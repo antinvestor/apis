@@ -60,22 +60,22 @@ paths:
       operationId: addFile
       requestBody:
         description: File contents to add to the store
-          content: 
-            multipart/form-data: 
-              schema:            
-                type: object
-                properties:      
-                  group_id:
-                    type: string
-                  subscription_id:
-                    type: string
-                  public:
-                    type: boolean         
-                  name:
-                    type: string                  
-                  fileObject:  
-                    type: string
-                    format: binary
+        content: 
+          multipart/form-data: 
+            schema:            
+              type: object
+              properties:      
+                group_id:
+                  type: string
+                subscription_id:
+                  type: string
+                public:
+                  type: boolean         
+                name:
+                  type: string                  
+                fileObject:  
+                  type: string
+                  format: binary
       responses:
         '200':
           description: file response
