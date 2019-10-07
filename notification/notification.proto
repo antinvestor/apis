@@ -1,0 +1,57 @@
+syntax = "proto3";
+ 
+package payment;
+option go_package ="payment";
+
+//QueueRequest for Queue Request with these defined requirements
+message QueueRequest{
+    string profileID = 1;
+    string massageTemplete = 2; 
+    string language = 3;
+    map<string ,string> massagevariables = 4;    
+    string channel = 5;
+    bool autosend = 6;
+}
+
+message QueueResponse{
+    string notificationID = 1;
+    string messagestatus = 2;
+}
+
+message StatusRequest{
+    string notificationID = 1;
+    
+}
+
+message StatusResponse{
+    string notificationID = 1;
+    string messagestatus = 2;
+    
+}
+
+message ReleaseRequest{
+    string notificationID = 1;
+    bool ReleaseMassage = 2;
+}
+
+message IncomeRequest{
+    string profileID = 1;
+    string requeststatus = 2;
+    
+}
+
+service NotificationService{
+
+    //QueueOut method for queueing massages as requested
+        rpc QueueOut (QueueRequest) returns (QueueResponse);
+    
+    //CommunicationStatus request to determine if notification is prepared or released
+        rpc CommunicationStatus (StatusRequest) returns (StatusResponse);
+    
+    //QueueRelease method for releasing queued massages and returns if notification status if released
+        rpc QueueRelease (ReleaseRequest) returns (StatusResponse);
+    
+    //SentIn method is for client request for particular notification respones from system
+        rpc SentIn (IncomeRequest) returns (QueueResponse);
+      
+    }
