@@ -1,7 +1,7 @@
 syntax = "proto3";
  
-package payment;
-option go_package ="payment";
+package notification;
+option go_package ="notification";
 
 //QueueRequest for Queue Request with these defined requirements
 message QueueRequest{
@@ -31,27 +31,29 @@ message StatusResponse{
 
 message ReleaseRequest{
     string notificationID = 1;
-    bool ReleaseMassage = 2;
+    bool releasemassage = 2;
 }
 
 message IncomeRequest{
     string profileID = 1;
     string requeststatus = 2;
-    
+    string massageType = 3;
+    string language = 4;
+    string product =5;
 }
 
 service NotificationService{
 
-    //QueueOut method for queueing massages as requested
-        rpc QueueOut (QueueRequest) returns (QueueResponse);
+    //Out method for queueing massages as requested
+        rpc Out (QueueRequest) returns (QueueResponse);
     
     //CommunicationStatus request to determine if notification is prepared or released
-        rpc CommunicationStatus (StatusRequest) returns (StatusResponse);
+        rpc Status (StatusRequest) returns (StatusResponse);
     
     //QueueRelease method for releasing queued massages and returns if notification status if released
-        rpc QueueRelease (ReleaseRequest) returns (StatusResponse);
+        rpc Release (ReleaseRequest) returns (StatusResponse);
     
-    //SentIn method is for client request for particular notification respones from system
-        rpc SentIn (IncomeRequest) returns (QueueResponse);
+    //In method is for client request for particular notification respones from system
+        rpc In (IncomeRequest) returns (QueueResponse);
       
     }
