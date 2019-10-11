@@ -10,7 +10,7 @@ message QueueRequest{
     string language = 3;
     map<string ,string> massagevariables = 4;    
     string channel = 5;
-    bool autosend = 6;
+    string autosend = 6;
 }
 
 message QueueResponse{
@@ -31,7 +31,7 @@ message StatusResponse{
 
 message ReleaseRequest{
     string notificationID = 1;
-    bool releasemassage = 2;
+    string releasemassage = 2;
 }
 
 message IncomeRequest{
