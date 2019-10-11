@@ -5,7 +5,7 @@ option go_package ="notification";
 
 //QueueRequest for Queue Request with these defined requirements
 message QueueRequest{
-    string profileID = 1;
+    map<string,string> profileID = 1;
     string massagetemplete = 2; 
     string language = 3;
     map<string ,string> massagevariables = 4;    
@@ -35,7 +35,7 @@ message ReleaseRequest{
 }
 
 message IncomeRequest{
-    string profileID = 1;
+    map<string,string> profileID = 1;
     string requeststatus = 2;
     string massagetype = 3;
     string language = 4;
