@@ -13,10 +13,6 @@ message QueueRequest{
     string autosend = 6;
 }
 
-message QueueResponse{
-    string notificationID = 1;
-    string messagestatus = 2;
-}
 
 message StatusRequest{
     string notificationID = 1;
@@ -42,10 +38,24 @@ message IncomeRequest{
     string product =5;
 }
 
+message SearchRequest{
+    string notificationID = 1;
+}
+
+
+message SearchResponse{
+    string notificationID = 1;
+    string requeststatus = 2;
+    string massagetype = 3;
+    string language = 4;
+    string product =5;
+    map<string,string> profileID = 6;
+}
+
 service NotificationService{
 
     //Out method for queueing massages as requested
-        rpc Out (QueueRequest) returns (QueueResponse);
+        rpc Out (QueueRequest) returns (StatusResponse);
     
     //CommunicationStatus request to determine if notification is prepared or released
         rpc Status (StatusRequest) returns (StatusResponse);
@@ -54,6 +64,9 @@ service NotificationService{
         rpc Release (ReleaseRequest) returns (StatusResponse);
     
     //In method is for client request for particular notification respones from system
-        rpc In (IncomeRequest) returns (QueueResponse);
+        rpc In (IncomeRequest) returns (StatusResponse);
+
+    //Search method is for client request for particular notification details from system
+        rpc Search (SearchRequest) returns (SearchResponse);
       
     }
