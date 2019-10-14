@@ -13,6 +13,17 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
   - url: http://api.antinvestor.com/files
+
+components:
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    
+
+security:
+  - bearerAuth: []   
+
 paths:
   /:
     get:
@@ -20,6 +31,8 @@ paths:
         Returns all files from the system that the user has access to
         
       operationId: findFiles
+      security:
+        - bearerAuth?: []
       parameters:
         - name: subscription_id
           in: query
@@ -49,6 +62,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/File'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         default:
           description: unexpected error
           content:
@@ -58,6 +73,8 @@ paths:
     post:
       description: Stores a new file. Duplicates are going to be ignored if the hash of the file and meta data both match an existing file 
       operationId: addFile
+      security:
+        - bearerAuth: []
       requestBody:
         description: File contents to add to the store
         content: 
@@ -83,6 +100,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/File'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         default:
           description: unexpected error
           content:
@@ -93,6 +112,8 @@ paths:
     get:
       description: Returns a file based on supplied ID
       operationId: find file by id
+      security:
+        - bearerAuth?: []
       parameters:
         - name: id
           in: path
@@ -107,6 +128,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/File'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         default:
           description: unexpected error
           content:
@@ -116,6 +139,8 @@ paths:
     delete:
       description: deletes a single file based on the ID supplied
       operationId: deleteFile
+      security:
+        - bearerAuth: []
       parameters:
         - name: id
           in: path
@@ -126,6 +151,8 @@ paths:
       responses:
         '204':
           description: file deleted
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         default:
           description: unexpected error
           content:
@@ -161,3 +188,6 @@ components:
           format: int32
         message:
           type: string
+
+    UnauthorizedError:
+      description: Access token is missing or invalid
