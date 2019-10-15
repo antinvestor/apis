@@ -5,7 +5,7 @@ option go_package ="notification";
 
 //QueueRequest for Queue Request with these defined requirements
 message QueueRequest{
-    map<string,string> profileID = 1;
+    string profileID = 1;
     string massagetemplete = 2; 
     string language = 3;
     map<string ,string> massagevariables = 4;    
@@ -31,7 +31,7 @@ message ReleaseRequest{
 }
 
 message IncomeRequest{
-    map<string,string> profileID = 1;
+    string profileID = 1;
     string requeststatus = 2;
     string massagetype = 3;
     string language = 4;
@@ -48,8 +48,9 @@ message SearchResponse{
     string requeststatus = 2;
     string massagetype = 3;
     string language = 4;
-    string product =5;
-    map<string,string> profileID = 6;
+    string productID =5;
+    map<string,string> payload = 6;
+    string profileID =7;
 }
 
 service NotificationService{
@@ -67,6 +68,6 @@ service NotificationService{
         rpc In (IncomeRequest) returns (StatusResponse);
 
     //Search method is for client request for particular notification details from system
-        rpc Search (SearchRequest) returns (SearchResponse);
+        rpc Search (SearchRequest) returns (stream SearchResponse);
       
     }
