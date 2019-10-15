@@ -32,10 +32,11 @@ message ReleaseRequest{
 
 message IncomeRequest{
     string profileID = 1;
-    string requeststatus = 2;
+    string productID = 2;
     string massagetype = 3;
     string language = 4;
-    string product =5;
+    string requeststatus =5;
+    map<string,string> payload = 6;
 }
 
 message SearchRequest{
@@ -45,12 +46,12 @@ message SearchRequest{
 
 message SearchResponse{
     string notificationID = 1;
-    string requeststatus = 2;
-    string massagetype = 3;
+    string profileID = 2;
+    string productID = 3;
     string language = 4;
-    string productID =5;
+    string massagetype =5;
     map<string,string> payload = 6;
-    string profileID =7;
+    string requeststatus =7;
 }
 
 service NotificationService{
