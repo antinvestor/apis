@@ -6,9 +6,9 @@ option go_package ="notification";
 //QueueRequest for Queue Request with these defined requirements
 message QueueRequest{
     string profileID = 1;
-    string massagetemplete = 2; 
+    string messageTemplete = 2; 
     string language = 3;
-    map<string ,string> massagevariables = 4;    
+    map<string ,string> messageVariables = 4;    
     string channel = 5;
     string autosend = 6;
 }
@@ -21,22 +21,22 @@ message StatusRequest{
 
 message StatusResponse{
     string notificationID = 1;
-    string messagestatus = 2;
+    string messageStatus = 2;
     
 }
 
 message ReleaseRequest{
     string notificationID = 1;
-    string releasemassage = 2;
+    string releaseMessage = 2;
 }
 
 message IncomeRequest{
     string profileID = 1;
     string productID = 2;
-    string massagetype = 3;
+    string messageType = 3;
     string language = 4;
-    string requeststatus =5;
-    map<string,string> payload = 6;
+    string requestStatus =5;
+    map<string,string> payLoad = 6;
 }
 
 message SearchRequest{
@@ -49,9 +49,9 @@ message SearchResponse{
     string profileID = 2;
     string productID = 3;
     string language = 4;
-    string massagetype =5;
-    map<string,string> payload = 6;
-    string requeststatus =7;
+    string messageType =5;
+    map<string,string> payLoad = 6;
+    string requestStatus =7;
 }
 
 service NotificationService{
