@@ -1,0 +1,74 @@
+syntax = "proto3";
+ 
+package notification;
+option go_package ="notification";
+
+//QueueRequest for Queue Request with these defined requirements
+message QueueRequest{
+    string profileID = 1;
+    string messageTemplete = 2; 
+    string language = 3;
+    map<string ,string> messageVariables = 4;    
+    string channel = 5;
+    string autosend = 6;
+}
+
+
+message StatusRequest{
+    string notificationID = 1;
+    
+}
+
+message StatusResponse{
+    string notificationID = 1;
+    string messageStatus = 2;
+    
+}
+
+message ReleaseRequest{
+    string notificationID = 1;
+    string releaseMessage = 2;
+}
+
+message IncomeRequest{
+    string profileID = 1;
+    string productID = 2;
+    string messageType = 3;
+    string language = 4;
+    string requestStatus =5;
+    map<string,string> payLoad = 6;
+}
+
+message SearchRequest{
+    string notificationID = 1;
+}
+
+
+message SearchResponse{
+    string notificationID = 1;
+    string profileID = 2;
+    string productID = 3;
+    string language = 4;
+    string messageType =5;
+    map<string,string> payLoad = 6;
+    string requestStatus =7;
+}
+
+service NotificationService{
+
+    //Out method for queueing massages as requested
+        rpc Out (QueueRequest) returns (StatusResponse);
+    
+    //CommunicationStatus request to determine if notification is prepared or released
+        rpc Status (StatusRequest) returns (StatusResponse);
+    
+    //QueueRelease method for releasing queued massages and returns if notification status if released
+        rpc Release (ReleaseRequest) returns (StatusResponse);
+    
+    //In method is for client request for particular notification respones from system
+        rpc In (IncomeRequest) returns (StatusResponse);
+
+    //Search method is for client request for particular notification details from system
+        rpc Search (SearchRequest) returns (stream SearchResponse);
+      
+    }
