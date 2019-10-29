@@ -4,7 +4,7 @@ package notification;
 option go_package ="notification";
 
 //QueueRequest for Queue Request with these defined requirements
-message QueueRequest{
+message MessageOut{
     string profileID = 1;
     string messageTemplete = 2; 
     string language = 3;
@@ -30,7 +30,7 @@ message ReleaseRequest{
     string releaseMessage = 2;
 }
 
-message IncomeRequest{
+message MessageIn{
     string profileID = 1;
     string productID = 2;
     string messageType = 3;
@@ -57,7 +57,7 @@ message SearchResponse{
 service NotificationService{
 
     //Out method for queueing massages as requested
-        rpc Out (QueueRequest) returns (StatusResponse);
+        rpc Out (MessageOut) returns (StatusResponse);
     
     //CommunicationStatus request to determine if notification is prepared or released
         rpc Status (StatusRequest) returns (StatusResponse);
@@ -66,7 +66,7 @@ service NotificationService{
         rpc Release (ReleaseRequest) returns (StatusResponse);
     
     //In method is for client request for particular notification respones from system
-        rpc In (IncomeRequest) returns (StatusResponse);
+        rpc In (MessageIn) returns (StatusResponse);
 
     //Search method is for client request for particular notification details from system
         rpc Search (SearchRequest) returns (stream SearchResponse);
