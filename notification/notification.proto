@@ -41,6 +41,9 @@ message MessageIn{
 
 message SearchRequest{
     string notificationID = 1;
+    string date =2;
+    string contact =3;
+    string message =4;
 }
 
 
