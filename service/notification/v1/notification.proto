@@ -17,7 +17,6 @@ message MessageOut{
 
 message StatusRequest{
     string notificationID = 1;
-    
 }
 
 message StatusResponse{
