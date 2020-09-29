@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package lostmyid;
+option go_package = "github.com/antinvestor/lostmyid";
+
+import "google/type/money.proto";
+
+//Request to log a found card
+message FoundRequest {
+    string profile_id = 1;
+    string contact_id = 2;
+    string front_file_id = 3;
+    string back_file_id = 4;
+    map<string,string> properties = 5;
+    google.type.Money minimum_pay = 6;
+}
+
+
+message StatusResponse {
+    string found_id = 1;
+    string state = 2;
+}
+
+message SearchRequest {
+    string search_id = 1;
+    string profile_id = 2;
+    string contact_id = 3;
+    string query = 4;
+    string type = 5;
+    string country = 6;
+    map<string,string> properties = 7;
+}
+
+message SearchResponse {
+    string search_id = 1;
+    string state = 2;
+    google.type.Money minimum_cost = 3;
+}
+
+message ProgressRequest {
+    string search_id = 1;
+    string found_id = 2;
+}
+
+message ProgressItem{
+    string audit_id = 1;
+    string datetime = 2;
+    string state = 3;
+    string description = 4;
+}
+
+message ProgressResponse {
+    string object_id = 1;
+    string object_type = 2;
+    repeated ProgressItem items  = 3;
+}
+
+
+
+service LostMyIDService {
+
+    // Log a new found request
+    rpc Found (FoundRequest) returns (StatusResponse);
+
+    // Log a new search request
+    rpc Search (SearchRequest) returns (SearchResponse);
+
+    rpc Progress(ProgressRequest) returns (ProgressResponse);
+
+}
