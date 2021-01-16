@@ -1,4 +1,4 @@
-package common
+package apis
 
 import (
 	"bytes"
