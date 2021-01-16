@@ -1,7 +1,7 @@
 syntax = "proto3";
  
 package notification;
-option go_package ="notification";
+option go_package ="notification_v1";
 
 //QueueRequest for Queue Request with these defined requirements
 message MessageOut{
