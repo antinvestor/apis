@@ -4,7 +4,7 @@ import (
 	"context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
-	apic "github.com/antinvestor/api/service/common"
+	apic "github.com/antinvestor/apis/service/common"
 
 	"math"
 )
