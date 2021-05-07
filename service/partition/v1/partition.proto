@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package partition;
+option go_package = "github.com/antinvestor/partition";
+
+
+//Request to create new tenancy
+message TenantRequest {
+    string name = 1;
+    string description = 2;
+    map<string,string> properties = 3;
+}
+
+message TenantResponse {
+    string tenant_id = 1;
+    string description = 2;
+    map<string,string> properties = 3;
+}
+
+//Request to create a new partition
+message PartitionCreateRequest {
+    string name = 1;
+    string tenant_id = 2;
+    string parent_id = 3;
+    string description = 4;
+    map<string,string> properties = 5;
+}
+
+message PartitionGetRequest {
+    string partition_id = 1;
+}
+
+message PartitionResponse {
+    string partition_id = 1;
+    string name = 2;
+    string tenant_id = 3;
+    string parent_id = 4;
+    string description = 5;
+    map<string,string> properties = 6;
+}
+
+service PartitionService {
+
+    // Log a new tenant request
+    rpc CreateTenant (TenantRequest) returns (TenantResponse);
+
+    // Log a new partition request
+    rpc CreatePartition (PartitionCreateRequest) returns (PartitionResponse);
+
+    // Get an existing partition object
+    rpc GetPartition (PartitionGetRequest) returns (PartitionResponse);
+}
