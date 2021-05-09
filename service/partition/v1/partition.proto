@@ -1,22 +1,26 @@
 syntax = "proto3";
 
 package apis;
-option go_package ="partition/v1;partition";
+option go_package = ".;partition_v1";
 import "common/common.proto";
+
+// Service wide response to show success on removal Of entry or failure
+message RemoveResponse {
+    bool succeeded = 1;
+}
 
 //Request to create new tenancy
 message TenantRequest {
     string name = 1;
     string description = 2;
-    map<string,string> properties = 3;
+    map<string, string> properties = 3;
 }
 
-message TenantResponse {
+message TenantObject {
     string tenant_id = 1;
     string description = 2;
-    map<string,string> properties = 3;
+    map<string, string> properties = 3;
 }
-
 
 //Request to create a new partition
 message PartitionCreateRequest {
@@ -24,33 +28,173 @@ message PartitionCreateRequest {
     string tenant_id = 2;
     string parent_id = 3;
     string description = 4;
-    map<string,string> properties = 5;
+    map<string, string> properties = 5;
 }
 
 message PartitionGetRequest {
     string partition_id = 1;
 }
 
-message PartitionResponse {
+message PartitionUpdateRequest {
+    string partition_id = 1;
+    string name = 2;
+    string description = 3;
+    apis.STATE state = 4;
+    map<string, string> properties = 5;
+}
+
+message PartitionObject {
     string partition_id = 1;
     string name = 2;
     string tenant_id = 3;
     string parent_id = 4;
     string description = 5;
     apis.STATE state = 6;
-    map<string,string> properties = 7;
+    map<string, string> properties = 7;
+}
+
+// Partition Roles
+message PartitionRoleCreateRequest {
+    string partition_id = 1;
+    string name = 2;
+    map<string, string> properties = 3;
+}
+
+message PartitionRoleObject {
+    string partition_role_id = 1;
+    string partition_id = 2;
+    string name = 3;
+    map<string, string> properties = 4;
+}
+
+message PartitionRoleRemoveRequest {
+    string partition_role_id = 1;
+}
+
+message PartitionRoleListRequest {
+    string partition_id = 1;
+}
+
+message PartitionRoleListResponse {
+    repeated PartitionRoleObject role = 1;
+}
+
+message PageObject {
+    string page_id = 1;
+    string name = 2;
+    string html = 3;
+    apis.STATE state = 4;
+}
+
+message PageCreateRequest {
+    string partition_id = 1;
+    string name = 2;
+    string html = 3;
+}
+
+message PageGetRequest {
+    string page_id = 1;
+    string partition_id = 2;
+    string name = 3;
+}
+
+message PageRemoveRequest {
+    string page_id = 1;
+}
+
+message AccessObject {
+    string access_id = 1;
+    string profile_id = 2;
+    string partition_id = 3;
+}
+
+message AccessCreateRequest {
+    string partition_id = 1;
+    string profile_id = 2;
+}
+
+message AccessGetRequest {
+    string access_id = 1;
+    string partition_id = 2;
+    string profile_id = 3;
+}
+
+message AccessRemoveRequest {
+    string access_id = 1;
+}
+
+// Access Roles
+message AccessRoleCreateRequest {
+    string access_id = 1;
+    string partition_role_id = 2;
+}
+
+message AccessRoleObject {
+    string access_role_id = 1;
+    string access_id = 2;
+    PartitionRoleObject role = 3;
+}
+
+message AccessRoleRemoveRequest {
+    string access_role_id = 1;
+}
+
+message AccessRoleListRequest {
+    string access_id = 1;
+}
+
+message AccessRoleListResponse {
+    repeated AccessRoleObject role = 1;
 }
 
 service PartitionService {
 
     // Log a new tenant request
-    rpc CreateTenant (TenantRequest) returns (TenantResponse);
+    rpc CreateTenant (TenantRequest) returns (TenantObject);
 
     // Log a new partition request
-    rpc CreatePartition (PartitionCreateRequest) returns (PartitionResponse);
+    rpc CreatePartition (PartitionCreateRequest) returns (PartitionObject);
 
     // Get an existing partition object
-    rpc GetPartition (PartitionGetRequest) returns (PartitionResponse);
+    rpc GetPartition (PartitionGetRequest) returns (PartitionObject);
 
+    // Update an existing partition object
+    rpc UpdatePartition (PartitionUpdateRequest) returns (PartitionObject);
+
+    // Create a partition Role for a particular partition
+    rpc CreatePartitionRole (PartitionRoleCreateRequest) returns (PartitionRoleObject);
+
+    // List partition roles available for this particular partition
+    rpc ListPartitionRoles (PartitionRoleListRequest) returns (PartitionRoleListResponse);
+
+    // Remove a partition role that is not required
+    rpc RemovePartitionRole (PartitionRoleRemoveRequest) returns (RemoveResponse);
+
+    // Creates a new page for access or customization of how a partition looks like
+    rpc CreatePage (PageCreateRequest) returns (PageObject);
+
+    // Obtains a new page specific to a partition
+    rpc GetPage (PageGetRequest) returns (PageObject);
+
+    // Removes a page from being accessible for a partition
+    rpc RemovePage (PageRemoveRequest) returns (RemoveResponse);
+
+    // Creates a users ability to access a partition
+    rpc CreateAccess (AccessCreateRequest) returns (AccessObject);
+
+    // Obtains a users access to a partition by access id or partition and profile id
+    rpc GetAccess (AccessGetRequest) returns (AccessObject);
+
+    // Removes a user's ability to access a partition
+    rpc RemoveAccess (AccessRemoveRequest) returns (RemoveResponse);
+
+    // Create an access Role for a particular access
+    rpc CreateAccessRole (AccessRoleCreateRequest) returns (AccessRoleObject);
+
+    // List access roles available for this particular access
+    rpc ListAccessRoles (AccessRoleListRequest) returns (AccessRoleListResponse);
+
+    // Remove an access role that is not required
+    rpc RemoveAccessRole (AccessRoleRemoveRequest) returns (RemoveResponse);
 
 }
