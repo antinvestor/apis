@@ -1,0 +1,22 @@
+
+syntax = "proto3";
+
+package apis;
+option go_package ="common;common";
+
+enum STATE {
+    CREATED = 0;
+    CHECKED = 1;
+    ACTIVE = 2;
+    INACTIVE = 3;
+    DELETED = 4;
+}
+
+
+enum STATUS {
+    UNKNOWN = 0;
+    QUEUED = 1;
+    IN_PROCESS = 2;
+    FAILED = 3;
+    SUCCESSFUL = 4;
+}
