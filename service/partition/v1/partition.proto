@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package apis;
 option go_package = ".;partition_v1";
+
+
+import "common/validate.proto";
 import "common/common.proto";
 
 // Service wide response to show success on removal Of entry or failure
@@ -11,68 +14,68 @@ message RemoveResponse {
 
 //Request to create new tenancy
 message TenantRequest {
-    string name = 1;
-    string description = 2;
+    string name = 1 [(validate.rules).string = {min_len: 3, max_len: 100}];
+    string description = 2 [(validate.rules).string = {min_len: 10, max_len: 500}];
     map<string, string> properties = 3;
 }
 
 message TenantObject {
-    string tenant_id = 1;
-    string description = 2;
+    string tenant_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string description = 2 [(validate.rules).string = {min_len: 10, max_len: 500}];
     map<string, string> properties = 3;
 }
 
 //Request to create a new partition
 message PartitionCreateRequest {
-    string name = 1;
-    string tenant_id = 2;
-    string parent_id = 3;
-    string description = 4;
+    string name = 1 [(validate.rules).string = {min_len: 3, max_len: 100}];
+    string tenant_id = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string parent_id = 3 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string description = 4 [(validate.rules).string = {min_len: 10, max_len: 250}];
     map<string, string> properties = 5;
 }
 
 message PartitionGetRequest {
-    string partition_id = 1;
+    string partition_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 message PartitionUpdateRequest {
-    string partition_id = 1;
-    string name = 2;
-    string description = 3;
+    string partition_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string name = 2 [(validate.rules).string = {min_len: 3, max_len: 100}];
+    string description = 3 [(validate.rules).string = {min_len: 10, max_len: 500}];
     apis.STATE state = 4;
     map<string, string> properties = 5;
 }
 
 message PartitionObject {
-    string partition_id = 1;
-    string name = 2;
-    string tenant_id = 3;
-    string parent_id = 4;
-    string description = 5;
+    string partition_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string name = 2 [(validate.rules).string = {min_len: 3, max_len: 100}];
+    string tenant_id = 3 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string parent_id = 4 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string description = 5 [(validate.rules).string = {min_len: 10, max_len: 500}];
     apis.STATE state = 6;
     map<string, string> properties = 7;
 }
 
 // Partition Roles
 message PartitionRoleCreateRequest {
-    string partition_id = 1;
-    string name = 2;
+    string partition_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string name = 2 [(validate.rules).string = {min_len: 3, max_len: 100}];
     map<string, string> properties = 3;
 }
 
 message PartitionRoleObject {
-    string partition_role_id = 1;
-    string partition_id = 2;
-    string name = 3;
+    string partition_role_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string partition_id = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string name = 3 [(validate.rules).string = {min_len: 3, max_len: 100}];
     map<string, string> properties = 4;
 }
 
 message PartitionRoleRemoveRequest {
-    string partition_role_id = 1;
+    string partition_role_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 message PartitionRoleListRequest {
-    string partition_id = 1;
+    string partition_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 message PartitionRoleListResponse {
@@ -80,67 +83,67 @@ message PartitionRoleListResponse {
 }
 
 message PageObject {
-    string page_id = 1;
-    string name = 2;
-    string html = 3;
+    string page_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string name = 2 [(validate.rules).string = {min_len: 3, max_len: 100}];
+    string html = 3 [(validate.rules).string = {min_len: 4, max_len: 5000}];
     apis.STATE state = 4;
 }
 
 message PageCreateRequest {
-    string partition_id = 1;
-    string name = 2;
-    string html = 3;
+    string partition_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string name = 2 [(validate.rules).string = {min_len: 3, max_len: 100}];
+    string html = 3 [(validate.rules).string = {min_len: 4, max_len: 5000}];
 }
 
 message PageGetRequest {
-    string page_id = 1;
-    string partition_id = 2;
-    string name = 3;
+    string page_id = 1 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string partition_id = 2 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string name = 3 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 100}];
 }
 
 message PageRemoveRequest {
-    string page_id = 1;
+    string page_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 message AccessObject {
-    string access_id = 1;
-    string profile_id = 2;
-    string partition_id = 3;
+    string access_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string profile_id = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string partition_id = 3 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 message AccessCreateRequest {
-    string partition_id = 1;
-    string profile_id = 2;
+    string partition_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string profile_id = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 message AccessGetRequest {
-    string access_id = 1;
-    string partition_id = 2;
-    string profile_id = 3;
+    string access_id = 1 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string partition_id = 2 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string profile_id = 3 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 message AccessRemoveRequest {
-    string access_id = 1;
+    string access_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 // Access Roles
 message AccessRoleCreateRequest {
-    string access_id = 1;
-    string partition_role_id = 2;
+    string access_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string partition_role_id = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 message AccessRoleObject {
-    string access_role_id = 1;
-    string access_id = 2;
+    string access_role_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string access_id = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     PartitionRoleObject role = 3;
 }
 
 message AccessRoleRemoveRequest {
-    string access_role_id = 1;
+    string access_role_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 message AccessRoleListRequest {
-    string access_id = 1;
+    string access_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 message AccessRoleListResponse {
