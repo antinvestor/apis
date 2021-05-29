@@ -1,6 +1,10 @@
 syntax = "proto3";
 
-package profile;
+package apis;
+option go_package =".;profile_v1";
+
+import "common/validate.proto";
+import "common/common.proto";
 
 enum ContactType {
     EMAIL = 0;
@@ -16,16 +20,17 @@ enum CommunicationLevel {
 }
 
 message ContactObject {
-    string ID = 1;
+    string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     ContactType type = 2;
     string detail = 3;
     bool verifed = 4;
     CommunicationLevel communication_level = 5;
+    apis.STATE state = 6;
 }
 
 message AddressObject {
-    string ID = 1;
-    string name = 2;
+    string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string name = 2 [(validate.rules).string = {min_len: 3, max_len: 100}];
     string country = 3;
     string city = 4;
     string area = 5;
@@ -34,7 +39,7 @@ message AddressObject {
     string postcode = 8;
     double latitude = 9;
     double longitude = 10;
-    string extra = 11;
+    string extra = 11 [(validate.rules).string = {min_len: 10, max_len: 500}];
 }
 
 enum ProfileType {
@@ -45,36 +50,38 @@ enum ProfileType {
 
 // The response message containing the greetings
 message ProfileObject {
-    string ID = 1;
+    string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     ProfileType type = 2;
     map<string, string> properties =3;
     repeated ContactObject contacts = 4;
     repeated AddressObject addresses = 5;
+    apis.STATE state = 6;
 }
 
 // The request message containing the profile's hash
 message ProfileIDRequest {
-    string ID = 1;
+    string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 // The request message containing the profile's hash
 message ProfileSearchRequest {
     string query = 1;
     repeated string properties = 2; // Properties to include in the search request.
-    int32 page = 3;
-    int32 count = 4;
+    apis.STATE state = 3;
+    int32 page = 4;
+    int32 count = 5;
 
 }
 
 // The request message containing the profile's hash
 message ProfileMergeRequest {
-    string ID = 1;
-    string mergeID = 2;
+    string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    string mergeID = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 // The request message containing the information necessary to create a profile
 message ProfileCreateRequest {
-    string ID = 1;
+    string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     ProfileType type = 2;
     string contact = 3;
     map<string, string> properties =4;
@@ -83,20 +90,21 @@ message ProfileCreateRequest {
 
 // The request message containing the information necessary to create a profile
 message ProfileUpdateRequest {
-    string ID = 1;
-    map<string, string> properties =4;
+    string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+    map<string, string> properties =2;
+    apis.STATE state = 3;
 }
 
 
 // The request message containing the information necessary to create a profile
 message ProfileAddContactRequest {
-    string ID = 1;
+    string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     string contact = 2;
 }
 
 // The request message containing the information necessary to create a profile
 message ProfileAddAddressRequest {
-    string ID = 1;
+    string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     AddressObject address = 2;
 }
 
