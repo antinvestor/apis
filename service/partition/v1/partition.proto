@@ -108,9 +108,8 @@ message PageRemoveRequest {
 message AccessObject {
     string access_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     string profile_id = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
-    string partition_id = 3 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
-    string tenant_id = 4 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
-
+    PartitionObject partition = 3;
+    apis.STATE state = 4;
 }
 
 message AccessCreateRequest {
