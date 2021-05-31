@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"context"
 	"crypto/x509"
-	"encoding/json"
-	"fmt"
+	"golang.org/x/oauth2"
+	"golang.org/x/oauth2/clientcredentials"
 	"google.golang.org/grpc/credentials"
 	"net/http"
 	"runtime"
@@ -20,78 +20,40 @@ import (
 
 type (
 	JWTInterceptor struct {
-		http     *http.Client // The HTTP client for calling the token-serving API
-		token    string       // The JWT token that will be used in every call to the server
-		username string       // The username for basic authentication
-		password string       // The password for basic authentication
-		endpoint string       // The HTTP endpoint to hit to obtain tokens
-	}
+		http        *http.Client              // The HTTP client for calling the token-serving API
+		tokenClient *clientcredentials.Config // An oauth2 client to fetch new server token
+		token       *oauth2.Token             // The JWT token that will be used in every call to the server
+		apiKey      string                    // An api key that never changes for a legacy api
 
-	authResponse struct {
-		Token string `json:"token"`
-	}
-
-	authRequest struct {
-		Username string `json:"username"`
-		Password string `json:"password"`
 	}
 )
 
-func (jwt *JWTInterceptor) refreshBearerToken() error {
-	resp, err := jwt.performAuthRequest()
+func (jwt *JWTInterceptor) refreshBearerToken(ctx context.Context) error {
 
+	token, err := jwt.tokenClient.Token(ctx)
 	if err != nil {
 		return err
 	}
 
-	var respBody authResponse
-	if err = json.NewDecoder(resp.Body).Decode(&respBody); err != nil {
-		return err
-	}
-
-	jwt.token = respBody.Token
-
-	return resp.Body.Close()
+	jwt.token = token
+	return nil
 }
 
-func (jwt *JWTInterceptor) performAuthRequest() (*http.Response, error) {
-	body := authRequest{
-		Username: jwt.username,
-		Password: jwt.password,
-	}
-
-	data, err := json.Marshal(body)
-
-	if err != nil {
-		return nil, err
-	}
-
-	buff := bytes.NewBuffer(data)
-	resp, err := jwt.http.Post(jwt.endpoint, "application/json", buff)
-
-	if err != nil {
-		return resp, err
-	}
-
-	if resp.StatusCode != http.StatusOK {
-		out := make([]byte, resp.ContentLength)
-		if _, err = resp.Body.Read(out); err != nil {
-			return resp, err
-		}
-
-		return resp, fmt.Errorf("unexpected authentication response: %s", string(out))
-	}
-
-	return resp, nil
-}
 func (jwt *JWTInterceptor) UnaryClientInterceptor(ctx context.Context, method string, req interface{}, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
+
+	if jwt.tokenClient != nil && jwt.token == nil {
+		if err := jwt.refreshBearerToken(ctx); err != nil {
+			return err
+		}
+	}
+
 	// Create a new context with the token and make the first request
-	authCtx := metadata.AppendToOutgoingContext(ctx, "authorization", "bearer "+jwt.token)
+	authCtx := metadata.AppendToOutgoingContext(ctx, "authorization", "bearer "+jwt.token.AccessToken)
 	err := invoker(authCtx, method, req, reply, cc, opts...)
 
 	// If we got an unauthenticated response from the gRPC service, refresh the token
 	if status.Code(err) == codes.Unauthenticated {
-		if err = jwt.refreshBearerToken(); err != nil {
+		if err = jwt.refreshBearerToken(ctx); err != nil {
 			return err
 		}
 
@@ -99,7 +61,7 @@ func (jwt *JWTInterceptor) UnaryClientInterceptor(ctx context.Context, method st
 		// because we've already appended the invalid token. We're appending metadata to
 		// a slice here rather than a map like HTTP headers, so the first one will be picked
 		// up and invalid.
-		updatedAuthCtx := metadata.AppendToOutgoingContext(ctx, "authorization", "bearer "+jwt.token)
+		updatedAuthCtx := metadata.AppendToOutgoingContext(ctx, "authorization", "bearer "+jwt.token.AccessToken)
 		err = invoker(updatedAuthCtx, method, req, reply, cc, opts...)
 	}
 
@@ -118,7 +80,6 @@ func processAndValidateOpts(opts []ClientOption) (*DialSettings, error) {
 	return &o, nil
 }
 
-
 func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn, error) {
 
 	ds, err := processAndValidateOpts(opts)
@@ -129,11 +90,11 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 	dialOptions := ds.GRPCDialOpts
 
 	var certDialOption grpc.DialOption
-	if !strings.HasSuffix(ds.Endpoint,":443") {
+	if !strings.HasSuffix(ds.Endpoint, ":443") {
 
 		certDialOption = grpc.WithInsecure()
 
-	}else {
+	} else {
 
 		pool, err := x509.SystemCertPool()
 		if err != nil {
@@ -144,24 +105,29 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 
 	}
 
-	dialOptions = append(dialOptions, certDialOption )
+	dialOptions = append(dialOptions, certDialOption)
 
-	if ! ds.NoAuth {
+	if !ds.NoAuth {
 
 		// Create a new interceptor
-		jwt := &JWTInterceptor{
-			username: ds.APIUserName,
-			password: ds.APIPassword,
-			token: ds.APIKey,
-			endpoint: ds.JwtEndpoint,
+		jwt := &JWTInterceptor{}
+
+		if ds.ApiKey != "" {
+			jwt.apiKey = ds.ApiKey
+		} else {
+			jwt.tokenClient = &clientcredentials.Config{
+				ClientID:     ds.TokenUserName,
+				ClientSecret: ds.TokenPassword,
+				TokenURL:     ds.TokenEndpoint,
+			}
 		}
 
 		authDialOption := grpc.WithUnaryInterceptor(jwt.UnaryClientInterceptor)
-		dialOptions = append(dialOptions, authDialOption )
+		dialOptions = append(dialOptions, authDialOption)
 	}
 
 	serviceConnection, err := grpc.Dial(
-		ds.Endpoint, dialOptions ...
+		ds.Endpoint, dialOptions...,
 	)
 	return serviceConnection, err
 }
@@ -171,7 +137,7 @@ func XAntHeader(keyval ...string) string {
 		return ""
 	}
 	if len(keyval)%2 != 0 {
-		panic("gax.Header: odd argument count")
+		panic("xant.Header: odd argument count")
 	}
 	var buf bytes.Buffer
 	for i := 0; i < len(keyval); i += 2 {

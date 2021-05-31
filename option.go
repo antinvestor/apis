@@ -36,7 +36,6 @@ func (w withEndpoint) Apply(o *DialSettings) {
 	o.Endpoint = string(w)
 }
 
-
 // WithScopes returns a ClientOption that overrides the default OAuth2 scopes
 // to be used for a service.
 func WithScopes(scope ...string) ClientOption {
@@ -100,50 +99,49 @@ func (w withGRPCDialOption) Apply(o *DialSettings) {
 	o.GRPCDialOpts = append(o.GRPCDialOpts, w.opt)
 }
 
-
-// WithAPIKey returns a ClientOption that specifies an API key to be used
+// WithTokenApiKey returns a ClientOption that specifies an API key to be used
 // as the basis for authentication.
 //
-func WithAPIKey(apiKey string) ClientOption {
-	return withAPIKey(apiKey)
+func WithTokenApiKey(apiKey string) ClientOption {
+	return withTokenApiKey(apiKey)
 }
 
-type withAPIKey string
+type withTokenApiKey string
 
-func (w withAPIKey) Apply(o *DialSettings) { o.APIKey = string(w) }
+func (w withTokenApiKey) Apply(o *DialSettings) { o.ApiKey = string(w) }
 
-// WithAPIUsername returns a ClientOption that specifies an API Username to be used
+// WithTokenUsername returns a ClientOption that specifies an API Username to be used
 // as the basis for authentication.
 //
-func WithAPIUsername(apiUsername string) ClientOption {
-	return WithAPIUsername(apiUsername)
+func WithTokenUsername(tokenUsername string) ClientOption {
+	return withTokenUsername(tokenUsername)
 }
 
-type withAPIUsername string
+type withTokenUsername string
 
-func (w withAPIUsername) Apply(o *DialSettings) { o.APIUserName = string(w) }
+func (w withTokenUsername) Apply(o *DialSettings) { o.TokenUserName = string(w) }
 
-// WithAPIPassword returns a ClientOption that specifies an API Username to be used
+// WithTokenPassword returns a ClientOption that specifies an API Username to be used
 // as the basis for authentication.
 //
-func WithAPIPassword(apiPassword string) ClientOption {
-	return WithAPIPassword(apiPassword)
+func WithTokenPassword(tokenPassword string) ClientOption {
+	return withTokenPassword(tokenPassword)
 }
 
-type withAPIPassword string
+type withTokenPassword string
 
-func (w withAPIPassword) Apply(o *DialSettings) { o.APIPassword = string(w) }
+func (w withTokenPassword) Apply(o *DialSettings) { o.TokenPassword = string(w) }
 
-// WithAPI returns a ClientOption that specifies an API Username to be used
+// WithTokenEndpoint returns a ClientOption that specifies an API Username to be used
 // as the basis for authentication.
 //
-func WithJwtEndpoint(jwtEndpoint string) ClientOption {
-	return WithJwtEndpoint(jwtEndpoint)
+func WithTokenEndpoint(tokenEndpoint string) ClientOption {
+	return withTokenEndpoint(tokenEndpoint)
 }
 
-type withJwtEndpoint string
+type withTokenEndpoint string
 
-func (w withJwtEndpoint) Apply(o *DialSettings) { o.JwtEndpoint = string(w) }
+func (w withTokenEndpoint) Apply(o *DialSettings) { o.TokenEndpoint = string(w) }
 
 // WithAudiences returns a ClientOption that specifies an audience to be used
 // as the audience field ("aud") for the JWT token authentication.
@@ -161,7 +159,7 @@ func (w withAudiences) Apply(o *DialSettings) {
 // WithoutAuthentication returns a ClientOption that specifies that no
 // authentication should be used. It is suitable only for testing and for
 // accessing public resources, like public Google Cloud Storage buckets.
-// It is an error to provide both WithoutAuthentication and any of WithAPIKey,
+// It is an error to provide both WithoutAuthentication and any of WithTokenApiKey,
 // WithTokenSource, WithCredentialsFile or WithServiceAccountFile.
 func WithoutAuthentication() ClientOption {
 	return withoutAuthentication{}
@@ -211,4 +209,3 @@ type withClientCertSource struct{ s ClientCertSource }
 func (w withClientCertSource) Apply(o *DialSettings) {
 	o.ClientCertSource = w.s
 }
-
