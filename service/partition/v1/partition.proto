@@ -3,7 +3,7 @@ syntax = "proto3";
 package apis;
 option go_package = ".;partition_v1";
 
-
+import "google/protobuf/any.proto";
 import "common/validate.proto";
 import "common/common.proto";
 
@@ -16,13 +16,13 @@ message RemoveResponse {
 message TenantRequest {
     string name = 1 [(validate.rules).string = {min_len: 3, max_len: 100}];
     string description = 2 [(validate.rules).string = {min_len: 10, max_len: 500}];
-    map<string, string> properties = 3;
+    map<string, google.protobuf.Any> properties = 3;
 }
 
 message TenantObject {
     string tenant_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     string description = 2 [(validate.rules).string = {min_len: 10, max_len: 500}];
-    map<string, string> properties = 3;
+    map<string, google.protobuf.Any> properties = 3;
 }
 
 //Request to create a new partition
@@ -31,7 +31,7 @@ message PartitionCreateRequest {
     string tenant_id = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     string parent_id = 3 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     string description = 4 [(validate.rules).string = {min_len: 10, max_len: 250}];
-    map<string, string> properties = 5;
+    map<string, google.protobuf.Any> properties = 5;
 }
 
 message PartitionGetRequest {
@@ -43,7 +43,7 @@ message PartitionUpdateRequest {
     string name = 2 [(validate.rules).string = {min_len: 3, max_len: 100}];
     string description = 3 [(validate.rules).string = {min_len: 10, max_len: 500}];
     apis.STATE state = 4;
-    map<string, string> properties = 5;
+    map<string, google.protobuf.Any> properties = 5;
 }
 
 message PartitionObject {
@@ -53,7 +53,7 @@ message PartitionObject {
     string parent_id = 4 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     string description = 5 [(validate.rules).string = {min_len: 10, max_len: 500}];
     apis.STATE state = 6;
-    map<string, string> properties = 7;
+    map<string, google.protobuf.Any> properties = 7;
 }
 
 // Partition Roles
@@ -67,7 +67,7 @@ message PartitionRoleObject {
     string partition_role_id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     string partition_id = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
     string name = 3 [(validate.rules).string = {min_len: 3, max_len: 100}];
-    map<string, string> properties = 4;
+    map<string, google.protobuf.Any> properties = 4;
 }
 
 message PartitionRoleRemoveRequest {
