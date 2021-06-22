@@ -80,6 +80,31 @@ func processAndValidateOpts(opts []ClientOption) (*DialSettings, error) {
 	return &o, nil
 }
 
+// HttpClient create a http client that
+func HttpClient(ctx context.Context, opts ...ClientOption) (*http.Client, error) {
+	var httpClient *http.Client
+	ds, err := processAndValidateOpts(opts)
+	if err != nil {
+		return nil, err
+	}
+
+	if !ds.NoAuth && ds.ApiKey == "" {
+
+		cfg := &clientcredentials.Config{
+			ClientID:     ds.TokenUserName,
+			ClientSecret: ds.TokenPassword,
+			TokenURL:     ds.TokenEndpoint,
+		}
+		httpClient = cfg.Client(ctx)
+
+	} else {
+		httpClient = &http.Client{}
+	}
+
+	return httpClient, nil
+}
+
+//DialConnection Way for dialing a grpc connection and obtaining a permanent link that is used fairly throughout the life cycle of the application.
 func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn, error) {
 
 	ds, err := processAndValidateOpts(opts)
@@ -132,6 +157,7 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 	return serviceConnection, err
 }
 
+//XAntHeader Simple way to add a header to the ant service
 func XAntHeader(keyval ...string) string {
 	if len(keyval) == 0 {
 		return ""
