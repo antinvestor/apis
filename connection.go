@@ -143,6 +143,7 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 				ClientID:     ds.TokenUserName,
 				ClientSecret: ds.TokenPassword,
 				TokenURL:     ds.TokenEndpoint,
+				Scopes:       ds.Scopes,
 			}
 		}
 
