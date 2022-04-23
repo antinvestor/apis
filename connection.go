@@ -7,6 +7,7 @@ import (
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
 	"net/http"
 	"runtime"
 	"strings"
@@ -29,7 +30,6 @@ type (
 )
 
 func (jwt *JWTInterceptor) refreshBearerToken(ctx context.Context) error {
-
 	token, err := jwt.tokenClient.Token(ctx)
 	if err != nil {
 		return err
@@ -39,7 +39,14 @@ func (jwt *JWTInterceptor) refreshBearerToken(ctx context.Context) error {
 	return nil
 }
 
-func (jwt *JWTInterceptor) UnaryClientInterceptor(ctx context.Context, method string, req interface{}, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
+func (jwt *JWTInterceptor) UnaryClientInterceptor(
+	ctx context.Context,
+	method string,
+	req interface{},
+	reply interface{},
+	cc *grpc.ClientConn,
+	invoker grpc.UnaryInvoker,
+	opts ...grpc.CallOption) error {
 
 	if jwt.tokenClient != nil && jwt.token == nil {
 		if err := jwt.refreshBearerToken(ctx); err != nil {
@@ -89,14 +96,12 @@ func HttpClient(ctx context.Context, opts ...ClientOption) (*http.Client, error)
 	}
 
 	if !ds.NoAuth && ds.ApiKey == "" {
-
 		cfg := &clientcredentials.Config{
 			ClientID:     ds.TokenUserName,
 			ClientSecret: ds.TokenPassword,
 			TokenURL:     ds.TokenEndpoint,
 		}
 		httpClient = cfg.Client(ctx)
-
 	} else {
 		httpClient = &http.Client{}
 	}
@@ -104,9 +109,9 @@ func HttpClient(ctx context.Context, opts ...ClientOption) (*http.Client, error)
 	return httpClient, nil
 }
 
-//DialConnection Way for dialing a grpc connection and obtaining a permanent link that is used fairly throughout the life cycle of the application.
+// DialConnection Way for dialing a grpc connection and obtaining a permanent link that
+//is used fairly always available throughout the life cycle of the application.
 func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn, error) {
-
 	ds, err := processAndValidateOpts(opts)
 	if err != nil {
 		return nil, err
@@ -116,25 +121,19 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 
 	var certDialOption grpc.DialOption
 	if !strings.HasSuffix(ds.Endpoint, ":443") {
-
-		certDialOption = grpc.WithInsecure()
+		certDialOption = grpc.WithTransportCredentials(insecure.NewCredentials())
 
 	} else {
-
 		pool, err := x509.SystemCertPool()
 		if err != nil {
 			return nil, err
 		}
 		creds := credentials.NewClientTLSFromCert(pool, "")
 		certDialOption = grpc.WithTransportCredentials(creds)
-
 	}
-
 	dialOptions = append(dialOptions, certDialOption)
 
-	if !ds.NoAuth {
-
-		// Create a new interceptor
+	if !ds.NoAuth { // Create a new interceptor
 		jwt := &JWTInterceptor{}
 
 		if ds.ApiKey != "" {
@@ -157,7 +156,7 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 	return serviceConnection, err
 }
 
-//XAntHeader Simple way to add a header to the ant service
+// XAntHeader Simple way to add a header to the ant service
 func XAntHeader(keyval ...string) string {
 	if len(keyval) == 0 {
 		return ""
