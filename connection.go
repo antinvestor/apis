@@ -96,10 +96,11 @@ func HttpClient(ctx context.Context, opts ...ClientOption) (*http.Client, error)
 		return nil, err
 	}
 	if !ds.NoAuth && ds.APIKey == "" {
-		endpointValues := url.Values{}
+		var endpointValues url.Values
 		if len(ds.Audiences) > 0 {
+			endpointValues = url.Values{}
 			audienceList := strings.Join(ds.Audiences, " ")
-			endpointValues = url.Values{"audience": {audienceList}}
+			endpointValues.Add("audience", audienceList)
 		}
 		cfg := &clientcredentials.Config{
 			ClientID:       ds.TokenUserName,
@@ -145,6 +146,13 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 		if ds.APIKey != "" {
 			jwt.apiKey = ds.APIKey
 		} else {
+			var endpointValues url.Values
+			if len(ds.Audiences) > 0 {
+				endpointValues = url.Values{}
+				audienceList := strings.Join(ds.Audiences, " ")
+				endpointValues.Add("audience", audienceList)
+			}
+
 			jwt.tokenClient = &clientcredentials.Config{
 				ClientID:     ds.TokenUserName,
 				ClientSecret: ds.TokenPassword,
