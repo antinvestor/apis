@@ -17,7 +17,7 @@ type DialSettings struct {
 	TokenSource      oauth2.TokenSource
 	UserAgent        string
 	TokenEndpoint    string
-	ApiKey           string
+	APIKey           string
 	TokenUserName    string
 	TokenPassword    string
 	Audiences        []string
@@ -44,7 +44,7 @@ func (ds *DialSettings) GetScopes() []string {
 // Validate reports an error if ds is invalid.
 func (ds *DialSettings) Validate() error {
 
-	hasCreds := ds.ApiKey != "" || ds.TokenSource != nil
+	hasCreds := ds.APIKey != "" || ds.TokenSource != nil
 	if ds.NoAuth && hasCreds {
 		return errors.New("options.WithoutAuthentication is incompatible with any option that provides credentials")
 	}
@@ -53,7 +53,7 @@ func (ds *DialSettings) Validate() error {
 	// TODO(jba): make TokenSource & CredentialsFile an error (breaking change).
 	nCreds := 0
 
-	if ds.ApiKey != "" {
+	if ds.APIKey != "" {
 		nCreds++
 	}
 	if ds.TokenSource != nil {

@@ -95,7 +95,7 @@ func HttpClient(ctx context.Context, opts ...ClientOption) (*http.Client, error)
 		return nil, err
 	}
 
-	if !ds.NoAuth && ds.ApiKey == "" {
+	if !ds.NoAuth && ds.APIKey == "" {
 		cfg := &clientcredentials.Config{
 			ClientID:     ds.TokenUserName,
 			ClientSecret: ds.TokenPassword,
@@ -110,7 +110,7 @@ func HttpClient(ctx context.Context, opts ...ClientOption) (*http.Client, error)
 }
 
 // DialConnection Way for dialing a grpc connection and obtaining a permanent link that
-//is used fairly always available throughout the life cycle of the application.
+// is used fairly always available throughout the life cycle of the application.
 func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn, error) {
 	ds, err := processAndValidateOpts(opts)
 	if err != nil {
@@ -122,7 +122,6 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 	var certDialOption grpc.DialOption
 	if !strings.HasSuffix(ds.Endpoint, ":443") {
 		certDialOption = grpc.WithTransportCredentials(insecure.NewCredentials())
-
 	} else {
 		pool, err := x509.SystemCertPool()
 		if err != nil {
@@ -136,15 +135,15 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 	if !ds.NoAuth { // Create a new interceptor
 		jwt := &JWTInterceptor{}
 
-		if ds.ApiKey != "" {
-			jwt.apiKey = ds.ApiKey
+		if ds.APIKey != "" {
+			jwt.apiKey = ds.APIKey
 		} else {
 			jwt.tokenClient = &clientcredentials.Config{
 				ClientID:     ds.TokenUserName,
 				ClientSecret: ds.TokenPassword,
 				TokenURL:     ds.TokenEndpoint,
 				Scopes:       ds.Scopes,
-				AuthStyle:    oauth2.AuthStyleInParams,
+				AuthStyle:    oauth2.AuthStyleAutoDetect,
 			}
 		}
 

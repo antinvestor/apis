@@ -108,7 +108,7 @@ func WithTokenApiKey(apiKey string) ClientOption {
 
 type withTokenApiKey string
 
-func (w withTokenApiKey) Apply(o *DialSettings) { o.ApiKey = string(w) }
+func (w withTokenApiKey) Apply(o *DialSettings) { o.APIKey = string(w) }
 
 // WithTokenUsername returns a ClientOption that specifies an API Username to be used
 // as the basis for authentication.
