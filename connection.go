@@ -154,11 +154,12 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 			}
 
 			jwt.tokenClient = &clientcredentials.Config{
-				ClientID:     ds.TokenUserName,
-				ClientSecret: ds.TokenPassword,
-				TokenURL:     ds.TokenEndpoint,
-				Scopes:       ds.Scopes,
-				AuthStyle:    oauth2.AuthStyleAutoDetect,
+				ClientID:       ds.TokenUserName,
+				ClientSecret:   ds.TokenPassword,
+				TokenURL:       ds.TokenEndpoint,
+				Scopes:         ds.Scopes,
+				EndpointParams: endpointValues,
+				AuthStyle:      oauth2.AuthStyleAutoDetect,
 			}
 		}
 
