@@ -59,9 +59,7 @@ func (ds *DialSettings) Validate() error {
 	if ds.TokenSource != nil {
 		nCreds++
 	}
-	if len(ds.Scopes) > 0 && len(ds.Audiences) > 0 {
-		return errors.New("WithScopes is incompatible with WithAudience")
-	}
+
 	// Accept only one form of credentials, except we allow TokenSource and CredentialsFile for backwards compatibility.
 	if nCreds > 1 {
 		return errors.New("multiple credential options provided")

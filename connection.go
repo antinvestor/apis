@@ -9,6 +9,7 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
 	"net/http"
+	"net/url"
 	"runtime"
 	"strings"
 	"unicode"
@@ -94,12 +95,18 @@ func HttpClient(ctx context.Context, opts ...ClientOption) (*http.Client, error)
 	if err != nil {
 		return nil, err
 	}
-
 	if !ds.NoAuth && ds.APIKey == "" {
+		endpointValues := url.Values{}
+		if len(ds.Audiences) > 0 {
+			audienceList := strings.Join(ds.Audiences, " ")
+			endpointValues = url.Values{"audience": {audienceList}}
+		}
 		cfg := &clientcredentials.Config{
-			ClientID:     ds.TokenUserName,
-			ClientSecret: ds.TokenPassword,
-			TokenURL:     ds.TokenEndpoint,
+			ClientID:       ds.TokenUserName,
+			ClientSecret:   ds.TokenPassword,
+			TokenURL:       ds.TokenEndpoint,
+			Scopes:         ds.Scopes,
+			EndpointParams: endpointValues,
 		}
 		httpClient = cfg.Client(ctx)
 	} else {
