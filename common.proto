@@ -2,7 +2,9 @@
 syntax = "proto3";
 
 package apis;
-option go_package =".;common";
+
+option cc_enable_arenas = true;
+option go_package ="github.com/antinvestor/apis/common;common";
 
 enum STATE {
     CREATED = 0;
