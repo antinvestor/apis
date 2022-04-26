@@ -2,10 +2,13 @@ package apis
 
 import (
 	"crypto/tls"
+	"net/http"
+
 	"golang.org/x/oauth2"
 	"google.golang.org/grpc"
-	"net/http"
 )
+
+type CtxServiceKey string
 
 // A ClientOption is an option for a Google API client.
 type ClientOption interface {

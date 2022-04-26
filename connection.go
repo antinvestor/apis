@@ -4,15 +4,16 @@ import (
 	"bytes"
 	"context"
 	"crypto/x509"
-	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/clientcredentials"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/insecure"
 	"net/http"
 	"net/url"
 	"runtime"
 	"strings"
 	"unicode"
+
+	"golang.org/x/oauth2"
+	"golang.org/x/oauth2/clientcredentials"
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -22,7 +23,6 @@ import (
 
 type (
 	JWTInterceptor struct {
-		http        *http.Client              // The HTTP client for calling the token-serving API
 		tokenClient *clientcredentials.Config // An oauth2 client to fetch new server token
 		token       *oauth2.Token             // The JWT token that will be used in every call to the server
 		apiKey      string                    // An api key that never changes for a legacy api
