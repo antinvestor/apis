@@ -1,6 +1,6 @@
 module github.com/antinvestor/apis
 
-go 1.17
+go 1.18
 
 require (
 	golang.org/x/oauth2 v0.0.0-20220718184931-c8730f7fcb92
