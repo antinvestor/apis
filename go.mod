@@ -3,7 +3,7 @@ module github.com/antinvestor/apis
 go 1.19
 
 require (
-	golang.org/x/oauth2 v0.0.0-20220722155238-128564f6959c
+	golang.org/x/oauth2 v0.0.0-20220808172628-8227340efae7
 	google.golang.org/grpc v1.48.0
 	google.golang.org/protobuf v1.28.1
 )
