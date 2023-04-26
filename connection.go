@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"runtime"
 	"strings"
+	"sync"
 	"unicode"
 
 	"golang.org/x/oauth2"
@@ -16,9 +17,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"
 )
 
 type (
@@ -26,18 +25,33 @@ type (
 		tokenClient *clientcredentials.Config // An oauth2 client to fetch new server token
 		token       *oauth2.Token             // The JWT token that will be used in every call to the server
 		apiKey      string                    // An api key that never changes for a legacy api
-
+		mu          sync.Mutex
 	}
 )
 
-func (jwt *JWTInterceptor) refreshBearerToken(ctx context.Context) error {
-	token, err := jwt.tokenClient.Token(ctx)
-	if err != nil {
-		return err
+func (jwt *JWTInterceptor) getTokenStr(ctx context.Context) (string, error) {
+	jwt.mu.Lock()
+	defer jwt.mu.Unlock()
+
+	var err error
+	if jwt.tokenClient != nil {
+
+		if jwt.token == nil || !jwt.token.Valid() {
+			jwt.token, err = jwt.tokenClient.Token(ctx)
+			if err != nil {
+				return "", err
+			}
+		}
+
+		return jwt.token.AccessToken, nil
+
 	}
 
-	jwt.token = token
-	return nil
+	if jwt.apiKey != "" {
+
+		return jwt.apiKey, nil
+	}
+	return "", nil
 }
 
 func (jwt *JWTInterceptor) UnaryClientInterceptor(
@@ -49,31 +63,43 @@ func (jwt *JWTInterceptor) UnaryClientInterceptor(
 	invoker grpc.UnaryInvoker,
 	opts ...grpc.CallOption) error {
 
-	if jwt.tokenClient != nil && jwt.token == nil {
-		if err := jwt.refreshBearerToken(ctx); err != nil {
-			return err
-		}
+	tokenStr, err := jwt.getTokenStr(ctx)
+	if err != nil {
+		return err
 	}
 
-	// Create a new context with the token and make the first request
-	authCtx := metadata.AppendToOutgoingContext(ctx, "authorization", "bearer "+jwt.token.AccessToken)
-	err := invoker(authCtx, method, req, reply, cc, opts...)
-
-	// If we got an unauthenticated response from the gRPC service, refresh the token
-	if status.Code(err) == codes.Unauthenticated {
-		if err = jwt.refreshBearerToken(ctx); err != nil {
-			return err
-		}
-
-		// Create a new context with the new token. We don't want to reuse 'authCtx' here
-		// because we've already appended the invalid token. We're appending metadata to
-		// a slice here rather than a map like HTTP headers, so the first one will be picked
-		// up and invalid.
-		updatedAuthCtx := metadata.AppendToOutgoingContext(ctx, "authorization", "bearer "+jwt.token.AccessToken)
-		err = invoker(updatedAuthCtx, method, req, reply, cc, opts...)
+	if tokenStr != "" {
+		// Create a new context with the token and make the first request
+		authCtx := metadata.AppendToOutgoingContext(ctx, "authorization", "bearer "+jwt.token.AccessToken)
+		err = invoker(authCtx, method, req, reply, cc, opts...)
+	} else {
+		err = invoker(ctx, method, req, reply, cc, opts...)
 	}
 
 	return err
+}
+
+func (jwt *JWTInterceptor) StreamClientInterceptor(
+	ctx context.Context,
+	desc *grpc.StreamDesc,
+	cc *grpc.ClientConn,
+	method string,
+	streamer grpc.Streamer,
+	opts ...grpc.CallOption,
+) (grpc.ClientStream, error) {
+
+	tokenStr, err := jwt.getTokenStr(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	if tokenStr != "" {
+		// Create a new context with the token and make the first request
+		authCtx := metadata.AppendToOutgoingContext(ctx, "authorization", "bearer "+jwt.token.AccessToken)
+		return streamer(authCtx, desc, cc, method, opts...)
+	} else {
+		return streamer(ctx, desc, cc, method, opts...)
+	}
 }
 
 func processAndValidateOpts(opts []ClientOption) (*DialSettings, error) {
@@ -163,8 +189,9 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 			}
 		}
 
-		authDialOption := grpc.WithUnaryInterceptor(jwt.UnaryClientInterceptor)
-		dialOptions = append(dialOptions, authDialOption)
+		unaryInterceptOption := grpc.WithUnaryInterceptor(jwt.UnaryClientInterceptor)
+		streamInterceptOption := grpc.WithStreamInterceptor(jwt.StreamClientInterceptor)
+		dialOptions = append(dialOptions, unaryInterceptOption, streamInterceptOption)
 	}
 
 	serviceConnection, err := grpc.Dial(
