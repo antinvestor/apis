@@ -104,7 +104,6 @@ func (w withGRPCDialOption) Apply(o *DialSettings) {
 
 // WithTokenApiKey returns a ClientOption that specifies an API key to be used
 // as the basis for authentication.
-//
 func WithTokenApiKey(apiKey string) ClientOption {
 	return withTokenApiKey(apiKey)
 }
@@ -115,7 +114,6 @@ func (w withTokenApiKey) Apply(o *DialSettings) { o.APIKey = string(w) }
 
 // WithTokenUsername returns a ClientOption that specifies an API Username to be used
 // as the basis for authentication.
-//
 func WithTokenUsername(tokenUsername string) ClientOption {
 	return withTokenUsername(tokenUsername)
 }
@@ -126,7 +124,6 @@ func (w withTokenUsername) Apply(o *DialSettings) { o.TokenUserName = string(w) 
 
 // WithTokenPassword returns a ClientOption that specifies an API Username to be used
 // as the basis for authentication.
-//
 func WithTokenPassword(tokenPassword string) ClientOption {
 	return withTokenPassword(tokenPassword)
 }
@@ -137,7 +134,6 @@ func (w withTokenPassword) Apply(o *DialSettings) { o.TokenPassword = string(w) 
 
 // WithTokenEndpoint returns a ClientOption that specifies an API Username to be used
 // as the basis for authentication.
-//
 func WithTokenEndpoint(tokenEndpoint string) ClientOption {
 	return withTokenEndpoint(tokenEndpoint)
 }
