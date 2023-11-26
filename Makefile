@@ -32,10 +32,10 @@ vet:    ## run go vet on the source files
 	cd profile && go vet ./...
 
 gen:
-	protoc --proto_path=./  common.proto --go_out=paths=source_relative:./common --validate_out=lang=go:.
+	protoc --proto_path=./  common.proto --go_out=paths=source_relative:./common --validate_out=lang=go:./common/
 	protoc --proto_path=./ common.proto --go-grpc_out=./
 	protoc --proto_path=./ --proto_path=./profile/v1 --go_out=./profile/ --validate_out=lang=go:./profile/ profile.proto
 	protoc --proto_path=./ --proto_path=./profile/v1  profile.proto --go-grpc_out=./profile/
 	mockgen -source=./profile/profile_grpc.pb.go -self_package=github.com/antinvestor/apis/profile -package=profilev1 -destination=./profile/profile_grpc_mock.go
 
-build: setup clean fmt vet gen ## build all at once
+build: setup clean fmt vet ## build all at once
