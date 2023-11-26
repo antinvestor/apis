@@ -3,7 +3,7 @@ module github.com/antinvestor/apis/notification
 go 1.21
 
 require (
-	github.com/antinvestor/apis v1.2.1
+	github.com/antinvestor/apis v1.3.0
 	github.com/envoyproxy/protoc-gen-validate v1.0.2
 	github.com/golang/mock v1.6.0
 	google.golang.org/grpc v1.59.0
