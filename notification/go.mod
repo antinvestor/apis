@@ -1,4 +1,4 @@
-module github.com/antinvestor/apis/profile
+module github.com/antinvestor/apis/notification
 
 go 1.21
 

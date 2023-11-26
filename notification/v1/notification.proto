@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+package apis;
+option go_package = ".;notificationv1";
+
+option java_multiple_files = true;
+option java_package = "com.antinvestor.api.notification";
+
+import "validate.proto";
+import "common.proto";
+
+enum PRIORITY{
+  HIGH = 0;
+  LOW = 1;
+  VERY_LOW = 2;
+}
+
+
+message StatusResponse {
+  string Id = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  apis.STATE state = 2;
+  apis.STATUS status = 3;
+  string externalId = 4;
+  string transientId = 5;
+  map<string, string> extras = 6;
+}
+
+message Notification {
+
+  string accessId = 1 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  string Id = 2 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  string profileId = 3 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,40}"}];
+
+  oneof contact {
+
+    option (validate.required) = true;
+    string contactId = 4 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,40}"}];
+    string Detail = 5 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 250, pattern: "[0-9a-z_-]{3,250}"}];
+  }
+  string type = 6;
+  string template = 7;
+  map<string, string> payload = 8;
+  string data = 9;
+  string language = 10;
+  bool outBound = 11;
+  bool autoRelease = 12;
+  string routeId = 13 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  StatusResponse status = 14 [(validate.rules).message.skip = true];
+  map<string, string> extras = 15;
+
+  PRIORITY priority = 16;
+
+}
+
+message StatusRequest {
+  string accessId = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  string Id = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+}
+
+message StatusUpdateRequest {
+  string accessId = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  string Id = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  apis.STATE state = 3;
+  apis.STATUS status = 4;
+  string externalId = 5;
+  map<string, string> extras = 6;
+}
+
+
+message ReleaseRequest {
+  string accessId = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  string Id = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  string comment = 3;
+}
+
+message SearchRequest {
+  string accessId = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  string Id = 2 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  string query = 5;
+  int64 page = 6;
+  int32 count = 7;
+  string startDate = 3;
+  string endDate = 4;
+}
+
+
+service NotificationService {
+
+  //Send method for queueing massages as requested
+  rpc Send (Notification) returns (StatusResponse);
+
+  //Status request to determine if notification is prepared or released
+  rpc Status (StatusRequest) returns (StatusResponse);
+
+  //Status update request to allow continuation of notification processing
+  rpc StatusUpdate (StatusUpdateRequest) returns (StatusResponse);
+
+  //Release method for releasing queued massages and returns if notification status if released
+  rpc Release (ReleaseRequest) returns (StatusResponse);
+
+  //Receive method is for client request for particular notification responses from system
+  rpc Receive (Notification) returns (StatusResponse);
+
+  //Search method is for client request for particular notification details from system
+  rpc Search (SearchRequest) returns (stream Notification);
+
+}
