@@ -575,36 +575,94 @@ func (m *RelationshipObject) validate(all bool) error {
 
 	// no validation rules for Type
 
-	if all {
-		switch v := interface{}(m.GetProfile()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, RelationshipObjectValidationError{
-					field:  "Profile",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, RelationshipObjectValidationError{
-					field:  "Profile",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetProfile()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return RelationshipObjectValidationError{
-				field:  "Profile",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	// no validation rules for Properties
+
+	switch v := m.Child.(type) {
+	case *RelationshipObject_Profile:
+		if v == nil {
+			err := RelationshipObjectValidationError{
+				field:  "Child",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetProfile()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RelationshipObjectValidationError{
+						field:  "Profile",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RelationshipObjectValidationError{
+						field:  "Profile",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetProfile()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RelationshipObjectValidationError{
+					field:  "Profile",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *RelationshipObject_Contact:
+		if v == nil {
+			err := RelationshipObjectValidationError{
+				field:  "Child",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetContact()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RelationshipObjectValidationError{
+						field:  "Contact",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RelationshipObjectValidationError{
+						field:  "Contact",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetContact()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RelationshipObjectValidationError{
+					field:  "Contact",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		_ = v // ensures v is used
+	}
 
 	if len(errors) > 0 {
 		return RelationshipObjectMultiError(errors)
@@ -1737,9 +1795,20 @@ func (m *ProfileListRelationshipRequest) validate(all bool) error {
 
 	var errors []error
 
-	if l := utf8.RuneCountInString(m.GetProfileID()); l < 3 || l > 40 {
+	if _, ok := _ProfileListRelationshipRequest_Parent_InLookup[m.GetParent()]; !ok {
 		err := ProfileListRelationshipRequestValidationError{
-			field:  "ProfileID",
+			field:  "Parent",
+			reason: "value must be in list [Contact Profile]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if l := utf8.RuneCountInString(m.GetParent()); l < 3 || l > 40 {
+		err := ProfileListRelationshipRequestValidationError{
+			field:  "Parent",
 			reason: "value length must be between 3 and 40 runes, inclusive",
 		}
 		if !all {
@@ -1748,9 +1817,20 @@ func (m *ProfileListRelationshipRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if !_ProfileListRelationshipRequest_ProfileID_Pattern.MatchString(m.GetProfileID()) {
+	if l := utf8.RuneCountInString(m.GetParentID()); l < 3 || l > 40 {
 		err := ProfileListRelationshipRequestValidationError{
-			field:  "ProfileID",
+			field:  "ParentID",
+			reason: "value length must be between 3 and 40 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if !_ProfileListRelationshipRequest_ParentID_Pattern.MatchString(m.GetParentID()) {
+		err := ProfileListRelationshipRequestValidationError{
+			field:  "ParentID",
 			reason: "value does not match regex pattern \"[0-9a-z_-]{3,20}\"",
 		}
 		if !all {
@@ -1868,7 +1948,12 @@ var _ interface {
 	ErrorName() string
 } = ProfileListRelationshipRequestValidationError{}
 
-var _ProfileListRelationshipRequest_ProfileID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")
+var _ProfileListRelationshipRequest_Parent_InLookup = map[string]struct{}{
+	"Contact": {},
+	"Profile": {},
+}
+
+var _ProfileListRelationshipRequest_ParentID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")
 
 var _ProfileListRelationshipRequest_LastRelationshipID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")
 
@@ -1916,9 +2001,20 @@ func (m *ProfileAddRelationshipRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if l := utf8.RuneCountInString(m.GetProfileID()); l < 3 || l > 40 {
+	if _, ok := _ProfileAddRelationshipRequest_Parent_InLookup[m.GetParent()]; !ok {
 		err := ProfileAddRelationshipRequestValidationError{
-			field:  "ProfileID",
+			field:  "Parent",
+			reason: "value must be in list [Contact Profile]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if l := utf8.RuneCountInString(m.GetParent()); l < 3 || l > 40 {
+		err := ProfileAddRelationshipRequestValidationError{
+			field:  "Parent",
 			reason: "value length must be between 3 and 40 runes, inclusive",
 		}
 		if !all {
@@ -1927,9 +2023,20 @@ func (m *ProfileAddRelationshipRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if !_ProfileAddRelationshipRequest_ProfileID_Pattern.MatchString(m.GetProfileID()) {
+	if l := utf8.RuneCountInString(m.GetParentID()); l < 3 || l > 40 {
 		err := ProfileAddRelationshipRequestValidationError{
-			field:  "ProfileID",
+			field:  "ParentID",
+			reason: "value length must be between 3 and 40 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if !_ProfileAddRelationshipRequest_ParentID_Pattern.MatchString(m.GetParentID()) {
+		err := ProfileAddRelationshipRequestValidationError{
+			field:  "ParentID",
 			reason: "value does not match regex pattern \"[0-9a-z_-]{3,20}\"",
 		}
 		if !all {
@@ -1938,9 +2045,20 @@ func (m *ProfileAddRelationshipRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if l := utf8.RuneCountInString(m.GetChildProfileID()); l < 3 || l > 40 {
+	if _, ok := _ProfileAddRelationshipRequest_Child_InLookup[m.GetChild()]; !ok {
 		err := ProfileAddRelationshipRequestValidationError{
-			field:  "ChildProfileID",
+			field:  "Child",
+			reason: "value must be in list [Contact Profile]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if l := utf8.RuneCountInString(m.GetChild()); l < 3 || l > 40 {
+		err := ProfileAddRelationshipRequestValidationError{
+			field:  "Child",
 			reason: "value length must be between 3 and 40 runes, inclusive",
 		}
 		if !all {
@@ -1949,9 +2067,20 @@ func (m *ProfileAddRelationshipRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if !_ProfileAddRelationshipRequest_ChildProfileID_Pattern.MatchString(m.GetChildProfileID()) {
+	if l := utf8.RuneCountInString(m.GetChildID()); l < 3 || l > 40 {
 		err := ProfileAddRelationshipRequestValidationError{
-			field:  "ChildProfileID",
+			field:  "ChildID",
+			reason: "value length must be between 3 and 40 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if !_ProfileAddRelationshipRequest_ChildID_Pattern.MatchString(m.GetChildID()) {
+		err := ProfileAddRelationshipRequestValidationError{
+			field:  "ChildID",
 			reason: "value does not match regex pattern \"[0-9a-z_-]{3,20}\"",
 		}
 		if !all {
@@ -2047,9 +2176,19 @@ var _ interface {
 
 var _ProfileAddRelationshipRequest_ID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")
 
-var _ProfileAddRelationshipRequest_ProfileID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")
+var _ProfileAddRelationshipRequest_Parent_InLookup = map[string]struct{}{
+	"Contact": {},
+	"Profile": {},
+}
 
-var _ProfileAddRelationshipRequest_ChildProfileID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")
+var _ProfileAddRelationshipRequest_ParentID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")
+
+var _ProfileAddRelationshipRequest_Child_InLookup = map[string]struct{}{
+	"Contact": {},
+	"Profile": {},
+}
+
+var _ProfileAddRelationshipRequest_ChildID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")
 
 // Validate checks the field values on ProfileDeleteRelationshipRequest with
 // the rules defined in the proto definition for this message. If any rules
@@ -2096,11 +2235,11 @@ func (m *ProfileDeleteRelationshipRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if m.GetProfileID() != "" {
+	if m.GetParentID() != "" {
 
-		if l := utf8.RuneCountInString(m.GetProfileID()); l < 3 || l > 40 {
+		if l := utf8.RuneCountInString(m.GetParentID()); l < 3 || l > 40 {
 			err := ProfileDeleteRelationshipRequestValidationError{
-				field:  "ProfileID",
+				field:  "ParentID",
 				reason: "value length must be between 3 and 40 runes, inclusive",
 			}
 			if !all {
@@ -2109,9 +2248,9 @@ func (m *ProfileDeleteRelationshipRequest) validate(all bool) error {
 			errors = append(errors, err)
 		}
 
-		if !_ProfileDeleteRelationshipRequest_ProfileID_Pattern.MatchString(m.GetProfileID()) {
+		if !_ProfileDeleteRelationshipRequest_ParentID_Pattern.MatchString(m.GetParentID()) {
 			err := ProfileDeleteRelationshipRequestValidationError{
-				field:  "ProfileID",
+				field:  "ParentID",
 				reason: "value does not match regex pattern \"[0-9a-z_-]{3,20}\"",
 			}
 			if !all {
@@ -2206,4 +2345,4 @@ var _ interface {
 
 var _ProfileDeleteRelationshipRequest_ID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")
 
-var _ProfileDeleteRelationshipRequest_ProfileID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")
+var _ProfileDeleteRelationshipRequest_ParentID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")

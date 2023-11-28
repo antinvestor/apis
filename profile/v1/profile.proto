@@ -69,8 +69,11 @@ enum RelationshipType{
 message RelationshipObject {
   string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
   RelationshipType type = 2;
-  ProfileObject profile = 3;
-  map<string, string> properties =4;
+  map<string, string> properties =3;
+  oneof child  {
+    ProfileObject profile = 4;
+    ContactObject contact = 5;
+      }
 }
 
 // The request message containing the profile's hash
@@ -130,25 +133,28 @@ message ProfileContactRequest {
 
 // Request message to list all profiles related to the supplied profile id
 message ProfileListRelationshipRequest {
-  string ProfileID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
-  string LastRelationshipID = 2 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
-  repeated string relatedProfileID = 3; // Related profile ids to specifically search for.
-  int32 count = 4;
+  string Parent = 1 [(validate.rules).string = {min_len: 3, max_len: 40, in: ["Contact", "Profile"]}];
+  string ParentID = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  string LastRelationshipID = 3 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  repeated string relatedChildrenID = 4; // Related profile ids to specifically search for.
+  int32 count = 5;
 }
 
 // The request message containing the information necessary to create a profile
 message ProfileAddRelationshipRequest {
   string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
-  string ProfileID = 2 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
-  string ChildProfileID = 3 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
-  RelationshipType type = 4;
-  map<string, string> properties =5;
+  string Parent = 2 [(validate.rules).string = {min_len: 3, max_len: 40, in: ["Contact", "Profile"]}];
+  string ParentID = 3 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  string Child = 4 [(validate.rules).string = {min_len: 3, max_len: 40, in: ["Contact", "Profile"]}];
+  string ChildID = 5 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  RelationshipType type = 6;
+  map<string, string> properties =7;
 }
 
 // The request message containing the information necessary to delete relationship to a profile
 message ProfileDeleteRelationshipRequest {
   string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
-  string ProfileID = 2 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  string ParentID = 2 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
 }
 
 // The profile service definition.
