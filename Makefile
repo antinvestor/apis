@@ -36,7 +36,7 @@ vet:    ## run go vet on the source files
 	cd notification && go vet ./...
 
 gen:
-	protoc --proto_path=./  common.proto --go_out=paths=source_relative:./common --validate_out=lang=go:./common/
+	protoc --proto_path=./ common.proto --go_out=paths=source_relative:./common --validate_out=lang=go:./common/
 	protoc --proto_path=./ common.proto --go-grpc_out=./
 
 	protoc --proto_path=./ --proto_path=./profile/v1 --go_out=./profile/ --validate_out=lang=go:./profile/ profile.proto
@@ -46,5 +46,13 @@ gen:
 	protoc --proto_path=./ --proto_path=./notification/v1 --go_out=./notification/ --validate_out=lang=go:./notification/ notification.proto;
 	protoc --proto_path=./ --proto_path=./notification/v1  notification.proto --go-grpc_out=./notification/
 	mockgen -source=./notification/notification_grpc.pb.go -self_package=github.com/antinvestor/apis/notification -package=notificationv1 -destination=./notification/notification_grpc_mock.go
+
+	protoc --proto_path=./ --proto_path=./partition/v1 --go_out=./partition --validate_out=lang=go:./partition/ partition.proto
+	protoc --proto_path=./ --proto_path=./partition/v1  partition.proto --go-grpc_out=./partition/
+	mockgen -source=./partition/partition_grpc.pb.go -self_package=github.com/antinvestor/apis/partition -package=partitionv1 -destination=./partition/partition_grpc_mock.go
+
+	protoc --proto_path=./ --proto_path=./settings/v1 --go_out=./settings --validate_out=lang=go:./settings/ settings.proto
+	protoc --proto_path=./ --proto_path=./settings/v1  settings.proto --go-grpc_out=./settings/
+	mockgen -source=./settings/settings_grpc.pb.go -self_package=github.com/antinvestor/apis/settings -package=settingsv1 -destination=./settings/settings_grpc_mock.go
 
 build: setup clean fmt vet ## build all at once

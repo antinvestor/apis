@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package apis;
+option go_package = ".;settingsv1";
+
+option java_multiple_files = true;
+import "validate.proto";
+
+message Setting {
+  string name = 1 [(validate.rules).string = {min_len: 2}];
+  string object = 2 [(validate.rules).string = {ignore_empty: true, min_len: 2}];
+  string objectId = 3 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  string lang = 4 [(validate.rules).string = {ignore_empty: true, min_len: 2}];
+  string module = 5 [(validate.rules).string = {ignore_empty: true, min_len: 3}];
+}
+
+message SettingRequest{
+  Setting key = 1;
+}
+
+message SettingUpdateRequest {
+  Setting key = 1;
+  string value = 2;
+}
+
+message SettingResponse {
+  string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}"}];
+  Setting key = 2;
+  string value = 3;
+  string updated = 4;
+}
+
+service SettingsService {
+  // Gets a single setting and its stored value
+  rpc Get (SettingRequest) returns (SettingResponse);
+  // Pulls all setting values that match some criteria in the name & any other setting properties
+  rpc List (SettingRequest) returns (stream SettingResponse);
+
+  rpc Set (SettingUpdateRequest) returns (SettingResponse);
+}
