@@ -1,4 +1,4 @@
-module github.com/antinvestor/apis/partition
+module github.com/antinvestor/apis/ocr
 
 go 1.21
 

@@ -21,6 +21,9 @@ setup:  ## go clean
 	cd notification && go mod tidy
 	cd partition && go mod tidy
 	cd settings && go mod tidy
+	cd files && go mod tidy
+	cd ocr && go mod tidy
+	cd property && go mod tidy
 
 clean:  ## go clean
 	go clean
@@ -28,6 +31,9 @@ clean:  ## go clean
 	cd notification && go clean
 	cd partition && go clean
 	cd settings && go clean
+	cd files && go clean
+	cd ocr && go clean
+	cd property && go clean
 
 fmt:    ## format the go source files
 	go fmt ./...
@@ -35,6 +41,9 @@ fmt:    ## format the go source files
 	cd notification && go fmt ./...
 	cd partition && go fmt ./...
 	cd settings && go fmt ./...
+	cd files && go fmt ./...
+	cd ocr && go fmt ./...
+	cd property && go fmt ./...
 
 vet:    ## run go vet on the source files
 	go vet ./...
@@ -42,6 +51,9 @@ vet:    ## run go vet on the source files
 	cd notification && go vet ./...
 	cd partition && go vet ./...
 	cd settings && go vet ./...
+	cd files && go vet ./...
+	cd ocr && go vet ./...
+	cd property && go vet ./...
 
 gen:
 	protoc --proto_path=./ common.proto --go_out=paths=source_relative:./common --validate_out=lang=go:./common/
@@ -62,5 +74,13 @@ gen:
 	protoc --proto_path=./ --proto_path=./settings/v1 --go_out=./settings --validate_out=lang=go:./settings/ settings.proto
 	protoc --proto_path=./ --proto_path=./settings/v1  settings.proto --go-grpc_out=./settings/
 	mockgen -source=./settings/settings_grpc.pb.go -self_package=github.com/antinvestor/apis/settings -package=settingsv1 -destination=./settings/settings_grpc_mock.go
+
+	protoc --proto_path=./ --proto_path=./ocr/v1 --go_out=./ocr --validate_out=lang=go:./ocr/ ocr.proto
+	protoc --proto_path=./ --proto_path=./ocr/v1  ocr.proto --go-grpc_out=./ocr/
+	mockgen -source=./ocr/ocr_grpc.pb.go -self_package=github.com/antinvestor/apis/ocr -package=ocrv1 -destination=./ocr/ocr_grpc_mock.go
+
+	protoc --proto_path=./ --proto_path=./property/v1 --go_out=./property --validate_out=lang=go:./property/ property.proto
+	protoc --proto_path=./ --proto_path=./property/v1  property.proto --go-grpc_out=./property/
+	mockgen -source=./property/property_grpc.pb.go -self_package=github.com/antinvestor/apis/property -package=propertyv1 -destination=./property/property_grpc_mock.go
 
 build: setup clean fmt vet ## build all at once

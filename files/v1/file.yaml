@@ -1,0 +1,208 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Ant Investor Files
+  description: An openAPI 3.0 specification that defines how files are stored and accessed on ant investor products
+  termsOfService: https://antinvestor/terms/
+  contact:
+    name: Ant Investor Team
+    email: info@antinvestor.com
+    url: https://antinvestor.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://files.api.antinvestor.com
+
+components:
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    File:
+      required:
+        - name  
+      properties:
+        id:
+          type: string
+        group_id:
+          type: string
+        access_id:
+          type: string
+        public:
+          type: boolean         
+        name:
+          type: string
+        url:
+          type: string    
+
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+
+    UnauthorizedError:
+      description: Access token is missing or invalid
+
+
+
+security:
+  - bearerAuth: []
+paths:
+  /:
+    get:
+      description: |
+        Returns all files from the system that the user has access to
+        
+      operationId: findFiles
+      parameters:
+        - name: subscription_id
+          in: query
+          description: filters the files by the subscription by
+          required: false
+          schema:
+            type: string
+            pattern: '[0-9a-z_-]{3,20}'
+            example: '9bsv0s09a5j002njlpvg'
+        - name: group_id
+          in: query
+          description: filters the files by the grouping id
+          required: false
+          schema:
+            type: string 
+            pattern: '[0-9a-z_-]{3,20}'
+            example: '9bsv0s09a5j002njlptg'   
+        - name: limit
+          in: query
+          description: maximum number of results to return
+          required: false
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: maximum number of results to return
+          required: false
+          schema:
+            type: integer
+
+      responses:
+        '200':
+          description: files response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/File'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Stores a new file. Duplicates are going to be ignored if the hash of the file and meta data both match an existing file 
+      operationId: addFile
+      requestBody:
+        description: File contents to add to the store
+        content: 
+          multipart/form-data: 
+            schema:            
+              type: object
+              properties:      
+                group_id:
+                  type: string
+                  pattern: '[0-9a-z_-]{3,20}'
+                  example: '9bsv0s09a5j002njlpvg'
+                access_id:
+                  type: string
+                  pattern: '[0-9a-z_-]{3,20}'
+                  example: '9bsv0s09a5j002njlptg'
+                public:
+                  type: boolean
+                  default: false         
+                name:
+                  type: string  
+                  example: 'uploadfile.txt'                
+                fileObject:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: file response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{id}:
+    get:
+      description: Returns a file based on supplied ID
+      operationId: find file by id
+      parameters:
+        - name: id
+          in: path
+          description: ID of file to fetch
+          required: true
+          schema:
+            type: string
+            pattern: '[0-9a-z_-]{3,20}'
+            example: '9bsv0s09a5j002njlq30'
+      responses:
+        '200':
+          description: file response
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: deletes a single file based on the ID supplied
+      operationId: deleteFile
+      parameters:
+        - name: id
+          in: path
+          description: ID of file to delete
+          required: true
+          schema:
+            type: string
+            pattern: '[0-9a-z_-]{3,20}'
+            example: '9bsv0s09a5j002njlq20'
+      responses:
+        '204':
+          description: file deleted
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+

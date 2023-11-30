@@ -1,0 +1,246 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: info@antinvestor.com
+    name: Ant Investor Team
+    url: https://antinvestor.com
+  description: An openAPI 3.0 specification that defines how files are stored and
+    accessed on ant investor products
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://antinvestor/terms/
+  title: Ant Investor Files
+  version: 1.0.0
+servers:
+- url: https://files.api.antinvestor.com
+security:
+- bearerAuth: []
+paths:
+  /:
+    get:
+      description: |
+        Returns all files from the system that the user has access to
+      operationId: findFiles
+      parameters:
+      - description: filters the files by the subscription by
+        explode: true
+        in: query
+        name: subscription_id
+        required: false
+        schema:
+          example: 9bsv0s09a5j002njlpvg
+          pattern: '[0-9a-z_-]{3,20}'
+          type: string
+        style: form
+      - description: filters the files by the grouping id
+        explode: true
+        in: query
+        name: group_id
+        required: false
+        schema:
+          example: 9bsv0s09a5j002njlptg
+          pattern: '[0-9a-z_-]{3,20}'
+          type: string
+        style: form
+      - description: maximum number of results to return
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: maximum number of results to return
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/File'
+                type: array
+          description: files response
+        "401":
+          $ref: '#/components/responses/UnauthorizedError'
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+    post:
+      description: Stores a new file. Duplicates are going to be ignored if the hash
+        of the file and meta data both match an existing file
+      operationId: addFile
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                group_id:
+                  example: 9bsv0s09a5j002njlpvg
+                  pattern: '[0-9a-z_-]{3,20}'
+                  type: string
+                access_id:
+                  example: 9bsv0s09a5j002njlptg
+                  pattern: '[0-9a-z_-]{3,20}'
+                  type: string
+                public:
+                  default: false
+                  type: boolean
+                name:
+                  example: uploadfile.txt
+                  type: string
+                fileObject:
+                  format: binary
+                  type: string
+              type: object
+        description: File contents to add to the store
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+          description: file response
+        "401":
+          $ref: '#/components/responses/UnauthorizedError'
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+  /{id}:
+    delete:
+      description: deletes a single file based on the ID supplied
+      operationId: deleteFile
+      parameters:
+      - description: ID of file to delete
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 9bsv0s09a5j002njlq20
+          pattern: '[0-9a-z_-]{3,20}'
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: file deleted
+        "401":
+          $ref: '#/components/responses/UnauthorizedError'
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+    get:
+      description: Returns a file based on supplied ID
+      operationId: find file by id
+      parameters:
+      - description: ID of file to fetch
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 9bsv0s09a5j002njlq30
+          pattern: '[0-9a-z_-]{3,20}'
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: file response
+        "401":
+          $ref: '#/components/responses/UnauthorizedError'
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+components:
+  requestBodies:
+    inline_object:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+  schemas:
+    File:
+      example:
+        public: true
+        group_id: group_id
+        name: name
+        access_id: access_id
+        id: id
+        url: url
+      properties:
+        id:
+          type: string
+        group_id:
+          type: string
+        access_id:
+          type: string
+        public:
+          type: boolean
+        name:
+          type: string
+        url:
+          type: string
+      required:
+      - name
+    Error:
+      properties:
+        code:
+          format: int32
+          type: integer
+        message:
+          type: string
+      required:
+      - code
+      - message
+    UnauthorizedError:
+      description: Access token is missing or invalid
+    inline_object:
+      properties:
+        group_id:
+          example: 9bsv0s09a5j002njlpvg
+          pattern: '[0-9a-z_-]{3,20}'
+          type: string
+        access_id:
+          example: 9bsv0s09a5j002njlptg
+          pattern: '[0-9a-z_-]{3,20}'
+          type: string
+        public:
+          default: false
+          type: boolean
+        name:
+          example: uploadfile.txt
+          type: string
+        fileObject:
+          format: binary
+          type: string
+      type: object
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
