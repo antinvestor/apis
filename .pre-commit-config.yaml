@@ -4,6 +4,6 @@ repos:
       - id: local-build
         name: Locally build
         description: A local make file to always build and test locally
-        entry: make build
+        entry: make
         files: '\.go$'
         language: 'system'

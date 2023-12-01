@@ -14,12 +14,13 @@ LICENSE_IGNORE := --ignore /testdata/
 # Set to use a different compiler. For example, `GO=go1.18rc1 make test`.
 GO ?= go
 
-define clean_package
-cd ${1} && go mod tidy
-cd ${1} && go fmt ./...
-cd ${1} && go vet ./...
-endef
+define build_package
+cd ${1} && $(GO) mod tidy
+cd ${1} && $(GO) fmt ./...
+cd ${1} && $(GO) vet ./...
+cd ${1} && $(GO) build ./...
 
+endef
 
 .PHONY: help
 help: ## Describe useful make targets
@@ -35,12 +36,7 @@ clean: ## Delete intermediate build artifacts
 	@# -X only removes untracked files, -d recurses into directories, -f actually removes files/dirs
 	git clean -Xdf
 	$(call clean_package, .)
-	$(call clean_package, notification)
-	$(call clean_package, ocr)
-	$(call clean_package, partition)
-	$(call clean_package, profile)
-	$(call clean_package, property)
-	$(call clean_package, settings)
+
 
 .PHONY: test
 test: build ## Run unit tests
@@ -48,7 +44,13 @@ test: build ## Run unit tests
 
 .PHONY: build
 build: generate ## Build all packages
-	$(GO) build ./...
+	$(call build_package, notification)
+	$(call build_package, ocr)
+	$(call build_package, partition)
+	$(call build_package, profile)
+	$(call build_package, property)
+	$(call build_package, settings)
+
 
 .PHONY: lint
 lint: $(BIN)/golangci-lint $(BIN)/buf ## Lint Go and protobuf
