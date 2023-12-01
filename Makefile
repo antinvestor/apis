@@ -27,7 +27,7 @@ cd ${1} && $(GO) build ./...
 endef
 
 define mock_package
-cd ${1} && $(MOCK_GEN) -source=${CUR_DIR}/${1}/${2}/${1}_grpc.pb.go -self_package=github.com/antinvestor/apis/${1}/${2} -package=${1}${2} -destination=${CUR_DIR}/${1}/${2}/${1}_grpc_mock.go
+cd ${1} && $(MOCK_GEN) -source=${CUR_DIR}${1}/${2}/${1}_grpc.pb.go -self_package=github.com/antinvestor/apis/${1}/${2} -package=${1}${2} -destination=${CUR_DIR}${1}/${2}/${1}_grpc_mock.go
 
 endef
 
