@@ -12,33 +12,34 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package propertyv1
+package settingsv1
 
 import (
 	"context"
 	apic "github.com/antinvestor/apis"
+	settingsv1 "github.com/antinvestor/apis/settings/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
 	"math"
 )
 
-const ctxKeyService = "propertyClientKey"
+const ctxKeyService = "settingsClientKey"
 
-func defaultPropertyClientOptions() []apic.ClientOption {
+func defaultsettingsClientOptions() []apic.ClientOption {
 	return []apic.ClientOption{
-		apic.WithEndpoint("property.api.antinvestor.com:443"),
+		apic.WithEndpoint("settings.api.antinvestor.com:443"),
 		apic.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
 		apic.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
 	}
 }
 
-func ToContext(ctx context.Context, client *PropertyClient) context.Context {
+func ToContext(ctx context.Context, client *settingsClient) context.Context {
 	return context.WithValue(ctx, ctxKeyService, client)
 }
 
-func FromContext(ctx context.Context) *PropertyClient {
-	client, ok := ctx.Value(ctxKeyService).(*PropertyClient)
+func FromContext(ctx context.Context) *settingsClient {
+	client, ok := ctx.Value(ctxKeyService).(*settingsClient)
 	if !ok {
 		return nil
 	}
@@ -46,27 +47,27 @@ func FromContext(ctx context.Context) *PropertyClient {
 	return client
 }
 
-// PropertyClient is a client for interacting with the notification service API.
+// settingsClient is a client for interacting with the notification service API.
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
-type PropertyClient struct {
+type settingsClient struct {
 	// gRPC connection to the service.
 	clientConn *grpc.ClientConn
 
 	// The gRPC API client.
-	propertyClient PropertyServiceClient
+	settingsClient settingsv1.SettingsServiceClient
 
 	// The x-ant-* metadata to be sent with each request.
 	xMetadata metadata.MD
 }
 
-// InstantiatePropertyClient creates a new notification client.
+// InstantiatesettingsClient creates a new notification client.
 //
 // The service that an application uses to send and access received messages
-func InstantiatePropertyClient(clientConnection *grpc.ClientConn, propertyServiceCli PropertyServiceClient) *PropertyClient {
-	c := &PropertyClient{
+func InstantiatesettingsClient(clientConnection *grpc.ClientConn, settingsServiceCli settingsv1.SettingsServiceClient) *settingsClient {
+	c := &settingsClient{
 		clientConn:     clientConnection,
-		propertyClient: propertyServiceCli,
+		settingsClient: settingsServiceCli,
 	}
 
 	c.setClientInfo()
@@ -74,59 +75,32 @@ func InstantiatePropertyClient(clientConnection *grpc.ClientConn, propertyServic
 	return c
 }
 
-// NewPropertyClient creates a new notification client.
+// NewsettingsClient creates a new notification client.
 //
 // The service that an application uses to send and access received messages
-func NewPropertyClient(ctx context.Context, opts ...apic.ClientOption) (*PropertyClient, error) {
-	clientOpts := defaultPropertyClientOptions()
+func NewsettingsClient(ctx context.Context, opts ...apic.ClientOption) (*settingsClient, error) {
+	clientOpts := defaultsettingsClientOptions()
 
 	connPool, err := apic.DialConnection(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
 
-	notificationServiceCli := NewPropertyServiceClient(connPool)
-	return InstantiatePropertyClient(connPool, notificationServiceCli), nil
+	notificationServiceCli := settingsv1.NewSettingsServiceClient(connPool)
+	return InstantiatesettingsClient(connPool, notificationServiceCli), nil
 }
 
 // Close closes the connection to the API service. The user should invoke this when
 // the client is no longer required.
-func (nc *PropertyClient) Close() error {
+func (nc *settingsClient) Close() error {
 	return nc.clientConn.Close()
 }
 
 // setClientInfo sets the name and version of the application in
 // the `x-goog-api-client` header passed on each request. Intended for
 // use by Google-written clients.
-func (nc *PropertyClient) setClientInfo(keyval ...string) {
+func (nc *settingsClient) setClientInfo(keyval ...string) {
 	kv := append([]string{"gl-go", apic.VersionGo()}, keyval...)
 	kv = append(kv, "grpc", grpc.Version)
 	nc.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))
-}
-
-func (nc *PropertyClient) AddPropertyType(
-	ctx context.Context, name string, description string,
-	extras map[string]string) (*PropertyType, error) {
-
-	propertyService := NewPropertyServiceClient(nc.clientConn)
-
-	propertyType := PropertyType{
-		Name:        name,
-		Description: description,
-		Extra:       extras,
-	}
-
-	return propertyService.AddPropertyType(ctx, &propertyType)
-}
-
-func (nc *PropertyClient) ListPropertyType(
-	ctx context.Context, query string) (PropertyService_ListTypeClient, error) {
-
-	propertyService := NewPropertyServiceClient(nc.clientConn)
-
-	searchRequest := SearchRequest{
-		Query: query,
-	}
-
-	return propertyService.ListType(ctx, &searchRequest)
 }

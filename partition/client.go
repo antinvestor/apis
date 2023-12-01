@@ -17,6 +17,7 @@ package partitionv1
 import (
 	"context"
 	"errors"
+	partitionv1 "github.com/antinvestor/apis/partition/v1"
 	"io"
 	"time"
 
@@ -58,7 +59,7 @@ type PartitionClient struct {
 	clientConn *grpc.ClientConn
 
 	// The gRPC API client.
-	client PartitionServiceClient
+	client partitionv1.PartitionServiceClient
 
 	// The x-ant-* metadata to be sent with each request.
 	xMetadata metadata.MD
@@ -67,7 +68,7 @@ type PartitionClient struct {
 // InstantiatePartitionsClient creates a new partitions client based on supplied connection
 func InstantiatePartitionsClient(
 	clientConnection *grpc.ClientConn,
-	partitionServiceClient PartitionServiceClient) *PartitionClient {
+	partitionServiceClient partitionv1.PartitionServiceClient) *PartitionClient {
 
 	cl := &PartitionClient{
 		clientConn: clientConnection,
@@ -106,12 +107,12 @@ func (partCl *PartitionClient) setClientInfo(keyval ...string) {
 	partCl.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))
 }
 
-func (partCl *PartitionClient) getService() PartitionServiceClient {
+func (partCl *PartitionClient) getService() partitionv1.PartitionServiceClient {
 	if partCl.client != nil {
 		return partCl.client
 	}
 
-	return NewPartitionServiceClient(partCl.clientConn)
+	return partitionv1.NewPartitionServiceClient(partCl.clientConn)
 }
 
 // ListTenants gets a list of all the tenants with query filtering against id and properties
@@ -119,17 +120,17 @@ func (partCl *PartitionClient) ListTenants(
 	ctx context.Context,
 	query string,
 	count uint,
-	page uint) ([]*TenantObject, error) {
+	page uint) ([]*partitionv1.TenantObject, error) {
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := SearchRequest{
+	request := partitionv1.ListTenantRequest{
 		Query: query,
-		Count: uint32(count),
-		Page:  uint32(page),
+		Count: int32(count),
+		Page:  int64(page),
 	}
 
-	var tenantList []*TenantObject
+	var tenantList []*partitionv1.TenantObject
 
 	tenantStream, err := partCl.getService().ListTenant(cancelCtx, &request)
 	if err != nil {
@@ -144,16 +145,16 @@ func (partCl *PartitionClient) ListTenants(
 			return tenantList, err
 		}
 
-		tenantList = append(tenantList, tenantObj)
+		tenantList = append(tenantList, tenantObj.Data...)
 	}
 }
 
 // GetTenant Obtains the tenant by the id  supplied.
-func (partCl *PartitionClient) GetTenant(ctx context.Context, tenantId string) (*TenantObject, error) {
+func (partCl *PartitionClient) GetTenant(ctx context.Context, tenantId string) (*partitionv1.TenantObject, error) {
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := GetRequest{
+	request := partitionv1.GetTenantRequest{
 		Id: tenantId,
 	}
 

@@ -1,4 +1,4 @@
-module github.com/antinvestor/apis/property
+module github.com/antinvestor/apis/settings
 
 go 1.21
 

@@ -17,6 +17,7 @@ package propertyv1
 import (
 	"context"
 	apic "github.com/antinvestor/apis"
+	propertyv1 "github.com/antinvestor/apis/property/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
@@ -54,7 +55,7 @@ type PropertyClient struct {
 	clientConn *grpc.ClientConn
 
 	// The gRPC API client.
-	propertyClient PropertyServiceClient
+	propertyClient propertyv1.PropertyServiceClient
 
 	// The x-ant-* metadata to be sent with each request.
 	xMetadata metadata.MD
@@ -63,7 +64,7 @@ type PropertyClient struct {
 // InstantiatePropertyClient creates a new notification client.
 //
 // The service that an application uses to send and access received messages
-func InstantiatePropertyClient(clientConnection *grpc.ClientConn, propertyServiceCli PropertyServiceClient) *PropertyClient {
+func InstantiatePropertyClient(clientConnection *grpc.ClientConn, propertyServiceCli propertyv1.PropertyServiceClient) *PropertyClient {
 	c := &PropertyClient{
 		clientConn:     clientConnection,
 		propertyClient: propertyServiceCli,
@@ -85,7 +86,7 @@ func NewPropertyClient(ctx context.Context, opts ...apic.ClientOption) (*Propert
 		return nil, err
 	}
 
-	notificationServiceCli := NewPropertyServiceClient(connPool)
+	notificationServiceCli := propertyv1.NewPropertyServiceClient(connPool)
 	return InstantiatePropertyClient(connPool, notificationServiceCli), nil
 }
 
@@ -106,27 +107,29 @@ func (nc *PropertyClient) setClientInfo(keyval ...string) {
 
 func (nc *PropertyClient) AddPropertyType(
 	ctx context.Context, name string, description string,
-	extras map[string]string) (*PropertyType, error) {
+	extras map[string]string) (*propertyv1.AddPropertyTypeResponse, error) {
 
-	propertyService := NewPropertyServiceClient(nc.clientConn)
+	propertyService := propertyv1.NewPropertyServiceClient(nc.clientConn)
 
-	propertyType := PropertyType{
+	propertyType := propertyv1.PropertyType{
 		Name:        name,
 		Description: description,
 		Extra:       extras,
 	}
 
-	return propertyService.AddPropertyType(ctx, &propertyType)
+	return propertyService.AddPropertyType(ctx, &propertyv1.AddPropertyTypeRequest{
+		Data: &propertyType,
+	})
 }
 
 func (nc *PropertyClient) ListPropertyType(
-	ctx context.Context, query string) (PropertyService_ListTypeClient, error) {
+	ctx context.Context, query string) (propertyv1.PropertyService_ListPropertyTypeClient, error) {
 
-	propertyService := NewPropertyServiceClient(nc.clientConn)
+	propertyService := propertyv1.NewPropertyServiceClient(nc.clientConn)
 
-	searchRequest := SearchRequest{
+	searchRequest := propertyv1.ListPropertyTypeRequest{
 		Query: query,
 	}
 
-	return propertyService.ListType(ctx, &searchRequest)
+	return propertyService.ListPropertyType(ctx, &searchRequest)
 }
