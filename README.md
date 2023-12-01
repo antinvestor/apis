@@ -1,6 +1,7 @@
 # apis
 
-[![Build Status][ci-badge]][ci-runs] [![Go Reference][reference-badge]][reference]
+[![Tests](https://github.com/antinvestor/apis/actions/workflows/run_tests.yml/badge.svg?branch=main)](https://github.com/antinvestor/apis/actions/workflows/run_tests.yml) [![Buf Build Status](https://github.com/antinvestor/apis/actions/workflows/buf_build.yml/badge.svg?branch=main)](https://github.com/antinvestor/apis/actions/workflows/buf_build.yml)
+
 
 The repository holds the common grpc api library that other clients extend
 

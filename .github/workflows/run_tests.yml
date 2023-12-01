@@ -1,4 +1,4 @@
-name: Service testing action
+name: Test Api
 
 on: [push]
 
