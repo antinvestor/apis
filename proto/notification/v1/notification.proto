@@ -23,11 +23,12 @@ option go_package = "notificationv1";
 option java_multiple_files = true;
 option java_package = "com.antinvestor.api.notification";
 
+// buf:lint:ignore ENUM_VALUE_PREFIX
 enum PRIORITY {
-  PRIORITY_UNSPECIFIED = 0;
-  PRIORITY_HIGH = 1;
-  PRIORITY_LOW = 2;
-  PRIORITY_VERY_LOW = 3;
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  HIGH = 0;
+  LOW = 1;
+  VERY_LOW = 2;
 }
 
 message Notification {

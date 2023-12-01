@@ -9,3 +9,4 @@ lint:
     - DEFAULT
 deps:
   - buf.build/bufbuild/protovalidate
+  - buf.build/googleapis/googleapis

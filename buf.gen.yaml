@@ -5,6 +5,7 @@ managed:
     default: github.com/antinvestor/apis
     except:
       - buf.build/bufbuild/protovalidate
+      - buf.build/googleapis/googleapis
 plugins:
   - plugin: buf.build/grpc/go
     out: .
