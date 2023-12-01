@@ -93,7 +93,7 @@ type PartitionServiceClient interface {
 	// Create an access Role for a particular access
 	CreateAccessRole(ctx context.Context, in *CreateAccessRoleRequest, opts ...grpc.CallOption) (*CreateAccessRoleResponse, error)
 	// List access roles available for this particular access
-	ListAccessRole(ctx context.Context, in *ListAccessRoleRequest, opts ...grpc.CallOption) (*ListAccessRoleResponse, error)
+	ListAccessRole(ctx context.Context, in *ListAccessRoleRequest, opts ...grpc.CallOption) (PartitionService_ListAccessRoleClient, error)
 	// Remove an access role that is not required
 	RemoveAccessRole(ctx context.Context, in *RemoveAccessRoleRequest, opts ...grpc.CallOption) (*RemoveAccessRoleResponse, error)
 }
@@ -328,13 +328,36 @@ func (c *partitionServiceClient) CreateAccessRole(ctx context.Context, in *Creat
 	return out, nil
 }
 
-func (c *partitionServiceClient) ListAccessRole(ctx context.Context, in *ListAccessRoleRequest, opts ...grpc.CallOption) (*ListAccessRoleResponse, error) {
-	out := new(ListAccessRoleResponse)
-	err := c.cc.Invoke(ctx, PartitionService_ListAccessRole_FullMethodName, in, out, opts...)
+func (c *partitionServiceClient) ListAccessRole(ctx context.Context, in *ListAccessRoleRequest, opts ...grpc.CallOption) (PartitionService_ListAccessRoleClient, error) {
+	stream, err := c.cc.NewStream(ctx, &PartitionService_ServiceDesc.Streams[3], PartitionService_ListAccessRole_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &partitionServiceListAccessRoleClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type PartitionService_ListAccessRoleClient interface {
+	Recv() (*ListAccessRoleResponse, error)
+	grpc.ClientStream
+}
+
+type partitionServiceListAccessRoleClient struct {
+	grpc.ClientStream
+}
+
+func (x *partitionServiceListAccessRoleClient) Recv() (*ListAccessRoleResponse, error) {
+	m := new(ListAccessRoleResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *partitionServiceClient) RemoveAccessRole(ctx context.Context, in *RemoveAccessRoleRequest, opts ...grpc.CallOption) (*RemoveAccessRoleResponse, error) {
@@ -385,7 +408,7 @@ type PartitionServiceServer interface {
 	// Create an access Role for a particular access
 	CreateAccessRole(context.Context, *CreateAccessRoleRequest) (*CreateAccessRoleResponse, error)
 	// List access roles available for this particular access
-	ListAccessRole(context.Context, *ListAccessRoleRequest) (*ListAccessRoleResponse, error)
+	ListAccessRole(*ListAccessRoleRequest, PartitionService_ListAccessRoleServer) error
 	// Remove an access role that is not required
 	RemoveAccessRole(context.Context, *RemoveAccessRoleRequest) (*RemoveAccessRoleResponse, error)
 	mustEmbedUnimplementedPartitionServiceServer()
@@ -446,8 +469,8 @@ func (UnimplementedPartitionServiceServer) RemoveAccess(context.Context, *Remove
 func (UnimplementedPartitionServiceServer) CreateAccessRole(context.Context, *CreateAccessRoleRequest) (*CreateAccessRoleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccessRole not implemented")
 }
-func (UnimplementedPartitionServiceServer) ListAccessRole(context.Context, *ListAccessRoleRequest) (*ListAccessRoleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAccessRole not implemented")
+func (UnimplementedPartitionServiceServer) ListAccessRole(*ListAccessRoleRequest, PartitionService_ListAccessRoleServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListAccessRole not implemented")
 }
 func (UnimplementedPartitionServiceServer) RemoveAccessRole(context.Context, *RemoveAccessRoleRequest) (*RemoveAccessRoleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveAccessRole not implemented")
@@ -780,22 +803,25 @@ func _PartitionService_CreateAccessRole_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PartitionService_ListAccessRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAccessRoleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _PartitionService_ListAccessRole_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListAccessRoleRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(PartitionServiceServer).ListAccessRole(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PartitionService_ListAccessRole_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PartitionServiceServer).ListAccessRole(ctx, req.(*ListAccessRoleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(PartitionServiceServer).ListAccessRole(m, &partitionServiceListAccessRoleServer{stream})
+}
+
+type PartitionService_ListAccessRoleServer interface {
+	Send(*ListAccessRoleResponse) error
+	grpc.ServerStream
+}
+
+type partitionServiceListAccessRoleServer struct {
+	grpc.ServerStream
+}
+
+func (x *partitionServiceListAccessRoleServer) Send(m *ListAccessRoleResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _PartitionService_RemoveAccessRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -880,10 +906,6 @@ var PartitionService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PartitionService_CreateAccessRole_Handler,
 		},
 		{
-			MethodName: "ListAccessRole",
-			Handler:    _PartitionService_ListAccessRole_Handler,
-		},
-		{
 			MethodName: "RemoveAccessRole",
 			Handler:    _PartitionService_RemoveAccessRole_Handler,
 		},
@@ -902,6 +924,11 @@ var PartitionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListPartitionRole",
 			Handler:       _PartitionService_ListPartitionRole_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListAccessRole",
+			Handler:       _PartitionService_ListAccessRole_Handler,
 			ServerStreams: true,
 		},
 	},

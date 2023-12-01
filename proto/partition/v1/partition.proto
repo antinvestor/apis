@@ -22,7 +22,7 @@ import "common/v1/common.proto";
 option go_package = "partitionv1";
 
 message TenantObject {
-  string tenant_id = 1 [
+  string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
@@ -123,20 +123,30 @@ message ListPartitionRequest {
 }
 
 message ListPartitionResponse {
-  repeated TenantObject data = 1;
+  repeated PartitionObject data = 1;
 }
 
-//Request to create new tenancy
+//Request to create new partition
 message CreatePartitionRequest {
-  string name = 1 [
+  string tenant_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string parent_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string name = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
   ];
-  string description = 2 [
+  string description = 4 [
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
   ];
-  map<string, string> properties = 3;
+  map<string, string> properties = 5;
 }
 
 message CreatePartitionResponse {
@@ -166,7 +176,7 @@ message UpdatePartitionResponse {
 }
 
 message PartitionObject {
-  string partition_id = 1 [
+  string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
@@ -409,7 +419,9 @@ message CreateAccessRoleRequest {
   ];
 }
 
-message CreateAccessRoleResponse {}
+message CreateAccessRoleResponse {
+    AccessRoleObject Data = 1;
+}
 
 message AccessRoleObject {
   string access_role_id = 1 [
@@ -501,7 +513,7 @@ service PartitionService {
   rpc CreateAccessRole(CreateAccessRoleRequest) returns (CreateAccessRoleResponse);
 
   // List access roles available for this particular access
-  rpc ListAccessRole(ListAccessRoleRequest) returns (ListAccessRoleResponse);
+  rpc ListAccessRole(ListAccessRoleRequest) returns (stream ListAccessRoleResponse);
 
   // Remove an access role that is not required
   rpc RemoveAccessRole(RemoveAccessRoleRequest) returns (RemoveAccessRoleResponse);

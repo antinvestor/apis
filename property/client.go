@@ -123,7 +123,7 @@ func (nc *PropertyClient) AddPropertyType(
 }
 
 func (nc *PropertyClient) ListPropertyType(
-	ctx context.Context, query string) (propertyv1.PropertyService_ListPropertyTypeClient, error) {
+	ctx context.Context, query string) (<-chan *propertyv1.PropertyType, error) {
 
 	propertyService := propertyv1.NewPropertyServiceClient(nc.clientConn)
 
@@ -131,5 +131,30 @@ func (nc *PropertyClient) ListPropertyType(
 		Query: query,
 	}
 
-	return propertyService.ListPropertyType(ctx, &searchRequest)
+	responseService, err := propertyService.ListPropertyType(ctx, &searchRequest)
+	if err != nil {
+		return nil, err
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	propertyTypeChannel := make(chan *propertyv1.PropertyType)
+	go func(responseService propertyv1.PropertyService_ListPropertyTypeClient) {
+		defer close(propertyTypeChannel)
+		for {
+			responses, err0 := responseService.Recv()
+			if err0 != nil {
+				return
+			}
+
+			for _, role := range responses.GetData() {
+				propertyTypeChannel <- role
+			}
+		}
+	}(responseService)
+
+	return propertyTypeChannel, nil
+
 }
