@@ -1,11 +1,13 @@
 # apis
-This repository holds the common grpc api library that other clients extend
+
+[![Build Status][ci-badge]][ci-runs] [![Go Reference][reference-badge]][reference]
+
+The repository holds the common grpc api library that other clients extend
 
 # requirements
 Install 
     - protoc
-    - https://github.com/envoyproxy/protoc-gen-validate
-    - https://github.com/golang/mock
+   -  https://github.com/golang/mock
 
 
     - Installing buf

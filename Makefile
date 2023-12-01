@@ -13,12 +13,21 @@ COPYRIGHT_YEARS := 2023-2024
 LICENSE_IGNORE := --ignore /testdata/
 # Set to use a different compiler. For example, `GO=go1.18rc1 make test`.
 GO ?= go
+MOCK_GEN ?= mockgen
+
+MKFILE_DIR := $(abspath $(lastword $(MAKEFILE_LIST)))
+CUR_DIR := $(dir $(MKFILE_DIR))
 
 define build_package
 cd ${1} && $(GO) mod tidy
 cd ${1} && $(GO) fmt ./...
 cd ${1} && $(GO) vet ./...
 cd ${1} && $(GO) build ./...
+
+endef
+
+define mock_package
+cd ${1} && $(MOCK_GEN) -source=${CUR_DIR}/${1}/${2}/${1}_grpc.pb.go -self_package=github.com/antinvestor/apis/${1}/${2} -package=${1}${2} -destination=${CUR_DIR}/${1}/${2}/${1}_grpc_mock.go
 
 endef
 
@@ -35,7 +44,6 @@ all: ## Build, test, and lint (default)
 clean: ## Delete intermediate build artifacts
 	@# -X only removes untracked files, -d recurses into directories, -f actually removes files/dirs
 	git clean -Xdf
-	$(call clean_package, .)
 
 
 .PHONY: test
@@ -44,33 +52,41 @@ test: build ## Run unit tests
 
 .PHONY: build
 build: generate ## Build all packages
-	$(call build_package, notification)
-	$(call build_package, ocr)
-	$(call build_package, partition)
-	$(call build_package, profile)
-	$(call build_package, property)
-	$(call build_package, settings)
+	$(call build_package,.)
+	$(call build_package,notification)
+	$(call build_package,ocr)
+	$(call build_package,partition)
+	$(call build_package,profile)
+	$(call build_package,property)
+	$(call build_package,settings)
 
 
 .PHONY: lint
-lint: $(BIN)/golangci-lint $(BIN)/buf ## Lint Go and protobuf
+lint: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and protobuf
 	test -z "$$($(BIN)/buf format -d . | tee /dev/stderr)"
 	$(GO) vet ./...
 	golangci-lint run
 	buf lint
 
 .PHONY: lintfix
-lintfix: $(BIN)/golangci-lint $(BIN)/buf ## Automatically fix some lint errors
+lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some lint errors
 	golangci-lint run --fix
 	buf format -w .
 
 .PHONY: generate
-generate: $(BIN)/buf $(BIN)/license-header ## Regenerate code and licenses
+generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header ## Regenerate code and licenses
 	PATH=$(BIN) $(BIN)/buf generate
 	license-header \
 		--license-type apache \
 		--copyright-holder "Ant Investor Ltd" \
 		--year-range "$(COPYRIGHT_YEARS)" $(LICENSE_IGNORE)
+	$(call mock_package,notification,v1)
+	$(call mock_package,ocr,v1)
+	$(call mock_package,partition,v1)
+	$(call mock_package,profile,v1)
+	$(call mock_package,property,v1)
+	$(call mock_package,settings,v1)
+
 
 .PHONY: upgrade
 upgrade: ## Upgrade dependencies
@@ -92,3 +108,7 @@ $(BIN)/license-header: Makefile
 $(BIN)/golangci-lint: Makefile
 	@mkdir -p $(@D)
 	$(GO) install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.54.1
+
+$(BIN)/gomock: Makefile
+	@mkdir -p $(@D)
+	$(GO) install go.uber.org/mock/mockgen@latest
