@@ -1,0 +1,325 @@
+// Copyright 2023-2024 Ant Investor Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package partition.v1;
+option go_package = "partition";
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+
+message TenantObject {
+  string tenant_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string description = 2 [(buf.validate.field).string.min_len = 10, (buf.validate.field).string.max_len = 500];
+  map<string, string> properties = 3;
+}
+
+//Request to create a new partition
+message PartitionCreateRequest {
+  string name = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 100];
+  string tenant_id = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string parent_id = 3 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string description = 4 [(buf.validate.field).string.min_len = 10, (buf.validate.field).string.max_len = 250];
+  map<string, string> properties = 5;
+}
+
+message GetTenantRequest {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+message GetTenantResponse {
+  TenantObject data = 1;
+}
+
+message ListTenantRequest {
+  string query = 1;
+  int64 page = 2;
+  int32 count = 3;
+  string start_date = 4;
+  string end_date = 5;
+  repeated string properties = 6;
+  map<string, string> extras = 7;
+}
+
+message ListTenantResponse {
+  repeated TenantObject data = 1;
+}
+
+//Request to create new tenancy
+message CreateTenantRequest {
+  string name = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 100];
+  string description = 2 [(buf.validate.field).string.min_len = 10, (buf.validate.field).string.max_len = 500];
+  map<string, string> properties = 3;
+}
+
+message CreateTenantResponse {
+  TenantObject data = 1;
+}
+
+
+message GetPartitionRequest {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+message GetPartitionResponse {
+  PartitionObject data = 1;
+}
+
+message ListPartitionRequest {
+  string query = 1;
+  int64 page = 2;
+  int32 count = 3;
+  string start_date = 4;
+  string end_date = 5;
+  repeated string properties = 6;
+  map<string, string> extras = 7;
+}
+
+message ListPartitionResponse {
+  repeated TenantObject data = 1;
+}
+
+//Request to create new tenancy
+message CreatePartitionRequest {
+  string name = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 100];
+  string description = 2 [(buf.validate.field).string.min_len = 10, (buf.validate.field).string.max_len = 500];
+  map<string, string> properties = 3;
+}
+
+message CreatePartitionResponse {
+  PartitionObject data = 1;
+}
+
+
+message UpdatePartitionRequest {
+  string partition_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string name = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 100];
+  string description = 3 [(buf.validate.field).string.min_len = 10, (buf.validate.field).string.max_len = 500];
+  common.v1.STATE state = 4;
+  map<string, string> properties = 5;
+}
+
+message UpdatePartitionResponse {
+  PartitionObject data = 1;
+}
+
+
+message PartitionObject {
+  string partition_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string name = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 100];
+  string tenant_id = 3 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string parent_id = 4 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string description = 5 [(buf.validate.field).string.min_len = 10, (buf.validate.field).string.max_len = 500];
+  common.v1.STATE state = 6;
+  map<string, string> properties = 7;
+}
+
+// Partition Roles
+message CreatePartitionRoleRequest {
+  string partition_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string name = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 100];
+  map<string, string> properties = 3;
+}
+
+
+message CreatePartitionRoleResponse {
+  PartitionRoleObject data = 1;
+}
+
+message PartitionRoleObject {
+  string partition_role_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string partition_id = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string name = 3 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 100];
+  map<string, string> properties = 4;
+}
+
+message RemovePartitionRoleRequest {
+  string partition_role_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+message RemovePartitionRoleResponse {
+  bool succeeded = 1;
+}
+
+message ListPartitionRoleRequest {
+  string partition_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+message ListPartitionRoleResponse {
+  repeated PartitionRoleObject role = 1;
+}
+
+message PageObject {
+  string page_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string name = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 100];
+  string html = 3 [(buf.validate.field).string.min_len = 4, (buf.validate.field).string.max_len = 5000];
+  common.v1.STATE state = 4;
+}
+
+message CreatePageRequest {
+  string partition_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string name = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 100];
+  string html = 3 [(buf.validate.field).string.min_len = 4, (buf.validate.field).string.max_len = 5000];
+}
+
+message CreatePageResponse {
+    PageObject data = 1;
+}
+
+message GetPageRequest {
+  string page_id = 1 [(buf.validate.field).ignore_empty = true, (buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string partition_id = 2 [(buf.validate.field).ignore_empty = true, (buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string name = 3 [(buf.validate.field).ignore_empty = true, (buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 100];
+}
+
+message GetPageResponse {
+    PageObject data = 1;
+}
+
+message RemovePageRequest {
+  string page_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+message RemovePageResponse {
+    bool succeeded = 1;
+}
+
+message AccessObject {
+  string access_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string profile_id = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  PartitionObject partition = 3;
+  common.v1.STATE state = 4;
+}
+
+message CreateAccessRequest {
+  string partition_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string profile_id = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+message CreateAccessResponse {
+    AccessObject data = 1;
+}
+
+message GetAccessRequest {
+  string access_id = 1 [(buf.validate.field).ignore_empty = true, (buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string partition_id = 2 [(buf.validate.field).ignore_empty = true, (buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string profile_id = 3 [(buf.validate.field).ignore_empty = true, (buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+message GetAccessResponse {
+    AccessObject data = 1;
+}
+
+message RemoveAccessRequest {
+  string access_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+message RemoveAccessResponse {
+    bool succeeded = 1;
+}
+
+// Access Roles
+message CreateAccessRoleRequest {
+  string access_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string partition_role_id = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+message CreateAccessRoleResponse {
+
+}
+
+message AccessRoleObject {
+  string access_role_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string access_id = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  PartitionRoleObject role = 3;
+}
+
+message RemoveAccessRoleRequest {
+  string access_role_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+message RemoveAccessRoleResponse {
+    bool succeeded = 1;
+}
+message ListAccessRoleRequest {
+  string access_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+message ListAccessRoleResponse {
+  repeated AccessRoleObject role = 1;
+}
+
+service PartitionService {
+
+
+  // Get a tenant in the system matching the id
+  rpc GetTenant (GetTenantRequest) returns (GetTenantResponse);
+
+  // List all tenants in the system matching the query in some way
+  rpc ListTenant (ListTenantRequest) returns (stream ListTenantResponse);
+
+  // Log a new tenant request
+  rpc CreateTenant (CreateTenantRequest) returns (CreateTenantResponse);
+
+  // List all partitions in the system matching the query in some way
+  rpc ListPartition (ListPartitionRequest) returns (stream ListPartitionResponse);
+
+  // Log a new partition request
+  rpc CreatePartition (CreatePartitionRequest) returns (CreatePartitionResponse);
+
+  // Get an existing partition object
+  rpc GetPartition (GetPartitionRequest) returns (GetPartitionResponse);
+
+  // Update an existing partition object
+  rpc UpdatePartition (UpdatePartitionRequest) returns (UpdatePartitionResponse);
+
+  // Create a partition Role for a particular partition
+  rpc CreatePartitionRole (CreatePartitionRoleRequest) returns (CreatePartitionRoleResponse);
+
+  // List partition roles available for this particular partition
+  rpc ListPartitionRole (ListPartitionRoleRequest) returns (stream ListPartitionRoleResponse);
+
+  // Remove a partition role that is not required
+  rpc RemovePartitionRole (RemovePartitionRoleRequest) returns (RemovePartitionRoleResponse);
+
+  // Creates a new page for access or customization of how a partition looks like
+  rpc CreatePage (CreatePageRequest) returns (CreatePageResponse);
+
+  // Obtains a new page specific to a partition
+  rpc GetPage (GetPageRequest) returns (GetPageResponse);
+
+  // Removes a page from being accessible for a partition
+  rpc RemovePage (RemovePageRequest) returns (RemovePageResponse);
+
+  // Creates a users ability to access a partition
+  rpc CreateAccess (CreateAccessRequest) returns (CreateAccessResponse);
+
+  // Obtains a users access to a partition by access id or partition and profile id
+  rpc GetAccess (GetAccessRequest) returns (GetAccessResponse);
+
+  // Removes a user's ability to access a partition
+  rpc RemoveAccess (RemoveAccessRequest) returns (RemoveAccessResponse);
+
+  // Create an access Role for a particular access
+  rpc CreateAccessRole (CreateAccessRoleRequest) returns (CreateAccessRoleResponse);
+
+  // List access roles available for this particular access
+  rpc ListAccessRole (ListAccessRoleRequest) returns (ListAccessRoleResponse);
+
+  // Remove an access role that is not required
+  rpc RemoveAccessRole (RemoveAccessRoleRequest) returns (RemoveAccessRoleResponse);
+
+}

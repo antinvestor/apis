@@ -1,0 +1,267 @@
+// Copyright 2023-2024 Ant Investor Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package profile.v1;
+option go_package ="profile";
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+enum ContactType {
+  CONTACT_TYPE_UNSPECIFIED = 0;
+  CONTACT_TYPE_EMAIL = 1;
+  CONTACT_TYPE_PHONE = 2;
+}
+
+enum CommunicationLevel {
+  COMMUNICATION_LEVEL_UNSPECIFIED = 0; // Any communication including 3rd party marketing is welcome.
+  COMMUNICATION_LEVEL_INTERNAL_MARKETING = 1; // Can receive marketing messages from our services
+  COMMUNICATION_LEVEL_IMPORTANT_ALERTS = 2; // These can be things like policy changes
+  COMMUNICATION_LEVEL_SYSTEM_ALERTS = 3; // This include user actions expecting a response.
+  COMMUNICATION_LEVEL_NO_CONTACT = 4; // This one needs prayers
+}
+
+message ContactObject {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  ContactType type = 2;
+  string detail = 3;
+  bool verified = 4;
+  CommunicationLevel communication_level = 5;
+  common.v1.STATE state = 6;
+}
+
+message AddressObject {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string name = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 100];
+  string country = 3;
+  string city = 4;
+  string area = 5;
+  string street = 6;
+  string house = 7;
+  string postcode = 8;
+  double latitude = 9;
+  double longitude = 10;
+  string extra = 11 [(buf.validate.field).string.min_len = 10, (buf.validate.field).string.max_len = 500];
+}
+
+enum ProfileType {
+  PROFILE_TYPE_UNSPECIFIED = 0;
+  PROFILE_TYPE_PERSON = 1;
+  PROFILE_TYPE_INSTITUTION = 2;
+  PROFILE_TYPE_BOT = 3;
+}
+
+// The response message containing the full profile object
+message ProfileObject {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  ProfileType type = 2;
+  map<string, string> properties =3;
+  repeated ContactObject contacts = 4;
+  repeated AddressObject addresses = 5;
+  common.v1.STATE state = 6;
+}
+
+// RelationshipType enum represents the way two profiles are linked.
+enum RelationshipType{
+  RELATIONSHIP_TYPE_UNSPECIFIED = 0;
+  RELATIONSHIP_TYPE_MEMBER = 1;
+  RELATIONSHIP_TYPE_AFFILIATED = 2;
+  RELATIONSHIP_TYPE_BLACK_LISTED = 3;
+}
+
+// A Relationship object
+message RelationshipObject {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  RelationshipType type = 2;
+  map<string, string> properties =3;
+  oneof child  {
+    option (buf.validate.oneof).required = true;
+    ProfileObject profile = 4;
+    ContactObject contact = 5;
+      }
+}
+
+// The request message containing the profile's hash
+message GetByIdRequest {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+message GetByIdResponse {
+  ProfileObject data = 1;
+}
+
+
+message SearchRequest {
+  string query = 1;
+  int64 page = 2;
+  int32 count = 3;
+  string start_date = 4;
+  string end_date = 5;
+  repeated string properties = 6;
+  map<string, string> extras = 7;
+}
+
+message SearchResponse {
+  repeated ProfileObject data = 1;
+}
+
+// The request message containing the profile's hash
+message MergeRequest {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string mergeid = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+
+message MergeResponse {
+  ProfileObject data = 1;
+}
+
+
+// The request message containing the information necessary to create a profile
+message CreateRequest {
+  ProfileType type = 1 [(buf.validate.field).enum.defined_only = true];
+  string contact = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 255];
+  map<string, string> properties =3;
+}
+
+
+message CreateResponse {
+  ProfileObject data = 1;
+}
+
+
+// The request message containing the information necessary to create a profile
+message UpdateRequest {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  map<string, string> properties =2;
+  common.v1.STATE state = 3;
+}
+
+
+message UpdateResponse {
+  ProfileObject data = 1;
+}
+
+// The request message containing the information necessary to create a profile
+message AddContactRequest {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string contact = 2;
+}
+
+
+message AddContactResponse {
+  ProfileObject data = 1;
+}
+
+// The request message containing the information necessary to create a profile
+message AddAddressRequest {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  AddressObject address = 2;
+}
+
+
+message AddAddressResponse {
+  ProfileObject data = 1;
+}
+
+// Request message containing a contact necessary to link to a profile
+message GetByContactRequest {
+  string contact = 1;
+}
+
+message GetByContactResponse {
+  ProfileObject data = 1;
+}
+
+// Request message to list all profiles related to the supplied profile id
+message ListRelationshipRequest {
+  string parent = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.in = "Contact", (buf.validate.field).string.in = "Profile"];
+  string parent_id = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string last_relationship_id = 3 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  repeated string related_children_id = 4; // Related profile ids to specifically search for.
+  int32 count = 5;
+}
+
+message ListRelationshipResponse {
+  repeated RelationshipObject data = 1;
+}
+
+// The request message containing the information necessary to create a profile
+message AddRelationshipRequest {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string parent = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.in = "Contact", (buf.validate.field).string.in = "Profile"];
+  string parent_id = 3 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string child = 4 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.in = "Contact", (buf.validate.field).string.in = "Profile"];
+  string child_id = 5 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  RelationshipType type = 6;
+  map<string, string> properties =7;
+}
+
+
+message AddRelationshipResponse {
+  RelationshipObject data = 1;
+}
+
+
+// The request message containing the information necessary to delete relationship to a profile
+message DeleteRelationshipRequest {
+  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string parent_id = 2 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+}
+
+
+message DeleteRelationshipResponse {
+  RelationshipObject data = 1;
+}
+
+
+// The profile service definition.
+service ProfileService {
+  // Obtains a profile by its hash
+  rpc GetById (GetByIdRequest) returns (GetByIdResponse) {}
+
+  // Obtains a profile by its hash
+  rpc GetByContact (GetByContactRequest) returns (GetByContactResponse) {}
+
+  // Obtains a profile by its hash
+  rpc Search (SearchRequest) returns (stream SearchResponse) {}
+
+  // Uses data found in the profile from mergeHash to update the current profile.
+  rpc Merge (MergeRequest) returns (MergeResponse) {}
+
+  // Creates a new profile based on the request.
+  rpc Create (CreateRequest) returns (CreateResponse) {}
+
+  // Creates a new profile based on the request.
+  rpc Update (UpdateRequest) returns (UpdateResponse) {}
+
+  // Adds a new contact based on the request/this leads to automatic verification.
+  rpc AddContact (AddContactRequest) returns (AddContactResponse) {}
+
+  // Adds a new address based on the request.
+  rpc AddAddress (AddAddressRequest) returns (AddAddressResponse) {}
+
+  // Adds a new relationship between different proiles.
+  rpc AddRelationship (AddRelationshipRequest) returns (AddRelationshipResponse) {}
+
+  // Remove an existing relationship between profiles.
+  rpc DeleteRelationship (DeleteRelationshipRequest) returns (DeleteRelationshipResponse) {}
+
+  // Lists relationships a profile has.
+  rpc ListRelationship (ListRelationshipRequest) returns ( stream ListRelationshipResponse) {}
+
+}
+

@@ -12,20 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package partitionv1
+syntax = "proto3";
 
-import (
-	"context"
-	"testing"
+package common.v1;
 
-	"github.com/antinvestor/apis"
-)
+option cc_enable_arenas = true;
+option go_package ="common";
 
-func TestNewProfileClient(t *testing.T) {
-	ctx := context.Background()
-	_, err := NewPartitionsClient(ctx, apis.WithEndpoint("127.0.0.1:7005"))
-	if err != nil {
-		t.Errorf("Could not setup profile service : %v", err)
-	}
+enum STATE {
+    STATE_UNSPECIFIED = 0;
+    STATE_CREATED = 1;
+    STATE_CHECKED = 2;
+    STATE_ACTIVE = 3;
+    STATE_INACTIVE = 4;
+    STATE_DELETED = 5;
+}
 
+
+enum STATUS {
+    STATUS_UNSPECIFIED = 0;
+    STATUS_QUEUED = 1;
+    STATUS_IN_PROCESS = 2;
+    STATUS_FAILED = 3;
+    STATUS_SUCCESSFUL = 4;
 }
