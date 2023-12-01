@@ -14,6 +14,14 @@ LICENSE_IGNORE := --ignore /testdata/
 # Set to use a different compiler. For example, `GO=go1.18rc1 make test`.
 GO ?= go
 
+define clean_package
+cd ${1} && go clean
+cd ${1} && go mod tidy
+cd ${1} && go fmt ./...
+cd ${1} && go vet ./...
+endef
+
+
 .PHONY: help
 help: ## Describe useful make targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "%-30s %s\n", $$1, $$2}'
@@ -27,6 +35,8 @@ all: ## Build, test, and lint (default)
 clean: ## Delete intermediate build artifacts
 	@# -X only removes untracked files, -d recurses into directories, -f actually removes files/dirs
 	git clean -Xdf
+	$(call clean_package, .)
+	$(call clean_package, notification)
 
 .PHONY: test
 test: build ## Run unit tests
