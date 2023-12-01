@@ -59,6 +59,7 @@ build: generate ## Build all packages
 	$(call build_package,profile)
 	$(call build_package,property)
 	$(call build_package,settings)
+	$(call build_package,ledger)
 	$(call build_package,lostid)
 
 
@@ -88,6 +89,7 @@ generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header ## Regenerate code and 
 	$(call mock_package,profile,v1)
 	$(call mock_package,property,v1)
 	$(call mock_package,settings,v1)
+	$(call mock_package,ledger,v1)
 	$(call mock_package,lostid,v1)
 
 

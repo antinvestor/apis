@@ -1,0 +1,104 @@
+// Copyright 2023-2024 Ant Investor Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package ledger.v1;
+
+import "google/type/money.proto";
+
+option go_package = "ledgerv1";
+option java_multiple_files = true;
+option java_package = "com.antinvestor.api.ledger";
+
+message SearchRequest {
+  string query = 1;
+}
+
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum LedgerType {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  ASSET = 0;
+  LIABILITY = 1;
+  INCOME = 2;
+  EXPENSE = 3;
+  CAPITAL = 4;
+}
+
+message Ledger {
+  string reference = 1;
+  LedgerType type = 2;
+  string parent = 3;
+  map<string, string> data = 4;
+}
+
+message Account {
+  string reference = 1;
+  string ledger = 3;
+  google.type.Money balance = 4;
+  map<string, string> data = 5;
+}
+
+message TransactionEntry {
+  string account = 1;
+  string transaction = 2;
+  string transacted_at = 3;
+  google.type.Money amount = 4;
+  bool credit = 5;
+  google.type.Money acc_balance = 6;
+}
+
+message Transaction {
+  string reference = 1;
+  string currency = 2;
+  string transacted_at = 3;
+  map<string, string> data = 4;
+  repeated TransactionEntry entries = 5;
+}
+
+// The ledger service definition.
+service LedgerService {
+  // Searches for an ledger based on details
+  rpc SearchLedgers(SearchRequest) returns (stream Ledger) {}
+
+  // Creates a new ledger based on supplied data
+  rpc CreateLedger(Ledger) returns (Ledger) {}
+
+  // Updates the data component of the ledger.
+  rpc UpdateLedger(Ledger) returns (Ledger) {}
+
+  // Searches for an account based on details
+  rpc SearchAccounts(SearchRequest) returns (stream Account) {}
+
+  // Creates a new account based on supplied data
+  rpc CreateAccount(Account) returns (Account) {}
+
+  // Updates the data component of the account.
+  rpc UpdateAccount(Account) returns (Account) {}
+
+  // Searches for a transaction based on details
+  rpc SearchTransactions(SearchRequest) returns (stream Transaction) {}
+
+  // Creates a new transaction
+  rpc CreateTransaction(Transaction) returns (Transaction) {}
+
+  // Reverses a transaction by creating a new one with inverted entries
+  rpc ReverseTransaction(Transaction) returns (Transaction) {}
+
+  // Updates a transaction's details
+  rpc UpdateTransaction(Transaction) returns (Transaction) {}
+
+  // Searches for entries matching the search details
+  rpc SearchTransactionEntries(SearchRequest) returns (stream TransactionEntry) {}
+}
