@@ -34,12 +34,12 @@ func defaultsettingsClientOptions() []apic.ClientOption {
 	}
 }
 
-func ToContext(ctx context.Context, client *settingsClient) context.Context {
+func ToContext(ctx context.Context, client *SettingsClient) context.Context {
 	return context.WithValue(ctx, ctxKeyService, client)
 }
 
-func FromContext(ctx context.Context) *settingsClient {
-	client, ok := ctx.Value(ctxKeyService).(*settingsClient)
+func FromContext(ctx context.Context) *SettingsClient {
+	client, ok := ctx.Value(ctxKeyService).(*SettingsClient)
 	if !ok {
 		return nil
 	}
@@ -47,10 +47,10 @@ func FromContext(ctx context.Context) *settingsClient {
 	return client
 }
 
-// settingsClient is a client for interacting with the notification service API.
+// SettingsClient is a client for interacting with the notification service API.
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
-type settingsClient struct {
+type SettingsClient struct {
 	// gRPC connection to the service.
 	clientConn *grpc.ClientConn
 
@@ -64,8 +64,8 @@ type settingsClient struct {
 // InstantiatesettingsClient creates a new notification client.
 //
 // The service that an application uses to send and access received messages
-func InstantiatesettingsClient(clientConnection *grpc.ClientConn, settingsServiceCli settingsv1.SettingsServiceClient) *settingsClient {
-	c := &settingsClient{
+func InstantiatesettingsClient(clientConnection *grpc.ClientConn, settingsServiceCli settingsv1.SettingsServiceClient) *SettingsClient {
+	c := &SettingsClient{
 		clientConn:     clientConnection,
 		settingsClient: settingsServiceCli,
 	}
@@ -78,7 +78,7 @@ func InstantiatesettingsClient(clientConnection *grpc.ClientConn, settingsServic
 // NewsettingsClient creates a new notification client.
 //
 // The service that an application uses to send and access received messages
-func NewsettingsClient(ctx context.Context, opts ...apic.ClientOption) (*settingsClient, error) {
+func NewsettingsClient(ctx context.Context, opts ...apic.ClientOption) (*SettingsClient, error) {
 	clientOpts := defaultsettingsClientOptions()
 
 	connPool, err := apic.DialConnection(ctx, append(clientOpts, opts...)...)
@@ -92,14 +92,14 @@ func NewsettingsClient(ctx context.Context, opts ...apic.ClientOption) (*setting
 
 // Close closes the connection to the API service. The user should invoke this when
 // the client is no longer required.
-func (nc *settingsClient) Close() error {
+func (nc *SettingsClient) Close() error {
 	return nc.clientConn.Close()
 }
 
 // setClientInfo sets the name and version of the application in
 // the `x-goog-api-client` header passed on each request. Intended for
 // use by Google-written clients.
-func (nc *settingsClient) setClientInfo(keyval ...string) {
+func (nc *SettingsClient) setClientInfo(keyval ...string) {
 	kv := append([]string{"gl-go", apic.VersionGo()}, keyval...)
 	kv = append(kv, "grpc", grpc.Version)
 	nc.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))

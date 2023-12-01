@@ -17,6 +17,7 @@ package ocrv1
 import (
 	"context"
 	apic "github.com/antinvestor/apis"
+	ocrv1 "github.com/antinvestor/apis/ocr/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"time"
@@ -55,7 +56,7 @@ type OCRClient struct {
 	clientConn *grpc.ClientConn
 
 	// The gRPC API client.
-	ocrClient OCRServiceClient
+	ocrClient ocrv1.OCRServiceClient
 
 	// The x-ant-* metadata to be sent with each request.
 	xMetadata metadata.MD
@@ -72,7 +73,7 @@ func NewOCRClient(ctx context.Context, opts ...apic.ClientOption) (*OCRClient, e
 	}
 	cl := &OCRClient{
 		clientConn: connPool,
-		ocrClient:  NewOCRServiceClient(connPool),
+		ocrClient:  ocrv1.NewOCRServiceClient(connPool),
 	}
 
 	cl.setClientInfo()
@@ -95,14 +96,14 @@ func (pc *OCRClient) setClientInfo(keyval ...string) {
 	pc.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))
 }
 
-func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, properties map[string]string, fileId ...string) (*OcrResponse, error) {
+func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, properties map[string]string, fileId ...string) (*ocrv1.RecognizeResponse, error) {
 
 	ctx2, cancel := context.WithTimeout(ctx, time.Second*300)
 	defer cancel()
 
-	ocrService := NewOCRServiceClient(pc.clientConn)
+	ocrService := ocrv1.NewOCRServiceClient(pc.clientConn)
 
-	ocrRequest := OcrRequest{
+	ocrRequest := ocrv1.RecognizeRequest{
 		ReferenceId: id,
 		LanguageId:  language,
 		FileId:      fileId,
@@ -112,15 +113,15 @@ func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, 
 	return ocrService.Recognize(ctx2, &ocrRequest)
 }
 
-func (pc *OCRClient) StatusCheck(ctx context.Context, id string) (*OcrResponse, error) {
+func (pc *OCRClient) StatusCheck(ctx context.Context, id string) (*ocrv1.StatusResponse, error) {
 
 	ctx2, cancel := context.WithTimeout(ctx, time.Second*300)
 	defer cancel()
 
-	ocrService := NewOCRServiceClient(pc.clientConn)
+	ocrService := ocrv1.NewOCRServiceClient(pc.clientConn)
 
-	statusCheckRequest := StatusRequest{
-		ReferenceId: id,
+	statusCheckRequest := ocrv1.StatusRequest{
+		Id: id,
 	}
 
 	return ocrService.Status(ctx2, &statusCheckRequest)

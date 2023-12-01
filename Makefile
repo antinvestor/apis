@@ -15,7 +15,6 @@ LICENSE_IGNORE := --ignore /testdata/
 GO ?= go
 
 define clean_package
-cd ${1} && go clean
 cd ${1} && go mod tidy
 cd ${1} && go fmt ./...
 cd ${1} && go vet ./...
@@ -37,6 +36,11 @@ clean: ## Delete intermediate build artifacts
 	git clean -Xdf
 	$(call clean_package, .)
 	$(call clean_package, notification)
+	$(call clean_package, ocr)
+	$(call clean_package, partition)
+	$(call clean_package, profile)
+	$(call clean_package, property)
+	$(call clean_package, settings)
 
 .PHONY: test
 test: build ## Run unit tests

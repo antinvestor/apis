@@ -164,8 +164,8 @@ func (nc *NotificationClient) UpdateStatus(ctx context.Context, notificationId s
 	messageStatus := notificationv1.StatusUpdateRequest{
 		AccessId:   accessId,
 		Id:         notificationId,
-		State:      commonv1.STATE_STATE_INACTIVE,
-		Status:     commonv1.STATUS_STATUS_SUCCESSFUL,
+		State:      commonv1.STATE_INACTIVE,
+		Status:     commonv1.STATUS_SUCCESSFUL,
 		ExternalId: externalId,
 		Extras:     extras,
 	}
