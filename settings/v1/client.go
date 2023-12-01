@@ -17,7 +17,6 @@ package settingsv1
 import (
 	"context"
 	apic "github.com/antinvestor/apis"
-	settingsv1 "github.com/antinvestor/apis/settings/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
@@ -55,7 +54,7 @@ type SettingsClient struct {
 	clientConn *grpc.ClientConn
 
 	// The gRPC API client.
-	settingsClient settingsv1.SettingsServiceClient
+	settingsClient SettingsServiceClient
 
 	// The x-ant-* metadata to be sent with each request.
 	xMetadata metadata.MD
@@ -64,7 +63,7 @@ type SettingsClient struct {
 // InstantiatesettingsClient creates a new notification client.
 //
 // The service that an application uses to send and access received messages
-func InstantiatesettingsClient(clientConnection *grpc.ClientConn, settingsServiceCli settingsv1.SettingsServiceClient) *SettingsClient {
+func InstantiatesettingsClient(clientConnection *grpc.ClientConn, settingsServiceCli SettingsServiceClient) *SettingsClient {
 	c := &SettingsClient{
 		clientConn:     clientConnection,
 		settingsClient: settingsServiceCli,
@@ -86,7 +85,7 @@ func NewsettingsClient(ctx context.Context, opts ...apic.ClientOption) (*Setting
 		return nil, err
 	}
 
-	notificationServiceCli := settingsv1.NewSettingsServiceClient(connPool)
+	notificationServiceCli := NewSettingsServiceClient(connPool)
 	return InstantiatesettingsClient(connPool, notificationServiceCli), nil
 }
 

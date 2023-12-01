@@ -17,7 +17,6 @@ package profilev1
 import (
 	"context"
 	apic "github.com/antinvestor/apis"
-	profilev1 "github.com/antinvestor/apis/profile/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"time"
@@ -56,7 +55,7 @@ type ProfileClient struct {
 	clientConn *grpc.ClientConn
 
 	// The gRPC API client.
-	profileClient profilev1.ProfileServiceClient
+	profileClient ProfileServiceClient
 
 	// The x-ant-* metadata to be sent with each request.
 	xMetadata metadata.MD
@@ -66,7 +65,7 @@ type ProfileClient struct {
 
 func InstantiateProfileClient(
 	clientConn *grpc.ClientConn,
-	profileSrvCli profilev1.ProfileServiceClient) *ProfileClient {
+	profileSrvCli ProfileServiceClient) *ProfileClient {
 	cl := &ProfileClient{
 		clientConn:    clientConn,
 		profileClient: profileSrvCli,
@@ -87,7 +86,7 @@ func NewProfileClient(ctx context.Context, opts ...apic.ClientOption) (*ProfileC
 		return nil, err
 	}
 
-	profileSvcCli := profilev1.NewProfileServiceClient(connPool)
+	profileSvcCli := NewProfileServiceClient(connPool)
 
 	return InstantiateProfileClient(connPool, profileSvcCli), nil
 }
@@ -109,13 +108,13 @@ func (pc *ProfileClient) setClientInfo(keyval ...string) {
 
 func (pc *ProfileClient) GetProfileByID(
 	ctx context.Context,
-	profileID string) (*profilev1.ProfileObject, error) {
+	profileID string) (*ProfileObject, error) {
 	profileCtx, cancel := context.WithTimeout(ctx, time.Second*15)
 	defer cancel()
 
-	profileService := profilev1.NewProfileServiceClient(pc.clientConn)
+	profileService := NewProfileServiceClient(pc.clientConn)
 
-	profileRequest := profilev1.GetByIdRequest{
+	profileRequest := GetByIdRequest{
 		Id: profileID,
 	}
 
@@ -129,16 +128,16 @@ func (pc *ProfileClient) GetProfileByID(
 func (pc *ProfileClient) CreateProfileByContactAndName(
 	ctx context.Context,
 	contact string,
-	name string) (*profilev1.ProfileObject, error) {
+	name string) (*ProfileObject, error) {
 	profileCtx, cancel := context.WithTimeout(ctx, time.Second*30)
 	defer cancel()
 
-	profileService := profilev1.NewProfileServiceClient(pc.clientConn)
+	profileService := NewProfileServiceClient(pc.clientConn)
 
 	properties := make(map[string]string)
 	properties["name"] = name
 
-	createProfileRequest := profilev1.CreateRequest{
+	createProfileRequest := CreateRequest{
 		Contact:    contact,
 		Properties: properties,
 	}
@@ -150,13 +149,13 @@ func (pc *ProfileClient) CreateProfileByContactAndName(
 	return response.Data, nil
 }
 
-func (pc *ProfileClient) GetProfileByContact(ctx context.Context, contact string) (*profilev1.ProfileObject, error) {
-	profileService := profilev1.NewProfileServiceClient(pc.clientConn)
+func (pc *ProfileClient) GetProfileByContact(ctx context.Context, contact string) (*ProfileObject, error) {
+	profileService := NewProfileServiceClient(pc.clientConn)
 
 	profileCtx, cancel := context.WithTimeout(ctx, time.Second*15)
 	defer cancel()
 
-	contactRequest := profilev1.GetByContactRequest{
+	contactRequest := GetByContactRequest{
 		Contact: contact,
 	}
 

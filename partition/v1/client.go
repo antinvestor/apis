@@ -16,7 +16,6 @@ package partitionv1
 
 import (
 	"context"
-	partitionv1 "github.com/antinvestor/apis/partition/v1"
 	"time"
 
 	apic "github.com/antinvestor/apis"
@@ -57,7 +56,7 @@ type PartitionClient struct {
 	clientConn *grpc.ClientConn
 
 	// The gRPC API client.
-	client partitionv1.PartitionServiceClient
+	client PartitionServiceClient
 
 	// The x-ant-* metadata to be sent with each request.
 	xMetadata metadata.MD
@@ -66,7 +65,7 @@ type PartitionClient struct {
 // InstantiatePartitionsClient creates a new partitions client based on supplied connection
 func InstantiatePartitionsClient(
 	clientConnection *grpc.ClientConn,
-	partitionServiceClient partitionv1.PartitionServiceClient) *PartitionClient {
+	partitionServiceClient PartitionServiceClient) *PartitionClient {
 
 	cl := &PartitionClient{
 		clientConn: clientConnection,
@@ -105,12 +104,12 @@ func (partCl *PartitionClient) setClientInfo(keyval ...string) {
 	partCl.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))
 }
 
-func (partCl *PartitionClient) getService() partitionv1.PartitionServiceClient {
+func (partCl *PartitionClient) getService() PartitionServiceClient {
 	if partCl.client != nil {
 		return partCl.client
 	}
 
-	return partitionv1.NewPartitionServiceClient(partCl.clientConn)
+	return NewPartitionServiceClient(partCl.clientConn)
 }
 
 // ListTenants gets a list of all the tenants with query filtering against id and properties
@@ -118,11 +117,11 @@ func (partCl *PartitionClient) ListTenants(
 	ctx context.Context,
 	query string,
 	count uint,
-	page uint) (<-chan *partitionv1.TenantObject, error) {
+	page uint) (<-chan *TenantObject, error) {
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.ListTenantRequest{
+	request := ListTenantRequest{
 		Query: query,
 		Count: int32(count),
 		Page:  int64(page),
@@ -137,8 +136,8 @@ func (partCl *PartitionClient) ListTenants(
 		return nil, err
 	}
 
-	tenantChannel := make(chan *partitionv1.TenantObject)
-	go func(responseService partitionv1.PartitionService_ListTenantClient) {
+	tenantChannel := make(chan *TenantObject)
+	go func(responseService PartitionService_ListTenantClient) {
 		defer close(tenantChannel)
 		for {
 			responses, err0 := responseService.Recv()
@@ -157,11 +156,11 @@ func (partCl *PartitionClient) ListTenants(
 }
 
 // GetTenant Obtains the tenant by the id  supplied.
-func (partCl *PartitionClient) GetTenant(ctx context.Context, tenantId string) (*partitionv1.TenantObject, error) {
+func (partCl *PartitionClient) GetTenant(ctx context.Context, tenantId string) (*TenantObject, error) {
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.GetTenantRequest{
+	request := GetTenantRequest{
 		Id: tenantId,
 	}
 
@@ -181,11 +180,11 @@ func (partCl *PartitionClient) NewTenant(
 	ctx context.Context,
 	name string,
 	description string,
-	props map[string]string) (*partitionv1.TenantObject, error) {
+	props map[string]string) (*TenantObject, error) {
 	profileCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.CreateTenantRequest{
+	request := CreateTenantRequest{
 		Name:        name,
 		Description: description,
 		Properties:  props,
@@ -204,11 +203,11 @@ func (partCl *PartitionClient) ListPartitions(
 	ctx context.Context,
 	query string,
 	count uint,
-	page uint) (<-chan *partitionv1.PartitionObject, error) {
+	page uint) (<-chan *PartitionObject, error) {
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.ListPartitionRequest{
+	request := ListPartitionRequest{
 		Query: query,
 		Count: int32(count),
 		Page:  int64(page),
@@ -223,8 +222,8 @@ func (partCl *PartitionClient) ListPartitions(
 		return nil, err
 	}
 
-	partitionChannel := make(chan *partitionv1.PartitionObject)
-	go func(responseService partitionv1.PartitionService_ListPartitionClient) {
+	partitionChannel := make(chan *PartitionObject)
+	go func(responseService PartitionService_ListPartitionClient) {
 		defer close(partitionChannel)
 		for {
 			responses, err0 := responseService.Recv()
@@ -245,16 +244,16 @@ func (partCl *PartitionClient) ListPartitions(
 // NewPartition Creates a further logical multitenant environment at a softer level.
 // This separation at the partition level is enforced at the application level that is consuming the api.
 func (partCl *PartitionClient) NewPartition(ctx context.Context, tenantId string, name string, description string,
-	props map[string]string) (*partitionv1.PartitionObject, error) {
+	props map[string]string) (*PartitionObject, error) {
 	return partCl.newPartition(ctx, tenantId, "", name, description, props)
 }
 
 // GetPartition Obtains the partition by the id  supplied.
-func (partCl *PartitionClient) GetPartition(ctx context.Context, partitionId string) (*partitionv1.PartitionObject, error) {
+func (partCl *PartitionClient) GetPartition(ctx context.Context, partitionId string) (*PartitionObject, error) {
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.GetPartitionRequest{
+	request := GetPartitionRequest{
 		Id: partitionId,
 	}
 
@@ -267,17 +266,17 @@ func (partCl *PartitionClient) GetPartition(ctx context.Context, partitionId str
 
 // NewChildPartition partitions can have children, for example a bank can have multiple branches
 func (partCl *PartitionClient) NewChildPartition(ctx context.Context, tenantId string, parentId string, name string,
-	description string, props map[string]string) (*partitionv1.PartitionObject, error) {
+	description string, props map[string]string) (*PartitionObject, error) {
 	return partCl.newPartition(ctx, tenantId, parentId, name, description, props)
 }
 
 func (partCl *PartitionClient) newPartition(ctx context.Context, tenantId string,
-	parentId string, name string, description string, props map[string]string) (*partitionv1.PartitionObject, error) {
+	parentId string, name string, description string, props map[string]string) (*PartitionObject, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.CreatePartitionRequest{
+	request := CreatePartitionRequest{
 		TenantId:    tenantId,
 		ParentId:    parentId,
 		Name:        name,
@@ -294,12 +293,12 @@ func (partCl *PartitionClient) newPartition(ctx context.Context, tenantId string
 }
 
 func (partCl *PartitionClient) UpdatePartition(ctx context.Context, partitionId string,
-	name string, description string, props map[string]string) (*partitionv1.PartitionObject, error) {
+	name string, description string, props map[string]string) (*PartitionObject, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.UpdatePartitionRequest{
+	request := UpdatePartitionRequest{
 		PartitionId: partitionId,
 		Name:        name,
 		Description: description,
@@ -315,12 +314,12 @@ func (partCl *PartitionClient) UpdatePartition(ctx context.Context, partitionId 
 }
 
 func (partCl *PartitionClient) CreatePartitionRole(ctx context.Context, partitionId string,
-	name string, props map[string]string) (*partitionv1.PartitionRoleObject, error) {
+	name string, props map[string]string) (*PartitionRoleObject, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.CreatePartitionRoleRequest{
+	request := CreatePartitionRoleRequest{
 		Name:        name,
 		PartitionId: partitionId,
 		Properties:  props,
@@ -334,12 +333,12 @@ func (partCl *PartitionClient) CreatePartitionRole(ctx context.Context, partitio
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) RemovePartitionRole(ctx context.Context, partitionRoleId string) (*partitionv1.RemovePartitionRoleResponse, error) {
+func (partCl *PartitionClient) RemovePartitionRole(ctx context.Context, partitionRoleId string) (*RemovePartitionRoleResponse, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.RemovePartitionRoleRequest{
+	request := RemovePartitionRoleRequest{
 		PartitionRoleId: partitionRoleId,
 	}
 
@@ -348,12 +347,12 @@ func (partCl *PartitionClient) RemovePartitionRole(ctx context.Context, partitio
 
 func (partCl *PartitionClient) ListPartitionRoles(
 	ctx context.Context,
-	partitionId string) (<-chan *partitionv1.PartitionRoleObject, error) {
+	partitionId string) (<-chan *PartitionRoleObject, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	partitionRoleRequest := partitionv1.ListPartitionRoleRequest{
+	partitionRoleRequest := ListPartitionRoleRequest{
 		PartitionId: partitionId,
 	}
 
@@ -363,8 +362,8 @@ func (partCl *PartitionClient) ListPartitionRoles(
 		return nil, err
 	}
 
-	partitionRoleChannel := make(chan *partitionv1.PartitionRoleObject)
-	go func(responseService partitionv1.PartitionService_ListPartitionRoleClient) {
+	partitionRoleChannel := make(chan *PartitionRoleObject)
+	go func(responseService PartitionService_ListPartitionRoleClient) {
 		defer close(partitionRoleChannel)
 		for {
 			responses, err0 := responseService.Recv()
@@ -384,12 +383,12 @@ func (partCl *PartitionClient) ListPartitionRoles(
 
 // NewPage a partition has a provision to store custom pages that can be shown to users later.
 // These pages can include signup or customer specified customized pictures
-func (partCl *PartitionClient) NewPage(ctx context.Context, partitionId string, name string, html string) (*partitionv1.PageObject, error) {
+func (partCl *PartitionClient) NewPage(ctx context.Context, partitionId string, name string, html string) (*PageObject, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.CreatePageRequest{
+	request := CreatePageRequest{
 		Name:        name,
 		Html:        html,
 		PartitionId: partitionId,
@@ -403,12 +402,12 @@ func (partCl *PartitionClient) NewPage(ctx context.Context, partitionId string, 
 }
 
 // GetPage simple way to quickly pull custom pages accessed by clients of a partition
-func (partCl *PartitionClient) GetPage(ctx context.Context, partitionId string, name string) (*partitionv1.PageObject, error) {
+func (partCl *PartitionClient) GetPage(ctx context.Context, partitionId string, name string) (*PageObject, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.GetPageRequest{
+	request := GetPageRequest{
 		Name:        name,
 		PartitionId: partitionId,
 	}
@@ -422,12 +421,12 @@ func (partCl *PartitionClient) GetPage(ctx context.Context, partitionId string, 
 
 func (partCl *PartitionClient) CreateAccess(
 	ctx context.Context,
-	partitionId string, profileId string) (*partitionv1.AccessObject, error) {
+	partitionId string, profileId string) (*AccessObject, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.CreateAccessRequest{
+	request := CreateAccessRequest{
 		ProfileId:   profileId,
 		PartitionId: partitionId,
 	}
@@ -440,24 +439,24 @@ func (partCl *PartitionClient) CreateAccess(
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) RemoveAccess(ctx context.Context, accessId string) (*partitionv1.RemoveAccessResponse, error) {
+func (partCl *PartitionClient) RemoveAccess(ctx context.Context, accessId string) (*RemoveAccessResponse, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.RemoveAccessRequest{
+	request := RemoveAccessRequest{
 		AccessId: accessId,
 	}
 
 	return partCl.getService().RemoveAccess(cancelCtx, &request)
 }
 
-func (partCl *PartitionClient) GetAccessById(ctx context.Context, accessId string) (*partitionv1.AccessObject, error) {
+func (partCl *PartitionClient) GetAccessById(ctx context.Context, accessId string) (*AccessObject, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.GetAccessRequest{
+	request := GetAccessRequest{
 		AccessId: accessId,
 	}
 
@@ -472,12 +471,12 @@ func (partCl *PartitionClient) GetAccessById(ctx context.Context, accessId strin
 func (partCl *PartitionClient) GetAccess(
 	ctx context.Context,
 	partitionId string,
-	profileId string) (*partitionv1.AccessObject, error) {
+	profileId string) (*AccessObject, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.GetAccessRequest{
+	request := GetAccessRequest{
 		ProfileId:   profileId,
 		PartitionId: partitionId,
 	}
@@ -493,12 +492,12 @@ func (partCl *PartitionClient) GetAccess(
 func (partCl *PartitionClient) CreateAccessRole(
 	ctx context.Context,
 	accessId string,
-	partitionRoleId string) (*partitionv1.AccessRoleObject, error) {
+	partitionRoleId string) (*AccessRoleObject, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.CreateAccessRoleRequest{
+	request := CreateAccessRoleRequest{
 		AccessId:        accessId,
 		PartitionRoleId: partitionRoleId,
 	}
@@ -511,24 +510,24 @@ func (partCl *PartitionClient) CreateAccessRole(
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) RemoveAccessRole(ctx context.Context, accessRoleId string) (*partitionv1.RemoveAccessRoleResponse, error) {
+func (partCl *PartitionClient) RemoveAccessRole(ctx context.Context, accessRoleId string) (*RemoveAccessRoleResponse, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.RemoveAccessRoleRequest{
+	request := RemoveAccessRoleRequest{
 		AccessRoleId: accessRoleId,
 	}
 
 	return partCl.getService().RemoveAccessRole(cancelCtx, &request)
 }
 
-func (partCl *PartitionClient) ListAccess(ctx context.Context, accessId string) (<-chan *partitionv1.AccessRoleObject, error) {
+func (partCl *PartitionClient) ListAccess(ctx context.Context, accessId string) (<-chan *AccessRoleObject, error) {
 
 	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
 	defer cancel()
 
-	request := partitionv1.ListAccessRoleRequest{
+	request := ListAccessRoleRequest{
 		AccessId: accessId,
 	}
 
@@ -537,8 +536,8 @@ func (partCl *PartitionClient) ListAccess(ctx context.Context, accessId string) 
 		return nil, err
 	}
 
-	accessRoleChannel := make(chan *partitionv1.AccessRoleObject)
-	go func(responseService partitionv1.PartitionService_ListAccessRoleClient) {
+	accessRoleChannel := make(chan *AccessRoleObject)
+	go func(responseService PartitionService_ListAccessRoleClient) {
 		defer close(accessRoleChannel)
 		for {
 			responses, err0 := responseService.Recv()
