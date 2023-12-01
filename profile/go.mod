@@ -3,9 +3,8 @@ module github.com/antinvestor/apis/profile
 go 1.21
 
 require (
-	github.com/antinvestor/apis v1.3.1
-	github.com/envoyproxy/protoc-gen-validate v1.0.2
-	github.com/golang/mock v1.6.0
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.31.0-20231115204500-e097f827e652.2
+	github.com/antinvestor/apis v1.4.0
 	google.golang.org/grpc v1.59.0
 	google.golang.org/protobuf v1.31.0
 )

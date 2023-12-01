@@ -15,40 +15,58 @@
 syntax = "proto3";
 
 package settings.v1;
-option go_package = "settings";
 
-option java_multiple_files = true;
 import "buf/validate/validate.proto";
+
+option go_package = "settingsv1";
+option java_multiple_files = true;
 
 message Setting {
   string name = 1 [(buf.validate.field).string.min_len = 2];
-  string object = 2 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 2];
-  string object_id = 3 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string lang = 4 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 2];
-  string module = 5 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3];
+  string object = 2 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 2
+  ];
+  string object_id = 3 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string lang = 4 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 2
+  ];
+  string module = 5 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3
+  ];
 }
 
-
 message SettingObject {
-  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   Setting key = 2;
   string value = 3;
   string updated = 4;
 }
 
-message GetRequest{
+message GetRequest {
   Setting key = 1;
 }
 
-message GetResponse{
+message GetResponse {
   SettingObject data = 1;
 }
 
-message ListRequest{
+message ListRequest {
   Setting key = 1;
 }
 
-message ListResponse{
+message ListResponse {
   repeated SettingObject data = 1;
 }
 
@@ -57,17 +75,15 @@ message SetRequest {
   string value = 2;
 }
 
-message SetResponse{
+message SetResponse {
   SettingObject data = 1;
 }
 
-
-
 service SettingsService {
   // Gets a single setting and its stored value
-  rpc Get (GetRequest) returns (GetResponse);
+  rpc Get(GetRequest) returns (GetResponse);
   // Pulls all setting values that match some criteria in the name & any other setting properties
-  rpc List (ListRequest) returns (stream ListResponse);
+  rpc List(ListRequest) returns (stream ListResponse);
 
-  rpc Set (SetRequest) returns (SetResponse);
+  rpc Set(SetRequest) returns (SetResponse);
 }

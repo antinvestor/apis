@@ -15,19 +15,34 @@
 syntax = "proto3";
 
 package property.v1;
-option go_package = "property";
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
 
+option go_package = "propertyv1";
 
-message Locality{
-
-  string id = 1 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string parent_id = 2 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string name = 5 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 60];
-  string description = 6 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len =50];
+message Locality {
+  string id = 1 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string parent_id = 2 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string name = 5 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 60
+  ];
+  string description = 6 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 50
+  ];
   map<string, string> extras = 7;
   google.protobuf.Timestamp created_at = 8;
 
@@ -35,9 +50,16 @@ message Locality{
     // either x, y, or z must be set.
     option (buf.validate.oneof).required = true;
 
-    string point = 3 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 10, (buf.validate.field).string.max_len = 100];
-    string boundary = 4 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 10, (buf.validate.field).string.max_len = 2048];
-
+    string point = 3 [
+      (buf.validate.field).ignore_empty = true,
+      (buf.validate.field).string.min_len = 10,
+      (buf.validate.field).string.max_len = 100
+    ];
+    string boundary = 4 [
+      (buf.validate.field).ignore_empty = true,
+      (buf.validate.field).string.min_len = 10,
+      (buf.validate.field).string.max_len = 2048
+    ];
   }
 }
 
@@ -49,65 +71,126 @@ message AddLocalityResponse {
 }
 
 message PropertyState {
-  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string propertyid = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string propertyid = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   common.v1.STATE state = 3;
   common.v1.STATUS status = 4;
-  string name = 5 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 60];
-  string description = 6 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len =50];
+  string name = 5 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 60
+  ];
+  string description = 6 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 50
+  ];
   map<string, string> extras = 7;
   google.protobuf.Timestamp created_at = 8;
 }
 
-message PropertyType{
-  string id = 1 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string name = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 60];
-  string description = 3 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len =50];
+message PropertyType {
+  string id = 1 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string name = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 60
+  ];
+  string description = 3 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 50
+  ];
   map<string, string> extra = 4;
   google.protobuf.Timestamp created_at = 5;
 }
 
-message AddPropertyTypeRequest{
+message AddPropertyTypeRequest {
   PropertyType data = 1;
 }
-message AddPropertyTypeResponse{
+message AddPropertyTypeResponse {
   PropertyType data = 1;
 }
 
 message Subscription {
-  string id = 1 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string propertyid = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40];
-  string profileid = 3 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len =50];
-  string role = 4 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len =50];
+  string id = 1 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string propertyid = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40
+  ];
+  string profileid = 3 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 50
+  ];
+  string role = 4 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 50
+  ];
   map<string, string> extra = 5;
   google.protobuf.Timestamp created_at = 6;
   google.protobuf.Timestamp expires_at = 7;
 }
 
-
-message AddSubscriptionRequest{
+message AddSubscriptionRequest {
   Subscription data = 1;
 }
-message AddSubscriptionResponse{
+message AddSubscriptionResponse {
   Subscription data = 1;
 }
 
 message Property {
-  string id = 1 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string parent_id = 2 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string name = 3 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 60];
-  string description = 4 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len =50];
+  string id = 1 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string parent_id = 2 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string name = 3 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 60
+  ];
+  string description = 4 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 50
+  ];
   PropertyType property_type = 5;
   Locality locality = 6;
   google.protobuf.Timestamp started_at = 7 [(buf.validate.field).timestamp.lt_now = true];
   google.protobuf.Timestamp created_at = 8;
-  map<string, string> extra = 9 [(buf.validate.field).ignore_empty = true, (buf.validate.field).map.values = {string: {min_len: 3}}];
+  map<string, string> extra = 9 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).map.values = {
+      string: {min_len: 3}
+    }
+  ];
 }
 
-message CreatePropertyRequest{
+message CreatePropertyRequest {
   Property data = 1;
 }
-message CreatePropertyResponse{
+message CreatePropertyResponse {
   Property data = 1;
 }
 
@@ -139,36 +222,48 @@ message SearchPropertyResponse {
   repeated Property data = 1;
 }
 
-
 message DeleteLocalityRequest {
-  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
 }
 
 message DeleteLocalityResponse {
   bool success = 1;
 }
 
-
 message DeletePropertyRequest {
-  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
 }
 
 message DeletePropertyResponse {
   bool success = 1;
 }
 
-
 message StateOfPropertyRequest {
-  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
 }
 
 message StateOfPropertyResponse {
   PropertyState data = 1;
 }
 
-
 message HistoryOfPropertyRequest {
-  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
 }
 
 message HistoryOfPropertyResponse {
@@ -176,22 +271,47 @@ message HistoryOfPropertyResponse {
 }
 
 message UpdatePropertyRequest {
-  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   common.v1.STATE state = 2;
   common.v1.STATUS status = 3;
-  string name = 4 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 60];
-  string description = 5 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 60];
-  string guardian_id = 6 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string locality_id = 7 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  map<string, string> extras = 8 [(buf.validate.field).ignore_empty = true, (buf.validate.field).map.values = {string: {min_len: 3}}];
-
+  string name = 4 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 60
+  ];
+  string description = 5 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 60
+  ];
+  string guardian_id = 6 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string locality_id = 7 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  map<string, string> extras = 8 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).map.values = {
+      string: {min_len: 3}
+    }
+  ];
 }
 
 message UpdatePropertyResponse {
   Property data = 1;
 }
 
-message ListSubscriptionRequest{
+message ListSubscriptionRequest {
   string property_id = 1;
   string query = 2;
 }
@@ -200,47 +320,48 @@ message ListSubscriptionResponse {
   repeated Subscription data = 1;
 }
 
-
 message DeleteSubscriptionRequest {
-  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
 }
 
 message DeleteSubscriptionResponse {
   bool success = 1;
 }
 
-
 service PropertyService {
-
   //Create method for adding a new property type into the system
-  rpc AddPropertyType (AddPropertyTypeRequest) returns (AddPropertyTypeResponse);
+  rpc AddPropertyType(AddPropertyTypeRequest) returns (AddPropertyTypeResponse);
 
   //List method for showing all property types in the system
-  rpc ListPropertyType (ListPropertyTypeRequest) returns (stream ListPropertyTypeResponse);
+  rpc ListPropertyType(ListPropertyTypeRequest) returns (stream ListPropertyTypeResponse);
 
   //Create method for adding a new locality into the system
-  rpc AddLocality (AddLocalityRequest) returns (AddLocalityResponse);
+  rpc AddLocality(AddLocalityRequest) returns (AddLocalityResponse);
 
   //Delete method for removing an existing locality from the system
-  rpc DeleteLocality (DeleteLocalityRequest) returns (DeleteLocalityResponse);
+  rpc DeleteLocality(DeleteLocalityRequest) returns (DeleteLocalityResponse);
 
   //Create method for adding a new property into the system
-  rpc CreateProperty (CreatePropertyRequest) returns (CreatePropertyResponse);
+  rpc CreateProperty(CreatePropertyRequest) returns (CreatePropertyResponse);
 
   //Update property request to modify its current form to another
-  rpc UpdateProperty (UpdatePropertyRequest) returns (UpdatePropertyResponse);
+  rpc UpdateProperty(UpdatePropertyRequest) returns (UpdatePropertyResponse);
 
   //Delete property request to modify its current form to another
-  rpc DeleteProperty (DeletePropertyRequest) returns (DeletePropertyResponse);
+  rpc DeleteProperty(DeletePropertyRequest) returns (DeletePropertyResponse);
 
   //State request to determine active state and status of a property
-  rpc StateOfProperty (StateOfPropertyRequest) returns (StateOfPropertyResponse);
+  rpc StateOfProperty(StateOfPropertyRequest) returns (StateOfPropertyResponse);
 
   //History request returns all the state transitions a property has had over its lifetime in the system
-  rpc HistoryOfProperty (HistoryOfPropertyRequest) returns (stream HistoryOfPropertyResponse);
+  rpc HistoryOfProperty(HistoryOfPropertyRequest) returns (stream HistoryOfPropertyResponse);
 
   //Search method is for client request to query for properties that match query
-  rpc SearchProperty (SearchPropertyRequest) returns (stream SearchPropertyResponse);
+  rpc SearchProperty(SearchPropertyRequest) returns (stream SearchPropertyResponse);
 
   //ListSubscriptions for a particular property
   rpc ListSubscription(ListSubscriptionRequest) returns (stream ListSubscriptionResponse);
@@ -249,6 +370,5 @@ service PropertyService {
   rpc AddSubscription(AddSubscriptionRequest) returns (AddSubscriptionResponse);
 
   //Delete subscription of profile to a property
-  rpc DeleteSubscription (DeleteSubscriptionRequest) returns (DeleteSubscriptionResponse);
-
+  rpc DeleteSubscription(DeleteSubscriptionRequest) returns (DeleteSubscriptionResponse);
 }

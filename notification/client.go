@@ -17,7 +17,8 @@ package notificationv1
 import (
 	"context"
 	apic "github.com/antinvestor/apis"
-	"github.com/antinvestor/apis/common"
+	commonv1 "github.com/antinvestor/apis/common/v1"
+	notificationv1 "github.com/antinvestor/apis/notification/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"math"
@@ -54,7 +55,7 @@ type NotificationClient struct {
 	clientConn *grpc.ClientConn
 
 	// The gRPC API client.
-	notificationClient NotificationServiceClient
+	notificationClient notificationv1.NotificationServiceClient
 
 	// The x-ant-* metadata to be sent with each request.
 	xMetadata metadata.MD
@@ -63,7 +64,7 @@ type NotificationClient struct {
 // InstantiateNotificationClient creates a new notification client.
 //
 // The service that an application uses to send and access received messages
-func InstantiateNotificationClient(clientConnection *grpc.ClientConn, notificationServiceCli NotificationServiceClient) *NotificationClient {
+func InstantiateNotificationClient(clientConnection *grpc.ClientConn, notificationServiceCli notificationv1.NotificationServiceClient) *NotificationClient {
 	c := &NotificationClient{
 		clientConn:         clientConnection,
 		notificationClient: notificationServiceCli,
@@ -85,7 +86,7 @@ func NewNotificationClient(ctx context.Context, opts ...apic.ClientOption) (*Not
 		return nil, err
 	}
 
-	notificationServiceCli := NewNotificationServiceClient(connPool)
+	notificationServiceCli := notificationv1.NewNotificationServiceClient(connPool)
 	return InstantiateNotificationClient(connPool, notificationServiceCli), nil
 }
 
@@ -96,13 +97,13 @@ func (nc *NotificationClient) Close() error {
 }
 
 // Service creates a new notification service for use to invoke.
-func (nc *NotificationClient) Service() NotificationServiceClient {
+func (nc *NotificationClient) Service() notificationv1.NotificationServiceClient {
 
 	if nc.notificationClient != nil {
 		return nc.notificationClient
 	}
 
-	return NewNotificationServiceClient(nc.clientConn)
+	return notificationv1.NewNotificationServiceClient(nc.clientConn)
 }
 
 // setClientInfo sets the name and version of the application in
@@ -115,58 +116,56 @@ func (nc *NotificationClient) setClientInfo(keyval ...string) {
 }
 
 func (nc *NotificationClient) Send(ctx context.Context, accessID string, contactId string, contactDetail string,
-	language string, template string, variables map[string]string) (*StatusResponse, error) {
+	language string, template string, variables map[string]string) (*notificationv1.SendResponse, error) {
 
-	var contact isNotification_Contact
-	if contactId != "" {
-		contact = &Notification_ContactId{ContactId: contactId}
-	} else {
-		contact = &Notification_Detail{Detail: contactDetail}
-	}
-
-	messageOut := Notification{
+	messageOut := notificationv1.Notification{
 		AutoRelease: true,
 		Template:    template,
 		Language:    language,
 		AccessId:    accessID,
-		Contact:     contact,
 		Payload:     variables,
 	}
 
-	return nc.Service().Send(ctx, &messageOut)
+	if contactId != "" {
+		messageOut.Contact = &notificationv1.Notification_ContactId{ContactId: contactId}
+	} else {
+		messageOut.Contact = &notificationv1.Notification_Detail{Detail: contactDetail}
+	}
+
+	return nc.Service().Send(ctx, &notificationv1.SendRequest{Data: &messageOut})
+
 }
 
 func (nc *NotificationClient) Receive(ctx context.Context, accessID string, contactId string, contactDetail string,
-	language string, template string, variables map[string]string, extras map[string]string) (*StatusResponse, error) {
+	language string, template string, variables map[string]string, extras map[string]string) (*notificationv1.ReceiveResponse, error) {
 
-	var contact isNotification_Contact
-	if contactId != "" {
-		contact = &Notification_ContactId{ContactId: contactId}
-	} else {
-		contact = &Notification_Detail{Detail: contactDetail}
-	}
-
-	messageIn := Notification{
+	messageIn := notificationv1.Notification{
 		AutoRelease: true,
 		Template:    template,
 		Language:    language,
 		AccessId:    accessID,
-		Contact:     contact,
 		Payload:     variables,
 		Extras:      extras,
 	}
 
-	return nc.Service().Receive(ctx, &messageIn)
+	if contactId != "" {
+		messageIn.Contact = &notificationv1.Notification_ContactId{ContactId: contactId}
+	} else {
+		messageIn.Contact = &notificationv1.Notification_Detail{Detail: contactDetail}
+	}
+
+	return nc.Service().Receive(ctx, &notificationv1.ReceiveRequest{Data: &messageIn})
+
 }
 
 func (nc *NotificationClient) UpdateStatus(ctx context.Context, notificationId string, accessId string,
-	externalId string, extras map[string]string) (*StatusResponse, error) {
+	externalId string, extras map[string]string) (*notificationv1.StatusUpdateResponse, error) {
 
-	messageStatus := StatusUpdateRequest{
+	messageStatus := notificationv1.StatusUpdateRequest{
 		AccessId:   accessId,
 		Id:         notificationId,
-		State:      common.STATE_INACTIVE,
-		Status:     common.STATUS_SUCCESSFUL,
+		State:      commonv1.STATE_STATE_INACTIVE,
+		Status:     commonv1.STATUS_STATUS_SUCCESSFUL,
 		ExternalId: externalId,
 		Extras:     extras,
 	}

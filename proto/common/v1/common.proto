@@ -17,22 +17,24 @@ syntax = "proto3";
 package common.v1;
 
 option cc_enable_arenas = true;
-option go_package ="common";
+option go_package = "commonv1";
 
+// buf:lint:ignore ENUM_VALUE_PREFIX
 enum STATE {
-    STATE_UNSPECIFIED = 0;
-    STATE_CREATED = 1;
-    STATE_CHECKED = 2;
-    STATE_ACTIVE = 3;
-    STATE_INACTIVE = 4;
-    STATE_DELETED = 5;
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  CREATED = 0;
+  CHECKED = 1;
+  ACTIVE = 2;
+  INACTIVE = 3;
+  DELETED = 4;
 }
 
-
+// buf:lint:ignore ENUM_VALUE_PREFIX
 enum STATUS {
-    STATUS_UNSPECIFIED = 0;
-    STATUS_QUEUED = 1;
-    STATUS_IN_PROCESS = 2;
-    STATUS_FAILED = 3;
-    STATUS_SUCCESSFUL = 4;
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  UNKNOWN = 0;
+  QUEUED = 1;
+  IN_PROCESS = 2;
+  FAILED = 3;
+  SUCCESSFUL = 4;
 }

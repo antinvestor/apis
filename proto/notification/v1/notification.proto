@@ -15,15 +15,15 @@
 syntax = "proto3";
 
 package notification.v1;
-option go_package = "notification";
-
-option java_multiple_files = true;
-option java_package = "com.antinvestor.api.notification";
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 
-enum PRIORITY{
+option go_package = "notificationv1";
+option java_multiple_files = true;
+option java_package = "com.antinvestor.api.notification";
+
+enum PRIORITY {
   PRIORITY_UNSPECIFIED = 0;
   PRIORITY_HIGH = 1;
   PRIORITY_LOW = 2;
@@ -31,16 +31,39 @@ enum PRIORITY{
 }
 
 message Notification {
-
-  string access_id = 1 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string id = 2 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string profile_id = 3 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"];
+  string access_id = 1 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string id = 2 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string profile_id = 3 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+  ];
 
   oneof contact {
-
     option (buf.validate.oneof).required = true;
-    string contact_id = 4 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"];
-    string detail = 5 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 250, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"];
+    string contact_id = 4 [
+      (buf.validate.field).ignore_empty = true,
+      (buf.validate.field).string.min_len = 3,
+      (buf.validate.field).string.max_len = 40,
+      (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+    ];
+    string detail = 5 [
+      (buf.validate.field).ignore_empty = true,
+      (buf.validate.field).string.min_len = 3,
+      (buf.validate.field).string.max_len = 250,
+      (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"
+    ];
   }
   string type = 6;
   string template = 7;
@@ -49,12 +72,16 @@ message Notification {
   string language = 10;
   bool out_bound = 11;
   bool auto_release = 12;
-  string route_id = 13 [(buf.validate.field).ignore_empty = true,(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string route_id = 13 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   StatusResponse status = 14 [(buf.validate.field).skipped = true];
   map<string, string> extras = 15;
 
   PRIORITY priority = 16;
-
 }
 
 message SearchRequest {
@@ -68,25 +95,32 @@ message SearchRequest {
 }
 
 message SearchResponse {
-    repeated Notification data = 1;
+  repeated Notification data = 1;
 }
 
 message SendRequest {
-    Notification data = 1;
+  Notification data = 1;
 }
 
 message SendResponse {
-    StatusResponse data = 1;
+  StatusResponse data = 1;
 }
 
 message StatusRequest {
-  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   map<string, string> extras = 2;
 }
 
-
 message StatusResponse {
-  string id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   common.v1.STATE state = 2;
   common.v1.STATUS status = 3;
   string external_id = 4;
@@ -95,8 +129,16 @@ message StatusResponse {
 }
 
 message StatusUpdateRequest {
-  string access_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string id = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string access_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   common.v1.STATE state = 3;
   common.v1.STATUS status = 4;
   string external_id = 5;
@@ -107,18 +149,23 @@ message StatusUpdateResponse {
   StatusResponse data = 1;
 }
 
-
 message ReleaseRequest {
-  string access_id = 1 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
-  string id = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 40, (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"];
+  string access_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   string comment = 3;
 }
-
 
 message ReleaseResponse {
   StatusResponse data = 1;
 }
-
 
 message ReceiveRequest {
   Notification data = 1;
@@ -128,25 +175,22 @@ message ReceiveResponse {
   StatusResponse data = 1;
 }
 
-
 service NotificationService {
-
   //Send method for queueing massages as requested
-  rpc Send (SendRequest) returns (SendResponse);
+  rpc Send(SendRequest) returns (SendResponse);
 
   //Status request to determine if notification is prepared or released
-  rpc Status (StatusRequest) returns (StatusResponse);
+  rpc Status(StatusRequest) returns (StatusResponse);
 
   //Status update request to allow continuation of notification processing
-  rpc StatusUpdate (StatusUpdateRequest) returns (StatusUpdateResponse);
+  rpc StatusUpdate(StatusUpdateRequest) returns (StatusUpdateResponse);
 
   //Release method for releasing queued massages and returns if notification status if released
-  rpc Release (ReleaseRequest) returns (ReleaseResponse);
+  rpc Release(ReleaseRequest) returns (ReleaseResponse);
 
   //Receive method is for client request for particular notification responses from system
-  rpc Receive (ReceiveRequest) returns (ReceiveResponse);
+  rpc Receive(ReceiveRequest) returns (ReceiveResponse);
 
   //Search method is for client request for particular notification details from system
-  rpc Search (SearchRequest) returns (stream SearchResponse);
-
+  rpc Search(SearchRequest) returns (stream SearchResponse);
 }

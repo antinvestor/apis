@@ -1,5 +1,6 @@
 github.com/antinvestor/apis v1.3.1 h1:M61h+oHHzDHnHYETi1wOPeBPlNCNINEbniywlhPaJes=
 github.com/antinvestor/apis v1.3.1/go.mod h1:KNul+h0/ICeKP3mWZOHWtE2/a2s563CBr/ZDaZQCG88=
+github.com/antinvestor/apis v1.4.0/go.mod h1:KNul+h0/ICeKP3mWZOHWtE2/a2s563CBr/ZDaZQCG88=
 github.com/envoyproxy/protoc-gen-validate v1.0.2 h1:QkIBuU5k+x7/QXPvPPnWXWlCdaBFApVqftFV6k087DA=
 github.com/envoyproxy/protoc-gen-validate v1.0.2/go.mod h1:GpiZQP3dDbg4JouG/NNS7QWXpgx6x8QiMKdmN72jogE=
 github.com/golang/mock v1.6.0 h1:ErTB+efbowRARo13NNdxyJji2egdxLGQhRaY+DUumQc=
