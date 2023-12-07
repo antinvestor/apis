@@ -419,7 +419,7 @@ func (partCl *PartitionClient) GetPage(ctx context.Context, partitionId string, 
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) CreateAccess(
+func (partCl *PartitionClient) CreateAccessByPartitionID(
 	ctx context.Context,
 	partitionId string, profileId string) (*AccessObject, error) {
 
@@ -427,8 +427,28 @@ func (partCl *PartitionClient) CreateAccess(
 	defer cancel()
 
 	request := CreateAccessRequest{
-		ProfileId:   profileId,
-		PartitionId: partitionId,
+		ProfileId: profileId,
+		Partition: &CreateAccessRequest_PartitionId{PartitionId: partitionId},
+	}
+
+	response, err := partCl.getService().CreateAccess(cancelCtx, &request)
+
+	if err != nil {
+		return nil, err
+	}
+	return response.GetData(), nil
+}
+
+func (partCl *PartitionClient) CreateAccessByClientID(
+	ctx context.Context,
+	clientId string, profileId string) (*AccessObject, error) {
+
+	cancelCtx, cancel := context.WithTimeout(ctx, time.Second*5)
+	defer cancel()
+
+	request := CreateAccessRequest{
+		ProfileId: profileId,
+		Partition: &CreateAccessRequest_ClientId{ClientId: clientId},
 	}
 
 	response, err := partCl.getService().CreateAccess(cancelCtx, &request)
