@@ -5,7 +5,7 @@ go 1.21
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.31.0-20231115204500-e097f827e652.2
 	go.uber.org/mock v0.3.0
-	google.golang.org/genproto v0.0.0-20231127180814-3a041ad873d4
+	google.golang.org/genproto v0.0.0-20231211222908-989df2bf70f3
 	google.golang.org/grpc v1.59.0
 	google.golang.org/protobuf v1.31.0
 )
