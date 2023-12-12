@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/antinvestor/apis v1.4.5
 	golang.org/x/oauth2 v0.15.0
-	google.golang.org/grpc v1.59.0
+	google.golang.org/grpc v1.60.0
 )
 
 require (
