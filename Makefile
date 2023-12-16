@@ -19,15 +19,16 @@ MKFILE_DIR := $(abspath $(lastword $(MAKEFILE_LIST)))
 CUR_DIR := $(dir $(MKFILE_DIR))
 
 define build_package
-cd ${1} && $(GO) mod tidy
-cd ${1} && $(GO) fmt ./...
-cd ${1} && $(GO) vet ./...
-cd ${1} && $(GO) build ./...
+cd go/${1} && $(GO) mod tidy
+cd go/${1} && $(GO) fmt ./...
+cd go/${1} && $(GO) vet ./...
+cd go/${1} && $(GO) build ./...
 
 endef
 
 define mock_package
-cd ${1} && $(MOCK_GEN) -source=${CUR_DIR}${1}/${2}/${1}_grpc.pb.go -self_package=github.com/antinvestor/apis/${1}/${2} -package=${1}${2} -destination=${CUR_DIR}${1}/${2}/${1}_grpc_mock.go
+cd go/${1} && $(GO) mod tidy
+cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -package=${1}${2} -destination=${CUR_DIR}go/${1}/${2}/${1}_grpc_mock.go
 
 endef
 
@@ -48,7 +49,7 @@ clean: ## Delete intermediate build artifacts
 
 .PHONY: test
 test: build ## Run unit tests
-	$(GO) test -vet=off -race -cover ./...
+	cd go/ && $(GO) test -vet=off -race -cover ./...
 
 .PHONY: build
 build: generate ## Build all packages
@@ -66,13 +67,13 @@ build: generate ## Build all packages
 .PHONY: lint
 lint: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and protobuf
 	test -z "$$($(BIN)/buf format -d . | tee /dev/stderr)"
-	$(GO) vet ./...
-	golangci-lint run
+	cd go/ &&  $(GO) vet ./...
+	cd go/ && golangci-lint run
 	buf lint
 
 .PHONY: lintfix
 lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some lint errors
-	golangci-lint run --fix
+	cd go/ && golangci-lint run --fix
 	buf format -w .
 
 .PHONY: generate
@@ -95,7 +96,7 @@ generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header ## Regenerate code and 
 
 .PHONY: upgrade
 upgrade: ## Upgrade dependencies
-	go get -u -t ./... && go mod tidy -v
+	$(GO) get -u -t ./... && $(GO) mod tidy -v
 
 .PHONY: checkgenerate
 checkgenerate:
