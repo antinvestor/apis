@@ -5,14 +5,12 @@ api/openapi.yaml
 api_default.go
 client.go
 configuration.go
-docs/DefaultApi.md
+docs/DefaultAPI.md
 docs/Error.md
 docs/File.md
-docs/InlineObject.md
 git_push.sh
 go.sum
 model_error.go
 model_file.go
-model_inline_object.go
 response.go
 utils.go

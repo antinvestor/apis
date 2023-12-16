@@ -2,7 +2,7 @@ version: v1
 managed:
   enabled: true
   go_package_prefix:
-    default: github.com/antinvestor/apis
+    default: github.com/antinvestor/apis/go
     except:
       - buf.build/bufbuild/protovalidate
       - buf.build/googleapis/googleapis

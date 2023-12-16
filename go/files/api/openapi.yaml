@@ -30,7 +30,7 @@ paths:
         required: false
         schema:
           example: 9bsv0s09a5j002njlpvg
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: "[0-9a-z_-]{3,20}"
           type: string
         style: form
       - description: filters the files by the grouping id
@@ -40,7 +40,7 @@ paths:
         required: false
         schema:
           example: 9bsv0s09a5j002njlptg
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: "[0-9a-z_-]{3,20}"
           type: string
         style: form
       - description: maximum number of results to return
@@ -81,29 +81,10 @@ paths:
         of the file and meta data both match an existing file
       operationId: addFile
       requestBody:
-        $ref: '#/components/requestBodies/inline_object'
         content:
           multipart/form-data:
             schema:
-              properties:
-                group_id:
-                  example: 9bsv0s09a5j002njlpvg
-                  pattern: '[0-9a-z_-]{3,20}'
-                  type: string
-                access_id:
-                  example: 9bsv0s09a5j002njlptg
-                  pattern: '[0-9a-z_-]{3,20}'
-                  type: string
-                public:
-                  default: false
-                  type: boolean
-                name:
-                  example: uploadfile.txt
-                  type: string
-                fileObject:
-                  format: binary
-                  type: string
-              type: object
+              $ref: '#/components/schemas/addFile_request'
         description: File contents to add to the store
       responses:
         "200":
@@ -132,7 +113,7 @@ paths:
         required: true
         schema:
           example: 9bsv0s09a5j002njlq20
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: "[0-9a-z_-]{3,20}"
           type: string
         style: simple
       responses:
@@ -157,7 +138,7 @@ paths:
         required: true
         schema:
           example: 9bsv0s09a5j002njlq30
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: "[0-9a-z_-]{3,20}"
           type: string
         style: simple
       responses:
@@ -177,12 +158,6 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: unexpected error
 components:
-  requestBodies:
-    inline_object:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object'
   schemas:
     File:
       example:
@@ -219,15 +194,15 @@ components:
       - message
     UnauthorizedError:
       description: Access token is missing or invalid
-    inline_object:
+    addFile_request:
       properties:
         group_id:
           example: 9bsv0s09a5j002njlpvg
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: "[0-9a-z_-]{3,20}"
           type: string
         access_id:
           example: 9bsv0s09a5j002njlptg
-          pattern: '[0-9a-z_-]{3,20}'
+          pattern: "[0-9a-z_-]{3,20}"
           type: string
         public:
           default: false

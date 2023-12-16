@@ -16,7 +16,7 @@ package file_v1
 
 import (
 	"context"
-	apic "github.com/antinvestor/apis"
+	apic "github.com/antinvestor/apis/go"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )
@@ -68,7 +68,7 @@ func NewFilesClient(ctx context.Context, opts ...apic.ClientOption) (*FilesClien
 	cl := &FilesClient{}
 	cl.cfg = configuration
 	cl.common.client = &cl.APIClient
-	cl.DefaultApi = (*DefaultApiService)(&cl.common)
+	cl.DefaultAPI = (*DefaultAPIService)(&cl.common)
 
 	cl.setClientInfo()
 

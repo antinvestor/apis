@@ -14,21 +14,20 @@ For more information, please visit [https://antinvestor.com](https://antinvestor
 
 Install the following dependencies:
 
-```shell
+```sh
 go get github.com/stretchr/testify/assert
-go get golang.org/x/oauth2
 go get golang.org/x/net/context
 ```
 
 Put the package under your project folder and add the following in import:
 
-```golang
-import sw "./file_v1"
+```go
+import file_v1 "github.com/GIT_USER_ID/GIT_REPO_ID"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
 
-```golang
+```go
 os.Setenv("HTTP_PROXY", "http://proxy_name:proxy_port")
 ```
 
@@ -38,18 +37,18 @@ Default configuration comes with `Servers` field that contains server objects as
 
 ### Select Server Configuration
 
-For using other server than the one defined on index 0 set context value `sw.ContextServerIndex` of type `int`.
+For using other server than the one defined on index 0 set context value `file_v1.ContextServerIndex` of type `int`.
 
-```golang
-ctx := context.WithValue(context.Background(), sw.ContextServerIndex, 1)
+```go
+ctx := context.WithValue(context.Background(), file_v1.ContextServerIndex, 1)
 ```
 
 ### Templated Server URL
 
-Templated server URL is formatted using default variables from configuration or from context value `sw.ContextServerVariables` of type `map[string]string`.
+Templated server URL is formatted using default variables from configuration or from context value `file_v1.ContextServerVariables` of type `map[string]string`.
 
-```golang
-ctx := context.WithValue(context.Background(), sw.ContextServerVariables, map[string]string{
+```go
+ctx := context.WithValue(context.Background(), file_v1.ContextServerVariables, map[string]string{
 	"basePath": "v2",
 })
 ```
@@ -59,14 +58,14 @@ Note, enum values are always validated and all unused variables are silently ign
 ### URLs Configuration per Operation
 
 Each operation can use different server URL defined using `OperationServers` map in the `Configuration`.
-An operation is uniquely identifield by `"{classname}Service.{nickname}"` string.
-Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
+An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
+Similar rules for overriding default operation server index and variables applies by using `file_v1.ContextOperationServerIndices` and `file_v1.ContextOperationServerVariables` context maps.
 
-```
-ctx := context.WithValue(context.Background(), sw.ContextOperationServerIndices, map[string]int{
+```go
+ctx := context.WithValue(context.Background(), file_v1.ContextOperationServerIndices, map[string]int{
 	"{classname}Service.{nickname}": 2,
 })
-ctx = context.WithValue(context.Background(), sw.ContextOperationServerVariables, map[string]map[string]string{
+ctx = context.WithValue(context.Background(), file_v1.ContextOperationServerVariables, map[string]map[string]string{
 	"{classname}Service.{nickname}": {
 		"port": "8443",
 	},
@@ -79,31 +78,30 @@ All URIs are relative to *https://files.api.antinvestor.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**AddFile**](docs/DefaultApi.md#addfile) | **Post** / | 
-*DefaultApi* | [**DeleteFile**](docs/DefaultApi.md#deletefile) | **Delete** /{id} | 
-*DefaultApi* | [**FindFileById**](docs/DefaultApi.md#findfilebyid) | **Get** /{id} | 
-*DefaultApi* | [**FindFiles**](docs/DefaultApi.md#findfiles) | **Get** / | 
+*DefaultAPI* | [**AddFile**](docs/DefaultAPI.md#addfile) | **Post** / | 
+*DefaultAPI* | [**DeleteFile**](docs/DefaultAPI.md#deletefile) | **Delete** /{id} | 
+*DefaultAPI* | [**FindFileById**](docs/DefaultAPI.md#findfilebyid) | **Get** /{id} | 
+*DefaultAPI* | [**FindFiles**](docs/DefaultAPI.md#findfiles) | **Get** / | 
 
 
 ## Documentation For Models
 
  - [Error](docs/Error.md)
  - [File](docs/File.md)
- - [InlineObject](docs/InlineObject.md)
 
 
 ## Documentation For Authorization
 
 
-
+Authentication schemes defined for the API:
 ### bearerAuth
 
 - **Type**: HTTP Bearer token authentication
 
 Example
 
-```golang
-auth := context.WithValue(context.Background(), sw.ContextAccessToken, "BEARERTOKENSTRING")
+```go
+auth := context.WithValue(context.Background(), file_v1.ContextAccessToken, "BEARER_TOKEN_STRING")
 r, err := client.Service.Operation(auth, args)
 ```
 

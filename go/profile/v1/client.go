@@ -16,7 +16,7 @@ package profilev1
 
 import (
 	"context"
-	apic "github.com/antinvestor/apis"
+	apic "github.com/antinvestor/apis/go"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"time"

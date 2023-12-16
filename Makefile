@@ -14,6 +14,7 @@ LICENSE_IGNORE := --ignore /testdata/
 # Set to use a different compiler. For example, `GO=go1.18rc1 make test`.
 GO ?= go
 MOCK_GEN ?= mockgen
+DOCKER ?= docker
 
 MKFILE_DIR := $(abspath $(lastword $(MAKEFILE_LIST)))
 CUR_DIR := $(dir $(MKFILE_DIR))
@@ -77,7 +78,7 @@ lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some
 	buf format -w .
 
 .PHONY: generate
-generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header ## Regenerate code and licenses
+generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header openapi_files_gen_go ## Regenerate code and licenses
 	cd proto && PATH=$(BIN) $(BIN)/buf mod update
 	PATH=$(BIN) $(BIN)/buf generate
 	license-header \
@@ -93,6 +94,13 @@ generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header ## Regenerate code and 
 	$(call mock_package,ledger,v1)
 	$(call mock_package,lostid,v1)
 
+
+.PHONY: openapi_files_gen_go
+openapi_files_gen_go: ## Generate the golang open api spec for the files server
+	$(DOCKER) run --rm -v "${CUR_DIR}go/files:/local" \
+		openapitools/openapi-generator-cli generate \
+        -g go -o /local/ -p packageName=file_v1 \
+        -i /local/v1/file.yaml
 
 .PHONY: upgrade
 upgrade: ## Upgrade dependencies
