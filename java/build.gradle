@@ -85,7 +85,7 @@ subprojects {
         implementation "io.grpc:grpc-protobuf:1.60.0"
         implementation "io.grpc:grpc-services:1.60.0"
         implementation "io.grpc:grpc-stub:1.60.0"
-        implementation "build.buf:protovalidate:v0.1.8"
+        implementation "build.buf:protovalidate:0.1.8"
         compileOnly "org.apache.tomcat:annotations-api:6.0.53"
 
         runtimeOnly "io.grpc:grpc-netty-shaded:1.60.0"
