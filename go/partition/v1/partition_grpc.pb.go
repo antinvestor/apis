@@ -16,7 +16,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: partition/v1/partition.proto
+// source: v1/partition.proto
 
 package partitionv1
 
@@ -932,5 +932,5 @@ var PartitionService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "partition/v1/partition.proto",
+	Metadata: "v1/partition.proto",
 }

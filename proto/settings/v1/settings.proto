@@ -20,6 +20,7 @@ import "buf/validate/validate.proto";
 
 option go_package = "settingsv1";
 option java_multiple_files = true;
+option java_package = "settingsv1";
 
 message Setting {
   string name = 1 [(buf.validate.field).string.min_len = 2];

@@ -21,6 +21,8 @@ import "google/type/interval.proto";
 import "google/type/money.proto";
 
 option go_package = "lostidv1";
+option java_multiple_files = true;
+option java_package = "lostidv1";
 
 //Request to log a Collectible card
 message CollectibleRequest {

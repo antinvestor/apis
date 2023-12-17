@@ -1,3 +1,12 @@
 version: v1
 directories:
-  - proto
+  - proto/common
+  - proto/ledger
+  - proto/lostid
+  - proto/notification
+  - proto/ocr
+  - proto/partition
+  - proto/payment
+  - proto/profile
+  - proto/property
+  - proto/settings

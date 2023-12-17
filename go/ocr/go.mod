@@ -1,10 +1,10 @@
-module github.com/antinvestor/go/apis/ocr
+module github.com/antinvestor/apis/go/ocr
 
 go 1.21
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.31.0-20231115204500-e097f827e652.2
-	github.com/antinvestor/apis/go v1.5.0
+	github.com/antinvestor/apis/go/common v1.6.0
 	go.uber.org/mock v0.3.0
 	google.golang.org/grpc v1.60.0
 	google.golang.org/protobuf v1.31.0

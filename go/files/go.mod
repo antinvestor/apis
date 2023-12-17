@@ -3,7 +3,7 @@ module github.com/antinvestor/apis/go/files
 go 1.21
 
 require (
-	github.com/antinvestor/apis/go v1.5.0
+	github.com/antinvestor/apis/go/common v1.6.0
 	golang.org/x/oauth2 v0.15.0
 	google.golang.org/grpc v1.60.0
 )

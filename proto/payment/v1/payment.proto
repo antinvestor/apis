@@ -1,0 +1,129 @@
+// Copyright 2023-2024 Ant Investor Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package payment.v1;
+
+import "buf/validate/validate.proto";
+import "v1/common.proto";
+
+import "google/protobuf/timestamp.proto";
+import "google/type/money.proto";
+
+option go_package = "paymentv1";
+option java_multiple_files = true;
+option java_package = "paymentv1";
+
+
+message Payment {
+  string id = 1;
+  string transaction_id = 2;
+  string reference_id = 3;
+  string batch_id = 4;
+  string external_transaction_id = 5;
+  string route = 6;
+  string source = 7;
+  string destination = 8;
+  google.type.Money amount = 9;
+  google.type.Money cost = 10;
+  common.v1.STATE state = 11;
+  common.v1.STATUS status = 12;
+  string date_created = 13;
+  string date_processed = 14;
+  bool outbound = 15;
+  map<string, string> extra = 16;
+}
+
+message ReconcileRequest {
+  string external_transaction_id = 1;
+  string route = 2;
+  bool outbound = 3;
+  google.type.Money amount = 4;
+  string owner = 5;
+  string countryCode = 6;
+}
+
+message ReconcileResponse {
+  string id = 1;
+  string transaction_id = 2;
+  string reference_id = 3;
+  common.v1.STATUS status = 4;
+  string description = 5;
+}
+
+
+message SearchResponse {
+  repeated Payment data = 1;
+}
+
+message SendRequest {
+  Payment data = 1;
+}
+
+message SendResponse {
+  common.v1.StatusResponse data = 1;
+}
+
+
+message ReceiveRequest {
+  Payment data = 1;
+}
+
+message ReceiveResponse {
+  common.v1.StatusResponse data = 1;
+}
+
+
+message ReleaseRequest {
+  string access_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string comment = 3;
+}
+
+message ReleaseResponse {
+  common.v1.StatusResponse data = 1;
+}
+
+
+
+service PaymentService {
+  //Send method for queueing outbound payments as requested
+  rpc Send (SendRequest) returns (SendResponse);
+
+  //Send method for queueing inbound payments as requested
+  rpc Receive (ReceiveRequest) returns (ReceiveResponse);
+
+  //Status request to determine if payment is prepared or released
+  rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse);
+
+  //Status update request to allow continuation of payment processing
+  rpc StatusUpdate(common.v1.StatusUpdateRequest) returns (common.v1.StatusUpdateResponse);
+
+  //Release method for releasing queued payments and returns if status is not released
+  rpc Release(ReleaseRequest) returns (ReleaseResponse);
+
+  //Search method is for client request look for payments matching supplied details from the system
+  rpc Search(common.v1.SearchRequest) returns (stream SearchResponse);
+
+  rpc Reconcile (ReconcileRequest) returns (ReconcileResponse);
+}

@@ -16,13 +16,13 @@
 // versions:
 // 	protoc-gen-go v1.31.0
 // 	protoc        (unknown)
-// source: property/v1/property.proto
+// source: v1/property.proto
 
 package propertyv1
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
-	v1 "github.com/antinvestor/apis/go/common/v1"
+	common "github.com/antinvestor/apis/go/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -58,7 +58,7 @@ type Locality struct {
 func (x *Locality) Reset() {
 	*x = Locality{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[0]
+		mi := &file_v1_property_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -71,7 +71,7 @@ func (x *Locality) String() string {
 func (*Locality) ProtoMessage() {}
 
 func (x *Locality) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[0]
+	mi := &file_v1_property_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -84,7 +84,7 @@ func (x *Locality) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Locality.ProtoReflect.Descriptor instead.
 func (*Locality) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{0}
+	return file_v1_property_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Locality) GetId() string {
@@ -177,7 +177,7 @@ type AddLocalityRequest struct {
 func (x *AddLocalityRequest) Reset() {
 	*x = AddLocalityRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[1]
+		mi := &file_v1_property_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -190,7 +190,7 @@ func (x *AddLocalityRequest) String() string {
 func (*AddLocalityRequest) ProtoMessage() {}
 
 func (x *AddLocalityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[1]
+	mi := &file_v1_property_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -203,7 +203,7 @@ func (x *AddLocalityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddLocalityRequest.ProtoReflect.Descriptor instead.
 func (*AddLocalityRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{1}
+	return file_v1_property_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *AddLocalityRequest) GetData() *Locality {
@@ -224,7 +224,7 @@ type AddLocalityResponse struct {
 func (x *AddLocalityResponse) Reset() {
 	*x = AddLocalityResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[2]
+		mi := &file_v1_property_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -237,7 +237,7 @@ func (x *AddLocalityResponse) String() string {
 func (*AddLocalityResponse) ProtoMessage() {}
 
 func (x *AddLocalityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[2]
+	mi := &file_v1_property_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -250,7 +250,7 @@ func (x *AddLocalityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddLocalityResponse.ProtoReflect.Descriptor instead.
 func (*AddLocalityResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{2}
+	return file_v1_property_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AddLocalityResponse) GetData() *Locality {
@@ -267,8 +267,8 @@ type PropertyState struct {
 
 	Id          string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Propertyid  string                 `protobuf:"bytes,2,opt,name=propertyid,proto3" json:"propertyid,omitempty"`
-	State       v1.STATE               `protobuf:"varint,3,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
-	Status      v1.STATUS              `protobuf:"varint,4,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`
+	State       common.STATE           `protobuf:"varint,3,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
+	Status      common.STATUS          `protobuf:"varint,4,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`
 	Name        string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	Description string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
 	Extras      map[string]string      `protobuf:"bytes,7,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
@@ -278,7 +278,7 @@ type PropertyState struct {
 func (x *PropertyState) Reset() {
 	*x = PropertyState{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[3]
+		mi := &file_v1_property_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -291,7 +291,7 @@ func (x *PropertyState) String() string {
 func (*PropertyState) ProtoMessage() {}
 
 func (x *PropertyState) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[3]
+	mi := &file_v1_property_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -304,7 +304,7 @@ func (x *PropertyState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PropertyState.ProtoReflect.Descriptor instead.
 func (*PropertyState) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{3}
+	return file_v1_property_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *PropertyState) GetId() string {
@@ -321,18 +321,18 @@ func (x *PropertyState) GetPropertyid() string {
 	return ""
 }
 
-func (x *PropertyState) GetState() v1.STATE {
+func (x *PropertyState) GetState() common.STATE {
 	if x != nil {
 		return x.State
 	}
-	return v1.STATE(0)
+	return common.STATE(0)
 }
 
-func (x *PropertyState) GetStatus() v1.STATUS {
+func (x *PropertyState) GetStatus() common.STATUS {
 	if x != nil {
 		return x.Status
 	}
-	return v1.STATUS(0)
+	return common.STATUS(0)
 }
 
 func (x *PropertyState) GetName() string {
@@ -378,7 +378,7 @@ type PropertyType struct {
 func (x *PropertyType) Reset() {
 	*x = PropertyType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[4]
+		mi := &file_v1_property_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -391,7 +391,7 @@ func (x *PropertyType) String() string {
 func (*PropertyType) ProtoMessage() {}
 
 func (x *PropertyType) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[4]
+	mi := &file_v1_property_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -404,7 +404,7 @@ func (x *PropertyType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PropertyType.ProtoReflect.Descriptor instead.
 func (*PropertyType) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{4}
+	return file_v1_property_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *PropertyType) GetId() string {
@@ -453,7 +453,7 @@ type AddPropertyTypeRequest struct {
 func (x *AddPropertyTypeRequest) Reset() {
 	*x = AddPropertyTypeRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[5]
+		mi := &file_v1_property_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -466,7 +466,7 @@ func (x *AddPropertyTypeRequest) String() string {
 func (*AddPropertyTypeRequest) ProtoMessage() {}
 
 func (x *AddPropertyTypeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[5]
+	mi := &file_v1_property_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -479,7 +479,7 @@ func (x *AddPropertyTypeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddPropertyTypeRequest.ProtoReflect.Descriptor instead.
 func (*AddPropertyTypeRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{5}
+	return file_v1_property_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *AddPropertyTypeRequest) GetData() *PropertyType {
@@ -500,7 +500,7 @@ type AddPropertyTypeResponse struct {
 func (x *AddPropertyTypeResponse) Reset() {
 	*x = AddPropertyTypeResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[6]
+		mi := &file_v1_property_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -513,7 +513,7 @@ func (x *AddPropertyTypeResponse) String() string {
 func (*AddPropertyTypeResponse) ProtoMessage() {}
 
 func (x *AddPropertyTypeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[6]
+	mi := &file_v1_property_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -526,7 +526,7 @@ func (x *AddPropertyTypeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddPropertyTypeResponse.ProtoReflect.Descriptor instead.
 func (*AddPropertyTypeResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{6}
+	return file_v1_property_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AddPropertyTypeResponse) GetData() *PropertyType {
@@ -553,7 +553,7 @@ type Subscription struct {
 func (x *Subscription) Reset() {
 	*x = Subscription{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[7]
+		mi := &file_v1_property_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -566,7 +566,7 @@ func (x *Subscription) String() string {
 func (*Subscription) ProtoMessage() {}
 
 func (x *Subscription) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[7]
+	mi := &file_v1_property_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -579,7 +579,7 @@ func (x *Subscription) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Subscription.ProtoReflect.Descriptor instead.
 func (*Subscription) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{7}
+	return file_v1_property_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Subscription) GetId() string {
@@ -642,7 +642,7 @@ type AddSubscriptionRequest struct {
 func (x *AddSubscriptionRequest) Reset() {
 	*x = AddSubscriptionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[8]
+		mi := &file_v1_property_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -655,7 +655,7 @@ func (x *AddSubscriptionRequest) String() string {
 func (*AddSubscriptionRequest) ProtoMessage() {}
 
 func (x *AddSubscriptionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[8]
+	mi := &file_v1_property_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -668,7 +668,7 @@ func (x *AddSubscriptionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddSubscriptionRequest.ProtoReflect.Descriptor instead.
 func (*AddSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{8}
+	return file_v1_property_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AddSubscriptionRequest) GetData() *Subscription {
@@ -689,7 +689,7 @@ type AddSubscriptionResponse struct {
 func (x *AddSubscriptionResponse) Reset() {
 	*x = AddSubscriptionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[9]
+		mi := &file_v1_property_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -702,7 +702,7 @@ func (x *AddSubscriptionResponse) String() string {
 func (*AddSubscriptionResponse) ProtoMessage() {}
 
 func (x *AddSubscriptionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[9]
+	mi := &file_v1_property_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -715,7 +715,7 @@ func (x *AddSubscriptionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddSubscriptionResponse.ProtoReflect.Descriptor instead.
 func (*AddSubscriptionResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{9}
+	return file_v1_property_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *AddSubscriptionResponse) GetData() *Subscription {
@@ -744,7 +744,7 @@ type Property struct {
 func (x *Property) Reset() {
 	*x = Property{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[10]
+		mi := &file_v1_property_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -757,7 +757,7 @@ func (x *Property) String() string {
 func (*Property) ProtoMessage() {}
 
 func (x *Property) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[10]
+	mi := &file_v1_property_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -770,7 +770,7 @@ func (x *Property) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Property.ProtoReflect.Descriptor instead.
 func (*Property) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{10}
+	return file_v1_property_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *Property) GetId() string {
@@ -847,7 +847,7 @@ type CreatePropertyRequest struct {
 func (x *CreatePropertyRequest) Reset() {
 	*x = CreatePropertyRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[11]
+		mi := &file_v1_property_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -860,7 +860,7 @@ func (x *CreatePropertyRequest) String() string {
 func (*CreatePropertyRequest) ProtoMessage() {}
 
 func (x *CreatePropertyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[11]
+	mi := &file_v1_property_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -873,7 +873,7 @@ func (x *CreatePropertyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePropertyRequest.ProtoReflect.Descriptor instead.
 func (*CreatePropertyRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{11}
+	return file_v1_property_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *CreatePropertyRequest) GetData() *Property {
@@ -894,7 +894,7 @@ type CreatePropertyResponse struct {
 func (x *CreatePropertyResponse) Reset() {
 	*x = CreatePropertyResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[12]
+		mi := &file_v1_property_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -907,7 +907,7 @@ func (x *CreatePropertyResponse) String() string {
 func (*CreatePropertyResponse) ProtoMessage() {}
 
 func (x *CreatePropertyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[12]
+	mi := &file_v1_property_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -920,7 +920,7 @@ func (x *CreatePropertyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePropertyResponse.ProtoReflect.Descriptor instead.
 func (*CreatePropertyResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{12}
+	return file_v1_property_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CreatePropertyResponse) GetData() *Property {
@@ -947,7 +947,7 @@ type ListPropertyTypeRequest struct {
 func (x *ListPropertyTypeRequest) Reset() {
 	*x = ListPropertyTypeRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[13]
+		mi := &file_v1_property_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -960,7 +960,7 @@ func (x *ListPropertyTypeRequest) String() string {
 func (*ListPropertyTypeRequest) ProtoMessage() {}
 
 func (x *ListPropertyTypeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[13]
+	mi := &file_v1_property_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -973,7 +973,7 @@ func (x *ListPropertyTypeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPropertyTypeRequest.ProtoReflect.Descriptor instead.
 func (*ListPropertyTypeRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{13}
+	return file_v1_property_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListPropertyTypeRequest) GetQuery() string {
@@ -1036,7 +1036,7 @@ type ListPropertyTypeResponse struct {
 func (x *ListPropertyTypeResponse) Reset() {
 	*x = ListPropertyTypeResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[14]
+		mi := &file_v1_property_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1049,7 +1049,7 @@ func (x *ListPropertyTypeResponse) String() string {
 func (*ListPropertyTypeResponse) ProtoMessage() {}
 
 func (x *ListPropertyTypeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[14]
+	mi := &file_v1_property_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1062,7 +1062,7 @@ func (x *ListPropertyTypeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPropertyTypeResponse.ProtoReflect.Descriptor instead.
 func (*ListPropertyTypeResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{14}
+	return file_v1_property_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListPropertyTypeResponse) GetData() []*PropertyType {
@@ -1089,7 +1089,7 @@ type SearchPropertyRequest struct {
 func (x *SearchPropertyRequest) Reset() {
 	*x = SearchPropertyRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[15]
+		mi := &file_v1_property_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1102,7 +1102,7 @@ func (x *SearchPropertyRequest) String() string {
 func (*SearchPropertyRequest) ProtoMessage() {}
 
 func (x *SearchPropertyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[15]
+	mi := &file_v1_property_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1115,7 +1115,7 @@ func (x *SearchPropertyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchPropertyRequest.ProtoReflect.Descriptor instead.
 func (*SearchPropertyRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{15}
+	return file_v1_property_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SearchPropertyRequest) GetQuery() string {
@@ -1178,7 +1178,7 @@ type SearchPropertyResponse struct {
 func (x *SearchPropertyResponse) Reset() {
 	*x = SearchPropertyResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[16]
+		mi := &file_v1_property_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1191,7 +1191,7 @@ func (x *SearchPropertyResponse) String() string {
 func (*SearchPropertyResponse) ProtoMessage() {}
 
 func (x *SearchPropertyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[16]
+	mi := &file_v1_property_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1204,7 +1204,7 @@ func (x *SearchPropertyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchPropertyResponse.ProtoReflect.Descriptor instead.
 func (*SearchPropertyResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{16}
+	return file_v1_property_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SearchPropertyResponse) GetData() []*Property {
@@ -1225,7 +1225,7 @@ type DeleteLocalityRequest struct {
 func (x *DeleteLocalityRequest) Reset() {
 	*x = DeleteLocalityRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[17]
+		mi := &file_v1_property_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1238,7 +1238,7 @@ func (x *DeleteLocalityRequest) String() string {
 func (*DeleteLocalityRequest) ProtoMessage() {}
 
 func (x *DeleteLocalityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[17]
+	mi := &file_v1_property_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1251,7 +1251,7 @@ func (x *DeleteLocalityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteLocalityRequest.ProtoReflect.Descriptor instead.
 func (*DeleteLocalityRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{17}
+	return file_v1_property_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *DeleteLocalityRequest) GetId() string {
@@ -1272,7 +1272,7 @@ type DeleteLocalityResponse struct {
 func (x *DeleteLocalityResponse) Reset() {
 	*x = DeleteLocalityResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[18]
+		mi := &file_v1_property_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1285,7 +1285,7 @@ func (x *DeleteLocalityResponse) String() string {
 func (*DeleteLocalityResponse) ProtoMessage() {}
 
 func (x *DeleteLocalityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[18]
+	mi := &file_v1_property_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1298,7 +1298,7 @@ func (x *DeleteLocalityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteLocalityResponse.ProtoReflect.Descriptor instead.
 func (*DeleteLocalityResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{18}
+	return file_v1_property_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *DeleteLocalityResponse) GetSuccess() bool {
@@ -1319,7 +1319,7 @@ type DeletePropertyRequest struct {
 func (x *DeletePropertyRequest) Reset() {
 	*x = DeletePropertyRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[19]
+		mi := &file_v1_property_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1332,7 +1332,7 @@ func (x *DeletePropertyRequest) String() string {
 func (*DeletePropertyRequest) ProtoMessage() {}
 
 func (x *DeletePropertyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[19]
+	mi := &file_v1_property_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1345,7 +1345,7 @@ func (x *DeletePropertyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePropertyRequest.ProtoReflect.Descriptor instead.
 func (*DeletePropertyRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{19}
+	return file_v1_property_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *DeletePropertyRequest) GetId() string {
@@ -1366,7 +1366,7 @@ type DeletePropertyResponse struct {
 func (x *DeletePropertyResponse) Reset() {
 	*x = DeletePropertyResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[20]
+		mi := &file_v1_property_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1379,7 +1379,7 @@ func (x *DeletePropertyResponse) String() string {
 func (*DeletePropertyResponse) ProtoMessage() {}
 
 func (x *DeletePropertyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[20]
+	mi := &file_v1_property_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1392,7 +1392,7 @@ func (x *DeletePropertyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePropertyResponse.ProtoReflect.Descriptor instead.
 func (*DeletePropertyResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{20}
+	return file_v1_property_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *DeletePropertyResponse) GetSuccess() bool {
@@ -1413,7 +1413,7 @@ type StateOfPropertyRequest struct {
 func (x *StateOfPropertyRequest) Reset() {
 	*x = StateOfPropertyRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[21]
+		mi := &file_v1_property_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1426,7 +1426,7 @@ func (x *StateOfPropertyRequest) String() string {
 func (*StateOfPropertyRequest) ProtoMessage() {}
 
 func (x *StateOfPropertyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[21]
+	mi := &file_v1_property_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1439,7 +1439,7 @@ func (x *StateOfPropertyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateOfPropertyRequest.ProtoReflect.Descriptor instead.
 func (*StateOfPropertyRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{21}
+	return file_v1_property_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *StateOfPropertyRequest) GetId() string {
@@ -1460,7 +1460,7 @@ type StateOfPropertyResponse struct {
 func (x *StateOfPropertyResponse) Reset() {
 	*x = StateOfPropertyResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[22]
+		mi := &file_v1_property_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1473,7 +1473,7 @@ func (x *StateOfPropertyResponse) String() string {
 func (*StateOfPropertyResponse) ProtoMessage() {}
 
 func (x *StateOfPropertyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[22]
+	mi := &file_v1_property_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1486,7 +1486,7 @@ func (x *StateOfPropertyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateOfPropertyResponse.ProtoReflect.Descriptor instead.
 func (*StateOfPropertyResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{22}
+	return file_v1_property_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *StateOfPropertyResponse) GetData() *PropertyState {
@@ -1507,7 +1507,7 @@ type HistoryOfPropertyRequest struct {
 func (x *HistoryOfPropertyRequest) Reset() {
 	*x = HistoryOfPropertyRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[23]
+		mi := &file_v1_property_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1520,7 +1520,7 @@ func (x *HistoryOfPropertyRequest) String() string {
 func (*HistoryOfPropertyRequest) ProtoMessage() {}
 
 func (x *HistoryOfPropertyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[23]
+	mi := &file_v1_property_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1533,7 +1533,7 @@ func (x *HistoryOfPropertyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryOfPropertyRequest.ProtoReflect.Descriptor instead.
 func (*HistoryOfPropertyRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{23}
+	return file_v1_property_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *HistoryOfPropertyRequest) GetId() string {
@@ -1554,7 +1554,7 @@ type HistoryOfPropertyResponse struct {
 func (x *HistoryOfPropertyResponse) Reset() {
 	*x = HistoryOfPropertyResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[24]
+		mi := &file_v1_property_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1567,7 +1567,7 @@ func (x *HistoryOfPropertyResponse) String() string {
 func (*HistoryOfPropertyResponse) ProtoMessage() {}
 
 func (x *HistoryOfPropertyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[24]
+	mi := &file_v1_property_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1580,7 +1580,7 @@ func (x *HistoryOfPropertyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryOfPropertyResponse.ProtoReflect.Descriptor instead.
 func (*HistoryOfPropertyResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{24}
+	return file_v1_property_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *HistoryOfPropertyResponse) GetData() []*PropertyState {
@@ -1596,8 +1596,8 @@ type UpdatePropertyRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	Id          string            `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	State       v1.STATE          `protobuf:"varint,2,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
-	Status      v1.STATUS         `protobuf:"varint,3,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`
+	State       common.STATE      `protobuf:"varint,2,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
+	Status      common.STATUS     `protobuf:"varint,3,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`
 	Name        string            `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	Description string            `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	GuardianId  string            `protobuf:"bytes,6,opt,name=guardian_id,json=guardianId,proto3" json:"guardian_id,omitempty"`
@@ -1608,7 +1608,7 @@ type UpdatePropertyRequest struct {
 func (x *UpdatePropertyRequest) Reset() {
 	*x = UpdatePropertyRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[25]
+		mi := &file_v1_property_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1621,7 +1621,7 @@ func (x *UpdatePropertyRequest) String() string {
 func (*UpdatePropertyRequest) ProtoMessage() {}
 
 func (x *UpdatePropertyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[25]
+	mi := &file_v1_property_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1634,7 +1634,7 @@ func (x *UpdatePropertyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePropertyRequest.ProtoReflect.Descriptor instead.
 func (*UpdatePropertyRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{25}
+	return file_v1_property_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *UpdatePropertyRequest) GetId() string {
@@ -1644,18 +1644,18 @@ func (x *UpdatePropertyRequest) GetId() string {
 	return ""
 }
 
-func (x *UpdatePropertyRequest) GetState() v1.STATE {
+func (x *UpdatePropertyRequest) GetState() common.STATE {
 	if x != nil {
 		return x.State
 	}
-	return v1.STATE(0)
+	return common.STATE(0)
 }
 
-func (x *UpdatePropertyRequest) GetStatus() v1.STATUS {
+func (x *UpdatePropertyRequest) GetStatus() common.STATUS {
 	if x != nil {
 		return x.Status
 	}
-	return v1.STATUS(0)
+	return common.STATUS(0)
 }
 
 func (x *UpdatePropertyRequest) GetName() string {
@@ -1704,7 +1704,7 @@ type UpdatePropertyResponse struct {
 func (x *UpdatePropertyResponse) Reset() {
 	*x = UpdatePropertyResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[26]
+		mi := &file_v1_property_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1717,7 +1717,7 @@ func (x *UpdatePropertyResponse) String() string {
 func (*UpdatePropertyResponse) ProtoMessage() {}
 
 func (x *UpdatePropertyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[26]
+	mi := &file_v1_property_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1730,7 +1730,7 @@ func (x *UpdatePropertyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePropertyResponse.ProtoReflect.Descriptor instead.
 func (*UpdatePropertyResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{26}
+	return file_v1_property_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *UpdatePropertyResponse) GetData() *Property {
@@ -1752,7 +1752,7 @@ type ListSubscriptionRequest struct {
 func (x *ListSubscriptionRequest) Reset() {
 	*x = ListSubscriptionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[27]
+		mi := &file_v1_property_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1765,7 +1765,7 @@ func (x *ListSubscriptionRequest) String() string {
 func (*ListSubscriptionRequest) ProtoMessage() {}
 
 func (x *ListSubscriptionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[27]
+	mi := &file_v1_property_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1778,7 +1778,7 @@ func (x *ListSubscriptionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSubscriptionRequest.ProtoReflect.Descriptor instead.
 func (*ListSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{27}
+	return file_v1_property_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ListSubscriptionRequest) GetPropertyId() string {
@@ -1806,7 +1806,7 @@ type ListSubscriptionResponse struct {
 func (x *ListSubscriptionResponse) Reset() {
 	*x = ListSubscriptionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[28]
+		mi := &file_v1_property_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1819,7 +1819,7 @@ func (x *ListSubscriptionResponse) String() string {
 func (*ListSubscriptionResponse) ProtoMessage() {}
 
 func (x *ListSubscriptionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[28]
+	mi := &file_v1_property_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1832,7 +1832,7 @@ func (x *ListSubscriptionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSubscriptionResponse.ProtoReflect.Descriptor instead.
 func (*ListSubscriptionResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{28}
+	return file_v1_property_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ListSubscriptionResponse) GetData() []*Subscription {
@@ -1853,7 +1853,7 @@ type DeleteSubscriptionRequest struct {
 func (x *DeleteSubscriptionRequest) Reset() {
 	*x = DeleteSubscriptionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[29]
+		mi := &file_v1_property_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1866,7 +1866,7 @@ func (x *DeleteSubscriptionRequest) String() string {
 func (*DeleteSubscriptionRequest) ProtoMessage() {}
 
 func (x *DeleteSubscriptionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[29]
+	mi := &file_v1_property_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1879,7 +1879,7 @@ func (x *DeleteSubscriptionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSubscriptionRequest.ProtoReflect.Descriptor instead.
 func (*DeleteSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{29}
+	return file_v1_property_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *DeleteSubscriptionRequest) GetId() string {
@@ -1900,7 +1900,7 @@ type DeleteSubscriptionResponse struct {
 func (x *DeleteSubscriptionResponse) Reset() {
 	*x = DeleteSubscriptionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_property_v1_property_proto_msgTypes[30]
+		mi := &file_v1_property_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1913,7 +1913,7 @@ func (x *DeleteSubscriptionResponse) String() string {
 func (*DeleteSubscriptionResponse) ProtoMessage() {}
 
 func (x *DeleteSubscriptionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_property_v1_property_proto_msgTypes[30]
+	mi := &file_v1_property_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1926,7 +1926,7 @@ func (x *DeleteSubscriptionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSubscriptionResponse.ProtoReflect.Descriptor instead.
 func (*DeleteSubscriptionResponse) Descriptor() ([]byte, []int) {
-	return file_property_v1_property_proto_rawDescGZIP(), []int{30}
+	return file_v1_property_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *DeleteSubscriptionResponse) GetSuccess() bool {
@@ -1936,14 +1936,13 @@ func (x *DeleteSubscriptionResponse) GetSuccess() bool {
 	return false
 }
 
-var File_property_v1_property_proto protoreflect.FileDescriptor
+var File_v1_property_proto protoreflect.FileDescriptor
 
-var file_property_v1_property_proto_rawDesc = []byte{
-	0x0a, 0x1a, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x2f, 0x76, 0x31, 0x2f, 0x70, 0x72,
-	0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0b, 0x70, 0x72,
-	0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x1a, 0x1b, 0x62, 0x75, 0x66, 0x2f, 0x76,
-	0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x65, 0x2f, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x65,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x16, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x76,
+var file_v1_property_proto_rawDesc = []byte{
+	0x0a, 0x11, 0x76, 0x31, 0x2f, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x12, 0x0b, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x2e, 0x76, 0x31,
+	0x1a, 0x1b, 0x62, 0x75, 0x66, 0x2f, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x65, 0x2f, 0x76,
+	0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0f, 0x76,
 	0x31, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f,
 	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f,
 	0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22,
@@ -2337,33 +2336,35 @@ var file_property_v1_property_proto_rawDesc = []byte{
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x27, 0x2e, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72,
 	0x74, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x75, 0x62, 0x73,
 	0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x42, 0xa4, 0x01, 0x0a, 0x0f, 0x63, 0x6f, 0x6d, 0x2e, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74,
-	0x79, 0x2e, 0x76, 0x31, 0x42, 0x0d, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x50, 0x72,
-	0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x35, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
-	0x6d, 0x2f, 0x61, 0x6e, 0x74, 0x69, 0x6e, 0x76, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x2f, 0x61, 0x70,
-	0x69, 0x73, 0x2f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x2f, 0x76,
-	0x31, 0x3b, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x50,
-	0x58, 0x58, 0xaa, 0x02, 0x0b, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x2e, 0x56, 0x31,
-	0xca, 0x02, 0x0b, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x5c, 0x56, 0x31, 0xe2, 0x02,
-	0x17, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42,
-	0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0c, 0x50, 0x72, 0x6f, 0x70, 0x65,
-	0x72, 0x74, 0x79, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x42, 0xbe, 0x01, 0x0a, 0x29, 0x63, 0x6f, 0x6d, 0x2e, 0x61, 0x6e, 0x74, 0x69, 0x6e, 0x76, 0x65,
+	0x73, 0x74, 0x6f, 0x72, 0x2e, 0x61, 0x70, 0x69, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72,
+	0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x42, 0x0d,
+	0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a,
+	0x35, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x6e, 0x74, 0x69,
+	0x6e, 0x76, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x2f, 0x61, 0x70, 0x69, 0x73, 0x2f, 0x67, 0x6f, 0x2f,
+	0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x2f, 0x76, 0x31, 0x3b, 0x70, 0x72, 0x6f, 0x70,
+	0x65, 0x72, 0x74, 0x79, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x50, 0x58, 0x58, 0xaa, 0x02, 0x0b, 0x50,
+	0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x0b, 0x50, 0x72, 0x6f,
+	0x70, 0x65, 0x72, 0x74, 0x79, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x17, 0x50, 0x72, 0x6f, 0x70, 0x65,
+	0x72, 0x74, 0x79, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61,
+	0x74, 0x61, 0xea, 0x02, 0x0c, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x3a, 0x3a, 0x56,
+	0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_property_v1_property_proto_rawDescOnce sync.Once
-	file_property_v1_property_proto_rawDescData = file_property_v1_property_proto_rawDesc
+	file_v1_property_proto_rawDescOnce sync.Once
+	file_v1_property_proto_rawDescData = file_v1_property_proto_rawDesc
 )
 
-func file_property_v1_property_proto_rawDescGZIP() []byte {
-	file_property_v1_property_proto_rawDescOnce.Do(func() {
-		file_property_v1_property_proto_rawDescData = protoimpl.X.CompressGZIP(file_property_v1_property_proto_rawDescData)
+func file_v1_property_proto_rawDescGZIP() []byte {
+	file_v1_property_proto_rawDescOnce.Do(func() {
+		file_v1_property_proto_rawDescData = protoimpl.X.CompressGZIP(file_v1_property_proto_rawDescData)
 	})
-	return file_property_v1_property_proto_rawDescData
+	return file_v1_property_proto_rawDescData
 }
 
-var file_property_v1_property_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
-var file_property_v1_property_proto_goTypes = []interface{}{
+var file_v1_property_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
+var file_v1_property_proto_goTypes = []interface{}{
 	(*Locality)(nil),                   // 0: property.v1.Locality
 	(*AddLocalityRequest)(nil),         // 1: property.v1.AddLocalityRequest
 	(*AddLocalityResponse)(nil),        // 2: property.v1.AddLocalityResponse
@@ -2404,10 +2405,10 @@ var file_property_v1_property_proto_goTypes = []interface{}{
 	nil,                                // 37: property.v1.SearchPropertyRequest.ExtrasEntry
 	nil,                                // 38: property.v1.UpdatePropertyRequest.ExtrasEntry
 	(*timestamppb.Timestamp)(nil),      // 39: google.protobuf.Timestamp
-	(v1.STATE)(0),                      // 40: common.v1.STATE
-	(v1.STATUS)(0),                     // 41: common.v1.STATUS
+	(common.STATE)(0),                  // 40: common.v1.STATE
+	(common.STATUS)(0),                 // 41: common.v1.STATUS
 }
-var file_property_v1_property_proto_depIdxs = []int32{
+var file_v1_property_proto_depIdxs = []int32{
 	31, // 0: property.v1.Locality.extras:type_name -> property.v1.Locality.ExtrasEntry
 	39, // 1: property.v1.Locality.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 2: property.v1.AddLocalityRequest.data:type_name -> property.v1.Locality
@@ -2476,13 +2477,13 @@ var file_property_v1_property_proto_depIdxs = []int32{
 	0,  // [0:35] is the sub-list for field type_name
 }
 
-func init() { file_property_v1_property_proto_init() }
-func file_property_v1_property_proto_init() {
-	if File_property_v1_property_proto != nil {
+func init() { file_v1_property_proto_init() }
+func file_v1_property_proto_init() {
+	if File_v1_property_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_property_v1_property_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Locality); i {
 			case 0:
 				return &v.state
@@ -2494,7 +2495,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AddLocalityRequest); i {
 			case 0:
 				return &v.state
@@ -2506,7 +2507,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AddLocalityResponse); i {
 			case 0:
 				return &v.state
@@ -2518,7 +2519,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PropertyState); i {
 			case 0:
 				return &v.state
@@ -2530,7 +2531,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PropertyType); i {
 			case 0:
 				return &v.state
@@ -2542,7 +2543,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AddPropertyTypeRequest); i {
 			case 0:
 				return &v.state
@@ -2554,7 +2555,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AddPropertyTypeResponse); i {
 			case 0:
 				return &v.state
@@ -2566,7 +2567,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Subscription); i {
 			case 0:
 				return &v.state
@@ -2578,7 +2579,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AddSubscriptionRequest); i {
 			case 0:
 				return &v.state
@@ -2590,7 +2591,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AddSubscriptionResponse); i {
 			case 0:
 				return &v.state
@@ -2602,7 +2603,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Property); i {
 			case 0:
 				return &v.state
@@ -2614,7 +2615,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreatePropertyRequest); i {
 			case 0:
 				return &v.state
@@ -2626,7 +2627,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreatePropertyResponse); i {
 			case 0:
 				return &v.state
@@ -2638,7 +2639,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListPropertyTypeRequest); i {
 			case 0:
 				return &v.state
@@ -2650,7 +2651,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListPropertyTypeResponse); i {
 			case 0:
 				return &v.state
@@ -2662,7 +2663,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SearchPropertyRequest); i {
 			case 0:
 				return &v.state
@@ -2674,7 +2675,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SearchPropertyResponse); i {
 			case 0:
 				return &v.state
@@ -2686,7 +2687,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteLocalityRequest); i {
 			case 0:
 				return &v.state
@@ -2698,7 +2699,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteLocalityResponse); i {
 			case 0:
 				return &v.state
@@ -2710,7 +2711,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeletePropertyRequest); i {
 			case 0:
 				return &v.state
@@ -2722,7 +2723,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeletePropertyResponse); i {
 			case 0:
 				return &v.state
@@ -2734,7 +2735,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateOfPropertyRequest); i {
 			case 0:
 				return &v.state
@@ -2746,7 +2747,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateOfPropertyResponse); i {
 			case 0:
 				return &v.state
@@ -2758,7 +2759,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*HistoryOfPropertyRequest); i {
 			case 0:
 				return &v.state
@@ -2770,7 +2771,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*HistoryOfPropertyResponse); i {
 			case 0:
 				return &v.state
@@ -2782,7 +2783,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdatePropertyRequest); i {
 			case 0:
 				return &v.state
@@ -2794,7 +2795,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdatePropertyResponse); i {
 			case 0:
 				return &v.state
@@ -2806,7 +2807,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListSubscriptionRequest); i {
 			case 0:
 				return &v.state
@@ -2818,7 +2819,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListSubscriptionResponse); i {
 			case 0:
 				return &v.state
@@ -2830,7 +2831,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteSubscriptionRequest); i {
 			case 0:
 				return &v.state
@@ -2842,7 +2843,7 @@ func file_property_v1_property_proto_init() {
 				return nil
 			}
 		}
-		file_property_v1_property_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+		file_v1_property_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteSubscriptionResponse); i {
 			case 0:
 				return &v.state
@@ -2855,7 +2856,7 @@ func file_property_v1_property_proto_init() {
 			}
 		}
 	}
-	file_property_v1_property_proto_msgTypes[0].OneofWrappers = []interface{}{
+	file_v1_property_proto_msgTypes[0].OneofWrappers = []interface{}{
 		(*Locality_Point)(nil),
 		(*Locality_Boundary)(nil),
 	}
@@ -2863,18 +2864,18 @@ func file_property_v1_property_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_property_v1_property_proto_rawDesc,
+			RawDescriptor: file_v1_property_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   39,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_property_v1_property_proto_goTypes,
-		DependencyIndexes: file_property_v1_property_proto_depIdxs,
-		MessageInfos:      file_property_v1_property_proto_msgTypes,
+		GoTypes:           file_v1_property_proto_goTypes,
+		DependencyIndexes: file_v1_property_proto_depIdxs,
+		MessageInfos:      file_v1_property_proto_msgTypes,
 	}.Build()
-	File_property_v1_property_proto = out.File
-	file_property_v1_property_proto_rawDesc = nil
-	file_property_v1_property_proto_goTypes = nil
-	file_property_v1_property_proto_depIdxs = nil
+	File_v1_property_proto = out.File
+	file_v1_property_proto_rawDesc = nil
+	file_v1_property_proto_goTypes = nil
+	file_v1_property_proto_depIdxs = nil
 }

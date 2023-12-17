@@ -1,0 +1,24 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/antinvestor/apis/go/lostid
+    except:
+      - buf.build/bufbuild/protovalidate
+      - buf.build/googleapis/googleapis
+      - buf.build/antinvestor/common
+  java_multiple_files: true
+  java_package_prefix: com.antinvestor.apis.lostid
+
+plugins:
+  - plugin: buf.build/grpc/go
+    out: ../../go/lostid/
+    opt:
+      - paths=source_relative
+  - plugin: buf.build/protocolbuffers/go
+    out: ../../go/lostid/
+    opt: paths=source_relative
+  - plugin: buf.build/grpc/java
+    out: ../../java/lostid/src/main/java/
+  - plugin: buf.build/protocolbuffers/java
+    out: ../../java/lostid/src/main/java/

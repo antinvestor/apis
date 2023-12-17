@@ -18,7 +18,7 @@ import (
 	"context"
 	"time"
 
-	apic "github.com/antinvestor/apis/go"
+	apic "github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 

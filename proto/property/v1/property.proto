@@ -17,10 +17,12 @@ syntax = "proto3";
 package property.v1;
 
 import "buf/validate/validate.proto";
-import "common/v1/common.proto";
+import "v1/common.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "propertyv1";
+option java_multiple_files = true;
+option java_package = "propertyv1";
 
 message Locality {
   string id = 1 [

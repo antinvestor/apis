@@ -1,0 +1,23 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/antinvestor/apis/go/common
+    except:
+      - buf.build/bufbuild/protovalidate
+      - buf.build/googleapis/googleapis
+  java_multiple_files: true
+  java_package_prefix: com.antinvestor.apis.common
+
+plugins:
+  - plugin: buf.build/grpc/go
+    out: ../../go/common/
+    opt:
+      - paths=source_relative
+  - plugin: buf.build/protocolbuffers/go
+    out: ../../go/common/
+    opt: paths=source_relative
+  - plugin: buf.build/grpc/java
+    out: ../../java/common/src/main/java/
+  - plugin: buf.build/protocolbuffers/java
+    out: ../../java/common/src/main/java/

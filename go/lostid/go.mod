@@ -1,4 +1,4 @@
-module github.com/antinvestor/go/apis/lostid
+module github.com/antinvestor/apis/go/lostid
 
 go 1.21
 

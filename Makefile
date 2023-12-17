@@ -33,6 +33,13 @@ cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -packag
 
 endef
 
+
+define buf_generate
+cd proto/${1} && PATH=$(BIN) $(BIN)/buf mod update
+cd proto/${1} && PATH=$(BIN) $(BIN)/buf generate
+license-header --license-type apache --copyright-holder "Ant Investor Ltd" --year-range "$(COPYRIGHT_YEARS)" $(LICENSE_IGNORE)
+endef
+
 .PHONY: help
 help: ## Describe useful make targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "%-30s %s\n", $$1, $$2}'
@@ -54,7 +61,7 @@ test: build ## Run unit tests
 
 .PHONY: build
 build: generate ## Build all packages
-	$(call build_package,.)
+	$(call build_package,common)
 	$(call build_package,notification)
 	$(call build_package,ocr)
 	$(call build_package,partition)
@@ -63,7 +70,6 @@ build: generate ## Build all packages
 	$(call build_package,settings)
 	$(call build_package,ledger)
 	$(call build_package,lostid)
-
 
 .PHONY: lint
 lint: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and protobuf
@@ -77,14 +83,15 @@ lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some
 	cd go/ && golangci-lint run --fix
 	buf format -w .
 
-.PHONY: generate
-generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header openapi_files_gen_go ## Regenerate code and licenses
-	cd proto && PATH=$(BIN) $(BIN)/buf mod update
-	PATH=$(BIN) $(BIN)/buf generate
-	license-header \
-		--license-type apache \
-		--copyright-holder "Ant Investor Ltd" \
-		--year-range "$(COPYRIGHT_YEARS)" $(LICENSE_IGNORE)
+.PHONY: openapi_files_gen_go
+openapi_files_gen_go: ## Generate the golang open api spec for the files server
+	$(DOCKER) run --rm -v "${CUR_DIR}go/files:/local" \
+		openapitools/openapi-generator-cli generate \
+        -g go -o /local/ -p packageName=file_v1 \
+        -i /local/v1/file.yaml
+
+.PHONY: generate_grpc_mocks
+generate_grpc_mocks:
 	$(call mock_package,notification,v1)
 	$(call mock_package,ocr,v1)
 	$(call mock_package,partition,v1)
@@ -94,13 +101,25 @@ generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header openapi_files_gen_go ##
 	$(call mock_package,ledger,v1)
 	$(call mock_package,lostid,v1)
 
+.PHONY: generate_buf_gen
+generate_buf_gen:
+	$(call buf_generate,common)
+	$(call buf_generate,ledger)
+	$(call buf_generate,lostid)
+	$(call buf_generate,ocr)
+	$(call buf_generate,partition)
+	$(call buf_generate,payment)
+	$(call buf_generate,profile)
+	$(call buf_generate,property)
+	$(call buf_generate,settings)
+	license-header \
+		--license-type apache \
+		--copyright-holder "Ant Investor Ltd" \
+		--year-range "$(COPYRIGHT_YEARS)" $(LICENSE_IGNORE)
 
-.PHONY: openapi_files_gen_go
-openapi_files_gen_go: ## Generate the golang open api spec for the files server
-	$(DOCKER) run --rm -v "${CUR_DIR}go/files:/local" \
-		openapitools/openapi-generator-cli generate \
-        -g go -o /local/ -p packageName=file_v1 \
-        -i /local/v1/file.yaml
+.PHONY: generate
+generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header generate_buf_gen generate_grpc_mocks openapi_files_gen_go  ## Regenerate code and licenses
+
 
 .PHONY: upgrade
 upgrade: ## Upgrade dependencies

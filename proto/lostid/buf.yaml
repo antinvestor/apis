@@ -1,0 +1,13 @@
+version: v1
+name: buf.build/antinvestor/lostid
+breaking:
+  use:
+    - FILE
+lint:
+  allow_comment_ignores: true
+  use:
+    - DEFAULT
+deps:
+  - buf.build/bufbuild/protovalidate
+  - buf.build/googleapis/googleapis
+  - buf.build/antinvestor/common

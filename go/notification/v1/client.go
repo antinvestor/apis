@@ -16,7 +16,7 @@ package notificationv1
 
 import (
 	"context"
-	apic "github.com/antinvestor/apis/go"
+	apic "github.com/antinvestor/apis/go/common"
 	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"

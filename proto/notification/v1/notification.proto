@@ -16,12 +16,11 @@ syntax = "proto3";
 
 package notification.v1;
 
-import "buf/validate/validate.proto";
-import "common/v1/common.proto";
-
 option go_package = "notificationv1";
 option java_multiple_files = true;
-option java_package = "com.antinvestor.api.notification";
+option java_package = "notificationv1";
+
+import "buf.build/antinvestor/common/v1/common.proto";
 
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum PRIORITY {
@@ -79,21 +78,13 @@ message Notification {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  StatusResponse status = 14 [(buf.validate.field).skipped = true];
+  common.v1.StatusResponse status = 14 [(buf.validate.field).skipped = true];
   map<string, string> extras = 15;
 
   PRIORITY priority = 16;
 }
 
-message SearchRequest {
-  string query = 1;
-  int64 page = 2;
-  int32 count = 3;
-  string start_date = 4;
-  string end_date = 5;
-  repeated string properties = 6;
-  map<string, string> extras = 7;
-}
+
 
 message SearchResponse {
   repeated Notification data = 1;
@@ -104,50 +95,7 @@ message SendRequest {
 }
 
 message SendResponse {
-  StatusResponse data = 1;
-}
-
-message StatusRequest {
-  string id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  map<string, string> extras = 2;
-}
-
-message StatusResponse {
-  string id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  common.v1.STATE state = 2;
-  common.v1.STATUS status = 3;
-  string external_id = 4;
-  string transient_id = 5;
-  map<string, string> extras = 6;
-}
-
-message StatusUpdateRequest {
-  string access_id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string id = 2 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  common.v1.STATE state = 3;
-  common.v1.STATUS status = 4;
-  string external_id = 5;
-  map<string, string> extras = 6;
-}
-
-message StatusUpdateResponse {
-  StatusResponse data = 1;
+  common.v1.StatusResponse data = 1;
 }
 
 message ReleaseRequest {
@@ -165,7 +113,7 @@ message ReleaseRequest {
 }
 
 message ReleaseResponse {
-  StatusResponse data = 1;
+  common.v1.StatusResponse data = 1;
 }
 
 message ReceiveRequest {
@@ -173,7 +121,7 @@ message ReceiveRequest {
 }
 
 message ReceiveResponse {
-  StatusResponse data = 1;
+  common.v1.StatusResponse data = 1;
 }
 
 service NotificationService {
@@ -181,10 +129,10 @@ service NotificationService {
   rpc Send(SendRequest) returns (SendResponse);
 
   //Status request to determine if notification is prepared or released
-  rpc Status(StatusRequest) returns (StatusResponse);
+  rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse);
 
   //Status update request to allow continuation of notification processing
-  rpc StatusUpdate(StatusUpdateRequest) returns (StatusUpdateResponse);
+  rpc StatusUpdate(common.v1.StatusUpdateRequest) returns (common.v1.StatusUpdateResponse);
 
   //Release method for releasing queued massages and returns if notification status if released
   rpc Release(ReleaseRequest) returns (ReleaseResponse);
@@ -193,5 +141,5 @@ service NotificationService {
   rpc Receive(ReceiveRequest) returns (ReceiveResponse);
 
   //Search method is for client request for particular notification details from system
-  rpc Search(SearchRequest) returns (stream SearchResponse);
+  rpc Search(common.v1.SearchRequest) returns (stream SearchResponse);
 }

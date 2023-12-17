@@ -16,7 +16,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: property/v1/property.proto
+// source: v1/property.proto
 
 package propertyv1
 
@@ -698,5 +698,5 @@ var PropertyService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "property/v1/property.proto",
+	Metadata: "v1/property.proto",
 }

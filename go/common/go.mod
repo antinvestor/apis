@@ -1,4 +1,4 @@
-module github.com/antinvestor/apis/go
+module github.com/antinvestor/apis/go/common
 
 go 1.21
 
