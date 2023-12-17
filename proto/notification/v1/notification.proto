@@ -16,11 +16,11 @@ syntax = "proto3";
 
 package notification.v1;
 
-option go_package = "notificationv1";
+import "v1/common.proto";
+
+option go_package = "github.com/antinvestor/apis/go/notification/v1;notificationv1";
 option java_multiple_files = true;
 option java_package = "notificationv1";
-
-import "buf.build/antinvestor/common/v1/common.proto";
 
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum PRIORITY {
@@ -83,8 +83,6 @@ message Notification {
 
   PRIORITY priority = 16;
 }
-
-
 
 message SearchResponse {
   repeated Notification data = 1;

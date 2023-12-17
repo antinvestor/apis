@@ -1,0 +1,12 @@
+version: v1
+directories:
+  - common
+  - ledger
+  - lostid
+  - notification
+  - ocr
+  - partition
+  - payment
+  - profile
+  - property
+  - settings

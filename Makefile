@@ -24,6 +24,7 @@ cd go/${1} && $(GO) mod tidy
 cd go/${1} && $(GO) fmt ./...
 cd go/${1} && $(GO) vet ./...
 cd go/${1} && $(GO) build ./...
+cd go/${1} && $(GO) test -vet=off -race -cover ./...
 
 endef
 
@@ -37,7 +38,15 @@ endef
 define buf_generate
 cd proto/${1} && PATH=$(BIN) $(BIN)/buf mod update
 cd proto/${1} && PATH=$(BIN) $(BIN)/buf generate
-license-header --license-type apache --copyright-holder "Ant Investor Ltd" --year-range "$(COPYRIGHT_YEARS)" $(LICENSE_IGNORE)
+endef
+
+define lint_golang
+cd go/${1} && $(GO) vet ./...
+cd go/${1} && golangci-lint run
+endef
+
+define lint_fix_golang
+cd go/${1} && golangci-lint run --fix
 endef
 
 .PHONY: help
@@ -46,18 +55,13 @@ help: ## Describe useful make targets
 
 .PHONY: all
 all: ## Build, test, and lint (default)
-	$(MAKE) test
-	$(MAKE) lint
+	$(MAKE) build
+	#$(MAKE) lint
 
 .PHONY: clean
 clean: ## Delete intermediate build artifacts
 	@# -X only removes untracked files, -d recurses into directories, -f actually removes files/dirs
 	git clean -Xdf
-
-
-.PHONY: test
-test: build ## Run unit tests
-	cd go/ && $(GO) test -vet=off -race -cover ./...
 
 .PHONY: build
 build: generate ## Build all packages
@@ -74,20 +78,36 @@ build: generate ## Build all packages
 .PHONY: lint
 lint: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and protobuf
 	test -z "$$($(BIN)/buf format -d . | tee /dev/stderr)"
-	cd go/ &&  $(GO) vet ./...
-	cd go/ && golangci-lint run
-	buf lint
+	$(call lint_golang,common)
+	$(call lint_golang,notification)
+	$(call lint_golang,ocr)
+	$(call lint_golang,partition)
+	$(call lint_golang,profile)
+	$(call lint_golang,property)
+	$(call lint_golang,settings)
+	$(call lint_golang,ledger)
+	$(call lint_golang,lostid)
+	cd proto/ && buf lint
 
 .PHONY: lintfix
 lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some lint errors
-	cd go/ && golangci-lint run --fix
-	buf format -w .
+	$(call lint_fix_golang,common)
+	$(call lint_fix_golang,notification)
+	$(call lint_fix_golang,ocr)
+	$(call lint_fix_golang,partition)
+	$(call lint_fix_golang,profile)
+	$(call lint_fix_golang,property)
+	$(call lint_fix_golang,settings)
+	$(call lint_fix_golang,ledger)
+	$(call lint_fix_golang,lostid)
+	cd proto/ && buf format -w .
 
 .PHONY: openapi_files_gen_go
 openapi_files_gen_go: ## Generate the golang open api spec for the files server
 	$(DOCKER) run --rm -v "${CUR_DIR}go/files:/local" \
 		openapitools/openapi-generator-cli generate \
-        -g go -o /local/ -p packageName=file_v1 \
+		-g go -o /local/ -p packageName=file_v1 \
+        --git-repo-id apis/go/files --git-user-id antinvestor \
         -i /local/v1/file.yaml
 
 .PHONY: generate_grpc_mocks
@@ -118,8 +138,10 @@ generate_buf_gen:
 		--year-range "$(COPYRIGHT_YEARS)" $(LICENSE_IGNORE)
 
 .PHONY: generate
-generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header generate_buf_gen generate_grpc_mocks openapi_files_gen_go  ## Regenerate code and licenses
-
+generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header  ## Regenerate code and licenses
+	$(MAKE) generate_buf_gen
+	$(MAKE) generate_grpc_mocks
+	$(MAKE) openapi_files_gen_go
 
 .PHONY: upgrade
 upgrade: ## Upgrade dependencies

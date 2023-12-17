@@ -17,15 +17,13 @@ syntax = "proto3";
 package payment.v1;
 
 import "buf/validate/validate.proto";
-import "v1/common.proto";
-
 import "google/protobuf/timestamp.proto";
 import "google/type/money.proto";
+import "v1/common.proto";
 
-option go_package = "paymentv1";
+option go_package = "github.com/antinvestor/apis/go/payment/v1;paymentv1";
 option java_multiple_files = true;
 option java_package = "paymentv1";
-
 
 message Payment {
   string id = 1;
@@ -63,7 +61,6 @@ message ReconcileResponse {
   string description = 5;
 }
 
-
 message SearchResponse {
   repeated Payment data = 1;
 }
@@ -76,7 +73,6 @@ message SendResponse {
   common.v1.StatusResponse data = 1;
 }
 
-
 message ReceiveRequest {
   Payment data = 1;
 }
@@ -84,7 +80,6 @@ message ReceiveRequest {
 message ReceiveResponse {
   common.v1.StatusResponse data = 1;
 }
-
 
 message ReleaseRequest {
   string access_id = 1 [
@@ -104,14 +99,12 @@ message ReleaseResponse {
   common.v1.StatusResponse data = 1;
 }
 
-
-
 service PaymentService {
   //Send method for queueing outbound payments as requested
-  rpc Send (SendRequest) returns (SendResponse);
+  rpc Send(SendRequest) returns (SendResponse);
 
   //Send method for queueing inbound payments as requested
-  rpc Receive (ReceiveRequest) returns (ReceiveResponse);
+  rpc Receive(ReceiveRequest) returns (ReceiveResponse);
 
   //Status request to determine if payment is prepared or released
   rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse);
@@ -125,5 +118,5 @@ service PaymentService {
   //Search method is for client request look for payments matching supplied details from the system
   rpc Search(common.v1.SearchRequest) returns (stream SearchResponse);
 
-  rpc Reconcile (ReconcileRequest) returns (ReconcileResponse);
+  rpc Reconcile(ReconcileRequest) returns (ReconcileResponse);
 }

@@ -19,7 +19,7 @@ package ocr.v1;
 import "buf/validate/validate.proto";
 import "v1/common.proto";
 
-option go_package = "ocrv1";
+option go_package = "github.com/antinvestor/apis/go/ocr/v1;ocrv1";
 option java_multiple_files = true;
 option java_package = "ocrv1";
 

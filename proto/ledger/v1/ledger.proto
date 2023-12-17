@@ -18,7 +18,7 @@ package ledger.v1;
 
 import "google/type/money.proto";
 
-option go_package = "ledgerv1";
+option go_package = "github.com/antinvestor/apis/go/ledger/v1;ledgerv1";
 option java_multiple_files = true;
 option java_package = "ledgerv1";
 

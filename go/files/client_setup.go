@@ -21,7 +21,7 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-const ctxKeyService = "filesClientKey"
+const ctxKeyService = apic.CtxServiceKey("filesClientKey")
 
 func defaultFilesClientOptions() []apic.ClientOption {
 	return []apic.ClientOption{

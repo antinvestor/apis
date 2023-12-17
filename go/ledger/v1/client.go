@@ -23,7 +23,7 @@ import (
 	"math"
 )
 
-const ctxKeyService = "ledgerClientKey"
+const ctxKeyService = apic.CtxServiceKey("ledgerClientKey")
 
 func defaultLedgerClientOptions() []apic.ClientOption {
 	return []apic.ClientOption{

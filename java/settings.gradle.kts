@@ -1,0 +1,10 @@
+rootProject.name = "apis"
+include("common")
+include("ledger")
+include("lostid")
+include("ocr")
+include("partition")
+include("payment")
+include("profile")
+include("property")
+include("settings")

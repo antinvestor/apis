@@ -8,7 +8,11 @@ managed:
       - buf.build/googleapis/googleapis
       - buf.build/antinvestor/common
   java_multiple_files: true
-  java_package_prefix: com.antinvestor.apis.partition
+  java_package_prefix: 
+    default: com.antinvestor.apis
+    except:
+      - buf.build/bufbuild/protovalidate
+      - buf.build/googleapis/googleapis
 
 plugins:
   - plugin: buf.build/grpc/go

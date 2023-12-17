@@ -23,7 +23,7 @@ import (
 	"math"
 )
 
-const ctxKeyService = "propertyClientKey"
+const ctxKeyService = apic.CtxServiceKey("propertyClientKey")
 
 func defaultPropertyClientOptions() []apic.ClientOption {
 	return []apic.ClientOption{

@@ -25,10 +25,10 @@ package file_v1
 
 import (
 	"context"
+	openapiclient "github.com/antinvestor/apis/go/files"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_file_v1_DefaultAPIService(t *testing.T) {
@@ -38,7 +38,7 @@ func Test_file_v1_DefaultAPIService(t *testing.T) {
 
 	t.Run("Test DefaultAPIService AddFile", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.AddFile(context.Background()).Execute()
 
@@ -50,7 +50,7 @@ func Test_file_v1_DefaultAPIService(t *testing.T) {
 
 	t.Run("Test DefaultAPIService DeleteFile", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var id string
 
@@ -63,7 +63,7 @@ func Test_file_v1_DefaultAPIService(t *testing.T) {
 
 	t.Run("Test DefaultAPIService FindFileById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var id string
 
@@ -77,7 +77,7 @@ func Test_file_v1_DefaultAPIService(t *testing.T) {
 
 	t.Run("Test DefaultAPIService FindFiles", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.FindFiles(context.Background()).Execute()
 

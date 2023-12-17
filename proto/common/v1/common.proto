@@ -16,12 +16,12 @@ syntax = "proto3";
 
 package common.v1;
 
+import "buf/validate/validate.proto";
+
 option cc_enable_arenas = true;
-option go_package = "github.com/antinvestor/apis/go/common;commonv1";
+option go_package = "github.com/antinvestor/apis/go/common/v1;commonv1";
 option java_multiple_files = true;
 option java_package = "commonv1";
-
-import "buf/validate/validate.proto";
 
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum STATE {
@@ -62,7 +62,6 @@ message StatusRequest {
   map<string, string> extras = 2;
 }
 
-
 message StatusResponse {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
@@ -75,7 +74,6 @@ message StatusResponse {
   string transient_id = 5;
   map<string, string> extras = 6;
 }
-
 
 message StatusUpdateRequest {
   string access_id = 1 [
@@ -97,4 +95,3 @@ message StatusUpdateRequest {
 message StatusUpdateResponse {
   StatusResponse data = 1;
 }
-

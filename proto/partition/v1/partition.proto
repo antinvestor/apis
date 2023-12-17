@@ -19,7 +19,7 @@ package partition.v1;
 import "buf/validate/validate.proto";
 import "v1/common.proto";
 
-option go_package = "partitionv1";
+option go_package = "github.com/antinvestor/apis/go/partition/v1;partitionv1";
 option java_multiple_files = true;
 option java_package = "partitionv1";
 
