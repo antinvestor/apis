@@ -13,6 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: bufbuild/buf-setup-action@v1
+      - run: cd proto/${{ matrix.api_module }} && buf mod update
+
       - uses: bufbuild/buf-lint-action@v1
         with:
           input: "proto/${{ matrix.api_module }}"

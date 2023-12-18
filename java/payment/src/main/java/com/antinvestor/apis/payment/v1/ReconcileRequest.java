@@ -212,11 +212,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int COUNTRYCODE_FIELD_NUMBER = 6;
+  public static final int COUNTRY_CODE_FIELD_NUMBER = 6;
   @SuppressWarnings("serial")
   private volatile java.lang.Object countryCode_ = "";
   /**
-   * <code>string countryCode = 6 [json_name = "countryCode"];</code>
+   * <code>string country_code = 6 [json_name = "countryCode"];</code>
    * @return The countryCode.
    */
   @java.lang.Override
@@ -233,7 +233,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string countryCode = 6 [json_name = "countryCode"];</code>
+   * <code>string country_code = 6 [json_name = "countryCode"];</code>
    * @return The bytes for countryCode.
    */
   @java.lang.Override
@@ -366,7 +366,7 @@ private static final long serialVersionUID = 0L;
     }
     hash = (37 * hash) + OWNER_FIELD_NUMBER;
     hash = (53 * hash) + getOwner().hashCode();
-    hash = (37 * hash) + COUNTRYCODE_FIELD_NUMBER;
+    hash = (37 * hash) + COUNTRY_CODE_FIELD_NUMBER;
     hash = (53 * hash) + getCountryCode().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -1089,7 +1089,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object countryCode_ = "";
     /**
-     * <code>string countryCode = 6 [json_name = "countryCode"];</code>
+     * <code>string country_code = 6 [json_name = "countryCode"];</code>
      * @return The countryCode.
      */
     public java.lang.String getCountryCode() {
@@ -1105,7 +1105,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string countryCode = 6 [json_name = "countryCode"];</code>
+     * <code>string country_code = 6 [json_name = "countryCode"];</code>
      * @return The bytes for countryCode.
      */
     public com.google.protobuf.ByteString
@@ -1122,7 +1122,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string countryCode = 6 [json_name = "countryCode"];</code>
+     * <code>string country_code = 6 [json_name = "countryCode"];</code>
      * @param value The countryCode to set.
      * @return This builder for chaining.
      */
@@ -1135,7 +1135,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string countryCode = 6 [json_name = "countryCode"];</code>
+     * <code>string country_code = 6 [json_name = "countryCode"];</code>
      * @return This builder for chaining.
      */
     public Builder clearCountryCode() {
@@ -1145,7 +1145,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string countryCode = 6 [json_name = "countryCode"];</code>
+     * <code>string country_code = 6 [json_name = "countryCode"];</code>
      * @param value The bytes for countryCode to set.
      * @return This builder for chaining.
      */

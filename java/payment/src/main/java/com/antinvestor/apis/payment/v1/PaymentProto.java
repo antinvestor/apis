@@ -95,72 +95,70 @@ public final class PaymentProto {
     java.lang.String[] descriptorData = {
       "\n\030payment/v1/payment.proto\022\npayment.v1\032\033" +
       "buf/validate/validate.proto\032\026common/v1/c" +
-      "ommon.proto\032\037google/protobuf/timestamp.p" +
-      "roto\032\027google/type/money.proto\"\203\005\n\007Paymen" +
-      "t\022\016\n\002id\030\001 \001(\tR\002id\022%\n\016transaction_id\030\002 \001(" +
-      "\tR\rtransactionId\022!\n\014reference_id\030\003 \001(\tR\013" +
-      "referenceId\022\031\n\010batch_id\030\004 \001(\tR\007batchId\0226" +
-      "\n\027external_transaction_id\030\005 \001(\tR\025externa" +
-      "lTransactionId\022\024\n\005route\030\006 \001(\tR\005route\022\026\n\006" +
-      "source\030\007 \001(\tR\006source\022 \n\013destination\030\010 \001(" +
-      "\tR\013destination\022*\n\006amount\030\t \001(\0132\022.google." +
-      "type.MoneyR\006amount\022&\n\004cost\030\n \001(\0132\022.googl" +
-      "e.type.MoneyR\004cost\022&\n\005state\030\013 \001(\0162\020.comm" +
-      "on.v1.STATER\005state\022)\n\006status\030\014 \001(\0162\021.com" +
-      "mon.v1.STATUSR\006status\022!\n\014date_created\030\r " +
-      "\001(\tR\013dateCreated\022%\n\016date_processed\030\016 \001(\t" +
-      "R\rdateProcessed\022\032\n\010outbound\030\017 \001(\010R\010outbo" +
-      "und\0224\n\005extra\030\020 \003(\0132\036.payment.v1.Payment." +
-      "ExtraEntryR\005extra\0328\n\nExtraEntry\022\020\n\003key\030\001" +
-      " \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\340\001\n\020" +
-      "ReconcileRequest\0226\n\027external_transaction" +
-      "_id\030\001 \001(\tR\025externalTransactionId\022\024\n\005rout" +
-      "e\030\002 \001(\tR\005route\022\032\n\010outbound\030\003 \001(\010R\010outbou" +
-      "nd\022*\n\006amount\030\004 \001(\0132\022.google.type.MoneyR\006" +
-      "amount\022\024\n\005owner\030\005 \001(\tR\005owner\022 \n\013countryC" +
-      "ode\030\006 \001(\tR\013countryCode\"\272\001\n\021ReconcileResp" +
-      "onse\022\016\n\002id\030\001 \001(\tR\002id\022%\n\016transaction_id\030\002" +
-      " \001(\tR\rtransactionId\022!\n\014reference_id\030\003 \001(" +
-      "\tR\013referenceId\022)\n\006status\030\004 \001(\0162\021.common." +
-      "v1.STATUSR\006status\022 \n\013description\030\005 \001(\tR\013" +
-      "description\"9\n\016SearchResponse\022\'\n\004data\030\001 " +
-      "\003(\0132\023.payment.v1.PaymentR\004data\"6\n\013SendRe" +
-      "quest\022\'\n\004data\030\001 \001(\0132\023.payment.v1.Payment" +
-      "R\004data\"=\n\014SendResponse\022-\n\004data\030\001 \001(\0132\031.c" +
-      "ommon.v1.StatusResponseR\004data\"9\n\016Receive" +
-      "Request\022\'\n\004data\030\001 \001(\0132\023.payment.v1.Payme" +
-      "ntR\004data\"@\n\017ReceiveResponse\022-\n\004data\030\001 \001(" +
-      "\0132\031.common.v1.StatusResponseR\004data\"\221\001\n\016R" +
-      "eleaseRequest\0228\n\taccess_id\030\001 \001(\tB\033\272H\030r\026\020" +
-      "\003\030(2\020[0-9a-z_-]{3,20}R\010accessId\022+\n\002id\030\002 " +
-      "\001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\030\n\007" +
-      "comment\030\003 \001(\tR\007comment\"@\n\017ReleaseRespons" +
-      "e\022-\n\004data\030\001 \001(\0132\031.common.v1.StatusRespon" +
-      "seR\004data2\357\003\n\016PaymentService\0229\n\004Send\022\027.pa" +
-      "yment.v1.SendRequest\032\030.payment.v1.SendRe" +
-      "sponse\022B\n\007Receive\022\032.payment.v1.ReceiveRe" +
-      "quest\032\033.payment.v1.ReceiveResponse\022=\n\006St" +
-      "atus\022\030.common.v1.StatusRequest\032\031.common." +
-      "v1.StatusResponse\022O\n\014StatusUpdate\022\036.comm" +
-      "on.v1.StatusUpdateRequest\032\037.common.v1.St" +
-      "atusUpdateResponse\022B\n\007Release\022\032.payment." +
-      "v1.ReleaseRequest\032\033.payment.v1.ReleaseRe" +
-      "sponse\022@\n\006Search\022\030.common.v1.SearchReque" +
-      "st\032\032.payment.v1.SearchResponse0\001\022H\n\tReco" +
-      "ncile\022\034.payment.v1.ReconcileRequest\032\035.pa" +
-      "yment.v1.ReconcileResponseB\265\001\n\037com.antin" +
-      "vestor.apis.payment.v1B\014PaymentProtoP\001Z;" +
-      "github.com/antinvestor/apis/go/payment/p" +
-      "ayment/v1;paymentv1\242\002\003PXX\252\002\nPayment.V1\312\002" +
-      "\nPayment\\V1\342\002\026Payment\\V1\\GPBMetadata\352\002\013P" +
-      "ayment::V1b\006proto3"
+      "ommon.proto\032\027google/type/money.proto\"\203\005\n" +
+      "\007Payment\022\016\n\002id\030\001 \001(\tR\002id\022%\n\016transaction_" +
+      "id\030\002 \001(\tR\rtransactionId\022!\n\014reference_id\030" +
+      "\003 \001(\tR\013referenceId\022\031\n\010batch_id\030\004 \001(\tR\007ba" +
+      "tchId\0226\n\027external_transaction_id\030\005 \001(\tR\025" +
+      "externalTransactionId\022\024\n\005route\030\006 \001(\tR\005ro" +
+      "ute\022\026\n\006source\030\007 \001(\tR\006source\022 \n\013destinati" +
+      "on\030\010 \001(\tR\013destination\022*\n\006amount\030\t \001(\0132\022." +
+      "google.type.MoneyR\006amount\022&\n\004cost\030\n \001(\0132" +
+      "\022.google.type.MoneyR\004cost\022&\n\005state\030\013 \001(\016" +
+      "2\020.common.v1.STATER\005state\022)\n\006status\030\014 \001(" +
+      "\0162\021.common.v1.STATUSR\006status\022!\n\014date_cre" +
+      "ated\030\r \001(\tR\013dateCreated\022%\n\016date_processe" +
+      "d\030\016 \001(\tR\rdateProcessed\022\032\n\010outbound\030\017 \001(\010" +
+      "R\010outbound\0224\n\005extra\030\020 \003(\0132\036.payment.v1.P" +
+      "ayment.ExtraEntryR\005extra\0328\n\nExtraEntry\022\020" +
+      "\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\002" +
+      "8\001\"\341\001\n\020ReconcileRequest\0226\n\027external_tran" +
+      "saction_id\030\001 \001(\tR\025externalTransactionId\022" +
+      "\024\n\005route\030\002 \001(\tR\005route\022\032\n\010outbound\030\003 \001(\010R" +
+      "\010outbound\022*\n\006amount\030\004 \001(\0132\022.google.type." +
+      "MoneyR\006amount\022\024\n\005owner\030\005 \001(\tR\005owner\022!\n\014c" +
+      "ountry_code\030\006 \001(\tR\013countryCode\"\272\001\n\021Recon" +
+      "cileResponse\022\016\n\002id\030\001 \001(\tR\002id\022%\n\016transact" +
+      "ion_id\030\002 \001(\tR\rtransactionId\022!\n\014reference" +
+      "_id\030\003 \001(\tR\013referenceId\022)\n\006status\030\004 \001(\0162\021" +
+      ".common.v1.STATUSR\006status\022 \n\013description" +
+      "\030\005 \001(\tR\013description\"9\n\016SearchResponse\022\'\n" +
+      "\004data\030\001 \003(\0132\023.payment.v1.PaymentR\004data\"6" +
+      "\n\013SendRequest\022\'\n\004data\030\001 \001(\0132\023.payment.v1" +
+      ".PaymentR\004data\"=\n\014SendResponse\022-\n\004data\030\001" +
+      " \001(\0132\031.common.v1.StatusResponseR\004data\"9\n" +
+      "\016ReceiveRequest\022\'\n\004data\030\001 \001(\0132\023.payment." +
+      "v1.PaymentR\004data\"@\n\017ReceiveResponse\022-\n\004d" +
+      "ata\030\001 \001(\0132\031.common.v1.StatusResponseR\004da" +
+      "ta\"\221\001\n\016ReleaseRequest\0228\n\taccess_id\030\001 \001(\t" +
+      "B\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010accessId\022" +
+      "+\n\002id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}" +
+      "R\002id\022\030\n\007comment\030\003 \001(\tR\007comment\"@\n\017Releas" +
+      "eResponse\022-\n\004data\030\001 \001(\0132\031.common.v1.Stat" +
+      "usResponseR\004data2\357\003\n\016PaymentService\0229\n\004S" +
+      "end\022\027.payment.v1.SendRequest\032\030.payment.v" +
+      "1.SendResponse\022B\n\007Receive\022\032.payment.v1.R" +
+      "eceiveRequest\032\033.payment.v1.ReceiveRespon" +
+      "se\022=\n\006Status\022\030.common.v1.StatusRequest\032\031" +
+      ".common.v1.StatusResponse\022O\n\014StatusUpdat" +
+      "e\022\036.common.v1.StatusUpdateRequest\032\037.comm" +
+      "on.v1.StatusUpdateResponse\022B\n\007Release\022\032." +
+      "payment.v1.ReleaseRequest\032\033.payment.v1.R" +
+      "eleaseResponse\022@\n\006Search\022\030.common.v1.Sea" +
+      "rchRequest\032\032.payment.v1.SearchResponse0\001" +
+      "\022H\n\tReconcile\022\034.payment.v1.ReconcileRequ" +
+      "est\032\035.payment.v1.ReconcileResponseB\265\001\n\037c" +
+      "om.antinvestor.apis.payment.v1B\014PaymentP" +
+      "rotoP\001Z;github.com/antinvestor/apis/go/p" +
+      "ayment/payment/v1;paymentv1\242\002\003PXX\252\002\nPaym" +
+      "ent.V1\312\002\nPayment\\V1\342\002\026Payment\\V1\\GPBMeta" +
+      "data\352\002\013Payment::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           build.buf.validate.ValidateProto.getDescriptor(),
           com.antinvestor.apis.common.v1.CommonProto.getDescriptor(),
-          com.google.protobuf.TimestampProto.getDescriptor(),
           com.google.type.MoneyProto.getDescriptor(),
         });
     internal_static_payment_v1_Payment_descriptor =
@@ -236,7 +234,6 @@ public final class PaymentProto {
         .internalUpdateFileDescriptor(descriptor, registry);
     build.buf.validate.ValidateProto.getDescriptor();
     com.antinvestor.apis.common.v1.CommonProto.getDescriptor();
-    com.google.protobuf.TimestampProto.getDescriptor();
     com.google.type.MoneyProto.getDescriptor();
   }
 

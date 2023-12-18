@@ -5,5 +5,5 @@ repos:
         name: Locally build
         description: A local make file to always build and test locally
         entry: make
-        files: '\.go$'
+        files: '\.proto$'
         language: 'system'

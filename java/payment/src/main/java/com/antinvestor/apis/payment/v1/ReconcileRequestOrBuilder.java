@@ -80,12 +80,12 @@ public interface ReconcileRequestOrBuilder extends
       getOwnerBytes();
 
   /**
-   * <code>string countryCode = 6 [json_name = "countryCode"];</code>
+   * <code>string country_code = 6 [json_name = "countryCode"];</code>
    * @return The countryCode.
    */
   java.lang.String getCountryCode();
   /**
-   * <code>string countryCode = 6 [json_name = "countryCode"];</code>
+   * <code>string country_code = 6 [json_name = "countryCode"];</code>
    * @return The bytes for countryCode.
    */
   com.google.protobuf.ByteString
