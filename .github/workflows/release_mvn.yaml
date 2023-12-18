@@ -24,7 +24,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
+        uses: gradle/wrapper-validation-action@342dbebe7272035434f9baccc29a816ec6dd2c7b
       - name: Publish package
         uses: gradle/gradle-build-action@f95e9c74599bc49122b76ecfe1306f0034f87266
         with:
