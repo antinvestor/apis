@@ -1,5 +1,5 @@
 version: v1
-name: buf.build/antinvestor/settings
+name: buf.build/antinvestor/setting-s
 breaking:
   use:
     - FILE
