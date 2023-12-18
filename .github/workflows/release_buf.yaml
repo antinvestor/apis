@@ -23,7 +23,7 @@ jobs:
 
           # The 'main' branch of the GitHub repository that defines the module.
           # Note we specify the subdir to compare against.
-          against: "https://github.com/${GITHUB_REPOSITORY}.git#branch=main,ref=HEAD~1,subdir=proto"
+          against: "https://github.com/${GITHUB_REPOSITORY}.git#branch=main,ref=HEAD~1,subdir=proto/${{ matrix.api_module }}"
 
       - uses: bufbuild/buf-push-action@v1
         with:
