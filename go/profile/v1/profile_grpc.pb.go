@@ -16,7 +16,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: v1/profile.proto
+// source: profile/v1/profile.proto
 
 package profilev1
 
@@ -566,5 +566,5 @@ var ProfileService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "v1/profile.proto",
+	Metadata: "profile/v1/profile.proto",
 }

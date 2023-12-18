@@ -20,7 +20,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.60.0)",
-    comments = "Source: v1/partition.proto")
+    comments = "Source: partition/v1/partition.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class PartitionServiceGrpc {
 

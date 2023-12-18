@@ -16,11 +16,11 @@ managed:
 
 plugins:
   - plugin: buf.build/grpc/go
-    out: ../../go/payment/
+    out: ../../go/
     opt:
       - paths=source_relative
   - plugin: buf.build/protocolbuffers/go
-    out: ../../go/payment/
+    out: ../../go/
     opt: paths=source_relative
   - plugin: buf.build/grpc/java
     out: ../../java/payment/src/main/java/

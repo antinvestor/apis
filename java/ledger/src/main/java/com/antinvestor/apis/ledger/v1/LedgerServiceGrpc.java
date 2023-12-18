@@ -23,7 +23,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.60.0)",
-    comments = "Source: v1/ledger.proto")
+    comments = "Source: ledger/v1/ledger.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class LedgerServiceGrpc {
 

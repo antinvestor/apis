@@ -16,7 +16,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: v1/ledger.proto
+// source: ledger/v1/ledger.proto
 
 package ledgerv1
 
@@ -620,5 +620,5 @@ var LedgerService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "v1/ledger.proto",
+	Metadata: "ledger/v1/ledger.proto",
 }

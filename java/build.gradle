@@ -86,7 +86,6 @@ subprojects {
         runtimeOnly "io.grpc:grpc-netty-shaded:1.60.0"
     }
 
-
     jar {
         manifest {
             attributes(

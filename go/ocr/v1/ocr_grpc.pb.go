@@ -16,7 +16,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: v1/ocr.proto
+// source: ocr/v1/ocr.proto
 
 package ocrv1
 
@@ -160,5 +160,5 @@ var OCRService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "v1/ocr.proto",
+	Metadata: "ocr/v1/ocr.proto",
 }

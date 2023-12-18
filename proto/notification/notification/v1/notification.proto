@@ -16,7 +16,8 @@ syntax = "proto3";
 
 package notification.v1;
 
-import "v1/common.proto";
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
 
 option go_package = "github.com/antinvestor/apis/go/notification/v1;notificationv1";
 option java_multiple_files = true;

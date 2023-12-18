@@ -40,12 +40,15 @@ cd proto/${1} && PATH=$(BIN) $(BIN)/buf mod update
 cd proto/${1} && PATH=$(BIN) $(BIN)/buf generate
 endef
 
-define lint_golang
+define lint_module
+cd proto/${1} && PATH=$(BIN) $(BIN)/buf lint
 cd go/${1} && $(GO) vet ./...
 cd go/${1} && golangci-lint run
 endef
 
-define lint_fix_golang
+define lint_fix_module
+cd proto/${1} && PATH=$(BIN) $(BIN)/buf mod update
+cd proto/${1} && PATH=$(BIN) $(BIN)/buf format -w .
 cd go/${1} && golangci-lint run --fix
 endef
 
@@ -56,7 +59,7 @@ help: ## Describe useful make targets
 .PHONY: all
 all: ## Build, test, and lint (default)
 	$(MAKE) build
-	#$(MAKE) lint
+	$(MAKE) lint
 
 .PHONY: clean
 clean: ## Delete intermediate build artifacts
@@ -78,29 +81,29 @@ build: generate ## Build all packages
 .PHONY: lint
 lint: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and protobuf
 	test -z "$$($(BIN)/buf format -d . | tee /dev/stderr)"
-	$(call lint_golang,common)
-	$(call lint_golang,notification)
-	$(call lint_golang,ocr)
-	$(call lint_golang,partition)
-	$(call lint_golang,profile)
-	$(call lint_golang,property)
-	$(call lint_golang,settings)
-	$(call lint_golang,ledger)
-	$(call lint_golang,lostid)
-	cd proto/ && buf lint
+	$(call lint_module,common)
+	$(call lint_module,notification)
+	$(call lint_module,ocr)
+	$(call lint_module,partition)
+	$(call lint_module,profile)
+	$(call lint_module,property)
+	$(call lint_module,settings)
+	$(call lint_module,ledger)
+	$(call lint_module,lostid)
+
 
 .PHONY: lintfix
 lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some lint errors
-	$(call lint_fix_golang,common)
-	$(call lint_fix_golang,notification)
-	$(call lint_fix_golang,ocr)
-	$(call lint_fix_golang,partition)
-	$(call lint_fix_golang,profile)
-	$(call lint_fix_golang,property)
-	$(call lint_fix_golang,settings)
-	$(call lint_fix_golang,ledger)
-	$(call lint_fix_golang,lostid)
-	cd proto/ && buf format -w .
+	$(call lint_fix_module,common)
+	$(call lint_fix_module,notification)
+	$(call lint_fix_module,ocr)
+	$(call lint_fix_module,partition)
+	$(call lint_fix_module,profile)
+	$(call lint_fix_module,property)
+	$(call lint_fix_module,settings)
+	$(call lint_fix_module,ledger)
+	$(call lint_fix_module,lostid)
+
 
 .PHONY: openapi_files_gen_go
 openapi_files_gen_go: ## Generate the golang open api spec for the files server

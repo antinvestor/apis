@@ -1,21 +1,25 @@
-name: Upload Api
+name: Upload to buf.build
 on:
   push:
     branches:
       - main
 jobs:
   build:
+    strategy:
+      matrix:
+        api_module: [ common,ledger,lostid,notification,ocr,partition,payment,profile,property,settings ]
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: bufbuild/buf-setup-action@v1
       - uses: bufbuild/buf-lint-action@v1
         with:
-          input: "proto"
+          input: "proto/${{ matrix.api_module }}"
 
       - uses: bufbuild/buf-breaking-action@v1
         with:
-          input: "proto"
+          input: "proto/${{ matrix.api_module }}"
 
           # The 'main' branch of the GitHub repository that defines the module.
           # Note we specify the subdir to compare against.
@@ -23,5 +27,5 @@ jobs:
 
       - uses: bufbuild/buf-push-action@v1
         with:
-          input: "proto"
+          input: "proto/${{ matrix.api_module }}"
           buf_token: ${{ secrets.BUF_TOKEN }}

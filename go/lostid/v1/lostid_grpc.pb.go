@@ -16,7 +16,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: v1/lostid.proto
+// source: lostid/v1/lostid.proto
 
 package lostidv1
 
@@ -390,5 +390,5 @@ var LostIdService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "v1/lostid.proto",
+	Metadata: "lostid/v1/lostid.proto",
 }
