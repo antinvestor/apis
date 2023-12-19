@@ -45,12 +45,13 @@ enum STATUS {
 
 message SearchRequest {
   string query = 1;
-  int64 page = 2;
-  int32 count = 3;
-  string start_date = 4;
-  string end_date = 5;
-  repeated string properties = 6;
-  map<string, string> extras = 7;
+  string id_query = 2;
+  int64 page = 3;
+  int32 count = 4;
+  string start_date = 5;
+  string end_date = 6;
+  repeated string properties = 7;
+  map<string, string> extras = 8;
 }
 
 message StatusRequest {

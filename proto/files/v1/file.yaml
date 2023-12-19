@@ -28,12 +28,16 @@ components:
       properties:
         id:
           type: string
+        owner_id:
+          type: string
         group_id:
           type: string
-        access_id:
+        sub_group_id:
           type: string
         public:
           type: boolean         
+        description:
+          type: string
         name:
           type: string
         url:
@@ -53,7 +57,13 @@ components:
     UnauthorizedError:
       description: Access token is missing or invalid
 
-
+  responses:
+    UnauthorizedError:
+      description: "Access token is missing or invalid"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UnauthorizedError"
 
 security:
   - bearerAuth: []
@@ -65,7 +75,7 @@ paths:
         
       operationId: findFiles
       parameters:
-        - name: subscription_id
+        - name: owner_id
           in: query
           description: filters the files by the subscription by
           required: false
@@ -81,6 +91,13 @@ paths:
             type: string 
             pattern: '[0-9a-z_-]{3,20}'
             example: '9bsv0s09a5j002njlptg'   
+        - name: sub_group_id
+          in: query
+          description: filters the files by the sub grouping id
+          required: false
+          schema:
+            type: string
+            example: 'front side'
         - name: limit
           in: query
           description: maximum number of results to return
@@ -125,16 +142,22 @@ paths:
                   type: string
                   pattern: '[0-9a-z_-]{3,20}'
                   example: '9bsv0s09a5j002njlpvg'
-                access_id:
+                sub_group_id:
+                  type: string
+                  example: 'front_side'
+                owner_id:
                   type: string
                   pattern: '[0-9a-z_-]{3,20}'
                   example: '9bsv0s09a5j002njlptg'
                 public:
                   type: boolean
                   default: false         
-                name:
+                description:
                   type: string  
-                  example: 'uploadfile.txt'                
+                  example: 'Users id details'
+                name:
+                  type: string
+                  example: 'uploadfile.txt'
                 fileObject:
                   type: string
                   format: binary
@@ -205,4 +228,3 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-

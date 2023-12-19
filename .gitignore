@@ -178,3 +178,17 @@ yarn-debug.log*
 yarn-error.log*
 
 .jpb/
+
+#============================================== ignore files =================================
+java/files/.gitignore
+java/files/.travis.yml
+java/files/build.sbt
+java/files/git_push.sh
+java/files/gradle.properties
+java/files/gradlew
+java/files/gradlew.bat
+java/files/pox.xml
+java/files/settings.gradle
+java/files/gradle/wrapper/gradle-wrapper.jar
+java/files/gradle/wrapper/gradle-wrapper.properties
+java/files/.github

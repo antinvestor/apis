@@ -107,11 +107,31 @@ lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some
 
 .PHONY: openapi_files_gen_go
 openapi_files_gen_go: ## Generate the golang open api spec for the files server
-	$(DOCKER) run --rm -v "${CUR_DIR}go/files:/local" \
+	$(DOCKER) run --rm \
+		-v "${CUR_DIR}proto/files:/local/proto" \
+		-v "${CUR_DIR}go/files:/local/golang" \
 		openapitools/openapi-generator-cli generate \
-		-g go -o /local/ -p packageName=file_v1 \
+		-g go -o /local/golang/ -p packageName=file_v1 \
         --git-repo-id apis/go/files --git-user-id antinvestor \
-        -i /local/v1/file.yaml
+        -i /local/proto/v1/file.yaml
+
+
+.PHONY: openapi_files_gen_java
+openapi_files_gen_java: ## Generate the java open api spec for the files server
+	$(DOCKER) run --rm \
+		-v "${CUR_DIR}proto/files:/local/proto" \
+		-v "${CUR_DIR}java/files:/local/java" \
+		openapitools/openapi-generator-cli generate \
+		-g java -o /local/java/ \
+		--git-repo-id apis/java/files --git-user-id antinvestor \
+        --additional-properties artifactId=files,hideGenerationTimestamp=true,groupId=com.antinvestor.apis,library=native \
+        --package-name com.antinvestor.apis.files \
+        --api-package com.antinvestor.apis.files.api \
+        --invoker-package com.antinvestor.apis.files.invoker \
+        --model-package com.antinvestor.apis.files.model \
+        --artifact-id files \
+        -i /local/proto/v1/file.yaml
+
 
 .PHONY: generate_grpc_mocks
 generate_grpc_mocks:
@@ -146,6 +166,7 @@ generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header  ## Regenerate code and
 	$(MAKE) generate_buf_gen
 	$(MAKE) generate_grpc_mocks
 	$(MAKE) openapi_files_gen_go
+	$(MAKE) openapi_files_gen_java
 
 .PHONY: upgrade
 upgrade: ## Upgrade dependencies

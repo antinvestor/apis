@@ -5,9 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** |  | [optional] 
+**OwnerId** | Pointer to **string** |  | [optional] 
 **GroupId** | Pointer to **string** |  | [optional] 
-**AccessId** | Pointer to **string** |  | [optional] 
+**SubGroupId** | Pointer to **string** |  | [optional] 
 **Public** | Pointer to **bool** |  | [optional] 
+**Description** | Pointer to **string** |  | [optional] 
 **Name** | **string** |  | 
 **Url** | Pointer to **string** |  | [optional] 
 
@@ -55,6 +57,31 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
+### GetOwnerId
+
+`func (o *File) GetOwnerId() string`
+
+GetOwnerId returns the OwnerId field if non-nil, zero value otherwise.
+
+### GetOwnerIdOk
+
+`func (o *File) GetOwnerIdOk() (*string, bool)`
+
+GetOwnerIdOk returns a tuple with the OwnerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOwnerId
+
+`func (o *File) SetOwnerId(v string)`
+
+SetOwnerId sets OwnerId field to given value.
+
+### HasOwnerId
+
+`func (o *File) HasOwnerId() bool`
+
+HasOwnerId returns a boolean if a field has been set.
+
 ### GetGroupId
 
 `func (o *File) GetGroupId() string`
@@ -80,30 +107,30 @@ SetGroupId sets GroupId field to given value.
 
 HasGroupId returns a boolean if a field has been set.
 
-### GetAccessId
+### GetSubGroupId
 
-`func (o *File) GetAccessId() string`
+`func (o *File) GetSubGroupId() string`
 
-GetAccessId returns the AccessId field if non-nil, zero value otherwise.
+GetSubGroupId returns the SubGroupId field if non-nil, zero value otherwise.
 
-### GetAccessIdOk
+### GetSubGroupIdOk
 
-`func (o *File) GetAccessIdOk() (*string, bool)`
+`func (o *File) GetSubGroupIdOk() (*string, bool)`
 
-GetAccessIdOk returns a tuple with the AccessId field if it's non-nil, zero value otherwise
+GetSubGroupIdOk returns a tuple with the SubGroupId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAccessId
+### SetSubGroupId
 
-`func (o *File) SetAccessId(v string)`
+`func (o *File) SetSubGroupId(v string)`
 
-SetAccessId sets AccessId field to given value.
+SetSubGroupId sets SubGroupId field to given value.
 
-### HasAccessId
+### HasSubGroupId
 
-`func (o *File) HasAccessId() bool`
+`func (o *File) HasSubGroupId() bool`
 
-HasAccessId returns a boolean if a field has been set.
+HasSubGroupId returns a boolean if a field has been set.
 
 ### GetPublic
 
@@ -129,6 +156,31 @@ SetPublic sets Public field to given value.
 `func (o *File) HasPublic() bool`
 
 HasPublic returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *File) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *File) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *File) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *File) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
 
 ### GetName
 

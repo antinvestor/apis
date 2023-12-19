@@ -26,7 +26,7 @@ paths:
       - description: filters the files by the subscription by
         explode: true
         in: query
-        name: subscription_id
+        name: owner_id
         required: false
         schema:
           example: 9bsv0s09a5j002njlpvg
@@ -41,6 +41,15 @@ paths:
         schema:
           example: 9bsv0s09a5j002njlptg
           pattern: "[0-9a-z_-]{3,20}"
+          type: string
+        style: form
+      - description: filters the files by the sub grouping id
+        explode: true
+        in: query
+        name: sub_group_id
+        required: false
+        schema:
+          example: front side
           type: string
         style: form
       - description: maximum number of results to return
@@ -69,7 +78,11 @@ paths:
                 type: array
           description: files response
         "401":
-          $ref: '#/components/responses/UnauthorizedError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+          description: Access token is missing or invalid
         default:
           content:
             application/json:
@@ -94,7 +107,11 @@ paths:
                 $ref: '#/components/schemas/File'
           description: file response
         "401":
-          $ref: '#/components/responses/UnauthorizedError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+          description: Access token is missing or invalid
         default:
           content:
             application/json:
@@ -120,7 +137,11 @@ paths:
         "204":
           description: file deleted
         "401":
-          $ref: '#/components/responses/UnauthorizedError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+          description: Access token is missing or invalid
         default:
           content:
             application/json:
@@ -150,7 +171,11 @@ paths:
                 type: string
           description: file response
         "401":
-          $ref: '#/components/responses/UnauthorizedError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+          description: Access token is missing or invalid
         default:
           content:
             application/json:
@@ -158,24 +183,37 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: unexpected error
 components:
+  responses:
+    UnauthorizedError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnauthorizedError'
+      description: Access token is missing or invalid
   schemas:
     File:
       example:
         public: true
         group_id: group_id
+        owner_id: owner_id
         name: name
-        access_id: access_id
+        sub_group_id: sub_group_id
+        description: description
         id: id
         url: url
       properties:
         id:
           type: string
+        owner_id:
+          type: string
         group_id:
           type: string
-        access_id:
+        sub_group_id:
           type: string
         public:
           type: boolean
+        description:
+          type: string
         name:
           type: string
         url:
@@ -200,13 +238,19 @@ components:
           example: 9bsv0s09a5j002njlpvg
           pattern: "[0-9a-z_-]{3,20}"
           type: string
-        access_id:
+        sub_group_id:
+          example: front_side
+          type: string
+        owner_id:
           example: 9bsv0s09a5j002njlptg
           pattern: "[0-9a-z_-]{3,20}"
           type: string
         public:
           default: false
           type: boolean
+        description:
+          example: Users id details
+          type: string
         name:
           example: uploadfile.txt
           type: string

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## AddFile
 
-> File AddFile(ctx).GroupId(groupId).AccessId(accessId).Public(public).Name(name).FileObject(fileObject).Execute()
+> File AddFile(ctx).GroupId(groupId).SubGroupId(subGroupId).OwnerId(ownerId).Public(public).Description(description).Name(name).FileObject(fileObject).Execute()
 
 
 
@@ -33,14 +33,16 @@ import (
 
 func main() {
 	groupId := "groupId_example" // string |  (optional)
-	accessId := "accessId_example" // string |  (optional)
+	subGroupId := "subGroupId_example" // string |  (optional)
+	ownerId := "ownerId_example" // string |  (optional)
 	public := true // bool |  (optional) (default to false)
+	description := "description_example" // string |  (optional)
 	name := "name_example" // string |  (optional)
 	fileObject := os.NewFile(1234, "some_file") // *os.File |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.AddFile(context.Background()).GroupId(groupId).AccessId(accessId).Public(public).Name(name).FileObject(fileObject).Execute()
+	resp, r, err := apiClient.DefaultAPI.AddFile(context.Background()).GroupId(groupId).SubGroupId(subGroupId).OwnerId(ownerId).Public(public).Description(description).Name(name).FileObject(fileObject).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.AddFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -62,8 +64,10 @@ Other parameters are passed through a pointer to a apiAddFileRequest struct via 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **groupId** | **string** |  | 
- **accessId** | **string** |  | 
+ **subGroupId** | **string** |  | 
+ **ownerId** | **string** |  | 
  **public** | **bool** |  | [default to false]
+ **description** | **string** |  | 
  **name** | **string** |  | 
  **fileObject** | ***os.File** |  | 
 
@@ -225,7 +229,7 @@ Name | Type | Description  | Notes
 
 ## FindFiles
 
-> []File FindFiles(ctx).SubscriptionId(subscriptionId).GroupId(groupId).Limit(limit).Page(page).Execute()
+> []File FindFiles(ctx).OwnerId(ownerId).GroupId(groupId).SubGroupId(subGroupId).Limit(limit).Page(page).Execute()
 
 
 
@@ -244,14 +248,15 @@ import (
 )
 
 func main() {
-	subscriptionId := "9bsv0s09a5j002njlpvg" // string | filters the files by the subscription by (optional)
+	ownerId := "9bsv0s09a5j002njlpvg" // string | filters the files by the subscription by (optional)
 	groupId := "9bsv0s09a5j002njlptg" // string | filters the files by the grouping id (optional)
+	subGroupId := "front side" // string | filters the files by the sub grouping id (optional)
 	limit := int32(56) // int32 | maximum number of results to return (optional)
 	page := int32(56) // int32 | maximum number of results to return (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.FindFiles(context.Background()).SubscriptionId(subscriptionId).GroupId(groupId).Limit(limit).Page(page).Execute()
+	resp, r, err := apiClient.DefaultAPI.FindFiles(context.Background()).OwnerId(ownerId).GroupId(groupId).SubGroupId(subGroupId).Limit(limit).Page(page).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.FindFiles``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -272,8 +277,9 @@ Other parameters are passed through a pointer to a apiFindFilesRequest struct vi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **subscriptionId** | **string** | filters the files by the subscription by | 
+ **ownerId** | **string** | filters the files by the subscription by | 
  **groupId** | **string** | filters the files by the grouping id | 
+ **subGroupId** | **string** | filters the files by the sub grouping id | 
  **limit** | **int32** | maximum number of results to return | 
  **page** | **int32** | maximum number of results to return | 
 

@@ -4,6 +4,9 @@ plugins {
     id("maven-publish")
 }
 
+repositories {
+    mavenCentral()
+}
 
 
 subprojects {
@@ -26,8 +29,8 @@ subprojects {
     tasks.withType<Jar> {
         manifest {
             attributes(
-                "Specification-Title" to project.name,
-                "Specification-Version" to versioning.info.tag,
+                "Specification-Title" to project.name + project.version,
+                "Specification-Version" to versioning.info.full,
                 "Specification-Vendor" to "Ant Investor Ltd",
                 "Implementation-Title" to project.group.toString() + "." + project.name,
                 "Implementation-Version" to versioning.info.build,
@@ -59,14 +62,22 @@ subprojects {
     }
 
     dependencies {
-        implementation("com.google.protobuf:protobuf-java:3.25.1")
-        implementation("io.grpc:grpc-protobuf:1.60.0")
-        implementation("io.grpc:grpc-services:1.60.0")
-        implementation("io.grpc:grpc-stub:1.60.0")
-        implementation("build.buf:protovalidate:0.1.8")
+        api("com.google.protobuf:protobuf-java:3.25.1")
+        api("io.grpc:grpc-protobuf:1.60.0")
+        api("io.grpc:grpc-services:1.60.0")
+        api("io.grpc:grpc-stub:1.60.0")
+        api("build.buf:protovalidate:0.1.8")
+
+
+        api("com.googlecode.libphonenumber:libphonenumber:8.13.7")
+
+        api("org.slf4j:slf4j-api:1.7.36")
+
         compileOnly("org.apache.tomcat:annotations-api:6.0.53")
 
         runtimeOnly("io.grpc:grpc-netty-shaded:1.60.0")
+
+
     }
 
 }

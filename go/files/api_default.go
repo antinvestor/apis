@@ -29,8 +29,10 @@ type ApiAddFileRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
 	groupId *string
-	accessId *string
+	subGroupId *string
+	ownerId *string
 	public *bool
+	description *string
 	name *string
 	fileObject *os.File
 }
@@ -40,13 +42,23 @@ func (r ApiAddFileRequest) GroupId(groupId string) ApiAddFileRequest {
 	return r
 }
 
-func (r ApiAddFileRequest) AccessId(accessId string) ApiAddFileRequest {
-	r.accessId = &accessId
+func (r ApiAddFileRequest) SubGroupId(subGroupId string) ApiAddFileRequest {
+	r.subGroupId = &subGroupId
+	return r
+}
+
+func (r ApiAddFileRequest) OwnerId(ownerId string) ApiAddFileRequest {
+	r.ownerId = &ownerId
 	return r
 }
 
 func (r ApiAddFileRequest) Public(public bool) ApiAddFileRequest {
 	r.public = &public
+	return r
+}
+
+func (r ApiAddFileRequest) Description(description string) ApiAddFileRequest {
+	r.description = &description
 	return r
 }
 
@@ -120,11 +132,17 @@ func (a *DefaultAPIService) AddFileExecute(r ApiAddFileRequest) (*File, *http.Re
 	if r.groupId != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "group_id", r.groupId, "")
 	}
-	if r.accessId != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "access_id", r.accessId, "")
+	if r.subGroupId != nil {
+		parameterAddToHeaderOrQuery(localVarFormParams, "sub_group_id", r.subGroupId, "")
+	}
+	if r.ownerId != nil {
+		parameterAddToHeaderOrQuery(localVarFormParams, "owner_id", r.ownerId, "")
 	}
 	if r.public != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "public", r.public, "")
+	}
+	if r.description != nil {
+		parameterAddToHeaderOrQuery(localVarFormParams, "description", r.description, "")
 	}
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "name", r.name, "")
@@ -165,6 +183,17 @@ func (a *DefaultAPIService) AddFileExecute(r ApiAddFileRequest) (*File, *http.Re
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v interface{}
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -275,6 +304,17 @@ func (a *DefaultAPIService) DeleteFileExecute(r ApiDeleteFileRequest) (*http.Res
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v interface{}
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -377,6 +417,17 @@ func (a *DefaultAPIService) FindFileByIdExecute(r ApiFindFileByIdRequest) (*os.F
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v interface{}
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -403,21 +454,28 @@ func (a *DefaultAPIService) FindFileByIdExecute(r ApiFindFileByIdRequest) (*os.F
 type ApiFindFilesRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
-	subscriptionId *string
+	ownerId *string
 	groupId *string
+	subGroupId *string
 	limit *int32
 	page *int32
 }
 
 // filters the files by the subscription by
-func (r ApiFindFilesRequest) SubscriptionId(subscriptionId string) ApiFindFilesRequest {
-	r.subscriptionId = &subscriptionId
+func (r ApiFindFilesRequest) OwnerId(ownerId string) ApiFindFilesRequest {
+	r.ownerId = &ownerId
 	return r
 }
 
 // filters the files by the grouping id
 func (r ApiFindFilesRequest) GroupId(groupId string) ApiFindFilesRequest {
 	r.groupId = &groupId
+	return r
+}
+
+// filters the files by the sub grouping id
+func (r ApiFindFilesRequest) SubGroupId(subGroupId string) ApiFindFilesRequest {
+	r.subGroupId = &subGroupId
 	return r
 }
 
@@ -474,11 +532,14 @@ func (a *DefaultAPIService) FindFilesExecute(r ApiFindFilesRequest) ([]File, *ht
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.subscriptionId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "subscription_id", r.subscriptionId, "")
+	if r.ownerId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "owner_id", r.ownerId, "")
 	}
 	if r.groupId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "group_id", r.groupId, "")
+	}
+	if r.subGroupId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sub_group_id", r.subGroupId, "")
 	}
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
@@ -524,6 +585,17 @@ func (a *DefaultAPIService) FindFilesExecute(r ApiFindFilesRequest) ([]File, *ht
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v interface{}
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))

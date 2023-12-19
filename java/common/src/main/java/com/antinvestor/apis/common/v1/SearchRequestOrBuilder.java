@@ -35,60 +35,72 @@ public interface SearchRequestOrBuilder extends
       getQueryBytes();
 
   /**
-   * <code>int64 page = 2 [json_name = "page"];</code>
+   * <code>string id_query = 2 [json_name = "idQuery"];</code>
+   * @return The idQuery.
+   */
+  java.lang.String getIdQuery();
+  /**
+   * <code>string id_query = 2 [json_name = "idQuery"];</code>
+   * @return The bytes for idQuery.
+   */
+  com.google.protobuf.ByteString
+      getIdQueryBytes();
+
+  /**
+   * <code>int64 page = 3 [json_name = "page"];</code>
    * @return The page.
    */
   long getPage();
 
   /**
-   * <code>int32 count = 3 [json_name = "count"];</code>
+   * <code>int32 count = 4 [json_name = "count"];</code>
    * @return The count.
    */
   int getCount();
 
   /**
-   * <code>string start_date = 4 [json_name = "startDate"];</code>
+   * <code>string start_date = 5 [json_name = "startDate"];</code>
    * @return The startDate.
    */
   java.lang.String getStartDate();
   /**
-   * <code>string start_date = 4 [json_name = "startDate"];</code>
+   * <code>string start_date = 5 [json_name = "startDate"];</code>
    * @return The bytes for startDate.
    */
   com.google.protobuf.ByteString
       getStartDateBytes();
 
   /**
-   * <code>string end_date = 5 [json_name = "endDate"];</code>
+   * <code>string end_date = 6 [json_name = "endDate"];</code>
    * @return The endDate.
    */
   java.lang.String getEndDate();
   /**
-   * <code>string end_date = 5 [json_name = "endDate"];</code>
+   * <code>string end_date = 6 [json_name = "endDate"];</code>
    * @return The bytes for endDate.
    */
   com.google.protobuf.ByteString
       getEndDateBytes();
 
   /**
-   * <code>repeated string properties = 6 [json_name = "properties"];</code>
+   * <code>repeated string properties = 7 [json_name = "properties"];</code>
    * @return A list containing the properties.
    */
   java.util.List<java.lang.String>
       getPropertiesList();
   /**
-   * <code>repeated string properties = 6 [json_name = "properties"];</code>
+   * <code>repeated string properties = 7 [json_name = "properties"];</code>
    * @return The count of properties.
    */
   int getPropertiesCount();
   /**
-   * <code>repeated string properties = 6 [json_name = "properties"];</code>
+   * <code>repeated string properties = 7 [json_name = "properties"];</code>
    * @param index The index of the element to return.
    * @return The properties at the given index.
    */
   java.lang.String getProperties(int index);
   /**
-   * <code>repeated string properties = 6 [json_name = "properties"];</code>
+   * <code>repeated string properties = 7 [json_name = "properties"];</code>
    * @param index The index of the value to return.
    * @return The bytes of the properties at the given index.
    */
@@ -96,11 +108,11 @@ public interface SearchRequestOrBuilder extends
       getPropertiesBytes(int index);
 
   /**
-   * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
    */
   int getExtrasCount();
   /**
-   * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
    */
   boolean containsExtras(
       java.lang.String key);
@@ -111,12 +123,12 @@ public interface SearchRequestOrBuilder extends
   java.util.Map<java.lang.String, java.lang.String>
   getExtras();
   /**
-   * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
   getExtrasMap();
   /**
-   * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
    */
   /* nullable */
 java.lang.String getExtrasOrDefault(
@@ -124,7 +136,7 @@ java.lang.String getExtrasOrDefault(
       /* nullable */
 java.lang.String defaultValue);
   /**
-   * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
    */
   java.lang.String getExtrasOrThrow(
       java.lang.String key);

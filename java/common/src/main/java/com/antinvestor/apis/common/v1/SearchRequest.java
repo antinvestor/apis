@@ -32,6 +32,7 @@ private static final long serialVersionUID = 0L;
   }
   private SearchRequest() {
     query_ = "";
+    idQuery_ = "";
     startDate_ = "";
     endDate_ = "";
     properties_ =
@@ -55,7 +56,7 @@ private static final long serialVersionUID = 0L;
   protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
       int number) {
     switch (number) {
-      case 7:
+      case 8:
         return internalGetExtras();
       default:
         throw new RuntimeException(
@@ -109,10 +110,49 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PAGE_FIELD_NUMBER = 2;
+  public static final int ID_QUERY_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object idQuery_ = "";
+  /**
+   * <code>string id_query = 2 [json_name = "idQuery"];</code>
+   * @return The idQuery.
+   */
+  @java.lang.Override
+  public java.lang.String getIdQuery() {
+    java.lang.Object ref = idQuery_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      idQuery_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string id_query = 2 [json_name = "idQuery"];</code>
+   * @return The bytes for idQuery.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getIdQueryBytes() {
+    java.lang.Object ref = idQuery_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      idQuery_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int PAGE_FIELD_NUMBER = 3;
   private long page_ = 0L;
   /**
-   * <code>int64 page = 2 [json_name = "page"];</code>
+   * <code>int64 page = 3 [json_name = "page"];</code>
    * @return The page.
    */
   @java.lang.Override
@@ -120,10 +160,10 @@ private static final long serialVersionUID = 0L;
     return page_;
   }
 
-  public static final int COUNT_FIELD_NUMBER = 3;
+  public static final int COUNT_FIELD_NUMBER = 4;
   private int count_ = 0;
   /**
-   * <code>int32 count = 3 [json_name = "count"];</code>
+   * <code>int32 count = 4 [json_name = "count"];</code>
    * @return The count.
    */
   @java.lang.Override
@@ -131,11 +171,11 @@ private static final long serialVersionUID = 0L;
     return count_;
   }
 
-  public static final int START_DATE_FIELD_NUMBER = 4;
+  public static final int START_DATE_FIELD_NUMBER = 5;
   @SuppressWarnings("serial")
   private volatile java.lang.Object startDate_ = "";
   /**
-   * <code>string start_date = 4 [json_name = "startDate"];</code>
+   * <code>string start_date = 5 [json_name = "startDate"];</code>
    * @return The startDate.
    */
   @java.lang.Override
@@ -152,7 +192,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string start_date = 4 [json_name = "startDate"];</code>
+   * <code>string start_date = 5 [json_name = "startDate"];</code>
    * @return The bytes for startDate.
    */
   @java.lang.Override
@@ -170,11 +210,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int END_DATE_FIELD_NUMBER = 5;
+  public static final int END_DATE_FIELD_NUMBER = 6;
   @SuppressWarnings("serial")
   private volatile java.lang.Object endDate_ = "";
   /**
-   * <code>string end_date = 5 [json_name = "endDate"];</code>
+   * <code>string end_date = 6 [json_name = "endDate"];</code>
    * @return The endDate.
    */
   @java.lang.Override
@@ -191,7 +231,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string end_date = 5 [json_name = "endDate"];</code>
+   * <code>string end_date = 6 [json_name = "endDate"];</code>
    * @return The bytes for endDate.
    */
   @java.lang.Override
@@ -209,12 +249,12 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PROPERTIES_FIELD_NUMBER = 6;
+  public static final int PROPERTIES_FIELD_NUMBER = 7;
   @SuppressWarnings("serial")
   private com.google.protobuf.LazyStringArrayList properties_ =
       com.google.protobuf.LazyStringArrayList.emptyList();
   /**
-   * <code>repeated string properties = 6 [json_name = "properties"];</code>
+   * <code>repeated string properties = 7 [json_name = "properties"];</code>
    * @return A list containing the properties.
    */
   public com.google.protobuf.ProtocolStringList
@@ -222,14 +262,14 @@ private static final long serialVersionUID = 0L;
     return properties_;
   }
   /**
-   * <code>repeated string properties = 6 [json_name = "properties"];</code>
+   * <code>repeated string properties = 7 [json_name = "properties"];</code>
    * @return The count of properties.
    */
   public int getPropertiesCount() {
     return properties_.size();
   }
   /**
-   * <code>repeated string properties = 6 [json_name = "properties"];</code>
+   * <code>repeated string properties = 7 [json_name = "properties"];</code>
    * @param index The index of the element to return.
    * @return The properties at the given index.
    */
@@ -237,7 +277,7 @@ private static final long serialVersionUID = 0L;
     return properties_.get(index);
   }
   /**
-   * <code>repeated string properties = 6 [json_name = "properties"];</code>
+   * <code>repeated string properties = 7 [json_name = "properties"];</code>
    * @param index The index of the value to return.
    * @return The bytes of the properties at the given index.
    */
@@ -246,7 +286,7 @@ private static final long serialVersionUID = 0L;
     return properties_.getByteString(index);
   }
 
-  public static final int EXTRAS_FIELD_NUMBER = 7;
+  public static final int EXTRAS_FIELD_NUMBER = 8;
   private static final class ExtrasDefaultEntryHolder {
     static final com.google.protobuf.MapEntry<
         java.lang.String, java.lang.String> defaultEntry =
@@ -273,7 +313,7 @@ private static final long serialVersionUID = 0L;
     return internalGetExtras().getMap().size();
   }
   /**
-   * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
    */
   @java.lang.Override
   public boolean containsExtras(
@@ -290,14 +330,14 @@ private static final long serialVersionUID = 0L;
     return getExtrasMap();
   }
   /**
-   * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
    */
   @java.lang.Override
   public java.util.Map<java.lang.String, java.lang.String> getExtrasMap() {
     return internalGetExtras().getMap();
   }
   /**
-   * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
    */
   @java.lang.Override
   public /* nullable */
@@ -311,7 +351,7 @@ java.lang.String defaultValue) {
     return map.containsKey(key) ? map.get(key) : defaultValue;
   }
   /**
-   * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
    */
   @java.lang.Override
   public java.lang.String getExtrasOrThrow(
@@ -342,27 +382,30 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(query_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, query_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(idQuery_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, idQuery_);
+    }
     if (page_ != 0L) {
-      output.writeInt64(2, page_);
+      output.writeInt64(3, page_);
     }
     if (count_ != 0) {
-      output.writeInt32(3, count_);
+      output.writeInt32(4, count_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(startDate_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, startDate_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, startDate_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(endDate_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, endDate_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, endDate_);
     }
     for (int i = 0; i < properties_.size(); i++) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, properties_.getRaw(i));
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, properties_.getRaw(i));
     }
     com.google.protobuf.GeneratedMessageV3
       .serializeStringMapTo(
         output,
         internalGetExtras(),
         ExtrasDefaultEntryHolder.defaultEntry,
-        7);
+        8);
     getUnknownFields().writeTo(output);
   }
 
@@ -375,19 +418,22 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(query_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, query_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(idQuery_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, idQuery_);
+    }
     if (page_ != 0L) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(2, page_);
+        .computeInt64Size(3, page_);
     }
     if (count_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(3, count_);
+        .computeInt32Size(4, count_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(startDate_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, startDate_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, startDate_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(endDate_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, endDate_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, endDate_);
     }
     {
       int dataSize = 0;
@@ -405,7 +451,7 @@ java.lang.String defaultValue) {
           .setValue(entry.getValue())
           .build();
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, extras__);
+          .computeMessageSize(8, extras__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -424,6 +470,8 @@ java.lang.String defaultValue) {
 
     if (!getQuery()
         .equals(other.getQuery())) return false;
+    if (!getIdQuery()
+        .equals(other.getIdQuery())) return false;
     if (getPage()
         != other.getPage()) return false;
     if (getCount()
@@ -449,6 +497,8 @@ java.lang.String defaultValue) {
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + QUERY_FIELD_NUMBER;
     hash = (53 * hash) + getQuery().hashCode();
+    hash = (37 * hash) + ID_QUERY_FIELD_NUMBER;
+    hash = (53 * hash) + getIdQuery().hashCode();
     hash = (37 * hash) + PAGE_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         getPage());
@@ -579,7 +629,7 @@ java.lang.String defaultValue) {
     protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
         int number) {
       switch (number) {
-        case 7:
+        case 8:
           return internalGetExtras();
         default:
           throw new RuntimeException(
@@ -590,7 +640,7 @@ java.lang.String defaultValue) {
     protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
         int number) {
       switch (number) {
-        case 7:
+        case 8:
           return internalGetMutableExtras();
         default:
           throw new RuntimeException(
@@ -620,6 +670,7 @@ java.lang.String defaultValue) {
       super.clear();
       bitField0_ = 0;
       query_ = "";
+      idQuery_ = "";
       page_ = 0L;
       count_ = 0;
       startDate_ = "";
@@ -664,22 +715,25 @@ java.lang.String defaultValue) {
         result.query_ = query_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.page_ = page_;
+        result.idQuery_ = idQuery_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.count_ = count_;
+        result.page_ = page_;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.startDate_ = startDate_;
+        result.count_ = count_;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.endDate_ = endDate_;
+        result.startDate_ = startDate_;
       }
       if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.endDate_ = endDate_;
+      }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
         properties_.makeImmutable();
         result.properties_ = properties_;
       }
-      if (((from_bitField0_ & 0x00000040) != 0)) {
+      if (((from_bitField0_ & 0x00000080) != 0)) {
         result.extras_ = internalGetExtras();
         result.extras_.makeImmutable();
       }
@@ -734,6 +788,11 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000001;
         onChanged();
       }
+      if (!other.getIdQuery().isEmpty()) {
+        idQuery_ = other.idQuery_;
+        bitField0_ |= 0x00000002;
+        onChanged();
+      }
       if (other.getPage() != 0L) {
         setPage(other.getPage());
       }
@@ -742,18 +801,18 @@ java.lang.String defaultValue) {
       }
       if (!other.getStartDate().isEmpty()) {
         startDate_ = other.startDate_;
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         onChanged();
       }
       if (!other.getEndDate().isEmpty()) {
         endDate_ = other.endDate_;
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         onChanged();
       }
       if (!other.properties_.isEmpty()) {
         if (properties_.isEmpty()) {
           properties_ = other.properties_;
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
         } else {
           ensurePropertiesIsMutable();
           properties_.addAll(other.properties_);
@@ -762,7 +821,7 @@ java.lang.String defaultValue) {
       }
       internalGetMutableExtras().mergeFrom(
           other.internalGetExtras());
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000080;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -794,41 +853,46 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000001;
               break;
             } // case 10
-            case 16: {
-              page_ = input.readInt64();
+            case 18: {
+              idQuery_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
-            } // case 16
+            } // case 18
             case 24: {
-              count_ = input.readInt32();
+              page_ = input.readInt64();
               bitField0_ |= 0x00000004;
               break;
             } // case 24
-            case 34: {
-              startDate_ = input.readStringRequireUtf8();
+            case 32: {
+              count_ = input.readInt32();
               bitField0_ |= 0x00000008;
               break;
-            } // case 34
+            } // case 32
             case 42: {
-              endDate_ = input.readStringRequireUtf8();
+              startDate_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000010;
               break;
             } // case 42
             case 50: {
+              endDate_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 50
+            case 58: {
               java.lang.String s = input.readStringRequireUtf8();
               ensurePropertiesIsMutable();
               properties_.add(s);
               break;
-            } // case 50
-            case 58: {
+            } // case 58
+            case 66: {
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
               extras__ = input.readMessage(
                   ExtrasDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableExtras().getMutableMap().put(
                   extras__.getKey(), extras__.getValue());
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000080;
               break;
-            } // case 58
+            } // case 66
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -918,9 +982,81 @@ java.lang.String defaultValue) {
       return this;
     }
 
+    private java.lang.Object idQuery_ = "";
+    /**
+     * <code>string id_query = 2 [json_name = "idQuery"];</code>
+     * @return The idQuery.
+     */
+    public java.lang.String getIdQuery() {
+      java.lang.Object ref = idQuery_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        idQuery_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string id_query = 2 [json_name = "idQuery"];</code>
+     * @return The bytes for idQuery.
+     */
+    public com.google.protobuf.ByteString
+        getIdQueryBytes() {
+      java.lang.Object ref = idQuery_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        idQuery_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string id_query = 2 [json_name = "idQuery"];</code>
+     * @param value The idQuery to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIdQuery(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      idQuery_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string id_query = 2 [json_name = "idQuery"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearIdQuery() {
+      idQuery_ = getDefaultInstance().getIdQuery();
+      bitField0_ = (bitField0_ & ~0x00000002);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string id_query = 2 [json_name = "idQuery"];</code>
+     * @param value The bytes for idQuery to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIdQueryBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      idQuery_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+
     private long page_ ;
     /**
-     * <code>int64 page = 2 [json_name = "page"];</code>
+     * <code>int64 page = 3 [json_name = "page"];</code>
      * @return The page.
      */
     @java.lang.Override
@@ -928,23 +1064,23 @@ java.lang.String defaultValue) {
       return page_;
     }
     /**
-     * <code>int64 page = 2 [json_name = "page"];</code>
+     * <code>int64 page = 3 [json_name = "page"];</code>
      * @param value The page to set.
      * @return This builder for chaining.
      */
     public Builder setPage(long value) {
 
       page_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>int64 page = 2 [json_name = "page"];</code>
+     * <code>int64 page = 3 [json_name = "page"];</code>
      * @return This builder for chaining.
      */
     public Builder clearPage() {
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000004);
       page_ = 0L;
       onChanged();
       return this;
@@ -952,7 +1088,7 @@ java.lang.String defaultValue) {
 
     private int count_ ;
     /**
-     * <code>int32 count = 3 [json_name = "count"];</code>
+     * <code>int32 count = 4 [json_name = "count"];</code>
      * @return The count.
      */
     @java.lang.Override
@@ -960,23 +1096,23 @@ java.lang.String defaultValue) {
       return count_;
     }
     /**
-     * <code>int32 count = 3 [json_name = "count"];</code>
+     * <code>int32 count = 4 [json_name = "count"];</code>
      * @param value The count to set.
      * @return This builder for chaining.
      */
     public Builder setCount(int value) {
 
       count_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 count = 3 [json_name = "count"];</code>
+     * <code>int32 count = 4 [json_name = "count"];</code>
      * @return This builder for chaining.
      */
     public Builder clearCount() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000008);
       count_ = 0;
       onChanged();
       return this;
@@ -984,7 +1120,7 @@ java.lang.String defaultValue) {
 
     private java.lang.Object startDate_ = "";
     /**
-     * <code>string start_date = 4 [json_name = "startDate"];</code>
+     * <code>string start_date = 5 [json_name = "startDate"];</code>
      * @return The startDate.
      */
     public java.lang.String getStartDate() {
@@ -1000,7 +1136,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string start_date = 4 [json_name = "startDate"];</code>
+     * <code>string start_date = 5 [json_name = "startDate"];</code>
      * @return The bytes for startDate.
      */
     public com.google.protobuf.ByteString
@@ -1017,7 +1153,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string start_date = 4 [json_name = "startDate"];</code>
+     * <code>string start_date = 5 [json_name = "startDate"];</code>
      * @param value The startDate to set.
      * @return This builder for chaining.
      */
@@ -1025,22 +1161,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       startDate_ = value;
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
-     * <code>string start_date = 4 [json_name = "startDate"];</code>
+     * <code>string start_date = 5 [json_name = "startDate"];</code>
      * @return This builder for chaining.
      */
     public Builder clearStartDate() {
       startDate_ = getDefaultInstance().getStartDate();
-      bitField0_ = (bitField0_ & ~0x00000008);
+      bitField0_ = (bitField0_ & ~0x00000010);
       onChanged();
       return this;
     }
     /**
-     * <code>string start_date = 4 [json_name = "startDate"];</code>
+     * <code>string start_date = 5 [json_name = "startDate"];</code>
      * @param value The bytes for startDate to set.
      * @return This builder for chaining.
      */
@@ -1049,14 +1185,14 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       startDate_ = value;
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
 
     private java.lang.Object endDate_ = "";
     /**
-     * <code>string end_date = 5 [json_name = "endDate"];</code>
+     * <code>string end_date = 6 [json_name = "endDate"];</code>
      * @return The endDate.
      */
     public java.lang.String getEndDate() {
@@ -1072,7 +1208,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string end_date = 5 [json_name = "endDate"];</code>
+     * <code>string end_date = 6 [json_name = "endDate"];</code>
      * @return The bytes for endDate.
      */
     public com.google.protobuf.ByteString
@@ -1089,7 +1225,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string end_date = 5 [json_name = "endDate"];</code>
+     * <code>string end_date = 6 [json_name = "endDate"];</code>
      * @param value The endDate to set.
      * @return This builder for chaining.
      */
@@ -1097,22 +1233,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       endDate_ = value;
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
     /**
-     * <code>string end_date = 5 [json_name = "endDate"];</code>
+     * <code>string end_date = 6 [json_name = "endDate"];</code>
      * @return This builder for chaining.
      */
     public Builder clearEndDate() {
       endDate_ = getDefaultInstance().getEndDate();
-      bitField0_ = (bitField0_ & ~0x00000010);
+      bitField0_ = (bitField0_ & ~0x00000020);
       onChanged();
       return this;
     }
     /**
-     * <code>string end_date = 5 [json_name = "endDate"];</code>
+     * <code>string end_date = 6 [json_name = "endDate"];</code>
      * @param value The bytes for endDate to set.
      * @return This builder for chaining.
      */
@@ -1121,7 +1257,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       endDate_ = value;
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
@@ -1132,10 +1268,10 @@ java.lang.String defaultValue) {
       if (!properties_.isModifiable()) {
         properties_ = new com.google.protobuf.LazyStringArrayList(properties_);
       }
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
     }
     /**
-     * <code>repeated string properties = 6 [json_name = "properties"];</code>
+     * <code>repeated string properties = 7 [json_name = "properties"];</code>
      * @return A list containing the properties.
      */
     public com.google.protobuf.ProtocolStringList
@@ -1144,14 +1280,14 @@ java.lang.String defaultValue) {
       return properties_;
     }
     /**
-     * <code>repeated string properties = 6 [json_name = "properties"];</code>
+     * <code>repeated string properties = 7 [json_name = "properties"];</code>
      * @return The count of properties.
      */
     public int getPropertiesCount() {
       return properties_.size();
     }
     /**
-     * <code>repeated string properties = 6 [json_name = "properties"];</code>
+     * <code>repeated string properties = 7 [json_name = "properties"];</code>
      * @param index The index of the element to return.
      * @return The properties at the given index.
      */
@@ -1159,7 +1295,7 @@ java.lang.String defaultValue) {
       return properties_.get(index);
     }
     /**
-     * <code>repeated string properties = 6 [json_name = "properties"];</code>
+     * <code>repeated string properties = 7 [json_name = "properties"];</code>
      * @param index The index of the value to return.
      * @return The bytes of the properties at the given index.
      */
@@ -1168,7 +1304,7 @@ java.lang.String defaultValue) {
       return properties_.getByteString(index);
     }
     /**
-     * <code>repeated string properties = 6 [json_name = "properties"];</code>
+     * <code>repeated string properties = 7 [json_name = "properties"];</code>
      * @param index The index to set the value at.
      * @param value The properties to set.
      * @return This builder for chaining.
@@ -1178,12 +1314,12 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       ensurePropertiesIsMutable();
       properties_.set(index, value);
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
     /**
-     * <code>repeated string properties = 6 [json_name = "properties"];</code>
+     * <code>repeated string properties = 7 [json_name = "properties"];</code>
      * @param value The properties to add.
      * @return This builder for chaining.
      */
@@ -1192,12 +1328,12 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       ensurePropertiesIsMutable();
       properties_.add(value);
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
     /**
-     * <code>repeated string properties = 6 [json_name = "properties"];</code>
+     * <code>repeated string properties = 7 [json_name = "properties"];</code>
      * @param values The properties to add.
      * @return This builder for chaining.
      */
@@ -1206,23 +1342,23 @@ java.lang.String defaultValue) {
       ensurePropertiesIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
           values, properties_);
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
     /**
-     * <code>repeated string properties = 6 [json_name = "properties"];</code>
+     * <code>repeated string properties = 7 [json_name = "properties"];</code>
      * @return This builder for chaining.
      */
     public Builder clearProperties() {
       properties_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000020);;
+      bitField0_ = (bitField0_ & ~0x00000040);;
       onChanged();
       return this;
     }
     /**
-     * <code>repeated string properties = 6 [json_name = "properties"];</code>
+     * <code>repeated string properties = 7 [json_name = "properties"];</code>
      * @param value The bytes of the properties to add.
      * @return This builder for chaining.
      */
@@ -1232,7 +1368,7 @@ java.lang.String defaultValue) {
       checkByteStringIsUtf8(value);
       ensurePropertiesIsMutable();
       properties_.add(value);
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
@@ -1256,7 +1392,7 @@ java.lang.String defaultValue) {
       if (!extras_.isMutable()) {
         extras_ = extras_.copy();
       }
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000080;
       onChanged();
       return extras_;
     }
@@ -1264,7 +1400,7 @@ java.lang.String defaultValue) {
       return internalGetExtras().getMap().size();
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
      */
     @java.lang.Override
     public boolean containsExtras(
@@ -1281,14 +1417,14 @@ java.lang.String defaultValue) {
       return getExtrasMap();
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
      */
     @java.lang.Override
     public java.util.Map<java.lang.String, java.lang.String> getExtrasMap() {
       return internalGetExtras().getMap();
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
      */
     @java.lang.Override
     public /* nullable */
@@ -1302,7 +1438,7 @@ java.lang.String defaultValue) {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
      */
     @java.lang.Override
     public java.lang.String getExtrasOrThrow(
@@ -1316,13 +1452,13 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearExtras() {
-      bitField0_ = (bitField0_ & ~0x00000040);
+      bitField0_ = (bitField0_ & ~0x00000080);
       internalGetMutableExtras().getMutableMap()
           .clear();
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
      */
     public Builder removeExtras(
         java.lang.String key) {
@@ -1337,11 +1473,11 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableExtras() {
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000080;
       return internalGetMutableExtras().getMutableMap();
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
      */
     public Builder putExtras(
         java.lang.String key,
@@ -1350,17 +1486,17 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableExtras().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000080;
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 7 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras"];</code>
      */
     public Builder putAllExtras(
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableExtras().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000080;
       return this;
     }
     @java.lang.Override

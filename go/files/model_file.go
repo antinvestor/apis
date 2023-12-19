@@ -22,9 +22,11 @@ var _ MappedNullable = &File{}
 // File struct for File
 type File struct {
 	Id *string `json:"id,omitempty"`
+	OwnerId *string `json:"owner_id,omitempty"`
 	GroupId *string `json:"group_id,omitempty"`
-	AccessId *string `json:"access_id,omitempty"`
+	SubGroupId *string `json:"sub_group_id,omitempty"`
 	Public *bool `json:"public,omitempty"`
+	Description *string `json:"description,omitempty"`
 	Name string `json:"name"`
 	Url *string `json:"url,omitempty"`
 }
@@ -81,6 +83,38 @@ func (o *File) SetId(v string) {
 	o.Id = &v
 }
 
+// GetOwnerId returns the OwnerId field value if set, zero value otherwise.
+func (o *File) GetOwnerId() string {
+	if o == nil || IsNil(o.OwnerId) {
+		var ret string
+		return ret
+	}
+	return *o.OwnerId
+}
+
+// GetOwnerIdOk returns a tuple with the OwnerId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *File) GetOwnerIdOk() (*string, bool) {
+	if o == nil || IsNil(o.OwnerId) {
+		return nil, false
+	}
+	return o.OwnerId, true
+}
+
+// HasOwnerId returns a boolean if a field has been set.
+func (o *File) HasOwnerId() bool {
+	if o != nil && !IsNil(o.OwnerId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwnerId gets a reference to the given string and assigns it to the OwnerId field.
+func (o *File) SetOwnerId(v string) {
+	o.OwnerId = &v
+}
+
 // GetGroupId returns the GroupId field value if set, zero value otherwise.
 func (o *File) GetGroupId() string {
 	if o == nil || IsNil(o.GroupId) {
@@ -113,36 +147,36 @@ func (o *File) SetGroupId(v string) {
 	o.GroupId = &v
 }
 
-// GetAccessId returns the AccessId field value if set, zero value otherwise.
-func (o *File) GetAccessId() string {
-	if o == nil || IsNil(o.AccessId) {
+// GetSubGroupId returns the SubGroupId field value if set, zero value otherwise.
+func (o *File) GetSubGroupId() string {
+	if o == nil || IsNil(o.SubGroupId) {
 		var ret string
 		return ret
 	}
-	return *o.AccessId
+	return *o.SubGroupId
 }
 
-// GetAccessIdOk returns a tuple with the AccessId field value if set, nil otherwise
+// GetSubGroupIdOk returns a tuple with the SubGroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *File) GetAccessIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AccessId) {
+func (o *File) GetSubGroupIdOk() (*string, bool) {
+	if o == nil || IsNil(o.SubGroupId) {
 		return nil, false
 	}
-	return o.AccessId, true
+	return o.SubGroupId, true
 }
 
-// HasAccessId returns a boolean if a field has been set.
-func (o *File) HasAccessId() bool {
-	if o != nil && !IsNil(o.AccessId) {
+// HasSubGroupId returns a boolean if a field has been set.
+func (o *File) HasSubGroupId() bool {
+	if o != nil && !IsNil(o.SubGroupId) {
 		return true
 	}
 
 	return false
 }
 
-// SetAccessId gets a reference to the given string and assigns it to the AccessId field.
-func (o *File) SetAccessId(v string) {
-	o.AccessId = &v
+// SetSubGroupId gets a reference to the given string and assigns it to the SubGroupId field.
+func (o *File) SetSubGroupId(v string) {
+	o.SubGroupId = &v
 }
 
 // GetPublic returns the Public field value if set, zero value otherwise.
@@ -175,6 +209,38 @@ func (o *File) HasPublic() bool {
 // SetPublic gets a reference to the given bool and assigns it to the Public field.
 func (o *File) SetPublic(v bool) {
 	o.Public = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *File) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *File) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *File) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *File) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetName returns the Name field value
@@ -246,14 +312,20 @@ func (o File) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+	if !IsNil(o.OwnerId) {
+		toSerialize["owner_id"] = o.OwnerId
+	}
 	if !IsNil(o.GroupId) {
 		toSerialize["group_id"] = o.GroupId
 	}
-	if !IsNil(o.AccessId) {
-		toSerialize["access_id"] = o.AccessId
+	if !IsNil(o.SubGroupId) {
+		toSerialize["sub_group_id"] = o.SubGroupId
 	}
 	if !IsNil(o.Public) {
 		toSerialize["public"] = o.Public
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
 	}
 	toSerialize["name"] = o.Name
 	if !IsNil(o.Url) {
