@@ -17,7 +17,7 @@ subprojects {
         gitRepoRootDir = "../"
     }
     group = "com.antinvestor.apis"
-    version = versioning.info.full
+    version = versioning.info.tag
 
     repositories {
         mavenCentral() // Add Maven Central Repository
@@ -27,7 +27,7 @@ subprojects {
         manifest {
             attributes(
                 "Specification-Title" to project.name,
-                "Specification-Version" to versioning.info.display,
+                "Specification-Version" to versioning.info.tag,
                 "Specification-Vendor" to "Ant Investor Ltd",
                 "Implementation-Title" to project.group.toString() + "." + project.name,
                 "Implementation-Version" to versioning.info.build,
