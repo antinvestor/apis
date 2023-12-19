@@ -1,0 +1,24 @@
+name: Create/update tag
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  create-tag:
+    strategy:
+      matrix:
+        api_module: [ common,ledger,lostid,notification,ocr,partition,payment,profile,property,settings,files ]
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: rickstaa/action-create-tag@v1
+        id: "tag_create"
+        with:
+          tag: ${{ matrix.api_module }}/${{github.ref_name}}
+          tag_exists_error: false
+          message: "release module ${{ matrix.api_module }}/${{github.ref_name}}"
+
