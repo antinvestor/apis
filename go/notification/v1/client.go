@@ -158,9 +158,9 @@ func (nc *NotificationClient) Receive(ctx context.Context, accessID string, cont
 }
 
 func (nc *NotificationClient) UpdateStatus(ctx context.Context, notificationId string, accessId string,
-	externalId string, extras map[string]string) (*StatusUpdateResponse, error) {
+	externalId string, extras map[string]string) (*commonv1.StatusUpdateResponse, error) {
 
-	messageStatus := StatusUpdateRequest{
+	messageStatus := commonv1.StatusUpdateRequest{
 		AccessId:   accessId,
 		Id:         notificationId,
 		State:      commonv1.STATE_INACTIVE,

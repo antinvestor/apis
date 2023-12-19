@@ -127,6 +127,7 @@ generate_grpc_mocks:
 .PHONY: generate_buf_gen
 generate_buf_gen:
 	$(call buf_generate,common)
+	$(call buf_generate,notification)
 	$(call buf_generate,ledger)
 	$(call buf_generate,lostid)
 	$(call buf_generate,ocr)

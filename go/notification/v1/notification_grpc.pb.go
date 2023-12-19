@@ -22,6 +22,7 @@ package notificationv1
 
 import (
 	context "context"
+	v1 "github.com/antinvestor/apis/go/common/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -48,15 +49,15 @@ type NotificationServiceClient interface {
 	// Send method for queueing massages as requested
 	Send(ctx context.Context, in *SendRequest, opts ...grpc.CallOption) (*SendResponse, error)
 	// Status request to determine if notification is prepared or released
-	Status(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error)
+	Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error)
 	// Status update request to allow continuation of notification processing
-	StatusUpdate(ctx context.Context, in *StatusUpdateRequest, opts ...grpc.CallOption) (*StatusUpdateResponse, error)
+	StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error)
 	// Release method for releasing queued massages and returns if notification status if released
 	Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (*ReleaseResponse, error)
 	// Receive method is for client request for particular notification responses from system
 	Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (*ReceiveResponse, error)
 	// Search method is for client request for particular notification details from system
-	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (NotificationService_SearchClient, error)
+	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (NotificationService_SearchClient, error)
 }
 
 type notificationServiceClient struct {
@@ -76,8 +77,8 @@ func (c *notificationServiceClient) Send(ctx context.Context, in *SendRequest, o
 	return out, nil
 }
 
-func (c *notificationServiceClient) Status(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error) {
-	out := new(StatusResponse)
+func (c *notificationServiceClient) Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error) {
+	out := new(v1.StatusResponse)
 	err := c.cc.Invoke(ctx, NotificationService_Status_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -85,8 +86,8 @@ func (c *notificationServiceClient) Status(ctx context.Context, in *StatusReques
 	return out, nil
 }
 
-func (c *notificationServiceClient) StatusUpdate(ctx context.Context, in *StatusUpdateRequest, opts ...grpc.CallOption) (*StatusUpdateResponse, error) {
-	out := new(StatusUpdateResponse)
+func (c *notificationServiceClient) StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error) {
+	out := new(v1.StatusUpdateResponse)
 	err := c.cc.Invoke(ctx, NotificationService_StatusUpdate_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -112,7 +113,7 @@ func (c *notificationServiceClient) Receive(ctx context.Context, in *ReceiveRequ
 	return out, nil
 }
 
-func (c *notificationServiceClient) Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (NotificationService_SearchClient, error) {
+func (c *notificationServiceClient) Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (NotificationService_SearchClient, error) {
 	stream, err := c.cc.NewStream(ctx, &NotificationService_ServiceDesc.Streams[0], NotificationService_Search_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
@@ -151,15 +152,15 @@ type NotificationServiceServer interface {
 	// Send method for queueing massages as requested
 	Send(context.Context, *SendRequest) (*SendResponse, error)
 	// Status request to determine if notification is prepared or released
-	Status(context.Context, *StatusRequest) (*StatusResponse, error)
+	Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error)
 	// Status update request to allow continuation of notification processing
-	StatusUpdate(context.Context, *StatusUpdateRequest) (*StatusUpdateResponse, error)
+	StatusUpdate(context.Context, *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error)
 	// Release method for releasing queued massages and returns if notification status if released
 	Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error)
 	// Receive method is for client request for particular notification responses from system
 	Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error)
 	// Search method is for client request for particular notification details from system
-	Search(*SearchRequest, NotificationService_SearchServer) error
+	Search(*v1.SearchRequest, NotificationService_SearchServer) error
 	mustEmbedUnimplementedNotificationServiceServer()
 }
 
@@ -170,10 +171,10 @@ type UnimplementedNotificationServiceServer struct {
 func (UnimplementedNotificationServiceServer) Send(context.Context, *SendRequest) (*SendResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Send not implemented")
 }
-func (UnimplementedNotificationServiceServer) Status(context.Context, *StatusRequest) (*StatusResponse, error) {
+func (UnimplementedNotificationServiceServer) Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Status not implemented")
 }
-func (UnimplementedNotificationServiceServer) StatusUpdate(context.Context, *StatusUpdateRequest) (*StatusUpdateResponse, error) {
+func (UnimplementedNotificationServiceServer) StatusUpdate(context.Context, *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StatusUpdate not implemented")
 }
 func (UnimplementedNotificationServiceServer) Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error) {
@@ -182,7 +183,7 @@ func (UnimplementedNotificationServiceServer) Release(context.Context, *ReleaseR
 func (UnimplementedNotificationServiceServer) Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Receive not implemented")
 }
-func (UnimplementedNotificationServiceServer) Search(*SearchRequest, NotificationService_SearchServer) error {
+func (UnimplementedNotificationServiceServer) Search(*v1.SearchRequest, NotificationService_SearchServer) error {
 	return status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
 func (UnimplementedNotificationServiceServer) mustEmbedUnimplementedNotificationServiceServer() {}
@@ -217,7 +218,7 @@ func _NotificationService_Send_Handler(srv interface{}, ctx context.Context, dec
 }
 
 func _NotificationService_Status_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StatusRequest)
+	in := new(v1.StatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -229,13 +230,13 @@ func _NotificationService_Status_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: NotificationService_Status_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationServiceServer).Status(ctx, req.(*StatusRequest))
+		return srv.(NotificationServiceServer).Status(ctx, req.(*v1.StatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _NotificationService_StatusUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StatusUpdateRequest)
+	in := new(v1.StatusUpdateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -247,7 +248,7 @@ func _NotificationService_StatusUpdate_Handler(srv interface{}, ctx context.Cont
 		FullMethod: NotificationService_StatusUpdate_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationServiceServer).StatusUpdate(ctx, req.(*StatusUpdateRequest))
+		return srv.(NotificationServiceServer).StatusUpdate(ctx, req.(*v1.StatusUpdateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -289,7 +290,7 @@ func _NotificationService_Receive_Handler(srv interface{}, ctx context.Context, 
 }
 
 func _NotificationService_Search_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchRequest)
+	m := new(v1.SearchRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
