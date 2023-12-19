@@ -16,6 +16,10 @@ on:
 
 jobs:
   publish:
+    strategy:
+      matrix:
+        api_module: [ common,ledger,lostid,notification,ocr,partition,payment,profile,property,settings ]
+
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -31,7 +35,7 @@ jobs:
       - name: Publish package
         uses: gradle/gradle-build-action@f95e9c74599bc49122b76ecfe1306f0034f87266
         with:
-          arguments: publish
+          arguments: ${{ matrix.api_module }}:publish
           build-root-directory: java
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
