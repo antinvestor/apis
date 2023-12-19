@@ -12,6 +12,10 @@ subprojects {
     apply(plugin = "maven-publish")
     apply(plugin = "net.nemerosa.versioning")
 
+    versioning{
+        scm = "git"
+        gitRepoRootDir = "../"
+    }
     group = "com.antinvestor.apis"
     version = versioning.info.full
 
