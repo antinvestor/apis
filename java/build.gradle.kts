@@ -4,26 +4,32 @@ plugins {
     id("maven-publish")
 }
 
-/*
- * Gets the version name from the latest Git tag
- *
- *  To perform tagging use: git tag -a v1.0.x
- */
-val getFullVersion: () -> String = { versioning.info.full }
 
-val getReleaseVersion: () -> String = { versioning.info.display }
-
-val getCommitVersion: () -> String = { versioning.info.build }
 
 subprojects {
-    group = "com.antinvestor.apis"
-    version = getFullVersion()
 
     apply(plugin = "java-library")
     apply(plugin = "maven-publish")
+    apply(plugin = "net.nemerosa.versioning")
+
+    group = "com.antinvestor.apis"
+    version = versioning.info.full
 
     repositories {
         mavenCentral() // Add Maven Central Repository
+    }
+
+    tasks.withType<Jar> {
+        manifest {
+            attributes(
+                "Specification-Title" to project.name,
+                "Specification-Version" to versioning.info.display,
+                "Specification-Vendor" to "Ant Investor Ltd",
+                "Implementation-Title" to project.group.toString() + "." + project.name,
+                "Implementation-Version" to versioning.info.build,
+                "Implementation-Vendor" to "Ant Investor Ltd"
+            )
+        }
     }
 
     publishing {
