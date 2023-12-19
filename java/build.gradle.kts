@@ -69,7 +69,7 @@ subprojects {
         api("build.buf:protovalidate:0.1.8")
 
 
-        api("com.googlecode.libphonenumber:libphonenumber:8.13.7")
+        api("com.googlecode.libphonenumber:libphonenumber:8.13.27")
 
         api("org.slf4j:slf4j-api:1.7.36")
 
