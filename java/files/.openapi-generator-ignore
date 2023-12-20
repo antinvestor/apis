@@ -30,7 +30,7 @@ git_push.sh
 gradle.properties
 gradlew
 gradlew.bat
-pox.xml
+pom.xml
 settings.gradle
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties

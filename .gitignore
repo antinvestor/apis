@@ -187,7 +187,7 @@ java/files/git_push.sh
 java/files/gradle.properties
 java/files/gradlew
 java/files/gradlew.bat
-java/files/pox.xml
+java/files/pom.xml
 java/files/settings.gradle
 java/files/gradle/wrapper/gradle-wrapper.jar
 java/files/gradle/wrapper/gradle-wrapper.properties
