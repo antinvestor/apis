@@ -14,17 +14,19 @@
 
 package com.antinvestor.apis.common.interceptor;
 
+import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.context.DefaultKeys;
-import com.auth0.jwk.JwkException;
-import com.auth0.jwk.JwkProvider;
-import com.auth0.jwk.JwkProviderBuilder;
+import com.antinvestor.apis.common.exceptions.RetriableException;
+import com.antinvestor.apis.common.exceptions.UnRetriableException;
+import com.antinvestor.apis.common.interceptor.oath2.JwtKeyResolver;
 import io.grpc.*;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.Key;
+import java.util.Objects;
 
 public class ServerSideInterceptor implements ServerInterceptor {
 
@@ -32,10 +34,11 @@ public class ServerSideInterceptor implements ServerInterceptor {
     private static final Logger log = LoggerFactory.getLogger(ServerSideInterceptor.class);
     private static final Metadata.Key<String> JWT_BEARER_HEADER_KEY =
             Metadata.Key.of("authorization", Metadata.ASCII_STRING_MARSHALLER);
-    private final JwkProvider provider;
     private final String issuer;
     private final String audience;
     private final DefaultContext context;
+    private LocatorAdapter<Key> keyLocatorAdapter;
+    private DefaultConfig config;
 
     public ServerSideInterceptor(com.antinvestor.apis.common.context.Context context) {
         this.context = (DefaultContext) context;
@@ -47,10 +50,6 @@ public class ServerSideInterceptor implements ServerInterceptor {
 
         this.issuer = config.jwtVerifyIssuer();
         this.audience = config.jwtVerifyAudience();
-
-
-        this.provider = new JwkProviderBuilder(config.oauth2ServerUrl())
-                .build();
 
 
     }
@@ -65,26 +64,25 @@ public class ServerSideInterceptor implements ServerInterceptor {
 
         String jwtHeader = requestHeaders.get(JWT_BEARER_HEADER_KEY);
 
+        if (Objects.isNull(keyLocatorAdapter)) {
+            try {
+                this.keyLocatorAdapter = new JwtKeyResolver(config.oauth2ServerUrl());
+            } catch (UnRetriableException | RetriableException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         try {
 
 
-            Jws<Claims> jws = Jwts.parserBuilder()
-                    .setSigningKeyResolver(new SigningKeyResolverAdapter() {
-                        @Override
-                        public Key resolveSigningKey(JwsHeader header, Claims claims) {
-                            try {
-                                return provider.get(header.getKeyId()).getPublicKey();
-                            } catch (JwkException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                    })
+            Jws<Claims> jws = Jwts.parser()
+                    .keyLocator(keyLocatorAdapter)
                     .requireIssuer(issuer)
                     .requireAudience(audience)
                     .build()
-                    .parseClaimsJws(jwtHeader);
+                    .parseSignedClaims(jwtHeader);
 
-            Claims claims = jws.getBody();
+            Claims claims = jws.getPayload();
 
             final com.antinvestor.apis.common.context.Context ctx = context
                     .add(DefaultKeys.TENANT_ID, claims.get(DefaultKeys.TENANT_ID.name()))

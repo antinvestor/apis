@@ -14,12 +14,11 @@
 
 package com.antinvestor.apis.common.interceptor.oath2;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SigningKeyResolver;
+import io.jsonwebtoken.*;
 
+import java.io.Serial;
 import java.io.Serializable;
+import java.security.Key;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
@@ -32,6 +31,7 @@ import java.util.Optional;
  */
 public class AccessToken implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -8709640649316468092L;
 
     private final String rawResponse;
@@ -40,7 +40,7 @@ public class AccessToken implements Serializable {
      * <p>
      * REQUIRED. The access token issued by the authorization server.</p>
      */
-    private String accessToken;
+    private final String accessToken;
 
     /**
      * token_type
@@ -48,7 +48,7 @@ public class AccessToken implements Serializable {
      * REQUIRED. The type of the token issued as described in http://tools.ietf.org/html/rfc6749#section-7.1 Value is
      * case insensitive.</p>
      */
-    private String tokenType;
+    private final String tokenType;
 
     /**
      * expires_in
@@ -57,7 +57,7 @@ public class AccessToken implements Serializable {
      * token will expire in one hour from the time the response was generated. If omitted, the authorization server
      * SHOULD provide the expiration time via other means or document the default value.</p>
      */
-    private Integer expiresIn;
+    private final Integer expiresIn;
 
     /**
      * refresh_token
@@ -65,7 +65,7 @@ public class AccessToken implements Serializable {
      * OPTIONAL. The refresh token, which can be used to obtain new access tokens using the same authorization grant as
      * described in http://tools.ietf.org/html/rfc6749#section-6</p>
      */
-    private String refreshToken;
+    private final String refreshToken;
 
     /**
      * scope
@@ -73,7 +73,7 @@ public class AccessToken implements Serializable {
      * OPTIONAL, if identical to the scope requested by the client; otherwise, REQUIRED. The scope of the access token
      * as described by http://tools.ietf.org/html/rfc6749#section-3.3</p>
      */
-    private String scope;
+    private final String scope;
 
     private Jws<Claims> parsedJwt;
 
@@ -142,15 +142,15 @@ public class AccessToken implements Serializable {
         if (Objects.isNull(parsedJwt)) {
             return Optional.empty();
         }
-        return Optional.of(LocalDateTime.from(parsedJwt.getBody().getExpiration().toInstant()));
+        return Optional.of(LocalDateTime.from(parsedJwt.getPayload().getExpiration().toInstant()));
     }
 
-    public void parse(SigningKeyResolver signingKeyResolver, Configuration configuration) {
+    public void parse(LocatorAdapter<Key> locatorAdapter, Configuration configuration) {
 
-        parsedJwt = Jwts.parserBuilder()
-                .setSigningKeyResolver(signingKeyResolver)
+        parsedJwt = Jwts.parser()
+                .keyLocator(locatorAdapter)
                 .requireIssuer(configuration.issuer)
-                .build().parseClaimsJws(getAccessToken());
+                .build().parseSignedClaims(getAccessToken());
     }
 
     public boolean isValid() {

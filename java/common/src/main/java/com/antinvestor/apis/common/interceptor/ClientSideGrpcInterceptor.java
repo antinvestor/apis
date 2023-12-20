@@ -25,12 +25,14 @@ import com.antinvestor.apis.common.interceptor.oath2.Oauth2Client;
 import com.antinvestor.apis.common.utilities.HttpUtil;
 import com.antinvestor.apis.common.utilities.TextUtils;
 import io.grpc.*;
+import io.jsonwebtoken.LocatorAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
+import java.security.Key;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -47,7 +49,7 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
     private final String apiKeyValue;
     private final String apiSecretValue;
     private Configuration optionalConfiguration;
-    private io.jsonwebtoken.SigningKeyResolver optionalSigningKeyResolver;
+    private LocatorAdapter<Key> keyLocatorAdapter;
     private Oauth2Client oauth2service;
     private AccessToken optionalAccessToken;
 
@@ -96,7 +98,7 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
         }
 
         optionalAccessToken = generateBearerToken();
-        optionalAccessToken.parse(optionalSigningKeyResolver, optionalConfiguration);
+        optionalAccessToken.parse(keyLocatorAdapter, optionalConfiguration);
 
         return optionalAccessToken.getAccessToken();
 
@@ -110,8 +112,8 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
 
         }
 
-        if (Objects.isNull(optionalSigningKeyResolver)) {
-            this.optionalSigningKeyResolver = new JwtKeyResolver(oauth2ServerUrl);
+        if (Objects.isNull(keyLocatorAdapter)) {
+            this.keyLocatorAdapter = new JwtKeyResolver(oauth2ServerUrl);
         }
 
         return getOauth2Service().getAccessToken();

@@ -20,19 +20,17 @@ import com.auth0.jwk.Jwk;
 import com.auth0.jwk.JwkException;
 import com.auth0.jwk.JwkProvider;
 import com.auth0.jwk.JwkProviderBuilder;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwsHeader;
-import io.jsonwebtoken.SigningKeyResolver;
+import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.Key;
 import java.util.concurrent.TimeUnit;
 
-public class JwtKeyResolver implements SigningKeyResolver {
+public class JwtKeyResolver extends LocatorAdapter<Key> {
 
     private static final Logger log = LoggerFactory.getLogger(JwtKeyResolver.class);
-    private JwkProvider jwkProvider;
+    private final JwkProvider jwkProvider;
 
     public JwtKeyResolver(String oauth2ServiceUrl) throws UnRetriableException, RetriableException {
         jwkProvider = new JwkProviderBuilder(oauth2ServiceUrl)
@@ -44,12 +42,13 @@ public class JwtKeyResolver implements SigningKeyResolver {
 
     }
 
-
     @Override
-    public Key resolveSigningKey(JwsHeader header, Claims claims) {
+    protected Key locate(ProtectedHeader header) {
 
+        //inspect the header, lookup and return the verification key
+        String keyId = header.getKeyId();
         try {
-            Jwk jwk = jwkProvider.get(header.getKeyId());
+            Jwk jwk = jwkProvider.get(keyId);
 
             return jwk.getPublicKey();
 
@@ -58,15 +57,4 @@ public class JwtKeyResolver implements SigningKeyResolver {
         }
     }
 
-    @Override
-    public Key resolveSigningKey(JwsHeader header, String plaintext) {
-
-        try {
-            Jwk jwk = jwkProvider.get(header.getKeyId());
-            return jwk.getPublicKey();
-
-        } catch (JwkException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
