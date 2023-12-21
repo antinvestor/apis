@@ -20,7 +20,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.antinvestor.apis.partition;
+package com.antinvestor.apis.partition.client;
 
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.antinvestor.apis.notification;
+package com.antinvestor.apis.notification.client;
 
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;

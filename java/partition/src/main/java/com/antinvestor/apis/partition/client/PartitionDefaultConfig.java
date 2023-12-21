@@ -12,17 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.antinvestor.apis.notification;
+package com.antinvestor.apis.partition.client;
 
 import com.antinvestor.apis.common.config.DefaultConfig;
 import org.aeonbits.owner.Config;
 
-public interface NotificationDefaultConfig extends DefaultConfig {
-    @Config.DefaultValue("notifications.api.antinvestor.com")
-    @Config.Key("${product}.${env}.notifications.host.url")
-    String notificationsHostUrl();
+public interface PartitionDefaultConfig extends DefaultConfig {
+    @Config.DefaultValue("partitions.api.antinvestor.com")
+    @Config.Key("${product}.${env}.partitions.host.url")
+    String partitionsHostUrl();
 
     @Config.DefaultValue("443")
-    @Config.Key("${product}.${env}.notifications.host.port")
-    Integer notificationsHostPort();
+    @Config.Key("${product}.${env}.partitions.host.port")
+    Integer partitionsHostPort();
 }
