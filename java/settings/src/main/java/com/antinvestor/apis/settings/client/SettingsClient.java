@@ -281,6 +281,19 @@ public class SettingsClient implements AutoCloseable {
         };
     }
 
+
+    public void deleteObjectSetting(String moduleName, BaseModel object) {
+
+        Setting setting = Setting.newBuilder()
+                .setModule(moduleName)
+                .setName("")
+                .setObject(object.getClass().getSimpleName())
+                .setObjectId(String.valueOf(object.getId()))
+                .build();
+
+    }
+
+
     private SettingsServiceGrpc.SettingsServiceBlockingStub getStub() {
         return SettingsServiceGrpc.newBlockingStub(channel);
     }
