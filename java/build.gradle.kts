@@ -65,7 +65,7 @@ subprojects {
         api("com.google.protobuf:protobuf-java:3.25.1")
         api("io.grpc:grpc-protobuf:1.60.1")
         api("io.grpc:grpc-services:1.60.1")
-        api("io.grpc:grpc-stub:1.60.0")
+        api("io.grpc:grpc-stub:1.60.1")
         api("build.buf:protovalidate:0.1.9")
 
 
