@@ -32,7 +32,7 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@342dbebe7272035434f9baccc29a816ec6dd2c7b
       - name: Publish package
-        uses: gradle/gradle-build-action@a7b743845f0c60004ced1073c39c2d8defad19d1
+        uses: gradle/gradle-build-action@5d2dd0dea4f991e50e445c733ea237f7fb58fde1
         with:
           arguments: ${{ matrix.api_module }}:publish
           build-root-directory: java
