@@ -30,38 +30,35 @@ import java.io.File;
 
 public class FilesClient implements AutoCloseable {
 
-    private static FilesClient STATIC_INSTANCE = null;
-    private final DefaultApi apiInstance;
-
-    private FilesClient(DefaultApi apiInstance) {
-        this.apiInstance = apiInstance;
-    }
+    private DefaultApi apiInstance;
 
     public static FilesClient getInstance(Context context) {
 
-        if (STATIC_INSTANCE == null) {
 
-            var optionalConfig = ((DefaultContext) context).getConfig();
-            if (optionalConfig.isEmpty())
-                throw new RuntimeException("Files configuration is required");
-            var cfg = (FilesDefaultConfig) optionalConfig.get();
+        var optionalConfig = ((DefaultContext) context).getConfig();
+        if (optionalConfig.isEmpty())
+            throw new RuntimeException("Files configuration is required");
+        var cfg = (FilesDefaultConfig) optionalConfig.get();
 
 
-            ApiClient defaultClient = Configuration.getDefaultApiClient();
-            defaultClient.setHost(cfg.filesHostUrl());
-            defaultClient.setPort(cfg.filesHostPort());
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setHost(cfg.filesHostUrl());
+        defaultClient.setPort(cfg.filesHostPort());
 
-            var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-            optionalClientSideGrpcInterceptor.ifPresent(defaultClient::setRequestInterceptor);
+        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
+        optionalClientSideGrpcInterceptor.ifPresent(defaultClient::setRequestInterceptor);
 
-            DefaultApi apiInstance = new DefaultApi(defaultClient);
+        DefaultApi apiInstance = new DefaultApi(defaultClient);
 
-            STATIC_INSTANCE = new FilesClient(apiInstance);
-        }
+        var filesClient = new FilesClient();
+        filesClient.setApiInstance(apiInstance);
 
-        return STATIC_INSTANCE;
+        return filesClient;
     }
 
+    public void setApiInstance(DefaultApi apiInstance) {
+        this.apiInstance = apiInstance;
+    }
 
     @Override
     public void close() throws Exception {

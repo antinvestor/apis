@@ -34,15 +34,17 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class PartitionClient implements AutoCloseable {
-    private static PartitionClient STATIC_INSTANCE = null;
-    private final ManagedChannel channel;
+    private ManagedChannel channel;
 
-    private PartitionClient(ManagedChannel channel) {
+    public ManagedChannel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(ManagedChannel channel) {
         this.channel = channel;
     }
 
     public static PartitionClient getInstance(Context context) {
-        if (STATIC_INSTANCE == null) {
 
             var optionalConfig = ((DefaultContext) context).getConfig();
             if (optionalConfig.isEmpty())
@@ -56,12 +58,12 @@ public class PartitionClient implements AutoCloseable {
             var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
             optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
 
-
             ManagedChannel channel = channelBuilder.build();
 
-            STATIC_INSTANCE = new PartitionClient(channel);
-        }
-        return STATIC_INSTANCE;
+            var partitionClient = new PartitionClient();
+            partitionClient.setChannel(channel);
+            return partitionClient;
+
     }
 
     private PartitionServiceGrpc.PartitionServiceBlockingStub stub() {

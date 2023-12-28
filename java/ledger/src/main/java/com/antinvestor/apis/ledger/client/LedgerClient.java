@@ -31,16 +31,18 @@ import java.util.Optional;
 
 public class LedgerClient implements AutoCloseable {
 
-    private static LedgerClient STATIC_INSTANCE = null;
-    private final ManagedChannel channel;
+    private ManagedChannel channel;
 
-    private LedgerClient(ManagedChannel channel) {
+    public ManagedChannel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(ManagedChannel channel) {
         this.channel = channel;
     }
 
     public static LedgerClient getInstance(Context context) {
 
-        if (Objects.isNull(STATIC_INSTANCE)) {
 
             var optionalConfig = ((DefaultContext) context).getConfig();
             if (optionalConfig.isEmpty())
@@ -58,9 +60,10 @@ public class LedgerClient implements AutoCloseable {
 
             ManagedChannel channel = channelBuilder.build();
 
-            STATIC_INSTANCE = new LedgerClient(channel);
-        }
-        return STATIC_INSTANCE;
+            var ledgerClient = new LedgerClient();
+            ledgerClient.setChannel(channel);
+            return ledgerClient;
+
     }
 
     private LedgerServiceGrpc.LedgerServiceBlockingStub stub() {

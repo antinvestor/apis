@@ -25,8 +25,6 @@ import com.antinvestor.apis.settings.SettingConstantAbstract;
 import com.antinvestor.apis.settings.v1.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -40,13 +38,7 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class SettingsClient implements AutoCloseable {
-    private static SettingsClient single_instance = null;
-    private final Logger log = LoggerFactory.getLogger(SettingsClient.class);
-    private final ManagedChannel channel;
-
-    private SettingsClient(ManagedChannel channel) {
-        this.channel = channel;
-    }
+    private ManagedChannel channel;
 
     public static Optional<LocalDateTime> asLocalDateTime(String settingValue) {
         try {
@@ -85,27 +77,33 @@ public class SettingsClient implements AutoCloseable {
 
     public static SettingsClient getInstance(Context context) {
 
-        if (single_instance == null) {
+        var optionalConfig = ((DefaultContext) context).getConfig();
+        if (optionalConfig.isEmpty())
+            throw new RuntimeException("Settings configuration is required");
 
-            var optionalConfig = ((DefaultContext) context).getConfig();
-            if (optionalConfig.isEmpty())
-                throw new RuntimeException("Settings configuration is required");
-
-            var cfg = (SettingsDefaultConfig) optionalConfig.get();
+        var cfg = (SettingsDefaultConfig) optionalConfig.get();
 
 
-            ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.settingsHostUrl(), cfg.settingsHostPort())
-                    .usePlaintext();
+        ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.settingsHostUrl(), cfg.settingsHostPort())
+                .usePlaintext();
 
-            var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-            optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
+        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
+        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
 
 
-            ManagedChannel channel = channelBuilder.build();
+        ManagedChannel channel = channelBuilder.build();
 
-            single_instance = new SettingsClient(channel);
-        }
-        return single_instance;
+        var settingsClient = new SettingsClient();
+        settingsClient.setChannel(channel);
+        return settingsClient;
+    }
+
+    public ManagedChannel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(ManagedChannel channel) {
+        this.channel = channel;
     }
 
     public String getSetting(String moduleName, String settingName) {
@@ -337,8 +335,7 @@ public class SettingsClient implements AutoCloseable {
 
 
             } catch (IllegalArgumentException | IllegalAccessException | NullPointerException ex) {
-
-                log.debug(" processForDefaults -- error ", ex);
+                throw new RuntimeException(ex);
             }
         }
 

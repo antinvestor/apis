@@ -35,36 +35,37 @@ import java.util.concurrent.TimeUnit;
  * The NotificationClient class represents a client for accessing notification services.
  */
 public class NotificationClient implements AutoCloseable {
-    private static NotificationClient STATIC_INSTANCE = null;
-    private final ManagedChannel channel;
-
-    private NotificationClient(ManagedChannel channel) {
-        this.channel = channel;
-    }
+    private ManagedChannel channel;
 
     public static NotificationClient getInstance(Context context) {
 
-        if (STATIC_INSTANCE == null) {
+        var optionalConfig = ((DefaultContext) context).getConfig();
+        if (optionalConfig.isEmpty())
+            throw new RuntimeException("Notifications configuration is required");
 
-            var optionalConfig = ((DefaultContext) context).getConfig();
-            if (optionalConfig.isEmpty())
-                throw new RuntimeException("Notifications configuration is required");
-
-            var cfg = (NotificationDefaultConfig) optionalConfig.get();
+        var cfg = (NotificationDefaultConfig) optionalConfig.get();
 
 
-            ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.notificationsHostUrl(), cfg.notificationsHostPort())
-                    .usePlaintext();
+        ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.notificationsHostUrl(), cfg.notificationsHostPort())
+                .usePlaintext();
 
-            var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-            optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
+        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
+        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
 
 
-            ManagedChannel channel = channelBuilder.build();
+        ManagedChannel channel = channelBuilder.build();
 
-            STATIC_INSTANCE = new NotificationClient(channel);
-        }
-        return STATIC_INSTANCE;
+        var notificationClient = new NotificationClient();
+        notificationClient.setChannel(channel);
+        return notificationClient;
+    }
+
+    public ManagedChannel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(ManagedChannel channel) {
+        this.channel = channel;
     }
 
     private NotificationServiceGrpc.NotificationServiceBlockingStub stub() {

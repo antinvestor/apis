@@ -37,16 +37,17 @@ public class PaymentClient implements AutoCloseable {
 
     public static final String CONFIG_PAYMENTS_HOST_URL = "PAYMENTS_HOST_URL";
     public static final String CONFIG_PAYMENTS_HOST_PORT = "PAYMENTS_HOST_PORT";
-    private static PaymentClient STATIC_INSTANCE = null;
-    private final ManagedChannel channel;
+    private ManagedChannel channel;
 
-    private PaymentClient(ManagedChannel channel) {
+    public ManagedChannel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(ManagedChannel channel) {
         this.channel = channel;
     }
 
     public static PaymentClient getInstance(Context context) {
-
-        if (STATIC_INSTANCE == null) {
 
             var optionalConfig = ((DefaultContext) context).getConfig();
             if (optionalConfig.isEmpty())
@@ -64,9 +65,9 @@ public class PaymentClient implements AutoCloseable {
 
             ManagedChannel channel = channelBuilder.build();
 
-            STATIC_INSTANCE = new PaymentClient(channel);
-        }
-        return STATIC_INSTANCE;
+            var paymentClient = new PaymentClient();
+            paymentClient.setChannel(channel);
+            return paymentClient;
     }
 
     private PaymentServiceGrpc.PaymentServiceBlockingStub stub() {

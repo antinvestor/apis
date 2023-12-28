@@ -25,15 +25,17 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class ProfilesClient implements AutoCloseable {
-    private static ProfilesClient STATIC_INSTANCE = null;
-    private final ManagedChannel channel;
+    private ManagedChannel channel;
 
-    private ProfilesClient(ManagedChannel channel) {
+    public ManagedChannel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(ManagedChannel channel) {
         this.channel = channel;
     }
 
     public static ProfilesClient getInstance(Context context) {
-        if (STATIC_INSTANCE == null) {
 
             var optionalConfig = ((DefaultContext) context).getConfig();
             if (optionalConfig.isEmpty())
@@ -48,12 +50,13 @@ public class ProfilesClient implements AutoCloseable {
             var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
             optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
 
-
             ManagedChannel channel = channelBuilder.build();
 
-            STATIC_INSTANCE = new ProfilesClient(channel);
-        }
-        return STATIC_INSTANCE;
+            var profileClient = new ProfilesClient();
+            profileClient.setChannel(channel);
+
+            return profileClient;
+
     }
 
     private ProfileServiceGrpc.ProfileServiceBlockingStub stub() {
