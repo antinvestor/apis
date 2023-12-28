@@ -71,7 +71,7 @@ subprojects {
 
         api("com.googlecode.libphonenumber:libphonenumber:8.13.27")
 
-        api("org.slf4j:slf4j-api:2.0.9")
+        api("org.slf4j:slf4j-api:2.0.10")
 
         compileOnly("org.apache.tomcat:annotations-api:6.0.53")
 
