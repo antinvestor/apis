@@ -4,7 +4,6 @@ api/openapi.yaml
 docs/DefaultApi.md
 docs/Error.md
 docs/ModelFile.md
-pom.xml
 src/main/AndroidManifest.xml
 src/main/java/com/antinvestor/apis/files/api/DefaultApi.java
 src/main/java/com/antinvestor/apis/files/invoker/ApiClient.java

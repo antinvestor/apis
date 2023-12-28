@@ -5,6 +5,7 @@
 //
 //	mockgen -source=/home/j/code/antinvestor/apis/go/partition/v1/partition_grpc.pb.go -package=partitionv1 -destination=/home/j/code/antinvestor/apis/go/partition/v1/partition_grpc_mock.go
 //
+
 // Package partitionv1 is a generated GoMock package.
 package partitionv1
 

@@ -5,6 +5,7 @@
 //
 //	mockgen -source=/home/j/code/antinvestor/apis/go/settings/v1/settings_grpc.pb.go -package=settingsv1 -destination=/home/j/code/antinvestor/apis/go/settings/v1/settings_grpc_mock.go
 //
+
 // Package settingsv1 is a generated GoMock package.
 package settingsv1
 

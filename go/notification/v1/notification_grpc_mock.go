@@ -5,6 +5,7 @@
 //
 //	mockgen -source=/home/j/code/antinvestor/apis/go/notification/v1/notification_grpc.pb.go -package=notificationv1 -destination=/home/j/code/antinvestor/apis/go/notification/v1/notification_grpc_mock.go
 //
+
 // Package notificationv1 is a generated GoMock package.
 package notificationv1
 

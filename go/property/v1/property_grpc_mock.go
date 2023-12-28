@@ -5,6 +5,7 @@
 //
 //	mockgen -source=/home/j/code/antinvestor/apis/go/property/v1/property_grpc.pb.go -package=propertyv1 -destination=/home/j/code/antinvestor/apis/go/property/v1/property_grpc_mock.go
 //
+
 // Package propertyv1 is a generated GoMock package.
 package propertyv1
 

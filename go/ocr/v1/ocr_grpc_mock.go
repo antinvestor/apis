@@ -5,6 +5,7 @@
 //
 //	mockgen -source=/home/j/code/antinvestor/apis/go/ocr/v1/ocr_grpc.pb.go -package=ocrv1 -destination=/home/j/code/antinvestor/apis/go/ocr/v1/ocr_grpc_mock.go
 //
+
 // Package ocrv1 is a generated GoMock package.
 package ocrv1
 

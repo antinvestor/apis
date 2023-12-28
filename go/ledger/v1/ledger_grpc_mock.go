@@ -5,6 +5,7 @@
 //
 //	mockgen -source=/home/j/code/antinvestor/apis/go/ledger/v1/ledger_grpc.pb.go -package=ledgerv1 -destination=/home/j/code/antinvestor/apis/go/ledger/v1/ledger_grpc_mock.go
 //
+
 // Package ledgerv1 is a generated GoMock package.
 package ledgerv1
 

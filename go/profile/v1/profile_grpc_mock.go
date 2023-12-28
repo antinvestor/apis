@@ -5,6 +5,7 @@
 //
 //	mockgen -source=/home/j/code/antinvestor/apis/go/profile/v1/profile_grpc.pb.go -package=profilev1 -destination=/home/j/code/antinvestor/apis/go/profile/v1/profile_grpc_mock.go
 //
+
 // Package profilev1 is a generated GoMock package.
 package profilev1
 

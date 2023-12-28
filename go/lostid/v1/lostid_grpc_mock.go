@@ -5,6 +5,7 @@
 //
 //	mockgen -source=/home/j/code/antinvestor/apis/go/lostid/v1/lostid_grpc.pb.go -package=lostidv1 -destination=/home/j/code/antinvestor/apis/go/lostid/v1/lostid_grpc_mock.go
 //
+
 // Package lostidv1 is a generated GoMock package.
 package lostidv1
 
