@@ -37,6 +37,13 @@ import java.util.concurrent.TimeUnit;
 public class NotificationClient implements AutoCloseable {
     private ManagedChannel channel;
 
+    protected NotificationClient() {
+    }
+
+    public NotificationClient(ManagedChannel channel) {
+        this.channel = channel;
+    }
+
     public static NotificationClient getInstance(Context context) {
 
         var optionalConfig = ((DefaultContext) context).getConfig();
@@ -55,9 +62,7 @@ public class NotificationClient implements AutoCloseable {
 
         ManagedChannel channel = channelBuilder.build();
 
-        var notificationClient = new NotificationClient();
-        notificationClient.setChannel(channel);
-        return notificationClient;
+        return new NotificationClient(channel);
     }
 
     public ManagedChannel getChannel() {

@@ -34,10 +34,36 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class PaymentClient implements AutoCloseable {
-
-    public static final String CONFIG_PAYMENTS_HOST_URL = "PAYMENTS_HOST_URL";
-    public static final String CONFIG_PAYMENTS_HOST_PORT = "PAYMENTS_HOST_PORT";
     private ManagedChannel channel;
+
+    protected PaymentClient() {
+    }
+
+    public PaymentClient(ManagedChannel channel) {
+        this.channel = channel;
+    }
+
+    public static PaymentClient getInstance(Context context) {
+
+        var optionalConfig = ((DefaultContext) context).getConfig();
+        if (optionalConfig.isEmpty())
+            throw new RuntimeException("Payment configuration is required");
+
+        var cfg = (PaymentDefaultConfig) optionalConfig.get();
+
+
+        ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.paymentsHostUrl(), cfg.paymentsHostPort())
+                .usePlaintext();
+
+        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
+        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
+
+
+        ManagedChannel channel = channelBuilder.build();
+
+        return new PaymentClient(channel);
+
+    }
 
     public ManagedChannel getChannel() {
         return channel;
@@ -45,29 +71,6 @@ public class PaymentClient implements AutoCloseable {
 
     public void setChannel(ManagedChannel channel) {
         this.channel = channel;
-    }
-
-    public static PaymentClient getInstance(Context context) {
-
-            var optionalConfig = ((DefaultContext) context).getConfig();
-            if (optionalConfig.isEmpty())
-                throw new RuntimeException("Payment configuration is required");
-
-            var cfg = (PaymentDefaultConfig) optionalConfig.get();
-
-
-            ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.paymentsHostUrl(), cfg.paymentsHostPort())
-                    .usePlaintext();
-
-            var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-            optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
-
-
-            ManagedChannel channel = channelBuilder.build();
-
-            var paymentClient = new PaymentClient();
-            paymentClient.setChannel(channel);
-            return paymentClient;
     }
 
     private PaymentServiceGrpc.PaymentServiceBlockingStub stub() {

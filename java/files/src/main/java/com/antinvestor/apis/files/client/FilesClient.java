@@ -32,6 +32,11 @@ public class FilesClient implements AutoCloseable {
 
     private DefaultApi apiInstance;
 
+    protected FilesClient(){}
+    public FilesClient(DefaultApi apiInstance) {
+        this.apiInstance = apiInstance;
+    }
+
     public static FilesClient getInstance(Context context) {
 
 
@@ -50,10 +55,7 @@ public class FilesClient implements AutoCloseable {
 
         DefaultApi apiInstance = new DefaultApi(defaultClient);
 
-        var filesClient = new FilesClient();
-        filesClient.setApiInstance(apiInstance);
-
-        return filesClient;
+        return new FilesClient(apiInstance);
     }
 
     public void setApiInstance(DefaultApi apiInstance) {

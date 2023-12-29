@@ -29,12 +29,38 @@ import com.antinvestor.apis.partition.v1.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
-
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class PartitionClient implements AutoCloseable {
     private ManagedChannel channel;
+
+    protected PartitionClient() {
+    }
+
+    public PartitionClient(ManagedChannel channel) {
+        this.channel = channel;
+    }
+
+    public static PartitionClient getInstance(Context context) {
+
+        var optionalConfig = ((DefaultContext) context).getConfig();
+        if (optionalConfig.isEmpty())
+            throw new RuntimeException("Partition configuration is required");
+
+        var cfg = (PartitionDefaultConfig) optionalConfig.get();
+
+        ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.partitionsHostUrl(), cfg.partitionsHostPort())
+                .usePlaintext();
+
+        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
+        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
+
+        ManagedChannel channel = channelBuilder.build();
+
+        return new PartitionClient(channel);
+
+    }
 
     public ManagedChannel getChannel() {
         return channel;
@@ -42,28 +68,6 @@ public class PartitionClient implements AutoCloseable {
 
     public void setChannel(ManagedChannel channel) {
         this.channel = channel;
-    }
-
-    public static PartitionClient getInstance(Context context) {
-
-            var optionalConfig = ((DefaultContext) context).getConfig();
-            if (optionalConfig.isEmpty())
-                throw new RuntimeException("Partition configuration is required");
-
-            var cfg = (PartitionDefaultConfig) optionalConfig.get();
-
-            ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.partitionsHostUrl(), cfg.partitionsHostPort())
-                    .usePlaintext();
-
-            var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-            optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
-
-            ManagedChannel channel = channelBuilder.build();
-
-            var partitionClient = new PartitionClient();
-            partitionClient.setChannel(channel);
-            return partitionClient;
-
     }
 
     private PartitionServiceGrpc.PartitionServiceBlockingStub stub() {

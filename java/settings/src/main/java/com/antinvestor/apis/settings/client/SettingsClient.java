@@ -40,6 +40,22 @@ import java.util.concurrent.TimeUnit;
 public class SettingsClient implements AutoCloseable {
     private ManagedChannel channel;
 
+    protected SettingsClient() {
+    }
+
+    public SettingsClient(ManagedChannel channel) {
+        this.channel = channel;
+    }
+
+
+    public ManagedChannel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(ManagedChannel channel) {
+        this.channel = channel;
+    }
+
     public static Optional<LocalDateTime> asLocalDateTime(String settingValue) {
         try {
             return Optional.of(LocalDateTime.parse(settingValue, DateTimeFormatter.ISO_ZONED_DATE_TIME));
@@ -93,18 +109,9 @@ public class SettingsClient implements AutoCloseable {
 
         ManagedChannel channel = channelBuilder.build();
 
-        var settingsClient = new SettingsClient();
-        settingsClient.setChannel(channel);
-        return settingsClient;
+        return new SettingsClient(channel);
     }
 
-    public ManagedChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(ManagedChannel channel) {
-        this.channel = channel;
-    }
 
     public String getSetting(String moduleName, String settingName) {
 

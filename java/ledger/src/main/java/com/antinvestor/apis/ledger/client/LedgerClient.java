@@ -33,37 +33,40 @@ public class LedgerClient implements AutoCloseable {
 
     private ManagedChannel channel;
 
-    public ManagedChannel getChannel() {
-        return channel;
+    protected LedgerClient() {
     }
 
-    public void setChannel(ManagedChannel channel) {
+    public LedgerClient(ManagedChannel channel) {
         this.channel = channel;
     }
 
     public static LedgerClient getInstance(Context context) {
 
 
-            var optionalConfig = ((DefaultContext) context).getConfig();
-            if (optionalConfig.isEmpty())
-                throw new RuntimeException("Ledger configuration is required");
+        var optionalConfig = ((DefaultContext) context).getConfig();
+        if (optionalConfig.isEmpty())
+            throw new RuntimeException("Ledger configuration is required");
 
-            var cfg = (LedgerConfig) optionalConfig.get();
+        var cfg = (LedgerConfig) optionalConfig.get();
 
 
+        ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.ledgerHostUrl(), cfg.ledgerHostPort())
+                .usePlaintext();
 
-            ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.ledgerHostUrl(), cfg.ledgerHostPort())
-                    .usePlaintext();
+        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
+        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
 
-            var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-            optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
+        ManagedChannel channel = channelBuilder.build();
 
-            ManagedChannel channel = channelBuilder.build();
+        return new LedgerClient(channel);
+    }
 
-            var ledgerClient = new LedgerClient();
-            ledgerClient.setChannel(channel);
-            return ledgerClient;
+    public ManagedChannel getChannel() {
+        return channel;
+    }
 
+    public void setChannel(ManagedChannel channel) {
+        this.channel = channel;
     }
 
     private LedgerServiceGrpc.LedgerServiceBlockingStub stub() {
