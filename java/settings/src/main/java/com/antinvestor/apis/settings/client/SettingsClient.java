@@ -25,6 +25,8 @@ import com.antinvestor.apis.settings.SettingConstantAbstract;
 import com.antinvestor.apis.settings.v1.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -37,22 +39,31 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
+@ApplicationScoped
 public class SettingsClient implements AutoCloseable {
     private ManagedChannel channel;
 
-    protected SettingsClient() {
+    @Inject
+    public SettingsClient(Context context) {
+
+        var optionalConfig = ((DefaultContext) context).getConfig();
+        if (optionalConfig.isEmpty())
+            throw new RuntimeException("Settings configuration is required");
+
+        var cfg = (SettingsDefaultConfig) optionalConfig.get();
+
+
+        ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder
+                .forAddress(cfg.settingsHostUrl(), cfg.settingsHostPort())
+                .usePlaintext();
+
+        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
+        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
+
+        this.channel = channelBuilder.build();
     }
 
     public SettingsClient(ManagedChannel channel) {
-        this.channel = channel;
-    }
-
-
-    public ManagedChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(ManagedChannel channel) {
         this.channel = channel;
     }
 
@@ -91,27 +102,13 @@ public class SettingsClient implements AutoCloseable {
         return Boolean.parseBoolean(settingValue);
     }
 
-    public static SettingsClient getInstance(Context context) {
-
-        var optionalConfig = ((DefaultContext) context).getConfig();
-        if (optionalConfig.isEmpty())
-            throw new RuntimeException("Settings configuration is required");
-
-        var cfg = (SettingsDefaultConfig) optionalConfig.get();
-
-
-        ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.settingsHostUrl(), cfg.settingsHostPort())
-                .usePlaintext();
-
-        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
-
-
-        ManagedChannel channel = channelBuilder.build();
-
-        return new SettingsClient(channel);
+    public ManagedChannel getChannel() {
+        return channel;
     }
 
+    public void setChannel(ManagedChannel channel) {
+        this.channel = channel;
+    }
 
     public String getSetting(String moduleName, String settingName) {
 

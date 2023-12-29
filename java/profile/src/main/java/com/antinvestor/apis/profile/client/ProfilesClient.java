@@ -20,21 +20,22 @@ import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.profile.v1.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+@ApplicationScoped
 public class ProfilesClient implements AutoCloseable {
     private ManagedChannel channel;
-
-    protected ProfilesClient() {
-    }
 
     public ProfilesClient(ManagedChannel channel) {
         this.channel = channel;
     }
 
-    public static ProfilesClient getInstance(Context context) {
+    @Inject
+    public ProfilesClient(Context context) {
 
         var optionalConfig = ((DefaultContext) context).getConfig();
         if (optionalConfig.isEmpty())
@@ -42,16 +43,14 @@ public class ProfilesClient implements AutoCloseable {
 
         var cfg = (ProfilesDefaultConfig) optionalConfig.get();
 
-
-        ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.profilesHostUrl(), cfg.profilesHostPort())
+        var channelBuilder = ManagedChannelBuilder
+                .forAddress(cfg.profilesHostUrl(), cfg.profilesHostPort())
                 .usePlaintext();
 
         var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
         optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
 
-        ManagedChannel channel = channelBuilder.build();
-
-        return new ProfilesClient(channel);
+        this.channel = channelBuilder.build();
     }
 
     public ManagedChannel getChannel() {

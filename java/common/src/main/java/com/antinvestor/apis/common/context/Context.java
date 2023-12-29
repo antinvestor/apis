@@ -27,7 +27,7 @@ public interface Context {
    @Immutable
    public static class Key<T> {
 
-      private String name;
+      private final String name;
 
       private Key(String name) {
          this.name = name;

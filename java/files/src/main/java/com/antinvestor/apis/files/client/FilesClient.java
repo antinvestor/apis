@@ -25,20 +25,22 @@ import com.antinvestor.apis.files.invoker.ApiClient;
 import com.antinvestor.apis.files.invoker.ApiException;
 import com.antinvestor.apis.files.invoker.Configuration;
 import com.antinvestor.apis.files.model.ModelFile;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.io.File;
 
+@ApplicationScoped
 public class FilesClient implements AutoCloseable {
 
     private DefaultApi apiInstance;
 
-    protected FilesClient(){}
     public FilesClient(DefaultApi apiInstance) {
         this.apiInstance = apiInstance;
     }
 
-    public static FilesClient getInstance(Context context) {
-
+    @Inject
+    public FilesClient(Context context) {
 
         var optionalConfig = ((DefaultContext) context).getConfig();
         if (optionalConfig.isEmpty())
@@ -53,9 +55,7 @@ public class FilesClient implements AutoCloseable {
         var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
         optionalClientSideGrpcInterceptor.ifPresent(defaultClient::setRequestInterceptor);
 
-        DefaultApi apiInstance = new DefaultApi(defaultClient);
-
-        return new FilesClient(apiInstance);
+        this.apiInstance = new DefaultApi(defaultClient);
     }
 
     public void setApiInstance(DefaultApi apiInstance) {

@@ -22,6 +22,8 @@ import com.antinvestor.apis.common.v1.*;
 import com.antinvestor.apis.notification.v1.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,17 +36,16 @@ import java.util.concurrent.TimeUnit;
 /**
  * The NotificationClient class represents a client for accessing notification services.
  */
+@ApplicationScoped
 public class NotificationClient implements AutoCloseable {
     private ManagedChannel channel;
-
-    protected NotificationClient() {
-    }
 
     public NotificationClient(ManagedChannel channel) {
         this.channel = channel;
     }
 
-    public static NotificationClient getInstance(Context context) {
+    @Inject
+    public NotificationClient(Context context) {
 
         var optionalConfig = ((DefaultContext) context).getConfig();
         if (optionalConfig.isEmpty())
@@ -52,17 +53,15 @@ public class NotificationClient implements AutoCloseable {
 
         var cfg = (NotificationDefaultConfig) optionalConfig.get();
 
-
-        ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.notificationsHostUrl(), cfg.notificationsHostPort())
+        var channelBuilder = ManagedChannelBuilder
+                .forAddress(cfg.notificationsHostUrl(), cfg.notificationsHostPort())
                 .usePlaintext();
 
         var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
         optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
 
 
-        ManagedChannel channel = channelBuilder.build();
-
-        return new NotificationClient(channel);
+        this.channel = channelBuilder.build();
     }
 
     public ManagedChannel getChannel() {

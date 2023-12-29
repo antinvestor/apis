@@ -28,37 +28,35 @@ import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.partition.v1.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+@ApplicationScoped
 public class PartitionClient implements AutoCloseable {
     private ManagedChannel channel;
-
-    protected PartitionClient() {
-    }
 
     public PartitionClient(ManagedChannel channel) {
         this.channel = channel;
     }
 
-    public static PartitionClient getInstance(Context context) {
+    @Inject
+    public PartitionClient(Context context) {
 
         var optionalConfig = ((DefaultContext) context).getConfig();
         if (optionalConfig.isEmpty())
             throw new RuntimeException("Partition configuration is required");
 
         var cfg = (PartitionDefaultConfig) optionalConfig.get();
-
-        ManagedChannelBuilder channelBuilder = ManagedChannelBuilder.forAddress(cfg.partitionsHostUrl(), cfg.partitionsHostPort())
+        var channelBuilder = ManagedChannelBuilder.forAddress(cfg.partitionsHostUrl(), cfg.partitionsHostPort())
                 .usePlaintext();
 
-        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
+        var optionalClientInterceptor = ClientSideGrpcInterceptor.fromContext(context);
+        optionalClientInterceptor.ifPresent(channelBuilder::intercept);
 
-        ManagedChannel channel = channelBuilder.build();
-
-        return new PartitionClient(channel);
+        this.channel = channelBuilder.build();
 
     }
 
