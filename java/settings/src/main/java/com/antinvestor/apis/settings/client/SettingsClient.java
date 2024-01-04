@@ -83,7 +83,7 @@ public class SettingsClient implements AutoCloseable {
 
     public static BigDecimal asBigDecimal(String settingValue) {
         if (TextUtils.isBlank(settingValue)) {
-            return BigDecimal.ZERO;
+            return null;
         }
         return new BigDecimal(settingValue);
     }
