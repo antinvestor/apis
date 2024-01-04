@@ -17,9 +17,7 @@ package com.antinvestor.apis.settings.client;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.database.BaseModel;
-import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
-import com.antinvestor.apis.common.utilities.NumberUtils;
 import com.antinvestor.apis.common.utilities.TextUtils;
 import com.antinvestor.apis.settings.SettingConstantAbstract;
 import com.antinvestor.apis.settings.v1.*;
@@ -75,12 +73,12 @@ public class SettingsClient implements AutoCloseable {
         }
     }
 
-    public static double asDouble(String settingValue) {
-        try {
-            return Double.parseDouble(null == settingValue ? "0" : settingValue);
-        } catch (NumberFormatException nfe) {
-            return 0;
+    public static Double asDouble(String settingValue) {
+        if (TextUtils.isBlank(settingValue)) {
+            return null;
         }
+        return Double.parseDouble(settingValue);
+
     }
 
     public static BigDecimal asBigDecimal(String settingValue) {
@@ -90,12 +88,12 @@ public class SettingsClient implements AutoCloseable {
         return new BigDecimal(settingValue);
     }
 
-    public static int asInt(String settingValue) {
-        try {
-            return NumberUtils.toInt(settingValue);
-        } catch (UnRetriableException nfe) {
-            return -1;
+    public static Integer asInt(String settingValue) {
+
+        if (TextUtils.isBlank(settingValue)) {
+            return null;
         }
+        return Integer.parseInt(settingValue);
     }
 
     public static boolean asBoolean(String settingValue) {
@@ -123,7 +121,15 @@ public class SettingsClient implements AutoCloseable {
         return settingValue.getData().getValue();
     }
 
-    public double getSettingAsDouble(String moduleName, String settingName) {
+    public Double getSettingAsDouble(String moduleName, String settingName, double defaultValue) {
+        var result = getSettingAsDouble(moduleName, settingName);
+        if( Objects.isNull(result)){
+            return defaultValue;
+        }
+        return result;
+    }
+
+    public Double getSettingAsDouble(String moduleName, String settingName) {
         String setting = getSetting(moduleName, settingName);
         return asDouble(setting);
     }
@@ -133,9 +139,25 @@ public class SettingsClient implements AutoCloseable {
         return asBigDecimal(setting);
     }
 
-    public int getSettingAsInt(String moduleName, String settingName) {
+    public BigDecimal getSettingAsBigDecimal(String moduleName, String settingName, BigDecimal defaultValue) {
+        var result = getSettingAsBigDecimal(moduleName, settingName);
+        if( Objects.isNull(result)){
+            return defaultValue;
+        }
+        return result;
+    }
+
+    public Integer getSettingAsInt(String moduleName, String settingName) {
         String setting = getSetting(moduleName, settingName);
         return asInt(setting);
+    }
+
+    public Integer getSettingAsInt(String moduleName, String settingName, int defaultValue) {
+        var result = getSettingAsInt(moduleName, settingName);
+        if( Objects.isNull(result)){
+            return defaultValue;
+        }
+        return result;
     }
 
     public boolean getSettingAsBoolean(String moduleName, String settingName) {

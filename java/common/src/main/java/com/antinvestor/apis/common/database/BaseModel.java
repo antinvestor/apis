@@ -74,80 +74,42 @@ import java.time.LocalDateTime;
 public interface BaseModel {
 
 
-    /**
-     * @return
-     */
     String getId();
 
-    /**
-     * @param id
-     */
     void setId(String id);
 
-    /**
-     * @return
-     */
+    int getVersion();
+
+
     String getApplicationID();
 
-    /**
-     * @param applicationID
-     */
     void setApplicationID(String applicationID);
 
-    /**
-     * @return
-     */
     String getProcessID();
 
-    /**
-     * @param processID
-     */
     void setProcessID(String processID);
 
 
     String getProcessBatchID();
 
     void setProcessBatchID(String processBatchID);
-    //This ensures any model can be managed by the pools.
 
-    /**
-     * @return
-     */
     int getEntityState();
 
-    /**
-     * @param entityState
-     */
     void setEntityState(int entityState);
 
-    /**
-     * @return
-     */
     int getEntityStatus();
 
-    /**
-     * @param entityStatus
-     */
     void setEntityStatus(int entityStatus);
 
     //These methods manage client partitioning
 
-    /**
-     * @return
-     */
-
     String getPartitionID();
 
-    /**
-     * @param partitionID
-     */
     void setPartitionID(String partitionID);
 
     String getTenantID();
 
-    /**
-     * @param tenantID
-     */
     void setTenantID(String tenantID);
 
 
