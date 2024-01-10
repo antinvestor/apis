@@ -1,4 +1,4 @@
-module github.com/antinvestor/apis/profile
+module github.com/antinvestor/apis/go/profile
 
 go 1.21
 
