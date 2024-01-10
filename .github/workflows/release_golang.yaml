@@ -18,7 +18,7 @@ jobs:
       - uses: rickstaa/action-create-tag@v1
         id: "tag_create"
         with:
-          tag: ${{ matrix.api_module }}/${{github.ref_name}}
+          tag: go/${{ matrix.api_module }}/${{github.ref_name}}
           tag_exists_error: false
-          message: "release module ${{ matrix.api_module }}/${{github.ref_name}}"
+          message: "release module go/${{ matrix.api_module }}/${{github.ref_name}}"
 
