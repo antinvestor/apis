@@ -75,7 +75,7 @@ subprojects {
 
         compileOnly("org.apache.tomcat:annotations-api:6.0.53")
 
-        runtimeOnly("io.grpc:grpc-netty-shaded:1.60.1")
+        runtimeOnly("io.grpc:grpc-netty-shaded:1.61.0")
 
 
     }
