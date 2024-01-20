@@ -14,12 +14,16 @@
 
 package com.antinvestor.apis.common.interceptor.oath2;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.LocatorAdapter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.security.Key;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -142,7 +146,7 @@ public class AccessToken implements Serializable {
         if (Objects.isNull(parsedJwt)) {
             return Optional.empty();
         }
-        return Optional.of(LocalDateTime.from(parsedJwt.getPayload().getExpiration().toInstant()));
+        return Optional.of(LocalDateTime.ofInstant(parsedJwt.getPayload().getExpiration().toInstant(), ZoneId.systemDefault()));
     }
 
     public void parse(LocatorAdapter<Key> locatorAdapter, Configuration configuration) {
