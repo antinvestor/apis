@@ -138,29 +138,21 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
     @Override
     public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(MethodDescriptor<ReqT, RespT> method, CallOptions callOptions, Channel next) {
 
-        return new ForwardingClientCall.SimpleForwardingClientCall<ReqT, RespT>(next.newCall(method, callOptions)) {
+        return new ForwardingClientCall.SimpleForwardingClientCall<>(next.newCall(method, callOptions)) {
 
             @Override
             public void start(Listener<RespT> responseListener, Metadata headers) {
-                String jwtBearerToken = null;
                 try {
-                    jwtBearerToken = getValidBearerToken();
+                    var jwtBearerToken = getValidBearerToken();
+                    /* put custom header */
+                    headers.put(JWT_BEARER_HEADER_KEY, String.format("%s %s", BEARER_TYPE, jwtBearerToken));
 
                 } catch (IOException | ExecutionException | InterruptedException | URISyntaxException |
                          UnRetriableException | RetriableException e) {
                     throw new RuntimeException(e);
                 }
 
-                /* put custom header */
-                headers.put(JWT_BEARER_HEADER_KEY, String.format("%s %s", BEARER_TYPE, jwtBearerToken));
-
-                super.start(new ForwardingClientCallListener.SimpleForwardingClientCallListener<>(responseListener) {
-                    @Override
-                    public void onHeaders(Metadata headers) {
-                        log.debug("header received from server:" + headers);
-                        super.onHeaders(headers);
-                    }
-                }, headers);
+                super.start(responseListener, headers);
             }
         };
     }
@@ -168,16 +160,12 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
     @Override
     public void accept(HttpRequest.Builder builder) {
 
-        String jwtBearerToken;
         try {
-            jwtBearerToken = getValidBearerToken();
-
+           var jwtBearerToken = getValidBearerToken();
+            builder.header(JWT_HTTP_AUTH_HEADER_KEY, String.format("%s %s", BEARER_TYPE, jwtBearerToken));
         } catch (IOException | ExecutionException | InterruptedException | URISyntaxException |
                  UnRetriableException | RetriableException e) {
             throw new RuntimeException(e);
         }
-
-        builder.header(JWT_HTTP_AUTH_HEADER_KEY, String.format("Bearer %s", jwtBearerToken));
-
     }
 }
