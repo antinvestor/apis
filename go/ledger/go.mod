@@ -3,7 +3,7 @@ module github.com/antinvestor/apis/go/ledger
 go 1.21
 
 require (
-	github.com/antinvestor/apis/go/common v1.7.13
+	github.com/antinvestor/apis/go/common v1.7.16
 	go.uber.org/mock v0.4.0
 	google.golang.org/genproto v0.0.0-20240116215550-a9fa1716bcac
 	google.golang.org/grpc v1.60.1
