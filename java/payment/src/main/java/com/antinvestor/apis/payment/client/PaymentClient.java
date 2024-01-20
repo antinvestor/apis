@@ -86,9 +86,13 @@ public class PaymentClient implements AutoCloseable {
         SearchRequest filter = SearchRequest.newBuilder().setIdQuery(paymentID).build();
 
         Iterator<SearchResponse> paymentIterator = stub().search(filter);
-        if (paymentIterator.hasNext())
-            return Optional.of(paymentIterator.next().getData(0));
+        if (paymentIterator.hasNext()) {
 
+            var searchResponse = paymentIterator.next();
+            if (searchResponse.getDataCount() > 0) {
+                return Optional.of(searchResponse.getData(0));
+            }
+        }
         return Optional.empty();
     }
 

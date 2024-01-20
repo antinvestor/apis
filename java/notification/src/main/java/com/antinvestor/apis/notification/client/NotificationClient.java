@@ -93,8 +93,12 @@ public class NotificationClient implements AutoCloseable {
     public Optional<Notification> getById(String notificationId) {
         SearchRequest searchFilter = SearchRequest.newBuilder().setIdQuery(notificationId).build();
         Iterator<SearchResponse> notificationIterator = stub().search(searchFilter);
-        if (notificationIterator.hasNext())
-            return Optional.of(notificationIterator.next().getData(0));
+        if (notificationIterator.hasNext()) {
+            var searchResponse = notificationIterator.next();
+            if (searchResponse.getDataCount() > 0) {
+                return Optional.of(searchResponse.getData(0));
+            }
+        }
         return Optional.empty();
     }
 
