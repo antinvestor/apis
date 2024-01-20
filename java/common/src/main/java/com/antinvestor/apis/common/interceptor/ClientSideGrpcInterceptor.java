@@ -43,6 +43,8 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
     private static final Logger log = LoggerFactory.getLogger(ClientSideGrpcInterceptor.class);
 
     private static final String JWT_HTTP_AUTH_HEADER_KEY = "Authorization";
+
+    public static final String BEARER_TYPE = "Bearer";
     private static final Metadata.Key<String> JWT_BEARER_HEADER_KEY =
             Metadata.Key.of("authorization", Metadata.ASCII_STRING_MARSHALLER);
     private final String oauth2ServerUrl;
@@ -150,7 +152,7 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
                 }
 
                 /* put custom header */
-                headers.put(JWT_BEARER_HEADER_KEY, jwtBearerToken);
+                headers.put(JWT_BEARER_HEADER_KEY, String.format("%s %s", BEARER_TYPE, jwtBearerToken));
 
                 super.start(new ForwardingClientCallListener.SimpleForwardingClientCallListener<>(responseListener) {
                     @Override
