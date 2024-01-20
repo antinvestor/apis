@@ -46,7 +46,7 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
 
     public static final String BEARER_TYPE = "Bearer";
     private static final Metadata.Key<String> JWT_BEARER_HEADER_KEY =
-            Metadata.Key.of("authorization", Metadata.ASCII_STRING_MARSHALLER);
+            Metadata.Key.of(JWT_HTTP_AUTH_HEADER_KEY, Metadata.ASCII_STRING_MARSHALLER);
     private final String oauth2ServerUrl;
     private final String apiKeyValue;
     private final String apiSecretValue;
@@ -136,12 +136,16 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
     }
 
     @Override
-    public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(MethodDescriptor<ReqT, RespT> method, CallOptions callOptions, Channel next) {
+    public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(
+            MethodDescriptor<ReqT, RespT> methodDescriptor,
+            CallOptions callOptions,
+            Channel channel) {
 
-        return new ForwardingClientCall.SimpleForwardingClientCall<>(next.newCall(method, callOptions)) {
+        return new ForwardingClientCall.SimpleForwardingClientCall<>(
+                channel.newCall(methodDescriptor, callOptions)) {
 
             @Override
-            public void start(Listener<RespT> responseListener, Metadata headers) {
+            public void start(ClientCall.Listener<RespT> responseListener, Metadata headers) {
                 try {
                     var jwtBearerToken = getValidBearerToken();
                     /* put custom header */

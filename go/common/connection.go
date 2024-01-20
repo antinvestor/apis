@@ -84,7 +84,7 @@ func (jwt *JWTInterceptor) UnaryClientInterceptor(
 
 	if tokenStr != "" {
 		// Create a new context with the token and make the first request
-		authCtx := metadata.AppendToOutgoingContext(ctx, "authorization", "bearer "+jwt.token.AccessToken)
+		authCtx := metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+jwt.token.AccessToken)
 		err = invoker(authCtx, method, req, reply, cc, opts...)
 	} else {
 		err = invoker(ctx, method, req, reply, cc, opts...)
@@ -109,7 +109,7 @@ func (jwt *JWTInterceptor) StreamClientInterceptor(
 
 	if tokenStr != "" {
 		// Create a new context with the token and make the first request
-		authCtx := metadata.AppendToOutgoingContext(ctx, "authorization", "bearer "+jwt.token.AccessToken)
+		authCtx := metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+jwt.token.AccessToken)
 		return streamer(authCtx, desc, cc, method, opts...)
 	} else {
 		return streamer(ctx, desc, cc, method, opts...)
