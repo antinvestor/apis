@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
 import java.security.Key;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -40,25 +42,26 @@ import java.util.function.Consumer;
 
 public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<HttpRequest.Builder> {
 
-    private static final Logger log = LoggerFactory.getLogger(ClientSideGrpcInterceptor.class);
-
-    private static final String JWT_HTTP_AUTH_HEADER_KEY = "Authorization";
-
     public static final String BEARER_TYPE = "Bearer";
+    private static final Logger log = LoggerFactory.getLogger(ClientSideGrpcInterceptor.class);
+    private static final String JWT_HTTP_AUTH_HEADER_KEY = "Authorization";
     private static final Metadata.Key<String> JWT_BEARER_HEADER_KEY =
             Metadata.Key.of(JWT_HTTP_AUTH_HEADER_KEY, Metadata.ASCII_STRING_MARSHALLER);
     private final String oauth2ServerUrl;
     private final String apiKeyValue;
     private final String apiSecretValue;
+
+    private final List<String> audienceList;
     private Configuration optionalConfiguration;
     private LocatorAdapter<Key> keyLocatorAdapter;
     private Oauth2Client oauth2service;
     private AccessToken optionalAccessToken;
 
-    public ClientSideGrpcInterceptor(String oauth2ServerUrl, String apiKeyValue, String apiSecretValue) {
+    public ClientSideGrpcInterceptor(String oauth2ServerUrl, String apiKeyValue, String apiSecretValue, List<String> audience) {
         this.oauth2ServerUrl = oauth2ServerUrl;
         this.apiKeyValue = apiKeyValue;
         this.apiSecretValue = apiSecretValue;
+        this.audienceList = audience;
     }
 
     public static Optional<ClientSideGrpcInterceptor> fromContext(Context context) {
@@ -69,18 +72,22 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
             return Optional.empty();
         var config = optionalConfig.get();
 
-        return from(config.oauth2ServerUrl(), config.oauth2ApiKey(), config.oauth2ApiKeySecret());
+        return from(config.oauth2ServerUrl(), config.oauth2ApiKey(), config.oauth2ApiKeySecret(), config.oauth2ServerAudience());
     }
 
     public static Optional<ClientSideGrpcInterceptor> from(
-            String oauth2ServerUrl, String apiKeyValue, String apiKeySecret) {
+            String oauth2ServerUrl, String apiKeyValue, String apiKeySecret, List<String> audience) {
 
         if (TextUtils.isBlank(oauth2ServerUrl) || TextUtils.isBlank(apiKeyValue)) {
             return Optional.empty();
         }
 
+        if (Objects.isNull(audience)) {
+            audience = Collections.emptyList();
+        }
+
         ClientSideGrpcInterceptor clientInterceptor = new ClientSideGrpcInterceptor(
-                oauth2ServerUrl, apiKeyValue, apiKeySecret
+                oauth2ServerUrl, apiKeyValue, apiKeySecret, audience
         );
         return Optional.of(clientInterceptor);
     }
@@ -127,9 +134,10 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
         }
 
         oauth2service = new Oauth2Client()
-                .oauth2ServiceUrl(optionalConfiguration.tokenEndpoint)
+                .oauth2ServiceTokenUri(optionalConfiguration.tokenEndpoint)
                 .apiKey(apiKeyValue)
                 .apiSecret(apiSecretValue)
+                .audience(audienceList)
                 .scope("offline_access");
 
         return oauth2service;
@@ -165,7 +173,7 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
     public void accept(HttpRequest.Builder builder) {
 
         try {
-           var jwtBearerToken = getValidBearerToken();
+            var jwtBearerToken = getValidBearerToken();
             builder.header(JWT_HTTP_AUTH_HEADER_KEY, String.format("%s %s", BEARER_TYPE, jwtBearerToken));
         } catch (IOException | ExecutionException | InterruptedException | URISyntaxException |
                  UnRetriableException | RetriableException e) {

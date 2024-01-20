@@ -28,6 +28,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -40,10 +41,11 @@ public class Oauth2Client {
     private String apiKey;
     private String apiSecret;
     private String scope;
+    private List<String> audience;
     private String responseType = "code";
     private String userAgent;
 
-    private URI oauth2ServiceUri;
+    private URI oauth2ServiceTokenUri;
     private Gson gson;
     private HttpClient httpClient;
 
@@ -68,6 +70,11 @@ public class Oauth2Client {
         return this;
     }
 
+    public Oauth2Client audience(List<String> audience) {
+        this.audience = audience;
+        return this;
+    }
+
     public Oauth2Client scope(String scope) {
         this.scope = scope;
         return this;
@@ -83,8 +90,8 @@ public class Oauth2Client {
         return this;
     }
 
-    public Oauth2Client oauth2ServiceUrl(String url) throws URISyntaxException {
-        this.oauth2ServiceUri = new URI(url);
+    public Oauth2Client oauth2ServiceTokenUri(String url) throws URISyntaxException {
+        this.oauth2ServiceTokenUri = new URI(url);
         return this;
     }
 
@@ -116,13 +123,16 @@ public class Oauth2Client {
         parameters.put(OAuthConstants.CLIENT_ID, apiKey);
         parameters.put(OAuthConstants.CLIENT_SECRET, apiSecret);
         parameters.put(OAuthConstants.SCOPE, scope);
+        if ( Objects.nonNull(audience) && !audience.isEmpty()) {
+            parameters.put(OAuthConstants.AUDIENCE, String.join(" ", audience));
+        }
         parameters.put(OAuthConstants.GRANT_TYPE, OAuthConstants.CLIENT_CREDENTIALS);
 
 
         var form = getParamsUrlEncoded(parameters);
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(oauth2ServiceUri)
+                .uri(oauth2ServiceTokenUri)
                 .POST(form)
                 .header(OAuthConstants.USER_AGENT_HEADER_NAME, "Stawi Client")
                 .headers("Content-Type", "application/x-www-form-urlencoded")

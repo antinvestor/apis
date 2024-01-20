@@ -17,6 +17,7 @@ package com.antinvestor.apis.common.interceptor.oath2;
 public interface OAuthConstants {
     String HEADER = "Authorization";
     String SCOPE = "scope";
+    String AUDIENCE = "audience";
 
     String ACCESS_TOKEN = "access_token";
     String CLIENT_ID = "client_id";

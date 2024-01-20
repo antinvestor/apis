@@ -16,6 +16,8 @@ package com.antinvestor.apis.common.config;
 
 import org.aeonbits.owner.Config;
 
+import java.util.List;
+
 public interface DefaultConfig extends Config {
 
     @DefaultValue("stawi")
@@ -35,6 +37,10 @@ public interface DefaultConfig extends Config {
     @DefaultValue("")
     @Key("${product}.${env}.oauth2.api.key.secret")
     String oauth2ApiKeySecret();
+
+    @DefaultValue("")
+    @Key("${product}.${env}.oauth2.server.audience")
+    List<String> oauth2ServerAudience();
 
     @DefaultValue("")
     @Key("${product}.${env}.jwt.verify.issuer")
