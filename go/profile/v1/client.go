@@ -19,8 +19,6 @@ import (
 	apic "github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
-	"time"
-
 	"math"
 )
 
@@ -66,14 +64,14 @@ type ProfileClient struct {
 func InstantiateProfileClient(
 	clientConn *grpc.ClientConn,
 	profileSrvCli ProfileServiceClient) *ProfileClient {
-	cl := &ProfileClient{
+	pc := &ProfileClient{
 		clientConn:    clientConn,
 		profileClient: profileSrvCli,
 	}
 
-	cl.setClientInfo()
+	pc.setClientInfo()
 
-	return cl
+	return pc
 }
 
 // NewProfileClient creates a new notification client.
@@ -109,8 +107,6 @@ func (pc *ProfileClient) setClientInfo(keyval ...string) {
 func (pc *ProfileClient) GetProfileByID(
 	ctx context.Context,
 	profileID string) (*ProfileObject, error) {
-	profileCtx, cancel := context.WithTimeout(ctx, time.Second*15)
-	defer cancel()
 
 	profileService := NewProfileServiceClient(pc.clientConn)
 
@@ -118,7 +114,7 @@ func (pc *ProfileClient) GetProfileByID(
 		Id: profileID,
 	}
 
-	response, err := profileService.GetById(profileCtx, &profileRequest)
+	response, err := profileService.GetById(ctx, &profileRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -129,8 +125,6 @@ func (pc *ProfileClient) CreateProfileByContactAndName(
 	ctx context.Context,
 	contact string,
 	name string) (*ProfileObject, error) {
-	profileCtx, cancel := context.WithTimeout(ctx, time.Second*30)
-	defer cancel()
 
 	profileService := NewProfileServiceClient(pc.clientConn)
 
@@ -142,7 +136,7 @@ func (pc *ProfileClient) CreateProfileByContactAndName(
 		Properties: properties,
 	}
 
-	response, err := profileService.Create(profileCtx, &createProfileRequest)
+	response, err := profileService.Create(ctx, &createProfileRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -152,14 +146,11 @@ func (pc *ProfileClient) CreateProfileByContactAndName(
 func (pc *ProfileClient) GetProfileByContact(ctx context.Context, contact string) (*ProfileObject, error) {
 	profileService := NewProfileServiceClient(pc.clientConn)
 
-	profileCtx, cancel := context.WithTimeout(ctx, time.Second*15)
-	defer cancel()
-
 	contactRequest := GetByContactRequest{
 		Contact: contact,
 	}
 
-	response, err := profileService.GetByContact(profileCtx, &contactRequest)
+	response, err := profileService.GetByContact(ctx, &contactRequest)
 
 	if err != nil {
 		return nil, err

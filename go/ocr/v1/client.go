@@ -19,8 +19,6 @@ import (
 	apic "github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
-	"time"
-
 	"math"
 )
 
@@ -97,9 +95,6 @@ func (pc *OCRClient) setClientInfo(keyval ...string) {
 
 func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, properties map[string]string, fileId ...string) (*RecognizeResponse, error) {
 
-	ctx2, cancel := context.WithTimeout(ctx, time.Second*300)
-	defer cancel()
-
 	ocrService := NewOCRServiceClient(pc.clientConn)
 
 	ocrRequest := RecognizeRequest{
@@ -109,13 +104,10 @@ func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, 
 		Properties:  properties,
 	}
 
-	return ocrService.Recognize(ctx2, &ocrRequest)
+	return ocrService.Recognize(ctx, &ocrRequest)
 }
 
 func (pc *OCRClient) StatusCheck(ctx context.Context, id string) (*StatusResponse, error) {
-
-	ctx2, cancel := context.WithTimeout(ctx, time.Second*300)
-	defer cancel()
 
 	ocrService := NewOCRServiceClient(pc.clientConn)
 
@@ -123,5 +115,5 @@ func (pc *OCRClient) StatusCheck(ctx context.Context, id string) (*StatusRespons
 		Id: id,
 	}
 
-	return ocrService.Status(ctx2, &statusCheckRequest)
+	return ocrService.Status(ctx, &statusCheckRequest)
 }
