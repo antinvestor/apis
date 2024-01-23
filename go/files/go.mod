@@ -3,7 +3,7 @@ module github.com/antinvestor/apis/go/files
 go 1.21
 
 require (
-	github.com/antinvestor/apis/go/common v1.7.18
+	github.com/antinvestor/apis/go/common v1.7.19
 	github.com/stretchr/testify v1.8.4
 	google.golang.org/grpc v1.60.1
 )
