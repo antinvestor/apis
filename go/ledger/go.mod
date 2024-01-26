@@ -2,8 +2,10 @@ module github.com/antinvestor/apis/go/ledger
 
 go 1.21
 
+replace github.com/antinvestor/apis/go/common => ../common
+
 require (
-	github.com/antinvestor/apis/go/common v1.7.20
+	github.com/antinvestor/apis/go/common v1.7.21
 	go.uber.org/mock v0.4.0
 	google.golang.org/genproto v0.0.0-20240125205218-1f4bbc51befe
 	google.golang.org/grpc v1.61.0

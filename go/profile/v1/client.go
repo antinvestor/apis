@@ -16,19 +16,18 @@ package profilev1
 
 import (
 	"context"
-	apic "github.com/antinvestor/apis/go/common"
+	"github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
 	"math"
 )
 
-const ctxKeyService = apic.CtxServiceKey("profileClientKey")
+const ctxKeyService = common.CtxServiceKey("profileClientKey")
 
-func defaultProfileClientOptions() []apic.ClientOption {
-	return []apic.ClientOption{
-		apic.WithEndpoint("profile.api.antinvestor.com:443"),
-		apic.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
-		apic.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
+func defaultProfileClientOptions() []common.ClientOption {
+	return []common.ClientOption{
+		common.WithEndpoint("profile.api.antinvestor.com:443"),
+		common.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
+		common.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
 	}
 }
 
@@ -49,7 +48,7 @@ func FromContext(ctx context.Context) *ProfileClient {
 // Methods, except Close, may be called concurrently. However,
 // fields must not be modified concurrently with method calls.
 type ProfileClient struct {
-	apic.GrpcClientBase
+	common.GrpcClientBase
 
 	// The gRPC API client.
 	profileClient ProfileServiceClient
@@ -70,10 +69,10 @@ func InstantiateProfileClient(
 
 // NewProfileClient creates a new notification client.
 // The service that an application uses to send and access received messages
-func NewProfileClient(ctx context.Context, opts ...apic.ClientOption) (*ProfileClient, error) {
+func NewProfileClient(ctx context.Context, opts ...common.ClientOption) (*ProfileClient, error) {
 	clientOpts := defaultProfileClientOptions()
 
-	connPool, err := apic.DialConnection(ctx, append(clientOpts, opts...)...)
+	connPool, err := common.DialConnection(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
@@ -83,26 +82,11 @@ func NewProfileClient(ctx context.Context, opts ...apic.ClientOption) (*ProfileC
 	return InstantiateProfileClient(connPool, profileSvcCli), nil
 }
 
-// Close closes the connection to the API service. The user should invoke this when
-// the client is no longer required.
-func (pc *ProfileClient) Close() error {
-	return pc.clientConn.Close()
-}
-
-// setClientInfo sets the name and version of the application in
-// the `x-goog-api-client` header passed on each request. Intended for
-// use by Google-written clients.
-func (pc *ProfileClient) setClientInfo(keyval ...string) {
-	kv := append([]string{"gl-go", apic.VersionGo()}, keyval...)
-	kv = append(kv, "grpc", grpc.Version)
-	pc.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))
-}
-
 func (pc *ProfileClient) GetProfileByID(
 	ctx context.Context,
 	profileID string) (*ProfileObject, error) {
 
-	profileService := NewProfileServiceClient(pc.clientConn)
+	profileService := NewProfileServiceClient(pc.Connection())
 
 	profileRequest := GetByIdRequest{
 		Id: profileID,
@@ -120,7 +104,7 @@ func (pc *ProfileClient) CreateProfileByContactAndName(
 	contact string,
 	name string) (*ProfileObject, error) {
 
-	profileService := NewProfileServiceClient(pc.clientConn)
+	profileService := NewProfileServiceClient(pc.Connection())
 
 	properties := make(map[string]string)
 	properties["name"] = name
@@ -138,7 +122,7 @@ func (pc *ProfileClient) CreateProfileByContactAndName(
 }
 
 func (pc *ProfileClient) GetProfileByContact(ctx context.Context, contact string) (*ProfileObject, error) {
-	profileService := NewProfileServiceClient(pc.clientConn)
+	profileService := NewProfileServiceClient(pc.Connection())
 
 	contactRequest := GetByContactRequest{
 		Contact: contact,

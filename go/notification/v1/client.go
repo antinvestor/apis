@@ -16,20 +16,19 @@ package notificationv1
 
 import (
 	"context"
-	apic "github.com/antinvestor/apis/go/common"
 	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"math"
 )
 
-const ctxKeyService = apic.CtxServiceKey("notificationClientKey")
+const ctxKeyService = common.CtxServiceKey("notificationClientKey")
 
-func defaultNotificationClientOptions() []apic.ClientOption {
-	return []apic.ClientOption{
-		apic.WithEndpoint("notification.api.antinvestor.com:443"),
-		apic.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
-		apic.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
+func defaultNotificationClientOptions() []common.ClientOption {
+	return []common.ClientOption{
+		common.WithEndpoint("notification.api.antinvestor.com:443"),
+		common.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
+		common.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
 	}
 }
 
@@ -77,10 +76,10 @@ func InstantiateNotificationClient(clientConnection *grpc.ClientConn, notificati
 // NewNotificationClient creates a new notification client.
 //
 // The service that an application uses to send and access received messages
-func NewNotificationClient(ctx context.Context, opts ...apic.ClientOption) (*NotificationClient, error) {
+func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*NotificationClient, error) {
 	clientOpts := defaultNotificationClientOptions()
 
-	connPool, err := apic.DialConnection(ctx, append(clientOpts, opts...)...)
+	connPool, err := common.DialConnection(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
@@ -109,9 +108,9 @@ func (nc *NotificationClient) Service() NotificationServiceClient {
 // the `x-goog-api-client` header passed on each request. Intended for
 // use by Google-written clients.
 func (nc *NotificationClient) setClientInfo(keyval ...string) {
-	kv := append([]string{"gl-go", apic.VersionGo()}, keyval...)
+	kv := append([]string{"gl-go", common.VersionGo()}, keyval...)
 	kv = append(kv, "grpc", grpc.Version)
-	nc.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))
+	nc.xMetadata = metadata.Pairs("x-ai-api-client", common.XAntHeader(kv...))
 }
 
 func (nc *NotificationClient) Send(ctx context.Context, accessID string, contactId string, contactDetail string,

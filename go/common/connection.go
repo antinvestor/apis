@@ -42,6 +42,12 @@ type GrpcClientBase struct {
 	xMetadata metadata.MD
 }
 
+// Connection obtains the connection to the API service. User should invoke this
+// connection is required.
+func (gbc *GrpcClientBase) Connection() *grpc.ClientConn {
+	return gbc.clientConn
+}
+
 // Close closes the connection to the API service. The user should invoke this when
 // the client is no longer required.
 func (gbc *GrpcClientBase) Close() error {
@@ -61,12 +67,18 @@ func (gbc *GrpcClientBase) GetInfo() metadata.MD {
 	return gbc.xMetadata
 }
 
-func NewClientBase(clientConn *grpc.ClientConn) GrpcClientBase {
+func NewClientBase(ctx context.Context, opts ...ClientOption) (*GrpcClientBase, error) {
+
+	connPool, err := DialConnection(ctx, opts...)
+	if err != nil {
+		return nil, err
+	}
+
 	clientBase := GrpcClientBase{
-		clientConn: clientConn,
+		clientConn: connPool,
 	}
 	clientBase.SetInfo()
-	return clientBase
+	return &clientBase, nil
 }
 
 type JWTInterceptor struct {

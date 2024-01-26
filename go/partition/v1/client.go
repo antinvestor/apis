@@ -16,20 +16,19 @@ package partitionv1
 
 import (
 	"context"
-	apic "github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
 	"math"
 )
 
-var ctxKeyService = apic.CtxServiceKey("partitionClientKey")
+var ctxKeyService = common.CtxServiceKey("partitionClientKey")
 
-func defaultPartitionClientOptions() []apic.ClientOption {
-	return []apic.ClientOption{
-		apic.WithEndpoint("partitions.api.antinvestor.com:443"),
-		apic.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
-		apic.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
+func defaultPartitionClientOptions() []common.ClientOption {
+	return []common.ClientOption{
+		common.WithEndpoint("partitions.api.antinvestor.com:443"),
+		common.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
+		common.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
 	}
 }
 
@@ -76,10 +75,10 @@ func InstantiatePartitionsClient(
 
 // NewPartitionsClient creates a new partitions client.
 // / The service that an application uses to access and manipulate partition information
-func NewPartitionsClient(ctx context.Context, opts ...apic.ClientOption) (*PartitionClient, error) {
+func NewPartitionsClient(ctx context.Context, opts ...common.ClientOption) (*PartitionClient, error) {
 	clientOpts := defaultPartitionClientOptions()
 
-	connPool, err := apic.DialConnection(ctx, append(clientOpts, opts...)...)
+	connPool, err := common.DialConnection(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
@@ -97,9 +96,9 @@ func (partCl *PartitionClient) Close() error {
 // the `x-goog-api-client` header passed on each request. Intended for
 // use by Google-written clients.
 func (partCl *PartitionClient) setClientInfo(keyval ...string) {
-	kv := append([]string{"gl-go", apic.VersionGo()}, keyval...)
+	kv := append([]string{"gl-go", common.VersionGo()}, keyval...)
 	kv = append(kv, "grpc", grpc.Version)
-	partCl.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))
+	partCl.xMetadata = metadata.Pairs("x-ai-api-client", common.XAntHeader(kv...))
 }
 
 func (partCl *PartitionClient) getService() PartitionServiceClient {

@@ -16,16 +16,15 @@ package file_v1
 
 import (
 	"context"
-	apic "github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )
 
-const ctxKeyService = apic.CtxServiceKey("filesClientKey")
+const ctxKeyService = common.CtxServiceKey("filesClientKey")
 
-func defaultFilesClientOptions() []apic.ClientOption {
-	return []apic.ClientOption{
-		apic.WithEndpoint("https://files.api.antinvestor.com"),
+func defaultFilesClientOptions() []common.ClientOption {
+	return []common.ClientOption{
+		common.WithEndpoint("https://files.api.antinvestor.com"),
 	}
 }
 
@@ -53,10 +52,10 @@ type FilesClient struct {
 
 // NewFilesClient creates a new file client.
 // The service that an application uses to create and read files stored in the system
-func NewFilesClient(ctx context.Context, opts ...apic.ClientOption) (*FilesClient, error) {
+func NewFilesClient(ctx context.Context, opts ...common.ClientOption) (*FilesClient, error) {
 	clientOpts := defaultFilesClientOptions()
 
-	httClient, err := apic.HttpClient(ctx, append(clientOpts, opts...)...)
+	httClient, err := common.HttpClient(ctx, append(clientOpts, opts...)...)
 
 	if err != nil {
 		return nil, err
@@ -79,7 +78,7 @@ func NewFilesClient(ctx context.Context, opts ...apic.ClientOption) (*FilesClien
 // the `x-goog-api-client` header passed on each request. Intended for
 // use by Google-written clients.
 func (fc *FilesClient) setClientInfo(keyval ...string) {
-	kv := append([]string{"gl-go", apic.VersionGo()}, keyval...)
+	kv := append([]string{"gl-go", common.VersionGo()}, keyval...)
 	kv = append(kv, "grpc", grpc.Version)
-	fc.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))
+	fc.xMetadata = metadata.Pairs("x-ai-api-client", common.XAntHeader(kv...))
 }

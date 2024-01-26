@@ -16,19 +16,18 @@ package ocrv1
 
 import (
 	"context"
-	apic "github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"math"
 )
 
-const ctxKeyService = apic.CtxServiceKey("ocrClientKey")
+const ctxKeyService = common.CtxServiceKey("ocrClientKey")
 
-func defaultProfileClientOptions() []apic.ClientOption {
-	return []apic.ClientOption{
-		apic.WithEndpoint("ocr.api.antinvestor.com:443"),
-		apic.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
-		apic.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
+func defaultProfileClientOptions() []common.ClientOption {
+	return []common.ClientOption{
+		common.WithEndpoint("ocr.api.antinvestor.com:443"),
+		common.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
+		common.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
 	}
 }
 
@@ -49,22 +48,18 @@ func FromContext(ctx context.Context) *OCRClient {
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type OCRClient struct {
-	// gRPC connection to the service.
-	clientConn *grpc.ClientConn
+	common.GrpcClientBase
 
 	// The gRPC API client.
 	ocrClient OCRServiceClient
-
-	// The x-ant-* metadata to be sent with each request.
-	xMetadata metadata.MD
 }
 
 // NewOCRClient creates a new ocr client.
 // The service that an application uses to perform ocr requests
-func NewOCRClient(ctx context.Context, opts ...apic.ClientOption) (*OCRClient, error) {
+func NewOCRClient(ctx context.Context, opts ...common.ClientOption) (*OCRClient, error) {
 	clientOpts := defaultProfileClientOptions()
 
-	connPool, err := apic.DialConnection(ctx, append(clientOpts, opts...)...)
+	connPool, err := common.DialConnection(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
@@ -88,9 +83,9 @@ func (pc *OCRClient) Close() error {
 // the `x-goog-api-client` header passed on each request. Intended for
 // use by Google-written clients.
 func (pc *OCRClient) setClientInfo(keyval ...string) {
-	kv := append([]string{"gl-go", apic.VersionGo()}, keyval...)
+	kv := append([]string{"gl-go", common.VersionGo()}, keyval...)
 	kv = append(kv, "grpc", grpc.Version)
-	pc.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))
+	pc.xMetadata = metadata.Pairs("x-ai-api-client", common.XAntHeader(kv...))
 }
 
 func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, properties map[string]string, fileId ...string) (*RecognizeResponse, error) {

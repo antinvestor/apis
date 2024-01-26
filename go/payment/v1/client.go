@@ -16,20 +16,19 @@ package paymentv1
 
 import (
 	"context"
-	apic "github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
 	"math"
 )
 
-var ctxKeyService = apic.CtxServiceKey("paymentClientKey")
+var ctxKeyService = common.CtxServiceKey("paymentClientKey")
 
-func defaultPaymentClientOptions() []apic.ClientOption {
-	return []apic.ClientOption{
-		apic.WithEndpoint("payments.api.antinvestor.com:443"),
-		apic.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
-		apic.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
+func defaultPaymentClientOptions() []common.ClientOption {
+	return []common.ClientOption{
+		common.WithEndpoint("payments.api.antinvestor.com:443"),
+		common.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
+		common.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
 	}
 }
 
@@ -76,10 +75,10 @@ func InstantiatePaymentsClient(
 
 // NewPaymentsClient creates a new payments client.
 // / The service that an application uses to access and manipulate payment information
-func NewPaymentsClient(ctx context.Context, opts ...apic.ClientOption) (*PaymentClient, error) {
+func NewPaymentsClient(ctx context.Context, opts ...common.ClientOption) (*PaymentClient, error) {
 	clientOpts := defaultPaymentClientOptions()
 
-	connPool, err := apic.DialConnection(ctx, append(clientOpts, opts...)...)
+	connPool, err := common.DialConnection(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
@@ -97,9 +96,9 @@ func (pCl *PaymentClient) Close() error {
 // the `x-goog-api-client` header passed on each request. Intended for
 // use by Google-written clients.
 func (pCl *PaymentClient) setClientInfo(keyval ...string) {
-	kv := append([]string{"gl-go", apic.VersionGo()}, keyval...)
+	kv := append([]string{"gl-go", common.VersionGo()}, keyval...)
 	kv = append(kv, "grpc", grpc.Version)
-	pCl.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))
+	pCl.xMetadata = metadata.Pairs("x-ai-api-client", common.XAntHeader(kv...))
 }
 
 func (pCl *PaymentClient) getService() PaymentServiceClient {

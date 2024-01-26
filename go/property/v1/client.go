@@ -16,20 +16,19 @@ package propertyv1
 
 import (
 	"context"
-	apic "github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
 	"math"
 )
 
-const ctxKeyService = apic.CtxServiceKey("propertyClientKey")
+const ctxKeyService = common.CtxServiceKey("propertyClientKey")
 
-func defaultPropertyClientOptions() []apic.ClientOption {
-	return []apic.ClientOption{
-		apic.WithEndpoint("property.api.antinvestor.com:443"),
-		apic.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
-		apic.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
+func defaultPropertyClientOptions() []common.ClientOption {
+	return []common.ClientOption{
+		common.WithEndpoint("property.api.antinvestor.com:443"),
+		common.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
+		common.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
 	}
 }
 
@@ -77,10 +76,10 @@ func InstantiatePropertyClient(clientConnection *grpc.ClientConn, propertyServic
 // NewPropertyClient creates a new notification client.
 //
 // The service that an application uses to send and access received messages
-func NewPropertyClient(ctx context.Context, opts ...apic.ClientOption) (*PropertyClient, error) {
+func NewPropertyClient(ctx context.Context, opts ...common.ClientOption) (*PropertyClient, error) {
 	clientOpts := defaultPropertyClientOptions()
 
-	connPool, err := apic.DialConnection(ctx, append(clientOpts, opts...)...)
+	connPool, err := common.DialConnection(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
@@ -99,9 +98,9 @@ func (nc *PropertyClient) Close() error {
 // the `x-goog-api-client` header passed on each request. Intended for
 // use by Google-written clients.
 func (nc *PropertyClient) setClientInfo(keyval ...string) {
-	kv := append([]string{"gl-go", apic.VersionGo()}, keyval...)
+	kv := append([]string{"gl-go", common.VersionGo()}, keyval...)
 	kv = append(kv, "grpc", grpc.Version)
-	nc.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))
+	nc.xMetadata = metadata.Pairs("x-ai-api-client", common.XAntHeader(kv...))
 }
 
 func (nc *PropertyClient) AddPropertyType(

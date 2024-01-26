@@ -16,20 +16,19 @@ package ledgerv1
 
 import (
 	"context"
-	apic "github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
 	"math"
 )
 
-const ctxKeyService = apic.CtxServiceKey("ledgerClientKey")
+const ctxKeyService = common.CtxServiceKey("ledgerClientKey")
 
-func defaultLedgerClientOptions() []apic.ClientOption {
-	return []apic.ClientOption{
-		apic.WithEndpoint("ledger.api.antinvestor.com:443"),
-		apic.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
-		apic.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
+func defaultLedgerClientOptions() []common.ClientOption {
+	return []common.ClientOption{
+		common.WithEndpoint("ledger.api.antinvestor.com:443"),
+		common.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
+		common.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
 	}
 }
 
@@ -77,10 +76,10 @@ func InstantiateLedgerClient(clientConnection *grpc.ClientConn, ledgerServiceCli
 // NewLedgerClient creates a new notification client.
 //
 // The service that an application uses to send and access received messages
-func NewLedgerClient(ctx context.Context, opts ...apic.ClientOption) (*LedgerClient, error) {
+func NewLedgerClient(ctx context.Context, opts ...common.ClientOption) (*LedgerClient, error) {
 	clientOpts := defaultLedgerClientOptions()
 
-	connPool, err := apic.DialConnection(ctx, append(clientOpts, opts...)...)
+	connPool, err := common.DialConnection(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +98,7 @@ func (nc *LedgerClient) Close() error {
 // the `x-goog-api-client` header passed on each request. Intended for
 // use by Google-written clients.
 func (nc *LedgerClient) setClientInfo(keyval ...string) {
-	kv := append([]string{"gl-go", apic.VersionGo()}, keyval...)
+	kv := append([]string{"gl-go", common.VersionGo()}, keyval...)
 	kv = append(kv, "grpc", grpc.Version)
-	nc.xMetadata = metadata.Pairs("x-ai-api-client", apic.XAntHeader(kv...))
+	nc.xMetadata = metadata.Pairs("x-ai-api-client", common.XAntHeader(kv...))
 }

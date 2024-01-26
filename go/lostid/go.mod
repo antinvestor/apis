@@ -2,6 +2,8 @@ module github.com/antinvestor/apis/go/lostid
 
 go 1.21
 
+replace github.com/antinvestor/apis/go/common => ../common
+
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.32.0-20231115204500-e097f827e652.1
 	go.uber.org/mock v0.4.0

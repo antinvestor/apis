@@ -16,13 +16,12 @@ package partitionv1
 
 import (
 	"context"
-	apic "github.com/antinvestor/apis/go/common"
 	"testing"
 )
 
 func TestNewProfileClient(t *testing.T) {
 	ctx := context.Background()
-	_, err := NewPartitionsClient(ctx, apic.WithEndpoint("127.0.0.1:7005"))
+	_, err := NewPartitionsClient(ctx, common.WithEndpoint("127.0.0.1:7005"))
 	if err != nil {
 		t.Errorf("Could not setup profile service : %v", err)
 	}
