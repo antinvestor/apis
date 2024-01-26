@@ -215,6 +215,68 @@ public final class NotificationServiceGrpc {
     return getSearchMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
+      com.antinvestor.apis.notification.v1.TemplateSearchResponse> getTemplateSearchMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "TemplateSearch",
+      requestType = com.antinvestor.apis.common.v1.SearchRequest.class,
+      responseType = com.antinvestor.apis.notification.v1.TemplateSearchResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
+      com.antinvestor.apis.notification.v1.TemplateSearchResponse> getTemplateSearchMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest, com.antinvestor.apis.notification.v1.TemplateSearchResponse> getTemplateSearchMethod;
+    if ((getTemplateSearchMethod = NotificationServiceGrpc.getTemplateSearchMethod) == null) {
+      synchronized (NotificationServiceGrpc.class) {
+        if ((getTemplateSearchMethod = NotificationServiceGrpc.getTemplateSearchMethod) == null) {
+          NotificationServiceGrpc.getTemplateSearchMethod = getTemplateSearchMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.common.v1.SearchRequest, com.antinvestor.apis.notification.v1.TemplateSearchResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "TemplateSearch"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.common.v1.SearchRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.notification.v1.TemplateSearchResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new NotificationServiceMethodDescriptorSupplier("TemplateSearch"))
+              .build();
+        }
+      }
+    }
+    return getTemplateSearchMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.notification.v1.TemplateSaveRequest,
+      com.antinvestor.apis.notification.v1.TemplateSaveResponse> getTemplateSaveMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "TemplateSave",
+      requestType = com.antinvestor.apis.notification.v1.TemplateSaveRequest.class,
+      responseType = com.antinvestor.apis.notification.v1.TemplateSaveResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.notification.v1.TemplateSaveRequest,
+      com.antinvestor.apis.notification.v1.TemplateSaveResponse> getTemplateSaveMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.notification.v1.TemplateSaveRequest, com.antinvestor.apis.notification.v1.TemplateSaveResponse> getTemplateSaveMethod;
+    if ((getTemplateSaveMethod = NotificationServiceGrpc.getTemplateSaveMethod) == null) {
+      synchronized (NotificationServiceGrpc.class) {
+        if ((getTemplateSaveMethod = NotificationServiceGrpc.getTemplateSaveMethod) == null) {
+          NotificationServiceGrpc.getTemplateSaveMethod = getTemplateSaveMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.notification.v1.TemplateSaveRequest, com.antinvestor.apis.notification.v1.TemplateSaveResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "TemplateSave"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.notification.v1.TemplateSaveRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.notification.v1.TemplateSaveResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new NotificationServiceMethodDescriptorSupplier("TemplateSave"))
+              .build();
+        }
+      }
+    }
+    return getTemplateSaveMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -322,6 +384,23 @@ public final class NotificationServiceGrpc {
         io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.SearchResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSearchMethod(), responseObserver);
     }
+
+    /**
+     * <pre>
+     * Utility to allow system obtain templates within the system
+     * </pre>
+     */
+    default void templateSearch(com.antinvestor.apis.common.v1.SearchRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.TemplateSearchResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getTemplateSearchMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void templateSave(com.antinvestor.apis.notification.v1.TemplateSaveRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.TemplateSaveResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getTemplateSaveMethod(), responseObserver);
+    }
   }
 
   /**
@@ -416,6 +495,25 @@ public final class NotificationServiceGrpc {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getSearchMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Utility to allow system obtain templates within the system
+     * </pre>
+     */
+    public void templateSearch(com.antinvestor.apis.common.v1.SearchRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.TemplateSearchResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getTemplateSearchMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void templateSave(com.antinvestor.apis.notification.v1.TemplateSaveRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.TemplateSaveResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getTemplateSaveMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -494,6 +592,24 @@ public final class NotificationServiceGrpc {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getSearchMethod(), getCallOptions(), request);
     }
+
+    /**
+     * <pre>
+     * Utility to allow system obtain templates within the system
+     * </pre>
+     */
+    public java.util.Iterator<com.antinvestor.apis.notification.v1.TemplateSearchResponse> templateSearch(
+        com.antinvestor.apis.common.v1.SearchRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getTemplateSearchMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.antinvestor.apis.notification.v1.TemplateSaveResponse templateSave(com.antinvestor.apis.notification.v1.TemplateSaveRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getTemplateSaveMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -566,6 +682,14 @@ public final class NotificationServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getReceiveMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.notification.v1.TemplateSaveResponse> templateSave(
+        com.antinvestor.apis.notification.v1.TemplateSaveRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getTemplateSaveMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_SEND = 0;
@@ -574,6 +698,8 @@ public final class NotificationServiceGrpc {
   private static final int METHODID_RELEASE = 3;
   private static final int METHODID_RECEIVE = 4;
   private static final int METHODID_SEARCH = 5;
+  private static final int METHODID_TEMPLATE_SEARCH = 6;
+  private static final int METHODID_TEMPLATE_SAVE = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -615,6 +741,14 @@ public final class NotificationServiceGrpc {
         case METHODID_SEARCH:
           serviceImpl.search((com.antinvestor.apis.common.v1.SearchRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.SearchResponse>) responseObserver);
+          break;
+        case METHODID_TEMPLATE_SEARCH:
+          serviceImpl.templateSearch((com.antinvestor.apis.common.v1.SearchRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.TemplateSearchResponse>) responseObserver);
+          break;
+        case METHODID_TEMPLATE_SAVE:
+          serviceImpl.templateSave((com.antinvestor.apis.notification.v1.TemplateSaveRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.TemplateSaveResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -676,6 +810,20 @@ public final class NotificationServiceGrpc {
               com.antinvestor.apis.common.v1.SearchRequest,
               com.antinvestor.apis.notification.v1.SearchResponse>(
                 service, METHODID_SEARCH)))
+        .addMethod(
+          getTemplateSearchMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              com.antinvestor.apis.common.v1.SearchRequest,
+              com.antinvestor.apis.notification.v1.TemplateSearchResponse>(
+                service, METHODID_TEMPLATE_SEARCH)))
+        .addMethod(
+          getTemplateSaveMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.notification.v1.TemplateSaveRequest,
+              com.antinvestor.apis.notification.v1.TemplateSaveResponse>(
+                service, METHODID_TEMPLATE_SAVE)))
         .build();
   }
 
@@ -730,6 +878,8 @@ public final class NotificationServiceGrpc {
               .addMethod(getReleaseMethod())
               .addMethod(getReceiveMethod())
               .addMethod(getSearchMethod())
+              .addMethod(getTemplateSearchMethod())
+              .addMethod(getTemplateSaveMethod())
               .build();
         }
       }

@@ -34,12 +34,14 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	NotificationService_Send_FullMethodName         = "/notification.v1.NotificationService/Send"
-	NotificationService_Status_FullMethodName       = "/notification.v1.NotificationService/Status"
-	NotificationService_StatusUpdate_FullMethodName = "/notification.v1.NotificationService/StatusUpdate"
-	NotificationService_Release_FullMethodName      = "/notification.v1.NotificationService/Release"
-	NotificationService_Receive_FullMethodName      = "/notification.v1.NotificationService/Receive"
-	NotificationService_Search_FullMethodName       = "/notification.v1.NotificationService/Search"
+	NotificationService_Send_FullMethodName           = "/notification.v1.NotificationService/Send"
+	NotificationService_Status_FullMethodName         = "/notification.v1.NotificationService/Status"
+	NotificationService_StatusUpdate_FullMethodName   = "/notification.v1.NotificationService/StatusUpdate"
+	NotificationService_Release_FullMethodName        = "/notification.v1.NotificationService/Release"
+	NotificationService_Receive_FullMethodName        = "/notification.v1.NotificationService/Receive"
+	NotificationService_Search_FullMethodName         = "/notification.v1.NotificationService/Search"
+	NotificationService_TemplateSearch_FullMethodName = "/notification.v1.NotificationService/TemplateSearch"
+	NotificationService_TemplateSave_FullMethodName   = "/notification.v1.NotificationService/TemplateSave"
 )
 
 // NotificationServiceClient is the client API for NotificationService service.
@@ -58,6 +60,9 @@ type NotificationServiceClient interface {
 	Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (*ReceiveResponse, error)
 	// Search method is for client request for particular notification details from system
 	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (NotificationService_SearchClient, error)
+	// Utility to allow system obtain templates within the system
+	TemplateSearch(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (NotificationService_TemplateSearchClient, error)
+	TemplateSave(ctx context.Context, in *TemplateSaveRequest, opts ...grpc.CallOption) (*TemplateSaveResponse, error)
 }
 
 type notificationServiceClient struct {
@@ -145,6 +150,47 @@ func (x *notificationServiceSearchClient) Recv() (*SearchResponse, error) {
 	return m, nil
 }
 
+func (c *notificationServiceClient) TemplateSearch(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (NotificationService_TemplateSearchClient, error) {
+	stream, err := c.cc.NewStream(ctx, &NotificationService_ServiceDesc.Streams[1], NotificationService_TemplateSearch_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &notificationServiceTemplateSearchClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type NotificationService_TemplateSearchClient interface {
+	Recv() (*TemplateSearchResponse, error)
+	grpc.ClientStream
+}
+
+type notificationServiceTemplateSearchClient struct {
+	grpc.ClientStream
+}
+
+func (x *notificationServiceTemplateSearchClient) Recv() (*TemplateSearchResponse, error) {
+	m := new(TemplateSearchResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *notificationServiceClient) TemplateSave(ctx context.Context, in *TemplateSaveRequest, opts ...grpc.CallOption) (*TemplateSaveResponse, error) {
+	out := new(TemplateSaveResponse)
+	err := c.cc.Invoke(ctx, NotificationService_TemplateSave_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NotificationServiceServer is the server API for NotificationService service.
 // All implementations must embed UnimplementedNotificationServiceServer
 // for forward compatibility
@@ -161,6 +207,9 @@ type NotificationServiceServer interface {
 	Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error)
 	// Search method is for client request for particular notification details from system
 	Search(*v1.SearchRequest, NotificationService_SearchServer) error
+	// Utility to allow system obtain templates within the system
+	TemplateSearch(*v1.SearchRequest, NotificationService_TemplateSearchServer) error
+	TemplateSave(context.Context, *TemplateSaveRequest) (*TemplateSaveResponse, error)
 	mustEmbedUnimplementedNotificationServiceServer()
 }
 
@@ -185,6 +234,12 @@ func (UnimplementedNotificationServiceServer) Receive(context.Context, *ReceiveR
 }
 func (UnimplementedNotificationServiceServer) Search(*v1.SearchRequest, NotificationService_SearchServer) error {
 	return status.Errorf(codes.Unimplemented, "method Search not implemented")
+}
+func (UnimplementedNotificationServiceServer) TemplateSearch(*v1.SearchRequest, NotificationService_TemplateSearchServer) error {
+	return status.Errorf(codes.Unimplemented, "method TemplateSearch not implemented")
+}
+func (UnimplementedNotificationServiceServer) TemplateSave(context.Context, *TemplateSaveRequest) (*TemplateSaveResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TemplateSave not implemented")
 }
 func (UnimplementedNotificationServiceServer) mustEmbedUnimplementedNotificationServiceServer() {}
 
@@ -310,6 +365,45 @@ func (x *notificationServiceSearchServer) Send(m *SearchResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _NotificationService_TemplateSearch_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(v1.SearchRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(NotificationServiceServer).TemplateSearch(m, &notificationServiceTemplateSearchServer{stream})
+}
+
+type NotificationService_TemplateSearchServer interface {
+	Send(*TemplateSearchResponse) error
+	grpc.ServerStream
+}
+
+type notificationServiceTemplateSearchServer struct {
+	grpc.ServerStream
+}
+
+func (x *notificationServiceTemplateSearchServer) Send(m *TemplateSearchResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _NotificationService_TemplateSave_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TemplateSaveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).TemplateSave(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_TemplateSave_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).TemplateSave(ctx, req.(*TemplateSaveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // NotificationService_ServiceDesc is the grpc.ServiceDesc for NotificationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -337,11 +431,20 @@ var NotificationService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "Receive",
 			Handler:    _NotificationService_Receive_Handler,
 		},
+		{
+			MethodName: "TemplateSave",
+			Handler:    _NotificationService_TemplateSave_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "Search",
 			Handler:       _NotificationService_Search_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "TemplateSearch",
+			Handler:       _NotificationService_TemplateSearch_Handler,
 			ServerStreams: true,
 		},
 	},

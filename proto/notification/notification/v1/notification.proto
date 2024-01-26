@@ -31,6 +31,44 @@ enum PRIORITY {
   VERY_LOW = 2;
 }
 
+message Language {
+  string id = 1 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string code = 2;
+  string name = 3;
+  map<string, string> extra = 4;
+}
+
+message TemplateData {
+  string id = 1 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+
+  string type = 2;
+  string detail = 3;
+}
+
+message Template {
+  string id = 1 [
+    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string name = 2;
+
+  Language language = 3;
+  repeated TemplateData data = 4;
+  map<string, string> extra = 5;
+}
+
 message Notification {
   string access_id = 1 [
     (buf.validate.field).ignore_empty = true,
@@ -123,6 +161,25 @@ message ReceiveResponse {
   common.v1.StatusResponse data = 1;
 }
 
+message TemplateSearchRequest {
+  common.v1.SearchRequest data = 1;
+}
+
+message TemplateSearchResponse {
+  repeated Template data = 1;
+}
+
+message TemplateSaveRequest {
+  string name = 1;
+  string language_code = 2;
+  map<string, string> data = 3;
+  map<string, string> extra = 4;
+}
+
+message TemplateSaveResponse {
+  repeated Template data = 1;
+}
+
 service NotificationService {
   //Send method for queueing massages as requested
   rpc Send(SendRequest) returns (SendResponse);
@@ -141,4 +198,9 @@ service NotificationService {
 
   //Search method is for client request for particular notification details from system
   rpc Search(common.v1.SearchRequest) returns (stream SearchResponse);
+
+  // Utility to allow system obtain templates within the system
+  rpc TemplateSearch(TemplateSearchRequest) returns (stream TemplateSearchResponse);
+
+  rpc TemplateSave(TemplateSaveRequest) returns (TemplateSaveResponse);
 }

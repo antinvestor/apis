@@ -30,6 +30,31 @@ public final class NotificationProto {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_notification_v1_Language_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_notification_v1_Language_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_notification_v1_Language_ExtraEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_notification_v1_Language_ExtraEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_notification_v1_TemplateData_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_notification_v1_TemplateData_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_notification_v1_Template_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_notification_v1_Template_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_notification_v1_Template_ExtraEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_notification_v1_Template_ExtraEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_notification_v1_Notification_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -79,6 +104,36 @@ public final class NotificationProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_notification_v1_ReceiveResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_notification_v1_TemplateSearchRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_notification_v1_TemplateSearchRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_notification_v1_TemplateSearchResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_notification_v1_TemplateSearchResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_notification_v1_TemplateSaveRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_notification_v1_TemplateSaveRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_notification_v1_TemplateSaveRequest_DataEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_notification_v1_TemplateSaveRequest_DataEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_notification_v1_TemplateSaveRequest_ExtraEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_notification_v1_TemplateSaveRequest_ExtraEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_notification_v1_TemplateSaveResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_notification_v1_TemplateSaveResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -90,62 +145,97 @@ public final class NotificationProto {
     java.lang.String[] descriptorData = {
       "\n\"notification/v1/notification.proto\022\017no" +
       "tification.v1\032\033buf/validate/validate.pro" +
-      "to\032\026common/v1/common.proto\"\226\007\n\014Notificat" +
-      "ion\022;\n\taccess_id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a" +
-      "-z_-]{3,20}\320\001\001R\010accessId\022.\n\002id\030\002 \001(\tB\036\272H" +
-      "\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\320\001\001R\002id\022=\n\nprof" +
-      "ile_id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,40" +
-      "}\320\001\001R\tprofileId\022?\n\ncontact_id\030\004 \001(\tB\036\272H\033" +
-      "r\026\020\003\030(2\020[0-9a-z_-]{3,40}\320\001\001H\000R\tcontactId" +
-      "\022:\n\006detail\030\005 \001(\tB \272H\035r\030\020\003\030\372\0012\021[0-9a-z_-]" +
-      "{3,250}\320\001\001H\000R\006detail\022\022\n\004type\030\006 \001(\tR\004type" +
-      "\022\032\n\010template\030\007 \001(\tR\010template\022D\n\007payload\030" +
-      "\010 \003(\0132*.notification.v1.Notification.Pay" +
-      "loadEntryR\007payload\022\022\n\004data\030\t \001(\tR\004data\022\032" +
-      "\n\010language\030\n \001(\tR\010language\022\033\n\tout_bound\030" +
-      "\013 \001(\010R\010outBound\022!\n\014auto_release\030\014 \001(\010R\013a" +
-      "utoRelease\0229\n\010route_id\030\r \001(\tB\036\272H\033r\026\020\003\030(2" +
-      "\020[0-9a-z_-]{3,20}\320\001\001R\007routeId\0229\n\006status\030" +
-      "\016 \001(\0132\031.common.v1.StatusResponseB\006\272H\003\300\001\001" +
-      "R\006status\022A\n\006extras\030\017 \003(\0132).notification." +
-      "v1.Notification.ExtrasEntryR\006extras\0225\n\010p" +
-      "riority\030\020 \001(\0162\031.notification.v1.PRIORITY" +
-      "R\010priority\032:\n\014PayloadEntry\022\020\n\003key\030\001 \001(\tR" +
-      "\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\0329\n\013Extras" +
-      "Entry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005" +
-      "value:\0028\001B\020\n\007contact\022\005\272H\002\010\001\"C\n\016SearchRes" +
-      "ponse\0221\n\004data\030\001 \003(\0132\035.notification.v1.No" +
-      "tificationR\004data\"@\n\013SendRequest\0221\n\004data\030" +
-      "\001 \001(\0132\035.notification.v1.NotificationR\004da" +
-      "ta\"=\n\014SendResponse\022-\n\004data\030\001 \001(\0132\031.commo" +
-      "n.v1.StatusResponseR\004data\"\221\001\n\016ReleaseReq" +
-      "uest\0228\n\taccess_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9" +
-      "a-z_-]{3,20}R\010accessId\022+\n\002id\030\002 \001(\tB\033\272H\030r" +
-      "\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\030\n\007comment\030\003" +
-      " \001(\tR\007comment\"@\n\017ReleaseResponse\022-\n\004data" +
-      "\030\001 \001(\0132\031.common.v1.StatusResponseR\004data\"" +
-      "C\n\016ReceiveRequest\0221\n\004data\030\001 \001(\0132\035.notifi" +
-      "cation.v1.NotificationR\004data\"@\n\017ReceiveR" +
-      "esponse\022-\n\004data\030\001 \001(\0132\031.common.v1.Status" +
-      "ResponseR\004data*+\n\010PRIORITY\022\010\n\004HIGH\020\000\022\007\n\003" +
-      "LOW\020\001\022\014\n\010VERY_LOW\020\0022\315\003\n\023NotificationServ" +
-      "ice\022C\n\004Send\022\034.notification.v1.SendReques" +
-      "t\032\035.notification.v1.SendResponse\022=\n\006Stat" +
-      "us\022\030.common.v1.StatusRequest\032\031.common.v1" +
-      ".StatusResponse\022O\n\014StatusUpdate\022\036.common" +
-      ".v1.StatusUpdateRequest\032\037.common.v1.Stat" +
-      "usUpdateResponse\022L\n\007Release\022\037.notificati" +
-      "on.v1.ReleaseRequest\032 .notification.v1.R" +
-      "eleaseResponse\022L\n\007Receive\022\037.notification" +
-      ".v1.ReceiveRequest\032 .notification.v1.Rec" +
-      "eiveResponse\022E\n\006Search\022\030.common.v1.Searc" +
-      "hRequest\032\037.notification.v1.SearchRespons" +
-      "e0\001B\342\001\n$com.antinvestor.apis.notificatio" +
-      "n.v1B\021NotificationProtoP\001ZJgithub.com/an" +
-      "tinvestor/apis/go/notification/notificat" +
-      "ion/v1;notificationv1\242\002\003NXX\252\002\017Notificati" +
-      "on.V1\312\002\017Notification\\V1\342\002\033Notification\\V" +
-      "1\\GPBMetadata\352\002\020Notification::V1b\006proto3"
+      "to\032\026common/v1/common.proto\"\330\001\n\010Language\022" +
+      ".\n\002id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}" +
+      "\320\001\001R\002id\022\022\n\004code\030\002 \001(\tR\004code\022\022\n\004name\030\003 \001(" +
+      "\tR\004name\022:\n\005extra\030\004 \003(\0132$.notification.v1" +
+      ".Language.ExtraEntryR\005extra\0328\n\nExtraEntr" +
+      "y\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005valu" +
+      "e:\0028\001\"j\n\014TemplateData\022.\n\002id\030\001 \001(\tB\036\272H\033r\026" +
+      "\020\003\030(2\020[0-9a-z_-]{3,20}\320\001\001R\002id\022\022\n\004type\030\002 " +
+      "\001(\tR\004type\022\026\n\006detail\030\003 \001(\tR\006detail\"\256\002\n\010Te" +
+      "mplate\022.\n\002id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-" +
+      "]{3,20}\320\001\001R\002id\022\022\n\004name\030\002 \001(\tR\004name\0225\n\010la" +
+      "nguage\030\003 \001(\0132\031.notification.v1.LanguageR" +
+      "\010language\0221\n\004data\030\004 \003(\0132\035.notification.v" +
+      "1.TemplateDataR\004data\022:\n\005extra\030\005 \003(\0132$.no" +
+      "tification.v1.Template.ExtraEntryR\005extra" +
+      "\0328\n\nExtraEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005valu" +
+      "e\030\002 \001(\tR\005value:\0028\001\"\226\007\n\014Notification\022;\n\ta" +
+      "ccess_id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3," +
+      "20}\320\001\001R\010accessId\022.\n\002id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2" +
+      "\020[0-9a-z_-]{3,20}\320\001\001R\002id\022=\n\nprofile_id\030\003" +
+      " \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,40}\320\001\001R\tpr" +
+      "ofileId\022?\n\ncontact_id\030\004 \001(\tB\036\272H\033r\026\020\003\030(2\020" +
+      "[0-9a-z_-]{3,40}\320\001\001H\000R\tcontactId\022:\n\006deta" +
+      "il\030\005 \001(\tB \272H\035r\030\020\003\030\372\0012\021[0-9a-z_-]{3,250}\320" +
+      "\001\001H\000R\006detail\022\022\n\004type\030\006 \001(\tR\004type\022\032\n\010temp" +
+      "late\030\007 \001(\tR\010template\022D\n\007payload\030\010 \003(\0132*." +
+      "notification.v1.Notification.PayloadEntr" +
+      "yR\007payload\022\022\n\004data\030\t \001(\tR\004data\022\032\n\010langua" +
+      "ge\030\n \001(\tR\010language\022\033\n\tout_bound\030\013 \001(\010R\010o" +
+      "utBound\022!\n\014auto_release\030\014 \001(\010R\013autoRelea" +
+      "se\0229\n\010route_id\030\r \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z" +
+      "_-]{3,20}\320\001\001R\007routeId\0229\n\006status\030\016 \001(\0132\031." +
+      "common.v1.StatusResponseB\006\272H\003\300\001\001R\006status" +
+      "\022A\n\006extras\030\017 \003(\0132).notification.v1.Notif" +
+      "ication.ExtrasEntryR\006extras\0225\n\010priority\030" +
+      "\020 \001(\0162\031.notification.v1.PRIORITYR\010priori" +
+      "ty\032:\n\014PayloadEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005" +
+      "value\030\002 \001(\tR\005value:\0028\001\0329\n\013ExtrasEntry\022\020\n" +
+      "\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028" +
+      "\001B\020\n\007contact\022\005\272H\002\010\001\"C\n\016SearchResponse\0221\n" +
+      "\004data\030\001 \003(\0132\035.notification.v1.Notificati" +
+      "onR\004data\"@\n\013SendRequest\0221\n\004data\030\001 \001(\0132\035." +
+      "notification.v1.NotificationR\004data\"=\n\014Se" +
+      "ndResponse\022-\n\004data\030\001 \001(\0132\031.common.v1.Sta" +
+      "tusResponseR\004data\"\221\001\n\016ReleaseRequest\0228\n\t" +
+      "access_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3" +
+      ",20}R\010accessId\022+\n\002id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[" +
+      "0-9a-z_-]{3,20}R\002id\022\030\n\007comment\030\003 \001(\tR\007co" +
+      "mment\"@\n\017ReleaseResponse\022-\n\004data\030\001 \001(\0132\031" +
+      ".common.v1.StatusResponseR\004data\"C\n\016Recei" +
+      "veRequest\0221\n\004data\030\001 \001(\0132\035.notification.v" +
+      "1.NotificationR\004data\"@\n\017ReceiveResponse\022" +
+      "-\n\004data\030\001 \001(\0132\031.common.v1.StatusResponse" +
+      "R\004data\"E\n\025TemplateSearchRequest\022,\n\004data\030" +
+      "\001 \001(\0132\030.common.v1.SearchRequestR\004data\"G\n" +
+      "\026TemplateSearchResponse\022-\n\004data\030\001 \003(\0132\031." +
+      "notification.v1.TemplateR\004data\"\314\002\n\023Templ" +
+      "ateSaveRequest\022\022\n\004name\030\001 \001(\tR\004name\022#\n\rla" +
+      "nguage_code\030\002 \001(\tR\014languageCode\022B\n\004data\030" +
+      "\003 \003(\0132..notification.v1.TemplateSaveRequ" +
+      "est.DataEntryR\004data\022E\n\005extra\030\004 \003(\0132/.not" +
+      "ification.v1.TemplateSaveRequest.ExtraEn" +
+      "tryR\005extra\0327\n\tDataEntry\022\020\n\003key\030\001 \001(\tR\003ke" +
+      "y\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\0328\n\nExtraEntr" +
+      "y\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005valu" +
+      "e:\0028\001\"E\n\024TemplateSaveResponse\022-\n\004data\030\001 " +
+      "\003(\0132\031.notification.v1.TemplateR\004data*+\n\010" +
+      "PRIORITY\022\010\n\004HIGH\020\000\022\007\n\003LOW\020\001\022\014\n\010VERY_LOW\020" +
+      "\0022\201\005\n\023NotificationService\022C\n\004Send\022\034.noti" +
+      "fication.v1.SendRequest\032\035.notification.v" +
+      "1.SendResponse\022=\n\006Status\022\030.common.v1.Sta" +
+      "tusRequest\032\031.common.v1.StatusResponse\022O\n" +
+      "\014StatusUpdate\022\036.common.v1.StatusUpdateRe" +
+      "quest\032\037.common.v1.StatusUpdateResponse\022L" +
+      "\n\007Release\022\037.notification.v1.ReleaseReque" +
+      "st\032 .notification.v1.ReleaseResponse\022L\n\007" +
+      "Receive\022\037.notification.v1.ReceiveRequest" +
+      "\032 .notification.v1.ReceiveResponse\022E\n\006Se" +
+      "arch\022\030.common.v1.SearchRequest\032\037.notific" +
+      "ation.v1.SearchResponse0\001\022U\n\016TemplateSea" +
+      "rch\022\030.common.v1.SearchRequest\032\'.notifica" +
+      "tion.v1.TemplateSearchResponse0\001\022[\n\014Temp" +
+      "lateSave\022$.notification.v1.TemplateSaveR" +
+      "equest\032%.notification.v1.TemplateSaveRes" +
+      "ponseB\342\001\n$com.antinvestor.apis.notificat" +
+      "ion.v1B\021NotificationProtoP\001ZJgithub.com/" +
+      "antinvestor/apis/go/notification/notific" +
+      "ation/v1;notificationv1\242\002\003NXX\252\002\017Notifica" +
+      "tion.V1\312\002\017Notification\\V1\342\002\033Notification" +
+      "\\V1\\GPBMetadata\352\002\020Notification::V1b\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -153,8 +243,38 @@ public final class NotificationProto {
           build.buf.validate.ValidateProto.getDescriptor(),
           com.antinvestor.apis.common.v1.CommonProto.getDescriptor(),
         });
-    internal_static_notification_v1_Notification_descriptor =
+    internal_static_notification_v1_Language_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_notification_v1_Language_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_notification_v1_Language_descriptor,
+        new java.lang.String[] { "Id", "Code", "Name", "Extra", });
+    internal_static_notification_v1_Language_ExtraEntry_descriptor =
+      internal_static_notification_v1_Language_descriptor.getNestedTypes().get(0);
+    internal_static_notification_v1_Language_ExtraEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_notification_v1_Language_ExtraEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_notification_v1_TemplateData_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_notification_v1_TemplateData_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_notification_v1_TemplateData_descriptor,
+        new java.lang.String[] { "Id", "Type", "Detail", });
+    internal_static_notification_v1_Template_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_notification_v1_Template_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_notification_v1_Template_descriptor,
+        new java.lang.String[] { "Id", "Name", "Language", "Data", "Extra", });
+    internal_static_notification_v1_Template_ExtraEntry_descriptor =
+      internal_static_notification_v1_Template_descriptor.getNestedTypes().get(0);
+    internal_static_notification_v1_Template_ExtraEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_notification_v1_Template_ExtraEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_notification_v1_Notification_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_notification_v1_Notification_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_notification_v1_Notification_descriptor,
@@ -172,46 +292,82 @@ public final class NotificationProto {
         internal_static_notification_v1_Notification_ExtrasEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_notification_v1_SearchResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_notification_v1_SearchResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_notification_v1_SearchResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_notification_v1_SendRequest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_notification_v1_SendRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_notification_v1_SendRequest_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_notification_v1_SendResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_notification_v1_SendResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_notification_v1_SendResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_notification_v1_ReleaseRequest_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_notification_v1_ReleaseRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_notification_v1_ReleaseRequest_descriptor,
         new java.lang.String[] { "AccessId", "Id", "Comment", });
     internal_static_notification_v1_ReleaseResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_notification_v1_ReleaseResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_notification_v1_ReleaseResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_notification_v1_ReceiveRequest_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_notification_v1_ReceiveRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_notification_v1_ReceiveRequest_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_notification_v1_ReceiveResponse_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_notification_v1_ReceiveResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_notification_v1_ReceiveResponse_descriptor,
+        new java.lang.String[] { "Data", });
+    internal_static_notification_v1_TemplateSearchRequest_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_notification_v1_TemplateSearchRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_notification_v1_TemplateSearchRequest_descriptor,
+        new java.lang.String[] { "Data", });
+    internal_static_notification_v1_TemplateSearchResponse_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_notification_v1_TemplateSearchResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_notification_v1_TemplateSearchResponse_descriptor,
+        new java.lang.String[] { "Data", });
+    internal_static_notification_v1_TemplateSaveRequest_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_notification_v1_TemplateSaveRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_notification_v1_TemplateSaveRequest_descriptor,
+        new java.lang.String[] { "Name", "LanguageCode", "Data", "Extra", });
+    internal_static_notification_v1_TemplateSaveRequest_DataEntry_descriptor =
+      internal_static_notification_v1_TemplateSaveRequest_descriptor.getNestedTypes().get(0);
+    internal_static_notification_v1_TemplateSaveRequest_DataEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_notification_v1_TemplateSaveRequest_DataEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_notification_v1_TemplateSaveRequest_ExtraEntry_descriptor =
+      internal_static_notification_v1_TemplateSaveRequest_descriptor.getNestedTypes().get(1);
+    internal_static_notification_v1_TemplateSaveRequest_ExtraEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_notification_v1_TemplateSaveRequest_ExtraEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_notification_v1_TemplateSaveResponse_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_notification_v1_TemplateSaveResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_notification_v1_TemplateSaveResponse_descriptor,
         new java.lang.String[] { "Data", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
