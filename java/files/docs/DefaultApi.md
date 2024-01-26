@@ -2,16 +2,18 @@
 
 All URIs are relative to *https://files.api.antinvestor.com*
 
-| Method                                                                 | HTTP request     | Description |
-|------------------------------------------------------------------------|------------------|-------------|
-| [**addFile**](DefaultApi.md#addFile)                                   | **POST** /       |             |
-| [**addFileWithHttpInfo**](DefaultApi.md#addFileWithHttpInfo)           | **POST** /       |             |
-| [**deleteFile**](DefaultApi.md#deleteFile)                             | **DELETE** /{id} |             |
-| [**deleteFileWithHttpInfo**](DefaultApi.md#deleteFileWithHttpInfo)     | **DELETE** /{id} |             |
-| [**findFileById**](DefaultApi.md#findFileById)                         | **GET** /{id}    |             |
-| [**findFileByIdWithHttpInfo**](DefaultApi.md#findFileByIdWithHttpInfo) | **GET** /{id}    |             |
-| [**findFiles**](DefaultApi.md#findFiles)                               | **GET** /        |             |
-| [**findFilesWithHttpInfo**](DefaultApi.md#findFilesWithHttpInfo)       | **GET** /        |             |
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**addFile**](DefaultApi.md#addFile) | **POST** / |  |
+| [**addFileWithHttpInfo**](DefaultApi.md#addFileWithHttpInfo) | **POST** / |  |
+| [**deleteFile**](DefaultApi.md#deleteFile) | **DELETE** /{id} |  |
+| [**deleteFileWithHttpInfo**](DefaultApi.md#deleteFileWithHttpInfo) | **DELETE** /{id} |  |
+| [**findFileById**](DefaultApi.md#findFileById) | **GET** /{id} |  |
+| [**findFileByIdWithHttpInfo**](DefaultApi.md#findFileByIdWithHttpInfo) | **GET** /{id} |  |
+| [**findFiles**](DefaultApi.md#findFiles) | **GET** / |  |
+| [**findFilesWithHttpInfo**](DefaultApi.md#findFilesWithHttpInfo) | **GET** / |  |
+
+
 
 ## addFile
 
@@ -65,19 +67,21 @@ public class Example {
 
 ### Parameters
 
-| Name            | Type        | Description | Notes                         |
-|-----------------|-------------|-------------|-------------------------------|
-| **groupId**     | **String**  |             | [optional]                    |
-| **subGroupId**  | **String**  |             | [optional]                    |
-| **ownerId**     | **String**  |             | [optional]                    |
-| **_public**     | **Boolean** |             | [optional] [default to false] |
-| **description** | **String**  |             | [optional]                    |
-| **name**        | **String**  |             | [optional]                    |
-| **fileObject**  | **File**    |             | [optional]                    |
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **groupId** | **String**|  | [optional] |
+| **subGroupId** | **String**|  | [optional] |
+| **ownerId** | **String**|  | [optional] |
+| **_public** | **Boolean**|  | [optional] [default to false] |
+| **description** | **String**|  | [optional] |
+| **name** | **String**|  | [optional] |
+| **fileObject** | **File**|  | [optional] |
 
 ### Return type
 
 [**ModelFile**](ModelFile.md)
+
 
 ### Authorization
 
@@ -89,17 +93,15 @@ public class Example {
 - **Accept**: application/json
 
 ### HTTP response details
-
-| Status code | Description                        | Response headers |
-|-------------|------------------------------------|------------------|
-| **200**     | file response                      | -                |
-| **401**     | Access token is missing or invalid | -                |
-| **0**       | unexpected error                   | -                |
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | file response |  -  |
+| **401** | Access token is missing or invalid |  -  |
+| **0** | unexpected error |  -  |
 
 ## addFileWithHttpInfo
 
-> ApiResponse<ModelFile> addFile addFileWithHttpInfo(groupId, subGroupId, ownerId, _public, description, name,
-> fileObject)
+> ApiResponse<ModelFile> addFile addFileWithHttpInfo(groupId, subGroupId, ownerId, _public, description, name, fileObject)
 
 
 
@@ -152,19 +154,21 @@ public class Example {
 
 ### Parameters
 
-| Name            | Type        | Description | Notes                         |
-|-----------------|-------------|-------------|-------------------------------|
-| **groupId**     | **String**  |             | [optional]                    |
-| **subGroupId**  | **String**  |             | [optional]                    |
-| **ownerId**     | **String**  |             | [optional]                    |
-| **_public**     | **Boolean** |             | [optional] [default to false] |
-| **description** | **String**  |             | [optional]                    |
-| **name**        | **String**  |             | [optional]                    |
-| **fileObject**  | **File**    |             | [optional]                    |
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **groupId** | **String**|  | [optional] |
+| **subGroupId** | **String**|  | [optional] |
+| **ownerId** | **String**|  | [optional] |
+| **_public** | **Boolean**|  | [optional] [default to false] |
+| **description** | **String**|  | [optional] |
+| **name** | **String**|  | [optional] |
+| **fileObject** | **File**|  | [optional] |
 
 ### Return type
 
 ApiResponse<[**ModelFile**](ModelFile.md)>
+
 
 ### Authorization
 
@@ -176,12 +180,12 @@ ApiResponse<[**ModelFile**](ModelFile.md)>
 - **Accept**: application/json
 
 ### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | file response |  -  |
+| **401** | Access token is missing or invalid |  -  |
+| **0** | unexpected error |  -  |
 
-| Status code | Description                        | Response headers |
-|-------------|------------------------------------|------------------|
-| **200**     | file response                      | -                |
-| **401**     | Access token is missing or invalid | -                |
-| **0**       | unexpected error                   | -                |
 
 ## deleteFile
 
@@ -228,11 +232,13 @@ public class Example {
 
 ### Parameters
 
-| Name   | Type       | Description          | Notes |
-|--------|------------|----------------------|-------|
-| **id** | **String** | ID of file to delete |       |
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**| ID of file to delete | |
 
 ### Return type
+
 
 null (empty response body)
 
@@ -246,12 +252,11 @@ null (empty response body)
 - **Accept**: application/json
 
 ### HTTP response details
-
-| Status code | Description                        | Response headers |
-|-------------|------------------------------------|------------------|
-| **204**     | file deleted                       | -                |
-| **401**     | Access token is missing or invalid | -                |
-| **0**       | unexpected error                   | -                |
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | file deleted |  -  |
+| **401** | Access token is missing or invalid |  -  |
+| **0** | unexpected error |  -  |
 
 ## deleteFileWithHttpInfo
 
@@ -301,11 +306,13 @@ public class Example {
 
 ### Parameters
 
-| Name   | Type       | Description          | Notes |
-|--------|------------|----------------------|-------|
-| **id** | **String** | ID of file to delete |       |
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**| ID of file to delete | |
 
 ### Return type
+
 
 ApiResponse<Void>
 
@@ -319,12 +326,12 @@ ApiResponse<Void>
 - **Accept**: application/json
 
 ### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | file deleted |  -  |
+| **401** | Access token is missing or invalid |  -  |
+| **0** | unexpected error |  -  |
 
-| Status code | Description                        | Response headers |
-|-------------|------------------------------------|------------------|
-| **204**     | file deleted                       | -                |
-| **401**     | Access token is missing or invalid | -                |
-| **0**       | unexpected error                   | -                |
 
 ## findFileById
 
@@ -372,13 +379,15 @@ public class Example {
 
 ### Parameters
 
-| Name   | Type       | Description         | Notes |
-|--------|------------|---------------------|-------|
-| **id** | **String** | ID of file to fetch |       |
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**| ID of file to fetch | |
 
 ### Return type
 
 [**File**](File.md)
+
 
 ### Authorization
 
@@ -390,12 +399,11 @@ public class Example {
 - **Accept**: application/octet-stream, application/json
 
 ### HTTP response details
-
-| Status code | Description                        | Response headers |
-|-------------|------------------------------------|------------------|
-| **200**     | file response                      | -                |
-| **401**     | Access token is missing or invalid | -                |
-| **0**       | unexpected error                   | -                |
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | file response |  -  |
+| **401** | Access token is missing or invalid |  -  |
+| **0** | unexpected error |  -  |
 
 ## findFileByIdWithHttpInfo
 
@@ -446,13 +454,15 @@ public class Example {
 
 ### Parameters
 
-| Name   | Type       | Description         | Notes |
-|--------|------------|---------------------|-------|
-| **id** | **String** | ID of file to fetch |       |
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**| ID of file to fetch | |
 
 ### Return type
 
 ApiResponse<[**File**](File.md)>
+
 
 ### Authorization
 
@@ -464,12 +474,12 @@ ApiResponse<[**File**](File.md)>
 - **Accept**: application/octet-stream, application/json
 
 ### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | file response |  -  |
+| **401** | Access token is missing or invalid |  -  |
+| **0** | unexpected error |  -  |
 
-| Status code | Description                        | Response headers |
-|-------------|------------------------------------|------------------|
-| **200**     | file response                      | -                |
-| **401**     | Access token is missing or invalid | -                |
-| **0**       | unexpected error                   | -                |
 
 ## findFiles
 
@@ -477,7 +487,7 @@ ApiResponse<[**File**](File.md)>
 
 
 
-Returns all files from the system that the user has access to
+Returns all files from the system that the user has access to 
 
 ### Example
 
@@ -521,17 +531,19 @@ public class Example {
 
 ### Parameters
 
-| Name           | Type        | Description                              | Notes      |
-|----------------|-------------|------------------------------------------|------------|
-| **ownerId**    | **String**  | filters the files by the subscription by | [optional] |
-| **groupId**    | **String**  | filters the files by the grouping id     | [optional] |
-| **subGroupId** | **String**  | filters the files by the sub grouping id | [optional] |
-| **limit**      | **Integer** | maximum number of results to return      | [optional] |
-| **page**       | **Integer** | maximum number of results to return      | [optional] |
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **ownerId** | **String**| filters the files by the subscription by | [optional] |
+| **groupId** | **String**| filters the files by the grouping id | [optional] |
+| **subGroupId** | **String**| filters the files by the sub grouping id | [optional] |
+| **limit** | **Integer**| maximum number of results to return | [optional] |
+| **page** | **Integer**| maximum number of results to return | [optional] |
 
 ### Return type
 
 [**List&lt;ModelFile&gt;**](ModelFile.md)
+
 
 ### Authorization
 
@@ -543,12 +555,11 @@ public class Example {
 - **Accept**: application/json
 
 ### HTTP response details
-
-| Status code | Description                        | Response headers |
-|-------------|------------------------------------|------------------|
-| **200**     | files response                     | -                |
-| **401**     | Access token is missing or invalid | -                |
-| **0**       | unexpected error                   | -                |
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | files response |  -  |
+| **401** | Access token is missing or invalid |  -  |
+| **0** | unexpected error |  -  |
 
 ## findFilesWithHttpInfo
 
@@ -556,7 +567,7 @@ public class Example {
 
 
 
-Returns all files from the system that the user has access to
+Returns all files from the system that the user has access to 
 
 ### Example
 
@@ -603,17 +614,19 @@ public class Example {
 
 ### Parameters
 
-| Name           | Type        | Description                              | Notes      |
-|----------------|-------------|------------------------------------------|------------|
-| **ownerId**    | **String**  | filters the files by the subscription by | [optional] |
-| **groupId**    | **String**  | filters the files by the grouping id     | [optional] |
-| **subGroupId** | **String**  | filters the files by the sub grouping id | [optional] |
-| **limit**      | **Integer** | maximum number of results to return      | [optional] |
-| **page**       | **Integer** | maximum number of results to return      | [optional] |
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **ownerId** | **String**| filters the files by the subscription by | [optional] |
+| **groupId** | **String**| filters the files by the grouping id | [optional] |
+| **subGroupId** | **String**| filters the files by the sub grouping id | [optional] |
+| **limit** | **Integer**| maximum number of results to return | [optional] |
+| **page** | **Integer**| maximum number of results to return | [optional] |
 
 ### Return type
 
 ApiResponse<[**List&lt;ModelFile&gt;**](ModelFile.md)>
+
 
 ### Authorization
 
@@ -625,10 +638,9 @@ ApiResponse<[**List&lt;ModelFile&gt;**](ModelFile.md)>
 - **Accept**: application/json
 
 ### HTTP response details
-
-| Status code | Description                        | Response headers |
-|-------------|------------------------------------|------------------|
-| **200**     | files response                     | -                |
-| **401**     | Access token is missing or invalid | -                |
-| **0**       | unexpected error                   | -                |
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | files response |  -  |
+| **401** | Access token is missing or invalid |  -  |
+| **0** | unexpected error |  -  |
 

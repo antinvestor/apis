@@ -2,16 +2,16 @@
 
 ## Properties
 
- Name            | Type                  | Description | Notes      
------------------|-----------------------|-------------|------------
- **Id**          | Pointer to **string** |             | [optional] 
- **OwnerId**     | Pointer to **string** |             | [optional] 
- **GroupId**     | Pointer to **string** |             | [optional] 
- **SubGroupId**  | Pointer to **string** |             | [optional] 
- **Public**      | Pointer to **bool**   |             | [optional] 
- **Description** | Pointer to **string** |             | [optional] 
- **Name**        | **string**            |             |
- **Url**         | Pointer to **string** |             | [optional] 
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Id** | Pointer to **string** |  | [optional] 
+**OwnerId** | Pointer to **string** |  | [optional] 
+**GroupId** | Pointer to **string** |  | [optional] 
+**SubGroupId** | Pointer to **string** |  | [optional] 
+**Public** | Pointer to **bool** |  | [optional] 
+**Description** | Pointer to **string** |  | [optional] 
+**Name** | **string** |  | 
+**Url** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -201,6 +201,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+
 ### GetUrl
 
 `func (o *File) GetUrl() string`
@@ -225,6 +226,7 @@ SetUrl sets Url field to given value.
 `func (o *File) HasUrl() bool`
 
 HasUrl returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
