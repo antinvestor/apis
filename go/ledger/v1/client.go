@@ -16,9 +16,8 @@ package ledgerv1
 
 import (
 	"context"
+	"github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
-
 	"math"
 )
 
@@ -49,28 +48,10 @@ func FromContext(ctx context.Context) *LedgerClient {
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type LedgerClient struct {
-	// gRPC connection to the service.
-	clientConn *grpc.ClientConn
+	*common.GrpcClientBase
 
 	// The gRPC API client.
 	ledgerClient LedgerServiceClient
-
-	// The x-ant-* metadata to be sent with each request.
-	xMetadata metadata.MD
-}
-
-// InstantiateLedgerClient creates a new notification client.
-//
-// The service that an application uses to send and access received messages
-func InstantiateLedgerClient(clientConnection *grpc.ClientConn, ledgerServiceCli LedgerServiceClient) *LedgerClient {
-	c := &LedgerClient{
-		clientConn:   clientConnection,
-		ledgerClient: ledgerServiceCli,
-	}
-
-	c.setClientInfo()
-
-	return c
 }
 
 // NewLedgerClient creates a new notification client.
@@ -79,26 +60,15 @@ func InstantiateLedgerClient(clientConnection *grpc.ClientConn, ledgerServiceCli
 func NewLedgerClient(ctx context.Context, opts ...common.ClientOption) (*LedgerClient, error) {
 	clientOpts := defaultLedgerClientOptions()
 
-	connPool, err := common.DialConnection(ctx, append(clientOpts, opts...)...)
+	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
 
-	notificationServiceCli := NewLedgerServiceClient(connPool)
-	return InstantiateLedgerClient(connPool, notificationServiceCli), nil
-}
+	c := &LedgerClient{
+		GrpcClientBase: clientBase,
+		ledgerClient:   NewLedgerServiceClient(clientBase.Connection()),
+	}
 
-// Close closes the connection to the API service. The user should invoke this when
-// the client is no longer required.
-func (nc *LedgerClient) Close() error {
-	return nc.clientConn.Close()
-}
-
-// setClientInfo sets the name and version of the application in
-// the `x-goog-api-client` header passed on each request. Intended for
-// use by Google-written clients.
-func (nc *LedgerClient) setClientInfo(keyval ...string) {
-	kv := append([]string{"gl-go", common.VersionGo()}, keyval...)
-	kv = append(kv, "grpc", grpc.Version)
-	nc.xMetadata = metadata.Pairs("x-ai-api-client", common.XAntHeader(kv...))
+	return c, nil
 }

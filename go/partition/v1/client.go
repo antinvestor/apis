@@ -16,9 +16,8 @@ package partitionv1
 
 import (
 	"context"
+	"github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
-
 	"math"
 )
 
@@ -49,28 +48,10 @@ func FromContext(ctx context.Context) *PartitionClient {
 // Methods, except Close, may be called concurrently.
 // However, fields must not be modified concurrently with method calls.
 type PartitionClient struct {
-	// gRPC connection to the service.
-	clientConn *grpc.ClientConn
+	*common.GrpcClientBase
 
 	// The gRPC API client.
 	client PartitionServiceClient
-
-	// The x-ant-* metadata to be sent with each request.
-	xMetadata metadata.MD
-}
-
-// InstantiatePartitionsClient creates a new partitions client based on supplied connection
-func InstantiatePartitionsClient(
-	clientConnection *grpc.ClientConn,
-	partitionServiceClient PartitionServiceClient) *PartitionClient {
-
-	cl := &PartitionClient{
-		clientConn: clientConnection,
-		client:     partitionServiceClient,
-	}
-
-	cl.setClientInfo()
-	return cl
 }
 
 // NewPartitionsClient creates a new partitions client.
@@ -78,35 +59,25 @@ func InstantiatePartitionsClient(
 func NewPartitionsClient(ctx context.Context, opts ...common.ClientOption) (*PartitionClient, error) {
 	clientOpts := defaultPartitionClientOptions()
 
-	connPool, err := common.DialConnection(ctx, append(clientOpts, opts...)...)
+	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
 
-	return InstantiatePartitionsClient(connPool, nil), nil
+	cl := &PartitionClient{
+		GrpcClientBase: clientBase,
+		client:         NewPartitionServiceClient(clientBase.Connection()),
+	}
+
+	return cl, nil
 }
 
-// Close closes the connection to the API service. The user should invoke this when
-// the client is no longer required.
-func (partCl *PartitionClient) Close() error {
-	return partCl.clientConn.Close()
-}
-
-// setClientInfo sets the name and version of the application in
-// the `x-goog-api-client` header passed on each request. Intended for
-// use by Google-written clients.
-func (partCl *PartitionClient) setClientInfo(keyval ...string) {
-	kv := append([]string{"gl-go", common.VersionGo()}, keyval...)
-	kv = append(kv, "grpc", grpc.Version)
-	partCl.xMetadata = metadata.Pairs("x-ai-api-client", common.XAntHeader(kv...))
-}
-
-func (partCl *PartitionClient) getService() PartitionServiceClient {
+func (partCl *PartitionClient) service() PartitionServiceClient {
 	if partCl.client != nil {
 		return partCl.client
 	}
 
-	return NewPartitionServiceClient(partCl.clientConn)
+	return NewPartitionServiceClient(partCl.Connection())
 }
 
 // ListTenants gets a list of all the tenants with query filtering against id and properties
@@ -122,7 +93,7 @@ func (partCl *PartitionClient) ListTenants(
 		Page:  int64(page),
 	}
 
-	responseService, err := partCl.getService().ListTenant(ctx, &request)
+	responseService, err := partCl.service().ListTenant(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -157,7 +128,7 @@ func (partCl *PartitionClient) GetTenant(ctx context.Context, tenantId string) (
 		Id: tenantId,
 	}
 
-	response, err := partCl.getService().GetTenant(ctx, &request)
+	response, err := partCl.service().GetTenant(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -181,7 +152,7 @@ func (partCl *PartitionClient) NewTenant(
 		Properties:  props,
 	}
 
-	response, err := partCl.getService().CreateTenant(ctx, &request)
+	response, err := partCl.service().CreateTenant(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -202,7 +173,7 @@ func (partCl *PartitionClient) ListPartitions(
 		Page:  int64(page),
 	}
 
-	responseService, err := partCl.getService().ListPartition(ctx, &request)
+	responseService, err := partCl.service().ListPartition(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -244,7 +215,7 @@ func (partCl *PartitionClient) GetPartition(ctx context.Context, partitionId str
 		Id: partitionId,
 	}
 
-	response, err := partCl.getService().GetPartition(ctx, &request)
+	response, err := partCl.service().GetPartition(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -268,7 +239,7 @@ func (partCl *PartitionClient) newPartition(ctx context.Context, tenantId string
 		Properties:  props,
 	}
 
-	response, err := partCl.getService().CreatePartition(ctx, &request)
+	response, err := partCl.service().CreatePartition(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -286,7 +257,7 @@ func (partCl *PartitionClient) UpdatePartition(ctx context.Context, partitionId 
 		Properties:  props,
 	}
 
-	response, err := partCl.getService().UpdatePartition(ctx, &request)
+	response, err := partCl.service().UpdatePartition(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -303,7 +274,7 @@ func (partCl *PartitionClient) CreatePartitionRole(ctx context.Context, partitio
 		Properties:  props,
 	}
 
-	response, err := partCl.getService().CreatePartitionRole(ctx, &request)
+	response, err := partCl.service().CreatePartitionRole(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -317,7 +288,7 @@ func (partCl *PartitionClient) RemovePartitionRole(ctx context.Context, partitio
 		PartitionRoleId: partitionRoleId,
 	}
 
-	return partCl.getService().RemovePartitionRole(ctx, &request)
+	return partCl.service().RemovePartitionRole(ctx, &request)
 }
 
 func (partCl *PartitionClient) ListPartitionRoles(
@@ -328,7 +299,7 @@ func (partCl *PartitionClient) ListPartitionRoles(
 		PartitionId: partitionId,
 	}
 
-	responseService, err := partCl.getService().ListPartitionRole(ctx, &partitionRoleRequest)
+	responseService, err := partCl.service().ListPartitionRole(ctx, &partitionRoleRequest)
 
 	if err != nil {
 		return nil, err
@@ -363,7 +334,7 @@ func (partCl *PartitionClient) NewPage(ctx context.Context, partitionId string, 
 		PartitionId: partitionId,
 	}
 
-	response, err := partCl.getService().CreatePage(ctx, &request)
+	response, err := partCl.service().CreatePage(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -378,7 +349,7 @@ func (partCl *PartitionClient) GetPage(ctx context.Context, partitionId string, 
 		PartitionId: partitionId,
 	}
 
-	response, err := partCl.getService().GetPage(ctx, &request)
+	response, err := partCl.service().GetPage(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -394,7 +365,7 @@ func (partCl *PartitionClient) CreateAccessByPartitionID(
 		Partition: &CreateAccessRequest_PartitionId{PartitionId: partitionId},
 	}
 
-	response, err := partCl.getService().CreateAccess(ctx, &request)
+	response, err := partCl.service().CreateAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -411,7 +382,7 @@ func (partCl *PartitionClient) CreateAccessByClientID(
 		Partition: &CreateAccessRequest_ClientId{ClientId: clientId},
 	}
 
-	response, err := partCl.getService().CreateAccess(ctx, &request)
+	response, err := partCl.service().CreateAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -425,7 +396,7 @@ func (partCl *PartitionClient) RemoveAccess(ctx context.Context, accessId string
 		AccessId: accessId,
 	}
 
-	return partCl.getService().RemoveAccess(ctx, &request)
+	return partCl.service().RemoveAccess(ctx, &request)
 }
 
 func (partCl *PartitionClient) GetAccessById(ctx context.Context, accessId string) (*AccessObject, error) {
@@ -434,7 +405,7 @@ func (partCl *PartitionClient) GetAccessById(ctx context.Context, accessId strin
 		AccessId: accessId,
 	}
 
-	response, err := partCl.getService().GetAccess(ctx, &request)
+	response, err := partCl.service().GetAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -452,7 +423,7 @@ func (partCl *PartitionClient) GetAccessByPartitionIdProfileId(
 		Partition: &GetAccessRequest_PartitionId{PartitionId: partitionId},
 	}
 
-	response, err := partCl.getService().GetAccess(ctx, &request)
+	response, err := partCl.service().GetAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -470,7 +441,7 @@ func (partCl *PartitionClient) GetAccessByClientIdProfileId(
 		Partition: &GetAccessRequest_ClientId{ClientId: clientId},
 	}
 
-	response, err := partCl.getService().GetAccess(ctx, &request)
+	response, err := partCl.service().GetAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -488,7 +459,7 @@ func (partCl *PartitionClient) CreateAccessRole(
 		PartitionRoleId: partitionRoleId,
 	}
 
-	response, err := partCl.getService().CreateAccessRole(ctx, &request)
+	response, err := partCl.service().CreateAccessRole(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -502,7 +473,7 @@ func (partCl *PartitionClient) RemoveAccessRole(ctx context.Context, accessRoleI
 		AccessRoleId: accessRoleId,
 	}
 
-	return partCl.getService().RemoveAccessRole(ctx, &request)
+	return partCl.service().RemoveAccessRole(ctx, &request)
 }
 
 func (partCl *PartitionClient) ListAccess(ctx context.Context, accessId string) (<-chan *AccessRoleObject, error) {
@@ -511,7 +482,7 @@ func (partCl *PartitionClient) ListAccess(ctx context.Context, accessId string) 
 		AccessId: accessId,
 	}
 
-	responseService, err := partCl.getService().ListAccessRole(ctx, &request)
+	responseService, err := partCl.service().ListAccessRole(ctx, &request)
 	if err != nil {
 		return nil, err
 	}

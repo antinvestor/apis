@@ -16,9 +16,9 @@ package notificationv1
 
 import (
 	"context"
+	"github.com/antinvestor/apis/go/common"
 	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
 	"math"
 )
 
@@ -49,28 +49,10 @@ func FromContext(ctx context.Context) *NotificationClient {
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type NotificationClient struct {
-	// gRPC connection to the service.
-	clientConn *grpc.ClientConn
+	*common.GrpcClientBase
 
 	// The gRPC API client.
 	notificationClient NotificationServiceClient
-
-	// The x-ant-* metadata to be sent with each request.
-	xMetadata metadata.MD
-}
-
-// InstantiateNotificationClient creates a new notification client.
-//
-// The service that an application uses to send and access received messages
-func InstantiateNotificationClient(clientConnection *grpc.ClientConn, notificationServiceCli NotificationServiceClient) *NotificationClient {
-	c := &NotificationClient{
-		clientConn:         clientConnection,
-		notificationClient: notificationServiceCli,
-	}
-
-	c.setClientInfo()
-
-	return c
 }
 
 // NewNotificationClient creates a new notification client.
@@ -79,19 +61,17 @@ func InstantiateNotificationClient(clientConnection *grpc.ClientConn, notificati
 func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*NotificationClient, error) {
 	clientOpts := defaultNotificationClientOptions()
 
-	connPool, err := common.DialConnection(ctx, append(clientOpts, opts...)...)
+	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
 
-	notificationServiceCli := NewNotificationServiceClient(connPool)
-	return InstantiateNotificationClient(connPool, notificationServiceCli), nil
-}
+	c := &NotificationClient{
+		GrpcClientBase:     clientBase,
+		notificationClient: NewNotificationServiceClient(clientBase.Connection()),
+	}
 
-// Close closes the connection to the API service. The user should invoke this when
-// the client is no longer required.
-func (nc *NotificationClient) Close() error {
-	return nc.clientConn.Close()
+	return c, nil
 }
 
 // Service creates a new notification service for use to invoke.
@@ -101,16 +81,7 @@ func (nc *NotificationClient) Service() NotificationServiceClient {
 		return nc.notificationClient
 	}
 
-	return NewNotificationServiceClient(nc.clientConn)
-}
-
-// setClientInfo sets the name and version of the application in
-// the `x-goog-api-client` header passed on each request. Intended for
-// use by Google-written clients.
-func (nc *NotificationClient) setClientInfo(keyval ...string) {
-	kv := append([]string{"gl-go", common.VersionGo()}, keyval...)
-	kv = append(kv, "grpc", grpc.Version)
-	nc.xMetadata = metadata.Pairs("x-ai-api-client", common.XAntHeader(kv...))
+	return NewNotificationServiceClient(nc.Connection())
 }
 
 func (nc *NotificationClient) Send(ctx context.Context, accessID string, contactId string, contactDetail string,

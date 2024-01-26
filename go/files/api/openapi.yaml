@@ -13,9 +13,9 @@ info:
   title: Ant Investor Files
   version: 1.0.0
 servers:
-- url: https://files.api.antinvestor.com
+  - url: https://files.api.antinvestor.com
 security:
-- bearerAuth: []
+  - bearerAuth: [ ]
 paths:
   /:
     get:
@@ -23,51 +23,51 @@ paths:
         Returns all files from the system that the user has access to
       operationId: findFiles
       parameters:
-      - description: filters the files by the subscription by
-        explode: true
-        in: query
-        name: owner_id
-        required: false
-        schema:
-          example: 9bsv0s09a5j002njlpvg
-          pattern: "[0-9a-z_-]{3,20}"
-          type: string
-        style: form
-      - description: filters the files by the grouping id
-        explode: true
-        in: query
-        name: group_id
-        required: false
-        schema:
-          example: 9bsv0s09a5j002njlptg
-          pattern: "[0-9a-z_-]{3,20}"
-          type: string
-        style: form
-      - description: filters the files by the sub grouping id
-        explode: true
-        in: query
-        name: sub_group_id
-        required: false
-        schema:
-          example: front side
-          type: string
-        style: form
-      - description: maximum number of results to return
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: maximum number of results to return
-        explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          type: integer
-        style: form
+        - description: filters the files by the subscription by
+          explode: true
+          in: query
+          name: owner_id
+          required: false
+          schema:
+            example: 9bsv0s09a5j002njlpvg
+            pattern: "[0-9a-z_-]{3,20}"
+            type: string
+          style: form
+        - description: filters the files by the grouping id
+          explode: true
+          in: query
+          name: group_id
+          required: false
+          schema:
+            example: 9bsv0s09a5j002njlptg
+            pattern: "[0-9a-z_-]{3,20}"
+            type: string
+          style: form
+        - description: filters the files by the sub grouping id
+          explode: true
+          in: query
+          name: sub_group_id
+          required: false
+          schema:
+            example: front side
+            type: string
+          style: form
+        - description: maximum number of results to return
+          explode: true
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: maximum number of results to return
+          explode: true
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+          style: form
       responses:
         "200":
           content:
@@ -123,16 +123,16 @@ paths:
       description: deletes a single file based on the ID supplied
       operationId: deleteFile
       parameters:
-      - description: ID of file to delete
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          example: 9bsv0s09a5j002njlq20
-          pattern: "[0-9a-z_-]{3,20}"
-          type: string
-        style: simple
+        - description: ID of file to delete
+          explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            example: 9bsv0s09a5j002njlq20
+            pattern: "[0-9a-z_-]{3,20}"
+            type: string
+          style: simple
       responses:
         "204":
           description: file deleted
@@ -152,16 +152,16 @@ paths:
       description: Returns a file based on supplied ID
       operationId: find file by id
       parameters:
-      - description: ID of file to fetch
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          example: 9bsv0s09a5j002njlq30
-          pattern: "[0-9a-z_-]{3,20}"
-          type: string
-        style: simple
+        - description: ID of file to fetch
+          explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            example: 9bsv0s09a5j002njlq30
+            pattern: "[0-9a-z_-]{3,20}"
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -219,7 +219,7 @@ components:
         url:
           type: string
       required:
-      - name
+        - name
     Error:
       properties:
         code:
@@ -228,8 +228,8 @@ components:
         message:
           type: string
       required:
-      - code
-      - message
+        - code
+        - message
     UnauthorizedError:
       description: Access token is missing or invalid
     addFile_request:

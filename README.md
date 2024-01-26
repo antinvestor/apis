@@ -2,14 +2,14 @@
 
 [![Tests](https://github.com/antinvestor/apis/actions/workflows/run_tests.yml/badge.svg?branch=main)](https://github.com/antinvestor/apis/actions/workflows/run_tests.yml) [![Buf Build Status](https://github.com/antinvestor/apis/actions/workflows/buf_build.yaml/badge.svg?branch=main)](https://github.com/antinvestor/apis/actions/workflows/buf_build.yaml)
 
-
 The repository holds the common grpc api library that other clients extend
 
 # requirements
-Install 
-    - protoc
-   -  https://github.com/golang/mock
 
+Install
+- protoc
+
+- https://github.com/golang/mock
 
     - Installing buf
      
@@ -19,7 +19,6 @@ Install
       "https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf-$(uname -s)-$(uname -m)" \
       -o "${BIN}/buf" && \
       chmod +x "${BIN}/buf"
-
 
 # proto generation
 

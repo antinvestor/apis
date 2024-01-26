@@ -2,10 +2,10 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**Code** | **int32** |  | 
-**Message** | **string** |  | 
+ Name        | Type       | Description | Notes 
+-------------|------------|-------------|-------
+ **Code**    | **int32**  |             |
+ **Message** | **string** |             |
 
 ## Methods
 
@@ -45,7 +45,6 @@ and a boolean to check if the value has been set.
 
 SetCode sets Code field to given value.
 
-
 ### GetMessage
 
 `func (o *Error) GetMessage() string`
@@ -64,8 +63,6 @@ and a boolean to check if the value has been set.
 `func (o *Error) SetMessage(v string)`
 
 SetMessage sets Message field to given value.
-
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

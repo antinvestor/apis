@@ -16,15 +16,14 @@ package settingsv1
 
 import (
 	"context"
+	"github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
-
 	"math"
 )
 
 const ctxKeyService = common.CtxServiceKey("settingsClientKey")
 
-func defaultsettingsClientOptions() []common.ClientOption {
+func defaultSettingsClientOptions() []common.ClientOption {
 	return []common.ClientOption{
 		common.WithEndpoint("settings.api.antinvestor.com:443"),
 		common.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
@@ -49,56 +48,26 @@ func FromContext(ctx context.Context) *SettingsClient {
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type SettingsClient struct {
-	// gRPC connection to the service.
-	clientConn *grpc.ClientConn
-
+	*common.GrpcClientBase
 	// The gRPC API client.
 	settingsClient SettingsServiceClient
-
-	// The x-ant-* metadata to be sent with each request.
-	xMetadata metadata.MD
-}
-
-// InstantiatesettingsClient creates a new notification client.
-//
-// The service that an application uses to send and access received messages
-func InstantiatesettingsClient(clientConnection *grpc.ClientConn, settingsServiceCli SettingsServiceClient) *SettingsClient {
-	c := &SettingsClient{
-		clientConn:     clientConnection,
-		settingsClient: settingsServiceCli,
-	}
-
-	c.setClientInfo()
-
-	return c
 }
 
 // NewsettingsClient creates a new notification client.
 //
 // The service that an application uses to send and access received messages
 func NewsettingsClient(ctx context.Context, opts ...common.ClientOption) (*SettingsClient, error) {
-	clientOpts := defaultsettingsClientOptions()
+	clientOpts := defaultSettingsClientOptions()
 
-	connPool, err := common.DialConnection(ctx, append(clientOpts, opts...)...)
+	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
 
-	notificationServiceCli := NewSettingsServiceClient(connPool)
-	return InstantiatesettingsClient(connPool, notificationServiceCli), nil
-}
+	c := &SettingsClient{
+		GrpcClientBase: clientBase,
+		settingsClient: NewSettingsServiceClient(clientBase.Connection()),
+	}
 
-// Close closes the connection to the API service. The user should invoke this when
-// the client is no longer required.
-func (nc *SettingsClient) Close() error {
-	return nc.clientConn.Close()
-}
-
-// setClientInfo sets the name and version of the application in
-// the `x-goog-api-client` header passed on each request. Intended for
-// use by Google-written clients.
-func (nc *SettingsClient) setClientInfo(keyval ...string) {
-	kv := append([]string{"gl-go", common.VersionGo()}, keyval...)
-	kv = append(kv, "grpc", grpc.Version)
-	nc.xMetadata = metadata.Pairs("x-ai-api-client", common.XAntHeader(kv...))
+	return c, nil
 }

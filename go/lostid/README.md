@@ -1,6 +1,6 @@
 # service-lostmyid-api
 
-A repository for the  lost my id service api being developed to host lost and found cards. 
+A repository for the lost my id service api being developed to host lost and found cards.
 
 ### How do I update the definitions? ###
 

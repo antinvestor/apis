@@ -1,6 +1,6 @@
 # service-ocr-api
 
-A repository for the  ocr service api being developed
+A repository for the ocr service api being developed
 for ant investors to push images and get back text extracted from the images
 
 ### How do I update the definitions? ###

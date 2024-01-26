@@ -16,7 +16,7 @@ servers:
 
 components:
   securitySchemes:
-    bearerAuth:            
+    bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
@@ -24,7 +24,7 @@ components:
   schemas:
     File:
       required:
-        - name  
+        - name
       properties:
         id:
           type: string
@@ -35,13 +35,13 @@ components:
         sub_group_id:
           type: string
         public:
-          type: boolean         
+          type: boolean
         description:
           type: string
         name:
           type: string
         url:
-          type: string    
+          type: string
 
     Error:
       required:
@@ -66,13 +66,13 @@ components:
             $ref: "#/components/schemas/UnauthorizedError"
 
 security:
-  - bearerAuth: []
+  - bearerAuth: [ ]
 paths:
   /:
     get:
       description: |
         Returns all files from the system that the user has access to
-        
+
       operationId: findFiles
       parameters:
         - name: owner_id
@@ -88,9 +88,9 @@ paths:
           description: filters the files by the grouping id
           required: false
           schema:
-            type: string 
+            type: string
             pattern: '[0-9a-z_-]{3,20}'
-            example: '9bsv0s09a5j002njlptg'   
+            example: '9bsv0s09a5j002njlptg'
         - name: sub_group_id
           in: query
           description: filters the files by the sub grouping id
@@ -129,15 +129,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     post:
-      description: Stores a new file. Duplicates are going to be ignored if the hash of the file and meta data both match an existing file 
+      description: Stores a new file. Duplicates are going to be ignored if the hash of the file and meta data both match an existing file
       operationId: addFile
       requestBody:
         description: File contents to add to the store
-        content: 
-          multipart/form-data: 
-            schema:            
+        content:
+          multipart/form-data:
+            schema:
               type: object
-              properties:      
+              properties:
                 group_id:
                   type: string
                   pattern: '[0-9a-z_-]{3,20}'
@@ -151,9 +151,9 @@ paths:
                   example: '9bsv0s09a5j002njlptg'
                 public:
                   type: boolean
-                  default: false         
+                  default: false
                 description:
-                  type: string  
+                  type: string
                   example: 'Users id details'
                 name:
                   type: string

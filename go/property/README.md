@@ -1,6 +1,6 @@
 service-propery-api
 
-A repository for the  property service api being developed 
+A repository for the property service api being developed
 for ant investors. A property is any physical item that affects
 the value of a profile over time.
 
@@ -8,7 +8,6 @@ the value of a profile over time.
 
 * The api definition is defined in the proto file notification.proto
 * To update the proto service you need to run the command :
-
 
     `protoc --proto_path=../apis --proto_path=./v1 --go_out=./ --validate_out=lang=go:. property.proto`
 

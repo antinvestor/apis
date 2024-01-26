@@ -48,23 +48,10 @@ func FromContext(ctx context.Context) *ProfileClient {
 // Methods, except Close, may be called concurrently. However,
 // fields must not be modified concurrently with method calls.
 type ProfileClient struct {
-	common.GrpcClientBase
+	*common.GrpcClientBase
 
 	// The gRPC API client.
 	profileClient ProfileServiceClient
-}
-
-// InstantiateProfileClient creates a new profile client based on parameters.
-
-func InstantiateProfileClient(
-	clientConn *grpc.ClientConn,
-	profileSrvCli ProfileServiceClient) *ProfileClient {
-	pc := &ProfileClient{
-
-		profileClient: profileSrvCli,
-	}
-
-	return pc
 }
 
 // NewProfileClient creates a new notification client.
@@ -72,14 +59,17 @@ func InstantiateProfileClient(
 func NewProfileClient(ctx context.Context, opts ...common.ClientOption) (*ProfileClient, error) {
 	clientOpts := defaultProfileClientOptions()
 
-	connPool, err := common.DialConnection(ctx, append(clientOpts, opts...)...)
+	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
 
-	profileSvcCli := NewProfileServiceClient(connPool)
+	pc := &ProfileClient{
+		GrpcClientBase: clientBase,
+		profileClient:  NewProfileServiceClient(clientBase.Connection()),
+	}
 
-	return InstantiateProfileClient(connPool, profileSvcCli), nil
+	return pc, nil
 }
 
 func (pc *ProfileClient) GetProfileByID(

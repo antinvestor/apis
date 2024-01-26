@@ -16,6 +16,7 @@ package partitionv1
 
 import (
 	"context"
+	"github.com/antinvestor/apis/go/common"
 	"testing"
 )
 

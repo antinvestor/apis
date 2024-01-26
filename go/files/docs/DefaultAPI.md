@@ -2,22 +2,17 @@
 
 All URIs are relative to *https://files.api.antinvestor.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**AddFile**](DefaultAPI.md#AddFile) | **Post** / | 
-[**DeleteFile**](DefaultAPI.md#DeleteFile) | **Delete** /{id} | 
-[**FindFileById**](DefaultAPI.md#FindFileById) | **Get** /{id} | 
-[**FindFiles**](DefaultAPI.md#FindFiles) | **Get** / | 
-
-
+ Method                                         | HTTP request     | Description 
+------------------------------------------------|------------------|-------------
+ [**AddFile**](DefaultAPI.md#AddFile)           | **Post** /       |
+ [**DeleteFile**](DefaultAPI.md#DeleteFile)     | **Delete** /{id} |
+ [**FindFileById**](DefaultAPI.md#FindFileById) | **Get** /{id}    |
+ [**FindFiles**](DefaultAPI.md#FindFiles)       | **Get** /        |
 
 ## AddFile
 
-> File AddFile(ctx).GroupId(groupId).SubGroupId(subGroupId).OwnerId(ownerId).Public(public).Description(description).Name(name).FileObject(fileObject).Execute()
-
-
-
-
+> File AddFile(ctx).GroupId(groupId).SubGroupId(subGroupId).OwnerId(ownerId).Public(public).Description(description)
+> .Name(name).FileObject(fileObject).Execute()
 
 ### Example
 
@@ -54,22 +49,19 @@ func main() {
 
 ### Path Parameters
 
-
-
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAddFileRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **groupId** | **string** |  | 
- **subGroupId** | **string** |  | 
- **ownerId** | **string** |  | 
- **public** | **bool** |  | [default to false]
- **description** | **string** |  | 
- **name** | **string** |  | 
- **fileObject** | ***os.File** |  | 
+ Name            | Type         | Description | Notes              
+-----------------|--------------|-------------|--------------------
+ **groupId**     | **string**   |             |
+ **subGroupId**  | **string**   |             |
+ **ownerId**     | **string**   |             |
+ **public**      | **bool**     |             | [default to false] 
+ **description** | **string**   |             |
+ **name**        | **string**   |             |
+ **fileObject**  | ***os.File** |             |
 
 ### Return type
 
@@ -88,14 +80,9 @@ Name | Type | Description  | Notes
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
-
 ## DeleteFile
 
 > DeleteFile(ctx, id).Execute()
-
-
-
-
 
 ### Example
 
@@ -124,24 +111,21 @@ func main() {
 
 ### Path Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | ID of file to delete | 
+ Name    | Type                | Description                                                                 | Notes 
+---------|---------------------|-----------------------------------------------------------------------------|-------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. 
+ **id**  | **string**          | ID of file to delete                                                        |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteFileRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+ Name | Type | Description | Notes 
+------|------|-------------|-------
 
 ### Return type
 
- (empty response body)
+(empty response body)
 
 ### Authorization
 
@@ -156,14 +140,9 @@ Name | Type | Description  | Notes
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
-
 ## FindFileById
 
 > *os.File FindFileById(ctx, id).Execute()
-
-
-
-
 
 ### Example
 
@@ -194,20 +173,17 @@ func main() {
 
 ### Path Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | ID of file to fetch | 
+ Name    | Type                | Description                                                                 | Notes 
+---------|---------------------|-----------------------------------------------------------------------------|-------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. 
+ **id**  | **string**          | ID of file to fetch                                                         |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiFindFileByIdRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+ Name | Type | Description | Notes 
+------|------|-------------|-------
 
 ### Return type
 
@@ -226,14 +202,9 @@ Name | Type | Description  | Notes
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
-
 ## FindFiles
 
 > []File FindFiles(ctx).OwnerId(ownerId).GroupId(groupId).SubGroupId(subGroupId).Limit(limit).Page(page).Execute()
-
-
-
-
 
 ### Example
 
@@ -268,20 +239,17 @@ func main() {
 
 ### Path Parameters
 
-
-
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiFindFilesRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ownerId** | **string** | filters the files by the subscription by | 
- **groupId** | **string** | filters the files by the grouping id | 
- **subGroupId** | **string** | filters the files by the sub grouping id | 
- **limit** | **int32** | maximum number of results to return | 
- **page** | **int32** | maximum number of results to return | 
+ Name           | Type       | Description                              | Notes 
+----------------|------------|------------------------------------------|-------
+ **ownerId**    | **string** | filters the files by the subscription by |
+ **groupId**    | **string** | filters the files by the grouping id     |
+ **subGroupId** | **string** | filters the files by the sub grouping id |
+ **limit**      | **int32**  | maximum number of results to return      |
+ **page**       | **int32**  | maximum number of results to return      |
 
 ### Return type
 

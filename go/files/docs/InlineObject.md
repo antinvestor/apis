@@ -2,13 +2,13 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**GroupId** | Pointer to **string** |  | [optional] 
-**AccessId** | Pointer to **string** |  | [optional] 
-**Public** | Pointer to **bool** |  | [optional] [default to false]
-**Name** | Pointer to **string** |  | [optional] 
-**FileObject** | Pointer to ***os.File** |  | [optional] 
+ Name           | Type                    | Description | Notes                         
+----------------|-------------------------|-------------|-------------------------------
+ **GroupId**    | Pointer to **string**   |             | [optional]                    
+ **AccessId**   | Pointer to **string**   |             | [optional]                    
+ **Public**     | Pointer to **bool**     |             | [optional] [default to false] 
+ **Name**       | Pointer to **string**   |             | [optional]                    
+ **FileObject** | Pointer to ***os.File** |             | [optional]                    
 
 ## Methods
 
@@ -153,7 +153,6 @@ SetFileObject sets FileObject field to given value.
 `func (o *InlineObject) HasFileObject() bool`
 
 HasFileObject returns a boolean if a field has been set.
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
