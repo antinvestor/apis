@@ -48,13 +48,25 @@ func (gbc *GrpcClientBase) Close() error {
 	return gbc.clientConn.Close()
 }
 
-// setClientInfo sets the name and version of the application in
+// SetInfo sets the name and version of the application in
 // the `x-goog-api-client` header passed on each request. Intended for
 // use by Google-written clients.
-func (gbc *GrpcClientBase) setClientInfo(keyval ...string) {
+func (gbc *GrpcClientBase) SetInfo(keyval ...string) {
 	kv := append([]string{"gl-go", VersionGo()}, keyval...)
 	kv = append(kv, "grpc", grpc.Version)
 	gbc.xMetadata = metadata.Pairs("x-ai-api-client", XAntHeader(kv...))
+}
+
+func (gbc *GrpcClientBase) GetInfo() metadata.MD {
+	return gbc.xMetadata
+}
+
+func NewClientBase(clientConn *grpc.ClientConn) GrpcClientBase {
+	clientBase := GrpcClientBase{
+		clientConn: clientConn,
+	}
+	clientBase.SetInfo()
+	return clientBase
 }
 
 type JWTInterceptor struct {

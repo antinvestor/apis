@@ -49,14 +49,10 @@ func FromContext(ctx context.Context) *ProfileClient {
 // Methods, except Close, may be called concurrently. However,
 // fields must not be modified concurrently with method calls.
 type ProfileClient struct {
-	// gRPC connection to the service.
-	clientConn *grpc.ClientConn
+	apic.GrpcClientBase
 
 	// The gRPC API client.
 	profileClient ProfileServiceClient
-
-	// The x-ant-* metadata to be sent with each request.
-	xMetadata metadata.MD
 }
 
 // InstantiateProfileClient creates a new profile client based on parameters.
@@ -65,11 +61,9 @@ func InstantiateProfileClient(
 	clientConn *grpc.ClientConn,
 	profileSrvCli ProfileServiceClient) *ProfileClient {
 	pc := &ProfileClient{
-		clientConn:    clientConn,
+
 		profileClient: profileSrvCli,
 	}
-
-	pc.setClientInfo()
 
 	return pc
 }
