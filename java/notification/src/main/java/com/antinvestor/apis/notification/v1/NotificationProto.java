@@ -198,44 +198,45 @@ public final class NotificationProto {
       "veRequest\0221\n\004data\030\001 \001(\0132\035.notification.v" +
       "1.NotificationR\004data\"@\n\017ReceiveResponse\022" +
       "-\n\004data\030\001 \001(\0132\031.common.v1.StatusResponse" +
-      "R\004data\"E\n\025TemplateSearchRequest\022,\n\004data\030" +
-      "\001 \001(\0132\030.common.v1.SearchRequestR\004data\"G\n" +
-      "\026TemplateSearchResponse\022-\n\004data\030\001 \003(\0132\031." +
-      "notification.v1.TemplateR\004data\"\314\002\n\023Templ" +
-      "ateSaveRequest\022\022\n\004name\030\001 \001(\tR\004name\022#\n\rla" +
-      "nguage_code\030\002 \001(\tR\014languageCode\022B\n\004data\030" +
-      "\003 \003(\0132..notification.v1.TemplateSaveRequ" +
-      "est.DataEntryR\004data\022E\n\005extra\030\004 \003(\0132/.not" +
-      "ification.v1.TemplateSaveRequest.ExtraEn" +
-      "tryR\005extra\0327\n\tDataEntry\022\020\n\003key\030\001 \001(\tR\003ke" +
-      "y\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\0328\n\nExtraEntr" +
-      "y\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005valu" +
-      "e:\0028\001\"E\n\024TemplateSaveResponse\022-\n\004data\030\001 " +
-      "\003(\0132\031.notification.v1.TemplateR\004data*+\n\010" +
-      "PRIORITY\022\010\n\004HIGH\020\000\022\007\n\003LOW\020\001\022\014\n\010VERY_LOW\020" +
-      "\0022\201\005\n\023NotificationService\022C\n\004Send\022\034.noti" +
-      "fication.v1.SendRequest\032\035.notification.v" +
-      "1.SendResponse\022=\n\006Status\022\030.common.v1.Sta" +
-      "tusRequest\032\031.common.v1.StatusResponse\022O\n" +
-      "\014StatusUpdate\022\036.common.v1.StatusUpdateRe" +
-      "quest\032\037.common.v1.StatusUpdateResponse\022L" +
-      "\n\007Release\022\037.notification.v1.ReleaseReque" +
-      "st\032 .notification.v1.ReleaseResponse\022L\n\007" +
-      "Receive\022\037.notification.v1.ReceiveRequest" +
-      "\032 .notification.v1.ReceiveResponse\022E\n\006Se" +
-      "arch\022\030.common.v1.SearchRequest\032\037.notific" +
-      "ation.v1.SearchResponse0\001\022U\n\016TemplateSea" +
-      "rch\022\030.common.v1.SearchRequest\032\'.notifica" +
-      "tion.v1.TemplateSearchResponse0\001\022[\n\014Temp" +
-      "lateSave\022$.notification.v1.TemplateSaveR" +
-      "equest\032%.notification.v1.TemplateSaveRes" +
-      "ponseB\342\001\n$com.antinvestor.apis.notificat" +
-      "ion.v1B\021NotificationProtoP\001ZJgithub.com/" +
-      "antinvestor/apis/go/notification/notific" +
-      "ation/v1;notificationv1\242\002\003NXX\252\002\017Notifica" +
-      "tion.V1\312\002\017Notification\\V1\342\002\033Notification" +
-      "\\V1\\GPBMetadata\352\002\020Notification::V1b\006prot" +
-      "o3"
+      "R\004data\"|\n\025TemplateSearchRequest\022\024\n\005query" +
+      "\030\001 \001(\tR\005query\022#\n\rlanguage_code\030\002 \001(\tR\014la" +
+      "nguageCode\022\022\n\004page\030\003 \001(\003R\004page\022\024\n\005count\030" +
+      "\004 \001(\005R\005count\"G\n\026TemplateSearchResponse\022-" +
+      "\n\004data\030\001 \003(\0132\031.notification.v1.TemplateR" +
+      "\004data\"\314\002\n\023TemplateSaveRequest\022\022\n\004name\030\001 " +
+      "\001(\tR\004name\022#\n\rlanguage_code\030\002 \001(\tR\014langua" +
+      "geCode\022B\n\004data\030\003 \003(\0132..notification.v1.T" +
+      "emplateSaveRequest.DataEntryR\004data\022E\n\005ex" +
+      "tra\030\004 \003(\0132/.notification.v1.TemplateSave" +
+      "Request.ExtraEntryR\005extra\0327\n\tDataEntry\022\020" +
+      "\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\002" +
+      "8\001\0328\n\nExtraEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005va" +
+      "lue\030\002 \001(\tR\005value:\0028\001\"E\n\024TemplateSaveResp" +
+      "onse\022-\n\004data\030\001 \001(\0132\031.notification.v1.Tem" +
+      "plateR\004data*+\n\010PRIORITY\022\010\n\004HIGH\020\000\022\007\n\003LOW" +
+      "\020\001\022\014\n\010VERY_LOW\020\0022\217\005\n\023NotificationService" +
+      "\022C\n\004Send\022\034.notification.v1.SendRequest\032\035" +
+      ".notification.v1.SendResponse\022=\n\006Status\022" +
+      "\030.common.v1.StatusRequest\032\031.common.v1.St" +
+      "atusResponse\022O\n\014StatusUpdate\022\036.common.v1" +
+      ".StatusUpdateRequest\032\037.common.v1.StatusU" +
+      "pdateResponse\022L\n\007Release\022\037.notification." +
+      "v1.ReleaseRequest\032 .notification.v1.Rele" +
+      "aseResponse\022L\n\007Receive\022\037.notification.v1" +
+      ".ReceiveRequest\032 .notification.v1.Receiv" +
+      "eResponse\022E\n\006Search\022\030.common.v1.SearchRe" +
+      "quest\032\037.notification.v1.SearchResponse0\001" +
+      "\022c\n\016TemplateSearch\022&.notification.v1.Tem" +
+      "plateSearchRequest\032\'.notification.v1.Tem" +
+      "plateSearchResponse0\001\022[\n\014TemplateSave\022$." +
+      "notification.v1.TemplateSaveRequest\032%.no" +
+      "tification.v1.TemplateSaveResponseB\342\001\n$c" +
+      "om.antinvestor.apis.notification.v1B\021Not" +
+      "ificationProtoP\001ZJgithub.com/antinvestor" +
+      "/apis/go/notification/notification/v1;no" +
+      "tificationv1\242\002\003NXX\252\002\017Notification.V1\312\002\017N" +
+      "otification\\V1\342\002\033Notification\\V1\\GPBMeta" +
+      "data\352\002\020Notification::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -338,7 +339,7 @@ public final class NotificationProto {
     internal_static_notification_v1_TemplateSearchRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_notification_v1_TemplateSearchRequest_descriptor,
-        new java.lang.String[] { "Data", });
+        new java.lang.String[] { "Query", "LanguageCode", "Page", "Count", });
     internal_static_notification_v1_TemplateSearchResponse_descriptor =
       getDescriptor().getMessageTypes().get(12);
     internal_static_notification_v1_TemplateSearchResponse_fieldAccessorTable = new

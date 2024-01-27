@@ -162,7 +162,10 @@ message ReceiveResponse {
 }
 
 message TemplateSearchRequest {
-  common.v1.SearchRequest data = 1;
+  string query = 1;
+  string language_code = 2;
+  int64 page = 3;
+  int32 count = 4;
 }
 
 message TemplateSearchResponse {
@@ -177,7 +180,7 @@ message TemplateSaveRequest {
 }
 
 message TemplateSaveResponse {
-  repeated Template data = 1;
+  Template data = 1;
 }
 
 service NotificationService {

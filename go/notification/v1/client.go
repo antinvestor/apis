@@ -141,3 +141,75 @@ func (nc *NotificationClient) UpdateStatus(ctx context.Context, notificationId s
 
 	return nc.Service().StatusUpdate(ctx, &messageStatus)
 }
+
+func (nc *NotificationClient) GetTemplate(ctx context.Context, name string, language string) (*Template, error) {
+
+	searchRequest := TemplateSearchRequest{
+		Query:        name,
+		LanguageCode: language,
+	}
+
+	responseStream, err := nc.Service().TemplateSearch(ctx, &searchRequest)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := responseStream.Recv()
+	if err != nil {
+		return nil, err
+	}
+
+	if len(resp.GetData()) > 0 {
+		return resp.GetData()[0], nil
+	}
+	return nil, nil
+}
+
+func (nc *NotificationClient) SearchTemplate(ctx context.Context, query string, language string, page int64, count int32) (chan<- *Template, error) {
+
+	searchRequest := TemplateSearchRequest{
+		Query:        query,
+		LanguageCode: language,
+		Page:         page,
+		Count:        count,
+	}
+
+	responseService, err := nc.Service().TemplateSearch(ctx, &searchRequest)
+	if err != nil {
+		return nil, err
+	}
+
+	templateChannel := make(chan *Template)
+	go func(responseService NotificationService_TemplateSearchClient) {
+		defer close(templateChannel)
+		for {
+			responses, err0 := responseService.Recv()
+			if err0 != nil {
+				return
+			}
+
+			for _, role := range responses.GetData() {
+				templateChannel <- role
+			}
+		}
+	}(responseService)
+
+	return templateChannel, nil
+
+}
+
+func (nc *NotificationClient) SaveTemplate(ctx context.Context, name string, language string, data map[string]string) (*Template, error) {
+
+	templateSaveRequest := &TemplateSaveRequest{
+		Name:         name,
+		LanguageCode: language,
+		Data:         data,
+	}
+
+	response, err := nc.Service().TemplateSave(ctx, templateSaveRequest)
+	if err != nil {
+		return nil, err
+	}
+
+	return response.GetData(), nil
+}

@@ -183,7 +183,7 @@ func (mr *MockNotificationServiceClientMockRecorder) TemplateSave(ctx, in any, o
 }
 
 // TemplateSearch mocks base method.
-func (m *MockNotificationServiceClient) TemplateSearch(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (NotificationService_TemplateSearchClient, error) {
+func (m *MockNotificationServiceClient) TemplateSearch(ctx context.Context, in *TemplateSearchRequest, opts ...grpc.CallOption) (NotificationService_TemplateSearchClient, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -576,7 +576,7 @@ func (mr *MockNotificationServiceServerMockRecorder) TemplateSave(arg0, arg1 any
 }
 
 // TemplateSearch mocks base method.
-func (m *MockNotificationServiceServer) TemplateSearch(arg0 *commonv1.SearchRequest, arg1 NotificationService_TemplateSearchServer) error {
+func (m *MockNotificationServiceServer) TemplateSearch(arg0 *TemplateSearchRequest, arg1 NotificationService_TemplateSearchServer) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "TemplateSearch", arg0, arg1)
 	ret0, _ := ret[0].(error)

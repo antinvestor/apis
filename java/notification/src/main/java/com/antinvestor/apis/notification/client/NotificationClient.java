@@ -163,4 +163,67 @@ public class NotificationClient implements AutoCloseable {
         };
 
     }
+
+
+    public Template templeteSave(String name, String languageCode) {
+        var saveRequest = TemplateSaveRequest.
+                newBuilder().
+                setName(name).
+                setLanguageCode(languageCode).
+                build();
+        return stub().templateSave(saveRequest).getData();
+    }
+
+
+    public Iterator<List<Template>> templateSearch(String query, String languageCode, int page, int size) {
+
+        var filterBuilder = TemplateSearchRequest.newBuilder()
+                .setPage(page)
+                .setCount(size);
+
+        if (!TextUtils.isBlank(query)) {
+            filterBuilder = filterBuilder.setQuery(query);
+        }
+
+        if (!TextUtils.isBlank(languageCode)) {
+            filterBuilder = filterBuilder.setLanguageCode(languageCode);
+        }
+
+        var response = stub().templateSearch(filterBuilder.build());
+
+        return new Iterator<>() {
+            @Override
+            public boolean hasNext() {
+                return response.hasNext();
+            }
+
+            @Override
+            public List<Template> next() {
+                return response.next().getDataList();
+            }
+        };
+
+    }
+
+
+    public Optional<Template> templateGet(String query, String languageCode) {
+
+        var searchRequest = TemplateSearchRequest.newBuilder()
+                .setQuery(query)
+                .setLanguageCode(languageCode).build();
+
+        var response = stub().templateSearch(searchRequest);
+
+        if (response.hasNext()) {
+            var templatesList = response.next();
+            if (templatesList.getDataCount() > 0) {
+                return Optional.of(templatesList.getData(0));
+            }
+        }
+
+        return Optional.empty();
+
+    }
+
+
 }

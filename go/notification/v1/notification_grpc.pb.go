@@ -61,7 +61,7 @@ type NotificationServiceClient interface {
 	// Search method is for client request for particular notification details from system
 	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (NotificationService_SearchClient, error)
 	// Utility to allow system obtain templates within the system
-	TemplateSearch(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (NotificationService_TemplateSearchClient, error)
+	TemplateSearch(ctx context.Context, in *TemplateSearchRequest, opts ...grpc.CallOption) (NotificationService_TemplateSearchClient, error)
 	TemplateSave(ctx context.Context, in *TemplateSaveRequest, opts ...grpc.CallOption) (*TemplateSaveResponse, error)
 }
 
@@ -150,7 +150,7 @@ func (x *notificationServiceSearchClient) Recv() (*SearchResponse, error) {
 	return m, nil
 }
 
-func (c *notificationServiceClient) TemplateSearch(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (NotificationService_TemplateSearchClient, error) {
+func (c *notificationServiceClient) TemplateSearch(ctx context.Context, in *TemplateSearchRequest, opts ...grpc.CallOption) (NotificationService_TemplateSearchClient, error) {
 	stream, err := c.cc.NewStream(ctx, &NotificationService_ServiceDesc.Streams[1], NotificationService_TemplateSearch_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
@@ -208,7 +208,7 @@ type NotificationServiceServer interface {
 	// Search method is for client request for particular notification details from system
 	Search(*v1.SearchRequest, NotificationService_SearchServer) error
 	// Utility to allow system obtain templates within the system
-	TemplateSearch(*v1.SearchRequest, NotificationService_TemplateSearchServer) error
+	TemplateSearch(*TemplateSearchRequest, NotificationService_TemplateSearchServer) error
 	TemplateSave(context.Context, *TemplateSaveRequest) (*TemplateSaveResponse, error)
 	mustEmbedUnimplementedNotificationServiceServer()
 }
@@ -235,7 +235,7 @@ func (UnimplementedNotificationServiceServer) Receive(context.Context, *ReceiveR
 func (UnimplementedNotificationServiceServer) Search(*v1.SearchRequest, NotificationService_SearchServer) error {
 	return status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
-func (UnimplementedNotificationServiceServer) TemplateSearch(*v1.SearchRequest, NotificationService_TemplateSearchServer) error {
+func (UnimplementedNotificationServiceServer) TemplateSearch(*TemplateSearchRequest, NotificationService_TemplateSearchServer) error {
 	return status.Errorf(codes.Unimplemented, "method TemplateSearch not implemented")
 }
 func (UnimplementedNotificationServiceServer) TemplateSave(context.Context, *TemplateSaveRequest) (*TemplateSaveResponse, error) {
@@ -366,7 +366,7 @@ func (x *notificationServiceSearchServer) Send(m *SearchResponse) error {
 }
 
 func _NotificationService_TemplateSearch_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(v1.SearchRequest)
+	m := new(TemplateSearchRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
