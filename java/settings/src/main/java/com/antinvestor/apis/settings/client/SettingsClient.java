@@ -328,45 +328,4 @@ public class SettingsClient implements AutoCloseable {
             channel.shutdown().awaitTermination(1, TimeUnit.MINUTES);
         }
     }
-
-    public void processForDefaults(String moduleName, SettingConstantAbstract settingConstants) {
-
-        settingConstants.setDefaults();
-
-        Field[] fields = settingConstants.getClass().getFields();
-
-        for (Field field : fields) {
-            try {
-
-                String settingName = (String) field.get(settingConstants);
-
-                String settingValue = "";
-                String defaultLanguage = "";
-                ///Deal with translatable data.
-                if (settingName.contains("{lang}")) {
-                    defaultLanguage = "en";
-                    settingValue = getLocalizedSetting(moduleName, defaultLanguage, settingName);
-                } else {
-                    settingValue = getSetting(moduleName, settingName);
-                }
-
-                if (TextUtils.isEmpty(settingValue)) {
-                    String defaultValue = settingConstants.getDefaultValue(settingName);
-
-                    if (!TextUtils.isEmpty(defaultValue)) {
-                        setSetting(moduleName, defaultLanguage, settingName, defaultValue);
-                    }
-
-                }
-
-
-            } catch (IllegalArgumentException | IllegalAccessException | NullPointerException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
-
-
-    }
-
-
 }

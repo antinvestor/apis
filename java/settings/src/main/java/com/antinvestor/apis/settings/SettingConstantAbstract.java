@@ -78,12 +78,6 @@ public abstract class SettingConstantAbstract {
     private final Map<String, String> defaultSettingDescriptions = Map.of();
 
     protected void setDefaultValue(String name, String value) {
-
-        if (name.contains(".{lang}.")) {
-            String defaultLanguage = getDefaultValue(GLOBAL_DEFAULT_LANGUAGE_CODE);
-            name = name.replace("{lang}", defaultLanguage);
-        }
-
         this.defaultSettingValues.put(name, value);
     }
 
@@ -103,11 +97,6 @@ public abstract class SettingConstantAbstract {
 
     public String getDefaultValue(String setting) {
 
-        if (setting.contains(".{lang}.")) {
-            String defaultLanguage = getDefaultValue(GLOBAL_DEFAULT_LANGUAGE_CODE);
-            setting = setting.replace("{lang}", defaultLanguage);
-        }
-
         String settingValue = defaultSettingValues.get(setting);
         if (settingValue == null) {
             settingValue = "";
@@ -115,17 +104,4 @@ public abstract class SettingConstantAbstract {
         return settingValue;
     }
 
-    public String getDefaultDescription(String setting) {
-
-        if (setting.contains(".{lang}.")) {
-            String defaultLanguage = getDefaultValue(GLOBAL_DEFAULT_LANGUAGE_CODE);
-            setting = setting.replace("{lang}", defaultLanguage);
-        }
-
-        String settingDescription = defaultSettingDescriptions.get(setting);
-        if (settingDescription == null) {
-            settingDescription = "";
-        }
-        return settingDescription;
-    }
 }
