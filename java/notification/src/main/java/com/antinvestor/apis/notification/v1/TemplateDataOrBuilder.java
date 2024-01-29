@@ -57,4 +57,19 @@ public interface TemplateDataOrBuilder extends
    */
   com.google.protobuf.ByteString
       getDetailBytes();
+
+  /**
+   * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+   * @return Whether the language field is set.
+   */
+  boolean hasLanguage();
+  /**
+   * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+   * @return The language.
+   */
+  com.antinvestor.apis.notification.v1.Language getLanguage();
+  /**
+   * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+   */
+  com.antinvestor.apis.notification.v1.LanguageOrBuilder getLanguageOrBuilder();
 }

@@ -47,21 +47,6 @@ public interface TemplateOrBuilder extends
       getNameBytes();
 
   /**
-   * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-   * @return Whether the language field is set.
-   */
-  boolean hasLanguage();
-  /**
-   * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-   * @return The language.
-   */
-  com.antinvestor.apis.notification.v1.Language getLanguage();
-  /**
-   * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-   */
-  com.antinvestor.apis.notification.v1.LanguageOrBuilder getLanguageOrBuilder();
-
-  /**
    * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
    */
   java.util.List<com.antinvestor.apis.notification.v1.TemplateData> 

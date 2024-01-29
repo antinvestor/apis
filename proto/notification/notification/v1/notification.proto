@@ -53,6 +53,8 @@ message TemplateData {
 
   string type = 2;
   string detail = 3;
+
+  Language language = 4;
 }
 
 message Template {
@@ -64,7 +66,6 @@ message Template {
   ];
   string name = 2;
 
-  Language language = 3;
   repeated TemplateData data = 4;
   map<string, string> extra = 5;
 }

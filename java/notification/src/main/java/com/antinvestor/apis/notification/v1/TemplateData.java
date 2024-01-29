@@ -56,6 +56,7 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.notification.v1.TemplateData.class, com.antinvestor.apis.notification.v1.TemplateData.Builder.class);
   }
 
+  private int bitField0_;
   public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
@@ -173,6 +174,32 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int LANGUAGE_FIELD_NUMBER = 4;
+  private com.antinvestor.apis.notification.v1.Language language_;
+  /**
+   * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+   * @return Whether the language field is set.
+   */
+  @java.lang.Override
+  public boolean hasLanguage() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+   * @return The language.
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.notification.v1.Language getLanguage() {
+    return language_ == null ? com.antinvestor.apis.notification.v1.Language.getDefaultInstance() : language_;
+  }
+  /**
+   * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.notification.v1.LanguageOrBuilder getLanguageOrBuilder() {
+    return language_ == null ? com.antinvestor.apis.notification.v1.Language.getDefaultInstance() : language_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -196,6 +223,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(detail_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, detail_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(4, getLanguage());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -213,6 +243,10 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(detail_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, detail_);
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(4, getLanguage());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -235,6 +269,11 @@ private static final long serialVersionUID = 0L;
         .equals(other.getType())) return false;
     if (!getDetail()
         .equals(other.getDetail())) return false;
+    if (hasLanguage() != other.hasLanguage()) return false;
+    if (hasLanguage()) {
+      if (!getLanguage()
+          .equals(other.getLanguage())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -252,6 +291,10 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getType().hashCode();
     hash = (37 * hash) + DETAIL_FIELD_NUMBER;
     hash = (53 * hash) + getDetail().hashCode();
+    if (hasLanguage()) {
+      hash = (37 * hash) + LANGUAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getLanguage().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -371,13 +414,19 @@ private static final long serialVersionUID = 0L;
 
     // Construct using com.antinvestor.apis.notification.v1.TemplateData.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getLanguageFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -386,6 +435,11 @@ private static final long serialVersionUID = 0L;
       id_ = "";
       type_ = "";
       detail_ = "";
+      language_ = null;
+      if (languageBuilder_ != null) {
+        languageBuilder_.dispose();
+        languageBuilder_ = null;
+      }
       return this;
     }
 
@@ -428,6 +482,14 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.detail_ = detail_;
       }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.language_ = languageBuilder_ == null
+            ? language_
+            : languageBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -489,6 +551,9 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000004;
         onChanged();
       }
+      if (other.hasLanguage()) {
+        mergeLanguage(other.getLanguage());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -530,6 +595,13 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000004;
               break;
             } // case 26
+            case 34: {
+              input.readMessage(
+                  getLanguageFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 34
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -761,6 +833,127 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
+    }
+
+    private com.antinvestor.apis.notification.v1.Language language_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.antinvestor.apis.notification.v1.Language, com.antinvestor.apis.notification.v1.Language.Builder, com.antinvestor.apis.notification.v1.LanguageOrBuilder> languageBuilder_;
+    /**
+     * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+     * @return Whether the language field is set.
+     */
+    public boolean hasLanguage() {
+      return ((bitField0_ & 0x00000008) != 0);
+    }
+    /**
+     * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+     * @return The language.
+     */
+    public com.antinvestor.apis.notification.v1.Language getLanguage() {
+      if (languageBuilder_ == null) {
+        return language_ == null ? com.antinvestor.apis.notification.v1.Language.getDefaultInstance() : language_;
+      } else {
+        return languageBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+     */
+    public Builder setLanguage(com.antinvestor.apis.notification.v1.Language value) {
+      if (languageBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        language_ = value;
+      } else {
+        languageBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+     */
+    public Builder setLanguage(
+        com.antinvestor.apis.notification.v1.Language.Builder builderForValue) {
+      if (languageBuilder_ == null) {
+        language_ = builderForValue.build();
+      } else {
+        languageBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+     */
+    public Builder mergeLanguage(com.antinvestor.apis.notification.v1.Language value) {
+      if (languageBuilder_ == null) {
+        if (((bitField0_ & 0x00000008) != 0) &&
+          language_ != null &&
+          language_ != com.antinvestor.apis.notification.v1.Language.getDefaultInstance()) {
+          getLanguageBuilder().mergeFrom(value);
+        } else {
+          language_ = value;
+        }
+      } else {
+        languageBuilder_.mergeFrom(value);
+      }
+      if (language_ != null) {
+        bitField0_ |= 0x00000008;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+     */
+    public Builder clearLanguage() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      language_ = null;
+      if (languageBuilder_ != null) {
+        languageBuilder_.dispose();
+        languageBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+     */
+    public com.antinvestor.apis.notification.v1.Language.Builder getLanguageBuilder() {
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return getLanguageFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+     */
+    public com.antinvestor.apis.notification.v1.LanguageOrBuilder getLanguageOrBuilder() {
+      if (languageBuilder_ != null) {
+        return languageBuilder_.getMessageOrBuilder();
+      } else {
+        return language_ == null ?
+            com.antinvestor.apis.notification.v1.Language.getDefaultInstance() : language_;
+      }
+    }
+    /**
+     * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.antinvestor.apis.notification.v1.Language, com.antinvestor.apis.notification.v1.Language.Builder, com.antinvestor.apis.notification.v1.LanguageOrBuilder> 
+        getLanguageFieldBuilder() {
+      if (languageBuilder_ == null) {
+        languageBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.antinvestor.apis.notification.v1.Language, com.antinvestor.apis.notification.v1.Language.Builder, com.antinvestor.apis.notification.v1.LanguageOrBuilder>(
+                getLanguage(),
+                getParentForChildren(),
+                isClean());
+        language_ = null;
+      }
+      return languageBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

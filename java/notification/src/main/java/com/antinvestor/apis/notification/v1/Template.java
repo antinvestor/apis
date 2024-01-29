@@ -68,7 +68,6 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.notification.v1.Template.class, com.antinvestor.apis.notification.v1.Template.Builder.class);
   }
 
-  private int bitField0_;
   public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
@@ -145,32 +144,6 @@ private static final long serialVersionUID = 0L;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
-  }
-
-  public static final int LANGUAGE_FIELD_NUMBER = 3;
-  private com.antinvestor.apis.notification.v1.Language language_;
-  /**
-   * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-   * @return Whether the language field is set.
-   */
-  @java.lang.Override
-  public boolean hasLanguage() {
-    return ((bitField0_ & 0x00000001) != 0);
-  }
-  /**
-   * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-   * @return The language.
-   */
-  @java.lang.Override
-  public com.antinvestor.apis.notification.v1.Language getLanguage() {
-    return language_ == null ? com.antinvestor.apis.notification.v1.Language.getDefaultInstance() : language_;
-  }
-  /**
-   * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-   */
-  @java.lang.Override
-  public com.antinvestor.apis.notification.v1.LanguageOrBuilder getLanguageOrBuilder() {
-    return language_ == null ? com.antinvestor.apis.notification.v1.Language.getDefaultInstance() : language_;
   }
 
   public static final int DATA_FIELD_NUMBER = 4;
@@ -313,9 +286,6 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
     }
-    if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(3, getLanguage());
-    }
     for (int i = 0; i < data_.size(); i++) {
       output.writeMessage(4, data_.get(i));
     }
@@ -339,10 +309,6 @@ java.lang.String defaultValue) {
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
-    }
-    if (((bitField0_ & 0x00000001) != 0)) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(3, getLanguage());
     }
     for (int i = 0; i < data_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
@@ -377,11 +343,6 @@ java.lang.String defaultValue) {
         .equals(other.getId())) return false;
     if (!getName()
         .equals(other.getName())) return false;
-    if (hasLanguage() != other.hasLanguage()) return false;
-    if (hasLanguage()) {
-      if (!getLanguage()
-          .equals(other.getLanguage())) return false;
-    }
     if (!getDataList()
         .equals(other.getDataList())) return false;
     if (!internalGetExtra().equals(
@@ -401,10 +362,6 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + NAME_FIELD_NUMBER;
     hash = (53 * hash) + getName().hashCode();
-    if (hasLanguage()) {
-      hash = (37 * hash) + LANGUAGE_FIELD_NUMBER;
-      hash = (53 * hash) + getLanguage().hashCode();
-    }
     if (getDataCount() > 0) {
       hash = (37 * hash) + DATA_FIELD_NUMBER;
       hash = (53 * hash) + getDataList().hashCode();
@@ -554,20 +511,13 @@ java.lang.String defaultValue) {
 
     // Construct using com.antinvestor.apis.notification.v1.Template.newBuilder()
     private Builder() {
-      maybeForceBuilderInitialization();
+
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-      maybeForceBuilderInitialization();
-    }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3
-              .alwaysUseFieldBuilders) {
-        getLanguageFieldBuilder();
-        getDataFieldBuilder();
-      }
+
     }
     @java.lang.Override
     public Builder clear() {
@@ -575,18 +525,13 @@ java.lang.String defaultValue) {
       bitField0_ = 0;
       id_ = "";
       name_ = "";
-      language_ = null;
-      if (languageBuilder_ != null) {
-        languageBuilder_.dispose();
-        languageBuilder_ = null;
-      }
       if (dataBuilder_ == null) {
         data_ = java.util.Collections.emptyList();
       } else {
         data_ = null;
         dataBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000008);
+      bitField0_ = (bitField0_ & ~0x00000004);
       internalGetMutableExtra().clear();
       return this;
     }
@@ -622,9 +567,9 @@ java.lang.String defaultValue) {
 
     private void buildPartialRepeatedFields(com.antinvestor.apis.notification.v1.Template result) {
       if (dataBuilder_ == null) {
-        if (((bitField0_ & 0x00000008) != 0)) {
+        if (((bitField0_ & 0x00000004) != 0)) {
           data_ = java.util.Collections.unmodifiableList(data_);
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.data_ = data_;
       } else {
@@ -640,18 +585,10 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.name_ = name_;
       }
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.language_ = languageBuilder_ == null
-            ? language_
-            : languageBuilder_.build();
-        to_bitField0_ |= 0x00000001;
-      }
-      if (((from_bitField0_ & 0x00000010) != 0)) {
+      if (((from_bitField0_ & 0x00000008) != 0)) {
         result.extra_ = internalGetExtra();
         result.extra_.makeImmutable();
       }
-      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -708,14 +645,11 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000002;
         onChanged();
       }
-      if (other.hasLanguage()) {
-        mergeLanguage(other.getLanguage());
-      }
       if (dataBuilder_ == null) {
         if (!other.data_.isEmpty()) {
           if (data_.isEmpty()) {
             data_ = other.data_;
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
             ensureDataIsMutable();
             data_.addAll(other.data_);
@@ -728,7 +662,7 @@ java.lang.String defaultValue) {
             dataBuilder_.dispose();
             dataBuilder_ = null;
             data_ = other.data_;
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000004);
             dataBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                  getDataFieldBuilder() : null;
@@ -739,7 +673,7 @@ java.lang.String defaultValue) {
       }
       internalGetMutableExtra().mergeFrom(
           other.internalGetExtra());
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000008;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -776,13 +710,6 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000002;
               break;
             } // case 18
-            case 26: {
-              input.readMessage(
-                  getLanguageFieldBuilder().getBuilder(),
-                  extensionRegistry);
-              bitField0_ |= 0x00000004;
-              break;
-            } // case 26
             case 34: {
               com.antinvestor.apis.notification.v1.TemplateData m =
                   input.readMessage(
@@ -802,7 +729,7 @@ java.lang.String defaultValue) {
                   ExtraDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableExtra().getMutableMap().put(
                   extra__.getKey(), extra__.getValue());
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000008;
               break;
             } // case 42
             default: {
@@ -966,133 +893,12 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private com.antinvestor.apis.notification.v1.Language language_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.antinvestor.apis.notification.v1.Language, com.antinvestor.apis.notification.v1.Language.Builder, com.antinvestor.apis.notification.v1.LanguageOrBuilder> languageBuilder_;
-    /**
-     * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-     * @return Whether the language field is set.
-     */
-    public boolean hasLanguage() {
-      return ((bitField0_ & 0x00000004) != 0);
-    }
-    /**
-     * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-     * @return The language.
-     */
-    public com.antinvestor.apis.notification.v1.Language getLanguage() {
-      if (languageBuilder_ == null) {
-        return language_ == null ? com.antinvestor.apis.notification.v1.Language.getDefaultInstance() : language_;
-      } else {
-        return languageBuilder_.getMessage();
-      }
-    }
-    /**
-     * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-     */
-    public Builder setLanguage(com.antinvestor.apis.notification.v1.Language value) {
-      if (languageBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        language_ = value;
-      } else {
-        languageBuilder_.setMessage(value);
-      }
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-     */
-    public Builder setLanguage(
-        com.antinvestor.apis.notification.v1.Language.Builder builderForValue) {
-      if (languageBuilder_ == null) {
-        language_ = builderForValue.build();
-      } else {
-        languageBuilder_.setMessage(builderForValue.build());
-      }
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-     */
-    public Builder mergeLanguage(com.antinvestor.apis.notification.v1.Language value) {
-      if (languageBuilder_ == null) {
-        if (((bitField0_ & 0x00000004) != 0) &&
-          language_ != null &&
-          language_ != com.antinvestor.apis.notification.v1.Language.getDefaultInstance()) {
-          getLanguageBuilder().mergeFrom(value);
-        } else {
-          language_ = value;
-        }
-      } else {
-        languageBuilder_.mergeFrom(value);
-      }
-      if (language_ != null) {
-        bitField0_ |= 0x00000004;
-        onChanged();
-      }
-      return this;
-    }
-    /**
-     * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-     */
-    public Builder clearLanguage() {
-      bitField0_ = (bitField0_ & ~0x00000004);
-      language_ = null;
-      if (languageBuilder_ != null) {
-        languageBuilder_.dispose();
-        languageBuilder_ = null;
-      }
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-     */
-    public com.antinvestor.apis.notification.v1.Language.Builder getLanguageBuilder() {
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return getLanguageFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-     */
-    public com.antinvestor.apis.notification.v1.LanguageOrBuilder getLanguageOrBuilder() {
-      if (languageBuilder_ != null) {
-        return languageBuilder_.getMessageOrBuilder();
-      } else {
-        return language_ == null ?
-            com.antinvestor.apis.notification.v1.Language.getDefaultInstance() : language_;
-      }
-    }
-    /**
-     * <code>.notification.v1.Language language = 3 [json_name = "language"];</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.antinvestor.apis.notification.v1.Language, com.antinvestor.apis.notification.v1.Language.Builder, com.antinvestor.apis.notification.v1.LanguageOrBuilder> 
-        getLanguageFieldBuilder() {
-      if (languageBuilder_ == null) {
-        languageBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            com.antinvestor.apis.notification.v1.Language, com.antinvestor.apis.notification.v1.Language.Builder, com.antinvestor.apis.notification.v1.LanguageOrBuilder>(
-                getLanguage(),
-                getParentForChildren(),
-                isClean());
-        language_ = null;
-      }
-      return languageBuilder_;
-    }
-
     private java.util.List<com.antinvestor.apis.notification.v1.TemplateData> data_ =
       java.util.Collections.emptyList();
     private void ensureDataIsMutable() {
-      if (!((bitField0_ & 0x00000008) != 0)) {
+      if (!((bitField0_ & 0x00000004) != 0)) {
         data_ = new java.util.ArrayList<com.antinvestor.apis.notification.v1.TemplateData>(data_);
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
        }
     }
 
@@ -1242,7 +1048,7 @@ java.lang.String defaultValue) {
     public Builder clearData() {
       if (dataBuilder_ == null) {
         data_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
       } else {
         dataBuilder_.clear();
@@ -1319,7 +1125,7 @@ java.lang.String defaultValue) {
         dataBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             com.antinvestor.apis.notification.v1.TemplateData, com.antinvestor.apis.notification.v1.TemplateData.Builder, com.antinvestor.apis.notification.v1.TemplateDataOrBuilder>(
                 data_,
-                ((bitField0_ & 0x00000008) != 0),
+                ((bitField0_ & 0x00000004) != 0),
                 getParentForChildren(),
                 isClean());
         data_ = null;
@@ -1346,7 +1152,7 @@ java.lang.String defaultValue) {
       if (!extra_.isMutable()) {
         extra_ = extra_.copy();
       }
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000008;
       onChanged();
       return extra_;
     }
@@ -1406,7 +1212,7 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearExtra() {
-      bitField0_ = (bitField0_ & ~0x00000010);
+      bitField0_ = (bitField0_ & ~0x00000008);
       internalGetMutableExtra().getMutableMap()
           .clear();
       return this;
@@ -1427,7 +1233,7 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableExtra() {
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000008;
       return internalGetMutableExtra().getMutableMap();
     }
     /**
@@ -1440,7 +1246,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableExtra().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000008;
       return this;
     }
     /**
@@ -1450,7 +1256,7 @@ java.lang.String defaultValue) {
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableExtra().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000008;
       return this;
     }
     @java.lang.Override

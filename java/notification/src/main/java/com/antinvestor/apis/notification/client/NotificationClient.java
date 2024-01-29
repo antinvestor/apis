@@ -27,10 +27,7 @@ import jakarta.inject.Inject;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -165,11 +162,16 @@ public class NotificationClient implements AutoCloseable {
     }
 
 
-    public Template templeteSave(String name, String languageCode) {
+    public Template templeteSave(String name, String languageCode, Map<String, String> data) {
+        return templeteSave(name, languageCode, data, Collections.emptyMap());
+    }
+    public Template templeteSave(String name, String languageCode, Map<String, String> data, Map<String, String> extra) {
         var saveRequest = TemplateSaveRequest.
                 newBuilder().
                 setName(name).
                 setLanguageCode(languageCode).
+                putAllData(data).
+                putAllExtra(extra).
                 build();
         return stub().templateSave(saveRequest).getData();
     }
@@ -210,7 +212,8 @@ public class NotificationClient implements AutoCloseable {
 
         var searchRequest = TemplateSearchRequest.newBuilder()
                 .setQuery(query)
-                .setLanguageCode(languageCode).build();
+                .setLanguageCode(languageCode).
+                build();
 
         var response = stub().templateSearch(searchRequest);
 
