@@ -54,6 +54,13 @@ type PropertyClient struct {
 	client PropertyServiceClient
 }
 
+func Init(cBase *common.GrpcClientBase, service PropertyServiceClient) *PropertyClient {
+	return &PropertyClient{
+		GrpcClientBase: cBase,
+		client:         service,
+	}
+}
+
 // NewPropertyClient creates a new notification client.
 //
 // The service that an application uses to send and access received messages

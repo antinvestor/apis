@@ -51,7 +51,14 @@ type ProfileClient struct {
 	*common.GrpcClientBase
 
 	// The gRPC API client.
-	profileClient ProfileServiceClient
+	client ProfileServiceClient
+}
+
+func Init(cBase *common.GrpcClientBase, service ProfileServiceClient) *ProfileClient {
+	return &ProfileClient{
+		GrpcClientBase: cBase,
+		client:         service,
+	}
 }
 
 // NewProfileClient creates a new notification client.
@@ -64,12 +71,7 @@ func NewProfileClient(ctx context.Context, opts ...common.ClientOption) (*Profil
 		return nil, err
 	}
 
-	pc := &ProfileClient{
-		GrpcClientBase: clientBase,
-		profileClient:  NewProfileServiceClient(clientBase.Connection()),
-	}
-
-	return pc, nil
+	return Init(clientBase, NewProfileServiceClient(clientBase.Connection())), nil
 }
 
 func (pc *ProfileClient) GetProfileByID(

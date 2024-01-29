@@ -51,7 +51,14 @@ type LedgerClient struct {
 	*common.GrpcClientBase
 
 	// The gRPC API client.
-	ledgerClient LedgerServiceClient
+	client LedgerServiceClient
+}
+
+func Init(cBase *common.GrpcClientBase, service LedgerServiceClient) *LedgerClient {
+	return &LedgerClient{
+		GrpcClientBase: cBase,
+		client:         service,
+	}
 }
 
 // NewLedgerClient creates a new notification client.
@@ -65,10 +72,5 @@ func NewLedgerClient(ctx context.Context, opts ...common.ClientOption) (*LedgerC
 		return nil, err
 	}
 
-	c := &LedgerClient{
-		GrpcClientBase: clientBase,
-		ledgerClient:   NewLedgerServiceClient(clientBase.Connection()),
-	}
-
-	return c, nil
+	return Init(clientBase, NewLedgerServiceClient(clientBase.Connection())), nil
 }

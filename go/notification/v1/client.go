@@ -52,7 +52,14 @@ type NotificationClient struct {
 	*common.GrpcClientBase
 
 	// The gRPC API client.
-	notificationClient NotificationServiceClient
+	client NotificationServiceClient
+}
+
+func Init(cBase *common.GrpcClientBase, service NotificationServiceClient) *NotificationClient {
+	return &NotificationClient{
+		GrpcClientBase: cBase,
+		client:         service,
+	}
 }
 
 // NewNotificationClient creates a new notification client.
@@ -66,19 +73,14 @@ func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*N
 		return nil, err
 	}
 
-	c := &NotificationClient{
-		GrpcClientBase:     clientBase,
-		notificationClient: NewNotificationServiceClient(clientBase.Connection()),
-	}
-
-	return c, nil
+	return Init(clientBase, NewNotificationServiceClient(clientBase.Connection())), nil
 }
 
 // Service creates a new notification service for use to invoke.
 func (nc *NotificationClient) Service() NotificationServiceClient {
 
-	if nc.notificationClient != nil {
-		return nc.notificationClient
+	if nc.client != nil {
+		return nc.client
 	}
 
 	return NewNotificationServiceClient(nc.Connection())

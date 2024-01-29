@@ -51,7 +51,14 @@ type OCRClient struct {
 	*common.GrpcClientBase
 
 	// The gRPC API client.
-	ocrClient OCRServiceClient
+	client OCRServiceClient
+}
+
+func Init(cBase *common.GrpcClientBase, service OCRServiceClient) *OCRClient {
+	return &OCRClient{
+		GrpcClientBase: cBase,
+		client:         service,
+	}
 }
 
 // NewOCRClient creates a new ocr client.
@@ -63,12 +70,8 @@ func NewOCRClient(ctx context.Context, opts ...common.ClientOption) (*OCRClient,
 	if err != nil {
 		return nil, err
 	}
-	cl := &OCRClient{
-		GrpcClientBase: clientBase,
-		ocrClient:      NewOCRServiceClient(clientBase.Connection()),
-	}
 
-	return cl, nil
+	return Init(clientBase, NewOCRServiceClient(clientBase.Connection())), nil
 }
 
 func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, properties map[string]string, fileId ...string) (*RecognizeResponse, error) {

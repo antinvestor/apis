@@ -54,6 +54,13 @@ type PartitionClient struct {
 	client PartitionServiceClient
 }
 
+func Init(cBase *common.GrpcClientBase, service PartitionServiceClient) *PartitionClient {
+	return &PartitionClient{
+		GrpcClientBase: cBase,
+		client:         service,
+	}
+}
+
 // NewPartitionsClient creates a new partitions client.
 // / The service that an application uses to access and manipulate partition information
 func NewPartitionsClient(ctx context.Context, opts ...common.ClientOption) (*PartitionClient, error) {
@@ -64,12 +71,7 @@ func NewPartitionsClient(ctx context.Context, opts ...common.ClientOption) (*Par
 		return nil, err
 	}
 
-	cl := &PartitionClient{
-		GrpcClientBase: clientBase,
-		client:         NewPartitionServiceClient(clientBase.Connection()),
-	}
-
-	return cl, nil
+	return Init(clientBase, NewPartitionServiceClient(clientBase.Connection())), nil
 }
 
 func (partCl *PartitionClient) service() PartitionServiceClient {

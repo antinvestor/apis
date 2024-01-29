@@ -53,6 +53,13 @@ type PaymentClient struct {
 	client PaymentServiceClient
 }
 
+func Init(cBase *common.GrpcClientBase, service PaymentServiceClient) *PaymentClient {
+	return &PaymentClient{
+		GrpcClientBase: cBase,
+		client:         service,
+	}
+}
+
 // NewPaymentsClient creates a new payments client.
 // / The service that an application uses to access and manipulate payment information
 func NewPaymentsClient(ctx context.Context, opts ...common.ClientOption) (*PaymentClient, error) {
@@ -63,12 +70,7 @@ func NewPaymentsClient(ctx context.Context, opts ...common.ClientOption) (*Payme
 		return nil, err
 	}
 
-	cl := &PaymentClient{
-		GrpcClientBase: clientBase,
-		client:         NewPaymentServiceClient(clientBase.Connection()),
-	}
-
-	return cl, nil
+	return Init(clientBase, NewPaymentServiceClient(clientBase.Connection())), nil
 }
 
 func (pCl *PaymentClient) service() PaymentServiceClient {
