@@ -5,5 +5,5 @@ dependencies {
 
     implementation("io.jsonwebtoken:jjwt-api:0.12.5")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.4")
-    runtimeOnly("io.jsonwebtoken:jjwt-gson:0.12.4")
+    runtimeOnly("io.jsonwebtoken:jjwt-gson:0.12.5")
 }
