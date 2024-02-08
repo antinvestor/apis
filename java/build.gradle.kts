@@ -63,19 +63,19 @@ subprojects {
 
     dependencies {
         api("com.google.protobuf:protobuf-java:3.25.2")
-        api("io.grpc:grpc-protobuf:1.61.0")
-        api("io.grpc:grpc-services:1.61.0")
-        api("io.grpc:grpc-stub:1.61.0")
+        api("io.grpc:grpc-protobuf:1.61.1")
+        api("io.grpc:grpc-services:1.61.1")
+        api("io.grpc:grpc-stub:1.61.1")
         api("build.buf:protovalidate:0.1.9")
 
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
         api("com.googlecode.libphonenumber:libphonenumber:8.13.29")
 
-        api("org.slf4j:slf4j-api:2.0.11")
+        api("org.slf4j:slf4j-api:2.0.12")
 
         compileOnly("org.apache.tomcat:annotations-api:6.0.53")
 
-        runtimeOnly("io.grpc:grpc-netty-shaded:1.61.0")
+        runtimeOnly("io.grpc:grpc-netty-shaded:1.61.1")
 
 
     }
