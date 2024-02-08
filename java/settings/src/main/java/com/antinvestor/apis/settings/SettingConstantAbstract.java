@@ -66,6 +66,7 @@
  */
 package com.antinvestor.apis.settings;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -74,8 +75,8 @@ import java.util.Map;
 public abstract class SettingConstantAbstract {
 
     public static final String GLOBAL_DEFAULT_LANGUAGE_CODE = "settings.default.language.code";
-    private final Map<String, String> defaultSettingValues = Map.of(GLOBAL_DEFAULT_LANGUAGE_CODE, "en");
-    private final Map<String, String> defaultSettingDescriptions = Map.of();
+    private final Map<String, String> defaultSettingValues = new HashMap<>(Map.of(GLOBAL_DEFAULT_LANGUAGE_CODE, "en"));
+    private final Map<String, String> defaultSettingDescriptions = new HashMap<>(Map.of());
 
     protected void setDefaultValue(String name, String value) {
         this.defaultSettingValues.put(name, value);

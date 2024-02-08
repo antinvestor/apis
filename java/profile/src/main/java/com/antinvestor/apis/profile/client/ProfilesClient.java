@@ -72,7 +72,6 @@ public class ProfilesClient implements AutoCloseable {
         }
     }
 
-
     public Iterator<List<ProfileObject>> search(String query) {
         var searchRequest = SearchRequest.newBuilder()
                 .setQuery(query)
@@ -158,6 +157,32 @@ public class ProfilesClient implements AutoCloseable {
                 .build();
 
         return Optional.of(stub().getByContact(profileContactRequest).getData());
+    }
+
+    public Optional<RelationshipObject> addRelationship(String relationshipId, String parent, String parentId,
+                                                        String child, String childId, RelationshipType relationshipType,
+                                                        Map<String, String> extras) {
+
+        var addRelationshipReq = AddRelationshipRequest.newBuilder()
+                .setId(relationshipId)
+                .setParent(parent)
+                .setParentId(parentId)
+                .setChild(child)
+                .setChildId(childId)
+                .setType(relationshipType)
+                .putAllProperties(extras).build();
+
+        return Optional.of(stub().addRelationship(addRelationshipReq).getData());
+
+    }
+
+    public Optional<RelationshipObject> deleteRelationship(String relationshipId, String parentId) {
+
+        var deleteRelationshipReq = DeleteRelationshipRequest.newBuilder()
+                .setId(relationshipId)
+                .setParentId(parentId).build();
+
+        return Optional.of(stub().deleteRelationship(deleteRelationshipReq).getData());
     }
 
 }
