@@ -23,40 +23,40 @@ public interface NotificationOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-   * @return The accessId.
-   */
-  java.lang.String getAccessId();
-  /**
-   * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for accessId.
-   */
-  com.google.protobuf.ByteString
-      getAccessIdBytes();
-
-  /**
-   * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
-   * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
   com.google.protobuf.ByteString
       getIdBytes();
 
   /**
-   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-   * @return The profileId.
+   * <code>string receiver_type = 2 [json_name = "receiverType", (.buf.validate.field) = { ... }</code>
+   * @return The receiverType.
    */
-  java.lang.String getProfileId();
+  java.lang.String getReceiverType();
   /**
-   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for profileId.
+   * <code>string receiver_type = 2 [json_name = "receiverType", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for receiverType.
    */
   com.google.protobuf.ByteString
-      getProfileIdBytes();
+      getReceiverTypeBytes();
+
+  /**
+   * <code>string receiver_profile_id = 3 [json_name = "receiverProfileId", (.buf.validate.field) = { ... }</code>
+   * @return The receiverProfileId.
+   */
+  java.lang.String getReceiverProfileId();
+  /**
+   * <code>string receiver_profile_id = 3 [json_name = "receiverProfileId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for receiverProfileId.
+   */
+  com.google.protobuf.ByteString
+      getReceiverProfileIdBytes();
 
   /**
    * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>

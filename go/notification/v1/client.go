@@ -18,6 +18,7 @@ import (
 	"context"
 	"github.com/antinvestor/apis/go/common"
 	commonv1 "github.com/antinvestor/apis/go/common/v1"
+	"github.com/rs/xid"
 	"google.golang.org/grpc"
 	"math"
 )
@@ -86,43 +87,55 @@ func (nc *NotificationClient) Service() NotificationServiceClient {
 	return NewNotificationServiceClient(nc.Connection())
 }
 
-func (nc *NotificationClient) Send(ctx context.Context, accessID string, contactId string, contactDetail string,
+func (nc *NotificationClient) Send(ctx context.Context, receiverProfileId, contact string,
 	language string, template string, variables map[string]string) (*SendResponse, error) {
+	return nc.SendFrom(ctx, "user", receiverProfileId, contact, language, template, variables, true)
+}
+
+func (nc *NotificationClient) SendFrom(ctx context.Context, receiverType, receiverProfileId, contact string,
+	language string, template string, variables map[string]string, autoRelease bool) (*SendResponse, error) {
 
 	messageOut := Notification{
-		AutoRelease: true,
-		Template:    template,
-		Language:    language,
-		AccessId:    accessID,
-		Payload:     variables,
+		ReceiverType:      receiverType,
+		ReceiverProfileId: receiverProfileId,
+		AutoRelease:       autoRelease,
+		Template:          template,
+		Language:          language,
+		Payload:           variables,
 	}
 
-	if contactId != "" {
-		messageOut.Contact = &Notification_ContactId{ContactId: contactId}
-	} else {
-		messageOut.Contact = &Notification_Detail{Detail: contactDetail}
+	if contact != "" {
+		_, err := xid.FromString(contact)
+		if err != nil {
+			messageOut.Contact = &Notification_Detail{Detail: contact}
+		} else {
+			messageOut.Contact = &Notification_ContactId{ContactId: contact}
+		}
 	}
 
 	return nc.Service().Send(ctx, &SendRequest{Data: &messageOut})
 
 }
 
-func (nc *NotificationClient) Receive(ctx context.Context, accessID string, contactId string, contactDetail string,
+func (nc *NotificationClient) Receive(ctx context.Context, profileId string, contact string,
 	language string, template string, variables map[string]string, extras map[string]string) (*ReceiveResponse, error) {
 
 	messageIn := Notification{
-		AutoRelease: true,
-		Template:    template,
-		Language:    language,
-		AccessId:    accessID,
-		Payload:     variables,
-		Extras:      extras,
+		AutoRelease:       true,
+		ReceiverProfileId: profileId,
+		Template:          template,
+		Language:          language,
+		Payload:           variables,
+		Extras:            extras,
 	}
 
-	if contactId != "" {
-		messageIn.Contact = &Notification_ContactId{ContactId: contactId}
-	} else {
-		messageIn.Contact = &Notification_Detail{Detail: contactDetail}
+	if contact != "" {
+		_, err := xid.FromString(contact)
+		if err != nil {
+			messageIn.Contact = &Notification_Detail{Detail: contact}
+		} else {
+			messageIn.Contact = &Notification_ContactId{ContactId: contact}
+		}
 	}
 
 	return nc.Service().Receive(ctx, &ReceiveRequest{Data: &messageIn})
