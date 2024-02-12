@@ -76,8 +76,6 @@ func NewOCRClient(ctx context.Context, opts ...common.ClientOption) (*OCRClient,
 
 func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, properties map[string]string, fileId ...string) (*RecognizeResponse, error) {
 
-	ocrService := NewOCRServiceClient(pc.Connection())
-
 	ocrRequest := RecognizeRequest{
 		ReferenceId: id,
 		LanguageId:  language,
@@ -85,16 +83,14 @@ func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, 
 		Properties:  properties,
 	}
 
-	return ocrService.Recognize(ctx, &ocrRequest)
+	return pc.client.Recognize(ctx, &ocrRequest)
 }
 
 func (pc *OCRClient) StatusCheck(ctx context.Context, id string) (*StatusResponse, error) {
-
-	ocrService := NewOCRServiceClient(pc.Connection())
 
 	statusCheckRequest := StatusRequest{
 		Id: id,
 	}
 
-	return ocrService.Status(ctx, &statusCheckRequest)
+	return pc.client.Status(ctx, &statusCheckRequest)
 }

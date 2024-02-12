@@ -80,14 +80,6 @@ func NewPropertyClient(ctx context.Context, opts ...common.ClientOption) (*Prope
 	return c, nil
 }
 
-func (pCl *PropertyClient) service() PropertyServiceClient {
-	if pCl.client != nil {
-		return pCl.client
-	}
-
-	return NewPropertyServiceClient(pCl.Connection())
-}
-
 func (pCl *PropertyClient) AddPropertyType(
 	ctx context.Context, name string, description string,
 	extras map[string]string) (*AddPropertyTypeResponse, error) {
@@ -98,7 +90,7 @@ func (pCl *PropertyClient) AddPropertyType(
 		Extra:       extras,
 	}
 
-	return pCl.service().AddPropertyType(ctx, &AddPropertyTypeRequest{
+	return pCl.client.AddPropertyType(ctx, &AddPropertyTypeRequest{
 		Data: &propertyType,
 	})
 }
@@ -110,7 +102,7 @@ func (pCl *PropertyClient) ListPropertyType(
 		Query: query,
 	}
 
-	responseService, err := pCl.service().ListPropertyType(ctx, &searchRequest)
+	responseService, err := pCl.client.ListPropertyType(ctx, &searchRequest)
 	if err != nil {
 		return nil, err
 	}

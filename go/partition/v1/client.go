@@ -74,14 +74,6 @@ func NewPartitionsClient(ctx context.Context, opts ...common.ClientOption) (*Par
 	return Init(clientBase, NewPartitionServiceClient(clientBase.Connection())), nil
 }
 
-func (partCl *PartitionClient) service() PartitionServiceClient {
-	if partCl.client != nil {
-		return partCl.client
-	}
-
-	return NewPartitionServiceClient(partCl.Connection())
-}
-
 // ListTenants gets a list of all the tenants with query filtering against id and properties
 func (partCl *PartitionClient) ListTenants(
 	ctx context.Context,
@@ -95,7 +87,7 @@ func (partCl *PartitionClient) ListTenants(
 		Page:  int64(page),
 	}
 
-	responseService, err := partCl.service().ListTenant(ctx, &request)
+	responseService, err := partCl.client.ListTenant(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +122,7 @@ func (partCl *PartitionClient) GetTenant(ctx context.Context, tenantId string) (
 		Id: tenantId,
 	}
 
-	response, err := partCl.service().GetTenant(ctx, &request)
+	response, err := partCl.client.GetTenant(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -154,7 +146,7 @@ func (partCl *PartitionClient) NewTenant(
 		Properties:  props,
 	}
 
-	response, err := partCl.service().CreateTenant(ctx, &request)
+	response, err := partCl.client.CreateTenant(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -175,7 +167,7 @@ func (partCl *PartitionClient) ListPartitions(
 		Page:  int64(page),
 	}
 
-	responseService, err := partCl.service().ListPartition(ctx, &request)
+	responseService, err := partCl.client.ListPartition(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -217,7 +209,7 @@ func (partCl *PartitionClient) GetPartition(ctx context.Context, partitionId str
 		Id: partitionId,
 	}
 
-	response, err := partCl.service().GetPartition(ctx, &request)
+	response, err := partCl.client.GetPartition(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -241,7 +233,7 @@ func (partCl *PartitionClient) newPartition(ctx context.Context, tenantId string
 		Properties:  props,
 	}
 
-	response, err := partCl.service().CreatePartition(ctx, &request)
+	response, err := partCl.client.CreatePartition(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -259,7 +251,7 @@ func (partCl *PartitionClient) UpdatePartition(ctx context.Context, partitionId 
 		Properties:  props,
 	}
 
-	response, err := partCl.service().UpdatePartition(ctx, &request)
+	response, err := partCl.client.UpdatePartition(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -276,7 +268,7 @@ func (partCl *PartitionClient) CreatePartitionRole(ctx context.Context, partitio
 		Properties:  props,
 	}
 
-	response, err := partCl.service().CreatePartitionRole(ctx, &request)
+	response, err := partCl.client.CreatePartitionRole(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -290,7 +282,7 @@ func (partCl *PartitionClient) RemovePartitionRole(ctx context.Context, partitio
 		PartitionRoleId: partitionRoleId,
 	}
 
-	return partCl.service().RemovePartitionRole(ctx, &request)
+	return partCl.client.RemovePartitionRole(ctx, &request)
 }
 
 func (partCl *PartitionClient) ListPartitionRoles(
@@ -301,7 +293,7 @@ func (partCl *PartitionClient) ListPartitionRoles(
 		PartitionId: partitionId,
 	}
 
-	responseService, err := partCl.service().ListPartitionRole(ctx, &partitionRoleRequest)
+	responseService, err := partCl.client.ListPartitionRole(ctx, &partitionRoleRequest)
 
 	if err != nil {
 		return nil, err
@@ -336,7 +328,7 @@ func (partCl *PartitionClient) NewPage(ctx context.Context, partitionId string, 
 		PartitionId: partitionId,
 	}
 
-	response, err := partCl.service().CreatePage(ctx, &request)
+	response, err := partCl.client.CreatePage(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -351,7 +343,7 @@ func (partCl *PartitionClient) GetPage(ctx context.Context, partitionId string, 
 		PartitionId: partitionId,
 	}
 
-	response, err := partCl.service().GetPage(ctx, &request)
+	response, err := partCl.client.GetPage(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -367,7 +359,7 @@ func (partCl *PartitionClient) CreateAccessByPartitionID(
 		Partition: &CreateAccessRequest_PartitionId{PartitionId: partitionId},
 	}
 
-	response, err := partCl.service().CreateAccess(ctx, &request)
+	response, err := partCl.client.CreateAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -384,7 +376,7 @@ func (partCl *PartitionClient) CreateAccessByClientID(
 		Partition: &CreateAccessRequest_ClientId{ClientId: clientId},
 	}
 
-	response, err := partCl.service().CreateAccess(ctx, &request)
+	response, err := partCl.client.CreateAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -398,7 +390,7 @@ func (partCl *PartitionClient) RemoveAccess(ctx context.Context, accessId string
 		AccessId: accessId,
 	}
 
-	return partCl.service().RemoveAccess(ctx, &request)
+	return partCl.client.RemoveAccess(ctx, &request)
 }
 
 func (partCl *PartitionClient) GetAccessById(ctx context.Context, accessId string) (*AccessObject, error) {
@@ -407,7 +399,7 @@ func (partCl *PartitionClient) GetAccessById(ctx context.Context, accessId strin
 		AccessId: accessId,
 	}
 
-	response, err := partCl.service().GetAccess(ctx, &request)
+	response, err := partCl.client.GetAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -425,7 +417,7 @@ func (partCl *PartitionClient) GetAccessByPartitionIdProfileId(
 		Partition: &GetAccessRequest_PartitionId{PartitionId: partitionId},
 	}
 
-	response, err := partCl.service().GetAccess(ctx, &request)
+	response, err := partCl.client.GetAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -443,7 +435,7 @@ func (partCl *PartitionClient) GetAccessByClientIdProfileId(
 		Partition: &GetAccessRequest_ClientId{ClientId: clientId},
 	}
 
-	response, err := partCl.service().GetAccess(ctx, &request)
+	response, err := partCl.client.GetAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -461,7 +453,7 @@ func (partCl *PartitionClient) CreateAccessRole(
 		PartitionRoleId: partitionRoleId,
 	}
 
-	response, err := partCl.service().CreateAccessRole(ctx, &request)
+	response, err := partCl.client.CreateAccessRole(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -475,7 +467,7 @@ func (partCl *PartitionClient) RemoveAccessRole(ctx context.Context, accessRoleI
 		AccessRoleId: accessRoleId,
 	}
 
-	return partCl.service().RemoveAccessRole(ctx, &request)
+	return partCl.client.RemoveAccessRole(ctx, &request)
 }
 
 func (partCl *PartitionClient) ListAccess(ctx context.Context, accessId string) (<-chan *AccessRoleObject, error) {
@@ -484,7 +476,7 @@ func (partCl *PartitionClient) ListAccess(ctx context.Context, accessId string) 
 		AccessId: accessId,
 	}
 
-	responseService, err := partCl.service().ListAccessRole(ctx, &request)
+	responseService, err := partCl.client.ListAccessRole(ctx, &request)
 	if err != nil {
 		return nil, err
 	}

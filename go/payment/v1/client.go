@@ -72,11 +72,3 @@ func NewPaymentsClient(ctx context.Context, opts ...common.ClientOption) (*Payme
 
 	return Init(clientBase, NewPaymentServiceClient(clientBase.Connection())), nil
 }
-
-func (pCl *PaymentClient) service() PaymentServiceClient {
-	if pCl.client != nil {
-		return pCl.client
-	}
-
-	return NewPaymentServiceClient(pCl.Connection())
-}

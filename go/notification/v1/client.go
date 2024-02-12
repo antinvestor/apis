@@ -77,16 +77,6 @@ func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*N
 	return Init(clientBase, NewNotificationServiceClient(clientBase.Connection())), nil
 }
 
-// Service creates a new notification service for use to invoke.
-func (nc *NotificationClient) Service() NotificationServiceClient {
-
-	if nc.client != nil {
-		return nc.client
-	}
-
-	return NewNotificationServiceClient(nc.Connection())
-}
-
 func (nc *NotificationClient) Send(ctx context.Context, receiverProfileId, contact string,
 	language string, template string, variables map[string]string) (*SendResponse, error) {
 	return nc.SendFrom(ctx, "user", receiverProfileId, contact, language, template, variables, true)
@@ -113,7 +103,7 @@ func (nc *NotificationClient) SendFrom(ctx context.Context, profileType, profile
 		}
 	}
 
-	return nc.Service().Send(ctx, &SendRequest{Data: &messageOut})
+	return nc.client.Send(ctx, &SendRequest{Data: &messageOut})
 
 }
 
@@ -139,7 +129,7 @@ func (nc *NotificationClient) Receive(ctx context.Context, profileId string, con
 		}
 	}
 
-	return nc.Service().Receive(ctx, &ReceiveRequest{Data: &messageIn})
+	return nc.client.Receive(ctx, &ReceiveRequest{Data: &messageIn})
 
 }
 
@@ -155,7 +145,7 @@ func (nc *NotificationClient) UpdateStatus(ctx context.Context, notificationId s
 		Extras:     extras,
 	}
 
-	return nc.Service().StatusUpdate(ctx, &messageStatus)
+	return nc.client.StatusUpdate(ctx, &messageStatus)
 }
 
 func (nc *NotificationClient) GetTemplate(ctx context.Context, name string, language string) (*Template, error) {
@@ -165,7 +155,7 @@ func (nc *NotificationClient) GetTemplate(ctx context.Context, name string, lang
 		LanguageCode: language,
 	}
 
-	responseStream, err := nc.Service().TemplateSearch(ctx, &searchRequest)
+	responseStream, err := nc.client.TemplateSearch(ctx, &searchRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -190,7 +180,7 @@ func (nc *NotificationClient) SearchTemplate(ctx context.Context, query string, 
 		Count:        count,
 	}
 
-	responseService, err := nc.Service().TemplateSearch(ctx, &searchRequest)
+	responseService, err := nc.client.TemplateSearch(ctx, &searchRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -222,7 +212,7 @@ func (nc *NotificationClient) SaveTemplate(ctx context.Context, name string, lan
 		Data:         data,
 	}
 
-	response, err := nc.Service().TemplateSave(ctx, templateSaveRequest)
+	response, err := nc.client.TemplateSave(ctx, templateSaveRequest)
 	if err != nil {
 		return nil, err
 	}

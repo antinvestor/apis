@@ -78,13 +78,11 @@ func (pc *ProfileClient) GetProfileByID(
 	ctx context.Context,
 	profileID string) (*ProfileObject, error) {
 
-	profileService := NewProfileServiceClient(pc.Connection())
-
 	profileRequest := GetByIdRequest{
 		Id: profileID,
 	}
 
-	response, err := profileService.GetById(ctx, &profileRequest)
+	response, err := pc.client.GetById(ctx, &profileRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -96,8 +94,6 @@ func (pc *ProfileClient) CreateProfileByContactAndName(
 	contact string,
 	name string) (*ProfileObject, error) {
 
-	profileService := NewProfileServiceClient(pc.Connection())
-
 	properties := make(map[string]string)
 	properties["name"] = name
 
@@ -106,7 +102,7 @@ func (pc *ProfileClient) CreateProfileByContactAndName(
 		Properties: properties,
 	}
 
-	response, err := profileService.Create(ctx, &createProfileRequest)
+	response, err := pc.client.Create(ctx, &createProfileRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -114,13 +110,12 @@ func (pc *ProfileClient) CreateProfileByContactAndName(
 }
 
 func (pc *ProfileClient) GetProfileByContact(ctx context.Context, contact string) (*ProfileObject, error) {
-	profileService := NewProfileServiceClient(pc.Connection())
 
 	contactRequest := GetByContactRequest{
 		Contact: contact,
 	}
 
-	response, err := profileService.GetByContact(ctx, &contactRequest)
+	response, err := pc.client.GetByContact(ctx, &contactRequest)
 
 	if err != nil {
 		return nil, err
