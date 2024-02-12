@@ -4,8 +4,8 @@ deps:
   - remote: buf.build
     owner: antinvestor
     repository: common
-    commit: 901f999156734ba99239099e9b48d431
-    digest: shake256:145216f1f56ab40a2142ff0a16dc4076873e9e35aca7c90fb68dfacf12a59b0206bbd7684fa17eb4b8c620660b1f3fb53282ff7b251fa9936883b6b48e3aef90
+    commit: 3ec82b52e70e44c4923638ad7c322e56
+    digest: shake256:766bd130acafe2eeddb3eddc432360fcc18f859deec0130c3b4ff1bebeaeadef2f1f38bf824bade9045162b6f963721b26da44a7365312ffe14748b1286b09aa
   - remote: buf.build
     owner: bufbuild
     repository: protovalidate

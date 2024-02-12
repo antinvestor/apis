@@ -77,9 +77,9 @@ func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*N
 	return Init(clientBase, NewNotificationServiceClient(clientBase.Connection())), nil
 }
 
-func (nc *NotificationClient) Send(ctx context.Context, receiverProfileId, contact string,
+func (nc *NotificationClient) Send(ctx context.Context, profileId, contact string,
 	language string, template string, variables map[string]string) (*SendResponse, error) {
-	return nc.SendFrom(ctx, "user", receiverProfileId, contact, language, template, variables, true)
+	return nc.SendFrom(ctx, "user", profileId, contact, language, template, variables, true)
 }
 
 func (nc *NotificationClient) SendFrom(ctx context.Context, profileType, profileId, contact string,
@@ -133,11 +133,10 @@ func (nc *NotificationClient) Receive(ctx context.Context, profileId string, con
 
 }
 
-func (nc *NotificationClient) UpdateStatus(ctx context.Context, notificationId string, accessId string,
+func (nc *NotificationClient) UpdateStatus(ctx context.Context, notificationId string,
 	externalId string, extras map[string]string) (*commonv1.StatusUpdateResponse, error) {
 
 	messageStatus := commonv1.StatusUpdateRequest{
-		AccessId:   accessId,
 		Id:         notificationId,
 		State:      commonv1.STATE_INACTIVE,
 		Status:     commonv1.STATUS_SUCCESSFUL,
