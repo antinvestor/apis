@@ -77,20 +77,15 @@ message StatusResponse {
 }
 
 message StatusUpdateRequest {
-  string access_id = 1 [
+  string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  string id = 2 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  STATE state = 3;
-  STATUS status = 4;
-  string external_id = 5;
-  map<string, string> extras = 6;
+  STATE state = 2;
+  STATUS status = 3;
+  string external_id = 4;
+  map<string, string> extras = 5;
 }
 
 message StatusUpdateResponse {

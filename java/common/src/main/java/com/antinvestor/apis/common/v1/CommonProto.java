@@ -105,27 +105,25 @@ public final class CommonProto {
       "t_id\030\005 \001(\tR\013transientId\022=\n\006extras\030\006 \003(\0132" +
       "%.common.v1.StatusResponse.ExtrasEntryR\006" +
       "extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003key\022" +
-      "\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\357\002\n\023StatusUpda" +
-      "teRequest\0228\n\taccess_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2" +
-      "\020[0-9a-z_-]{3,20}R\010accessId\022+\n\002id\030\002 \001(\tB" +
-      "\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022&\n\005stat" +
-      "e\030\003 \001(\0162\020.common.v1.STATER\005state\022)\n\006stat" +
-      "us\030\004 \001(\0162\021.common.v1.STATUSR\006status\022\037\n\013e" +
-      "xternal_id\030\005 \001(\tR\nexternalId\022B\n\006extras\030\006" +
-      " \003(\0132*.common.v1.StatusUpdateRequest.Ext" +
-      "rasEntryR\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001" +
-      " \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"E\n\024S" +
-      "tatusUpdateResponse\022-\n\004data\030\001 \001(\0132\031.comm" +
-      "on.v1.StatusResponseR\004data*H\n\005STATE\022\013\n\007C" +
-      "REATED\020\000\022\013\n\007CHECKED\020\001\022\n\n\006ACTIVE\020\002\022\014\n\010INA" +
-      "CTIVE\020\003\022\013\n\007DELETED\020\004*M\n\006STATUS\022\013\n\007UNKNOW" +
-      "N\020\000\022\n\n\006QUEUED\020\001\022\016\n\nIN_PROCESS\020\002\022\n\n\006FAILE" +
-      "D\020\003\022\016\n\nSUCCESSFUL\020\004B\257\001\n\036com.antinvestor." +
-      "apis.common.v1B\013CommonProtoP\001Z8github.co" +
-      "m/antinvestor/apis/go/common/common/v1;c" +
-      "ommonv1\370\001\001\242\002\003CXX\252\002\tCommon.V1\312\002\tCommon\\V1" +
-      "\342\002\025Common\\V1\\GPBMetadata\352\002\nCommon::V1b\006p" +
-      "roto3"
+      "\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\265\002\n\023StatusUpda" +
+      "teRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-" +
+      "z_-]{3,20}R\002id\022&\n\005state\030\002 \001(\0162\020.common.v" +
+      "1.STATER\005state\022)\n\006status\030\003 \001(\0162\021.common." +
+      "v1.STATUSR\006status\022\037\n\013external_id\030\004 \001(\tR\n" +
+      "externalId\022B\n\006extras\030\005 \003(\0132*.common.v1.S" +
+      "tatusUpdateRequest.ExtrasEntryR\006extras\0329" +
+      "\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value" +
+      "\030\002 \001(\tR\005value:\0028\001\"E\n\024StatusUpdateRespons" +
+      "e\022-\n\004data\030\001 \001(\0132\031.common.v1.StatusRespon" +
+      "seR\004data*H\n\005STATE\022\013\n\007CREATED\020\000\022\013\n\007CHECKE" +
+      "D\020\001\022\n\n\006ACTIVE\020\002\022\014\n\010INACTIVE\020\003\022\013\n\007DELETED" +
+      "\020\004*M\n\006STATUS\022\013\n\007UNKNOWN\020\000\022\n\n\006QUEUED\020\001\022\016\n" +
+      "\nIN_PROCESS\020\002\022\n\n\006FAILED\020\003\022\016\n\nSUCCESSFUL\020" +
+      "\004B\257\001\n\036com.antinvestor.apis.common.v1B\013Co" +
+      "mmonProtoP\001Z8github.com/antinvestor/apis" +
+      "/go/common/common/v1;commonv1\370\001\001\242\002\003CXX\252\002" +
+      "\tCommon.V1\312\002\tCommon\\V1\342\002\025Common\\V1\\GPBMe" +
+      "tadata\352\002\nCommon::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -173,7 +171,7 @@ public final class CommonProto {
     internal_static_common_v1_StatusUpdateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_common_v1_StatusUpdateRequest_descriptor,
-        new java.lang.String[] { "AccessId", "Id", "State", "Status", "ExternalId", "Extras", });
+        new java.lang.String[] { "Id", "State", "Status", "ExternalId", "Extras", });
     internal_static_common_v1_StatusUpdateRequest_ExtrasEntry_descriptor =
       internal_static_common_v1_StatusUpdateRequest_descriptor.getNestedTypes().get(0);
     internal_static_common_v1_StatusUpdateRequest_ExtrasEntry_fieldAccessorTable = new

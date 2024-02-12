@@ -23,69 +23,57 @@ public interface StatusUpdateRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-   * @return The accessId.
-   */
-  java.lang.String getAccessId();
-  /**
-   * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for accessId.
-   */
-  com.google.protobuf.ByteString
-      getAccessIdBytes();
-
-  /**
-   * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
-   * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
   com.google.protobuf.ByteString
       getIdBytes();
 
   /**
-   * <code>.common.v1.STATE state = 3 [json_name = "state"];</code>
+   * <code>.common.v1.STATE state = 2 [json_name = "state"];</code>
    * @return The enum numeric value on the wire for state.
    */
   int getStateValue();
   /**
-   * <code>.common.v1.STATE state = 3 [json_name = "state"];</code>
+   * <code>.common.v1.STATE state = 2 [json_name = "state"];</code>
    * @return The state.
    */
   com.antinvestor.apis.common.v1.STATE getState();
 
   /**
-   * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
+   * <code>.common.v1.STATUS status = 3 [json_name = "status"];</code>
    * @return The enum numeric value on the wire for status.
    */
   int getStatusValue();
   /**
-   * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
+   * <code>.common.v1.STATUS status = 3 [json_name = "status"];</code>
    * @return The status.
    */
   com.antinvestor.apis.common.v1.STATUS getStatus();
 
   /**
-   * <code>string external_id = 5 [json_name = "externalId"];</code>
+   * <code>string external_id = 4 [json_name = "externalId"];</code>
    * @return The externalId.
    */
   java.lang.String getExternalId();
   /**
-   * <code>string external_id = 5 [json_name = "externalId"];</code>
+   * <code>string external_id = 4 [json_name = "externalId"];</code>
    * @return The bytes for externalId.
    */
   com.google.protobuf.ByteString
       getExternalIdBytes();
 
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
    */
   int getExtrasCount();
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
    */
   boolean containsExtras(
       java.lang.String key);
@@ -96,12 +84,12 @@ public interface StatusUpdateRequestOrBuilder extends
   java.util.Map<java.lang.String, java.lang.String>
   getExtras();
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
   getExtrasMap();
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
    */
   /* nullable */
 java.lang.String getExtrasOrDefault(
@@ -109,7 +97,7 @@ java.lang.String getExtrasOrDefault(
       /* nullable */
 java.lang.String defaultValue);
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
    */
   java.lang.String getExtrasOrThrow(
       java.lang.String key);
