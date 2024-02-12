@@ -32,8 +32,8 @@ private static final long serialVersionUID = 0L;
   }
   private Notification() {
     id_ = "";
-    receiverType_ = "";
-    receiverProfileId_ = "";
+    profileType_ = "";
+    profileId_ = "";
     type_ = "";
     template_ = "";
     data_ = "";
@@ -158,78 +158,78 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int RECEIVER_TYPE_FIELD_NUMBER = 2;
+  public static final int PROFILE_TYPE_FIELD_NUMBER = 2;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object receiverType_ = "";
+  private volatile java.lang.Object profileType_ = "";
   /**
-   * <code>string receiver_type = 2 [json_name = "receiverType", (.buf.validate.field) = { ... }</code>
-   * @return The receiverType.
+   * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+   * @return The profileType.
    */
   @java.lang.Override
-  public java.lang.String getReceiverType() {
-    java.lang.Object ref = receiverType_;
+  public java.lang.String getProfileType() {
+    java.lang.Object ref = profileType_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      receiverType_ = s;
+      profileType_ = s;
       return s;
     }
   }
   /**
-   * <code>string receiver_type = 2 [json_name = "receiverType", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for receiverType.
+   * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileType.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getReceiverTypeBytes() {
-    java.lang.Object ref = receiverType_;
+      getProfileTypeBytes() {
+    java.lang.Object ref = profileType_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      receiverType_ = b;
+      profileType_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int RECEIVER_PROFILE_ID_FIELD_NUMBER = 3;
+  public static final int PROFILE_ID_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object receiverProfileId_ = "";
+  private volatile java.lang.Object profileId_ = "";
   /**
-   * <code>string receiver_profile_id = 3 [json_name = "receiverProfileId", (.buf.validate.field) = { ... }</code>
-   * @return The receiverProfileId.
+   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The profileId.
    */
   @java.lang.Override
-  public java.lang.String getReceiverProfileId() {
-    java.lang.Object ref = receiverProfileId_;
+  public java.lang.String getProfileId() {
+    java.lang.Object ref = profileId_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      receiverProfileId_ = s;
+      profileId_ = s;
       return s;
     }
   }
   /**
-   * <code>string receiver_profile_id = 3 [json_name = "receiverProfileId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for receiverProfileId.
+   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileId.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getReceiverProfileIdBytes() {
-    java.lang.Object ref = receiverProfileId_;
+      getProfileIdBytes() {
+    java.lang.Object ref = profileId_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      receiverProfileId_ = b;
+      profileId_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -776,11 +776,11 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(receiverType_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, receiverType_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(profileType_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, profileType_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(receiverProfileId_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, receiverProfileId_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(profileId_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, profileId_);
     }
     if (contactCase_ == 4) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 4, contact_);
@@ -839,11 +839,11 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(receiverType_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, receiverType_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(profileType_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, profileType_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(receiverProfileId_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, receiverProfileId_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(profileId_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, profileId_);
     }
     if (contactCase_ == 4) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, contact_);
@@ -919,10 +919,10 @@ java.lang.String defaultValue) {
 
     if (!getId()
         .equals(other.getId())) return false;
-    if (!getReceiverType()
-        .equals(other.getReceiverType())) return false;
-    if (!getReceiverProfileId()
-        .equals(other.getReceiverProfileId())) return false;
+    if (!getProfileType()
+        .equals(other.getProfileType())) return false;
+    if (!getProfileId()
+        .equals(other.getProfileId())) return false;
     if (!getType()
         .equals(other.getType())) return false;
     if (!getTemplate()
@@ -973,10 +973,10 @@ java.lang.String defaultValue) {
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + getId().hashCode();
-    hash = (37 * hash) + RECEIVER_TYPE_FIELD_NUMBER;
-    hash = (53 * hash) + getReceiverType().hashCode();
-    hash = (37 * hash) + RECEIVER_PROFILE_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getReceiverProfileId().hashCode();
+    hash = (37 * hash) + PROFILE_TYPE_FIELD_NUMBER;
+    hash = (53 * hash) + getProfileType().hashCode();
+    hash = (37 * hash) + PROFILE_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getProfileId().hashCode();
     hash = (37 * hash) + TYPE_FIELD_NUMBER;
     hash = (53 * hash) + getType().hashCode();
     hash = (37 * hash) + TEMPLATE_FIELD_NUMBER;
@@ -1183,8 +1183,8 @@ java.lang.String defaultValue) {
       super.clear();
       bitField0_ = 0;
       id_ = "";
-      receiverType_ = "";
-      receiverProfileId_ = "";
+      profileType_ = "";
+      profileId_ = "";
       type_ = "";
       template_ = "";
       internalGetMutablePayload().clear();
@@ -1240,10 +1240,10 @@ java.lang.String defaultValue) {
         result.id_ = id_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.receiverType_ = receiverType_;
+        result.profileType_ = profileType_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.receiverProfileId_ = receiverProfileId_;
+        result.profileId_ = profileId_;
       }
       if (((from_bitField0_ & 0x00000020) != 0)) {
         result.type_ = type_;
@@ -1341,13 +1341,13 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (!other.getReceiverType().isEmpty()) {
-        receiverType_ = other.receiverType_;
+      if (!other.getProfileType().isEmpty()) {
+        profileType_ = other.profileType_;
         bitField0_ |= 0x00000002;
         onChanged();
       }
-      if (!other.getReceiverProfileId().isEmpty()) {
-        receiverProfileId_ = other.receiverProfileId_;
+      if (!other.getProfileId().isEmpty()) {
+        profileId_ = other.profileId_;
         bitField0_ |= 0x00000004;
         onChanged();
       }
@@ -1443,12 +1443,12 @@ java.lang.String defaultValue) {
               break;
             } // case 10
             case 18: {
-              receiverType_ = input.readStringRequireUtf8();
+              profileType_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
             case 26: {
-              receiverProfileId_ = input.readStringRequireUtf8();
+              profileId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
             } // case 26
@@ -1633,145 +1633,145 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private java.lang.Object receiverType_ = "";
+    private java.lang.Object profileType_ = "";
     /**
-     * <code>string receiver_type = 2 [json_name = "receiverType", (.buf.validate.field) = { ... }</code>
-     * @return The receiverType.
+     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+     * @return The profileType.
      */
-    public java.lang.String getReceiverType() {
-      java.lang.Object ref = receiverType_;
+    public java.lang.String getProfileType() {
+      java.lang.Object ref = profileType_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        receiverType_ = s;
+        profileType_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string receiver_type = 2 [json_name = "receiverType", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for receiverType.
+     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for profileType.
      */
     public com.google.protobuf.ByteString
-        getReceiverTypeBytes() {
-      java.lang.Object ref = receiverType_;
+        getProfileTypeBytes() {
+      java.lang.Object ref = profileType_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        receiverType_ = b;
+        profileType_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string receiver_type = 2 [json_name = "receiverType", (.buf.validate.field) = { ... }</code>
-     * @param value The receiverType to set.
+     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+     * @param value The profileType to set.
      * @return This builder for chaining.
      */
-    public Builder setReceiverType(
+    public Builder setProfileType(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      receiverType_ = value;
+      profileType_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>string receiver_type = 2 [json_name = "receiverType", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearReceiverType() {
-      receiverType_ = getDefaultInstance().getReceiverType();
+    public Builder clearProfileType() {
+      profileType_ = getDefaultInstance().getProfileType();
       bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string receiver_type = 2 [json_name = "receiverType", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for receiverType to set.
+     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for profileType to set.
      * @return This builder for chaining.
      */
-    public Builder setReceiverTypeBytes(
+    public Builder setProfileTypeBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      receiverType_ = value;
+      profileType_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
 
-    private java.lang.Object receiverProfileId_ = "";
+    private java.lang.Object profileId_ = "";
     /**
-     * <code>string receiver_profile_id = 3 [json_name = "receiverProfileId", (.buf.validate.field) = { ... }</code>
-     * @return The receiverProfileId.
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @return The profileId.
      */
-    public java.lang.String getReceiverProfileId() {
-      java.lang.Object ref = receiverProfileId_;
+    public java.lang.String getProfileId() {
+      java.lang.Object ref = profileId_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        receiverProfileId_ = s;
+        profileId_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string receiver_profile_id = 3 [json_name = "receiverProfileId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for receiverProfileId.
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for profileId.
      */
     public com.google.protobuf.ByteString
-        getReceiverProfileIdBytes() {
-      java.lang.Object ref = receiverProfileId_;
+        getProfileIdBytes() {
+      java.lang.Object ref = profileId_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        receiverProfileId_ = b;
+        profileId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string receiver_profile_id = 3 [json_name = "receiverProfileId", (.buf.validate.field) = { ... }</code>
-     * @param value The receiverProfileId to set.
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @param value The profileId to set.
      * @return This builder for chaining.
      */
-    public Builder setReceiverProfileId(
+    public Builder setProfileId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      receiverProfileId_ = value;
+      profileId_ = value;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>string receiver_profile_id = 3 [json_name = "receiverProfileId", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearReceiverProfileId() {
-      receiverProfileId_ = getDefaultInstance().getReceiverProfileId();
+    public Builder clearProfileId() {
+      profileId_ = getDefaultInstance().getProfileId();
       bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
     /**
-     * <code>string receiver_profile_id = 3 [json_name = "receiverProfileId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for receiverProfileId to set.
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for profileId to set.
      * @return This builder for chaining.
      */
-    public Builder setReceiverProfileIdBytes(
+    public Builder setProfileIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      receiverProfileId_ = value;
+      profileId_ = value;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;

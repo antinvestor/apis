@@ -92,16 +92,16 @@ func (nc *NotificationClient) Send(ctx context.Context, receiverProfileId, conta
 	return nc.SendFrom(ctx, "user", receiverProfileId, contact, language, template, variables, true)
 }
 
-func (nc *NotificationClient) SendFrom(ctx context.Context, receiverType, receiverProfileId, contact string,
+func (nc *NotificationClient) SendFrom(ctx context.Context, profileType, profileId, contact string,
 	language string, template string, variables map[string]string, autoRelease bool) (*SendResponse, error) {
 
 	messageOut := Notification{
-		ReceiverType:      receiverType,
-		ReceiverProfileId: receiverProfileId,
-		AutoRelease:       autoRelease,
-		Template:          template,
-		Language:          language,
-		Payload:           variables,
+		ProfileType: profileType,
+		ProfileId:   profileId,
+		AutoRelease: autoRelease,
+		Template:    template,
+		Language:    language,
+		Payload:     variables,
 	}
 
 	if contact != "" {
@@ -121,12 +121,13 @@ func (nc *NotificationClient) Receive(ctx context.Context, profileId string, con
 	language string, template string, variables map[string]string, extras map[string]string) (*ReceiveResponse, error) {
 
 	messageIn := Notification{
-		AutoRelease:       true,
-		ReceiverProfileId: profileId,
-		Template:          template,
-		Language:          language,
-		Payload:           variables,
-		Extras:            extras,
+		AutoRelease: true,
+		ProfileType: "user",
+		ProfileId:   profileId,
+		Template:    template,
+		Language:    language,
+		Payload:     variables,
+		Extras:      extras,
 	}
 
 	if contact != "" {
