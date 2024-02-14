@@ -9,7 +9,7 @@ require (
 	github.com/antinvestor/apis/go/common v1.9.10
 	github.com/rs/xid v1.5.0
 	go.uber.org/mock v0.4.0
-	google.golang.org/grpc v1.61.0
+	google.golang.org/grpc v1.61.1
 	google.golang.org/protobuf v1.32.0
 )
 
