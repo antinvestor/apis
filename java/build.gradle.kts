@@ -62,7 +62,7 @@ subprojects {
     }
 
     dependencies {
-        api("com.google.protobuf:protobuf-java:3.25.2")
+        api("com.google.protobuf:protobuf-java:3.25.3")
         api("io.grpc:grpc-protobuf:1.61.1")
         api("io.grpc:grpc-services:1.61.1")
         api("io.grpc:grpc-stub:1.61.1")
