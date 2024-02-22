@@ -6,7 +6,7 @@ go 1.21
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.32.0-20240221180331-f05a6f4403ce.1
-	github.com/antinvestor/apis/go/common v1.9.11
+	github.com/antinvestor/apis/go/common v1.10.0
 	go.uber.org/mock v0.4.0
 	google.golang.org/grpc v1.62.0
 	google.golang.org/protobuf v1.32.0
