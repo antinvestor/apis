@@ -34,6 +34,11 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
+const ctxKeyTenantId = CtxServiceKey("tenantIdKey")
+const ctxKeyPartitionId = CtxServiceKey("partitionIdKey")
+const ctxKeyAccessId = CtxServiceKey("accessIdKey")
+const ctxKeyProfileId = CtxServiceKey("profileIdKey")
+
 type GrpcClientBase struct {
 	// gRPC connection to the service.
 	clientConn *grpc.ClientConn
@@ -67,6 +72,10 @@ func (gbc *GrpcClientBase) GetInfo() metadata.MD {
 	return gbc.xMetadata
 }
 
+func (gbc *GrpcClientBase) ToContext(ctx context.Context, key CtxServiceKey, val string) context.Context {
+	return context.WithValue(ctx, key, val)
+}
+
 func NewClientBase(ctx context.Context, opts ...ClientOption) (*GrpcClientBase, error) {
 
 	connPool, err := DialConnection(ctx, opts...)
@@ -86,6 +95,23 @@ type JWTInterceptor struct {
 	token       *oauth2.Token             // The JWT token that will be used in every call to the server
 	apiKey      string                    // An api key that never changes for a legacy api
 	mu          sync.Mutex
+}
+
+func (jwt *JWTInterceptor) fromContext(ctx context.Context, key CtxServiceKey) string {
+	val, ok := ctx.Value(key).(string)
+	if !ok {
+		return ""
+	}
+
+	return val
+}
+
+func (jwt *JWTInterceptor) setupPartitionData(ctx context.Context) context.Context {
+	finalCtx := metadata.AppendToOutgoingContext(ctx, "tenant_id", jwt.fromContext(ctx, ctxKeyTenantId))
+	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "partition_id", jwt.fromContext(ctx, ctxKeyPartitionId))
+	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "access_id", jwt.fromContext(ctx, ctxKeyAccessId))
+	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "profile_id", jwt.fromContext(ctx, ctxKeyProfileId))
+	return finalCtx
 }
 
 func (jwt *JWTInterceptor) getTokenStr(ctx context.Context) (string, error) {
@@ -127,15 +153,14 @@ func (jwt *JWTInterceptor) UnaryClientInterceptor(
 		return err
 	}
 
+	finalCtx := ctx
 	if tokenStr != "" {
 		// Create a new context with the token and make the first request
-		authCtx := metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+jwt.token.AccessToken)
-		err = invoker(authCtx, method, req, reply, cc, opts...)
-	} else {
-		err = invoker(ctx, method, req, reply, cc, opts...)
+		finalCtx = metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+jwt.token.AccessToken)
 	}
 
-	return err
+	finalCtx = jwt.setupPartitionData(finalCtx)
+	return invoker(finalCtx, method, req, reply, cc, opts...)
 }
 
 func (jwt *JWTInterceptor) StreamClientInterceptor(
@@ -152,13 +177,16 @@ func (jwt *JWTInterceptor) StreamClientInterceptor(
 		return nil, err
 	}
 
+	finalCtx := ctx
+
 	if tokenStr != "" {
 		// Create a new context with the token and make the first request
-		authCtx := metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+jwt.token.AccessToken)
-		return streamer(authCtx, desc, cc, method, opts...)
-	} else {
-		return streamer(ctx, desc, cc, method, opts...)
+		finalCtx = metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+jwt.token.AccessToken)
 	}
+
+	finalCtx = jwt.setupPartitionData(finalCtx)
+	return streamer(finalCtx, desc, cc, method, opts...)
+
 }
 
 func processAndValidateOpts(opts []ClientOption) (*DialSettings, error) {
