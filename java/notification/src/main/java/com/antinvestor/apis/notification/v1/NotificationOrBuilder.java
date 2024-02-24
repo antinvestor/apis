@@ -270,5 +270,29 @@ java.lang.String defaultValue);
   com.google.protobuf.ByteString
       getParentIdBytes();
 
+  /**
+   * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
+   * @return The source.
+   */
+  java.lang.String getSource();
+  /**
+   * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for source.
+   */
+  com.google.protobuf.ByteString
+      getSourceBytes();
+
+  /**
+   * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
+   * @return The sourceContactId.
+   */
+  java.lang.String getSourceContactId();
+  /**
+   * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for sourceContactId.
+   */
+  com.google.protobuf.ByteString
+      getSourceContactIdBytes();
+
   com.antinvestor.apis.notification.v1.Notification.ContactCase getContactCase();
 }

@@ -161,7 +161,7 @@ public final class NotificationProto {
       "v1.TemplateDataR\004data\022:\n\005extra\030\005 \003(\0132$.n" +
       "otification.v1.Template.ExtraEntryR\005extr" +
       "a\0328\n\nExtraEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005val" +
-      "ue\030\002 \001(\tR\005value:\0028\001\"\333\007\n\014Notification\022.\n\002" +
+      "ue\030\002 \001(\tR\005value:\0028\001\"\341\010\n\014Notification\022.\n\002" +
       "id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\320\001\001" +
       "R\002id\022C\n\014profile_type\030\002 \001(\tB \272H\035r\030\020\003\030\372\0012\021" +
       "[0-9a-z_-]{3,250}\320\001\001R\013profileType\022=\n\npro" +
@@ -182,63 +182,66 @@ public final class NotificationProto {
       ".v1.Notification.ExtrasEntryR\006extras\0225\n\010" +
       "priority\030\020 \001(\0162\031.notification.v1.PRIORIT" +
       "YR\010priority\022;\n\tparent_id\030\021 \001(\tB\036\272H\033r\026\020\003\030" +
-      "(2\020[0-9a-z_-]{3,20}\320\001\001R\010parentId\032:\n\014Payl" +
-      "oadEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(" +
-      "\tR\005value:\0028\001\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\t" +
-      "R\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001B\020\n\007conta" +
-      "ct\022\005\272H\002\010\000\"C\n\016SearchResponse\0221\n\004data\030\001 \003(" +
-      "\0132\035.notification.v1.NotificationR\004data\"@" +
-      "\n\013SendRequest\0221\n\004data\030\001 \001(\0132\035.notificati" +
-      "on.v1.NotificationR\004data\"=\n\014SendResponse" +
-      "\022-\n\004data\030\001 \001(\0132\031.common.v1.StatusRespons" +
-      "eR\004data\"\221\001\n\016ReleaseRequest\0228\n\taccess_id\030" +
-      "\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010acce" +
-      "ssId\022+\n\002id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{" +
-      "3,20}R\002id\022\030\n\007comment\030\003 \001(\tR\007comment\"@\n\017R" +
-      "eleaseResponse\022-\n\004data\030\001 \001(\0132\031.common.v1" +
-      ".StatusResponseR\004data\"C\n\016ReceiveRequest\022" +
-      "1\n\004data\030\001 \001(\0132\035.notification.v1.Notifica" +
-      "tionR\004data\"@\n\017ReceiveResponse\022-\n\004data\030\001 " +
-      "\001(\0132\031.common.v1.StatusResponseR\004data\"|\n\025" +
-      "TemplateSearchRequest\022\024\n\005query\030\001 \001(\tR\005qu" +
-      "ery\022#\n\rlanguage_code\030\002 \001(\tR\014languageCode" +
-      "\022\022\n\004page\030\003 \001(\003R\004page\022\024\n\005count\030\004 \001(\005R\005cou" +
-      "nt\"G\n\026TemplateSearchResponse\022-\n\004data\030\001 \003" +
-      "(\0132\031.notification.v1.TemplateR\004data\"\314\002\n\023" +
-      "TemplateSaveRequest\022\022\n\004name\030\001 \001(\tR\004name\022" +
-      "#\n\rlanguage_code\030\002 \001(\tR\014languageCode\022B\n\004" +
-      "data\030\003 \003(\0132..notification.v1.TemplateSav" +
-      "eRequest.DataEntryR\004data\022E\n\005extra\030\004 \003(\0132" +
-      "/.notification.v1.TemplateSaveRequest.Ex" +
-      "traEntryR\005extra\0327\n\tDataEntry\022\020\n\003key\030\001 \001(" +
-      "\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\0328\n\nExtr" +
-      "aEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR" +
-      "\005value:\0028\001\"E\n\024TemplateSaveResponse\022-\n\004da" +
-      "ta\030\001 \001(\0132\031.notification.v1.TemplateR\004dat" +
-      "a*+\n\010PRIORITY\022\010\n\004HIGH\020\000\022\007\n\003LOW\020\001\022\014\n\010VERY" +
-      "_LOW\020\0022\217\005\n\023NotificationService\022C\n\004Send\022\034" +
-      ".notification.v1.SendRequest\032\035.notificat" +
-      "ion.v1.SendResponse\022=\n\006Status\022\030.common.v" +
-      "1.StatusRequest\032\031.common.v1.StatusRespon" +
-      "se\022O\n\014StatusUpdate\022\036.common.v1.StatusUpd" +
-      "ateRequest\032\037.common.v1.StatusUpdateRespo" +
-      "nse\022L\n\007Release\022\037.notification.v1.Release" +
-      "Request\032 .notification.v1.ReleaseRespons" +
-      "e\022L\n\007Receive\022\037.notification.v1.ReceiveRe" +
-      "quest\032 .notification.v1.ReceiveResponse\022" +
-      "E\n\006Search\022\030.common.v1.SearchRequest\032\037.no" +
-      "tification.v1.SearchResponse0\001\022c\n\016Templa" +
-      "teSearch\022&.notification.v1.TemplateSearc" +
-      "hRequest\032\'.notification.v1.TemplateSearc" +
-      "hResponse0\001\022[\n\014TemplateSave\022$.notificati" +
-      "on.v1.TemplateSaveRequest\032%.notification" +
-      ".v1.TemplateSaveResponseB\342\001\n$com.antinve" +
-      "stor.apis.notification.v1B\021NotificationP" +
-      "rotoP\001ZJgithub.com/antinvestor/apis/go/n" +
-      "otification/notification/v1;notification" +
-      "v1\242\002\003NXX\252\002\017Notification.V1\312\002\017Notificatio" +
-      "n\\V1\342\002\033Notification\\V1\\GPBMetadata\352\002\020Not" +
-      "ification::V1b\006proto3"
+      "(2\020[0-9a-z_-]{3,20}\320\001\001R\010parentId\0228\n\006sour" +
+      "ce\030\022 \001(\tB \272H\035r\030\020\003\030\372\0012\021[0-9a-z_-]{3,250}\320" +
+      "\001\001R\006source\022J\n\021source_contact_id\030\023 \001(\tB\036\272" +
+      "H\033r\026\020\003\030(2\020[0-9a-z_-]{3,40}\320\001\001R\017sourceCon" +
+      "tactId\032:\n\014PayloadEntry\022\020\n\003key\030\001 \001(\tR\003key" +
+      "\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\0329\n\013ExtrasEntr" +
+      "y\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005valu" +
+      "e:\0028\001B\020\n\007contact\022\005\272H\002\010\000\"C\n\016SearchRespons" +
+      "e\0221\n\004data\030\001 \003(\0132\035.notification.v1.Notifi" +
+      "cationR\004data\"@\n\013SendRequest\0221\n\004data\030\001 \001(" +
+      "\0132\035.notification.v1.NotificationR\004data\"=" +
+      "\n\014SendResponse\022-\n\004data\030\001 \001(\0132\031.common.v1" +
+      ".StatusResponseR\004data\"\221\001\n\016ReleaseRequest" +
+      "\0228\n\taccess_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_" +
+      "-]{3,20}R\010accessId\022+\n\002id\030\002 \001(\tB\033\272H\030r\026\020\003\030" +
+      "(2\020[0-9a-z_-]{3,20}R\002id\022\030\n\007comment\030\003 \001(\t" +
+      "R\007comment\"@\n\017ReleaseResponse\022-\n\004data\030\001 \001" +
+      "(\0132\031.common.v1.StatusResponseR\004data\"C\n\016R" +
+      "eceiveRequest\0221\n\004data\030\001 \001(\0132\035.notificati" +
+      "on.v1.NotificationR\004data\"@\n\017ReceiveRespo" +
+      "nse\022-\n\004data\030\001 \001(\0132\031.common.v1.StatusResp" +
+      "onseR\004data\"|\n\025TemplateSearchRequest\022\024\n\005q" +
+      "uery\030\001 \001(\tR\005query\022#\n\rlanguage_code\030\002 \001(\t" +
+      "R\014languageCode\022\022\n\004page\030\003 \001(\003R\004page\022\024\n\005co" +
+      "unt\030\004 \001(\005R\005count\"G\n\026TemplateSearchRespon" +
+      "se\022-\n\004data\030\001 \003(\0132\031.notification.v1.Templ" +
+      "ateR\004data\"\314\002\n\023TemplateSaveRequest\022\022\n\004nam" +
+      "e\030\001 \001(\tR\004name\022#\n\rlanguage_code\030\002 \001(\tR\014la" +
+      "nguageCode\022B\n\004data\030\003 \003(\0132..notification." +
+      "v1.TemplateSaveRequest.DataEntryR\004data\022E" +
+      "\n\005extra\030\004 \003(\0132/.notification.v1.Template" +
+      "SaveRequest.ExtraEntryR\005extra\0327\n\tDataEnt" +
+      "ry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005val" +
+      "ue:\0028\001\0328\n\nExtraEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024" +
+      "\n\005value\030\002 \001(\tR\005value:\0028\001\"E\n\024TemplateSave" +
+      "Response\022-\n\004data\030\001 \001(\0132\031.notification.v1" +
+      ".TemplateR\004data*+\n\010PRIORITY\022\010\n\004HIGH\020\000\022\007\n" +
+      "\003LOW\020\001\022\014\n\010VERY_LOW\020\0022\217\005\n\023NotificationSer" +
+      "vice\022C\n\004Send\022\034.notification.v1.SendReque" +
+      "st\032\035.notification.v1.SendResponse\022=\n\006Sta" +
+      "tus\022\030.common.v1.StatusRequest\032\031.common.v" +
+      "1.StatusResponse\022O\n\014StatusUpdate\022\036.commo" +
+      "n.v1.StatusUpdateRequest\032\037.common.v1.Sta" +
+      "tusUpdateResponse\022L\n\007Release\022\037.notificat" +
+      "ion.v1.ReleaseRequest\032 .notification.v1." +
+      "ReleaseResponse\022L\n\007Receive\022\037.notificatio" +
+      "n.v1.ReceiveRequest\032 .notification.v1.Re" +
+      "ceiveResponse\022E\n\006Search\022\030.common.v1.Sear" +
+      "chRequest\032\037.notification.v1.SearchRespon" +
+      "se0\001\022c\n\016TemplateSearch\022&.notification.v1" +
+      ".TemplateSearchRequest\032\'.notification.v1" +
+      ".TemplateSearchResponse0\001\022[\n\014TemplateSav" +
+      "e\022$.notification.v1.TemplateSaveRequest\032" +
+      "%.notification.v1.TemplateSaveResponseB\342" +
+      "\001\n$com.antinvestor.apis.notification.v1B" +
+      "\021NotificationProtoP\001ZJgithub.com/antinve" +
+      "stor/apis/go/notification/notification/v" +
+      "1;notificationv1\242\002\003NXX\252\002\017Notification.V1" +
+      "\312\002\017Notification\\V1\342\002\033Notification\\V1\\GPB" +
+      "Metadata\352\002\020Notification::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -281,7 +284,7 @@ public final class NotificationProto {
     internal_static_notification_v1_Notification_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_notification_v1_Notification_descriptor,
-        new java.lang.String[] { "Id", "ProfileType", "ProfileId", "ContactId", "Detail", "Type", "Template", "Payload", "Data", "Language", "OutBound", "AutoRelease", "RouteId", "Status", "Extras", "Priority", "ParentId", "Contact", });
+        new java.lang.String[] { "Id", "ProfileType", "ProfileId", "ContactId", "Detail", "Type", "Template", "Payload", "Data", "Language", "OutBound", "AutoRelease", "RouteId", "Status", "Extras", "Priority", "ParentId", "Source", "SourceContactId", "Contact", });
     internal_static_notification_v1_Notification_PayloadEntry_descriptor =
       internal_static_notification_v1_Notification_descriptor.getNestedTypes().get(0);
     internal_static_notification_v1_Notification_PayloadEntry_fieldAccessorTable = new

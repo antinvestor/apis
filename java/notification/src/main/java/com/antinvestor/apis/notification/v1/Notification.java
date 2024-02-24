@@ -41,6 +41,8 @@ private static final long serialVersionUID = 0L;
     routeId_ = "";
     priority_ = 0;
     parentId_ = "";
+    source_ = "";
+    sourceContactId_ = "";
   }
 
   @java.lang.Override
@@ -799,6 +801,84 @@ java.lang.String defaultValue) {
     }
   }
 
+  public static final int SOURCE_FIELD_NUMBER = 18;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object source_ = "";
+  /**
+   * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
+   * @return The source.
+   */
+  @java.lang.Override
+  public java.lang.String getSource() {
+    java.lang.Object ref = source_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      source_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for source.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getSourceBytes() {
+    java.lang.Object ref = source_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      source_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int SOURCE_CONTACT_ID_FIELD_NUMBER = 19;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object sourceContactId_ = "";
+  /**
+   * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
+   * @return The sourceContactId.
+   */
+  @java.lang.Override
+  public java.lang.String getSourceContactId() {
+    java.lang.Object ref = sourceContactId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      sourceContactId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for sourceContactId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getSourceContactIdBytes() {
+    java.lang.Object ref = sourceContactId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      sourceContactId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -869,6 +949,12 @@ java.lang.String defaultValue) {
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(parentId_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 17, parentId_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(source_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 18, source_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(sourceContactId_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 19, sourceContactId_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -948,6 +1034,12 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(parentId_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(17, parentId_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(source_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(18, source_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(sourceContactId_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(19, sourceContactId_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -995,6 +1087,10 @@ java.lang.String defaultValue) {
     if (priority_ != other.priority_) return false;
     if (!getParentId()
         .equals(other.getParentId())) return false;
+    if (!getSource()
+        .equals(other.getSource())) return false;
+    if (!getSourceContactId()
+        .equals(other.getSourceContactId())) return false;
     if (!getContactCase().equals(other.getContactCase())) return false;
     switch (contactCase_) {
       case 4:
@@ -1057,6 +1153,10 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + priority_;
     hash = (37 * hash) + PARENT_ID_FIELD_NUMBER;
     hash = (53 * hash) + getParentId().hashCode();
+    hash = (37 * hash) + SOURCE_FIELD_NUMBER;
+    hash = (53 * hash) + getSource().hashCode();
+    hash = (37 * hash) + SOURCE_CONTACT_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getSourceContactId().hashCode();
     switch (contactCase_) {
       case 4:
         hash = (37 * hash) + CONTACT_ID_FIELD_NUMBER;
@@ -1251,6 +1351,8 @@ java.lang.String defaultValue) {
       internalGetMutableExtras().clear();
       priority_ = 0;
       parentId_ = "";
+      source_ = "";
+      sourceContactId_ = "";
       contactCase_ = 0;
       contact_ = null;
       return this;
@@ -1337,6 +1439,12 @@ java.lang.String defaultValue) {
       }
       if (((from_bitField0_ & 0x00010000) != 0)) {
         result.parentId_ = parentId_;
+      }
+      if (((from_bitField0_ & 0x00020000) != 0)) {
+        result.source_ = source_;
+      }
+      if (((from_bitField0_ & 0x00040000) != 0)) {
+        result.sourceContactId_ = sourceContactId_;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1451,6 +1559,16 @@ java.lang.String defaultValue) {
       if (!other.getParentId().isEmpty()) {
         parentId_ = other.parentId_;
         bitField0_ |= 0x00010000;
+        onChanged();
+      }
+      if (!other.getSource().isEmpty()) {
+        source_ = other.source_;
+        bitField0_ |= 0x00020000;
+        onChanged();
+      }
+      if (!other.getSourceContactId().isEmpty()) {
+        sourceContactId_ = other.sourceContactId_;
+        bitField0_ |= 0x00040000;
         onChanged();
       }
       switch (other.getContactCase()) {
@@ -1593,6 +1711,16 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00010000;
               break;
             } // case 138
+            case 146: {
+              source_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00020000;
+              break;
+            } // case 146
+            case 154: {
+              sourceContactId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00040000;
+              break;
+            } // case 154
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2947,6 +3075,150 @@ java.lang.String defaultValue) {
       checkByteStringIsUtf8(value);
       parentId_ = value;
       bitField0_ |= 0x00010000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object source_ = "";
+    /**
+     * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
+     * @return The source.
+     */
+    public java.lang.String getSource() {
+      java.lang.Object ref = source_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        source_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for source.
+     */
+    public com.google.protobuf.ByteString
+        getSourceBytes() {
+      java.lang.Object ref = source_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        source_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
+     * @param value The source to set.
+     * @return This builder for chaining.
+     */
+    public Builder setSource(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      source_ = value;
+      bitField0_ |= 0x00020000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearSource() {
+      source_ = getDefaultInstance().getSource();
+      bitField0_ = (bitField0_ & ~0x00020000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for source to set.
+     * @return This builder for chaining.
+     */
+    public Builder setSourceBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      source_ = value;
+      bitField0_ |= 0x00020000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object sourceContactId_ = "";
+    /**
+     * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
+     * @return The sourceContactId.
+     */
+    public java.lang.String getSourceContactId() {
+      java.lang.Object ref = sourceContactId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        sourceContactId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for sourceContactId.
+     */
+    public com.google.protobuf.ByteString
+        getSourceContactIdBytes() {
+      java.lang.Object ref = sourceContactId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sourceContactId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
+     * @param value The sourceContactId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setSourceContactId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      sourceContactId_ = value;
+      bitField0_ |= 0x00040000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearSourceContactId() {
+      sourceContactId_ = getDefaultInstance().getSourceContactId();
+      bitField0_ = (bitField0_ & ~0x00040000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for sourceContactId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setSourceContactIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      sourceContactId_ = value;
+      bitField0_ |= 0x00040000;
       onChanged();
       return this;
     }
