@@ -18,7 +18,6 @@ import (
 	"context"
 	"github.com/antinvestor/apis/go/common"
 	commonv1 "github.com/antinvestor/apis/go/common/v1"
-	"github.com/rs/xid"
 	"google.golang.org/grpc"
 	"math"
 )
@@ -77,61 +76,23 @@ func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*N
 	return Init(clientBase, NewNotificationServiceClient(clientBase.Connection())), nil
 }
 
-func (nc *NotificationClient) Send(ctx context.Context, parentId, profileId, contact string,
-	language string, template string, variables map[string]string) (*SendResponse, error) {
-	return nc.SendFrom(ctx, parentId, "user", profileId, contact, language, template, variables, true)
-}
-
-func (nc *NotificationClient) SendFrom(ctx context.Context, parentId, profileType, profileId, contact string,
-	language string, template string, variables map[string]string, autoRelease bool) (*SendResponse, error) {
-
-	messageOut := Notification{
-		ParentId:    parentId,
-		ProfileType: profileType,
-		ProfileId:   profileId,
-		AutoRelease: autoRelease,
-		Template:    template,
-		Language:    language,
-		Payload:     variables,
+func (nc *NotificationClient) Send(ctx context.Context, message *Notification) (*SendResponse, error) {
+	if message.GetProfileType() == "" {
+		message.ProfileType = "user"
 	}
 
-	if contact != "" {
-		_, err := xid.FromString(contact)
-		if err != nil {
-			messageOut.Contact = &Notification_Detail{Detail: contact}
-		} else {
-			messageOut.Contact = &Notification_ContactId{ContactId: contact}
-		}
-	}
-
-	return nc.client.Send(ctx, &SendRequest{Data: &messageOut})
+	return nc.client.Send(ctx, &SendRequest{Data: message})
 
 }
 
-func (nc *NotificationClient) Receive(ctx context.Context, parentId, profileId string, contact string,
-	language string, template string, variables map[string]string, extras map[string]string) (*ReceiveResponse, error) {
+func (nc *NotificationClient) Receive(ctx context.Context, message *Notification) (*ReceiveResponse, error) {
 
-	messageIn := Notification{
-		ParentId:    parentId,
-		AutoRelease: true,
-		ProfileType: "user",
-		ProfileId:   profileId,
-		Template:    template,
-		Language:    language,
-		Payload:     variables,
-		Extras:      extras,
+	message.AutoRelease = true
+	if message.GetProfileType() == "" {
+		message.ProfileType = "user"
 	}
 
-	if contact != "" {
-		_, err := xid.FromString(contact)
-		if err != nil {
-			messageIn.Contact = &Notification_Detail{Detail: contact}
-		} else {
-			messageIn.Contact = &Notification_ContactId{ContactId: contact}
-		}
-	}
-
-	return nc.client.Receive(ctx, &ReceiveRequest{Data: &messageIn})
+	return nc.client.Receive(ctx, &ReceiveRequest{Data: message})
 
 }
 
