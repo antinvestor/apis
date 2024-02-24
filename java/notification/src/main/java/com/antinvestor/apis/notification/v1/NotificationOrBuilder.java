@@ -258,5 +258,17 @@ java.lang.String defaultValue);
    */
   com.antinvestor.apis.notification.v1.PRIORITY getPriority();
 
+  /**
+   * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return The parentId.
+   */
+  java.lang.String getParentId();
+  /**
+   * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for parentId.
+   */
+  com.google.protobuf.ByteString
+      getParentIdBytes();
+
   com.antinvestor.apis.notification.v1.Notification.ContactCase getContactCase();
 }

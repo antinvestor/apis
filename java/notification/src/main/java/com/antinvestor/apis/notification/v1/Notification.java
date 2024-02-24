@@ -40,6 +40,7 @@ private static final long serialVersionUID = 0L;
     language_ = "";
     routeId_ = "";
     priority_ = 0;
+    parentId_ = "";
   }
 
   @java.lang.Override
@@ -759,6 +760,45 @@ java.lang.String defaultValue) {
     return result == null ? com.antinvestor.apis.notification.v1.PRIORITY.UNRECOGNIZED : result;
   }
 
+  public static final int PARENT_ID_FIELD_NUMBER = 17;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object parentId_ = "";
+  /**
+   * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return The parentId.
+   */
+  @java.lang.Override
+  public java.lang.String getParentId() {
+    java.lang.Object ref = parentId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      parentId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for parentId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getParentIdBytes() {
+    java.lang.Object ref = parentId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      parentId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -826,6 +866,9 @@ java.lang.String defaultValue) {
         15);
     if (priority_ != com.antinvestor.apis.notification.v1.PRIORITY.HIGH.getNumber()) {
       output.writeEnum(16, priority_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(parentId_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 17, parentId_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -902,6 +945,9 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(16, priority_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(parentId_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(17, parentId_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -947,6 +993,8 @@ java.lang.String defaultValue) {
     if (!internalGetExtras().equals(
         other.internalGetExtras())) return false;
     if (priority_ != other.priority_) return false;
+    if (!getParentId()
+        .equals(other.getParentId())) return false;
     if (!getContactCase().equals(other.getContactCase())) return false;
     switch (contactCase_) {
       case 4:
@@ -1007,6 +1055,8 @@ java.lang.String defaultValue) {
     }
     hash = (37 * hash) + PRIORITY_FIELD_NUMBER;
     hash = (53 * hash) + priority_;
+    hash = (37 * hash) + PARENT_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getParentId().hashCode();
     switch (contactCase_) {
       case 4:
         hash = (37 * hash) + CONTACT_ID_FIELD_NUMBER;
@@ -1200,6 +1250,7 @@ java.lang.String defaultValue) {
       }
       internalGetMutableExtras().clear();
       priority_ = 0;
+      parentId_ = "";
       contactCase_ = 0;
       contact_ = null;
       return this;
@@ -1283,6 +1334,9 @@ java.lang.String defaultValue) {
       }
       if (((from_bitField0_ & 0x00008000) != 0)) {
         result.priority_ = priority_;
+      }
+      if (((from_bitField0_ & 0x00010000) != 0)) {
+        result.parentId_ = parentId_;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1393,6 +1447,11 @@ java.lang.String defaultValue) {
       bitField0_ |= 0x00004000;
       if (other.priority_ != 0) {
         setPriorityValue(other.getPriorityValue());
+      }
+      if (!other.getParentId().isEmpty()) {
+        parentId_ = other.parentId_;
+        bitField0_ |= 0x00010000;
+        onChanged();
       }
       switch (other.getContactCase()) {
         case CONTACT_ID: {
@@ -1529,6 +1588,11 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00008000;
               break;
             } // case 128
+            case 138: {
+              parentId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00010000;
+              break;
+            } // case 138
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2811,6 +2875,78 @@ java.lang.String defaultValue) {
     public Builder clearPriority() {
       bitField0_ = (bitField0_ & ~0x00008000);
       priority_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object parentId_ = "";
+    /**
+     * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @return The parentId.
+     */
+    public java.lang.String getParentId() {
+      java.lang.Object ref = parentId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        parentId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for parentId.
+     */
+    public com.google.protobuf.ByteString
+        getParentIdBytes() {
+      java.lang.Object ref = parentId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        parentId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @param value The parentId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setParentId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      parentId_ = value;
+      bitField0_ |= 0x00010000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearParentId() {
+      parentId_ = getDefaultInstance().getParentId();
+      bitField0_ = (bitField0_ & ~0x00010000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for parentId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setParentIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      parentId_ = value;
+      bitField0_ |= 0x00010000;
       onChanged();
       return this;
     }

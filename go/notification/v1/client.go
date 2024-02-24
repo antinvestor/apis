@@ -77,15 +77,16 @@ func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*N
 	return Init(clientBase, NewNotificationServiceClient(clientBase.Connection())), nil
 }
 
-func (nc *NotificationClient) Send(ctx context.Context, profileId, contact string,
+func (nc *NotificationClient) Send(ctx context.Context, parentId, profileId, contact string,
 	language string, template string, variables map[string]string) (*SendResponse, error) {
-	return nc.SendFrom(ctx, "user", profileId, contact, language, template, variables, true)
+	return nc.SendFrom(ctx, parentId, "user", profileId, contact, language, template, variables, true)
 }
 
-func (nc *NotificationClient) SendFrom(ctx context.Context, profileType, profileId, contact string,
+func (nc *NotificationClient) SendFrom(ctx context.Context, parentId, profileType, profileId, contact string,
 	language string, template string, variables map[string]string, autoRelease bool) (*SendResponse, error) {
 
 	messageOut := Notification{
+		ParentId:    parentId,
 		ProfileType: profileType,
 		ProfileId:   profileId,
 		AutoRelease: autoRelease,
@@ -107,10 +108,11 @@ func (nc *NotificationClient) SendFrom(ctx context.Context, profileType, profile
 
 }
 
-func (nc *NotificationClient) Receive(ctx context.Context, profileId string, contact string,
+func (nc *NotificationClient) Receive(ctx context.Context, parentId, profileId string, contact string,
 	language string, template string, variables map[string]string, extras map[string]string) (*ReceiveResponse, error) {
 
 	messageIn := Notification{
+		ParentId:    parentId,
 		AutoRelease: true,
 		ProfileType: "user",
 		ProfileId:   profileId,
@@ -134,12 +136,13 @@ func (nc *NotificationClient) Receive(ctx context.Context, profileId string, con
 }
 
 func (nc *NotificationClient) UpdateStatus(ctx context.Context, notificationId string,
-	externalId string, extras map[string]string) (*commonv1.StatusUpdateResponse, error) {
+	state commonv1.STATE, status commonv1.STATUS, externalId string,
+	extras map[string]string) (*commonv1.StatusUpdateResponse, error) {
 
 	messageStatus := commonv1.StatusUpdateRequest{
 		Id:         notificationId,
-		State:      commonv1.STATE_INACTIVE,
-		Status:     commonv1.STATUS_SUCCESSFUL,
+		State:      state,
+		Status:     status,
 		ExternalId: externalId,
 		Extras:     extras,
 	}
