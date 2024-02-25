@@ -241,7 +241,8 @@ message ListRelationshipRequest {
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.in = "Contact",
-    (buf.validate.field).string.in = "Profile"
+    (buf.validate.field).string.in = "Profile",
+    (buf.validate.field).string.in = "Group"
   ];
   string parent_id = 2 [
     (buf.validate.field).string.min_len = 3,
@@ -273,7 +274,8 @@ message AddRelationshipRequest {
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.in = "Contact",
-    (buf.validate.field).string.in = "Profile"
+    (buf.validate.field).string.in = "Profile",
+    (buf.validate.field).string.in = "Group"
   ];
   string parent_id = 3 [
     (buf.validate.field).string.min_len = 3,
@@ -284,7 +286,8 @@ message AddRelationshipRequest {
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.in = "Contact",
-    (buf.validate.field).string.in = "Profile"
+    (buf.validate.field).string.in = "Profile",
+    (buf.validate.field).string.in = "Group"
   ];
   string child_id = 5 [
     (buf.validate.field).string.min_len = 3,
