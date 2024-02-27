@@ -19,16 +19,15 @@ import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.database.BaseModel;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.common.utilities.TextUtils;
-import com.antinvestor.apis.settings.SettingConstantAbstract;
 import com.antinvestor.apis.settings.v1.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Iterator;
@@ -123,7 +122,7 @@ public class SettingsClient implements AutoCloseable {
 
     public Double getSettingAsDouble(String moduleName, String settingName, double defaultValue) {
         var result = getSettingAsDouble(moduleName, settingName);
-        if( Objects.isNull(result)){
+        if (Objects.isNull(result)) {
             return defaultValue;
         }
         return result;
@@ -141,7 +140,7 @@ public class SettingsClient implements AutoCloseable {
 
     public BigDecimal getSettingAsBigDecimal(String moduleName, String settingName, BigDecimal defaultValue) {
         var result = getSettingAsBigDecimal(moduleName, settingName);
-        if( Objects.isNull(result)){
+        if (Objects.isNull(result)) {
             return defaultValue;
         }
         return result;
@@ -154,7 +153,7 @@ public class SettingsClient implements AutoCloseable {
 
     public Integer getSettingAsInt(String moduleName, String settingName, int defaultValue) {
         var result = getSettingAsInt(moduleName, settingName);
-        if( Objects.isNull(result)){
+        if (Objects.isNull(result)) {
             return defaultValue;
         }
         return result;
@@ -218,7 +217,9 @@ public class SettingsClient implements AutoCloseable {
     public String setSetting(String moduleName, String settingLang, String settingName, Object settingValue) {
         String stringSettingValue;
         if (settingValue instanceof LocalDateTime dateSettingValue) {
-            stringSettingValue = dateSettingValue.format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+            stringSettingValue = dateSettingValue.
+                    atZone(ZoneId.systemDefault()).
+                    format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
         } else {
             stringSettingValue = String.valueOf(settingValue);
         }
