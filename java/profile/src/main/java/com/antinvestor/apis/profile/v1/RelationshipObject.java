@@ -71,14 +71,15 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.profile.v1.RelationshipObject.class, com.antinvestor.apis.profile.v1.RelationshipObject.Builder.class);
   }
 
+  private int bitField0_;
   private int childCase_ = 0;
   @SuppressWarnings("serial")
   private java.lang.Object child_;
   public enum ChildCase
       implements com.google.protobuf.Internal.EnumLite,
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-    PROFILE(4),
-    CONTACT(5),
+    CHILD_PROFILE(6),
+    CHILD_CONTACT(7),
     CHILD_NOT_SET(0);
     private final int value;
     private ChildCase(int value) {
@@ -96,8 +97,8 @@ private static final long serialVersionUID = 0L;
 
     public static ChildCase forNumber(int value) {
       switch (value) {
-        case 4: return PROFILE;
-        case 5: return CONTACT;
+        case 6: return CHILD_PROFILE;
+        case 7: return CHILD_CONTACT;
         case 0: return CHILD_NOT_SET;
         default: return null;
       }
@@ -111,6 +112,48 @@ private static final long serialVersionUID = 0L;
   getChildCase() {
     return ChildCase.forNumber(
         childCase_);
+  }
+
+  private int parentCase_ = 0;
+  @SuppressWarnings("serial")
+  private java.lang.Object parent_;
+  public enum ParentCase
+      implements com.google.protobuf.Internal.EnumLite,
+          com.google.protobuf.AbstractMessage.InternalOneOfEnum {
+    PARENT_PROFILE(8),
+    PARENT_CONTACT(9),
+    PARENT_NOT_SET(0);
+    private final int value;
+    private ParentCase(int value) {
+      this.value = value;
+    }
+    /**
+     * @param value The number of the enum to look for.
+     * @return The enum associated with the given number.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static ParentCase valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static ParentCase forNumber(int value) {
+      switch (value) {
+        case 8: return PARENT_PROFILE;
+        case 9: return PARENT_CONTACT;
+        case 0: return PARENT_NOT_SET;
+        default: return null;
+      }
+    }
+    public int getNumber() {
+      return this.value;
+    }
+  };
+
+  public ParentCase
+  getParentCase() {
+    return ParentCase.forNumber(
+        parentCase_);
   }
 
   public static final int ID_FIELD_NUMBER = 1;
@@ -249,64 +292,178 @@ java.lang.String defaultValue) {
     return map.get(key);
   }
 
-  public static final int PROFILE_FIELD_NUMBER = 4;
+  public static final int CHILD_ENTRY_FIELD_NUMBER = 4;
+  private com.antinvestor.apis.profile.v1.EntryItem childEntry_;
   /**
-   * <code>.profile.v1.ProfileObject profile = 4 [json_name = "profile"];</code>
-   * @return Whether the profile field is set.
+   * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
+   * @return Whether the childEntry field is set.
    */
   @java.lang.Override
-  public boolean hasProfile() {
-    return childCase_ == 4;
+  public boolean hasChildEntry() {
+    return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * <code>.profile.v1.ProfileObject profile = 4 [json_name = "profile"];</code>
-   * @return The profile.
+   * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
+   * @return The childEntry.
    */
   @java.lang.Override
-  public com.antinvestor.apis.profile.v1.ProfileObject getProfile() {
-    if (childCase_ == 4) {
+  public com.antinvestor.apis.profile.v1.EntryItem getChildEntry() {
+    return childEntry_ == null ? com.antinvestor.apis.profile.v1.EntryItem.getDefaultInstance() : childEntry_;
+  }
+  /**
+   * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.profile.v1.EntryItemOrBuilder getChildEntryOrBuilder() {
+    return childEntry_ == null ? com.antinvestor.apis.profile.v1.EntryItem.getDefaultInstance() : childEntry_;
+  }
+
+  public static final int PARENT_ENTRY_FIELD_NUMBER = 5;
+  private com.antinvestor.apis.profile.v1.EntryItem parentEntry_;
+  /**
+   * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
+   * @return Whether the parentEntry field is set.
+   */
+  @java.lang.Override
+  public boolean hasParentEntry() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
+   * @return The parentEntry.
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.profile.v1.EntryItem getParentEntry() {
+    return parentEntry_ == null ? com.antinvestor.apis.profile.v1.EntryItem.getDefaultInstance() : parentEntry_;
+  }
+  /**
+   * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.profile.v1.EntryItemOrBuilder getParentEntryOrBuilder() {
+    return parentEntry_ == null ? com.antinvestor.apis.profile.v1.EntryItem.getDefaultInstance() : parentEntry_;
+  }
+
+  public static final int CHILD_PROFILE_FIELD_NUMBER = 6;
+  /**
+   * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
+   * @return Whether the childProfile field is set.
+   */
+  @java.lang.Override
+  public boolean hasChildProfile() {
+    return childCase_ == 6;
+  }
+  /**
+   * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
+   * @return The childProfile.
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.profile.v1.ProfileObject getChildProfile() {
+    if (childCase_ == 6) {
        return (com.antinvestor.apis.profile.v1.ProfileObject) child_;
     }
     return com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance();
   }
   /**
-   * <code>.profile.v1.ProfileObject profile = 4 [json_name = "profile"];</code>
+   * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
    */
   @java.lang.Override
-  public com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder getProfileOrBuilder() {
-    if (childCase_ == 4) {
+  public com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder getChildProfileOrBuilder() {
+    if (childCase_ == 6) {
        return (com.antinvestor.apis.profile.v1.ProfileObject) child_;
     }
     return com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance();
   }
 
-  public static final int CONTACT_FIELD_NUMBER = 5;
+  public static final int CHILD_CONTACT_FIELD_NUMBER = 7;
   /**
-   * <code>.profile.v1.ContactObject contact = 5 [json_name = "contact"];</code>
-   * @return Whether the contact field is set.
+   * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
+   * @return Whether the childContact field is set.
    */
   @java.lang.Override
-  public boolean hasContact() {
-    return childCase_ == 5;
+  public boolean hasChildContact() {
+    return childCase_ == 7;
   }
   /**
-   * <code>.profile.v1.ContactObject contact = 5 [json_name = "contact"];</code>
-   * @return The contact.
+   * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
+   * @return The childContact.
    */
   @java.lang.Override
-  public com.antinvestor.apis.profile.v1.ContactObject getContact() {
-    if (childCase_ == 5) {
+  public com.antinvestor.apis.profile.v1.ContactObject getChildContact() {
+    if (childCase_ == 7) {
        return (com.antinvestor.apis.profile.v1.ContactObject) child_;
     }
     return com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance();
   }
   /**
-   * <code>.profile.v1.ContactObject contact = 5 [json_name = "contact"];</code>
+   * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
    */
   @java.lang.Override
-  public com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getContactOrBuilder() {
-    if (childCase_ == 5) {
+  public com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getChildContactOrBuilder() {
+    if (childCase_ == 7) {
        return (com.antinvestor.apis.profile.v1.ContactObject) child_;
+    }
+    return com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance();
+  }
+
+  public static final int PARENT_PROFILE_FIELD_NUMBER = 8;
+  /**
+   * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
+   * @return Whether the parentProfile field is set.
+   */
+  @java.lang.Override
+  public boolean hasParentProfile() {
+    return parentCase_ == 8;
+  }
+  /**
+   * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
+   * @return The parentProfile.
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.profile.v1.ProfileObject getParentProfile() {
+    if (parentCase_ == 8) {
+       return (com.antinvestor.apis.profile.v1.ProfileObject) parent_;
+    }
+    return com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance();
+  }
+  /**
+   * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder getParentProfileOrBuilder() {
+    if (parentCase_ == 8) {
+       return (com.antinvestor.apis.profile.v1.ProfileObject) parent_;
+    }
+    return com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance();
+  }
+
+  public static final int PARENT_CONTACT_FIELD_NUMBER = 9;
+  /**
+   * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
+   * @return Whether the parentContact field is set.
+   */
+  @java.lang.Override
+  public boolean hasParentContact() {
+    return parentCase_ == 9;
+  }
+  /**
+   * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
+   * @return The parentContact.
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.profile.v1.ContactObject getParentContact() {
+    if (parentCase_ == 9) {
+       return (com.antinvestor.apis.profile.v1.ContactObject) parent_;
+    }
+    return com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance();
+  }
+  /**
+   * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getParentContactOrBuilder() {
+    if (parentCase_ == 9) {
+       return (com.antinvestor.apis.profile.v1.ContactObject) parent_;
     }
     return com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance();
   }
@@ -337,11 +494,23 @@ java.lang.String defaultValue) {
         internalGetProperties(),
         PropertiesDefaultEntryHolder.defaultEntry,
         3);
-    if (childCase_ == 4) {
-      output.writeMessage(4, (com.antinvestor.apis.profile.v1.ProfileObject) child_);
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(4, getChildEntry());
     }
-    if (childCase_ == 5) {
-      output.writeMessage(5, (com.antinvestor.apis.profile.v1.ContactObject) child_);
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(5, getParentEntry());
+    }
+    if (childCase_ == 6) {
+      output.writeMessage(6, (com.antinvestor.apis.profile.v1.ProfileObject) child_);
+    }
+    if (childCase_ == 7) {
+      output.writeMessage(7, (com.antinvestor.apis.profile.v1.ContactObject) child_);
+    }
+    if (parentCase_ == 8) {
+      output.writeMessage(8, (com.antinvestor.apis.profile.v1.ProfileObject) parent_);
+    }
+    if (parentCase_ == 9) {
+      output.writeMessage(9, (com.antinvestor.apis.profile.v1.ContactObject) parent_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -369,13 +538,29 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, properties__);
     }
-    if (childCase_ == 4) {
+    if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(4, (com.antinvestor.apis.profile.v1.ProfileObject) child_);
+        .computeMessageSize(4, getChildEntry());
     }
-    if (childCase_ == 5) {
+    if (((bitField0_ & 0x00000002) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(5, (com.antinvestor.apis.profile.v1.ContactObject) child_);
+        .computeMessageSize(5, getParentEntry());
+    }
+    if (childCase_ == 6) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(6, (com.antinvestor.apis.profile.v1.ProfileObject) child_);
+    }
+    if (childCase_ == 7) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(7, (com.antinvestor.apis.profile.v1.ContactObject) child_);
+    }
+    if (parentCase_ == 8) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(8, (com.antinvestor.apis.profile.v1.ProfileObject) parent_);
+    }
+    if (parentCase_ == 9) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(9, (com.antinvestor.apis.profile.v1.ContactObject) parent_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -397,15 +582,38 @@ java.lang.String defaultValue) {
     if (type_ != other.type_) return false;
     if (!internalGetProperties().equals(
         other.internalGetProperties())) return false;
+    if (hasChildEntry() != other.hasChildEntry()) return false;
+    if (hasChildEntry()) {
+      if (!getChildEntry()
+          .equals(other.getChildEntry())) return false;
+    }
+    if (hasParentEntry() != other.hasParentEntry()) return false;
+    if (hasParentEntry()) {
+      if (!getParentEntry()
+          .equals(other.getParentEntry())) return false;
+    }
     if (!getChildCase().equals(other.getChildCase())) return false;
     switch (childCase_) {
-      case 4:
-        if (!getProfile()
-            .equals(other.getProfile())) return false;
+      case 6:
+        if (!getChildProfile()
+            .equals(other.getChildProfile())) return false;
         break;
-      case 5:
-        if (!getContact()
-            .equals(other.getContact())) return false;
+      case 7:
+        if (!getChildContact()
+            .equals(other.getChildContact())) return false;
+        break;
+      case 0:
+      default:
+    }
+    if (!getParentCase().equals(other.getParentCase())) return false;
+    switch (parentCase_) {
+      case 8:
+        if (!getParentProfile()
+            .equals(other.getParentProfile())) return false;
+        break;
+      case 9:
+        if (!getParentContact()
+            .equals(other.getParentContact())) return false;
         break;
       case 0:
       default:
@@ -429,14 +637,34 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + PROPERTIES_FIELD_NUMBER;
       hash = (53 * hash) + internalGetProperties().hashCode();
     }
+    if (hasChildEntry()) {
+      hash = (37 * hash) + CHILD_ENTRY_FIELD_NUMBER;
+      hash = (53 * hash) + getChildEntry().hashCode();
+    }
+    if (hasParentEntry()) {
+      hash = (37 * hash) + PARENT_ENTRY_FIELD_NUMBER;
+      hash = (53 * hash) + getParentEntry().hashCode();
+    }
     switch (childCase_) {
-      case 4:
-        hash = (37 * hash) + PROFILE_FIELD_NUMBER;
-        hash = (53 * hash) + getProfile().hashCode();
+      case 6:
+        hash = (37 * hash) + CHILD_PROFILE_FIELD_NUMBER;
+        hash = (53 * hash) + getChildProfile().hashCode();
         break;
-      case 5:
-        hash = (37 * hash) + CONTACT_FIELD_NUMBER;
-        hash = (53 * hash) + getContact().hashCode();
+      case 7:
+        hash = (37 * hash) + CHILD_CONTACT_FIELD_NUMBER;
+        hash = (53 * hash) + getChildContact().hashCode();
+        break;
+      case 0:
+      default:
+    }
+    switch (parentCase_) {
+      case 8:
+        hash = (37 * hash) + PARENT_PROFILE_FIELD_NUMBER;
+        hash = (53 * hash) + getParentProfile().hashCode();
+        break;
+      case 9:
+        hash = (37 * hash) + PARENT_CONTACT_FIELD_NUMBER;
+        hash = (53 * hash) + getParentContact().hashCode();
         break;
       case 0:
       default:
@@ -586,13 +814,20 @@ java.lang.String defaultValue) {
 
     // Construct using com.antinvestor.apis.profile.v1.RelationshipObject.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getChildEntryFieldBuilder();
+        getParentEntryFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -601,14 +836,32 @@ java.lang.String defaultValue) {
       id_ = "";
       type_ = 0;
       internalGetMutableProperties().clear();
-      if (profileBuilder_ != null) {
-        profileBuilder_.clear();
+      childEntry_ = null;
+      if (childEntryBuilder_ != null) {
+        childEntryBuilder_.dispose();
+        childEntryBuilder_ = null;
       }
-      if (contactBuilder_ != null) {
-        contactBuilder_.clear();
+      parentEntry_ = null;
+      if (parentEntryBuilder_ != null) {
+        parentEntryBuilder_.dispose();
+        parentEntryBuilder_ = null;
+      }
+      if (childProfileBuilder_ != null) {
+        childProfileBuilder_.clear();
+      }
+      if (childContactBuilder_ != null) {
+        childContactBuilder_.clear();
+      }
+      if (parentProfileBuilder_ != null) {
+        parentProfileBuilder_.clear();
+      }
+      if (parentContactBuilder_ != null) {
+        parentContactBuilder_.clear();
       }
       childCase_ = 0;
       child_ = null;
+      parentCase_ = 0;
+      parent_ = null;
       return this;
     }
 
@@ -653,18 +906,42 @@ java.lang.String defaultValue) {
         result.properties_ = internalGetProperties();
         result.properties_.makeImmutable();
       }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.childEntry_ = childEntryBuilder_ == null
+            ? childEntry_
+            : childEntryBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.parentEntry_ = parentEntryBuilder_ == null
+            ? parentEntry_
+            : parentEntryBuilder_.build();
+        to_bitField0_ |= 0x00000002;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     private void buildPartialOneofs(com.antinvestor.apis.profile.v1.RelationshipObject result) {
       result.childCase_ = childCase_;
       result.child_ = this.child_;
-      if (childCase_ == 4 &&
-          profileBuilder_ != null) {
-        result.child_ = profileBuilder_.build();
+      if (childCase_ == 6 &&
+          childProfileBuilder_ != null) {
+        result.child_ = childProfileBuilder_.build();
       }
-      if (childCase_ == 5 &&
-          contactBuilder_ != null) {
-        result.child_ = contactBuilder_.build();
+      if (childCase_ == 7 &&
+          childContactBuilder_ != null) {
+        result.child_ = childContactBuilder_.build();
+      }
+      result.parentCase_ = parentCase_;
+      result.parent_ = this.parent_;
+      if (parentCase_ == 8 &&
+          parentProfileBuilder_ != null) {
+        result.parent_ = parentProfileBuilder_.build();
+      }
+      if (parentCase_ == 9 &&
+          parentContactBuilder_ != null) {
+        result.parent_ = parentContactBuilder_.build();
       }
     }
 
@@ -723,16 +1000,35 @@ java.lang.String defaultValue) {
       internalGetMutableProperties().mergeFrom(
           other.internalGetProperties());
       bitField0_ |= 0x00000004;
+      if (other.hasChildEntry()) {
+        mergeChildEntry(other.getChildEntry());
+      }
+      if (other.hasParentEntry()) {
+        mergeParentEntry(other.getParentEntry());
+      }
       switch (other.getChildCase()) {
-        case PROFILE: {
-          mergeProfile(other.getProfile());
+        case CHILD_PROFILE: {
+          mergeChildProfile(other.getChildProfile());
           break;
         }
-        case CONTACT: {
-          mergeContact(other.getContact());
+        case CHILD_CONTACT: {
+          mergeChildContact(other.getChildContact());
           break;
         }
         case CHILD_NOT_SET: {
+          break;
+        }
+      }
+      switch (other.getParentCase()) {
+        case PARENT_PROFILE: {
+          mergeParentProfile(other.getParentProfile());
+          break;
+        }
+        case PARENT_CONTACT: {
+          mergeParentContact(other.getParentContact());
+          break;
+        }
+        case PARENT_NOT_SET: {
           break;
         }
       }
@@ -783,18 +1079,46 @@ java.lang.String defaultValue) {
             } // case 26
             case 34: {
               input.readMessage(
-                  getProfileFieldBuilder().getBuilder(),
+                  getChildEntryFieldBuilder().getBuilder(),
                   extensionRegistry);
-              childCase_ = 4;
+              bitField0_ |= 0x00000008;
               break;
             } // case 34
             case 42: {
               input.readMessage(
-                  getContactFieldBuilder().getBuilder(),
+                  getParentEntryFieldBuilder().getBuilder(),
                   extensionRegistry);
-              childCase_ = 5;
+              bitField0_ |= 0x00000010;
               break;
             } // case 42
+            case 50: {
+              input.readMessage(
+                  getChildProfileFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              childCase_ = 6;
+              break;
+            } // case 50
+            case 58: {
+              input.readMessage(
+                  getChildContactFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              childCase_ = 7;
+              break;
+            } // case 58
+            case 66: {
+              input.readMessage(
+                  getParentProfileFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              parentCase_ = 8;
+              break;
+            } // case 66
+            case 74: {
+              input.readMessage(
+                  getParentContactFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              parentCase_ = 9;
+              break;
+            } // case 74
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -821,6 +1145,21 @@ java.lang.String defaultValue) {
     public Builder clearChild() {
       childCase_ = 0;
       child_ = null;
+      onChanged();
+      return this;
+    }
+
+    private int parentCase_ = 0;
+    private java.lang.Object parent_;
+    public ParentCase
+        getParentCase() {
+      return ParentCase.forNumber(
+          parentCase_);
+    }
+
+    public Builder clearParent() {
+      parentCase_ = 0;
+      parent_ = null;
       onChanged();
       return this;
     }
@@ -1079,70 +1418,312 @@ java.lang.String defaultValue) {
       return this;
     }
 
+    private com.antinvestor.apis.profile.v1.EntryItem childEntry_;
     private com.google.protobuf.SingleFieldBuilderV3<
-        com.antinvestor.apis.profile.v1.ProfileObject, com.antinvestor.apis.profile.v1.ProfileObject.Builder, com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder> profileBuilder_;
+        com.antinvestor.apis.profile.v1.EntryItem, com.antinvestor.apis.profile.v1.EntryItem.Builder, com.antinvestor.apis.profile.v1.EntryItemOrBuilder> childEntryBuilder_;
     /**
-     * <code>.profile.v1.ProfileObject profile = 4 [json_name = "profile"];</code>
-     * @return Whether the profile field is set.
+     * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
+     * @return Whether the childEntry field is set.
      */
-    @java.lang.Override
-    public boolean hasProfile() {
-      return childCase_ == 4;
+    public boolean hasChildEntry() {
+      return ((bitField0_ & 0x00000008) != 0);
     }
     /**
-     * <code>.profile.v1.ProfileObject profile = 4 [json_name = "profile"];</code>
-     * @return The profile.
+     * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
+     * @return The childEntry.
+     */
+    public com.antinvestor.apis.profile.v1.EntryItem getChildEntry() {
+      if (childEntryBuilder_ == null) {
+        return childEntry_ == null ? com.antinvestor.apis.profile.v1.EntryItem.getDefaultInstance() : childEntry_;
+      } else {
+        return childEntryBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
+     */
+    public Builder setChildEntry(com.antinvestor.apis.profile.v1.EntryItem value) {
+      if (childEntryBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        childEntry_ = value;
+      } else {
+        childEntryBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
+     */
+    public Builder setChildEntry(
+        com.antinvestor.apis.profile.v1.EntryItem.Builder builderForValue) {
+      if (childEntryBuilder_ == null) {
+        childEntry_ = builderForValue.build();
+      } else {
+        childEntryBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
+     */
+    public Builder mergeChildEntry(com.antinvestor.apis.profile.v1.EntryItem value) {
+      if (childEntryBuilder_ == null) {
+        if (((bitField0_ & 0x00000008) != 0) &&
+          childEntry_ != null &&
+          childEntry_ != com.antinvestor.apis.profile.v1.EntryItem.getDefaultInstance()) {
+          getChildEntryBuilder().mergeFrom(value);
+        } else {
+          childEntry_ = value;
+        }
+      } else {
+        childEntryBuilder_.mergeFrom(value);
+      }
+      if (childEntry_ != null) {
+        bitField0_ |= 0x00000008;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
+     */
+    public Builder clearChildEntry() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      childEntry_ = null;
+      if (childEntryBuilder_ != null) {
+        childEntryBuilder_.dispose();
+        childEntryBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
+     */
+    public com.antinvestor.apis.profile.v1.EntryItem.Builder getChildEntryBuilder() {
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return getChildEntryFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
+     */
+    public com.antinvestor.apis.profile.v1.EntryItemOrBuilder getChildEntryOrBuilder() {
+      if (childEntryBuilder_ != null) {
+        return childEntryBuilder_.getMessageOrBuilder();
+      } else {
+        return childEntry_ == null ?
+            com.antinvestor.apis.profile.v1.EntryItem.getDefaultInstance() : childEntry_;
+      }
+    }
+    /**
+     * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.antinvestor.apis.profile.v1.EntryItem, com.antinvestor.apis.profile.v1.EntryItem.Builder, com.antinvestor.apis.profile.v1.EntryItemOrBuilder> 
+        getChildEntryFieldBuilder() {
+      if (childEntryBuilder_ == null) {
+        childEntryBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.antinvestor.apis.profile.v1.EntryItem, com.antinvestor.apis.profile.v1.EntryItem.Builder, com.antinvestor.apis.profile.v1.EntryItemOrBuilder>(
+                getChildEntry(),
+                getParentForChildren(),
+                isClean());
+        childEntry_ = null;
+      }
+      return childEntryBuilder_;
+    }
+
+    private com.antinvestor.apis.profile.v1.EntryItem parentEntry_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.antinvestor.apis.profile.v1.EntryItem, com.antinvestor.apis.profile.v1.EntryItem.Builder, com.antinvestor.apis.profile.v1.EntryItemOrBuilder> parentEntryBuilder_;
+    /**
+     * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
+     * @return Whether the parentEntry field is set.
+     */
+    public boolean hasParentEntry() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
+     * @return The parentEntry.
+     */
+    public com.antinvestor.apis.profile.v1.EntryItem getParentEntry() {
+      if (parentEntryBuilder_ == null) {
+        return parentEntry_ == null ? com.antinvestor.apis.profile.v1.EntryItem.getDefaultInstance() : parentEntry_;
+      } else {
+        return parentEntryBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
+     */
+    public Builder setParentEntry(com.antinvestor.apis.profile.v1.EntryItem value) {
+      if (parentEntryBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        parentEntry_ = value;
+      } else {
+        parentEntryBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
+     */
+    public Builder setParentEntry(
+        com.antinvestor.apis.profile.v1.EntryItem.Builder builderForValue) {
+      if (parentEntryBuilder_ == null) {
+        parentEntry_ = builderForValue.build();
+      } else {
+        parentEntryBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
+     */
+    public Builder mergeParentEntry(com.antinvestor.apis.profile.v1.EntryItem value) {
+      if (parentEntryBuilder_ == null) {
+        if (((bitField0_ & 0x00000010) != 0) &&
+          parentEntry_ != null &&
+          parentEntry_ != com.antinvestor.apis.profile.v1.EntryItem.getDefaultInstance()) {
+          getParentEntryBuilder().mergeFrom(value);
+        } else {
+          parentEntry_ = value;
+        }
+      } else {
+        parentEntryBuilder_.mergeFrom(value);
+      }
+      if (parentEntry_ != null) {
+        bitField0_ |= 0x00000010;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
+     */
+    public Builder clearParentEntry() {
+      bitField0_ = (bitField0_ & ~0x00000010);
+      parentEntry_ = null;
+      if (parentEntryBuilder_ != null) {
+        parentEntryBuilder_.dispose();
+        parentEntryBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
+     */
+    public com.antinvestor.apis.profile.v1.EntryItem.Builder getParentEntryBuilder() {
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return getParentEntryFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
+     */
+    public com.antinvestor.apis.profile.v1.EntryItemOrBuilder getParentEntryOrBuilder() {
+      if (parentEntryBuilder_ != null) {
+        return parentEntryBuilder_.getMessageOrBuilder();
+      } else {
+        return parentEntry_ == null ?
+            com.antinvestor.apis.profile.v1.EntryItem.getDefaultInstance() : parentEntry_;
+      }
+    }
+    /**
+     * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.antinvestor.apis.profile.v1.EntryItem, com.antinvestor.apis.profile.v1.EntryItem.Builder, com.antinvestor.apis.profile.v1.EntryItemOrBuilder> 
+        getParentEntryFieldBuilder() {
+      if (parentEntryBuilder_ == null) {
+        parentEntryBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.antinvestor.apis.profile.v1.EntryItem, com.antinvestor.apis.profile.v1.EntryItem.Builder, com.antinvestor.apis.profile.v1.EntryItemOrBuilder>(
+                getParentEntry(),
+                getParentForChildren(),
+                isClean());
+        parentEntry_ = null;
+      }
+      return parentEntryBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.antinvestor.apis.profile.v1.ProfileObject, com.antinvestor.apis.profile.v1.ProfileObject.Builder, com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder> childProfileBuilder_;
+    /**
+     * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
+     * @return Whether the childProfile field is set.
      */
     @java.lang.Override
-    public com.antinvestor.apis.profile.v1.ProfileObject getProfile() {
-      if (profileBuilder_ == null) {
-        if (childCase_ == 4) {
+    public boolean hasChildProfile() {
+      return childCase_ == 6;
+    }
+    /**
+     * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
+     * @return The childProfile.
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.profile.v1.ProfileObject getChildProfile() {
+      if (childProfileBuilder_ == null) {
+        if (childCase_ == 6) {
           return (com.antinvestor.apis.profile.v1.ProfileObject) child_;
         }
         return com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance();
       } else {
-        if (childCase_ == 4) {
-          return profileBuilder_.getMessage();
+        if (childCase_ == 6) {
+          return childProfileBuilder_.getMessage();
         }
         return com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance();
       }
     }
     /**
-     * <code>.profile.v1.ProfileObject profile = 4 [json_name = "profile"];</code>
+     * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
      */
-    public Builder setProfile(com.antinvestor.apis.profile.v1.ProfileObject value) {
-      if (profileBuilder_ == null) {
+    public Builder setChildProfile(com.antinvestor.apis.profile.v1.ProfileObject value) {
+      if (childProfileBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
         child_ = value;
         onChanged();
       } else {
-        profileBuilder_.setMessage(value);
+        childProfileBuilder_.setMessage(value);
       }
-      childCase_ = 4;
+      childCase_ = 6;
       return this;
     }
     /**
-     * <code>.profile.v1.ProfileObject profile = 4 [json_name = "profile"];</code>
+     * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
      */
-    public Builder setProfile(
+    public Builder setChildProfile(
         com.antinvestor.apis.profile.v1.ProfileObject.Builder builderForValue) {
-      if (profileBuilder_ == null) {
+      if (childProfileBuilder_ == null) {
         child_ = builderForValue.build();
         onChanged();
       } else {
-        profileBuilder_.setMessage(builderForValue.build());
+        childProfileBuilder_.setMessage(builderForValue.build());
       }
-      childCase_ = 4;
+      childCase_ = 6;
       return this;
     }
     /**
-     * <code>.profile.v1.ProfileObject profile = 4 [json_name = "profile"];</code>
+     * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
      */
-    public Builder mergeProfile(com.antinvestor.apis.profile.v1.ProfileObject value) {
-      if (profileBuilder_ == null) {
-        if (childCase_ == 4 &&
+    public Builder mergeChildProfile(com.antinvestor.apis.profile.v1.ProfileObject value) {
+      if (childProfileBuilder_ == null) {
+        if (childCase_ == 6 &&
             child_ != com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance()) {
           child_ = com.antinvestor.apis.profile.v1.ProfileObject.newBuilder((com.antinvestor.apis.profile.v1.ProfileObject) child_)
               .mergeFrom(value).buildPartial();
@@ -1151,140 +1732,140 @@ java.lang.String defaultValue) {
         }
         onChanged();
       } else {
-        if (childCase_ == 4) {
-          profileBuilder_.mergeFrom(value);
+        if (childCase_ == 6) {
+          childProfileBuilder_.mergeFrom(value);
         } else {
-          profileBuilder_.setMessage(value);
+          childProfileBuilder_.setMessage(value);
         }
       }
-      childCase_ = 4;
+      childCase_ = 6;
       return this;
     }
     /**
-     * <code>.profile.v1.ProfileObject profile = 4 [json_name = "profile"];</code>
+     * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
      */
-    public Builder clearProfile() {
-      if (profileBuilder_ == null) {
-        if (childCase_ == 4) {
+    public Builder clearChildProfile() {
+      if (childProfileBuilder_ == null) {
+        if (childCase_ == 6) {
           childCase_ = 0;
           child_ = null;
           onChanged();
         }
       } else {
-        if (childCase_ == 4) {
+        if (childCase_ == 6) {
           childCase_ = 0;
           child_ = null;
         }
-        profileBuilder_.clear();
+        childProfileBuilder_.clear();
       }
       return this;
     }
     /**
-     * <code>.profile.v1.ProfileObject profile = 4 [json_name = "profile"];</code>
+     * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
      */
-    public com.antinvestor.apis.profile.v1.ProfileObject.Builder getProfileBuilder() {
-      return getProfileFieldBuilder().getBuilder();
+    public com.antinvestor.apis.profile.v1.ProfileObject.Builder getChildProfileBuilder() {
+      return getChildProfileFieldBuilder().getBuilder();
     }
     /**
-     * <code>.profile.v1.ProfileObject profile = 4 [json_name = "profile"];</code>
+     * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
      */
     @java.lang.Override
-    public com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder getProfileOrBuilder() {
-      if ((childCase_ == 4) && (profileBuilder_ != null)) {
-        return profileBuilder_.getMessageOrBuilder();
+    public com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder getChildProfileOrBuilder() {
+      if ((childCase_ == 6) && (childProfileBuilder_ != null)) {
+        return childProfileBuilder_.getMessageOrBuilder();
       } else {
-        if (childCase_ == 4) {
+        if (childCase_ == 6) {
           return (com.antinvestor.apis.profile.v1.ProfileObject) child_;
         }
         return com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance();
       }
     }
     /**
-     * <code>.profile.v1.ProfileObject profile = 4 [json_name = "profile"];</code>
+     * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         com.antinvestor.apis.profile.v1.ProfileObject, com.antinvestor.apis.profile.v1.ProfileObject.Builder, com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder> 
-        getProfileFieldBuilder() {
-      if (profileBuilder_ == null) {
-        if (!(childCase_ == 4)) {
+        getChildProfileFieldBuilder() {
+      if (childProfileBuilder_ == null) {
+        if (!(childCase_ == 6)) {
           child_ = com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance();
         }
-        profileBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+        childProfileBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
             com.antinvestor.apis.profile.v1.ProfileObject, com.antinvestor.apis.profile.v1.ProfileObject.Builder, com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder>(
                 (com.antinvestor.apis.profile.v1.ProfileObject) child_,
                 getParentForChildren(),
                 isClean());
         child_ = null;
       }
-      childCase_ = 4;
+      childCase_ = 6;
       onChanged();
-      return profileBuilder_;
+      return childProfileBuilder_;
     }
 
     private com.google.protobuf.SingleFieldBuilderV3<
-        com.antinvestor.apis.profile.v1.ContactObject, com.antinvestor.apis.profile.v1.ContactObject.Builder, com.antinvestor.apis.profile.v1.ContactObjectOrBuilder> contactBuilder_;
+        com.antinvestor.apis.profile.v1.ContactObject, com.antinvestor.apis.profile.v1.ContactObject.Builder, com.antinvestor.apis.profile.v1.ContactObjectOrBuilder> childContactBuilder_;
     /**
-     * <code>.profile.v1.ContactObject contact = 5 [json_name = "contact"];</code>
-     * @return Whether the contact field is set.
+     * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
+     * @return Whether the childContact field is set.
      */
     @java.lang.Override
-    public boolean hasContact() {
-      return childCase_ == 5;
+    public boolean hasChildContact() {
+      return childCase_ == 7;
     }
     /**
-     * <code>.profile.v1.ContactObject contact = 5 [json_name = "contact"];</code>
-     * @return The contact.
+     * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
+     * @return The childContact.
      */
     @java.lang.Override
-    public com.antinvestor.apis.profile.v1.ContactObject getContact() {
-      if (contactBuilder_ == null) {
-        if (childCase_ == 5) {
+    public com.antinvestor.apis.profile.v1.ContactObject getChildContact() {
+      if (childContactBuilder_ == null) {
+        if (childCase_ == 7) {
           return (com.antinvestor.apis.profile.v1.ContactObject) child_;
         }
         return com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance();
       } else {
-        if (childCase_ == 5) {
-          return contactBuilder_.getMessage();
+        if (childCase_ == 7) {
+          return childContactBuilder_.getMessage();
         }
         return com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance();
       }
     }
     /**
-     * <code>.profile.v1.ContactObject contact = 5 [json_name = "contact"];</code>
+     * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
      */
-    public Builder setContact(com.antinvestor.apis.profile.v1.ContactObject value) {
-      if (contactBuilder_ == null) {
+    public Builder setChildContact(com.antinvestor.apis.profile.v1.ContactObject value) {
+      if (childContactBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
         child_ = value;
         onChanged();
       } else {
-        contactBuilder_.setMessage(value);
+        childContactBuilder_.setMessage(value);
       }
-      childCase_ = 5;
+      childCase_ = 7;
       return this;
     }
     /**
-     * <code>.profile.v1.ContactObject contact = 5 [json_name = "contact"];</code>
+     * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
      */
-    public Builder setContact(
+    public Builder setChildContact(
         com.antinvestor.apis.profile.v1.ContactObject.Builder builderForValue) {
-      if (contactBuilder_ == null) {
+      if (childContactBuilder_ == null) {
         child_ = builderForValue.build();
         onChanged();
       } else {
-        contactBuilder_.setMessage(builderForValue.build());
+        childContactBuilder_.setMessage(builderForValue.build());
       }
-      childCase_ = 5;
+      childCase_ = 7;
       return this;
     }
     /**
-     * <code>.profile.v1.ContactObject contact = 5 [json_name = "contact"];</code>
+     * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
      */
-    public Builder mergeContact(com.antinvestor.apis.profile.v1.ContactObject value) {
-      if (contactBuilder_ == null) {
-        if (childCase_ == 5 &&
+    public Builder mergeChildContact(com.antinvestor.apis.profile.v1.ContactObject value) {
+      if (childContactBuilder_ == null) {
+        if (childCase_ == 7 &&
             child_ != com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance()) {
           child_ = com.antinvestor.apis.profile.v1.ContactObject.newBuilder((com.antinvestor.apis.profile.v1.ContactObject) child_)
               .mergeFrom(value).buildPartial();
@@ -1293,74 +1874,358 @@ java.lang.String defaultValue) {
         }
         onChanged();
       } else {
-        if (childCase_ == 5) {
-          contactBuilder_.mergeFrom(value);
+        if (childCase_ == 7) {
+          childContactBuilder_.mergeFrom(value);
         } else {
-          contactBuilder_.setMessage(value);
+          childContactBuilder_.setMessage(value);
         }
       }
-      childCase_ = 5;
+      childCase_ = 7;
       return this;
     }
     /**
-     * <code>.profile.v1.ContactObject contact = 5 [json_name = "contact"];</code>
+     * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
      */
-    public Builder clearContact() {
-      if (contactBuilder_ == null) {
-        if (childCase_ == 5) {
+    public Builder clearChildContact() {
+      if (childContactBuilder_ == null) {
+        if (childCase_ == 7) {
           childCase_ = 0;
           child_ = null;
           onChanged();
         }
       } else {
-        if (childCase_ == 5) {
+        if (childCase_ == 7) {
           childCase_ = 0;
           child_ = null;
         }
-        contactBuilder_.clear();
+        childContactBuilder_.clear();
       }
       return this;
     }
     /**
-     * <code>.profile.v1.ContactObject contact = 5 [json_name = "contact"];</code>
+     * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
      */
-    public com.antinvestor.apis.profile.v1.ContactObject.Builder getContactBuilder() {
-      return getContactFieldBuilder().getBuilder();
+    public com.antinvestor.apis.profile.v1.ContactObject.Builder getChildContactBuilder() {
+      return getChildContactFieldBuilder().getBuilder();
     }
     /**
-     * <code>.profile.v1.ContactObject contact = 5 [json_name = "contact"];</code>
+     * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
      */
     @java.lang.Override
-    public com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getContactOrBuilder() {
-      if ((childCase_ == 5) && (contactBuilder_ != null)) {
-        return contactBuilder_.getMessageOrBuilder();
+    public com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getChildContactOrBuilder() {
+      if ((childCase_ == 7) && (childContactBuilder_ != null)) {
+        return childContactBuilder_.getMessageOrBuilder();
       } else {
-        if (childCase_ == 5) {
+        if (childCase_ == 7) {
           return (com.antinvestor.apis.profile.v1.ContactObject) child_;
         }
         return com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance();
       }
     }
     /**
-     * <code>.profile.v1.ContactObject contact = 5 [json_name = "contact"];</code>
+     * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         com.antinvestor.apis.profile.v1.ContactObject, com.antinvestor.apis.profile.v1.ContactObject.Builder, com.antinvestor.apis.profile.v1.ContactObjectOrBuilder> 
-        getContactFieldBuilder() {
-      if (contactBuilder_ == null) {
-        if (!(childCase_ == 5)) {
+        getChildContactFieldBuilder() {
+      if (childContactBuilder_ == null) {
+        if (!(childCase_ == 7)) {
           child_ = com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance();
         }
-        contactBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+        childContactBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
             com.antinvestor.apis.profile.v1.ContactObject, com.antinvestor.apis.profile.v1.ContactObject.Builder, com.antinvestor.apis.profile.v1.ContactObjectOrBuilder>(
                 (com.antinvestor.apis.profile.v1.ContactObject) child_,
                 getParentForChildren(),
                 isClean());
         child_ = null;
       }
-      childCase_ = 5;
+      childCase_ = 7;
       onChanged();
-      return contactBuilder_;
+      return childContactBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.antinvestor.apis.profile.v1.ProfileObject, com.antinvestor.apis.profile.v1.ProfileObject.Builder, com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder> parentProfileBuilder_;
+    /**
+     * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
+     * @return Whether the parentProfile field is set.
+     */
+    @java.lang.Override
+    public boolean hasParentProfile() {
+      return parentCase_ == 8;
+    }
+    /**
+     * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
+     * @return The parentProfile.
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.profile.v1.ProfileObject getParentProfile() {
+      if (parentProfileBuilder_ == null) {
+        if (parentCase_ == 8) {
+          return (com.antinvestor.apis.profile.v1.ProfileObject) parent_;
+        }
+        return com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance();
+      } else {
+        if (parentCase_ == 8) {
+          return parentProfileBuilder_.getMessage();
+        }
+        return com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
+     */
+    public Builder setParentProfile(com.antinvestor.apis.profile.v1.ProfileObject value) {
+      if (parentProfileBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        parent_ = value;
+        onChanged();
+      } else {
+        parentProfileBuilder_.setMessage(value);
+      }
+      parentCase_ = 8;
+      return this;
+    }
+    /**
+     * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
+     */
+    public Builder setParentProfile(
+        com.antinvestor.apis.profile.v1.ProfileObject.Builder builderForValue) {
+      if (parentProfileBuilder_ == null) {
+        parent_ = builderForValue.build();
+        onChanged();
+      } else {
+        parentProfileBuilder_.setMessage(builderForValue.build());
+      }
+      parentCase_ = 8;
+      return this;
+    }
+    /**
+     * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
+     */
+    public Builder mergeParentProfile(com.antinvestor.apis.profile.v1.ProfileObject value) {
+      if (parentProfileBuilder_ == null) {
+        if (parentCase_ == 8 &&
+            parent_ != com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance()) {
+          parent_ = com.antinvestor.apis.profile.v1.ProfileObject.newBuilder((com.antinvestor.apis.profile.v1.ProfileObject) parent_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          parent_ = value;
+        }
+        onChanged();
+      } else {
+        if (parentCase_ == 8) {
+          parentProfileBuilder_.mergeFrom(value);
+        } else {
+          parentProfileBuilder_.setMessage(value);
+        }
+      }
+      parentCase_ = 8;
+      return this;
+    }
+    /**
+     * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
+     */
+    public Builder clearParentProfile() {
+      if (parentProfileBuilder_ == null) {
+        if (parentCase_ == 8) {
+          parentCase_ = 0;
+          parent_ = null;
+          onChanged();
+        }
+      } else {
+        if (parentCase_ == 8) {
+          parentCase_ = 0;
+          parent_ = null;
+        }
+        parentProfileBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
+     */
+    public com.antinvestor.apis.profile.v1.ProfileObject.Builder getParentProfileBuilder() {
+      return getParentProfileFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder getParentProfileOrBuilder() {
+      if ((parentCase_ == 8) && (parentProfileBuilder_ != null)) {
+        return parentProfileBuilder_.getMessageOrBuilder();
+      } else {
+        if (parentCase_ == 8) {
+          return (com.antinvestor.apis.profile.v1.ProfileObject) parent_;
+        }
+        return com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.antinvestor.apis.profile.v1.ProfileObject, com.antinvestor.apis.profile.v1.ProfileObject.Builder, com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder> 
+        getParentProfileFieldBuilder() {
+      if (parentProfileBuilder_ == null) {
+        if (!(parentCase_ == 8)) {
+          parent_ = com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance();
+        }
+        parentProfileBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.antinvestor.apis.profile.v1.ProfileObject, com.antinvestor.apis.profile.v1.ProfileObject.Builder, com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder>(
+                (com.antinvestor.apis.profile.v1.ProfileObject) parent_,
+                getParentForChildren(),
+                isClean());
+        parent_ = null;
+      }
+      parentCase_ = 8;
+      onChanged();
+      return parentProfileBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.antinvestor.apis.profile.v1.ContactObject, com.antinvestor.apis.profile.v1.ContactObject.Builder, com.antinvestor.apis.profile.v1.ContactObjectOrBuilder> parentContactBuilder_;
+    /**
+     * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
+     * @return Whether the parentContact field is set.
+     */
+    @java.lang.Override
+    public boolean hasParentContact() {
+      return parentCase_ == 9;
+    }
+    /**
+     * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
+     * @return The parentContact.
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.profile.v1.ContactObject getParentContact() {
+      if (parentContactBuilder_ == null) {
+        if (parentCase_ == 9) {
+          return (com.antinvestor.apis.profile.v1.ContactObject) parent_;
+        }
+        return com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance();
+      } else {
+        if (parentCase_ == 9) {
+          return parentContactBuilder_.getMessage();
+        }
+        return com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
+     */
+    public Builder setParentContact(com.antinvestor.apis.profile.v1.ContactObject value) {
+      if (parentContactBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        parent_ = value;
+        onChanged();
+      } else {
+        parentContactBuilder_.setMessage(value);
+      }
+      parentCase_ = 9;
+      return this;
+    }
+    /**
+     * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
+     */
+    public Builder setParentContact(
+        com.antinvestor.apis.profile.v1.ContactObject.Builder builderForValue) {
+      if (parentContactBuilder_ == null) {
+        parent_ = builderForValue.build();
+        onChanged();
+      } else {
+        parentContactBuilder_.setMessage(builderForValue.build());
+      }
+      parentCase_ = 9;
+      return this;
+    }
+    /**
+     * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
+     */
+    public Builder mergeParentContact(com.antinvestor.apis.profile.v1.ContactObject value) {
+      if (parentContactBuilder_ == null) {
+        if (parentCase_ == 9 &&
+            parent_ != com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance()) {
+          parent_ = com.antinvestor.apis.profile.v1.ContactObject.newBuilder((com.antinvestor.apis.profile.v1.ContactObject) parent_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          parent_ = value;
+        }
+        onChanged();
+      } else {
+        if (parentCase_ == 9) {
+          parentContactBuilder_.mergeFrom(value);
+        } else {
+          parentContactBuilder_.setMessage(value);
+        }
+      }
+      parentCase_ = 9;
+      return this;
+    }
+    /**
+     * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
+     */
+    public Builder clearParentContact() {
+      if (parentContactBuilder_ == null) {
+        if (parentCase_ == 9) {
+          parentCase_ = 0;
+          parent_ = null;
+          onChanged();
+        }
+      } else {
+        if (parentCase_ == 9) {
+          parentCase_ = 0;
+          parent_ = null;
+        }
+        parentContactBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
+     */
+    public com.antinvestor.apis.profile.v1.ContactObject.Builder getParentContactBuilder() {
+      return getParentContactFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getParentContactOrBuilder() {
+      if ((parentCase_ == 9) && (parentContactBuilder_ != null)) {
+        return parentContactBuilder_.getMessageOrBuilder();
+      } else {
+        if (parentCase_ == 9) {
+          return (com.antinvestor.apis.profile.v1.ContactObject) parent_;
+        }
+        return com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.antinvestor.apis.profile.v1.ContactObject, com.antinvestor.apis.profile.v1.ContactObject.Builder, com.antinvestor.apis.profile.v1.ContactObjectOrBuilder> 
+        getParentContactFieldBuilder() {
+      if (parentContactBuilder_ == null) {
+        if (!(parentCase_ == 9)) {
+          parent_ = com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance();
+        }
+        parentContactBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.antinvestor.apis.profile.v1.ContactObject, com.antinvestor.apis.profile.v1.ContactObject.Builder, com.antinvestor.apis.profile.v1.ContactObjectOrBuilder>(
+                (com.antinvestor.apis.profile.v1.ContactObject) parent_,
+                getParentForChildren(),
+                isClean());
+        parent_ = null;
+      }
+      parentCase_ = 9;
+      onChanged();
+      return parentContactBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
