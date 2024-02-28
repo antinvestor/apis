@@ -67,8 +67,7 @@ public class SettingsClient implements AutoCloseable {
 
     public static Optional<LocalDateTime> asLocalDateTime(String settingValue) {
         try {
-            var zonedDateTime = ZonedDateTime.parse(settingValue, DateTimeFormatter.ISO_ZONED_DATE_TIME);
-            return Optional.of(zonedDateTime.toLocalDateTime());
+            return Optional.of(LocalDateTime.parse(settingValue, DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         } catch (DateTimeParseException dtpe) {
             return Optional.empty();
         }
@@ -220,8 +219,7 @@ public class SettingsClient implements AutoCloseable {
         String stringSettingValue;
         if (settingValue instanceof LocalDateTime dateSettingValue) {
             stringSettingValue = dateSettingValue.
-                    atZone(ZoneId.systemDefault()).
-                    format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+                    format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         } else {
             stringSettingValue = String.valueOf(settingValue);
         }
@@ -247,8 +245,7 @@ public class SettingsClient implements AutoCloseable {
         String stringSettingValue;
         if (settingValue instanceof LocalDateTime dateSettingValue) {
             stringSettingValue = dateSettingValue.
-                    atZone(ZoneId.systemDefault()).
-                    format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+                    format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         } else {
             stringSettingValue = String.valueOf(settingValue);
         }
