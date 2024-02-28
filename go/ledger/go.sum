@@ -1,5 +1,7 @@
 github.com/antinvestor/apis/go/common v1.12.1 h1:+eIViKz5Q4a/UuGZgHRdK0ja+3BUCiwtKizZZGK6r3Y=
 github.com/antinvestor/apis/go/common v1.12.1/go.mod h1:ZJYKXFz+guTx1vPoiLGFrtg3b8MUVFtuf8olnbxEzxA=
+github.com/antinvestor/apis/go/common v1.12.2 h1:FCC+YVacjln3r5LPyObP3k+HkWYcIIWTeeK9QCblkog=
+github.com/antinvestor/apis/go/common v1.12.2/go.mod h1:ZJYKXFz+guTx1vPoiLGFrtg3b8MUVFtuf8olnbxEzxA=
 github.com/golang/protobuf v1.5.0/go.mod h1:FsONVRAS9T7sI+LIUmWTfcYkHO4aIWwzhcaSAoJOfIk=
 github.com/golang/protobuf v1.5.2/go.mod h1:XVQd3VNwM+JqD3oG2Ue2ip4fOMUkwXdXDdiuN0vRsmY=
 github.com/golang/protobuf v1.5.3 h1:KhyjKVUg7Usr/dYsdSqoFveMYd5ko72D+zANwlG1mmg=
