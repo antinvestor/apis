@@ -28,6 +28,7 @@ import jakarta.inject.Inject;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Iterator;
@@ -66,7 +67,8 @@ public class SettingsClient implements AutoCloseable {
 
     public static Optional<LocalDateTime> asLocalDateTime(String settingValue) {
         try {
-            return Optional.of(LocalDateTime.parse(settingValue, DateTimeFormatter.ISO_ZONED_DATE_TIME));
+            var zonedDateTime = ZonedDateTime.parse(settingValue, DateTimeFormatter.ISO_ZONED_DATE_TIME);
+            return Optional.of(zonedDateTime.toLocalDateTime());
         } catch (DateTimeParseException dtpe) {
             return Optional.empty();
         }
@@ -244,7 +246,9 @@ public class SettingsClient implements AutoCloseable {
     public String setObjectSetting(String moduleName, BaseModel object, String settingName, Object settingValue) {
         String stringSettingValue;
         if (settingValue instanceof LocalDateTime dateSettingValue) {
-            stringSettingValue = dateSettingValue.format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+            stringSettingValue = dateSettingValue.
+                    atZone(ZoneId.systemDefault()).
+                    format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
         } else {
             stringSettingValue = String.valueOf(settingValue);
         }
