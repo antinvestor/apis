@@ -19,7 +19,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.61.1)",
+    value = "by gRPC proto compiler (version 1.62.2)",
     comments = "Source: settings/v1/settings.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class SettingsServiceGrpc {
