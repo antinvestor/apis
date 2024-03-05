@@ -8,7 +8,7 @@ require (
 	github.com/antinvestor/apis/go/common v1.12.2
 	go.uber.org/mock v0.4.0
 	google.golang.org/genproto v0.0.0-20240304212257-790db918fca8
-	google.golang.org/grpc v1.62.0
+	google.golang.org/grpc v1.62.1
 	google.golang.org/protobuf v1.32.0
 )
 
