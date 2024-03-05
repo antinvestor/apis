@@ -66,7 +66,7 @@ subprojects {
         api("io.grpc:grpc-protobuf:1.62.2")
         api("io.grpc:grpc-services:1.62.2")
         api("io.grpc:grpc-stub:1.62.2")
-        api("build.buf:protovalidate:0.1.9")
+        api("build.buf:protovalidate:0.2.0")
 
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
         api("com.googlecode.libphonenumber:libphonenumber:8.13.31")
