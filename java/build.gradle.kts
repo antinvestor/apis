@@ -69,7 +69,7 @@ subprojects {
         api("build.buf:protovalidate:0.2.0")
 
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
-        api("com.googlecode.libphonenumber:libphonenumber:8.13.32")
+        api("com.googlecode.libphonenumber:libphonenumber:8.13.33")
 
         api("org.slf4j:slf4j-api:2.0.12")
 
