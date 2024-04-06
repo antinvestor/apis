@@ -292,7 +292,7 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 		dialOptions = append(dialOptions, unaryInterceptOption, streamInterceptOption)
 	}
 
-	serviceConnection, err := grpc.Dial(
+	serviceConnection, err := grpc.NewClient(
 		ds.Endpoint, dialOptions...,
 	)
 	return serviceConnection, err
