@@ -18,67 +18,69 @@
 // Protobuf Java Version: 4.26.1
 package com.antinvestor.apis.common.v1;
 
-public interface StatusResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:common.v1.StatusResponse)
+public interface ContactLinkOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:common.v1.ContactLink)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return The id.
+   * <code>string profile_name = 1 [json_name = "profileName", (.buf.validate.field) = { ... }</code>
+   * @return The profileName.
    */
-  java.lang.String getId();
+  java.lang.String getProfileName();
   /**
-   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for id.
+   * <code>string profile_name = 1 [json_name = "profileName", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileName.
    */
   com.google.protobuf.ByteString
-      getIdBytes();
+      getProfileNameBytes();
 
   /**
-   * <code>.common.v1.STATE state = 2 [json_name = "state"];</code>
-   * @return The enum numeric value on the wire for state.
+   * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The profileId.
    */
-  int getStateValue();
+  java.lang.String getProfileId();
   /**
-   * <code>.common.v1.STATE state = 2 [json_name = "state"];</code>
-   * @return The state.
-   */
-  com.antinvestor.apis.common.v1.STATE getState();
-
-  /**
-   * <code>.common.v1.STATUS status = 3 [json_name = "status"];</code>
-   * @return The enum numeric value on the wire for status.
-   */
-  int getStatusValue();
-  /**
-   * <code>.common.v1.STATUS status = 3 [json_name = "status"];</code>
-   * @return The status.
-   */
-  com.antinvestor.apis.common.v1.STATUS getStatus();
-
-  /**
-   * <code>string external_id = 4 [json_name = "externalId"];</code>
-   * @return The externalId.
-   */
-  java.lang.String getExternalId();
-  /**
-   * <code>string external_id = 4 [json_name = "externalId"];</code>
-   * @return The bytes for externalId.
+   * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileId.
    */
   com.google.protobuf.ByteString
-      getExternalIdBytes();
+      getProfileIdBytes();
 
   /**
-   * <code>string transient_id = 5 [json_name = "transientId"];</code>
-   * @return The transientId.
+   * <code>string profile_image_id = 3 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
+   * @return The profileImageId.
    */
-  java.lang.String getTransientId();
+  java.lang.String getProfileImageId();
   /**
-   * <code>string transient_id = 5 [json_name = "transientId"];</code>
-   * @return The bytes for transientId.
+   * <code>string profile_image_id = 3 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileImageId.
    */
   com.google.protobuf.ByteString
-      getTransientIdBytes();
+      getProfileImageIdBytes();
+
+  /**
+   * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
+   * @return The contactId.
+   */
+  java.lang.String getContactId();
+  /**
+   * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for contactId.
+   */
+  com.google.protobuf.ByteString
+      getContactIdBytes();
+
+  /**
+   * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
+   * @return The detail.
+   */
+  java.lang.String getDetail();
+  /**
+   * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for detail.
+   */
+  com.google.protobuf.ByteString
+      getDetailBytes();
 
   /**
    * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>

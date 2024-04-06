@@ -19,7 +19,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.62.2)",
+    value = "by gRPC proto compiler (version 1.63.0)",
     comments = "Source: ocr/v1/ocr.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class OCRServiceGrpc {
