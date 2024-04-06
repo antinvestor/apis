@@ -17,7 +17,6 @@ syntax = "proto3";
 package lostid.v1;
 
 import "buf/validate/validate.proto";
-import "google/type/interval.proto";
 import "common/v1/common.proto";
 
 option go_package = "github.com/antinvestor/apis/go/lostid/v1;lostidv1";
@@ -52,8 +51,8 @@ message ListCollectibleRequest {
     // either pagination or time interval must be set.
     option (buf.validate.oneof).required = true;
 
-    Pagination pagination = 1;
-    google.type.Interval interval = 2;
+    common.v1.Pagination pagination = 1;
+    common.v1.Interval interval = 2;
   }
 }
 
@@ -119,18 +118,13 @@ message ProgressResponse {
   repeated TransactionItem transactions = 6;
 }
 
-message Pagination {
-  int32 count = 1;
-  int32 page = 2;
-}
-
 message ListSearchRequest {
   oneof range {
     // either pagination or time interval must be set.
     option (buf.validate.oneof).required = true;
 
-    Pagination pagination = 1;
-    google.type.Interval interval = 2;
+    common.v1.Pagination pagination = 1;
+    common.v1.Interval interval = 2;
   }
 }
 
@@ -143,8 +137,8 @@ message ListTransactionRequest {
     // either pagination or time interval must be set.
     option (buf.validate.oneof).required = true;
 
-    Pagination pagination = 1;
-    google.type.Interval interval = 2;
+    common.v1.Pagination pagination = 1;
+    common.v1.Interval interval = 2;
   }
 }
 

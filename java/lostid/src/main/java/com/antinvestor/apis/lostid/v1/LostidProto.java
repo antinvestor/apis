@@ -114,11 +114,6 @@ public final class LostidProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_lostid_v1_ProgressResponse_PropertiesEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_lostid_v1_Pagination_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_lostid_v1_Pagination_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_lostid_v1_ListSearchRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -148,92 +143,89 @@ public final class LostidProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026lostid/v1/lostid.proto\022\tlostid.v1\032\033buf" +
-      "/validate/validate.proto\032\032google/type/in" +
-      "terval.proto\032\026common/v1/common.proto\"\341\001\n" +
-      "\022CollectibleRequest\022=\n\007file_id\030\001 \003(\tB$\272H" +
-      "!\222\001\036\010\001\020\005\"\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006file" +
-      "Id\022M\n\nproperties\030\002 \003(\0132-.lostid.v1.Colle" +
-      "ctibleRequest.PropertiesEntryR\npropertie" +
-      "s\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024" +
-      "\n\005value\030\002 \001(\tR\005value:\0028\001\"\343\001\n\023Collectible" +
-      "Response\022\016\n\002id\030\001 \001(\tR\002id\022\027\n\007file_id\030\002 \003(" +
-      "\tR\006fileId\022N\n\nproperties\030\003 \003(\0132..lostid.v" +
-      "1.CollectibleResponse.PropertiesEntryR\np" +
-      "roperties\022\024\n\005state\030\004 \001(\tR\005state\032=\n\017Prope" +
-      "rtiesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 " +
-      "\001(\tR\005value:\0028\001\"\226\001\n\026ListCollectibleReques" +
-      "t\0227\n\npagination\030\001 \001(\0132\025.lostid.v1.Pagina" +
-      "tionH\000R\npagination\0223\n\010interval\030\002 \001(\0132\025.g" +
-      "oogle.type.IntervalH\000R\010intervalB\016\n\005range" +
-      "\022\005\272H\002\010\001\"M\n\027ListCollectibleResponse\0222\n\004da" +
-      "ta\030\001 \003(\0132\036.lostid.v1.CollectibleResponse" +
-      "R\004data\"\333\001\n\rSearchRequest\022+\n\002id\030\001 \001(\tB\033\272H" +
-      "\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\024\n\005query\030\002" +
-      " \001(\tR\005query\022H\n\nproperties\030\003 \003(\0132(.lostid" +
-      ".v1.SearchRequest.PropertiesEntryR\nprope" +
-      "rties\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\tR\003k" +
-      "ey\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\326\001\n\016SearchR" +
-      "esponse\022\016\n\002id\030\001 \001(\tR\002id\022\024\n\005query\030\002 \001(\tR\005" +
-      "query\022I\n\nproperties\030\003 \003(\0132).lostid.v1.Se" +
-      "archResponse.PropertiesEntryR\nproperties" +
-      "\022\024\n\005state\030\004 \001(\tR\005state\032=\n\017PropertiesEntr" +
-      "y\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005valu" +
-      "e:\0028\001\"q\n\017ProgressRequest\022+\n\002id\030\001 \001(\tB\033\272H" +
-      "\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\0221\n\004type\030\002 " +
-      "\001(\0162\023.lostid.v1.ItemTypeB\010\272H\005\202\001\002\020\001R\004type" +
-      "\"\241\001\n\017TransactionItem\022\016\n\002id\030\001 \001(\tR\002id\022\032\n\010" +
-      "datetime\030\002 \001(\tR\010datetime\022\026\n\006credit\030\003 \001(\010" +
-      "R\006credit\022(\n\006amount\030\004 \001(\0132\020.common.v1.Mon" +
-      "eyR\006amount\022 \n\013description\030\005 \001(\tR\013descrip" +
-      "tion\"r\n\014ProgressItem\022\016\n\002id\030\001 \001(\tR\002id\022\032\n\010" +
-      "datetime\030\002 \001(\tR\010datetime\022\024\n\005state\030\003 \001(\tR" +
-      "\005state\022 \n\013description\030\004 \001(\tR\013description" +
-      "\"\334\002\n\020ProgressResponse\022\016\n\002id\030\001 \001(\tR\002id\022\'\n" +
-      "\004type\030\002 \001(\0162\023.lostid.v1.ItemTypeR\004type\022K" +
-      "\n\nproperties\030\003 \003(\0132+.lostid.v1.ProgressR" +
-      "esponse.PropertiesEntryR\nproperties\022\024\n\005s" +
-      "tate\030\004 \001(\tR\005state\022-\n\005items\030\005 \003(\0132\027.losti" +
-      "d.v1.ProgressItemR\005items\022>\n\014transactions" +
-      "\030\006 \003(\0132\032.lostid.v1.TransactionItemR\014tran" +
-      "sactions\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\t" +
-      "R\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"6\n\nPagin" +
-      "ation\022\024\n\005count\030\001 \001(\005R\005count\022\022\n\004page\030\002 \001(" +
-      "\005R\004page\"\221\001\n\021ListSearchRequest\0227\n\npaginat" +
-      "ion\030\001 \001(\0132\025.lostid.v1.PaginationH\000R\npagi" +
-      "nation\0223\n\010interval\030\002 \001(\0132\025.google.type.I" +
-      "ntervalH\000R\010intervalB\016\n\005range\022\005\272H\002\010\001\"C\n\022L" +
-      "istSearchResponse\022-\n\004data\030\001 \003(\0132\031.lostid" +
-      ".v1.SearchResponseR\004data\"\226\001\n\026ListTransac" +
-      "tionRequest\0227\n\npagination\030\001 \001(\0132\025.lostid" +
-      ".v1.PaginationH\000R\npagination\0223\n\010interval" +
-      "\030\002 \001(\0132\025.google.type.IntervalH\000R\010interva" +
-      "lB\016\n\005range\022\005\272H\002\010\001\"I\n\027ListTransactionResp" +
-      "onse\022.\n\004data\030\001 \003(\0132\032.lostid.v1.Transacti" +
-      "onItemR\004data*8\n\010ItemType\022\017\n\013COLLECTIBLE\020" +
-      "\000\022\n\n\006SEARCH\020\001\022\017\n\013TRANSACTION\020\0022\346\003\n\rLostI" +
-      "dService\022L\n\013Collectible\022\035.lostid.v1.Coll" +
-      "ectibleRequest\032\036.lostid.v1.CollectibleRe" +
-      "sponse\022Z\n\017ListCollectible\022!.lostid.v1.Li" +
-      "stCollectibleRequest\032\".lostid.v1.ListCol" +
-      "lectibleResponse0\001\022=\n\006Search\022\030.lostid.v1" +
-      ".SearchRequest\032\031.lostid.v1.SearchRespons" +
-      "e\022K\n\nListSearch\022\034.lostid.v1.ListSearchRe" +
-      "quest\032\035.lostid.v1.ListSearchResponse0\001\022C" +
-      "\n\010Progress\022\032.lostid.v1.ProgressRequest\032\033" +
-      ".lostid.v1.ProgressResponse\022Z\n\017ListTrans" +
-      "action\022!.lostid.v1.ListTransactionReques" +
-      "t\032\".lostid.v1.ListTransactionResponse0\001B" +
-      "\254\001\n\036com.antinvestor.apis.lostid.v1B\013Lost" +
-      "idProtoP\001Z8github.com/antinvestor/apis/g" +
-      "o/lostid/lostid/v1;lostidv1\242\002\003LXX\252\002\tLost" +
-      "id.V1\312\002\tLostid\\V1\342\002\025Lostid\\V1\\GPBMetadat" +
-      "a\352\002\nLostid::V1b\006proto3"
+      "/validate/validate.proto\032\026common/v1/comm" +
+      "on.proto\"\341\001\n\022CollectibleRequest\022=\n\007file_" +
+      "id\030\001 \003(\tB$\272H!\222\001\036\010\001\020\005\"\030r\026\020\003\030(2\020[0-9a-z_-]" +
+      "{3,20}R\006fileId\022M\n\nproperties\030\002 \003(\0132-.los" +
+      "tid.v1.CollectibleRequest.PropertiesEntr" +
+      "yR\nproperties\032=\n\017PropertiesEntry\022\020\n\003key\030" +
+      "\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\343\001\n" +
+      "\023CollectibleResponse\022\016\n\002id\030\001 \001(\tR\002id\022\027\n\007" +
+      "file_id\030\002 \003(\tR\006fileId\022N\n\nproperties\030\003 \003(" +
+      "\0132..lostid.v1.CollectibleResponse.Proper" +
+      "tiesEntryR\nproperties\022\024\n\005state\030\004 \001(\tR\005st" +
+      "ate\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\tR\003key" +
+      "\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\224\001\n\026ListColle" +
+      "ctibleRequest\0227\n\npagination\030\001 \001(\0132\025.comm" +
+      "on.v1.PaginationH\000R\npagination\0221\n\010interv" +
+      "al\030\002 \001(\0132\023.common.v1.IntervalH\000R\010interva" +
+      "lB\016\n\005range\022\005\272H\002\010\001\"M\n\027ListCollectibleResp" +
+      "onse\0222\n\004data\030\001 \003(\0132\036.lostid.v1.Collectib" +
+      "leResponseR\004data\"\333\001\n\rSearchRequest\022+\n\002id" +
+      "\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022" +
+      "\024\n\005query\030\002 \001(\tR\005query\022H\n\nproperties\030\003 \003(" +
+      "\0132(.lostid.v1.SearchRequest.PropertiesEn" +
+      "tryR\nproperties\032=\n\017PropertiesEntry\022\020\n\003ke" +
+      "y\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\326" +
+      "\001\n\016SearchResponse\022\016\n\002id\030\001 \001(\tR\002id\022\024\n\005que" +
+      "ry\030\002 \001(\tR\005query\022I\n\nproperties\030\003 \003(\0132).lo" +
+      "stid.v1.SearchResponse.PropertiesEntryR\n" +
+      "properties\022\024\n\005state\030\004 \001(\tR\005state\032=\n\017Prop" +
+      "ertiesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002" +
+      " \001(\tR\005value:\0028\001\"q\n\017ProgressRequest\022+\n\002id" +
+      "\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022" +
+      "1\n\004type\030\002 \001(\0162\023.lostid.v1.ItemTypeB\010\272H\005\202" +
+      "\001\002\020\001R\004type\"\241\001\n\017TransactionItem\022\016\n\002id\030\001 \001" +
+      "(\tR\002id\022\032\n\010datetime\030\002 \001(\tR\010datetime\022\026\n\006cr" +
+      "edit\030\003 \001(\010R\006credit\022(\n\006amount\030\004 \001(\0132\020.com" +
+      "mon.v1.MoneyR\006amount\022 \n\013description\030\005 \001(" +
+      "\tR\013description\"r\n\014ProgressItem\022\016\n\002id\030\001 \001" +
+      "(\tR\002id\022\032\n\010datetime\030\002 \001(\tR\010datetime\022\024\n\005st" +
+      "ate\030\003 \001(\tR\005state\022 \n\013description\030\004 \001(\tR\013d" +
+      "escription\"\334\002\n\020ProgressResponse\022\016\n\002id\030\001 " +
+      "\001(\tR\002id\022\'\n\004type\030\002 \001(\0162\023.lostid.v1.ItemTy" +
+      "peR\004type\022K\n\nproperties\030\003 \003(\0132+.lostid.v1" +
+      ".ProgressResponse.PropertiesEntryR\nprope" +
+      "rties\022\024\n\005state\030\004 \001(\tR\005state\022-\n\005items\030\005 \003" +
+      "(\0132\027.lostid.v1.ProgressItemR\005items\022>\n\014tr" +
+      "ansactions\030\006 \003(\0132\032.lostid.v1.Transaction" +
+      "ItemR\014transactions\032=\n\017PropertiesEntry\022\020\n" +
+      "\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028" +
+      "\001\"\217\001\n\021ListSearchRequest\0227\n\npagination\030\001 " +
+      "\001(\0132\025.common.v1.PaginationH\000R\npagination" +
+      "\0221\n\010interval\030\002 \001(\0132\023.common.v1.IntervalH" +
+      "\000R\010intervalB\016\n\005range\022\005\272H\002\010\001\"C\n\022ListSearc" +
+      "hResponse\022-\n\004data\030\001 \003(\0132\031.lostid.v1.Sear" +
+      "chResponseR\004data\"\224\001\n\026ListTransactionRequ" +
+      "est\0227\n\npagination\030\001 \001(\0132\025.common.v1.Pagi" +
+      "nationH\000R\npagination\0221\n\010interval\030\002 \001(\0132\023" +
+      ".common.v1.IntervalH\000R\010intervalB\016\n\005range" +
+      "\022\005\272H\002\010\001\"I\n\027ListTransactionResponse\022.\n\004da" +
+      "ta\030\001 \003(\0132\032.lostid.v1.TransactionItemR\004da" +
+      "ta*8\n\010ItemType\022\017\n\013COLLECTIBLE\020\000\022\n\n\006SEARC" +
+      "H\020\001\022\017\n\013TRANSACTION\020\0022\346\003\n\rLostIdService\022L" +
+      "\n\013Collectible\022\035.lostid.v1.CollectibleReq" +
+      "uest\032\036.lostid.v1.CollectibleResponse\022Z\n\017" +
+      "ListCollectible\022!.lostid.v1.ListCollecti" +
+      "bleRequest\032\".lostid.v1.ListCollectibleRe" +
+      "sponse0\001\022=\n\006Search\022\030.lostid.v1.SearchReq" +
+      "uest\032\031.lostid.v1.SearchResponse\022K\n\nListS" +
+      "earch\022\034.lostid.v1.ListSearchRequest\032\035.lo" +
+      "stid.v1.ListSearchResponse0\001\022C\n\010Progress" +
+      "\022\032.lostid.v1.ProgressRequest\032\033.lostid.v1" +
+      ".ProgressResponse\022Z\n\017ListTransaction\022!.l" +
+      "ostid.v1.ListTransactionRequest\032\".lostid" +
+      ".v1.ListTransactionResponse0\001B\254\001\n\036com.an" +
+      "tinvestor.apis.lostid.v1B\013LostidProtoP\001Z" +
+      "8github.com/antinvestor/apis/go/lostid/l" +
+      "ostid/v1;lostidv1\242\002\003LXX\252\002\tLostid.V1\312\002\tLo" +
+      "stid\\V1\342\002\025Lostid\\V1\\GPBMetadata\352\002\nLostid" +
+      "::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           build.buf.validate.ValidateProto.getDescriptor(),
-          com.google.type.IntervalProto.getDescriptor(),
           com.antinvestor.apis.common.v1.CommonProto.getDescriptor(),
         });
     internal_static_lostid_v1_CollectibleRequest_descriptor =
@@ -326,39 +318,32 @@ public final class LostidProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_lostid_v1_ProgressResponse_PropertiesEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_lostid_v1_Pagination_descriptor =
-      getDescriptor().getMessageTypes().get(10);
-    internal_static_lostid_v1_Pagination_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_lostid_v1_Pagination_descriptor,
-        new java.lang.String[] { "Count", "Page", });
     internal_static_lostid_v1_ListSearchRequest_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_lostid_v1_ListSearchRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_lostid_v1_ListSearchRequest_descriptor,
         new java.lang.String[] { "Pagination", "Interval", "Range", });
     internal_static_lostid_v1_ListSearchResponse_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_lostid_v1_ListSearchResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_lostid_v1_ListSearchResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_lostid_v1_ListTransactionRequest_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_lostid_v1_ListTransactionRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_lostid_v1_ListTransactionRequest_descriptor,
         new java.lang.String[] { "Pagination", "Interval", "Range", });
     internal_static_lostid_v1_ListTransactionResponse_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_lostid_v1_ListTransactionResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_lostid_v1_ListTransactionResponse_descriptor,
         new java.lang.String[] { "Data", });
     descriptor.resolveAllFeaturesImmutable();
     build.buf.validate.ValidateProto.getDescriptor();
-    com.google.type.IntervalProto.getDescriptor();
     com.antinvestor.apis.common.v1.CommonProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();

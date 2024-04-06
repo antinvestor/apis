@@ -42,8 +42,6 @@ private static final long serialVersionUID = 0L;
   private SearchRequest() {
     query_ = "";
     idQuery_ = "";
-    startDate_ = "";
-    endDate_ = "";
     properties_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
   }
@@ -73,6 +71,7 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.common.v1.SearchRequest.class, com.antinvestor.apis.common.v1.SearchRequest.Builder.class);
   }
 
+  private int bitField0_;
   public static final int QUERY_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object query_ = "";
@@ -151,104 +150,30 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PAGE_FIELD_NUMBER = 3;
-  private long page_ = 0L;
+  public static final int LIMITS_FIELD_NUMBER = 3;
+  private com.antinvestor.apis.common.v1.Pagination limits_;
   /**
-   * <code>int64 page = 3 [json_name = "page"];</code>
-   * @return The page.
+   * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
+   * @return Whether the limits field is set.
    */
   @java.lang.Override
-  public long getPage() {
-    return page_;
-  }
-
-  public static final int COUNT_FIELD_NUMBER = 4;
-  private int count_ = 0;
-  /**
-   * <code>int32 count = 4 [json_name = "count"];</code>
-   * @return The count.
-   */
-  @java.lang.Override
-  public int getCount() {
-    return count_;
-  }
-
-  public static final int START_DATE_FIELD_NUMBER = 5;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object startDate_ = "";
-  /**
-   * <code>string start_date = 5 [json_name = "startDate"];</code>
-   * @return The startDate.
-   */
-  @java.lang.Override
-  public java.lang.String getStartDate() {
-    java.lang.Object ref = startDate_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      startDate_ = s;
-      return s;
-    }
+  public boolean hasLimits() {
+    return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * <code>string start_date = 5 [json_name = "startDate"];</code>
-   * @return The bytes for startDate.
+   * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
+   * @return The limits.
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getStartDateBytes() {
-    java.lang.Object ref = startDate_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      startDate_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int END_DATE_FIELD_NUMBER = 6;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object endDate_ = "";
-  /**
-   * <code>string end_date = 6 [json_name = "endDate"];</code>
-   * @return The endDate.
-   */
-  @java.lang.Override
-  public java.lang.String getEndDate() {
-    java.lang.Object ref = endDate_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      endDate_ = s;
-      return s;
-    }
+  public com.antinvestor.apis.common.v1.Pagination getLimits() {
+    return limits_ == null ? com.antinvestor.apis.common.v1.Pagination.getDefaultInstance() : limits_;
   }
   /**
-   * <code>string end_date = 6 [json_name = "endDate"];</code>
-   * @return The bytes for endDate.
+   * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getEndDateBytes() {
-    java.lang.Object ref = endDate_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      endDate_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public com.antinvestor.apis.common.v1.PaginationOrBuilder getLimitsOrBuilder() {
+    return limits_ == null ? com.antinvestor.apis.common.v1.Pagination.getDefaultInstance() : limits_;
   }
 
   public static final int PROPERTIES_FIELD_NUMBER = 7;
@@ -387,17 +312,8 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(idQuery_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, idQuery_);
     }
-    if (page_ != 0L) {
-      output.writeInt64(3, page_);
-    }
-    if (count_ != 0) {
-      output.writeInt32(4, count_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(startDate_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 5, startDate_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(endDate_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 6, endDate_);
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(3, getLimits());
     }
     for (int i = 0; i < properties_.size(); i++) {
       com.google.protobuf.GeneratedMessage.writeString(output, 7, properties_.getRaw(i));
@@ -423,19 +339,9 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(idQuery_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(2, idQuery_);
     }
-    if (page_ != 0L) {
+    if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(3, page_);
-    }
-    if (count_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(4, count_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(startDate_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(5, startDate_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(endDate_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(6, endDate_);
+        .computeMessageSize(3, getLimits());
     }
     {
       int dataSize = 0;
@@ -474,14 +380,11 @@ java.lang.String defaultValue) {
         .equals(other.getQuery())) return false;
     if (!getIdQuery()
         .equals(other.getIdQuery())) return false;
-    if (getPage()
-        != other.getPage()) return false;
-    if (getCount()
-        != other.getCount()) return false;
-    if (!getStartDate()
-        .equals(other.getStartDate())) return false;
-    if (!getEndDate()
-        .equals(other.getEndDate())) return false;
+    if (hasLimits() != other.hasLimits()) return false;
+    if (hasLimits()) {
+      if (!getLimits()
+          .equals(other.getLimits())) return false;
+    }
     if (!getPropertiesList()
         .equals(other.getPropertiesList())) return false;
     if (!internalGetExtras().equals(
@@ -501,15 +404,10 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + getQuery().hashCode();
     hash = (37 * hash) + ID_QUERY_FIELD_NUMBER;
     hash = (53 * hash) + getIdQuery().hashCode();
-    hash = (37 * hash) + PAGE_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getPage());
-    hash = (37 * hash) + COUNT_FIELD_NUMBER;
-    hash = (53 * hash) + getCount();
-    hash = (37 * hash) + START_DATE_FIELD_NUMBER;
-    hash = (53 * hash) + getStartDate().hashCode();
-    hash = (37 * hash) + END_DATE_FIELD_NUMBER;
-    hash = (53 * hash) + getEndDate().hashCode();
+    if (hasLimits()) {
+      hash = (37 * hash) + LIMITS_FIELD_NUMBER;
+      hash = (53 * hash) + getLimits().hashCode();
+    }
     if (getPropertiesCount() > 0) {
       hash = (37 * hash) + PROPERTIES_FIELD_NUMBER;
       hash = (53 * hash) + getPropertiesList().hashCode();
@@ -659,13 +557,19 @@ java.lang.String defaultValue) {
 
     // Construct using com.antinvestor.apis.common.v1.SearchRequest.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessage
+              .alwaysUseFieldBuilders) {
+        getLimitsFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -673,10 +577,11 @@ java.lang.String defaultValue) {
       bitField0_ = 0;
       query_ = "";
       idQuery_ = "";
-      page_ = 0L;
-      count_ = 0;
-      startDate_ = "";
-      endDate_ = "";
+      limits_ = null;
+      if (limitsBuilder_ != null) {
+        limitsBuilder_.dispose();
+        limitsBuilder_ = null;
+      }
       properties_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
       internalGetMutableExtras().clear();
@@ -719,26 +624,22 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.idQuery_ = idQuery_;
       }
+      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.page_ = page_;
+        result.limits_ = limitsBuilder_ == null
+            ? limits_
+            : limitsBuilder_.build();
+        to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.count_ = count_;
-      }
-      if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.startDate_ = startDate_;
-      }
-      if (((from_bitField0_ & 0x00000020) != 0)) {
-        result.endDate_ = endDate_;
-      }
-      if (((from_bitField0_ & 0x00000040) != 0)) {
         properties_.makeImmutable();
         result.properties_ = properties_;
       }
-      if (((from_bitField0_ & 0x00000080) != 0)) {
+      if (((from_bitField0_ & 0x00000010) != 0)) {
         result.extras_ = internalGetExtras();
         result.extras_.makeImmutable();
       }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -763,26 +664,13 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000002;
         onChanged();
       }
-      if (other.getPage() != 0L) {
-        setPage(other.getPage());
-      }
-      if (other.getCount() != 0) {
-        setCount(other.getCount());
-      }
-      if (!other.getStartDate().isEmpty()) {
-        startDate_ = other.startDate_;
-        bitField0_ |= 0x00000010;
-        onChanged();
-      }
-      if (!other.getEndDate().isEmpty()) {
-        endDate_ = other.endDate_;
-        bitField0_ |= 0x00000020;
-        onChanged();
+      if (other.hasLimits()) {
+        mergeLimits(other.getLimits());
       }
       if (!other.properties_.isEmpty()) {
         if (properties_.isEmpty()) {
           properties_ = other.properties_;
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000008;
         } else {
           ensurePropertiesIsMutable();
           properties_.addAll(other.properties_);
@@ -791,7 +679,7 @@ java.lang.String defaultValue) {
       }
       internalGetMutableExtras().mergeFrom(
           other.internalGetExtras());
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000010;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -828,26 +716,13 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000002;
               break;
             } // case 18
-            case 24: {
-              page_ = input.readInt64();
+            case 26: {
+              input.readMessage(
+                  getLimitsFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000004;
               break;
-            } // case 24
-            case 32: {
-              count_ = input.readInt32();
-              bitField0_ |= 0x00000008;
-              break;
-            } // case 32
-            case 42: {
-              startDate_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000010;
-              break;
-            } // case 42
-            case 50: {
-              endDate_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000020;
-              break;
-            } // case 50
+            } // case 26
             case 58: {
               java.lang.String s = input.readStringRequireUtf8();
               ensurePropertiesIsMutable();
@@ -860,7 +735,7 @@ java.lang.String defaultValue) {
                   ExtrasDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableExtras().getMutableMap().put(
                   extras__.getKey(), extras__.getValue());
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000010;
               break;
             } // case 66
             default: {
@@ -1024,212 +899,125 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private long page_ ;
+    private com.antinvestor.apis.common.v1.Pagination limits_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.common.v1.Pagination, com.antinvestor.apis.common.v1.Pagination.Builder, com.antinvestor.apis.common.v1.PaginationOrBuilder> limitsBuilder_;
     /**
-     * <code>int64 page = 3 [json_name = "page"];</code>
-     * @return The page.
+     * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
+     * @return Whether the limits field is set.
      */
-    @java.lang.Override
-    public long getPage() {
-      return page_;
+    public boolean hasLimits() {
+      return ((bitField0_ & 0x00000004) != 0);
     }
     /**
-     * <code>int64 page = 3 [json_name = "page"];</code>
-     * @param value The page to set.
-     * @return This builder for chaining.
+     * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
+     * @return The limits.
      */
-    public Builder setPage(long value) {
-
-      page_ = value;
+    public com.antinvestor.apis.common.v1.Pagination getLimits() {
+      if (limitsBuilder_ == null) {
+        return limits_ == null ? com.antinvestor.apis.common.v1.Pagination.getDefaultInstance() : limits_;
+      } else {
+        return limitsBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
+     */
+    public Builder setLimits(com.antinvestor.apis.common.v1.Pagination value) {
+      if (limitsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        limits_ = value;
+      } else {
+        limitsBuilder_.setMessage(value);
+      }
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>int64 page = 3 [json_name = "page"];</code>
-     * @return This builder for chaining.
+     * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
      */
-    public Builder clearPage() {
+    public Builder setLimits(
+        com.antinvestor.apis.common.v1.Pagination.Builder builderForValue) {
+      if (limitsBuilder_ == null) {
+        limits_ = builderForValue.build();
+      } else {
+        limitsBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
+     */
+    public Builder mergeLimits(com.antinvestor.apis.common.v1.Pagination value) {
+      if (limitsBuilder_ == null) {
+        if (((bitField0_ & 0x00000004) != 0) &&
+          limits_ != null &&
+          limits_ != com.antinvestor.apis.common.v1.Pagination.getDefaultInstance()) {
+          getLimitsBuilder().mergeFrom(value);
+        } else {
+          limits_ = value;
+        }
+      } else {
+        limitsBuilder_.mergeFrom(value);
+      }
+      if (limits_ != null) {
+        bitField0_ |= 0x00000004;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
+     */
+    public Builder clearLimits() {
       bitField0_ = (bitField0_ & ~0x00000004);
-      page_ = 0L;
-      onChanged();
-      return this;
-    }
-
-    private int count_ ;
-    /**
-     * <code>int32 count = 4 [json_name = "count"];</code>
-     * @return The count.
-     */
-    @java.lang.Override
-    public int getCount() {
-      return count_;
-    }
-    /**
-     * <code>int32 count = 4 [json_name = "count"];</code>
-     * @param value The count to set.
-     * @return This builder for chaining.
-     */
-    public Builder setCount(int value) {
-
-      count_ = value;
-      bitField0_ |= 0x00000008;
+      limits_ = null;
+      if (limitsBuilder_ != null) {
+        limitsBuilder_.dispose();
+        limitsBuilder_ = null;
+      }
       onChanged();
       return this;
     }
     /**
-     * <code>int32 count = 4 [json_name = "count"];</code>
-     * @return This builder for chaining.
+     * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
      */
-    public Builder clearCount() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      count_ = 0;
+    public com.antinvestor.apis.common.v1.Pagination.Builder getLimitsBuilder() {
+      bitField0_ |= 0x00000004;
       onChanged();
-      return this;
+      return getLimitsFieldBuilder().getBuilder();
     }
-
-    private java.lang.Object startDate_ = "";
     /**
-     * <code>string start_date = 5 [json_name = "startDate"];</code>
-     * @return The startDate.
+     * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
      */
-    public java.lang.String getStartDate() {
-      java.lang.Object ref = startDate_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        startDate_ = s;
-        return s;
+    public com.antinvestor.apis.common.v1.PaginationOrBuilder getLimitsOrBuilder() {
+      if (limitsBuilder_ != null) {
+        return limitsBuilder_.getMessageOrBuilder();
       } else {
-        return (java.lang.String) ref;
+        return limits_ == null ?
+            com.antinvestor.apis.common.v1.Pagination.getDefaultInstance() : limits_;
       }
     }
     /**
-     * <code>string start_date = 5 [json_name = "startDate"];</code>
-     * @return The bytes for startDate.
+     * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
      */
-    public com.google.protobuf.ByteString
-        getStartDateBytes() {
-      java.lang.Object ref = startDate_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        startDate_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.common.v1.Pagination, com.antinvestor.apis.common.v1.Pagination.Builder, com.antinvestor.apis.common.v1.PaginationOrBuilder> 
+        getLimitsFieldBuilder() {
+      if (limitsBuilder_ == null) {
+        limitsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.antinvestor.apis.common.v1.Pagination, com.antinvestor.apis.common.v1.Pagination.Builder, com.antinvestor.apis.common.v1.PaginationOrBuilder>(
+                getLimits(),
+                getParentForChildren(),
+                isClean());
+        limits_ = null;
       }
-    }
-    /**
-     * <code>string start_date = 5 [json_name = "startDate"];</code>
-     * @param value The startDate to set.
-     * @return This builder for chaining.
-     */
-    public Builder setStartDate(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      startDate_ = value;
-      bitField0_ |= 0x00000010;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string start_date = 5 [json_name = "startDate"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearStartDate() {
-      startDate_ = getDefaultInstance().getStartDate();
-      bitField0_ = (bitField0_ & ~0x00000010);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string start_date = 5 [json_name = "startDate"];</code>
-     * @param value The bytes for startDate to set.
-     * @return This builder for chaining.
-     */
-    public Builder setStartDateBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      startDate_ = value;
-      bitField0_ |= 0x00000010;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object endDate_ = "";
-    /**
-     * <code>string end_date = 6 [json_name = "endDate"];</code>
-     * @return The endDate.
-     */
-    public java.lang.String getEndDate() {
-      java.lang.Object ref = endDate_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        endDate_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string end_date = 6 [json_name = "endDate"];</code>
-     * @return The bytes for endDate.
-     */
-    public com.google.protobuf.ByteString
-        getEndDateBytes() {
-      java.lang.Object ref = endDate_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        endDate_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string end_date = 6 [json_name = "endDate"];</code>
-     * @param value The endDate to set.
-     * @return This builder for chaining.
-     */
-    public Builder setEndDate(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      endDate_ = value;
-      bitField0_ |= 0x00000020;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string end_date = 6 [json_name = "endDate"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearEndDate() {
-      endDate_ = getDefaultInstance().getEndDate();
-      bitField0_ = (bitField0_ & ~0x00000020);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string end_date = 6 [json_name = "endDate"];</code>
-     * @param value The bytes for endDate to set.
-     * @return This builder for chaining.
-     */
-    public Builder setEndDateBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      endDate_ = value;
-      bitField0_ |= 0x00000020;
-      onChanged();
-      return this;
+      return limitsBuilder_;
     }
 
     private com.google.protobuf.LazyStringArrayList properties_ =
@@ -1238,7 +1026,7 @@ java.lang.String defaultValue) {
       if (!properties_.isModifiable()) {
         properties_ = new com.google.protobuf.LazyStringArrayList(properties_);
       }
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000008;
     }
     /**
      * <code>repeated string properties = 7 [json_name = "properties"];</code>
@@ -1284,7 +1072,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       ensurePropertiesIsMutable();
       properties_.set(index, value);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
@@ -1298,7 +1086,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       ensurePropertiesIsMutable();
       properties_.add(value);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
@@ -1312,7 +1100,7 @@ java.lang.String defaultValue) {
       ensurePropertiesIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
           values, properties_);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
@@ -1323,7 +1111,7 @@ java.lang.String defaultValue) {
     public Builder clearProperties() {
       properties_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000040);;
+      bitField0_ = (bitField0_ & ~0x00000008);;
       onChanged();
       return this;
     }
@@ -1338,7 +1126,7 @@ java.lang.String defaultValue) {
       checkByteStringIsUtf8(value);
       ensurePropertiesIsMutable();
       properties_.add(value);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
@@ -1362,7 +1150,7 @@ java.lang.String defaultValue) {
       if (!extras_.isMutable()) {
         extras_ = extras_.copy();
       }
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000010;
       onChanged();
       return extras_;
     }
@@ -1422,7 +1210,7 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearExtras() {
-      bitField0_ = (bitField0_ & ~0x00000080);
+      bitField0_ = (bitField0_ & ~0x00000010);
       internalGetMutableExtras().getMutableMap()
           .clear();
       return this;
@@ -1443,7 +1231,7 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableExtras() {
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000010;
       return internalGetMutableExtras().getMutableMap();
     }
     /**
@@ -1456,7 +1244,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableExtras().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000010;
       return this;
     }
     /**
@@ -1466,7 +1254,7 @@ java.lang.String defaultValue) {
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableExtras().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000010;
       return this;
     }
 

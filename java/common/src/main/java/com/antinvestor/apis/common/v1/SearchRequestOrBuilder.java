@@ -47,40 +47,19 @@ public interface SearchRequestOrBuilder extends
       getIdQueryBytes();
 
   /**
-   * <code>int64 page = 3 [json_name = "page"];</code>
-   * @return The page.
+   * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
+   * @return Whether the limits field is set.
    */
-  long getPage();
-
+  boolean hasLimits();
   /**
-   * <code>int32 count = 4 [json_name = "count"];</code>
-   * @return The count.
+   * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
+   * @return The limits.
    */
-  int getCount();
-
+  com.antinvestor.apis.common.v1.Pagination getLimits();
   /**
-   * <code>string start_date = 5 [json_name = "startDate"];</code>
-   * @return The startDate.
+   * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
    */
-  java.lang.String getStartDate();
-  /**
-   * <code>string start_date = 5 [json_name = "startDate"];</code>
-   * @return The bytes for startDate.
-   */
-  com.google.protobuf.ByteString
-      getStartDateBytes();
-
-  /**
-   * <code>string end_date = 6 [json_name = "endDate"];</code>
-   * @return The endDate.
-   */
-  java.lang.String getEndDate();
-  /**
-   * <code>string end_date = 6 [json_name = "endDate"];</code>
-   * @return The bytes for endDate.
-   */
-  com.google.protobuf.ByteString
-      getEndDateBytes();
+  com.antinvestor.apis.common.v1.PaginationOrBuilder getLimitsOrBuilder();
 
   /**
    * <code>repeated string properties = 7 [json_name = "properties"];</code>

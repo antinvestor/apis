@@ -23,34 +23,34 @@ public interface ListSearchRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+   * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
    * @return Whether the pagination field is set.
    */
   boolean hasPagination();
   /**
-   * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+   * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
    * @return The pagination.
    */
-  com.antinvestor.apis.lostid.v1.Pagination getPagination();
+  com.antinvestor.apis.common.v1.Pagination getPagination();
   /**
-   * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+   * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
    */
-  com.antinvestor.apis.lostid.v1.PaginationOrBuilder getPaginationOrBuilder();
+  com.antinvestor.apis.common.v1.PaginationOrBuilder getPaginationOrBuilder();
 
   /**
-   * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+   * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
    * @return Whether the interval field is set.
    */
   boolean hasInterval();
   /**
-   * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+   * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
    * @return The interval.
    */
-  com.google.type.Interval getInterval();
+  com.antinvestor.apis.common.v1.Interval getInterval();
   /**
-   * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+   * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
    */
-  com.google.type.IntervalOrBuilder getIntervalOrBuilder();
+  com.antinvestor.apis.common.v1.IntervalOrBuilder getIntervalOrBuilder();
 
   com.antinvestor.apis.lostid.v1.ListSearchRequest.RangeCase getRangeCase();
 }

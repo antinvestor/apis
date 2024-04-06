@@ -99,7 +99,7 @@ private static final long serialVersionUID = 0L;
 
   public static final int PAGINATION_FIELD_NUMBER = 1;
   /**
-   * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+   * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
    * @return Whether the pagination field is set.
    */
   @java.lang.Override
@@ -107,30 +107,30 @@ private static final long serialVersionUID = 0L;
     return rangeCase_ == 1;
   }
   /**
-   * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+   * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
    * @return The pagination.
    */
   @java.lang.Override
-  public com.antinvestor.apis.lostid.v1.Pagination getPagination() {
+  public com.antinvestor.apis.common.v1.Pagination getPagination() {
     if (rangeCase_ == 1) {
-       return (com.antinvestor.apis.lostid.v1.Pagination) range_;
+       return (com.antinvestor.apis.common.v1.Pagination) range_;
     }
-    return com.antinvestor.apis.lostid.v1.Pagination.getDefaultInstance();
+    return com.antinvestor.apis.common.v1.Pagination.getDefaultInstance();
   }
   /**
-   * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+   * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
    */
   @java.lang.Override
-  public com.antinvestor.apis.lostid.v1.PaginationOrBuilder getPaginationOrBuilder() {
+  public com.antinvestor.apis.common.v1.PaginationOrBuilder getPaginationOrBuilder() {
     if (rangeCase_ == 1) {
-       return (com.antinvestor.apis.lostid.v1.Pagination) range_;
+       return (com.antinvestor.apis.common.v1.Pagination) range_;
     }
-    return com.antinvestor.apis.lostid.v1.Pagination.getDefaultInstance();
+    return com.antinvestor.apis.common.v1.Pagination.getDefaultInstance();
   }
 
   public static final int INTERVAL_FIELD_NUMBER = 2;
   /**
-   * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+   * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
    * @return Whether the interval field is set.
    */
   @java.lang.Override
@@ -138,25 +138,25 @@ private static final long serialVersionUID = 0L;
     return rangeCase_ == 2;
   }
   /**
-   * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+   * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
    * @return The interval.
    */
   @java.lang.Override
-  public com.google.type.Interval getInterval() {
+  public com.antinvestor.apis.common.v1.Interval getInterval() {
     if (rangeCase_ == 2) {
-       return (com.google.type.Interval) range_;
+       return (com.antinvestor.apis.common.v1.Interval) range_;
     }
-    return com.google.type.Interval.getDefaultInstance();
+    return com.antinvestor.apis.common.v1.Interval.getDefaultInstance();
   }
   /**
-   * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+   * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
    */
   @java.lang.Override
-  public com.google.type.IntervalOrBuilder getIntervalOrBuilder() {
+  public com.antinvestor.apis.common.v1.IntervalOrBuilder getIntervalOrBuilder() {
     if (rangeCase_ == 2) {
-       return (com.google.type.Interval) range_;
+       return (com.antinvestor.apis.common.v1.Interval) range_;
     }
-    return com.google.type.Interval.getDefaultInstance();
+    return com.antinvestor.apis.common.v1.Interval.getDefaultInstance();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -174,10 +174,10 @@ private static final long serialVersionUID = 0L;
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (rangeCase_ == 1) {
-      output.writeMessage(1, (com.antinvestor.apis.lostid.v1.Pagination) range_);
+      output.writeMessage(1, (com.antinvestor.apis.common.v1.Pagination) range_);
     }
     if (rangeCase_ == 2) {
-      output.writeMessage(2, (com.google.type.Interval) range_);
+      output.writeMessage(2, (com.antinvestor.apis.common.v1.Interval) range_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -190,11 +190,11 @@ private static final long serialVersionUID = 0L;
     size = 0;
     if (rangeCase_ == 1) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(1, (com.antinvestor.apis.lostid.v1.Pagination) range_);
+        .computeMessageSize(1, (com.antinvestor.apis.common.v1.Pagination) range_);
     }
     if (rangeCase_ == 2) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(2, (com.google.type.Interval) range_);
+        .computeMessageSize(2, (com.antinvestor.apis.common.v1.Interval) range_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -533,9 +533,9 @@ private static final long serialVersionUID = 0L;
     private int bitField0_;
 
     private com.google.protobuf.SingleFieldBuilder<
-        com.antinvestor.apis.lostid.v1.Pagination, com.antinvestor.apis.lostid.v1.Pagination.Builder, com.antinvestor.apis.lostid.v1.PaginationOrBuilder> paginationBuilder_;
+        com.antinvestor.apis.common.v1.Pagination, com.antinvestor.apis.common.v1.Pagination.Builder, com.antinvestor.apis.common.v1.PaginationOrBuilder> paginationBuilder_;
     /**
-     * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+     * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      * @return Whether the pagination field is set.
      */
     @java.lang.Override
@@ -543,27 +543,27 @@ private static final long serialVersionUID = 0L;
       return rangeCase_ == 1;
     }
     /**
-     * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+     * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      * @return The pagination.
      */
     @java.lang.Override
-    public com.antinvestor.apis.lostid.v1.Pagination getPagination() {
+    public com.antinvestor.apis.common.v1.Pagination getPagination() {
       if (paginationBuilder_ == null) {
         if (rangeCase_ == 1) {
-          return (com.antinvestor.apis.lostid.v1.Pagination) range_;
+          return (com.antinvestor.apis.common.v1.Pagination) range_;
         }
-        return com.antinvestor.apis.lostid.v1.Pagination.getDefaultInstance();
+        return com.antinvestor.apis.common.v1.Pagination.getDefaultInstance();
       } else {
         if (rangeCase_ == 1) {
           return paginationBuilder_.getMessage();
         }
-        return com.antinvestor.apis.lostid.v1.Pagination.getDefaultInstance();
+        return com.antinvestor.apis.common.v1.Pagination.getDefaultInstance();
       }
     }
     /**
-     * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+     * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
-    public Builder setPagination(com.antinvestor.apis.lostid.v1.Pagination value) {
+    public Builder setPagination(com.antinvestor.apis.common.v1.Pagination value) {
       if (paginationBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -577,10 +577,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+     * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
     public Builder setPagination(
-        com.antinvestor.apis.lostid.v1.Pagination.Builder builderForValue) {
+        com.antinvestor.apis.common.v1.Pagination.Builder builderForValue) {
       if (paginationBuilder_ == null) {
         range_ = builderForValue.build();
         onChanged();
@@ -591,13 +591,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+     * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
-    public Builder mergePagination(com.antinvestor.apis.lostid.v1.Pagination value) {
+    public Builder mergePagination(com.antinvestor.apis.common.v1.Pagination value) {
       if (paginationBuilder_ == null) {
         if (rangeCase_ == 1 &&
-            range_ != com.antinvestor.apis.lostid.v1.Pagination.getDefaultInstance()) {
-          range_ = com.antinvestor.apis.lostid.v1.Pagination.newBuilder((com.antinvestor.apis.lostid.v1.Pagination) range_)
+            range_ != com.antinvestor.apis.common.v1.Pagination.getDefaultInstance()) {
+          range_ = com.antinvestor.apis.common.v1.Pagination.newBuilder((com.antinvestor.apis.common.v1.Pagination) range_)
               .mergeFrom(value).buildPartial();
         } else {
           range_ = value;
@@ -614,7 +614,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+     * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
     public Builder clearPagination() {
       if (paginationBuilder_ == null) {
@@ -633,38 +633,38 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+     * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
-    public com.antinvestor.apis.lostid.v1.Pagination.Builder getPaginationBuilder() {
+    public com.antinvestor.apis.common.v1.Pagination.Builder getPaginationBuilder() {
       return getPaginationFieldBuilder().getBuilder();
     }
     /**
-     * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+     * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
     @java.lang.Override
-    public com.antinvestor.apis.lostid.v1.PaginationOrBuilder getPaginationOrBuilder() {
+    public com.antinvestor.apis.common.v1.PaginationOrBuilder getPaginationOrBuilder() {
       if ((rangeCase_ == 1) && (paginationBuilder_ != null)) {
         return paginationBuilder_.getMessageOrBuilder();
       } else {
         if (rangeCase_ == 1) {
-          return (com.antinvestor.apis.lostid.v1.Pagination) range_;
+          return (com.antinvestor.apis.common.v1.Pagination) range_;
         }
-        return com.antinvestor.apis.lostid.v1.Pagination.getDefaultInstance();
+        return com.antinvestor.apis.common.v1.Pagination.getDefaultInstance();
       }
     }
     /**
-     * <code>.lostid.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
+     * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
-        com.antinvestor.apis.lostid.v1.Pagination, com.antinvestor.apis.lostid.v1.Pagination.Builder, com.antinvestor.apis.lostid.v1.PaginationOrBuilder> 
+        com.antinvestor.apis.common.v1.Pagination, com.antinvestor.apis.common.v1.Pagination.Builder, com.antinvestor.apis.common.v1.PaginationOrBuilder> 
         getPaginationFieldBuilder() {
       if (paginationBuilder_ == null) {
         if (!(rangeCase_ == 1)) {
-          range_ = com.antinvestor.apis.lostid.v1.Pagination.getDefaultInstance();
+          range_ = com.antinvestor.apis.common.v1.Pagination.getDefaultInstance();
         }
         paginationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-            com.antinvestor.apis.lostid.v1.Pagination, com.antinvestor.apis.lostid.v1.Pagination.Builder, com.antinvestor.apis.lostid.v1.PaginationOrBuilder>(
-                (com.antinvestor.apis.lostid.v1.Pagination) range_,
+            com.antinvestor.apis.common.v1.Pagination, com.antinvestor.apis.common.v1.Pagination.Builder, com.antinvestor.apis.common.v1.PaginationOrBuilder>(
+                (com.antinvestor.apis.common.v1.Pagination) range_,
                 getParentForChildren(),
                 isClean());
         range_ = null;
@@ -675,9 +675,9 @@ private static final long serialVersionUID = 0L;
     }
 
     private com.google.protobuf.SingleFieldBuilder<
-        com.google.type.Interval, com.google.type.Interval.Builder, com.google.type.IntervalOrBuilder> intervalBuilder_;
+        com.antinvestor.apis.common.v1.Interval, com.antinvestor.apis.common.v1.Interval.Builder, com.antinvestor.apis.common.v1.IntervalOrBuilder> intervalBuilder_;
     /**
-     * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+     * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
      * @return Whether the interval field is set.
      */
     @java.lang.Override
@@ -685,27 +685,27 @@ private static final long serialVersionUID = 0L;
       return rangeCase_ == 2;
     }
     /**
-     * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+     * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
      * @return The interval.
      */
     @java.lang.Override
-    public com.google.type.Interval getInterval() {
+    public com.antinvestor.apis.common.v1.Interval getInterval() {
       if (intervalBuilder_ == null) {
         if (rangeCase_ == 2) {
-          return (com.google.type.Interval) range_;
+          return (com.antinvestor.apis.common.v1.Interval) range_;
         }
-        return com.google.type.Interval.getDefaultInstance();
+        return com.antinvestor.apis.common.v1.Interval.getDefaultInstance();
       } else {
         if (rangeCase_ == 2) {
           return intervalBuilder_.getMessage();
         }
-        return com.google.type.Interval.getDefaultInstance();
+        return com.antinvestor.apis.common.v1.Interval.getDefaultInstance();
       }
     }
     /**
-     * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+     * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
      */
-    public Builder setInterval(com.google.type.Interval value) {
+    public Builder setInterval(com.antinvestor.apis.common.v1.Interval value) {
       if (intervalBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -719,10 +719,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+     * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
      */
     public Builder setInterval(
-        com.google.type.Interval.Builder builderForValue) {
+        com.antinvestor.apis.common.v1.Interval.Builder builderForValue) {
       if (intervalBuilder_ == null) {
         range_ = builderForValue.build();
         onChanged();
@@ -733,13 +733,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+     * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
      */
-    public Builder mergeInterval(com.google.type.Interval value) {
+    public Builder mergeInterval(com.antinvestor.apis.common.v1.Interval value) {
       if (intervalBuilder_ == null) {
         if (rangeCase_ == 2 &&
-            range_ != com.google.type.Interval.getDefaultInstance()) {
-          range_ = com.google.type.Interval.newBuilder((com.google.type.Interval) range_)
+            range_ != com.antinvestor.apis.common.v1.Interval.getDefaultInstance()) {
+          range_ = com.antinvestor.apis.common.v1.Interval.newBuilder((com.antinvestor.apis.common.v1.Interval) range_)
               .mergeFrom(value).buildPartial();
         } else {
           range_ = value;
@@ -756,7 +756,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+     * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
      */
     public Builder clearInterval() {
       if (intervalBuilder_ == null) {
@@ -775,38 +775,38 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+     * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
      */
-    public com.google.type.Interval.Builder getIntervalBuilder() {
+    public com.antinvestor.apis.common.v1.Interval.Builder getIntervalBuilder() {
       return getIntervalFieldBuilder().getBuilder();
     }
     /**
-     * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+     * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
      */
     @java.lang.Override
-    public com.google.type.IntervalOrBuilder getIntervalOrBuilder() {
+    public com.antinvestor.apis.common.v1.IntervalOrBuilder getIntervalOrBuilder() {
       if ((rangeCase_ == 2) && (intervalBuilder_ != null)) {
         return intervalBuilder_.getMessageOrBuilder();
       } else {
         if (rangeCase_ == 2) {
-          return (com.google.type.Interval) range_;
+          return (com.antinvestor.apis.common.v1.Interval) range_;
         }
-        return com.google.type.Interval.getDefaultInstance();
+        return com.antinvestor.apis.common.v1.Interval.getDefaultInstance();
       }
     }
     /**
-     * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
+     * <code>.common.v1.Interval interval = 2 [json_name = "interval"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
-        com.google.type.Interval, com.google.type.Interval.Builder, com.google.type.IntervalOrBuilder> 
+        com.antinvestor.apis.common.v1.Interval, com.antinvestor.apis.common.v1.Interval.Builder, com.antinvestor.apis.common.v1.IntervalOrBuilder> 
         getIntervalFieldBuilder() {
       if (intervalBuilder_ == null) {
         if (!(rangeCase_ == 2)) {
-          range_ = com.google.type.Interval.getDefaultInstance();
+          range_ = com.antinvestor.apis.common.v1.Interval.getDefaultInstance();
         }
         intervalBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-            com.google.type.Interval, com.google.type.Interval.Builder, com.google.type.IntervalOrBuilder>(
-                (com.google.type.Interval) range_,
+            com.antinvestor.apis.common.v1.Interval, com.antinvestor.apis.common.v1.Interval.Builder, com.antinvestor.apis.common.v1.IntervalOrBuilder>(
+                (com.antinvestor.apis.common.v1.Interval) range_,
                 getParentForChildren(),
                 isClean());
         range_ = null;
