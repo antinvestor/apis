@@ -18,6 +18,7 @@ package com.antinvestor.apis.payment.client;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
+import com.antinvestor.apis.common.v1.Pagination;
 import com.antinvestor.apis.common.v1.SearchRequest;
 import com.antinvestor.apis.common.v1.StatusResponse;
 import com.antinvestor.apis.common.v1.StatusUpdateRequest;
@@ -98,22 +99,26 @@ public class PaymentClient implements AutoCloseable {
 
     public Iterator<List<Payment>> search(Integer stateInt, String query, LocalDateTime startDate, LocalDateTime endDate, int page, int size) {
 
-        SearchRequest.Builder filterBuilder = SearchRequest.newBuilder()
-                .setPage(page)
-                .setCount(size);
+        SearchRequest.Builder filterBuilder = SearchRequest.newBuilder();
 
         if (Objects.nonNull(query)) {
             filterBuilder = filterBuilder.setQuery(query);
         }
 
+        var limitsBuilder = Pagination.newBuilder();
+        limitsBuilder.setCount(size)
+                .setPage(page);
+
+
         if (Objects.nonNull(startDate)) {
-            filterBuilder = filterBuilder.setStartDate(startDate.format(DateTimeFormatter.ISO_DATE_TIME));
+            limitsBuilder = limitsBuilder.setStartDate(startDate.format(DateTimeFormatter.ISO_DATE_TIME));
         }
 
         if (Objects.nonNull(endDate)) {
-            filterBuilder = filterBuilder.setEndDate(endDate.format(DateTimeFormatter.ISO_DATE_TIME));
+            limitsBuilder = limitsBuilder.setEndDate(endDate.format(DateTimeFormatter.ISO_DATE_TIME));
         }
 
+        filterBuilder.setLimits(limitsBuilder.build());
         var response = stub().search(filterBuilder.build());
         return new Iterator<List<Payment>>() {
             @Override

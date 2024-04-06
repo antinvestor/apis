@@ -129,21 +129,26 @@ public class NotificationClient implements AutoCloseable {
 
     public Iterator<List<Notification>> search(String query, LocalDateTime startDate, LocalDateTime endDate, int page, int size) {
 
-        var filterBuilder = SearchRequest.newBuilder()
-                .setPage(page)
-                .setCount(size);
+        var filterBuilder = SearchRequest.newBuilder();
 
         if (!TextUtils.isBlank(query)) {
             filterBuilder = filterBuilder.setQuery(query);
         }
 
+        var limitsBuilder = Pagination.newBuilder();
+        limitsBuilder.setCount(size)
+                .setPage(page);
+
+
         if (Objects.nonNull(startDate)) {
-            filterBuilder = filterBuilder.setStartDate(startDate.format(DateTimeFormatter.ISO_DATE_TIME));
+            limitsBuilder = limitsBuilder.setStartDate(startDate.format(DateTimeFormatter.ISO_DATE_TIME));
         }
 
         if (Objects.nonNull(endDate)) {
-            filterBuilder = filterBuilder.setEndDate(endDate.format(DateTimeFormatter.ISO_DATE_TIME));
+            limitsBuilder = limitsBuilder.setEndDate(endDate.format(DateTimeFormatter.ISO_DATE_TIME));
         }
+
+        filterBuilder.setLimits(limitsBuilder.build());
 
         var response = stub().search(filterBuilder.build());
 
