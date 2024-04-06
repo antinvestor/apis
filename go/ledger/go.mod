@@ -7,12 +7,12 @@ go 1.21
 require (
 	github.com/antinvestor/apis/go/common v1.12.2
 	go.uber.org/mock v0.4.0
-	google.golang.org/genproto v0.0.0-20240401170217-c3f982113cda
 	google.golang.org/grpc v1.63.0
 	google.golang.org/protobuf v1.33.0
 )
 
 require (
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.32.0-20240221180331-f05a6f4403ce.1 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	golang.org/x/net v0.22.0 // indirect
 	golang.org/x/oauth2 v0.17.0 // indirect

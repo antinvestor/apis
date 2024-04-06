@@ -53,19 +53,19 @@ public interface ReconcileRequestOrBuilder extends
   boolean getOutbound();
 
   /**
-   * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
+   * <code>.common.v1.Money amount = 4 [json_name = "amount"];</code>
    * @return Whether the amount field is set.
    */
   boolean hasAmount();
   /**
-   * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
+   * <code>.common.v1.Money amount = 4 [json_name = "amount"];</code>
    * @return The amount.
    */
-  com.google.type.Money getAmount();
+  com.antinvestor.apis.common.v1.Money getAmount();
   /**
-   * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
+   * <code>.common.v1.Money amount = 4 [json_name = "amount"];</code>
    */
-  com.google.type.MoneyOrBuilder getAmountOrBuilder();
+  com.antinvestor.apis.common.v1.MoneyOrBuilder getAmountOrBuilder();
 
   /**
    * <code>string owner = 5 [json_name = "owner"];</code>

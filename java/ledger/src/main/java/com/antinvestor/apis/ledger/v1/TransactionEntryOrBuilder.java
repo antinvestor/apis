@@ -59,19 +59,19 @@ public interface TransactionEntryOrBuilder extends
       getTransactedAtBytes();
 
   /**
-   * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
+   * <code>.common.v1.Money amount = 4 [json_name = "amount"];</code>
    * @return Whether the amount field is set.
    */
   boolean hasAmount();
   /**
-   * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
+   * <code>.common.v1.Money amount = 4 [json_name = "amount"];</code>
    * @return The amount.
    */
-  com.google.type.Money getAmount();
+  com.antinvestor.apis.common.v1.Money getAmount();
   /**
-   * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
+   * <code>.common.v1.Money amount = 4 [json_name = "amount"];</code>
    */
-  com.google.type.MoneyOrBuilder getAmountOrBuilder();
+  com.antinvestor.apis.common.v1.MoneyOrBuilder getAmountOrBuilder();
 
   /**
    * <code>bool credit = 5 [json_name = "credit"];</code>
@@ -80,17 +80,17 @@ public interface TransactionEntryOrBuilder extends
   boolean getCredit();
 
   /**
-   * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
+   * <code>.common.v1.Money acc_balance = 6 [json_name = "accBalance"];</code>
    * @return Whether the accBalance field is set.
    */
   boolean hasAccBalance();
   /**
-   * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
+   * <code>.common.v1.Money acc_balance = 6 [json_name = "accBalance"];</code>
    * @return The accBalance.
    */
-  com.google.type.Money getAccBalance();
+  com.antinvestor.apis.common.v1.Money getAccBalance();
   /**
-   * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
+   * <code>.common.v1.Money acc_balance = 6 [json_name = "accBalance"];</code>
    */
-  com.google.type.MoneyOrBuilder getAccBalanceOrBuilder();
+  com.antinvestor.apis.common.v1.MoneyOrBuilder getAccBalanceOrBuilder();
 }

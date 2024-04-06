@@ -149,9 +149,9 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int BALANCE_FIELD_NUMBER = 4;
-  private com.google.type.Money balance_;
+  private com.antinvestor.apis.common.v1.Money balance_;
   /**
-   * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+   * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
    * @return Whether the balance field is set.
    */
   @java.lang.Override
@@ -159,19 +159,19 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+   * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
    * @return The balance.
    */
   @java.lang.Override
-  public com.google.type.Money getBalance() {
-    return balance_ == null ? com.google.type.Money.getDefaultInstance() : balance_;
+  public com.antinvestor.apis.common.v1.Money getBalance() {
+    return balance_ == null ? com.antinvestor.apis.common.v1.Money.getDefaultInstance() : balance_;
   }
   /**
-   * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+   * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
    */
   @java.lang.Override
-  public com.google.type.MoneyOrBuilder getBalanceOrBuilder() {
-    return balance_ == null ? com.google.type.Money.getDefaultInstance() : balance_;
+  public com.antinvestor.apis.common.v1.MoneyOrBuilder getBalanceOrBuilder() {
+    return balance_ == null ? com.antinvestor.apis.common.v1.Money.getDefaultInstance() : balance_;
   }
 
   public static final int DATA_FIELD_NUMBER = 5;
@@ -821,31 +821,31 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private com.google.type.Money balance_;
+    private com.antinvestor.apis.common.v1.Money balance_;
     private com.google.protobuf.SingleFieldBuilder<
-        com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> balanceBuilder_;
+        com.antinvestor.apis.common.v1.Money, com.antinvestor.apis.common.v1.Money.Builder, com.antinvestor.apis.common.v1.MoneyOrBuilder> balanceBuilder_;
     /**
-     * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+     * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
      * @return Whether the balance field is set.
      */
     public boolean hasBalance() {
       return ((bitField0_ & 0x00000004) != 0);
     }
     /**
-     * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+     * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
      * @return The balance.
      */
-    public com.google.type.Money getBalance() {
+    public com.antinvestor.apis.common.v1.Money getBalance() {
       if (balanceBuilder_ == null) {
-        return balance_ == null ? com.google.type.Money.getDefaultInstance() : balance_;
+        return balance_ == null ? com.antinvestor.apis.common.v1.Money.getDefaultInstance() : balance_;
       } else {
         return balanceBuilder_.getMessage();
       }
     }
     /**
-     * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+     * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
      */
-    public Builder setBalance(com.google.type.Money value) {
+    public Builder setBalance(com.antinvestor.apis.common.v1.Money value) {
       if (balanceBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -859,10 +859,10 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+     * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
      */
     public Builder setBalance(
-        com.google.type.Money.Builder builderForValue) {
+        com.antinvestor.apis.common.v1.Money.Builder builderForValue) {
       if (balanceBuilder_ == null) {
         balance_ = builderForValue.build();
       } else {
@@ -873,13 +873,13 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+     * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
      */
-    public Builder mergeBalance(com.google.type.Money value) {
+    public Builder mergeBalance(com.antinvestor.apis.common.v1.Money value) {
       if (balanceBuilder_ == null) {
         if (((bitField0_ & 0x00000004) != 0) &&
           balance_ != null &&
-          balance_ != com.google.type.Money.getDefaultInstance()) {
+          balance_ != com.antinvestor.apis.common.v1.Money.getDefaultInstance()) {
           getBalanceBuilder().mergeFrom(value);
         } else {
           balance_ = value;
@@ -894,7 +894,7 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+     * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
      */
     public Builder clearBalance() {
       bitField0_ = (bitField0_ & ~0x00000004);
@@ -907,33 +907,33 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+     * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
      */
-    public com.google.type.Money.Builder getBalanceBuilder() {
+    public com.antinvestor.apis.common.v1.Money.Builder getBalanceBuilder() {
       bitField0_ |= 0x00000004;
       onChanged();
       return getBalanceFieldBuilder().getBuilder();
     }
     /**
-     * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+     * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
      */
-    public com.google.type.MoneyOrBuilder getBalanceOrBuilder() {
+    public com.antinvestor.apis.common.v1.MoneyOrBuilder getBalanceOrBuilder() {
       if (balanceBuilder_ != null) {
         return balanceBuilder_.getMessageOrBuilder();
       } else {
         return balance_ == null ?
-            com.google.type.Money.getDefaultInstance() : balance_;
+            com.antinvestor.apis.common.v1.Money.getDefaultInstance() : balance_;
       }
     }
     /**
-     * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+     * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
-        com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> 
+        com.antinvestor.apis.common.v1.Money, com.antinvestor.apis.common.v1.Money.Builder, com.antinvestor.apis.common.v1.MoneyOrBuilder> 
         getBalanceFieldBuilder() {
       if (balanceBuilder_ == null) {
         balanceBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-            com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder>(
+            com.antinvestor.apis.common.v1.Money, com.antinvestor.apis.common.v1.Money.Builder, com.antinvestor.apis.common.v1.MoneyOrBuilder>(
                 getBalance(),
                 getParentForChildren(),
                 isClean());

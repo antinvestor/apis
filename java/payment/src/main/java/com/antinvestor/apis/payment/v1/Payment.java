@@ -393,9 +393,9 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int AMOUNT_FIELD_NUMBER = 9;
-  private com.google.type.Money amount_;
+  private com.antinvestor.apis.common.v1.Money amount_;
   /**
-   * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+   * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
    * @return Whether the amount field is set.
    */
   @java.lang.Override
@@ -403,25 +403,25 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+   * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
    * @return The amount.
    */
   @java.lang.Override
-  public com.google.type.Money getAmount() {
-    return amount_ == null ? com.google.type.Money.getDefaultInstance() : amount_;
+  public com.antinvestor.apis.common.v1.Money getAmount() {
+    return amount_ == null ? com.antinvestor.apis.common.v1.Money.getDefaultInstance() : amount_;
   }
   /**
-   * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+   * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
    */
   @java.lang.Override
-  public com.google.type.MoneyOrBuilder getAmountOrBuilder() {
-    return amount_ == null ? com.google.type.Money.getDefaultInstance() : amount_;
+  public com.antinvestor.apis.common.v1.MoneyOrBuilder getAmountOrBuilder() {
+    return amount_ == null ? com.antinvestor.apis.common.v1.Money.getDefaultInstance() : amount_;
   }
 
   public static final int COST_FIELD_NUMBER = 10;
-  private com.google.type.Money cost_;
+  private com.antinvestor.apis.common.v1.Money cost_;
   /**
-   * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+   * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
    * @return Whether the cost field is set.
    */
   @java.lang.Override
@@ -429,19 +429,19 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000002) != 0);
   }
   /**
-   * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+   * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
    * @return The cost.
    */
   @java.lang.Override
-  public com.google.type.Money getCost() {
-    return cost_ == null ? com.google.type.Money.getDefaultInstance() : cost_;
+  public com.antinvestor.apis.common.v1.Money getCost() {
+    return cost_ == null ? com.antinvestor.apis.common.v1.Money.getDefaultInstance() : cost_;
   }
   /**
-   * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+   * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
    */
   @java.lang.Override
-  public com.google.type.MoneyOrBuilder getCostOrBuilder() {
-    return cost_ == null ? com.google.type.Money.getDefaultInstance() : cost_;
+  public com.antinvestor.apis.common.v1.MoneyOrBuilder getCostOrBuilder() {
+    return cost_ == null ? com.antinvestor.apis.common.v1.Money.getDefaultInstance() : cost_;
   }
 
   public static final int STATE_FIELD_NUMBER = 11;
@@ -1946,31 +1946,31 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private com.google.type.Money amount_;
+    private com.antinvestor.apis.common.v1.Money amount_;
     private com.google.protobuf.SingleFieldBuilder<
-        com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> amountBuilder_;
+        com.antinvestor.apis.common.v1.Money, com.antinvestor.apis.common.v1.Money.Builder, com.antinvestor.apis.common.v1.MoneyOrBuilder> amountBuilder_;
     /**
-     * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+     * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
      * @return Whether the amount field is set.
      */
     public boolean hasAmount() {
       return ((bitField0_ & 0x00000100) != 0);
     }
     /**
-     * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+     * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
      * @return The amount.
      */
-    public com.google.type.Money getAmount() {
+    public com.antinvestor.apis.common.v1.Money getAmount() {
       if (amountBuilder_ == null) {
-        return amount_ == null ? com.google.type.Money.getDefaultInstance() : amount_;
+        return amount_ == null ? com.antinvestor.apis.common.v1.Money.getDefaultInstance() : amount_;
       } else {
         return amountBuilder_.getMessage();
       }
     }
     /**
-     * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+     * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
      */
-    public Builder setAmount(com.google.type.Money value) {
+    public Builder setAmount(com.antinvestor.apis.common.v1.Money value) {
       if (amountBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -1984,10 +1984,10 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+     * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
      */
     public Builder setAmount(
-        com.google.type.Money.Builder builderForValue) {
+        com.antinvestor.apis.common.v1.Money.Builder builderForValue) {
       if (amountBuilder_ == null) {
         amount_ = builderForValue.build();
       } else {
@@ -1998,13 +1998,13 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+     * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
      */
-    public Builder mergeAmount(com.google.type.Money value) {
+    public Builder mergeAmount(com.antinvestor.apis.common.v1.Money value) {
       if (amountBuilder_ == null) {
         if (((bitField0_ & 0x00000100) != 0) &&
           amount_ != null &&
-          amount_ != com.google.type.Money.getDefaultInstance()) {
+          amount_ != com.antinvestor.apis.common.v1.Money.getDefaultInstance()) {
           getAmountBuilder().mergeFrom(value);
         } else {
           amount_ = value;
@@ -2019,7 +2019,7 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+     * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
      */
     public Builder clearAmount() {
       bitField0_ = (bitField0_ & ~0x00000100);
@@ -2032,33 +2032,33 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+     * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
      */
-    public com.google.type.Money.Builder getAmountBuilder() {
+    public com.antinvestor.apis.common.v1.Money.Builder getAmountBuilder() {
       bitField0_ |= 0x00000100;
       onChanged();
       return getAmountFieldBuilder().getBuilder();
     }
     /**
-     * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+     * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
      */
-    public com.google.type.MoneyOrBuilder getAmountOrBuilder() {
+    public com.antinvestor.apis.common.v1.MoneyOrBuilder getAmountOrBuilder() {
       if (amountBuilder_ != null) {
         return amountBuilder_.getMessageOrBuilder();
       } else {
         return amount_ == null ?
-            com.google.type.Money.getDefaultInstance() : amount_;
+            com.antinvestor.apis.common.v1.Money.getDefaultInstance() : amount_;
       }
     }
     /**
-     * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+     * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
-        com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> 
+        com.antinvestor.apis.common.v1.Money, com.antinvestor.apis.common.v1.Money.Builder, com.antinvestor.apis.common.v1.MoneyOrBuilder> 
         getAmountFieldBuilder() {
       if (amountBuilder_ == null) {
         amountBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-            com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder>(
+            com.antinvestor.apis.common.v1.Money, com.antinvestor.apis.common.v1.Money.Builder, com.antinvestor.apis.common.v1.MoneyOrBuilder>(
                 getAmount(),
                 getParentForChildren(),
                 isClean());
@@ -2067,31 +2067,31 @@ java.lang.String defaultValue) {
       return amountBuilder_;
     }
 
-    private com.google.type.Money cost_;
+    private com.antinvestor.apis.common.v1.Money cost_;
     private com.google.protobuf.SingleFieldBuilder<
-        com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> costBuilder_;
+        com.antinvestor.apis.common.v1.Money, com.antinvestor.apis.common.v1.Money.Builder, com.antinvestor.apis.common.v1.MoneyOrBuilder> costBuilder_;
     /**
-     * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+     * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
      * @return Whether the cost field is set.
      */
     public boolean hasCost() {
       return ((bitField0_ & 0x00000200) != 0);
     }
     /**
-     * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+     * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
      * @return The cost.
      */
-    public com.google.type.Money getCost() {
+    public com.antinvestor.apis.common.v1.Money getCost() {
       if (costBuilder_ == null) {
-        return cost_ == null ? com.google.type.Money.getDefaultInstance() : cost_;
+        return cost_ == null ? com.antinvestor.apis.common.v1.Money.getDefaultInstance() : cost_;
       } else {
         return costBuilder_.getMessage();
       }
     }
     /**
-     * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+     * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
      */
-    public Builder setCost(com.google.type.Money value) {
+    public Builder setCost(com.antinvestor.apis.common.v1.Money value) {
       if (costBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -2105,10 +2105,10 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+     * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
      */
     public Builder setCost(
-        com.google.type.Money.Builder builderForValue) {
+        com.antinvestor.apis.common.v1.Money.Builder builderForValue) {
       if (costBuilder_ == null) {
         cost_ = builderForValue.build();
       } else {
@@ -2119,13 +2119,13 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+     * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
      */
-    public Builder mergeCost(com.google.type.Money value) {
+    public Builder mergeCost(com.antinvestor.apis.common.v1.Money value) {
       if (costBuilder_ == null) {
         if (((bitField0_ & 0x00000200) != 0) &&
           cost_ != null &&
-          cost_ != com.google.type.Money.getDefaultInstance()) {
+          cost_ != com.antinvestor.apis.common.v1.Money.getDefaultInstance()) {
           getCostBuilder().mergeFrom(value);
         } else {
           cost_ = value;
@@ -2140,7 +2140,7 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+     * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
      */
     public Builder clearCost() {
       bitField0_ = (bitField0_ & ~0x00000200);
@@ -2153,33 +2153,33 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+     * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
      */
-    public com.google.type.Money.Builder getCostBuilder() {
+    public com.antinvestor.apis.common.v1.Money.Builder getCostBuilder() {
       bitField0_ |= 0x00000200;
       onChanged();
       return getCostFieldBuilder().getBuilder();
     }
     /**
-     * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+     * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
      */
-    public com.google.type.MoneyOrBuilder getCostOrBuilder() {
+    public com.antinvestor.apis.common.v1.MoneyOrBuilder getCostOrBuilder() {
       if (costBuilder_ != null) {
         return costBuilder_.getMessageOrBuilder();
       } else {
         return cost_ == null ?
-            com.google.type.Money.getDefaultInstance() : cost_;
+            com.antinvestor.apis.common.v1.Money.getDefaultInstance() : cost_;
       }
     }
     /**
-     * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+     * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
-        com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> 
+        com.antinvestor.apis.common.v1.Money, com.antinvestor.apis.common.v1.Money.Builder, com.antinvestor.apis.common.v1.MoneyOrBuilder> 
         getCostFieldBuilder() {
       if (costBuilder_ == null) {
         costBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-            com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder>(
+            com.antinvestor.apis.common.v1.Money, com.antinvestor.apis.common.v1.Money.Builder, com.antinvestor.apis.common.v1.MoneyOrBuilder>(
                 getCost(),
                 getParentForChildren(),
                 isClean());

@@ -119,34 +119,34 @@ public interface PaymentOrBuilder extends
       getDestinationBytes();
 
   /**
-   * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+   * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
    * @return Whether the amount field is set.
    */
   boolean hasAmount();
   /**
-   * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+   * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
    * @return The amount.
    */
-  com.google.type.Money getAmount();
+  com.antinvestor.apis.common.v1.Money getAmount();
   /**
-   * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
+   * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
    */
-  com.google.type.MoneyOrBuilder getAmountOrBuilder();
+  com.antinvestor.apis.common.v1.MoneyOrBuilder getAmountOrBuilder();
 
   /**
-   * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+   * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
    * @return Whether the cost field is set.
    */
   boolean hasCost();
   /**
-   * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+   * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
    * @return The cost.
    */
-  com.google.type.Money getCost();
+  com.antinvestor.apis.common.v1.Money getCost();
   /**
-   * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
+   * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
    */
-  com.google.type.MoneyOrBuilder getCostOrBuilder();
+  com.antinvestor.apis.common.v1.MoneyOrBuilder getCostOrBuilder();
 
   /**
    * <code>.common.v1.STATE state = 11 [json_name = "state"];</code>

@@ -18,7 +18,7 @@ package lostid.v1;
 
 import "buf/validate/validate.proto";
 import "google/type/interval.proto";
-import "google/type/money.proto";
+import "common/v1/common.proto";
 
 option go_package = "github.com/antinvestor/apis/go/lostid/v1;lostidv1";
 option java_multiple_files = true;
@@ -99,7 +99,7 @@ message TransactionItem {
   string id = 1;
   string datetime = 2;
   bool credit = 3;
-  google.type.Money amount = 4;
+  common.v1.Money amount = 4;
   string description = 5;
 }
 

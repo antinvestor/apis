@@ -47,19 +47,19 @@ public interface AccountOrBuilder extends
       getLedgerBytes();
 
   /**
-   * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+   * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
    * @return Whether the balance field is set.
    */
   boolean hasBalance();
   /**
-   * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+   * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
    * @return The balance.
    */
-  com.google.type.Money getBalance();
+  com.antinvestor.apis.common.v1.Money getBalance();
   /**
-   * <code>.google.type.Money balance = 4 [json_name = "balance"];</code>
+   * <code>.common.v1.Money balance = 4 [json_name = "balance"];</code>
    */
-  com.google.type.MoneyOrBuilder getBalanceOrBuilder();
+  com.antinvestor.apis.common.v1.MoneyOrBuilder getBalanceOrBuilder();
 
   /**
    * <code>map&lt;string, string&gt; data = 5 [json_name = "data"];</code>

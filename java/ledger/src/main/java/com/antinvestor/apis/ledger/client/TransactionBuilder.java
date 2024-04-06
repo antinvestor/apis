@@ -18,9 +18,9 @@ import com.antinvestor.apis.common.exceptions.STATUSCODES;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.utilities.MoneyUtil;
 import com.antinvestor.apis.common.utilities.TextUtils;
+import com.antinvestor.apis.common.v1.Money;
 import com.antinvestor.apis.ledger.v1.Transaction;
 import com.antinvestor.apis.ledger.v1.TransactionEntry;
-import com.google.type.Money;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

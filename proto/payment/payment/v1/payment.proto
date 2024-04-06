@@ -18,7 +18,6 @@ package payment.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
-import "google/type/money.proto";
 
 option go_package = "github.com/antinvestor/apis/go/payment/v1;paymentv1";
 option java_multiple_files = true;
@@ -33,8 +32,8 @@ message Payment {
   string route = 6;
   string source = 7;
   string destination = 8;
-  google.type.Money amount = 9;
-  google.type.Money cost = 10;
+  common.v1.Money amount = 9;
+  common.v1.Money cost = 10;
   common.v1.STATE state = 11;
   common.v1.STATUS status = 12;
   string date_created = 13;
@@ -47,7 +46,7 @@ message ReconcileRequest {
   string external_transaction_id = 1;
   string route = 2;
   bool outbound = 3;
-  google.type.Money amount = 4;
+  common.v1.Money amount = 4;
   string owner = 5;
   string country_code = 6;
 }

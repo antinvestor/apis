@@ -93,6 +93,16 @@ public final class CommonProto {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_common_v1_ContactLink_ExtrasEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_common_v1_Money_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_common_v1_Money_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_common_v1_LocalizedText_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_common_v1_LocalizedText_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -145,16 +155,20 @@ public final class CommonProto {
       "\0012\021[0-9a-z_-]{3,250}\320\001\001R\006detail\022:\n\006extra" +
       "s\030\006 \003(\0132\".common.v1.ContactLink.ExtrasEn" +
       "tryR\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR" +
-      "\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001*H\n\005STATE\022" +
-      "\013\n\007CREATED\020\000\022\013\n\007CHECKED\020\001\022\n\n\006ACTIVE\020\002\022\014\n" +
-      "\010INACTIVE\020\003\022\013\n\007DELETED\020\004*M\n\006STATUS\022\013\n\007UN" +
-      "KNOWN\020\000\022\n\n\006QUEUED\020\001\022\016\n\nIN_PROCESS\020\002\022\n\n\006F" +
-      "AILED\020\003\022\016\n\nSUCCESSFUL\020\004B\257\001\n\036com.antinves" +
-      "tor.apis.common.v1B\013CommonProtoP\001Z8githu" +
-      "b.com/antinvestor/apis/go/common/common/" +
-      "v1;commonv1\370\001\001\242\002\003CXX\252\002\tCommon.V1\312\002\tCommo" +
-      "n\\V1\342\002\025Common\\V1\\GPBMetadata\352\002\nCommon::V" +
-      "1b\006proto3"
+      "\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"X\n\005Money\022" +
+      "#\n\rcurrency_code\030\001 \001(\tR\014currencyCode\022\024\n\005" +
+      "units\030\002 \001(\003R\005units\022\024\n\005nanos\030\003 \001(\005R\005nanos" +
+      "\"H\n\rLocalizedText\022\022\n\004text\030\001 \001(\tR\004text\022#\n" +
+      "\rlanguage_code\030\002 \001(\tR\014languageCode*H\n\005ST" +
+      "ATE\022\013\n\007CREATED\020\000\022\013\n\007CHECKED\020\001\022\n\n\006ACTIVE\020" +
+      "\002\022\014\n\010INACTIVE\020\003\022\013\n\007DELETED\020\004*M\n\006STATUS\022\013" +
+      "\n\007UNKNOWN\020\000\022\n\n\006QUEUED\020\001\022\016\n\nIN_PROCESS\020\002\022" +
+      "\n\n\006FAILED\020\003\022\016\n\nSUCCESSFUL\020\004B\257\001\n\036com.anti" +
+      "nvestor.apis.common.v1B\013CommonProtoP\001Z8g" +
+      "ithub.com/antinvestor/apis/go/common/com" +
+      "mon/v1;commonv1\370\001\001\242\002\003CXX\252\002\tCommon.V1\312\002\tC" +
+      "ommon\\V1\342\002\025Common\\V1\\GPBMetadata\352\002\nCommo" +
+      "n::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -227,6 +241,18 @@ public final class CommonProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_common_v1_ContactLink_ExtrasEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
+    internal_static_common_v1_Money_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_common_v1_Money_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_common_v1_Money_descriptor,
+        new java.lang.String[] { "CurrencyCode", "Units", "Nanos", });
+    internal_static_common_v1_LocalizedText_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_common_v1_LocalizedText_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_common_v1_LocalizedText_descriptor,
+        new java.lang.String[] { "Text", "LanguageCode", });
     descriptor.resolveAllFeaturesImmutable();
     build.buf.validate.ValidateProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
