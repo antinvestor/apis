@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.0.0-Beta4"
-    id("net.nemerosa.versioning") version "3.0.0"
+    kotlin("jvm") version "2.0.0-Beta5"
+    id("net.nemerosa.versioning") version "3.1.0"
     id("maven-publish")
 }
 
@@ -63,19 +63,19 @@ subprojects {
 
     dependencies {
         api("com.google.protobuf:protobuf-java:3.25.3")
-        api("io.grpc:grpc-protobuf:1.62.2")
-        api("io.grpc:grpc-services:1.62.2")
-        api("io.grpc:grpc-stub:1.62.2")
-        api("build.buf:protovalidate:0.1.9")
+        api("io.grpc:grpc-protobuf:1.63.0")
+        api("io.grpc:grpc-services:1.63.0")
+        api("io.grpc:grpc-stub:1.63.0")
+        api("build.buf:protovalidate:0.2.1")
 
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
-        api("com.googlecode.libphonenumber:libphonenumber:8.13.31")
+        api("com.googlecode.libphonenumber:libphonenumber:8.13.34")
 
         api("org.slf4j:slf4j-api:2.0.12")
 
         compileOnly("org.apache.tomcat:annotations-api:6.0.53")
 
-        runtimeOnly("io.grpc:grpc-netty-shaded:1.62.2")
+        runtimeOnly("io.grpc:grpc-netty-shaded:1.63.0")
 
 
     }
