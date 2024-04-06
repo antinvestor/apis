@@ -30,8 +30,8 @@ message Payment {
   string batch_id = 4;
   string external_transaction_id = 5;
   string route = 6;
-  string source = 7;
-  string destination = 8;
+  common.v1.ContactLink source = 7;
+  common.v1.ContactLink recipient = 8;
   common.v1.Money amount = 9;
   common.v1.Money cost = 10;
   common.v1.STATE state = 11;

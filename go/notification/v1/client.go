@@ -77,10 +77,6 @@ func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*N
 }
 
 func (nc *NotificationClient) Send(ctx context.Context, message *Notification) (*SendResponse, error) {
-	if message.GetProfileType() == "" {
-		message.ProfileType = "user"
-	}
-
 	return nc.client.Send(ctx, &SendRequest{Data: message})
 
 }
@@ -88,10 +84,6 @@ func (nc *NotificationClient) Send(ctx context.Context, message *Notification) (
 func (nc *NotificationClient) Receive(ctx context.Context, message *Notification) (*ReceiveResponse, error) {
 
 	message.AutoRelease = true
-	if message.GetProfileType() == "" {
-		message.ProfileType = "user"
-	}
-
 	return nc.client.Receive(ctx, &ReceiveRequest{Data: message})
 
 }

@@ -78,35 +78,17 @@ message Notification {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
 
-  string profile_type = 2 [
-    (buf.validate.field).ignore_empty = true,
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 250,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"
-  ];
-
-  string profile_id = 3 [
+  string parent_id = 2 [
     (buf.validate.field).ignore_empty = true,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
 
-  oneof contact {
-    option (buf.validate.oneof).required = false;
-    string contact_id = 4 [
-      (buf.validate.field).ignore_empty = true,
-      (buf.validate.field).string.min_len = 3,
-      (buf.validate.field).string.max_len = 40,
-      (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-    ];
-    string detail = 5 [
-      (buf.validate.field).ignore_empty = true,
-      (buf.validate.field).string.min_len = 3,
-      (buf.validate.field).string.max_len = 250,
-      (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"
-    ];
-  }
+  common.v1.ContactLink source = 3;
+
+  common.v1.ContactLink recipient = 4;
+
   string type = 6;
   string template = 7;
   map<string, string> payload = 8;
@@ -124,27 +106,6 @@ message Notification {
   map<string, string> extras = 15;
 
   PRIORITY priority = 16;
-
-  string parent_id = 17 [
-    (buf.validate.field).ignore_empty = true,
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-
-  string source = 18 [
-    (buf.validate.field).ignore_empty = true,
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 250,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"
-  ];
-
-  string source_contact_id = 19 [
-    (buf.validate.field).ignore_empty = true,
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
 }
 
 message SearchResponse {

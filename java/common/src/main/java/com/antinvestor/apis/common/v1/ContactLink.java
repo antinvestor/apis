@@ -41,6 +41,7 @@ private static final long serialVersionUID = 0L;
   }
   private ContactLink() {
     profileName_ = "";
+    profileType_ = "";
     profileId_ = "";
     profileImageId_ = "";
     contactId_ = "";
@@ -57,7 +58,7 @@ private static final long serialVersionUID = 0L;
   protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
       int number) {
     switch (number) {
-      case 6:
+      case 10:
         return internalGetExtras();
       default:
         throw new RuntimeException(
@@ -111,11 +112,50 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PROFILE_ID_FIELD_NUMBER = 2;
+  public static final int PROFILE_TYPE_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object profileType_ = "";
+  /**
+   * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+   * @return The profileType.
+   */
+  @java.lang.Override
+  public java.lang.String getProfileType() {
+    java.lang.Object ref = profileType_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      profileType_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileType.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getProfileTypeBytes() {
+    java.lang.Object ref = profileType_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      profileType_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int PROFILE_ID_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
   private volatile java.lang.Object profileId_ = "";
   /**
-   * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The profileId.
    */
   @java.lang.Override
@@ -132,7 +172,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileId.
    */
   @java.lang.Override
@@ -150,11 +190,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PROFILE_IMAGE_ID_FIELD_NUMBER = 3;
+  public static final int PROFILE_IMAGE_ID_FIELD_NUMBER = 4;
   @SuppressWarnings("serial")
   private volatile java.lang.Object profileImageId_ = "";
   /**
-   * <code>string profile_image_id = 3 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
+   * <code>string profile_image_id = 4 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
    * @return The profileImageId.
    */
   @java.lang.Override
@@ -171,7 +211,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string profile_image_id = 3 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
+   * <code>string profile_image_id = 4 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileImageId.
    */
   @java.lang.Override
@@ -189,11 +229,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int CONTACT_ID_FIELD_NUMBER = 4;
+  public static final int CONTACT_ID_FIELD_NUMBER = 8;
   @SuppressWarnings("serial")
   private volatile java.lang.Object contactId_ = "";
   /**
-   * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
+   * <code>string contact_id = 8 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
    * @return The contactId.
    */
   @java.lang.Override
@@ -210,7 +250,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
+   * <code>string contact_id = 8 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for contactId.
    */
   @java.lang.Override
@@ -228,11 +268,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int DETAIL_FIELD_NUMBER = 5;
+  public static final int DETAIL_FIELD_NUMBER = 9;
   @SuppressWarnings("serial")
   private volatile java.lang.Object detail_ = "";
   /**
-   * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
+   * <code>string detail = 9 [json_name = "detail", (.buf.validate.field) = { ... }</code>
    * @return The detail.
    */
   @java.lang.Override
@@ -249,7 +289,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
+   * <code>string detail = 9 [json_name = "detail", (.buf.validate.field) = { ... }</code>
    * @return The bytes for detail.
    */
   @java.lang.Override
@@ -267,7 +307,7 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int EXTRAS_FIELD_NUMBER = 6;
+  public static final int EXTRAS_FIELD_NUMBER = 10;
   private static final class ExtrasDefaultEntryHolder {
     static final com.google.protobuf.MapEntry<
         java.lang.String, java.lang.String> defaultEntry =
@@ -294,7 +334,7 @@ private static final long serialVersionUID = 0L;
     return internalGetExtras().getMap().size();
   }
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
    */
   @java.lang.Override
   public boolean containsExtras(
@@ -311,14 +351,14 @@ private static final long serialVersionUID = 0L;
     return getExtrasMap();
   }
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
    */
   @java.lang.Override
   public java.util.Map<java.lang.String, java.lang.String> getExtrasMap() {
     return internalGetExtras().getMap();
   }
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
    */
   @java.lang.Override
   public /* nullable */
@@ -332,7 +372,7 @@ java.lang.String defaultValue) {
     return map.containsKey(key) ? map.get(key) : defaultValue;
   }
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
    */
   @java.lang.Override
   public java.lang.String getExtrasOrThrow(
@@ -363,24 +403,27 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileName_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 1, profileName_);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileType_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, profileType_);
+    }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 2, profileId_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 3, profileId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileImageId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 3, profileImageId_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 4, profileImageId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(contactId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 4, contactId_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 8, contactId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(detail_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 5, detail_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 9, detail_);
     }
     com.google.protobuf.GeneratedMessage
       .serializeStringMapTo(
         output,
         internalGetExtras(),
         ExtrasDefaultEntryHolder.defaultEntry,
-        6);
+        10);
     getUnknownFields().writeTo(output);
   }
 
@@ -393,17 +436,20 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileName_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(1, profileName_);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileType_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, profileType_);
+    }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, profileId_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, profileId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileImageId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, profileImageId_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(4, profileImageId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(contactId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(4, contactId_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(8, contactId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(detail_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(5, detail_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(9, detail_);
     }
     for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
          : internalGetExtras().getMap().entrySet()) {
@@ -413,7 +459,7 @@ java.lang.String defaultValue) {
           .setValue(entry.getValue())
           .build();
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, extras__);
+          .computeMessageSize(10, extras__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -432,6 +478,8 @@ java.lang.String defaultValue) {
 
     if (!getProfileName()
         .equals(other.getProfileName())) return false;
+    if (!getProfileType()
+        .equals(other.getProfileType())) return false;
     if (!getProfileId()
         .equals(other.getProfileId())) return false;
     if (!getProfileImageId()
@@ -455,6 +503,8 @@ java.lang.String defaultValue) {
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + PROFILE_NAME_FIELD_NUMBER;
     hash = (53 * hash) + getProfileName().hashCode();
+    hash = (37 * hash) + PROFILE_TYPE_FIELD_NUMBER;
+    hash = (53 * hash) + getProfileType().hashCode();
     hash = (37 * hash) + PROFILE_ID_FIELD_NUMBER;
     hash = (53 * hash) + getProfileId().hashCode();
     hash = (37 * hash) + PROFILE_IMAGE_ID_FIELD_NUMBER;
@@ -580,7 +630,7 @@ java.lang.String defaultValue) {
     protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
         int number) {
       switch (number) {
-        case 6:
+        case 10:
           return internalGetExtras();
         default:
           throw new RuntimeException(
@@ -591,7 +641,7 @@ java.lang.String defaultValue) {
     protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
         int number) {
       switch (number) {
-        case 6:
+        case 10:
           return internalGetMutableExtras();
         default:
           throw new RuntimeException(
@@ -621,6 +671,7 @@ java.lang.String defaultValue) {
       super.clear();
       bitField0_ = 0;
       profileName_ = "";
+      profileType_ = "";
       profileId_ = "";
       profileImageId_ = "";
       contactId_ = "";
@@ -663,18 +714,21 @@ java.lang.String defaultValue) {
         result.profileName_ = profileName_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.profileId_ = profileId_;
+        result.profileType_ = profileType_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.profileImageId_ = profileImageId_;
+        result.profileId_ = profileId_;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.contactId_ = contactId_;
+        result.profileImageId_ = profileImageId_;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.detail_ = detail_;
+        result.contactId_ = contactId_;
       }
       if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.detail_ = detail_;
+      }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
         result.extras_ = internalGetExtras();
         result.extras_.makeImmutable();
       }
@@ -697,29 +751,34 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000001;
         onChanged();
       }
+      if (!other.getProfileType().isEmpty()) {
+        profileType_ = other.profileType_;
+        bitField0_ |= 0x00000002;
+        onChanged();
+      }
       if (!other.getProfileId().isEmpty()) {
         profileId_ = other.profileId_;
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         onChanged();
       }
       if (!other.getProfileImageId().isEmpty()) {
         profileImageId_ = other.profileImageId_;
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         onChanged();
       }
       if (!other.getContactId().isEmpty()) {
         contactId_ = other.contactId_;
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         onChanged();
       }
       if (!other.getDetail().isEmpty()) {
         detail_ = other.detail_;
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         onChanged();
       }
       internalGetMutableExtras().mergeFrom(
           other.internalGetExtras());
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -752,34 +811,39 @@ java.lang.String defaultValue) {
               break;
             } // case 10
             case 18: {
-              profileId_ = input.readStringRequireUtf8();
+              profileType_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
             case 26: {
-              profileImageId_ = input.readStringRequireUtf8();
+              profileId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
             } // case 26
             case 34: {
-              contactId_ = input.readStringRequireUtf8();
+              profileImageId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000008;
               break;
             } // case 34
-            case 42: {
-              detail_ = input.readStringRequireUtf8();
+            case 66: {
+              contactId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000010;
               break;
-            } // case 42
-            case 50: {
+            } // case 66
+            case 74: {
+              detail_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 74
+            case 82: {
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
               extras__ = input.readMessage(
                   ExtrasDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableExtras().getMutableMap().put(
                   extras__.getKey(), extras__.getValue());
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
               break;
-            } // case 50
+            } // case 82
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -869,9 +933,81 @@ java.lang.String defaultValue) {
       return this;
     }
 
+    private java.lang.Object profileType_ = "";
+    /**
+     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+     * @return The profileType.
+     */
+    public java.lang.String getProfileType() {
+      java.lang.Object ref = profileType_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        profileType_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for profileType.
+     */
+    public com.google.protobuf.ByteString
+        getProfileTypeBytes() {
+      java.lang.Object ref = profileType_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        profileType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+     * @param value The profileType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setProfileType(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      profileType_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearProfileType() {
+      profileType_ = getDefaultInstance().getProfileType();
+      bitField0_ = (bitField0_ & ~0x00000002);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for profileType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setProfileTypeBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      profileType_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+
     private java.lang.Object profileId_ = "";
     /**
-     * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return The profileId.
      */
     public java.lang.String getProfileId() {
@@ -887,7 +1023,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for profileId.
      */
     public com.google.protobuf.ByteString
@@ -904,7 +1040,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @param value The profileId to set.
      * @return This builder for chaining.
      */
@@ -912,22 +1048,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       profileId_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearProfileId() {
       profileId_ = getDefaultInstance().getProfileId();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
     /**
-     * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for profileId to set.
      * @return This builder for chaining.
      */
@@ -936,14 +1072,14 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       profileId_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
 
     private java.lang.Object profileImageId_ = "";
     /**
-     * <code>string profile_image_id = 3 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_image_id = 4 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
      * @return The profileImageId.
      */
     public java.lang.String getProfileImageId() {
@@ -959,7 +1095,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string profile_image_id = 3 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_image_id = 4 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for profileImageId.
      */
     public com.google.protobuf.ByteString
@@ -976,7 +1112,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string profile_image_id = 3 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_image_id = 4 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
      * @param value The profileImageId to set.
      * @return This builder for chaining.
      */
@@ -984,22 +1120,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       profileImageId_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>string profile_image_id = 3 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_image_id = 4 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearProfileImageId() {
       profileImageId_ = getDefaultInstance().getProfileImageId();
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000008);
       onChanged();
       return this;
     }
     /**
-     * <code>string profile_image_id = 3 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_image_id = 4 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for profileImageId to set.
      * @return This builder for chaining.
      */
@@ -1008,14 +1144,14 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       profileImageId_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
 
     private java.lang.Object contactId_ = "";
     /**
-     * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
+     * <code>string contact_id = 8 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
      * @return The contactId.
      */
     public java.lang.String getContactId() {
@@ -1031,7 +1167,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
+     * <code>string contact_id = 8 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for contactId.
      */
     public com.google.protobuf.ByteString
@@ -1048,7 +1184,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
+     * <code>string contact_id = 8 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
      * @param value The contactId to set.
      * @return This builder for chaining.
      */
@@ -1056,22 +1192,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       contactId_ = value;
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
-     * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
+     * <code>string contact_id = 8 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearContactId() {
       contactId_ = getDefaultInstance().getContactId();
-      bitField0_ = (bitField0_ & ~0x00000008);
+      bitField0_ = (bitField0_ & ~0x00000010);
       onChanged();
       return this;
     }
     /**
-     * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
+     * <code>string contact_id = 8 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for contactId to set.
      * @return This builder for chaining.
      */
@@ -1080,14 +1216,14 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       contactId_ = value;
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
 
     private java.lang.Object detail_ = "";
     /**
-     * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
+     * <code>string detail = 9 [json_name = "detail", (.buf.validate.field) = { ... }</code>
      * @return The detail.
      */
     public java.lang.String getDetail() {
@@ -1103,7 +1239,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
+     * <code>string detail = 9 [json_name = "detail", (.buf.validate.field) = { ... }</code>
      * @return The bytes for detail.
      */
     public com.google.protobuf.ByteString
@@ -1120,7 +1256,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
+     * <code>string detail = 9 [json_name = "detail", (.buf.validate.field) = { ... }</code>
      * @param value The detail to set.
      * @return This builder for chaining.
      */
@@ -1128,22 +1264,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       detail_ = value;
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
     /**
-     * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
+     * <code>string detail = 9 [json_name = "detail", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearDetail() {
       detail_ = getDefaultInstance().getDetail();
-      bitField0_ = (bitField0_ & ~0x00000010);
+      bitField0_ = (bitField0_ & ~0x00000020);
       onChanged();
       return this;
     }
     /**
-     * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
+     * <code>string detail = 9 [json_name = "detail", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for detail to set.
      * @return This builder for chaining.
      */
@@ -1152,7 +1288,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       detail_ = value;
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
@@ -1176,7 +1312,7 @@ java.lang.String defaultValue) {
       if (!extras_.isMutable()) {
         extras_ = extras_.copy();
       }
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       onChanged();
       return extras_;
     }
@@ -1184,7 +1320,7 @@ java.lang.String defaultValue) {
       return internalGetExtras().getMap().size();
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
      */
     @java.lang.Override
     public boolean containsExtras(
@@ -1201,14 +1337,14 @@ java.lang.String defaultValue) {
       return getExtrasMap();
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
      */
     @java.lang.Override
     public java.util.Map<java.lang.String, java.lang.String> getExtrasMap() {
       return internalGetExtras().getMap();
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
      */
     @java.lang.Override
     public /* nullable */
@@ -1222,7 +1358,7 @@ java.lang.String defaultValue) {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
      */
     @java.lang.Override
     public java.lang.String getExtrasOrThrow(
@@ -1236,13 +1372,13 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearExtras() {
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000040);
       internalGetMutableExtras().getMutableMap()
           .clear();
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
      */
     public Builder removeExtras(
         java.lang.String key) {
@@ -1257,11 +1393,11 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableExtras() {
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       return internalGetMutableExtras().getMutableMap();
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
      */
     public Builder putExtras(
         java.lang.String key,
@@ -1270,17 +1406,17 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableExtras().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+     * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
      */
     public Builder putAllExtras(
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableExtras().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       return this;
     }
 

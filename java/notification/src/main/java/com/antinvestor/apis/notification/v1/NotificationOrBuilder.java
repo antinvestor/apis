@@ -35,62 +35,46 @@ public interface NotificationOrBuilder extends
       getIdBytes();
 
   /**
-   * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
-   * @return The profileType.
+   * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return The parentId.
    */
-  java.lang.String getProfileType();
+  java.lang.String getParentId();
   /**
-   * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for profileType.
+   * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for parentId.
    */
   com.google.protobuf.ByteString
-      getProfileTypeBytes();
+      getParentIdBytes();
 
   /**
-   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-   * @return The profileId.
+   * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
+   * @return Whether the source field is set.
    */
-  java.lang.String getProfileId();
+  boolean hasSource();
   /**
-   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for profileId.
+   * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
+   * @return The source.
    */
-  com.google.protobuf.ByteString
-      getProfileIdBytes();
+  com.antinvestor.apis.common.v1.ContactLink getSource();
+  /**
+   * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
+   */
+  com.antinvestor.apis.common.v1.ContactLinkOrBuilder getSourceOrBuilder();
 
   /**
-   * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
-   * @return Whether the contactId field is set.
+   * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
+   * @return Whether the recipient field is set.
    */
-  boolean hasContactId();
+  boolean hasRecipient();
   /**
-   * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
-   * @return The contactId.
+   * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
+   * @return The recipient.
    */
-  java.lang.String getContactId();
+  com.antinvestor.apis.common.v1.ContactLink getRecipient();
   /**
-   * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for contactId.
+   * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
    */
-  com.google.protobuf.ByteString
-      getContactIdBytes();
-
-  /**
-   * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
-   * @return Whether the detail field is set.
-   */
-  boolean hasDetail();
-  /**
-   * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
-   * @return The detail.
-   */
-  java.lang.String getDetail();
-  /**
-   * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for detail.
-   */
-  com.google.protobuf.ByteString
-      getDetailBytes();
+  com.antinvestor.apis.common.v1.ContactLinkOrBuilder getRecipientOrBuilder();
 
   /**
    * <code>string type = 6 [json_name = "type"];</code>
@@ -257,42 +241,4 @@ java.lang.String defaultValue);
    * @return The priority.
    */
   com.antinvestor.apis.notification.v1.PRIORITY getPriority();
-
-  /**
-   * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-   * @return The parentId.
-   */
-  java.lang.String getParentId();
-  /**
-   * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for parentId.
-   */
-  com.google.protobuf.ByteString
-      getParentIdBytes();
-
-  /**
-   * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
-   * @return The source.
-   */
-  java.lang.String getSource();
-  /**
-   * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for source.
-   */
-  com.google.protobuf.ByteString
-      getSourceBytes();
-
-  /**
-   * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
-   * @return The sourceContactId.
-   */
-  java.lang.String getSourceContactId();
-  /**
-   * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for sourceContactId.
-   */
-  com.google.protobuf.ByteString
-      getSourceContactIdBytes();
-
-  com.antinvestor.apis.notification.v1.Notification.ContactCase getContactCase();
 }

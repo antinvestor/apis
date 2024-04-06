@@ -35,59 +35,71 @@ public interface ContactLinkOrBuilder extends
       getProfileNameBytes();
 
   /**
-   * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+   * @return The profileType.
+   */
+  java.lang.String getProfileType();
+  /**
+   * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileType.
+   */
+  com.google.protobuf.ByteString
+      getProfileTypeBytes();
+
+  /**
+   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The profileId.
    */
   java.lang.String getProfileId();
   /**
-   * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileId.
    */
   com.google.protobuf.ByteString
       getProfileIdBytes();
 
   /**
-   * <code>string profile_image_id = 3 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
+   * <code>string profile_image_id = 4 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
    * @return The profileImageId.
    */
   java.lang.String getProfileImageId();
   /**
-   * <code>string profile_image_id = 3 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
+   * <code>string profile_image_id = 4 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileImageId.
    */
   com.google.protobuf.ByteString
       getProfileImageIdBytes();
 
   /**
-   * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
+   * <code>string contact_id = 8 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
    * @return The contactId.
    */
   java.lang.String getContactId();
   /**
-   * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
+   * <code>string contact_id = 8 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for contactId.
    */
   com.google.protobuf.ByteString
       getContactIdBytes();
 
   /**
-   * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
+   * <code>string detail = 9 [json_name = "detail", (.buf.validate.field) = { ... }</code>
    * @return The detail.
    */
   java.lang.String getDetail();
   /**
-   * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
+   * <code>string detail = 9 [json_name = "detail", (.buf.validate.field) = { ... }</code>
    * @return The bytes for detail.
    */
   com.google.protobuf.ByteString
       getDetailBytes();
 
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
    */
   int getExtrasCount();
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
    */
   boolean containsExtras(
       java.lang.String key);
@@ -98,12 +110,12 @@ public interface ContactLinkOrBuilder extends
   java.util.Map<java.lang.String, java.lang.String>
   getExtras();
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
   getExtrasMap();
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
    */
   /* nullable */
 java.lang.String getExtrasOrDefault(
@@ -111,7 +123,7 @@ java.lang.String getExtrasOrDefault(
       /* nullable */
 java.lang.String defaultValue);
   /**
-   * <code>map&lt;string, string&gt; extras = 6 [json_name = "extras"];</code>
+   * <code>map&lt;string, string&gt; extras = 10 [json_name = "extras"];</code>
    */
   java.lang.String getExtrasOrThrow(
       java.lang.String key);

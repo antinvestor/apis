@@ -165,37 +165,39 @@ public final class CommonProto {
       "ExtrasEntryR\006extras\0329\n\013ExtrasEntry\022\020\n\003ke" +
       "y\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"E" +
       "\n\024StatusUpdateResponse\022-\n\004data\030\001 \001(\0132\031.c" +
-      "ommon.v1.StatusResponseR\004data\"\313\003\n\013Contac" +
+      "ommon.v1.StatusResponseR\004data\"\220\004\n\013Contac" +
       "tLink\022C\n\014profile_name\030\001 \001(\tB \272H\035r\030\020\003\030\372\0012" +
-      "\021[0-9a-z_-]{3,250}\320\001\001R\013profileName\022=\n\npr" +
-      "ofile_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3," +
-      "40}\320\001\001R\tprofileId\022H\n\020profile_image_id\030\003 " +
-      "\001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,40}\320\001\001R\016pro" +
-      "fileImageId\022=\n\ncontact_id\030\004 \001(\tB\036\272H\033r\026\020\003" +
-      "\030(2\020[0-9a-z_-]{3,40}\320\001\001R\tcontactId\0228\n\006de" +
-      "tail\030\005 \001(\tB \272H\035r\030\020\003\030\372\0012\021[0-9a-z_-]{3,250" +
-      "}\320\001\001R\006detail\022:\n\006extras\030\006 \003(\0132\".common.v1" +
-      ".ContactLink.ExtrasEntryR\006extras\0329\n\013Extr" +
-      "asEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\t" +
-      "R\005value:\0028\001\";\n\tTimestamp\022\030\n\007seconds\030\001 \001(" +
-      "\003R\007seconds\022\024\n\005nanos\030\002 \001(\005R\005nanos\"p\n\010Inte" +
-      "rval\0223\n\nstart_time\030\001 \001(\0132\024.common.v1.Tim" +
-      "estampR\tstartTime\022/\n\010end_time\030\002 \001(\0132\024.co" +
-      "mmon.v1.TimestampR\007endTime\"X\n\005Money\022#\n\rc" +
-      "urrency_code\030\001 \001(\tR\014currencyCode\022\024\n\005unit" +
-      "s\030\002 \001(\003R\005units\022\024\n\005nanos\030\003 \001(\005R\005nanos\"H\n\r" +
-      "LocalizedText\022\022\n\004text\030\001 \001(\tR\004text\022#\n\rlan" +
-      "guage_code\030\002 \001(\tR\014languageCode\"B\n\006LatLng" +
-      "\022\032\n\010latitude\030\001 \001(\001R\010latitude\022\034\n\tlongitud" +
-      "e\030\002 \001(\001R\tlongitude*H\n\005STATE\022\013\n\007CREATED\020\000" +
-      "\022\013\n\007CHECKED\020\001\022\n\n\006ACTIVE\020\002\022\014\n\010INACTIVE\020\003\022" +
-      "\013\n\007DELETED\020\004*M\n\006STATUS\022\013\n\007UNKNOWN\020\000\022\n\n\006Q" +
-      "UEUED\020\001\022\016\n\nIN_PROCESS\020\002\022\n\n\006FAILED\020\003\022\016\n\nS" +
-      "UCCESSFUL\020\004B\257\001\n\036com.antinvestor.apis.com" +
-      "mon.v1B\013CommonProtoP\001Z8github.com/antinv" +
-      "estor/apis/go/common/common/v1;commonv1\370" +
-      "\001\001\242\002\003CXX\252\002\tCommon.V1\312\002\tCommon\\V1\342\002\025Commo" +
-      "n\\V1\\GPBMetadata\352\002\nCommon::V1b\006proto3"
+      "\021[0-9a-z_-]{3,250}\320\001\001R\013profileName\022C\n\014pr" +
+      "ofile_type\030\002 \001(\tB \272H\035r\030\020\003\030\372\0012\021[0-9a-z_-]" +
+      "{3,250}\320\001\001R\013profileType\022=\n\nprofile_id\030\003 " +
+      "\001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,40}\320\001\001R\tpro" +
+      "fileId\022H\n\020profile_image_id\030\004 \001(\tB\036\272H\033r\026\020" +
+      "\003\030(2\020[0-9a-z_-]{3,40}\320\001\001R\016profileImageId" +
+      "\022=\n\ncontact_id\030\010 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z" +
+      "_-]{3,40}\320\001\001R\tcontactId\0228\n\006detail\030\t \001(\tB" +
+      " \272H\035r\030\020\003\030\372\0012\021[0-9a-z_-]{3,250}\320\001\001R\006detai" +
+      "l\022:\n\006extras\030\n \003(\0132\".common.v1.ContactLin" +
+      "k.ExtrasEntryR\006extras\0329\n\013ExtrasEntry\022\020\n\003" +
+      "key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001" +
+      "\";\n\tTimestamp\022\030\n\007seconds\030\001 \001(\003R\007seconds\022" +
+      "\024\n\005nanos\030\002 \001(\005R\005nanos\"p\n\010Interval\0223\n\nsta" +
+      "rt_time\030\001 \001(\0132\024.common.v1.TimestampR\tsta" +
+      "rtTime\022/\n\010end_time\030\002 \001(\0132\024.common.v1.Tim" +
+      "estampR\007endTime\"X\n\005Money\022#\n\rcurrency_cod" +
+      "e\030\001 \001(\tR\014currencyCode\022\024\n\005units\030\002 \001(\003R\005un" +
+      "its\022\024\n\005nanos\030\003 \001(\005R\005nanos\"H\n\rLocalizedTe" +
+      "xt\022\022\n\004text\030\001 \001(\tR\004text\022#\n\rlanguage_code\030" +
+      "\002 \001(\tR\014languageCode\"B\n\006LatLng\022\032\n\010latitud" +
+      "e\030\001 \001(\001R\010latitude\022\034\n\tlongitude\030\002 \001(\001R\tlo" +
+      "ngitude*H\n\005STATE\022\013\n\007CREATED\020\000\022\013\n\007CHECKED" +
+      "\020\001\022\n\n\006ACTIVE\020\002\022\014\n\010INACTIVE\020\003\022\013\n\007DELETED\020" +
+      "\004*M\n\006STATUS\022\013\n\007UNKNOWN\020\000\022\n\n\006QUEUED\020\001\022\016\n\n" +
+      "IN_PROCESS\020\002\022\n\n\006FAILED\020\003\022\016\n\nSUCCESSFUL\020\004" +
+      "B\257\001\n\036com.antinvestor.apis.common.v1B\013Com" +
+      "monProtoP\001Z8github.com/antinvestor/apis/" +
+      "go/common/common/v1;commonv1\370\001\001\242\002\003CXX\252\002\t" +
+      "Common.V1\312\002\tCommon\\V1\342\002\025Common\\V1\\GPBMet" +
+      "adata\352\002\nCommon::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -267,7 +269,7 @@ public final class CommonProto {
     internal_static_common_v1_ContactLink_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_common_v1_ContactLink_descriptor,
-        new java.lang.String[] { "ProfileName", "ProfileId", "ProfileImageId", "ContactId", "Detail", "Extras", });
+        new java.lang.String[] { "ProfileName", "ProfileType", "ProfileId", "ProfileImageId", "ContactId", "Detail", "Extras", });
     internal_static_common_v1_ContactLink_ExtrasEntry_descriptor =
       internal_static_common_v1_ContactLink_descriptor.getNestedTypes().get(0);
     internal_static_common_v1_ContactLink_ExtrasEntry_fieldAccessorTable = new

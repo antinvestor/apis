@@ -46,8 +46,6 @@ private static final long serialVersionUID = 0L;
     batchId_ = "";
     externalTransactionId_ = "";
     route_ = "";
-    source_ = "";
-    destination_ = "";
     state_ = 0;
     status_ = 0;
     dateCreated_ = "";
@@ -315,81 +313,55 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int SOURCE_FIELD_NUMBER = 7;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object source_ = "";
+  private com.antinvestor.apis.common.v1.ContactLink source_;
   /**
-   * <code>string source = 7 [json_name = "source"];</code>
+   * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
+   * @return Whether the source field is set.
+   */
+  @java.lang.Override
+  public boolean hasSource() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
    * @return The source.
    */
   @java.lang.Override
-  public java.lang.String getSource() {
-    java.lang.Object ref = source_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      source_ = s;
-      return s;
-    }
+  public com.antinvestor.apis.common.v1.ContactLink getSource() {
+    return source_ == null ? com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : source_;
   }
   /**
-   * <code>string source = 7 [json_name = "source"];</code>
-   * @return The bytes for source.
+   * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getSourceBytes() {
-    java.lang.Object ref = source_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      source_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public com.antinvestor.apis.common.v1.ContactLinkOrBuilder getSourceOrBuilder() {
+    return source_ == null ? com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : source_;
   }
 
-  public static final int DESTINATION_FIELD_NUMBER = 8;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object destination_ = "";
+  public static final int RECIPIENT_FIELD_NUMBER = 8;
+  private com.antinvestor.apis.common.v1.ContactLink recipient_;
   /**
-   * <code>string destination = 8 [json_name = "destination"];</code>
-   * @return The destination.
+   * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
+   * @return Whether the recipient field is set.
    */
   @java.lang.Override
-  public java.lang.String getDestination() {
-    java.lang.Object ref = destination_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      destination_ = s;
-      return s;
-    }
+  public boolean hasRecipient() {
+    return ((bitField0_ & 0x00000002) != 0);
   }
   /**
-   * <code>string destination = 8 [json_name = "destination"];</code>
-   * @return The bytes for destination.
+   * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
+   * @return The recipient.
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getDestinationBytes() {
-    java.lang.Object ref = destination_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      destination_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public com.antinvestor.apis.common.v1.ContactLink getRecipient() {
+    return recipient_ == null ? com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : recipient_;
+  }
+  /**
+   * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.common.v1.ContactLinkOrBuilder getRecipientOrBuilder() {
+    return recipient_ == null ? com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : recipient_;
   }
 
   public static final int AMOUNT_FIELD_NUMBER = 9;
@@ -400,7 +372,7 @@ private static final long serialVersionUID = 0L;
    */
   @java.lang.Override
   public boolean hasAmount() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return ((bitField0_ & 0x00000004) != 0);
   }
   /**
    * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>
@@ -426,7 +398,7 @@ private static final long serialVersionUID = 0L;
    */
   @java.lang.Override
   public boolean hasCost() {
-    return ((bitField0_ & 0x00000002) != 0);
+    return ((bitField0_ & 0x00000008) != 0);
   }
   /**
    * <code>.common.v1.Money cost = 10 [json_name = "cost"];</code>
@@ -680,16 +652,16 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(route_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 6, route_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(source_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 7, source_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(destination_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 8, destination_);
-    }
     if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(9, getAmount());
+      output.writeMessage(7, getSource());
     }
     if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(8, getRecipient());
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      output.writeMessage(9, getAmount());
+    }
+    if (((bitField0_ & 0x00000008) != 0)) {
       output.writeMessage(10, getCost());
     }
     if (state_ != com.antinvestor.apis.common.v1.STATE.CREATED.getNumber()) {
@@ -740,17 +712,19 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(route_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(6, route_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(source_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(7, source_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(destination_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(8, destination_);
-    }
     if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(7, getSource());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(8, getRecipient());
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(9, getAmount());
     }
-    if (((bitField0_ & 0x00000002) != 0)) {
+    if (((bitField0_ & 0x00000008) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(10, getCost());
     }
@@ -809,10 +783,16 @@ java.lang.String defaultValue) {
         .equals(other.getExternalTransactionId())) return false;
     if (!getRoute()
         .equals(other.getRoute())) return false;
-    if (!getSource()
-        .equals(other.getSource())) return false;
-    if (!getDestination()
-        .equals(other.getDestination())) return false;
+    if (hasSource() != other.hasSource()) return false;
+    if (hasSource()) {
+      if (!getSource()
+          .equals(other.getSource())) return false;
+    }
+    if (hasRecipient() != other.hasRecipient()) return false;
+    if (hasRecipient()) {
+      if (!getRecipient()
+          .equals(other.getRecipient())) return false;
+    }
     if (hasAmount() != other.hasAmount()) return false;
     if (hasAmount()) {
       if (!getAmount()
@@ -856,10 +836,14 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + getExternalTransactionId().hashCode();
     hash = (37 * hash) + ROUTE_FIELD_NUMBER;
     hash = (53 * hash) + getRoute().hashCode();
-    hash = (37 * hash) + SOURCE_FIELD_NUMBER;
-    hash = (53 * hash) + getSource().hashCode();
-    hash = (37 * hash) + DESTINATION_FIELD_NUMBER;
-    hash = (53 * hash) + getDestination().hashCode();
+    if (hasSource()) {
+      hash = (37 * hash) + SOURCE_FIELD_NUMBER;
+      hash = (53 * hash) + getSource().hashCode();
+    }
+    if (hasRecipient()) {
+      hash = (37 * hash) + RECIPIENT_FIELD_NUMBER;
+      hash = (53 * hash) + getRecipient().hashCode();
+    }
     if (hasAmount()) {
       hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
       hash = (53 * hash) + getAmount().hashCode();
@@ -1035,6 +1019,8 @@ java.lang.String defaultValue) {
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessage
               .alwaysUseFieldBuilders) {
+        getSourceFieldBuilder();
+        getRecipientFieldBuilder();
         getAmountFieldBuilder();
         getCostFieldBuilder();
       }
@@ -1049,8 +1035,16 @@ java.lang.String defaultValue) {
       batchId_ = "";
       externalTransactionId_ = "";
       route_ = "";
-      source_ = "";
-      destination_ = "";
+      source_ = null;
+      if (sourceBuilder_ != null) {
+        sourceBuilder_.dispose();
+        sourceBuilder_ = null;
+      }
+      recipient_ = null;
+      if (recipientBuilder_ != null) {
+        recipientBuilder_.dispose();
+        recipientBuilder_ = null;
+      }
       amount_ = null;
       if (amountBuilder_ != null) {
         amountBuilder_.dispose();
@@ -1118,24 +1112,30 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000020) != 0)) {
         result.route_ = route_;
       }
+      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000040) != 0)) {
-        result.source_ = source_;
+        result.source_ = sourceBuilder_ == null
+            ? source_
+            : sourceBuilder_.build();
+        to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00000080) != 0)) {
-        result.destination_ = destination_;
+        result.recipient_ = recipientBuilder_ == null
+            ? recipient_
+            : recipientBuilder_.build();
+        to_bitField0_ |= 0x00000002;
       }
-      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000100) != 0)) {
         result.amount_ = amountBuilder_ == null
             ? amount_
             : amountBuilder_.build();
-        to_bitField0_ |= 0x00000001;
+        to_bitField0_ |= 0x00000004;
       }
       if (((from_bitField0_ & 0x00000200) != 0)) {
         result.cost_ = costBuilder_ == null
             ? cost_
             : costBuilder_.build();
-        to_bitField0_ |= 0x00000002;
+        to_bitField0_ |= 0x00000008;
       }
       if (((from_bitField0_ & 0x00000400) != 0)) {
         result.state_ = state_;
@@ -1201,15 +1201,11 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000020;
         onChanged();
       }
-      if (!other.getSource().isEmpty()) {
-        source_ = other.source_;
-        bitField0_ |= 0x00000040;
-        onChanged();
+      if (other.hasSource()) {
+        mergeSource(other.getSource());
       }
-      if (!other.getDestination().isEmpty()) {
-        destination_ = other.destination_;
-        bitField0_ |= 0x00000080;
-        onChanged();
+      if (other.hasRecipient()) {
+        mergeRecipient(other.getRecipient());
       }
       if (other.hasAmount()) {
         mergeAmount(other.getAmount());
@@ -1296,12 +1292,16 @@ java.lang.String defaultValue) {
               break;
             } // case 50
             case 58: {
-              source_ = input.readStringRequireUtf8();
+              input.readMessage(
+                  getSourceFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000040;
               break;
             } // case 58
             case 66: {
-              destination_ = input.readStringRequireUtf8();
+              input.readMessage(
+                  getRecipientFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000080;
               break;
             } // case 66
@@ -1802,148 +1802,246 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private java.lang.Object source_ = "";
+    private com.antinvestor.apis.common.v1.ContactLink source_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.common.v1.ContactLink, com.antinvestor.apis.common.v1.ContactLink.Builder, com.antinvestor.apis.common.v1.ContactLinkOrBuilder> sourceBuilder_;
     /**
-     * <code>string source = 7 [json_name = "source"];</code>
+     * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
+     * @return Whether the source field is set.
+     */
+    public boolean hasSource() {
+      return ((bitField0_ & 0x00000040) != 0);
+    }
+    /**
+     * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
      * @return The source.
      */
-    public java.lang.String getSource() {
-      java.lang.Object ref = source_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        source_ = s;
-        return s;
+    public com.antinvestor.apis.common.v1.ContactLink getSource() {
+      if (sourceBuilder_ == null) {
+        return source_ == null ? com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : source_;
       } else {
-        return (java.lang.String) ref;
+        return sourceBuilder_.getMessage();
       }
     }
     /**
-     * <code>string source = 7 [json_name = "source"];</code>
-     * @return The bytes for source.
+     * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
      */
-    public com.google.protobuf.ByteString
-        getSourceBytes() {
-      java.lang.Object ref = source_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        source_ = b;
-        return b;
+    public Builder setSource(com.antinvestor.apis.common.v1.ContactLink value) {
+      if (sourceBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        source_ = value;
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        sourceBuilder_.setMessage(value);
       }
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
     }
     /**
-     * <code>string source = 7 [json_name = "source"];</code>
-     * @param value The source to set.
-     * @return This builder for chaining.
+     * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
      */
     public Builder setSource(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      source_ = value;
+        com.antinvestor.apis.common.v1.ContactLink.Builder builderForValue) {
+      if (sourceBuilder_ == null) {
+        source_ = builderForValue.build();
+      } else {
+        sourceBuilder_.setMessage(builderForValue.build());
+      }
       bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
     /**
-     * <code>string source = 7 [json_name = "source"];</code>
-     * @return This builder for chaining.
+     * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
+     */
+    public Builder mergeSource(com.antinvestor.apis.common.v1.ContactLink value) {
+      if (sourceBuilder_ == null) {
+        if (((bitField0_ & 0x00000040) != 0) &&
+          source_ != null &&
+          source_ != com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance()) {
+          getSourceBuilder().mergeFrom(value);
+        } else {
+          source_ = value;
+        }
+      } else {
+        sourceBuilder_.mergeFrom(value);
+      }
+      if (source_ != null) {
+        bitField0_ |= 0x00000040;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
      */
     public Builder clearSource() {
-      source_ = getDefaultInstance().getSource();
       bitField0_ = (bitField0_ & ~0x00000040);
+      source_ = null;
+      if (sourceBuilder_ != null) {
+        sourceBuilder_.dispose();
+        sourceBuilder_ = null;
+      }
       onChanged();
       return this;
     }
     /**
-     * <code>string source = 7 [json_name = "source"];</code>
-     * @param value The bytes for source to set.
-     * @return This builder for chaining.
+     * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
      */
-    public Builder setSourceBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      source_ = value;
+    public com.antinvestor.apis.common.v1.ContactLink.Builder getSourceBuilder() {
       bitField0_ |= 0x00000040;
       onChanged();
-      return this;
+      return getSourceFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
+     */
+    public com.antinvestor.apis.common.v1.ContactLinkOrBuilder getSourceOrBuilder() {
+      if (sourceBuilder_ != null) {
+        return sourceBuilder_.getMessageOrBuilder();
+      } else {
+        return source_ == null ?
+            com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : source_;
+      }
+    }
+    /**
+     * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.common.v1.ContactLink, com.antinvestor.apis.common.v1.ContactLink.Builder, com.antinvestor.apis.common.v1.ContactLinkOrBuilder> 
+        getSourceFieldBuilder() {
+      if (sourceBuilder_ == null) {
+        sourceBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.antinvestor.apis.common.v1.ContactLink, com.antinvestor.apis.common.v1.ContactLink.Builder, com.antinvestor.apis.common.v1.ContactLinkOrBuilder>(
+                getSource(),
+                getParentForChildren(),
+                isClean());
+        source_ = null;
+      }
+      return sourceBuilder_;
     }
 
-    private java.lang.Object destination_ = "";
+    private com.antinvestor.apis.common.v1.ContactLink recipient_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.common.v1.ContactLink, com.antinvestor.apis.common.v1.ContactLink.Builder, com.antinvestor.apis.common.v1.ContactLinkOrBuilder> recipientBuilder_;
     /**
-     * <code>string destination = 8 [json_name = "destination"];</code>
-     * @return The destination.
+     * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
+     * @return Whether the recipient field is set.
      */
-    public java.lang.String getDestination() {
-      java.lang.Object ref = destination_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        destination_ = s;
-        return s;
+    public boolean hasRecipient() {
+      return ((bitField0_ & 0x00000080) != 0);
+    }
+    /**
+     * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
+     * @return The recipient.
+     */
+    public com.antinvestor.apis.common.v1.ContactLink getRecipient() {
+      if (recipientBuilder_ == null) {
+        return recipient_ == null ? com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : recipient_;
       } else {
-        return (java.lang.String) ref;
+        return recipientBuilder_.getMessage();
       }
     }
     /**
-     * <code>string destination = 8 [json_name = "destination"];</code>
-     * @return The bytes for destination.
+     * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
      */
-    public com.google.protobuf.ByteString
-        getDestinationBytes() {
-      java.lang.Object ref = destination_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        destination_ = b;
-        return b;
+    public Builder setRecipient(com.antinvestor.apis.common.v1.ContactLink value) {
+      if (recipientBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        recipient_ = value;
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        recipientBuilder_.setMessage(value);
       }
-    }
-    /**
-     * <code>string destination = 8 [json_name = "destination"];</code>
-     * @param value The destination to set.
-     * @return This builder for chaining.
-     */
-    public Builder setDestination(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      destination_ = value;
       bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }
     /**
-     * <code>string destination = 8 [json_name = "destination"];</code>
-     * @return This builder for chaining.
+     * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
      */
-    public Builder clearDestination() {
-      destination_ = getDefaultInstance().getDestination();
+    public Builder setRecipient(
+        com.antinvestor.apis.common.v1.ContactLink.Builder builderForValue) {
+      if (recipientBuilder_ == null) {
+        recipient_ = builderForValue.build();
+      } else {
+        recipientBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
+     */
+    public Builder mergeRecipient(com.antinvestor.apis.common.v1.ContactLink value) {
+      if (recipientBuilder_ == null) {
+        if (((bitField0_ & 0x00000080) != 0) &&
+          recipient_ != null &&
+          recipient_ != com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance()) {
+          getRecipientBuilder().mergeFrom(value);
+        } else {
+          recipient_ = value;
+        }
+      } else {
+        recipientBuilder_.mergeFrom(value);
+      }
+      if (recipient_ != null) {
+        bitField0_ |= 0x00000080;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
+     */
+    public Builder clearRecipient() {
       bitField0_ = (bitField0_ & ~0x00000080);
+      recipient_ = null;
+      if (recipientBuilder_ != null) {
+        recipientBuilder_.dispose();
+        recipientBuilder_ = null;
+      }
       onChanged();
       return this;
     }
     /**
-     * <code>string destination = 8 [json_name = "destination"];</code>
-     * @param value The bytes for destination to set.
-     * @return This builder for chaining.
+     * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
      */
-    public Builder setDestinationBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      destination_ = value;
+    public com.antinvestor.apis.common.v1.ContactLink.Builder getRecipientBuilder() {
       bitField0_ |= 0x00000080;
       onChanged();
-      return this;
+      return getRecipientFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
+     */
+    public com.antinvestor.apis.common.v1.ContactLinkOrBuilder getRecipientOrBuilder() {
+      if (recipientBuilder_ != null) {
+        return recipientBuilder_.getMessageOrBuilder();
+      } else {
+        return recipient_ == null ?
+            com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : recipient_;
+      }
+    }
+    /**
+     * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.common.v1.ContactLink, com.antinvestor.apis.common.v1.ContactLink.Builder, com.antinvestor.apis.common.v1.ContactLinkOrBuilder> 
+        getRecipientFieldBuilder() {
+      if (recipientBuilder_ == null) {
+        recipientBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.antinvestor.apis.common.v1.ContactLink, com.antinvestor.apis.common.v1.ContactLink.Builder, com.antinvestor.apis.common.v1.ContactLinkOrBuilder>(
+                getRecipient(),
+                getParentForChildren(),
+                isClean());
+        recipient_ = null;
+      }
+      return recipientBuilder_;
     }
 
     private com.antinvestor.apis.common.v1.Money amount_;

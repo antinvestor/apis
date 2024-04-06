@@ -95,28 +95,34 @@ public interface PaymentOrBuilder extends
       getRouteBytes();
 
   /**
-   * <code>string source = 7 [json_name = "source"];</code>
+   * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
+   * @return Whether the source field is set.
+   */
+  boolean hasSource();
+  /**
+   * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
    * @return The source.
    */
-  java.lang.String getSource();
+  com.antinvestor.apis.common.v1.ContactLink getSource();
   /**
-   * <code>string source = 7 [json_name = "source"];</code>
-   * @return The bytes for source.
+   * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
    */
-  com.google.protobuf.ByteString
-      getSourceBytes();
+  com.antinvestor.apis.common.v1.ContactLinkOrBuilder getSourceOrBuilder();
 
   /**
-   * <code>string destination = 8 [json_name = "destination"];</code>
-   * @return The destination.
+   * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
+   * @return Whether the recipient field is set.
    */
-  java.lang.String getDestination();
+  boolean hasRecipient();
   /**
-   * <code>string destination = 8 [json_name = "destination"];</code>
-   * @return The bytes for destination.
+   * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
+   * @return The recipient.
    */
-  com.google.protobuf.ByteString
-      getDestinationBytes();
+  com.antinvestor.apis.common.v1.ContactLink getRecipient();
+  /**
+   * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
+   */
+  com.antinvestor.apis.common.v1.ContactLinkOrBuilder getRecipientOrBuilder();
 
   /**
    * <code>.common.v1.Money amount = 9 [json_name = "amount"];</code>

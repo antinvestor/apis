@@ -41,17 +41,13 @@ private static final long serialVersionUID = 0L;
   }
   private Notification() {
     id_ = "";
-    profileType_ = "";
-    profileId_ = "";
+    parentId_ = "";
     type_ = "";
     template_ = "";
     data_ = "";
     language_ = "";
     routeId_ = "";
     priority_ = 0;
-    parentId_ = "";
-    source_ = "";
-    sourceContactId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -82,48 +78,6 @@ private static final long serialVersionUID = 0L;
   }
 
   private int bitField0_;
-  private int contactCase_ = 0;
-  @SuppressWarnings("serial")
-  private java.lang.Object contact_;
-  public enum ContactCase
-      implements com.google.protobuf.Internal.EnumLite,
-          com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-    CONTACT_ID(4),
-    DETAIL(5),
-    CONTACT_NOT_SET(0);
-    private final int value;
-    private ContactCase(int value) {
-      this.value = value;
-    }
-    /**
-     * @param value The number of the enum to look for.
-     * @return The enum associated with the given number.
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
-    public static ContactCase valueOf(int value) {
-      return forNumber(value);
-    }
-
-    public static ContactCase forNumber(int value) {
-      switch (value) {
-        case 4: return CONTACT_ID;
-        case 5: return DETAIL;
-        case 0: return CONTACT_NOT_SET;
-        default: return null;
-      }
-    }
-    public int getNumber() {
-      return this.value;
-    }
-  };
-
-  public ContactCase
-  getContactCase() {
-    return ContactCase.forNumber(
-        contactCase_);
-  }
-
   public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
@@ -163,186 +117,95 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PROFILE_TYPE_FIELD_NUMBER = 2;
+  public static final int PARENT_ID_FIELD_NUMBER = 2;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object profileType_ = "";
+  private volatile java.lang.Object parentId_ = "";
   /**
-   * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
-   * @return The profileType.
+   * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return The parentId.
    */
   @java.lang.Override
-  public java.lang.String getProfileType() {
-    java.lang.Object ref = profileType_;
+  public java.lang.String getParentId() {
+    java.lang.Object ref = parentId_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      profileType_ = s;
+      parentId_ = s;
       return s;
     }
   }
   /**
-   * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for profileType.
+   * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for parentId.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getProfileTypeBytes() {
-    java.lang.Object ref = profileType_;
+      getParentIdBytes() {
+    java.lang.Object ref = parentId_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      profileType_ = b;
+      parentId_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int PROFILE_ID_FIELD_NUMBER = 3;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object profileId_ = "";
+  public static final int SOURCE_FIELD_NUMBER = 3;
+  private com.antinvestor.apis.common.v1.ContactLink source_;
   /**
-   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-   * @return The profileId.
+   * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
+   * @return Whether the source field is set.
    */
   @java.lang.Override
-  public java.lang.String getProfileId() {
-    java.lang.Object ref = profileId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      profileId_ = s;
-      return s;
-    }
+  public boolean hasSource() {
+    return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for profileId.
+   * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
+   * @return The source.
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getProfileIdBytes() {
-    java.lang.Object ref = profileId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      profileId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public com.antinvestor.apis.common.v1.ContactLink getSource() {
+    return source_ == null ? com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : source_;
+  }
+  /**
+   * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.common.v1.ContactLinkOrBuilder getSourceOrBuilder() {
+    return source_ == null ? com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : source_;
   }
 
-  public static final int CONTACT_ID_FIELD_NUMBER = 4;
+  public static final int RECIPIENT_FIELD_NUMBER = 4;
+  private com.antinvestor.apis.common.v1.ContactLink recipient_;
   /**
-   * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
-   * @return Whether the contactId field is set.
+   * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
+   * @return Whether the recipient field is set.
    */
-  public boolean hasContactId() {
-    return contactCase_ == 4;
+  @java.lang.Override
+  public boolean hasRecipient() {
+    return ((bitField0_ & 0x00000002) != 0);
   }
   /**
-   * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
-   * @return The contactId.
+   * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
+   * @return The recipient.
    */
-  public java.lang.String getContactId() {
-    java.lang.Object ref = "";
-    if (contactCase_ == 4) {
-      ref = contact_;
-    }
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      if (contactCase_ == 4) {
-        contact_ = s;
-      }
-      return s;
-    }
+  @java.lang.Override
+  public com.antinvestor.apis.common.v1.ContactLink getRecipient() {
+    return recipient_ == null ? com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : recipient_;
   }
   /**
-   * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for contactId.
+   * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
    */
-  public com.google.protobuf.ByteString
-      getContactIdBytes() {
-    java.lang.Object ref = "";
-    if (contactCase_ == 4) {
-      ref = contact_;
-    }
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      if (contactCase_ == 4) {
-        contact_ = b;
-      }
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int DETAIL_FIELD_NUMBER = 5;
-  /**
-   * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
-   * @return Whether the detail field is set.
-   */
-  public boolean hasDetail() {
-    return contactCase_ == 5;
-  }
-  /**
-   * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
-   * @return The detail.
-   */
-  public java.lang.String getDetail() {
-    java.lang.Object ref = "";
-    if (contactCase_ == 5) {
-      ref = contact_;
-    }
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      if (contactCase_ == 5) {
-        contact_ = s;
-      }
-      return s;
-    }
-  }
-  /**
-   * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for detail.
-   */
-  public com.google.protobuf.ByteString
-      getDetailBytes() {
-    java.lang.Object ref = "";
-    if (contactCase_ == 5) {
-      ref = contact_;
-    }
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      if (contactCase_ == 5) {
-        contact_ = b;
-      }
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  @java.lang.Override
+  public com.antinvestor.apis.common.v1.ContactLinkOrBuilder getRecipientOrBuilder() {
+    return recipient_ == null ? com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : recipient_;
   }
 
   public static final int TYPE_FIELD_NUMBER = 6;
@@ -649,7 +512,7 @@ java.lang.String defaultValue) {
    */
   @java.lang.Override
   public boolean hasStatus() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return ((bitField0_ & 0x00000004) != 0);
   }
   /**
    * <code>.common.v1.StatusResponse status = 14 [json_name = "status", (.buf.validate.field) = { ... }</code>
@@ -764,123 +627,6 @@ java.lang.String defaultValue) {
     return result == null ? com.antinvestor.apis.notification.v1.PRIORITY.UNRECOGNIZED : result;
   }
 
-  public static final int PARENT_ID_FIELD_NUMBER = 17;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object parentId_ = "";
-  /**
-   * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-   * @return The parentId.
-   */
-  @java.lang.Override
-  public java.lang.String getParentId() {
-    java.lang.Object ref = parentId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      parentId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for parentId.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getParentIdBytes() {
-    java.lang.Object ref = parentId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      parentId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int SOURCE_FIELD_NUMBER = 18;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object source_ = "";
-  /**
-   * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
-   * @return The source.
-   */
-  @java.lang.Override
-  public java.lang.String getSource() {
-    java.lang.Object ref = source_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      source_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for source.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getSourceBytes() {
-    java.lang.Object ref = source_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      source_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int SOURCE_CONTACT_ID_FIELD_NUMBER = 19;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object sourceContactId_ = "";
-  /**
-   * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
-   * @return The sourceContactId.
-   */
-  @java.lang.Override
-  public java.lang.String getSourceContactId() {
-    java.lang.Object ref = sourceContactId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      sourceContactId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for sourceContactId.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getSourceContactIdBytes() {
-    java.lang.Object ref = sourceContactId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      sourceContactId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -898,17 +644,14 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileType_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 2, profileType_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(parentId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, parentId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 3, profileId_);
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(3, getSource());
     }
-    if (contactCase_ == 4) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 4, contact_);
-    }
-    if (contactCase_ == 5) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 5, contact_);
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(4, getRecipient());
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(type_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 6, type_);
@@ -937,7 +680,7 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(routeId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 13, routeId_);
     }
-    if (((bitField0_ & 0x00000001) != 0)) {
+    if (((bitField0_ & 0x00000004) != 0)) {
       output.writeMessage(14, getStatus());
     }
     com.google.protobuf.GeneratedMessage
@@ -948,15 +691,6 @@ java.lang.String defaultValue) {
         15);
     if (priority_ != com.antinvestor.apis.notification.v1.PRIORITY.HIGH.getNumber()) {
       output.writeEnum(16, priority_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(parentId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 17, parentId_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(source_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 18, source_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(sourceContactId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 19, sourceContactId_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -970,17 +704,16 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileType_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, profileType_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(parentId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, parentId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, profileId_);
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(3, getSource());
     }
-    if (contactCase_ == 4) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(4, contact_);
-    }
-    if (contactCase_ == 5) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(5, contact_);
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(4, getRecipient());
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(type_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(6, type_);
@@ -1015,7 +748,7 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(routeId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(13, routeId_);
     }
-    if (((bitField0_ & 0x00000001) != 0)) {
+    if (((bitField0_ & 0x00000004) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(14, getStatus());
     }
@@ -1032,15 +765,6 @@ java.lang.String defaultValue) {
     if (priority_ != com.antinvestor.apis.notification.v1.PRIORITY.HIGH.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(16, priority_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(parentId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(17, parentId_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(source_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(18, source_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(sourceContactId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(19, sourceContactId_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -1059,10 +783,18 @@ java.lang.String defaultValue) {
 
     if (!getId()
         .equals(other.getId())) return false;
-    if (!getProfileType()
-        .equals(other.getProfileType())) return false;
-    if (!getProfileId()
-        .equals(other.getProfileId())) return false;
+    if (!getParentId()
+        .equals(other.getParentId())) return false;
+    if (hasSource() != other.hasSource()) return false;
+    if (hasSource()) {
+      if (!getSource()
+          .equals(other.getSource())) return false;
+    }
+    if (hasRecipient() != other.hasRecipient()) return false;
+    if (hasRecipient()) {
+      if (!getRecipient()
+          .equals(other.getRecipient())) return false;
+    }
     if (!getType()
         .equals(other.getType())) return false;
     if (!getTemplate()
@@ -1087,25 +819,6 @@ java.lang.String defaultValue) {
     if (!internalGetExtras().equals(
         other.internalGetExtras())) return false;
     if (priority_ != other.priority_) return false;
-    if (!getParentId()
-        .equals(other.getParentId())) return false;
-    if (!getSource()
-        .equals(other.getSource())) return false;
-    if (!getSourceContactId()
-        .equals(other.getSourceContactId())) return false;
-    if (!getContactCase().equals(other.getContactCase())) return false;
-    switch (contactCase_) {
-      case 4:
-        if (!getContactId()
-            .equals(other.getContactId())) return false;
-        break;
-      case 5:
-        if (!getDetail()
-            .equals(other.getDetail())) return false;
-        break;
-      case 0:
-      default:
-    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -1119,10 +832,16 @@ java.lang.String defaultValue) {
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + getId().hashCode();
-    hash = (37 * hash) + PROFILE_TYPE_FIELD_NUMBER;
-    hash = (53 * hash) + getProfileType().hashCode();
-    hash = (37 * hash) + PROFILE_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getProfileId().hashCode();
+    hash = (37 * hash) + PARENT_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getParentId().hashCode();
+    if (hasSource()) {
+      hash = (37 * hash) + SOURCE_FIELD_NUMBER;
+      hash = (53 * hash) + getSource().hashCode();
+    }
+    if (hasRecipient()) {
+      hash = (37 * hash) + RECIPIENT_FIELD_NUMBER;
+      hash = (53 * hash) + getRecipient().hashCode();
+    }
     hash = (37 * hash) + TYPE_FIELD_NUMBER;
     hash = (53 * hash) + getType().hashCode();
     hash = (37 * hash) + TEMPLATE_FIELD_NUMBER;
@@ -1153,24 +872,6 @@ java.lang.String defaultValue) {
     }
     hash = (37 * hash) + PRIORITY_FIELD_NUMBER;
     hash = (53 * hash) + priority_;
-    hash = (37 * hash) + PARENT_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getParentId().hashCode();
-    hash = (37 * hash) + SOURCE_FIELD_NUMBER;
-    hash = (53 * hash) + getSource().hashCode();
-    hash = (37 * hash) + SOURCE_CONTACT_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getSourceContactId().hashCode();
-    switch (contactCase_) {
-      case 4:
-        hash = (37 * hash) + CONTACT_ID_FIELD_NUMBER;
-        hash = (53 * hash) + getContactId().hashCode();
-        break;
-      case 5:
-        hash = (37 * hash) + DETAIL_FIELD_NUMBER;
-        hash = (53 * hash) + getDetail().hashCode();
-        break;
-      case 0:
-      default:
-    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1327,6 +1028,8 @@ java.lang.String defaultValue) {
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessage
               .alwaysUseFieldBuilders) {
+        getSourceFieldBuilder();
+        getRecipientFieldBuilder();
         getStatusFieldBuilder();
       }
     }
@@ -1335,8 +1038,17 @@ java.lang.String defaultValue) {
       super.clear();
       bitField0_ = 0;
       id_ = "";
-      profileType_ = "";
-      profileId_ = "";
+      parentId_ = "";
+      source_ = null;
+      if (sourceBuilder_ != null) {
+        sourceBuilder_.dispose();
+        sourceBuilder_ = null;
+      }
+      recipient_ = null;
+      if (recipientBuilder_ != null) {
+        recipientBuilder_.dispose();
+        recipientBuilder_ = null;
+      }
       type_ = "";
       template_ = "";
       internalGetMutablePayload().clear();
@@ -1352,11 +1064,6 @@ java.lang.String defaultValue) {
       }
       internalGetMutableExtras().clear();
       priority_ = 0;
-      parentId_ = "";
-      source_ = "";
-      sourceContactId_ = "";
-      contactCase_ = 0;
-      contact_ = null;
       return this;
     }
 
@@ -1384,7 +1091,6 @@ java.lang.String defaultValue) {
     public com.antinvestor.apis.notification.v1.Notification buildPartial() {
       com.antinvestor.apis.notification.v1.Notification result = new com.antinvestor.apis.notification.v1.Notification(this);
       if (bitField0_ != 0) { buildPartial0(result); }
-      buildPartialOneofs(result);
       onBuilt();
       return result;
     }
@@ -1395,65 +1101,60 @@ java.lang.String defaultValue) {
         result.id_ = id_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.profileType_ = profileType_;
+        result.parentId_ = parentId_;
       }
+      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.profileId_ = profileId_;
+        result.source_ = sourceBuilder_ == null
+            ? source_
+            : sourceBuilder_.build();
+        to_bitField0_ |= 0x00000001;
       }
-      if (((from_bitField0_ & 0x00000020) != 0)) {
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.recipient_ = recipientBuilder_ == null
+            ? recipient_
+            : recipientBuilder_.build();
+        to_bitField0_ |= 0x00000002;
+      }
+      if (((from_bitField0_ & 0x00000010) != 0)) {
         result.type_ = type_;
       }
-      if (((from_bitField0_ & 0x00000040) != 0)) {
+      if (((from_bitField0_ & 0x00000020) != 0)) {
         result.template_ = template_;
       }
-      if (((from_bitField0_ & 0x00000080) != 0)) {
+      if (((from_bitField0_ & 0x00000040) != 0)) {
         result.payload_ = internalGetPayload();
         result.payload_.makeImmutable();
       }
-      if (((from_bitField0_ & 0x00000100) != 0)) {
+      if (((from_bitField0_ & 0x00000080) != 0)) {
         result.data_ = data_;
       }
-      if (((from_bitField0_ & 0x00000200) != 0)) {
+      if (((from_bitField0_ & 0x00000100) != 0)) {
         result.language_ = language_;
       }
-      if (((from_bitField0_ & 0x00000400) != 0)) {
+      if (((from_bitField0_ & 0x00000200) != 0)) {
         result.outBound_ = outBound_;
       }
-      if (((from_bitField0_ & 0x00000800) != 0)) {
+      if (((from_bitField0_ & 0x00000400) != 0)) {
         result.autoRelease_ = autoRelease_;
       }
-      if (((from_bitField0_ & 0x00001000) != 0)) {
+      if (((from_bitField0_ & 0x00000800) != 0)) {
         result.routeId_ = routeId_;
       }
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00002000) != 0)) {
+      if (((from_bitField0_ & 0x00001000) != 0)) {
         result.status_ = statusBuilder_ == null
             ? status_
             : statusBuilder_.build();
-        to_bitField0_ |= 0x00000001;
+        to_bitField0_ |= 0x00000004;
       }
-      if (((from_bitField0_ & 0x00004000) != 0)) {
+      if (((from_bitField0_ & 0x00002000) != 0)) {
         result.extras_ = internalGetExtras();
         result.extras_.makeImmutable();
       }
-      if (((from_bitField0_ & 0x00008000) != 0)) {
+      if (((from_bitField0_ & 0x00004000) != 0)) {
         result.priority_ = priority_;
       }
-      if (((from_bitField0_ & 0x00010000) != 0)) {
-        result.parentId_ = parentId_;
-      }
-      if (((from_bitField0_ & 0x00020000) != 0)) {
-        result.source_ = source_;
-      }
-      if (((from_bitField0_ & 0x00040000) != 0)) {
-        result.sourceContactId_ = sourceContactId_;
-      }
       result.bitField0_ |= to_bitField0_;
-    }
-
-    private void buildPartialOneofs(com.antinvestor.apis.notification.v1.Notification result) {
-      result.contactCase_ = contactCase_;
-      result.contact_ = this.contact_;
     }
 
     @java.lang.Override
@@ -1473,37 +1174,38 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (!other.getProfileType().isEmpty()) {
-        profileType_ = other.profileType_;
+      if (!other.getParentId().isEmpty()) {
+        parentId_ = other.parentId_;
         bitField0_ |= 0x00000002;
         onChanged();
       }
-      if (!other.getProfileId().isEmpty()) {
-        profileId_ = other.profileId_;
-        bitField0_ |= 0x00000004;
-        onChanged();
+      if (other.hasSource()) {
+        mergeSource(other.getSource());
+      }
+      if (other.hasRecipient()) {
+        mergeRecipient(other.getRecipient());
       }
       if (!other.getType().isEmpty()) {
         type_ = other.type_;
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         onChanged();
       }
       if (!other.getTemplate().isEmpty()) {
         template_ = other.template_;
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         onChanged();
       }
       internalGetMutablePayload().mergeFrom(
           other.internalGetPayload());
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000040;
       if (!other.getData().isEmpty()) {
         data_ = other.data_;
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000080;
         onChanged();
       }
       if (!other.getLanguage().isEmpty()) {
         language_ = other.language_;
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000100;
         onChanged();
       }
       if (other.getOutBound() != false) {
@@ -1514,7 +1216,7 @@ java.lang.String defaultValue) {
       }
       if (!other.getRouteId().isEmpty()) {
         routeId_ = other.routeId_;
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00000800;
         onChanged();
       }
       if (other.hasStatus()) {
@@ -1522,41 +1224,9 @@ java.lang.String defaultValue) {
       }
       internalGetMutableExtras().mergeFrom(
           other.internalGetExtras());
-      bitField0_ |= 0x00004000;
+      bitField0_ |= 0x00002000;
       if (other.priority_ != 0) {
         setPriorityValue(other.getPriorityValue());
-      }
-      if (!other.getParentId().isEmpty()) {
-        parentId_ = other.parentId_;
-        bitField0_ |= 0x00010000;
-        onChanged();
-      }
-      if (!other.getSource().isEmpty()) {
-        source_ = other.source_;
-        bitField0_ |= 0x00020000;
-        onChanged();
-      }
-      if (!other.getSourceContactId().isEmpty()) {
-        sourceContactId_ = other.sourceContactId_;
-        bitField0_ |= 0x00040000;
-        onChanged();
-      }
-      switch (other.getContactCase()) {
-        case CONTACT_ID: {
-          contactCase_ = 4;
-          contact_ = other.contact_;
-          onChanged();
-          break;
-        }
-        case DETAIL: {
-          contactCase_ = 5;
-          contact_ = other.contact_;
-          onChanged();
-          break;
-        }
-        case CONTACT_NOT_SET: {
-          break;
-        }
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -1590,35 +1260,32 @@ java.lang.String defaultValue) {
               break;
             } // case 10
             case 18: {
-              profileType_ = input.readStringRequireUtf8();
+              parentId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
             case 26: {
-              profileId_ = input.readStringRequireUtf8();
+              input.readMessage(
+                  getSourceFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000004;
               break;
             } // case 26
             case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-              contactCase_ = 4;
-              contact_ = s;
+              input.readMessage(
+                  getRecipientFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000008;
               break;
             } // case 34
-            case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
-              contactCase_ = 5;
-              contact_ = s;
-              break;
-            } // case 42
             case 50: {
               type_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000010;
               break;
             } // case 50
             case 58: {
               template_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000020;
               break;
             } // case 58
             case 66: {
@@ -1627,39 +1294,39 @@ java.lang.String defaultValue) {
                   PayloadDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutablePayload().getMutableMap().put(
                   payload__.getKey(), payload__.getValue());
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000040;
               break;
             } // case 66
             case 74: {
               data_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000080;
               break;
             } // case 74
             case 82: {
               language_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000100;
               break;
             } // case 82
             case 88: {
               outBound_ = input.readBool();
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00000200;
               break;
             } // case 88
             case 96: {
               autoRelease_ = input.readBool();
-              bitField0_ |= 0x00000800;
+              bitField0_ |= 0x00000400;
               break;
             } // case 96
             case 106: {
               routeId_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00001000;
+              bitField0_ |= 0x00000800;
               break;
             } // case 106
             case 114: {
               input.readMessage(
                   getStatusFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00002000;
+              bitField0_ |= 0x00001000;
               break;
             } // case 114
             case 122: {
@@ -1668,29 +1335,14 @@ java.lang.String defaultValue) {
                   ExtrasDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableExtras().getMutableMap().put(
                   extras__.getKey(), extras__.getValue());
-              bitField0_ |= 0x00004000;
+              bitField0_ |= 0x00002000;
               break;
             } // case 122
             case 128: {
               priority_ = input.readEnum();
-              bitField0_ |= 0x00008000;
+              bitField0_ |= 0x00004000;
               break;
             } // case 128
-            case 138: {
-              parentId_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00010000;
-              break;
-            } // case 138
-            case 146: {
-              source_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00020000;
-              break;
-            } // case 146
-            case 154: {
-              sourceContactId_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00040000;
-              break;
-            } // case 154
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1706,21 +1358,6 @@ java.lang.String defaultValue) {
       } // finally
       return this;
     }
-    private int contactCase_ = 0;
-    private java.lang.Object contact_;
-    public ContactCase
-        getContactCase() {
-      return ContactCase.forNumber(
-          contactCase_);
-    }
-
-    public Builder clearContact() {
-      contactCase_ = 0;
-      contact_ = null;
-      onChanged();
-      return this;
-    }
-
     private int bitField0_;
 
     private java.lang.Object id_ = "";
@@ -1795,334 +1432,318 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private java.lang.Object profileType_ = "";
+    private java.lang.Object parentId_ = "";
     /**
-     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
-     * @return The profileType.
+     * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @return The parentId.
      */
-    public java.lang.String getProfileType() {
-      java.lang.Object ref = profileType_;
+    public java.lang.String getParentId() {
+      java.lang.Object ref = parentId_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        profileType_ = s;
+        parentId_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for profileType.
+     * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for parentId.
      */
     public com.google.protobuf.ByteString
-        getProfileTypeBytes() {
-      java.lang.Object ref = profileType_;
+        getParentIdBytes() {
+      java.lang.Object ref = parentId_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        profileType_ = b;
+        parentId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
-     * @param value The profileType to set.
+     * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @param value The parentId to set.
      * @return This builder for chaining.
      */
-    public Builder setProfileType(
+    public Builder setParentId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      profileType_ = value;
+      parentId_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
+     * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearProfileType() {
-      profileType_ = getDefaultInstance().getProfileType();
+    public Builder clearParentId() {
+      parentId_ = getDefaultInstance().getParentId();
       bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for profileType to set.
+     * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for parentId to set.
      * @return This builder for chaining.
      */
-    public Builder setProfileTypeBytes(
+    public Builder setParentIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      profileType_ = value;
+      parentId_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
 
-    private java.lang.Object profileId_ = "";
+    private com.antinvestor.apis.common.v1.ContactLink source_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.common.v1.ContactLink, com.antinvestor.apis.common.v1.ContactLink.Builder, com.antinvestor.apis.common.v1.ContactLinkOrBuilder> sourceBuilder_;
     /**
-     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-     * @return The profileId.
+     * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
+     * @return Whether the source field is set.
      */
-    public java.lang.String getProfileId() {
-      java.lang.Object ref = profileId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        profileId_ = s;
-        return s;
+    public boolean hasSource() {
+      return ((bitField0_ & 0x00000004) != 0);
+    }
+    /**
+     * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
+     * @return The source.
+     */
+    public com.antinvestor.apis.common.v1.ContactLink getSource() {
+      if (sourceBuilder_ == null) {
+        return source_ == null ? com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : source_;
       } else {
-        return (java.lang.String) ref;
+        return sourceBuilder_.getMessage();
       }
     }
     /**
-     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for profileId.
+     * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
      */
-    public com.google.protobuf.ByteString
-        getProfileIdBytes() {
-      java.lang.Object ref = profileId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        profileId_ = b;
-        return b;
+    public Builder setSource(com.antinvestor.apis.common.v1.ContactLink value) {
+      if (sourceBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        source_ = value;
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        sourceBuilder_.setMessage(value);
       }
-    }
-    /**
-     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-     * @param value The profileId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setProfileId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      profileId_ = value;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-     * @return This builder for chaining.
+     * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
      */
-    public Builder clearProfileId() {
-      profileId_ = getDefaultInstance().getProfileId();
+    public Builder setSource(
+        com.antinvestor.apis.common.v1.ContactLink.Builder builderForValue) {
+      if (sourceBuilder_ == null) {
+        source_ = builderForValue.build();
+      } else {
+        sourceBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
+     */
+    public Builder mergeSource(com.antinvestor.apis.common.v1.ContactLink value) {
+      if (sourceBuilder_ == null) {
+        if (((bitField0_ & 0x00000004) != 0) &&
+          source_ != null &&
+          source_ != com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance()) {
+          getSourceBuilder().mergeFrom(value);
+        } else {
+          source_ = value;
+        }
+      } else {
+        sourceBuilder_.mergeFrom(value);
+      }
+      if (source_ != null) {
+        bitField0_ |= 0x00000004;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
+     */
+    public Builder clearSource() {
       bitField0_ = (bitField0_ & ~0x00000004);
+      source_ = null;
+      if (sourceBuilder_ != null) {
+        sourceBuilder_.dispose();
+        sourceBuilder_ = null;
+      }
       onChanged();
       return this;
     }
     /**
-     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for profileId to set.
-     * @return This builder for chaining.
+     * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
      */
-    public Builder setProfileIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      profileId_ = value;
+    public com.antinvestor.apis.common.v1.ContactLink.Builder getSourceBuilder() {
       bitField0_ |= 0x00000004;
       onChanged();
-      return this;
+      return getSourceFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
+     */
+    public com.antinvestor.apis.common.v1.ContactLinkOrBuilder getSourceOrBuilder() {
+      if (sourceBuilder_ != null) {
+        return sourceBuilder_.getMessageOrBuilder();
+      } else {
+        return source_ == null ?
+            com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : source_;
+      }
+    }
+    /**
+     * <code>.common.v1.ContactLink source = 3 [json_name = "source"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.common.v1.ContactLink, com.antinvestor.apis.common.v1.ContactLink.Builder, com.antinvestor.apis.common.v1.ContactLinkOrBuilder> 
+        getSourceFieldBuilder() {
+      if (sourceBuilder_ == null) {
+        sourceBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.antinvestor.apis.common.v1.ContactLink, com.antinvestor.apis.common.v1.ContactLink.Builder, com.antinvestor.apis.common.v1.ContactLinkOrBuilder>(
+                getSource(),
+                getParentForChildren(),
+                isClean());
+        source_ = null;
+      }
+      return sourceBuilder_;
     }
 
+    private com.antinvestor.apis.common.v1.ContactLink recipient_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.common.v1.ContactLink, com.antinvestor.apis.common.v1.ContactLink.Builder, com.antinvestor.apis.common.v1.ContactLinkOrBuilder> recipientBuilder_;
     /**
-     * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
-     * @return Whether the contactId field is set.
+     * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
+     * @return Whether the recipient field is set.
      */
-    @java.lang.Override
-    public boolean hasContactId() {
-      return contactCase_ == 4;
+    public boolean hasRecipient() {
+      return ((bitField0_ & 0x00000008) != 0);
     }
     /**
-     * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
-     * @return The contactId.
+     * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
+     * @return The recipient.
      */
-    @java.lang.Override
-    public java.lang.String getContactId() {
-      java.lang.Object ref = "";
-      if (contactCase_ == 4) {
-        ref = contact_;
-      }
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (contactCase_ == 4) {
-          contact_ = s;
-        }
-        return s;
+    public com.antinvestor.apis.common.v1.ContactLink getRecipient() {
+      if (recipientBuilder_ == null) {
+        return recipient_ == null ? com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : recipient_;
       } else {
-        return (java.lang.String) ref;
+        return recipientBuilder_.getMessage();
       }
     }
     /**
-     * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for contactId.
+     * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
      */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getContactIdBytes() {
-      java.lang.Object ref = "";
-      if (contactCase_ == 4) {
-        ref = contact_;
-      }
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        if (contactCase_ == 4) {
-          contact_ = b;
+    public Builder setRecipient(com.antinvestor.apis.common.v1.ContactLink value) {
+      if (recipientBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
         }
-        return b;
+        recipient_ = value;
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        recipientBuilder_.setMessage(value);
       }
-    }
-    /**
-     * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
-     * @param value The contactId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setContactId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      contactCase_ = 4;
-      contact_ = value;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
-     * @return This builder for chaining.
+     * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
      */
-    public Builder clearContactId() {
-      if (contactCase_ == 4) {
-        contactCase_ = 0;
-        contact_ = null;
+    public Builder setRecipient(
+        com.antinvestor.apis.common.v1.ContactLink.Builder builderForValue) {
+      if (recipientBuilder_ == null) {
+        recipient_ = builderForValue.build();
+      } else {
+        recipientBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
+     */
+    public Builder mergeRecipient(com.antinvestor.apis.common.v1.ContactLink value) {
+      if (recipientBuilder_ == null) {
+        if (((bitField0_ & 0x00000008) != 0) &&
+          recipient_ != null &&
+          recipient_ != com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance()) {
+          getRecipientBuilder().mergeFrom(value);
+        } else {
+          recipient_ = value;
+        }
+      } else {
+        recipientBuilder_.mergeFrom(value);
+      }
+      if (recipient_ != null) {
+        bitField0_ |= 0x00000008;
         onChanged();
       }
       return this;
     }
     /**
-     * <code>string contact_id = 4 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for contactId to set.
-     * @return This builder for chaining.
+     * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
      */
-    public Builder setContactIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      contactCase_ = 4;
-      contact_ = value;
+    public Builder clearRecipient() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      recipient_ = null;
+      if (recipientBuilder_ != null) {
+        recipientBuilder_.dispose();
+        recipientBuilder_ = null;
+      }
       onChanged();
       return this;
     }
-
     /**
-     * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
-     * @return Whether the detail field is set.
+     * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
      */
-    @java.lang.Override
-    public boolean hasDetail() {
-      return contactCase_ == 5;
+    public com.antinvestor.apis.common.v1.ContactLink.Builder getRecipientBuilder() {
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return getRecipientFieldBuilder().getBuilder();
     }
     /**
-     * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
-     * @return The detail.
+     * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
      */
-    @java.lang.Override
-    public java.lang.String getDetail() {
-      java.lang.Object ref = "";
-      if (contactCase_ == 5) {
-        ref = contact_;
-      }
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (contactCase_ == 5) {
-          contact_ = s;
-        }
-        return s;
+    public com.antinvestor.apis.common.v1.ContactLinkOrBuilder getRecipientOrBuilder() {
+      if (recipientBuilder_ != null) {
+        return recipientBuilder_.getMessageOrBuilder();
       } else {
-        return (java.lang.String) ref;
+        return recipient_ == null ?
+            com.antinvestor.apis.common.v1.ContactLink.getDefaultInstance() : recipient_;
       }
     }
     /**
-     * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for detail.
+     * <code>.common.v1.ContactLink recipient = 4 [json_name = "recipient"];</code>
      */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getDetailBytes() {
-      java.lang.Object ref = "";
-      if (contactCase_ == 5) {
-        ref = contact_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.common.v1.ContactLink, com.antinvestor.apis.common.v1.ContactLink.Builder, com.antinvestor.apis.common.v1.ContactLinkOrBuilder> 
+        getRecipientFieldBuilder() {
+      if (recipientBuilder_ == null) {
+        recipientBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.antinvestor.apis.common.v1.ContactLink, com.antinvestor.apis.common.v1.ContactLink.Builder, com.antinvestor.apis.common.v1.ContactLinkOrBuilder>(
+                getRecipient(),
+                getParentForChildren(),
+                isClean());
+        recipient_ = null;
       }
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        if (contactCase_ == 5) {
-          contact_ = b;
-        }
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
-     * @param value The detail to set.
-     * @return This builder for chaining.
-     */
-    public Builder setDetail(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      contactCase_ = 5;
-      contact_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearDetail() {
-      if (contactCase_ == 5) {
-        contactCase_ = 0;
-        contact_ = null;
-        onChanged();
-      }
-      return this;
-    }
-    /**
-     * <code>string detail = 5 [json_name = "detail", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for detail to set.
-     * @return This builder for chaining.
-     */
-    public Builder setDetailBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      contactCase_ = 5;
-      contact_ = value;
-      onChanged();
-      return this;
+      return recipientBuilder_;
     }
 
     private java.lang.Object type_ = "";
@@ -2168,7 +1789,7 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       type_ = value;
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
@@ -2178,7 +1799,7 @@ java.lang.String defaultValue) {
      */
     public Builder clearType() {
       type_ = getDefaultInstance().getType();
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000010);
       onChanged();
       return this;
     }
@@ -2192,7 +1813,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       type_ = value;
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
@@ -2240,7 +1861,7 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       template_ = value;
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
@@ -2250,7 +1871,7 @@ java.lang.String defaultValue) {
      */
     public Builder clearTemplate() {
       template_ = getDefaultInstance().getTemplate();
-      bitField0_ = (bitField0_ & ~0x00000040);
+      bitField0_ = (bitField0_ & ~0x00000020);
       onChanged();
       return this;
     }
@@ -2264,7 +1885,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       template_ = value;
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
@@ -2288,7 +1909,7 @@ java.lang.String defaultValue) {
       if (!payload_.isMutable()) {
         payload_ = payload_.copy();
       }
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000040;
       onChanged();
       return payload_;
     }
@@ -2348,7 +1969,7 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearPayload() {
-      bitField0_ = (bitField0_ & ~0x00000080);
+      bitField0_ = (bitField0_ & ~0x00000040);
       internalGetMutablePayload().getMutableMap()
           .clear();
       return this;
@@ -2369,7 +1990,7 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutablePayload() {
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000040;
       return internalGetMutablePayload().getMutableMap();
     }
     /**
@@ -2382,7 +2003,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutablePayload().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000040;
       return this;
     }
     /**
@@ -2392,7 +2013,7 @@ java.lang.String defaultValue) {
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutablePayload().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000040;
       return this;
     }
 
@@ -2439,7 +2060,7 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       data_ = value;
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }
@@ -2449,7 +2070,7 @@ java.lang.String defaultValue) {
      */
     public Builder clearData() {
       data_ = getDefaultInstance().getData();
-      bitField0_ = (bitField0_ & ~0x00000100);
+      bitField0_ = (bitField0_ & ~0x00000080);
       onChanged();
       return this;
     }
@@ -2463,7 +2084,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       data_ = value;
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }
@@ -2511,7 +2132,7 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       language_ = value;
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
@@ -2521,7 +2142,7 @@ java.lang.String defaultValue) {
      */
     public Builder clearLanguage() {
       language_ = getDefaultInstance().getLanguage();
-      bitField0_ = (bitField0_ & ~0x00000200);
+      bitField0_ = (bitField0_ & ~0x00000100);
       onChanged();
       return this;
     }
@@ -2535,7 +2156,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       language_ = value;
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
@@ -2557,7 +2178,7 @@ java.lang.String defaultValue) {
     public Builder setOutBound(boolean value) {
 
       outBound_ = value;
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00000200;
       onChanged();
       return this;
     }
@@ -2566,7 +2187,7 @@ java.lang.String defaultValue) {
      * @return This builder for chaining.
      */
     public Builder clearOutBound() {
-      bitField0_ = (bitField0_ & ~0x00000400);
+      bitField0_ = (bitField0_ & ~0x00000200);
       outBound_ = false;
       onChanged();
       return this;
@@ -2589,7 +2210,7 @@ java.lang.String defaultValue) {
     public Builder setAutoRelease(boolean value) {
 
       autoRelease_ = value;
-      bitField0_ |= 0x00000800;
+      bitField0_ |= 0x00000400;
       onChanged();
       return this;
     }
@@ -2598,7 +2219,7 @@ java.lang.String defaultValue) {
      * @return This builder for chaining.
      */
     public Builder clearAutoRelease() {
-      bitField0_ = (bitField0_ & ~0x00000800);
+      bitField0_ = (bitField0_ & ~0x00000400);
       autoRelease_ = false;
       onChanged();
       return this;
@@ -2647,7 +2268,7 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       routeId_ = value;
-      bitField0_ |= 0x00001000;
+      bitField0_ |= 0x00000800;
       onChanged();
       return this;
     }
@@ -2657,7 +2278,7 @@ java.lang.String defaultValue) {
      */
     public Builder clearRouteId() {
       routeId_ = getDefaultInstance().getRouteId();
-      bitField0_ = (bitField0_ & ~0x00001000);
+      bitField0_ = (bitField0_ & ~0x00000800);
       onChanged();
       return this;
     }
@@ -2671,7 +2292,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       routeId_ = value;
-      bitField0_ |= 0x00001000;
+      bitField0_ |= 0x00000800;
       onChanged();
       return this;
     }
@@ -2684,7 +2305,7 @@ java.lang.String defaultValue) {
      * @return Whether the status field is set.
      */
     public boolean hasStatus() {
-      return ((bitField0_ & 0x00002000) != 0);
+      return ((bitField0_ & 0x00001000) != 0);
     }
     /**
      * <code>.common.v1.StatusResponse status = 14 [json_name = "status", (.buf.validate.field) = { ... }</code>
@@ -2709,7 +2330,7 @@ java.lang.String defaultValue) {
       } else {
         statusBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00002000;
+      bitField0_ |= 0x00001000;
       onChanged();
       return this;
     }
@@ -2723,7 +2344,7 @@ java.lang.String defaultValue) {
       } else {
         statusBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00002000;
+      bitField0_ |= 0x00001000;
       onChanged();
       return this;
     }
@@ -2732,7 +2353,7 @@ java.lang.String defaultValue) {
      */
     public Builder mergeStatus(com.antinvestor.apis.common.v1.StatusResponse value) {
       if (statusBuilder_ == null) {
-        if (((bitField0_ & 0x00002000) != 0) &&
+        if (((bitField0_ & 0x00001000) != 0) &&
           status_ != null &&
           status_ != com.antinvestor.apis.common.v1.StatusResponse.getDefaultInstance()) {
           getStatusBuilder().mergeFrom(value);
@@ -2743,7 +2364,7 @@ java.lang.String defaultValue) {
         statusBuilder_.mergeFrom(value);
       }
       if (status_ != null) {
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00001000;
         onChanged();
       }
       return this;
@@ -2752,7 +2373,7 @@ java.lang.String defaultValue) {
      * <code>.common.v1.StatusResponse status = 14 [json_name = "status", (.buf.validate.field) = { ... }</code>
      */
     public Builder clearStatus() {
-      bitField0_ = (bitField0_ & ~0x00002000);
+      bitField0_ = (bitField0_ & ~0x00001000);
       status_ = null;
       if (statusBuilder_ != null) {
         statusBuilder_.dispose();
@@ -2765,7 +2386,7 @@ java.lang.String defaultValue) {
      * <code>.common.v1.StatusResponse status = 14 [json_name = "status", (.buf.validate.field) = { ... }</code>
      */
     public com.antinvestor.apis.common.v1.StatusResponse.Builder getStatusBuilder() {
-      bitField0_ |= 0x00002000;
+      bitField0_ |= 0x00001000;
       onChanged();
       return getStatusFieldBuilder().getBuilder();
     }
@@ -2816,7 +2437,7 @@ java.lang.String defaultValue) {
       if (!extras_.isMutable()) {
         extras_ = extras_.copy();
       }
-      bitField0_ |= 0x00004000;
+      bitField0_ |= 0x00002000;
       onChanged();
       return extras_;
     }
@@ -2876,7 +2497,7 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearExtras() {
-      bitField0_ = (bitField0_ & ~0x00004000);
+      bitField0_ = (bitField0_ & ~0x00002000);
       internalGetMutableExtras().getMutableMap()
           .clear();
       return this;
@@ -2897,7 +2518,7 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableExtras() {
-      bitField0_ |= 0x00004000;
+      bitField0_ |= 0x00002000;
       return internalGetMutableExtras().getMutableMap();
     }
     /**
@@ -2910,7 +2531,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableExtras().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00004000;
+      bitField0_ |= 0x00002000;
       return this;
     }
     /**
@@ -2920,7 +2541,7 @@ java.lang.String defaultValue) {
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableExtras().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00004000;
+      bitField0_ |= 0x00002000;
       return this;
     }
 
@@ -2939,7 +2560,7 @@ java.lang.String defaultValue) {
      */
     public Builder setPriorityValue(int value) {
       priority_ = value;
-      bitField0_ |= 0x00008000;
+      bitField0_ |= 0x00004000;
       onChanged();
       return this;
     }
@@ -2961,7 +2582,7 @@ java.lang.String defaultValue) {
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00008000;
+      bitField0_ |= 0x00004000;
       priority_ = value.getNumber();
       onChanged();
       return this;
@@ -2971,224 +2592,8 @@ java.lang.String defaultValue) {
      * @return This builder for chaining.
      */
     public Builder clearPriority() {
-      bitField0_ = (bitField0_ & ~0x00008000);
+      bitField0_ = (bitField0_ & ~0x00004000);
       priority_ = 0;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object parentId_ = "";
-    /**
-     * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-     * @return The parentId.
-     */
-    public java.lang.String getParentId() {
-      java.lang.Object ref = parentId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        parentId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for parentId.
-     */
-    public com.google.protobuf.ByteString
-        getParentIdBytes() {
-      java.lang.Object ref = parentId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        parentId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-     * @param value The parentId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setParentId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      parentId_ = value;
-      bitField0_ |= 0x00010000;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearParentId() {
-      parentId_ = getDefaultInstance().getParentId();
-      bitField0_ = (bitField0_ & ~0x00010000);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string parent_id = 17 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for parentId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setParentIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      parentId_ = value;
-      bitField0_ |= 0x00010000;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object source_ = "";
-    /**
-     * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
-     * @return The source.
-     */
-    public java.lang.String getSource() {
-      java.lang.Object ref = source_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        source_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for source.
-     */
-    public com.google.protobuf.ByteString
-        getSourceBytes() {
-      java.lang.Object ref = source_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        source_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
-     * @param value The source to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSource(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      source_ = value;
-      bitField0_ |= 0x00020000;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearSource() {
-      source_ = getDefaultInstance().getSource();
-      bitField0_ = (bitField0_ & ~0x00020000);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string source = 18 [json_name = "source", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for source to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSourceBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      source_ = value;
-      bitField0_ |= 0x00020000;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object sourceContactId_ = "";
-    /**
-     * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
-     * @return The sourceContactId.
-     */
-    public java.lang.String getSourceContactId() {
-      java.lang.Object ref = sourceContactId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        sourceContactId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for sourceContactId.
-     */
-    public com.google.protobuf.ByteString
-        getSourceContactIdBytes() {
-      java.lang.Object ref = sourceContactId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        sourceContactId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
-     * @param value The sourceContactId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSourceContactId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      sourceContactId_ = value;
-      bitField0_ |= 0x00040000;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearSourceContactId() {
-      sourceContactId_ = getDefaultInstance().getSourceContactId();
-      bitField0_ = (bitField0_ & ~0x00040000);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string source_contact_id = 19 [json_name = "sourceContactId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for sourceContactId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSourceContactIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      sourceContactId_ = value;
-      bitField0_ |= 0x00040000;
       onChanged();
       return this;
     }
