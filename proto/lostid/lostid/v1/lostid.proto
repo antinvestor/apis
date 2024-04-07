@@ -18,6 +18,8 @@ package lostid.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "google/type/interval.proto";
+import "google/type/money.proto";
 
 option go_package = "github.com/antinvestor/apis/go/lostid/v1;lostidv1";
 option java_multiple_files = true;
@@ -52,7 +54,7 @@ message ListCollectibleRequest {
     option (buf.validate.oneof).required = true;
 
     common.v1.Pagination pagination = 1;
-    common.v1.Interval interval = 2;
+    google.type.Interval interval = 2;
   }
 }
 
@@ -98,7 +100,7 @@ message TransactionItem {
   string id = 1;
   string datetime = 2;
   bool credit = 3;
-  common.v1.Money amount = 4;
+  google.type.Money amount = 4;
   string description = 5;
 }
 
@@ -124,7 +126,7 @@ message ListSearchRequest {
     option (buf.validate.oneof).required = true;
 
     common.v1.Pagination pagination = 1;
-    common.v1.Interval interval = 2;
+    google.type.Interval interval = 2;
   }
 }
 
@@ -138,7 +140,7 @@ message ListTransactionRequest {
     option (buf.validate.oneof).required = true;
 
     common.v1.Pagination pagination = 1;
-    common.v1.Interval interval = 2;
+    google.type.Interval interval = 2;
   }
 }
 

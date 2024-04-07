@@ -19,10 +19,10 @@ plugins:
     out: ../../go/
     opt:
       - paths=source_relative
-  - plugin: buf.build/protocolbuffers/go
+  - plugin: buf.build/protocolbuffers/go:v1.33.0
     out: ../../go/
     opt: paths=source_relative
   - plugin: buf.build/grpc/java
     out: ../../java/payment/src/main/java/
-  - plugin: buf.build/protocolbuffers/java
+  - plugin: buf.build/protocolbuffers/java:v25.3
     out: ../../java/payment/src/main/java/

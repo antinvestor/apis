@@ -17,6 +17,7 @@ syntax = "proto3";
 package ledger.v1;
 
 import "common/v1/common.proto";
+import "google/type/money.proto";
 
 option go_package = "github.com/antinvestor/apis/go/ledger/v1;ledgerv1";
 option java_multiple_files = true;
@@ -46,7 +47,7 @@ message Ledger {
 message Account {
   string reference = 1;
   string ledger = 3;
-  common.v1.Money balance = 4;
+  google.type.Money balance = 4;
   map<string, string> data = 5;
 }
 
@@ -54,9 +55,9 @@ message TransactionEntry {
   string account = 1;
   string transaction = 2;
   string transacted_at = 3;
-  common.v1.Money amount = 4;
+  google.type.Money amount = 4;
   bool credit = 5;
-  common.v1.Money acc_balance = 6;
+  google.type.Money acc_balance = 6;
 }
 
 message Transaction {
