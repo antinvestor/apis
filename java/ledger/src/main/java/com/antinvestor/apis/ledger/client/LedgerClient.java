@@ -19,7 +19,7 @@ import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
-import com.antinvestor.apis.common.v1.Money;
+import com.google.type.Money;
 import com.antinvestor.apis.ledger.v1.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;

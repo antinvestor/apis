@@ -16,7 +16,7 @@ package com.antinvestor.apis.common.utilities;
 
 import com.antinvestor.apis.common.exceptions.STATUSCODES;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
-import com.antinvestor.apis.common.v1.Money;
+import com.google.type.Money;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
