@@ -293,70 +293,71 @@ public final class ProfileProto {
       "data\"/\n\023GetByContactRequest\022\030\n\007contact\030\001" +
       " \001(\tR\007contact\"E\n\024GetByContactResponse\022-\n" +
       "\004data\030\001 \001(\0132\031.profile.v1.ProfileObjectR\004" +
-      "data\"\247\002\n\027ListRelationshipRequest\022:\n\006pare" +
-      "nt\030\001 \001(\tB\"\272H\037r\035\020\003\030(R\007ContactR\007ProfileR\005G" +
-      "roupR\006parent\0228\n\tparent_id\030\002 \001(\tB\033\272H\030r\026\020\003" +
-      "\030(2\020[0-9a-z_-]{3,20}R\010parentId\022P\n\024last_r" +
-      "elationship_id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z" +
-      "_-]{3,20}\320\001\001R\022lastRelationshipId\022.\n\023rela" +
-      "ted_children_id\030\004 \003(\tR\021relatedChildrenId" +
-      "\022\024\n\005count\030\005 \001(\005R\005count\"N\n\030ListRelationsh" +
-      "ipResponse\0222\n\004data\030\001 \003(\0132\036.profile.v1.Re" +
-      "lationshipObjectR\004data\"\362\003\n\026AddRelationsh" +
-      "ipRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-" +
-      "z_-]{3,20}R\002id\022:\n\006parent\030\002 \001(\tB\"\272H\037r\035\020\003\030" +
-      "(R\007ContactR\007ProfileR\005GroupR\006parent\0228\n\tpa" +
-      "rent_id\030\003 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,2" +
-      "0}R\010parentId\0228\n\005child\030\004 \001(\tB\"\272H\037r\035\020\003\030(R\007" +
-      "ContactR\007ProfileR\005GroupR\005child\0226\n\010child_" +
-      "id\030\005 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\007c" +
-      "hildId\0220\n\004type\030\006 \001(\0162\034.profile.v1.Relati" +
-      "onshipTypeR\004type\022R\n\nproperties\030\007 \003(\01322.p" +
-      "rofile.v1.AddRelationshipRequest.Propert" +
-      "iesEntryR\nproperties\032=\n\017PropertiesEntry\022" +
-      "\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:" +
-      "\0028\001\"M\n\027AddRelationshipResponse\0222\n\004data\030\001" +
-      " \001(\0132\036.profile.v1.RelationshipObjectR\004da" +
-      "ta\"\205\001\n\031DeleteRelationshipRequest\022+\n\002id\030\001" +
-      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022;\n" +
-      "\tparent_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{" +
-      "3,20}\320\001\001R\010parentId\"P\n\032DeleteRelationship" +
-      "Response\0222\n\004data\030\001 \001(\0132\036.profile.v1.Rela" +
-      "tionshipObjectR\004data*#\n\013ContactType\022\t\n\005E" +
-      "MAIL\020\000\022\t\n\005PHONE\020\001*n\n\022CommunicationLevel\022" +
-      "\007\n\003ALL\020\000\022\026\n\022INTERNAL_MARKETING\020\001\022\024\n\020IMPO" +
-      "RTANT_ALERTS\020\002\022\021\n\rSYSTEM_ALERTS\020\003\022\016\n\nNO_" +
-      "CONTACT\020\004*3\n\013ProfileType\022\n\n\006PERSON\020\000\022\017\n\013" +
-      "INSTITUTION\020\001\022\007\n\003BOT\020\002*@\n\020RelationshipTy" +
-      "pe\022\n\n\006MEMBER\020\000\022\016\n\nAFFILIATED\020\001\022\020\n\014BLACK_" +
-      "LISTED\020\0022\374\006\n\016ProfileService\022D\n\007GetById\022\032" +
-      ".profile.v1.GetByIdRequest\032\033.profile.v1." +
-      "GetByIdResponse\"\000\022S\n\014GetByContact\022\037.prof" +
-      "ile.v1.GetByContactRequest\032 .profile.v1." +
-      "GetByContactResponse\"\000\022C\n\006Search\022\031.profi" +
-      "le.v1.SearchRequest\032\032.profile.v1.SearchR" +
-      "esponse\"\0000\001\022>\n\005Merge\022\030.profile.v1.MergeR" +
-      "equest\032\031.profile.v1.MergeResponse\"\000\022A\n\006C" +
-      "reate\022\031.profile.v1.CreateRequest\032\032.profi" +
-      "le.v1.CreateResponse\"\000\022A\n\006Update\022\031.profi" +
-      "le.v1.UpdateRequest\032\032.profile.v1.UpdateR" +
-      "esponse\"\000\022M\n\nAddContact\022\035.profile.v1.Add" +
-      "ContactRequest\032\036.profile.v1.AddContactRe" +
-      "sponse\"\000\022M\n\nAddAddress\022\035.profile.v1.AddA" +
-      "ddressRequest\032\036.profile.v1.AddAddressRes" +
-      "ponse\"\000\022\\\n\017AddRelationship\022\".profile.v1." +
-      "AddRelationshipRequest\032#.profile.v1.AddR" +
-      "elationshipResponse\"\000\022e\n\022DeleteRelations" +
-      "hip\022%.profile.v1.DeleteRelationshipReque" +
-      "st\032&.profile.v1.DeleteRelationshipRespon" +
-      "se\"\000\022a\n\020ListRelationship\022#.profile.v1.Li" +
-      "stRelationshipRequest\032$.profile.v1.ListR" +
-      "elationshipResponse\"\0000\001B\265\001\n\037com.antinves" +
-      "tor.apis.profile.v1B\014ProfileProtoP\001Z;git" +
-      "hub.com/antinvestor/apis/go/profile/prof" +
-      "ile/v1;profilev1\242\002\003PXX\252\002\nProfile.V1\312\002\nPr" +
-      "ofile\\V1\342\002\026Profile\\V1\\GPBMetadata\352\002\013Prof" +
-      "ile::V1b\006proto3"
+      "data\"\321\002\n\027ListRelationshipRequest\022?\n\tpeer" +
+      "_name\030\001 \001(\tB\"\272H\037r\035\020\003\030(R\007ContactR\007Profile" +
+      "R\005GroupR\010peerName\0224\n\007peer_id\030\002 \001(\tB\033\272H\030r" +
+      "\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006peerId\022P\n\024last_" +
+      "relationship_id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-" +
+      "z_-]{3,20}\320\001\001R\022lastRelationshipId\022.\n\023rel" +
+      "ated_children_id\030\004 \003(\tR\021relatedChildrenI" +
+      "d\022\024\n\005count\030\005 \001(\005R\005count\022\'\n\017invert_relati" +
+      "on\030\006 \001(\010R\016invertRelation\"N\n\030ListRelation" +
+      "shipResponse\0222\n\004data\030\001 \003(\0132\036.profile.v1." +
+      "RelationshipObjectR\004data\"\362\003\n\026AddRelation" +
+      "shipRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9" +
+      "a-z_-]{3,20}R\002id\022:\n\006parent\030\002 \001(\tB\"\272H\037r\035\020" +
+      "\003\030(R\007ContactR\007ProfileR\005GroupR\006parent\0228\n\t" +
+      "parent_id\030\003 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3" +
+      ",20}R\010parentId\0228\n\005child\030\004 \001(\tB\"\272H\037r\035\020\003\030(" +
+      "R\007ContactR\007ProfileR\005GroupR\005child\0226\n\010chil" +
+      "d_id\030\005 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R" +
+      "\007childId\0220\n\004type\030\006 \001(\0162\034.profile.v1.Rela" +
+      "tionshipTypeR\004type\022R\n\nproperties\030\007 \003(\01322" +
+      ".profile.v1.AddRelationshipRequest.Prope" +
+      "rtiesEntryR\nproperties\032=\n\017PropertiesEntr" +
+      "y\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005valu" +
+      "e:\0028\001\"M\n\027AddRelationshipResponse\0222\n\004data" +
+      "\030\001 \001(\0132\036.profile.v1.RelationshipObjectR\004" +
+      "data\"\205\001\n\031DeleteRelationshipRequest\022+\n\002id" +
+      "\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022" +
+      ";\n\tparent_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-" +
+      "]{3,20}\320\001\001R\010parentId\"P\n\032DeleteRelationsh" +
+      "ipResponse\0222\n\004data\030\001 \001(\0132\036.profile.v1.Re" +
+      "lationshipObjectR\004data*#\n\013ContactType\022\t\n" +
+      "\005EMAIL\020\000\022\t\n\005PHONE\020\001*n\n\022CommunicationLeve" +
+      "l\022\007\n\003ALL\020\000\022\026\n\022INTERNAL_MARKETING\020\001\022\024\n\020IM" +
+      "PORTANT_ALERTS\020\002\022\021\n\rSYSTEM_ALERTS\020\003\022\016\n\nN" +
+      "O_CONTACT\020\004*3\n\013ProfileType\022\n\n\006PERSON\020\000\022\017" +
+      "\n\013INSTITUTION\020\001\022\007\n\003BOT\020\002*@\n\020Relationship" +
+      "Type\022\n\n\006MEMBER\020\000\022\016\n\nAFFILIATED\020\001\022\020\n\014BLAC" +
+      "K_LISTED\020\0022\374\006\n\016ProfileService\022D\n\007GetById" +
+      "\022\032.profile.v1.GetByIdRequest\032\033.profile.v" +
+      "1.GetByIdResponse\"\000\022S\n\014GetByContact\022\037.pr" +
+      "ofile.v1.GetByContactRequest\032 .profile.v" +
+      "1.GetByContactResponse\"\000\022C\n\006Search\022\031.pro" +
+      "file.v1.SearchRequest\032\032.profile.v1.Searc" +
+      "hResponse\"\0000\001\022>\n\005Merge\022\030.profile.v1.Merg" +
+      "eRequest\032\031.profile.v1.MergeResponse\"\000\022A\n" +
+      "\006Create\022\031.profile.v1.CreateRequest\032\032.pro" +
+      "file.v1.CreateResponse\"\000\022A\n\006Update\022\031.pro" +
+      "file.v1.UpdateRequest\032\032.profile.v1.Updat" +
+      "eResponse\"\000\022M\n\nAddContact\022\035.profile.v1.A" +
+      "ddContactRequest\032\036.profile.v1.AddContact" +
+      "Response\"\000\022M\n\nAddAddress\022\035.profile.v1.Ad" +
+      "dAddressRequest\032\036.profile.v1.AddAddressR" +
+      "esponse\"\000\022\\\n\017AddRelationship\022\".profile.v" +
+      "1.AddRelationshipRequest\032#.profile.v1.Ad" +
+      "dRelationshipResponse\"\000\022e\n\022DeleteRelatio" +
+      "nship\022%.profile.v1.DeleteRelationshipReq" +
+      "uest\032&.profile.v1.DeleteRelationshipResp" +
+      "onse\"\000\022a\n\020ListRelationship\022#.profile.v1." +
+      "ListRelationshipRequest\032$.profile.v1.Lis" +
+      "tRelationshipResponse\"\0000\001B\265\001\n\037com.antinv" +
+      "estor.apis.profile.v1B\014ProfileProtoP\001Z;g" +
+      "ithub.com/antinvestor/apis/go/profile/pr" +
+      "ofile/v1;profilev1\242\002\003PXX\252\002\nProfile.V1\312\002\n" +
+      "Profile\\V1\342\002\026Profile\\V1\\GPBMetadata\352\002\013Pr" +
+      "ofile::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -525,7 +526,7 @@ public final class ProfileProto {
     internal_static_profile_v1_ListRelationshipRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_profile_v1_ListRelationshipRequest_descriptor,
-        new java.lang.String[] { "Parent", "ParentId", "LastRelationshipId", "RelatedChildrenId", "Count", });
+        new java.lang.String[] { "PeerName", "PeerId", "LastRelationshipId", "RelatedChildrenId", "Count", "InvertRelation", });
     internal_static_profile_v1_ListRelationshipResponse_descriptor =
       getDescriptor().getMessageTypes().get(22);
     internal_static_profile_v1_ListRelationshipResponse_fieldAccessorTable = new

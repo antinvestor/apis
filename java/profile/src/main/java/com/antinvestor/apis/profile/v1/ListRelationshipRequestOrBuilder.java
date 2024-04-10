@@ -23,28 +23,28 @@ public interface ListRelationshipRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string parent = 1 [json_name = "parent", (.buf.validate.field) = { ... }</code>
-   * @return The parent.
+   * <code>string peer_name = 1 [json_name = "peerName", (.buf.validate.field) = { ... }</code>
+   * @return The peerName.
    */
-  java.lang.String getParent();
+  java.lang.String getPeerName();
   /**
-   * <code>string parent = 1 [json_name = "parent", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for parent.
+   * <code>string peer_name = 1 [json_name = "peerName", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for peerName.
    */
   com.google.protobuf.ByteString
-      getParentBytes();
+      getPeerNameBytes();
 
   /**
-   * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-   * @return The parentId.
+   * <code>string peer_id = 2 [json_name = "peerId", (.buf.validate.field) = { ... }</code>
+   * @return The peerId.
    */
-  java.lang.String getParentId();
+  java.lang.String getPeerId();
   /**
-   * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for parentId.
+   * <code>string peer_id = 2 [json_name = "peerId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for peerId.
    */
   com.google.protobuf.ByteString
-      getParentIdBytes();
+      getPeerIdBytes();
 
   /**
    * <code>string last_relationship_id = 3 [json_name = "lastRelationshipId", (.buf.validate.field) = { ... }</code>
@@ -104,4 +104,10 @@ public interface ListRelationshipRequestOrBuilder extends
    * @return The count.
    */
   int getCount();
+
+  /**
+   * <code>bool invert_relation = 6 [json_name = "invertRelation"];</code>
+   * @return The invertRelation.
+   */
+  boolean getInvertRelation();
 }

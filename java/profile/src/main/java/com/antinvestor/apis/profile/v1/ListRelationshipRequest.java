@@ -35,8 +35,8 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ListRelationshipRequest() {
-    parent_ = "";
-    parentId_ = "";
+    peerName_ = "";
+    peerId_ = "";
     lastRelationshipId_ = "";
     relatedChildrenId_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
@@ -62,78 +62,78 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.profile.v1.ListRelationshipRequest.class, com.antinvestor.apis.profile.v1.ListRelationshipRequest.Builder.class);
   }
 
-  public static final int PARENT_FIELD_NUMBER = 1;
+  public static final int PEER_NAME_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object parent_ = "";
+  private volatile java.lang.Object peerName_ = "";
   /**
-   * <code>string parent = 1 [json_name = "parent", (.buf.validate.field) = { ... }</code>
-   * @return The parent.
+   * <code>string peer_name = 1 [json_name = "peerName", (.buf.validate.field) = { ... }</code>
+   * @return The peerName.
    */
   @java.lang.Override
-  public java.lang.String getParent() {
-    java.lang.Object ref = parent_;
+  public java.lang.String getPeerName() {
+    java.lang.Object ref = peerName_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      parent_ = s;
+      peerName_ = s;
       return s;
     }
   }
   /**
-   * <code>string parent = 1 [json_name = "parent", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for parent.
+   * <code>string peer_name = 1 [json_name = "peerName", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for peerName.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getParentBytes() {
-    java.lang.Object ref = parent_;
+      getPeerNameBytes() {
+    java.lang.Object ref = peerName_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      parent_ = b;
+      peerName_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int PARENT_ID_FIELD_NUMBER = 2;
+  public static final int PEER_ID_FIELD_NUMBER = 2;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object parentId_ = "";
+  private volatile java.lang.Object peerId_ = "";
   /**
-   * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-   * @return The parentId.
+   * <code>string peer_id = 2 [json_name = "peerId", (.buf.validate.field) = { ... }</code>
+   * @return The peerId.
    */
   @java.lang.Override
-  public java.lang.String getParentId() {
-    java.lang.Object ref = parentId_;
+  public java.lang.String getPeerId() {
+    java.lang.Object ref = peerId_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      parentId_ = s;
+      peerId_ = s;
       return s;
     }
   }
   /**
-   * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for parentId.
+   * <code>string peer_id = 2 [json_name = "peerId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for peerId.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getParentIdBytes() {
-    java.lang.Object ref = parentId_;
+      getPeerIdBytes() {
+    java.lang.Object ref = peerId_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      parentId_ = b;
+      peerId_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -243,6 +243,17 @@ private static final long serialVersionUID = 0L;
     return count_;
   }
 
+  public static final int INVERT_RELATION_FIELD_NUMBER = 6;
+  private boolean invertRelation_ = false;
+  /**
+   * <code>bool invert_relation = 6 [json_name = "invertRelation"];</code>
+   * @return The invertRelation.
+   */
+  @java.lang.Override
+  public boolean getInvertRelation() {
+    return invertRelation_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -257,11 +268,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(parent_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, parent_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(peerName_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, peerName_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(parentId_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, parentId_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(peerId_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, peerId_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(lastRelationshipId_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, lastRelationshipId_);
@@ -272,6 +283,9 @@ private static final long serialVersionUID = 0L;
     if (count_ != 0) {
       output.writeInt32(5, count_);
     }
+    if (invertRelation_ != false) {
+      output.writeBool(6, invertRelation_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -281,11 +295,11 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(parent_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, parent_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(peerName_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, peerName_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(parentId_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, parentId_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(peerId_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, peerId_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(lastRelationshipId_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, lastRelationshipId_);
@@ -302,6 +316,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(5, count_);
     }
+    if (invertRelation_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(6, invertRelation_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -317,16 +335,18 @@ private static final long serialVersionUID = 0L;
     }
     com.antinvestor.apis.profile.v1.ListRelationshipRequest other = (com.antinvestor.apis.profile.v1.ListRelationshipRequest) obj;
 
-    if (!getParent()
-        .equals(other.getParent())) return false;
-    if (!getParentId()
-        .equals(other.getParentId())) return false;
+    if (!getPeerName()
+        .equals(other.getPeerName())) return false;
+    if (!getPeerId()
+        .equals(other.getPeerId())) return false;
     if (!getLastRelationshipId()
         .equals(other.getLastRelationshipId())) return false;
     if (!getRelatedChildrenIdList()
         .equals(other.getRelatedChildrenIdList())) return false;
     if (getCount()
         != other.getCount()) return false;
+    if (getInvertRelation()
+        != other.getInvertRelation()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -338,10 +358,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + PARENT_FIELD_NUMBER;
-    hash = (53 * hash) + getParent().hashCode();
-    hash = (37 * hash) + PARENT_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getParentId().hashCode();
+    hash = (37 * hash) + PEER_NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getPeerName().hashCode();
+    hash = (37 * hash) + PEER_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getPeerId().hashCode();
     hash = (37 * hash) + LAST_RELATIONSHIP_ID_FIELD_NUMBER;
     hash = (53 * hash) + getLastRelationshipId().hashCode();
     if (getRelatedChildrenIdCount() > 0) {
@@ -350,6 +370,9 @@ private static final long serialVersionUID = 0L;
     }
     hash = (37 * hash) + COUNT_FIELD_NUMBER;
     hash = (53 * hash) + getCount();
+    hash = (37 * hash) + INVERT_RELATION_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getInvertRelation());
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -485,12 +508,13 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      parent_ = "";
-      parentId_ = "";
+      peerName_ = "";
+      peerId_ = "";
       lastRelationshipId_ = "";
       relatedChildrenId_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
       count_ = 0;
+      invertRelation_ = false;
       return this;
     }
 
@@ -525,10 +549,10 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(com.antinvestor.apis.profile.v1.ListRelationshipRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.parent_ = parent_;
+        result.peerName_ = peerName_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.parentId_ = parentId_;
+        result.peerId_ = peerId_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.lastRelationshipId_ = lastRelationshipId_;
@@ -539,6 +563,9 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
         result.count_ = count_;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.invertRelation_ = invertRelation_;
       }
     }
 
@@ -586,13 +613,13 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.antinvestor.apis.profile.v1.ListRelationshipRequest other) {
       if (other == com.antinvestor.apis.profile.v1.ListRelationshipRequest.getDefaultInstance()) return this;
-      if (!other.getParent().isEmpty()) {
-        parent_ = other.parent_;
+      if (!other.getPeerName().isEmpty()) {
+        peerName_ = other.peerName_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (!other.getParentId().isEmpty()) {
-        parentId_ = other.parentId_;
+      if (!other.getPeerId().isEmpty()) {
+        peerId_ = other.peerId_;
         bitField0_ |= 0x00000002;
         onChanged();
       }
@@ -613,6 +640,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getCount() != 0) {
         setCount(other.getCount());
+      }
+      if (other.getInvertRelation() != false) {
+        setInvertRelation(other.getInvertRelation());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -641,12 +671,12 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              parent_ = input.readStringRequireUtf8();
+              peerName_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
             case 18: {
-              parentId_ = input.readStringRequireUtf8();
+              peerId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
@@ -666,6 +696,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000010;
               break;
             } // case 40
+            case 48: {
+              invertRelation_ = input.readBool();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 48
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -683,145 +718,145 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object parent_ = "";
+    private java.lang.Object peerName_ = "";
     /**
-     * <code>string parent = 1 [json_name = "parent", (.buf.validate.field) = { ... }</code>
-     * @return The parent.
+     * <code>string peer_name = 1 [json_name = "peerName", (.buf.validate.field) = { ... }</code>
+     * @return The peerName.
      */
-    public java.lang.String getParent() {
-      java.lang.Object ref = parent_;
+    public java.lang.String getPeerName() {
+      java.lang.Object ref = peerName_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        parent_ = s;
+        peerName_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string parent = 1 [json_name = "parent", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for parent.
+     * <code>string peer_name = 1 [json_name = "peerName", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for peerName.
      */
     public com.google.protobuf.ByteString
-        getParentBytes() {
-      java.lang.Object ref = parent_;
+        getPeerNameBytes() {
+      java.lang.Object ref = peerName_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        parent_ = b;
+        peerName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string parent = 1 [json_name = "parent", (.buf.validate.field) = { ... }</code>
-     * @param value The parent to set.
+     * <code>string peer_name = 1 [json_name = "peerName", (.buf.validate.field) = { ... }</code>
+     * @param value The peerName to set.
      * @return This builder for chaining.
      */
-    public Builder setParent(
+    public Builder setPeerName(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      parent_ = value;
+      peerName_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>string parent = 1 [json_name = "parent", (.buf.validate.field) = { ... }</code>
+     * <code>string peer_name = 1 [json_name = "peerName", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearParent() {
-      parent_ = getDefaultInstance().getParent();
+    public Builder clearPeerName() {
+      peerName_ = getDefaultInstance().getPeerName();
       bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>string parent = 1 [json_name = "parent", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for parent to set.
+     * <code>string peer_name = 1 [json_name = "peerName", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for peerName to set.
      * @return This builder for chaining.
      */
-    public Builder setParentBytes(
+    public Builder setPeerNameBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      parent_ = value;
+      peerName_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
 
-    private java.lang.Object parentId_ = "";
+    private java.lang.Object peerId_ = "";
     /**
-     * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-     * @return The parentId.
+     * <code>string peer_id = 2 [json_name = "peerId", (.buf.validate.field) = { ... }</code>
+     * @return The peerId.
      */
-    public java.lang.String getParentId() {
-      java.lang.Object ref = parentId_;
+    public java.lang.String getPeerId() {
+      java.lang.Object ref = peerId_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        parentId_ = s;
+        peerId_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for parentId.
+     * <code>string peer_id = 2 [json_name = "peerId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for peerId.
      */
     public com.google.protobuf.ByteString
-        getParentIdBytes() {
-      java.lang.Object ref = parentId_;
+        getPeerIdBytes() {
+      java.lang.Object ref = peerId_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        parentId_ = b;
+        peerId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-     * @param value The parentId to set.
+     * <code>string peer_id = 2 [json_name = "peerId", (.buf.validate.field) = { ... }</code>
+     * @param value The peerId to set.
      * @return This builder for chaining.
      */
-    public Builder setParentId(
+    public Builder setPeerId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      parentId_ = value;
+      peerId_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * <code>string peer_id = 2 [json_name = "peerId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearParentId() {
-      parentId_ = getDefaultInstance().getParentId();
+    public Builder clearPeerId() {
+      peerId_ = getDefaultInstance().getPeerId();
       bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for parentId to set.
+     * <code>string peer_id = 2 [json_name = "peerId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for peerId to set.
      * @return This builder for chaining.
      */
-    public Builder setParentIdBytes(
+    public Builder setPeerIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      parentId_ = value;
+      peerId_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
@@ -1074,6 +1109,38 @@ private static final long serialVersionUID = 0L;
     public Builder clearCount() {
       bitField0_ = (bitField0_ & ~0x00000010);
       count_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private boolean invertRelation_ ;
+    /**
+     * <code>bool invert_relation = 6 [json_name = "invertRelation"];</code>
+     * @return The invertRelation.
+     */
+    @java.lang.Override
+    public boolean getInvertRelation() {
+      return invertRelation_;
+    }
+    /**
+     * <code>bool invert_relation = 6 [json_name = "invertRelation"];</code>
+     * @param value The invertRelation to set.
+     * @return This builder for chaining.
+     */
+    public Builder setInvertRelation(boolean value) {
+
+      invertRelation_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool invert_relation = 6 [json_name = "invertRelation"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearInvertRelation() {
+      bitField0_ = (bitField0_ & ~0x00000020);
+      invertRelation_ = false;
       onChanged();
       return this;
     }
