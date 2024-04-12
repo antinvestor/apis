@@ -71,7 +71,7 @@ subprojects {
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
         api("com.googlecode.libphonenumber:libphonenumber:8.13.34")
 
-        api("org.slf4j:slf4j-api:2.0.12")
+        api("org.slf4j:slf4j-api:2.0.13")
 
         compileOnly("org.apache.tomcat:annotations-api:6.0.53")
 
