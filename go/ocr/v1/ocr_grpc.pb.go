@@ -37,7 +37,7 @@ const (
 	OCRService_Status_FullMethodName    = "/ocr.v1.OCRService/Status"
 )
 
-// OCRServiceClient is the Client API for OCRService service.
+// OCRServiceClient is the client API for OCRService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OCRServiceClient interface {

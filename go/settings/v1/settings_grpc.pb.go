@@ -38,7 +38,7 @@ const (
 	SettingsService_Set_FullMethodName  = "/settings.v1.SettingsService/Set"
 )
 
-// SettingsServiceClient is the Client API for SettingsService service.
+// SettingsServiceClient is the client API for SettingsService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SettingsServiceClient interface {

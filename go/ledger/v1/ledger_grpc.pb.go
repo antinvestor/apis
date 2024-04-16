@@ -46,7 +46,7 @@ const (
 	LedgerService_SearchTransactionEntries_FullMethodName = "/ledger.v1.LedgerService/SearchTransactionEntries"
 )
 
-// LedgerServiceClient is the Client API for LedgerService service.
+// LedgerServiceClient is the client API for LedgerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LedgerServiceClient interface {
