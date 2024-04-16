@@ -126,7 +126,7 @@ func (nc *NotificationClient) GetTemplate(ctx context.Context, name string, lang
 	return nil, nil
 }
 
-func (nc *NotificationClient) SearchTemplate(ctx context.Context, query string, language string, page int64, count int32) (chan<- *Template, error) {
+func (nc *NotificationClient) SearchTemplate(ctx context.Context, query string, language string, page int64, count int32) (<-chan *Template, error) {
 
 	searchRequest := TemplateSearchRequest{
 		Query:        query,

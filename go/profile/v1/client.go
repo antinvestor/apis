@@ -123,7 +123,7 @@ func (pc *ProfileClient) GetProfileByContact(ctx context.Context, contact string
 	return response.Data, nil
 }
 
-func (pc *ProfileClient) ListRelationships(ctx context.Context, lastRelationshipID string, count int) (chan<- *RelationshipObject, error) {
+func (pc *ProfileClient) ListRelationships(ctx context.Context, lastRelationshipID string, count int) (<-chan *RelationshipObject, error) {
 
 	listRelationshipRequest := ListRelationshipRequest{
 		LastRelationshipId: lastRelationshipID,
