@@ -44,23 +44,23 @@ func FromContext(ctx context.Context) *PaymentClient {
 	return paymentsClient
 }
 
-// PaymentClient is a client for interacting with the payments service API.
+// PaymentClient is a Client for interacting with the payments service API.
 // Methods, except Close, may be called concurrently.
 // However, fields must not be modified concurrently with method calls.
 type PaymentClient struct {
 	*common.GrpcClientBase
-	// The gRPC API client.
-	client PaymentServiceClient
+	// The gRPC API Client.
+	Client PaymentServiceClient
 }
 
 func Init(cBase *common.GrpcClientBase, service PaymentServiceClient) *PaymentClient {
 	return &PaymentClient{
 		GrpcClientBase: cBase,
-		client:         service,
+		Client:         service,
 	}
 }
 
-// NewPaymentsClient creates a new payments client.
+// NewPaymentsClient creates a new payments Client.
 // / The service that an application uses to access and manipulate payment information
 func NewPaymentsClient(ctx context.Context, opts ...common.ClientOption) (*PaymentClient, error) {
 	clientOpts := defaultPaymentClientOptions()

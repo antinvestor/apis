@@ -44,7 +44,7 @@ const (
 	NotificationService_TemplateSave_FullMethodName   = "/notification.v1.NotificationService/TemplateSave"
 )
 
-// NotificationServiceClient is the client API for NotificationService service.
+// NotificationServiceClient is the Client API for NotificationService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NotificationServiceClient interface {
@@ -56,9 +56,9 @@ type NotificationServiceClient interface {
 	StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error)
 	// Release method for releasing queued massages and returns if notification status if released
 	Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (*ReleaseResponse, error)
-	// Receive method is for client request for particular notification responses from system
+	// Receive method is for Client request for particular notification responses from system
 	Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (*ReceiveResponse, error)
-	// Search method is for client request for particular notification details from system
+	// Search method is for Client request for particular notification details from system
 	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (NotificationService_SearchClient, error)
 	// Utility to allow system obtain templates within the system
 	TemplateSearch(ctx context.Context, in *TemplateSearchRequest, opts ...grpc.CallOption) (NotificationService_TemplateSearchClient, error)
@@ -203,9 +203,9 @@ type NotificationServiceServer interface {
 	StatusUpdate(context.Context, *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error)
 	// Release method for releasing queued massages and returns if notification status if released
 	Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error)
-	// Receive method is for client request for particular notification responses from system
+	// Receive method is for Client request for particular notification responses from system
 	Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error)
-	// Search method is for client request for particular notification details from system
+	// Search method is for Client request for particular notification details from system
 	Search(*v1.SearchRequest, NotificationService_SearchServer) error
 	// Utility to allow system obtain templates within the system
 	TemplateSearch(*TemplateSearchRequest, NotificationService_TemplateSearchServer) error

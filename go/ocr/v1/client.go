@@ -44,24 +44,24 @@ func FromContext(ctx context.Context) *OCRClient {
 	return ocrClient
 }
 
-// OCRClient is a client for interacting with the profile service API.
+// OCRClient is a Client for interacting with the profile service API.
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type OCRClient struct {
 	*common.GrpcClientBase
 
-	// The gRPC API client.
-	client OCRServiceClient
+	// The gRPC API Client.
+	Client OCRServiceClient
 }
 
 func Init(cBase *common.GrpcClientBase, service OCRServiceClient) *OCRClient {
 	return &OCRClient{
 		GrpcClientBase: cBase,
-		client:         service,
+		Client:         service,
 	}
 }
 
-// NewOCRClient creates a new ocr client.
+// NewOCRClient creates a new ocr Client.
 // The service that an application uses to perform ocr requests
 func NewOCRClient(ctx context.Context, opts ...common.ClientOption) (*OCRClient, error) {
 	clientOpts := defaultOcrClientOptions()
@@ -83,7 +83,7 @@ func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, 
 		Properties:  properties,
 	}
 
-	return pc.client.Recognize(ctx, &ocrRequest)
+	return pc.Client.Recognize(ctx, &ocrRequest)
 }
 
 func (pc *OCRClient) StatusCheck(ctx context.Context, id string) (*StatusResponse, error) {
@@ -92,5 +92,5 @@ func (pc *OCRClient) StatusCheck(ctx context.Context, id string) (*StatusRespons
 		Id: id,
 	}
 
-	return pc.client.Status(ctx, &statusCheckRequest)
+	return pc.Client.Status(ctx, &statusCheckRequest)
 }

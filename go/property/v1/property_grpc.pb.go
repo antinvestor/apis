@@ -48,7 +48,7 @@ const (
 	PropertyService_DeleteSubscription_FullMethodName = "/property.v1.PropertyService/DeleteSubscription"
 )
 
-// PropertyServiceClient is the client API for PropertyService service.
+// PropertyServiceClient is the Client API for PropertyService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PropertyServiceClient interface {
@@ -70,7 +70,7 @@ type PropertyServiceClient interface {
 	StateOfProperty(ctx context.Context, in *StateOfPropertyRequest, opts ...grpc.CallOption) (*StateOfPropertyResponse, error)
 	// History request returns all the state transitions a property has had over its lifetime in the system
 	HistoryOfProperty(ctx context.Context, in *HistoryOfPropertyRequest, opts ...grpc.CallOption) (PropertyService_HistoryOfPropertyClient, error)
-	// Search method is for client request to query for properties that match query
+	// Search method is for Client request to query for properties that match query
 	SearchProperty(ctx context.Context, in *SearchPropertyRequest, opts ...grpc.CallOption) (PropertyService_SearchPropertyClient, error)
 	// ListSubscriptions for a particular property
 	ListSubscription(ctx context.Context, in *ListSubscriptionRequest, opts ...grpc.CallOption) (PropertyService_ListSubscriptionClient, error)
@@ -319,7 +319,7 @@ type PropertyServiceServer interface {
 	StateOfProperty(context.Context, *StateOfPropertyRequest) (*StateOfPropertyResponse, error)
 	// History request returns all the state transitions a property has had over its lifetime in the system
 	HistoryOfProperty(*HistoryOfPropertyRequest, PropertyService_HistoryOfPropertyServer) error
-	// Search method is for client request to query for properties that match query
+	// Search method is for Client request to query for properties that match query
 	SearchProperty(*SearchPropertyRequest, PropertyService_SearchPropertyServer) error
 	// ListSubscriptions for a particular property
 	ListSubscription(*ListSubscriptionRequest, PropertyService_ListSubscriptionServer) error

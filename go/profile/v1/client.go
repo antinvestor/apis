@@ -44,24 +44,24 @@ func FromContext(ctx context.Context) *ProfileClient {
 	return profileClient
 }
 
-// ProfileClient is a client for interacting with the profile service API.
+// ProfileClient is a Client for interacting with the profile service API.
 // Methods, except Close, may be called concurrently. However,
 // fields must not be modified concurrently with method calls.
 type ProfileClient struct {
 	*common.GrpcClientBase
 
-	// The gRPC API client.
-	client ProfileServiceClient
+	// The gRPC API Client.
+	Client ProfileServiceClient
 }
 
 func Init(cBase *common.GrpcClientBase, service ProfileServiceClient) *ProfileClient {
 	return &ProfileClient{
 		GrpcClientBase: cBase,
-		client:         service,
+		Client:         service,
 	}
 }
 
-// NewProfileClient creates a new notification client.
+// NewProfileClient creates a new notification Client.
 // The service that an application uses to send and access received messages
 func NewProfileClient(ctx context.Context, opts ...common.ClientOption) (*ProfileClient, error) {
 	clientOpts := defaultProfileClientOptions()
@@ -82,7 +82,7 @@ func (pc *ProfileClient) GetProfileByID(
 		Id: profileID,
 	}
 
-	response, err := pc.client.GetById(ctx, &profileRequest)
+	response, err := pc.Client.GetById(ctx, &profileRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ func (pc *ProfileClient) CreateProfileByContactAndName(
 		Properties: properties,
 	}
 
-	response, err := pc.client.Create(ctx, &createProfileRequest)
+	response, err := pc.Client.Create(ctx, &createProfileRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -115,10 +115,42 @@ func (pc *ProfileClient) GetProfileByContact(ctx context.Context, contact string
 		Contact: contact,
 	}
 
-	response, err := pc.client.GetByContact(ctx, &contactRequest)
+	response, err := pc.Client.GetByContact(ctx, &contactRequest)
 
 	if err != nil {
 		return nil, err
 	}
 	return response.Data, nil
+}
+
+func (pc *ProfileClient) ListRelationships(ctx context.Context, lastRelationshipID string, count int) (chan<- *RelationshipObject, error) {
+
+	listRelationshipRequest := ListRelationshipRequest{
+		LastRelationshipId: lastRelationshipID,
+		Count:              int32(count),
+		InvertRelation:     false,
+	}
+
+	response, err := pc.Client.ListRelationship(ctx, &listRelationshipRequest)
+
+	if err != nil {
+		return nil, err
+	}
+
+	relationshipChannel := make(chan *RelationshipObject)
+	go func(responseService ProfileService_ListRelationshipClient) {
+		defer close(relationshipChannel)
+		for {
+			responses, err0 := responseService.Recv()
+			if err0 != nil {
+				return
+			}
+
+			for _, role := range responses.GetData() {
+				relationshipChannel <- role
+			}
+		}
+	}(response)
+
+	return relationshipChannel, nil
 }

@@ -44,24 +44,24 @@ func FromContext(ctx context.Context) *PropertyClient {
 	return client
 }
 
-// PropertyClient is a client for interacting with the notification service API.
+// PropertyClient is a Client for interacting with the notification service API.
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type PropertyClient struct {
 	*common.GrpcClientBase
 
-	// The gRPC API client.
-	client PropertyServiceClient
+	// The gRPC API Client.
+	Client PropertyServiceClient
 }
 
 func Init(cBase *common.GrpcClientBase, service PropertyServiceClient) *PropertyClient {
 	return &PropertyClient{
 		GrpcClientBase: cBase,
-		client:         service,
+		Client:         service,
 	}
 }
 
-// NewPropertyClient creates a new notification client.
+// NewPropertyClient creates a new notification Client.
 //
 // The service that an application uses to send and access received messages
 func NewPropertyClient(ctx context.Context, opts ...common.ClientOption) (*PropertyClient, error) {
@@ -74,7 +74,7 @@ func NewPropertyClient(ctx context.Context, opts ...common.ClientOption) (*Prope
 
 	c := &PropertyClient{
 		GrpcClientBase: clientBase,
-		client:         NewPropertyServiceClient(clientBase.Connection()),
+		Client:         NewPropertyServiceClient(clientBase.Connection()),
 	}
 
 	return c, nil
@@ -90,7 +90,7 @@ func (pCl *PropertyClient) AddPropertyType(
 		Extra:       extras,
 	}
 
-	return pCl.client.AddPropertyType(ctx, &AddPropertyTypeRequest{
+	return pCl.Client.AddPropertyType(ctx, &AddPropertyTypeRequest{
 		Data: &propertyType,
 	})
 }
@@ -102,11 +102,7 @@ func (pCl *PropertyClient) ListPropertyType(
 		Query: query,
 	}
 
-	responseService, err := pCl.client.ListPropertyType(ctx, &searchRequest)
-	if err != nil {
-		return nil, err
-	}
-
+	responseService, err := pCl.Client.ListPropertyType(ctx, &searchRequest)
 	if err != nil {
 		return nil, err
 	}

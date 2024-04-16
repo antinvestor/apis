@@ -47,20 +47,20 @@ func FromContext(ctx context.Context) *SettingsClient {
 func Init(cBase *common.GrpcClientBase, service SettingsServiceClient) *SettingsClient {
 	return &SettingsClient{
 		GrpcClientBase: cBase,
-		client:         service,
+		Client:         service,
 	}
 }
 
-// SettingsClient is a client for interacting with the notification service API.
+// SettingsClient is a Client for interacting with the notification service API.
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type SettingsClient struct {
 	*common.GrpcClientBase
-	// The gRPC API client.
-	client SettingsServiceClient
+	// The gRPC API Client.
+	Client SettingsServiceClient
 }
 
-// NewsettingsClient creates a new notification client.
+// NewsettingsClient creates a new notification Client.
 //
 // The service that an application uses to send and access received messages
 func NewsettingsClient(ctx context.Context, opts ...common.ClientOption) (*SettingsClient, error) {

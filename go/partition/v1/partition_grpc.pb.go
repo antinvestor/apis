@@ -54,7 +54,7 @@ const (
 	PartitionService_RemoveAccessRole_FullMethodName    = "/partition.v1.PartitionService/RemoveAccessRole"
 )
 
-// PartitionServiceClient is the client API for PartitionService service.
+// PartitionServiceClient is the Client API for PartitionService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PartitionServiceClient interface {

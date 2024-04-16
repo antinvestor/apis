@@ -45,24 +45,24 @@ func FromContext(ctx context.Context) *NotificationClient {
 	return client
 }
 
-// NotificationClient is a client for interacting with the notification service API.
+// NotificationClient is a Client for interacting with the notification service API.
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type NotificationClient struct {
 	*common.GrpcClientBase
 
-	// The gRPC API client.
-	client NotificationServiceClient
+	// The gRPC API Client.
+	Client NotificationServiceClient
 }
 
 func Init(cBase *common.GrpcClientBase, service NotificationServiceClient) *NotificationClient {
 	return &NotificationClient{
 		GrpcClientBase: cBase,
-		client:         service,
+		Client:         service,
 	}
 }
 
-// NewNotificationClient creates a new notification client.
+// NewNotificationClient creates a new notification Client.
 //
 // The service that an application uses to send and access received messages
 func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*NotificationClient, error) {
@@ -77,14 +77,14 @@ func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*N
 }
 
 func (nc *NotificationClient) Send(ctx context.Context, message *Notification) (*SendResponse, error) {
-	return nc.client.Send(ctx, &SendRequest{Data: message})
+	return nc.Client.Send(ctx, &SendRequest{Data: message})
 
 }
 
 func (nc *NotificationClient) Receive(ctx context.Context, message *Notification) (*ReceiveResponse, error) {
 
 	message.AutoRelease = true
-	return nc.client.Receive(ctx, &ReceiveRequest{Data: message})
+	return nc.Client.Receive(ctx, &ReceiveRequest{Data: message})
 
 }
 
@@ -100,7 +100,7 @@ func (nc *NotificationClient) UpdateStatus(ctx context.Context, notificationId s
 		Extras:     extras,
 	}
 
-	return nc.client.StatusUpdate(ctx, &messageStatus)
+	return nc.Client.StatusUpdate(ctx, &messageStatus)
 }
 
 func (nc *NotificationClient) GetTemplate(ctx context.Context, name string, language string) (*Template, error) {
@@ -110,7 +110,7 @@ func (nc *NotificationClient) GetTemplate(ctx context.Context, name string, lang
 		LanguageCode: language,
 	}
 
-	responseStream, err := nc.client.TemplateSearch(ctx, &searchRequest)
+	responseStream, err := nc.Client.TemplateSearch(ctx, &searchRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -135,7 +135,7 @@ func (nc *NotificationClient) SearchTemplate(ctx context.Context, query string, 
 		Count:        count,
 	}
 
-	responseService, err := nc.client.TemplateSearch(ctx, &searchRequest)
+	responseService, err := nc.Client.TemplateSearch(ctx, &searchRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -167,7 +167,7 @@ func (nc *NotificationClient) SaveTemplate(ctx context.Context, name string, lan
 		Data:         data,
 	}
 
-	response, err := nc.client.TemplateSave(ctx, templateSaveRequest)
+	response, err := nc.Client.TemplateSave(ctx, templateSaveRequest)
 	if err != nil {
 		return nil, err
 	}

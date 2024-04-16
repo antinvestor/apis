@@ -43,7 +43,7 @@ const (
 	PaymentService_Reconcile_FullMethodName    = "/payment.v1.PaymentService/Reconcile"
 )
 
-// PaymentServiceClient is the client API for PaymentService service.
+// PaymentServiceClient is the Client API for PaymentService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PaymentServiceClient interface {
@@ -57,7 +57,7 @@ type PaymentServiceClient interface {
 	StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error)
 	// Release method for releasing queued payments and returns if status is not released
 	Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (*ReleaseResponse, error)
-	// Search method is for client request look for payments matching supplied details from the system
+	// Search method is for Client request look for payments matching supplied details from the system
 	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (PaymentService_SearchClient, error)
 	Reconcile(ctx context.Context, in *ReconcileRequest, opts ...grpc.CallOption) (*ReconcileResponse, error)
 }
@@ -170,7 +170,7 @@ type PaymentServiceServer interface {
 	StatusUpdate(context.Context, *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error)
 	// Release method for releasing queued payments and returns if status is not released
 	Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error)
-	// Search method is for client request look for payments matching supplied details from the system
+	// Search method is for Client request look for payments matching supplied details from the system
 	Search(*v1.SearchRequest, PaymentService_SearchServer) error
 	Reconcile(context.Context, *ReconcileRequest) (*ReconcileResponse, error)
 	mustEmbedUnimplementedPaymentServiceServer()
