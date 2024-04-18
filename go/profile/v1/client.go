@@ -123,15 +123,9 @@ func (pc *ProfileClient) GetProfileByContact(ctx context.Context, contact string
 	return response.Data, nil
 }
 
-func (pc *ProfileClient) ListRelationships(ctx context.Context, lastRelationshipID string, count int) (<-chan *RelationshipObject, error) {
+func (pc *ProfileClient) ListRelationships(ctx context.Context, request *ListRelationshipRequest) (<-chan *RelationshipObject, error) {
 
-	listRelationshipRequest := ListRelationshipRequest{
-		LastRelationshipId: lastRelationshipID,
-		Count:              int32(count),
-		InvertRelation:     false,
-	}
-
-	response, err := pc.Client.ListRelationship(ctx, &listRelationshipRequest)
+	response, err := pc.Client.ListRelationship(ctx, request)
 
 	if err != nil {
 		return nil, err
