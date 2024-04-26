@@ -125,17 +125,8 @@ message RelationshipObject {
 
   EntryItem child_entry = 4;
   EntryItem parent_entry = 5;
-  oneof child {
-    option (buf.validate.oneof).required = true;
-    ProfileObject child_profile = 6;
-    ContactObject child_contact = 7;
-  }
 
-  oneof parent {
-    option (buf.validate.oneof).required = true;
-    ProfileObject parent_profile = 8;
-    ContactObject parent_contact = 9;
-  }
+  ProfileObject peer_profile = 6;
 }
 
 // The request message containing the profile's hash
