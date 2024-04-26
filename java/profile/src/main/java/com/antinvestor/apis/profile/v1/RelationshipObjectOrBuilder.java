@@ -110,66 +110,17 @@ java.lang.String defaultValue);
   com.antinvestor.apis.profile.v1.EntryItemOrBuilder getParentEntryOrBuilder();
 
   /**
-   * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
-   * @return Whether the childProfile field is set.
+   * <code>.profile.v1.ProfileObject peer_profile = 6 [json_name = "peerProfile"];</code>
+   * @return Whether the peerProfile field is set.
    */
-  boolean hasChildProfile();
+  boolean hasPeerProfile();
   /**
-   * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
-   * @return The childProfile.
+   * <code>.profile.v1.ProfileObject peer_profile = 6 [json_name = "peerProfile"];</code>
+   * @return The peerProfile.
    */
-  com.antinvestor.apis.profile.v1.ProfileObject getChildProfile();
+  com.antinvestor.apis.profile.v1.ProfileObject getPeerProfile();
   /**
-   * <code>.profile.v1.ProfileObject child_profile = 6 [json_name = "childProfile"];</code>
+   * <code>.profile.v1.ProfileObject peer_profile = 6 [json_name = "peerProfile"];</code>
    */
-  com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder getChildProfileOrBuilder();
-
-  /**
-   * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
-   * @return Whether the childContact field is set.
-   */
-  boolean hasChildContact();
-  /**
-   * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
-   * @return The childContact.
-   */
-  com.antinvestor.apis.profile.v1.ContactObject getChildContact();
-  /**
-   * <code>.profile.v1.ContactObject child_contact = 7 [json_name = "childContact"];</code>
-   */
-  com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getChildContactOrBuilder();
-
-  /**
-   * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
-   * @return Whether the parentProfile field is set.
-   */
-  boolean hasParentProfile();
-  /**
-   * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
-   * @return The parentProfile.
-   */
-  com.antinvestor.apis.profile.v1.ProfileObject getParentProfile();
-  /**
-   * <code>.profile.v1.ProfileObject parent_profile = 8 [json_name = "parentProfile"];</code>
-   */
-  com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder getParentProfileOrBuilder();
-
-  /**
-   * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
-   * @return Whether the parentContact field is set.
-   */
-  boolean hasParentContact();
-  /**
-   * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
-   * @return The parentContact.
-   */
-  com.antinvestor.apis.profile.v1.ContactObject getParentContact();
-  /**
-   * <code>.profile.v1.ContactObject parent_contact = 9 [json_name = "parentContact"];</code>
-   */
-  com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getParentContactOrBuilder();
-
-  com.antinvestor.apis.profile.v1.RelationshipObject.ChildCase getChildCase();
-
-  com.antinvestor.apis.profile.v1.RelationshipObject.ParentCase getParentCase();
+  com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder getPeerProfileOrBuilder();
 }
