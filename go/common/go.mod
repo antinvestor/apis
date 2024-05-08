@@ -3,7 +3,7 @@ module github.com/antinvestor/apis/go/common
 go 1.21
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.1-20240401165935-b983156c5e99.1
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.1-20240508200655-46a4cf4ba109.1
 	golang.org/x/oauth2 v0.20.0
 	google.golang.org/grpc v1.63.2
 	google.golang.org/protobuf v1.34.1
