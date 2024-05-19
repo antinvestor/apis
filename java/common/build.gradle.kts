@@ -1,6 +1,6 @@
 dependencies {
     api("org.aeonbits.owner:owner:1.0.12")
-    api("com.google.code.gson:gson:2.10.1")
+    api("com.google.code.gson:gson:2.11.0")
     implementation("com.auth0:jwks-rsa:0.22.1")
 
     implementation("io.jsonwebtoken:jjwt-api:0.12.5")
