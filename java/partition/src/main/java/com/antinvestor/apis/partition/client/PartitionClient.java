@@ -26,6 +26,7 @@ import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.partition.v1.*;
+import io.grpc.ClientInterceptors;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -53,9 +54,6 @@ public class PartitionClient implements AutoCloseable {
         var channelBuilder = ManagedChannelBuilder.forAddress(cfg.partitionsHostUrl(), cfg.partitionsHostPort())
                 .usePlaintext();
 
-        var optionalClientInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-        optionalClientInterceptor.ifPresent(channelBuilder::intercept);
-
         this.channel = channelBuilder.build();
 
     }
@@ -68,8 +66,12 @@ public class PartitionClient implements AutoCloseable {
         this.channel = channel;
     }
 
-    private PartitionServiceGrpc.PartitionServiceBlockingStub stub() {
-        return PartitionServiceGrpc.newBlockingStub(channel);
+    private PartitionServiceGrpc.PartitionServiceBlockingStub stub(Context context) {
+
+        return ClientSideGrpcInterceptor.fromContext(context)
+                .map(interceptor -> PartitionServiceGrpc.newBlockingStub(ClientInterceptors.intercept(channel, interceptor)))
+                .orElseGet(() -> PartitionServiceGrpc.newBlockingStub(channel));
+
     }
 
     @Override
@@ -79,20 +81,20 @@ public class PartitionClient implements AutoCloseable {
         }
     }
 
-    public TenantObject getTenant(String id) {
+    public TenantObject getTenant(Context context, String id) {
         var request = GetTenantRequest.newBuilder()
                 .setId(id)
                 .build();
-        return stub().getTenant(request).getData();
+        return stub(context).getTenant(request).getData();
     }
 
-    public Iterator<List<TenantObject>> listTenants(String query, int count, int page) {
+    public Iterator<List<TenantObject>> listTenants(Context context, String query, int count, int page) {
         var searchRequest = ListTenantRequest.newBuilder()
                 .setQuery(query)
                 .setCount(count)
                 .setPage(page)
                 .build();
-        var response = stub().listTenant(searchRequest);
+        var response = stub(context).listTenant(searchRequest);
         return new Iterator<>() {
             @Override
             public boolean hasNext() {
@@ -106,22 +108,22 @@ public class PartitionClient implements AutoCloseable {
         };
     }
 
-    public Optional<TenantObject> createTenant(String name, String description, Map<String, String> properties) {
+    public Optional<TenantObject> createTenant(Context context, String name, String description, Map<String, String> properties) {
         var request = CreateTenantRequest.newBuilder()
                 .setName(name)
                 .setDescription(description)
                 .putAllProperties(properties)
                 .build();
-        return Optional.of(stub().createTenant(request).getData());
+        return Optional.of(stub(context).createTenant(request).getData());
     }
 
-    public Iterator<List<PartitionObject>> listPartitions(String query, int count, int page) {
+    public Iterator<List<PartitionObject>> listPartitions(Context context, String query, int count, int page) {
         var request = ListPartitionRequest.newBuilder()
                 .setQuery(query)
                 .setCount(count)
                 .setPage(page)
                 .build();
-        var response = stub().listPartition(request);
+        var response = stub(context).listPartition(request);
 
         return new Iterator<>() {
             @Override
@@ -136,20 +138,20 @@ public class PartitionClient implements AutoCloseable {
         };
     }
 
-    public Optional<PartitionRoleObject> createPartitionRole(String partitionId, String name, Map<String, String> properties) {
+    public Optional<PartitionRoleObject> createPartitionRole(Context context, String partitionId, String name, Map<String, String> properties) {
         var request = CreatePartitionRoleRequest.newBuilder()
                 .setPartitionId(partitionId)
                 .setName(name)
                 .putAllProperties(properties)
                 .build();
-        return Optional.of(stub().createPartitionRole(request).getData());
+        return Optional.of(stub(context).createPartitionRole(request).getData());
     }
 
-    public Iterator<List<PartitionRoleObject>> listPartitionRoles(String partitionId) {
+    public Iterator<List<PartitionRoleObject>> listPartitionRoles(Context context, String partitionId) {
         var request = ListPartitionRoleRequest.newBuilder()
                 .setPartitionId(partitionId)
                 .build();
-        var response = stub().listPartitionRole(request);
+        var response = stub(context).listPartitionRole(request);
         return new Iterator<>() {
             @Override
             public boolean hasNext() {
@@ -163,54 +165,54 @@ public class PartitionClient implements AutoCloseable {
         };
     }
 
-    public Optional<PageObject> createPage(String partitionId, String name, String html) {
+    public Optional<PageObject> createPage(Context context, String partitionId, String name, String html) {
         var request = CreatePageRequest.newBuilder()
                 .setPartitionId(partitionId)
                 .setName(name)
                 .setHtml(html)
                 .build();
-        return Optional.of(stub().createPage(request).getData());
+        return Optional.of(stub(context).createPage(request).getData());
     }
 
-    public Optional<PageObject> getPage(String pageId, String partitionId, String name) {
+    public Optional<PageObject> getPage(Context context, String pageId, String partitionId, String name) {
         var request = GetPageRequest.newBuilder()
                 .setPageId(pageId)
                 .setPartitionId(partitionId)
                 .setName(name)
                 .build();
-        return Optional.of(stub().getPage(request).getData());
+        return Optional.of(stub(context).getPage(request).getData());
     }
 
-    public Optional<AccessObject> createAccess(String partitionId, String profileId) {
+    public Optional<AccessObject> createAccess(Context context, String partitionId, String profileId) {
         var request = CreateAccessRequest.newBuilder()
                 .setPartitionId(partitionId)
                 .setProfileId(profileId)
                 .build();
-        return Optional.of(stub().createAccess(request).getData());
+        return Optional.of(stub(context).createAccess(request).getData());
     }
 
-    public Optional<AccessObject> getAccess(String accessId, String partitionId, String profileId) {
+    public Optional<AccessObject> getAccess(Context context, String accessId, String partitionId, String profileId) {
         var request = GetAccessRequest.newBuilder()
                 .setAccessId(accessId)
                 .setPartitionId(partitionId)
                 .setProfileId(profileId)
                 .build();
-        return Optional.of(stub().getAccess(request).getData());
+        return Optional.of(stub(context).getAccess(request).getData());
     }
 
-    public Optional<AccessRoleObject> createAccessRole(String accessId, String partitionRoleId) {
+    public Optional<AccessRoleObject> createAccessRole(Context context, String accessId, String partitionRoleId) {
         var request = CreateAccessRoleRequest.newBuilder()
                 .setAccessId(accessId)
                 .setPartitionRoleId(partitionRoleId)
                 .build();
-        return Optional.of(stub().createAccessRole(request).getData());
+        return Optional.of(stub(context).createAccessRole(request).getData());
     }
 
-    public Iterator<List<AccessRoleObject>> listAccessRoles(String accessId) {
+    public Iterator<List<AccessRoleObject>> listAccessRoles(Context context, String accessId) {
         var request = ListAccessRoleRequest.newBuilder()
                 .setAccessId(accessId)
                 .build();
-        var response = stub().listAccessRole(request);
+        var response = stub(context).listAccessRole(request);
         return new Iterator<>() {
             @Override
             public boolean hasNext() {

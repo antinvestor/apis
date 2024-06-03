@@ -18,6 +18,7 @@ import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.profile.v1.*;
+import io.grpc.ClientInterceptors;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -47,9 +48,6 @@ public class ProfilesClient implements AutoCloseable {
                 .forAddress(cfg.profilesHostUrl(), cfg.profilesHostPort())
                 .usePlaintext();
 
-        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
-
         this.channel = channelBuilder.build();
     }
 
@@ -61,8 +59,12 @@ public class ProfilesClient implements AutoCloseable {
         this.channel = channel;
     }
 
-    private ProfileServiceGrpc.ProfileServiceBlockingStub stub() {
-        return ProfileServiceGrpc.newBlockingStub(channel);
+    private ProfileServiceGrpc.ProfileServiceBlockingStub stub(Context context) {
+
+        return ClientSideGrpcInterceptor.fromContext(context)
+                .map(interceptor -> ProfileServiceGrpc.newBlockingStub(ClientInterceptors.intercept(channel, interceptor)))
+                .orElseGet(() -> ProfileServiceGrpc.newBlockingStub(channel));
+
     }
 
     @Override
@@ -72,11 +74,11 @@ public class ProfilesClient implements AutoCloseable {
         }
     }
 
-    public Iterator<List<ProfileObject>> search(String query) {
+    public Iterator<List<ProfileObject>> search(Context context, String query) {
         var searchRequest = SearchRequest.newBuilder()
                 .setQuery(query)
                 .build();
-        var resp = stub().search(searchRequest);
+        var resp = stub(context).search(searchRequest);
         return new Iterator<>() {
             @Override
             public boolean hasNext() {
@@ -90,41 +92,41 @@ public class ProfilesClient implements AutoCloseable {
         };
     }
 
-    public Optional<ProfileObject> merge(String ID, String mergeID) {
+    public Optional<ProfileObject> merge(Context context, String ID, String mergeID) {
         var mergeRequest = MergeRequest.newBuilder()
                 .setId(ID)
                 .setMergeid(mergeID)
                 .build();
 
-        return Optional.of(stub().merge(mergeRequest).getData());
+        return Optional.of(stub(context).merge(mergeRequest).getData());
     }
 
-    public Optional<ProfileObject> createProfile(ProfileType profileType, String contact, Map<String, String> properties) {
+    public Optional<ProfileObject> createProfile(Context context, ProfileType profileType, String contact, Map<String, String> properties) {
         var createRequest = CreateRequest.newBuilder()
                 .setType(profileType)
                 .setContact(contact)
                 .putAllProperties(properties)
                 .build();
-        return Optional.of(stub().create(createRequest).getData());
+        return Optional.of(stub(context).create(createRequest).getData());
     }
 
-    public Optional<ProfileObject> update(String profileId, Map<String, String> properties) {
+    public Optional<ProfileObject> update(Context context, String profileId, Map<String, String> properties) {
         var updateRequest = UpdateRequest.newBuilder()
                 .setId(profileId)
                 .putAllProperties(properties)
                 .build();
-        return Optional.of(stub().update(updateRequest).getData());
+        return Optional.of(stub(context).update(updateRequest).getData());
     }
 
-    public Optional<ProfileObject> addContact(String profileId, String contact) {
+    public Optional<ProfileObject> addContact(Context context, String profileId, String contact) {
         var addContactRequest = AddContactRequest.newBuilder()
                 .setId(profileId)
                 .setContact(contact)
                 .build();
-        return Optional.of(stub().addContact(addContactRequest).getData());
+        return Optional.of(stub(context).addContact(addContactRequest).getData());
     }
 
-    public Optional<ProfileObject> addAddress(String profileId, String addressName, String country, String city, String area, String street, String house, String postCode, double latitude, double longitude, String extra) {
+    public Optional<ProfileObject> addAddress(Context context, String profileId, String addressName, String country, String city, String area, String street, String house, String postCode, double latitude, double longitude, String extra) {
         var address = AddressObject.newBuilder()
                 .setName(addressName)
                 .setCountry(country)
@@ -141,25 +143,25 @@ public class ProfilesClient implements AutoCloseable {
                 .setId(profileId)
                 .setAddress(address)
                 .build();
-        return Optional.of(stub().addAddress(addAddressRequest).getData());
+        return Optional.of(stub(context).addAddress(addAddressRequest).getData());
     }
 
-    public Optional<ProfileObject> getByID(String profileId) {
+    public Optional<ProfileObject> getByID(Context context, String profileId) {
         var profileIdRequest = GetByIdRequest.newBuilder()
                 .setId(profileId)
                 .build();
-        return Optional.of(stub().getById(profileIdRequest).getData());
+        return Optional.of(stub(context).getById(profileIdRequest).getData());
     }
 
-    public Optional<ProfileObject> getByContact(String contactDetail) {
+    public Optional<ProfileObject> getByContact(Context context, String contactDetail) {
         var profileContactRequest = GetByContactRequest.newBuilder()
                 .setContact(contactDetail)
                 .build();
 
-        return Optional.of(stub().getByContact(profileContactRequest).getData());
+        return Optional.of(stub(context).getByContact(profileContactRequest).getData());
     }
 
-    public Optional<RelationshipObject> addRelationship(String relationshipId, String parent, String parentId,
+    public Optional<RelationshipObject> addRelationship(Context context, String relationshipId, String parent, String parentId,
                                                         String child, String childId, RelationshipType relationshipType,
                                                         Map<String, String> extras) {
 
@@ -172,17 +174,17 @@ public class ProfilesClient implements AutoCloseable {
                 .setType(relationshipType)
                 .putAllProperties(extras).build();
 
-        return Optional.of(stub().addRelationship(addRelationshipReq).getData());
+        return Optional.of(stub(context).addRelationship(addRelationshipReq).getData());
 
     }
 
-    public Optional<RelationshipObject> deleteRelationship(String relationshipId, String parentId) {
+    public Optional<RelationshipObject> deleteRelationship(Context context, String relationshipId, String parentId) {
 
         var deleteRelationshipReq = DeleteRelationshipRequest.newBuilder()
                 .setId(relationshipId)
                 .setParentId(parentId).build();
 
-        return Optional.of(stub().deleteRelationship(deleteRelationshipReq).getData());
+        return Optional.of(stub(context).deleteRelationship(deleteRelationshipReq).getData());
     }
 
 }

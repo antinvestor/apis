@@ -21,26 +21,21 @@ import com.antinvestor.apis.common.exceptions.STATUSCODES;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.files.api.DefaultApi;
-import com.antinvestor.apis.files.invoker.ApiClient;
 import com.antinvestor.apis.files.invoker.ApiException;
 import com.antinvestor.apis.files.invoker.Configuration;
 import com.antinvestor.apis.files.model.ModelFile;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 
 import java.io.File;
 
 @ApplicationScoped
 public class FilesClient implements AutoCloseable {
 
-    private DefaultApi apiInstance;
-
-    public FilesClient(DefaultApi apiInstance) {
-        this.apiInstance = apiInstance;
+    public FilesClient() {
     }
 
-    @Inject
-    public FilesClient(Context context) {
+
+    private DefaultApi instantiate(Context context) {
 
         var optionalConfig = ((DefaultContext) context).getConfig();
         if (optionalConfig.isEmpty())
@@ -48,19 +43,16 @@ public class FilesClient implements AutoCloseable {
         var cfg = (FilesDefaultConfig) optionalConfig.get();
 
 
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        var defaultClient = Configuration.getDefaultApiClient();
         defaultClient.setHost(cfg.filesHostUrl());
         defaultClient.setPort(cfg.filesHostPort());
 
         var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
         optionalClientSideGrpcInterceptor.ifPresent(defaultClient::setRequestInterceptor);
 
-        this.apiInstance = new DefaultApi(defaultClient);
+        return new DefaultApi(defaultClient);
     }
 
-    public void setApiInstance(DefaultApi apiInstance) {
-        this.apiInstance = apiInstance;
-    }
 
     @Override
     public void close() throws Exception {
@@ -72,7 +64,7 @@ public class FilesClient implements AutoCloseable {
         try {
             String ownerId = "";
 
-            return apiInstance.addFile(groupId, subGroupId, ownerId, isPublic, description, fileName, fileData);
+            return instantiate(context).addFile(groupId, subGroupId, ownerId, isPublic, description, fileName, fileData);
 
         } catch (ApiException e) {
 
@@ -87,7 +79,7 @@ public class FilesClient implements AutoCloseable {
     public void delete(Context context, String fileId) throws RetriableException, UnRetriableException {
 
         try {
-            apiInstance.deleteFile(fileId);
+            instantiate(context).deleteFile(fileId);
 
         } catch (ApiException e) {
 
@@ -102,7 +94,7 @@ public class FilesClient implements AutoCloseable {
     public File get(Context context, String fileId) throws RetriableException, UnRetriableException {
 
         try {
-            return apiInstance.findFileById(fileId);
+            return instantiate(context).findFileById(fileId);
 
         } catch (ApiException e) {
 
@@ -117,7 +109,7 @@ public class FilesClient implements AutoCloseable {
     public Iterable<ModelFile> search(Context context, String ownerId, String groupId, String subGroupId, int page, int size) throws RetriableException, UnRetriableException {
 
         try {
-            return apiInstance.findFiles(ownerId, groupId, subGroupId, size, page);
+            return instantiate(context).findFiles(ownerId, groupId, subGroupId, size, page);
         } catch (ApiException e) {
 
             if (e.getCode() == 500) {

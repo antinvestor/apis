@@ -21,6 +21,7 @@ import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.google.type.Money;
 import com.antinvestor.apis.ledger.v1.*;
+import io.grpc.ClientInterceptors;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -52,9 +53,6 @@ public class LedgerClient implements AutoCloseable {
                 .forAddress(cfg.ledgerHostUrl(), cfg.ledgerHostPort())
                 .usePlaintext();
 
-        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
-
         this.channel = channelBuilder.build();
     }
 
@@ -66,8 +64,12 @@ public class LedgerClient implements AutoCloseable {
         this.channel = channel;
     }
 
-    private LedgerServiceGrpc.LedgerServiceBlockingStub stub() {
-        return LedgerServiceGrpc.newBlockingStub(channel);
+    private LedgerServiceGrpc.LedgerServiceBlockingStub stub(Context context) {
+
+        return ClientSideGrpcInterceptor.fromContext(context)
+                .map(interceptor -> LedgerServiceGrpc.newBlockingStub(ClientInterceptors.intercept(channel, interceptor)))
+                .orElseGet(() -> LedgerServiceGrpc.newBlockingStub(channel));
+
     }
 
     @Override
@@ -77,11 +79,11 @@ public class LedgerClient implements AutoCloseable {
         }
     }
 
-    public Optional<Ledger> getLedger(String reference) {
+    public Optional<Ledger> getLedger(Context context, String reference) {
 
         String jsonQuery = String.format("{ \"query\": { \"should\": { \"fields\": [{\"reference\": {\"eq\": \"%s\"}}]}}}", reference);
 
-        Iterator<Ledger> ledgerIterator = listLedgers(jsonQuery);
+        Iterator<Ledger> ledgerIterator = listLedgers(context, jsonQuery);
         if (ledgerIterator.hasNext()) {
             return Optional.of(ledgerIterator.next());
         } else {
@@ -90,14 +92,14 @@ public class LedgerClient implements AutoCloseable {
 
     }
 
-    public Iterator<Ledger> listLedgers(String jsonQuery) {
+    public Iterator<Ledger> listLedgers(Context context, String jsonQuery) {
         SearchRequest searchRequest = SearchRequest.newBuilder()
                 .setQuery(jsonQuery)
                 .build();
-        return stub().searchLedgers(searchRequest);
+        return stub(context).searchLedgers(searchRequest);
     }
 
-    public Ledger createLedger(String parent, LedgerType type, Map<String, String> data) {
+    public Ledger createLedger(Context context, String parent, LedgerType type, Map<String, String> data) {
 
         Ledger.Builder ledgerBuilder = Ledger.newBuilder()
                 .setType(type);
@@ -110,24 +112,24 @@ public class LedgerClient implements AutoCloseable {
             ledgerBuilder.putAllData(data);
         }
 
-        return stub().createLedger(ledgerBuilder.build());
+        return stub(context).createLedger(ledgerBuilder.build());
     }
 
-    public Optional<Ledger> updateLedger(String reference, Map<String, String> data) {
-        Optional<Ledger> optionalLedger = getLedger(reference);
+    public Optional<Ledger> updateLedger(Context context, String reference, Map<String, String> data) {
+        Optional<Ledger> optionalLedger = getLedger(context, reference);
         if (optionalLedger.isPresent()) {
             optionalLedger.get().getDataMap().putAll(data);
-            return Optional.of(stub().updateLedger(optionalLedger.get()));
+            return Optional.of(stub(context).updateLedger(optionalLedger.get()));
         } else {
             return Optional.empty();
         }
     }
 
 
-    public Optional<Account> getAccount(String reference) {
+    public Optional<Account> getAccount(Context context, String reference) {
 
         String jsonQuery = String.format("{ \"query\": { \"should\": { \"fields\": [{\"reference\": {\"eq\": \"%s\"}}]}}}", reference);
-        Iterator<Account> accountIterator = listAccounts(jsonQuery);
+        Iterator<Account> accountIterator = listAccounts(context, jsonQuery);
         if (accountIterator.hasNext()) {
             return Optional.of(accountIterator.next());
         } else {
@@ -136,14 +138,14 @@ public class LedgerClient implements AutoCloseable {
 
     }
 
-    public Iterator<Account> listAccounts(String jsonQuery) {
+    public Iterator<Account> listAccounts(Context context, String jsonQuery) {
         SearchRequest searchRequest = SearchRequest.newBuilder()
                 .setQuery(jsonQuery)
                 .build();
-        return stub().searchAccounts(searchRequest);
+        return stub(context).searchAccounts(searchRequest);
     }
 
-    public Account createAccount(String ledgerReference, String currencyCode, Map<String, String> data) {
+    public Account createAccount(Context context, String ledgerReference, String currencyCode, Map<String, String> data) {
 
         Money money = Money.newBuilder().setUnits(0).setNanos(0).setCurrencyCode(currencyCode).build();
         Account.Builder accountBuilder = Account.newBuilder()
@@ -154,23 +156,23 @@ public class LedgerClient implements AutoCloseable {
             accountBuilder.putAllData(data);
         }
 
-        return stub().createAccount(accountBuilder.build());
+        return stub(context).createAccount(accountBuilder.build());
     }
 
-    public Optional<Account> updateAccount(String reference, Map<String, String> data) {
+    public Optional<Account> updateAccount(Context context, String reference, Map<String, String> data) {
 
         Account.Builder accountBuilder = Account.newBuilder()
                 .setReference(reference)
                 .putAllData(data);
 
-        return Optional.of(stub().updateAccount(accountBuilder.build()));
+        return Optional.of(stub(context).updateAccount(accountBuilder.build()));
     }
 
 
-    public Optional<Transaction> getTransaction(String reference) {
+    public Optional<Transaction> getTransaction(Context context, String reference) {
 
         String jsonQuery = String.format("{ \"query\": { \"should\": { \"fields\": [{\"reference\": {\"eq\": \"%s\"}}]}}}", reference);
-        Iterable<Transaction> transactionIterator = listTransactions(jsonQuery);
+        Iterable<Transaction> transactionIterator = listTransactions(context, jsonQuery);
         if (transactionIterator.iterator().hasNext()) {
             return Optional.of(transactionIterator.iterator().next());
         } else {
@@ -179,49 +181,49 @@ public class LedgerClient implements AutoCloseable {
 
     }
 
-    public Iterable<Transaction> listTransactions(String jsonQuery) {
+    public Iterable<Transaction> listTransactions(Context context, String jsonQuery) {
         SearchRequest searchRequest = SearchRequest.newBuilder()
                 .setQuery(jsonQuery)
                 .build();
-        Iterator<Transaction> results = stub().searchTransactions(searchRequest);
+        Iterator<Transaction> results = stub(context).searchTransactions(searchRequest);
         return () -> results;
     }
 
-    public Transaction createTransaction(TransactionBuilder transactionBuilder) throws UnRetriableException {
+    public Transaction createTransaction(Context context, TransactionBuilder transactionBuilder) throws UnRetriableException {
 
         Transaction transaction = transactionBuilder.build();
 
-        return stub().createTransaction(transaction);
+        return stub(context).createTransaction(transaction);
     }
 
-    public Optional<Transaction> updateTransaction(String reference, Map<String, String> data) {
-        Optional<Transaction> optionalTransaction = getTransaction(reference);
+    public Optional<Transaction> updateTransaction(Context context, String reference, Map<String, String> data) {
+        Optional<Transaction> optionalTransaction = getTransaction(context, reference);
 
         if (optionalTransaction.isPresent()) {
 
             Transaction.Builder transactionBuilder = Transaction.newBuilder(optionalTransaction.get());
-            transactionBuilder = transactionBuilder.putAllData(data);
+            transactionBuilder.putAllData(data);
             Transaction transaction = transactionBuilder.build();
-            return Optional.of(stub().updateTransaction(transaction));
+            return Optional.of(stub(context).updateTransaction(transaction));
         } else {
             return Optional.empty();
         }
     }
 
 
-    public Optional<Transaction> reverseTransaction(String reference) {
+    public Optional<Transaction> reverseTransaction(Context context, String reference) {
 
         Transaction transaction = Transaction.newBuilder()
                 .setReference(reference).build();
-        return Optional.ofNullable(stub().reverseTransaction(transaction));
+        return Optional.ofNullable(stub(context).reverseTransaction(transaction));
     }
 
 
-    public Iterable<TransactionEntry> listTransactionEntries(String jsonQuery) {
+    public Iterable<TransactionEntry> listTransactionEntries(Context context, String jsonQuery) {
         SearchRequest searchRequest = SearchRequest.newBuilder()
                 .setQuery(jsonQuery)
                 .build();
-        Iterator<TransactionEntry> results = stub().searchTransactionEntries(searchRequest);
+        Iterator<TransactionEntry> results = stub(context).searchTransactionEntries(searchRequest);
         return () -> results;
     }
 

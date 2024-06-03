@@ -20,6 +20,7 @@ import com.antinvestor.apis.common.database.BaseModel;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.common.utilities.TextUtils;
 import com.antinvestor.apis.settings.v1.*;
+import io.grpc.ClientInterceptors;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -27,8 +28,6 @@ import jakarta.inject.Inject;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Iterator;
@@ -50,15 +49,11 @@ public class SettingsClient implements AutoCloseable {
 
         var cfg = (SettingsDefaultConfig) optionalConfig.get();
 
-
         ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder
                 .forAddress(cfg.settingsHostUrl(), cfg.settingsHostPort())
                 .usePlaintext();
 
-        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
-
-        this.channel = channelBuilder.build();
+         this.channel = channelBuilder.build();
     }
 
     public SettingsClient(ManagedChannel channel) {
@@ -108,7 +103,7 @@ public class SettingsClient implements AutoCloseable {
         this.channel = channel;
     }
 
-    public String getSetting(String moduleName, String settingName) {
+    public String getSetting(Context context, String moduleName, String settingName) {
 
         Setting setting = Setting.newBuilder()
                 .setModule(moduleName)
@@ -117,55 +112,55 @@ public class SettingsClient implements AutoCloseable {
         GetRequest request = GetRequest.newBuilder()
                 .setKey(setting)
                 .build();
-        GetResponse settingValue = getStub().get(request);
+        GetResponse settingValue = stub(context).get(request);
         return settingValue.getData().getValue();
     }
 
-    public Double getSettingAsDouble(String moduleName, String settingName, double defaultValue) {
-        var result = getSettingAsDouble(moduleName, settingName);
+    public Double getSettingAsDouble(Context context, String moduleName, String settingName, double defaultValue) {
+        var result = getSettingAsDouble(context, moduleName, settingName);
         if (Objects.isNull(result)) {
             return defaultValue;
         }
         return result;
     }
 
-    public Double getSettingAsDouble(String moduleName, String settingName) {
-        String setting = getSetting(moduleName, settingName);
+    public Double getSettingAsDouble(Context context, String moduleName, String settingName) {
+        String setting = getSetting(context, moduleName, settingName);
         return asDouble(setting);
     }
 
-    public BigDecimal getSettingAsBigDecimal(String moduleName, String settingName) {
-        String setting = getSetting(moduleName, settingName);
+    public BigDecimal getSettingAsBigDecimal(Context context, String moduleName, String settingName) {
+        String setting = getSetting(context, moduleName, settingName);
         return asBigDecimal(setting);
     }
 
-    public BigDecimal getSettingAsBigDecimal(String moduleName, String settingName, BigDecimal defaultValue) {
-        var result = getSettingAsBigDecimal(moduleName, settingName);
+    public BigDecimal getSettingAsBigDecimal(Context context, String moduleName, String settingName, BigDecimal defaultValue) {
+        var result = getSettingAsBigDecimal(context, moduleName, settingName);
         if (Objects.isNull(result)) {
             return defaultValue;
         }
         return result;
     }
 
-    public Integer getSettingAsInt(String moduleName, String settingName) {
-        String setting = getSetting(moduleName, settingName);
+    public Integer getSettingAsInt(Context context, String moduleName, String settingName) {
+        String setting = getSetting(context, moduleName, settingName);
         return asInt(setting);
     }
 
-    public Integer getSettingAsInt(String moduleName, String settingName, int defaultValue) {
-        var result = getSettingAsInt(moduleName, settingName);
+    public Integer getSettingAsInt(Context context, String moduleName, String settingName, int defaultValue) {
+        var result = getSettingAsInt(context, moduleName, settingName);
         if (Objects.isNull(result)) {
             return defaultValue;
         }
         return result;
     }
 
-    public boolean getSettingAsBoolean(String moduleName, String settingName) {
-        String setting = getSetting(moduleName, settingName);
+    public boolean getSettingAsBoolean(Context context, String moduleName, String settingName) {
+        String setting = getSetting(context, moduleName, settingName);
         return asBoolean(setting);
     }
 
-    public String getLocalizedSetting(String moduleName, String language, String settingName) {
+    public String getLocalizedSetting(Context context, String moduleName, String language, String settingName) {
 
         Setting setting = Setting.newBuilder()
                 .setModule(moduleName)
@@ -177,11 +172,11 @@ public class SettingsClient implements AutoCloseable {
                 .setKey(setting)
                 .build();
 
-        GetResponse settingValue = getStub().get(request);
+        GetResponse settingValue = stub(context).get(request);
         return settingValue.getData().getValue();
     }
 
-    public String getSystemSetting(String settingName) {
+    public String getSystemSetting(Context context, String settingName) {
 
         Setting setting = Setting.newBuilder()
                 .setName(settingName)
@@ -191,11 +186,11 @@ public class SettingsClient implements AutoCloseable {
                 .setKey(setting)
                 .build();
 
-        GetResponse settingValue = getStub().get(request);
+        GetResponse settingValue = stub(context).get(request);
         return settingValue.getData().getValue();
     }
 
-    public String getObjectSetting(String moduleName, BaseModel object, String settingName) {
+    public String getObjectSetting(Context context, String moduleName, BaseModel object, String settingName) {
         Setting setting = Setting.newBuilder()
                 .setModule(moduleName)
                 .setName(settingName)
@@ -207,15 +202,15 @@ public class SettingsClient implements AutoCloseable {
                 .setKey(setting)
                 .build();
 
-        GetResponse settingValue = getStub().get(request);
+        GetResponse settingValue = stub(context).get(request);
         return settingValue.getData().getValue();
     }
 
-    public String setSetting(String moduleName, String settingName, Object settingValue) {
-        return setSetting(moduleName, "", settingName, settingValue);
+    public String setSetting(Context context, String moduleName, String settingName, Object settingValue) {
+        return setSetting(context, moduleName, "", settingName, settingValue);
     }
 
-    public String setSetting(String moduleName, String settingLang, String settingName, Object settingValue) {
+    public String setSetting(Context context, String moduleName, String settingLang, String settingName, Object settingValue) {
         String stringSettingValue;
         if (settingValue instanceof LocalDateTime dateSettingValue) {
             stringSettingValue = dateSettingValue.
@@ -236,12 +231,12 @@ public class SettingsClient implements AutoCloseable {
                 .setValue(stringSettingValue)
                 .build();
 
-        SetResponse response = getStub().set(request);
+        SetResponse response = stub(context).set(request);
         return response.getData().getValue();
 
     }
 
-    public String setObjectSetting(String moduleName, BaseModel object, String settingName, Object settingValue) {
+    public String setObjectSetting(Context context, String moduleName, BaseModel object, String settingName, Object settingValue) {
         String stringSettingValue;
         if (settingValue instanceof LocalDateTime dateSettingValue) {
             stringSettingValue = dateSettingValue.
@@ -262,22 +257,22 @@ public class SettingsClient implements AutoCloseable {
                 .setValue(stringSettingValue)
                 .build();
 
-        SetResponse response = getStub().set(request);
+        SetResponse response = stub(context).set(request);
         return response.getData().getValue();
 
     }
 
-    public Iterator<List<SettingObject>> listSetting(String moduleName, String settingNameQuery) {
+    public Iterator<List<SettingObject>> listSetting(Context context, String moduleName, String settingNameQuery) {
 
         Setting setting = Setting.newBuilder()
                 .setModule(moduleName)
                 .setName(settingNameQuery)
                 .build();
 
-        return getListIterator(setting);
+        return getListIterator(context, setting);
     }
 
-    public Iterator<List<SettingObject>> listObjectSetting(String moduleName, BaseModel object, String settingNameQuery) {
+    public Iterator<List<SettingObject>> listObjectSetting(Context context, String moduleName, BaseModel object, String settingNameQuery) {
 
         Setting setting = Setting.newBuilder()
                 .setModule(moduleName)
@@ -285,15 +280,15 @@ public class SettingsClient implements AutoCloseable {
                 .setObject(object.getClass().getSimpleName())
                 .setObjectId(String.valueOf(object.getId()))
                 .build();
-        return getListIterator(setting);
+        return getListIterator(context, setting);
     }
 
-    private Iterator<List<SettingObject>> getListIterator(Setting setting) {
+    private Iterator<List<SettingObject>> getListIterator(Context context, Setting setting) {
         ListRequest request = ListRequest.newBuilder()
                 .setKey(setting)
                 .build();
 
-        var response = getStub().list(request);
+        var response = stub(context).list(request);
         return new Iterator<>() {
             @Override
             public boolean hasNext() {
@@ -308,7 +303,7 @@ public class SettingsClient implements AutoCloseable {
     }
 
 
-    public void deleteObjectSetting(String moduleName, BaseModel object) {
+    public void deleteObjectSetting(Context context, String moduleName, BaseModel object) {
 
         Setting setting = Setting.newBuilder()
                 .setModule(moduleName)
@@ -320,8 +315,11 @@ public class SettingsClient implements AutoCloseable {
     }
 
 
-    private SettingsServiceGrpc.SettingsServiceBlockingStub getStub() {
-        return SettingsServiceGrpc.newBlockingStub(channel);
+    private SettingsServiceGrpc.SettingsServiceBlockingStub stub(Context context) {
+
+        return ClientSideGrpcInterceptor.fromContext(context)
+                .map(interceptor -> SettingsServiceGrpc.newBlockingStub(ClientInterceptors.intercept(channel, interceptor)))
+                .orElseGet(() -> SettingsServiceGrpc.newBlockingStub(channel));
     }
 
     @Override

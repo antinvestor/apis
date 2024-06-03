@@ -36,9 +36,9 @@ public class ServerSideInterceptor implements ServerInterceptor {
             Metadata.Key.of("authorization", Metadata.ASCII_STRING_MARSHALLER);
     private final String issuer;
     private final String audience;
+    private final String oauth2ServerUrl;
     private final DefaultContext context;
     private LocatorAdapter<Key> keyLocatorAdapter;
-    private DefaultConfig config;
 
     public ServerSideInterceptor(com.antinvestor.apis.common.context.Context context) {
         this.context = (DefaultContext) context;
@@ -50,6 +50,7 @@ public class ServerSideInterceptor implements ServerInterceptor {
 
         this.issuer = config.jwtVerifyIssuer();
         this.audience = config.jwtVerifyAudience();
+        this.oauth2ServerUrl = config.oauth2ServerUrl();
 
 
     }
@@ -60,13 +61,13 @@ public class ServerSideInterceptor implements ServerInterceptor {
             final Metadata requestHeaders,
             ServerCallHandler<ReqT, RespT> next) {
 
-        log.info("header received from client:" + requestHeaders);
+        log.atInfo().addKeyValue("request headers", requestHeaders).log("header from client");
 
         String jwtHeader = requestHeaders.get(JWT_BEARER_HEADER_KEY);
 
         if (Objects.isNull(keyLocatorAdapter)) {
             try {
-                this.keyLocatorAdapter = new JwtKeyResolver(config.oauth2ServerUrl());
+                this.keyLocatorAdapter = new JwtKeyResolver(oauth2ServerUrl);
             } catch (UnRetriableException | RetriableException e) {
                 throw new RuntimeException(e);
             }

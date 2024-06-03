@@ -4,15 +4,15 @@ deps:
   - remote: buf.build
     owner: antinvestor
     repository: common
-    commit: 13b54ff3675043c6a4469240c1817146
-    digest: shake256:3637d3d985a3004c41ea873924d8397005771ebed90d6ee676a5bf7d7fe8163bf362dd61f8d66120dbdcce5dece60d06242aeade24fb63257534b75889607b6d
+    commit: 267da7974a94450cb813266fd70013c8
+    digest: shake256:bb7e5cd3b6505df742474a4d3856d182f6cb5b7e223743d3b5536cba8d6b797ee8281df3f543837fdaea37f55e082d1407dd7e5ebce74a5082f83cf083a92c31
   - remote: buf.build
     owner: bufbuild
     repository: protovalidate
-    commit: b983156c5e994cc9892e0ce3e64e17e0
-    digest: shake256:fb47a62989d38c2529bcc5cd86ded43d800eb84cee82b42b9e8a9e815d4ee8134a0fb9d0ce8299b27c2d2bbb7d6ade0c4ad5a8a4d467e1e2c7ca619ae9f634e2
+    commit: 46a4cf4ba1094a34bcd89a6c67163b4b
+    digest: shake256:436ce453801917c11bc7b21d66bcfae87da2aceb804a041487be1e51dc9fbc219e61ea6a552db7a7aa6d63bb5efd0f3ed5fe3d4c42d4f750d0eb35f14144e3b6
   - remote: buf.build
     owner: googleapis
     repository: googleapis
-    commit: 4ed3bc159a8b4ac68fe253218760d035
-    digest: shake256:7149cf5e9955c692d381e557830555d4e93f205a0f1b8e2dfdae46d029369aa3fc1980e35df0d310f7cc3b622f93e19ad276769a283a967dd3065ddfd3a40e13
+    commit: f0e53af8f2fc4556b94f482688b57223
+    digest: shake256:de26a277fc28b8b411ecf58729d78d32fcf15090ffd998a4469225b17889bfb51442eaab04bb7a8d88d203ecdf0a9febd4ffd52c18ed1c2229160c7bd353ca95

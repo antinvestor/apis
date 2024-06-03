@@ -20,6 +20,7 @@ import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.common.utilities.TextUtils;
 import com.antinvestor.apis.common.v1.*;
 import com.antinvestor.apis.notification.v1.*;
+import io.grpc.ClientInterceptors;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -54,10 +55,6 @@ public class NotificationClient implements AutoCloseable {
                 .forAddress(cfg.notificationsHostUrl(), cfg.notificationsHostPort())
                 .usePlaintext();
 
-        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
-
-
         this.channel = channelBuilder.build();
     }
 
@@ -69,8 +66,12 @@ public class NotificationClient implements AutoCloseable {
         this.channel = channel;
     }
 
-    private NotificationServiceGrpc.NotificationServiceBlockingStub stub() {
-        return NotificationServiceGrpc.newBlockingStub(channel);
+    private NotificationServiceGrpc.NotificationServiceBlockingStub stub(Context context) {
+
+        return ClientSideGrpcInterceptor.fromContext(context)
+                .map(interceptor -> NotificationServiceGrpc.newBlockingStub(ClientInterceptors.intercept(channel, interceptor)))
+                .orElseGet(() -> NotificationServiceGrpc.newBlockingStub(channel));
+
     }
 
     @Override
@@ -87,9 +88,9 @@ public class NotificationClient implements AutoCloseable {
      * @param notificationId The ID of the notification to retrieve.
      * @return An Optional containing the notification if found, or an empty Optional if not found.
      */
-    public Optional<Notification> getById(String notificationId) {
+    public Optional<Notification> getById(Context context, String notificationId) {
         SearchRequest searchFilter = SearchRequest.newBuilder().setIdQuery(notificationId).build();
-        Iterator<SearchResponse> notificationIterator = stub().search(searchFilter);
+        Iterator<SearchResponse> notificationIterator = stub(context).search(searchFilter);
         if (notificationIterator.hasNext()) {
             var searchResponse = notificationIterator.next();
             if (searchResponse.getDataCount() > 0) {
@@ -100,17 +101,17 @@ public class NotificationClient implements AutoCloseable {
     }
 
 
-    public StatusResponse send(Notification notification) {
+    public StatusResponse send(Context context, Notification notification) {
         var sendRequest = SendRequest.newBuilder().setData(notification).build();
-        return stub().send(sendRequest).getData();
+        return stub(context).send(sendRequest).getData();
     }
 
-    public StatusResponse receive(Notification notification) {
+    public StatusResponse receive(Context context, Notification notification) {
         var receiveRequest = ReceiveRequest.newBuilder().setData(notification).build();
-        return stub().receive(receiveRequest).getData();
+        return stub(context).receive(receiveRequest).getData();
     }
 
-    public StatusResponse update(STATE state, STATUS status, String externalId) {
+    public StatusResponse update(Context context, STATE state, STATUS status, String externalId) {
 
         StatusUpdateRequest statusUpdateRequest = StatusUpdateRequest
                 .newBuilder()
@@ -119,15 +120,15 @@ public class NotificationClient implements AutoCloseable {
                 .setExternalId(externalId)
                 .build();
 
-        return stub().statusUpdate(statusUpdateRequest).getData();
+        return stub(context).statusUpdate(statusUpdateRequest).getData();
     }
 
-    public Iterator<List<Notification>> page(int page, int size) {
-        return search(null, null, null, page, size);
+    public Iterator<List<Notification>> page(Context context, int page, int size) {
+        return search(context, null, null, null, page, size);
     }
 
 
-    public Iterator<List<Notification>> search(String query, LocalDateTime startDate, LocalDateTime endDate, int page, int size) {
+    public Iterator<List<Notification>> search(Context context, String query, LocalDateTime startDate, LocalDateTime endDate, int page, int size) {
 
         var filterBuilder = SearchRequest.newBuilder();
 
@@ -150,7 +151,7 @@ public class NotificationClient implements AutoCloseable {
 
         filterBuilder.setLimits(limitsBuilder.build());
 
-        var response = stub().search(filterBuilder.build());
+        var response = stub(context).search(filterBuilder.build());
 
         return new Iterator<>() {
             @Override
@@ -167,10 +168,11 @@ public class NotificationClient implements AutoCloseable {
     }
 
 
-    public Template templeteSave(String name, String languageCode, Map<String, String> data) {
-        return templeteSave(name, languageCode, data, Collections.emptyMap());
+    public Template templeteSave(Context context, String name, String languageCode, Map<String, String> data) {
+        return templeteSave(context, name, languageCode, data, Collections.emptyMap());
     }
-    public Template templeteSave(String name, String languageCode, Map<String, String> data, Map<String, String> extra) {
+
+    public Template templeteSave(Context context, String name, String languageCode, Map<String, String> data, Map<String, String> extra) {
         var saveRequest = TemplateSaveRequest.
                 newBuilder().
                 setName(name).
@@ -178,11 +180,11 @@ public class NotificationClient implements AutoCloseable {
                 putAllData(data).
                 putAllExtra(extra).
                 build();
-        return stub().templateSave(saveRequest).getData();
+        return stub(context).templateSave(saveRequest).getData();
     }
 
 
-    public Iterator<List<Template>> templateSearch(String query, String languageCode, int page, int size) {
+    public Iterator<List<Template>> templateSearch(Context context, String query, String languageCode, int page, int size) {
 
         var filterBuilder = TemplateSearchRequest.newBuilder()
                 .setPage(page)
@@ -196,7 +198,7 @@ public class NotificationClient implements AutoCloseable {
             filterBuilder = filterBuilder.setLanguageCode(languageCode);
         }
 
-        var response = stub().templateSearch(filterBuilder.build());
+        var response = stub(context).templateSearch(filterBuilder.build());
 
         return new Iterator<>() {
             @Override
@@ -213,14 +215,14 @@ public class NotificationClient implements AutoCloseable {
     }
 
 
-    public Optional<Template> templateGet(String query, String languageCode) {
+    public Optional<Template> templateGet(Context context, String query, String languageCode) {
 
         var searchRequest = TemplateSearchRequest.newBuilder()
                 .setQuery(query)
                 .setLanguageCode(languageCode).
                 build();
 
-        var response = stub().templateSearch(searchRequest);
+        var response = stub(context).templateSearch(searchRequest);
 
         if (response.hasNext()) {
             var templatesList = response.next();

@@ -14,6 +14,7 @@
 
 package com.antinvestor.apis.ledger.client;
 
+import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.exceptions.STATUSCODES;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.utilities.MoneyUtil;
@@ -192,18 +193,11 @@ public class TransactionBuilder {
         return currencyCode;
     }
 
-    public Transaction execute(LedgerClient ledgerClient) throws UnRetriableException {
-        return ledgerClient.createTransaction(this);
+    public Transaction execute(Context context, LedgerClient ledgerClient) throws UnRetriableException {
+        return ledgerClient.createTransaction(context, this);
     }
 
-    private static class LocalEntry {
-        private final String accountReference;
-        private final Money amount;
-
-        public LocalEntry(String accountReference, Money amount) {
-            this.accountReference = accountReference;
-            this.amount = amount;
-        }
+    private record LocalEntry(String accountReference, Money amount) {
 
     }
 }

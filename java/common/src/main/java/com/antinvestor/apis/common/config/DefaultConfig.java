@@ -26,21 +26,13 @@ public interface DefaultConfig extends Config {
     @DefaultValue("dev")
     String env();
 
+    @DefaultValue("authentication.toml")
+    @Key("${product}.${env}.tenant.auth.config.file")
+    String tenantAuthConfig();
+
     @DefaultValue("")
     @Key("${product}.${env}.oauth2.server.url")
     String oauth2ServerUrl();
-
-    @DefaultValue("")
-    @Key("${product}.${env}.oauth2.api.key")
-    String oauth2ApiKey();
-
-    @DefaultValue("")
-    @Key("${product}.${env}.oauth2.api.key.secret")
-    String oauth2ApiKeySecret();
-
-    @DefaultValue("")
-    @Key("${product}.${env}.oauth2.server.audience")
-    List<String> oauth2ServerAudience();
 
     @DefaultValue("")
     @Key("${product}.${env}.jwt.verify.issuer")

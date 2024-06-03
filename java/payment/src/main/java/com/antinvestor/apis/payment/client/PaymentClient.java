@@ -23,6 +23,7 @@ import com.antinvestor.apis.common.v1.SearchRequest;
 import com.antinvestor.apis.common.v1.StatusResponse;
 import com.antinvestor.apis.common.v1.StatusUpdateRequest;
 import com.antinvestor.apis.payment.v1.*;
+import io.grpc.ClientInterceptors;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -55,10 +56,6 @@ public class PaymentClient implements AutoCloseable {
         var channelBuilder = ManagedChannelBuilder.forAddress(cfg.paymentsHostUrl(), cfg.paymentsHostPort())
                 .usePlaintext();
 
-        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-        optionalClientSideGrpcInterceptor.ifPresent(channelBuilder::intercept);
-
-
         this.channel = channelBuilder.build();
 
     }
@@ -71,8 +68,12 @@ public class PaymentClient implements AutoCloseable {
         this.channel = channel;
     }
 
-    private PaymentServiceGrpc.PaymentServiceBlockingStub stub() {
-        return PaymentServiceGrpc.newBlockingStub(channel);
+    private PaymentServiceGrpc.PaymentServiceBlockingStub stub(Context context) {
+
+        return ClientSideGrpcInterceptor.fromContext(context)
+                .map(interceptor -> PaymentServiceGrpc.newBlockingStub(ClientInterceptors.intercept(channel, interceptor)))
+                .orElseGet(() -> PaymentServiceGrpc.newBlockingStub(channel));
+
     }
 
     @Override
@@ -82,11 +83,11 @@ public class PaymentClient implements AutoCloseable {
         }
     }
 
-    public Optional<Payment> getByID(String paymentID) {
+    public Optional<Payment> getByID(Context context, String paymentID) {
 
         SearchRequest filter = SearchRequest.newBuilder().setIdQuery(paymentID).build();
 
-        Iterator<SearchResponse> paymentIterator = stub().search(filter);
+        Iterator<SearchResponse> paymentIterator = stub(context).search(filter);
         if (paymentIterator.hasNext()) {
 
             var searchResponse = paymentIterator.next();
@@ -97,7 +98,7 @@ public class PaymentClient implements AutoCloseable {
         return Optional.empty();
     }
 
-    public Iterator<List<Payment>> search(Integer stateInt, String query, LocalDateTime startDate, LocalDateTime endDate, int page, int size) {
+    public Iterator<List<Payment>> search(Context context, Integer stateInt, String query, LocalDateTime startDate, LocalDateTime endDate, int page, int size) {
 
         SearchRequest.Builder filterBuilder = SearchRequest.newBuilder();
 
@@ -119,8 +120,8 @@ public class PaymentClient implements AutoCloseable {
         }
 
         filterBuilder.setLimits(limitsBuilder.build());
-        var response = stub().search(filterBuilder.build());
-        return new Iterator<List<Payment>>() {
+        var response = stub(context).search(filterBuilder.build());
+        return new Iterator<>() {
             @Override
             public boolean hasNext() {
                 return response.hasNext();
@@ -133,23 +134,23 @@ public class PaymentClient implements AutoCloseable {
         };
     }
 
-    public StatusResponse send(Payment payment) {
+    public StatusResponse send(Context context, Payment payment) {
         var request = SendRequest.newBuilder().setData(payment).build();
-        return stub().send(request).getData();
+        return stub(context).send(request).getData();
     }
 
-    public StatusResponse receive(Payment payment) {
+    public StatusResponse receive(Context context, Payment payment) {
         var request = ReceiveRequest.newBuilder().setData(payment).build();
-        return stub().receive(request).getData();
+        return stub(context).receive(request).getData();
     }
 
-    public StatusResponse update(StatusUpdateRequest update) {
+    public StatusResponse update(Context context, StatusUpdateRequest update) {
 
-        return stub().statusUpdate(update).getData();
+        return stub(context).statusUpdate(update).getData();
     }
 
 
-    public ReconcileResponse reconcile(ReconcileRequest reconPayment) {
-        return stub().reconcile(reconPayment);
+    public ReconcileResponse reconcile(Context context, ReconcileRequest reconPayment) {
+        return stub(context).reconcile(reconPayment);
     }
 }
