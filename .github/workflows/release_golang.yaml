@@ -16,20 +16,33 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Get latest tags
+        id: get_tags
+        run: |
+          # Get the two most recent tags
+          TAGS=$(git tag --sort=-creatordate | head -n 2)
+          echo $TAGS
+          TAG_ARRAY=($TAGS)
+          echo "latest_tag=${TAG_ARRAY[0]}" >> $GITHUB_ENV
+          echo "previous_tag=${TAG_ARRAY[1]}" >> $GITHUB_ENV
+
       - name: Check for folder changes
         id: check_changes
         run: |
-          git fetch origin
-          if git diff --name-only HEAD^ HEAD | grep 'go/${{ matrix.api_module }}'; then
-            echo "Folder has changes"
-            echo "::set-output name=changed::true"
+          git diff --name-only ${{ env.previous_tag }} ${{ env.latest_tag }} | grep 'go/${{ matrix.api_module }}' || echo "go/${{ matrix.api_module }} has no changes"
+        continue-on-error: true
+
+      - name: Set output if changes found
+        id: go_module_changed
+        run: |
+          if [[ $(git diff --name-only ${{ env.previous_tag }} ${{ env.latest_tag }} | grep 'go/${{ matrix.api_module }}') ]]; then
+          echo "::set-output name=changed::true"
           else
-            echo "Folder has no changes"
-            echo "::set-output name=changed::false"
+          echo "::set-output name=changed::false"
           fi
 
       - uses: rickstaa/action-create-tag@v1
-        if: steps.check_changes.outputs.changed == 'true'
+        if: steps.go_module_changed.outputs.changed == 'true'
         id: "tag_create"
         with:
           tag: go/${{ matrix.api_module }}/${{github.ref_name}}
