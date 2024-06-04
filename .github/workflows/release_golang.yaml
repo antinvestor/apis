@@ -20,19 +20,20 @@ jobs:
         id: get_tags
         run: |
           # Get the two most recent tags
-          TAGS=$(git tag --sort=-creatordate | head -n 2)
+          TAGS=$(git tag --sort=-creatordate | grep '^go/${{ matrix.api_module }}/v' | head -n 2)
           echo $TAGS
           TAG_ARRAY=($TAGS)
+          if [ ${#TAG_ARRAY[@]} -lt 2 ]; then
+          echo "Not enough tags found"
+          echo "::set-output name=not_enough_tags::true"
+          exit 0
+          fi
           echo "latest_tag=${TAG_ARRAY[0]}" >> $GITHUB_ENV
           echo "previous_tag=${TAG_ARRAY[1]}" >> $GITHUB_ENV
-
-      - name: Check for folder changes
-        id: check_changes
-        run: |
-          git diff --name-only ${{ env.previous_tag }} ${{ env.latest_tag }} | grep 'go/${{ matrix.api_module }}' || echo "go/${{ matrix.api_module }} has no changes"
-        continue-on-error: true
+          echo "::set-output name=not_enough_tags::false"
 
       - name: Set output if changes found
+        if: steps.get_tags.outputs.not_enough_tags == 'false'
         id: go_module_changed
         run: |
           if [[ $(git diff --name-only ${{ env.previous_tag }} ${{ env.latest_tag }} | grep 'go/${{ matrix.api_module }}') ]]; then
@@ -42,7 +43,7 @@ jobs:
           fi
 
       - uses: rickstaa/action-create-tag@v1
-        if: steps.go_module_changed.outputs.changed == 'true'
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.go_module_changed.outputs.changed == 'true'
         id: "tag_create"
         with:
           tag: go/${{ matrix.api_module }}/${{github.ref_name}}
