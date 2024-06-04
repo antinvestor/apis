@@ -65,7 +65,6 @@ func (ds *DialSettings) Validate() error {
 	}
 	// Credentials should not appear with other options.
 	// We currently allow TokenSource and CredentialsFile to coexist.
-	// TODO(jba): make TokenSource & CredentialsFile an error (breaking change).
 	nCreds := 0
 
 	if ds.APIKey != "" {
