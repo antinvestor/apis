@@ -53,7 +53,7 @@ public class TextUtils {
         if (s == null) {
             return true;
         }
-        return s.length() == 0;
+        return s.isEmpty();
     }
 
     /**
@@ -101,7 +101,7 @@ public class TextUtils {
     public static String camelToSnake(String camelCaseStr) {
 
         if(Objects.isNull(camelCaseStr)){
-            return camelCaseStr;
+            return null;
         }
         // Regular Expression
         String regex = "([a-z])([A-Z]+)";

@@ -24,6 +24,7 @@ import com.antinvestor.apis.common.interceptor.oath2.AccessToken;
 import com.antinvestor.apis.common.interceptor.oath2.Configuration;
 import com.antinvestor.apis.common.interceptor.oath2.JwtKeyResolver;
 import com.antinvestor.apis.common.interceptor.oath2.Oauth2Client;
+import com.antinvestor.apis.common.utilities.AuthenticationUtil;
 import com.antinvestor.apis.common.utilities.HttpUtil;
 import com.antinvestor.apis.common.utilities.TextUtils;
 import com.moandjiezana.toml.Toml;
@@ -89,32 +90,24 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
             return Optional.of(tenantInterceptorMap.get(tenantId.get()));
         }
 
-
-
-        var defaultContext = (DefaultContext) context;
-        var optionalConfig = defaultContext.getConfig();
-        if (optionalConfig.isEmpty()) {
-            log.atWarn().addKeyValue("tenantId", tenantId.get()).log("Can't intercept context without a configuration");
-            return Optional.empty();
-        }
-        var config = optionalConfig.get();
-
-        String authServerUrl = config.oauth2ServerUrl();
-
-
-        Toml authConfig = new Toml().read(config.tenantAuthConfig());
-        if(!authConfig.containsTable(tenantId.get())){
-            log.atWarn().addKeyValue("tenantId", tenantId.get()).log("authentication configuration is missing");
-            return Optional.empty();
+        var authConfigOptional = AuthenticationUtil.from(context);
+        if(authConfigOptional.isEmpty()){
+            return  Optional.empty();
         }
 
+        var authConfig = authConfigOptional.get();
 
-        Toml tenantConfig = authConfig.getTable(tenantId.get());
+        var tenantConfigOptional = authConfig.getTenantTable(tenantId.get());
+        if(tenantConfigOptional.isEmpty()){
+            return  Optional.empty();
+        }
+        var tenantConfig = tenantConfigOptional.get();
+
         String authApiKey = tenantConfig.getString(TENANT_AUTH_API_KEY);
         String authSecret = tenantConfig.getString(TENANT_AUTH_API_SECRET);
         List<String> authAudience = tenantConfig.getList(TENANT_AUTH_AUDIENCE, List.of());
 
-        var interceptor = from(authServerUrl, authApiKey, authSecret, authAudience);
+        var interceptor = from(authConfig.getOauth2ServerUrl(), authApiKey, authSecret, authAudience);
         if(interceptor.isEmpty()){
             log.atWarn().addKeyValue("tenantId", tenantId.get()).addKeyValue("", tenantConfig.toMap()).log("could not create interceptor from tenant config");
             return Optional.empty();
