@@ -20,6 +20,7 @@ import com.moandjiezana.toml.Toml;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,7 +59,7 @@ public class AuthenticationUtil {
     }
 
     private List<Toml> getAllTenantTables() {
-        Toml authConfig = new Toml().read(authenticationConfigFile);
+        Toml authConfig = new Toml().read(Paths.get(authenticationConfigFile).toFile());
         return authConfig.getTables("tenant");
     }
 
