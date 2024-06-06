@@ -50,9 +50,6 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
 
     public static final String BEARER_TYPE = "Bearer";
 
-    public static final String TENANT_AUTH_API_KEY = "api_key";
-    public static final String TENANT_AUTH_API_SECRET = "api_secret";
-    public static final String TENANT_AUTH_AUDIENCE = "audience";
     private static final Logger log = LoggerFactory.getLogger(ClientSideGrpcInterceptor.class);
     private static final String JWT_HTTP_AUTH_HEADER_KEY = "Authorization";
     private static final Metadata.Key<String> JWT_BEARER_HEADER_KEY =
@@ -99,15 +96,17 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
 
         var tenantConfigOptional = authConfig.getTenantTable(tenantId.get());
         if(tenantConfigOptional.isEmpty()){
+            log.atWarn().addKeyValue("tenantId", tenantId).log("could not get configuration by tenant id");
             return  Optional.empty();
         }
         var tenantConfig = tenantConfigOptional.get();
 
-        String authApiKey = tenantConfig.getString(TENANT_AUTH_API_KEY);
-        String authSecret = tenantConfig.getString(TENANT_AUTH_API_SECRET);
-        List<String> authAudience = tenantConfig.getList(TENANT_AUTH_AUDIENCE, List.of());
+        String oauth2ServerUri = tenantConfig.getString(AuthenticationUtil.TENANT_OAUTH2_SERVER);
+        String authApiKey = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_API_KEY);
+        String authSecret = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_API_SECRET);
+        List<String> authAudience = tenantConfig.getList(AuthenticationUtil.TENANT_AUTH_AUDIENCE, List.of());
 
-        var interceptor = from(authConfig.getOauth2ServerUrl(), authApiKey, authSecret, authAudience);
+        var interceptor = from(oauth2ServerUri, authApiKey, authSecret, authAudience);
         if(interceptor.isEmpty()){
             log.atWarn().addKeyValue("tenantId", tenantId.get()).addKeyValue("", tenantConfig.toMap()).log("could not create interceptor from tenant config");
             return Optional.empty();

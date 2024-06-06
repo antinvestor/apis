@@ -16,8 +16,6 @@ package com.antinvestor.apis.common.config;
 
 import org.aeonbits.owner.Config;
 
-import java.util.List;
-
 public interface DefaultConfig extends Config {
 
     @DefaultValue("stawi")
@@ -29,10 +27,6 @@ public interface DefaultConfig extends Config {
     @DefaultValue("authentication.toml")
     @Key("${product}.${env}.tenant.auth.config.file")
     String tenantAuthConfig();
-
-    @DefaultValue("")
-    @Key("${product}.${env}.oauth2.server.url")
-    String oauth2ServerUrl();
 
     @DefaultValue("")
     @Key("${product}.${env}.jwt.verify.issuer")
