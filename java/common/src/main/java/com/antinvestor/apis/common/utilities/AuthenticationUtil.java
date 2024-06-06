@@ -26,14 +26,12 @@ import java.util.stream.Collectors;
 
 public class AuthenticationUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthenticationUtil.class);
-
+    public static final String TENANT_AUTH_ID = "id";
     public static final String TENANT_AUTH_API_KEY = "api_key";
     public static final String TENANT_AUTH_API_SECRET = "api_secret";
     public static final String TENANT_AUTH_AUDIENCE = "audience";
     public static final String TENANT_OAUTH2_SERVER = "oauth2_server_uri";
-
-
+    private static final Logger log = LoggerFactory.getLogger(AuthenticationUtil.class);
     private final String authenticationConfigFile;
 
     public AuthenticationUtil(String authenticationConfigFile) {
@@ -56,7 +54,7 @@ public class AuthenticationUtil {
     }
 
     public Optional<Toml> getTenantTable(String tenantId) {
-        return getAllTenantTables().stream().filter(table -> table.getString("tenantId").equals(tenantId)).findFirst();
+        return getAllTenantTables().stream().filter(table -> table.getString(TENANT_AUTH_ID).equals(tenantId)).findFirst();
     }
 
     private List<Toml> getAllTenantTables() {
@@ -65,8 +63,6 @@ public class AuthenticationUtil {
     }
 
     public List<String> getTableKeys() {
-        return getAllTenantTables().stream().map(table -> table.getString("tenantId")).collect(Collectors.toList());
+        return getAllTenantTables().stream().map(table -> table.getString(TENANT_AUTH_ID)).collect(Collectors.toList());
     }
-
-
 }
