@@ -29,6 +29,10 @@ public interface DefaultConfig extends Config {
     String tenantAuthConfig();
 
     @DefaultValue("")
+    @Key("${product}.${env}.oauth2.server.url")
+    String oauth2ServerUrl();
+
+    @DefaultValue("")
     @Key("${product}.${env}.jwt.verify.issuer")
     String jwtVerifyIssuer();
 
