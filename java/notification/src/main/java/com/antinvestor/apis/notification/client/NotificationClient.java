@@ -20,7 +20,6 @@ import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.common.utilities.TextUtils;
 import com.antinvestor.apis.common.v1.*;
 import com.antinvestor.apis.notification.v1.*;
-import io.grpc.ClientInterceptors;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -36,11 +35,7 @@ import java.util.concurrent.TimeUnit;
  */
 @ApplicationScoped
 public class NotificationClient implements AutoCloseable {
-    private ManagedChannel channel;
-
-    public NotificationClient(ManagedChannel channel) {
-        this.channel = channel;
-    }
+    private final ManagedChannel channel;
 
     @Inject
     public NotificationClient(Context context) {
@@ -55,23 +50,17 @@ public class NotificationClient implements AutoCloseable {
                 .forAddress(cfg.notificationsHostUrl(), cfg.notificationsHostPort())
                 .usePlaintext();
 
-        this.channel = channelBuilder.build();
-    }
+        this.channel = channelBuilder.
+                intercept(ClientSideGrpcInterceptor.fromContext(context)).
+                build();
 
-    public ManagedChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(ManagedChannel channel) {
-        this.channel = channel;
     }
 
     private NotificationServiceGrpc.NotificationServiceBlockingStub stub(Context context) {
 
-        return ClientSideGrpcInterceptor.fromContext(context)
-                .map(interceptor -> NotificationServiceGrpc.newBlockingStub(ClientInterceptors.intercept(channel, interceptor)))
-                .orElseGet(() -> NotificationServiceGrpc.newBlockingStub(channel));
-
+        var stub = NotificationServiceGrpc.newBlockingStub(channel);
+        var tenantId = ClientSideGrpcInterceptor.extractTenantId(context);
+        return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
     }
 
     @Override

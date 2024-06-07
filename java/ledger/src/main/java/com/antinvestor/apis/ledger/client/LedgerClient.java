@@ -53,7 +53,10 @@ public class LedgerClient implements AutoCloseable {
                 .forAddress(cfg.ledgerHostUrl(), cfg.ledgerHostPort())
                 .usePlaintext();
 
-        this.channel = channelBuilder.build();
+        this.channel =  channelBuilder.
+                intercept(ClientSideGrpcInterceptor.fromContext(context)).
+                build();
+
     }
 
     public ManagedChannel getChannel() {
@@ -66,9 +69,9 @@ public class LedgerClient implements AutoCloseable {
 
     private LedgerServiceGrpc.LedgerServiceBlockingStub stub(Context context) {
 
-        return ClientSideGrpcInterceptor.fromContext(context)
-                .map(interceptor -> LedgerServiceGrpc.newBlockingStub(ClientInterceptors.intercept(channel, interceptor)))
-                .orElseGet(() -> LedgerServiceGrpc.newBlockingStub(channel));
+        var stub =  LedgerServiceGrpc.newBlockingStub(channel);
+        var tenantId =  ClientSideGrpcInterceptor.extractTenantId(context);
+        return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
 
     }
 

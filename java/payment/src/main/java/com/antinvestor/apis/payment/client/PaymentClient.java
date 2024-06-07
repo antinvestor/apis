@@ -55,25 +55,16 @@ public class PaymentClient implements AutoCloseable {
         var cfg = (PaymentDefaultConfig) optionalConfig.get();
         var channelBuilder = ManagedChannelBuilder.forAddress(cfg.paymentsHostUrl(), cfg.paymentsHostPort())
                 .usePlaintext();
+        this.channel =  channelBuilder.
+                intercept(ClientSideGrpcInterceptor.fromContext(context)).
+                build();
 
-        this.channel = channelBuilder.build();
-
-    }
-
-    public ManagedChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(ManagedChannel channel) {
-        this.channel = channel;
     }
 
     private PaymentServiceGrpc.PaymentServiceBlockingStub stub(Context context) {
-
-        return ClientSideGrpcInterceptor.fromContext(context)
-                .map(interceptor -> PaymentServiceGrpc.newBlockingStub(ClientInterceptors.intercept(channel, interceptor)))
-                .orElseGet(() -> PaymentServiceGrpc.newBlockingStub(channel));
-
+        var stub =  PaymentServiceGrpc.newBlockingStub(channel);
+        var tenantId =  ClientSideGrpcInterceptor.extractTenantId(context);
+        return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
     }
 
     @Override

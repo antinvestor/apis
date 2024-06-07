@@ -15,39 +15,26 @@
 package com.antinvestor.apis.common.interceptor;
 
 import com.antinvestor.apis.common.context.Context;
-import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.context.DefaultKeys;
 import com.antinvestor.apis.common.exceptions.RetriableException;
-import com.antinvestor.apis.common.exceptions.STATUSCODES;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
-import com.antinvestor.apis.common.interceptor.oath2.AccessToken;
-import com.antinvestor.apis.common.interceptor.oath2.Configuration;
-import com.antinvestor.apis.common.interceptor.oath2.JwtKeyResolver;
-import com.antinvestor.apis.common.interceptor.oath2.Oauth2Client;
+import com.antinvestor.apis.common.interceptor.oath2.ClientOath2Handler;
 import com.antinvestor.apis.common.utilities.AuthenticationUtil;
-import com.antinvestor.apis.common.utilities.HttpUtil;
-import com.antinvestor.apis.common.utilities.TextUtils;
-import com.moandjiezana.toml.Toml;
 import io.grpc.*;
-import io.jsonwebtoken.LocatorAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.http.HttpRequest;
-import java.security.Key;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ExecutionException;
-import java.util.function.Consumer;
 
-public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<HttpRequest.Builder> {
+public class ClientSideGrpcInterceptor implements ClientInterceptor {
 
+
+    public static final CallOptions.Key<String> TENANT_KEY = CallOptions.Key.create("tenant_id");
     public static final String BEARER_TYPE = "Bearer";
 
     private static final Logger log = LoggerFactory.getLogger(ClientSideGrpcInterceptor.class);
@@ -55,134 +42,53 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
     private static final Metadata.Key<String> JWT_BEARER_HEADER_KEY =
             Metadata.Key.of(JWT_HTTP_AUTH_HEADER_KEY, Metadata.ASCII_STRING_MARSHALLER);
 
-    private static final ConcurrentMap<String, ClientSideGrpcInterceptor> tenantInterceptorMap = new ConcurrentHashMap<>();
+    private final Map<String, ClientOath2Handler> clientOauth2HandlerMap;
 
-    private final String oauth2ServerUrl;
-    private final String apiKeyValue;
-    private final String apiSecretValue;
-
-    private final List<String> audienceList;
-    private Configuration optionalConfiguration;
-    private LocatorAdapter<Key> keyLocatorAdapter;
-    private Oauth2Client oauth2service;
-    private AccessToken optionalAccessToken;
-
-    public ClientSideGrpcInterceptor(String oauth2ServerUrl, String apiKeyValue, String apiSecretValue, List<String> audience) {
-        this.oauth2ServerUrl = oauth2ServerUrl;
-        this.apiKeyValue = apiKeyValue;
-        this.apiSecretValue = apiSecretValue;
-        this.audienceList = audience;
+    private ClientSideGrpcInterceptor(Map<String, ClientOath2Handler> clientOauth2HandlerMap) {
+        this.clientOauth2HandlerMap = clientOauth2HandlerMap;
     }
 
-    public static Optional<ClientSideGrpcInterceptor> fromContext(Context context) {
-
-
-        var tenantId = context.get(DefaultKeys.TENANT_ID);
-        if (tenantId.isEmpty()){
-            log.atWarn().log("Can't intercept context without a tenant id");
-            return Optional.empty();
-        }
-
-        if (tenantInterceptorMap.containsKey(tenantId.get())){
-            return Optional.of(tenantInterceptorMap.get(tenantId.get()));
-        }
+    public static ClientSideGrpcInterceptor fromContext(Context context) {
 
         var authConfigOptional = AuthenticationUtil.from(context);
-        if(authConfigOptional.isEmpty()){
-            return  Optional.empty();
+        if (authConfigOptional.isEmpty()) {
+            throw new RuntimeException("missing system configuration in context ");
         }
 
         var authConfig = authConfigOptional.get();
+        var handlersMap = new ConcurrentHashMap<String, ClientOath2Handler>();
 
-        var tenantConfigOptional = authConfig.getTenantTable(tenantId.get());
-        if(tenantConfigOptional.isEmpty()){
-            log.atWarn().addKeyValue("tenantId", tenantId).log("could not get configuration by tenant id");
-            return  Optional.empty();
-        }
-        var tenantConfig = tenantConfigOptional.get();
+        for (var tenantConfig : authConfig.getTenantTables()) {
 
-        String oauth2ServerUri = tenantConfig.getString(AuthenticationUtil.TENANT_OAUTH2_SERVER);
-        String authApiKey = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_API_KEY);
-        String authSecret = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_API_SECRET);
-        List<String> authAudience = tenantConfig.getList(AuthenticationUtil.TENANT_AUTH_AUDIENCE, List.of());
+            String oauth2ServerUri = tenantConfig.getString(AuthenticationUtil.TENANT_OAUTH2_SERVER);
+            String authApiKey = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_API_KEY);
+            String authSecret = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_API_SECRET);
+            List<String> authAudience = tenantConfig.getList(AuthenticationUtil.TENANT_AUTH_AUDIENCE, List.of());
 
-        var interceptor = from(oauth2ServerUri, authApiKey, authSecret, authAudience);
-        if(interceptor.isEmpty()){
-            log.atWarn().addKeyValue("tenantId", tenantId.get()).addKeyValue("", tenantConfig.toMap()).log("could not create interceptor from tenant config");
-            return Optional.empty();
-        }
-        tenantInterceptorMap.put(tenantId.get(), interceptor.get());
-
-        return interceptor;
-    }
-
-    public static Optional<ClientSideGrpcInterceptor> from(
-            String oauth2ServerUrl, String apiKeyValue, String apiKeySecret, List<String> audience) {
-
-        if (TextUtils.isBlank(oauth2ServerUrl) || TextUtils.isBlank(apiKeyValue)) {
-            return Optional.empty();
-        }
-
-        if (Objects.isNull(audience)) {
-            audience = Collections.emptyList();
-        }
-
-        ClientSideGrpcInterceptor clientInterceptor = new ClientSideGrpcInterceptor(
-                oauth2ServerUrl, apiKeyValue, apiKeySecret, audience
-        );
-        return Optional.of(clientInterceptor);
-    }
-
-    private Configuration loadConfiguration(String oauth2ServerUrl) throws UnRetriableException, RetriableException {
-        return HttpUtil.instance().get(Configuration.class, String.format("%s.well-known/openid-configuration", oauth2ServerUrl));
-    }
-
-
-    private String getValidBearerToken() throws IOException, ExecutionException, InterruptedException, URISyntaxException, UnRetriableException, RetriableException {
-
-        if (Objects.nonNull(optionalAccessToken)) {
-            var token = this.optionalAccessToken;
-            if (token.isValid()) {
-                return token.getAccessToken();
+            var tenantId = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_ID);
+            var handler = ClientOath2Handler.from(oauth2ServerUri, authApiKey, authSecret, authAudience);
+            if (handler.isEmpty()) {
+                log.atWarn().addKeyValue("tenantId", tenantId).addKeyValue("configuration", tenantConfig.toMap()).log("could not create handler from tenant config");
+                throw new RuntimeException("could not instantiate handler from configuration provided ");
             }
+
+            handlersMap.put(tenantId, handler.get());
         }
 
-        optionalAccessToken = generateBearerToken();
-        optionalAccessToken.parse(keyLocatorAdapter, optionalConfiguration);
-
-        return optionalAccessToken.getAccessToken();
+        return new ClientSideGrpcInterceptor(handlersMap);
 
     }
 
-    private AccessToken generateBearerToken() throws IOException, ExecutionException, InterruptedException, URISyntaxException, UnRetriableException, RetriableException {
+    public static String extractTenantId(Context context) {
 
-        if (Objects.isNull(optionalConfiguration)) {
-
-            optionalConfiguration = loadConfiguration(oauth2ServerUrl);
-
+        var optionalTenantId = context.get(DefaultKeys.TENANT_ID);
+        if (optionalTenantId.isEmpty()) {
+            throw new RuntimeException("missing tenant id in context ");
         }
 
-        if (Objects.isNull(keyLocatorAdapter)) {
-            this.keyLocatorAdapter = new JwtKeyResolver(oauth2ServerUrl);
-        }
-
-        return getOauth2Service().getAccessToken();
+        return optionalTenantId.get();
     }
 
-    private Oauth2Client getOauth2Service() throws URISyntaxException {
-        if (Objects.nonNull(oauth2service)) {
-            return oauth2service;
-        }
-
-        oauth2service = new Oauth2Client()
-                .oauth2ServiceTokenUri(optionalConfiguration.tokenEndpoint)
-                .apiKey(apiKeyValue)
-                .apiSecret(apiSecretValue)
-                .audience(audienceList)
-                .scope("offline_access");
-
-        return oauth2service;
-    }
 
     @Override
     public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(
@@ -190,17 +96,25 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
             CallOptions callOptions,
             Channel channel) {
 
+
         return new ForwardingClientCall.SimpleForwardingClientCall<>(
                 channel.newCall(methodDescriptor, callOptions)) {
 
             @Override
             public void start(ClientCall.Listener<RespT> responseListener, Metadata headers) {
                 try {
-                    var jwtBearerToken = getValidBearerToken();
+
+                    var tenantId = callOptions.getOption(TENANT_KEY);
+                    var clientHandler = clientOauth2HandlerMap.get(tenantId);
+                    if (Objects.isNull(clientHandler)) {
+                        throw new RuntimeException(String.format(" client handler for tenant : %s is missing", tenantId));
+                    }
+
+                    var jwtBearerToken = clientHandler.getValidBearerToken();
                     /* put custom header */
                     headers.put(JWT_BEARER_HEADER_KEY, String.format("%s %s", BEARER_TYPE, jwtBearerToken));
 
-                } catch (IOException | ExecutionException | InterruptedException | URISyntaxException |
+                } catch (IOException | InterruptedException | URISyntaxException |
                          UnRetriableException | RetriableException e) {
                     throw new RuntimeException(e);
                 }
@@ -208,17 +122,5 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor, Consumer<Ht
                 super.start(responseListener, headers);
             }
         };
-    }
-
-    @Override
-    public void accept(HttpRequest.Builder builder) {
-
-        try {
-            var jwtBearerToken = getValidBearerToken();
-            builder.header(JWT_HTTP_AUTH_HEADER_KEY, String.format("%s %s", BEARER_TYPE, jwtBearerToken));
-        } catch (IOException | ExecutionException | InterruptedException | URISyntaxException |
-                 UnRetriableException | RetriableException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

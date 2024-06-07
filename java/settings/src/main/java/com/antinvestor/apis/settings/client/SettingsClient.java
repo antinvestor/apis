@@ -20,7 +20,6 @@ import com.antinvestor.apis.common.database.BaseModel;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.common.utilities.TextUtils;
 import com.antinvestor.apis.settings.v1.*;
-import io.grpc.ClientInterceptors;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -38,7 +37,7 @@ import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
 public class SettingsClient implements AutoCloseable {
-    private ManagedChannel channel;
+    private final ManagedChannel channel;
 
     @Inject
     public SettingsClient(Context context) {
@@ -53,11 +52,9 @@ public class SettingsClient implements AutoCloseable {
                 .forAddress(cfg.settingsHostUrl(), cfg.settingsHostPort())
                 .usePlaintext();
 
-         this.channel = channelBuilder.build();
-    }
-
-    public SettingsClient(ManagedChannel channel) {
-        this.channel = channel;
+        this.channel = channelBuilder.
+                intercept(ClientSideGrpcInterceptor.fromContext(context)).
+                build();
     }
 
     public static Optional<LocalDateTime> asLocalDateTime(String settingValue) {
@@ -93,14 +90,6 @@ public class SettingsClient implements AutoCloseable {
 
     public static boolean asBoolean(String settingValue) {
         return Boolean.parseBoolean(settingValue);
-    }
-
-    public ManagedChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(ManagedChannel channel) {
-        this.channel = channel;
     }
 
     public String getSetting(Context context, String moduleName, String settingName) {
@@ -317,9 +306,9 @@ public class SettingsClient implements AutoCloseable {
 
     private SettingsServiceGrpc.SettingsServiceBlockingStub stub(Context context) {
 
-        return ClientSideGrpcInterceptor.fromContext(context)
-                .map(interceptor -> SettingsServiceGrpc.newBlockingStub(ClientInterceptors.intercept(channel, interceptor)))
-                .orElseGet(() -> SettingsServiceGrpc.newBlockingStub(channel));
+        var stub = SettingsServiceGrpc.newBlockingStub(channel);
+        var tenantId = ClientSideGrpcInterceptor.extractTenantId(context);
+        return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
     }
 
     @Override

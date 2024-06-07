@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
 public class ProfilesClient implements AutoCloseable {
-    private ManagedChannel channel;
+    private final ManagedChannel channel;
 
     public ProfilesClient(ManagedChannel channel) {
         this.channel = channel;
@@ -48,23 +48,16 @@ public class ProfilesClient implements AutoCloseable {
                 .forAddress(cfg.profilesHostUrl(), cfg.profilesHostPort())
                 .usePlaintext();
 
-        this.channel = channelBuilder.build();
-    }
+        this.channel =  channelBuilder.
+                intercept(ClientSideGrpcInterceptor.fromContext(context)).
+                build();
 
-    public ManagedChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(ManagedChannel channel) {
-        this.channel = channel;
     }
 
     private ProfileServiceGrpc.ProfileServiceBlockingStub stub(Context context) {
-
-        return ClientSideGrpcInterceptor.fromContext(context)
-                .map(interceptor -> ProfileServiceGrpc.newBlockingStub(ClientInterceptors.intercept(channel, interceptor)))
-                .orElseGet(() -> ProfileServiceGrpc.newBlockingStub(channel));
-
+        var stub =  ProfileServiceGrpc.newBlockingStub(channel);
+        var tenantId =  ClientSideGrpcInterceptor.extractTenantId(context);
+        return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
     }
 
     @Override

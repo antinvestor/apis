@@ -54,23 +54,18 @@ public class PartitionClient implements AutoCloseable {
         var channelBuilder = ManagedChannelBuilder.forAddress(cfg.partitionsHostUrl(), cfg.partitionsHostPort())
                 .usePlaintext();
 
-        this.channel = channelBuilder.build();
+        this.channel =  channelBuilder.
+                intercept(ClientSideGrpcInterceptor.fromContext(context)).
+                build();
 
-    }
 
-    public ManagedChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(ManagedChannel channel) {
-        this.channel = channel;
     }
 
     private PartitionServiceGrpc.PartitionServiceBlockingStub stub(Context context) {
 
-        return ClientSideGrpcInterceptor.fromContext(context)
-                .map(interceptor -> PartitionServiceGrpc.newBlockingStub(ClientInterceptors.intercept(channel, interceptor)))
-                .orElseGet(() -> PartitionServiceGrpc.newBlockingStub(channel));
+        var stub =  PartitionServiceGrpc.newBlockingStub(channel);
+        var tenantId =  ClientSideGrpcInterceptor.extractTenantId(context);
+        return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
 
     }
 

@@ -19,19 +19,24 @@ import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.exceptions.RetriableException;
 import com.antinvestor.apis.common.exceptions.STATUSCODES;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
-import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
+import com.antinvestor.apis.common.interceptor.ClientSideHttpInterceptorHolder;
 import com.antinvestor.apis.files.api.DefaultApi;
 import com.antinvestor.apis.files.invoker.ApiException;
 import com.antinvestor.apis.files.invoker.Configuration;
 import com.antinvestor.apis.files.model.ModelFile;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.io.File;
 
 @ApplicationScoped
 public class FilesClient implements AutoCloseable {
 
-    public FilesClient() {
+    private final ClientSideHttpInterceptorHolder interceptorHolder;
+
+    @Inject
+    public FilesClient(Context context) {
+        interceptorHolder = ClientSideHttpInterceptorHolder.fromContext(context);
     }
 
 
@@ -47,9 +52,7 @@ public class FilesClient implements AutoCloseable {
         defaultClient.setHost(cfg.filesHostUrl());
         defaultClient.setPort(cfg.filesHostPort());
 
-        var optionalClientSideGrpcInterceptor = ClientSideGrpcInterceptor.fromContext(context);
-        optionalClientSideGrpcInterceptor.ifPresent(defaultClient::setRequestInterceptor);
-
+        defaultClient.setRequestInterceptor(interceptorHolder.getInterceptor(context));
         return new DefaultApi(defaultClient);
     }
 
