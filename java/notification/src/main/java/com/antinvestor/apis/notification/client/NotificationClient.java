@@ -51,7 +51,7 @@ public class NotificationClient implements AutoCloseable {
                 .usePlaintext();
 
         this.channel = channelBuilder.
-                intercept(ClientSideGrpcInterceptor.fromContext(context)).
+                intercept(ClientSideGrpcInterceptor.from(context)).
                 build();
 
     }

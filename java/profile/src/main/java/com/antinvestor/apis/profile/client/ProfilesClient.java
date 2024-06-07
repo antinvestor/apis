@@ -18,7 +18,6 @@ import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.profile.v1.*;
-import io.grpc.ClientInterceptors;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -49,7 +48,7 @@ public class ProfilesClient implements AutoCloseable {
                 .usePlaintext();
 
         this.channel =  channelBuilder.
-                intercept(ClientSideGrpcInterceptor.fromContext(context)).
+                intercept(ClientSideGrpcInterceptor.from(context)).
                 build();
 
     }

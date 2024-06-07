@@ -18,7 +18,7 @@ import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultKeys;
 import com.antinvestor.apis.common.exceptions.RetriableException;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
-import com.antinvestor.apis.common.interceptor.oath2.ClientOath2Handler;
+import com.antinvestor.apis.common.interceptor.oath2.Oauth2ClientHandler;
 import com.antinvestor.apis.common.utilities.AuthenticationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,9 +38,9 @@ public class ClientSideHttpInterceptorHolder {
     private static final Logger log = LoggerFactory.getLogger(ClientSideHttpInterceptorHolder.class);
     private static final String JWT_HTTP_AUTH_HEADER_KEY = "Authorization";
 
-    private final Map<String, ClientOath2Handler> clientOauth2HandlerMap;
+    private final Map<String, Oauth2ClientHandler> clientOauth2HandlerMap;
 
-    private ClientSideHttpInterceptorHolder(Map<String, ClientOath2Handler> clientOauth2HandlerMap) {
+    private ClientSideHttpInterceptorHolder(Map<String, Oauth2ClientHandler> clientOauth2HandlerMap) {
         this.clientOauth2HandlerMap = clientOauth2HandlerMap;
     }
 

@@ -23,7 +23,6 @@ import com.antinvestor.apis.common.v1.SearchRequest;
 import com.antinvestor.apis.common.v1.StatusResponse;
 import com.antinvestor.apis.common.v1.StatusUpdateRequest;
 import com.antinvestor.apis.payment.v1.*;
-import io.grpc.ClientInterceptors;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -56,7 +55,7 @@ public class PaymentClient implements AutoCloseable {
         var channelBuilder = ManagedChannelBuilder.forAddress(cfg.paymentsHostUrl(), cfg.paymentsHostPort())
                 .usePlaintext();
         this.channel =  channelBuilder.
-                intercept(ClientSideGrpcInterceptor.fromContext(context)).
+                intercept(ClientSideGrpcInterceptor.from(context)).
                 build();
 
     }

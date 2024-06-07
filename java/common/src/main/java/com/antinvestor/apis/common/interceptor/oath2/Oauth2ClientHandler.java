@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class ClientOath2Handler {
+public class Oauth2ClientHandler {
 
         private final String oauth2ServerUrl;
         private final String apiKeyValue;
@@ -38,9 +38,9 @@ public class ClientOath2Handler {
         private Configuration optionalConfiguration;
         private LocatorAdapter<Key> keyLocatorAdapter;
         private Oauth2Client oauth2service;
-        private AccessToken optionalAccessToken;
+        private AccessToken accessToken;
 
-        public ClientOath2Handler(String oauth2ServerUrl, String apiKeyValue, String apiSecretValue, List<String> audience) {
+        public Oauth2ClientHandler(String oauth2ServerUrl, String apiKeyValue, String apiSecretValue, List<String> audience) {
             this.oauth2ServerUrl = oauth2ServerUrl;
             this.apiKeyValue = apiKeyValue;
             this.apiSecretValue = apiSecretValue;
@@ -54,17 +54,17 @@ public class ClientOath2Handler {
 
         public String getValidBearerToken() throws IOException, InterruptedException, URISyntaxException, UnRetriableException, RetriableException {
 
-            if (Objects.nonNull(optionalAccessToken)) {
-                var token = this.optionalAccessToken;
+            if (Objects.nonNull(accessToken)) {
+                var token = this.accessToken;
                 if (token.isValid()) {
                     return token.getAccessToken();
                 }
             }
 
-            optionalAccessToken = generateBearerToken();
-            optionalAccessToken.parse(keyLocatorAdapter, optionalConfiguration);
+            accessToken = generateBearerToken();
+            accessToken.parse(keyLocatorAdapter, optionalConfiguration);
 
-            return optionalAccessToken.getAccessToken();
+            return accessToken.getAccessToken();
 
         }
 
@@ -96,7 +96,7 @@ public class ClientOath2Handler {
             return oauth2service;
         }
 
-        public static Optional<ClientOath2Handler> from(
+        public static Optional<Oauth2ClientHandler> from(
                 String oauth2ServerUrl, String apiKeyValue, String apiKeySecret, List<String> audience) {
 
             if (TextUtils.isBlank(oauth2ServerUrl) || TextUtils.isBlank(apiKeyValue)) {
@@ -107,7 +107,7 @@ public class ClientOath2Handler {
                 audience = Collections.emptyList();
             }
 
-            var clientInterceptor = new ClientOath2Handler(
+            var clientInterceptor = new Oauth2ClientHandler(
                     oauth2ServerUrl, apiKeyValue, apiKeySecret, audience
             );
             return Optional.of(clientInterceptor);

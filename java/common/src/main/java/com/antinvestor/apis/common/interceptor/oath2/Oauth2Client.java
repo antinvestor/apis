@@ -36,7 +36,7 @@ import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
 
 public class Oauth2Client {
 
-    private Logger log = LoggerFactory.getLogger(Oauth2Client.class);
+    private static final Logger log = LoggerFactory.getLogger(Oauth2Client.class);
     private String callback;
     private String apiKey;
     private String apiSecret;
@@ -123,7 +123,7 @@ public class Oauth2Client {
         parameters.put(OAuthConstants.CLIENT_ID, apiKey);
         parameters.put(OAuthConstants.CLIENT_SECRET, apiSecret);
         parameters.put(OAuthConstants.SCOPE, scope);
-        if ( Objects.nonNull(audience) && !audience.isEmpty()) {
+        if (Objects.nonNull(audience) && !audience.isEmpty()) {
             parameters.put(OAuthConstants.AUDIENCE, String.join(" ", audience));
         }
         parameters.put(OAuthConstants.GRANT_TYPE, OAuthConstants.CLIENT_CREDENTIALS);
@@ -138,6 +138,11 @@ public class Oauth2Client {
                 .headers("Content-Type", "application/x-www-form-urlencoded")
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if (response.statusCode() < 200 || response.statusCode() >= 300) {
+            log.atWarn().addKeyValue("status code", response.statusCode()).addKeyValue("body", response.body()).log("failed to get credentials");
+            throw new RuntimeException(String.format("Could not get access token : [%d]  %s ", response.statusCode(), response.body()));
+        }
 
         return gson.fromJson(response.body(), AccessToken.class);
     }

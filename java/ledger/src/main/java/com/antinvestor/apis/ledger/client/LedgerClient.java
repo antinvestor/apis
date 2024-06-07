@@ -21,7 +21,6 @@ import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.google.type.Money;
 import com.antinvestor.apis.ledger.v1.*;
-import io.grpc.ClientInterceptors;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -54,7 +53,7 @@ public class LedgerClient implements AutoCloseable {
                 .usePlaintext();
 
         this.channel =  channelBuilder.
-                intercept(ClientSideGrpcInterceptor.fromContext(context)).
+                intercept(ClientSideGrpcInterceptor.from(context)).
                 build();
 
     }

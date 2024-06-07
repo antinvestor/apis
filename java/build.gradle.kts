@@ -8,7 +8,6 @@ repositories {
     mavenCentral()
 }
 
-
 subprojects {
 
     apply(plugin = "java-library")

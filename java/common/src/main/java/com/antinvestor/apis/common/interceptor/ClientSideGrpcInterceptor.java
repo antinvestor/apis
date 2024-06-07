@@ -18,7 +18,7 @@ import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultKeys;
 import com.antinvestor.apis.common.exceptions.RetriableException;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
-import com.antinvestor.apis.common.interceptor.oath2.ClientOath2Handler;
+import com.antinvestor.apis.common.interceptor.oath2.Oauth2ClientHandler;
 import com.antinvestor.apis.common.utilities.AuthenticationUtil;
 import io.grpc.*;
 import org.slf4j.Logger;
@@ -26,10 +26,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class ClientSideGrpcInterceptor implements ClientInterceptor {
 
@@ -42,13 +40,13 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor {
     private static final Metadata.Key<String> JWT_BEARER_HEADER_KEY =
             Metadata.Key.of(JWT_HTTP_AUTH_HEADER_KEY, Metadata.ASCII_STRING_MARSHALLER);
 
-    private final Map<String, ClientOath2Handler> clientOauth2HandlerMap;
+    private final Map<String, Oauth2ClientHandler> clientOauth2HandlerMap;
 
-    private ClientSideGrpcInterceptor(Map<String, ClientOath2Handler> clientOauth2HandlerMap) {
+    private ClientSideGrpcInterceptor(Map<String, Oauth2ClientHandler> clientOauth2HandlerMap) {
         this.clientOauth2HandlerMap = clientOauth2HandlerMap;
     }
 
-    public static ClientSideGrpcInterceptor fromContext(Context context) {
+    public static ClientSideGrpcInterceptor from(Context context) {
 
         var authConfigOptional = AuthenticationUtil.from(context);
         if (authConfigOptional.isEmpty()) {
@@ -56,25 +54,7 @@ public class ClientSideGrpcInterceptor implements ClientInterceptor {
         }
 
         var authConfig = authConfigOptional.get();
-        var handlersMap = new ConcurrentHashMap<String, ClientOath2Handler>();
-
-        for (var tenantConfig : authConfig.getTenantTables()) {
-
-            String oauth2ServerUri = tenantConfig.getString(AuthenticationUtil.TENANT_OAUTH2_SERVER);
-            String authApiKey = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_API_KEY);
-            String authSecret = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_API_SECRET);
-            List<String> authAudience = tenantConfig.getList(AuthenticationUtil.TENANT_AUTH_AUDIENCE, List.of());
-
-            var tenantId = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_ID);
-            var handler = ClientOath2Handler.from(oauth2ServerUri, authApiKey, authSecret, authAudience);
-            if (handler.isEmpty()) {
-                log.atWarn().addKeyValue("tenantId", tenantId).addKeyValue("configuration", tenantConfig.toMap()).log("could not create handler from tenant config");
-                throw new RuntimeException("could not instantiate handler from configuration provided ");
-            }
-
-            handlersMap.put(tenantId, handler.get());
-        }
-
+        var handlersMap = authConfig.getTenantHandlers();
         return new ClientSideGrpcInterceptor(handlersMap);
 
     }

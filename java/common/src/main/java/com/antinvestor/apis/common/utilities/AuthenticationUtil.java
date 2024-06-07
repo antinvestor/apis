@@ -16,7 +16,7 @@ package com.antinvestor.apis.common.utilities;
 
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
-import com.antinvestor.apis.common.interceptor.oath2.ClientOath2Handler;
+import com.antinvestor.apis.common.interceptor.oath2.Oauth2ClientHandler;
 import com.moandjiezana.toml.Toml;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,8 +62,8 @@ public class AuthenticationUtil {
         return getTenantTables().stream().filter(table -> table.getString(TENANT_AUTH_ID).equals(tenantId)).findFirst();
     }
 
-    public Map<String, ClientOath2Handler> getTenantHandlers(){
-        var handlersMap = new ConcurrentHashMap<String, ClientOath2Handler>();
+    public Map<String, Oauth2ClientHandler> getTenantHandlers(){
+        var handlersMap = new ConcurrentHashMap<String, Oauth2ClientHandler>();
 
         for (var tenantConfig : getTenantTables()) {
 
@@ -73,7 +73,7 @@ public class AuthenticationUtil {
             List<String> authAudience = tenantConfig.getList(AuthenticationUtil.TENANT_AUTH_AUDIENCE, List.of());
 
             var tenantId = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_ID);
-            var handler = ClientOath2Handler.from(oauth2ServerUri, authApiKey, authSecret, authAudience);
+            var handler = Oauth2ClientHandler.from(oauth2ServerUri, authApiKey, authSecret, authAudience);
             if (handler.isEmpty()) {
                 log.atWarn().addKeyValue("tenantId", tenantId).addKeyValue("configuration", tenantConfig.toMap()).log("could not create handler from tenant config");
                 throw new RuntimeException("could not instantiate handler from configuration provided ");
