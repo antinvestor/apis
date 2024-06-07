@@ -20,7 +20,6 @@ import com.antinvestor.apis.common.exceptions.RetriableException;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.interceptor.oath2.ClientOath2Handler;
 import com.antinvestor.apis.common.utilities.AuthenticationUtil;
-import io.grpc.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,8 +37,6 @@ public class ClientSideHttpInterceptorHolder {
 
     private static final Logger log = LoggerFactory.getLogger(ClientSideHttpInterceptorHolder.class);
     private static final String JWT_HTTP_AUTH_HEADER_KEY = "Authorization";
-    private static final Metadata.Key<String> JWT_BEARER_HEADER_KEY =
-            Metadata.Key.of(JWT_HTTP_AUTH_HEADER_KEY, Metadata.ASCII_STRING_MARSHALLER);
 
     private final Map<String, ClientOath2Handler> clientOauth2HandlerMap;
 
@@ -74,7 +71,7 @@ public class ClientSideHttpInterceptorHolder {
             try {
 
                 var clientHandler = clientOauth2HandlerMap.get(tenantId);
-                if(Objects.isNull(clientHandler)){
+                if (Objects.isNull(clientHandler)) {
                     throw new RuntimeException(String.format(" client handler for tenant : %s is missing", tenantId));
                 }
 
@@ -86,7 +83,6 @@ public class ClientSideHttpInterceptorHolder {
             }
         };
     }
-
 
 
 }
