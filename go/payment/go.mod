@@ -5,7 +5,7 @@ go 1.21
 //replace github.com/antinvestor/apis/go/common => ../common
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.1-20240508200655-46a4cf4ba109.1
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.2-20240508200655-46a4cf4ba109.2
 	github.com/antinvestor/apis/go/common v1.17.6
 	google.golang.org/genproto v0.0.0-20240610135401-a8a62080eff3
 	google.golang.org/grpc v1.64.0
