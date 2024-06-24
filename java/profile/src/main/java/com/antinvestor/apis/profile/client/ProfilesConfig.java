@@ -12,17 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.antinvestor.apis.settings.client;
+package com.antinvestor.apis.profile.client;
 
 import com.antinvestor.apis.common.config.DefaultConfig;
 import org.aeonbits.owner.Config;
 
-public interface SettingsDefaultConfig extends DefaultConfig {
-    @Config.DefaultValue("settings.api.antinvestor.com")
-    @Config.Key("${product}.${env}.settings.host.url")
-    String settingsHostUrl();
+public interface ProfilesConfig extends DefaultConfig {
+    @Config.DefaultValue("profiles.api.antinvestor.com")
+    @Config.Key("${product}.${env}.profiles.host.url")
+    String profilesHostUrl();
 
     @Config.DefaultValue("443")
-    @Config.Key("${product}.${env}.settings.host.port")
-    Integer settingsHostPort();
+    @Config.Key("${product}.${env}.profiles.host.port")
+    Integer profilesHostPort();
+
+    @Config.DefaultValue("true")
+    @Config.Key("${product}.${env}.profiles.auth.interceptor.enabled")
+    Boolean authInterceptorEnabled();
 }

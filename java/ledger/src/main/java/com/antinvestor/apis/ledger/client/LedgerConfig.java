@@ -24,4 +24,10 @@ public interface LedgerConfig {
     @Config.DefaultValue("443")
     @Config.Key("${product}.${env}.ledger.host.port")
     Integer ledgerHostPort();
+
+    @Config.DefaultValue("true")
+    @Config.Key("${product}.${env}.ledger.auth.interceptor.enabled")
+    Boolean authInterceptorEnabled();
+
+
 }

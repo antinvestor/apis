@@ -46,15 +46,17 @@ public class SettingsClient implements AutoCloseable {
         if (optionalConfig.isEmpty())
             throw new RuntimeException("Settings configuration is required");
 
-        var cfg = (SettingsDefaultConfig) optionalConfig.get();
+        var cfg = (SettingsConfig) optionalConfig.get();
 
         ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder
                 .forAddress(cfg.settingsHostUrl(), cfg.settingsHostPort())
                 .usePlaintext();
 
-        this.channel = channelBuilder.
-                intercept(ClientSideGrpcInterceptor.from(context)).
-                build();
+        if ( cfg.authInterceptorEnabled()){
+            channelBuilder = channelBuilder.intercept(ClientSideGrpcInterceptor.from(context));
+        }
+
+        this.channel =  channelBuilder.build();
     }
 
     public static Optional<LocalDateTime> asLocalDateTime(String settingValue) {

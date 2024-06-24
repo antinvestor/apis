@@ -41,16 +41,17 @@ public class ProfilesClient implements AutoCloseable {
         if (optionalConfig.isEmpty())
             throw new RuntimeException("Profiles configuration is required");
 
-        var cfg = (ProfilesDefaultConfig) optionalConfig.get();
+        var cfg = (ProfilesConfig) optionalConfig.get();
 
         var channelBuilder = ManagedChannelBuilder
                 .forAddress(cfg.profilesHostUrl(), cfg.profilesHostPort())
                 .usePlaintext();
 
-        this.channel =  channelBuilder.
-                intercept(ClientSideGrpcInterceptor.from(context)).
-                build();
+        if ( cfg.authInterceptorEnabled()){
+            channelBuilder = channelBuilder.intercept(ClientSideGrpcInterceptor.from(context));
+        }
 
+        this.channel =  channelBuilder.build();
     }
 
     private ProfileServiceGrpc.ProfileServiceBlockingStub stub(Context context) {
