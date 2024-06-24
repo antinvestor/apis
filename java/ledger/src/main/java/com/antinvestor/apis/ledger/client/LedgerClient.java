@@ -84,7 +84,7 @@ public class LedgerClient implements AutoCloseable {
 
     public Optional<Ledger> getLedger(Context context, String reference) {
 
-        String jsonQuery = String.format("{ \"query\": { \"should\": { \"fields\": [{\"reference\": {\"eq\": \"%s\"}}]}}}", reference);
+        String jsonQuery = String.format("{ \"query\": { \"should\": { \"fields\": [{\"id\": {\"eq\": \"%s\"}}]}}}", reference);
 
         Iterator<Ledger> ledgerIterator = listLedgers(context, jsonQuery);
         if (ledgerIterator.hasNext()) {
@@ -131,7 +131,7 @@ public class LedgerClient implements AutoCloseable {
 
     public Optional<Account> getAccount(Context context, String reference) {
 
-        String jsonQuery = String.format("{ \"query\": { \"should\": { \"fields\": [{\"reference\": {\"eq\": \"%s\"}}]}}}", reference);
+        String jsonQuery = String.format("{ \"query\": { \"should\": { \"fields\": [{\"id\": {\"eq\": \"%s\"}}]}}}", reference);
         Iterator<Account> accountIterator = listAccounts(context, jsonQuery);
         if (accountIterator.hasNext()) {
             return Optional.of(accountIterator.next());
@@ -174,7 +174,7 @@ public class LedgerClient implements AutoCloseable {
 
     public Optional<Transaction> getTransaction(Context context, String reference) {
 
-        String jsonQuery = String.format("{ \"query\": { \"should\": { \"fields\": [{\"reference\": {\"eq\": \"%s\"}}]}}}", reference);
+        String jsonQuery = String.format("{ \"query\": { \"should\": { \"fields\": [{\"id\": {\"eq\": \"%s\"}}]}}}", reference);
         Iterable<Transaction> transactionIterator = listTransactions(context, jsonQuery);
         if (transactionIterator.iterator().hasNext()) {
             return Optional.of(transactionIterator.iterator().next());
