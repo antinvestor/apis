@@ -15,12 +15,13 @@
 package com.antinvestor.apis.ledger.client;
 
 
+import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
-import com.google.type.Money;
 import com.antinvestor.apis.ledger.v1.*;
+import com.google.type.Money;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -32,12 +33,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 @ApplicationScoped
-public class LedgerClient implements AutoCloseable {
+public class LedgerClient extends GrpcClientBase {
 
-    private ManagedChannel channel;
 
     public LedgerClient(ManagedChannel channel) {
-        this.channel = channel;
+        setChannel(channel);
     }
 
     @Inject
@@ -52,34 +52,21 @@ public class LedgerClient implements AutoCloseable {
                 .forAddress(cfg.ledgerHostUrl(), cfg.ledgerHostPort())
                 .usePlaintext();
 
-        if ( cfg.authInterceptorEnabled()){
+        if (cfg.authInterceptorEnabled()) {
             channelBuilder = channelBuilder.intercept(ClientSideGrpcInterceptor.from(context));
         }
 
-        this.channel =  channelBuilder.build();
+        setChannel(channelBuilder.build());
+        ;
 
     }
 
-    public ManagedChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(ManagedChannel channel) {
-        this.channel = channel;
-    }
 
     private LedgerServiceGrpc.LedgerServiceBlockingStub stub(Context context) {
 
-        var stub =  LedgerServiceGrpc.newBlockingStub(channel);
-        var tenantId =  ClientSideGrpcInterceptor.extractTenantId(context);
+        var stub = LedgerServiceGrpc.newBlockingStub(getChannel());
+        var tenantId = ClientSideGrpcInterceptor.extractTenantId(context);
         return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
-    }
-
-    @Override
-    public void close() throws Exception {
-        if (Objects.nonNull(channel)) {
-            channel.shutdown();
-        }
     }
 
     public Optional<Ledger> getLedger(Context context, String reference) {

@@ -14,13 +14,13 @@
 
 package com.antinvestor.apis.notification.client;
 
+import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.common.utilities.TextUtils;
 import com.antinvestor.apis.common.v1.*;
 import com.antinvestor.apis.notification.v1.*;
-import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -28,14 +28,12 @@ import jakarta.inject.Inject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The NotificationClient class represents a client for accessing notification services.
  */
 @ApplicationScoped
-public class NotificationClient implements AutoCloseable {
-    private final ManagedChannel channel;
+public class NotificationClient extends GrpcClientBase {
 
     @Inject
     public NotificationClient(Context context) {
@@ -50,26 +48,20 @@ public class NotificationClient implements AutoCloseable {
                 .forAddress(cfg.notificationsHostUrl(), cfg.notificationsHostPort())
                 .usePlaintext();
 
-        this.channel = channelBuilder.
+        var channel = channelBuilder.
                 intercept(ClientSideGrpcInterceptor.from(context)).
                 build();
+
+        setChannel(channel);
 
     }
 
     private NotificationServiceGrpc.NotificationServiceBlockingStub stub(Context context) {
 
-        var stub = NotificationServiceGrpc.newBlockingStub(channel);
+        var stub = NotificationServiceGrpc.newBlockingStub(getChannel());
         var tenantId = ClientSideGrpcInterceptor.extractTenantId(context);
         return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
     }
-
-    @Override
-    public void close() throws Exception {
-        if (Objects.nonNull(channel)) {
-            channel.shutdown().awaitTermination(1, TimeUnit.MINUTES);
-        }
-    }
-
 
     /**
      * Retrieves a notification by its ID.

@@ -22,6 +22,7 @@
 
 package com.antinvestor.apis.partition.client;
 
+import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
@@ -35,11 +36,10 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
-public class PartitionClient implements AutoCloseable {
-    private ManagedChannel channel;
+public class PartitionClient extends GrpcClientBase {
 
     public PartitionClient(ManagedChannel channel) {
-        this.channel = channel;
+        setChannel(channel);
     }
 
     @Inject
@@ -53,26 +53,19 @@ public class PartitionClient implements AutoCloseable {
         var channelBuilder = ManagedChannelBuilder.forAddress(cfg.partitionsHostUrl(), cfg.partitionsHostPort())
                 .usePlaintext();
 
-        this.channel =  channelBuilder.
+        var channel =  channelBuilder.
                 intercept(ClientSideGrpcInterceptor.from(context)).
                 build();
-
+setChannel(channel);
 
     }
 
     private PartitionServiceGrpc.PartitionServiceBlockingStub stub(Context context) {
 
-        var stub =  PartitionServiceGrpc.newBlockingStub(channel);
+        var stub =  PartitionServiceGrpc.newBlockingStub(getChannel());
         var tenantId =  ClientSideGrpcInterceptor.extractTenantId(context);
         return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
 
-    }
-
-    @Override
-    public void close() throws Exception {
-        if (Objects.nonNull(channel)) {
-            channel.shutdown().awaitTermination(1, TimeUnit.MINUTES);
-        }
     }
 
     public TenantObject getTenant(Context context, String id) {

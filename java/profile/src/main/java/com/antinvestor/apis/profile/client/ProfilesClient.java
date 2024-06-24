@@ -14,6 +14,7 @@
 
 package com.antinvestor.apis.profile.client;
 
+import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
@@ -27,11 +28,10 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
-public class ProfilesClient implements AutoCloseable {
-    private final ManagedChannel channel;
+public class ProfilesClient extends GrpcClientBase {
 
     public ProfilesClient(ManagedChannel channel) {
-        this.channel = channel;
+        setChannel( channel);
     }
 
     @Inject
@@ -51,20 +51,14 @@ public class ProfilesClient implements AutoCloseable {
             channelBuilder = channelBuilder.intercept(ClientSideGrpcInterceptor.from(context));
         }
 
-        this.channel =  channelBuilder.build();
+        var channel =  channelBuilder.build();
+        setChannel(channel);
     }
 
     private ProfileServiceGrpc.ProfileServiceBlockingStub stub(Context context) {
-        var stub =  ProfileServiceGrpc.newBlockingStub(channel);
+        var stub =  ProfileServiceGrpc.newBlockingStub(getChannel());
         var tenantId =  ClientSideGrpcInterceptor.extractTenantId(context);
         return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
-    }
-
-    @Override
-    public void close() throws Exception {
-        if (Objects.nonNull(channel)) {
-            channel.shutdown().awaitTermination(1, TimeUnit.MINUTES);
-        }
     }
 
     public Iterator<List<ProfileObject>> search(Context context, String query) {

@@ -15,6 +15,7 @@
 package com.antinvestor.apis.payment.client;
 
 
+import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
@@ -37,11 +38,10 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
-public class PaymentClient implements AutoCloseable {
-    private ManagedChannel channel;
+public class PaymentClient extends GrpcClientBase {
 
     public PaymentClient(ManagedChannel channel) {
-        this.channel = channel;
+        setChannel( channel);
     }
 
     @Inject
@@ -54,23 +54,17 @@ public class PaymentClient implements AutoCloseable {
         var cfg = (PaymentDefaultConfig) optionalConfig.get();
         var channelBuilder = ManagedChannelBuilder.forAddress(cfg.paymentsHostUrl(), cfg.paymentsHostPort())
                 .usePlaintext();
-        this.channel =  channelBuilder.
+        var channel =  channelBuilder.
                 intercept(ClientSideGrpcInterceptor.from(context)).
                 build();
 
+        setChannel(channel);
     }
 
     private PaymentServiceGrpc.PaymentServiceBlockingStub stub(Context context) {
-        var stub =  PaymentServiceGrpc.newBlockingStub(channel);
+        var stub =  PaymentServiceGrpc.newBlockingStub(getChannel());
         var tenantId =  ClientSideGrpcInterceptor.extractTenantId(context);
         return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
-    }
-
-    @Override
-    public void close() throws Exception {
-        if (Objects.nonNull(channel)) {
-            channel.shutdown().awaitTermination(1, TimeUnit.MINUTES);
-        }
     }
 
     public Optional<Payment> getByID(Context context, String paymentID) {

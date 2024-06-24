@@ -14,6 +14,7 @@
 
 package com.antinvestor.apis.settings.client;
 
+import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.database.BaseModel;
@@ -36,8 +37,7 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
-public class SettingsClient implements AutoCloseable {
-    private final ManagedChannel channel;
+public class SettingsClient extends GrpcClientBase {
 
     @Inject
     public SettingsClient(Context context) {
@@ -56,7 +56,8 @@ public class SettingsClient implements AutoCloseable {
             channelBuilder = channelBuilder.intercept(ClientSideGrpcInterceptor.from(context));
         }
 
-        this.channel =  channelBuilder.build();
+        var channel =  channelBuilder.build();
+        setChannel(channel);
     }
 
     public static Optional<LocalDateTime> asLocalDateTime(String settingValue) {
@@ -308,15 +309,9 @@ public class SettingsClient implements AutoCloseable {
 
     private SettingsServiceGrpc.SettingsServiceBlockingStub stub(Context context) {
 
-        var stub = SettingsServiceGrpc.newBlockingStub(channel);
+        var stub = SettingsServiceGrpc.newBlockingStub(getChannel());
         var tenantId = ClientSideGrpcInterceptor.extractTenantId(context);
         return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
     }
 
-    @Override
-    public void close() throws Exception {
-        if (Objects.nonNull(channel)) {
-            channel.shutdown().awaitTermination(1, TimeUnit.MINUTES);
-        }
-    }
 }

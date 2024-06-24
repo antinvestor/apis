@@ -24,8 +24,10 @@ import com.antinvestor.apis.files.api.DefaultApi;
 import com.antinvestor.apis.files.invoker.ApiException;
 import com.antinvestor.apis.files.invoker.Configuration;
 import com.antinvestor.apis.files.model.ModelFile;
+import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+
 
 import java.io.File;
 
@@ -57,6 +59,7 @@ public class FilesClient implements AutoCloseable {
     }
 
 
+    @PreDestroy
     @Override
     public void close() throws Exception {
 
