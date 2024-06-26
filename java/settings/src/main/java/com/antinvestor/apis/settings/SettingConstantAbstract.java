@@ -66,43 +66,44 @@
  */
 package com.antinvestor.apis.settings;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Peter J. Bwire <bwire517@gmail.com>
  */
 public abstract class SettingConstantAbstract {
 
+    @SettingDescriptor("en")
     public static final String GLOBAL_DEFAULT_LANGUAGE_CODE = "settings.default.language.code";
-    private final Map<String, String> defaultSettingValues = new HashMap<>(Map.of(GLOBAL_DEFAULT_LANGUAGE_CODE, "en"));
-    private final Map<String, String> defaultSettingDescriptions = new HashMap<>(Map.of());
 
-    protected void setDefaultValue(String name, String value) {
-        this.defaultSettingValues.put(name, value);
+    public Map<String, DescriptorHolder> getDescriptors() {
+        return Stream.of(this.getClass().getDeclaredFields())
+                .filter(field -> field.isAnnotationPresent(SettingDescriptor.class))
+                .filter(field -> Modifier.isStatic(field.getModifiers()))
+                .filter(field -> field.getType() == String.class)
+                .collect(Collectors.toMap(
+                        Field::getName,
+                        field -> {
+                            try {
+                                return new DescriptorHolder(
+                                        (String) field.get(null),
+                                        List.of(field.getAnnotationsByType(SettingDescriptor.class))
+                                );
+                            } catch (IllegalAccessException e) {
+                                throw new RuntimeException(e);
+                            }
+                        },
+                        (existing, replacement) -> existing, // If there are duplicate keys, keep the existing one
+                        HashMap::new // Use HashMap as the target map
+                ));
     }
 
-    public abstract void setDefaults();
-
-    public Map<String, String> getDefaultValues() {
-        return defaultSettingValues;
-    }
-
-    public Map<String, String> getDefaultSettingDescriptions() {
-        return defaultSettingDescriptions;
-    }
-
-    public void setDefaultSettingDescription(String name, String value) {
-        this.defaultSettingDescriptions.put(name, value);
-    }
-
-    public String getDefaultValue(String setting) {
-
-        String settingValue = defaultSettingValues.get(setting);
-        if (settingValue == null) {
-            settingValue = "";
-        }
-        return settingValue;
-    }
+    public record DescriptorHolder(String settingKey, List<SettingDescriptor> descriptors) {}
 
 }
