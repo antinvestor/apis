@@ -72,27 +72,28 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author Peter J. Bwire <bwire517@gmail.com>
  */
 public interface Repository<T extends BaseModel> extends Serializable {
 
-    public  Class<T> entityClass();
-    public Optional<T> find(Context context, String id);
+    Class<T> entityClass();
+    Optional<T> find(Context context, String id);
 
-    public StreamConsumer<T> stream(Context context, String squery, Map<String, Object> parameters);
+    Stream<T> stream(Context context, String squery, Map<String, Object> parameters);
 
     /**
      */
-    public  T save(Context context, T obj);
+    T save(Context context, T obj);
 
-    public List<T> saveBatch(Context context, List<T> entities);
+    List<T> saveBatch(Context context, List<T> entities);
 
-    public int updateBatch(Context context, String squery, Map<String, Object> parameters);
+    int updateBatch(Context context, String squery, Map<String, Object> parameters);
 
     /**
      * @param id
      */
-    public void destroy(Context context, String id);
+    void destroy(Context context, String id);
 }
