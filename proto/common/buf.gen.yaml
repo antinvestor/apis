@@ -25,3 +25,5 @@ plugins:
     out: ../../java/common/src/main/java/
   - plugin: buf.build/protocolbuffers/java:v25.3
     out: ../../java/common/src/main/java/
+  - plugin: buf.build/protocolbuffers/js:v3.21.2
+    out: ../../js/common/v1/

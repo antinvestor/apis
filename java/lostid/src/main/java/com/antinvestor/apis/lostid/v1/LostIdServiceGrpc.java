@@ -19,7 +19,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.64.0)",
+    value = "by gRPC proto compiler (version 1.65.0)",
     comments = "Source: lostid/v1/lostid.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class LostIdServiceGrpc {
