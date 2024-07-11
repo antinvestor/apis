@@ -80,28 +80,24 @@ public class MoneyUtil {
         return String.format("%s %s", weeklysaving.getCurrencyCode(), toBigDecimal(weeklysaving).setScale(2, RoundingMode.DOWN).toPlainString());
     }
 
-    public static Money min(Money a, Money b) {
-        if (a == null || b == null) {
-            throw new IllegalArgumentException("Both amounts must be provided");
-        }
-
-        int comparisonResult = compareMoney(a, b);
+    public static Money min(Money a, Money b) throws UnRetriableException {
+        int comparisonResult = compare(a, b);
         return comparisonResult <= 0 ? a : b;
     }
 
 
-    public static Money max(Money a, Money b) {
-        if (a == null || b == null) {
-            throw new IllegalArgumentException("Both amounts must be provided");
-        }
-
-        int comparisonResult = compareMoney(a, b);
+    public static Money max(Money a, Money b) throws UnRetriableException {
+        int comparisonResult = compare(a, b);
         return comparisonResult >= 0 ? a : b;
     }
 
-    private static int compareMoney(Money a, Money b) {
+    public static int compare(Money a, Money b) throws UnRetriableException {
+        if (Objects.isNull(a) || Objects.isNull(b)) {
+            throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, "Both currency amounts must be provided");
+        }
+
         if (!a.getCurrencyCode().equals(b.getCurrencyCode())) {
-            throw new IllegalArgumentException("Amounts must have the same currency");
+            throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, "Both amounts must be provided in the same currency");
         }
 
         int amountComparison = Long.compare(a.getUnits(), b.getUnits());
