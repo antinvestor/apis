@@ -79,4 +79,38 @@ public class MoneyUtil {
     public static String format(Money weeklysaving) {
         return String.format("%s %s", weeklysaving.getCurrencyCode(), toBigDecimal(weeklysaving).setScale(2, RoundingMode.DOWN).toPlainString());
     }
+
+    public static Money min(Money a, Money b) {
+        if (a == null || b == null) {
+            throw new IllegalArgumentException("Both amounts must be provided");
+        }
+
+        int comparisonResult = compareMoney(a, b);
+        return comparisonResult <= 0 ? a : b;
+    }
+
+
+    public static Money max(Money a, Money b) {
+        if (a == null || b == null) {
+            throw new IllegalArgumentException("Both amounts must be provided");
+        }
+
+        int comparisonResult = compareMoney(a, b);
+        return comparisonResult >= 0 ? a : b;
+    }
+
+    private static int compareMoney(Money a, Money b) {
+        if (!a.getCurrencyCode().equals(b.getCurrencyCode())) {
+            throw new IllegalArgumentException("Amounts must have the same currency");
+        }
+
+        int amountComparison = Long.compare(a.getUnits(), b.getUnits());
+        if (amountComparison != 0) {
+            return amountComparison;
+        }
+
+        return Integer.compare(a.getNanos(), b.getNanos());
+    }
+
+
 }
