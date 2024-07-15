@@ -43,14 +43,29 @@ public class MoneyUtil {
         return new BigDecimal(money.getUnits()).add(new BigDecimal(money.getNanos()).multiply(BigDecimal.valueOf(Math.pow(10, -9))));
     }
 
-    public static boolean isZero(Money money) {
-        return money.getUnits() <= 0 && money.getNanos() <= 0;
+    public static boolean isEqual(Money a, Money b) throws UnRetriableException {
+        return compare(a, b) == 0;
     }
 
-    public static boolean isGreaterThanZero(Money money) {
-        return money.getUnits() > 0 || money.getNanos() > 0;
+    public static boolean isZero(Money money) throws UnRetriableException {
+        return isEqual(money, zeroMoney(money.getCurrencyCode()));
     }
 
+    public static boolean isGreaterThan(Money a, Money b) throws UnRetriableException {
+        return compare(a, b) > 0;
+    }
+
+    public static boolean isGreaterThanZero(Money money) throws UnRetriableException {
+        return isGreaterThan(money, zeroMoney( money.getCurrencyCode()));
+    }
+
+    public static boolean isLessThan(Money a, Money b) throws UnRetriableException {
+        return compare(a, b) < 0;
+    }
+
+    public static boolean isLessThanZero(Money money) throws UnRetriableException {
+        return isLessThan(money, zeroMoney(money.getCurrencyCode()));
+    }
 
     public static String toString(Money money) {
 
@@ -64,7 +79,7 @@ public class MoneyUtil {
         return from(BigDecimal.ZERO, currency);
     }
 
-    public static Money sum(Money a, Money b) throws UnRetriableException {
+    public static Money add(Money a, Money b) throws UnRetriableException {
         if (Objects.isNull(a) || Objects.isNull(b)) {
             throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to add null money");
         }
@@ -74,6 +89,18 @@ public class MoneyUtil {
         }
 
         return from(toBigDecimal(a).add(toBigDecimal(b)), a.getCurrencyCode());
+    }
+
+    public static Money subtract(Money a, Money b) throws UnRetriableException {
+        if (Objects.isNull(a) || Objects.isNull(b)) {
+            throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to subtract null money");
+        }
+
+        if (!a.getCurrencyCode().equalsIgnoreCase(b.getCurrencyCode())) {
+            throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, STATUSCODES.getLabel(STATUSCODES.BAD_CURRENCY_ERROR));
+        }
+
+        return from(toBigDecimal(a).subtract(toBigDecimal(b)), a.getCurrencyCode());
     }
 
     public static String format(Money weeklysaving) {
