@@ -103,8 +103,25 @@ public class MoneyUtil {
         return from(toBigDecimal(a).subtract(toBigDecimal(b)), a.getCurrencyCode());
     }
 
-    public static String format(Money weeklysaving) {
-        return String.format("%s %s", weeklysaving.getCurrencyCode(), toBigDecimal(weeklysaving).setScale(2, RoundingMode.DOWN).toPlainString());
+    public static Money multiply(Money a, BigDecimal b) throws UnRetriableException {
+        if (Objects.isNull(a) || Objects.isNull(b)) {
+            throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to multiply with nulls ");
+        }
+
+
+        return from(toBigDecimal(a).multiply(b), a.getCurrencyCode());
+    }
+
+    public static Money divide(Money a, BigDecimal b) throws UnRetriableException {
+        if (Objects.isNull(a) || Objects.isNull(b)) {
+            throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to divide with nulls ");
+        }
+
+        return from(toBigDecimal(a).divide(b,  RoundingMode.DOWN), a.getCurrencyCode());
+    }
+
+    public static String format(Money money) {
+        return String.format("%s %s", money.getCurrencyCode(), toBigDecimal(money).setScale(2, RoundingMode.DOWN).toPlainString());
     }
 
     public static Money min(Money a, Money b) throws UnRetriableException {
