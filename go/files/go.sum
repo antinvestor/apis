@@ -1,6 +1,8 @@
 cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/antinvestor/apis/go/common v1.18.5 h1:IGg9DD8pIlioVLxFIhE+vsHy7l/kJ0sg+oPv6/Sse1g=
 github.com/antinvestor/apis/go/common v1.18.5/go.mod h1:92APw131ecNJBMN/9MQiKjXqyXL6bR4gARYoHjHlZ2E=
+github.com/antinvestor/apis/go/common v1.19.0 h1:PwrSz7a8Ec2oypq7sPkoc5wjBvC6uSH6ZlM6tagpNcI=
+github.com/antinvestor/apis/go/common v1.19.0/go.mod h1:Y63AZ5dwudhZBLQJzFYJjDP3oGy216Tqk6XlENczpp0=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/golang/protobuf v1.2.0 h1:P3YflyNX/ehuJFLhxviNdFxQPkGK5cDcApsge1SqnvM=
