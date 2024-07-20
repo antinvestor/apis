@@ -80,7 +80,7 @@ import java.util.stream.Stream;
 public interface Repository<T extends BaseModel> extends Serializable {
 
     Class<T> entityClass();
-    Optional<T> find(Context context, String id);
+    Optional<T> findById(Context context, String id);
 
     Stream<T> stream(Context context, String squery, Map<String, Object> parameters);
 
