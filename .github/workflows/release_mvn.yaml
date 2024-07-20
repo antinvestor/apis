@@ -30,11 +30,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@f9c9c575b8b21b6485636a91ffecd10e558c62f6
+        uses: gradle/actions/wrapper-validation@v3
       - name: Publish package
-        uses: gradle/gradle-build-action@ac2d340dc04d9e1113182899e983b5400c17cda1
-        with:
-          arguments: ${{ matrix.api_module }}:publish
-          build-root-directory: java
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: gradle/actions/setup-gradle@v3
+      - name: Run publish action
+        working-directory: java
+        run: ./gradlew ${{ matrix.api_module }}:publish
