@@ -33,6 +33,15 @@ jobs:
         uses: gradle/actions/wrapper-validation@v3
       - name: Publish package
         uses: gradle/actions/setup-gradle@v3
+        with:
+          dependency-graph: generate-and-submit
+      - name: Run a Gradle build - a build scan will be published automatically
+        working-directory: java
+        run: ./gradlew build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Run publish action
         working-directory: java
         run: ./gradlew ${{ matrix.api_module }}:publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
