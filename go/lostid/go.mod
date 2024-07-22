@@ -8,7 +8,7 @@ require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.2-20240717164558-a6c49f84cc0f.2
 	github.com/antinvestor/apis/go/common v1.19.0
 	go.uber.org/mock v0.4.0
-	google.golang.org/genproto v0.0.0-20240711142825-46eb208f015d
+	google.golang.org/genproto v0.0.0-20240722135656-d784300faade
 	google.golang.org/grpc v1.65.0
 	google.golang.org/protobuf v1.34.2
 )
