@@ -91,6 +91,15 @@ public class SettingsClient extends GrpcClientBase {
         return Integer.parseInt(settingValue);
     }
 
+
+    public static Long asLong(String settingValue) {
+
+        if (TextUtils.isBlank(settingValue)) {
+            return null;
+        }
+        return Long.parseLong(settingValue);
+    }
+
     public static boolean asBoolean(String settingValue) {
         return Boolean.parseBoolean(settingValue);
     }
@@ -141,6 +150,19 @@ public class SettingsClient extends GrpcClientBase {
 
     public Integer getSettingAsInt(Context context, String moduleName, String settingName, int defaultValue) {
         var result = getSettingAsInt(context, moduleName, settingName);
+        if (Objects.isNull(result)) {
+            return defaultValue;
+        }
+        return result;
+    }
+
+    public Long getSettingAsLong(Context context, String moduleName, String settingName) {
+        String setting = getSetting(context, moduleName, settingName);
+        return asLong(setting);
+    }
+
+    public Long getSettingAsLong(Context context, String moduleName, String settingName, long defaultValue) {
+        var result = getSettingAsLong(context, moduleName, settingName);
         if (Objects.isNull(result)) {
             return defaultValue;
         }
