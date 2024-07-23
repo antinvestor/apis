@@ -198,6 +198,28 @@ public class SettingsClient extends GrpcClientBase {
         return settingValue.getData().getValue();
     }
 
+    public String getObjectSettingWithUpdateFallBack(Context context, String moduleName, BaseModel object, String settingName, String globalSettingName) {
+        String result = getObjectSetting(context, moduleName, object, settingName);
+        if(TextUtils.isBlank(result)){
+            result = getSetting(context, moduleName, globalSettingName);
+            if(!TextUtils.isBlank(result)){
+                setObjectSetting(context, moduleName, object, settingName, result);
+            }
+        }
+        return result;
+    }
+
+    public String getObjectSettingWithUpdateFallBackFromOtherObject(Context context, String moduleName, BaseModel object, String settingName,  BaseModel fallBackUpdateObject, String fallBackUpdateObjectSettingName) {
+        String result = getObjectSetting(context, moduleName, object, settingName);
+        if(TextUtils.isBlank(result)){
+            result = getObjectSetting(context, moduleName, fallBackUpdateObject, fallBackUpdateObjectSettingName);
+            if(!TextUtils.isBlank(result)){
+                setObjectSetting(context, moduleName, object, settingName, result);
+            }
+        }
+        return result;
+    }
+
     public String setSetting(Context context, String moduleName, String settingName, Object settingValue) {
         return setSetting(context, moduleName, "", settingName, settingValue);
     }
