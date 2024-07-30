@@ -7,7 +7,7 @@ go 1.21
 require (
 	github.com/antinvestor/apis/go/common v1.19.0
 	go.uber.org/mock v0.4.0
-	google.golang.org/genproto v0.0.0-20240725223205-93522f1f2a9f
+	google.golang.org/genproto v0.0.0-20240730163845-b1a4ccb954bf
 	google.golang.org/grpc v1.65.0
 	google.golang.org/protobuf v1.34.2
 )
@@ -18,5 +18,5 @@ require (
 	golang.org/x/oauth2 v0.21.0 // indirect
 	golang.org/x/sys v0.22.0 // indirect
 	golang.org/x/text v0.16.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240722135656-d784300faade // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240725223205-93522f1f2a9f // indirect
 )
