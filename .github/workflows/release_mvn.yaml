@@ -31,13 +31,6 @@ jobs:
           distribution: 'temurin'
       - name: Setup gradlew action
         uses: gradle/actions/setup-gradle@v4
-        with:
-          dependency-graph: generate-and-submit
-      - name: Run a Gradle build - a build scan will be published automatically
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        working-directory: java
-        run: ./gradlew build
       - name: Run publish action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
