@@ -8,6 +8,8 @@ github.com/antinvestor/apis/go/common v1.18.5 h1:IGg9DD8pIlioVLxFIhE+vsHy7l/kJ0s
 github.com/antinvestor/apis/go/common v1.18.5/go.mod h1:92APw131ecNJBMN/9MQiKjXqyXL6bR4gARYoHjHlZ2E=
 github.com/antinvestor/apis/go/common v1.19.0 h1:PwrSz7a8Ec2oypq7sPkoc5wjBvC6uSH6ZlM6tagpNcI=
 github.com/antinvestor/apis/go/common v1.19.0/go.mod h1:Y63AZ5dwudhZBLQJzFYJjDP3oGy216Tqk6XlENczpp0=
+github.com/antinvestor/apis/go/common v1.20.2 h1:O4gtMeeCOULMqrmd1ItugG3h26YELwfwrU0EPHPgm+g=
+github.com/antinvestor/apis/go/common v1.20.2/go.mod h1:gHWwKojMI4Pfcn+HM0he59BwNF8vg8RSNUifCrVMQas=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 go.uber.org/mock v0.4.0 h1:VcM4ZOtdbR4f6VXfiOpwpVJDL6lCReaZ6mw31wqh7KU=
@@ -16,6 +18,8 @@ golang.org/x/net v0.25.0 h1:d/OCCoBEUq33pjydKrGQhw7IlUPI2Oylr+8qLx49kac=
 golang.org/x/net v0.25.0/go.mod h1:JkAGAh7GEvH74S6FOH42FLoXpXbE/aqXSrIQjXgsiwM=
 golang.org/x/oauth2 v0.21.0 h1:tsimM75w1tF/uws5rbeHzIWxEqElMehnc+iW793zsZs=
 golang.org/x/oauth2 v0.21.0/go.mod h1:XYTD2NtWslqkgxebSiOHnXEap4TF09sJSc7H1sXbhtI=
+golang.org/x/oauth2 v0.22.0 h1:BzDx2FehcG7jJwgWLELCdmLuxk2i+x9UDpSiss2u0ZA=
+golang.org/x/oauth2 v0.22.0/go.mod h1:XYTD2NtWslqkgxebSiOHnXEap4TF09sJSc7H1sXbhtI=
 golang.org/x/sys v0.20.0 h1:Od9JTbYCk261bKm4M/mw7AklTlFYIa0bIp9BgSm1S8Y=
 golang.org/x/sys v0.20.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
 golang.org/x/text v0.15.0 h1:h1V/4gjBv8v9cjcR6+AR5+/cIYK5N/WAgiv4xlsEtAk=

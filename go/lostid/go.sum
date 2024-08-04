@@ -8,6 +8,8 @@ github.com/antinvestor/apis/go/common v1.18.5 h1:IGg9DD8pIlioVLxFIhE+vsHy7l/kJ0s
 github.com/antinvestor/apis/go/common v1.18.5/go.mod h1:92APw131ecNJBMN/9MQiKjXqyXL6bR4gARYoHjHlZ2E=
 github.com/antinvestor/apis/go/common v1.19.0 h1:PwrSz7a8Ec2oypq7sPkoc5wjBvC6uSH6ZlM6tagpNcI=
 github.com/antinvestor/apis/go/common v1.19.0/go.mod h1:Y63AZ5dwudhZBLQJzFYJjDP3oGy216Tqk6XlENczpp0=
+github.com/antinvestor/apis/go/common v1.20.2 h1:O4gtMeeCOULMqrmd1ItugG3h26YELwfwrU0EPHPgm+g=
+github.com/antinvestor/apis/go/common v1.20.2/go.mod h1:gHWwKojMI4Pfcn+HM0he59BwNF8vg8RSNUifCrVMQas=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 go.uber.org/mock v0.4.0 h1:VcM4ZOtdbR4f6VXfiOpwpVJDL6lCReaZ6mw31wqh7KU=
