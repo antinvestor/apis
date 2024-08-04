@@ -26,8 +26,6 @@ public class MoneyUtil {
 
     public static Money from(BigDecimal amount, String currency) {
 
-        amount = amount.abs();
-
         long units = amount.longValue();
         int nanos = amount.subtract(new BigDecimal(units)).multiply(BigDecimal.valueOf(Math.pow(10, 9))).intValue();
 
