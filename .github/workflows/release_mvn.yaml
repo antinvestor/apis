@@ -37,4 +37,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: java
-        run: ./gradlew -Pversion=${{  github.ref_name }} ${{ matrix.api_module }}:publish --info --stacktrace
+        run: ./gradlew -Pversion=${{  github.ref_name }} ${{ matrix.api_module }}:publish
