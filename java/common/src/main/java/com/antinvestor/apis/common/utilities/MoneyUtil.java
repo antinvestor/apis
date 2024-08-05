@@ -19,15 +19,19 @@ import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.google.type.Money;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Objects;
 
 public class MoneyUtil {
 
+    private static final BigDecimal NANO_DIVISOR = BigDecimal.valueOf(Math.pow(10, 9));
+    private static final MathContext MONEY_CONTEXT = MathContext.DECIMAL128;
+
     public static Money from(BigDecimal amount, String currency) {
 
         long units = amount.longValue();
-        int nanos = amount.subtract(new BigDecimal(units)).multiply(BigDecimal.valueOf(Math.pow(10, 9))).intValue();
+        int nanos = amount.subtract(new BigDecimal(units)).multiply(NANO_DIVISOR).intValue();
 
         return Money.newBuilder()
                 .setCurrencyCode(currency)
@@ -38,7 +42,15 @@ public class MoneyUtil {
 
 
     public static BigDecimal toBigDecimal(Money money) {
-        return new BigDecimal(money.getUnits()).add(new BigDecimal(money.getNanos()).multiply(BigDecimal.valueOf(Math.pow(10, -9))));
+        return new BigDecimal(money.getUnits()).add(new BigDecimal(money.getNanos()).divide(NANO_DIVISOR, MONEY_CONTEXT ));
+    }
+
+    public static String toString(Money money) {
+
+        var amount = toBigDecimal(money);
+        String amountString = amount.setScale(2, RoundingMode.DOWN).toPlainString();
+        return String.format("%s %s", money.getCurrencyCode(), amountString);
+
     }
 
     public static boolean isEqual(Money a, Money b) throws UnRetriableException {
@@ -63,14 +75,6 @@ public class MoneyUtil {
 
     public static boolean isLessThanZero(Money money) throws UnRetriableException {
         return isLessThan(money, zeroMoney(money.getCurrencyCode()));
-    }
-
-    public static String toString(Money money) {
-
-        var amount = toBigDecimal(money);
-        String amountString = amount.setScale(2, RoundingMode.DOWN).toPlainString();
-        return String.format("%s %s", money.getCurrencyCode(), amountString);
-
     }
 
     public static Money zeroMoney(String currency) {
@@ -123,32 +127,43 @@ public class MoneyUtil {
     }
 
     public static Money min(Money a, Money b) throws UnRetriableException {
-        int comparisonResult = compare(a, b);
-        return comparisonResult <= 0 ? a : b;
+        return compare(a, b) <= 0 ? a : b;
     }
 
 
     public static Money max(Money a, Money b) throws UnRetriableException {
-        int comparisonResult = compare(a, b);
-        return comparisonResult >= 0 ? a : b;
+        return compare(a, b) >= 0 ? a : b;
     }
 
     public static int compare(Money a, Money b) throws UnRetriableException {
-        if (Objects.isNull(a) || Objects.isNull(b)) {
-            throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, "Both currency amounts must be provided");
-        }
+        validateMoney(a, b);
 
         if (!a.getCurrencyCode().equals(b.getCurrencyCode())) {
-            throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, "Both amounts must be provided in the same currency");
+            throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, "Both amounts must be in the same currency");
         }
 
-        int amountComparison = Long.compare(a.getUnits(), b.getUnits());
-        if (amountComparison != 0) {
-            return amountComparison;
-        }
-
-        return Integer.compare(a.getNanos(), b.getNanos());
+        int unitsComparison = Long.compare(a.getUnits(), b.getUnits());
+        return unitsComparison != 0 ? unitsComparison : Integer.compare(a.getNanos(), b.getNanos());
     }
 
+    private static void validateMoney(Money... moneys) throws UnRetriableException {
+        String currency = null;
+        for (Money money : moneys) {
+            if (Objects.isNull(money)) {
+                throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Money object must not be null");
+            }
+
+            if (Objects.isNull(currency)) {
+                currency = money.getCurrencyCode();
+            }
+
+        }
+    }
+
+    private static void validateBigDecimal(BigDecimal amount) throws UnRetriableException {
+        if (Objects.isNull(amount)) {
+            throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "BigDecimal amount must not be null");
+        }
+    }
 
 }

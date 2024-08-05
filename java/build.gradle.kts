@@ -76,7 +76,14 @@ subprojects {
 
         runtimeOnly("io.grpc:grpc-netty-shaded:1.65.1")
 
+    }
 
+    testing {
+        suites {
+            val test by getting(JvmTestSuite::class) {
+                useJUnitJupiter()
+            }
+        }
     }
 
 }
