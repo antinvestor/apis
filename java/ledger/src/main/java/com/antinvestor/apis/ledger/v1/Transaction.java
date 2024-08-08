@@ -35,6 +35,7 @@ private static final long serialVersionUID = 0L;
     currency_ = "";
     transactedAt_ = "";
     entries_ = java.util.Collections.emptyList();
+    type_ = 0;
   }
 
   @java.lang.Override
@@ -306,6 +307,35 @@ java.lang.String defaultValue) {
     return entries_.get(index);
   }
 
+  public static final int CLEARED_FIELD_NUMBER = 6;
+  private boolean cleared_ = false;
+  /**
+   * <code>bool cleared = 6 [json_name = "cleared"];</code>
+   * @return The cleared.
+   */
+  @java.lang.Override
+  public boolean getCleared() {
+    return cleared_;
+  }
+
+  public static final int TYPE_FIELD_NUMBER = 7;
+  private int type_ = 0;
+  /**
+   * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
+   * @return The enum numeric value on the wire for type.
+   */
+  @java.lang.Override public int getTypeValue() {
+    return type_;
+  }
+  /**
+   * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
+   * @return The type.
+   */
+  @java.lang.Override public com.antinvestor.apis.ledger.v1.TransactionType getType() {
+    com.antinvestor.apis.ledger.v1.TransactionType result = com.antinvestor.apis.ledger.v1.TransactionType.forNumber(type_);
+    return result == null ? com.antinvestor.apis.ledger.v1.TransactionType.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -337,6 +367,12 @@ java.lang.String defaultValue) {
         4);
     for (int i = 0; i < entries_.size(); i++) {
       output.writeMessage(5, entries_.get(i));
+    }
+    if (cleared_ != false) {
+      output.writeBool(6, cleared_);
+    }
+    if (type_ != com.antinvestor.apis.ledger.v1.TransactionType.NORMAL.getNumber()) {
+      output.writeEnum(7, type_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -370,6 +406,14 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(5, entries_.get(i));
     }
+    if (cleared_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(6, cleared_);
+    }
+    if (type_ != com.antinvestor.apis.ledger.v1.TransactionType.NORMAL.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(7, type_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -395,6 +439,9 @@ java.lang.String defaultValue) {
         other.internalGetData())) return false;
     if (!getEntriesList()
         .equals(other.getEntriesList())) return false;
+    if (getCleared()
+        != other.getCleared()) return false;
+    if (type_ != other.type_) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -420,6 +467,11 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + ENTRIES_FIELD_NUMBER;
       hash = (53 * hash) + getEntriesList().hashCode();
     }
+    hash = (37 * hash) + CLEARED_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getCleared());
+    hash = (37 * hash) + TYPE_FIELD_NUMBER;
+    hash = (53 * hash) + type_;
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -584,6 +636,8 @@ java.lang.String defaultValue) {
         entriesBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000010);
+      cleared_ = false;
+      type_ = 0;
       return this;
     }
 
@@ -642,6 +696,12 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000008) != 0)) {
         result.data_ = internalGetData();
         result.data_.makeImmutable();
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.cleared_ = cleared_;
+      }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        result.type_ = type_;
       }
     }
 
@@ -733,6 +793,12 @@ java.lang.String defaultValue) {
           }
         }
       }
+      if (other.getCleared() != false) {
+        setCleared(other.getCleared());
+      }
+      if (other.type_ != 0) {
+        setTypeValue(other.getTypeValue());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -796,6 +862,16 @@ java.lang.String defaultValue) {
               }
               break;
             } // case 42
+            case 48: {
+              cleared_ = input.readBool();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 48
+            case 56: {
+              type_ = input.readEnum();
+              bitField0_ |= 0x00000040;
+              break;
+            } // case 56
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1394,6 +1470,91 @@ java.lang.String defaultValue) {
         entries_ = null;
       }
       return entriesBuilder_;
+    }
+
+    private boolean cleared_ ;
+    /**
+     * <code>bool cleared = 6 [json_name = "cleared"];</code>
+     * @return The cleared.
+     */
+    @java.lang.Override
+    public boolean getCleared() {
+      return cleared_;
+    }
+    /**
+     * <code>bool cleared = 6 [json_name = "cleared"];</code>
+     * @param value The cleared to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCleared(boolean value) {
+
+      cleared_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool cleared = 6 [json_name = "cleared"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCleared() {
+      bitField0_ = (bitField0_ & ~0x00000020);
+      cleared_ = false;
+      onChanged();
+      return this;
+    }
+
+    private int type_ = 0;
+    /**
+     * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
+     * @return The enum numeric value on the wire for type.
+     */
+    @java.lang.Override public int getTypeValue() {
+      return type_;
+    }
+    /**
+     * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
+     * @param value The enum numeric value on the wire for type to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTypeValue(int value) {
+      type_ = value;
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
+     * @return The type.
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.ledger.v1.TransactionType getType() {
+      com.antinvestor.apis.ledger.v1.TransactionType result = com.antinvestor.apis.ledger.v1.TransactionType.forNumber(type_);
+      return result == null ? com.antinvestor.apis.ledger.v1.TransactionType.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
+     * @param value The type to set.
+     * @return This builder for chaining.
+     */
+    public Builder setType(com.antinvestor.apis.ledger.v1.TransactionType value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bitField0_ |= 0x00000040;
+      type_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearType() {
+      bitField0_ = (bitField0_ & ~0x00000040);
+      type_ = 0;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

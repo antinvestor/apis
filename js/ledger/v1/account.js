@@ -89,7 +89,9 @@ proto.ledger.v1.Account.toObject = function(includeInstance, msg) {
     reference: jspb.Message.getFieldWithDefault(msg, 1, ""),
     ledger: jspb.Message.getFieldWithDefault(msg, 3, ""),
     balance: (f = msg.getBalance()) && proto.google.type.Money.toObject(includeInstance, f),
-    dataMap: (f = msg.getDataMap()) ? f.toObject(includeInstance, undefined) : []
+    dataMap: (f = msg.getDataMap()) ? f.toObject(includeInstance, undefined) : [],
+    unclearedBalance: (f = msg.getUnclearedBalance()) && proto.google.type.Money.toObject(includeInstance, f),
+    reservedBalance: (f = msg.getReservedBalance()) && proto.google.type.Money.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -145,6 +147,16 @@ proto.ledger.v1.Account.deserializeBinaryFromReader = function(msg, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readString, null, "", "");
          });
       break;
+    case 6:
+      var value = new proto.google.type.Money;
+      reader.readMessage(value,proto.google.type.Money.deserializeBinaryFromReader);
+      msg.setUnclearedBalance(value);
+      break;
+    case 7:
+      var value = new proto.google.type.Money;
+      reader.readMessage(value,proto.google.type.Money.deserializeBinaryFromReader);
+      msg.setReservedBalance(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -199,6 +211,22 @@ proto.ledger.v1.Account.serializeBinaryToWriter = function(message, writer) {
   f = message.getDataMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(5, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeString);
+  }
+  f = message.getUnclearedBalance();
+  if (f != null) {
+    writer.writeMessage(
+      6,
+      f,
+      proto.google.type.Money.serializeBinaryToWriter
+    );
+  }
+  f = message.getReservedBalance();
+  if (f != null) {
+    writer.writeMessage(
+      7,
+      f,
+      proto.google.type.Money.serializeBinaryToWriter
+    );
   }
 };
 
@@ -296,6 +324,80 @@ proto.ledger.v1.Account.prototype.getDataMap = function(opt_noLazyCreate) {
 proto.ledger.v1.Account.prototype.clearDataMap = function() {
   this.getDataMap().clear();
   return this;
+};
+
+
+/**
+ * optional google.type.Money uncleared_balance = 6;
+ * @return {?proto.google.type.Money}
+ */
+proto.ledger.v1.Account.prototype.getUnclearedBalance = function() {
+  return /** @type{?proto.google.type.Money} */ (
+    jspb.Message.getWrapperField(this, proto.google.type.Money, 6));
+};
+
+
+/**
+ * @param {?proto.google.type.Money|undefined} value
+ * @return {!proto.ledger.v1.Account} returns this
+*/
+proto.ledger.v1.Account.prototype.setUnclearedBalance = function(value) {
+  return jspb.Message.setWrapperField(this, 6, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.ledger.v1.Account} returns this
+ */
+proto.ledger.v1.Account.prototype.clearUnclearedBalance = function() {
+  return this.setUnclearedBalance(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.ledger.v1.Account.prototype.hasUnclearedBalance = function() {
+  return jspb.Message.getField(this, 6) != null;
+};
+
+
+/**
+ * optional google.type.Money reserved_balance = 7;
+ * @return {?proto.google.type.Money}
+ */
+proto.ledger.v1.Account.prototype.getReservedBalance = function() {
+  return /** @type{?proto.google.type.Money} */ (
+    jspb.Message.getWrapperField(this, proto.google.type.Money, 7));
+};
+
+
+/**
+ * @param {?proto.google.type.Money|undefined} value
+ * @return {!proto.ledger.v1.Account} returns this
+*/
+proto.ledger.v1.Account.prototype.setReservedBalance = function(value) {
+  return jspb.Message.setWrapperField(this, 7, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.ledger.v1.Account} returns this
+ */
+proto.ledger.v1.Account.prototype.clearReservedBalance = function() {
+  return this.setReservedBalance(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.ledger.v1.Account.prototype.hasReservedBalance = function() {
+  return jspb.Message.getField(this, 7) != null;
 };
 
 

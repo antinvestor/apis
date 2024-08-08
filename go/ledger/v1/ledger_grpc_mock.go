@@ -15,7 +15,6 @@ import (
 
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
-	metadata "google.golang.org/grpc/metadata"
 )
 
 // MockLedgerServiceClient is a mock of LedgerServiceClient interface.
@@ -122,14 +121,14 @@ func (mr *MockLedgerServiceClientMockRecorder) ReverseTransaction(ctx, in any, o
 }
 
 // SearchAccounts mocks base method.
-func (m *MockLedgerServiceClient) SearchAccounts(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (LedgerService_SearchAccountsClient, error) {
+func (m *MockLedgerServiceClient) SearchAccounts(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Account], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchAccounts", varargs...)
-	ret0, _ := ret[0].(LedgerService_SearchAccountsClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[Account])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -142,14 +141,14 @@ func (mr *MockLedgerServiceClientMockRecorder) SearchAccounts(ctx, in any, opts 
 }
 
 // SearchLedgers mocks base method.
-func (m *MockLedgerServiceClient) SearchLedgers(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (LedgerService_SearchLedgersClient, error) {
+func (m *MockLedgerServiceClient) SearchLedgers(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Ledger], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchLedgers", varargs...)
-	ret0, _ := ret[0].(LedgerService_SearchLedgersClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[Ledger])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -162,14 +161,14 @@ func (mr *MockLedgerServiceClientMockRecorder) SearchLedgers(ctx, in any, opts .
 }
 
 // SearchTransactionEntries mocks base method.
-func (m *MockLedgerServiceClient) SearchTransactionEntries(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (LedgerService_SearchTransactionEntriesClient, error) {
+func (m *MockLedgerServiceClient) SearchTransactionEntries(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TransactionEntry], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchTransactionEntries", varargs...)
-	ret0, _ := ret[0].(LedgerService_SearchTransactionEntriesClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[TransactionEntry])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -182,14 +181,14 @@ func (mr *MockLedgerServiceClientMockRecorder) SearchTransactionEntries(ctx, in 
 }
 
 // SearchTransactions mocks base method.
-func (m *MockLedgerServiceClient) SearchTransactions(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (LedgerService_SearchTransactionsClient, error) {
+func (m *MockLedgerServiceClient) SearchTransactions(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Transaction], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchTransactions", varargs...)
-	ret0, _ := ret[0].(LedgerService_SearchTransactionsClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[Transaction])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -259,498 +258,6 @@ func (mr *MockLedgerServiceClientMockRecorder) UpdateTransaction(ctx, in any, op
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTransaction", reflect.TypeOf((*MockLedgerServiceClient)(nil).UpdateTransaction), varargs...)
-}
-
-// MockLedgerService_SearchLedgersClient is a mock of LedgerService_SearchLedgersClient interface.
-type MockLedgerService_SearchLedgersClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockLedgerService_SearchLedgersClientMockRecorder
-}
-
-// MockLedgerService_SearchLedgersClientMockRecorder is the mock recorder for MockLedgerService_SearchLedgersClient.
-type MockLedgerService_SearchLedgersClientMockRecorder struct {
-	mock *MockLedgerService_SearchLedgersClient
-}
-
-// NewMockLedgerService_SearchLedgersClient creates a new mock instance.
-func NewMockLedgerService_SearchLedgersClient(ctrl *gomock.Controller) *MockLedgerService_SearchLedgersClient {
-	mock := &MockLedgerService_SearchLedgersClient{ctrl: ctrl}
-	mock.recorder = &MockLedgerService_SearchLedgersClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLedgerService_SearchLedgersClient) EXPECT() *MockLedgerService_SearchLedgersClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockLedgerService_SearchLedgersClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockLedgerService_SearchLedgersClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockLedgerService_SearchLedgersClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockLedgerService_SearchLedgersClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLedgerService_SearchLedgersClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLedgerService_SearchLedgersClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockLedgerService_SearchLedgersClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockLedgerService_SearchLedgersClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockLedgerService_SearchLedgersClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockLedgerService_SearchLedgersClient) Recv() (*Ledger, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*Ledger)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockLedgerService_SearchLedgersClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockLedgerService_SearchLedgersClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLedgerService_SearchLedgersClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLedgerService_SearchLedgersClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLedgerService_SearchLedgersClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLedgerService_SearchLedgersClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLedgerService_SearchLedgersClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLedgerService_SearchLedgersClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockLedgerService_SearchLedgersClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockLedgerService_SearchLedgersClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockLedgerService_SearchLedgersClient)(nil).Trailer))
-}
-
-// MockLedgerService_SearchAccountsClient is a mock of LedgerService_SearchAccountsClient interface.
-type MockLedgerService_SearchAccountsClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockLedgerService_SearchAccountsClientMockRecorder
-}
-
-// MockLedgerService_SearchAccountsClientMockRecorder is the mock recorder for MockLedgerService_SearchAccountsClient.
-type MockLedgerService_SearchAccountsClientMockRecorder struct {
-	mock *MockLedgerService_SearchAccountsClient
-}
-
-// NewMockLedgerService_SearchAccountsClient creates a new mock instance.
-func NewMockLedgerService_SearchAccountsClient(ctrl *gomock.Controller) *MockLedgerService_SearchAccountsClient {
-	mock := &MockLedgerService_SearchAccountsClient{ctrl: ctrl}
-	mock.recorder = &MockLedgerService_SearchAccountsClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLedgerService_SearchAccountsClient) EXPECT() *MockLedgerService_SearchAccountsClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockLedgerService_SearchAccountsClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockLedgerService_SearchAccountsClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockLedgerService_SearchAccountsClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockLedgerService_SearchAccountsClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLedgerService_SearchAccountsClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLedgerService_SearchAccountsClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockLedgerService_SearchAccountsClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockLedgerService_SearchAccountsClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockLedgerService_SearchAccountsClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockLedgerService_SearchAccountsClient) Recv() (*Account, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*Account)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockLedgerService_SearchAccountsClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockLedgerService_SearchAccountsClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLedgerService_SearchAccountsClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLedgerService_SearchAccountsClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLedgerService_SearchAccountsClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLedgerService_SearchAccountsClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLedgerService_SearchAccountsClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLedgerService_SearchAccountsClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockLedgerService_SearchAccountsClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockLedgerService_SearchAccountsClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockLedgerService_SearchAccountsClient)(nil).Trailer))
-}
-
-// MockLedgerService_SearchTransactionsClient is a mock of LedgerService_SearchTransactionsClient interface.
-type MockLedgerService_SearchTransactionsClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockLedgerService_SearchTransactionsClientMockRecorder
-}
-
-// MockLedgerService_SearchTransactionsClientMockRecorder is the mock recorder for MockLedgerService_SearchTransactionsClient.
-type MockLedgerService_SearchTransactionsClientMockRecorder struct {
-	mock *MockLedgerService_SearchTransactionsClient
-}
-
-// NewMockLedgerService_SearchTransactionsClient creates a new mock instance.
-func NewMockLedgerService_SearchTransactionsClient(ctrl *gomock.Controller) *MockLedgerService_SearchTransactionsClient {
-	mock := &MockLedgerService_SearchTransactionsClient{ctrl: ctrl}
-	mock.recorder = &MockLedgerService_SearchTransactionsClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLedgerService_SearchTransactionsClient) EXPECT() *MockLedgerService_SearchTransactionsClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockLedgerService_SearchTransactionsClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockLedgerService_SearchTransactionsClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockLedgerService_SearchTransactionsClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockLedgerService_SearchTransactionsClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLedgerService_SearchTransactionsClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLedgerService_SearchTransactionsClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockLedgerService_SearchTransactionsClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockLedgerService_SearchTransactionsClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockLedgerService_SearchTransactionsClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockLedgerService_SearchTransactionsClient) Recv() (*Transaction, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*Transaction)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockLedgerService_SearchTransactionsClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockLedgerService_SearchTransactionsClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLedgerService_SearchTransactionsClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLedgerService_SearchTransactionsClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLedgerService_SearchTransactionsClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLedgerService_SearchTransactionsClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLedgerService_SearchTransactionsClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLedgerService_SearchTransactionsClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockLedgerService_SearchTransactionsClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockLedgerService_SearchTransactionsClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockLedgerService_SearchTransactionsClient)(nil).Trailer))
-}
-
-// MockLedgerService_SearchTransactionEntriesClient is a mock of LedgerService_SearchTransactionEntriesClient interface.
-type MockLedgerService_SearchTransactionEntriesClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockLedgerService_SearchTransactionEntriesClientMockRecorder
-}
-
-// MockLedgerService_SearchTransactionEntriesClientMockRecorder is the mock recorder for MockLedgerService_SearchTransactionEntriesClient.
-type MockLedgerService_SearchTransactionEntriesClientMockRecorder struct {
-	mock *MockLedgerService_SearchTransactionEntriesClient
-}
-
-// NewMockLedgerService_SearchTransactionEntriesClient creates a new mock instance.
-func NewMockLedgerService_SearchTransactionEntriesClient(ctrl *gomock.Controller) *MockLedgerService_SearchTransactionEntriesClient {
-	mock := &MockLedgerService_SearchTransactionEntriesClient{ctrl: ctrl}
-	mock.recorder = &MockLedgerService_SearchTransactionEntriesClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLedgerService_SearchTransactionEntriesClient) EXPECT() *MockLedgerService_SearchTransactionEntriesClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockLedgerService_SearchTransactionEntriesClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockLedgerService_SearchTransactionEntriesClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockLedgerService_SearchTransactionEntriesClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLedgerService_SearchTransactionEntriesClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockLedgerService_SearchTransactionEntriesClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockLedgerService_SearchTransactionEntriesClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockLedgerService_SearchTransactionEntriesClient) Recv() (*TransactionEntry, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*TransactionEntry)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockLedgerService_SearchTransactionEntriesClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLedgerService_SearchTransactionEntriesClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLedgerService_SearchTransactionEntriesClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLedgerService_SearchTransactionEntriesClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLedgerService_SearchTransactionEntriesClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockLedgerService_SearchTransactionEntriesClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockLedgerService_SearchTransactionEntriesClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesClient)(nil).Trailer))
 }
 
 // MockLedgerServiceServer is a mock of LedgerServiceServer interface.
@@ -837,7 +344,7 @@ func (mr *MockLedgerServiceServerMockRecorder) ReverseTransaction(arg0, arg1 any
 }
 
 // SearchAccounts mocks base method.
-func (m *MockLedgerServiceServer) SearchAccounts(arg0 *SearchRequest, arg1 LedgerService_SearchAccountsServer) error {
+func (m *MockLedgerServiceServer) SearchAccounts(arg0 *SearchRequest, arg1 grpc.ServerStreamingServer[Account]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchAccounts", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -851,7 +358,7 @@ func (mr *MockLedgerServiceServerMockRecorder) SearchAccounts(arg0, arg1 any) *g
 }
 
 // SearchLedgers mocks base method.
-func (m *MockLedgerServiceServer) SearchLedgers(arg0 *SearchRequest, arg1 LedgerService_SearchLedgersServer) error {
+func (m *MockLedgerServiceServer) SearchLedgers(arg0 *SearchRequest, arg1 grpc.ServerStreamingServer[Ledger]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchLedgers", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -865,7 +372,7 @@ func (mr *MockLedgerServiceServerMockRecorder) SearchLedgers(arg0, arg1 any) *go
 }
 
 // SearchTransactionEntries mocks base method.
-func (m *MockLedgerServiceServer) SearchTransactionEntries(arg0 *SearchRequest, arg1 LedgerService_SearchTransactionEntriesServer) error {
+func (m *MockLedgerServiceServer) SearchTransactionEntries(arg0 *SearchRequest, arg1 grpc.ServerStreamingServer[TransactionEntry]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchTransactionEntries", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -879,7 +386,7 @@ func (mr *MockLedgerServiceServerMockRecorder) SearchTransactionEntries(arg0, ar
 }
 
 // SearchTransactions mocks base method.
-func (m *MockLedgerServiceServer) SearchTransactions(arg0 *SearchRequest, arg1 LedgerService_SearchTransactionsServer) error {
+func (m *MockLedgerServiceServer) SearchTransactions(arg0 *SearchRequest, arg1 grpc.ServerStreamingServer[Transaction]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchTransactions", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -982,480 +489,4 @@ func (m *MockUnsafeLedgerServiceServer) mustEmbedUnimplementedLedgerServiceServe
 func (mr *MockUnsafeLedgerServiceServerMockRecorder) mustEmbedUnimplementedLedgerServiceServer() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedLedgerServiceServer", reflect.TypeOf((*MockUnsafeLedgerServiceServer)(nil).mustEmbedUnimplementedLedgerServiceServer))
-}
-
-// MockLedgerService_SearchLedgersServer is a mock of LedgerService_SearchLedgersServer interface.
-type MockLedgerService_SearchLedgersServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockLedgerService_SearchLedgersServerMockRecorder
-}
-
-// MockLedgerService_SearchLedgersServerMockRecorder is the mock recorder for MockLedgerService_SearchLedgersServer.
-type MockLedgerService_SearchLedgersServerMockRecorder struct {
-	mock *MockLedgerService_SearchLedgersServer
-}
-
-// NewMockLedgerService_SearchLedgersServer creates a new mock instance.
-func NewMockLedgerService_SearchLedgersServer(ctrl *gomock.Controller) *MockLedgerService_SearchLedgersServer {
-	mock := &MockLedgerService_SearchLedgersServer{ctrl: ctrl}
-	mock.recorder = &MockLedgerService_SearchLedgersServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLedgerService_SearchLedgersServer) EXPECT() *MockLedgerService_SearchLedgersServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockLedgerService_SearchLedgersServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLedgerService_SearchLedgersServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLedgerService_SearchLedgersServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLedgerService_SearchLedgersServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLedgerService_SearchLedgersServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLedgerService_SearchLedgersServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockLedgerService_SearchLedgersServer) Send(arg0 *Ledger) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockLedgerService_SearchLedgersServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockLedgerService_SearchLedgersServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockLedgerService_SearchLedgersServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockLedgerService_SearchLedgersServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockLedgerService_SearchLedgersServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLedgerService_SearchLedgersServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLedgerService_SearchLedgersServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLedgerService_SearchLedgersServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockLedgerService_SearchLedgersServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockLedgerService_SearchLedgersServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockLedgerService_SearchLedgersServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockLedgerService_SearchLedgersServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockLedgerService_SearchLedgersServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockLedgerService_SearchLedgersServer)(nil).SetTrailer), arg0)
-}
-
-// MockLedgerService_SearchAccountsServer is a mock of LedgerService_SearchAccountsServer interface.
-type MockLedgerService_SearchAccountsServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockLedgerService_SearchAccountsServerMockRecorder
-}
-
-// MockLedgerService_SearchAccountsServerMockRecorder is the mock recorder for MockLedgerService_SearchAccountsServer.
-type MockLedgerService_SearchAccountsServerMockRecorder struct {
-	mock *MockLedgerService_SearchAccountsServer
-}
-
-// NewMockLedgerService_SearchAccountsServer creates a new mock instance.
-func NewMockLedgerService_SearchAccountsServer(ctrl *gomock.Controller) *MockLedgerService_SearchAccountsServer {
-	mock := &MockLedgerService_SearchAccountsServer{ctrl: ctrl}
-	mock.recorder = &MockLedgerService_SearchAccountsServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLedgerService_SearchAccountsServer) EXPECT() *MockLedgerService_SearchAccountsServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockLedgerService_SearchAccountsServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLedgerService_SearchAccountsServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLedgerService_SearchAccountsServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLedgerService_SearchAccountsServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLedgerService_SearchAccountsServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLedgerService_SearchAccountsServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockLedgerService_SearchAccountsServer) Send(arg0 *Account) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockLedgerService_SearchAccountsServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockLedgerService_SearchAccountsServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockLedgerService_SearchAccountsServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockLedgerService_SearchAccountsServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockLedgerService_SearchAccountsServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLedgerService_SearchAccountsServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLedgerService_SearchAccountsServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLedgerService_SearchAccountsServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockLedgerService_SearchAccountsServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockLedgerService_SearchAccountsServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockLedgerService_SearchAccountsServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockLedgerService_SearchAccountsServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockLedgerService_SearchAccountsServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockLedgerService_SearchAccountsServer)(nil).SetTrailer), arg0)
-}
-
-// MockLedgerService_SearchTransactionsServer is a mock of LedgerService_SearchTransactionsServer interface.
-type MockLedgerService_SearchTransactionsServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockLedgerService_SearchTransactionsServerMockRecorder
-}
-
-// MockLedgerService_SearchTransactionsServerMockRecorder is the mock recorder for MockLedgerService_SearchTransactionsServer.
-type MockLedgerService_SearchTransactionsServerMockRecorder struct {
-	mock *MockLedgerService_SearchTransactionsServer
-}
-
-// NewMockLedgerService_SearchTransactionsServer creates a new mock instance.
-func NewMockLedgerService_SearchTransactionsServer(ctrl *gomock.Controller) *MockLedgerService_SearchTransactionsServer {
-	mock := &MockLedgerService_SearchTransactionsServer{ctrl: ctrl}
-	mock.recorder = &MockLedgerService_SearchTransactionsServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLedgerService_SearchTransactionsServer) EXPECT() *MockLedgerService_SearchTransactionsServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockLedgerService_SearchTransactionsServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLedgerService_SearchTransactionsServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLedgerService_SearchTransactionsServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLedgerService_SearchTransactionsServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLedgerService_SearchTransactionsServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLedgerService_SearchTransactionsServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockLedgerService_SearchTransactionsServer) Send(arg0 *Transaction) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockLedgerService_SearchTransactionsServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockLedgerService_SearchTransactionsServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockLedgerService_SearchTransactionsServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockLedgerService_SearchTransactionsServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockLedgerService_SearchTransactionsServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLedgerService_SearchTransactionsServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLedgerService_SearchTransactionsServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLedgerService_SearchTransactionsServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockLedgerService_SearchTransactionsServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockLedgerService_SearchTransactionsServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockLedgerService_SearchTransactionsServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockLedgerService_SearchTransactionsServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockLedgerService_SearchTransactionsServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockLedgerService_SearchTransactionsServer)(nil).SetTrailer), arg0)
-}
-
-// MockLedgerService_SearchTransactionEntriesServer is a mock of LedgerService_SearchTransactionEntriesServer interface.
-type MockLedgerService_SearchTransactionEntriesServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockLedgerService_SearchTransactionEntriesServerMockRecorder
-}
-
-// MockLedgerService_SearchTransactionEntriesServerMockRecorder is the mock recorder for MockLedgerService_SearchTransactionEntriesServer.
-type MockLedgerService_SearchTransactionEntriesServerMockRecorder struct {
-	mock *MockLedgerService_SearchTransactionEntriesServer
-}
-
-// NewMockLedgerService_SearchTransactionEntriesServer creates a new mock instance.
-func NewMockLedgerService_SearchTransactionEntriesServer(ctrl *gomock.Controller) *MockLedgerService_SearchTransactionEntriesServer {
-	mock := &MockLedgerService_SearchTransactionEntriesServer{ctrl: ctrl}
-	mock.recorder = &MockLedgerService_SearchTransactionEntriesServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLedgerService_SearchTransactionEntriesServer) EXPECT() *MockLedgerService_SearchTransactionEntriesServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockLedgerService_SearchTransactionEntriesServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLedgerService_SearchTransactionEntriesServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLedgerService_SearchTransactionEntriesServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLedgerService_SearchTransactionEntriesServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockLedgerService_SearchTransactionEntriesServer) Send(arg0 *TransactionEntry) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockLedgerService_SearchTransactionEntriesServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockLedgerService_SearchTransactionEntriesServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockLedgerService_SearchTransactionEntriesServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLedgerService_SearchTransactionEntriesServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLedgerService_SearchTransactionEntriesServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockLedgerService_SearchTransactionEntriesServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockLedgerService_SearchTransactionEntriesServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockLedgerService_SearchTransactionEntriesServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockLedgerService_SearchTransactionEntriesServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockLedgerService_SearchTransactionEntriesServer)(nil).SetTrailer), arg0)
 }

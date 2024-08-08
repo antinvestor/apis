@@ -90,7 +90,8 @@ proto.ledger.v1.TransactionEntry.toObject = function(includeInstance, msg) {
     transactedAt: jspb.Message.getFieldWithDefault(msg, 3, ""),
     amount: (f = msg.getAmount()) && proto.google.type.Money.toObject(includeInstance, f),
     credit: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
-    accBalance: (f = msg.getAccBalance()) && proto.google.type.Money.toObject(includeInstance, f)
+    accBalance: (f = msg.getAccBalance()) && proto.google.type.Money.toObject(includeInstance, f),
+    clearedAt: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -152,6 +153,10 @@ proto.ledger.v1.TransactionEntry.deserializeBinaryFromReader = function(msg, rea
       var value = new proto.google.type.Money;
       reader.readMessage(value,proto.google.type.Money.deserializeBinaryFromReader);
       msg.setAccBalance(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setClearedAt(value);
       break;
     default:
       reader.skipField();
@@ -224,6 +229,13 @@ proto.ledger.v1.TransactionEntry.serializeBinaryToWriter = function(message, wri
       6,
       f,
       proto.google.type.Money.serializeBinaryToWriter
+    );
+  }
+  f = message.getClearedAt();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
+      f
     );
   }
 };
@@ -372,6 +384,24 @@ proto.ledger.v1.TransactionEntry.prototype.clearAccBalance = function() {
  */
 proto.ledger.v1.TransactionEntry.prototype.hasAccBalance = function() {
   return jspb.Message.getField(this, 6) != null;
+};
+
+
+/**
+ * optional string cleared_at = 7;
+ * @return {string}
+ */
+proto.ledger.v1.TransactionEntry.prototype.getClearedAt = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.ledger.v1.TransactionEntry} returns this
+ */
+proto.ledger.v1.TransactionEntry.prototype.setClearedAt = function(value) {
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 

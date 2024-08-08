@@ -49,6 +49,8 @@ message Account {
   string ledger = 3;
   google.type.Money balance = 4;
   map<string, string> data = 5;
+  google.type.Money uncleared_balance = 6;
+  google.type.Money reserved_balance = 7;
 }
 
 message TransactionEntry {
@@ -58,6 +60,15 @@ message TransactionEntry {
   google.type.Money amount = 4;
   bool credit = 5;
   google.type.Money acc_balance = 6;
+  string cleared_at = 7;
+}
+
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum TransactionType {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  NORMAL = 0;
+  REVERSAL = 1;
+  RESERVATION = 2;
 }
 
 message Transaction {
@@ -66,6 +77,8 @@ message Transaction {
   string transacted_at = 3;
   map<string, string> data = 4;
   repeated TransactionEntry entries = 5;
+  bool cleared = 6;
+  TransactionType type = 7;
 }
 
 // The ledger service definition.

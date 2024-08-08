@@ -251,6 +251,58 @@ java.lang.String defaultValue) {
     return map.get(key);
   }
 
+  public static final int UNCLEARED_BALANCE_FIELD_NUMBER = 6;
+  private com.google.type.Money unclearedBalance_;
+  /**
+   * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+   * @return Whether the unclearedBalance field is set.
+   */
+  @java.lang.Override
+  public boolean hasUnclearedBalance() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+   * @return The unclearedBalance.
+   */
+  @java.lang.Override
+  public com.google.type.Money getUnclearedBalance() {
+    return unclearedBalance_ == null ? com.google.type.Money.getDefaultInstance() : unclearedBalance_;
+  }
+  /**
+   * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+   */
+  @java.lang.Override
+  public com.google.type.MoneyOrBuilder getUnclearedBalanceOrBuilder() {
+    return unclearedBalance_ == null ? com.google.type.Money.getDefaultInstance() : unclearedBalance_;
+  }
+
+  public static final int RESERVED_BALANCE_FIELD_NUMBER = 7;
+  private com.google.type.Money reservedBalance_;
+  /**
+   * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+   * @return Whether the reservedBalance field is set.
+   */
+  @java.lang.Override
+  public boolean hasReservedBalance() {
+    return ((bitField0_ & 0x00000004) != 0);
+  }
+  /**
+   * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+   * @return The reservedBalance.
+   */
+  @java.lang.Override
+  public com.google.type.Money getReservedBalance() {
+    return reservedBalance_ == null ? com.google.type.Money.getDefaultInstance() : reservedBalance_;
+  }
+  /**
+   * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+   */
+  @java.lang.Override
+  public com.google.type.MoneyOrBuilder getReservedBalanceOrBuilder() {
+    return reservedBalance_ == null ? com.google.type.Money.getDefaultInstance() : reservedBalance_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -280,6 +332,12 @@ java.lang.String defaultValue) {
         internalGetData(),
         DataDefaultEntryHolder.defaultEntry,
         5);
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(6, getUnclearedBalance());
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      output.writeMessage(7, getReservedBalance());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -309,6 +367,14 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, data__);
     }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(6, getUnclearedBalance());
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(7, getReservedBalance());
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -335,6 +401,16 @@ java.lang.String defaultValue) {
     }
     if (!internalGetData().equals(
         other.internalGetData())) return false;
+    if (hasUnclearedBalance() != other.hasUnclearedBalance()) return false;
+    if (hasUnclearedBalance()) {
+      if (!getUnclearedBalance()
+          .equals(other.getUnclearedBalance())) return false;
+    }
+    if (hasReservedBalance() != other.hasReservedBalance()) return false;
+    if (hasReservedBalance()) {
+      if (!getReservedBalance()
+          .equals(other.getReservedBalance())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -357,6 +433,14 @@ java.lang.String defaultValue) {
     if (!internalGetData().getMap().isEmpty()) {
       hash = (37 * hash) + DATA_FIELD_NUMBER;
       hash = (53 * hash) + internalGetData().hashCode();
+    }
+    if (hasUnclearedBalance()) {
+      hash = (37 * hash) + UNCLEARED_BALANCE_FIELD_NUMBER;
+      hash = (53 * hash) + getUnclearedBalance().hashCode();
+    }
+    if (hasReservedBalance()) {
+      hash = (37 * hash) + RESERVED_BALANCE_FIELD_NUMBER;
+      hash = (53 * hash) + getReservedBalance().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -511,6 +595,8 @@ java.lang.String defaultValue) {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
         getBalanceFieldBuilder();
+        getUnclearedBalanceFieldBuilder();
+        getReservedBalanceFieldBuilder();
       }
     }
     @java.lang.Override
@@ -525,6 +611,16 @@ java.lang.String defaultValue) {
         balanceBuilder_ = null;
       }
       internalGetMutableData().clear();
+      unclearedBalance_ = null;
+      if (unclearedBalanceBuilder_ != null) {
+        unclearedBalanceBuilder_.dispose();
+        unclearedBalanceBuilder_ = null;
+      }
+      reservedBalance_ = null;
+      if (reservedBalanceBuilder_ != null) {
+        reservedBalanceBuilder_.dispose();
+        reservedBalanceBuilder_ = null;
+      }
       return this;
     }
 
@@ -574,6 +670,18 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000008) != 0)) {
         result.data_ = internalGetData();
         result.data_.makeImmutable();
+      }
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.unclearedBalance_ = unclearedBalanceBuilder_ == null
+            ? unclearedBalance_
+            : unclearedBalanceBuilder_.build();
+        to_bitField0_ |= 0x00000002;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.reservedBalance_ = reservedBalanceBuilder_ == null
+            ? reservedBalance_
+            : reservedBalanceBuilder_.build();
+        to_bitField0_ |= 0x00000004;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -638,6 +746,12 @@ java.lang.String defaultValue) {
       internalGetMutableData().mergeFrom(
           other.internalGetData());
       bitField0_ |= 0x00000008;
+      if (other.hasUnclearedBalance()) {
+        mergeUnclearedBalance(other.getUnclearedBalance());
+      }
+      if (other.hasReservedBalance()) {
+        mergeReservedBalance(other.getReservedBalance());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -690,6 +804,20 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000008;
               break;
             } // case 42
+            case 50: {
+              input.readMessage(
+                  getUnclearedBalanceFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 50
+            case 58: {
+              input.readMessage(
+                  getReservedBalanceFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 58
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1097,6 +1225,248 @@ java.lang.String defaultValue) {
           .putAll(values);
       bitField0_ |= 0x00000008;
       return this;
+    }
+
+    private com.google.type.Money unclearedBalance_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> unclearedBalanceBuilder_;
+    /**
+     * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+     * @return Whether the unclearedBalance field is set.
+     */
+    public boolean hasUnclearedBalance() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+     * @return The unclearedBalance.
+     */
+    public com.google.type.Money getUnclearedBalance() {
+      if (unclearedBalanceBuilder_ == null) {
+        return unclearedBalance_ == null ? com.google.type.Money.getDefaultInstance() : unclearedBalance_;
+      } else {
+        return unclearedBalanceBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+     */
+    public Builder setUnclearedBalance(com.google.type.Money value) {
+      if (unclearedBalanceBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        unclearedBalance_ = value;
+      } else {
+        unclearedBalanceBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+     */
+    public Builder setUnclearedBalance(
+        com.google.type.Money.Builder builderForValue) {
+      if (unclearedBalanceBuilder_ == null) {
+        unclearedBalance_ = builderForValue.build();
+      } else {
+        unclearedBalanceBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+     */
+    public Builder mergeUnclearedBalance(com.google.type.Money value) {
+      if (unclearedBalanceBuilder_ == null) {
+        if (((bitField0_ & 0x00000010) != 0) &&
+          unclearedBalance_ != null &&
+          unclearedBalance_ != com.google.type.Money.getDefaultInstance()) {
+          getUnclearedBalanceBuilder().mergeFrom(value);
+        } else {
+          unclearedBalance_ = value;
+        }
+      } else {
+        unclearedBalanceBuilder_.mergeFrom(value);
+      }
+      if (unclearedBalance_ != null) {
+        bitField0_ |= 0x00000010;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+     */
+    public Builder clearUnclearedBalance() {
+      bitField0_ = (bitField0_ & ~0x00000010);
+      unclearedBalance_ = null;
+      if (unclearedBalanceBuilder_ != null) {
+        unclearedBalanceBuilder_.dispose();
+        unclearedBalanceBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+     */
+    public com.google.type.Money.Builder getUnclearedBalanceBuilder() {
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return getUnclearedBalanceFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+     */
+    public com.google.type.MoneyOrBuilder getUnclearedBalanceOrBuilder() {
+      if (unclearedBalanceBuilder_ != null) {
+        return unclearedBalanceBuilder_.getMessageOrBuilder();
+      } else {
+        return unclearedBalance_ == null ?
+            com.google.type.Money.getDefaultInstance() : unclearedBalance_;
+      }
+    }
+    /**
+     * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> 
+        getUnclearedBalanceFieldBuilder() {
+      if (unclearedBalanceBuilder_ == null) {
+        unclearedBalanceBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder>(
+                getUnclearedBalance(),
+                getParentForChildren(),
+                isClean());
+        unclearedBalance_ = null;
+      }
+      return unclearedBalanceBuilder_;
+    }
+
+    private com.google.type.Money reservedBalance_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> reservedBalanceBuilder_;
+    /**
+     * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+     * @return Whether the reservedBalance field is set.
+     */
+    public boolean hasReservedBalance() {
+      return ((bitField0_ & 0x00000020) != 0);
+    }
+    /**
+     * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+     * @return The reservedBalance.
+     */
+    public com.google.type.Money getReservedBalance() {
+      if (reservedBalanceBuilder_ == null) {
+        return reservedBalance_ == null ? com.google.type.Money.getDefaultInstance() : reservedBalance_;
+      } else {
+        return reservedBalanceBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+     */
+    public Builder setReservedBalance(com.google.type.Money value) {
+      if (reservedBalanceBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        reservedBalance_ = value;
+      } else {
+        reservedBalanceBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+     */
+    public Builder setReservedBalance(
+        com.google.type.Money.Builder builderForValue) {
+      if (reservedBalanceBuilder_ == null) {
+        reservedBalance_ = builderForValue.build();
+      } else {
+        reservedBalanceBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+     */
+    public Builder mergeReservedBalance(com.google.type.Money value) {
+      if (reservedBalanceBuilder_ == null) {
+        if (((bitField0_ & 0x00000020) != 0) &&
+          reservedBalance_ != null &&
+          reservedBalance_ != com.google.type.Money.getDefaultInstance()) {
+          getReservedBalanceBuilder().mergeFrom(value);
+        } else {
+          reservedBalance_ = value;
+        }
+      } else {
+        reservedBalanceBuilder_.mergeFrom(value);
+      }
+      if (reservedBalance_ != null) {
+        bitField0_ |= 0x00000020;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+     */
+    public Builder clearReservedBalance() {
+      bitField0_ = (bitField0_ & ~0x00000020);
+      reservedBalance_ = null;
+      if (reservedBalanceBuilder_ != null) {
+        reservedBalanceBuilder_.dispose();
+        reservedBalanceBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+     */
+    public com.google.type.Money.Builder getReservedBalanceBuilder() {
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return getReservedBalanceFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+     */
+    public com.google.type.MoneyOrBuilder getReservedBalanceOrBuilder() {
+      if (reservedBalanceBuilder_ != null) {
+        return reservedBalanceBuilder_.getMessageOrBuilder();
+      } else {
+        return reservedBalance_ == null ?
+            com.google.type.Money.getDefaultInstance() : reservedBalance_;
+      }
+    }
+    /**
+     * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> 
+        getReservedBalanceFieldBuilder() {
+      if (reservedBalanceBuilder_ == null) {
+        reservedBalanceBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder>(
+                getReservedBalance(),
+                getParentForChildren(),
+                isClean());
+        reservedBalance_ = null;
+      }
+      return reservedBalanceBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

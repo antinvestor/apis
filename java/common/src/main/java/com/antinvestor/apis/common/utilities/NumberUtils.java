@@ -17,10 +17,18 @@ package com.antinvestor.apis.common.utilities;
 import com.antinvestor.apis.common.exceptions.STATUSCODES;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.text.NumberFormat;
 import java.text.ParseException;
 
-public class NumberUtils {
+public interface NumberUtils {
+
+    public static final BigDecimal NANO_DIVISOR = BigDecimal.valueOf(Math.pow(10, 9));
+
+    public static MathContext mathContext() {
+        return MathContext.DECIMAL128;
+    }
 
     public static Long toLong(String longString) throws UnRetriableException {
 

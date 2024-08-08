@@ -15,7 +15,6 @@ import (
 
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
-	metadata "google.golang.org/grpc/metadata"
 )
 
 // MockPropertyServiceClient is a mock of PropertyServiceClient interface.
@@ -182,14 +181,14 @@ func (mr *MockPropertyServiceClientMockRecorder) DeleteSubscription(ctx, in any,
 }
 
 // HistoryOfProperty mocks base method.
-func (m *MockPropertyServiceClient) HistoryOfProperty(ctx context.Context, in *HistoryOfPropertyRequest, opts ...grpc.CallOption) (PropertyService_HistoryOfPropertyClient, error) {
+func (m *MockPropertyServiceClient) HistoryOfProperty(ctx context.Context, in *HistoryOfPropertyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HistoryOfPropertyResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "HistoryOfProperty", varargs...)
-	ret0, _ := ret[0].(PropertyService_HistoryOfPropertyClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[HistoryOfPropertyResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -202,14 +201,14 @@ func (mr *MockPropertyServiceClientMockRecorder) HistoryOfProperty(ctx, in any, 
 }
 
 // ListPropertyType mocks base method.
-func (m *MockPropertyServiceClient) ListPropertyType(ctx context.Context, in *ListPropertyTypeRequest, opts ...grpc.CallOption) (PropertyService_ListPropertyTypeClient, error) {
+func (m *MockPropertyServiceClient) ListPropertyType(ctx context.Context, in *ListPropertyTypeRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListPropertyTypeResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListPropertyType", varargs...)
-	ret0, _ := ret[0].(PropertyService_ListPropertyTypeClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListPropertyTypeResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -222,14 +221,14 @@ func (mr *MockPropertyServiceClientMockRecorder) ListPropertyType(ctx, in any, o
 }
 
 // ListSubscription mocks base method.
-func (m *MockPropertyServiceClient) ListSubscription(ctx context.Context, in *ListSubscriptionRequest, opts ...grpc.CallOption) (PropertyService_ListSubscriptionClient, error) {
+func (m *MockPropertyServiceClient) ListSubscription(ctx context.Context, in *ListSubscriptionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListSubscriptionResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListSubscription", varargs...)
-	ret0, _ := ret[0].(PropertyService_ListSubscriptionClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListSubscriptionResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -242,14 +241,14 @@ func (mr *MockPropertyServiceClientMockRecorder) ListSubscription(ctx, in any, o
 }
 
 // SearchProperty mocks base method.
-func (m *MockPropertyServiceClient) SearchProperty(ctx context.Context, in *SearchPropertyRequest, opts ...grpc.CallOption) (PropertyService_SearchPropertyClient, error) {
+func (m *MockPropertyServiceClient) SearchProperty(ctx context.Context, in *SearchPropertyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchPropertyResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchProperty", varargs...)
-	ret0, _ := ret[0].(PropertyService_SearchPropertyClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[SearchPropertyResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -299,498 +298,6 @@ func (mr *MockPropertyServiceClientMockRecorder) UpdateProperty(ctx, in any, opt
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateProperty", reflect.TypeOf((*MockPropertyServiceClient)(nil).UpdateProperty), varargs...)
-}
-
-// MockPropertyService_ListPropertyTypeClient is a mock of PropertyService_ListPropertyTypeClient interface.
-type MockPropertyService_ListPropertyTypeClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockPropertyService_ListPropertyTypeClientMockRecorder
-}
-
-// MockPropertyService_ListPropertyTypeClientMockRecorder is the mock recorder for MockPropertyService_ListPropertyTypeClient.
-type MockPropertyService_ListPropertyTypeClientMockRecorder struct {
-	mock *MockPropertyService_ListPropertyTypeClient
-}
-
-// NewMockPropertyService_ListPropertyTypeClient creates a new mock instance.
-func NewMockPropertyService_ListPropertyTypeClient(ctrl *gomock.Controller) *MockPropertyService_ListPropertyTypeClient {
-	mock := &MockPropertyService_ListPropertyTypeClient{ctrl: ctrl}
-	mock.recorder = &MockPropertyService_ListPropertyTypeClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPropertyService_ListPropertyTypeClient) EXPECT() *MockPropertyService_ListPropertyTypeClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockPropertyService_ListPropertyTypeClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockPropertyService_ListPropertyTypeClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockPropertyService_ListPropertyTypeClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockPropertyService_ListPropertyTypeClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPropertyService_ListPropertyTypeClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPropertyService_ListPropertyTypeClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockPropertyService_ListPropertyTypeClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockPropertyService_ListPropertyTypeClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockPropertyService_ListPropertyTypeClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockPropertyService_ListPropertyTypeClient) Recv() (*ListPropertyTypeResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*ListPropertyTypeResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockPropertyService_ListPropertyTypeClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockPropertyService_ListPropertyTypeClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPropertyService_ListPropertyTypeClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPropertyService_ListPropertyTypeClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPropertyService_ListPropertyTypeClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPropertyService_ListPropertyTypeClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPropertyService_ListPropertyTypeClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPropertyService_ListPropertyTypeClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockPropertyService_ListPropertyTypeClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockPropertyService_ListPropertyTypeClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockPropertyService_ListPropertyTypeClient)(nil).Trailer))
-}
-
-// MockPropertyService_HistoryOfPropertyClient is a mock of PropertyService_HistoryOfPropertyClient interface.
-type MockPropertyService_HistoryOfPropertyClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockPropertyService_HistoryOfPropertyClientMockRecorder
-}
-
-// MockPropertyService_HistoryOfPropertyClientMockRecorder is the mock recorder for MockPropertyService_HistoryOfPropertyClient.
-type MockPropertyService_HistoryOfPropertyClientMockRecorder struct {
-	mock *MockPropertyService_HistoryOfPropertyClient
-}
-
-// NewMockPropertyService_HistoryOfPropertyClient creates a new mock instance.
-func NewMockPropertyService_HistoryOfPropertyClient(ctrl *gomock.Controller) *MockPropertyService_HistoryOfPropertyClient {
-	mock := &MockPropertyService_HistoryOfPropertyClient{ctrl: ctrl}
-	mock.recorder = &MockPropertyService_HistoryOfPropertyClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPropertyService_HistoryOfPropertyClient) EXPECT() *MockPropertyService_HistoryOfPropertyClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockPropertyService_HistoryOfPropertyClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockPropertyService_HistoryOfPropertyClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockPropertyService_HistoryOfPropertyClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPropertyService_HistoryOfPropertyClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockPropertyService_HistoryOfPropertyClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockPropertyService_HistoryOfPropertyClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockPropertyService_HistoryOfPropertyClient) Recv() (*HistoryOfPropertyResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*HistoryOfPropertyResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockPropertyService_HistoryOfPropertyClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPropertyService_HistoryOfPropertyClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPropertyService_HistoryOfPropertyClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPropertyService_HistoryOfPropertyClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPropertyService_HistoryOfPropertyClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockPropertyService_HistoryOfPropertyClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockPropertyService_HistoryOfPropertyClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyClient)(nil).Trailer))
-}
-
-// MockPropertyService_SearchPropertyClient is a mock of PropertyService_SearchPropertyClient interface.
-type MockPropertyService_SearchPropertyClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockPropertyService_SearchPropertyClientMockRecorder
-}
-
-// MockPropertyService_SearchPropertyClientMockRecorder is the mock recorder for MockPropertyService_SearchPropertyClient.
-type MockPropertyService_SearchPropertyClientMockRecorder struct {
-	mock *MockPropertyService_SearchPropertyClient
-}
-
-// NewMockPropertyService_SearchPropertyClient creates a new mock instance.
-func NewMockPropertyService_SearchPropertyClient(ctrl *gomock.Controller) *MockPropertyService_SearchPropertyClient {
-	mock := &MockPropertyService_SearchPropertyClient{ctrl: ctrl}
-	mock.recorder = &MockPropertyService_SearchPropertyClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPropertyService_SearchPropertyClient) EXPECT() *MockPropertyService_SearchPropertyClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockPropertyService_SearchPropertyClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockPropertyService_SearchPropertyClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockPropertyService_SearchPropertyClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockPropertyService_SearchPropertyClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPropertyService_SearchPropertyClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPropertyService_SearchPropertyClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockPropertyService_SearchPropertyClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockPropertyService_SearchPropertyClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockPropertyService_SearchPropertyClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockPropertyService_SearchPropertyClient) Recv() (*SearchPropertyResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*SearchPropertyResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockPropertyService_SearchPropertyClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockPropertyService_SearchPropertyClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPropertyService_SearchPropertyClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPropertyService_SearchPropertyClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPropertyService_SearchPropertyClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPropertyService_SearchPropertyClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPropertyService_SearchPropertyClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPropertyService_SearchPropertyClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockPropertyService_SearchPropertyClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockPropertyService_SearchPropertyClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockPropertyService_SearchPropertyClient)(nil).Trailer))
-}
-
-// MockPropertyService_ListSubscriptionClient is a mock of PropertyService_ListSubscriptionClient interface.
-type MockPropertyService_ListSubscriptionClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockPropertyService_ListSubscriptionClientMockRecorder
-}
-
-// MockPropertyService_ListSubscriptionClientMockRecorder is the mock recorder for MockPropertyService_ListSubscriptionClient.
-type MockPropertyService_ListSubscriptionClientMockRecorder struct {
-	mock *MockPropertyService_ListSubscriptionClient
-}
-
-// NewMockPropertyService_ListSubscriptionClient creates a new mock instance.
-func NewMockPropertyService_ListSubscriptionClient(ctrl *gomock.Controller) *MockPropertyService_ListSubscriptionClient {
-	mock := &MockPropertyService_ListSubscriptionClient{ctrl: ctrl}
-	mock.recorder = &MockPropertyService_ListSubscriptionClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPropertyService_ListSubscriptionClient) EXPECT() *MockPropertyService_ListSubscriptionClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockPropertyService_ListSubscriptionClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockPropertyService_ListSubscriptionClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockPropertyService_ListSubscriptionClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockPropertyService_ListSubscriptionClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPropertyService_ListSubscriptionClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPropertyService_ListSubscriptionClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockPropertyService_ListSubscriptionClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockPropertyService_ListSubscriptionClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockPropertyService_ListSubscriptionClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockPropertyService_ListSubscriptionClient) Recv() (*ListSubscriptionResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*ListSubscriptionResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockPropertyService_ListSubscriptionClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockPropertyService_ListSubscriptionClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPropertyService_ListSubscriptionClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPropertyService_ListSubscriptionClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPropertyService_ListSubscriptionClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPropertyService_ListSubscriptionClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPropertyService_ListSubscriptionClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPropertyService_ListSubscriptionClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockPropertyService_ListSubscriptionClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockPropertyService_ListSubscriptionClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockPropertyService_ListSubscriptionClient)(nil).Trailer))
 }
 
 // MockPropertyServiceServer is a mock of PropertyServiceServer interface.
@@ -922,7 +429,7 @@ func (mr *MockPropertyServiceServerMockRecorder) DeleteSubscription(arg0, arg1 a
 }
 
 // HistoryOfProperty mocks base method.
-func (m *MockPropertyServiceServer) HistoryOfProperty(arg0 *HistoryOfPropertyRequest, arg1 PropertyService_HistoryOfPropertyServer) error {
+func (m *MockPropertyServiceServer) HistoryOfProperty(arg0 *HistoryOfPropertyRequest, arg1 grpc.ServerStreamingServer[HistoryOfPropertyResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "HistoryOfProperty", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -936,7 +443,7 @@ func (mr *MockPropertyServiceServerMockRecorder) HistoryOfProperty(arg0, arg1 an
 }
 
 // ListPropertyType mocks base method.
-func (m *MockPropertyServiceServer) ListPropertyType(arg0 *ListPropertyTypeRequest, arg1 PropertyService_ListPropertyTypeServer) error {
+func (m *MockPropertyServiceServer) ListPropertyType(arg0 *ListPropertyTypeRequest, arg1 grpc.ServerStreamingServer[ListPropertyTypeResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListPropertyType", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -950,7 +457,7 @@ func (mr *MockPropertyServiceServerMockRecorder) ListPropertyType(arg0, arg1 any
 }
 
 // ListSubscription mocks base method.
-func (m *MockPropertyServiceServer) ListSubscription(arg0 *ListSubscriptionRequest, arg1 PropertyService_ListSubscriptionServer) error {
+func (m *MockPropertyServiceServer) ListSubscription(arg0 *ListSubscriptionRequest, arg1 grpc.ServerStreamingServer[ListSubscriptionResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListSubscription", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -964,7 +471,7 @@ func (mr *MockPropertyServiceServerMockRecorder) ListSubscription(arg0, arg1 any
 }
 
 // SearchProperty mocks base method.
-func (m *MockPropertyServiceServer) SearchProperty(arg0 *SearchPropertyRequest, arg1 PropertyService_SearchPropertyServer) error {
+func (m *MockPropertyServiceServer) SearchProperty(arg0 *SearchPropertyRequest, arg1 grpc.ServerStreamingServer[SearchPropertyResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchProperty", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -1052,480 +559,4 @@ func (m *MockUnsafePropertyServiceServer) mustEmbedUnimplementedPropertyServiceS
 func (mr *MockUnsafePropertyServiceServerMockRecorder) mustEmbedUnimplementedPropertyServiceServer() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedPropertyServiceServer", reflect.TypeOf((*MockUnsafePropertyServiceServer)(nil).mustEmbedUnimplementedPropertyServiceServer))
-}
-
-// MockPropertyService_ListPropertyTypeServer is a mock of PropertyService_ListPropertyTypeServer interface.
-type MockPropertyService_ListPropertyTypeServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockPropertyService_ListPropertyTypeServerMockRecorder
-}
-
-// MockPropertyService_ListPropertyTypeServerMockRecorder is the mock recorder for MockPropertyService_ListPropertyTypeServer.
-type MockPropertyService_ListPropertyTypeServerMockRecorder struct {
-	mock *MockPropertyService_ListPropertyTypeServer
-}
-
-// NewMockPropertyService_ListPropertyTypeServer creates a new mock instance.
-func NewMockPropertyService_ListPropertyTypeServer(ctrl *gomock.Controller) *MockPropertyService_ListPropertyTypeServer {
-	mock := &MockPropertyService_ListPropertyTypeServer{ctrl: ctrl}
-	mock.recorder = &MockPropertyService_ListPropertyTypeServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPropertyService_ListPropertyTypeServer) EXPECT() *MockPropertyService_ListPropertyTypeServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockPropertyService_ListPropertyTypeServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPropertyService_ListPropertyTypeServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPropertyService_ListPropertyTypeServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPropertyService_ListPropertyTypeServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPropertyService_ListPropertyTypeServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPropertyService_ListPropertyTypeServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockPropertyService_ListPropertyTypeServer) Send(arg0 *ListPropertyTypeResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockPropertyService_ListPropertyTypeServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockPropertyService_ListPropertyTypeServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockPropertyService_ListPropertyTypeServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockPropertyService_ListPropertyTypeServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockPropertyService_ListPropertyTypeServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPropertyService_ListPropertyTypeServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPropertyService_ListPropertyTypeServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPropertyService_ListPropertyTypeServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockPropertyService_ListPropertyTypeServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockPropertyService_ListPropertyTypeServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockPropertyService_ListPropertyTypeServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockPropertyService_ListPropertyTypeServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockPropertyService_ListPropertyTypeServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockPropertyService_ListPropertyTypeServer)(nil).SetTrailer), arg0)
-}
-
-// MockPropertyService_HistoryOfPropertyServer is a mock of PropertyService_HistoryOfPropertyServer interface.
-type MockPropertyService_HistoryOfPropertyServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockPropertyService_HistoryOfPropertyServerMockRecorder
-}
-
-// MockPropertyService_HistoryOfPropertyServerMockRecorder is the mock recorder for MockPropertyService_HistoryOfPropertyServer.
-type MockPropertyService_HistoryOfPropertyServerMockRecorder struct {
-	mock *MockPropertyService_HistoryOfPropertyServer
-}
-
-// NewMockPropertyService_HistoryOfPropertyServer creates a new mock instance.
-func NewMockPropertyService_HistoryOfPropertyServer(ctrl *gomock.Controller) *MockPropertyService_HistoryOfPropertyServer {
-	mock := &MockPropertyService_HistoryOfPropertyServer{ctrl: ctrl}
-	mock.recorder = &MockPropertyService_HistoryOfPropertyServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPropertyService_HistoryOfPropertyServer) EXPECT() *MockPropertyService_HistoryOfPropertyServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockPropertyService_HistoryOfPropertyServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPropertyService_HistoryOfPropertyServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPropertyService_HistoryOfPropertyServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPropertyService_HistoryOfPropertyServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockPropertyService_HistoryOfPropertyServer) Send(arg0 *HistoryOfPropertyResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockPropertyService_HistoryOfPropertyServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockPropertyService_HistoryOfPropertyServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockPropertyService_HistoryOfPropertyServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPropertyService_HistoryOfPropertyServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPropertyService_HistoryOfPropertyServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockPropertyService_HistoryOfPropertyServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockPropertyService_HistoryOfPropertyServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockPropertyService_HistoryOfPropertyServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockPropertyService_HistoryOfPropertyServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockPropertyService_HistoryOfPropertyServer)(nil).SetTrailer), arg0)
-}
-
-// MockPropertyService_SearchPropertyServer is a mock of PropertyService_SearchPropertyServer interface.
-type MockPropertyService_SearchPropertyServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockPropertyService_SearchPropertyServerMockRecorder
-}
-
-// MockPropertyService_SearchPropertyServerMockRecorder is the mock recorder for MockPropertyService_SearchPropertyServer.
-type MockPropertyService_SearchPropertyServerMockRecorder struct {
-	mock *MockPropertyService_SearchPropertyServer
-}
-
-// NewMockPropertyService_SearchPropertyServer creates a new mock instance.
-func NewMockPropertyService_SearchPropertyServer(ctrl *gomock.Controller) *MockPropertyService_SearchPropertyServer {
-	mock := &MockPropertyService_SearchPropertyServer{ctrl: ctrl}
-	mock.recorder = &MockPropertyService_SearchPropertyServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPropertyService_SearchPropertyServer) EXPECT() *MockPropertyService_SearchPropertyServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockPropertyService_SearchPropertyServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPropertyService_SearchPropertyServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPropertyService_SearchPropertyServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPropertyService_SearchPropertyServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPropertyService_SearchPropertyServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPropertyService_SearchPropertyServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockPropertyService_SearchPropertyServer) Send(arg0 *SearchPropertyResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockPropertyService_SearchPropertyServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockPropertyService_SearchPropertyServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockPropertyService_SearchPropertyServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockPropertyService_SearchPropertyServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockPropertyService_SearchPropertyServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPropertyService_SearchPropertyServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPropertyService_SearchPropertyServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPropertyService_SearchPropertyServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockPropertyService_SearchPropertyServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockPropertyService_SearchPropertyServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockPropertyService_SearchPropertyServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockPropertyService_SearchPropertyServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockPropertyService_SearchPropertyServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockPropertyService_SearchPropertyServer)(nil).SetTrailer), arg0)
-}
-
-// MockPropertyService_ListSubscriptionServer is a mock of PropertyService_ListSubscriptionServer interface.
-type MockPropertyService_ListSubscriptionServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockPropertyService_ListSubscriptionServerMockRecorder
-}
-
-// MockPropertyService_ListSubscriptionServerMockRecorder is the mock recorder for MockPropertyService_ListSubscriptionServer.
-type MockPropertyService_ListSubscriptionServerMockRecorder struct {
-	mock *MockPropertyService_ListSubscriptionServer
-}
-
-// NewMockPropertyService_ListSubscriptionServer creates a new mock instance.
-func NewMockPropertyService_ListSubscriptionServer(ctrl *gomock.Controller) *MockPropertyService_ListSubscriptionServer {
-	mock := &MockPropertyService_ListSubscriptionServer{ctrl: ctrl}
-	mock.recorder = &MockPropertyService_ListSubscriptionServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPropertyService_ListSubscriptionServer) EXPECT() *MockPropertyService_ListSubscriptionServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockPropertyService_ListSubscriptionServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPropertyService_ListSubscriptionServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPropertyService_ListSubscriptionServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPropertyService_ListSubscriptionServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPropertyService_ListSubscriptionServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPropertyService_ListSubscriptionServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockPropertyService_ListSubscriptionServer) Send(arg0 *ListSubscriptionResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockPropertyService_ListSubscriptionServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockPropertyService_ListSubscriptionServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockPropertyService_ListSubscriptionServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockPropertyService_ListSubscriptionServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockPropertyService_ListSubscriptionServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPropertyService_ListSubscriptionServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPropertyService_ListSubscriptionServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPropertyService_ListSubscriptionServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockPropertyService_ListSubscriptionServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockPropertyService_ListSubscriptionServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockPropertyService_ListSubscriptionServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockPropertyService_ListSubscriptionServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockPropertyService_ListSubscriptionServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockPropertyService_ListSubscriptionServer)(nil).SetTrailer), arg0)
 }

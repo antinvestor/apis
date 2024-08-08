@@ -93,4 +93,16 @@ public interface TransactionEntryOrBuilder extends
    * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
    */
   com.google.type.MoneyOrBuilder getAccBalanceOrBuilder();
+
+  /**
+   * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
+   * @return The clearedAt.
+   */
+  java.lang.String getClearedAt();
+  /**
+   * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
+   * @return The bytes for clearedAt.
+   */
+  com.google.protobuf.ByteString
+      getClearedAtBytes();
 }

@@ -16,7 +16,6 @@ import (
 	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
-	metadata "google.golang.org/grpc/metadata"
 )
 
 // MockNotificationServiceClient is a mock of NotificationServiceClient interface.
@@ -83,14 +82,14 @@ func (mr *MockNotificationServiceClientMockRecorder) Release(ctx, in any, opts .
 }
 
 // Search mocks base method.
-func (m *MockNotificationServiceClient) Search(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (NotificationService_SearchClient, error) {
+func (m *MockNotificationServiceClient) Search(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Search", varargs...)
-	ret0, _ := ret[0].(NotificationService_SearchClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[SearchResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -183,14 +182,14 @@ func (mr *MockNotificationServiceClientMockRecorder) TemplateSave(ctx, in any, o
 }
 
 // TemplateSearch mocks base method.
-func (m *MockNotificationServiceClient) TemplateSearch(ctx context.Context, in *TemplateSearchRequest, opts ...grpc.CallOption) (NotificationService_TemplateSearchClient, error) {
+func (m *MockNotificationServiceClient) TemplateSearch(ctx context.Context, in *TemplateSearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TemplateSearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "TemplateSearch", varargs...)
-	ret0, _ := ret[0].(NotificationService_TemplateSearchClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[TemplateSearchResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -200,252 +199,6 @@ func (mr *MockNotificationServiceClientMockRecorder) TemplateSearch(ctx, in any,
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TemplateSearch", reflect.TypeOf((*MockNotificationServiceClient)(nil).TemplateSearch), varargs...)
-}
-
-// MockNotificationService_SearchClient is a mock of NotificationService_SearchClient interface.
-type MockNotificationService_SearchClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockNotificationService_SearchClientMockRecorder
-}
-
-// MockNotificationService_SearchClientMockRecorder is the mock recorder for MockNotificationService_SearchClient.
-type MockNotificationService_SearchClientMockRecorder struct {
-	mock *MockNotificationService_SearchClient
-}
-
-// NewMockNotificationService_SearchClient creates a new mock instance.
-func NewMockNotificationService_SearchClient(ctrl *gomock.Controller) *MockNotificationService_SearchClient {
-	mock := &MockNotificationService_SearchClient{ctrl: ctrl}
-	mock.recorder = &MockNotificationService_SearchClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockNotificationService_SearchClient) EXPECT() *MockNotificationService_SearchClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockNotificationService_SearchClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockNotificationService_SearchClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockNotificationService_SearchClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockNotificationService_SearchClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockNotificationService_SearchClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockNotificationService_SearchClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockNotificationService_SearchClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockNotificationService_SearchClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockNotificationService_SearchClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockNotificationService_SearchClient) Recv() (*SearchResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*SearchResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockNotificationService_SearchClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockNotificationService_SearchClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockNotificationService_SearchClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockNotificationService_SearchClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockNotificationService_SearchClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockNotificationService_SearchClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockNotificationService_SearchClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockNotificationService_SearchClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockNotificationService_SearchClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockNotificationService_SearchClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockNotificationService_SearchClient)(nil).Trailer))
-}
-
-// MockNotificationService_TemplateSearchClient is a mock of NotificationService_TemplateSearchClient interface.
-type MockNotificationService_TemplateSearchClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockNotificationService_TemplateSearchClientMockRecorder
-}
-
-// MockNotificationService_TemplateSearchClientMockRecorder is the mock recorder for MockNotificationService_TemplateSearchClient.
-type MockNotificationService_TemplateSearchClientMockRecorder struct {
-	mock *MockNotificationService_TemplateSearchClient
-}
-
-// NewMockNotificationService_TemplateSearchClient creates a new mock instance.
-func NewMockNotificationService_TemplateSearchClient(ctrl *gomock.Controller) *MockNotificationService_TemplateSearchClient {
-	mock := &MockNotificationService_TemplateSearchClient{ctrl: ctrl}
-	mock.recorder = &MockNotificationService_TemplateSearchClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockNotificationService_TemplateSearchClient) EXPECT() *MockNotificationService_TemplateSearchClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockNotificationService_TemplateSearchClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockNotificationService_TemplateSearchClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockNotificationService_TemplateSearchClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockNotificationService_TemplateSearchClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockNotificationService_TemplateSearchClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockNotificationService_TemplateSearchClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockNotificationService_TemplateSearchClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockNotificationService_TemplateSearchClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockNotificationService_TemplateSearchClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockNotificationService_TemplateSearchClient) Recv() (*TemplateSearchResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*TemplateSearchResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockNotificationService_TemplateSearchClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockNotificationService_TemplateSearchClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockNotificationService_TemplateSearchClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockNotificationService_TemplateSearchClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockNotificationService_TemplateSearchClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockNotificationService_TemplateSearchClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockNotificationService_TemplateSearchClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockNotificationService_TemplateSearchClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockNotificationService_TemplateSearchClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockNotificationService_TemplateSearchClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockNotificationService_TemplateSearchClient)(nil).Trailer))
 }
 
 // MockNotificationServiceServer is a mock of NotificationServiceServer interface.
@@ -502,7 +255,7 @@ func (mr *MockNotificationServiceServerMockRecorder) Release(arg0, arg1 any) *go
 }
 
 // Search mocks base method.
-func (m *MockNotificationServiceServer) Search(arg0 *commonv1.SearchRequest, arg1 NotificationService_SearchServer) error {
+func (m *MockNotificationServiceServer) Search(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[SearchResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -576,7 +329,7 @@ func (mr *MockNotificationServiceServerMockRecorder) TemplateSave(arg0, arg1 any
 }
 
 // TemplateSearch mocks base method.
-func (m *MockNotificationServiceServer) TemplateSearch(arg0 *TemplateSearchRequest, arg1 NotificationService_TemplateSearchServer) error {
+func (m *MockNotificationServiceServer) TemplateSearch(arg0 *TemplateSearchRequest, arg1 grpc.ServerStreamingServer[TemplateSearchResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "TemplateSearch", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -634,242 +387,4 @@ func (m *MockUnsafeNotificationServiceServer) mustEmbedUnimplementedNotification
 func (mr *MockUnsafeNotificationServiceServerMockRecorder) mustEmbedUnimplementedNotificationServiceServer() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedNotificationServiceServer", reflect.TypeOf((*MockUnsafeNotificationServiceServer)(nil).mustEmbedUnimplementedNotificationServiceServer))
-}
-
-// MockNotificationService_SearchServer is a mock of NotificationService_SearchServer interface.
-type MockNotificationService_SearchServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockNotificationService_SearchServerMockRecorder
-}
-
-// MockNotificationService_SearchServerMockRecorder is the mock recorder for MockNotificationService_SearchServer.
-type MockNotificationService_SearchServerMockRecorder struct {
-	mock *MockNotificationService_SearchServer
-}
-
-// NewMockNotificationService_SearchServer creates a new mock instance.
-func NewMockNotificationService_SearchServer(ctrl *gomock.Controller) *MockNotificationService_SearchServer {
-	mock := &MockNotificationService_SearchServer{ctrl: ctrl}
-	mock.recorder = &MockNotificationService_SearchServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockNotificationService_SearchServer) EXPECT() *MockNotificationService_SearchServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockNotificationService_SearchServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockNotificationService_SearchServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockNotificationService_SearchServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockNotificationService_SearchServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockNotificationService_SearchServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockNotificationService_SearchServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockNotificationService_SearchServer) Send(arg0 *SearchResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockNotificationService_SearchServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockNotificationService_SearchServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockNotificationService_SearchServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockNotificationService_SearchServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockNotificationService_SearchServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockNotificationService_SearchServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockNotificationService_SearchServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockNotificationService_SearchServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockNotificationService_SearchServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockNotificationService_SearchServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockNotificationService_SearchServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockNotificationService_SearchServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockNotificationService_SearchServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockNotificationService_SearchServer)(nil).SetTrailer), arg0)
-}
-
-// MockNotificationService_TemplateSearchServer is a mock of NotificationService_TemplateSearchServer interface.
-type MockNotificationService_TemplateSearchServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockNotificationService_TemplateSearchServerMockRecorder
-}
-
-// MockNotificationService_TemplateSearchServerMockRecorder is the mock recorder for MockNotificationService_TemplateSearchServer.
-type MockNotificationService_TemplateSearchServerMockRecorder struct {
-	mock *MockNotificationService_TemplateSearchServer
-}
-
-// NewMockNotificationService_TemplateSearchServer creates a new mock instance.
-func NewMockNotificationService_TemplateSearchServer(ctrl *gomock.Controller) *MockNotificationService_TemplateSearchServer {
-	mock := &MockNotificationService_TemplateSearchServer{ctrl: ctrl}
-	mock.recorder = &MockNotificationService_TemplateSearchServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockNotificationService_TemplateSearchServer) EXPECT() *MockNotificationService_TemplateSearchServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockNotificationService_TemplateSearchServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockNotificationService_TemplateSearchServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockNotificationService_TemplateSearchServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockNotificationService_TemplateSearchServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockNotificationService_TemplateSearchServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockNotificationService_TemplateSearchServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockNotificationService_TemplateSearchServer) Send(arg0 *TemplateSearchResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockNotificationService_TemplateSearchServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockNotificationService_TemplateSearchServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockNotificationService_TemplateSearchServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockNotificationService_TemplateSearchServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockNotificationService_TemplateSearchServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockNotificationService_TemplateSearchServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockNotificationService_TemplateSearchServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockNotificationService_TemplateSearchServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockNotificationService_TemplateSearchServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockNotificationService_TemplateSearchServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockNotificationService_TemplateSearchServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockNotificationService_TemplateSearchServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockNotificationService_TemplateSearchServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockNotificationService_TemplateSearchServer)(nil).SetTrailer), arg0)
 }

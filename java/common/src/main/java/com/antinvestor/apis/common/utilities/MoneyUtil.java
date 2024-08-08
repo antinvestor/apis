@@ -19,19 +19,16 @@ import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.google.type.Money;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Objects;
 
 public class MoneyUtil {
 
-    private static final BigDecimal NANO_DIVISOR = BigDecimal.valueOf(Math.pow(10, 9));
-    private static final MathContext MONEY_CONTEXT = MathContext.DECIMAL128;
 
     public static Money from(BigDecimal amount, String currency) {
 
         long units = amount.longValue();
-        int nanos = amount.subtract(new BigDecimal(units)).multiply(NANO_DIVISOR).intValue();
+        int nanos = amount.subtract(new BigDecimal(units)).multiply(NumberUtils.NANO_DIVISOR).intValue();
 
         return Money.newBuilder()
                 .setCurrencyCode(currency)
@@ -42,7 +39,7 @@ public class MoneyUtil {
 
 
     public static BigDecimal toBigDecimal(Money money) {
-        return new BigDecimal(money.getUnits()).add(new BigDecimal(money.getNanos()).divide(NANO_DIVISOR, MONEY_CONTEXT ));
+        return new BigDecimal(money.getUnits()).add(new BigDecimal(money.getNanos()).divide(NumberUtils.NANO_DIVISOR, NumberUtils.mathContext()));
     }
 
     public static String toString(Money money) {
@@ -66,7 +63,7 @@ public class MoneyUtil {
     }
 
     public static boolean isGreaterThanZero(Money money) throws UnRetriableException {
-        return isGreaterThan(money, zeroMoney( money.getCurrencyCode()));
+        return isGreaterThan(money, zeroMoney(money.getCurrencyCode()));
     }
 
     public static boolean isLessThan(Money a, Money b) throws UnRetriableException {
@@ -119,7 +116,7 @@ public class MoneyUtil {
             throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to divide with nulls ");
         }
 
-        return from(toBigDecimal(a).divide(b,  RoundingMode.DOWN), a.getCurrencyCode());
+        return from(toBigDecimal(a).divide(b, RoundingMode.DOWN), a.getCurrencyCode());
     }
 
     public static String format(Money money) {
@@ -159,11 +156,4 @@ public class MoneyUtil {
 
         }
     }
-
-    private static void validateBigDecimal(BigDecimal amount) throws UnRetriableException {
-        if (Objects.isNull(amount)) {
-            throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "BigDecimal amount must not be null");
-        }
-    }
-
 }

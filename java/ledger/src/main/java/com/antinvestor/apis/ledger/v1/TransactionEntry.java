@@ -34,6 +34,7 @@ private static final long serialVersionUID = 0L;
     account_ = "";
     transaction_ = "";
     transactedAt_ = "";
+    clearedAt_ = "";
   }
 
   @java.lang.Override
@@ -237,6 +238,45 @@ private static final long serialVersionUID = 0L;
     return accBalance_ == null ? com.google.type.Money.getDefaultInstance() : accBalance_;
   }
 
+  public static final int CLEARED_AT_FIELD_NUMBER = 7;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object clearedAt_ = "";
+  /**
+   * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
+   * @return The clearedAt.
+   */
+  @java.lang.Override
+  public java.lang.String getClearedAt() {
+    java.lang.Object ref = clearedAt_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      clearedAt_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
+   * @return The bytes for clearedAt.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getClearedAtBytes() {
+    java.lang.Object ref = clearedAt_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      clearedAt_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -269,6 +309,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000002) != 0)) {
       output.writeMessage(6, getAccBalance());
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(clearedAt_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, clearedAt_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -298,6 +341,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000002) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(6, getAccBalance());
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(clearedAt_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, clearedAt_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -332,6 +378,8 @@ private static final long serialVersionUID = 0L;
       if (!getAccBalance()
           .equals(other.getAccBalance())) return false;
     }
+    if (!getClearedAt()
+        .equals(other.getClearedAt())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -360,6 +408,8 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + ACC_BALANCE_FIELD_NUMBER;
       hash = (53 * hash) + getAccBalance().hashCode();
     }
+    hash = (37 * hash) + CLEARED_AT_FIELD_NUMBER;
+    hash = (53 * hash) + getClearedAt().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -512,6 +562,7 @@ private static final long serialVersionUID = 0L;
         accBalanceBuilder_.dispose();
         accBalanceBuilder_ = null;
       }
+      clearedAt_ = "";
       return this;
     }
 
@@ -569,6 +620,9 @@ private static final long serialVersionUID = 0L;
             ? accBalance_
             : accBalanceBuilder_.build();
         to_bitField0_ |= 0x00000002;
+      }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        result.clearedAt_ = clearedAt_;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -641,6 +695,11 @@ private static final long serialVersionUID = 0L;
       if (other.hasAccBalance()) {
         mergeAccBalance(other.getAccBalance());
       }
+      if (!other.getClearedAt().isEmpty()) {
+        clearedAt_ = other.clearedAt_;
+        bitField0_ |= 0x00000040;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -701,6 +760,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000020;
               break;
             } // case 50
+            case 58: {
+              clearedAt_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000040;
+              break;
+            } // case 58
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1206,6 +1270,78 @@ private static final long serialVersionUID = 0L;
         accBalance_ = null;
       }
       return accBalanceBuilder_;
+    }
+
+    private java.lang.Object clearedAt_ = "";
+    /**
+     * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
+     * @return The clearedAt.
+     */
+    public java.lang.String getClearedAt() {
+      java.lang.Object ref = clearedAt_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        clearedAt_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
+     * @return The bytes for clearedAt.
+     */
+    public com.google.protobuf.ByteString
+        getClearedAtBytes() {
+      java.lang.Object ref = clearedAt_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clearedAt_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
+     * @param value The clearedAt to set.
+     * @return This builder for chaining.
+     */
+    public Builder setClearedAt(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      clearedAt_ = value;
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearClearedAt() {
+      clearedAt_ = getDefaultInstance().getClearedAt();
+      bitField0_ = (bitField0_ & ~0x00000040);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
+     * @param value The bytes for clearedAt to set.
+     * @return This builder for chaining.
+     */
+    public Builder setClearedAtBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      clearedAt_ = value;
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

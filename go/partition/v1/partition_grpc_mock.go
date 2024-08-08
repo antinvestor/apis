@@ -15,7 +15,6 @@ import (
 
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
-	metadata "google.golang.org/grpc/metadata"
 )
 
 // MockPartitionServiceClient is a mock of PartitionServiceClient interface.
@@ -242,14 +241,14 @@ func (mr *MockPartitionServiceClientMockRecorder) GetTenant(ctx, in any, opts ..
 }
 
 // ListAccessRole mocks base method.
-func (m *MockPartitionServiceClient) ListAccessRole(ctx context.Context, in *ListAccessRoleRequest, opts ...grpc.CallOption) (PartitionService_ListAccessRoleClient, error) {
+func (m *MockPartitionServiceClient) ListAccessRole(ctx context.Context, in *ListAccessRoleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListAccessRoleResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListAccessRole", varargs...)
-	ret0, _ := ret[0].(PartitionService_ListAccessRoleClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListAccessRoleResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -262,14 +261,14 @@ func (mr *MockPartitionServiceClientMockRecorder) ListAccessRole(ctx, in any, op
 }
 
 // ListPartition mocks base method.
-func (m *MockPartitionServiceClient) ListPartition(ctx context.Context, in *ListPartitionRequest, opts ...grpc.CallOption) (PartitionService_ListPartitionClient, error) {
+func (m *MockPartitionServiceClient) ListPartition(ctx context.Context, in *ListPartitionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListPartitionResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListPartition", varargs...)
-	ret0, _ := ret[0].(PartitionService_ListPartitionClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListPartitionResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -282,14 +281,14 @@ func (mr *MockPartitionServiceClientMockRecorder) ListPartition(ctx, in any, opt
 }
 
 // ListPartitionRole mocks base method.
-func (m *MockPartitionServiceClient) ListPartitionRole(ctx context.Context, in *ListPartitionRoleRequest, opts ...grpc.CallOption) (PartitionService_ListPartitionRoleClient, error) {
+func (m *MockPartitionServiceClient) ListPartitionRole(ctx context.Context, in *ListPartitionRoleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListPartitionRoleResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListPartitionRole", varargs...)
-	ret0, _ := ret[0].(PartitionService_ListPartitionRoleClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListPartitionRoleResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -302,14 +301,14 @@ func (mr *MockPartitionServiceClientMockRecorder) ListPartitionRole(ctx, in any,
 }
 
 // ListTenant mocks base method.
-func (m *MockPartitionServiceClient) ListTenant(ctx context.Context, in *ListTenantRequest, opts ...grpc.CallOption) (PartitionService_ListTenantClient, error) {
+func (m *MockPartitionServiceClient) ListTenant(ctx context.Context, in *ListTenantRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListTenantResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListTenant", varargs...)
-	ret0, _ := ret[0].(PartitionService_ListTenantClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListTenantResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -419,498 +418,6 @@ func (mr *MockPartitionServiceClientMockRecorder) UpdatePartition(ctx, in any, o
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdatePartition", reflect.TypeOf((*MockPartitionServiceClient)(nil).UpdatePartition), varargs...)
-}
-
-// MockPartitionService_ListTenantClient is a mock of PartitionService_ListTenantClient interface.
-type MockPartitionService_ListTenantClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockPartitionService_ListTenantClientMockRecorder
-}
-
-// MockPartitionService_ListTenantClientMockRecorder is the mock recorder for MockPartitionService_ListTenantClient.
-type MockPartitionService_ListTenantClientMockRecorder struct {
-	mock *MockPartitionService_ListTenantClient
-}
-
-// NewMockPartitionService_ListTenantClient creates a new mock instance.
-func NewMockPartitionService_ListTenantClient(ctrl *gomock.Controller) *MockPartitionService_ListTenantClient {
-	mock := &MockPartitionService_ListTenantClient{ctrl: ctrl}
-	mock.recorder = &MockPartitionService_ListTenantClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPartitionService_ListTenantClient) EXPECT() *MockPartitionService_ListTenantClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockPartitionService_ListTenantClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockPartitionService_ListTenantClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockPartitionService_ListTenantClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockPartitionService_ListTenantClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPartitionService_ListTenantClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPartitionService_ListTenantClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockPartitionService_ListTenantClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockPartitionService_ListTenantClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockPartitionService_ListTenantClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockPartitionService_ListTenantClient) Recv() (*ListTenantResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*ListTenantResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockPartitionService_ListTenantClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockPartitionService_ListTenantClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPartitionService_ListTenantClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPartitionService_ListTenantClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPartitionService_ListTenantClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPartitionService_ListTenantClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPartitionService_ListTenantClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPartitionService_ListTenantClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockPartitionService_ListTenantClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockPartitionService_ListTenantClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockPartitionService_ListTenantClient)(nil).Trailer))
-}
-
-// MockPartitionService_ListPartitionClient is a mock of PartitionService_ListPartitionClient interface.
-type MockPartitionService_ListPartitionClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockPartitionService_ListPartitionClientMockRecorder
-}
-
-// MockPartitionService_ListPartitionClientMockRecorder is the mock recorder for MockPartitionService_ListPartitionClient.
-type MockPartitionService_ListPartitionClientMockRecorder struct {
-	mock *MockPartitionService_ListPartitionClient
-}
-
-// NewMockPartitionService_ListPartitionClient creates a new mock instance.
-func NewMockPartitionService_ListPartitionClient(ctrl *gomock.Controller) *MockPartitionService_ListPartitionClient {
-	mock := &MockPartitionService_ListPartitionClient{ctrl: ctrl}
-	mock.recorder = &MockPartitionService_ListPartitionClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPartitionService_ListPartitionClient) EXPECT() *MockPartitionService_ListPartitionClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockPartitionService_ListPartitionClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockPartitionService_ListPartitionClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockPartitionService_ListPartitionClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockPartitionService_ListPartitionClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPartitionService_ListPartitionClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPartitionService_ListPartitionClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockPartitionService_ListPartitionClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockPartitionService_ListPartitionClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockPartitionService_ListPartitionClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockPartitionService_ListPartitionClient) Recv() (*ListPartitionResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*ListPartitionResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockPartitionService_ListPartitionClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockPartitionService_ListPartitionClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPartitionService_ListPartitionClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPartitionService_ListPartitionClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPartitionService_ListPartitionClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPartitionService_ListPartitionClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPartitionService_ListPartitionClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPartitionService_ListPartitionClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockPartitionService_ListPartitionClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockPartitionService_ListPartitionClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockPartitionService_ListPartitionClient)(nil).Trailer))
-}
-
-// MockPartitionService_ListPartitionRoleClient is a mock of PartitionService_ListPartitionRoleClient interface.
-type MockPartitionService_ListPartitionRoleClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockPartitionService_ListPartitionRoleClientMockRecorder
-}
-
-// MockPartitionService_ListPartitionRoleClientMockRecorder is the mock recorder for MockPartitionService_ListPartitionRoleClient.
-type MockPartitionService_ListPartitionRoleClientMockRecorder struct {
-	mock *MockPartitionService_ListPartitionRoleClient
-}
-
-// NewMockPartitionService_ListPartitionRoleClient creates a new mock instance.
-func NewMockPartitionService_ListPartitionRoleClient(ctrl *gomock.Controller) *MockPartitionService_ListPartitionRoleClient {
-	mock := &MockPartitionService_ListPartitionRoleClient{ctrl: ctrl}
-	mock.recorder = &MockPartitionService_ListPartitionRoleClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPartitionService_ListPartitionRoleClient) EXPECT() *MockPartitionService_ListPartitionRoleClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockPartitionService_ListPartitionRoleClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockPartitionService_ListPartitionRoleClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockPartitionService_ListPartitionRoleClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockPartitionService_ListPartitionRoleClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPartitionService_ListPartitionRoleClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPartitionService_ListPartitionRoleClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockPartitionService_ListPartitionRoleClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockPartitionService_ListPartitionRoleClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockPartitionService_ListPartitionRoleClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockPartitionService_ListPartitionRoleClient) Recv() (*ListPartitionRoleResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*ListPartitionRoleResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockPartitionService_ListPartitionRoleClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockPartitionService_ListPartitionRoleClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPartitionService_ListPartitionRoleClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPartitionService_ListPartitionRoleClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPartitionService_ListPartitionRoleClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPartitionService_ListPartitionRoleClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPartitionService_ListPartitionRoleClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPartitionService_ListPartitionRoleClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockPartitionService_ListPartitionRoleClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockPartitionService_ListPartitionRoleClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockPartitionService_ListPartitionRoleClient)(nil).Trailer))
-}
-
-// MockPartitionService_ListAccessRoleClient is a mock of PartitionService_ListAccessRoleClient interface.
-type MockPartitionService_ListAccessRoleClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockPartitionService_ListAccessRoleClientMockRecorder
-}
-
-// MockPartitionService_ListAccessRoleClientMockRecorder is the mock recorder for MockPartitionService_ListAccessRoleClient.
-type MockPartitionService_ListAccessRoleClientMockRecorder struct {
-	mock *MockPartitionService_ListAccessRoleClient
-}
-
-// NewMockPartitionService_ListAccessRoleClient creates a new mock instance.
-func NewMockPartitionService_ListAccessRoleClient(ctrl *gomock.Controller) *MockPartitionService_ListAccessRoleClient {
-	mock := &MockPartitionService_ListAccessRoleClient{ctrl: ctrl}
-	mock.recorder = &MockPartitionService_ListAccessRoleClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPartitionService_ListAccessRoleClient) EXPECT() *MockPartitionService_ListAccessRoleClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockPartitionService_ListAccessRoleClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockPartitionService_ListAccessRoleClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockPartitionService_ListAccessRoleClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockPartitionService_ListAccessRoleClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPartitionService_ListAccessRoleClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPartitionService_ListAccessRoleClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockPartitionService_ListAccessRoleClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockPartitionService_ListAccessRoleClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockPartitionService_ListAccessRoleClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockPartitionService_ListAccessRoleClient) Recv() (*ListAccessRoleResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*ListAccessRoleResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockPartitionService_ListAccessRoleClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockPartitionService_ListAccessRoleClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPartitionService_ListAccessRoleClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPartitionService_ListAccessRoleClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPartitionService_ListAccessRoleClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPartitionService_ListAccessRoleClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPartitionService_ListAccessRoleClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPartitionService_ListAccessRoleClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockPartitionService_ListAccessRoleClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockPartitionService_ListAccessRoleClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockPartitionService_ListAccessRoleClient)(nil).Trailer))
 }
 
 // MockPartitionServiceServer is a mock of PartitionServiceServer interface.
@@ -1087,7 +594,7 @@ func (mr *MockPartitionServiceServerMockRecorder) GetTenant(arg0, arg1 any) *gom
 }
 
 // ListAccessRole mocks base method.
-func (m *MockPartitionServiceServer) ListAccessRole(arg0 *ListAccessRoleRequest, arg1 PartitionService_ListAccessRoleServer) error {
+func (m *MockPartitionServiceServer) ListAccessRole(arg0 *ListAccessRoleRequest, arg1 grpc.ServerStreamingServer[ListAccessRoleResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListAccessRole", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -1101,7 +608,7 @@ func (mr *MockPartitionServiceServerMockRecorder) ListAccessRole(arg0, arg1 any)
 }
 
 // ListPartition mocks base method.
-func (m *MockPartitionServiceServer) ListPartition(arg0 *ListPartitionRequest, arg1 PartitionService_ListPartitionServer) error {
+func (m *MockPartitionServiceServer) ListPartition(arg0 *ListPartitionRequest, arg1 grpc.ServerStreamingServer[ListPartitionResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListPartition", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -1115,7 +622,7 @@ func (mr *MockPartitionServiceServerMockRecorder) ListPartition(arg0, arg1 any) 
 }
 
 // ListPartitionRole mocks base method.
-func (m *MockPartitionServiceServer) ListPartitionRole(arg0 *ListPartitionRoleRequest, arg1 PartitionService_ListPartitionRoleServer) error {
+func (m *MockPartitionServiceServer) ListPartitionRole(arg0 *ListPartitionRoleRequest, arg1 grpc.ServerStreamingServer[ListPartitionRoleResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListPartitionRole", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -1129,7 +636,7 @@ func (mr *MockPartitionServiceServerMockRecorder) ListPartitionRole(arg0, arg1 a
 }
 
 // ListTenant mocks base method.
-func (m *MockPartitionServiceServer) ListTenant(arg0 *ListTenantRequest, arg1 PartitionService_ListTenantServer) error {
+func (m *MockPartitionServiceServer) ListTenant(arg0 *ListTenantRequest, arg1 grpc.ServerStreamingServer[ListTenantResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListTenant", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -1262,480 +769,4 @@ func (m *MockUnsafePartitionServiceServer) mustEmbedUnimplementedPartitionServic
 func (mr *MockUnsafePartitionServiceServerMockRecorder) mustEmbedUnimplementedPartitionServiceServer() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedPartitionServiceServer", reflect.TypeOf((*MockUnsafePartitionServiceServer)(nil).mustEmbedUnimplementedPartitionServiceServer))
-}
-
-// MockPartitionService_ListTenantServer is a mock of PartitionService_ListTenantServer interface.
-type MockPartitionService_ListTenantServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockPartitionService_ListTenantServerMockRecorder
-}
-
-// MockPartitionService_ListTenantServerMockRecorder is the mock recorder for MockPartitionService_ListTenantServer.
-type MockPartitionService_ListTenantServerMockRecorder struct {
-	mock *MockPartitionService_ListTenantServer
-}
-
-// NewMockPartitionService_ListTenantServer creates a new mock instance.
-func NewMockPartitionService_ListTenantServer(ctrl *gomock.Controller) *MockPartitionService_ListTenantServer {
-	mock := &MockPartitionService_ListTenantServer{ctrl: ctrl}
-	mock.recorder = &MockPartitionService_ListTenantServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPartitionService_ListTenantServer) EXPECT() *MockPartitionService_ListTenantServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockPartitionService_ListTenantServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPartitionService_ListTenantServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPartitionService_ListTenantServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPartitionService_ListTenantServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPartitionService_ListTenantServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPartitionService_ListTenantServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockPartitionService_ListTenantServer) Send(arg0 *ListTenantResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockPartitionService_ListTenantServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockPartitionService_ListTenantServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockPartitionService_ListTenantServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockPartitionService_ListTenantServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockPartitionService_ListTenantServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPartitionService_ListTenantServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPartitionService_ListTenantServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPartitionService_ListTenantServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockPartitionService_ListTenantServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockPartitionService_ListTenantServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockPartitionService_ListTenantServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockPartitionService_ListTenantServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockPartitionService_ListTenantServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockPartitionService_ListTenantServer)(nil).SetTrailer), arg0)
-}
-
-// MockPartitionService_ListPartitionServer is a mock of PartitionService_ListPartitionServer interface.
-type MockPartitionService_ListPartitionServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockPartitionService_ListPartitionServerMockRecorder
-}
-
-// MockPartitionService_ListPartitionServerMockRecorder is the mock recorder for MockPartitionService_ListPartitionServer.
-type MockPartitionService_ListPartitionServerMockRecorder struct {
-	mock *MockPartitionService_ListPartitionServer
-}
-
-// NewMockPartitionService_ListPartitionServer creates a new mock instance.
-func NewMockPartitionService_ListPartitionServer(ctrl *gomock.Controller) *MockPartitionService_ListPartitionServer {
-	mock := &MockPartitionService_ListPartitionServer{ctrl: ctrl}
-	mock.recorder = &MockPartitionService_ListPartitionServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPartitionService_ListPartitionServer) EXPECT() *MockPartitionService_ListPartitionServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockPartitionService_ListPartitionServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPartitionService_ListPartitionServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPartitionService_ListPartitionServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPartitionService_ListPartitionServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPartitionService_ListPartitionServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPartitionService_ListPartitionServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockPartitionService_ListPartitionServer) Send(arg0 *ListPartitionResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockPartitionService_ListPartitionServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockPartitionService_ListPartitionServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockPartitionService_ListPartitionServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockPartitionService_ListPartitionServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockPartitionService_ListPartitionServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPartitionService_ListPartitionServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPartitionService_ListPartitionServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPartitionService_ListPartitionServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockPartitionService_ListPartitionServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockPartitionService_ListPartitionServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockPartitionService_ListPartitionServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockPartitionService_ListPartitionServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockPartitionService_ListPartitionServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockPartitionService_ListPartitionServer)(nil).SetTrailer), arg0)
-}
-
-// MockPartitionService_ListPartitionRoleServer is a mock of PartitionService_ListPartitionRoleServer interface.
-type MockPartitionService_ListPartitionRoleServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockPartitionService_ListPartitionRoleServerMockRecorder
-}
-
-// MockPartitionService_ListPartitionRoleServerMockRecorder is the mock recorder for MockPartitionService_ListPartitionRoleServer.
-type MockPartitionService_ListPartitionRoleServerMockRecorder struct {
-	mock *MockPartitionService_ListPartitionRoleServer
-}
-
-// NewMockPartitionService_ListPartitionRoleServer creates a new mock instance.
-func NewMockPartitionService_ListPartitionRoleServer(ctrl *gomock.Controller) *MockPartitionService_ListPartitionRoleServer {
-	mock := &MockPartitionService_ListPartitionRoleServer{ctrl: ctrl}
-	mock.recorder = &MockPartitionService_ListPartitionRoleServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPartitionService_ListPartitionRoleServer) EXPECT() *MockPartitionService_ListPartitionRoleServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockPartitionService_ListPartitionRoleServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPartitionService_ListPartitionRoleServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPartitionService_ListPartitionRoleServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPartitionService_ListPartitionRoleServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPartitionService_ListPartitionRoleServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPartitionService_ListPartitionRoleServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockPartitionService_ListPartitionRoleServer) Send(arg0 *ListPartitionRoleResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockPartitionService_ListPartitionRoleServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockPartitionService_ListPartitionRoleServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockPartitionService_ListPartitionRoleServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockPartitionService_ListPartitionRoleServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockPartitionService_ListPartitionRoleServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPartitionService_ListPartitionRoleServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPartitionService_ListPartitionRoleServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPartitionService_ListPartitionRoleServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockPartitionService_ListPartitionRoleServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockPartitionService_ListPartitionRoleServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockPartitionService_ListPartitionRoleServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockPartitionService_ListPartitionRoleServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockPartitionService_ListPartitionRoleServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockPartitionService_ListPartitionRoleServer)(nil).SetTrailer), arg0)
-}
-
-// MockPartitionService_ListAccessRoleServer is a mock of PartitionService_ListAccessRoleServer interface.
-type MockPartitionService_ListAccessRoleServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockPartitionService_ListAccessRoleServerMockRecorder
-}
-
-// MockPartitionService_ListAccessRoleServerMockRecorder is the mock recorder for MockPartitionService_ListAccessRoleServer.
-type MockPartitionService_ListAccessRoleServerMockRecorder struct {
-	mock *MockPartitionService_ListAccessRoleServer
-}
-
-// NewMockPartitionService_ListAccessRoleServer creates a new mock instance.
-func NewMockPartitionService_ListAccessRoleServer(ctrl *gomock.Controller) *MockPartitionService_ListAccessRoleServer {
-	mock := &MockPartitionService_ListAccessRoleServer{ctrl: ctrl}
-	mock.recorder = &MockPartitionService_ListAccessRoleServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockPartitionService_ListAccessRoleServer) EXPECT() *MockPartitionService_ListAccessRoleServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockPartitionService_ListAccessRoleServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockPartitionService_ListAccessRoleServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockPartitionService_ListAccessRoleServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockPartitionService_ListAccessRoleServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockPartitionService_ListAccessRoleServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockPartitionService_ListAccessRoleServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockPartitionService_ListAccessRoleServer) Send(arg0 *ListAccessRoleResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockPartitionService_ListAccessRoleServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockPartitionService_ListAccessRoleServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockPartitionService_ListAccessRoleServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockPartitionService_ListAccessRoleServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockPartitionService_ListAccessRoleServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockPartitionService_ListAccessRoleServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockPartitionService_ListAccessRoleServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockPartitionService_ListAccessRoleServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockPartitionService_ListAccessRoleServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockPartitionService_ListAccessRoleServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockPartitionService_ListAccessRoleServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockPartitionService_ListAccessRoleServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockPartitionService_ListAccessRoleServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockPartitionService_ListAccessRoleServer)(nil).SetTrailer), arg0)
 }

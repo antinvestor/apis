@@ -15,7 +15,6 @@ import (
 
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
-	metadata "google.golang.org/grpc/metadata"
 )
 
 // MockSettingsServiceClient is a mock of SettingsServiceClient interface.
@@ -62,14 +61,14 @@ func (mr *MockSettingsServiceClientMockRecorder) Get(ctx, in any, opts ...any) *
 }
 
 // List mocks base method.
-func (m *MockSettingsServiceClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (SettingsService_ListClient, error) {
+func (m *MockSettingsServiceClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "List", varargs...)
-	ret0, _ := ret[0].(SettingsService_ListClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -99,129 +98,6 @@ func (mr *MockSettingsServiceClientMockRecorder) Set(ctx, in any, opts ...any) *
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Set", reflect.TypeOf((*MockSettingsServiceClient)(nil).Set), varargs...)
-}
-
-// MockSettingsService_ListClient is a mock of SettingsService_ListClient interface.
-type MockSettingsService_ListClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockSettingsService_ListClientMockRecorder
-}
-
-// MockSettingsService_ListClientMockRecorder is the mock recorder for MockSettingsService_ListClient.
-type MockSettingsService_ListClientMockRecorder struct {
-	mock *MockSettingsService_ListClient
-}
-
-// NewMockSettingsService_ListClient creates a new mock instance.
-func NewMockSettingsService_ListClient(ctrl *gomock.Controller) *MockSettingsService_ListClient {
-	mock := &MockSettingsService_ListClient{ctrl: ctrl}
-	mock.recorder = &MockSettingsService_ListClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockSettingsService_ListClient) EXPECT() *MockSettingsService_ListClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockSettingsService_ListClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockSettingsService_ListClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockSettingsService_ListClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockSettingsService_ListClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockSettingsService_ListClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockSettingsService_ListClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockSettingsService_ListClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockSettingsService_ListClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockSettingsService_ListClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockSettingsService_ListClient) Recv() (*ListResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*ListResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockSettingsService_ListClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockSettingsService_ListClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockSettingsService_ListClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockSettingsService_ListClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockSettingsService_ListClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockSettingsService_ListClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockSettingsService_ListClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockSettingsService_ListClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockSettingsService_ListClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockSettingsService_ListClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockSettingsService_ListClient)(nil).Trailer))
 }
 
 // MockSettingsServiceServer is a mock of SettingsServiceServer interface.
@@ -263,7 +139,7 @@ func (mr *MockSettingsServiceServerMockRecorder) Get(arg0, arg1 any) *gomock.Cal
 }
 
 // List mocks base method.
-func (m *MockSettingsServiceServer) List(arg0 *ListRequest, arg1 SettingsService_ListServer) error {
+func (m *MockSettingsServiceServer) List(arg0 *ListRequest, arg1 grpc.ServerStreamingServer[ListResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -336,123 +212,4 @@ func (m *MockUnsafeSettingsServiceServer) mustEmbedUnimplementedSettingsServiceS
 func (mr *MockUnsafeSettingsServiceServerMockRecorder) mustEmbedUnimplementedSettingsServiceServer() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedSettingsServiceServer", reflect.TypeOf((*MockUnsafeSettingsServiceServer)(nil).mustEmbedUnimplementedSettingsServiceServer))
-}
-
-// MockSettingsService_ListServer is a mock of SettingsService_ListServer interface.
-type MockSettingsService_ListServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockSettingsService_ListServerMockRecorder
-}
-
-// MockSettingsService_ListServerMockRecorder is the mock recorder for MockSettingsService_ListServer.
-type MockSettingsService_ListServerMockRecorder struct {
-	mock *MockSettingsService_ListServer
-}
-
-// NewMockSettingsService_ListServer creates a new mock instance.
-func NewMockSettingsService_ListServer(ctrl *gomock.Controller) *MockSettingsService_ListServer {
-	mock := &MockSettingsService_ListServer{ctrl: ctrl}
-	mock.recorder = &MockSettingsService_ListServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockSettingsService_ListServer) EXPECT() *MockSettingsService_ListServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockSettingsService_ListServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockSettingsService_ListServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockSettingsService_ListServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockSettingsService_ListServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockSettingsService_ListServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockSettingsService_ListServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockSettingsService_ListServer) Send(arg0 *ListResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockSettingsService_ListServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockSettingsService_ListServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockSettingsService_ListServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockSettingsService_ListServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockSettingsService_ListServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockSettingsService_ListServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockSettingsService_ListServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockSettingsService_ListServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockSettingsService_ListServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockSettingsService_ListServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockSettingsService_ListServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockSettingsService_ListServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockSettingsService_ListServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockSettingsService_ListServer)(nil).SetTrailer), arg0)
 }

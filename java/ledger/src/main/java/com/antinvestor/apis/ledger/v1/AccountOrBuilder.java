@@ -94,4 +94,34 @@ java.lang.String defaultValue);
    */
   java.lang.String getDataOrThrow(
       java.lang.String key);
+
+  /**
+   * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+   * @return Whether the unclearedBalance field is set.
+   */
+  boolean hasUnclearedBalance();
+  /**
+   * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+   * @return The unclearedBalance.
+   */
+  com.google.type.Money getUnclearedBalance();
+  /**
+   * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
+   */
+  com.google.type.MoneyOrBuilder getUnclearedBalanceOrBuilder();
+
+  /**
+   * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+   * @return Whether the reservedBalance field is set.
+   */
+  boolean hasReservedBalance();
+  /**
+   * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+   * @return The reservedBalance.
+   */
+  com.google.type.Money getReservedBalance();
+  /**
+   * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
+   */
+  com.google.type.MoneyOrBuilder getReservedBalanceOrBuilder();
 }

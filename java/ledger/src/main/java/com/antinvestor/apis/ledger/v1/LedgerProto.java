@@ -86,51 +86,58 @@ public final class LedgerProto {
       "eR\004type\022\026\n\006parent\030\003 \001(\tR\006parent\022/\n\004data\030" +
       "\004 \003(\0132\033.ledger.v1.Ledger.DataEntryR\004data" +
       "\0327\n\tDataEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value" +
-      "\030\002 \001(\tR\005value:\0028\001\"\330\001\n\007Account\022\034\n\treferen" +
+      "\030\002 \001(\tR\005value:\0028\001\"\330\002\n\007Account\022\034\n\treferen" +
       "ce\030\001 \001(\tR\treference\022\026\n\006ledger\030\003 \001(\tR\006led" +
       "ger\022,\n\007balance\030\004 \001(\0132\022.google.type.Money" +
       "R\007balance\0220\n\004data\030\005 \003(\0132\034.ledger.v1.Acco" +
-      "unt.DataEntryR\004data\0327\n\tDataEntry\022\020\n\003key\030" +
-      "\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\354\001\n" +
-      "\020TransactionEntry\022\030\n\007account\030\001 \001(\tR\007acco" +
-      "unt\022 \n\013transaction\030\002 \001(\tR\013transaction\022#\n" +
-      "\rtransacted_at\030\003 \001(\tR\014transactedAt\022*\n\006am" +
-      "ount\030\004 \001(\0132\022.google.type.MoneyR\006amount\022\026" +
-      "\n\006credit\030\005 \001(\010R\006credit\0223\n\013acc_balance\030\006 " +
-      "\001(\0132\022.google.type.MoneyR\naccBalance\"\222\002\n\013" +
-      "Transaction\022\034\n\treference\030\001 \001(\tR\treferenc" +
-      "e\022\032\n\010currency\030\002 \001(\tR\010currency\022#\n\rtransac" +
-      "ted_at\030\003 \001(\tR\014transactedAt\0224\n\004data\030\004 \003(\013" +
-      "2 .ledger.v1.Transaction.DataEntryR\004data" +
-      "\0225\n\007entries\030\005 \003(\0132\033.ledger.v1.Transactio" +
-      "nEntryR\007entries\0327\n\tDataEntry\022\020\n\003key\030\001 \001(" +
-      "\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001*L\n\nLedg" +
-      "erType\022\t\n\005ASSET\020\000\022\r\n\tLIABILITY\020\001\022\n\n\006INCO" +
-      "ME\020\002\022\013\n\007EXPENSE\020\003\022\013\n\007CAPITAL\020\0042\364\005\n\rLedge" +
-      "rService\022@\n\rSearchLedgers\022\030.ledger.v1.Se" +
-      "archRequest\032\021.ledger.v1.Ledger\"\0000\001\0226\n\014Cr" +
-      "eateLedger\022\021.ledger.v1.Ledger\032\021.ledger.v" +
-      "1.Ledger\"\000\0226\n\014UpdateLedger\022\021.ledger.v1.L" +
-      "edger\032\021.ledger.v1.Ledger\"\000\022B\n\016SearchAcco" +
-      "unts\022\030.ledger.v1.SearchRequest\032\022.ledger." +
-      "v1.Account\"\0000\001\0229\n\rCreateAccount\022\022.ledger" +
-      ".v1.Account\032\022.ledger.v1.Account\"\000\0229\n\rUpd" +
-      "ateAccount\022\022.ledger.v1.Account\032\022.ledger." +
-      "v1.Account\"\000\022J\n\022SearchTransactions\022\030.led" +
-      "ger.v1.SearchRequest\032\026.ledger.v1.Transac" +
-      "tion\"\0000\001\022E\n\021CreateTransaction\022\026.ledger.v" +
-      "1.Transaction\032\026.ledger.v1.Transaction\"\000\022" +
-      "F\n\022ReverseTransaction\022\026.ledger.v1.Transa" +
-      "ction\032\026.ledger.v1.Transaction\"\000\022E\n\021Updat" +
-      "eTransaction\022\026.ledger.v1.Transaction\032\026.l" +
-      "edger.v1.Transaction\"\000\022U\n\030SearchTransact" +
-      "ionEntries\022\030.ledger.v1.SearchRequest\032\033.l" +
-      "edger.v1.TransactionEntry\"\0000\001B\254\001\n\036com.an" +
-      "tinvestor.apis.ledger.v1B\013LedgerProtoP\001Z" +
-      "8github.com/antinvestor/apis/go/ledger/l" +
-      "edger/v1;ledgerv1\242\002\003LXX\252\002\tLedger.V1\312\002\tLe" +
-      "dger\\V1\342\002\025Ledger\\V1\\GPBMetadata\352\002\nLedger" +
-      "::V1b\006proto3"
+      "unt.DataEntryR\004data\022?\n\021uncleared_balance" +
+      "\030\006 \001(\0132\022.google.type.MoneyR\020unclearedBal" +
+      "ance\022=\n\020reserved_balance\030\007 \001(\0132\022.google." +
+      "type.MoneyR\017reservedBalance\0327\n\tDataEntry" +
+      "\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value" +
+      ":\0028\001\"\213\002\n\020TransactionEntry\022\030\n\007account\030\001 \001" +
+      "(\tR\007account\022 \n\013transaction\030\002 \001(\tR\013transa" +
+      "ction\022#\n\rtransacted_at\030\003 \001(\tR\014transacted" +
+      "At\022*\n\006amount\030\004 \001(\0132\022.google.type.MoneyR\006" +
+      "amount\022\026\n\006credit\030\005 \001(\010R\006credit\0223\n\013acc_ba" +
+      "lance\030\006 \001(\0132\022.google.type.MoneyR\naccBala" +
+      "nce\022\035\n\ncleared_at\030\007 \001(\tR\tclearedAt\"\334\002\n\013T" +
+      "ransaction\022\034\n\treference\030\001 \001(\tR\treference" +
+      "\022\032\n\010currency\030\002 \001(\tR\010currency\022#\n\rtransact" +
+      "ed_at\030\003 \001(\tR\014transactedAt\0224\n\004data\030\004 \003(\0132" +
+      " .ledger.v1.Transaction.DataEntryR\004data\022" +
+      "5\n\007entries\030\005 \003(\0132\033.ledger.v1.Transaction" +
+      "EntryR\007entries\022\030\n\007cleared\030\006 \001(\010R\007cleared" +
+      "\022.\n\004type\030\007 \001(\0162\032.ledger.v1.TransactionTy" +
+      "peR\004type\0327\n\tDataEntry\022\020\n\003key\030\001 \001(\tR\003key\022" +
+      "\024\n\005value\030\002 \001(\tR\005value:\0028\001*L\n\nLedgerType\022" +
+      "\t\n\005ASSET\020\000\022\r\n\tLIABILITY\020\001\022\n\n\006INCOME\020\002\022\013\n" +
+      "\007EXPENSE\020\003\022\013\n\007CAPITAL\020\004*<\n\017TransactionTy" +
+      "pe\022\n\n\006NORMAL\020\000\022\014\n\010REVERSAL\020\001\022\017\n\013RESERVAT" +
+      "ION\020\0022\364\005\n\rLedgerService\022@\n\rSearchLedgers" +
+      "\022\030.ledger.v1.SearchRequest\032\021.ledger.v1.L" +
+      "edger\"\0000\001\0226\n\014CreateLedger\022\021.ledger.v1.Le" +
+      "dger\032\021.ledger.v1.Ledger\"\000\0226\n\014UpdateLedge" +
+      "r\022\021.ledger.v1.Ledger\032\021.ledger.v1.Ledger\"" +
+      "\000\022B\n\016SearchAccounts\022\030.ledger.v1.SearchRe" +
+      "quest\032\022.ledger.v1.Account\"\0000\001\0229\n\rCreateA" +
+      "ccount\022\022.ledger.v1.Account\032\022.ledger.v1.A" +
+      "ccount\"\000\0229\n\rUpdateAccount\022\022.ledger.v1.Ac" +
+      "count\032\022.ledger.v1.Account\"\000\022J\n\022SearchTra" +
+      "nsactions\022\030.ledger.v1.SearchRequest\032\026.le" +
+      "dger.v1.Transaction\"\0000\001\022E\n\021CreateTransac" +
+      "tion\022\026.ledger.v1.Transaction\032\026.ledger.v1" +
+      ".Transaction\"\000\022F\n\022ReverseTransaction\022\026.l" +
+      "edger.v1.Transaction\032\026.ledger.v1.Transac" +
+      "tion\"\000\022E\n\021UpdateTransaction\022\026.ledger.v1." +
+      "Transaction\032\026.ledger.v1.Transaction\"\000\022U\n" +
+      "\030SearchTransactionEntries\022\030.ledger.v1.Se" +
+      "archRequest\032\033.ledger.v1.TransactionEntry" +
+      "\"\0000\001B\254\001\n\036com.antinvestor.apis.ledger.v1B" +
+      "\013LedgerProtoP\001Z8github.com/antinvestor/a" +
+      "pis/go/ledger/ledger/v1;ledgerv1\242\002\003LXX\252\002" +
+      "\tLedger.V1\312\002\tLedger\\V1\342\002\025Ledger\\V1\\GPBMe" +
+      "tadata\352\002\nLedger::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -161,7 +168,7 @@ public final class LedgerProto {
     internal_static_ledger_v1_Account_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ledger_v1_Account_descriptor,
-        new java.lang.String[] { "Reference", "Ledger", "Balance", "Data", });
+        new java.lang.String[] { "Reference", "Ledger", "Balance", "Data", "UnclearedBalance", "ReservedBalance", });
     internal_static_ledger_v1_Account_DataEntry_descriptor =
       internal_static_ledger_v1_Account_descriptor.getNestedTypes().get(0);
     internal_static_ledger_v1_Account_DataEntry_fieldAccessorTable = new
@@ -173,13 +180,13 @@ public final class LedgerProto {
     internal_static_ledger_v1_TransactionEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ledger_v1_TransactionEntry_descriptor,
-        new java.lang.String[] { "Account", "Transaction", "TransactedAt", "Amount", "Credit", "AccBalance", });
+        new java.lang.String[] { "Account", "Transaction", "TransactedAt", "Amount", "Credit", "AccBalance", "ClearedAt", });
     internal_static_ledger_v1_Transaction_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_ledger_v1_Transaction_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ledger_v1_Transaction_descriptor,
-        new java.lang.String[] { "Reference", "Currency", "TransactedAt", "Data", "Entries", });
+        new java.lang.String[] { "Reference", "Currency", "TransactedAt", "Data", "Entries", "Cleared", "Type", });
     internal_static_ledger_v1_Transaction_DataEntry_descriptor =
       internal_static_ledger_v1_Transaction_descriptor.getNestedTypes().get(0);
     internal_static_ledger_v1_Transaction_DataEntry_fieldAccessorTable = new

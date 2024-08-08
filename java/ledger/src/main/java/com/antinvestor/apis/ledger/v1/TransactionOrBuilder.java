@@ -115,4 +115,21 @@ java.lang.String defaultValue);
    */
   com.antinvestor.apis.ledger.v1.TransactionEntryOrBuilder getEntriesOrBuilder(
       int index);
+
+  /**
+   * <code>bool cleared = 6 [json_name = "cleared"];</code>
+   * @return The cleared.
+   */
+  boolean getCleared();
+
+  /**
+   * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
+   * @return The enum numeric value on the wire for type.
+   */
+  int getTypeValue();
+  /**
+   * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
+   * @return The type.
+   */
+  com.antinvestor.apis.ledger.v1.TransactionType getType();
 }

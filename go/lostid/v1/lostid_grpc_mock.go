@@ -15,7 +15,6 @@ import (
 
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
-	metadata "google.golang.org/grpc/metadata"
 )
 
 // MockLostIdServiceClient is a mock of LostIdServiceClient interface.
@@ -62,14 +61,14 @@ func (mr *MockLostIdServiceClientMockRecorder) Collectible(ctx, in any, opts ...
 }
 
 // ListCollectible mocks base method.
-func (m *MockLostIdServiceClient) ListCollectible(ctx context.Context, in *ListCollectibleRequest, opts ...grpc.CallOption) (LostIdService_ListCollectibleClient, error) {
+func (m *MockLostIdServiceClient) ListCollectible(ctx context.Context, in *ListCollectibleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListCollectibleResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListCollectible", varargs...)
-	ret0, _ := ret[0].(LostIdService_ListCollectibleClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListCollectibleResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -82,14 +81,14 @@ func (mr *MockLostIdServiceClientMockRecorder) ListCollectible(ctx, in any, opts
 }
 
 // ListSearch mocks base method.
-func (m *MockLostIdServiceClient) ListSearch(ctx context.Context, in *ListSearchRequest, opts ...grpc.CallOption) (LostIdService_ListSearchClient, error) {
+func (m *MockLostIdServiceClient) ListSearch(ctx context.Context, in *ListSearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListSearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListSearch", varargs...)
-	ret0, _ := ret[0].(LostIdService_ListSearchClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListSearchResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -102,14 +101,14 @@ func (mr *MockLostIdServiceClientMockRecorder) ListSearch(ctx, in any, opts ...a
 }
 
 // ListTransaction mocks base method.
-func (m *MockLostIdServiceClient) ListTransaction(ctx context.Context, in *ListTransactionRequest, opts ...grpc.CallOption) (LostIdService_ListTransactionClient, error) {
+func (m *MockLostIdServiceClient) ListTransaction(ctx context.Context, in *ListTransactionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListTransactionResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListTransaction", varargs...)
-	ret0, _ := ret[0].(LostIdService_ListTransactionClient)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListTransactionResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -161,375 +160,6 @@ func (mr *MockLostIdServiceClientMockRecorder) Search(ctx, in any, opts ...any) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Search", reflect.TypeOf((*MockLostIdServiceClient)(nil).Search), varargs...)
 }
 
-// MockLostIdService_ListCollectibleClient is a mock of LostIdService_ListCollectibleClient interface.
-type MockLostIdService_ListCollectibleClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockLostIdService_ListCollectibleClientMockRecorder
-}
-
-// MockLostIdService_ListCollectibleClientMockRecorder is the mock recorder for MockLostIdService_ListCollectibleClient.
-type MockLostIdService_ListCollectibleClientMockRecorder struct {
-	mock *MockLostIdService_ListCollectibleClient
-}
-
-// NewMockLostIdService_ListCollectibleClient creates a new mock instance.
-func NewMockLostIdService_ListCollectibleClient(ctrl *gomock.Controller) *MockLostIdService_ListCollectibleClient {
-	mock := &MockLostIdService_ListCollectibleClient{ctrl: ctrl}
-	mock.recorder = &MockLostIdService_ListCollectibleClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLostIdService_ListCollectibleClient) EXPECT() *MockLostIdService_ListCollectibleClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockLostIdService_ListCollectibleClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockLostIdService_ListCollectibleClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockLostIdService_ListCollectibleClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockLostIdService_ListCollectibleClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLostIdService_ListCollectibleClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLostIdService_ListCollectibleClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockLostIdService_ListCollectibleClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockLostIdService_ListCollectibleClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockLostIdService_ListCollectibleClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockLostIdService_ListCollectibleClient) Recv() (*ListCollectibleResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*ListCollectibleResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockLostIdService_ListCollectibleClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockLostIdService_ListCollectibleClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLostIdService_ListCollectibleClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLostIdService_ListCollectibleClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLostIdService_ListCollectibleClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLostIdService_ListCollectibleClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLostIdService_ListCollectibleClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLostIdService_ListCollectibleClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockLostIdService_ListCollectibleClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockLostIdService_ListCollectibleClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockLostIdService_ListCollectibleClient)(nil).Trailer))
-}
-
-// MockLostIdService_ListSearchClient is a mock of LostIdService_ListSearchClient interface.
-type MockLostIdService_ListSearchClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockLostIdService_ListSearchClientMockRecorder
-}
-
-// MockLostIdService_ListSearchClientMockRecorder is the mock recorder for MockLostIdService_ListSearchClient.
-type MockLostIdService_ListSearchClientMockRecorder struct {
-	mock *MockLostIdService_ListSearchClient
-}
-
-// NewMockLostIdService_ListSearchClient creates a new mock instance.
-func NewMockLostIdService_ListSearchClient(ctrl *gomock.Controller) *MockLostIdService_ListSearchClient {
-	mock := &MockLostIdService_ListSearchClient{ctrl: ctrl}
-	mock.recorder = &MockLostIdService_ListSearchClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLostIdService_ListSearchClient) EXPECT() *MockLostIdService_ListSearchClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockLostIdService_ListSearchClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockLostIdService_ListSearchClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockLostIdService_ListSearchClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockLostIdService_ListSearchClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLostIdService_ListSearchClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLostIdService_ListSearchClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockLostIdService_ListSearchClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockLostIdService_ListSearchClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockLostIdService_ListSearchClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockLostIdService_ListSearchClient) Recv() (*ListSearchResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*ListSearchResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockLostIdService_ListSearchClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockLostIdService_ListSearchClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLostIdService_ListSearchClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLostIdService_ListSearchClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLostIdService_ListSearchClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLostIdService_ListSearchClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLostIdService_ListSearchClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLostIdService_ListSearchClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockLostIdService_ListSearchClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockLostIdService_ListSearchClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockLostIdService_ListSearchClient)(nil).Trailer))
-}
-
-// MockLostIdService_ListTransactionClient is a mock of LostIdService_ListTransactionClient interface.
-type MockLostIdService_ListTransactionClient struct {
-	ctrl     *gomock.Controller
-	recorder *MockLostIdService_ListTransactionClientMockRecorder
-}
-
-// MockLostIdService_ListTransactionClientMockRecorder is the mock recorder for MockLostIdService_ListTransactionClient.
-type MockLostIdService_ListTransactionClientMockRecorder struct {
-	mock *MockLostIdService_ListTransactionClient
-}
-
-// NewMockLostIdService_ListTransactionClient creates a new mock instance.
-func NewMockLostIdService_ListTransactionClient(ctrl *gomock.Controller) *MockLostIdService_ListTransactionClient {
-	mock := &MockLostIdService_ListTransactionClient{ctrl: ctrl}
-	mock.recorder = &MockLostIdService_ListTransactionClientMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLostIdService_ListTransactionClient) EXPECT() *MockLostIdService_ListTransactionClientMockRecorder {
-	return m.recorder
-}
-
-// CloseSend mocks base method.
-func (m *MockLostIdService_ListTransactionClient) CloseSend() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CloseSend")
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CloseSend indicates an expected call of CloseSend.
-func (mr *MockLostIdService_ListTransactionClientMockRecorder) CloseSend() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockLostIdService_ListTransactionClient)(nil).CloseSend))
-}
-
-// Context mocks base method.
-func (m *MockLostIdService_ListTransactionClient) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLostIdService_ListTransactionClientMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLostIdService_ListTransactionClient)(nil).Context))
-}
-
-// Header mocks base method.
-func (m *MockLostIdService_ListTransactionClient) Header() (metadata.MD, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Header")
-	ret0, _ := ret[0].(metadata.MD)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Header indicates an expected call of Header.
-func (mr *MockLostIdService_ListTransactionClientMockRecorder) Header() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockLostIdService_ListTransactionClient)(nil).Header))
-}
-
-// Recv mocks base method.
-func (m *MockLostIdService_ListTransactionClient) Recv() (*ListTransactionResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*ListTransactionResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Recv indicates an expected call of Recv.
-func (mr *MockLostIdService_ListTransactionClientMockRecorder) Recv() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockLostIdService_ListTransactionClient)(nil).Recv))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLostIdService_ListTransactionClient) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLostIdService_ListTransactionClientMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLostIdService_ListTransactionClient)(nil).RecvMsg), m)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLostIdService_ListTransactionClient) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLostIdService_ListTransactionClientMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLostIdService_ListTransactionClient)(nil).SendMsg), m)
-}
-
-// Trailer mocks base method.
-func (m *MockLostIdService_ListTransactionClient) Trailer() metadata.MD {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Trailer")
-	ret0, _ := ret[0].(metadata.MD)
-	return ret0
-}
-
-// Trailer indicates an expected call of Trailer.
-func (mr *MockLostIdService_ListTransactionClientMockRecorder) Trailer() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockLostIdService_ListTransactionClient)(nil).Trailer))
-}
-
 // MockLostIdServiceServer is a mock of LostIdServiceServer interface.
 type MockLostIdServiceServer struct {
 	ctrl     *gomock.Controller
@@ -569,7 +199,7 @@ func (mr *MockLostIdServiceServerMockRecorder) Collectible(arg0, arg1 any) *gomo
 }
 
 // ListCollectible mocks base method.
-func (m *MockLostIdServiceServer) ListCollectible(arg0 *ListCollectibleRequest, arg1 LostIdService_ListCollectibleServer) error {
+func (m *MockLostIdServiceServer) ListCollectible(arg0 *ListCollectibleRequest, arg1 grpc.ServerStreamingServer[ListCollectibleResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListCollectible", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -583,7 +213,7 @@ func (mr *MockLostIdServiceServerMockRecorder) ListCollectible(arg0, arg1 any) *
 }
 
 // ListSearch mocks base method.
-func (m *MockLostIdServiceServer) ListSearch(arg0 *ListSearchRequest, arg1 LostIdService_ListSearchServer) error {
+func (m *MockLostIdServiceServer) ListSearch(arg0 *ListSearchRequest, arg1 grpc.ServerStreamingServer[ListSearchResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListSearch", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -597,7 +227,7 @@ func (mr *MockLostIdServiceServerMockRecorder) ListSearch(arg0, arg1 any) *gomoc
 }
 
 // ListTransaction mocks base method.
-func (m *MockLostIdServiceServer) ListTransaction(arg0 *ListTransactionRequest, arg1 LostIdService_ListTransactionServer) error {
+func (m *MockLostIdServiceServer) ListTransaction(arg0 *ListTransactionRequest, arg1 grpc.ServerStreamingServer[ListTransactionResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListTransaction", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -685,361 +315,4 @@ func (m *MockUnsafeLostIdServiceServer) mustEmbedUnimplementedLostIdServiceServe
 func (mr *MockUnsafeLostIdServiceServerMockRecorder) mustEmbedUnimplementedLostIdServiceServer() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedLostIdServiceServer", reflect.TypeOf((*MockUnsafeLostIdServiceServer)(nil).mustEmbedUnimplementedLostIdServiceServer))
-}
-
-// MockLostIdService_ListCollectibleServer is a mock of LostIdService_ListCollectibleServer interface.
-type MockLostIdService_ListCollectibleServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockLostIdService_ListCollectibleServerMockRecorder
-}
-
-// MockLostIdService_ListCollectibleServerMockRecorder is the mock recorder for MockLostIdService_ListCollectibleServer.
-type MockLostIdService_ListCollectibleServerMockRecorder struct {
-	mock *MockLostIdService_ListCollectibleServer
-}
-
-// NewMockLostIdService_ListCollectibleServer creates a new mock instance.
-func NewMockLostIdService_ListCollectibleServer(ctrl *gomock.Controller) *MockLostIdService_ListCollectibleServer {
-	mock := &MockLostIdService_ListCollectibleServer{ctrl: ctrl}
-	mock.recorder = &MockLostIdService_ListCollectibleServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLostIdService_ListCollectibleServer) EXPECT() *MockLostIdService_ListCollectibleServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockLostIdService_ListCollectibleServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLostIdService_ListCollectibleServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLostIdService_ListCollectibleServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLostIdService_ListCollectibleServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLostIdService_ListCollectibleServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLostIdService_ListCollectibleServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockLostIdService_ListCollectibleServer) Send(arg0 *ListCollectibleResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockLostIdService_ListCollectibleServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockLostIdService_ListCollectibleServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockLostIdService_ListCollectibleServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockLostIdService_ListCollectibleServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockLostIdService_ListCollectibleServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLostIdService_ListCollectibleServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLostIdService_ListCollectibleServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLostIdService_ListCollectibleServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockLostIdService_ListCollectibleServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockLostIdService_ListCollectibleServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockLostIdService_ListCollectibleServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockLostIdService_ListCollectibleServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockLostIdService_ListCollectibleServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockLostIdService_ListCollectibleServer)(nil).SetTrailer), arg0)
-}
-
-// MockLostIdService_ListSearchServer is a mock of LostIdService_ListSearchServer interface.
-type MockLostIdService_ListSearchServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockLostIdService_ListSearchServerMockRecorder
-}
-
-// MockLostIdService_ListSearchServerMockRecorder is the mock recorder for MockLostIdService_ListSearchServer.
-type MockLostIdService_ListSearchServerMockRecorder struct {
-	mock *MockLostIdService_ListSearchServer
-}
-
-// NewMockLostIdService_ListSearchServer creates a new mock instance.
-func NewMockLostIdService_ListSearchServer(ctrl *gomock.Controller) *MockLostIdService_ListSearchServer {
-	mock := &MockLostIdService_ListSearchServer{ctrl: ctrl}
-	mock.recorder = &MockLostIdService_ListSearchServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLostIdService_ListSearchServer) EXPECT() *MockLostIdService_ListSearchServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockLostIdService_ListSearchServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLostIdService_ListSearchServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLostIdService_ListSearchServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLostIdService_ListSearchServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLostIdService_ListSearchServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLostIdService_ListSearchServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockLostIdService_ListSearchServer) Send(arg0 *ListSearchResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockLostIdService_ListSearchServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockLostIdService_ListSearchServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockLostIdService_ListSearchServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockLostIdService_ListSearchServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockLostIdService_ListSearchServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLostIdService_ListSearchServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLostIdService_ListSearchServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLostIdService_ListSearchServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockLostIdService_ListSearchServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockLostIdService_ListSearchServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockLostIdService_ListSearchServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockLostIdService_ListSearchServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockLostIdService_ListSearchServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockLostIdService_ListSearchServer)(nil).SetTrailer), arg0)
-}
-
-// MockLostIdService_ListTransactionServer is a mock of LostIdService_ListTransactionServer interface.
-type MockLostIdService_ListTransactionServer struct {
-	ctrl     *gomock.Controller
-	recorder *MockLostIdService_ListTransactionServerMockRecorder
-}
-
-// MockLostIdService_ListTransactionServerMockRecorder is the mock recorder for MockLostIdService_ListTransactionServer.
-type MockLostIdService_ListTransactionServerMockRecorder struct {
-	mock *MockLostIdService_ListTransactionServer
-}
-
-// NewMockLostIdService_ListTransactionServer creates a new mock instance.
-func NewMockLostIdService_ListTransactionServer(ctrl *gomock.Controller) *MockLostIdService_ListTransactionServer {
-	mock := &MockLostIdService_ListTransactionServer{ctrl: ctrl}
-	mock.recorder = &MockLostIdService_ListTransactionServerMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockLostIdService_ListTransactionServer) EXPECT() *MockLostIdService_ListTransactionServerMockRecorder {
-	return m.recorder
-}
-
-// Context mocks base method.
-func (m *MockLostIdService_ListTransactionServer) Context() context.Context {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Context")
-	ret0, _ := ret[0].(context.Context)
-	return ret0
-}
-
-// Context indicates an expected call of Context.
-func (mr *MockLostIdService_ListTransactionServerMockRecorder) Context() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLostIdService_ListTransactionServer)(nil).Context))
-}
-
-// RecvMsg mocks base method.
-func (m_2 *MockLostIdService_ListTransactionServer) RecvMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLostIdService_ListTransactionServerMockRecorder) RecvMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLostIdService_ListTransactionServer)(nil).RecvMsg), m)
-}
-
-// Send mocks base method.
-func (m *MockLostIdService_ListTransactionServer) Send(arg0 *ListTransactionResponse) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Send", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Send indicates an expected call of Send.
-func (mr *MockLostIdService_ListTransactionServerMockRecorder) Send(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockLostIdService_ListTransactionServer)(nil).Send), arg0)
-}
-
-// SendHeader mocks base method.
-func (m *MockLostIdService_ListTransactionServer) SendHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendHeader indicates an expected call of SendHeader.
-func (mr *MockLostIdService_ListTransactionServerMockRecorder) SendHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockLostIdService_ListTransactionServer)(nil).SendHeader), arg0)
-}
-
-// SendMsg mocks base method.
-func (m_2 *MockLostIdService_ListTransactionServer) SendMsg(m any) error {
-	m_2.ctrl.T.Helper()
-	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMsg indicates an expected call of SendMsg.
-func (mr *MockLostIdService_ListTransactionServerMockRecorder) SendMsg(m any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLostIdService_ListTransactionServer)(nil).SendMsg), m)
-}
-
-// SetHeader mocks base method.
-func (m *MockLostIdService_ListTransactionServer) SetHeader(arg0 metadata.MD) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHeader", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SetHeader indicates an expected call of SetHeader.
-func (mr *MockLostIdService_ListTransactionServerMockRecorder) SetHeader(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockLostIdService_ListTransactionServer)(nil).SetHeader), arg0)
-}
-
-// SetTrailer mocks base method.
-func (m *MockLostIdService_ListTransactionServer) SetTrailer(arg0 metadata.MD) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTrailer", arg0)
-}
-
-// SetTrailer indicates an expected call of SetTrailer.
-func (mr *MockLostIdService_ListTransactionServerMockRecorder) SetTrailer(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockLostIdService_ListTransactionServer)(nil).SetTrailer), arg0)
 }
