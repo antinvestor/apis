@@ -70,7 +70,7 @@ subprojects {
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0")
         api("com.googlecode.libphonenumber:libphonenumber:8.13.43")
 
-        api("org.slf4j:slf4j-api:2.0.15")
+        api("org.slf4j:slf4j-api:2.0.16")
 
         compileOnly("org.apache.tomcat:annotations-api:6.0.53")
 
