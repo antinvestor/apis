@@ -19,6 +19,7 @@ import com.antinvestor.apis.common.exceptions.STATUSCODES;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.utilities.MoneyUtil;
 import com.antinvestor.apis.common.utilities.TextUtils;
+import com.antinvestor.apis.ledger.v1.TransactionType;
 import com.google.type.Money;
 import com.antinvestor.apis.ledger.v1.Transaction;
 import com.antinvestor.apis.ledger.v1.TransactionEntry;
@@ -36,6 +37,8 @@ public class TransactionBuilder {
     private final List<LocalEntry> debitEntries = new ArrayList<>();
     private String transactionDate;
     private String reference;
+    private boolean cleared = true;
+    private TransactionType transactionType = TransactionType.NORMAL;
 
 
     private TransactionBuilder(Map<String, String> data) {
@@ -67,8 +70,14 @@ public class TransactionBuilder {
         return this;
     }
 
-    public TransactionBuilder reference(Long memoryTxId) {
-        return reference(referenceFromId(memoryTxId));
+    public TransactionBuilder notCleared() {
+        this.cleared = false;
+        return this;
+    }
+
+    public TransactionBuilder reserve() {
+        this.transactionType = TransactionType.RESERVATION;
+        return this;
     }
 
     public TransactionBuilder putData(String key, String value) {
@@ -103,9 +112,6 @@ public class TransactionBuilder {
     }
 
     public Transaction build() throws UnRetriableException {
-        BigDecimal entriesSumCheck = BigDecimal.ZERO;
-        BigDecimal debitSumCheck = BigDecimal.ZERO;
-        BigDecimal creditSumCheck = BigDecimal.ZERO;
         String currencyCode = null;
 
         if (Objects.isNull(transactionDate)) {
@@ -114,21 +120,17 @@ public class TransactionBuilder {
 
         Transaction.Builder transactionBuilder = Transaction.newBuilder()
                 .setTransactedAt(transactionDate)
+                .setType(transactionType)
+                .setCleared(cleared)
                 .putAllData(data);
 
         if (!TextUtils.isEmpty(reference)) {
             transactionBuilder.setReference(reference);
         }
 
-        if (debitEntries.isEmpty()) {
-            throw new UnRetriableException(STATUSCODES.BAD_AMOUNT_ERROR, "Debit transaction entries are  missing");
-        }
-
         for (LocalEntry localEntry : debitEntries) {
 
             currencyCode = validateCurrency(currencyCode, localEntry);
-
-            debitSumCheck = debitSumCheck.add(MoneyUtil.toBigDecimal(localEntry.amount));
 
             TransactionEntry transactionEntry = TransactionEntry.newBuilder()
                     .setAccount(localEntry.accountReference)
@@ -139,17 +141,9 @@ public class TransactionBuilder {
             transactionBuilder.addEntries(transactionEntry);
         }
 
-
-        if (creditEntries.isEmpty()) {
-            throw new UnRetriableException(STATUSCODES.BAD_AMOUNT_ERROR, "Credit transaction entries are  missing");
-        }
-
-
         for (LocalEntry localEntry : creditEntries) {
 
             currencyCode = validateCurrency(currencyCode, localEntry);
-
-            creditSumCheck = creditSumCheck.add(MoneyUtil.toBigDecimal(localEntry.amount));
 
             TransactionEntry transactionEntry = TransactionEntry.newBuilder()
                     .setAccount(localEntry.accountReference)
@@ -161,20 +155,6 @@ public class TransactionBuilder {
         }
 
         transactionBuilder.setCurrency(currencyCode);
-
-        if (debitSumCheck.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new UnRetriableException(STATUSCODES.BAD_AMOUNT_ERROR, "Sum of Debit entries cannot be zero");
-        }
-
-        if (creditSumCheck.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new UnRetriableException(STATUSCODES.BAD_AMOUNT_ERROR, "Sum of Credit entries cannot be zero");
-        }
-
-        entriesSumCheck = creditSumCheck.subtract(debitSumCheck);
-
-        if (entriesSumCheck.compareTo(BigDecimal.ZERO) != 0) {
-            throw new UnRetriableException(STATUSCODES.BAD_AMOUNT_ERROR, "Transaction entries sum is not going to zero");
-        }
 
         return transactionBuilder.build();
     }
