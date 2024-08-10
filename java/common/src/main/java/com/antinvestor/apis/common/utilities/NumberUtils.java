@@ -22,7 +22,7 @@ import java.math.MathContext;
 import java.text.NumberFormat;
 import java.text.ParseException;
 
-public interface NumberUtils {
+public class NumberUtils {
 
     public static final BigDecimal NANO_DIVISOR = BigDecimal.valueOf(Math.pow(10, 9));
 

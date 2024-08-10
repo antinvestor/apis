@@ -44,7 +44,7 @@ package com.antinvestor.apis.common.utilities;
 
 import java.util.Objects;
 
-public interface TextUtils {
+public class TextUtils {
 
     /**
      * Returns true if the parameter is null or of zero length
