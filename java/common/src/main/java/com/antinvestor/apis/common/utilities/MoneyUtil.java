@@ -50,11 +50,11 @@ public class MoneyUtil {
 
     }
 
-    public static boolean isEqual(Money a, Money b) throws UnRetriableException {
+    public static boolean isEqual(Money a, Money b)  {
         return compare(a, b) == 0;
     }
 
-    public static boolean isZero(Money money) throws UnRetriableException {
+    public static boolean isZero(Money money)  {
         return isEqual(money, zeroMoney(money.getCurrencyCode()));
     }
 
@@ -62,15 +62,15 @@ public class MoneyUtil {
         return compare(a, b) > 0;
     }
 
-    public static boolean isGreaterThanZero(Money money) throws UnRetriableException {
+    public static boolean isGreaterThanZero(Money money)  {
         return isGreaterThan(money, zeroMoney(money.getCurrencyCode()));
     }
 
-    public static boolean isLessThan(Money a, Money b) throws UnRetriableException {
+    public static boolean isLessThan(Money a, Money b)  {
         return compare(a, b) < 0;
     }
 
-    public static boolean isLessThanZero(Money money) throws UnRetriableException {
+    public static boolean isLessThanZero(Money money)  {
         return isLessThan(money, zeroMoney(money.getCurrencyCode()));
     }
 
@@ -78,7 +78,7 @@ public class MoneyUtil {
         return from(BigDecimal.ZERO, currency);
     }
 
-    public static Money add(Money a, Money b) throws UnRetriableException {
+    public static Money add(Money a, Money b)  {
         if (Objects.isNull(a) || Objects.isNull(b)) {
             throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to add null money");
         }
@@ -90,7 +90,7 @@ public class MoneyUtil {
         return from(toBigDecimal(a).add(toBigDecimal(b)), a.getCurrencyCode());
     }
 
-    public static Money subtract(Money a, Money b) throws UnRetriableException {
+    public static Money subtract(Money a, Money b)  {
         if (Objects.isNull(a) || Objects.isNull(b)) {
             throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to subtract null money");
         }
@@ -102,7 +102,7 @@ public class MoneyUtil {
         return from(toBigDecimal(a).subtract(toBigDecimal(b)), a.getCurrencyCode());
     }
 
-    public static Money multiply(Money a, BigDecimal b) throws UnRetriableException {
+    public static Money multiply(Money a, BigDecimal b)  {
         if (Objects.isNull(a) || Objects.isNull(b)) {
             throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to multiply with nulls ");
         }
@@ -111,7 +111,7 @@ public class MoneyUtil {
         return from(toBigDecimal(a).multiply(b), a.getCurrencyCode());
     }
 
-    public static Money divide(Money a, BigDecimal b) throws UnRetriableException {
+    public static Money divide(Money a, BigDecimal b)  {
         if (Objects.isNull(a) || Objects.isNull(b)) {
             throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to divide with nulls ");
         }
@@ -123,16 +123,16 @@ public class MoneyUtil {
         return String.format("%s %s", money.getCurrencyCode(), toBigDecimal(money).setScale(2, RoundingMode.DOWN).toPlainString());
     }
 
-    public static Money min(Money a, Money b) throws UnRetriableException {
+    public static Money min(Money a, Money b)  {
         return compare(a, b) <= 0 ? a : b;
     }
 
 
-    public static Money max(Money a, Money b) throws UnRetriableException {
+    public static Money max(Money a, Money b)  {
         return compare(a, b) >= 0 ? a : b;
     }
 
-    public static int compare(Money a, Money b) throws UnRetriableException {
+    public static int compare(Money a, Money b)  {
         validateMoney(a, b);
 
         if (!a.getCurrencyCode().equals(b.getCurrencyCode())) {
@@ -143,7 +143,7 @@ public class MoneyUtil {
         return unitsComparison != 0 ? unitsComparison : Integer.compare(a.getNanos(), b.getNanos());
     }
 
-    private static void validateMoney(Money... moneys) throws UnRetriableException {
+    private static void validateMoney(Money... moneys) {
         String currency = null;
         for (Money money : moneys) {
             if (Objects.isNull(money)) {

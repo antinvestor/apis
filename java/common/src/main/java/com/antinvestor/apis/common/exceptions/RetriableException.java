@@ -71,7 +71,7 @@ package com.antinvestor.apis.common.exceptions;
 /**
  * @author Peter J. Bwire <bwire517@gmail.com>
  */
-public class RetriableException extends Exception {
+public class RetriableException extends RuntimeException {
     private final int status;
 
     /**
