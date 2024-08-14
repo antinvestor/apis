@@ -115,7 +115,7 @@ public class TransactionBuilder {
         String currencyCode = null;
 
         if (Objects.isNull(transactionDate)) {
-            transactionDate = LocalDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+            transactionDate = LocalDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME);
         }
 
         Transaction.Builder transactionBuilder = Transaction.newBuilder()
