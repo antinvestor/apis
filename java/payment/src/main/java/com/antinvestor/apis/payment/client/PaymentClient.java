@@ -96,11 +96,11 @@ public class PaymentClient extends GrpcClientBase {
 
 
         if (Objects.nonNull(startDate)) {
-            limitsBuilder = limitsBuilder.setStartDate(startDate.format(DateTimeFormatter.ISO_DATE_TIME));
+            limitsBuilder = limitsBuilder.setStartDate(startDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
         }
 
         if (Objects.nonNull(endDate)) {
-            limitsBuilder = limitsBuilder.setEndDate(endDate.format(DateTimeFormatter.ISO_DATE_TIME));
+            limitsBuilder = limitsBuilder.setEndDate(endDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
         }
 
         filterBuilder.setLimits(limitsBuilder.build());

@@ -62,7 +62,7 @@ public class SettingsClient extends GrpcClientBase {
 
     public static Optional<LocalDateTime> asLocalDateTime(String settingValue) {
         try {
-            return Optional.of(LocalDateTime.parse(settingValue, DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            return Optional.of(LocalDateTime.parse(settingValue, DateTimeFormatter.ISO_OFFSET_DATE_TIME));
         } catch (DateTimeParseException dtpe) {
             return Optional.empty();
         }
@@ -250,7 +250,7 @@ public class SettingsClient extends GrpcClientBase {
         String stringSettingValue;
         if (settingValue instanceof LocalDateTime dateSettingValue) {
             stringSettingValue = dateSettingValue.
-                    format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+                    format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         } else {
             stringSettingValue = String.valueOf(settingValue);
         }
@@ -276,7 +276,7 @@ public class SettingsClient extends GrpcClientBase {
         String stringSettingValue;
         if (settingValue instanceof LocalDateTime dateSettingValue) {
             stringSettingValue = dateSettingValue.
-                    format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+                    format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         } else {
             stringSettingValue = String.valueOf(settingValue);
         }
