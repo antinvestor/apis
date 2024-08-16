@@ -111,12 +111,20 @@ public class MoneyUtil {
         return from(toBigDecimal(a).multiply(b), a.getCurrencyCode());
     }
 
+    public static Money divide(Money a, long b)  {
+        return divide(a, BigDecimal.valueOf(b));
+    }
+
+    public static Money divide(Money a, double b)  {
+        return divide(a, BigDecimal.valueOf(b));
+    }
+
     public static Money divide(Money a, BigDecimal b)  {
         if (Objects.isNull(a) || Objects.isNull(b)) {
             throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to divide with nulls ");
         }
-
-        return from(toBigDecimal(a).divide(b, RoundingMode.DOWN), a.getCurrencyCode());
+        var result = NumberUtils.divide(toBigDecimal(a),b);
+        return from( result, a.getCurrencyCode());
     }
 
     public static String format(Money money) {

@@ -47,4 +47,16 @@ public class NumberUtils {
             throw new UnRetriableException(STATUSCODES.BAD_REQUEST_DATA_ERROR, e);
         }
     }
+
+    public static BigDecimal divide(BigDecimal dividend, BigDecimal divisor) {
+        return dividend.divide(divisor, mathContext());
+    }
+
+    public static BigDecimal divide(BigDecimal dividend, long divisor) {
+        return divide(dividend, BigDecimal.valueOf(divisor));
+    }
+
+    public static BigDecimal divide(BigDecimal dividend, double divisor) {
+        return divide(dividend, BigDecimal.valueOf(divisor));
+    }
 }

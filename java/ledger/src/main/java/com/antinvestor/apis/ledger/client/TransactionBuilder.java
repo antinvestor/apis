@@ -96,19 +96,9 @@ public class TransactionBuilder {
         return this;
     }
 
-    public TransactionBuilder credit(String account, String currency, BigDecimal amount) {
-        Money money = MoneyUtil.from(amount, currency);
-        return credit(account, money);
-    }
-
     public TransactionBuilder debit(String account, Money amount) {
         debitEntries.add(new LocalEntry(account, amount));
         return this;
-    }
-
-    public TransactionBuilder debit(String account, String currency, BigDecimal amount) {
-        Money money = MoneyUtil.from(amount, currency);
-        return debit(account, money);
     }
 
     public Transaction build() throws UnRetriableException {

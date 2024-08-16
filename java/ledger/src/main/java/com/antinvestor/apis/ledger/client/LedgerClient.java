@@ -186,6 +186,20 @@ public class LedgerClient extends GrpcClientBase {
         return stub(context).createTransaction(transaction);
     }
 
+    public Optional<Transaction> clearTransaction(Context context, String reference) {
+        Optional<Transaction> optionalTransaction = getTransaction(context, reference);
+
+        if (optionalTransaction.isPresent()) {
+            var transaction = optionalTransaction.get();
+            Transaction.Builder transactionBuilder = Transaction.newBuilder(transaction);
+            transactionBuilder.setCleared(true);
+            var nueTransaction = transactionBuilder.build();
+            return Optional.of(stub(context).updateTransaction(nueTransaction));
+        } else {
+            return Optional.empty();
+        }
+    }
+
     public Optional<Transaction> updateTransaction(Context context, String reference, Map<String, String> data) {
         Optional<Transaction> optionalTransaction = getTransaction(context, reference);
 
