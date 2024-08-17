@@ -20,7 +20,6 @@ import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
-import com.antinvestor.apis.common.interceptor.TimeoutInterceptor;
 import com.antinvestor.apis.ledger.v1.*;
 import com.google.type.Money;
 import io.grpc.ManagedChannel;
@@ -54,11 +53,11 @@ public class LedgerClient extends GrpcClientBase {
                 .usePlaintext();
 
         if (cfg.authInterceptorEnabled()) {
-            channelBuilder = channelBuilder.intercept(ClientSideGrpcInterceptor.from(context), TimeoutInterceptor.from(context));
+            channelBuilder = channelBuilder.intercept(ClientSideGrpcInterceptor.from(context));
         }
 
         setChannel(channelBuilder.build());
-        ;
+
 
     }
 
