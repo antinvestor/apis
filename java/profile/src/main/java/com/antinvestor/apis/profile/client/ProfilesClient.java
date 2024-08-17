@@ -24,47 +24,44 @@ import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @ApplicationScoped
 public class ProfilesClient extends GrpcClientBase {
 
     public ProfilesClient(ManagedChannel channel) {
-        setChannel( channel);
+        setChannel(channel);
     }
 
     @Inject
     public ProfilesClient(Context context) {
 
         var optionalConfig = ((DefaultContext) context).getConfig();
-        if (optionalConfig.isEmpty())
-            throw new RuntimeException("Profiles configuration is required");
+        if (optionalConfig.isEmpty()) throw new RuntimeException("Profiles configuration is required");
 
         var cfg = (ProfilesConfig) optionalConfig.get();
 
-        var channelBuilder = ManagedChannelBuilder
-                .forAddress(cfg.profilesHostUrl(), cfg.profilesHostPort())
-                .usePlaintext();
+        var channelBuilder = ManagedChannelBuilder.forAddress(cfg.profilesHostUrl(), cfg.profilesHostPort()).usePlaintext();
 
-        if ( cfg.authInterceptorEnabled()){
+        if (cfg.authInterceptorEnabled()) {
             channelBuilder = channelBuilder.intercept(ClientSideGrpcInterceptor.from(context));
         }
 
-        var channel =  channelBuilder.build();
+        var channel = channelBuilder.build();
         setChannel(channel);
     }
 
     private ProfileServiceGrpc.ProfileServiceBlockingStub stub(Context context) {
-        var stub =  ProfileServiceGrpc.newBlockingStub(getChannel());
-        var tenantId =  ClientSideGrpcInterceptor.extractTenantId(context);
+        var stub = ProfileServiceGrpc.newBlockingStub(getChannel());
+        var tenantId = ClientSideGrpcInterceptor.extractTenantId(context);
         return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
     }
 
     public Iterator<List<ProfileObject>> search(Context context, String query) {
-        var searchRequest = SearchRequest.newBuilder()
-                .setQuery(query)
-                .build();
+        var searchRequest = SearchRequest.newBuilder().setQuery(query).build();
         var resp = stub(context).search(searchRequest);
         return new Iterator<>() {
             @Override
@@ -80,86 +77,46 @@ public class ProfilesClient extends GrpcClientBase {
     }
 
     public Optional<ProfileObject> merge(Context context, String ID, String mergeID) {
-        var mergeRequest = MergeRequest.newBuilder()
-                .setId(ID)
-                .setMergeid(mergeID)
-                .build();
+        var mergeRequest = MergeRequest.newBuilder().setId(ID).setMergeid(mergeID).build();
 
         return Optional.of(stub(context).merge(mergeRequest).getData());
     }
 
     public Optional<ProfileObject> createProfile(Context context, ProfileType profileType, String contact, Map<String, String> properties) {
-        var createRequest = CreateRequest.newBuilder()
-                .setType(profileType)
-                .setContact(contact)
-                .putAllProperties(properties)
-                .build();
+        var createRequest = CreateRequest.newBuilder().setType(profileType).setContact(contact).putAllProperties(properties).build();
         return Optional.of(stub(context).create(createRequest).getData());
     }
 
     public Optional<ProfileObject> update(Context context, String profileId, Map<String, String> properties) {
-        var updateRequest = UpdateRequest.newBuilder()
-                .setId(profileId)
-                .putAllProperties(properties)
-                .build();
+        var updateRequest = UpdateRequest.newBuilder().setId(profileId).putAllProperties(properties).build();
         return Optional.of(stub(context).update(updateRequest).getData());
     }
 
     public Optional<ProfileObject> addContact(Context context, String profileId, String contact) {
-        var addContactRequest = AddContactRequest.newBuilder()
-                .setId(profileId)
-                .setContact(contact)
-                .build();
+        var addContactRequest = AddContactRequest.newBuilder().setId(profileId).setContact(contact).build();
         return Optional.of(stub(context).addContact(addContactRequest).getData());
     }
 
     public Optional<ProfileObject> addAddress(Context context, String profileId, String addressName, String country, String city, String area, String street, String house, String postCode, double latitude, double longitude, String extra) {
-        var address = AddressObject.newBuilder()
-                .setName(addressName)
-                .setCountry(country)
-                .setCity(city)
-                .setArea(area)
-                .setStreet(street)
-                .setHouse(house)
-                .setPostcode(postCode)
-                .setLatitude(latitude)
-                .setLongitude(longitude)
-                .setExtra(extra)
-                .build();
-        var addAddressRequest = AddAddressRequest.newBuilder()
-                .setId(profileId)
-                .setAddress(address)
-                .build();
+        var address = AddressObject.newBuilder().setName(addressName).setCountry(country).setCity(city).setArea(area).setStreet(street).setHouse(house).setPostcode(postCode).setLatitude(latitude).setLongitude(longitude).setExtra(extra).build();
+        var addAddressRequest = AddAddressRequest.newBuilder().setId(profileId).setAddress(address).build();
         return Optional.of(stub(context).addAddress(addAddressRequest).getData());
     }
 
     public Optional<ProfileObject> getByID(Context context, String profileId) {
-        var profileIdRequest = GetByIdRequest.newBuilder()
-                .setId(profileId)
-                .build();
+        var profileIdRequest = GetByIdRequest.newBuilder().setId(profileId).build();
         return Optional.of(stub(context).getById(profileIdRequest).getData());
     }
 
     public Optional<ProfileObject> getByContact(Context context, String contactDetail) {
-        var profileContactRequest = GetByContactRequest.newBuilder()
-                .setContact(contactDetail)
-                .build();
+        var profileContactRequest = GetByContactRequest.newBuilder().setContact(contactDetail).build();
 
         return Optional.of(stub(context).getByContact(profileContactRequest).getData());
     }
 
-    public Optional<RelationshipObject> addRelationship(Context context, String relationshipId, String parent, String parentId,
-                                                        String child, String childId, RelationshipType relationshipType,
-                                                        Map<String, String> extras) {
+    public Optional<RelationshipObject> addRelationship(Context context, String relationshipId, String parent, String parentId, String child, String childId, RelationshipType relationshipType, Map<String, String> extras) {
 
-        var addRelationshipReq = AddRelationshipRequest.newBuilder()
-                .setId(relationshipId)
-                .setParent(parent)
-                .setParentId(parentId)
-                .setChild(child)
-                .setChildId(childId)
-                .setType(relationshipType)
-                .putAllProperties(extras).build();
+        var addRelationshipReq = AddRelationshipRequest.newBuilder().setId(relationshipId).setParent(parent).setParentId(parentId).setChild(child).setChildId(childId).setType(relationshipType).putAllProperties(extras).build();
 
         return Optional.of(stub(context).addRelationship(addRelationshipReq).getData());
 
@@ -167,9 +124,7 @@ public class ProfilesClient extends GrpcClientBase {
 
     public Optional<RelationshipObject> deleteRelationship(Context context, String relationshipId, String parentId) {
 
-        var deleteRelationshipReq = DeleteRelationshipRequest.newBuilder()
-                .setId(relationshipId)
-                .setParentId(parentId).build();
+        var deleteRelationshipReq = DeleteRelationshipRequest.newBuilder().setId(relationshipId).setParentId(parentId).build();
 
         return Optional.of(stub(context).deleteRelationship(deleteRelationshipReq).getData());
     }
