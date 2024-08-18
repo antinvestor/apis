@@ -70,7 +70,6 @@ public abstract class GrpcClientBase<T extends AbstractBlockingStub<T>> implemen
                 .keepAliveTimeout(20, TimeUnit.SECONDS)
                 .keepAliveWithoutCalls(true) // Allow keepalive pings even when there are no calls
                 .build();
-
     }
 
     protected T setupStub(Context context, T stub) {
