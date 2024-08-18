@@ -12,17 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.antinvestor.apis.payment.client;
+package com.antinvestor.apis.partition.client;
 
 import com.antinvestor.apis.common.config.DefaultConfig;
 import org.aeonbits.owner.Config;
 
-public interface PaymentDefaultConfig extends DefaultConfig {
-    @Config.DefaultValue("payments.api.antinvestor.com")
-    @Config.Key("${product}.${env}.payments.host.url")
-    String paymentsHostUrl();
+public interface PartitionConfig extends DefaultConfig {
+    @Config.DefaultValue("partitions.api.antinvestor.com")
+    @Config.Key("${product}.${env}.partitions.host.url")
+    String partitionsHostUrl();
 
     @Config.DefaultValue("443")
-    @Config.Key("${product}.${env}.payments.host.port")
-    Integer paymentsHostPort();
+    @Config.Key("${product}.${env}.partitions.host.port")
+    Integer partitionsHostPort();
+
+    @Config.DefaultValue("true")
+    @Config.Key("${product}.${env}.partitions.auth.interceptor.enabled")
+    Boolean authInterceptorEnabled();
+
 }

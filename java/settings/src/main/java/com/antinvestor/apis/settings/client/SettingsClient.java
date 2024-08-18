@@ -15,6 +15,7 @@
 package com.antinvestor.apis.settings.client;
 
 import com.antinvestor.apis.common.base.GrpcClientBase;
+import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.database.BaseModel;
@@ -37,28 +38,25 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
-public class SettingsClient extends GrpcClientBase {
+public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsServiceBlockingStub> {
 
     @Inject
     public SettingsClient(Context context) {
-
-        var optionalConfig = ((DefaultContext) context).getConfig();
-        if (optionalConfig.isEmpty())
-            throw new RuntimeException("Settings configuration is required");
-
-        var cfg = (SettingsConfig) optionalConfig.get();
-
-        ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder
-                .forAddress(cfg.settingsHostUrl(), cfg.settingsHostPort())
-                .usePlaintext();
-
-        if ( cfg.authInterceptorEnabled()){
-            channelBuilder = channelBuilder.intercept(ClientSideGrpcInterceptor.from(context));
-        }
-
-        var channel =  channelBuilder.build();
-        setChannel(channel);
+        setupChannelBuilder(context);
     }
+
+    @Override
+    protected ConnectionConfig getConnectionConfig(Context context, DefaultConfig defaultConfig) {
+        var cfg = (SettingsConfig) defaultConfig;
+        return  new ConnectionConfig(cfg.settingsHostUrl(), cfg.settingsHostPort(), cfg.authInterceptorEnabled() );
+    }
+
+    private SettingsServiceGrpc.SettingsServiceBlockingStub stub(Context context) {
+
+        var stub = SettingsServiceGrpc.newBlockingStub(getChannel());
+        return setupStub(context, stub);
+    }
+
 
     public static Optional<LocalDateTime> asLocalDateTime(String settingValue) {
         try {
@@ -351,11 +349,5 @@ public class SettingsClient extends GrpcClientBase {
     }
 
 
-    private SettingsServiceGrpc.SettingsServiceBlockingStub stub(Context context) {
-
-        var stub = SettingsServiceGrpc.newBlockingStub(getChannel());
-        var tenantId = ClientSideGrpcInterceptor.extractTenantId(context);
-        return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
-    }
 
 }

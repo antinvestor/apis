@@ -23,6 +23,7 @@
 package com.antinvestor.apis.partition.client;
 
 import com.antinvestor.apis.common.base.GrpcClientBase;
+import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
@@ -33,10 +34,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
-public class PartitionClient extends GrpcClientBase {
+public class PartitionClient extends GrpcClientBase<PartitionServiceGrpc.PartitionServiceBlockingStub> {
 
     public PartitionClient(ManagedChannel channel) {
         setChannel(channel);
@@ -44,27 +44,19 @@ public class PartitionClient extends GrpcClientBase {
 
     @Inject
     public PartitionClient(Context context) {
+        setupChannelBuilder(context);
+    }
 
-        var optionalConfig = ((DefaultContext) context).getConfig();
-        if (optionalConfig.isEmpty())
-            throw new RuntimeException("Partition configuration is required");
-
-        var cfg = (PartitionDefaultConfig) optionalConfig.get();
-        var channelBuilder = ManagedChannelBuilder.forAddress(cfg.partitionsHostUrl(), cfg.partitionsHostPort())
-                .usePlaintext();
-
-        var channel =  channelBuilder.
-                intercept(ClientSideGrpcInterceptor.from(context)).
-                build();
-setChannel(channel);
-
+    @Override
+    protected ConnectionConfig getConnectionConfig(Context context, DefaultConfig defaultConfig) {
+        var cfg = (PartitionConfig) defaultConfig;
+        return  new ConnectionConfig(cfg.partitionsHostUrl(), cfg.partitionsHostPort(), cfg.authInterceptorEnabled() );
     }
 
     private PartitionServiceGrpc.PartitionServiceBlockingStub stub(Context context) {
 
         var stub =  PartitionServiceGrpc.newBlockingStub(getChannel());
-        var tenantId =  ClientSideGrpcInterceptor.extractTenantId(context);
-        return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
+        return setupStub(context, stub);
 
     }
 

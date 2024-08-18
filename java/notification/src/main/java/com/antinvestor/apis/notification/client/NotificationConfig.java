@@ -17,7 +17,7 @@ package com.antinvestor.apis.notification.client;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import org.aeonbits.owner.Config;
 
-public interface NotificationDefaultConfig extends DefaultConfig {
+public interface NotificationConfig extends DefaultConfig {
     @Config.DefaultValue("notifications.api.antinvestor.com")
     @Config.Key("${product}.${env}.notifications.host.url")
     String notificationsHostUrl();
@@ -25,4 +25,9 @@ public interface NotificationDefaultConfig extends DefaultConfig {
     @Config.DefaultValue("443")
     @Config.Key("${product}.${env}.notifications.host.port")
     Integer notificationsHostPort();
+
+    @Config.DefaultValue("true")
+    @Config.Key("${product}.${env}.notifications.auth.interceptor.enabled")
+    Boolean authInterceptorEnabled();
+
 }

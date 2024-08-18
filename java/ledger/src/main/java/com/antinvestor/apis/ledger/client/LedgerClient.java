@@ -16,6 +16,7 @@ package com.antinvestor.apis.ledger.client;
 
 
 import com.antinvestor.apis.common.base.GrpcClientBase;
+import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
@@ -33,7 +34,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @ApplicationScoped
-public class LedgerClient extends GrpcClientBase {
+public class LedgerClient extends GrpcClientBase<LedgerServiceGrpc.LedgerServiceBlockingStub> {
 
 
     public LedgerClient(ManagedChannel channel) {
@@ -42,31 +43,19 @@ public class LedgerClient extends GrpcClientBase {
 
     @Inject
     public LedgerClient(Context context) {
-        var optionalConfig = ((DefaultContext) context).getConfig();
-        if (optionalConfig.isEmpty())
-            throw new RuntimeException("Ledger configuration is required");
-
-        var cfg = (LedgerConfig) optionalConfig.get();
-
-        var channelBuilder = ManagedChannelBuilder
-                .forAddress(cfg.ledgerHostUrl(), cfg.ledgerHostPort())
-                .usePlaintext();
-
-        if (cfg.authInterceptorEnabled()) {
-            channelBuilder = channelBuilder.intercept(ClientSideGrpcInterceptor.from(context));
-        }
-
-        setChannel(channelBuilder.build());
-
-
+        setupChannelBuilder(context);
     }
 
+    @Override
+    protected ConnectionConfig getConnectionConfig(Context context, DefaultConfig defaultConfig) {
+        var cfg = (LedgerConfig) defaultConfig;
+        return  new ConnectionConfig(cfg.ledgerHostUrl(), cfg.ledgerHostPort(), cfg.authInterceptorEnabled() );
+    }
 
     private LedgerServiceGrpc.LedgerServiceBlockingStub stub(Context context) {
 
         var stub = LedgerServiceGrpc.newBlockingStub(getChannel());
-        var tenantId = ClientSideGrpcInterceptor.extractTenantId(context);
-        return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
+        return setupStub(context, stub);
     }
 
     public Optional<Ledger> getLedger(Context context, String reference) {

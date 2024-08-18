@@ -15,8 +15,8 @@
 package com.antinvestor.apis.notification.client;
 
 import com.antinvestor.apis.common.base.GrpcClientBase;
+import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
-import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.common.utilities.TextUtils;
 import com.antinvestor.apis.common.v1.*;
@@ -33,34 +33,23 @@ import java.util.*;
  * The NotificationClient class represents a client for accessing notification services.
  */
 @ApplicationScoped
-public class NotificationClient extends GrpcClientBase {
+public class NotificationClient extends GrpcClientBase<NotificationServiceGrpc.NotificationServiceBlockingStub> {
 
     @Inject
     public NotificationClient(Context context) {
+        setupChannelBuilder(context);
+    }
 
-        var optionalConfig = ((DefaultContext) context).getConfig();
-        if (optionalConfig.isEmpty())
-            throw new RuntimeException("Notifications configuration is required");
-
-        var cfg = (NotificationDefaultConfig) optionalConfig.get();
-
-        var channelBuilder = ManagedChannelBuilder
-                .forAddress(cfg.notificationsHostUrl(), cfg.notificationsHostPort())
-                .usePlaintext();
-
-        var channel = channelBuilder.
-                intercept(ClientSideGrpcInterceptor.from(context)).
-                build();
-
-        setChannel(channel);
-
+    @Override
+    protected ConnectionConfig getConnectionConfig(Context context, DefaultConfig defaultConfig) {
+        var cfg = (NotificationConfig) defaultConfig;
+        return  new ConnectionConfig(cfg.notificationsHostUrl(), cfg.notificationsHostPort(), cfg.authInterceptorEnabled() );
     }
 
     private NotificationServiceGrpc.NotificationServiceBlockingStub stub(Context context) {
 
         var stub = NotificationServiceGrpc.newBlockingStub(getChannel());
-        var tenantId = ClientSideGrpcInterceptor.extractTenantId(context);
-        return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
+        return setupStub(context, stub);
     }
 
     /**

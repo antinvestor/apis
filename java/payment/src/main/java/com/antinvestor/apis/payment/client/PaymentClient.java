@@ -16,6 +16,7 @@ package com.antinvestor.apis.payment.client;
 
 
 import com.antinvestor.apis.common.base.GrpcClientBase;
+import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
@@ -35,10 +36,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
-public class PaymentClient extends GrpcClientBase {
+public class PaymentClient extends GrpcClientBase<PaymentServiceGrpc.PaymentServiceBlockingStub> {
 
     public PaymentClient(ManagedChannel channel) {
         setChannel( channel);
@@ -46,25 +46,18 @@ public class PaymentClient extends GrpcClientBase {
 
     @Inject
     public PaymentClient(Context context) {
+        setupChannelBuilder(context);
+    }
 
-        var optionalConfig = ((DefaultContext) context).getConfig();
-        if (optionalConfig.isEmpty())
-            throw new RuntimeException("Payment configuration is required");
-
-        var cfg = (PaymentDefaultConfig) optionalConfig.get();
-        var channelBuilder = ManagedChannelBuilder.forAddress(cfg.paymentsHostUrl(), cfg.paymentsHostPort())
-                .usePlaintext();
-        var channel =  channelBuilder.
-                intercept(ClientSideGrpcInterceptor.from(context)).
-                build();
-
-        setChannel(channel);
+    @Override
+    protected ConnectionConfig getConnectionConfig(Context context, DefaultConfig defaultConfig) {
+        var cfg = (PaymentConfig) defaultConfig;
+        return  new ConnectionConfig(cfg.paymentsHostUrl(), cfg.paymentsHostPort(), cfg.authInterceptorEnabled() );
     }
 
     private PaymentServiceGrpc.PaymentServiceBlockingStub stub(Context context) {
         var stub =  PaymentServiceGrpc.newBlockingStub(getChannel());
-        var tenantId =  ClientSideGrpcInterceptor.extractTenantId(context);
-        return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
+        return setupStub(context, stub);
     }
 
     public Optional<Payment> getByID(Context context, String paymentID) {

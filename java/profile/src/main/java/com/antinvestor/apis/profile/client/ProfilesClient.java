@@ -15,6 +15,7 @@
 package com.antinvestor.apis.profile.client;
 
 import com.antinvestor.apis.common.base.GrpcClientBase;
+import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
@@ -30,7 +31,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @ApplicationScoped
-public class ProfilesClient extends GrpcClientBase {
+public class ProfilesClient extends GrpcClientBase<ProfileServiceGrpc.ProfileServiceBlockingStub> {
 
     public ProfilesClient(ManagedChannel channel) {
         setChannel(channel);
@@ -38,26 +39,18 @@ public class ProfilesClient extends GrpcClientBase {
 
     @Inject
     public ProfilesClient(Context context) {
+        setupChannelBuilder(context);
+    }
 
-        var optionalConfig = ((DefaultContext) context).getConfig();
-        if (optionalConfig.isEmpty()) throw new RuntimeException("Profiles configuration is required");
-
-        var cfg = (ProfilesConfig) optionalConfig.get();
-
-        var channelBuilder = ManagedChannelBuilder.forAddress(cfg.profilesHostUrl(), cfg.profilesHostPort()).usePlaintext();
-
-        if (cfg.authInterceptorEnabled()) {
-            channelBuilder = channelBuilder.intercept(ClientSideGrpcInterceptor.from(context));
-        }
-
-        var channel = channelBuilder.build();
-        setChannel(channel);
+    @Override
+    protected ConnectionConfig getConnectionConfig(Context context, DefaultConfig defaultConfig) {
+        var cfg = (ProfilesConfig) defaultConfig;
+        return  new ConnectionConfig(cfg.profilesHostUrl(), cfg.profilesHostPort(), cfg.authInterceptorEnabled() );
     }
 
     private ProfileServiceGrpc.ProfileServiceBlockingStub stub(Context context) {
         var stub = ProfileServiceGrpc.newBlockingStub(getChannel());
-        var tenantId = ClientSideGrpcInterceptor.extractTenantId(context);
-        return stub.withOption(ClientSideGrpcInterceptor.TENANT_KEY, tenantId);
+        return setupStub(context, stub);
     }
 
     public Iterator<List<ProfileObject>> search(Context context, String query) {
