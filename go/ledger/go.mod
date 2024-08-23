@@ -7,7 +7,7 @@ go 1.21
 require (
 	github.com/antinvestor/apis/go/common v1.20.5
 	go.uber.org/mock v0.4.0
-	google.golang.org/genproto v0.0.0-20240822170219-fc7c04adadcd
+	google.golang.org/genproto v0.0.0-20240823204242-4ba0660f739c
 	google.golang.org/grpc v1.65.0
 	google.golang.org/protobuf v1.34.2
 )
