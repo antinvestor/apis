@@ -50,6 +50,65 @@ public class MoneyUtil {
 
     }
 
+    public static Money zeroMoney(String currency) {
+        return from(BigDecimal.ZERO, currency);
+    }
+
+    public static Money add(Money a, Money b)  {
+        validateMoney(a, b);
+        validateCurrenciesMatch( a, b);
+
+        return from(toBigDecimal(a).add(toBigDecimal(b)), a.getCurrencyCode());
+    }
+
+    public static Money subtract(Money a, Money b)  {
+        validateMoney(a, b);
+        validateCurrenciesMatch( a, b);
+
+        return from(toBigDecimal(a).subtract(toBigDecimal(b)), a.getCurrencyCode());
+    }
+
+    public static Money multiply(Money a, long b) {
+        return multiply(a, BigDecimal.valueOf(b));
+    }
+
+    public static Money multiply(Money a, double b) {
+        return multiply(a, BigDecimal.valueOf(b));
+    }
+
+    public static Money multiply(Money a, BigDecimal b)  {
+
+        validateMoney(a);
+
+        if (Objects.isNull(b)) {
+            throw new UnRetriableException(STATUSCODES.BAD_REQUEST_DATA_ERROR, "Attempting to multiply with null number ");
+        }
+
+        return from(toBigDecimal(a).multiply(b), a.getCurrencyCode());
+    }
+
+    public static Money divide(Money a, long b)  {
+        return divide(a, BigDecimal.valueOf(b));
+    }
+
+    public static Money divide(Money a, double b)  {
+        return divide(a, BigDecimal.valueOf(b));
+    }
+
+    public static Money divide(Money a, BigDecimal b)  {
+        validateMoney(a);
+
+        if (Objects.isNull(b)) {
+            throw new UnRetriableException(STATUSCODES.BAD_REQUEST_DATA_ERROR, "Attempting to divide with null number ");
+        }
+        var result = NumberUtils.divide(toBigDecimal(a),b);
+        return from( result, a.getCurrencyCode());
+    }
+
+    public static String format(Money money) {
+        return String.format("%s %s", money.getCurrencyCode(), toBigDecimal(money).setScale(2, RoundingMode.DOWN).toPlainString());
+    }
+
     public static boolean isEqual(Money a, Money b)  {
         return compare(a, b) == 0;
     }
@@ -74,67 +133,9 @@ public class MoneyUtil {
         return isLessThan(money, zeroMoney(money.getCurrencyCode()));
     }
 
-    public static Money zeroMoney(String currency) {
-        return from(BigDecimal.ZERO, currency);
-    }
-
-    public static Money add(Money a, Money b)  {
-        if (Objects.isNull(a) || Objects.isNull(b)) {
-            throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to add null money");
-        }
-
-        if (!a.getCurrencyCode().equalsIgnoreCase(b.getCurrencyCode())) {
-            throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, STATUSCODES.getLabel(STATUSCODES.BAD_CURRENCY_ERROR));
-        }
-
-        return from(toBigDecimal(a).add(toBigDecimal(b)), a.getCurrencyCode());
-    }
-
-    public static Money subtract(Money a, Money b)  {
-        if (Objects.isNull(a) || Objects.isNull(b)) {
-            throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to subtract null money");
-        }
-
-        if (!a.getCurrencyCode().equalsIgnoreCase(b.getCurrencyCode())) {
-            throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, STATUSCODES.getLabel(STATUSCODES.BAD_CURRENCY_ERROR));
-        }
-
-        return from(toBigDecimal(a).subtract(toBigDecimal(b)), a.getCurrencyCode());
-    }
-
-    public static Money multiply(Money a, BigDecimal b)  {
-        if (Objects.isNull(a) || Objects.isNull(b)) {
-            throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to multiply with nulls ");
-        }
-
-
-        return from(toBigDecimal(a).multiply(b), a.getCurrencyCode());
-    }
-
-    public static Money divide(Money a, long b)  {
-        return divide(a, BigDecimal.valueOf(b));
-    }
-
-    public static Money divide(Money a, double b)  {
-        return divide(a, BigDecimal.valueOf(b));
-    }
-
-    public static Money divide(Money a, BigDecimal b)  {
-        if (Objects.isNull(a) || Objects.isNull(b)) {
-            throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Attempting to divide with nulls ");
-        }
-        var result = NumberUtils.divide(toBigDecimal(a),b);
-        return from( result, a.getCurrencyCode());
-    }
-
-    public static String format(Money money) {
-        return String.format("%s %s", money.getCurrencyCode(), toBigDecimal(money).setScale(2, RoundingMode.DOWN).toPlainString());
-    }
-
     public static Money min(Money a, Money b)  {
         return compare(a, b) <= 0 ? a : b;
     }
-
 
     public static Money max(Money a, Money b)  {
         return compare(a, b) >= 0 ? a : b;
@@ -143,24 +144,28 @@ public class MoneyUtil {
     public static int compare(Money a, Money b)  {
         validateMoney(a, b);
 
-        if (!a.getCurrencyCode().equals(b.getCurrencyCode())) {
-            throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, "Both amounts must be in the same currency");
-        }
+        validateCurrenciesMatch(a, b);
 
         int unitsComparison = Long.compare(a.getUnits(), b.getUnits());
         return unitsComparison != 0 ? unitsComparison : Integer.compare(a.getNanos(), b.getNanos());
     }
 
-    private static void validateMoney(Money... moneys) {
-        String currency = null;
+    public static void validateCurrenciesMatch(Money a, Money b){
+        if (!a.getCurrencyCode().equalsIgnoreCase(b.getCurrencyCode())) {
+            throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, "Amounts have different currencies");
+        }
+    }
+
+    public static void validateMoney(Money... moneys) {
         for (Money money : moneys) {
             if (Objects.isNull(money)) {
                 throw new UnRetriableException(STATUSCODES.BAD_DATE_ERROR, "Money object must not be null");
             }
 
-            if (Objects.isNull(currency)) {
-                currency = money.getCurrencyCode();
+            if (TextUtils.isBlank(money.getCurrencyCode())) {
+                throw new UnRetriableException(STATUSCODES.BAD_CURRENCY_ERROR, "Money object must have a valid currency set");
             }
+
 
         }
     }
