@@ -1,15 +1,20 @@
-version: v1
+version: v2
 name: buf.build/antinvestor/ledger
+deps:
+  - buf.build/antinvestor/common
+  - buf.build/bufbuild/protovalidate
+  - buf.build/googleapis/googleapis
+lint:
+  use:
+    - STANDARD
+  except:
+    - FIELD_NOT_REQUIRED
+    - PACKAGE_NO_IMPORT_CYCLE
+  ignore:
+    - ledger
 breaking:
   use:
     - FILE
-lint:
-  allow_comment_ignores: true
-  use:
-    - DEFAULT
-  ignore:
-    - ledger
-deps:
-  - buf.build/bufbuild/protovalidate
-  - buf.build/googleapis/googleapis
-  - buf.build/antinvestor/common
+  except:
+    - EXTENSION_NO_DELETE
+    - FIELD_SAME_DEFAULT

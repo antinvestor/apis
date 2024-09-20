@@ -91,27 +91,27 @@ public final class LostIdServiceGrpc {
     return getListCollectibleMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.lostid.v1.SearchRequest,
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
       com.antinvestor.apis.lostid.v1.SearchResponse> getSearchMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "Search",
-      requestType = com.antinvestor.apis.lostid.v1.SearchRequest.class,
+      requestType = com.antinvestor.apis.common.v1.SearchRequest.class,
       responseType = com.antinvestor.apis.lostid.v1.SearchResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.lostid.v1.SearchRequest,
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
       com.antinvestor.apis.lostid.v1.SearchResponse> getSearchMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.lostid.v1.SearchRequest, com.antinvestor.apis.lostid.v1.SearchResponse> getSearchMethod;
+    io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest, com.antinvestor.apis.lostid.v1.SearchResponse> getSearchMethod;
     if ((getSearchMethod = LostIdServiceGrpc.getSearchMethod) == null) {
       synchronized (LostIdServiceGrpc.class) {
         if ((getSearchMethod = LostIdServiceGrpc.getSearchMethod) == null) {
           LostIdServiceGrpc.getSearchMethod = getSearchMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.lostid.v1.SearchRequest, com.antinvestor.apis.lostid.v1.SearchResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.common.v1.SearchRequest, com.antinvestor.apis.lostid.v1.SearchResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Search"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.lostid.v1.SearchRequest.getDefaultInstance()))
+                  com.antinvestor.apis.common.v1.SearchRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.antinvestor.apis.lostid.v1.SearchResponse.getDefaultInstance()))
               .setSchemaDescriptor(new LostIdServiceMethodDescriptorSupplier("Search"))
@@ -285,7 +285,7 @@ public final class LostIdServiceGrpc {
      * Log a new search request
      * </pre>
      */
-    default void search(com.antinvestor.apis.lostid.v1.SearchRequest request,
+    default void search(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.lostid.v1.SearchResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSearchMethod(), responseObserver);
     }
@@ -363,7 +363,7 @@ public final class LostIdServiceGrpc {
      * Log a new search request
      * </pre>
      */
-    public void search(com.antinvestor.apis.lostid.v1.SearchRequest request,
+    public void search(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.lostid.v1.SearchResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSearchMethod(), getCallOptions()), request, responseObserver);
@@ -433,7 +433,7 @@ public final class LostIdServiceGrpc {
      * Log a new search request
      * </pre>
      */
-    public com.antinvestor.apis.lostid.v1.SearchResponse search(com.antinvestor.apis.lostid.v1.SearchRequest request) {
+    public com.antinvestor.apis.lostid.v1.SearchResponse search(com.antinvestor.apis.common.v1.SearchRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSearchMethod(), getCallOptions(), request);
     }
@@ -495,7 +495,7 @@ public final class LostIdServiceGrpc {
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.lostid.v1.SearchResponse> search(
-        com.antinvestor.apis.lostid.v1.SearchRequest request) {
+        com.antinvestor.apis.common.v1.SearchRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getSearchMethod(), getCallOptions()), request);
     }
@@ -542,7 +542,7 @@ public final class LostIdServiceGrpc {
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.lostid.v1.ListCollectibleResponse>) responseObserver);
           break;
         case METHODID_SEARCH:
-          serviceImpl.search((com.antinvestor.apis.lostid.v1.SearchRequest) request,
+          serviceImpl.search((com.antinvestor.apis.common.v1.SearchRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.lostid.v1.SearchResponse>) responseObserver);
           break;
         case METHODID_LIST_SEARCH:
@@ -593,7 +593,7 @@ public final class LostIdServiceGrpc {
           getSearchMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              com.antinvestor.apis.lostid.v1.SearchRequest,
+              com.antinvestor.apis.common.v1.SearchRequest,
               com.antinvestor.apis.lostid.v1.SearchResponse>(
                 service, METHODID_SEARCH)))
         .addMethod(

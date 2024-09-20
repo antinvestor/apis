@@ -17,6 +17,7 @@ syntax = "proto3";
 package settings.v1;
 
 import "buf/validate/validate.proto";
+import "common/v1/common.proto";
 
 option go_package = "github.com/antinvestor/apis/go/settings/v1;settingsv1";
 option java_multiple_files = true;
@@ -63,11 +64,7 @@ message GetResponse {
   SettingObject data = 1;
 }
 
-message ListRequest {
-  Setting key = 1;
-}
-
-message ListResponse {
+message SearchResponse {
   repeated SettingObject data = 1;
 }
 
@@ -84,7 +81,7 @@ service SettingsService {
   // Gets a single setting and its stored value
   rpc Get(GetRequest) returns (GetResponse);
   // Pulls all setting values that match some criteria in the name & any other setting properties
-  rpc List(ListRequest) returns (stream ListResponse);
+  rpc Search(common.v1.SearchRequest) returns (stream SearchResponse);
 
   rpc Set(SetRequest) returns (SetResponse);
 }

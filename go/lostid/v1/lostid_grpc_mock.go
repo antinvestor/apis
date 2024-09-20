@@ -13,6 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -141,7 +142,7 @@ func (mr *MockLostIdServiceClientMockRecorder) Progress(ctx, in any, opts ...any
 }
 
 // Search mocks base method.
-func (m *MockLostIdServiceClient) Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
+func (m *MockLostIdServiceClient) Search(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -256,7 +257,7 @@ func (mr *MockLostIdServiceServerMockRecorder) Progress(arg0, arg1 any) *gomock.
 }
 
 // Search mocks base method.
-func (m *MockLostIdServiceServer) Search(arg0 context.Context, arg1 *SearchRequest) (*SearchResponse, error) {
+func (m *MockLostIdServiceServer) Search(arg0 context.Context, arg1 *commonv1.SearchRequest) (*SearchResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", arg0, arg1)
 	ret0, _ := ret[0].(*SearchResponse)

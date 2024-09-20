@@ -36,8 +36,12 @@ endef
 
 
 define buf_generate
-cd proto/${1} && PATH=$(BIN) $(BIN)/buf mod update
+cd proto/${1} && PATH=$(BIN) $(BIN)/buf dep update
 cd proto/${1} && PATH=$(BIN) $(BIN)/buf generate
+endef
+
+define buf_migrate
+cd proto/${1} && PATH=$(BIN) $(BIN)/buf config migrate
 endef
 
 define lint_module
@@ -144,6 +148,12 @@ generate_grpc_mocks:
 	$(call mock_package,ledger,v1)
 	$(call mock_package,lostid,v1)
 
+
+.PHONY: v2_migration
+v2_migration:
+	$(call buf_migrate,common)
+	$(call buf_migrate,payment)
+
 .PHONY: generate_buf_gen
 generate_buf_gen:
 	$(call buf_generate,common)
@@ -179,15 +189,15 @@ checkgenerate:
 
 $(BIN)/buf: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/bufbuild/buf/cmd/buf@v1.28.1
+	$(GO) install github.com/bufbuild/buf/cmd/buf@v1.42.0
 
 $(BIN)/license-header: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/bufbuild/buf/private/pkg/licenseheader/cmd/license-header@v1.28.1
+	$(GO) install github.com/bufbuild/buf/private/pkg/licenseheader/cmd/license-header@v1.42.0
 
 $(BIN)/golangci-lint: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.54.1
+	$(GO) install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.61.0
 
 $(BIN)/gomock: Makefile
 	@mkdir -p $(@D)

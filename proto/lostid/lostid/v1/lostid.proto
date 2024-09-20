@@ -32,8 +32,8 @@ message CollectibleRequest {
     (buf.validate.field).repeated.max_items = 5,
     (buf.validate.field).repeated.items = {
       string: {
-        min_len: 3,
-        max_len: 40,
+        min_len: 3
+        max_len: 40
         pattern: "[0-9a-z_-]{3,20}"
       }
     }
@@ -60,16 +60,6 @@ message ListCollectibleRequest {
 
 message ListCollectibleResponse {
   repeated CollectibleResponse data = 1;
-}
-
-message SearchRequest {
-  string id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string query = 2;
-  map<string, string> properties = 3;
 }
 
 message SearchResponse {
@@ -155,7 +145,7 @@ service LostIdService {
   rpc ListCollectible(ListCollectibleRequest) returns (stream ListCollectibleResponse);
 
   // Log a new search request
-  rpc Search(SearchRequest) returns (SearchResponse);
+  rpc Search(common.v1.SearchRequest) returns (SearchResponse);
 
   rpc ListSearch(ListSearchRequest) returns (stream ListSearchResponse);
 

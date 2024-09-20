@@ -13,6 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -60,24 +61,24 @@ func (mr *MockSettingsServiceClientMockRecorder) Get(ctx, in any, opts ...any) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MockSettingsServiceClient)(nil).Get), varargs...)
 }
 
-// List mocks base method.
-func (m *MockSettingsServiceClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListResponse], error) {
+// Search mocks base method.
+func (m *MockSettingsServiceClient) Search(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "List", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListResponse])
+	ret := m.ctrl.Call(m, "Search", varargs...)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[SearchResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// List indicates an expected call of List.
-func (mr *MockSettingsServiceClientMockRecorder) List(ctx, in any, opts ...any) *gomock.Call {
+// Search indicates an expected call of Search.
+func (mr *MockSettingsServiceClientMockRecorder) Search(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "List", reflect.TypeOf((*MockSettingsServiceClient)(nil).List), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Search", reflect.TypeOf((*MockSettingsServiceClient)(nil).Search), varargs...)
 }
 
 // Set mocks base method.
@@ -138,18 +139,18 @@ func (mr *MockSettingsServiceServerMockRecorder) Get(arg0, arg1 any) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MockSettingsServiceServer)(nil).Get), arg0, arg1)
 }
 
-// List mocks base method.
-func (m *MockSettingsServiceServer) List(arg0 *ListRequest, arg1 grpc.ServerStreamingServer[ListResponse]) error {
+// Search mocks base method.
+func (m *MockSettingsServiceServer) Search(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[SearchResponse]) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "List", arg0, arg1)
+	ret := m.ctrl.Call(m, "Search", arg0, arg1)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
-// List indicates an expected call of List.
-func (mr *MockSettingsServiceServerMockRecorder) List(arg0, arg1 any) *gomock.Call {
+// Search indicates an expected call of Search.
+func (mr *MockSettingsServiceServerMockRecorder) Search(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "List", reflect.TypeOf((*MockSettingsServiceServer)(nil).List), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Search", reflect.TypeOf((*MockSettingsServiceServer)(nil).Search), arg0, arg1)
 }
 
 // Set mocks base method.

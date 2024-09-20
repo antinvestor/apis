@@ -22,6 +22,7 @@ package lostidv1
 
 import (
 	context "context"
+	v1 "github.com/antinvestor/apis/go/common/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -49,7 +50,7 @@ type LostIdServiceClient interface {
 	Collectible(ctx context.Context, in *CollectibleRequest, opts ...grpc.CallOption) (*CollectibleResponse, error)
 	ListCollectible(ctx context.Context, in *ListCollectibleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListCollectibleResponse], error)
 	// Log a new search request
-	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
+	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
 	ListSearch(ctx context.Context, in *ListSearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListSearchResponse], error)
 	Progress(ctx context.Context, in *ProgressRequest, opts ...grpc.CallOption) (*ProgressResponse, error)
 	ListTransaction(ctx context.Context, in *ListTransactionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListTransactionResponse], error)
@@ -92,7 +93,7 @@ func (c *lostIdServiceClient) ListCollectible(ctx context.Context, in *ListColle
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type LostIdService_ListCollectibleClient = grpc.ServerStreamingClient[ListCollectibleResponse]
 
-func (c *lostIdServiceClient) Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
+func (c *lostIdServiceClient) Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SearchResponse)
 	err := c.cc.Invoke(ctx, LostIdService_Search_FullMethodName, in, out, cOpts...)
@@ -158,7 +159,7 @@ type LostIdServiceServer interface {
 	Collectible(context.Context, *CollectibleRequest) (*CollectibleResponse, error)
 	ListCollectible(*ListCollectibleRequest, grpc.ServerStreamingServer[ListCollectibleResponse]) error
 	// Log a new search request
-	Search(context.Context, *SearchRequest) (*SearchResponse, error)
+	Search(context.Context, *v1.SearchRequest) (*SearchResponse, error)
 	ListSearch(*ListSearchRequest, grpc.ServerStreamingServer[ListSearchResponse]) error
 	Progress(context.Context, *ProgressRequest) (*ProgressResponse, error)
 	ListTransaction(*ListTransactionRequest, grpc.ServerStreamingServer[ListTransactionResponse]) error
@@ -178,7 +179,7 @@ func (UnimplementedLostIdServiceServer) Collectible(context.Context, *Collectibl
 func (UnimplementedLostIdServiceServer) ListCollectible(*ListCollectibleRequest, grpc.ServerStreamingServer[ListCollectibleResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method ListCollectible not implemented")
 }
-func (UnimplementedLostIdServiceServer) Search(context.Context, *SearchRequest) (*SearchResponse, error) {
+func (UnimplementedLostIdServiceServer) Search(context.Context, *v1.SearchRequest) (*SearchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
 func (UnimplementedLostIdServiceServer) ListSearch(*ListSearchRequest, grpc.ServerStreamingServer[ListSearchResponse]) error {
@@ -241,7 +242,7 @@ func _LostIdService_ListCollectible_Handler(srv interface{}, stream grpc.ServerS
 type LostIdService_ListCollectibleServer = grpc.ServerStreamingServer[ListCollectibleResponse]
 
 func _LostIdService_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SearchRequest)
+	in := new(v1.SearchRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -253,7 +254,7 @@ func _LostIdService_Search_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: LostIdService_Search_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LostIdServiceServer).Search(ctx, req.(*SearchRequest))
+		return srv.(LostIdServiceServer).Search(ctx, req.(*v1.SearchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
