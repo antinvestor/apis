@@ -62,9 +62,9 @@ subprojects {
 
     dependencies {
         api("com.google.protobuf:protobuf-java:4.28.2")
-        api("io.grpc:grpc-protobuf:1.66.0")
-        api("io.grpc:grpc-services:1.66.0")
-        api("io.grpc:grpc-stub:1.66.0")
+        api("io.grpc:grpc-protobuf:1.68.0")
+        api("io.grpc:grpc-services:1.68.0")
+        api("io.grpc:grpc-stub:1.68.0")
         api("build.buf:protovalidate:0.3.2")
 
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0")
@@ -74,7 +74,7 @@ subprojects {
 
         compileOnly("org.apache.tomcat:annotations-api:6.0.53")
 
-        runtimeOnly("io.grpc:grpc-netty-shaded:1.66.0")
+        runtimeOnly("io.grpc:grpc-netty-shaded:1.68.0")
 
     }
 
