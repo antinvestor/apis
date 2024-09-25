@@ -9,6 +9,6 @@ dependencies {
     implementation "jakarta.annotation:jakarta.annotation-api:3.0.0"
     implementation "org.apache.httpcomponents:httpmime:4.5.14"
     testImplementation "junit:junit:4.13.2"
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.1'
 }
 
