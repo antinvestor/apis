@@ -92,7 +92,7 @@ proto.notification.v1.TemplateSearchResponse.prototype.toObject = function(opt_i
  */
 proto.notification.v1.TemplateSearchResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    dataList: jspb.Message.toObjectList(msg.getDataList(),
+dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.notification.v1.Template.toObject, includeInstance)
   };
 

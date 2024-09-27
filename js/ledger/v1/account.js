@@ -86,12 +86,12 @@ proto.ledger.v1.Account.prototype.toObject = function(opt_includeInstance) {
  */
 proto.ledger.v1.Account.toObject = function(includeInstance, msg) {
   var f, obj = {
-    reference: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    ledger: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    balance: (f = msg.getBalance()) && proto.google.type.Money.toObject(includeInstance, f),
-    dataMap: (f = msg.getDataMap()) ? f.toObject(includeInstance, undefined) : [],
-    unclearedBalance: (f = msg.getUnclearedBalance()) && proto.google.type.Money.toObject(includeInstance, f),
-    reservedBalance: (f = msg.getReservedBalance()) && proto.google.type.Money.toObject(includeInstance, f)
+reference: jspb.Message.getFieldWithDefault(msg, 1, ""),
+ledger: jspb.Message.getFieldWithDefault(msg, 3, ""),
+balance: (f = msg.getBalance()) && proto.google.type.Money.toObject(includeInstance, f),
+dataMap: (f = msg.getDataMap()) ? f.toObject(includeInstance, undefined) : [],
+unclearedBalance: (f = msg.getUnclearedBalance()) && proto.google.type.Money.toObject(includeInstance, f),
+reservedBalance: (f = msg.getReservedBalance()) && proto.google.type.Money.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

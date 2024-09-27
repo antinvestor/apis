@@ -85,7 +85,7 @@ proto.profile.v1.DeleteRelationshipResponse.prototype.toObject = function(opt_in
  */
 proto.profile.v1.DeleteRelationshipResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.profile.v1.RelationshipObject.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.profile.v1.RelationshipObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

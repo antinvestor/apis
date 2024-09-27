@@ -85,11 +85,11 @@ proto.payment.v1.ReconcileResponse.prototype.toObject = function(opt_includeInst
  */
 proto.payment.v1.ReconcileResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    transactionId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    referenceId: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    status: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    description: jspb.Message.getFieldWithDefault(msg, 5, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+transactionId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+referenceId: jspb.Message.getFieldWithDefault(msg, 3, ""),
+status: jspb.Message.getFieldWithDefault(msg, 4, 0),
+description: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {

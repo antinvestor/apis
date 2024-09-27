@@ -84,7 +84,7 @@ proto.profile.v1.GetByIdRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.profile.v1.GetByIdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

@@ -94,14 +94,14 @@ proto.ledger.v1.Transaction.prototype.toObject = function(opt_includeInstance) {
  */
 proto.ledger.v1.Transaction.toObject = function(includeInstance, msg) {
   var f, obj = {
-    reference: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    currency: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    transactedAt: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    dataMap: (f = msg.getDataMap()) ? f.toObject(includeInstance, undefined) : [],
-    entriesList: jspb.Message.toObjectList(msg.getEntriesList(),
+reference: jspb.Message.getFieldWithDefault(msg, 1, ""),
+currency: jspb.Message.getFieldWithDefault(msg, 2, ""),
+transactedAt: jspb.Message.getFieldWithDefault(msg, 3, ""),
+dataMap: (f = msg.getDataMap()) ? f.toObject(includeInstance, undefined) : [],
+entriesList: jspb.Message.toObjectList(msg.getEntriesList(),
     proto.ledger.v1.TransactionEntry.toObject, includeInstance),
-    cleared: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
-    type: jspb.Message.getFieldWithDefault(msg, 7, 0)
+cleared: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
+type: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {

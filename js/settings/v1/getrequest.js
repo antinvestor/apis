@@ -85,7 +85,7 @@ proto.settings.v1.GetRequest.prototype.toObject = function(opt_includeInstance) 
  */
 proto.settings.v1.GetRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    key: (f = msg.getKey()) && proto.settings.v1.Setting.toObject(includeInstance, f)
+key: (f = msg.getKey()) && proto.settings.v1.Setting.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

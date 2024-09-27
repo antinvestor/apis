@@ -85,7 +85,7 @@ proto.payment.v1.ReceiveRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.payment.v1.ReceiveRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.payment.v1.Payment.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.payment.v1.Payment.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

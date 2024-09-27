@@ -91,12 +91,12 @@ proto.profile.v1.ListRelationshipRequest.prototype.toObject = function(opt_inclu
  */
 proto.profile.v1.ListRelationshipRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    peerName: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    peerId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    lastRelationshipId: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    relatedChildrenIdList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
-    count: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    invertRelation: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
+peerName: jspb.Message.getFieldWithDefault(msg, 1, ""),
+peerId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+lastRelationshipId: jspb.Message.getFieldWithDefault(msg, 3, ""),
+relatedChildrenIdList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
+count: jspb.Message.getFieldWithDefault(msg, 5, 0),
+invertRelation: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
   };
 
   if (includeInstance) {

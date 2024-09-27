@@ -85,7 +85,7 @@ proto.notification.v1.TemplateSaveResponse.prototype.toObject = function(opt_inc
  */
 proto.notification.v1.TemplateSaveResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.notification.v1.Template.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.notification.v1.Template.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

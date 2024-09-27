@@ -92,7 +92,7 @@ proto.partition.v1.ListAccessRoleResponse.prototype.toObject = function(opt_incl
  */
 proto.partition.v1.ListAccessRoleResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    roleList: jspb.Message.toObjectList(msg.getRoleList(),
+roleList: jspb.Message.toObjectList(msg.getRoleList(),
     proto.partition.v1.AccessRoleObject.toObject, includeInstance)
   };
 

@@ -85,7 +85,7 @@ proto.profile.v1.GetByIdResponse.prototype.toObject = function(opt_includeInstan
  */
 proto.profile.v1.GetByIdResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.profile.v1.ProfileObject.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.profile.v1.ProfileObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

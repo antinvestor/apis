@@ -85,10 +85,10 @@ proto.settings.v1.SettingObject.prototype.toObject = function(opt_includeInstanc
  */
 proto.settings.v1.SettingObject.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    key: (f = msg.getKey()) && proto.settings.v1.Setting.toObject(includeInstance, f),
-    value: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    updated: jspb.Message.getFieldWithDefault(msg, 4, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+key: (f = msg.getKey()) && proto.settings.v1.Setting.toObject(includeInstance, f),
+value: jspb.Message.getFieldWithDefault(msg, 3, ""),
+updated: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {

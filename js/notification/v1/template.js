@@ -93,11 +93,11 @@ proto.notification.v1.Template.prototype.toObject = function(opt_includeInstance
  */
 proto.notification.v1.Template.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    dataList: jspb.Message.toObjectList(msg.getDataList(),
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.notification.v1.TemplateData.toObject, includeInstance),
-    extraMap: (f = msg.getExtraMap()) ? f.toObject(includeInstance, undefined) : []
+extraMap: (f = msg.getExtraMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {

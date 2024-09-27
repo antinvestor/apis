@@ -85,7 +85,7 @@ proto.partition.v1.CreateTenantResponse.prototype.toObject = function(opt_includ
  */
 proto.partition.v1.CreateTenantResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.partition.v1.TenantObject.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.partition.v1.TenantObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

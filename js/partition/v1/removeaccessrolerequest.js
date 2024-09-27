@@ -84,7 +84,7 @@ proto.partition.v1.RemoveAccessRoleRequest.prototype.toObject = function(opt_inc
  */
 proto.partition.v1.RemoveAccessRoleRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accessRoleId: jspb.Message.getFieldWithDefault(msg, 1, "")
+accessRoleId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

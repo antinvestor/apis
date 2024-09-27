@@ -86,9 +86,9 @@ proto.profile.v1.UpdateRequest.prototype.toObject = function(opt_includeInstance
  */
 proto.profile.v1.UpdateRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    propertiesMap: (f = msg.getPropertiesMap()) ? f.toObject(includeInstance, undefined) : [],
-    state: jspb.Message.getFieldWithDefault(msg, 3, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+propertiesMap: (f = msg.getPropertiesMap()) ? f.toObject(includeInstance, undefined) : [],
+state: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {

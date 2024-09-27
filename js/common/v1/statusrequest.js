@@ -85,8 +85,8 @@ proto.common.v1.StatusRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.common.v1.StatusRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    extrasMap: (f = msg.getExtrasMap()) ? f.toObject(includeInstance, undefined) : []
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+extrasMap: (f = msg.getExtrasMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {

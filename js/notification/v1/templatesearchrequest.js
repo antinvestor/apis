@@ -84,10 +84,10 @@ proto.notification.v1.TemplateSearchRequest.prototype.toObject = function(opt_in
  */
 proto.notification.v1.TemplateSearchRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    query: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    languageCode: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    page: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    count: jspb.Message.getFieldWithDefault(msg, 4, 0)
+query: jspb.Message.getFieldWithDefault(msg, 1, ""),
+languageCode: jspb.Message.getFieldWithDefault(msg, 2, ""),
+page: jspb.Message.getFieldWithDefault(msg, 3, 0),
+count: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {

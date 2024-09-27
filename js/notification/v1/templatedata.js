@@ -85,10 +85,10 @@ proto.notification.v1.TemplateData.prototype.toObject = function(opt_includeInst
  */
 proto.notification.v1.TemplateData.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    detail: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    language: (f = msg.getLanguage()) && proto.notification.v1.Language.toObject(includeInstance, f)
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+type: jspb.Message.getFieldWithDefault(msg, 2, ""),
+detail: jspb.Message.getFieldWithDefault(msg, 3, ""),
+language: (f = msg.getLanguage()) && proto.notification.v1.Language.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

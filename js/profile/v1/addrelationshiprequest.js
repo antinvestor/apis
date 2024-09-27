@@ -86,13 +86,13 @@ proto.profile.v1.AddRelationshipRequest.prototype.toObject = function(opt_includ
  */
 proto.profile.v1.AddRelationshipRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    parent: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    parentId: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    child: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    childId: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    propertiesMap: (f = msg.getPropertiesMap()) ? f.toObject(includeInstance, undefined) : []
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+parent: jspb.Message.getFieldWithDefault(msg, 2, ""),
+parentId: jspb.Message.getFieldWithDefault(msg, 3, ""),
+child: jspb.Message.getFieldWithDefault(msg, 4, ""),
+childId: jspb.Message.getFieldWithDefault(msg, 5, ""),
+type: jspb.Message.getFieldWithDefault(msg, 6, 0),
+propertiesMap: (f = msg.getPropertiesMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {

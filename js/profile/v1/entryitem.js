@@ -84,8 +84,8 @@ proto.profile.v1.EntryItem.prototype.toObject = function(opt_includeInstance) {
  */
 proto.profile.v1.EntryItem.toObject = function(includeInstance, msg) {
   var f, obj = {
-    objectName: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    objectId: jspb.Message.getFieldWithDefault(msg, 2, "")
+objectName: jspb.Message.getFieldWithDefault(msg, 1, ""),
+objectId: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {

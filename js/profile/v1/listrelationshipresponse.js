@@ -92,7 +92,7 @@ proto.profile.v1.ListRelationshipResponse.prototype.toObject = function(opt_incl
  */
 proto.profile.v1.ListRelationshipResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    dataList: jspb.Message.toObjectList(msg.getDataList(),
+dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.profile.v1.RelationshipObject.toObject, includeInstance)
   };
 

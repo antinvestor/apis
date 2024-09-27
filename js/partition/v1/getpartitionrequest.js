@@ -84,7 +84,7 @@ proto.partition.v1.GetPartitionRequest.prototype.toObject = function(opt_include
  */
 proto.partition.v1.GetPartitionRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

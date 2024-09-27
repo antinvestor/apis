@@ -84,11 +84,11 @@ proto.settings.v1.Setting.prototype.toObject = function(opt_includeInstance) {
  */
 proto.settings.v1.Setting.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    object: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    objectId: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    lang: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    module: jspb.Message.getFieldWithDefault(msg, 5, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+object: jspb.Message.getFieldWithDefault(msg, 2, ""),
+objectId: jspb.Message.getFieldWithDefault(msg, 3, ""),
+lang: jspb.Message.getFieldWithDefault(msg, 4, ""),
+module: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {

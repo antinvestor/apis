@@ -84,8 +84,8 @@ proto.profile.v1.DeleteRelationshipRequest.prototype.toObject = function(opt_inc
  */
 proto.profile.v1.DeleteRelationshipRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    parentId: jspb.Message.getFieldWithDefault(msg, 2, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+parentId: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {

@@ -87,12 +87,12 @@ proto.profile.v1.ContactObject.prototype.toObject = function(opt_includeInstance
  */
 proto.profile.v1.ContactObject.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    detail: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    verified: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
-    communicationLevel: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    state: jspb.Message.getFieldWithDefault(msg, 6, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+type: jspb.Message.getFieldWithDefault(msg, 2, 0),
+detail: jspb.Message.getFieldWithDefault(msg, 3, ""),
+verified: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
+communicationLevel: jspb.Message.getFieldWithDefault(msg, 5, 0),
+state: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {

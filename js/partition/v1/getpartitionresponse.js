@@ -85,7 +85,7 @@ proto.partition.v1.GetPartitionResponse.prototype.toObject = function(opt_includ
  */
 proto.partition.v1.GetPartitionResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.partition.v1.PartitionObject.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.partition.v1.PartitionObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

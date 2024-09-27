@@ -84,7 +84,7 @@ proto.partition.v1.RemoveAccessResponse.prototype.toObject = function(opt_includ
  */
 proto.partition.v1.RemoveAccessResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    succeeded: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
+succeeded: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
   };
 
   if (includeInstance) {

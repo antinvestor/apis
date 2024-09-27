@@ -84,7 +84,7 @@ proto.partition.v1.ListAccessRoleRequest.prototype.toObject = function(opt_inclu
  */
 proto.partition.v1.ListAccessRoleRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accessId: jspb.Message.getFieldWithDefault(msg, 1, "")
+accessId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

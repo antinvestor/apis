@@ -86,10 +86,10 @@ proto.ledger.v1.Ledger.prototype.toObject = function(opt_includeInstance) {
  */
 proto.ledger.v1.Ledger.toObject = function(includeInstance, msg) {
   var f, obj = {
-    reference: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    parent: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    dataMap: (f = msg.getDataMap()) ? f.toObject(includeInstance, undefined) : []
+reference: jspb.Message.getFieldWithDefault(msg, 1, ""),
+type: jspb.Message.getFieldWithDefault(msg, 2, 0),
+parent: jspb.Message.getFieldWithDefault(msg, 3, ""),
+dataMap: (f = msg.getDataMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {

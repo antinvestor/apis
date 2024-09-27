@@ -85,7 +85,7 @@ proto.partition.v1.CreateAccessRoleResponse.prototype.toObject = function(opt_in
  */
 proto.partition.v1.CreateAccessRoleResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.partition.v1.AccessRoleObject.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.partition.v1.AccessRoleObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

@@ -87,12 +87,12 @@ proto.common.v1.StatusResponse.prototype.toObject = function(opt_includeInstance
  */
 proto.common.v1.StatusResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    state: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    status: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    externalId: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    transientId: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    extrasMap: (f = msg.getExtrasMap()) ? f.toObject(includeInstance, undefined) : []
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+state: jspb.Message.getFieldWithDefault(msg, 2, 0),
+status: jspb.Message.getFieldWithDefault(msg, 3, 0),
+externalId: jspb.Message.getFieldWithDefault(msg, 4, ""),
+transientId: jspb.Message.getFieldWithDefault(msg, 5, ""),
+extrasMap: (f = msg.getExtrasMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {

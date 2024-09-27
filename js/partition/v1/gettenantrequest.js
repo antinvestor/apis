@@ -84,7 +84,7 @@ proto.partition.v1.GetTenantRequest.prototype.toObject = function(opt_includeIns
  */
 proto.partition.v1.GetTenantRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

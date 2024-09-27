@@ -85,12 +85,12 @@ proto.payment.v1.ReconcileRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.payment.v1.ReconcileRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    externalTransactionId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    route: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    outbound: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    amount: (f = msg.getAmount()) && proto.google.type.Money.toObject(includeInstance, f),
-    owner: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    countryCode: jspb.Message.getFieldWithDefault(msg, 6, "")
+externalTransactionId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+route: jspb.Message.getFieldWithDefault(msg, 2, ""),
+outbound: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+amount: (f = msg.getAmount()) && proto.google.type.Money.toObject(includeInstance, f),
+owner: jspb.Message.getFieldWithDefault(msg, 5, ""),
+countryCode: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {

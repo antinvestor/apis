@@ -85,7 +85,7 @@ proto.notification.v1.ReceiveRequest.prototype.toObject = function(opt_includeIn
  */
 proto.notification.v1.ReceiveRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.notification.v1.Notification.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.notification.v1.Notification.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

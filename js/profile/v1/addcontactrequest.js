@@ -84,8 +84,8 @@ proto.profile.v1.AddContactRequest.prototype.toObject = function(opt_includeInst
  */
 proto.profile.v1.AddContactRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    contact: jspb.Message.getFieldWithDefault(msg, 2, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+contact: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {

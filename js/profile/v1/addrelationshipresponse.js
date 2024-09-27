@@ -85,7 +85,7 @@ proto.profile.v1.AddRelationshipResponse.prototype.toObject = function(opt_inclu
  */
 proto.profile.v1.AddRelationshipResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.profile.v1.RelationshipObject.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.profile.v1.RelationshipObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

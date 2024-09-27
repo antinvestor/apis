@@ -85,7 +85,7 @@ proto.settings.v1.GetResponse.prototype.toObject = function(opt_includeInstance)
  */
 proto.settings.v1.GetResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.settings.v1.SettingObject.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.settings.v1.SettingObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

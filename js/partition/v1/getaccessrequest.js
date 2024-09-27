@@ -111,10 +111,10 @@ proto.partition.v1.GetAccessRequest.prototype.toObject = function(opt_includeIns
  */
 proto.partition.v1.GetAccessRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accessId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    partitionId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    clientId: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    profileId: jspb.Message.getFieldWithDefault(msg, 4, "")
+accessId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+partitionId: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+clientId: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+profileId: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {

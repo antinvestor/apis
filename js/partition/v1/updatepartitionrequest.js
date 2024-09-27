@@ -86,11 +86,11 @@ proto.partition.v1.UpdatePartitionRequest.prototype.toObject = function(opt_incl
  */
 proto.partition.v1.UpdatePartitionRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    partitionId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    state: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    propertiesMap: (f = msg.getPropertiesMap()) ? f.toObject(includeInstance, undefined) : []
+partitionId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+description: jspb.Message.getFieldWithDefault(msg, 3, ""),
+state: jspb.Message.getFieldWithDefault(msg, 4, 0),
+propertiesMap: (f = msg.getPropertiesMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {

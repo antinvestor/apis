@@ -88,21 +88,21 @@ proto.notification.v1.Notification.prototype.toObject = function(opt_includeInst
  */
 proto.notification.v1.Notification.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    parentId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    source: (f = msg.getSource()) && proto.common.v1.ContactLink.toObject(includeInstance, f),
-    recipient: (f = msg.getRecipient()) && proto.common.v1.ContactLink.toObject(includeInstance, f),
-    type: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    template: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    payloadMap: (f = msg.getPayloadMap()) ? f.toObject(includeInstance, undefined) : [],
-    data: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    language: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    outBound: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
-    autoRelease: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
-    routeId: jspb.Message.getFieldWithDefault(msg, 13, ""),
-    status: (f = msg.getStatus()) && proto.common.v1.StatusResponse.toObject(includeInstance, f),
-    extrasMap: (f = msg.getExtrasMap()) ? f.toObject(includeInstance, undefined) : [],
-    priority: jspb.Message.getFieldWithDefault(msg, 16, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+parentId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+source: (f = msg.getSource()) && proto.common.v1.ContactLink.toObject(includeInstance, f),
+recipient: (f = msg.getRecipient()) && proto.common.v1.ContactLink.toObject(includeInstance, f),
+type: jspb.Message.getFieldWithDefault(msg, 6, ""),
+template: jspb.Message.getFieldWithDefault(msg, 7, ""),
+payloadMap: (f = msg.getPayloadMap()) ? f.toObject(includeInstance, undefined) : [],
+data: jspb.Message.getFieldWithDefault(msg, 9, ""),
+language: jspb.Message.getFieldWithDefault(msg, 10, ""),
+outBound: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+autoRelease: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
+routeId: jspb.Message.getFieldWithDefault(msg, 13, ""),
+status: (f = msg.getStatus()) && proto.common.v1.StatusResponse.toObject(includeInstance, f),
+extrasMap: (f = msg.getExtrasMap()) ? f.toObject(includeInstance, undefined) : [],
+priority: jspb.Message.getFieldWithDefault(msg, 16, 0)
   };
 
   if (includeInstance) {

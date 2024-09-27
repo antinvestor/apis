@@ -84,7 +84,7 @@ proto.partition.v1.RemoveAccessRequest.prototype.toObject = function(opt_include
  */
 proto.partition.v1.RemoveAccessRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accessId: jspb.Message.getFieldWithDefault(msg, 1, "")
+accessId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

@@ -85,13 +85,13 @@ proto.ledger.v1.TransactionEntry.prototype.toObject = function(opt_includeInstan
  */
 proto.ledger.v1.TransactionEntry.toObject = function(includeInstance, msg) {
   var f, obj = {
-    account: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    transaction: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    transactedAt: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    amount: (f = msg.getAmount()) && proto.google.type.Money.toObject(includeInstance, f),
-    credit: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
-    accBalance: (f = msg.getAccBalance()) && proto.google.type.Money.toObject(includeInstance, f),
-    clearedAt: jspb.Message.getFieldWithDefault(msg, 7, "")
+account: jspb.Message.getFieldWithDefault(msg, 1, ""),
+transaction: jspb.Message.getFieldWithDefault(msg, 2, ""),
+transactedAt: jspb.Message.getFieldWithDefault(msg, 3, ""),
+amount: (f = msg.getAmount()) && proto.google.type.Money.toObject(includeInstance, f),
+credit: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
+accBalance: (f = msg.getAccBalance()) && proto.google.type.Money.toObject(includeInstance, f),
+clearedAt: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {

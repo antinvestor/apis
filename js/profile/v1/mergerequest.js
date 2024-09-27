@@ -84,8 +84,8 @@ proto.profile.v1.MergeRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.profile.v1.MergeRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    mergeid: jspb.Message.getFieldWithDefault(msg, 2, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+mergeid: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {

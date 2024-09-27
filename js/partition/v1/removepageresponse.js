@@ -84,7 +84,7 @@ proto.partition.v1.RemovePageResponse.prototype.toObject = function(opt_includeI
  */
 proto.partition.v1.RemovePageResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    succeeded: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
+succeeded: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
   };
 
   if (includeInstance) {

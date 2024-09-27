@@ -92,7 +92,7 @@ proto.partition.v1.ListPartitionResponse.prototype.toObject = function(opt_inclu
  */
 proto.partition.v1.ListPartitionResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    dataList: jspb.Message.toObjectList(msg.getDataList(),
+dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.partition.v1.PartitionObject.toObject, includeInstance)
   };
 

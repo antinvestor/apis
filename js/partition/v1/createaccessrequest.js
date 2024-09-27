@@ -111,9 +111,9 @@ proto.partition.v1.CreateAccessRequest.prototype.toObject = function(opt_include
  */
 proto.partition.v1.CreateAccessRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    partitionId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    clientId: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    profileId: jspb.Message.getFieldWithDefault(msg, 2, "")
+partitionId: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+clientId: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+profileId: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {

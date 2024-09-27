@@ -85,10 +85,10 @@ proto.partition.v1.PageObject.prototype.toObject = function(opt_includeInstance)
  */
 proto.partition.v1.PageObject.toObject = function(includeInstance, msg) {
   var f, obj = {
-    pageId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    html: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    state: jspb.Message.getFieldWithDefault(msg, 4, 0)
+pageId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+html: jspb.Message.getFieldWithDefault(msg, 3, ""),
+state: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {

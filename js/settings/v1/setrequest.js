@@ -85,8 +85,8 @@ proto.settings.v1.SetRequest.prototype.toObject = function(opt_includeInstance) 
  */
 proto.settings.v1.SetRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    key: (f = msg.getKey()) && proto.settings.v1.Setting.toObject(includeInstance, f),
-    value: jspb.Message.getFieldWithDefault(msg, 2, "")
+key: (f = msg.getKey()) && proto.settings.v1.Setting.toObject(includeInstance, f),
+value: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {

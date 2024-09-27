@@ -85,7 +85,7 @@ proto.partition.v1.CreatePageResponse.prototype.toObject = function(opt_includeI
  */
 proto.partition.v1.CreatePageResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.partition.v1.PageObject.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.partition.v1.PageObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

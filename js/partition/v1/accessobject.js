@@ -86,10 +86,10 @@ proto.partition.v1.AccessObject.prototype.toObject = function(opt_includeInstanc
  */
 proto.partition.v1.AccessObject.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accessId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    profileId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    partition: (f = msg.getPartition()) && proto.partition.v1.PartitionObject.toObject(includeInstance, f),
-    state: jspb.Message.getFieldWithDefault(msg, 4, 0)
+accessId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+profileId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+partition: (f = msg.getPartition()) && proto.partition.v1.PartitionObject.toObject(includeInstance, f),
+state: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {

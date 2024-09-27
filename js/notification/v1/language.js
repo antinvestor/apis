@@ -85,10 +85,10 @@ proto.notification.v1.Language.prototype.toObject = function(opt_includeInstance
  */
 proto.notification.v1.Language.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    code: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    extraMap: (f = msg.getExtraMap()) ? f.toObject(includeInstance, undefined) : []
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+code: jspb.Message.getFieldWithDefault(msg, 2, ""),
+name: jspb.Message.getFieldWithDefault(msg, 3, ""),
+extraMap: (f = msg.getExtraMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {

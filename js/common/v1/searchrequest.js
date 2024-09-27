@@ -93,11 +93,11 @@ proto.common.v1.SearchRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.common.v1.SearchRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    query: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    idQuery: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    limits: (f = msg.getLimits()) && proto.common.v1.Pagination.toObject(includeInstance, f),
-    propertiesList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
-    extrasMap: (f = msg.getExtrasMap()) ? f.toObject(includeInstance, undefined) : []
+query: jspb.Message.getFieldWithDefault(msg, 1, ""),
+idQuery: jspb.Message.getFieldWithDefault(msg, 2, ""),
+limits: (f = msg.getLimits()) && proto.common.v1.Pagination.toObject(includeInstance, f),
+propertiesList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
+extrasMap: (f = msg.getExtrasMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {

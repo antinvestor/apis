@@ -84,7 +84,7 @@ proto.partition.v1.RemovePageRequest.prototype.toObject = function(opt_includeIn
  */
 proto.partition.v1.RemovePageRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    pageId: jspb.Message.getFieldWithDefault(msg, 1, "")
+pageId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

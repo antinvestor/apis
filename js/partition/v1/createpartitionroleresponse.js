@@ -85,7 +85,7 @@ proto.partition.v1.CreatePartitionRoleResponse.prototype.toObject = function(opt
  */
 proto.partition.v1.CreatePartitionRoleResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.partition.v1.PartitionRoleObject.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.partition.v1.PartitionRoleObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

@@ -85,9 +85,9 @@ proto.partition.v1.CreatePartitionRoleRequest.prototype.toObject = function(opt_
  */
 proto.partition.v1.CreatePartitionRoleRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    partitionId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    propertiesMap: (f = msg.getPropertiesMap()) ? f.toObject(includeInstance, undefined) : []
+partitionId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+propertiesMap: (f = msg.getPropertiesMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {

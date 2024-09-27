@@ -85,8 +85,8 @@ proto.profile.v1.AddAddressRequest.prototype.toObject = function(opt_includeInst
  */
 proto.profile.v1.AddAddressRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    address: (f = msg.getAddress()) && proto.profile.v1.AddressObject.toObject(includeInstance, f)
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+address: (f = msg.getAddress()) && proto.profile.v1.AddressObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

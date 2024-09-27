@@ -85,7 +85,7 @@ proto.common.v1.StatusUpdateResponse.prototype.toObject = function(opt_includeIn
  */
 proto.common.v1.StatusUpdateResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.common.v1.StatusResponse.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.common.v1.StatusResponse.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

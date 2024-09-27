@@ -84,10 +84,10 @@ proto.common.v1.Pagination.prototype.toObject = function(opt_includeInstance) {
  */
 proto.common.v1.Pagination.toObject = function(includeInstance, msg) {
   var f, obj = {
-    count: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    page: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    startDate: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    endDate: jspb.Message.getFieldWithDefault(msg, 4, "")
+count: jspb.Message.getFieldWithDefault(msg, 1, 0),
+page: jspb.Message.getFieldWithDefault(msg, 2, 0),
+startDate: jspb.Message.getFieldWithDefault(msg, 3, ""),
+endDate: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {

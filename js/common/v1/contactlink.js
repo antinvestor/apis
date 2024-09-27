@@ -85,13 +85,13 @@ proto.common.v1.ContactLink.prototype.toObject = function(opt_includeInstance) {
  */
 proto.common.v1.ContactLink.toObject = function(includeInstance, msg) {
   var f, obj = {
-    profileName: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    profileType: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    profileId: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    profileImageId: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    contactId: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    detail: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    extrasMap: (f = msg.getExtrasMap()) ? f.toObject(includeInstance, undefined) : []
+profileName: jspb.Message.getFieldWithDefault(msg, 1, ""),
+profileType: jspb.Message.getFieldWithDefault(msg, 2, ""),
+profileId: jspb.Message.getFieldWithDefault(msg, 3, ""),
+profileImageId: jspb.Message.getFieldWithDefault(msg, 4, ""),
+contactId: jspb.Message.getFieldWithDefault(msg, 8, ""),
+detail: jspb.Message.getFieldWithDefault(msg, 9, ""),
+extrasMap: (f = msg.getExtrasMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {

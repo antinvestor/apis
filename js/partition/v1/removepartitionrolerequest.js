@@ -84,7 +84,7 @@ proto.partition.v1.RemovePartitionRoleRequest.prototype.toObject = function(opt_
  */
 proto.partition.v1.RemovePartitionRoleRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    partitionRoleId: jspb.Message.getFieldWithDefault(msg, 1, "")
+partitionRoleId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

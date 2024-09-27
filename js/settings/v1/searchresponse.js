@@ -92,7 +92,7 @@ proto.settings.v1.SearchResponse.prototype.toObject = function(opt_includeInstan
  */
 proto.settings.v1.SearchResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    dataList: jspb.Message.toObjectList(msg.getDataList(),
+dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.settings.v1.SettingObject.toObject, includeInstance)
   };
 

@@ -85,7 +85,7 @@ proto.partition.v1.GetPageResponse.prototype.toObject = function(opt_includeInst
  */
 proto.partition.v1.GetPageResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.partition.v1.PageObject.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.partition.v1.PageObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

@@ -88,12 +88,12 @@ proto.profile.v1.RelationshipObject.prototype.toObject = function(opt_includeIns
  */
 proto.profile.v1.RelationshipObject.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    propertiesMap: (f = msg.getPropertiesMap()) ? f.toObject(includeInstance, undefined) : [],
-    childEntry: (f = msg.getChildEntry()) && proto.profile.v1.EntryItem.toObject(includeInstance, f),
-    parentEntry: (f = msg.getParentEntry()) && proto.profile.v1.EntryItem.toObject(includeInstance, f),
-    peerProfile: (f = msg.getPeerProfile()) && proto.profile.v1.ProfileObject.toObject(includeInstance, f)
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+type: jspb.Message.getFieldWithDefault(msg, 2, 0),
+propertiesMap: (f = msg.getPropertiesMap()) ? f.toObject(includeInstance, undefined) : [],
+childEntry: (f = msg.getChildEntry()) && proto.profile.v1.EntryItem.toObject(includeInstance, f),
+parentEntry: (f = msg.getParentEntry()) && proto.profile.v1.EntryItem.toObject(includeInstance, f),
+peerProfile: (f = msg.getPeerProfile()) && proto.profile.v1.ProfileObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

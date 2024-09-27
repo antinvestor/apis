@@ -85,7 +85,7 @@ proto.profile.v1.UpdateResponse.prototype.toObject = function(opt_includeInstanc
  */
 proto.profile.v1.UpdateResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    data: (f = msg.getData()) && proto.profile.v1.ProfileObject.toObject(includeInstance, f)
+data: (f = msg.getData()) && proto.profile.v1.ProfileObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

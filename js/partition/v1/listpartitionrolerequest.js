@@ -84,7 +84,7 @@ proto.partition.v1.ListPartitionRoleRequest.prototype.toObject = function(opt_in
  */
 proto.partition.v1.ListPartitionRoleRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    partitionId: jspb.Message.getFieldWithDefault(msg, 1, "")
+partitionId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

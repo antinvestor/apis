@@ -85,10 +85,10 @@ proto.notification.v1.TemplateSaveRequest.prototype.toObject = function(opt_incl
  */
 proto.notification.v1.TemplateSaveRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    languageCode: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    dataMap: (f = msg.getDataMap()) ? f.toObject(includeInstance, undefined) : [],
-    extraMap: (f = msg.getExtraMap()) ? f.toObject(includeInstance, undefined) : []
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+languageCode: jspb.Message.getFieldWithDefault(msg, 2, ""),
+dataMap: (f = msg.getDataMap()) ? f.toObject(includeInstance, undefined) : [],
+extraMap: (f = msg.getExtraMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {

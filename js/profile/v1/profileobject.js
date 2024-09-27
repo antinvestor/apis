@@ -96,14 +96,14 @@ proto.profile.v1.ProfileObject.prototype.toObject = function(opt_includeInstance
  */
 proto.profile.v1.ProfileObject.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    propertiesMap: (f = msg.getPropertiesMap()) ? f.toObject(includeInstance, undefined) : [],
-    contactsList: jspb.Message.toObjectList(msg.getContactsList(),
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+type: jspb.Message.getFieldWithDefault(msg, 2, 0),
+propertiesMap: (f = msg.getPropertiesMap()) ? f.toObject(includeInstance, undefined) : [],
+contactsList: jspb.Message.toObjectList(msg.getContactsList(),
     proto.profile.v1.ContactObject.toObject, includeInstance),
-    addressesList: jspb.Message.toObjectList(msg.getAddressesList(),
+addressesList: jspb.Message.toObjectList(msg.getAddressesList(),
     proto.profile.v1.AddressObject.toObject, includeInstance),
-    state: jspb.Message.getFieldWithDefault(msg, 6, 0)
+state: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {

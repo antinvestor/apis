@@ -84,9 +84,9 @@ proto.payment.v1.ReleaseRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.payment.v1.ReleaseRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accessId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    id: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    comment: jspb.Message.getFieldWithDefault(msg, 3, "")
+accessId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+id: jspb.Message.getFieldWithDefault(msg, 2, ""),
+comment: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {

@@ -84,17 +84,17 @@ proto.profile.v1.AddressObject.prototype.toObject = function(opt_includeInstance
  */
 proto.profile.v1.AddressObject.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    country: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    city: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    area: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    street: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    house: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    postcode: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    latitude: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
-    longitude: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
-    extra: jspb.Message.getFieldWithDefault(msg, 11, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+country: jspb.Message.getFieldWithDefault(msg, 3, ""),
+city: jspb.Message.getFieldWithDefault(msg, 4, ""),
+area: jspb.Message.getFieldWithDefault(msg, 5, ""),
+street: jspb.Message.getFieldWithDefault(msg, 6, ""),
+house: jspb.Message.getFieldWithDefault(msg, 7, ""),
+postcode: jspb.Message.getFieldWithDefault(msg, 8, ""),
+latitude: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
+longitude: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
+extra: jspb.Message.getFieldWithDefault(msg, 11, "")
   };
 
   if (includeInstance) {

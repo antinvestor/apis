@@ -84,9 +84,9 @@ proto.partition.v1.CreatePageRequest.prototype.toObject = function(opt_includeIn
  */
 proto.partition.v1.CreatePageRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    partitionId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    html: jspb.Message.getFieldWithDefault(msg, 3, "")
+partitionId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+html: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {

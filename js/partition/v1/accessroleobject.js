@@ -85,9 +85,9 @@ proto.partition.v1.AccessRoleObject.prototype.toObject = function(opt_includeIns
  */
 proto.partition.v1.AccessRoleObject.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accessRoleId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    accessId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    role: (f = msg.getRole()) && proto.partition.v1.PartitionRoleObject.toObject(includeInstance, f)
+accessRoleId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+accessId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+role: (f = msg.getRole()) && proto.partition.v1.PartitionRoleObject.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

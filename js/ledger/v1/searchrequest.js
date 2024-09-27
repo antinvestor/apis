@@ -84,7 +84,7 @@ proto.ledger.v1.SearchRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.ledger.v1.SearchRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    query: jspb.Message.getFieldWithDefault(msg, 1, "")
+query: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
