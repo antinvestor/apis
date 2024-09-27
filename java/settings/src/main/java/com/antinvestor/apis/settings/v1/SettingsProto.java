@@ -65,6 +65,16 @@ public final class SettingsProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_settings_v1_SearchResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_settings_v1_ListRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_settings_v1_ListRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_settings_v1_ListResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_settings_v1_ListResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_settings_v1_SetRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -98,21 +108,25 @@ public final class SettingsProto {
       ".settings.v1.SettingR\003key\"=\n\013GetResponse" +
       "\022.\n\004data\030\001 \001(\0132\032.settings.v1.SettingObje" +
       "ctR\004data\"@\n\016SearchResponse\022.\n\004data\030\001 \003(\013" +
-      "2\032.settings.v1.SettingObjectR\004data\"J\n\nSe" +
-      "tRequest\022&\n\003key\030\001 \001(\0132\024.settings.v1.Sett" +
-      "ingR\003key\022\024\n\005value\030\002 \001(\tR\005value\"=\n\013SetRes" +
-      "ponse\022.\n\004data\030\001 \001(\0132\032.settings.v1.Settin" +
-      "gObjectR\004data2\310\001\n\017SettingsService\0228\n\003Get" +
-      "\022\027.settings.v1.GetRequest\032\030.settings.v1." +
-      "GetResponse\022A\n\006Search\022\030.common.v1.Search" +
-      "Request\032\033.settings.v1.SearchResponse0\001\0228" +
-      "\n\003Set\022\027.settings.v1.SetRequest\032\030.setting" +
-      "s.v1.SetResponseB\276\001\n com.antinvestor.api" +
-      "s.settings.v1B\rSettingsProtoP\001Z>github.c" +
-      "om/antinvestor/apis/go/settings/settings" +
-      "/v1;settingsv1\242\002\003SXX\252\002\013Settings.V1\312\002\013Set" +
-      "tings\\V1\342\002\027Settings\\V1\\GPBMetadata\352\002\014Set" +
-      "tings::V1b\006proto3"
+      "2\032.settings.v1.SettingObjectR\004data\"5\n\013Li" +
+      "stRequest\022&\n\003key\030\001 \001(\0132\024.settings.v1.Set" +
+      "tingR\003key\">\n\014ListResponse\022.\n\004data\030\001 \003(\0132" +
+      "\032.settings.v1.SettingObjectR\004data\"J\n\nSet" +
+      "Request\022&\n\003key\030\001 \001(\0132\024.settings.v1.Setti" +
+      "ngR\003key\022\024\n\005value\030\002 \001(\tR\005value\"=\n\013SetResp" +
+      "onse\022.\n\004data\030\001 \001(\0132\032.settings.v1.Setting" +
+      "ObjectR\004data2\207\002\n\017SettingsService\0228\n\003Get\022" +
+      "\027.settings.v1.GetRequest\032\030.settings.v1.G" +
+      "etResponse\022=\n\004List\022\030.settings.v1.ListReq" +
+      "uest\032\031.settings.v1.ListResponse0\001\022A\n\006Sea" +
+      "rch\022\030.common.v1.SearchRequest\032\033.settings" +
+      ".v1.SearchResponse0\001\0228\n\003Set\022\027.settings.v" +
+      "1.SetRequest\032\030.settings.v1.SetResponseB\276" +
+      "\001\n com.antinvestor.apis.settings.v1B\rSet" +
+      "tingsProtoP\001Z>github.com/antinvestor/api" +
+      "s/go/settings/settings/v1;settingsv1\242\002\003S" +
+      "XX\252\002\013Settings.V1\312\002\013Settings\\V1\342\002\027Setting" +
+      "s\\V1\\GPBMetadata\352\002\014Settings::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -150,14 +164,26 @@ public final class SettingsProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_settings_v1_SearchResponse_descriptor,
         new java.lang.String[] { "Data", });
-    internal_static_settings_v1_SetRequest_descriptor =
+    internal_static_settings_v1_ListRequest_descriptor =
       getDescriptor().getMessageTypes().get(5);
+    internal_static_settings_v1_ListRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_settings_v1_ListRequest_descriptor,
+        new java.lang.String[] { "Key", });
+    internal_static_settings_v1_ListResponse_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_settings_v1_ListResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_settings_v1_ListResponse_descriptor,
+        new java.lang.String[] { "Data", });
+    internal_static_settings_v1_SetRequest_descriptor =
+      getDescriptor().getMessageTypes().get(7);
     internal_static_settings_v1_SetRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_settings_v1_SetRequest_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_settings_v1_SetResponse_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_settings_v1_SetResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_settings_v1_SetResponse_descriptor,

@@ -68,6 +68,14 @@ message SearchResponse {
   repeated SettingObject data = 1;
 }
 
+message ListRequest {
+  Setting key = 1;
+}
+
+message ListResponse {
+  repeated SettingObject data = 1;
+}
+
 message SetRequest {
   Setting key = 1;
   string value = 2;
@@ -80,7 +88,7 @@ message SetResponse {
 service SettingsService {
   // Gets a single setting and its stored value
   rpc Get(GetRequest) returns (GetResponse);
-  // Pulls all setting values that match some criteria in the name & any other setting properties
+  rpc List(ListRequest) returns (stream ListResponse);
   rpc Search(common.v1.SearchRequest) returns (stream SearchResponse);
 
   rpc Set(SetRequest) returns (SetResponse);

@@ -68,6 +68,28 @@ function deserialize_settings_v1_GetResponse(buffer_arg) {
   return settings_v1_settings_pb.GetResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_settings_v1_ListRequest(arg) {
+  if (!(arg instanceof settings_v1_settings_pb.ListRequest)) {
+    throw new Error('Expected argument of type settings.v1.ListRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_settings_v1_ListRequest(buffer_arg) {
+  return settings_v1_settings_pb.ListRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_settings_v1_ListResponse(arg) {
+  if (!(arg instanceof settings_v1_settings_pb.ListResponse)) {
+    throw new Error('Expected argument of type settings.v1.ListResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_settings_v1_ListResponse(buffer_arg) {
+  return settings_v1_settings_pb.ListResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_settings_v1_SearchResponse(arg) {
   if (!(arg instanceof settings_v1_settings_pb.SearchResponse)) {
     throw new Error('Expected argument of type settings.v1.SearchResponse');
@@ -115,8 +137,18 @@ get: {
     responseSerialize: serialize_settings_v1_GetResponse,
     responseDeserialize: deserialize_settings_v1_GetResponse,
   },
-  // Pulls all setting values that match some criteria in the name & any other setting properties
-search: {
+  list: {
+    path: '/settings.v1.SettingsService/List',
+    requestStream: false,
+    responseStream: true,
+    requestType: settings_v1_settings_pb.ListRequest,
+    responseType: settings_v1_settings_pb.ListResponse,
+    requestSerialize: serialize_settings_v1_ListRequest,
+    requestDeserialize: deserialize_settings_v1_ListRequest,
+    responseSerialize: serialize_settings_v1_ListResponse,
+    responseDeserialize: deserialize_settings_v1_ListResponse,
+  },
+  search: {
     path: '/settings.v1.SettingsService/Search',
     requestStream: false,
     responseStream: true,

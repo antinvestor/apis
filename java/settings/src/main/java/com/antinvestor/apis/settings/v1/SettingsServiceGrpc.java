@@ -60,6 +60,37 @@ public final class SettingsServiceGrpc {
     return getGetMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.settings.v1.ListRequest,
+      com.antinvestor.apis.settings.v1.ListResponse> getListMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "List",
+      requestType = com.antinvestor.apis.settings.v1.ListRequest.class,
+      responseType = com.antinvestor.apis.settings.v1.ListResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.settings.v1.ListRequest,
+      com.antinvestor.apis.settings.v1.ListResponse> getListMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.settings.v1.ListRequest, com.antinvestor.apis.settings.v1.ListResponse> getListMethod;
+    if ((getListMethod = SettingsServiceGrpc.getListMethod) == null) {
+      synchronized (SettingsServiceGrpc.class) {
+        if ((getListMethod = SettingsServiceGrpc.getListMethod) == null) {
+          SettingsServiceGrpc.getListMethod = getListMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.settings.v1.ListRequest, com.antinvestor.apis.settings.v1.ListResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "List"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.settings.v1.ListRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.settings.v1.ListResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new SettingsServiceMethodDescriptorSupplier("List"))
+              .build();
+        }
+      }
+    }
+    return getListMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
       com.antinvestor.apis.settings.v1.SearchResponse> getSearchMethod;
 
@@ -181,9 +212,13 @@ public final class SettingsServiceGrpc {
     }
 
     /**
-     * <pre>
-     * Pulls all setting values that match some criteria in the name &amp; any other setting properties
-     * </pre>
+     */
+    default void list(com.antinvestor.apis.settings.v1.ListRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.settings.v1.ListResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListMethod(), responseObserver);
+    }
+
+    /**
      */
     default void search(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.settings.v1.SearchResponse> responseObserver) {
@@ -237,9 +272,14 @@ public final class SettingsServiceGrpc {
     }
 
     /**
-     * <pre>
-     * Pulls all setting values that match some criteria in the name &amp; any other setting properties
-     * </pre>
+     */
+    public void list(com.antinvestor.apis.settings.v1.ListRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.settings.v1.ListResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getListMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
      */
     public void search(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.settings.v1.SearchResponse> responseObserver) {
@@ -283,9 +323,14 @@ public final class SettingsServiceGrpc {
     }
 
     /**
-     * <pre>
-     * Pulls all setting values that match some criteria in the name &amp; any other setting properties
-     * </pre>
+     */
+    public java.util.Iterator<com.antinvestor.apis.settings.v1.ListResponse> list(
+        com.antinvestor.apis.settings.v1.ListRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getListMethod(), getCallOptions(), request);
+    }
+
+    /**
      */
     public java.util.Iterator<com.antinvestor.apis.settings.v1.SearchResponse> search(
         com.antinvestor.apis.common.v1.SearchRequest request) {
@@ -338,8 +383,9 @@ public final class SettingsServiceGrpc {
   }
 
   private static final int METHODID_GET = 0;
-  private static final int METHODID_SEARCH = 1;
-  private static final int METHODID_SET = 2;
+  private static final int METHODID_LIST = 1;
+  private static final int METHODID_SEARCH = 2;
+  private static final int METHODID_SET = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -361,6 +407,10 @@ public final class SettingsServiceGrpc {
         case METHODID_GET:
           serviceImpl.get((com.antinvestor.apis.settings.v1.GetRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.settings.v1.GetResponse>) responseObserver);
+          break;
+        case METHODID_LIST:
+          serviceImpl.list((com.antinvestor.apis.settings.v1.ListRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.settings.v1.ListResponse>) responseObserver);
           break;
         case METHODID_SEARCH:
           serviceImpl.search((com.antinvestor.apis.common.v1.SearchRequest) request,
@@ -395,6 +445,13 @@ public final class SettingsServiceGrpc {
               com.antinvestor.apis.settings.v1.GetRequest,
               com.antinvestor.apis.settings.v1.GetResponse>(
                 service, METHODID_GET)))
+        .addMethod(
+          getListMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              com.antinvestor.apis.settings.v1.ListRequest,
+              com.antinvestor.apis.settings.v1.ListResponse>(
+                service, METHODID_LIST)))
         .addMethod(
           getSearchMethod(),
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
@@ -458,6 +515,7 @@ public final class SettingsServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new SettingsServiceFileDescriptorSupplier())
               .addMethod(getGetMethod())
+              .addMethod(getListMethod())
               .addMethod(getSearchMethod())
               .addMethod(getSetMethod())
               .build();

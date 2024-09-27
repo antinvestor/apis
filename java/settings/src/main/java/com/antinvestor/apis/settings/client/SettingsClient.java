@@ -21,6 +21,7 @@ import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.database.BaseModel;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.common.utilities.TextUtils;
+import com.antinvestor.apis.common.v1.SearchRequest;
 import com.antinvestor.apis.settings.v1.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -323,6 +324,26 @@ public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsS
                 .build();
 
         var response = stub(context).list(request);
+        return new Iterator<>() {
+            @Override
+            public boolean hasNext() {
+                return response.hasNext();
+            }
+
+            @Override
+            public List<SettingObject> next() {
+                return response.next().getDataList();
+            }
+        };
+    }
+
+
+    private Iterator<List<SettingObject>> search(Context context, String query) {
+        var request = SearchRequest.newBuilder()
+                .setQuery(query)
+                .build();
+
+        var response = stub(context).search(request);
         return new Iterator<>() {
             @Override
             public boolean hasNext() {

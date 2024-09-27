@@ -35,6 +35,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	SettingsService_Get_FullMethodName    = "/settings.v1.SettingsService/Get"
+	SettingsService_List_FullMethodName   = "/settings.v1.SettingsService/List"
 	SettingsService_Search_FullMethodName = "/settings.v1.SettingsService/Search"
 	SettingsService_Set_FullMethodName    = "/settings.v1.SettingsService/Set"
 )
@@ -45,7 +46,7 @@ const (
 type SettingsServiceClient interface {
 	// Gets a single setting and its stored value
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
-	// Pulls all setting values that match some criteria in the name & any other setting properties
+	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListResponse], error)
 	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error)
 	Set(ctx context.Context, in *SetRequest, opts ...grpc.CallOption) (*SetResponse, error)
 }
@@ -68,9 +69,28 @@ func (c *settingsServiceClient) Get(ctx context.Context, in *GetRequest, opts ..
 	return out, nil
 }
 
+func (c *settingsServiceClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &SettingsService_ServiceDesc.Streams[0], SettingsService_List_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[ListRequest, ListResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type SettingsService_ListClient = grpc.ServerStreamingClient[ListResponse]
+
 func (c *settingsServiceClient) Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &SettingsService_ServiceDesc.Streams[0], SettingsService_Search_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &SettingsService_ServiceDesc.Streams[1], SettingsService_Search_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +123,7 @@ func (c *settingsServiceClient) Set(ctx context.Context, in *SetRequest, opts ..
 type SettingsServiceServer interface {
 	// Gets a single setting and its stored value
 	Get(context.Context, *GetRequest) (*GetResponse, error)
-	// Pulls all setting values that match some criteria in the name & any other setting properties
+	List(*ListRequest, grpc.ServerStreamingServer[ListResponse]) error
 	Search(*v1.SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error
 	Set(context.Context, *SetRequest) (*SetResponse, error)
 	mustEmbedUnimplementedSettingsServiceServer()
@@ -118,6 +138,9 @@ type UnimplementedSettingsServiceServer struct{}
 
 func (UnimplementedSettingsServiceServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedSettingsServiceServer) List(*ListRequest, grpc.ServerStreamingServer[ListResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedSettingsServiceServer) Search(*v1.SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method Search not implemented")
@@ -163,6 +186,17 @@ func _SettingsService_Get_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	return interceptor(ctx, in, info, handler)
 }
+
+func _SettingsService_List_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(SettingsServiceServer).List(m, &grpc.GenericServerStream[ListRequest, ListResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type SettingsService_ListServer = grpc.ServerStreamingServer[ListResponse]
 
 func _SettingsService_Search_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(v1.SearchRequest)
@@ -210,6 +244,11 @@ var SettingsService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "List",
+			Handler:       _SettingsService_List_Handler,
+			ServerStreams: true,
+		},
 		{
 			StreamName:    "Search",
 			Handler:       _SettingsService_Search_Handler,
