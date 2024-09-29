@@ -17,7 +17,7 @@ syntax = "proto3";
 package payment.v1;
 
 import "buf/validate/validate.proto";
-import "common/common/v1/common.proto";
+import "common/v1/common.proto";
 import "google/type/money.proto";
 
 option go_package = "github.com/antinvestor/apis/go/payment/v1;paymentv1";
