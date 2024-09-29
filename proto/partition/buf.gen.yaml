@@ -30,10 +30,10 @@ plugins:
     out: ../../java/partition/src/main/java/
   - remote: buf.build/protocolbuffers/java
     out: ../../java/partition/src/main/java/
-  - remote: buf.build/grpc/node
+  - remote: buf.build/connectrpc/es
     out: ../../js/
-    opt:
-      - target=ts
-  - remote: buf.build/protocolbuffers/js
-    out: ../../js/partition/v1/
+    opt: target=ts
+  - remote: buf.build/bufbuild/es
+    opt: target=ts
+    out: ../../js/
 
