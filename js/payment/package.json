@@ -1,10 +1,10 @@
 {
   "name": "@antinvestor/payment",
-  "version": "1.26.8",
+  "version": "1.26.9",
   "description": "payment api logic",
   "main": "payment.js",
   "dependencies": {
-    "@antinvestor/common": "^1.26.5",
+    "@antinvestor/common": "^1.26.8",
     "@connectrpc/connect-node": "^1.5.0",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2"
