@@ -33,7 +33,6 @@ export abstract class BaseClient<T extends ServiceType> {
 
     }
 
-
     protected abstract createClient(transport: Transport): T ;
 
     getClient(): T {
