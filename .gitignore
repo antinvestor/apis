@@ -154,6 +154,7 @@ nb-configuration.xml
 
 /node_modules
 */node_modules
+**/node_modules
 
 ui-docs/v-1.x.x/translated_docs
 ui-docs/v-1.x.x/build/
