@@ -4,7 +4,7 @@ import {LedgerService} from "./v1/ledger_connect";
 
 
 // @ts-ignore
-class LedgerClient extends BaseClient<LedgerService> {
+class LedgerClient extends BaseClient<> {
     protected createClient(transport: Transport) {
         return createPromiseClient(LedgerService, transport);
     }
