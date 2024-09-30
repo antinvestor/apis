@@ -38,11 +38,11 @@ jobs:
         id: get_tags
         run: |
           # Get the most recent tag that matches the module
-          TAGS=$(git tag --sort=-creatordate | grep "^js/${{ matrix.api_module }}/v" | head -n 1)
+          TAGS=$(git tag --sort=-creatordate | grep "^java/${{ matrix.api_module }}/v" | head -n 1)
           echo "Found tag: $TAGS"
           if [[ -z "$TAGS" ]]; then
             echo "not_enough_tags=true" >> $GITHUB_OUTPUT
-            echo "No tags found for js/${{ matrix.api_module }}."
+            echo "No tags found for java/${{ matrix.api_module }}."
             exit 0
           else
             echo "latest_tag=$TAGS" >> $GITHUB_ENV
