@@ -3,12 +3,12 @@ import {createPromiseClient, Transport} from "@connectrpc/connect";
 import {ProfileService} from "./v1/profile_connect";
 
 
-class ProfileClient extends BaseClient<any> {
+export class ProfileClient extends BaseClient<any> {
 
 
     constructor(baseUrl?: string ) {
        if (!baseUrl ){
-           baseUrl = process.env.PROFILE_SERVICE_URL || "";
+           baseUrl = process.env.PROFILE_SERVICE_URL || "profile.api.antinvestor.com:443";
        }
 
         super(baseUrl);

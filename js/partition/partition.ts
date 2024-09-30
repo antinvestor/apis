@@ -3,12 +3,12 @@ import {createPromiseClient, Transport} from "@connectrpc/connect";
 import {PartitionService} from "./v1/partition_connect";
 
 
-class PartitionClient extends BaseClient<any> {
+export class PartitionClient extends BaseClient<any> {
 
 
     constructor(baseUrl?: string ) {
        if (!baseUrl ){
-           baseUrl = process.env.PARTITION_SERVICE_URL || "";
+           baseUrl = process.env.PARTITION_SERVICE_URL || "partition.api.antinvestor.com:443";
        }
 
         super(baseUrl);

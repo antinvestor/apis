@@ -3,12 +3,12 @@ import {createPromiseClient, Transport} from "@connectrpc/connect";
 import {PaymentService} from "./v1/payment_connect";
 
 
-class PaymentClient extends BaseClient<any> {
+export class PaymentClient extends BaseClient<any> {
 
 
     constructor(baseUrl?: string ) {
        if (!baseUrl ){
-           baseUrl = process.env.PAYMENT_SERVICE_URL || "";
+           baseUrl = process.env.PAYMENT_SERVICE_URL || "payment.api.antinvestor.com:443";
        }
 
         super(baseUrl);

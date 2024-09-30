@@ -3,11 +3,11 @@ import {createPromiseClient, Transport} from "@connectrpc/connect";
 import {NotificationService} from "./v1/notification_connect";
 
 
-class NotificationClient extends BaseClient<any> {
+export class NotificationClient extends BaseClient<any> {
 
     constructor(baseUrl?: string ) {
        if (!baseUrl ){
-           baseUrl = process.env.NOTIFICATION_SERVICE_URL || "";
+           baseUrl = process.env.NOTIFICATION_SERVICE_URL || "notification.api.antinvestor.com:443";
        }
 
         super(baseUrl);

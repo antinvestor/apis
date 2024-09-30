@@ -3,12 +3,12 @@ import {createPromiseClient, Transport} from "@connectrpc/connect";
 import {LedgerService} from "./v1/ledger_connect";
 
 
-class LedgerClient extends BaseClient<any> {
+export class LedgerClient extends BaseClient<any> {
 
 
     constructor(baseUrl?: string ) {
        if (!baseUrl ){
-           baseUrl = process.env.LEDGER_SERVICE_URL || "";
+           baseUrl = process.env.LEDGER_SERVICE_URL || "ledger.api.antinvestor.com:443";
        }
 
         super(baseUrl);
