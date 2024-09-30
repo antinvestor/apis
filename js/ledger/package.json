@@ -2,7 +2,7 @@
   "name": "@antinvestor/ledger",
   "version": "1.0.0",
   "description": "ledger api logic",
-  "main": "index.js",
+  "main": "ledger.js",
   "dependencies": {
     "@connectrpc/connect-node": "^1.5.0",
     "tsx": "^4.19.1",
@@ -16,7 +16,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/antinvestor/apis/js/common"
+    "url": "https://github.com/antinvestor/apis",
+    "directory": "js/ledger"
   },
   "keywords": [
     "antinvestor",
