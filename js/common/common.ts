@@ -1,4 +1,5 @@
 import {Transport, Interceptor, createContextKey} from "@connectrpc/connect";
+import type { ServiceType } from "@bufbuild/protobuf";
 import {createGrpcTransport,} from "@connectrpc/connect-node";
 
 const ctxKeyAuthenticate = createContextKey<String>("", {
@@ -16,7 +17,7 @@ const authenticateInterceptor: Interceptor = (next) => async (req) => {
 };
 
 
-abstract class BaseClient<T> {
+export abstract class BaseClient<T extends ServiceType> {
 
     private readonly transport: Transport;
     private readonly client: T;
@@ -28,11 +29,12 @@ abstract class BaseClient<T> {
             interceptors: [authenticateInterceptor],
         });
 
-        this.client = this.createClient();
+        this.client = this.createClient(this.transport);
 
     }
 
-    protected abstract createClient(): T ;
+
+    protected abstract createClient(transport: Transport): T ;
 
     getClient(): T {
         return this.client;

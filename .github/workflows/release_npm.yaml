@@ -17,7 +17,7 @@ jobs:
   publish:
     strategy:
       matrix:
-        api_module: [ common,ledger ]
+        api_module: [ common ]
 
     runs-on: ubuntu-latest
     permissions:
