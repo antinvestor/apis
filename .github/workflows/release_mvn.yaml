@@ -33,7 +33,19 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           dependency-graph: generate-and-submit
+
+      - name: Set output if changes found
+        if: steps.get_tags.outputs.not_enough_tags == 'false'
+        id: java_module_changed
+        run: |
+          if [[ $(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'go/${{ matrix.api_module }}') ]]; then
+          echo "changed=true" >> $GITHUB_OUTPUT
+          else
+          echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Run publish action
+        if: steps.java_module_changed.outputs.changed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: java

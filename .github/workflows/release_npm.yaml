@@ -31,6 +31,18 @@ jobs:
           node-version: '22.x'
           registry-url: 'https://registry.npmjs.org'
       - run: cd js/${{ matrix.api_module }} && npm ci
+
+      - name: Set output if changes found
+        if: steps.get_tags.outputs.not_enough_tags == 'false'
+        id: npm_module_changed
+        run: |
+          if [[ $(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'go/${{ matrix.api_module }}') ]]; then
+          echo "changed=true" >> $GITHUB_OUTPUT
+          else
+          echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
       - run: cd js/${{ matrix.api_module }} && npm publish --provenance --access public
+        if: steps.npm_module_changed.outputs.changed == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
