@@ -38,7 +38,7 @@ jobs:
         if: steps.get_tags.outputs.not_enough_tags == 'false'
         id: java_module_changed
         run: |
-          if [[ $(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'go/${{ matrix.api_module }}') ]]; then
+          if [[ $(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'java/${{ matrix.api_module }}') ]]; then
           echo "changed=true" >> $GITHUB_OUTPUT
           else
           echo "changed=false" >> $GITHUB_OUTPUT
