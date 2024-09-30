@@ -32,23 +32,40 @@ jobs:
           node-version: '22.x'
           registry-url: 'https://registry.npmjs.org'
 
-      # Find the previous tag
-      - name: Get latest tag
-        id: get_latest_tag
-        run: echo "latest_tag=$(git describe --tags --abbrev=0 HEAD^)" >> $GITHUB_ENV
+      - name: Get the latest tag
+        id: get_tags
+        run: |
+          # Get the most recent tag that matches the module
+          TAGS=$(git tag --sort=-creatordate | grep "^js/${{ matrix.api_module }}/v" | head -n 1)
+          echo "Found tag: $TAGS"
+          if [[ -z "$TAGS" ]]; then
+            echo "not_enough_tags=true" >> $GITHUB_OUTPUT
+            echo "No tags found for js/${{ matrix.api_module }}."
+            exit 0
+          else
+            echo "latest_tag=$TAGS" >> $GITHUB_ENV
+            echo "not_enough_tags=false" >> $GITHUB_OUTPUT
+          fi
 
-      - run: cd js/${{ matrix.api_module }} && npm ci
-
-      - name: Set output if changes found
+      - name: Check for changes since the last tag
+        if: steps.get_tags.outputs.not_enough_tags == 'false'
         id: npm_module_changed
         run: |
-          if [[ $(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'js/${{ matrix.api_module }}') ]]; then
+          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'js/${{ matrix.api_module }}' || true)
+          if [[ -n "$CHANGES" ]]; then
+            echo "Changes found in js/${{ matrix.api_module }}"
             echo "changed=true" >> $GITHUB_OUTPUT
           else
+            echo "No changes found in js/${{ matrix.api_module }}"
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
-      - run: cd js/${{ matrix.api_module }} && npm publish --provenance --access public
-        if: steps.npm_module_changed.outputs.changed == 'true'
+      - name: Install dependencies
+        if: steps.npm_module_changed.outputs.changed == 'true' || steps.get_tags.outputs.not_enough_tags == 'true'
+        run: cd js/${{ matrix.api_module }} && npm ci
+
+      - name: Publish to npm
+        if: steps.npm_module_changed.outputs.changed == 'true' || steps.get_tags.outputs.not_enough_tags == 'true'
+        run: cd js/${{ matrix.api_module }} && npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
