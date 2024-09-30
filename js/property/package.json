@@ -1,6 +1,6 @@
 {
   "name": "@antinvestor/property",
-  "version": "1.26.5",
+  "version": "1.26.7",
   "description": "property api logic",
   "main": "property.js",
   "dependencies": {

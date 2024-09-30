@@ -1,6 +1,6 @@
 {
   "name": "@antinvestor/lostid",
-  "version": "1.26.5",
+  "version": "1.26.7",
   "description": "lostid api logic",
   "main": "lostid.js",
   "dependencies": {
