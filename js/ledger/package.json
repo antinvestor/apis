@@ -1,6 +1,6 @@
 {
   "name": "@antinvestor/ledger",
-  "version": "1.26.0",
+  "version": "1.26.3",
   "description": "ledger api logic",
   "main": "ledger.js",
   "dependencies": {
