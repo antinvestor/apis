@@ -19,7 +19,12 @@ DOCKER ?= docker
 MKFILE_DIR := $(abspath $(lastword $(MAKEFILE_LIST)))
 CUR_DIR := $(dir $(MKFILE_DIR))
 
-define build_package
+define npm_build
+cd js/${1} && npm i
+
+endef
+
+define golang_build
 cd go/${1} && $(GO) mod tidy
 cd go/${1} && $(GO) fmt ./...
 cd go/${1} && $(GO) vet ./...
@@ -44,7 +49,7 @@ define buf_migrate
 cd proto/${1} && PATH=$(BIN) $(BIN)/buf config migrate
 endef
 
-define lint_module
+define golang_lint
 cd proto/${1} && PATH=$(BIN) $(BIN)/buf lint
 cd go/${1} && $(GO) vet ./...
 cd go/${1} && golangci-lint run
@@ -60,40 +65,55 @@ endef
 help: ## Describe useful make targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "%-30s %s\n", $$1, $$2}'
 
+
+.PHONY: npm_build_all
+npm_build_all:  ## Build all npm packages
+	$(call npm_build,common)
+	$(call npm_build,notification)
+	$(call npm_build,ocr)
+	$(call npm_build,partition)
+	$(call npm_build,profile)
+	$(call npm_build,property)
+	$(call npm_build,payment)
+	$(call npm_build,settings)
+	$(call npm_build,ledger)
+	$(call npm_build,lostid)
+
 .PHONY: all
 all: ## Build, test, and lint (default)
-	$(MAKE) build
-	$(MAKE) lint
+	$(MAKE) golang_build_all
+	$(MAKE) golang_lint_all
+	$(MAKE) npm_build_all
 
 .PHONY: clean
 clean: ## Delete intermediate build artifacts
 	@# -X only removes untracked files, -d recurses into directories, -f actually removes files/dirs
 	git clean -Xdf
 
-.PHONY: build
-build: generate ## Build all packages
-	$(call build_package,common)
-	$(call build_package,notification)
-	$(call build_package,ocr)
-	$(call build_package,partition)
-	$(call build_package,profile)
-	$(call build_package,property)
-	$(call build_package,settings)
-	$(call build_package,ledger)
-	$(call build_package,lostid)
+.PHONY: golang_build_all
+golang_build_all: generate ## Build all packages
+	$(call golang_build,common)
+	$(call golang_build,notification)
+	$(call golang_build,ocr)
+	$(call golang_build,partition)
+	$(call golang_build,profile)
+	$(call golang_build,property)
+	$(call golang_build,settings)
+	$(call golang_build,ledger)
+	$(call golang_build,lostid)
 
-.PHONY: lint
-lint: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and protobuf
+.PHONY: golang_lint_all
+golang_lint_all: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and protobuf
 	test -z "$$($(BIN)/buf format -d . | tee /dev/stderr)"
-	$(call lint_module,common)
-	$(call lint_module,notification)
-	$(call lint_module,ocr)
-	$(call lint_module,partition)
-	$(call lint_module,profile)
-	$(call lint_module,property)
-	$(call lint_module,settings)
-	$(call lint_module,ledger)
-	$(call lint_module,lostid)
+	$(call golang_lint,common)
+	$(call golang_lint,notification)
+	$(call golang_lint,ocr)
+	$(call golang_lint,partition)
+	$(call golang_lint,profile)
+	$(call golang_lint,property)
+	$(call golang_lint,settings)
+	$(call golang_lint,ledger)
+	$(call golang_lint,lostid)
 
 
 .PHONY: lintfix

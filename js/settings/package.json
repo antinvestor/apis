@@ -1,6 +1,6 @@
 {
   "name": "@antinvestor/settings",
-  "version": "1.26.3",
+  "version": "1.26.5",
   "description": "settings api logic",
   "main": "settings.js",
   "dependencies": {

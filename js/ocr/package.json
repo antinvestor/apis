@@ -1,6 +1,6 @@
 {
   "name": "@antinvestor/ocr",
-  "version": "1.26.3",
+  "version": "1.26.5",
   "description": "ocr api logic",
   "main": "ocr.js",
   "dependencies": {

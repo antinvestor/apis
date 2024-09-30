@@ -1,6 +1,6 @@
 {
   "name": "@antinvestor/partition",
-  "version": "1.26.3",
+  "version": "1.26.5",
   "description": "partition api logic",
   "main": "partition.js",
   "dependencies": {
