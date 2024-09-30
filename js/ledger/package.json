@@ -4,7 +4,7 @@
   "description": "ledger api logic",
   "main": "ledger.js",
   "dependencies": {
-    "@antinvestor/common": "^1.0.0",
+    "@antinvestor/common": "^1.26.4",
     "@connectrpc/connect-node": "^1.5.0",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2"
@@ -23,7 +23,7 @@
   "keywords": [
     "antinvestor",
     "api",
-    "common"
+    "ledger"
   ],
   "author": "Peter Bwire",
   "license": "ISC"

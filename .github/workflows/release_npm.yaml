@@ -17,7 +17,7 @@ jobs:
   publish:
     strategy:
       matrix:
-        api_module: [ common ]
+        api_module: [ common,lostid,notification,ocr,partition,payment,profile,property,settings ]
 
     runs-on: ubuntu-latest
     permissions:
