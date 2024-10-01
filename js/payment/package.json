@@ -1,6 +1,6 @@
 {
   "name": "@antinvestor/payment",
-  "version": "1.27.2",
+  "version": "1.27.3",
   "description": "payment api logic",
   "main": "payment.js",
   "dependencies": {

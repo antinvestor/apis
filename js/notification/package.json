@@ -1,6 +1,6 @@
 {
   "name": "@antinvestor/notification",
-  "version": "1.27.2",
+  "version": "1.27.3",
   "description": "notification api logic",
   "main": "notification.js",
   "dependencies": {

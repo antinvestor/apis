@@ -1,6 +1,6 @@
 {
   "name": "@antinvestor/profile",
-  "version": "1.27.2",
+  "version": "1.27.3",
   "description": "profile api logic",
   "main": "profile.js",
   "dependencies": {
