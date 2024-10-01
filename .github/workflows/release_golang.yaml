@@ -26,7 +26,10 @@ jobs:
             echo "not_enough_tags=true" >> $GITHUB_OUTPUT
             echo "No tags found for go/${{ matrix.api_module }}."
           else
-            echo "latest_tag=$TAGS" >> $GITHUB_ENV
+            LATEST_TAG=$(echo "$TAGS" | head -n 1)
+            SECOND_LATEST_TAG=$(echo "$TAGS" | tail -n 1)
+            echo "latest_tag=$LATEST_TAG" >> $GITHUB_ENV
+            echo "second_latest_tag=$SECOND_LATEST_TAG" >> $GITHUB_ENV
             echo "not_enough_tags=false" >> $GITHUB_OUTPUT
           fi
 
@@ -34,7 +37,7 @@ jobs:
         if: steps.get_tags.outputs.not_enough_tags == 'false'
         id: go_module_changed
         run: |
-          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'go/${{ matrix.api_module }}' || true)
+          CHANGES=$(git diff --name-only ${{ env.second_latest_tag }} HEAD | grep 'go/${{ matrix.api_module }}' || true)
           if [[ -n "$CHANGES" ]]; then
             echo "Changes found in go/${{ matrix.api_module }}"
             echo "changed=true" >> $GITHUB_OUTPUT
