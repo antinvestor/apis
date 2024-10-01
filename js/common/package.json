@@ -1,6 +1,6 @@
 {
   "name": "@antinvestor/common",
-  "version": "1.26.10",
+  "version": "1.27.0",
   "description": "common api logic",
   "main": "common.js",
   "dependencies": {

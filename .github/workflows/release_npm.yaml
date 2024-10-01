@@ -41,7 +41,6 @@ jobs:
           if [[ -z "$TAGS" ]]; then
             echo "not_enough_tags=true" >> $GITHUB_OUTPUT
             echo "No tags found for js/${{ matrix.api_module }}."
-            exit 0
           else
             echo "latest_tag=$TAGS" >> $GITHUB_ENV
             echo "not_enough_tags=false" >> $GITHUB_OUTPUT

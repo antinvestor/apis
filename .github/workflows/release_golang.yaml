@@ -16,30 +16,33 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get latest tags
+      - name: Get the latest tag
         id: get_tags
         run: |
-          # Get the two most recent tags
-          TAGS=$(git tag --sort=-creatordate | grep '^go/${{ matrix.api_module }}/v' | head -n 1)
-          echo $TAGS
-          TAG_ARRAY=($TAGS)
-          if [ ${#TAG_ARRAY[@]} -lt 1 ]; then
-          echo "Not enough tags found"
-          echo "not_enough_tags=true" >> $GITHUB_OUTPUT
-          exit 0
+          # Get the most recent tag that matches the module
+          TAGS=$(git tag --sort=-creatordate | grep "^go/${{ matrix.api_module }}/v" | head -n 1)
+          echo "Found tag: $TAGS"
+          if [[ -z "$TAGS" ]]; then
+            echo "not_enough_tags=true" >> $GITHUB_OUTPUT
+            echo "No tags found for go/${{ matrix.api_module }}."
+          else
+            echo "latest_tag=$TAGS" >> $GITHUB_ENV
+            echo "not_enough_tags=false" >> $GITHUB_OUTPUT
           fi
-          echo "latest_tag=${TAG_ARRAY[0]}" >> $GITHUB_ENV
-          echo "not_enough_tags=false" >> $GITHUB_OUTPUT
 
-      - name: Set output if changes found
+      - name: Check for changes since the last tag
         if: steps.get_tags.outputs.not_enough_tags == 'false'
         id: go_module_changed
         run: |
-          if [[ $(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'go/${{ matrix.api_module }}') ]]; then
-          echo "changed=true" >> $GITHUB_OUTPUT
+          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'go/${{ matrix.api_module }}' || true)
+          if [[ -n "$CHANGES" ]]; then
+            echo "Changes found in go/${{ matrix.api_module }}"
+            echo "changed=true" >> $GITHUB_OUTPUT
           else
-          echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes found in go/${{ matrix.api_module }}"
+            echo "changed=false" >> $GITHUB_OUTPUT
           fi
+      
 
       - uses: rickstaa/action-create-tag@v1
         if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.go_module_changed.outputs.changed == 'true'
