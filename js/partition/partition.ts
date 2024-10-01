@@ -20,12 +20,12 @@ import {PartitionService} from "./v1/partition_connect";
 export class PartitionClient extends BaseClient<any> {
 
 
-    constructor(baseUrl?: string ) {
+    constructor(baseUrl?: string, jwtToken?: string ) {
        if (!baseUrl ){
            baseUrl = process.env.PARTITION_SERVICE_URL || "partition.api.antinvestor.com:443";
        }
 
-        super(baseUrl);
+        super(baseUrl, jwtToken);
     }
 
     protected createClient(transport: Transport) {

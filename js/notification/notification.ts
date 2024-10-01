@@ -19,12 +19,12 @@ import {NotificationService} from "./v1/notification_connect";
 
 export class NotificationClient extends BaseClient<any> {
 
-    constructor(baseUrl?: string ) {
+    constructor(baseUrl?: string, jwtToken?: string ) {
        if (!baseUrl ){
            baseUrl = process.env.NOTIFICATION_SERVICE_URL || "notification.api.antinvestor.com:443";
        }
 
-        super(baseUrl);
+        super(baseUrl, jwtToken);
     }
 
     protected createClient(transport: Transport) {

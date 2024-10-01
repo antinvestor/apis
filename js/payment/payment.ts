@@ -20,12 +20,12 @@ import {PaymentService} from "./v1/payment_connect";
 export class PaymentClient extends BaseClient<any> {
 
 
-    constructor(baseUrl?: string ) {
+    constructor(baseUrl?: string, jwtToken?: string ) {
        if (!baseUrl ){
            baseUrl = process.env.PAYMENT_SERVICE_URL || "payment.api.antinvestor.com:443";
        }
 
-        super(baseUrl);
+        super(baseUrl, jwtToken);
     }
 
     protected createClient(transport: Transport) {

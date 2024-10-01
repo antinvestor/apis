@@ -20,12 +20,12 @@ import {OCRService} from "./v1/ocr_connect";
 export class OCRClient extends BaseClient<any> {
 
 
-    constructor(baseUrl?: string ) {
+    constructor(baseUrl?: string, jwtToken?: string ) {
        if (!baseUrl ){
            baseUrl = process.env.OCR_SERVICE_URL || "ocr.api.antinvestor.com:443";
        }
 
-        super(baseUrl);
+        super(baseUrl, jwtToken);
     }
 
     protected createClient(transport: Transport) {

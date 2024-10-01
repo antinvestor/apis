@@ -19,12 +19,12 @@ import {PropertyService} from "./v1/property_connect";
 
 export class PropertyClient extends BaseClient<any> {
 
-    constructor(baseUrl?: string ) {
+    constructor(baseUrl?: string, jwtToken?: string ) {
        if (!baseUrl ){
            baseUrl = process.env.PROPERTY_SERVICE_URL || "property.api.antinvestor.com:443";
        }
 
-        super(baseUrl);
+        super(baseUrl, jwtToken);
     }
 
     protected createClient(transport: Transport) {

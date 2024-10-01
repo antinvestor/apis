@@ -20,12 +20,12 @@ import {LedgerService} from "./v1/ledger_connect";
 export class LedgerClient extends BaseClient<any> {
 
 
-    constructor(baseUrl?: string ) {
+    constructor(baseUrl?: string, jwtToken?: string ) {
        if (!baseUrl ){
            baseUrl = process.env.LEDGER_SERVICE_URL || "ledger.api.antinvestor.com:443";
        }
 
-        super(baseUrl);
+        super(baseUrl, jwtToken);
     }
 
     protected createClient(transport: Transport) {

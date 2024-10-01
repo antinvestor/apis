@@ -20,12 +20,12 @@ import {LostIdService} from "./v1/lostid_connect";
 export class LostIdClient extends BaseClient<any> {
 
 
-    constructor(baseUrl?: string ) {
+    constructor(baseUrl?: string, jwtToken?: string ) {
        if (!baseUrl ){
            baseUrl = process.env.LOSTID_SERVICE_URL || "lostid.api.antinvestor.com:443";
        }
 
-        super(baseUrl);
+        super(baseUrl, jwtToken);
     }
 
     protected createClient(transport: Transport) {

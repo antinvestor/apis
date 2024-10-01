@@ -19,12 +19,12 @@ import {SettingsService} from "./v1/settings_connect";
 
 export class SettingsClient extends BaseClient<any> {
 
-    constructor(baseUrl?: string ) {
+    constructor(baseUrl?: string, jwtToken?: string ) {
        if (!baseUrl ){
            baseUrl = process.env.SETTINGS_SERVICE_URL || "settings.api.antinvestor.com:443";
        }
 
-        super(baseUrl);
+        super(baseUrl, jwtToken);
     }
 
     protected createClient(transport: Transport) {
