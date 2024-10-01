@@ -12,23 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Transport, Interceptor, createContextKey} from "@connectrpc/connect";
-import type { ServiceType } from "@bufbuild/protobuf";
+import {Transport, Interceptor} from "@connectrpc/connect";
+import type {ServiceType} from "@bufbuild/protobuf";
 import {createGrpcTransport,} from "@connectrpc/connect-node";
-
-const ctxKeyAuthenticate = createContextKey<String>("", {
-    description: "Authentication jwt to be utilized by the client",
-});
-
-export {ctxKeyAuthenticate};
-
-const authenticateInterceptor: Interceptor = (next) => async (req) => {
-
-    const jwtToken = req.contextValues.get(ctxKeyAuthenticate);
-    req.header.set("authorization", `Bearer ${jwtToken}`);
-
-    return await next(req);
-};
 
 
 export abstract class BaseClient<T extends ServiceType> {
@@ -36,7 +22,17 @@ export abstract class BaseClient<T extends ServiceType> {
     private readonly transport: Transport;
     private readonly client: T;
 
-    constructor(baseUrl: string) {
+    constructor(baseUrl: string, jwtToken?: string) {
+
+        const authenticateInterceptor: Interceptor = (next) => async (req) => {
+
+            if (jwtToken) {
+                req.header.set("authorization", jwtToken);
+            }
+            return await next(req);
+        };
+
+
         this.transport = createGrpcTransport({
             baseUrl: baseUrl,
             httpVersion: "2",
