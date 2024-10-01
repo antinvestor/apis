@@ -7,7 +7,7 @@
 # To get a newer version, you will need to update the SHA.
 # You can also reference a tag or branch, but the action may change without warning.
 
-name: Publish package to GitHub Packages
+name: Publish java packages to GH
 on:
   push:
     tags:
@@ -38,11 +38,11 @@ jobs:
         id: get_tags
         run: |
           # Get the most recent tag that matches the module
-          TAGS=$(git tag --sort=-creatordate | grep "^java/${{ matrix.api_module }}/v" | head -n 1)
+          TAGS=$(git tag --sort=-creatordate | grep "^v" | head -n 1)
           echo "Found tag: $TAGS"
           if [[ -z "$TAGS" ]]; then
             echo "not_enough_tags=true" >> $GITHUB_OUTPUT
-            echo "No tags found for java/${{ matrix.api_module }}."
+            echo "No tags found for repository tags found."
           else
             echo "latest_tag=$TAGS" >> $GITHUB_ENV
             echo "not_enough_tags=false" >> $GITHUB_OUTPUT

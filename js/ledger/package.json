@@ -1,6 +1,6 @@
 {
   "name": "@antinvestor/ledger",
-  "version": "1.26.9",
+  "version": "1.27.1",
   "description": "ledger api logic",
   "main": "ledger.js",
   "dependencies": {
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/antinvestor/apis",
+    "url": "git+https://github.com/antinvestor/apis.git",
     "directory": "js/ledger"
   },
   "keywords": [

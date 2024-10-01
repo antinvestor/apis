@@ -21,6 +21,7 @@ CUR_DIR := $(dir $(MKFILE_DIR))
 
 define npm_build
 cd js/${1} && npm i
+cd js/${1} && npm pkg fix
 
 endef
 

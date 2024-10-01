@@ -1,6 +1,6 @@
 {
   "name": "@antinvestor/notification",
-  "version": "1.26.9",
+  "version": "1.27.1",
   "description": "notification api logic",
   "main": "notification.js",
   "dependencies": {
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/antinvestor/apis",
+    "url": "git+https://github.com/antinvestor/apis.git",
     "directory": "js/notification"
   },
   "keywords": [
