@@ -41,7 +41,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private UpdatePartitionRequest() {
-    partitionId_ = "";
+    id_ = "";
     name_ = "";
     description_ = "";
     state_ = 0;
@@ -72,39 +72,39 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.partition.v1.UpdatePartitionRequest.class, com.antinvestor.apis.partition.v1.UpdatePartitionRequest.Builder.class);
   }
 
-  public static final int PARTITION_ID_FIELD_NUMBER = 1;
+  public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object partitionId_ = "";
+  private volatile java.lang.Object id_ = "";
   /**
-   * <code>string partition_id = 1 [json_name = "partitionId", (.buf.validate.field) = { ... }</code>
-   * @return The partitionId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The id.
    */
   @java.lang.Override
-  public java.lang.String getPartitionId() {
-    java.lang.Object ref = partitionId_;
+  public java.lang.String getId() {
+    java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      partitionId_ = s;
+      id_ = s;
       return s;
     }
   }
   /**
-   * <code>string partition_id = 1 [json_name = "partitionId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for partitionId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for id.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getPartitionIdBytes() {
-    java.lang.Object ref = partitionId_;
+      getIdBytes() {
+    java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      partitionId_ = b;
+      id_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -300,8 +300,8 @@ java.lang.String defaultValue) {
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(partitionId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, partitionId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, name_);
@@ -327,8 +327,8 @@ java.lang.String defaultValue) {
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(partitionId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, partitionId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(2, name_);
@@ -365,8 +365,8 @@ java.lang.String defaultValue) {
     }
     com.antinvestor.apis.partition.v1.UpdatePartitionRequest other = (com.antinvestor.apis.partition.v1.UpdatePartitionRequest) obj;
 
-    if (!getPartitionId()
-        .equals(other.getPartitionId())) return false;
+    if (!getId()
+        .equals(other.getId())) return false;
     if (!getName()
         .equals(other.getName())) return false;
     if (!getDescription()
@@ -385,8 +385,8 @@ java.lang.String defaultValue) {
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + PARTITION_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getPartitionId().hashCode();
+    hash = (37 * hash) + ID_FIELD_NUMBER;
+    hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + NAME_FIELD_NUMBER;
     hash = (53 * hash) + getName().hashCode();
     hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
@@ -550,7 +550,7 @@ java.lang.String defaultValue) {
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      partitionId_ = "";
+      id_ = "";
       name_ = "";
       description_ = "";
       state_ = 0;
@@ -589,7 +589,7 @@ java.lang.String defaultValue) {
     private void buildPartial0(com.antinvestor.apis.partition.v1.UpdatePartitionRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.partitionId_ = partitionId_;
+        result.id_ = id_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.name_ = name_;
@@ -618,8 +618,8 @@ java.lang.String defaultValue) {
 
     public Builder mergeFrom(com.antinvestor.apis.partition.v1.UpdatePartitionRequest other) {
       if (other == com.antinvestor.apis.partition.v1.UpdatePartitionRequest.getDefaultInstance()) return this;
-      if (!other.getPartitionId().isEmpty()) {
-        partitionId_ = other.partitionId_;
+      if (!other.getId().isEmpty()) {
+        id_ = other.id_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
@@ -666,7 +666,7 @@ java.lang.String defaultValue) {
               done = true;
               break;
             case 10: {
-              partitionId_ = input.readStringRequireUtf8();
+              id_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
@@ -711,73 +711,73 @@ java.lang.String defaultValue) {
     }
     private int bitField0_;
 
-    private java.lang.Object partitionId_ = "";
+    private java.lang.Object id_ = "";
     /**
-     * <code>string partition_id = 1 [json_name = "partitionId", (.buf.validate.field) = { ... }</code>
-     * @return The partitionId.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @return The id.
      */
-    public java.lang.String getPartitionId() {
-      java.lang.Object ref = partitionId_;
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        partitionId_ = s;
+        id_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string partition_id = 1 [json_name = "partitionId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for partitionId.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for id.
      */
     public com.google.protobuf.ByteString
-        getPartitionIdBytes() {
-      java.lang.Object ref = partitionId_;
+        getIdBytes() {
+      java.lang.Object ref = id_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        partitionId_ = b;
+        id_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string partition_id = 1 [json_name = "partitionId", (.buf.validate.field) = { ... }</code>
-     * @param value The partitionId to set.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @param value The id to set.
      * @return This builder for chaining.
      */
-    public Builder setPartitionId(
+    public Builder setId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      partitionId_ = value;
+      id_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>string partition_id = 1 [json_name = "partitionId", (.buf.validate.field) = { ... }</code>
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearPartitionId() {
-      partitionId_ = getDefaultInstance().getPartitionId();
+    public Builder clearId() {
+      id_ = getDefaultInstance().getId();
       bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>string partition_id = 1 [json_name = "partitionId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for partitionId to set.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for id to set.
      * @return This builder for chaining.
      */
-    public Builder setPartitionIdBytes(
+    public Builder setIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      partitionId_ = value;
+      id_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;

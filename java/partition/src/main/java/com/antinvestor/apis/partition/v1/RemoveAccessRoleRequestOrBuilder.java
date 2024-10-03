@@ -24,14 +24,14 @@ public interface RemoveAccessRoleRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
-   * @return The accessRoleId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The id.
    */
-  java.lang.String getAccessRoleId();
+  java.lang.String getId();
   /**
-   * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for accessRoleId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for id.
    */
   com.google.protobuf.ByteString
-      getAccessRoleIdBytes();
+      getIdBytes();
 }

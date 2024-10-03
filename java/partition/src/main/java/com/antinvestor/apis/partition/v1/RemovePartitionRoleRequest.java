@@ -41,7 +41,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private RemovePartitionRoleRequest() {
-    partitionRoleId_ = "";
+    id_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -57,39 +57,39 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest.class, com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest.Builder.class);
   }
 
-  public static final int PARTITION_ROLE_ID_FIELD_NUMBER = 1;
+  public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object partitionRoleId_ = "";
+  private volatile java.lang.Object id_ = "";
   /**
-   * <code>string partition_role_id = 1 [json_name = "partitionRoleId", (.buf.validate.field) = { ... }</code>
-   * @return The partitionRoleId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The id.
    */
   @java.lang.Override
-  public java.lang.String getPartitionRoleId() {
-    java.lang.Object ref = partitionRoleId_;
+  public java.lang.String getId() {
+    java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      partitionRoleId_ = s;
+      id_ = s;
       return s;
     }
   }
   /**
-   * <code>string partition_role_id = 1 [json_name = "partitionRoleId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for partitionRoleId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for id.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getPartitionRoleIdBytes() {
-    java.lang.Object ref = partitionRoleId_;
+      getIdBytes() {
+    java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      partitionRoleId_ = b;
+      id_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -110,8 +110,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(partitionRoleId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, partitionRoleId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -122,8 +122,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(partitionRoleId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, partitionRoleId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -140,8 +140,8 @@ private static final long serialVersionUID = 0L;
     }
     com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest other = (com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest) obj;
 
-    if (!getPartitionRoleId()
-        .equals(other.getPartitionRoleId())) return false;
+    if (!getId()
+        .equals(other.getId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -153,8 +153,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + PARTITION_ROLE_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getPartitionRoleId().hashCode();
+    hash = (37 * hash) + ID_FIELD_NUMBER;
+    hash = (53 * hash) + getId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -286,7 +286,7 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      partitionRoleId_ = "";
+      id_ = "";
       return this;
     }
 
@@ -321,7 +321,7 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.partitionRoleId_ = partitionRoleId_;
+        result.id_ = id_;
       }
     }
 
@@ -337,8 +337,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest other) {
       if (other == com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest.getDefaultInstance()) return this;
-      if (!other.getPartitionRoleId().isEmpty()) {
-        partitionRoleId_ = other.partitionRoleId_;
+      if (!other.getId().isEmpty()) {
+        id_ = other.id_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
@@ -369,7 +369,7 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              partitionRoleId_ = input.readStringRequireUtf8();
+              id_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
@@ -390,73 +390,73 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object partitionRoleId_ = "";
+    private java.lang.Object id_ = "";
     /**
-     * <code>string partition_role_id = 1 [json_name = "partitionRoleId", (.buf.validate.field) = { ... }</code>
-     * @return The partitionRoleId.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @return The id.
      */
-    public java.lang.String getPartitionRoleId() {
-      java.lang.Object ref = partitionRoleId_;
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        partitionRoleId_ = s;
+        id_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string partition_role_id = 1 [json_name = "partitionRoleId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for partitionRoleId.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for id.
      */
     public com.google.protobuf.ByteString
-        getPartitionRoleIdBytes() {
-      java.lang.Object ref = partitionRoleId_;
+        getIdBytes() {
+      java.lang.Object ref = id_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        partitionRoleId_ = b;
+        id_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string partition_role_id = 1 [json_name = "partitionRoleId", (.buf.validate.field) = { ... }</code>
-     * @param value The partitionRoleId to set.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @param value The id to set.
      * @return This builder for chaining.
      */
-    public Builder setPartitionRoleId(
+    public Builder setId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      partitionRoleId_ = value;
+      id_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>string partition_role_id = 1 [json_name = "partitionRoleId", (.buf.validate.field) = { ... }</code>
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearPartitionRoleId() {
-      partitionRoleId_ = getDefaultInstance().getPartitionRoleId();
+    public Builder clearId() {
+      id_ = getDefaultInstance().getId();
       bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>string partition_role_id = 1 [json_name = "partitionRoleId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for partitionRoleId to set.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for id to set.
      * @return This builder for chaining.
      */
-    public Builder setPartitionRoleIdBytes(
+    public Builder setIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      partitionRoleId_ = value;
+      id_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;

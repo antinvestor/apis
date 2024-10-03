@@ -18,10 +18,43 @@ package notification.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/notification/v1;notificationv1";
 option java_multiple_files = true;
 option java_package = "notificationv1";
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Notification Service"
+    version: "1.0"
+    contact: {
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-lostid"
+      email: "info@antinvestor.com"
+    }
+  }
+
+  schemes: HTTP
+  schemes: HTTPS
+  consumes: "application/json"
+  produces: "application/json"
+
+  security_definitions: {
+    security: {
+      key: "bearer"
+      value: {
+        type: TYPE_API_KEY
+        in: IN_HEADER
+        name: "Authorization"
+        description: "Authentication token, prefixed by Bearer: Bearer <token>"
+      }
+    }
+  }
+  security: {
+    security_requirement: {key: "bearer"}
+  }
+};
 
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum PRIORITY {
@@ -121,17 +154,12 @@ message SendResponse {
 }
 
 message ReleaseRequest {
-  string access_id = 1 [
+  string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  string id = 2 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string comment = 3;
+  string comment = 2;
 }
 
 message ReleaseResponse {
@@ -170,25 +198,56 @@ message TemplateSaveResponse {
 
 service NotificationService {
   //Send method for queueing massages as requested
-  rpc Send(SendRequest) returns (SendResponse);
-
-  //Status request to determine if notification is prepared or released
-  rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse);
-
-  //Status update request to allow continuation of notification processing
-  rpc StatusUpdate(common.v1.StatusUpdateRequest) returns (common.v1.StatusUpdateResponse);
+  rpc Send(SendRequest) returns (SendResponse) {
+    option (google.api.http) = {
+      post: "/send"
+      body: "*"
+    };
+  }
 
   //Release method for releasing queued massages and returns if notification status if released
-  rpc Release(ReleaseRequest) returns (ReleaseResponse);
+  rpc Release(ReleaseRequest) returns (ReleaseResponse) {
+    option (google.api.http) = {
+      post: "/send/release/{id}"
+      body: "*"
+    };
+  }
 
   //Receive method is for client request for particular notification responses from system
-  rpc Receive(ReceiveRequest) returns (ReceiveResponse);
+  rpc Receive(ReceiveRequest) returns (ReceiveResponse) {
+    option (google.api.http) = {
+      post: "/receive"
+      body: "*"
+    };
+  }
 
   //Search method is for client request for particular notification details from system
-  rpc Search(common.v1.SearchRequest) returns (stream SearchResponse);
+  rpc Search(common.v1.SearchRequest) returns (stream SearchResponse) {
+    option (google.api.http) = {get: "/search"};
+  }
+
+  //Status request to determine if notification is prepared or released
+  rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse) {
+    option (google.api.http) = {get: "/status/{id}"};
+  }
+
+  //Status update request to allow continuation of notification processing
+  rpc StatusUpdate(common.v1.StatusUpdateRequest) returns (common.v1.StatusUpdateResponse) {
+    option (google.api.http) = {
+      patch: "/status/{id}"
+      body: "*"
+    };
+  }
 
   // Utility to allow system obtain templates within the system
-  rpc TemplateSearch(TemplateSearchRequest) returns (stream TemplateSearchResponse);
+  rpc TemplateSearch(TemplateSearchRequest) returns (stream TemplateSearchResponse) {
+    option (google.api.http) = {get: "/template"};
+  }
 
-  rpc TemplateSave(TemplateSaveRequest) returns (TemplateSaveResponse);
+  rpc TemplateSave(TemplateSaveRequest) returns (TemplateSaveResponse) {
+    option (google.api.http) = {
+      post: "/template"
+      body: "*"
+    };
+  }
 }

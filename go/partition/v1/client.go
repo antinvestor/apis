@@ -237,7 +237,7 @@ func (partCl *PartitionClient) UpdatePartition(ctx context.Context, partitionId 
 	name string, description string, props map[string]string) (*PartitionObject, error) {
 
 	request := UpdatePartitionRequest{
-		PartitionId: partitionId,
+		Id:          partitionId,
 		Name:        name,
 		Description: description,
 		Properties:  props,
@@ -271,7 +271,7 @@ func (partCl *PartitionClient) CreatePartitionRole(ctx context.Context, partitio
 func (partCl *PartitionClient) RemovePartitionRole(ctx context.Context, partitionRoleId string) (*RemovePartitionRoleResponse, error) {
 
 	request := RemovePartitionRoleRequest{
-		PartitionRoleId: partitionRoleId,
+		Id: partitionRoleId,
 	}
 
 	return partCl.Client.RemovePartitionRole(ctx, &request)
@@ -379,7 +379,7 @@ func (partCl *PartitionClient) CreateAccessByClientID(
 func (partCl *PartitionClient) RemoveAccess(ctx context.Context, accessId string) (*RemoveAccessResponse, error) {
 
 	request := RemoveAccessRequest{
-		AccessId: accessId,
+		Id: accessId,
 	}
 
 	return partCl.Client.RemoveAccess(ctx, &request)
@@ -456,7 +456,7 @@ func (partCl *PartitionClient) CreateAccessRole(
 func (partCl *PartitionClient) RemoveAccessRole(ctx context.Context, accessRoleId string) (*RemoveAccessRoleResponse, error) {
 
 	request := RemoveAccessRoleRequest{
-		AccessRoleId: accessRoleId,
+		Id: accessRoleId,
 	}
 
 	return partCl.Client.RemoveAccessRole(ctx, &request)

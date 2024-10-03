@@ -35,11 +35,11 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	NotificationService_Send_FullMethodName           = "/notification.v1.NotificationService/Send"
-	NotificationService_Status_FullMethodName         = "/notification.v1.NotificationService/Status"
-	NotificationService_StatusUpdate_FullMethodName   = "/notification.v1.NotificationService/StatusUpdate"
 	NotificationService_Release_FullMethodName        = "/notification.v1.NotificationService/Release"
 	NotificationService_Receive_FullMethodName        = "/notification.v1.NotificationService/Receive"
 	NotificationService_Search_FullMethodName         = "/notification.v1.NotificationService/Search"
+	NotificationService_Status_FullMethodName         = "/notification.v1.NotificationService/Status"
+	NotificationService_StatusUpdate_FullMethodName   = "/notification.v1.NotificationService/StatusUpdate"
 	NotificationService_TemplateSearch_FullMethodName = "/notification.v1.NotificationService/TemplateSearch"
 	NotificationService_TemplateSave_FullMethodName   = "/notification.v1.NotificationService/TemplateSave"
 )
@@ -50,16 +50,16 @@ const (
 type NotificationServiceClient interface {
 	// Send method for queueing massages as requested
 	Send(ctx context.Context, in *SendRequest, opts ...grpc.CallOption) (*SendResponse, error)
-	// Status request to determine if notification is prepared or released
-	Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error)
-	// Status update request to allow continuation of notification processing
-	StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error)
 	// Release method for releasing queued massages and returns if notification status if released
 	Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (*ReleaseResponse, error)
 	// Receive method is for client request for particular notification responses from system
 	Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (*ReceiveResponse, error)
 	// Search method is for client request for particular notification details from system
 	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error)
+	// Status request to determine if notification is prepared or released
+	Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error)
+	// Status update request to allow continuation of notification processing
+	StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error)
 	// Utility to allow system obtain templates within the system
 	TemplateSearch(ctx context.Context, in *TemplateSearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TemplateSearchResponse], error)
 	TemplateSave(ctx context.Context, in *TemplateSaveRequest, opts ...grpc.CallOption) (*TemplateSaveResponse, error)
@@ -77,26 +77,6 @@ func (c *notificationServiceClient) Send(ctx context.Context, in *SendRequest, o
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SendResponse)
 	err := c.cc.Invoke(ctx, NotificationService_Send_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notificationServiceClient) Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.StatusResponse)
-	err := c.cc.Invoke(ctx, NotificationService_Status_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notificationServiceClient) StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.StatusUpdateResponse)
-	err := c.cc.Invoke(ctx, NotificationService_StatusUpdate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -142,6 +122,26 @@ func (c *notificationServiceClient) Search(ctx context.Context, in *v1.SearchReq
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type NotificationService_SearchClient = grpc.ServerStreamingClient[SearchResponse]
 
+func (c *notificationServiceClient) Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.StatusResponse)
+	err := c.cc.Invoke(ctx, NotificationService_Status_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationServiceClient) StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.StatusUpdateResponse)
+	err := c.cc.Invoke(ctx, NotificationService_StatusUpdate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *notificationServiceClient) TemplateSearch(ctx context.Context, in *TemplateSearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TemplateSearchResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &NotificationService_ServiceDesc.Streams[1], NotificationService_TemplateSearch_FullMethodName, cOpts...)
@@ -177,16 +177,16 @@ func (c *notificationServiceClient) TemplateSave(ctx context.Context, in *Templa
 type NotificationServiceServer interface {
 	// Send method for queueing massages as requested
 	Send(context.Context, *SendRequest) (*SendResponse, error)
-	// Status request to determine if notification is prepared or released
-	Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error)
-	// Status update request to allow continuation of notification processing
-	StatusUpdate(context.Context, *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error)
 	// Release method for releasing queued massages and returns if notification status if released
 	Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error)
 	// Receive method is for client request for particular notification responses from system
 	Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error)
 	// Search method is for client request for particular notification details from system
 	Search(*v1.SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error
+	// Status request to determine if notification is prepared or released
+	Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error)
+	// Status update request to allow continuation of notification processing
+	StatusUpdate(context.Context, *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error)
 	// Utility to allow system obtain templates within the system
 	TemplateSearch(*TemplateSearchRequest, grpc.ServerStreamingServer[TemplateSearchResponse]) error
 	TemplateSave(context.Context, *TemplateSaveRequest) (*TemplateSaveResponse, error)
@@ -203,12 +203,6 @@ type UnimplementedNotificationServiceServer struct{}
 func (UnimplementedNotificationServiceServer) Send(context.Context, *SendRequest) (*SendResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Send not implemented")
 }
-func (UnimplementedNotificationServiceServer) Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Status not implemented")
-}
-func (UnimplementedNotificationServiceServer) StatusUpdate(context.Context, *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StatusUpdate not implemented")
-}
 func (UnimplementedNotificationServiceServer) Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Release not implemented")
 }
@@ -217,6 +211,12 @@ func (UnimplementedNotificationServiceServer) Receive(context.Context, *ReceiveR
 }
 func (UnimplementedNotificationServiceServer) Search(*v1.SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method Search not implemented")
+}
+func (UnimplementedNotificationServiceServer) Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Status not implemented")
+}
+func (UnimplementedNotificationServiceServer) StatusUpdate(context.Context, *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StatusUpdate not implemented")
 }
 func (UnimplementedNotificationServiceServer) TemplateSearch(*TemplateSearchRequest, grpc.ServerStreamingServer[TemplateSearchResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method TemplateSearch not implemented")
@@ -259,42 +259,6 @@ func _NotificationService_Send_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NotificationServiceServer).Send(ctx, req.(*SendRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotificationService_Status_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.StatusRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationServiceServer).Status(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationService_Status_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationServiceServer).Status(ctx, req.(*v1.StatusRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotificationService_StatusUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.StatusUpdateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationServiceServer).StatusUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationService_StatusUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationServiceServer).StatusUpdate(ctx, req.(*v1.StatusUpdateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -346,6 +310,42 @@ func _NotificationService_Search_Handler(srv interface{}, stream grpc.ServerStre
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type NotificationService_SearchServer = grpc.ServerStreamingServer[SearchResponse]
 
+func _NotificationService_Status_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.StatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).Status(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_Status_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).Status(ctx, req.(*v1.StatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationService_StatusUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.StatusUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).StatusUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_StatusUpdate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).StatusUpdate(ctx, req.(*v1.StatusUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NotificationService_TemplateSearch_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(TemplateSearchRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -387,20 +387,20 @@ var NotificationService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _NotificationService_Send_Handler,
 		},
 		{
-			MethodName: "Status",
-			Handler:    _NotificationService_Status_Handler,
-		},
-		{
-			MethodName: "StatusUpdate",
-			Handler:    _NotificationService_StatusUpdate_Handler,
-		},
-		{
 			MethodName: "Release",
 			Handler:    _NotificationService_Release_Handler,
 		},
 		{
 			MethodName: "Receive",
 			Handler:    _NotificationService_Receive_Handler,
+		},
+		{
+			MethodName: "Status",
+			Handler:    _NotificationService_Status_Handler,
+		},
+		{
+			MethodName: "StatusUpdate",
+			Handler:    _NotificationService_StatusUpdate_Handler,
 		},
 		{
 			MethodName: "TemplateSave",

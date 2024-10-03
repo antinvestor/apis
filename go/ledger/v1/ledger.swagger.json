@@ -1,0 +1,940 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Ledger Service",
+    "version": "1.0",
+    "contact": {
+      "name": "Ant Investor Ltd",
+      "url": "https://github.com/antinvestor/service-ledger",
+      "email": "info@antinvestor.com"
+    }
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/account": {
+      "get": {
+        "summary": "Searches for an account based on details",
+        "operationId": "LedgerService_SearchAccounts",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/ledger.v1.Account"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of ledger.v1.Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idQuery",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.count",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.startDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.endDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extras",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ledger.v1.LedgerService"
+        ]
+      },
+      "post": {
+        "summary": "Creates a new account based on supplied data",
+        "operationId": "LedgerService_CreateAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.Account"
+            }
+          }
+        ],
+        "tags": [
+          "ledger.v1.LedgerService"
+        ]
+      }
+    },
+    "/account/{reference}": {
+      "patch": {
+        "summary": "Updates the data component of the account.",
+        "operationId": "LedgerService_UpdateAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.LedgerService.UpdateAccountBody"
+            }
+          }
+        ],
+        "tags": [
+          "ledger.v1.LedgerService"
+        ]
+      }
+    },
+    "/ledger": {
+      "get": {
+        "summary": "Searches for an ledger based on details",
+        "operationId": "LedgerService_SearchLedgers",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/ledger.v1.Ledger"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of ledger.v1.Ledger"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idQuery",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.count",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.startDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.endDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extras",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ledger.v1.LedgerService"
+        ]
+      },
+      "post": {
+        "summary": "Creates a new ledger based on supplied data",
+        "operationId": "LedgerService_CreateLedger",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.Ledger"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.Ledger"
+            }
+          }
+        ],
+        "tags": [
+          "ledger.v1.LedgerService"
+        ]
+      }
+    },
+    "/ledger/{reference}": {
+      "patch": {
+        "summary": "Updates the data component of the ledger.",
+        "operationId": "LedgerService_UpdateLedger",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.Ledger"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.LedgerService.UpdateLedgerBody"
+            }
+          }
+        ],
+        "tags": [
+          "ledger.v1.LedgerService"
+        ]
+      }
+    },
+    "/transaction": {
+      "get": {
+        "summary": "Searches for a transaction based on details",
+        "operationId": "LedgerService_SearchTransactions",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/ledger.v1.Transaction"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of ledger.v1.Transaction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idQuery",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.count",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.startDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.endDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extras",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ledger.v1.LedgerService"
+        ]
+      },
+      "post": {
+        "summary": "Creates a new transaction",
+        "operationId": "LedgerService_CreateTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.Transaction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.Transaction"
+            }
+          }
+        ],
+        "tags": [
+          "ledger.v1.LedgerService"
+        ]
+      }
+    },
+    "/transaction/entry": {
+      "get": {
+        "summary": "Searches for entries matching the search details",
+        "operationId": "LedgerService_SearchTransactionEntries",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/ledger.v1.TransactionEntry"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of ledger.v1.TransactionEntry"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idQuery",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.count",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.startDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.endDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extras",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ledger.v1.LedgerService"
+        ]
+      }
+    },
+    "/transaction/{reference}": {
+      "patch": {
+        "summary": "Updates a transaction's details",
+        "operationId": "LedgerService_UpdateTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.Transaction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.LedgerService.UpdateTransactionBody"
+            }
+          }
+        ],
+        "tags": [
+          "ledger.v1.LedgerService"
+        ]
+      }
+    },
+    "/transaction/{reference}/reverse": {
+      "post": {
+        "summary": "Reverses a transaction by creating a new one with inverted entries",
+        "operationId": "LedgerService_ReverseTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.Transaction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ledger.v1.LedgerService.ReverseTransactionBody"
+            }
+          }
+        ],
+        "tags": [
+          "ledger.v1.LedgerService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "common.v1.Pagination": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }
+      }
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    },
+    "google.type.Money": {
+      "type": "object",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "The three-letter currency code defined in ISO 4217."
+        },
+        "units": {
+          "type": "string",
+          "format": "int64",
+          "description": "The whole units of the amount.\nFor example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar."
+        },
+        "nanos": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nano (10^-9) units of the amount.\nThe value must be between -999,999,999 and +999,999,999 inclusive.\nIf `units` is positive, `nanos` must be positive or zero.\nIf `units` is zero, `nanos` can be positive, zero, or negative.\nIf `units` is negative, `nanos` must be negative or zero.\nFor example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000."
+        }
+      },
+      "description": "Represents an amount of money with its currency type."
+    },
+    "ledger.v1.Account": {
+      "type": "object",
+      "properties": {
+        "reference": {
+          "type": "string"
+        },
+        "ledger": {
+          "type": "string"
+        },
+        "balance": {
+          "$ref": "#/definitions/google.type.Money"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "unclearedBalance": {
+          "$ref": "#/definitions/google.type.Money"
+        },
+        "reservedBalance": {
+          "$ref": "#/definitions/google.type.Money"
+        }
+      }
+    },
+    "ledger.v1.Ledger": {
+      "type": "object",
+      "properties": {
+        "reference": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/ledger.v1.LedgerType"
+        },
+        "parent": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ledger.v1.LedgerService.ReverseTransactionBody": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string"
+        },
+        "transactedAt": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ledger.v1.TransactionEntry"
+          }
+        },
+        "cleared": {
+          "type": "boolean"
+        },
+        "type": {
+          "$ref": "#/definitions/ledger.v1.TransactionType"
+        }
+      }
+    },
+    "ledger.v1.LedgerService.UpdateAccountBody": {
+      "type": "object",
+      "properties": {
+        "ledger": {
+          "type": "string"
+        },
+        "balance": {
+          "$ref": "#/definitions/google.type.Money"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "unclearedBalance": {
+          "$ref": "#/definitions/google.type.Money"
+        },
+        "reservedBalance": {
+          "$ref": "#/definitions/google.type.Money"
+        }
+      }
+    },
+    "ledger.v1.LedgerService.UpdateLedgerBody": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ledger.v1.LedgerType"
+        },
+        "parent": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ledger.v1.LedgerService.UpdateTransactionBody": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string"
+        },
+        "transactedAt": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ledger.v1.TransactionEntry"
+          }
+        },
+        "cleared": {
+          "type": "boolean"
+        },
+        "type": {
+          "$ref": "#/definitions/ledger.v1.TransactionType"
+        }
+      }
+    },
+    "ledger.v1.LedgerType": {
+      "type": "string",
+      "enum": [
+        "ASSET",
+        "LIABILITY",
+        "INCOME",
+        "EXPENSE",
+        "CAPITAL"
+      ],
+      "default": "ASSET",
+      "description": "- ASSET: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+      "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "ledger.v1.Transaction": {
+      "type": "object",
+      "properties": {
+        "reference": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "transactedAt": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ledger.v1.TransactionEntry"
+          }
+        },
+        "cleared": {
+          "type": "boolean"
+        },
+        "type": {
+          "$ref": "#/definitions/ledger.v1.TransactionType"
+        }
+      }
+    },
+    "ledger.v1.TransactionEntry": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string"
+        },
+        "transaction": {
+          "type": "string"
+        },
+        "transactedAt": {
+          "type": "string"
+        },
+        "amount": {
+          "$ref": "#/definitions/google.type.Money"
+        },
+        "credit": {
+          "type": "boolean"
+        },
+        "accBalance": {
+          "$ref": "#/definitions/google.type.Money"
+        },
+        "clearedAt": {
+          "type": "string"
+        }
+      }
+    },
+    "ledger.v1.TransactionType": {
+      "type": "string",
+      "enum": [
+        "NORMAL",
+        "REVERSAL",
+        "RESERVATION"
+      ],
+      "default": "NORMAL",
+      "description": "- NORMAL: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+      "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "description": "Authentication token, prefixed by Bearer: Bearer \u003ctoken\u003e",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}

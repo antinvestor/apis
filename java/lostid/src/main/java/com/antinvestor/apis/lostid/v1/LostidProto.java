@@ -135,87 +135,100 @@ public final class LostidProto {
     java.lang.String[] descriptorData = {
       "\n\026lostid/v1/lostid.proto\022\tlostid.v1\032\033buf" +
       "/validate/validate.proto\032\026common/v1/comm" +
-      "on.proto\032\032google/type/interval.proto\032\027go" +
-      "ogle/type/money.proto\"\341\001\n\022CollectibleReq" +
-      "uest\022=\n\007file_id\030\001 \003(\tB$\272H!\222\001\036\010\001\020\005\"\030r\026\020\003\030" +
-      "(2\020[0-9a-z_-]{3,20}R\006fileId\022M\n\npropertie" +
-      "s\030\002 \003(\0132-.lostid.v1.CollectibleRequest.P" +
-      "ropertiesEntryR\nproperties\032=\n\017Properties" +
-      "Entry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005" +
-      "value:\0028\001\"\343\001\n\023CollectibleResponse\022\016\n\002id\030" +
-      "\001 \001(\tR\002id\022\027\n\007file_id\030\002 \003(\tR\006fileId\022N\n\npr" +
-      "operties\030\003 \003(\0132..lostid.v1.CollectibleRe" +
-      "sponse.PropertiesEntryR\nproperties\022\024\n\005st" +
-      "ate\030\004 \001(\tR\005state\032=\n\017PropertiesEntry\022\020\n\003k" +
-      "ey\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"" +
-      "\226\001\n\026ListCollectibleRequest\0227\n\npagination" +
-      "\030\001 \001(\0132\025.common.v1.PaginationH\000R\npaginat" +
-      "ion\0223\n\010interval\030\002 \001(\0132\025.google.type.Inte" +
-      "rvalH\000R\010intervalB\016\n\005range\022\005\272H\002\010\001\"M\n\027List" +
-      "CollectibleResponse\0222\n\004data\030\001 \003(\0132\036.lost" +
-      "id.v1.CollectibleResponseR\004data\"\326\001\n\016Sear" +
-      "chResponse\022\016\n\002id\030\001 \001(\tR\002id\022\024\n\005query\030\002 \001(" +
-      "\tR\005query\022I\n\nproperties\030\003 \003(\0132).lostid.v1" +
-      ".SearchResponse.PropertiesEntryR\npropert" +
-      "ies\022\024\n\005state\030\004 \001(\tR\005state\032=\n\017PropertiesE" +
-      "ntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005v" +
-      "alue:\0028\001\"q\n\017ProgressRequest\022+\n\002id\030\001 \001(\tB" +
-      "\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\0221\n\004type" +
-      "\030\002 \001(\0162\023.lostid.v1.ItemTypeB\010\272H\005\202\001\002\020\001R\004t" +
-      "ype\"\243\001\n\017TransactionItem\022\016\n\002id\030\001 \001(\tR\002id\022" +
-      "\032\n\010datetime\030\002 \001(\tR\010datetime\022\026\n\006credit\030\003 " +
-      "\001(\010R\006credit\022*\n\006amount\030\004 \001(\0132\022.google.typ" +
-      "e.MoneyR\006amount\022 \n\013description\030\005 \001(\tR\013de" +
-      "scription\"r\n\014ProgressItem\022\016\n\002id\030\001 \001(\tR\002i" +
-      "d\022\032\n\010datetime\030\002 \001(\tR\010datetime\022\024\n\005state\030\003" +
-      " \001(\tR\005state\022 \n\013description\030\004 \001(\tR\013descri" +
-      "ption\"\334\002\n\020ProgressResponse\022\016\n\002id\030\001 \001(\tR\002" +
-      "id\022\'\n\004type\030\002 \001(\0162\023.lostid.v1.ItemTypeR\004t" +
-      "ype\022K\n\nproperties\030\003 \003(\0132+.lostid.v1.Prog" +
-      "ressResponse.PropertiesEntryR\nproperties" +
-      "\022\024\n\005state\030\004 \001(\tR\005state\022-\n\005items\030\005 \003(\0132\027." +
-      "lostid.v1.ProgressItemR\005items\022>\n\014transac" +
-      "tions\030\006 \003(\0132\032.lostid.v1.TransactionItemR" +
-      "\014transactions\032=\n\017PropertiesEntry\022\020\n\003key\030" +
-      "\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\221\001\n" +
-      "\021ListSearchRequest\0227\n\npagination\030\001 \001(\0132\025" +
-      ".common.v1.PaginationH\000R\npagination\0223\n\010i" +
-      "nterval\030\002 \001(\0132\025.google.type.IntervalH\000R\010" +
-      "intervalB\016\n\005range\022\005\272H\002\010\001\"C\n\022ListSearchRe" +
-      "sponse\022-\n\004data\030\001 \003(\0132\031.lostid.v1.SearchR" +
-      "esponseR\004data\"\226\001\n\026ListTransactionRequest" +
-      "\0227\n\npagination\030\001 \001(\0132\025.common.v1.Paginat" +
-      "ionH\000R\npagination\0223\n\010interval\030\002 \001(\0132\025.go" +
-      "ogle.type.IntervalH\000R\010intervalB\016\n\005range\022" +
-      "\005\272H\002\010\001\"I\n\027ListTransactionResponse\022.\n\004dat" +
-      "a\030\001 \003(\0132\032.lostid.v1.TransactionItemR\004dat" +
-      "a*8\n\010ItemType\022\017\n\013COLLECTIBLE\020\000\022\n\n\006SEARCH" +
-      "\020\001\022\017\n\013TRANSACTION\020\0022\346\003\n\rLostIdService\022L\n" +
-      "\013Collectible\022\035.lostid.v1.CollectibleRequ" +
-      "est\032\036.lostid.v1.CollectibleResponse\022Z\n\017L" +
-      "istCollectible\022!.lostid.v1.ListCollectib" +
-      "leRequest\032\".lostid.v1.ListCollectibleRes" +
-      "ponse0\001\022=\n\006Search\022\030.common.v1.SearchRequ" +
-      "est\032\031.lostid.v1.SearchResponse\022K\n\nListSe" +
-      "arch\022\034.lostid.v1.ListSearchRequest\032\035.los" +
-      "tid.v1.ListSearchResponse0\001\022C\n\010Progress\022" +
-      "\032.lostid.v1.ProgressRequest\032\033.lostid.v1." +
-      "ProgressResponse\022Z\n\017ListTransaction\022!.lo" +
-      "stid.v1.ListTransactionRequest\032\".lostid." +
-      "v1.ListTransactionResponse0\001B\254\001\n\036com.ant" +
-      "investor.apis.lostid.v1B\013LostidProtoP\001Z8" +
-      "github.com/antinvestor/apis/go/lostid/lo" +
-      "stid/v1;lostidv1\242\002\003LXX\252\002\tLostid.V1\312\002\tLos" +
-      "tid\\V1\342\002\025Lostid\\V1\\GPBMetadata\352\002\nLostid:" +
-      ":V1b\006proto3"
+      "on.proto\032\034google/api/annotations.proto\032\032" +
+      "google/type/interval.proto\032\027google/type/" +
+      "money.proto\032.protoc-gen-openapiv2/option" +
+      "s/annotations.proto\"\341\001\n\022CollectibleReque" +
+      "st\022=\n\007file_id\030\001 \003(\tB$\272H!\222\001\036\010\001\020\005\"\030r\026\020\003\030(2" +
+      "\020[0-9a-z_-]{3,20}R\006fileId\022M\n\nproperties\030" +
+      "\002 \003(\0132-.lostid.v1.CollectibleRequest.Pro" +
+      "pertiesEntryR\nproperties\032=\n\017PropertiesEn" +
+      "try\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005va" +
+      "lue:\0028\001\"\343\001\n\023CollectibleResponse\022\016\n\002id\030\001 " +
+      "\001(\tR\002id\022\027\n\007file_id\030\002 \003(\tR\006fileId\022N\n\nprop" +
+      "erties\030\003 \003(\0132..lostid.v1.CollectibleResp" +
+      "onse.PropertiesEntryR\nproperties\022\024\n\005stat" +
+      "e\030\004 \001(\tR\005state\032=\n\017PropertiesEntry\022\020\n\003key" +
+      "\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\226\001" +
+      "\n\026ListCollectibleRequest\0227\n\npagination\030\001" +
+      " \001(\0132\025.common.v1.PaginationH\000R\npaginatio" +
+      "n\0223\n\010interval\030\002 \001(\0132\025.google.type.Interv" +
+      "alH\000R\010intervalB\016\n\005range\022\005\272H\002\010\001\"M\n\027ListCo" +
+      "llectibleResponse\0222\n\004data\030\001 \003(\0132\036.lostid" +
+      ".v1.CollectibleResponseR\004data\"\326\001\n\016Search" +
+      "Response\022\016\n\002id\030\001 \001(\tR\002id\022\024\n\005query\030\002 \001(\tR" +
+      "\005query\022I\n\nproperties\030\003 \003(\0132).lostid.v1.S" +
+      "earchResponse.PropertiesEntryR\npropertie" +
+      "s\022\024\n\005state\030\004 \001(\tR\005state\032=\n\017PropertiesEnt" +
+      "ry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005val" +
+      "ue:\0028\001\"q\n\017ProgressRequest\022+\n\002id\030\001 \001(\tB\033\272" +
+      "H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\0221\n\004type\030\002" +
+      " \001(\0162\023.lostid.v1.ItemTypeB\010\272H\005\202\001\002\020\001R\004typ" +
+      "e\"\243\001\n\017TransactionItem\022\016\n\002id\030\001 \001(\tR\002id\022\032\n" +
+      "\010datetime\030\002 \001(\tR\010datetime\022\026\n\006credit\030\003 \001(" +
+      "\010R\006credit\022*\n\006amount\030\004 \001(\0132\022.google.type." +
+      "MoneyR\006amount\022 \n\013description\030\005 \001(\tR\013desc" +
+      "ription\"r\n\014ProgressItem\022\016\n\002id\030\001 \001(\tR\002id\022" +
+      "\032\n\010datetime\030\002 \001(\tR\010datetime\022\024\n\005state\030\003 \001" +
+      "(\tR\005state\022 \n\013description\030\004 \001(\tR\013descript" +
+      "ion\"\334\002\n\020ProgressResponse\022\016\n\002id\030\001 \001(\tR\002id" +
+      "\022\'\n\004type\030\002 \001(\0162\023.lostid.v1.ItemTypeR\004typ" +
+      "e\022K\n\nproperties\030\003 \003(\0132+.lostid.v1.Progre" +
+      "ssResponse.PropertiesEntryR\nproperties\022\024" +
+      "\n\005state\030\004 \001(\tR\005state\022-\n\005items\030\005 \003(\0132\027.lo" +
+      "stid.v1.ProgressItemR\005items\022>\n\014transacti" +
+      "ons\030\006 \003(\0132\032.lostid.v1.TransactionItemR\014t" +
+      "ransactions\032=\n\017PropertiesEntry\022\020\n\003key\030\001 " +
+      "\001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\221\001\n\021L" +
+      "istSearchRequest\0227\n\npagination\030\001 \001(\0132\025.c" +
+      "ommon.v1.PaginationH\000R\npagination\0223\n\010int" +
+      "erval\030\002 \001(\0132\025.google.type.IntervalH\000R\010in" +
+      "tervalB\016\n\005range\022\005\272H\002\010\001\"C\n\022ListSearchResp" +
+      "onse\022-\n\004data\030\001 \003(\0132\031.lostid.v1.SearchRes" +
+      "ponseR\004data\"\226\001\n\026ListTransactionRequest\0227" +
+      "\n\npagination\030\001 \001(\0132\025.common.v1.Paginatio" +
+      "nH\000R\npagination\0223\n\010interval\030\002 \001(\0132\025.goog" +
+      "le.type.IntervalH\000R\010intervalB\016\n\005range\022\005\272" +
+      "H\002\010\001\"I\n\027ListTransactionResponse\022.\n\004data\030" +
+      "\001 \003(\0132\032.lostid.v1.TransactionItemR\004data*" +
+      "8\n\010ItemType\022\017\n\013COLLECTIBLE\020\000\022\n\n\006SEARCH\020\001" +
+      "\022\017\n\013TRANSACTION\020\0022\342\004\n\rLostIdService\022e\n\013C" +
+      "ollectible\022\035.lostid.v1.CollectibleReques" +
+      "t\032\036.lostid.v1.CollectibleResponse\"\027\202\323\344\223\002" +
+      "\021\"\014/collectible:\001*\022p\n\017ListCollectible\022!." +
+      "lostid.v1.ListCollectibleRequest\032\".losti" +
+      "d.v1.ListCollectibleResponse\"\024\202\323\344\223\002\016\022\014/c" +
+      "ollectible0\001\022N\n\006Search\022\030.common.v1.Searc" +
+      "hRequest\032\031.lostid.v1.SearchResponse\"\017\202\323\344" +
+      "\223\002\t\022\007/search\022^\n\nListSearch\022\034.lostid.v1.L" +
+      "istSearchRequest\032\035.lostid.v1.ListSearchR" +
+      "esponse\"\021\202\323\344\223\002\013\022\t/searches0\001\022V\n\010Progress" +
+      "\022\032.lostid.v1.ProgressRequest\032\033.lostid.v1" +
+      ".ProgressResponse\"\021\202\323\344\223\002\013\022\t/progress\022p\n\017" +
+      "ListTransaction\022!.lostid.v1.ListTransact" +
+      "ionRequest\032\".lostid.v1.ListTransactionRe" +
+      "sponse\"\024\202\323\344\223\002\016\022\014/transaction0\001B\262\003\n\036com.a" +
+      "ntinvestor.apis.lostid.v1B\013LostidProtoP\001" +
+      "Z8github.com/antinvestor/apis/go/lostid/" +
+      "lostid/v1;lostidv1\242\002\003LXX\252\002\tLostid.V1\312\002\tL" +
+      "ostid\\V1\342\002\025Lostid\\V1\\GPBMetadata\352\002\nLosti" +
+      "d::V1\222A\202\002\022o\n\017Lost ID Service\"W\n\020Ant Inve" +
+      "stor Ltd\022-https://github.com/antinvestor" +
+      "/service-lostid\032\024info@antinvestor.com2\0031" +
+      ".0*\002\001\0022\020application/json:\020application/js" +
+      "onZY\nW\n\006bearer\022M\010\002\0228Authentication token" +
+      ", prefixed by Bearer: Bearer <token>\032\rAu" +
+      "thorization \002b\014\n\n\n\006bearer\022\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           build.buf.validate.ValidateProto.getDescriptor(),
           com.antinvestor.apis.common.v1.CommonProto.getDescriptor(),
+          com.google.api.AnnotationsProto.getDescriptor(),
           com.google.type.IntervalProto.getDescriptor(),
           com.google.type.MoneyProto.getDescriptor(),
+          grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor(),
         });
     internal_static_lostid_v1_CollectibleRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -322,12 +335,16 @@ public final class LostidProto {
     descriptor.resolveAllFeaturesImmutable();
     build.buf.validate.ValidateProto.getDescriptor();
     com.antinvestor.apis.common.v1.CommonProto.getDescriptor();
+    com.google.api.AnnotationsProto.getDescriptor();
     com.google.type.IntervalProto.getDescriptor();
     com.google.type.MoneyProto.getDescriptor();
+    grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(build.buf.validate.ValidateProto.field);
     registry.add(build.buf.validate.ValidateProto.oneof);
+    registry.add(com.google.api.AnnotationsProto.http);
+    registry.add(grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.openapiv2Swagger);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
   }

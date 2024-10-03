@@ -13,6 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -121,7 +122,7 @@ func (mr *MockLedgerServiceClientMockRecorder) ReverseTransaction(ctx, in any, o
 }
 
 // SearchAccounts mocks base method.
-func (m *MockLedgerServiceClient) SearchAccounts(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Account], error) {
+func (m *MockLedgerServiceClient) SearchAccounts(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Account], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -141,7 +142,7 @@ func (mr *MockLedgerServiceClientMockRecorder) SearchAccounts(ctx, in any, opts 
 }
 
 // SearchLedgers mocks base method.
-func (m *MockLedgerServiceClient) SearchLedgers(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Ledger], error) {
+func (m *MockLedgerServiceClient) SearchLedgers(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Ledger], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -161,7 +162,7 @@ func (mr *MockLedgerServiceClientMockRecorder) SearchLedgers(ctx, in any, opts .
 }
 
 // SearchTransactionEntries mocks base method.
-func (m *MockLedgerServiceClient) SearchTransactionEntries(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TransactionEntry], error) {
+func (m *MockLedgerServiceClient) SearchTransactionEntries(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TransactionEntry], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -181,7 +182,7 @@ func (mr *MockLedgerServiceClientMockRecorder) SearchTransactionEntries(ctx, in 
 }
 
 // SearchTransactions mocks base method.
-func (m *MockLedgerServiceClient) SearchTransactions(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Transaction], error) {
+func (m *MockLedgerServiceClient) SearchTransactions(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Transaction], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -344,7 +345,7 @@ func (mr *MockLedgerServiceServerMockRecorder) ReverseTransaction(arg0, arg1 any
 }
 
 // SearchAccounts mocks base method.
-func (m *MockLedgerServiceServer) SearchAccounts(arg0 *SearchRequest, arg1 grpc.ServerStreamingServer[Account]) error {
+func (m *MockLedgerServiceServer) SearchAccounts(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[Account]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchAccounts", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -358,7 +359,7 @@ func (mr *MockLedgerServiceServerMockRecorder) SearchAccounts(arg0, arg1 any) *g
 }
 
 // SearchLedgers mocks base method.
-func (m *MockLedgerServiceServer) SearchLedgers(arg0 *SearchRequest, arg1 grpc.ServerStreamingServer[Ledger]) error {
+func (m *MockLedgerServiceServer) SearchLedgers(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[Ledger]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchLedgers", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -372,7 +373,7 @@ func (mr *MockLedgerServiceServerMockRecorder) SearchLedgers(arg0, arg1 any) *go
 }
 
 // SearchTransactionEntries mocks base method.
-func (m *MockLedgerServiceServer) SearchTransactionEntries(arg0 *SearchRequest, arg1 grpc.ServerStreamingServer[TransactionEntry]) error {
+func (m *MockLedgerServiceServer) SearchTransactionEntries(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[TransactionEntry]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchTransactionEntries", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -386,7 +387,7 @@ func (mr *MockLedgerServiceServerMockRecorder) SearchTransactionEntries(arg0, ar
 }
 
 // SearchTransactions mocks base method.
-func (m *MockLedgerServiceServer) SearchTransactions(arg0 *SearchRequest, arg1 grpc.ServerStreamingServer[Transaction]) error {
+func (m *MockLedgerServiceServer) SearchTransactions(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[Transaction]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchTransactions", arg0, arg1)
 	ret0, _ := ret[0].(error)

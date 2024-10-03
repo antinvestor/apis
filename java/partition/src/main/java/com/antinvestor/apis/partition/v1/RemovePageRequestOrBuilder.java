@@ -24,14 +24,14 @@ public interface RemovePageRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string page_id = 1 [json_name = "pageId", (.buf.validate.field) = { ... }</code>
-   * @return The pageId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The id.
    */
-  java.lang.String getPageId();
+  java.lang.String getId();
   /**
-   * <code>string page_id = 1 [json_name = "pageId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for pageId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for id.
    */
   com.google.protobuf.ByteString
-      getPageIdBytes();
+      getIdBytes();
 }

@@ -24,36 +24,24 @@ public interface ReleaseRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-   * @return The accessId.
-   */
-  java.lang.String getAccessId();
-  /**
-   * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for accessId.
-   */
-  com.google.protobuf.ByteString
-      getAccessIdBytes();
-
-  /**
-   * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
-   * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
   com.google.protobuf.ByteString
       getIdBytes();
 
   /**
-   * <code>string comment = 3 [json_name = "comment"];</code>
+   * <code>string comment = 2 [json_name = "comment"];</code>
    * @return The comment.
    */
   java.lang.String getComment();
   /**
-   * <code>string comment = 3 [json_name = "comment"];</code>
+   * <code>string comment = 2 [json_name = "comment"];</code>
    * @return The bytes for comment.
    */
   com.google.protobuf.ByteString

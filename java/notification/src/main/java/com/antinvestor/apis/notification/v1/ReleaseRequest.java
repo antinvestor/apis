@@ -41,7 +41,6 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ReleaseRequest() {
-    accessId_ = "";
     id_ = "";
     comment_ = "";
   }
@@ -59,50 +58,11 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.notification.v1.ReleaseRequest.class, com.antinvestor.apis.notification.v1.ReleaseRequest.Builder.class);
   }
 
-  public static final int ACCESS_ID_FIELD_NUMBER = 1;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object accessId_ = "";
-  /**
-   * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-   * @return The accessId.
-   */
-  @java.lang.Override
-  public java.lang.String getAccessId() {
-    java.lang.Object ref = accessId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      accessId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for accessId.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getAccessIdBytes() {
-    java.lang.Object ref = accessId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      accessId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int ID_FIELD_NUMBER = 2;
+  public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
   /**
-   * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   @java.lang.Override
@@ -119,7 +79,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
   @java.lang.Override
@@ -137,11 +97,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int COMMENT_FIELD_NUMBER = 3;
+  public static final int COMMENT_FIELD_NUMBER = 2;
   @SuppressWarnings("serial")
   private volatile java.lang.Object comment_ = "";
   /**
-   * <code>string comment = 3 [json_name = "comment"];</code>
+   * <code>string comment = 2 [json_name = "comment"];</code>
    * @return The comment.
    */
   @java.lang.Override
@@ -158,7 +118,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string comment = 3 [json_name = "comment"];</code>
+   * <code>string comment = 2 [json_name = "comment"];</code>
    * @return The bytes for comment.
    */
   @java.lang.Override
@@ -190,14 +150,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(accessId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, accessId_);
-    }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 2, id_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(comment_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 3, comment_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, comment_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -208,14 +165,11 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(accessId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, accessId_);
-    }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, id_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(comment_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, comment_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, comment_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -232,8 +186,6 @@ private static final long serialVersionUID = 0L;
     }
     com.antinvestor.apis.notification.v1.ReleaseRequest other = (com.antinvestor.apis.notification.v1.ReleaseRequest) obj;
 
-    if (!getAccessId()
-        .equals(other.getAccessId())) return false;
     if (!getId()
         .equals(other.getId())) return false;
     if (!getComment()
@@ -249,8 +201,6 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ACCESS_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getAccessId().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + COMMENT_FIELD_NUMBER;
@@ -386,7 +336,6 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      accessId_ = "";
       id_ = "";
       comment_ = "";
       return this;
@@ -423,12 +372,9 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(com.antinvestor.apis.notification.v1.ReleaseRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.accessId_ = accessId_;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
         result.id_ = id_;
       }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
+      if (((from_bitField0_ & 0x00000002) != 0)) {
         result.comment_ = comment_;
       }
     }
@@ -445,19 +391,14 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.antinvestor.apis.notification.v1.ReleaseRequest other) {
       if (other == com.antinvestor.apis.notification.v1.ReleaseRequest.getDefaultInstance()) return this;
-      if (!other.getAccessId().isEmpty()) {
-        accessId_ = other.accessId_;
-        bitField0_ |= 0x00000001;
-        onChanged();
-      }
       if (!other.getId().isEmpty()) {
         id_ = other.id_;
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000001;
         onChanged();
       }
       if (!other.getComment().isEmpty()) {
         comment_ = other.comment_;
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -487,20 +428,15 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              accessId_ = input.readStringRequireUtf8();
+              id_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
             case 18: {
-              id_ = input.readStringRequireUtf8();
+              comment_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
-            case 26: {
-              comment_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000004;
-              break;
-            } // case 26
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -518,81 +454,9 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object accessId_ = "";
-    /**
-     * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-     * @return The accessId.
-     */
-    public java.lang.String getAccessId() {
-      java.lang.Object ref = accessId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        accessId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for accessId.
-     */
-    public com.google.protobuf.ByteString
-        getAccessIdBytes() {
-      java.lang.Object ref = accessId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        accessId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-     * @param value The accessId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setAccessId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      accessId_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearAccessId() {
-      accessId_ = getDefaultInstance().getAccessId();
-      bitField0_ = (bitField0_ & ~0x00000001);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for accessId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setAccessIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      accessId_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object id_ = "";
     /**
-     * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The id.
      */
     public java.lang.String getId() {
@@ -608,7 +472,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The bytes for id.
      */
     public com.google.protobuf.ByteString
@@ -625,7 +489,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The id to set.
      * @return This builder for chaining.
      */
@@ -633,22 +497,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       id_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearId() {
       id_ = getDefaultInstance().getId();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>string id = 2 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for id to set.
      * @return This builder for chaining.
      */
@@ -657,14 +521,14 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       id_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
 
     private java.lang.Object comment_ = "";
     /**
-     * <code>string comment = 3 [json_name = "comment"];</code>
+     * <code>string comment = 2 [json_name = "comment"];</code>
      * @return The comment.
      */
     public java.lang.String getComment() {
@@ -680,7 +544,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string comment = 3 [json_name = "comment"];</code>
+     * <code>string comment = 2 [json_name = "comment"];</code>
      * @return The bytes for comment.
      */
     public com.google.protobuf.ByteString
@@ -697,7 +561,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string comment = 3 [json_name = "comment"];</code>
+     * <code>string comment = 2 [json_name = "comment"];</code>
      * @param value The comment to set.
      * @return This builder for chaining.
      */
@@ -705,22 +569,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       comment_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>string comment = 3 [json_name = "comment"];</code>
+     * <code>string comment = 2 [json_name = "comment"];</code>
      * @return This builder for chaining.
      */
     public Builder clearComment() {
       comment_ = getDefaultInstance().getComment();
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string comment = 3 [json_name = "comment"];</code>
+     * <code>string comment = 2 [json_name = "comment"];</code>
      * @param value The bytes for comment to set.
      * @return This builder for chaining.
      */
@@ -729,7 +593,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       comment_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }

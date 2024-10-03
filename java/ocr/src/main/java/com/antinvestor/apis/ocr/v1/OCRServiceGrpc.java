@@ -60,27 +60,27 @@ public final class OCRServiceGrpc {
     return getRecognizeMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.ocr.v1.StatusRequest,
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusRequest,
       com.antinvestor.apis.ocr.v1.StatusResponse> getStatusMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "Status",
-      requestType = com.antinvestor.apis.ocr.v1.StatusRequest.class,
+      requestType = com.antinvestor.apis.common.v1.StatusRequest.class,
       responseType = com.antinvestor.apis.ocr.v1.StatusResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.ocr.v1.StatusRequest,
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusRequest,
       com.antinvestor.apis.ocr.v1.StatusResponse> getStatusMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.ocr.v1.StatusRequest, com.antinvestor.apis.ocr.v1.StatusResponse> getStatusMethod;
+    io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusRequest, com.antinvestor.apis.ocr.v1.StatusResponse> getStatusMethod;
     if ((getStatusMethod = OCRServiceGrpc.getStatusMethod) == null) {
       synchronized (OCRServiceGrpc.class) {
         if ((getStatusMethod = OCRServiceGrpc.getStatusMethod) == null) {
           OCRServiceGrpc.getStatusMethod = getStatusMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.ocr.v1.StatusRequest, com.antinvestor.apis.ocr.v1.StatusResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.common.v1.StatusRequest, com.antinvestor.apis.ocr.v1.StatusResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Status"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.ocr.v1.StatusRequest.getDefaultInstance()))
+                  com.antinvestor.apis.common.v1.StatusRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.antinvestor.apis.ocr.v1.StatusResponse.getDefaultInstance()))
               .setSchemaDescriptor(new OCRServiceMethodDescriptorSupplier("Status"))
@@ -154,7 +154,7 @@ public final class OCRServiceGrpc {
      * Check the status of request if queued
      * </pre>
      */
-    default void status(com.antinvestor.apis.ocr.v1.StatusRequest request,
+    default void status(com.antinvestor.apis.common.v1.StatusRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.ocr.v1.StatusResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getStatusMethod(), responseObserver);
     }
@@ -203,7 +203,7 @@ public final class OCRServiceGrpc {
      * Check the status of request if queued
      * </pre>
      */
-    public void status(com.antinvestor.apis.ocr.v1.StatusRequest request,
+    public void status(com.antinvestor.apis.common.v1.StatusRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.ocr.v1.StatusResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getStatusMethod(), getCallOptions()), request, responseObserver);
@@ -241,7 +241,7 @@ public final class OCRServiceGrpc {
      * Check the status of request if queued
      * </pre>
      */
-    public com.antinvestor.apis.ocr.v1.StatusResponse status(com.antinvestor.apis.ocr.v1.StatusRequest request) {
+    public com.antinvestor.apis.ocr.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getStatusMethod(), getCallOptions(), request);
     }
@@ -280,7 +280,7 @@ public final class OCRServiceGrpc {
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.ocr.v1.StatusResponse> status(
-        com.antinvestor.apis.ocr.v1.StatusRequest request) {
+        com.antinvestor.apis.common.v1.StatusRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getStatusMethod(), getCallOptions()), request);
     }
@@ -311,7 +311,7 @@ public final class OCRServiceGrpc {
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.ocr.v1.RecognizeResponse>) responseObserver);
           break;
         case METHODID_STATUS:
-          serviceImpl.status((com.antinvestor.apis.ocr.v1.StatusRequest) request,
+          serviceImpl.status((com.antinvestor.apis.common.v1.StatusRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.ocr.v1.StatusResponse>) responseObserver);
           break;
         default:
@@ -343,7 +343,7 @@ public final class OCRServiceGrpc {
           getStatusMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              com.antinvestor.apis.ocr.v1.StatusRequest,
+              com.antinvestor.apis.common.v1.StatusRequest,
               com.antinvestor.apis.ocr.v1.StatusResponse>(
                 service, METHODID_STATUS)))
         .build();

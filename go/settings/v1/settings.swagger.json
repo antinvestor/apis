@@ -1,0 +1,417 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Settings Service",
+    "version": "1.0",
+    "contact": {
+      "name": "Ant Investor Ltd",
+      "url": "https://github.com/antinvestor/service-settings",
+      "email": "info@antinvestor.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "settings.v1.SettingsService"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Gets a single setting and its stored value",
+        "operationId": "SettingsService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/settings.v1.GetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "key.object",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "key.objectId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "key.lang",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "key.module",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "settings.v1.SettingsService"
+        ]
+      }
+    },
+    "/list": {
+      "get": {
+        "operationId": "SettingsService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/settings.v1.ListResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of settings.v1.ListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "key.name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "key.object",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "key.objectId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "key.lang",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "key.module",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "settings.v1.SettingsService"
+        ]
+      }
+    },
+    "/search": {
+      "get": {
+        "operationId": "SettingsService_Search",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/settings.v1.SearchResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of settings.v1.SearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idQuery",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.count",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.startDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.endDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extras",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "settings.v1.SettingsService"
+        ]
+      }
+    },
+    "/set": {
+      "post": {
+        "operationId": "SettingsService_Set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/settings.v1.SetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/settings.v1.SetRequest"
+            }
+          }
+        ],
+        "tags": [
+          "settings.v1.SettingsService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "common.v1.Pagination": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }
+      }
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    },
+    "settings.v1.GetResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/settings.v1.SettingObject"
+        }
+      }
+    },
+    "settings.v1.ListResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/settings.v1.SettingObject"
+          }
+        }
+      }
+    },
+    "settings.v1.SearchResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/settings.v1.SettingObject"
+          }
+        }
+      }
+    },
+    "settings.v1.SetRequest": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/settings.v1.Setting"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "settings.v1.SetResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/settings.v1.SettingObject"
+        }
+      }
+    },
+    "settings.v1.Setting": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "object": {
+          "type": "string"
+        },
+        "objectId": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "module": {
+          "type": "string"
+        }
+      }
+    },
+    "settings.v1.SettingObject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "key": {
+          "$ref": "#/definitions/settings.v1.Setting"
+        },
+        "value": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "description": "Authentication token, prefixed by Bearer: Bearer \u003ctoken\u003e",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}

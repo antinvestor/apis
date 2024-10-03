@@ -17,6 +17,7 @@ package ocrv1
 import (
 	"context"
 	"github.com/antinvestor/apis/go/common"
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	"google.golang.org/grpc"
 	"math"
 )
@@ -88,7 +89,7 @@ func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, 
 
 func (pc *OCRClient) StatusCheck(ctx context.Context, id string) (*StatusResponse, error) {
 
-	statusCheckRequest := StatusRequest{
+	statusCheckRequest := commonv1.StatusRequest{
 		Id: id,
 	}
 

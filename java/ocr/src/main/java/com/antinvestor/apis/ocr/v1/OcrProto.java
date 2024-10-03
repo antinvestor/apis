@@ -65,16 +65,6 @@ public final class OcrProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_ocr_v1_RecognizeResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ocr_v1_StatusRequest_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_ocr_v1_StatusRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ocr_v1_StatusRequest_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_ocr_v1_StatusRequest_ExtrasEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ocr_v1_StatusResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -89,45 +79,52 @@ public final class OcrProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\020ocr/v1/ocr.proto\022\006ocr.v1\032\033buf/validate" +
-      "/validate.proto\032\026common/v1/common.proto\"" +
-      "\375\001\n\007OCRFile\022\027\n\007file_id\030\001 \001(\tR\006fileId\022\032\n\010" +
-      "language\030\002 \001(\tR\010language\022)\n\006status\030\003 \001(\016" +
-      "2\021.common.v1.STATUSR\006status\022\022\n\004text\030\004 \001(" +
-      "\tR\004text\022?\n\nproperties\030\005 \003(\0132\037.ocr.v1.OCR" +
-      "File.PropertiesEntryR\nproperties\032=\n\017Prop" +
-      "ertiesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002" +
-      " \001(\tR\005value:\0028\001\"\350\002\n\020RecognizeRequest\022>\n\014" +
-      "reference_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-" +
-      "]{3,20}R\013referenceId\0226\n\013language_id\030\002 \001(" +
-      "\tB\025\272H\022r\020\020\002\030\0032\n[a-z]{2,3}R\nlanguageId\022H\n\n" +
-      "properties\030\003 \003(\0132(.ocr.v1.RecognizeReque" +
-      "st.PropertiesEntryR\nproperties\022\024\n\005async\030" +
-      "\004 \001(\010R\005async\022=\n\007file_id\030\005 \003(\tB$\272H!\222\001\036\010\001\020" +
-      "\005\"\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006fileId\032=\n\017P" +
-      "ropertiesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005valu" +
-      "e\030\002 \001(\tR\005value:\0028\001\"_\n\021RecognizeResponse\022" +
-      "!\n\014reference_id\030\001 \001(\tR\013referenceId\022\'\n\006re" +
-      "sult\030\002 \003(\0132\017.ocr.v1.OCRFileR\006result\"\262\001\n\r" +
-      "StatusRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0" +
-      "-9a-z_-]{3,20}R\002id\0229\n\006extras\030\002 \003(\0132!.ocr" +
-      ".v1.StatusRequest.ExtrasEntryR\006extras\0329\n" +
-      "\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030" +
-      "\002 \001(\tR\005value:\0028\001\"?\n\016StatusResponse\022-\n\004da" +
-      "ta\030\001 \001(\0132\031.ocr.v1.RecognizeResponseR\004dat" +
-      "a2\207\001\n\nOCRService\022@\n\tRecognize\022\030.ocr.v1.R" +
-      "ecognizeRequest\032\031.ocr.v1.RecognizeRespon" +
-      "se\0227\n\006Status\022\025.ocr.v1.StatusRequest\032\026.oc" +
-      "r.v1.StatusResponseB\221\001\n\033com.antinvestor." +
-      "apis.ocr.v1B\010OcrProtoP\001Z/github.com/anti" +
-      "nvestor/apis/go/ocr/ocr/v1;ocrv1\242\002\003OXX\252\002" +
-      "\006Ocr.V1\312\002\006Ocr\\V1\342\002\022Ocr\\V1\\GPBMetadata\352\002\007" +
-      "Ocr::V1b\006proto3"
+      "/validate.proto\032\026common/v1/common.proto\032" +
+      "\034google/api/annotations.proto\032.protoc-ge" +
+      "n-openapiv2/options/annotations.proto\"\375\001" +
+      "\n\007OCRFile\022\027\n\007file_id\030\001 \001(\tR\006fileId\022\032\n\010la" +
+      "nguage\030\002 \001(\tR\010language\022)\n\006status\030\003 \001(\0162\021" +
+      ".common.v1.STATUSR\006status\022\022\n\004text\030\004 \001(\tR" +
+      "\004text\022?\n\nproperties\030\005 \003(\0132\037.ocr.v1.OCRFi" +
+      "le.PropertiesEntryR\nproperties\032=\n\017Proper" +
+      "tiesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001" +
+      "(\tR\005value:\0028\001\"\350\002\n\020RecognizeRequest\022>\n\014re" +
+      "ference_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{" +
+      "3,20}R\013referenceId\0226\n\013language_id\030\002 \001(\tB" +
+      "\025\272H\022r\020\020\002\030\0032\n[a-z]{2,3}R\nlanguageId\022H\n\npr" +
+      "operties\030\003 \003(\0132(.ocr.v1.RecognizeRequest" +
+      ".PropertiesEntryR\nproperties\022\024\n\005async\030\004 " +
+      "\001(\010R\005async\022=\n\007file_id\030\005 \003(\tB$\272H!\222\001\036\010\001\020\005\"" +
+      "\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006fileId\032=\n\017Pro" +
+      "pertiesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030" +
+      "\002 \001(\tR\005value:\0028\001\"_\n\021RecognizeResponse\022!\n" +
+      "\014reference_id\030\001 \001(\tR\013referenceId\022\'\n\006resu" +
+      "lt\030\002 \003(\0132\017.ocr.v1.OCRFileR\006result\"?\n\016Sta" +
+      "tusResponse\022-\n\004data\030\001 \001(\0132\031.ocr.v1.Recog" +
+      "nizeResponseR\004data2\262\001\n\nOCRService\022W\n\tRec" +
+      "ognize\022\030.ocr.v1.RecognizeRequest\032\031.ocr.v" +
+      "1.RecognizeResponse\"\025\202\323\344\223\002\017\"\n/recognize:" +
+      "\001*\022K\n\006Status\022\030.common.v1.StatusRequest\032\026" +
+      ".ocr.v1.StatusResponse\"\017\202\323\344\223\002\t\022\007/statusB" +
+      "\223\003\n\033com.antinvestor.apis.ocr.v1B\010OcrProt" +
+      "oP\001Z/github.com/antinvestor/apis/go/ocr/" +
+      "ocr/v1;ocrv1\242\002\003OXX\252\002\006Ocr.V1\312\002\006Ocr\\V1\342\002\022O" +
+      "cr\\V1\\GPBMetadata\352\002\007Ocr::V1\222A\376\001\022k\n\013OCR S" +
+      "ervice\"W\n\020Ant Investor Ltd\022-https://gith" +
+      "ub.com/antinvestor/service-lostid\032\024info@" +
+      "antinvestor.com2\0031.0*\002\001\0022\020application/js" +
+      "on:\020application/jsonZY\nW\n\006bearer\022M\010\002\0228Au" +
+      "thentication token, prefixed by Bearer: " +
+      "Bearer <token>\032\rAuthorization \002b\014\n\n\n\006bea" +
+      "rer\022\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           build.buf.validate.ValidateProto.getDescriptor(),
           com.antinvestor.apis.common.v1.CommonProto.getDescriptor(),
+          com.google.api.AnnotationsProto.getDescriptor(),
+          grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor(),
         });
     internal_static_ocr_v1_OCRFile_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -159,20 +156,8 @@ public final class OcrProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_ocr_v1_RecognizeResponse_descriptor,
         new java.lang.String[] { "ReferenceId", "Result", });
-    internal_static_ocr_v1_StatusRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_ocr_v1_StatusRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_ocr_v1_StatusRequest_descriptor,
-        new java.lang.String[] { "Id", "Extras", });
-    internal_static_ocr_v1_StatusRequest_ExtrasEntry_descriptor =
-      internal_static_ocr_v1_StatusRequest_descriptor.getNestedTypes().get(0);
-    internal_static_ocr_v1_StatusRequest_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_ocr_v1_StatusRequest_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_ocr_v1_StatusResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_ocr_v1_StatusResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_ocr_v1_StatusResponse_descriptor,
@@ -180,9 +165,13 @@ public final class OcrProto {
     descriptor.resolveAllFeaturesImmutable();
     build.buf.validate.ValidateProto.getDescriptor();
     com.antinvestor.apis.common.v1.CommonProto.getDescriptor();
+    com.google.api.AnnotationsProto.getDescriptor();
+    grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(build.buf.validate.ValidateProto.field);
+    registry.add(com.google.api.AnnotationsProto.http);
+    registry.add(grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.openapiv2Swagger);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
   }

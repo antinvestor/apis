@@ -22,6 +22,7 @@ package ledgerv1
 
 import (
 	context "context"
+	v1 "github.com/antinvestor/apis/go/common/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -53,19 +54,19 @@ const (
 // The ledger service definition.
 type LedgerServiceClient interface {
 	// Searches for an ledger based on details
-	SearchLedgers(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Ledger], error)
+	SearchLedgers(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Ledger], error)
 	// Creates a new ledger based on supplied data
 	CreateLedger(ctx context.Context, in *Ledger, opts ...grpc.CallOption) (*Ledger, error)
 	// Updates the data component of the ledger.
 	UpdateLedger(ctx context.Context, in *Ledger, opts ...grpc.CallOption) (*Ledger, error)
 	// Searches for an account based on details
-	SearchAccounts(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Account], error)
+	SearchAccounts(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Account], error)
 	// Creates a new account based on supplied data
 	CreateAccount(ctx context.Context, in *Account, opts ...grpc.CallOption) (*Account, error)
 	// Updates the data component of the account.
 	UpdateAccount(ctx context.Context, in *Account, opts ...grpc.CallOption) (*Account, error)
 	// Searches for a transaction based on details
-	SearchTransactions(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Transaction], error)
+	SearchTransactions(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Transaction], error)
 	// Creates a new transaction
 	CreateTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Transaction, error)
 	// Reverses a transaction by creating a new one with inverted entries
@@ -73,7 +74,7 @@ type LedgerServiceClient interface {
 	// Updates a transaction's details
 	UpdateTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Transaction, error)
 	// Searches for entries matching the search details
-	SearchTransactionEntries(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TransactionEntry], error)
+	SearchTransactionEntries(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TransactionEntry], error)
 }
 
 type ledgerServiceClient struct {
@@ -84,13 +85,13 @@ func NewLedgerServiceClient(cc grpc.ClientConnInterface) LedgerServiceClient {
 	return &ledgerServiceClient{cc}
 }
 
-func (c *ledgerServiceClient) SearchLedgers(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Ledger], error) {
+func (c *ledgerServiceClient) SearchLedgers(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Ledger], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &LedgerService_ServiceDesc.Streams[0], LedgerService_SearchLedgers_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[SearchRequest, Ledger]{ClientStream: stream}
+	x := &grpc.GenericClientStream[v1.SearchRequest, Ledger]{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -123,13 +124,13 @@ func (c *ledgerServiceClient) UpdateLedger(ctx context.Context, in *Ledger, opts
 	return out, nil
 }
 
-func (c *ledgerServiceClient) SearchAccounts(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Account], error) {
+func (c *ledgerServiceClient) SearchAccounts(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Account], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &LedgerService_ServiceDesc.Streams[1], LedgerService_SearchAccounts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[SearchRequest, Account]{ClientStream: stream}
+	x := &grpc.GenericClientStream[v1.SearchRequest, Account]{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -162,13 +163,13 @@ func (c *ledgerServiceClient) UpdateAccount(ctx context.Context, in *Account, op
 	return out, nil
 }
 
-func (c *ledgerServiceClient) SearchTransactions(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Transaction], error) {
+func (c *ledgerServiceClient) SearchTransactions(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Transaction], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &LedgerService_ServiceDesc.Streams[2], LedgerService_SearchTransactions_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[SearchRequest, Transaction]{ClientStream: stream}
+	x := &grpc.GenericClientStream[v1.SearchRequest, Transaction]{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -211,13 +212,13 @@ func (c *ledgerServiceClient) UpdateTransaction(ctx context.Context, in *Transac
 	return out, nil
 }
 
-func (c *ledgerServiceClient) SearchTransactionEntries(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TransactionEntry], error) {
+func (c *ledgerServiceClient) SearchTransactionEntries(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TransactionEntry], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &LedgerService_ServiceDesc.Streams[3], LedgerService_SearchTransactionEntries_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[SearchRequest, TransactionEntry]{ClientStream: stream}
+	x := &grpc.GenericClientStream[v1.SearchRequest, TransactionEntry]{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -237,19 +238,19 @@ type LedgerService_SearchTransactionEntriesClient = grpc.ServerStreamingClient[T
 // The ledger service definition.
 type LedgerServiceServer interface {
 	// Searches for an ledger based on details
-	SearchLedgers(*SearchRequest, grpc.ServerStreamingServer[Ledger]) error
+	SearchLedgers(*v1.SearchRequest, grpc.ServerStreamingServer[Ledger]) error
 	// Creates a new ledger based on supplied data
 	CreateLedger(context.Context, *Ledger) (*Ledger, error)
 	// Updates the data component of the ledger.
 	UpdateLedger(context.Context, *Ledger) (*Ledger, error)
 	// Searches for an account based on details
-	SearchAccounts(*SearchRequest, grpc.ServerStreamingServer[Account]) error
+	SearchAccounts(*v1.SearchRequest, grpc.ServerStreamingServer[Account]) error
 	// Creates a new account based on supplied data
 	CreateAccount(context.Context, *Account) (*Account, error)
 	// Updates the data component of the account.
 	UpdateAccount(context.Context, *Account) (*Account, error)
 	// Searches for a transaction based on details
-	SearchTransactions(*SearchRequest, grpc.ServerStreamingServer[Transaction]) error
+	SearchTransactions(*v1.SearchRequest, grpc.ServerStreamingServer[Transaction]) error
 	// Creates a new transaction
 	CreateTransaction(context.Context, *Transaction) (*Transaction, error)
 	// Reverses a transaction by creating a new one with inverted entries
@@ -257,7 +258,7 @@ type LedgerServiceServer interface {
 	// Updates a transaction's details
 	UpdateTransaction(context.Context, *Transaction) (*Transaction, error)
 	// Searches for entries matching the search details
-	SearchTransactionEntries(*SearchRequest, grpc.ServerStreamingServer[TransactionEntry]) error
+	SearchTransactionEntries(*v1.SearchRequest, grpc.ServerStreamingServer[TransactionEntry]) error
 	mustEmbedUnimplementedLedgerServiceServer()
 }
 
@@ -268,7 +269,7 @@ type LedgerServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLedgerServiceServer struct{}
 
-func (UnimplementedLedgerServiceServer) SearchLedgers(*SearchRequest, grpc.ServerStreamingServer[Ledger]) error {
+func (UnimplementedLedgerServiceServer) SearchLedgers(*v1.SearchRequest, grpc.ServerStreamingServer[Ledger]) error {
 	return status.Errorf(codes.Unimplemented, "method SearchLedgers not implemented")
 }
 func (UnimplementedLedgerServiceServer) CreateLedger(context.Context, *Ledger) (*Ledger, error) {
@@ -277,7 +278,7 @@ func (UnimplementedLedgerServiceServer) CreateLedger(context.Context, *Ledger) (
 func (UnimplementedLedgerServiceServer) UpdateLedger(context.Context, *Ledger) (*Ledger, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateLedger not implemented")
 }
-func (UnimplementedLedgerServiceServer) SearchAccounts(*SearchRequest, grpc.ServerStreamingServer[Account]) error {
+func (UnimplementedLedgerServiceServer) SearchAccounts(*v1.SearchRequest, grpc.ServerStreamingServer[Account]) error {
 	return status.Errorf(codes.Unimplemented, "method SearchAccounts not implemented")
 }
 func (UnimplementedLedgerServiceServer) CreateAccount(context.Context, *Account) (*Account, error) {
@@ -286,7 +287,7 @@ func (UnimplementedLedgerServiceServer) CreateAccount(context.Context, *Account)
 func (UnimplementedLedgerServiceServer) UpdateAccount(context.Context, *Account) (*Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
 }
-func (UnimplementedLedgerServiceServer) SearchTransactions(*SearchRequest, grpc.ServerStreamingServer[Transaction]) error {
+func (UnimplementedLedgerServiceServer) SearchTransactions(*v1.SearchRequest, grpc.ServerStreamingServer[Transaction]) error {
 	return status.Errorf(codes.Unimplemented, "method SearchTransactions not implemented")
 }
 func (UnimplementedLedgerServiceServer) CreateTransaction(context.Context, *Transaction) (*Transaction, error) {
@@ -298,7 +299,7 @@ func (UnimplementedLedgerServiceServer) ReverseTransaction(context.Context, *Tra
 func (UnimplementedLedgerServiceServer) UpdateTransaction(context.Context, *Transaction) (*Transaction, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTransaction not implemented")
 }
-func (UnimplementedLedgerServiceServer) SearchTransactionEntries(*SearchRequest, grpc.ServerStreamingServer[TransactionEntry]) error {
+func (UnimplementedLedgerServiceServer) SearchTransactionEntries(*v1.SearchRequest, grpc.ServerStreamingServer[TransactionEntry]) error {
 	return status.Errorf(codes.Unimplemented, "method SearchTransactionEntries not implemented")
 }
 func (UnimplementedLedgerServiceServer) mustEmbedUnimplementedLedgerServiceServer() {}
@@ -323,11 +324,11 @@ func RegisterLedgerServiceServer(s grpc.ServiceRegistrar, srv LedgerServiceServe
 }
 
 func _LedgerService_SearchLedgers_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchRequest)
+	m := new(v1.SearchRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(LedgerServiceServer).SearchLedgers(m, &grpc.GenericServerStream[SearchRequest, Ledger]{ServerStream: stream})
+	return srv.(LedgerServiceServer).SearchLedgers(m, &grpc.GenericServerStream[v1.SearchRequest, Ledger]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
@@ -370,11 +371,11 @@ func _LedgerService_UpdateLedger_Handler(srv interface{}, ctx context.Context, d
 }
 
 func _LedgerService_SearchAccounts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchRequest)
+	m := new(v1.SearchRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(LedgerServiceServer).SearchAccounts(m, &grpc.GenericServerStream[SearchRequest, Account]{ServerStream: stream})
+	return srv.(LedgerServiceServer).SearchAccounts(m, &grpc.GenericServerStream[v1.SearchRequest, Account]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
@@ -417,11 +418,11 @@ func _LedgerService_UpdateAccount_Handler(srv interface{}, ctx context.Context, 
 }
 
 func _LedgerService_SearchTransactions_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchRequest)
+	m := new(v1.SearchRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(LedgerServiceServer).SearchTransactions(m, &grpc.GenericServerStream[SearchRequest, Transaction]{ServerStream: stream})
+	return srv.(LedgerServiceServer).SearchTransactions(m, &grpc.GenericServerStream[v1.SearchRequest, Transaction]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
@@ -482,11 +483,11 @@ func _LedgerService_UpdateTransaction_Handler(srv interface{}, ctx context.Conte
 }
 
 func _LedgerService_SearchTransactionEntries_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchRequest)
+	m := new(v1.SearchRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(LedgerServiceServer).SearchTransactionEntries(m, &grpc.GenericServerStream[SearchRequest, TransactionEntry]{ServerStream: stream})
+	return srv.(LedgerServiceServer).SearchTransactionEntries(m, &grpc.GenericServerStream[v1.SearchRequest, TransactionEntry]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.

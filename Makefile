@@ -19,12 +19,6 @@ DOCKER ?= docker
 MKFILE_DIR := $(abspath $(lastword $(MAKEFILE_LIST)))
 CUR_DIR := $(dir $(MKFILE_DIR))
 
-define npm_build
-cd js/${1} && npm i
-cd js/${1} && npm pkg fix
-
-endef
-
 define golang_build
 cd go/${1} && $(GO) mod tidy
 cd go/${1} && $(GO) fmt ./...
@@ -57,7 +51,7 @@ cd go/${1} && golangci-lint run
 endef
 
 define lint_fix_module
-cd proto/${1} && PATH=$(BIN) $(BIN)/buf mod update
+cd proto/${1} && PATH=$(BIN) $(BIN)/buf dep update
 cd proto/${1} && PATH=$(BIN) $(BIN)/buf format -w .
 cd go/${1} && golangci-lint run --fix
 endef
@@ -67,24 +61,10 @@ help: ## Describe useful make targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "%-30s %s\n", $$1, $$2}'
 
 
-.PHONY: npm_build_all
-npm_build_all:  ## Build all npm packages
-	$(call npm_build,common)
-	$(call npm_build,notification)
-	$(call npm_build,ocr)
-	$(call npm_build,partition)
-	$(call npm_build,profile)
-	$(call npm_build,property)
-	$(call npm_build,payment)
-	$(call npm_build,settings)
-	$(call npm_build,ledger)
-	$(call npm_build,lostid)
-
 .PHONY: all
 all: ## Build, test, and lint (default)
 	$(MAKE) golang_build_all
 	$(MAKE) golang_lint_all
-	$(MAKE) npm_build_all
 
 .PHONY: clean
 clean: ## Delete intermediate build artifacts
@@ -210,11 +190,11 @@ checkgenerate:
 
 $(BIN)/buf: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/bufbuild/buf/cmd/buf@v1.42.0
+	$(GO) install github.com/bufbuild/buf/cmd/buf@v1.43.0
 
 $(BIN)/license-header: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/bufbuild/buf/private/pkg/licenseheader/cmd/license-header@v1.42.0
+	$(GO) install github.com/bufbuild/buf/private/pkg/licenseheader/cmd/license-header@v1.43.0
 
 $(BIN)/golangci-lint: Makefile
 	@mkdir -p $(@D)
@@ -222,4 +202,4 @@ $(BIN)/golangci-lint: Makefile
 
 $(BIN)/gomock: Makefile
 	@mkdir -p $(@D)
-	$(GO) install go.uber.org/mock/mockgen@latest
+	$(GO) install go.uber.org/mock/mockgen@v0.4.0

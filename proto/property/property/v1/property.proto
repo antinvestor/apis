@@ -18,11 +18,44 @@ package property.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/property/v1;propertyv1";
 option java_multiple_files = true;
 option java_package = "propertyv1";
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Property Service"
+    version: "1.0"
+    contact: {
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-property"
+      email: "info@antinvestor.com"
+    }
+  }
+
+  schemes: HTTP
+  schemes: HTTPS
+  consumes: "application/json"
+  produces: "application/json"
+
+  security_definitions: {
+    security: {
+      key: "bearer"
+      value: {
+        type: TYPE_API_KEY
+        in: IN_HEADER
+        name: "Authorization"
+        description: "Authentication token, prefixed by Bearer: Bearer <token>"
+      }
+    }
+  }
+  security: {
+    security_requirement: {key: "bearer"}
+  }
+};
 
 message Locality {
   string id = 1 [
@@ -130,11 +163,11 @@ message Subscription {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  string propertyid = 2 [
+  string property_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40
   ];
-  string profileid = 3 [
+  string profile_id = 3 [
     (buf.validate.field).ignore_empty = true,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 50
@@ -336,41 +369,82 @@ message DeleteSubscriptionResponse {
 
 service PropertyService {
   //Create method for adding a new property type into the system
-  rpc AddPropertyType(AddPropertyTypeRequest) returns (AddPropertyTypeResponse);
+  rpc AddPropertyType(AddPropertyTypeRequest) returns (AddPropertyTypeResponse) {
+    option (google.api.http) = {
+      post: "/type"
+      body: "*"
+    };
+  }
 
   //List method for showing all property types in the system
-  rpc ListPropertyType(ListPropertyTypeRequest) returns (stream ListPropertyTypeResponse);
+  rpc ListPropertyType(ListPropertyTypeRequest) returns (stream ListPropertyTypeResponse) {
+    option (google.api.http) = {get: "/type"};
+  }
 
   //Create method for adding a new locality into the system
-  rpc AddLocality(AddLocalityRequest) returns (AddLocalityResponse);
+  rpc AddLocality(AddLocalityRequest) returns (AddLocalityResponse) {
+    option (google.api.http) = {
+      post: "/locality"
+      body: "*"
+    };
+  }
 
   //Delete method for removing an existing locality from the system
-  rpc DeleteLocality(DeleteLocalityRequest) returns (DeleteLocalityResponse);
+  rpc DeleteLocality(DeleteLocalityRequest) returns (DeleteLocalityResponse) {
+    option (google.api.http) = {delete: "/locality/{id}"};
+  }
 
   //Create method for adding a new property into the system
-  rpc CreateProperty(CreatePropertyRequest) returns (CreatePropertyResponse);
+  rpc CreateProperty(CreatePropertyRequest) returns (CreatePropertyResponse) {
+    option (google.api.http) = {
+      post: "/"
+      body: "*"
+    };
+  }
 
   //Update property request to modify its current form to another
-  rpc UpdateProperty(UpdatePropertyRequest) returns (UpdatePropertyResponse);
+  rpc UpdateProperty(UpdatePropertyRequest) returns (UpdatePropertyResponse) {
+    option (google.api.http) = {
+      patch: "/{id}"
+      body: "*"
+    };
+  }
 
   //Delete property request to modify its current form to another
-  rpc DeleteProperty(DeletePropertyRequest) returns (DeletePropertyResponse);
+  rpc DeleteProperty(DeletePropertyRequest) returns (DeletePropertyResponse) {
+    option (google.api.http) = {delete: "/{id}"};
+  }
 
   //State request to determine active state and status of a property
-  rpc StateOfProperty(StateOfPropertyRequest) returns (StateOfPropertyResponse);
+  rpc StateOfProperty(StateOfPropertyRequest) returns (StateOfPropertyResponse) {
+    option (google.api.http) = {get: "/{id}/state"};
+  }
 
   //History request returns all the state transitions a property has had over its lifetime in the system
-  rpc HistoryOfProperty(HistoryOfPropertyRequest) returns (stream HistoryOfPropertyResponse);
+  rpc HistoryOfProperty(HistoryOfPropertyRequest) returns (stream HistoryOfPropertyResponse) {
+    option (google.api.http) = {get: "/{id}/history"};
+  }
 
   //Search method is for client request to query for properties that match query
-  rpc SearchProperty(SearchPropertyRequest) returns (stream SearchPropertyResponse);
+  rpc SearchProperty(SearchPropertyRequest) returns (stream SearchPropertyResponse) {
+    option (google.api.http) = {get: "/search"};
+  }
 
   //ListSubscriptions for a particular property
-  rpc ListSubscription(ListSubscriptionRequest) returns (stream ListSubscriptionResponse);
+  rpc ListSubscription(ListSubscriptionRequest) returns (stream ListSubscriptionResponse) {
+    option (google.api.http) = {get: "/{property_id}/subscription"};
+  }
 
   //AddSubscription for a profile to a property
-  rpc AddSubscription(AddSubscriptionRequest) returns (AddSubscriptionResponse);
+  rpc AddSubscription(AddSubscriptionRequest) returns (AddSubscriptionResponse) {
+    option (google.api.http) = {
+      post: "/{data.property_id}/subscription"
+      body: "*"
+    };
+  }
 
   //Delete subscription of profile to a property
-  rpc DeleteSubscription(DeleteSubscriptionRequest) returns (DeleteSubscriptionResponse);
+  rpc DeleteSubscription(DeleteSubscriptionRequest) returns (DeleteSubscriptionResponse) {
+    option (google.api.http) = {delete: "/{id}/subscription"};
+  }
 }

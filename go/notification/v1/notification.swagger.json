@@ -1,0 +1,790 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Notification Service",
+    "version": "1.0",
+    "contact": {
+      "name": "Ant Investor Ltd",
+      "url": "https://github.com/antinvestor/service-lostid",
+      "email": "info@antinvestor.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "notification.v1.NotificationService"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/receive": {
+      "post": {
+        "summary": "Receive method is for client request for particular notification responses from system",
+        "operationId": "NotificationService_Receive",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notification.v1.ReceiveResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/notification.v1.ReceiveRequest"
+            }
+          }
+        ],
+        "tags": [
+          "notification.v1.NotificationService"
+        ]
+      }
+    },
+    "/search": {
+      "get": {
+        "summary": "Search method is for client request for particular notification details from system",
+        "operationId": "NotificationService_Search",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/notification.v1.SearchResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of notification.v1.SearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idQuery",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.count",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.startDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.endDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extras",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "notification.v1.NotificationService"
+        ]
+      }
+    },
+    "/send": {
+      "post": {
+        "summary": "Send method for queueing massages as requested",
+        "operationId": "NotificationService_Send",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notification.v1.SendResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/notification.v1.SendRequest"
+            }
+          }
+        ],
+        "tags": [
+          "notification.v1.NotificationService"
+        ]
+      }
+    },
+    "/send/release/{id}": {
+      "post": {
+        "summary": "Release method for releasing queued massages and returns if notification status if released",
+        "operationId": "NotificationService_Release",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notification.v1.ReleaseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/notification.v1.NotificationService.ReleaseBody"
+            }
+          }
+        ],
+        "tags": [
+          "notification.v1.NotificationService"
+        ]
+      }
+    },
+    "/status/{id}": {
+      "get": {
+        "summary": "Status request to determine if notification is prepared or released",
+        "operationId": "NotificationService_Status",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/common.v1.StatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extras",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "notification.v1.NotificationService"
+        ]
+      },
+      "patch": {
+        "summary": "Status update request to allow continuation of notification processing",
+        "operationId": "NotificationService_StatusUpdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/common.v1.StatusUpdateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/notification.v1.NotificationService.StatusUpdateBody"
+            }
+          }
+        ],
+        "tags": [
+          "notification.v1.NotificationService"
+        ]
+      }
+    },
+    "/template": {
+      "get": {
+        "summary": "Utility to allow system obtain templates within the system",
+        "operationId": "NotificationService_TemplateSearch",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/notification.v1.TemplateSearchResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of notification.v1.TemplateSearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "languageCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "notification.v1.NotificationService"
+        ]
+      },
+      "post": {
+        "operationId": "NotificationService_TemplateSave",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notification.v1.TemplateSaveResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/notification.v1.TemplateSaveRequest"
+            }
+          }
+        ],
+        "tags": [
+          "notification.v1.NotificationService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "common.v1.ContactLink": {
+      "type": "object",
+      "properties": {
+        "profileName": {
+          "type": "string"
+        },
+        "profileType": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "profileImageId": {
+          "type": "string"
+        },
+        "contactId": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "extras": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "common.v1.Pagination": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }
+      }
+    },
+    "common.v1.STATE": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "CHECKED",
+        "ACTIVE",
+        "INACTIVE",
+        "DELETED"
+      ],
+      "default": "CREATED",
+      "description": "- CREATED: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+      "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "common.v1.STATUS": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "QUEUED",
+        "IN_PROCESS",
+        "FAILED",
+        "SUCCESSFUL"
+      ],
+      "default": "UNKNOWN",
+      "description": "- UNKNOWN: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+      "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "common.v1.StatusResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
+        },
+        "status": {
+          "$ref": "#/definitions/common.v1.STATUS"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "transientId": {
+          "type": "string"
+        },
+        "extras": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "common.v1.StatusUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/common.v1.StatusResponse"
+        }
+      }
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    },
+    "notification.v1.Language": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "extra": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "notification.v1.Notification": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/common.v1.ContactLink"
+        },
+        "recipient": {
+          "$ref": "#/definitions/common.v1.ContactLink"
+        },
+        "type": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "payload": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "data": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "outBound": {
+          "type": "boolean"
+        },
+        "autoRelease": {
+          "type": "boolean"
+        },
+        "routeId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/common.v1.StatusResponse"
+        },
+        "extras": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "priority": {
+          "$ref": "#/definitions/notification.v1.PRIORITY"
+        }
+      }
+    },
+    "notification.v1.NotificationService.ReleaseBody": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "type": "string"
+        }
+      }
+    },
+    "notification.v1.NotificationService.StatusUpdateBody": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
+        },
+        "status": {
+          "$ref": "#/definitions/common.v1.STATUS"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "extras": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "notification.v1.PRIORITY": {
+      "type": "string",
+      "enum": [
+        "HIGH",
+        "LOW",
+        "VERY_LOW"
+      ],
+      "default": "HIGH",
+      "description": "- HIGH: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+      "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "notification.v1.ReceiveRequest": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/notification.v1.Notification"
+        }
+      }
+    },
+    "notification.v1.ReceiveResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/common.v1.StatusResponse"
+        }
+      }
+    },
+    "notification.v1.ReleaseResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/common.v1.StatusResponse"
+        }
+      }
+    },
+    "notification.v1.SearchResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notification.v1.Notification"
+          }
+        }
+      }
+    },
+    "notification.v1.SendRequest": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/notification.v1.Notification"
+        }
+      }
+    },
+    "notification.v1.SendResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/common.v1.StatusResponse"
+        }
+      }
+    },
+    "notification.v1.Template": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notification.v1.TemplateData"
+          }
+        },
+        "extra": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "notification.v1.TemplateData": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "language": {
+          "$ref": "#/definitions/notification.v1.Language"
+        }
+      }
+    },
+    "notification.v1.TemplateSaveRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "languageCode": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "extra": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "notification.v1.TemplateSaveResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/notification.v1.Template"
+        }
+      }
+    },
+    "notification.v1.TemplateSearchResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notification.v1.Template"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "description": "Authentication token, prefixed by Bearer: Bearer \u003ctoken\u003e",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}

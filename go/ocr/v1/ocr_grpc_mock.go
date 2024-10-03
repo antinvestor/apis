@@ -13,6 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -61,7 +62,7 @@ func (mr *MockOCRServiceClientMockRecorder) Recognize(ctx, in any, opts ...any) 
 }
 
 // Status mocks base method.
-func (m *MockOCRServiceClient) Status(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error) {
+func (m *MockOCRServiceClient) Status(ctx context.Context, in *commonv1.StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -119,7 +120,7 @@ func (mr *MockOCRServiceServerMockRecorder) Recognize(arg0, arg1 any) *gomock.Ca
 }
 
 // Status mocks base method.
-func (m *MockOCRServiceServer) Status(arg0 context.Context, arg1 *StatusRequest) (*StatusResponse, error) {
+func (m *MockOCRServiceServer) Status(arg0 context.Context, arg1 *commonv1.StatusRequest) (*StatusResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Status", arg0, arg1)
 	ret0, _ := ret[0].(*StatusResponse)

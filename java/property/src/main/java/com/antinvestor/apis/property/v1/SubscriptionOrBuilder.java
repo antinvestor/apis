@@ -36,28 +36,28 @@ public interface SubscriptionOrBuilder extends
       getIdBytes();
 
   /**
-   * <code>string propertyid = 2 [json_name = "propertyid", (.buf.validate.field) = { ... }</code>
-   * @return The propertyid.
+   * <code>string property_id = 2 [json_name = "propertyId", (.buf.validate.field) = { ... }</code>
+   * @return The propertyId.
    */
-  java.lang.String getPropertyid();
+  java.lang.String getPropertyId();
   /**
-   * <code>string propertyid = 2 [json_name = "propertyid", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for propertyid.
+   * <code>string property_id = 2 [json_name = "propertyId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for propertyId.
    */
   com.google.protobuf.ByteString
-      getPropertyidBytes();
+      getPropertyIdBytes();
 
   /**
-   * <code>string profileid = 3 [json_name = "profileid", (.buf.validate.field) = { ... }</code>
-   * @return The profileid.
+   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The profileId.
    */
-  java.lang.String getProfileid();
+  java.lang.String getProfileId();
   /**
-   * <code>string profileid = 3 [json_name = "profileid", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for profileid.
+   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileId.
    */
   com.google.protobuf.ByteString
-      getProfileidBytes();
+      getProfileIdBytes();
 
   /**
    * <code>string role = 4 [json_name = "role", (.buf.validate.field) = { ... }</code>

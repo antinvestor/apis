@@ -32,27 +32,27 @@ public final class LedgerServiceGrpc {
   public static final java.lang.String SERVICE_NAME = "ledger.v1.LedgerService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.ledger.v1.SearchRequest,
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
       com.antinvestor.apis.ledger.v1.Ledger> getSearchLedgersMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SearchLedgers",
-      requestType = com.antinvestor.apis.ledger.v1.SearchRequest.class,
+      requestType = com.antinvestor.apis.common.v1.SearchRequest.class,
       responseType = com.antinvestor.apis.ledger.v1.Ledger.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.ledger.v1.SearchRequest,
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
       com.antinvestor.apis.ledger.v1.Ledger> getSearchLedgersMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.ledger.v1.SearchRequest, com.antinvestor.apis.ledger.v1.Ledger> getSearchLedgersMethod;
+    io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest, com.antinvestor.apis.ledger.v1.Ledger> getSearchLedgersMethod;
     if ((getSearchLedgersMethod = LedgerServiceGrpc.getSearchLedgersMethod) == null) {
       synchronized (LedgerServiceGrpc.class) {
         if ((getSearchLedgersMethod = LedgerServiceGrpc.getSearchLedgersMethod) == null) {
           LedgerServiceGrpc.getSearchLedgersMethod = getSearchLedgersMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.ledger.v1.SearchRequest, com.antinvestor.apis.ledger.v1.Ledger>newBuilder()
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.common.v1.SearchRequest, com.antinvestor.apis.ledger.v1.Ledger>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SearchLedgers"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.ledger.v1.SearchRequest.getDefaultInstance()))
+                  com.antinvestor.apis.common.v1.SearchRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.antinvestor.apis.ledger.v1.Ledger.getDefaultInstance()))
               .setSchemaDescriptor(new LedgerServiceMethodDescriptorSupplier("SearchLedgers"))
@@ -125,27 +125,27 @@ public final class LedgerServiceGrpc {
     return getUpdateLedgerMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.ledger.v1.SearchRequest,
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
       com.antinvestor.apis.ledger.v1.Account> getSearchAccountsMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SearchAccounts",
-      requestType = com.antinvestor.apis.ledger.v1.SearchRequest.class,
+      requestType = com.antinvestor.apis.common.v1.SearchRequest.class,
       responseType = com.antinvestor.apis.ledger.v1.Account.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.ledger.v1.SearchRequest,
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
       com.antinvestor.apis.ledger.v1.Account> getSearchAccountsMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.ledger.v1.SearchRequest, com.antinvestor.apis.ledger.v1.Account> getSearchAccountsMethod;
+    io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest, com.antinvestor.apis.ledger.v1.Account> getSearchAccountsMethod;
     if ((getSearchAccountsMethod = LedgerServiceGrpc.getSearchAccountsMethod) == null) {
       synchronized (LedgerServiceGrpc.class) {
         if ((getSearchAccountsMethod = LedgerServiceGrpc.getSearchAccountsMethod) == null) {
           LedgerServiceGrpc.getSearchAccountsMethod = getSearchAccountsMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.ledger.v1.SearchRequest, com.antinvestor.apis.ledger.v1.Account>newBuilder()
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.common.v1.SearchRequest, com.antinvestor.apis.ledger.v1.Account>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SearchAccounts"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.ledger.v1.SearchRequest.getDefaultInstance()))
+                  com.antinvestor.apis.common.v1.SearchRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.antinvestor.apis.ledger.v1.Account.getDefaultInstance()))
               .setSchemaDescriptor(new LedgerServiceMethodDescriptorSupplier("SearchAccounts"))
@@ -218,27 +218,27 @@ public final class LedgerServiceGrpc {
     return getUpdateAccountMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.ledger.v1.SearchRequest,
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
       com.antinvestor.apis.ledger.v1.Transaction> getSearchTransactionsMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SearchTransactions",
-      requestType = com.antinvestor.apis.ledger.v1.SearchRequest.class,
+      requestType = com.antinvestor.apis.common.v1.SearchRequest.class,
       responseType = com.antinvestor.apis.ledger.v1.Transaction.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.ledger.v1.SearchRequest,
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
       com.antinvestor.apis.ledger.v1.Transaction> getSearchTransactionsMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.ledger.v1.SearchRequest, com.antinvestor.apis.ledger.v1.Transaction> getSearchTransactionsMethod;
+    io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest, com.antinvestor.apis.ledger.v1.Transaction> getSearchTransactionsMethod;
     if ((getSearchTransactionsMethod = LedgerServiceGrpc.getSearchTransactionsMethod) == null) {
       synchronized (LedgerServiceGrpc.class) {
         if ((getSearchTransactionsMethod = LedgerServiceGrpc.getSearchTransactionsMethod) == null) {
           LedgerServiceGrpc.getSearchTransactionsMethod = getSearchTransactionsMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.ledger.v1.SearchRequest, com.antinvestor.apis.ledger.v1.Transaction>newBuilder()
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.common.v1.SearchRequest, com.antinvestor.apis.ledger.v1.Transaction>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SearchTransactions"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.ledger.v1.SearchRequest.getDefaultInstance()))
+                  com.antinvestor.apis.common.v1.SearchRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.antinvestor.apis.ledger.v1.Transaction.getDefaultInstance()))
               .setSchemaDescriptor(new LedgerServiceMethodDescriptorSupplier("SearchTransactions"))
@@ -342,27 +342,27 @@ public final class LedgerServiceGrpc {
     return getUpdateTransactionMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.ledger.v1.SearchRequest,
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
       com.antinvestor.apis.ledger.v1.TransactionEntry> getSearchTransactionEntriesMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SearchTransactionEntries",
-      requestType = com.antinvestor.apis.ledger.v1.SearchRequest.class,
+      requestType = com.antinvestor.apis.common.v1.SearchRequest.class,
       responseType = com.antinvestor.apis.ledger.v1.TransactionEntry.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.ledger.v1.SearchRequest,
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest,
       com.antinvestor.apis.ledger.v1.TransactionEntry> getSearchTransactionEntriesMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.ledger.v1.SearchRequest, com.antinvestor.apis.ledger.v1.TransactionEntry> getSearchTransactionEntriesMethod;
+    io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.SearchRequest, com.antinvestor.apis.ledger.v1.TransactionEntry> getSearchTransactionEntriesMethod;
     if ((getSearchTransactionEntriesMethod = LedgerServiceGrpc.getSearchTransactionEntriesMethod) == null) {
       synchronized (LedgerServiceGrpc.class) {
         if ((getSearchTransactionEntriesMethod = LedgerServiceGrpc.getSearchTransactionEntriesMethod) == null) {
           LedgerServiceGrpc.getSearchTransactionEntriesMethod = getSearchTransactionEntriesMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.ledger.v1.SearchRequest, com.antinvestor.apis.ledger.v1.TransactionEntry>newBuilder()
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.common.v1.SearchRequest, com.antinvestor.apis.ledger.v1.TransactionEntry>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SearchTransactionEntries"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.ledger.v1.SearchRequest.getDefaultInstance()))
+                  com.antinvestor.apis.common.v1.SearchRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.antinvestor.apis.ledger.v1.TransactionEntry.getDefaultInstance()))
               .setSchemaDescriptor(new LedgerServiceMethodDescriptorSupplier("SearchTransactionEntries"))
@@ -429,7 +429,7 @@ public final class LedgerServiceGrpc {
      * Searches for an ledger based on details
      * </pre>
      */
-    default void searchLedgers(com.antinvestor.apis.ledger.v1.SearchRequest request,
+    default void searchLedgers(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.Ledger> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSearchLedgersMethod(), responseObserver);
     }
@@ -459,7 +459,7 @@ public final class LedgerServiceGrpc {
      * Searches for an account based on details
      * </pre>
      */
-    default void searchAccounts(com.antinvestor.apis.ledger.v1.SearchRequest request,
+    default void searchAccounts(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.Account> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSearchAccountsMethod(), responseObserver);
     }
@@ -489,7 +489,7 @@ public final class LedgerServiceGrpc {
      * Searches for a transaction based on details
      * </pre>
      */
-    default void searchTransactions(com.antinvestor.apis.ledger.v1.SearchRequest request,
+    default void searchTransactions(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.Transaction> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSearchTransactionsMethod(), responseObserver);
     }
@@ -529,7 +529,7 @@ public final class LedgerServiceGrpc {
      * Searches for entries matching the search details
      * </pre>
      */
-    default void searchTransactionEntries(com.antinvestor.apis.ledger.v1.SearchRequest request,
+    default void searchTransactionEntries(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.TransactionEntry> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSearchTransactionEntriesMethod(), responseObserver);
     }
@@ -573,7 +573,7 @@ public final class LedgerServiceGrpc {
      * Searches for an ledger based on details
      * </pre>
      */
-    public void searchLedgers(com.antinvestor.apis.ledger.v1.SearchRequest request,
+    public void searchLedgers(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.Ledger> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getSearchLedgersMethod(), getCallOptions()), request, responseObserver);
@@ -606,7 +606,7 @@ public final class LedgerServiceGrpc {
      * Searches for an account based on details
      * </pre>
      */
-    public void searchAccounts(com.antinvestor.apis.ledger.v1.SearchRequest request,
+    public void searchAccounts(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.Account> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getSearchAccountsMethod(), getCallOptions()), request, responseObserver);
@@ -639,7 +639,7 @@ public final class LedgerServiceGrpc {
      * Searches for a transaction based on details
      * </pre>
      */
-    public void searchTransactions(com.antinvestor.apis.ledger.v1.SearchRequest request,
+    public void searchTransactions(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.Transaction> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getSearchTransactionsMethod(), getCallOptions()), request, responseObserver);
@@ -683,7 +683,7 @@ public final class LedgerServiceGrpc {
      * Searches for entries matching the search details
      * </pre>
      */
-    public void searchTransactionEntries(com.antinvestor.apis.ledger.v1.SearchRequest request,
+    public void searchTransactionEntries(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.TransactionEntry> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getSearchTransactionEntriesMethod(), getCallOptions()), request, responseObserver);
@@ -715,7 +715,7 @@ public final class LedgerServiceGrpc {
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.ledger.v1.Ledger> searchLedgers(
-        com.antinvestor.apis.ledger.v1.SearchRequest request) {
+        com.antinvestor.apis.common.v1.SearchRequest request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getSearchLedgersMethod(), getCallOptions(), request);
     }
@@ -746,7 +746,7 @@ public final class LedgerServiceGrpc {
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.ledger.v1.Account> searchAccounts(
-        com.antinvestor.apis.ledger.v1.SearchRequest request) {
+        com.antinvestor.apis.common.v1.SearchRequest request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getSearchAccountsMethod(), getCallOptions(), request);
     }
@@ -777,7 +777,7 @@ public final class LedgerServiceGrpc {
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.ledger.v1.Transaction> searchTransactions(
-        com.antinvestor.apis.ledger.v1.SearchRequest request) {
+        com.antinvestor.apis.common.v1.SearchRequest request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getSearchTransactionsMethod(), getCallOptions(), request);
     }
@@ -818,7 +818,7 @@ public final class LedgerServiceGrpc {
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.ledger.v1.TransactionEntry> searchTransactionEntries(
-        com.antinvestor.apis.ledger.v1.SearchRequest request) {
+        com.antinvestor.apis.common.v1.SearchRequest request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getSearchTransactionEntriesMethod(), getCallOptions(), request);
     }
@@ -951,7 +951,7 @@ public final class LedgerServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_SEARCH_LEDGERS:
-          serviceImpl.searchLedgers((com.antinvestor.apis.ledger.v1.SearchRequest) request,
+          serviceImpl.searchLedgers((com.antinvestor.apis.common.v1.SearchRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.Ledger>) responseObserver);
           break;
         case METHODID_CREATE_LEDGER:
@@ -963,7 +963,7 @@ public final class LedgerServiceGrpc {
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.Ledger>) responseObserver);
           break;
         case METHODID_SEARCH_ACCOUNTS:
-          serviceImpl.searchAccounts((com.antinvestor.apis.ledger.v1.SearchRequest) request,
+          serviceImpl.searchAccounts((com.antinvestor.apis.common.v1.SearchRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.Account>) responseObserver);
           break;
         case METHODID_CREATE_ACCOUNT:
@@ -975,7 +975,7 @@ public final class LedgerServiceGrpc {
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.Account>) responseObserver);
           break;
         case METHODID_SEARCH_TRANSACTIONS:
-          serviceImpl.searchTransactions((com.antinvestor.apis.ledger.v1.SearchRequest) request,
+          serviceImpl.searchTransactions((com.antinvestor.apis.common.v1.SearchRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.Transaction>) responseObserver);
           break;
         case METHODID_CREATE_TRANSACTION:
@@ -991,7 +991,7 @@ public final class LedgerServiceGrpc {
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.Transaction>) responseObserver);
           break;
         case METHODID_SEARCH_TRANSACTION_ENTRIES:
-          serviceImpl.searchTransactionEntries((com.antinvestor.apis.ledger.v1.SearchRequest) request,
+          serviceImpl.searchTransactionEntries((com.antinvestor.apis.common.v1.SearchRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.ledger.v1.TransactionEntry>) responseObserver);
           break;
         default:
@@ -1016,7 +1016,7 @@ public final class LedgerServiceGrpc {
           getSearchLedgersMethod(),
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
-              com.antinvestor.apis.ledger.v1.SearchRequest,
+              com.antinvestor.apis.common.v1.SearchRequest,
               com.antinvestor.apis.ledger.v1.Ledger>(
                 service, METHODID_SEARCH_LEDGERS)))
         .addMethod(
@@ -1037,7 +1037,7 @@ public final class LedgerServiceGrpc {
           getSearchAccountsMethod(),
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
-              com.antinvestor.apis.ledger.v1.SearchRequest,
+              com.antinvestor.apis.common.v1.SearchRequest,
               com.antinvestor.apis.ledger.v1.Account>(
                 service, METHODID_SEARCH_ACCOUNTS)))
         .addMethod(
@@ -1058,7 +1058,7 @@ public final class LedgerServiceGrpc {
           getSearchTransactionsMethod(),
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
-              com.antinvestor.apis.ledger.v1.SearchRequest,
+              com.antinvestor.apis.common.v1.SearchRequest,
               com.antinvestor.apis.ledger.v1.Transaction>(
                 service, METHODID_SEARCH_TRANSACTIONS)))
         .addMethod(
@@ -1086,7 +1086,7 @@ public final class LedgerServiceGrpc {
           getSearchTransactionEntriesMethod(),
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
-              com.antinvestor.apis.ledger.v1.SearchRequest,
+              com.antinvestor.apis.common.v1.SearchRequest,
               com.antinvestor.apis.ledger.v1.TransactionEntry>(
                 service, METHODID_SEARCH_TRANSACTION_ENTRIES)))
         .build();

@@ -24,16 +24,16 @@ public interface UpdatePartitionRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string partition_id = 1 [json_name = "partitionId", (.buf.validate.field) = { ... }</code>
-   * @return The partitionId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The id.
    */
-  java.lang.String getPartitionId();
+  java.lang.String getId();
   /**
-   * <code>string partition_id = 1 [json_name = "partitionId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for partitionId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for id.
    */
   com.google.protobuf.ByteString
-      getPartitionIdBytes();
+      getIdBytes();
 
   /**
    * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>

@@ -3,6 +3,9 @@ name: buf.build/antinvestor/notification
 deps:
   - buf.build/antinvestor/common
   - buf.build/bufbuild/protovalidate
+  - buf.build/googleapis/googleapis
+  - buf.build/grpc-ecosystem/grpc-gateway
+
 lint:
   use:
     - STANDARD

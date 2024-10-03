@@ -325,234 +325,253 @@ public final class PartitionProto {
     java.lang.String[] descriptorData = {
       "\n\034partition/v1/partition.proto\022\014partitio" +
       "n.v1\032\033buf/validate/validate.proto\032\026commo" +
-      "n/v1/common.proto\"\364\001\n\014TenantObject\022+\n\002id" +
-      "\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022" +
-      ",\n\013description\030\002 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013descri" +
-      "ption\022J\n\nproperties\030\003 \003(\0132*.partition.v1" +
-      ".TenantObject.PropertiesEntryR\npropertie" +
-      "s\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024" +
-      "\n\005value\030\002 \001(\tR\005value:\0028\001\"\356\002\n\026PartitionCr" +
-      "eateRequest\022\035\n\004name\030\001 \001(\tB\t\272H\006r\004\020\003\030dR\004na" +
-      "me\0228\n\ttenant_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-" +
-      "z_-]{3,20}R\010tenantId\0228\n\tparent_id\030\003 \001(\tB" +
-      "\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010parentId\022," +
-      "\n\013description\030\004 \001(\tB\n\272H\007r\005\020\n\030\372\001R\013descrip" +
-      "tion\022T\n\nproperties\030\005 \003(\01324.partition.v1." +
-      "PartitionCreateRequest.PropertiesEntryR\n" +
-      "properties\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001" +
-      "(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"?\n\020Get" +
-      "TenantRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0" +
-      "-9a-z_-]{3,20}R\002id\"C\n\021GetTenantResponse\022" +
-      ".\n\004data\030\001 \001(\0132\032.partition.v1.TenantObjec" +
-      "tR\004data\"\255\002\n\021ListTenantRequest\022\024\n\005query\030\001" +
-      " \001(\tR\005query\022\022\n\004page\030\002 \001(\003R\004page\022\024\n\005count" +
-      "\030\003 \001(\005R\005count\022\035\n\nstart_date\030\004 \001(\tR\tstart" +
-      "Date\022\031\n\010end_date\030\005 \001(\tR\007endDate\022\036\n\nprope" +
-      "rties\030\006 \003(\tR\nproperties\022C\n\006extras\030\007 \003(\0132" +
-      "+.partition.v1.ListTenantRequest.ExtrasE" +
-      "ntryR\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\t" +
-      "R\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"D\n\022ListT" +
-      "enantResponse\022.\n\004data\030\001 \003(\0132\032.partition." +
-      "v1.TenantObjectR\004data\"\364\001\n\023CreateTenantRe" +
-      "quest\022\035\n\004name\030\001 \001(\tB\t\272H\006r\004\020\003\030dR\004name\022,\n\013" +
-      "description\030\002 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013descripti" +
-      "on\022Q\n\nproperties\030\003 \003(\01321.partition.v1.Cr" +
-      "eateTenantRequest.PropertiesEntryR\nprope" +
-      "rties\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\tR\003k" +
-      "ey\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"F\n\024CreateTe" +
-      "nantResponse\022.\n\004data\030\001 \001(\0132\032.partition.v" +
-      "1.TenantObjectR\004data\"B\n\023GetPartitionRequ" +
-      "est\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3" +
-      ",20}R\002id\"I\n\024GetPartitionResponse\0221\n\004data" +
-      "\030\001 \001(\0132\035.partition.v1.PartitionObjectR\004d" +
-      "ata\"\263\002\n\024ListPartitionRequest\022\024\n\005query\030\001 " +
-      "\001(\tR\005query\022\022\n\004page\030\002 \001(\003R\004page\022\024\n\005count\030" +
-      "\003 \001(\005R\005count\022\035\n\nstart_date\030\004 \001(\tR\tstartD" +
-      "ate\022\031\n\010end_date\030\005 \001(\tR\007endDate\022\036\n\nproper" +
-      "ties\030\006 \003(\tR\nproperties\022F\n\006extras\030\007 \003(\0132." +
-      ".partition.v1.ListPartitionRequest.Extra" +
-      "sEntryR\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001" +
-      "(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"J\n\025Lis" +
-      "tPartitionResponse\0221\n\004data\030\001 \003(\0132\035.parti" +
-      "tion.v1.PartitionObjectR\004data\"\356\002\n\026Create" +
-      "PartitionRequest\0228\n\ttenant_id\030\001 \001(\tB\033\272H\030" +
-      "r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010tenantId\0228\n\tpa" +
-      "rent_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,2" +
-      "0}R\010parentId\022\035\n\004name\030\003 \001(\tB\t\272H\006r\004\020\003\030dR\004n" +
-      "ame\022,\n\013description\030\004 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013de" +
-      "scription\022T\n\nproperties\030\005 \003(\01324.partitio" +
-      "n.v1.CreatePartitionRequest.PropertiesEn" +
-      "tryR\nproperties\032=\n\017PropertiesEntry\022\020\n\003ke" +
-      "y\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"L" +
-      "\n\027CreatePartitionResponse\0221\n\004data\030\001 \001(\0132" +
-      "\035.partition.v1.PartitionObjectR\004data\"\342\002\n" +
-      "\026UpdatePartitionRequest\022>\n\014partition_id\030" +
-      "\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\013part" +
-      "itionId\022\035\n\004name\030\002 \001(\tB\t\272H\006r\004\020\003\030dR\004name\022," +
-      "\n\013description\030\003 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013descrip" +
-      "tion\022&\n\005state\030\004 \001(\0162\020.common.v1.STATER\005s" +
-      "tate\022T\n\nproperties\030\005 \003(\01324.partition.v1." +
-      "UpdatePartitionRequest.PropertiesEntryR\n" +
-      "properties\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001" +
-      "(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"L\n\027Upd" +
-      "atePartitionResponse\0221\n\004data\030\001 \001(\0132\035.par" +
-      "tition.v1.PartitionObjectR\004data\"\265\003\n\017Part" +
-      "itionObject\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9" +
-      "a-z_-]{3,20}R\002id\022\035\n\004name\030\002 \001(\tB\t\272H\006r\004\020\003\030" +
-      "dR\004name\0228\n\ttenant_id\030\003 \001(\tB\033\272H\030r\026\020\003\030(2\020[" +
-      "0-9a-z_-]{3,20}R\010tenantId\0228\n\tparent_id\030\004" +
-      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010paren" +
-      "tId\022,\n\013description\030\005 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013de" +
-      "scription\022&\n\005state\030\006 \001(\0162\020.common.v1.STA" +
-      "TER\005state\022M\n\nproperties\030\007 \003(\0132-.partitio" +
-      "n.v1.PartitionObject.PropertiesEntryR\npr" +
+      "n/v1/common.proto\032\034google/api/annotation" +
+      "s.proto\032.protoc-gen-openapiv2/options/an" +
+      "notations.proto\"\364\001\n\014TenantObject\022+\n\002id\030\001" +
+      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022,\n" +
+      "\013description\030\002 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013descript" +
+      "ion\022J\n\nproperties\030\003 \003(\0132*.partition.v1.T" +
+      "enantObject.PropertiesEntryR\nproperties\032" +
+      "=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005" +
+      "value\030\002 \001(\tR\005value:\0028\001\"\356\002\n\026PartitionCrea" +
+      "teRequest\022\035\n\004name\030\001 \001(\tB\t\272H\006r\004\020\003\030dR\004name" +
+      "\0228\n\ttenant_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_" +
+      "-]{3,20}R\010tenantId\0228\n\tparent_id\030\003 \001(\tB\033\272" +
+      "H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010parentId\022,\n\013" +
+      "description\030\004 \001(\tB\n\272H\007r\005\020\n\030\372\001R\013descripti" +
+      "on\022T\n\nproperties\030\005 \003(\01324.partition.v1.Pa" +
+      "rtitionCreateRequest.PropertiesEntryR\npr" +
       "operties\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\t" +
-      "R\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\224\002\n\032Crea" +
-      "tePartitionRoleRequest\022>\n\014partition_id\030\001" +
-      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\013parti" +
-      "tionId\022\035\n\004name\030\002 \001(\tB\t\272H\006r\004\020\003\030dR\004name\022X\n" +
-      "\nproperties\030\003 \003(\01328.partition.v1.CreateP" +
-      "artitionRoleRequest.PropertiesEntryR\npro" +
-      "perties\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\tR" +
-      "\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"T\n\033Create" +
-      "PartitionRoleResponse\0225\n\004data\030\001 \001(\0132!.pa" +
-      "rtition.v1.PartitionRoleObjectR\004data\"\317\002\n" +
-      "\023PartitionRoleObject\022G\n\021partition_role_i" +
-      "d\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\017pa" +
-      "rtitionRoleId\022>\n\014partition_id\030\002 \001(\tB\033\272H\030" +
-      "r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\013partitionId\022\035\n" +
-      "\004name\030\003 \001(\tB\t\272H\006r\004\020\003\030dR\004name\022Q\n\nproperti" +
-      "es\030\004 \003(\01321.partition.v1.PartitionRoleObj" +
-      "ect.PropertiesEntryR\nproperties\032=\n\017Prope" +
-      "rtiesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 " +
-      "\001(\tR\005value:\0028\001\"e\n\032RemovePartitionRoleReq" +
-      "uest\022G\n\021partition_role_id\030\001 \001(\tB\033\272H\030r\026\020\003" +
-      "\030(2\020[0-9a-z_-]{3,20}R\017partitionRoleId\";\n" +
-      "\033RemovePartitionRoleResponse\022\034\n\tsucceede" +
-      "d\030\001 \001(\010R\tsucceeded\"Z\n\030ListPartitionRoleR" +
-      "equest\022>\n\014partition_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2" +
-      "\020[0-9a-z_-]{3,20}R\013partitionId\"R\n\031ListPa" +
-      "rtitionRoleResponse\0225\n\004role\030\001 \003(\0132!.part" +
-      "ition.v1.PartitionRoleObjectR\004role\"\251\001\n\nP" +
-      "ageObject\0224\n\007page_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[" +
-      "0-9a-z_-]{3,20}R\006pageId\022\035\n\004name\030\002 \001(\tB\t\272" +
-      "H\006r\004\020\003\030dR\004name\022\036\n\004html\030\003 \001(\tB\n\272H\007r\005\020\004\030\210\'" +
-      "R\004html\022&\n\005state\030\004 \001(\0162\020.common.v1.STATER" +
-      "\005state\"\222\001\n\021CreatePageRequest\022>\n\014partitio" +
-      "n_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R" +
-      "\013partitionId\022\035\n\004name\030\002 \001(\tB\t\272H\006r\004\020\003\030dR\004n" +
-      "ame\022\036\n\004html\030\003 \001(\tB\n\272H\007r\005\020\004\030\210\'R\004html\"B\n\022C" +
-      "reatePageResponse\022,\n\004data\030\001 \001(\0132\030.partit" +
-      "ion.v1.PageObjectR\004data\"\256\001\n\016GetPageReque" +
-      "st\0227\n\007page_id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_" +
-      "-]{3,20}\320\001\001R\006pageId\022A\n\014partition_id\030\002 \001(" +
-      "\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\320\001\001R\013parti" +
-      "tionId\022 \n\004name\030\003 \001(\tB\014\272H\tr\004\020\003\030d\320\001\001R\004name" +
-      "\"?\n\017GetPageResponse\022,\n\004data\030\001 \001(\0132\030.part" +
-      "ition.v1.PageObjectR\004data\"I\n\021RemovePageR" +
-      "equest\0224\n\007page_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9" +
-      "a-z_-]{3,20}R\006pageId\"2\n\022RemovePageRespon" +
-      "se\022\034\n\tsucceeded\030\001 \001(\010R\tsucceeded\"\351\001\n\014Acc" +
-      "essObject\0228\n\taccess_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2" +
-      "\020[0-9a-z_-]{3,20}R\010accessId\022:\n\nprofile_i" +
-      "d\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\tpr" +
-      "ofileId\022;\n\tpartition\030\003 \001(\0132\035.partition.v" +
-      "1.PartitionObjectR\tpartition\022&\n\005state\030\004 " +
-      "\001(\0162\020.common.v1.STATER\005state\"\351\001\n\023CreateA" +
-      "ccessRequest\022C\n\014partition_id\030\001 \001(\tB\036\272H\033r" +
-      "\026\020\003\030(2\020[0-9a-z_-]{3,20}\320\001\001H\000R\013partitionI" +
-      "d\022=\n\tclient_id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z" +
-      "_-]{3,20}\320\001\001H\000R\010clientId\022:\n\nprofile_id\030\002" +
-      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\tprofi" +
-      "leIdB\022\n\tpartition\022\005\272H\002\010\000\"F\n\024CreateAccess" +
-      "Response\022.\n\004data\030\001 \001(\0132\032.partition.v1.Ac" +
-      "cessObjectR\004data\"\246\002\n\020GetAccessRequest\022;\n" +
-      "\taccess_id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{" +
-      "3,20}\320\001\001R\010accessId\022C\n\014partition_id\030\002 \001(\t" +
-      "B\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\320\001\001H\000R\013part" +
-      "itionId\022=\n\tclient_id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[" +
-      "0-9a-z_-]{3,20}\320\001\001H\000R\010clientId\022=\n\nprofil" +
-      "e_id\030\004 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\320" +
-      "\001\001R\tprofileIdB\022\n\tpartition\022\005\272H\002\010\000\"C\n\021Get" +
-      "AccessResponse\022.\n\004data\030\001 \001(\0132\032.partition" +
-      ".v1.AccessObjectR\004data\"O\n\023RemoveAccessRe" +
-      "quest\0228\n\taccess_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-" +
-      "9a-z_-]{3,20}R\010accessId\"4\n\024RemoveAccessR" +
-      "esponse\022\034\n\tsucceeded\030\001 \001(\010R\tsucceeded\"\234\001" +
-      "\n\027CreateAccessRoleRequest\0228\n\taccess_id\030\001" +
-      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010acces" +
-      "sId\022G\n\021partition_role_id\030\002 \001(\tB\033\272H\030r\026\020\003\030" +
-      "(2\020[0-9a-z_-]{3,20}R\017partitionRoleId\"N\n\030" +
-      "CreateAccessRoleResponse\0222\n\004data\030\001 \001(\0132\036" +
-      ".partition.v1.AccessRoleObjectR\004data\"\306\001\n" +
-      "\020AccessRoleObject\022A\n\016access_role_id\030\001 \001(" +
-      "\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\014accessRo" +
-      "leId\0228\n\taccess_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9" +
-      "a-z_-]{3,20}R\010accessId\0225\n\004role\030\003 \001(\0132!.p" +
-      "artition.v1.PartitionRoleObjectR\004role\"\\\n" +
-      "\027RemoveAccessRoleRequest\022A\n\016access_role_" +
-      "id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\014a" +
-      "ccessRoleId\"8\n\030RemoveAccessRoleResponse\022" +
-      "\034\n\tsucceeded\030\001 \001(\010R\tsucceeded\"Q\n\025ListAcc" +
-      "essRoleRequest\0228\n\taccess_id\030\001 \001(\tB\033\272H\030r\026" +
-      "\020\003\030(2\020[0-9a-z_-]{3,20}R\010accessId\"L\n\026List" +
-      "AccessRoleResponse\0222\n\004role\030\001 \003(\0132\036.parti" +
-      "tion.v1.AccessRoleObjectR\004role2\310\r\n\020Parti" +
-      "tionService\022L\n\tGetTenant\022\036.partition.v1." +
-      "GetTenantRequest\032\037.partition.v1.GetTenan" +
-      "tResponse\022Q\n\nListTenant\022\037.partition.v1.L" +
-      "istTenantRequest\032 .partition.v1.ListTena" +
-      "ntResponse0\001\022U\n\014CreateTenant\022!.partition" +
-      ".v1.CreateTenantRequest\032\".partition.v1.C" +
-      "reateTenantResponse\022Z\n\rListPartition\022\".p" +
-      "artition.v1.ListPartitionRequest\032#.parti" +
-      "tion.v1.ListPartitionResponse0\001\022^\n\017Creat" +
-      "ePartition\022$.partition.v1.CreatePartitio" +
-      "nRequest\032%.partition.v1.CreatePartitionR" +
-      "esponse\022U\n\014GetPartition\022!.partition.v1.G" +
-      "etPartitionRequest\032\".partition.v1.GetPar" +
-      "titionResponse\022^\n\017UpdatePartition\022$.part" +
-      "ition.v1.UpdatePartitionRequest\032%.partit" +
-      "ion.v1.UpdatePartitionResponse\022j\n\023Create" +
-      "PartitionRole\022(.partition.v1.CreateParti" +
-      "tionRoleRequest\032).partition.v1.CreatePar" +
-      "titionRoleResponse\022f\n\021ListPartitionRole\022" +
-      "&.partition.v1.ListPartitionRoleRequest\032" +
-      "\'.partition.v1.ListPartitionRoleResponse" +
-      "0\001\022j\n\023RemovePartitionRole\022(.partition.v1" +
-      ".RemovePartitionRoleRequest\032).partition." +
-      "v1.RemovePartitionRoleResponse\022O\n\nCreate" +
-      "Page\022\037.partition.v1.CreatePageRequest\032 ." +
-      "partition.v1.CreatePageResponse\022F\n\007GetPa" +
-      "ge\022\034.partition.v1.GetPageRequest\032\035.parti" +
-      "tion.v1.GetPageResponse\022O\n\nRemovePage\022\037." +
-      "partition.v1.RemovePageRequest\032 .partiti" +
-      "on.v1.RemovePageResponse\022U\n\014CreateAccess" +
+      "R\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"?\n\020GetTe" +
+      "nantRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9" +
+      "a-z_-]{3,20}R\002id\"C\n\021GetTenantResponse\022.\n" +
+      "\004data\030\001 \001(\0132\032.partition.v1.TenantObjectR" +
+      "\004data\"\255\002\n\021ListTenantRequest\022\024\n\005query\030\001 \001" +
+      "(\tR\005query\022\022\n\004page\030\002 \001(\003R\004page\022\024\n\005count\030\003" +
+      " \001(\005R\005count\022\035\n\nstart_date\030\004 \001(\tR\tstartDa" +
+      "te\022\031\n\010end_date\030\005 \001(\tR\007endDate\022\036\n\npropert" +
+      "ies\030\006 \003(\tR\nproperties\022C\n\006extras\030\007 \003(\0132+." +
+      "partition.v1.ListTenantRequest.ExtrasEnt" +
+      "ryR\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003" +
+      "key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"D\n\022ListTen" +
+      "antResponse\022.\n\004data\030\001 \003(\0132\032.partition.v1" +
+      ".TenantObjectR\004data\"\364\001\n\023CreateTenantRequ" +
+      "est\022\035\n\004name\030\001 \001(\tB\t\272H\006r\004\020\003\030dR\004name\022,\n\013de" +
+      "scription\030\002 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013description" +
+      "\022Q\n\nproperties\030\003 \003(\01321.partition.v1.Crea" +
+      "teTenantRequest.PropertiesEntryR\npropert" +
+      "ies\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\tR\003key" +
+      "\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"F\n\024CreateTena" +
+      "ntResponse\022.\n\004data\030\001 \001(\0132\032.partition.v1." +
+      "TenantObjectR\004data\"B\n\023GetPartitionReques" +
+      "t\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,2" +
+      "0}R\002id\"I\n\024GetPartitionResponse\0221\n\004data\030\001" +
+      " \001(\0132\035.partition.v1.PartitionObjectR\004dat" +
+      "a\"\263\002\n\024ListPartitionRequest\022\024\n\005query\030\001 \001(" +
+      "\tR\005query\022\022\n\004page\030\002 \001(\003R\004page\022\024\n\005count\030\003 " +
+      "\001(\005R\005count\022\035\n\nstart_date\030\004 \001(\tR\tstartDat" +
+      "e\022\031\n\010end_date\030\005 \001(\tR\007endDate\022\036\n\nproperti" +
+      "es\030\006 \003(\tR\nproperties\022F\n\006extras\030\007 \003(\0132..p" +
+      "artition.v1.ListPartitionRequest.ExtrasE" +
+      "ntryR\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\t" +
+      "R\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"J\n\025ListP" +
+      "artitionResponse\0221\n\004data\030\001 \003(\0132\035.partiti" +
+      "on.v1.PartitionObjectR\004data\"\356\002\n\026CreatePa" +
+      "rtitionRequest\0228\n\ttenant_id\030\001 \001(\tB\033\272H\030r\026" +
+      "\020\003\030(2\020[0-9a-z_-]{3,20}R\010tenantId\0228\n\tpare" +
+      "nt_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}" +
+      "R\010parentId\022\035\n\004name\030\003 \001(\tB\t\272H\006r\004\020\003\030dR\004nam" +
+      "e\022,\n\013description\030\004 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013desc" +
+      "ription\022T\n\nproperties\030\005 \003(\01324.partition." +
+      "v1.CreatePartitionRequest.PropertiesEntr" +
+      "yR\nproperties\032=\n\017PropertiesEntry\022\020\n\003key\030" +
+      "\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"L\n\027" +
+      "CreatePartitionResponse\0221\n\004data\030\001 \001(\0132\035." +
+      "partition.v1.PartitionObjectR\004data\"\317\002\n\026U" +
+      "pdatePartitionRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026" +
+      "\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\035\n\004name\030\002 \001(\t" +
+      "B\t\272H\006r\004\020\003\030dR\004name\022,\n\013description\030\003 \001(\tB\n" +
+      "\272H\007r\005\020\n\030\364\003R\013description\022&\n\005state\030\004 \001(\0162\020" +
+      ".common.v1.STATER\005state\022T\n\nproperties\030\005 " +
+      "\003(\01324.partition.v1.UpdatePartitionReques" +
+      "t.PropertiesEntryR\nproperties\032=\n\017Propert" +
+      "iesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(" +
+      "\tR\005value:\0028\001\"L\n\027UpdatePartitionResponse\022" +
+      "1\n\004data\030\001 \001(\0132\035.partition.v1.PartitionOb" +
+      "jectR\004data\"\265\003\n\017PartitionObject\022+\n\002id\030\001 \001" +
+      "(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\035\n\004n" +
+      "ame\030\002 \001(\tB\t\272H\006r\004\020\003\030dR\004name\0228\n\ttenant_id\030" +
+      "\003 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010tena" +
+      "ntId\0228\n\tparent_id\030\004 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9" +
+      "a-z_-]{3,20}R\010parentId\022,\n\013description\030\005 " +
+      "\001(\tB\n\272H\007r\005\020\n\030\364\003R\013description\022&\n\005state\030\006 " +
+      "\001(\0162\020.common.v1.STATER\005state\022M\n\nproperti" +
+      "es\030\007 \003(\0132-.partition.v1.PartitionObject." +
+      "PropertiesEntryR\nproperties\032=\n\017Propertie" +
+      "sEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR" +
+      "\005value:\0028\001\"\224\002\n\032CreatePartitionRoleReques" +
+      "t\022>\n\014partition_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9" +
+      "a-z_-]{3,20}R\013partitionId\022\035\n\004name\030\002 \001(\tB" +
+      "\t\272H\006r\004\020\003\030dR\004name\022X\n\nproperties\030\003 \003(\01328.p" +
+      "artition.v1.CreatePartitionRoleRequest.P" +
+      "ropertiesEntryR\nproperties\032=\n\017Properties" +
+      "Entry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005" +
+      "value:\0028\001\"T\n\033CreatePartitionRoleResponse" +
+      "\0225\n\004data\030\001 \001(\0132!.partition.v1.PartitionR" +
+      "oleObjectR\004data\"\317\002\n\023PartitionRoleObject\022" +
+      "G\n\021partition_role_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[" +
+      "0-9a-z_-]{3,20}R\017partitionRoleId\022>\n\014part" +
+      "ition_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3," +
+      "20}R\013partitionId\022\035\n\004name\030\003 \001(\tB\t\272H\006r\004\020\003\030" +
+      "dR\004name\022Q\n\nproperties\030\004 \003(\01321.partition." +
+      "v1.PartitionRoleObject.PropertiesEntryR\n" +
+      "properties\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001" +
+      "(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"I\n\032Rem" +
+      "ovePartitionRoleRequest\022+\n\002id\030\001 \001(\tB\033\272H\030" +
+      "r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\";\n\033RemovePa" +
+      "rtitionRoleResponse\022\034\n\tsucceeded\030\001 \001(\010R\t" +
+      "succeeded\"Z\n\030ListPartitionRoleRequest\022>\n" +
+      "\014partition_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_" +
+      "-]{3,20}R\013partitionId\"R\n\031ListPartitionRo" +
+      "leResponse\0225\n\004role\030\001 \003(\0132!.partition.v1." +
+      "PartitionRoleObjectR\004role\"\251\001\n\nPageObject" +
+      "\0224\n\007page_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]" +
+      "{3,20}R\006pageId\022\035\n\004name\030\002 \001(\tB\t\272H\006r\004\020\003\030dR" +
+      "\004name\022\036\n\004html\030\003 \001(\tB\n\272H\007r\005\020\004\030\210\'R\004html\022&\n" +
+      "\005state\030\004 \001(\0162\020.common.v1.STATER\005state\"\222\001" +
+      "\n\021CreatePageRequest\022>\n\014partition_id\030\001 \001(" +
+      "\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\013partitio" +
+      "nId\022\035\n\004name\030\002 \001(\tB\t\272H\006r\004\020\003\030dR\004name\022\036\n\004ht" +
+      "ml\030\003 \001(\tB\n\272H\007r\005\020\004\030\210\'R\004html\"B\n\022CreatePage" +
+      "Response\022,\n\004data\030\001 \001(\0132\030.partition.v1.Pa" +
+      "geObjectR\004data\"\256\001\n\016GetPageRequest\0227\n\007pag" +
+      "e_id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\320" +
+      "\001\001R\006pageId\022A\n\014partition_id\030\002 \001(\tB\036\272H\033r\026\020" +
+      "\003\030(2\020[0-9a-z_-]{3,20}\320\001\001R\013partitionId\022 \n" +
+      "\004name\030\003 \001(\tB\014\272H\tr\004\020\003\030d\320\001\001R\004name\"?\n\017GetPa" +
+      "geResponse\022,\n\004data\030\001 \001(\0132\030.partition.v1." +
+      "PageObjectR\004data\"@\n\021RemovePageRequest\022+\n" +
+      "\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002" +
+      "id\"2\n\022RemovePageResponse\022\034\n\tsucceeded\030\001 " +
+      "\001(\010R\tsucceeded\"\351\001\n\014AccessObject\0228\n\tacces" +
+      "s_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R" +
+      "\010accessId\022:\n\nprofile_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(" +
+      "2\020[0-9a-z_-]{3,20}R\tprofileId\022;\n\tpartiti" +
+      "on\030\003 \001(\0132\035.partition.v1.PartitionObjectR" +
+      "\tpartition\022&\n\005state\030\004 \001(\0162\020.common.v1.ST" +
+      "ATER\005state\"\351\001\n\023CreateAccessRequest\022C\n\014pa" +
+      "rtition_id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{" +
+      "3,20}\320\001\001H\000R\013partitionId\022=\n\tclient_id\030\003 \001" +
+      "(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\320\001\001H\000R\010cl" +
+      "ientId\022:\n\nprofile_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[" +
+      "0-9a-z_-]{3,20}R\tprofileIdB\022\n\tpartition\022" +
+      "\005\272H\002\010\000\"F\n\024CreateAccessResponse\022.\n\004data\030\001" +
+      " \001(\0132\032.partition.v1.AccessObjectR\004data\"\246" +
+      "\002\n\020GetAccessRequest\022;\n\taccess_id\030\001 \001(\tB\036" +
+      "\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\320\001\001R\010accessId" +
+      "\022C\n\014partition_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a" +
+      "-z_-]{3,20}\320\001\001H\000R\013partitionId\022=\n\tclient_" +
+      "id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\320\001\001" +
+      "H\000R\010clientId\022=\n\nprofile_id\030\004 \001(\tB\036\272H\033r\026\020" +
+      "\003\030(2\020[0-9a-z_-]{3,20}\320\001\001R\tprofileIdB\022\n\tp" +
+      "artition\022\005\272H\002\010\000\"C\n\021GetAccessResponse\022.\n\004" +
+      "data\030\001 \001(\0132\032.partition.v1.AccessObjectR\004" +
+      "data\"B\n\023RemoveAccessRequest\022+\n\002id\030\001 \001(\tB" +
+      "\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"4\n\024Remo" +
+      "veAccessResponse\022\034\n\tsucceeded\030\001 \001(\010R\tsuc" +
+      "ceeded\"\234\001\n\027CreateAccessRoleRequest\0228\n\tac" +
+      "cess_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,2" +
+      "0}R\010accessId\022G\n\021partition_role_id\030\002 \001(\tB" +
+      "\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\017partitionR" +
+      "oleId\"N\n\030CreateAccessRoleResponse\0222\n\004dat" +
+      "a\030\001 \001(\0132\036.partition.v1.AccessRoleObjectR" +
+      "\004data\"\306\001\n\020AccessRoleObject\022A\n\016access_rol" +
+      "e_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R" +
+      "\014accessRoleId\0228\n\taccess_id\030\002 \001(\tB\033\272H\030r\026\020" +
+      "\003\030(2\020[0-9a-z_-]{3,20}R\010accessId\0225\n\004role\030" +
+      "\003 \001(\0132!.partition.v1.PartitionRoleObject" +
+      "R\004role\"F\n\027RemoveAccessRoleRequest\022+\n\002id\030" +
+      "\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"8" +
+      "\n\030RemoveAccessRoleResponse\022\034\n\tsucceeded\030" +
+      "\001 \001(\010R\tsucceeded\"Q\n\025ListAccessRoleReques" +
+      "t\0228\n\taccess_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z" +
+      "_-]{3,20}R\010accessId\"L\n\026ListAccessRoleRes" +
+      "ponse\0222\n\004role\030\001 \003(\0132\036.partition.v1.Acces" +
+      "sRoleObjectR\004role2\362\020\n\020PartitionService\022b" +
+      "\n\tGetTenant\022\036.partition.v1.GetTenantRequ" +
+      "est\032\037.partition.v1.GetTenantResponse\"\024\202\323" +
+      "\344\223\002\016\022\014/tenant/{id}\022b\n\nListTenant\022\037.parti" +
+      "tion.v1.ListTenantRequest\032 .partition.v1" +
+      ".ListTenantResponse\"\017\202\323\344\223\002\t\022\007/tenant0\001\022i" +
+      "\n\014CreateTenant\022!.partition.v1.CreateTena" +
+      "ntRequest\032\".partition.v1.CreateTenantRes" +
+      "ponse\"\022\202\323\344\223\002\014\"\007/tenant:\001*\022n\n\rListPartiti" +
+      "on\022\".partition.v1.ListPartitionRequest\032#" +
+      ".partition.v1.ListPartitionResponse\"\022\202\323\344" +
+      "\223\002\014\022\n/partition0\001\022u\n\017CreatePartition\022$.p" +
+      "artition.v1.CreatePartitionRequest\032%.par" +
+      "tition.v1.CreatePartitionResponse\"\025\202\323\344\223\002" +
+      "\017\"\n/partition:\001*\022n\n\014GetPartition\022!.parti" +
+      "tion.v1.GetPartitionRequest\032\".partition." +
+      "v1.GetPartitionResponse\"\027\202\323\344\223\002\021\022\017/partit" +
+      "ion/{id}\022z\n\017UpdatePartition\022$.partition." +
+      "v1.UpdatePartitionRequest\032%.partition.v1" +
+      ".UpdatePartitionResponse\"\032\202\323\344\223\002\0242\017/parti" +
+      "tion/{id}:\001*\022\206\001\n\023CreatePartitionRole\022(.p" +
+      "artition.v1.CreatePartitionRoleRequest\032)" +
+      ".partition.v1.CreatePartitionRoleRespons" +
+      "e\"\032\202\323\344\223\002\024\"\017/partition/role:\001*\022\177\n\021ListPar" +
+      "titionRole\022&.partition.v1.ListPartitionR" +
+      "oleRequest\032\'.partition.v1.ListPartitionR" +
+      "oleResponse\"\027\202\323\344\223\002\021\022\017/partition/role0\001\022\210" +
+      "\001\n\023RemovePartitionRole\022(.partition.v1.Re" +
+      "movePartitionRoleRequest\032).partition.v1." +
+      "RemovePartitionRoleResponse\"\034\202\323\344\223\002\026*\024/pa" +
+      "rtition/role/{id}\022a\n\nCreatePage\022\037.partit" +
+      "ion.v1.CreatePageRequest\032 .partition.v1." +
+      "CreatePageResponse\"\020\202\323\344\223\002\n\"\005/page:\001*\022U\n\007" +
+      "GetPage\022\034.partition.v1.GetPageRequest\032\035." +
+      "partition.v1.GetPageResponse\"\r\202\323\344\223\002\007\022\005/p" +
+      "age\022c\n\nRemovePage\022\037.partition.v1.RemoveP" +
+      "ageRequest\032 .partition.v1.RemovePageResp" +
+      "onse\"\022\202\323\344\223\002\014*\n/page/{id}\022i\n\014CreateAccess" +
       "\022!.partition.v1.CreateAccessRequest\032\".pa" +
-      "rtition.v1.CreateAccessResponse\022L\n\tGetAc" +
-      "cess\022\036.partition.v1.GetAccessRequest\032\037.p" +
-      "artition.v1.GetAccessResponse\022U\n\014RemoveA" +
-      "ccess\022!.partition.v1.RemoveAccessRequest" +
-      "\032\".partition.v1.RemoveAccessResponse\022a\n\020" +
-      "CreateAccessRole\022%.partition.v1.CreateAc" +
-      "cessRoleRequest\032&.partition.v1.CreateAcc" +
-      "essRoleResponse\022]\n\016ListAccessRole\022#.part" +
-      "ition.v1.ListAccessRoleRequest\032$.partiti" +
-      "on.v1.ListAccessRoleResponse0\001\022a\n\020Remove" +
-      "AccessRole\022%.partition.v1.RemoveAccessRo" +
-      "leRequest\032&.partition.v1.RemoveAccessRol" +
-      "eResponseB\307\001\n!com.antinvestor.apis.parti" +
-      "tion.v1B\016PartitionProtoP\001ZAgithub.com/an" +
-      "tinvestor/apis/go/partition/partition/v1" +
-      ";partitionv1\242\002\003PXX\252\002\014Partition.V1\312\002\014Part" +
-      "ition\\V1\342\002\030Partition\\V1\\GPBMetadata\352\002\rPa" +
-      "rtition::V1b\006proto3"
+      "rtition.v1.CreateAccessResponse\"\022\202\323\344\223\002\014\"" +
+      "\007/access:\001*\022]\n\tGetAccess\022\036.partition.v1." +
+      "GetAccessRequest\032\037.partition.v1.GetAcces" +
+      "sResponse\"\017\202\323\344\223\002\t\022\007/access\022k\n\014RemoveAcce" +
+      "ss\022!.partition.v1.RemoveAccessRequest\032\"." +
+      "partition.v1.RemoveAccessResponse\"\024\202\323\344\223\002" +
+      "\016*\014/access/{id}\022z\n\020CreateAccessRole\022%.pa" +
+      "rtition.v1.CreateAccessRoleRequest\032&.par" +
+      "tition.v1.CreateAccessRoleResponse\"\027\202\323\344\223" +
+      "\002\021\"\014/access/role:\001*\022s\n\016ListAccessRole\022#." +
+      "partition.v1.ListAccessRoleRequest\032$.par" +
+      "tition.v1.ListAccessRoleResponse\"\024\202\323\344\223\002\016" +
+      "\022\014/access/role0\001\022|\n\020RemoveAccessRole\022%.p" +
+      "artition.v1.RemoveAccessRoleRequest\032&.pa" +
+      "rtition.v1.RemoveAccessRoleResponse\"\031\202\323\344" +
+      "\223\002\023*\021/access/role/{id}B\317\003\n!com.antinvest" +
+      "or.apis.partition.v1B\016PartitionProtoP\001ZA" +
+      "github.com/antinvestor/apis/go/partition" +
+      "/partition/v1;partitionv1\242\002\003PXX\252\002\014Partit" +
+      "ion.V1\312\002\014Partition\\V1\342\002\030Partition\\V1\\GPB" +
+      "Metadata\352\002\rPartition::V1\222A\204\002\022q\n\021Partitio" +
+      "n Service\"W\n\020Ant Investor Ltd\022-https://g" +
+      "ithub.com/antinvestor/service-lostid\032\024in" +
+      "fo@antinvestor.com2\0031.0*\002\001\0022\020application" +
+      "/json:\020application/jsonZY\nW\n\006bearer\022M\010\002\022" +
+      "8Authentication token, prefixed by Beare" +
+      "r: Bearer <token>\032\rAuthorization \002b\014\n\n\n\006" +
+      "bearer\022\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           build.buf.validate.ValidateProto.getDescriptor(),
           com.antinvestor.apis.common.v1.CommonProto.getDescriptor(),
+          com.google.api.AnnotationsProto.getDescriptor(),
+          grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor(),
         });
     internal_static_partition_v1_TenantObject_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -679,7 +698,7 @@ public final class PartitionProto {
     internal_static_partition_v1_UpdatePartitionRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_UpdatePartitionRequest_descriptor,
-        new java.lang.String[] { "PartitionId", "Name", "Description", "State", "Properties", });
+        new java.lang.String[] { "Id", "Name", "Description", "State", "Properties", });
     internal_static_partition_v1_UpdatePartitionRequest_PropertiesEntry_descriptor =
       internal_static_partition_v1_UpdatePartitionRequest_descriptor.getNestedTypes().get(0);
     internal_static_partition_v1_UpdatePartitionRequest_PropertiesEntry_fieldAccessorTable = new
@@ -739,7 +758,7 @@ public final class PartitionProto {
     internal_static_partition_v1_RemovePartitionRoleRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_RemovePartitionRoleRequest_descriptor,
-        new java.lang.String[] { "PartitionRoleId", });
+        new java.lang.String[] { "Id", });
     internal_static_partition_v1_RemovePartitionRoleResponse_descriptor =
       getDescriptor().getMessageTypes().get(21);
     internal_static_partition_v1_RemovePartitionRoleResponse_fieldAccessorTable = new
@@ -793,7 +812,7 @@ public final class PartitionProto {
     internal_static_partition_v1_RemovePageRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_RemovePageRequest_descriptor,
-        new java.lang.String[] { "PageId", });
+        new java.lang.String[] { "Id", });
     internal_static_partition_v1_RemovePageResponse_descriptor =
       getDescriptor().getMessageTypes().get(30);
     internal_static_partition_v1_RemovePageResponse_fieldAccessorTable = new
@@ -835,7 +854,7 @@ public final class PartitionProto {
     internal_static_partition_v1_RemoveAccessRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_RemoveAccessRequest_descriptor,
-        new java.lang.String[] { "AccessId", });
+        new java.lang.String[] { "Id", });
     internal_static_partition_v1_RemoveAccessResponse_descriptor =
       getDescriptor().getMessageTypes().get(37);
     internal_static_partition_v1_RemoveAccessResponse_fieldAccessorTable = new
@@ -865,7 +884,7 @@ public final class PartitionProto {
     internal_static_partition_v1_RemoveAccessRoleRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_RemoveAccessRoleRequest_descriptor,
-        new java.lang.String[] { "AccessRoleId", });
+        new java.lang.String[] { "Id", });
     internal_static_partition_v1_RemoveAccessRoleResponse_descriptor =
       getDescriptor().getMessageTypes().get(42);
     internal_static_partition_v1_RemoveAccessRoleResponse_fieldAccessorTable = new
@@ -887,10 +906,14 @@ public final class PartitionProto {
     descriptor.resolveAllFeaturesImmutable();
     build.buf.validate.ValidateProto.getDescriptor();
     com.antinvestor.apis.common.v1.CommonProto.getDescriptor();
+    com.google.api.AnnotationsProto.getDescriptor();
+    grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(build.buf.validate.ValidateProto.field);
     registry.add(build.buf.validate.ValidateProto.oneof);
+    registry.add(com.google.api.AnnotationsProto.http);
+    registry.add(grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.openapiv2Swagger);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
   }

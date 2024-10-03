@@ -41,7 +41,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private RemoveAccessRoleRequest() {
-    accessRoleId_ = "";
+    id_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -57,39 +57,39 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest.class, com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest.Builder.class);
   }
 
-  public static final int ACCESS_ROLE_ID_FIELD_NUMBER = 1;
+  public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object accessRoleId_ = "";
+  private volatile java.lang.Object id_ = "";
   /**
-   * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
-   * @return The accessRoleId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The id.
    */
   @java.lang.Override
-  public java.lang.String getAccessRoleId() {
-    java.lang.Object ref = accessRoleId_;
+  public java.lang.String getId() {
+    java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      accessRoleId_ = s;
+      id_ = s;
       return s;
     }
   }
   /**
-   * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for accessRoleId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for id.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getAccessRoleIdBytes() {
-    java.lang.Object ref = accessRoleId_;
+      getIdBytes() {
+    java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      accessRoleId_ = b;
+      id_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -110,8 +110,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(accessRoleId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, accessRoleId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -122,8 +122,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(accessRoleId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, accessRoleId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -140,8 +140,8 @@ private static final long serialVersionUID = 0L;
     }
     com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest other = (com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest) obj;
 
-    if (!getAccessRoleId()
-        .equals(other.getAccessRoleId())) return false;
+    if (!getId()
+        .equals(other.getId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -153,8 +153,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ACCESS_ROLE_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getAccessRoleId().hashCode();
+    hash = (37 * hash) + ID_FIELD_NUMBER;
+    hash = (53 * hash) + getId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -286,7 +286,7 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      accessRoleId_ = "";
+      id_ = "";
       return this;
     }
 
@@ -321,7 +321,7 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.accessRoleId_ = accessRoleId_;
+        result.id_ = id_;
       }
     }
 
@@ -337,8 +337,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest other) {
       if (other == com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest.getDefaultInstance()) return this;
-      if (!other.getAccessRoleId().isEmpty()) {
-        accessRoleId_ = other.accessRoleId_;
+      if (!other.getId().isEmpty()) {
+        id_ = other.id_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
@@ -369,7 +369,7 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              accessRoleId_ = input.readStringRequireUtf8();
+              id_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
@@ -390,73 +390,73 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object accessRoleId_ = "";
+    private java.lang.Object id_ = "";
     /**
-     * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
-     * @return The accessRoleId.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @return The id.
      */
-    public java.lang.String getAccessRoleId() {
-      java.lang.Object ref = accessRoleId_;
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        accessRoleId_ = s;
+        id_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for accessRoleId.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for id.
      */
     public com.google.protobuf.ByteString
-        getAccessRoleIdBytes() {
-      java.lang.Object ref = accessRoleId_;
+        getIdBytes() {
+      java.lang.Object ref = id_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        accessRoleId_ = b;
+        id_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
-     * @param value The accessRoleId to set.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @param value The id to set.
      * @return This builder for chaining.
      */
-    public Builder setAccessRoleId(
+    public Builder setId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      accessRoleId_ = value;
+      id_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearAccessRoleId() {
-      accessRoleId_ = getDefaultInstance().getAccessRoleId();
+    public Builder clearId() {
+      id_ = getDefaultInstance().getId();
       bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for accessRoleId to set.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for id to set.
      * @return This builder for chaining.
      */
-    public Builder setAccessRoleIdBytes(
+    public Builder setIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      accessRoleId_ = value;
+      id_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;

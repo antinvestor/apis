@@ -22,6 +22,7 @@ package ocrv1
 
 import (
 	context "context"
+	v1 "github.com/antinvestor/apis/go/common/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -44,7 +45,7 @@ type OCRServiceClient interface {
 	// Perform a new ocr process request
 	Recognize(ctx context.Context, in *RecognizeRequest, opts ...grpc.CallOption) (*RecognizeResponse, error)
 	// Check the status of request if queued
-	Status(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error)
+	Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error)
 }
 
 type oCRServiceClient struct {
@@ -65,7 +66,7 @@ func (c *oCRServiceClient) Recognize(ctx context.Context, in *RecognizeRequest, 
 	return out, nil
 }
 
-func (c *oCRServiceClient) Status(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error) {
+func (c *oCRServiceClient) Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(StatusResponse)
 	err := c.cc.Invoke(ctx, OCRService_Status_FullMethodName, in, out, cOpts...)
@@ -82,7 +83,7 @@ type OCRServiceServer interface {
 	// Perform a new ocr process request
 	Recognize(context.Context, *RecognizeRequest) (*RecognizeResponse, error)
 	// Check the status of request if queued
-	Status(context.Context, *StatusRequest) (*StatusResponse, error)
+	Status(context.Context, *v1.StatusRequest) (*StatusResponse, error)
 	mustEmbedUnimplementedOCRServiceServer()
 }
 
@@ -96,7 +97,7 @@ type UnimplementedOCRServiceServer struct{}
 func (UnimplementedOCRServiceServer) Recognize(context.Context, *RecognizeRequest) (*RecognizeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Recognize not implemented")
 }
-func (UnimplementedOCRServiceServer) Status(context.Context, *StatusRequest) (*StatusResponse, error) {
+func (UnimplementedOCRServiceServer) Status(context.Context, *v1.StatusRequest) (*StatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Status not implemented")
 }
 func (UnimplementedOCRServiceServer) mustEmbedUnimplementedOCRServiceServer() {}
@@ -139,7 +140,7 @@ func _OCRService_Recognize_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 func _OCRService_Status_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StatusRequest)
+	in := new(v1.StatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -151,7 +152,7 @@ func _OCRService_Status_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: OCRService_Status_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OCRServiceServer).Status(ctx, req.(*StatusRequest))
+		return srv.(OCRServiceServer).Status(ctx, req.(*v1.StatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

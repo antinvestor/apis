@@ -1,0 +1,702 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Payment Service",
+    "version": "1.0",
+    "contact": {
+      "name": "Ant Investor Ltd",
+      "url": "https://github.com/antinvestor/service-lostid",
+      "email": "info@antinvestor.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "payment.v1.PaymentService"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/receive": {
+      "post": {
+        "summary": "Send method for queueing inbound payments as requested",
+        "operationId": "PaymentService_Receive",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/payment.v1.ReceiveResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/payment.v1.ReceiveRequest"
+            }
+          }
+        ],
+        "tags": [
+          "payment.v1.PaymentService"
+        ]
+      }
+    },
+    "/reconcile": {
+      "get": {
+        "operationId": "PaymentService_Reconcile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/payment.v1.ReconcileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "externalTransactionId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "route",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outbound",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "amount.currencyCode",
+            "description": "The three-letter currency code defined in ISO 4217.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "amount.units",
+            "description": "The whole units of the amount.\nFor example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "amount.nanos",
+            "description": "Number of nano (10^-9) units of the amount.\nThe value must be between -999,999,999 and +999,999,999 inclusive.\nIf `units` is positive, `nanos` must be positive or zero.\nIf `units` is zero, `nanos` can be positive, zero, or negative.\nIf `units` is negative, `nanos` must be negative or zero.\nFor example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "countryCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "payment.v1.PaymentService"
+        ]
+      }
+    },
+    "/search": {
+      "get": {
+        "summary": "Search method is for client request look for payments matching supplied details from the system",
+        "operationId": "PaymentService_Search",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/payment.v1.SearchResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of payment.v1.SearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idQuery",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.count",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limits.startDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limits.endDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extras",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "payment.v1.PaymentService"
+        ]
+      }
+    },
+    "/send": {
+      "post": {
+        "summary": "Send method for queueing outbound payments as requested",
+        "operationId": "PaymentService_Send",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/payment.v1.SendResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/payment.v1.SendRequest"
+            }
+          }
+        ],
+        "tags": [
+          "payment.v1.PaymentService"
+        ]
+      }
+    },
+    "/send/release/{id}": {
+      "post": {
+        "summary": "Release method for releasing queued payments and returns if status is not released",
+        "operationId": "PaymentService_Release",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/payment.v1.ReleaseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/payment.v1.PaymentService.ReleaseBody"
+            }
+          }
+        ],
+        "tags": [
+          "payment.v1.PaymentService"
+        ]
+      }
+    },
+    "/status/{id}": {
+      "get": {
+        "summary": "Status request to determine if payment is prepared or released",
+        "operationId": "PaymentService_Status",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/common.v1.StatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extras",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "payment.v1.PaymentService"
+        ]
+      },
+      "put": {
+        "summary": "Status update request to allow continuation of payment processing",
+        "operationId": "PaymentService_StatusUpdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/common.v1.StatusUpdateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/payment.v1.PaymentService.StatusUpdateBody"
+            }
+          }
+        ],
+        "tags": [
+          "payment.v1.PaymentService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "common.v1.ContactLink": {
+      "type": "object",
+      "properties": {
+        "profileName": {
+          "type": "string"
+        },
+        "profileType": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "profileImageId": {
+          "type": "string"
+        },
+        "contactId": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "extras": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "common.v1.Pagination": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }
+      }
+    },
+    "common.v1.STATE": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "CHECKED",
+        "ACTIVE",
+        "INACTIVE",
+        "DELETED"
+      ],
+      "default": "CREATED",
+      "description": "- CREATED: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+      "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "common.v1.STATUS": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "QUEUED",
+        "IN_PROCESS",
+        "FAILED",
+        "SUCCESSFUL"
+      ],
+      "default": "UNKNOWN",
+      "description": "- UNKNOWN: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+      "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "common.v1.StatusResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
+        },
+        "status": {
+          "$ref": "#/definitions/common.v1.STATUS"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "transientId": {
+          "type": "string"
+        },
+        "extras": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "common.v1.StatusUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/common.v1.StatusResponse"
+        }
+      }
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    },
+    "google.type.Money": {
+      "type": "object",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "The three-letter currency code defined in ISO 4217."
+        },
+        "units": {
+          "type": "string",
+          "format": "int64",
+          "description": "The whole units of the amount.\nFor example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar."
+        },
+        "nanos": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nano (10^-9) units of the amount.\nThe value must be between -999,999,999 and +999,999,999 inclusive.\nIf `units` is positive, `nanos` must be positive or zero.\nIf `units` is zero, `nanos` can be positive, zero, or negative.\nIf `units` is negative, `nanos` must be negative or zero.\nFor example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000."
+        }
+      },
+      "description": "Represents an amount of money with its currency type."
+    },
+    "payment.v1.Payment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "transactionId": {
+          "type": "string"
+        },
+        "referenceId": {
+          "type": "string"
+        },
+        "batchId": {
+          "type": "string"
+        },
+        "externalTransactionId": {
+          "type": "string"
+        },
+        "route": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/common.v1.ContactLink"
+        },
+        "recipient": {
+          "$ref": "#/definitions/common.v1.ContactLink"
+        },
+        "amount": {
+          "$ref": "#/definitions/google.type.Money"
+        },
+        "cost": {
+          "$ref": "#/definitions/google.type.Money"
+        },
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
+        },
+        "status": {
+          "$ref": "#/definitions/common.v1.STATUS"
+        },
+        "dateCreated": {
+          "type": "string"
+        },
+        "dateProcessed": {
+          "type": "string"
+        },
+        "outbound": {
+          "type": "boolean"
+        },
+        "extra": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "payment.v1.PaymentService.ReleaseBody": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "type": "string"
+        }
+      }
+    },
+    "payment.v1.PaymentService.StatusUpdateBody": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
+        },
+        "status": {
+          "$ref": "#/definitions/common.v1.STATUS"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "extras": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "payment.v1.ReceiveRequest": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/payment.v1.Payment"
+        }
+      }
+    },
+    "payment.v1.ReceiveResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/common.v1.StatusResponse"
+        }
+      }
+    },
+    "payment.v1.ReconcileResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "transactionId": {
+          "type": "string"
+        },
+        "referenceId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/common.v1.STATUS"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "payment.v1.ReleaseResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/common.v1.StatusResponse"
+        }
+      }
+    },
+    "payment.v1.SearchResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/payment.v1.Payment"
+          }
+        }
+      }
+    },
+    "payment.v1.SendRequest": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/payment.v1.Payment"
+        }
+      }
+    },
+    "payment.v1.SendResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/common.v1.StatusResponse"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "description": "Authentication token, prefixed by Bearer: Bearer \u003ctoken\u003e",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}

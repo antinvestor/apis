@@ -42,8 +42,8 @@ private static final long serialVersionUID = 0L;
   }
   private Subscription() {
     id_ = "";
-    propertyid_ = "";
-    profileid_ = "";
+    propertyId_ = "";
+    profileId_ = "";
     role_ = "";
   }
 
@@ -112,78 +112,78 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PROPERTYID_FIELD_NUMBER = 2;
+  public static final int PROPERTY_ID_FIELD_NUMBER = 2;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object propertyid_ = "";
+  private volatile java.lang.Object propertyId_ = "";
   /**
-   * <code>string propertyid = 2 [json_name = "propertyid", (.buf.validate.field) = { ... }</code>
-   * @return The propertyid.
+   * <code>string property_id = 2 [json_name = "propertyId", (.buf.validate.field) = { ... }</code>
+   * @return The propertyId.
    */
   @java.lang.Override
-  public java.lang.String getPropertyid() {
-    java.lang.Object ref = propertyid_;
+  public java.lang.String getPropertyId() {
+    java.lang.Object ref = propertyId_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      propertyid_ = s;
+      propertyId_ = s;
       return s;
     }
   }
   /**
-   * <code>string propertyid = 2 [json_name = "propertyid", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for propertyid.
+   * <code>string property_id = 2 [json_name = "propertyId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for propertyId.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getPropertyidBytes() {
-    java.lang.Object ref = propertyid_;
+      getPropertyIdBytes() {
+    java.lang.Object ref = propertyId_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      propertyid_ = b;
+      propertyId_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int PROFILEID_FIELD_NUMBER = 3;
+  public static final int PROFILE_ID_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object profileid_ = "";
+  private volatile java.lang.Object profileId_ = "";
   /**
-   * <code>string profileid = 3 [json_name = "profileid", (.buf.validate.field) = { ... }</code>
-   * @return The profileid.
+   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The profileId.
    */
   @java.lang.Override
-  public java.lang.String getProfileid() {
-    java.lang.Object ref = profileid_;
+  public java.lang.String getProfileId() {
+    java.lang.Object ref = profileId_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      profileid_ = s;
+      profileId_ = s;
       return s;
     }
   }
   /**
-   * <code>string profileid = 3 [json_name = "profileid", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for profileid.
+   * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileId.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getProfileidBytes() {
-    java.lang.Object ref = profileid_;
+      getProfileIdBytes() {
+    java.lang.Object ref = profileId_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      profileid_ = b;
+      profileId_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -377,11 +377,11 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(propertyid_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 2, propertyid_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(propertyId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, propertyId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileid_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 3, profileid_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 3, profileId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(role_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 4, role_);
@@ -410,11 +410,11 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(propertyid_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, propertyid_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(propertyId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, propertyId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileid_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, profileid_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, profileId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(role_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(4, role_);
@@ -454,10 +454,10 @@ java.lang.String defaultValue) {
 
     if (!getId()
         .equals(other.getId())) return false;
-    if (!getPropertyid()
-        .equals(other.getPropertyid())) return false;
-    if (!getProfileid()
-        .equals(other.getProfileid())) return false;
+    if (!getPropertyId()
+        .equals(other.getPropertyId())) return false;
+    if (!getProfileId()
+        .equals(other.getProfileId())) return false;
     if (!getRole()
         .equals(other.getRole())) return false;
     if (!internalGetExtra().equals(
@@ -485,10 +485,10 @@ java.lang.String defaultValue) {
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + getId().hashCode();
-    hash = (37 * hash) + PROPERTYID_FIELD_NUMBER;
-    hash = (53 * hash) + getPropertyid().hashCode();
-    hash = (37 * hash) + PROFILEID_FIELD_NUMBER;
-    hash = (53 * hash) + getProfileid().hashCode();
+    hash = (37 * hash) + PROPERTY_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getPropertyId().hashCode();
+    hash = (37 * hash) + PROFILE_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getProfileId().hashCode();
     hash = (37 * hash) + ROLE_FIELD_NUMBER;
     hash = (53 * hash) + getRole().hashCode();
     if (!internalGetExtra().getMap().isEmpty()) {
@@ -664,8 +664,8 @@ java.lang.String defaultValue) {
       super.clear();
       bitField0_ = 0;
       id_ = "";
-      propertyid_ = "";
-      profileid_ = "";
+      propertyId_ = "";
+      profileId_ = "";
       role_ = "";
       internalGetMutableExtra().clear();
       createdAt_ = null;
@@ -715,10 +715,10 @@ java.lang.String defaultValue) {
         result.id_ = id_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.propertyid_ = propertyid_;
+        result.propertyId_ = propertyId_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.profileid_ = profileid_;
+        result.profileId_ = profileId_;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
         result.role_ = role_;
@@ -760,13 +760,13 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (!other.getPropertyid().isEmpty()) {
-        propertyid_ = other.propertyid_;
+      if (!other.getPropertyId().isEmpty()) {
+        propertyId_ = other.propertyId_;
         bitField0_ |= 0x00000002;
         onChanged();
       }
-      if (!other.getProfileid().isEmpty()) {
-        profileid_ = other.profileid_;
+      if (!other.getProfileId().isEmpty()) {
+        profileId_ = other.profileId_;
         bitField0_ |= 0x00000004;
         onChanged();
       }
@@ -816,12 +816,12 @@ java.lang.String defaultValue) {
               break;
             } // case 10
             case 18: {
-              propertyid_ = input.readStringRequireUtf8();
+              propertyId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
             case 26: {
-              profileid_ = input.readStringRequireUtf8();
+              profileId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
             } // case 26
@@ -942,145 +942,145 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private java.lang.Object propertyid_ = "";
+    private java.lang.Object propertyId_ = "";
     /**
-     * <code>string propertyid = 2 [json_name = "propertyid", (.buf.validate.field) = { ... }</code>
-     * @return The propertyid.
+     * <code>string property_id = 2 [json_name = "propertyId", (.buf.validate.field) = { ... }</code>
+     * @return The propertyId.
      */
-    public java.lang.String getPropertyid() {
-      java.lang.Object ref = propertyid_;
+    public java.lang.String getPropertyId() {
+      java.lang.Object ref = propertyId_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        propertyid_ = s;
+        propertyId_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string propertyid = 2 [json_name = "propertyid", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for propertyid.
+     * <code>string property_id = 2 [json_name = "propertyId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for propertyId.
      */
     public com.google.protobuf.ByteString
-        getPropertyidBytes() {
-      java.lang.Object ref = propertyid_;
+        getPropertyIdBytes() {
+      java.lang.Object ref = propertyId_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        propertyid_ = b;
+        propertyId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string propertyid = 2 [json_name = "propertyid", (.buf.validate.field) = { ... }</code>
-     * @param value The propertyid to set.
+     * <code>string property_id = 2 [json_name = "propertyId", (.buf.validate.field) = { ... }</code>
+     * @param value The propertyId to set.
      * @return This builder for chaining.
      */
-    public Builder setPropertyid(
+    public Builder setPropertyId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      propertyid_ = value;
+      propertyId_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>string propertyid = 2 [json_name = "propertyid", (.buf.validate.field) = { ... }</code>
+     * <code>string property_id = 2 [json_name = "propertyId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearPropertyid() {
-      propertyid_ = getDefaultInstance().getPropertyid();
+    public Builder clearPropertyId() {
+      propertyId_ = getDefaultInstance().getPropertyId();
       bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string propertyid = 2 [json_name = "propertyid", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for propertyid to set.
+     * <code>string property_id = 2 [json_name = "propertyId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for propertyId to set.
      * @return This builder for chaining.
      */
-    public Builder setPropertyidBytes(
+    public Builder setPropertyIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      propertyid_ = value;
+      propertyId_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
 
-    private java.lang.Object profileid_ = "";
+    private java.lang.Object profileId_ = "";
     /**
-     * <code>string profileid = 3 [json_name = "profileid", (.buf.validate.field) = { ... }</code>
-     * @return The profileid.
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @return The profileId.
      */
-    public java.lang.String getProfileid() {
-      java.lang.Object ref = profileid_;
+    public java.lang.String getProfileId() {
+      java.lang.Object ref = profileId_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        profileid_ = s;
+        profileId_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string profileid = 3 [json_name = "profileid", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for profileid.
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for profileId.
      */
     public com.google.protobuf.ByteString
-        getProfileidBytes() {
-      java.lang.Object ref = profileid_;
+        getProfileIdBytes() {
+      java.lang.Object ref = profileId_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        profileid_ = b;
+        profileId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string profileid = 3 [json_name = "profileid", (.buf.validate.field) = { ... }</code>
-     * @param value The profileid to set.
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @param value The profileId to set.
      * @return This builder for chaining.
      */
-    public Builder setProfileid(
+    public Builder setProfileId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      profileid_ = value;
+      profileId_ = value;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>string profileid = 3 [json_name = "profileid", (.buf.validate.field) = { ... }</code>
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearProfileid() {
-      profileid_ = getDefaultInstance().getProfileid();
+    public Builder clearProfileId() {
+      profileId_ = getDefaultInstance().getProfileId();
       bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
     /**
-     * <code>string profileid = 3 [json_name = "profileid", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for profileid to set.
+     * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for profileId to set.
      * @return This builder for chaining.
      */
-    public Builder setProfileidBytes(
+    public Builder setProfileIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      profileid_ = value;
+      profileId_ = value;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;

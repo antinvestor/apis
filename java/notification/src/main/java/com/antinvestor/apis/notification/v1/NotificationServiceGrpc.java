@@ -60,68 +60,6 @@ public final class NotificationServiceGrpc {
     return getSendMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusRequest,
-      com.antinvestor.apis.common.v1.StatusResponse> getStatusMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "Status",
-      requestType = com.antinvestor.apis.common.v1.StatusRequest.class,
-      responseType = com.antinvestor.apis.common.v1.StatusResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusRequest,
-      com.antinvestor.apis.common.v1.StatusResponse> getStatusMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusRequest, com.antinvestor.apis.common.v1.StatusResponse> getStatusMethod;
-    if ((getStatusMethod = NotificationServiceGrpc.getStatusMethod) == null) {
-      synchronized (NotificationServiceGrpc.class) {
-        if ((getStatusMethod = NotificationServiceGrpc.getStatusMethod) == null) {
-          NotificationServiceGrpc.getStatusMethod = getStatusMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.common.v1.StatusRequest, com.antinvestor.apis.common.v1.StatusResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Status"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.common.v1.StatusRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.common.v1.StatusResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new NotificationServiceMethodDescriptorSupplier("Status"))
-              .build();
-        }
-      }
-    }
-    return getStatusMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusUpdateRequest,
-      com.antinvestor.apis.common.v1.StatusUpdateResponse> getStatusUpdateMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "StatusUpdate",
-      requestType = com.antinvestor.apis.common.v1.StatusUpdateRequest.class,
-      responseType = com.antinvestor.apis.common.v1.StatusUpdateResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusUpdateRequest,
-      com.antinvestor.apis.common.v1.StatusUpdateResponse> getStatusUpdateMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusUpdateRequest, com.antinvestor.apis.common.v1.StatusUpdateResponse> getStatusUpdateMethod;
-    if ((getStatusUpdateMethod = NotificationServiceGrpc.getStatusUpdateMethod) == null) {
-      synchronized (NotificationServiceGrpc.class) {
-        if ((getStatusUpdateMethod = NotificationServiceGrpc.getStatusUpdateMethod) == null) {
-          NotificationServiceGrpc.getStatusUpdateMethod = getStatusUpdateMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.common.v1.StatusUpdateRequest, com.antinvestor.apis.common.v1.StatusUpdateResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "StatusUpdate"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.common.v1.StatusUpdateRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.common.v1.StatusUpdateResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new NotificationServiceMethodDescriptorSupplier("StatusUpdate"))
-              .build();
-        }
-      }
-    }
-    return getStatusUpdateMethod;
-  }
-
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.notification.v1.ReleaseRequest,
       com.antinvestor.apis.notification.v1.ReleaseResponse> getReleaseMethod;
 
@@ -213,6 +151,68 @@ public final class NotificationServiceGrpc {
       }
     }
     return getSearchMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusRequest,
+      com.antinvestor.apis.common.v1.StatusResponse> getStatusMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Status",
+      requestType = com.antinvestor.apis.common.v1.StatusRequest.class,
+      responseType = com.antinvestor.apis.common.v1.StatusResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusRequest,
+      com.antinvestor.apis.common.v1.StatusResponse> getStatusMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusRequest, com.antinvestor.apis.common.v1.StatusResponse> getStatusMethod;
+    if ((getStatusMethod = NotificationServiceGrpc.getStatusMethod) == null) {
+      synchronized (NotificationServiceGrpc.class) {
+        if ((getStatusMethod = NotificationServiceGrpc.getStatusMethod) == null) {
+          NotificationServiceGrpc.getStatusMethod = getStatusMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.common.v1.StatusRequest, com.antinvestor.apis.common.v1.StatusResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Status"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.common.v1.StatusRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.common.v1.StatusResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new NotificationServiceMethodDescriptorSupplier("Status"))
+              .build();
+        }
+      }
+    }
+    return getStatusMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusUpdateRequest,
+      com.antinvestor.apis.common.v1.StatusUpdateResponse> getStatusUpdateMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "StatusUpdate",
+      requestType = com.antinvestor.apis.common.v1.StatusUpdateRequest.class,
+      responseType = com.antinvestor.apis.common.v1.StatusUpdateResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusUpdateRequest,
+      com.antinvestor.apis.common.v1.StatusUpdateResponse> getStatusUpdateMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusUpdateRequest, com.antinvestor.apis.common.v1.StatusUpdateResponse> getStatusUpdateMethod;
+    if ((getStatusUpdateMethod = NotificationServiceGrpc.getStatusUpdateMethod) == null) {
+      synchronized (NotificationServiceGrpc.class) {
+        if ((getStatusUpdateMethod = NotificationServiceGrpc.getStatusUpdateMethod) == null) {
+          NotificationServiceGrpc.getStatusUpdateMethod = getStatusUpdateMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.common.v1.StatusUpdateRequest, com.antinvestor.apis.common.v1.StatusUpdateResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "StatusUpdate"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.common.v1.StatusUpdateRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.common.v1.StatusUpdateResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new NotificationServiceMethodDescriptorSupplier("StatusUpdate"))
+              .build();
+        }
+      }
+    }
+    return getStatusUpdateMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.notification.v1.TemplateSearchRequest,
@@ -337,26 +337,6 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if notification is prepared or released
-     * </pre>
-     */
-    default void status(com.antinvestor.apis.common.v1.StatusRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.common.v1.StatusResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getStatusMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     *Status update request to allow continuation of notification processing
-     * </pre>
-     */
-    default void statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.common.v1.StatusUpdateResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getStatusUpdateMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
      *Release method for releasing queued massages and returns if notification status if released
      * </pre>
      */
@@ -383,6 +363,26 @@ public final class NotificationServiceGrpc {
     default void search(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.SearchResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSearchMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Status request to determine if notification is prepared or released
+     * </pre>
+     */
+    default void status(com.antinvestor.apis.common.v1.StatusRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.common.v1.StatusResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getStatusMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Status update request to allow continuation of notification processing
+     * </pre>
+     */
+    default void statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.common.v1.StatusUpdateResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getStatusUpdateMethod(), responseObserver);
     }
 
     /**
@@ -443,28 +443,6 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if notification is prepared or released
-     * </pre>
-     */
-    public void status(com.antinvestor.apis.common.v1.StatusRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.common.v1.StatusResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getStatusMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     *Status update request to allow continuation of notification processing
-     * </pre>
-     */
-    public void statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.common.v1.StatusUpdateResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getStatusUpdateMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
      *Release method for releasing queued massages and returns if notification status if released
      * </pre>
      */
@@ -494,6 +472,28 @@ public final class NotificationServiceGrpc {
         io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.SearchResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getSearchMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Status request to determine if notification is prepared or released
+     * </pre>
+     */
+    public void status(com.antinvestor.apis.common.v1.StatusRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.common.v1.StatusResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getStatusMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Status update request to allow continuation of notification processing
+     * </pre>
+     */
+    public void statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.common.v1.StatusUpdateResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getStatusUpdateMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -544,26 +544,6 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if notification is prepared or released
-     * </pre>
-     */
-    public com.antinvestor.apis.common.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getStatusMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     *Status update request to allow continuation of notification processing
-     * </pre>
-     */
-    public com.antinvestor.apis.common.v1.StatusUpdateResponse statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getStatusUpdateMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
      *Release method for releasing queued massages and returns if notification status if released
      * </pre>
      */
@@ -591,6 +571,26 @@ public final class NotificationServiceGrpc {
         com.antinvestor.apis.common.v1.SearchRequest request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getSearchMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Status request to determine if notification is prepared or released
+     * </pre>
+     */
+    public com.antinvestor.apis.common.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getStatusMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Status update request to allow continuation of notification processing
+     * </pre>
+     */
+    public com.antinvestor.apis.common.v1.StatusUpdateResponse statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getStatusUpdateMethod(), getCallOptions(), request);
     }
 
     /**
@@ -641,28 +641,6 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if notification is prepared or released
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.common.v1.StatusResponse> status(
-        com.antinvestor.apis.common.v1.StatusRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getStatusMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     *Status update request to allow continuation of notification processing
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.common.v1.StatusUpdateResponse> statusUpdate(
-        com.antinvestor.apis.common.v1.StatusUpdateRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getStatusUpdateMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
      *Release method for releasing queued massages and returns if notification status if released
      * </pre>
      */
@@ -684,6 +662,28 @@ public final class NotificationServiceGrpc {
     }
 
     /**
+     * <pre>
+     *Status request to determine if notification is prepared or released
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.common.v1.StatusResponse> status(
+        com.antinvestor.apis.common.v1.StatusRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getStatusMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     *Status update request to allow continuation of notification processing
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.common.v1.StatusUpdateResponse> statusUpdate(
+        com.antinvestor.apis.common.v1.StatusUpdateRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getStatusUpdateMethod(), getCallOptions()), request);
+    }
+
+    /**
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.notification.v1.TemplateSaveResponse> templateSave(
         com.antinvestor.apis.notification.v1.TemplateSaveRequest request) {
@@ -693,11 +693,11 @@ public final class NotificationServiceGrpc {
   }
 
   private static final int METHODID_SEND = 0;
-  private static final int METHODID_STATUS = 1;
-  private static final int METHODID_STATUS_UPDATE = 2;
-  private static final int METHODID_RELEASE = 3;
-  private static final int METHODID_RECEIVE = 4;
-  private static final int METHODID_SEARCH = 5;
+  private static final int METHODID_RELEASE = 1;
+  private static final int METHODID_RECEIVE = 2;
+  private static final int METHODID_SEARCH = 3;
+  private static final int METHODID_STATUS = 4;
+  private static final int METHODID_STATUS_UPDATE = 5;
   private static final int METHODID_TEMPLATE_SEARCH = 6;
   private static final int METHODID_TEMPLATE_SAVE = 7;
 
@@ -722,14 +722,6 @@ public final class NotificationServiceGrpc {
           serviceImpl.send((com.antinvestor.apis.notification.v1.SendRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.SendResponse>) responseObserver);
           break;
-        case METHODID_STATUS:
-          serviceImpl.status((com.antinvestor.apis.common.v1.StatusRequest) request,
-              (io.grpc.stub.StreamObserver<com.antinvestor.apis.common.v1.StatusResponse>) responseObserver);
-          break;
-        case METHODID_STATUS_UPDATE:
-          serviceImpl.statusUpdate((com.antinvestor.apis.common.v1.StatusUpdateRequest) request,
-              (io.grpc.stub.StreamObserver<com.antinvestor.apis.common.v1.StatusUpdateResponse>) responseObserver);
-          break;
         case METHODID_RELEASE:
           serviceImpl.release((com.antinvestor.apis.notification.v1.ReleaseRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.ReleaseResponse>) responseObserver);
@@ -741,6 +733,14 @@ public final class NotificationServiceGrpc {
         case METHODID_SEARCH:
           serviceImpl.search((com.antinvestor.apis.common.v1.SearchRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.SearchResponse>) responseObserver);
+          break;
+        case METHODID_STATUS:
+          serviceImpl.status((com.antinvestor.apis.common.v1.StatusRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.common.v1.StatusResponse>) responseObserver);
+          break;
+        case METHODID_STATUS_UPDATE:
+          serviceImpl.statusUpdate((com.antinvestor.apis.common.v1.StatusUpdateRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.common.v1.StatusUpdateResponse>) responseObserver);
           break;
         case METHODID_TEMPLATE_SEARCH:
           serviceImpl.templateSearch((com.antinvestor.apis.notification.v1.TemplateSearchRequest) request,
@@ -776,20 +776,6 @@ public final class NotificationServiceGrpc {
               com.antinvestor.apis.notification.v1.SendResponse>(
                 service, METHODID_SEND)))
         .addMethod(
-          getStatusMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              com.antinvestor.apis.common.v1.StatusRequest,
-              com.antinvestor.apis.common.v1.StatusResponse>(
-                service, METHODID_STATUS)))
-        .addMethod(
-          getStatusUpdateMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              com.antinvestor.apis.common.v1.StatusUpdateRequest,
-              com.antinvestor.apis.common.v1.StatusUpdateResponse>(
-                service, METHODID_STATUS_UPDATE)))
-        .addMethod(
           getReleaseMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
@@ -810,6 +796,20 @@ public final class NotificationServiceGrpc {
               com.antinvestor.apis.common.v1.SearchRequest,
               com.antinvestor.apis.notification.v1.SearchResponse>(
                 service, METHODID_SEARCH)))
+        .addMethod(
+          getStatusMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.common.v1.StatusRequest,
+              com.antinvestor.apis.common.v1.StatusResponse>(
+                service, METHODID_STATUS)))
+        .addMethod(
+          getStatusUpdateMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.common.v1.StatusUpdateRequest,
+              com.antinvestor.apis.common.v1.StatusUpdateResponse>(
+                service, METHODID_STATUS_UPDATE)))
         .addMethod(
           getTemplateSearchMethod(),
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
@@ -873,11 +873,11 @@ public final class NotificationServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new NotificationServiceFileDescriptorSupplier())
               .addMethod(getSendMethod())
-              .addMethod(getStatusMethod())
-              .addMethod(getStatusUpdateMethod())
               .addMethod(getReleaseMethod())
               .addMethod(getReceiveMethod())
               .addMethod(getSearchMethod())
+              .addMethod(getStatusMethod())
+              .addMethod(getStatusUpdateMethod())
               .addMethod(getTemplateSearchMethod())
               .addMethod(getTemplateSaveMethod())
               .build();

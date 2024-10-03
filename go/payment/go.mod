@@ -1,6 +1,6 @@
 module github.com/antinvestor/apis/go/payment
 
-go 1.21
+go 1.23
 
 //replace github.com/antinvestor/apis/go/common => ../common
 

@@ -1,0 +1,917 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Profile Service",
+    "version": "1.0",
+    "contact": {
+      "name": "Ant Investor Ltd",
+      "url": "https://github.com/antinvestor/service-lostid",
+      "email": "info@antinvestor.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "profile.v1.ProfileService"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "summary": "Creates a new profile based on the request.",
+        "operationId": "ProfileService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.CreateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/profile.v1.CreateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    },
+    "/address": {
+      "post": {
+        "summary": "Adds a new address based on the request.",
+        "operationId": "ProfileService_AddAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.AddAddressResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/profile.v1.AddAddressRequest"
+            }
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    },
+    "/contact": {
+      "get": {
+        "summary": "Obtains a profile by its hash",
+        "operationId": "ProfileService_GetByContact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.GetByContactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "contact",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      },
+      "post": {
+        "summary": "Adds a new contact based on the request/this leads to automatic verification.",
+        "operationId": "ProfileService_AddContact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.AddContactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/profile.v1.AddContactRequest"
+            }
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    },
+    "/merge": {
+      "post": {
+        "summary": "Uses data found in the profile from mergeHash to update the current profile.",
+        "operationId": "ProfileService_Merge",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.MergeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/profile.v1.MergeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    },
+    "/relationship": {
+      "get": {
+        "summary": "Lists relationships a profile has.",
+        "operationId": "ProfileService_ListRelationship",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/profile.v1.ListRelationshipResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of profile.v1.ListRelationshipResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "peerName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "peerId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lastRelationshipId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "relatedChildrenId",
+            "description": "Related profile ids to specifically search for.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "invertRelation",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      },
+      "post": {
+        "summary": "Adds a new relationship between different proiles.",
+        "operationId": "ProfileService_AddRelationship",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.AddRelationshipResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/profile.v1.AddRelationshipRequest"
+            }
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    },
+    "/relationship/{id}": {
+      "delete": {
+        "summary": "Remove an existing relationship between profiles.",
+        "operationId": "ProfileService_DeleteRelationship",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.DeleteRelationshipResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    },
+    "/search": {
+      "get": {
+        "summary": "Obtains a profile by its hash",
+        "operationId": "ProfileService_Search",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/profile.v1.SearchResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of profile.v1.SearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extras",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    },
+    "/{id}": {
+      "get": {
+        "summary": "Obtains a profile by its hash",
+        "operationId": "ProfileService_GetById",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.GetByIdResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      },
+      "patch": {
+        "summary": "Creates a new profile based on the request.",
+        "operationId": "ProfileService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.UpdateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/profile.v1.ProfileService.UpdateBody"
+            }
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "common.v1.STATE": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "CHECKED",
+        "ACTIVE",
+        "INACTIVE",
+        "DELETED"
+      ],
+      "default": "CREATED",
+      "description": "- CREATED: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+      "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    },
+    "profile.v1.AddAddressRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/profile.v1.AddressObject"
+        }
+      },
+      "title": "The request message containing the information necessary to create a profile"
+    },
+    "profile.v1.AddAddressResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/profile.v1.ProfileObject"
+        }
+      }
+    },
+    "profile.v1.AddContactRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "contact": {
+          "type": "string"
+        }
+      },
+      "title": "The request message containing the information necessary to create a profile"
+    },
+    "profile.v1.AddContactResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/profile.v1.ProfileObject"
+        }
+      }
+    },
+    "profile.v1.AddRelationshipRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "parent": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "child": {
+          "type": "string"
+        },
+        "childId": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/profile.v1.RelationshipType"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "The request message containing the information necessary to create a profile"
+    },
+    "profile.v1.AddRelationshipResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/profile.v1.RelationshipObject"
+        }
+      }
+    },
+    "profile.v1.AddressObject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "area": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "house": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "extra": {
+          "type": "string"
+        }
+      }
+    },
+    "profile.v1.CommunicationLevel": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "INTERNAL_MARKETING",
+        "IMPORTANT_ALERTS",
+        "SYSTEM_ALERTS",
+        "NO_CONTACT"
+      ],
+      "default": "ALL",
+      "description": "- ALL: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX\n\nAny communication including 3rd party marketing is welcome.\n - INTERNAL_MARKETING: Can receive marketing messages from our services\n - IMPORTANT_ALERTS: These can be things like policy changes\n - SYSTEM_ALERTS: This include user actions expecting a response.\n - NO_CONTACT: This one needs prayers",
+      "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "profile.v1.ContactObject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/profile.v1.ContactType"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean"
+        },
+        "communicationLevel": {
+          "$ref": "#/definitions/profile.v1.CommunicationLevel"
+        },
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
+        }
+      }
+    },
+    "profile.v1.ContactType": {
+      "type": "string",
+      "enum": [
+        "EMAIL",
+        "PHONE"
+      ],
+      "default": "EMAIL",
+      "description": "- EMAIL: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+      "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "profile.v1.CreateRequest": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/profile.v1.ProfileType"
+        },
+        "contact": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "The request message containing the information necessary to create a profile"
+    },
+    "profile.v1.CreateResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/profile.v1.ProfileObject"
+        }
+      }
+    },
+    "profile.v1.DeleteRelationshipResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/profile.v1.RelationshipObject"
+        }
+      }
+    },
+    "profile.v1.EntryItem": {
+      "type": "object",
+      "properties": {
+        "objectName": {
+          "type": "string"
+        },
+        "objectId": {
+          "type": "string"
+        }
+      }
+    },
+    "profile.v1.GetByContactResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/profile.v1.ProfileObject"
+        }
+      }
+    },
+    "profile.v1.GetByIdResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/profile.v1.ProfileObject"
+        }
+      }
+    },
+    "profile.v1.ListRelationshipResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/profile.v1.RelationshipObject"
+          }
+        }
+      }
+    },
+    "profile.v1.MergeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "mergeid": {
+          "type": "string"
+        }
+      },
+      "title": "The request message containing the profile's hash"
+    },
+    "profile.v1.MergeResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/profile.v1.ProfileObject"
+        }
+      }
+    },
+    "profile.v1.ProfileObject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/profile.v1.ProfileType"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/profile.v1.ContactObject"
+          }
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/profile.v1.AddressObject"
+          }
+        },
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
+        }
+      },
+      "title": "The response message containing the full profile object"
+    },
+    "profile.v1.ProfileService.UpdateBody": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
+        }
+      },
+      "title": "The request message containing the information necessary to create a profile"
+    },
+    "profile.v1.ProfileType": {
+      "type": "string",
+      "enum": [
+        "PERSON",
+        "INSTITUTION",
+        "BOT"
+      ],
+      "default": "PERSON",
+      "description": "- PERSON: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+      "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "profile.v1.RelationshipObject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/profile.v1.RelationshipType"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "childEntry": {
+          "$ref": "#/definitions/profile.v1.EntryItem"
+        },
+        "parentEntry": {
+          "$ref": "#/definitions/profile.v1.EntryItem"
+        },
+        "peerProfile": {
+          "$ref": "#/definitions/profile.v1.ProfileObject"
+        }
+      },
+      "title": "A Relationship object"
+    },
+    "profile.v1.RelationshipType": {
+      "type": "string",
+      "enum": [
+        "MEMBER",
+        "AFFILIATED",
+        "BLACK_LISTED"
+      ],
+      "default": "MEMBER",
+      "description": "- MEMBER: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+      "title": "RelationshipType enum represents the way two profiles are linked.\nbuf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "profile.v1.SearchResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/profile.v1.ProfileObject"
+          }
+        }
+      }
+    },
+    "profile.v1.UpdateResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/profile.v1.ProfileObject"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "description": "Authentication token, prefixed by Bearer: Bearer \u003ctoken\u003e",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}

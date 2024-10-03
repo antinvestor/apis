@@ -28,8 +28,4 @@ plugins:
     out: ../../java/common/src/main/java/
   - remote: buf.build/protocolbuffers/java
     out: ../../java/common/src/main/java/
-  - remote: buf.build/bufbuild/es
-    opt: target=ts
-    out: ../../js/
-
 

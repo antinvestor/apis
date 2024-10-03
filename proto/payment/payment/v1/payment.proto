@@ -18,11 +18,44 @@ package payment.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "google/api/annotations.proto";
 import "google/type/money.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/payment/v1;paymentv1";
 option java_multiple_files = true;
 option java_package = "paymentv1";
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Payment Service"
+    version: "1.0"
+    contact: {
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-lostid"
+      email: "info@antinvestor.com"
+    }
+  }
+
+  schemes: HTTP
+  schemes: HTTPS
+  consumes: "application/json"
+  produces: "application/json"
+
+  security_definitions: {
+    security: {
+      key: "bearer"
+      value: {
+        type: TYPE_API_KEY
+        in: IN_HEADER
+        name: "Authorization"
+        description: "Authentication token, prefixed by Bearer: Bearer <token>"
+      }
+    }
+  }
+  security: {
+    security_requirement: {key: "bearer"}
+  }
+};
 
 message Payment {
   string id = 1;
@@ -81,17 +114,12 @@ message ReceiveResponse {
 }
 
 message ReleaseRequest {
-  string access_id = 1 [
+  string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  string id = 2 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string comment = 3;
+  string comment = 2;
 }
 
 message ReleaseResponse {
@@ -100,22 +128,48 @@ message ReleaseResponse {
 
 service PaymentService {
   //Send method for queueing outbound payments as requested
-  rpc Send(SendRequest) returns (SendResponse);
+  rpc Send(SendRequest) returns (SendResponse) {
+    option (google.api.http) = {
+      post: "/send"
+      body: "*"
+    };
+  }
 
   //Send method for queueing inbound payments as requested
-  rpc Receive(ReceiveRequest) returns (ReceiveResponse);
+  rpc Receive(ReceiveRequest) returns (ReceiveResponse) {
+    option (google.api.http) = {
+      post: "/receive"
+      body: "*"
+    };
+  }
 
   //Status request to determine if payment is prepared or released
-  rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse);
+  rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse) {
+    option (google.api.http) = {get: "/status/{id}"};
+  }
 
   //Status update request to allow continuation of payment processing
-  rpc StatusUpdate(common.v1.StatusUpdateRequest) returns (common.v1.StatusUpdateResponse);
+  rpc StatusUpdate(common.v1.StatusUpdateRequest) returns (common.v1.StatusUpdateResponse) {
+    option (google.api.http) = {
+      put: "/status/{id}"
+      body: "*"
+    };
+  }
 
   //Release method for releasing queued payments and returns if status is not released
-  rpc Release(ReleaseRequest) returns (ReleaseResponse);
+  rpc Release(ReleaseRequest) returns (ReleaseResponse) {
+    option (google.api.http) = {
+      post: "/send/release/{id}"
+      body: "*"
+    };
+  }
 
   //Search method is for client request look for payments matching supplied details from the system
-  rpc Search(common.v1.SearchRequest) returns (stream SearchResponse);
+  rpc Search(common.v1.SearchRequest) returns (stream SearchResponse) {
+    option (google.api.http) = {get: "/search"};
+  }
 
-  rpc Reconcile(ReconcileRequest) returns (ReconcileResponse);
+  rpc Reconcile(ReconcileRequest) returns (ReconcileResponse) {
+    option (google.api.http) = {get: "/reconcile"};
+  }
 }

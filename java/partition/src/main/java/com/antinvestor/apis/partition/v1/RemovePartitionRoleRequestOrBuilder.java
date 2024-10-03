@@ -24,14 +24,14 @@ public interface RemovePartitionRoleRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string partition_role_id = 1 [json_name = "partitionRoleId", (.buf.validate.field) = { ... }</code>
-   * @return The partitionRoleId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The id.
    */
-  java.lang.String getPartitionRoleId();
+  java.lang.String getId();
   /**
-   * <code>string partition_role_id = 1 [json_name = "partitionRoleId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for partitionRoleId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for id.
    */
   com.google.protobuf.ByteString
-      getPartitionRoleIdBytes();
+      getIdBytes();
 }
