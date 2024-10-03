@@ -9,6 +9,11 @@
       "email": "info@antinvestor.com"
     }
   },
+  "tags": [
+    {
+      "name": "ledger.v1.LedgerService"
+    }
+  ],
   "schemes": [
     "http",
     "https"

@@ -151,20 +151,19 @@ public final class LedgerProto {
       "nsaction\"#\202\323\344\223\002\0352\030/transaction/{referenc" +
       "e}:\001*\022o\n\030SearchTransactionEntries\022\030.comm" +
       "on.v1.SearchRequest\032\033.ledger.v1.Transact" +
-      "ionEntry\"\032\202\323\344\223\002\024\022\022/transaction/entry0\001B\345" +
+      "ionEntry\"\032\202\323\344\223\002\024\022\022/transaction/entry0\001B\261" +
       "\003\n\036com.antinvestor.apis.ledger.v1B\013Ledge" +
       "rProtoP\001Z8github.com/antinvestor/apis/go" +
       "/ledger/ledger/v1;ledgerv1\242\002\003LXX\252\002\tLedge" +
       "r.V1\312\002\tLedger\\V1\342\002\025Ledger\\V1\\GPBMetadata" +
-      "\352\002\nLedger::V1\222A\265\002\022n\n\016Ledger Service\"W\n\020A" +
+      "\352\002\nLedger::V1\222A\201\002\022n\n\016Ledger Service\"W\n\020A" +
       "nt Investor Ltd\022-https://github.com/anti" +
       "nvestor/service-ledger\032\024info@antinvestor" +
       ".com2\0031.0*\002\001\0022\020application/json:\020applica" +
       "tion/jsonZY\nW\n\006bearer\022M\010\002\0228Authenticatio" +
       "n token, prefixed by Bearer: Bearer <tok" +
-      "en>\032\rAuthorization \002b\014\n\n\n\006bearer\022\000j2\n\010ec" +
-      "ho rpc\022\024Echo Rpc description\"\020\n\nx-traitT" +
-      "ag\022\002 \001b\006proto3"
+      "en>\032\rAuthorization \002b\014\n\n\n\006bearer\022\000b\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
