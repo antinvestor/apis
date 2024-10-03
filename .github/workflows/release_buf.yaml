@@ -23,14 +23,14 @@ jobs:
           input: "proto/${{ matrix.api_module }}"
           buf_token: ${{ secrets.BUF_TOKEN }}
 
-#      - uses: bufbuild/buf-breaking-action@v1
-#        with:
-#          input: "proto/${{ matrix.api_module }}"
-#          buf_token: ${{ secrets.BUF_TOKEN }}
-#
-#          # The 'main' branch of the GitHub repository that defines the module.
-#          # Note we specify the subdir to compare against.
-#          against: "https://github.com/${GITHUB_REPOSITORY}.git#branch=main,ref=HEAD~1,subdir=proto/${{ matrix.api_module }}"
+      - uses: bufbuild/buf-breaking-action@v1
+        with:
+          input: "proto/${{ matrix.api_module }}"
+          buf_token: ${{ secrets.BUF_TOKEN }}
+
+          # The 'main' branch of the GitHub repository that defines the module.
+          # Note we specify the subdir to compare against.
+          against: "https://github.com/${GITHUB_REPOSITORY}.git#branch=main,ref=HEAD~1,subdir=proto/${{ matrix.api_module }}"
 
       - uses: bufbuild/buf-push-action@v1
         with:
