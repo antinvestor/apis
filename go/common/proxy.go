@@ -17,7 +17,6 @@ package common
 import (
 	"embed"
 	"google.golang.org/grpc"
-	"io/fs"
 	"net/http"
 )
 
@@ -29,21 +28,30 @@ type ProxyOptions struct {
 
 func (p *ProxyOptions) CleanPath() string {
 	if p.OpenAPIPath == "" {
-		return "/openapi.json"
+		return "/swagger.json"
 	}
 	return p.OpenAPIPath
 }
 
-func (p *ProxyOptions) ServeApiSpec(proxyMux *http.ServeMux, apiSpec embed.FS) error {
+func (p *ProxyOptions) ServeApiSpec(proxyMux *http.ServeMux, apiSpec embed.FS, specFileName string) error {
 
 	path := p.CleanPath()
 
-	// Serve the embedded swagger.json at the root path "/"
-	subFS, err := fs.Sub(apiSpec, ".")
-	if err != nil {
-		return err
-	}
+	proxyMux.HandleFunc(path, func(w http.ResponseWriter, r *http.Request) {
+		// Read the embedded file content
+		swaggerFile, err := apiSpec.ReadFile(specFileName)
+		if err != nil {
+			http.Error(w, "File not found", http.StatusNotFound)
+			return
+		}
 
-	proxyMux.Handle(path, http.FileServer(http.FS(subFS)))
+		// Set content type to JSON
+		w.Header().Set("Content-Type", "application/json")
+		_, err = w.Write(swaggerFile)
+		if err != nil {
+			return
+		} // Write file content to the response
+	})
+
 	return nil
 }
