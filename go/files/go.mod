@@ -5,7 +5,7 @@ go 1.23
 //replace github.com/antinvestor/apis/go/common => ../common
 
 require (
-	github.com/antinvestor/apis/go/common v1.28.0
+	github.com/antinvestor/apis/go/common v1.28.2
 	github.com/stretchr/testify v1.9.0
 	google.golang.org/grpc v1.67.1
 )

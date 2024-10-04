@@ -12,38 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package common
+package ocrv1
 
 import (
+	"context"
 	"embed"
-	"google.golang.org/grpc"
-	"io/fs"
+	"github.com/antinvestor/apis/go/common"
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"net/http"
 )
 
-type ProxyOptions struct {
-	GrpcServerEndpoint string
-	GrpcServerDialOpts []grpc.DialOption
-	OpenAPIPath        string
-}
+//go:embed ocr.swagger.json
+var apiSpecFs embed.FS
 
-func (p *ProxyOptions) CleanPath() string {
-	if p.OpenAPIPath == "" {
-		return "/openapi.json"
-	}
-	return p.OpenAPIPath
-}
+func ProxyGateway(ctx context.Context, proxyOptions common.ProxyOptions) (*http.ServeMux, error) {
 
-func (p *ProxyOptions) ServeApiSpec(proxyMux *http.ServeMux, apiSpec embed.FS) error {
+	proxyMux := http.NewServeMux()
 
-	path := p.CleanPath()
-
-	// Serve the embedded swagger.json at the root path "/"
-	subFS, err := fs.Sub(apiSpec, ".")
+	implementationMux := runtime.NewServeMux()
+	err := RegisterOCRServiceHandlerFromEndpoint(ctx, implementationMux, proxyOptions.GrpcServerEndpoint, proxyOptions.GrpcServerDialOpts)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	proxyMux.Handle(path, http.FileServer(http.FS(subFS)))
-	return nil
+	proxyMux.Handle("/", implementationMux)
+
+	err = proxyOptions.ServeApiSpec(proxyMux, apiSpecFs)
+	if err != nil {
+		return nil, err
+	}
+
+	return proxyMux, nil
 }
