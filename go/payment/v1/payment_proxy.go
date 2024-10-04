@@ -25,7 +25,7 @@ import (
 //go:embed payment.swagger.json
 var apiSpecFs embed.FS
 
-func ProxyGateway(ctx context.Context, proxyOptions common.ProxyOptions) (*http.ServeMux, error) {
+func CreateProxyHandler(ctx context.Context, proxyOptions common.ProxyOptions) (*http.ServeMux, error) {
 
 	proxyMux := http.NewServeMux()
 
