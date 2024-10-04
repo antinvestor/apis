@@ -2,7 +2,7 @@ module github.com/antinvestor/apis/go/ledger
 
 go 1.23
 
-//replace github.com/antinvestor/apis/go/common => ../common
+replace github.com/antinvestor/apis/go/common => ../common
 
 require (
 	github.com/antinvestor/apis/go/common v1.28.0
