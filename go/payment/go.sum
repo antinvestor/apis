@@ -1,5 +1,7 @@
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.2-20240920164238-5a7b106cbb87.2 h1:hl0FrmGlNpQZIGvU1/jDz0lsPDd0BhCE0QDRwPfLZcA=
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.2-20240920164238-5a7b106cbb87.2/go.mod h1:ylS4c28ACSI59oJrOdW4pHS4n0Hw4TgSPHn8rpHl4Yw=
+buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.35.1-20240920164238-5a7b106cbb87.1 h1:9wP6ZZYWnF2Z0TxmII7m3XNykxnP4/w8oXeth6ekcRI=
+buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.35.1-20240920164238-5a7b106cbb87.1/go.mod h1:Duw/9JoXkXIydyASnLYIiufkzySThoqavOsF+IihqvM=
 github.com/antinvestor/apis/go/common v1.28.2 h1:q8Jd5luVNmeLkDwsAuuBVFmmIHrrGUolTObTLR1w9/0=
 github.com/antinvestor/apis/go/common v1.28.2/go.mod h1:koMLCJsyilq6JGYJs+gOGzSMQqd0reLdt8ZY/NqJ/eI=
 github.com/antinvestor/apis/go/common v1.28.3/go.mod h1:koMLCJsyilq6JGYJs+gOGzSMQqd0reLdt8ZY/NqJ/eI=
