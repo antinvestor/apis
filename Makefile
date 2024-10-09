@@ -31,6 +31,7 @@ endef
 define mock_package
 cd go/${1} && $(GO) mod tidy
 cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -package=${1}${2} -destination=${CUR_DIR}go/${1}/${2}/${1}_grpc_mock.go
+cd go/${1} && $(MOCK_GEN) -package=${1}${2} -destination=${CUR_DIR}go/${1}/${2}/${1}_grpc_stream_mock.go  google.golang.org/grpc ClientStream,ServerStream
 
 endef
 
