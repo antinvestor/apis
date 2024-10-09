@@ -1,7 +1,7 @@
-buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.2-20240920164238-5a7b106cbb87.2 h1:hl0FrmGlNpQZIGvU1/jDz0lsPDd0BhCE0QDRwPfLZcA=
-buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.2-20240920164238-5a7b106cbb87.2/go.mod h1:ylS4c28ACSI59oJrOdW4pHS4n0Hw4TgSPHn8rpHl4Yw=
-github.com/antinvestor/apis/go/common v1.28.5 h1:XHveel2RFJyOAG+XjWgO45gXMj4LrVRb1TteUZCch94=
-github.com/antinvestor/apis/go/common v1.28.5/go.mod h1:koMLCJsyilq6JGYJs+gOGzSMQqd0reLdt8ZY/NqJ/eI=
+buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.35.1-20240920164238-5a7b106cbb87.1 h1:9wP6ZZYWnF2Z0TxmII7m3XNykxnP4/w8oXeth6ekcRI=
+buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.35.1-20240920164238-5a7b106cbb87.1/go.mod h1:Duw/9JoXkXIydyASnLYIiufkzySThoqavOsF+IihqvM=
+github.com/antinvestor/apis/go/common v1.29.0 h1:o+G0MpZ5Cc6IFA4srxgu/2D8IN/YnIm6WptmK0HlgEs=
+github.com/antinvestor/apis/go/common v1.29.0/go.mod h1:H0EdbHPzstMsZ7yhy2BL4YyBARPeSve3eqee2Oo7Q0s=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0 h1:asbCHRVmodnJTuQ3qamDwqVOIjwqUPTYmYuemVOx+Ys=

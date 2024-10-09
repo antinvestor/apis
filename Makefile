@@ -31,7 +31,6 @@ endef
 define mock_package
 cd go/${1} && $(GO) mod tidy
 cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -package=${1}${2} -destination=${CUR_DIR}go/${1}/${2}/${1}_grpc_mock.go
-cd go/${1} && $(MOCK_GEN) -package=${1}${2} -destination=${CUR_DIR}go/${1}/${2}/${1}_grpc_stream_mock.go  google.golang.org/grpc ClientStream,ServerStream
 
 endef
 
@@ -78,6 +77,7 @@ golang_build_all: generate ## Build all packages
 	$(call golang_build,notification)
 	$(call golang_build,ocr)
 	$(call golang_build,partition)
+	$(call golang_build,payment)
 	$(call golang_build,profile)
 	$(call golang_build,property)
 	$(call golang_build,settings)
@@ -91,6 +91,7 @@ golang_lint_all: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and pr
 	$(call golang_lint,notification)
 	$(call golang_lint,ocr)
 	$(call golang_lint,partition)
+	$(call golang_lint,payment)
 	$(call golang_lint,profile)
 	$(call golang_lint,property)
 	$(call golang_lint,settings)
@@ -104,6 +105,7 @@ lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some
 	$(call lint_fix_module,notification)
 	$(call lint_fix_module,ocr)
 	$(call lint_fix_module,partition)
+	$(call lint_fix_module,payment)
 	$(call lint_fix_module,profile)
 	$(call lint_fix_module,property)
 	$(call lint_fix_module,settings)
@@ -144,17 +146,12 @@ generate_grpc_mocks:
 	$(call mock_package,notification,v1)
 	$(call mock_package,ocr,v1)
 	$(call mock_package,partition,v1)
+	$(call mock_package,payment,v1)
 	$(call mock_package,profile,v1)
 	$(call mock_package,property,v1)
 	$(call mock_package,settings,v1)
 	$(call mock_package,ledger,v1)
 	$(call mock_package,lostid,v1)
-
-
-.PHONY: v2_migration
-v2_migration:
-	$(call buf_migrate,common)
-	$(call buf_migrate,payment)
 
 .PHONY: generate_buf_gen
 generate_buf_gen:
