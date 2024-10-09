@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	v1 "github.com/antinvestor/apis/go/common/v1"
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -102,7 +102,7 @@ func (mr *MockPaymentServiceClientMockRecorder) Release(ctx, in any, opts ...any
 }
 
 // Search mocks base method.
-func (m *MockPaymentServiceClient) Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error) {
+func (m *MockPaymentServiceClient) Search(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -142,14 +142,14 @@ func (mr *MockPaymentServiceClientMockRecorder) Send(ctx, in any, opts ...any) *
 }
 
 // Status mocks base method.
-func (m *MockPaymentServiceClient) Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error) {
+func (m *MockPaymentServiceClient) Status(ctx context.Context, in *commonv1.StatusRequest, opts ...grpc.CallOption) (*commonv1.StatusResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Status", varargs...)
-	ret0, _ := ret[0].(*v1.StatusResponse)
+	ret0, _ := ret[0].(*commonv1.StatusResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -162,14 +162,14 @@ func (mr *MockPaymentServiceClientMockRecorder) Status(ctx, in any, opts ...any)
 }
 
 // StatusUpdate mocks base method.
-func (m *MockPaymentServiceClient) StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error) {
+func (m *MockPaymentServiceClient) StatusUpdate(ctx context.Context, in *commonv1.StatusUpdateRequest, opts ...grpc.CallOption) (*commonv1.StatusUpdateResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "StatusUpdate", varargs...)
-	ret0, _ := ret[0].(*v1.StatusUpdateResponse)
+	ret0, _ := ret[0].(*commonv1.StatusUpdateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -250,7 +250,7 @@ func (mr *MockPaymentServiceServerMockRecorder) Release(arg0, arg1 any) *gomock.
 }
 
 // Search mocks base method.
-func (m *MockPaymentServiceServer) Search(arg0 *v1.SearchRequest, arg1 grpc.ServerStreamingServer[SearchResponse]) error {
+func (m *MockPaymentServiceServer) Search(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[SearchResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -279,10 +279,10 @@ func (mr *MockPaymentServiceServerMockRecorder) Send(arg0, arg1 any) *gomock.Cal
 }
 
 // Status mocks base method.
-func (m *MockPaymentServiceServer) Status(arg0 context.Context, arg1 *v1.StatusRequest) (*v1.StatusResponse, error) {
+func (m *MockPaymentServiceServer) Status(arg0 context.Context, arg1 *commonv1.StatusRequest) (*commonv1.StatusResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Status", arg0, arg1)
-	ret0, _ := ret[0].(*v1.StatusResponse)
+	ret0, _ := ret[0].(*commonv1.StatusResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -294,10 +294,10 @@ func (mr *MockPaymentServiceServerMockRecorder) Status(arg0, arg1 any) *gomock.C
 }
 
 // StatusUpdate mocks base method.
-func (m *MockPaymentServiceServer) StatusUpdate(arg0 context.Context, arg1 *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error) {
+func (m *MockPaymentServiceServer) StatusUpdate(arg0 context.Context, arg1 *commonv1.StatusUpdateRequest) (*commonv1.StatusUpdateResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "StatusUpdate", arg0, arg1)
-	ret0, _ := ret[0].(*v1.StatusUpdateResponse)
+	ret0, _ := ret[0].(*commonv1.StatusUpdateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
