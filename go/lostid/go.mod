@@ -8,7 +8,7 @@ require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.35.1-20240920164238-5a7b106cbb87.1
 	github.com/antinvestor/apis/go/common v1.29.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0
-	go.uber.org/mock v0.4.0
+	go.uber.org/mock v0.5.0
 	google.golang.org/genproto v0.0.0-20241015192408-796eee8c2d53
 	google.golang.org/genproto/googleapis/api v0.0.0-20241015192408-796eee8c2d53
 	google.golang.org/grpc v1.67.1
