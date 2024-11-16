@@ -16,9 +16,11 @@ package paymentv1
 
 import (
 	"context"
-	"github.com/antinvestor/apis/go/common"
-	"google.golang.org/grpc"
 	"math"
+
+	"github.com/antinvestor/apis/go/common"
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
+	"google.golang.org/grpc"
 )
 
 var ctxKeyService = common.CtxServiceKey("paymentClientKey")
@@ -71,4 +73,30 @@ func NewPaymentsClient(ctx context.Context, opts ...common.ClientOption) (*Payme
 	}
 
 	return Init(clientBase, NewPaymentServiceClient(clientBase.Connection())), nil
+}
+
+// send method for queueing payments as requested
+func (pc *PaymentClient) Send(ctx context.Context, message *Payment) (*SendResponse, error) {
+	return pc.Client.Send(ctx, &SendRequest{Data: message})
+}
+
+// receive method for polling payments as requested
+func (pc *PaymentClient) Receive(ctx context.Context, message *Payment) (*ReceiveResponse, error) {
+	return pc.Client.Receive(ctx, &ReceiveRequest{Data: message})
+}
+
+// updateStatus method for updating payments as requested
+func (pc *PaymentClient) UpdateStatus(ctx context.Context, paymentId string,
+	state commonv1.STATE, status commonv1.STATUS, externalId string,
+	extras map[string]string) (*commonv1.StatusUpdateResponse, error) {
+
+		messageStatus := commonv1.StatusUpdateRequest{
+			Id:         paymentId,
+			State:      state,
+			Status:     status,
+			ExternalId: externalId,
+			Extras:     extras,
+		}
+	
+		return pc.Client.StatusUpdate(ctx, &messageStatus)
 }
