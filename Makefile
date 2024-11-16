@@ -34,7 +34,6 @@ cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -packag
 
 endef
 
-
 define buf_generate
 cd proto/${1} && PATH=$(BIN) $(BIN)/buf dep update
 cd proto/${1} && PATH=$(BIN) $(BIN)/buf generate
