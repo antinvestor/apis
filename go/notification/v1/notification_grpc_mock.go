@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	commonv1 "github.com/antinvestor/apis/go/common/v1"
+	v1 "github.com/antinvestor/apis/go/common/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -82,7 +82,7 @@ func (mr *MockNotificationServiceClientMockRecorder) Release(ctx, in any, opts .
 }
 
 // Search mocks base method.
-func (m *MockNotificationServiceClient) Search(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error) {
+func (m *MockNotificationServiceClient) Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -122,14 +122,14 @@ func (mr *MockNotificationServiceClientMockRecorder) Send(ctx, in any, opts ...a
 }
 
 // Status mocks base method.
-func (m *MockNotificationServiceClient) Status(ctx context.Context, in *commonv1.StatusRequest, opts ...grpc.CallOption) (*commonv1.StatusResponse, error) {
+func (m *MockNotificationServiceClient) Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Status", varargs...)
-	ret0, _ := ret[0].(*commonv1.StatusResponse)
+	ret0, _ := ret[0].(*v1.StatusResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -142,14 +142,14 @@ func (mr *MockNotificationServiceClientMockRecorder) Status(ctx, in any, opts ..
 }
 
 // StatusUpdate mocks base method.
-func (m *MockNotificationServiceClient) StatusUpdate(ctx context.Context, in *commonv1.StatusUpdateRequest, opts ...grpc.CallOption) (*commonv1.StatusUpdateResponse, error) {
+func (m *MockNotificationServiceClient) StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "StatusUpdate", varargs...)
-	ret0, _ := ret[0].(*commonv1.StatusUpdateResponse)
+	ret0, _ := ret[0].(*v1.StatusUpdateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -255,7 +255,7 @@ func (mr *MockNotificationServiceServerMockRecorder) Release(arg0, arg1 any) *go
 }
 
 // Search mocks base method.
-func (m *MockNotificationServiceServer) Search(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[SearchResponse]) error {
+func (m *MockNotificationServiceServer) Search(arg0 *v1.SearchRequest, arg1 grpc.ServerStreamingServer[SearchResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -284,10 +284,10 @@ func (mr *MockNotificationServiceServerMockRecorder) Send(arg0, arg1 any) *gomoc
 }
 
 // Status mocks base method.
-func (m *MockNotificationServiceServer) Status(arg0 context.Context, arg1 *commonv1.StatusRequest) (*commonv1.StatusResponse, error) {
+func (m *MockNotificationServiceServer) Status(arg0 context.Context, arg1 *v1.StatusRequest) (*v1.StatusResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Status", arg0, arg1)
-	ret0, _ := ret[0].(*commonv1.StatusResponse)
+	ret0, _ := ret[0].(*v1.StatusResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -299,10 +299,10 @@ func (mr *MockNotificationServiceServerMockRecorder) Status(arg0, arg1 any) *gom
 }
 
 // StatusUpdate mocks base method.
-func (m *MockNotificationServiceServer) StatusUpdate(arg0 context.Context, arg1 *commonv1.StatusUpdateRequest) (*commonv1.StatusUpdateResponse, error) {
+func (m *MockNotificationServiceServer) StatusUpdate(arg0 context.Context, arg1 *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "StatusUpdate", arg0, arg1)
-	ret0, _ := ret[0].(*commonv1.StatusUpdateResponse)
+	ret0, _ := ret[0].(*v1.StatusUpdateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

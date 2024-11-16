@@ -90,13 +90,13 @@ func (pc *PaymentClient) UpdateStatus(ctx context.Context, paymentId string,
 	state commonv1.STATE, status commonv1.STATUS, externalId string,
 	extras map[string]string) (*commonv1.StatusUpdateResponse, error) {
 
-		messageStatus := commonv1.StatusUpdateRequest{
-			Id:         paymentId,
-			State:      state,
-			Status:     status,
-			ExternalId: externalId,
-			Extras:     extras,
-		}
-	
-		return pc.Client.StatusUpdate(ctx, &messageStatus)
+	messageStatus := commonv1.StatusUpdateRequest{
+		Id:         paymentId,
+		State:      state,
+		Status:     status,
+		ExternalId: externalId,
+		Extras:     extras,
+	}
+
+	return pc.Client.StatusUpdate(ctx, &messageStatus)
 }
