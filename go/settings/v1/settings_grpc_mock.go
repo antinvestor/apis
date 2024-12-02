@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	v1 "github.com/antinvestor/apis/go/common/v1"
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -22,6 +22,7 @@ import (
 type MockSettingsServiceClient struct {
 	ctrl     *gomock.Controller
 	recorder *MockSettingsServiceClientMockRecorder
+	isgomock struct{}
 }
 
 // MockSettingsServiceClientMockRecorder is the mock recorder for MockSettingsServiceClient.
@@ -82,7 +83,7 @@ func (mr *MockSettingsServiceClientMockRecorder) List(ctx, in any, opts ...any) 
 }
 
 // Search mocks base method.
-func (m *MockSettingsServiceClient) Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error) {
+func (m *MockSettingsServiceClient) Search(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -125,6 +126,7 @@ func (mr *MockSettingsServiceClientMockRecorder) Set(ctx, in any, opts ...any) *
 type MockSettingsServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockSettingsServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockSettingsServiceServerMockRecorder is the mock recorder for MockSettingsServiceServer.
@@ -174,7 +176,7 @@ func (mr *MockSettingsServiceServerMockRecorder) List(arg0, arg1 any) *gomock.Ca
 }
 
 // Search mocks base method.
-func (m *MockSettingsServiceServer) Search(arg0 *v1.SearchRequest, arg1 grpc.ServerStreamingServer[SearchResponse]) error {
+func (m *MockSettingsServiceServer) Search(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[SearchResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -218,6 +220,7 @@ func (mr *MockSettingsServiceServerMockRecorder) mustEmbedUnimplementedSettingsS
 type MockUnsafeSettingsServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockUnsafeSettingsServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockUnsafeSettingsServiceServerMockRecorder is the mock recorder for MockUnsafeSettingsServiceServer.

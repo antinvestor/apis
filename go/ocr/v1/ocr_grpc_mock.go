@@ -22,6 +22,7 @@ import (
 type MockOCRServiceClient struct {
 	ctrl     *gomock.Controller
 	recorder *MockOCRServiceClientMockRecorder
+	isgomock struct{}
 }
 
 // MockOCRServiceClientMockRecorder is the mock recorder for MockOCRServiceClient.
@@ -85,6 +86,7 @@ func (mr *MockOCRServiceClientMockRecorder) Status(ctx, in any, opts ...any) *go
 type MockOCRServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockOCRServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockOCRServiceServerMockRecorder is the mock recorder for MockOCRServiceServer.
@@ -150,6 +152,7 @@ func (mr *MockOCRServiceServerMockRecorder) mustEmbedUnimplementedOCRServiceServ
 type MockUnsafeOCRServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockUnsafeOCRServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockUnsafeOCRServiceServerMockRecorder is the mock recorder for MockUnsafeOCRServiceServer.

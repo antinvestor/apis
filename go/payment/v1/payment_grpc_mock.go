@@ -22,6 +22,7 @@ import (
 type MockPaymentServiceClient struct {
 	ctrl     *gomock.Controller
 	recorder *MockPaymentServiceClientMockRecorder
+	isgomock struct{}
 }
 
 // MockPaymentServiceClientMockRecorder is the mock recorder for MockPaymentServiceClient.
@@ -185,6 +186,7 @@ func (mr *MockPaymentServiceClientMockRecorder) StatusUpdate(ctx, in any, opts .
 type MockPaymentServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockPaymentServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockPaymentServiceServerMockRecorder is the mock recorder for MockPaymentServiceServer.
@@ -324,6 +326,7 @@ func (mr *MockPaymentServiceServerMockRecorder) mustEmbedUnimplementedPaymentSer
 type MockUnsafePaymentServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockUnsafePaymentServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockUnsafePaymentServiceServerMockRecorder is the mock recorder for MockUnsafePaymentServiceServer.

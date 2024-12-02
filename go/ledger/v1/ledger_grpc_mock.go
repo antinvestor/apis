@@ -22,6 +22,7 @@ import (
 type MockLedgerServiceClient struct {
 	ctrl     *gomock.Controller
 	recorder *MockLedgerServiceClientMockRecorder
+	isgomock struct{}
 }
 
 // MockLedgerServiceClientMockRecorder is the mock recorder for MockLedgerServiceClient.
@@ -265,6 +266,7 @@ func (mr *MockLedgerServiceClientMockRecorder) UpdateTransaction(ctx, in any, op
 type MockLedgerServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockLedgerServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockLedgerServiceServerMockRecorder is the mock recorder for MockLedgerServiceServer.
@@ -461,6 +463,7 @@ func (mr *MockLedgerServiceServerMockRecorder) mustEmbedUnimplementedLedgerServi
 type MockUnsafeLedgerServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockUnsafeLedgerServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockUnsafeLedgerServiceServerMockRecorder is the mock recorder for MockUnsafeLedgerServiceServer.

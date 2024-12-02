@@ -21,6 +21,7 @@ import (
 type MockPartitionServiceClient struct {
 	ctrl     *gomock.Controller
 	recorder *MockPartitionServiceClientMockRecorder
+	isgomock struct{}
 }
 
 // MockPartitionServiceClientMockRecorder is the mock recorder for MockPartitionServiceClient.
@@ -424,6 +425,7 @@ func (mr *MockPartitionServiceClientMockRecorder) UpdatePartition(ctx, in any, o
 type MockPartitionServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockPartitionServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockPartitionServiceServerMockRecorder is the mock recorder for MockPartitionServiceServer.
@@ -740,6 +742,7 @@ func (mr *MockPartitionServiceServerMockRecorder) mustEmbedUnimplementedPartitio
 type MockUnsafePartitionServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockUnsafePartitionServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockUnsafePartitionServiceServerMockRecorder is the mock recorder for MockUnsafePartitionServiceServer.

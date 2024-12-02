@@ -21,6 +21,7 @@ import (
 type MockProfileServiceClient struct {
 	ctrl     *gomock.Controller
 	recorder *MockProfileServiceClientMockRecorder
+	isgomock struct{}
 }
 
 // MockProfileServiceClientMockRecorder is the mock recorder for MockProfileServiceClient.
@@ -264,6 +265,7 @@ func (mr *MockProfileServiceClientMockRecorder) Update(ctx, in any, opts ...any)
 type MockProfileServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockProfileServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockProfileServiceServerMockRecorder is the mock recorder for MockProfileServiceServer.
@@ -462,6 +464,7 @@ func (mr *MockProfileServiceServerMockRecorder) mustEmbedUnimplementedProfileSer
 type MockUnsafeProfileServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockUnsafeProfileServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockUnsafeProfileServiceServerMockRecorder is the mock recorder for MockUnsafeProfileServiceServer.

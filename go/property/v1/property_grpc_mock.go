@@ -21,6 +21,7 @@ import (
 type MockPropertyServiceClient struct {
 	ctrl     *gomock.Controller
 	recorder *MockPropertyServiceClientMockRecorder
+	isgomock struct{}
 }
 
 // MockPropertyServiceClientMockRecorder is the mock recorder for MockPropertyServiceClient.
@@ -304,6 +305,7 @@ func (mr *MockPropertyServiceClientMockRecorder) UpdateProperty(ctx, in any, opt
 type MockPropertyServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockPropertyServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockPropertyServiceServerMockRecorder is the mock recorder for MockPropertyServiceServer.
@@ -530,6 +532,7 @@ func (mr *MockPropertyServiceServerMockRecorder) mustEmbedUnimplementedPropertyS
 type MockUnsafePropertyServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockUnsafePropertyServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockUnsafePropertyServiceServerMockRecorder is the mock recorder for MockUnsafePropertyServiceServer.

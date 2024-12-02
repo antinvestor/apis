@@ -24,6 +24,7 @@ package lostidv1
 
 import (
 	"context"
+	"errors"
 	"io"
 	"net/http"
 
@@ -39,54 +40,53 @@ import (
 )
 
 // Suppress "imported and not used" errors
-var _ codes.Code
-var _ io.Reader
-var _ status.Status
-var _ = runtime.String
-var _ = utilities.NewDoubleArray
-var _ = metadata.Join
+var (
+	_ codes.Code
+	_ io.Reader
+	_ status.Status
+	_ = errors.New
+	_ = runtime.String
+	_ = utilities.NewDoubleArray
+	_ = metadata.Join
+)
 
 func request_LostIdService_Collectible_0(ctx context.Context, marshaler runtime.Marshaler, client LostIdServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CollectibleRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq CollectibleRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.Collectible(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_LostIdService_Collectible_0(ctx context.Context, marshaler runtime.Marshaler, server LostIdServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CollectibleRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq CollectibleRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.Collectible(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_LostIdService_ListCollectible_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_LostIdService_ListCollectible_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_LostIdService_ListCollectible_0(ctx context.Context, marshaler runtime.Marshaler, client LostIdServiceClient, req *http.Request, pathParams map[string]string) (LostIdService_ListCollectibleClient, runtime.ServerMetadata, error) {
-	var protoReq ListCollectibleRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq ListCollectibleRequest
+		metadata runtime.ServerMetadata
+	)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LostIdService_ListCollectible_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	stream, err := client.ListCollectible(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -97,60 +97,53 @@ func request_LostIdService_ListCollectible_0(ctx context.Context, marshaler runt
 	}
 	metadata.HeaderMD = header
 	return stream, metadata, nil
-
 }
 
-var (
-	filter_LostIdService_Search_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_LostIdService_Search_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_LostIdService_Search_0(ctx context.Context, marshaler runtime.Marshaler, client LostIdServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq commonv1.SearchRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq commonv1.SearchRequest
+		metadata runtime.ServerMetadata
+	)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LostIdService_Search_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.Search(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_LostIdService_Search_0(ctx context.Context, marshaler runtime.Marshaler, server LostIdServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq commonv1.SearchRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq commonv1.SearchRequest
+		metadata runtime.ServerMetadata
+	)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LostIdService_Search_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.Search(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_LostIdService_ListSearch_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_LostIdService_ListSearch_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_LostIdService_ListSearch_0(ctx context.Context, marshaler runtime.Marshaler, client LostIdServiceClient, req *http.Request, pathParams map[string]string) (LostIdService_ListSearchClient, runtime.ServerMetadata, error) {
-	var protoReq ListSearchRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq ListSearchRequest
+		metadata runtime.ServerMetadata
+	)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LostIdService_ListSearch_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	stream, err := client.ListSearch(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -161,60 +154,53 @@ func request_LostIdService_ListSearch_0(ctx context.Context, marshaler runtime.M
 	}
 	metadata.HeaderMD = header
 	return stream, metadata, nil
-
 }
 
-var (
-	filter_LostIdService_Progress_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_LostIdService_Progress_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_LostIdService_Progress_0(ctx context.Context, marshaler runtime.Marshaler, client LostIdServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ProgressRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq ProgressRequest
+		metadata runtime.ServerMetadata
+	)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LostIdService_Progress_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.Progress(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_LostIdService_Progress_0(ctx context.Context, marshaler runtime.Marshaler, server LostIdServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ProgressRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq ProgressRequest
+		metadata runtime.ServerMetadata
+	)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LostIdService_Progress_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.Progress(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_LostIdService_ListTransaction_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_LostIdService_ListTransaction_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_LostIdService_ListTransaction_0(ctx context.Context, marshaler runtime.Marshaler, client LostIdServiceClient, req *http.Request, pathParams map[string]string) (LostIdService_ListTransactionClient, runtime.ServerMetadata, error) {
-	var protoReq ListTransactionRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq ListTransactionRequest
+		metadata runtime.ServerMetadata
+	)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_LostIdService_ListTransaction_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	stream, err := client.ListTransaction(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -225,7 +211,6 @@ func request_LostIdService_ListTransaction_0(ctx context.Context, marshaler runt
 	}
 	metadata.HeaderMD = header
 	return stream, metadata, nil
-
 }
 
 // RegisterLostIdServiceHandlerServer registers the http handlers for service LostIdService to "mux".
@@ -234,16 +219,13 @@ func request_LostIdService_ListTransaction_0(ctx context.Context, marshaler runt
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterLostIdServiceHandlerFromEndpoint instead.
 // GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterLostIdServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server LostIdServiceServer) error {
-
-	mux.Handle("POST", pattern_LostIdService_Collectible_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_LostIdService_Collectible_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lostid.v1.LostIdService/Collectible", runtime.WithHTTPPathPattern("/collectible"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/lostid.v1.LostIdService/Collectible", runtime.WithHTTPPathPattern("/collectible"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -255,27 +237,22 @@ func RegisterLostIdServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_LostIdService_Collectible_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
-	mux.Handle("GET", pattern_LostIdService_ListCollectible_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_LostIdService_ListCollectible_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
-
-	mux.Handle("GET", pattern_LostIdService_Search_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_LostIdService_Search_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lostid.v1.LostIdService/Search", runtime.WithHTTPPathPattern("/search"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/lostid.v1.LostIdService/Search", runtime.WithHTTPPathPattern("/search"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -287,27 +264,22 @@ func RegisterLostIdServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_LostIdService_Search_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
-	mux.Handle("GET", pattern_LostIdService_ListSearch_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_LostIdService_ListSearch_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
-
-	mux.Handle("GET", pattern_LostIdService_Progress_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_LostIdService_Progress_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lostid.v1.LostIdService/Progress", runtime.WithHTTPPathPattern("/progress"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/lostid.v1.LostIdService/Progress", runtime.WithHTTPPathPattern("/progress"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -319,12 +291,10 @@ func RegisterLostIdServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_LostIdService_Progress_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
-	mux.Handle("GET", pattern_LostIdService_ListTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_LostIdService_ListTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -355,7 +325,6 @@ func RegisterLostIdServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.
 			}
 		}()
 	}()
-
 	return RegisterLostIdServiceHandler(ctx, mux, conn)
 }
 
@@ -371,14 +340,11 @@ func RegisterLostIdServiceHandler(ctx context.Context, mux *runtime.ServeMux, co
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
 // "LostIdServiceClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterLostIdServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client LostIdServiceClient) error {
-
-	mux.Handle("POST", pattern_LostIdService_Collectible_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_LostIdService_Collectible_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lostid.v1.LostIdService/Collectible", runtime.WithHTTPPathPattern("/collectible"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/lostid.v1.LostIdService/Collectible", runtime.WithHTTPPathPattern("/collectible"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -389,18 +355,13 @@ func RegisterLostIdServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_LostIdService_Collectible_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_LostIdService_ListCollectible_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_LostIdService_ListCollectible_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lostid.v1.LostIdService/ListCollectible", runtime.WithHTTPPathPattern("/collectible"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/lostid.v1.LostIdService/ListCollectible", runtime.WithHTTPPathPattern("/collectible"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -411,18 +372,13 @@ func RegisterLostIdServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_LostIdService_ListCollectible_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_LostIdService_Search_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_LostIdService_Search_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lostid.v1.LostIdService/Search", runtime.WithHTTPPathPattern("/search"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/lostid.v1.LostIdService/Search", runtime.WithHTTPPathPattern("/search"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -433,18 +389,13 @@ func RegisterLostIdServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_LostIdService_Search_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_LostIdService_ListSearch_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_LostIdService_ListSearch_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lostid.v1.LostIdService/ListSearch", runtime.WithHTTPPathPattern("/searches"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/lostid.v1.LostIdService/ListSearch", runtime.WithHTTPPathPattern("/searches"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -455,18 +406,13 @@ func RegisterLostIdServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_LostIdService_ListSearch_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_LostIdService_Progress_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_LostIdService_Progress_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lostid.v1.LostIdService/Progress", runtime.WithHTTPPathPattern("/progress"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/lostid.v1.LostIdService/Progress", runtime.WithHTTPPathPattern("/progress"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -477,18 +423,13 @@ func RegisterLostIdServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_LostIdService_Progress_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_LostIdService_ListTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_LostIdService_ListTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lostid.v1.LostIdService/ListTransaction", runtime.WithHTTPPathPattern("/transaction"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/lostid.v1.LostIdService/ListTransaction", runtime.WithHTTPPathPattern("/transaction"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -499,38 +440,25 @@ func RegisterLostIdServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_LostIdService_ListTransaction_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
-
 	})
-
 	return nil
 }
 
 var (
-	pattern_LostIdService_Collectible_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"collectible"}, ""))
-
+	pattern_LostIdService_Collectible_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"collectible"}, ""))
 	pattern_LostIdService_ListCollectible_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"collectible"}, ""))
-
-	pattern_LostIdService_Search_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"search"}, ""))
-
-	pattern_LostIdService_ListSearch_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"searches"}, ""))
-
-	pattern_LostIdService_Progress_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"progress"}, ""))
-
+	pattern_LostIdService_Search_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"search"}, ""))
+	pattern_LostIdService_ListSearch_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"searches"}, ""))
+	pattern_LostIdService_Progress_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"progress"}, ""))
 	pattern_LostIdService_ListTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"transaction"}, ""))
 )
 
 var (
-	forward_LostIdService_Collectible_0 = runtime.ForwardResponseMessage
-
+	forward_LostIdService_Collectible_0     = runtime.ForwardResponseMessage
 	forward_LostIdService_ListCollectible_0 = runtime.ForwardResponseStream
-
-	forward_LostIdService_Search_0 = runtime.ForwardResponseMessage
-
-	forward_LostIdService_ListSearch_0 = runtime.ForwardResponseStream
-
-	forward_LostIdService_Progress_0 = runtime.ForwardResponseMessage
-
+	forward_LostIdService_Search_0          = runtime.ForwardResponseMessage
+	forward_LostIdService_ListSearch_0      = runtime.ForwardResponseStream
+	forward_LostIdService_Progress_0        = runtime.ForwardResponseMessage
 	forward_LostIdService_ListTransaction_0 = runtime.ForwardResponseStream
 )

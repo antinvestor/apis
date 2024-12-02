@@ -187,7 +187,7 @@ checkgenerate:
 
 $(BIN)/buf: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/bufbuild/buf/cmd/buf@v1.45.0
+	$(GO) install github.com/bufbuild/buf/cmd/buf@v1.47.2
 
 $(BIN)/license-header: Makefile
 	@mkdir -p $(@D)
@@ -199,4 +199,4 @@ $(BIN)/golangci-lint: Makefile
 
 $(BIN)/gomock: Makefile
 	@mkdir -p $(@D)
-	$(GO) install go.uber.org/mock/mockgen@v0.4.0
+	$(GO) install go.uber.org/mock/mockgen@v0.5.0

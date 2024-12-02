@@ -22,6 +22,7 @@ import (
 type MockLostIdServiceClient struct {
 	ctrl     *gomock.Controller
 	recorder *MockLostIdServiceClientMockRecorder
+	isgomock struct{}
 }
 
 // MockLostIdServiceClientMockRecorder is the mock recorder for MockLostIdServiceClient.
@@ -165,6 +166,7 @@ func (mr *MockLostIdServiceClientMockRecorder) Search(ctx, in any, opts ...any) 
 type MockLostIdServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockLostIdServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockLostIdServiceServerMockRecorder is the mock recorder for MockLostIdServiceServer.
@@ -287,6 +289,7 @@ func (mr *MockLostIdServiceServerMockRecorder) mustEmbedUnimplementedLostIdServi
 type MockUnsafeLostIdServiceServer struct {
 	ctrl     *gomock.Controller
 	recorder *MockUnsafeLostIdServiceServerMockRecorder
+	isgomock struct{}
 }
 
 // MockUnsafeLostIdServiceServerMockRecorder is the mock recorder for MockUnsafeLostIdServiceServer.

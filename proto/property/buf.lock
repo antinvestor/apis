@@ -2,11 +2,11 @@
 version: v2
 deps:
   - name: buf.build/antinvestor/common
-    commit: ebb216cad3974484b86c37f7ba6787be
-    digest: b5:68589af41582f7e7ce14a07fc7499ed689eb39d4dff6f6f755ddef8da9c851e6b5a01195dec61195cf54d2e68c7d87de68ac68cd67fff86a9f9c2091548d703e
+    commit: b9fe6681e17b4d448513b143560eda61
+    digest: b5:d5172a7899949be7e893d69b7abd46e3c20a4d8a95e65e813580e897b1de9bef9532130a3df7f053b6ab614b521be3ccbc56448e988f0b4a27d16bbfcaa875fb
   - name: buf.build/bufbuild/protovalidate
-    commit: 5a7b106cbb87462d9a8c9ffecdbd2e38
-    digest: b5:0f2dc6c9453e9cc9e9f36807aaa5f94022e837d91fef4dcaeed79a35c0843cc64eba28ff077aab24da3b2cb12639ad256246f9f9a36c033b99d5754b19996b7e
+    commit: a3320276596649bcad929ac829d451f4
+    digest: b5:285a6d3a423b195a21f45aacc97ee222ac09cfb01a42f0d546aa51d92177b0b9d00eb9ae93e72dabbbefdc77f35a4c7a11f15d913cc08da764fcb6071f85d148
   - name: buf.build/googleapis/googleapis
     commit: c0913f24652a4cfc95f77d97443a5005
     digest: b5:4edb1480036c60f7867d75417d7faa87c851c96a4988a9746058a24e8e9bb4978daed0af35d57f6043de5a60355978dceaaa93dc992be99193260ac8823cbb8f
