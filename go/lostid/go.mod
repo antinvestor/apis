@@ -11,7 +11,7 @@ require (
 	go.uber.org/mock v0.5.0
 	google.golang.org/genproto v0.0.0-20241202173237-19429a94021a
 	google.golang.org/genproto/googleapis/api v0.0.0-20241202173237-19429a94021a
-	google.golang.org/grpc v1.68.0
+	google.golang.org/grpc v1.68.1
 	google.golang.org/protobuf v1.35.2
 )
 
