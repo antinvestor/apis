@@ -7,7 +7,7 @@ go 1.23
 require (
 	github.com/antinvestor/apis/go/common v1.29.20
 	github.com/stretchr/testify v1.10.0
-	google.golang.org/grpc v1.69.0
+	google.golang.org/grpc v1.69.2
 )
 
 require (
