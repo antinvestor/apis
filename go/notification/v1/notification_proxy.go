@@ -27,7 +27,7 @@ var apiSpecFs embed.FS
 
 func CreateProxyHandler(ctx context.Context, proxyOptions common.ProxyOptions) (*http.ServeMux, error) {
 
-	proxyMux := http.NewServeMux()
+	proxyMux := proxyOptions.Mux()
 
 	implementationMux := runtime.NewServeMux()
 	err := RegisterNotificationServiceHandlerFromEndpoint(ctx, implementationMux, proxyOptions.GrpcServerEndpoint, proxyOptions.GrpcServerDialOpts)
@@ -35,7 +35,7 @@ func CreateProxyHandler(ctx context.Context, proxyOptions common.ProxyOptions) (
 		return nil, err
 	}
 
-	proxyMux.Handle("/", implementationMux)
+	proxyMux.Handle(proxyOptions.CleanApiPath(), implementationMux)
 
 	err = proxyOptions.ServeApiSpec(proxyMux, apiSpecFs, "notification.swagger.json")
 	if err != nil {

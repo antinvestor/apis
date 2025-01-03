@@ -27,7 +27,7 @@ var apiSpecFs embed.FS
 
 func CreateProxyHandler(ctx context.Context, proxyOptions common.ProxyOptions) (*http.ServeMux, error) {
 
-	proxyMux := http.NewServeMux()
+	proxyMux := proxyOptions.Mux()
 
 	implementationMux := runtime.NewServeMux()
 	err := RegisterPaymentServiceHandlerFromEndpoint(ctx, implementationMux, proxyOptions.GrpcServerEndpoint, proxyOptions.GrpcServerDialOpts)
@@ -35,12 +35,12 @@ func CreateProxyHandler(ctx context.Context, proxyOptions common.ProxyOptions) (
 		return nil, err
 	}
 
-	proxyMux.Handle("/", implementationMux)
-
 	err = proxyOptions.ServeApiSpec(proxyMux, apiSpecFs, "payment.swagger.json")
 	if err != nil {
 		return nil, err
 	}
+
+	proxyMux.Handle(proxyOptions.CleanApiPath(), implementationMux)
 
 	return proxyMux, nil
 }
