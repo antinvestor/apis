@@ -24,18 +24,34 @@ type ProxyOptions struct {
 	GrpcServerEndpoint string
 	GrpcServerDialOpts []grpc.DialOption
 	OpenAPIPath        string
+	ProxyAPIPath       string
+	ServerMux          *http.ServeMux
 }
 
-func (p *ProxyOptions) CleanPath() string {
+func (p *ProxyOptions) Mux() *http.ServeMux {
+	if p.ServerMux == nil {
+		p.ServerMux = http.NewServeMux()
+	}
+	return p.ServerMux
+}
+
+func (p *ProxyOptions) CleanSwaggerPath() string {
 	if p.OpenAPIPath == "" {
-		return "/swagger.json"
+		p.OpenAPIPath = "/swagger.json"
 	}
 	return p.OpenAPIPath
 }
 
+func (p *ProxyOptions) CleanApiPath() string {
+	if p.ProxyAPIPath == "" {
+		p.ProxyAPIPath = "/"
+	}
+	return p.ProxyAPIPath
+}
+
 func (p *ProxyOptions) ServeApiSpec(proxyMux *http.ServeMux, apiSpec embed.FS, specFileName string) error {
 
-	path := p.CleanPath()
+	path := p.CleanSwaggerPath()
 
 	proxyMux.HandleFunc(path, func(w http.ResponseWriter, r *http.Request) {
 		// Read the embedded file content
