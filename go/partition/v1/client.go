@@ -462,7 +462,7 @@ func (partCl *PartitionClient) RemoveAccessRole(ctx context.Context, accessRoleI
 	return partCl.Client.RemoveAccessRole(ctx, &request)
 }
 
-func (partCl *PartitionClient) ListAccess(ctx context.Context, accessId string) (<-chan *AccessRoleObject, error) {
+func (partCl *PartitionClient) ListAccessRole(ctx context.Context, accessId string) (<-chan *AccessRoleObject, error) {
 
 	request := ListAccessRoleRequest{
 		AccessId: accessId,
