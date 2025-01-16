@@ -61,14 +61,14 @@ subprojects {
     }
 
     dependencies {
-        api("com.google.protobuf:protobuf-java:4.29.2")
+        api("com.google.protobuf:protobuf-java:4.29.3")
         api("io.grpc:grpc-protobuf:1.69.0")
         api("io.grpc:grpc-services:1.69.0")
         api("io.grpc:grpc-stub:1.69.0")
         api("build.buf:protovalidate:0.5.0")
 
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0")
-        api("com.googlecode.libphonenumber:libphonenumber:8.13.52")
+        api("com.googlecode.libphonenumber:libphonenumber:8.13.53")
 
         api("org.slf4j:slf4j-api:2.0.16")
 
