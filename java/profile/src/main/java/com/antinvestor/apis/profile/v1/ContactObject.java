@@ -53,6 +53,18 @@ private static final long serialVersionUID = 0L;
     return com.antinvestor.apis.profile.v1.ProfileProto.internal_static_profile_v1_ContactObject_descriptor;
   }
 
+  @SuppressWarnings({"rawtypes"})
+  @java.lang.Override
+  protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+      int number) {
+    switch (number) {
+      case 7:
+        return internalGetExtra();
+      default:
+        throw new RuntimeException(
+            "Invalid map field number: " + number);
+    }
+  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
@@ -204,6 +216,85 @@ private static final long serialVersionUID = 0L;
     return result == null ? com.antinvestor.apis.common.v1.STATE.UNRECOGNIZED : result;
   }
 
+  public static final int EXTRA_FIELD_NUMBER = 7;
+  private static final class ExtraDefaultEntryHolder {
+    static final com.google.protobuf.MapEntry<
+        java.lang.String, java.lang.String> defaultEntry =
+            com.google.protobuf.MapEntry
+            .<java.lang.String, java.lang.String>newDefaultInstance(
+                com.antinvestor.apis.profile.v1.ProfileProto.internal_static_profile_v1_ContactObject_ExtraEntry_descriptor, 
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "",
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "");
+  }
+  @SuppressWarnings("serial")
+  private com.google.protobuf.MapField<
+      java.lang.String, java.lang.String> extra_;
+  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+  internalGetExtra() {
+    if (extra_ == null) {
+      return com.google.protobuf.MapField.emptyMapField(
+          ExtraDefaultEntryHolder.defaultEntry);
+    }
+    return extra_;
+  }
+  public int getExtraCount() {
+    return internalGetExtra().getMap().size();
+  }
+  /**
+   * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+   */
+  @java.lang.Override
+  public boolean containsExtra(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    return internalGetExtra().getMap().containsKey(key);
+  }
+  /**
+   * Use {@link #getExtraMap()} instead.
+   */
+  @java.lang.Override
+  @java.lang.Deprecated
+  public java.util.Map<java.lang.String, java.lang.String> getExtra() {
+    return getExtraMap();
+  }
+  /**
+   * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+   */
+  @java.lang.Override
+  public java.util.Map<java.lang.String, java.lang.String> getExtraMap() {
+    return internalGetExtra().getMap();
+  }
+  /**
+   * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+   */
+  @java.lang.Override
+  public /* nullable */
+java.lang.String getExtraOrDefault(
+      java.lang.String key,
+      /* nullable */
+java.lang.String defaultValue) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, java.lang.String> map =
+        internalGetExtra().getMap();
+    return map.containsKey(key) ? map.get(key) : defaultValue;
+  }
+  /**
+   * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+   */
+  @java.lang.Override
+  public java.lang.String getExtraOrThrow(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, java.lang.String> map =
+        internalGetExtra().getMap();
+    if (!map.containsKey(key)) {
+      throw new java.lang.IllegalArgumentException();
+    }
+    return map.get(key);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -236,6 +327,12 @@ private static final long serialVersionUID = 0L;
     if (state_ != com.antinvestor.apis.common.v1.STATE.CREATED.getNumber()) {
       output.writeEnum(6, state_);
     }
+    com.google.protobuf.GeneratedMessage
+      .serializeStringMapTo(
+        output,
+        internalGetExtra(),
+        ExtraDefaultEntryHolder.defaultEntry,
+        7);
     getUnknownFields().writeTo(output);
   }
 
@@ -267,6 +364,16 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(6, state_);
     }
+    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
+         : internalGetExtra().getMap().entrySet()) {
+      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+      extra__ = ExtraDefaultEntryHolder.defaultEntry.newBuilderForType()
+          .setKey(entry.getKey())
+          .setValue(entry.getValue())
+          .build();
+      size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, extra__);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -291,6 +398,8 @@ private static final long serialVersionUID = 0L;
         != other.getVerified()) return false;
     if (communicationLevel_ != other.communicationLevel_) return false;
     if (state_ != other.state_) return false;
+    if (!internalGetExtra().equals(
+        other.internalGetExtra())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -315,6 +424,10 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + communicationLevel_;
     hash = (37 * hash) + STATE_FIELD_NUMBER;
     hash = (53 * hash) + state_;
+    if (!internalGetExtra().getMap().isEmpty()) {
+      hash = (37 * hash) + EXTRA_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetExtra().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -424,6 +537,28 @@ private static final long serialVersionUID = 0L;
       return com.antinvestor.apis.profile.v1.ProfileProto.internal_static_profile_v1_ContactObject_descriptor;
     }
 
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+        int number) {
+      switch (number) {
+        case 7:
+          return internalGetExtra();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
+        int number) {
+      switch (number) {
+        case 7:
+          return internalGetMutableExtra();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -452,6 +587,7 @@ private static final long serialVersionUID = 0L;
       verified_ = false;
       communicationLevel_ = 0;
       state_ = 0;
+      internalGetMutableExtra().clear();
       return this;
     }
 
@@ -503,6 +639,10 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000020) != 0)) {
         result.state_ = state_;
       }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        result.extra_ = internalGetExtra();
+        result.extra_.makeImmutable();
+      }
     }
 
     @java.lang.Override
@@ -539,6 +679,9 @@ private static final long serialVersionUID = 0L;
       if (other.state_ != 0) {
         setStateValue(other.getStateValue());
       }
+      internalGetMutableExtra().mergeFrom(
+          other.internalGetExtra());
+      bitField0_ |= 0x00000040;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -595,6 +738,15 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000020;
               break;
             } // case 48
+            case 58: {
+              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+              extra__ = input.readMessage(
+                  ExtraDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              internalGetMutableExtra().getMutableMap().put(
+                  extra__.getKey(), extra__.getValue());
+              bitField0_ |= 0x00000040;
+              break;
+            } // case 58
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -944,6 +1096,133 @@ private static final long serialVersionUID = 0L;
       bitField0_ = (bitField0_ & ~0x00000020);
       state_ = 0;
       onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.String> extra_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+        internalGetExtra() {
+      if (extra_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            ExtraDefaultEntryHolder.defaultEntry);
+      }
+      return extra_;
+    }
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+        internalGetMutableExtra() {
+      if (extra_ == null) {
+        extra_ = com.google.protobuf.MapField.newMapField(
+            ExtraDefaultEntryHolder.defaultEntry);
+      }
+      if (!extra_.isMutable()) {
+        extra_ = extra_.copy();
+      }
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return extra_;
+    }
+    public int getExtraCount() {
+      return internalGetExtra().getMap().size();
+    }
+    /**
+     * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+     */
+    @java.lang.Override
+    public boolean containsExtra(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      return internalGetExtra().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getExtraMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String> getExtra() {
+      return getExtraMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+     */
+    @java.lang.Override
+    public java.util.Map<java.lang.String, java.lang.String> getExtraMap() {
+      return internalGetExtra().getMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+     */
+    @java.lang.Override
+    public /* nullable */
+java.lang.String getExtraOrDefault(
+        java.lang.String key,
+        /* nullable */
+java.lang.String defaultValue) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetExtra().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+     */
+    @java.lang.Override
+    public java.lang.String getExtraOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetExtra().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+    public Builder clearExtra() {
+      bitField0_ = (bitField0_ & ~0x00000040);
+      internalGetMutableExtra().getMutableMap()
+          .clear();
+      return this;
+    }
+    /**
+     * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+     */
+    public Builder removeExtra(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      internalGetMutableExtra().getMutableMap()
+          .remove(key);
+      return this;
+    }
+    /**
+     * Use alternate mutation accessors instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String>
+        getMutableExtra() {
+      bitField0_ |= 0x00000040;
+      return internalGetMutableExtra().getMutableMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+     */
+    public Builder putExtra(
+        java.lang.String key,
+        java.lang.String value) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      if (value == null) { throw new NullPointerException("map value"); }
+      internalGetMutableExtra().getMutableMap()
+          .put(key, value);
+      bitField0_ |= 0x00000040;
+      return this;
+    }
+    /**
+     * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+     */
+    public Builder putAllExtra(
+        java.util.Map<java.lang.String, java.lang.String> values) {
+      internalGetMutableExtra().getMutableMap()
+          .putAll(values);
+      bitField0_ |= 0x00000040;
       return this;
     }
 

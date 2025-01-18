@@ -22,7 +22,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.69.0)",
+    value = "by gRPC proto compiler (version 1.69.1)",
     comments = "Source: profile/v1/profile.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class ProfileServiceGrpc {
@@ -247,6 +247,130 @@ public final class ProfileServiceGrpc {
       }
     }
     return getAddContactMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.RemoveContactRequest,
+      com.antinvestor.apis.profile.v1.RemoveContactResponse> getRemoveContactMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "RemoveContact",
+      requestType = com.antinvestor.apis.profile.v1.RemoveContactRequest.class,
+      responseType = com.antinvestor.apis.profile.v1.RemoveContactResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.RemoveContactRequest,
+      com.antinvestor.apis.profile.v1.RemoveContactResponse> getRemoveContactMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.RemoveContactRequest, com.antinvestor.apis.profile.v1.RemoveContactResponse> getRemoveContactMethod;
+    if ((getRemoveContactMethod = ProfileServiceGrpc.getRemoveContactMethod) == null) {
+      synchronized (ProfileServiceGrpc.class) {
+        if ((getRemoveContactMethod = ProfileServiceGrpc.getRemoveContactMethod) == null) {
+          ProfileServiceGrpc.getRemoveContactMethod = getRemoveContactMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.profile.v1.RemoveContactRequest, com.antinvestor.apis.profile.v1.RemoveContactResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "RemoveContact"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.profile.v1.RemoveContactRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.profile.v1.RemoveContactResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ProfileServiceMethodDescriptorSupplier("RemoveContact"))
+              .build();
+        }
+      }
+    }
+    return getRemoveContactMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.SearchRosterRequest,
+      com.antinvestor.apis.profile.v1.SearchRosterResponse> getSearchRosterMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "SearchRoster",
+      requestType = com.antinvestor.apis.profile.v1.SearchRosterRequest.class,
+      responseType = com.antinvestor.apis.profile.v1.SearchRosterResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.SearchRosterRequest,
+      com.antinvestor.apis.profile.v1.SearchRosterResponse> getSearchRosterMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.SearchRosterRequest, com.antinvestor.apis.profile.v1.SearchRosterResponse> getSearchRosterMethod;
+    if ((getSearchRosterMethod = ProfileServiceGrpc.getSearchRosterMethod) == null) {
+      synchronized (ProfileServiceGrpc.class) {
+        if ((getSearchRosterMethod = ProfileServiceGrpc.getSearchRosterMethod) == null) {
+          ProfileServiceGrpc.getSearchRosterMethod = getSearchRosterMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.profile.v1.SearchRosterRequest, com.antinvestor.apis.profile.v1.SearchRosterResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SearchRoster"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.profile.v1.SearchRosterRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.profile.v1.SearchRosterResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ProfileServiceMethodDescriptorSupplier("SearchRoster"))
+              .build();
+        }
+      }
+    }
+    return getSearchRosterMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.AddRosterRequest,
+      com.antinvestor.apis.profile.v1.AddRosterResponse> getAddRosterMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "AddRoster",
+      requestType = com.antinvestor.apis.profile.v1.AddRosterRequest.class,
+      responseType = com.antinvestor.apis.profile.v1.AddRosterResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.AddRosterRequest,
+      com.antinvestor.apis.profile.v1.AddRosterResponse> getAddRosterMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.AddRosterRequest, com.antinvestor.apis.profile.v1.AddRosterResponse> getAddRosterMethod;
+    if ((getAddRosterMethod = ProfileServiceGrpc.getAddRosterMethod) == null) {
+      synchronized (ProfileServiceGrpc.class) {
+        if ((getAddRosterMethod = ProfileServiceGrpc.getAddRosterMethod) == null) {
+          ProfileServiceGrpc.getAddRosterMethod = getAddRosterMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.profile.v1.AddRosterRequest, com.antinvestor.apis.profile.v1.AddRosterResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "AddRoster"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.profile.v1.AddRosterRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.profile.v1.AddRosterResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ProfileServiceMethodDescriptorSupplier("AddRoster"))
+              .build();
+        }
+      }
+    }
+    return getAddRosterMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.RemoveRosterRequest,
+      com.antinvestor.apis.profile.v1.RemoveRosterResponse> getRemoveRosterMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "RemoveRoster",
+      requestType = com.antinvestor.apis.profile.v1.RemoveRosterRequest.class,
+      responseType = com.antinvestor.apis.profile.v1.RemoveRosterResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.RemoveRosterRequest,
+      com.antinvestor.apis.profile.v1.RemoveRosterResponse> getRemoveRosterMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.RemoveRosterRequest, com.antinvestor.apis.profile.v1.RemoveRosterResponse> getRemoveRosterMethod;
+    if ((getRemoveRosterMethod = ProfileServiceGrpc.getRemoveRosterMethod) == null) {
+      synchronized (ProfileServiceGrpc.class) {
+        if ((getRemoveRosterMethod = ProfileServiceGrpc.getRemoveRosterMethod) == null) {
+          ProfileServiceGrpc.getRemoveRosterMethod = getRemoveRosterMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.profile.v1.RemoveRosterRequest, com.antinvestor.apis.profile.v1.RemoveRosterResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "RemoveRoster"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.profile.v1.RemoveRosterRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.profile.v1.RemoveRosterResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ProfileServiceMethodDescriptorSupplier("RemoveRoster"))
+              .build();
+        }
+      }
+    }
+    return getRemoveRosterMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.AddAddressRequest,
@@ -496,6 +620,46 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
+     * Removes an old contact based on this request's id
+     * </pre>
+     */
+    default void removeContact(com.antinvestor.apis.profile.v1.RemoveContactRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.RemoveContactResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRemoveContactMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Searches all contacts tied to a users profile and based on the active request.
+     * </pre>
+     */
+    default void searchRoster(com.antinvestor.apis.profile.v1.SearchRosterRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.SearchRosterResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSearchRosterMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Adds a new contact based on the request/this leads to automatic verification.
+     * </pre>
+     */
+    default void addRoster(com.antinvestor.apis.profile.v1.AddRosterRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.AddRosterResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddRosterMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Removes a contact from a user's circle based on this request's id
+     * </pre>
+     */
+    default void removeRoster(com.antinvestor.apis.profile.v1.RemoveRosterRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.RemoveRosterResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRemoveRosterMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * Adds a new address based on the request.
      * </pre>
      */
@@ -647,6 +811,50 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
+     * Removes an old contact based on this request's id
+     * </pre>
+     */
+    public void removeContact(com.antinvestor.apis.profile.v1.RemoveContactRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.RemoveContactResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getRemoveContactMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Searches all contacts tied to a users profile and based on the active request.
+     * </pre>
+     */
+    public void searchRoster(com.antinvestor.apis.profile.v1.SearchRosterRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.SearchRosterResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getSearchRosterMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Adds a new contact based on the request/this leads to automatic verification.
+     * </pre>
+     */
+    public void addRoster(com.antinvestor.apis.profile.v1.AddRosterRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.AddRosterResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getAddRosterMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Removes a contact from a user's circle based on this request's id
+     * </pre>
+     */
+    public void removeRoster(com.antinvestor.apis.profile.v1.RemoveRosterRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.RemoveRosterResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getRemoveRosterMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * Adds a new address based on the request.
      * </pre>
      */
@@ -782,6 +990,47 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
+     * Removes an old contact based on this request's id
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.RemoveContactResponse removeContact(com.antinvestor.apis.profile.v1.RemoveContactRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRemoveContactMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Searches all contacts tied to a users profile and based on the active request.
+     * </pre>
+     */
+    public java.util.Iterator<com.antinvestor.apis.profile.v1.SearchRosterResponse> searchRoster(
+        com.antinvestor.apis.profile.v1.SearchRosterRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getSearchRosterMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Adds a new contact based on the request/this leads to automatic verification.
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.AddRosterResponse addRoster(com.antinvestor.apis.profile.v1.AddRosterRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddRosterMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Removes a contact from a user's circle based on this request's id
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.RemoveRosterResponse removeRoster(com.antinvestor.apis.profile.v1.RemoveRosterRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRemoveRosterMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      * Adds a new address based on the request.
      * </pre>
      */
@@ -909,6 +1158,39 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
+     * Removes an old contact based on this request's id
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.RemoveContactResponse> removeContact(
+        com.antinvestor.apis.profile.v1.RemoveContactRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getRemoveContactMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * Adds a new contact based on the request/this leads to automatic verification.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.AddRosterResponse> addRoster(
+        com.antinvestor.apis.profile.v1.AddRosterRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getAddRosterMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * Removes a contact from a user's circle based on this request's id
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.RemoveRosterResponse> removeRoster(
+        com.antinvestor.apis.profile.v1.RemoveRosterRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getRemoveRosterMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * Adds a new address based on the request.
      * </pre>
      */
@@ -948,10 +1230,14 @@ public final class ProfileServiceGrpc {
   private static final int METHODID_CREATE = 4;
   private static final int METHODID_UPDATE = 5;
   private static final int METHODID_ADD_CONTACT = 6;
-  private static final int METHODID_ADD_ADDRESS = 7;
-  private static final int METHODID_ADD_RELATIONSHIP = 8;
-  private static final int METHODID_DELETE_RELATIONSHIP = 9;
-  private static final int METHODID_LIST_RELATIONSHIP = 10;
+  private static final int METHODID_REMOVE_CONTACT = 7;
+  private static final int METHODID_SEARCH_ROSTER = 8;
+  private static final int METHODID_ADD_ROSTER = 9;
+  private static final int METHODID_REMOVE_ROSTER = 10;
+  private static final int METHODID_ADD_ADDRESS = 11;
+  private static final int METHODID_ADD_RELATIONSHIP = 12;
+  private static final int METHODID_DELETE_RELATIONSHIP = 13;
+  private static final int METHODID_LIST_RELATIONSHIP = 14;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -997,6 +1283,22 @@ public final class ProfileServiceGrpc {
         case METHODID_ADD_CONTACT:
           serviceImpl.addContact((com.antinvestor.apis.profile.v1.AddContactRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.AddContactResponse>) responseObserver);
+          break;
+        case METHODID_REMOVE_CONTACT:
+          serviceImpl.removeContact((com.antinvestor.apis.profile.v1.RemoveContactRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.RemoveContactResponse>) responseObserver);
+          break;
+        case METHODID_SEARCH_ROSTER:
+          serviceImpl.searchRoster((com.antinvestor.apis.profile.v1.SearchRosterRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.SearchRosterResponse>) responseObserver);
+          break;
+        case METHODID_ADD_ROSTER:
+          serviceImpl.addRoster((com.antinvestor.apis.profile.v1.AddRosterRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.AddRosterResponse>) responseObserver);
+          break;
+        case METHODID_REMOVE_ROSTER:
+          serviceImpl.removeRoster((com.antinvestor.apis.profile.v1.RemoveRosterRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.RemoveRosterResponse>) responseObserver);
           break;
         case METHODID_ADD_ADDRESS:
           serviceImpl.addAddress((com.antinvestor.apis.profile.v1.AddAddressRequest) request,
@@ -1082,6 +1384,34 @@ public final class ProfileServiceGrpc {
               com.antinvestor.apis.profile.v1.AddContactResponse>(
                 service, METHODID_ADD_CONTACT)))
         .addMethod(
+          getRemoveContactMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.profile.v1.RemoveContactRequest,
+              com.antinvestor.apis.profile.v1.RemoveContactResponse>(
+                service, METHODID_REMOVE_CONTACT)))
+        .addMethod(
+          getSearchRosterMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              com.antinvestor.apis.profile.v1.SearchRosterRequest,
+              com.antinvestor.apis.profile.v1.SearchRosterResponse>(
+                service, METHODID_SEARCH_ROSTER)))
+        .addMethod(
+          getAddRosterMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.profile.v1.AddRosterRequest,
+              com.antinvestor.apis.profile.v1.AddRosterResponse>(
+                service, METHODID_ADD_ROSTER)))
+        .addMethod(
+          getRemoveRosterMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.profile.v1.RemoveRosterRequest,
+              com.antinvestor.apis.profile.v1.RemoveRosterResponse>(
+                service, METHODID_REMOVE_ROSTER)))
+        .addMethod(
           getAddAddressMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
@@ -1164,6 +1494,10 @@ public final class ProfileServiceGrpc {
               .addMethod(getCreateMethod())
               .addMethod(getUpdateMethod())
               .addMethod(getAddContactMethod())
+              .addMethod(getRemoveContactMethod())
+              .addMethod(getSearchRosterMethod())
+              .addMethod(getAddRosterMethod())
+              .addMethod(getRemoveRosterMethod())
               .addMethod(getAddAddressMethod())
               .addMethod(getAddRelationshipMethod())
               .addMethod(getDeleteRelationshipMethod())

@@ -54,6 +54,18 @@ private static final long serialVersionUID = 0L;
     return com.antinvestor.apis.profile.v1.ProfileProto.internal_static_profile_v1_AddContactRequest_descriptor;
   }
 
+  @SuppressWarnings({"rawtypes"})
+  @java.lang.Override
+  protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+      int number) {
+    switch (number) {
+      case 3:
+        return internalGetExtras();
+      default:
+        throw new RuntimeException(
+            "Invalid map field number: " + number);
+    }
+  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
@@ -140,6 +152,85 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int EXTRAS_FIELD_NUMBER = 3;
+  private static final class ExtrasDefaultEntryHolder {
+    static final com.google.protobuf.MapEntry<
+        java.lang.String, java.lang.String> defaultEntry =
+            com.google.protobuf.MapEntry
+            .<java.lang.String, java.lang.String>newDefaultInstance(
+                com.antinvestor.apis.profile.v1.ProfileProto.internal_static_profile_v1_AddContactRequest_ExtrasEntry_descriptor, 
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "",
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "");
+  }
+  @SuppressWarnings("serial")
+  private com.google.protobuf.MapField<
+      java.lang.String, java.lang.String> extras_;
+  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+  internalGetExtras() {
+    if (extras_ == null) {
+      return com.google.protobuf.MapField.emptyMapField(
+          ExtrasDefaultEntryHolder.defaultEntry);
+    }
+    return extras_;
+  }
+  public int getExtrasCount() {
+    return internalGetExtras().getMap().size();
+  }
+  /**
+   * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+   */
+  @java.lang.Override
+  public boolean containsExtras(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    return internalGetExtras().getMap().containsKey(key);
+  }
+  /**
+   * Use {@link #getExtrasMap()} instead.
+   */
+  @java.lang.Override
+  @java.lang.Deprecated
+  public java.util.Map<java.lang.String, java.lang.String> getExtras() {
+    return getExtrasMap();
+  }
+  /**
+   * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+   */
+  @java.lang.Override
+  public java.util.Map<java.lang.String, java.lang.String> getExtrasMap() {
+    return internalGetExtras().getMap();
+  }
+  /**
+   * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+   */
+  @java.lang.Override
+  public /* nullable */
+java.lang.String getExtrasOrDefault(
+      java.lang.String key,
+      /* nullable */
+java.lang.String defaultValue) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, java.lang.String> map =
+        internalGetExtras().getMap();
+    return map.containsKey(key) ? map.get(key) : defaultValue;
+  }
+  /**
+   * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+   */
+  @java.lang.Override
+  public java.lang.String getExtrasOrThrow(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, java.lang.String> map =
+        internalGetExtras().getMap();
+    if (!map.containsKey(key)) {
+      throw new java.lang.IllegalArgumentException();
+    }
+    return map.get(key);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -160,6 +251,12 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(contact_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, contact_);
     }
+    com.google.protobuf.GeneratedMessage
+      .serializeStringMapTo(
+        output,
+        internalGetExtras(),
+        ExtrasDefaultEntryHolder.defaultEntry,
+        3);
     getUnknownFields().writeTo(output);
   }
 
@@ -174,6 +271,16 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(contact_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(2, contact_);
+    }
+    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
+         : internalGetExtras().getMap().entrySet()) {
+      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+      extras__ = ExtrasDefaultEntryHolder.defaultEntry.newBuilderForType()
+          .setKey(entry.getKey())
+          .setValue(entry.getValue())
+          .build();
+      size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, extras__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -194,6 +301,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getId())) return false;
     if (!getContact()
         .equals(other.getContact())) return false;
+    if (!internalGetExtras().equals(
+        other.internalGetExtras())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -209,6 +318,10 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + CONTACT_FIELD_NUMBER;
     hash = (53 * hash) + getContact().hashCode();
+    if (!internalGetExtras().getMap().isEmpty()) {
+      hash = (37 * hash) + EXTRAS_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetExtras().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -322,6 +435,28 @@ private static final long serialVersionUID = 0L;
       return com.antinvestor.apis.profile.v1.ProfileProto.internal_static_profile_v1_AddContactRequest_descriptor;
     }
 
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+        int number) {
+      switch (number) {
+        case 3:
+          return internalGetExtras();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
+        int number) {
+      switch (number) {
+        case 3:
+          return internalGetMutableExtras();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -346,6 +481,7 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       id_ = "";
       contact_ = "";
+      internalGetMutableExtras().clear();
       return this;
     }
 
@@ -385,6 +521,10 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.contact_ = contact_;
       }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.extras_ = internalGetExtras();
+        result.extras_.makeImmutable();
+      }
     }
 
     @java.lang.Override
@@ -409,6 +549,9 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000002;
         onChanged();
       }
+      internalGetMutableExtras().mergeFrom(
+          other.internalGetExtras());
+      bitField0_ |= 0x00000004;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -445,6 +588,15 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000002;
               break;
             } // case 18
+            case 26: {
+              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+              extras__ = input.readMessage(
+                  ExtrasDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              internalGetMutableExtras().getMutableMap().put(
+                  extras__.getKey(), extras__.getValue());
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 26
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -603,6 +755,133 @@ private static final long serialVersionUID = 0L;
       contact_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.String> extras_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+        internalGetExtras() {
+      if (extras_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            ExtrasDefaultEntryHolder.defaultEntry);
+      }
+      return extras_;
+    }
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+        internalGetMutableExtras() {
+      if (extras_ == null) {
+        extras_ = com.google.protobuf.MapField.newMapField(
+            ExtrasDefaultEntryHolder.defaultEntry);
+      }
+      if (!extras_.isMutable()) {
+        extras_ = extras_.copy();
+      }
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return extras_;
+    }
+    public int getExtrasCount() {
+      return internalGetExtras().getMap().size();
+    }
+    /**
+     * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+     */
+    @java.lang.Override
+    public boolean containsExtras(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      return internalGetExtras().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getExtrasMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String> getExtras() {
+      return getExtrasMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+     */
+    @java.lang.Override
+    public java.util.Map<java.lang.String, java.lang.String> getExtrasMap() {
+      return internalGetExtras().getMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+     */
+    @java.lang.Override
+    public /* nullable */
+java.lang.String getExtrasOrDefault(
+        java.lang.String key,
+        /* nullable */
+java.lang.String defaultValue) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetExtras().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+     */
+    @java.lang.Override
+    public java.lang.String getExtrasOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetExtras().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+    public Builder clearExtras() {
+      bitField0_ = (bitField0_ & ~0x00000004);
+      internalGetMutableExtras().getMutableMap()
+          .clear();
+      return this;
+    }
+    /**
+     * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+     */
+    public Builder removeExtras(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      internalGetMutableExtras().getMutableMap()
+          .remove(key);
+      return this;
+    }
+    /**
+     * Use alternate mutation accessors instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String>
+        getMutableExtras() {
+      bitField0_ |= 0x00000004;
+      return internalGetMutableExtras().getMutableMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+     */
+    public Builder putExtras(
+        java.lang.String key,
+        java.lang.String value) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      if (value == null) { throw new NullPointerException("map value"); }
+      internalGetMutableExtras().getMutableMap()
+          .put(key, value);
+      bitField0_ |= 0x00000004;
+      return this;
+    }
+    /**
+     * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+     */
+    public Builder putAllExtras(
+        java.util.Map<java.lang.String, java.lang.String> values) {
+      internalGetMutableExtras().getMutableMap()
+          .putAll(values);
+      bitField0_ |= 0x00000004;
       return this;
     }
 

@@ -40,6 +40,10 @@ const (
 	ProfileService_Create_FullMethodName             = "/profile.v1.ProfileService/Create"
 	ProfileService_Update_FullMethodName             = "/profile.v1.ProfileService/Update"
 	ProfileService_AddContact_FullMethodName         = "/profile.v1.ProfileService/AddContact"
+	ProfileService_RemoveContact_FullMethodName      = "/profile.v1.ProfileService/RemoveContact"
+	ProfileService_SearchRoster_FullMethodName       = "/profile.v1.ProfileService/SearchRoster"
+	ProfileService_AddRoster_FullMethodName          = "/profile.v1.ProfileService/AddRoster"
+	ProfileService_RemoveRoster_FullMethodName       = "/profile.v1.ProfileService/RemoveRoster"
 	ProfileService_AddAddress_FullMethodName         = "/profile.v1.ProfileService/AddAddress"
 	ProfileService_AddRelationship_FullMethodName    = "/profile.v1.ProfileService/AddRelationship"
 	ProfileService_DeleteRelationship_FullMethodName = "/profile.v1.ProfileService/DeleteRelationship"
@@ -66,6 +70,14 @@ type ProfileServiceClient interface {
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
 	// Adds a new contact based on the request/this leads to automatic verification.
 	AddContact(ctx context.Context, in *AddContactRequest, opts ...grpc.CallOption) (*AddContactResponse, error)
+	// Removes an old contact based on this request's id
+	RemoveContact(ctx context.Context, in *RemoveContactRequest, opts ...grpc.CallOption) (*RemoveContactResponse, error)
+	// Searches all contacts tied to a users profile and based on the active request.
+	SearchRoster(ctx context.Context, in *SearchRosterRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchRosterResponse], error)
+	// Adds a new contact based on the request/this leads to automatic verification.
+	AddRoster(ctx context.Context, in *AddRosterRequest, opts ...grpc.CallOption) (*AddRosterResponse, error)
+	// Removes a contact from a user's circle based on this request's id
+	RemoveRoster(ctx context.Context, in *RemoveRosterRequest, opts ...grpc.CallOption) (*RemoveRosterResponse, error)
 	// Adds a new address based on the request.
 	AddAddress(ctx context.Context, in *AddAddressRequest, opts ...grpc.CallOption) (*AddAddressResponse, error)
 	// Adds a new relationship between different proiles.
@@ -163,6 +175,55 @@ func (c *profileServiceClient) AddContact(ctx context.Context, in *AddContactReq
 	return out, nil
 }
 
+func (c *profileServiceClient) RemoveContact(ctx context.Context, in *RemoveContactRequest, opts ...grpc.CallOption) (*RemoveContactResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveContactResponse)
+	err := c.cc.Invoke(ctx, ProfileService_RemoveContact_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *profileServiceClient) SearchRoster(ctx context.Context, in *SearchRosterRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchRosterResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &ProfileService_ServiceDesc.Streams[1], ProfileService_SearchRoster_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[SearchRosterRequest, SearchRosterResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type ProfileService_SearchRosterClient = grpc.ServerStreamingClient[SearchRosterResponse]
+
+func (c *profileServiceClient) AddRoster(ctx context.Context, in *AddRosterRequest, opts ...grpc.CallOption) (*AddRosterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddRosterResponse)
+	err := c.cc.Invoke(ctx, ProfileService_AddRoster_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *profileServiceClient) RemoveRoster(ctx context.Context, in *RemoveRosterRequest, opts ...grpc.CallOption) (*RemoveRosterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveRosterResponse)
+	err := c.cc.Invoke(ctx, ProfileService_RemoveRoster_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *profileServiceClient) AddAddress(ctx context.Context, in *AddAddressRequest, opts ...grpc.CallOption) (*AddAddressResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddAddressResponse)
@@ -195,7 +256,7 @@ func (c *profileServiceClient) DeleteRelationship(ctx context.Context, in *Delet
 
 func (c *profileServiceClient) ListRelationship(ctx context.Context, in *ListRelationshipRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListRelationshipResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &ProfileService_ServiceDesc.Streams[1], ProfileService_ListRelationship_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &ProfileService_ServiceDesc.Streams[2], ProfileService_ListRelationship_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -232,6 +293,14 @@ type ProfileServiceServer interface {
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
 	// Adds a new contact based on the request/this leads to automatic verification.
 	AddContact(context.Context, *AddContactRequest) (*AddContactResponse, error)
+	// Removes an old contact based on this request's id
+	RemoveContact(context.Context, *RemoveContactRequest) (*RemoveContactResponse, error)
+	// Searches all contacts tied to a users profile and based on the active request.
+	SearchRoster(*SearchRosterRequest, grpc.ServerStreamingServer[SearchRosterResponse]) error
+	// Adds a new contact based on the request/this leads to automatic verification.
+	AddRoster(context.Context, *AddRosterRequest) (*AddRosterResponse, error)
+	// Removes a contact from a user's circle based on this request's id
+	RemoveRoster(context.Context, *RemoveRosterRequest) (*RemoveRosterResponse, error)
 	// Adds a new address based on the request.
 	AddAddress(context.Context, *AddAddressRequest) (*AddAddressResponse, error)
 	// Adds a new relationship between different proiles.
@@ -270,6 +339,18 @@ func (UnimplementedProfileServiceServer) Update(context.Context, *UpdateRequest)
 }
 func (UnimplementedProfileServiceServer) AddContact(context.Context, *AddContactRequest) (*AddContactResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddContact not implemented")
+}
+func (UnimplementedProfileServiceServer) RemoveContact(context.Context, *RemoveContactRequest) (*RemoveContactResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveContact not implemented")
+}
+func (UnimplementedProfileServiceServer) SearchRoster(*SearchRosterRequest, grpc.ServerStreamingServer[SearchRosterResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method SearchRoster not implemented")
+}
+func (UnimplementedProfileServiceServer) AddRoster(context.Context, *AddRosterRequest) (*AddRosterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddRoster not implemented")
+}
+func (UnimplementedProfileServiceServer) RemoveRoster(context.Context, *RemoveRosterRequest) (*RemoveRosterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveRoster not implemented")
 }
 func (UnimplementedProfileServiceServer) AddAddress(context.Context, *AddAddressRequest) (*AddAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddAddress not implemented")
@@ -423,6 +504,71 @@ func _ProfileService_AddContact_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProfileService_RemoveContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveContactRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).RemoveContact(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProfileService_RemoveContact_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).RemoveContact(ctx, req.(*RemoveContactRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProfileService_SearchRoster_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(SearchRosterRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ProfileServiceServer).SearchRoster(m, &grpc.GenericServerStream[SearchRosterRequest, SearchRosterResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type ProfileService_SearchRosterServer = grpc.ServerStreamingServer[SearchRosterResponse]
+
+func _ProfileService_AddRoster_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddRosterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).AddRoster(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProfileService_AddRoster_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).AddRoster(ctx, req.(*AddRosterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProfileService_RemoveRoster_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveRosterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).RemoveRoster(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProfileService_RemoveRoster_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).RemoveRoster(ctx, req.(*RemoveRosterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProfileService_AddAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddAddressRequest)
 	if err := dec(in); err != nil {
@@ -520,6 +666,18 @@ var ProfileService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProfileService_AddContact_Handler,
 		},
 		{
+			MethodName: "RemoveContact",
+			Handler:    _ProfileService_RemoveContact_Handler,
+		},
+		{
+			MethodName: "AddRoster",
+			Handler:    _ProfileService_AddRoster_Handler,
+		},
+		{
+			MethodName: "RemoveRoster",
+			Handler:    _ProfileService_RemoveRoster_Handler,
+		},
+		{
 			MethodName: "AddAddress",
 			Handler:    _ProfileService_AddAddress_Handler,
 		},
@@ -536,6 +694,11 @@ var ProfileService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "Search",
 			Handler:       _ProfileService_Search_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "SearchRoster",
+			Handler:       _ProfileService_SearchRoster_Handler,
 			ServerStreams: true,
 		},
 		{

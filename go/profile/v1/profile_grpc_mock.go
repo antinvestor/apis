@@ -101,6 +101,26 @@ func (mr *MockProfileServiceClientMockRecorder) AddRelationship(ctx, in any, opt
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddRelationship", reflect.TypeOf((*MockProfileServiceClient)(nil).AddRelationship), varargs...)
 }
 
+// AddRoster mocks base method.
+func (m *MockProfileServiceClient) AddRoster(ctx context.Context, in *AddRosterRequest, opts ...grpc.CallOption) (*AddRosterResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AddRoster", varargs...)
+	ret0, _ := ret[0].(*AddRosterResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddRoster indicates an expected call of AddRoster.
+func (mr *MockProfileServiceClientMockRecorder) AddRoster(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddRoster", reflect.TypeOf((*MockProfileServiceClient)(nil).AddRoster), varargs...)
+}
+
 // Create mocks base method.
 func (m *MockProfileServiceClient) Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error) {
 	m.ctrl.T.Helper()
@@ -221,6 +241,46 @@ func (mr *MockProfileServiceClientMockRecorder) Merge(ctx, in any, opts ...any) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Merge", reflect.TypeOf((*MockProfileServiceClient)(nil).Merge), varargs...)
 }
 
+// RemoveContact mocks base method.
+func (m *MockProfileServiceClient) RemoveContact(ctx context.Context, in *RemoveContactRequest, opts ...grpc.CallOption) (*RemoveContactResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "RemoveContact", varargs...)
+	ret0, _ := ret[0].(*RemoveContactResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RemoveContact indicates an expected call of RemoveContact.
+func (mr *MockProfileServiceClientMockRecorder) RemoveContact(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveContact", reflect.TypeOf((*MockProfileServiceClient)(nil).RemoveContact), varargs...)
+}
+
+// RemoveRoster mocks base method.
+func (m *MockProfileServiceClient) RemoveRoster(ctx context.Context, in *RemoveRosterRequest, opts ...grpc.CallOption) (*RemoveRosterResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "RemoveRoster", varargs...)
+	ret0, _ := ret[0].(*RemoveRosterResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RemoveRoster indicates an expected call of RemoveRoster.
+func (mr *MockProfileServiceClientMockRecorder) RemoveRoster(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveRoster", reflect.TypeOf((*MockProfileServiceClient)(nil).RemoveRoster), varargs...)
+}
+
 // Search mocks base method.
 func (m *MockProfileServiceClient) Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error) {
 	m.ctrl.T.Helper()
@@ -239,6 +299,26 @@ func (mr *MockProfileServiceClientMockRecorder) Search(ctx, in any, opts ...any)
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Search", reflect.TypeOf((*MockProfileServiceClient)(nil).Search), varargs...)
+}
+
+// SearchRoster mocks base method.
+func (m *MockProfileServiceClient) SearchRoster(ctx context.Context, in *SearchRosterRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchRosterResponse], error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "SearchRoster", varargs...)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[SearchRosterResponse])
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SearchRoster indicates an expected call of SearchRoster.
+func (mr *MockProfileServiceClientMockRecorder) SearchRoster(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchRoster", reflect.TypeOf((*MockProfileServiceClient)(nil).SearchRoster), varargs...)
 }
 
 // Update mocks base method.
@@ -330,6 +410,21 @@ func (mr *MockProfileServiceServerMockRecorder) AddRelationship(arg0, arg1 any) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddRelationship", reflect.TypeOf((*MockProfileServiceServer)(nil).AddRelationship), arg0, arg1)
 }
 
+// AddRoster mocks base method.
+func (m *MockProfileServiceServer) AddRoster(arg0 context.Context, arg1 *AddRosterRequest) (*AddRosterResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddRoster", arg0, arg1)
+	ret0, _ := ret[0].(*AddRosterResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddRoster indicates an expected call of AddRoster.
+func (mr *MockProfileServiceServerMockRecorder) AddRoster(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddRoster", reflect.TypeOf((*MockProfileServiceServer)(nil).AddRoster), arg0, arg1)
+}
+
 // Create mocks base method.
 func (m *MockProfileServiceServer) Create(arg0 context.Context, arg1 *CreateRequest) (*CreateResponse, error) {
 	m.ctrl.T.Helper()
@@ -419,6 +514,36 @@ func (mr *MockProfileServiceServerMockRecorder) Merge(arg0, arg1 any) *gomock.Ca
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Merge", reflect.TypeOf((*MockProfileServiceServer)(nil).Merge), arg0, arg1)
 }
 
+// RemoveContact mocks base method.
+func (m *MockProfileServiceServer) RemoveContact(arg0 context.Context, arg1 *RemoveContactRequest) (*RemoveContactResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveContact", arg0, arg1)
+	ret0, _ := ret[0].(*RemoveContactResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RemoveContact indicates an expected call of RemoveContact.
+func (mr *MockProfileServiceServerMockRecorder) RemoveContact(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveContact", reflect.TypeOf((*MockProfileServiceServer)(nil).RemoveContact), arg0, arg1)
+}
+
+// RemoveRoster mocks base method.
+func (m *MockProfileServiceServer) RemoveRoster(arg0 context.Context, arg1 *RemoveRosterRequest) (*RemoveRosterResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveRoster", arg0, arg1)
+	ret0, _ := ret[0].(*RemoveRosterResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RemoveRoster indicates an expected call of RemoveRoster.
+func (mr *MockProfileServiceServerMockRecorder) RemoveRoster(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveRoster", reflect.TypeOf((*MockProfileServiceServer)(nil).RemoveRoster), arg0, arg1)
+}
+
 // Search mocks base method.
 func (m *MockProfileServiceServer) Search(arg0 *SearchRequest, arg1 grpc.ServerStreamingServer[SearchResponse]) error {
 	m.ctrl.T.Helper()
@@ -431,6 +556,20 @@ func (m *MockProfileServiceServer) Search(arg0 *SearchRequest, arg1 grpc.ServerS
 func (mr *MockProfileServiceServerMockRecorder) Search(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Search", reflect.TypeOf((*MockProfileServiceServer)(nil).Search), arg0, arg1)
+}
+
+// SearchRoster mocks base method.
+func (m *MockProfileServiceServer) SearchRoster(arg0 *SearchRosterRequest, arg1 grpc.ServerStreamingServer[SearchRosterResponse]) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SearchRoster", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SearchRoster indicates an expected call of SearchRoster.
+func (mr *MockProfileServiceServerMockRecorder) SearchRoster(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchRoster", reflect.TypeOf((*MockProfileServiceServer)(nil).SearchRoster), arg0, arg1)
 }
 
 // Update mocks base method.

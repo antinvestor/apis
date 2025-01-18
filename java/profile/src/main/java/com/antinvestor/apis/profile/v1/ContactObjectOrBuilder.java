@@ -85,4 +85,38 @@ public interface ContactObjectOrBuilder extends
    * @return The state.
    */
   com.antinvestor.apis.common.v1.STATE getState();
+
+  /**
+   * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+   */
+  int getExtraCount();
+  /**
+   * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+   */
+  boolean containsExtra(
+      java.lang.String key);
+  /**
+   * Use {@link #getExtraMap()} instead.
+   */
+  @java.lang.Deprecated
+  java.util.Map<java.lang.String, java.lang.String>
+  getExtra();
+  /**
+   * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+   */
+  java.util.Map<java.lang.String, java.lang.String>
+  getExtraMap();
+  /**
+   * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+   */
+  /* nullable */
+java.lang.String getExtraOrDefault(
+      java.lang.String key,
+      /* nullable */
+java.lang.String defaultValue);
+  /**
+   * <code>map&lt;string, string&gt; extra = 7 [json_name = "extra"];</code>
+   */
+  java.lang.String getExtraOrThrow(
+      java.lang.String key);
 }

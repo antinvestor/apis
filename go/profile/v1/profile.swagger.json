@@ -153,6 +153,37 @@
         ]
       }
     },
+    "/contact/{id}": {
+      "delete": {
+        "summary": "Removes an old contact based on this request's id",
+        "operationId": "ProfileService_RemoveContact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.RemoveContactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    },
     "/merge": {
       "post": {
         "summary": "Uses data found in the profile from mergeHash to update the current profile.",
@@ -322,6 +353,151 @@
             "name": "parentId",
             "in": "query",
             "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    },
+    "/roster": {
+      "get": {
+        "summary": "Searches all contacts tied to a users profile and based on the active request.",
+        "operationId": "ProfileService_SearchRoster",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/profile.v1.SearchRosterResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of profile.v1.SearchRosterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extras",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      },
+      "post": {
+        "summary": "Adds a new contact based on the request/this leads to automatic verification.",
+        "operationId": "ProfileService_AddRoster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.AddRosterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/profile.v1.AddRosterRequest"
+            }
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    },
+    "/roster/{id}": {
+      "delete": {
+        "summary": "Removes a contact from a user's circle based on this request's id",
+        "operationId": "ProfileService_RemoveRoster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.RemoveRosterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
             "type": "string"
           }
         ],
@@ -552,6 +728,12 @@
         },
         "contact": {
           "type": "string"
+        },
+        "extras": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "title": "The request message containing the information necessary to create a profile"
@@ -599,6 +781,30 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/profile.v1.RelationshipObject"
+        }
+      }
+    },
+    "profile.v1.AddRosterRequest": {
+      "type": "object",
+      "properties": {
+        "contact": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/profile.v1.AddContactRequest"
+          }
+        }
+      }
+    },
+    "profile.v1.AddRosterResponse": {
+      "type": "object",
+      "properties": {
+        "contact": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/profile.v1.ContactObject"
+          }
         }
       }
     },
@@ -675,6 +881,12 @@
         },
         "state": {
           "$ref": "#/definitions/common.v1.STATE"
+        },
+        "extra": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -880,6 +1092,22 @@
       "description": "- MEMBER: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
       "title": "RelationshipType enum represents the way two profiles are linked.\nbuf:lint:ignore ENUM_VALUE_PREFIX"
     },
+    "profile.v1.RemoveContactResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/profile.v1.ProfileObject"
+        }
+      }
+    },
+    "profile.v1.RemoveRosterResponse": {
+      "type": "object",
+      "properties": {
+        "contacts": {
+          "$ref": "#/definitions/profile.v1.ContactObject"
+        }
+      }
+    },
     "profile.v1.SearchResponse": {
       "type": "object",
       "properties": {
@@ -888,6 +1116,18 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/profile.v1.ProfileObject"
+          }
+        }
+      }
+    },
+    "profile.v1.SearchRosterResponse": {
+      "type": "object",
+      "properties": {
+        "contacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/profile.v1.ContactObject"
           }
         }
       }

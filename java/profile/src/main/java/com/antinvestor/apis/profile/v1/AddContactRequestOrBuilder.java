@@ -46,4 +46,38 @@ public interface AddContactRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getContactBytes();
+
+  /**
+   * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+   */
+  int getExtrasCount();
+  /**
+   * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+   */
+  boolean containsExtras(
+      java.lang.String key);
+  /**
+   * Use {@link #getExtrasMap()} instead.
+   */
+  @java.lang.Deprecated
+  java.util.Map<java.lang.String, java.lang.String>
+  getExtras();
+  /**
+   * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+   */
+  java.util.Map<java.lang.String, java.lang.String>
+  getExtrasMap();
+  /**
+   * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+   */
+  /* nullable */
+java.lang.String getExtrasOrDefault(
+      java.lang.String key,
+      /* nullable */
+java.lang.String defaultValue);
+  /**
+   * <code>map&lt;string, string&gt; extras = 3 [json_name = "extras"];</code>
+   */
+  java.lang.String getExtrasOrThrow(
+      java.lang.String key);
 }

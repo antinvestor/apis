@@ -45,6 +45,11 @@ public final class ProfileProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_profile_v1_ContactObject_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profile_v1_ContactObject_ExtraEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_profile_v1_ContactObject_ExtraEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_profile_v1_AddressObject_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -145,10 +150,60 @@ public final class ProfileProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_profile_v1_AddContactRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profile_v1_AddContactRequest_ExtrasEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_profile_v1_AddContactRequest_ExtrasEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_profile_v1_AddContactResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_profile_v1_AddContactResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profile_v1_RemoveContactRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_profile_v1_RemoveContactRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profile_v1_RemoveContactResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_profile_v1_RemoveContactResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profile_v1_SearchRosterRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_profile_v1_SearchRosterRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profile_v1_SearchRosterRequest_ExtrasEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_profile_v1_SearchRosterRequest_ExtrasEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profile_v1_SearchRosterResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_profile_v1_SearchRosterResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profile_v1_AddRosterRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_profile_v1_AddRosterRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profile_v1_AddRosterResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_profile_v1_AddRosterResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profile_v1_RemoveRosterRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_profile_v1_RemoveRosterRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profile_v1_RemoveRosterResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_profile_v1_RemoveRosterResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_profile_v1_AddAddressRequest_descriptor;
   static final 
@@ -217,164 +272,201 @@ public final class ProfileProto {
       "buf/validate/validate.proto\032\026common/v1/c" +
       "ommon.proto\032\034google/api/annotations.prot" +
       "o\032.protoc-gen-openapiv2/options/annotati" +
-      "ons.proto\"\226\002\n\rContactObject\022+\n\002id\030\001 \001(\tB" +
+      "ons.proto\"\214\003\n\rContactObject\022+\n\002id\030\001 \001(\tB" +
       "\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022+\n\004type" +
       "\030\002 \001(\0162\027.profile.v1.ContactTypeR\004type\022\026\n" +
       "\006detail\030\003 \001(\tR\006detail\022\032\n\010verified\030\004 \001(\010R" +
       "\010verified\022O\n\023communication_level\030\005 \001(\0162\036" +
       ".profile.v1.CommunicationLevelR\022communic" +
       "ationLevel\022&\n\005state\030\006 \001(\0162\020.common.v1.ST" +
-      "ATER\005state\"\303\002\n\rAddressObject\022+\n\002id\030\001 \001(\t" +
-      "B\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\035\n\004nam" +
-      "e\030\002 \001(\tB\t\272H\006r\004\020\003\030dR\004name\022\030\n\007country\030\003 \001(" +
-      "\tR\007country\022\022\n\004city\030\004 \001(\tR\004city\022\022\n\004area\030\005" +
-      " \001(\tR\004area\022\026\n\006street\030\006 \001(\tR\006street\022\024\n\005ho" +
-      "use\030\007 \001(\tR\005house\022\032\n\010postcode\030\010 \001(\tR\010post" +
-      "code\022\032\n\010latitude\030\t \001(\001R\010latitude\022\034\n\tlong" +
-      "itude\030\n \001(\001R\tlongitude\022 \n\005extra\030\013 \001(\tB\n\272" +
-      "H\007r\005\020\n\030\364\003R\005extra\"\213\003\n\rProfileObject\022+\n\002id" +
-      "\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022" +
-      "+\n\004type\030\002 \001(\0162\027.profile.v1.ProfileTypeR\004" +
-      "type\022I\n\nproperties\030\003 \003(\0132).profile.v1.Pr" +
-      "ofileObject.PropertiesEntryR\nproperties\022" +
-      "5\n\010contacts\030\004 \003(\0132\031.profile.v1.ContactOb" +
-      "jectR\010contacts\0227\n\taddresses\030\005 \003(\0132\031.prof" +
-      "ile.v1.AddressObjectR\taddresses\022&\n\005state" +
-      "\030\006 \001(\0162\020.common.v1.STATER\005state\032=\n\017Prope" +
-      "rtiesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 " +
-      "\001(\tR\005value:\0028\001\"I\n\tEntryItem\022\037\n\013object_na" +
-      "me\030\001 \001(\tR\nobjectName\022\033\n\tobject_id\030\002 \001(\tR" +
-      "\010objectId\"\262\003\n\022RelationshipObject\022+\n\002id\030\001" +
-      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\0220\n" +
-      "\004type\030\002 \001(\0162\034.profile.v1.RelationshipTyp" +
-      "eR\004type\022N\n\nproperties\030\003 \003(\0132..profile.v1" +
-      ".RelationshipObject.PropertiesEntryR\npro" +
-      "perties\0226\n\013child_entry\030\004 \001(\0132\025.profile.v" +
-      "1.EntryItemR\nchildEntry\0228\n\014parent_entry\030" +
-      "\005 \001(\0132\025.profile.v1.EntryItemR\013parentEntr" +
-      "y\022<\n\014peer_profile\030\006 \001(\0132\031.profile.v1.Pro" +
-      "fileObjectR\013peerProfile\032=\n\017PropertiesEnt" +
-      "ry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005val" +
-      "ue:\0028\001\"=\n\016GetByIdRequest\022+\n\002id\030\001 \001(\tB\033\272H" +
-      "\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"@\n\017GetById" +
-      "Response\022-\n\004data\030\001 \001(\0132\031.profile.v1.Prof" +
-      "ileObjectR\004data\"\243\002\n\rSearchRequest\022\024\n\005que" +
-      "ry\030\001 \001(\tR\005query\022\022\n\004page\030\002 \001(\003R\004page\022\024\n\005c" +
-      "ount\030\003 \001(\005R\005count\022\035\n\nstart_date\030\004 \001(\tR\ts" +
-      "tartDate\022\031\n\010end_date\030\005 \001(\tR\007endDate\022\036\n\np" +
-      "roperties\030\006 \003(\tR\nproperties\022=\n\006extras\030\007 " +
-      "\003(\0132%.profile.v1.SearchRequest.ExtrasEnt" +
-      "ryR\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003" +
-      "key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"?\n\016SearchR" +
-      "esponse\022-\n\004data\030\001 \003(\0132\031.profile.v1.Profi" +
-      "leObjectR\004data\"r\n\014MergeRequest\022+\n\002id\030\001 \001" +
-      "(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\0225\n\007m" +
-      "ergeid\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20" +
-      "}R\007mergeid\">\n\rMergeResponse\022-\n\004data\030\001 \001(" +
-      "\0132\031.profile.v1.ProfileObjectR\004data\"\366\001\n\rC" +
-      "reateRequest\0225\n\004type\030\001 \001(\0162\027.profile.v1." +
-      "ProfileTypeB\010\272H\005\202\001\002\020\001R\004type\022$\n\007contact\030\002" +
-      " \001(\tB\n\272H\007r\005\020\003\030\377\001R\007contact\022I\n\nproperties\030" +
-      "\003 \003(\0132).profile.v1.CreateRequest.Propert" +
-      "iesEntryR\nproperties\032=\n\017PropertiesEntry\022" +
-      "\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:" +
-      "\0028\001\"?\n\016CreateResponse\022-\n\004data\030\001 \001(\0132\031.pr" +
-      "ofile.v1.ProfileObjectR\004data\"\356\001\n\rUpdateR" +
-      "equest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-" +
-      "]{3,20}R\002id\022I\n\nproperties\030\002 \003(\0132).profil" +
-      "e.v1.UpdateRequest.PropertiesEntryR\nprop" +
-      "erties\022&\n\005state\030\003 \001(\0162\020.common.v1.STATER" +
-      "\005state\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\tR\003" +
-      "key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"?\n\016UpdateR" +
-      "esponse\022-\n\004data\030\001 \001(\0132\031.profile.v1.Profi" +
-      "leObjectR\004data\"Z\n\021AddContactRequest\022+\n\002i" +
-      "d\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id" +
-      "\022\030\n\007contact\030\002 \001(\tR\007contact\"C\n\022AddContact" +
-      "Response\022-\n\004data\030\001 \001(\0132\031.profile.v1.Prof" +
-      "ileObjectR\004data\"u\n\021AddAddressRequest\022+\n\002" +
-      "id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002i" +
-      "d\0223\n\007address\030\002 \001(\0132\031.profile.v1.AddressO" +
-      "bjectR\007address\"C\n\022AddAddressResponse\022-\n\004" +
-      "data\030\001 \001(\0132\031.profile.v1.ProfileObjectR\004d" +
-      "ata\"/\n\023GetByContactRequest\022\030\n\007contact\030\001 " +
-      "\001(\tR\007contact\"E\n\024GetByContactResponse\022-\n\004" +
-      "data\030\001 \001(\0132\031.profile.v1.ProfileObjectR\004d" +
-      "ata\"\321\002\n\027ListRelationshipRequest\022?\n\tpeer_" +
-      "name\030\001 \001(\tB\"\272H\037r\035\020\003\030(R\007ContactR\007ProfileR" +
-      "\005GroupR\010peerName\0224\n\007peer_id\030\002 \001(\tB\033\272H\030r\026" +
-      "\020\003\030(2\020[0-9a-z_-]{3,20}R\006peerId\022P\n\024last_r" +
-      "elationship_id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z" +
-      "_-]{3,20}\320\001\001R\022lastRelationshipId\022.\n\023rela" +
-      "ted_children_id\030\004 \003(\tR\021relatedChildrenId" +
-      "\022\024\n\005count\030\005 \001(\005R\005count\022\'\n\017invert_relatio" +
-      "n\030\006 \001(\010R\016invertRelation\"N\n\030ListRelations" +
-      "hipResponse\0222\n\004data\030\001 \003(\0132\036.profile.v1.R" +
-      "elationshipObjectR\004data\"\362\003\n\026AddRelations" +
-      "hipRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a" +
-      "-z_-]{3,20}R\002id\022:\n\006parent\030\002 \001(\tB\"\272H\037r\035\020\003" +
-      "\030(R\007ContactR\007ProfileR\005GroupR\006parent\0228\n\tp" +
-      "arent_id\030\003 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3," +
-      "20}R\010parentId\0228\n\005child\030\004 \001(\tB\"\272H\037r\035\020\003\030(R" +
-      "\007ContactR\007ProfileR\005GroupR\005child\0226\n\010child" +
-      "_id\030\005 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\007" +
-      "childId\0220\n\004type\030\006 \001(\0162\034.profile.v1.Relat" +
-      "ionshipTypeR\004type\022R\n\nproperties\030\007 \003(\01322." +
-      "profile.v1.AddRelationshipRequest.Proper" +
-      "tiesEntryR\nproperties\032=\n\017PropertiesEntry" +
+      "ATER\005state\022:\n\005extra\030\007 \003(\0132$.profile.v1.C" +
+      "ontactObject.ExtraEntryR\005extra\0328\n\nExtraE" +
+      "ntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005v" +
+      "alue:\0028\001\"\303\002\n\rAddressObject\022+\n\002id\030\001 \001(\tB\033" +
+      "\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\035\n\004name\030" +
+      "\002 \001(\tB\t\272H\006r\004\020\003\030dR\004name\022\030\n\007country\030\003 \001(\tR" +
+      "\007country\022\022\n\004city\030\004 \001(\tR\004city\022\022\n\004area\030\005 \001" +
+      "(\tR\004area\022\026\n\006street\030\006 \001(\tR\006street\022\024\n\005hous" +
+      "e\030\007 \001(\tR\005house\022\032\n\010postcode\030\010 \001(\tR\010postco" +
+      "de\022\032\n\010latitude\030\t \001(\001R\010latitude\022\034\n\tlongit" +
+      "ude\030\n \001(\001R\tlongitude\022 \n\005extra\030\013 \001(\tB\n\272H\007" +
+      "r\005\020\n\030\364\003R\005extra\"\213\003\n\rProfileObject\022+\n\002id\030\001" +
+      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022+\n" +
+      "\004type\030\002 \001(\0162\027.profile.v1.ProfileTypeR\004ty" +
+      "pe\022I\n\nproperties\030\003 \003(\0132).profile.v1.Prof" +
+      "ileObject.PropertiesEntryR\nproperties\0225\n" +
+      "\010contacts\030\004 \003(\0132\031.profile.v1.ContactObje" +
+      "ctR\010contacts\0227\n\taddresses\030\005 \003(\0132\031.profil" +
+      "e.v1.AddressObjectR\taddresses\022&\n\005state\030\006" +
+      " \001(\0162\020.common.v1.STATER\005state\032=\n\017Propert" +
+      "iesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(" +
+      "\tR\005value:\0028\001\"I\n\tEntryItem\022\037\n\013object_name" +
+      "\030\001 \001(\tR\nobjectName\022\033\n\tobject_id\030\002 \001(\tR\010o" +
+      "bjectId\"\262\003\n\022RelationshipObject\022+\n\002id\030\001 \001" +
+      "(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\0220\n\004t" +
+      "ype\030\002 \001(\0162\034.profile.v1.RelationshipTypeR" +
+      "\004type\022N\n\nproperties\030\003 \003(\0132..profile.v1.R" +
+      "elationshipObject.PropertiesEntryR\nprope" +
+      "rties\0226\n\013child_entry\030\004 \001(\0132\025.profile.v1." +
+      "EntryItemR\nchildEntry\0228\n\014parent_entry\030\005 " +
+      "\001(\0132\025.profile.v1.EntryItemR\013parentEntry\022" +
+      "<\n\014peer_profile\030\006 \001(\0132\031.profile.v1.Profi" +
+      "leObjectR\013peerProfile\032=\n\017PropertiesEntry" +
       "\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value" +
-      ":\0028\001\"M\n\027AddRelationshipResponse\0222\n\004data\030" +
-      "\001 \001(\0132\036.profile.v1.RelationshipObjectR\004d" +
-      "ata\"\205\001\n\031DeleteRelationshipRequest\022+\n\002id\030" +
-      "\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022;" +
-      "\n\tparent_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]" +
-      "{3,20}\320\001\001R\010parentId\"P\n\032DeleteRelationshi" +
-      "pResponse\0222\n\004data\030\001 \001(\0132\036.profile.v1.Rel" +
-      "ationshipObjectR\004data*#\n\013ContactType\022\t\n\005" +
-      "EMAIL\020\000\022\t\n\005PHONE\020\001*n\n\022CommunicationLevel" +
-      "\022\007\n\003ALL\020\000\022\026\n\022INTERNAL_MARKETING\020\001\022\024\n\020IMP" +
-      "ORTANT_ALERTS\020\002\022\021\n\rSYSTEM_ALERTS\020\003\022\016\n\nNO" +
-      "_CONTACT\020\004*3\n\013ProfileType\022\n\n\006PERSON\020\000\022\017\n" +
-      "\013INSTITUTION\020\001\022\007\n\003BOT\020\002*@\n\020RelationshipT" +
-      "ype\022\n\n\006MEMBER\020\000\022\016\n\nAFFILIATED\020\001\022\020\n\014BLACK" +
-      "_LISTED\020\0022\302\010\n\016ProfileService\022Q\n\007GetById\022" +
-      "\032.profile.v1.GetByIdRequest\032\033.profile.v1" +
-      ".GetByIdResponse\"\r\202\323\344\223\002\007\022\005/{id}\022c\n\014GetBy" +
-      "Contact\022\037.profile.v1.GetByContactRequest" +
-      "\032 .profile.v1.GetByContactResponse\"\020\202\323\344\223" +
-      "\002\n\022\010/contact\022R\n\006Search\022\031.profile.v1.Sear" +
-      "chRequest\032\032.profile.v1.SearchResponse\"\017\202" +
-      "\323\344\223\002\t\022\007/search0\001\022O\n\005Merge\022\030.profile.v1.M" +
-      "ergeRequest\032\031.profile.v1.MergeResponse\"\021" +
-      "\202\323\344\223\002\013\"\006/merge:\001*\022M\n\006Create\022\031.profile.v1" +
-      ".CreateRequest\032\032.profile.v1.CreateRespon" +
-      "se\"\014\202\323\344\223\002\006\"\001/:\001*\022Q\n\006Update\022\031.profile.v1." +
-      "UpdateRequest\032\032.profile.v1.UpdateRespons" +
-      "e\"\020\202\323\344\223\002\n2\005/{id}:\001*\022`\n\nAddContact\022\035.prof" +
-      "ile.v1.AddContactRequest\032\036.profile.v1.Ad" +
-      "dContactResponse\"\023\202\323\344\223\002\r\"\010/contact:\001*\022`\n" +
-      "\nAddAddress\022\035.profile.v1.AddAddressReque" +
-      "st\032\036.profile.v1.AddAddressResponse\"\023\202\323\344\223" +
-      "\002\r\"\010/address:\001*\022t\n\017AddRelationship\022\".pro" +
-      "file.v1.AddRelationshipRequest\032#.profile" +
-      ".v1.AddRelationshipResponse\"\030\202\323\344\223\002\022\"\r/re" +
-      "lationship:\001*\022\177\n\022DeleteRelationship\022%.pr" +
-      "ofile.v1.DeleteRelationshipRequest\032&.pro" +
-      "file.v1.DeleteRelationshipResponse\"\032\202\323\344\223" +
-      "\002\024*\022/relationship/{id}\022v\n\020ListRelationsh" +
-      "ip\022#.profile.v1.ListRelationshipRequest\032" +
-      "$.profile.v1.ListRelationshipResponse\"\025\202" +
-      "\323\344\223\002\017\022\r/relationship0\001B\273\003\n\037com.antinvest" +
-      "or.apis.profile.v1B\014ProfileProtoP\001Z;gith" +
-      "ub.com/antinvestor/apis/go/profile/profi" +
-      "le/v1;profilev1\242\002\003PXX\252\002\nProfile.V1\312\002\nPro" +
-      "file\\V1\342\002\026Profile\\V1\\GPBMetadata\352\002\013Profi" +
-      "le::V1\222A\202\002\022o\n\017Profile Service\"W\n\020Ant Inv" +
-      "estor Ltd\022-https://github.com/antinvesto" +
-      "r/service-lostid\032\024info@antinvestor.com2\003" +
-      "1.0*\002\001\0022\020application/json:\020application/j" +
-      "sonZY\nW\n\006bearer\022M\010\002\0228Authentication toke" +
-      "n, prefixed by Bearer: Bearer <token>\032\rA" +
-      "uthorization \002b\014\n\n\n\006bearer\022\000b\006proto3"
+      ":\0028\001\"=\n\016GetByIdRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r" +
+      "\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"@\n\017GetByIdRe" +
+      "sponse\022-\n\004data\030\001 \001(\0132\031.profile.v1.Profil" +
+      "eObjectR\004data\"\243\002\n\rSearchRequest\022\024\n\005query" +
+      "\030\001 \001(\tR\005query\022\022\n\004page\030\002 \001(\003R\004page\022\024\n\005cou" +
+      "nt\030\003 \001(\005R\005count\022\035\n\nstart_date\030\004 \001(\tR\tsta" +
+      "rtDate\022\031\n\010end_date\030\005 \001(\tR\007endDate\022\036\n\npro" +
+      "perties\030\006 \003(\tR\nproperties\022=\n\006extras\030\007 \003(" +
+      "\0132%.profile.v1.SearchRequest.ExtrasEntry" +
+      "R\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003ke" +
+      "y\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"?\n\016SearchRes" +
+      "ponse\022-\n\004data\030\001 \003(\0132\031.profile.v1.Profile" +
+      "ObjectR\004data\"r\n\014MergeRequest\022+\n\002id\030\001 \001(\t" +
+      "B\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\0225\n\007mer" +
+      "geid\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R" +
+      "\007mergeid\">\n\rMergeResponse\022-\n\004data\030\001 \001(\0132" +
+      "\031.profile.v1.ProfileObjectR\004data\"\366\001\n\rCre" +
+      "ateRequest\0225\n\004type\030\001 \001(\0162\027.profile.v1.Pr" +
+      "ofileTypeB\010\272H\005\202\001\002\020\001R\004type\022$\n\007contact\030\002 \001" +
+      "(\tB\n\272H\007r\005\020\003\030\377\001R\007contact\022I\n\nproperties\030\003 " +
+      "\003(\0132).profile.v1.CreateRequest.Propertie" +
+      "sEntryR\nproperties\032=\n\017PropertiesEntry\022\020\n" +
+      "\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028" +
+      "\001\"?\n\016CreateResponse\022-\n\004data\030\001 \001(\0132\031.prof" +
+      "ile.v1.ProfileObjectR\004data\"\356\001\n\rUpdateReq" +
+      "uest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{" +
+      "3,20}R\002id\022I\n\nproperties\030\002 \003(\0132).profile." +
+      "v1.UpdateRequest.PropertiesEntryR\nproper" +
+      "ties\022&\n\005state\030\003 \001(\0162\020.common.v1.STATER\005s" +
+      "tate\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\tR\003ke" +
+      "y\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"?\n\016UpdateRes" +
+      "ponse\022-\n\004data\030\001 \001(\0132\031.profile.v1.Profile" +
+      "ObjectR\004data\"\330\001\n\021AddContactRequest\022+\n\002id" +
+      "\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022" +
+      "\030\n\007contact\030\002 \001(\tR\007contact\022A\n\006extras\030\003 \003(" +
+      "\0132).profile.v1.AddContactRequest.ExtrasE" +
+      "ntryR\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\t" +
+      "R\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"C\n\022AddCo" +
+      "ntactResponse\022-\n\004data\030\001 \001(\0132\031.profile.v1" +
+      ".ProfileObjectR\004data\"C\n\024RemoveContactReq" +
+      "uest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{" +
+      "3,20}R\002id\"F\n\025RemoveContactResponse\022-\n\004da" +
+      "ta\030\001 \001(\0132\031.profile.v1.ProfileObjectR\004dat" +
+      "a\"\257\002\n\023SearchRosterRequest\022\024\n\005query\030\001 \001(\t" +
+      "R\005query\022\022\n\004page\030\002 \001(\003R\004page\022\024\n\005count\030\003 \001" +
+      "(\005R\005count\022\035\n\nstart_date\030\004 \001(\tR\tstartDate" +
+      "\022\031\n\010end_date\030\005 \001(\tR\007endDate\022\036\n\npropertie" +
+      "s\030\006 \003(\tR\nproperties\022C\n\006extras\030\007 \003(\0132+.pr" +
+      "ofile.v1.SearchRosterRequest.ExtrasEntry" +
+      "R\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003ke" +
+      "y\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"M\n\024SearchRos" +
+      "terResponse\0225\n\010contacts\030\001 \003(\0132\031.profile." +
+      "v1.ContactObjectR\010contacts\"K\n\020AddRosterR" +
+      "equest\0227\n\007contact\030\001 \003(\0132\035.profile.v1.Add" +
+      "ContactRequestR\007contact\"H\n\021AddRosterResp" +
+      "onse\0223\n\007contact\030\001 \003(\0132\031.profile.v1.Conta" +
+      "ctObjectR\007contact\"B\n\023RemoveRosterRequest" +
+      "\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20" +
+      "}R\002id\"M\n\024RemoveRosterResponse\0225\n\010contact" +
+      "s\030\001 \001(\0132\031.profile.v1.ContactObjectR\010cont" +
+      "acts\"u\n\021AddAddressRequest\022+\n\002id\030\001 \001(\tB\033\272" +
+      "H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\0223\n\007addres" +
+      "s\030\002 \001(\0132\031.profile.v1.AddressObjectR\007addr" +
+      "ess\"C\n\022AddAddressResponse\022-\n\004data\030\001 \001(\0132" +
+      "\031.profile.v1.ProfileObjectR\004data\"/\n\023GetB" +
+      "yContactRequest\022\030\n\007contact\030\001 \001(\tR\007contac" +
+      "t\"E\n\024GetByContactResponse\022-\n\004data\030\001 \001(\0132" +
+      "\031.profile.v1.ProfileObjectR\004data\"\321\002\n\027Lis" +
+      "tRelationshipRequest\022?\n\tpeer_name\030\001 \001(\tB" +
+      "\"\272H\037r\035\020\003\030(R\007ContactR\007ProfileR\005GroupR\010pee" +
+      "rName\0224\n\007peer_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a" +
+      "-z_-]{3,20}R\006peerId\022P\n\024last_relationship" +
+      "_id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\320\001" +
+      "\001R\022lastRelationshipId\022.\n\023related_childre" +
+      "n_id\030\004 \003(\tR\021relatedChildrenId\022\024\n\005count\030\005" +
+      " \001(\005R\005count\022\'\n\017invert_relation\030\006 \001(\010R\016in" +
+      "vertRelation\"N\n\030ListRelationshipResponse" +
+      "\0222\n\004data\030\001 \003(\0132\036.profile.v1.Relationship" +
+      "ObjectR\004data\"\362\003\n\026AddRelationshipRequest\022" +
+      "+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}" +
+      "R\002id\022:\n\006parent\030\002 \001(\tB\"\272H\037r\035\020\003\030(R\007Contact" +
+      "R\007ProfileR\005GroupR\006parent\0228\n\tparent_id\030\003 " +
+      "\001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010parent" +
+      "Id\0228\n\005child\030\004 \001(\tB\"\272H\037r\035\020\003\030(R\007ContactR\007P" +
+      "rofileR\005GroupR\005child\0226\n\010child_id\030\005 \001(\tB\033" +
+      "\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\007childId\0220\n\004" +
+      "type\030\006 \001(\0162\034.profile.v1.RelationshipType" +
+      "R\004type\022R\n\nproperties\030\007 \003(\01322.profile.v1." +
+      "AddRelationshipRequest.PropertiesEntryR\n" +
+      "properties\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001" +
+      "(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"M\n\027Add" +
+      "RelationshipResponse\0222\n\004data\030\001 \001(\0132\036.pro" +
+      "file.v1.RelationshipObjectR\004data\"\205\001\n\031Del" +
+      "eteRelationshipRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r" +
+      "\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022;\n\tparent_id" +
+      "\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\320\001\001R\010" +
+      "parentId\"P\n\032DeleteRelationshipResponse\0222" +
+      "\n\004data\030\001 \001(\0132\036.profile.v1.RelationshipOb" +
+      "jectR\004data*#\n\013ContactType\022\t\n\005EMAIL\020\000\022\t\n\005" +
+      "PHONE\020\001*n\n\022CommunicationLevel\022\007\n\003ALL\020\000\022\026" +
+      "\n\022INTERNAL_MARKETING\020\001\022\024\n\020IMPORTANT_ALER" +
+      "TS\020\002\022\021\n\rSYSTEM_ALERTS\020\003\022\016\n\nNO_CONTACT\020\004*" +
+      "3\n\013ProfileType\022\n\n\006PERSON\020\000\022\017\n\013INSTITUTIO" +
+      "N\020\001\022\007\n\003BOT\020\002*@\n\020RelationshipType\022\n\n\006MEMB" +
+      "ER\020\000\022\016\n\nAFFILIATED\020\001\022\020\n\014BLACK_LISTED\020\0022\334" +
+      "\013\n\016ProfileService\022Q\n\007GetById\022\032.profile.v" +
+      "1.GetByIdRequest\032\033.profile.v1.GetByIdRes" +
+      "ponse\"\r\202\323\344\223\002\007\022\005/{id}\022c\n\014GetByContact\022\037.p" +
+      "rofile.v1.GetByContactRequest\032 .profile." +
+      "v1.GetByContactResponse\"\020\202\323\344\223\002\n\022\010/contac" +
+      "t\022R\n\006Search\022\031.profile.v1.SearchRequest\032\032" +
+      ".profile.v1.SearchResponse\"\017\202\323\344\223\002\t\022\007/sea" +
+      "rch0\001\022O\n\005Merge\022\030.profile.v1.MergeRequest" +
+      "\032\031.profile.v1.MergeResponse\"\021\202\323\344\223\002\013\"\006/me" +
+      "rge:\001*\022M\n\006Create\022\031.profile.v1.CreateRequ" +
+      "est\032\032.profile.v1.CreateResponse\"\014\202\323\344\223\002\006\"" +
+      "\001/:\001*\022Q\n\006Update\022\031.profile.v1.UpdateReque" +
+      "st\032\032.profile.v1.UpdateResponse\"\020\202\323\344\223\002\n2\005" +
+      "/{id}:\001*\022`\n\nAddContact\022\035.profile.v1.AddC" +
+      "ontactRequest\032\036.profile.v1.AddContactRes" +
+      "ponse\"\023\202\323\344\223\002\r\"\010/contact:\001*\022k\n\rRemoveCont" +
+      "act\022 .profile.v1.RemoveContactRequest\032!." +
+      "profile.v1.RemoveContactResponse\"\025\202\323\344\223\002\017" +
+      "*\r/contact/{id}\022d\n\014SearchRoster\022\037.profil" +
+      "e.v1.SearchRosterRequest\032 .profile.v1.Se" +
+      "archRosterResponse\"\017\202\323\344\223\002\t\022\007/roster0\001\022\\\n" +
+      "\tAddRoster\022\034.profile.v1.AddRosterRequest" +
+      "\032\035.profile.v1.AddRosterResponse\"\022\202\323\344\223\002\014\"" +
+      "\007/roster:\001*\022g\n\014RemoveRoster\022\037.profile.v1" +
+      ".RemoveRosterRequest\032 .profile.v1.Remove" +
+      "RosterResponse\"\024\202\323\344\223\002\016*\014/roster/{id}\022`\n\n" +
+      "AddAddress\022\035.profile.v1.AddAddressReques" +
+      "t\032\036.profile.v1.AddAddressResponse\"\023\202\323\344\223\002" +
+      "\r\"\010/address:\001*\022t\n\017AddRelationship\022\".prof" +
+      "ile.v1.AddRelationshipRequest\032#.profile." +
+      "v1.AddRelationshipResponse\"\030\202\323\344\223\002\022\"\r/rel" +
+      "ationship:\001*\022\177\n\022DeleteRelationship\022%.pro" +
+      "file.v1.DeleteRelationshipRequest\032&.prof" +
+      "ile.v1.DeleteRelationshipResponse\"\032\202\323\344\223\002" +
+      "\024*\022/relationship/{id}\022v\n\020ListRelationshi" +
+      "p\022#.profile.v1.ListRelationshipRequest\032$" +
+      ".profile.v1.ListRelationshipResponse\"\025\202\323" +
+      "\344\223\002\017\022\r/relationship0\001B\273\003\n\037com.antinvesto" +
+      "r.apis.profile.v1B\014ProfileProtoP\001Z;githu" +
+      "b.com/antinvestor/apis/go/profile/profil" +
+      "e/v1;profilev1\242\002\003PXX\252\002\nProfile.V1\312\002\nProf" +
+      "ile\\V1\342\002\026Profile\\V1\\GPBMetadata\352\002\013Profil" +
+      "e::V1\222A\202\002\022o\n\017Profile Service\"W\n\020Ant Inve" +
+      "stor Ltd\022-https://github.com/antinvestor" +
+      "/service-lostid\032\024info@antinvestor.com2\0031" +
+      ".0*\002\001\0022\020application/json:\020application/js" +
+      "onZY\nW\n\006bearer\022M\010\002\0228Authentication token" +
+      ", prefixed by Bearer: Bearer <token>\032\rAu" +
+      "thorization \002b\014\n\n\n\006bearer\022\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -389,7 +481,13 @@ public final class ProfileProto {
     internal_static_profile_v1_ContactObject_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_ContactObject_descriptor,
-        new java.lang.String[] { "Id", "Type", "Detail", "Verified", "CommunicationLevel", "State", });
+        new java.lang.String[] { "Id", "Type", "Detail", "Verified", "CommunicationLevel", "State", "Extra", });
+    internal_static_profile_v1_ContactObject_ExtraEntry_descriptor =
+      internal_static_profile_v1_ContactObject_descriptor.getNestedTypes().get(0);
+    internal_static_profile_v1_ContactObject_ExtraEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_profile_v1_ContactObject_ExtraEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
     internal_static_profile_v1_AddressObject_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_profile_v1_AddressObject_fieldAccessorTable = new
@@ -509,51 +607,111 @@ public final class ProfileProto {
     internal_static_profile_v1_AddContactRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_AddContactRequest_descriptor,
-        new java.lang.String[] { "Id", "Contact", });
+        new java.lang.String[] { "Id", "Contact", "Extras", });
+    internal_static_profile_v1_AddContactRequest_ExtrasEntry_descriptor =
+      internal_static_profile_v1_AddContactRequest_descriptor.getNestedTypes().get(0);
+    internal_static_profile_v1_AddContactRequest_ExtrasEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_profile_v1_AddContactRequest_ExtrasEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
     internal_static_profile_v1_AddContactResponse_descriptor =
       getDescriptor().getMessageTypes().get(16);
     internal_static_profile_v1_AddContactResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_AddContactResponse_descriptor,
         new java.lang.String[] { "Data", });
-    internal_static_profile_v1_AddAddressRequest_descriptor =
+    internal_static_profile_v1_RemoveContactRequest_descriptor =
       getDescriptor().getMessageTypes().get(17);
+    internal_static_profile_v1_RemoveContactRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_profile_v1_RemoveContactRequest_descriptor,
+        new java.lang.String[] { "Id", });
+    internal_static_profile_v1_RemoveContactResponse_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_profile_v1_RemoveContactResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_profile_v1_RemoveContactResponse_descriptor,
+        new java.lang.String[] { "Data", });
+    internal_static_profile_v1_SearchRosterRequest_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_profile_v1_SearchRosterRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_profile_v1_SearchRosterRequest_descriptor,
+        new java.lang.String[] { "Query", "Page", "Count", "StartDate", "EndDate", "Properties", "Extras", });
+    internal_static_profile_v1_SearchRosterRequest_ExtrasEntry_descriptor =
+      internal_static_profile_v1_SearchRosterRequest_descriptor.getNestedTypes().get(0);
+    internal_static_profile_v1_SearchRosterRequest_ExtrasEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_profile_v1_SearchRosterRequest_ExtrasEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_profile_v1_SearchRosterResponse_descriptor =
+      getDescriptor().getMessageTypes().get(20);
+    internal_static_profile_v1_SearchRosterResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_profile_v1_SearchRosterResponse_descriptor,
+        new java.lang.String[] { "Contacts", });
+    internal_static_profile_v1_AddRosterRequest_descriptor =
+      getDescriptor().getMessageTypes().get(21);
+    internal_static_profile_v1_AddRosterRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_profile_v1_AddRosterRequest_descriptor,
+        new java.lang.String[] { "Contact", });
+    internal_static_profile_v1_AddRosterResponse_descriptor =
+      getDescriptor().getMessageTypes().get(22);
+    internal_static_profile_v1_AddRosterResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_profile_v1_AddRosterResponse_descriptor,
+        new java.lang.String[] { "Contact", });
+    internal_static_profile_v1_RemoveRosterRequest_descriptor =
+      getDescriptor().getMessageTypes().get(23);
+    internal_static_profile_v1_RemoveRosterRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_profile_v1_RemoveRosterRequest_descriptor,
+        new java.lang.String[] { "Id", });
+    internal_static_profile_v1_RemoveRosterResponse_descriptor =
+      getDescriptor().getMessageTypes().get(24);
+    internal_static_profile_v1_RemoveRosterResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_profile_v1_RemoveRosterResponse_descriptor,
+        new java.lang.String[] { "Contacts", });
+    internal_static_profile_v1_AddAddressRequest_descriptor =
+      getDescriptor().getMessageTypes().get(25);
     internal_static_profile_v1_AddAddressRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_AddAddressRequest_descriptor,
         new java.lang.String[] { "Id", "Address", });
     internal_static_profile_v1_AddAddressResponse_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(26);
     internal_static_profile_v1_AddAddressResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_AddAddressResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_profile_v1_GetByContactRequest_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(27);
     internal_static_profile_v1_GetByContactRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_GetByContactRequest_descriptor,
         new java.lang.String[] { "Contact", });
     internal_static_profile_v1_GetByContactResponse_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(28);
     internal_static_profile_v1_GetByContactResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_GetByContactResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_profile_v1_ListRelationshipRequest_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(29);
     internal_static_profile_v1_ListRelationshipRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_ListRelationshipRequest_descriptor,
         new java.lang.String[] { "PeerName", "PeerId", "LastRelationshipId", "RelatedChildrenId", "Count", "InvertRelation", });
     internal_static_profile_v1_ListRelationshipResponse_descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(30);
     internal_static_profile_v1_ListRelationshipResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_ListRelationshipResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_profile_v1_AddRelationshipRequest_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(31);
     internal_static_profile_v1_AddRelationshipRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_AddRelationshipRequest_descriptor,
@@ -565,19 +723,19 @@ public final class ProfileProto {
         internal_static_profile_v1_AddRelationshipRequest_PropertiesEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_profile_v1_AddRelationshipResponse_descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(32);
     internal_static_profile_v1_AddRelationshipResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_AddRelationshipResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_profile_v1_DeleteRelationshipRequest_descriptor =
-      getDescriptor().getMessageTypes().get(25);
+      getDescriptor().getMessageTypes().get(33);
     internal_static_profile_v1_DeleteRelationshipRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_DeleteRelationshipRequest_descriptor,
         new java.lang.String[] { "Id", "ParentId", });
     internal_static_profile_v1_DeleteRelationshipResponse_descriptor =
-      getDescriptor().getMessageTypes().get(26);
+      getDescriptor().getMessageTypes().get(34);
     internal_static_profile_v1_DeleteRelationshipResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_profile_v1_DeleteRelationshipResponse_descriptor,

@@ -84,6 +84,7 @@ message ContactObject {
   bool verified = 4;
   CommunicationLevel communication_level = 5;
   common.v1.STATE state = 6;
+  map<string, string> extra = 7;
 }
 
 message AddressObject {
@@ -244,10 +245,58 @@ message AddContactRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   string contact = 2;
+  map<string, string> extras = 3;
 }
 
 message AddContactResponse {
   ProfileObject data = 1;
+}
+
+// The request message containing the information necessary to remove a contact
+message RemoveContactRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+}
+
+message RemoveContactResponse {
+  ProfileObject data = 1;
+}
+
+message SearchRosterRequest {
+  string query = 1;
+  int64 page = 2;
+  int32 count = 3;
+  string start_date = 4;
+  string end_date = 5;
+  repeated string properties = 6;
+  map<string, string> extras = 7;
+}
+
+message SearchRosterResponse {
+  repeated ContactObject contacts = 1;
+}
+
+message AddRosterRequest {
+  repeated AddContactRequest contact = 1;
+}
+
+message AddRosterResponse {
+  repeated ContactObject contact = 1;
+}
+
+message RemoveRosterRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+}
+
+message RemoveRosterResponse {
+  ContactObject contacts = 1;
 }
 
 // The request message containing the information necessary to create a profile
@@ -407,6 +456,29 @@ service ProfileService {
       post: "/contact"
       body: "*"
     };
+  }
+
+  // Removes an old contact based on this request's id
+  rpc RemoveContact(RemoveContactRequest) returns (RemoveContactResponse) {
+    option (google.api.http) = {delete: "/contact/{id}"};
+  }
+
+  // Searches all contacts tied to a users profile and based on the active request.
+  rpc SearchRoster(SearchRosterRequest) returns (stream SearchRosterResponse) {
+    option (google.api.http) = {get: "/roster"};
+  }
+
+  // Adds a new contact based on the request/this leads to automatic verification.
+  rpc AddRoster(AddRosterRequest) returns (AddRosterResponse) {
+    option (google.api.http) = {
+      post: "/roster"
+      body: "*"
+    };
+  }
+
+  // Removes a contact from a user's circle based on this request's id
+  rpc RemoveRoster(RemoveRosterRequest) returns (RemoveRosterResponse) {
+    option (google.api.http) = {delete: "/roster/{id}"};
   }
 
   // Adds a new address based on the request.
