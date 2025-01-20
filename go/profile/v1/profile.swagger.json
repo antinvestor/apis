@@ -787,7 +787,7 @@
     "profile.v1.AddRosterRequest": {
       "type": "object",
       "properties": {
-        "contact": {
+        "data": {
           "type": "array",
           "items": {
             "type": "object",
@@ -799,11 +799,11 @@
     "profile.v1.AddRosterResponse": {
       "type": "object",
       "properties": {
-        "contact": {
+        "data": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/profile.v1.ContactObject"
+            "$ref": "#/definitions/profile.v1.RosterObject"
           }
         }
       }
@@ -1103,8 +1103,28 @@
     "profile.v1.RemoveRosterResponse": {
       "type": "object",
       "properties": {
-        "contacts": {
+        "roster": {
+          "$ref": "#/definitions/profile.v1.RosterObject"
+        }
+      }
+    },
+    "profile.v1.RosterObject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "contact": {
           "$ref": "#/definitions/profile.v1.ContactObject"
+        },
+        "extra": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1123,11 +1143,11 @@
     "profile.v1.SearchRosterResponse": {
       "type": "object",
       "properties": {
-        "contacts": {
+        "data": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/profile.v1.ContactObject"
+            "$ref": "#/definitions/profile.v1.RosterObject"
           }
         }
       }

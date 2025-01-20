@@ -41,7 +41,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private SearchRosterResponse() {
-    contacts_ = java.util.Collections.emptyList();
+    data_ = java.util.Collections.emptyList();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -57,45 +57,45 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.profile.v1.SearchRosterResponse.class, com.antinvestor.apis.profile.v1.SearchRosterResponse.Builder.class);
   }
 
-  public static final int CONTACTS_FIELD_NUMBER = 1;
+  public static final int DATA_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private java.util.List<com.antinvestor.apis.profile.v1.ContactObject> contacts_;
+  private java.util.List<com.antinvestor.apis.profile.v1.RosterObject> data_;
   /**
-   * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+   * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
-  public java.util.List<com.antinvestor.apis.profile.v1.ContactObject> getContactsList() {
-    return contacts_;
+  public java.util.List<com.antinvestor.apis.profile.v1.RosterObject> getDataList() {
+    return data_;
   }
   /**
-   * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+   * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
-  public java.util.List<? extends com.antinvestor.apis.profile.v1.ContactObjectOrBuilder> 
-      getContactsOrBuilderList() {
-    return contacts_;
+  public java.util.List<? extends com.antinvestor.apis.profile.v1.RosterObjectOrBuilder> 
+      getDataOrBuilderList() {
+    return data_;
   }
   /**
-   * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+   * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
-  public int getContactsCount() {
-    return contacts_.size();
+  public int getDataCount() {
+    return data_.size();
   }
   /**
-   * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+   * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
-  public com.antinvestor.apis.profile.v1.ContactObject getContacts(int index) {
-    return contacts_.get(index);
+  public com.antinvestor.apis.profile.v1.RosterObject getData(int index) {
+    return data_.get(index);
   }
   /**
-   * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+   * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
-  public com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getContactsOrBuilder(
+  public com.antinvestor.apis.profile.v1.RosterObjectOrBuilder getDataOrBuilder(
       int index) {
-    return contacts_.get(index);
+    return data_.get(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -112,8 +112,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    for (int i = 0; i < contacts_.size(); i++) {
-      output.writeMessage(1, contacts_.get(i));
+    for (int i = 0; i < data_.size(); i++) {
+      output.writeMessage(1, data_.get(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -124,9 +124,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    for (int i = 0; i < contacts_.size(); i++) {
+    for (int i = 0; i < data_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(1, contacts_.get(i));
+        .computeMessageSize(1, data_.get(i));
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -143,8 +143,8 @@ private static final long serialVersionUID = 0L;
     }
     com.antinvestor.apis.profile.v1.SearchRosterResponse other = (com.antinvestor.apis.profile.v1.SearchRosterResponse) obj;
 
-    if (!getContactsList()
-        .equals(other.getContactsList())) return false;
+    if (!getDataList()
+        .equals(other.getDataList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -156,9 +156,9 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (getContactsCount() > 0) {
-      hash = (37 * hash) + CONTACTS_FIELD_NUMBER;
-      hash = (53 * hash) + getContactsList().hashCode();
+    if (getDataCount() > 0) {
+      hash = (37 * hash) + DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getDataList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -291,11 +291,11 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      if (contactsBuilder_ == null) {
-        contacts_ = java.util.Collections.emptyList();
+      if (dataBuilder_ == null) {
+        data_ = java.util.Collections.emptyList();
       } else {
-        contacts_ = null;
-        contactsBuilder_.clear();
+        data_ = null;
+        dataBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000001);
       return this;
@@ -331,14 +331,14 @@ private static final long serialVersionUID = 0L;
     }
 
     private void buildPartialRepeatedFields(com.antinvestor.apis.profile.v1.SearchRosterResponse result) {
-      if (contactsBuilder_ == null) {
+      if (dataBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0)) {
-          contacts_ = java.util.Collections.unmodifiableList(contacts_);
+          data_ = java.util.Collections.unmodifiableList(data_);
           bitField0_ = (bitField0_ & ~0x00000001);
         }
-        result.contacts_ = contacts_;
+        result.data_ = data_;
       } else {
-        result.contacts_ = contactsBuilder_.build();
+        result.data_ = dataBuilder_.build();
       }
     }
 
@@ -358,29 +358,29 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.antinvestor.apis.profile.v1.SearchRosterResponse other) {
       if (other == com.antinvestor.apis.profile.v1.SearchRosterResponse.getDefaultInstance()) return this;
-      if (contactsBuilder_ == null) {
-        if (!other.contacts_.isEmpty()) {
-          if (contacts_.isEmpty()) {
-            contacts_ = other.contacts_;
+      if (dataBuilder_ == null) {
+        if (!other.data_.isEmpty()) {
+          if (data_.isEmpty()) {
+            data_ = other.data_;
             bitField0_ = (bitField0_ & ~0x00000001);
           } else {
-            ensureContactsIsMutable();
-            contacts_.addAll(other.contacts_);
+            ensureDataIsMutable();
+            data_.addAll(other.data_);
           }
           onChanged();
         }
       } else {
-        if (!other.contacts_.isEmpty()) {
-          if (contactsBuilder_.isEmpty()) {
-            contactsBuilder_.dispose();
-            contactsBuilder_ = null;
-            contacts_ = other.contacts_;
+        if (!other.data_.isEmpty()) {
+          if (dataBuilder_.isEmpty()) {
+            dataBuilder_.dispose();
+            dataBuilder_ = null;
+            data_ = other.data_;
             bitField0_ = (bitField0_ & ~0x00000001);
-            contactsBuilder_ = 
+            dataBuilder_ = 
               com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 getContactsFieldBuilder() : null;
+                 getDataFieldBuilder() : null;
           } else {
-            contactsBuilder_.addAllMessages(other.contacts_);
+            dataBuilder_.addAllMessages(other.data_);
           }
         }
       }
@@ -411,15 +411,15 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              com.antinvestor.apis.profile.v1.ContactObject m =
+              com.antinvestor.apis.profile.v1.RosterObject m =
                   input.readMessage(
-                      com.antinvestor.apis.profile.v1.ContactObject.parser(),
+                      com.antinvestor.apis.profile.v1.RosterObject.parser(),
                       extensionRegistry);
-              if (contactsBuilder_ == null) {
-                ensureContactsIsMutable();
-                contacts_.add(m);
+              if (dataBuilder_ == null) {
+                ensureDataIsMutable();
+                data_.add(m);
               } else {
-                contactsBuilder_.addMessage(m);
+                dataBuilder_.addMessage(m);
               }
               break;
             } // case 10
@@ -440,244 +440,244 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.util.List<com.antinvestor.apis.profile.v1.ContactObject> contacts_ =
+    private java.util.List<com.antinvestor.apis.profile.v1.RosterObject> data_ =
       java.util.Collections.emptyList();
-    private void ensureContactsIsMutable() {
+    private void ensureDataIsMutable() {
       if (!((bitField0_ & 0x00000001) != 0)) {
-        contacts_ = new java.util.ArrayList<com.antinvestor.apis.profile.v1.ContactObject>(contacts_);
+        data_ = new java.util.ArrayList<com.antinvestor.apis.profile.v1.RosterObject>(data_);
         bitField0_ |= 0x00000001;
        }
     }
 
     private com.google.protobuf.RepeatedFieldBuilder<
-        com.antinvestor.apis.profile.v1.ContactObject, com.antinvestor.apis.profile.v1.ContactObject.Builder, com.antinvestor.apis.profile.v1.ContactObjectOrBuilder> contactsBuilder_;
+        com.antinvestor.apis.profile.v1.RosterObject, com.antinvestor.apis.profile.v1.RosterObject.Builder, com.antinvestor.apis.profile.v1.RosterObjectOrBuilder> dataBuilder_;
 
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public java.util.List<com.antinvestor.apis.profile.v1.ContactObject> getContactsList() {
-      if (contactsBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(contacts_);
+    public java.util.List<com.antinvestor.apis.profile.v1.RosterObject> getDataList() {
+      if (dataBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(data_);
       } else {
-        return contactsBuilder_.getMessageList();
+        return dataBuilder_.getMessageList();
       }
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public int getContactsCount() {
-      if (contactsBuilder_ == null) {
-        return contacts_.size();
+    public int getDataCount() {
+      if (dataBuilder_ == null) {
+        return data_.size();
       } else {
-        return contactsBuilder_.getCount();
+        return dataBuilder_.getCount();
       }
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public com.antinvestor.apis.profile.v1.ContactObject getContacts(int index) {
-      if (contactsBuilder_ == null) {
-        return contacts_.get(index);
+    public com.antinvestor.apis.profile.v1.RosterObject getData(int index) {
+      if (dataBuilder_ == null) {
+        return data_.get(index);
       } else {
-        return contactsBuilder_.getMessage(index);
+        return dataBuilder_.getMessage(index);
       }
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public Builder setContacts(
-        int index, com.antinvestor.apis.profile.v1.ContactObject value) {
-      if (contactsBuilder_ == null) {
+    public Builder setData(
+        int index, com.antinvestor.apis.profile.v1.RosterObject value) {
+      if (dataBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureContactsIsMutable();
-        contacts_.set(index, value);
+        ensureDataIsMutable();
+        data_.set(index, value);
         onChanged();
       } else {
-        contactsBuilder_.setMessage(index, value);
+        dataBuilder_.setMessage(index, value);
       }
       return this;
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public Builder setContacts(
-        int index, com.antinvestor.apis.profile.v1.ContactObject.Builder builderForValue) {
-      if (contactsBuilder_ == null) {
-        ensureContactsIsMutable();
-        contacts_.set(index, builderForValue.build());
+    public Builder setData(
+        int index, com.antinvestor.apis.profile.v1.RosterObject.Builder builderForValue) {
+      if (dataBuilder_ == null) {
+        ensureDataIsMutable();
+        data_.set(index, builderForValue.build());
         onChanged();
       } else {
-        contactsBuilder_.setMessage(index, builderForValue.build());
+        dataBuilder_.setMessage(index, builderForValue.build());
       }
       return this;
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public Builder addContacts(com.antinvestor.apis.profile.v1.ContactObject value) {
-      if (contactsBuilder_ == null) {
+    public Builder addData(com.antinvestor.apis.profile.v1.RosterObject value) {
+      if (dataBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureContactsIsMutable();
-        contacts_.add(value);
+        ensureDataIsMutable();
+        data_.add(value);
         onChanged();
       } else {
-        contactsBuilder_.addMessage(value);
+        dataBuilder_.addMessage(value);
       }
       return this;
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public Builder addContacts(
-        int index, com.antinvestor.apis.profile.v1.ContactObject value) {
-      if (contactsBuilder_ == null) {
+    public Builder addData(
+        int index, com.antinvestor.apis.profile.v1.RosterObject value) {
+      if (dataBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureContactsIsMutable();
-        contacts_.add(index, value);
+        ensureDataIsMutable();
+        data_.add(index, value);
         onChanged();
       } else {
-        contactsBuilder_.addMessage(index, value);
+        dataBuilder_.addMessage(index, value);
       }
       return this;
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public Builder addContacts(
-        com.antinvestor.apis.profile.v1.ContactObject.Builder builderForValue) {
-      if (contactsBuilder_ == null) {
-        ensureContactsIsMutable();
-        contacts_.add(builderForValue.build());
+    public Builder addData(
+        com.antinvestor.apis.profile.v1.RosterObject.Builder builderForValue) {
+      if (dataBuilder_ == null) {
+        ensureDataIsMutable();
+        data_.add(builderForValue.build());
         onChanged();
       } else {
-        contactsBuilder_.addMessage(builderForValue.build());
+        dataBuilder_.addMessage(builderForValue.build());
       }
       return this;
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public Builder addContacts(
-        int index, com.antinvestor.apis.profile.v1.ContactObject.Builder builderForValue) {
-      if (contactsBuilder_ == null) {
-        ensureContactsIsMutable();
-        contacts_.add(index, builderForValue.build());
+    public Builder addData(
+        int index, com.antinvestor.apis.profile.v1.RosterObject.Builder builderForValue) {
+      if (dataBuilder_ == null) {
+        ensureDataIsMutable();
+        data_.add(index, builderForValue.build());
         onChanged();
       } else {
-        contactsBuilder_.addMessage(index, builderForValue.build());
+        dataBuilder_.addMessage(index, builderForValue.build());
       }
       return this;
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public Builder addAllContacts(
-        java.lang.Iterable<? extends com.antinvestor.apis.profile.v1.ContactObject> values) {
-      if (contactsBuilder_ == null) {
-        ensureContactsIsMutable();
+    public Builder addAllData(
+        java.lang.Iterable<? extends com.antinvestor.apis.profile.v1.RosterObject> values) {
+      if (dataBuilder_ == null) {
+        ensureDataIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, contacts_);
+            values, data_);
         onChanged();
       } else {
-        contactsBuilder_.addAllMessages(values);
+        dataBuilder_.addAllMessages(values);
       }
       return this;
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public Builder clearContacts() {
-      if (contactsBuilder_ == null) {
-        contacts_ = java.util.Collections.emptyList();
+    public Builder clearData() {
+      if (dataBuilder_ == null) {
+        data_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
       } else {
-        contactsBuilder_.clear();
+        dataBuilder_.clear();
       }
       return this;
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public Builder removeContacts(int index) {
-      if (contactsBuilder_ == null) {
-        ensureContactsIsMutable();
-        contacts_.remove(index);
+    public Builder removeData(int index) {
+      if (dataBuilder_ == null) {
+        ensureDataIsMutable();
+        data_.remove(index);
         onChanged();
       } else {
-        contactsBuilder_.remove(index);
+        dataBuilder_.remove(index);
       }
       return this;
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public com.antinvestor.apis.profile.v1.ContactObject.Builder getContactsBuilder(
+    public com.antinvestor.apis.profile.v1.RosterObject.Builder getDataBuilder(
         int index) {
-      return getContactsFieldBuilder().getBuilder(index);
+      return getDataFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getContactsOrBuilder(
+    public com.antinvestor.apis.profile.v1.RosterObjectOrBuilder getDataOrBuilder(
         int index) {
-      if (contactsBuilder_ == null) {
-        return contacts_.get(index);  } else {
-        return contactsBuilder_.getMessageOrBuilder(index);
+      if (dataBuilder_ == null) {
+        return data_.get(index);  } else {
+        return dataBuilder_.getMessageOrBuilder(index);
       }
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public java.util.List<? extends com.antinvestor.apis.profile.v1.ContactObjectOrBuilder> 
-         getContactsOrBuilderList() {
-      if (contactsBuilder_ != null) {
-        return contactsBuilder_.getMessageOrBuilderList();
+    public java.util.List<? extends com.antinvestor.apis.profile.v1.RosterObjectOrBuilder> 
+         getDataOrBuilderList() {
+      if (dataBuilder_ != null) {
+        return dataBuilder_.getMessageOrBuilderList();
       } else {
-        return java.util.Collections.unmodifiableList(contacts_);
+        return java.util.Collections.unmodifiableList(data_);
       }
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public com.antinvestor.apis.profile.v1.ContactObject.Builder addContactsBuilder() {
-      return getContactsFieldBuilder().addBuilder(
-          com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance());
+    public com.antinvestor.apis.profile.v1.RosterObject.Builder addDataBuilder() {
+      return getDataFieldBuilder().addBuilder(
+          com.antinvestor.apis.profile.v1.RosterObject.getDefaultInstance());
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public com.antinvestor.apis.profile.v1.ContactObject.Builder addContactsBuilder(
+    public com.antinvestor.apis.profile.v1.RosterObject.Builder addDataBuilder(
         int index) {
-      return getContactsFieldBuilder().addBuilder(
-          index, com.antinvestor.apis.profile.v1.ContactObject.getDefaultInstance());
+      return getDataFieldBuilder().addBuilder(
+          index, com.antinvestor.apis.profile.v1.RosterObject.getDefaultInstance());
     }
     /**
-     * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+     * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
      */
-    public java.util.List<com.antinvestor.apis.profile.v1.ContactObject.Builder> 
-         getContactsBuilderList() {
-      return getContactsFieldBuilder().getBuilderList();
+    public java.util.List<com.antinvestor.apis.profile.v1.RosterObject.Builder> 
+         getDataBuilderList() {
+      return getDataFieldBuilder().getBuilderList();
     }
     private com.google.protobuf.RepeatedFieldBuilder<
-        com.antinvestor.apis.profile.v1.ContactObject, com.antinvestor.apis.profile.v1.ContactObject.Builder, com.antinvestor.apis.profile.v1.ContactObjectOrBuilder> 
-        getContactsFieldBuilder() {
-      if (contactsBuilder_ == null) {
-        contactsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            com.antinvestor.apis.profile.v1.ContactObject, com.antinvestor.apis.profile.v1.ContactObject.Builder, com.antinvestor.apis.profile.v1.ContactObjectOrBuilder>(
-                contacts_,
+        com.antinvestor.apis.profile.v1.RosterObject, com.antinvestor.apis.profile.v1.RosterObject.Builder, com.antinvestor.apis.profile.v1.RosterObjectOrBuilder> 
+        getDataFieldBuilder() {
+      if (dataBuilder_ == null) {
+        dataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+            com.antinvestor.apis.profile.v1.RosterObject, com.antinvestor.apis.profile.v1.RosterObject.Builder, com.antinvestor.apis.profile.v1.RosterObjectOrBuilder>(
+                data_,
                 ((bitField0_ & 0x00000001) != 0),
                 getParentForChildren(),
                 isClean());
-        contacts_ = null;
+        data_ = null;
       }
-      return contactsBuilder_;
+      return dataBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:profile.v1.SearchRosterResponse)

@@ -87,6 +87,21 @@ message ContactObject {
   map<string, string> extra = 7;
 }
 
+message RosterObject {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string profile_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  ContactObject contact = 3;
+  map<string, string> extra = 4;
+}
+
 message AddressObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
@@ -276,15 +291,15 @@ message SearchRosterRequest {
 }
 
 message SearchRosterResponse {
-  repeated ContactObject contacts = 1;
+  repeated RosterObject data = 1;
 }
 
 message AddRosterRequest {
-  repeated AddContactRequest contact = 1;
+  repeated AddContactRequest data = 1;
 }
 
 message AddRosterResponse {
-  repeated ContactObject contact = 1;
+  repeated RosterObject data = 1;
 }
 
 message RemoveRosterRequest {
@@ -296,7 +311,7 @@ message RemoveRosterRequest {
 }
 
 message RemoveRosterResponse {
-  ContactObject contacts = 1;
+  RosterObject roster = 1;
 }
 
 // The request message containing the information necessary to create a profile

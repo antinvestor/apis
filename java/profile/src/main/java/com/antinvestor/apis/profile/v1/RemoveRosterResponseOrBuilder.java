@@ -24,17 +24,17 @@ public interface RemoveRosterResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
-   * @return Whether the contacts field is set.
+   * <code>.profile.v1.RosterObject roster = 1 [json_name = "roster"];</code>
+   * @return Whether the roster field is set.
    */
-  boolean hasContacts();
+  boolean hasRoster();
   /**
-   * <code>.profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
-   * @return The contacts.
+   * <code>.profile.v1.RosterObject roster = 1 [json_name = "roster"];</code>
+   * @return The roster.
    */
-  com.antinvestor.apis.profile.v1.ContactObject getContacts();
+  com.antinvestor.apis.profile.v1.RosterObject getRoster();
   /**
-   * <code>.profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+   * <code>.profile.v1.RosterObject roster = 1 [json_name = "roster"];</code>
    */
-  com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getContactsOrBuilder();
+  com.antinvestor.apis.profile.v1.RosterObjectOrBuilder getRosterOrBuilder();
 }

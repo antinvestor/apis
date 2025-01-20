@@ -24,26 +24,26 @@ public interface SearchRosterResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+   * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
    */
-  java.util.List<com.antinvestor.apis.profile.v1.ContactObject> 
-      getContactsList();
+  java.util.List<com.antinvestor.apis.profile.v1.RosterObject> 
+      getDataList();
   /**
-   * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+   * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
    */
-  com.antinvestor.apis.profile.v1.ContactObject getContacts(int index);
+  com.antinvestor.apis.profile.v1.RosterObject getData(int index);
   /**
-   * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+   * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
    */
-  int getContactsCount();
+  int getDataCount();
   /**
-   * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+   * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
    */
-  java.util.List<? extends com.antinvestor.apis.profile.v1.ContactObjectOrBuilder> 
-      getContactsOrBuilderList();
+  java.util.List<? extends com.antinvestor.apis.profile.v1.RosterObjectOrBuilder> 
+      getDataOrBuilderList();
   /**
-   * <code>repeated .profile.v1.ContactObject contacts = 1 [json_name = "contacts"];</code>
+   * <code>repeated .profile.v1.RosterObject data = 1 [json_name = "data"];</code>
    */
-  com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getContactsOrBuilder(
+  com.antinvestor.apis.profile.v1.RosterObjectOrBuilder getDataOrBuilder(
       int index);
 }
