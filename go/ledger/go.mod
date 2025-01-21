@@ -6,7 +6,7 @@ go 1.23
 
 require (
 	github.com/antinvestor/apis/go/common v1.30.5
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.25.1
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.0
 	go.uber.org/mock v0.5.0
 	google.golang.org/genproto v0.0.0-20250115164207-1a7da9e5054f
 	google.golang.org/genproto/googleapis/api v0.0.0-20250115164207-1a7da9e5054f
@@ -20,5 +20,5 @@ require (
 	golang.org/x/oauth2 v0.25.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250106144421-5f5ef82da422 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250115164207-1a7da9e5054f // indirect
 )
