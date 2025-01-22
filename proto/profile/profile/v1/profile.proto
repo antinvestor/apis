@@ -60,7 +60,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 enum ContactType {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
   EMAIL = 0;
-  PHONE = 1;
+  MSISDN = 1;
 }
 
 // buf:lint:ignore ENUM_VALUE_PREFIX

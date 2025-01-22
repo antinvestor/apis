@@ -37,9 +37,9 @@ public enum ContactType
    */
   EMAIL(0),
   /**
-   * <code>PHONE = 1;</code>
+   * <code>MSISDN = 1;</code>
    */
-  PHONE(1),
+  MSISDN(1),
   UNRECOGNIZED(-1),
   ;
 
@@ -61,9 +61,9 @@ public enum ContactType
    */
   public static final int EMAIL_VALUE = 0;
   /**
-   * <code>PHONE = 1;</code>
+   * <code>MSISDN = 1;</code>
    */
-  public static final int PHONE_VALUE = 1;
+  public static final int MSISDN_VALUE = 1;
 
 
   public final int getNumber() {
@@ -91,7 +91,7 @@ public enum ContactType
   public static ContactType forNumber(int value) {
     switch (value) {
       case 0: return EMAIL;
-      case 1: return PHONE;
+      case 1: return MSISDN;
       default: return null;
     }
   }

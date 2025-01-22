@@ -427,63 +427,63 @@ public final class ProfileProto {
       "-]{3,20}R\002id\022;\n\tparent_id\030\002 \001(\tB\036\272H\033r\026\020\003" +
       "\030(2\020[0-9a-z_-]{3,20}\320\001\001R\010parentId\"P\n\032Del" +
       "eteRelationshipResponse\0222\n\004data\030\001 \001(\0132\036." +
-      "profile.v1.RelationshipObjectR\004data*#\n\013C" +
-      "ontactType\022\t\n\005EMAIL\020\000\022\t\n\005PHONE\020\001*n\n\022Comm" +
-      "unicationLevel\022\007\n\003ALL\020\000\022\026\n\022INTERNAL_MARK" +
-      "ETING\020\001\022\024\n\020IMPORTANT_ALERTS\020\002\022\021\n\rSYSTEM_" +
-      "ALERTS\020\003\022\016\n\nNO_CONTACT\020\004*3\n\013ProfileType\022" +
-      "\n\n\006PERSON\020\000\022\017\n\013INSTITUTION\020\001\022\007\n\003BOT\020\002*@\n" +
-      "\020RelationshipType\022\n\n\006MEMBER\020\000\022\016\n\nAFFILIA" +
-      "TED\020\001\022\020\n\014BLACK_LISTED\020\0022\334\013\n\016ProfileServi" +
-      "ce\022Q\n\007GetById\022\032.profile.v1.GetByIdReques" +
-      "t\032\033.profile.v1.GetByIdResponse\"\r\202\323\344\223\002\007\022\005" +
-      "/{id}\022c\n\014GetByContact\022\037.profile.v1.GetBy" +
-      "ContactRequest\032 .profile.v1.GetByContact" +
-      "Response\"\020\202\323\344\223\002\n\022\010/contact\022R\n\006Search\022\031.p" +
-      "rofile.v1.SearchRequest\032\032.profile.v1.Sea" +
-      "rchResponse\"\017\202\323\344\223\002\t\022\007/search0\001\022O\n\005Merge\022" +
-      "\030.profile.v1.MergeRequest\032\031.profile.v1.M" +
-      "ergeResponse\"\021\202\323\344\223\002\013\"\006/merge:\001*\022M\n\006Creat" +
-      "e\022\031.profile.v1.CreateRequest\032\032.profile.v" +
-      "1.CreateResponse\"\014\202\323\344\223\002\006\"\001/:\001*\022Q\n\006Update" +
-      "\022\031.profile.v1.UpdateRequest\032\032.profile.v1" +
-      ".UpdateResponse\"\020\202\323\344\223\002\n2\005/{id}:\001*\022`\n\nAdd" +
-      "Contact\022\035.profile.v1.AddContactRequest\032\036" +
-      ".profile.v1.AddContactResponse\"\023\202\323\344\223\002\r\"\010" +
-      "/contact:\001*\022k\n\rRemoveContact\022 .profile.v" +
-      "1.RemoveContactRequest\032!.profile.v1.Remo" +
-      "veContactResponse\"\025\202\323\344\223\002\017*\r/contact/{id}" +
-      "\022d\n\014SearchRoster\022\037.profile.v1.SearchRost" +
-      "erRequest\032 .profile.v1.SearchRosterRespo" +
-      "nse\"\017\202\323\344\223\002\t\022\007/roster0\001\022\\\n\tAddRoster\022\034.pr" +
-      "ofile.v1.AddRosterRequest\032\035.profile.v1.A" +
-      "ddRosterResponse\"\022\202\323\344\223\002\014\"\007/roster:\001*\022g\n\014" +
-      "RemoveRoster\022\037.profile.v1.RemoveRosterRe" +
-      "quest\032 .profile.v1.RemoveRosterResponse\"" +
-      "\024\202\323\344\223\002\016*\014/roster/{id}\022`\n\nAddAddress\022\035.pr" +
-      "ofile.v1.AddAddressRequest\032\036.profile.v1." +
-      "AddAddressResponse\"\023\202\323\344\223\002\r\"\010/address:\001*\022" +
-      "t\n\017AddRelationship\022\".profile.v1.AddRelat" +
-      "ionshipRequest\032#.profile.v1.AddRelations" +
-      "hipResponse\"\030\202\323\344\223\002\022\"\r/relationship:\001*\022\177\n" +
-      "\022DeleteRelationship\022%.profile.v1.DeleteR" +
-      "elationshipRequest\032&.profile.v1.DeleteRe" +
-      "lationshipResponse\"\032\202\323\344\223\002\024*\022/relationshi" +
-      "p/{id}\022v\n\020ListRelationship\022#.profile.v1." +
-      "ListRelationshipRequest\032$.profile.v1.Lis" +
-      "tRelationshipResponse\"\025\202\323\344\223\002\017\022\r/relation" +
-      "ship0\001B\273\003\n\037com.antinvestor.apis.profile." +
-      "v1B\014ProfileProtoP\001Z;github.com/antinvest" +
-      "or/apis/go/profile/profile/v1;profilev1\242" +
-      "\002\003PXX\252\002\nProfile.V1\312\002\nProfile\\V1\342\002\026Profil" +
-      "e\\V1\\GPBMetadata\352\002\013Profile::V1\222A\202\002\022o\n\017Pr" +
-      "ofile Service\"W\n\020Ant Investor Ltd\022-https" +
-      "://github.com/antinvestor/service-lostid" +
-      "\032\024info@antinvestor.com2\0031.0*\002\001\0022\020applica" +
-      "tion/json:\020application/jsonZY\nW\n\006bearer\022" +
-      "M\010\002\0228Authentication token, prefixed by B" +
-      "earer: Bearer <token>\032\rAuthorization \002b\014" +
-      "\n\n\n\006bearer\022\000b\006proto3"
+      "profile.v1.RelationshipObjectR\004data*$\n\013C" +
+      "ontactType\022\t\n\005EMAIL\020\000\022\n\n\006MSISDN\020\001*n\n\022Com" +
+      "municationLevel\022\007\n\003ALL\020\000\022\026\n\022INTERNAL_MAR" +
+      "KETING\020\001\022\024\n\020IMPORTANT_ALERTS\020\002\022\021\n\rSYSTEM" +
+      "_ALERTS\020\003\022\016\n\nNO_CONTACT\020\004*3\n\013ProfileType" +
+      "\022\n\n\006PERSON\020\000\022\017\n\013INSTITUTION\020\001\022\007\n\003BOT\020\002*@" +
+      "\n\020RelationshipType\022\n\n\006MEMBER\020\000\022\016\n\nAFFILI" +
+      "ATED\020\001\022\020\n\014BLACK_LISTED\020\0022\334\013\n\016ProfileServ" +
+      "ice\022Q\n\007GetById\022\032.profile.v1.GetByIdReque" +
+      "st\032\033.profile.v1.GetByIdResponse\"\r\202\323\344\223\002\007\022" +
+      "\005/{id}\022c\n\014GetByContact\022\037.profile.v1.GetB" +
+      "yContactRequest\032 .profile.v1.GetByContac" +
+      "tResponse\"\020\202\323\344\223\002\n\022\010/contact\022R\n\006Search\022\031." +
+      "profile.v1.SearchRequest\032\032.profile.v1.Se" +
+      "archResponse\"\017\202\323\344\223\002\t\022\007/search0\001\022O\n\005Merge" +
+      "\022\030.profile.v1.MergeRequest\032\031.profile.v1." +
+      "MergeResponse\"\021\202\323\344\223\002\013\"\006/merge:\001*\022M\n\006Crea" +
+      "te\022\031.profile.v1.CreateRequest\032\032.profile." +
+      "v1.CreateResponse\"\014\202\323\344\223\002\006\"\001/:\001*\022Q\n\006Updat" +
+      "e\022\031.profile.v1.UpdateRequest\032\032.profile.v" +
+      "1.UpdateResponse\"\020\202\323\344\223\002\n2\005/{id}:\001*\022`\n\nAd" +
+      "dContact\022\035.profile.v1.AddContactRequest\032" +
+      "\036.profile.v1.AddContactResponse\"\023\202\323\344\223\002\r\"" +
+      "\010/contact:\001*\022k\n\rRemoveContact\022 .profile." +
+      "v1.RemoveContactRequest\032!.profile.v1.Rem" +
+      "oveContactResponse\"\025\202\323\344\223\002\017*\r/contact/{id" +
+      "}\022d\n\014SearchRoster\022\037.profile.v1.SearchRos" +
+      "terRequest\032 .profile.v1.SearchRosterResp" +
+      "onse\"\017\202\323\344\223\002\t\022\007/roster0\001\022\\\n\tAddRoster\022\034.p" +
+      "rofile.v1.AddRosterRequest\032\035.profile.v1." +
+      "AddRosterResponse\"\022\202\323\344\223\002\014\"\007/roster:\001*\022g\n" +
+      "\014RemoveRoster\022\037.profile.v1.RemoveRosterR" +
+      "equest\032 .profile.v1.RemoveRosterResponse" +
+      "\"\024\202\323\344\223\002\016*\014/roster/{id}\022`\n\nAddAddress\022\035.p" +
+      "rofile.v1.AddAddressRequest\032\036.profile.v1" +
+      ".AddAddressResponse\"\023\202\323\344\223\002\r\"\010/address:\001*" +
+      "\022t\n\017AddRelationship\022\".profile.v1.AddRela" +
+      "tionshipRequest\032#.profile.v1.AddRelation" +
+      "shipResponse\"\030\202\323\344\223\002\022\"\r/relationship:\001*\022\177" +
+      "\n\022DeleteRelationship\022%.profile.v1.Delete" +
+      "RelationshipRequest\032&.profile.v1.DeleteR" +
+      "elationshipResponse\"\032\202\323\344\223\002\024*\022/relationsh" +
+      "ip/{id}\022v\n\020ListRelationship\022#.profile.v1" +
+      ".ListRelationshipRequest\032$.profile.v1.Li" +
+      "stRelationshipResponse\"\025\202\323\344\223\002\017\022\r/relatio" +
+      "nship0\001B\273\003\n\037com.antinvestor.apis.profile" +
+      ".v1B\014ProfileProtoP\001Z;github.com/antinves" +
+      "tor/apis/go/profile/profile/v1;profilev1" +
+      "\242\002\003PXX\252\002\nProfile.V1\312\002\nProfile\\V1\342\002\026Profi" +
+      "le\\V1\\GPBMetadata\352\002\013Profile::V1\222A\202\002\022o\n\017P" +
+      "rofile Service\"W\n\020Ant Investor Ltd\022-http" +
+      "s://github.com/antinvestor/service-losti" +
+      "d\032\024info@antinvestor.com2\0031.0*\002\001\0022\020applic" +
+      "ation/json:\020application/jsonZY\nW\n\006bearer" +
+      "\022M\010\002\0228Authentication token, prefixed by " +
+      "Bearer: Bearer <token>\032\rAuthorization \002b" +
+      "\014\n\n\n\006bearer\022\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

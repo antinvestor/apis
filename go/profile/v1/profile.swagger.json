@@ -894,7 +894,7 @@
       "type": "string",
       "enum": [
         "EMAIL",
-        "PHONE"
+        "MSISDN"
       ],
       "default": "EMAIL",
       "description": "- EMAIL: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
