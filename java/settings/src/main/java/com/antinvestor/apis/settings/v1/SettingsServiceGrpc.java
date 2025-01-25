@@ -19,7 +19,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.69.1)",
+    value = "by gRPC proto compiler (version 1.70.0)",
     comments = "Source: settings/v1/settings.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class SettingsServiceGrpc {
@@ -168,6 +168,21 @@ public final class SettingsServiceGrpc {
   }
 
   /**
+   * Creates a new blocking-style stub that supports all types of calls on the service
+   */
+  public static SettingsServiceBlockingV2Stub newBlockingV2Stub(
+      io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<SettingsServiceBlockingV2Stub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<SettingsServiceBlockingV2Stub>() {
+        @java.lang.Override
+        public SettingsServiceBlockingV2Stub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new SettingsServiceBlockingV2Stub(channel, callOptions);
+        }
+      };
+    return SettingsServiceBlockingV2Stub.newStub(factory, channel);
+  }
+
+  /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
   public static SettingsServiceBlockingStub newBlockingStub(
@@ -298,6 +313,58 @@ public final class SettingsServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service SettingsService.
+   */
+  public static final class SettingsServiceBlockingV2Stub
+      extends io.grpc.stub.AbstractBlockingStub<SettingsServiceBlockingV2Stub> {
+    private SettingsServiceBlockingV2Stub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected SettingsServiceBlockingV2Stub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new SettingsServiceBlockingV2Stub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     * Gets a single setting and its stored value
+     * </pre>
+     */
+    public com.antinvestor.apis.settings.v1.GetResponse get(com.antinvestor.apis.settings.v1.GetRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.settings.v1.ListResponse>
+        list(com.antinvestor.apis.settings.v1.ListRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getListMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.settings.v1.SearchResponse>
+        search(com.antinvestor.apis.common.v1.SearchRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getSearchMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.antinvestor.apis.settings.v1.SetResponse set(com.antinvestor.apis.settings.v1.SetRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSetMethod(), getCallOptions(), request);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do limited synchronous rpc calls to service SettingsService.
    */
   public static final class SettingsServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<SettingsServiceBlockingStub> {

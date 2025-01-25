@@ -19,7 +19,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.69.1)",
+    value = "by gRPC proto compiler (version 1.70.0)",
     comments = "Source: partition/v1/partition.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class PartitionServiceGrpc {
@@ -633,6 +633,21 @@ public final class PartitionServiceGrpc {
   }
 
   /**
+   * Creates a new blocking-style stub that supports all types of calls on the service
+   */
+  public static PartitionServiceBlockingV2Stub newBlockingV2Stub(
+      io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<PartitionServiceBlockingV2Stub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<PartitionServiceBlockingV2Stub>() {
+        @java.lang.Override
+        public PartitionServiceBlockingV2Stub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new PartitionServiceBlockingV2Stub(channel, callOptions);
+        }
+      };
+    return PartitionServiceBlockingV2Stub.newStub(factory, channel);
+  }
+
+  /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
   public static PartitionServiceBlockingStub newBlockingStub(
@@ -1096,6 +1111,221 @@ public final class PartitionServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service PartitionService.
+   */
+  public static final class PartitionServiceBlockingV2Stub
+      extends io.grpc.stub.AbstractBlockingStub<PartitionServiceBlockingV2Stub> {
+    private PartitionServiceBlockingV2Stub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected PartitionServiceBlockingV2Stub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new PartitionServiceBlockingV2Stub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     * Get a tenant in the system matching the id
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.GetTenantResponse getTenant(com.antinvestor.apis.partition.v1.GetTenantRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetTenantMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * List all tenants in the system matching the query in some way
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.partition.v1.ListTenantResponse>
+        listTenant(com.antinvestor.apis.partition.v1.ListTenantRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getListTenantMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Log a new tenant request
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.CreateTenantResponse createTenant(com.antinvestor.apis.partition.v1.CreateTenantRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreateTenantMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * List all partitions in the system matching the query in some way
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.partition.v1.ListPartitionResponse>
+        listPartition(com.antinvestor.apis.partition.v1.ListPartitionRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getListPartitionMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Log a new partition request
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.CreatePartitionResponse createPartition(com.antinvestor.apis.partition.v1.CreatePartitionRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreatePartitionMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Get an existing partition object
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.GetPartitionResponse getPartition(com.antinvestor.apis.partition.v1.GetPartitionRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetPartitionMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Update an existing partition object
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.UpdatePartitionResponse updatePartition(com.antinvestor.apis.partition.v1.UpdatePartitionRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdatePartitionMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Create a partition Role for a particular partition
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.CreatePartitionRoleResponse createPartitionRole(com.antinvestor.apis.partition.v1.CreatePartitionRoleRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreatePartitionRoleMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * List partition roles available for this particular partition
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.partition.v1.ListPartitionRoleResponse>
+        listPartitionRole(com.antinvestor.apis.partition.v1.ListPartitionRoleRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getListPartitionRoleMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Remove a partition role that is not required
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.RemovePartitionRoleResponse removePartitionRole(com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRemovePartitionRoleMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Creates a new page for access or customization of how a partition looks like
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.CreatePageResponse createPage(com.antinvestor.apis.partition.v1.CreatePageRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreatePageMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Obtains a new page specific to a partition
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.GetPageResponse getPage(com.antinvestor.apis.partition.v1.GetPageRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetPageMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Removes a page from being accessible for a partition
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.RemovePageResponse removePage(com.antinvestor.apis.partition.v1.RemovePageRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRemovePageMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Creates a users ability to access a partition
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.CreateAccessResponse createAccess(com.antinvestor.apis.partition.v1.CreateAccessRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreateAccessMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Obtains a users access to a partition by access id or partition and profile id
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.GetAccessResponse getAccess(com.antinvestor.apis.partition.v1.GetAccessRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetAccessMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Removes a user's ability to access a partition
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.RemoveAccessResponse removeAccess(com.antinvestor.apis.partition.v1.RemoveAccessRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRemoveAccessMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Create an access Role for a particular access
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.CreateAccessRoleResponse createAccessRole(com.antinvestor.apis.partition.v1.CreateAccessRoleRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreateAccessRoleMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * List access roles available for this particular access
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.partition.v1.ListAccessRoleResponse>
+        listAccessRole(com.antinvestor.apis.partition.v1.ListAccessRoleRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getListAccessRoleMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Remove an access role that is not required
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.RemoveAccessRoleResponse removeAccessRole(com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRemoveAccessRoleMethod(), getCallOptions(), request);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do limited synchronous rpc calls to service PartitionService.
    */
   public static final class PartitionServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<PartitionServiceBlockingStub> {

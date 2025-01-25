@@ -22,7 +22,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.69.1)",
+    value = "by gRPC proto compiler (version 1.70.0)",
     comments = "Source: ledger/v1/ledger.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class LedgerServiceGrpc {
@@ -388,6 +388,21 @@ public final class LedgerServiceGrpc {
   }
 
   /**
+   * Creates a new blocking-style stub that supports all types of calls on the service
+   */
+  public static LedgerServiceBlockingV2Stub newBlockingV2Stub(
+      io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<LedgerServiceBlockingV2Stub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<LedgerServiceBlockingV2Stub>() {
+        @java.lang.Override
+        public LedgerServiceBlockingV2Stub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new LedgerServiceBlockingV2Stub(channel, callOptions);
+        }
+      };
+    return LedgerServiceBlockingV2Stub.newStub(factory, channel);
+  }
+
+  /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
   public static LedgerServiceBlockingStub newBlockingStub(
@@ -692,6 +707,144 @@ public final class LedgerServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service LedgerService.
+   * <pre>
+   * The ledger service definition.
+   * </pre>
+   */
+  public static final class LedgerServiceBlockingV2Stub
+      extends io.grpc.stub.AbstractBlockingStub<LedgerServiceBlockingV2Stub> {
+    private LedgerServiceBlockingV2Stub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected LedgerServiceBlockingV2Stub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new LedgerServiceBlockingV2Stub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     * Searches for an ledger based on details
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.ledger.v1.Ledger>
+        searchLedgers(com.antinvestor.apis.common.v1.SearchRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getSearchLedgersMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Creates a new ledger based on supplied data
+     * </pre>
+     */
+    public com.antinvestor.apis.ledger.v1.Ledger createLedger(com.antinvestor.apis.ledger.v1.Ledger request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreateLedgerMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Updates the data component of the ledger.
+     * </pre>
+     */
+    public com.antinvestor.apis.ledger.v1.Ledger updateLedger(com.antinvestor.apis.ledger.v1.Ledger request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdateLedgerMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Searches for an account based on details
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.ledger.v1.Account>
+        searchAccounts(com.antinvestor.apis.common.v1.SearchRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getSearchAccountsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Creates a new account based on supplied data
+     * </pre>
+     */
+    public com.antinvestor.apis.ledger.v1.Account createAccount(com.antinvestor.apis.ledger.v1.Account request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreateAccountMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Updates the data component of the account.
+     * </pre>
+     */
+    public com.antinvestor.apis.ledger.v1.Account updateAccount(com.antinvestor.apis.ledger.v1.Account request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdateAccountMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Searches for a transaction based on details
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.ledger.v1.Transaction>
+        searchTransactions(com.antinvestor.apis.common.v1.SearchRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getSearchTransactionsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Creates a new transaction
+     * </pre>
+     */
+    public com.antinvestor.apis.ledger.v1.Transaction createTransaction(com.antinvestor.apis.ledger.v1.Transaction request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreateTransactionMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Reverses a transaction by creating a new one with inverted entries
+     * </pre>
+     */
+    public com.antinvestor.apis.ledger.v1.Transaction reverseTransaction(com.antinvestor.apis.ledger.v1.Transaction request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getReverseTransactionMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Updates a transaction's details
+     * </pre>
+     */
+    public com.antinvestor.apis.ledger.v1.Transaction updateTransaction(com.antinvestor.apis.ledger.v1.Transaction request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdateTransactionMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Searches for entries matching the search details
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.ledger.v1.TransactionEntry>
+        searchTransactionEntries(com.antinvestor.apis.common.v1.SearchRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getSearchTransactionEntriesMethod(), getCallOptions(), request);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do limited synchronous rpc calls to service LedgerService.
    * <pre>
    * The ledger service definition.
    * </pre>

@@ -19,7 +19,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.69.1)",
+    value = "by gRPC proto compiler (version 1.70.0)",
     comments = "Source: payment/v1/payment.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class PaymentServiceGrpc {
@@ -261,6 +261,21 @@ public final class PaymentServiceGrpc {
   }
 
   /**
+   * Creates a new blocking-style stub that supports all types of calls on the service
+   */
+  public static PaymentServiceBlockingV2Stub newBlockingV2Stub(
+      io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<PaymentServiceBlockingV2Stub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<PaymentServiceBlockingV2Stub>() {
+        @java.lang.Override
+        public PaymentServiceBlockingV2Stub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new PaymentServiceBlockingV2Stub(channel, callOptions);
+        }
+      };
+    return PaymentServiceBlockingV2Stub.newStub(factory, channel);
+  }
+
+  /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
   public static PaymentServiceBlockingStub newBlockingStub(
@@ -466,6 +481,92 @@ public final class PaymentServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service PaymentService.
+   */
+  public static final class PaymentServiceBlockingV2Stub
+      extends io.grpc.stub.AbstractBlockingStub<PaymentServiceBlockingV2Stub> {
+    private PaymentServiceBlockingV2Stub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected PaymentServiceBlockingV2Stub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new PaymentServiceBlockingV2Stub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     *Send method for queueing outbound payments as requested
+     * </pre>
+     */
+    public com.antinvestor.apis.payment.v1.SendResponse send(com.antinvestor.apis.payment.v1.SendRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSendMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Send method for queueing inbound payments as requested
+     * </pre>
+     */
+    public com.antinvestor.apis.payment.v1.ReceiveResponse receive(com.antinvestor.apis.payment.v1.ReceiveRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getReceiveMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Status request to determine if payment is prepared or released
+     * </pre>
+     */
+    public com.antinvestor.apis.common.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getStatusMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Status update request to allow continuation of payment processing
+     * </pre>
+     */
+    public com.antinvestor.apis.common.v1.StatusUpdateResponse statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getStatusUpdateMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Release method for releasing queued payments and returns if status is not released
+     * </pre>
+     */
+    public com.antinvestor.apis.payment.v1.ReleaseResponse release(com.antinvestor.apis.payment.v1.ReleaseRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getReleaseMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Search method is for client request look for payments matching supplied details from the system
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.payment.v1.SearchResponse>
+        search(com.antinvestor.apis.common.v1.SearchRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getSearchMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.antinvestor.apis.payment.v1.ReconcileResponse reconcile(com.antinvestor.apis.payment.v1.ReconcileRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getReconcileMethod(), getCallOptions(), request);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do limited synchronous rpc calls to service PaymentService.
    */
   public static final class PaymentServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<PaymentServiceBlockingStub> {

@@ -19,7 +19,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.69.1)",
+    value = "by gRPC proto compiler (version 1.70.0)",
     comments = "Source: notification/v1/notification.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class NotificationServiceGrpc {
@@ -292,6 +292,21 @@ public final class NotificationServiceGrpc {
   }
 
   /**
+   * Creates a new blocking-style stub that supports all types of calls on the service
+   */
+  public static NotificationServiceBlockingV2Stub newBlockingV2Stub(
+      io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<NotificationServiceBlockingV2Stub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<NotificationServiceBlockingV2Stub>() {
+        @java.lang.Override
+        public NotificationServiceBlockingV2Stub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new NotificationServiceBlockingV2Stub(channel, callOptions);
+        }
+      };
+    return NotificationServiceBlockingV2Stub.newStub(factory, channel);
+  }
+
+  /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
   public static NotificationServiceBlockingStub newBlockingStub(
@@ -518,6 +533,104 @@ public final class NotificationServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service NotificationService.
+   */
+  public static final class NotificationServiceBlockingV2Stub
+      extends io.grpc.stub.AbstractBlockingStub<NotificationServiceBlockingV2Stub> {
+    private NotificationServiceBlockingV2Stub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected NotificationServiceBlockingV2Stub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new NotificationServiceBlockingV2Stub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     *Send method for queueing massages as requested
+     * </pre>
+     */
+    public com.antinvestor.apis.notification.v1.SendResponse send(com.antinvestor.apis.notification.v1.SendRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSendMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Release method for releasing queued massages and returns if notification status if released
+     * </pre>
+     */
+    public com.antinvestor.apis.notification.v1.ReleaseResponse release(com.antinvestor.apis.notification.v1.ReleaseRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getReleaseMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Receive method is for client request for particular notification responses from system
+     * </pre>
+     */
+    public com.antinvestor.apis.notification.v1.ReceiveResponse receive(com.antinvestor.apis.notification.v1.ReceiveRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getReceiveMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Search method is for client request for particular notification details from system
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.notification.v1.SearchResponse>
+        search(com.antinvestor.apis.common.v1.SearchRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getSearchMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Status request to determine if notification is prepared or released
+     * </pre>
+     */
+    public com.antinvestor.apis.common.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getStatusMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Status update request to allow continuation of notification processing
+     * </pre>
+     */
+    public com.antinvestor.apis.common.v1.StatusUpdateResponse statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getStatusUpdateMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Utility to allow system obtain templates within the system
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.notification.v1.TemplateSearchResponse>
+        templateSearch(com.antinvestor.apis.notification.v1.TemplateSearchRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getTemplateSearchMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.antinvestor.apis.notification.v1.TemplateSaveResponse templateSave(com.antinvestor.apis.notification.v1.TemplateSaveRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getTemplateSaveMethod(), getCallOptions(), request);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do limited synchronous rpc calls to service NotificationService.
    */
   public static final class NotificationServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<NotificationServiceBlockingStub> {

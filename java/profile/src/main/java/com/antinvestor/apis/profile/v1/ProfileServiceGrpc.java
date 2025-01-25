@@ -22,7 +22,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.69.1)",
+    value = "by gRPC proto compiler (version 1.70.0)",
     comments = "Source: profile/v1/profile.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class ProfileServiceGrpc {
@@ -512,6 +512,21 @@ public final class ProfileServiceGrpc {
   }
 
   /**
+   * Creates a new blocking-style stub that supports all types of calls on the service
+   */
+  public static ProfileServiceBlockingV2Stub newBlockingV2Stub(
+      io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<ProfileServiceBlockingV2Stub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<ProfileServiceBlockingV2Stub>() {
+        @java.lang.Override
+        public ProfileServiceBlockingV2Stub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new ProfileServiceBlockingV2Stub(channel, callOptions);
+        }
+      };
+    return ProfileServiceBlockingV2Stub.newStub(factory, channel);
+  }
+
+  /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
   public static ProfileServiceBlockingStub newBlockingStub(
@@ -900,6 +915,182 @@ public final class ProfileServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service ProfileService.
+   * <pre>
+   * The profile service definition.
+   * </pre>
+   */
+  public static final class ProfileServiceBlockingV2Stub
+      extends io.grpc.stub.AbstractBlockingStub<ProfileServiceBlockingV2Stub> {
+    private ProfileServiceBlockingV2Stub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected ProfileServiceBlockingV2Stub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new ProfileServiceBlockingV2Stub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     * Obtains a profile by its hash
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.GetByIdResponse getById(com.antinvestor.apis.profile.v1.GetByIdRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetByIdMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Obtains a profile by its hash
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.GetByContactResponse getByContact(com.antinvestor.apis.profile.v1.GetByContactRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetByContactMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Obtains a profile by its hash
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.profile.v1.SearchResponse>
+        search(com.antinvestor.apis.profile.v1.SearchRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getSearchMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Uses data found in the profile from mergeHash to update the current profile.
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.MergeResponse merge(com.antinvestor.apis.profile.v1.MergeRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getMergeMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Creates a new profile based on the request.
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.CreateResponse create(com.antinvestor.apis.profile.v1.CreateRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreateMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Creates a new profile based on the request.
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.UpdateResponse update(com.antinvestor.apis.profile.v1.UpdateRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdateMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Adds a new contact based on the request/this leads to automatic verification.
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.AddContactResponse addContact(com.antinvestor.apis.profile.v1.AddContactRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddContactMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Removes an old contact based on this request's id
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.RemoveContactResponse removeContact(com.antinvestor.apis.profile.v1.RemoveContactRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRemoveContactMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Searches all contacts tied to a users profile and based on the active request.
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.profile.v1.SearchRosterResponse>
+        searchRoster(com.antinvestor.apis.profile.v1.SearchRosterRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getSearchRosterMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Adds a new contact based on the request/this leads to automatic verification.
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.AddRosterResponse addRoster(com.antinvestor.apis.profile.v1.AddRosterRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddRosterMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Removes a contact from a user's circle based on this request's id
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.RemoveRosterResponse removeRoster(com.antinvestor.apis.profile.v1.RemoveRosterRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRemoveRosterMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Adds a new address based on the request.
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.AddAddressResponse addAddress(com.antinvestor.apis.profile.v1.AddAddressRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddAddressMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Adds a new relationship between different proiles.
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.AddRelationshipResponse addRelationship(com.antinvestor.apis.profile.v1.AddRelationshipRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddRelationshipMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Remove an existing relationship between profiles.
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.DeleteRelationshipResponse deleteRelationship(com.antinvestor.apis.profile.v1.DeleteRelationshipRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeleteRelationshipMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Lists relationships a profile has.
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.profile.v1.ListRelationshipResponse>
+        listRelationship(com.antinvestor.apis.profile.v1.ListRelationshipRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getListRelationshipMethod(), getCallOptions(), request);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do limited synchronous rpc calls to service ProfileService.
    * <pre>
    * The profile service definition.
    * </pre>

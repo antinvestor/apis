@@ -19,7 +19,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.69.1)",
+    value = "by gRPC proto compiler (version 1.70.0)",
     comments = "Source: ocr/v1/ocr.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class OCRServiceGrpc {
@@ -103,6 +103,21 @@ public final class OCRServiceGrpc {
         }
       };
     return OCRServiceStub.newStub(factory, channel);
+  }
+
+  /**
+   * Creates a new blocking-style stub that supports all types of calls on the service
+   */
+  public static OCRServiceBlockingV2Stub newBlockingV2Stub(
+      io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<OCRServiceBlockingV2Stub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<OCRServiceBlockingV2Stub>() {
+        @java.lang.Override
+        public OCRServiceBlockingV2Stub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new OCRServiceBlockingV2Stub(channel, callOptions);
+        }
+      };
+    return OCRServiceBlockingV2Stub.newStub(factory, channel);
   }
 
   /**
@@ -212,6 +227,43 @@ public final class OCRServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service OCRService.
+   */
+  public static final class OCRServiceBlockingV2Stub
+      extends io.grpc.stub.AbstractBlockingStub<OCRServiceBlockingV2Stub> {
+    private OCRServiceBlockingV2Stub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected OCRServiceBlockingV2Stub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new OCRServiceBlockingV2Stub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     * Perform a new ocr process request
+     * </pre>
+     */
+    public com.antinvestor.apis.ocr.v1.RecognizeResponse recognize(com.antinvestor.apis.ocr.v1.RecognizeRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRecognizeMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Check the status of request if queued
+     * </pre>
+     */
+    public com.antinvestor.apis.ocr.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getStatusMethod(), getCallOptions(), request);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do limited synchronous rpc calls to service OCRService.
    */
   public static final class OCRServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<OCRServiceBlockingStub> {

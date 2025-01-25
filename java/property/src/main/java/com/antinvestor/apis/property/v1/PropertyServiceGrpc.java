@@ -19,7 +19,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.69.1)",
+    value = "by gRPC proto compiler (version 1.70.0)",
     comments = "Source: property/v1/property.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class PropertyServiceGrpc {
@@ -447,6 +447,21 @@ public final class PropertyServiceGrpc {
   }
 
   /**
+   * Creates a new blocking-style stub that supports all types of calls on the service
+   */
+  public static PropertyServiceBlockingV2Stub newBlockingV2Stub(
+      io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<PropertyServiceBlockingV2Stub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<PropertyServiceBlockingV2Stub>() {
+        @java.lang.Override
+        public PropertyServiceBlockingV2Stub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new PropertyServiceBlockingV2Stub(channel, callOptions);
+        }
+      };
+    return PropertyServiceBlockingV2Stub.newStub(factory, channel);
+  }
+
+  /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
   public static PropertyServiceBlockingStub newBlockingStub(
@@ -784,6 +799,161 @@ public final class PropertyServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service PropertyService.
+   */
+  public static final class PropertyServiceBlockingV2Stub
+      extends io.grpc.stub.AbstractBlockingStub<PropertyServiceBlockingV2Stub> {
+    private PropertyServiceBlockingV2Stub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected PropertyServiceBlockingV2Stub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new PropertyServiceBlockingV2Stub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     *Create method for adding a new property type into the system
+     * </pre>
+     */
+    public com.antinvestor.apis.property.v1.AddPropertyTypeResponse addPropertyType(com.antinvestor.apis.property.v1.AddPropertyTypeRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddPropertyTypeMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *List method for showing all property types in the system
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.property.v1.ListPropertyTypeResponse>
+        listPropertyType(com.antinvestor.apis.property.v1.ListPropertyTypeRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getListPropertyTypeMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Create method for adding a new locality into the system
+     * </pre>
+     */
+    public com.antinvestor.apis.property.v1.AddLocalityResponse addLocality(com.antinvestor.apis.property.v1.AddLocalityRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddLocalityMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Delete method for removing an existing locality from the system
+     * </pre>
+     */
+    public com.antinvestor.apis.property.v1.DeleteLocalityResponse deleteLocality(com.antinvestor.apis.property.v1.DeleteLocalityRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeleteLocalityMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Create method for adding a new property into the system
+     * </pre>
+     */
+    public com.antinvestor.apis.property.v1.CreatePropertyResponse createProperty(com.antinvestor.apis.property.v1.CreatePropertyRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreatePropertyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Update property request to modify its current form to another
+     * </pre>
+     */
+    public com.antinvestor.apis.property.v1.UpdatePropertyResponse updateProperty(com.antinvestor.apis.property.v1.UpdatePropertyRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdatePropertyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Delete property request to modify its current form to another
+     * </pre>
+     */
+    public com.antinvestor.apis.property.v1.DeletePropertyResponse deleteProperty(com.antinvestor.apis.property.v1.DeletePropertyRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeletePropertyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *State request to determine active state and status of a property
+     * </pre>
+     */
+    public com.antinvestor.apis.property.v1.StateOfPropertyResponse stateOfProperty(com.antinvestor.apis.property.v1.StateOfPropertyRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getStateOfPropertyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *History request returns all the state transitions a property has had over its lifetime in the system
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.property.v1.HistoryOfPropertyResponse>
+        historyOfProperty(com.antinvestor.apis.property.v1.HistoryOfPropertyRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getHistoryOfPropertyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Search method is for client request to query for properties that match query
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.property.v1.SearchPropertyResponse>
+        searchProperty(com.antinvestor.apis.property.v1.SearchPropertyRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getSearchPropertyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *ListSubscriptions for a particular property
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.property.v1.ListSubscriptionResponse>
+        listSubscription(com.antinvestor.apis.property.v1.ListSubscriptionRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getListSubscriptionMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *AddSubscription for a profile to a property
+     * </pre>
+     */
+    public com.antinvestor.apis.property.v1.AddSubscriptionResponse addSubscription(com.antinvestor.apis.property.v1.AddSubscriptionRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddSubscriptionMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Delete subscription of profile to a property
+     * </pre>
+     */
+    public com.antinvestor.apis.property.v1.DeleteSubscriptionResponse deleteSubscription(com.antinvestor.apis.property.v1.DeleteSubscriptionRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeleteSubscriptionMethod(), getCallOptions(), request);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do limited synchronous rpc calls to service PropertyService.
    */
   public static final class PropertyServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<PropertyServiceBlockingStub> {
