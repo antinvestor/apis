@@ -2,7 +2,7 @@ module github.com/antinvestor/apis/go/ledger
 
 go 1.23
 
-//replace github.com/antinvestor/apis/go/common => ../common
+replace github.com/antinvestor/apis/go/common => ../common
 
 require (
 	github.com/antinvestor/apis/go/common v1.30.5
@@ -15,7 +15,7 @@ require (
 )
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.3-20241127180247-a33202765966.1 // indirect
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.4-20250130201111-63bb56e20495.1// indirect
 	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/oauth2 v0.25.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect

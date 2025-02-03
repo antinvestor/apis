@@ -98,41 +98,41 @@ message StatusUpdateResponse {
 
 message ContactLink {
   string profile_name = 1 [
-    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 250,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"
   ];
 
   string profile_type = 2 [
-    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 250,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"
   ];
 
   string profile_id = 3 [
-    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 
   string profile_image_id = 4 [
-    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
 
   string contact_id = 8 [
-    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
   ];
   string detail = 9 [
-    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 250,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"

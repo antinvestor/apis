@@ -187,7 +187,7 @@ checkgenerate:
 
 $(BIN)/buf: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/bufbuild/buf/cmd/buf@v1.47.2
+	$(GO) install github.com/bufbuild/buf/cmd/buf@v1.50.0
 
 $(BIN)/license-header: Makefile
 	@mkdir -p $(@D)
@@ -195,7 +195,7 @@ $(BIN)/license-header: Makefile
 
 $(BIN)/golangci-lint: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.61.0
+	$(GO) install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.63.4
 
 $(BIN)/gomock: Makefile
 	@mkdir -p $(@D)

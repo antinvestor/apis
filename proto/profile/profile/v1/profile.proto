@@ -352,7 +352,7 @@ message ListRelationshipRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   string last_relationship_id = 3 [
-    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
@@ -413,7 +413,7 @@ message DeleteRelationshipRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   string parent_id = 2 [
-    (buf.validate.field).ignore_empty = true,
+    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
