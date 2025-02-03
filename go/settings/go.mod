@@ -2,11 +2,11 @@ module github.com/antinvestor/apis/go/settings
 
 go 1.23
 
-replace github.com/antinvestor/apis/go/common => ../common
+//replace github.com/antinvestor/apis/go/common => ../common
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.4-20241127180247-a33202765966.1
-	github.com/antinvestor/apis/go/common v1.30.5
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.4-20250130201111-63bb56e20495.1
+	github.com/antinvestor/apis/go/common v1.32.4
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.0
 	go.uber.org/mock v0.5.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20250127172529-29210b9bc287

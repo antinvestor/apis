@@ -2,10 +2,10 @@ module github.com/antinvestor/apis/go/files
 
 go 1.23
 
-replace github.com/antinvestor/apis/go/common => ../common
+//replace github.com/antinvestor/apis/go/common => ../common
 
 require (
-	github.com/antinvestor/apis/go/common v1.30.5
+	github.com/antinvestor/apis/go/common v1.32.4
 	github.com/stretchr/testify v1.10.0
 	google.golang.org/grpc v1.70.0
 )

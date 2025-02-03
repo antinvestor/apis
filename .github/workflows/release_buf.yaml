@@ -7,7 +7,7 @@ jobs:
   build:
     strategy:
       matrix:
-        api_module: [ common,ledger,lostid,notification,ocr,partition,payment,profile,property,settings ]
+        api_module: [ common ]
 
     runs-on: ubuntu-latest
     steps:
