@@ -402,7 +402,7 @@ public final class ProfileProto {
       "tactR\007ProfileR\005GroupR\010peerName\0224\n\007peer_i" +
       "d\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006pe" +
       "erId\022P\n\024last_relationship_id\030\003 \001(\tB\036\272H\033r" +
-      "\026\020\003\030(2\020[0-9a-z_-]{3,20}\320\001\001R\022lastRelation" +
+      "\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\022lastRelation" +
       "shipId\022.\n\023related_children_id\030\004 \003(\tR\021rel" +
       "atedChildrenId\022\024\n\005count\030\005 \001(\005R\005count\022\'\n\017" +
       "invert_relation\030\006 \001(\010R\016invertRelation\"N\n" +
@@ -425,7 +425,7 @@ public final class ProfileProto {
       "nshipObjectR\004data\"\205\001\n\031DeleteRelationship" +
       "Request\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_" +
       "-]{3,20}R\002id\022;\n\tparent_id\030\002 \001(\tB\036\272H\033r\026\020\003" +
-      "\030(2\020[0-9a-z_-]{3,20}\320\001\001R\010parentId\"P\n\032Del" +
+      "\030(2\020[0-9a-z_-]{3,20}\330\001\001R\010parentId\"P\n\032Del" +
       "eteRelationshipResponse\0222\n\004data\030\001 \001(\0132\036." +
       "profile.v1.RelationshipObjectR\004data*$\n\013C" +
       "ontactType\022\t\n\005EMAIL\020\000\022\n\n\006MSISDN\020\001*n\n\022Com" +

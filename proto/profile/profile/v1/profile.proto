@@ -288,6 +288,7 @@ message SearchRosterRequest {
   string end_date = 5;
   repeated string properties = 6;
   map<string, string> extras = 7;
+  string profile_id = 8;
 }
 
 message SearchRosterResponse {

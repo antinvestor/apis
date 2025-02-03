@@ -135,7 +135,7 @@ message Notification {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  common.v1.StatusResponse status = 14 [(buf.validate.field).skipped = true];
+  common.v1.StatusResponse status = 14 [(buf.validate.field).ignore = IGNORE_ALWAYS];
   map<string, string> extras = 15;
 
   PRIORITY priority = 16;
