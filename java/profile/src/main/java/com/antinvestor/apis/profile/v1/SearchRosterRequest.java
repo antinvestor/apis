@@ -46,6 +46,7 @@ private static final long serialVersionUID = 0L;
     endDate_ = "";
     properties_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
+    profileId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -328,6 +329,45 @@ java.lang.String defaultValue) {
     return map.get(key);
   }
 
+  public static final int PROFILE_ID_FIELD_NUMBER = 8;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object profileId_ = "";
+  /**
+   * <code>string profile_id = 8 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The profileId.
+   */
+  @java.lang.Override
+  public java.lang.String getProfileId() {
+    java.lang.Object ref = profileId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      profileId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string profile_id = 8 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getProfileIdBytes() {
+    java.lang.Object ref = profileId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      profileId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -366,6 +406,9 @@ java.lang.String defaultValue) {
         internalGetExtras(),
         ExtrasDefaultEntryHolder.defaultEntry,
         7);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 8, profileId_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -410,6 +453,9 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, extras__);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(8, profileId_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -439,6 +485,8 @@ java.lang.String defaultValue) {
         .equals(other.getPropertiesList())) return false;
     if (!internalGetExtras().equals(
         other.internalGetExtras())) return false;
+    if (!getProfileId()
+        .equals(other.getProfileId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -469,6 +517,8 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + EXTRAS_FIELD_NUMBER;
       hash = (53 * hash) + internalGetExtras().hashCode();
     }
+    hash = (37 * hash) + PROFILE_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getProfileId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -630,6 +680,7 @@ java.lang.String defaultValue) {
       properties_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
       internalGetMutableExtras().clear();
+      profileId_ = "";
       return this;
     }
 
@@ -686,6 +737,9 @@ java.lang.String defaultValue) {
         result.extras_ = internalGetExtras();
         result.extras_.makeImmutable();
       }
+      if (((from_bitField0_ & 0x00000080) != 0)) {
+        result.profileId_ = profileId_;
+      }
     }
 
     @java.lang.Override
@@ -734,6 +788,11 @@ java.lang.String defaultValue) {
       internalGetMutableExtras().mergeFrom(
           other.internalGetExtras());
       bitField0_ |= 0x00000040;
+      if (!other.getProfileId().isEmpty()) {
+        profileId_ = other.profileId_;
+        bitField0_ |= 0x00000080;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -800,6 +859,11 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000040;
               break;
             } // case 58
+            case 66: {
+              profileId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000080;
+              break;
+            } // case 66
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1332,6 +1396,78 @@ java.lang.String defaultValue) {
       internalGetMutableExtras().getMutableMap()
           .putAll(values);
       bitField0_ |= 0x00000040;
+      return this;
+    }
+
+    private java.lang.Object profileId_ = "";
+    /**
+     * <code>string profile_id = 8 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @return The profileId.
+     */
+    public java.lang.String getProfileId() {
+      java.lang.Object ref = profileId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        profileId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string profile_id = 8 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for profileId.
+     */
+    public com.google.protobuf.ByteString
+        getProfileIdBytes() {
+      java.lang.Object ref = profileId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        profileId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string profile_id = 8 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @param value The profileId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setProfileId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      profileId_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string profile_id = 8 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearProfileId() {
+      profileId_ = getDefaultInstance().getProfileId();
+      bitField0_ = (bitField0_ & ~0x00000080);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string profile_id = 8 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for profileId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setProfileIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      profileId_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
       return this;
     }
 

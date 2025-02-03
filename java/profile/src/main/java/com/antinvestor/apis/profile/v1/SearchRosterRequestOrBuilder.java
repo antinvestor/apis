@@ -129,4 +129,16 @@ java.lang.String defaultValue);
    */
   java.lang.String getExtrasOrThrow(
       java.lang.String key);
+
+  /**
+   * <code>string profile_id = 8 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The profileId.
+   */
+  java.lang.String getProfileId();
+  /**
+   * <code>string profile_id = 8 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileId.
+   */
+  com.google.protobuf.ByteString
+      getProfileIdBytes();
 }

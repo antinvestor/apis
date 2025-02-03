@@ -437,6 +437,12 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "profileId",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
