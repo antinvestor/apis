@@ -19,10 +19,10 @@ import (
 // checks if the Error type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Error{}
 
-// Error A Matrix-level Error
+// Error A Service level Error
 type Error struct {
 	// An error code for the error.
-	Code string `json:"code"`
+	Errcode string `json:"errcode"`
 	// A human-readable error message.
 	Error *string `json:"error,omitempty"`
 }
@@ -33,9 +33,9 @@ type _Error Error
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewError(code string) *Error {
+func NewError(errcode string) *Error {
 	this := Error{}
-	this.Code = code
+	this.Errcode = errcode
 	return &this
 }
 
@@ -47,28 +47,28 @@ func NewErrorWithDefaults() *Error {
 	return &this
 }
 
-// GetCode returns the Code field value
-func (o *Error) GetCode() string {
+// GetErrcode returns the Errcode field value
+func (o *Error) GetErrcode() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Code
+	return o.Errcode
 }
 
-// GetCodeOk returns a tuple with the Code field value
+// GetErrcodeOk returns a tuple with the Errcode field value
 // and a boolean to check if the value has been set.
-func (o *Error) GetCodeOk() (*string, bool) {
+func (o *Error) GetErrcodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Code, true
+	return &o.Errcode, true
 }
 
-// SetCode sets field value
-func (o *Error) SetCode(v string) {
-	o.Code = v
+// SetErrcode sets field value
+func (o *Error) SetErrcode(v string) {
+	o.Errcode = v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
@@ -113,7 +113,7 @@ func (o Error) MarshalJSON() ([]byte, error) {
 
 func (o Error) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["code"] = o.Code
+	toSerialize["errcode"] = o.Errcode
 	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
@@ -125,7 +125,7 @@ func (o *Error) UnmarshalJSON(bytes []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"code",
+		"errcode",
 	}
 
 	allProperties := make(map[string]interface{})

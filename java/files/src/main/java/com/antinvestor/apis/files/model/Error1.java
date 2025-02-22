@@ -36,13 +36,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * A Service level Error
  */
 @JsonPropertyOrder({
-  Error1.JSON_PROPERTY_CODE,
+  Error1.JSON_PROPERTY_ERRCODE,
   Error1.JSON_PROPERTY_ERROR
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class Error1 {
-  public static final String JSON_PROPERTY_CODE = "code";
-  private Object code = null;
+  public static final String JSON_PROPERTY_ERRCODE = "errcode";
+  private Object errcode = null;
 
   public static final String JSON_PROPERTY_ERROR = "error";
   private JsonNullable<Object> error = JsonNullable.<Object>of(null);
@@ -50,28 +50,28 @@ public class Error1 {
   public Error1() { 
   }
 
-  public Error1 code(Object code) {
-    this.code = code;
+  public Error1 errcode(Object errcode) {
+    this.errcode = errcode;
     return this;
   }
 
    /**
    * An error code for the error.
-   * @return code
+   * @return errcode
   **/
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonProperty(JSON_PROPERTY_ERRCODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public Object getCode() {
-    return code;
+  public Object getErrcode() {
+    return errcode;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonProperty(JSON_PROPERTY_ERRCODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setCode(Object code) {
-    this.code = code;
+  public void setErrcode(Object errcode) {
+    this.errcode = errcode;
   }
 
 
@@ -120,7 +120,7 @@ public class Error1 {
       return false;
     }
     Error1 error1 = (Error1) o;
-    return Objects.equals(this.code, error1.code) &&
+    return Objects.equals(this.errcode, error1.errcode) &&
         equalsNullable(this.error, error1.error);
   }
 
@@ -130,7 +130,7 @@ public class Error1 {
 
   @Override
   public int hashCode() {
-    return Objects.hash(code, hashCodeNullable(error));
+    return Objects.hash(errcode, hashCodeNullable(error));
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -144,7 +144,7 @@ public class Error1 {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Error1 {\n");
-    sb.append("    code: ").append(toIndentedString(code)).append("\n");
+    sb.append("    errcode: ").append(toIndentedString(errcode)).append("\n");
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -193,9 +193,9 @@ public class Error1 {
 
     StringJoiner joiner = new StringJoiner("&");
 
-    // add `code` to the URL query string
-    if (getCode() != null) {
-      joiner.add(String.format("%scode%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getCode()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    // add `errcode` to the URL query string
+    if (getErrcode() != null) {
+      joiner.add(String.format("%serrcode%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getErrcode()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
     // add `error` to the URL query string

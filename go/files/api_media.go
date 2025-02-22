@@ -53,7 +53,7 @@ should limit the number of concurrent *pending media uploads* a given
 user can have. A pending media upload is a created `mxc://` URI where (a)
 the media has not yet been uploaded, and (b) has not yet expired (the
 `unused_expires_at` timestamp has not yet passed). In both cases, the
-server should respond with an HTTP 429 error with an code of
+server should respond with an HTTP 429 error with an errcode of
 `M_LIMIT_EXCEEDED`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Code** | **string** | An error code for the error. | 
+**Errcode** | **string** | An error code for the error. | 
 **Error** | Pointer to **string** | A human-readable error message. | [optional] 
 
 ## Methods
 
 ### NewError
 
-`func NewError(code string, ) *Error`
+`func NewError(errcode string, ) *Error`
 
 NewError instantiates a new Error object
 This constructor will assign default values to properties that have it defined,
@@ -26,24 +26,24 @@ NewErrorWithDefaults instantiates a new Error object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetCode
+### GetErrcode
 
-`func (o *Error) GetCode() string`
+`func (o *Error) GetErrcode() string`
 
-GetCode returns the Code field if non-nil, zero value otherwise.
+GetErrcode returns the Errcode field if non-nil, zero value otherwise.
 
-### GetCodeOk
+### GetErrcodeOk
 
-`func (o *Error) GetCodeOk() (*string, bool)`
+`func (o *Error) GetErrcodeOk() (*string, bool)`
 
-GetCodeOk returns a tuple with the Code field if it's non-nil, zero value otherwise
+GetErrcodeOk returns a tuple with the Errcode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCode
+### SetErrcode
 
-`func (o *Error) SetCode(v string)`
+`func (o *Error) SetErrcode(v string)`
 
-SetCode sets Code field to given value.
+SetErrcode sets Errcode field to given value.
 
 
 ### GetError

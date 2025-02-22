@@ -32,13 +32,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * A Service level Error
  */
 @JsonPropertyOrder({
-  Error.JSON_PROPERTY_CODE,
+  Error.JSON_PROPERTY_ERRCODE,
   Error.JSON_PROPERTY_ERROR
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class Error {
-  public static final String JSON_PROPERTY_CODE = "code";
-  private String code;
+  public static final String JSON_PROPERTY_ERRCODE = "errcode";
+  private String errcode;
 
   public static final String JSON_PROPERTY_ERROR = "error";
   private String error;
@@ -46,28 +46,28 @@ public class Error {
   public Error() { 
   }
 
-  public Error code(String code) {
-    this.code = code;
+  public Error errcode(String errcode) {
+    this.errcode = errcode;
     return this;
   }
 
    /**
    * An error code for the error.
-   * @return code
+   * @return errcode
   **/
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonProperty(JSON_PROPERTY_ERRCODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public String getCode() {
-    return code;
+  public String getErrcode() {
+    return errcode;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonProperty(JSON_PROPERTY_ERRCODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setCode(String code) {
-    this.code = code;
+  public void setErrcode(String errcode) {
+    this.errcode = errcode;
   }
 
 
@@ -108,20 +108,20 @@ public class Error {
       return false;
     }
     Error error = (Error) o;
-    return Objects.equals(this.code, error.code) &&
+    return Objects.equals(this.errcode, error.errcode) &&
         Objects.equals(this.error, error.error);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(code, error);
+    return Objects.hash(errcode, error);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Error {\n");
-    sb.append("    code: ").append(toIndentedString(code)).append("\n");
+    sb.append("    errcode: ").append(toIndentedString(errcode)).append("\n");
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -170,9 +170,9 @@ public class Error {
 
     StringJoiner joiner = new StringJoiner("&");
 
-    // add `code` to the URL query string
-    if (getCode() != null) {
-      joiner.add(String.format("%scode%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getCode()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    // add `errcode` to the URL query string
+    if (getErrcode() != null) {
+      joiner.add(String.format("%serrcode%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getErrcode()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
     // add `error` to the URL query string

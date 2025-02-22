@@ -51,7 +51,7 @@ paths:
               examples:
                 response:
                   value:
-                    code: M_FORBIDDEN
+                    errcode: M_FORBIDDEN
                     error: Cannot upload this content
               schema:
                 $ref: '#/components/schemas/Error'
@@ -101,7 +101,7 @@ paths:
               examples:
                 response:
                   value:
-                    code: M_FORBIDDEN
+                    errcode: M_FORBIDDEN
                     error: Cannot upload this content
               schema:
                 $ref: '#/components/schemas/Error_1'
@@ -114,14 +114,14 @@ paths:
               [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).
 
             A [standard error response](/client-server-api/#standard-error-response)
-            will be returned with the `code` `M_FORBIDDEN`.
+            will be returned with the `errcode` `M_FORBIDDEN`.
         "404":
           content:
             application/json:
               examples:
                 response:
                   value:
-                    code: M_NOT_FOUND
+                    errcode: M_NOT_FOUND
                     error: Unknown media ID
               schema:
                 $ref: '#/components/schemas/Error_1'
@@ -132,21 +132,21 @@ paths:
             - The MXC ID has expired.
 
             A [standard error response](/client-server-api/#standard-error-response)
-            will be returned with the `code` `M_NOT_FOUND`.
+            will be returned with the `errcode` `M_NOT_FOUND`.
         "409":
           content:
             application/json:
               examples:
                 response:
                   value:
-                    code: M_CANNOT_OVERWRITE_MEDIA
+                    errcode: M_CANNOT_OVERWRITE_MEDIA
                     error: Media already uploaded
               schema:
                 $ref: '#/components/schemas/Error_1'
           description: |-
             The endpoint was called with a media ID that already has content. A
             [standard error response](/client-server-api/#standard-error-response)
-            will be returned with the `code` `M_CANNOT_OVERWRITE_MEDIA`.
+            will be returned with the `errcode` `M_CANNOT_OVERWRITE_MEDIA`.
         "413":
           $ref: '#/components/responses/uploadTooLarge'
         "429":
@@ -176,7 +176,7 @@ paths:
         user can have. A pending media upload is a created `mxc://` URI where (a)
         the media has not yet been uploaded, and (b) has not yet expired (the
         `unused_expires_at` timestamp has not yet passed). In both cases, the
-        server should respond with an HTTP 429 error with an code of
+        server should respond with an HTTP 429 error with an errcode of
         `M_LIMIT_EXCEEDED`.
       operationId: createContent
       responses:
@@ -193,7 +193,7 @@ paths:
               examples:
                 response:
                   value:
-                    code: M_FORBIDDEN
+                    errcode: M_FORBIDDEN
                     error: Cannot upload this content
               schema:
                 $ref: '#/components/schemas/Error_1'
@@ -477,7 +477,7 @@ paths:
               examples:
                 response:
                   value:
-                    code: M_UNKNOWN
+                    errcode: M_UNKNOWN
                     error: Cannot generate thumbnails for the requested content
               schema:
                 $ref: '#/components/schemas/Error_1'
@@ -491,7 +491,7 @@ paths:
               examples:
                 response:
                   value:
-                    code: M_TOO_LARGE
+                    errcode: M_TOO_LARGE
                     error: Content is too large to thumbnail
               schema:
                 $ref: '#/components/schemas/Error_1'
@@ -504,7 +504,7 @@ paths:
               examples:
                 response:
                   value:
-                    code: M_TOO_LARGE
+                    errcode: M_TOO_LARGE
                     error: Content is too large to thumbnail
               schema:
                 $ref: '#/components/schemas/Error_1'
@@ -710,12 +710,12 @@ components:
           examples:
             response:
               value:
-                code: M_TOO_LARGE
+                errcode: M_TOO_LARGE
                 error: Cannot upload files larger than 100mb
           schema:
-            description: A Matrix-level Error
+            description: A Service level Error
             properties:
-              code:
+              errcode:
                 description: An error code for the error.
                 example: M_UNKNOWN
                 type: string
@@ -724,7 +724,7 @@ components:
                 example: An unknown error occurred
                 type: string
             required:
-            - code
+            - errcode
             title: Error
       description: The uploaded content is too large for the server.
     rateLimited:
@@ -732,9 +732,9 @@ components:
         application/json:
           schema:
             allOf:
-            - description: A Matrix-level Error
+            - description: A Service level Error
               properties:
-                code:
+                errcode:
                   description: An error code for the error.
                   example: M_UNKNOWN
                   type: string
@@ -743,11 +743,11 @@ components:
                   example: An unknown error occurred
                   type: string
               required:
-              - code
+              - errcode
               title: Error
             - description: The rate limit was reached for this request
               properties:
-                code:
+                errcode:
                   description: The M_LIMIT_EXCEEDED error code
                   example: M_LIMIT_EXCEEDED
                   type: string
@@ -762,7 +762,7 @@ components:
                   example: 2000
                   type: integer
               required:
-              - code
+              - errcode
               title: RateLimitError
       description: This request was rate-limited.
     notYetUploaded:
@@ -771,23 +771,23 @@ components:
           examples:
             response:
               value:
-                code: M_NOT_YET_UPLOADED
+                errcode: M_NOT_YET_UPLOADED
                 error: Content has not yet been uploaded
           schema:
-            description: A Matrix-level Error
+            description: A Service level Error
             properties:
-              code:
+              errcode:
                 description: An error code for the error.
                 example: M_UNKNOWN
               error:
                 description: A human-readable error message.
                 example: An unknown error occurred
             required:
-            - code
+            - errcode
             title: Error
       description: |-
         The content is not yet available. A [standard error response](/client-server-api/#standard-error-response)
-        will be returned with the `code` `M_NOT_YET_UPLOADED`.
+        will be returned with the `errcode` `M_NOT_YET_UPLOADED`.
     downloadRedirect:
       description: A redirect to the requested content.
       headers:
@@ -803,19 +803,19 @@ components:
           examples:
             response:
               value:
-                code: M_TOO_LARGE
+                errcode: M_TOO_LARGE
                 error: Content is too large to serve
           schema:
-            description: A Matrix-level Error
+            description: A Service level Error
             properties:
-              code:
+              errcode:
                 description: An error code for the error.
                 example: M_UNKNOWN
               error:
                 description: A human-readable error message.
                 example: An unknown error occurred
             required:
-            - code
+            - errcode
             title: Error
       description: The content is too large for the server to serve.
     thumbnailRedirect:
@@ -873,9 +873,9 @@ components:
       required:
       - content_uri
     Error:
-      description: A Matrix-level Error
+      description: A Service level Error
       properties:
-        code:
+        errcode:
           description: An error code for the error.
           example: M_UNKNOWN
           type: string
@@ -884,7 +884,7 @@ components:
           example: An unknown error occurred
           type: string
       required:
-      - code
+      - errcode
       title: Error
     getConfig_200_response:
       example:
@@ -897,16 +897,16 @@ components:
             If not listed or null, the size limit should be treated as unknown.
           format: int64
     Error_1:
-      description: A Matrix-level Error
+      description: A Service level Error
       properties:
-        code:
+        errcode:
           description: An error code for the error.
           example: M_UNKNOWN
         error:
           description: A human-readable error message.
           example: An unknown error occurred
       required:
-      - code
+      - errcode
       title: Error
   securitySchemes:
     accessTokenBearer:

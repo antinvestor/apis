@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Code** | **interface{}** | An error code for the error. | 
+**Errcode** | **interface{}** | An error code for the error. | 
 **Error** | Pointer to **interface{}** | A human-readable error message. | [optional] 
 
 ## Methods
 
 ### NewError1
 
-`func NewError1(code interface{}, ) *Error1`
+`func NewError1(errcode interface{}, ) *Error1`
 
 NewError1 instantiates a new Error1 object
 This constructor will assign default values to properties that have it defined,
@@ -26,36 +26,36 @@ NewError1WithDefaults instantiates a new Error1 object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetCode
+### GetErrcode
 
-`func (o *Error1) GetCode() interface{}`
+`func (o *Error1) GetErrcode() interface{}`
 
-GetCode returns the Code field if non-nil, zero value otherwise.
+GetErrcode returns the Errcode field if non-nil, zero value otherwise.
 
-### GetCodeOk
+### GetErrcodeOk
 
-`func (o *Error1) GetCodeOk() (*interface{}, bool)`
+`func (o *Error1) GetErrcodeOk() (*interface{}, bool)`
 
-GetCodeOk returns a tuple with the Code field if it's non-nil, zero value otherwise
+GetErrcodeOk returns a tuple with the Errcode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCode
+### SetErrcode
 
-`func (o *Error1) SetCode(v interface{})`
+`func (o *Error1) SetErrcode(v interface{})`
 
-SetCode sets Code field to given value.
+SetErrcode sets Errcode field to given value.
 
 
-### SetCodeNil
+### SetErrcodeNil
 
-`func (o *Error1) SetCodeNil(b bool)`
+`func (o *Error1) SetErrcodeNil(b bool)`
 
- SetCodeNil sets the value for Code to be an explicit nil
+ SetErrcodeNil sets the value for Errcode to be an explicit nil
 
-### UnsetCode
-`func (o *Error1) UnsetCode()`
+### UnsetErrcode
+`func (o *Error1) UnsetErrcode()`
 
-UnsetCode ensures that no value is present for Code, not even an explicit nil
+UnsetErrcode ensures that no value is present for Errcode, not even an explicit nil
 ### GetError
 
 `func (o *Error1) GetError() interface{}`

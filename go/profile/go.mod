@@ -1,8 +1,6 @@
 module github.com/antinvestor/apis/go/profile
 
-go 1.23.0
-
-toolchain go1.24.0
+go 1.24
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.5-20250219170025-d39267d9df8f.1

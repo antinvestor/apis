@@ -19,10 +19,10 @@ import (
 // checks if the Error1 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Error1{}
 
-// Error1 A Matrix-level Error
+// Error1 A Service level Error
 type Error1 struct {
 	// An error code for the error.
-	Code interface{} `json:"code"`
+	Errcode interface{} `json:"errcode"`
 	// A human-readable error message.
 	Error interface{} `json:"error,omitempty"`
 }
@@ -33,9 +33,9 @@ type _Error1 Error1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewError1(code interface{}) *Error1 {
+func NewError1(errcode interface{}) *Error1 {
 	this := Error1{}
-	this.Code = code
+	this.Errcode = errcode
 	return &this
 }
 
@@ -47,30 +47,30 @@ func NewError1WithDefaults() *Error1 {
 	return &this
 }
 
-// GetCode returns the Code field value
+// GetErrcode returns the Errcode field value
 // If the value is explicit nil, the zero value for interface{} will be returned
-func (o *Error1) GetCode() interface{} {
+func (o *Error1) GetErrcode() interface{} {
 	if o == nil {
 		var ret interface{}
 		return ret
 	}
 
-	return o.Code
+	return o.Errcode
 }
 
-// GetCodeOk returns a tuple with the Code field value
+// GetErrcodeOk returns a tuple with the Errcode field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Error1) GetCodeOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Code) {
+func (o *Error1) GetErrcodeOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.Errcode) {
 		return nil, false
 	}
-	return &o.Code, true
+	return &o.Errcode, true
 }
 
-// SetCode sets field value
-func (o *Error1) SetCode(v interface{}) {
-	o.Code = v
+// SetErrcode sets field value
+func (o *Error1) SetErrcode(v interface{}) {
+	o.Errcode = v
 }
 
 // GetError returns the Error field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -116,8 +116,8 @@ func (o Error1) MarshalJSON() ([]byte, error) {
 
 func (o Error1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Code != nil {
-		toSerialize["code"] = o.Code
+	if o.Errcode != nil {
+		toSerialize["errcode"] = o.Errcode
 	}
 	if o.Error != nil {
 		toSerialize["error"] = o.Error
@@ -130,7 +130,7 @@ func (o *Error1) UnmarshalJSON(bytes []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"code",
+		"errcode",
 	}
 
 	allProperties := make(map[string]interface{})

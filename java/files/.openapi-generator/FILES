@@ -1,6 +1,5 @@
 .github/workflows/maven.yml
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -39,10 +38,3 @@ src/main/java/com/antinvestor/apis/files/model/Error1.java
 src/main/java/com/antinvestor/apis/files/model/GetConfig200Response.java
 src/main/java/com/antinvestor/apis/files/model/GetUrlPreview200Response.java
 src/main/java/com/antinvestor/apis/files/model/UploadContent200Response.java
-src/test/java/com/antinvestor/apis/files/api/MediaApiTest.java
-src/test/java/com/antinvestor/apis/files/model/CreateContent200ResponseTest.java
-src/test/java/com/antinvestor/apis/files/model/Error1Test.java
-src/test/java/com/antinvestor/apis/files/model/ErrorTest.java
-src/test/java/com/antinvestor/apis/files/model/GetConfig200ResponseTest.java
-src/test/java/com/antinvestor/apis/files/model/GetUrlPreview200ResponseTest.java
-src/test/java/com/antinvestor/apis/files/model/UploadContent200ResponseTest.java

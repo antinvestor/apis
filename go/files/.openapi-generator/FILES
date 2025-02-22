@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -23,5 +22,4 @@ model_get_config_200_response.go
 model_get_url_preview_200_response.go
 model_upload_content_200_response.go
 response.go
-test/api_media_test.go
 utils.go
