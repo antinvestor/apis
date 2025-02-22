@@ -120,7 +120,7 @@ openapi_files_gen_go: ## Generate the golang open api spec for the files server
 		openapitools/openapi-generator-cli generate \
 		-g go -o /local/golang/ -p packageName=file_v1 \
         --git-repo-id apis/go/files --git-user-id antinvestor \
-        -i /local/proto/v1/file.yaml
+        -i /local/proto/v1/openapi.yaml
 
 
 .PHONY: openapi_files_gen_java
@@ -137,7 +137,7 @@ openapi_files_gen_java: ## Generate the java open api spec for the files server
         --invoker-package com.antinvestor.apis.files.invoker \
         --model-package com.antinvestor.apis.files.model \
         --artifact-id files \
-        -i /local/proto/v1/file.yaml
+        -i /local/proto/v1/openapi.yaml
 
 
 .PHONY: generate_grpc_mocks
