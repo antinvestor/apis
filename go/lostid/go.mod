@@ -1,6 +1,8 @@
 module github.com/antinvestor/apis/go/lostid
 
-go 1.23
+go 1.23.0
+
+toolchain go1.24.0
 
 //replace github.com/antinvestor/apis/go/common => ../common
 
@@ -9,7 +11,7 @@ require (
 	github.com/antinvestor/apis/go/common v1.33.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.1
 	go.uber.org/mock v0.5.0
-	google.golang.org/genproto v0.0.0-20250218202821-56aae31c358a
+	google.golang.org/genproto v0.0.0-20250219182151-9fdb1cabc7b2
 	google.golang.org/genproto/googleapis/api v0.0.0-20250218202821-56aae31c358a
 	google.golang.org/grpc v1.70.0
 	google.golang.org/protobuf v1.36.5
