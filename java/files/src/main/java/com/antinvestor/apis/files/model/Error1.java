@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
- * A Matrix-level Error
+ * A Service level Error
  */
 @JsonPropertyOrder({
   Error1.JSON_PROPERTY_CODE,

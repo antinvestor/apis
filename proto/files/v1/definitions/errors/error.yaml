@@ -13,7 +13,7 @@
 # limitations under the License.
 type: object
 title: Error
-description: A Matrix-level Error
+description: A Service level Error
 properties:
   code:
     type: string

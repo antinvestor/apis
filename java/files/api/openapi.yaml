@@ -723,7 +723,7 @@ components:
                 code: M_TOO_LARGE
                 error: Cannot upload files larger than 100mb
           schema:
-            description: A Matrix-level Error
+            description: A Service level Error
             properties:
               code:
                 description: An error code for the error.
@@ -742,7 +742,7 @@ components:
         application/json:
           schema:
             allOf:
-            - description: A Matrix-level Error
+            - description: A Service level Error
               properties:
                 code:
                   description: An error code for the error.
@@ -757,7 +757,7 @@ components:
               title: Error
             - description: The rate limit was reached for this request
               properties:
-                errcode:
+                code:
                   description: The M_LIMIT_EXCEEDED error code
                   example: M_LIMIT_EXCEEDED
                   type: string
@@ -772,7 +772,7 @@ components:
                   example: 2000
                   type: integer
               required:
-              - errcode
+              - code
               title: RateLimitError
       description: This request was rate-limited.
     notYetUploaded:
@@ -784,7 +784,7 @@ components:
                 code: M_NOT_YET_UPLOADED
                 error: Content has not yet been uploaded
           schema:
-            description: A Matrix-level Error
+            description: A Service level Error
             properties:
               code:
                 description: An error code for the error.
@@ -816,7 +816,7 @@ components:
                 code: M_TOO_LARGE
                 error: Content is too large to serve
           schema:
-            description: A Matrix-level Error
+            description: A Service level Error
             properties:
               code:
                 description: An error code for the error.
@@ -883,7 +883,7 @@ components:
       required:
       - content_uri
     Error:
-      description: A Matrix-level Error
+      description: A Service level Error
       properties:
         code:
           description: An error code for the error.
@@ -907,7 +907,7 @@ components:
             If not listed or null, the size limit should be treated as unknown.
           format: int64
     Error_1:
-      description: A Matrix-level Error
+      description: A Service level Error
       properties:
         code:
           description: An error code for the error.

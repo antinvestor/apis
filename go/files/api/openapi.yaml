@@ -747,7 +747,7 @@ components:
               title: Error
             - description: The rate limit was reached for this request
               properties:
-                errcode:
+                code:
                   description: The M_LIMIT_EXCEEDED error code
                   example: M_LIMIT_EXCEEDED
                   type: string
@@ -762,7 +762,7 @@ components:
                   example: 2000
                   type: integer
               required:
-              - errcode
+              - code
               title: RateLimitError
       description: This request was rate-limited.
     notYetUploaded:

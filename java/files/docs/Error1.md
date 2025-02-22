@@ -2,7 +2,7 @@
 
 # Error1
 
-A Matrix-level Error
+A Service level Error
 
 ## Properties
 
