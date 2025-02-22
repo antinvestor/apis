@@ -15,7 +15,7 @@ type: object
 title: Error
 description: A Service level Error
 properties:
-  code:
+  errcode:
     type: string
     description: An error code for the error.
     example: M_UNKNOWN
@@ -23,4 +23,4 @@ properties:
     type: string
     description: A human-readable error message.
     example: An unknown error occurred
-required: ["code"]
+required: ["errcode"]
