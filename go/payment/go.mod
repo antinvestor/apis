@@ -9,7 +9,7 @@ require (
 	github.com/antinvestor/apis/go/common v1.33.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.1
 	go.uber.org/mock v0.5.0
-	google.golang.org/genproto v0.0.0-20250224174004-546df14abb99
+	google.golang.org/genproto v0.0.0-20250227231956-55c901821b1e
 	google.golang.org/genproto/googleapis/api v0.0.0-20250224174004-546df14abb99
 	google.golang.org/grpc v1.70.0
 	google.golang.org/protobuf v1.36.5
