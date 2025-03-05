@@ -6,7 +6,7 @@ toolchain go1.24.1
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.5-20250219170025-d39267d9df8f.1
-	golang.org/x/oauth2 v0.27.0
+	golang.org/x/oauth2 v0.28.0
 	google.golang.org/grpc v1.71.0
 	google.golang.org/protobuf v1.36.5
 )
