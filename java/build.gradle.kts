@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.1.10"
+    kotlin("jvm") version "2.1.20"
     id("net.nemerosa.versioning") version "3.1.0"
     id("maven-publish")
 }
