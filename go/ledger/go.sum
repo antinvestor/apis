@@ -64,6 +64,8 @@ google.golang.org/genproto v0.0.0-20250324211829-b45e905df463 h1:qEFnJI6AnfZk0NN
 google.golang.org/genproto v0.0.0-20250324211829-b45e905df463/go.mod h1:SqIx1NV9hcvqdLHo7uNZDS5lrUJybQ3evo3+z/WBfA0=
 google.golang.org/genproto v0.0.0-20250404141209-ee84b53bf3d0 h1:wX+y2uwLyC73sX9zfiJW7E7m68+oxAQGzgCmoM0e/zs=
 google.golang.org/genproto v0.0.0-20250404141209-ee84b53bf3d0/go.mod h1:jwIveCnYVWLDIe0ZXnIrfMKNoy/rQRSRrepUPEruz0U=
+google.golang.org/genproto v0.0.0-20250407143221-ac9807e6c755 h1:bldQzRMfyYSvYsP0oCgOIsBryyDN2Ci7HxB+rx3L7Qw=
+google.golang.org/genproto v0.0.0-20250407143221-ac9807e6c755/go.mod h1:qD4k1RhYfNmRjqaHJxKLG/HRtqbXVclhjop2mPlxGwA=
 google.golang.org/genproto/googleapis/api v0.0.0-20250219182151-9fdb1cabc7b2 h1:35ZFtrCgaAjF7AFAK0+lRSf+4AyYnWRbH7og13p7rZ4=
 google.golang.org/genproto/googleapis/api v0.0.0-20250219182151-9fdb1cabc7b2/go.mod h1:W9ynFDP/shebLB1Hl/ESTOap2jHd6pmLXPNZC7SVDbA=
 google.golang.org/genproto/googleapis/api v0.0.0-20250224174004-546df14abb99 h1:ilJhrCga0AptpJZXmUYG4MCrx/zf3l1okuYz7YK9PPw=
@@ -92,6 +94,8 @@ google.golang.org/genproto/googleapis/rpc v0.0.0-20250313205543-e70fdf4c4cb4 h1:
 google.golang.org/genproto/googleapis/rpc v0.0.0-20250313205543-e70fdf4c4cb4/go.mod h1:LuRYeWDFV6WOn90g357N17oMCaxpgCnbi/44qJvDn2I=
 google.golang.org/genproto/googleapis/rpc v0.0.0-20250324211829-b45e905df463 h1:e0AIkUUhxyBKh6ssZNrAMeqhA7RKUj42346d1y02i2g=
 google.golang.org/genproto/googleapis/rpc v0.0.0-20250324211829-b45e905df463/go.mod h1:qQ0YXyHHx3XkvlzUtpXDkS29lDSafHMZBAZDc03LQ3A=
+google.golang.org/genproto/googleapis/rpc v0.0.0-20250404141209-ee84b53bf3d0 h1:0K7wTWyzxZ7J+L47+LbFogJW1nn/gnnMCN0vGXNYtTI=
+google.golang.org/genproto/googleapis/rpc v0.0.0-20250404141209-ee84b53bf3d0/go.mod h1:qQ0YXyHHx3XkvlzUtpXDkS29lDSafHMZBAZDc03LQ3A=
 google.golang.org/grpc v1.70.0 h1:pWFv03aZoHzlRKHWicjsZytKAiYCtNS0dHbXnIdq7jQ=
 google.golang.org/grpc v1.70.0/go.mod h1:ofIJqVKDXx/JiXrwr2IG4/zwdH9txy3IlF40RmcJSQw=
 google.golang.org/grpc v1.71.0 h1:kF77BGdPTQ4/JZWMlb9VpJ5pa25aqvVqogsxNHHdeBg=
