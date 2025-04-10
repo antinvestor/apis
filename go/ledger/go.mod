@@ -9,7 +9,7 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3
 	go.uber.org/mock v0.5.1
 	google.golang.org/genproto v0.0.0-20250409194420-de1ac958c67a
-	google.golang.org/genproto/googleapis/api v0.0.0-20250407143221-ac9807e6c755
+	google.golang.org/genproto/googleapis/api v0.0.0-20250409194420-de1ac958c67a
 	google.golang.org/grpc v1.71.1
 	google.golang.org/protobuf v1.36.6
 )
