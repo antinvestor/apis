@@ -57,6 +57,7 @@ func request_SettingsService_Get_0(ctx context.Context, marshaler runtime.Marsha
 		protoReq GetRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -89,6 +90,7 @@ func request_SettingsService_List_0(ctx context.Context, marshaler runtime.Marsh
 		protoReq ListRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -114,6 +116,7 @@ func request_SettingsService_Search_0(ctx context.Context, marshaler runtime.Mar
 		protoReq commonv1.SearchRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}

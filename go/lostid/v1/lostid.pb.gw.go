@@ -81,6 +81,7 @@ func request_LostIdService_ListCollectible_0(ctx context.Context, marshaler runt
 		protoReq ListCollectibleRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -106,6 +107,7 @@ func request_LostIdService_Search_0(ctx context.Context, marshaler runtime.Marsh
 		protoReq commonv1.SearchRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -138,6 +140,7 @@ func request_LostIdService_ListSearch_0(ctx context.Context, marshaler runtime.M
 		protoReq ListSearchRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -163,6 +166,7 @@ func request_LostIdService_Progress_0(ctx context.Context, marshaler runtime.Mar
 		protoReq ProgressRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -195,6 +199,7 @@ func request_LostIdService_ListTransaction_0(ctx context.Context, marshaler runt
 		protoReq ListTransactionRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}

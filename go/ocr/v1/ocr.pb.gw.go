@@ -81,6 +81,7 @@ func request_OCRService_Status_0(ctx context.Context, marshaler runtime.Marshale
 		protoReq commonv1.StatusRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}

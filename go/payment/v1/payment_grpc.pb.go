@@ -36,6 +36,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	PaymentService_Send_FullMethodName         = "/payment.v1.PaymentService/Send"
 	PaymentService_Receive_FullMethodName      = "/payment.v1.PaymentService/Receive"
+	PaymentService_Initiate_FullMethodName     = "/payment.v1.PaymentService/Initiate"
 	PaymentService_Status_FullMethodName       = "/payment.v1.PaymentService/Status"
 	PaymentService_StatusUpdate_FullMethodName = "/payment.v1.PaymentService/StatusUpdate"
 	PaymentService_Release_FullMethodName      = "/payment.v1.PaymentService/Release"
@@ -51,6 +52,8 @@ type PaymentServiceClient interface {
 	Send(ctx context.Context, in *SendRequest, opts ...grpc.CallOption) (*SendResponse, error)
 	// Send method for queueing inbound payments as requested
 	Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (*ReceiveResponse, error)
+	// Initiate method for initiating payments as requested
+	Initiate(ctx context.Context, in *InitiateRequest, opts ...grpc.CallOption) (*InitiateResponse, error)
 	// Status request to determine if payment is prepared or released
 	Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error)
 	// Status update request to allow continuation of payment processing
@@ -84,6 +87,16 @@ func (c *paymentServiceClient) Receive(ctx context.Context, in *ReceiveRequest, 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ReceiveResponse)
 	err := c.cc.Invoke(ctx, PaymentService_Receive_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) Initiate(ctx context.Context, in *InitiateRequest, opts ...grpc.CallOption) (*InitiateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InitiateResponse)
+	err := c.cc.Invoke(ctx, PaymentService_Initiate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -157,6 +170,8 @@ type PaymentServiceServer interface {
 	Send(context.Context, *SendRequest) (*SendResponse, error)
 	// Send method for queueing inbound payments as requested
 	Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error)
+	// Initiate method for initiating payments as requested
+	Initiate(context.Context, *InitiateRequest) (*InitiateResponse, error)
 	// Status request to determine if payment is prepared or released
 	Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error)
 	// Status update request to allow continuation of payment processing
@@ -181,6 +196,9 @@ func (UnimplementedPaymentServiceServer) Send(context.Context, *SendRequest) (*S
 }
 func (UnimplementedPaymentServiceServer) Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Receive not implemented")
+}
+func (UnimplementedPaymentServiceServer) Initiate(context.Context, *InitiateRequest) (*InitiateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Initiate not implemented")
 }
 func (UnimplementedPaymentServiceServer) Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Status not implemented")
@@ -250,6 +268,24 @@ func _PaymentService_Receive_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentServiceServer).Receive(ctx, req.(*ReceiveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_Initiate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitiateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).Initiate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_Initiate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).Initiate(ctx, req.(*InitiateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -351,6 +387,10 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Receive",
 			Handler:    _PaymentService_Receive_Handler,
+		},
+		{
+			MethodName: "Initiate",
+			Handler:    _PaymentService_Initiate_Handler,
 		},
 		{
 			MethodName: "Status",

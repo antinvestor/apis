@@ -57,6 +57,7 @@ func request_LedgerService_SearchLedgers_0(ctx context.Context, marshaler runtim
 		protoReq commonv1.SearchRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -148,6 +149,7 @@ func request_LedgerService_SearchAccounts_0(ctx context.Context, marshaler runti
 		protoReq commonv1.SearchRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -239,6 +241,7 @@ func request_LedgerService_SearchTransactions_0(ctx context.Context, marshaler r
 		protoReq commonv1.SearchRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -372,6 +375,7 @@ func request_LedgerService_SearchTransactionEntries_0(ctx context.Context, marsh
 		protoReq commonv1.SearchRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}

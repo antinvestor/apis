@@ -113,11 +113,11 @@ message ReceiveResponse {
   common.v1.StatusResponse data = 1;
 }
 
-message AcknowledgeRequest {
+message InitiateRequest {
   Payment data = 1;
 }
 
-message AcknowledgeResponse {
+message InitiateResponse {
   common.v1.StatusResponse data = 1;
 }
 
@@ -151,10 +151,10 @@ service PaymentService {
     };
   }
 
-  //Acknowledge method for acknowledging payments as requested
-  rpc Acknowledge(AcknowledgeRequest) returns (AcknowledgeResponse) {
+  //Initiate method for initiating payments as requested
+  rpc Initiate(InitiateRequest) returns (InitiateResponse) {
     option (google.api.http) = {
-      post: "/acknowledge"
+      post: "/initiate"
       body: "*"
     };
   }

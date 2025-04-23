@@ -25,6 +25,39 @@
     "application/json"
   ],
   "paths": {
+    "/initiate": {
+      "post": {
+        "summary": "Initiate method for initiating payments as requested",
+        "operationId": "PaymentService_Initiate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/payment.v1.InitiateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/payment.v1.InitiateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "payment.v1.PaymentService"
+        ]
+      }
+    },
     "/receive": {
       "post": {
         "summary": "Send method for queueing inbound payments as requested",
@@ -526,6 +559,22 @@
         }
       },
       "description": "Represents an amount of money with its currency type."
+    },
+    "payment.v1.InitiateRequest": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/payment.v1.Payment"
+        }
+      }
+    },
+    "payment.v1.InitiateResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/common.v1.StatusResponse"
+        }
+      }
     },
     "payment.v1.Payment": {
       "type": "object",
