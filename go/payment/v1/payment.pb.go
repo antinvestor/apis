@@ -892,6 +892,7 @@ const file_payment_v1_payment_proto_rawDesc = "" +
 	"\x0eReceiveRequest\x12'\n" +
 	"\x04data\x18\x01 \x01(\v2\x13.payment.v1.PaymentR\x04data\"@\n" +
 	"\x0fReceiveResponse\x12-\n" +
+
 	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data\"\xec\x03\n" +
 	"\x15InitiatePromptRequest\x12.\n" +
 	"\x06source\x18\x01 \x01(\v2\x16.common.v1.ContactLinkR\x06source\x124\n" +
@@ -909,17 +910,15 @@ const file_payment_v1_payment_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"G\n" +
 	"\x16InitiatePromptResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data\"W\n" +
-	"\x0eReleaseRequest\x12+\n" +
-	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x18\n" +
-	"\acomment\x18\x02 \x01(\tR\acomment\"@\n" +
-	"\x0fReleaseResponse\x12-\n" +
+
 	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data2\xff\x05\n" +
 	"\x0ePaymentService\x12K\n" +
 	"\x04Send\x12\x17.payment.v1.SendRequest\x1a\x18.payment.v1.SendResponse\"\x10\x82\xd3\xe4\x93\x02\n" +
 	":\x01*\"\x05/send\x12W\n" +
 	"\aReceive\x12\x1a.payment.v1.ReceiveRequest\x1a\x1b.payment.v1.ReceiveResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/receive\x12t\n" +
 	"\x0eInitiatePrompt\x12!.payment.v1.InitiatePromptRequest\x1a\".payment.v1.InitiatePromptResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/initiate/prompt\x12S\n" +
+
+
 	"\x06Status\x12\x18.common.v1.StatusRequest\x1a\x19.common.v1.StatusResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/status/{id}\x12h\n" +
 	"\fStatusUpdate\x12\x1e.common.v1.StatusUpdateRequest\x1a\x1f.common.v1.StatusUpdateResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\x1a\f/status/{id}\x12a\n" +
 	"\aRelease\x12\x1a.payment.v1.ReleaseRequest\x1a\x1b.payment.v1.ReleaseResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/send/release/{id}\x12Q\n" +
