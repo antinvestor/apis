@@ -128,7 +128,6 @@ message InitiatePromptRequest {
   map<string, string> metadata = 10;
 }
 
-
 message InitiatePromptResponse {
   common.v1.StatusResponse data = 1;
 }
