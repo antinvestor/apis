@@ -113,6 +113,26 @@ message ReceiveResponse {
   common.v1.StatusResponse data = 1;
 }
 
+message InitiatePromptRequest {
+  common.v1.ContactLink source = 1;
+  common.v1.ContactLink recipient = 2;
+  google.type.Money amount = 3;
+  string date_created = 4;
+  string device_id = 5;
+  string id = 6;
+  common.v1.STATE state = 7;
+  common.v1.STATUS status = 8;
+  // Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
+  string route = 9;
+  // Any additional metadata (e.g., notes, tags, correlation keys)
+  map<string, string> metadata = 10;
+}
+
+
+message InitiatePromptResponse {
+  common.v1.StatusResponse data = 1;
+}
+
 message ReleaseRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
@@ -139,6 +159,14 @@ service PaymentService {
   rpc Receive(ReceiveRequest) returns (ReceiveResponse) {
     option (google.api.http) = {
       post: "/receive"
+      body: "*"
+    };
+  }
+
+  //Initiate method for initiating payments as requested
+  rpc InitiatePrompt(InitiatePromptRequest) returns (InitiatePromptResponse) {
+    option (google.api.http) = {
+      post: "/initiate/prompt"
       body: "*"
     };
   }

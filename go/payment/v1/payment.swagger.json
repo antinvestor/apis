@@ -25,6 +25,39 @@
     "application/json"
   ],
   "paths": {
+    "/initiate/prompt": {
+      "post": {
+        "summary": "Initiate method for initiating payments as requested",
+        "operationId": "PaymentService_InitiatePrompt",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/payment.v1.InitiatePromptResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/payment.v1.InitiatePromptRequest"
+            }
+          }
+        ],
+        "tags": [
+          "payment.v1.PaymentService"
+        ]
+      }
+    },
     "/receive": {
       "post": {
         "summary": "Send method for queueing inbound payments as requested",
@@ -526,6 +559,54 @@
         }
       },
       "description": "Represents an amount of money with its currency type."
+    },
+    "payment.v1.InitiatePromptRequest": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/common.v1.ContactLink"
+        },
+        "recipient": {
+          "$ref": "#/definitions/common.v1.ContactLink"
+        },
+        "amount": {
+          "$ref": "#/definitions/google.type.Money"
+        },
+        "dateCreated": {
+          "type": "string"
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
+        },
+        "status": {
+          "$ref": "#/definitions/common.v1.STATUS"
+        },
+        "route": {
+          "type": "string",
+          "title": "Optional route/hint for processing (e.g., \"M-PESA\", \"RTGS\", \"INTERNAL\")"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Any additional metadata (e.g., notes, tags, correlation keys)"
+        }
+      }
+    },
+    "payment.v1.InitiatePromptResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/common.v1.StatusResponse"
+        }
+      }
     },
     "payment.v1.Payment": {
       "type": "object",

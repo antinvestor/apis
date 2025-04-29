@@ -193,3 +193,4 @@ java/files/settings.gradle
 java/files/gradle/wrapper/gradle-wrapper.jar
 java/files/gradle/wrapper/gradle-wrapper.properties
 java/files/.github
+.qodo

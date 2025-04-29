@@ -91,6 +91,37 @@ public final class PaymentServiceGrpc {
     return getReceiveMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.payment.v1.InitiatePromptRequest,
+      com.antinvestor.apis.payment.v1.InitiatePromptResponse> getInitiatePromptMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "InitiatePrompt",
+      requestType = com.antinvestor.apis.payment.v1.InitiatePromptRequest.class,
+      responseType = com.antinvestor.apis.payment.v1.InitiatePromptResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.payment.v1.InitiatePromptRequest,
+      com.antinvestor.apis.payment.v1.InitiatePromptResponse> getInitiatePromptMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.payment.v1.InitiatePromptRequest, com.antinvestor.apis.payment.v1.InitiatePromptResponse> getInitiatePromptMethod;
+    if ((getInitiatePromptMethod = PaymentServiceGrpc.getInitiatePromptMethod) == null) {
+      synchronized (PaymentServiceGrpc.class) {
+        if ((getInitiatePromptMethod = PaymentServiceGrpc.getInitiatePromptMethod) == null) {
+          PaymentServiceGrpc.getInitiatePromptMethod = getInitiatePromptMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.payment.v1.InitiatePromptRequest, com.antinvestor.apis.payment.v1.InitiatePromptResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "InitiatePrompt"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.payment.v1.InitiatePromptRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.payment.v1.InitiatePromptResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new PaymentServiceMethodDescriptorSupplier("InitiatePrompt"))
+              .build();
+        }
+      }
+    }
+    return getInitiatePromptMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusRequest,
       com.antinvestor.apis.common.v1.StatusResponse> getStatusMethod;
 
@@ -331,6 +362,16 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
+     *Initiate method for initiating payments as requested
+     * </pre>
+     */
+    default void initiatePrompt(com.antinvestor.apis.payment.v1.InitiatePromptRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.payment.v1.InitiatePromptResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getInitiatePromptMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      *Status request to determine if payment is prepared or released
      * </pre>
      */
@@ -428,6 +469,17 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
+     *Initiate method for initiating payments as requested
+     * </pre>
+     */
+    public void initiatePrompt(com.antinvestor.apis.payment.v1.InitiatePromptRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.payment.v1.InitiatePromptResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getInitiatePromptMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      *Status request to determine if payment is prepared or released
      * </pre>
      */
@@ -517,6 +569,16 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
+     *Initiate method for initiating payments as requested
+     * </pre>
+     */
+    public com.antinvestor.apis.payment.v1.InitiatePromptResponse initiatePrompt(com.antinvestor.apis.payment.v1.InitiatePromptRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getInitiatePromptMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      *Status request to determine if payment is prepared or released
      * </pre>
      */
@@ -599,6 +661,16 @@ public final class PaymentServiceGrpc {
     public com.antinvestor.apis.payment.v1.ReceiveResponse receive(com.antinvestor.apis.payment.v1.ReceiveRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getReceiveMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Initiate method for initiating payments as requested
+     * </pre>
+     */
+    public com.antinvestor.apis.payment.v1.InitiatePromptResponse initiatePrompt(com.antinvestor.apis.payment.v1.InitiatePromptRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getInitiatePromptMethod(), getCallOptions(), request);
     }
 
     /**
@@ -690,6 +762,17 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
+     *Initiate method for initiating payments as requested
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.payment.v1.InitiatePromptResponse> initiatePrompt(
+        com.antinvestor.apis.payment.v1.InitiatePromptRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getInitiatePromptMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      *Status request to determine if payment is prepared or released
      * </pre>
      */
@@ -732,11 +815,12 @@ public final class PaymentServiceGrpc {
 
   private static final int METHODID_SEND = 0;
   private static final int METHODID_RECEIVE = 1;
-  private static final int METHODID_STATUS = 2;
-  private static final int METHODID_STATUS_UPDATE = 3;
-  private static final int METHODID_RELEASE = 4;
-  private static final int METHODID_SEARCH = 5;
-  private static final int METHODID_RECONCILE = 6;
+  private static final int METHODID_INITIATE_PROMPT = 2;
+  private static final int METHODID_STATUS = 3;
+  private static final int METHODID_STATUS_UPDATE = 4;
+  private static final int METHODID_RELEASE = 5;
+  private static final int METHODID_SEARCH = 6;
+  private static final int METHODID_RECONCILE = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -762,6 +846,10 @@ public final class PaymentServiceGrpc {
         case METHODID_RECEIVE:
           serviceImpl.receive((com.antinvestor.apis.payment.v1.ReceiveRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.payment.v1.ReceiveResponse>) responseObserver);
+          break;
+        case METHODID_INITIATE_PROMPT:
+          serviceImpl.initiatePrompt((com.antinvestor.apis.payment.v1.InitiatePromptRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.payment.v1.InitiatePromptResponse>) responseObserver);
           break;
         case METHODID_STATUS:
           serviceImpl.status((com.antinvestor.apis.common.v1.StatusRequest) request,
@@ -815,6 +903,13 @@ public final class PaymentServiceGrpc {
               com.antinvestor.apis.payment.v1.ReceiveRequest,
               com.antinvestor.apis.payment.v1.ReceiveResponse>(
                 service, METHODID_RECEIVE)))
+        .addMethod(
+          getInitiatePromptMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.payment.v1.InitiatePromptRequest,
+              com.antinvestor.apis.payment.v1.InitiatePromptResponse>(
+                service, METHODID_INITIATE_PROMPT)))
         .addMethod(
           getStatusMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -900,6 +995,7 @@ public final class PaymentServiceGrpc {
               .setSchemaDescriptor(new PaymentServiceFileDescriptorSupplier())
               .addMethod(getSendMethod())
               .addMethod(getReceiveMethod())
+              .addMethod(getInitiatePromptMethod())
               .addMethod(getStatusMethod())
               .addMethod(getStatusUpdateMethod())
               .addMethod(getReleaseMethod())
