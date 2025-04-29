@@ -19,7 +19,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.70.0)",
+    value = "by gRPC proto compiler (version 1.72.0)",
     comments = "Source: notification/v1/notification.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class NotificationServiceGrpc {
