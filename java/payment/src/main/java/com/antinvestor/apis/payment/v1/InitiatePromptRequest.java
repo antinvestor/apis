@@ -41,10 +41,11 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private InitiatePromptRequest() {
-    groupId_ = "";
-    promptTime_ = "";
+    dateCreated_ = "";
     deviceId_ = "";
     transactionId_ = "";
+    state_ = 0;
+    status_ = 0;
     route_ = "";
   }
 
@@ -58,7 +59,7 @@ private static final long serialVersionUID = 0L;
   protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
       int number) {
     switch (number) {
-      case 9:
+      case 10:
         return internalGetMetadata();
       default:
         throw new RuntimeException(
@@ -152,89 +153,50 @@ private static final long serialVersionUID = 0L;
     return amount_ == null ? com.google.type.Money.getDefaultInstance() : amount_;
   }
 
-  public static final int GROUP_ID_FIELD_NUMBER = 4;
+  public static final int DATE_CREATED_FIELD_NUMBER = 4;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object groupId_ = "";
+  private volatile java.lang.Object dateCreated_ = "";
   /**
-   * <code>string group_id = 4 [json_name = "groupId"];</code>
-   * @return The groupId.
+   * <code>string date_created = 4 [json_name = "dateCreated"];</code>
+   * @return The dateCreated.
    */
   @java.lang.Override
-  public java.lang.String getGroupId() {
-    java.lang.Object ref = groupId_;
+  public java.lang.String getDateCreated() {
+    java.lang.Object ref = dateCreated_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      groupId_ = s;
+      dateCreated_ = s;
       return s;
     }
   }
   /**
-   * <code>string group_id = 4 [json_name = "groupId"];</code>
-   * @return The bytes for groupId.
+   * <code>string date_created = 4 [json_name = "dateCreated"];</code>
+   * @return The bytes for dateCreated.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getGroupIdBytes() {
-    java.lang.Object ref = groupId_;
+      getDateCreatedBytes() {
+    java.lang.Object ref = dateCreated_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      groupId_ = b;
+      dateCreated_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int PROMPT_TIME_FIELD_NUMBER = 5;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object promptTime_ = "";
-  /**
-   * <code>string prompt_time = 5 [json_name = "promptTime"];</code>
-   * @return The promptTime.
-   */
-  @java.lang.Override
-  public java.lang.String getPromptTime() {
-    java.lang.Object ref = promptTime_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      promptTime_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string prompt_time = 5 [json_name = "promptTime"];</code>
-   * @return The bytes for promptTime.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getPromptTimeBytes() {
-    java.lang.Object ref = promptTime_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      promptTime_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int DEVICE_ID_FIELD_NUMBER = 6;
+  public static final int DEVICE_ID_FIELD_NUMBER = 5;
   @SuppressWarnings("serial")
   private volatile java.lang.Object deviceId_ = "";
   /**
-   * <code>string device_id = 6 [json_name = "deviceId"];</code>
+   * <code>string device_id = 5 [json_name = "deviceId"];</code>
    * @return The deviceId.
    */
   @java.lang.Override
@@ -251,7 +213,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string device_id = 6 [json_name = "deviceId"];</code>
+   * <code>string device_id = 5 [json_name = "deviceId"];</code>
    * @return The bytes for deviceId.
    */
   @java.lang.Override
@@ -269,11 +231,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int TRANSACTION_ID_FIELD_NUMBER = 7;
+  public static final int TRANSACTION_ID_FIELD_NUMBER = 6;
   @SuppressWarnings("serial")
   private volatile java.lang.Object transactionId_ = "";
   /**
-   * <code>string transaction_id = 7 [json_name = "transactionId"];</code>
+   * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
    * @return The transactionId.
    */
   @java.lang.Override
@@ -290,7 +252,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string transaction_id = 7 [json_name = "transactionId"];</code>
+   * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
    * @return The bytes for transactionId.
    */
   @java.lang.Override
@@ -308,7 +270,43 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int ROUTE_FIELD_NUMBER = 8;
+  public static final int STATE_FIELD_NUMBER = 7;
+  private int state_ = 0;
+  /**
+   * <code>.common.v1.STATE state = 7 [json_name = "state"];</code>
+   * @return The enum numeric value on the wire for state.
+   */
+  @java.lang.Override public int getStateValue() {
+    return state_;
+  }
+  /**
+   * <code>.common.v1.STATE state = 7 [json_name = "state"];</code>
+   * @return The state.
+   */
+  @java.lang.Override public com.antinvestor.apis.common.v1.STATE getState() {
+    com.antinvestor.apis.common.v1.STATE result = com.antinvestor.apis.common.v1.STATE.forNumber(state_);
+    return result == null ? com.antinvestor.apis.common.v1.STATE.UNRECOGNIZED : result;
+  }
+
+  public static final int STATUS_FIELD_NUMBER = 8;
+  private int status_ = 0;
+  /**
+   * <code>.common.v1.STATUS status = 8 [json_name = "status"];</code>
+   * @return The enum numeric value on the wire for status.
+   */
+  @java.lang.Override public int getStatusValue() {
+    return status_;
+  }
+  /**
+   * <code>.common.v1.STATUS status = 8 [json_name = "status"];</code>
+   * @return The status.
+   */
+  @java.lang.Override public com.antinvestor.apis.common.v1.STATUS getStatus() {
+    com.antinvestor.apis.common.v1.STATUS result = com.antinvestor.apis.common.v1.STATUS.forNumber(status_);
+    return result == null ? com.antinvestor.apis.common.v1.STATUS.UNRECOGNIZED : result;
+  }
+
+  public static final int ROUTE_FIELD_NUMBER = 9;
   @SuppressWarnings("serial")
   private volatile java.lang.Object route_ = "";
   /**
@@ -316,7 +314,7 @@ private static final long serialVersionUID = 0L;
    * Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
    * </pre>
    *
-   * <code>string route = 8 [json_name = "route"];</code>
+   * <code>string route = 9 [json_name = "route"];</code>
    * @return The route.
    */
   @java.lang.Override
@@ -337,7 +335,7 @@ private static final long serialVersionUID = 0L;
    * Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
    * </pre>
    *
-   * <code>string route = 8 [json_name = "route"];</code>
+   * <code>string route = 9 [json_name = "route"];</code>
    * @return The bytes for route.
    */
   @java.lang.Override
@@ -355,7 +353,7 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int METADATA_FIELD_NUMBER = 9;
+  public static final int METADATA_FIELD_NUMBER = 10;
   private static final class MetadataDefaultEntryHolder {
     static final com.google.protobuf.MapEntry<
         java.lang.String, java.lang.String> defaultEntry =
@@ -386,7 +384,7 @@ private static final long serialVersionUID = 0L;
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
    */
   @java.lang.Override
   public boolean containsMetadata(
@@ -407,7 +405,7 @@ private static final long serialVersionUID = 0L;
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
    */
   @java.lang.Override
   public java.util.Map<java.lang.String, java.lang.String> getMetadataMap() {
@@ -418,7 +416,7 @@ private static final long serialVersionUID = 0L;
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
    */
   @java.lang.Override
   public /* nullable */
@@ -436,7 +434,7 @@ java.lang.String defaultValue) {
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
    */
   @java.lang.Override
   public java.lang.String getMetadataOrThrow(
@@ -473,27 +471,30 @@ java.lang.String defaultValue) {
     if (((bitField0_ & 0x00000004) != 0)) {
       output.writeMessage(3, getAmount());
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(groupId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 4, groupId_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(promptTime_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 5, promptTime_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(dateCreated_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 4, dateCreated_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 6, deviceId_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 5, deviceId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(transactionId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 7, transactionId_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 6, transactionId_);
+    }
+    if (state_ != com.antinvestor.apis.common.v1.STATE.CREATED.getNumber()) {
+      output.writeEnum(7, state_);
+    }
+    if (status_ != com.antinvestor.apis.common.v1.STATUS.UNKNOWN.getNumber()) {
+      output.writeEnum(8, status_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(route_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 8, route_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 9, route_);
     }
     com.google.protobuf.GeneratedMessage
       .serializeStringMapTo(
         output,
         internalGetMetadata(),
         MetadataDefaultEntryHolder.defaultEntry,
-        9);
+        10);
     getUnknownFields().writeTo(output);
   }
 
@@ -515,20 +516,25 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(3, getAmount());
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(groupId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(4, groupId_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(promptTime_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(5, promptTime_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(dateCreated_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(4, dateCreated_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(6, deviceId_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(5, deviceId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(transactionId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(7, transactionId_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(6, transactionId_);
+    }
+    if (state_ != com.antinvestor.apis.common.v1.STATE.CREATED.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(7, state_);
+    }
+    if (status_ != com.antinvestor.apis.common.v1.STATUS.UNKNOWN.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(8, status_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(route_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(8, route_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(9, route_);
     }
     for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
          : internalGetMetadata().getMap().entrySet()) {
@@ -538,7 +544,7 @@ java.lang.String defaultValue) {
           .setValue(entry.getValue())
           .build();
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, metadata__);
+          .computeMessageSize(10, metadata__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -570,14 +576,14 @@ java.lang.String defaultValue) {
       if (!getAmount()
           .equals(other.getAmount())) return false;
     }
-    if (!getGroupId()
-        .equals(other.getGroupId())) return false;
-    if (!getPromptTime()
-        .equals(other.getPromptTime())) return false;
+    if (!getDateCreated()
+        .equals(other.getDateCreated())) return false;
     if (!getDeviceId()
         .equals(other.getDeviceId())) return false;
     if (!getTransactionId()
         .equals(other.getTransactionId())) return false;
+    if (state_ != other.state_) return false;
+    if (status_ != other.status_) return false;
     if (!getRoute()
         .equals(other.getRoute())) return false;
     if (!internalGetMetadata().equals(
@@ -605,14 +611,16 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
       hash = (53 * hash) + getAmount().hashCode();
     }
-    hash = (37 * hash) + GROUP_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getGroupId().hashCode();
-    hash = (37 * hash) + PROMPT_TIME_FIELD_NUMBER;
-    hash = (53 * hash) + getPromptTime().hashCode();
+    hash = (37 * hash) + DATE_CREATED_FIELD_NUMBER;
+    hash = (53 * hash) + getDateCreated().hashCode();
     hash = (37 * hash) + DEVICE_ID_FIELD_NUMBER;
     hash = (53 * hash) + getDeviceId().hashCode();
     hash = (37 * hash) + TRANSACTION_ID_FIELD_NUMBER;
     hash = (53 * hash) + getTransactionId().hashCode();
+    hash = (37 * hash) + STATE_FIELD_NUMBER;
+    hash = (53 * hash) + state_;
+    hash = (37 * hash) + STATUS_FIELD_NUMBER;
+    hash = (53 * hash) + status_;
     hash = (37 * hash) + ROUTE_FIELD_NUMBER;
     hash = (53 * hash) + getRoute().hashCode();
     if (!internalGetMetadata().getMap().isEmpty()) {
@@ -732,7 +740,7 @@ java.lang.String defaultValue) {
     protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
         int number) {
       switch (number) {
-        case 9:
+        case 10:
           return internalGetMetadata();
         default:
           throw new RuntimeException(
@@ -743,7 +751,7 @@ java.lang.String defaultValue) {
     protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
         int number) {
       switch (number) {
-        case 9:
+        case 10:
           return internalGetMutableMetadata();
         default:
           throw new RuntimeException(
@@ -795,10 +803,11 @@ java.lang.String defaultValue) {
         amountBuilder_.dispose();
         amountBuilder_ = null;
       }
-      groupId_ = "";
-      promptTime_ = "";
+      dateCreated_ = "";
       deviceId_ = "";
       transactionId_ = "";
+      state_ = 0;
+      status_ = 0;
       route_ = "";
       internalGetMutableMetadata().clear();
       return this;
@@ -854,21 +863,24 @@ java.lang.String defaultValue) {
         to_bitField0_ |= 0x00000004;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.groupId_ = groupId_;
+        result.dateCreated_ = dateCreated_;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.promptTime_ = promptTime_;
-      }
-      if (((from_bitField0_ & 0x00000020) != 0)) {
         result.deviceId_ = deviceId_;
       }
-      if (((from_bitField0_ & 0x00000040) != 0)) {
+      if (((from_bitField0_ & 0x00000020) != 0)) {
         result.transactionId_ = transactionId_;
       }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        result.state_ = state_;
+      }
       if (((from_bitField0_ & 0x00000080) != 0)) {
-        result.route_ = route_;
+        result.status_ = status_;
       }
       if (((from_bitField0_ & 0x00000100) != 0)) {
+        result.route_ = route_;
+      }
+      if (((from_bitField0_ & 0x00000200) != 0)) {
         result.metadata_ = internalGetMetadata();
         result.metadata_.makeImmutable();
       }
@@ -896,34 +908,35 @@ java.lang.String defaultValue) {
       if (other.hasAmount()) {
         mergeAmount(other.getAmount());
       }
-      if (!other.getGroupId().isEmpty()) {
-        groupId_ = other.groupId_;
+      if (!other.getDateCreated().isEmpty()) {
+        dateCreated_ = other.dateCreated_;
         bitField0_ |= 0x00000008;
-        onChanged();
-      }
-      if (!other.getPromptTime().isEmpty()) {
-        promptTime_ = other.promptTime_;
-        bitField0_ |= 0x00000010;
         onChanged();
       }
       if (!other.getDeviceId().isEmpty()) {
         deviceId_ = other.deviceId_;
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         onChanged();
       }
       if (!other.getTransactionId().isEmpty()) {
         transactionId_ = other.transactionId_;
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         onChanged();
+      }
+      if (other.state_ != 0) {
+        setStateValue(other.getStateValue());
+      }
+      if (other.status_ != 0) {
+        setStatusValue(other.getStatusValue());
       }
       if (!other.getRoute().isEmpty()) {
         route_ = other.route_;
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         onChanged();
       }
       internalGetMutableMetadata().mergeFrom(
           other.internalGetMetadata());
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -972,39 +985,44 @@ java.lang.String defaultValue) {
               break;
             } // case 26
             case 34: {
-              groupId_ = input.readStringRequireUtf8();
+              dateCreated_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000008;
               break;
             } // case 34
             case 42: {
-              promptTime_ = input.readStringRequireUtf8();
+              deviceId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000010;
               break;
             } // case 42
             case 50: {
-              deviceId_ = input.readStringRequireUtf8();
+              transactionId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000020;
               break;
             } // case 50
-            case 58: {
-              transactionId_ = input.readStringRequireUtf8();
+            case 56: {
+              state_ = input.readEnum();
               bitField0_ |= 0x00000040;
               break;
-            } // case 58
-            case 66: {
-              route_ = input.readStringRequireUtf8();
+            } // case 56
+            case 64: {
+              status_ = input.readEnum();
               bitField0_ |= 0x00000080;
               break;
-            } // case 66
+            } // case 64
             case 74: {
+              route_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000100;
+              break;
+            } // case 74
+            case 82: {
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
               metadata__ = input.readMessage(
                   MetadataDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableMetadata().getMutableMap().put(
                   metadata__.getKey(), metadata__.getValue());
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000200;
               break;
-            } // case 74
+            } // case 82
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1385,153 +1403,81 @@ java.lang.String defaultValue) {
       return amountBuilder_;
     }
 
-    private java.lang.Object groupId_ = "";
+    private java.lang.Object dateCreated_ = "";
     /**
-     * <code>string group_id = 4 [json_name = "groupId"];</code>
-     * @return The groupId.
+     * <code>string date_created = 4 [json_name = "dateCreated"];</code>
+     * @return The dateCreated.
      */
-    public java.lang.String getGroupId() {
-      java.lang.Object ref = groupId_;
+    public java.lang.String getDateCreated() {
+      java.lang.Object ref = dateCreated_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        groupId_ = s;
+        dateCreated_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string group_id = 4 [json_name = "groupId"];</code>
-     * @return The bytes for groupId.
+     * <code>string date_created = 4 [json_name = "dateCreated"];</code>
+     * @return The bytes for dateCreated.
      */
     public com.google.protobuf.ByteString
-        getGroupIdBytes() {
-      java.lang.Object ref = groupId_;
+        getDateCreatedBytes() {
+      java.lang.Object ref = dateCreated_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        groupId_ = b;
+        dateCreated_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string group_id = 4 [json_name = "groupId"];</code>
-     * @param value The groupId to set.
+     * <code>string date_created = 4 [json_name = "dateCreated"];</code>
+     * @param value The dateCreated to set.
      * @return This builder for chaining.
      */
-    public Builder setGroupId(
+    public Builder setDateCreated(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      groupId_ = value;
+      dateCreated_ = value;
       bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>string group_id = 4 [json_name = "groupId"];</code>
+     * <code>string date_created = 4 [json_name = "dateCreated"];</code>
      * @return This builder for chaining.
      */
-    public Builder clearGroupId() {
-      groupId_ = getDefaultInstance().getGroupId();
+    public Builder clearDateCreated() {
+      dateCreated_ = getDefaultInstance().getDateCreated();
       bitField0_ = (bitField0_ & ~0x00000008);
       onChanged();
       return this;
     }
     /**
-     * <code>string group_id = 4 [json_name = "groupId"];</code>
-     * @param value The bytes for groupId to set.
+     * <code>string date_created = 4 [json_name = "dateCreated"];</code>
+     * @param value The bytes for dateCreated to set.
      * @return This builder for chaining.
      */
-    public Builder setGroupIdBytes(
+    public Builder setDateCreatedBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      groupId_ = value;
+      dateCreated_ = value;
       bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object promptTime_ = "";
-    /**
-     * <code>string prompt_time = 5 [json_name = "promptTime"];</code>
-     * @return The promptTime.
-     */
-    public java.lang.String getPromptTime() {
-      java.lang.Object ref = promptTime_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        promptTime_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string prompt_time = 5 [json_name = "promptTime"];</code>
-     * @return The bytes for promptTime.
-     */
-    public com.google.protobuf.ByteString
-        getPromptTimeBytes() {
-      java.lang.Object ref = promptTime_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        promptTime_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string prompt_time = 5 [json_name = "promptTime"];</code>
-     * @param value The promptTime to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPromptTime(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      promptTime_ = value;
-      bitField0_ |= 0x00000010;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string prompt_time = 5 [json_name = "promptTime"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearPromptTime() {
-      promptTime_ = getDefaultInstance().getPromptTime();
-      bitField0_ = (bitField0_ & ~0x00000010);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string prompt_time = 5 [json_name = "promptTime"];</code>
-     * @param value The bytes for promptTime to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPromptTimeBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      promptTime_ = value;
-      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
 
     private java.lang.Object deviceId_ = "";
     /**
-     * <code>string device_id = 6 [json_name = "deviceId"];</code>
+     * <code>string device_id = 5 [json_name = "deviceId"];</code>
      * @return The deviceId.
      */
     public java.lang.String getDeviceId() {
@@ -1547,7 +1493,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string device_id = 6 [json_name = "deviceId"];</code>
+     * <code>string device_id = 5 [json_name = "deviceId"];</code>
      * @return The bytes for deviceId.
      */
     public com.google.protobuf.ByteString
@@ -1564,7 +1510,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string device_id = 6 [json_name = "deviceId"];</code>
+     * <code>string device_id = 5 [json_name = "deviceId"];</code>
      * @param value The deviceId to set.
      * @return This builder for chaining.
      */
@@ -1572,22 +1518,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       deviceId_ = value;
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
-     * <code>string device_id = 6 [json_name = "deviceId"];</code>
+     * <code>string device_id = 5 [json_name = "deviceId"];</code>
      * @return This builder for chaining.
      */
     public Builder clearDeviceId() {
       deviceId_ = getDefaultInstance().getDeviceId();
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000010);
       onChanged();
       return this;
     }
     /**
-     * <code>string device_id = 6 [json_name = "deviceId"];</code>
+     * <code>string device_id = 5 [json_name = "deviceId"];</code>
      * @param value The bytes for deviceId to set.
      * @return This builder for chaining.
      */
@@ -1596,14 +1542,14 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       deviceId_ = value;
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
 
     private java.lang.Object transactionId_ = "";
     /**
-     * <code>string transaction_id = 7 [json_name = "transactionId"];</code>
+     * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
      * @return The transactionId.
      */
     public java.lang.String getTransactionId() {
@@ -1619,7 +1565,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string transaction_id = 7 [json_name = "transactionId"];</code>
+     * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
      * @return The bytes for transactionId.
      */
     public com.google.protobuf.ByteString
@@ -1636,7 +1582,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string transaction_id = 7 [json_name = "transactionId"];</code>
+     * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
      * @param value The transactionId to set.
      * @return This builder for chaining.
      */
@@ -1644,22 +1590,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       transactionId_ = value;
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
     /**
-     * <code>string transaction_id = 7 [json_name = "transactionId"];</code>
+     * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
      * @return This builder for chaining.
      */
     public Builder clearTransactionId() {
       transactionId_ = getDefaultInstance().getTransactionId();
-      bitField0_ = (bitField0_ & ~0x00000040);
+      bitField0_ = (bitField0_ & ~0x00000020);
       onChanged();
       return this;
     }
     /**
-     * <code>string transaction_id = 7 [json_name = "transactionId"];</code>
+     * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
      * @param value The bytes for transactionId to set.
      * @return This builder for chaining.
      */
@@ -1668,7 +1614,113 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       transactionId_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+
+    private int state_ = 0;
+    /**
+     * <code>.common.v1.STATE state = 7 [json_name = "state"];</code>
+     * @return The enum numeric value on the wire for state.
+     */
+    @java.lang.Override public int getStateValue() {
+      return state_;
+    }
+    /**
+     * <code>.common.v1.STATE state = 7 [json_name = "state"];</code>
+     * @param value The enum numeric value on the wire for state to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStateValue(int value) {
+      state_ = value;
       bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.common.v1.STATE state = 7 [json_name = "state"];</code>
+     * @return The state.
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.common.v1.STATE getState() {
+      com.antinvestor.apis.common.v1.STATE result = com.antinvestor.apis.common.v1.STATE.forNumber(state_);
+      return result == null ? com.antinvestor.apis.common.v1.STATE.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.common.v1.STATE state = 7 [json_name = "state"];</code>
+     * @param value The state to set.
+     * @return This builder for chaining.
+     */
+    public Builder setState(com.antinvestor.apis.common.v1.STATE value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bitField0_ |= 0x00000040;
+      state_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.common.v1.STATE state = 7 [json_name = "state"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearState() {
+      bitField0_ = (bitField0_ & ~0x00000040);
+      state_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int status_ = 0;
+    /**
+     * <code>.common.v1.STATUS status = 8 [json_name = "status"];</code>
+     * @return The enum numeric value on the wire for status.
+     */
+    @java.lang.Override public int getStatusValue() {
+      return status_;
+    }
+    /**
+     * <code>.common.v1.STATUS status = 8 [json_name = "status"];</code>
+     * @param value The enum numeric value on the wire for status to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStatusValue(int value) {
+      status_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.common.v1.STATUS status = 8 [json_name = "status"];</code>
+     * @return The status.
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.common.v1.STATUS getStatus() {
+      com.antinvestor.apis.common.v1.STATUS result = com.antinvestor.apis.common.v1.STATUS.forNumber(status_);
+      return result == null ? com.antinvestor.apis.common.v1.STATUS.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.common.v1.STATUS status = 8 [json_name = "status"];</code>
+     * @param value The status to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStatus(com.antinvestor.apis.common.v1.STATUS value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bitField0_ |= 0x00000080;
+      status_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.common.v1.STATUS status = 8 [json_name = "status"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearStatus() {
+      bitField0_ = (bitField0_ & ~0x00000080);
+      status_ = 0;
       onChanged();
       return this;
     }
@@ -1679,7 +1731,7 @@ java.lang.String defaultValue) {
      * Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
      * </pre>
      *
-     * <code>string route = 8 [json_name = "route"];</code>
+     * <code>string route = 9 [json_name = "route"];</code>
      * @return The route.
      */
     public java.lang.String getRoute() {
@@ -1699,7 +1751,7 @@ java.lang.String defaultValue) {
      * Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
      * </pre>
      *
-     * <code>string route = 8 [json_name = "route"];</code>
+     * <code>string route = 9 [json_name = "route"];</code>
      * @return The bytes for route.
      */
     public com.google.protobuf.ByteString
@@ -1720,7 +1772,7 @@ java.lang.String defaultValue) {
      * Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
      * </pre>
      *
-     * <code>string route = 8 [json_name = "route"];</code>
+     * <code>string route = 9 [json_name = "route"];</code>
      * @param value The route to set.
      * @return This builder for chaining.
      */
@@ -1728,7 +1780,7 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       route_ = value;
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
@@ -1737,12 +1789,12 @@ java.lang.String defaultValue) {
      * Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
      * </pre>
      *
-     * <code>string route = 8 [json_name = "route"];</code>
+     * <code>string route = 9 [json_name = "route"];</code>
      * @return This builder for chaining.
      */
     public Builder clearRoute() {
       route_ = getDefaultInstance().getRoute();
-      bitField0_ = (bitField0_ & ~0x00000080);
+      bitField0_ = (bitField0_ & ~0x00000100);
       onChanged();
       return this;
     }
@@ -1751,7 +1803,7 @@ java.lang.String defaultValue) {
      * Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
      * </pre>
      *
-     * <code>string route = 8 [json_name = "route"];</code>
+     * <code>string route = 9 [json_name = "route"];</code>
      * @param value The bytes for route to set.
      * @return This builder for chaining.
      */
@@ -1760,7 +1812,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       route_ = value;
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
@@ -1784,7 +1836,7 @@ java.lang.String defaultValue) {
       if (!metadata_.isMutable()) {
         metadata_ = metadata_.copy();
       }
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       onChanged();
       return metadata_;
     }
@@ -1796,7 +1848,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+     * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
      */
     @java.lang.Override
     public boolean containsMetadata(
@@ -1817,7 +1869,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+     * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
      */
     @java.lang.Override
     public java.util.Map<java.lang.String, java.lang.String> getMetadataMap() {
@@ -1828,7 +1880,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+     * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
      */
     @java.lang.Override
     public /* nullable */
@@ -1846,7 +1898,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+     * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
      */
     @java.lang.Override
     public java.lang.String getMetadataOrThrow(
@@ -1860,7 +1912,7 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearMetadata() {
-      bitField0_ = (bitField0_ & ~0x00000100);
+      bitField0_ = (bitField0_ & ~0x00000200);
       internalGetMutableMetadata().getMutableMap()
           .clear();
       return this;
@@ -1870,7 +1922,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+     * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
      */
     public Builder removeMetadata(
         java.lang.String key) {
@@ -1885,7 +1937,7 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableMetadata() {
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       return internalGetMutableMetadata().getMutableMap();
     }
     /**
@@ -1893,7 +1945,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+     * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
      */
     public Builder putMetadata(
         java.lang.String key,
@@ -1902,7 +1954,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableMetadata().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       return this;
     }
     /**
@@ -1910,13 +1962,13 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+     * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
      */
     public Builder putAllMetadata(
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableMetadata().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       return this;
     }
 

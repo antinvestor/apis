@@ -114,20 +114,18 @@ message ReceiveResponse {
 }
 
 message InitiatePromptRequest {
-  string initiator_profile_id = 1;
-  common.v1.ContactLink source = 2;
-  common.v1.ContactLink recipient = 3;
-  google.type.Money amount = 4;
-  string group_id = 5;
-  string prompt_time = 6;
-  string device_id = 7;
-  string transaction_id = 8;
-  common.v1.STATE state = 9;
-  common.v1.STATUS status = 10;
+  common.v1.ContactLink source = 1;
+  common.v1.ContactLink recipient = 2;
+  google.type.Money amount = 3;
+  string date_created = 4;
+  string device_id = 5;
+  string transaction_id = 6;
+  common.v1.STATE state = 7;
+  common.v1.STATUS status = 8;
   // Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
-  string route = 11;
+  string route = 9;
   // Any additional metadata (e.g., notes, tags, correlation keys)
-  map<string, string> metadata = 12;
+  map<string, string> metadata = 10;
 }
 
 

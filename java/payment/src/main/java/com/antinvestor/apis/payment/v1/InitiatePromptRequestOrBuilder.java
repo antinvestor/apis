@@ -69,59 +69,69 @@ public interface InitiatePromptRequestOrBuilder extends
   com.google.type.MoneyOrBuilder getAmountOrBuilder();
 
   /**
-   * <code>string group_id = 4 [json_name = "groupId"];</code>
-   * @return The groupId.
+   * <code>string date_created = 4 [json_name = "dateCreated"];</code>
+   * @return The dateCreated.
    */
-  java.lang.String getGroupId();
+  java.lang.String getDateCreated();
   /**
-   * <code>string group_id = 4 [json_name = "groupId"];</code>
-   * @return The bytes for groupId.
-   */
-  com.google.protobuf.ByteString
-      getGroupIdBytes();
-
-  /**
-   * <code>string prompt_time = 5 [json_name = "promptTime"];</code>
-   * @return The promptTime.
-   */
-  java.lang.String getPromptTime();
-  /**
-   * <code>string prompt_time = 5 [json_name = "promptTime"];</code>
-   * @return The bytes for promptTime.
+   * <code>string date_created = 4 [json_name = "dateCreated"];</code>
+   * @return The bytes for dateCreated.
    */
   com.google.protobuf.ByteString
-      getPromptTimeBytes();
+      getDateCreatedBytes();
 
   /**
-   * <code>string device_id = 6 [json_name = "deviceId"];</code>
+   * <code>string device_id = 5 [json_name = "deviceId"];</code>
    * @return The deviceId.
    */
   java.lang.String getDeviceId();
   /**
-   * <code>string device_id = 6 [json_name = "deviceId"];</code>
+   * <code>string device_id = 5 [json_name = "deviceId"];</code>
    * @return The bytes for deviceId.
    */
   com.google.protobuf.ByteString
       getDeviceIdBytes();
 
   /**
-   * <code>string transaction_id = 7 [json_name = "transactionId"];</code>
+   * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
    * @return The transactionId.
    */
   java.lang.String getTransactionId();
   /**
-   * <code>string transaction_id = 7 [json_name = "transactionId"];</code>
+   * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
    * @return The bytes for transactionId.
    */
   com.google.protobuf.ByteString
       getTransactionIdBytes();
 
   /**
+   * <code>.common.v1.STATE state = 7 [json_name = "state"];</code>
+   * @return The enum numeric value on the wire for state.
+   */
+  int getStateValue();
+  /**
+   * <code>.common.v1.STATE state = 7 [json_name = "state"];</code>
+   * @return The state.
+   */
+  com.antinvestor.apis.common.v1.STATE getState();
+
+  /**
+   * <code>.common.v1.STATUS status = 8 [json_name = "status"];</code>
+   * @return The enum numeric value on the wire for status.
+   */
+  int getStatusValue();
+  /**
+   * <code>.common.v1.STATUS status = 8 [json_name = "status"];</code>
+   * @return The status.
+   */
+  com.antinvestor.apis.common.v1.STATUS getStatus();
+
+  /**
    * <pre>
    * Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
    * </pre>
    *
-   * <code>string route = 8 [json_name = "route"];</code>
+   * <code>string route = 9 [json_name = "route"];</code>
    * @return The route.
    */
   java.lang.String getRoute();
@@ -130,7 +140,7 @@ public interface InitiatePromptRequestOrBuilder extends
    * Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
    * </pre>
    *
-   * <code>string route = 8 [json_name = "route"];</code>
+   * <code>string route = 9 [json_name = "route"];</code>
    * @return The bytes for route.
    */
   com.google.protobuf.ByteString
@@ -141,7 +151,7 @@ public interface InitiatePromptRequestOrBuilder extends
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
    */
   int getMetadataCount();
   /**
@@ -149,7 +159,7 @@ public interface InitiatePromptRequestOrBuilder extends
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
    */
   boolean containsMetadata(
       java.lang.String key);
@@ -164,7 +174,7 @@ public interface InitiatePromptRequestOrBuilder extends
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
   getMetadataMap();
@@ -173,7 +183,7 @@ public interface InitiatePromptRequestOrBuilder extends
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
    */
   /* nullable */
 java.lang.String getMetadataOrDefault(
@@ -185,7 +195,7 @@ java.lang.String defaultValue);
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 9 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; metadata = 10 [json_name = "metadata"];</code>
    */
   java.lang.String getMetadataOrThrow(
       java.lang.String key);

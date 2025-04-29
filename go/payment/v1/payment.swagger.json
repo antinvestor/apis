@@ -572,10 +572,7 @@
         "amount": {
           "$ref": "#/definitions/google.type.Money"
         },
-        "groupId": {
-          "type": "string"
-        },
-        "promptTime": {
+        "dateCreated": {
           "type": "string"
         },
         "deviceId": {
@@ -583,6 +580,12 @@
         },
         "transactionId": {
           "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
+        },
+        "status": {
+          "$ref": "#/definitions/common.v1.STATUS"
         },
         "route": {
           "type": "string",

@@ -589,14 +589,15 @@ type InitiatePromptRequest struct {
 	Source        *v1.ContactLink        `protobuf:"bytes,1,opt,name=source,proto3" json:"source,omitempty"`
 	Recipient     *v1.ContactLink        `protobuf:"bytes,2,opt,name=recipient,proto3" json:"recipient,omitempty"`
 	Amount        *money.Money           `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
-	GroupId       string                 `protobuf:"bytes,4,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	PromptTime    string                 `protobuf:"bytes,5,opt,name=prompt_time,json=promptTime,proto3" json:"prompt_time,omitempty"`
-	DeviceId      string                 `protobuf:"bytes,6,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	TransactionId string                 `protobuf:"bytes,7,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	DateCreated   string                 `protobuf:"bytes,4,opt,name=date_created,json=dateCreated,proto3" json:"date_created,omitempty"`
+	DeviceId      string                 `protobuf:"bytes,5,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	TransactionId string                 `protobuf:"bytes,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	State         v1.STATE               `protobuf:"varint,7,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
+	Status        v1.STATUS              `protobuf:"varint,8,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`
 	// Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
-	Route string `protobuf:"bytes,8,opt,name=route,proto3" json:"route,omitempty"`
+	Route string `protobuf:"bytes,9,opt,name=route,proto3" json:"route,omitempty"`
 	// Any additional metadata (e.g., notes, tags, correlation keys)
-	Metadata      map[string]string `protobuf:"bytes,9,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Metadata      map[string]string `protobuf:"bytes,10,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -652,16 +653,9 @@ func (x *InitiatePromptRequest) GetAmount() *money.Money {
 	return nil
 }
 
-func (x *InitiatePromptRequest) GetGroupId() string {
+func (x *InitiatePromptRequest) GetDateCreated() string {
 	if x != nil {
-		return x.GroupId
-	}
-	return ""
-}
-
-func (x *InitiatePromptRequest) GetPromptTime() string {
-	if x != nil {
-		return x.PromptTime
+		return x.DateCreated
 	}
 	return ""
 }
@@ -678,6 +672,20 @@ func (x *InitiatePromptRequest) GetTransactionId() string {
 		return x.TransactionId
 	}
 	return ""
+}
+
+func (x *InitiatePromptRequest) GetState() v1.STATE {
+	if x != nil {
+		return x.State
+	}
+	return v1.STATE(0)
+}
+
+func (x *InitiatePromptRequest) GetStatus() v1.STATUS {
+	if x != nil {
+		return x.Status
+	}
+	return v1.STATUS(0)
 }
 
 func (x *InitiatePromptRequest) GetRoute() string {
@@ -884,18 +892,19 @@ const file_payment_v1_payment_proto_rawDesc = "" +
 	"\x0eReceiveRequest\x12'\n" +
 	"\x04data\x18\x01 \x01(\v2\x13.payment.v1.PaymentR\x04data\"@\n" +
 	"\x0fReceiveResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data\"\xc9\x03\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data\"\x83\x04\n" +
 	"\x15InitiatePromptRequest\x12.\n" +
 	"\x06source\x18\x01 \x01(\v2\x16.common.v1.ContactLinkR\x06source\x124\n" +
 	"\trecipient\x18\x02 \x01(\v2\x16.common.v1.ContactLinkR\trecipient\x12*\n" +
-	"\x06amount\x18\x03 \x01(\v2\x12.google.type.MoneyR\x06amount\x12\x19\n" +
-	"\bgroup_id\x18\x04 \x01(\tR\agroupId\x12\x1f\n" +
-	"\vprompt_time\x18\x05 \x01(\tR\n" +
-	"promptTime\x12\x1b\n" +
-	"\tdevice_id\x18\x06 \x01(\tR\bdeviceId\x12%\n" +
-	"\x0etransaction_id\x18\a \x01(\tR\rtransactionId\x12\x14\n" +
-	"\x05route\x18\b \x01(\tR\x05route\x12K\n" +
-	"\bmetadata\x18\t \x03(\v2/.payment.v1.InitiatePromptRequest.MetadataEntryR\bmetadata\x1a;\n" +
+	"\x06amount\x18\x03 \x01(\v2\x12.google.type.MoneyR\x06amount\x12!\n" +
+	"\fdate_created\x18\x04 \x01(\tR\vdateCreated\x12\x1b\n" +
+	"\tdevice_id\x18\x05 \x01(\tR\bdeviceId\x12%\n" +
+	"\x0etransaction_id\x18\x06 \x01(\tR\rtransactionId\x12&\n" +
+	"\x05state\x18\a \x01(\x0e2\x10.common.v1.STATER\x05state\x12)\n" +
+	"\x06status\x18\b \x01(\x0e2\x11.common.v1.STATUSR\x06status\x12\x14\n" +
+	"\x05route\x18\t \x01(\tR\x05route\x12K\n" +
+	"\bmetadata\x18\n" +
+	" \x03(\v2/.payment.v1.InitiatePromptRequest.MetadataEntryR\bmetadata\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"G\n" +
@@ -984,30 +993,32 @@ var file_payment_v1_payment_proto_depIdxs = []int32{
 	14, // 14: payment.v1.InitiatePromptRequest.source:type_name -> common.v1.ContactLink
 	14, // 15: payment.v1.InitiatePromptRequest.recipient:type_name -> common.v1.ContactLink
 	15, // 16: payment.v1.InitiatePromptRequest.amount:type_name -> google.type.Money
-	13, // 17: payment.v1.InitiatePromptRequest.metadata:type_name -> payment.v1.InitiatePromptRequest.MetadataEntry
-	18, // 18: payment.v1.InitiatePromptResponse.data:type_name -> common.v1.StatusResponse
-	18, // 19: payment.v1.ReleaseResponse.data:type_name -> common.v1.StatusResponse
-	4,  // 20: payment.v1.PaymentService.Send:input_type -> payment.v1.SendRequest
-	6,  // 21: payment.v1.PaymentService.Receive:input_type -> payment.v1.ReceiveRequest
-	8,  // 22: payment.v1.PaymentService.InitiatePrompt:input_type -> payment.v1.InitiatePromptRequest
-	19, // 23: payment.v1.PaymentService.Status:input_type -> common.v1.StatusRequest
-	20, // 24: payment.v1.PaymentService.StatusUpdate:input_type -> common.v1.StatusUpdateRequest
-	10, // 25: payment.v1.PaymentService.Release:input_type -> payment.v1.ReleaseRequest
-	21, // 26: payment.v1.PaymentService.Search:input_type -> common.v1.SearchRequest
-	1,  // 27: payment.v1.PaymentService.Reconcile:input_type -> payment.v1.ReconcileRequest
-	5,  // 28: payment.v1.PaymentService.Send:output_type -> payment.v1.SendResponse
-	7,  // 29: payment.v1.PaymentService.Receive:output_type -> payment.v1.ReceiveResponse
-	9,  // 30: payment.v1.PaymentService.InitiatePrompt:output_type -> payment.v1.InitiatePromptResponse
-	18, // 31: payment.v1.PaymentService.Status:output_type -> common.v1.StatusResponse
-	22, // 32: payment.v1.PaymentService.StatusUpdate:output_type -> common.v1.StatusUpdateResponse
-	11, // 33: payment.v1.PaymentService.Release:output_type -> payment.v1.ReleaseResponse
-	3,  // 34: payment.v1.PaymentService.Search:output_type -> payment.v1.SearchResponse
-	2,  // 35: payment.v1.PaymentService.Reconcile:output_type -> payment.v1.ReconcileResponse
-	28, // [28:36] is the sub-list for method output_type
-	20, // [20:28] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	16, // 17: payment.v1.InitiatePromptRequest.state:type_name -> common.v1.STATE
+	17, // 18: payment.v1.InitiatePromptRequest.status:type_name -> common.v1.STATUS
+	13, // 19: payment.v1.InitiatePromptRequest.metadata:type_name -> payment.v1.InitiatePromptRequest.MetadataEntry
+	18, // 20: payment.v1.InitiatePromptResponse.data:type_name -> common.v1.StatusResponse
+	18, // 21: payment.v1.ReleaseResponse.data:type_name -> common.v1.StatusResponse
+	4,  // 22: payment.v1.PaymentService.Send:input_type -> payment.v1.SendRequest
+	6,  // 23: payment.v1.PaymentService.Receive:input_type -> payment.v1.ReceiveRequest
+	8,  // 24: payment.v1.PaymentService.InitiatePrompt:input_type -> payment.v1.InitiatePromptRequest
+	19, // 25: payment.v1.PaymentService.Status:input_type -> common.v1.StatusRequest
+	20, // 26: payment.v1.PaymentService.StatusUpdate:input_type -> common.v1.StatusUpdateRequest
+	10, // 27: payment.v1.PaymentService.Release:input_type -> payment.v1.ReleaseRequest
+	21, // 28: payment.v1.PaymentService.Search:input_type -> common.v1.SearchRequest
+	1,  // 29: payment.v1.PaymentService.Reconcile:input_type -> payment.v1.ReconcileRequest
+	5,  // 30: payment.v1.PaymentService.Send:output_type -> payment.v1.SendResponse
+	7,  // 31: payment.v1.PaymentService.Receive:output_type -> payment.v1.ReceiveResponse
+	9,  // 32: payment.v1.PaymentService.InitiatePrompt:output_type -> payment.v1.InitiatePromptResponse
+	18, // 33: payment.v1.PaymentService.Status:output_type -> common.v1.StatusResponse
+	22, // 34: payment.v1.PaymentService.StatusUpdate:output_type -> common.v1.StatusUpdateResponse
+	11, // 35: payment.v1.PaymentService.Release:output_type -> payment.v1.ReleaseResponse
+	3,  // 36: payment.v1.PaymentService.Search:output_type -> payment.v1.SearchResponse
+	2,  // 37: payment.v1.PaymentService.Reconcile:output_type -> payment.v1.ReconcileResponse
+	30, // [30:38] is the sub-list for method output_type
+	22, // [22:30] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_payment_v1_payment_proto_init() }
