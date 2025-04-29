@@ -113,11 +113,23 @@ message ReceiveResponse {
   common.v1.StatusResponse data = 1;
 }
 
-message InitiateRequest {
-  Payment data = 1;
+message InitiatePromptRequest {
+  string initiator_profile_id = 1;
+  common.v1.ContactLink source = 2;
+  common.v1.ContactLink recipient = 3;
+  google.type.Money amount = 4;
+  string group_id = 5;
+  string prompt_time = 6;
+  string device_id = 7;
+  string transaction_id = 8;
+  // Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
+  string route = 9;
+  // Any additional metadata (e.g., notes, tags, correlation keys)
+  map<string, string> metadata = 10;
 }
 
-message InitiateResponse {
+
+message InitiatePromptResponse {
   common.v1.StatusResponse data = 1;
 }
 
@@ -152,9 +164,9 @@ service PaymentService {
   }
 
   //Initiate method for initiating payments as requested
-  rpc Initiate(InitiateRequest) returns (InitiateResponse) {
+  rpc InitiatePrompt(InitiatePromptRequest) returns (InitiatePromptResponse) {
     option (google.api.http) = {
-      post: "/initiate"
+      post: "/initiate/prompt"
       body: "*"
     };
   }

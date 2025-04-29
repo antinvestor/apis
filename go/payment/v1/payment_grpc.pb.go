@@ -34,14 +34,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PaymentService_Send_FullMethodName         = "/payment.v1.PaymentService/Send"
-	PaymentService_Receive_FullMethodName      = "/payment.v1.PaymentService/Receive"
-	PaymentService_Initiate_FullMethodName     = "/payment.v1.PaymentService/Initiate"
-	PaymentService_Status_FullMethodName       = "/payment.v1.PaymentService/Status"
-	PaymentService_StatusUpdate_FullMethodName = "/payment.v1.PaymentService/StatusUpdate"
-	PaymentService_Release_FullMethodName      = "/payment.v1.PaymentService/Release"
-	PaymentService_Search_FullMethodName       = "/payment.v1.PaymentService/Search"
-	PaymentService_Reconcile_FullMethodName    = "/payment.v1.PaymentService/Reconcile"
+	PaymentService_Send_FullMethodName           = "/payment.v1.PaymentService/Send"
+	PaymentService_Receive_FullMethodName        = "/payment.v1.PaymentService/Receive"
+	PaymentService_InitiatePrompt_FullMethodName = "/payment.v1.PaymentService/InitiatePrompt"
+	PaymentService_Status_FullMethodName         = "/payment.v1.PaymentService/Status"
+	PaymentService_StatusUpdate_FullMethodName   = "/payment.v1.PaymentService/StatusUpdate"
+	PaymentService_Release_FullMethodName        = "/payment.v1.PaymentService/Release"
+	PaymentService_Search_FullMethodName         = "/payment.v1.PaymentService/Search"
+	PaymentService_Reconcile_FullMethodName      = "/payment.v1.PaymentService/Reconcile"
 )
 
 // PaymentServiceClient is the client API for PaymentService service.
@@ -53,7 +53,7 @@ type PaymentServiceClient interface {
 	// Send method for queueing inbound payments as requested
 	Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (*ReceiveResponse, error)
 	// Initiate method for initiating payments as requested
-	Initiate(ctx context.Context, in *InitiateRequest, opts ...grpc.CallOption) (*InitiateResponse, error)
+	InitiatePrompt(ctx context.Context, in *InitiatePromptRequest, opts ...grpc.CallOption) (*InitiatePromptResponse, error)
 	// Status request to determine if payment is prepared or released
 	Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error)
 	// Status update request to allow continuation of payment processing
@@ -93,10 +93,10 @@ func (c *paymentServiceClient) Receive(ctx context.Context, in *ReceiveRequest, 
 	return out, nil
 }
 
-func (c *paymentServiceClient) Initiate(ctx context.Context, in *InitiateRequest, opts ...grpc.CallOption) (*InitiateResponse, error) {
+func (c *paymentServiceClient) InitiatePrompt(ctx context.Context, in *InitiatePromptRequest, opts ...grpc.CallOption) (*InitiatePromptResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(InitiateResponse)
-	err := c.cc.Invoke(ctx, PaymentService_Initiate_FullMethodName, in, out, cOpts...)
+	out := new(InitiatePromptResponse)
+	err := c.cc.Invoke(ctx, PaymentService_InitiatePrompt_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -171,7 +171,7 @@ type PaymentServiceServer interface {
 	// Send method for queueing inbound payments as requested
 	Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error)
 	// Initiate method for initiating payments as requested
-	Initiate(context.Context, *InitiateRequest) (*InitiateResponse, error)
+	InitiatePrompt(context.Context, *InitiatePromptRequest) (*InitiatePromptResponse, error)
 	// Status request to determine if payment is prepared or released
 	Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error)
 	// Status update request to allow continuation of payment processing
@@ -197,8 +197,8 @@ func (UnimplementedPaymentServiceServer) Send(context.Context, *SendRequest) (*S
 func (UnimplementedPaymentServiceServer) Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Receive not implemented")
 }
-func (UnimplementedPaymentServiceServer) Initiate(context.Context, *InitiateRequest) (*InitiateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Initiate not implemented")
+func (UnimplementedPaymentServiceServer) InitiatePrompt(context.Context, *InitiatePromptRequest) (*InitiatePromptResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InitiatePrompt not implemented")
 }
 func (UnimplementedPaymentServiceServer) Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Status not implemented")
@@ -272,20 +272,20 @@ func _PaymentService_Receive_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentService_Initiate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InitiateRequest)
+func _PaymentService_InitiatePrompt_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitiatePromptRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).Initiate(ctx, in)
+		return srv.(PaymentServiceServer).InitiatePrompt(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_Initiate_FullMethodName,
+		FullMethod: PaymentService_InitiatePrompt_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).Initiate(ctx, req.(*InitiateRequest))
+		return srv.(PaymentServiceServer).InitiatePrompt(ctx, req.(*InitiatePromptRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -389,8 +389,8 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PaymentService_Receive_Handler,
 		},
 		{
-			MethodName: "Initiate",
-			Handler:    _PaymentService_Initiate_Handler,
+			MethodName: "InitiatePrompt",
+			Handler:    _PaymentService_InitiatePrompt_Handler,
 		},
 		{
 			MethodName: "Status",

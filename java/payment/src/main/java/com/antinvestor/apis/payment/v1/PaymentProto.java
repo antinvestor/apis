@@ -85,15 +85,20 @@ public final class PaymentProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_payment_v1_ReceiveResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_payment_v1_InitiateRequest_descriptor;
+    internal_static_payment_v1_InitiatePromptRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_payment_v1_InitiateRequest_fieldAccessorTable;
+      internal_static_payment_v1_InitiatePromptRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_payment_v1_InitiateResponse_descriptor;
+    internal_static_payment_v1_InitiatePromptRequest_MetadataEntry_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_payment_v1_InitiateResponse_fieldAccessorTable;
+      internal_static_payment_v1_InitiatePromptRequest_MetadataEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_payment_v1_InitiatePromptResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_payment_v1_InitiatePromptResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_payment_v1_ReleaseRequest_descriptor;
   static final 
@@ -153,44 +158,54 @@ public final class PaymentProto {
       "9\n\016ReceiveRequest\022\'\n\004data\030\001 \001(\0132\023.paymen" +
       "t.v1.PaymentR\004data\"@\n\017ReceiveResponse\022-\n" +
       "\004data\030\001 \001(\0132\031.common.v1.StatusResponseR\004" +
-      "data\":\n\017InitiateRequest\022\'\n\004data\030\001 \001(\0132\023." +
-      "payment.v1.PaymentR\004data\"A\n\020InitiateResp" +
-      "onse\022-\n\004data\030\001 \001(\0132\031.common.v1.StatusRes" +
-      "ponseR\004data\"W\n\016ReleaseRequest\022+\n\002id\030\001 \001(" +
-      "\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\030\n\007co" +
-      "mment\030\002 \001(\tR\007comment\"@\n\017ReleaseResponse\022" +
-      "-\n\004data\030\001 \001(\0132\031.common.v1.StatusResponse" +
-      "R\004data2\346\005\n\016PaymentService\022K\n\004Send\022\027.paym" +
-      "ent.v1.SendRequest\032\030.payment.v1.SendResp" +
-      "onse\"\020\202\323\344\223\002\n\"\005/send:\001*\022W\n\007Receive\022\032.paym" +
-      "ent.v1.ReceiveRequest\032\033.payment.v1.Recei" +
-      "veResponse\"\023\202\323\344\223\002\r\"\010/receive:\001*\022[\n\010Initi" +
-      "ate\022\033.payment.v1.InitiateRequest\032\034.payme" +
-      "nt.v1.InitiateResponse\"\024\202\323\344\223\002\016\"\t/initiat" +
-      "e:\001*\022S\n\006Status\022\030.common.v1.StatusRequest" +
-      "\032\031.common.v1.StatusResponse\"\024\202\323\344\223\002\016\022\014/st" +
-      "atus/{id}\022h\n\014StatusUpdate\022\036.common.v1.St" +
-      "atusUpdateRequest\032\037.common.v1.StatusUpda" +
-      "teResponse\"\027\202\323\344\223\002\021\032\014/status/{id}:\001*\022a\n\007R" +
-      "elease\022\032.payment.v1.ReleaseRequest\032\033.pay" +
-      "ment.v1.ReleaseResponse\"\035\202\323\344\223\002\027\"\022/send/r" +
-      "elease/{id}:\001*\022Q\n\006Search\022\030.common.v1.Sea" +
-      "rchRequest\032\032.payment.v1.SearchResponse\"\017" +
-      "\202\323\344\223\002\t\022\007/search0\001\022\\\n\tReconcile\022\034.payment" +
-      ".v1.ReconcileRequest\032\035.payment.v1.Reconc" +
-      "ileResponse\"\022\202\323\344\223\002\014\022\n/reconcileB\273\003\n\037com." +
-      "antinvestor.apis.payment.v1B\014PaymentProt" +
-      "oP\001Z;github.com/antinvestor/apis/go/paym" +
-      "ent/payment/v1;paymentv1\242\002\003PXX\252\002\nPayment" +
-      ".V1\312\002\nPayment\\V1\342\002\026Payment\\V1\\GPBMetadat" +
-      "a\352\002\013Payment::V1\222A\202\002\022o\n\017Payment Service\"W" +
-      "\n\020Ant Investor Ltd\022-https://github.com/a" +
-      "ntinvestor/service-lostid\032\024info@antinves" +
-      "tor.com2\0031.0*\002\001\0022\020application/json:\020appl" +
-      "ication/jsonZY\nW\n\006bearer\022M\010\002\0228Authentica" +
-      "tion token, prefixed by Bearer: Bearer <" +
-      "token>\032\rAuthorization \002b\014\n\n\n\006bearer\022\000b\006p" +
-      "roto3"
+      "data\"\311\003\n\025InitiatePromptRequest\022.\n\006source" +
+      "\030\001 \001(\0132\026.common.v1.ContactLinkR\006source\0224" +
+      "\n\trecipient\030\002 \001(\0132\026.common.v1.ContactLin" +
+      "kR\trecipient\022*\n\006amount\030\003 \001(\0132\022.google.ty" +
+      "pe.MoneyR\006amount\022\031\n\010group_id\030\004 \001(\tR\007grou" +
+      "pId\022\037\n\013prompt_time\030\005 \001(\tR\npromptTime\022\033\n\t" +
+      "device_id\030\006 \001(\tR\010deviceId\022%\n\016transaction" +
+      "_id\030\007 \001(\tR\rtransactionId\022\024\n\005route\030\010 \001(\tR" +
+      "\005route\022K\n\010metadata\030\t \003(\0132/.payment.v1.In" +
+      "itiatePromptRequest.MetadataEntryR\010metad" +
+      "ata\032;\n\rMetadataEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024" +
+      "\n\005value\030\002 \001(\tR\005value:\0028\001\"G\n\026InitiateProm" +
+      "ptResponse\022-\n\004data\030\001 \001(\0132\031.common.v1.Sta" +
+      "tusResponseR\004data\"W\n\016ReleaseRequest\022+\n\002i" +
+      "d\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id" +
+      "\022\030\n\007comment\030\002 \001(\tR\007comment\"@\n\017ReleaseRes" +
+      "ponse\022-\n\004data\030\001 \001(\0132\031.common.v1.StatusRe" +
+      "sponseR\004data2\377\005\n\016PaymentService\022K\n\004Send\022" +
+      "\027.payment.v1.SendRequest\032\030.payment.v1.Se" +
+      "ndResponse\"\020\202\323\344\223\002\n\"\005/send:\001*\022W\n\007Receive\022" +
+      "\032.payment.v1.ReceiveRequest\032\033.payment.v1" +
+      ".ReceiveResponse\"\023\202\323\344\223\002\r\"\010/receive:\001*\022t\n" +
+      "\016InitiatePrompt\022!.payment.v1.InitiatePro" +
+      "mptRequest\032\".payment.v1.InitiatePromptRe" +
+      "sponse\"\033\202\323\344\223\002\025\"\020/initiate/prompt:\001*\022S\n\006S" +
+      "tatus\022\030.common.v1.StatusRequest\032\031.common" +
+      ".v1.StatusResponse\"\024\202\323\344\223\002\016\022\014/status/{id}" +
+      "\022h\n\014StatusUpdate\022\036.common.v1.StatusUpdat" +
+      "eRequest\032\037.common.v1.StatusUpdateRespons" +
+      "e\"\027\202\323\344\223\002\021\032\014/status/{id}:\001*\022a\n\007Release\022\032." +
+      "payment.v1.ReleaseRequest\032\033.payment.v1.R" +
+      "eleaseResponse\"\035\202\323\344\223\002\027\"\022/send/release/{i" +
+      "d}:\001*\022Q\n\006Search\022\030.common.v1.SearchReques" +
+      "t\032\032.payment.v1.SearchResponse\"\017\202\323\344\223\002\t\022\007/" +
+      "search0\001\022\\\n\tReconcile\022\034.payment.v1.Recon" +
+      "cileRequest\032\035.payment.v1.ReconcileRespon" +
+      "se\"\022\202\323\344\223\002\014\022\n/reconcileB\273\003\n\037com.antinvest" +
+      "or.apis.payment.v1B\014PaymentProtoP\001Z;gith" +
+      "ub.com/antinvestor/apis/go/payment/payme" +
+      "nt/v1;paymentv1\242\002\003PXX\252\002\nPayment.V1\312\002\nPay" +
+      "ment\\V1\342\002\026Payment\\V1\\GPBMetadata\352\002\013Payme" +
+      "nt::V1\222A\202\002\022o\n\017Payment Service\"W\n\020Ant Inv" +
+      "estor Ltd\022-https://github.com/antinvesto" +
+      "r/service-lostid\032\024info@antinvestor.com2\003" +
+      "1.0*\002\001\0022\020application/json:\020application/j" +
+      "sonZY\nW\n\006bearer\022M\010\002\0228Authentication toke" +
+      "n, prefixed by Bearer: Bearer <token>\032\rA" +
+      "uthorization \002b\014\n\n\n\006bearer\022\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -255,17 +270,23 @@ public final class PaymentProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_payment_v1_ReceiveResponse_descriptor,
         new java.lang.String[] { "Data", });
-    internal_static_payment_v1_InitiateRequest_descriptor =
+    internal_static_payment_v1_InitiatePromptRequest_descriptor =
       getDescriptor().getMessageTypes().get(8);
-    internal_static_payment_v1_InitiateRequest_fieldAccessorTable = new
+    internal_static_payment_v1_InitiatePromptRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_payment_v1_InitiateRequest_descriptor,
-        new java.lang.String[] { "Data", });
-    internal_static_payment_v1_InitiateResponse_descriptor =
+        internal_static_payment_v1_InitiatePromptRequest_descriptor,
+        new java.lang.String[] { "Source", "Recipient", "Amount", "GroupId", "PromptTime", "DeviceId", "TransactionId", "Route", "Metadata", });
+    internal_static_payment_v1_InitiatePromptRequest_MetadataEntry_descriptor =
+      internal_static_payment_v1_InitiatePromptRequest_descriptor.getNestedTypes().get(0);
+    internal_static_payment_v1_InitiatePromptRequest_MetadataEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_payment_v1_InitiatePromptRequest_MetadataEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_payment_v1_InitiatePromptResponse_descriptor =
       getDescriptor().getMessageTypes().get(9);
-    internal_static_payment_v1_InitiateResponse_fieldAccessorTable = new
+    internal_static_payment_v1_InitiatePromptResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_payment_v1_InitiateResponse_descriptor,
+        internal_static_payment_v1_InitiatePromptResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_payment_v1_ReleaseRequest_descriptor =
       getDescriptor().getMessageTypes().get(10);
