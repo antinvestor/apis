@@ -585,15 +585,15 @@ func (x *ReceiveResponse) GetData() *v1.StatusResponse {
 }
 
 type InitiatePromptRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Source        *v1.ContactLink        `protobuf:"bytes,1,opt,name=source,proto3" json:"source,omitempty"`
-	Recipient     *v1.ContactLink        `protobuf:"bytes,2,opt,name=recipient,proto3" json:"recipient,omitempty"`
-	Amount        *money.Money           `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
-	DateCreated   string                 `protobuf:"bytes,4,opt,name=date_created,json=dateCreated,proto3" json:"date_created,omitempty"`
-	DeviceId      string                 `protobuf:"bytes,5,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	TransactionId string                 `protobuf:"bytes,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	State         v1.STATE               `protobuf:"varint,7,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
-	Status        v1.STATUS              `protobuf:"varint,8,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Source      *v1.ContactLink        `protobuf:"bytes,1,opt,name=source,proto3" json:"source,omitempty"`
+	Recipient   *v1.ContactLink        `protobuf:"bytes,2,opt,name=recipient,proto3" json:"recipient,omitempty"`
+	Amount      *money.Money           `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	DateCreated string                 `protobuf:"bytes,4,opt,name=date_created,json=dateCreated,proto3" json:"date_created,omitempty"`
+	DeviceId    string                 `protobuf:"bytes,5,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	Id          string                 `protobuf:"bytes,6,opt,name=id,proto3" json:"id,omitempty"`
+	State       v1.STATE               `protobuf:"varint,7,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
+	Status      v1.STATUS              `protobuf:"varint,8,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`
 	// Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
 	Route string `protobuf:"bytes,9,opt,name=route,proto3" json:"route,omitempty"`
 	// Any additional metadata (e.g., notes, tags, correlation keys)
@@ -667,9 +667,9 @@ func (x *InitiatePromptRequest) GetDeviceId() string {
 	return ""
 }
 
-func (x *InitiatePromptRequest) GetTransactionId() string {
+func (x *InitiatePromptRequest) GetId() string {
 	if x != nil {
-		return x.TransactionId
+		return x.Id
 	}
 	return ""
 }
@@ -892,14 +892,14 @@ const file_payment_v1_payment_proto_rawDesc = "" +
 	"\x0eReceiveRequest\x12'\n" +
 	"\x04data\x18\x01 \x01(\v2\x13.payment.v1.PaymentR\x04data\"@\n" +
 	"\x0fReceiveResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data\"\x83\x04\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data\"\xec\x03\n" +
 	"\x15InitiatePromptRequest\x12.\n" +
 	"\x06source\x18\x01 \x01(\v2\x16.common.v1.ContactLinkR\x06source\x124\n" +
 	"\trecipient\x18\x02 \x01(\v2\x16.common.v1.ContactLinkR\trecipient\x12*\n" +
 	"\x06amount\x18\x03 \x01(\v2\x12.google.type.MoneyR\x06amount\x12!\n" +
 	"\fdate_created\x18\x04 \x01(\tR\vdateCreated\x12\x1b\n" +
-	"\tdevice_id\x18\x05 \x01(\tR\bdeviceId\x12%\n" +
-	"\x0etransaction_id\x18\x06 \x01(\tR\rtransactionId\x12&\n" +
+	"\tdevice_id\x18\x05 \x01(\tR\bdeviceId\x12\x0e\n" +
+	"\x02id\x18\x06 \x01(\tR\x02id\x12&\n" +
 	"\x05state\x18\a \x01(\x0e2\x10.common.v1.STATER\x05state\x12)\n" +
 	"\x06status\x18\b \x01(\x0e2\x11.common.v1.STATUSR\x06status\x12\x14\n" +
 	"\x05route\x18\t \x01(\tR\x05route\x12K\n" +

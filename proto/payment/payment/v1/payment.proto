@@ -119,7 +119,7 @@ message InitiatePromptRequest {
   google.type.Money amount = 3;
   string date_created = 4;
   string device_id = 5;
-  string transaction_id = 6;
+  string id = 6;
   common.v1.STATE state = 7;
   common.v1.STATUS status = 8;
   // Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")

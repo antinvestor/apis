@@ -158,56 +158,55 @@ public final class PaymentProto {
       "9\n\016ReceiveRequest\022\'\n\004data\030\001 \001(\0132\023.paymen" +
       "t.v1.PaymentR\004data\"@\n\017ReceiveResponse\022-\n" +
       "\004data\030\001 \001(\0132\031.common.v1.StatusResponseR\004" +
-      "data\"\203\004\n\025InitiatePromptRequest\022.\n\006source" +
+      "data\"\354\003\n\025InitiatePromptRequest\022.\n\006source" +
       "\030\001 \001(\0132\026.common.v1.ContactLinkR\006source\0224" +
       "\n\trecipient\030\002 \001(\0132\026.common.v1.ContactLin" +
       "kR\trecipient\022*\n\006amount\030\003 \001(\0132\022.google.ty" +
       "pe.MoneyR\006amount\022!\n\014date_created\030\004 \001(\tR\013" +
       "dateCreated\022\033\n\tdevice_id\030\005 \001(\tR\010deviceId" +
-      "\022%\n\016transaction_id\030\006 \001(\tR\rtransactionId\022" +
-      "&\n\005state\030\007 \001(\0162\020.common.v1.STATER\005state\022" +
-      ")\n\006status\030\010 \001(\0162\021.common.v1.STATUSR\006stat" +
-      "us\022\024\n\005route\030\t \001(\tR\005route\022K\n\010metadata\030\n \003" +
-      "(\0132/.payment.v1.InitiatePromptRequest.Me" +
-      "tadataEntryR\010metadata\032;\n\rMetadataEntry\022\020" +
-      "\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\002" +
-      "8\001\"G\n\026InitiatePromptResponse\022-\n\004data\030\001 \001" +
-      "(\0132\031.common.v1.StatusResponseR\004data\"W\n\016R" +
-      "eleaseRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0" +
-      "-9a-z_-]{3,20}R\002id\022\030\n\007comment\030\002 \001(\tR\007com" +
-      "ment\"@\n\017ReleaseResponse\022-\n\004data\030\001 \001(\0132\031." +
-      "common.v1.StatusResponseR\004data2\377\005\n\016Payme" +
-      "ntService\022K\n\004Send\022\027.payment.v1.SendReque" +
-      "st\032\030.payment.v1.SendResponse\"\020\202\323\344\223\002\n\"\005/s" +
-      "end:\001*\022W\n\007Receive\022\032.payment.v1.ReceiveRe" +
-      "quest\032\033.payment.v1.ReceiveResponse\"\023\202\323\344\223" +
-      "\002\r\"\010/receive:\001*\022t\n\016InitiatePrompt\022!.paym" +
-      "ent.v1.InitiatePromptRequest\032\".payment.v" +
-      "1.InitiatePromptResponse\"\033\202\323\344\223\002\025\"\020/initi" +
-      "ate/prompt:\001*\022S\n\006Status\022\030.common.v1.Stat" +
-      "usRequest\032\031.common.v1.StatusResponse\"\024\202\323" +
-      "\344\223\002\016\022\014/status/{id}\022h\n\014StatusUpdate\022\036.com" +
-      "mon.v1.StatusUpdateRequest\032\037.common.v1.S" +
-      "tatusUpdateResponse\"\027\202\323\344\223\002\021\032\014/status/{id" +
-      "}:\001*\022a\n\007Release\022\032.payment.v1.ReleaseRequ" +
-      "est\032\033.payment.v1.ReleaseResponse\"\035\202\323\344\223\002\027" +
-      "\"\022/send/release/{id}:\001*\022Q\n\006Search\022\030.comm" +
-      "on.v1.SearchRequest\032\032.payment.v1.SearchR" +
-      "esponse\"\017\202\323\344\223\002\t\022\007/search0\001\022\\\n\tReconcile\022" +
-      "\034.payment.v1.ReconcileRequest\032\035.payment." +
-      "v1.ReconcileResponse\"\022\202\323\344\223\002\014\022\n/reconcile" +
-      "B\273\003\n\037com.antinvestor.apis.payment.v1B\014Pa" +
-      "ymentProtoP\001Z;github.com/antinvestor/api" +
-      "s/go/payment/payment/v1;paymentv1\242\002\003PXX\252" +
-      "\002\nPayment.V1\312\002\nPayment\\V1\342\002\026Payment\\V1\\G" +
-      "PBMetadata\352\002\013Payment::V1\222A\202\002\022o\n\017Payment " +
-      "Service\"W\n\020Ant Investor Ltd\022-https://git" +
-      "hub.com/antinvestor/service-lostid\032\024info" +
-      "@antinvestor.com2\0031.0*\002\001\0022\020application/j" +
-      "son:\020application/jsonZY\nW\n\006bearer\022M\010\002\0228A" +
-      "uthentication token, prefixed by Bearer:" +
-      " Bearer <token>\032\rAuthorization \002b\014\n\n\n\006be" +
-      "arer\022\000b\006proto3"
+      "\022\016\n\002id\030\006 \001(\tR\002id\022&\n\005state\030\007 \001(\0162\020.common" +
+      ".v1.STATER\005state\022)\n\006status\030\010 \001(\0162\021.commo" +
+      "n.v1.STATUSR\006status\022\024\n\005route\030\t \001(\tR\005rout" +
+      "e\022K\n\010metadata\030\n \003(\0132/.payment.v1.Initiat" +
+      "ePromptRequest.MetadataEntryR\010metadata\032;" +
+      "\n\rMetadataEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005val" +
+      "ue\030\002 \001(\tR\005value:\0028\001\"G\n\026InitiatePromptRes" +
+      "ponse\022-\n\004data\030\001 \001(\0132\031.common.v1.StatusRe" +
+      "sponseR\004data\"W\n\016ReleaseRequest\022+\n\002id\030\001 \001" +
+      "(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\030\n\007c" +
+      "omment\030\002 \001(\tR\007comment\"@\n\017ReleaseResponse" +
+      "\022-\n\004data\030\001 \001(\0132\031.common.v1.StatusRespons" +
+      "eR\004data2\377\005\n\016PaymentService\022K\n\004Send\022\027.pay" +
+      "ment.v1.SendRequest\032\030.payment.v1.SendRes" +
+      "ponse\"\020\202\323\344\223\002\n\"\005/send:\001*\022W\n\007Receive\022\032.pay" +
+      "ment.v1.ReceiveRequest\032\033.payment.v1.Rece" +
+      "iveResponse\"\023\202\323\344\223\002\r\"\010/receive:\001*\022t\n\016Init" +
+      "iatePrompt\022!.payment.v1.InitiatePromptRe" +
+      "quest\032\".payment.v1.InitiatePromptRespons" +
+      "e\"\033\202\323\344\223\002\025\"\020/initiate/prompt:\001*\022S\n\006Status" +
+      "\022\030.common.v1.StatusRequest\032\031.common.v1.S" +
+      "tatusResponse\"\024\202\323\344\223\002\016\022\014/status/{id}\022h\n\014S" +
+      "tatusUpdate\022\036.common.v1.StatusUpdateRequ" +
+      "est\032\037.common.v1.StatusUpdateResponse\"\027\202\323" +
+      "\344\223\002\021\032\014/status/{id}:\001*\022a\n\007Release\022\032.payme" +
+      "nt.v1.ReleaseRequest\032\033.payment.v1.Releas" +
+      "eResponse\"\035\202\323\344\223\002\027\"\022/send/release/{id}:\001*" +
+      "\022Q\n\006Search\022\030.common.v1.SearchRequest\032\032.p" +
+      "ayment.v1.SearchResponse\"\017\202\323\344\223\002\t\022\007/searc" +
+      "h0\001\022\\\n\tReconcile\022\034.payment.v1.ReconcileR" +
+      "equest\032\035.payment.v1.ReconcileResponse\"\022\202" +
+      "\323\344\223\002\014\022\n/reconcileB\273\003\n\037com.antinvestor.ap" +
+      "is.payment.v1B\014PaymentProtoP\001Z;github.co" +
+      "m/antinvestor/apis/go/payment/payment/v1" +
+      ";paymentv1\242\002\003PXX\252\002\nPayment.V1\312\002\nPayment\\" +
+      "V1\342\002\026Payment\\V1\\GPBMetadata\352\002\013Payment::V" +
+      "1\222A\202\002\022o\n\017Payment Service\"W\n\020Ant Investor" +
+      " Ltd\022-https://github.com/antinvestor/ser" +
+      "vice-lostid\032\024info@antinvestor.com2\0031.0*\002" +
+      "\001\0022\020application/json:\020application/jsonZY" +
+      "\nW\n\006bearer\022M\010\002\0228Authentication token, pr" +
+      "efixed by Bearer: Bearer <token>\032\rAuthor" +
+      "ization \002b\014\n\n\n\006bearer\022\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -277,7 +276,7 @@ public final class PaymentProto {
     internal_static_payment_v1_InitiatePromptRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_payment_v1_InitiatePromptRequest_descriptor,
-        new java.lang.String[] { "Source", "Recipient", "Amount", "DateCreated", "DeviceId", "TransactionId", "State", "Status", "Route", "Metadata", });
+        new java.lang.String[] { "Source", "Recipient", "Amount", "DateCreated", "DeviceId", "Id", "State", "Status", "Route", "Metadata", });
     internal_static_payment_v1_InitiatePromptRequest_MetadataEntry_descriptor =
       internal_static_payment_v1_InitiatePromptRequest_descriptor.getNestedTypes().get(0);
     internal_static_payment_v1_InitiatePromptRequest_MetadataEntry_fieldAccessorTable = new

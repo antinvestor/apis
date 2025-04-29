@@ -43,7 +43,7 @@ private static final long serialVersionUID = 0L;
   private InitiatePromptRequest() {
     dateCreated_ = "";
     deviceId_ = "";
-    transactionId_ = "";
+    id_ = "";
     state_ = 0;
     status_ = 0;
     route_ = "";
@@ -231,39 +231,39 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int TRANSACTION_ID_FIELD_NUMBER = 6;
+  public static final int ID_FIELD_NUMBER = 6;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object transactionId_ = "";
+  private volatile java.lang.Object id_ = "";
   /**
-   * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
-   * @return The transactionId.
+   * <code>string id = 6 [json_name = "id"];</code>
+   * @return The id.
    */
   @java.lang.Override
-  public java.lang.String getTransactionId() {
-    java.lang.Object ref = transactionId_;
+  public java.lang.String getId() {
+    java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      transactionId_ = s;
+      id_ = s;
       return s;
     }
   }
   /**
-   * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
-   * @return The bytes for transactionId.
+   * <code>string id = 6 [json_name = "id"];</code>
+   * @return The bytes for id.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getTransactionIdBytes() {
-    java.lang.Object ref = transactionId_;
+      getIdBytes() {
+    java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      transactionId_ = b;
+      id_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -477,8 +477,8 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 5, deviceId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(transactionId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 6, transactionId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 6, id_);
     }
     if (state_ != com.antinvestor.apis.common.v1.STATE.CREATED.getNumber()) {
       output.writeEnum(7, state_);
@@ -522,8 +522,8 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(5, deviceId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(transactionId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(6, transactionId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(6, id_);
     }
     if (state_ != com.antinvestor.apis.common.v1.STATE.CREATED.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
@@ -580,8 +580,8 @@ java.lang.String defaultValue) {
         .equals(other.getDateCreated())) return false;
     if (!getDeviceId()
         .equals(other.getDeviceId())) return false;
-    if (!getTransactionId()
-        .equals(other.getTransactionId())) return false;
+    if (!getId()
+        .equals(other.getId())) return false;
     if (state_ != other.state_) return false;
     if (status_ != other.status_) return false;
     if (!getRoute()
@@ -615,8 +615,8 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + getDateCreated().hashCode();
     hash = (37 * hash) + DEVICE_ID_FIELD_NUMBER;
     hash = (53 * hash) + getDeviceId().hashCode();
-    hash = (37 * hash) + TRANSACTION_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getTransactionId().hashCode();
+    hash = (37 * hash) + ID_FIELD_NUMBER;
+    hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + STATE_FIELD_NUMBER;
     hash = (53 * hash) + state_;
     hash = (37 * hash) + STATUS_FIELD_NUMBER;
@@ -805,7 +805,7 @@ java.lang.String defaultValue) {
       }
       dateCreated_ = "";
       deviceId_ = "";
-      transactionId_ = "";
+      id_ = "";
       state_ = 0;
       status_ = 0;
       route_ = "";
@@ -869,7 +869,7 @@ java.lang.String defaultValue) {
         result.deviceId_ = deviceId_;
       }
       if (((from_bitField0_ & 0x00000020) != 0)) {
-        result.transactionId_ = transactionId_;
+        result.id_ = id_;
       }
       if (((from_bitField0_ & 0x00000040) != 0)) {
         result.state_ = state_;
@@ -918,8 +918,8 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000010;
         onChanged();
       }
-      if (!other.getTransactionId().isEmpty()) {
-        transactionId_ = other.transactionId_;
+      if (!other.getId().isEmpty()) {
+        id_ = other.id_;
         bitField0_ |= 0x00000020;
         onChanged();
       }
@@ -995,7 +995,7 @@ java.lang.String defaultValue) {
               break;
             } // case 42
             case 50: {
-              transactionId_ = input.readStringRequireUtf8();
+              id_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000020;
               break;
             } // case 50
@@ -1547,73 +1547,73 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private java.lang.Object transactionId_ = "";
+    private java.lang.Object id_ = "";
     /**
-     * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
-     * @return The transactionId.
+     * <code>string id = 6 [json_name = "id"];</code>
+     * @return The id.
      */
-    public java.lang.String getTransactionId() {
-      java.lang.Object ref = transactionId_;
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        transactionId_ = s;
+        id_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
-     * @return The bytes for transactionId.
+     * <code>string id = 6 [json_name = "id"];</code>
+     * @return The bytes for id.
      */
     public com.google.protobuf.ByteString
-        getTransactionIdBytes() {
-      java.lang.Object ref = transactionId_;
+        getIdBytes() {
+      java.lang.Object ref = id_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        transactionId_ = b;
+        id_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
-     * @param value The transactionId to set.
+     * <code>string id = 6 [json_name = "id"];</code>
+     * @param value The id to set.
      * @return This builder for chaining.
      */
-    public Builder setTransactionId(
+    public Builder setId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      transactionId_ = value;
+      id_ = value;
       bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
     /**
-     * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
+     * <code>string id = 6 [json_name = "id"];</code>
      * @return This builder for chaining.
      */
-    public Builder clearTransactionId() {
-      transactionId_ = getDefaultInstance().getTransactionId();
+    public Builder clearId() {
+      id_ = getDefaultInstance().getId();
       bitField0_ = (bitField0_ & ~0x00000020);
       onChanged();
       return this;
     }
     /**
-     * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
-     * @param value The bytes for transactionId to set.
+     * <code>string id = 6 [json_name = "id"];</code>
+     * @param value The bytes for id to set.
      * @return This builder for chaining.
      */
-    public Builder setTransactionIdBytes(
+    public Builder setIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      transactionId_ = value;
+      id_ = value;
       bitField0_ |= 0x00000020;
       onChanged();
       return this;

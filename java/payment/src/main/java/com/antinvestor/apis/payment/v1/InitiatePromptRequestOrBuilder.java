@@ -93,16 +93,16 @@ public interface InitiatePromptRequestOrBuilder extends
       getDeviceIdBytes();
 
   /**
-   * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
-   * @return The transactionId.
+   * <code>string id = 6 [json_name = "id"];</code>
+   * @return The id.
    */
-  java.lang.String getTransactionId();
+  java.lang.String getId();
   /**
-   * <code>string transaction_id = 6 [json_name = "transactionId"];</code>
-   * @return The bytes for transactionId.
+   * <code>string id = 6 [json_name = "id"];</code>
+   * @return The bytes for id.
    */
   com.google.protobuf.ByteString
-      getTransactionIdBytes();
+      getIdBytes();
 
   /**
    * <code>.common.v1.STATE state = 7 [json_name = "state"];</code>

@@ -578,7 +578,7 @@
         "deviceId": {
           "type": "string"
         },
-        "transactionId": {
+        "id": {
           "type": "string"
         },
         "state": {
