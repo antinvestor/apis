@@ -122,10 +122,12 @@ message InitiatePromptRequest {
   string prompt_time = 6;
   string device_id = 7;
   string transaction_id = 8;
+  common.v1.STATE state = 9;
+  common.v1.STATUS status = 10;
   // Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
-  string route = 9;
+  string route = 11;
   // Any additional metadata (e.g., notes, tags, correlation keys)
-  map<string, string> metadata = 10;
+  map<string, string> metadata = 12;
 }
 
 
