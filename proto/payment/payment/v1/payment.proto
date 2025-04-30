@@ -113,6 +113,13 @@ message ReceiveResponse {
   common.v1.StatusResponse data = 1;
 }
 
+message Merchant {
+  // Account to be credited once customers make payments
+  string account_number = 1;
+  string country_code = 2;
+  string name = 3;
+}
+
 message InitiatePromptRequest {
   common.v1.ContactLink source = 1;
   common.v1.ContactLink recipient = 2;
@@ -124,8 +131,10 @@ message InitiatePromptRequest {
   common.v1.STATUS status = 8;
   // Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
   string route = 9;
+  // Merchant information for the payment
+  Merchant merchant = 10;
   // Any additional metadata (e.g., notes, tags, correlation keys)
-  map<string, string> metadata = 10;
+  map<string, string> metadata = 11;
 }
 
 message InitiatePromptResponse {
