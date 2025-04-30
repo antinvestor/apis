@@ -584,6 +584,67 @@ func (x *ReceiveResponse) GetData() *v1.StatusResponse {
 	return nil
 }
 
+type Merchant struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Account to be credited once customers make payments
+	AccountNumber string `protobuf:"bytes,1,opt,name=account_number,json=accountNumber,proto3" json:"account_number,omitempty"`
+	CountryCode   string `protobuf:"bytes,2,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
+	Name          string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Merchant) Reset() {
+	*x = Merchant{}
+	mi := &file_payment_v1_payment_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Merchant) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Merchant) ProtoMessage() {}
+
+func (x *Merchant) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_v1_payment_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Merchant.ProtoReflect.Descriptor instead.
+func (*Merchant) Descriptor() ([]byte, []int) {
+	return file_payment_v1_payment_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Merchant) GetAccountNumber() string {
+	if x != nil {
+		return x.AccountNumber
+	}
+	return ""
+}
+
+func (x *Merchant) GetCountryCode() string {
+	if x != nil {
+		return x.CountryCode
+	}
+	return ""
+}
+
+func (x *Merchant) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 type InitiatePromptRequest struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	Source      *v1.ContactLink        `protobuf:"bytes,1,opt,name=source,proto3" json:"source,omitempty"`
@@ -596,15 +657,17 @@ type InitiatePromptRequest struct {
 	Status      v1.STATUS              `protobuf:"varint,8,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`
 	// Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
 	Route string `protobuf:"bytes,9,opt,name=route,proto3" json:"route,omitempty"`
+	// Merchant information for the payment
+	Merchant *Merchant `protobuf:"bytes,10,opt,name=merchant,proto3" json:"merchant,omitempty"`
 	// Any additional metadata (e.g., notes, tags, correlation keys)
-	Metadata      map[string]string `protobuf:"bytes,10,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Metadata      map[string]string `protobuf:"bytes,11,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *InitiatePromptRequest) Reset() {
 	*x = InitiatePromptRequest{}
-	mi := &file_payment_v1_payment_proto_msgTypes[8]
+	mi := &file_payment_v1_payment_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -616,7 +679,7 @@ func (x *InitiatePromptRequest) String() string {
 func (*InitiatePromptRequest) ProtoMessage() {}
 
 func (x *InitiatePromptRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_v1_payment_proto_msgTypes[8]
+	mi := &file_payment_v1_payment_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -629,7 +692,7 @@ func (x *InitiatePromptRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitiatePromptRequest.ProtoReflect.Descriptor instead.
 func (*InitiatePromptRequest) Descriptor() ([]byte, []int) {
-	return file_payment_v1_payment_proto_rawDescGZIP(), []int{8}
+	return file_payment_v1_payment_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *InitiatePromptRequest) GetSource() *v1.ContactLink {
@@ -695,6 +758,13 @@ func (x *InitiatePromptRequest) GetRoute() string {
 	return ""
 }
 
+func (x *InitiatePromptRequest) GetMerchant() *Merchant {
+	if x != nil {
+		return x.Merchant
+	}
+	return nil
+}
+
 func (x *InitiatePromptRequest) GetMetadata() map[string]string {
 	if x != nil {
 		return x.Metadata
@@ -711,7 +781,7 @@ type InitiatePromptResponse struct {
 
 func (x *InitiatePromptResponse) Reset() {
 	*x = InitiatePromptResponse{}
-	mi := &file_payment_v1_payment_proto_msgTypes[9]
+	mi := &file_payment_v1_payment_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -723,7 +793,7 @@ func (x *InitiatePromptResponse) String() string {
 func (*InitiatePromptResponse) ProtoMessage() {}
 
 func (x *InitiatePromptResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_v1_payment_proto_msgTypes[9]
+	mi := &file_payment_v1_payment_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -736,7 +806,7 @@ func (x *InitiatePromptResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitiatePromptResponse.ProtoReflect.Descriptor instead.
 func (*InitiatePromptResponse) Descriptor() ([]byte, []int) {
-	return file_payment_v1_payment_proto_rawDescGZIP(), []int{9}
+	return file_payment_v1_payment_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *InitiatePromptResponse) GetData() *v1.StatusResponse {
@@ -756,7 +826,7 @@ type ReleaseRequest struct {
 
 func (x *ReleaseRequest) Reset() {
 	*x = ReleaseRequest{}
-	mi := &file_payment_v1_payment_proto_msgTypes[10]
+	mi := &file_payment_v1_payment_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -768,7 +838,7 @@ func (x *ReleaseRequest) String() string {
 func (*ReleaseRequest) ProtoMessage() {}
 
 func (x *ReleaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_v1_payment_proto_msgTypes[10]
+	mi := &file_payment_v1_payment_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -781,7 +851,7 @@ func (x *ReleaseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReleaseRequest.ProtoReflect.Descriptor instead.
 func (*ReleaseRequest) Descriptor() ([]byte, []int) {
-	return file_payment_v1_payment_proto_rawDescGZIP(), []int{10}
+	return file_payment_v1_payment_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ReleaseRequest) GetId() string {
@@ -807,7 +877,7 @@ type ReleaseResponse struct {
 
 func (x *ReleaseResponse) Reset() {
 	*x = ReleaseResponse{}
-	mi := &file_payment_v1_payment_proto_msgTypes[11]
+	mi := &file_payment_v1_payment_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -819,7 +889,7 @@ func (x *ReleaseResponse) String() string {
 func (*ReleaseResponse) ProtoMessage() {}
 
 func (x *ReleaseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_v1_payment_proto_msgTypes[11]
+	mi := &file_payment_v1_payment_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -832,7 +902,7 @@ func (x *ReleaseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReleaseResponse.ProtoReflect.Descriptor instead.
 func (*ReleaseResponse) Descriptor() ([]byte, []int) {
-	return file_payment_v1_payment_proto_rawDescGZIP(), []int{11}
+	return file_payment_v1_payment_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ReleaseResponse) GetData() *v1.StatusResponse {
@@ -892,8 +962,11 @@ const file_payment_v1_payment_proto_rawDesc = "" +
 	"\x0eReceiveRequest\x12'\n" +
 	"\x04data\x18\x01 \x01(\v2\x13.payment.v1.PaymentR\x04data\"@\n" +
 	"\x0fReceiveResponse\x12-\n" +
-
-	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data\"\xec\x03\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data\"h\n" +
+	"\bMerchant\x12%\n" +
+	"\x0eaccount_number\x18\x01 \x01(\tR\raccountNumber\x12!\n" +
+	"\fcountry_code\x18\x02 \x01(\tR\vcountryCode\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\"\x9e\x04\n" +
 	"\x15InitiatePromptRequest\x12.\n" +
 	"\x06source\x18\x01 \x01(\v2\x16.common.v1.ContactLinkR\x06source\x124\n" +
 	"\trecipient\x18\x02 \x01(\v2\x16.common.v1.ContactLinkR\trecipient\x12*\n" +
@@ -903,22 +976,25 @@ const file_payment_v1_payment_proto_rawDesc = "" +
 	"\x02id\x18\x06 \x01(\tR\x02id\x12&\n" +
 	"\x05state\x18\a \x01(\x0e2\x10.common.v1.STATER\x05state\x12)\n" +
 	"\x06status\x18\b \x01(\x0e2\x11.common.v1.STATUSR\x06status\x12\x14\n" +
-	"\x05route\x18\t \x01(\tR\x05route\x12K\n" +
-	"\bmetadata\x18\n" +
-	" \x03(\v2/.payment.v1.InitiatePromptRequest.MetadataEntryR\bmetadata\x1a;\n" +
+	"\x05route\x18\t \x01(\tR\x05route\x120\n" +
+	"\bmerchant\x18\n" +
+	" \x01(\v2\x14.payment.v1.MerchantR\bmerchant\x12K\n" +
+	"\bmetadata\x18\v \x03(\v2/.payment.v1.InitiatePromptRequest.MetadataEntryR\bmetadata\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"G\n" +
 	"\x16InitiatePromptResponse\x12-\n" +
-
+	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data\"W\n" +
+	"\x0eReleaseRequest\x12+\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x18\n" +
+	"\acomment\x18\x02 \x01(\tR\acomment\"@\n" +
+	"\x0fReleaseResponse\x12-\n" +
 	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data2\xff\x05\n" +
 	"\x0ePaymentService\x12K\n" +
 	"\x04Send\x12\x17.payment.v1.SendRequest\x1a\x18.payment.v1.SendResponse\"\x10\x82\xd3\xe4\x93\x02\n" +
 	":\x01*\"\x05/send\x12W\n" +
 	"\aReceive\x12\x1a.payment.v1.ReceiveRequest\x1a\x1b.payment.v1.ReceiveResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/receive\x12t\n" +
 	"\x0eInitiatePrompt\x12!.payment.v1.InitiatePromptRequest\x1a\".payment.v1.InitiatePromptResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/initiate/prompt\x12S\n" +
-
-
 	"\x06Status\x12\x18.common.v1.StatusRequest\x1a\x19.common.v1.StatusResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/status/{id}\x12h\n" +
 	"\fStatusUpdate\x12\x1e.common.v1.StatusUpdateRequest\x1a\x1f.common.v1.StatusUpdateResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\x1a\f/status/{id}\x12a\n" +
 	"\aRelease\x12\x1a.payment.v1.ReleaseRequest\x1a\x1b.payment.v1.ReleaseResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/send/release/{id}\x12Q\n" +
@@ -948,7 +1024,7 @@ func file_payment_v1_payment_proto_rawDescGZIP() []byte {
 	return file_payment_v1_payment_proto_rawDescData
 }
 
-var file_payment_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_payment_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_payment_v1_payment_proto_goTypes = []any{
 	(*Payment)(nil),                 // 0: payment.v1.Payment
 	(*ReconcileRequest)(nil),        // 1: payment.v1.ReconcileRequest
@@ -958,66 +1034,68 @@ var file_payment_v1_payment_proto_goTypes = []any{
 	(*SendResponse)(nil),            // 5: payment.v1.SendResponse
 	(*ReceiveRequest)(nil),          // 6: payment.v1.ReceiveRequest
 	(*ReceiveResponse)(nil),         // 7: payment.v1.ReceiveResponse
-	(*InitiatePromptRequest)(nil),   // 8: payment.v1.InitiatePromptRequest
-	(*InitiatePromptResponse)(nil),  // 9: payment.v1.InitiatePromptResponse
-	(*ReleaseRequest)(nil),          // 10: payment.v1.ReleaseRequest
-	(*ReleaseResponse)(nil),         // 11: payment.v1.ReleaseResponse
-	nil,                             // 12: payment.v1.Payment.ExtraEntry
-	nil,                             // 13: payment.v1.InitiatePromptRequest.MetadataEntry
-	(*v1.ContactLink)(nil),          // 14: common.v1.ContactLink
-	(*money.Money)(nil),             // 15: google.type.Money
-	(v1.STATE)(0),                   // 16: common.v1.STATE
-	(v1.STATUS)(0),                  // 17: common.v1.STATUS
-	(*v1.StatusResponse)(nil),       // 18: common.v1.StatusResponse
-	(*v1.StatusRequest)(nil),        // 19: common.v1.StatusRequest
-	(*v1.StatusUpdateRequest)(nil),  // 20: common.v1.StatusUpdateRequest
-	(*v1.SearchRequest)(nil),        // 21: common.v1.SearchRequest
-	(*v1.StatusUpdateResponse)(nil), // 22: common.v1.StatusUpdateResponse
+	(*Merchant)(nil),                // 8: payment.v1.Merchant
+	(*InitiatePromptRequest)(nil),   // 9: payment.v1.InitiatePromptRequest
+	(*InitiatePromptResponse)(nil),  // 10: payment.v1.InitiatePromptResponse
+	(*ReleaseRequest)(nil),          // 11: payment.v1.ReleaseRequest
+	(*ReleaseResponse)(nil),         // 12: payment.v1.ReleaseResponse
+	nil,                             // 13: payment.v1.Payment.ExtraEntry
+	nil,                             // 14: payment.v1.InitiatePromptRequest.MetadataEntry
+	(*v1.ContactLink)(nil),          // 15: common.v1.ContactLink
+	(*money.Money)(nil),             // 16: google.type.Money
+	(v1.STATE)(0),                   // 17: common.v1.STATE
+	(v1.STATUS)(0),                  // 18: common.v1.STATUS
+	(*v1.StatusResponse)(nil),       // 19: common.v1.StatusResponse
+	(*v1.StatusRequest)(nil),        // 20: common.v1.StatusRequest
+	(*v1.StatusUpdateRequest)(nil),  // 21: common.v1.StatusUpdateRequest
+	(*v1.SearchRequest)(nil),        // 22: common.v1.SearchRequest
+	(*v1.StatusUpdateResponse)(nil), // 23: common.v1.StatusUpdateResponse
 }
 var file_payment_v1_payment_proto_depIdxs = []int32{
-	14, // 0: payment.v1.Payment.source:type_name -> common.v1.ContactLink
-	14, // 1: payment.v1.Payment.recipient:type_name -> common.v1.ContactLink
-	15, // 2: payment.v1.Payment.amount:type_name -> google.type.Money
-	15, // 3: payment.v1.Payment.cost:type_name -> google.type.Money
-	16, // 4: payment.v1.Payment.state:type_name -> common.v1.STATE
-	17, // 5: payment.v1.Payment.status:type_name -> common.v1.STATUS
-	12, // 6: payment.v1.Payment.extra:type_name -> payment.v1.Payment.ExtraEntry
-	15, // 7: payment.v1.ReconcileRequest.amount:type_name -> google.type.Money
-	17, // 8: payment.v1.ReconcileResponse.status:type_name -> common.v1.STATUS
+	15, // 0: payment.v1.Payment.source:type_name -> common.v1.ContactLink
+	15, // 1: payment.v1.Payment.recipient:type_name -> common.v1.ContactLink
+	16, // 2: payment.v1.Payment.amount:type_name -> google.type.Money
+	16, // 3: payment.v1.Payment.cost:type_name -> google.type.Money
+	17, // 4: payment.v1.Payment.state:type_name -> common.v1.STATE
+	18, // 5: payment.v1.Payment.status:type_name -> common.v1.STATUS
+	13, // 6: payment.v1.Payment.extra:type_name -> payment.v1.Payment.ExtraEntry
+	16, // 7: payment.v1.ReconcileRequest.amount:type_name -> google.type.Money
+	18, // 8: payment.v1.ReconcileResponse.status:type_name -> common.v1.STATUS
 	0,  // 9: payment.v1.SearchResponse.data:type_name -> payment.v1.Payment
 	0,  // 10: payment.v1.SendRequest.data:type_name -> payment.v1.Payment
-	18, // 11: payment.v1.SendResponse.data:type_name -> common.v1.StatusResponse
+	19, // 11: payment.v1.SendResponse.data:type_name -> common.v1.StatusResponse
 	0,  // 12: payment.v1.ReceiveRequest.data:type_name -> payment.v1.Payment
-	18, // 13: payment.v1.ReceiveResponse.data:type_name -> common.v1.StatusResponse
-	14, // 14: payment.v1.InitiatePromptRequest.source:type_name -> common.v1.ContactLink
-	14, // 15: payment.v1.InitiatePromptRequest.recipient:type_name -> common.v1.ContactLink
-	15, // 16: payment.v1.InitiatePromptRequest.amount:type_name -> google.type.Money
-	16, // 17: payment.v1.InitiatePromptRequest.state:type_name -> common.v1.STATE
-	17, // 18: payment.v1.InitiatePromptRequest.status:type_name -> common.v1.STATUS
-	13, // 19: payment.v1.InitiatePromptRequest.metadata:type_name -> payment.v1.InitiatePromptRequest.MetadataEntry
-	18, // 20: payment.v1.InitiatePromptResponse.data:type_name -> common.v1.StatusResponse
-	18, // 21: payment.v1.ReleaseResponse.data:type_name -> common.v1.StatusResponse
-	4,  // 22: payment.v1.PaymentService.Send:input_type -> payment.v1.SendRequest
-	6,  // 23: payment.v1.PaymentService.Receive:input_type -> payment.v1.ReceiveRequest
-	8,  // 24: payment.v1.PaymentService.InitiatePrompt:input_type -> payment.v1.InitiatePromptRequest
-	19, // 25: payment.v1.PaymentService.Status:input_type -> common.v1.StatusRequest
-	20, // 26: payment.v1.PaymentService.StatusUpdate:input_type -> common.v1.StatusUpdateRequest
-	10, // 27: payment.v1.PaymentService.Release:input_type -> payment.v1.ReleaseRequest
-	21, // 28: payment.v1.PaymentService.Search:input_type -> common.v1.SearchRequest
-	1,  // 29: payment.v1.PaymentService.Reconcile:input_type -> payment.v1.ReconcileRequest
-	5,  // 30: payment.v1.PaymentService.Send:output_type -> payment.v1.SendResponse
-	7,  // 31: payment.v1.PaymentService.Receive:output_type -> payment.v1.ReceiveResponse
-	9,  // 32: payment.v1.PaymentService.InitiatePrompt:output_type -> payment.v1.InitiatePromptResponse
-	18, // 33: payment.v1.PaymentService.Status:output_type -> common.v1.StatusResponse
-	22, // 34: payment.v1.PaymentService.StatusUpdate:output_type -> common.v1.StatusUpdateResponse
-	11, // 35: payment.v1.PaymentService.Release:output_type -> payment.v1.ReleaseResponse
-	3,  // 36: payment.v1.PaymentService.Search:output_type -> payment.v1.SearchResponse
-	2,  // 37: payment.v1.PaymentService.Reconcile:output_type -> payment.v1.ReconcileResponse
-	30, // [30:38] is the sub-list for method output_type
-	22, // [22:30] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	19, // 13: payment.v1.ReceiveResponse.data:type_name -> common.v1.StatusResponse
+	15, // 14: payment.v1.InitiatePromptRequest.source:type_name -> common.v1.ContactLink
+	15, // 15: payment.v1.InitiatePromptRequest.recipient:type_name -> common.v1.ContactLink
+	16, // 16: payment.v1.InitiatePromptRequest.amount:type_name -> google.type.Money
+	17, // 17: payment.v1.InitiatePromptRequest.state:type_name -> common.v1.STATE
+	18, // 18: payment.v1.InitiatePromptRequest.status:type_name -> common.v1.STATUS
+	8,  // 19: payment.v1.InitiatePromptRequest.merchant:type_name -> payment.v1.Merchant
+	14, // 20: payment.v1.InitiatePromptRequest.metadata:type_name -> payment.v1.InitiatePromptRequest.MetadataEntry
+	19, // 21: payment.v1.InitiatePromptResponse.data:type_name -> common.v1.StatusResponse
+	19, // 22: payment.v1.ReleaseResponse.data:type_name -> common.v1.StatusResponse
+	4,  // 23: payment.v1.PaymentService.Send:input_type -> payment.v1.SendRequest
+	6,  // 24: payment.v1.PaymentService.Receive:input_type -> payment.v1.ReceiveRequest
+	9,  // 25: payment.v1.PaymentService.InitiatePrompt:input_type -> payment.v1.InitiatePromptRequest
+	20, // 26: payment.v1.PaymentService.Status:input_type -> common.v1.StatusRequest
+	21, // 27: payment.v1.PaymentService.StatusUpdate:input_type -> common.v1.StatusUpdateRequest
+	11, // 28: payment.v1.PaymentService.Release:input_type -> payment.v1.ReleaseRequest
+	22, // 29: payment.v1.PaymentService.Search:input_type -> common.v1.SearchRequest
+	1,  // 30: payment.v1.PaymentService.Reconcile:input_type -> payment.v1.ReconcileRequest
+	5,  // 31: payment.v1.PaymentService.Send:output_type -> payment.v1.SendResponse
+	7,  // 32: payment.v1.PaymentService.Receive:output_type -> payment.v1.ReceiveResponse
+	10, // 33: payment.v1.PaymentService.InitiatePrompt:output_type -> payment.v1.InitiatePromptResponse
+	19, // 34: payment.v1.PaymentService.Status:output_type -> common.v1.StatusResponse
+	23, // 35: payment.v1.PaymentService.StatusUpdate:output_type -> common.v1.StatusUpdateResponse
+	12, // 36: payment.v1.PaymentService.Release:output_type -> payment.v1.ReleaseResponse
+	3,  // 37: payment.v1.PaymentService.Search:output_type -> payment.v1.SearchResponse
+	2,  // 38: payment.v1.PaymentService.Reconcile:output_type -> payment.v1.ReconcileResponse
+	31, // [31:39] is the sub-list for method output_type
+	23, // [23:31] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_payment_v1_payment_proto_init() }
@@ -1031,7 +1109,7 @@ func file_payment_v1_payment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_payment_v1_payment_proto_rawDesc), len(file_payment_v1_payment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

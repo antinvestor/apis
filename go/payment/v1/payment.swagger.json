@@ -591,6 +591,10 @@
           "type": "string",
           "title": "Optional route/hint for processing (e.g., \"M-PESA\", \"RTGS\", \"INTERNAL\")"
         },
+        "merchant": {
+          "$ref": "#/definitions/payment.v1.Merchant",
+          "title": "Merchant information for the payment"
+        },
         "metadata": {
           "type": "object",
           "additionalProperties": {
@@ -605,6 +609,21 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/common.v1.StatusResponse"
+        }
+      }
+    },
+    "payment.v1.Merchant": {
+      "type": "object",
+      "properties": {
+        "accountNumber": {
+          "type": "string",
+          "title": "Account to be credited once customers make payments"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
         }
       }
     },
