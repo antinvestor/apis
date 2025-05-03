@@ -85,18 +85,22 @@ func (pc *PaymentClient) Receive(ctx context.Context, message *Payment) (*Receiv
 	return pc.Client.Receive(ctx, &ReceiveRequest{Data: message})
 }
 
-// updateStatus method for updating payments as requested
-func (pc *PaymentClient) UpdateStatus(ctx context.Context, paymentId string,
-	state commonv1.STATE, status commonv1.STATUS, externalId string,
-	extras map[string]string) (*commonv1.StatusUpdateResponse, error) {
+// initiate prompt method for initiating payments as requested
+func (pc *PaymentClient) InitiatePrompt(ctx context.Context, message *InitiatePromptRequest) (*InitiatePromptResponse, error) {
+	return pc.Client.InitiatePrompt(ctx, message)
+}
 
-	messageStatus := commonv1.StatusUpdateRequest{
-		Id:         paymentId,
-		State:      state,
-		Status:     status,
-		ExternalId: externalId,
-		Extras:     extras,
+//status check method for checking payments status as requested
+func (pc *PaymentClient) Status(ctx context.Context, id string) (*commonv1.StatusResponse, error) {
+	statusCheckRequest := commonv1.StatusRequest{
+		Id: id,
 	}
 
-	return pc.Client.StatusUpdate(ctx, &messageStatus)
+	return pc.Client.Status(ctx, &statusCheckRequest)
 }
+
+// updateStatus method for updating payments as requested
+func (pc *PaymentClient) UpdateStatus(ctx context.Context, message *commonv1.StatusUpdateRequest) (*commonv1.StatusUpdateResponse, error) {
+	return pc.Client.StatusUpdate(ctx, message)
+}
+
