@@ -100,7 +100,7 @@ func (pc *PaymentClient) Status(ctx context.Context, id string) (*commonv1.Statu
 }
 
 // updateStatus method for updating payments as requested
-func (pc *PaymentClient) UpdateStatus(ctx context.Context, message *commonv1.StatusUpdateRequest) (*commonv1.StatusUpdateResponse, error) {
+func (pc *PaymentClient) StatusUpdate(ctx context.Context, message *commonv1.StatusUpdateRequest) (*commonv1.StatusUpdateResponse, error) {
 	return pc.Client.StatusUpdate(ctx, message)
 }
 
