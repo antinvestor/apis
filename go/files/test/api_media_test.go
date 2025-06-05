@@ -25,10 +25,10 @@ package file_v1
 
 import (
 	"context"
+	openapiclient "github.com/antinvestor/apis/go/files"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/antinvestor/apis/go/files"
 )
 
 func Test_file_v1_MediaAPIService(t *testing.T) {
@@ -38,7 +38,7 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 	t.Run("Test MediaAPIService CreateContent", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.MediaAPI.CreateContent(context.Background()).Execute()
 
@@ -50,7 +50,7 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 	t.Run("Test MediaAPIService GetConfig", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.MediaAPI.GetConfig(context.Background()).Execute()
 
@@ -62,7 +62,7 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 	t.Run("Test MediaAPIService GetContent", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var serverName interface{}
 		var mediaId interface{}
@@ -77,7 +77,7 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 	t.Run("Test MediaAPIService GetContentOverrideName", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var serverName interface{}
 		var mediaId interface{}
@@ -93,7 +93,7 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 	t.Run("Test MediaAPIService GetContentThumbnail", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var serverName interface{}
 		var mediaId interface{}
@@ -108,7 +108,7 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 	t.Run("Test MediaAPIService GetUrlPreview", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.MediaAPI.GetUrlPreview(context.Background()).Execute()
 
@@ -120,7 +120,7 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 	t.Run("Test MediaAPIService UploadContent", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.MediaAPI.UploadContent(context.Background()).Execute()
 
@@ -132,7 +132,7 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 	t.Run("Test MediaAPIService UploadContentToMXC", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var serverName interface{}
 		var mediaId interface{}

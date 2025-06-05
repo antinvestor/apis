@@ -90,7 +90,7 @@ func (pc *PaymentClient) InitiatePrompt(ctx context.Context, message *InitiatePr
 	return pc.Client.InitiatePrompt(ctx, message)
 }
 
-//status check method for checking payments status as requested
+// status check method for checking payments status as requested
 func (pc *PaymentClient) Status(ctx context.Context, id string) (*commonv1.StatusResponse, error) {
 	statusCheckRequest := commonv1.StatusRequest{
 		Id: id,
@@ -103,4 +103,3 @@ func (pc *PaymentClient) Status(ctx context.Context, id string) (*commonv1.Statu
 func (pc *PaymentClient) StatusUpdate(ctx context.Context, message *commonv1.StatusUpdateRequest) (*commonv1.StatusUpdateResponse, error) {
 	return pc.Client.StatusUpdate(ctx, message)
 }
-
