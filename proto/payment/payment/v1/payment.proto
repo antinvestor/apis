@@ -227,6 +227,8 @@ service PaymentService {
     };
   }
 
+  
+
   //Status request to determine if payment is prepared or released
   rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse) {
     option (google.api.http) = {get: "/status/{id}"};
