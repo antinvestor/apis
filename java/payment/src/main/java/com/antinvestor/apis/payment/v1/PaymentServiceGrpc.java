@@ -1,3 +1,17 @@
+// Copyright 2023-2024 Ant Investor Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package com.antinvestor.apis.payment.v1;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
@@ -5,7 +19,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.72.0)",
+    value = "by gRPC proto compiler (version 1.73.0)",
     comments = "Source: payment/v1/payment.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class PaymentServiceGrpc {
@@ -106,6 +120,37 @@ public final class PaymentServiceGrpc {
       }
     }
     return getInitiatePromptMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest,
+      com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse> getCreatePaymentLinkMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CreatePaymentLink",
+      requestType = com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest.class,
+      responseType = com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest,
+      com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse> getCreatePaymentLinkMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest, com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse> getCreatePaymentLinkMethod;
+    if ((getCreatePaymentLinkMethod = PaymentServiceGrpc.getCreatePaymentLinkMethod) == null) {
+      synchronized (PaymentServiceGrpc.class) {
+        if ((getCreatePaymentLinkMethod = PaymentServiceGrpc.getCreatePaymentLinkMethod) == null) {
+          PaymentServiceGrpc.getCreatePaymentLinkMethod = getCreatePaymentLinkMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest, com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CreatePaymentLink"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new PaymentServiceMethodDescriptorSupplier("CreatePaymentLink"))
+              .build();
+        }
+      }
+    }
+    return getCreatePaymentLinkMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.common.v1.StatusRequest,
@@ -358,6 +403,16 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
+     *createPaymentLink method for creating payment links as requested
+     * </pre>
+     */
+    default void createPaymentLink(com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreatePaymentLinkMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      *Status request to determine if payment is prepared or released
      * </pre>
      */
@@ -466,6 +521,17 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
+     *createPaymentLink method for creating payment links as requested
+     * </pre>
+     */
+    public void createPaymentLink(com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getCreatePaymentLinkMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      *Status request to determine if payment is prepared or released
      * </pre>
      */
@@ -565,6 +631,16 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
+     *createPaymentLink method for creating payment links as requested
+     * </pre>
+     */
+    public com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse createPaymentLink(com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreatePaymentLinkMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      *Status request to determine if payment is prepared or released
      * </pre>
      */
@@ -657,6 +733,16 @@ public final class PaymentServiceGrpc {
     public com.antinvestor.apis.payment.v1.InitiatePromptResponse initiatePrompt(com.antinvestor.apis.payment.v1.InitiatePromptRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getInitiatePromptMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *createPaymentLink method for creating payment links as requested
+     * </pre>
+     */
+    public com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse createPaymentLink(com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreatePaymentLinkMethod(), getCallOptions(), request);
     }
 
     /**
@@ -759,6 +845,17 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
+     *createPaymentLink method for creating payment links as requested
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse> createPaymentLink(
+        com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getCreatePaymentLinkMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      *Status request to determine if payment is prepared or released
      * </pre>
      */
@@ -802,11 +899,12 @@ public final class PaymentServiceGrpc {
   private static final int METHODID_SEND = 0;
   private static final int METHODID_RECEIVE = 1;
   private static final int METHODID_INITIATE_PROMPT = 2;
-  private static final int METHODID_STATUS = 3;
-  private static final int METHODID_STATUS_UPDATE = 4;
-  private static final int METHODID_RELEASE = 5;
-  private static final int METHODID_SEARCH = 6;
-  private static final int METHODID_RECONCILE = 7;
+  private static final int METHODID_CREATE_PAYMENT_LINK = 3;
+  private static final int METHODID_STATUS = 4;
+  private static final int METHODID_STATUS_UPDATE = 5;
+  private static final int METHODID_RELEASE = 6;
+  private static final int METHODID_SEARCH = 7;
+  private static final int METHODID_RECONCILE = 8;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -836,6 +934,10 @@ public final class PaymentServiceGrpc {
         case METHODID_INITIATE_PROMPT:
           serviceImpl.initiatePrompt((com.antinvestor.apis.payment.v1.InitiatePromptRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.payment.v1.InitiatePromptResponse>) responseObserver);
+          break;
+        case METHODID_CREATE_PAYMENT_LINK:
+          serviceImpl.createPaymentLink((com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse>) responseObserver);
           break;
         case METHODID_STATUS:
           serviceImpl.status((com.antinvestor.apis.common.v1.StatusRequest) request,
@@ -896,6 +998,13 @@ public final class PaymentServiceGrpc {
               com.antinvestor.apis.payment.v1.InitiatePromptRequest,
               com.antinvestor.apis.payment.v1.InitiatePromptResponse>(
                 service, METHODID_INITIATE_PROMPT)))
+        .addMethod(
+          getCreatePaymentLinkMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest,
+              com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse>(
+                service, METHODID_CREATE_PAYMENT_LINK)))
         .addMethod(
           getStatusMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -982,6 +1091,7 @@ public final class PaymentServiceGrpc {
               .addMethod(getSendMethod())
               .addMethod(getReceiveMethod())
               .addMethod(getInitiatePromptMethod())
+              .addMethod(getCreatePaymentLinkMethod())
               .addMethod(getStatusMethod())
               .addMethod(getStatusUpdateMethod())
               .addMethod(getReleaseMethod())

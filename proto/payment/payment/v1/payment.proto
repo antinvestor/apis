@@ -154,6 +154,46 @@ message ReleaseResponse {
   common.v1.StatusResponse data = 1;
 }
 
+// --- Payment Link Creation ---
+
+enum NotificationType {
+  NOTIFICATION_TYPE_UNSPECIFIED = 0;
+  EMAIL = 1;
+  SMS = 2;
+}
+
+message Customer {
+  common.v1.ContactLink source = 1;
+  string first_address = 2;
+  string country_code = 3;
+  string postal_or_zip_code = 4;
+  string customer_external_ref = 5;
+}
+
+message PaymentLink {
+  string expiry_date = 1;
+  string sale_date = 2;
+  string payment_link_type = 3;
+  string sale_type = 4;
+  string name = 5;
+  string description = 6;
+  string external_ref = 7;
+  string payment_link_ref = 8;
+  string redirect_url = 9;
+  string amount_option = 10;
+  double amount = 11;
+  string currency = 12;
+}
+
+message CreatePaymentLinkRequest {
+  repeated Customer customers = 1;
+  PaymentLink payment_link = 2;
+  repeated NotificationType notifications = 3;
+}
+message CreatePaymentLinkResponse {
+  common.v1.StatusResponse data = 1;
+  }
+
 service PaymentService {
   //Send method for queueing outbound payments as requested
   rpc Send(SendRequest) returns (SendResponse) {
@@ -175,6 +215,14 @@ service PaymentService {
   rpc InitiatePrompt(InitiatePromptRequest) returns (InitiatePromptResponse) {
     option (google.api.http) = {
       post: "/initiate/prompt"
+      body: "*"
+    };
+  }
+
+  //createPaymentLink method for creating payment links as requested
+  rpc CreatePaymentLink(CreatePaymentLinkRequest) returns (CreatePaymentLinkResponse) {
+    option (google.api.http) = {
+      post: "/create-payment-link"
       body: "*"
     };
   }
@@ -208,4 +256,6 @@ service PaymentService {
   rpc Reconcile(ReconcileRequest) returns (ReconcileResponse) {
     option (google.api.http) = {get: "/reconcile"};
   }
+
+
 }
