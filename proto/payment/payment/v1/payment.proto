@@ -113,12 +113,11 @@ message ReceiveResponse {
   common.v1.StatusResponse data = 1;
 }
 
-message Account {
+message Merchant {
   // Account to be credited once customers make payments
   string account_number = 1;
   string country_code = 2;
   string name = 3;
-  map<string, string> extra = 11;
 }
 
 message InitiatePromptRequest {
@@ -132,9 +131,10 @@ message InitiatePromptRequest {
   common.v1.STATUS status = 8;
   // Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
   string route = 9;
-  Account recipient_account = 10;
+  // Merchant information for the payment
+  Merchant merchant = 10;
   // Any additional metadata (e.g., notes, tags, correlation keys)
-  map<string, string> extra = 11;
+  map<string, string> metadata = 11;
 }
 
 message InitiatePromptResponse {
@@ -151,6 +151,46 @@ message ReleaseRequest {
 }
 
 message ReleaseResponse {
+  common.v1.StatusResponse data = 1;
+}
+
+// --- Payment Link Creation ---
+
+enum NotificationType {
+  NOTIFICATION_TYPE_UNSPECIFIED = 0;
+  NOTIFICATION_TYPE_EMAIL = 1;
+  NOTIFICATION_TYPE_SMS = 2;
+}
+
+message Customer {
+  common.v1.ContactLink source = 1;
+  string first_address = 2;
+  string country_code = 3;
+  string postal_or_zip_code = 4;
+  string customer_external_ref = 5;
+}
+
+message PaymentLink {
+  string expiry_date = 1;
+  string sale_date = 2;
+  string payment_link_type = 3;
+  string sale_type = 4;
+  string name = 5;
+  string description = 6;
+  string external_ref = 7;
+  string payment_link_ref = 8;
+  string redirect_url = 9;
+  string amount_option = 10;
+  double amount = 11;
+  string currency = 12;
+}
+
+message CreatePaymentLinkRequest {
+  repeated Customer customers = 1;
+  PaymentLink payment_link = 2;
+  repeated NotificationType notifications = 3;
+}
+message CreatePaymentLinkResponse {
   common.v1.StatusResponse data = 1;
 }
 
@@ -178,6 +218,16 @@ service PaymentService {
       body: "*"
     };
   }
+
+  //createPaymentLink method for creating payment links as requested
+  rpc CreatePaymentLink(CreatePaymentLinkRequest) returns (CreatePaymentLinkResponse) {
+    option (google.api.http) = {
+      post: "/create-payment-link"
+      body: "*"
+    };
+  }
+
+  
 
   //Status request to determine if payment is prepared or released
   rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse) {
