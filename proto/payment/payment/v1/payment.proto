@@ -158,8 +158,8 @@ message ReleaseResponse {
 
 enum NotificationType {
   NOTIFICATION_TYPE_UNSPECIFIED = 0;
-  EMAIL = 1;
-  SMS = 2;
+  NOTIFICATION_TYPE_EMAIL = 1;
+  NOTIFICATION_TYPE_SMS = 2;
 }
 
 message Customer {
@@ -192,7 +192,7 @@ message CreatePaymentLinkRequest {
 }
 message CreatePaymentLinkResponse {
   common.v1.StatusResponse data = 1;
-  }
+}
 
 service PaymentService {
   //Send method for queueing outbound payments as requested
@@ -256,6 +256,4 @@ service PaymentService {
   rpc Reconcile(ReconcileRequest) returns (ReconcileResponse) {
     option (google.api.http) = {get: "/reconcile"};
   }
-
-
 }
