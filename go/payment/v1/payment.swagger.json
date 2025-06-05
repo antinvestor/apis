@@ -25,6 +25,39 @@
     "application/json"
   ],
   "paths": {
+    "/create-payment-link": {
+      "post": {
+        "summary": "createPaymentLink method for creating payment links as requested",
+        "operationId": "PaymentService_CreatePaymentLink",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/payment.v1.CreatePaymentLinkResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/payment.v1.CreatePaymentLinkRequest"
+            }
+          }
+        ],
+        "tags": [
+          "payment.v1.PaymentService"
+        ]
+      }
+    },
     "/initiate/prompt": {
       "post": {
         "summary": "Initiate method for initiating payments as requested",
@@ -560,24 +593,52 @@
       },
       "description": "Represents an amount of money with its currency type."
     },
-    "payment.v1.Account": {
+    "payment.v1.CreatePaymentLinkRequest": {
       "type": "object",
       "properties": {
-        "accountNumber": {
-          "type": "string",
-          "title": "Account to be credited once customers make payments"
+        "customers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/payment.v1.Customer"
+          }
+        },
+        "paymentLink": {
+          "$ref": "#/definitions/payment.v1.PaymentLink"
+        },
+        "notifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/payment.v1.NotificationType"
+          }
+        }
+      }
+    },
+    "payment.v1.CreatePaymentLinkResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/common.v1.StatusResponse"
+        }
+      }
+    },
+    "payment.v1.Customer": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/common.v1.ContactLink"
+        },
+        "firstAddress": {
+          "type": "string"
         },
         "countryCode": {
           "type": "string"
         },
-        "name": {
+        "postalOrZipCode": {
           "type": "string"
         },
-        "extra": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "customerExternalRef": {
+          "type": "string"
         }
       }
     },
@@ -612,10 +673,11 @@
           "type": "string",
           "title": "Optional route/hint for processing (e.g., \"M-PESA\", \"RTGS\", \"INTERNAL\")"
         },
-        "recipientAccount": {
-          "$ref": "#/definitions/payment.v1.Account"
+        "merchant": {
+          "$ref": "#/definitions/payment.v1.Merchant",
+          "title": "Merchant information for the payment"
         },
-        "extra": {
+        "metadata": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -631,6 +693,30 @@
           "$ref": "#/definitions/common.v1.StatusResponse"
         }
       }
+    },
+    "payment.v1.Merchant": {
+      "type": "object",
+      "properties": {
+        "accountNumber": {
+          "type": "string",
+          "title": "Account to be credited once customers make payments"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "payment.v1.NotificationType": {
+      "type": "string",
+      "enum": [
+        "NOTIFICATION_TYPE_UNSPECIFIED",
+        "NOTIFICATION_TYPE_EMAIL",
+        "NOTIFICATION_TYPE_SMS"
+      ],
+      "default": "NOTIFICATION_TYPE_UNSPECIFIED"
     },
     "payment.v1.Payment": {
       "type": "object",
@@ -685,6 +771,48 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "payment.v1.PaymentLink": {
+      "type": "object",
+      "properties": {
+        "expiryDate": {
+          "type": "string"
+        },
+        "saleDate": {
+          "type": "string"
+        },
+        "paymentLinkType": {
+          "type": "string"
+        },
+        "saleType": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "externalRef": {
+          "type": "string"
+        },
+        "paymentLinkRef": {
+          "type": "string"
+        },
+        "redirectUrl": {
+          "type": "string"
+        },
+        "amountOption": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "currency": {
+          "type": "string"
         }
       }
     },

@@ -34,14 +34,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PaymentService_Send_FullMethodName           = "/payment.v1.PaymentService/Send"
-	PaymentService_Receive_FullMethodName        = "/payment.v1.PaymentService/Receive"
-	PaymentService_InitiatePrompt_FullMethodName = "/payment.v1.PaymentService/InitiatePrompt"
-	PaymentService_Status_FullMethodName         = "/payment.v1.PaymentService/Status"
-	PaymentService_StatusUpdate_FullMethodName   = "/payment.v1.PaymentService/StatusUpdate"
-	PaymentService_Release_FullMethodName        = "/payment.v1.PaymentService/Release"
-	PaymentService_Search_FullMethodName         = "/payment.v1.PaymentService/Search"
-	PaymentService_Reconcile_FullMethodName      = "/payment.v1.PaymentService/Reconcile"
+	PaymentService_Send_FullMethodName              = "/payment.v1.PaymentService/Send"
+	PaymentService_Receive_FullMethodName           = "/payment.v1.PaymentService/Receive"
+	PaymentService_InitiatePrompt_FullMethodName    = "/payment.v1.PaymentService/InitiatePrompt"
+	PaymentService_CreatePaymentLink_FullMethodName = "/payment.v1.PaymentService/CreatePaymentLink"
+	PaymentService_Status_FullMethodName            = "/payment.v1.PaymentService/Status"
+	PaymentService_StatusUpdate_FullMethodName      = "/payment.v1.PaymentService/StatusUpdate"
+	PaymentService_Release_FullMethodName           = "/payment.v1.PaymentService/Release"
+	PaymentService_Search_FullMethodName            = "/payment.v1.PaymentService/Search"
+	PaymentService_Reconcile_FullMethodName         = "/payment.v1.PaymentService/Reconcile"
 )
 
 // PaymentServiceClient is the client API for PaymentService service.
@@ -54,6 +55,8 @@ type PaymentServiceClient interface {
 	Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (*ReceiveResponse, error)
 	// Initiate method for initiating payments as requested
 	InitiatePrompt(ctx context.Context, in *InitiatePromptRequest, opts ...grpc.CallOption) (*InitiatePromptResponse, error)
+	// createPaymentLink method for creating payment links as requested
+	CreatePaymentLink(ctx context.Context, in *CreatePaymentLinkRequest, opts ...grpc.CallOption) (*CreatePaymentLinkResponse, error)
 	// Status request to determine if payment is prepared or released
 	Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error)
 	// Status update request to allow continuation of payment processing
@@ -97,6 +100,16 @@ func (c *paymentServiceClient) InitiatePrompt(ctx context.Context, in *InitiateP
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(InitiatePromptResponse)
 	err := c.cc.Invoke(ctx, PaymentService_InitiatePrompt_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) CreatePaymentLink(ctx context.Context, in *CreatePaymentLinkRequest, opts ...grpc.CallOption) (*CreatePaymentLinkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreatePaymentLinkResponse)
+	err := c.cc.Invoke(ctx, PaymentService_CreatePaymentLink_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -172,6 +185,8 @@ type PaymentServiceServer interface {
 	Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error)
 	// Initiate method for initiating payments as requested
 	InitiatePrompt(context.Context, *InitiatePromptRequest) (*InitiatePromptResponse, error)
+	// createPaymentLink method for creating payment links as requested
+	CreatePaymentLink(context.Context, *CreatePaymentLinkRequest) (*CreatePaymentLinkResponse, error)
 	// Status request to determine if payment is prepared or released
 	Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error)
 	// Status update request to allow continuation of payment processing
@@ -199,6 +214,9 @@ func (UnimplementedPaymentServiceServer) Receive(context.Context, *ReceiveReques
 }
 func (UnimplementedPaymentServiceServer) InitiatePrompt(context.Context, *InitiatePromptRequest) (*InitiatePromptResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InitiatePrompt not implemented")
+}
+func (UnimplementedPaymentServiceServer) CreatePaymentLink(context.Context, *CreatePaymentLinkRequest) (*CreatePaymentLinkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentLink not implemented")
 }
 func (UnimplementedPaymentServiceServer) Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Status not implemented")
@@ -286,6 +304,24 @@ func _PaymentService_InitiatePrompt_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentServiceServer).InitiatePrompt(ctx, req.(*InitiatePromptRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_CreatePaymentLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePaymentLinkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).CreatePaymentLink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_CreatePaymentLink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).CreatePaymentLink(ctx, req.(*CreatePaymentLinkRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -391,6 +427,10 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "InitiatePrompt",
 			Handler:    _PaymentService_InitiatePrompt_Handler,
+		},
+		{
+			MethodName: "CreatePaymentLink",
+			Handler:    _PaymentService_CreatePaymentLink_Handler,
 		},
 		{
 			MethodName: "Status",
