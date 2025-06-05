@@ -90,6 +90,11 @@ func (pc *PaymentClient) InitiatePrompt(ctx context.Context, message *InitiatePr
 	return pc.Client.InitiatePrompt(ctx, message)
 }
 
+// createPaymentLink method for creating payment links as requested
+func (pc *PaymentClient) CreatePaymentLink(ctx context.Context, message *CreatePaymentLinkRequest) (*CreatePaymentLinkResponse, error) {
+	return pc.Client.CreatePaymentLink(ctx, message)
+}
+
 // status check method for checking payments status as requested
 func (pc *PaymentClient) Status(ctx context.Context, id string) (*commonv1.StatusResponse, error) {
 	statusCheckRequest := commonv1.StatusRequest{
