@@ -1364,9 +1364,9 @@ const file_payment_v1_payment_proto_rawDesc = "" +
 	"\rfirst_address\x18\x02 \x01(\tR\ffirstAddress\x12!\n" +
 	"\fcountry_code\x18\x03 \x01(\tR\vcountryCode\x12+\n" +
 	"\x12postal_or_zip_code\x18\x04 \x01(\tR\x0fpostalOrZipCode\x122\n" +
-	"\x15customer_external_ref\x18\x05 \x01(\tR\x13customerExternalRef\"\xa3\x03\n" +
-	"\vPaymentLink\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
+	"\x15customer_external_ref\x18\x05 \x01(\tR\x13customerExternalRef\"\xc0\x03\n" +
+	"\vPaymentLink\x12+\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1f\n" +
 	"\vexpiry_date\x18\x02 \x01(\tR\n" +
 	"expiryDate\x12\x1b\n" +
 	"\tsale_date\x18\x03 \x01(\tR\bsaleDate\x12*\n" +

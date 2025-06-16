@@ -197,62 +197,62 @@ public final class PaymentProto {
       "s\030\002 \001(\tR\014firstAddress\022!\n\014country_code\030\003 " +
       "\001(\tR\013countryCode\022+\n\022postal_or_zip_code\030\004" +
       " \001(\tR\017postalOrZipCode\0222\n\025customer_extern" +
-      "al_ref\030\005 \001(\tR\023customerExternalRef\"\243\003\n\013Pa" +
-      "ymentLink\022\016\n\002id\030\001 \001(\tR\002id\022\037\n\013expiry_date" +
-      "\030\002 \001(\tR\nexpiryDate\022\033\n\tsale_date\030\003 \001(\tR\010s" +
-      "aleDate\022*\n\021payment_link_type\030\004 \001(\tR\017paym" +
-      "entLinkType\022\033\n\tsale_type\030\005 \001(\tR\010saleType" +
-      "\022\022\n\004name\030\006 \001(\tR\004name\022 \n\013description\030\007 \001(" +
-      "\tR\013description\022!\n\014external_ref\030\010 \001(\tR\013ex" +
-      "ternalRef\022(\n\020payment_link_ref\030\t \001(\tR\016pay" +
-      "mentLinkRef\022!\n\014redirect_url\030\n \001(\tR\013redir" +
-      "ectUrl\022#\n\ramount_option\030\013 \001(\tR\014amountOpt" +
-      "ion\022\026\n\006amount\030\014 \001(\001R\006amount\022\032\n\010currency\030" +
-      "\r \001(\tR\010currency\"\316\001\n\030CreatePaymentLinkReq" +
-      "uest\0222\n\tcustomers\030\001 \003(\0132\024.payment.v1.Cus" +
-      "tomerR\tcustomers\022:\n\014payment_link\030\002 \001(\0132\027" +
-      ".payment.v1.PaymentLinkR\013paymentLink\022B\n\r" +
-      "notifications\030\003 \003(\0162\034.payment.v1.Notific" +
-      "ationTypeR\rnotifications\"J\n\031CreatePaymen" +
-      "tLinkResponse\022-\n\004data\030\001 \001(\0132\031.common.v1." +
-      "StatusResponseR\004data*m\n\020NotificationType" +
-      "\022!\n\035NOTIFICATION_TYPE_UNSPECIFIED\020\000\022\033\n\027N" +
-      "OTIFICATION_TYPE_EMAIL\020\001\022\031\n\025NOTIFICATION" +
-      "_TYPE_SMS\020\0022\203\007\n\016PaymentService\022K\n\004Send\022\027" +
-      ".payment.v1.SendRequest\032\030.payment.v1.Sen" +
-      "dResponse\"\020\202\323\344\223\002\n\"\005/send:\001*\022W\n\007Receive\022\032" +
-      ".payment.v1.ReceiveRequest\032\033.payment.v1." +
-      "ReceiveResponse\"\023\202\323\344\223\002\r\"\010/receive:\001*\022t\n\016" +
-      "InitiatePrompt\022!.payment.v1.InitiateProm" +
-      "ptRequest\032\".payment.v1.InitiatePromptRes" +
-      "ponse\"\033\202\323\344\223\002\025\"\020/initiate/prompt:\001*\022\201\001\n\021C" +
-      "reatePaymentLink\022$.payment.v1.CreatePaym" +
-      "entLinkRequest\032%.payment.v1.CreatePaymen" +
-      "tLinkResponse\"\037\202\323\344\223\002\031\"\024/create-payment-l" +
-      "ink:\001*\022S\n\006Status\022\030.common.v1.StatusReque" +
-      "st\032\031.common.v1.StatusResponse\"\024\202\323\344\223\002\016\022\014/" +
-      "status/{id}\022h\n\014StatusUpdate\022\036.common.v1." +
-      "StatusUpdateRequest\032\037.common.v1.StatusUp" +
-      "dateResponse\"\027\202\323\344\223\002\021\032\014/status/{id}:\001*\022a\n" +
-      "\007Release\022\032.payment.v1.ReleaseRequest\032\033.p" +
-      "ayment.v1.ReleaseResponse\"\035\202\323\344\223\002\027\"\022/send" +
-      "/release/{id}:\001*\022Q\n\006Search\022\030.common.v1.S" +
-      "earchRequest\032\032.payment.v1.SearchResponse" +
-      "\"\017\202\323\344\223\002\t\022\007/search0\001\022\\\n\tReconcile\022\034.payme" +
-      "nt.v1.ReconcileRequest\032\035.payment.v1.Reco" +
-      "ncileResponse\"\022\202\323\344\223\002\014\022\n/reconcileB\273\003\n\037co" +
-      "m.antinvestor.apis.payment.v1B\014PaymentPr" +
-      "otoP\001Z;github.com/antinvestor/apis/go/pa" +
-      "yment/payment/v1;paymentv1\242\002\003PXX\252\002\nPayme" +
-      "nt.V1\312\002\nPayment\\V1\342\002\026Payment\\V1\\GPBMetad" +
-      "ata\352\002\013Payment::V1\222A\202\002\022o\n\017Payment Service" +
-      "\"W\n\020Ant Investor Ltd\022-https://github.com" +
-      "/antinvestor/service-lostid\032\024info@antinv" +
-      "estor.com2\0031.0*\002\001\0022\020application/json:\020ap" +
-      "plication/jsonZY\nW\n\006bearer\022M\010\002\0228Authenti" +
-      "cation token, prefixed by Bearer: Bearer" +
-      " <token>\032\rAuthorization \002b\014\n\n\n\006bearer\022\000b" +
-      "\006proto3"
+      "al_ref\030\005 \001(\tR\023customerExternalRef\"\300\003\n\013Pa" +
+      "ymentLink\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-" +
+      "z_-]{3,20}R\002id\022\037\n\013expiry_date\030\002 \001(\tR\nexp" +
+      "iryDate\022\033\n\tsale_date\030\003 \001(\tR\010saleDate\022*\n\021" +
+      "payment_link_type\030\004 \001(\tR\017paymentLinkType" +
+      "\022\033\n\tsale_type\030\005 \001(\tR\010saleType\022\022\n\004name\030\006 " +
+      "\001(\tR\004name\022 \n\013description\030\007 \001(\tR\013descript" +
+      "ion\022!\n\014external_ref\030\010 \001(\tR\013externalRef\022(" +
+      "\n\020payment_link_ref\030\t \001(\tR\016paymentLinkRef" +
+      "\022!\n\014redirect_url\030\n \001(\tR\013redirectUrl\022#\n\ra" +
+      "mount_option\030\013 \001(\tR\014amountOption\022\026\n\006amou" +
+      "nt\030\014 \001(\001R\006amount\022\032\n\010currency\030\r \001(\tR\010curr" +
+      "ency\"\316\001\n\030CreatePaymentLinkRequest\0222\n\tcus" +
+      "tomers\030\001 \003(\0132\024.payment.v1.CustomerR\tcust" +
+      "omers\022:\n\014payment_link\030\002 \001(\0132\027.payment.v1" +
+      ".PaymentLinkR\013paymentLink\022B\n\rnotificatio" +
+      "ns\030\003 \003(\0162\034.payment.v1.NotificationTypeR\r" +
+      "notifications\"J\n\031CreatePaymentLinkRespon" +
+      "se\022-\n\004data\030\001 \001(\0132\031.common.v1.StatusRespo" +
+      "nseR\004data*m\n\020NotificationType\022!\n\035NOTIFIC" +
+      "ATION_TYPE_UNSPECIFIED\020\000\022\033\n\027NOTIFICATION" +
+      "_TYPE_EMAIL\020\001\022\031\n\025NOTIFICATION_TYPE_SMS\020\002" +
+      "2\203\007\n\016PaymentService\022K\n\004Send\022\027.payment.v1" +
+      ".SendRequest\032\030.payment.v1.SendResponse\"\020" +
+      "\202\323\344\223\002\n\"\005/send:\001*\022W\n\007Receive\022\032.payment.v1" +
+      ".ReceiveRequest\032\033.payment.v1.ReceiveResp" +
+      "onse\"\023\202\323\344\223\002\r\"\010/receive:\001*\022t\n\016InitiatePro" +
+      "mpt\022!.payment.v1.InitiatePromptRequest\032\"" +
+      ".payment.v1.InitiatePromptResponse\"\033\202\323\344\223" +
+      "\002\025\"\020/initiate/prompt:\001*\022\201\001\n\021CreatePaymen" +
+      "tLink\022$.payment.v1.CreatePaymentLinkRequ" +
+      "est\032%.payment.v1.CreatePaymentLinkRespon" +
+      "se\"\037\202\323\344\223\002\031\"\024/create-payment-link:\001*\022S\n\006S" +
+      "tatus\022\030.common.v1.StatusRequest\032\031.common" +
+      ".v1.StatusResponse\"\024\202\323\344\223\002\016\022\014/status/{id}" +
+      "\022h\n\014StatusUpdate\022\036.common.v1.StatusUpdat" +
+      "eRequest\032\037.common.v1.StatusUpdateRespons" +
+      "e\"\027\202\323\344\223\002\021\032\014/status/{id}:\001*\022a\n\007Release\022\032." +
+      "payment.v1.ReleaseRequest\032\033.payment.v1.R" +
+      "eleaseResponse\"\035\202\323\344\223\002\027\"\022/send/release/{i" +
+      "d}:\001*\022Q\n\006Search\022\030.common.v1.SearchReques" +
+      "t\032\032.payment.v1.SearchResponse\"\017\202\323\344\223\002\t\022\007/" +
+      "search0\001\022\\\n\tReconcile\022\034.payment.v1.Recon" +
+      "cileRequest\032\035.payment.v1.ReconcileRespon" +
+      "se\"\022\202\323\344\223\002\014\022\n/reconcileB\273\003\n\037com.antinvest" +
+      "or.apis.payment.v1B\014PaymentProtoP\001Z;gith" +
+      "ub.com/antinvestor/apis/go/payment/payme" +
+      "nt/v1;paymentv1\242\002\003PXX\252\002\nPayment.V1\312\002\nPay" +
+      "ment\\V1\342\002\026Payment\\V1\\GPBMetadata\352\002\013Payme" +
+      "nt::V1\222A\202\002\022o\n\017Payment Service\"W\n\020Ant Inv" +
+      "estor Ltd\022-https://github.com/antinvesto" +
+      "r/service-lostid\032\024info@antinvestor.com2\003" +
+      "1.0*\002\001\0022\020application/json:\020application/j" +
+      "sonZY\nW\n\006bearer\022M\010\002\0228Authentication toke" +
+      "n, prefixed by Bearer: Bearer <token>\032\rA" +
+      "uthorization \002b\014\n\n\n\006bearer\022\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
