@@ -10,6 +10,8 @@ github.com/antinvestor/apis/go/common v1.34.0 h1:JwU0IIhL7keqpgXo/PZmDPD4YEP7ja1
 github.com/antinvestor/apis/go/common v1.34.0/go.mod h1:V8NHLwhxnqHGksoUAdTT34sf+hcyzhJerY+wNbqF4BI=
 github.com/antinvestor/apis/go/common v1.34.12 h1:nQH3sahhQwbSVMalB0kU80srYEFCXjv6IdUnPVB1EoU=
 github.com/antinvestor/apis/go/common v1.34.12/go.mod h1:EdvrP7dMo2/xQT7XgJQcNcrU6FCL5chXoWSVko3KRzY=
+github.com/antinvestor/apis/go/common v1.34.17 h1:w0dMbBQl3QCKxsDL5sIjEtsI2OkgWnd+drZP3+irX7E=
+github.com/antinvestor/apis/go/common v1.34.17/go.mod h1:WPCnhJSJgilXI7jGQyu01DU/eE2dD3drUoiLFK0haPk=
 github.com/go-logr/logr v1.4.2 h1:6pFjapn8bFcIbiKo3XT4j/BhANplGihG6tvd+8rYgrY=
 github.com/go-logr/logr v1.4.2/go.mod h1:9T104GzyrTigFIr8wt5mBrctHMim0Nb2HLGrmQ40KvY=
 github.com/go-logr/stdr v1.2.2 h1:hSWxHoqTgW2S2qGc0LTAI563KZ5YKYRhT3MFKZMbjag=
