@@ -5,7 +5,7 @@ go 1.24
 //replace github.com/antinvestor/apis/go/common => ../common
 
 require (
-	github.com/antinvestor/apis/go/common v1.34.0
+	github.com/antinvestor/apis/go/common v1.34.12
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3
 	go.uber.org/mock v0.5.2
 	google.golang.org/genproto v0.0.0-20250603155806-513f23925822
@@ -15,9 +15,9 @@ require (
 )
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.6-20250425153114-8976f5be98c1.1 // indirect
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.6-20250603165357-b52ab10f4468.1 // indirect
 	golang.org/x/net v0.40.0 // indirect
-	golang.org/x/oauth2 v0.29.0 // indirect
+	golang.org/x/oauth2 v0.30.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/text v0.25.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250528174236-200df99c418a // indirect
