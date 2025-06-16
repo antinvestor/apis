@@ -183,8 +183,8 @@ public final class PaymentProto {
       "e\022)\n\006status\030\010 \001(\0162\021.common.v1.STATUSR\006st" +
       "atus\022\024\n\005route\030\t \001(\tR\005route\022@\n\021recipient_" +
       "account\030\n \001(\0132\023.payment.v1.AccountR\020reci" +
-      "pientAccount\022B\n\005Extra\030\013 \003(\0132,.payment.v1" +
-      ".InitiatePromptRequest.ExtraEntryR\005Extra" +
+      "pientAccount\022B\n\005extra\030\013 \003(\0132,.payment.v1" +
+      ".InitiatePromptRequest.ExtraEntryR\005extra" +
       "\0328\n\nExtraEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005valu" +
       "e\030\002 \001(\tR\005value:\0028\001\"G\n\026InitiatePromptResp" +
       "onse\022-\n\004data\030\001 \001(\0132\031.common.v1.StatusRes" +

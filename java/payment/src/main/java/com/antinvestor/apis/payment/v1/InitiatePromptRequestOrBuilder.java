@@ -165,7 +165,7 @@ public interface InitiatePromptRequestOrBuilder extends
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
    */
   int getExtraCount();
   /**
@@ -173,7 +173,7 @@ public interface InitiatePromptRequestOrBuilder extends
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
    */
   boolean containsExtra(
       java.lang.String key);
@@ -188,7 +188,7 @@ public interface InitiatePromptRequestOrBuilder extends
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
   getExtraMap();
@@ -197,7 +197,7 @@ public interface InitiatePromptRequestOrBuilder extends
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
    */
   /* nullable */
 java.lang.String getExtraOrDefault(
@@ -209,7 +209,7 @@ java.lang.String defaultValue);
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
    */
   java.lang.String getExtraOrThrow(
       java.lang.String key);

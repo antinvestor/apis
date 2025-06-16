@@ -134,7 +134,7 @@ message InitiatePromptRequest {
   // Merchant information for the payment
   Account recipient_account = 10;
   // Any additional metadata (e.g., notes, tags, correlation keys)
-  map<string, string> Extra = 11;
+  map<string, string> extra = 11;
 }
 
 message InitiatePromptResponse {

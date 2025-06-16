@@ -709,7 +709,7 @@ type InitiatePromptRequest struct {
 	// Merchant information for the payment
 	RecipientAccount *Account `protobuf:"bytes,10,opt,name=recipient_account,json=recipientAccount,proto3" json:"recipient_account,omitempty"`
 	// Any additional metadata (e.g., notes, tags, correlation keys)
-	Extra         map[string]string `protobuf:"bytes,11,rep,name=Extra,proto3" json:"Extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extra         map[string]string `protobuf:"bytes,11,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1348,7 +1348,7 @@ const file_payment_v1_payment_proto_rawDesc = "" +
 	"\x05route\x18\t \x01(\tR\x05route\x12@\n" +
 	"\x11recipient_account\x18\n" +
 	" \x01(\v2\x13.payment.v1.AccountR\x10recipientAccount\x12B\n" +
-	"\x05Extra\x18\v \x03(\v2,.payment.v1.InitiatePromptRequest.ExtraEntryR\x05Extra\x1a8\n" +
+	"\x05extra\x18\v \x03(\v2,.payment.v1.InitiatePromptRequest.ExtraEntryR\x05extra\x1a8\n" +
 	"\n" +
 	"ExtraEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -1481,7 +1481,7 @@ var file_payment_v1_payment_proto_depIdxs = []int32{
 	22, // 17: payment.v1.InitiatePromptRequest.state:type_name -> common.v1.STATE
 	23, // 18: payment.v1.InitiatePromptRequest.status:type_name -> common.v1.STATUS
 	9,  // 19: payment.v1.InitiatePromptRequest.recipient_account:type_name -> payment.v1.Account
-	19, // 20: payment.v1.InitiatePromptRequest.Extra:type_name -> payment.v1.InitiatePromptRequest.ExtraEntry
+	19, // 20: payment.v1.InitiatePromptRequest.extra:type_name -> payment.v1.InitiatePromptRequest.ExtraEntry
 	24, // 21: payment.v1.InitiatePromptResponse.data:type_name -> common.v1.StatusResponse
 	24, // 22: payment.v1.ReleaseResponse.data:type_name -> common.v1.StatusResponse
 	20, // 23: payment.v1.Customer.source:type_name -> common.v1.ContactLink

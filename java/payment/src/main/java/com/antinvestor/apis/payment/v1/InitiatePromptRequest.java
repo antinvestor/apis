@@ -409,7 +409,7 @@ private static final long serialVersionUID = 0L;
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
    */
   @java.lang.Override
   public boolean containsExtra(
@@ -430,7 +430,7 @@ private static final long serialVersionUID = 0L;
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
    */
   @java.lang.Override
   public java.util.Map<java.lang.String, java.lang.String> getExtraMap() {
@@ -441,7 +441,7 @@ private static final long serialVersionUID = 0L;
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
    */
   @java.lang.Override
   public /* nullable */
@@ -459,7 +459,7 @@ java.lang.String defaultValue) {
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
    */
   @java.lang.Override
   public java.lang.String getExtraOrThrow(
@@ -2064,7 +2064,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
      */
     @java.lang.Override
     public boolean containsExtra(
@@ -2085,7 +2085,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
      */
     @java.lang.Override
     public java.util.Map<java.lang.String, java.lang.String> getExtraMap() {
@@ -2096,7 +2096,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
      */
     @java.lang.Override
     public /* nullable */
@@ -2114,7 +2114,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
      */
     @java.lang.Override
     public java.lang.String getExtraOrThrow(
@@ -2138,7 +2138,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
      */
     public Builder removeExtra(
         java.lang.String key) {
@@ -2161,7 +2161,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
      */
     public Builder putExtra(
         java.lang.String key,
@@ -2178,7 +2178,7 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
+     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
      */
     public Builder putAllExtra(
         java.util.Map<java.lang.String, java.lang.String> values) {

@@ -692,7 +692,7 @@
           "$ref": "#/definitions/payment.v1.Account",
           "title": "Merchant information for the payment"
         },
-        "Extra": {
+        "extra": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
