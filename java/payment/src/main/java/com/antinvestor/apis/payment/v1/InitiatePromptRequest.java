@@ -47,7 +47,7 @@ private static final long serialVersionUID = 0L;
       int number) {
     switch (number) {
       case 11:
-        return internalGetExtras();
+        return internalGetExtra();
       default:
         throw new RuntimeException(
             "Invalid map field number: " + number);
@@ -340,14 +340,14 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int RECIPIENTACCOUNT_FIELD_NUMBER = 10;
+  public static final int RECIPIENT_ACCOUNT_FIELD_NUMBER = 10;
   private com.antinvestor.apis.payment.v1.Account recipientAccount_;
   /**
    * <pre>
    * Merchant information for the payment
    * </pre>
    *
-   * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+   * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
    * @return Whether the recipientAccount field is set.
    */
   @java.lang.Override
@@ -359,7 +359,7 @@ private static final long serialVersionUID = 0L;
    * Merchant information for the payment
    * </pre>
    *
-   * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+   * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
    * @return The recipientAccount.
    */
   @java.lang.Override
@@ -371,20 +371,20 @@ private static final long serialVersionUID = 0L;
    * Merchant information for the payment
    * </pre>
    *
-   * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+   * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
    */
   @java.lang.Override
   public com.antinvestor.apis.payment.v1.AccountOrBuilder getRecipientAccountOrBuilder() {
     return recipientAccount_ == null ? com.antinvestor.apis.payment.v1.Account.getDefaultInstance() : recipientAccount_;
   }
 
-  public static final int EXTRAS_FIELD_NUMBER = 11;
-  private static final class ExtrasDefaultEntryHolder {
+  public static final int EXTRA_FIELD_NUMBER = 11;
+  private static final class ExtraDefaultEntryHolder {
     static final com.google.protobuf.MapEntry<
         java.lang.String, java.lang.String> defaultEntry =
             com.google.protobuf.MapEntry
             .<java.lang.String, java.lang.String>newDefaultInstance(
-                com.antinvestor.apis.payment.v1.PaymentProto.internal_static_payment_v1_InitiatePromptRequest_ExtrasEntry_descriptor, 
+                com.antinvestor.apis.payment.v1.PaymentProto.internal_static_payment_v1_InitiatePromptRequest_ExtraEntry_descriptor, 
                 com.google.protobuf.WireFormat.FieldType.STRING,
                 "",
                 com.google.protobuf.WireFormat.FieldType.STRING,
@@ -392,66 +392,66 @@ private static final long serialVersionUID = 0L;
   }
   @SuppressWarnings("serial")
   private com.google.protobuf.MapField<
-      java.lang.String, java.lang.String> extras_;
+      java.lang.String, java.lang.String> extra_;
   private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-  internalGetExtras() {
-    if (extras_ == null) {
+  internalGetExtra() {
+    if (extra_ == null) {
       return com.google.protobuf.MapField.emptyMapField(
-          ExtrasDefaultEntryHolder.defaultEntry);
+          ExtraDefaultEntryHolder.defaultEntry);
     }
-    return extras_;
+    return extra_;
   }
-  public int getExtrasCount() {
-    return internalGetExtras().getMap().size();
+  public int getExtraCount() {
+    return internalGetExtra().getMap().size();
   }
   /**
    * <pre>
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
    */
   @java.lang.Override
-  public boolean containsExtras(
+  public boolean containsExtra(
       java.lang.String key) {
     if (key == null) { throw new NullPointerException("map key"); }
-    return internalGetExtras().getMap().containsKey(key);
+    return internalGetExtra().getMap().containsKey(key);
   }
   /**
-   * Use {@link #getExtrasMap()} instead.
+   * Use {@link #getExtraMap()} instead.
    */
   @java.lang.Override
   @java.lang.Deprecated
-  public java.util.Map<java.lang.String, java.lang.String> getExtras() {
-    return getExtrasMap();
+  public java.util.Map<java.lang.String, java.lang.String> getExtra() {
+    return getExtraMap();
   }
   /**
    * <pre>
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
    */
   @java.lang.Override
-  public java.util.Map<java.lang.String, java.lang.String> getExtrasMap() {
-    return internalGetExtras().getMap();
+  public java.util.Map<java.lang.String, java.lang.String> getExtraMap() {
+    return internalGetExtra().getMap();
   }
   /**
    * <pre>
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
    */
   @java.lang.Override
   public /* nullable */
-java.lang.String getExtrasOrDefault(
+java.lang.String getExtraOrDefault(
       java.lang.String key,
       /* nullable */
 java.lang.String defaultValue) {
     if (key == null) { throw new NullPointerException("map key"); }
     java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetExtras().getMap();
+        internalGetExtra().getMap();
     return map.containsKey(key) ? map.get(key) : defaultValue;
   }
   /**
@@ -459,14 +459,14 @@ java.lang.String defaultValue) {
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
    */
   @java.lang.Override
-  public java.lang.String getExtrasOrThrow(
+  public java.lang.String getExtraOrThrow(
       java.lang.String key) {
     if (key == null) { throw new NullPointerException("map key"); }
     java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetExtras().getMap();
+        internalGetExtra().getMap();
     if (!map.containsKey(key)) {
       throw new java.lang.IllegalArgumentException();
     }
@@ -520,8 +520,8 @@ java.lang.String defaultValue) {
     com.google.protobuf.GeneratedMessage
       .serializeStringMapTo(
         output,
-        internalGetExtras(),
-        ExtrasDefaultEntryHolder.defaultEntry,
+        internalGetExtra(),
+        ExtraDefaultEntryHolder.defaultEntry,
         11);
     getUnknownFields().writeTo(output);
   }
@@ -569,14 +569,14 @@ java.lang.String defaultValue) {
         .computeMessageSize(10, getRecipientAccount());
     }
     for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-         : internalGetExtras().getMap().entrySet()) {
+         : internalGetExtra().getMap().entrySet()) {
       com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-      extras__ = ExtrasDefaultEntryHolder.defaultEntry.newBuilderForType()
+      extra__ = ExtraDefaultEntryHolder.defaultEntry.newBuilderForType()
           .setKey(entry.getKey())
           .setValue(entry.getValue())
           .build();
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(11, extras__);
+          .computeMessageSize(11, extra__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -623,8 +623,8 @@ java.lang.String defaultValue) {
       if (!getRecipientAccount()
           .equals(other.getRecipientAccount())) return false;
     }
-    if (!internalGetExtras().equals(
-        other.internalGetExtras())) return false;
+    if (!internalGetExtra().equals(
+        other.internalGetExtra())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -661,12 +661,12 @@ java.lang.String defaultValue) {
     hash = (37 * hash) + ROUTE_FIELD_NUMBER;
     hash = (53 * hash) + getRoute().hashCode();
     if (hasRecipientAccount()) {
-      hash = (37 * hash) + RECIPIENTACCOUNT_FIELD_NUMBER;
+      hash = (37 * hash) + RECIPIENT_ACCOUNT_FIELD_NUMBER;
       hash = (53 * hash) + getRecipientAccount().hashCode();
     }
-    if (!internalGetExtras().getMap().isEmpty()) {
-      hash = (37 * hash) + EXTRAS_FIELD_NUMBER;
-      hash = (53 * hash) + internalGetExtras().hashCode();
+    if (!internalGetExtra().getMap().isEmpty()) {
+      hash = (37 * hash) + EXTRA_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetExtra().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -782,7 +782,7 @@ java.lang.String defaultValue) {
         int number) {
       switch (number) {
         case 11:
-          return internalGetExtras();
+          return internalGetExtra();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -793,7 +793,7 @@ java.lang.String defaultValue) {
         int number) {
       switch (number) {
         case 11:
-          return internalGetMutableExtras();
+          return internalGetMutableExtra();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -856,7 +856,7 @@ java.lang.String defaultValue) {
         recipientAccountBuilder_.dispose();
         recipientAccountBuilder_ = null;
       }
-      internalGetMutableExtras().clear();
+      internalGetMutableExtra().clear();
       return this;
     }
 
@@ -934,8 +934,8 @@ java.lang.String defaultValue) {
         to_bitField0_ |= 0x00000008;
       }
       if (((from_bitField0_ & 0x00000400) != 0)) {
-        result.extras_ = internalGetExtras();
-        result.extras_.makeImmutable();
+        result.extra_ = internalGetExtra();
+        result.extra_.makeImmutable();
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -990,8 +990,8 @@ java.lang.String defaultValue) {
       if (other.hasRecipientAccount()) {
         mergeRecipientAccount(other.getRecipientAccount());
       }
-      internalGetMutableExtras().mergeFrom(
-          other.internalGetExtras());
+      internalGetMutableExtra().mergeFrom(
+          other.internalGetExtra());
       bitField0_ |= 0x00000400;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -1079,10 +1079,10 @@ java.lang.String defaultValue) {
             } // case 82
             case 90: {
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              extras__ = input.readMessage(
-                  ExtrasDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              internalGetMutableExtras().getMutableMap().put(
-                  extras__.getKey(), extras__.getValue());
+              extra__ = input.readMessage(
+                  ExtraDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              internalGetMutableExtra().getMutableMap().put(
+                  extra__.getKey(), extra__.getValue());
               bitField0_ |= 0x00000400;
               break;
             } // case 90
@@ -1884,7 +1884,7 @@ java.lang.String defaultValue) {
      * Merchant information for the payment
      * </pre>
      *
-     * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+     * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
      * @return Whether the recipientAccount field is set.
      */
     public boolean hasRecipientAccount() {
@@ -1895,7 +1895,7 @@ java.lang.String defaultValue) {
      * Merchant information for the payment
      * </pre>
      *
-     * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+     * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
      * @return The recipientAccount.
      */
     public com.antinvestor.apis.payment.v1.Account getRecipientAccount() {
@@ -1910,7 +1910,7 @@ java.lang.String defaultValue) {
      * Merchant information for the payment
      * </pre>
      *
-     * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+     * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
      */
     public Builder setRecipientAccount(com.antinvestor.apis.payment.v1.Account value) {
       if (recipientAccountBuilder_ == null) {
@@ -1930,7 +1930,7 @@ java.lang.String defaultValue) {
      * Merchant information for the payment
      * </pre>
      *
-     * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+     * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
      */
     public Builder setRecipientAccount(
         com.antinvestor.apis.payment.v1.Account.Builder builderForValue) {
@@ -1948,7 +1948,7 @@ java.lang.String defaultValue) {
      * Merchant information for the payment
      * </pre>
      *
-     * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+     * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
      */
     public Builder mergeRecipientAccount(com.antinvestor.apis.payment.v1.Account value) {
       if (recipientAccountBuilder_ == null) {
@@ -1973,7 +1973,7 @@ java.lang.String defaultValue) {
      * Merchant information for the payment
      * </pre>
      *
-     * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+     * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
      */
     public Builder clearRecipientAccount() {
       bitField0_ = (bitField0_ & ~0x00000200);
@@ -1990,7 +1990,7 @@ java.lang.String defaultValue) {
      * Merchant information for the payment
      * </pre>
      *
-     * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+     * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
      */
     public com.antinvestor.apis.payment.v1.Account.Builder getRecipientAccountBuilder() {
       bitField0_ |= 0x00000200;
@@ -2002,7 +2002,7 @@ java.lang.String defaultValue) {
      * Merchant information for the payment
      * </pre>
      *
-     * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+     * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
      */
     public com.antinvestor.apis.payment.v1.AccountOrBuilder getRecipientAccountOrBuilder() {
       if (recipientAccountBuilder_ != null) {
@@ -2017,7 +2017,7 @@ java.lang.String defaultValue) {
      * Merchant information for the payment
      * </pre>
      *
-     * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+     * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
         com.antinvestor.apis.payment.v1.Account, com.antinvestor.apis.payment.v1.Account.Builder, com.antinvestor.apis.payment.v1.AccountOrBuilder> 
@@ -2034,79 +2034,79 @@ java.lang.String defaultValue) {
     }
 
     private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> extras_;
+        java.lang.String, java.lang.String> extra_;
     private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetExtras() {
-      if (extras_ == null) {
+        internalGetExtra() {
+      if (extra_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
-            ExtrasDefaultEntryHolder.defaultEntry);
+            ExtraDefaultEntryHolder.defaultEntry);
       }
-      return extras_;
+      return extra_;
     }
     private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetMutableExtras() {
-      if (extras_ == null) {
-        extras_ = com.google.protobuf.MapField.newMapField(
-            ExtrasDefaultEntryHolder.defaultEntry);
+        internalGetMutableExtra() {
+      if (extra_ == null) {
+        extra_ = com.google.protobuf.MapField.newMapField(
+            ExtraDefaultEntryHolder.defaultEntry);
       }
-      if (!extras_.isMutable()) {
-        extras_ = extras_.copy();
+      if (!extra_.isMutable()) {
+        extra_ = extra_.copy();
       }
       bitField0_ |= 0x00000400;
       onChanged();
-      return extras_;
+      return extra_;
     }
-    public int getExtrasCount() {
-      return internalGetExtras().getMap().size();
+    public int getExtraCount() {
+      return internalGetExtra().getMap().size();
     }
     /**
      * <pre>
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
      */
     @java.lang.Override
-    public boolean containsExtras(
+    public boolean containsExtra(
         java.lang.String key) {
       if (key == null) { throw new NullPointerException("map key"); }
-      return internalGetExtras().getMap().containsKey(key);
+      return internalGetExtra().getMap().containsKey(key);
     }
     /**
-     * Use {@link #getExtrasMap()} instead.
+     * Use {@link #getExtraMap()} instead.
      */
     @java.lang.Override
     @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getExtras() {
-      return getExtrasMap();
+    public java.util.Map<java.lang.String, java.lang.String> getExtra() {
+      return getExtraMap();
     }
     /**
      * <pre>
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
      */
     @java.lang.Override
-    public java.util.Map<java.lang.String, java.lang.String> getExtrasMap() {
-      return internalGetExtras().getMap();
+    public java.util.Map<java.lang.String, java.lang.String> getExtraMap() {
+      return internalGetExtra().getMap();
     }
     /**
      * <pre>
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
      */
     @java.lang.Override
     public /* nullable */
-java.lang.String getExtrasOrDefault(
+java.lang.String getExtraOrDefault(
         java.lang.String key,
         /* nullable */
 java.lang.String defaultValue) {
       if (key == null) { throw new NullPointerException("map key"); }
       java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetExtras().getMap();
+          internalGetExtra().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
@@ -2114,22 +2114,22 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
      */
     @java.lang.Override
-    public java.lang.String getExtrasOrThrow(
+    public java.lang.String getExtraOrThrow(
         java.lang.String key) {
       if (key == null) { throw new NullPointerException("map key"); }
       java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetExtras().getMap();
+          internalGetExtra().getMap();
       if (!map.containsKey(key)) {
         throw new java.lang.IllegalArgumentException();
       }
       return map.get(key);
     }
-    public Builder clearExtras() {
+    public Builder clearExtra() {
       bitField0_ = (bitField0_ & ~0x00000400);
-      internalGetMutableExtras().getMutableMap()
+      internalGetMutableExtra().getMutableMap()
           .clear();
       return this;
     }
@@ -2138,12 +2138,12 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
      */
-    public Builder removeExtras(
+    public Builder removeExtra(
         java.lang.String key) {
       if (key == null) { throw new NullPointerException("map key"); }
-      internalGetMutableExtras().getMutableMap()
+      internalGetMutableExtra().getMutableMap()
           .remove(key);
       return this;
     }
@@ -2152,23 +2152,23 @@ java.lang.String defaultValue) {
      */
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
-        getMutableExtras() {
+        getMutableExtra() {
       bitField0_ |= 0x00000400;
-      return internalGetMutableExtras().getMutableMap();
+      return internalGetMutableExtra().getMutableMap();
     }
     /**
      * <pre>
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
      */
-    public Builder putExtras(
+    public Builder putExtra(
         java.lang.String key,
         java.lang.String value) {
       if (key == null) { throw new NullPointerException("map key"); }
       if (value == null) { throw new NullPointerException("map value"); }
-      internalGetMutableExtras().getMutableMap()
+      internalGetMutableExtra().getMutableMap()
           .put(key, value);
       bitField0_ |= 0x00000400;
       return this;
@@ -2178,11 +2178,11 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+     * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
      */
-    public Builder putAllExtras(
+    public Builder putAllExtra(
         java.util.Map<java.lang.String, java.lang.String> values) {
-      internalGetMutableExtras().getMutableMap()
+      internalGetMutableExtra().getMutableMap()
           .putAll(values);
       bitField0_ |= 0x00000400;
       return this;

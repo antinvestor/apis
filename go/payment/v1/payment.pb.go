@@ -707,9 +707,9 @@ type InitiatePromptRequest struct {
 	// Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
 	Route string `protobuf:"bytes,9,opt,name=route,proto3" json:"route,omitempty"`
 	// Merchant information for the payment
-	RecipientAccount *Account `protobuf:"bytes,10,opt,name=recipientAccount,proto3" json:"recipientAccount,omitempty"`
+	RecipientAccount *Account `protobuf:"bytes,10,opt,name=recipient_account,json=recipientAccount,proto3" json:"recipient_account,omitempty"`
 	// Any additional metadata (e.g., notes, tags, correlation keys)
-	Extras        map[string]string `protobuf:"bytes,11,rep,name=Extras,proto3" json:"Extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extra         map[string]string `protobuf:"bytes,11,rep,name=Extra,proto3" json:"Extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -814,9 +814,9 @@ func (x *InitiatePromptRequest) GetRecipientAccount() *Account {
 	return nil
 }
 
-func (x *InitiatePromptRequest) GetExtras() map[string]string {
+func (x *InitiatePromptRequest) GetExtra() map[string]string {
 	if x != nil {
-		return x.Extras
+		return x.Extra
 	}
 	return nil
 }
@@ -1335,7 +1335,7 @@ const file_payment_v1_payment_proto_rawDesc = "" +
 	"\aAccount\x12%\n" +
 	"\x0eaccount_number\x18\x01 \x01(\tR\raccountNumber\x12!\n" +
 	"\fcountry_code\x18\x02 \x01(\tR\vcountryCode\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\"\xa5\x04\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\"\xa2\x04\n" +
 	"\x15InitiatePromptRequest\x12.\n" +
 	"\x06source\x18\x01 \x01(\v2\x16.common.v1.ContactLinkR\x06source\x124\n" +
 	"\trecipient\x18\x02 \x01(\v2\x16.common.v1.ContactLinkR\trecipient\x12*\n" +
@@ -1345,11 +1345,12 @@ const file_payment_v1_payment_proto_rawDesc = "" +
 	"\x02id\x18\x06 \x01(\tR\x02id\x12&\n" +
 	"\x05state\x18\a \x01(\x0e2\x10.common.v1.STATER\x05state\x12)\n" +
 	"\x06status\x18\b \x01(\x0e2\x11.common.v1.STATUSR\x06status\x12\x14\n" +
-	"\x05route\x18\t \x01(\tR\x05route\x12?\n" +
-	"\x10recipientAccount\x18\n" +
-	" \x01(\v2\x13.payment.v1.AccountR\x10recipientAccount\x12E\n" +
-	"\x06Extras\x18\v \x03(\v2-.payment.v1.InitiatePromptRequest.ExtrasEntryR\x06Extras\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
+	"\x05route\x18\t \x01(\tR\x05route\x12@\n" +
+	"\x11recipient_account\x18\n" +
+	" \x01(\v2\x13.payment.v1.AccountR\x10recipientAccount\x12B\n" +
+	"\x05Extra\x18\v \x03(\v2,.payment.v1.InitiatePromptRequest.ExtraEntryR\x05Extra\x1a8\n" +
+	"\n" +
+	"ExtraEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"G\n" +
 	"\x16InitiatePromptResponse\x12-\n" +
@@ -1448,7 +1449,7 @@ var file_payment_v1_payment_proto_goTypes = []any{
 	(*CreatePaymentLinkRequest)(nil),  // 16: payment.v1.CreatePaymentLinkRequest
 	(*CreatePaymentLinkResponse)(nil), // 17: payment.v1.CreatePaymentLinkResponse
 	nil,                               // 18: payment.v1.Payment.ExtraEntry
-	nil,                               // 19: payment.v1.InitiatePromptRequest.ExtrasEntry
+	nil,                               // 19: payment.v1.InitiatePromptRequest.ExtraEntry
 	(*v1.ContactLink)(nil),            // 20: common.v1.ContactLink
 	(*money.Money)(nil),               // 21: google.type.Money
 	(v1.STATE)(0),                     // 22: common.v1.STATE
@@ -1479,8 +1480,8 @@ var file_payment_v1_payment_proto_depIdxs = []int32{
 	21, // 16: payment.v1.InitiatePromptRequest.amount:type_name -> google.type.Money
 	22, // 17: payment.v1.InitiatePromptRequest.state:type_name -> common.v1.STATE
 	23, // 18: payment.v1.InitiatePromptRequest.status:type_name -> common.v1.STATUS
-	9,  // 19: payment.v1.InitiatePromptRequest.recipientAccount:type_name -> payment.v1.Account
-	19, // 20: payment.v1.InitiatePromptRequest.Extras:type_name -> payment.v1.InitiatePromptRequest.ExtrasEntry
+	9,  // 19: payment.v1.InitiatePromptRequest.recipient_account:type_name -> payment.v1.Account
+	19, // 20: payment.v1.InitiatePromptRequest.Extra:type_name -> payment.v1.InitiatePromptRequest.ExtraEntry
 	24, // 21: payment.v1.InitiatePromptResponse.data:type_name -> common.v1.StatusResponse
 	24, // 22: payment.v1.ReleaseResponse.data:type_name -> common.v1.StatusResponse
 	20, // 23: payment.v1.Customer.source:type_name -> common.v1.ContactLink

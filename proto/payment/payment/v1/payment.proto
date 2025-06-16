@@ -132,7 +132,7 @@ message InitiatePromptRequest {
   // Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
   string route = 9;
   // Merchant information for the payment
-  Account recipientAccount = 10;
+  Account recipient_account = 10;
   // Any additional metadata (e.g., notes, tags, correlation keys)
   map<string, string> Extra = 11;
 }

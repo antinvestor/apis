@@ -138,7 +138,7 @@ public interface InitiatePromptRequestOrBuilder extends
    * Merchant information for the payment
    * </pre>
    *
-   * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+   * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
    * @return Whether the recipientAccount field is set.
    */
   boolean hasRecipientAccount();
@@ -147,7 +147,7 @@ public interface InitiatePromptRequestOrBuilder extends
    * Merchant information for the payment
    * </pre>
    *
-   * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+   * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
    * @return The recipientAccount.
    */
   com.antinvestor.apis.payment.v1.Account getRecipientAccount();
@@ -156,7 +156,7 @@ public interface InitiatePromptRequestOrBuilder extends
    * Merchant information for the payment
    * </pre>
    *
-   * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+   * <code>.payment.v1.Account recipient_account = 10 [json_name = "recipientAccount"];</code>
    */
   com.antinvestor.apis.payment.v1.AccountOrBuilder getRecipientAccountOrBuilder();
 
@@ -165,42 +165,42 @@ public interface InitiatePromptRequestOrBuilder extends
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
    */
-  int getExtrasCount();
+  int getExtraCount();
   /**
    * <pre>
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
    */
-  boolean containsExtras(
+  boolean containsExtra(
       java.lang.String key);
   /**
-   * Use {@link #getExtrasMap()} instead.
+   * Use {@link #getExtraMap()} instead.
    */
   @java.lang.Deprecated
   java.util.Map<java.lang.String, java.lang.String>
-  getExtras();
+  getExtra();
   /**
    * <pre>
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
-  getExtrasMap();
+  getExtraMap();
   /**
    * <pre>
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
    */
   /* nullable */
-java.lang.String getExtrasOrDefault(
+java.lang.String getExtraOrDefault(
       java.lang.String key,
       /* nullable */
 java.lang.String defaultValue);
@@ -209,8 +209,8 @@ java.lang.String defaultValue);
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
+   * <code>map&lt;string, string&gt; Extra = 11 [json_name = "Extra"];</code>
    */
-  java.lang.String getExtrasOrThrow(
+  java.lang.String getExtraOrThrow(
       java.lang.String key);
 }
