@@ -113,7 +113,7 @@ message ReceiveResponse {
   common.v1.StatusResponse data = 1;
 }
 
-message Merchant {
+message Account {
   // Account to be credited once customers make payments
   string account_number = 1;
   string country_code = 2;
@@ -132,9 +132,9 @@ message InitiatePromptRequest {
   // Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
   string route = 9;
   // Merchant information for the payment
-  Merchant merchant = 10;
+  Account recipientAccount = 10;
   // Any additional metadata (e.g., notes, tags, correlation keys)
-  map<string, string> metadata = 11;
+  map<string, string> Extra = 11;
 }
 
 message InitiatePromptResponse {
@@ -186,7 +186,7 @@ message PaymentLink {
   string payment_link_ref = 9;
   string redirect_url = 10;
   string amount_option = 11;
-  double amount = 12;
+  google.type.Money amount = 12;
   string currency = 13;
 }
 

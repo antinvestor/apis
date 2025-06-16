@@ -143,10 +143,19 @@ public interface PaymentLinkOrBuilder extends
       getAmountOptionBytes();
 
   /**
-   * <code>double amount = 12 [json_name = "amount"];</code>
+   * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
+   * @return Whether the amount field is set.
+   */
+  boolean hasAmount();
+  /**
+   * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
    * @return The amount.
    */
-  double getAmount();
+  com.google.type.Money getAmount();
+  /**
+   * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
+   */
+  com.google.type.MoneyOrBuilder getAmountOrBuilder();
 
   /**
    * <code>string currency = 13 [json_name = "currency"];</code>

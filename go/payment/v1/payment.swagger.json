@@ -593,6 +593,21 @@
       },
       "description": "Represents an amount of money with its currency type."
     },
+    "payment.v1.Account": {
+      "type": "object",
+      "properties": {
+        "accountNumber": {
+          "type": "string",
+          "title": "Account to be credited once customers make payments"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "payment.v1.CreatePaymentLinkRequest": {
       "type": "object",
       "properties": {
@@ -673,11 +688,11 @@
           "type": "string",
           "title": "Optional route/hint for processing (e.g., \"M-PESA\", \"RTGS\", \"INTERNAL\")"
         },
-        "merchant": {
-          "$ref": "#/definitions/payment.v1.Merchant",
+        "recipientAccount": {
+          "$ref": "#/definitions/payment.v1.Account",
           "title": "Merchant information for the payment"
         },
-        "metadata": {
+        "Extras": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -691,21 +706,6 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/common.v1.StatusResponse"
-        }
-      }
-    },
-    "payment.v1.Merchant": {
-      "type": "object",
-      "properties": {
-        "accountNumber": {
-          "type": "string",
-          "title": "Account to be credited once customers make payments"
-        },
-        "countryCode": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
         }
       }
     },
@@ -811,8 +811,7 @@
           "type": "string"
         },
         "amount": {
-          "type": "number",
-          "format": "double"
+          "$ref": "#/definitions/google.type.Money"
         },
         "currency": {
           "type": "string"

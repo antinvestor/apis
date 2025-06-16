@@ -55,6 +55,7 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.payment.v1.PaymentLink.class, com.antinvestor.apis.payment.v1.PaymentLink.Builder.class);
   }
 
+  private int bitField0_;
   public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
@@ -485,14 +486,29 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int AMOUNT_FIELD_NUMBER = 12;
-  private double amount_ = 0D;
+  private com.google.type.Money amount_;
   /**
-   * <code>double amount = 12 [json_name = "amount"];</code>
+   * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
+   * @return Whether the amount field is set.
+   */
+  @java.lang.Override
+  public boolean hasAmount() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
    * @return The amount.
    */
   @java.lang.Override
-  public double getAmount() {
-    return amount_;
+  public com.google.type.Money getAmount() {
+    return amount_ == null ? com.google.type.Money.getDefaultInstance() : amount_;
+  }
+  /**
+   * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
+   */
+  @java.lang.Override
+  public com.google.type.MoneyOrBuilder getAmountOrBuilder() {
+    return amount_ == null ? com.google.type.Money.getDefaultInstance() : amount_;
   }
 
   public static final int CURRENCY_FIELD_NUMBER = 13;
@@ -581,8 +597,8 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(amountOption_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 11, amountOption_);
     }
-    if (java.lang.Double.doubleToRawLongBits(amount_) != 0) {
-      output.writeDouble(12, amount_);
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(12, getAmount());
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(currency_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 13, currency_);
@@ -629,9 +645,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(amountOption_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(11, amountOption_);
     }
-    if (java.lang.Double.doubleToRawLongBits(amount_) != 0) {
+    if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(12, amount_);
+        .computeMessageSize(12, getAmount());
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(currency_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(13, currency_);
@@ -673,9 +689,11 @@ private static final long serialVersionUID = 0L;
         .equals(other.getRedirectUrl())) return false;
     if (!getAmountOption()
         .equals(other.getAmountOption())) return false;
-    if (java.lang.Double.doubleToLongBits(getAmount())
-        != java.lang.Double.doubleToLongBits(
-            other.getAmount())) return false;
+    if (hasAmount() != other.hasAmount()) return false;
+    if (hasAmount()) {
+      if (!getAmount()
+          .equals(other.getAmount())) return false;
+    }
     if (!getCurrency()
         .equals(other.getCurrency())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
@@ -711,9 +729,10 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getRedirectUrl().hashCode();
     hash = (37 * hash) + AMOUNT_OPTION_FIELD_NUMBER;
     hash = (53 * hash) + getAmountOption().hashCode();
-    hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        java.lang.Double.doubleToLongBits(getAmount()));
+    if (hasAmount()) {
+      hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
+      hash = (53 * hash) + getAmount().hashCode();
+    }
     hash = (37 * hash) + CURRENCY_FIELD_NUMBER;
     hash = (53 * hash) + getCurrency().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
@@ -835,13 +854,19 @@ private static final long serialVersionUID = 0L;
 
     // Construct using com.antinvestor.apis.payment.v1.PaymentLink.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessage
+              .alwaysUseFieldBuilders) {
+        internalGetAmountFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -858,7 +883,11 @@ private static final long serialVersionUID = 0L;
       paymentLinkRef_ = "";
       redirectUrl_ = "";
       amountOption_ = "";
-      amount_ = 0D;
+      amount_ = null;
+      if (amountBuilder_ != null) {
+        amountBuilder_.dispose();
+        amountBuilder_ = null;
+      }
       currency_ = "";
       return this;
     }
@@ -926,12 +955,17 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000400) != 0)) {
         result.amountOption_ = amountOption_;
       }
+      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000800) != 0)) {
-        result.amount_ = amount_;
+        result.amount_ = amountBuilder_ == null
+            ? amount_
+            : amountBuilder_.build();
+        to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00001000) != 0)) {
         result.currency_ = currency_;
       }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -1001,8 +1035,8 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000400;
         onChanged();
       }
-      if (java.lang.Double.doubleToRawLongBits(other.getAmount()) != 0) {
-        setAmount(other.getAmount());
+      if (other.hasAmount()) {
+        mergeAmount(other.getAmount());
       }
       if (!other.getCurrency().isEmpty()) {
         currency_ = other.currency_;
@@ -1090,11 +1124,13 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000400;
               break;
             } // case 90
-            case 97: {
-              amount_ = input.readDouble();
+            case 98: {
+              input.readMessage(
+                  internalGetAmountFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000800;
               break;
-            } // case 97
+            } // case 98
             case 106: {
               currency_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00001000;
@@ -1909,36 +1945,125 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private double amount_ ;
+    private com.google.type.Money amount_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> amountBuilder_;
     /**
-     * <code>double amount = 12 [json_name = "amount"];</code>
-     * @return The amount.
+     * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
+     * @return Whether the amount field is set.
      */
-    @java.lang.Override
-    public double getAmount() {
-      return amount_;
+    public boolean hasAmount() {
+      return ((bitField0_ & 0x00000800) != 0);
     }
     /**
-     * <code>double amount = 12 [json_name = "amount"];</code>
-     * @param value The amount to set.
-     * @return This builder for chaining.
+     * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
+     * @return The amount.
      */
-    public Builder setAmount(double value) {
-
-      amount_ = value;
+    public com.google.type.Money getAmount() {
+      if (amountBuilder_ == null) {
+        return amount_ == null ? com.google.type.Money.getDefaultInstance() : amount_;
+      } else {
+        return amountBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
+     */
+    public Builder setAmount(com.google.type.Money value) {
+      if (amountBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        amount_ = value;
+      } else {
+        amountBuilder_.setMessage(value);
+      }
       bitField0_ |= 0x00000800;
       onChanged();
       return this;
     }
     /**
-     * <code>double amount = 12 [json_name = "amount"];</code>
-     * @return This builder for chaining.
+     * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
+     */
+    public Builder setAmount(
+        com.google.type.Money.Builder builderForValue) {
+      if (amountBuilder_ == null) {
+        amount_ = builderForValue.build();
+      } else {
+        amountBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
+     */
+    public Builder mergeAmount(com.google.type.Money value) {
+      if (amountBuilder_ == null) {
+        if (((bitField0_ & 0x00000800) != 0) &&
+          amount_ != null &&
+          amount_ != com.google.type.Money.getDefaultInstance()) {
+          getAmountBuilder().mergeFrom(value);
+        } else {
+          amount_ = value;
+        }
+      } else {
+        amountBuilder_.mergeFrom(value);
+      }
+      if (amount_ != null) {
+        bitField0_ |= 0x00000800;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
      */
     public Builder clearAmount() {
       bitField0_ = (bitField0_ & ~0x00000800);
-      amount_ = 0D;
+      amount_ = null;
+      if (amountBuilder_ != null) {
+        amountBuilder_.dispose();
+        amountBuilder_ = null;
+      }
       onChanged();
       return this;
+    }
+    /**
+     * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
+     */
+    public com.google.type.Money.Builder getAmountBuilder() {
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return internalGetAmountFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
+     */
+    public com.google.type.MoneyOrBuilder getAmountOrBuilder() {
+      if (amountBuilder_ != null) {
+        return amountBuilder_.getMessageOrBuilder();
+      } else {
+        return amount_ == null ?
+            com.google.type.Money.getDefaultInstance() : amount_;
+      }
+    }
+    /**
+     * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> 
+        internalGetAmountFieldBuilder() {
+      if (amountBuilder_ == null) {
+        amountBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder>(
+                getAmount(),
+                getParentForChildren(),
+                isClean());
+        amount_ = null;
+      }
+      return amountBuilder_;
     }
 
     private java.lang.Object currency_ = "";

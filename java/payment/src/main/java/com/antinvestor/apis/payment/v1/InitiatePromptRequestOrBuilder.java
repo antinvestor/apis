@@ -138,69 +138,69 @@ public interface InitiatePromptRequestOrBuilder extends
    * Merchant information for the payment
    * </pre>
    *
-   * <code>.payment.v1.Merchant merchant = 10 [json_name = "merchant"];</code>
-   * @return Whether the merchant field is set.
+   * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+   * @return Whether the recipientAccount field is set.
    */
-  boolean hasMerchant();
+  boolean hasRecipientAccount();
   /**
    * <pre>
    * Merchant information for the payment
    * </pre>
    *
-   * <code>.payment.v1.Merchant merchant = 10 [json_name = "merchant"];</code>
-   * @return The merchant.
+   * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
+   * @return The recipientAccount.
    */
-  com.antinvestor.apis.payment.v1.Merchant getMerchant();
+  com.antinvestor.apis.payment.v1.Account getRecipientAccount();
   /**
    * <pre>
    * Merchant information for the payment
    * </pre>
    *
-   * <code>.payment.v1.Merchant merchant = 10 [json_name = "merchant"];</code>
+   * <code>.payment.v1.Account recipientAccount = 10 [json_name = "recipientAccount"];</code>
    */
-  com.antinvestor.apis.payment.v1.MerchantOrBuilder getMerchantOrBuilder();
+  com.antinvestor.apis.payment.v1.AccountOrBuilder getRecipientAccountOrBuilder();
 
   /**
    * <pre>
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 11 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
    */
-  int getMetadataCount();
+  int getExtrasCount();
   /**
    * <pre>
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 11 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
    */
-  boolean containsMetadata(
+  boolean containsExtras(
       java.lang.String key);
   /**
-   * Use {@link #getMetadataMap()} instead.
+   * Use {@link #getExtrasMap()} instead.
    */
   @java.lang.Deprecated
   java.util.Map<java.lang.String, java.lang.String>
-  getMetadata();
+  getExtras();
   /**
    * <pre>
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 11 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
-  getMetadataMap();
+  getExtrasMap();
   /**
    * <pre>
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 11 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
    */
   /* nullable */
-java.lang.String getMetadataOrDefault(
+java.lang.String getExtrasOrDefault(
       java.lang.String key,
       /* nullable */
 java.lang.String defaultValue);
@@ -209,8 +209,8 @@ java.lang.String defaultValue);
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; metadata = 11 [json_name = "metadata"];</code>
+   * <code>map&lt;string, string&gt; Extras = 11 [json_name = "Extras"];</code>
    */
-  java.lang.String getMetadataOrThrow(
+  java.lang.String getExtrasOrThrow(
       java.lang.String key);
 }
