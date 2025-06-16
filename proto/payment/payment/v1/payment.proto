@@ -171,18 +171,19 @@ message Customer {
 }
 
 message PaymentLink {
-  string expiry_date = 1;
-  string sale_date = 2;
-  string payment_link_type = 3;
-  string sale_type = 4;
-  string name = 5;
-  string description = 6;
-  string external_ref = 7;
-  string payment_link_ref = 8;
-  string redirect_url = 9;
-  string amount_option = 10;
-  double amount = 11;
-  string currency = 12;
+  string id = 1; 
+  string expiry_date = 2;
+  string sale_date = 3;
+  string payment_link_type = 4;
+  string sale_type = 5;
+  string name = 6;
+  string description = 7;
+  string external_ref = 8;
+  string payment_link_ref = 9;
+  string redirect_url = 10;
+  string amount_option = 11;
+  double amount = 12;
+  string currency = 13;
 }
 
 message CreatePaymentLinkRequest {

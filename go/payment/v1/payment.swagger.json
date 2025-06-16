@@ -777,6 +777,9 @@
     "payment.v1.PaymentLink": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "expiryDate": {
           "type": "string"
         },

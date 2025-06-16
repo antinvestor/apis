@@ -1039,18 +1039,19 @@ func (x *Customer) GetCustomerExternalRef() string {
 
 type PaymentLink struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	ExpiryDate      string                 `protobuf:"bytes,1,opt,name=expiry_date,json=expiryDate,proto3" json:"expiry_date,omitempty"`
-	SaleDate        string                 `protobuf:"bytes,2,opt,name=sale_date,json=saleDate,proto3" json:"sale_date,omitempty"`
-	PaymentLinkType string                 `protobuf:"bytes,3,opt,name=payment_link_type,json=paymentLinkType,proto3" json:"payment_link_type,omitempty"`
-	SaleType        string                 `protobuf:"bytes,4,opt,name=sale_type,json=saleType,proto3" json:"sale_type,omitempty"`
-	Name            string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	Description     string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	ExternalRef     string                 `protobuf:"bytes,7,opt,name=external_ref,json=externalRef,proto3" json:"external_ref,omitempty"`
-	PaymentLinkRef  string                 `protobuf:"bytes,8,opt,name=payment_link_ref,json=paymentLinkRef,proto3" json:"payment_link_ref,omitempty"`
-	RedirectUrl     string                 `protobuf:"bytes,9,opt,name=redirect_url,json=redirectUrl,proto3" json:"redirect_url,omitempty"`
-	AmountOption    string                 `protobuf:"bytes,10,opt,name=amount_option,json=amountOption,proto3" json:"amount_option,omitempty"`
-	Amount          float64                `protobuf:"fixed64,11,opt,name=amount,proto3" json:"amount,omitempty"`
-	Currency        string                 `protobuf:"bytes,12,opt,name=currency,proto3" json:"currency,omitempty"`
+	Id              string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ExpiryDate      string                 `protobuf:"bytes,2,opt,name=expiry_date,json=expiryDate,proto3" json:"expiry_date,omitempty"`
+	SaleDate        string                 `protobuf:"bytes,3,opt,name=sale_date,json=saleDate,proto3" json:"sale_date,omitempty"`
+	PaymentLinkType string                 `protobuf:"bytes,4,opt,name=payment_link_type,json=paymentLinkType,proto3" json:"payment_link_type,omitempty"`
+	SaleType        string                 `protobuf:"bytes,5,opt,name=sale_type,json=saleType,proto3" json:"sale_type,omitempty"`
+	Name            string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	Description     string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	ExternalRef     string                 `protobuf:"bytes,8,opt,name=external_ref,json=externalRef,proto3" json:"external_ref,omitempty"`
+	PaymentLinkRef  string                 `protobuf:"bytes,9,opt,name=payment_link_ref,json=paymentLinkRef,proto3" json:"payment_link_ref,omitempty"`
+	RedirectUrl     string                 `protobuf:"bytes,10,opt,name=redirect_url,json=redirectUrl,proto3" json:"redirect_url,omitempty"`
+	AmountOption    string                 `protobuf:"bytes,11,opt,name=amount_option,json=amountOption,proto3" json:"amount_option,omitempty"`
+	Amount          float64                `protobuf:"fixed64,12,opt,name=amount,proto3" json:"amount,omitempty"`
+	Currency        string                 `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1083,6 +1084,13 @@ func (x *PaymentLink) ProtoReflect() protoreflect.Message {
 // Deprecated: Use PaymentLink.ProtoReflect.Descriptor instead.
 func (*PaymentLink) Descriptor() ([]byte, []int) {
 	return file_payment_v1_payment_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *PaymentLink) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 func (x *PaymentLink) GetExpiryDate() string {
@@ -1356,22 +1364,23 @@ const file_payment_v1_payment_proto_rawDesc = "" +
 	"\rfirst_address\x18\x02 \x01(\tR\ffirstAddress\x12!\n" +
 	"\fcountry_code\x18\x03 \x01(\tR\vcountryCode\x12+\n" +
 	"\x12postal_or_zip_code\x18\x04 \x01(\tR\x0fpostalOrZipCode\x122\n" +
-	"\x15customer_external_ref\x18\x05 \x01(\tR\x13customerExternalRef\"\x93\x03\n" +
-	"\vPaymentLink\x12\x1f\n" +
-	"\vexpiry_date\x18\x01 \x01(\tR\n" +
+	"\x15customer_external_ref\x18\x05 \x01(\tR\x13customerExternalRef\"\xa3\x03\n" +
+	"\vPaymentLink\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
+	"\vexpiry_date\x18\x02 \x01(\tR\n" +
 	"expiryDate\x12\x1b\n" +
-	"\tsale_date\x18\x02 \x01(\tR\bsaleDate\x12*\n" +
-	"\x11payment_link_type\x18\x03 \x01(\tR\x0fpaymentLinkType\x12\x1b\n" +
-	"\tsale_type\x18\x04 \x01(\tR\bsaleType\x12\x12\n" +
-	"\x04name\x18\x05 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\x12!\n" +
-	"\fexternal_ref\x18\a \x01(\tR\vexternalRef\x12(\n" +
-	"\x10payment_link_ref\x18\b \x01(\tR\x0epaymentLinkRef\x12!\n" +
-	"\fredirect_url\x18\t \x01(\tR\vredirectUrl\x12#\n" +
-	"\ramount_option\x18\n" +
-	" \x01(\tR\famountOption\x12\x16\n" +
-	"\x06amount\x18\v \x01(\x01R\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\f \x01(\tR\bcurrency\"\xce\x01\n" +
+	"\tsale_date\x18\x03 \x01(\tR\bsaleDate\x12*\n" +
+	"\x11payment_link_type\x18\x04 \x01(\tR\x0fpaymentLinkType\x12\x1b\n" +
+	"\tsale_type\x18\x05 \x01(\tR\bsaleType\x12\x12\n" +
+	"\x04name\x18\x06 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\x12!\n" +
+	"\fexternal_ref\x18\b \x01(\tR\vexternalRef\x12(\n" +
+	"\x10payment_link_ref\x18\t \x01(\tR\x0epaymentLinkRef\x12!\n" +
+	"\fredirect_url\x18\n" +
+	" \x01(\tR\vredirectUrl\x12#\n" +
+	"\ramount_option\x18\v \x01(\tR\famountOption\x12\x16\n" +
+	"\x06amount\x18\f \x01(\x01R\x06amount\x12\x1a\n" +
+	"\bcurrency\x18\r \x01(\tR\bcurrency\"\xce\x01\n" +
 	"\x18CreatePaymentLinkRequest\x122\n" +
 	"\tcustomers\x18\x01 \x03(\v2\x14.payment.v1.CustomerR\tcustomers\x12:\n" +
 	"\fpayment_link\x18\x02 \x01(\v2\x17.payment.v1.PaymentLinkR\vpaymentLink\x12B\n" +
