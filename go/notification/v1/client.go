@@ -76,23 +76,24 @@ func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*N
 	return Init(clientBase, NewNotificationServiceClient(clientBase.Connection())), nil
 }
 
-func (nc *NotificationClient) Send(ctx context.Context, messages []*Notification) (<-chan *commonv1.StatusResponse, error) {
+func (nc *NotificationClient) Send(ctx context.Context, messages []*Notification) (<-chan *common.MessageOrError[*commonv1.StatusResponse], error) {
 	responseStream, err := nc.Client.Send(ctx, &SendRequest{Data: messages})
 	if err != nil {
 		return nil, err
 	}
 
-	statusChannel := make(chan *commonv1.StatusResponse)
+	statusChannel := make(chan *common.MessageOrError[*commonv1.StatusResponse])
 	go func(response NotificationService_SendClient) {
 		defer close(statusChannel)
 		for {
 			responses, err0 := response.Recv()
 			if err0 != nil {
+				statusChannel <- &common.MessageOrError[*commonv1.StatusResponse]{Error: err0}
 				return
 			}
 
 			for _, role := range responses.GetData() {
-				statusChannel <- role
+				statusChannel <- &common.MessageOrError[*commonv1.StatusResponse]{Message: role}
 			}
 		}
 	}(responseStream)
@@ -101,24 +102,25 @@ func (nc *NotificationClient) Send(ctx context.Context, messages []*Notification
 
 }
 
-func (nc *NotificationClient) Release(ctx context.Context, ids []string, comment string) (<-chan *commonv1.StatusResponse, error) {
+func (nc *NotificationClient) Release(ctx context.Context, ids []string, comment string) (<-chan *common.MessageOrError[*commonv1.StatusResponse], error) {
 
 	responseStream, err := nc.Client.Release(ctx, &ReleaseRequest{Id: ids, Comment: comment})
 	if err != nil {
 		return nil, err
 	}
 
-	statusChannel := make(chan *commonv1.StatusResponse)
+	statusChannel := make(chan *common.MessageOrError[*commonv1.StatusResponse])
 	go func(response NotificationService_ReleaseClient) {
 		defer close(statusChannel)
 		for {
 			responses, err0 := response.Recv()
 			if err0 != nil {
+				statusChannel <- &common.MessageOrError[*commonv1.StatusResponse]{Error: err0}
 				return
 			}
 
 			for _, role := range responses.GetData() {
-				statusChannel <- role
+				statusChannel <- &common.MessageOrError[*commonv1.StatusResponse]{Message: role}
 			}
 		}
 	}(responseStream)
@@ -127,7 +129,7 @@ func (nc *NotificationClient) Release(ctx context.Context, ids []string, comment
 
 }
 
-func (nc *NotificationClient) Receive(ctx context.Context, messages []*Notification) (<-chan *commonv1.StatusResponse, error) {
+func (nc *NotificationClient) Receive(ctx context.Context, messages []*Notification) (<-chan *common.MessageOrError[*commonv1.StatusResponse], error) {
 
 	for _, msg := range messages {
 		msg.AutoRelease = true
@@ -137,17 +139,18 @@ func (nc *NotificationClient) Receive(ctx context.Context, messages []*Notificat
 		return nil, err
 	}
 
-	statusChannel := make(chan *commonv1.StatusResponse)
+	statusChannel := make(chan *common.MessageOrError[*commonv1.StatusResponse])
 	go func(response NotificationService_ReceiveClient) {
 		defer close(statusChannel)
 		for {
 			responses, err0 := response.Recv()
 			if err0 != nil {
+				statusChannel <- &common.MessageOrError[*commonv1.StatusResponse]{Error: err0}
 				return
 			}
 
 			for _, role := range responses.GetData() {
-				statusChannel <- role
+				statusChannel <- &common.MessageOrError[*commonv1.StatusResponse]{Message: role}
 			}
 		}
 	}(responseStream)
@@ -194,7 +197,7 @@ func (nc *NotificationClient) GetTemplate(ctx context.Context, name string, lang
 	return nil, nil
 }
 
-func (nc *NotificationClient) SearchTemplate(ctx context.Context, query string, language string, page int64, count int32) (<-chan *Template, error) {
+func (nc *NotificationClient) SearchTemplate(ctx context.Context, query string, language string, page int64, count int32) (<-chan *common.MessageOrError[*Template], error) {
 
 	searchRequest := TemplateSearchRequest{
 		Query:        query,
@@ -208,17 +211,18 @@ func (nc *NotificationClient) SearchTemplate(ctx context.Context, query string, 
 		return nil, err
 	}
 
-	templateChannel := make(chan *Template)
+	templateChannel := make(chan *common.MessageOrError[*Template])
 	go func(responseService NotificationService_TemplateSearchClient) {
 		defer close(templateChannel)
 		for {
 			responses, err0 := responseService.Recv()
 			if err0 != nil {
+				templateChannel <- &common.MessageOrError[*Template]{Error: err0}
 				return
 			}
 
 			for _, role := range responses.GetData() {
-				templateChannel <- role
+				templateChannel <- &common.MessageOrError[*Template]{Message: role}
 			}
 		}
 	}(responseService)
