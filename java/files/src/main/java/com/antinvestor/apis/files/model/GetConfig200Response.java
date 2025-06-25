@@ -1,17 +1,3 @@
-// Copyright 2023-2024 Ant Investor Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
  * Ant Investor Files
  * An openAPI 3.0 specification that defines how files are stored and accessed on ant investor products
@@ -39,57 +25,46 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
-import org.openapitools.jackson.nullable.JsonNullable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
+import com.antinvestor.apis.files.invoker.ApiClient;
 /**
  * GetConfig200Response
  */
 @JsonPropertyOrder({
   GetConfig200Response.JSON_PROPERTY_M_UPLOAD_SIZE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class GetConfig200Response {
   public static final String JSON_PROPERTY_M_UPLOAD_SIZE = "m.upload.size";
-  private JsonNullable<Object> mUploadSize = JsonNullable.<Object>of(null);
+  @javax.annotation.Nullable
+  private Long mUploadSize;
 
   public GetConfig200Response() { 
   }
 
-  public GetConfig200Response mUploadSize(Object mUploadSize) {
-    this.mUploadSize = JsonNullable.<Object>of(mUploadSize);
+  public GetConfig200Response mUploadSize(@javax.annotation.Nullable Long mUploadSize) {
+    this.mUploadSize = mUploadSize;
     return this;
   }
 
-   /**
+  /**
    * The maximum size an upload can be in bytes. Clients SHOULD use this as a guide when uploading content. If not listed or null, the size limit should be treated as unknown.
    * @return mUploadSize
-  **/
+   */
   @javax.annotation.Nullable
-  @JsonIgnore
-
-  public Object getmUploadSize() {
-        return mUploadSize.orElse(null);
+  @JsonProperty(JSON_PROPERTY_M_UPLOAD_SIZE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Long getmUploadSize() {
+    return mUploadSize;
   }
+
 
   @JsonProperty(JSON_PROPERTY_M_UPLOAD_SIZE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Object> getmUploadSize_JsonNullable() {
-    return mUploadSize;
-  }
-  
-  @JsonProperty(JSON_PROPERTY_M_UPLOAD_SIZE)
-  public void setmUploadSize_JsonNullable(JsonNullable<Object> mUploadSize) {
+  public void setmUploadSize(@javax.annotation.Nullable Long mUploadSize) {
     this.mUploadSize = mUploadSize;
-  }
-
-  public void setmUploadSize(Object mUploadSize) {
-    this.mUploadSize = JsonNullable.<Object>of(mUploadSize);
   }
 
 
@@ -105,23 +80,12 @@ public class GetConfig200Response {
       return false;
     }
     GetConfig200Response getConfig200Response = (GetConfig200Response) o;
-    return equalsNullable(this.mUploadSize, getConfig200Response.mUploadSize);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+    return Objects.equals(this.mUploadSize, getConfig200Response.mUploadSize);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(hashCodeNullable(mUploadSize));
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(mUploadSize);
   }
 
   @Override
@@ -178,7 +142,7 @@ public class GetConfig200Response {
 
     // add `m.upload.size` to the URL query string
     if (getmUploadSize() != null) {
-      joiner.add(String.format("%sm.upload.size%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getmUploadSize()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%sm.upload.size%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getmUploadSize()))));
     }
 
     return joiner.toString();

@@ -1,17 +1,3 @@
-// Copyright 2023-2024 Ant Investor Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
  * Ant Investor Files
  * An openAPI 3.0 specification that defines how files are stored and accessed on ant investor products
@@ -29,13 +15,15 @@ package com.antinvestor.apis.files.api;
 import com.antinvestor.apis.files.invoker.ApiClient;
 import com.antinvestor.apis.files.invoker.ApiException;
 import com.antinvestor.apis.files.invoker.ApiResponse;
+import com.antinvestor.apis.files.invoker.Configuration;
 import com.antinvestor.apis.files.invoker.Pair;
 
 import com.antinvestor.apis.files.model.CreateContent200Response;
 import com.antinvestor.apis.files.model.Error;
-import com.antinvestor.apis.files.model.Error1;
 import com.antinvestor.apis.files.model.GetConfig200Response;
 import com.antinvestor.apis.files.model.GetUrlPreview200Response;
+import com.antinvestor.apis.files.model.InlineObject;
+import java.net.URI;
 import com.antinvestor.apis.files.model.UploadContent200Response;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -63,7 +51,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class MediaApi {
   private final HttpClient memberVarHttpClient;
   private final ObjectMapper memberVarObjectMapper;
@@ -74,7 +62,7 @@ public class MediaApi {
   private final Consumer<HttpResponse<String>> memberVarAsyncResponseInterceptor;
 
   public MediaApi() {
-    this(new ApiClient());
+    this(Configuration.getDefaultApiClient());
   }
 
   public MediaApi(ApiClient apiClient) {
@@ -130,10 +118,21 @@ public class MediaApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("createContent", localVarResponse);
         }
+        if (localVarResponse.body() == null) {
+          return new ApiResponse<CreateContent200Response>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        String responseBody = new String(localVarResponse.body().readAllBytes());
+        localVarResponse.body().close();
+
         return new ApiResponse<CreateContent200Response>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<CreateContent200Response>() {}) // closes the InputStream
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<CreateContent200Response>() {})
         );
       } finally {
       }
@@ -165,6 +164,7 @@ public class MediaApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Get the configuration for the content repository.
    * This endpoint allows clients to retrieve the configuration of the content repository, such as upload limitations. Clients SHOULD use this as a guide when using content repository endpoints. All values are intentionally left optional. Clients SHOULD follow the advice given in the field description when the field is not available.  {{% boxes/note %}} Both clients and server administrators should be aware that proxies between the client and the server may affect the apparent behaviour of content repository APIs, for example, proxies may enforce a lower upload size limit than is advertised by the server on this endpoint. {{% /boxes/note %}}
@@ -195,10 +195,21 @@ public class MediaApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("getConfig", localVarResponse);
         }
+        if (localVarResponse.body() == null) {
+          return new ApiResponse<GetConfig200Response>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        String responseBody = new String(localVarResponse.body().readAllBytes());
+        localVarResponse.body().close();
+
         return new ApiResponse<GetConfig200Response>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<GetConfig200Response>() {}) // closes the InputStream
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetConfig200Response>() {})
         );
       } finally {
       }
@@ -230,6 +241,7 @@ public class MediaApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Download content from the content repository.
    * {{% boxes/note %}} Clients SHOULD NOT generate or use URLs which supply the access token in the query string. These URLs may be copied by users verbatim and provided in a chat message to another user, disclosing the sender&#39;s access token. {{% /boxes/note %}}  Clients MAY be redirected using the 307/308 responses below to download the request object. This is typical when the homeserver uses a Content Delivery Network (CDN).
@@ -239,7 +251,7 @@ public class MediaApi {
    * @return Object
    * @throws ApiException if fails to make API call
    */
-  public Object getContent(Object serverName, Object mediaId, Object timeoutMs) throws ApiException {
+  public Object getContent(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
     ApiResponse<Object> localVarResponse = getContentWithHttpInfo(serverName, mediaId, timeoutMs);
     return localVarResponse.getData();
   }
@@ -253,7 +265,7 @@ public class MediaApi {
    * @return ApiResponse&lt;Object&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<Object> getContentWithHttpInfo(Object serverName, Object mediaId, Object timeoutMs) throws ApiException {
+  public ApiResponse<Object> getContentWithHttpInfo(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getContentRequestBuilder(serverName, mediaId, timeoutMs);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -266,10 +278,21 @@ public class MediaApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("getContent", localVarResponse);
         }
+        if (localVarResponse.body() == null) {
+          return new ApiResponse<Object>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        String responseBody = new String(localVarResponse.body().readAllBytes());
+        localVarResponse.body().close();
+
         return new ApiResponse<Object>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<Object>() {}) // closes the InputStream
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<Object>() {})
         );
       } finally {
       }
@@ -282,7 +305,7 @@ public class MediaApi {
     }
   }
 
-  private HttpRequest.Builder getContentRequestBuilder(Object serverName, Object mediaId, Object timeoutMs) throws ApiException {
+  private HttpRequest.Builder getContentRequestBuilder(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
     // verify the required parameter 'serverName' is set
     if (serverName == null) {
       throw new ApiException(400, "Missing the required parameter 'serverName' when calling getContent");
@@ -326,6 +349,7 @@ public class MediaApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Download content from the content repository overriding the file name.
    * This will download content from the content repository (same as the previous endpoint) but replaces the target file name with the one provided by the caller.  {{% boxes/note %}} Clients SHOULD NOT generate or use URLs which supply the access token in the query string. These URLs may be copied by users verbatim and provided in a chat message to another user, disclosing the sender&#39;s access token. {{% /boxes/note %}}  Clients MAY be redirected using the 307/308 responses below to download the request object. This is typical when the homeserver uses a Content Delivery Network (CDN).
@@ -336,7 +360,7 @@ public class MediaApi {
    * @return Object
    * @throws ApiException if fails to make API call
    */
-  public Object getContentOverrideName(Object serverName, Object mediaId, Object fileName, Object timeoutMs) throws ApiException {
+  public Object getContentOverrideName(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull String fileName, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
     ApiResponse<Object> localVarResponse = getContentOverrideNameWithHttpInfo(serverName, mediaId, fileName, timeoutMs);
     return localVarResponse.getData();
   }
@@ -351,7 +375,7 @@ public class MediaApi {
    * @return ApiResponse&lt;Object&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<Object> getContentOverrideNameWithHttpInfo(Object serverName, Object mediaId, Object fileName, Object timeoutMs) throws ApiException {
+  public ApiResponse<Object> getContentOverrideNameWithHttpInfo(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull String fileName, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getContentOverrideNameRequestBuilder(serverName, mediaId, fileName, timeoutMs);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -364,10 +388,21 @@ public class MediaApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("getContentOverrideName", localVarResponse);
         }
+        if (localVarResponse.body() == null) {
+          return new ApiResponse<Object>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        String responseBody = new String(localVarResponse.body().readAllBytes());
+        localVarResponse.body().close();
+
         return new ApiResponse<Object>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<Object>() {}) // closes the InputStream
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<Object>() {})
         );
       } finally {
       }
@@ -380,7 +415,7 @@ public class MediaApi {
     }
   }
 
-  private HttpRequest.Builder getContentOverrideNameRequestBuilder(Object serverName, Object mediaId, Object fileName, Object timeoutMs) throws ApiException {
+  private HttpRequest.Builder getContentOverrideNameRequestBuilder(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull String fileName, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
     // verify the required parameter 'serverName' is set
     if (serverName == null) {
       throw new ApiException(400, "Missing the required parameter 'serverName' when calling getContentOverrideName");
@@ -429,6 +464,7 @@ public class MediaApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Download a thumbnail of content from the content repository
    * Download a thumbnail of content from the content repository. See the [Thumbnails](/client-server-api/#thumbnails) section for more information.  {{% boxes/note %}} Clients SHOULD NOT generate or use URLs which supply the access token in the query string. These URLs may be copied by users verbatim and provided in a chat message to another user, disclosing the sender&#39;s access token. {{% /boxes/note %}}  Clients MAY be redirected using the 307/308 responses below to download the request object. This is typical when the homeserver uses a Content Delivery Network (CDN).
@@ -442,7 +478,7 @@ public class MediaApi {
    * @return Object
    * @throws ApiException if fails to make API call
    */
-  public Object getContentThumbnail(Object serverName, Object mediaId, Object width, Object height, Object method, Object timeoutMs, Object animated) throws ApiException {
+  public Object getContentThumbnail(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull Integer width, @javax.annotation.Nonnull Integer height, @javax.annotation.Nullable String method, @javax.annotation.Nullable Long timeoutMs, @javax.annotation.Nullable Boolean animated) throws ApiException {
     ApiResponse<Object> localVarResponse = getContentThumbnailWithHttpInfo(serverName, mediaId, width, height, method, timeoutMs, animated);
     return localVarResponse.getData();
   }
@@ -460,7 +496,7 @@ public class MediaApi {
    * @return ApiResponse&lt;Object&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<Object> getContentThumbnailWithHttpInfo(Object serverName, Object mediaId, Object width, Object height, Object method, Object timeoutMs, Object animated) throws ApiException {
+  public ApiResponse<Object> getContentThumbnailWithHttpInfo(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull Integer width, @javax.annotation.Nonnull Integer height, @javax.annotation.Nullable String method, @javax.annotation.Nullable Long timeoutMs, @javax.annotation.Nullable Boolean animated) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getContentThumbnailRequestBuilder(serverName, mediaId, width, height, method, timeoutMs, animated);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -473,10 +509,21 @@ public class MediaApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("getContentThumbnail", localVarResponse);
         }
+        if (localVarResponse.body() == null) {
+          return new ApiResponse<Object>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        String responseBody = new String(localVarResponse.body().readAllBytes());
+        localVarResponse.body().close();
+
         return new ApiResponse<Object>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<Object>() {}) // closes the InputStream
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<Object>() {})
         );
       } finally {
       }
@@ -489,7 +536,7 @@ public class MediaApi {
     }
   }
 
-  private HttpRequest.Builder getContentThumbnailRequestBuilder(Object serverName, Object mediaId, Object width, Object height, Object method, Object timeoutMs, Object animated) throws ApiException {
+  private HttpRequest.Builder getContentThumbnailRequestBuilder(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull Integer width, @javax.annotation.Nonnull Integer height, @javax.annotation.Nullable String method, @javax.annotation.Nullable Long timeoutMs, @javax.annotation.Nullable Boolean animated) throws ApiException {
     // verify the required parameter 'serverName' is set
     if (serverName == null) {
       throw new ApiException(400, "Missing the required parameter 'serverName' when calling getContentThumbnail");
@@ -549,6 +596,7 @@ public class MediaApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Get information about a URL for a client
    * Get information about a URL for the client. Typically this is called when a client sees a URL in a message and wants to render a preview for the user.  {{% boxes/note %}} Clients should consider avoiding this endpoint for URLs posted in encrypted rooms. Encrypted rooms often contain more sensitive information the users do not want to share with the homeserver, and this can mean that the URLs being shared should also not be shared with the homeserver. {{% /boxes/note %}}
@@ -557,7 +605,7 @@ public class MediaApi {
    * @return GetUrlPreview200Response
    * @throws ApiException if fails to make API call
    */
-  public GetUrlPreview200Response getUrlPreview(Object url, Object ts) throws ApiException {
+  public GetUrlPreview200Response getUrlPreview(@javax.annotation.Nonnull URI url, @javax.annotation.Nullable Long ts) throws ApiException {
     ApiResponse<GetUrlPreview200Response> localVarResponse = getUrlPreviewWithHttpInfo(url, ts);
     return localVarResponse.getData();
   }
@@ -570,7 +618,7 @@ public class MediaApi {
    * @return ApiResponse&lt;GetUrlPreview200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetUrlPreview200Response> getUrlPreviewWithHttpInfo(Object url, Object ts) throws ApiException {
+  public ApiResponse<GetUrlPreview200Response> getUrlPreviewWithHttpInfo(@javax.annotation.Nonnull URI url, @javax.annotation.Nullable Long ts) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUrlPreviewRequestBuilder(url, ts);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -583,10 +631,21 @@ public class MediaApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("getUrlPreview", localVarResponse);
         }
+        if (localVarResponse.body() == null) {
+          return new ApiResponse<GetUrlPreview200Response>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        String responseBody = new String(localVarResponse.body().readAllBytes());
+        localVarResponse.body().close();
+
         return new ApiResponse<GetUrlPreview200Response>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<GetUrlPreview200Response>() {}) // closes the InputStream
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetUrlPreview200Response>() {})
         );
       } finally {
       }
@@ -599,7 +658,7 @@ public class MediaApi {
     }
   }
 
-  private HttpRequest.Builder getUrlPreviewRequestBuilder(Object url, Object ts) throws ApiException {
+  private HttpRequest.Builder getUrlPreviewRequestBuilder(@javax.annotation.Nonnull URI url, @javax.annotation.Nullable Long ts) throws ApiException {
     // verify the required parameter 'url' is set
     if (url == null) {
       throw new ApiException(400, "Missing the required parameter 'url' when calling getUrlPreview");
@@ -639,6 +698,7 @@ public class MediaApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Upload some content to the content repository.
    * 
@@ -648,7 +708,7 @@ public class MediaApi {
    * @return UploadContent200Response
    * @throws ApiException if fails to make API call
    */
-  public UploadContent200Response uploadContent(Object body, String contentType, String filename) throws ApiException {
+  public UploadContent200Response uploadContent(@javax.annotation.Nullable Object body, @javax.annotation.Nullable String contentType, @javax.annotation.Nullable String filename) throws ApiException {
     ApiResponse<UploadContent200Response> localVarResponse = uploadContentWithHttpInfo(body, contentType, filename);
     return localVarResponse.getData();
   }
@@ -662,7 +722,7 @@ public class MediaApi {
    * @return ApiResponse&lt;UploadContent200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<UploadContent200Response> uploadContentWithHttpInfo(Object body, String contentType, String filename) throws ApiException {
+  public ApiResponse<UploadContent200Response> uploadContentWithHttpInfo(@javax.annotation.Nullable Object body, @javax.annotation.Nullable String contentType, @javax.annotation.Nullable String filename) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = uploadContentRequestBuilder(body, contentType, filename);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -675,10 +735,21 @@ public class MediaApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("uploadContent", localVarResponse);
         }
+        if (localVarResponse.body() == null) {
+          return new ApiResponse<UploadContent200Response>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        String responseBody = new String(localVarResponse.body().readAllBytes());
+        localVarResponse.body().close();
+
         return new ApiResponse<UploadContent200Response>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<UploadContent200Response>() {}) // closes the InputStream
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<UploadContent200Response>() {})
         );
       } finally {
       }
@@ -691,7 +762,7 @@ public class MediaApi {
     }
   }
 
-  private HttpRequest.Builder uploadContentRequestBuilder(Object body, String contentType, String filename) throws ApiException {
+  private HttpRequest.Builder uploadContentRequestBuilder(@javax.annotation.Nullable Object body, @javax.annotation.Nullable String contentType, @javax.annotation.Nullable String filename) throws ApiException {
     // verify the required parameter 'body' is set
     if (body == null) {
       throw new ApiException(400, "Missing the required parameter 'body' when calling uploadContent");
@@ -738,6 +809,7 @@ public class MediaApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Upload content to an &#x60;mxc://&#x60; URI that was created earlier.
    * This endpoint permits uploading content to an &#x60;mxc://&#x60; URI that was created earlier via [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).
@@ -749,7 +821,7 @@ public class MediaApi {
    * @return Object
    * @throws ApiException if fails to make API call
    */
-  public Object uploadContentToMXC(Object serverName, Object mediaId, Object body, String contentType, String filename) throws ApiException {
+  public Object uploadContentToMXC(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nullable Object body, @javax.annotation.Nullable String contentType, @javax.annotation.Nullable String filename) throws ApiException {
     ApiResponse<Object> localVarResponse = uploadContentToMXCWithHttpInfo(serverName, mediaId, body, contentType, filename);
     return localVarResponse.getData();
   }
@@ -765,7 +837,7 @@ public class MediaApi {
    * @return ApiResponse&lt;Object&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<Object> uploadContentToMXCWithHttpInfo(Object serverName, Object mediaId, Object body, String contentType, String filename) throws ApiException {
+  public ApiResponse<Object> uploadContentToMXCWithHttpInfo(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nullable Object body, @javax.annotation.Nullable String contentType, @javax.annotation.Nullable String filename) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = uploadContentToMXCRequestBuilder(serverName, mediaId, body, contentType, filename);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -778,10 +850,21 @@ public class MediaApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("uploadContentToMXC", localVarResponse);
         }
+        if (localVarResponse.body() == null) {
+          return new ApiResponse<Object>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        String responseBody = new String(localVarResponse.body().readAllBytes());
+        localVarResponse.body().close();
+
         return new ApiResponse<Object>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<Object>() {}) // closes the InputStream
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<Object>() {})
         );
       } finally {
       }
@@ -794,7 +877,7 @@ public class MediaApi {
     }
   }
 
-  private HttpRequest.Builder uploadContentToMXCRequestBuilder(Object serverName, Object mediaId, Object body, String contentType, String filename) throws ApiException {
+  private HttpRequest.Builder uploadContentToMXCRequestBuilder(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nullable Object body, @javax.annotation.Nullable String contentType, @javax.annotation.Nullable String filename) throws ApiException {
     // verify the required parameter 'serverName' is set
     if (serverName == null) {
       throw new ApiException(400, "Missing the required parameter 'serverName' when calling uploadContentToMXC");
@@ -851,4 +934,5 @@ public class MediaApi {
     }
     return localVarRequestBuilder;
   }
+
 }

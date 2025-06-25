@@ -1,17 +1,3 @@
-// Copyright 2023-2024 Ant Investor Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
  * Ant Investor Files
  * An openAPI 3.0 specification that defines how files are stored and accessed on ant investor products
@@ -42,33 +28,34 @@ import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
+import com.antinvestor.apis.files.invoker.ApiClient;
 /**
  * UploadContent200Response
  */
 @JsonPropertyOrder({
   UploadContent200Response.JSON_PROPERTY_CONTENT_URI
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class UploadContent200Response {
   public static final String JSON_PROPERTY_CONTENT_URI = "content_uri";
+  @javax.annotation.Nonnull
   private String contentUri;
 
   public UploadContent200Response() { 
   }
 
-  public UploadContent200Response contentUri(String contentUri) {
+  public UploadContent200Response contentUri(@javax.annotation.Nonnull String contentUri) {
     this.contentUri = contentUri;
     return this;
   }
 
-   /**
+  /**
    * The [&#x60;mxc://&#x60; URI](/client-server-api/#matrix-content-mxc-uris) to the uploaded content.
    * @return contentUri
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CONTENT_URI)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getContentUri() {
     return contentUri;
   }
@@ -76,7 +63,7 @@ public class UploadContent200Response {
 
   @JsonProperty(JSON_PROPERTY_CONTENT_URI)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setContentUri(String contentUri) {
+  public void setContentUri(@javax.annotation.Nonnull String contentUri) {
     this.contentUri = contentUri;
   }
 
@@ -155,7 +142,7 @@ public class UploadContent200Response {
 
     // add `content_uri` to the URL query string
     if (getContentUri() != null) {
-      joiner.add(String.format("%scontent_uri%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getContentUri()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%scontent_uri%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getContentUri()))));
     }
 
     return joiner.toString();

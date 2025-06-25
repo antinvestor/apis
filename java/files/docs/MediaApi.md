@@ -89,7 +89,7 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 | **200** | The [&#x60;mxc://&#x60; URI](/client-server-api/#matrix-content-mxc-uris) for the uploaded content. |  -  |
 | **403** | The user does not have permission to upload the content. |  -  |
-| **429** |  |  -  |
+| **429** | This request was rate-limited. |  -  |
 
 ## createContentWithHttpInfo
 
@@ -160,7 +160,7 @@ ApiResponse<[**CreateContent200Response**](CreateContent200Response.md)>
 |-------------|-------------|------------------|
 | **200** | The [&#x60;mxc://&#x60; URI](/client-server-api/#matrix-content-mxc-uris) for the uploaded content. |  -  |
 | **403** | The user does not have permission to upload the content. |  -  |
-| **429** |  |  -  |
+| **429** | This request was rate-limited. |  -  |
 
 
 ## getConfig
@@ -228,7 +228,7 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The public content repository configuration for the matrix server. |  -  |
-| **429** |  |  -  |
+| **429** | This request was rate-limited. |  -  |
 
 ## getConfigWithHttpInfo
 
@@ -298,7 +298,7 @@ ApiResponse<[**GetConfig200Response**](GetConfig200Response.md)>
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The public content repository configuration for the matrix server. |  -  |
-| **429** |  |  -  |
+| **429** | This request was rate-limited. |  -  |
 
 
 ## getContent
@@ -330,9 +330,9 @@ public class Example {
         accessTokenBearer.setBearerToken("BEARER TOKEN");
 
         MediaApi apiInstance = new MediaApi(defaultClient);
-        Object serverName = matrix.org; // Object | The server name from the `mxc://` URI (the authority component). 
-        Object mediaId = ascERGshawAWawugaAcauga; // Object | The media ID from the `mxc://` URI (the path component). 
-        Object timeoutMs = 20000; // Object | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
+        String serverName = "matrix.org"; // String | The server name from the `mxc://` URI (the authority component). 
+        String mediaId = "ascERGshawAWawugaAcauga"; // String | The media ID from the `mxc://` URI (the path component). 
+        Long timeoutMs = 20000L; // Long | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
         try {
             Object result = apiInstance.getContent(serverName, mediaId, timeoutMs);
             System.out.println(result);
@@ -352,9 +352,9 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **serverName** | [**Object**](.md)| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
-| **mediaId** | [**Object**](.md)| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
-| **timeoutMs** | [**Object**](.md)| The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [optional] [default to 20000] |
+| **serverName** | **String**| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
+| **mediaId** | **String**| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
+| **timeoutMs** | **Long**| The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [optional] [default to 20000] |
 
 ### Return type
 
@@ -374,11 +374,11 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The content that was previously uploaded. |  * Content-Type -  <br>  * Content-Disposition - The [disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) of the returned content. MUST be one of &#x60;inline&#x60; or &#x60;attachment&#x60;, and MUST contain the file name requested in the path.  If the &#x60;Content-Type&#x60; is allowed in the [restrictions for serving inline content](/client-server-api/#serving-inline-content), servers SHOULD use &#x60;inline&#x60;, otherwise they SHOULD use &#x60;attachment&#x60;.  <br>  |
-| **307** |  |  -  |
-| **308** |  |  -  |
-| **429** |  |  -  |
-| **502** |  |  -  |
-| **504** |  |  -  |
+| **307** | A redirect to the requested content. |  * Location - The URL of the thumbnail content. <br>  |
+| **308** | A redirect to the requested content. |  * Location - The URL of the thumbnail content. <br>  |
+| **429** | This request was rate-limited. |  -  |
+| **502** | The content is too large for the server to serve. |  -  |
+| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
 
 ## getContentWithHttpInfo
 
@@ -410,9 +410,9 @@ public class Example {
         accessTokenBearer.setBearerToken("BEARER TOKEN");
 
         MediaApi apiInstance = new MediaApi(defaultClient);
-        Object serverName = matrix.org; // Object | The server name from the `mxc://` URI (the authority component). 
-        Object mediaId = ascERGshawAWawugaAcauga; // Object | The media ID from the `mxc://` URI (the path component). 
-        Object timeoutMs = 20000; // Object | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
+        String serverName = "matrix.org"; // String | The server name from the `mxc://` URI (the authority component). 
+        String mediaId = "ascERGshawAWawugaAcauga"; // String | The media ID from the `mxc://` URI (the path component). 
+        Long timeoutMs = 20000L; // Long | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
         try {
             ApiResponse<Object> response = apiInstance.getContentWithHttpInfo(serverName, mediaId, timeoutMs);
             System.out.println("Status code: " + response.getStatusCode());
@@ -434,9 +434,9 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **serverName** | [**Object**](.md)| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
-| **mediaId** | [**Object**](.md)| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
-| **timeoutMs** | [**Object**](.md)| The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [optional] [default to 20000] |
+| **serverName** | **String**| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
+| **mediaId** | **String**| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
+| **timeoutMs** | **Long**| The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [optional] [default to 20000] |
 
 ### Return type
 
@@ -456,11 +456,11 @@ ApiResponse<**Object**>
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The content that was previously uploaded. |  * Content-Type -  <br>  * Content-Disposition - The [disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) of the returned content. MUST be one of &#x60;inline&#x60; or &#x60;attachment&#x60;, and MUST contain the file name requested in the path.  If the &#x60;Content-Type&#x60; is allowed in the [restrictions for serving inline content](/client-server-api/#serving-inline-content), servers SHOULD use &#x60;inline&#x60;, otherwise they SHOULD use &#x60;attachment&#x60;.  <br>  |
-| **307** |  |  -  |
-| **308** |  |  -  |
-| **429** |  |  -  |
-| **502** |  |  -  |
-| **504** |  |  -  |
+| **307** | A redirect to the requested content. |  * Location - The URL of the thumbnail content. <br>  |
+| **308** | A redirect to the requested content. |  * Location - The URL of the thumbnail content. <br>  |
+| **429** | This request was rate-limited. |  -  |
+| **502** | The content is too large for the server to serve. |  -  |
+| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
 
 
 ## getContentOverrideName
@@ -492,10 +492,10 @@ public class Example {
         accessTokenBearer.setBearerToken("BEARER TOKEN");
 
         MediaApi apiInstance = new MediaApi(defaultClient);
-        Object serverName = matrix.org; // Object | The server name from the `mxc://` URI (the authority component). 
-        Object mediaId = ascERGshawAWawugaAcauga; // Object | The media ID from the `mxc://` URI (the path component). 
-        Object fileName = filename.jpg; // Object | A filename to give in the `Content-Disposition` header.
-        Object timeoutMs = 20000; // Object | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
+        String serverName = "matrix.org"; // String | The server name from the `mxc://` URI (the authority component). 
+        String mediaId = "ascERGshawAWawugaAcauga"; // String | The media ID from the `mxc://` URI (the path component). 
+        String fileName = "filename.jpg"; // String | A filename to give in the `Content-Disposition` header.
+        Long timeoutMs = 20000L; // Long | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
         try {
             Object result = apiInstance.getContentOverrideName(serverName, mediaId, fileName, timeoutMs);
             System.out.println(result);
@@ -515,10 +515,10 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **serverName** | [**Object**](.md)| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
-| **mediaId** | [**Object**](.md)| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
-| **fileName** | [**Object**](.md)| A filename to give in the &#x60;Content-Disposition&#x60; header. | |
-| **timeoutMs** | [**Object**](.md)| The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [optional] [default to 20000] |
+| **serverName** | **String**| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
+| **mediaId** | **String**| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
+| **fileName** | **String**| A filename to give in the &#x60;Content-Disposition&#x60; header. | |
+| **timeoutMs** | **Long**| The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [optional] [default to 20000] |
 
 ### Return type
 
@@ -538,11 +538,11 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The content that was previously uploaded. |  * Content-Type -  <br>  * Content-Disposition - The [disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) of the returned content. MUST be one of &#x60;inline&#x60; or &#x60;attachment&#x60;, and MUST contain the file name requested in the path.  If the &#x60;Content-Type&#x60; is allowed in the [restrictions for serving inline content](/client-server-api/#serving-inline-content), servers SHOULD use &#x60;inline&#x60;, otherwise they SHOULD use &#x60;attachment&#x60;.  <br>  |
-| **307** |  |  -  |
-| **308** |  |  -  |
-| **429** |  |  -  |
-| **502** |  |  -  |
-| **504** |  |  -  |
+| **307** | A redirect to the requested content. |  * Location - The URL of the thumbnail content. <br>  |
+| **308** | A redirect to the requested content. |  * Location - The URL of the thumbnail content. <br>  |
+| **429** | This request was rate-limited. |  -  |
+| **502** | The content is too large for the server to serve. |  -  |
+| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
 
 ## getContentOverrideNameWithHttpInfo
 
@@ -574,10 +574,10 @@ public class Example {
         accessTokenBearer.setBearerToken("BEARER TOKEN");
 
         MediaApi apiInstance = new MediaApi(defaultClient);
-        Object serverName = matrix.org; // Object | The server name from the `mxc://` URI (the authority component). 
-        Object mediaId = ascERGshawAWawugaAcauga; // Object | The media ID from the `mxc://` URI (the path component). 
-        Object fileName = filename.jpg; // Object | A filename to give in the `Content-Disposition` header.
-        Object timeoutMs = 20000; // Object | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
+        String serverName = "matrix.org"; // String | The server name from the `mxc://` URI (the authority component). 
+        String mediaId = "ascERGshawAWawugaAcauga"; // String | The media ID from the `mxc://` URI (the path component). 
+        String fileName = "filename.jpg"; // String | A filename to give in the `Content-Disposition` header.
+        Long timeoutMs = 20000L; // Long | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
         try {
             ApiResponse<Object> response = apiInstance.getContentOverrideNameWithHttpInfo(serverName, mediaId, fileName, timeoutMs);
             System.out.println("Status code: " + response.getStatusCode());
@@ -599,10 +599,10 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **serverName** | [**Object**](.md)| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
-| **mediaId** | [**Object**](.md)| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
-| **fileName** | [**Object**](.md)| A filename to give in the &#x60;Content-Disposition&#x60; header. | |
-| **timeoutMs** | [**Object**](.md)| The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [optional] [default to 20000] |
+| **serverName** | **String**| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
+| **mediaId** | **String**| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
+| **fileName** | **String**| A filename to give in the &#x60;Content-Disposition&#x60; header. | |
+| **timeoutMs** | **Long**| The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [optional] [default to 20000] |
 
 ### Return type
 
@@ -622,11 +622,11 @@ ApiResponse<**Object**>
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The content that was previously uploaded. |  * Content-Type -  <br>  * Content-Disposition - The [disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) of the returned content. MUST be one of &#x60;inline&#x60; or &#x60;attachment&#x60;, and MUST contain the file name requested in the path.  If the &#x60;Content-Type&#x60; is allowed in the [restrictions for serving inline content](/client-server-api/#serving-inline-content), servers SHOULD use &#x60;inline&#x60;, otherwise they SHOULD use &#x60;attachment&#x60;.  <br>  |
-| **307** |  |  -  |
-| **308** |  |  -  |
-| **429** |  |  -  |
-| **502** |  |  -  |
-| **504** |  |  -  |
+| **307** | A redirect to the requested content. |  * Location - The URL of the thumbnail content. <br>  |
+| **308** | A redirect to the requested content. |  * Location - The URL of the thumbnail content. <br>  |
+| **429** | This request was rate-limited. |  -  |
+| **502** | The content is too large for the server to serve. |  -  |
+| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
 
 
 ## getContentThumbnail
@@ -658,13 +658,13 @@ public class Example {
         accessTokenBearer.setBearerToken("BEARER TOKEN");
 
         MediaApi apiInstance = new MediaApi(defaultClient);
-        Object serverName = matrix.org; // Object | The server name from the `mxc://` URI (the authority component). 
-        Object mediaId = ascERGshawAWawugaAcauga; // Object | The media ID from the `mxc://` URI (the path component). 
-        Object width = 64; // Object | The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified.
-        Object height = 64; // Object | The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified.
-        Object method = Object.fromValue("crop"); // Object | The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information.
-        Object timeoutMs = 20000; // Object | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
-        Object animated = false; // Object | Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types `image/gif`, `image/png` (with APNG format), `image/apng`, and `image/webp` instead of the common static `image/png` or `image/jpeg` content types.  When `true`, the server SHOULD return an animated thumbnail if possible and supported. When `false`, the server MUST NOT return an animated thumbnail. For example, returning a static `image/png` or `image/jpeg` thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return `image/webp` thumbnails when supporting animation.  When `true` and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though `animated` is `false`. 
+        String serverName = "matrix.org"; // String | The server name from the `mxc://` URI (the authority component). 
+        String mediaId = "ascERGshawAWawugaAcauga"; // String | The media ID from the `mxc://` URI (the path component). 
+        Integer width = 64; // Integer | The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified.
+        Integer height = 64; // Integer | The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified.
+        String method = "crop"; // String | The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information.
+        Long timeoutMs = 20000L; // Long | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
+        Boolean animated = false; // Boolean | Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types `image/gif`, `image/png` (with APNG format), `image/apng`, and `image/webp` instead of the common static `image/png` or `image/jpeg` content types.  When `true`, the server SHOULD return an animated thumbnail if possible and supported. When `false`, the server MUST NOT return an animated thumbnail. For example, returning a static `image/png` or `image/jpeg` thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return `image/webp` thumbnails when supporting animation.  When `true` and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though `animated` is `false`. 
         try {
             Object result = apiInstance.getContentThumbnail(serverName, mediaId, width, height, method, timeoutMs, animated);
             System.out.println(result);
@@ -684,13 +684,13 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **serverName** | [**Object**](.md)| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
-| **mediaId** | [**Object**](.md)| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
-| **width** | [**Object**](.md)| The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified. | |
-| **height** | [**Object**](.md)| The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified. | |
-| **method** | [**Object**](.md)| The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information. | [optional] [enum: crop, scale] |
-| **timeoutMs** | [**Object**](.md)| The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [optional] [default to 20000] |
-| **animated** | [**Object**](.md)| Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types &#x60;image/gif&#x60;, &#x60;image/png&#x60; (with APNG format), &#x60;image/apng&#x60;, and &#x60;image/webp&#x60; instead of the common static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; content types.  When &#x60;true&#x60;, the server SHOULD return an animated thumbnail if possible and supported. When &#x60;false&#x60;, the server MUST NOT return an animated thumbnail. For example, returning a static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return &#x60;image/webp&#x60; thumbnails when supporting animation.  When &#x60;true&#x60; and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though &#x60;animated&#x60; is &#x60;false&#x60;.  | [optional] |
+| **serverName** | **String**| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
+| **mediaId** | **String**| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
+| **width** | **Integer**| The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified. | |
+| **height** | **Integer**| The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified. | |
+| **method** | **String**| The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information. | [optional] [enum: crop, scale] |
+| **timeoutMs** | **Long**| The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [optional] [default to 20000] |
+| **animated** | **Boolean**| Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types &#x60;image/gif&#x60;, &#x60;image/png&#x60; (with APNG format), &#x60;image/apng&#x60;, and &#x60;image/webp&#x60; instead of the common static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; content types.  When &#x60;true&#x60;, the server SHOULD return an animated thumbnail if possible and supported. When &#x60;false&#x60;, the server MUST NOT return an animated thumbnail. For example, returning a static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return &#x60;image/webp&#x60; thumbnails when supporting animation.  When &#x60;true&#x60; and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though &#x60;animated&#x60; is &#x60;false&#x60;.  | [optional] |
 
 ### Return type
 
@@ -710,13 +710,13 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | A thumbnail of the requested content. |  * Content-Disposition - The [disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) of the returned content. MUST be &#x60;inline&#x60;, and SHOULD contain a file name (e.g. &#x60;thumbnail.png&#x60;).  Servers should note the [Content-Type restrictions for serving inline content](/client-server-api/#serving-inline-content), as these limitations imply which formats should be used for thumbnail generation.  <br>  * Content-Type - The content type of the thumbnail. This header became required in order to support &#x60;Content-Disposition&#x60;. <br>  |
-| **307** |  |  -  |
-| **308** |  |  -  |
+| **307** | A redirect to the thumbnail of the requested content. |  * Location - The URL of the thumbnail content. <br>  |
+| **308** | A redirect to the thumbnail of the requested content. |  * Location - The URL of the thumbnail content. <br>  |
 | **400** | The request does not make sense to the server, or the server cannot thumbnail the content. For example, the client requested non-integer dimensions or asked for negatively-sized images. |  -  |
 | **413** | The local content is too large for the server to thumbnail. |  -  |
-| **429** |  |  -  |
+| **429** | This request was rate-limited. |  -  |
 | **502** | The remote content is too large for the server to thumbnail. |  -  |
-| **504** |  |  -  |
+| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
 
 ## getContentThumbnailWithHttpInfo
 
@@ -748,13 +748,13 @@ public class Example {
         accessTokenBearer.setBearerToken("BEARER TOKEN");
 
         MediaApi apiInstance = new MediaApi(defaultClient);
-        Object serverName = matrix.org; // Object | The server name from the `mxc://` URI (the authority component). 
-        Object mediaId = ascERGshawAWawugaAcauga; // Object | The media ID from the `mxc://` URI (the path component). 
-        Object width = 64; // Object | The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified.
-        Object height = 64; // Object | The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified.
-        Object method = Object.fromValue("crop"); // Object | The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information.
-        Object timeoutMs = 20000; // Object | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
-        Object animated = false; // Object | Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types `image/gif`, `image/png` (with APNG format), `image/apng`, and `image/webp` instead of the common static `image/png` or `image/jpeg` content types.  When `true`, the server SHOULD return an animated thumbnail if possible and supported. When `false`, the server MUST NOT return an animated thumbnail. For example, returning a static `image/png` or `image/jpeg` thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return `image/webp` thumbnails when supporting animation.  When `true` and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though `animated` is `false`. 
+        String serverName = "matrix.org"; // String | The server name from the `mxc://` URI (the authority component). 
+        String mediaId = "ascERGshawAWawugaAcauga"; // String | The media ID from the `mxc://` URI (the path component). 
+        Integer width = 64; // Integer | The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified.
+        Integer height = 64; // Integer | The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified.
+        String method = "crop"; // String | The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information.
+        Long timeoutMs = 20000L; // Long | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
+        Boolean animated = false; // Boolean | Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types `image/gif`, `image/png` (with APNG format), `image/apng`, and `image/webp` instead of the common static `image/png` or `image/jpeg` content types.  When `true`, the server SHOULD return an animated thumbnail if possible and supported. When `false`, the server MUST NOT return an animated thumbnail. For example, returning a static `image/png` or `image/jpeg` thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return `image/webp` thumbnails when supporting animation.  When `true` and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though `animated` is `false`. 
         try {
             ApiResponse<Object> response = apiInstance.getContentThumbnailWithHttpInfo(serverName, mediaId, width, height, method, timeoutMs, animated);
             System.out.println("Status code: " + response.getStatusCode());
@@ -776,13 +776,13 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **serverName** | [**Object**](.md)| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
-| **mediaId** | [**Object**](.md)| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
-| **width** | [**Object**](.md)| The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified. | |
-| **height** | [**Object**](.md)| The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified. | |
-| **method** | [**Object**](.md)| The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information. | [optional] [enum: crop, scale] |
-| **timeoutMs** | [**Object**](.md)| The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [optional] [default to 20000] |
-| **animated** | [**Object**](.md)| Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types &#x60;image/gif&#x60;, &#x60;image/png&#x60; (with APNG format), &#x60;image/apng&#x60;, and &#x60;image/webp&#x60; instead of the common static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; content types.  When &#x60;true&#x60;, the server SHOULD return an animated thumbnail if possible and supported. When &#x60;false&#x60;, the server MUST NOT return an animated thumbnail. For example, returning a static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return &#x60;image/webp&#x60; thumbnails when supporting animation.  When &#x60;true&#x60; and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though &#x60;animated&#x60; is &#x60;false&#x60;.  | [optional] |
+| **serverName** | **String**| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
+| **mediaId** | **String**| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
+| **width** | **Integer**| The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified. | |
+| **height** | **Integer**| The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified. | |
+| **method** | **String**| The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information. | [optional] [enum: crop, scale] |
+| **timeoutMs** | **Long**| The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [optional] [default to 20000] |
+| **animated** | **Boolean**| Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types &#x60;image/gif&#x60;, &#x60;image/png&#x60; (with APNG format), &#x60;image/apng&#x60;, and &#x60;image/webp&#x60; instead of the common static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; content types.  When &#x60;true&#x60;, the server SHOULD return an animated thumbnail if possible and supported. When &#x60;false&#x60;, the server MUST NOT return an animated thumbnail. For example, returning a static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return &#x60;image/webp&#x60; thumbnails when supporting animation.  When &#x60;true&#x60; and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though &#x60;animated&#x60; is &#x60;false&#x60;.  | [optional] |
 
 ### Return type
 
@@ -802,13 +802,13 @@ ApiResponse<**Object**>
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | A thumbnail of the requested content. |  * Content-Disposition - The [disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) of the returned content. MUST be &#x60;inline&#x60;, and SHOULD contain a file name (e.g. &#x60;thumbnail.png&#x60;).  Servers should note the [Content-Type restrictions for serving inline content](/client-server-api/#serving-inline-content), as these limitations imply which formats should be used for thumbnail generation.  <br>  * Content-Type - The content type of the thumbnail. This header became required in order to support &#x60;Content-Disposition&#x60;. <br>  |
-| **307** |  |  -  |
-| **308** |  |  -  |
+| **307** | A redirect to the thumbnail of the requested content. |  * Location - The URL of the thumbnail content. <br>  |
+| **308** | A redirect to the thumbnail of the requested content. |  * Location - The URL of the thumbnail content. <br>  |
 | **400** | The request does not make sense to the server, or the server cannot thumbnail the content. For example, the client requested non-integer dimensions or asked for negatively-sized images. |  -  |
 | **413** | The local content is too large for the server to thumbnail. |  -  |
-| **429** |  |  -  |
+| **429** | This request was rate-limited. |  -  |
 | **502** | The remote content is too large for the server to thumbnail. |  -  |
-| **504** |  |  -  |
+| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
 
 
 ## getUrlPreview
@@ -840,8 +840,8 @@ public class Example {
         accessTokenBearer.setBearerToken("BEARER TOKEN");
 
         MediaApi apiInstance = new MediaApi(defaultClient);
-        Object url = https://matrix.org; // Object | The URL to get a preview of.
-        Object ts = 1510610716656; // Object | The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available.
+        URI url = new URI(); // URI | The URL to get a preview of.
+        Long ts = 1510610716656L; // Long | The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available.
         try {
             GetUrlPreview200Response result = apiInstance.getUrlPreview(url, ts);
             System.out.println(result);
@@ -861,8 +861,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **url** | [**Object**](.md)| The URL to get a preview of. | |
-| **ts** | [**Object**](.md)| The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available. | [optional] |
+| **url** | **URI**| The URL to get a preview of. | |
+| **ts** | **Long**| The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available. | [optional] |
 
 ### Return type
 
@@ -882,7 +882,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The OpenGraph data for the URL, which may be empty. Some values are replaced with matrix equivalents if they are provided in the response. The differences from the OpenGraph protocol are described here. |  -  |
-| **429** |  |  -  |
+| **429** | This request was rate-limited. |  -  |
 
 ## getUrlPreviewWithHttpInfo
 
@@ -914,8 +914,8 @@ public class Example {
         accessTokenBearer.setBearerToken("BEARER TOKEN");
 
         MediaApi apiInstance = new MediaApi(defaultClient);
-        Object url = https://matrix.org; // Object | The URL to get a preview of.
-        Object ts = 1510610716656; // Object | The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available.
+        URI url = new URI(); // URI | The URL to get a preview of.
+        Long ts = 1510610716656L; // Long | The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available.
         try {
             ApiResponse<GetUrlPreview200Response> response = apiInstance.getUrlPreviewWithHttpInfo(url, ts);
             System.out.println("Status code: " + response.getStatusCode());
@@ -937,8 +937,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **url** | [**Object**](.md)| The URL to get a preview of. | |
-| **ts** | [**Object**](.md)| The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available. | [optional] |
+| **url** | **URI**| The URL to get a preview of. | |
+| **ts** | **Long**| The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available. | [optional] |
 
 ### Return type
 
@@ -958,7 +958,7 @@ ApiResponse<[**GetUrlPreview200Response**](GetUrlPreview200Response.md)>
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The OpenGraph data for the URL, which may be empty. Some values are replaced with matrix equivalents if they are provided in the response. The differences from the OpenGraph protocol are described here. |  -  |
-| **429** |  |  -  |
+| **429** | This request was rate-limited. |  -  |
 
 
 ## uploadContent
@@ -1033,8 +1033,8 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | The [&#x60;mxc://&#x60; URI](/client-server-api/#matrix-content-mxc-uris) for the uploaded content. |  -  |
 | **403** | The user does not have permission to upload the content. Some reasons for this error include:  - The server does not permit the file type. - The user has reached a quota for uploaded content. |  -  |
-| **413** |  |  -  |
-| **429** |  |  -  |
+| **413** | The uploaded content is too large for the server. |  -  |
+| **429** | This request was rate-limited. |  -  |
 
 ## uploadContentWithHttpInfo
 
@@ -1111,8 +1111,8 @@ ApiResponse<[**UploadContent200Response**](UploadContent200Response.md)>
 |-------------|-------------|------------------|
 | **200** | The [&#x60;mxc://&#x60; URI](/client-server-api/#matrix-content-mxc-uris) for the uploaded content. |  -  |
 | **403** | The user does not have permission to upload the content. Some reasons for this error include:  - The server does not permit the file type. - The user has reached a quota for uploaded content. |  -  |
-| **413** |  |  -  |
-| **429** |  |  -  |
+| **413** | The uploaded content is too large for the server. |  -  |
+| **429** | This request was rate-limited. |  -  |
 
 
 ## uploadContentToMXC
@@ -1144,8 +1144,8 @@ public class Example {
         accessTokenBearer.setBearerToken("BEARER TOKEN");
 
         MediaApi apiInstance = new MediaApi(defaultClient);
-        Object serverName = matrix.org; // Object | The server name from the `mxc://` URI (the authority component). 
-        Object mediaId = ascERGshawAWawugaAcauga; // Object | The media ID from the `mxc://` URI (the path component). 
+        String serverName = "matrix.org"; // String | The server name from the `mxc://` URI (the authority component). 
+        String mediaId = "ascERGshawAWawugaAcauga"; // String | The media ID from the `mxc://` URI (the path component). 
         Object body = null; // Object | 
         String contentType = "application/pdf"; // String | **Optional.** The content type of the file being uploaded.  Clients SHOULD always supply this header.  Defaults to `application/octet-stream` if it is not set. This header became explicitly optional with a default value. 
         String filename = "War and Peace.pdf"; // String | The name of the file being uploaded
@@ -1168,8 +1168,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **serverName** | [**Object**](.md)| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
-| **mediaId** | [**Object**](.md)| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
+| **serverName** | **String**| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
+| **mediaId** | **String**| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
 | **body** | **Object**|  | |
 | **contentType** | **String**| **Optional.** The content type of the file being uploaded.  Clients SHOULD always supply this header.  Defaults to &#x60;application/octet-stream&#x60; if it is not set. This header became explicitly optional with a default value.  | [optional] |
 | **filename** | **String**| The name of the file being uploaded | [optional] |
@@ -1195,8 +1195,8 @@ public class Example {
 | **403** | The user does not have permission to upload the content. Some reasons for this error include:  - The server does not permit the file type. - The user has reached a quota for uploaded content. - The request comes from a different user than the one that called   [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).  A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_FORBIDDEN&#x60;. |  -  |
 | **404** | The user has provided an invalid MXC ID. Some reasons for this error include:  - The MXC ID was not created with [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create). - The MXC ID has expired.  A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_FOUND&#x60;. |  -  |
 | **409** | The endpoint was called with a media ID that already has content. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_CANNOT_OVERWRITE_MEDIA&#x60;. |  -  |
-| **413** |  |  -  |
-| **429** |  |  -  |
+| **413** | The uploaded content is too large for the server. |  -  |
+| **429** | This request was rate-limited. |  -  |
 
 ## uploadContentToMXCWithHttpInfo
 
@@ -1228,8 +1228,8 @@ public class Example {
         accessTokenBearer.setBearerToken("BEARER TOKEN");
 
         MediaApi apiInstance = new MediaApi(defaultClient);
-        Object serverName = matrix.org; // Object | The server name from the `mxc://` URI (the authority component). 
-        Object mediaId = ascERGshawAWawugaAcauga; // Object | The media ID from the `mxc://` URI (the path component). 
+        String serverName = "matrix.org"; // String | The server name from the `mxc://` URI (the authority component). 
+        String mediaId = "ascERGshawAWawugaAcauga"; // String | The media ID from the `mxc://` URI (the path component). 
         Object body = null; // Object | 
         String contentType = "application/pdf"; // String | **Optional.** The content type of the file being uploaded.  Clients SHOULD always supply this header.  Defaults to `application/octet-stream` if it is not set. This header became explicitly optional with a default value. 
         String filename = "War and Peace.pdf"; // String | The name of the file being uploaded
@@ -1254,8 +1254,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **serverName** | [**Object**](.md)| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
-| **mediaId** | [**Object**](.md)| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
+| **serverName** | **String**| The server name from the &#x60;mxc://&#x60; URI (the authority component).  | |
+| **mediaId** | **String**| The media ID from the &#x60;mxc://&#x60; URI (the path component).  | |
 | **body** | **Object**|  | |
 | **contentType** | **String**| **Optional.** The content type of the file being uploaded.  Clients SHOULD always supply this header.  Defaults to &#x60;application/octet-stream&#x60; if it is not set. This header became explicitly optional with a default value.  | [optional] |
 | **filename** | **String**| The name of the file being uploaded | [optional] |
@@ -1281,6 +1281,6 @@ ApiResponse<**Object**>
 | **403** | The user does not have permission to upload the content. Some reasons for this error include:  - The server does not permit the file type. - The user has reached a quota for uploaded content. - The request comes from a different user than the one that called   [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).  A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_FORBIDDEN&#x60;. |  -  |
 | **404** | The user has provided an invalid MXC ID. Some reasons for this error include:  - The MXC ID was not created with [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create). - The MXC ID has expired.  A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_FOUND&#x60;. |  -  |
 | **409** | The endpoint was called with a media ID that already has content. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_CANNOT_OVERWRITE_MEDIA&#x60;. |  -  |
-| **413** |  |  -  |
-| **429** |  |  -  |
+| **413** | The uploaded content is too large for the server. |  -  |
+| **429** | This request was rate-limited. |  -  |
 

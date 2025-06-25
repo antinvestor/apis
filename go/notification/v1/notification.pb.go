@@ -496,7 +496,7 @@ func (x *SearchResponse) GetData() []*Notification {
 
 type SendRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *Notification          `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Data          []*Notification        `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -531,7 +531,7 @@ func (*SendRequest) Descriptor() ([]byte, []int) {
 	return file_notification_v1_notification_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *SendRequest) GetData() *Notification {
+func (x *SendRequest) GetData() []*Notification {
 	if x != nil {
 		return x.Data
 	}
@@ -540,7 +540,7 @@ func (x *SendRequest) GetData() *Notification {
 
 type SendResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *v1.StatusResponse     `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Data          []*v1.StatusResponse   `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -575,7 +575,7 @@ func (*SendResponse) Descriptor() ([]byte, []int) {
 	return file_notification_v1_notification_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *SendResponse) GetData() *v1.StatusResponse {
+func (x *SendResponse) GetData() []*v1.StatusResponse {
 	if x != nil {
 		return x.Data
 	}
@@ -584,7 +584,7 @@ func (x *SendResponse) GetData() *v1.StatusResponse {
 
 type ReleaseRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            []string               `protobuf:"bytes,1,rep,name=id,proto3" json:"id,omitempty"`
 	Comment       string                 `protobuf:"bytes,2,opt,name=comment,proto3" json:"comment,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -620,11 +620,11 @@ func (*ReleaseRequest) Descriptor() ([]byte, []int) {
 	return file_notification_v1_notification_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *ReleaseRequest) GetId() string {
+func (x *ReleaseRequest) GetId() []string {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return nil
 }
 
 func (x *ReleaseRequest) GetComment() string {
@@ -636,7 +636,7 @@ func (x *ReleaseRequest) GetComment() string {
 
 type ReleaseResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *v1.StatusResponse     `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Data          []*v1.StatusResponse   `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -671,7 +671,7 @@ func (*ReleaseResponse) Descriptor() ([]byte, []int) {
 	return file_notification_v1_notification_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *ReleaseResponse) GetData() *v1.StatusResponse {
+func (x *ReleaseResponse) GetData() []*v1.StatusResponse {
 	if x != nil {
 		return x.Data
 	}
@@ -680,7 +680,7 @@ func (x *ReleaseResponse) GetData() *v1.StatusResponse {
 
 type ReceiveRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *Notification          `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Data          []*Notification        `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -715,7 +715,7 @@ func (*ReceiveRequest) Descriptor() ([]byte, []int) {
 	return file_notification_v1_notification_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *ReceiveRequest) GetData() *Notification {
+func (x *ReceiveRequest) GetData() []*Notification {
 	if x != nil {
 		return x.Data
 	}
@@ -724,7 +724,7 @@ func (x *ReceiveRequest) GetData() *Notification {
 
 type ReceiveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *v1.StatusResponse     `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Data          []*v1.StatusResponse   `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -759,7 +759,7 @@ func (*ReceiveResponse) Descriptor() ([]byte, []int) {
 	return file_notification_v1_notification_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *ReceiveResponse) GetData() *v1.StatusResponse {
+func (x *ReceiveResponse) GetData() []*v1.StatusResponse {
 	if x != nil {
 		return x.Data
 	}
@@ -1044,18 +1044,18 @@ const file_notification_v1_notification_proto_rawDesc = "" +
 	"\x0eSearchResponse\x121\n" +
 	"\x04data\x18\x01 \x03(\v2\x1d.notification.v1.NotificationR\x04data\"@\n" +
 	"\vSendRequest\x121\n" +
-	"\x04data\x18\x01 \x01(\v2\x1d.notification.v1.NotificationR\x04data\"=\n" +
+	"\x04data\x18\x01 \x03(\v2\x1d.notification.v1.NotificationR\x04data\"=\n" +
 	"\fSendResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data\"W\n" +
-	"\x0eReleaseRequest\x12+\n" +
-	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x18\n" +
+	"\x04data\x18\x01 \x03(\v2\x19.common.v1.StatusResponseR\x04data\"\\\n" +
+	"\x0eReleaseRequest\x120\n" +
+	"\x02id\x18\x01 \x03(\tB \xbaH\x1d\x92\x01\x1a\"\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x18\n" +
 	"\acomment\x18\x02 \x01(\tR\acomment\"@\n" +
 	"\x0fReleaseResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data\"C\n" +
+	"\x04data\x18\x01 \x03(\v2\x19.common.v1.StatusResponseR\x04data\"C\n" +
 	"\x0eReceiveRequest\x121\n" +
-	"\x04data\x18\x01 \x01(\v2\x1d.notification.v1.NotificationR\x04data\"@\n" +
+	"\x04data\x18\x01 \x03(\v2\x1d.notification.v1.NotificationR\x04data\"@\n" +
 	"\x0fReceiveResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.common.v1.StatusResponseR\x04data\"|\n" +
+	"\x04data\x18\x01 \x03(\v2\x19.common.v1.StatusResponseR\x04data\"|\n" +
 	"\x15TemplateSearchRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12#\n" +
 	"\rlanguage_code\x18\x02 \x01(\tR\flanguageCode\x12\x12\n" +
@@ -1080,12 +1080,12 @@ const file_notification_v1_notification_proto_rawDesc = "" +
 	"\bPRIORITY\x12\b\n" +
 	"\x04HIGH\x10\x00\x12\a\n" +
 	"\x03LOW\x10\x01\x12\f\n" +
-	"\bVERY_LOW\x10\x022\xbe\x06\n" +
-	"\x13NotificationService\x12U\n" +
+	"\bVERY_LOW\x10\x022\xc4\x06\n" +
+	"\x13NotificationService\x12W\n" +
 	"\x04Send\x12\x1c.notification.v1.SendRequest\x1a\x1d.notification.v1.SendResponse\"\x10\x82\xd3\xe4\x93\x02\n" +
-	":\x01*\"\x05/send\x12k\n" +
-	"\aRelease\x12\x1f.notification.v1.ReleaseRequest\x1a .notification.v1.ReleaseResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/send/release/{id}\x12a\n" +
-	"\aReceive\x12\x1f.notification.v1.ReceiveRequest\x1a .notification.v1.ReceiveResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/receive\x12V\n" +
+	":\x01*\"\x05/send0\x01\x12m\n" +
+	"\aRelease\x12\x1f.notification.v1.ReleaseRequest\x1a .notification.v1.ReleaseResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/send/release/{id}0\x01\x12c\n" +
+	"\aReceive\x12\x1f.notification.v1.ReceiveRequest\x1a .notification.v1.ReceiveResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/receive0\x01\x12V\n" +
 	"\x06Search\x12\x18.common.v1.SearchRequest\x1a\x1f.notification.v1.SearchResponse\"\x0f\x82\xd3\xe4\x93\x02\t\x12\a/search0\x01\x12S\n" +
 	"\x06Status\x12\x18.common.v1.StatusRequest\x1a\x19.common.v1.StatusResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/status/{id}\x12h\n" +
 	"\fStatusUpdate\x12\x1e.common.v1.StatusUpdateRequest\x1a\x1f.common.v1.StatusUpdateResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*2\f/status/{id}\x12v\n" +

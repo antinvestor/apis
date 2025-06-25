@@ -49,11 +49,11 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NotificationServiceClient interface {
 	// Send method for queueing massages as requested
-	Send(ctx context.Context, in *SendRequest, opts ...grpc.CallOption) (*SendResponse, error)
+	Send(ctx context.Context, in *SendRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SendResponse], error)
 	// Release method for releasing queued massages and returns if notification status if released
-	Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (*ReleaseResponse, error)
+	Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ReleaseResponse], error)
 	// Receive method is for client request for particular notification responses from system
-	Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (*ReceiveResponse, error)
+	Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ReceiveResponse], error)
 	// Search method is for client request for particular notification details from system
 	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error)
 	// Status request to determine if notification is prepared or released
@@ -73,39 +73,66 @@ func NewNotificationServiceClient(cc grpc.ClientConnInterface) NotificationServi
 	return &notificationServiceClient{cc}
 }
 
-func (c *notificationServiceClient) Send(ctx context.Context, in *SendRequest, opts ...grpc.CallOption) (*SendResponse, error) {
+func (c *notificationServiceClient) Send(ctx context.Context, in *SendRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SendResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SendResponse)
-	err := c.cc.Invoke(ctx, NotificationService_Send_FullMethodName, in, out, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &NotificationService_ServiceDesc.Streams[0], NotificationService_Send_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &grpc.GenericClientStream[SendRequest, SendResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
 }
 
-func (c *notificationServiceClient) Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (*ReleaseResponse, error) {
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type NotificationService_SendClient = grpc.ServerStreamingClient[SendResponse]
+
+func (c *notificationServiceClient) Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ReleaseResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ReleaseResponse)
-	err := c.cc.Invoke(ctx, NotificationService_Release_FullMethodName, in, out, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &NotificationService_ServiceDesc.Streams[1], NotificationService_Release_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &grpc.GenericClientStream[ReleaseRequest, ReleaseResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
 }
 
-func (c *notificationServiceClient) Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (*ReceiveResponse, error) {
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type NotificationService_ReleaseClient = grpc.ServerStreamingClient[ReleaseResponse]
+
+func (c *notificationServiceClient) Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ReceiveResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ReceiveResponse)
-	err := c.cc.Invoke(ctx, NotificationService_Receive_FullMethodName, in, out, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &NotificationService_ServiceDesc.Streams[2], NotificationService_Receive_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &grpc.GenericClientStream[ReceiveRequest, ReceiveResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
 }
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type NotificationService_ReceiveClient = grpc.ServerStreamingClient[ReceiveResponse]
 
 func (c *notificationServiceClient) Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &NotificationService_ServiceDesc.Streams[0], NotificationService_Search_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &NotificationService_ServiceDesc.Streams[3], NotificationService_Search_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -144,7 +171,7 @@ func (c *notificationServiceClient) StatusUpdate(ctx context.Context, in *v1.Sta
 
 func (c *notificationServiceClient) TemplateSearch(ctx context.Context, in *TemplateSearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TemplateSearchResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &NotificationService_ServiceDesc.Streams[1], NotificationService_TemplateSearch_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &NotificationService_ServiceDesc.Streams[4], NotificationService_TemplateSearch_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -176,11 +203,11 @@ func (c *notificationServiceClient) TemplateSave(ctx context.Context, in *Templa
 // for forward compatibility.
 type NotificationServiceServer interface {
 	// Send method for queueing massages as requested
-	Send(context.Context, *SendRequest) (*SendResponse, error)
+	Send(*SendRequest, grpc.ServerStreamingServer[SendResponse]) error
 	// Release method for releasing queued massages and returns if notification status if released
-	Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error)
+	Release(*ReleaseRequest, grpc.ServerStreamingServer[ReleaseResponse]) error
 	// Receive method is for client request for particular notification responses from system
-	Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error)
+	Receive(*ReceiveRequest, grpc.ServerStreamingServer[ReceiveResponse]) error
 	// Search method is for client request for particular notification details from system
 	Search(*v1.SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error
 	// Status request to determine if notification is prepared or released
@@ -200,14 +227,14 @@ type NotificationServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedNotificationServiceServer struct{}
 
-func (UnimplementedNotificationServiceServer) Send(context.Context, *SendRequest) (*SendResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Send not implemented")
+func (UnimplementedNotificationServiceServer) Send(*SendRequest, grpc.ServerStreamingServer[SendResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method Send not implemented")
 }
-func (UnimplementedNotificationServiceServer) Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Release not implemented")
+func (UnimplementedNotificationServiceServer) Release(*ReleaseRequest, grpc.ServerStreamingServer[ReleaseResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method Release not implemented")
 }
-func (UnimplementedNotificationServiceServer) Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Receive not implemented")
+func (UnimplementedNotificationServiceServer) Receive(*ReceiveRequest, grpc.ServerStreamingServer[ReceiveResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method Receive not implemented")
 }
 func (UnimplementedNotificationServiceServer) Search(*v1.SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method Search not implemented")
@@ -245,59 +272,38 @@ func RegisterNotificationServiceServer(s grpc.ServiceRegistrar, srv Notification
 	s.RegisterService(&NotificationService_ServiceDesc, srv)
 }
 
-func _NotificationService_Send_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SendRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _NotificationService_Send_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(SendRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(NotificationServiceServer).Send(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationService_Send_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationServiceServer).Send(ctx, req.(*SendRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(NotificationServiceServer).Send(m, &grpc.GenericServerStream[SendRequest, SendResponse]{ServerStream: stream})
 }
 
-func _NotificationService_Release_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReleaseRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type NotificationService_SendServer = grpc.ServerStreamingServer[SendResponse]
+
+func _NotificationService_Release_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReleaseRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(NotificationServiceServer).Release(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationService_Release_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationServiceServer).Release(ctx, req.(*ReleaseRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(NotificationServiceServer).Release(m, &grpc.GenericServerStream[ReleaseRequest, ReleaseResponse]{ServerStream: stream})
 }
 
-func _NotificationService_Receive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReceiveRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type NotificationService_ReleaseServer = grpc.ServerStreamingServer[ReleaseResponse]
+
+func _NotificationService_Receive_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReceiveRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(NotificationServiceServer).Receive(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationService_Receive_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationServiceServer).Receive(ctx, req.(*ReceiveRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(NotificationServiceServer).Receive(m, &grpc.GenericServerStream[ReceiveRequest, ReceiveResponse]{ServerStream: stream})
 }
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type NotificationService_ReceiveServer = grpc.ServerStreamingServer[ReceiveResponse]
 
 func _NotificationService_Search_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(v1.SearchRequest)
@@ -383,18 +389,6 @@ var NotificationService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*NotificationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Send",
-			Handler:    _NotificationService_Send_Handler,
-		},
-		{
-			MethodName: "Release",
-			Handler:    _NotificationService_Release_Handler,
-		},
-		{
-			MethodName: "Receive",
-			Handler:    _NotificationService_Receive_Handler,
-		},
-		{
 			MethodName: "Status",
 			Handler:    _NotificationService_Status_Handler,
 		},
@@ -408,6 +402,21 @@ var NotificationService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Send",
+			Handler:       _NotificationService_Send_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "Release",
+			Handler:       _NotificationService_Release_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "Receive",
+			Handler:       _NotificationService_Receive_Handler,
+			ServerStreams: true,
+		},
 		{
 			StreamName:    "Search",
 			Handler:       _NotificationService_Search_Handler,

@@ -1,17 +1,3 @@
-// Copyright 2023-2024 Ant Investor Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
  * Ant Investor Files
  * An openAPI 3.0 specification that defines how files are stored and accessed on ant investor products
@@ -38,95 +24,77 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.net.URI;
 import java.util.Arrays;
-import org.openapitools.jackson.nullable.JsonNullable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
+import com.antinvestor.apis.files.invoker.ApiClient;
 /**
  * GetUrlPreview200Response
  */
 @JsonPropertyOrder({
-  GetUrlPreview200Response.JSON_PROPERTY_MATRIX_COLON_IMAGE_COLON_SIZE,
-  GetUrlPreview200Response.JSON_PROPERTY_OG_COLON_IMAGE
+  GetUrlPreview200Response.JSON_PROPERTY_MATRIX_IMAGE_SIZE,
+  GetUrlPreview200Response.JSON_PROPERTY_OG_IMAGE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class GetUrlPreview200Response {
-  public static final String JSON_PROPERTY_MATRIX_COLON_IMAGE_COLON_SIZE = "matrix:image:size";
-  private JsonNullable<Object> matrixColonImageColonSize = JsonNullable.<Object>of(null);
+  public static final String JSON_PROPERTY_MATRIX_IMAGE_SIZE = "matrix:image:size";
+  @javax.annotation.Nullable
+  private Long matrixImageSize;
 
-  public static final String JSON_PROPERTY_OG_COLON_IMAGE = "og:image";
-  private JsonNullable<Object> ogColonImage = JsonNullable.<Object>of(null);
+  public static final String JSON_PROPERTY_OG_IMAGE = "og:image";
+  @javax.annotation.Nullable
+  private URI ogImage;
 
   public GetUrlPreview200Response() { 
   }
 
-  public GetUrlPreview200Response matrixColonImageColonSize(Object matrixColonImageColonSize) {
-    this.matrixColonImageColonSize = JsonNullable.<Object>of(matrixColonImageColonSize);
+  public GetUrlPreview200Response matrixImageSize(@javax.annotation.Nullable Long matrixImageSize) {
+    this.matrixImageSize = matrixImageSize;
     return this;
   }
 
-   /**
+  /**
    * The byte-size of the image. Omitted if there is no image attached.
-   * @return matrixColonImageColonSize
-  **/
+   * @return matrixImageSize
+   */
   @javax.annotation.Nullable
-  @JsonIgnore
-
-  public Object getMatrixColonImageColonSize() {
-        return matrixColonImageColonSize.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_MATRIX_COLON_IMAGE_COLON_SIZE)
+  @JsonProperty(JSON_PROPERTY_MATRIX_IMAGE_SIZE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Object> getMatrixColonImageColonSize_JsonNullable() {
-    return matrixColonImageColonSize;
-  }
-  
-  @JsonProperty(JSON_PROPERTY_MATRIX_COLON_IMAGE_COLON_SIZE)
-  public void setMatrixColonImageColonSize_JsonNullable(JsonNullable<Object> matrixColonImageColonSize) {
-    this.matrixColonImageColonSize = matrixColonImageColonSize;
-  }
-
-  public void setMatrixColonImageColonSize(Object matrixColonImageColonSize) {
-    this.matrixColonImageColonSize = JsonNullable.<Object>of(matrixColonImageColonSize);
+  public Long getMatrixImageSize() {
+    return matrixImageSize;
   }
 
 
-  public GetUrlPreview200Response ogColonImage(Object ogColonImage) {
-    this.ogColonImage = JsonNullable.<Object>of(ogColonImage);
+  @JsonProperty(JSON_PROPERTY_MATRIX_IMAGE_SIZE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setMatrixImageSize(@javax.annotation.Nullable Long matrixImageSize) {
+    this.matrixImageSize = matrixImageSize;
+  }
+
+
+  public GetUrlPreview200Response ogImage(@javax.annotation.Nullable URI ogImage) {
+    this.ogImage = ogImage;
     return this;
   }
 
-   /**
+  /**
    * An [&#x60;mxc://&#x60; URI](/client-server-api/#matrix-content-mxc-uris) to the image. Omitted if there is no image.
-   * @return ogColonImage
-  **/
+   * @return ogImage
+   */
   @javax.annotation.Nullable
-  @JsonIgnore
-
-  public Object getOgColonImage() {
-        return ogColonImage.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_OG_COLON_IMAGE)
+  @JsonProperty(JSON_PROPERTY_OG_IMAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Object> getOgColonImage_JsonNullable() {
-    return ogColonImage;
-  }
-  
-  @JsonProperty(JSON_PROPERTY_OG_COLON_IMAGE)
-  public void setOgColonImage_JsonNullable(JsonNullable<Object> ogColonImage) {
-    this.ogColonImage = ogColonImage;
+  public URI getOgImage() {
+    return ogImage;
   }
 
-  public void setOgColonImage(Object ogColonImage) {
-    this.ogColonImage = JsonNullable.<Object>of(ogColonImage);
+
+  @JsonProperty(JSON_PROPERTY_OG_IMAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setOgImage(@javax.annotation.Nullable URI ogImage) {
+    this.ogImage = ogImage;
   }
 
 
@@ -142,32 +110,21 @@ public class GetUrlPreview200Response {
       return false;
     }
     GetUrlPreview200Response getUrlPreview200Response = (GetUrlPreview200Response) o;
-    return equalsNullable(this.matrixColonImageColonSize, getUrlPreview200Response.matrixColonImageColonSize) &&
-        equalsNullable(this.ogColonImage, getUrlPreview200Response.ogColonImage);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+    return Objects.equals(this.matrixImageSize, getUrlPreview200Response.matrixImageSize) &&
+        Objects.equals(this.ogImage, getUrlPreview200Response.ogImage);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(hashCodeNullable(matrixColonImageColonSize), hashCodeNullable(ogColonImage));
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(matrixImageSize, ogImage);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class GetUrlPreview200Response {\n");
-    sb.append("    matrixColonImageColonSize: ").append(toIndentedString(matrixColonImageColonSize)).append("\n");
-    sb.append("    ogColonImage: ").append(toIndentedString(ogColonImage)).append("\n");
+    sb.append("    matrixImageSize: ").append(toIndentedString(matrixImageSize)).append("\n");
+    sb.append("    ogImage: ").append(toIndentedString(ogImage)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -216,13 +173,13 @@ public class GetUrlPreview200Response {
     StringJoiner joiner = new StringJoiner("&");
 
     // add `matrix:image:size` to the URL query string
-    if (getMatrixColonImageColonSize() != null) {
-      joiner.add(String.format("%smatrix:image:size%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getMatrixColonImageColonSize()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    if (getMatrixImageSize() != null) {
+      joiner.add(String.format("%smatrix:image:size%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getMatrixImageSize()))));
     }
 
     // add `og:image` to the URL query string
-    if (getOgColonImage() != null) {
-      joiner.add(String.format("%sog:image%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getOgColonImage()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    if (getOgImage() != null) {
+      joiner.add(String.format("%sog:image%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getOgImage()))));
     }
 
     return joiner.toString();

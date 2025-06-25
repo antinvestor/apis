@@ -29,10 +29,10 @@ paths:
     post:
       operationId: uploadContent
       parameters:
-      - $ref: '#/components/parameters/contentType'
-      - $ref: '#/components/parameters/filename'
+      - $ref: "#/components/parameters/contentType"
+      - $ref: "#/components/parameters/filename"
       requestBody:
-        $ref: '#/components/requestBodies/bytes'
+        $ref: "#/components/requestBodies/bytes"
       responses:
         "200":
           content:
@@ -42,7 +42,7 @@ paths:
                   value:
                     content_uri: mxc://example.com/AQwafuaFswefuhsfAFAgsw
               schema:
-                $ref: '#/components/schemas/uploadContent_200_response'
+                $ref: "#/components/schemas/uploadContent_200_response"
           description: "The [`mxc://` URI](/client-server-api/#matrix-content-mxc-uris)\
             \ for the uploaded content."
         "403":
@@ -54,16 +54,16 @@ paths:
                     errcode: M_FORBIDDEN
                     error: Cannot upload this content
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: |-
             The user does not have permission to upload the content. Some reasons for this error include:
 
             - The server does not permit the file type.
             - The user has reached a quota for uploaded content.
         "413":
-          $ref: '#/components/responses/uploadTooLarge'
+          $ref: "#/components/responses/uploadTooLarge"
         "429":
-          $ref: '#/components/responses/rateLimited'
+          $ref: "#/components/responses/rateLimited"
       security:
       - accessTokenBearer: []
       summary: Upload some content to the content repository.
@@ -76,16 +76,16 @@ paths:
         earlier via [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).
       operationId: uploadContentToMXC
       parameters:
-      - $ref: '#/components/parameters/serverName'
+      - $ref: "#/components/parameters/serverName"
         description: |
           The server name from the `mxc://` URI returned by `POST /_matrix/media/v1/create` (the authority component).
-      - $ref: '#/components/parameters/mediaId'
+      - $ref: "#/components/parameters/mediaId"
         description: |
           The media ID from the `mxc://` URI returned by `POST /_matrix/media/v1/create` (the path component).
-      - $ref: '#/components/parameters/contentType'
-      - $ref: '#/components/parameters/filename'
+      - $ref: "#/components/parameters/contentType"
+      - $ref: "#/components/parameters/filename"
       requestBody:
-        $ref: '#/components/requestBodies/bytes'
+        $ref: "#/components/requestBodies/bytes"
       responses:
         "200":
           content:
@@ -93,7 +93,8 @@ paths:
               examples:
                 response:
                   value: {}
-              schema: {}
+              schema:
+                type: object
           description: The upload was successful.
         "403":
           content:
@@ -104,7 +105,7 @@ paths:
                     errcode: M_FORBIDDEN
                     error: Cannot upload this content
               schema:
-                $ref: '#/components/schemas/Error_1'
+                $ref: "#/components/schemas/Error"
           description: |-
             The user does not have permission to upload the content. Some reasons for this error include:
 
@@ -124,7 +125,7 @@ paths:
                     errcode: M_NOT_FOUND
                     error: Unknown media ID
               schema:
-                $ref: '#/components/schemas/Error_1'
+                $ref: "#/components/schemas/Error"
           description: |-
             The user has provided an invalid MXC ID. Some reasons for this error include:
 
@@ -142,15 +143,15 @@ paths:
                     errcode: M_CANNOT_OVERWRITE_MEDIA
                     error: Media already uploaded
               schema:
-                $ref: '#/components/schemas/Error_1'
+                $ref: "#/components/schemas/Error"
           description: |-
             The endpoint was called with a media ID that already has content. A
             [standard error response](/client-server-api/#standard-error-response)
             will be returned with the `errcode` `M_CANNOT_OVERWRITE_MEDIA`.
         "413":
-          $ref: '#/components/responses/uploadTooLarge'
+          $ref: "#/components/responses/uploadTooLarge"
         "429":
-          $ref: '#/components/responses/rateLimited'
+          $ref: "#/components/responses/rateLimited"
       security:
       - accessTokenBearer: []
       summary: Upload content to an `mxc://` URI that was created earlier.
@@ -184,7 +185,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/createContent_200_response'
+                $ref: "#/components/schemas/createContent_200_response"
           description: "The [`mxc://` URI](/client-server-api/#matrix-content-mxc-uris)\
             \ for the uploaded content."
         "403":
@@ -196,10 +197,10 @@ paths:
                     errcode: M_FORBIDDEN
                     error: Cannot upload this content
               schema:
-                $ref: '#/components/schemas/Error_1'
+                $ref: "#/components/schemas/Error"
           description: The user does not have permission to upload the content.
         "429":
-          $ref: '#/components/responses/rateLimited'
+          $ref: "#/components/responses/rateLimited"
       security:
       - accessTokenBearer: []
       summary: Create a new `mxc://` URI without uploading the content.
@@ -219,19 +220,18 @@ paths:
         Delivery Network (CDN).
       operationId: getContent
       parameters:
-      - $ref: '#/components/parameters/serverName'
-      - $ref: '#/components/parameters/mediaId'
-      - $ref: '#/components/parameters/timeout_ms'
+      - $ref: "#/components/parameters/serverName"
+      - $ref: "#/components/parameters/mediaId"
+      - $ref: "#/components/parameters/timeout_ms"
       responses:
         "200":
           content:
             application/octet-stream:
-              schema:
-                description: '**Required.** The bytes for the uploaded file.'
+              schema: {}
           description: The content that was previously uploaded.
           headers:
             Content-Type:
-              $ref: '#/components/headers/downloadContentType'
+              $ref: "#/components/headers/downloadContentType"
             Content-Disposition:
               description: |
                 The [disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition)
@@ -254,17 +254,18 @@ paths:
               required: true
               schema:
                 example: inline; filename="filename.jpg"
+                type: string
               style: simple
         "307":
-          $ref: '#/components/responses/downloadRedirect'
+          $ref: "#/components/responses/downloadRedirect"
         "308":
-          $ref: '#/components/responses/downloadRedirect'
+          $ref: "#/components/responses/downloadRedirect"
         "429":
-          $ref: '#/components/responses/rateLimited'
+          $ref: "#/components/responses/rateLimited"
         "502":
-          $ref: '#/components/responses/downloadTooLarge'
+          $ref: "#/components/responses/downloadTooLarge"
         "504":
-          $ref: '#/components/responses/notYetUploaded'
+          $ref: "#/components/responses/notYetUploaded"
       security:
       - accessTokenBearer: []
       summary: Download content from the content repository.
@@ -288,27 +289,27 @@ paths:
         Delivery Network (CDN).
       operationId: getContentOverrideName
       parameters:
-      - $ref: '#/components/parameters/serverName'
-      - $ref: '#/components/parameters/mediaId'
+      - $ref: "#/components/parameters/serverName"
+      - $ref: "#/components/parameters/mediaId"
       - description: A filename to give in the `Content-Disposition` header.
         example: filename.jpg
         explode: false
         in: path
         name: fileName
         required: true
-        schema: {}
+        schema:
+          type: string
         style: simple
-      - $ref: '#/components/parameters/timeout_ms'
+      - $ref: "#/components/parameters/timeout_ms"
       responses:
         "200":
           content:
             application/octet-stream:
-              schema:
-                description: '**Required.** The bytes for the uploaded file.'
+              schema: {}
           description: The content that was previously uploaded.
           headers:
             Content-Type:
-              $ref: '#/components/headers/downloadContentType'
+              $ref: "#/components/headers/downloadContentType"
             Content-Disposition:
               description: |
                 The [disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition)
@@ -323,17 +324,18 @@ paths:
               required: true
               schema:
                 example: inline; filename="filename.jpg"
+                type: string
               style: simple
         "307":
-          $ref: '#/components/responses/downloadRedirect'
+          $ref: "#/components/responses/downloadRedirect"
         "308":
-          $ref: '#/components/responses/downloadRedirect'
+          $ref: "#/components/responses/downloadRedirect"
         "429":
-          $ref: '#/components/responses/rateLimited'
+          $ref: "#/components/responses/rateLimited"
         "502":
-          $ref: '#/components/responses/downloadTooLarge'
+          $ref: "#/components/responses/downloadTooLarge"
         "504":
-          $ref: '#/components/responses/notYetUploaded'
+          $ref: "#/components/responses/notYetUploaded"
       security:
       - accessTokenBearer: []
       summary: Download content from the content repository overriding the file name.
@@ -356,8 +358,8 @@ paths:
         Delivery Network (CDN).
       operationId: getContentThumbnail
       parameters:
-      - $ref: '#/components/parameters/serverName'
-      - $ref: '#/components/parameters/mediaId'
+      - $ref: "#/components/parameters/serverName"
+      - $ref: "#/components/parameters/mediaId"
       - description: |-
           The *desired* width of the thumbnail. The actual thumbnail may be
           larger than the size specified.
@@ -366,7 +368,8 @@ paths:
         in: query
         name: width
         required: true
-        schema: {}
+        schema:
+          type: integer
         style: form
       - description: |-
           The *desired* height of the thumbnail. The actual thumbnail may be
@@ -376,7 +379,8 @@ paths:
         in: query
         name: height
         required: true
-        schema: {}
+        schema:
+          type: integer
         style: form
       - description: |-
           The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails)
@@ -390,8 +394,9 @@ paths:
           enum:
           - crop
           - scale
+          type: string
         style: form
-      - $ref: '#/components/parameters/timeout_ms'
+      - $ref: "#/components/parameters/timeout_ms"
       - description: |
           Indicates preference for an animated thumbnail from the server, if possible. Animated
           thumbnails typically use the content types `image/gif`, `image/png` (with APNG format),
@@ -412,34 +417,22 @@ paths:
         in: query
         name: animated
         required: false
-        schema: {}
+        schema:
+          type: boolean
         style: form
       responses:
         "200":
           content:
             image/jpeg:
-              schema:
-                description: '**Required.** The bytes for the thumbnail.'
+              schema: {}
             image/png:
-              schema:
-                description: |
-                  **Required.** The bytes for the thumbnail. The thumbnail MAY use an animated
-                  format if `animated=true`.
-                x-changedInMatrixVersion:
-                  "1.11": The PNG may be of the APNG variety if animation is supported
-                    and requested.
+              schema: {}
             image/apng:
-              schema:
-                description: '**Required.** The bytes for the *animated* thumbnail.'
-                x-addedInMatrixVersion: "1.11"
+              schema: {}
             image/gif:
-              schema:
-                description: '**Required.** The bytes for the *animated* thumbnail.'
-                x-addedInMatrixVersion: "1.11"
+              schema: {}
             image/webp:
-              schema:
-                description: '**Required.** The bytes for the *animated* thumbnail.'
-                x-addedInMatrixVersion: "1.11"
+              schema: {}
           description: A thumbnail of the requested content.
           headers:
             Content-Disposition:
@@ -453,6 +446,7 @@ paths:
               required: true
               schema:
                 example: inline; filename="thumbnail.png"
+                type: string
               style: simple
             Content-Type:
               description: The content type of the thumbnail. This header became required
@@ -466,11 +460,12 @@ paths:
                 - image/apng
                 - image/gif
                 - image/webp
+                type: string
               style: simple
         "307":
-          $ref: '#/components/responses/thumbnailRedirect'
+          $ref: "#/components/responses/thumbnailRedirect"
         "308":
-          $ref: '#/components/responses/thumbnailRedirect'
+          $ref: "#/components/responses/thumbnailRedirect"
         "400":
           content:
             application/json:
@@ -480,7 +475,7 @@ paths:
                     errcode: M_UNKNOWN
                     error: Cannot generate thumbnails for the requested content
               schema:
-                $ref: '#/components/schemas/Error_1'
+                $ref: "#/components/schemas/Error"
           description: |-
             The request does not make sense to the server, or the server cannot thumbnail
             the content. For example, the client requested non-integer dimensions or asked
@@ -494,10 +489,10 @@ paths:
                     errcode: M_TOO_LARGE
                     error: Content is too large to thumbnail
               schema:
-                $ref: '#/components/schemas/Error_1'
+                $ref: "#/components/schemas/Error"
           description: The local content is too large for the server to thumbnail.
         "429":
-          $ref: '#/components/responses/rateLimited'
+          $ref: "#/components/responses/rateLimited"
         "502":
           content:
             application/json:
@@ -507,10 +502,10 @@ paths:
                     errcode: M_TOO_LARGE
                     error: Content is too large to thumbnail
               schema:
-                $ref: '#/components/schemas/Error_1'
+                $ref: "#/components/schemas/Error"
           description: The remote content is too large for the server to thumbnail.
         "504":
-          $ref: '#/components/responses/notYetUploaded'
+          $ref: "#/components/responses/notYetUploaded"
       security:
       - accessTokenBearer: []
       summary: Download a thumbnail of content from the content repository
@@ -538,6 +533,7 @@ paths:
         required: true
         schema:
           format: uri
+          type: string
         style: form
       - description: |-
           The preferred point in time to return a preview for. The server may
@@ -550,6 +546,7 @@ paths:
         required: false
         schema:
           format: int64
+          type: integer
         style: form
       responses:
         "200":
@@ -566,13 +563,13 @@ paths:
                     og:image:width: 48
                     matrix:image:size: 102400
               schema:
-                $ref: '#/components/schemas/getUrlPreview_200_response'
+                $ref: "#/components/schemas/getUrlPreview_200_response"
           description: |-
             The OpenGraph data for the URL, which may be empty. Some values are
             replaced with matrix equivalents if they are provided in the response.
             The differences from the OpenGraph protocol are described here.
         "429":
-          $ref: '#/components/responses/rateLimited'
+          $ref: "#/components/responses/rateLimited"
       security:
       - accessTokenBearer: []
       summary: Get information about a URL for a client
@@ -603,11 +600,11 @@ paths:
                   value:
                     m.upload.size: 50000000
               schema:
-                $ref: '#/components/schemas/getConfig_200_response'
+                $ref: "#/components/schemas/getConfig_200_response"
           description: The public content repository configuration for the matrix
             server.
         "429":
-          $ref: '#/components/responses/rateLimited'
+          $ref: "#/components/responses/rateLimited"
       security:
       - accessTokenBearer: []
       summary: Get the configuration for the content repository.
@@ -670,6 +667,7 @@ components:
       required: true
       schema:
         format: mx-server-name
+        type: string
       style: simple
     mediaId:
       description: |
@@ -679,7 +677,8 @@ components:
       in: path
       name: mediaId
       required: true
-      schema: {}
+      schema:
+        type: string
       style: simple
     timeout_ms:
       description: |
@@ -696,6 +695,7 @@ components:
       schema:
         default: 20000
         format: int64
+        type: integer
       style: form
   requestBodies:
     bytes:
@@ -713,57 +713,13 @@ components:
                 errcode: M_TOO_LARGE
                 error: Cannot upload files larger than 100mb
           schema:
-            description: A Service level Error
-            properties:
-              errcode:
-                description: An error code for the error.
-                example: M_UNKNOWN
-                type: string
-              error:
-                description: A human-readable error message.
-                example: An unknown error occurred
-                type: string
-            required:
-            - errcode
-            title: Error
+            $ref: "#/components/schemas/Error"
       description: The uploaded content is too large for the server.
     rateLimited:
       content:
         application/json:
           schema:
-            allOf:
-            - description: A Service level Error
-              properties:
-                errcode:
-                  description: An error code for the error.
-                  example: M_UNKNOWN
-                  type: string
-                error:
-                  description: A human-readable error message.
-                  example: An unknown error occurred
-                  type: string
-              required:
-              - errcode
-              title: Error
-            - description: The rate limit was reached for this request
-              properties:
-                errcode:
-                  description: The M_LIMIT_EXCEEDED error code
-                  example: M_LIMIT_EXCEEDED
-                  type: string
-                error:
-                  description: A human-readable error message.
-                  example: Too many requests
-                  type: string
-                retry_after_ms:
-                  description: |-
-                    The amount of time in milliseconds the client should wait
-                    before trying the request again.
-                  example: 2000
-                  type: integer
-              required:
-              - errcode
-              title: RateLimitError
+            $ref: "#/components/schemas/inline_object"
       description: This request was rate-limited.
     notYetUploaded:
       content:
@@ -774,17 +730,7 @@ components:
                 errcode: M_NOT_YET_UPLOADED
                 error: Content has not yet been uploaded
           schema:
-            description: A Service level Error
-            properties:
-              errcode:
-                description: An error code for the error.
-                example: M_UNKNOWN
-              error:
-                description: A human-readable error message.
-                example: An unknown error occurred
-            required:
-            - errcode
-            title: Error
+            $ref: "#/components/schemas/Error"
       description: |-
         The content is not yet available. A [standard error response](/client-server-api/#standard-error-response)
         will be returned with the `errcode` `M_NOT_YET_UPLOADED`.
@@ -796,6 +742,7 @@ components:
           explode: false
           schema:
             format: uri
+            type: string
           style: simple
     downloadTooLarge:
       content:
@@ -806,17 +753,7 @@ components:
                 errcode: M_TOO_LARGE
                 error: Content is too large to serve
           schema:
-            description: A Service level Error
-            properties:
-              errcode:
-                description: An error code for the error.
-                example: M_UNKNOWN
-              error:
-                description: A human-readable error message.
-                example: An unknown error occurred
-            required:
-            - errcode
-            title: Error
+            $ref: "#/components/schemas/Error"
       description: The content is too large for the server to serve.
     thumbnailRedirect:
       description: A redirect to the thumbnail of the requested content.
@@ -826,6 +763,7 @@ components:
           explode: false
           schema:
             format: uri
+            type: string
           style: simple
   schemas:
     uploadContent_200_response:
@@ -842,16 +780,18 @@ components:
       - content_uri
     getUrlPreview_200_response:
       example:
-        og:image: ""
-        matrix:image:size: ""
+        og:image: https://openapi-generator.tech
+        matrix:image:size: 0
       properties:
         matrix:image:size:
           description: The byte-size of the image. Omitted if there is no image attached.
           format: int64
+          type: integer
         og:image:
           description: "An [`mxc://` URI](/client-server-api/#matrix-content-mxc-uris)\
             \ to the image. Omitted if there is no image."
           format: uri
+          type: string
     createContent_200_response:
       example:
         content_uri: mxc://example.com/AQwafuaFswefuhsfAFAgsw
@@ -864,16 +804,21 @@ components:
           example: mxc://example.com/AQwafuaFswefuhsfAFAgsw
           format: mx-mxc-uri
           pattern: ^mxc:\/\/
+          type: string
         unused_expires_at:
           description: |-
             The timestamp (in milliseconds since the unix epoch) when the
             generated media id will expire, if media is not uploaded.
           example: 1647257217083
           format: int64
+          type: integer
       required:
       - content_uri
     Error:
       description: A Service level Error
+      example:
+        errcode: M_UNKNOWN
+        error: An unknown error occurred
       properties:
         errcode:
           description: An error code for the error.
@@ -886,9 +831,47 @@ components:
       required:
       - errcode
       title: Error
+    inline_object:
+      allOf:
+      - description: A Service level Error
+        properties:
+          errcode:
+            description: An error code for the error.
+            example: M_UNKNOWN
+            type: string
+          error:
+            description: A human-readable error message.
+            example: An unknown error occurred
+            type: string
+        required:
+        - errcode
+        title: Error
+      - description: The rate limit was reached for this request
+        properties:
+          errcode:
+            description: The M_LIMIT_EXCEEDED error code
+            example: M_LIMIT_EXCEEDED
+            type: string
+          error:
+            description: A human-readable error message.
+            example: Too many requests
+            type: string
+          retry_after_ms:
+            description: |-
+              The amount of time in milliseconds the client should wait
+              before trying the request again.
+            example: 2000
+            type: integer
+        required:
+        - errcode
+        title: RateLimitError
+      example:
+        errcode: M_LIMIT_EXCEEDED
+        retry_after_ms: 2000
+        error: Too many requests
     getConfig_200_response:
       example:
-        m.upload.size: ""
+        m.upload.size: 0
       properties:
         m.upload.size:
           description: |-
@@ -896,18 +879,7 @@ components:
             Clients SHOULD use this as a guide when uploading content.
             If not listed or null, the size limit should be treated as unknown.
           format: int64
-    Error_1:
-      description: A Service level Error
-      properties:
-        errcode:
-          description: An error code for the error.
-          example: M_UNKNOWN
-        error:
-          description: A human-readable error message.
-          example: An unknown error occurred
-      required:
-      - errcode
-      title: Error
+          type: integer
   securitySchemes:
     accessTokenBearer:
       bearerFormat: JWT

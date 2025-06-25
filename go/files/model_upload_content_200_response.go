@@ -1,17 +1,3 @@
-// Copyright 2023-2024 Ant Investor Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
 Ant Investor Files
 
@@ -27,6 +13,7 @@ package file_v1
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -36,7 +23,7 @@ var _ MappedNullable = &UploadContent200Response{}
 // UploadContent200Response struct for UploadContent200Response
 type UploadContent200Response struct {
 	// The [`mxc://` URI](/client-server-api/#matrix-content-mxc-uris) to the uploaded content.
-	ContentUri string `json:"content_uri"`
+	ContentUri string `json:"content_uri" validate:"regexp=^mxc:\\/\\/"`
 }
 
 type _UploadContent200Response UploadContent200Response
@@ -84,7 +71,7 @@ func (o *UploadContent200Response) SetContentUri(v string) {
 }
 
 func (o UploadContent200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -97,7 +84,7 @@ func (o UploadContent200Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *UploadContent200Response) UnmarshalJSON(bytes []byte) (err error) {
+func (o *UploadContent200Response) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -107,13 +94,13 @@ func (o *UploadContent200Response) UnmarshalJSON(bytes []byte) (err error) {
 
 	allProperties := make(map[string]interface{})
 
-	err = json.Unmarshal(bytes, &allProperties)
+	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -121,7 +108,9 @@ func (o *UploadContent200Response) UnmarshalJSON(bytes []byte) (err error) {
 
 	varUploadContent200Response := _UploadContent200Response{}
 
-	err = json.Unmarshal(bytes, &varUploadContent200Response)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUploadContent200Response)
 
 	if err != nil {
 		return err
@@ -167,3 +156,5 @@ func (v *NullableUploadContent200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

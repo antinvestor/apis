@@ -158,9 +158,9 @@ import (
 )
 
 func main() {
-	serverName := TODO // interface{} | The server name from the `mxc://` URI (the authority component). 
-	mediaId := TODO // interface{} | The media ID from the `mxc://` URI (the path component). 
-	timeoutMs := TODO // interface{} | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  (optional) (default to 20000)
+	serverName := "matrix.org" // string | The server name from the `mxc://` URI (the authority component). 
+	mediaId := "ascERGshawAWawugaAcauga" // string | The media ID from the `mxc://` URI (the path component). 
+	timeoutMs := int64(5000) // int64 | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  (optional) (default to 20000)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -180,8 +180,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverName** | [**interface{}**](.md) | The server name from the &#x60;mxc://&#x60; URI (the authority component).  | 
-**mediaId** | [**interface{}**](.md) | The media ID from the &#x60;mxc://&#x60; URI (the path component).  | 
+**serverName** | **string** | The server name from the &#x60;mxc://&#x60; URI (the authority component).  | 
+**mediaId** | **string** | The media ID from the &#x60;mxc://&#x60; URI (the path component).  | 
 
 ### Other Parameters
 
@@ -192,7 +192,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **timeoutMs** | [**interface{}**](interface{}.md) | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [default to 20000]
+ **timeoutMs** | **int64** | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [default to 20000]
 
 ### Return type
 
@@ -233,10 +233,10 @@ import (
 )
 
 func main() {
-	serverName := TODO // interface{} | The server name from the `mxc://` URI (the authority component). 
-	mediaId := TODO // interface{} | The media ID from the `mxc://` URI (the path component). 
-	fileName := TODO // interface{} | A filename to give in the `Content-Disposition` header.
-	timeoutMs := TODO // interface{} | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  (optional) (default to 20000)
+	serverName := "matrix.org" // string | The server name from the `mxc://` URI (the authority component). 
+	mediaId := "ascERGshawAWawugaAcauga" // string | The media ID from the `mxc://` URI (the path component). 
+	fileName := "filename.jpg" // string | A filename to give in the `Content-Disposition` header.
+	timeoutMs := int64(5000) // int64 | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  (optional) (default to 20000)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -256,9 +256,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverName** | [**interface{}**](.md) | The server name from the &#x60;mxc://&#x60; URI (the authority component).  | 
-**mediaId** | [**interface{}**](.md) | The media ID from the &#x60;mxc://&#x60; URI (the path component).  | 
-**fileName** | [**interface{}**](.md) | A filename to give in the &#x60;Content-Disposition&#x60; header. | 
+**serverName** | **string** | The server name from the &#x60;mxc://&#x60; URI (the authority component).  | 
+**mediaId** | **string** | The media ID from the &#x60;mxc://&#x60; URI (the path component).  | 
+**fileName** | **string** | A filename to give in the &#x60;Content-Disposition&#x60; header. | 
 
 ### Other Parameters
 
@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 
 
 
- **timeoutMs** | [**interface{}**](interface{}.md) | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [default to 20000]
+ **timeoutMs** | **int64** | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [default to 20000]
 
 ### Return type
 
@@ -311,13 +311,13 @@ import (
 )
 
 func main() {
-	serverName := TODO // interface{} | The server name from the `mxc://` URI (the authority component). 
-	mediaId := TODO // interface{} | The media ID from the `mxc://` URI (the path component). 
-	width := TODO // interface{} | The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified.
-	height := TODO // interface{} | The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified.
-	method := TODO // interface{} | The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information. (optional)
-	timeoutMs := TODO // interface{} | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  (optional) (default to 20000)
-	animated := TODO // interface{} | Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types `image/gif`, `image/png` (with APNG format), `image/apng`, and `image/webp` instead of the common static `image/png` or `image/jpeg` content types.  When `true`, the server SHOULD return an animated thumbnail if possible and supported. When `false`, the server MUST NOT return an animated thumbnail. For example, returning a static `image/png` or `image/jpeg` thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return `image/webp` thumbnails when supporting animation.  When `true` and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though `animated` is `false`.  (optional)
+	serverName := "matrix.org" // string | The server name from the `mxc://` URI (the authority component). 
+	mediaId := "ascERGshawAWawugaAcauga" // string | The media ID from the `mxc://` URI (the path component). 
+	width := int32(64) // int32 | The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified.
+	height := int32(64) // int32 | The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified.
+	method := "scale" // string | The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information. (optional)
+	timeoutMs := int64(5000) // int64 | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  (optional) (default to 20000)
+	animated := false // bool | Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types `image/gif`, `image/png` (with APNG format), `image/apng`, and `image/webp` instead of the common static `image/png` or `image/jpeg` content types.  When `true`, the server SHOULD return an animated thumbnail if possible and supported. When `false`, the server MUST NOT return an animated thumbnail. For example, returning a static `image/png` or `image/jpeg` thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return `image/webp` thumbnails when supporting animation.  When `true` and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though `animated` is `false`.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -337,8 +337,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverName** | [**interface{}**](.md) | The server name from the &#x60;mxc://&#x60; URI (the authority component).  | 
-**mediaId** | [**interface{}**](.md) | The media ID from the &#x60;mxc://&#x60; URI (the path component).  | 
+**serverName** | **string** | The server name from the &#x60;mxc://&#x60; URI (the authority component).  | 
+**mediaId** | **string** | The media ID from the &#x60;mxc://&#x60; URI (the path component).  | 
 
 ### Other Parameters
 
@@ -349,11 +349,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **width** | [**interface{}**](interface{}.md) | The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified. | 
- **height** | [**interface{}**](interface{}.md) | The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified. | 
- **method** | [**interface{}**](interface{}.md) | The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information. | 
- **timeoutMs** | [**interface{}**](interface{}.md) | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [default to 20000]
- **animated** | [**interface{}**](interface{}.md) | Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types &#x60;image/gif&#x60;, &#x60;image/png&#x60; (with APNG format), &#x60;image/apng&#x60;, and &#x60;image/webp&#x60; instead of the common static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; content types.  When &#x60;true&#x60;, the server SHOULD return an animated thumbnail if possible and supported. When &#x60;false&#x60;, the server MUST NOT return an animated thumbnail. For example, returning a static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return &#x60;image/webp&#x60; thumbnails when supporting animation.  When &#x60;true&#x60; and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though &#x60;animated&#x60; is &#x60;false&#x60;.  | 
+ **width** | **int32** | The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified. | 
+ **height** | **int32** | The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified. | 
+ **method** | **string** | The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information. | 
+ **timeoutMs** | **int64** | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout.  | [default to 20000]
+ **animated** | **bool** | Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types &#x60;image/gif&#x60;, &#x60;image/png&#x60; (with APNG format), &#x60;image/apng&#x60;, and &#x60;image/webp&#x60; instead of the common static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; content types.  When &#x60;true&#x60;, the server SHOULD return an animated thumbnail if possible and supported. When &#x60;false&#x60;, the server MUST NOT return an animated thumbnail. For example, returning a static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return &#x60;image/webp&#x60; thumbnails when supporting animation.  When &#x60;true&#x60; and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though &#x60;animated&#x60; is &#x60;false&#x60;.  | 
 
 ### Return type
 
@@ -394,8 +394,8 @@ import (
 )
 
 func main() {
-	url := TODO // interface{} | The URL to get a preview of.
-	ts := TODO // interface{} | The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available. (optional)
+	url := "https://matrix.org" // string | The URL to get a preview of.
+	ts := int64(1510610716656) // int64 | The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -420,8 +420,8 @@ Other parameters are passed through a pointer to a apiGetUrlPreviewRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **url** | [**interface{}**](interface{}.md) | The URL to get a preview of. | 
- **ts** | [**interface{}**](interface{}.md) | The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available. | 
+ **url** | **string** | The URL to get a preview of. | 
+ **ts** | **int64** | The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available. | 
 
 ### Return type
 
@@ -511,7 +511,7 @@ Name | Type | Description  | Notes
 
 ## UploadContentToMXC
 
-> interface{} UploadContentToMXC(ctx, serverName, mediaId).Body(body).ContentType(contentType).Filename(filename).Execute()
+> map[string]interface{} UploadContentToMXC(ctx, serverName, mediaId).Body(body).ContentType(contentType).Filename(filename).Execute()
 
 Upload content to an `mxc://` URI that was created earlier.
 
@@ -530,8 +530,8 @@ import (
 )
 
 func main() {
-	serverName := TODO // interface{} | The server name from the `mxc://` URI (the authority component). 
-	mediaId := TODO // interface{} | The media ID from the `mxc://` URI (the path component). 
+	serverName := "matrix.org" // string | The server name from the `mxc://` URI (the authority component). 
+	mediaId := "ascERGshawAWawugaAcauga" // string | The media ID from the `mxc://` URI (the path component). 
 	body := interface{}(987) // interface{} | 
 	contentType := "application/pdf" // string | **Optional.** The content type of the file being uploaded.  Clients SHOULD always supply this header.  Defaults to `application/octet-stream` if it is not set. This header became explicitly optional with a default value.  (optional)
 	filename := "War and Peace.pdf" // string | The name of the file being uploaded (optional)
@@ -543,7 +543,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `MediaAPI.UploadContentToMXC``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UploadContentToMXC`: interface{}
+	// response from `UploadContentToMXC`: map[string]interface{}
 	fmt.Fprintf(os.Stdout, "Response from `MediaAPI.UploadContentToMXC`: %v\n", resp)
 }
 ```
@@ -554,8 +554,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverName** | [**interface{}**](.md) | The server name from the &#x60;mxc://&#x60; URI (the authority component).  | 
-**mediaId** | [**interface{}**](.md) | The media ID from the &#x60;mxc://&#x60; URI (the path component).  | 
+**serverName** | **string** | The server name from the &#x60;mxc://&#x60; URI (the authority component).  | 
+**mediaId** | **string** | The media ID from the &#x60;mxc://&#x60; URI (the path component).  | 
 
 ### Other Parameters
 
@@ -572,7 +572,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**interface{}**
+**map[string]interface{}**
 
 ### Authorization
 

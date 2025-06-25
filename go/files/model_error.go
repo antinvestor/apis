@@ -1,17 +1,3 @@
-// Copyright 2023-2024 Ant Investor Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
 Ant Investor Files
 
@@ -27,6 +13,7 @@ package file_v1
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -118,7 +105,7 @@ func (o *Error) SetError(v string) {
 }
 
 func (o Error) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -134,7 +121,7 @@ func (o Error) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Error) UnmarshalJSON(bytes []byte) (err error) {
+func (o *Error) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -144,13 +131,13 @@ func (o *Error) UnmarshalJSON(bytes []byte) (err error) {
 
 	allProperties := make(map[string]interface{})
 
-	err = json.Unmarshal(bytes, &allProperties)
+	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -158,7 +145,9 @@ func (o *Error) UnmarshalJSON(bytes []byte) (err error) {
 
 	varError := _Error{}
 
-	err = json.Unmarshal(bytes, &varError)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varError)
 
 	if err != nil {
 		return err
@@ -204,3 +193,5 @@ func (v *NullableError) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -154,11 +154,13 @@ message SendResponse {
 }
 
 message ReleaseRequest {
-  repeated string id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  repeated string id = 1 [(buf.validate.field).repeated.items = {
+    string: {
+      min_len: 3
+      max_len: 40
+      pattern: "[0-9a-z_-]{3,20}"
+    }
+  }];
   string comment = 2;
 }
 
@@ -198,7 +200,7 @@ message TemplateSaveResponse {
 
 service NotificationService {
   //Send method for queueing massages as requested
-  rpc Send(SendRequest) returns (SendResponse) {
+  rpc Send(SendRequest) returns (stream SendResponse) {
     option (google.api.http) = {
       post: "/send"
       body: "*"
@@ -206,7 +208,7 @@ service NotificationService {
   }
 
   //Release method for releasing queued massages and returns if notification status if released
-  rpc Release(ReleaseRequest) returns (ReleaseResponse) {
+  rpc Release(ReleaseRequest) returns (stream ReleaseResponse) {
     option (google.api.http) = {
       post: "/send/release/{id}"
       body: "*"
@@ -214,7 +216,7 @@ service NotificationService {
   }
 
   //Receive method is for client request for particular notification responses from system
-  rpc Receive(ReceiveRequest) returns (ReceiveResponse) {
+  rpc Receive(ReceiveRequest) returns (stream ReceiveResponse) {
     option (google.api.http) = {
       post: "/receive"
       body: "*"

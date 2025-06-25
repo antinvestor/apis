@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MUploadSize** | Pointer to **interface{}** | The maximum size an upload can be in bytes. Clients SHOULD use this as a guide when uploading content. If not listed or null, the size limit should be treated as unknown. | [optional] 
+**MUploadSize** | Pointer to **int64** | The maximum size an upload can be in bytes. Clients SHOULD use this as a guide when uploading content. If not listed or null, the size limit should be treated as unknown. | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetMUploadSize
 
-`func (o *GetConfig200Response) GetMUploadSize() interface{}`
+`func (o *GetConfig200Response) GetMUploadSize() int64`
 
 GetMUploadSize returns the MUploadSize field if non-nil, zero value otherwise.
 
 ### GetMUploadSizeOk
 
-`func (o *GetConfig200Response) GetMUploadSizeOk() (*interface{}, bool)`
+`func (o *GetConfig200Response) GetMUploadSizeOk() (*int64, bool)`
 
 GetMUploadSizeOk returns a tuple with the MUploadSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMUploadSize
 
-`func (o *GetConfig200Response) SetMUploadSize(v interface{})`
+`func (o *GetConfig200Response) SetMUploadSize(v int64)`
 
 SetMUploadSize sets MUploadSize field to given value.
 
@@ -50,16 +50,6 @@ SetMUploadSize sets MUploadSize field to given value.
 
 HasMUploadSize returns a boolean if a field has been set.
 
-### SetMUploadSizeNil
-
-`func (o *GetConfig200Response) SetMUploadSizeNil(b bool)`
-
- SetMUploadSizeNil sets the value for MUploadSize to be an explicit nil
-
-### UnsetMUploadSize
-`func (o *GetConfig200Response) UnsetMUploadSize()`
-
-UnsetMUploadSize ensures that no value is present for MUploadSize, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

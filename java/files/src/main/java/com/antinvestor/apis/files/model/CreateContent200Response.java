@@ -1,17 +1,3 @@
-// Copyright 2023-2024 Ant Investor Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
  * Ant Investor Files
  * An openAPI 3.0 specification that defines how files are stored and accessed on ant investor products
@@ -39,13 +25,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
-import org.openapitools.jackson.nullable.JsonNullable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
+import com.antinvestor.apis.files.invoker.ApiClient;
 /**
  * CreateContent200Response
  */
@@ -53,72 +36,64 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CreateContent200Response.JSON_PROPERTY_CONTENT_URI,
   CreateContent200Response.JSON_PROPERTY_UNUSED_EXPIRES_AT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class CreateContent200Response {
   public static final String JSON_PROPERTY_CONTENT_URI = "content_uri";
-  private Object contentUri = null;
+  @javax.annotation.Nonnull
+  private String contentUri;
 
   public static final String JSON_PROPERTY_UNUSED_EXPIRES_AT = "unused_expires_at";
-  private JsonNullable<Object> unusedExpiresAt = JsonNullable.<Object>of(null);
+  @javax.annotation.Nullable
+  private Long unusedExpiresAt;
 
   public CreateContent200Response() { 
   }
 
-  public CreateContent200Response contentUri(Object contentUri) {
+  public CreateContent200Response contentUri(@javax.annotation.Nonnull String contentUri) {
     this.contentUri = contentUri;
     return this;
   }
 
-   /**
+  /**
    * The [&#x60;mxc://&#x60; URI](/client-server-api/#matrix-content-mxc-uris) at which the content will be available, once it is uploaded.
    * @return contentUri
-  **/
-  @javax.annotation.Nullable
+   */
+  @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CONTENT_URI)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public Object getContentUri() {
+  public String getContentUri() {
     return contentUri;
   }
 
 
   @JsonProperty(JSON_PROPERTY_CONTENT_URI)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setContentUri(Object contentUri) {
+  public void setContentUri(@javax.annotation.Nonnull String contentUri) {
     this.contentUri = contentUri;
   }
 
 
-  public CreateContent200Response unusedExpiresAt(Object unusedExpiresAt) {
-    this.unusedExpiresAt = JsonNullable.<Object>of(unusedExpiresAt);
+  public CreateContent200Response unusedExpiresAt(@javax.annotation.Nullable Long unusedExpiresAt) {
+    this.unusedExpiresAt = unusedExpiresAt;
     return this;
   }
 
-   /**
+  /**
    * The timestamp (in milliseconds since the unix epoch) when the generated media id will expire, if media is not uploaded.
    * @return unusedExpiresAt
-  **/
+   */
   @javax.annotation.Nullable
-  @JsonIgnore
-
-  public Object getUnusedExpiresAt() {
-        return unusedExpiresAt.orElse(null);
+  @JsonProperty(JSON_PROPERTY_UNUSED_EXPIRES_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Long getUnusedExpiresAt() {
+    return unusedExpiresAt;
   }
+
 
   @JsonProperty(JSON_PROPERTY_UNUSED_EXPIRES_AT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Object> getUnusedExpiresAt_JsonNullable() {
-    return unusedExpiresAt;
-  }
-  
-  @JsonProperty(JSON_PROPERTY_UNUSED_EXPIRES_AT)
-  public void setUnusedExpiresAt_JsonNullable(JsonNullable<Object> unusedExpiresAt) {
+  public void setUnusedExpiresAt(@javax.annotation.Nullable Long unusedExpiresAt) {
     this.unusedExpiresAt = unusedExpiresAt;
-  }
-
-  public void setUnusedExpiresAt(Object unusedExpiresAt) {
-    this.unusedExpiresAt = JsonNullable.<Object>of(unusedExpiresAt);
   }
 
 
@@ -135,23 +110,12 @@ public class CreateContent200Response {
     }
     CreateContent200Response createContent200Response = (CreateContent200Response) o;
     return Objects.equals(this.contentUri, createContent200Response.contentUri) &&
-        equalsNullable(this.unusedExpiresAt, createContent200Response.unusedExpiresAt);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+        Objects.equals(this.unusedExpiresAt, createContent200Response.unusedExpiresAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(contentUri, hashCodeNullable(unusedExpiresAt));
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(contentUri, unusedExpiresAt);
   }
 
   @Override
@@ -209,12 +173,12 @@ public class CreateContent200Response {
 
     // add `content_uri` to the URL query string
     if (getContentUri() != null) {
-      joiner.add(String.format("%scontent_uri%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getContentUri()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%scontent_uri%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getContentUri()))));
     }
 
     // add `unused_expires_at` to the URL query string
     if (getUnusedExpiresAt() != null) {
-      joiner.add(String.format("%sunused_expires_at%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getUnusedExpiresAt()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%sunused_expires_at%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getUnusedExpiresAt()))));
     }
 
     return joiner.toString();

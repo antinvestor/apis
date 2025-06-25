@@ -1,17 +1,3 @@
-// Copyright 2023-2024 Ant Investor Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
 Ant Investor Files
 
@@ -35,7 +21,7 @@ var _ MappedNullable = &GetConfig200Response{}
 // GetConfig200Response struct for GetConfig200Response
 type GetConfig200Response struct {
 	// The maximum size an upload can be in bytes. Clients SHOULD use this as a guide when uploading content. If not listed or null, the size limit should be treated as unknown.
-	MUploadSize interface{} `json:"m.upload.size,omitempty"`
+	MUploadSize *int64 `json:"m.upload.size,omitempty"`
 }
 
 // NewGetConfig200Response instantiates a new GetConfig200Response object
@@ -55,41 +41,40 @@ func NewGetConfig200ResponseWithDefaults() *GetConfig200Response {
 	return &this
 }
 
-// GetMUploadSize returns the MUploadSize field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetConfig200Response) GetMUploadSize() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetMUploadSize returns the MUploadSize field value if set, zero value otherwise.
+func (o *GetConfig200Response) GetMUploadSize() int64 {
+	if o == nil || IsNil(o.MUploadSize) {
+		var ret int64
 		return ret
 	}
-	return o.MUploadSize
+	return *o.MUploadSize
 }
 
 // GetMUploadSizeOk returns a tuple with the MUploadSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetConfig200Response) GetMUploadSizeOk() (*interface{}, bool) {
+func (o *GetConfig200Response) GetMUploadSizeOk() (*int64, bool) {
 	if o == nil || IsNil(o.MUploadSize) {
 		return nil, false
 	}
-	return &o.MUploadSize, true
+	return o.MUploadSize, true
 }
 
 // HasMUploadSize returns a boolean if a field has been set.
 func (o *GetConfig200Response) HasMUploadSize() bool {
-	if o != nil && IsNil(o.MUploadSize) {
+	if o != nil && !IsNil(o.MUploadSize) {
 		return true
 	}
 
 	return false
 }
 
-// SetMUploadSize gets a reference to the given interface{} and assigns it to the MUploadSize field.
-func (o *GetConfig200Response) SetMUploadSize(v interface{}) {
-	o.MUploadSize = v
+// SetMUploadSize gets a reference to the given int64 and assigns it to the MUploadSize field.
+func (o *GetConfig200Response) SetMUploadSize(v int64) {
+	o.MUploadSize = &v
 }
 
 func (o GetConfig200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -98,7 +83,7 @@ func (o GetConfig200Response) MarshalJSON() ([]byte, error) {
 
 func (o GetConfig200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.MUploadSize != nil {
+	if !IsNil(o.MUploadSize) {
 		toSerialize["m.upload.size"] = o.MUploadSize
 	}
 	return toSerialize, nil
@@ -139,3 +124,5 @@ func (v *NullableGetConfig200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

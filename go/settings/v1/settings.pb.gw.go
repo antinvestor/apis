@@ -57,7 +57,9 @@ func request_SettingsService_Get_0(ctx context.Context, marshaler runtime.Marsha
 		protoReq GetRequest
 		metadata runtime.ServerMetadata
 	)
-	io.Copy(io.Discard, req.Body)
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -90,7 +92,9 @@ func request_SettingsService_List_0(ctx context.Context, marshaler runtime.Marsh
 		protoReq ListRequest
 		metadata runtime.ServerMetadata
 	)
-	io.Copy(io.Discard, req.Body)
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -116,7 +120,9 @@ func request_SettingsService_Search_0(ctx context.Context, marshaler runtime.Mar
 		protoReq commonv1.SearchRequest
 		metadata runtime.ServerMetadata
 	)
-	io.Copy(io.Discard, req.Body)
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -142,6 +148,9 @@ func request_SettingsService_Set_0(ctx context.Context, marshaler runtime.Marsha
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
 	}
 	msg, err := client.Set(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err

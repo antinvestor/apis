@@ -76,15 +76,83 @@ func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*N
 	return Init(clientBase, NewNotificationServiceClient(clientBase.Connection())), nil
 }
 
-func (nc *NotificationClient) Send(ctx context.Context, message *Notification) (*SendResponse, error) {
-	return nc.Client.Send(ctx, &SendRequest{Data: message})
+func (nc *NotificationClient) Send(ctx context.Context, messages []*Notification) (<-chan *commonv1.StatusResponse, error) {
+	responseStream, err := nc.Client.Send(ctx, &SendRequest{Data: messages})
+	if err != nil {
+		return nil, err
+	}
+
+	statusChannel := make(chan *commonv1.StatusResponse)
+	go func(response NotificationService_SendClient) {
+		defer close(statusChannel)
+		for {
+			responses, err0 := response.Recv()
+			if err0 != nil {
+				return
+			}
+
+			for _, role := range responses.GetData() {
+				statusChannel <- role
+			}
+		}
+	}(responseStream)
+
+	return statusChannel, nil
 
 }
 
-func (nc *NotificationClient) Receive(ctx context.Context, message *Notification) (*ReceiveResponse, error) {
+func (nc *NotificationClient) Release(ctx context.Context, ids []string, comment string) (<-chan *commonv1.StatusResponse, error) {
 
-	message.AutoRelease = true
-	return nc.Client.Receive(ctx, &ReceiveRequest{Data: message})
+	responseStream, err := nc.Client.Release(ctx, &ReleaseRequest{Id: ids, Comment: comment})
+	if err != nil {
+		return nil, err
+	}
+
+	statusChannel := make(chan *commonv1.StatusResponse)
+	go func(response NotificationService_ReleaseClient) {
+		defer close(statusChannel)
+		for {
+			responses, err0 := response.Recv()
+			if err0 != nil {
+				return
+			}
+
+			for _, role := range responses.GetData() {
+				statusChannel <- role
+			}
+		}
+	}(responseStream)
+
+	return statusChannel, nil
+
+}
+
+func (nc *NotificationClient) Receive(ctx context.Context, messages []*Notification) (<-chan *commonv1.StatusResponse, error) {
+
+	for _, msg := range messages {
+		msg.AutoRelease = true
+	}
+	responseStream, err := nc.Client.Receive(ctx, &ReceiveRequest{Data: messages})
+	if err != nil {
+		return nil, err
+	}
+
+	statusChannel := make(chan *commonv1.StatusResponse)
+	go func(response NotificationService_ReceiveClient) {
+		defer close(statusChannel)
+		for {
+			responses, err0 := response.Recv()
+			if err0 != nil {
+				return
+			}
+
+			for _, role := range responses.GetData() {
+				statusChannel <- role
+			}
+		}
+	}(responseStream)
+
+	return statusChannel, nil
 
 }
 

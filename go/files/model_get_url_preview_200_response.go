@@ -1,17 +1,3 @@
-// Copyright 2023-2024 Ant Investor Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
 Ant Investor Files
 
@@ -35,9 +21,9 @@ var _ MappedNullable = &GetUrlPreview200Response{}
 // GetUrlPreview200Response struct for GetUrlPreview200Response
 type GetUrlPreview200Response struct {
 	// The byte-size of the image. Omitted if there is no image attached.
-	Matriximagesize interface{} `json:"matrix:image:size,omitempty"`
+	MatrixImageSize *int64 `json:"matrix:image:size,omitempty"`
 	// An [`mxc://` URI](/client-server-api/#matrix-content-mxc-uris) to the image. Omitted if there is no image.
-	Ogimage interface{} `json:"og:image,omitempty"`
+	OgImage *string `json:"og:image,omitempty"`
 }
 
 // NewGetUrlPreview200Response instantiates a new GetUrlPreview200Response object
@@ -57,74 +43,72 @@ func NewGetUrlPreview200ResponseWithDefaults() *GetUrlPreview200Response {
 	return &this
 }
 
-// GetMatriximagesize returns the Matriximagesize field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetUrlPreview200Response) GetMatriximagesize() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetMatrixImageSize returns the MatrixImageSize field value if set, zero value otherwise.
+func (o *GetUrlPreview200Response) GetMatrixImageSize() int64 {
+	if o == nil || IsNil(o.MatrixImageSize) {
+		var ret int64
 		return ret
 	}
-	return o.Matriximagesize
+	return *o.MatrixImageSize
 }
 
-// GetMatriximagesizeOk returns a tuple with the Matriximagesize field value if set, nil otherwise
+// GetMatrixImageSizeOk returns a tuple with the MatrixImageSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetUrlPreview200Response) GetMatriximagesizeOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Matriximagesize) {
+func (o *GetUrlPreview200Response) GetMatrixImageSizeOk() (*int64, bool) {
+	if o == nil || IsNil(o.MatrixImageSize) {
 		return nil, false
 	}
-	return &o.Matriximagesize, true
+	return o.MatrixImageSize, true
 }
 
-// HasMatriximagesize returns a boolean if a field has been set.
-func (o *GetUrlPreview200Response) HasMatriximagesize() bool {
-	if o != nil && IsNil(o.Matriximagesize) {
+// HasMatrixImageSize returns a boolean if a field has been set.
+func (o *GetUrlPreview200Response) HasMatrixImageSize() bool {
+	if o != nil && !IsNil(o.MatrixImageSize) {
 		return true
 	}
 
 	return false
 }
 
-// SetMatriximagesize gets a reference to the given interface{} and assigns it to the Matriximagesize field.
-func (o *GetUrlPreview200Response) SetMatriximagesize(v interface{}) {
-	o.Matriximagesize = v
+// SetMatrixImageSize gets a reference to the given int64 and assigns it to the MatrixImageSize field.
+func (o *GetUrlPreview200Response) SetMatrixImageSize(v int64) {
+	o.MatrixImageSize = &v
 }
 
-// GetOgimage returns the Ogimage field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetUrlPreview200Response) GetOgimage() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetOgImage returns the OgImage field value if set, zero value otherwise.
+func (o *GetUrlPreview200Response) GetOgImage() string {
+	if o == nil || IsNil(o.OgImage) {
+		var ret string
 		return ret
 	}
-	return o.Ogimage
+	return *o.OgImage
 }
 
-// GetOgimageOk returns a tuple with the Ogimage field value if set, nil otherwise
+// GetOgImageOk returns a tuple with the OgImage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetUrlPreview200Response) GetOgimageOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Ogimage) {
+func (o *GetUrlPreview200Response) GetOgImageOk() (*string, bool) {
+	if o == nil || IsNil(o.OgImage) {
 		return nil, false
 	}
-	return &o.Ogimage, true
+	return o.OgImage, true
 }
 
-// HasOgimage returns a boolean if a field has been set.
-func (o *GetUrlPreview200Response) HasOgimage() bool {
-	if o != nil && IsNil(o.Ogimage) {
+// HasOgImage returns a boolean if a field has been set.
+func (o *GetUrlPreview200Response) HasOgImage() bool {
+	if o != nil && !IsNil(o.OgImage) {
 		return true
 	}
 
 	return false
 }
 
-// SetOgimage gets a reference to the given interface{} and assigns it to the Ogimage field.
-func (o *GetUrlPreview200Response) SetOgimage(v interface{}) {
-	o.Ogimage = v
+// SetOgImage gets a reference to the given string and assigns it to the OgImage field.
+func (o *GetUrlPreview200Response) SetOgImage(v string) {
+	o.OgImage = &v
 }
 
 func (o GetUrlPreview200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -133,11 +117,11 @@ func (o GetUrlPreview200Response) MarshalJSON() ([]byte, error) {
 
 func (o GetUrlPreview200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Matriximagesize != nil {
-		toSerialize["matrix:image:size"] = o.Matriximagesize
+	if !IsNil(o.MatrixImageSize) {
+		toSerialize["matrix:image:size"] = o.MatrixImageSize
 	}
-	if o.Ogimage != nil {
-		toSerialize["og:image"] = o.Ogimage
+	if !IsNil(o.OgImage) {
+		toSerialize["og:image"] = o.OgImage
 	}
 	return toSerialize, nil
 }
@@ -177,3 +161,5 @@ func (v *NullableGetUrlPreview200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

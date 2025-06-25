@@ -1,3 +1,17 @@
+// Copyright 2023-2024 Ant Investor Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package com.antinvestor.apis.notification.v1;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
@@ -22,7 +36,7 @@ public final class NotificationServiceGrpc {
       fullMethodName = SERVICE_NAME + '/' + "Send",
       requestType = com.antinvestor.apis.notification.v1.SendRequest.class,
       responseType = com.antinvestor.apis.notification.v1.SendResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<com.antinvestor.apis.notification.v1.SendRequest,
       com.antinvestor.apis.notification.v1.SendResponse> getSendMethod() {
     io.grpc.MethodDescriptor<com.antinvestor.apis.notification.v1.SendRequest, com.antinvestor.apis.notification.v1.SendResponse> getSendMethod;
@@ -31,7 +45,7 @@ public final class NotificationServiceGrpc {
         if ((getSendMethod = NotificationServiceGrpc.getSendMethod) == null) {
           NotificationServiceGrpc.getSendMethod = getSendMethod =
               io.grpc.MethodDescriptor.<com.antinvestor.apis.notification.v1.SendRequest, com.antinvestor.apis.notification.v1.SendResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Send"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -53,7 +67,7 @@ public final class NotificationServiceGrpc {
       fullMethodName = SERVICE_NAME + '/' + "Release",
       requestType = com.antinvestor.apis.notification.v1.ReleaseRequest.class,
       responseType = com.antinvestor.apis.notification.v1.ReleaseResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<com.antinvestor.apis.notification.v1.ReleaseRequest,
       com.antinvestor.apis.notification.v1.ReleaseResponse> getReleaseMethod() {
     io.grpc.MethodDescriptor<com.antinvestor.apis.notification.v1.ReleaseRequest, com.antinvestor.apis.notification.v1.ReleaseResponse> getReleaseMethod;
@@ -62,7 +76,7 @@ public final class NotificationServiceGrpc {
         if ((getReleaseMethod = NotificationServiceGrpc.getReleaseMethod) == null) {
           NotificationServiceGrpc.getReleaseMethod = getReleaseMethod =
               io.grpc.MethodDescriptor.<com.antinvestor.apis.notification.v1.ReleaseRequest, com.antinvestor.apis.notification.v1.ReleaseResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Release"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -84,7 +98,7 @@ public final class NotificationServiceGrpc {
       fullMethodName = SERVICE_NAME + '/' + "Receive",
       requestType = com.antinvestor.apis.notification.v1.ReceiveRequest.class,
       responseType = com.antinvestor.apis.notification.v1.ReceiveResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<com.antinvestor.apis.notification.v1.ReceiveRequest,
       com.antinvestor.apis.notification.v1.ReceiveResponse> getReceiveMethod() {
     io.grpc.MethodDescriptor<com.antinvestor.apis.notification.v1.ReceiveRequest, com.antinvestor.apis.notification.v1.ReceiveResponse> getReceiveMethod;
@@ -93,7 +107,7 @@ public final class NotificationServiceGrpc {
         if ((getReceiveMethod = NotificationServiceGrpc.getReceiveMethod) == null) {
           NotificationServiceGrpc.getReceiveMethod = getReceiveMethod =
               io.grpc.MethodDescriptor.<com.antinvestor.apis.notification.v1.ReceiveRequest, com.antinvestor.apis.notification.v1.ReceiveResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Receive"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -438,7 +452,7 @@ public final class NotificationServiceGrpc {
      */
     public void send(com.antinvestor.apis.notification.v1.SendRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.SendResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getSendMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -449,7 +463,7 @@ public final class NotificationServiceGrpc {
      */
     public void release(com.antinvestor.apis.notification.v1.ReleaseRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.ReleaseResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getReleaseMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -460,7 +474,7 @@ public final class NotificationServiceGrpc {
      */
     public void receive(com.antinvestor.apis.notification.v1.ReceiveRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.ReceiveResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getReceiveMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -538,8 +552,10 @@ public final class NotificationServiceGrpc {
      *Send method for queueing massages as requested
      * </pre>
      */
-    public com.antinvestor.apis.notification.v1.SendResponse send(com.antinvestor.apis.notification.v1.SendRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.notification.v1.SendResponse>
+        send(com.antinvestor.apis.notification.v1.SendRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
           getChannel(), getSendMethod(), getCallOptions(), request);
     }
 
@@ -548,8 +564,10 @@ public final class NotificationServiceGrpc {
      *Release method for releasing queued massages and returns if notification status if released
      * </pre>
      */
-    public com.antinvestor.apis.notification.v1.ReleaseResponse release(com.antinvestor.apis.notification.v1.ReleaseRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.notification.v1.ReleaseResponse>
+        release(com.antinvestor.apis.notification.v1.ReleaseRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
           getChannel(), getReleaseMethod(), getCallOptions(), request);
     }
 
@@ -558,8 +576,10 @@ public final class NotificationServiceGrpc {
      *Receive method is for client request for particular notification responses from system
      * </pre>
      */
-    public com.antinvestor.apis.notification.v1.ReceiveResponse receive(com.antinvestor.apis.notification.v1.ReceiveRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.notification.v1.ReceiveResponse>
+        receive(com.antinvestor.apis.notification.v1.ReceiveRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
           getChannel(), getReceiveMethod(), getCallOptions(), request);
     }
 
@@ -636,8 +656,9 @@ public final class NotificationServiceGrpc {
      *Send method for queueing massages as requested
      * </pre>
      */
-    public com.antinvestor.apis.notification.v1.SendResponse send(com.antinvestor.apis.notification.v1.SendRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public java.util.Iterator<com.antinvestor.apis.notification.v1.SendResponse> send(
+        com.antinvestor.apis.notification.v1.SendRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getSendMethod(), getCallOptions(), request);
     }
 
@@ -646,8 +667,9 @@ public final class NotificationServiceGrpc {
      *Release method for releasing queued massages and returns if notification status if released
      * </pre>
      */
-    public com.antinvestor.apis.notification.v1.ReleaseResponse release(com.antinvestor.apis.notification.v1.ReleaseRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public java.util.Iterator<com.antinvestor.apis.notification.v1.ReleaseResponse> release(
+        com.antinvestor.apis.notification.v1.ReleaseRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getReleaseMethod(), getCallOptions(), request);
     }
 
@@ -656,8 +678,9 @@ public final class NotificationServiceGrpc {
      *Receive method is for client request for particular notification responses from system
      * </pre>
      */
-    public com.antinvestor.apis.notification.v1.ReceiveResponse receive(com.antinvestor.apis.notification.v1.ReceiveRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public java.util.Iterator<com.antinvestor.apis.notification.v1.ReceiveResponse> receive(
+        com.antinvestor.apis.notification.v1.ReceiveRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getReceiveMethod(), getCallOptions(), request);
     }
 
@@ -725,39 +748,6 @@ public final class NotificationServiceGrpc {
     protected NotificationServiceFutureStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new NotificationServiceFutureStub(channel, callOptions);
-    }
-
-    /**
-     * <pre>
-     *Send method for queueing massages as requested
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.notification.v1.SendResponse> send(
-        com.antinvestor.apis.notification.v1.SendRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getSendMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     *Release method for releasing queued massages and returns if notification status if released
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.notification.v1.ReleaseResponse> release(
-        com.antinvestor.apis.notification.v1.ReleaseRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getReleaseMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     *Receive method is for client request for particular notification responses from system
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.notification.v1.ReceiveResponse> receive(
-        com.antinvestor.apis.notification.v1.ReceiveRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getReceiveMethod(), getCallOptions()), request);
     }
 
     /**
@@ -869,21 +859,21 @@ public final class NotificationServiceGrpc {
     return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
         .addMethod(
           getSendMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
               com.antinvestor.apis.notification.v1.SendRequest,
               com.antinvestor.apis.notification.v1.SendResponse>(
                 service, METHODID_SEND)))
         .addMethod(
           getReleaseMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
               com.antinvestor.apis.notification.v1.ReleaseRequest,
               com.antinvestor.apis.notification.v1.ReleaseResponse>(
                 service, METHODID_RELEASE)))
         .addMethod(
           getReceiveMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
               com.antinvestor.apis.notification.v1.ReceiveRequest,
               com.antinvestor.apis.notification.v1.ReceiveResponse>(

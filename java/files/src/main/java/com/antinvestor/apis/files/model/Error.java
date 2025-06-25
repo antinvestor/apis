@@ -1,17 +1,3 @@
-// Copyright 2023-2024 Ant Investor Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
  * Ant Investor Files
  * An openAPI 3.0 specification that defines how files are stored and accessed on ant investor products
@@ -42,6 +28,7 @@ import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
+import com.antinvestor.apis.files.invoker.ApiClient;
 /**
  * A Service level Error
  */
@@ -49,30 +36,31 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Error.JSON_PROPERTY_ERRCODE,
   Error.JSON_PROPERTY_ERROR
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Error {
   public static final String JSON_PROPERTY_ERRCODE = "errcode";
+  @javax.annotation.Nonnull
   private String errcode;
 
   public static final String JSON_PROPERTY_ERROR = "error";
+  @javax.annotation.Nullable
   private String error;
 
   public Error() { 
   }
 
-  public Error errcode(String errcode) {
+  public Error errcode(@javax.annotation.Nonnull String errcode) {
     this.errcode = errcode;
     return this;
   }
 
-   /**
+  /**
    * An error code for the error.
    * @return errcode
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ERRCODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getErrcode() {
     return errcode;
   }
@@ -80,24 +68,23 @@ public class Error {
 
   @JsonProperty(JSON_PROPERTY_ERRCODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setErrcode(String errcode) {
+  public void setErrcode(@javax.annotation.Nonnull String errcode) {
     this.errcode = errcode;
   }
 
 
-  public Error error(String error) {
+  public Error error(@javax.annotation.Nullable String error) {
     this.error = error;
     return this;
   }
 
-   /**
+  /**
    * A human-readable error message.
    * @return error
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ERROR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getError() {
     return error;
   }
@@ -105,7 +92,7 @@ public class Error {
 
   @JsonProperty(JSON_PROPERTY_ERROR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setError(String error) {
+  public void setError(@javax.annotation.Nullable String error) {
     this.error = error;
   }
 
@@ -186,12 +173,12 @@ public class Error {
 
     // add `errcode` to the URL query string
     if (getErrcode() != null) {
-      joiner.add(String.format("%serrcode%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getErrcode()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%serrcode%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getErrcode()))));
     }
 
     // add `error` to the URL query string
     if (getError() != null) {
-      joiner.add(String.format("%serror%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getError()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%serror%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getError()))));
     }
 
     return joiner.toString();

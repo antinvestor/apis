@@ -4,6 +4,8 @@ Ant Investor Files
 
 - API version: 1.0.0
 
+- Generator version: 7.14.0
+
 An openAPI 3.0 specification that defines how files are stored and accessed on ant investor products
 
   For more information, please visit [https://antinvestor.com](https://antinvestor.com)
@@ -127,9 +129,9 @@ Class | Method | HTTP request | Description
 
  - [CreateContent200Response](docs/CreateContent200Response.md)
  - [Error](docs/Error.md)
- - [Error1](docs/Error1.md)
  - [GetConfig200Response](docs/GetConfig200Response.md)
  - [GetUrlPreview200Response](docs/GetUrlPreview200Response.md)
+ - [InlineObject](docs/InlineObject.md)
  - [UploadContent200Response](docs/UploadContent200Response.md)
 
 

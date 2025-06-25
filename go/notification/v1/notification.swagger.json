@@ -31,9 +31,18 @@
         "operationId": "NotificationService_Receive",
         "responses": {
           "200": {
-            "description": "A successful response.",
+            "description": "A successful response.(streaming responses)",
             "schema": {
-              "$ref": "#/definitions/notification.v1.ReceiveResponse"
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/notification.v1.ReceiveResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of notification.v1.ReceiveResponse"
             }
           },
           "default": {
@@ -152,9 +161,18 @@
         "operationId": "NotificationService_Send",
         "responses": {
           "200": {
-            "description": "A successful response.",
+            "description": "A successful response.(streaming responses)",
             "schema": {
-              "$ref": "#/definitions/notification.v1.SendResponse"
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/notification.v1.SendResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of notification.v1.SendResponse"
             }
           },
           "default": {
@@ -185,9 +203,18 @@
         "operationId": "NotificationService_Release",
         "responses": {
           "200": {
-            "description": "A successful response.",
+            "description": "A successful response.(streaming responses)",
             "schema": {
-              "$ref": "#/definitions/notification.v1.ReleaseResponse"
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/notification.v1.ReleaseResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of notification.v1.ReleaseResponse"
             }
           },
           "default": {
@@ -202,7 +229,12 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv",
+            "minItems": 1
           },
           {
             "name": "body",
@@ -639,7 +671,11 @@
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/notification.v1.Notification"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notification.v1.Notification"
+          }
         }
       }
     },
@@ -647,7 +683,11 @@
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/common.v1.StatusResponse"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/common.v1.StatusResponse"
+          }
         }
       }
     },
@@ -655,7 +695,11 @@
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/common.v1.StatusResponse"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/common.v1.StatusResponse"
+          }
         }
       }
     },
@@ -675,7 +719,11 @@
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/notification.v1.Notification"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notification.v1.Notification"
+          }
         }
       }
     },
@@ -683,7 +731,11 @@
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/common.v1.StatusResponse"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/common.v1.StatusResponse"
+          }
         }
       }
     },
