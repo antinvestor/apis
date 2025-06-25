@@ -118,7 +118,6 @@ message Account {
   string account_number = 1;
   string country_code = 2;
   string name = 3;
-  map<string, string> extra = 11;
 }
 
 message InitiatePromptRequest {
@@ -132,6 +131,7 @@ message InitiatePromptRequest {
   common.v1.STATUS status = 8;
   // Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
   string route = 9;
+  // Merchant information for the payment
   Account recipient_account = 10;
   // Any additional metadata (e.g., notes, tags, correlation keys)
   map<string, string> extra = 11;
@@ -151,6 +151,51 @@ message ReleaseRequest {
 }
 
 message ReleaseResponse {
+  common.v1.StatusResponse data = 1;
+}
+
+// --- Payment Link Creation ---
+
+enum NotificationType {
+  NOTIFICATION_TYPE_UNSPECIFIED = 0;
+  NOTIFICATION_TYPE_EMAIL = 1;
+  NOTIFICATION_TYPE_SMS = 2;
+}
+
+message Customer {
+  common.v1.ContactLink source = 1;
+  string first_address = 2;
+  string country_code = 3;
+  string postal_or_zip_code = 4;
+  string customer_external_ref = 5;
+}
+
+message PaymentLink {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string expiry_date = 2;
+  string sale_date = 3;
+  string payment_link_type = 4;
+  string sale_type = 5;
+  string name = 6;
+  string description = 7;
+  string external_ref = 8;
+  string payment_link_ref = 9;
+  string redirect_url = 10;
+  string amount_option = 11;
+  google.type.Money amount = 12;
+  string currency = 13;
+}
+
+message CreatePaymentLinkRequest {
+  repeated Customer customers = 1;
+  PaymentLink payment_link = 2;
+  repeated NotificationType notifications = 3;
+}
+message CreatePaymentLinkResponse {
   common.v1.StatusResponse data = 1;
 }
 
@@ -175,6 +220,14 @@ service PaymentService {
   rpc InitiatePrompt(InitiatePromptRequest) returns (InitiatePromptResponse) {
     option (google.api.http) = {
       post: "/initiate/prompt"
+      body: "*"
+    };
+  }
+
+  //createPaymentLink method for creating payment links as requested
+  rpc CreatePaymentLink(CreatePaymentLinkRequest) returns (CreatePaymentLinkResponse) {
+    option (google.api.http) = {
+      post: "/create-payment-link"
       body: "*"
     };
   }
