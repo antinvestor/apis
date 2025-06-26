@@ -3,7 +3,7 @@ module github.com/antinvestor/apis/go/profile
 go 1.24
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.6-20250613105001-9f2d3c737feb.1
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.6-20250625184727-c923a0c2a132.1
 	github.com/antinvestor/apis/go/common v1.35.2
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.1
 	go.uber.org/mock v0.5.2
