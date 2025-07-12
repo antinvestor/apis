@@ -35,9 +35,9 @@ func CreateProxyHandler(ctx context.Context, proxyOptions common.ProxyOptions) (
 		return nil, err
 	}
 
-	proxyMux.Handle(proxyOptions.CleanApiPath(), implementationMux)
+	proxyMux.Handle(proxyOptions.CleanAPIPath(), implementationMux)
 
-	err = proxyOptions.ServeApiSpec(proxyMux, apiSpecFs, "notification.swagger.json")
+	err = proxyOptions.ServeAPISpec(proxyMux, apiSpecFs, "notification.swagger.json")
 	if err != nil {
 		return nil, err
 	}

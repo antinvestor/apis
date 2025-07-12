@@ -35,12 +35,12 @@ func CreateProxyHandler(ctx context.Context, proxyOptions common.ProxyOptions) (
 		return nil, err
 	}
 
-	err = proxyOptions.ServeApiSpec(proxyMux, apiSpecFs, "ocr.swagger.json")
+	err = proxyOptions.ServeAPISpec(proxyMux, apiSpecFs, "ocr.swagger.json")
 	if err != nil {
 		return nil, err
 	}
 
-	proxyMux.Handle(proxyOptions.CleanApiPath(), implementationMux)
+	proxyMux.Handle(proxyOptions.CleanAPIPath(), implementationMux)
 
 	return proxyMux, nil
 }
