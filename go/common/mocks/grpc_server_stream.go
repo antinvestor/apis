@@ -26,7 +26,7 @@ import (
 type MockServerStreamingClient[T any] struct {
 	grpc.ServerStreamingClient[T]
 	ctx      context.Context
-	messages []T
+	messages []*T
 	msgMu    sync.Mutex
 }
 
@@ -50,7 +50,7 @@ func (m *MockServerStreamingClient[T]) SendMsg(msg any) error {
 	m.msgMu.Lock()
 	defer m.msgMu.Unlock()
 
-	v, ok := msg.(T)
+	v, ok := msg.(*T)
 	if ok {
 		// Store the message in our temporary storage
 		m.messages = append(m.messages, v)
@@ -79,11 +79,11 @@ func (m *MockServerStreamingClient[T]) RecvMsg(
 	return nil
 }
 
-func (m *MockServerStreamingClient[T]) Recv() (T, error) {
+func (m *MockServerStreamingClient[T]) Recv() (*T, error) {
 	m.msgMu.Lock()
 	defer m.msgMu.Unlock()
 
-	var msg T
+	var msg *T
 	// If we have messages in storage, return them first
 	if len(m.messages) > 0 {
 		msg = m.messages[0]
@@ -97,7 +97,7 @@ func (m *MockServerStreamingClient[T]) Recv() (T, error) {
 }
 
 // NewMockServerStreamingClient creates a new mock server streaming client.
-func NewMockServerStreamingClient[T any](ctx context.Context) *MockServerStreamingClient[T] {
+func NewMockServerStreamingClient[T any](ctx context.Context) grpc.ServerStreamingClient[T] {
 	return &MockServerStreamingClient[T]{
 		ctx: ctx,
 	}
