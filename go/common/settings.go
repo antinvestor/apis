@@ -24,7 +24,7 @@ import (
 	"golang.org/x/oauth2"
 )
 
-// DialSettings holds information needed to establish a connection
+// DialSettings holds information needed to establish a connection.
 type DialSettings struct {
 	Endpoint         string
 	Scopes           []string
@@ -58,24 +58,14 @@ func (ds *DialSettings) GetScopes() []string {
 
 // Validate reports an error if ds is invalid.
 func (ds *DialSettings) Validate() error {
-
 	hasCreds := ds.APIKey != "" || ds.TokenSource != nil
 	if ds.NoAuth && hasCreds {
 		return errors.New("options.WithoutAuthentication is incompatible with any option that provides credentials")
 	}
 	// Credentials should not appear with other options.
 	// We currently allow TokenSource and CredentialsFile to coexist.
-	nCreds := 0
-
-	if ds.APIKey != "" {
-		nCreds++
-	}
-	if ds.TokenSource != nil {
-		nCreds++
-	}
-
-	// Accept only one form of credentials, except we allow TokenSource and CredentialsFile for backwards compatibility.
-	if nCreds > 1 {
+	if ds.APIKey != "" && ds.TokenSource != nil {
+		// Accept only one form of credentials, except we allow TokenSource and CredentialsFile for backwards compatibility.
 		return errors.New("multiple credential options provided")
 	}
 	if ds.HTTPClient != nil && ds.GRPCConn != nil {

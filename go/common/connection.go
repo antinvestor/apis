@@ -37,10 +37,10 @@ import (
 const ctxKeyPartitionInfo = CtxServiceKey("partitionInfoKey")
 
 type PartitionInfo struct {
-	TenantId    string
-	PartitionId string
-	AccessId    string
-	ProfileId   string
+	TenantID    string
+	PartitionID string
+	AccessID    string
+	ProfileID   string
 }
 
 type GrpcClientBase struct {
@@ -81,7 +81,6 @@ func (gbc *GrpcClientBase) SetPartitionInfo(ctx context.Context, partitionInfo *
 }
 
 func NewClientBase(ctx context.Context, opts ...ClientOption) (*GrpcClientBase, error) {
-
 	connPool, err := DialConnection(ctx, opts...)
 	if err != nil {
 		return nil, err
@@ -116,10 +115,10 @@ func (jwt *JWTInterceptor) setupPartitionData(ctx context.Context) context.Conte
 	if partitionInfo == nil {
 		return ctx
 	}
-	finalCtx := metadata.AppendToOutgoingContext(ctx, "tenant_id", partitionInfo.TenantId)
-	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "partition_id", partitionInfo.PartitionId)
-	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "access_id", partitionInfo.AccessId)
-	return metadata.AppendToOutgoingContext(finalCtx, "profile_id", partitionInfo.ProfileId)
+	finalCtx := metadata.AppendToOutgoingContext(ctx, "tenant_id", partitionInfo.TenantID)
+	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "partition_id", partitionInfo.PartitionID)
+	finalCtx = metadata.AppendToOutgoingContext(finalCtx, "access_id", partitionInfo.AccessID)
+	return metadata.AppendToOutgoingContext(finalCtx, "profile_id", partitionInfo.ProfileID)
 }
 
 func (jwt *JWTInterceptor) getTokenStr(ctx context.Context) (string, error) {
@@ -128,7 +127,6 @@ func (jwt *JWTInterceptor) getTokenStr(ctx context.Context) (string, error) {
 
 	var err error
 	if jwt.tokenClient != nil {
-
 		if jwt.token == nil || !jwt.token.Valid() {
 			jwt.token, err = jwt.tokenClient.Token(ctx)
 			if err != nil {
@@ -137,11 +135,9 @@ func (jwt *JWTInterceptor) getTokenStr(ctx context.Context) (string, error) {
 		}
 
 		return jwt.token.AccessToken, nil
-
 	}
 
 	if jwt.apiKey != "" {
-
 		return jwt.apiKey, nil
 	}
 	return "", nil
@@ -155,7 +151,6 @@ func (jwt *JWTInterceptor) UnaryClientInterceptor(
 	cc *grpc.ClientConn,
 	invoker grpc.UnaryInvoker,
 	opts ...grpc.CallOption) error {
-
 	tokenStr, err := jwt.getTokenStr(ctx)
 	if err != nil {
 		return err
@@ -181,7 +176,6 @@ func (jwt *JWTInterceptor) StreamClientInterceptor(
 	streamer grpc.Streamer,
 	opts ...grpc.CallOption,
 ) (grpc.ClientStream, error) {
-
 	tokenStr, err := jwt.getTokenStr(ctx)
 	if err != nil {
 		return nil, err
@@ -197,7 +191,6 @@ func (jwt *JWTInterceptor) StreamClientInterceptor(
 
 	finalCtx = jwt.setupPartitionData(finalCtx)
 	return streamer(finalCtx, desc, cc, method, opts...)
-
 }
 
 func processAndValidateOpts(opts []ClientOption) (*DialSettings, error) {
@@ -212,8 +205,8 @@ func processAndValidateOpts(opts []ClientOption) (*DialSettings, error) {
 	return &o, nil
 }
 
-// HttpClient create a http client that
-func HttpClient(ctx context.Context, opts ...ClientOption) (*http.Client, error) {
+// HTTPClient creates a new http client with the provided options.
+func HTTPClient(ctx context.Context, opts ...ClientOption) (*http.Client, error) {
 	var httpClient *http.Client
 	ds, err := processAndValidateOpts(opts)
 	if err != nil {
@@ -241,9 +234,8 @@ func HttpClient(ctx context.Context, opts ...ClientOption) (*http.Client, error)
 	return httpClient, nil
 }
 
-// DialConnection Way for dialing a grpc connection and obtaining a permanent link that
-// is used fairly always available throughout the life cycle of the application.
-func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn, error) {
+// DialConnection creates a gRPC connection with the provided options.
+func DialConnection(_ context.Context, opts ...ClientOption) (*grpc.ClientConn, error) {
 	ds, err := processAndValidateOpts(opts)
 	if err != nil {
 		return nil, err
@@ -255,9 +247,9 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 	if !strings.HasSuffix(ds.Endpoint, ":443") {
 		certDialOption = grpc.WithTransportCredentials(insecure.NewCredentials())
 	} else {
-		pool, err := x509.SystemCertPool()
-		if err != nil {
-			return nil, err
+		pool, certErr := x509.SystemCertPool()
+		if certErr != nil {
+			return nil, certErr
 		}
 		creds := credentials.NewClientTLSFromCert(pool, "")
 		certDialOption = grpc.WithTransportCredentials(creds)
@@ -298,7 +290,7 @@ func DialConnection(ctx context.Context, opts ...ClientOption) (*grpc.ClientConn
 	return serviceConnection, err
 }
 
-// XAntHeader Simple way to add a header to the ant service
+// XAntHeader Simple way to add a header to the ant service.
 func XAntHeader(keyval ...string) string {
 	if len(keyval) == 0 {
 		return ""
@@ -315,6 +307,8 @@ func XAntHeader(keyval ...string) string {
 	}
 	return buf.String()[1:]
 }
+
+const minDotsInDomain = 2
 
 // VersionGo returns the Go runtime version. The returned string
 // has no whitespace, suitable for reporting in header.
@@ -342,7 +336,7 @@ func VersionGo() string {
 		}
 		if strings.HasSuffix(s, ".") {
 			s += "0"
-		} else if strings.Count(s, ".") < 2 {
+		} else if strings.Count(s, ".") < minDotsInDomain {
 			s += ".0"
 		}
 		if prerelease != "" {

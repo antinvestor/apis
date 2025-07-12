@@ -16,8 +16,9 @@ package common
 
 import (
 	"embed"
-	"google.golang.org/grpc"
 	"net/http"
+
+	"google.golang.org/grpc"
 )
 
 type ProxyOptions struct {
@@ -42,18 +43,19 @@ func (p *ProxyOptions) CleanSwaggerPath() string {
 	return p.OpenAPIPath
 }
 
-func (p *ProxyOptions) CleanApiPath() string {
+// CleanAPIPath returns the clean API path for the proxy.
+func (p *ProxyOptions) CleanAPIPath() string {
 	if p.ProxyAPIPath == "" {
 		p.ProxyAPIPath = "/"
 	}
 	return p.ProxyAPIPath
 }
 
-func (p *ProxyOptions) ServeApiSpec(proxyMux *http.ServeMux, apiSpec embed.FS, specFileName string) error {
-
+// ServeAPISpec serves the API specification.
+func (p *ProxyOptions) ServeAPISpec(proxyMux *http.ServeMux, apiSpec embed.FS, specFileName string) error {
 	path := p.CleanSwaggerPath()
 
-	proxyMux.HandleFunc(path, func(w http.ResponseWriter, r *http.Request) {
+	proxyMux.HandleFunc(path, func(w http.ResponseWriter, _ *http.Request) {
 		// Read the embedded file content
 		swaggerFile, err := apiSpec.ReadFile(specFileName)
 		if err != nil {
