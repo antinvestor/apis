@@ -16,89 +16,42 @@ package mocks
 
 import (
 	"context"
-	"io"
-	"sync"
-
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )
 
-type MockServerStreamingClient[T any] struct {
-	grpc.ServerStreamingClient[T]
-	ctx      context.Context
-	messages []*T
-	msgMu    sync.Mutex
+type MockServerStream[T any] struct {
+	grpc.ServerStreamingServer[T]
+	ctx       context.Context
+	responses []*T
 }
 
-func (m *MockServerStreamingClient[T]) Header() (metadata.MD, error) {
-	return metadata.MD{}, nil
+func NewMockServerStream[T any](ctx context.Context) *MockServerStream[T] {
+	return &MockServerStream[T]{ctx: ctx}
 }
 
-func (m *MockServerStreamingClient[T]) Trailer() metadata.MD {
-	return metadata.MD{}
-}
-
-func (m *MockServerStreamingClient[T]) CloseSend() error {
+func (m *MockServerStream[T]) SetHeader(_ metadata.MD) error {
 	return nil
 }
 
-func (m *MockServerStreamingClient[T]) Context() context.Context {
+func (m *MockServerStream[T]) SendHeader(_ metadata.MD) error {
+	return nil
+}
+
+func (m *MockServerStream[T]) SetTrailer(_ metadata.MD) {
+}
+
+func (m *MockServerStream[T]) Send(resp *T) error {
+	if resp != nil {
+		m.responses = append(m.responses, resp)
+	}
+	return nil
+}
+
+func (m *MockServerStream[T]) Context() context.Context {
 	return m.ctx
 }
 
-func (m *MockServerStreamingClient[T]) SendMsg(msg any) error {
-	m.msgMu.Lock()
-	defer m.msgMu.Unlock()
-
-	v, ok := msg.(*T)
-	if ok {
-		// Store the message in our temporary storage
-		m.messages = append(m.messages, v)
-	}
-	return nil
-}
-
-//nolint:staticcheck //normally msg is a pointer to be set
-func (m *MockServerStreamingClient[T]) RecvMsg(
-	msg any,
-) error {
-	m.msgMu.Lock()
-	defer m.msgMu.Unlock()
-
-	// If there are no messages, return EOF
-	if len(m.messages) == 0 {
-		return io.EOF
-	}
-
-	msg = m.messages[0] //nolint:ineffassign, wastedassign // this is how it works
-	// Get the first message from our storage
-	// This would require type assertions in a real implementation to copy values
-	// For now we'll just remove it from the queue
-	m.messages = m.messages[1:]
-
-	return nil
-}
-
-func (m *MockServerStreamingClient[T]) Recv() (*T, error) {
-	m.msgMu.Lock()
-	defer m.msgMu.Unlock()
-
-	var msg *T
-	// If we have messages in storage, return them first
-	if len(m.messages) > 0 {
-		msg = m.messages[0]
-		// In a real implementation, we'd need to convert the message to type T
-		// For simplicity, we'll just remove it from the queue
-		m.messages = m.messages[1:]
-		return msg, nil
-	}
-
-	return msg, io.EOF
-}
-
-// NewMockServerStreamingClient creates a new mock server streaming client.
-func NewMockServerStreamingClient[T any](ctx context.Context) grpc.ServerStreamingClient[T] {
-	return &MockServerStreamingClient[T]{
-		ctx: ctx,
-	}
+func (m *MockServerStream[T]) GetResponses() []*T {
+	return m.responses
 }
