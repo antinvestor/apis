@@ -44,24 +44,28 @@ func FromContext(ctx context.Context) *PropertyClient {
 	return client
 }
 
-// PropertyClient is a Client for interacting with the notification service API.
+// PropertyClient is a svc for interacting with the notification service API.
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type PropertyClient struct {
 	*common.GrpcClientBase
 
-	// The gRPC API Client.
-	Client PropertyServiceClient
+	// The gRPC API svc.
+	svc PropertyServiceClient
 }
 
 func Init(cBase *common.GrpcClientBase, service PropertyServiceClient) *PropertyClient {
 	return &PropertyClient{
 		GrpcClientBase: cBase,
-		Client:         service,
+		svc:            service,
 	}
 }
 
-// NewPropertyClient creates a new notification Client.
+func (pc *PropertyClient) Svc() PropertyServiceClient {
+	return pc.svc
+}
+
+// NewPropertyClient creates a new notification svc.
 //
 // The service that an application uses to send and access received messages
 func NewPropertyClient(ctx context.Context, opts ...common.ClientOption) (*PropertyClient, error) {
@@ -74,13 +78,13 @@ func NewPropertyClient(ctx context.Context, opts ...common.ClientOption) (*Prope
 
 	c := &PropertyClient{
 		GrpcClientBase: clientBase,
-		Client:         NewPropertyServiceClient(clientBase.Connection()),
+		svc:            NewPropertyServiceClient(clientBase.Connection()),
 	}
 
 	return c, nil
 }
 
-func (pCl *PropertyClient) AddPropertyType(
+func (pc *PropertyClient) AddPropertyType(
 	ctx context.Context, name string, description string,
 	extras map[string]string) (*AddPropertyTypeResponse, error) {
 
@@ -90,19 +94,19 @@ func (pCl *PropertyClient) AddPropertyType(
 		Extra:       extras,
 	}
 
-	return pCl.Client.AddPropertyType(ctx, &AddPropertyTypeRequest{
+	return pc.svc.AddPropertyType(ctx, &AddPropertyTypeRequest{
 		Data: &propertyType,
 	})
 }
 
-func (pCl *PropertyClient) ListPropertyType(
+func (pc *PropertyClient) ListPropertyType(
 	ctx context.Context, query string) (<-chan *PropertyType, error) {
 
 	searchRequest := ListPropertyTypeRequest{
 		Query: query,
 	}
 
-	responseService, err := pCl.Client.ListPropertyType(ctx, &searchRequest)
+	responseService, err := pc.svc.ListPropertyType(ctx, &searchRequest)
 	if err != nil {
 		return nil, err
 	}

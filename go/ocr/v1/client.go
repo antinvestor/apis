@@ -45,24 +45,28 @@ func FromContext(ctx context.Context) *OCRClient {
 	return ocrClient
 }
 
-// OCRClient is a Client for interacting with the profile service API.
+// OCRClient is a svc for interacting with the profile service API.
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type OCRClient struct {
 	*common.GrpcClientBase
 
-	// The gRPC API Client.
-	Client OCRServiceClient
+	// The gRPC API svc.
+	svc OCRServiceClient
 }
 
 func Init(cBase *common.GrpcClientBase, service OCRServiceClient) *OCRClient {
 	return &OCRClient{
 		GrpcClientBase: cBase,
-		Client:         service,
+		svc:            service,
 	}
 }
 
-// NewOCRClient creates a new ocr Client.
+func (oc *OCRClient) Svc() OCRServiceClient {
+	return oc.svc
+}
+
+// NewOCRClient creates a new ocr svc.
 // The service that an application uses to perform ocr requests
 func NewOCRClient(ctx context.Context, opts ...common.ClientOption) (*OCRClient, error) {
 	clientOpts := defaultOcrClientOptions()
@@ -75,7 +79,7 @@ func NewOCRClient(ctx context.Context, opts ...common.ClientOption) (*OCRClient,
 	return Init(clientBase, NewOCRServiceClient(clientBase.Connection())), nil
 }
 
-func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, properties map[string]string, fileId ...string) (*RecognizeResponse, error) {
+func (oc *OCRClient) Recognize(ctx context.Context, id string, language string, properties map[string]string, fileId ...string) (*RecognizeResponse, error) {
 
 	ocrRequest := RecognizeRequest{
 		ReferenceId: id,
@@ -84,14 +88,14 @@ func (pc *OCRClient) Recognize(ctx context.Context, id string, language string, 
 		Properties:  properties,
 	}
 
-	return pc.Client.Recognize(ctx, &ocrRequest)
+	return oc.svc.Recognize(ctx, &ocrRequest)
 }
 
-func (pc *OCRClient) StatusCheck(ctx context.Context, id string) (*StatusResponse, error) {
+func (oc *OCRClient) StatusCheck(ctx context.Context, id string) (*StatusResponse, error) {
 
 	statusCheckRequest := commonv1.StatusRequest{
 		Id: id,
 	}
 
-	return pc.Client.Status(ctx, &statusCheckRequest)
+	return oc.svc.Status(ctx, &statusCheckRequest)
 }

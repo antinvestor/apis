@@ -1,0 +1,48 @@
+version: v2
+managed:
+  enabled: true
+  disable:
+    - file_option: java_package
+      module: buf.build/bufbuild/protovalidate
+    - file_option: java_package
+      module: buf.build/googleapis/googleapis
+    - file_option: java_package
+      module: buf.build/grpc-ecosystem/grpc-gateway
+    - file_option: go_package
+      module: buf.build/bufbuild/protovalidate
+    - file_option: go_package
+      module: buf.build/googleapis/googleapis
+    - file_option: go_package
+      module: buf.build/grpc-ecosystem/grpc-gateway
+  override:
+    - file_option: java_multiple_files
+      value: true
+    - file_option: java_package_prefix
+      value: com.antinvestor.apis
+    - file_option: go_package_prefix
+      value: github.com/antinvestor/apis/go/device
+plugins:
+  - remote: buf.build/grpc/go
+    out: ../../go/
+    opt: paths=source_relative
+  - remote: buf.build/protocolbuffers/go
+    out: ../../go/
+    opt: paths=source_relative
+  - remote: buf.build/grpc-ecosystem/gateway
+    out: ../../go/
+    opt:
+      - paths=source_relative
+      - generate_unbound_methods=true
+      - allow_repeated_fields_in_body=true
+  - remote: buf.build/grpc-ecosystem/openapiv2
+    out: ../../go/
+    opt:
+      - logtostderr=true
+      - fqn_for_openapi_name=true
+      - include_package_in_tags=true
+      - allow_repeated_fields_in_body=true
+  - remote: buf.build/grpc/java
+    out: ../../java/device/src/main/java/
+  - remote: buf.build/protocolbuffers/java
+    out: ../../java/device/src/main/java/
+

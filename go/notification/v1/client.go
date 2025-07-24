@@ -45,24 +45,28 @@ func FromContext(ctx context.Context) *NotificationClient {
 	return client
 }
 
-// NotificationClient is a Client for interacting with the notification service API.
+// NotificationClient is a svc for interacting with the notification service API.
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type NotificationClient struct {
 	*common.GrpcClientBase
 
-	// The gRPC API Client.
-	Client NotificationServiceClient
+	// The gRPC API svc.
+	svc NotificationServiceClient
 }
 
 func Init(cBase *common.GrpcClientBase, service NotificationServiceClient) *NotificationClient {
 	return &NotificationClient{
 		GrpcClientBase: cBase,
-		Client:         service,
+		svc:            service,
 	}
 }
 
-// NewNotificationClient creates a new notification Client.
+func (nc *NotificationClient) Svc() NotificationServiceClient {
+	return nc.svc
+}
+
+// NewNotificationClient creates a new notification svc.
 //
 // The service that an application uses to send and access received messages
 func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*NotificationClient, error) {
@@ -77,7 +81,7 @@ func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*N
 }
 
 func (nc *NotificationClient) Send(ctx context.Context, messages []*Notification) (<-chan *common.MessageOrError[*commonv1.StatusResponse], error) {
-	responseStream, err := nc.Client.Send(ctx, &SendRequest{Data: messages})
+	responseStream, err := nc.svc.Send(ctx, &SendRequest{Data: messages})
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +108,7 @@ func (nc *NotificationClient) Send(ctx context.Context, messages []*Notification
 
 func (nc *NotificationClient) Release(ctx context.Context, ids []string, comment string) (<-chan *common.MessageOrError[*commonv1.StatusResponse], error) {
 
-	responseStream, err := nc.Client.Release(ctx, &ReleaseRequest{Id: ids, Comment: comment})
+	responseStream, err := nc.svc.Release(ctx, &ReleaseRequest{Id: ids, Comment: comment})
 	if err != nil {
 		return nil, err
 	}
@@ -134,7 +138,7 @@ func (nc *NotificationClient) Receive(ctx context.Context, messages []*Notificat
 	for _, msg := range messages {
 		msg.AutoRelease = true
 	}
-	responseStream, err := nc.Client.Receive(ctx, &ReceiveRequest{Data: messages})
+	responseStream, err := nc.svc.Receive(ctx, &ReceiveRequest{Data: messages})
 	if err != nil {
 		return nil, err
 	}
@@ -171,7 +175,7 @@ func (nc *NotificationClient) UpdateStatus(ctx context.Context, notificationId s
 		Extras:     extras,
 	}
 
-	return nc.Client.StatusUpdate(ctx, &messageStatus)
+	return nc.svc.StatusUpdate(ctx, &messageStatus)
 }
 
 func (nc *NotificationClient) GetTemplate(ctx context.Context, name string, language string) (*Template, error) {
@@ -181,7 +185,7 @@ func (nc *NotificationClient) GetTemplate(ctx context.Context, name string, lang
 		LanguageCode: language,
 	}
 
-	responseStream, err := nc.Client.TemplateSearch(ctx, &searchRequest)
+	responseStream, err := nc.svc.TemplateSearch(ctx, &searchRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -206,7 +210,7 @@ func (nc *NotificationClient) SearchTemplate(ctx context.Context, query string, 
 		Count:        count,
 	}
 
-	responseService, err := nc.Client.TemplateSearch(ctx, &searchRequest)
+	responseService, err := nc.svc.TemplateSearch(ctx, &searchRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -239,7 +243,7 @@ func (nc *NotificationClient) SaveTemplate(ctx context.Context, name string, lan
 		Data:         data,
 	}
 
-	response, err := nc.Client.TemplateSave(ctx, templateSaveRequest)
+	response, err := nc.svc.TemplateSave(ctx, templateSaveRequest)
 	if err != nil {
 		return nil, err
 	}

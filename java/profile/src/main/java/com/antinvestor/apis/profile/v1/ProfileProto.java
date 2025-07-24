@@ -381,7 +381,7 @@ public final class ProfileProto {
       "\036\n\nproperties\030\006 \003(\tR\nproperties\022C\n\006extra" +
       "s\030\007 \003(\0132+.profile.v1.SearchRosterRequest" +
       ".ExtrasEntryR\006extras\022?\n\nprofile_id\030\010 \001(\t" +
-      "B \272H\035r\030\020\003\030\372\0012\021[0-9a-z_-]{3,250}\330\001\001R\tprof" +
+      "B \272H\035r\030\020\003\030\372\0012\021[0-9a-z_-]{3,250}\330\001\000R\tprof" +
       "ileId\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024" +
       "\n\005value\030\002 \001(\tR\005value:\0028\001\"D\n\024SearchRoster" +
       "Response\022,\n\004data\030\001 \003(\0132\030.profile.v1.Rost" +
@@ -405,7 +405,7 @@ public final class ProfileProto {
       "GroupR\010peerName\0224\n\007peer_id\030\002 \001(\tB\033\272H\030r\026\020" +
       "\003\030(2\020[0-9a-z_-]{3,20}R\006peerId\022P\n\024last_re" +
       "lationship_id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_" +
-      "-]{3,20}\330\001\001R\022lastRelationshipId\022.\n\023relat" +
+      "-]{3,20}\330\001\000R\022lastRelationshipId\022.\n\023relat" +
       "ed_children_id\030\004 \003(\tR\021relatedChildrenId\022" +
       "\024\n\005count\030\005 \001(\005R\005count\022\'\n\017invert_relation" +
       "\030\006 \001(\010R\016invertRelation\"N\n\030ListRelationsh" +
@@ -428,7 +428,7 @@ public final class ProfileProto {
       "ta\"\205\001\n\031DeleteRelationshipRequest\022+\n\002id\030\001" +
       " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022;\n" +
       "\tparent_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{" +
-      "3,20}\330\001\001R\010parentId\"P\n\032DeleteRelationship" +
+      "3,20}\330\001\000R\010parentId\"P\n\032DeleteRelationship" +
       "Response\0222\n\004data\030\001 \001(\0132\036.profile.v1.Rela" +
       "tionshipObjectR\004data*$\n\013ContactType\022\t\n\005E" +
       "MAIL\020\000\022\n\n\006MSISDN\020\001*n\n\022CommunicationLevel" +
@@ -474,19 +474,19 @@ public final class ProfileProto {
       "onse\"\032\202\323\344\223\002\024*\022/relationship/{id}\022v\n\020List" +
       "Relationship\022#.profile.v1.ListRelationsh" +
       "ipRequest\032$.profile.v1.ListRelationshipR" +
-      "esponse\"\025\202\323\344\223\002\017\022\r/relationship0\001B\273\003\n\037com" +
+      "esponse\"\025\202\323\344\223\002\017\022\r/relationship0\001B\274\003\n\037com" +
       ".antinvestor.apis.profile.v1B\014ProfilePro" +
       "toP\001Z;github.com/antinvestor/apis/go/pro" +
       "file/profile/v1;profilev1\242\002\003PXX\252\002\nProfil" +
       "e.V1\312\002\nProfile\\V1\342\002\026Profile\\V1\\GPBMetada" +
-      "ta\352\002\013Profile::V1\222A\202\002\022o\n\017Profile Service\"" +
-      "W\n\020Ant Investor Ltd\022-https://github.com/" +
-      "antinvestor/service-lostid\032\024info@antinve" +
-      "stor.com2\0031.0*\002\001\0022\020application/json:\020app" +
-      "lication/jsonZY\nW\n\006bearer\022M\010\002\0228Authentic" +
-      "ation token, prefixed by Bearer: Bearer " +
-      "<token>\032\rAuthorization \002b\014\n\n\n\006bearer\022\000b\006" +
-      "proto3"
+      "ta\352\002\013Profile::V1\222A\203\002\022p\n\017Profile Service\"" +
+      "X\n\020Ant Investor Ltd\022.https://github.com/" +
+      "antinvestor/service-profile\032\024info@antinv" +
+      "estor.com2\0031.0*\002\001\0022\020application/json:\020ap" +
+      "plication/jsonZY\nW\n\006bearer\022M\010\002\0228Authenti" +
+      "cation token, prefixed by Bearer: Bearer" +
+      " <token>\032\rAuthorization \002b\014\n\n\n\006bearer\022\000b" +
+      "\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

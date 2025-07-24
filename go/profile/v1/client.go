@@ -44,24 +44,28 @@ func FromContext(ctx context.Context) *ProfileClient {
 	return profileClient
 }
 
-// ProfileClient is a Client for interacting with the profile service API.
+// ProfileClient is a svc for interacting with the profile service API.
 // Methods, except Close, may be called concurrently. However,
 // fields must not be modified concurrently with method calls.
 type ProfileClient struct {
 	*common.GrpcClientBase
 
-	// The gRPC API Client.
-	Client ProfileServiceClient
+	// The gRPC API svc.
+	svc ProfileServiceClient
 }
 
 func Init(cBase *common.GrpcClientBase, service ProfileServiceClient) *ProfileClient {
 	return &ProfileClient{
 		GrpcClientBase: cBase,
-		Client:         service,
+		svc:            service,
 	}
 }
 
-// NewProfileClient creates a new notification Client.
+func (pc *ProfileClient) Svc() ProfileServiceClient {
+	return pc.svc
+}
+
+// NewProfileClient creates a new notification svc.
 // The service that an application uses to send and access received messages
 func NewProfileClient(ctx context.Context, opts ...common.ClientOption) (*ProfileClient, error) {
 	clientOpts := defaultProfileClientOptions()
@@ -82,7 +86,7 @@ func (pc *ProfileClient) GetProfileByID(
 		Id: profileID,
 	}
 
-	response, err := pc.Client.GetById(ctx, &profileRequest)
+	response, err := pc.svc.GetById(ctx, &profileRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +106,7 @@ func (pc *ProfileClient) CreateProfileByContactAndName(
 		Properties: properties,
 	}
 
-	response, err := pc.Client.Create(ctx, &createProfileRequest)
+	response, err := pc.svc.Create(ctx, &createProfileRequest)
 	if err != nil {
 		return nil, err
 	}
@@ -115,7 +119,7 @@ func (pc *ProfileClient) GetProfileByContact(ctx context.Context, contact string
 		Contact: contact,
 	}
 
-	response, err := pc.Client.GetByContact(ctx, &contactRequest)
+	response, err := pc.svc.GetByContact(ctx, &contactRequest)
 
 	if err != nil {
 		return nil, err
@@ -125,7 +129,7 @@ func (pc *ProfileClient) GetProfileByContact(ctx context.Context, contact string
 
 func (pc *ProfileClient) ListRelationships(ctx context.Context, request *ListRelationshipRequest) (<-chan *RelationshipObject, error) {
 
-	response, err := pc.Client.ListRelationship(ctx, request)
+	response, err := pc.svc.ListRelationship(ctx, request)
 
 	if err != nil {
 		return nil, err

@@ -46,23 +46,27 @@ func FromContext(ctx context.Context) *PaymentClient {
 	return paymentsClient
 }
 
-// PaymentClient is a Client for interacting with the payments service API.
+// PaymentClient is a svc for interacting with the payments service API.
 // Methods, except Close, may be called concurrently.
 // However, fields must not be modified concurrently with method calls.
 type PaymentClient struct {
 	*common.GrpcClientBase
-	// The gRPC API Client.
-	Client PaymentServiceClient
+	// The gRPC API svc.
+	svc PaymentServiceClient
 }
 
 func Init(cBase *common.GrpcClientBase, service PaymentServiceClient) *PaymentClient {
 	return &PaymentClient{
 		GrpcClientBase: cBase,
-		Client:         service,
+		svc:            service,
 	}
 }
 
-// NewPaymentsClient creates a new payments Client.
+func (pc *PaymentClient) Svc() PaymentServiceClient {
+	return pc.svc
+}
+
+// NewPaymentsClient creates a new payments svc.
 // / The service that an application uses to access and manipulate payment information
 func NewPaymentsClient(ctx context.Context, opts ...common.ClientOption) (*PaymentClient, error) {
 	clientOpts := defaultPaymentClientOptions()
@@ -77,22 +81,22 @@ func NewPaymentsClient(ctx context.Context, opts ...common.ClientOption) (*Payme
 
 // send method for queueing payments as requested
 func (pc *PaymentClient) Send(ctx context.Context, message *Payment) (*SendResponse, error) {
-	return pc.Client.Send(ctx, &SendRequest{Data: message})
+	return pc.svc.Send(ctx, &SendRequest{Data: message})
 }
 
 // receive method for polling payments as requested
 func (pc *PaymentClient) Receive(ctx context.Context, message *Payment) (*ReceiveResponse, error) {
-	return pc.Client.Receive(ctx, &ReceiveRequest{Data: message})
+	return pc.svc.Receive(ctx, &ReceiveRequest{Data: message})
 }
 
 // initiate prompt method for initiating payments as requested
 func (pc *PaymentClient) InitiatePrompt(ctx context.Context, message *InitiatePromptRequest) (*InitiatePromptResponse, error) {
-	return pc.Client.InitiatePrompt(ctx, message)
+	return pc.svc.InitiatePrompt(ctx, message)
 }
 
 // createPaymentLink method for creating payment links as requested
 func (pc *PaymentClient) CreatePaymentLink(ctx context.Context, message *CreatePaymentLinkRequest) (*CreatePaymentLinkResponse, error) {
-	return pc.Client.CreatePaymentLink(ctx, message)
+	return pc.svc.CreatePaymentLink(ctx, message)
 }
 
 // status check method for checking payments status as requested
@@ -101,10 +105,10 @@ func (pc *PaymentClient) Status(ctx context.Context, id string) (*commonv1.Statu
 		Id: id,
 	}
 
-	return pc.Client.Status(ctx, &statusCheckRequest)
+	return pc.svc.Status(ctx, &statusCheckRequest)
 }
 
 // updateStatus method for updating payments as requested
 func (pc *PaymentClient) StatusUpdate(ctx context.Context, message *commonv1.StatusUpdateRequest) (*commonv1.StatusUpdateResponse, error) {
-	return pc.Client.StatusUpdate(ctx, message)
+	return pc.svc.StatusUpdate(ctx, message)
 }

@@ -44,24 +44,28 @@ func FromContext(ctx context.Context) *PartitionClient {
 	return partitionsClient
 }
 
-// PartitionClient is a Client for interacting with the partitions service API.
+// PartitionClient is a svc for interacting with the partitions service API.
 // Methods, except Close, may be called concurrently.
 // However, fields must not be modified concurrently with method calls.
 type PartitionClient struct {
 	*common.GrpcClientBase
 
-	// The gRPC API Client.
-	Client PartitionServiceClient
+	// The gRPC API svc.
+	svc PartitionServiceClient
 }
 
 func Init(cBase *common.GrpcClientBase, service PartitionServiceClient) *PartitionClient {
 	return &PartitionClient{
 		GrpcClientBase: cBase,
-		Client:         service,
+		svc:            service,
 	}
 }
 
-// NewPartitionsClient creates a new partitions Client.
+func (pc *PartitionClient) Svc() PartitionServiceClient {
+	return pc.svc
+}
+
+// NewPartitionsClient creates a new partitions svc.
 // / The service that an application uses to access and manipulate partition information
 func NewPartitionsClient(ctx context.Context, opts ...common.ClientOption) (*PartitionClient, error) {
 	clientOpts := defaultPartitionClientOptions()
@@ -75,7 +79,7 @@ func NewPartitionsClient(ctx context.Context, opts ...common.ClientOption) (*Par
 }
 
 // ListTenants gets a list of all the tenants with query filtering against id and properties
-func (partCl *PartitionClient) ListTenants(
+func (pc *PartitionClient) ListTenants(
 	ctx context.Context,
 	query string,
 	count uint,
@@ -87,7 +91,7 @@ func (partCl *PartitionClient) ListTenants(
 		Page:  int64(page),
 	}
 
-	responseService, err := partCl.Client.ListTenant(ctx, &request)
+	responseService, err := pc.svc.ListTenant(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -112,13 +116,13 @@ func (partCl *PartitionClient) ListTenants(
 }
 
 // GetTenant Obtains the tenant by the id  supplied.
-func (partCl *PartitionClient) GetTenant(ctx context.Context, tenantId string) (*TenantObject, error) {
+func (pc *PartitionClient) GetTenant(ctx context.Context, tenantId string) (*TenantObject, error) {
 
 	request := GetTenantRequest{
 		Id: tenantId,
 	}
 
-	response, err := partCl.Client.GetTenant(ctx, &request)
+	response, err := pc.svc.GetTenant(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -130,7 +134,7 @@ func (partCl *PartitionClient) GetTenant(ctx context.Context, tenantId string) (
 // NewTenant used to create a new tenant instance.
 // This is a fairly static and infrequently used option that creates an almost physical data separation
 // To allow the use of same databases in a multitentant fashion.
-func (partCl *PartitionClient) NewTenant(
+func (pc *PartitionClient) NewTenant(
 	ctx context.Context,
 	name string,
 	description string,
@@ -142,7 +146,7 @@ func (partCl *PartitionClient) NewTenant(
 		Properties:  props,
 	}
 
-	response, err := partCl.Client.CreateTenant(ctx, &request)
+	response, err := pc.svc.CreateTenant(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -151,7 +155,7 @@ func (partCl *PartitionClient) NewTenant(
 }
 
 // ListPartitions obtains partitions tied to the query parameter
-func (partCl *PartitionClient) ListPartitions(
+func (pc *PartitionClient) ListPartitions(
 	ctx context.Context,
 	query string,
 	count uint,
@@ -163,7 +167,7 @@ func (partCl *PartitionClient) ListPartitions(
 		Page:  int64(page),
 	}
 
-	responseService, err := partCl.Client.ListPartition(ctx, &request)
+	responseService, err := pc.svc.ListPartition(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -189,19 +193,19 @@ func (partCl *PartitionClient) ListPartitions(
 
 // NewPartition Creates a further logical multitenant environment at a softer level.
 // This separation at the partition level is enforced at the application level that is consuming the api.
-func (partCl *PartitionClient) NewPartition(ctx context.Context, tenantId string, name string, description string,
+func (pc *PartitionClient) NewPartition(ctx context.Context, tenantId string, name string, description string,
 	props map[string]string) (*PartitionObject, error) {
-	return partCl.newPartition(ctx, tenantId, "", name, description, props)
+	return pc.newPartition(ctx, tenantId, "", name, description, props)
 }
 
 // GetPartition Obtains the partition by the id  supplied.
-func (partCl *PartitionClient) GetPartition(ctx context.Context, partitionId string) (*PartitionObject, error) {
+func (pc *PartitionClient) GetPartition(ctx context.Context, partitionId string) (*PartitionObject, error) {
 
 	request := GetPartitionRequest{
 		Id: partitionId,
 	}
 
-	response, err := partCl.Client.GetPartition(ctx, &request)
+	response, err := pc.svc.GetPartition(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -209,12 +213,12 @@ func (partCl *PartitionClient) GetPartition(ctx context.Context, partitionId str
 }
 
 // NewChildPartition partitions can have children, for example a bank can have multiple branches
-func (partCl *PartitionClient) NewChildPartition(ctx context.Context, tenantId string, parentId string, name string,
+func (pc *PartitionClient) NewChildPartition(ctx context.Context, tenantId string, parentId string, name string,
 	description string, props map[string]string) (*PartitionObject, error) {
-	return partCl.newPartition(ctx, tenantId, parentId, name, description, props)
+	return pc.newPartition(ctx, tenantId, parentId, name, description, props)
 }
 
-func (partCl *PartitionClient) newPartition(ctx context.Context, tenantId string,
+func (pc *PartitionClient) newPartition(ctx context.Context, tenantId string,
 	parentId string, name string, description string, props map[string]string) (*PartitionObject, error) {
 
 	request := CreatePartitionRequest{
@@ -225,7 +229,7 @@ func (partCl *PartitionClient) newPartition(ctx context.Context, tenantId string
 		Properties:  props,
 	}
 
-	response, err := partCl.Client.CreatePartition(ctx, &request)
+	response, err := pc.svc.CreatePartition(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -233,7 +237,7 @@ func (partCl *PartitionClient) newPartition(ctx context.Context, tenantId string
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) UpdatePartition(ctx context.Context, partitionId string,
+func (pc *PartitionClient) UpdatePartition(ctx context.Context, partitionId string,
 	name string, description string, props map[string]string) (*PartitionObject, error) {
 
 	request := UpdatePartitionRequest{
@@ -243,7 +247,7 @@ func (partCl *PartitionClient) UpdatePartition(ctx context.Context, partitionId 
 		Properties:  props,
 	}
 
-	response, err := partCl.Client.UpdatePartition(ctx, &request)
+	response, err := pc.svc.UpdatePartition(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -251,7 +255,7 @@ func (partCl *PartitionClient) UpdatePartition(ctx context.Context, partitionId 
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) CreatePartitionRole(ctx context.Context, partitionId string,
+func (pc *PartitionClient) CreatePartitionRole(ctx context.Context, partitionId string,
 	name string, props map[string]string) (*PartitionRoleObject, error) {
 
 	request := CreatePartitionRoleRequest{
@@ -260,7 +264,7 @@ func (partCl *PartitionClient) CreatePartitionRole(ctx context.Context, partitio
 		Properties:  props,
 	}
 
-	response, err := partCl.Client.CreatePartitionRole(ctx, &request)
+	response, err := pc.svc.CreatePartitionRole(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -268,16 +272,16 @@ func (partCl *PartitionClient) CreatePartitionRole(ctx context.Context, partitio
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) RemovePartitionRole(ctx context.Context, partitionRoleId string) (*RemovePartitionRoleResponse, error) {
+func (pc *PartitionClient) RemovePartitionRole(ctx context.Context, partitionRoleId string) (*RemovePartitionRoleResponse, error) {
 
 	request := RemovePartitionRoleRequest{
 		Id: partitionRoleId,
 	}
 
-	return partCl.Client.RemovePartitionRole(ctx, &request)
+	return pc.svc.RemovePartitionRole(ctx, &request)
 }
 
-func (partCl *PartitionClient) ListPartitionRoles(
+func (pc *PartitionClient) ListPartitionRoles(
 	ctx context.Context,
 	partitionId string) (<-chan *PartitionRoleObject, error) {
 
@@ -285,7 +289,7 @@ func (partCl *PartitionClient) ListPartitionRoles(
 		PartitionId: partitionId,
 	}
 
-	responseService, err := partCl.Client.ListPartitionRole(ctx, &partitionRoleRequest)
+	responseService, err := pc.svc.ListPartitionRole(ctx, &partitionRoleRequest)
 
 	if err != nil {
 		return nil, err
@@ -312,7 +316,7 @@ func (partCl *PartitionClient) ListPartitionRoles(
 
 // NewPage a partition has a provision to store custom pages that can be shown to users later.
 // These pages can include signup or customer specified customized pictures
-func (partCl *PartitionClient) NewPage(ctx context.Context, partitionId string, name string, html string) (*PageObject, error) {
+func (pc *PartitionClient) NewPage(ctx context.Context, partitionId string, name string, html string) (*PageObject, error) {
 
 	request := CreatePageRequest{
 		Name:        name,
@@ -320,7 +324,7 @@ func (partCl *PartitionClient) NewPage(ctx context.Context, partitionId string, 
 		PartitionId: partitionId,
 	}
 
-	response, err := partCl.Client.CreatePage(ctx, &request)
+	response, err := pc.svc.CreatePage(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
@@ -328,21 +332,21 @@ func (partCl *PartitionClient) NewPage(ctx context.Context, partitionId string, 
 }
 
 // GetPage simple way to quickly pull custom pages accessed by clients of a partition
-func (partCl *PartitionClient) GetPage(ctx context.Context, partitionId string, name string) (*PageObject, error) {
+func (pc *PartitionClient) GetPage(ctx context.Context, partitionId string, name string) (*PageObject, error) {
 
 	request := GetPageRequest{
 		Name:        name,
 		PartitionId: partitionId,
 	}
 
-	response, err := partCl.Client.GetPage(ctx, &request)
+	response, err := pc.svc.GetPage(ctx, &request)
 	if err != nil {
 		return nil, err
 	}
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) CreateAccessByPartitionID(
+func (pc *PartitionClient) CreateAccessByPartitionID(
 	ctx context.Context,
 	partitionId string, profileId string) (*AccessObject, error) {
 
@@ -351,7 +355,7 @@ func (partCl *PartitionClient) CreateAccessByPartitionID(
 		Partition: &CreateAccessRequest_PartitionId{PartitionId: partitionId},
 	}
 
-	response, err := partCl.Client.CreateAccess(ctx, &request)
+	response, err := pc.svc.CreateAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -359,7 +363,7 @@ func (partCl *PartitionClient) CreateAccessByPartitionID(
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) CreateAccessByClientID(
+func (pc *PartitionClient) CreateAccessByClientID(
 	ctx context.Context,
 	clientId string, profileId string) (*AccessObject, error) {
 
@@ -368,7 +372,7 @@ func (partCl *PartitionClient) CreateAccessByClientID(
 		Partition: &CreateAccessRequest_ClientId{ClientId: clientId},
 	}
 
-	response, err := partCl.Client.CreateAccess(ctx, &request)
+	response, err := pc.svc.CreateAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -376,22 +380,22 @@ func (partCl *PartitionClient) CreateAccessByClientID(
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) RemoveAccess(ctx context.Context, accessId string) (*RemoveAccessResponse, error) {
+func (pc *PartitionClient) RemoveAccess(ctx context.Context, accessId string) (*RemoveAccessResponse, error) {
 
 	request := RemoveAccessRequest{
 		Id: accessId,
 	}
 
-	return partCl.Client.RemoveAccess(ctx, &request)
+	return pc.svc.RemoveAccess(ctx, &request)
 }
 
-func (partCl *PartitionClient) GetAccessById(ctx context.Context, accessId string) (*AccessObject, error) {
+func (pc *PartitionClient) GetAccessById(ctx context.Context, accessId string) (*AccessObject, error) {
 
 	request := GetAccessRequest{
 		AccessId: accessId,
 	}
 
-	response, err := partCl.Client.GetAccess(ctx, &request)
+	response, err := pc.svc.GetAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -399,7 +403,7 @@ func (partCl *PartitionClient) GetAccessById(ctx context.Context, accessId strin
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) GetAccessByPartitionIdProfileId(
+func (pc *PartitionClient) GetAccessByPartitionIdProfileId(
 	ctx context.Context,
 	partitionId string,
 	profileId string) (*AccessObject, error) {
@@ -409,7 +413,7 @@ func (partCl *PartitionClient) GetAccessByPartitionIdProfileId(
 		Partition: &GetAccessRequest_PartitionId{PartitionId: partitionId},
 	}
 
-	response, err := partCl.Client.GetAccess(ctx, &request)
+	response, err := pc.svc.GetAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -417,7 +421,7 @@ func (partCl *PartitionClient) GetAccessByPartitionIdProfileId(
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) GetAccessByClientIdProfileId(
+func (pc *PartitionClient) GetAccessByClientIdProfileId(
 	ctx context.Context,
 	clientId string,
 	profileId string) (*AccessObject, error) {
@@ -427,7 +431,7 @@ func (partCl *PartitionClient) GetAccessByClientIdProfileId(
 		Partition: &GetAccessRequest_ClientId{ClientId: clientId},
 	}
 
-	response, err := partCl.Client.GetAccess(ctx, &request)
+	response, err := pc.svc.GetAccess(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -435,7 +439,7 @@ func (partCl *PartitionClient) GetAccessByClientIdProfileId(
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) CreateAccessRole(
+func (pc *PartitionClient) CreateAccessRole(
 	ctx context.Context,
 	accessId string,
 	partitionRoleId string) (*AccessRoleObject, error) {
@@ -445,7 +449,7 @@ func (partCl *PartitionClient) CreateAccessRole(
 		PartitionRoleId: partitionRoleId,
 	}
 
-	response, err := partCl.Client.CreateAccessRole(ctx, &request)
+	response, err := pc.svc.CreateAccessRole(ctx, &request)
 
 	if err != nil {
 		return nil, err
@@ -453,22 +457,22 @@ func (partCl *PartitionClient) CreateAccessRole(
 	return response.GetData(), nil
 }
 
-func (partCl *PartitionClient) RemoveAccessRole(ctx context.Context, accessRoleId string) (*RemoveAccessRoleResponse, error) {
+func (pc *PartitionClient) RemoveAccessRole(ctx context.Context, accessRoleId string) (*RemoveAccessRoleResponse, error) {
 
 	request := RemoveAccessRoleRequest{
 		Id: accessRoleId,
 	}
 
-	return partCl.Client.RemoveAccessRole(ctx, &request)
+	return pc.svc.RemoveAccessRole(ctx, &request)
 }
 
-func (partCl *PartitionClient) ListAccessRole(ctx context.Context, accessId string) (<-chan *AccessRoleObject, error) {
+func (pc *PartitionClient) ListAccessRole(ctx context.Context, accessId string) (<-chan *AccessRoleObject, error) {
 
 	request := ListAccessRoleRequest{
 		AccessId: accessId,
 	}
 
-	responseService, err := partCl.Client.ListAccessRole(ctx, &request)
+	responseService, err := pc.svc.ListAccessRole(ctx, &request)
 	if err != nil {
 		return nil, err
 	}

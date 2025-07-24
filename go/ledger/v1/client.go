@@ -44,24 +44,24 @@ func FromContext(ctx context.Context) *LedgerClient {
 	return client
 }
 
-// LedgerClient is a Client for interacting with the notification service API.
+// LedgerClient is a svc for interacting with the notification service API.
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type LedgerClient struct {
 	*common.GrpcClientBase
 
-	// The gRPC API Client.
-	Client LedgerServiceClient
+	// The gRPC API svc.
+	svc LedgerServiceClient
 }
 
 func Init(cBase *common.GrpcClientBase, service LedgerServiceClient) *LedgerClient {
 	return &LedgerClient{
 		GrpcClientBase: cBase,
-		Client:         service,
+		svc:            service,
 	}
 }
 
-// NewLedgerClient creates a new notification Client.
+// NewLedgerClient creates a new notification svc.
 //
 // The service that an application uses to send and access received messages
 func NewLedgerClient(ctx context.Context, opts ...common.ClientOption) (*LedgerClient, error) {
@@ -73,4 +73,8 @@ func NewLedgerClient(ctx context.Context, opts ...common.ClientOption) (*LedgerC
 	}
 
 	return Init(clientBase, NewLedgerServiceClient(clientBase.Connection())), nil
+}
+
+func (lc *LedgerClient) Svc() LedgerServiceClient {
+	return lc.svc
 }
