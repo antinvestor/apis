@@ -121,6 +121,46 @@ func (mr *MockDeviceServiceClientMockRecorder) ListKeys(ctx, in any, opts ...any
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListKeys", reflect.TypeOf((*MockDeviceServiceClient)(nil).ListKeys), varargs...)
 }
 
+// ListLogs mocks base method.
+func (m *MockDeviceServiceClient) ListLogs(ctx context.Context, in *ListLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListLogsResponse], error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListLogs", varargs...)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListLogsResponse])
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListLogs indicates an expected call of ListLogs.
+func (mr *MockDeviceServiceClientMockRecorder) ListLogs(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLogs", reflect.TypeOf((*MockDeviceServiceClient)(nil).ListLogs), varargs...)
+}
+
+// Log mocks base method.
+func (m *MockDeviceServiceClient) Log(ctx context.Context, in *LogRequest, opts ...grpc.CallOption) (*LogResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "Log", varargs...)
+	ret0, _ := ret[0].(*LogResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Log indicates an expected call of Log.
+func (mr *MockDeviceServiceClientMockRecorder) Log(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Log", reflect.TypeOf((*MockDeviceServiceClient)(nil).Log), varargs...)
+}
+
 // Remove mocks base method.
 func (m *MockDeviceServiceClient) Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (*RemoveResponse, error) {
 	m.ctrl.T.Helper()
@@ -282,6 +322,35 @@ func (m *MockDeviceServiceServer) ListKeys(arg0 *ListKeysRequest, arg1 grpc.Serv
 func (mr *MockDeviceServiceServerMockRecorder) ListKeys(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListKeys", reflect.TypeOf((*MockDeviceServiceServer)(nil).ListKeys), arg0, arg1)
+}
+
+// ListLogs mocks base method.
+func (m *MockDeviceServiceServer) ListLogs(arg0 *ListLogsRequest, arg1 grpc.ServerStreamingServer[ListLogsResponse]) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListLogs", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// ListLogs indicates an expected call of ListLogs.
+func (mr *MockDeviceServiceServerMockRecorder) ListLogs(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLogs", reflect.TypeOf((*MockDeviceServiceServer)(nil).ListLogs), arg0, arg1)
+}
+
+// Log mocks base method.
+func (m *MockDeviceServiceServer) Log(arg0 context.Context, arg1 *LogRequest) (*LogResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Log", arg0, arg1)
+	ret0, _ := ret[0].(*LogResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Log indicates an expected call of Log.
+func (mr *MockDeviceServiceServerMockRecorder) Log(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Log", reflect.TypeOf((*MockDeviceServiceServer)(nil).Log), arg0, arg1)
 }
 
 // Remove mocks base method.

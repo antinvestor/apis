@@ -187,6 +187,68 @@ public final class DeviceServiceGrpc {
     return getRemoveMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.LogRequest,
+      com.antinvestor.apis.device.v1.LogResponse> getLogMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Log",
+      requestType = com.antinvestor.apis.device.v1.LogRequest.class,
+      responseType = com.antinvestor.apis.device.v1.LogResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.LogRequest,
+      com.antinvestor.apis.device.v1.LogResponse> getLogMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.LogRequest, com.antinvestor.apis.device.v1.LogResponse> getLogMethod;
+    if ((getLogMethod = DeviceServiceGrpc.getLogMethod) == null) {
+      synchronized (DeviceServiceGrpc.class) {
+        if ((getLogMethod = DeviceServiceGrpc.getLogMethod) == null) {
+          DeviceServiceGrpc.getLogMethod = getLogMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.device.v1.LogRequest, com.antinvestor.apis.device.v1.LogResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Log"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.LogRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.LogResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeviceServiceMethodDescriptorSupplier("Log"))
+              .build();
+        }
+      }
+    }
+    return getLogMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.ListLogsRequest,
+      com.antinvestor.apis.device.v1.ListLogsResponse> getListLogsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ListLogs",
+      requestType = com.antinvestor.apis.device.v1.ListLogsRequest.class,
+      responseType = com.antinvestor.apis.device.v1.ListLogsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.ListLogsRequest,
+      com.antinvestor.apis.device.v1.ListLogsResponse> getListLogsMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.ListLogsRequest, com.antinvestor.apis.device.v1.ListLogsResponse> getListLogsMethod;
+    if ((getListLogsMethod = DeviceServiceGrpc.getListLogsMethod) == null) {
+      synchronized (DeviceServiceGrpc.class) {
+        if ((getListLogsMethod = DeviceServiceGrpc.getListLogsMethod) == null) {
+          DeviceServiceGrpc.getListLogsMethod = getListLogsMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.device.v1.ListLogsRequest, com.antinvestor.apis.device.v1.ListLogsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListLogs"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.ListLogsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.ListLogsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeviceServiceMethodDescriptorSupplier("ListLogs"))
+              .build();
+        }
+      }
+    }
+    return getListLogsMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.AddKeyRequest,
       com.antinvestor.apis.device.v1.AddKeyResponse> getAddKeyMethod;
 
@@ -398,6 +460,26 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
+     * Log a new key based on the request.
+     * </pre>
+     */
+    default void log(com.antinvestor.apis.device.v1.LogRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.LogResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getLogMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Lists logs the a device has/owns.
+     * </pre>
+     */
+    default void listLogs(com.antinvestor.apis.device.v1.ListLogsRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.ListLogsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListLogsMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * Adds a new key based on the request.
      * </pre>
      */
@@ -517,6 +599,28 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
+     * Log a new key based on the request.
+     * </pre>
+     */
+    public void log(com.antinvestor.apis.device.v1.LogRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.LogResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getLogMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Lists logs the a device has/owns.
+     * </pre>
+     */
+    public void listLogs(com.antinvestor.apis.device.v1.ListLogsRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.ListLogsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getListLogsMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * Adds a new key based on the request.
      * </pre>
      */
@@ -618,6 +722,28 @@ public final class DeviceServiceGrpc {
     public com.antinvestor.apis.device.v1.RemoveResponse remove(com.antinvestor.apis.device.v1.RemoveRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getRemoveMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Log a new key based on the request.
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.LogResponse log(com.antinvestor.apis.device.v1.LogRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getLogMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Lists logs the a device has/owns.
+     * </pre>
+     */
+    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.device.v1.ListLogsResponse>
+        listLogs(com.antinvestor.apis.device.v1.ListLogsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+          getChannel(), getListLogsMethod(), getCallOptions(), request);
     }
 
     /**
@@ -725,6 +851,27 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
+     * Log a new key based on the request.
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.LogResponse log(com.antinvestor.apis.device.v1.LogRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getLogMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Lists logs the a device has/owns.
+     * </pre>
+     */
+    public java.util.Iterator<com.antinvestor.apis.device.v1.ListLogsResponse> listLogs(
+        com.antinvestor.apis.device.v1.ListLogsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getListLogsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      * Adds a new key based on the request.
      * </pre>
      */
@@ -820,6 +967,17 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
+     * Log a new key based on the request.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.LogResponse> log(
+        com.antinvestor.apis.device.v1.LogRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getLogMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * Adds a new key based on the request.
      * </pre>
      */
@@ -846,9 +1004,11 @@ public final class DeviceServiceGrpc {
   private static final int METHODID_CREATE = 2;
   private static final int METHODID_UPDATE = 3;
   private static final int METHODID_REMOVE = 4;
-  private static final int METHODID_ADD_KEY = 5;
-  private static final int METHODID_REMOVE_KEY = 6;
-  private static final int METHODID_LIST_KEYS = 7;
+  private static final int METHODID_LOG = 5;
+  private static final int METHODID_LIST_LOGS = 6;
+  private static final int METHODID_ADD_KEY = 7;
+  private static final int METHODID_REMOVE_KEY = 8;
+  private static final int METHODID_LIST_KEYS = 9;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -886,6 +1046,14 @@ public final class DeviceServiceGrpc {
         case METHODID_REMOVE:
           serviceImpl.remove((com.antinvestor.apis.device.v1.RemoveRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.RemoveResponse>) responseObserver);
+          break;
+        case METHODID_LOG:
+          serviceImpl.log((com.antinvestor.apis.device.v1.LogRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.LogResponse>) responseObserver);
+          break;
+        case METHODID_LIST_LOGS:
+          serviceImpl.listLogs((com.antinvestor.apis.device.v1.ListLogsRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.ListLogsResponse>) responseObserver);
           break;
         case METHODID_ADD_KEY:
           serviceImpl.addKey((com.antinvestor.apis.device.v1.AddKeyRequest) request,
@@ -952,6 +1120,20 @@ public final class DeviceServiceGrpc {
               com.antinvestor.apis.device.v1.RemoveRequest,
               com.antinvestor.apis.device.v1.RemoveResponse>(
                 service, METHODID_REMOVE)))
+        .addMethod(
+          getLogMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.device.v1.LogRequest,
+              com.antinvestor.apis.device.v1.LogResponse>(
+                service, METHODID_LOG)))
+        .addMethod(
+          getListLogsMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              com.antinvestor.apis.device.v1.ListLogsRequest,
+              com.antinvestor.apis.device.v1.ListLogsResponse>(
+                service, METHODID_LIST_LOGS)))
         .addMethod(
           getAddKeyMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -1026,6 +1208,8 @@ public final class DeviceServiceGrpc {
               .addMethod(getCreateMethod())
               .addMethod(getUpdateMethod())
               .addMethod(getRemoveMethod())
+              .addMethod(getLogMethod())
+              .addMethod(getListLogsMethod())
               .addMethod(getAddKeyMethod())
               .addMethod(getRemoveKeyMethod())
               .addMethod(getListKeysMethod())

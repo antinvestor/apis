@@ -20,8 +20,8 @@
 package com.antinvestor.apis.device.v1;
 
 @com.google.protobuf.Generated
-public interface DeviceObjectOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:device.v1.DeviceObject)
+public interface DeviceLogOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:device.v1.DeviceLog)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -37,83 +37,95 @@ public interface DeviceObjectOrBuilder extends
       getIdBytes();
 
   /**
-   * <code>string name = 2 [json_name = "name"];</code>
-   * @return The name.
+   * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * @return The deviceId.
    */
-  java.lang.String getName();
+  java.lang.String getDeviceId();
   /**
-   * <code>string name = 2 [json_name = "name"];</code>
-   * @return The bytes for name.
+   * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for deviceId.
    */
   com.google.protobuf.ByteString
-      getNameBytes();
+      getDeviceIdBytes();
 
   /**
-   * <code>string ip = 3 [json_name = "ip"];</code>
+   * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
+   * @return The linkId.
+   */
+  java.lang.String getLinkId();
+  /**
+   * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for linkId.
+   */
+  com.google.protobuf.ByteString
+      getLinkIdBytes();
+
+  /**
+   * <code>string ip = 4 [json_name = "ip"];</code>
    * @return The ip.
    */
   java.lang.String getIp();
   /**
-   * <code>string ip = 3 [json_name = "ip"];</code>
+   * <code>string ip = 4 [json_name = "ip"];</code>
    * @return The bytes for ip.
    */
   com.google.protobuf.ByteString
       getIpBytes();
 
   /**
-   * <code>string locale = 4 [json_name = "locale"];</code>
+   * <code>string locale = 5 [json_name = "locale"];</code>
    * @return The locale.
    */
   java.lang.String getLocale();
   /**
-   * <code>string locale = 4 [json_name = "locale"];</code>
+   * <code>string locale = 5 [json_name = "locale"];</code>
    * @return The bytes for locale.
    */
   com.google.protobuf.ByteString
       getLocaleBytes();
 
   /**
-   * <code>string user_agent = 5 [json_name = "userAgent"];</code>
+   * <code>string user_agent = 6 [json_name = "userAgent"];</code>
    * @return The userAgent.
    */
   java.lang.String getUserAgent();
   /**
-   * <code>string user_agent = 5 [json_name = "userAgent"];</code>
+   * <code>string user_agent = 6 [json_name = "userAgent"];</code>
    * @return The bytes for userAgent.
    */
   com.google.protobuf.ByteString
       getUserAgentBytes();
 
   /**
-   * <code>string os = 6 [json_name = "os"];</code>
+   * <code>string os = 7 [json_name = "os"];</code>
    * @return The os.
    */
   java.lang.String getOs();
   /**
-   * <code>string os = 6 [json_name = "os"];</code>
+   * <code>string os = 7 [json_name = "os"];</code>
    * @return The bytes for os.
    */
   com.google.protobuf.ByteString
       getOsBytes();
 
   /**
-   * <code>string last_seen = 7 [json_name = "lastSeen"];</code>
+   * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
    * @return The lastSeen.
    */
   java.lang.String getLastSeen();
   /**
-   * <code>string last_seen = 7 [json_name = "lastSeen"];</code>
+   * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
    * @return The bytes for lastSeen.
    */
   com.google.protobuf.ByteString
       getLastSeenBytes();
 
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
    */
   int getLocationCount();
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
    */
   boolean containsLocation(
       java.lang.String key);
@@ -124,12 +136,12 @@ public interface DeviceObjectOrBuilder extends
   java.util.Map<java.lang.String, java.lang.String>
   getLocation();
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
   getLocationMap();
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
    */
   /* nullable */
 java.lang.String getLocationOrDefault(
@@ -137,42 +149,42 @@ java.lang.String getLocationOrDefault(
       /* nullable */
 java.lang.String defaultValue);
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
    */
   java.lang.String getLocationOrThrow(
       java.lang.String key);
 
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
    */
-  int getPropertiesCount();
+  int getExtraCount();
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
    */
-  boolean containsProperties(
+  boolean containsExtra(
       java.lang.String key);
   /**
-   * Use {@link #getPropertiesMap()} instead.
+   * Use {@link #getExtraMap()} instead.
    */
   @java.lang.Deprecated
   java.util.Map<java.lang.String, java.lang.String>
-  getProperties();
+  getExtra();
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
-  getPropertiesMap();
+  getExtraMap();
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
    */
   /* nullable */
-java.lang.String getPropertiesOrDefault(
+java.lang.String getExtraOrDefault(
       java.lang.String key,
       /* nullable */
 java.lang.String defaultValue);
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
    */
-  java.lang.String getPropertiesOrThrow(
+  java.lang.String getExtraOrThrow(
       java.lang.String key);
 }

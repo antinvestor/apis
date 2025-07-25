@@ -172,6 +172,84 @@
         ]
       }
     },
+    "/logs": {
+      "get": {
+        "summary": "Lists logs the a device has/owns.",
+        "operationId": "DeviceService_ListLogs",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/device.v1.ListLogsResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/google.rpc.Status"
+                }
+              },
+              "title": "Stream result of device.v1.ListLogsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "device.v1.DeviceService"
+        ]
+      },
+      "post": {
+        "summary": "Log a new key based on the request.",
+        "operationId": "DeviceService_Log",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/device.v1.LogResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/device.v1.LogRequest"
+            }
+          }
+        ],
+        "tags": [
+          "device.v1.DeviceService"
+        ]
+      }
+    },
     "/search": {
       "get": {
         "summary": "Obtains a device by its hash",
@@ -277,7 +355,12 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv",
+            "minItems": 1
           }
         ],
         "tags": [
@@ -402,6 +485,48 @@
         }
       }
     },
+    "device.v1.DeviceLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "linkId": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "userAgent": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "lastSeen": {
+          "type": "string"
+        },
+        "location": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "extra": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Contained message representing a device's log"
+    },
     "device.v1.DeviceObject": {
       "type": "object",
       "properties": {
@@ -410,6 +535,27 @@
         },
         "name": {
           "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "userAgent": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "lastSeen": {
+          "type": "string"
+        },
+        "location": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "properties": {
           "type": "object",
@@ -439,7 +585,11 @@
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/device.v1.DeviceObject"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/device.v1.DeviceObject"
+          }
         }
       }
     },
@@ -471,6 +621,59 @@
             "type": "object",
             "$ref": "#/definitions/device.v1.KeyObject"
           }
+        }
+      }
+    },
+    "device.v1.ListLogsResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/device.v1.DeviceLog"
+          }
+        }
+      }
+    },
+    "device.v1.LogRequest": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string"
+        },
+        "linkId": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "userAgent": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "lastSeen": {
+          "type": "string"
+        },
+        "extras": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "The request message containing the information necessary to create a key"
+    },
+    "device.v1.LogResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/device.v1.DeviceLog"
         }
       }
     },

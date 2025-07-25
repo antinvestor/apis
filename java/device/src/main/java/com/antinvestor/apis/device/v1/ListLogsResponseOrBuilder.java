@@ -20,31 +20,31 @@
 package com.antinvestor.apis.device.v1;
 
 @com.google.protobuf.Generated
-public interface GetByIdResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:device.v1.GetByIdResponse)
+public interface ListLogsResponseOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:device.v1.ListLogsResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+   * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
-  java.util.List<com.antinvestor.apis.device.v1.DeviceObject> 
+  java.util.List<com.antinvestor.apis.device.v1.DeviceLog> 
       getDataList();
   /**
-   * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+   * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
-  com.antinvestor.apis.device.v1.DeviceObject getData(int index);
+  com.antinvestor.apis.device.v1.DeviceLog getData(int index);
   /**
-   * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+   * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
   int getDataCount();
   /**
-   * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+   * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
-  java.util.List<? extends com.antinvestor.apis.device.v1.DeviceObjectOrBuilder> 
+  java.util.List<? extends com.antinvestor.apis.device.v1.DeviceLogOrBuilder> 
       getDataOrBuilderList();
   /**
-   * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+   * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
-  com.antinvestor.apis.device.v1.DeviceObjectOrBuilder getDataOrBuilder(
+  com.antinvestor.apis.device.v1.DeviceLogOrBuilder getDataOrBuilder(
       int index);
 }

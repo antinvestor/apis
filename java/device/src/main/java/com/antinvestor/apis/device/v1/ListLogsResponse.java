@@ -20,13 +20,13 @@
 package com.antinvestor.apis.device.v1;
 
 /**
- * Protobuf type {@code device.v1.GetByIdResponse}
+ * Protobuf type {@code device.v1.ListLogsResponse}
  */
 @com.google.protobuf.Generated
-public final class GetByIdResponse extends
+public final class ListLogsResponse extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:device.v1.GetByIdResponse)
-    GetByIdResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:device.v1.ListLogsResponse)
+    ListLogsResponseOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -35,66 +35,66 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 31,
       /* patch= */ 1,
       /* suffix= */ "",
-      GetByIdResponse.class.getName());
+      ListLogsResponse.class.getName());
   }
-  // Use GetByIdResponse.newBuilder() to construct.
-  private GetByIdResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use ListLogsResponse.newBuilder() to construct.
+  private ListLogsResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private GetByIdResponse() {
+  private ListLogsResponse() {
     data_ = java.util.Collections.emptyList();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_GetByIdResponse_descriptor;
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_ListLogsResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_GetByIdResponse_fieldAccessorTable
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_ListLogsResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.antinvestor.apis.device.v1.GetByIdResponse.class, com.antinvestor.apis.device.v1.GetByIdResponse.Builder.class);
+            com.antinvestor.apis.device.v1.ListLogsResponse.class, com.antinvestor.apis.device.v1.ListLogsResponse.Builder.class);
   }
 
   public static final int DATA_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private java.util.List<com.antinvestor.apis.device.v1.DeviceObject> data_;
+  private java.util.List<com.antinvestor.apis.device.v1.DeviceLog> data_;
   /**
-   * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+   * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
-  public java.util.List<com.antinvestor.apis.device.v1.DeviceObject> getDataList() {
+  public java.util.List<com.antinvestor.apis.device.v1.DeviceLog> getDataList() {
     return data_;
   }
   /**
-   * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+   * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
-  public java.util.List<? extends com.antinvestor.apis.device.v1.DeviceObjectOrBuilder> 
+  public java.util.List<? extends com.antinvestor.apis.device.v1.DeviceLogOrBuilder> 
       getDataOrBuilderList() {
     return data_;
   }
   /**
-   * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+   * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
   public int getDataCount() {
     return data_.size();
   }
   /**
-   * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+   * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
-  public com.antinvestor.apis.device.v1.DeviceObject getData(int index) {
+  public com.antinvestor.apis.device.v1.DeviceLog getData(int index) {
     return data_.get(index);
   }
   /**
-   * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+   * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
-  public com.antinvestor.apis.device.v1.DeviceObjectOrBuilder getDataOrBuilder(
+  public com.antinvestor.apis.device.v1.DeviceLogOrBuilder getDataOrBuilder(
       int index) {
     return data_.get(index);
   }
@@ -139,10 +139,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.antinvestor.apis.device.v1.GetByIdResponse)) {
+    if (!(obj instanceof com.antinvestor.apis.device.v1.ListLogsResponse)) {
       return super.equals(obj);
     }
-    com.antinvestor.apis.device.v1.GetByIdResponse other = (com.antinvestor.apis.device.v1.GetByIdResponse) obj;
+    com.antinvestor.apis.device.v1.ListLogsResponse other = (com.antinvestor.apis.device.v1.ListLogsResponse) obj;
 
     if (!getDataList()
         .equals(other.getDataList())) return false;
@@ -166,44 +166,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.antinvestor.apis.device.v1.GetByIdResponse parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdResponse parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdResponse parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdResponse parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdResponse parseFrom(byte[] data)
+  public static com.antinvestor.apis.device.v1.ListLogsResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdResponse parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdResponse parseFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.ListLogsResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdResponse parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -211,26 +211,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.antinvestor.apis.device.v1.GetByIdResponse parseDelimitedFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.ListLogsResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.antinvestor.apis.device.v1.GetByIdResponse parseDelimitedFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdResponse parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdResponse parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -243,7 +243,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.antinvestor.apis.device.v1.GetByIdResponse prototype) {
+  public static Builder newBuilder(com.antinvestor.apis.device.v1.ListLogsResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -259,26 +259,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code device.v1.GetByIdResponse}
+   * Protobuf type {@code device.v1.ListLogsResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:device.v1.GetByIdResponse)
-      com.antinvestor.apis.device.v1.GetByIdResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:device.v1.ListLogsResponse)
+      com.antinvestor.apis.device.v1.ListLogsResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_GetByIdResponse_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_ListLogsResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_GetByIdResponse_fieldAccessorTable
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_ListLogsResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.antinvestor.apis.device.v1.GetByIdResponse.class, com.antinvestor.apis.device.v1.GetByIdResponse.Builder.class);
+              com.antinvestor.apis.device.v1.ListLogsResponse.class, com.antinvestor.apis.device.v1.ListLogsResponse.Builder.class);
     }
 
-    // Construct using com.antinvestor.apis.device.v1.GetByIdResponse.newBuilder()
+    // Construct using com.antinvestor.apis.device.v1.ListLogsResponse.newBuilder()
     private Builder() {
 
     }
@@ -305,17 +305,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_GetByIdResponse_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_ListLogsResponse_descriptor;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.GetByIdResponse getDefaultInstanceForType() {
-      return com.antinvestor.apis.device.v1.GetByIdResponse.getDefaultInstance();
+    public com.antinvestor.apis.device.v1.ListLogsResponse getDefaultInstanceForType() {
+      return com.antinvestor.apis.device.v1.ListLogsResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.GetByIdResponse build() {
-      com.antinvestor.apis.device.v1.GetByIdResponse result = buildPartial();
+    public com.antinvestor.apis.device.v1.ListLogsResponse build() {
+      com.antinvestor.apis.device.v1.ListLogsResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -323,15 +323,15 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.GetByIdResponse buildPartial() {
-      com.antinvestor.apis.device.v1.GetByIdResponse result = new com.antinvestor.apis.device.v1.GetByIdResponse(this);
+    public com.antinvestor.apis.device.v1.ListLogsResponse buildPartial() {
+      com.antinvestor.apis.device.v1.ListLogsResponse result = new com.antinvestor.apis.device.v1.ListLogsResponse(this);
       buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartialRepeatedFields(com.antinvestor.apis.device.v1.GetByIdResponse result) {
+    private void buildPartialRepeatedFields(com.antinvestor.apis.device.v1.ListLogsResponse result) {
       if (dataBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0)) {
           data_ = java.util.Collections.unmodifiableList(data_);
@@ -343,22 +343,22 @@ private static final long serialVersionUID = 0L;
       }
     }
 
-    private void buildPartial0(com.antinvestor.apis.device.v1.GetByIdResponse result) {
+    private void buildPartial0(com.antinvestor.apis.device.v1.ListLogsResponse result) {
       int from_bitField0_ = bitField0_;
     }
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.antinvestor.apis.device.v1.GetByIdResponse) {
-        return mergeFrom((com.antinvestor.apis.device.v1.GetByIdResponse)other);
+      if (other instanceof com.antinvestor.apis.device.v1.ListLogsResponse) {
+        return mergeFrom((com.antinvestor.apis.device.v1.ListLogsResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.antinvestor.apis.device.v1.GetByIdResponse other) {
-      if (other == com.antinvestor.apis.device.v1.GetByIdResponse.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.antinvestor.apis.device.v1.ListLogsResponse other) {
+      if (other == com.antinvestor.apis.device.v1.ListLogsResponse.getDefaultInstance()) return this;
       if (dataBuilder_ == null) {
         if (!other.data_.isEmpty()) {
           if (data_.isEmpty()) {
@@ -412,9 +412,9 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              com.antinvestor.apis.device.v1.DeviceObject m =
+              com.antinvestor.apis.device.v1.DeviceLog m =
                   input.readMessage(
-                      com.antinvestor.apis.device.v1.DeviceObject.parser(),
+                      com.antinvestor.apis.device.v1.DeviceLog.parser(),
                       extensionRegistry);
               if (dataBuilder_ == null) {
                 ensureDataIsMutable();
@@ -441,22 +441,22 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.util.List<com.antinvestor.apis.device.v1.DeviceObject> data_ =
+    private java.util.List<com.antinvestor.apis.device.v1.DeviceLog> data_ =
       java.util.Collections.emptyList();
     private void ensureDataIsMutable() {
       if (!((bitField0_ & 0x00000001) != 0)) {
-        data_ = new java.util.ArrayList<com.antinvestor.apis.device.v1.DeviceObject>(data_);
+        data_ = new java.util.ArrayList<com.antinvestor.apis.device.v1.DeviceLog>(data_);
         bitField0_ |= 0x00000001;
        }
     }
 
     private com.google.protobuf.RepeatedFieldBuilder<
-        com.antinvestor.apis.device.v1.DeviceObject, com.antinvestor.apis.device.v1.DeviceObject.Builder, com.antinvestor.apis.device.v1.DeviceObjectOrBuilder> dataBuilder_;
+        com.antinvestor.apis.device.v1.DeviceLog, com.antinvestor.apis.device.v1.DeviceLog.Builder, com.antinvestor.apis.device.v1.DeviceLogOrBuilder> dataBuilder_;
 
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
-    public java.util.List<com.antinvestor.apis.device.v1.DeviceObject> getDataList() {
+    public java.util.List<com.antinvestor.apis.device.v1.DeviceLog> getDataList() {
       if (dataBuilder_ == null) {
         return java.util.Collections.unmodifiableList(data_);
       } else {
@@ -464,7 +464,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
     public int getDataCount() {
       if (dataBuilder_ == null) {
@@ -474,9 +474,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
-    public com.antinvestor.apis.device.v1.DeviceObject getData(int index) {
+    public com.antinvestor.apis.device.v1.DeviceLog getData(int index) {
       if (dataBuilder_ == null) {
         return data_.get(index);
       } else {
@@ -484,10 +484,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
     public Builder setData(
-        int index, com.antinvestor.apis.device.v1.DeviceObject value) {
+        int index, com.antinvestor.apis.device.v1.DeviceLog value) {
       if (dataBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -501,10 +501,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
     public Builder setData(
-        int index, com.antinvestor.apis.device.v1.DeviceObject.Builder builderForValue) {
+        int index, com.antinvestor.apis.device.v1.DeviceLog.Builder builderForValue) {
       if (dataBuilder_ == null) {
         ensureDataIsMutable();
         data_.set(index, builderForValue.build());
@@ -515,9 +515,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
-    public Builder addData(com.antinvestor.apis.device.v1.DeviceObject value) {
+    public Builder addData(com.antinvestor.apis.device.v1.DeviceLog value) {
       if (dataBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -531,10 +531,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
     public Builder addData(
-        int index, com.antinvestor.apis.device.v1.DeviceObject value) {
+        int index, com.antinvestor.apis.device.v1.DeviceLog value) {
       if (dataBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -548,10 +548,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
     public Builder addData(
-        com.antinvestor.apis.device.v1.DeviceObject.Builder builderForValue) {
+        com.antinvestor.apis.device.v1.DeviceLog.Builder builderForValue) {
       if (dataBuilder_ == null) {
         ensureDataIsMutable();
         data_.add(builderForValue.build());
@@ -562,10 +562,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
     public Builder addData(
-        int index, com.antinvestor.apis.device.v1.DeviceObject.Builder builderForValue) {
+        int index, com.antinvestor.apis.device.v1.DeviceLog.Builder builderForValue) {
       if (dataBuilder_ == null) {
         ensureDataIsMutable();
         data_.add(index, builderForValue.build());
@@ -576,10 +576,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
     public Builder addAllData(
-        java.lang.Iterable<? extends com.antinvestor.apis.device.v1.DeviceObject> values) {
+        java.lang.Iterable<? extends com.antinvestor.apis.device.v1.DeviceLog> values) {
       if (dataBuilder_ == null) {
         ensureDataIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -591,7 +591,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
     public Builder clearData() {
       if (dataBuilder_ == null) {
@@ -604,7 +604,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
     public Builder removeData(int index) {
       if (dataBuilder_ == null) {
@@ -617,16 +617,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
-    public com.antinvestor.apis.device.v1.DeviceObject.Builder getDataBuilder(
+    public com.antinvestor.apis.device.v1.DeviceLog.Builder getDataBuilder(
         int index) {
       return internalGetDataFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
-    public com.antinvestor.apis.device.v1.DeviceObjectOrBuilder getDataOrBuilder(
+    public com.antinvestor.apis.device.v1.DeviceLogOrBuilder getDataOrBuilder(
         int index) {
       if (dataBuilder_ == null) {
         return data_.get(index);  } else {
@@ -634,9 +634,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
-    public java.util.List<? extends com.antinvestor.apis.device.v1.DeviceObjectOrBuilder> 
+    public java.util.List<? extends com.antinvestor.apis.device.v1.DeviceLogOrBuilder> 
          getDataOrBuilderList() {
       if (dataBuilder_ != null) {
         return dataBuilder_.getMessageOrBuilderList();
@@ -645,33 +645,33 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
-    public com.antinvestor.apis.device.v1.DeviceObject.Builder addDataBuilder() {
+    public com.antinvestor.apis.device.v1.DeviceLog.Builder addDataBuilder() {
       return internalGetDataFieldBuilder().addBuilder(
-          com.antinvestor.apis.device.v1.DeviceObject.getDefaultInstance());
+          com.antinvestor.apis.device.v1.DeviceLog.getDefaultInstance());
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
-    public com.antinvestor.apis.device.v1.DeviceObject.Builder addDataBuilder(
+    public com.antinvestor.apis.device.v1.DeviceLog.Builder addDataBuilder(
         int index) {
       return internalGetDataFieldBuilder().addBuilder(
-          index, com.antinvestor.apis.device.v1.DeviceObject.getDefaultInstance());
+          index, com.antinvestor.apis.device.v1.DeviceLog.getDefaultInstance());
     }
     /**
-     * <code>repeated .device.v1.DeviceObject data = 1 [json_name = "data"];</code>
+     * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
      */
-    public java.util.List<com.antinvestor.apis.device.v1.DeviceObject.Builder> 
+    public java.util.List<com.antinvestor.apis.device.v1.DeviceLog.Builder> 
          getDataBuilderList() {
       return internalGetDataFieldBuilder().getBuilderList();
     }
     private com.google.protobuf.RepeatedFieldBuilder<
-        com.antinvestor.apis.device.v1.DeviceObject, com.antinvestor.apis.device.v1.DeviceObject.Builder, com.antinvestor.apis.device.v1.DeviceObjectOrBuilder> 
+        com.antinvestor.apis.device.v1.DeviceLog, com.antinvestor.apis.device.v1.DeviceLog.Builder, com.antinvestor.apis.device.v1.DeviceLogOrBuilder> 
         internalGetDataFieldBuilder() {
       if (dataBuilder_ == null) {
         dataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            com.antinvestor.apis.device.v1.DeviceObject, com.antinvestor.apis.device.v1.DeviceObject.Builder, com.antinvestor.apis.device.v1.DeviceObjectOrBuilder>(
+            com.antinvestor.apis.device.v1.DeviceLog, com.antinvestor.apis.device.v1.DeviceLog.Builder, com.antinvestor.apis.device.v1.DeviceLogOrBuilder>(
                 data_,
                 ((bitField0_ & 0x00000001) != 0),
                 getParentForChildren(),
@@ -681,23 +681,23 @@ private static final long serialVersionUID = 0L;
       return dataBuilder_;
     }
 
-    // @@protoc_insertion_point(builder_scope:device.v1.GetByIdResponse)
+    // @@protoc_insertion_point(builder_scope:device.v1.ListLogsResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:device.v1.GetByIdResponse)
-  private static final com.antinvestor.apis.device.v1.GetByIdResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:device.v1.ListLogsResponse)
+  private static final com.antinvestor.apis.device.v1.ListLogsResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.GetByIdResponse();
+    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.ListLogsResponse();
   }
 
-  public static com.antinvestor.apis.device.v1.GetByIdResponse getDefaultInstance() {
+  public static com.antinvestor.apis.device.v1.ListLogsResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<GetByIdResponse>
-      PARSER = new com.google.protobuf.AbstractParser<GetByIdResponse>() {
+  private static final com.google.protobuf.Parser<ListLogsResponse>
+      PARSER = new com.google.protobuf.AbstractParser<ListLogsResponse>() {
     @java.lang.Override
-    public GetByIdResponse parsePartialFrom(
+    public ListLogsResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -716,17 +716,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<GetByIdResponse> parser() {
+  public static com.google.protobuf.Parser<ListLogsResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<GetByIdResponse> getParserForType() {
+  public com.google.protobuf.Parser<ListLogsResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.antinvestor.apis.device.v1.GetByIdResponse getDefaultInstanceForType() {
+  public com.antinvestor.apis.device.v1.ListLogsResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

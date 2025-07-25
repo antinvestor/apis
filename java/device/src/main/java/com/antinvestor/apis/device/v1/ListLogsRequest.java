@@ -21,16 +21,16 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * The request message containing the device's hash
+ * Request message to list device logs related to the supplied device id
  * </pre>
  *
- * Protobuf type {@code device.v1.GetByIdRequest}
+ * Protobuf type {@code device.v1.ListLogsRequest}
  */
 @com.google.protobuf.Generated
-public final class GetByIdRequest extends
+public final class ListLogsRequest extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:device.v1.GetByIdRequest)
-    GetByIdRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:device.v1.ListLogsRequest)
+    ListLogsRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -39,65 +39,77 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 31,
       /* patch= */ 1,
       /* suffix= */ "",
-      GetByIdRequest.class.getName());
+      ListLogsRequest.class.getName());
   }
-  // Use GetByIdRequest.newBuilder() to construct.
-  private GetByIdRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use ListLogsRequest.newBuilder() to construct.
+  private ListLogsRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private GetByIdRequest() {
-    id_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
+  private ListLogsRequest() {
+    deviceId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_GetByIdRequest_descriptor;
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_ListLogsRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_GetByIdRequest_fieldAccessorTable
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_ListLogsRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.antinvestor.apis.device.v1.GetByIdRequest.class, com.antinvestor.apis.device.v1.GetByIdRequest.Builder.class);
+            com.antinvestor.apis.device.v1.ListLogsRequest.class, com.antinvestor.apis.device.v1.ListLogsRequest.Builder.class);
   }
 
-  public static final int ID_FIELD_NUMBER = 1;
+  public static final int DEVICE_ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private com.google.protobuf.LazyStringArrayList id_ =
-      com.google.protobuf.LazyStringArrayList.emptyList();
+  private volatile java.lang.Object deviceId_ = "";
   /**
-   * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return A list containing the id.
+   * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * @return The deviceId.
    */
-  public com.google.protobuf.ProtocolStringList
-      getIdList() {
-    return id_;
+  @java.lang.Override
+  public java.lang.String getDeviceId() {
+    java.lang.Object ref = deviceId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      deviceId_ = s;
+      return s;
+    }
   }
   /**
-   * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return The count of id.
+   * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for deviceId.
    */
-  public int getIdCount() {
-    return id_.size();
-  }
-  /**
-   * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @param index The index of the element to return.
-   * @return The id at the given index.
-   */
-  public java.lang.String getId(int index) {
-    return id_.get(index);
-  }
-  /**
-   * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @param index The index of the value to return.
-   * @return The bytes of the id at the given index.
-   */
+  @java.lang.Override
   public com.google.protobuf.ByteString
-      getIdBytes(int index) {
-    return id_.getByteString(index);
+      getDeviceIdBytes() {
+    java.lang.Object ref = deviceId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      deviceId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int COUNT_FIELD_NUMBER = 2;
+  private int count_ = 0;
+  /**
+   * <code>int32 count = 2 [json_name = "count"];</code>
+   * @return The count.
+   */
+  @java.lang.Override
+  public int getCount() {
+    return count_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -114,8 +126,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    for (int i = 0; i < id_.size(); i++) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, id_.getRaw(i));
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, deviceId_);
+    }
+    if (count_ != 0) {
+      output.writeInt32(2, count_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -126,13 +141,12 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    {
-      int dataSize = 0;
-      for (int i = 0; i < id_.size(); i++) {
-        dataSize += computeStringSizeNoTag(id_.getRaw(i));
-      }
-      size += dataSize;
-      size += 1 * getIdList().size();
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, deviceId_);
+    }
+    if (count_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, count_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -144,13 +158,15 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.antinvestor.apis.device.v1.GetByIdRequest)) {
+    if (!(obj instanceof com.antinvestor.apis.device.v1.ListLogsRequest)) {
       return super.equals(obj);
     }
-    com.antinvestor.apis.device.v1.GetByIdRequest other = (com.antinvestor.apis.device.v1.GetByIdRequest) obj;
+    com.antinvestor.apis.device.v1.ListLogsRequest other = (com.antinvestor.apis.device.v1.ListLogsRequest) obj;
 
-    if (!getIdList()
-        .equals(other.getIdList())) return false;
+    if (!getDeviceId()
+        .equals(other.getDeviceId())) return false;
+    if (getCount()
+        != other.getCount()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -162,53 +178,53 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (getIdCount() > 0) {
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getIdList().hashCode();
-    }
+    hash = (37 * hash) + DEVICE_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getDeviceId().hashCode();
+    hash = (37 * hash) + COUNT_FIELD_NUMBER;
+    hash = (53 * hash) + getCount();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.antinvestor.apis.device.v1.GetByIdRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdRequest parseFrom(byte[] data)
+  public static com.antinvestor.apis.device.v1.ListLogsRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdRequest parseFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.ListLogsRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -216,26 +232,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.antinvestor.apis.device.v1.GetByIdRequest parseDelimitedFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.ListLogsRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.antinvestor.apis.device.v1.GetByIdRequest parseDelimitedFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.GetByIdRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.ListLogsRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -248,7 +264,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.antinvestor.apis.device.v1.GetByIdRequest prototype) {
+  public static Builder newBuilder(com.antinvestor.apis.device.v1.ListLogsRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -265,29 +281,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The request message containing the device's hash
+   * Request message to list device logs related to the supplied device id
    * </pre>
    *
-   * Protobuf type {@code device.v1.GetByIdRequest}
+   * Protobuf type {@code device.v1.ListLogsRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:device.v1.GetByIdRequest)
-      com.antinvestor.apis.device.v1.GetByIdRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:device.v1.ListLogsRequest)
+      com.antinvestor.apis.device.v1.ListLogsRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_GetByIdRequest_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_ListLogsRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_GetByIdRequest_fieldAccessorTable
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_ListLogsRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.antinvestor.apis.device.v1.GetByIdRequest.class, com.antinvestor.apis.device.v1.GetByIdRequest.Builder.class);
+              com.antinvestor.apis.device.v1.ListLogsRequest.class, com.antinvestor.apis.device.v1.ListLogsRequest.Builder.class);
     }
 
-    // Construct using com.antinvestor.apis.device.v1.GetByIdRequest.newBuilder()
+    // Construct using com.antinvestor.apis.device.v1.ListLogsRequest.newBuilder()
     private Builder() {
 
     }
@@ -301,25 +317,25 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      id_ =
-          com.google.protobuf.LazyStringArrayList.emptyList();
+      deviceId_ = "";
+      count_ = 0;
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_GetByIdRequest_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_ListLogsRequest_descriptor;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.GetByIdRequest getDefaultInstanceForType() {
-      return com.antinvestor.apis.device.v1.GetByIdRequest.getDefaultInstance();
+    public com.antinvestor.apis.device.v1.ListLogsRequest getDefaultInstanceForType() {
+      return com.antinvestor.apis.device.v1.ListLogsRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.GetByIdRequest build() {
-      com.antinvestor.apis.device.v1.GetByIdRequest result = buildPartial();
+    public com.antinvestor.apis.device.v1.ListLogsRequest build() {
+      com.antinvestor.apis.device.v1.ListLogsRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -327,42 +343,42 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.GetByIdRequest buildPartial() {
-      com.antinvestor.apis.device.v1.GetByIdRequest result = new com.antinvestor.apis.device.v1.GetByIdRequest(this);
+    public com.antinvestor.apis.device.v1.ListLogsRequest buildPartial() {
+      com.antinvestor.apis.device.v1.ListLogsRequest result = new com.antinvestor.apis.device.v1.ListLogsRequest(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.antinvestor.apis.device.v1.GetByIdRequest result) {
+    private void buildPartial0(com.antinvestor.apis.device.v1.ListLogsRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        id_.makeImmutable();
-        result.id_ = id_;
+        result.deviceId_ = deviceId_;
+      }
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.count_ = count_;
       }
     }
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.antinvestor.apis.device.v1.GetByIdRequest) {
-        return mergeFrom((com.antinvestor.apis.device.v1.GetByIdRequest)other);
+      if (other instanceof com.antinvestor.apis.device.v1.ListLogsRequest) {
+        return mergeFrom((com.antinvestor.apis.device.v1.ListLogsRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.antinvestor.apis.device.v1.GetByIdRequest other) {
-      if (other == com.antinvestor.apis.device.v1.GetByIdRequest.getDefaultInstance()) return this;
-      if (!other.id_.isEmpty()) {
-        if (id_.isEmpty()) {
-          id_ = other.id_;
-          bitField0_ |= 0x00000001;
-        } else {
-          ensureIdIsMutable();
-          id_.addAll(other.id_);
-        }
+    public Builder mergeFrom(com.antinvestor.apis.device.v1.ListLogsRequest other) {
+      if (other == com.antinvestor.apis.device.v1.ListLogsRequest.getDefaultInstance()) return this;
+      if (!other.getDeviceId().isEmpty()) {
+        deviceId_ = other.deviceId_;
+        bitField0_ |= 0x00000001;
         onChanged();
+      }
+      if (other.getCount() != 0) {
+        setCount(other.getCount());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -391,11 +407,15 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-              ensureIdIsMutable();
-              id_.add(s);
+              deviceId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000001;
               break;
             } // case 10
+            case 16: {
+              count_ = input.readInt32();
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 16
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -413,134 +433,127 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private com.google.protobuf.LazyStringArrayList id_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
-    private void ensureIdIsMutable() {
-      if (!id_.isModifiable()) {
-        id_ = new com.google.protobuf.LazyStringArrayList(id_);
+    private java.lang.Object deviceId_ = "";
+    /**
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @return The deviceId.
+     */
+    public java.lang.String getDeviceId() {
+      java.lang.Object ref = deviceId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        deviceId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
       }
-      bitField0_ |= 0x00000001;
     }
     /**
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @return A list containing the id.
-     */
-    public com.google.protobuf.ProtocolStringList
-        getIdList() {
-      id_.makeImmutable();
-      return id_;
-    }
-    /**
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @return The count of id.
-     */
-    public int getIdCount() {
-      return id_.size();
-    }
-    /**
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param index The index of the element to return.
-     * @return The id at the given index.
-     */
-    public java.lang.String getId(int index) {
-      return id_.get(index);
-    }
-    /**
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param index The index of the value to return.
-     * @return The bytes of the id at the given index.
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for deviceId.
      */
     public com.google.protobuf.ByteString
-        getIdBytes(int index) {
-      return id_.getByteString(index);
+        getDeviceIdBytes() {
+      java.lang.Object ref = deviceId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        deviceId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     /**
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param index The index to set the value at.
-     * @param value The id to set.
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @param value The deviceId to set.
      * @return This builder for chaining.
      */
-    public Builder setId(
-        int index, java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      ensureIdIsMutable();
-      id_.set(index, value);
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param value The id to add.
-     * @return This builder for chaining.
-     */
-    public Builder addId(
+    public Builder setDeviceId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      ensureIdIsMutable();
-      id_.add(value);
+      deviceId_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param values The id to add.
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder addAllId(
-        java.lang.Iterable<java.lang.String> values) {
-      ensureIdIsMutable();
-      com.google.protobuf.AbstractMessageLite.Builder.addAll(
-          values, id_);
-      bitField0_ |= 0x00000001;
+    public Builder clearDeviceId() {
+      deviceId_ = getDefaultInstance().getDeviceId();
+      bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for deviceId to set.
      * @return This builder for chaining.
      */
-    public Builder clearId() {
-      id_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000001);;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes of the id to add.
-     * @return This builder for chaining.
-     */
-    public Builder addIdBytes(
+    public Builder setDeviceIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      ensureIdIsMutable();
-      id_.add(value);
+      deviceId_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
 
-    // @@protoc_insertion_point(builder_scope:device.v1.GetByIdRequest)
+    private int count_ ;
+    /**
+     * <code>int32 count = 2 [json_name = "count"];</code>
+     * @return The count.
+     */
+    @java.lang.Override
+    public int getCount() {
+      return count_;
+    }
+    /**
+     * <code>int32 count = 2 [json_name = "count"];</code>
+     * @param value The count to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCount(int value) {
+
+      count_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 count = 2 [json_name = "count"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCount() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      count_ = 0;
+      onChanged();
+      return this;
+    }
+
+    // @@protoc_insertion_point(builder_scope:device.v1.ListLogsRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:device.v1.GetByIdRequest)
-  private static final com.antinvestor.apis.device.v1.GetByIdRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:device.v1.ListLogsRequest)
+  private static final com.antinvestor.apis.device.v1.ListLogsRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.GetByIdRequest();
+    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.ListLogsRequest();
   }
 
-  public static com.antinvestor.apis.device.v1.GetByIdRequest getDefaultInstance() {
+  public static com.antinvestor.apis.device.v1.ListLogsRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<GetByIdRequest>
-      PARSER = new com.google.protobuf.AbstractParser<GetByIdRequest>() {
+  private static final com.google.protobuf.Parser<ListLogsRequest>
+      PARSER = new com.google.protobuf.AbstractParser<ListLogsRequest>() {
     @java.lang.Override
-    public GetByIdRequest parsePartialFrom(
+    public ListLogsRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -559,17 +572,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<GetByIdRequest> parser() {
+  public static com.google.protobuf.Parser<ListLogsRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<GetByIdRequest> getParserForType() {
+  public com.google.protobuf.Parser<ListLogsRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.antinvestor.apis.device.v1.GetByIdRequest getDefaultInstanceForType() {
+  public com.antinvestor.apis.device.v1.ListLogsRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

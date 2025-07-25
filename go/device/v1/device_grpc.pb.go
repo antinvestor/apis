@@ -38,6 +38,8 @@ const (
 	DeviceService_Create_FullMethodName    = "/device.v1.DeviceService/Create"
 	DeviceService_Update_FullMethodName    = "/device.v1.DeviceService/Update"
 	DeviceService_Remove_FullMethodName    = "/device.v1.DeviceService/Remove"
+	DeviceService_Log_FullMethodName       = "/device.v1.DeviceService/Log"
+	DeviceService_ListLogs_FullMethodName  = "/device.v1.DeviceService/ListLogs"
 	DeviceService_AddKey_FullMethodName    = "/device.v1.DeviceService/AddKey"
 	DeviceService_RemoveKey_FullMethodName = "/device.v1.DeviceService/RemoveKey"
 	DeviceService_ListKeys_FullMethodName  = "/device.v1.DeviceService/ListKeys"
@@ -59,6 +61,10 @@ type DeviceServiceClient interface {
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
 	// Removes an existing device based on the request.
 	Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (*RemoveResponse, error)
+	// Log a new key based on the request.
+	Log(ctx context.Context, in *LogRequest, opts ...grpc.CallOption) (*LogResponse, error)
+	// Lists logs the a device has/owns.
+	ListLogs(ctx context.Context, in *ListLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListLogsResponse], error)
 	// Adds a new key based on the request.
 	AddKey(ctx context.Context, in *AddKeyRequest, opts ...grpc.CallOption) (*AddKeyResponse, error)
 	// Removes an old device keys based on this request's id
@@ -134,6 +140,35 @@ func (c *deviceServiceClient) Remove(ctx context.Context, in *RemoveRequest, opt
 	return out, nil
 }
 
+func (c *deviceServiceClient) Log(ctx context.Context, in *LogRequest, opts ...grpc.CallOption) (*LogResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LogResponse)
+	err := c.cc.Invoke(ctx, DeviceService_Log_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deviceServiceClient) ListLogs(ctx context.Context, in *ListLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListLogsResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &DeviceService_ServiceDesc.Streams[1], DeviceService_ListLogs_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[ListLogsRequest, ListLogsResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type DeviceService_ListLogsClient = grpc.ServerStreamingClient[ListLogsResponse]
+
 func (c *deviceServiceClient) AddKey(ctx context.Context, in *AddKeyRequest, opts ...grpc.CallOption) (*AddKeyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddKeyResponse)
@@ -156,7 +191,7 @@ func (c *deviceServiceClient) RemoveKey(ctx context.Context, in *RemoveKeyReques
 
 func (c *deviceServiceClient) ListKeys(ctx context.Context, in *ListKeysRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListKeysResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &DeviceService_ServiceDesc.Streams[1], DeviceService_ListKeys_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &DeviceService_ServiceDesc.Streams[2], DeviceService_ListKeys_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -189,6 +224,10 @@ type DeviceServiceServer interface {
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
 	// Removes an existing device based on the request.
 	Remove(context.Context, *RemoveRequest) (*RemoveResponse, error)
+	// Log a new key based on the request.
+	Log(context.Context, *LogRequest) (*LogResponse, error)
+	// Lists logs the a device has/owns.
+	ListLogs(*ListLogsRequest, grpc.ServerStreamingServer[ListLogsResponse]) error
 	// Adds a new key based on the request.
 	AddKey(context.Context, *AddKeyRequest) (*AddKeyResponse, error)
 	// Removes an old device keys based on this request's id
@@ -219,6 +258,12 @@ func (UnimplementedDeviceServiceServer) Update(context.Context, *UpdateRequest) 
 }
 func (UnimplementedDeviceServiceServer) Remove(context.Context, *RemoveRequest) (*RemoveResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Remove not implemented")
+}
+func (UnimplementedDeviceServiceServer) Log(context.Context, *LogRequest) (*LogResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Log not implemented")
+}
+func (UnimplementedDeviceServiceServer) ListLogs(*ListLogsRequest, grpc.ServerStreamingServer[ListLogsResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method ListLogs not implemented")
 }
 func (UnimplementedDeviceServiceServer) AddKey(context.Context, *AddKeyRequest) (*AddKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddKey not implemented")
@@ -333,6 +378,35 @@ func _DeviceService_Remove_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DeviceService_Log_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LogRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceServiceServer).Log(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceService_Log_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceServiceServer).Log(ctx, req.(*LogRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeviceService_ListLogs_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListLogsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(DeviceServiceServer).ListLogs(m, &grpc.GenericServerStream[ListLogsRequest, ListLogsResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type DeviceService_ListLogsServer = grpc.ServerStreamingServer[ListLogsResponse]
+
 func _DeviceService_AddKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddKeyRequest)
 	if err := dec(in); err != nil {
@@ -404,6 +478,10 @@ var DeviceService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _DeviceService_Remove_Handler,
 		},
 		{
+			MethodName: "Log",
+			Handler:    _DeviceService_Log_Handler,
+		},
+		{
 			MethodName: "AddKey",
 			Handler:    _DeviceService_AddKey_Handler,
 		},
@@ -416,6 +494,11 @@ var DeviceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "Search",
 			Handler:       _DeviceService_Search_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListLogs",
+			Handler:       _DeviceService_ListLogs_Handler,
 			ServerStreams: true,
 		},
 		{

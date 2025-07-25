@@ -74,6 +74,6 @@ func NewDeviceClient(ctx context.Context, opts ...common.ClientOption) (*DeviceC
 	return Init(clientBase, NewDeviceServiceClient(clientBase.Connection())), nil
 }
 
-func (dc *DeviceClient) Client() DeviceServiceClient {
+func (dc *DeviceClient) Svc() DeviceServiceClient {
 	return dc.svc
 }

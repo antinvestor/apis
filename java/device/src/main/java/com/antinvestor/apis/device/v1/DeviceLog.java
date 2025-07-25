@@ -21,16 +21,16 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * The response message containing the full device object
+ * Contained message representing a device's log
  * </pre>
  *
- * Protobuf type {@code device.v1.DeviceObject}
+ * Protobuf type {@code device.v1.DeviceLog}
  */
 @com.google.protobuf.Generated
-public final class DeviceObject extends
+public final class DeviceLog extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:device.v1.DeviceObject)
-    DeviceObjectOrBuilder {
+    // @@protoc_insertion_point(message_implements:device.v1.DeviceLog)
+    DeviceLogOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -39,15 +39,16 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 31,
       /* patch= */ 1,
       /* suffix= */ "",
-      DeviceObject.class.getName());
+      DeviceLog.class.getName());
   }
-  // Use DeviceObject.newBuilder() to construct.
-  private DeviceObject(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use DeviceLog.newBuilder() to construct.
+  private DeviceLog(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private DeviceObject() {
+  private DeviceLog() {
     id_ = "";
-    name_ = "";
+    deviceId_ = "";
+    linkId_ = "";
     ip_ = "";
     locale_ = "";
     userAgent_ = "";
@@ -57,7 +58,7 @@ private static final long serialVersionUID = 0L;
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_descriptor;
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceLog_descriptor;
   }
 
   @SuppressWarnings({"rawtypes"})
@@ -65,10 +66,10 @@ private static final long serialVersionUID = 0L;
   protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
       int number) {
     switch (number) {
-      case 8:
-        return internalGetLocation();
       case 9:
-        return internalGetProperties();
+        return internalGetLocation();
+      case 10:
+        return internalGetExtra();
       default:
         throw new RuntimeException(
             "Invalid map field number: " + number);
@@ -77,9 +78,9 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_fieldAccessorTable
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceLog_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.antinvestor.apis.device.v1.DeviceObject.class, com.antinvestor.apis.device.v1.DeviceObject.Builder.class);
+            com.antinvestor.apis.device.v1.DeviceLog.class, com.antinvestor.apis.device.v1.DeviceLog.Builder.class);
   }
 
   public static final int ID_FIELD_NUMBER = 1;
@@ -121,50 +122,89 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int NAME_FIELD_NUMBER = 2;
+  public static final int DEVICE_ID_FIELD_NUMBER = 2;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object name_ = "";
+  private volatile java.lang.Object deviceId_ = "";
   /**
-   * <code>string name = 2 [json_name = "name"];</code>
-   * @return The name.
+   * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * @return The deviceId.
    */
   @java.lang.Override
-  public java.lang.String getName() {
-    java.lang.Object ref = name_;
+  public java.lang.String getDeviceId() {
+    java.lang.Object ref = deviceId_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      name_ = s;
+      deviceId_ = s;
       return s;
     }
   }
   /**
-   * <code>string name = 2 [json_name = "name"];</code>
-   * @return The bytes for name.
+   * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for deviceId.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getNameBytes() {
-    java.lang.Object ref = name_;
+      getDeviceIdBytes() {
+    java.lang.Object ref = deviceId_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      name_ = b;
+      deviceId_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int IP_FIELD_NUMBER = 3;
+  public static final int LINK_ID_FIELD_NUMBER = 3;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object linkId_ = "";
+  /**
+   * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
+   * @return The linkId.
+   */
+  @java.lang.Override
+  public java.lang.String getLinkId() {
+    java.lang.Object ref = linkId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      linkId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for linkId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getLinkIdBytes() {
+    java.lang.Object ref = linkId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      linkId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int IP_FIELD_NUMBER = 4;
   @SuppressWarnings("serial")
   private volatile java.lang.Object ip_ = "";
   /**
-   * <code>string ip = 3 [json_name = "ip"];</code>
+   * <code>string ip = 4 [json_name = "ip"];</code>
    * @return The ip.
    */
   @java.lang.Override
@@ -181,7 +221,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string ip = 3 [json_name = "ip"];</code>
+   * <code>string ip = 4 [json_name = "ip"];</code>
    * @return The bytes for ip.
    */
   @java.lang.Override
@@ -199,11 +239,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int LOCALE_FIELD_NUMBER = 4;
+  public static final int LOCALE_FIELD_NUMBER = 5;
   @SuppressWarnings("serial")
   private volatile java.lang.Object locale_ = "";
   /**
-   * <code>string locale = 4 [json_name = "locale"];</code>
+   * <code>string locale = 5 [json_name = "locale"];</code>
    * @return The locale.
    */
   @java.lang.Override
@@ -220,7 +260,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string locale = 4 [json_name = "locale"];</code>
+   * <code>string locale = 5 [json_name = "locale"];</code>
    * @return The bytes for locale.
    */
   @java.lang.Override
@@ -238,11 +278,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int USER_AGENT_FIELD_NUMBER = 5;
+  public static final int USER_AGENT_FIELD_NUMBER = 6;
   @SuppressWarnings("serial")
   private volatile java.lang.Object userAgent_ = "";
   /**
-   * <code>string user_agent = 5 [json_name = "userAgent"];</code>
+   * <code>string user_agent = 6 [json_name = "userAgent"];</code>
    * @return The userAgent.
    */
   @java.lang.Override
@@ -259,7 +299,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string user_agent = 5 [json_name = "userAgent"];</code>
+   * <code>string user_agent = 6 [json_name = "userAgent"];</code>
    * @return The bytes for userAgent.
    */
   @java.lang.Override
@@ -277,11 +317,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int OS_FIELD_NUMBER = 6;
+  public static final int OS_FIELD_NUMBER = 7;
   @SuppressWarnings("serial")
   private volatile java.lang.Object os_ = "";
   /**
-   * <code>string os = 6 [json_name = "os"];</code>
+   * <code>string os = 7 [json_name = "os"];</code>
    * @return The os.
    */
   @java.lang.Override
@@ -298,7 +338,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string os = 6 [json_name = "os"];</code>
+   * <code>string os = 7 [json_name = "os"];</code>
    * @return The bytes for os.
    */
   @java.lang.Override
@@ -316,11 +356,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int LAST_SEEN_FIELD_NUMBER = 7;
+  public static final int LAST_SEEN_FIELD_NUMBER = 8;
   @SuppressWarnings("serial")
   private volatile java.lang.Object lastSeen_ = "";
   /**
-   * <code>string last_seen = 7 [json_name = "lastSeen"];</code>
+   * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
    * @return The lastSeen.
    */
   @java.lang.Override
@@ -337,7 +377,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string last_seen = 7 [json_name = "lastSeen"];</code>
+   * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
    * @return The bytes for lastSeen.
    */
   @java.lang.Override
@@ -355,13 +395,13 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int LOCATION_FIELD_NUMBER = 8;
+  public static final int LOCATION_FIELD_NUMBER = 9;
   private static final class LocationDefaultEntryHolder {
     static final com.google.protobuf.MapEntry<
         java.lang.String, java.lang.String> defaultEntry =
             com.google.protobuf.MapEntry
             .<java.lang.String, java.lang.String>newDefaultInstance(
-                com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_LocationEntry_descriptor, 
+                com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceLog_LocationEntry_descriptor, 
                 com.google.protobuf.WireFormat.FieldType.STRING,
                 "",
                 com.google.protobuf.WireFormat.FieldType.STRING,
@@ -382,7 +422,7 @@ private static final long serialVersionUID = 0L;
     return internalGetLocation().getMap().size();
   }
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
    */
   @java.lang.Override
   public boolean containsLocation(
@@ -399,14 +439,14 @@ private static final long serialVersionUID = 0L;
     return getLocationMap();
   }
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
    */
   @java.lang.Override
   public java.util.Map<java.lang.String, java.lang.String> getLocationMap() {
     return internalGetLocation().getMap();
   }
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
    */
   @java.lang.Override
   public /* nullable */
@@ -420,7 +460,7 @@ java.lang.String defaultValue) {
     return map.containsKey(key) ? map.get(key) : defaultValue;
   }
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
    */
   @java.lang.Override
   public java.lang.String getLocationOrThrow(
@@ -434,13 +474,13 @@ java.lang.String defaultValue) {
     return map.get(key);
   }
 
-  public static final int PROPERTIES_FIELD_NUMBER = 9;
-  private static final class PropertiesDefaultEntryHolder {
+  public static final int EXTRA_FIELD_NUMBER = 10;
+  private static final class ExtraDefaultEntryHolder {
     static final com.google.protobuf.MapEntry<
         java.lang.String, java.lang.String> defaultEntry =
             com.google.protobuf.MapEntry
             .<java.lang.String, java.lang.String>newDefaultInstance(
-                com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_PropertiesEntry_descriptor, 
+                com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceLog_ExtraEntry_descriptor, 
                 com.google.protobuf.WireFormat.FieldType.STRING,
                 "",
                 com.google.protobuf.WireFormat.FieldType.STRING,
@@ -448,65 +488,65 @@ java.lang.String defaultValue) {
   }
   @SuppressWarnings("serial")
   private com.google.protobuf.MapField<
-      java.lang.String, java.lang.String> properties_;
+      java.lang.String, java.lang.String> extra_;
   private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-  internalGetProperties() {
-    if (properties_ == null) {
+  internalGetExtra() {
+    if (extra_ == null) {
       return com.google.protobuf.MapField.emptyMapField(
-          PropertiesDefaultEntryHolder.defaultEntry);
+          ExtraDefaultEntryHolder.defaultEntry);
     }
-    return properties_;
+    return extra_;
   }
-  public int getPropertiesCount() {
-    return internalGetProperties().getMap().size();
+  public int getExtraCount() {
+    return internalGetExtra().getMap().size();
   }
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
    */
   @java.lang.Override
-  public boolean containsProperties(
+  public boolean containsExtra(
       java.lang.String key) {
     if (key == null) { throw new NullPointerException("map key"); }
-    return internalGetProperties().getMap().containsKey(key);
+    return internalGetExtra().getMap().containsKey(key);
   }
   /**
-   * Use {@link #getPropertiesMap()} instead.
+   * Use {@link #getExtraMap()} instead.
    */
   @java.lang.Override
   @java.lang.Deprecated
-  public java.util.Map<java.lang.String, java.lang.String> getProperties() {
-    return getPropertiesMap();
+  public java.util.Map<java.lang.String, java.lang.String> getExtra() {
+    return getExtraMap();
   }
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
    */
   @java.lang.Override
-  public java.util.Map<java.lang.String, java.lang.String> getPropertiesMap() {
-    return internalGetProperties().getMap();
+  public java.util.Map<java.lang.String, java.lang.String> getExtraMap() {
+    return internalGetExtra().getMap();
   }
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
    */
   @java.lang.Override
   public /* nullable */
-java.lang.String getPropertiesOrDefault(
+java.lang.String getExtraOrDefault(
       java.lang.String key,
       /* nullable */
 java.lang.String defaultValue) {
     if (key == null) { throw new NullPointerException("map key"); }
     java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetProperties().getMap();
+        internalGetExtra().getMap();
     return map.containsKey(key) ? map.get(key) : defaultValue;
   }
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
    */
   @java.lang.Override
-  public java.lang.String getPropertiesOrThrow(
+  public java.lang.String getExtraOrThrow(
       java.lang.String key) {
     if (key == null) { throw new NullPointerException("map key"); }
     java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetProperties().getMap();
+        internalGetExtra().getMap();
     if (!map.containsKey(key)) {
       throw new java.lang.IllegalArgumentException();
     }
@@ -530,36 +570,39 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 2, name_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, deviceId_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(linkId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 3, linkId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(ip_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 3, ip_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 4, ip_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(locale_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 4, locale_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 5, locale_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(userAgent_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 5, userAgent_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 6, userAgent_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(os_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 6, os_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 7, os_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(lastSeen_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 7, lastSeen_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 8, lastSeen_);
     }
     com.google.protobuf.GeneratedMessage
       .serializeStringMapTo(
         output,
         internalGetLocation(),
         LocationDefaultEntryHolder.defaultEntry,
-        8);
+        9);
     com.google.protobuf.GeneratedMessage
       .serializeStringMapTo(
         output,
-        internalGetProperties(),
-        PropertiesDefaultEntryHolder.defaultEntry,
-        9);
+        internalGetExtra(),
+        ExtraDefaultEntryHolder.defaultEntry,
+        10);
     getUnknownFields().writeTo(output);
   }
 
@@ -572,23 +615,26 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, name_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, deviceId_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(linkId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, linkId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(ip_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, ip_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(4, ip_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(locale_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(4, locale_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(5, locale_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(userAgent_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(5, userAgent_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(6, userAgent_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(os_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(6, os_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(7, os_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(lastSeen_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(7, lastSeen_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(8, lastSeen_);
     }
     for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
          : internalGetLocation().getMap().entrySet()) {
@@ -598,17 +644,17 @@ java.lang.String defaultValue) {
           .setValue(entry.getValue())
           .build();
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, location__);
+          .computeMessageSize(9, location__);
     }
     for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-         : internalGetProperties().getMap().entrySet()) {
+         : internalGetExtra().getMap().entrySet()) {
       com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-      properties__ = PropertiesDefaultEntryHolder.defaultEntry.newBuilderForType()
+      extra__ = ExtraDefaultEntryHolder.defaultEntry.newBuilderForType()
           .setKey(entry.getKey())
           .setValue(entry.getValue())
           .build();
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, properties__);
+          .computeMessageSize(10, extra__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -620,15 +666,17 @@ java.lang.String defaultValue) {
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.antinvestor.apis.device.v1.DeviceObject)) {
+    if (!(obj instanceof com.antinvestor.apis.device.v1.DeviceLog)) {
       return super.equals(obj);
     }
-    com.antinvestor.apis.device.v1.DeviceObject other = (com.antinvestor.apis.device.v1.DeviceObject) obj;
+    com.antinvestor.apis.device.v1.DeviceLog other = (com.antinvestor.apis.device.v1.DeviceLog) obj;
 
     if (!getId()
         .equals(other.getId())) return false;
-    if (!getName()
-        .equals(other.getName())) return false;
+    if (!getDeviceId()
+        .equals(other.getDeviceId())) return false;
+    if (!getLinkId()
+        .equals(other.getLinkId())) return false;
     if (!getIp()
         .equals(other.getIp())) return false;
     if (!getLocale()
@@ -641,8 +689,8 @@ java.lang.String defaultValue) {
         .equals(other.getLastSeen())) return false;
     if (!internalGetLocation().equals(
         other.internalGetLocation())) return false;
-    if (!internalGetProperties().equals(
-        other.internalGetProperties())) return false;
+    if (!internalGetExtra().equals(
+        other.internalGetExtra())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -656,8 +704,10 @@ java.lang.String defaultValue) {
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + getId().hashCode();
-    hash = (37 * hash) + NAME_FIELD_NUMBER;
-    hash = (53 * hash) + getName().hashCode();
+    hash = (37 * hash) + DEVICE_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getDeviceId().hashCode();
+    hash = (37 * hash) + LINK_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getLinkId().hashCode();
     hash = (37 * hash) + IP_FIELD_NUMBER;
     hash = (53 * hash) + getIp().hashCode();
     hash = (37 * hash) + LOCALE_FIELD_NUMBER;
@@ -672,53 +722,53 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + LOCATION_FIELD_NUMBER;
       hash = (53 * hash) + internalGetLocation().hashCode();
     }
-    if (!internalGetProperties().getMap().isEmpty()) {
-      hash = (37 * hash) + PROPERTIES_FIELD_NUMBER;
-      hash = (53 * hash) + internalGetProperties().hashCode();
+    if (!internalGetExtra().getMap().isEmpty()) {
+      hash = (37 * hash) + EXTRA_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetExtra().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.antinvestor.apis.device.v1.DeviceObject parseFrom(
+  public static com.antinvestor.apis.device.v1.DeviceLog parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.DeviceObject parseFrom(
+  public static com.antinvestor.apis.device.v1.DeviceLog parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.DeviceObject parseFrom(
+  public static com.antinvestor.apis.device.v1.DeviceLog parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.DeviceObject parseFrom(
+  public static com.antinvestor.apis.device.v1.DeviceLog parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.DeviceObject parseFrom(byte[] data)
+  public static com.antinvestor.apis.device.v1.DeviceLog parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.DeviceObject parseFrom(
+  public static com.antinvestor.apis.device.v1.DeviceLog parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.DeviceObject parseFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.DeviceLog parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.DeviceObject parseFrom(
+  public static com.antinvestor.apis.device.v1.DeviceLog parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -726,26 +776,26 @@ java.lang.String defaultValue) {
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.antinvestor.apis.device.v1.DeviceObject parseDelimitedFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.DeviceLog parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.antinvestor.apis.device.v1.DeviceObject parseDelimitedFrom(
+  public static com.antinvestor.apis.device.v1.DeviceLog parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.DeviceObject parseFrom(
+  public static com.antinvestor.apis.device.v1.DeviceLog parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.DeviceObject parseFrom(
+  public static com.antinvestor.apis.device.v1.DeviceLog parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -758,7 +808,7 @@ java.lang.String defaultValue) {
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.antinvestor.apis.device.v1.DeviceObject prototype) {
+  public static Builder newBuilder(com.antinvestor.apis.device.v1.DeviceLog prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -775,28 +825,28 @@ java.lang.String defaultValue) {
   }
   /**
    * <pre>
-   * The response message containing the full device object
+   * Contained message representing a device's log
    * </pre>
    *
-   * Protobuf type {@code device.v1.DeviceObject}
+   * Protobuf type {@code device.v1.DeviceLog}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:device.v1.DeviceObject)
-      com.antinvestor.apis.device.v1.DeviceObjectOrBuilder {
+      // @@protoc_insertion_point(builder_implements:device.v1.DeviceLog)
+      com.antinvestor.apis.device.v1.DeviceLogOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceLog_descriptor;
     }
 
     @SuppressWarnings({"rawtypes"})
     protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
         int number) {
       switch (number) {
-        case 8:
-          return internalGetLocation();
         case 9:
-          return internalGetProperties();
+          return internalGetLocation();
+        case 10:
+          return internalGetExtra();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -806,10 +856,10 @@ java.lang.String defaultValue) {
     protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
         int number) {
       switch (number) {
-        case 8:
-          return internalGetMutableLocation();
         case 9:
-          return internalGetMutableProperties();
+          return internalGetMutableLocation();
+        case 10:
+          return internalGetMutableExtra();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -818,12 +868,12 @@ java.lang.String defaultValue) {
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_fieldAccessorTable
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceLog_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.antinvestor.apis.device.v1.DeviceObject.class, com.antinvestor.apis.device.v1.DeviceObject.Builder.class);
+              com.antinvestor.apis.device.v1.DeviceLog.class, com.antinvestor.apis.device.v1.DeviceLog.Builder.class);
     }
 
-    // Construct using com.antinvestor.apis.device.v1.DeviceObject.newBuilder()
+    // Construct using com.antinvestor.apis.device.v1.DeviceLog.newBuilder()
     private Builder() {
 
     }
@@ -838,31 +888,32 @@ java.lang.String defaultValue) {
       super.clear();
       bitField0_ = 0;
       id_ = "";
-      name_ = "";
+      deviceId_ = "";
+      linkId_ = "";
       ip_ = "";
       locale_ = "";
       userAgent_ = "";
       os_ = "";
       lastSeen_ = "";
       internalGetMutableLocation().clear();
-      internalGetMutableProperties().clear();
+      internalGetMutableExtra().clear();
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceLog_descriptor;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.DeviceObject getDefaultInstanceForType() {
-      return com.antinvestor.apis.device.v1.DeviceObject.getDefaultInstance();
+    public com.antinvestor.apis.device.v1.DeviceLog getDefaultInstanceForType() {
+      return com.antinvestor.apis.device.v1.DeviceLog.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.DeviceObject build() {
-      com.antinvestor.apis.device.v1.DeviceObject result = buildPartial();
+    public com.antinvestor.apis.device.v1.DeviceLog build() {
+      com.antinvestor.apis.device.v1.DeviceLog result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -870,99 +921,107 @@ java.lang.String defaultValue) {
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.DeviceObject buildPartial() {
-      com.antinvestor.apis.device.v1.DeviceObject result = new com.antinvestor.apis.device.v1.DeviceObject(this);
+    public com.antinvestor.apis.device.v1.DeviceLog buildPartial() {
+      com.antinvestor.apis.device.v1.DeviceLog result = new com.antinvestor.apis.device.v1.DeviceLog(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.antinvestor.apis.device.v1.DeviceObject result) {
+    private void buildPartial0(com.antinvestor.apis.device.v1.DeviceLog result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.id_ = id_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.name_ = name_;
+        result.deviceId_ = deviceId_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.ip_ = ip_;
+        result.linkId_ = linkId_;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.locale_ = locale_;
+        result.ip_ = ip_;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.userAgent_ = userAgent_;
+        result.locale_ = locale_;
       }
       if (((from_bitField0_ & 0x00000020) != 0)) {
-        result.os_ = os_;
+        result.userAgent_ = userAgent_;
       }
       if (((from_bitField0_ & 0x00000040) != 0)) {
-        result.lastSeen_ = lastSeen_;
+        result.os_ = os_;
       }
       if (((from_bitField0_ & 0x00000080) != 0)) {
+        result.lastSeen_ = lastSeen_;
+      }
+      if (((from_bitField0_ & 0x00000100) != 0)) {
         result.location_ = internalGetLocation();
         result.location_.makeImmutable();
       }
-      if (((from_bitField0_ & 0x00000100) != 0)) {
-        result.properties_ = internalGetProperties();
-        result.properties_.makeImmutable();
+      if (((from_bitField0_ & 0x00000200) != 0)) {
+        result.extra_ = internalGetExtra();
+        result.extra_.makeImmutable();
       }
     }
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.antinvestor.apis.device.v1.DeviceObject) {
-        return mergeFrom((com.antinvestor.apis.device.v1.DeviceObject)other);
+      if (other instanceof com.antinvestor.apis.device.v1.DeviceLog) {
+        return mergeFrom((com.antinvestor.apis.device.v1.DeviceLog)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.antinvestor.apis.device.v1.DeviceObject other) {
-      if (other == com.antinvestor.apis.device.v1.DeviceObject.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.antinvestor.apis.device.v1.DeviceLog other) {
+      if (other == com.antinvestor.apis.device.v1.DeviceLog.getDefaultInstance()) return this;
       if (!other.getId().isEmpty()) {
         id_ = other.id_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (!other.getName().isEmpty()) {
-        name_ = other.name_;
+      if (!other.getDeviceId().isEmpty()) {
+        deviceId_ = other.deviceId_;
         bitField0_ |= 0x00000002;
+        onChanged();
+      }
+      if (!other.getLinkId().isEmpty()) {
+        linkId_ = other.linkId_;
+        bitField0_ |= 0x00000004;
         onChanged();
       }
       if (!other.getIp().isEmpty()) {
         ip_ = other.ip_;
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         onChanged();
       }
       if (!other.getLocale().isEmpty()) {
         locale_ = other.locale_;
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         onChanged();
       }
       if (!other.getUserAgent().isEmpty()) {
         userAgent_ = other.userAgent_;
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         onChanged();
       }
       if (!other.getOs().isEmpty()) {
         os_ = other.os_;
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         onChanged();
       }
       if (!other.getLastSeen().isEmpty()) {
         lastSeen_ = other.lastSeen_;
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         onChanged();
       }
       internalGetMutableLocation().mergeFrom(
           other.internalGetLocation());
-      bitField0_ |= 0x00000080;
-      internalGetMutableProperties().mergeFrom(
-          other.internalGetProperties());
       bitField0_ |= 0x00000100;
+      internalGetMutableExtra().mergeFrom(
+          other.internalGetExtra());
+      bitField0_ |= 0x00000200;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -995,53 +1054,58 @@ java.lang.String defaultValue) {
               break;
             } // case 10
             case 18: {
-              name_ = input.readStringRequireUtf8();
+              deviceId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
             case 26: {
-              ip_ = input.readStringRequireUtf8();
+              linkId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
             } // case 26
             case 34: {
-              locale_ = input.readStringRequireUtf8();
+              ip_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000008;
               break;
             } // case 34
             case 42: {
-              userAgent_ = input.readStringRequireUtf8();
+              locale_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000010;
               break;
             } // case 42
             case 50: {
-              os_ = input.readStringRequireUtf8();
+              userAgent_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000020;
               break;
             } // case 50
             case 58: {
-              lastSeen_ = input.readStringRequireUtf8();
+              os_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000040;
               break;
             } // case 58
             case 66: {
-              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              location__ = input.readMessage(
-                  LocationDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              internalGetMutableLocation().getMutableMap().put(
-                  location__.getKey(), location__.getValue());
+              lastSeen_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000080;
               break;
             } // case 66
             case 74: {
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              properties__ = input.readMessage(
-                  PropertiesDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              internalGetMutableProperties().getMutableMap().put(
-                  properties__.getKey(), properties__.getValue());
+              location__ = input.readMessage(
+                  LocationDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              internalGetMutableLocation().getMutableMap().put(
+                  location__.getKey(), location__.getValue());
               bitField0_ |= 0x00000100;
               break;
             } // case 74
+            case 82: {
+              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+              extra__ = input.readMessage(
+                  ExtraDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              internalGetMutableExtra().getMutableMap().put(
+                  extra__.getKey(), extra__.getValue());
+              bitField0_ |= 0x00000200;
+              break;
+            } // case 82
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1131,81 +1195,153 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private java.lang.Object name_ = "";
+    private java.lang.Object deviceId_ = "";
     /**
-     * <code>string name = 2 [json_name = "name"];</code>
-     * @return The name.
+     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @return The deviceId.
      */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
+    public java.lang.String getDeviceId() {
+      java.lang.Object ref = deviceId_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        name_ = s;
+        deviceId_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string name = 2 [json_name = "name"];</code>
-     * @return The bytes for name.
+     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for deviceId.
      */
     public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
+        getDeviceIdBytes() {
+      java.lang.Object ref = deviceId_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        name_ = b;
+        deviceId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string name = 2 [json_name = "name"];</code>
-     * @param value The name to set.
+     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @param value The deviceId to set.
      * @return This builder for chaining.
      */
-    public Builder setName(
+    public Builder setDeviceId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      name_ = value;
+      deviceId_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>string name = 2 [json_name = "name"];</code>
+     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearName() {
-      name_ = getDefaultInstance().getName();
+    public Builder clearDeviceId() {
+      deviceId_ = getDefaultInstance().getDeviceId();
       bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string name = 2 [json_name = "name"];</code>
-     * @param value The bytes for name to set.
+     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for deviceId to set.
      * @return This builder for chaining.
      */
-    public Builder setNameBytes(
+    public Builder setDeviceIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      name_ = value;
+      deviceId_ = value;
       bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object linkId_ = "";
+    /**
+     * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
+     * @return The linkId.
+     */
+    public java.lang.String getLinkId() {
+      java.lang.Object ref = linkId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        linkId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for linkId.
+     */
+    public com.google.protobuf.ByteString
+        getLinkIdBytes() {
+      java.lang.Object ref = linkId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        linkId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
+     * @param value The linkId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setLinkId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      linkId_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearLinkId() {
+      linkId_ = getDefaultInstance().getLinkId();
+      bitField0_ = (bitField0_ & ~0x00000004);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for linkId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setLinkIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      linkId_ = value;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
 
     private java.lang.Object ip_ = "";
     /**
-     * <code>string ip = 3 [json_name = "ip"];</code>
+     * <code>string ip = 4 [json_name = "ip"];</code>
      * @return The ip.
      */
     public java.lang.String getIp() {
@@ -1221,7 +1357,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string ip = 3 [json_name = "ip"];</code>
+     * <code>string ip = 4 [json_name = "ip"];</code>
      * @return The bytes for ip.
      */
     public com.google.protobuf.ByteString
@@ -1238,7 +1374,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string ip = 3 [json_name = "ip"];</code>
+     * <code>string ip = 4 [json_name = "ip"];</code>
      * @param value The ip to set.
      * @return This builder for chaining.
      */
@@ -1246,22 +1382,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       ip_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>string ip = 3 [json_name = "ip"];</code>
+     * <code>string ip = 4 [json_name = "ip"];</code>
      * @return This builder for chaining.
      */
     public Builder clearIp() {
       ip_ = getDefaultInstance().getIp();
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000008);
       onChanged();
       return this;
     }
     /**
-     * <code>string ip = 3 [json_name = "ip"];</code>
+     * <code>string ip = 4 [json_name = "ip"];</code>
      * @param value The bytes for ip to set.
      * @return This builder for chaining.
      */
@@ -1270,14 +1406,14 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       ip_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
 
     private java.lang.Object locale_ = "";
     /**
-     * <code>string locale = 4 [json_name = "locale"];</code>
+     * <code>string locale = 5 [json_name = "locale"];</code>
      * @return The locale.
      */
     public java.lang.String getLocale() {
@@ -1293,7 +1429,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string locale = 4 [json_name = "locale"];</code>
+     * <code>string locale = 5 [json_name = "locale"];</code>
      * @return The bytes for locale.
      */
     public com.google.protobuf.ByteString
@@ -1310,7 +1446,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string locale = 4 [json_name = "locale"];</code>
+     * <code>string locale = 5 [json_name = "locale"];</code>
      * @param value The locale to set.
      * @return This builder for chaining.
      */
@@ -1318,22 +1454,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       locale_ = value;
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
-     * <code>string locale = 4 [json_name = "locale"];</code>
+     * <code>string locale = 5 [json_name = "locale"];</code>
      * @return This builder for chaining.
      */
     public Builder clearLocale() {
       locale_ = getDefaultInstance().getLocale();
-      bitField0_ = (bitField0_ & ~0x00000008);
+      bitField0_ = (bitField0_ & ~0x00000010);
       onChanged();
       return this;
     }
     /**
-     * <code>string locale = 4 [json_name = "locale"];</code>
+     * <code>string locale = 5 [json_name = "locale"];</code>
      * @param value The bytes for locale to set.
      * @return This builder for chaining.
      */
@@ -1342,14 +1478,14 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       locale_ = value;
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
 
     private java.lang.Object userAgent_ = "";
     /**
-     * <code>string user_agent = 5 [json_name = "userAgent"];</code>
+     * <code>string user_agent = 6 [json_name = "userAgent"];</code>
      * @return The userAgent.
      */
     public java.lang.String getUserAgent() {
@@ -1365,7 +1501,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string user_agent = 5 [json_name = "userAgent"];</code>
+     * <code>string user_agent = 6 [json_name = "userAgent"];</code>
      * @return The bytes for userAgent.
      */
     public com.google.protobuf.ByteString
@@ -1382,7 +1518,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string user_agent = 5 [json_name = "userAgent"];</code>
+     * <code>string user_agent = 6 [json_name = "userAgent"];</code>
      * @param value The userAgent to set.
      * @return This builder for chaining.
      */
@@ -1390,22 +1526,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       userAgent_ = value;
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
     /**
-     * <code>string user_agent = 5 [json_name = "userAgent"];</code>
+     * <code>string user_agent = 6 [json_name = "userAgent"];</code>
      * @return This builder for chaining.
      */
     public Builder clearUserAgent() {
       userAgent_ = getDefaultInstance().getUserAgent();
-      bitField0_ = (bitField0_ & ~0x00000010);
+      bitField0_ = (bitField0_ & ~0x00000020);
       onChanged();
       return this;
     }
     /**
-     * <code>string user_agent = 5 [json_name = "userAgent"];</code>
+     * <code>string user_agent = 6 [json_name = "userAgent"];</code>
      * @param value The bytes for userAgent to set.
      * @return This builder for chaining.
      */
@@ -1414,14 +1550,14 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       userAgent_ = value;
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
 
     private java.lang.Object os_ = "";
     /**
-     * <code>string os = 6 [json_name = "os"];</code>
+     * <code>string os = 7 [json_name = "os"];</code>
      * @return The os.
      */
     public java.lang.String getOs() {
@@ -1437,7 +1573,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string os = 6 [json_name = "os"];</code>
+     * <code>string os = 7 [json_name = "os"];</code>
      * @return The bytes for os.
      */
     public com.google.protobuf.ByteString
@@ -1454,7 +1590,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string os = 6 [json_name = "os"];</code>
+     * <code>string os = 7 [json_name = "os"];</code>
      * @param value The os to set.
      * @return This builder for chaining.
      */
@@ -1462,22 +1598,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       os_ = value;
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
     /**
-     * <code>string os = 6 [json_name = "os"];</code>
+     * <code>string os = 7 [json_name = "os"];</code>
      * @return This builder for chaining.
      */
     public Builder clearOs() {
       os_ = getDefaultInstance().getOs();
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000040);
       onChanged();
       return this;
     }
     /**
-     * <code>string os = 6 [json_name = "os"];</code>
+     * <code>string os = 7 [json_name = "os"];</code>
      * @param value The bytes for os to set.
      * @return This builder for chaining.
      */
@@ -1486,14 +1622,14 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       os_ = value;
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
 
     private java.lang.Object lastSeen_ = "";
     /**
-     * <code>string last_seen = 7 [json_name = "lastSeen"];</code>
+     * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
      * @return The lastSeen.
      */
     public java.lang.String getLastSeen() {
@@ -1509,7 +1645,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string last_seen = 7 [json_name = "lastSeen"];</code>
+     * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
      * @return The bytes for lastSeen.
      */
     public com.google.protobuf.ByteString
@@ -1526,7 +1662,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string last_seen = 7 [json_name = "lastSeen"];</code>
+     * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
      * @param value The lastSeen to set.
      * @return This builder for chaining.
      */
@@ -1534,22 +1670,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       lastSeen_ = value;
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }
     /**
-     * <code>string last_seen = 7 [json_name = "lastSeen"];</code>
+     * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
      * @return This builder for chaining.
      */
     public Builder clearLastSeen() {
       lastSeen_ = getDefaultInstance().getLastSeen();
-      bitField0_ = (bitField0_ & ~0x00000040);
+      bitField0_ = (bitField0_ & ~0x00000080);
       onChanged();
       return this;
     }
     /**
-     * <code>string last_seen = 7 [json_name = "lastSeen"];</code>
+     * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
      * @param value The bytes for lastSeen to set.
      * @return This builder for chaining.
      */
@@ -1558,7 +1694,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       lastSeen_ = value;
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }
@@ -1582,7 +1718,7 @@ java.lang.String defaultValue) {
       if (!location_.isMutable()) {
         location_ = location_.copy();
       }
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       onChanged();
       return location_;
     }
@@ -1590,7 +1726,7 @@ java.lang.String defaultValue) {
       return internalGetLocation().getMap().size();
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
      */
     @java.lang.Override
     public boolean containsLocation(
@@ -1607,14 +1743,14 @@ java.lang.String defaultValue) {
       return getLocationMap();
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
      */
     @java.lang.Override
     public java.util.Map<java.lang.String, java.lang.String> getLocationMap() {
       return internalGetLocation().getMap();
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
      */
     @java.lang.Override
     public /* nullable */
@@ -1628,7 +1764,7 @@ java.lang.String defaultValue) {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
      */
     @java.lang.Override
     public java.lang.String getLocationOrThrow(
@@ -1642,13 +1778,13 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearLocation() {
-      bitField0_ = (bitField0_ & ~0x00000080);
+      bitField0_ = (bitField0_ & ~0x00000100);
       internalGetMutableLocation().getMutableMap()
           .clear();
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
      */
     public Builder removeLocation(
         java.lang.String key) {
@@ -1663,11 +1799,11 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableLocation() {
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       return internalGetMutableLocation().getMutableMap();
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
      */
     public Builder putLocation(
         java.lang.String key,
@@ -1676,111 +1812,111 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableLocation().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 9 [json_name = "location"];</code>
      */
     public Builder putAllLocation(
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableLocation().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       return this;
     }
 
     private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> properties_;
+        java.lang.String, java.lang.String> extra_;
     private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetProperties() {
-      if (properties_ == null) {
+        internalGetExtra() {
+      if (extra_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
-            PropertiesDefaultEntryHolder.defaultEntry);
+            ExtraDefaultEntryHolder.defaultEntry);
       }
-      return properties_;
+      return extra_;
     }
     private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetMutableProperties() {
-      if (properties_ == null) {
-        properties_ = com.google.protobuf.MapField.newMapField(
-            PropertiesDefaultEntryHolder.defaultEntry);
+        internalGetMutableExtra() {
+      if (extra_ == null) {
+        extra_ = com.google.protobuf.MapField.newMapField(
+            ExtraDefaultEntryHolder.defaultEntry);
       }
-      if (!properties_.isMutable()) {
-        properties_ = properties_.copy();
+      if (!extra_.isMutable()) {
+        extra_ = extra_.copy();
       }
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       onChanged();
-      return properties_;
+      return extra_;
     }
-    public int getPropertiesCount() {
-      return internalGetProperties().getMap().size();
+    public int getExtraCount() {
+      return internalGetExtra().getMap().size();
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
      */
     @java.lang.Override
-    public boolean containsProperties(
+    public boolean containsExtra(
         java.lang.String key) {
       if (key == null) { throw new NullPointerException("map key"); }
-      return internalGetProperties().getMap().containsKey(key);
+      return internalGetExtra().getMap().containsKey(key);
     }
     /**
-     * Use {@link #getPropertiesMap()} instead.
+     * Use {@link #getExtraMap()} instead.
      */
     @java.lang.Override
     @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getProperties() {
-      return getPropertiesMap();
+    public java.util.Map<java.lang.String, java.lang.String> getExtra() {
+      return getExtraMap();
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
      */
     @java.lang.Override
-    public java.util.Map<java.lang.String, java.lang.String> getPropertiesMap() {
-      return internalGetProperties().getMap();
+    public java.util.Map<java.lang.String, java.lang.String> getExtraMap() {
+      return internalGetExtra().getMap();
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
      */
     @java.lang.Override
     public /* nullable */
-java.lang.String getPropertiesOrDefault(
+java.lang.String getExtraOrDefault(
         java.lang.String key,
         /* nullable */
 java.lang.String defaultValue) {
       if (key == null) { throw new NullPointerException("map key"); }
       java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetProperties().getMap();
+          internalGetExtra().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
      */
     @java.lang.Override
-    public java.lang.String getPropertiesOrThrow(
+    public java.lang.String getExtraOrThrow(
         java.lang.String key) {
       if (key == null) { throw new NullPointerException("map key"); }
       java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetProperties().getMap();
+          internalGetExtra().getMap();
       if (!map.containsKey(key)) {
         throw new java.lang.IllegalArgumentException();
       }
       return map.get(key);
     }
-    public Builder clearProperties() {
-      bitField0_ = (bitField0_ & ~0x00000100);
-      internalGetMutableProperties().getMutableMap()
+    public Builder clearExtra() {
+      bitField0_ = (bitField0_ & ~0x00000200);
+      internalGetMutableExtra().getMutableMap()
           .clear();
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
      */
-    public Builder removeProperties(
+    public Builder removeExtra(
         java.lang.String key) {
       if (key == null) { throw new NullPointerException("map key"); }
-      internalGetMutableProperties().getMutableMap()
+      internalGetMutableExtra().getMutableMap()
           .remove(key);
       return this;
     }
@@ -1789,51 +1925,51 @@ java.lang.String defaultValue) {
      */
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
-        getMutableProperties() {
-      bitField0_ |= 0x00000100;
-      return internalGetMutableProperties().getMutableMap();
+        getMutableExtra() {
+      bitField0_ |= 0x00000200;
+      return internalGetMutableExtra().getMutableMap();
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
      */
-    public Builder putProperties(
+    public Builder putExtra(
         java.lang.String key,
         java.lang.String value) {
       if (key == null) { throw new NullPointerException("map key"); }
       if (value == null) { throw new NullPointerException("map value"); }
-      internalGetMutableProperties().getMutableMap()
+      internalGetMutableExtra().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; extra = 10 [json_name = "extra"];</code>
      */
-    public Builder putAllProperties(
+    public Builder putAllExtra(
         java.util.Map<java.lang.String, java.lang.String> values) {
-      internalGetMutableProperties().getMutableMap()
+      internalGetMutableExtra().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       return this;
     }
 
-    // @@protoc_insertion_point(builder_scope:device.v1.DeviceObject)
+    // @@protoc_insertion_point(builder_scope:device.v1.DeviceLog)
   }
 
-  // @@protoc_insertion_point(class_scope:device.v1.DeviceObject)
-  private static final com.antinvestor.apis.device.v1.DeviceObject DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:device.v1.DeviceLog)
+  private static final com.antinvestor.apis.device.v1.DeviceLog DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.DeviceObject();
+    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.DeviceLog();
   }
 
-  public static com.antinvestor.apis.device.v1.DeviceObject getDefaultInstance() {
+  public static com.antinvestor.apis.device.v1.DeviceLog getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<DeviceObject>
-      PARSER = new com.google.protobuf.AbstractParser<DeviceObject>() {
+  private static final com.google.protobuf.Parser<DeviceLog>
+      PARSER = new com.google.protobuf.AbstractParser<DeviceLog>() {
     @java.lang.Override
-    public DeviceObject parsePartialFrom(
+    public DeviceLog parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1852,17 +1988,17 @@ java.lang.String defaultValue) {
     }
   };
 
-  public static com.google.protobuf.Parser<DeviceObject> parser() {
+  public static com.google.protobuf.Parser<DeviceLog> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<DeviceObject> getParserForType() {
+  public com.google.protobuf.Parser<DeviceLog> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.antinvestor.apis.device.v1.DeviceObject getDefaultInstanceForType() {
+  public com.antinvestor.apis.device.v1.DeviceLog getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 
