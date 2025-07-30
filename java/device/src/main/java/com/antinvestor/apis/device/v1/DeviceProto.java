@@ -291,70 +291,71 @@ public final class DeviceProto {
       "a\"<\n\rRemoveRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030" +
       "(2\020[0-9a-z_-]{3,20}R\002id\"=\n\016RemoveRespons" +
       "e\022+\n\004data\030\001 \001(\0132\027.device.v1.DeviceObject" +
-      "R\004data\"\346\002\n\nLogRequest\0228\n\tdevice_id\030\001 \001(\t" +
+      "R\004data\"\205\003\n\nLogRequest\0228\n\tdevice_id\030\001 \001(\t" +
       "B\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010deviceId\022" +
       "4\n\007link_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{" +
       "3,20}R\006linkId\022\016\n\002ip\030\004 \001(\tR\002ip\022\026\n\006locale\030" +
       "\005 \001(\tR\006locale\022\035\n\nuser_agent\030\006 \001(\tR\tuserA" +
       "gent\022\016\n\002os\030\007 \001(\tR\002os\022\033\n\tlast_seen\030\010 \001(\tR" +
       "\010lastSeen\0229\n\006extras\030\t \003(\0132!.device.v1.Lo" +
-      "gRequest.ExtrasEntryR\006extras\0329\n\013ExtrasEn" +
-      "try\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005va" +
-      "lue:\0028\001\"7\n\013LogResponse\022(\n\004data\030\001 \001(\0132\024.d" +
-      "evice.v1.DeviceLogR\004data\"a\n\017ListLogsRequ" +
-      "est\0228\n\tdevice_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a" +
-      "-z_-]{3,20}R\010deviceId\022\024\n\005count\030\002 \001(\005R\005co" +
-      "unt\"<\n\020ListLogsResponse\022(\n\004data\030\001 \003(\0132\024." +
-      "device.v1.DeviceLogR\004data\"\317\001\n\rAddKeyRequ" +
-      "est\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3" +
-      ",20}R\002id\022\030\n\007contact\030\002 \001(\tR\007contact\022<\n\006ex" +
-      "tras\030\003 \003(\0132$.device.v1.AddKeyRequest.Ext" +
-      "rasEntryR\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001" +
-      " \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\":\n\016A" +
-      "ddKeyResponse\022(\n\004data\030\001 \001(\0132\024.device.v1." +
-      "KeyObjectR\004data\"D\n\020RemoveKeyRequest\0220\n\002i" +
-      "d\030\001 \003(\tB \272H\035\222\001\032\"\030r\026\020\003\030(2\020[0-9a-z_-]{3,20" +
-      "}R\002id\"=\n\021RemoveKeyResponse\022(\n\004data\030\001 \003(\013" +
-      "2\024.device.v1.KeyObjectR\004data\"a\n\017ListKeys" +
-      "Request\0228\n\tdevice_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[" +
-      "0-9a-z_-]{3,20}R\010deviceId\022\024\n\005count\030\002 \001(\005" +
-      "R\005count\"<\n\020ListKeysResponse\022(\n\004data\030\001 \003(" +
-      "\0132\024.device.v1.KeyObjectR\004data2\255\007\n\rDevice" +
-      "Service\022O\n\007GetById\022\031.device.v1.GetByIdRe" +
-      "quest\032\032.device.v1.GetByIdResponse\"\r\202\323\344\223\002" +
-      "\007\022\005/{id}\022l\n\016GetBySessionId\022 .device.v1.G" +
-      "etBySessionIdRequest\032!.device.v1.GetBySe" +
-      "ssionIdResponse\"\025\202\323\344\223\002\017\022\r/session/{id}\022P" +
-      "\n\006Search\022\030.device.v1.SearchRequest\032\031.dev" +
-      "ice.v1.SearchResponse\"\017\202\323\344\223\002\t\022\007/search0\001" +
-      "\022K\n\006Create\022\030.device.v1.CreateRequest\032\031.d" +
-      "evice.v1.CreateResponse\"\014\202\323\344\223\002\006\"\001/:\001*\022O\n" +
-      "\006Update\022\030.device.v1.UpdateRequest\032\031.devi" +
-      "ce.v1.UpdateResponse\"\020\202\323\344\223\002\n2\005/{id}:\001*\022L" +
-      "\n\006Remove\022\030.device.v1.RemoveRequest\032\031.dev" +
-      "ice.v1.RemoveResponse\"\r\202\323\344\223\002\007*\005/{id}\022F\n\003" +
-      "Log\022\025.device.v1.LogRequest\032\026.device.v1.L" +
-      "ogResponse\"\020\202\323\344\223\002\n\"\005/logs:\001*\022T\n\010ListLogs" +
-      "\022\032.device.v1.ListLogsRequest\032\033.device.v1" +
-      ".ListLogsResponse\"\r\202\323\344\223\002\007\022\005/logs0\001\022O\n\006Ad" +
-      "dKey\022\030.device.v1.AddKeyRequest\032\031.device." +
-      "v1.AddKeyResponse\"\020\202\323\344\223\002\n\"\005/keys:\001*\022Z\n\tR" +
-      "emoveKey\022\033.device.v1.RemoveKeyRequest\032\034." +
-      "device.v1.RemoveKeyResponse\"\022\202\323\344\223\002\014*\n/ke" +
-      "ys/{id}\022T\n\010ListKeys\022\032.device.v1.ListKeys" +
-      "Request\032\033.device.v1.ListKeysResponse\"\r\202\323" +
-      "\344\223\002\007\022\005/keys0\001B\261\003\n\036com.antinvestor.apis.d" +
-      "evice.v1B\013DeviceProtoP\001Z8github.com/anti" +
-      "nvestor/apis/go/device/device/v1;devicev" +
-      "1\242\002\003DXX\252\002\tDevice.V1\312\002\tDevice\\V1\342\002\025Device" +
-      "\\V1\\GPBMetadata\352\002\nDevice::V1\222A\201\002\022n\n\016Devi" +
-      "ce Service\"W\n\020Ant Investor Ltd\022-https://" +
-      "github.com/antinvestor/service-device\032\024i" +
-      "nfo@antinvestor.com2\0031.0*\002\001\0022\020applicatio" +
-      "n/json:\020application/jsonZY\nW\n\006bearer\022M\010\002" +
-      "\0228Authentication token, prefixed by Bear" +
-      "er: Bearer <token>\032\rAuthorization \002b\014\n\n\n" +
-      "\006bearer\022\000b\006proto3"
+      "gRequest.ExtrasEntryR\006extras\022\035\n\nsession_" +
+      "id\030\n \001(\tR\tsessionId\0329\n\013ExtrasEntry\022\020\n\003ke" +
+      "y\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"7" +
+      "\n\013LogResponse\022(\n\004data\030\001 \001(\0132\024.device.v1." +
+      "DeviceLogR\004data\"a\n\017ListLogsRequest\0228\n\tde" +
+      "vice_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,2" +
+      "0}R\010deviceId\022\024\n\005count\030\002 \001(\005R\005count\"<\n\020Li" +
+      "stLogsResponse\022(\n\004data\030\001 \003(\0132\024.device.v1" +
+      ".DeviceLogR\004data\"\317\001\n\rAddKeyRequest\022+\n\002id" +
+      "\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022" +
+      "\030\n\007contact\030\002 \001(\tR\007contact\022<\n\006extras\030\003 \003(" +
+      "\0132$.device.v1.AddKeyRequest.ExtrasEntryR" +
+      "\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003key" +
+      "\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\":\n\016AddKeyResp" +
+      "onse\022(\n\004data\030\001 \001(\0132\024.device.v1.KeyObject" +
+      "R\004data\"D\n\020RemoveKeyRequest\0220\n\002id\030\001 \003(\tB " +
+      "\272H\035\222\001\032\"\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"=\n\021" +
+      "RemoveKeyResponse\022(\n\004data\030\001 \003(\0132\024.device" +
+      ".v1.KeyObjectR\004data\"a\n\017ListKeysRequest\0228" +
+      "\n\tdevice_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]" +
+      "{3,20}R\010deviceId\022\024\n\005count\030\002 \001(\005R\005count\"<" +
+      "\n\020ListKeysResponse\022(\n\004data\030\001 \003(\0132\024.devic" +
+      "e.v1.KeyObjectR\004data2\255\007\n\rDeviceService\022O" +
+      "\n\007GetById\022\031.device.v1.GetByIdRequest\032\032.d" +
+      "evice.v1.GetByIdResponse\"\r\202\323\344\223\002\007\022\005/{id}\022" +
+      "l\n\016GetBySessionId\022 .device.v1.GetBySessi" +
+      "onIdRequest\032!.device.v1.GetBySessionIdRe" +
+      "sponse\"\025\202\323\344\223\002\017\022\r/session/{id}\022P\n\006Search\022" +
+      "\030.device.v1.SearchRequest\032\031.device.v1.Se" +
+      "archResponse\"\017\202\323\344\223\002\t\022\007/search0\001\022K\n\006Creat" +
+      "e\022\030.device.v1.CreateRequest\032\031.device.v1." +
+      "CreateResponse\"\014\202\323\344\223\002\006\"\001/:\001*\022O\n\006Update\022\030" +
+      ".device.v1.UpdateRequest\032\031.device.v1.Upd" +
+      "ateResponse\"\020\202\323\344\223\002\n2\005/{id}:\001*\022L\n\006Remove\022" +
+      "\030.device.v1.RemoveRequest\032\031.device.v1.Re" +
+      "moveResponse\"\r\202\323\344\223\002\007*\005/{id}\022F\n\003Log\022\025.dev" +
+      "ice.v1.LogRequest\032\026.device.v1.LogRespons" +
+      "e\"\020\202\323\344\223\002\n\"\005/logs:\001*\022T\n\010ListLogs\022\032.device" +
+      ".v1.ListLogsRequest\032\033.device.v1.ListLogs" +
+      "Response\"\r\202\323\344\223\002\007\022\005/logs0\001\022O\n\006AddKey\022\030.de" +
+      "vice.v1.AddKeyRequest\032\031.device.v1.AddKey" +
+      "Response\"\020\202\323\344\223\002\n\"\005/keys:\001*\022Z\n\tRemoveKey\022" +
+      "\033.device.v1.RemoveKeyRequest\032\034.device.v1" +
+      ".RemoveKeyResponse\"\022\202\323\344\223\002\014*\n/keys/{id}\022T" +
+      "\n\010ListKeys\022\032.device.v1.ListKeysRequest\032\033" +
+      ".device.v1.ListKeysResponse\"\r\202\323\344\223\002\007\022\005/ke" +
+      "ys0\001B\261\003\n\036com.antinvestor.apis.device.v1B" +
+      "\013DeviceProtoP\001Z8github.com/antinvestor/a" +
+      "pis/go/device/device/v1;devicev1\242\002\003DXX\252\002" +
+      "\tDevice.V1\312\002\tDevice\\V1\342\002\025Device\\V1\\GPBMe" +
+      "tadata\352\002\nDevice::V1\222A\201\002\022n\n\016Device Servic" +
+      "e\"W\n\020Ant Investor Ltd\022-https://github.co" +
+      "m/antinvestor/service-device\032\024info@antin" +
+      "vestor.com2\0031.0*\002\001\0022\020application/json:\020a" +
+      "pplication/jsonZY\nW\n\006bearer\022M\010\002\0228Authent" +
+      "ication token, prefixed by Bearer: Beare" +
+      "r <token>\032\rAuthorization \002b\014\n\n\n\006bearer\022\000" +
+      "b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -506,7 +507,7 @@ public final class DeviceProto {
     internal_static_device_v1_LogRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_LogRequest_descriptor,
-        new java.lang.String[] { "DeviceId", "LinkId", "Ip", "Locale", "UserAgent", "Os", "LastSeen", "Extras", });
+        new java.lang.String[] { "DeviceId", "LinkId", "Ip", "Locale", "UserAgent", "Os", "LastSeen", "Extras", "SessionId", });
     internal_static_device_v1_LogRequest_ExtrasEntry_descriptor =
       internal_static_device_v1_LogRequest_descriptor.getNestedTypes().get(0);
     internal_static_device_v1_LogRequest_ExtrasEntry_fieldAccessorTable = new
