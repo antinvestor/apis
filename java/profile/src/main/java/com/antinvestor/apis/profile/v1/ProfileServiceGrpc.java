@@ -21,9 +21,6 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
  * The profile service definition.
  * </pre>
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.73.0)",
-    comments = "Source: profile/v1/profile.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class ProfileServiceGrpc {
 
@@ -937,8 +934,8 @@ public final class ProfileServiceGrpc {
      * Obtains a profile by its hash
      * </pre>
      */
-    public com.antinvestor.apis.profile.v1.GetByIdResponse getById(com.antinvestor.apis.profile.v1.GetByIdRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.profile.v1.GetByIdResponse getById(com.antinvestor.apis.profile.v1.GetByIdRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getGetByIdMethod(), getCallOptions(), request);
     }
 
@@ -947,8 +944,8 @@ public final class ProfileServiceGrpc {
      * Obtains a profile by its hash
      * </pre>
      */
-    public com.antinvestor.apis.profile.v1.GetByContactResponse getByContact(com.antinvestor.apis.profile.v1.GetByContactRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.profile.v1.GetByContactResponse getByContact(com.antinvestor.apis.profile.v1.GetByContactRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getGetByContactMethod(), getCallOptions(), request);
     }
 
@@ -969,8 +966,8 @@ public final class ProfileServiceGrpc {
      * Uses data found in the profile from mergeHash to update the current profile.
      * </pre>
      */
-    public com.antinvestor.apis.profile.v1.MergeResponse merge(com.antinvestor.apis.profile.v1.MergeRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.profile.v1.MergeResponse merge(com.antinvestor.apis.profile.v1.MergeRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getMergeMethod(), getCallOptions(), request);
     }
 
@@ -979,8 +976,8 @@ public final class ProfileServiceGrpc {
      * Creates a new profile based on the request.
      * </pre>
      */
-    public com.antinvestor.apis.profile.v1.CreateResponse create(com.antinvestor.apis.profile.v1.CreateRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.profile.v1.CreateResponse create(com.antinvestor.apis.profile.v1.CreateRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreateMethod(), getCallOptions(), request);
     }
 
@@ -989,8 +986,8 @@ public final class ProfileServiceGrpc {
      * Creates a new profile based on the request.
      * </pre>
      */
-    public com.antinvestor.apis.profile.v1.UpdateResponse update(com.antinvestor.apis.profile.v1.UpdateRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.profile.v1.UpdateResponse update(com.antinvestor.apis.profile.v1.UpdateRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getUpdateMethod(), getCallOptions(), request);
     }
 
@@ -999,8 +996,8 @@ public final class ProfileServiceGrpc {
      * Adds a new contact based on the request/this leads to automatic verification.
      * </pre>
      */
-    public com.antinvestor.apis.profile.v1.AddContactResponse addContact(com.antinvestor.apis.profile.v1.AddContactRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.profile.v1.AddContactResponse addContact(com.antinvestor.apis.profile.v1.AddContactRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getAddContactMethod(), getCallOptions(), request);
     }
 
@@ -1009,8 +1006,8 @@ public final class ProfileServiceGrpc {
      * Removes an old contact based on this request's id
      * </pre>
      */
-    public com.antinvestor.apis.profile.v1.RemoveContactResponse removeContact(com.antinvestor.apis.profile.v1.RemoveContactRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.profile.v1.RemoveContactResponse removeContact(com.antinvestor.apis.profile.v1.RemoveContactRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getRemoveContactMethod(), getCallOptions(), request);
     }
 
@@ -1031,8 +1028,8 @@ public final class ProfileServiceGrpc {
      * Adds a new contact based on the request/this leads to automatic verification.
      * </pre>
      */
-    public com.antinvestor.apis.profile.v1.AddRosterResponse addRoster(com.antinvestor.apis.profile.v1.AddRosterRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.profile.v1.AddRosterResponse addRoster(com.antinvestor.apis.profile.v1.AddRosterRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getAddRosterMethod(), getCallOptions(), request);
     }
 
@@ -1041,8 +1038,8 @@ public final class ProfileServiceGrpc {
      * Removes a contact from a user's circle based on this request's id
      * </pre>
      */
-    public com.antinvestor.apis.profile.v1.RemoveRosterResponse removeRoster(com.antinvestor.apis.profile.v1.RemoveRosterRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.profile.v1.RemoveRosterResponse removeRoster(com.antinvestor.apis.profile.v1.RemoveRosterRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getRemoveRosterMethod(), getCallOptions(), request);
     }
 
@@ -1051,8 +1048,8 @@ public final class ProfileServiceGrpc {
      * Adds a new address based on the request.
      * </pre>
      */
-    public com.antinvestor.apis.profile.v1.AddAddressResponse addAddress(com.antinvestor.apis.profile.v1.AddAddressRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.profile.v1.AddAddressResponse addAddress(com.antinvestor.apis.profile.v1.AddAddressRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getAddAddressMethod(), getCallOptions(), request);
     }
 
@@ -1061,8 +1058,8 @@ public final class ProfileServiceGrpc {
      * Adds a new relationship between different proiles.
      * </pre>
      */
-    public com.antinvestor.apis.profile.v1.AddRelationshipResponse addRelationship(com.antinvestor.apis.profile.v1.AddRelationshipRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.profile.v1.AddRelationshipResponse addRelationship(com.antinvestor.apis.profile.v1.AddRelationshipRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getAddRelationshipMethod(), getCallOptions(), request);
     }
 
@@ -1071,8 +1068,8 @@ public final class ProfileServiceGrpc {
      * Remove an existing relationship between profiles.
      * </pre>
      */
-    public com.antinvestor.apis.profile.v1.DeleteRelationshipResponse deleteRelationship(com.antinvestor.apis.profile.v1.DeleteRelationshipRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.profile.v1.DeleteRelationshipResponse deleteRelationship(com.antinvestor.apis.profile.v1.DeleteRelationshipRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getDeleteRelationshipMethod(), getCallOptions(), request);
     }
 

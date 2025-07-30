@@ -18,9 +18,6 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.73.0)",
-    comments = "Source: payment/v1/payment.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class PaymentServiceGrpc {
 
@@ -604,8 +601,8 @@ public final class PaymentServiceGrpc {
      *Send method for queueing outbound payments as requested
      * </pre>
      */
-    public com.antinvestor.apis.payment.v1.SendResponse send(com.antinvestor.apis.payment.v1.SendRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.payment.v1.SendResponse send(com.antinvestor.apis.payment.v1.SendRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getSendMethod(), getCallOptions(), request);
     }
 
@@ -614,8 +611,8 @@ public final class PaymentServiceGrpc {
      *Send method for queueing inbound payments as requested
      * </pre>
      */
-    public com.antinvestor.apis.payment.v1.ReceiveResponse receive(com.antinvestor.apis.payment.v1.ReceiveRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.payment.v1.ReceiveResponse receive(com.antinvestor.apis.payment.v1.ReceiveRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getReceiveMethod(), getCallOptions(), request);
     }
 
@@ -624,8 +621,8 @@ public final class PaymentServiceGrpc {
      *Initiate method for initiating payments as requested
      * </pre>
      */
-    public com.antinvestor.apis.payment.v1.InitiatePromptResponse initiatePrompt(com.antinvestor.apis.payment.v1.InitiatePromptRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.payment.v1.InitiatePromptResponse initiatePrompt(com.antinvestor.apis.payment.v1.InitiatePromptRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getInitiatePromptMethod(), getCallOptions(), request);
     }
 
@@ -634,8 +631,8 @@ public final class PaymentServiceGrpc {
      *createPaymentLink method for creating payment links as requested
      * </pre>
      */
-    public com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse createPaymentLink(com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse createPaymentLink(com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreatePaymentLinkMethod(), getCallOptions(), request);
     }
 
@@ -644,8 +641,8 @@ public final class PaymentServiceGrpc {
      *Status request to determine if payment is prepared or released
      * </pre>
      */
-    public com.antinvestor.apis.common.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.common.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getStatusMethod(), getCallOptions(), request);
     }
 
@@ -654,8 +651,8 @@ public final class PaymentServiceGrpc {
      *Status update request to allow continuation of payment processing
      * </pre>
      */
-    public com.antinvestor.apis.common.v1.StatusUpdateResponse statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.common.v1.StatusUpdateResponse statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getStatusUpdateMethod(), getCallOptions(), request);
     }
 
@@ -664,8 +661,8 @@ public final class PaymentServiceGrpc {
      *Release method for releasing queued payments and returns if status is not released
      * </pre>
      */
-    public com.antinvestor.apis.payment.v1.ReleaseResponse release(com.antinvestor.apis.payment.v1.ReleaseRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.payment.v1.ReleaseResponse release(com.antinvestor.apis.payment.v1.ReleaseRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getReleaseMethod(), getCallOptions(), request);
     }
 
@@ -683,8 +680,8 @@ public final class PaymentServiceGrpc {
 
     /**
      */
-    public com.antinvestor.apis.payment.v1.ReconcileResponse reconcile(com.antinvestor.apis.payment.v1.ReconcileRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.payment.v1.ReconcileResponse reconcile(com.antinvestor.apis.payment.v1.ReconcileRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getReconcileMethod(), getCallOptions(), request);
     }
   }

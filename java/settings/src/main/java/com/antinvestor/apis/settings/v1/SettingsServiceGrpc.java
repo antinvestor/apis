@@ -18,9 +18,6 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.73.0)",
-    comments = "Source: settings/v1/settings.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class SettingsServiceGrpc {
 
@@ -332,8 +329,8 @@ public final class SettingsServiceGrpc {
      * Gets a single setting and its stored value
      * </pre>
      */
-    public com.antinvestor.apis.settings.v1.GetResponse get(com.antinvestor.apis.settings.v1.GetRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.settings.v1.GetResponse get(com.antinvestor.apis.settings.v1.GetRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getGetMethod(), getCallOptions(), request);
     }
 
@@ -357,8 +354,8 @@ public final class SettingsServiceGrpc {
 
     /**
      */
-    public com.antinvestor.apis.settings.v1.SetResponse set(com.antinvestor.apis.settings.v1.SetRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.settings.v1.SetResponse set(com.antinvestor.apis.settings.v1.SetRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getSetMethod(), getCallOptions(), request);
     }
   }

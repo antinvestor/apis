@@ -21,9 +21,6 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
  * The device service definition.
  * </pre>
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.73.0)",
-    comments = "Source: device/v1/device.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class DeviceServiceGrpc {
 
@@ -61,6 +58,37 @@ public final class DeviceServiceGrpc {
       }
     }
     return getGetByIdMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.GetBySessionIdRequest,
+      com.antinvestor.apis.device.v1.GetBySessionIdResponse> getGetBySessionIdMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetBySessionId",
+      requestType = com.antinvestor.apis.device.v1.GetBySessionIdRequest.class,
+      responseType = com.antinvestor.apis.device.v1.GetBySessionIdResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.GetBySessionIdRequest,
+      com.antinvestor.apis.device.v1.GetBySessionIdResponse> getGetBySessionIdMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.GetBySessionIdRequest, com.antinvestor.apis.device.v1.GetBySessionIdResponse> getGetBySessionIdMethod;
+    if ((getGetBySessionIdMethod = DeviceServiceGrpc.getGetBySessionIdMethod) == null) {
+      synchronized (DeviceServiceGrpc.class) {
+        if ((getGetBySessionIdMethod = DeviceServiceGrpc.getGetBySessionIdMethod) == null) {
+          DeviceServiceGrpc.getGetBySessionIdMethod = getGetBySessionIdMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.device.v1.GetBySessionIdRequest, com.antinvestor.apis.device.v1.GetBySessionIdResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetBySessionId"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.GetBySessionIdRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.GetBySessionIdResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeviceServiceMethodDescriptorSupplier("GetBySessionId"))
+              .build();
+        }
+      }
+    }
+    return getGetBySessionIdMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.SearchRequest,
@@ -420,6 +448,16 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
+     * Obtains a device by its session id
+     * </pre>
+     */
+    default void getBySessionId(com.antinvestor.apis.device.v1.GetBySessionIdRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.GetBySessionIdResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetBySessionIdMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * Obtains a device by its hash
      * </pre>
      */
@@ -555,6 +593,17 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
+     * Obtains a device by its session id
+     * </pre>
+     */
+    public void getBySessionId(com.antinvestor.apis.device.v1.GetBySessionIdRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.GetBySessionIdResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetBySessionIdMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * Obtains a device by its hash
      * </pre>
      */
@@ -677,9 +726,19 @@ public final class DeviceServiceGrpc {
      * Obtains a device by its hash
      * </pre>
      */
-    public com.antinvestor.apis.device.v1.GetByIdResponse getById(com.antinvestor.apis.device.v1.GetByIdRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.device.v1.GetByIdResponse getById(com.antinvestor.apis.device.v1.GetByIdRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getGetByIdMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Obtains a device by its session id
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.GetBySessionIdResponse getBySessionId(com.antinvestor.apis.device.v1.GetBySessionIdRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
+          getChannel(), getGetBySessionIdMethod(), getCallOptions(), request);
     }
 
     /**
@@ -699,8 +758,8 @@ public final class DeviceServiceGrpc {
      * Creates a new device based on the request.
      * </pre>
      */
-    public com.antinvestor.apis.device.v1.CreateResponse create(com.antinvestor.apis.device.v1.CreateRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.device.v1.CreateResponse create(com.antinvestor.apis.device.v1.CreateRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreateMethod(), getCallOptions(), request);
     }
 
@@ -709,8 +768,8 @@ public final class DeviceServiceGrpc {
      * Updates an existing device based on the request.
      * </pre>
      */
-    public com.antinvestor.apis.device.v1.UpdateResponse update(com.antinvestor.apis.device.v1.UpdateRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.device.v1.UpdateResponse update(com.antinvestor.apis.device.v1.UpdateRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getUpdateMethod(), getCallOptions(), request);
     }
 
@@ -719,8 +778,8 @@ public final class DeviceServiceGrpc {
      * Removes an existing device based on the request.
      * </pre>
      */
-    public com.antinvestor.apis.device.v1.RemoveResponse remove(com.antinvestor.apis.device.v1.RemoveRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.device.v1.RemoveResponse remove(com.antinvestor.apis.device.v1.RemoveRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getRemoveMethod(), getCallOptions(), request);
     }
 
@@ -729,8 +788,8 @@ public final class DeviceServiceGrpc {
      * Log a new key based on the request.
      * </pre>
      */
-    public com.antinvestor.apis.device.v1.LogResponse log(com.antinvestor.apis.device.v1.LogRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.device.v1.LogResponse log(com.antinvestor.apis.device.v1.LogRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getLogMethod(), getCallOptions(), request);
     }
 
@@ -751,8 +810,8 @@ public final class DeviceServiceGrpc {
      * Adds a new key based on the request.
      * </pre>
      */
-    public com.antinvestor.apis.device.v1.AddKeyResponse addKey(com.antinvestor.apis.device.v1.AddKeyRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.device.v1.AddKeyResponse addKey(com.antinvestor.apis.device.v1.AddKeyRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getAddKeyMethod(), getCallOptions(), request);
     }
 
@@ -761,8 +820,8 @@ public final class DeviceServiceGrpc {
      * Removes an old device keys based on this request's id
      * </pre>
      */
-    public com.antinvestor.apis.device.v1.RemoveKeyResponse removeKey(com.antinvestor.apis.device.v1.RemoveKeyRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.device.v1.RemoveKeyResponse removeKey(com.antinvestor.apis.device.v1.RemoveKeyRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getRemoveKeyMethod(), getCallOptions(), request);
     }
 
@@ -806,6 +865,16 @@ public final class DeviceServiceGrpc {
     public com.antinvestor.apis.device.v1.GetByIdResponse getById(com.antinvestor.apis.device.v1.GetByIdRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetByIdMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Obtains a device by its session id
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.GetBySessionIdResponse getBySessionId(com.antinvestor.apis.device.v1.GetBySessionIdRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetBySessionIdMethod(), getCallOptions(), request);
     }
 
     /**
@@ -934,6 +1003,17 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
+     * Obtains a device by its session id
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.GetBySessionIdResponse> getBySessionId(
+        com.antinvestor.apis.device.v1.GetBySessionIdRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetBySessionIdMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * Creates a new device based on the request.
      * </pre>
      */
@@ -1000,15 +1080,16 @@ public final class DeviceServiceGrpc {
   }
 
   private static final int METHODID_GET_BY_ID = 0;
-  private static final int METHODID_SEARCH = 1;
-  private static final int METHODID_CREATE = 2;
-  private static final int METHODID_UPDATE = 3;
-  private static final int METHODID_REMOVE = 4;
-  private static final int METHODID_LOG = 5;
-  private static final int METHODID_LIST_LOGS = 6;
-  private static final int METHODID_ADD_KEY = 7;
-  private static final int METHODID_REMOVE_KEY = 8;
-  private static final int METHODID_LIST_KEYS = 9;
+  private static final int METHODID_GET_BY_SESSION_ID = 1;
+  private static final int METHODID_SEARCH = 2;
+  private static final int METHODID_CREATE = 3;
+  private static final int METHODID_UPDATE = 4;
+  private static final int METHODID_REMOVE = 5;
+  private static final int METHODID_LOG = 6;
+  private static final int METHODID_LIST_LOGS = 7;
+  private static final int METHODID_ADD_KEY = 8;
+  private static final int METHODID_REMOVE_KEY = 9;
+  private static final int METHODID_LIST_KEYS = 10;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1030,6 +1111,10 @@ public final class DeviceServiceGrpc {
         case METHODID_GET_BY_ID:
           serviceImpl.getById((com.antinvestor.apis.device.v1.GetByIdRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.GetByIdResponse>) responseObserver);
+          break;
+        case METHODID_GET_BY_SESSION_ID:
+          serviceImpl.getBySessionId((com.antinvestor.apis.device.v1.GetBySessionIdRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.GetBySessionIdResponse>) responseObserver);
           break;
         case METHODID_SEARCH:
           serviceImpl.search((com.antinvestor.apis.device.v1.SearchRequest) request,
@@ -1092,6 +1177,13 @@ public final class DeviceServiceGrpc {
               com.antinvestor.apis.device.v1.GetByIdRequest,
               com.antinvestor.apis.device.v1.GetByIdResponse>(
                 service, METHODID_GET_BY_ID)))
+        .addMethod(
+          getGetBySessionIdMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.device.v1.GetBySessionIdRequest,
+              com.antinvestor.apis.device.v1.GetBySessionIdResponse>(
+                service, METHODID_GET_BY_SESSION_ID)))
         .addMethod(
           getSearchMethod(),
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
@@ -1204,6 +1296,7 @@ public final class DeviceServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new DeviceServiceFileDescriptorSupplier())
               .addMethod(getGetByIdMethod())
+              .addMethod(getGetBySessionIdMethod())
               .addMethod(getSearchMethod())
               .addMethod(getCreateMethod())
               .addMethod(getUpdateMethod())

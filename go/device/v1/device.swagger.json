@@ -332,6 +332,37 @@
         ]
       }
     },
+    "/session/{id}": {
+      "get": {
+        "summary": "Obtains a device by its session id",
+        "operationId": "DeviceService_GetBySessionId",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/device.v1.GetBySessionIdResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "device.v1.DeviceService"
+        ]
+      }
+    },
     "/{id}": {
       "get": {
         "summary": "Obtains a device by its hash",
@@ -361,6 +392,12 @@
             },
             "collectionFormat": "csv",
             "minItems": 1
+          },
+          {
+            "name": "extensive",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -523,6 +560,9 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "sessionId": {
+          "type": "string"
         }
       },
       "title": "Contained message representing a device's log"
@@ -562,6 +602,9 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "sessionId": {
+          "type": "string"
         }
       },
       "title": "The response message containing the full device object"
@@ -590,6 +633,14 @@
             "type": "object",
             "$ref": "#/definitions/device.v1.DeviceObject"
           }
+        }
+      }
+    },
+    "device.v1.GetBySessionIdResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/device.v1.DeviceObject"
         }
       }
     },

@@ -18,9 +18,6 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.73.0)",
-    comments = "Source: partition/v1/partition.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class PartitionServiceGrpc {
 
@@ -1130,8 +1127,8 @@ public final class PartitionServiceGrpc {
      * Get a tenant in the system matching the id
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.GetTenantResponse getTenant(com.antinvestor.apis.partition.v1.GetTenantRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.GetTenantResponse getTenant(com.antinvestor.apis.partition.v1.GetTenantRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getGetTenantMethod(), getCallOptions(), request);
     }
 
@@ -1152,8 +1149,8 @@ public final class PartitionServiceGrpc {
      * Log a new tenant request
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.CreateTenantResponse createTenant(com.antinvestor.apis.partition.v1.CreateTenantRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.CreateTenantResponse createTenant(com.antinvestor.apis.partition.v1.CreateTenantRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreateTenantMethod(), getCallOptions(), request);
     }
 
@@ -1174,8 +1171,8 @@ public final class PartitionServiceGrpc {
      * Log a new partition request
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.CreatePartitionResponse createPartition(com.antinvestor.apis.partition.v1.CreatePartitionRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.CreatePartitionResponse createPartition(com.antinvestor.apis.partition.v1.CreatePartitionRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreatePartitionMethod(), getCallOptions(), request);
     }
 
@@ -1184,8 +1181,8 @@ public final class PartitionServiceGrpc {
      * Get an existing partition object
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.GetPartitionResponse getPartition(com.antinvestor.apis.partition.v1.GetPartitionRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.GetPartitionResponse getPartition(com.antinvestor.apis.partition.v1.GetPartitionRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getGetPartitionMethod(), getCallOptions(), request);
     }
 
@@ -1194,8 +1191,8 @@ public final class PartitionServiceGrpc {
      * Update an existing partition object
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.UpdatePartitionResponse updatePartition(com.antinvestor.apis.partition.v1.UpdatePartitionRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.UpdatePartitionResponse updatePartition(com.antinvestor.apis.partition.v1.UpdatePartitionRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getUpdatePartitionMethod(), getCallOptions(), request);
     }
 
@@ -1204,8 +1201,8 @@ public final class PartitionServiceGrpc {
      * Create a partition Role for a particular partition
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.CreatePartitionRoleResponse createPartitionRole(com.antinvestor.apis.partition.v1.CreatePartitionRoleRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.CreatePartitionRoleResponse createPartitionRole(com.antinvestor.apis.partition.v1.CreatePartitionRoleRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreatePartitionRoleMethod(), getCallOptions(), request);
     }
 
@@ -1226,8 +1223,8 @@ public final class PartitionServiceGrpc {
      * Remove a partition role that is not required
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.RemovePartitionRoleResponse removePartitionRole(com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.RemovePartitionRoleResponse removePartitionRole(com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getRemovePartitionRoleMethod(), getCallOptions(), request);
     }
 
@@ -1236,8 +1233,8 @@ public final class PartitionServiceGrpc {
      * Creates a new page for access or customization of how a partition looks like
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.CreatePageResponse createPage(com.antinvestor.apis.partition.v1.CreatePageRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.CreatePageResponse createPage(com.antinvestor.apis.partition.v1.CreatePageRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreatePageMethod(), getCallOptions(), request);
     }
 
@@ -1246,8 +1243,8 @@ public final class PartitionServiceGrpc {
      * Obtains a new page specific to a partition
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.GetPageResponse getPage(com.antinvestor.apis.partition.v1.GetPageRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.GetPageResponse getPage(com.antinvestor.apis.partition.v1.GetPageRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getGetPageMethod(), getCallOptions(), request);
     }
 
@@ -1256,8 +1253,8 @@ public final class PartitionServiceGrpc {
      * Removes a page from being accessible for a partition
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.RemovePageResponse removePage(com.antinvestor.apis.partition.v1.RemovePageRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.RemovePageResponse removePage(com.antinvestor.apis.partition.v1.RemovePageRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getRemovePageMethod(), getCallOptions(), request);
     }
 
@@ -1266,8 +1263,8 @@ public final class PartitionServiceGrpc {
      * Creates a users ability to access a partition
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.CreateAccessResponse createAccess(com.antinvestor.apis.partition.v1.CreateAccessRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.CreateAccessResponse createAccess(com.antinvestor.apis.partition.v1.CreateAccessRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreateAccessMethod(), getCallOptions(), request);
     }
 
@@ -1276,8 +1273,8 @@ public final class PartitionServiceGrpc {
      * Obtains a users access to a partition by access id or partition and profile id
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.GetAccessResponse getAccess(com.antinvestor.apis.partition.v1.GetAccessRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.GetAccessResponse getAccess(com.antinvestor.apis.partition.v1.GetAccessRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getGetAccessMethod(), getCallOptions(), request);
     }
 
@@ -1286,8 +1283,8 @@ public final class PartitionServiceGrpc {
      * Removes a user's ability to access a partition
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.RemoveAccessResponse removeAccess(com.antinvestor.apis.partition.v1.RemoveAccessRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.RemoveAccessResponse removeAccess(com.antinvestor.apis.partition.v1.RemoveAccessRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getRemoveAccessMethod(), getCallOptions(), request);
     }
 
@@ -1296,8 +1293,8 @@ public final class PartitionServiceGrpc {
      * Create an access Role for a particular access
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.CreateAccessRoleResponse createAccessRole(com.antinvestor.apis.partition.v1.CreateAccessRoleRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.CreateAccessRoleResponse createAccessRole(com.antinvestor.apis.partition.v1.CreateAccessRoleRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreateAccessRoleMethod(), getCallOptions(), request);
     }
 
@@ -1318,8 +1315,8 @@ public final class PartitionServiceGrpc {
      * Remove an access role that is not required
      * </pre>
      */
-    public com.antinvestor.apis.partition.v1.RemoveAccessRoleResponse removeAccessRole(com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.partition.v1.RemoveAccessRoleResponse removeAccessRole(com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getRemoveAccessRoleMethod(), getCallOptions(), request);
     }
   }

@@ -18,9 +18,6 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.73.0)",
-    comments = "Source: lostid/v1/lostid.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class LostIdServiceGrpc {
 
@@ -430,8 +427,8 @@ public final class LostIdServiceGrpc {
      * Log a new Collectible request
      * </pre>
      */
-    public com.antinvestor.apis.lostid.v1.CollectibleResponse collectible(com.antinvestor.apis.lostid.v1.CollectibleRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.lostid.v1.CollectibleResponse collectible(com.antinvestor.apis.lostid.v1.CollectibleRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCollectibleMethod(), getCallOptions(), request);
     }
 
@@ -449,8 +446,8 @@ public final class LostIdServiceGrpc {
      * Log a new search request
      * </pre>
      */
-    public com.antinvestor.apis.lostid.v1.SearchResponse search(com.antinvestor.apis.common.v1.SearchRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.lostid.v1.SearchResponse search(com.antinvestor.apis.common.v1.SearchRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getSearchMethod(), getCallOptions(), request);
     }
 
@@ -465,8 +462,8 @@ public final class LostIdServiceGrpc {
 
     /**
      */
-    public com.antinvestor.apis.lostid.v1.ProgressResponse progress(com.antinvestor.apis.lostid.v1.ProgressRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.lostid.v1.ProgressResponse progress(com.antinvestor.apis.lostid.v1.ProgressRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getProgressMethod(), getCallOptions(), request);
     }
 

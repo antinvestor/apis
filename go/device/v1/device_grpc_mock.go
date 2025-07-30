@@ -101,6 +101,26 @@ func (mr *MockDeviceServiceClientMockRecorder) GetById(ctx, in any, opts ...any)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*MockDeviceServiceClient)(nil).GetById), varargs...)
 }
 
+// GetBySessionId mocks base method.
+func (m *MockDeviceServiceClient) GetBySessionId(ctx context.Context, in *GetBySessionIdRequest, opts ...grpc.CallOption) (*GetBySessionIdResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetBySessionId", varargs...)
+	ret0, _ := ret[0].(*GetBySessionIdResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetBySessionId indicates an expected call of GetBySessionId.
+func (mr *MockDeviceServiceClientMockRecorder) GetBySessionId(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBySessionId", reflect.TypeOf((*MockDeviceServiceClient)(nil).GetBySessionId), varargs...)
+}
+
 // ListKeys mocks base method.
 func (m *MockDeviceServiceClient) ListKeys(ctx context.Context, in *ListKeysRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListKeysResponse], error) {
 	m.ctrl.T.Helper()
@@ -308,6 +328,21 @@ func (m *MockDeviceServiceServer) GetById(arg0 context.Context, arg1 *GetByIdReq
 func (mr *MockDeviceServiceServerMockRecorder) GetById(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*MockDeviceServiceServer)(nil).GetById), arg0, arg1)
+}
+
+// GetBySessionId mocks base method.
+func (m *MockDeviceServiceServer) GetBySessionId(arg0 context.Context, arg1 *GetBySessionIdRequest) (*GetBySessionIdResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetBySessionId", arg0, arg1)
+	ret0, _ := ret[0].(*GetBySessionIdResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetBySessionId indicates an expected call of GetBySessionId.
+func (mr *MockDeviceServiceServerMockRecorder) GetBySessionId(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBySessionId", reflect.TypeOf((*MockDeviceServiceServer)(nil).GetBySessionId), arg0, arg1)
 }
 
 // ListKeys mocks base method.

@@ -54,6 +54,7 @@ private static final long serialVersionUID = 0L;
     userAgent_ = "";
     os_ = "";
     lastSeen_ = "";
+    sessionId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -553,6 +554,45 @@ java.lang.String defaultValue) {
     return map.get(key);
   }
 
+  public static final int SESSION_ID_FIELD_NUMBER = 11;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object sessionId_ = "";
+  /**
+   * <code>string session_id = 11 [json_name = "sessionId"];</code>
+   * @return The sessionId.
+   */
+  @java.lang.Override
+  public java.lang.String getSessionId() {
+    java.lang.Object ref = sessionId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      sessionId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string session_id = 11 [json_name = "sessionId"];</code>
+   * @return The bytes for sessionId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getSessionIdBytes() {
+    java.lang.Object ref = sessionId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      sessionId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -603,6 +643,9 @@ java.lang.String defaultValue) {
         internalGetExtra(),
         ExtraDefaultEntryHolder.defaultEntry,
         10);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(sessionId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 11, sessionId_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -656,6 +699,9 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, extra__);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(sessionId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(11, sessionId_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -691,6 +737,8 @@ java.lang.String defaultValue) {
         other.internalGetLocation())) return false;
     if (!internalGetExtra().equals(
         other.internalGetExtra())) return false;
+    if (!getSessionId()
+        .equals(other.getSessionId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -726,6 +774,8 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + EXTRA_FIELD_NUMBER;
       hash = (53 * hash) + internalGetExtra().hashCode();
     }
+    hash = (37 * hash) + SESSION_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getSessionId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -897,6 +947,7 @@ java.lang.String defaultValue) {
       lastSeen_ = "";
       internalGetMutableLocation().clear();
       internalGetMutableExtra().clear();
+      sessionId_ = "";
       return this;
     }
 
@@ -962,6 +1013,9 @@ java.lang.String defaultValue) {
         result.extra_ = internalGetExtra();
         result.extra_.makeImmutable();
       }
+      if (((from_bitField0_ & 0x00000400) != 0)) {
+        result.sessionId_ = sessionId_;
+      }
     }
 
     @java.lang.Override
@@ -1022,6 +1076,11 @@ java.lang.String defaultValue) {
       internalGetMutableExtra().mergeFrom(
           other.internalGetExtra());
       bitField0_ |= 0x00000200;
+      if (!other.getSessionId().isEmpty()) {
+        sessionId_ = other.sessionId_;
+        bitField0_ |= 0x00000400;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1106,6 +1165,11 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000200;
               break;
             } // case 82
+            case 90: {
+              sessionId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000400;
+              break;
+            } // case 90
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1950,6 +2014,78 @@ java.lang.String defaultValue) {
       internalGetMutableExtra().getMutableMap()
           .putAll(values);
       bitField0_ |= 0x00000200;
+      return this;
+    }
+
+    private java.lang.Object sessionId_ = "";
+    /**
+     * <code>string session_id = 11 [json_name = "sessionId"];</code>
+     * @return The sessionId.
+     */
+    public java.lang.String getSessionId() {
+      java.lang.Object ref = sessionId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        sessionId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string session_id = 11 [json_name = "sessionId"];</code>
+     * @return The bytes for sessionId.
+     */
+    public com.google.protobuf.ByteString
+        getSessionIdBytes() {
+      java.lang.Object ref = sessionId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sessionId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string session_id = 11 [json_name = "sessionId"];</code>
+     * @param value The sessionId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setSessionId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      sessionId_ = value;
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string session_id = 11 [json_name = "sessionId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearSessionId() {
+      sessionId_ = getDefaultInstance().getSessionId();
+      bitField0_ = (bitField0_ & ~0x00000400);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string session_id = 11 [json_name = "sessionId"];</code>
+     * @param value The bytes for sessionId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setSessionIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      sessionId_ = value;
+      bitField0_ |= 0x00000400;
+      onChanged();
       return this;
     }
 

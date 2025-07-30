@@ -18,9 +18,6 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.73.0)",
-    comments = "Source: notification/v1/notification.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class NotificationServiceGrpc {
 
@@ -600,8 +597,8 @@ public final class NotificationServiceGrpc {
      *Status request to determine if notification is prepared or released
      * </pre>
      */
-    public com.antinvestor.apis.common.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.common.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getStatusMethod(), getCallOptions(), request);
     }
 
@@ -610,8 +607,8 @@ public final class NotificationServiceGrpc {
      *Status update request to allow continuation of notification processing
      * </pre>
      */
-    public com.antinvestor.apis.common.v1.StatusUpdateResponse statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.common.v1.StatusUpdateResponse statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getStatusUpdateMethod(), getCallOptions(), request);
     }
 
@@ -629,8 +626,8 @@ public final class NotificationServiceGrpc {
 
     /**
      */
-    public com.antinvestor.apis.notification.v1.TemplateSaveResponse templateSave(com.antinvestor.apis.notification.v1.TemplateSaveRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.notification.v1.TemplateSaveResponse templateSave(com.antinvestor.apis.notification.v1.TemplateSaveRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getTemplateSaveMethod(), getCallOptions(), request);
     }
   }

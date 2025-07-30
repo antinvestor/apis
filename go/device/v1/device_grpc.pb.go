@@ -33,16 +33,17 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DeviceService_GetById_FullMethodName   = "/device.v1.DeviceService/GetById"
-	DeviceService_Search_FullMethodName    = "/device.v1.DeviceService/Search"
-	DeviceService_Create_FullMethodName    = "/device.v1.DeviceService/Create"
-	DeviceService_Update_FullMethodName    = "/device.v1.DeviceService/Update"
-	DeviceService_Remove_FullMethodName    = "/device.v1.DeviceService/Remove"
-	DeviceService_Log_FullMethodName       = "/device.v1.DeviceService/Log"
-	DeviceService_ListLogs_FullMethodName  = "/device.v1.DeviceService/ListLogs"
-	DeviceService_AddKey_FullMethodName    = "/device.v1.DeviceService/AddKey"
-	DeviceService_RemoveKey_FullMethodName = "/device.v1.DeviceService/RemoveKey"
-	DeviceService_ListKeys_FullMethodName  = "/device.v1.DeviceService/ListKeys"
+	DeviceService_GetById_FullMethodName        = "/device.v1.DeviceService/GetById"
+	DeviceService_GetBySessionId_FullMethodName = "/device.v1.DeviceService/GetBySessionId"
+	DeviceService_Search_FullMethodName         = "/device.v1.DeviceService/Search"
+	DeviceService_Create_FullMethodName         = "/device.v1.DeviceService/Create"
+	DeviceService_Update_FullMethodName         = "/device.v1.DeviceService/Update"
+	DeviceService_Remove_FullMethodName         = "/device.v1.DeviceService/Remove"
+	DeviceService_Log_FullMethodName            = "/device.v1.DeviceService/Log"
+	DeviceService_ListLogs_FullMethodName       = "/device.v1.DeviceService/ListLogs"
+	DeviceService_AddKey_FullMethodName         = "/device.v1.DeviceService/AddKey"
+	DeviceService_RemoveKey_FullMethodName      = "/device.v1.DeviceService/RemoveKey"
+	DeviceService_ListKeys_FullMethodName       = "/device.v1.DeviceService/ListKeys"
 )
 
 // DeviceServiceClient is the client API for DeviceService service.
@@ -53,6 +54,8 @@ const (
 type DeviceServiceClient interface {
 	// Obtains a device by its hash
 	GetById(ctx context.Context, in *GetByIdRequest, opts ...grpc.CallOption) (*GetByIdResponse, error)
+	// Obtains a device by its session id
+	GetBySessionId(ctx context.Context, in *GetBySessionIdRequest, opts ...grpc.CallOption) (*GetBySessionIdResponse, error)
 	// Obtains a device by its hash
 	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error)
 	// Creates a new device based on the request.
@@ -85,6 +88,16 @@ func (c *deviceServiceClient) GetById(ctx context.Context, in *GetByIdRequest, o
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetByIdResponse)
 	err := c.cc.Invoke(ctx, DeviceService_GetById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deviceServiceClient) GetBySessionId(ctx context.Context, in *GetBySessionIdRequest, opts ...grpc.CallOption) (*GetBySessionIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBySessionIdResponse)
+	err := c.cc.Invoke(ctx, DeviceService_GetBySessionId_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -216,6 +229,8 @@ type DeviceService_ListKeysClient = grpc.ServerStreamingClient[ListKeysResponse]
 type DeviceServiceServer interface {
 	// Obtains a device by its hash
 	GetById(context.Context, *GetByIdRequest) (*GetByIdResponse, error)
+	// Obtains a device by its session id
+	GetBySessionId(context.Context, *GetBySessionIdRequest) (*GetBySessionIdResponse, error)
 	// Obtains a device by its hash
 	Search(*SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error
 	// Creates a new device based on the request.
@@ -246,6 +261,9 @@ type UnimplementedDeviceServiceServer struct{}
 
 func (UnimplementedDeviceServiceServer) GetById(context.Context, *GetByIdRequest) (*GetByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetById not implemented")
+}
+func (UnimplementedDeviceServiceServer) GetBySessionId(context.Context, *GetBySessionIdRequest) (*GetBySessionIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBySessionId not implemented")
 }
 func (UnimplementedDeviceServiceServer) Search(*SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method Search not implemented")
@@ -309,6 +327,24 @@ func _DeviceService_GetById_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DeviceServiceServer).GetById(ctx, req.(*GetByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeviceService_GetBySessionId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBySessionIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceServiceServer).GetBySessionId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceService_GetBySessionId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceServiceServer).GetBySessionId(ctx, req.(*GetBySessionIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -464,6 +500,10 @@ var DeviceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetById",
 			Handler:    _DeviceService_GetById_Handler,
+		},
+		{
+			MethodName: "GetBySessionId",
+			Handler:    _DeviceService_GetBySessionId_Handler,
 		},
 		{
 			MethodName: "Create",

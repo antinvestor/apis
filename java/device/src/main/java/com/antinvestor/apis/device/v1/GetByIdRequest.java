@@ -100,6 +100,17 @@ private static final long serialVersionUID = 0L;
     return id_.getByteString(index);
   }
 
+  public static final int EXTENSIVE_FIELD_NUMBER = 2;
+  private boolean extensive_ = false;
+  /**
+   * <code>bool extensive = 2 [json_name = "extensive"];</code>
+   * @return The extensive.
+   */
+  @java.lang.Override
+  public boolean getExtensive() {
+    return extensive_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -116,6 +127,9 @@ private static final long serialVersionUID = 0L;
                       throws java.io.IOException {
     for (int i = 0; i < id_.size(); i++) {
       com.google.protobuf.GeneratedMessage.writeString(output, 1, id_.getRaw(i));
+    }
+    if (extensive_ != false) {
+      output.writeBool(2, extensive_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -134,6 +148,10 @@ private static final long serialVersionUID = 0L;
       size += dataSize;
       size += 1 * getIdList().size();
     }
+    if (extensive_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(2, extensive_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -151,6 +169,8 @@ private static final long serialVersionUID = 0L;
 
     if (!getIdList()
         .equals(other.getIdList())) return false;
+    if (getExtensive()
+        != other.getExtensive()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -166,6 +186,9 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getIdList().hashCode();
     }
+    hash = (37 * hash) + EXTENSIVE_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getExtensive());
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -303,6 +326,7 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       id_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
+      extensive_ = false;
       return this;
     }
 
@@ -340,6 +364,9 @@ private static final long serialVersionUID = 0L;
         id_.makeImmutable();
         result.id_ = id_;
       }
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.extensive_ = extensive_;
+      }
     }
 
     @java.lang.Override
@@ -363,6 +390,9 @@ private static final long serialVersionUID = 0L;
           id_.addAll(other.id_);
         }
         onChanged();
+      }
+      if (other.getExtensive() != false) {
+        setExtensive(other.getExtensive());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -396,6 +426,11 @@ private static final long serialVersionUID = 0L;
               id_.add(s);
               break;
             } // case 10
+            case 16: {
+              extensive_ = input.readBool();
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 16
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -520,6 +555,38 @@ private static final long serialVersionUID = 0L;
       ensureIdIsMutable();
       id_.add(value);
       bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+
+    private boolean extensive_ ;
+    /**
+     * <code>bool extensive = 2 [json_name = "extensive"];</code>
+     * @return The extensive.
+     */
+    @java.lang.Override
+    public boolean getExtensive() {
+      return extensive_;
+    }
+    /**
+     * <code>bool extensive = 2 [json_name = "extensive"];</code>
+     * @param value The extensive to set.
+     * @return This builder for chaining.
+     */
+    public Builder setExtensive(boolean value) {
+
+      extensive_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool extensive = 2 [json_name = "extensive"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearExtensive() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      extensive_ = false;
       onChanged();
       return this;
     }

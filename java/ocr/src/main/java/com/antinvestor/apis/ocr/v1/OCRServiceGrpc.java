@@ -18,9 +18,6 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.73.0)",
-    comments = "Source: ocr/v1/ocr.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class OCRServiceGrpc {
 
@@ -246,8 +243,8 @@ public final class OCRServiceGrpc {
      * Perform a new ocr process request
      * </pre>
      */
-    public com.antinvestor.apis.ocr.v1.RecognizeResponse recognize(com.antinvestor.apis.ocr.v1.RecognizeRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.ocr.v1.RecognizeResponse recognize(com.antinvestor.apis.ocr.v1.RecognizeRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getRecognizeMethod(), getCallOptions(), request);
     }
 
@@ -256,8 +253,8 @@ public final class OCRServiceGrpc {
      * Check the status of request if queued
      * </pre>
      */
-    public com.antinvestor.apis.ocr.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.ocr.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getStatusMethod(), getCallOptions(), request);
     }
   }

@@ -21,9 +21,6 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
  * The ledger service definition.
  * </pre>
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.73.0)",
-    comments = "Source: ledger/v1/ledger.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class LedgerServiceGrpc {
 
@@ -741,8 +738,8 @@ public final class LedgerServiceGrpc {
      * Creates a new ledger based on supplied data
      * </pre>
      */
-    public com.antinvestor.apis.ledger.v1.Ledger createLedger(com.antinvestor.apis.ledger.v1.Ledger request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.ledger.v1.Ledger createLedger(com.antinvestor.apis.ledger.v1.Ledger request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreateLedgerMethod(), getCallOptions(), request);
     }
 
@@ -751,8 +748,8 @@ public final class LedgerServiceGrpc {
      * Updates the data component of the ledger.
      * </pre>
      */
-    public com.antinvestor.apis.ledger.v1.Ledger updateLedger(com.antinvestor.apis.ledger.v1.Ledger request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.ledger.v1.Ledger updateLedger(com.antinvestor.apis.ledger.v1.Ledger request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getUpdateLedgerMethod(), getCallOptions(), request);
     }
 
@@ -773,8 +770,8 @@ public final class LedgerServiceGrpc {
      * Creates a new account based on supplied data
      * </pre>
      */
-    public com.antinvestor.apis.ledger.v1.Account createAccount(com.antinvestor.apis.ledger.v1.Account request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.ledger.v1.Account createAccount(com.antinvestor.apis.ledger.v1.Account request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreateAccountMethod(), getCallOptions(), request);
     }
 
@@ -783,8 +780,8 @@ public final class LedgerServiceGrpc {
      * Updates the data component of the account.
      * </pre>
      */
-    public com.antinvestor.apis.ledger.v1.Account updateAccount(com.antinvestor.apis.ledger.v1.Account request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.ledger.v1.Account updateAccount(com.antinvestor.apis.ledger.v1.Account request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getUpdateAccountMethod(), getCallOptions(), request);
     }
 
@@ -805,8 +802,8 @@ public final class LedgerServiceGrpc {
      * Creates a new transaction
      * </pre>
      */
-    public com.antinvestor.apis.ledger.v1.Transaction createTransaction(com.antinvestor.apis.ledger.v1.Transaction request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.ledger.v1.Transaction createTransaction(com.antinvestor.apis.ledger.v1.Transaction request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreateTransactionMethod(), getCallOptions(), request);
     }
 
@@ -815,8 +812,8 @@ public final class LedgerServiceGrpc {
      * Reverses a transaction by creating a new one with inverted entries
      * </pre>
      */
-    public com.antinvestor.apis.ledger.v1.Transaction reverseTransaction(com.antinvestor.apis.ledger.v1.Transaction request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.ledger.v1.Transaction reverseTransaction(com.antinvestor.apis.ledger.v1.Transaction request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getReverseTransactionMethod(), getCallOptions(), request);
     }
 
@@ -825,8 +822,8 @@ public final class LedgerServiceGrpc {
      * Updates a transaction's details
      * </pre>
      */
-    public com.antinvestor.apis.ledger.v1.Transaction updateTransaction(com.antinvestor.apis.ledger.v1.Transaction request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.ledger.v1.Transaction updateTransaction(com.antinvestor.apis.ledger.v1.Transaction request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getUpdateTransactionMethod(), getCallOptions(), request);
     }
 

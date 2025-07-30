@@ -48,4 +48,10 @@ public interface GetByIdRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getIdBytes(int index);
+
+  /**
+   * <code>bool extensive = 2 [json_name = "extensive"];</code>
+   * @return The extensive.
+   */
+  boolean getExtensive();
 }

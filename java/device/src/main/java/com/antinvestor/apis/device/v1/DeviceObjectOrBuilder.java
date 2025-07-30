@@ -175,4 +175,16 @@ java.lang.String defaultValue);
    */
   java.lang.String getPropertiesOrThrow(
       java.lang.String key);
+
+  /**
+   * <code>string session_id = 10 [json_name = "sessionId"];</code>
+   * @return The sessionId.
+   */
+  java.lang.String getSessionId();
+  /**
+   * <code>string session_id = 10 [json_name = "sessionId"];</code>
+   * @return The bytes for sessionId.
+   */
+  com.google.protobuf.ByteString
+      getSessionIdBytes();
 }

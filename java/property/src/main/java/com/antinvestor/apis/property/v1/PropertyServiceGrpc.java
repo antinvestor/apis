@@ -18,9 +18,6 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.73.0)",
-    comments = "Source: property/v1/property.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class PropertyServiceGrpc {
 
@@ -818,8 +815,8 @@ public final class PropertyServiceGrpc {
      *Create method for adding a new property type into the system
      * </pre>
      */
-    public com.antinvestor.apis.property.v1.AddPropertyTypeResponse addPropertyType(com.antinvestor.apis.property.v1.AddPropertyTypeRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.property.v1.AddPropertyTypeResponse addPropertyType(com.antinvestor.apis.property.v1.AddPropertyTypeRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getAddPropertyTypeMethod(), getCallOptions(), request);
     }
 
@@ -840,8 +837,8 @@ public final class PropertyServiceGrpc {
      *Create method for adding a new locality into the system
      * </pre>
      */
-    public com.antinvestor.apis.property.v1.AddLocalityResponse addLocality(com.antinvestor.apis.property.v1.AddLocalityRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.property.v1.AddLocalityResponse addLocality(com.antinvestor.apis.property.v1.AddLocalityRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getAddLocalityMethod(), getCallOptions(), request);
     }
 
@@ -850,8 +847,8 @@ public final class PropertyServiceGrpc {
      *Delete method for removing an existing locality from the system
      * </pre>
      */
-    public com.antinvestor.apis.property.v1.DeleteLocalityResponse deleteLocality(com.antinvestor.apis.property.v1.DeleteLocalityRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.property.v1.DeleteLocalityResponse deleteLocality(com.antinvestor.apis.property.v1.DeleteLocalityRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getDeleteLocalityMethod(), getCallOptions(), request);
     }
 
@@ -860,8 +857,8 @@ public final class PropertyServiceGrpc {
      *Create method for adding a new property into the system
      * </pre>
      */
-    public com.antinvestor.apis.property.v1.CreatePropertyResponse createProperty(com.antinvestor.apis.property.v1.CreatePropertyRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.property.v1.CreatePropertyResponse createProperty(com.antinvestor.apis.property.v1.CreatePropertyRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getCreatePropertyMethod(), getCallOptions(), request);
     }
 
@@ -870,8 +867,8 @@ public final class PropertyServiceGrpc {
      *Update property request to modify its current form to another
      * </pre>
      */
-    public com.antinvestor.apis.property.v1.UpdatePropertyResponse updateProperty(com.antinvestor.apis.property.v1.UpdatePropertyRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.property.v1.UpdatePropertyResponse updateProperty(com.antinvestor.apis.property.v1.UpdatePropertyRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getUpdatePropertyMethod(), getCallOptions(), request);
     }
 
@@ -880,8 +877,8 @@ public final class PropertyServiceGrpc {
      *Delete property request to modify its current form to another
      * </pre>
      */
-    public com.antinvestor.apis.property.v1.DeletePropertyResponse deleteProperty(com.antinvestor.apis.property.v1.DeletePropertyRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.property.v1.DeletePropertyResponse deleteProperty(com.antinvestor.apis.property.v1.DeletePropertyRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getDeletePropertyMethod(), getCallOptions(), request);
     }
 
@@ -890,8 +887,8 @@ public final class PropertyServiceGrpc {
      *State request to determine active state and status of a property
      * </pre>
      */
-    public com.antinvestor.apis.property.v1.StateOfPropertyResponse stateOfProperty(com.antinvestor.apis.property.v1.StateOfPropertyRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.property.v1.StateOfPropertyResponse stateOfProperty(com.antinvestor.apis.property.v1.StateOfPropertyRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getStateOfPropertyMethod(), getCallOptions(), request);
     }
 
@@ -936,8 +933,8 @@ public final class PropertyServiceGrpc {
      *AddSubscription for a profile to a property
      * </pre>
      */
-    public com.antinvestor.apis.property.v1.AddSubscriptionResponse addSubscription(com.antinvestor.apis.property.v1.AddSubscriptionRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.property.v1.AddSubscriptionResponse addSubscription(com.antinvestor.apis.property.v1.AddSubscriptionRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getAddSubscriptionMethod(), getCallOptions(), request);
     }
 
@@ -946,8 +943,8 @@ public final class PropertyServiceGrpc {
      *Delete subscription of profile to a property
      * </pre>
      */
-    public com.antinvestor.apis.property.v1.DeleteSubscriptionResponse deleteSubscription(com.antinvestor.apis.property.v1.DeleteSubscriptionRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+    public com.antinvestor.apis.property.v1.DeleteSubscriptionResponse deleteSubscription(com.antinvestor.apis.property.v1.DeleteSubscriptionRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getDeleteSubscriptionMethod(), getCallOptions(), request);
     }
   }

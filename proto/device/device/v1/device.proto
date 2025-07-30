@@ -90,6 +90,7 @@ message DeviceLog {
   string last_seen = 8;
   map<string, string> location = 9;
   map<string, string> extra = 10;
+  string session_id = 11;
 }
 
 // The response message containing the full device object
@@ -107,6 +108,7 @@ message DeviceObject {
   string last_seen = 7;
   map<string, string> location = 8;
   map<string, string> properties = 9;
+  string session_id = 10;
 }
 
 // The request message containing the device's hash
@@ -118,10 +120,24 @@ message GetByIdRequest {
       pattern: "[0-9a-z_-]{3,20}"
     }
   }];
+  bool extensive = 2;
 }
 
 message GetByIdResponse {
   repeated DeviceObject data = 1;
+}
+
+// The request message containing the device's hash
+message GetBySessionIdRequest {
+  string id = 1 [(buf.validate.field).string = {
+    min_len: 3
+    max_len: 40
+    pattern: "[0-9a-z_-]{3,20}"
+  }];
+}
+
+message GetBySessionIdResponse {
+  DeviceObject data = 1;
 }
 
 message SearchRequest {
@@ -264,12 +280,14 @@ service DeviceService {
   rpc GetById(GetByIdRequest) returns (GetByIdResponse) {
     option (google.api.http) = {get: "/{id}"};
   }
-
+  // Obtains a device by its session id
+  rpc GetBySessionId(GetBySessionIdRequest) returns (GetBySessionIdResponse) {
+    option (google.api.http) = {get: "/session/{id}"};
+  }
   // Obtains a device by its hash
   rpc Search(SearchRequest) returns (stream SearchResponse) {
     option (google.api.http) = {get: "/search"};
   }
-
   // Creates a new device based on the request.
   rpc Create(CreateRequest) returns (CreateResponse) {
     option (google.api.http) = {
@@ -277,7 +295,6 @@ service DeviceService {
       body: "*"
     };
   }
-
   // Updates an existing device based on the request.
   rpc Update(UpdateRequest) returns (UpdateResponse) {
     option (google.api.http) = {
