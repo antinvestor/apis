@@ -114,14 +114,14 @@ message DeviceObject {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   string name = 2;
-  string ip = 3;
-  string locale = 4;
+  string session_id = 3;
+  string ip = 4;
   string user_agent = 5;
   string os = 6;
   string last_seen = 7;
-  map<string, string> location = 8;
-  map<string, string> properties = 9;
-  string session_id = 10;
+  map<string, string> locale = 9;
+  map<string, string> location = 11;
+  map<string, string> properties = 15;
 }
 
 // The request message containing the device's hash

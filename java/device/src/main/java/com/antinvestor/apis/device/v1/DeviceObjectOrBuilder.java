@@ -49,28 +49,28 @@ public interface DeviceObjectOrBuilder extends
       getNameBytes();
 
   /**
-   * <code>string ip = 3 [json_name = "ip"];</code>
+   * <code>string session_id = 3 [json_name = "sessionId"];</code>
+   * @return The sessionId.
+   */
+  java.lang.String getSessionId();
+  /**
+   * <code>string session_id = 3 [json_name = "sessionId"];</code>
+   * @return The bytes for sessionId.
+   */
+  com.google.protobuf.ByteString
+      getSessionIdBytes();
+
+  /**
+   * <code>string ip = 4 [json_name = "ip"];</code>
    * @return The ip.
    */
   java.lang.String getIp();
   /**
-   * <code>string ip = 3 [json_name = "ip"];</code>
+   * <code>string ip = 4 [json_name = "ip"];</code>
    * @return The bytes for ip.
    */
   com.google.protobuf.ByteString
       getIpBytes();
-
-  /**
-   * <code>string locale = 4 [json_name = "locale"];</code>
-   * @return The locale.
-   */
-  java.lang.String getLocale();
-  /**
-   * <code>string locale = 4 [json_name = "locale"];</code>
-   * @return The bytes for locale.
-   */
-  com.google.protobuf.ByteString
-      getLocaleBytes();
 
   /**
    * <code>string user_agent = 5 [json_name = "userAgent"];</code>
@@ -109,11 +109,45 @@ public interface DeviceObjectOrBuilder extends
       getLastSeenBytes();
 
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   */
+  int getLocaleCount();
+  /**
+   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   */
+  boolean containsLocale(
+      java.lang.String key);
+  /**
+   * Use {@link #getLocaleMap()} instead.
+   */
+  @java.lang.Deprecated
+  java.util.Map<java.lang.String, java.lang.String>
+  getLocale();
+  /**
+   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   */
+  java.util.Map<java.lang.String, java.lang.String>
+  getLocaleMap();
+  /**
+   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   */
+  /* nullable */
+java.lang.String getLocaleOrDefault(
+      java.lang.String key,
+      /* nullable */
+java.lang.String defaultValue);
+  /**
+   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   */
+  java.lang.String getLocaleOrThrow(
+      java.lang.String key);
+
+  /**
+   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
    */
   int getLocationCount();
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
    */
   boolean containsLocation(
       java.lang.String key);
@@ -124,12 +158,12 @@ public interface DeviceObjectOrBuilder extends
   java.util.Map<java.lang.String, java.lang.String>
   getLocation();
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
   getLocationMap();
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
    */
   /* nullable */
 java.lang.String getLocationOrDefault(
@@ -137,17 +171,17 @@ java.lang.String getLocationOrDefault(
       /* nullable */
 java.lang.String defaultValue);
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
    */
   java.lang.String getLocationOrThrow(
       java.lang.String key);
 
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
    */
   int getPropertiesCount();
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
    */
   boolean containsProperties(
       java.lang.String key);
@@ -158,12 +192,12 @@ java.lang.String defaultValue);
   java.util.Map<java.lang.String, java.lang.String>
   getProperties();
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
   getPropertiesMap();
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
    */
   /* nullable */
 java.lang.String getPropertiesOrDefault(
@@ -171,20 +205,8 @@ java.lang.String getPropertiesOrDefault(
       /* nullable */
 java.lang.String defaultValue);
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
    */
   java.lang.String getPropertiesOrThrow(
       java.lang.String key);
-
-  /**
-   * <code>string session_id = 10 [json_name = "sessionId"];</code>
-   * @return The sessionId.
-   */
-  java.lang.String getSessionId();
-  /**
-   * <code>string session_id = 10 [json_name = "sessionId"];</code>
-   * @return The bytes for sessionId.
-   */
-  com.google.protobuf.ByteString
-      getSessionIdBytes();
 }

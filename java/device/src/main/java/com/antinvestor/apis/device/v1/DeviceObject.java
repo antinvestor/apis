@@ -48,12 +48,11 @@ private static final long serialVersionUID = 0L;
   private DeviceObject() {
     id_ = "";
     name_ = "";
+    sessionId_ = "";
     ip_ = "";
-    locale_ = "";
     userAgent_ = "";
     os_ = "";
     lastSeen_ = "";
-    sessionId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -66,9 +65,11 @@ private static final long serialVersionUID = 0L;
   protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
       int number) {
     switch (number) {
-      case 8:
-        return internalGetLocation();
       case 9:
+        return internalGetLocale();
+      case 11:
+        return internalGetLocation();
+      case 15:
         return internalGetProperties();
       default:
         throw new RuntimeException(
@@ -161,11 +162,50 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int IP_FIELD_NUMBER = 3;
+  public static final int SESSION_ID_FIELD_NUMBER = 3;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object sessionId_ = "";
+  /**
+   * <code>string session_id = 3 [json_name = "sessionId"];</code>
+   * @return The sessionId.
+   */
+  @java.lang.Override
+  public java.lang.String getSessionId() {
+    java.lang.Object ref = sessionId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      sessionId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string session_id = 3 [json_name = "sessionId"];</code>
+   * @return The bytes for sessionId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getSessionIdBytes() {
+    java.lang.Object ref = sessionId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      sessionId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int IP_FIELD_NUMBER = 4;
   @SuppressWarnings("serial")
   private volatile java.lang.Object ip_ = "";
   /**
-   * <code>string ip = 3 [json_name = "ip"];</code>
+   * <code>string ip = 4 [json_name = "ip"];</code>
    * @return The ip.
    */
   @java.lang.Override
@@ -182,7 +222,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string ip = 3 [json_name = "ip"];</code>
+   * <code>string ip = 4 [json_name = "ip"];</code>
    * @return The bytes for ip.
    */
   @java.lang.Override
@@ -194,45 +234,6 @@ private static final long serialVersionUID = 0L;
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
       ip_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int LOCALE_FIELD_NUMBER = 4;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object locale_ = "";
-  /**
-   * <code>string locale = 4 [json_name = "locale"];</code>
-   * @return The locale.
-   */
-  @java.lang.Override
-  public java.lang.String getLocale() {
-    java.lang.Object ref = locale_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      locale_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string locale = 4 [json_name = "locale"];</code>
-   * @return The bytes for locale.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getLocaleBytes() {
-    java.lang.Object ref = locale_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      locale_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -356,7 +357,86 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int LOCATION_FIELD_NUMBER = 8;
+  public static final int LOCALE_FIELD_NUMBER = 9;
+  private static final class LocaleDefaultEntryHolder {
+    static final com.google.protobuf.MapEntry<
+        java.lang.String, java.lang.String> defaultEntry =
+            com.google.protobuf.MapEntry
+            .<java.lang.String, java.lang.String>newDefaultInstance(
+                com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_LocaleEntry_descriptor, 
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "",
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "");
+  }
+  @SuppressWarnings("serial")
+  private com.google.protobuf.MapField<
+      java.lang.String, java.lang.String> locale_;
+  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+  internalGetLocale() {
+    if (locale_ == null) {
+      return com.google.protobuf.MapField.emptyMapField(
+          LocaleDefaultEntryHolder.defaultEntry);
+    }
+    return locale_;
+  }
+  public int getLocaleCount() {
+    return internalGetLocale().getMap().size();
+  }
+  /**
+   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   */
+  @java.lang.Override
+  public boolean containsLocale(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    return internalGetLocale().getMap().containsKey(key);
+  }
+  /**
+   * Use {@link #getLocaleMap()} instead.
+   */
+  @java.lang.Override
+  @java.lang.Deprecated
+  public java.util.Map<java.lang.String, java.lang.String> getLocale() {
+    return getLocaleMap();
+  }
+  /**
+   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   */
+  @java.lang.Override
+  public java.util.Map<java.lang.String, java.lang.String> getLocaleMap() {
+    return internalGetLocale().getMap();
+  }
+  /**
+   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   */
+  @java.lang.Override
+  public /* nullable */
+java.lang.String getLocaleOrDefault(
+      java.lang.String key,
+      /* nullable */
+java.lang.String defaultValue) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, java.lang.String> map =
+        internalGetLocale().getMap();
+    return map.containsKey(key) ? map.get(key) : defaultValue;
+  }
+  /**
+   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   */
+  @java.lang.Override
+  public java.lang.String getLocaleOrThrow(
+      java.lang.String key) {
+    if (key == null) { throw new NullPointerException("map key"); }
+    java.util.Map<java.lang.String, java.lang.String> map =
+        internalGetLocale().getMap();
+    if (!map.containsKey(key)) {
+      throw new java.lang.IllegalArgumentException();
+    }
+    return map.get(key);
+  }
+
+  public static final int LOCATION_FIELD_NUMBER = 11;
   private static final class LocationDefaultEntryHolder {
     static final com.google.protobuf.MapEntry<
         java.lang.String, java.lang.String> defaultEntry =
@@ -383,7 +463,7 @@ private static final long serialVersionUID = 0L;
     return internalGetLocation().getMap().size();
   }
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
    */
   @java.lang.Override
   public boolean containsLocation(
@@ -400,14 +480,14 @@ private static final long serialVersionUID = 0L;
     return getLocationMap();
   }
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
    */
   @java.lang.Override
   public java.util.Map<java.lang.String, java.lang.String> getLocationMap() {
     return internalGetLocation().getMap();
   }
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
    */
   @java.lang.Override
   public /* nullable */
@@ -421,7 +501,7 @@ java.lang.String defaultValue) {
     return map.containsKey(key) ? map.get(key) : defaultValue;
   }
   /**
-   * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
    */
   @java.lang.Override
   public java.lang.String getLocationOrThrow(
@@ -435,7 +515,7 @@ java.lang.String defaultValue) {
     return map.get(key);
   }
 
-  public static final int PROPERTIES_FIELD_NUMBER = 9;
+  public static final int PROPERTIES_FIELD_NUMBER = 15;
   private static final class PropertiesDefaultEntryHolder {
     static final com.google.protobuf.MapEntry<
         java.lang.String, java.lang.String> defaultEntry =
@@ -462,7 +542,7 @@ java.lang.String defaultValue) {
     return internalGetProperties().getMap().size();
   }
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
    */
   @java.lang.Override
   public boolean containsProperties(
@@ -479,14 +559,14 @@ java.lang.String defaultValue) {
     return getPropertiesMap();
   }
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
    */
   @java.lang.Override
   public java.util.Map<java.lang.String, java.lang.String> getPropertiesMap() {
     return internalGetProperties().getMap();
   }
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
    */
   @java.lang.Override
   public /* nullable */
@@ -500,7 +580,7 @@ java.lang.String defaultValue) {
     return map.containsKey(key) ? map.get(key) : defaultValue;
   }
   /**
-   * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
    */
   @java.lang.Override
   public java.lang.String getPropertiesOrThrow(
@@ -512,45 +592,6 @@ java.lang.String defaultValue) {
       throw new java.lang.IllegalArgumentException();
     }
     return map.get(key);
-  }
-
-  public static final int SESSION_ID_FIELD_NUMBER = 10;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object sessionId_ = "";
-  /**
-   * <code>string session_id = 10 [json_name = "sessionId"];</code>
-   * @return The sessionId.
-   */
-  @java.lang.Override
-  public java.lang.String getSessionId() {
-    java.lang.Object ref = sessionId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      sessionId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string session_id = 10 [json_name = "sessionId"];</code>
-   * @return The bytes for sessionId.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getSessionIdBytes() {
-    java.lang.Object ref = sessionId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      sessionId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -573,11 +614,11 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, name_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(ip_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 3, ip_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(sessionId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 3, sessionId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(locale_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 4, locale_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(ip_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 4, ip_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(userAgent_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 5, userAgent_);
@@ -591,18 +632,21 @@ java.lang.String defaultValue) {
     com.google.protobuf.GeneratedMessage
       .serializeStringMapTo(
         output,
+        internalGetLocale(),
+        LocaleDefaultEntryHolder.defaultEntry,
+        9);
+    com.google.protobuf.GeneratedMessage
+      .serializeStringMapTo(
+        output,
         internalGetLocation(),
         LocationDefaultEntryHolder.defaultEntry,
-        8);
+        11);
     com.google.protobuf.GeneratedMessage
       .serializeStringMapTo(
         output,
         internalGetProperties(),
         PropertiesDefaultEntryHolder.defaultEntry,
-        9);
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(sessionId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 10, sessionId_);
-    }
+        15);
     getUnknownFields().writeTo(output);
   }
 
@@ -618,11 +662,11 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(2, name_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(ip_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, ip_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(sessionId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, sessionId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(locale_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(4, locale_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(ip_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(4, ip_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(userAgent_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(5, userAgent_);
@@ -634,6 +678,16 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(7, lastSeen_);
     }
     for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
+         : internalGetLocale().getMap().entrySet()) {
+      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+      locale__ = LocaleDefaultEntryHolder.defaultEntry.newBuilderForType()
+          .setKey(entry.getKey())
+          .setValue(entry.getValue())
+          .build();
+      size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, locale__);
+    }
+    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
          : internalGetLocation().getMap().entrySet()) {
       com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
       location__ = LocationDefaultEntryHolder.defaultEntry.newBuilderForType()
@@ -641,7 +695,7 @@ java.lang.String defaultValue) {
           .setValue(entry.getValue())
           .build();
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, location__);
+          .computeMessageSize(11, location__);
     }
     for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
          : internalGetProperties().getMap().entrySet()) {
@@ -651,10 +705,7 @@ java.lang.String defaultValue) {
           .setValue(entry.getValue())
           .build();
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, properties__);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(sessionId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(10, sessionId_);
+          .computeMessageSize(15, properties__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -675,22 +726,22 @@ java.lang.String defaultValue) {
         .equals(other.getId())) return false;
     if (!getName()
         .equals(other.getName())) return false;
+    if (!getSessionId()
+        .equals(other.getSessionId())) return false;
     if (!getIp()
         .equals(other.getIp())) return false;
-    if (!getLocale()
-        .equals(other.getLocale())) return false;
     if (!getUserAgent()
         .equals(other.getUserAgent())) return false;
     if (!getOs()
         .equals(other.getOs())) return false;
     if (!getLastSeen()
         .equals(other.getLastSeen())) return false;
+    if (!internalGetLocale().equals(
+        other.internalGetLocale())) return false;
     if (!internalGetLocation().equals(
         other.internalGetLocation())) return false;
     if (!internalGetProperties().equals(
         other.internalGetProperties())) return false;
-    if (!getSessionId()
-        .equals(other.getSessionId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -706,16 +757,20 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + NAME_FIELD_NUMBER;
     hash = (53 * hash) + getName().hashCode();
+    hash = (37 * hash) + SESSION_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getSessionId().hashCode();
     hash = (37 * hash) + IP_FIELD_NUMBER;
     hash = (53 * hash) + getIp().hashCode();
-    hash = (37 * hash) + LOCALE_FIELD_NUMBER;
-    hash = (53 * hash) + getLocale().hashCode();
     hash = (37 * hash) + USER_AGENT_FIELD_NUMBER;
     hash = (53 * hash) + getUserAgent().hashCode();
     hash = (37 * hash) + OS_FIELD_NUMBER;
     hash = (53 * hash) + getOs().hashCode();
     hash = (37 * hash) + LAST_SEEN_FIELD_NUMBER;
     hash = (53 * hash) + getLastSeen().hashCode();
+    if (!internalGetLocale().getMap().isEmpty()) {
+      hash = (37 * hash) + LOCALE_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetLocale().hashCode();
+    }
     if (!internalGetLocation().getMap().isEmpty()) {
       hash = (37 * hash) + LOCATION_FIELD_NUMBER;
       hash = (53 * hash) + internalGetLocation().hashCode();
@@ -724,8 +779,6 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + PROPERTIES_FIELD_NUMBER;
       hash = (53 * hash) + internalGetProperties().hashCode();
     }
-    hash = (37 * hash) + SESSION_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getSessionId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -843,9 +896,11 @@ java.lang.String defaultValue) {
     protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
         int number) {
       switch (number) {
-        case 8:
-          return internalGetLocation();
         case 9:
+          return internalGetLocale();
+        case 11:
+          return internalGetLocation();
+        case 15:
           return internalGetProperties();
         default:
           throw new RuntimeException(
@@ -856,9 +911,11 @@ java.lang.String defaultValue) {
     protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
         int number) {
       switch (number) {
-        case 8:
-          return internalGetMutableLocation();
         case 9:
+          return internalGetMutableLocale();
+        case 11:
+          return internalGetMutableLocation();
+        case 15:
           return internalGetMutableProperties();
         default:
           throw new RuntimeException(
@@ -889,14 +946,14 @@ java.lang.String defaultValue) {
       bitField0_ = 0;
       id_ = "";
       name_ = "";
+      sessionId_ = "";
       ip_ = "";
-      locale_ = "";
       userAgent_ = "";
       os_ = "";
       lastSeen_ = "";
+      internalGetMutableLocale().clear();
       internalGetMutableLocation().clear();
       internalGetMutableProperties().clear();
-      sessionId_ = "";
       return this;
     }
 
@@ -937,10 +994,10 @@ java.lang.String defaultValue) {
         result.name_ = name_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.ip_ = ip_;
+        result.sessionId_ = sessionId_;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.locale_ = locale_;
+        result.ip_ = ip_;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
         result.userAgent_ = userAgent_;
@@ -952,15 +1009,16 @@ java.lang.String defaultValue) {
         result.lastSeen_ = lastSeen_;
       }
       if (((from_bitField0_ & 0x00000080) != 0)) {
+        result.locale_ = internalGetLocale();
+        result.locale_.makeImmutable();
+      }
+      if (((from_bitField0_ & 0x00000100) != 0)) {
         result.location_ = internalGetLocation();
         result.location_.makeImmutable();
       }
-      if (((from_bitField0_ & 0x00000100) != 0)) {
+      if (((from_bitField0_ & 0x00000200) != 0)) {
         result.properties_ = internalGetProperties();
         result.properties_.makeImmutable();
-      }
-      if (((from_bitField0_ & 0x00000200) != 0)) {
-        result.sessionId_ = sessionId_;
       }
     }
 
@@ -986,13 +1044,13 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000002;
         onChanged();
       }
-      if (!other.getIp().isEmpty()) {
-        ip_ = other.ip_;
+      if (!other.getSessionId().isEmpty()) {
+        sessionId_ = other.sessionId_;
         bitField0_ |= 0x00000004;
         onChanged();
       }
-      if (!other.getLocale().isEmpty()) {
-        locale_ = other.locale_;
+      if (!other.getIp().isEmpty()) {
+        ip_ = other.ip_;
         bitField0_ |= 0x00000008;
         onChanged();
       }
@@ -1011,17 +1069,15 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000040;
         onChanged();
       }
+      internalGetMutableLocale().mergeFrom(
+          other.internalGetLocale());
+      bitField0_ |= 0x00000080;
       internalGetMutableLocation().mergeFrom(
           other.internalGetLocation());
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       internalGetMutableProperties().mergeFrom(
           other.internalGetProperties());
-      bitField0_ |= 0x00000100;
-      if (!other.getSessionId().isEmpty()) {
-        sessionId_ = other.sessionId_;
-        bitField0_ |= 0x00000200;
-        onChanged();
-      }
+      bitField0_ |= 0x00000200;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1059,12 +1115,12 @@ java.lang.String defaultValue) {
               break;
             } // case 18
             case 26: {
-              ip_ = input.readStringRequireUtf8();
+              sessionId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
             } // case 26
             case 34: {
-              locale_ = input.readStringRequireUtf8();
+              ip_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000008;
               break;
             } // case 34
@@ -1083,29 +1139,33 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000040;
               break;
             } // case 58
-            case 66: {
+            case 74: {
+              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+              locale__ = input.readMessage(
+                  LocaleDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              internalGetMutableLocale().getMutableMap().put(
+                  locale__.getKey(), locale__.getValue());
+              bitField0_ |= 0x00000080;
+              break;
+            } // case 74
+            case 90: {
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
               location__ = input.readMessage(
                   LocationDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableLocation().getMutableMap().put(
                   location__.getKey(), location__.getValue());
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000100;
               break;
-            } // case 66
-            case 74: {
+            } // case 90
+            case 122: {
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
               properties__ = input.readMessage(
                   PropertiesDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableProperties().getMutableMap().put(
                   properties__.getKey(), properties__.getValue());
-              bitField0_ |= 0x00000100;
-              break;
-            } // case 74
-            case 82: {
-              sessionId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000200;
               break;
-            } // case 82
+            } // case 122
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1267,9 +1327,81 @@ java.lang.String defaultValue) {
       return this;
     }
 
+    private java.lang.Object sessionId_ = "";
+    /**
+     * <code>string session_id = 3 [json_name = "sessionId"];</code>
+     * @return The sessionId.
+     */
+    public java.lang.String getSessionId() {
+      java.lang.Object ref = sessionId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        sessionId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string session_id = 3 [json_name = "sessionId"];</code>
+     * @return The bytes for sessionId.
+     */
+    public com.google.protobuf.ByteString
+        getSessionIdBytes() {
+      java.lang.Object ref = sessionId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sessionId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string session_id = 3 [json_name = "sessionId"];</code>
+     * @param value The sessionId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setSessionId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      sessionId_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string session_id = 3 [json_name = "sessionId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearSessionId() {
+      sessionId_ = getDefaultInstance().getSessionId();
+      bitField0_ = (bitField0_ & ~0x00000004);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string session_id = 3 [json_name = "sessionId"];</code>
+     * @param value The bytes for sessionId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setSessionIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      sessionId_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+
     private java.lang.Object ip_ = "";
     /**
-     * <code>string ip = 3 [json_name = "ip"];</code>
+     * <code>string ip = 4 [json_name = "ip"];</code>
      * @return The ip.
      */
     public java.lang.String getIp() {
@@ -1285,7 +1417,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string ip = 3 [json_name = "ip"];</code>
+     * <code>string ip = 4 [json_name = "ip"];</code>
      * @return The bytes for ip.
      */
     public com.google.protobuf.ByteString
@@ -1302,7 +1434,7 @@ java.lang.String defaultValue) {
       }
     }
     /**
-     * <code>string ip = 3 [json_name = "ip"];</code>
+     * <code>string ip = 4 [json_name = "ip"];</code>
      * @param value The ip to set.
      * @return This builder for chaining.
      */
@@ -1310,22 +1442,22 @@ java.lang.String defaultValue) {
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       ip_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>string ip = 3 [json_name = "ip"];</code>
+     * <code>string ip = 4 [json_name = "ip"];</code>
      * @return This builder for chaining.
      */
     public Builder clearIp() {
       ip_ = getDefaultInstance().getIp();
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000008);
       onChanged();
       return this;
     }
     /**
-     * <code>string ip = 3 [json_name = "ip"];</code>
+     * <code>string ip = 4 [json_name = "ip"];</code>
      * @param value The bytes for ip to set.
      * @return This builder for chaining.
      */
@@ -1334,78 +1466,6 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       ip_ = value;
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object locale_ = "";
-    /**
-     * <code>string locale = 4 [json_name = "locale"];</code>
-     * @return The locale.
-     */
-    public java.lang.String getLocale() {
-      java.lang.Object ref = locale_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        locale_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string locale = 4 [json_name = "locale"];</code>
-     * @return The bytes for locale.
-     */
-    public com.google.protobuf.ByteString
-        getLocaleBytes() {
-      java.lang.Object ref = locale_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        locale_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string locale = 4 [json_name = "locale"];</code>
-     * @param value The locale to set.
-     * @return This builder for chaining.
-     */
-    public Builder setLocale(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      locale_ = value;
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string locale = 4 [json_name = "locale"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearLocale() {
-      locale_ = getDefaultInstance().getLocale();
-      bitField0_ = (bitField0_ & ~0x00000008);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string locale = 4 [json_name = "locale"];</code>
-     * @param value The bytes for locale to set.
-     * @return This builder for chaining.
-     */
-    public Builder setLocaleBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      locale_ = value;
       bitField0_ |= 0x00000008;
       onChanged();
       return this;
@@ -1628,6 +1688,133 @@ java.lang.String defaultValue) {
     }
 
     private com.google.protobuf.MapField<
+        java.lang.String, java.lang.String> locale_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+        internalGetLocale() {
+      if (locale_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            LocaleDefaultEntryHolder.defaultEntry);
+      }
+      return locale_;
+    }
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+        internalGetMutableLocale() {
+      if (locale_ == null) {
+        locale_ = com.google.protobuf.MapField.newMapField(
+            LocaleDefaultEntryHolder.defaultEntry);
+      }
+      if (!locale_.isMutable()) {
+        locale_ = locale_.copy();
+      }
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return locale_;
+    }
+    public int getLocaleCount() {
+      return internalGetLocale().getMap().size();
+    }
+    /**
+     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+     */
+    @java.lang.Override
+    public boolean containsLocale(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      return internalGetLocale().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getLocaleMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String> getLocale() {
+      return getLocaleMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+     */
+    @java.lang.Override
+    public java.util.Map<java.lang.String, java.lang.String> getLocaleMap() {
+      return internalGetLocale().getMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+     */
+    @java.lang.Override
+    public /* nullable */
+java.lang.String getLocaleOrDefault(
+        java.lang.String key,
+        /* nullable */
+java.lang.String defaultValue) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetLocale().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+     */
+    @java.lang.Override
+    public java.lang.String getLocaleOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetLocale().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+    public Builder clearLocale() {
+      bitField0_ = (bitField0_ & ~0x00000080);
+      internalGetMutableLocale().getMutableMap()
+          .clear();
+      return this;
+    }
+    /**
+     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+     */
+    public Builder removeLocale(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      internalGetMutableLocale().getMutableMap()
+          .remove(key);
+      return this;
+    }
+    /**
+     * Use alternate mutation accessors instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String>
+        getMutableLocale() {
+      bitField0_ |= 0x00000080;
+      return internalGetMutableLocale().getMutableMap();
+    }
+    /**
+     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+     */
+    public Builder putLocale(
+        java.lang.String key,
+        java.lang.String value) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      if (value == null) { throw new NullPointerException("map value"); }
+      internalGetMutableLocale().getMutableMap()
+          .put(key, value);
+      bitField0_ |= 0x00000080;
+      return this;
+    }
+    /**
+     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+     */
+    public Builder putAllLocale(
+        java.util.Map<java.lang.String, java.lang.String> values) {
+      internalGetMutableLocale().getMutableMap()
+          .putAll(values);
+      bitField0_ |= 0x00000080;
+      return this;
+    }
+
+    private com.google.protobuf.MapField<
         java.lang.String, java.lang.String> location_;
     private com.google.protobuf.MapField<java.lang.String, java.lang.String>
         internalGetLocation() {
@@ -1646,7 +1833,7 @@ java.lang.String defaultValue) {
       if (!location_.isMutable()) {
         location_ = location_.copy();
       }
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       onChanged();
       return location_;
     }
@@ -1654,7 +1841,7 @@ java.lang.String defaultValue) {
       return internalGetLocation().getMap().size();
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
      */
     @java.lang.Override
     public boolean containsLocation(
@@ -1671,14 +1858,14 @@ java.lang.String defaultValue) {
       return getLocationMap();
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
      */
     @java.lang.Override
     public java.util.Map<java.lang.String, java.lang.String> getLocationMap() {
       return internalGetLocation().getMap();
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
      */
     @java.lang.Override
     public /* nullable */
@@ -1692,7 +1879,7 @@ java.lang.String defaultValue) {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
      */
     @java.lang.Override
     public java.lang.String getLocationOrThrow(
@@ -1706,13 +1893,13 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearLocation() {
-      bitField0_ = (bitField0_ & ~0x00000080);
+      bitField0_ = (bitField0_ & ~0x00000100);
       internalGetMutableLocation().getMutableMap()
           .clear();
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
      */
     public Builder removeLocation(
         java.lang.String key) {
@@ -1727,11 +1914,11 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableLocation() {
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       return internalGetMutableLocation().getMutableMap();
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
      */
     public Builder putLocation(
         java.lang.String key,
@@ -1740,17 +1927,17 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableLocation().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; location = 8 [json_name = "location"];</code>
+     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
      */
     public Builder putAllLocation(
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableLocation().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       return this;
     }
 
@@ -1773,7 +1960,7 @@ java.lang.String defaultValue) {
       if (!properties_.isMutable()) {
         properties_ = properties_.copy();
       }
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       onChanged();
       return properties_;
     }
@@ -1781,7 +1968,7 @@ java.lang.String defaultValue) {
       return internalGetProperties().getMap().size();
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
      */
     @java.lang.Override
     public boolean containsProperties(
@@ -1798,14 +1985,14 @@ java.lang.String defaultValue) {
       return getPropertiesMap();
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
      */
     @java.lang.Override
     public java.util.Map<java.lang.String, java.lang.String> getPropertiesMap() {
       return internalGetProperties().getMap();
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
      */
     @java.lang.Override
     public /* nullable */
@@ -1819,7 +2006,7 @@ java.lang.String defaultValue) {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
      */
     @java.lang.Override
     public java.lang.String getPropertiesOrThrow(
@@ -1833,13 +2020,13 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearProperties() {
-      bitField0_ = (bitField0_ & ~0x00000100);
+      bitField0_ = (bitField0_ & ~0x00000200);
       internalGetMutableProperties().getMutableMap()
           .clear();
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
      */
     public Builder removeProperties(
         java.lang.String key) {
@@ -1854,11 +2041,11 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableProperties() {
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       return internalGetMutableProperties().getMutableMap();
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
      */
     public Builder putProperties(
         java.lang.String key,
@@ -1867,89 +2054,17 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableProperties().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 9 [json_name = "properties"];</code>
+     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
      */
     public Builder putAllProperties(
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableProperties().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000100;
-      return this;
-    }
-
-    private java.lang.Object sessionId_ = "";
-    /**
-     * <code>string session_id = 10 [json_name = "sessionId"];</code>
-     * @return The sessionId.
-     */
-    public java.lang.String getSessionId() {
-      java.lang.Object ref = sessionId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        sessionId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string session_id = 10 [json_name = "sessionId"];</code>
-     * @return The bytes for sessionId.
-     */
-    public com.google.protobuf.ByteString
-        getSessionIdBytes() {
-      java.lang.Object ref = sessionId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        sessionId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string session_id = 10 [json_name = "sessionId"];</code>
-     * @param value The sessionId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSessionId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      sessionId_ = value;
       bitField0_ |= 0x00000200;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string session_id = 10 [json_name = "sessionId"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearSessionId() {
-      sessionId_ = getDefaultInstance().getSessionId();
-      bitField0_ = (bitField0_ & ~0x00000200);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string session_id = 10 [json_name = "sessionId"];</code>
-     * @param value The bytes for sessionId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSessionIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      sessionId_ = value;
-      bitField0_ |= 0x00000200;
-      onChanged();
       return this;
     }
 

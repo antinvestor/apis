@@ -608,10 +608,10 @@
         "name": {
           "type": "string"
         },
-        "ip": {
+        "sessionId": {
           "type": "string"
         },
-        "locale": {
+        "ip": {
           "type": "string"
         },
         "userAgent": {
@@ -622,6 +622,12 @@
         },
         "lastSeen": {
           "type": "string"
+        },
+        "locale": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "location": {
           "type": "object",
@@ -634,9 +640,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "sessionId": {
-          "type": "string"
         }
       },
       "title": "The response message containing the full device object"

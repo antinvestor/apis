@@ -285,14 +285,14 @@ type DeviceObject struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Ip            string                 `protobuf:"bytes,3,opt,name=ip,proto3" json:"ip,omitempty"`
-	Locale        string                 `protobuf:"bytes,4,opt,name=locale,proto3" json:"locale,omitempty"`
+	SessionId     string                 `protobuf:"bytes,3,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	Ip            string                 `protobuf:"bytes,4,opt,name=ip,proto3" json:"ip,omitempty"`
 	UserAgent     string                 `protobuf:"bytes,5,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
 	Os            string                 `protobuf:"bytes,6,opt,name=os,proto3" json:"os,omitempty"`
 	LastSeen      string                 `protobuf:"bytes,7,opt,name=last_seen,json=lastSeen,proto3" json:"last_seen,omitempty"`
-	Location      map[string]string      `protobuf:"bytes,8,rep,name=location,proto3" json:"location,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Properties    map[string]string      `protobuf:"bytes,9,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	SessionId     string                 `protobuf:"bytes,10,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	Locale        map[string]string      `protobuf:"bytes,9,rep,name=locale,proto3" json:"locale,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Location      map[string]string      `protobuf:"bytes,11,rep,name=location,proto3" json:"location,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    map[string]string      `protobuf:"bytes,15,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -341,16 +341,16 @@ func (x *DeviceObject) GetName() string {
 	return ""
 }
 
-func (x *DeviceObject) GetIp() string {
+func (x *DeviceObject) GetSessionId() string {
 	if x != nil {
-		return x.Ip
+		return x.SessionId
 	}
 	return ""
 }
 
-func (x *DeviceObject) GetLocale() string {
+func (x *DeviceObject) GetIp() string {
 	if x != nil {
-		return x.Locale
+		return x.Ip
 	}
 	return ""
 }
@@ -376,6 +376,13 @@ func (x *DeviceObject) GetLastSeen() string {
 	return ""
 }
 
+func (x *DeviceObject) GetLocale() map[string]string {
+	if x != nil {
+		return x.Locale
+	}
+	return nil
+}
+
 func (x *DeviceObject) GetLocation() map[string]string {
 	if x != nil {
 		return x.Location
@@ -388,13 +395,6 @@ func (x *DeviceObject) GetProperties() map[string]string {
 		return x.Properties
 	}
 	return nil
-}
-
-func (x *DeviceObject) GetSessionId() string {
-	if x != nil {
-		return x.SessionId
-	}
-	return ""
 }
 
 // The request message containing the device's hash
@@ -1626,23 +1626,25 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\n" +
 	"ExtraEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xea\x03\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xca\x04\n" +
 	"\fDeviceObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x0e\n" +
-	"\x02ip\x18\x03 \x01(\tR\x02ip\x12\x16\n" +
-	"\x06locale\x18\x04 \x01(\tR\x06locale\x12\x1d\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x03 \x01(\tR\tsessionId\x12\x0e\n" +
+	"\x02ip\x18\x04 \x01(\tR\x02ip\x12\x1d\n" +
 	"\n" +
 	"user_agent\x18\x05 \x01(\tR\tuserAgent\x12\x0e\n" +
 	"\x02os\x18\x06 \x01(\tR\x02os\x12\x1b\n" +
-	"\tlast_seen\x18\a \x01(\tR\blastSeen\x12A\n" +
-	"\blocation\x18\b \x03(\v2%.device.v1.DeviceObject.LocationEntryR\blocation\x12G\n" +
+	"\tlast_seen\x18\a \x01(\tR\blastSeen\x12;\n" +
+	"\x06locale\x18\t \x03(\v2#.device.v1.DeviceObject.LocaleEntryR\x06locale\x12A\n" +
+	"\blocation\x18\v \x03(\v2%.device.v1.DeviceObject.LocationEntryR\blocation\x12G\n" +
 	"\n" +
-	"properties\x18\t \x03(\v2'.device.v1.DeviceObject.PropertiesEntryR\n" +
-	"properties\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\n" +
-	" \x01(\tR\tsessionId\x1a;\n" +
+	"properties\x18\x0f \x03(\v2'.device.v1.DeviceObject.PropertiesEntryR\n" +
+	"properties\x1a9\n" +
+	"\vLocaleEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a;\n" +
 	"\rLocationEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a=\n" +
@@ -1789,7 +1791,7 @@ func file_device_v1_device_proto_rawDescGZIP() []byte {
 }
 
 var file_device_v1_device_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_device_v1_device_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
+var file_device_v1_device_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_device_v1_device_proto_goTypes = []any{
 	(KeyType)(0),                   // 0: device.v1.KeyType
 	(*KeyObject)(nil),              // 1: device.v1.KeyObject
@@ -1820,64 +1822,66 @@ var file_device_v1_device_proto_goTypes = []any{
 	nil,                            // 26: device.v1.KeyObject.ExtraEntry
 	nil,                            // 27: device.v1.DeviceLog.LocationEntry
 	nil,                            // 28: device.v1.DeviceLog.ExtraEntry
-	nil,                            // 29: device.v1.DeviceObject.LocationEntry
-	nil,                            // 30: device.v1.DeviceObject.PropertiesEntry
-	nil,                            // 31: device.v1.SearchRequest.ExtrasEntry
-	nil,                            // 32: device.v1.CreateRequest.PropertiesEntry
-	nil,                            // 33: device.v1.UpdateRequest.PropertiesEntry
-	nil,                            // 34: device.v1.LogRequest.ExtrasEntry
-	nil,                            // 35: device.v1.AddKeyRequest.ExtrasEntry
+	nil,                            // 29: device.v1.DeviceObject.LocaleEntry
+	nil,                            // 30: device.v1.DeviceObject.LocationEntry
+	nil,                            // 31: device.v1.DeviceObject.PropertiesEntry
+	nil,                            // 32: device.v1.SearchRequest.ExtrasEntry
+	nil,                            // 33: device.v1.CreateRequest.PropertiesEntry
+	nil,                            // 34: device.v1.UpdateRequest.PropertiesEntry
+	nil,                            // 35: device.v1.LogRequest.ExtrasEntry
+	nil,                            // 36: device.v1.AddKeyRequest.ExtrasEntry
 }
 var file_device_v1_device_proto_depIdxs = []int32{
 	26, // 0: device.v1.KeyObject.extra:type_name -> device.v1.KeyObject.ExtraEntry
 	27, // 1: device.v1.DeviceLog.location:type_name -> device.v1.DeviceLog.LocationEntry
 	28, // 2: device.v1.DeviceLog.extra:type_name -> device.v1.DeviceLog.ExtraEntry
-	29, // 3: device.v1.DeviceObject.location:type_name -> device.v1.DeviceObject.LocationEntry
-	30, // 4: device.v1.DeviceObject.properties:type_name -> device.v1.DeviceObject.PropertiesEntry
-	3,  // 5: device.v1.GetByIdResponse.data:type_name -> device.v1.DeviceObject
-	3,  // 6: device.v1.GetBySessionIdResponse.data:type_name -> device.v1.DeviceObject
-	31, // 7: device.v1.SearchRequest.extras:type_name -> device.v1.SearchRequest.ExtrasEntry
-	3,  // 8: device.v1.SearchResponse.data:type_name -> device.v1.DeviceObject
-	32, // 9: device.v1.CreateRequest.properties:type_name -> device.v1.CreateRequest.PropertiesEntry
-	3,  // 10: device.v1.CreateResponse.data:type_name -> device.v1.DeviceObject
-	33, // 11: device.v1.UpdateRequest.properties:type_name -> device.v1.UpdateRequest.PropertiesEntry
-	3,  // 12: device.v1.UpdateResponse.data:type_name -> device.v1.DeviceObject
-	3,  // 13: device.v1.RemoveResponse.data:type_name -> device.v1.DeviceObject
-	34, // 14: device.v1.LogRequest.extras:type_name -> device.v1.LogRequest.ExtrasEntry
-	2,  // 15: device.v1.LogResponse.data:type_name -> device.v1.DeviceLog
-	2,  // 16: device.v1.ListLogsResponse.data:type_name -> device.v1.DeviceLog
-	0,  // 17: device.v1.AddKeyRequest.key_type:type_name -> device.v1.KeyType
-	35, // 18: device.v1.AddKeyRequest.extras:type_name -> device.v1.AddKeyRequest.ExtrasEntry
-	1,  // 19: device.v1.AddKeyResponse.data:type_name -> device.v1.KeyObject
-	0,  // 20: device.v1.SearchKeyRequest.key_type:type_name -> device.v1.KeyType
-	1,  // 21: device.v1.SearchKeyResponse.data:type_name -> device.v1.KeyObject
-	4,  // 22: device.v1.DeviceService.GetById:input_type -> device.v1.GetByIdRequest
-	6,  // 23: device.v1.DeviceService.GetBySessionId:input_type -> device.v1.GetBySessionIdRequest
-	8,  // 24: device.v1.DeviceService.Search:input_type -> device.v1.SearchRequest
-	10, // 25: device.v1.DeviceService.Create:input_type -> device.v1.CreateRequest
-	12, // 26: device.v1.DeviceService.Update:input_type -> device.v1.UpdateRequest
-	14, // 27: device.v1.DeviceService.Remove:input_type -> device.v1.RemoveRequest
-	16, // 28: device.v1.DeviceService.Log:input_type -> device.v1.LogRequest
-	18, // 29: device.v1.DeviceService.ListLogs:input_type -> device.v1.ListLogsRequest
-	20, // 30: device.v1.DeviceService.AddKey:input_type -> device.v1.AddKeyRequest
-	22, // 31: device.v1.DeviceService.RemoveKey:input_type -> device.v1.RemoveKeyRequest
-	24, // 32: device.v1.DeviceService.SearchKey:input_type -> device.v1.SearchKeyRequest
-	5,  // 33: device.v1.DeviceService.GetById:output_type -> device.v1.GetByIdResponse
-	7,  // 34: device.v1.DeviceService.GetBySessionId:output_type -> device.v1.GetBySessionIdResponse
-	9,  // 35: device.v1.DeviceService.Search:output_type -> device.v1.SearchResponse
-	11, // 36: device.v1.DeviceService.Create:output_type -> device.v1.CreateResponse
-	13, // 37: device.v1.DeviceService.Update:output_type -> device.v1.UpdateResponse
-	15, // 38: device.v1.DeviceService.Remove:output_type -> device.v1.RemoveResponse
-	17, // 39: device.v1.DeviceService.Log:output_type -> device.v1.LogResponse
-	19, // 40: device.v1.DeviceService.ListLogs:output_type -> device.v1.ListLogsResponse
-	21, // 41: device.v1.DeviceService.AddKey:output_type -> device.v1.AddKeyResponse
-	23, // 42: device.v1.DeviceService.RemoveKey:output_type -> device.v1.RemoveKeyResponse
-	25, // 43: device.v1.DeviceService.SearchKey:output_type -> device.v1.SearchKeyResponse
-	33, // [33:44] is the sub-list for method output_type
-	22, // [22:33] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	29, // 3: device.v1.DeviceObject.locale:type_name -> device.v1.DeviceObject.LocaleEntry
+	30, // 4: device.v1.DeviceObject.location:type_name -> device.v1.DeviceObject.LocationEntry
+	31, // 5: device.v1.DeviceObject.properties:type_name -> device.v1.DeviceObject.PropertiesEntry
+	3,  // 6: device.v1.GetByIdResponse.data:type_name -> device.v1.DeviceObject
+	3,  // 7: device.v1.GetBySessionIdResponse.data:type_name -> device.v1.DeviceObject
+	32, // 8: device.v1.SearchRequest.extras:type_name -> device.v1.SearchRequest.ExtrasEntry
+	3,  // 9: device.v1.SearchResponse.data:type_name -> device.v1.DeviceObject
+	33, // 10: device.v1.CreateRequest.properties:type_name -> device.v1.CreateRequest.PropertiesEntry
+	3,  // 11: device.v1.CreateResponse.data:type_name -> device.v1.DeviceObject
+	34, // 12: device.v1.UpdateRequest.properties:type_name -> device.v1.UpdateRequest.PropertiesEntry
+	3,  // 13: device.v1.UpdateResponse.data:type_name -> device.v1.DeviceObject
+	3,  // 14: device.v1.RemoveResponse.data:type_name -> device.v1.DeviceObject
+	35, // 15: device.v1.LogRequest.extras:type_name -> device.v1.LogRequest.ExtrasEntry
+	2,  // 16: device.v1.LogResponse.data:type_name -> device.v1.DeviceLog
+	2,  // 17: device.v1.ListLogsResponse.data:type_name -> device.v1.DeviceLog
+	0,  // 18: device.v1.AddKeyRequest.key_type:type_name -> device.v1.KeyType
+	36, // 19: device.v1.AddKeyRequest.extras:type_name -> device.v1.AddKeyRequest.ExtrasEntry
+	1,  // 20: device.v1.AddKeyResponse.data:type_name -> device.v1.KeyObject
+	0,  // 21: device.v1.SearchKeyRequest.key_type:type_name -> device.v1.KeyType
+	1,  // 22: device.v1.SearchKeyResponse.data:type_name -> device.v1.KeyObject
+	4,  // 23: device.v1.DeviceService.GetById:input_type -> device.v1.GetByIdRequest
+	6,  // 24: device.v1.DeviceService.GetBySessionId:input_type -> device.v1.GetBySessionIdRequest
+	8,  // 25: device.v1.DeviceService.Search:input_type -> device.v1.SearchRequest
+	10, // 26: device.v1.DeviceService.Create:input_type -> device.v1.CreateRequest
+	12, // 27: device.v1.DeviceService.Update:input_type -> device.v1.UpdateRequest
+	14, // 28: device.v1.DeviceService.Remove:input_type -> device.v1.RemoveRequest
+	16, // 29: device.v1.DeviceService.Log:input_type -> device.v1.LogRequest
+	18, // 30: device.v1.DeviceService.ListLogs:input_type -> device.v1.ListLogsRequest
+	20, // 31: device.v1.DeviceService.AddKey:input_type -> device.v1.AddKeyRequest
+	22, // 32: device.v1.DeviceService.RemoveKey:input_type -> device.v1.RemoveKeyRequest
+	24, // 33: device.v1.DeviceService.SearchKey:input_type -> device.v1.SearchKeyRequest
+	5,  // 34: device.v1.DeviceService.GetById:output_type -> device.v1.GetByIdResponse
+	7,  // 35: device.v1.DeviceService.GetBySessionId:output_type -> device.v1.GetBySessionIdResponse
+	9,  // 36: device.v1.DeviceService.Search:output_type -> device.v1.SearchResponse
+	11, // 37: device.v1.DeviceService.Create:output_type -> device.v1.CreateResponse
+	13, // 38: device.v1.DeviceService.Update:output_type -> device.v1.UpdateResponse
+	15, // 39: device.v1.DeviceService.Remove:output_type -> device.v1.RemoveResponse
+	17, // 40: device.v1.DeviceService.Log:output_type -> device.v1.LogResponse
+	19, // 41: device.v1.DeviceService.ListLogs:output_type -> device.v1.ListLogsResponse
+	21, // 42: device.v1.DeviceService.AddKey:output_type -> device.v1.AddKeyResponse
+	23, // 43: device.v1.DeviceService.RemoveKey:output_type -> device.v1.RemoveKeyResponse
+	25, // 44: device.v1.DeviceService.SearchKey:output_type -> device.v1.SearchKeyResponse
+	34, // [34:45] is the sub-list for method output_type
+	23, // [23:34] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_device_v1_device_proto_init() }
@@ -1891,7 +1895,7 @@ func file_device_v1_device_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_device_v1_device_proto_rawDesc), len(file_device_v1_device_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   35,
+			NumMessages:   36,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
