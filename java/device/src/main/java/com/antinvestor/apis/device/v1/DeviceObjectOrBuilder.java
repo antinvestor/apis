@@ -109,38 +109,19 @@ public interface DeviceObjectOrBuilder extends
       getLastSeenBytes();
 
   /**
-   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
+   * @return Whether the locale field is set.
    */
-  int getLocaleCount();
+  boolean hasLocale();
   /**
-   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
+   * @return The locale.
    */
-  boolean containsLocale(
-      java.lang.String key);
+  com.antinvestor.apis.device.v1.Locale getLocale();
   /**
-   * Use {@link #getLocaleMap()} instead.
+   * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getLocale();
-  /**
-   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getLocaleMap();
-  /**
-   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
-   */
-  /* nullable */
-java.lang.String getLocaleOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
-   */
-  java.lang.String getLocaleOrThrow(
-      java.lang.String key);
+  com.antinvestor.apis.device.v1.LocaleOrBuilder getLocaleOrBuilder();
 
   /**
    * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>

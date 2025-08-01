@@ -49,16 +49,16 @@ public interface DeviceLogOrBuilder extends
       getDeviceIdBytes();
 
   /**
-   * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
-   * @return The linkId.
+   * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
+   * @return The sessionId.
    */
-  java.lang.String getLinkId();
+  java.lang.String getSessionId();
   /**
-   * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for linkId.
+   * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for sessionId.
    */
   com.google.protobuf.ByteString
-      getLinkIdBytes();
+      getSessionIdBytes();
 
   /**
    * <code>string ip = 4 [json_name = "ip"];</code>
@@ -73,16 +73,19 @@ public interface DeviceLogOrBuilder extends
       getIpBytes();
 
   /**
-   * <code>string locale = 5 [json_name = "locale"];</code>
+   * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
+   * @return Whether the locale field is set.
+   */
+  boolean hasLocale();
+  /**
+   * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
    * @return The locale.
    */
-  java.lang.String getLocale();
+  com.antinvestor.apis.device.v1.Locale getLocale();
   /**
-   * <code>string locale = 5 [json_name = "locale"];</code>
-   * @return The bytes for locale.
+   * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
    */
-  com.google.protobuf.ByteString
-      getLocaleBytes();
+  com.antinvestor.apis.device.v1.LocaleOrBuilder getLocaleOrBuilder();
 
   /**
    * <code>string user_agent = 6 [json_name = "userAgent"];</code>
@@ -187,16 +190,4 @@ java.lang.String defaultValue);
    */
   java.lang.String getExtraOrThrow(
       java.lang.String key);
-
-  /**
-   * <code>string session_id = 11 [json_name = "sessionId"];</code>
-   * @return The sessionId.
-   */
-  java.lang.String getSessionId();
-  /**
-   * <code>string session_id = 11 [json_name = "sessionId"];</code>
-   * @return The bytes for sessionId.
-   */
-  com.google.protobuf.ByteString
-      getSessionIdBytes();
 }

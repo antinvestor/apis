@@ -48,13 +48,11 @@ private static final long serialVersionUID = 0L;
   private DeviceLog() {
     id_ = "";
     deviceId_ = "";
-    linkId_ = "";
+    sessionId_ = "";
     ip_ = "";
-    locale_ = "";
     userAgent_ = "";
     os_ = "";
     lastSeen_ = "";
-    sessionId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -84,6 +82,7 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.device.v1.DeviceLog.class, com.antinvestor.apis.device.v1.DeviceLog.Builder.class);
   }
 
+  private int bitField0_;
   public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
@@ -162,39 +161,39 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int LINK_ID_FIELD_NUMBER = 3;
+  public static final int SESSION_ID_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object linkId_ = "";
+  private volatile java.lang.Object sessionId_ = "";
   /**
-   * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
-   * @return The linkId.
+   * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
+   * @return The sessionId.
    */
   @java.lang.Override
-  public java.lang.String getLinkId() {
-    java.lang.Object ref = linkId_;
+  public java.lang.String getSessionId() {
+    java.lang.Object ref = sessionId_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      linkId_ = s;
+      sessionId_ = s;
       return s;
     }
   }
   /**
-   * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for linkId.
+   * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for sessionId.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getLinkIdBytes() {
-    java.lang.Object ref = linkId_;
+      getSessionIdBytes() {
+    java.lang.Object ref = sessionId_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      linkId_ = b;
+      sessionId_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -241,42 +240,29 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int LOCALE_FIELD_NUMBER = 5;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object locale_ = "";
+  private com.antinvestor.apis.device.v1.Locale locale_;
   /**
-   * <code>string locale = 5 [json_name = "locale"];</code>
+   * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
+   * @return Whether the locale field is set.
+   */
+  @java.lang.Override
+  public boolean hasLocale() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
    * @return The locale.
    */
   @java.lang.Override
-  public java.lang.String getLocale() {
-    java.lang.Object ref = locale_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      locale_ = s;
-      return s;
-    }
+  public com.antinvestor.apis.device.v1.Locale getLocale() {
+    return locale_ == null ? com.antinvestor.apis.device.v1.Locale.getDefaultInstance() : locale_;
   }
   /**
-   * <code>string locale = 5 [json_name = "locale"];</code>
-   * @return The bytes for locale.
+   * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getLocaleBytes() {
-    java.lang.Object ref = locale_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      locale_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public com.antinvestor.apis.device.v1.LocaleOrBuilder getLocaleOrBuilder() {
+    return locale_ == null ? com.antinvestor.apis.device.v1.Locale.getDefaultInstance() : locale_;
   }
 
   public static final int USER_AGENT_FIELD_NUMBER = 6;
@@ -554,45 +540,6 @@ java.lang.String defaultValue) {
     return map.get(key);
   }
 
-  public static final int SESSION_ID_FIELD_NUMBER = 11;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object sessionId_ = "";
-  /**
-   * <code>string session_id = 11 [json_name = "sessionId"];</code>
-   * @return The sessionId.
-   */
-  @java.lang.Override
-  public java.lang.String getSessionId() {
-    java.lang.Object ref = sessionId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      sessionId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string session_id = 11 [json_name = "sessionId"];</code>
-   * @return The bytes for sessionId.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getSessionIdBytes() {
-    java.lang.Object ref = sessionId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      sessionId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -613,14 +560,14 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, deviceId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(linkId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 3, linkId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(sessionId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 3, sessionId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(ip_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 4, ip_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(locale_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 5, locale_);
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(5, getLocale());
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(userAgent_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 6, userAgent_);
@@ -643,9 +590,6 @@ java.lang.String defaultValue) {
         internalGetExtra(),
         ExtraDefaultEntryHolder.defaultEntry,
         10);
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(sessionId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 11, sessionId_);
-    }
     getUnknownFields().writeTo(output);
   }
 
@@ -661,14 +605,15 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(2, deviceId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(linkId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, linkId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(sessionId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, sessionId_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(ip_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(4, ip_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(locale_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(5, locale_);
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(5, getLocale());
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(userAgent_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(6, userAgent_);
@@ -699,9 +644,6 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, extra__);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(sessionId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(11, sessionId_);
-    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -721,12 +663,15 @@ java.lang.String defaultValue) {
         .equals(other.getId())) return false;
     if (!getDeviceId()
         .equals(other.getDeviceId())) return false;
-    if (!getLinkId()
-        .equals(other.getLinkId())) return false;
+    if (!getSessionId()
+        .equals(other.getSessionId())) return false;
     if (!getIp()
         .equals(other.getIp())) return false;
-    if (!getLocale()
-        .equals(other.getLocale())) return false;
+    if (hasLocale() != other.hasLocale()) return false;
+    if (hasLocale()) {
+      if (!getLocale()
+          .equals(other.getLocale())) return false;
+    }
     if (!getUserAgent()
         .equals(other.getUserAgent())) return false;
     if (!getOs()
@@ -737,8 +682,6 @@ java.lang.String defaultValue) {
         other.internalGetLocation())) return false;
     if (!internalGetExtra().equals(
         other.internalGetExtra())) return false;
-    if (!getSessionId()
-        .equals(other.getSessionId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -754,12 +697,14 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + DEVICE_ID_FIELD_NUMBER;
     hash = (53 * hash) + getDeviceId().hashCode();
-    hash = (37 * hash) + LINK_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getLinkId().hashCode();
+    hash = (37 * hash) + SESSION_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getSessionId().hashCode();
     hash = (37 * hash) + IP_FIELD_NUMBER;
     hash = (53 * hash) + getIp().hashCode();
-    hash = (37 * hash) + LOCALE_FIELD_NUMBER;
-    hash = (53 * hash) + getLocale().hashCode();
+    if (hasLocale()) {
+      hash = (37 * hash) + LOCALE_FIELD_NUMBER;
+      hash = (53 * hash) + getLocale().hashCode();
+    }
     hash = (37 * hash) + USER_AGENT_FIELD_NUMBER;
     hash = (53 * hash) + getUserAgent().hashCode();
     hash = (37 * hash) + OS_FIELD_NUMBER;
@@ -774,8 +719,6 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + EXTRA_FIELD_NUMBER;
       hash = (53 * hash) + internalGetExtra().hashCode();
     }
-    hash = (37 * hash) + SESSION_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getSessionId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -925,13 +868,19 @@ java.lang.String defaultValue) {
 
     // Construct using com.antinvestor.apis.device.v1.DeviceLog.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessage
+              .alwaysUseFieldBuilders) {
+        internalGetLocaleFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -939,15 +888,18 @@ java.lang.String defaultValue) {
       bitField0_ = 0;
       id_ = "";
       deviceId_ = "";
-      linkId_ = "";
+      sessionId_ = "";
       ip_ = "";
-      locale_ = "";
+      locale_ = null;
+      if (localeBuilder_ != null) {
+        localeBuilder_.dispose();
+        localeBuilder_ = null;
+      }
       userAgent_ = "";
       os_ = "";
       lastSeen_ = "";
       internalGetMutableLocation().clear();
       internalGetMutableExtra().clear();
-      sessionId_ = "";
       return this;
     }
 
@@ -988,13 +940,17 @@ java.lang.String defaultValue) {
         result.deviceId_ = deviceId_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.linkId_ = linkId_;
+        result.sessionId_ = sessionId_;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
         result.ip_ = ip_;
       }
+      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.locale_ = locale_;
+        result.locale_ = localeBuilder_ == null
+            ? locale_
+            : localeBuilder_.build();
+        to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00000020) != 0)) {
         result.userAgent_ = userAgent_;
@@ -1013,9 +969,7 @@ java.lang.String defaultValue) {
         result.extra_ = internalGetExtra();
         result.extra_.makeImmutable();
       }
-      if (((from_bitField0_ & 0x00000400) != 0)) {
-        result.sessionId_ = sessionId_;
-      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -1040,8 +994,8 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000002;
         onChanged();
       }
-      if (!other.getLinkId().isEmpty()) {
-        linkId_ = other.linkId_;
+      if (!other.getSessionId().isEmpty()) {
+        sessionId_ = other.sessionId_;
         bitField0_ |= 0x00000004;
         onChanged();
       }
@@ -1050,10 +1004,8 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000008;
         onChanged();
       }
-      if (!other.getLocale().isEmpty()) {
-        locale_ = other.locale_;
-        bitField0_ |= 0x00000010;
-        onChanged();
+      if (other.hasLocale()) {
+        mergeLocale(other.getLocale());
       }
       if (!other.getUserAgent().isEmpty()) {
         userAgent_ = other.userAgent_;
@@ -1076,11 +1028,6 @@ java.lang.String defaultValue) {
       internalGetMutableExtra().mergeFrom(
           other.internalGetExtra());
       bitField0_ |= 0x00000200;
-      if (!other.getSessionId().isEmpty()) {
-        sessionId_ = other.sessionId_;
-        bitField0_ |= 0x00000400;
-        onChanged();
-      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1118,7 +1065,7 @@ java.lang.String defaultValue) {
               break;
             } // case 18
             case 26: {
-              linkId_ = input.readStringRequireUtf8();
+              sessionId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
             } // case 26
@@ -1128,7 +1075,9 @@ java.lang.String defaultValue) {
               break;
             } // case 34
             case 42: {
-              locale_ = input.readStringRequireUtf8();
+              input.readMessage(
+                  internalGetLocaleFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000010;
               break;
             } // case 42
@@ -1165,11 +1114,6 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000200;
               break;
             } // case 82
-            case 90: {
-              sessionId_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000400;
-              break;
-            } // case 90
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1331,73 +1275,73 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private java.lang.Object linkId_ = "";
+    private java.lang.Object sessionId_ = "";
     /**
-     * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
-     * @return The linkId.
+     * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
+     * @return The sessionId.
      */
-    public java.lang.String getLinkId() {
-      java.lang.Object ref = linkId_;
+    public java.lang.String getSessionId() {
+      java.lang.Object ref = sessionId_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        linkId_ = s;
+        sessionId_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for linkId.
+     * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for sessionId.
      */
     public com.google.protobuf.ByteString
-        getLinkIdBytes() {
-      java.lang.Object ref = linkId_;
+        getSessionIdBytes() {
+      java.lang.Object ref = sessionId_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        linkId_ = b;
+        sessionId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
-     * @param value The linkId to set.
+     * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
+     * @param value The sessionId to set.
      * @return This builder for chaining.
      */
-    public Builder setLinkId(
+    public Builder setSessionId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      linkId_ = value;
+      sessionId_ = value;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
+     * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearLinkId() {
-      linkId_ = getDefaultInstance().getLinkId();
+    public Builder clearSessionId() {
+      sessionId_ = getDefaultInstance().getSessionId();
       bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
     /**
-     * <code>string link_id = 3 [json_name = "linkId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for linkId to set.
+     * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for sessionId to set.
      * @return This builder for chaining.
      */
-    public Builder setLinkIdBytes(
+    public Builder setSessionIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      linkId_ = value;
+      sessionId_ = value;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
@@ -1475,76 +1419,125 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private java.lang.Object locale_ = "";
+    private com.antinvestor.apis.device.v1.Locale locale_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.device.v1.Locale, com.antinvestor.apis.device.v1.Locale.Builder, com.antinvestor.apis.device.v1.LocaleOrBuilder> localeBuilder_;
     /**
-     * <code>string locale = 5 [json_name = "locale"];</code>
+     * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
+     * @return Whether the locale field is set.
+     */
+    public boolean hasLocale() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
      * @return The locale.
      */
-    public java.lang.String getLocale() {
-      java.lang.Object ref = locale_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        locale_ = s;
-        return s;
+    public com.antinvestor.apis.device.v1.Locale getLocale() {
+      if (localeBuilder_ == null) {
+        return locale_ == null ? com.antinvestor.apis.device.v1.Locale.getDefaultInstance() : locale_;
       } else {
-        return (java.lang.String) ref;
+        return localeBuilder_.getMessage();
       }
     }
     /**
-     * <code>string locale = 5 [json_name = "locale"];</code>
-     * @return The bytes for locale.
+     * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
      */
-    public com.google.protobuf.ByteString
-        getLocaleBytes() {
-      java.lang.Object ref = locale_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        locale_ = b;
-        return b;
+    public Builder setLocale(com.antinvestor.apis.device.v1.Locale value) {
+      if (localeBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        locale_ = value;
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        localeBuilder_.setMessage(value);
       }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
     }
     /**
-     * <code>string locale = 5 [json_name = "locale"];</code>
-     * @param value The locale to set.
-     * @return This builder for chaining.
+     * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
      */
     public Builder setLocale(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      locale_ = value;
+        com.antinvestor.apis.device.v1.Locale.Builder builderForValue) {
+      if (localeBuilder_ == null) {
+        locale_ = builderForValue.build();
+      } else {
+        localeBuilder_.setMessage(builderForValue.build());
+      }
       bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
-     * <code>string locale = 5 [json_name = "locale"];</code>
-     * @return This builder for chaining.
+     * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
+     */
+    public Builder mergeLocale(com.antinvestor.apis.device.v1.Locale value) {
+      if (localeBuilder_ == null) {
+        if (((bitField0_ & 0x00000010) != 0) &&
+          locale_ != null &&
+          locale_ != com.antinvestor.apis.device.v1.Locale.getDefaultInstance()) {
+          getLocaleBuilder().mergeFrom(value);
+        } else {
+          locale_ = value;
+        }
+      } else {
+        localeBuilder_.mergeFrom(value);
+      }
+      if (locale_ != null) {
+        bitField0_ |= 0x00000010;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
      */
     public Builder clearLocale() {
-      locale_ = getDefaultInstance().getLocale();
       bitField0_ = (bitField0_ & ~0x00000010);
+      locale_ = null;
+      if (localeBuilder_ != null) {
+        localeBuilder_.dispose();
+        localeBuilder_ = null;
+      }
       onChanged();
       return this;
     }
     /**
-     * <code>string locale = 5 [json_name = "locale"];</code>
-     * @param value The bytes for locale to set.
-     * @return This builder for chaining.
+     * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
      */
-    public Builder setLocaleBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      locale_ = value;
+    public com.antinvestor.apis.device.v1.Locale.Builder getLocaleBuilder() {
       bitField0_ |= 0x00000010;
       onChanged();
-      return this;
+      return internalGetLocaleFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
+     */
+    public com.antinvestor.apis.device.v1.LocaleOrBuilder getLocaleOrBuilder() {
+      if (localeBuilder_ != null) {
+        return localeBuilder_.getMessageOrBuilder();
+      } else {
+        return locale_ == null ?
+            com.antinvestor.apis.device.v1.Locale.getDefaultInstance() : locale_;
+      }
+    }
+    /**
+     * <code>.device.v1.Locale locale = 5 [json_name = "locale"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.device.v1.Locale, com.antinvestor.apis.device.v1.Locale.Builder, com.antinvestor.apis.device.v1.LocaleOrBuilder> 
+        internalGetLocaleFieldBuilder() {
+      if (localeBuilder_ == null) {
+        localeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.antinvestor.apis.device.v1.Locale, com.antinvestor.apis.device.v1.Locale.Builder, com.antinvestor.apis.device.v1.LocaleOrBuilder>(
+                getLocale(),
+                getParentForChildren(),
+                isClean());
+        locale_ = null;
+      }
+      return localeBuilder_;
     }
 
     private java.lang.Object userAgent_ = "";
@@ -2014,78 +2007,6 @@ java.lang.String defaultValue) {
       internalGetMutableExtra().getMutableMap()
           .putAll(values);
       bitField0_ |= 0x00000200;
-      return this;
-    }
-
-    private java.lang.Object sessionId_ = "";
-    /**
-     * <code>string session_id = 11 [json_name = "sessionId"];</code>
-     * @return The sessionId.
-     */
-    public java.lang.String getSessionId() {
-      java.lang.Object ref = sessionId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        sessionId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string session_id = 11 [json_name = "sessionId"];</code>
-     * @return The bytes for sessionId.
-     */
-    public com.google.protobuf.ByteString
-        getSessionIdBytes() {
-      java.lang.Object ref = sessionId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        sessionId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string session_id = 11 [json_name = "sessionId"];</code>
-     * @param value The sessionId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSessionId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      sessionId_ = value;
-      bitField0_ |= 0x00000400;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string session_id = 11 [json_name = "sessionId"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearSessionId() {
-      sessionId_ = getDefaultInstance().getSessionId();
-      bitField0_ = (bitField0_ & ~0x00000400);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string session_id = 11 [json_name = "sessionId"];</code>
-     * @param value The bytes for sessionId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSessionIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      sessionId_ = value;
-      bitField0_ |= 0x00000400;
-      onChanged();
       return this;
     }
 

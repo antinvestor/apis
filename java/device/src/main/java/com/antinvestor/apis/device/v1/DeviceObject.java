@@ -65,8 +65,6 @@ private static final long serialVersionUID = 0L;
   protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
       int number) {
     switch (number) {
-      case 9:
-        return internalGetLocale();
       case 11:
         return internalGetLocation();
       case 15:
@@ -84,6 +82,7 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.device.v1.DeviceObject.class, com.antinvestor.apis.device.v1.DeviceObject.Builder.class);
   }
 
+  private int bitField0_;
   public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
@@ -358,82 +357,29 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int LOCALE_FIELD_NUMBER = 9;
-  private static final class LocaleDefaultEntryHolder {
-    static final com.google.protobuf.MapEntry<
-        java.lang.String, java.lang.String> defaultEntry =
-            com.google.protobuf.MapEntry
-            .<java.lang.String, java.lang.String>newDefaultInstance(
-                com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_LocaleEntry_descriptor, 
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "",
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "");
-  }
-  @SuppressWarnings("serial")
-  private com.google.protobuf.MapField<
-      java.lang.String, java.lang.String> locale_;
-  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-  internalGetLocale() {
-    if (locale_ == null) {
-      return com.google.protobuf.MapField.emptyMapField(
-          LocaleDefaultEntryHolder.defaultEntry);
-    }
-    return locale_;
-  }
-  public int getLocaleCount() {
-    return internalGetLocale().getMap().size();
-  }
+  private com.antinvestor.apis.device.v1.Locale locale_;
   /**
-   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
+   * @return Whether the locale field is set.
    */
   @java.lang.Override
-  public boolean containsLocale(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    return internalGetLocale().getMap().containsKey(key);
+  public boolean hasLocale() {
+    return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * Use {@link #getLocaleMap()} instead.
+   * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
+   * @return The locale.
    */
   @java.lang.Override
-  @java.lang.Deprecated
-  public java.util.Map<java.lang.String, java.lang.String> getLocale() {
-    return getLocaleMap();
+  public com.antinvestor.apis.device.v1.Locale getLocale() {
+    return locale_ == null ? com.antinvestor.apis.device.v1.Locale.getDefaultInstance() : locale_;
   }
   /**
-   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+   * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
    */
   @java.lang.Override
-  public java.util.Map<java.lang.String, java.lang.String> getLocaleMap() {
-    return internalGetLocale().getMap();
-  }
-  /**
-   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
-   */
-  @java.lang.Override
-  public /* nullable */
-java.lang.String getLocaleOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetLocale().getMap();
-    return map.containsKey(key) ? map.get(key) : defaultValue;
-  }
-  /**
-   * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
-   */
-  @java.lang.Override
-  public java.lang.String getLocaleOrThrow(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetLocale().getMap();
-    if (!map.containsKey(key)) {
-      throw new java.lang.IllegalArgumentException();
-    }
-    return map.get(key);
+  public com.antinvestor.apis.device.v1.LocaleOrBuilder getLocaleOrBuilder() {
+    return locale_ == null ? com.antinvestor.apis.device.v1.Locale.getDefaultInstance() : locale_;
   }
 
   public static final int LOCATION_FIELD_NUMBER = 11;
@@ -629,12 +575,9 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(lastSeen_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 7, lastSeen_);
     }
-    com.google.protobuf.GeneratedMessage
-      .serializeStringMapTo(
-        output,
-        internalGetLocale(),
-        LocaleDefaultEntryHolder.defaultEntry,
-        9);
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(9, getLocale());
+    }
     com.google.protobuf.GeneratedMessage
       .serializeStringMapTo(
         output,
@@ -677,15 +620,9 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(lastSeen_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(7, lastSeen_);
     }
-    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-         : internalGetLocale().getMap().entrySet()) {
-      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-      locale__ = LocaleDefaultEntryHolder.defaultEntry.newBuilderForType()
-          .setKey(entry.getKey())
-          .setValue(entry.getValue())
-          .build();
+    if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, locale__);
+        .computeMessageSize(9, getLocale());
     }
     for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
          : internalGetLocation().getMap().entrySet()) {
@@ -736,8 +673,11 @@ java.lang.String defaultValue) {
         .equals(other.getOs())) return false;
     if (!getLastSeen()
         .equals(other.getLastSeen())) return false;
-    if (!internalGetLocale().equals(
-        other.internalGetLocale())) return false;
+    if (hasLocale() != other.hasLocale()) return false;
+    if (hasLocale()) {
+      if (!getLocale()
+          .equals(other.getLocale())) return false;
+    }
     if (!internalGetLocation().equals(
         other.internalGetLocation())) return false;
     if (!internalGetProperties().equals(
@@ -767,9 +707,9 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + getOs().hashCode();
     hash = (37 * hash) + LAST_SEEN_FIELD_NUMBER;
     hash = (53 * hash) + getLastSeen().hashCode();
-    if (!internalGetLocale().getMap().isEmpty()) {
+    if (hasLocale()) {
       hash = (37 * hash) + LOCALE_FIELD_NUMBER;
-      hash = (53 * hash) + internalGetLocale().hashCode();
+      hash = (53 * hash) + getLocale().hashCode();
     }
     if (!internalGetLocation().getMap().isEmpty()) {
       hash = (37 * hash) + LOCATION_FIELD_NUMBER;
@@ -896,8 +836,6 @@ java.lang.String defaultValue) {
     protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
         int number) {
       switch (number) {
-        case 9:
-          return internalGetLocale();
         case 11:
           return internalGetLocation();
         case 15:
@@ -911,8 +849,6 @@ java.lang.String defaultValue) {
     protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
         int number) {
       switch (number) {
-        case 9:
-          return internalGetMutableLocale();
         case 11:
           return internalGetMutableLocation();
         case 15:
@@ -932,13 +868,19 @@ java.lang.String defaultValue) {
 
     // Construct using com.antinvestor.apis.device.v1.DeviceObject.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessage
+              .alwaysUseFieldBuilders) {
+        internalGetLocaleFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -951,7 +893,11 @@ java.lang.String defaultValue) {
       userAgent_ = "";
       os_ = "";
       lastSeen_ = "";
-      internalGetMutableLocale().clear();
+      locale_ = null;
+      if (localeBuilder_ != null) {
+        localeBuilder_.dispose();
+        localeBuilder_ = null;
+      }
       internalGetMutableLocation().clear();
       internalGetMutableProperties().clear();
       return this;
@@ -1008,9 +954,12 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000040) != 0)) {
         result.lastSeen_ = lastSeen_;
       }
+      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000080) != 0)) {
-        result.locale_ = internalGetLocale();
-        result.locale_.makeImmutable();
+        result.locale_ = localeBuilder_ == null
+            ? locale_
+            : localeBuilder_.build();
+        to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00000100) != 0)) {
         result.location_ = internalGetLocation();
@@ -1020,6 +969,7 @@ java.lang.String defaultValue) {
         result.properties_ = internalGetProperties();
         result.properties_.makeImmutable();
       }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -1069,9 +1019,9 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000040;
         onChanged();
       }
-      internalGetMutableLocale().mergeFrom(
-          other.internalGetLocale());
-      bitField0_ |= 0x00000080;
+      if (other.hasLocale()) {
+        mergeLocale(other.getLocale());
+      }
       internalGetMutableLocation().mergeFrom(
           other.internalGetLocation());
       bitField0_ |= 0x00000100;
@@ -1140,11 +1090,9 @@ java.lang.String defaultValue) {
               break;
             } // case 58
             case 74: {
-              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              locale__ = input.readMessage(
-                  LocaleDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              internalGetMutableLocale().getMutableMap().put(
-                  locale__.getKey(), locale__.getValue());
+              input.readMessage(
+                  internalGetLocaleFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000080;
               break;
             } // case 74
@@ -1687,131 +1635,125 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> locale_;
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetLocale() {
-      if (locale_ == null) {
-        return com.google.protobuf.MapField.emptyMapField(
-            LocaleDefaultEntryHolder.defaultEntry);
-      }
-      return locale_;
+    private com.antinvestor.apis.device.v1.Locale locale_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.device.v1.Locale, com.antinvestor.apis.device.v1.Locale.Builder, com.antinvestor.apis.device.v1.LocaleOrBuilder> localeBuilder_;
+    /**
+     * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
+     * @return Whether the locale field is set.
+     */
+    public boolean hasLocale() {
+      return ((bitField0_ & 0x00000080) != 0);
     }
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetMutableLocale() {
-      if (locale_ == null) {
-        locale_ = com.google.protobuf.MapField.newMapField(
-            LocaleDefaultEntryHolder.defaultEntry);
+    /**
+     * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
+     * @return The locale.
+     */
+    public com.antinvestor.apis.device.v1.Locale getLocale() {
+      if (localeBuilder_ == null) {
+        return locale_ == null ? com.antinvestor.apis.device.v1.Locale.getDefaultInstance() : locale_;
+      } else {
+        return localeBuilder_.getMessage();
       }
-      if (!locale_.isMutable()) {
-        locale_ = locale_.copy();
+    }
+    /**
+     * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
+     */
+    public Builder setLocale(com.antinvestor.apis.device.v1.Locale value) {
+      if (localeBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        locale_ = value;
+      } else {
+        localeBuilder_.setMessage(value);
       }
       bitField0_ |= 0x00000080;
       onChanged();
-      return locale_;
-    }
-    public int getLocaleCount() {
-      return internalGetLocale().getMap().size();
+      return this;
     }
     /**
-     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+     * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
      */
-    @java.lang.Override
-    public boolean containsLocale(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      return internalGetLocale().getMap().containsKey(key);
-    }
-    /**
-     * Use {@link #getLocaleMap()} instead.
-     */
-    @java.lang.Override
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getLocale() {
-      return getLocaleMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
-     */
-    @java.lang.Override
-    public java.util.Map<java.lang.String, java.lang.String> getLocaleMap() {
-      return internalGetLocale().getMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
-     */
-    @java.lang.Override
-    public /* nullable */
-java.lang.String getLocaleOrDefault(
-        java.lang.String key,
-        /* nullable */
-java.lang.String defaultValue) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetLocale().getMap();
-      return map.containsKey(key) ? map.get(key) : defaultValue;
-    }
-    /**
-     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
-     */
-    @java.lang.Override
-    public java.lang.String getLocaleOrThrow(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetLocale().getMap();
-      if (!map.containsKey(key)) {
-        throw new java.lang.IllegalArgumentException();
+    public Builder setLocale(
+        com.antinvestor.apis.device.v1.Locale.Builder builderForValue) {
+      if (localeBuilder_ == null) {
+        locale_ = builderForValue.build();
+      } else {
+        localeBuilder_.setMessage(builderForValue.build());
       }
-      return map.get(key);
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
     }
+    /**
+     * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
+     */
+    public Builder mergeLocale(com.antinvestor.apis.device.v1.Locale value) {
+      if (localeBuilder_ == null) {
+        if (((bitField0_ & 0x00000080) != 0) &&
+          locale_ != null &&
+          locale_ != com.antinvestor.apis.device.v1.Locale.getDefaultInstance()) {
+          getLocaleBuilder().mergeFrom(value);
+        } else {
+          locale_ = value;
+        }
+      } else {
+        localeBuilder_.mergeFrom(value);
+      }
+      if (locale_ != null) {
+        bitField0_ |= 0x00000080;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
+     */
     public Builder clearLocale() {
       bitField0_ = (bitField0_ & ~0x00000080);
-      internalGetMutableLocale().getMutableMap()
-          .clear();
+      locale_ = null;
+      if (localeBuilder_ != null) {
+        localeBuilder_.dispose();
+        localeBuilder_ = null;
+      }
+      onChanged();
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+     * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
      */
-    public Builder removeLocale(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      internalGetMutableLocale().getMutableMap()
-          .remove(key);
-      return this;
-    }
-    /**
-     * Use alternate mutation accessors instead.
-     */
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String>
-        getMutableLocale() {
+    public com.antinvestor.apis.device.v1.Locale.Builder getLocaleBuilder() {
       bitField0_ |= 0x00000080;
-      return internalGetMutableLocale().getMutableMap();
+      onChanged();
+      return internalGetLocaleFieldBuilder().getBuilder();
     }
     /**
-     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+     * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
      */
-    public Builder putLocale(
-        java.lang.String key,
-        java.lang.String value) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      if (value == null) { throw new NullPointerException("map value"); }
-      internalGetMutableLocale().getMutableMap()
-          .put(key, value);
-      bitField0_ |= 0x00000080;
-      return this;
+    public com.antinvestor.apis.device.v1.LocaleOrBuilder getLocaleOrBuilder() {
+      if (localeBuilder_ != null) {
+        return localeBuilder_.getMessageOrBuilder();
+      } else {
+        return locale_ == null ?
+            com.antinvestor.apis.device.v1.Locale.getDefaultInstance() : locale_;
+      }
     }
     /**
-     * <code>map&lt;string, string&gt; locale = 9 [json_name = "locale"];</code>
+     * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
      */
-    public Builder putAllLocale(
-        java.util.Map<java.lang.String, java.lang.String> values) {
-      internalGetMutableLocale().getMutableMap()
-          .putAll(values);
-      bitField0_ |= 0x00000080;
-      return this;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.device.v1.Locale, com.antinvestor.apis.device.v1.Locale.Builder, com.antinvestor.apis.device.v1.LocaleOrBuilder> 
+        internalGetLocaleFieldBuilder() {
+      if (localeBuilder_ == null) {
+        localeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.antinvestor.apis.device.v1.Locale, com.antinvestor.apis.device.v1.Locale.Builder, com.antinvestor.apis.device.v1.LocaleOrBuilder>(
+                getLocale(),
+                getParentForChildren(),
+                isClean());
+        locale_ = null;
+      }
+      return localeBuilder_;
     }
 
     private com.google.protobuf.MapField<
