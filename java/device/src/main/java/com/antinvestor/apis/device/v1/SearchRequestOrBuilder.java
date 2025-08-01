@@ -37,10 +37,10 @@ public interface SearchRequestOrBuilder extends
       getQueryBytes();
 
   /**
-   * <code>int64 page = 2 [json_name = "page"];</code>
+   * <code>int32 page = 2 [json_name = "page"];</code>
    * @return The page.
    */
-  long getPage();
+  int getPage();
 
   /**
    * <code>int32 count = 3 [json_name = "count"];</code>

@@ -121,26 +121,6 @@ func (mr *MockDeviceServiceClientMockRecorder) GetBySessionId(ctx, in any, opts 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBySessionId", reflect.TypeOf((*MockDeviceServiceClient)(nil).GetBySessionId), varargs...)
 }
 
-// ListKeys mocks base method.
-func (m *MockDeviceServiceClient) ListKeys(ctx context.Context, in *ListKeysRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListKeysResponse], error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ListKeys", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[ListKeysResponse])
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ListKeys indicates an expected call of ListKeys.
-func (mr *MockDeviceServiceClientMockRecorder) ListKeys(ctx, in any, opts ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListKeys", reflect.TypeOf((*MockDeviceServiceClient)(nil).ListKeys), varargs...)
-}
-
 // ListLogs mocks base method.
 func (m *MockDeviceServiceClient) ListLogs(ctx context.Context, in *ListLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListLogsResponse], error) {
 	m.ctrl.T.Helper()
@@ -239,6 +219,26 @@ func (mr *MockDeviceServiceClientMockRecorder) Search(ctx, in any, opts ...any) 
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Search", reflect.TypeOf((*MockDeviceServiceClient)(nil).Search), varargs...)
+}
+
+// SearchKey mocks base method.
+func (m *MockDeviceServiceClient) SearchKey(ctx context.Context, in *SearchKeyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchKeyResponse], error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "SearchKey", varargs...)
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[SearchKeyResponse])
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SearchKey indicates an expected call of SearchKey.
+func (mr *MockDeviceServiceClientMockRecorder) SearchKey(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchKey", reflect.TypeOf((*MockDeviceServiceClient)(nil).SearchKey), varargs...)
 }
 
 // Update mocks base method.
@@ -345,20 +345,6 @@ func (mr *MockDeviceServiceServerMockRecorder) GetBySessionId(arg0, arg1 any) *g
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBySessionId", reflect.TypeOf((*MockDeviceServiceServer)(nil).GetBySessionId), arg0, arg1)
 }
 
-// ListKeys mocks base method.
-func (m *MockDeviceServiceServer) ListKeys(arg0 *ListKeysRequest, arg1 grpc.ServerStreamingServer[ListKeysResponse]) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ListKeys", arg0, arg1)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// ListKeys indicates an expected call of ListKeys.
-func (mr *MockDeviceServiceServerMockRecorder) ListKeys(arg0, arg1 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListKeys", reflect.TypeOf((*MockDeviceServiceServer)(nil).ListKeys), arg0, arg1)
-}
-
 // ListLogs mocks base method.
 func (m *MockDeviceServiceServer) ListLogs(arg0 *ListLogsRequest, arg1 grpc.ServerStreamingServer[ListLogsResponse]) error {
 	m.ctrl.T.Helper()
@@ -430,6 +416,20 @@ func (m *MockDeviceServiceServer) Search(arg0 *SearchRequest, arg1 grpc.ServerSt
 func (mr *MockDeviceServiceServerMockRecorder) Search(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Search", reflect.TypeOf((*MockDeviceServiceServer)(nil).Search), arg0, arg1)
+}
+
+// SearchKey mocks base method.
+func (m *MockDeviceServiceServer) SearchKey(arg0 *SearchKeyRequest, arg1 grpc.ServerStreamingServer[SearchKeyResponse]) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SearchKey", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SearchKey indicates an expected call of SearchKey.
+func (mr *MockDeviceServiceServerMockRecorder) SearchKey(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchKey", reflect.TypeOf((*MockDeviceServiceServer)(nil).SearchKey), arg0, arg1)
 }
 
 // Update mocks base method.

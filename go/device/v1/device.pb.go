@@ -38,10 +38,59 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// buf:lint:ignore ENUM_VALUE_PREFIX
+type KeyType int32
+
+const (
+	// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+	KeyType_MATRIX_KEY       KeyType = 0
+	KeyType_NOTIFICATION_KEY KeyType = 1
+)
+
+// Enum value maps for KeyType.
+var (
+	KeyType_name = map[int32]string{
+		0: "MATRIX_KEY",
+		1: "NOTIFICATION_KEY",
+	}
+	KeyType_value = map[string]int32{
+		"MATRIX_KEY":       0,
+		"NOTIFICATION_KEY": 1,
+	}
+)
+
+func (x KeyType) Enum() *KeyType {
+	p := new(KeyType)
+	*p = x
+	return p
+}
+
+func (x KeyType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (KeyType) Descriptor() protoreflect.EnumDescriptor {
+	return file_device_v1_device_proto_enumTypes[0].Descriptor()
+}
+
+func (KeyType) Type() protoreflect.EnumType {
+	return &file_device_v1_device_proto_enumTypes[0]
+}
+
+func (x KeyType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use KeyType.Descriptor instead.
+func (KeyType) EnumDescriptor() ([]byte, []int) {
+	return file_device_v1_device_proto_rawDescGZIP(), []int{0}
+}
+
 // The response message containing the full device key object
 type KeyObject struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	Key           []byte                 `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`
 	Extra         map[string]string      `protobuf:"bytes,4,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
@@ -81,6 +130,13 @@ func (*KeyObject) Descriptor() ([]byte, []int) {
 func (x *KeyObject) GetId() string {
 	if x != nil {
 		return x.Id
+	}
+	return ""
+}
+
+func (x *KeyObject) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
 	}
 	return ""
 }
@@ -530,7 +586,7 @@ func (x *GetBySessionIdResponse) GetData() *DeviceObject {
 type SearchRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
-	Page          int64                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
 	Count         int32                  `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`
 	StartDate     string                 `protobuf:"bytes,4,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
 	EndDate       string                 `protobuf:"bytes,5,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
@@ -577,7 +633,7 @@ func (x *SearchRequest) GetQuery() string {
 	return ""
 }
 
-func (x *SearchRequest) GetPage() int64 {
+func (x *SearchRequest) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
@@ -1208,8 +1264,10 @@ func (x *ListLogsResponse) GetData() []*DeviceLog {
 type AddKeyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Contact       string                 `protobuf:"bytes,2,opt,name=contact,proto3" json:"contact,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,3,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	KeyType       KeyType                `protobuf:"varint,3,opt,name=key_type,json=keyType,proto3,enum=device.v1.KeyType" json:"key_type,omitempty"`
+	Data          []byte                 `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
+	Extras        map[string]string      `protobuf:"bytes,5,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1251,11 +1309,25 @@ func (x *AddKeyRequest) GetId() string {
 	return ""
 }
 
-func (x *AddKeyRequest) GetContact() string {
+func (x *AddKeyRequest) GetDeviceId() string {
 	if x != nil {
-		return x.Contact
+		return x.DeviceId
 	}
 	return ""
+}
+
+func (x *AddKeyRequest) GetKeyType() KeyType {
+	if x != nil {
+		return x.KeyType
+	}
+	return KeyType_MATRIX_KEY
+}
+
+func (x *AddKeyRequest) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
 }
 
 func (x *AddKeyRequest) GetExtras() map[string]string {
@@ -1356,7 +1428,7 @@ func (x *RemoveKeyRequest) GetId() []string {
 
 type RemoveKeyResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*KeyObject           `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Id            []string               `protobuf:"bytes,1,rep,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1391,36 +1463,39 @@ func (*RemoveKeyResponse) Descriptor() ([]byte, []int) {
 	return file_device_v1_device_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *RemoveKeyResponse) GetData() []*KeyObject {
+func (x *RemoveKeyResponse) GetId() []string {
 	if x != nil {
-		return x.Data
+		return x.Id
 	}
 	return nil
 }
 
 // Request message to list all keys related to the supplied device id
-type ListKeysRequest struct {
+type SearchKeyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DeviceId      string                 `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	Count         int32                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
+	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	KeyType       KeyType                `protobuf:"varint,3,opt,name=key_type,json=keyType,proto3,enum=device.v1.KeyType" json:"key_type,omitempty"`
+	Page          int32                  `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
+	Count         int32                  `protobuf:"varint,5,opt,name=count,proto3" json:"count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListKeysRequest) Reset() {
-	*x = ListKeysRequest{}
+func (x *SearchKeyRequest) Reset() {
+	*x = SearchKeyRequest{}
 	mi := &file_device_v1_device_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListKeysRequest) String() string {
+func (x *SearchKeyRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListKeysRequest) ProtoMessage() {}
+func (*SearchKeyRequest) ProtoMessage() {}
 
-func (x *ListKeysRequest) ProtoReflect() protoreflect.Message {
+func (x *SearchKeyRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_device_v1_device_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1432,46 +1507,67 @@ func (x *ListKeysRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListKeysRequest.ProtoReflect.Descriptor instead.
-func (*ListKeysRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SearchKeyRequest.ProtoReflect.Descriptor instead.
+func (*SearchKeyRequest) Descriptor() ([]byte, []int) {
 	return file_device_v1_device_proto_rawDescGZIP(), []int{23}
 }
 
-func (x *ListKeysRequest) GetDeviceId() string {
+func (x *SearchKeyRequest) GetQuery() string {
+	if x != nil {
+		return x.Query
+	}
+	return ""
+}
+
+func (x *SearchKeyRequest) GetDeviceId() string {
 	if x != nil {
 		return x.DeviceId
 	}
 	return ""
 }
 
-func (x *ListKeysRequest) GetCount() int32 {
+func (x *SearchKeyRequest) GetKeyType() KeyType {
+	if x != nil {
+		return x.KeyType
+	}
+	return KeyType_MATRIX_KEY
+}
+
+func (x *SearchKeyRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *SearchKeyRequest) GetCount() int32 {
 	if x != nil {
 		return x.Count
 	}
 	return 0
 }
 
-type ListKeysResponse struct {
+type SearchKeyResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          []*KeyObject           `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListKeysResponse) Reset() {
-	*x = ListKeysResponse{}
+func (x *SearchKeyResponse) Reset() {
+	*x = SearchKeyResponse{}
 	mi := &file_device_v1_device_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListKeysResponse) String() string {
+func (x *SearchKeyResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListKeysResponse) ProtoMessage() {}
+func (*SearchKeyResponse) ProtoMessage() {}
 
-func (x *ListKeysResponse) ProtoReflect() protoreflect.Message {
+func (x *SearchKeyResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_device_v1_device_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1483,12 +1579,12 @@ func (x *ListKeysResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListKeysResponse.ProtoReflect.Descriptor instead.
-func (*ListKeysResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SearchKeyResponse.ProtoReflect.Descriptor instead.
+func (*SearchKeyResponse) Descriptor() ([]byte, []int) {
 	return file_device_v1_device_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *ListKeysResponse) GetData() []*KeyObject {
+func (x *SearchKeyResponse) GetData() []*KeyObject {
 	if x != nil {
 		return x.Data
 	}
@@ -1499,9 +1595,10 @@ var File_device_v1_device_proto protoreflect.FileDescriptor
 
 const file_device_v1_device_proto_rawDesc = "" +
 	"\n" +
-	"\x16device/v1/device.proto\x12\tdevice.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xbb\x01\n" +
+	"\x16device/v1/device.proto\x12\tdevice.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xf5\x01\n" +
 	"\tKeyObject\x12+\n" +
-	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x10\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x128\n" +
+	"\tdevice_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12\x10\n" +
 	"\x03key\x18\x03 \x01(\fR\x03key\x125\n" +
 	"\x05extra\x18\x04 \x03(\v2\x1f.device.v1.KeyObject.ExtraEntryR\x05extra\x1a8\n" +
 	"\n" +
@@ -1563,7 +1660,7 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x01(\v2\x17.device.v1.DeviceObjectR\x04data\"\xa2\x02\n" +
 	"\rSearchRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x12\n" +
-	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x14\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x14\n" +
 	"\x05count\x18\x03 \x01(\x05R\x05count\x12\x1d\n" +
 	"\n" +
 	"start_date\x18\x04 \x01(\tR\tstartDate\x12\x19\n" +
@@ -1625,25 +1722,34 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\tdevice_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x05R\x05count\"<\n" +
 	"\x10ListLogsResponse\x12(\n" +
-	"\x04data\x18\x01 \x03(\v2\x14.device.v1.DeviceLogR\x04data\"\xcf\x01\n" +
+	"\x04data\x18\x01 \x03(\v2\x14.device.v1.DeviceLogR\x04data\"\xb2\x02\n" +
 	"\rAddKeyRequest\x12+\n" +
-	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x18\n" +
-	"\acontact\x18\x02 \x01(\tR\acontact\x12<\n" +
-	"\x06extras\x18\x03 \x03(\v2$.device.v1.AddKeyRequest.ExtrasEntryR\x06extras\x1a9\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x128\n" +
+	"\tdevice_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12-\n" +
+	"\bkey_type\x18\x03 \x01(\x0e2\x12.device.v1.KeyTypeR\akeyType\x12\x12\n" +
+	"\x04data\x18\x04 \x01(\fR\x04data\x12<\n" +
+	"\x06extras\x18\x05 \x03(\v2$.device.v1.AddKeyRequest.ExtrasEntryR\x06extras\x1a9\n" +
 	"\vExtrasEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\":\n" +
 	"\x0eAddKeyResponse\x12(\n" +
 	"\x04data\x18\x01 \x01(\v2\x14.device.v1.KeyObjectR\x04data\"D\n" +
 	"\x10RemoveKeyRequest\x120\n" +
-	"\x02id\x18\x01 \x03(\tB \xbaH\x1d\x92\x01\x1a\"\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"=\n" +
-	"\x11RemoveKeyResponse\x12(\n" +
-	"\x04data\x18\x01 \x03(\v2\x14.device.v1.KeyObjectR\x04data\"a\n" +
-	"\x0fListKeysRequest\x128\n" +
-	"\tdevice_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12\x14\n" +
-	"\x05count\x18\x02 \x01(\x05R\x05count\"<\n" +
-	"\x10ListKeysResponse\x12(\n" +
-	"\x04data\x18\x01 \x03(\v2\x14.device.v1.KeyObjectR\x04data2\xad\a\n" +
+	"\x02id\x18\x01 \x03(\tB \xbaH\x1d\x92\x01\x1a\"\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"#\n" +
+	"\x11RemoveKeyResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x03(\tR\x02id\"\xbb\x01\n" +
+	"\x10SearchKeyRequest\x12\x14\n" +
+	"\x05query\x18\x01 \x01(\tR\x05query\x128\n" +
+	"\tdevice_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12-\n" +
+	"\bkey_type\x18\x03 \x01(\x0e2\x12.device.v1.KeyTypeR\akeyType\x12\x12\n" +
+	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x14\n" +
+	"\x05count\x18\x05 \x01(\x05R\x05count\"=\n" +
+	"\x11SearchKeyResponse\x12(\n" +
+	"\x04data\x18\x01 \x03(\v2\x14.device.v1.KeyObjectR\x04data*/\n" +
+	"\aKeyType\x12\x0e\n" +
+	"\n" +
+	"MATRIX_KEY\x10\x00\x12\x14\n" +
+	"\x10NOTIFICATION_KEY\x10\x012\xb0\a\n" +
 	"\rDeviceService\x12O\n" +
 	"\aGetById\x12\x19.device.v1.GetByIdRequest\x1a\x1a.device.v1.GetByIdResponse\"\r\x82\xd3\xe4\x93\x02\a\x12\x05/{id}\x12l\n" +
 	"\x0eGetBySessionId\x12 .device.v1.GetBySessionIdRequest\x1a!.device.v1.GetBySessionIdResponse\"\x15\x82\xd3\xe4\x93\x02\x0f\x12\r/session/{id}\x12P\n" +
@@ -1658,8 +1764,8 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\x06AddKey\x12\x18.device.v1.AddKeyRequest\x1a\x19.device.v1.AddKeyResponse\"\x10\x82\xd3\xe4\x93\x02\n" +
 	":\x01*\"\x05/keys\x12Z\n" +
 	"\tRemoveKey\x12\x1b.device.v1.RemoveKeyRequest\x1a\x1c.device.v1.RemoveKeyResponse\"\x12\x82\xd3\xe4\x93\x02\f*\n" +
-	"/keys/{id}\x12T\n" +
-	"\bListKeys\x12\x1a.device.v1.ListKeysRequest\x1a\x1b.device.v1.ListKeysResponse\"\r\x82\xd3\xe4\x93\x02\a\x12\x05/keys0\x01B\xb1\x03\x92A\x81\x02\x12n\n" +
+	"/keys/{id}\x12W\n" +
+	"\tSearchKey\x12\x1b.device.v1.SearchKeyRequest\x1a\x1c.device.v1.SearchKeyResponse\"\r\x82\xd3\xe4\x93\x02\a\x12\x05/keys0\x01B\xb1\x03\x92A\x81\x02\x12n\n" +
 	"\x0eDevice Service\"W\n" +
 	"\x10Ant Investor Ltd\x12-https://github.com/antinvestor/service-device\x1a\x14info@antinvestor.com2\x031.0*\x02\x01\x022\x10application/json:\x10application/jsonZY\n" +
 	"W\n" +
@@ -1682,93 +1788,96 @@ func file_device_v1_device_proto_rawDescGZIP() []byte {
 	return file_device_v1_device_proto_rawDescData
 }
 
+var file_device_v1_device_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_device_v1_device_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_device_v1_device_proto_goTypes = []any{
-	(*KeyObject)(nil),              // 0: device.v1.KeyObject
-	(*DeviceLog)(nil),              // 1: device.v1.DeviceLog
-	(*DeviceObject)(nil),           // 2: device.v1.DeviceObject
-	(*GetByIdRequest)(nil),         // 3: device.v1.GetByIdRequest
-	(*GetByIdResponse)(nil),        // 4: device.v1.GetByIdResponse
-	(*GetBySessionIdRequest)(nil),  // 5: device.v1.GetBySessionIdRequest
-	(*GetBySessionIdResponse)(nil), // 6: device.v1.GetBySessionIdResponse
-	(*SearchRequest)(nil),          // 7: device.v1.SearchRequest
-	(*SearchResponse)(nil),         // 8: device.v1.SearchResponse
-	(*CreateRequest)(nil),          // 9: device.v1.CreateRequest
-	(*CreateResponse)(nil),         // 10: device.v1.CreateResponse
-	(*UpdateRequest)(nil),          // 11: device.v1.UpdateRequest
-	(*UpdateResponse)(nil),         // 12: device.v1.UpdateResponse
-	(*RemoveRequest)(nil),          // 13: device.v1.RemoveRequest
-	(*RemoveResponse)(nil),         // 14: device.v1.RemoveResponse
-	(*LogRequest)(nil),             // 15: device.v1.LogRequest
-	(*LogResponse)(nil),            // 16: device.v1.LogResponse
-	(*ListLogsRequest)(nil),        // 17: device.v1.ListLogsRequest
-	(*ListLogsResponse)(nil),       // 18: device.v1.ListLogsResponse
-	(*AddKeyRequest)(nil),          // 19: device.v1.AddKeyRequest
-	(*AddKeyResponse)(nil),         // 20: device.v1.AddKeyResponse
-	(*RemoveKeyRequest)(nil),       // 21: device.v1.RemoveKeyRequest
-	(*RemoveKeyResponse)(nil),      // 22: device.v1.RemoveKeyResponse
-	(*ListKeysRequest)(nil),        // 23: device.v1.ListKeysRequest
-	(*ListKeysResponse)(nil),       // 24: device.v1.ListKeysResponse
-	nil,                            // 25: device.v1.KeyObject.ExtraEntry
-	nil,                            // 26: device.v1.DeviceLog.LocationEntry
-	nil,                            // 27: device.v1.DeviceLog.ExtraEntry
-	nil,                            // 28: device.v1.DeviceObject.LocationEntry
-	nil,                            // 29: device.v1.DeviceObject.PropertiesEntry
-	nil,                            // 30: device.v1.SearchRequest.ExtrasEntry
-	nil,                            // 31: device.v1.CreateRequest.PropertiesEntry
-	nil,                            // 32: device.v1.UpdateRequest.PropertiesEntry
-	nil,                            // 33: device.v1.LogRequest.ExtrasEntry
-	nil,                            // 34: device.v1.AddKeyRequest.ExtrasEntry
+	(KeyType)(0),                   // 0: device.v1.KeyType
+	(*KeyObject)(nil),              // 1: device.v1.KeyObject
+	(*DeviceLog)(nil),              // 2: device.v1.DeviceLog
+	(*DeviceObject)(nil),           // 3: device.v1.DeviceObject
+	(*GetByIdRequest)(nil),         // 4: device.v1.GetByIdRequest
+	(*GetByIdResponse)(nil),        // 5: device.v1.GetByIdResponse
+	(*GetBySessionIdRequest)(nil),  // 6: device.v1.GetBySessionIdRequest
+	(*GetBySessionIdResponse)(nil), // 7: device.v1.GetBySessionIdResponse
+	(*SearchRequest)(nil),          // 8: device.v1.SearchRequest
+	(*SearchResponse)(nil),         // 9: device.v1.SearchResponse
+	(*CreateRequest)(nil),          // 10: device.v1.CreateRequest
+	(*CreateResponse)(nil),         // 11: device.v1.CreateResponse
+	(*UpdateRequest)(nil),          // 12: device.v1.UpdateRequest
+	(*UpdateResponse)(nil),         // 13: device.v1.UpdateResponse
+	(*RemoveRequest)(nil),          // 14: device.v1.RemoveRequest
+	(*RemoveResponse)(nil),         // 15: device.v1.RemoveResponse
+	(*LogRequest)(nil),             // 16: device.v1.LogRequest
+	(*LogResponse)(nil),            // 17: device.v1.LogResponse
+	(*ListLogsRequest)(nil),        // 18: device.v1.ListLogsRequest
+	(*ListLogsResponse)(nil),       // 19: device.v1.ListLogsResponse
+	(*AddKeyRequest)(nil),          // 20: device.v1.AddKeyRequest
+	(*AddKeyResponse)(nil),         // 21: device.v1.AddKeyResponse
+	(*RemoveKeyRequest)(nil),       // 22: device.v1.RemoveKeyRequest
+	(*RemoveKeyResponse)(nil),      // 23: device.v1.RemoveKeyResponse
+	(*SearchKeyRequest)(nil),       // 24: device.v1.SearchKeyRequest
+	(*SearchKeyResponse)(nil),      // 25: device.v1.SearchKeyResponse
+	nil,                            // 26: device.v1.KeyObject.ExtraEntry
+	nil,                            // 27: device.v1.DeviceLog.LocationEntry
+	nil,                            // 28: device.v1.DeviceLog.ExtraEntry
+	nil,                            // 29: device.v1.DeviceObject.LocationEntry
+	nil,                            // 30: device.v1.DeviceObject.PropertiesEntry
+	nil,                            // 31: device.v1.SearchRequest.ExtrasEntry
+	nil,                            // 32: device.v1.CreateRequest.PropertiesEntry
+	nil,                            // 33: device.v1.UpdateRequest.PropertiesEntry
+	nil,                            // 34: device.v1.LogRequest.ExtrasEntry
+	nil,                            // 35: device.v1.AddKeyRequest.ExtrasEntry
 }
 var file_device_v1_device_proto_depIdxs = []int32{
-	25, // 0: device.v1.KeyObject.extra:type_name -> device.v1.KeyObject.ExtraEntry
-	26, // 1: device.v1.DeviceLog.location:type_name -> device.v1.DeviceLog.LocationEntry
-	27, // 2: device.v1.DeviceLog.extra:type_name -> device.v1.DeviceLog.ExtraEntry
-	28, // 3: device.v1.DeviceObject.location:type_name -> device.v1.DeviceObject.LocationEntry
-	29, // 4: device.v1.DeviceObject.properties:type_name -> device.v1.DeviceObject.PropertiesEntry
-	2,  // 5: device.v1.GetByIdResponse.data:type_name -> device.v1.DeviceObject
-	2,  // 6: device.v1.GetBySessionIdResponse.data:type_name -> device.v1.DeviceObject
-	30, // 7: device.v1.SearchRequest.extras:type_name -> device.v1.SearchRequest.ExtrasEntry
-	2,  // 8: device.v1.SearchResponse.data:type_name -> device.v1.DeviceObject
-	31, // 9: device.v1.CreateRequest.properties:type_name -> device.v1.CreateRequest.PropertiesEntry
-	2,  // 10: device.v1.CreateResponse.data:type_name -> device.v1.DeviceObject
-	32, // 11: device.v1.UpdateRequest.properties:type_name -> device.v1.UpdateRequest.PropertiesEntry
-	2,  // 12: device.v1.UpdateResponse.data:type_name -> device.v1.DeviceObject
-	2,  // 13: device.v1.RemoveResponse.data:type_name -> device.v1.DeviceObject
-	33, // 14: device.v1.LogRequest.extras:type_name -> device.v1.LogRequest.ExtrasEntry
-	1,  // 15: device.v1.LogResponse.data:type_name -> device.v1.DeviceLog
-	1,  // 16: device.v1.ListLogsResponse.data:type_name -> device.v1.DeviceLog
-	34, // 17: device.v1.AddKeyRequest.extras:type_name -> device.v1.AddKeyRequest.ExtrasEntry
-	0,  // 18: device.v1.AddKeyResponse.data:type_name -> device.v1.KeyObject
-	0,  // 19: device.v1.RemoveKeyResponse.data:type_name -> device.v1.KeyObject
-	0,  // 20: device.v1.ListKeysResponse.data:type_name -> device.v1.KeyObject
-	3,  // 21: device.v1.DeviceService.GetById:input_type -> device.v1.GetByIdRequest
-	5,  // 22: device.v1.DeviceService.GetBySessionId:input_type -> device.v1.GetBySessionIdRequest
-	7,  // 23: device.v1.DeviceService.Search:input_type -> device.v1.SearchRequest
-	9,  // 24: device.v1.DeviceService.Create:input_type -> device.v1.CreateRequest
-	11, // 25: device.v1.DeviceService.Update:input_type -> device.v1.UpdateRequest
-	13, // 26: device.v1.DeviceService.Remove:input_type -> device.v1.RemoveRequest
-	15, // 27: device.v1.DeviceService.Log:input_type -> device.v1.LogRequest
-	17, // 28: device.v1.DeviceService.ListLogs:input_type -> device.v1.ListLogsRequest
-	19, // 29: device.v1.DeviceService.AddKey:input_type -> device.v1.AddKeyRequest
-	21, // 30: device.v1.DeviceService.RemoveKey:input_type -> device.v1.RemoveKeyRequest
-	23, // 31: device.v1.DeviceService.ListKeys:input_type -> device.v1.ListKeysRequest
-	4,  // 32: device.v1.DeviceService.GetById:output_type -> device.v1.GetByIdResponse
-	6,  // 33: device.v1.DeviceService.GetBySessionId:output_type -> device.v1.GetBySessionIdResponse
-	8,  // 34: device.v1.DeviceService.Search:output_type -> device.v1.SearchResponse
-	10, // 35: device.v1.DeviceService.Create:output_type -> device.v1.CreateResponse
-	12, // 36: device.v1.DeviceService.Update:output_type -> device.v1.UpdateResponse
-	14, // 37: device.v1.DeviceService.Remove:output_type -> device.v1.RemoveResponse
-	16, // 38: device.v1.DeviceService.Log:output_type -> device.v1.LogResponse
-	18, // 39: device.v1.DeviceService.ListLogs:output_type -> device.v1.ListLogsResponse
-	20, // 40: device.v1.DeviceService.AddKey:output_type -> device.v1.AddKeyResponse
-	22, // 41: device.v1.DeviceService.RemoveKey:output_type -> device.v1.RemoveKeyResponse
-	24, // 42: device.v1.DeviceService.ListKeys:output_type -> device.v1.ListKeysResponse
-	32, // [32:43] is the sub-list for method output_type
-	21, // [21:32] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	26, // 0: device.v1.KeyObject.extra:type_name -> device.v1.KeyObject.ExtraEntry
+	27, // 1: device.v1.DeviceLog.location:type_name -> device.v1.DeviceLog.LocationEntry
+	28, // 2: device.v1.DeviceLog.extra:type_name -> device.v1.DeviceLog.ExtraEntry
+	29, // 3: device.v1.DeviceObject.location:type_name -> device.v1.DeviceObject.LocationEntry
+	30, // 4: device.v1.DeviceObject.properties:type_name -> device.v1.DeviceObject.PropertiesEntry
+	3,  // 5: device.v1.GetByIdResponse.data:type_name -> device.v1.DeviceObject
+	3,  // 6: device.v1.GetBySessionIdResponse.data:type_name -> device.v1.DeviceObject
+	31, // 7: device.v1.SearchRequest.extras:type_name -> device.v1.SearchRequest.ExtrasEntry
+	3,  // 8: device.v1.SearchResponse.data:type_name -> device.v1.DeviceObject
+	32, // 9: device.v1.CreateRequest.properties:type_name -> device.v1.CreateRequest.PropertiesEntry
+	3,  // 10: device.v1.CreateResponse.data:type_name -> device.v1.DeviceObject
+	33, // 11: device.v1.UpdateRequest.properties:type_name -> device.v1.UpdateRequest.PropertiesEntry
+	3,  // 12: device.v1.UpdateResponse.data:type_name -> device.v1.DeviceObject
+	3,  // 13: device.v1.RemoveResponse.data:type_name -> device.v1.DeviceObject
+	34, // 14: device.v1.LogRequest.extras:type_name -> device.v1.LogRequest.ExtrasEntry
+	2,  // 15: device.v1.LogResponse.data:type_name -> device.v1.DeviceLog
+	2,  // 16: device.v1.ListLogsResponse.data:type_name -> device.v1.DeviceLog
+	0,  // 17: device.v1.AddKeyRequest.key_type:type_name -> device.v1.KeyType
+	35, // 18: device.v1.AddKeyRequest.extras:type_name -> device.v1.AddKeyRequest.ExtrasEntry
+	1,  // 19: device.v1.AddKeyResponse.data:type_name -> device.v1.KeyObject
+	0,  // 20: device.v1.SearchKeyRequest.key_type:type_name -> device.v1.KeyType
+	1,  // 21: device.v1.SearchKeyResponse.data:type_name -> device.v1.KeyObject
+	4,  // 22: device.v1.DeviceService.GetById:input_type -> device.v1.GetByIdRequest
+	6,  // 23: device.v1.DeviceService.GetBySessionId:input_type -> device.v1.GetBySessionIdRequest
+	8,  // 24: device.v1.DeviceService.Search:input_type -> device.v1.SearchRequest
+	10, // 25: device.v1.DeviceService.Create:input_type -> device.v1.CreateRequest
+	12, // 26: device.v1.DeviceService.Update:input_type -> device.v1.UpdateRequest
+	14, // 27: device.v1.DeviceService.Remove:input_type -> device.v1.RemoveRequest
+	16, // 28: device.v1.DeviceService.Log:input_type -> device.v1.LogRequest
+	18, // 29: device.v1.DeviceService.ListLogs:input_type -> device.v1.ListLogsRequest
+	20, // 30: device.v1.DeviceService.AddKey:input_type -> device.v1.AddKeyRequest
+	22, // 31: device.v1.DeviceService.RemoveKey:input_type -> device.v1.RemoveKeyRequest
+	24, // 32: device.v1.DeviceService.SearchKey:input_type -> device.v1.SearchKeyRequest
+	5,  // 33: device.v1.DeviceService.GetById:output_type -> device.v1.GetByIdResponse
+	7,  // 34: device.v1.DeviceService.GetBySessionId:output_type -> device.v1.GetBySessionIdResponse
+	9,  // 35: device.v1.DeviceService.Search:output_type -> device.v1.SearchResponse
+	11, // 36: device.v1.DeviceService.Create:output_type -> device.v1.CreateResponse
+	13, // 37: device.v1.DeviceService.Update:output_type -> device.v1.UpdateResponse
+	15, // 38: device.v1.DeviceService.Remove:output_type -> device.v1.RemoveResponse
+	17, // 39: device.v1.DeviceService.Log:output_type -> device.v1.LogResponse
+	19, // 40: device.v1.DeviceService.ListLogs:output_type -> device.v1.ListLogsResponse
+	21, // 41: device.v1.DeviceService.AddKey:output_type -> device.v1.AddKeyResponse
+	23, // 42: device.v1.DeviceService.RemoveKey:output_type -> device.v1.RemoveKeyResponse
+	25, // 43: device.v1.DeviceService.SearchKey:output_type -> device.v1.SearchKeyResponse
+	33, // [33:44] is the sub-list for method output_type
+	22, // [22:33] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_device_v1_device_proto_init() }
@@ -1781,13 +1890,14 @@ func file_device_v1_device_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_device_v1_device_proto_rawDesc), len(file_device_v1_device_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_device_v1_device_proto_goTypes,
 		DependencyIndexes: file_device_v1_device_proto_depIdxs,
+		EnumInfos:         file_device_v1_device_proto_enumTypes,
 		MessageInfos:      file_device_v1_device_proto_msgTypes,
 	}.Build()
 	File_device_v1_device_proto = out.File

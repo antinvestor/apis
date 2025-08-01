@@ -43,7 +43,7 @@ const (
 	DeviceService_ListLogs_FullMethodName       = "/device.v1.DeviceService/ListLogs"
 	DeviceService_AddKey_FullMethodName         = "/device.v1.DeviceService/AddKey"
 	DeviceService_RemoveKey_FullMethodName      = "/device.v1.DeviceService/RemoveKey"
-	DeviceService_ListKeys_FullMethodName       = "/device.v1.DeviceService/ListKeys"
+	DeviceService_SearchKey_FullMethodName      = "/device.v1.DeviceService/SearchKey"
 )
 
 // DeviceServiceClient is the client API for DeviceService service.
@@ -73,7 +73,7 @@ type DeviceServiceClient interface {
 	// Removes an old device keys based on this request's id
 	RemoveKey(ctx context.Context, in *RemoveKeyRequest, opts ...grpc.CallOption) (*RemoveKeyResponse, error)
 	// Lists all the keys a device has/owns.
-	ListKeys(ctx context.Context, in *ListKeysRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListKeysResponse], error)
+	SearchKey(ctx context.Context, in *SearchKeyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchKeyResponse], error)
 }
 
 type deviceServiceClient struct {
@@ -202,13 +202,13 @@ func (c *deviceServiceClient) RemoveKey(ctx context.Context, in *RemoveKeyReques
 	return out, nil
 }
 
-func (c *deviceServiceClient) ListKeys(ctx context.Context, in *ListKeysRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListKeysResponse], error) {
+func (c *deviceServiceClient) SearchKey(ctx context.Context, in *SearchKeyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchKeyResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &DeviceService_ServiceDesc.Streams[2], DeviceService_ListKeys_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &DeviceService_ServiceDesc.Streams[2], DeviceService_SearchKey_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[ListKeysRequest, ListKeysResponse]{ClientStream: stream}
+	x := &grpc.GenericClientStream[SearchKeyRequest, SearchKeyResponse]{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -219,7 +219,7 @@ func (c *deviceServiceClient) ListKeys(ctx context.Context, in *ListKeysRequest,
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type DeviceService_ListKeysClient = grpc.ServerStreamingClient[ListKeysResponse]
+type DeviceService_SearchKeyClient = grpc.ServerStreamingClient[SearchKeyResponse]
 
 // DeviceServiceServer is the server API for DeviceService service.
 // All implementations must embed UnimplementedDeviceServiceServer
@@ -248,7 +248,7 @@ type DeviceServiceServer interface {
 	// Removes an old device keys based on this request's id
 	RemoveKey(context.Context, *RemoveKeyRequest) (*RemoveKeyResponse, error)
 	// Lists all the keys a device has/owns.
-	ListKeys(*ListKeysRequest, grpc.ServerStreamingServer[ListKeysResponse]) error
+	SearchKey(*SearchKeyRequest, grpc.ServerStreamingServer[SearchKeyResponse]) error
 	mustEmbedUnimplementedDeviceServiceServer()
 }
 
@@ -289,8 +289,8 @@ func (UnimplementedDeviceServiceServer) AddKey(context.Context, *AddKeyRequest) 
 func (UnimplementedDeviceServiceServer) RemoveKey(context.Context, *RemoveKeyRequest) (*RemoveKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveKey not implemented")
 }
-func (UnimplementedDeviceServiceServer) ListKeys(*ListKeysRequest, grpc.ServerStreamingServer[ListKeysResponse]) error {
-	return status.Errorf(codes.Unimplemented, "method ListKeys not implemented")
+func (UnimplementedDeviceServiceServer) SearchKey(*SearchKeyRequest, grpc.ServerStreamingServer[SearchKeyResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method SearchKey not implemented")
 }
 func (UnimplementedDeviceServiceServer) mustEmbedUnimplementedDeviceServiceServer() {}
 func (UnimplementedDeviceServiceServer) testEmbeddedByValue()                       {}
@@ -479,16 +479,16 @@ func _DeviceService_RemoveKey_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DeviceService_ListKeys_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListKeysRequest)
+func _DeviceService_SearchKey_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(SearchKeyRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(DeviceServiceServer).ListKeys(m, &grpc.GenericServerStream[ListKeysRequest, ListKeysResponse]{ServerStream: stream})
+	return srv.(DeviceServiceServer).SearchKey(m, &grpc.GenericServerStream[SearchKeyRequest, SearchKeyResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type DeviceService_ListKeysServer = grpc.ServerStreamingServer[ListKeysResponse]
+type DeviceService_SearchKeyServer = grpc.ServerStreamingServer[SearchKeyResponse]
 
 // DeviceService_ServiceDesc is the grpc.ServiceDesc for DeviceService service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -542,8 +542,8 @@ var DeviceService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "ListKeys",
-			Handler:       _DeviceService_ListKeys_Handler,
+			StreamName:    "SearchKey",
+			Handler:       _DeviceService_SearchKey_Handler,
 			ServerStreams: true,
 		},
 	},

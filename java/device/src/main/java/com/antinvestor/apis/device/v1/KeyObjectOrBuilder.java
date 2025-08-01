@@ -37,6 +37,18 @@ public interface KeyObjectOrBuilder extends
       getIdBytes();
 
   /**
+   * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * @return The deviceId.
+   */
+  java.lang.String getDeviceId();
+  /**
+   * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for deviceId.
+   */
+  com.google.protobuf.ByteString
+      getDeviceIdBytes();
+
+  /**
    * <code>bytes key = 3 [json_name = "key"];</code>
    * @return The key.
    */

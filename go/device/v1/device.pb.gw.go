@@ -401,11 +401,11 @@ func local_request_DeviceService_RemoveKey_0(ctx context.Context, marshaler runt
 	return msg, metadata, err
 }
 
-var filter_DeviceService_ListKeys_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+var filter_DeviceService_SearchKey_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
-func request_DeviceService_ListKeys_0(ctx context.Context, marshaler runtime.Marshaler, client DeviceServiceClient, req *http.Request, pathParams map[string]string) (DeviceService_ListKeysClient, runtime.ServerMetadata, error) {
+func request_DeviceService_SearchKey_0(ctx context.Context, marshaler runtime.Marshaler, client DeviceServiceClient, req *http.Request, pathParams map[string]string) (DeviceService_SearchKeyClient, runtime.ServerMetadata, error) {
 	var (
-		protoReq ListKeysRequest
+		protoReq SearchKeyRequest
 		metadata runtime.ServerMetadata
 	)
 	if req.Body != nil {
@@ -414,10 +414,10 @@ func request_DeviceService_ListKeys_0(ctx context.Context, marshaler runtime.Mar
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_DeviceService_ListKeys_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_DeviceService_SearchKey_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	stream, err := client.ListKeys(ctx, &protoReq)
+	stream, err := client.SearchKey(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -610,7 +610,7 @@ func RegisterDeviceServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		forward_DeviceService_RemoveKey_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 
-	mux.Handle(http.MethodGet, pattern_DeviceService_ListKeys_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_DeviceService_SearchKey_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -826,22 +826,22 @@ func RegisterDeviceServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		}
 		forward_DeviceService_RemoveKey_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_DeviceService_ListKeys_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_DeviceService_SearchKey_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/device.v1.DeviceService/ListKeys", runtime.WithHTTPPathPattern("/keys"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/device.v1.DeviceService/SearchKey", runtime.WithHTTPPathPattern("/keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_DeviceService_ListKeys_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_DeviceService_SearchKey_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_DeviceService_ListKeys_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_DeviceService_SearchKey_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 	})
 	return nil
 }
@@ -857,7 +857,7 @@ var (
 	pattern_DeviceService_ListLogs_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"logs"}, ""))
 	pattern_DeviceService_AddKey_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"keys"}, ""))
 	pattern_DeviceService_RemoveKey_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"keys", "id"}, ""))
-	pattern_DeviceService_ListKeys_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"keys"}, ""))
+	pattern_DeviceService_SearchKey_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"keys"}, ""))
 )
 
 var (
@@ -871,5 +871,5 @@ var (
 	forward_DeviceService_ListLogs_0       = runtime.ForwardResponseStream
 	forward_DeviceService_AddKey_0         = runtime.ForwardResponseMessage
 	forward_DeviceService_RemoveKey_0      = runtime.ForwardResponseMessage
-	forward_DeviceService_ListKeys_0       = runtime.ForwardResponseStream
+	forward_DeviceService_SearchKey_0      = runtime.ForwardResponseStream
 )

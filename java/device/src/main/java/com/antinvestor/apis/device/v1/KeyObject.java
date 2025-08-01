@@ -47,6 +47,7 @@ private static final long serialVersionUID = 0L;
   }
   private KeyObject() {
     id_ = "";
+    deviceId_ = "";
     key_ = com.google.protobuf.ByteString.EMPTY;
   }
 
@@ -108,6 +109,45 @@ private static final long serialVersionUID = 0L;
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
       id_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int DEVICE_ID_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object deviceId_ = "";
+  /**
+   * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * @return The deviceId.
+   */
+  @java.lang.Override
+  public java.lang.String getDeviceId() {
+    java.lang.Object ref = deviceId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      deviceId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for deviceId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getDeviceIdBytes() {
+    java.lang.Object ref = deviceId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      deviceId_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -221,6 +261,9 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, deviceId_);
+    }
     if (!key_.isEmpty()) {
       output.writeBytes(3, key_);
     }
@@ -241,6 +284,9 @@ java.lang.String defaultValue) {
     size = 0;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, deviceId_);
     }
     if (!key_.isEmpty()) {
       size += com.google.protobuf.CodedOutputStream
@@ -273,6 +319,8 @@ java.lang.String defaultValue) {
 
     if (!getId()
         .equals(other.getId())) return false;
+    if (!getDeviceId()
+        .equals(other.getDeviceId())) return false;
     if (!getKey()
         .equals(other.getKey())) return false;
     if (!internalGetExtra().equals(
@@ -290,6 +338,8 @@ java.lang.String defaultValue) {
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + getId().hashCode();
+    hash = (37 * hash) + DEVICE_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getDeviceId().hashCode();
     hash = (37 * hash) + KEY_FIELD_NUMBER;
     hash = (53 * hash) + getKey().hashCode();
     if (!internalGetExtra().getMap().isEmpty()) {
@@ -454,6 +504,7 @@ java.lang.String defaultValue) {
       super.clear();
       bitField0_ = 0;
       id_ = "";
+      deviceId_ = "";
       key_ = com.google.protobuf.ByteString.EMPTY;
       internalGetMutableExtra().clear();
       return this;
@@ -493,9 +544,12 @@ java.lang.String defaultValue) {
         result.id_ = id_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.key_ = key_;
+        result.deviceId_ = deviceId_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.key_ = key_;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
         result.extra_ = internalGetExtra();
         result.extra_.makeImmutable();
       }
@@ -518,12 +572,17 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000001;
         onChanged();
       }
+      if (!other.getDeviceId().isEmpty()) {
+        deviceId_ = other.deviceId_;
+        bitField0_ |= 0x00000002;
+        onChanged();
+      }
       if (!other.getKey().isEmpty()) {
         setKey(other.getKey());
       }
       internalGetMutableExtra().mergeFrom(
           other.internalGetExtra());
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -555,9 +614,14 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000001;
               break;
             } // case 10
+            case 18: {
+              deviceId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 18
             case 26: {
               key_ = input.readBytes();
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000004;
               break;
             } // case 26
             case 34: {
@@ -566,7 +630,7 @@ java.lang.String defaultValue) {
                   ExtraDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableExtra().getMutableMap().put(
                   extra__.getKey(), extra__.getValue());
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000008;
               break;
             } // case 34
             default: {
@@ -658,6 +722,78 @@ java.lang.String defaultValue) {
       return this;
     }
 
+    private java.lang.Object deviceId_ = "";
+    /**
+     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @return The deviceId.
+     */
+    public java.lang.String getDeviceId() {
+      java.lang.Object ref = deviceId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        deviceId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for deviceId.
+     */
+    public com.google.protobuf.ByteString
+        getDeviceIdBytes() {
+      java.lang.Object ref = deviceId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        deviceId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @param value The deviceId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDeviceId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      deviceId_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDeviceId() {
+      deviceId_ = getDefaultInstance().getDeviceId();
+      bitField0_ = (bitField0_ & ~0x00000002);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for deviceId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDeviceIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      deviceId_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+
     private com.google.protobuf.ByteString key_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes key = 3 [json_name = "key"];</code>
@@ -675,7 +811,7 @@ java.lang.String defaultValue) {
     public Builder setKey(com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       key_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
@@ -684,7 +820,7 @@ java.lang.String defaultValue) {
      * @return This builder for chaining.
      */
     public Builder clearKey() {
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000004);
       key_ = getDefaultInstance().getKey();
       onChanged();
       return this;
@@ -709,7 +845,7 @@ java.lang.String defaultValue) {
       if (!extra_.isMutable()) {
         extra_ = extra_.copy();
       }
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return extra_;
     }
@@ -769,7 +905,7 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearExtra() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000008);
       internalGetMutableExtra().getMutableMap()
           .clear();
       return this;
@@ -790,7 +926,7 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableExtra() {
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       return internalGetMutableExtra().getMutableMap();
     }
     /**
@@ -803,7 +939,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableExtra().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       return this;
     }
     /**
@@ -813,7 +949,7 @@ java.lang.String defaultValue) {
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableExtra().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       return this;
     }
 

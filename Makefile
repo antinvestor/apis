@@ -35,23 +35,23 @@ cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -packag
 endef
 
 define buf_generate
-cd proto/${1} && PATH=$(BIN) $(BIN)/buf dep update
-cd proto/${1} && PATH=$(BIN) $(BIN)/buf generate
+cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf dep update
+cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf generate
 endef
 
 define buf_migrate
-cd proto/${1} && PATH=$(BIN) $(BIN)/buf config migrate
+cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf config migrate
 endef
 
 define golang_lint
-cd proto/${1} && PATH=$(BIN) $(BIN)/buf lint
+cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf lint
 cd go/${1} && $(GO) vet ./...
 cd go/${1} && golangci-lint run
 endef
 
 define lint_fix_module
-cd proto/${1} && PATH=$(BIN) $(BIN)/buf dep update
-cd proto/${1} && PATH=$(BIN) $(BIN)/buf format -w .
+cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf dep update
+cd proto/${1} && PATH=$(BIN):$$PATH $(BIN)/buf format -w .
 cd go/${1} && golangci-lint run --fix
 endef
 
@@ -63,7 +63,7 @@ help: ## Describe useful make targets
 .PHONY: all
 all: ## Build, test, and lint (default)
 	$(MAKE) golang_build_all
-	$(MAKE) golang_lint_all
+	$(MAKE) lintfix
 
 .PHONY: clean
 clean: ## Delete intermediate build artifacts
@@ -84,21 +84,6 @@ golang_build_all: generate ## Build all packages
 	$(call golang_build,ledger)
 	$(call golang_build,lostid)
 
-.PHONY: golang_lint_all
-golang_lint_all: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and protobuf
-	test -z "$$($(BIN)/buf format -d . | tee /dev/stderr)"
-	$(call golang_lint,common)
-	$(call golang_lint,device)
-	$(call golang_lint,notification)
-	$(call golang_lint,ocr)
-	$(call golang_lint,partition)
-	$(call golang_lint,payment)
-	$(call golang_lint,profile)
-	$(call golang_lint,property)
-	$(call golang_lint,settings)
-	$(call golang_lint,ledger)
-	$(call golang_lint,lostid)
-
 
 .PHONY: lintfix
 lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some lint errors
@@ -114,6 +99,20 @@ lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some
 	$(call lint_fix_module,ledger)
 	$(call lint_fix_module,lostid)
 
+.PHONY: golang_lint_all
+golang_lint_all: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and protobuf
+	test -z "$$($(BIN)/buf format -d . | tee /dev/stderr)"
+	$(call golang_lint,common)
+	$(call golang_lint,device)
+	$(call golang_lint,notification)
+	$(call golang_lint,ocr)
+	$(call golang_lint,partition)
+	$(call golang_lint,payment)
+	$(call golang_lint,profile)
+	$(call golang_lint,property)
+	$(call golang_lint,settings)
+	$(call golang_lint,ledger)
+	$(call golang_lint,lostid)
 
 .PHONY: openapi_files_gen_go
 openapi_files_gen_go: ## Generate the golang open api spec for the files server

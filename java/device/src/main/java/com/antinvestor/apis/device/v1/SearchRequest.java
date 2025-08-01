@@ -114,13 +114,13 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int PAGE_FIELD_NUMBER = 2;
-  private long page_ = 0L;
+  private int page_ = 0;
   /**
-   * <code>int64 page = 2 [json_name = "page"];</code>
+   * <code>int32 page = 2 [json_name = "page"];</code>
    * @return The page.
    */
   @java.lang.Override
-  public long getPage() {
+  public int getPage() {
     return page_;
   }
 
@@ -346,8 +346,8 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(query_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 1, query_);
     }
-    if (page_ != 0L) {
-      output.writeInt64(2, page_);
+    if (page_ != 0) {
+      output.writeInt32(2, page_);
     }
     if (count_ != 0) {
       output.writeInt32(3, count_);
@@ -379,9 +379,9 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(query_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(1, query_);
     }
-    if (page_ != 0L) {
+    if (page_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(2, page_);
+        .computeInt32Size(2, page_);
     }
     if (count_ != 0) {
       size += com.google.protobuf.CodedOutputStream
@@ -454,8 +454,7 @@ java.lang.String defaultValue) {
     hash = (37 * hash) + QUERY_FIELD_NUMBER;
     hash = (53 * hash) + getQuery().hashCode();
     hash = (37 * hash) + PAGE_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getPage());
+    hash = (53 * hash) + getPage();
     hash = (37 * hash) + COUNT_FIELD_NUMBER;
     hash = (53 * hash) + getCount();
     hash = (37 * hash) + START_DATE_FIELD_NUMBER;
@@ -624,7 +623,7 @@ java.lang.String defaultValue) {
       super.clear();
       bitField0_ = 0;
       query_ = "";
-      page_ = 0L;
+      page_ = 0;
       count_ = 0;
       startDate_ = "";
       endDate_ = "";
@@ -706,7 +705,7 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (other.getPage() != 0L) {
+      if (other.getPage() != 0) {
         setPage(other.getPage());
       }
       if (other.getCount() != 0) {
@@ -767,7 +766,7 @@ java.lang.String defaultValue) {
               break;
             } // case 10
             case 16: {
-              page_ = input.readInt64();
+              page_ = input.readInt32();
               bitField0_ |= 0x00000002;
               break;
             } // case 16
@@ -890,21 +889,21 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private long page_ ;
+    private int page_ ;
     /**
-     * <code>int64 page = 2 [json_name = "page"];</code>
+     * <code>int32 page = 2 [json_name = "page"];</code>
      * @return The page.
      */
     @java.lang.Override
-    public long getPage() {
+    public int getPage() {
       return page_;
     }
     /**
-     * <code>int64 page = 2 [json_name = "page"];</code>
+     * <code>int32 page = 2 [json_name = "page"];</code>
      * @param value The page to set.
      * @return This builder for chaining.
      */
-    public Builder setPage(long value) {
+    public Builder setPage(int value) {
 
       page_ = value;
       bitField0_ |= 0x00000002;
@@ -912,12 +911,12 @@ java.lang.String defaultValue) {
       return this;
     }
     /**
-     * <code>int64 page = 2 [json_name = "page"];</code>
+     * <code>int32 page = 2 [json_name = "page"];</code>
      * @return This builder for chaining.
      */
     public Builder clearPage() {
       bitField0_ = (bitField0_ & ~0x00000002);
-      page_ = 0L;
+      page_ = 0;
       onChanged();
       return this;
     }

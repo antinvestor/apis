@@ -42,7 +42,8 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private RemoveKeyResponse() {
-    data_ = java.util.Collections.emptyList();
+    id_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -58,45 +59,41 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.device.v1.RemoveKeyResponse.class, com.antinvestor.apis.device.v1.RemoveKeyResponse.Builder.class);
   }
 
-  public static final int DATA_FIELD_NUMBER = 1;
+  public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private java.util.List<com.antinvestor.apis.device.v1.KeyObject> data_;
+  private com.google.protobuf.LazyStringArrayList id_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
   /**
-   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+   * <code>repeated string id = 1 [json_name = "id"];</code>
+   * @return A list containing the id.
    */
-  @java.lang.Override
-  public java.util.List<com.antinvestor.apis.device.v1.KeyObject> getDataList() {
-    return data_;
+  public com.google.protobuf.ProtocolStringList
+      getIdList() {
+    return id_;
   }
   /**
-   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+   * <code>repeated string id = 1 [json_name = "id"];</code>
+   * @return The count of id.
    */
-  @java.lang.Override
-  public java.util.List<? extends com.antinvestor.apis.device.v1.KeyObjectOrBuilder> 
-      getDataOrBuilderList() {
-    return data_;
+  public int getIdCount() {
+    return id_.size();
   }
   /**
-   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+   * <code>repeated string id = 1 [json_name = "id"];</code>
+   * @param index The index of the element to return.
+   * @return The id at the given index.
    */
-  @java.lang.Override
-  public int getDataCount() {
-    return data_.size();
+  public java.lang.String getId(int index) {
+    return id_.get(index);
   }
   /**
-   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+   * <code>repeated string id = 1 [json_name = "id"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the id at the given index.
    */
-  @java.lang.Override
-  public com.antinvestor.apis.device.v1.KeyObject getData(int index) {
-    return data_.get(index);
-  }
-  /**
-   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-   */
-  @java.lang.Override
-  public com.antinvestor.apis.device.v1.KeyObjectOrBuilder getDataOrBuilder(
-      int index) {
-    return data_.get(index);
+  public com.google.protobuf.ByteString
+      getIdBytes(int index) {
+    return id_.getByteString(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -113,8 +110,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    for (int i = 0; i < data_.size(); i++) {
-      output.writeMessage(1, data_.get(i));
+    for (int i = 0; i < id_.size(); i++) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, id_.getRaw(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -125,9 +122,13 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    for (int i = 0; i < data_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(1, data_.get(i));
+    {
+      int dataSize = 0;
+      for (int i = 0; i < id_.size(); i++) {
+        dataSize += computeStringSizeNoTag(id_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getIdList().size();
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -144,8 +145,8 @@ private static final long serialVersionUID = 0L;
     }
     com.antinvestor.apis.device.v1.RemoveKeyResponse other = (com.antinvestor.apis.device.v1.RemoveKeyResponse) obj;
 
-    if (!getDataList()
-        .equals(other.getDataList())) return false;
+    if (!getIdList()
+        .equals(other.getIdList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -157,9 +158,9 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (getDataCount() > 0) {
-      hash = (37 * hash) + DATA_FIELD_NUMBER;
-      hash = (53 * hash) + getDataList().hashCode();
+    if (getIdCount() > 0) {
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getIdList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -292,13 +293,8 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      if (dataBuilder_ == null) {
-        data_ = java.util.Collections.emptyList();
-      } else {
-        data_ = null;
-        dataBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00000001);
+      id_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
       return this;
     }
 
@@ -325,26 +321,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.antinvestor.apis.device.v1.RemoveKeyResponse buildPartial() {
       com.antinvestor.apis.device.v1.RemoveKeyResponse result = new com.antinvestor.apis.device.v1.RemoveKeyResponse(this);
-      buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartialRepeatedFields(com.antinvestor.apis.device.v1.RemoveKeyResponse result) {
-      if (dataBuilder_ == null) {
-        if (((bitField0_ & 0x00000001) != 0)) {
-          data_ = java.util.Collections.unmodifiableList(data_);
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.data_ = data_;
-      } else {
-        result.data_ = dataBuilder_.build();
-      }
-    }
-
     private void buildPartial0(com.antinvestor.apis.device.v1.RemoveKeyResponse result) {
       int from_bitField0_ = bitField0_;
+      if (((from_bitField0_ & 0x00000001) != 0)) {
+        id_.makeImmutable();
+        result.id_ = id_;
+      }
     }
 
     @java.lang.Override
@@ -359,31 +346,15 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.antinvestor.apis.device.v1.RemoveKeyResponse other) {
       if (other == com.antinvestor.apis.device.v1.RemoveKeyResponse.getDefaultInstance()) return this;
-      if (dataBuilder_ == null) {
-        if (!other.data_.isEmpty()) {
-          if (data_.isEmpty()) {
-            data_ = other.data_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureDataIsMutable();
-            data_.addAll(other.data_);
-          }
-          onChanged();
+      if (!other.id_.isEmpty()) {
+        if (id_.isEmpty()) {
+          id_ = other.id_;
+          bitField0_ |= 0x00000001;
+        } else {
+          ensureIdIsMutable();
+          id_.addAll(other.id_);
         }
-      } else {
-        if (!other.data_.isEmpty()) {
-          if (dataBuilder_.isEmpty()) {
-            dataBuilder_.dispose();
-            dataBuilder_ = null;
-            data_ = other.data_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-            dataBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetDataFieldBuilder() : null;
-          } else {
-            dataBuilder_.addAllMessages(other.data_);
-          }
-        }
+        onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -412,16 +383,9 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              com.antinvestor.apis.device.v1.KeyObject m =
-                  input.readMessage(
-                      com.antinvestor.apis.device.v1.KeyObject.parser(),
-                      extensionRegistry);
-              if (dataBuilder_ == null) {
-                ensureDataIsMutable();
-                data_.add(m);
-              } else {
-                dataBuilder_.addMessage(m);
-              }
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureIdIsMutable();
+              id_.add(s);
               break;
             } // case 10
             default: {
@@ -441,244 +405,115 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.util.List<com.antinvestor.apis.device.v1.KeyObject> data_ =
-      java.util.Collections.emptyList();
-    private void ensureDataIsMutable() {
-      if (!((bitField0_ & 0x00000001) != 0)) {
-        data_ = new java.util.ArrayList<com.antinvestor.apis.device.v1.KeyObject>(data_);
-        bitField0_ |= 0x00000001;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        com.antinvestor.apis.device.v1.KeyObject, com.antinvestor.apis.device.v1.KeyObject.Builder, com.antinvestor.apis.device.v1.KeyObjectOrBuilder> dataBuilder_;
-
-    /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-     */
-    public java.util.List<com.antinvestor.apis.device.v1.KeyObject> getDataList() {
-      if (dataBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(data_);
-      } else {
-        return dataBuilder_.getMessageList();
+    private com.google.protobuf.LazyStringArrayList id_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureIdIsMutable() {
+      if (!id_.isModifiable()) {
+        id_ = new com.google.protobuf.LazyStringArrayList(id_);
       }
+      bitField0_ |= 0x00000001;
     }
     /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+     * <code>repeated string id = 1 [json_name = "id"];</code>
+     * @return A list containing the id.
      */
-    public int getDataCount() {
-      if (dataBuilder_ == null) {
-        return data_.size();
-      } else {
-        return dataBuilder_.getCount();
-      }
+    public com.google.protobuf.ProtocolStringList
+        getIdList() {
+      id_.makeImmutable();
+      return id_;
     }
     /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+     * <code>repeated string id = 1 [json_name = "id"];</code>
+     * @return The count of id.
      */
-    public com.antinvestor.apis.device.v1.KeyObject getData(int index) {
-      if (dataBuilder_ == null) {
-        return data_.get(index);
-      } else {
-        return dataBuilder_.getMessage(index);
-      }
+    public int getIdCount() {
+      return id_.size();
     }
     /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+     * <code>repeated string id = 1 [json_name = "id"];</code>
+     * @param index The index of the element to return.
+     * @return The id at the given index.
      */
-    public Builder setData(
-        int index, com.antinvestor.apis.device.v1.KeyObject value) {
-      if (dataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureDataIsMutable();
-        data_.set(index, value);
-        onChanged();
-      } else {
-        dataBuilder_.setMessage(index, value);
-      }
+    public java.lang.String getId(int index) {
+      return id_.get(index);
+    }
+    /**
+     * <code>repeated string id = 1 [json_name = "id"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the id at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes(int index) {
+      return id_.getByteString(index);
+    }
+    /**
+     * <code>repeated string id = 1 [json_name = "id"];</code>
+     * @param index The index to set the value at.
+     * @param value The id to set.
+     * @return This builder for chaining.
+     */
+    public Builder setId(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureIdIsMutable();
+      id_.set(index, value);
+      bitField0_ |= 0x00000001;
+      onChanged();
       return this;
     }
     /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+     * <code>repeated string id = 1 [json_name = "id"];</code>
+     * @param value The id to add.
+     * @return This builder for chaining.
      */
-    public Builder setData(
-        int index, com.antinvestor.apis.device.v1.KeyObject.Builder builderForValue) {
-      if (dataBuilder_ == null) {
-        ensureDataIsMutable();
-        data_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        dataBuilder_.setMessage(index, builderForValue.build());
-      }
+    public Builder addId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureIdIsMutable();
+      id_.add(value);
+      bitField0_ |= 0x00000001;
+      onChanged();
       return this;
     }
     /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+     * <code>repeated string id = 1 [json_name = "id"];</code>
+     * @param values The id to add.
+     * @return This builder for chaining.
      */
-    public Builder addData(com.antinvestor.apis.device.v1.KeyObject value) {
-      if (dataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureDataIsMutable();
-        data_.add(value);
-        onChanged();
-      } else {
-        dataBuilder_.addMessage(value);
-      }
+    public Builder addAllId(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureIdIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, id_);
+      bitField0_ |= 0x00000001;
+      onChanged();
       return this;
     }
     /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+     * <code>repeated string id = 1 [json_name = "id"];</code>
+     * @return This builder for chaining.
      */
-    public Builder addData(
-        int index, com.antinvestor.apis.device.v1.KeyObject value) {
-      if (dataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureDataIsMutable();
-        data_.add(index, value);
-        onChanged();
-      } else {
-        dataBuilder_.addMessage(index, value);
-      }
+    public Builder clearId() {
+      id_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00000001);;
+      onChanged();
       return this;
     }
     /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+     * <code>repeated string id = 1 [json_name = "id"];</code>
+     * @param value The bytes of the id to add.
+     * @return This builder for chaining.
      */
-    public Builder addData(
-        com.antinvestor.apis.device.v1.KeyObject.Builder builderForValue) {
-      if (dataBuilder_ == null) {
-        ensureDataIsMutable();
-        data_.add(builderForValue.build());
-        onChanged();
-      } else {
-        dataBuilder_.addMessage(builderForValue.build());
-      }
+    public Builder addIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureIdIsMutable();
+      id_.add(value);
+      bitField0_ |= 0x00000001;
+      onChanged();
       return this;
-    }
-    /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-     */
-    public Builder addData(
-        int index, com.antinvestor.apis.device.v1.KeyObject.Builder builderForValue) {
-      if (dataBuilder_ == null) {
-        ensureDataIsMutable();
-        data_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        dataBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-     */
-    public Builder addAllData(
-        java.lang.Iterable<? extends com.antinvestor.apis.device.v1.KeyObject> values) {
-      if (dataBuilder_ == null) {
-        ensureDataIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, data_);
-        onChanged();
-      } else {
-        dataBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-     */
-    public Builder clearData() {
-      if (dataBuilder_ == null) {
-        data_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-      } else {
-        dataBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-     */
-    public Builder removeData(int index) {
-      if (dataBuilder_ == null) {
-        ensureDataIsMutable();
-        data_.remove(index);
-        onChanged();
-      } else {
-        dataBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-     */
-    public com.antinvestor.apis.device.v1.KeyObject.Builder getDataBuilder(
-        int index) {
-      return internalGetDataFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-     */
-    public com.antinvestor.apis.device.v1.KeyObjectOrBuilder getDataOrBuilder(
-        int index) {
-      if (dataBuilder_ == null) {
-        return data_.get(index);  } else {
-        return dataBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-     */
-    public java.util.List<? extends com.antinvestor.apis.device.v1.KeyObjectOrBuilder> 
-         getDataOrBuilderList() {
-      if (dataBuilder_ != null) {
-        return dataBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(data_);
-      }
-    }
-    /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-     */
-    public com.antinvestor.apis.device.v1.KeyObject.Builder addDataBuilder() {
-      return internalGetDataFieldBuilder().addBuilder(
-          com.antinvestor.apis.device.v1.KeyObject.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-     */
-    public com.antinvestor.apis.device.v1.KeyObject.Builder addDataBuilder(
-        int index) {
-      return internalGetDataFieldBuilder().addBuilder(
-          index, com.antinvestor.apis.device.v1.KeyObject.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-     */
-    public java.util.List<com.antinvestor.apis.device.v1.KeyObject.Builder> 
-         getDataBuilderList() {
-      return internalGetDataFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        com.antinvestor.apis.device.v1.KeyObject, com.antinvestor.apis.device.v1.KeyObject.Builder, com.antinvestor.apis.device.v1.KeyObjectOrBuilder> 
-        internalGetDataFieldBuilder() {
-      if (dataBuilder_ == null) {
-        dataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            com.antinvestor.apis.device.v1.KeyObject, com.antinvestor.apis.device.v1.KeyObject.Builder, com.antinvestor.apis.device.v1.KeyObjectOrBuilder>(
-                data_,
-                ((bitField0_ & 0x00000001) != 0),
-                getParentForChildren(),
-                isClean());
-        data_ = null;
-      }
-      return dataBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:device.v1.RemoveKeyResponse)

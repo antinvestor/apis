@@ -25,26 +25,27 @@ public interface RemoveKeyResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+   * <code>repeated string id = 1 [json_name = "id"];</code>
+   * @return A list containing the id.
    */
-  java.util.List<com.antinvestor.apis.device.v1.KeyObject> 
-      getDataList();
+  java.util.List<java.lang.String>
+      getIdList();
   /**
-   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+   * <code>repeated string id = 1 [json_name = "id"];</code>
+   * @return The count of id.
    */
-  com.antinvestor.apis.device.v1.KeyObject getData(int index);
+  int getIdCount();
   /**
-   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+   * <code>repeated string id = 1 [json_name = "id"];</code>
+   * @param index The index of the element to return.
+   * @return The id at the given index.
    */
-  int getDataCount();
+  java.lang.String getId(int index);
   /**
-   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+   * <code>repeated string id = 1 [json_name = "id"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the id at the given index.
    */
-  java.util.List<? extends com.antinvestor.apis.device.v1.KeyObjectOrBuilder> 
-      getDataOrBuilderList();
-  /**
-   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
-   */
-  com.antinvestor.apis.device.v1.KeyObjectOrBuilder getDataOrBuilder(
-      int index);
+  com.google.protobuf.ByteString
+      getIdBytes(int index);
 }

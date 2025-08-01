@@ -20,25 +20,31 @@
 package com.antinvestor.apis.device.v1;
 
 @com.google.protobuf.Generated
-public interface ListKeysRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:device.v1.ListKeysRequest)
+public interface SearchKeyResponseOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:device.v1.SearchKeyResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
-   * @return The deviceId.
+   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
    */
-  java.lang.String getDeviceId();
+  java.util.List<com.antinvestor.apis.device.v1.KeyObject> 
+      getDataList();
   /**
-   * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for deviceId.
+   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
    */
-  com.google.protobuf.ByteString
-      getDeviceIdBytes();
-
+  com.antinvestor.apis.device.v1.KeyObject getData(int index);
   /**
-   * <code>int32 count = 2 [json_name = "count"];</code>
-   * @return The count.
+   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
    */
-  int getCount();
+  int getDataCount();
+  /**
+   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+   */
+  java.util.List<? extends com.antinvestor.apis.device.v1.KeyObjectOrBuilder> 
+      getDataOrBuilderList();
+  /**
+   * <code>repeated .device.v1.KeyObject data = 1 [json_name = "data"];</code>
+   */
+  com.antinvestor.apis.device.v1.KeyObjectOrBuilder getDataOrBuilder(
+      int index);
 }

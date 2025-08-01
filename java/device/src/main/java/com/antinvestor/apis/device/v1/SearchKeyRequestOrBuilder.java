@@ -20,21 +20,21 @@
 package com.antinvestor.apis.device.v1;
 
 @com.google.protobuf.Generated
-public interface AddKeyRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:device.v1.AddKeyRequest)
+public interface SearchKeyRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:device.v1.SearchKeyRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return The id.
+   * <code>string query = 1 [json_name = "query"];</code>
+   * @return The query.
    */
-  java.lang.String getId();
+  java.lang.String getQuery();
   /**
-   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for id.
+   * <code>string query = 1 [json_name = "query"];</code>
+   * @return The bytes for query.
    */
   com.google.protobuf.ByteString
-      getIdBytes();
+      getQueryBytes();
 
   /**
    * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
@@ -60,42 +60,14 @@ public interface AddKeyRequestOrBuilder extends
   com.antinvestor.apis.device.v1.KeyType getKeyType();
 
   /**
-   * <code>bytes data = 4 [json_name = "data"];</code>
-   * @return The data.
+   * <code>int32 page = 4 [json_name = "page"];</code>
+   * @return The page.
    */
-  com.google.protobuf.ByteString getData();
+  int getPage();
 
   /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
+   * <code>int32 count = 5 [json_name = "count"];</code>
+   * @return The count.
    */
-  int getExtrasCount();
-  /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-   */
-  boolean containsExtras(
-      java.lang.String key);
-  /**
-   * Use {@link #getExtrasMap()} instead.
-   */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtras();
-  /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtrasMap();
-  /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-   */
-  /* nullable */
-java.lang.String getExtrasOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-   */
-  java.lang.String getExtrasOrThrow(
-      java.lang.String key);
+  int getCount();
 }

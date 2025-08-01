@@ -21,16 +21,16 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * The request message containing the information necessary to create a key
+ * Request message to list all keys related to the supplied device id
  * </pre>
  *
- * Protobuf type {@code device.v1.AddKeyRequest}
+ * Protobuf type {@code device.v1.SearchKeyRequest}
  */
 @com.google.protobuf.Generated
-public final class AddKeyRequest extends
+public final class SearchKeyRequest extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:device.v1.AddKeyRequest)
-    AddKeyRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:device.v1.SearchKeyRequest)
+    SearchKeyRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -39,77 +39,64 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 31,
       /* patch= */ 1,
       /* suffix= */ "",
-      AddKeyRequest.class.getName());
+      SearchKeyRequest.class.getName());
   }
-  // Use AddKeyRequest.newBuilder() to construct.
-  private AddKeyRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use SearchKeyRequest.newBuilder() to construct.
+  private SearchKeyRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private AddKeyRequest() {
-    id_ = "";
+  private SearchKeyRequest() {
+    query_ = "";
     deviceId_ = "";
     keyType_ = 0;
-    data_ = com.google.protobuf.ByteString.EMPTY;
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_descriptor;
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_SearchKeyRequest_descriptor;
   }
 
-  @SuppressWarnings({"rawtypes"})
-  @java.lang.Override
-  protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-      int number) {
-    switch (number) {
-      case 5:
-        return internalGetExtras();
-      default:
-        throw new RuntimeException(
-            "Invalid map field number: " + number);
-    }
-  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_fieldAccessorTable
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_SearchKeyRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.antinvestor.apis.device.v1.AddKeyRequest.class, com.antinvestor.apis.device.v1.AddKeyRequest.Builder.class);
+            com.antinvestor.apis.device.v1.SearchKeyRequest.class, com.antinvestor.apis.device.v1.SearchKeyRequest.Builder.class);
   }
 
-  public static final int ID_FIELD_NUMBER = 1;
+  public static final int QUERY_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object id_ = "";
+  private volatile java.lang.Object query_ = "";
   /**
-   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return The id.
+   * <code>string query = 1 [json_name = "query"];</code>
+   * @return The query.
    */
   @java.lang.Override
-  public java.lang.String getId() {
-    java.lang.Object ref = id_;
+  public java.lang.String getQuery() {
+    java.lang.Object ref = query_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      id_ = s;
+      query_ = s;
       return s;
     }
   }
   /**
-   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for id.
+   * <code>string query = 1 [json_name = "query"];</code>
+   * @return The bytes for query.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getIdBytes() {
-    java.lang.Object ref = id_;
+      getQueryBytes() {
+    java.lang.Object ref = query_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      id_ = b;
+      query_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -173,94 +160,26 @@ private static final long serialVersionUID = 0L;
     return result == null ? com.antinvestor.apis.device.v1.KeyType.UNRECOGNIZED : result;
   }
 
-  public static final int DATA_FIELD_NUMBER = 4;
-  private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+  public static final int PAGE_FIELD_NUMBER = 4;
+  private int page_ = 0;
   /**
-   * <code>bytes data = 4 [json_name = "data"];</code>
-   * @return The data.
+   * <code>int32 page = 4 [json_name = "page"];</code>
+   * @return The page.
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString getData() {
-    return data_;
+  public int getPage() {
+    return page_;
   }
 
-  public static final int EXTRAS_FIELD_NUMBER = 5;
-  private static final class ExtrasDefaultEntryHolder {
-    static final com.google.protobuf.MapEntry<
-        java.lang.String, java.lang.String> defaultEntry =
-            com.google.protobuf.MapEntry
-            .<java.lang.String, java.lang.String>newDefaultInstance(
-                com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_ExtrasEntry_descriptor, 
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "",
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "");
-  }
-  @SuppressWarnings("serial")
-  private com.google.protobuf.MapField<
-      java.lang.String, java.lang.String> extras_;
-  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-  internalGetExtras() {
-    if (extras_ == null) {
-      return com.google.protobuf.MapField.emptyMapField(
-          ExtrasDefaultEntryHolder.defaultEntry);
-    }
-    return extras_;
-  }
-  public int getExtrasCount() {
-    return internalGetExtras().getMap().size();
-  }
+  public static final int COUNT_FIELD_NUMBER = 5;
+  private int count_ = 0;
   /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
+   * <code>int32 count = 5 [json_name = "count"];</code>
+   * @return The count.
    */
   @java.lang.Override
-  public boolean containsExtras(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    return internalGetExtras().getMap().containsKey(key);
-  }
-  /**
-   * Use {@link #getExtrasMap()} instead.
-   */
-  @java.lang.Override
-  @java.lang.Deprecated
-  public java.util.Map<java.lang.String, java.lang.String> getExtras() {
-    return getExtrasMap();
-  }
-  /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-   */
-  @java.lang.Override
-  public java.util.Map<java.lang.String, java.lang.String> getExtrasMap() {
-    return internalGetExtras().getMap();
-  }
-  /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-   */
-  @java.lang.Override
-  public /* nullable */
-java.lang.String getExtrasOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetExtras().getMap();
-    return map.containsKey(key) ? map.get(key) : defaultValue;
-  }
-  /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-   */
-  @java.lang.Override
-  public java.lang.String getExtrasOrThrow(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetExtras().getMap();
-    if (!map.containsKey(key)) {
-      throw new java.lang.IllegalArgumentException();
-    }
-    return map.get(key);
+  public int getCount() {
+    return count_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -277,8 +196,8 @@ java.lang.String defaultValue) {
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(query_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, query_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, deviceId_);
@@ -286,15 +205,12 @@ java.lang.String defaultValue) {
     if (keyType_ != com.antinvestor.apis.device.v1.KeyType.MATRIX_KEY.getNumber()) {
       output.writeEnum(3, keyType_);
     }
-    if (!data_.isEmpty()) {
-      output.writeBytes(4, data_);
+    if (page_ != 0) {
+      output.writeInt32(4, page_);
     }
-    com.google.protobuf.GeneratedMessage
-      .serializeStringMapTo(
-        output,
-        internalGetExtras(),
-        ExtrasDefaultEntryHolder.defaultEntry,
-        5);
+    if (count_ != 0) {
+      output.writeInt32(5, count_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -304,8 +220,8 @@ java.lang.String defaultValue) {
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(query_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, query_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(2, deviceId_);
@@ -314,19 +230,13 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(3, keyType_);
     }
-    if (!data_.isEmpty()) {
+    if (page_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeBytesSize(4, data_);
+        .computeInt32Size(4, page_);
     }
-    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-         : internalGetExtras().getMap().entrySet()) {
-      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-      extras__ = ExtrasDefaultEntryHolder.defaultEntry.newBuilderForType()
-          .setKey(entry.getKey())
-          .setValue(entry.getValue())
-          .build();
+    if (count_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, extras__);
+        .computeInt32Size(5, count_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -338,20 +248,20 @@ java.lang.String defaultValue) {
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.antinvestor.apis.device.v1.AddKeyRequest)) {
+    if (!(obj instanceof com.antinvestor.apis.device.v1.SearchKeyRequest)) {
       return super.equals(obj);
     }
-    com.antinvestor.apis.device.v1.AddKeyRequest other = (com.antinvestor.apis.device.v1.AddKeyRequest) obj;
+    com.antinvestor.apis.device.v1.SearchKeyRequest other = (com.antinvestor.apis.device.v1.SearchKeyRequest) obj;
 
-    if (!getId()
-        .equals(other.getId())) return false;
+    if (!getQuery()
+        .equals(other.getQuery())) return false;
     if (!getDeviceId()
         .equals(other.getDeviceId())) return false;
     if (keyType_ != other.keyType_) return false;
-    if (!getData()
-        .equals(other.getData())) return false;
-    if (!internalGetExtras().equals(
-        other.internalGetExtras())) return false;
+    if (getPage()
+        != other.getPage()) return false;
+    if (getCount()
+        != other.getCount()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -363,61 +273,59 @@ java.lang.String defaultValue) {
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ID_FIELD_NUMBER;
-    hash = (53 * hash) + getId().hashCode();
+    hash = (37 * hash) + QUERY_FIELD_NUMBER;
+    hash = (53 * hash) + getQuery().hashCode();
     hash = (37 * hash) + DEVICE_ID_FIELD_NUMBER;
     hash = (53 * hash) + getDeviceId().hashCode();
     hash = (37 * hash) + KEY_TYPE_FIELD_NUMBER;
     hash = (53 * hash) + keyType_;
-    hash = (37 * hash) + DATA_FIELD_NUMBER;
-    hash = (53 * hash) + getData().hashCode();
-    if (!internalGetExtras().getMap().isEmpty()) {
-      hash = (37 * hash) + EXTRAS_FIELD_NUMBER;
-      hash = (53 * hash) + internalGetExtras().hashCode();
-    }
+    hash = (37 * hash) + PAGE_FIELD_NUMBER;
+    hash = (53 * hash) + getPage();
+    hash = (37 * hash) + COUNT_FIELD_NUMBER;
+    hash = (53 * hash) + getCount();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(byte[] data)
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -425,26 +333,26 @@ java.lang.String defaultValue) {
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseDelimitedFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseDelimitedFrom(
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -457,7 +365,7 @@ java.lang.String defaultValue) {
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.antinvestor.apis.device.v1.AddKeyRequest prototype) {
+  public static Builder newBuilder(com.antinvestor.apis.device.v1.SearchKeyRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -474,51 +382,29 @@ java.lang.String defaultValue) {
   }
   /**
    * <pre>
-   * The request message containing the information necessary to create a key
+   * Request message to list all keys related to the supplied device id
    * </pre>
    *
-   * Protobuf type {@code device.v1.AddKeyRequest}
+   * Protobuf type {@code device.v1.SearchKeyRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:device.v1.AddKeyRequest)
-      com.antinvestor.apis.device.v1.AddKeyRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:device.v1.SearchKeyRequest)
+      com.antinvestor.apis.device.v1.SearchKeyRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_SearchKeyRequest_descriptor;
     }
 
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 5:
-          return internalGetExtras();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 5:
-          return internalGetMutableExtras();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_fieldAccessorTable
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_SearchKeyRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.antinvestor.apis.device.v1.AddKeyRequest.class, com.antinvestor.apis.device.v1.AddKeyRequest.Builder.class);
+              com.antinvestor.apis.device.v1.SearchKeyRequest.class, com.antinvestor.apis.device.v1.SearchKeyRequest.Builder.class);
     }
 
-    // Construct using com.antinvestor.apis.device.v1.AddKeyRequest.newBuilder()
+    // Construct using com.antinvestor.apis.device.v1.SearchKeyRequest.newBuilder()
     private Builder() {
 
     }
@@ -532,28 +418,28 @@ java.lang.String defaultValue) {
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      id_ = "";
+      query_ = "";
       deviceId_ = "";
       keyType_ = 0;
-      data_ = com.google.protobuf.ByteString.EMPTY;
-      internalGetMutableExtras().clear();
+      page_ = 0;
+      count_ = 0;
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_SearchKeyRequest_descriptor;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.AddKeyRequest getDefaultInstanceForType() {
-      return com.antinvestor.apis.device.v1.AddKeyRequest.getDefaultInstance();
+    public com.antinvestor.apis.device.v1.SearchKeyRequest getDefaultInstanceForType() {
+      return com.antinvestor.apis.device.v1.SearchKeyRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.AddKeyRequest build() {
-      com.antinvestor.apis.device.v1.AddKeyRequest result = buildPartial();
+    public com.antinvestor.apis.device.v1.SearchKeyRequest build() {
+      com.antinvestor.apis.device.v1.SearchKeyRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -561,17 +447,17 @@ java.lang.String defaultValue) {
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.AddKeyRequest buildPartial() {
-      com.antinvestor.apis.device.v1.AddKeyRequest result = new com.antinvestor.apis.device.v1.AddKeyRequest(this);
+    public com.antinvestor.apis.device.v1.SearchKeyRequest buildPartial() {
+      com.antinvestor.apis.device.v1.SearchKeyRequest result = new com.antinvestor.apis.device.v1.SearchKeyRequest(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.antinvestor.apis.device.v1.AddKeyRequest result) {
+    private void buildPartial0(com.antinvestor.apis.device.v1.SearchKeyRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.id_ = id_;
+        result.query_ = query_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.deviceId_ = deviceId_;
@@ -580,28 +466,27 @@ java.lang.String defaultValue) {
         result.keyType_ = keyType_;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.data_ = data_;
+        result.page_ = page_;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.extras_ = internalGetExtras();
-        result.extras_.makeImmutable();
+        result.count_ = count_;
       }
     }
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.antinvestor.apis.device.v1.AddKeyRequest) {
-        return mergeFrom((com.antinvestor.apis.device.v1.AddKeyRequest)other);
+      if (other instanceof com.antinvestor.apis.device.v1.SearchKeyRequest) {
+        return mergeFrom((com.antinvestor.apis.device.v1.SearchKeyRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.antinvestor.apis.device.v1.AddKeyRequest other) {
-      if (other == com.antinvestor.apis.device.v1.AddKeyRequest.getDefaultInstance()) return this;
-      if (!other.getId().isEmpty()) {
-        id_ = other.id_;
+    public Builder mergeFrom(com.antinvestor.apis.device.v1.SearchKeyRequest other) {
+      if (other == com.antinvestor.apis.device.v1.SearchKeyRequest.getDefaultInstance()) return this;
+      if (!other.getQuery().isEmpty()) {
+        query_ = other.query_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
@@ -613,12 +498,12 @@ java.lang.String defaultValue) {
       if (other.keyType_ != 0) {
         setKeyTypeValue(other.getKeyTypeValue());
       }
-      if (!other.getData().isEmpty()) {
-        setData(other.getData());
+      if (other.getPage() != 0) {
+        setPage(other.getPage());
       }
-      internalGetMutableExtras().mergeFrom(
-          other.internalGetExtras());
-      bitField0_ |= 0x00000010;
+      if (other.getCount() != 0) {
+        setCount(other.getCount());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -646,7 +531,7 @@ java.lang.String defaultValue) {
               done = true;
               break;
             case 10: {
-              id_ = input.readStringRequireUtf8();
+              query_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
@@ -660,20 +545,16 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000004;
               break;
             } // case 24
-            case 34: {
-              data_ = input.readBytes();
+            case 32: {
+              page_ = input.readInt32();
               bitField0_ |= 0x00000008;
               break;
-            } // case 34
-            case 42: {
-              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              extras__ = input.readMessage(
-                  ExtrasDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              internalGetMutableExtras().getMutableMap().put(
-                  extras__.getKey(), extras__.getValue());
+            } // case 32
+            case 40: {
+              count_ = input.readInt32();
               bitField0_ |= 0x00000010;
               break;
-            } // case 42
+            } // case 40
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -691,73 +572,73 @@ java.lang.String defaultValue) {
     }
     private int bitField0_;
 
-    private java.lang.Object id_ = "";
+    private java.lang.Object query_ = "";
     /**
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @return The id.
+     * <code>string query = 1 [json_name = "query"];</code>
+     * @return The query.
      */
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
+    public java.lang.String getQuery() {
+      java.lang.Object ref = query_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        id_ = s;
+        query_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for id.
+     * <code>string query = 1 [json_name = "query"];</code>
+     * @return The bytes for query.
      */
     public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
+        getQueryBytes() {
+      java.lang.Object ref = query_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        id_ = b;
+        query_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param value The id to set.
+     * <code>string query = 1 [json_name = "query"];</code>
+     * @param value The query to set.
      * @return This builder for chaining.
      */
-    public Builder setId(
+    public Builder setQuery(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      id_ = value;
+      query_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * <code>string query = 1 [json_name = "query"];</code>
      * @return This builder for chaining.
      */
-    public Builder clearId() {
-      id_ = getDefaultInstance().getId();
+    public Builder clearQuery() {
+      query_ = getDefaultInstance().getQuery();
       bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for id to set.
+     * <code>string query = 1 [json_name = "query"];</code>
+     * @param value The bytes for query to set.
      * @return This builder for chaining.
      */
-    public Builder setIdBytes(
+    public Builder setQueryBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      id_ = value;
+      query_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
@@ -886,182 +767,87 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+    private int page_ ;
     /**
-     * <code>bytes data = 4 [json_name = "data"];</code>
-     * @return The data.
+     * <code>int32 page = 4 [json_name = "page"];</code>
+     * @return The page.
      */
     @java.lang.Override
-    public com.google.protobuf.ByteString getData() {
-      return data_;
+    public int getPage() {
+      return page_;
     }
     /**
-     * <code>bytes data = 4 [json_name = "data"];</code>
-     * @param value The data to set.
+     * <code>int32 page = 4 [json_name = "page"];</code>
+     * @param value The page to set.
      * @return This builder for chaining.
      */
-    public Builder setData(com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      data_ = value;
+    public Builder setPage(int value) {
+
+      page_ = value;
       bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>bytes data = 4 [json_name = "data"];</code>
+     * <code>int32 page = 4 [json_name = "page"];</code>
      * @return This builder for chaining.
      */
-    public Builder clearData() {
+    public Builder clearPage() {
       bitField0_ = (bitField0_ & ~0x00000008);
-      data_ = getDefaultInstance().getData();
+      page_ = 0;
       onChanged();
       return this;
     }
 
-    private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> extras_;
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetExtras() {
-      if (extras_ == null) {
-        return com.google.protobuf.MapField.emptyMapField(
-            ExtrasDefaultEntryHolder.defaultEntry);
-      }
-      return extras_;
+    private int count_ ;
+    /**
+     * <code>int32 count = 5 [json_name = "count"];</code>
+     * @return The count.
+     */
+    @java.lang.Override
+    public int getCount() {
+      return count_;
     }
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetMutableExtras() {
-      if (extras_ == null) {
-        extras_ = com.google.protobuf.MapField.newMapField(
-            ExtrasDefaultEntryHolder.defaultEntry);
-      }
-      if (!extras_.isMutable()) {
-        extras_ = extras_.copy();
-      }
+    /**
+     * <code>int32 count = 5 [json_name = "count"];</code>
+     * @param value The count to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCount(int value) {
+
+      count_ = value;
       bitField0_ |= 0x00000010;
       onChanged();
-      return extras_;
-    }
-    public int getExtrasCount() {
-      return internalGetExtras().getMap().size();
+      return this;
     }
     /**
-     * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
+     * <code>int32 count = 5 [json_name = "count"];</code>
+     * @return This builder for chaining.
      */
-    @java.lang.Override
-    public boolean containsExtras(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      return internalGetExtras().getMap().containsKey(key);
-    }
-    /**
-     * Use {@link #getExtrasMap()} instead.
-     */
-    @java.lang.Override
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getExtras() {
-      return getExtrasMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-     */
-    @java.lang.Override
-    public java.util.Map<java.lang.String, java.lang.String> getExtrasMap() {
-      return internalGetExtras().getMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-     */
-    @java.lang.Override
-    public /* nullable */
-java.lang.String getExtrasOrDefault(
-        java.lang.String key,
-        /* nullable */
-java.lang.String defaultValue) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetExtras().getMap();
-      return map.containsKey(key) ? map.get(key) : defaultValue;
-    }
-    /**
-     * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-     */
-    @java.lang.Override
-    public java.lang.String getExtrasOrThrow(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetExtras().getMap();
-      if (!map.containsKey(key)) {
-        throw new java.lang.IllegalArgumentException();
-      }
-      return map.get(key);
-    }
-    public Builder clearExtras() {
+    public Builder clearCount() {
       bitField0_ = (bitField0_ & ~0x00000010);
-      internalGetMutableExtras().getMutableMap()
-          .clear();
-      return this;
-    }
-    /**
-     * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-     */
-    public Builder removeExtras(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      internalGetMutableExtras().getMutableMap()
-          .remove(key);
-      return this;
-    }
-    /**
-     * Use alternate mutation accessors instead.
-     */
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String>
-        getMutableExtras() {
-      bitField0_ |= 0x00000010;
-      return internalGetMutableExtras().getMutableMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-     */
-    public Builder putExtras(
-        java.lang.String key,
-        java.lang.String value) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      if (value == null) { throw new NullPointerException("map value"); }
-      internalGetMutableExtras().getMutableMap()
-          .put(key, value);
-      bitField0_ |= 0x00000010;
-      return this;
-    }
-    /**
-     * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-     */
-    public Builder putAllExtras(
-        java.util.Map<java.lang.String, java.lang.String> values) {
-      internalGetMutableExtras().getMutableMap()
-          .putAll(values);
-      bitField0_ |= 0x00000010;
+      count_ = 0;
+      onChanged();
       return this;
     }
 
-    // @@protoc_insertion_point(builder_scope:device.v1.AddKeyRequest)
+    // @@protoc_insertion_point(builder_scope:device.v1.SearchKeyRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:device.v1.AddKeyRequest)
-  private static final com.antinvestor.apis.device.v1.AddKeyRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:device.v1.SearchKeyRequest)
+  private static final com.antinvestor.apis.device.v1.SearchKeyRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.AddKeyRequest();
+    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.SearchKeyRequest();
   }
 
-  public static com.antinvestor.apis.device.v1.AddKeyRequest getDefaultInstance() {
+  public static com.antinvestor.apis.device.v1.SearchKeyRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<AddKeyRequest>
-      PARSER = new com.google.protobuf.AbstractParser<AddKeyRequest>() {
+  private static final com.google.protobuf.Parser<SearchKeyRequest>
+      PARSER = new com.google.protobuf.AbstractParser<SearchKeyRequest>() {
     @java.lang.Override
-    public AddKeyRequest parsePartialFrom(
+    public SearchKeyRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1080,17 +866,17 @@ java.lang.String defaultValue) {
     }
   };
 
-  public static com.google.protobuf.Parser<AddKeyRequest> parser() {
+  public static com.google.protobuf.Parser<SearchKeyRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<AddKeyRequest> getParserForType() {
+  public com.google.protobuf.Parser<SearchKeyRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.antinvestor.apis.device.v1.AddKeyRequest getDefaultInstanceForType() {
+  public com.antinvestor.apis.device.v1.SearchKeyRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

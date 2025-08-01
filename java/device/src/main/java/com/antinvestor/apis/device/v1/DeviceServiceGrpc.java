@@ -339,35 +339,35 @@ public final class DeviceServiceGrpc {
     return getRemoveKeyMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.ListKeysRequest,
-      com.antinvestor.apis.device.v1.ListKeysResponse> getListKeysMethod;
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.SearchKeyRequest,
+      com.antinvestor.apis.device.v1.SearchKeyResponse> getSearchKeyMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "ListKeys",
-      requestType = com.antinvestor.apis.device.v1.ListKeysRequest.class,
-      responseType = com.antinvestor.apis.device.v1.ListKeysResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "SearchKey",
+      requestType = com.antinvestor.apis.device.v1.SearchKeyRequest.class,
+      responseType = com.antinvestor.apis.device.v1.SearchKeyResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.ListKeysRequest,
-      com.antinvestor.apis.device.v1.ListKeysResponse> getListKeysMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.ListKeysRequest, com.antinvestor.apis.device.v1.ListKeysResponse> getListKeysMethod;
-    if ((getListKeysMethod = DeviceServiceGrpc.getListKeysMethod) == null) {
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.SearchKeyRequest,
+      com.antinvestor.apis.device.v1.SearchKeyResponse> getSearchKeyMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.SearchKeyRequest, com.antinvestor.apis.device.v1.SearchKeyResponse> getSearchKeyMethod;
+    if ((getSearchKeyMethod = DeviceServiceGrpc.getSearchKeyMethod) == null) {
       synchronized (DeviceServiceGrpc.class) {
-        if ((getListKeysMethod = DeviceServiceGrpc.getListKeysMethod) == null) {
-          DeviceServiceGrpc.getListKeysMethod = getListKeysMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.device.v1.ListKeysRequest, com.antinvestor.apis.device.v1.ListKeysResponse>newBuilder()
+        if ((getSearchKeyMethod = DeviceServiceGrpc.getSearchKeyMethod) == null) {
+          DeviceServiceGrpc.getSearchKeyMethod = getSearchKeyMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.device.v1.SearchKeyRequest, com.antinvestor.apis.device.v1.SearchKeyResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListKeys"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SearchKey"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.device.v1.ListKeysRequest.getDefaultInstance()))
+                  com.antinvestor.apis.device.v1.SearchKeyRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.device.v1.ListKeysResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new DeviceServiceMethodDescriptorSupplier("ListKeys"))
+                  com.antinvestor.apis.device.v1.SearchKeyResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeviceServiceMethodDescriptorSupplier("SearchKey"))
               .build();
         }
       }
     }
-    return getListKeysMethod;
+    return getSearchKeyMethod;
   }
 
   /**
@@ -541,9 +541,9 @@ public final class DeviceServiceGrpc {
      * Lists all the keys a device has/owns.
      * </pre>
      */
-    default void listKeys(com.antinvestor.apis.device.v1.ListKeysRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.ListKeysResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListKeysMethod(), responseObserver);
+    default void searchKey(com.antinvestor.apis.device.v1.SearchKeyRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.SearchKeyResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSearchKeyMethod(), responseObserver);
     }
   }
 
@@ -695,10 +695,10 @@ public final class DeviceServiceGrpc {
      * Lists all the keys a device has/owns.
      * </pre>
      */
-    public void listKeys(com.antinvestor.apis.device.v1.ListKeysRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.ListKeysResponse> responseObserver) {
+    public void searchKey(com.antinvestor.apis.device.v1.SearchKeyRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.SearchKeyResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
-          getChannel().newCall(getListKeysMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getSearchKeyMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -831,10 +831,10 @@ public final class DeviceServiceGrpc {
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
-    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.device.v1.ListKeysResponse>
-        listKeys(com.antinvestor.apis.device.v1.ListKeysRequest request) {
+    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.device.v1.SearchKeyResponse>
+        searchKey(com.antinvestor.apis.device.v1.SearchKeyRequest request) {
       return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
-          getChannel(), getListKeysMethod(), getCallOptions(), request);
+          getChannel(), getSearchKeyMethod(), getCallOptions(), request);
     }
   }
 
@@ -964,10 +964,10 @@ public final class DeviceServiceGrpc {
      * Lists all the keys a device has/owns.
      * </pre>
      */
-    public java.util.Iterator<com.antinvestor.apis.device.v1.ListKeysResponse> listKeys(
-        com.antinvestor.apis.device.v1.ListKeysRequest request) {
+    public java.util.Iterator<com.antinvestor.apis.device.v1.SearchKeyResponse> searchKey(
+        com.antinvestor.apis.device.v1.SearchKeyRequest request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
-          getChannel(), getListKeysMethod(), getCallOptions(), request);
+          getChannel(), getSearchKeyMethod(), getCallOptions(), request);
     }
   }
 
@@ -1089,7 +1089,7 @@ public final class DeviceServiceGrpc {
   private static final int METHODID_LIST_LOGS = 7;
   private static final int METHODID_ADD_KEY = 8;
   private static final int METHODID_REMOVE_KEY = 9;
-  private static final int METHODID_LIST_KEYS = 10;
+  private static final int METHODID_SEARCH_KEY = 10;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1148,9 +1148,9 @@ public final class DeviceServiceGrpc {
           serviceImpl.removeKey((com.antinvestor.apis.device.v1.RemoveKeyRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.RemoveKeyResponse>) responseObserver);
           break;
-        case METHODID_LIST_KEYS:
-          serviceImpl.listKeys((com.antinvestor.apis.device.v1.ListKeysRequest) request,
-              (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.ListKeysResponse>) responseObserver);
+        case METHODID_SEARCH_KEY:
+          serviceImpl.searchKey((com.antinvestor.apis.device.v1.SearchKeyRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.SearchKeyResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -1241,12 +1241,12 @@ public final class DeviceServiceGrpc {
               com.antinvestor.apis.device.v1.RemoveKeyResponse>(
                 service, METHODID_REMOVE_KEY)))
         .addMethod(
-          getListKeysMethod(),
+          getSearchKeyMethod(),
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
-              com.antinvestor.apis.device.v1.ListKeysRequest,
-              com.antinvestor.apis.device.v1.ListKeysResponse>(
-                service, METHODID_LIST_KEYS)))
+              com.antinvestor.apis.device.v1.SearchKeyRequest,
+              com.antinvestor.apis.device.v1.SearchKeyResponse>(
+                service, METHODID_SEARCH_KEY)))
         .build();
   }
 
@@ -1305,7 +1305,7 @@ public final class DeviceServiceGrpc {
               .addMethod(getListLogsMethod())
               .addMethod(getAddKeyMethod())
               .addMethod(getRemoveKeyMethod())
-              .addMethod(getListKeysMethod())
+              .addMethod(getSearchKeyMethod())
               .build();
         }
       }

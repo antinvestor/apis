@@ -61,7 +61,7 @@
     "/keys": {
       "get": {
         "summary": "Lists all the keys a device has/owns.",
-        "operationId": "DeviceService_ListKeys",
+        "operationId": "DeviceService_SearchKey",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -69,13 +69,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/device.v1.ListKeysResponse"
+                  "$ref": "#/definitions/device.v1.SearchKeyResponse"
                 },
                 "error": {
                   "$ref": "#/definitions/google.rpc.Status"
                 }
               },
-              "title": "Stream result of device.v1.ListKeysResponse"
+              "title": "Stream result of device.v1.SearchKeyResponse"
             }
           },
           "default": {
@@ -87,10 +87,35 @@
         },
         "parameters": [
           {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "deviceId",
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "keyType",
+            "description": " - MATRIX_KEY: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "MATRIX_KEY",
+              "NOTIFICATION_KEY"
+            ],
+            "default": "MATRIX_KEY"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "count",
@@ -288,8 +313,8 @@
             "name": "page",
             "in": "query",
             "required": false,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "count",
@@ -479,8 +504,15 @@
         "id": {
           "type": "string"
         },
-        "contact": {
+        "deviceId": {
           "type": "string"
+        },
+        "keyType": {
+          "$ref": "#/definitions/device.v1.KeyType"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
         },
         "extras": {
           "type": "object",
@@ -650,6 +682,9 @@
         "id": {
           "type": "string"
         },
+        "deviceId": {
+          "type": "string"
+        },
         "key": {
           "type": "string",
           "format": "byte"
@@ -663,17 +698,15 @@
       },
       "title": "The response message containing the full device key object"
     },
-    "device.v1.ListKeysResponse": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/device.v1.KeyObject"
-          }
-        }
-      }
+    "device.v1.KeyType": {
+      "type": "string",
+      "enum": [
+        "MATRIX_KEY",
+        "NOTIFICATION_KEY"
+      ],
+      "default": "MATRIX_KEY",
+      "description": "- MATRIX_KEY: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
+      "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
     },
     "device.v1.ListLogsResponse": {
       "type": "object",
@@ -734,11 +767,10 @@
     "device.v1.RemoveKeyResponse": {
       "type": "object",
       "properties": {
-        "data": {
+        "id": {
           "type": "array",
           "items": {
-            "type": "object",
-            "$ref": "#/definitions/device.v1.KeyObject"
+            "type": "string"
           }
         }
       }
@@ -748,6 +780,18 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/device.v1.DeviceObject"
+        }
+      }
+    },
+    "device.v1.SearchKeyResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/device.v1.KeyObject"
+          }
         }
       }
     },
