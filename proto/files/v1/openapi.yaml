@@ -13,7 +13,7 @@ info:
   termsOfService: https://antinvestor/terms/
   title: Ant Investor Files
 paths:
-  /media/upload:
+  /media/v3/upload:
     post:
       summary: Upload some content to the content repository.
       operationId: uploadContent
@@ -49,7 +49,7 @@ paths:
         "403":
           description: |-
             The user does not have permission to upload the content. Some reasons for this error include:
-            
+
             - The server does not permit the file type.
             - The user has reached a quota for uploaded content.
           content:
@@ -59,7 +59,7 @@ paths:
               examples:
                 response:
                   value: {
-                    "errcode": "M_FORBIDDEN",
+                    "code": "M_FORBIDDEN",
                     "error": "Cannot upload this content"
                   }
         "413":
@@ -68,7 +68,7 @@ paths:
           $ref: '#/components/responses/rateLimited'
       tags:
         - Media
-  /media/upload/{serverName}/{mediaId}:
+  /media/v3/upload/{serverName}/{mediaId}:
     put:
       summary: Upload content to an `mxc://` URI that was created earlier.
       description: |-
@@ -108,7 +108,7 @@ paths:
               [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).
 
             A [standard error response](/client-server-api/#standard-error-response)
-            will be returned with the `errcode` `M_FORBIDDEN`.
+            will be returned with the `code` `M_FORBIDDEN`.
           content:
             application/json:
               schema:
@@ -116,7 +116,7 @@ paths:
               examples:
                 response:
                   value: {
-                    "errcode": "M_FORBIDDEN",
+                    "code": "M_FORBIDDEN",
                     "error": "Cannot upload this content"
                   }
         "404":
@@ -127,7 +127,7 @@ paths:
             - The MXC ID has expired.
 
             A [standard error response](/client-server-api/#standard-error-response)
-            will be returned with the `errcode` `M_NOT_FOUND`.
+            will be returned with the `code` `M_NOT_FOUND`.
           content:
             application/json:
               schema:
@@ -135,14 +135,14 @@ paths:
               examples:
                 response:
                   value: {
-                    "errcode": "M_NOT_FOUND",
+                    "code": "M_NOT_FOUND",
                     "error": "Unknown media ID"
                   }
         "409":
           description: |-
             The endpoint was called with a media ID that already has content. A
             [standard error response](/client-server-api/#standard-error-response)
-            will be returned with the `errcode` `M_CANNOT_OVERWRITE_MEDIA`.
+            will be returned with the `code` `M_CANNOT_OVERWRITE_MEDIA`.
           content:
             application/json:
               schema:
@@ -150,7 +150,7 @@ paths:
               examples:
                 response:
                   value: {
-                    "errcode": "M_CANNOT_OVERWRITE_MEDIA",
+                    "code": "M_CANNOT_OVERWRITE_MEDIA",
                     "error": "Media already uploaded"
                   }
         "413":
@@ -159,7 +159,7 @@ paths:
           $ref: '#/components/responses/rateLimited'
       tags:
         - Media
-  /media/create:
+  /media/v1/create:
     post:
       summary: Create a new `mxc://` URI without uploading the content.
       description: |-
@@ -180,7 +180,7 @@ paths:
         user can have. A pending media upload is a created `mxc://` URI where (a)
         the media has not yet been uploaded, and (b) has not yet expired (the
         `unused_expires_at` timestamp has not yet passed). In both cases, the
-        server should respond with an HTTP 429 error with an errcode of
+        server should respond with an HTTP 429 error with an code of
         `M_LIMIT_EXCEEDED`.
       operationId: createContent
       security:
@@ -220,7 +220,7 @@ paths:
               examples:
                 response:
                   value: {
-                    "errcode": "M_FORBIDDEN",
+                    "code": "M_FORBIDDEN",
                     "error": "Cannot upload this content"
                   }
         "429":
@@ -240,7 +240,7 @@ paths:
         Clients MAY be redirected using the 307/308 responses below to download
         the request object. This is typical when the homeserver uses a Content
         Delivery Network (CDN).
-      operationId: getContent
+      operationId: getContentAuthed
       security:
         - accessTokenBearer: [ ]
       parameters:
@@ -309,7 +309,7 @@ paths:
         Clients MAY be redirected using the 307/308 responses below to download
         the request object. This is typical when the homeserver uses a Content
         Delivery Network (CDN).
-      operationId: getContentOverrideName
+      operationId: getContentOverrideNameAuthed
       security:
         - accessTokenBearer: [ ]
       parameters:
@@ -376,7 +376,7 @@ paths:
         Clients MAY be redirected using the 307/308 responses below to download
         the request object. This is typical when the homeserver uses a Content
         Delivery Network (CDN).
-      operationId: getContentThumbnail
+      operationId: getContentThumbnailAuthed
       security:
         - accessTokenBearer: [ ]
       parameters:
@@ -499,7 +499,7 @@ paths:
               examples:
                 response:
                   value: {
-                    "errcode": "M_UNKNOWN",
+                    "code": "M_UNKNOWN",
                     "error": "Cannot generate thumbnails for the requested content"
                   }
         "413":
@@ -511,7 +511,7 @@ paths:
               examples:
                 response:
                   value: {
-                    "errcode": "M_TOO_LARGE",
+                    "code": "M_TOO_LARGE",
                     "error": "Content is too large to thumbnail"
                   }
         "429":
@@ -525,7 +525,7 @@ paths:
               examples:
                 response:
                   value: {
-                    "errcode": "M_TOO_LARGE",
+                    "code": "M_TOO_LARGE",
                     "error": "Content is too large to thumbnail"
                   }
         "504":
@@ -545,7 +545,7 @@ paths:
         do not want to share with the homeserver, and this can mean that the URLs
         being shared should also not be shared with the homeserver.
         {{% /boxes/note %}}
-      operationId: getUrlPreview
+      operationId: getUrlPreviewAuthed
       security:
         - accessTokenBearer: [ ]
       parameters:
@@ -618,7 +618,7 @@ paths:
         repository APIs, for example, proxies may enforce a lower upload size limit
         than is advertised by the server on this endpoint.
         {{% /boxes/note %}}
-      operationId: getConfig
+      operationId: getConfigAuthed
       security:
         - accessTokenBearer: [ ]
       responses:
@@ -643,6 +643,127 @@ paths:
                   }
         "429":
           $ref: '#/components/responses/rateLimited'
+      tags:
+        - Media
+  /media/search:
+    get:
+      summary: Search for media files
+      operationId: searchMedia
+      security:
+        - accessTokenBearer: [ ]
+      parameters:
+        - name: q
+          in: query
+          description: Search query string
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination (default 0)
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - name: limit
+          in: query
+          description: Number of results per page (default 20, max 100)
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: owner_id
+          in: query
+          description: Filter by owner ID
+          required: false
+          schema:
+            type: string
+        - name: parent_id
+          in: query
+          description: Filter by parent media ID
+          required: false
+          schema:
+            type: string
+        - name: start_date
+          in: query
+          description: Filter by creation date (start range)
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: end_date
+          in: query
+          description: Filter by creation date (end range)
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: Search results containing media metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - results
+                  - total
+                  - page
+                  - has_more
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MediaMetadata'
+                    description: Array of media metadata objects matching the search criteria
+                  total:
+                    type: integer
+                    description: Total number of results returned in this page
+                  page:
+                    type: integer
+                    description: Current page number
+                  has_more:
+                    type: boolean
+                    description: Whether there are more results available
+              examples:
+                response:
+                  value: {
+                    "results": [
+                      {
+                        "media_id": "AQwafuaFswefuhsfAFAgsw",
+                        "content_type": "image/jpeg",
+                        "file_size_bytes": 102400,
+                        "creation_timestamp": 1640995200,
+                        "upload_name": "example.jpg",
+                        "base64_hash": "aGVsbG8gd29ybGQ",
+                        "owner_id": "@user:example.com"
+                      }
+                    ],
+                    "total": 1,
+                    "page": 0,
+                    "has_more": false
+                  }
+        "400":
+          description: Bad request - invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "401":
+          description: Unauthorized - missing or invalid access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       tags:
         - Media
 servers:
@@ -743,7 +864,7 @@ components:
           examples:
             response:
               value: {
-                "errcode": "M_TOO_LARGE",
+                "code": "M_TOO_LARGE",
                 "error": "Cannot upload files larger than 100mb"
               }
     rateLimited:
@@ -755,7 +876,7 @@ components:
     notYetUploaded:
       description: |-
         The content is not yet available. A [standard error response](/client-server-api/#standard-error-response)
-        will be returned with the `errcode` `M_NOT_YET_UPLOADED`.
+        will be returned with the `code` `M_NOT_YET_UPLOADED`.
       content:
         application/json:
           schema:
@@ -763,7 +884,7 @@ components:
           examples:
             response:
               value: {
-                "errcode": "M_NOT_YET_UPLOADED",
+                "code": "M_NOT_YET_UPLOADED",
                 "error": "Content has not yet been uploaded"
               }
     downloadRedirect:
@@ -783,7 +904,7 @@ components:
           examples:
             response:
               value: {
-                "errcode": "M_TOO_LARGE",
+                "code": "M_TOO_LARGE",
                 "error": "Content is too large to serve"
               }
     thumbnailRedirect:
@@ -819,3 +940,37 @@ components:
       required: true
       schema:
         type: string
+  schemas:
+    MediaMetadata:
+      type: object
+      properties:
+        media_id:
+          type: string
+          description: The media ID of the file
+        content_type:
+          type: string
+          description: The content type of the file
+        file_size_bytes:
+          type: integer
+          description: The size of the file in bytes
+        creation_timestamp:
+          type: integer
+          description: The timestamp when the file was uploaded
+        upload_name:
+          type: string
+          description: The name of the file when it was uploaded
+        base64_hash:
+          type: string
+          description: The base64 encoded hash of the file
+        owner_id:
+          type: string
+          description: The ID of the user who uploaded the file
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The error code
+        error:
+          type: string
+          description: The error message
