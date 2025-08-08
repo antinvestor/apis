@@ -18,6 +18,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 )
 
 
@@ -53,7 +54,7 @@ should limit the number of concurrent *pending media uploads* a given
 user can have. A pending media upload is a created `mxc://` URI where (a)
 the media has not yet been uploaded, and (b) has not yet expired (the
 `unused_expires_at` timestamp has not yet passed). In both cases, the
-server should respond with an HTTP 429 error with an errcode of
+server should respond with an HTTP 429 error with an code of
 `M_LIMIT_EXCEEDED`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -81,7 +82,7 @@ func (a *MediaAPIService) CreateContentExecute(r ApiCreateContentRequest) (*Crea
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/media/create"
+	localVarPath := localBasePath + "/media/v1/create"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -127,7 +128,7 @@ func (a *MediaAPIService) CreateContentExecute(r ApiCreateContentRequest) (*Crea
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -162,17 +163,17 @@ func (a *MediaAPIService) CreateContentExecute(r ApiCreateContentRequest) (*Crea
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetConfigRequest struct {
+type ApiGetConfigAuthedRequest struct {
 	ctx context.Context
 	ApiService *MediaAPIService
 }
 
-func (r ApiGetConfigRequest) Execute() (*GetConfig200Response, *http.Response, error) {
-	return r.ApiService.GetConfigExecute(r)
+func (r ApiGetConfigAuthedRequest) Execute() (*GetConfigAuthed200Response, *http.Response, error) {
+	return r.ApiService.GetConfigAuthedExecute(r)
 }
 
 /*
-GetConfig Get the configuration for the content repository.
+GetConfigAuthed Get the configuration for the content repository.
 
 This endpoint allows clients to retrieve the configuration of the content
 repository, such as upload limitations.
@@ -188,26 +189,26 @@ than is advertised by the server on this endpoint.
 {{% /boxes/note %}}
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetConfigRequest
+ @return ApiGetConfigAuthedRequest
 */
-func (a *MediaAPIService) GetConfig(ctx context.Context) ApiGetConfigRequest {
-	return ApiGetConfigRequest{
+func (a *MediaAPIService) GetConfigAuthed(ctx context.Context) ApiGetConfigAuthedRequest {
+	return ApiGetConfigAuthedRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetConfig200Response
-func (a *MediaAPIService) GetConfigExecute(r ApiGetConfigRequest) (*GetConfig200Response, *http.Response, error) {
+//  @return GetConfigAuthed200Response
+func (a *MediaAPIService) GetConfigAuthedExecute(r ApiGetConfigAuthedRequest) (*GetConfigAuthed200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetConfig200Response
+		localVarReturnValue  *GetConfigAuthed200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.GetConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.GetConfigAuthed")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -282,7 +283,7 @@ func (a *MediaAPIService) GetConfigExecute(r ApiGetConfigRequest) (*GetConfig200
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetContentRequest struct {
+type ApiGetContentAuthedRequest struct {
 	ctx context.Context
 	ApiService *MediaAPIService
 	serverName string
@@ -291,17 +292,17 @@ type ApiGetContentRequest struct {
 }
 
 // The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
-func (r ApiGetContentRequest) TimeoutMs(timeoutMs int64) ApiGetContentRequest {
+func (r ApiGetContentAuthedRequest) TimeoutMs(timeoutMs int64) ApiGetContentAuthedRequest {
 	r.timeoutMs = &timeoutMs
 	return r
 }
 
-func (r ApiGetContentRequest) Execute() (interface{}, *http.Response, error) {
-	return r.ApiService.GetContentExecute(r)
+func (r ApiGetContentAuthedRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.GetContentAuthedExecute(r)
 }
 
 /*
-GetContent Download content from the content repository.
+GetContentAuthed Download content from the content repository.
 
 {{% boxes/note %}}
 Clients SHOULD NOT generate or use URLs which supply the access token in
@@ -316,10 +317,10 @@ Delivery Network (CDN).
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param serverName The server name from the `mxc://` URI (the authority component). 
  @param mediaId The media ID from the `mxc://` URI (the path component). 
- @return ApiGetContentRequest
+ @return ApiGetContentAuthedRequest
 */
-func (a *MediaAPIService) GetContent(ctx context.Context, serverName string, mediaId string) ApiGetContentRequest {
-	return ApiGetContentRequest{
+func (a *MediaAPIService) GetContentAuthed(ctx context.Context, serverName string, mediaId string) ApiGetContentAuthedRequest {
+	return ApiGetContentAuthedRequest{
 		ApiService: a,
 		ctx: ctx,
 		serverName: serverName,
@@ -329,7 +330,7 @@ func (a *MediaAPIService) GetContent(ctx context.Context, serverName string, med
 
 // Execute executes the request
 //  @return interface{}
-func (a *MediaAPIService) GetContentExecute(r ApiGetContentRequest) (interface{}, *http.Response, error) {
+func (a *MediaAPIService) GetContentAuthedExecute(r ApiGetContentAuthedRequest) (interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -337,7 +338,7 @@ func (a *MediaAPIService) GetContentExecute(r ApiGetContentRequest) (interface{}
 		localVarReturnValue  interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.GetContent")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.GetContentAuthed")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -407,7 +408,7 @@ func (a *MediaAPIService) GetContentExecute(r ApiGetContentRequest) (interface{}
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 502 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -418,7 +419,7 @@ func (a *MediaAPIService) GetContentExecute(r ApiGetContentRequest) (interface{}
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 504 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -442,7 +443,7 @@ func (a *MediaAPIService) GetContentExecute(r ApiGetContentRequest) (interface{}
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetContentOverrideNameRequest struct {
+type ApiGetContentOverrideNameAuthedRequest struct {
 	ctx context.Context
 	ApiService *MediaAPIService
 	serverName string
@@ -452,17 +453,17 @@ type ApiGetContentOverrideNameRequest struct {
 }
 
 // The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
-func (r ApiGetContentOverrideNameRequest) TimeoutMs(timeoutMs int64) ApiGetContentOverrideNameRequest {
+func (r ApiGetContentOverrideNameAuthedRequest) TimeoutMs(timeoutMs int64) ApiGetContentOverrideNameAuthedRequest {
 	r.timeoutMs = &timeoutMs
 	return r
 }
 
-func (r ApiGetContentOverrideNameRequest) Execute() (interface{}, *http.Response, error) {
-	return r.ApiService.GetContentOverrideNameExecute(r)
+func (r ApiGetContentOverrideNameAuthedRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.GetContentOverrideNameAuthedExecute(r)
 }
 
 /*
-GetContentOverrideName Download content from the content repository overriding the file name.
+GetContentOverrideNameAuthed Download content from the content repository overriding the file name.
 
 This will download content from the content repository (same as
 the previous endpoint) but replaces the target file name with the one
@@ -482,10 +483,10 @@ Delivery Network (CDN).
  @param serverName The server name from the `mxc://` URI (the authority component). 
  @param mediaId The media ID from the `mxc://` URI (the path component). 
  @param fileName A filename to give in the `Content-Disposition` header.
- @return ApiGetContentOverrideNameRequest
+ @return ApiGetContentOverrideNameAuthedRequest
 */
-func (a *MediaAPIService) GetContentOverrideName(ctx context.Context, serverName string, mediaId string, fileName string) ApiGetContentOverrideNameRequest {
-	return ApiGetContentOverrideNameRequest{
+func (a *MediaAPIService) GetContentOverrideNameAuthed(ctx context.Context, serverName string, mediaId string, fileName string) ApiGetContentOverrideNameAuthedRequest {
+	return ApiGetContentOverrideNameAuthedRequest{
 		ApiService: a,
 		ctx: ctx,
 		serverName: serverName,
@@ -496,7 +497,7 @@ func (a *MediaAPIService) GetContentOverrideName(ctx context.Context, serverName
 
 // Execute executes the request
 //  @return interface{}
-func (a *MediaAPIService) GetContentOverrideNameExecute(r ApiGetContentOverrideNameRequest) (interface{}, *http.Response, error) {
+func (a *MediaAPIService) GetContentOverrideNameAuthedExecute(r ApiGetContentOverrideNameAuthedRequest) (interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -504,7 +505,7 @@ func (a *MediaAPIService) GetContentOverrideNameExecute(r ApiGetContentOverrideN
 		localVarReturnValue  interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.GetContentOverrideName")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.GetContentOverrideNameAuthed")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -575,7 +576,7 @@ func (a *MediaAPIService) GetContentOverrideNameExecute(r ApiGetContentOverrideN
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 502 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -586,7 +587,7 @@ func (a *MediaAPIService) GetContentOverrideNameExecute(r ApiGetContentOverrideN
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 504 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -610,7 +611,7 @@ func (a *MediaAPIService) GetContentOverrideNameExecute(r ApiGetContentOverrideN
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetContentThumbnailRequest struct {
+type ApiGetContentThumbnailAuthedRequest struct {
 	ctx context.Context
 	ApiService *MediaAPIService
 	serverName string
@@ -623,41 +624,41 @@ type ApiGetContentThumbnailRequest struct {
 }
 
 // The *desired* width of the thumbnail. The actual thumbnail may be larger than the size specified.
-func (r ApiGetContentThumbnailRequest) Width(width int32) ApiGetContentThumbnailRequest {
+func (r ApiGetContentThumbnailAuthedRequest) Width(width int32) ApiGetContentThumbnailAuthedRequest {
 	r.width = &width
 	return r
 }
 
 // The *desired* height of the thumbnail. The actual thumbnail may be larger than the size specified.
-func (r ApiGetContentThumbnailRequest) Height(height int32) ApiGetContentThumbnailRequest {
+func (r ApiGetContentThumbnailAuthedRequest) Height(height int32) ApiGetContentThumbnailAuthedRequest {
 	r.height = &height
 	return r
 }
 
 // The desired resizing method. See the [Thumbnails](/client-server-api/#thumbnails) section for more information.
-func (r ApiGetContentThumbnailRequest) Method(method string) ApiGetContentThumbnailRequest {
+func (r ApiGetContentThumbnailAuthedRequest) Method(method string) ApiGetContentThumbnailAuthedRequest {
 	r.method = &method
 	return r
 }
 
 // The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
-func (r ApiGetContentThumbnailRequest) TimeoutMs(timeoutMs int64) ApiGetContentThumbnailRequest {
+func (r ApiGetContentThumbnailAuthedRequest) TimeoutMs(timeoutMs int64) ApiGetContentThumbnailAuthedRequest {
 	r.timeoutMs = &timeoutMs
 	return r
 }
 
 // Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types &#x60;image/gif&#x60;, &#x60;image/png&#x60; (with APNG format), &#x60;image/apng&#x60;, and &#x60;image/webp&#x60; instead of the common static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; content types.  When &#x60;true&#x60;, the server SHOULD return an animated thumbnail if possible and supported. When &#x60;false&#x60;, the server MUST NOT return an animated thumbnail. For example, returning a static &#x60;image/png&#x60; or &#x60;image/jpeg&#x60; thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return &#x60;image/webp&#x60; thumbnails when supporting animation.  When &#x60;true&#x60; and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though &#x60;animated&#x60; is &#x60;false&#x60;. 
-func (r ApiGetContentThumbnailRequest) Animated(animated bool) ApiGetContentThumbnailRequest {
+func (r ApiGetContentThumbnailAuthedRequest) Animated(animated bool) ApiGetContentThumbnailAuthedRequest {
 	r.animated = &animated
 	return r
 }
 
-func (r ApiGetContentThumbnailRequest) Execute() (interface{}, *http.Response, error) {
-	return r.ApiService.GetContentThumbnailExecute(r)
+func (r ApiGetContentThumbnailAuthedRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.GetContentThumbnailAuthedExecute(r)
 }
 
 /*
-GetContentThumbnail Download a thumbnail of content from the content repository
+GetContentThumbnailAuthed Download a thumbnail of content from the content repository
 
 Download a thumbnail of content from the content repository.
 See the [Thumbnails](/client-server-api/#thumbnails) section for more information.
@@ -675,10 +676,10 @@ Delivery Network (CDN).
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param serverName The server name from the `mxc://` URI (the authority component). 
  @param mediaId The media ID from the `mxc://` URI (the path component). 
- @return ApiGetContentThumbnailRequest
+ @return ApiGetContentThumbnailAuthedRequest
 */
-func (a *MediaAPIService) GetContentThumbnail(ctx context.Context, serverName string, mediaId string) ApiGetContentThumbnailRequest {
-	return ApiGetContentThumbnailRequest{
+func (a *MediaAPIService) GetContentThumbnailAuthed(ctx context.Context, serverName string, mediaId string) ApiGetContentThumbnailAuthedRequest {
+	return ApiGetContentThumbnailAuthedRequest{
 		ApiService: a,
 		ctx: ctx,
 		serverName: serverName,
@@ -688,7 +689,7 @@ func (a *MediaAPIService) GetContentThumbnail(ctx context.Context, serverName st
 
 // Execute executes the request
 //  @return interface{}
-func (a *MediaAPIService) GetContentThumbnailExecute(r ApiGetContentThumbnailRequest) (interface{}, *http.Response, error) {
+func (a *MediaAPIService) GetContentThumbnailAuthedExecute(r ApiGetContentThumbnailAuthedRequest) (interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -696,7 +697,7 @@ func (a *MediaAPIService) GetContentThumbnailExecute(r ApiGetContentThumbnailReq
 		localVarReturnValue  interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.GetContentThumbnail")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.GetContentThumbnailAuthed")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -769,7 +770,7 @@ func (a *MediaAPIService) GetContentThumbnailExecute(r ApiGetContentThumbnailReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -780,7 +781,7 @@ func (a *MediaAPIService) GetContentThumbnailExecute(r ApiGetContentThumbnailReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 413 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -802,7 +803,7 @@ func (a *MediaAPIService) GetContentThumbnailExecute(r ApiGetContentThumbnailReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 502 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -813,7 +814,7 @@ func (a *MediaAPIService) GetContentThumbnailExecute(r ApiGetContentThumbnailReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 504 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -837,7 +838,7 @@ func (a *MediaAPIService) GetContentThumbnailExecute(r ApiGetContentThumbnailReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetUrlPreviewRequest struct {
+type ApiGetUrlPreviewAuthedRequest struct {
 	ctx context.Context
 	ApiService *MediaAPIService
 	url *string
@@ -845,23 +846,23 @@ type ApiGetUrlPreviewRequest struct {
 }
 
 // The URL to get a preview of.
-func (r ApiGetUrlPreviewRequest) Url(url string) ApiGetUrlPreviewRequest {
+func (r ApiGetUrlPreviewAuthedRequest) Url(url string) ApiGetUrlPreviewAuthedRequest {
 	r.url = &url
 	return r
 }
 
 // The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available.
-func (r ApiGetUrlPreviewRequest) Ts(ts int64) ApiGetUrlPreviewRequest {
+func (r ApiGetUrlPreviewAuthedRequest) Ts(ts int64) ApiGetUrlPreviewAuthedRequest {
 	r.ts = &ts
 	return r
 }
 
-func (r ApiGetUrlPreviewRequest) Execute() (*GetUrlPreview200Response, *http.Response, error) {
-	return r.ApiService.GetUrlPreviewExecute(r)
+func (r ApiGetUrlPreviewAuthedRequest) Execute() (*GetUrlPreviewAuthed200Response, *http.Response, error) {
+	return r.ApiService.GetUrlPreviewAuthedExecute(r)
 }
 
 /*
-GetUrlPreview Get information about a URL for a client
+GetUrlPreviewAuthed Get information about a URL for a client
 
 Get information about a URL for the client. Typically this is called when a
 client sees a URL in a message and wants to render a preview for the user.
@@ -874,26 +875,26 @@ being shared should also not be shared with the homeserver.
 {{% /boxes/note %}}
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUrlPreviewRequest
+ @return ApiGetUrlPreviewAuthedRequest
 */
-func (a *MediaAPIService) GetUrlPreview(ctx context.Context) ApiGetUrlPreviewRequest {
-	return ApiGetUrlPreviewRequest{
+func (a *MediaAPIService) GetUrlPreviewAuthed(ctx context.Context) ApiGetUrlPreviewAuthedRequest {
+	return ApiGetUrlPreviewAuthedRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetUrlPreview200Response
-func (a *MediaAPIService) GetUrlPreviewExecute(r ApiGetUrlPreviewRequest) (*GetUrlPreview200Response, *http.Response, error) {
+//  @return GetUrlPreviewAuthed200Response
+func (a *MediaAPIService) GetUrlPreviewAuthedExecute(r ApiGetUrlPreviewAuthedRequest) (*GetUrlPreviewAuthed200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetUrlPreview200Response
+		localVarReturnValue  *GetUrlPreviewAuthed200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.GetUrlPreview")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.GetUrlPreviewAuthed")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -975,6 +976,211 @@ func (a *MediaAPIService) GetUrlPreviewExecute(r ApiGetUrlPreviewRequest) (*GetU
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiSearchMediaRequest struct {
+	ctx context.Context
+	ApiService *MediaAPIService
+	q *string
+	page *int32
+	limit *int32
+	ownerId *string
+	parentId *string
+	startDate *time.Time
+	endDate *time.Time
+}
+
+// Search query string
+func (r ApiSearchMediaRequest) Q(q string) ApiSearchMediaRequest {
+	r.q = &q
+	return r
+}
+
+// Page number for pagination (default 0)
+func (r ApiSearchMediaRequest) Page(page int32) ApiSearchMediaRequest {
+	r.page = &page
+	return r
+}
+
+// Number of results per page (default 20, max 100)
+func (r ApiSearchMediaRequest) Limit(limit int32) ApiSearchMediaRequest {
+	r.limit = &limit
+	return r
+}
+
+// Filter by owner ID
+func (r ApiSearchMediaRequest) OwnerId(ownerId string) ApiSearchMediaRequest {
+	r.ownerId = &ownerId
+	return r
+}
+
+// Filter by parent media ID
+func (r ApiSearchMediaRequest) ParentId(parentId string) ApiSearchMediaRequest {
+	r.parentId = &parentId
+	return r
+}
+
+// Filter by creation date (start range)
+func (r ApiSearchMediaRequest) StartDate(startDate time.Time) ApiSearchMediaRequest {
+	r.startDate = &startDate
+	return r
+}
+
+// Filter by creation date (end range)
+func (r ApiSearchMediaRequest) EndDate(endDate time.Time) ApiSearchMediaRequest {
+	r.endDate = &endDate
+	return r
+}
+
+func (r ApiSearchMediaRequest) Execute() (*SearchMedia200Response, *http.Response, error) {
+	return r.ApiService.SearchMediaExecute(r)
+}
+
+/*
+SearchMedia Search for media files
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiSearchMediaRequest
+*/
+func (a *MediaAPIService) SearchMedia(ctx context.Context) ApiSearchMediaRequest {
+	return ApiSearchMediaRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return SearchMedia200Response
+func (a *MediaAPIService) SearchMediaExecute(r ApiSearchMediaRequest) (*SearchMedia200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SearchMedia200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.SearchMedia")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/media/search"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.q != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "q", r.q, "form", "")
+	}
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	} else {
+		var defaultValue int32 = 0
+		r.page = &defaultValue
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	} else {
+		var defaultValue int32 = 20
+		r.limit = &defaultValue
+	}
+	if r.ownerId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "owner_id", r.ownerId, "form", "")
+	}
+	if r.parentId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "parent_id", r.parentId, "form", "")
+	}
+	if r.startDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start_date", r.startDate, "form", "")
+	}
+	if r.endDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "end_date", r.endDate, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUploadContentRequest struct {
 	ctx context.Context
 	ApiService *MediaAPIService
@@ -1032,7 +1238,7 @@ func (a *MediaAPIService) UploadContentExecute(r ApiUploadContentRequest) (*Uplo
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/media/upload"
+	localVarPath := localBasePath + "/media/v3/upload"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1089,7 +1295,7 @@ func (a *MediaAPIService) UploadContentExecute(r ApiUploadContentRequest) (*Uplo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1100,7 +1306,7 @@ func (a *MediaAPIService) UploadContentExecute(r ApiUploadContentRequest) (*Uplo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 413 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1201,7 +1407,7 @@ func (a *MediaAPIService) UploadContentToMXCExecute(r ApiUploadContentToMXCReque
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/media/upload/{serverName}/{mediaId}"
+	localVarPath := localBasePath + "/media/v3/upload/{serverName}/{mediaId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"serverName"+"}", url.PathEscape(parameterValueToString(r.serverName, "serverName")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"mediaId"+"}", url.PathEscape(parameterValueToString(r.mediaId, "mediaId")), -1)
 
@@ -1260,7 +1466,7 @@ func (a *MediaAPIService) UploadContentToMXCExecute(r ApiUploadContentToMXCReque
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1271,7 +1477,7 @@ func (a *MediaAPIService) UploadContentToMXCExecute(r ApiUploadContentToMXCReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1282,7 +1488,7 @@ func (a *MediaAPIService) UploadContentToMXCExecute(r ApiUploadContentToMXCReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1293,7 +1499,7 @@ func (a *MediaAPIService) UploadContentToMXCExecute(r ApiUploadContentToMXCReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 413 {
-			var v Error
+			var v Error1
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

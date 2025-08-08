@@ -1,17 +1,3 @@
-// Copyright 2023-2024 Ant Investor Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
 Ant Investor Files
 
@@ -27,6 +13,7 @@ package file_v1
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -36,9 +23,9 @@ var _ MappedNullable = &Error1{}
 // Error1 A Service level Error
 type Error1 struct {
 	// An error code for the error.
-	Errcode interface{} `json:"errcode"`
+	Errcode string `json:"errcode"`
 	// A human-readable error message.
-	Error interface{} `json:"error,omitempty"`
+	Error *string `json:"error,omitempty"`
 }
 
 type _Error1 Error1
@@ -47,7 +34,7 @@ type _Error1 Error1
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewError1(errcode interface{}) *Error1 {
+func NewError1(errcode string) *Error1 {
 	this := Error1{}
 	this.Errcode = errcode
 	return &this
@@ -62,10 +49,9 @@ func NewError1WithDefaults() *Error1 {
 }
 
 // GetErrcode returns the Errcode field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *Error1) GetErrcode() interface{} {
+func (o *Error1) GetErrcode() string {
 	if o == nil {
-		var ret interface{}
+		var ret string
 		return ret
 	}
 
@@ -74,54 +60,52 @@ func (o *Error1) GetErrcode() interface{} {
 
 // GetErrcodeOk returns a tuple with the Errcode field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Error1) GetErrcodeOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Errcode) {
+func (o *Error1) GetErrcodeOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Errcode, true
 }
 
 // SetErrcode sets field value
-func (o *Error1) SetErrcode(v interface{}) {
+func (o *Error1) SetErrcode(v string) {
 	o.Errcode = v
 }
 
-// GetError returns the Error field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Error1) GetError() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetError returns the Error field value if set, zero value otherwise.
+func (o *Error1) GetError() string {
+	if o == nil || IsNil(o.Error) {
+		var ret string
 		return ret
 	}
-	return o.Error
+	return *o.Error
 }
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Error1) GetErrorOk() (*interface{}, bool) {
+func (o *Error1) GetErrorOk() (*string, bool) {
 	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
-	return &o.Error, true
+	return o.Error, true
 }
 
 // HasError returns a boolean if a field has been set.
 func (o *Error1) HasError() bool {
-	if o != nil && IsNil(o.Error) {
+	if o != nil && !IsNil(o.Error) {
 		return true
 	}
 
 	return false
 }
 
-// SetError gets a reference to the given interface{} and assigns it to the Error field.
-func (o *Error1) SetError(v interface{}) {
-	o.Error = v
+// SetError gets a reference to the given string and assigns it to the Error field.
+func (o *Error1) SetError(v string) {
+	o.Error = &v
 }
 
 func (o Error1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -130,16 +114,14 @@ func (o Error1) MarshalJSON() ([]byte, error) {
 
 func (o Error1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Errcode != nil {
-		toSerialize["errcode"] = o.Errcode
-	}
-	if o.Error != nil {
+	toSerialize["errcode"] = o.Errcode
+	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
 	return toSerialize, nil
 }
 
-func (o *Error1) UnmarshalJSON(bytes []byte) (err error) {
+func (o *Error1) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -149,13 +131,13 @@ func (o *Error1) UnmarshalJSON(bytes []byte) (err error) {
 
 	allProperties := make(map[string]interface{})
 
-	err = json.Unmarshal(bytes, &allProperties)
+	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -163,7 +145,9 @@ func (o *Error1) UnmarshalJSON(bytes []byte) (err error) {
 
 	varError1 := _Error1{}
 
-	err = json.Unmarshal(bytes, &varError1)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varError1)
 
 	if err != nil {
 		return err
@@ -209,3 +193,5 @@ func (v *NullableError1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

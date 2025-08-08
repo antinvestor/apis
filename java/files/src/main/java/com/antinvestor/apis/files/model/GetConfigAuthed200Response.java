@@ -30,75 +30,46 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import com.antinvestor.apis.files.invoker.ApiClient;
 /**
- * A Service level Error
+ * GetConfigAuthed200Response
  */
 @JsonPropertyOrder({
-  Error1.JSON_PROPERTY_ERRCODE,
-  Error1.JSON_PROPERTY_ERROR
+  GetConfigAuthed200Response.JSON_PROPERTY_M_UPLOAD_SIZE
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
-public class Error1 {
-  public static final String JSON_PROPERTY_ERRCODE = "errcode";
-  @javax.annotation.Nonnull
-  private String errcode;
-
-  public static final String JSON_PROPERTY_ERROR = "error";
+public class GetConfigAuthed200Response {
+  public static final String JSON_PROPERTY_M_UPLOAD_SIZE = "m.upload.size";
   @javax.annotation.Nullable
-  private String error;
+  private Long mUploadSize;
 
-  public Error1() { 
+  public GetConfigAuthed200Response() { 
   }
 
-  public Error1 errcode(@javax.annotation.Nonnull String errcode) {
-    this.errcode = errcode;
+  public GetConfigAuthed200Response mUploadSize(@javax.annotation.Nullable Long mUploadSize) {
+    this.mUploadSize = mUploadSize;
     return this;
   }
 
   /**
-   * An error code for the error.
-   * @return errcode
-   */
-  @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_ERRCODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public String getErrcode() {
-    return errcode;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_ERRCODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setErrcode(@javax.annotation.Nonnull String errcode) {
-    this.errcode = errcode;
-  }
-
-
-  public Error1 error(@javax.annotation.Nullable String error) {
-    this.error = error;
-    return this;
-  }
-
-  /**
-   * A human-readable error message.
-   * @return error
+   * The maximum size an upload can be in bytes. Clients SHOULD use this as a guide when uploading content. If not listed or null, the size limit should be treated as unknown.
+   * @return mUploadSize
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_ERROR)
+  @JsonProperty(JSON_PROPERTY_M_UPLOAD_SIZE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public String getError() {
-    return error;
+  public Long getmUploadSize() {
+    return mUploadSize;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ERROR)
+  @JsonProperty(JSON_PROPERTY_M_UPLOAD_SIZE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setError(@javax.annotation.Nullable String error) {
-    this.error = error;
+  public void setmUploadSize(@javax.annotation.Nullable Long mUploadSize) {
+    this.mUploadSize = mUploadSize;
   }
 
 
   /**
-   * Return true if this Error_1 object is equal to o.
+   * Return true if this getConfigAuthed_200_response object is equal to o.
    */
   @Override
   public boolean equals(Object o) {
@@ -108,22 +79,20 @@ public class Error1 {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Error1 error1 = (Error1) o;
-    return Objects.equals(this.errcode, error1.errcode) &&
-        Objects.equals(this.error, error1.error);
+    GetConfigAuthed200Response getConfigAuthed200Response = (GetConfigAuthed200Response) o;
+    return Objects.equals(this.mUploadSize, getConfigAuthed200Response.mUploadSize);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(errcode, error);
+    return Objects.hash(mUploadSize);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Error1 {\n");
-    sb.append("    errcode: ").append(toIndentedString(errcode)).append("\n");
-    sb.append("    error: ").append(toIndentedString(error)).append("\n");
+    sb.append("class GetConfigAuthed200Response {\n");
+    sb.append("    mUploadSize: ").append(toIndentedString(mUploadSize)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -171,14 +140,9 @@ public class Error1 {
 
     StringJoiner joiner = new StringJoiner("&");
 
-    // add `errcode` to the URL query string
-    if (getErrcode() != null) {
-      joiner.add(String.format("%serrcode%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getErrcode()))));
-    }
-
-    // add `error` to the URL query string
-    if (getError() != null) {
-      joiner.add(String.format("%serror%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getError()))));
+    // add `m.upload.size` to the URL query string
+    if (getmUploadSize() != null) {
+      joiner.add(String.format("%sm.upload.size%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getmUploadSize()))));
     }
 
     return joiner.toString();

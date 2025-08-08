@@ -4,14 +4,15 @@ All URIs are relative to *https://media.antinvestor.com/_matrix/client/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateContent**](MediaAPI.md#CreateContent) | **Post** /media/create | Create a new &#x60;mxc://&#x60; URI without uploading the content.
-[**GetConfig**](MediaAPI.md#GetConfig) | **Get** /media/config | Get the configuration for the content repository.
-[**GetContent**](MediaAPI.md#GetContent) | **Get** /media/download/{serverName}/{mediaId} | Download content from the content repository.
-[**GetContentOverrideName**](MediaAPI.md#GetContentOverrideName) | **Get** /media/download/{serverName}/{mediaId}/{fileName} | Download content from the content repository overriding the file name.
-[**GetContentThumbnail**](MediaAPI.md#GetContentThumbnail) | **Get** /media/thumbnail/{serverName}/{mediaId} | Download a thumbnail of content from the content repository
-[**GetUrlPreview**](MediaAPI.md#GetUrlPreview) | **Get** /media/preview_url | Get information about a URL for a client
-[**UploadContent**](MediaAPI.md#UploadContent) | **Post** /media/upload | Upload some content to the content repository.
-[**UploadContentToMXC**](MediaAPI.md#UploadContentToMXC) | **Put** /media/upload/{serverName}/{mediaId} | Upload content to an &#x60;mxc://&#x60; URI that was created earlier.
+[**CreateContent**](MediaAPI.md#CreateContent) | **Post** /media/v1/create | Create a new &#x60;mxc://&#x60; URI without uploading the content.
+[**GetConfigAuthed**](MediaAPI.md#GetConfigAuthed) | **Get** /media/config | Get the configuration for the content repository.
+[**GetContentAuthed**](MediaAPI.md#GetContentAuthed) | **Get** /media/download/{serverName}/{mediaId} | Download content from the content repository.
+[**GetContentOverrideNameAuthed**](MediaAPI.md#GetContentOverrideNameAuthed) | **Get** /media/download/{serverName}/{mediaId}/{fileName} | Download content from the content repository overriding the file name.
+[**GetContentThumbnailAuthed**](MediaAPI.md#GetContentThumbnailAuthed) | **Get** /media/thumbnail/{serverName}/{mediaId} | Download a thumbnail of content from the content repository
+[**GetUrlPreviewAuthed**](MediaAPI.md#GetUrlPreviewAuthed) | **Get** /media/preview_url | Get information about a URL for a client
+[**SearchMedia**](MediaAPI.md#SearchMedia) | **Get** /media/search | Search for media files
+[**UploadContent**](MediaAPI.md#UploadContent) | **Post** /media/v3/upload | Upload some content to the content repository.
+[**UploadContentToMXC**](MediaAPI.md#UploadContentToMXC) | **Put** /media/v3/upload/{serverName}/{mediaId} | Upload content to an &#x60;mxc://&#x60; URI that was created earlier.
 
 
 
@@ -76,9 +77,9 @@ Other parameters are passed through a pointer to a apiCreateContentRequest struc
 [[Back to README]](../README.md)
 
 
-## GetConfig
+## GetConfigAuthed
 
-> GetConfig200Response GetConfig(ctx).Execute()
+> GetConfigAuthed200Response GetConfigAuthed(ctx).Execute()
 
 Get the configuration for the content repository.
 
@@ -100,13 +101,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MediaAPI.GetConfig(context.Background()).Execute()
+	resp, r, err := apiClient.MediaAPI.GetConfigAuthed(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MediaAPI.GetConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MediaAPI.GetConfigAuthed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetConfig`: GetConfig200Response
-	fmt.Fprintf(os.Stdout, "Response from `MediaAPI.GetConfig`: %v\n", resp)
+	// response from `GetConfigAuthed`: GetConfigAuthed200Response
+	fmt.Fprintf(os.Stdout, "Response from `MediaAPI.GetConfigAuthed`: %v\n", resp)
 }
 ```
 
@@ -116,12 +117,12 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetConfigRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetConfigAuthedRequest struct via the builder pattern
 
 
 ### Return type
 
-[**GetConfig200Response**](GetConfig200Response.md)
+[**GetConfigAuthed200Response**](GetConfigAuthed200Response.md)
 
 ### Authorization
 
@@ -137,9 +138,9 @@ Other parameters are passed through a pointer to a apiGetConfigRequest struct vi
 [[Back to README]](../README.md)
 
 
-## GetContent
+## GetContentAuthed
 
-> interface{} GetContent(ctx, serverName, mediaId).TimeoutMs(timeoutMs).Execute()
+> interface{} GetContentAuthed(ctx, serverName, mediaId).TimeoutMs(timeoutMs).Execute()
 
 Download content from the content repository.
 
@@ -164,13 +165,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MediaAPI.GetContent(context.Background(), serverName, mediaId).TimeoutMs(timeoutMs).Execute()
+	resp, r, err := apiClient.MediaAPI.GetContentAuthed(context.Background(), serverName, mediaId).TimeoutMs(timeoutMs).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MediaAPI.GetContent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MediaAPI.GetContentAuthed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContent`: interface{}
-	fmt.Fprintf(os.Stdout, "Response from `MediaAPI.GetContent`: %v\n", resp)
+	// response from `GetContentAuthed`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `MediaAPI.GetContentAuthed`: %v\n", resp)
 }
 ```
 
@@ -185,7 +186,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetContentRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetContentAuthedRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -212,9 +213,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetContentOverrideName
+## GetContentOverrideNameAuthed
 
-> interface{} GetContentOverrideName(ctx, serverName, mediaId, fileName).TimeoutMs(timeoutMs).Execute()
+> interface{} GetContentOverrideNameAuthed(ctx, serverName, mediaId, fileName).TimeoutMs(timeoutMs).Execute()
 
 Download content from the content repository overriding the file name.
 
@@ -240,13 +241,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MediaAPI.GetContentOverrideName(context.Background(), serverName, mediaId, fileName).TimeoutMs(timeoutMs).Execute()
+	resp, r, err := apiClient.MediaAPI.GetContentOverrideNameAuthed(context.Background(), serverName, mediaId, fileName).TimeoutMs(timeoutMs).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MediaAPI.GetContentOverrideName``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MediaAPI.GetContentOverrideNameAuthed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContentOverrideName`: interface{}
-	fmt.Fprintf(os.Stdout, "Response from `MediaAPI.GetContentOverrideName`: %v\n", resp)
+	// response from `GetContentOverrideNameAuthed`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `MediaAPI.GetContentOverrideNameAuthed`: %v\n", resp)
 }
 ```
 
@@ -262,7 +263,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetContentOverrideNameRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetContentOverrideNameAuthedRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -290,9 +291,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetContentThumbnail
+## GetContentThumbnailAuthed
 
-> interface{} GetContentThumbnail(ctx, serverName, mediaId).Width(width).Height(height).Method(method).TimeoutMs(timeoutMs).Animated(animated).Execute()
+> interface{} GetContentThumbnailAuthed(ctx, serverName, mediaId).Width(width).Height(height).Method(method).TimeoutMs(timeoutMs).Animated(animated).Execute()
 
 Download a thumbnail of content from the content repository
 
@@ -321,13 +322,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MediaAPI.GetContentThumbnail(context.Background(), serverName, mediaId).Width(width).Height(height).Method(method).TimeoutMs(timeoutMs).Animated(animated).Execute()
+	resp, r, err := apiClient.MediaAPI.GetContentThumbnailAuthed(context.Background(), serverName, mediaId).Width(width).Height(height).Method(method).TimeoutMs(timeoutMs).Animated(animated).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MediaAPI.GetContentThumbnail``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MediaAPI.GetContentThumbnailAuthed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContentThumbnail`: interface{}
-	fmt.Fprintf(os.Stdout, "Response from `MediaAPI.GetContentThumbnail`: %v\n", resp)
+	// response from `GetContentThumbnailAuthed`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `MediaAPI.GetContentThumbnailAuthed`: %v\n", resp)
 }
 ```
 
@@ -342,7 +343,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetContentThumbnailRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetContentThumbnailAuthedRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -373,9 +374,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetUrlPreview
+## GetUrlPreviewAuthed
 
-> GetUrlPreview200Response GetUrlPreview(ctx).Url(url).Ts(ts).Execute()
+> GetUrlPreviewAuthed200Response GetUrlPreviewAuthed(ctx).Url(url).Ts(ts).Execute()
 
 Get information about a URL for a client
 
@@ -399,13 +400,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MediaAPI.GetUrlPreview(context.Background()).Url(url).Ts(ts).Execute()
+	resp, r, err := apiClient.MediaAPI.GetUrlPreviewAuthed(context.Background()).Url(url).Ts(ts).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MediaAPI.GetUrlPreview``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MediaAPI.GetUrlPreviewAuthed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUrlPreview`: GetUrlPreview200Response
-	fmt.Fprintf(os.Stdout, "Response from `MediaAPI.GetUrlPreview`: %v\n", resp)
+	// response from `GetUrlPreviewAuthed`: GetUrlPreviewAuthed200Response
+	fmt.Fprintf(os.Stdout, "Response from `MediaAPI.GetUrlPreviewAuthed`: %v\n", resp)
 }
 ```
 
@@ -415,7 +416,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetUrlPreviewRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetUrlPreviewAuthedRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -425,7 +426,84 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetUrlPreview200Response**](GetUrlPreview200Response.md)
+[**GetUrlPreviewAuthed200Response**](GetUrlPreviewAuthed200Response.md)
+
+### Authorization
+
+[accessTokenBearer](../README.md#accessTokenBearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SearchMedia
+
+> SearchMedia200Response SearchMedia(ctx).Q(q).Page(page).Limit(limit).OwnerId(ownerId).ParentId(parentId).StartDate(startDate).EndDate(endDate).Execute()
+
+Search for media files
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/antinvestor/apis/go/files"
+)
+
+func main() {
+	q := "q_example" // string | Search query string (optional)
+	page := int32(56) // int32 | Page number for pagination (default 0) (optional) (default to 0)
+	limit := int32(56) // int32 | Number of results per page (default 20, max 100) (optional) (default to 20)
+	ownerId := "ownerId_example" // string | Filter by owner ID (optional)
+	parentId := "parentId_example" // string | Filter by parent media ID (optional)
+	startDate := time.Now() // time.Time | Filter by creation date (start range) (optional)
+	endDate := time.Now() // time.Time | Filter by creation date (end range) (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MediaAPI.SearchMedia(context.Background()).Q(q).Page(page).Limit(limit).OwnerId(ownerId).ParentId(parentId).StartDate(startDate).EndDate(endDate).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MediaAPI.SearchMedia``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SearchMedia`: SearchMedia200Response
+	fmt.Fprintf(os.Stdout, "Response from `MediaAPI.SearchMedia`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSearchMediaRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **q** | **string** | Search query string | 
+ **page** | **int32** | Page number for pagination (default 0) | [default to 0]
+ **limit** | **int32** | Number of results per page (default 20, max 100) | [default to 20]
+ **ownerId** | **string** | Filter by owner ID | 
+ **parentId** | **string** | Filter by parent media ID | 
+ **startDate** | **time.Time** | Filter by creation date (start range) | 
+ **endDate** | **time.Time** | Filter by creation date (end range) | 
+
+### Return type
+
+[**SearchMedia200Response**](SearchMedia200Response.md)
 
 ### Authorization
 

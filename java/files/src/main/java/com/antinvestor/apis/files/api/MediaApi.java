@@ -20,9 +20,12 @@ import com.antinvestor.apis.files.invoker.Pair;
 
 import com.antinvestor.apis.files.model.CreateContent200Response;
 import com.antinvestor.apis.files.model.Error;
-import com.antinvestor.apis.files.model.GetConfig200Response;
-import com.antinvestor.apis.files.model.GetUrlPreview200Response;
+import com.antinvestor.apis.files.model.Error1;
+import com.antinvestor.apis.files.model.GetConfigAuthed200Response;
+import com.antinvestor.apis.files.model.GetUrlPreviewAuthed200Response;
 import com.antinvestor.apis.files.model.InlineObject;
+import java.time.OffsetDateTime;
+import com.antinvestor.apis.files.model.SearchMedia200Response;
 import java.net.URI;
 import com.antinvestor.apis.files.model.UploadContent200Response;
 
@@ -90,7 +93,7 @@ public class MediaApi {
 
   /**
    * Create a new &#x60;mxc://&#x60; URI without uploading the content.
-   * Creates a new &#x60;mxc://&#x60; URI, independently of the content being uploaded. The content must be provided later via [&#x60;PUT /_matrix/media/v3/upload/{serverName}/{mediaId}&#x60;](/client-server-api/#put_matrixmediav3uploadservernamemediaid).  The server may optionally enforce a maximum age for unused IDs, and delete media IDs when the client doesn&#39;t start the upload in time, or when the upload was interrupted and not resumed in time. The server should include the maximum POSIX millisecond timestamp to complete the upload in the &#x60;unused_expires_at&#x60; field in the response JSON. The recommended default expiration is 24 hours which should be enough time to accommodate users on poor connection who find a better connection to complete the upload.  As well as limiting the rate of requests to create &#x60;mxc://&#x60; URIs, the server should limit the number of concurrent *pending media uploads* a given user can have. A pending media upload is a created &#x60;mxc://&#x60; URI where (a) the media has not yet been uploaded, and (b) has not yet expired (the &#x60;unused_expires_at&#x60; timestamp has not yet passed). In both cases, the server should respond with an HTTP 429 error with an errcode of &#x60;M_LIMIT_EXCEEDED&#x60;.
+   * Creates a new &#x60;mxc://&#x60; URI, independently of the content being uploaded. The content must be provided later via [&#x60;PUT /_matrix/media/v3/upload/{serverName}/{mediaId}&#x60;](/client-server-api/#put_matrixmediav3uploadservernamemediaid).  The server may optionally enforce a maximum age for unused IDs, and delete media IDs when the client doesn&#39;t start the upload in time, or when the upload was interrupted and not resumed in time. The server should include the maximum POSIX millisecond timestamp to complete the upload in the &#x60;unused_expires_at&#x60; field in the response JSON. The recommended default expiration is 24 hours which should be enough time to accommodate users on poor connection who find a better connection to complete the upload.  As well as limiting the rate of requests to create &#x60;mxc://&#x60; URIs, the server should limit the number of concurrent *pending media uploads* a given user can have. A pending media upload is a created &#x60;mxc://&#x60; URI where (a) the media has not yet been uploaded, and (b) has not yet expired (the &#x60;unused_expires_at&#x60; timestamp has not yet passed). In both cases, the server should respond with an HTTP 429 error with an code of &#x60;M_LIMIT_EXCEEDED&#x60;.
    * @return CreateContent200Response
    * @throws ApiException if fails to make API call
    */
@@ -101,7 +104,7 @@ public class MediaApi {
 
   /**
    * Create a new &#x60;mxc://&#x60; URI without uploading the content.
-   * Creates a new &#x60;mxc://&#x60; URI, independently of the content being uploaded. The content must be provided later via [&#x60;PUT /_matrix/media/v3/upload/{serverName}/{mediaId}&#x60;](/client-server-api/#put_matrixmediav3uploadservernamemediaid).  The server may optionally enforce a maximum age for unused IDs, and delete media IDs when the client doesn&#39;t start the upload in time, or when the upload was interrupted and not resumed in time. The server should include the maximum POSIX millisecond timestamp to complete the upload in the &#x60;unused_expires_at&#x60; field in the response JSON. The recommended default expiration is 24 hours which should be enough time to accommodate users on poor connection who find a better connection to complete the upload.  As well as limiting the rate of requests to create &#x60;mxc://&#x60; URIs, the server should limit the number of concurrent *pending media uploads* a given user can have. A pending media upload is a created &#x60;mxc://&#x60; URI where (a) the media has not yet been uploaded, and (b) has not yet expired (the &#x60;unused_expires_at&#x60; timestamp has not yet passed). In both cases, the server should respond with an HTTP 429 error with an errcode of &#x60;M_LIMIT_EXCEEDED&#x60;.
+   * Creates a new &#x60;mxc://&#x60; URI, independently of the content being uploaded. The content must be provided later via [&#x60;PUT /_matrix/media/v3/upload/{serverName}/{mediaId}&#x60;](/client-server-api/#put_matrixmediav3uploadservernamemediaid).  The server may optionally enforce a maximum age for unused IDs, and delete media IDs when the client doesn&#39;t start the upload in time, or when the upload was interrupted and not resumed in time. The server should include the maximum POSIX millisecond timestamp to complete the upload in the &#x60;unused_expires_at&#x60; field in the response JSON. The recommended default expiration is 24 hours which should be enough time to accommodate users on poor connection who find a better connection to complete the upload.  As well as limiting the rate of requests to create &#x60;mxc://&#x60; URIs, the server should limit the number of concurrent *pending media uploads* a given user can have. A pending media upload is a created &#x60;mxc://&#x60; URI where (a) the media has not yet been uploaded, and (b) has not yet expired (the &#x60;unused_expires_at&#x60; timestamp has not yet passed). In both cases, the server should respond with an HTTP 429 error with an code of &#x60;M_LIMIT_EXCEEDED&#x60;.
    * @return ApiResponse&lt;CreateContent200Response&gt;
    * @throws ApiException if fails to make API call
    */
@@ -149,7 +152,7 @@ public class MediaApi {
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
 
-    String localVarPath = "/media/create";
+    String localVarPath = "/media/v1/create";
 
     localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath));
 
@@ -168,22 +171,22 @@ public class MediaApi {
   /**
    * Get the configuration for the content repository.
    * This endpoint allows clients to retrieve the configuration of the content repository, such as upload limitations. Clients SHOULD use this as a guide when using content repository endpoints. All values are intentionally left optional. Clients SHOULD follow the advice given in the field description when the field is not available.  {{% boxes/note %}} Both clients and server administrators should be aware that proxies between the client and the server may affect the apparent behaviour of content repository APIs, for example, proxies may enforce a lower upload size limit than is advertised by the server on this endpoint. {{% /boxes/note %}}
-   * @return GetConfig200Response
+   * @return GetConfigAuthed200Response
    * @throws ApiException if fails to make API call
    */
-  public GetConfig200Response getConfig() throws ApiException {
-    ApiResponse<GetConfig200Response> localVarResponse = getConfigWithHttpInfo();
+  public GetConfigAuthed200Response getConfigAuthed() throws ApiException {
+    ApiResponse<GetConfigAuthed200Response> localVarResponse = getConfigAuthedWithHttpInfo();
     return localVarResponse.getData();
   }
 
   /**
    * Get the configuration for the content repository.
    * This endpoint allows clients to retrieve the configuration of the content repository, such as upload limitations. Clients SHOULD use this as a guide when using content repository endpoints. All values are intentionally left optional. Clients SHOULD follow the advice given in the field description when the field is not available.  {{% boxes/note %}} Both clients and server administrators should be aware that proxies between the client and the server may affect the apparent behaviour of content repository APIs, for example, proxies may enforce a lower upload size limit than is advertised by the server on this endpoint. {{% /boxes/note %}}
-   * @return ApiResponse&lt;GetConfig200Response&gt;
+   * @return ApiResponse&lt;GetConfigAuthed200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetConfig200Response> getConfigWithHttpInfo() throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = getConfigRequestBuilder();
+  public ApiResponse<GetConfigAuthed200Response> getConfigAuthedWithHttpInfo() throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = getConfigAuthedRequestBuilder();
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -193,10 +196,10 @@ public class MediaApi {
       }
       try {
         if (localVarResponse.statusCode()/ 100 != 2) {
-          throw getApiException("getConfig", localVarResponse);
+          throw getApiException("getConfigAuthed", localVarResponse);
         }
         if (localVarResponse.body() == null) {
-          return new ApiResponse<GetConfig200Response>(
+          return new ApiResponse<GetConfigAuthed200Response>(
               localVarResponse.statusCode(),
               localVarResponse.headers().map(),
               null
@@ -206,10 +209,10 @@ public class MediaApi {
         String responseBody = new String(localVarResponse.body().readAllBytes());
         localVarResponse.body().close();
 
-        return new ApiResponse<GetConfig200Response>(
+        return new ApiResponse<GetConfigAuthed200Response>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
-            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetConfig200Response>() {})
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetConfigAuthed200Response>() {})
         );
       } finally {
       }
@@ -222,7 +225,7 @@ public class MediaApi {
     }
   }
 
-  private HttpRequest.Builder getConfigRequestBuilder() throws ApiException {
+  private HttpRequest.Builder getConfigAuthedRequestBuilder() throws ApiException {
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
 
@@ -251,8 +254,8 @@ public class MediaApi {
    * @return Object
    * @throws ApiException if fails to make API call
    */
-  public Object getContent(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
-    ApiResponse<Object> localVarResponse = getContentWithHttpInfo(serverName, mediaId, timeoutMs);
+  public Object getContentAuthed(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
+    ApiResponse<Object> localVarResponse = getContentAuthedWithHttpInfo(serverName, mediaId, timeoutMs);
     return localVarResponse.getData();
   }
 
@@ -265,8 +268,8 @@ public class MediaApi {
    * @return ApiResponse&lt;Object&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<Object> getContentWithHttpInfo(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = getContentRequestBuilder(serverName, mediaId, timeoutMs);
+  public ApiResponse<Object> getContentAuthedWithHttpInfo(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = getContentAuthedRequestBuilder(serverName, mediaId, timeoutMs);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -276,7 +279,7 @@ public class MediaApi {
       }
       try {
         if (localVarResponse.statusCode()/ 100 != 2) {
-          throw getApiException("getContent", localVarResponse);
+          throw getApiException("getContentAuthed", localVarResponse);
         }
         if (localVarResponse.body() == null) {
           return new ApiResponse<Object>(
@@ -305,14 +308,14 @@ public class MediaApi {
     }
   }
 
-  private HttpRequest.Builder getContentRequestBuilder(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
+  private HttpRequest.Builder getContentAuthedRequestBuilder(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
     // verify the required parameter 'serverName' is set
     if (serverName == null) {
-      throw new ApiException(400, "Missing the required parameter 'serverName' when calling getContent");
+      throw new ApiException(400, "Missing the required parameter 'serverName' when calling getContentAuthed");
     }
     // verify the required parameter 'mediaId' is set
     if (mediaId == null) {
-      throw new ApiException(400, "Missing the required parameter 'mediaId' when calling getContent");
+      throw new ApiException(400, "Missing the required parameter 'mediaId' when calling getContentAuthed");
     }
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
@@ -360,8 +363,8 @@ public class MediaApi {
    * @return Object
    * @throws ApiException if fails to make API call
    */
-  public Object getContentOverrideName(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull String fileName, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
-    ApiResponse<Object> localVarResponse = getContentOverrideNameWithHttpInfo(serverName, mediaId, fileName, timeoutMs);
+  public Object getContentOverrideNameAuthed(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull String fileName, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
+    ApiResponse<Object> localVarResponse = getContentOverrideNameAuthedWithHttpInfo(serverName, mediaId, fileName, timeoutMs);
     return localVarResponse.getData();
   }
 
@@ -375,8 +378,8 @@ public class MediaApi {
    * @return ApiResponse&lt;Object&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<Object> getContentOverrideNameWithHttpInfo(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull String fileName, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = getContentOverrideNameRequestBuilder(serverName, mediaId, fileName, timeoutMs);
+  public ApiResponse<Object> getContentOverrideNameAuthedWithHttpInfo(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull String fileName, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = getContentOverrideNameAuthedRequestBuilder(serverName, mediaId, fileName, timeoutMs);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -386,7 +389,7 @@ public class MediaApi {
       }
       try {
         if (localVarResponse.statusCode()/ 100 != 2) {
-          throw getApiException("getContentOverrideName", localVarResponse);
+          throw getApiException("getContentOverrideNameAuthed", localVarResponse);
         }
         if (localVarResponse.body() == null) {
           return new ApiResponse<Object>(
@@ -415,18 +418,18 @@ public class MediaApi {
     }
   }
 
-  private HttpRequest.Builder getContentOverrideNameRequestBuilder(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull String fileName, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
+  private HttpRequest.Builder getContentOverrideNameAuthedRequestBuilder(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull String fileName, @javax.annotation.Nullable Long timeoutMs) throws ApiException {
     // verify the required parameter 'serverName' is set
     if (serverName == null) {
-      throw new ApiException(400, "Missing the required parameter 'serverName' when calling getContentOverrideName");
+      throw new ApiException(400, "Missing the required parameter 'serverName' when calling getContentOverrideNameAuthed");
     }
     // verify the required parameter 'mediaId' is set
     if (mediaId == null) {
-      throw new ApiException(400, "Missing the required parameter 'mediaId' when calling getContentOverrideName");
+      throw new ApiException(400, "Missing the required parameter 'mediaId' when calling getContentOverrideNameAuthed");
     }
     // verify the required parameter 'fileName' is set
     if (fileName == null) {
-      throw new ApiException(400, "Missing the required parameter 'fileName' when calling getContentOverrideName");
+      throw new ApiException(400, "Missing the required parameter 'fileName' when calling getContentOverrideNameAuthed");
     }
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
@@ -478,8 +481,8 @@ public class MediaApi {
    * @return Object
    * @throws ApiException if fails to make API call
    */
-  public Object getContentThumbnail(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull Integer width, @javax.annotation.Nonnull Integer height, @javax.annotation.Nullable String method, @javax.annotation.Nullable Long timeoutMs, @javax.annotation.Nullable Boolean animated) throws ApiException {
-    ApiResponse<Object> localVarResponse = getContentThumbnailWithHttpInfo(serverName, mediaId, width, height, method, timeoutMs, animated);
+  public Object getContentThumbnailAuthed(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull Integer width, @javax.annotation.Nonnull Integer height, @javax.annotation.Nullable String method, @javax.annotation.Nullable Long timeoutMs, @javax.annotation.Nullable Boolean animated) throws ApiException {
+    ApiResponse<Object> localVarResponse = getContentThumbnailAuthedWithHttpInfo(serverName, mediaId, width, height, method, timeoutMs, animated);
     return localVarResponse.getData();
   }
 
@@ -496,8 +499,8 @@ public class MediaApi {
    * @return ApiResponse&lt;Object&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<Object> getContentThumbnailWithHttpInfo(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull Integer width, @javax.annotation.Nonnull Integer height, @javax.annotation.Nullable String method, @javax.annotation.Nullable Long timeoutMs, @javax.annotation.Nullable Boolean animated) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = getContentThumbnailRequestBuilder(serverName, mediaId, width, height, method, timeoutMs, animated);
+  public ApiResponse<Object> getContentThumbnailAuthedWithHttpInfo(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull Integer width, @javax.annotation.Nonnull Integer height, @javax.annotation.Nullable String method, @javax.annotation.Nullable Long timeoutMs, @javax.annotation.Nullable Boolean animated) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = getContentThumbnailAuthedRequestBuilder(serverName, mediaId, width, height, method, timeoutMs, animated);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -507,7 +510,7 @@ public class MediaApi {
       }
       try {
         if (localVarResponse.statusCode()/ 100 != 2) {
-          throw getApiException("getContentThumbnail", localVarResponse);
+          throw getApiException("getContentThumbnailAuthed", localVarResponse);
         }
         if (localVarResponse.body() == null) {
           return new ApiResponse<Object>(
@@ -536,22 +539,22 @@ public class MediaApi {
     }
   }
 
-  private HttpRequest.Builder getContentThumbnailRequestBuilder(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull Integer width, @javax.annotation.Nonnull Integer height, @javax.annotation.Nullable String method, @javax.annotation.Nullable Long timeoutMs, @javax.annotation.Nullable Boolean animated) throws ApiException {
+  private HttpRequest.Builder getContentThumbnailAuthedRequestBuilder(@javax.annotation.Nonnull String serverName, @javax.annotation.Nonnull String mediaId, @javax.annotation.Nonnull Integer width, @javax.annotation.Nonnull Integer height, @javax.annotation.Nullable String method, @javax.annotation.Nullable Long timeoutMs, @javax.annotation.Nullable Boolean animated) throws ApiException {
     // verify the required parameter 'serverName' is set
     if (serverName == null) {
-      throw new ApiException(400, "Missing the required parameter 'serverName' when calling getContentThumbnail");
+      throw new ApiException(400, "Missing the required parameter 'serverName' when calling getContentThumbnailAuthed");
     }
     // verify the required parameter 'mediaId' is set
     if (mediaId == null) {
-      throw new ApiException(400, "Missing the required parameter 'mediaId' when calling getContentThumbnail");
+      throw new ApiException(400, "Missing the required parameter 'mediaId' when calling getContentThumbnailAuthed");
     }
     // verify the required parameter 'width' is set
     if (width == null) {
-      throw new ApiException(400, "Missing the required parameter 'width' when calling getContentThumbnail");
+      throw new ApiException(400, "Missing the required parameter 'width' when calling getContentThumbnailAuthed");
     }
     // verify the required parameter 'height' is set
     if (height == null) {
-      throw new ApiException(400, "Missing the required parameter 'height' when calling getContentThumbnail");
+      throw new ApiException(400, "Missing the required parameter 'height' when calling getContentThumbnailAuthed");
     }
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
@@ -602,11 +605,11 @@ public class MediaApi {
    * Get information about a URL for the client. Typically this is called when a client sees a URL in a message and wants to render a preview for the user.  {{% boxes/note %}} Clients should consider avoiding this endpoint for URLs posted in encrypted rooms. Encrypted rooms often contain more sensitive information the users do not want to share with the homeserver, and this can mean that the URLs being shared should also not be shared with the homeserver. {{% /boxes/note %}}
    * @param url The URL to get a preview of. (required)
    * @param ts The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available. (optional)
-   * @return GetUrlPreview200Response
+   * @return GetUrlPreviewAuthed200Response
    * @throws ApiException if fails to make API call
    */
-  public GetUrlPreview200Response getUrlPreview(@javax.annotation.Nonnull URI url, @javax.annotation.Nullable Long ts) throws ApiException {
-    ApiResponse<GetUrlPreview200Response> localVarResponse = getUrlPreviewWithHttpInfo(url, ts);
+  public GetUrlPreviewAuthed200Response getUrlPreviewAuthed(@javax.annotation.Nonnull URI url, @javax.annotation.Nullable Long ts) throws ApiException {
+    ApiResponse<GetUrlPreviewAuthed200Response> localVarResponse = getUrlPreviewAuthedWithHttpInfo(url, ts);
     return localVarResponse.getData();
   }
 
@@ -615,11 +618,11 @@ public class MediaApi {
    * Get information about a URL for the client. Typically this is called when a client sees a URL in a message and wants to render a preview for the user.  {{% boxes/note %}} Clients should consider avoiding this endpoint for URLs posted in encrypted rooms. Encrypted rooms often contain more sensitive information the users do not want to share with the homeserver, and this can mean that the URLs being shared should also not be shared with the homeserver. {{% /boxes/note %}}
    * @param url The URL to get a preview of. (required)
    * @param ts The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available. (optional)
-   * @return ApiResponse&lt;GetUrlPreview200Response&gt;
+   * @return ApiResponse&lt;GetUrlPreviewAuthed200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetUrlPreview200Response> getUrlPreviewWithHttpInfo(@javax.annotation.Nonnull URI url, @javax.annotation.Nullable Long ts) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = getUrlPreviewRequestBuilder(url, ts);
+  public ApiResponse<GetUrlPreviewAuthed200Response> getUrlPreviewAuthedWithHttpInfo(@javax.annotation.Nonnull URI url, @javax.annotation.Nullable Long ts) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = getUrlPreviewAuthedRequestBuilder(url, ts);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -629,10 +632,10 @@ public class MediaApi {
       }
       try {
         if (localVarResponse.statusCode()/ 100 != 2) {
-          throw getApiException("getUrlPreview", localVarResponse);
+          throw getApiException("getUrlPreviewAuthed", localVarResponse);
         }
         if (localVarResponse.body() == null) {
-          return new ApiResponse<GetUrlPreview200Response>(
+          return new ApiResponse<GetUrlPreviewAuthed200Response>(
               localVarResponse.statusCode(),
               localVarResponse.headers().map(),
               null
@@ -642,10 +645,10 @@ public class MediaApi {
         String responseBody = new String(localVarResponse.body().readAllBytes());
         localVarResponse.body().close();
 
-        return new ApiResponse<GetUrlPreview200Response>(
+        return new ApiResponse<GetUrlPreviewAuthed200Response>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
-            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetUrlPreview200Response>() {})
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetUrlPreviewAuthed200Response>() {})
         );
       } finally {
       }
@@ -658,10 +661,10 @@ public class MediaApi {
     }
   }
 
-  private HttpRequest.Builder getUrlPreviewRequestBuilder(@javax.annotation.Nonnull URI url, @javax.annotation.Nullable Long ts) throws ApiException {
+  private HttpRequest.Builder getUrlPreviewAuthedRequestBuilder(@javax.annotation.Nonnull URI url, @javax.annotation.Nullable Long ts) throws ApiException {
     // verify the required parameter 'url' is set
     if (url == null) {
-      throw new ApiException(400, "Missing the required parameter 'url' when calling getUrlPreview");
+      throw new ApiException(400, "Missing the required parameter 'url' when calling getUrlPreviewAuthed");
     }
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
@@ -675,6 +678,124 @@ public class MediaApi {
     localVarQueryParams.addAll(ApiClient.parameterToPairs("url", url));
     localVarQueryParameterBaseName = "ts";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("ts", ts));
+
+    if (!localVarQueryParams.isEmpty() || localVarQueryStringJoiner.length() != 0) {
+      StringJoiner queryJoiner = new StringJoiner("&");
+      localVarQueryParams.forEach(p -> queryJoiner.add(p.getName() + '=' + p.getValue()));
+      if (localVarQueryStringJoiner.length() != 0) {
+        queryJoiner.add(localVarQueryStringJoiner.toString());
+      }
+      localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath + '?' + queryJoiner.toString()));
+    } else {
+      localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath));
+    }
+
+    localVarRequestBuilder.header("Accept", "application/json");
+
+    localVarRequestBuilder.method("GET", HttpRequest.BodyPublishers.noBody());
+    if (memberVarReadTimeout != null) {
+      localVarRequestBuilder.timeout(memberVarReadTimeout);
+    }
+    if (memberVarInterceptor != null) {
+      memberVarInterceptor.accept(localVarRequestBuilder);
+    }
+    return localVarRequestBuilder;
+  }
+
+  /**
+   * Search for media files
+   * 
+   * @param q Search query string (optional)
+   * @param page Page number for pagination (default 0) (optional, default to 0)
+   * @param limit Number of results per page (default 20, max 100) (optional, default to 20)
+   * @param ownerId Filter by owner ID (optional)
+   * @param parentId Filter by parent media ID (optional)
+   * @param startDate Filter by creation date (start range) (optional)
+   * @param endDate Filter by creation date (end range) (optional)
+   * @return SearchMedia200Response
+   * @throws ApiException if fails to make API call
+   */
+  public SearchMedia200Response searchMedia(@javax.annotation.Nullable String q, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String ownerId, @javax.annotation.Nullable String parentId, @javax.annotation.Nullable OffsetDateTime startDate, @javax.annotation.Nullable OffsetDateTime endDate) throws ApiException {
+    ApiResponse<SearchMedia200Response> localVarResponse = searchMediaWithHttpInfo(q, page, limit, ownerId, parentId, startDate, endDate);
+    return localVarResponse.getData();
+  }
+
+  /**
+   * Search for media files
+   * 
+   * @param q Search query string (optional)
+   * @param page Page number for pagination (default 0) (optional, default to 0)
+   * @param limit Number of results per page (default 20, max 100) (optional, default to 20)
+   * @param ownerId Filter by owner ID (optional)
+   * @param parentId Filter by parent media ID (optional)
+   * @param startDate Filter by creation date (start range) (optional)
+   * @param endDate Filter by creation date (end range) (optional)
+   * @return ApiResponse&lt;SearchMedia200Response&gt;
+   * @throws ApiException if fails to make API call
+   */
+  public ApiResponse<SearchMedia200Response> searchMediaWithHttpInfo(@javax.annotation.Nullable String q, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String ownerId, @javax.annotation.Nullable String parentId, @javax.annotation.Nullable OffsetDateTime startDate, @javax.annotation.Nullable OffsetDateTime endDate) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = searchMediaRequestBuilder(q, page, limit, ownerId, parentId, startDate, endDate);
+    try {
+      HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
+          localVarRequestBuilder.build(),
+          HttpResponse.BodyHandlers.ofInputStream());
+      if (memberVarResponseInterceptor != null) {
+        memberVarResponseInterceptor.accept(localVarResponse);
+      }
+      try {
+        if (localVarResponse.statusCode()/ 100 != 2) {
+          throw getApiException("searchMedia", localVarResponse);
+        }
+        if (localVarResponse.body() == null) {
+          return new ApiResponse<SearchMedia200Response>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        String responseBody = new String(localVarResponse.body().readAllBytes());
+        localVarResponse.body().close();
+
+        return new ApiResponse<SearchMedia200Response>(
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<SearchMedia200Response>() {})
+        );
+      } finally {
+      }
+    } catch (IOException e) {
+      throw new ApiException(e);
+    }
+    catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      throw new ApiException(e);
+    }
+  }
+
+  private HttpRequest.Builder searchMediaRequestBuilder(@javax.annotation.Nullable String q, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String ownerId, @javax.annotation.Nullable String parentId, @javax.annotation.Nullable OffsetDateTime startDate, @javax.annotation.Nullable OffsetDateTime endDate) throws ApiException {
+
+    HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
+
+    String localVarPath = "/media/search";
+
+    List<Pair> localVarQueryParams = new ArrayList<>();
+    StringJoiner localVarQueryStringJoiner = new StringJoiner("&");
+    String localVarQueryParameterBaseName;
+    localVarQueryParameterBaseName = "q";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("q", q));
+    localVarQueryParameterBaseName = "page";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("page", page));
+    localVarQueryParameterBaseName = "limit";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("limit", limit));
+    localVarQueryParameterBaseName = "owner_id";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("owner_id", ownerId));
+    localVarQueryParameterBaseName = "parent_id";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("parent_id", parentId));
+    localVarQueryParameterBaseName = "start_date";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("start_date", startDate));
+    localVarQueryParameterBaseName = "end_date";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("end_date", endDate));
 
     if (!localVarQueryParams.isEmpty() || localVarQueryStringJoiner.length() != 0) {
       StringJoiner queryJoiner = new StringJoiner("&");
@@ -770,7 +891,7 @@ public class MediaApi {
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
 
-    String localVarPath = "/media/upload";
+    String localVarPath = "/media/v3/upload";
 
     List<Pair> localVarQueryParams = new ArrayList<>();
     StringJoiner localVarQueryStringJoiner = new StringJoiner("&");
@@ -893,7 +1014,7 @@ public class MediaApi {
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
 
-    String localVarPath = "/media/upload/{serverName}/{mediaId}"
+    String localVarPath = "/media/v3/upload/{serverName}/{mediaId}"
         .replace("{serverName}", ApiClient.urlEncode(serverName.toString()))
         .replace("{mediaId}", ApiClient.urlEncode(mediaId.toString()));
 

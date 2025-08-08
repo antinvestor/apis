@@ -1,17 +1,3 @@
-// Copyright 2023-2024 Ant Investor Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
 Ant Investor Files
 
@@ -29,36 +15,36 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetUrlPreview200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetUrlPreview200Response{}
+// checks if the GetUrlPreviewAuthed200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetUrlPreviewAuthed200Response{}
 
-// GetUrlPreview200Response struct for GetUrlPreview200Response
-type GetUrlPreview200Response struct {
+// GetUrlPreviewAuthed200Response struct for GetUrlPreviewAuthed200Response
+type GetUrlPreviewAuthed200Response struct {
 	// The byte-size of the image. Omitted if there is no image attached.
 	MatrixImageSize *int64 `json:"matrix:image:size,omitempty"`
 	// An [`mxc://` URI](/client-server-api/#matrix-content-mxc-uris) to the image. Omitted if there is no image.
 	OgImage *string `json:"og:image,omitempty"`
 }
 
-// NewGetUrlPreview200Response instantiates a new GetUrlPreview200Response object
+// NewGetUrlPreviewAuthed200Response instantiates a new GetUrlPreviewAuthed200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetUrlPreview200Response() *GetUrlPreview200Response {
-	this := GetUrlPreview200Response{}
+func NewGetUrlPreviewAuthed200Response() *GetUrlPreviewAuthed200Response {
+	this := GetUrlPreviewAuthed200Response{}
 	return &this
 }
 
-// NewGetUrlPreview200ResponseWithDefaults instantiates a new GetUrlPreview200Response object
+// NewGetUrlPreviewAuthed200ResponseWithDefaults instantiates a new GetUrlPreviewAuthed200Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetUrlPreview200ResponseWithDefaults() *GetUrlPreview200Response {
-	this := GetUrlPreview200Response{}
+func NewGetUrlPreviewAuthed200ResponseWithDefaults() *GetUrlPreviewAuthed200Response {
+	this := GetUrlPreviewAuthed200Response{}
 	return &this
 }
 
 // GetMatrixImageSize returns the MatrixImageSize field value if set, zero value otherwise.
-func (o *GetUrlPreview200Response) GetMatrixImageSize() int64 {
+func (o *GetUrlPreviewAuthed200Response) GetMatrixImageSize() int64 {
 	if o == nil || IsNil(o.MatrixImageSize) {
 		var ret int64
 		return ret
@@ -68,7 +54,7 @@ func (o *GetUrlPreview200Response) GetMatrixImageSize() int64 {
 
 // GetMatrixImageSizeOk returns a tuple with the MatrixImageSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetUrlPreview200Response) GetMatrixImageSizeOk() (*int64, bool) {
+func (o *GetUrlPreviewAuthed200Response) GetMatrixImageSizeOk() (*int64, bool) {
 	if o == nil || IsNil(o.MatrixImageSize) {
 		return nil, false
 	}
@@ -76,7 +62,7 @@ func (o *GetUrlPreview200Response) GetMatrixImageSizeOk() (*int64, bool) {
 }
 
 // HasMatrixImageSize returns a boolean if a field has been set.
-func (o *GetUrlPreview200Response) HasMatrixImageSize() bool {
+func (o *GetUrlPreviewAuthed200Response) HasMatrixImageSize() bool {
 	if o != nil && !IsNil(o.MatrixImageSize) {
 		return true
 	}
@@ -85,12 +71,12 @@ func (o *GetUrlPreview200Response) HasMatrixImageSize() bool {
 }
 
 // SetMatrixImageSize gets a reference to the given int64 and assigns it to the MatrixImageSize field.
-func (o *GetUrlPreview200Response) SetMatrixImageSize(v int64) {
+func (o *GetUrlPreviewAuthed200Response) SetMatrixImageSize(v int64) {
 	o.MatrixImageSize = &v
 }
 
 // GetOgImage returns the OgImage field value if set, zero value otherwise.
-func (o *GetUrlPreview200Response) GetOgImage() string {
+func (o *GetUrlPreviewAuthed200Response) GetOgImage() string {
 	if o == nil || IsNil(o.OgImage) {
 		var ret string
 		return ret
@@ -100,7 +86,7 @@ func (o *GetUrlPreview200Response) GetOgImage() string {
 
 // GetOgImageOk returns a tuple with the OgImage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetUrlPreview200Response) GetOgImageOk() (*string, bool) {
+func (o *GetUrlPreviewAuthed200Response) GetOgImageOk() (*string, bool) {
 	if o == nil || IsNil(o.OgImage) {
 		return nil, false
 	}
@@ -108,7 +94,7 @@ func (o *GetUrlPreview200Response) GetOgImageOk() (*string, bool) {
 }
 
 // HasOgImage returns a boolean if a field has been set.
-func (o *GetUrlPreview200Response) HasOgImage() bool {
+func (o *GetUrlPreviewAuthed200Response) HasOgImage() bool {
 	if o != nil && !IsNil(o.OgImage) {
 		return true
 	}
@@ -117,11 +103,11 @@ func (o *GetUrlPreview200Response) HasOgImage() bool {
 }
 
 // SetOgImage gets a reference to the given string and assigns it to the OgImage field.
-func (o *GetUrlPreview200Response) SetOgImage(v string) {
+func (o *GetUrlPreviewAuthed200Response) SetOgImage(v string) {
 	o.OgImage = &v
 }
 
-func (o GetUrlPreview200Response) MarshalJSON() ([]byte, error) {
+func (o GetUrlPreviewAuthed200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -129,7 +115,7 @@ func (o GetUrlPreview200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetUrlPreview200Response) ToMap() (map[string]interface{}, error) {
+func (o GetUrlPreviewAuthed200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.MatrixImageSize) {
 		toSerialize["matrix:image:size"] = o.MatrixImageSize
@@ -140,38 +126,38 @@ func (o GetUrlPreview200Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableGetUrlPreview200Response struct {
-	value *GetUrlPreview200Response
+type NullableGetUrlPreviewAuthed200Response struct {
+	value *GetUrlPreviewAuthed200Response
 	isSet bool
 }
 
-func (v NullableGetUrlPreview200Response) Get() *GetUrlPreview200Response {
+func (v NullableGetUrlPreviewAuthed200Response) Get() *GetUrlPreviewAuthed200Response {
 	return v.value
 }
 
-func (v *NullableGetUrlPreview200Response) Set(val *GetUrlPreview200Response) {
+func (v *NullableGetUrlPreviewAuthed200Response) Set(val *GetUrlPreviewAuthed200Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetUrlPreview200Response) IsSet() bool {
+func (v NullableGetUrlPreviewAuthed200Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetUrlPreview200Response) Unset() {
+func (v *NullableGetUrlPreviewAuthed200Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetUrlPreview200Response(val *GetUrlPreview200Response) *NullableGetUrlPreview200Response {
-	return &NullableGetUrlPreview200Response{value: val, isSet: true}
+func NewNullableGetUrlPreviewAuthed200Response(val *GetUrlPreviewAuthed200Response) *NullableGetUrlPreviewAuthed200Response {
+	return &NullableGetUrlPreviewAuthed200Response{value: val, isSet: true}
 }
 
-func (v NullableGetUrlPreview200Response) MarshalJSON() ([]byte, error) {
+func (v NullableGetUrlPreviewAuthed200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetUrlPreview200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableGetUrlPreviewAuthed200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

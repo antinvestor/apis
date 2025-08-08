@@ -24,81 +24,82 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.net.URI;
 import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 import com.antinvestor.apis.files.invoker.ApiClient;
 /**
- * A Service level Error
+ * GetUrlPreviewAuthed200Response
  */
 @JsonPropertyOrder({
-  Error1.JSON_PROPERTY_ERRCODE,
-  Error1.JSON_PROPERTY_ERROR
+  GetUrlPreviewAuthed200Response.JSON_PROPERTY_MATRIX_IMAGE_SIZE,
+  GetUrlPreviewAuthed200Response.JSON_PROPERTY_OG_IMAGE
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
-public class Error1 {
-  public static final String JSON_PROPERTY_ERRCODE = "errcode";
-  @javax.annotation.Nonnull
-  private String errcode;
-
-  public static final String JSON_PROPERTY_ERROR = "error";
+public class GetUrlPreviewAuthed200Response {
+  public static final String JSON_PROPERTY_MATRIX_IMAGE_SIZE = "matrix:image:size";
   @javax.annotation.Nullable
-  private String error;
+  private Long matrixImageSize;
 
-  public Error1() { 
+  public static final String JSON_PROPERTY_OG_IMAGE = "og:image";
+  @javax.annotation.Nullable
+  private URI ogImage;
+
+  public GetUrlPreviewAuthed200Response() { 
   }
 
-  public Error1 errcode(@javax.annotation.Nonnull String errcode) {
-    this.errcode = errcode;
+  public GetUrlPreviewAuthed200Response matrixImageSize(@javax.annotation.Nullable Long matrixImageSize) {
+    this.matrixImageSize = matrixImageSize;
     return this;
   }
 
   /**
-   * An error code for the error.
-   * @return errcode
+   * The byte-size of the image. Omitted if there is no image attached.
+   * @return matrixImageSize
    */
-  @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_ERRCODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public String getErrcode() {
-    return errcode;
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_MATRIX_IMAGE_SIZE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Long getMatrixImageSize() {
+    return matrixImageSize;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ERRCODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setErrcode(@javax.annotation.Nonnull String errcode) {
-    this.errcode = errcode;
+  @JsonProperty(JSON_PROPERTY_MATRIX_IMAGE_SIZE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setMatrixImageSize(@javax.annotation.Nullable Long matrixImageSize) {
+    this.matrixImageSize = matrixImageSize;
   }
 
 
-  public Error1 error(@javax.annotation.Nullable String error) {
-    this.error = error;
+  public GetUrlPreviewAuthed200Response ogImage(@javax.annotation.Nullable URI ogImage) {
+    this.ogImage = ogImage;
     return this;
   }
 
   /**
-   * A human-readable error message.
-   * @return error
+   * An [&#x60;mxc://&#x60; URI](/client-server-api/#matrix-content-mxc-uris) to the image. Omitted if there is no image.
+   * @return ogImage
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_ERROR)
+  @JsonProperty(JSON_PROPERTY_OG_IMAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public String getError() {
-    return error;
+  public URI getOgImage() {
+    return ogImage;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ERROR)
+  @JsonProperty(JSON_PROPERTY_OG_IMAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setError(@javax.annotation.Nullable String error) {
-    this.error = error;
+  public void setOgImage(@javax.annotation.Nullable URI ogImage) {
+    this.ogImage = ogImage;
   }
 
 
   /**
-   * Return true if this Error_1 object is equal to o.
+   * Return true if this getUrlPreviewAuthed_200_response object is equal to o.
    */
   @Override
   public boolean equals(Object o) {
@@ -108,22 +109,22 @@ public class Error1 {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Error1 error1 = (Error1) o;
-    return Objects.equals(this.errcode, error1.errcode) &&
-        Objects.equals(this.error, error1.error);
+    GetUrlPreviewAuthed200Response getUrlPreviewAuthed200Response = (GetUrlPreviewAuthed200Response) o;
+    return Objects.equals(this.matrixImageSize, getUrlPreviewAuthed200Response.matrixImageSize) &&
+        Objects.equals(this.ogImage, getUrlPreviewAuthed200Response.ogImage);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(errcode, error);
+    return Objects.hash(matrixImageSize, ogImage);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Error1 {\n");
-    sb.append("    errcode: ").append(toIndentedString(errcode)).append("\n");
-    sb.append("    error: ").append(toIndentedString(error)).append("\n");
+    sb.append("class GetUrlPreviewAuthed200Response {\n");
+    sb.append("    matrixImageSize: ").append(toIndentedString(matrixImageSize)).append("\n");
+    sb.append("    ogImage: ").append(toIndentedString(ogImage)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -171,14 +172,14 @@ public class Error1 {
 
     StringJoiner joiner = new StringJoiner("&");
 
-    // add `errcode` to the URL query string
-    if (getErrcode() != null) {
-      joiner.add(String.format("%serrcode%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getErrcode()))));
+    // add `matrix:image:size` to the URL query string
+    if (getMatrixImageSize() != null) {
+      joiner.add(String.format("%smatrix:image:size%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getMatrixImageSize()))));
     }
 
-    // add `error` to the URL query string
-    if (getError() != null) {
-      joiner.add(String.format("%serror%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getError()))));
+    // add `og:image` to the URL query string
+    if (getOgImage() != null) {
+      joiner.add(String.format("%sog:image%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getOgImage()))));
     }
 
     return joiner.toString();

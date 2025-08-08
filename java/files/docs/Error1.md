@@ -8,8 +8,8 @@ A Service level Error
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**errcode** | **Object** | An error code for the error. |  |
-|**error** | **Object** | A human-readable error message. |  [optional] |
+|**errcode** | **String** | An error code for the error. |  |
+|**error** | **String** | A human-readable error message. |  [optional] |
 
 
 

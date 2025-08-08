@@ -79,23 +79,27 @@ All URIs are relative to *https://media.antinvestor.com/_matrix/client/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*MediaAPI* | [**CreateContent**](docs/MediaAPI.md#createcontent) | **Post** /media/create | Create a new &#x60;mxc://&#x60; URI without uploading the content.
-*MediaAPI* | [**GetConfig**](docs/MediaAPI.md#getconfig) | **Get** /media/config | Get the configuration for the content repository.
-*MediaAPI* | [**GetContent**](docs/MediaAPI.md#getcontent) | **Get** /media/download/{serverName}/{mediaId} | Download content from the content repository.
-*MediaAPI* | [**GetContentOverrideName**](docs/MediaAPI.md#getcontentoverridename) | **Get** /media/download/{serverName}/{mediaId}/{fileName} | Download content from the content repository overriding the file name.
-*MediaAPI* | [**GetContentThumbnail**](docs/MediaAPI.md#getcontentthumbnail) | **Get** /media/thumbnail/{serverName}/{mediaId} | Download a thumbnail of content from the content repository
-*MediaAPI* | [**GetUrlPreview**](docs/MediaAPI.md#geturlpreview) | **Get** /media/preview_url | Get information about a URL for a client
-*MediaAPI* | [**UploadContent**](docs/MediaAPI.md#uploadcontent) | **Post** /media/upload | Upload some content to the content repository.
-*MediaAPI* | [**UploadContentToMXC**](docs/MediaAPI.md#uploadcontenttomxc) | **Put** /media/upload/{serverName}/{mediaId} | Upload content to an &#x60;mxc://&#x60; URI that was created earlier.
+*MediaAPI* | [**CreateContent**](docs/MediaAPI.md#createcontent) | **Post** /media/v1/create | Create a new &#x60;mxc://&#x60; URI without uploading the content.
+*MediaAPI* | [**GetConfigAuthed**](docs/MediaAPI.md#getconfigauthed) | **Get** /media/config | Get the configuration for the content repository.
+*MediaAPI* | [**GetContentAuthed**](docs/MediaAPI.md#getcontentauthed) | **Get** /media/download/{serverName}/{mediaId} | Download content from the content repository.
+*MediaAPI* | [**GetContentOverrideNameAuthed**](docs/MediaAPI.md#getcontentoverridenameauthed) | **Get** /media/download/{serverName}/{mediaId}/{fileName} | Download content from the content repository overriding the file name.
+*MediaAPI* | [**GetContentThumbnailAuthed**](docs/MediaAPI.md#getcontentthumbnailauthed) | **Get** /media/thumbnail/{serverName}/{mediaId} | Download a thumbnail of content from the content repository
+*MediaAPI* | [**GetUrlPreviewAuthed**](docs/MediaAPI.md#geturlpreviewauthed) | **Get** /media/preview_url | Get information about a URL for a client
+*MediaAPI* | [**SearchMedia**](docs/MediaAPI.md#searchmedia) | **Get** /media/search | Search for media files
+*MediaAPI* | [**UploadContent**](docs/MediaAPI.md#uploadcontent) | **Post** /media/v3/upload | Upload some content to the content repository.
+*MediaAPI* | [**UploadContentToMXC**](docs/MediaAPI.md#uploadcontenttomxc) | **Put** /media/v3/upload/{serverName}/{mediaId} | Upload content to an &#x60;mxc://&#x60; URI that was created earlier.
 
 
 ## Documentation For Models
 
  - [CreateContent200Response](docs/CreateContent200Response.md)
  - [Error](docs/Error.md)
- - [GetConfig200Response](docs/GetConfig200Response.md)
- - [GetUrlPreview200Response](docs/GetUrlPreview200Response.md)
+ - [Error1](docs/Error1.md)
+ - [GetConfigAuthed200Response](docs/GetConfigAuthed200Response.md)
+ - [GetUrlPreviewAuthed200Response](docs/GetUrlPreviewAuthed200Response.md)
  - [InlineObject](docs/InlineObject.md)
+ - [MediaMetadata](docs/MediaMetadata.md)
+ - [SearchMedia200Response](docs/SearchMedia200Response.md)
  - [UploadContent200Response](docs/UploadContent200Response.md)
 
 

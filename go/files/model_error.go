@@ -13,30 +13,25 @@ package file_v1
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Error type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Error{}
 
-// Error A Service level Error
+// Error struct for Error
 type Error struct {
-	// An error code for the error.
-	Errcode string `json:"errcode"`
-	// A human-readable error message.
+	// The error code
+	Code *string `json:"code,omitempty"`
+	// The error message
 	Error *string `json:"error,omitempty"`
 }
-
-type _Error Error
 
 // NewError instantiates a new Error object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewError(errcode string) *Error {
+func NewError() *Error {
 	this := Error{}
-	this.Errcode = errcode
 	return &this
 }
 
@@ -48,28 +43,36 @@ func NewErrorWithDefaults() *Error {
 	return &this
 }
 
-// GetErrcode returns the Errcode field value
-func (o *Error) GetErrcode() string {
-	if o == nil {
+// GetCode returns the Code field value if set, zero value otherwise.
+func (o *Error) GetCode() string {
+	if o == nil || IsNil(o.Code) {
 		var ret string
 		return ret
 	}
-
-	return o.Errcode
+	return *o.Code
 }
 
-// GetErrcodeOk returns a tuple with the Errcode field value
+// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Error) GetErrcodeOk() (*string, bool) {
-	if o == nil {
+func (o *Error) GetCodeOk() (*string, bool) {
+	if o == nil || IsNil(o.Code) {
 		return nil, false
 	}
-	return &o.Errcode, true
+	return o.Code, true
 }
 
-// SetErrcode sets field value
-func (o *Error) SetErrcode(v string) {
-	o.Errcode = v
+// HasCode returns a boolean if a field has been set.
+func (o *Error) HasCode() bool {
+	if o != nil && !IsNil(o.Code) {
+		return true
+	}
+
+	return false
+}
+
+// SetCode gets a reference to the given string and assigns it to the Code field.
+func (o *Error) SetCode(v string) {
+	o.Code = &v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
@@ -114,48 +117,13 @@ func (o Error) MarshalJSON() ([]byte, error) {
 
 func (o Error) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["errcode"] = o.Errcode
+	if !IsNil(o.Code) {
+		toSerialize["code"] = o.Code
+	}
 	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
 	return toSerialize, nil
-}
-
-func (o *Error) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"errcode",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varError := _Error{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varError)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Error(varError)
-
-	return err
 }
 
 type NullableError struct {

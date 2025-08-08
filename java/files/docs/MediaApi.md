@@ -4,22 +4,24 @@ All URIs are relative to *https://media.antinvestor.com/_matrix/client/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createContent**](MediaApi.md#createContent) | **POST** /media/create | Create a new &#x60;mxc://&#x60; URI without uploading the content. |
-| [**createContentWithHttpInfo**](MediaApi.md#createContentWithHttpInfo) | **POST** /media/create | Create a new &#x60;mxc://&#x60; URI without uploading the content. |
-| [**getConfig**](MediaApi.md#getConfig) | **GET** /media/config | Get the configuration for the content repository. |
-| [**getConfigWithHttpInfo**](MediaApi.md#getConfigWithHttpInfo) | **GET** /media/config | Get the configuration for the content repository. |
-| [**getContent**](MediaApi.md#getContent) | **GET** /media/download/{serverName}/{mediaId} | Download content from the content repository. |
-| [**getContentWithHttpInfo**](MediaApi.md#getContentWithHttpInfo) | **GET** /media/download/{serverName}/{mediaId} | Download content from the content repository. |
-| [**getContentOverrideName**](MediaApi.md#getContentOverrideName) | **GET** /media/download/{serverName}/{mediaId}/{fileName} | Download content from the content repository overriding the file name. |
-| [**getContentOverrideNameWithHttpInfo**](MediaApi.md#getContentOverrideNameWithHttpInfo) | **GET** /media/download/{serverName}/{mediaId}/{fileName} | Download content from the content repository overriding the file name. |
-| [**getContentThumbnail**](MediaApi.md#getContentThumbnail) | **GET** /media/thumbnail/{serverName}/{mediaId} | Download a thumbnail of content from the content repository |
-| [**getContentThumbnailWithHttpInfo**](MediaApi.md#getContentThumbnailWithHttpInfo) | **GET** /media/thumbnail/{serverName}/{mediaId} | Download a thumbnail of content from the content repository |
-| [**getUrlPreview**](MediaApi.md#getUrlPreview) | **GET** /media/preview_url | Get information about a URL for a client |
-| [**getUrlPreviewWithHttpInfo**](MediaApi.md#getUrlPreviewWithHttpInfo) | **GET** /media/preview_url | Get information about a URL for a client |
-| [**uploadContent**](MediaApi.md#uploadContent) | **POST** /media/upload | Upload some content to the content repository. |
-| [**uploadContentWithHttpInfo**](MediaApi.md#uploadContentWithHttpInfo) | **POST** /media/upload | Upload some content to the content repository. |
-| [**uploadContentToMXC**](MediaApi.md#uploadContentToMXC) | **PUT** /media/upload/{serverName}/{mediaId} | Upload content to an &#x60;mxc://&#x60; URI that was created earlier. |
-| [**uploadContentToMXCWithHttpInfo**](MediaApi.md#uploadContentToMXCWithHttpInfo) | **PUT** /media/upload/{serverName}/{mediaId} | Upload content to an &#x60;mxc://&#x60; URI that was created earlier. |
+| [**createContent**](MediaApi.md#createContent) | **POST** /media/v1/create | Create a new &#x60;mxc://&#x60; URI without uploading the content. |
+| [**createContentWithHttpInfo**](MediaApi.md#createContentWithHttpInfo) | **POST** /media/v1/create | Create a new &#x60;mxc://&#x60; URI without uploading the content. |
+| [**getConfigAuthed**](MediaApi.md#getConfigAuthed) | **GET** /media/config | Get the configuration for the content repository. |
+| [**getConfigAuthedWithHttpInfo**](MediaApi.md#getConfigAuthedWithHttpInfo) | **GET** /media/config | Get the configuration for the content repository. |
+| [**getContentAuthed**](MediaApi.md#getContentAuthed) | **GET** /media/download/{serverName}/{mediaId} | Download content from the content repository. |
+| [**getContentAuthedWithHttpInfo**](MediaApi.md#getContentAuthedWithHttpInfo) | **GET** /media/download/{serverName}/{mediaId} | Download content from the content repository. |
+| [**getContentOverrideNameAuthed**](MediaApi.md#getContentOverrideNameAuthed) | **GET** /media/download/{serverName}/{mediaId}/{fileName} | Download content from the content repository overriding the file name. |
+| [**getContentOverrideNameAuthedWithHttpInfo**](MediaApi.md#getContentOverrideNameAuthedWithHttpInfo) | **GET** /media/download/{serverName}/{mediaId}/{fileName} | Download content from the content repository overriding the file name. |
+| [**getContentThumbnailAuthed**](MediaApi.md#getContentThumbnailAuthed) | **GET** /media/thumbnail/{serverName}/{mediaId} | Download a thumbnail of content from the content repository |
+| [**getContentThumbnailAuthedWithHttpInfo**](MediaApi.md#getContentThumbnailAuthedWithHttpInfo) | **GET** /media/thumbnail/{serverName}/{mediaId} | Download a thumbnail of content from the content repository |
+| [**getUrlPreviewAuthed**](MediaApi.md#getUrlPreviewAuthed) | **GET** /media/preview_url | Get information about a URL for a client |
+| [**getUrlPreviewAuthedWithHttpInfo**](MediaApi.md#getUrlPreviewAuthedWithHttpInfo) | **GET** /media/preview_url | Get information about a URL for a client |
+| [**searchMedia**](MediaApi.md#searchMedia) | **GET** /media/search | Search for media files |
+| [**searchMediaWithHttpInfo**](MediaApi.md#searchMediaWithHttpInfo) | **GET** /media/search | Search for media files |
+| [**uploadContent**](MediaApi.md#uploadContent) | **POST** /media/v3/upload | Upload some content to the content repository. |
+| [**uploadContentWithHttpInfo**](MediaApi.md#uploadContentWithHttpInfo) | **POST** /media/v3/upload | Upload some content to the content repository. |
+| [**uploadContentToMXC**](MediaApi.md#uploadContentToMXC) | **PUT** /media/v3/upload/{serverName}/{mediaId} | Upload content to an &#x60;mxc://&#x60; URI that was created earlier. |
+| [**uploadContentToMXCWithHttpInfo**](MediaApi.md#uploadContentToMXCWithHttpInfo) | **PUT** /media/v3/upload/{serverName}/{mediaId} | Upload content to an &#x60;mxc://&#x60; URI that was created earlier. |
 
 
 
@@ -29,7 +31,7 @@ All URIs are relative to *https://media.antinvestor.com/_matrix/client/v1*
 
 Create a new &#x60;mxc://&#x60; URI without uploading the content.
 
-Creates a new &#x60;mxc://&#x60; URI, independently of the content being uploaded. The content must be provided later via [&#x60;PUT /_matrix/media/v3/upload/{serverName}/{mediaId}&#x60;](/client-server-api/#put_matrixmediav3uploadservernamemediaid).  The server may optionally enforce a maximum age for unused IDs, and delete media IDs when the client doesn&#39;t start the upload in time, or when the upload was interrupted and not resumed in time. The server should include the maximum POSIX millisecond timestamp to complete the upload in the &#x60;unused_expires_at&#x60; field in the response JSON. The recommended default expiration is 24 hours which should be enough time to accommodate users on poor connection who find a better connection to complete the upload.  As well as limiting the rate of requests to create &#x60;mxc://&#x60; URIs, the server should limit the number of concurrent *pending media uploads* a given user can have. A pending media upload is a created &#x60;mxc://&#x60; URI where (a) the media has not yet been uploaded, and (b) has not yet expired (the &#x60;unused_expires_at&#x60; timestamp has not yet passed). In both cases, the server should respond with an HTTP 429 error with an errcode of &#x60;M_LIMIT_EXCEEDED&#x60;.
+Creates a new &#x60;mxc://&#x60; URI, independently of the content being uploaded. The content must be provided later via [&#x60;PUT /_matrix/media/v3/upload/{serverName}/{mediaId}&#x60;](/client-server-api/#put_matrixmediav3uploadservernamemediaid).  The server may optionally enforce a maximum age for unused IDs, and delete media IDs when the client doesn&#39;t start the upload in time, or when the upload was interrupted and not resumed in time. The server should include the maximum POSIX millisecond timestamp to complete the upload in the &#x60;unused_expires_at&#x60; field in the response JSON. The recommended default expiration is 24 hours which should be enough time to accommodate users on poor connection who find a better connection to complete the upload.  As well as limiting the rate of requests to create &#x60;mxc://&#x60; URIs, the server should limit the number of concurrent *pending media uploads* a given user can have. A pending media upload is a created &#x60;mxc://&#x60; URI where (a) the media has not yet been uploaded, and (b) has not yet expired (the &#x60;unused_expires_at&#x60; timestamp has not yet passed). In both cases, the server should respond with an HTTP 429 error with an code of &#x60;M_LIMIT_EXCEEDED&#x60;.
 
 ### Example
 
@@ -97,7 +99,7 @@ This endpoint does not need any parameter.
 
 Create a new &#x60;mxc://&#x60; URI without uploading the content.
 
-Creates a new &#x60;mxc://&#x60; URI, independently of the content being uploaded. The content must be provided later via [&#x60;PUT /_matrix/media/v3/upload/{serverName}/{mediaId}&#x60;](/client-server-api/#put_matrixmediav3uploadservernamemediaid).  The server may optionally enforce a maximum age for unused IDs, and delete media IDs when the client doesn&#39;t start the upload in time, or when the upload was interrupted and not resumed in time. The server should include the maximum POSIX millisecond timestamp to complete the upload in the &#x60;unused_expires_at&#x60; field in the response JSON. The recommended default expiration is 24 hours which should be enough time to accommodate users on poor connection who find a better connection to complete the upload.  As well as limiting the rate of requests to create &#x60;mxc://&#x60; URIs, the server should limit the number of concurrent *pending media uploads* a given user can have. A pending media upload is a created &#x60;mxc://&#x60; URI where (a) the media has not yet been uploaded, and (b) has not yet expired (the &#x60;unused_expires_at&#x60; timestamp has not yet passed). In both cases, the server should respond with an HTTP 429 error with an errcode of &#x60;M_LIMIT_EXCEEDED&#x60;.
+Creates a new &#x60;mxc://&#x60; URI, independently of the content being uploaded. The content must be provided later via [&#x60;PUT /_matrix/media/v3/upload/{serverName}/{mediaId}&#x60;](/client-server-api/#put_matrixmediav3uploadservernamemediaid).  The server may optionally enforce a maximum age for unused IDs, and delete media IDs when the client doesn&#39;t start the upload in time, or when the upload was interrupted and not resumed in time. The server should include the maximum POSIX millisecond timestamp to complete the upload in the &#x60;unused_expires_at&#x60; field in the response JSON. The recommended default expiration is 24 hours which should be enough time to accommodate users on poor connection who find a better connection to complete the upload.  As well as limiting the rate of requests to create &#x60;mxc://&#x60; URIs, the server should limit the number of concurrent *pending media uploads* a given user can have. A pending media upload is a created &#x60;mxc://&#x60; URI where (a) the media has not yet been uploaded, and (b) has not yet expired (the &#x60;unused_expires_at&#x60; timestamp has not yet passed). In both cases, the server should respond with an HTTP 429 error with an code of &#x60;M_LIMIT_EXCEEDED&#x60;.
 
 ### Example
 
@@ -163,9 +165,9 @@ ApiResponse<[**CreateContent200Response**](CreateContent200Response.md)>
 | **429** | This request was rate-limited. |  -  |
 
 
-## getConfig
+## getConfigAuthed
 
-> GetConfig200Response getConfig()
+> GetConfigAuthed200Response getConfigAuthed()
 
 Get the configuration for the content repository.
 
@@ -193,10 +195,10 @@ public class Example {
 
         MediaApi apiInstance = new MediaApi(defaultClient);
         try {
-            GetConfig200Response result = apiInstance.getConfig();
+            GetConfigAuthed200Response result = apiInstance.getConfigAuthed();
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MediaApi#getConfig");
+            System.err.println("Exception when calling MediaApi#getConfigAuthed");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("Response headers: " + e.getResponseHeaders());
@@ -212,7 +214,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**GetConfig200Response**](GetConfig200Response.md)
+[**GetConfigAuthed200Response**](GetConfigAuthed200Response.md)
 
 
 ### Authorization
@@ -230,9 +232,9 @@ This endpoint does not need any parameter.
 | **200** | The public content repository configuration for the matrix server. |  -  |
 | **429** | This request was rate-limited. |  -  |
 
-## getConfigWithHttpInfo
+## getConfigAuthedWithHttpInfo
 
-> ApiResponse<GetConfig200Response> getConfig getConfigWithHttpInfo()
+> ApiResponse<GetConfigAuthed200Response> getConfigAuthed getConfigAuthedWithHttpInfo()
 
 Get the configuration for the content repository.
 
@@ -261,12 +263,12 @@ public class Example {
 
         MediaApi apiInstance = new MediaApi(defaultClient);
         try {
-            ApiResponse<GetConfig200Response> response = apiInstance.getConfigWithHttpInfo();
+            ApiResponse<GetConfigAuthed200Response> response = apiInstance.getConfigAuthedWithHttpInfo();
             System.out.println("Status code: " + response.getStatusCode());
             System.out.println("Response headers: " + response.getHeaders());
             System.out.println("Response body: " + response.getData());
         } catch (ApiException e) {
-            System.err.println("Exception when calling MediaApi#getConfig");
+            System.err.println("Exception when calling MediaApi#getConfigAuthed");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Response headers: " + e.getResponseHeaders());
             System.err.println("Reason: " + e.getResponseBody());
@@ -282,7 +284,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-ApiResponse<[**GetConfig200Response**](GetConfig200Response.md)>
+ApiResponse<[**GetConfigAuthed200Response**](GetConfigAuthed200Response.md)>
 
 
 ### Authorization
@@ -301,9 +303,9 @@ ApiResponse<[**GetConfig200Response**](GetConfig200Response.md)>
 | **429** | This request was rate-limited. |  -  |
 
 
-## getContent
+## getContentAuthed
 
-> Object getContent(serverName, mediaId, timeoutMs)
+> Object getContentAuthed(serverName, mediaId, timeoutMs)
 
 Download content from the content repository.
 
@@ -334,10 +336,10 @@ public class Example {
         String mediaId = "ascERGshawAWawugaAcauga"; // String | The media ID from the `mxc://` URI (the path component). 
         Long timeoutMs = 20000L; // Long | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
         try {
-            Object result = apiInstance.getContent(serverName, mediaId, timeoutMs);
+            Object result = apiInstance.getContentAuthed(serverName, mediaId, timeoutMs);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MediaApi#getContent");
+            System.err.println("Exception when calling MediaApi#getContentAuthed");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("Response headers: " + e.getResponseHeaders());
@@ -378,11 +380,11 @@ public class Example {
 | **308** | A redirect to the requested content. |  * Location - The URL of the thumbnail content. <br>  |
 | **429** | This request was rate-limited. |  -  |
 | **502** | The content is too large for the server to serve. |  -  |
-| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
+| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;code&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
 
-## getContentWithHttpInfo
+## getContentAuthedWithHttpInfo
 
-> ApiResponse<Object> getContent getContentWithHttpInfo(serverName, mediaId, timeoutMs)
+> ApiResponse<Object> getContentAuthed getContentAuthedWithHttpInfo(serverName, mediaId, timeoutMs)
 
 Download content from the content repository.
 
@@ -414,12 +416,12 @@ public class Example {
         String mediaId = "ascERGshawAWawugaAcauga"; // String | The media ID from the `mxc://` URI (the path component). 
         Long timeoutMs = 20000L; // Long | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
         try {
-            ApiResponse<Object> response = apiInstance.getContentWithHttpInfo(serverName, mediaId, timeoutMs);
+            ApiResponse<Object> response = apiInstance.getContentAuthedWithHttpInfo(serverName, mediaId, timeoutMs);
             System.out.println("Status code: " + response.getStatusCode());
             System.out.println("Response headers: " + response.getHeaders());
             System.out.println("Response body: " + response.getData());
         } catch (ApiException e) {
-            System.err.println("Exception when calling MediaApi#getContent");
+            System.err.println("Exception when calling MediaApi#getContentAuthed");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Response headers: " + e.getResponseHeaders());
             System.err.println("Reason: " + e.getResponseBody());
@@ -460,12 +462,12 @@ ApiResponse<**Object**>
 | **308** | A redirect to the requested content. |  * Location - The URL of the thumbnail content. <br>  |
 | **429** | This request was rate-limited. |  -  |
 | **502** | The content is too large for the server to serve. |  -  |
-| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
+| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;code&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
 
 
-## getContentOverrideName
+## getContentOverrideNameAuthed
 
-> Object getContentOverrideName(serverName, mediaId, fileName, timeoutMs)
+> Object getContentOverrideNameAuthed(serverName, mediaId, fileName, timeoutMs)
 
 Download content from the content repository overriding the file name.
 
@@ -497,10 +499,10 @@ public class Example {
         String fileName = "filename.jpg"; // String | A filename to give in the `Content-Disposition` header.
         Long timeoutMs = 20000L; // Long | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
         try {
-            Object result = apiInstance.getContentOverrideName(serverName, mediaId, fileName, timeoutMs);
+            Object result = apiInstance.getContentOverrideNameAuthed(serverName, mediaId, fileName, timeoutMs);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MediaApi#getContentOverrideName");
+            System.err.println("Exception when calling MediaApi#getContentOverrideNameAuthed");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("Response headers: " + e.getResponseHeaders());
@@ -542,11 +544,11 @@ public class Example {
 | **308** | A redirect to the requested content. |  * Location - The URL of the thumbnail content. <br>  |
 | **429** | This request was rate-limited. |  -  |
 | **502** | The content is too large for the server to serve. |  -  |
-| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
+| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;code&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
 
-## getContentOverrideNameWithHttpInfo
+## getContentOverrideNameAuthedWithHttpInfo
 
-> ApiResponse<Object> getContentOverrideName getContentOverrideNameWithHttpInfo(serverName, mediaId, fileName, timeoutMs)
+> ApiResponse<Object> getContentOverrideNameAuthed getContentOverrideNameAuthedWithHttpInfo(serverName, mediaId, fileName, timeoutMs)
 
 Download content from the content repository overriding the file name.
 
@@ -579,12 +581,12 @@ public class Example {
         String fileName = "filename.jpg"; // String | A filename to give in the `Content-Disposition` header.
         Long timeoutMs = 20000L; // Long | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
         try {
-            ApiResponse<Object> response = apiInstance.getContentOverrideNameWithHttpInfo(serverName, mediaId, fileName, timeoutMs);
+            ApiResponse<Object> response = apiInstance.getContentOverrideNameAuthedWithHttpInfo(serverName, mediaId, fileName, timeoutMs);
             System.out.println("Status code: " + response.getStatusCode());
             System.out.println("Response headers: " + response.getHeaders());
             System.out.println("Response body: " + response.getData());
         } catch (ApiException e) {
-            System.err.println("Exception when calling MediaApi#getContentOverrideName");
+            System.err.println("Exception when calling MediaApi#getContentOverrideNameAuthed");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Response headers: " + e.getResponseHeaders());
             System.err.println("Reason: " + e.getResponseBody());
@@ -626,12 +628,12 @@ ApiResponse<**Object**>
 | **308** | A redirect to the requested content. |  * Location - The URL of the thumbnail content. <br>  |
 | **429** | This request was rate-limited. |  -  |
 | **502** | The content is too large for the server to serve. |  -  |
-| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
+| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;code&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
 
 
-## getContentThumbnail
+## getContentThumbnailAuthed
 
-> Object getContentThumbnail(serverName, mediaId, width, height, method, timeoutMs, animated)
+> Object getContentThumbnailAuthed(serverName, mediaId, width, height, method, timeoutMs, animated)
 
 Download a thumbnail of content from the content repository
 
@@ -666,10 +668,10 @@ public class Example {
         Long timeoutMs = 20000L; // Long | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
         Boolean animated = false; // Boolean | Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types `image/gif`, `image/png` (with APNG format), `image/apng`, and `image/webp` instead of the common static `image/png` or `image/jpeg` content types.  When `true`, the server SHOULD return an animated thumbnail if possible and supported. When `false`, the server MUST NOT return an animated thumbnail. For example, returning a static `image/png` or `image/jpeg` thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return `image/webp` thumbnails when supporting animation.  When `true` and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though `animated` is `false`. 
         try {
-            Object result = apiInstance.getContentThumbnail(serverName, mediaId, width, height, method, timeoutMs, animated);
+            Object result = apiInstance.getContentThumbnailAuthed(serverName, mediaId, width, height, method, timeoutMs, animated);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MediaApi#getContentThumbnail");
+            System.err.println("Exception when calling MediaApi#getContentThumbnailAuthed");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("Response headers: " + e.getResponseHeaders());
@@ -716,11 +718,11 @@ public class Example {
 | **413** | The local content is too large for the server to thumbnail. |  -  |
 | **429** | This request was rate-limited. |  -  |
 | **502** | The remote content is too large for the server to thumbnail. |  -  |
-| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
+| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;code&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
 
-## getContentThumbnailWithHttpInfo
+## getContentThumbnailAuthedWithHttpInfo
 
-> ApiResponse<Object> getContentThumbnail getContentThumbnailWithHttpInfo(serverName, mediaId, width, height, method, timeoutMs, animated)
+> ApiResponse<Object> getContentThumbnailAuthed getContentThumbnailAuthedWithHttpInfo(serverName, mediaId, width, height, method, timeoutMs, animated)
 
 Download a thumbnail of content from the content repository
 
@@ -756,12 +758,12 @@ public class Example {
         Long timeoutMs = 20000L; // Long | The maximum number of milliseconds that the client is willing to wait to start receiving data, in the case that the content has not yet been uploaded. The default value is 20000 (20 seconds). The content repository SHOULD impose a maximum value for this parameter. The content repository MAY respond before the timeout. 
         Boolean animated = false; // Boolean | Indicates preference for an animated thumbnail from the server, if possible. Animated thumbnails typically use the content types `image/gif`, `image/png` (with APNG format), `image/apng`, and `image/webp` instead of the common static `image/png` or `image/jpeg` content types.  When `true`, the server SHOULD return an animated thumbnail if possible and supported. When `false`, the server MUST NOT return an animated thumbnail. For example, returning a static `image/png` or `image/jpeg` thumbnail. When not provided, the server SHOULD NOT return an animated thumbnail.  Servers SHOULD prefer to return `image/webp` thumbnails when supporting animation.  When `true` and the media cannot be animated, such as in the case of a JPEG or PDF, the server SHOULD behave as though `animated` is `false`. 
         try {
-            ApiResponse<Object> response = apiInstance.getContentThumbnailWithHttpInfo(serverName, mediaId, width, height, method, timeoutMs, animated);
+            ApiResponse<Object> response = apiInstance.getContentThumbnailAuthedWithHttpInfo(serverName, mediaId, width, height, method, timeoutMs, animated);
             System.out.println("Status code: " + response.getStatusCode());
             System.out.println("Response headers: " + response.getHeaders());
             System.out.println("Response body: " + response.getData());
         } catch (ApiException e) {
-            System.err.println("Exception when calling MediaApi#getContentThumbnail");
+            System.err.println("Exception when calling MediaApi#getContentThumbnailAuthed");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Response headers: " + e.getResponseHeaders());
             System.err.println("Reason: " + e.getResponseBody());
@@ -808,12 +810,12 @@ ApiResponse<**Object**>
 | **413** | The local content is too large for the server to thumbnail. |  -  |
 | **429** | This request was rate-limited. |  -  |
 | **502** | The remote content is too large for the server to thumbnail. |  -  |
-| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
+| **504** | The content is not yet available. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;code&#x60; &#x60;M_NOT_YET_UPLOADED&#x60;. |  -  |
 
 
-## getUrlPreview
+## getUrlPreviewAuthed
 
-> GetUrlPreview200Response getUrlPreview(url, ts)
+> GetUrlPreviewAuthed200Response getUrlPreviewAuthed(url, ts)
 
 Get information about a URL for a client
 
@@ -843,10 +845,10 @@ public class Example {
         URI url = new URI(); // URI | The URL to get a preview of.
         Long ts = 1510610716656L; // Long | The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available.
         try {
-            GetUrlPreview200Response result = apiInstance.getUrlPreview(url, ts);
+            GetUrlPreviewAuthed200Response result = apiInstance.getUrlPreviewAuthed(url, ts);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MediaApi#getUrlPreview");
+            System.err.println("Exception when calling MediaApi#getUrlPreviewAuthed");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("Response headers: " + e.getResponseHeaders());
@@ -866,7 +868,7 @@ public class Example {
 
 ### Return type
 
-[**GetUrlPreview200Response**](GetUrlPreview200Response.md)
+[**GetUrlPreviewAuthed200Response**](GetUrlPreviewAuthed200Response.md)
 
 
 ### Authorization
@@ -884,9 +886,9 @@ public class Example {
 | **200** | The OpenGraph data for the URL, which may be empty. Some values are replaced with matrix equivalents if they are provided in the response. The differences from the OpenGraph protocol are described here. |  -  |
 | **429** | This request was rate-limited. |  -  |
 
-## getUrlPreviewWithHttpInfo
+## getUrlPreviewAuthedWithHttpInfo
 
-> ApiResponse<GetUrlPreview200Response> getUrlPreview getUrlPreviewWithHttpInfo(url, ts)
+> ApiResponse<GetUrlPreviewAuthed200Response> getUrlPreviewAuthed getUrlPreviewAuthedWithHttpInfo(url, ts)
 
 Get information about a URL for a client
 
@@ -917,12 +919,12 @@ public class Example {
         URI url = new URI(); // URI | The URL to get a preview of.
         Long ts = 1510610716656L; // Long | The preferred point in time to return a preview for. The server may return a newer version if it does not have the requested version available.
         try {
-            ApiResponse<GetUrlPreview200Response> response = apiInstance.getUrlPreviewWithHttpInfo(url, ts);
+            ApiResponse<GetUrlPreviewAuthed200Response> response = apiInstance.getUrlPreviewAuthedWithHttpInfo(url, ts);
             System.out.println("Status code: " + response.getStatusCode());
             System.out.println("Response headers: " + response.getHeaders());
             System.out.println("Response body: " + response.getData());
         } catch (ApiException e) {
-            System.err.println("Exception when calling MediaApi#getUrlPreview");
+            System.err.println("Exception when calling MediaApi#getUrlPreviewAuthed");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Response headers: " + e.getResponseHeaders());
             System.err.println("Reason: " + e.getResponseBody());
@@ -942,7 +944,7 @@ public class Example {
 
 ### Return type
 
-ApiResponse<[**GetUrlPreview200Response**](GetUrlPreview200Response.md)>
+ApiResponse<[**GetUrlPreviewAuthed200Response**](GetUrlPreviewAuthed200Response.md)>
 
 
 ### Authorization
@@ -959,6 +961,176 @@ ApiResponse<[**GetUrlPreview200Response**](GetUrlPreview200Response.md)>
 |-------------|-------------|------------------|
 | **200** | The OpenGraph data for the URL, which may be empty. Some values are replaced with matrix equivalents if they are provided in the response. The differences from the OpenGraph protocol are described here. |  -  |
 | **429** | This request was rate-limited. |  -  |
+
+
+## searchMedia
+
+> SearchMedia200Response searchMedia(q, page, limit, ownerId, parentId, startDate, endDate)
+
+Search for media files
+
+### Example
+
+```java
+// Import classes:
+import com.antinvestor.apis.files.invoker.ApiClient;
+import com.antinvestor.apis.files.invoker.ApiException;
+import com.antinvestor.apis.files.invoker.Configuration;
+import com.antinvestor.apis.files.invoker.auth.*;
+import com.antinvestor.apis.files.invoker.models.*;
+import com.antinvestor.apis.files.api.MediaApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://media.antinvestor.com/_matrix/client/v1");
+        
+        // Configure HTTP bearer authorization: accessTokenBearer
+        HttpBearerAuth accessTokenBearer = (HttpBearerAuth) defaultClient.getAuthentication("accessTokenBearer");
+        accessTokenBearer.setBearerToken("BEARER TOKEN");
+
+        MediaApi apiInstance = new MediaApi(defaultClient);
+        String q = "q_example"; // String | Search query string
+        Integer page = 0; // Integer | Page number for pagination (default 0)
+        Integer limit = 20; // Integer | Number of results per page (default 20, max 100)
+        String ownerId = "ownerId_example"; // String | Filter by owner ID
+        String parentId = "parentId_example"; // String | Filter by parent media ID
+        OffsetDateTime startDate = OffsetDateTime.now(); // OffsetDateTime | Filter by creation date (start range)
+        OffsetDateTime endDate = OffsetDateTime.now(); // OffsetDateTime | Filter by creation date (end range)
+        try {
+            SearchMedia200Response result = apiInstance.searchMedia(q, page, limit, ownerId, parentId, startDate, endDate);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MediaApi#searchMedia");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **q** | **String**| Search query string | [optional] |
+| **page** | **Integer**| Page number for pagination (default 0) | [optional] [default to 0] |
+| **limit** | **Integer**| Number of results per page (default 20, max 100) | [optional] [default to 20] |
+| **ownerId** | **String**| Filter by owner ID | [optional] |
+| **parentId** | **String**| Filter by parent media ID | [optional] |
+| **startDate** | **OffsetDateTime**| Filter by creation date (start range) | [optional] |
+| **endDate** | **OffsetDateTime**| Filter by creation date (end range) | [optional] |
+
+### Return type
+
+[**SearchMedia200Response**](SearchMedia200Response.md)
+
+
+### Authorization
+
+[accessTokenBearer](../README.md#accessTokenBearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Search results containing media metadata |  -  |
+| **400** | Bad request - invalid parameters |  -  |
+| **401** | Unauthorized - missing or invalid access token |  -  |
+| **500** | Internal server error |  -  |
+
+## searchMediaWithHttpInfo
+
+> ApiResponse<SearchMedia200Response> searchMedia searchMediaWithHttpInfo(q, page, limit, ownerId, parentId, startDate, endDate)
+
+Search for media files
+
+### Example
+
+```java
+// Import classes:
+import com.antinvestor.apis.files.invoker.ApiClient;
+import com.antinvestor.apis.files.invoker.ApiException;
+import com.antinvestor.apis.files.invoker.ApiResponse;
+import com.antinvestor.apis.files.invoker.Configuration;
+import com.antinvestor.apis.files.invoker.auth.*;
+import com.antinvestor.apis.files.invoker.models.*;
+import com.antinvestor.apis.files.api.MediaApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://media.antinvestor.com/_matrix/client/v1");
+        
+        // Configure HTTP bearer authorization: accessTokenBearer
+        HttpBearerAuth accessTokenBearer = (HttpBearerAuth) defaultClient.getAuthentication("accessTokenBearer");
+        accessTokenBearer.setBearerToken("BEARER TOKEN");
+
+        MediaApi apiInstance = new MediaApi(defaultClient);
+        String q = "q_example"; // String | Search query string
+        Integer page = 0; // Integer | Page number for pagination (default 0)
+        Integer limit = 20; // Integer | Number of results per page (default 20, max 100)
+        String ownerId = "ownerId_example"; // String | Filter by owner ID
+        String parentId = "parentId_example"; // String | Filter by parent media ID
+        OffsetDateTime startDate = OffsetDateTime.now(); // OffsetDateTime | Filter by creation date (start range)
+        OffsetDateTime endDate = OffsetDateTime.now(); // OffsetDateTime | Filter by creation date (end range)
+        try {
+            ApiResponse<SearchMedia200Response> response = apiInstance.searchMediaWithHttpInfo(q, page, limit, ownerId, parentId, startDate, endDate);
+            System.out.println("Status code: " + response.getStatusCode());
+            System.out.println("Response headers: " + response.getHeaders());
+            System.out.println("Response body: " + response.getData());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MediaApi#searchMedia");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **q** | **String**| Search query string | [optional] |
+| **page** | **Integer**| Page number for pagination (default 0) | [optional] [default to 0] |
+| **limit** | **Integer**| Number of results per page (default 20, max 100) | [optional] [default to 20] |
+| **ownerId** | **String**| Filter by owner ID | [optional] |
+| **parentId** | **String**| Filter by parent media ID | [optional] |
+| **startDate** | **OffsetDateTime**| Filter by creation date (start range) | [optional] |
+| **endDate** | **OffsetDateTime**| Filter by creation date (end range) | [optional] |
+
+### Return type
+
+ApiResponse<[**SearchMedia200Response**](SearchMedia200Response.md)>
+
+
+### Authorization
+
+[accessTokenBearer](../README.md#accessTokenBearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Search results containing media metadata |  -  |
+| **400** | Bad request - invalid parameters |  -  |
+| **401** | Unauthorized - missing or invalid access token |  -  |
+| **500** | Internal server error |  -  |
 
 
 ## uploadContent
@@ -1192,9 +1364,9 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The upload was successful. |  -  |
-| **403** | The user does not have permission to upload the content. Some reasons for this error include:  - The server does not permit the file type. - The user has reached a quota for uploaded content. - The request comes from a different user than the one that called   [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).  A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_FORBIDDEN&#x60;. |  -  |
-| **404** | The user has provided an invalid MXC ID. Some reasons for this error include:  - The MXC ID was not created with [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create). - The MXC ID has expired.  A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_FOUND&#x60;. |  -  |
-| **409** | The endpoint was called with a media ID that already has content. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_CANNOT_OVERWRITE_MEDIA&#x60;. |  -  |
+| **403** | The user does not have permission to upload the content. Some reasons for this error include:  - The server does not permit the file type. - The user has reached a quota for uploaded content. - The request comes from a different user than the one that called   [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).  A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;code&#x60; &#x60;M_FORBIDDEN&#x60;. |  -  |
+| **404** | The user has provided an invalid MXC ID. Some reasons for this error include:  - The MXC ID was not created with [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create). - The MXC ID has expired.  A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;code&#x60; &#x60;M_NOT_FOUND&#x60;. |  -  |
+| **409** | The endpoint was called with a media ID that already has content. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;code&#x60; &#x60;M_CANNOT_OVERWRITE_MEDIA&#x60;. |  -  |
 | **413** | The uploaded content is too large for the server. |  -  |
 | **429** | This request was rate-limited. |  -  |
 
@@ -1278,9 +1450,9 @@ ApiResponse<**Object**>
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The upload was successful. |  -  |
-| **403** | The user does not have permission to upload the content. Some reasons for this error include:  - The server does not permit the file type. - The user has reached a quota for uploaded content. - The request comes from a different user than the one that called   [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).  A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_FORBIDDEN&#x60;. |  -  |
-| **404** | The user has provided an invalid MXC ID. Some reasons for this error include:  - The MXC ID was not created with [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create). - The MXC ID has expired.  A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_NOT_FOUND&#x60;. |  -  |
-| **409** | The endpoint was called with a media ID that already has content. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;errcode&#x60; &#x60;M_CANNOT_OVERWRITE_MEDIA&#x60;. |  -  |
+| **403** | The user does not have permission to upload the content. Some reasons for this error include:  - The server does not permit the file type. - The user has reached a quota for uploaded content. - The request comes from a different user than the one that called   [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create).  A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;code&#x60; &#x60;M_FORBIDDEN&#x60;. |  -  |
+| **404** | The user has provided an invalid MXC ID. Some reasons for this error include:  - The MXC ID was not created with [POST /_matrix/media/v1/create](/client-server-api/#post_matrixmediav1create). - The MXC ID has expired.  A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;code&#x60; &#x60;M_NOT_FOUND&#x60;. |  -  |
+| **409** | The endpoint was called with a media ID that already has content. A [standard error response](/client-server-api/#standard-error-response) will be returned with the &#x60;code&#x60; &#x60;M_CANNOT_OVERWRITE_MEDIA&#x60;. |  -  |
 | **413** | The uploaded content is too large for the server. |  -  |
 | **429** | This request was rate-limited. |  -  |
 

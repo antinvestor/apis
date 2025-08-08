@@ -30,17 +30,17 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import com.antinvestor.apis.files.invoker.ApiClient;
 /**
- * A Service level Error
+ * Error
  */
 @JsonPropertyOrder({
-  Error.JSON_PROPERTY_ERRCODE,
+  Error.JSON_PROPERTY_CODE,
   Error.JSON_PROPERTY_ERROR
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Error {
-  public static final String JSON_PROPERTY_ERRCODE = "errcode";
-  @javax.annotation.Nonnull
-  private String errcode;
+  public static final String JSON_PROPERTY_CODE = "code";
+  @javax.annotation.Nullable
+  private String code;
 
   public static final String JSON_PROPERTY_ERROR = "error";
   @javax.annotation.Nullable
@@ -49,27 +49,27 @@ public class Error {
   public Error() { 
   }
 
-  public Error errcode(@javax.annotation.Nonnull String errcode) {
-    this.errcode = errcode;
+  public Error code(@javax.annotation.Nullable String code) {
+    this.code = code;
     return this;
   }
 
   /**
-   * An error code for the error.
-   * @return errcode
+   * The error code
+   * @return code
    */
-  @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_ERRCODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public String getErrcode() {
-    return errcode;
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getCode() {
+    return code;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ERRCODE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setErrcode(@javax.annotation.Nonnull String errcode) {
-    this.errcode = errcode;
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCode(@javax.annotation.Nullable String code) {
+    this.code = code;
   }
 
 
@@ -79,7 +79,7 @@ public class Error {
   }
 
   /**
-   * A human-readable error message.
+   * The error message
    * @return error
    */
   @javax.annotation.Nullable
@@ -109,20 +109,20 @@ public class Error {
       return false;
     }
     Error error = (Error) o;
-    return Objects.equals(this.errcode, error.errcode) &&
+    return Objects.equals(this.code, error.code) &&
         Objects.equals(this.error, error.error);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(errcode, error);
+    return Objects.hash(code, error);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Error {\n");
-    sb.append("    errcode: ").append(toIndentedString(errcode)).append("\n");
+    sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -171,9 +171,9 @@ public class Error {
 
     StringJoiner joiner = new StringJoiner("&");
 
-    // add `errcode` to the URL query string
-    if (getErrcode() != null) {
-      joiner.add(String.format("%serrcode%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getErrcode()))));
+    // add `code` to the URL query string
+    if (getCode() != null) {
+      joiner.add(String.format("%scode%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getCode()))));
     }
 
     // add `error` to the URL query string
