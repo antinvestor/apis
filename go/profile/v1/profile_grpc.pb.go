@@ -33,21 +33,23 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProfileService_GetById_FullMethodName            = "/profile.v1.ProfileService/GetById"
-	ProfileService_GetByContact_FullMethodName       = "/profile.v1.ProfileService/GetByContact"
-	ProfileService_Search_FullMethodName             = "/profile.v1.ProfileService/Search"
-	ProfileService_Merge_FullMethodName              = "/profile.v1.ProfileService/Merge"
-	ProfileService_Create_FullMethodName             = "/profile.v1.ProfileService/Create"
-	ProfileService_Update_FullMethodName             = "/profile.v1.ProfileService/Update"
-	ProfileService_AddContact_FullMethodName         = "/profile.v1.ProfileService/AddContact"
-	ProfileService_RemoveContact_FullMethodName      = "/profile.v1.ProfileService/RemoveContact"
-	ProfileService_SearchRoster_FullMethodName       = "/profile.v1.ProfileService/SearchRoster"
-	ProfileService_AddRoster_FullMethodName          = "/profile.v1.ProfileService/AddRoster"
-	ProfileService_RemoveRoster_FullMethodName       = "/profile.v1.ProfileService/RemoveRoster"
-	ProfileService_AddAddress_FullMethodName         = "/profile.v1.ProfileService/AddAddress"
-	ProfileService_AddRelationship_FullMethodName    = "/profile.v1.ProfileService/AddRelationship"
-	ProfileService_DeleteRelationship_FullMethodName = "/profile.v1.ProfileService/DeleteRelationship"
-	ProfileService_ListRelationship_FullMethodName   = "/profile.v1.ProfileService/ListRelationship"
+	ProfileService_GetById_FullMethodName                   = "/profile.v1.ProfileService/GetById"
+	ProfileService_GetByContact_FullMethodName              = "/profile.v1.ProfileService/GetByContact"
+	ProfileService_Search_FullMethodName                    = "/profile.v1.ProfileService/Search"
+	ProfileService_Merge_FullMethodName                     = "/profile.v1.ProfileService/Merge"
+	ProfileService_Create_FullMethodName                    = "/profile.v1.ProfileService/Create"
+	ProfileService_Update_FullMethodName                    = "/profile.v1.ProfileService/Update"
+	ProfileService_AddContact_FullMethodName                = "/profile.v1.ProfileService/AddContact"
+	ProfileService_CreateContactVerification_FullMethodName = "/profile.v1.ProfileService/CreateContactVerification"
+	ProfileService_CheckVerification_FullMethodName         = "/profile.v1.ProfileService/CheckVerification"
+	ProfileService_RemoveContact_FullMethodName             = "/profile.v1.ProfileService/RemoveContact"
+	ProfileService_SearchRoster_FullMethodName              = "/profile.v1.ProfileService/SearchRoster"
+	ProfileService_AddRoster_FullMethodName                 = "/profile.v1.ProfileService/AddRoster"
+	ProfileService_RemoveRoster_FullMethodName              = "/profile.v1.ProfileService/RemoveRoster"
+	ProfileService_AddAddress_FullMethodName                = "/profile.v1.ProfileService/AddAddress"
+	ProfileService_AddRelationship_FullMethodName           = "/profile.v1.ProfileService/AddRelationship"
+	ProfileService_DeleteRelationship_FullMethodName        = "/profile.v1.ProfileService/DeleteRelationship"
+	ProfileService_ListRelationship_FullMethodName          = "/profile.v1.ProfileService/ListRelationship"
 )
 
 // ProfileServiceClient is the client API for ProfileService service.
@@ -70,6 +72,10 @@ type ProfileServiceClient interface {
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
 	// Adds a new contact based on the request/this leads to automatic verification.
 	AddContact(ctx context.Context, in *AddContactRequest, opts ...grpc.CallOption) (*AddContactResponse, error)
+	// Create a new contact verification request
+	CreateContactVerification(ctx context.Context, in *CreateContactVerificationRequest, opts ...grpc.CallOption) (*CreateContactVerificationResponse, error)
+	// Checks the status of a verification
+	CheckVerification(ctx context.Context, in *CheckVerificationRequest, opts ...grpc.CallOption) (*CheckVerificationResponse, error)
 	// Removes an old contact based on this request's id
 	RemoveContact(ctx context.Context, in *RemoveContactRequest, opts ...grpc.CallOption) (*RemoveContactResponse, error)
 	// Searches all contacts tied to a users profile and based on the active request.
@@ -169,6 +175,26 @@ func (c *profileServiceClient) AddContact(ctx context.Context, in *AddContactReq
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddContactResponse)
 	err := c.cc.Invoke(ctx, ProfileService_AddContact_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *profileServiceClient) CreateContactVerification(ctx context.Context, in *CreateContactVerificationRequest, opts ...grpc.CallOption) (*CreateContactVerificationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateContactVerificationResponse)
+	err := c.cc.Invoke(ctx, ProfileService_CreateContactVerification_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *profileServiceClient) CheckVerification(ctx context.Context, in *CheckVerificationRequest, opts ...grpc.CallOption) (*CheckVerificationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckVerificationResponse)
+	err := c.cc.Invoke(ctx, ProfileService_CheckVerification_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -293,6 +319,10 @@ type ProfileServiceServer interface {
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
 	// Adds a new contact based on the request/this leads to automatic verification.
 	AddContact(context.Context, *AddContactRequest) (*AddContactResponse, error)
+	// Create a new contact verification request
+	CreateContactVerification(context.Context, *CreateContactVerificationRequest) (*CreateContactVerificationResponse, error)
+	// Checks the status of a verification
+	CheckVerification(context.Context, *CheckVerificationRequest) (*CheckVerificationResponse, error)
 	// Removes an old contact based on this request's id
 	RemoveContact(context.Context, *RemoveContactRequest) (*RemoveContactResponse, error)
 	// Searches all contacts tied to a users profile and based on the active request.
@@ -339,6 +369,12 @@ func (UnimplementedProfileServiceServer) Update(context.Context, *UpdateRequest)
 }
 func (UnimplementedProfileServiceServer) AddContact(context.Context, *AddContactRequest) (*AddContactResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddContact not implemented")
+}
+func (UnimplementedProfileServiceServer) CreateContactVerification(context.Context, *CreateContactVerificationRequest) (*CreateContactVerificationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateContactVerification not implemented")
+}
+func (UnimplementedProfileServiceServer) CheckVerification(context.Context, *CheckVerificationRequest) (*CheckVerificationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckVerification not implemented")
 }
 func (UnimplementedProfileServiceServer) RemoveContact(context.Context, *RemoveContactRequest) (*RemoveContactResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveContact not implemented")
@@ -504,6 +540,42 @@ func _ProfileService_AddContact_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProfileService_CreateContactVerification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateContactVerificationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).CreateContactVerification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProfileService_CreateContactVerification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).CreateContactVerification(ctx, req.(*CreateContactVerificationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProfileService_CheckVerification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckVerificationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).CheckVerification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProfileService_CheckVerification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).CheckVerification(ctx, req.(*CheckVerificationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProfileService_RemoveContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RemoveContactRequest)
 	if err := dec(in); err != nil {
@@ -664,6 +736,14 @@ var ProfileService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddContact",
 			Handler:    _ProfileService_AddContact_Handler,
+		},
+		{
+			MethodName: "CreateContactVerification",
+			Handler:    _ProfileService_CreateContactVerification_Handler,
+		},
+		{
+			MethodName: "CheckVerification",
+			Handler:    _ProfileService_CheckVerification_Handler,
 		},
 		{
 			MethodName: "RemoveContact",

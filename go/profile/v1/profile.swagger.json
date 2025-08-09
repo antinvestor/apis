@@ -184,6 +184,84 @@
         ]
       }
     },
+    "/contact/{id}/verification/check": {
+      "post": {
+        "summary": "Checks the status of a verification",
+        "operationId": "ProfileService_CheckVerification",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.CheckVerificationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/profile.v1.ProfileService.CheckVerificationBody"
+            }
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    },
+    "/contact/{id}/verification/create": {
+      "post": {
+        "summary": "Create a new contact verification request",
+        "operationId": "ProfileService_CreateContactVerification",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.CreateContactVerificationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/profile.v1.ProfileService.CreateContactVerificationBody"
+            }
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
+    },
     "/merge": {
       "post": {
         "summary": "Uses data found in the profile from mergeHash to update the current profile.",
@@ -852,6 +930,21 @@
         }
       }
     },
+    "profile.v1.CheckVerificationResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "checkAttempts": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
     "profile.v1.CommunicationLevel": {
       "type": "string",
       "enum": [
@@ -903,6 +996,17 @@
       "default": "EMAIL",
       "description": "- EMAIL: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
       "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "profile.v1.CreateContactVerificationResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      }
     },
     "profile.v1.CreateRequest": {
       "type": "object",
@@ -1031,6 +1135,23 @@
         }
       },
       "title": "The response message containing the full profile object"
+    },
+    "profile.v1.ProfileService.CheckVerificationBody": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        }
+      }
+    },
+    "profile.v1.ProfileService.CreateContactVerificationBody": {
+      "type": "object",
+      "properties": {
+        "contactId": {
+          "type": "string"
+        }
+      },
+      "title": "The request message containing the information necessary to verify a contact"
     },
     "profile.v1.ProfileService.UpdateBody": {
       "type": "object",

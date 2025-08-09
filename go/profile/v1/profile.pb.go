@@ -1390,6 +1390,223 @@ func (x *AddContactResponse) GetData() *ProfileObject {
 	return nil
 }
 
+// The request message containing the information necessary to verify a contact
+type CreateContactVerificationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ContactId     string                 `protobuf:"bytes,2,opt,name=contact_id,json=contactId,proto3" json:"contact_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateContactVerificationRequest) Reset() {
+	*x = CreateContactVerificationRequest{}
+	mi := &file_profile_v1_profile_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateContactVerificationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateContactVerificationRequest) ProtoMessage() {}
+
+func (x *CreateContactVerificationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_profile_v1_profile_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateContactVerificationRequest.ProtoReflect.Descriptor instead.
+func (*CreateContactVerificationRequest) Descriptor() ([]byte, []int) {
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *CreateContactVerificationRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *CreateContactVerificationRequest) GetContactId() string {
+	if x != nil {
+		return x.ContactId
+	}
+	return ""
+}
+
+type CreateContactVerificationResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Success       bool                   `protobuf:"varint,2,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateContactVerificationResponse) Reset() {
+	*x = CreateContactVerificationResponse{}
+	mi := &file_profile_v1_profile_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateContactVerificationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateContactVerificationResponse) ProtoMessage() {}
+
+func (x *CreateContactVerificationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_profile_v1_profile_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateContactVerificationResponse.ProtoReflect.Descriptor instead.
+func (*CreateContactVerificationResponse) Descriptor() ([]byte, []int) {
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *CreateContactVerificationResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *CreateContactVerificationResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type CheckVerificationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Data          string                 `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckVerificationRequest) Reset() {
+	*x = CheckVerificationRequest{}
+	mi := &file_profile_v1_profile_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckVerificationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckVerificationRequest) ProtoMessage() {}
+
+func (x *CheckVerificationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_profile_v1_profile_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckVerificationRequest.ProtoReflect.Descriptor instead.
+func (*CheckVerificationRequest) Descriptor() ([]byte, []int) {
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *CheckVerificationRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *CheckVerificationRequest) GetData() string {
+	if x != nil {
+		return x.Data
+	}
+	return ""
+}
+
+type CheckVerificationResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	CheckAttempts int32                  `protobuf:"varint,2,opt,name=check_attempts,json=checkAttempts,proto3" json:"check_attempts,omitempty"`
+	Success       bool                   `protobuf:"varint,3,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckVerificationResponse) Reset() {
+	*x = CheckVerificationResponse{}
+	mi := &file_profile_v1_profile_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckVerificationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckVerificationResponse) ProtoMessage() {}
+
+func (x *CheckVerificationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_profile_v1_profile_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckVerificationResponse.ProtoReflect.Descriptor instead.
+func (*CheckVerificationResponse) Descriptor() ([]byte, []int) {
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *CheckVerificationResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *CheckVerificationResponse) GetCheckAttempts() int32 {
+	if x != nil {
+		return x.CheckAttempts
+	}
+	return 0
+}
+
+func (x *CheckVerificationResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 // The request message containing the information necessary to remove a contact
 type RemoveContactRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1400,7 +1617,7 @@ type RemoveContactRequest struct {
 
 func (x *RemoveContactRequest) Reset() {
 	*x = RemoveContactRequest{}
-	mi := &file_profile_v1_profile_proto_msgTypes[18]
+	mi := &file_profile_v1_profile_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1412,7 +1629,7 @@ func (x *RemoveContactRequest) String() string {
 func (*RemoveContactRequest) ProtoMessage() {}
 
 func (x *RemoveContactRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[18]
+	mi := &file_profile_v1_profile_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1425,7 +1642,7 @@ func (x *RemoveContactRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveContactRequest.ProtoReflect.Descriptor instead.
 func (*RemoveContactRequest) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{18}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *RemoveContactRequest) GetId() string {
@@ -1444,7 +1661,7 @@ type RemoveContactResponse struct {
 
 func (x *RemoveContactResponse) Reset() {
 	*x = RemoveContactResponse{}
-	mi := &file_profile_v1_profile_proto_msgTypes[19]
+	mi := &file_profile_v1_profile_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1456,7 +1673,7 @@ func (x *RemoveContactResponse) String() string {
 func (*RemoveContactResponse) ProtoMessage() {}
 
 func (x *RemoveContactResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[19]
+	mi := &file_profile_v1_profile_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1469,7 +1686,7 @@ func (x *RemoveContactResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveContactResponse.ProtoReflect.Descriptor instead.
 func (*RemoveContactResponse) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{19}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *RemoveContactResponse) GetData() *ProfileObject {
@@ -1495,7 +1712,7 @@ type SearchRosterRequest struct {
 
 func (x *SearchRosterRequest) Reset() {
 	*x = SearchRosterRequest{}
-	mi := &file_profile_v1_profile_proto_msgTypes[20]
+	mi := &file_profile_v1_profile_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1507,7 +1724,7 @@ func (x *SearchRosterRequest) String() string {
 func (*SearchRosterRequest) ProtoMessage() {}
 
 func (x *SearchRosterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[20]
+	mi := &file_profile_v1_profile_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1520,7 +1737,7 @@ func (x *SearchRosterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchRosterRequest.ProtoReflect.Descriptor instead.
 func (*SearchRosterRequest) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{20}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *SearchRosterRequest) GetQuery() string {
@@ -1588,7 +1805,7 @@ type SearchRosterResponse struct {
 
 func (x *SearchRosterResponse) Reset() {
 	*x = SearchRosterResponse{}
-	mi := &file_profile_v1_profile_proto_msgTypes[21]
+	mi := &file_profile_v1_profile_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1600,7 +1817,7 @@ func (x *SearchRosterResponse) String() string {
 func (*SearchRosterResponse) ProtoMessage() {}
 
 func (x *SearchRosterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[21]
+	mi := &file_profile_v1_profile_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1613,7 +1830,7 @@ func (x *SearchRosterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchRosterResponse.ProtoReflect.Descriptor instead.
 func (*SearchRosterResponse) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{21}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *SearchRosterResponse) GetData() []*RosterObject {
@@ -1632,7 +1849,7 @@ type AddRosterRequest struct {
 
 func (x *AddRosterRequest) Reset() {
 	*x = AddRosterRequest{}
-	mi := &file_profile_v1_profile_proto_msgTypes[22]
+	mi := &file_profile_v1_profile_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1644,7 +1861,7 @@ func (x *AddRosterRequest) String() string {
 func (*AddRosterRequest) ProtoMessage() {}
 
 func (x *AddRosterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[22]
+	mi := &file_profile_v1_profile_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1657,7 +1874,7 @@ func (x *AddRosterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddRosterRequest.ProtoReflect.Descriptor instead.
 func (*AddRosterRequest) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{22}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *AddRosterRequest) GetData() []*AddContactRequest {
@@ -1676,7 +1893,7 @@ type AddRosterResponse struct {
 
 func (x *AddRosterResponse) Reset() {
 	*x = AddRosterResponse{}
-	mi := &file_profile_v1_profile_proto_msgTypes[23]
+	mi := &file_profile_v1_profile_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1688,7 +1905,7 @@ func (x *AddRosterResponse) String() string {
 func (*AddRosterResponse) ProtoMessage() {}
 
 func (x *AddRosterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[23]
+	mi := &file_profile_v1_profile_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1701,7 +1918,7 @@ func (x *AddRosterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddRosterResponse.ProtoReflect.Descriptor instead.
 func (*AddRosterResponse) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{23}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *AddRosterResponse) GetData() []*RosterObject {
@@ -1720,7 +1937,7 @@ type RemoveRosterRequest struct {
 
 func (x *RemoveRosterRequest) Reset() {
 	*x = RemoveRosterRequest{}
-	mi := &file_profile_v1_profile_proto_msgTypes[24]
+	mi := &file_profile_v1_profile_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1732,7 +1949,7 @@ func (x *RemoveRosterRequest) String() string {
 func (*RemoveRosterRequest) ProtoMessage() {}
 
 func (x *RemoveRosterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[24]
+	mi := &file_profile_v1_profile_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1745,7 +1962,7 @@ func (x *RemoveRosterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveRosterRequest.ProtoReflect.Descriptor instead.
 func (*RemoveRosterRequest) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{24}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *RemoveRosterRequest) GetId() string {
@@ -1764,7 +1981,7 @@ type RemoveRosterResponse struct {
 
 func (x *RemoveRosterResponse) Reset() {
 	*x = RemoveRosterResponse{}
-	mi := &file_profile_v1_profile_proto_msgTypes[25]
+	mi := &file_profile_v1_profile_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1776,7 +1993,7 @@ func (x *RemoveRosterResponse) String() string {
 func (*RemoveRosterResponse) ProtoMessage() {}
 
 func (x *RemoveRosterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[25]
+	mi := &file_profile_v1_profile_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1789,7 +2006,7 @@ func (x *RemoveRosterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveRosterResponse.ProtoReflect.Descriptor instead.
 func (*RemoveRosterResponse) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{25}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *RemoveRosterResponse) GetRoster() *RosterObject {
@@ -1810,7 +2027,7 @@ type AddAddressRequest struct {
 
 func (x *AddAddressRequest) Reset() {
 	*x = AddAddressRequest{}
-	mi := &file_profile_v1_profile_proto_msgTypes[26]
+	mi := &file_profile_v1_profile_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1822,7 +2039,7 @@ func (x *AddAddressRequest) String() string {
 func (*AddAddressRequest) ProtoMessage() {}
 
 func (x *AddAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[26]
+	mi := &file_profile_v1_profile_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1835,7 +2052,7 @@ func (x *AddAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddAddressRequest.ProtoReflect.Descriptor instead.
 func (*AddAddressRequest) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{26}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *AddAddressRequest) GetId() string {
@@ -1861,7 +2078,7 @@ type AddAddressResponse struct {
 
 func (x *AddAddressResponse) Reset() {
 	*x = AddAddressResponse{}
-	mi := &file_profile_v1_profile_proto_msgTypes[27]
+	mi := &file_profile_v1_profile_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1873,7 +2090,7 @@ func (x *AddAddressResponse) String() string {
 func (*AddAddressResponse) ProtoMessage() {}
 
 func (x *AddAddressResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[27]
+	mi := &file_profile_v1_profile_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1886,7 +2103,7 @@ func (x *AddAddressResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddAddressResponse.ProtoReflect.Descriptor instead.
 func (*AddAddressResponse) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{27}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *AddAddressResponse) GetData() *ProfileObject {
@@ -1906,7 +2123,7 @@ type GetByContactRequest struct {
 
 func (x *GetByContactRequest) Reset() {
 	*x = GetByContactRequest{}
-	mi := &file_profile_v1_profile_proto_msgTypes[28]
+	mi := &file_profile_v1_profile_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1918,7 +2135,7 @@ func (x *GetByContactRequest) String() string {
 func (*GetByContactRequest) ProtoMessage() {}
 
 func (x *GetByContactRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[28]
+	mi := &file_profile_v1_profile_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1931,7 +2148,7 @@ func (x *GetByContactRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetByContactRequest.ProtoReflect.Descriptor instead.
 func (*GetByContactRequest) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{28}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetByContactRequest) GetContact() string {
@@ -1950,7 +2167,7 @@ type GetByContactResponse struct {
 
 func (x *GetByContactResponse) Reset() {
 	*x = GetByContactResponse{}
-	mi := &file_profile_v1_profile_proto_msgTypes[29]
+	mi := &file_profile_v1_profile_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1962,7 +2179,7 @@ func (x *GetByContactResponse) String() string {
 func (*GetByContactResponse) ProtoMessage() {}
 
 func (x *GetByContactResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[29]
+	mi := &file_profile_v1_profile_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1975,7 +2192,7 @@ func (x *GetByContactResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetByContactResponse.ProtoReflect.Descriptor instead.
 func (*GetByContactResponse) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{29}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *GetByContactResponse) GetData() *ProfileObject {
@@ -2000,7 +2217,7 @@ type ListRelationshipRequest struct {
 
 func (x *ListRelationshipRequest) Reset() {
 	*x = ListRelationshipRequest{}
-	mi := &file_profile_v1_profile_proto_msgTypes[30]
+	mi := &file_profile_v1_profile_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2012,7 +2229,7 @@ func (x *ListRelationshipRequest) String() string {
 func (*ListRelationshipRequest) ProtoMessage() {}
 
 func (x *ListRelationshipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[30]
+	mi := &file_profile_v1_profile_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2025,7 +2242,7 @@ func (x *ListRelationshipRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRelationshipRequest.ProtoReflect.Descriptor instead.
 func (*ListRelationshipRequest) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{30}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ListRelationshipRequest) GetPeerName() string {
@@ -2079,7 +2296,7 @@ type ListRelationshipResponse struct {
 
 func (x *ListRelationshipResponse) Reset() {
 	*x = ListRelationshipResponse{}
-	mi := &file_profile_v1_profile_proto_msgTypes[31]
+	mi := &file_profile_v1_profile_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2091,7 +2308,7 @@ func (x *ListRelationshipResponse) String() string {
 func (*ListRelationshipResponse) ProtoMessage() {}
 
 func (x *ListRelationshipResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[31]
+	mi := &file_profile_v1_profile_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2104,7 +2321,7 @@ func (x *ListRelationshipResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRelationshipResponse.ProtoReflect.Descriptor instead.
 func (*ListRelationshipResponse) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{31}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ListRelationshipResponse) GetData() []*RelationshipObject {
@@ -2130,7 +2347,7 @@ type AddRelationshipRequest struct {
 
 func (x *AddRelationshipRequest) Reset() {
 	*x = AddRelationshipRequest{}
-	mi := &file_profile_v1_profile_proto_msgTypes[32]
+	mi := &file_profile_v1_profile_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2142,7 +2359,7 @@ func (x *AddRelationshipRequest) String() string {
 func (*AddRelationshipRequest) ProtoMessage() {}
 
 func (x *AddRelationshipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[32]
+	mi := &file_profile_v1_profile_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2155,7 +2372,7 @@ func (x *AddRelationshipRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddRelationshipRequest.ProtoReflect.Descriptor instead.
 func (*AddRelationshipRequest) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{32}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *AddRelationshipRequest) GetId() string {
@@ -2216,7 +2433,7 @@ type AddRelationshipResponse struct {
 
 func (x *AddRelationshipResponse) Reset() {
 	*x = AddRelationshipResponse{}
-	mi := &file_profile_v1_profile_proto_msgTypes[33]
+	mi := &file_profile_v1_profile_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2228,7 +2445,7 @@ func (x *AddRelationshipResponse) String() string {
 func (*AddRelationshipResponse) ProtoMessage() {}
 
 func (x *AddRelationshipResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[33]
+	mi := &file_profile_v1_profile_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2241,7 +2458,7 @@ func (x *AddRelationshipResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddRelationshipResponse.ProtoReflect.Descriptor instead.
 func (*AddRelationshipResponse) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{33}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *AddRelationshipResponse) GetData() *RelationshipObject {
@@ -2262,7 +2479,7 @@ type DeleteRelationshipRequest struct {
 
 func (x *DeleteRelationshipRequest) Reset() {
 	*x = DeleteRelationshipRequest{}
-	mi := &file_profile_v1_profile_proto_msgTypes[34]
+	mi := &file_profile_v1_profile_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2274,7 +2491,7 @@ func (x *DeleteRelationshipRequest) String() string {
 func (*DeleteRelationshipRequest) ProtoMessage() {}
 
 func (x *DeleteRelationshipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[34]
+	mi := &file_profile_v1_profile_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2287,7 +2504,7 @@ func (x *DeleteRelationshipRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteRelationshipRequest.ProtoReflect.Descriptor instead.
 func (*DeleteRelationshipRequest) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{34}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *DeleteRelationshipRequest) GetId() string {
@@ -2313,7 +2530,7 @@ type DeleteRelationshipResponse struct {
 
 func (x *DeleteRelationshipResponse) Reset() {
 	*x = DeleteRelationshipResponse{}
-	mi := &file_profile_v1_profile_proto_msgTypes[35]
+	mi := &file_profile_v1_profile_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2325,7 +2542,7 @@ func (x *DeleteRelationshipResponse) String() string {
 func (*DeleteRelationshipResponse) ProtoMessage() {}
 
 func (x *DeleteRelationshipResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_profile_v1_profile_proto_msgTypes[35]
+	mi := &file_profile_v1_profile_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2338,7 +2555,7 @@ func (x *DeleteRelationshipResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteRelationshipResponse.ProtoReflect.Descriptor instead.
 func (*DeleteRelationshipResponse) Descriptor() ([]byte, []int) {
-	return file_profile_v1_profile_proto_rawDescGZIP(), []int{35}
+	return file_profile_v1_profile_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *DeleteRelationshipResponse) GetData() *RelationshipObject {
@@ -2476,7 +2693,21 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
 	"\x12AddContactResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"C\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\x8b\x01\n" +
+	" CreateContactVerificationRequest\x12+\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12:\n" +
+	"\n" +
+	"contact_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tcontactId\"j\n" +
+	"!CreateContactVerificationResponse\x12+\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x18\n" +
+	"\asuccess\x18\x02 \x01(\bR\asuccess\"[\n" +
+	"\x18CheckVerificationRequest\x12+\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
+	"\x04data\x18\x02 \x01(\tR\x04data\"l\n" +
+	"\x19CheckVerificationResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12%\n" +
+	"\x0echeck_attempts\x18\x02 \x01(\x05R\rcheckAttempts\x12\x18\n" +
+	"\asuccess\x18\x03 \x01(\bR\asuccess\"C\n" +
 	"\x14RemoveContactRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"F\n" +
 	"\x15RemoveContactResponse\x12-\n" +
@@ -2566,7 +2797,7 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	"\x06MEMBER\x10\x00\x12\x0e\n" +
 	"\n" +
 	"AFFILIATED\x10\x01\x12\x10\n" +
-	"\fBLACK_LISTED\x10\x022\xdc\v\n" +
+	"\fBLACK_LISTED\x10\x022\x95\x0e\n" +
 	"\x0eProfileService\x12Q\n" +
 	"\aGetById\x12\x1a.profile.v1.GetByIdRequest\x1a\x1b.profile.v1.GetByIdResponse\"\r\x82\xd3\xe4\x93\x02\a\x12\x05/{id}\x12c\n" +
 	"\fGetByContact\x12\x1f.profile.v1.GetByContactRequest\x1a .profile.v1.GetByContactResponse\"\x10\x82\xd3\xe4\x93\x02\n" +
@@ -2577,7 +2808,9 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	"\x06Update\x12\x19.profile.v1.UpdateRequest\x1a\x1a.profile.v1.UpdateResponse\"\x10\x82\xd3\xe4\x93\x02\n" +
 	":\x01*2\x05/{id}\x12`\n" +
 	"\n" +
-	"AddContact\x12\x1d.profile.v1.AddContactRequest\x1a\x1e.profile.v1.AddContactResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/contact\x12k\n" +
+	"AddContact\x12\x1d.profile.v1.AddContactRequest\x1a\x1e.profile.v1.AddContactResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/contact\x12\xa6\x01\n" +
+	"\x19CreateContactVerification\x12,.profile.v1.CreateContactVerificationRequest\x1a-.profile.v1.CreateContactVerificationResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/contact/{id}/verification/create\x12\x8d\x01\n" +
+	"\x11CheckVerification\x12$.profile.v1.CheckVerificationRequest\x1a%.profile.v1.CheckVerificationResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /contact/{id}/verification/check\x12k\n" +
 	"\rRemoveContact\x12 .profile.v1.RemoveContactRequest\x1a!.profile.v1.RemoveContactResponse\"\x15\x82\xd3\xe4\x93\x02\x0f*\r/contact/{id}\x12d\n" +
 	"\fSearchRoster\x12\x1f.profile.v1.SearchRosterRequest\x1a .profile.v1.SearchRosterResponse\"\x0f\x82\xd3\xe4\x93\x02\t\x12\a/roster0\x01\x12\\\n" +
 	"\tAddRoster\x12\x1c.profile.v1.AddRosterRequest\x1a\x1d.profile.v1.AddRosterResponse\"\x12\x82\xd3\xe4\x93\x02\f:\x01*\"\a/roster\x12g\n" +
@@ -2611,91 +2844,95 @@ func file_profile_v1_profile_proto_rawDescGZIP() []byte {
 }
 
 var file_profile_v1_profile_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_profile_v1_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 46)
+var file_profile_v1_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 50)
 var file_profile_v1_profile_proto_goTypes = []any{
-	(ContactType)(0),                   // 0: profile.v1.ContactType
-	(CommunicationLevel)(0),            // 1: profile.v1.CommunicationLevel
-	(ProfileType)(0),                   // 2: profile.v1.ProfileType
-	(RelationshipType)(0),              // 3: profile.v1.RelationshipType
-	(*ContactObject)(nil),              // 4: profile.v1.ContactObject
-	(*RosterObject)(nil),               // 5: profile.v1.RosterObject
-	(*AddressObject)(nil),              // 6: profile.v1.AddressObject
-	(*ProfileObject)(nil),              // 7: profile.v1.ProfileObject
-	(*EntryItem)(nil),                  // 8: profile.v1.EntryItem
-	(*RelationshipObject)(nil),         // 9: profile.v1.RelationshipObject
-	(*GetByIdRequest)(nil),             // 10: profile.v1.GetByIdRequest
-	(*GetByIdResponse)(nil),            // 11: profile.v1.GetByIdResponse
-	(*SearchRequest)(nil),              // 12: profile.v1.SearchRequest
-	(*SearchResponse)(nil),             // 13: profile.v1.SearchResponse
-	(*MergeRequest)(nil),               // 14: profile.v1.MergeRequest
-	(*MergeResponse)(nil),              // 15: profile.v1.MergeResponse
-	(*CreateRequest)(nil),              // 16: profile.v1.CreateRequest
-	(*CreateResponse)(nil),             // 17: profile.v1.CreateResponse
-	(*UpdateRequest)(nil),              // 18: profile.v1.UpdateRequest
-	(*UpdateResponse)(nil),             // 19: profile.v1.UpdateResponse
-	(*AddContactRequest)(nil),          // 20: profile.v1.AddContactRequest
-	(*AddContactResponse)(nil),         // 21: profile.v1.AddContactResponse
-	(*RemoveContactRequest)(nil),       // 22: profile.v1.RemoveContactRequest
-	(*RemoveContactResponse)(nil),      // 23: profile.v1.RemoveContactResponse
-	(*SearchRosterRequest)(nil),        // 24: profile.v1.SearchRosterRequest
-	(*SearchRosterResponse)(nil),       // 25: profile.v1.SearchRosterResponse
-	(*AddRosterRequest)(nil),           // 26: profile.v1.AddRosterRequest
-	(*AddRosterResponse)(nil),          // 27: profile.v1.AddRosterResponse
-	(*RemoveRosterRequest)(nil),        // 28: profile.v1.RemoveRosterRequest
-	(*RemoveRosterResponse)(nil),       // 29: profile.v1.RemoveRosterResponse
-	(*AddAddressRequest)(nil),          // 30: profile.v1.AddAddressRequest
-	(*AddAddressResponse)(nil),         // 31: profile.v1.AddAddressResponse
-	(*GetByContactRequest)(nil),        // 32: profile.v1.GetByContactRequest
-	(*GetByContactResponse)(nil),       // 33: profile.v1.GetByContactResponse
-	(*ListRelationshipRequest)(nil),    // 34: profile.v1.ListRelationshipRequest
-	(*ListRelationshipResponse)(nil),   // 35: profile.v1.ListRelationshipResponse
-	(*AddRelationshipRequest)(nil),     // 36: profile.v1.AddRelationshipRequest
-	(*AddRelationshipResponse)(nil),    // 37: profile.v1.AddRelationshipResponse
-	(*DeleteRelationshipRequest)(nil),  // 38: profile.v1.DeleteRelationshipRequest
-	(*DeleteRelationshipResponse)(nil), // 39: profile.v1.DeleteRelationshipResponse
-	nil,                                // 40: profile.v1.ContactObject.ExtraEntry
-	nil,                                // 41: profile.v1.RosterObject.ExtraEntry
-	nil,                                // 42: profile.v1.ProfileObject.PropertiesEntry
-	nil,                                // 43: profile.v1.RelationshipObject.PropertiesEntry
-	nil,                                // 44: profile.v1.SearchRequest.ExtrasEntry
-	nil,                                // 45: profile.v1.CreateRequest.PropertiesEntry
-	nil,                                // 46: profile.v1.UpdateRequest.PropertiesEntry
-	nil,                                // 47: profile.v1.AddContactRequest.ExtrasEntry
-	nil,                                // 48: profile.v1.SearchRosterRequest.ExtrasEntry
-	nil,                                // 49: profile.v1.AddRelationshipRequest.PropertiesEntry
-	(v1.STATE)(0),                      // 50: common.v1.STATE
+	(ContactType)(0),                          // 0: profile.v1.ContactType
+	(CommunicationLevel)(0),                   // 1: profile.v1.CommunicationLevel
+	(ProfileType)(0),                          // 2: profile.v1.ProfileType
+	(RelationshipType)(0),                     // 3: profile.v1.RelationshipType
+	(*ContactObject)(nil),                     // 4: profile.v1.ContactObject
+	(*RosterObject)(nil),                      // 5: profile.v1.RosterObject
+	(*AddressObject)(nil),                     // 6: profile.v1.AddressObject
+	(*ProfileObject)(nil),                     // 7: profile.v1.ProfileObject
+	(*EntryItem)(nil),                         // 8: profile.v1.EntryItem
+	(*RelationshipObject)(nil),                // 9: profile.v1.RelationshipObject
+	(*GetByIdRequest)(nil),                    // 10: profile.v1.GetByIdRequest
+	(*GetByIdResponse)(nil),                   // 11: profile.v1.GetByIdResponse
+	(*SearchRequest)(nil),                     // 12: profile.v1.SearchRequest
+	(*SearchResponse)(nil),                    // 13: profile.v1.SearchResponse
+	(*MergeRequest)(nil),                      // 14: profile.v1.MergeRequest
+	(*MergeResponse)(nil),                     // 15: profile.v1.MergeResponse
+	(*CreateRequest)(nil),                     // 16: profile.v1.CreateRequest
+	(*CreateResponse)(nil),                    // 17: profile.v1.CreateResponse
+	(*UpdateRequest)(nil),                     // 18: profile.v1.UpdateRequest
+	(*UpdateResponse)(nil),                    // 19: profile.v1.UpdateResponse
+	(*AddContactRequest)(nil),                 // 20: profile.v1.AddContactRequest
+	(*AddContactResponse)(nil),                // 21: profile.v1.AddContactResponse
+	(*CreateContactVerificationRequest)(nil),  // 22: profile.v1.CreateContactVerificationRequest
+	(*CreateContactVerificationResponse)(nil), // 23: profile.v1.CreateContactVerificationResponse
+	(*CheckVerificationRequest)(nil),          // 24: profile.v1.CheckVerificationRequest
+	(*CheckVerificationResponse)(nil),         // 25: profile.v1.CheckVerificationResponse
+	(*RemoveContactRequest)(nil),              // 26: profile.v1.RemoveContactRequest
+	(*RemoveContactResponse)(nil),             // 27: profile.v1.RemoveContactResponse
+	(*SearchRosterRequest)(nil),               // 28: profile.v1.SearchRosterRequest
+	(*SearchRosterResponse)(nil),              // 29: profile.v1.SearchRosterResponse
+	(*AddRosterRequest)(nil),                  // 30: profile.v1.AddRosterRequest
+	(*AddRosterResponse)(nil),                 // 31: profile.v1.AddRosterResponse
+	(*RemoveRosterRequest)(nil),               // 32: profile.v1.RemoveRosterRequest
+	(*RemoveRosterResponse)(nil),              // 33: profile.v1.RemoveRosterResponse
+	(*AddAddressRequest)(nil),                 // 34: profile.v1.AddAddressRequest
+	(*AddAddressResponse)(nil),                // 35: profile.v1.AddAddressResponse
+	(*GetByContactRequest)(nil),               // 36: profile.v1.GetByContactRequest
+	(*GetByContactResponse)(nil),              // 37: profile.v1.GetByContactResponse
+	(*ListRelationshipRequest)(nil),           // 38: profile.v1.ListRelationshipRequest
+	(*ListRelationshipResponse)(nil),          // 39: profile.v1.ListRelationshipResponse
+	(*AddRelationshipRequest)(nil),            // 40: profile.v1.AddRelationshipRequest
+	(*AddRelationshipResponse)(nil),           // 41: profile.v1.AddRelationshipResponse
+	(*DeleteRelationshipRequest)(nil),         // 42: profile.v1.DeleteRelationshipRequest
+	(*DeleteRelationshipResponse)(nil),        // 43: profile.v1.DeleteRelationshipResponse
+	nil,                                       // 44: profile.v1.ContactObject.ExtraEntry
+	nil,                                       // 45: profile.v1.RosterObject.ExtraEntry
+	nil,                                       // 46: profile.v1.ProfileObject.PropertiesEntry
+	nil,                                       // 47: profile.v1.RelationshipObject.PropertiesEntry
+	nil,                                       // 48: profile.v1.SearchRequest.ExtrasEntry
+	nil,                                       // 49: profile.v1.CreateRequest.PropertiesEntry
+	nil,                                       // 50: profile.v1.UpdateRequest.PropertiesEntry
+	nil,                                       // 51: profile.v1.AddContactRequest.ExtrasEntry
+	nil,                                       // 52: profile.v1.SearchRosterRequest.ExtrasEntry
+	nil,                                       // 53: profile.v1.AddRelationshipRequest.PropertiesEntry
+	(v1.STATE)(0),                             // 54: common.v1.STATE
 }
 var file_profile_v1_profile_proto_depIdxs = []int32{
 	0,  // 0: profile.v1.ContactObject.type:type_name -> profile.v1.ContactType
 	1,  // 1: profile.v1.ContactObject.communication_level:type_name -> profile.v1.CommunicationLevel
-	50, // 2: profile.v1.ContactObject.state:type_name -> common.v1.STATE
-	40, // 3: profile.v1.ContactObject.extra:type_name -> profile.v1.ContactObject.ExtraEntry
+	54, // 2: profile.v1.ContactObject.state:type_name -> common.v1.STATE
+	44, // 3: profile.v1.ContactObject.extra:type_name -> profile.v1.ContactObject.ExtraEntry
 	4,  // 4: profile.v1.RosterObject.contact:type_name -> profile.v1.ContactObject
-	41, // 5: profile.v1.RosterObject.extra:type_name -> profile.v1.RosterObject.ExtraEntry
+	45, // 5: profile.v1.RosterObject.extra:type_name -> profile.v1.RosterObject.ExtraEntry
 	2,  // 6: profile.v1.ProfileObject.type:type_name -> profile.v1.ProfileType
-	42, // 7: profile.v1.ProfileObject.properties:type_name -> profile.v1.ProfileObject.PropertiesEntry
+	46, // 7: profile.v1.ProfileObject.properties:type_name -> profile.v1.ProfileObject.PropertiesEntry
 	4,  // 8: profile.v1.ProfileObject.contacts:type_name -> profile.v1.ContactObject
 	6,  // 9: profile.v1.ProfileObject.addresses:type_name -> profile.v1.AddressObject
-	50, // 10: profile.v1.ProfileObject.state:type_name -> common.v1.STATE
+	54, // 10: profile.v1.ProfileObject.state:type_name -> common.v1.STATE
 	3,  // 11: profile.v1.RelationshipObject.type:type_name -> profile.v1.RelationshipType
-	43, // 12: profile.v1.RelationshipObject.properties:type_name -> profile.v1.RelationshipObject.PropertiesEntry
+	47, // 12: profile.v1.RelationshipObject.properties:type_name -> profile.v1.RelationshipObject.PropertiesEntry
 	8,  // 13: profile.v1.RelationshipObject.child_entry:type_name -> profile.v1.EntryItem
 	8,  // 14: profile.v1.RelationshipObject.parent_entry:type_name -> profile.v1.EntryItem
 	7,  // 15: profile.v1.RelationshipObject.peer_profile:type_name -> profile.v1.ProfileObject
 	7,  // 16: profile.v1.GetByIdResponse.data:type_name -> profile.v1.ProfileObject
-	44, // 17: profile.v1.SearchRequest.extras:type_name -> profile.v1.SearchRequest.ExtrasEntry
+	48, // 17: profile.v1.SearchRequest.extras:type_name -> profile.v1.SearchRequest.ExtrasEntry
 	7,  // 18: profile.v1.SearchResponse.data:type_name -> profile.v1.ProfileObject
 	7,  // 19: profile.v1.MergeResponse.data:type_name -> profile.v1.ProfileObject
 	2,  // 20: profile.v1.CreateRequest.type:type_name -> profile.v1.ProfileType
-	45, // 21: profile.v1.CreateRequest.properties:type_name -> profile.v1.CreateRequest.PropertiesEntry
+	49, // 21: profile.v1.CreateRequest.properties:type_name -> profile.v1.CreateRequest.PropertiesEntry
 	7,  // 22: profile.v1.CreateResponse.data:type_name -> profile.v1.ProfileObject
-	46, // 23: profile.v1.UpdateRequest.properties:type_name -> profile.v1.UpdateRequest.PropertiesEntry
-	50, // 24: profile.v1.UpdateRequest.state:type_name -> common.v1.STATE
+	50, // 23: profile.v1.UpdateRequest.properties:type_name -> profile.v1.UpdateRequest.PropertiesEntry
+	54, // 24: profile.v1.UpdateRequest.state:type_name -> common.v1.STATE
 	7,  // 25: profile.v1.UpdateResponse.data:type_name -> profile.v1.ProfileObject
-	47, // 26: profile.v1.AddContactRequest.extras:type_name -> profile.v1.AddContactRequest.ExtrasEntry
+	51, // 26: profile.v1.AddContactRequest.extras:type_name -> profile.v1.AddContactRequest.ExtrasEntry
 	7,  // 27: profile.v1.AddContactResponse.data:type_name -> profile.v1.ProfileObject
 	7,  // 28: profile.v1.RemoveContactResponse.data:type_name -> profile.v1.ProfileObject
-	48, // 29: profile.v1.SearchRosterRequest.extras:type_name -> profile.v1.SearchRosterRequest.ExtrasEntry
+	52, // 29: profile.v1.SearchRosterRequest.extras:type_name -> profile.v1.SearchRosterRequest.ExtrasEntry
 	5,  // 30: profile.v1.SearchRosterResponse.data:type_name -> profile.v1.RosterObject
 	20, // 31: profile.v1.AddRosterRequest.data:type_name -> profile.v1.AddContactRequest
 	5,  // 32: profile.v1.AddRosterResponse.data:type_name -> profile.v1.RosterObject
@@ -2705,41 +2942,45 @@ var file_profile_v1_profile_proto_depIdxs = []int32{
 	7,  // 36: profile.v1.GetByContactResponse.data:type_name -> profile.v1.ProfileObject
 	9,  // 37: profile.v1.ListRelationshipResponse.data:type_name -> profile.v1.RelationshipObject
 	3,  // 38: profile.v1.AddRelationshipRequest.type:type_name -> profile.v1.RelationshipType
-	49, // 39: profile.v1.AddRelationshipRequest.properties:type_name -> profile.v1.AddRelationshipRequest.PropertiesEntry
+	53, // 39: profile.v1.AddRelationshipRequest.properties:type_name -> profile.v1.AddRelationshipRequest.PropertiesEntry
 	9,  // 40: profile.v1.AddRelationshipResponse.data:type_name -> profile.v1.RelationshipObject
 	9,  // 41: profile.v1.DeleteRelationshipResponse.data:type_name -> profile.v1.RelationshipObject
 	10, // 42: profile.v1.ProfileService.GetById:input_type -> profile.v1.GetByIdRequest
-	32, // 43: profile.v1.ProfileService.GetByContact:input_type -> profile.v1.GetByContactRequest
+	36, // 43: profile.v1.ProfileService.GetByContact:input_type -> profile.v1.GetByContactRequest
 	12, // 44: profile.v1.ProfileService.Search:input_type -> profile.v1.SearchRequest
 	14, // 45: profile.v1.ProfileService.Merge:input_type -> profile.v1.MergeRequest
 	16, // 46: profile.v1.ProfileService.Create:input_type -> profile.v1.CreateRequest
 	18, // 47: profile.v1.ProfileService.Update:input_type -> profile.v1.UpdateRequest
 	20, // 48: profile.v1.ProfileService.AddContact:input_type -> profile.v1.AddContactRequest
-	22, // 49: profile.v1.ProfileService.RemoveContact:input_type -> profile.v1.RemoveContactRequest
-	24, // 50: profile.v1.ProfileService.SearchRoster:input_type -> profile.v1.SearchRosterRequest
-	26, // 51: profile.v1.ProfileService.AddRoster:input_type -> profile.v1.AddRosterRequest
-	28, // 52: profile.v1.ProfileService.RemoveRoster:input_type -> profile.v1.RemoveRosterRequest
-	30, // 53: profile.v1.ProfileService.AddAddress:input_type -> profile.v1.AddAddressRequest
-	36, // 54: profile.v1.ProfileService.AddRelationship:input_type -> profile.v1.AddRelationshipRequest
-	38, // 55: profile.v1.ProfileService.DeleteRelationship:input_type -> profile.v1.DeleteRelationshipRequest
-	34, // 56: profile.v1.ProfileService.ListRelationship:input_type -> profile.v1.ListRelationshipRequest
-	11, // 57: profile.v1.ProfileService.GetById:output_type -> profile.v1.GetByIdResponse
-	33, // 58: profile.v1.ProfileService.GetByContact:output_type -> profile.v1.GetByContactResponse
-	13, // 59: profile.v1.ProfileService.Search:output_type -> profile.v1.SearchResponse
-	15, // 60: profile.v1.ProfileService.Merge:output_type -> profile.v1.MergeResponse
-	17, // 61: profile.v1.ProfileService.Create:output_type -> profile.v1.CreateResponse
-	19, // 62: profile.v1.ProfileService.Update:output_type -> profile.v1.UpdateResponse
-	21, // 63: profile.v1.ProfileService.AddContact:output_type -> profile.v1.AddContactResponse
-	23, // 64: profile.v1.ProfileService.RemoveContact:output_type -> profile.v1.RemoveContactResponse
-	25, // 65: profile.v1.ProfileService.SearchRoster:output_type -> profile.v1.SearchRosterResponse
-	27, // 66: profile.v1.ProfileService.AddRoster:output_type -> profile.v1.AddRosterResponse
-	29, // 67: profile.v1.ProfileService.RemoveRoster:output_type -> profile.v1.RemoveRosterResponse
-	31, // 68: profile.v1.ProfileService.AddAddress:output_type -> profile.v1.AddAddressResponse
-	37, // 69: profile.v1.ProfileService.AddRelationship:output_type -> profile.v1.AddRelationshipResponse
-	39, // 70: profile.v1.ProfileService.DeleteRelationship:output_type -> profile.v1.DeleteRelationshipResponse
-	35, // 71: profile.v1.ProfileService.ListRelationship:output_type -> profile.v1.ListRelationshipResponse
-	57, // [57:72] is the sub-list for method output_type
-	42, // [42:57] is the sub-list for method input_type
+	22, // 49: profile.v1.ProfileService.CreateContactVerification:input_type -> profile.v1.CreateContactVerificationRequest
+	24, // 50: profile.v1.ProfileService.CheckVerification:input_type -> profile.v1.CheckVerificationRequest
+	26, // 51: profile.v1.ProfileService.RemoveContact:input_type -> profile.v1.RemoveContactRequest
+	28, // 52: profile.v1.ProfileService.SearchRoster:input_type -> profile.v1.SearchRosterRequest
+	30, // 53: profile.v1.ProfileService.AddRoster:input_type -> profile.v1.AddRosterRequest
+	32, // 54: profile.v1.ProfileService.RemoveRoster:input_type -> profile.v1.RemoveRosterRequest
+	34, // 55: profile.v1.ProfileService.AddAddress:input_type -> profile.v1.AddAddressRequest
+	40, // 56: profile.v1.ProfileService.AddRelationship:input_type -> profile.v1.AddRelationshipRequest
+	42, // 57: profile.v1.ProfileService.DeleteRelationship:input_type -> profile.v1.DeleteRelationshipRequest
+	38, // 58: profile.v1.ProfileService.ListRelationship:input_type -> profile.v1.ListRelationshipRequest
+	11, // 59: profile.v1.ProfileService.GetById:output_type -> profile.v1.GetByIdResponse
+	37, // 60: profile.v1.ProfileService.GetByContact:output_type -> profile.v1.GetByContactResponse
+	13, // 61: profile.v1.ProfileService.Search:output_type -> profile.v1.SearchResponse
+	15, // 62: profile.v1.ProfileService.Merge:output_type -> profile.v1.MergeResponse
+	17, // 63: profile.v1.ProfileService.Create:output_type -> profile.v1.CreateResponse
+	19, // 64: profile.v1.ProfileService.Update:output_type -> profile.v1.UpdateResponse
+	21, // 65: profile.v1.ProfileService.AddContact:output_type -> profile.v1.AddContactResponse
+	23, // 66: profile.v1.ProfileService.CreateContactVerification:output_type -> profile.v1.CreateContactVerificationResponse
+	25, // 67: profile.v1.ProfileService.CheckVerification:output_type -> profile.v1.CheckVerificationResponse
+	27, // 68: profile.v1.ProfileService.RemoveContact:output_type -> profile.v1.RemoveContactResponse
+	29, // 69: profile.v1.ProfileService.SearchRoster:output_type -> profile.v1.SearchRosterResponse
+	31, // 70: profile.v1.ProfileService.AddRoster:output_type -> profile.v1.AddRosterResponse
+	33, // 71: profile.v1.ProfileService.RemoveRoster:output_type -> profile.v1.RemoveRosterResponse
+	35, // 72: profile.v1.ProfileService.AddAddress:output_type -> profile.v1.AddAddressResponse
+	41, // 73: profile.v1.ProfileService.AddRelationship:output_type -> profile.v1.AddRelationshipResponse
+	43, // 74: profile.v1.ProfileService.DeleteRelationship:output_type -> profile.v1.DeleteRelationshipResponse
+	39, // 75: profile.v1.ProfileService.ListRelationship:output_type -> profile.v1.ListRelationshipResponse
+	59, // [59:76] is the sub-list for method output_type
+	42, // [42:59] is the sub-list for method input_type
 	42, // [42:42] is the sub-list for extension type_name
 	42, // [42:42] is the sub-list for extension extendee
 	0,  // [0:42] is the sub-list for field type_name
@@ -2756,7 +2997,7 @@ func file_profile_v1_profile_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_profile_v1_profile_proto_rawDesc), len(file_profile_v1_profile_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   46,
+			NumMessages:   50,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

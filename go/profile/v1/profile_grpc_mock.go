@@ -121,6 +121,26 @@ func (mr *MockProfileServiceClientMockRecorder) AddRoster(ctx, in any, opts ...a
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddRoster", reflect.TypeOf((*MockProfileServiceClient)(nil).AddRoster), varargs...)
 }
 
+// CheckVerification mocks base method.
+func (m *MockProfileServiceClient) CheckVerification(ctx context.Context, in *CheckVerificationRequest, opts ...grpc.CallOption) (*CheckVerificationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CheckVerification", varargs...)
+	ret0, _ := ret[0].(*CheckVerificationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CheckVerification indicates an expected call of CheckVerification.
+func (mr *MockProfileServiceClientMockRecorder) CheckVerification(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckVerification", reflect.TypeOf((*MockProfileServiceClient)(nil).CheckVerification), varargs...)
+}
+
 // Create mocks base method.
 func (m *MockProfileServiceClient) Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error) {
 	m.ctrl.T.Helper()
@@ -139,6 +159,26 @@ func (mr *MockProfileServiceClientMockRecorder) Create(ctx, in any, opts ...any)
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockProfileServiceClient)(nil).Create), varargs...)
+}
+
+// CreateContactVerification mocks base method.
+func (m *MockProfileServiceClient) CreateContactVerification(ctx context.Context, in *CreateContactVerificationRequest, opts ...grpc.CallOption) (*CreateContactVerificationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateContactVerification", varargs...)
+	ret0, _ := ret[0].(*CreateContactVerificationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateContactVerification indicates an expected call of CreateContactVerification.
+func (mr *MockProfileServiceClientMockRecorder) CreateContactVerification(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateContactVerification", reflect.TypeOf((*MockProfileServiceClient)(nil).CreateContactVerification), varargs...)
 }
 
 // DeleteRelationship mocks base method.
@@ -425,6 +465,21 @@ func (mr *MockProfileServiceServerMockRecorder) AddRoster(arg0, arg1 any) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddRoster", reflect.TypeOf((*MockProfileServiceServer)(nil).AddRoster), arg0, arg1)
 }
 
+// CheckVerification mocks base method.
+func (m *MockProfileServiceServer) CheckVerification(arg0 context.Context, arg1 *CheckVerificationRequest) (*CheckVerificationResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CheckVerification", arg0, arg1)
+	ret0, _ := ret[0].(*CheckVerificationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CheckVerification indicates an expected call of CheckVerification.
+func (mr *MockProfileServiceServerMockRecorder) CheckVerification(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckVerification", reflect.TypeOf((*MockProfileServiceServer)(nil).CheckVerification), arg0, arg1)
+}
+
 // Create mocks base method.
 func (m *MockProfileServiceServer) Create(arg0 context.Context, arg1 *CreateRequest) (*CreateResponse, error) {
 	m.ctrl.T.Helper()
@@ -438,6 +493,21 @@ func (m *MockProfileServiceServer) Create(arg0 context.Context, arg1 *CreateRequ
 func (mr *MockProfileServiceServerMockRecorder) Create(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockProfileServiceServer)(nil).Create), arg0, arg1)
+}
+
+// CreateContactVerification mocks base method.
+func (m *MockProfileServiceServer) CreateContactVerification(arg0 context.Context, arg1 *CreateContactVerificationRequest) (*CreateContactVerificationResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateContactVerification", arg0, arg1)
+	ret0, _ := ret[0].(*CreateContactVerificationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateContactVerification indicates an expected call of CreateContactVerification.
+func (mr *MockProfileServiceServerMockRecorder) CreateContactVerification(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateContactVerification", reflect.TypeOf((*MockProfileServiceServer)(nil).CreateContactVerification), arg0, arg1)
 }
 
 // DeleteRelationship mocks base method.

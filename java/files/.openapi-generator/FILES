@@ -46,7 +46,3 @@ src/main/java/com/antinvestor/apis/files/model/InlineObject.java
 src/main/java/com/antinvestor/apis/files/model/MediaMetadata.java
 src/main/java/com/antinvestor/apis/files/model/SearchMedia200Response.java
 src/main/java/com/antinvestor/apis/files/model/UploadContent200Response.java
-src/test/java/com/antinvestor/apis/files/model/GetConfigAuthed200ResponseTest.java
-src/test/java/com/antinvestor/apis/files/model/GetUrlPreviewAuthed200ResponseTest.java
-src/test/java/com/antinvestor/apis/files/model/MediaMetadataTest.java
-src/test/java/com/antinvestor/apis/files/model/SearchMedia200ResponseTest.java

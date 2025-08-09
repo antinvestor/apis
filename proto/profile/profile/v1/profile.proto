@@ -267,6 +267,45 @@ message AddContactResponse {
   ProfileObject data = 1;
 }
 
+// The request message containing the information necessary to verify a contact
+message CreateContactVerificationRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string contact_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+}
+
+message CreateContactVerificationResponse {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  bool success = 2;
+}
+
+message CheckVerificationRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+
+  string data = 2;
+}
+
+message CheckVerificationResponse {
+  string id = 1;
+  int32 check_attempts = 2;
+  bool success = 3;
+}
+
 // The request message containing the information necessary to remove a contact
 message RemoveContactRequest {
   string id = 1 [
@@ -475,6 +514,21 @@ service ProfileService {
   rpc AddContact(AddContactRequest) returns (AddContactResponse) {
     option (google.api.http) = {
       post: "/contact"
+      body: "*"
+    };
+  }
+  // Create a new contact verification request
+  rpc CreateContactVerification(CreateContactVerificationRequest) returns (CreateContactVerificationResponse) {
+    option (google.api.http) = {
+      post: "/contact/{id}/verification/create"
+      body: "*"
+    };
+  }
+
+  //Checks the status of a verification
+  rpc CheckVerification(CheckVerificationRequest) returns (CheckVerificationResponse) {
+    option (google.api.http) = {
+      post: "/contact/{id}/verification/check"
       body: "*"
     };
   }
