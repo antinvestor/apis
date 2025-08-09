@@ -47,4 +47,36 @@ public interface CreateContactVerificationRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getContactIdBytes();
+
+  /**
+   * <code>string code = 3 [json_name = "code"];</code>
+   * @return The code.
+   */
+  java.lang.String getCode();
+  /**
+   * <code>string code = 3 [json_name = "code"];</code>
+   * @return The bytes for code.
+   */
+  com.google.protobuf.ByteString
+      getCodeBytes();
+
+  /**
+   * <pre>
+   * This is the string amount of time before code expires e.g. 3m or 500s
+   * </pre>
+   *
+   * <code>string durationToExpire = 4 [json_name = "durationToExpire"];</code>
+   * @return The durationToExpire.
+   */
+  java.lang.String getDurationToExpire();
+  /**
+   * <pre>
+   * This is the string amount of time before code expires e.g. 3m or 500s
+   * </pre>
+   *
+   * <code>string durationToExpire = 4 [json_name = "durationToExpire"];</code>
+   * @return The bytes for durationToExpire.
+   */
+  com.google.protobuf.ByteString
+      getDurationToExpireBytes();
 }

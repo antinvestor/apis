@@ -1139,7 +1139,7 @@
     "profile.v1.ProfileService.CheckVerificationBody": {
       "type": "object",
       "properties": {
-        "data": {
+        "code": {
           "type": "string"
         }
       }
@@ -1149,6 +1149,13 @@
       "properties": {
         "contactId": {
           "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "durationToExpire": {
+          "type": "string",
+          "title": "This is the string amount of time before code expires e.g. 3m or 500s"
         }
       },
       "title": "The request message containing the information necessary to verify a contact"

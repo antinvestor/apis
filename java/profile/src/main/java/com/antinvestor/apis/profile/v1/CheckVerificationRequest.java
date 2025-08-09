@@ -43,7 +43,7 @@ private static final long serialVersionUID = 0L;
   }
   private CheckVerificationRequest() {
     id_ = "";
-    data_ = "";
+    code_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -98,39 +98,39 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int DATA_FIELD_NUMBER = 2;
+  public static final int CODE_FIELD_NUMBER = 2;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object data_ = "";
+  private volatile java.lang.Object code_ = "";
   /**
-   * <code>string data = 2 [json_name = "data"];</code>
-   * @return The data.
+   * <code>string code = 2 [json_name = "code"];</code>
+   * @return The code.
    */
   @java.lang.Override
-  public java.lang.String getData() {
-    java.lang.Object ref = data_;
+  public java.lang.String getCode() {
+    java.lang.Object ref = code_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      data_ = s;
+      code_ = s;
       return s;
     }
   }
   /**
-   * <code>string data = 2 [json_name = "data"];</code>
-   * @return The bytes for data.
+   * <code>string code = 2 [json_name = "code"];</code>
+   * @return The bytes for code.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getDataBytes() {
-    java.lang.Object ref = data_;
+      getCodeBytes() {
+    java.lang.Object ref = code_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      data_ = b;
+      code_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -154,8 +154,8 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(data_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 2, data_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(code_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, code_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -169,8 +169,8 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(data_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, data_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(code_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, code_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -189,8 +189,8 @@ private static final long serialVersionUID = 0L;
 
     if (!getId()
         .equals(other.getId())) return false;
-    if (!getData()
-        .equals(other.getData())) return false;
+    if (!getCode()
+        .equals(other.getCode())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -204,8 +204,8 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + getId().hashCode();
-    hash = (37 * hash) + DATA_FIELD_NUMBER;
-    hash = (53 * hash) + getData().hashCode();
+    hash = (37 * hash) + CODE_FIELD_NUMBER;
+    hash = (53 * hash) + getCode().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -338,7 +338,7 @@ private static final long serialVersionUID = 0L;
       super.clear();
       bitField0_ = 0;
       id_ = "";
-      data_ = "";
+      code_ = "";
       return this;
     }
 
@@ -376,7 +376,7 @@ private static final long serialVersionUID = 0L;
         result.id_ = id_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.data_ = data_;
+        result.code_ = code_;
       }
     }
 
@@ -397,8 +397,8 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (!other.getData().isEmpty()) {
-        data_ = other.data_;
+      if (!other.getCode().isEmpty()) {
+        code_ = other.code_;
         bitField0_ |= 0x00000002;
         onChanged();
       }
@@ -434,7 +434,7 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 10
             case 18: {
-              data_ = input.readStringRequireUtf8();
+              code_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
@@ -527,73 +527,73 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object data_ = "";
+    private java.lang.Object code_ = "";
     /**
-     * <code>string data = 2 [json_name = "data"];</code>
-     * @return The data.
+     * <code>string code = 2 [json_name = "code"];</code>
+     * @return The code.
      */
-    public java.lang.String getData() {
-      java.lang.Object ref = data_;
+    public java.lang.String getCode() {
+      java.lang.Object ref = code_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        data_ = s;
+        code_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string data = 2 [json_name = "data"];</code>
-     * @return The bytes for data.
+     * <code>string code = 2 [json_name = "code"];</code>
+     * @return The bytes for code.
      */
     public com.google.protobuf.ByteString
-        getDataBytes() {
-      java.lang.Object ref = data_;
+        getCodeBytes() {
+      java.lang.Object ref = code_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        data_ = b;
+        code_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string data = 2 [json_name = "data"];</code>
-     * @param value The data to set.
+     * <code>string code = 2 [json_name = "code"];</code>
+     * @param value The code to set.
      * @return This builder for chaining.
      */
-    public Builder setData(
+    public Builder setCode(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      data_ = value;
+      code_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>string data = 2 [json_name = "data"];</code>
+     * <code>string code = 2 [json_name = "code"];</code>
      * @return This builder for chaining.
      */
-    public Builder clearData() {
-      data_ = getDefaultInstance().getData();
+    public Builder clearCode() {
+      code_ = getDefaultInstance().getCode();
       bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string data = 2 [json_name = "data"];</code>
-     * @param value The bytes for data to set.
+     * <code>string code = 2 [json_name = "code"];</code>
+     * @param value The bytes for code to set.
      * @return This builder for chaining.
      */
-    public Builder setDataBytes(
+    public Builder setCodeBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      data_ = value;
+      code_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;

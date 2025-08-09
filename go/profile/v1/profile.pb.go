@@ -1392,11 +1392,14 @@ func (x *AddContactResponse) GetData() *ProfileObject {
 
 // The request message containing the information necessary to verify a contact
 type CreateContactVerificationRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	ContactId     string                 `protobuf:"bytes,2,opt,name=contact_id,json=contactId,proto3" json:"contact_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Id        string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ContactId string                 `protobuf:"bytes,2,opt,name=contact_id,json=contactId,proto3" json:"contact_id,omitempty"`
+	Code      string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
+	// This is the string amount of time before code expires e.g. 3m or 500s
+	DurationToExpire string `protobuf:"bytes,4,opt,name=durationToExpire,proto3" json:"durationToExpire,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *CreateContactVerificationRequest) Reset() {
@@ -1439,6 +1442,20 @@ func (x *CreateContactVerificationRequest) GetId() string {
 func (x *CreateContactVerificationRequest) GetContactId() string {
 	if x != nil {
 		return x.ContactId
+	}
+	return ""
+}
+
+func (x *CreateContactVerificationRequest) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *CreateContactVerificationRequest) GetDurationToExpire() string {
+	if x != nil {
+		return x.DurationToExpire
 	}
 	return ""
 }
@@ -1498,7 +1515,7 @@ func (x *CreateContactVerificationResponse) GetSuccess() bool {
 type CheckVerificationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Data          string                 `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1540,9 +1557,9 @@ func (x *CheckVerificationRequest) GetId() string {
 	return ""
 }
 
-func (x *CheckVerificationRequest) GetData() string {
+func (x *CheckVerificationRequest) GetCode() string {
 	if x != nil {
-		return x.Data
+		return x.Code
 	}
 	return ""
 }
@@ -2693,17 +2710,19 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
 	"\x12AddContactResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\x8b\x01\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\xcb\x01\n" +
 	" CreateContactVerificationRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12:\n" +
 	"\n" +
-	"contact_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tcontactId\"j\n" +
+	"contact_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tcontactId\x12\x12\n" +
+	"\x04code\x18\x03 \x01(\tR\x04code\x12*\n" +
+	"\x10durationToExpire\x18\x04 \x01(\tR\x10durationToExpire\"j\n" +
 	"!CreateContactVerificationResponse\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x18\n" +
 	"\asuccess\x18\x02 \x01(\bR\asuccess\"[\n" +
 	"\x18CheckVerificationRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
-	"\x04data\x18\x02 \x01(\tR\x04data\"l\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\"l\n" +
 	"\x19CheckVerificationResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12%\n" +
 	"\x0echeck_attempts\x18\x02 \x01(\x05R\rcheckAttempts\x12\x18\n" +

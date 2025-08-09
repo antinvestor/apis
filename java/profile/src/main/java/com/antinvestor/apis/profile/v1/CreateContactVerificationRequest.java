@@ -48,6 +48,8 @@ private static final long serialVersionUID = 0L;
   private CreateContactVerificationRequest() {
     id_ = "";
     contactId_ = "";
+    code_ = "";
+    durationToExpire_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -141,6 +143,92 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int CODE_FIELD_NUMBER = 3;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object code_ = "";
+  /**
+   * <code>string code = 3 [json_name = "code"];</code>
+   * @return The code.
+   */
+  @java.lang.Override
+  public java.lang.String getCode() {
+    java.lang.Object ref = code_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      code_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string code = 3 [json_name = "code"];</code>
+   * @return The bytes for code.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getCodeBytes() {
+    java.lang.Object ref = code_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      code_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int DURATIONTOEXPIRE_FIELD_NUMBER = 4;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object durationToExpire_ = "";
+  /**
+   * <pre>
+   * This is the string amount of time before code expires e.g. 3m or 500s
+   * </pre>
+   *
+   * <code>string durationToExpire = 4 [json_name = "durationToExpire"];</code>
+   * @return The durationToExpire.
+   */
+  @java.lang.Override
+  public java.lang.String getDurationToExpire() {
+    java.lang.Object ref = durationToExpire_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      durationToExpire_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * This is the string amount of time before code expires e.g. 3m or 500s
+   * </pre>
+   *
+   * <code>string durationToExpire = 4 [json_name = "durationToExpire"];</code>
+   * @return The bytes for durationToExpire.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getDurationToExpireBytes() {
+    java.lang.Object ref = durationToExpire_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      durationToExpire_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -161,6 +249,12 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(contactId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, contactId_);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(code_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 3, code_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(durationToExpire_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 4, durationToExpire_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -175,6 +269,12 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(contactId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(2, contactId_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(code_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, code_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(durationToExpire_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(4, durationToExpire_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -195,6 +295,10 @@ private static final long serialVersionUID = 0L;
         .equals(other.getId())) return false;
     if (!getContactId()
         .equals(other.getContactId())) return false;
+    if (!getCode()
+        .equals(other.getCode())) return false;
+    if (!getDurationToExpire()
+        .equals(other.getDurationToExpire())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -210,6 +314,10 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + CONTACT_ID_FIELD_NUMBER;
     hash = (53 * hash) + getContactId().hashCode();
+    hash = (37 * hash) + CODE_FIELD_NUMBER;
+    hash = (53 * hash) + getCode().hashCode();
+    hash = (37 * hash) + DURATIONTOEXPIRE_FIELD_NUMBER;
+    hash = (53 * hash) + getDurationToExpire().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -347,6 +455,8 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       id_ = "";
       contactId_ = "";
+      code_ = "";
+      durationToExpire_ = "";
       return this;
     }
 
@@ -386,6 +496,12 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.contactId_ = contactId_;
       }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.code_ = code_;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.durationToExpire_ = durationToExpire_;
+      }
     }
 
     @java.lang.Override
@@ -408,6 +524,16 @@ private static final long serialVersionUID = 0L;
       if (!other.getContactId().isEmpty()) {
         contactId_ = other.contactId_;
         bitField0_ |= 0x00000002;
+        onChanged();
+      }
+      if (!other.getCode().isEmpty()) {
+        code_ = other.code_;
+        bitField0_ |= 0x00000004;
+        onChanged();
+      }
+      if (!other.getDurationToExpire().isEmpty()) {
+        durationToExpire_ = other.durationToExpire_;
+        bitField0_ |= 0x00000008;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -446,6 +572,16 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000002;
               break;
             } // case 18
+            case 26: {
+              code_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 26
+            case 34: {
+              durationToExpire_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 34
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -603,6 +739,170 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       contactId_ = value;
       bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object code_ = "";
+    /**
+     * <code>string code = 3 [json_name = "code"];</code>
+     * @return The code.
+     */
+    public java.lang.String getCode() {
+      java.lang.Object ref = code_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        code_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string code = 3 [json_name = "code"];</code>
+     * @return The bytes for code.
+     */
+    public com.google.protobuf.ByteString
+        getCodeBytes() {
+      java.lang.Object ref = code_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        code_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string code = 3 [json_name = "code"];</code>
+     * @param value The code to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCode(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      code_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string code = 3 [json_name = "code"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCode() {
+      code_ = getDefaultInstance().getCode();
+      bitField0_ = (bitField0_ & ~0x00000004);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string code = 3 [json_name = "code"];</code>
+     * @param value The bytes for code to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCodeBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      code_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object durationToExpire_ = "";
+    /**
+     * <pre>
+     * This is the string amount of time before code expires e.g. 3m or 500s
+     * </pre>
+     *
+     * <code>string durationToExpire = 4 [json_name = "durationToExpire"];</code>
+     * @return The durationToExpire.
+     */
+    public java.lang.String getDurationToExpire() {
+      java.lang.Object ref = durationToExpire_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        durationToExpire_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * This is the string amount of time before code expires e.g. 3m or 500s
+     * </pre>
+     *
+     * <code>string durationToExpire = 4 [json_name = "durationToExpire"];</code>
+     * @return The bytes for durationToExpire.
+     */
+    public com.google.protobuf.ByteString
+        getDurationToExpireBytes() {
+      java.lang.Object ref = durationToExpire_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        durationToExpire_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * This is the string amount of time before code expires e.g. 3m or 500s
+     * </pre>
+     *
+     * <code>string durationToExpire = 4 [json_name = "durationToExpire"];</code>
+     * @param value The durationToExpire to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDurationToExpire(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      durationToExpire_ = value;
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * This is the string amount of time before code expires e.g. 3m or 500s
+     * </pre>
+     *
+     * <code>string durationToExpire = 4 [json_name = "durationToExpire"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDurationToExpire() {
+      durationToExpire_ = getDefaultInstance().getDurationToExpire();
+      bitField0_ = (bitField0_ & ~0x00000008);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * This is the string amount of time before code expires e.g. 3m or 500s
+     * </pre>
+     *
+     * <code>string durationToExpire = 4 [json_name = "durationToExpire"];</code>
+     * @param value The bytes for durationToExpire to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDurationToExpireBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      durationToExpire_ = value;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }

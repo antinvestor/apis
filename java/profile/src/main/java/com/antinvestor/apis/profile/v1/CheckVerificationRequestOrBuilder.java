@@ -37,14 +37,14 @@ public interface CheckVerificationRequestOrBuilder extends
       getIdBytes();
 
   /**
-   * <code>string data = 2 [json_name = "data"];</code>
-   * @return The data.
+   * <code>string code = 2 [json_name = "code"];</code>
+   * @return The code.
    */
-  java.lang.String getData();
+  java.lang.String getCode();
   /**
-   * <code>string data = 2 [json_name = "data"];</code>
-   * @return The bytes for data.
+   * <code>string code = 2 [json_name = "code"];</code>
+   * @return The bytes for code.
    */
   com.google.protobuf.ByteString
-      getDataBytes();
+      getCodeBytes();
 }

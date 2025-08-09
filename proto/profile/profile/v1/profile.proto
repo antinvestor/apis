@@ -279,6 +279,10 @@ message CreateContactVerificationRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
+  string code = 3;
+
+  // This is the string amount of time before code expires e.g. 3m or 500s
+  string durationToExpire = 4;
 }
 
 message CreateContactVerificationResponse {
@@ -297,7 +301,7 @@ message CheckVerificationRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
 
-  string data = 2;
+  string code = 2;
 }
 
 message CheckVerificationResponse {
