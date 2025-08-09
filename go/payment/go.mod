@@ -6,7 +6,7 @@ go 1.24
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.7-20250717185734-6c6e0d3c608e.1
-	github.com/antinvestor/apis/go/common v1.37.1
+	github.com/antinvestor/apis/go/common v1.37.10
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.1
 	go.uber.org/mock v0.5.2
 	google.golang.org/genproto v0.0.0-20250804133106-a7a43d27e69b
