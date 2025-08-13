@@ -53,6 +53,7 @@ private static final long serialVersionUID = 0L;
     userAgent_ = "";
     os_ = "";
     lastSeen_ = "";
+    profileId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -356,6 +357,45 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int PROFILE_ID_FIELD_NUMBER = 8;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object profileId_ = "";
+  /**
+   * <code>string profile_id = 8 [json_name = "profileId"];</code>
+   * @return The profileId.
+   */
+  @java.lang.Override
+  public java.lang.String getProfileId() {
+    java.lang.Object ref = profileId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      profileId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string profile_id = 8 [json_name = "profileId"];</code>
+   * @return The bytes for profileId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getProfileIdBytes() {
+    java.lang.Object ref = profileId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      profileId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   public static final int LOCALE_FIELD_NUMBER = 9;
   private com.antinvestor.apis.device.v1.Locale locale_;
   /**
@@ -575,6 +615,9 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(lastSeen_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 7, lastSeen_);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 8, profileId_);
+    }
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeMessage(9, getLocale());
     }
@@ -619,6 +662,9 @@ java.lang.String defaultValue) {
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(lastSeen_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(7, lastSeen_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(8, profileId_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
@@ -673,6 +719,8 @@ java.lang.String defaultValue) {
         .equals(other.getOs())) return false;
     if (!getLastSeen()
         .equals(other.getLastSeen())) return false;
+    if (!getProfileId()
+        .equals(other.getProfileId())) return false;
     if (hasLocale() != other.hasLocale()) return false;
     if (hasLocale()) {
       if (!getLocale()
@@ -707,6 +755,8 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + getOs().hashCode();
     hash = (37 * hash) + LAST_SEEN_FIELD_NUMBER;
     hash = (53 * hash) + getLastSeen().hashCode();
+    hash = (37 * hash) + PROFILE_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getProfileId().hashCode();
     if (hasLocale()) {
       hash = (37 * hash) + LOCALE_FIELD_NUMBER;
       hash = (53 * hash) + getLocale().hashCode();
@@ -893,6 +943,7 @@ java.lang.String defaultValue) {
       userAgent_ = "";
       os_ = "";
       lastSeen_ = "";
+      profileId_ = "";
       locale_ = null;
       if (localeBuilder_ != null) {
         localeBuilder_.dispose();
@@ -954,18 +1005,21 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000040) != 0)) {
         result.lastSeen_ = lastSeen_;
       }
-      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000080) != 0)) {
+        result.profileId_ = profileId_;
+      }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000100) != 0)) {
         result.locale_ = localeBuilder_ == null
             ? locale_
             : localeBuilder_.build();
         to_bitField0_ |= 0x00000001;
       }
-      if (((from_bitField0_ & 0x00000100) != 0)) {
+      if (((from_bitField0_ & 0x00000200) != 0)) {
         result.location_ = internalGetLocation();
         result.location_.makeImmutable();
       }
-      if (((from_bitField0_ & 0x00000200) != 0)) {
+      if (((from_bitField0_ & 0x00000400) != 0)) {
         result.properties_ = internalGetProperties();
         result.properties_.makeImmutable();
       }
@@ -1019,15 +1073,20 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000040;
         onChanged();
       }
+      if (!other.getProfileId().isEmpty()) {
+        profileId_ = other.profileId_;
+        bitField0_ |= 0x00000080;
+        onChanged();
+      }
       if (other.hasLocale()) {
         mergeLocale(other.getLocale());
       }
       internalGetMutableLocation().mergeFrom(
           other.internalGetLocation());
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       internalGetMutableProperties().mergeFrom(
           other.internalGetProperties());
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000400;
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1089,11 +1148,16 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000040;
               break;
             } // case 58
+            case 66: {
+              profileId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000080;
+              break;
+            } // case 66
             case 74: {
               input.readMessage(
                   internalGetLocaleFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000100;
               break;
             } // case 74
             case 90: {
@@ -1102,7 +1166,7 @@ java.lang.String defaultValue) {
                   LocationDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableLocation().getMutableMap().put(
                   location__.getKey(), location__.getValue());
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000200;
               break;
             } // case 90
             case 122: {
@@ -1111,7 +1175,7 @@ java.lang.String defaultValue) {
                   PropertiesDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableProperties().getMutableMap().put(
                   properties__.getKey(), properties__.getValue());
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000400;
               break;
             } // case 122
             default: {
@@ -1635,6 +1699,78 @@ java.lang.String defaultValue) {
       return this;
     }
 
+    private java.lang.Object profileId_ = "";
+    /**
+     * <code>string profile_id = 8 [json_name = "profileId"];</code>
+     * @return The profileId.
+     */
+    public java.lang.String getProfileId() {
+      java.lang.Object ref = profileId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        profileId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string profile_id = 8 [json_name = "profileId"];</code>
+     * @return The bytes for profileId.
+     */
+    public com.google.protobuf.ByteString
+        getProfileIdBytes() {
+      java.lang.Object ref = profileId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        profileId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string profile_id = 8 [json_name = "profileId"];</code>
+     * @param value The profileId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setProfileId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      profileId_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string profile_id = 8 [json_name = "profileId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearProfileId() {
+      profileId_ = getDefaultInstance().getProfileId();
+      bitField0_ = (bitField0_ & ~0x00000080);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string profile_id = 8 [json_name = "profileId"];</code>
+     * @param value The bytes for profileId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setProfileIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      profileId_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+
     private com.antinvestor.apis.device.v1.Locale locale_;
     private com.google.protobuf.SingleFieldBuilder<
         com.antinvestor.apis.device.v1.Locale, com.antinvestor.apis.device.v1.Locale.Builder, com.antinvestor.apis.device.v1.LocaleOrBuilder> localeBuilder_;
@@ -1643,7 +1779,7 @@ java.lang.String defaultValue) {
      * @return Whether the locale field is set.
      */
     public boolean hasLocale() {
-      return ((bitField0_ & 0x00000080) != 0);
+      return ((bitField0_ & 0x00000100) != 0);
     }
     /**
      * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
@@ -1668,7 +1804,7 @@ java.lang.String defaultValue) {
       } else {
         localeBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
@@ -1682,7 +1818,7 @@ java.lang.String defaultValue) {
       } else {
         localeBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
@@ -1691,7 +1827,7 @@ java.lang.String defaultValue) {
      */
     public Builder mergeLocale(com.antinvestor.apis.device.v1.Locale value) {
       if (localeBuilder_ == null) {
-        if (((bitField0_ & 0x00000080) != 0) &&
+        if (((bitField0_ & 0x00000100) != 0) &&
           locale_ != null &&
           locale_ != com.antinvestor.apis.device.v1.Locale.getDefaultInstance()) {
           getLocaleBuilder().mergeFrom(value);
@@ -1702,7 +1838,7 @@ java.lang.String defaultValue) {
         localeBuilder_.mergeFrom(value);
       }
       if (locale_ != null) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         onChanged();
       }
       return this;
@@ -1711,7 +1847,7 @@ java.lang.String defaultValue) {
      * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
      */
     public Builder clearLocale() {
-      bitField0_ = (bitField0_ & ~0x00000080);
+      bitField0_ = (bitField0_ & ~0x00000100);
       locale_ = null;
       if (localeBuilder_ != null) {
         localeBuilder_.dispose();
@@ -1724,7 +1860,7 @@ java.lang.String defaultValue) {
      * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
      */
     public com.antinvestor.apis.device.v1.Locale.Builder getLocaleBuilder() {
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000100;
       onChanged();
       return internalGetLocaleFieldBuilder().getBuilder();
     }
@@ -1775,7 +1911,7 @@ java.lang.String defaultValue) {
       if (!location_.isMutable()) {
         location_ = location_.copy();
       }
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       onChanged();
       return location_;
     }
@@ -1835,7 +1971,7 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearLocation() {
-      bitField0_ = (bitField0_ & ~0x00000100);
+      bitField0_ = (bitField0_ & ~0x00000200);
       internalGetMutableLocation().getMutableMap()
           .clear();
       return this;
@@ -1856,7 +1992,7 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableLocation() {
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       return internalGetMutableLocation().getMutableMap();
     }
     /**
@@ -1869,7 +2005,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableLocation().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       return this;
     }
     /**
@@ -1879,7 +2015,7 @@ java.lang.String defaultValue) {
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableLocation().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000100;
+      bitField0_ |= 0x00000200;
       return this;
     }
 
@@ -1902,7 +2038,7 @@ java.lang.String defaultValue) {
       if (!properties_.isMutable()) {
         properties_ = properties_.copy();
       }
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000400;
       onChanged();
       return properties_;
     }
@@ -1962,7 +2098,7 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
     public Builder clearProperties() {
-      bitField0_ = (bitField0_ & ~0x00000200);
+      bitField0_ = (bitField0_ & ~0x00000400);
       internalGetMutableProperties().getMutableMap()
           .clear();
       return this;
@@ -1983,7 +2119,7 @@ java.lang.String defaultValue) {
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
         getMutableProperties() {
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000400;
       return internalGetMutableProperties().getMutableMap();
     }
     /**
@@ -1996,7 +2132,7 @@ java.lang.String defaultValue) {
       if (value == null) { throw new NullPointerException("map value"); }
       internalGetMutableProperties().getMutableMap()
           .put(key, value);
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000400;
       return this;
     }
     /**
@@ -2006,7 +2142,7 @@ java.lang.String defaultValue) {
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableProperties().getMutableMap()
           .putAll(values);
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000400;
       return this;
     }
 

@@ -197,6 +197,45 @@
         ]
       }
     },
+    "/link/{id}": {
+      "patch": {
+        "summary": "Links an existing device session based on the request to a profile.",
+        "operationId": "DeviceService_Link",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/device.v1.LinkResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/device.v1.DeviceService.LinkBody"
+            }
+          }
+        ],
+        "tags": [
+          "device.v1.DeviceService"
+        ]
+      }
+    },
     "/logs": {
       "get": {
         "summary": "Lists logs the a device has/owns.",
@@ -620,6 +659,9 @@
         "lastSeen": {
           "type": "string"
         },
+        "profileId": {
+          "type": "string"
+        },
         "locale": {
           "$ref": "#/definitions/device.v1.Locale"
         },
@@ -637,6 +679,21 @@
         }
       },
       "title": "The response message containing the full device object"
+    },
+    "device.v1.DeviceService.LinkBody": {
+      "type": "object",
+      "properties": {
+        "profileId": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "The request message has data to link a session to a user"
     },
     "device.v1.DeviceService.UpdateBody": {
       "type": "object",
@@ -704,6 +761,14 @@
       "default": "MATRIX_KEY",
       "description": "- MATRIX_KEY: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
       "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
+    },
+    "device.v1.LinkResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/device.v1.DeviceObject"
+        }
+      }
     },
     "device.v1.ListLogsResponse": {
       "type": "object",

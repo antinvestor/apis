@@ -184,6 +184,37 @@ public final class DeviceServiceGrpc {
     return getUpdateMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.LinkRequest,
+      com.antinvestor.apis.device.v1.LinkResponse> getLinkMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Link",
+      requestType = com.antinvestor.apis.device.v1.LinkRequest.class,
+      responseType = com.antinvestor.apis.device.v1.LinkResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.LinkRequest,
+      com.antinvestor.apis.device.v1.LinkResponse> getLinkMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.LinkRequest, com.antinvestor.apis.device.v1.LinkResponse> getLinkMethod;
+    if ((getLinkMethod = DeviceServiceGrpc.getLinkMethod) == null) {
+      synchronized (DeviceServiceGrpc.class) {
+        if ((getLinkMethod = DeviceServiceGrpc.getLinkMethod) == null) {
+          DeviceServiceGrpc.getLinkMethod = getLinkMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.device.v1.LinkRequest, com.antinvestor.apis.device.v1.LinkResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Link"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.LinkRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.LinkResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeviceServiceMethodDescriptorSupplier("Link"))
+              .build();
+        }
+      }
+    }
+    return getLinkMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.RemoveRequest,
       com.antinvestor.apis.device.v1.RemoveResponse> getRemoveMethod;
 
@@ -488,6 +519,16 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
+     * Links an existing device session based on the request to a profile.
+     * </pre>
+     */
+    default void link(com.antinvestor.apis.device.v1.LinkRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.LinkResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getLinkMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * Removes an existing device based on the request.
      * </pre>
      */
@@ -637,6 +678,17 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
+     * Links an existing device session based on the request to a profile.
+     * </pre>
+     */
+    public void link(com.antinvestor.apis.device.v1.LinkRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.LinkResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getLinkMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * Removes an existing device based on the request.
      * </pre>
      */
@@ -771,6 +823,16 @@ public final class DeviceServiceGrpc {
     public com.antinvestor.apis.device.v1.UpdateResponse update(com.antinvestor.apis.device.v1.UpdateRequest request) throws io.grpc.StatusException {
       return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getUpdateMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Links an existing device session based on the request to a profile.
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.LinkResponse link(com.antinvestor.apis.device.v1.LinkRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
+          getChannel(), getLinkMethod(), getCallOptions(), request);
     }
 
     /**
@@ -910,6 +972,16 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
+     * Links an existing device session based on the request to a profile.
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.LinkResponse link(com.antinvestor.apis.device.v1.LinkRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getLinkMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      * Removes an existing device based on the request.
      * </pre>
      */
@@ -1036,6 +1108,17 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
+     * Links an existing device session based on the request to a profile.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.LinkResponse> link(
+        com.antinvestor.apis.device.v1.LinkRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getLinkMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * Removes an existing device based on the request.
      * </pre>
      */
@@ -1084,12 +1167,13 @@ public final class DeviceServiceGrpc {
   private static final int METHODID_SEARCH = 2;
   private static final int METHODID_CREATE = 3;
   private static final int METHODID_UPDATE = 4;
-  private static final int METHODID_REMOVE = 5;
-  private static final int METHODID_LOG = 6;
-  private static final int METHODID_LIST_LOGS = 7;
-  private static final int METHODID_ADD_KEY = 8;
-  private static final int METHODID_REMOVE_KEY = 9;
-  private static final int METHODID_SEARCH_KEY = 10;
+  private static final int METHODID_LINK = 5;
+  private static final int METHODID_REMOVE = 6;
+  private static final int METHODID_LOG = 7;
+  private static final int METHODID_LIST_LOGS = 8;
+  private static final int METHODID_ADD_KEY = 9;
+  private static final int METHODID_REMOVE_KEY = 10;
+  private static final int METHODID_SEARCH_KEY = 11;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1127,6 +1211,10 @@ public final class DeviceServiceGrpc {
         case METHODID_UPDATE:
           serviceImpl.update((com.antinvestor.apis.device.v1.UpdateRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.UpdateResponse>) responseObserver);
+          break;
+        case METHODID_LINK:
+          serviceImpl.link((com.antinvestor.apis.device.v1.LinkRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.LinkResponse>) responseObserver);
           break;
         case METHODID_REMOVE:
           serviceImpl.remove((com.antinvestor.apis.device.v1.RemoveRequest) request,
@@ -1205,6 +1293,13 @@ public final class DeviceServiceGrpc {
               com.antinvestor.apis.device.v1.UpdateRequest,
               com.antinvestor.apis.device.v1.UpdateResponse>(
                 service, METHODID_UPDATE)))
+        .addMethod(
+          getLinkMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.device.v1.LinkRequest,
+              com.antinvestor.apis.device.v1.LinkResponse>(
+                service, METHODID_LINK)))
         .addMethod(
           getRemoveMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -1300,6 +1395,7 @@ public final class DeviceServiceGrpc {
               .addMethod(getSearchMethod())
               .addMethod(getCreateMethod())
               .addMethod(getUpdateMethod())
+              .addMethod(getLinkMethod())
               .addMethod(getRemoveMethod())
               .addMethod(getLogMethod())
               .addMethod(getListLogsMethod())

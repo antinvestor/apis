@@ -109,6 +109,18 @@ public interface DeviceObjectOrBuilder extends
       getLastSeenBytes();
 
   /**
+   * <code>string profile_id = 8 [json_name = "profileId"];</code>
+   * @return The profileId.
+   */
+  java.lang.String getProfileId();
+  /**
+   * <code>string profile_id = 8 [json_name = "profileId"];</code>
+   * @return The bytes for profileId.
+   */
+  com.google.protobuf.ByteString
+      getProfileIdBytes();
+
+  /**
    * <code>.device.v1.Locale locale = 9 [json_name = "locale"];</code>
    * @return Whether the locale field is set.
    */

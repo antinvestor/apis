@@ -38,6 +38,7 @@ const (
 	DeviceService_Search_FullMethodName         = "/device.v1.DeviceService/Search"
 	DeviceService_Create_FullMethodName         = "/device.v1.DeviceService/Create"
 	DeviceService_Update_FullMethodName         = "/device.v1.DeviceService/Update"
+	DeviceService_Link_FullMethodName           = "/device.v1.DeviceService/Link"
 	DeviceService_Remove_FullMethodName         = "/device.v1.DeviceService/Remove"
 	DeviceService_Log_FullMethodName            = "/device.v1.DeviceService/Log"
 	DeviceService_ListLogs_FullMethodName       = "/device.v1.DeviceService/ListLogs"
@@ -62,6 +63,8 @@ type DeviceServiceClient interface {
 	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
 	// Updates an existing device based on the request.
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
+	// Links an existing device session based on the request to a profile.
+	Link(ctx context.Context, in *LinkRequest, opts ...grpc.CallOption) (*LinkResponse, error)
 	// Removes an existing device based on the request.
 	Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (*RemoveResponse, error)
 	// Log a new key based on the request.
@@ -137,6 +140,16 @@ func (c *deviceServiceClient) Update(ctx context.Context, in *UpdateRequest, opt
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateResponse)
 	err := c.cc.Invoke(ctx, DeviceService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deviceServiceClient) Link(ctx context.Context, in *LinkRequest, opts ...grpc.CallOption) (*LinkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LinkResponse)
+	err := c.cc.Invoke(ctx, DeviceService_Link_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -237,6 +250,8 @@ type DeviceServiceServer interface {
 	Create(context.Context, *CreateRequest) (*CreateResponse, error)
 	// Updates an existing device based on the request.
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
+	// Links an existing device session based on the request to a profile.
+	Link(context.Context, *LinkRequest) (*LinkResponse, error)
 	// Removes an existing device based on the request.
 	Remove(context.Context, *RemoveRequest) (*RemoveResponse, error)
 	// Log a new key based on the request.
@@ -273,6 +288,9 @@ func (UnimplementedDeviceServiceServer) Create(context.Context, *CreateRequest) 
 }
 func (UnimplementedDeviceServiceServer) Update(context.Context, *UpdateRequest) (*UpdateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedDeviceServiceServer) Link(context.Context, *LinkRequest) (*LinkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Link not implemented")
 }
 func (UnimplementedDeviceServiceServer) Remove(context.Context, *RemoveRequest) (*RemoveResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Remove not implemented")
@@ -396,6 +414,24 @@ func _DeviceService_Update_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DeviceService_Link_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LinkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceServiceServer).Link(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceService_Link_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceServiceServer).Link(ctx, req.(*LinkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _DeviceService_Remove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RemoveRequest)
 	if err := dec(in); err != nil {
@@ -512,6 +548,10 @@ var DeviceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Update",
 			Handler:    _DeviceService_Update_Handler,
+		},
+		{
+			MethodName: "Link",
+			Handler:    _DeviceService_Link_Handler,
 		},
 		{
 			MethodName: "Remove",

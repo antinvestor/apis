@@ -121,6 +121,26 @@ func (mr *MockDeviceServiceClientMockRecorder) GetBySessionId(ctx, in any, opts 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBySessionId", reflect.TypeOf((*MockDeviceServiceClient)(nil).GetBySessionId), varargs...)
 }
 
+// Link mocks base method.
+func (m *MockDeviceServiceClient) Link(ctx context.Context, in *LinkRequest, opts ...grpc.CallOption) (*LinkResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "Link", varargs...)
+	ret0, _ := ret[0].(*LinkResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Link indicates an expected call of Link.
+func (mr *MockDeviceServiceClientMockRecorder) Link(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Link", reflect.TypeOf((*MockDeviceServiceClient)(nil).Link), varargs...)
+}
+
 // ListLogs mocks base method.
 func (m *MockDeviceServiceClient) ListLogs(ctx context.Context, in *ListLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListLogsResponse], error) {
 	m.ctrl.T.Helper()
@@ -343,6 +363,21 @@ func (m *MockDeviceServiceServer) GetBySessionId(arg0 context.Context, arg1 *Get
 func (mr *MockDeviceServiceServerMockRecorder) GetBySessionId(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBySessionId", reflect.TypeOf((*MockDeviceServiceServer)(nil).GetBySessionId), arg0, arg1)
+}
+
+// Link mocks base method.
+func (m *MockDeviceServiceServer) Link(arg0 context.Context, arg1 *LinkRequest) (*LinkResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Link", arg0, arg1)
+	ret0, _ := ret[0].(*LinkResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Link indicates an expected call of Link.
+func (mr *MockDeviceServiceServerMockRecorder) Link(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Link", reflect.TypeOf((*MockDeviceServiceServer)(nil).Link), arg0, arg1)
 }
 
 // ListLogs mocks base method.
