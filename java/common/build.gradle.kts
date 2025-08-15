@@ -5,6 +5,6 @@ dependencies {
     implementation("com.auth0:jwks-rsa:0.23.0")
 
     implementation("io.jsonwebtoken:jjwt-api:0.12.7")
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.7")
     runtimeOnly("io.jsonwebtoken:jjwt-gson:0.12.7")
 }
