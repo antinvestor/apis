@@ -14,7 +14,7 @@ jobs:
       - name: Setup go testing infrastructure
         uses: actions/setup-go@v5
         with:
-          go-version: '^1.24'
+          go-version: 'stable'
 
       - name: Run all required system tests
         run: make

@@ -30,7 +30,7 @@ endef
 
 define mock_package
 cd go/${1} && $(GO) mod tidy
-cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -package=${1}${2} -destination=${CUR_DIR}go/${1}/${2}/${1}_grpc_mock.go
+cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/${2}_mocks/${1}_grpc_mock.go
 
 endef
 
@@ -61,9 +61,8 @@ help: ## Describe useful make targets
 
 
 .PHONY: all
-all: ## Build, test, and lint (default)
+all: ## Build, test (default)
 	$(MAKE) golang_build_all
-	$(MAKE) lintfix
 
 .PHONY: clean
 clean: ## Delete intermediate build artifacts
@@ -119,7 +118,7 @@ openapi_files_gen_go: ## Generate the golang open api spec for the files server
 	$(DOCKER) run --rm \
 		-v "${CUR_DIR}proto/files:/local/proto" \
 		-v "${CUR_DIR}go/files:/local/golang" \
-		openapitools/openapi-generator-cli generate \
+		openapitools/openapi-generator-cli:latest generate \
 		-g go -o /local/golang/ -p packageName=file_v1 \
         --git-repo-id apis/go/files --git-user-id antinvestor \
         -i /local/proto/v1/openapi.yaml
@@ -130,7 +129,7 @@ openapi_files_gen_java: ## Generate the java open api spec for the files server
 	$(DOCKER) run --rm \
 		-v "${CUR_DIR}proto/files:/local/proto" \
 		-v "${CUR_DIR}java/files:/local/java" \
-		openapitools/openapi-generator-cli generate \
+		openapitools/openapi-generator-cli:latest generate \
 		-g java -o /local/java/ \
 		--git-repo-id apis/java/files --git-user-id antinvestor \
         --additional-properties artifactId=files,hideGenerationTimestamp=true,groupId=com.antinvestor.apis,library=native \
@@ -191,16 +190,16 @@ checkgenerate:
 
 $(BIN)/buf: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/bufbuild/buf/cmd/buf@v1.53.0
+	$(GO) install github.com/bufbuild/buf/cmd/buf@latest
 
 $(BIN)/license-header: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/bufbuild/buf/private/pkg/licenseheader/cmd/license-header@v1.45.0
+	$(GO) install github.com/bufbuild/buf/private/pkg/licenseheader/cmd/license-header@latest
 
 $(BIN)/golangci-lint: Makefile
 	@mkdir -p $(@D)
-	$(GO) install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.5
+	$(GO) install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.8
 
 $(BIN)/gomock: Makefile
 	@mkdir -p $(@D)
-	$(GO) install go.uber.org/mock/mockgen@v0.5.2
+	$(GO) install go.uber.org/mock/mockgen@latest
