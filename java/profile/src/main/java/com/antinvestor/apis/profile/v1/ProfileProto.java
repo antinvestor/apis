@@ -414,7 +414,7 @@ public final class ProfileProto {
       "properties\030\006 \003(\tR\nproperties\022C\n\006extras\030\007" +
       " \003(\0132+.profile.v1.SearchRosterRequest.Ex" +
       "trasEntryR\006extras\022?\n\nprofile_id\030\010 \001(\tB \272" +
-      "H\035r\030\020\003\030\372\0012\021[0-9a-z_-]{3,250}\330\001\000R\tprofile" +
+      "H\035r\030\020\003\030\372\0012\021[0-9a-z_-]{3,250}\330\001\001R\tprofile" +
       "Id\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005v" +
       "alue\030\002 \001(\tR\005value:\0028\001\"D\n\024SearchRosterRes" +
       "ponse\022,\n\004data\030\001 \003(\0132\030.profile.v1.RosterO" +
@@ -438,7 +438,7 @@ public final class ProfileProto {
       "upR\010peerName\0224\n\007peer_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(" +
       "2\020[0-9a-z_-]{3,20}R\006peerId\022P\n\024last_relat" +
       "ionship_id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{" +
-      "3,20}\330\001\000R\022lastRelationshipId\022.\n\023related_" +
+      "3,20}\330\001\001R\022lastRelationshipId\022.\n\023related_" +
       "children_id\030\004 \003(\tR\021relatedChildrenId\022\024\n\005" +
       "count\030\005 \001(\005R\005count\022\'\n\017invert_relation\030\006 " +
       "\001(\010R\016invertRelation\"N\n\030ListRelationshipR" +
@@ -461,7 +461,7 @@ public final class ProfileProto {
       "\205\001\n\031DeleteRelationshipRequest\022+\n\002id\030\001 \001(" +
       "\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022;\n\tpa" +
       "rent_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,2" +
-      "0}\330\001\000R\010parentId\"P\n\032DeleteRelationshipRes" +
+      "0}\330\001\001R\010parentId\"P\n\032DeleteRelationshipRes" +
       "ponse\0222\n\004data\030\001 \001(\0132\036.profile.v1.Relatio" +
       "nshipObjectR\004data*$\n\013ContactType\022\t\n\005EMAI" +
       "L\020\000\022\n\n\006MSISDN\020\001*n\n\022CommunicationLevel\022\007\n" +

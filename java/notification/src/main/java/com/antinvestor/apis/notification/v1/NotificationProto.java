@@ -160,24 +160,24 @@ public final class NotificationProto {
       "nnotations.proto\032.protoc-gen-openapiv2/o" +
       "ptions/annotations.proto\"\330\001\n\010Language\022.\n" +
       "\002id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001" +
-      "\000R\002id\022\022\n\004code\030\002 \001(\tR\004code\022\022\n\004name\030\003 \001(\tR" +
+      "\001R\002id\022\022\n\004code\030\002 \001(\tR\004code\022\022\n\004name\030\003 \001(\tR" +
       "\004name\022:\n\005extra\030\004 \003(\0132$.notification.v1.L" +
       "anguage.ExtraEntryR\005extra\0328\n\nExtraEntry\022" +
       "\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:" +
       "\0028\001\"\241\001\n\014TemplateData\022.\n\002id\030\001 \001(\tB\036\272H\033r\026\020" +
-      "\003\030(2\020[0-9a-z_-]{3,20}\330\001\000R\002id\022\022\n\004type\030\002 \001" +
+      "\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\002id\022\022\n\004type\030\002 \001" +
       "(\tR\004type\022\026\n\006detail\030\003 \001(\tR\006detail\0225\n\010lang" +
       "uage\030\004 \001(\0132\031.notification.v1.LanguageR\010l" +
       "anguage\"\367\001\n\010Template\022.\n\002id\030\001 \001(\tB\036\272H\033r\026\020" +
-      "\003\030(2\020[0-9a-z_-]{3,20}\330\001\000R\002id\022\022\n\004name\030\002 \001" +
+      "\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\002id\022\022\n\004name\030\002 \001" +
       "(\tR\004name\0221\n\004data\030\004 \003(\0132\035.notification.v1" +
       ".TemplateDataR\004data\022:\n\005extra\030\005 \003(\0132$.not" +
       "ification.v1.Template.ExtraEntryR\005extra\032" +
       "8\n\nExtraEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value" +
       "\030\002 \001(\tR\005value:\0028\001\"\256\006\n\014Notification\022.\n\002id" +
-      "\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\000R\002" +
+      "\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\002" +
       "id\022;\n\tparent_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-" +
-      "z_-]{3,20}\330\001\000R\010parentId\022.\n\006source\030\003 \001(\0132" +
+      "z_-]{3,20}\330\001\001R\010parentId\022.\n\006source\030\003 \001(\0132" +
       "\026.common.v1.ContactLinkR\006source\0224\n\trecip" +
       "ient\030\004 \001(\0132\026.common.v1.ContactLinkR\treci" +
       "pient\022\022\n\004type\030\006 \001(\tR\004type\022\032\n\010template\030\007 " +
@@ -187,7 +187,7 @@ public final class NotificationProto {
       "\tR\010language\022\033\n\tout_bound\030\013 \001(\010R\010outBound" +
       "\022!\n\014auto_release\030\014 \001(\010R\013autoRelease\0229\n\010r" +
       "oute_id\030\r \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,2" +
-      "0}\330\001\000R\007routeId\0229\n\006status\030\016 \001(\0132\031.common." +
+      "0}\330\001\001R\007routeId\0229\n\006status\030\016 \001(\0132\031.common." +
       "v1.StatusResponseB\006\272H\003\330\001\003R\006status\022A\n\006ext" +
       "ras\030\017 \003(\0132).notification.v1.Notification" +
       ".ExtrasEntryR\006extras\0225\n\010priority\030\020 \001(\0162\031" +

@@ -1,6 +1,6 @@
 module github.com/antinvestor/apis/go/common
 
-go 1.24
+go 1.25
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.7-20250717185734-6c6e0d3c608e.1

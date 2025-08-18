@@ -337,19 +337,19 @@ message CreatePageResponse {
 
 message GetPageRequest {
   string page_id = 1 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   string partition_id = 2 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   string name = 3 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
   ];
@@ -391,14 +391,14 @@ message CreateAccessRequest {
     option (buf.validate.oneof).required = false;
 
     string partition_id = 1 [
-      (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
       (buf.validate.field).string.min_len = 3,
       (buf.validate.field).string.max_len = 40,
       (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
     ];
 
     string client_id = 3 [
-      (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
       (buf.validate.field).string.min_len = 3,
       (buf.validate.field).string.max_len = 40,
       (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
@@ -418,7 +418,7 @@ message CreateAccessResponse {
 
 message GetAccessRequest {
   string access_id = 1 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
@@ -428,14 +428,14 @@ message GetAccessRequest {
     option (buf.validate.oneof).required = false;
 
     string partition_id = 2 [
-      (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
       (buf.validate.field).string.min_len = 3,
       (buf.validate.field).string.max_len = 40,
       (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
     ];
 
     string client_id = 3 [
-      (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
       (buf.validate.field).string.min_len = 3,
       (buf.validate.field).string.max_len = 40,
       (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
@@ -443,7 +443,7 @@ message GetAccessRequest {
   }
 
   string profile_id = 4 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"

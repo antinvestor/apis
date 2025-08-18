@@ -59,13 +59,13 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 
 message Locality {
   string id = 1 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   string parent_id = 2 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
@@ -75,7 +75,7 @@ message Locality {
     (buf.validate.field).string.max_len = 60
   ];
   string description = 6 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 50
   ];
   map<string, string> extras = 7;
@@ -86,12 +86,12 @@ message Locality {
     option (buf.validate.oneof).required = true;
 
     string point = 3 [
-      (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
       (buf.validate.field).string.min_len = 10,
       (buf.validate.field).string.max_len = 100
     ];
     string boundary = 4 [
-      (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+      (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
       (buf.validate.field).string.min_len = 10,
       (buf.validate.field).string.max_len = 2048
     ];
@@ -123,7 +123,7 @@ message PropertyState {
     (buf.validate.field).string.max_len = 60
   ];
   string description = 6 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 50
   ];
   map<string, string> extras = 7;
@@ -132,7 +132,7 @@ message PropertyState {
 
 message PropertyType {
   string id = 1 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
@@ -142,7 +142,7 @@ message PropertyType {
     (buf.validate.field).string.max_len = 60
   ];
   string description = 3 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 50
   ];
   map<string, string> extra = 4;
@@ -158,7 +158,7 @@ message AddPropertyTypeResponse {
 
 message Subscription {
   string id = 1 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
@@ -168,12 +168,12 @@ message Subscription {
     (buf.validate.field).string.max_len = 40
   ];
   string profile_id = 3 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 50
   ];
   string role = 4 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 50
   ];
@@ -191,13 +191,13 @@ message AddSubscriptionResponse {
 
 message Property {
   string id = 1 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   string parent_id = 2 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
@@ -207,7 +207,7 @@ message Property {
     (buf.validate.field).string.max_len = 60
   ];
   string description = 4 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 50
   ];
   PropertyType property_type = 5;
@@ -215,7 +215,7 @@ message Property {
   google.protobuf.Timestamp started_at = 7 [(buf.validate.field).timestamp.lt_now = true];
   google.protobuf.Timestamp created_at = 8;
   map<string, string> extra = 9 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).map.values = {
       string: {min_len: 3}
     }
@@ -314,28 +314,28 @@ message UpdatePropertyRequest {
   common.v1.STATE state = 2;
   common.v1.STATUS status = 3;
   string name = 4 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 60
   ];
   string description = 5 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 60
   ];
   string guardian_id = 6 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   string locality_id = 7 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   map<string, string> extras = 8 [
-    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).map.values = {
       string: {min_len: 3}
     }

@@ -2743,7 +2743,7 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	"properties\x12C\n" +
 	"\x06extras\x18\a \x03(\v2+.profile.v1.SearchRosterRequest.ExtrasEntryR\x06extras\x12?\n" +
 	"\n" +
-	"profile_id\x18\b \x01(\tB \xbaH\x1d\xd8\x01\x00r\x18\x10\x03\x18\xfa\x012\x11[0-9a-z_-]{3,250}R\tprofileId\x1a9\n" +
+	"profile_id\x18\b \x01(\tB \xbaH\x1d\xd8\x01\x01r\x18\x10\x03\x18\xfa\x012\x11[0-9a-z_-]{3,250}R\tprofileId\x1a9\n" +
 	"\vExtrasEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"D\n" +
@@ -2769,7 +2769,7 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	"\x17ListRelationshipRequest\x12?\n" +
 	"\tpeer_name\x18\x01 \x01(\tB\"\xbaH\x1fr\x1d\x10\x03\x18(R\aContactR\aProfileR\x05GroupR\bpeerName\x124\n" +
 	"\apeer_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06peerId\x12P\n" +
-	"\x14last_relationship_id\x18\x03 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x00r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x12lastRelationshipId\x12.\n" +
+	"\x14last_relationship_id\x18\x03 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x12lastRelationshipId\x12.\n" +
 	"\x13related_children_id\x18\x04 \x03(\tR\x11relatedChildrenId\x12\x14\n" +
 	"\x05count\x18\x05 \x01(\x05R\x05count\x12'\n" +
 	"\x0finvert_relation\x18\x06 \x01(\bR\x0einvertRelation\"N\n" +
@@ -2792,7 +2792,7 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x01(\v2\x1e.profile.v1.RelationshipObjectR\x04data\"\x85\x01\n" +
 	"\x19DeleteRelationshipRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12;\n" +
-	"\tparent_id\x18\x02 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x00r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bparentId\"P\n" +
+	"\tparent_id\x18\x02 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bparentId\"P\n" +
 	"\x1aDeleteRelationshipResponse\x122\n" +
 	"\x04data\x18\x01 \x01(\v2\x1e.profile.v1.RelationshipObjectR\x04data*$\n" +
 	"\vContactType\x12\t\n" +
