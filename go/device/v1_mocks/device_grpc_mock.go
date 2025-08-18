@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	v1 "github.com/antinvestor/apis/go/device/v1"
+	devicev1 "github.com/antinvestor/apis/go/device/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -43,14 +43,14 @@ func (m *MockDeviceServiceClient) EXPECT() *MockDeviceServiceClientMockRecorder 
 }
 
 // AddKey mocks base method.
-func (m *MockDeviceServiceClient) AddKey(ctx context.Context, in *v1.AddKeyRequest, opts ...grpc.CallOption) (*v1.AddKeyResponse, error) {
+func (m *MockDeviceServiceClient) AddKey(ctx context.Context, in *devicev1.AddKeyRequest, opts ...grpc.CallOption) (*devicev1.AddKeyResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "AddKey", varargs...)
-	ret0, _ := ret[0].(*v1.AddKeyResponse)
+	ret0, _ := ret[0].(*devicev1.AddKeyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -63,14 +63,14 @@ func (mr *MockDeviceServiceClientMockRecorder) AddKey(ctx, in any, opts ...any) 
 }
 
 // Create mocks base method.
-func (m *MockDeviceServiceClient) Create(ctx context.Context, in *v1.CreateRequest, opts ...grpc.CallOption) (*v1.CreateResponse, error) {
+func (m *MockDeviceServiceClient) Create(ctx context.Context, in *devicev1.CreateRequest, opts ...grpc.CallOption) (*devicev1.CreateResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Create", varargs...)
-	ret0, _ := ret[0].(*v1.CreateResponse)
+	ret0, _ := ret[0].(*devicev1.CreateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -83,14 +83,14 @@ func (mr *MockDeviceServiceClientMockRecorder) Create(ctx, in any, opts ...any) 
 }
 
 // GetById mocks base method.
-func (m *MockDeviceServiceClient) GetById(ctx context.Context, in *v1.GetByIdRequest, opts ...grpc.CallOption) (*v1.GetByIdResponse, error) {
+func (m *MockDeviceServiceClient) GetById(ctx context.Context, in *devicev1.GetByIdRequest, opts ...grpc.CallOption) (*devicev1.GetByIdResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetById", varargs...)
-	ret0, _ := ret[0].(*v1.GetByIdResponse)
+	ret0, _ := ret[0].(*devicev1.GetByIdResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -103,14 +103,14 @@ func (mr *MockDeviceServiceClientMockRecorder) GetById(ctx, in any, opts ...any)
 }
 
 // GetBySessionId mocks base method.
-func (m *MockDeviceServiceClient) GetBySessionId(ctx context.Context, in *v1.GetBySessionIdRequest, opts ...grpc.CallOption) (*v1.GetBySessionIdResponse, error) {
+func (m *MockDeviceServiceClient) GetBySessionId(ctx context.Context, in *devicev1.GetBySessionIdRequest, opts ...grpc.CallOption) (*devicev1.GetBySessionIdResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetBySessionId", varargs...)
-	ret0, _ := ret[0].(*v1.GetBySessionIdResponse)
+	ret0, _ := ret[0].(*devicev1.GetBySessionIdResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -123,14 +123,14 @@ func (mr *MockDeviceServiceClientMockRecorder) GetBySessionId(ctx, in any, opts 
 }
 
 // Link mocks base method.
-func (m *MockDeviceServiceClient) Link(ctx context.Context, in *v1.LinkRequest, opts ...grpc.CallOption) (*v1.LinkResponse, error) {
+func (m *MockDeviceServiceClient) Link(ctx context.Context, in *devicev1.LinkRequest, opts ...grpc.CallOption) (*devicev1.LinkResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Link", varargs...)
-	ret0, _ := ret[0].(*v1.LinkResponse)
+	ret0, _ := ret[0].(*devicev1.LinkResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -143,14 +143,14 @@ func (mr *MockDeviceServiceClientMockRecorder) Link(ctx, in any, opts ...any) *g
 }
 
 // ListLogs mocks base method.
-func (m *MockDeviceServiceClient) ListLogs(ctx context.Context, in *v1.ListLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.ListLogsResponse], error) {
+func (m *MockDeviceServiceClient) ListLogs(ctx context.Context, in *devicev1.ListLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[devicev1.ListLogsResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListLogs", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.ListLogsResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[devicev1.ListLogsResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -163,14 +163,14 @@ func (mr *MockDeviceServiceClientMockRecorder) ListLogs(ctx, in any, opts ...any
 }
 
 // Log mocks base method.
-func (m *MockDeviceServiceClient) Log(ctx context.Context, in *v1.LogRequest, opts ...grpc.CallOption) (*v1.LogResponse, error) {
+func (m *MockDeviceServiceClient) Log(ctx context.Context, in *devicev1.LogRequest, opts ...grpc.CallOption) (*devicev1.LogResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Log", varargs...)
-	ret0, _ := ret[0].(*v1.LogResponse)
+	ret0, _ := ret[0].(*devicev1.LogResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -183,14 +183,14 @@ func (mr *MockDeviceServiceClientMockRecorder) Log(ctx, in any, opts ...any) *go
 }
 
 // Remove mocks base method.
-func (m *MockDeviceServiceClient) Remove(ctx context.Context, in *v1.RemoveRequest, opts ...grpc.CallOption) (*v1.RemoveResponse, error) {
+func (m *MockDeviceServiceClient) Remove(ctx context.Context, in *devicev1.RemoveRequest, opts ...grpc.CallOption) (*devicev1.RemoveResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Remove", varargs...)
-	ret0, _ := ret[0].(*v1.RemoveResponse)
+	ret0, _ := ret[0].(*devicev1.RemoveResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -203,14 +203,14 @@ func (mr *MockDeviceServiceClientMockRecorder) Remove(ctx, in any, opts ...any) 
 }
 
 // RemoveKey mocks base method.
-func (m *MockDeviceServiceClient) RemoveKey(ctx context.Context, in *v1.RemoveKeyRequest, opts ...grpc.CallOption) (*v1.RemoveKeyResponse, error) {
+func (m *MockDeviceServiceClient) RemoveKey(ctx context.Context, in *devicev1.RemoveKeyRequest, opts ...grpc.CallOption) (*devicev1.RemoveKeyResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "RemoveKey", varargs...)
-	ret0, _ := ret[0].(*v1.RemoveKeyResponse)
+	ret0, _ := ret[0].(*devicev1.RemoveKeyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -223,14 +223,14 @@ func (mr *MockDeviceServiceClientMockRecorder) RemoveKey(ctx, in any, opts ...an
 }
 
 // Search mocks base method.
-func (m *MockDeviceServiceClient) Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.SearchResponse], error) {
+func (m *MockDeviceServiceClient) Search(ctx context.Context, in *devicev1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[devicev1.SearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Search", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.SearchResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[devicev1.SearchResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -243,14 +243,14 @@ func (mr *MockDeviceServiceClientMockRecorder) Search(ctx, in any, opts ...any) 
 }
 
 // SearchKey mocks base method.
-func (m *MockDeviceServiceClient) SearchKey(ctx context.Context, in *v1.SearchKeyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.SearchKeyResponse], error) {
+func (m *MockDeviceServiceClient) SearchKey(ctx context.Context, in *devicev1.SearchKeyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[devicev1.SearchKeyResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchKey", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.SearchKeyResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[devicev1.SearchKeyResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -263,14 +263,14 @@ func (mr *MockDeviceServiceClientMockRecorder) SearchKey(ctx, in any, opts ...an
 }
 
 // Update mocks base method.
-func (m *MockDeviceServiceClient) Update(ctx context.Context, in *v1.UpdateRequest, opts ...grpc.CallOption) (*v1.UpdateResponse, error) {
+func (m *MockDeviceServiceClient) Update(ctx context.Context, in *devicev1.UpdateRequest, opts ...grpc.CallOption) (*devicev1.UpdateResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Update", varargs...)
-	ret0, _ := ret[0].(*v1.UpdateResponse)
+	ret0, _ := ret[0].(*devicev1.UpdateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -307,10 +307,10 @@ func (m *MockDeviceServiceServer) EXPECT() *MockDeviceServiceServerMockRecorder 
 }
 
 // AddKey mocks base method.
-func (m *MockDeviceServiceServer) AddKey(arg0 context.Context, arg1 *v1.AddKeyRequest) (*v1.AddKeyResponse, error) {
+func (m *MockDeviceServiceServer) AddKey(arg0 context.Context, arg1 *devicev1.AddKeyRequest) (*devicev1.AddKeyResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddKey", arg0, arg1)
-	ret0, _ := ret[0].(*v1.AddKeyResponse)
+	ret0, _ := ret[0].(*devicev1.AddKeyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -322,10 +322,10 @@ func (mr *MockDeviceServiceServerMockRecorder) AddKey(arg0, arg1 any) *gomock.Ca
 }
 
 // Create mocks base method.
-func (m *MockDeviceServiceServer) Create(arg0 context.Context, arg1 *v1.CreateRequest) (*v1.CreateResponse, error) {
+func (m *MockDeviceServiceServer) Create(arg0 context.Context, arg1 *devicev1.CreateRequest) (*devicev1.CreateResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", arg0, arg1)
-	ret0, _ := ret[0].(*v1.CreateResponse)
+	ret0, _ := ret[0].(*devicev1.CreateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -337,10 +337,10 @@ func (mr *MockDeviceServiceServerMockRecorder) Create(arg0, arg1 any) *gomock.Ca
 }
 
 // GetById mocks base method.
-func (m *MockDeviceServiceServer) GetById(arg0 context.Context, arg1 *v1.GetByIdRequest) (*v1.GetByIdResponse, error) {
+func (m *MockDeviceServiceServer) GetById(arg0 context.Context, arg1 *devicev1.GetByIdRequest) (*devicev1.GetByIdResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetById", arg0, arg1)
-	ret0, _ := ret[0].(*v1.GetByIdResponse)
+	ret0, _ := ret[0].(*devicev1.GetByIdResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -352,10 +352,10 @@ func (mr *MockDeviceServiceServerMockRecorder) GetById(arg0, arg1 any) *gomock.C
 }
 
 // GetBySessionId mocks base method.
-func (m *MockDeviceServiceServer) GetBySessionId(arg0 context.Context, arg1 *v1.GetBySessionIdRequest) (*v1.GetBySessionIdResponse, error) {
+func (m *MockDeviceServiceServer) GetBySessionId(arg0 context.Context, arg1 *devicev1.GetBySessionIdRequest) (*devicev1.GetBySessionIdResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetBySessionId", arg0, arg1)
-	ret0, _ := ret[0].(*v1.GetBySessionIdResponse)
+	ret0, _ := ret[0].(*devicev1.GetBySessionIdResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -367,10 +367,10 @@ func (mr *MockDeviceServiceServerMockRecorder) GetBySessionId(arg0, arg1 any) *g
 }
 
 // Link mocks base method.
-func (m *MockDeviceServiceServer) Link(arg0 context.Context, arg1 *v1.LinkRequest) (*v1.LinkResponse, error) {
+func (m *MockDeviceServiceServer) Link(arg0 context.Context, arg1 *devicev1.LinkRequest) (*devicev1.LinkResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Link", arg0, arg1)
-	ret0, _ := ret[0].(*v1.LinkResponse)
+	ret0, _ := ret[0].(*devicev1.LinkResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -382,7 +382,7 @@ func (mr *MockDeviceServiceServerMockRecorder) Link(arg0, arg1 any) *gomock.Call
 }
 
 // ListLogs mocks base method.
-func (m *MockDeviceServiceServer) ListLogs(arg0 *v1.ListLogsRequest, arg1 grpc.ServerStreamingServer[v1.ListLogsResponse]) error {
+func (m *MockDeviceServiceServer) ListLogs(arg0 *devicev1.ListLogsRequest, arg1 grpc.ServerStreamingServer[devicev1.ListLogsResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListLogs", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -396,10 +396,10 @@ func (mr *MockDeviceServiceServerMockRecorder) ListLogs(arg0, arg1 any) *gomock.
 }
 
 // Log mocks base method.
-func (m *MockDeviceServiceServer) Log(arg0 context.Context, arg1 *v1.LogRequest) (*v1.LogResponse, error) {
+func (m *MockDeviceServiceServer) Log(arg0 context.Context, arg1 *devicev1.LogRequest) (*devicev1.LogResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Log", arg0, arg1)
-	ret0, _ := ret[0].(*v1.LogResponse)
+	ret0, _ := ret[0].(*devicev1.LogResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -411,10 +411,10 @@ func (mr *MockDeviceServiceServerMockRecorder) Log(arg0, arg1 any) *gomock.Call 
 }
 
 // Remove mocks base method.
-func (m *MockDeviceServiceServer) Remove(arg0 context.Context, arg1 *v1.RemoveRequest) (*v1.RemoveResponse, error) {
+func (m *MockDeviceServiceServer) Remove(arg0 context.Context, arg1 *devicev1.RemoveRequest) (*devicev1.RemoveResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Remove", arg0, arg1)
-	ret0, _ := ret[0].(*v1.RemoveResponse)
+	ret0, _ := ret[0].(*devicev1.RemoveResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -426,10 +426,10 @@ func (mr *MockDeviceServiceServerMockRecorder) Remove(arg0, arg1 any) *gomock.Ca
 }
 
 // RemoveKey mocks base method.
-func (m *MockDeviceServiceServer) RemoveKey(arg0 context.Context, arg1 *v1.RemoveKeyRequest) (*v1.RemoveKeyResponse, error) {
+func (m *MockDeviceServiceServer) RemoveKey(arg0 context.Context, arg1 *devicev1.RemoveKeyRequest) (*devicev1.RemoveKeyResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RemoveKey", arg0, arg1)
-	ret0, _ := ret[0].(*v1.RemoveKeyResponse)
+	ret0, _ := ret[0].(*devicev1.RemoveKeyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -441,7 +441,7 @@ func (mr *MockDeviceServiceServerMockRecorder) RemoveKey(arg0, arg1 any) *gomock
 }
 
 // Search mocks base method.
-func (m *MockDeviceServiceServer) Search(arg0 *v1.SearchRequest, arg1 grpc.ServerStreamingServer[v1.SearchResponse]) error {
+func (m *MockDeviceServiceServer) Search(arg0 *devicev1.SearchRequest, arg1 grpc.ServerStreamingServer[devicev1.SearchResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -455,7 +455,7 @@ func (mr *MockDeviceServiceServerMockRecorder) Search(arg0, arg1 any) *gomock.Ca
 }
 
 // SearchKey mocks base method.
-func (m *MockDeviceServiceServer) SearchKey(arg0 *v1.SearchKeyRequest, arg1 grpc.ServerStreamingServer[v1.SearchKeyResponse]) error {
+func (m *MockDeviceServiceServer) SearchKey(arg0 *devicev1.SearchKeyRequest, arg1 grpc.ServerStreamingServer[devicev1.SearchKeyResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchKey", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -469,10 +469,10 @@ func (mr *MockDeviceServiceServerMockRecorder) SearchKey(arg0, arg1 any) *gomock
 }
 
 // Update mocks base method.
-func (m *MockDeviceServiceServer) Update(arg0 context.Context, arg1 *v1.UpdateRequest) (*v1.UpdateResponse, error) {
+func (m *MockDeviceServiceServer) Update(arg0 context.Context, arg1 *devicev1.UpdateRequest) (*devicev1.UpdateResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Update", arg0, arg1)
-	ret0, _ := ret[0].(*v1.UpdateResponse)
+	ret0, _ := ret[0].(*devicev1.UpdateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

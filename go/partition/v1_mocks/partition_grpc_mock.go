@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	v1 "github.com/antinvestor/apis/go/partition/v1"
+	partitionv1 "github.com/antinvestor/apis/go/partition/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -43,14 +43,14 @@ func (m *MockPartitionServiceClient) EXPECT() *MockPartitionServiceClientMockRec
 }
 
 // CreateAccess mocks base method.
-func (m *MockPartitionServiceClient) CreateAccess(ctx context.Context, in *v1.CreateAccessRequest, opts ...grpc.CallOption) (*v1.CreateAccessResponse, error) {
+func (m *MockPartitionServiceClient) CreateAccess(ctx context.Context, in *partitionv1.CreateAccessRequest, opts ...grpc.CallOption) (*partitionv1.CreateAccessResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CreateAccess", varargs...)
-	ret0, _ := ret[0].(*v1.CreateAccessResponse)
+	ret0, _ := ret[0].(*partitionv1.CreateAccessResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -63,14 +63,14 @@ func (mr *MockPartitionServiceClientMockRecorder) CreateAccess(ctx, in any, opts
 }
 
 // CreateAccessRole mocks base method.
-func (m *MockPartitionServiceClient) CreateAccessRole(ctx context.Context, in *v1.CreateAccessRoleRequest, opts ...grpc.CallOption) (*v1.CreateAccessRoleResponse, error) {
+func (m *MockPartitionServiceClient) CreateAccessRole(ctx context.Context, in *partitionv1.CreateAccessRoleRequest, opts ...grpc.CallOption) (*partitionv1.CreateAccessRoleResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CreateAccessRole", varargs...)
-	ret0, _ := ret[0].(*v1.CreateAccessRoleResponse)
+	ret0, _ := ret[0].(*partitionv1.CreateAccessRoleResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -83,14 +83,14 @@ func (mr *MockPartitionServiceClientMockRecorder) CreateAccessRole(ctx, in any, 
 }
 
 // CreatePage mocks base method.
-func (m *MockPartitionServiceClient) CreatePage(ctx context.Context, in *v1.CreatePageRequest, opts ...grpc.CallOption) (*v1.CreatePageResponse, error) {
+func (m *MockPartitionServiceClient) CreatePage(ctx context.Context, in *partitionv1.CreatePageRequest, opts ...grpc.CallOption) (*partitionv1.CreatePageResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CreatePage", varargs...)
-	ret0, _ := ret[0].(*v1.CreatePageResponse)
+	ret0, _ := ret[0].(*partitionv1.CreatePageResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -103,14 +103,14 @@ func (mr *MockPartitionServiceClientMockRecorder) CreatePage(ctx, in any, opts .
 }
 
 // CreatePartition mocks base method.
-func (m *MockPartitionServiceClient) CreatePartition(ctx context.Context, in *v1.CreatePartitionRequest, opts ...grpc.CallOption) (*v1.CreatePartitionResponse, error) {
+func (m *MockPartitionServiceClient) CreatePartition(ctx context.Context, in *partitionv1.CreatePartitionRequest, opts ...grpc.CallOption) (*partitionv1.CreatePartitionResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CreatePartition", varargs...)
-	ret0, _ := ret[0].(*v1.CreatePartitionResponse)
+	ret0, _ := ret[0].(*partitionv1.CreatePartitionResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -123,14 +123,14 @@ func (mr *MockPartitionServiceClientMockRecorder) CreatePartition(ctx, in any, o
 }
 
 // CreatePartitionRole mocks base method.
-func (m *MockPartitionServiceClient) CreatePartitionRole(ctx context.Context, in *v1.CreatePartitionRoleRequest, opts ...grpc.CallOption) (*v1.CreatePartitionRoleResponse, error) {
+func (m *MockPartitionServiceClient) CreatePartitionRole(ctx context.Context, in *partitionv1.CreatePartitionRoleRequest, opts ...grpc.CallOption) (*partitionv1.CreatePartitionRoleResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CreatePartitionRole", varargs...)
-	ret0, _ := ret[0].(*v1.CreatePartitionRoleResponse)
+	ret0, _ := ret[0].(*partitionv1.CreatePartitionRoleResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -143,14 +143,14 @@ func (mr *MockPartitionServiceClientMockRecorder) CreatePartitionRole(ctx, in an
 }
 
 // CreateTenant mocks base method.
-func (m *MockPartitionServiceClient) CreateTenant(ctx context.Context, in *v1.CreateTenantRequest, opts ...grpc.CallOption) (*v1.CreateTenantResponse, error) {
+func (m *MockPartitionServiceClient) CreateTenant(ctx context.Context, in *partitionv1.CreateTenantRequest, opts ...grpc.CallOption) (*partitionv1.CreateTenantResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CreateTenant", varargs...)
-	ret0, _ := ret[0].(*v1.CreateTenantResponse)
+	ret0, _ := ret[0].(*partitionv1.CreateTenantResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -163,14 +163,14 @@ func (mr *MockPartitionServiceClientMockRecorder) CreateTenant(ctx, in any, opts
 }
 
 // GetAccess mocks base method.
-func (m *MockPartitionServiceClient) GetAccess(ctx context.Context, in *v1.GetAccessRequest, opts ...grpc.CallOption) (*v1.GetAccessResponse, error) {
+func (m *MockPartitionServiceClient) GetAccess(ctx context.Context, in *partitionv1.GetAccessRequest, opts ...grpc.CallOption) (*partitionv1.GetAccessResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetAccess", varargs...)
-	ret0, _ := ret[0].(*v1.GetAccessResponse)
+	ret0, _ := ret[0].(*partitionv1.GetAccessResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -183,14 +183,14 @@ func (mr *MockPartitionServiceClientMockRecorder) GetAccess(ctx, in any, opts ..
 }
 
 // GetPage mocks base method.
-func (m *MockPartitionServiceClient) GetPage(ctx context.Context, in *v1.GetPageRequest, opts ...grpc.CallOption) (*v1.GetPageResponse, error) {
+func (m *MockPartitionServiceClient) GetPage(ctx context.Context, in *partitionv1.GetPageRequest, opts ...grpc.CallOption) (*partitionv1.GetPageResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetPage", varargs...)
-	ret0, _ := ret[0].(*v1.GetPageResponse)
+	ret0, _ := ret[0].(*partitionv1.GetPageResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -203,14 +203,14 @@ func (mr *MockPartitionServiceClientMockRecorder) GetPage(ctx, in any, opts ...a
 }
 
 // GetPartition mocks base method.
-func (m *MockPartitionServiceClient) GetPartition(ctx context.Context, in *v1.GetPartitionRequest, opts ...grpc.CallOption) (*v1.GetPartitionResponse, error) {
+func (m *MockPartitionServiceClient) GetPartition(ctx context.Context, in *partitionv1.GetPartitionRequest, opts ...grpc.CallOption) (*partitionv1.GetPartitionResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetPartition", varargs...)
-	ret0, _ := ret[0].(*v1.GetPartitionResponse)
+	ret0, _ := ret[0].(*partitionv1.GetPartitionResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -223,14 +223,14 @@ func (mr *MockPartitionServiceClientMockRecorder) GetPartition(ctx, in any, opts
 }
 
 // GetTenant mocks base method.
-func (m *MockPartitionServiceClient) GetTenant(ctx context.Context, in *v1.GetTenantRequest, opts ...grpc.CallOption) (*v1.GetTenantResponse, error) {
+func (m *MockPartitionServiceClient) GetTenant(ctx context.Context, in *partitionv1.GetTenantRequest, opts ...grpc.CallOption) (*partitionv1.GetTenantResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetTenant", varargs...)
-	ret0, _ := ret[0].(*v1.GetTenantResponse)
+	ret0, _ := ret[0].(*partitionv1.GetTenantResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -243,14 +243,14 @@ func (mr *MockPartitionServiceClientMockRecorder) GetTenant(ctx, in any, opts ..
 }
 
 // ListAccessRole mocks base method.
-func (m *MockPartitionServiceClient) ListAccessRole(ctx context.Context, in *v1.ListAccessRoleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.ListAccessRoleResponse], error) {
+func (m *MockPartitionServiceClient) ListAccessRole(ctx context.Context, in *partitionv1.ListAccessRoleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[partitionv1.ListAccessRoleResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListAccessRole", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.ListAccessRoleResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[partitionv1.ListAccessRoleResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -263,14 +263,14 @@ func (mr *MockPartitionServiceClientMockRecorder) ListAccessRole(ctx, in any, op
 }
 
 // ListPartition mocks base method.
-func (m *MockPartitionServiceClient) ListPartition(ctx context.Context, in *v1.ListPartitionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.ListPartitionResponse], error) {
+func (m *MockPartitionServiceClient) ListPartition(ctx context.Context, in *partitionv1.ListPartitionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[partitionv1.ListPartitionResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListPartition", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.ListPartitionResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[partitionv1.ListPartitionResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -283,14 +283,14 @@ func (mr *MockPartitionServiceClientMockRecorder) ListPartition(ctx, in any, opt
 }
 
 // ListPartitionRole mocks base method.
-func (m *MockPartitionServiceClient) ListPartitionRole(ctx context.Context, in *v1.ListPartitionRoleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.ListPartitionRoleResponse], error) {
+func (m *MockPartitionServiceClient) ListPartitionRole(ctx context.Context, in *partitionv1.ListPartitionRoleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[partitionv1.ListPartitionRoleResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListPartitionRole", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.ListPartitionRoleResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[partitionv1.ListPartitionRoleResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -303,14 +303,14 @@ func (mr *MockPartitionServiceClientMockRecorder) ListPartitionRole(ctx, in any,
 }
 
 // ListTenant mocks base method.
-func (m *MockPartitionServiceClient) ListTenant(ctx context.Context, in *v1.ListTenantRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.ListTenantResponse], error) {
+func (m *MockPartitionServiceClient) ListTenant(ctx context.Context, in *partitionv1.ListTenantRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[partitionv1.ListTenantResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListTenant", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.ListTenantResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[partitionv1.ListTenantResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -323,14 +323,14 @@ func (mr *MockPartitionServiceClientMockRecorder) ListTenant(ctx, in any, opts .
 }
 
 // RemoveAccess mocks base method.
-func (m *MockPartitionServiceClient) RemoveAccess(ctx context.Context, in *v1.RemoveAccessRequest, opts ...grpc.CallOption) (*v1.RemoveAccessResponse, error) {
+func (m *MockPartitionServiceClient) RemoveAccess(ctx context.Context, in *partitionv1.RemoveAccessRequest, opts ...grpc.CallOption) (*partitionv1.RemoveAccessResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "RemoveAccess", varargs...)
-	ret0, _ := ret[0].(*v1.RemoveAccessResponse)
+	ret0, _ := ret[0].(*partitionv1.RemoveAccessResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -343,14 +343,14 @@ func (mr *MockPartitionServiceClientMockRecorder) RemoveAccess(ctx, in any, opts
 }
 
 // RemoveAccessRole mocks base method.
-func (m *MockPartitionServiceClient) RemoveAccessRole(ctx context.Context, in *v1.RemoveAccessRoleRequest, opts ...grpc.CallOption) (*v1.RemoveAccessRoleResponse, error) {
+func (m *MockPartitionServiceClient) RemoveAccessRole(ctx context.Context, in *partitionv1.RemoveAccessRoleRequest, opts ...grpc.CallOption) (*partitionv1.RemoveAccessRoleResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "RemoveAccessRole", varargs...)
-	ret0, _ := ret[0].(*v1.RemoveAccessRoleResponse)
+	ret0, _ := ret[0].(*partitionv1.RemoveAccessRoleResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -363,14 +363,14 @@ func (mr *MockPartitionServiceClientMockRecorder) RemoveAccessRole(ctx, in any, 
 }
 
 // RemovePage mocks base method.
-func (m *MockPartitionServiceClient) RemovePage(ctx context.Context, in *v1.RemovePageRequest, opts ...grpc.CallOption) (*v1.RemovePageResponse, error) {
+func (m *MockPartitionServiceClient) RemovePage(ctx context.Context, in *partitionv1.RemovePageRequest, opts ...grpc.CallOption) (*partitionv1.RemovePageResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "RemovePage", varargs...)
-	ret0, _ := ret[0].(*v1.RemovePageResponse)
+	ret0, _ := ret[0].(*partitionv1.RemovePageResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -383,14 +383,14 @@ func (mr *MockPartitionServiceClientMockRecorder) RemovePage(ctx, in any, opts .
 }
 
 // RemovePartitionRole mocks base method.
-func (m *MockPartitionServiceClient) RemovePartitionRole(ctx context.Context, in *v1.RemovePartitionRoleRequest, opts ...grpc.CallOption) (*v1.RemovePartitionRoleResponse, error) {
+func (m *MockPartitionServiceClient) RemovePartitionRole(ctx context.Context, in *partitionv1.RemovePartitionRoleRequest, opts ...grpc.CallOption) (*partitionv1.RemovePartitionRoleResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "RemovePartitionRole", varargs...)
-	ret0, _ := ret[0].(*v1.RemovePartitionRoleResponse)
+	ret0, _ := ret[0].(*partitionv1.RemovePartitionRoleResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -403,14 +403,14 @@ func (mr *MockPartitionServiceClientMockRecorder) RemovePartitionRole(ctx, in an
 }
 
 // UpdatePartition mocks base method.
-func (m *MockPartitionServiceClient) UpdatePartition(ctx context.Context, in *v1.UpdatePartitionRequest, opts ...grpc.CallOption) (*v1.UpdatePartitionResponse, error) {
+func (m *MockPartitionServiceClient) UpdatePartition(ctx context.Context, in *partitionv1.UpdatePartitionRequest, opts ...grpc.CallOption) (*partitionv1.UpdatePartitionResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "UpdatePartition", varargs...)
-	ret0, _ := ret[0].(*v1.UpdatePartitionResponse)
+	ret0, _ := ret[0].(*partitionv1.UpdatePartitionResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -447,10 +447,10 @@ func (m *MockPartitionServiceServer) EXPECT() *MockPartitionServiceServerMockRec
 }
 
 // CreateAccess mocks base method.
-func (m *MockPartitionServiceServer) CreateAccess(arg0 context.Context, arg1 *v1.CreateAccessRequest) (*v1.CreateAccessResponse, error) {
+func (m *MockPartitionServiceServer) CreateAccess(arg0 context.Context, arg1 *partitionv1.CreateAccessRequest) (*partitionv1.CreateAccessResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateAccess", arg0, arg1)
-	ret0, _ := ret[0].(*v1.CreateAccessResponse)
+	ret0, _ := ret[0].(*partitionv1.CreateAccessResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -462,10 +462,10 @@ func (mr *MockPartitionServiceServerMockRecorder) CreateAccess(arg0, arg1 any) *
 }
 
 // CreateAccessRole mocks base method.
-func (m *MockPartitionServiceServer) CreateAccessRole(arg0 context.Context, arg1 *v1.CreateAccessRoleRequest) (*v1.CreateAccessRoleResponse, error) {
+func (m *MockPartitionServiceServer) CreateAccessRole(arg0 context.Context, arg1 *partitionv1.CreateAccessRoleRequest) (*partitionv1.CreateAccessRoleResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateAccessRole", arg0, arg1)
-	ret0, _ := ret[0].(*v1.CreateAccessRoleResponse)
+	ret0, _ := ret[0].(*partitionv1.CreateAccessRoleResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -477,10 +477,10 @@ func (mr *MockPartitionServiceServerMockRecorder) CreateAccessRole(arg0, arg1 an
 }
 
 // CreatePage mocks base method.
-func (m *MockPartitionServiceServer) CreatePage(arg0 context.Context, arg1 *v1.CreatePageRequest) (*v1.CreatePageResponse, error) {
+func (m *MockPartitionServiceServer) CreatePage(arg0 context.Context, arg1 *partitionv1.CreatePageRequest) (*partitionv1.CreatePageResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreatePage", arg0, arg1)
-	ret0, _ := ret[0].(*v1.CreatePageResponse)
+	ret0, _ := ret[0].(*partitionv1.CreatePageResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -492,10 +492,10 @@ func (mr *MockPartitionServiceServerMockRecorder) CreatePage(arg0, arg1 any) *go
 }
 
 // CreatePartition mocks base method.
-func (m *MockPartitionServiceServer) CreatePartition(arg0 context.Context, arg1 *v1.CreatePartitionRequest) (*v1.CreatePartitionResponse, error) {
+func (m *MockPartitionServiceServer) CreatePartition(arg0 context.Context, arg1 *partitionv1.CreatePartitionRequest) (*partitionv1.CreatePartitionResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreatePartition", arg0, arg1)
-	ret0, _ := ret[0].(*v1.CreatePartitionResponse)
+	ret0, _ := ret[0].(*partitionv1.CreatePartitionResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -507,10 +507,10 @@ func (mr *MockPartitionServiceServerMockRecorder) CreatePartition(arg0, arg1 any
 }
 
 // CreatePartitionRole mocks base method.
-func (m *MockPartitionServiceServer) CreatePartitionRole(arg0 context.Context, arg1 *v1.CreatePartitionRoleRequest) (*v1.CreatePartitionRoleResponse, error) {
+func (m *MockPartitionServiceServer) CreatePartitionRole(arg0 context.Context, arg1 *partitionv1.CreatePartitionRoleRequest) (*partitionv1.CreatePartitionRoleResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreatePartitionRole", arg0, arg1)
-	ret0, _ := ret[0].(*v1.CreatePartitionRoleResponse)
+	ret0, _ := ret[0].(*partitionv1.CreatePartitionRoleResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -522,10 +522,10 @@ func (mr *MockPartitionServiceServerMockRecorder) CreatePartitionRole(arg0, arg1
 }
 
 // CreateTenant mocks base method.
-func (m *MockPartitionServiceServer) CreateTenant(arg0 context.Context, arg1 *v1.CreateTenantRequest) (*v1.CreateTenantResponse, error) {
+func (m *MockPartitionServiceServer) CreateTenant(arg0 context.Context, arg1 *partitionv1.CreateTenantRequest) (*partitionv1.CreateTenantResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateTenant", arg0, arg1)
-	ret0, _ := ret[0].(*v1.CreateTenantResponse)
+	ret0, _ := ret[0].(*partitionv1.CreateTenantResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -537,10 +537,10 @@ func (mr *MockPartitionServiceServerMockRecorder) CreateTenant(arg0, arg1 any) *
 }
 
 // GetAccess mocks base method.
-func (m *MockPartitionServiceServer) GetAccess(arg0 context.Context, arg1 *v1.GetAccessRequest) (*v1.GetAccessResponse, error) {
+func (m *MockPartitionServiceServer) GetAccess(arg0 context.Context, arg1 *partitionv1.GetAccessRequest) (*partitionv1.GetAccessResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAccess", arg0, arg1)
-	ret0, _ := ret[0].(*v1.GetAccessResponse)
+	ret0, _ := ret[0].(*partitionv1.GetAccessResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -552,10 +552,10 @@ func (mr *MockPartitionServiceServerMockRecorder) GetAccess(arg0, arg1 any) *gom
 }
 
 // GetPage mocks base method.
-func (m *MockPartitionServiceServer) GetPage(arg0 context.Context, arg1 *v1.GetPageRequest) (*v1.GetPageResponse, error) {
+func (m *MockPartitionServiceServer) GetPage(arg0 context.Context, arg1 *partitionv1.GetPageRequest) (*partitionv1.GetPageResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetPage", arg0, arg1)
-	ret0, _ := ret[0].(*v1.GetPageResponse)
+	ret0, _ := ret[0].(*partitionv1.GetPageResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -567,10 +567,10 @@ func (mr *MockPartitionServiceServerMockRecorder) GetPage(arg0, arg1 any) *gomoc
 }
 
 // GetPartition mocks base method.
-func (m *MockPartitionServiceServer) GetPartition(arg0 context.Context, arg1 *v1.GetPartitionRequest) (*v1.GetPartitionResponse, error) {
+func (m *MockPartitionServiceServer) GetPartition(arg0 context.Context, arg1 *partitionv1.GetPartitionRequest) (*partitionv1.GetPartitionResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetPartition", arg0, arg1)
-	ret0, _ := ret[0].(*v1.GetPartitionResponse)
+	ret0, _ := ret[0].(*partitionv1.GetPartitionResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -582,10 +582,10 @@ func (mr *MockPartitionServiceServerMockRecorder) GetPartition(arg0, arg1 any) *
 }
 
 // GetTenant mocks base method.
-func (m *MockPartitionServiceServer) GetTenant(arg0 context.Context, arg1 *v1.GetTenantRequest) (*v1.GetTenantResponse, error) {
+func (m *MockPartitionServiceServer) GetTenant(arg0 context.Context, arg1 *partitionv1.GetTenantRequest) (*partitionv1.GetTenantResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTenant", arg0, arg1)
-	ret0, _ := ret[0].(*v1.GetTenantResponse)
+	ret0, _ := ret[0].(*partitionv1.GetTenantResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -597,7 +597,7 @@ func (mr *MockPartitionServiceServerMockRecorder) GetTenant(arg0, arg1 any) *gom
 }
 
 // ListAccessRole mocks base method.
-func (m *MockPartitionServiceServer) ListAccessRole(arg0 *v1.ListAccessRoleRequest, arg1 grpc.ServerStreamingServer[v1.ListAccessRoleResponse]) error {
+func (m *MockPartitionServiceServer) ListAccessRole(arg0 *partitionv1.ListAccessRoleRequest, arg1 grpc.ServerStreamingServer[partitionv1.ListAccessRoleResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListAccessRole", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -611,7 +611,7 @@ func (mr *MockPartitionServiceServerMockRecorder) ListAccessRole(arg0, arg1 any)
 }
 
 // ListPartition mocks base method.
-func (m *MockPartitionServiceServer) ListPartition(arg0 *v1.ListPartitionRequest, arg1 grpc.ServerStreamingServer[v1.ListPartitionResponse]) error {
+func (m *MockPartitionServiceServer) ListPartition(arg0 *partitionv1.ListPartitionRequest, arg1 grpc.ServerStreamingServer[partitionv1.ListPartitionResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListPartition", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -625,7 +625,7 @@ func (mr *MockPartitionServiceServerMockRecorder) ListPartition(arg0, arg1 any) 
 }
 
 // ListPartitionRole mocks base method.
-func (m *MockPartitionServiceServer) ListPartitionRole(arg0 *v1.ListPartitionRoleRequest, arg1 grpc.ServerStreamingServer[v1.ListPartitionRoleResponse]) error {
+func (m *MockPartitionServiceServer) ListPartitionRole(arg0 *partitionv1.ListPartitionRoleRequest, arg1 grpc.ServerStreamingServer[partitionv1.ListPartitionRoleResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListPartitionRole", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -639,7 +639,7 @@ func (mr *MockPartitionServiceServerMockRecorder) ListPartitionRole(arg0, arg1 a
 }
 
 // ListTenant mocks base method.
-func (m *MockPartitionServiceServer) ListTenant(arg0 *v1.ListTenantRequest, arg1 grpc.ServerStreamingServer[v1.ListTenantResponse]) error {
+func (m *MockPartitionServiceServer) ListTenant(arg0 *partitionv1.ListTenantRequest, arg1 grpc.ServerStreamingServer[partitionv1.ListTenantResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListTenant", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -653,10 +653,10 @@ func (mr *MockPartitionServiceServerMockRecorder) ListTenant(arg0, arg1 any) *go
 }
 
 // RemoveAccess mocks base method.
-func (m *MockPartitionServiceServer) RemoveAccess(arg0 context.Context, arg1 *v1.RemoveAccessRequest) (*v1.RemoveAccessResponse, error) {
+func (m *MockPartitionServiceServer) RemoveAccess(arg0 context.Context, arg1 *partitionv1.RemoveAccessRequest) (*partitionv1.RemoveAccessResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RemoveAccess", arg0, arg1)
-	ret0, _ := ret[0].(*v1.RemoveAccessResponse)
+	ret0, _ := ret[0].(*partitionv1.RemoveAccessResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -668,10 +668,10 @@ func (mr *MockPartitionServiceServerMockRecorder) RemoveAccess(arg0, arg1 any) *
 }
 
 // RemoveAccessRole mocks base method.
-func (m *MockPartitionServiceServer) RemoveAccessRole(arg0 context.Context, arg1 *v1.RemoveAccessRoleRequest) (*v1.RemoveAccessRoleResponse, error) {
+func (m *MockPartitionServiceServer) RemoveAccessRole(arg0 context.Context, arg1 *partitionv1.RemoveAccessRoleRequest) (*partitionv1.RemoveAccessRoleResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RemoveAccessRole", arg0, arg1)
-	ret0, _ := ret[0].(*v1.RemoveAccessRoleResponse)
+	ret0, _ := ret[0].(*partitionv1.RemoveAccessRoleResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -683,10 +683,10 @@ func (mr *MockPartitionServiceServerMockRecorder) RemoveAccessRole(arg0, arg1 an
 }
 
 // RemovePage mocks base method.
-func (m *MockPartitionServiceServer) RemovePage(arg0 context.Context, arg1 *v1.RemovePageRequest) (*v1.RemovePageResponse, error) {
+func (m *MockPartitionServiceServer) RemovePage(arg0 context.Context, arg1 *partitionv1.RemovePageRequest) (*partitionv1.RemovePageResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RemovePage", arg0, arg1)
-	ret0, _ := ret[0].(*v1.RemovePageResponse)
+	ret0, _ := ret[0].(*partitionv1.RemovePageResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -698,10 +698,10 @@ func (mr *MockPartitionServiceServerMockRecorder) RemovePage(arg0, arg1 any) *go
 }
 
 // RemovePartitionRole mocks base method.
-func (m *MockPartitionServiceServer) RemovePartitionRole(arg0 context.Context, arg1 *v1.RemovePartitionRoleRequest) (*v1.RemovePartitionRoleResponse, error) {
+func (m *MockPartitionServiceServer) RemovePartitionRole(arg0 context.Context, arg1 *partitionv1.RemovePartitionRoleRequest) (*partitionv1.RemovePartitionRoleResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RemovePartitionRole", arg0, arg1)
-	ret0, _ := ret[0].(*v1.RemovePartitionRoleResponse)
+	ret0, _ := ret[0].(*partitionv1.RemovePartitionRoleResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -713,10 +713,10 @@ func (mr *MockPartitionServiceServerMockRecorder) RemovePartitionRole(arg0, arg1
 }
 
 // UpdatePartition mocks base method.
-func (m *MockPartitionServiceServer) UpdatePartition(arg0 context.Context, arg1 *v1.UpdatePartitionRequest) (*v1.UpdatePartitionResponse, error) {
+func (m *MockPartitionServiceServer) UpdatePartition(arg0 context.Context, arg1 *partitionv1.UpdatePartitionRequest) (*partitionv1.UpdatePartitionResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdatePartition", arg0, arg1)
-	ret0, _ := ret[0].(*v1.UpdatePartitionResponse)
+	ret0, _ := ret[0].(*partitionv1.UpdatePartitionResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

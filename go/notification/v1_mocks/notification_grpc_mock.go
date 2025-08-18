@@ -13,8 +13,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	v1 "github.com/antinvestor/apis/go/common/v1"
-	v10 "github.com/antinvestor/apis/go/notification/v1"
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
+	notificationv1 "github.com/antinvestor/apis/go/notification/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -44,14 +44,14 @@ func (m *MockNotificationServiceClient) EXPECT() *MockNotificationServiceClientM
 }
 
 // Receive mocks base method.
-func (m *MockNotificationServiceClient) Receive(ctx context.Context, in *v10.ReceiveRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.ReceiveResponse], error) {
+func (m *MockNotificationServiceClient) Receive(ctx context.Context, in *notificationv1.ReceiveRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[notificationv1.ReceiveResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Receive", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.ReceiveResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[notificationv1.ReceiveResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -64,14 +64,14 @@ func (mr *MockNotificationServiceClientMockRecorder) Receive(ctx, in any, opts .
 }
 
 // Release mocks base method.
-func (m *MockNotificationServiceClient) Release(ctx context.Context, in *v10.ReleaseRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.ReleaseResponse], error) {
+func (m *MockNotificationServiceClient) Release(ctx context.Context, in *notificationv1.ReleaseRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[notificationv1.ReleaseResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Release", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.ReleaseResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[notificationv1.ReleaseResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -84,14 +84,14 @@ func (mr *MockNotificationServiceClientMockRecorder) Release(ctx, in any, opts .
 }
 
 // Search mocks base method.
-func (m *MockNotificationServiceClient) Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.SearchResponse], error) {
+func (m *MockNotificationServiceClient) Search(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[notificationv1.SearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Search", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.SearchResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[notificationv1.SearchResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -104,14 +104,14 @@ func (mr *MockNotificationServiceClientMockRecorder) Search(ctx, in any, opts ..
 }
 
 // Send mocks base method.
-func (m *MockNotificationServiceClient) Send(ctx context.Context, in *v10.SendRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.SendResponse], error) {
+func (m *MockNotificationServiceClient) Send(ctx context.Context, in *notificationv1.SendRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[notificationv1.SendResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Send", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.SendResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[notificationv1.SendResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -124,14 +124,14 @@ func (mr *MockNotificationServiceClientMockRecorder) Send(ctx, in any, opts ...a
 }
 
 // Status mocks base method.
-func (m *MockNotificationServiceClient) Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error) {
+func (m *MockNotificationServiceClient) Status(ctx context.Context, in *commonv1.StatusRequest, opts ...grpc.CallOption) (*commonv1.StatusResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Status", varargs...)
-	ret0, _ := ret[0].(*v1.StatusResponse)
+	ret0, _ := ret[0].(*commonv1.StatusResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -144,14 +144,14 @@ func (mr *MockNotificationServiceClientMockRecorder) Status(ctx, in any, opts ..
 }
 
 // StatusUpdate mocks base method.
-func (m *MockNotificationServiceClient) StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error) {
+func (m *MockNotificationServiceClient) StatusUpdate(ctx context.Context, in *commonv1.StatusUpdateRequest, opts ...grpc.CallOption) (*commonv1.StatusUpdateResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "StatusUpdate", varargs...)
-	ret0, _ := ret[0].(*v1.StatusUpdateResponse)
+	ret0, _ := ret[0].(*commonv1.StatusUpdateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -164,14 +164,14 @@ func (mr *MockNotificationServiceClientMockRecorder) StatusUpdate(ctx, in any, o
 }
 
 // TemplateSave mocks base method.
-func (m *MockNotificationServiceClient) TemplateSave(ctx context.Context, in *v10.TemplateSaveRequest, opts ...grpc.CallOption) (*v10.TemplateSaveResponse, error) {
+func (m *MockNotificationServiceClient) TemplateSave(ctx context.Context, in *notificationv1.TemplateSaveRequest, opts ...grpc.CallOption) (*notificationv1.TemplateSaveResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "TemplateSave", varargs...)
-	ret0, _ := ret[0].(*v10.TemplateSaveResponse)
+	ret0, _ := ret[0].(*notificationv1.TemplateSaveResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -184,14 +184,14 @@ func (mr *MockNotificationServiceClientMockRecorder) TemplateSave(ctx, in any, o
 }
 
 // TemplateSearch mocks base method.
-func (m *MockNotificationServiceClient) TemplateSearch(ctx context.Context, in *v10.TemplateSearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.TemplateSearchResponse], error) {
+func (m *MockNotificationServiceClient) TemplateSearch(ctx context.Context, in *notificationv1.TemplateSearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[notificationv1.TemplateSearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "TemplateSearch", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.TemplateSearchResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[notificationv1.TemplateSearchResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -228,7 +228,7 @@ func (m *MockNotificationServiceServer) EXPECT() *MockNotificationServiceServerM
 }
 
 // Receive mocks base method.
-func (m *MockNotificationServiceServer) Receive(arg0 *v10.ReceiveRequest, arg1 grpc.ServerStreamingServer[v10.ReceiveResponse]) error {
+func (m *MockNotificationServiceServer) Receive(arg0 *notificationv1.ReceiveRequest, arg1 grpc.ServerStreamingServer[notificationv1.ReceiveResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Receive", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -242,7 +242,7 @@ func (mr *MockNotificationServiceServerMockRecorder) Receive(arg0, arg1 any) *go
 }
 
 // Release mocks base method.
-func (m *MockNotificationServiceServer) Release(arg0 *v10.ReleaseRequest, arg1 grpc.ServerStreamingServer[v10.ReleaseResponse]) error {
+func (m *MockNotificationServiceServer) Release(arg0 *notificationv1.ReleaseRequest, arg1 grpc.ServerStreamingServer[notificationv1.ReleaseResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Release", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -256,7 +256,7 @@ func (mr *MockNotificationServiceServerMockRecorder) Release(arg0, arg1 any) *go
 }
 
 // Search mocks base method.
-func (m *MockNotificationServiceServer) Search(arg0 *v1.SearchRequest, arg1 grpc.ServerStreamingServer[v10.SearchResponse]) error {
+func (m *MockNotificationServiceServer) Search(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[notificationv1.SearchResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -270,7 +270,7 @@ func (mr *MockNotificationServiceServerMockRecorder) Search(arg0, arg1 any) *gom
 }
 
 // Send mocks base method.
-func (m *MockNotificationServiceServer) Send(arg0 *v10.SendRequest, arg1 grpc.ServerStreamingServer[v10.SendResponse]) error {
+func (m *MockNotificationServiceServer) Send(arg0 *notificationv1.SendRequest, arg1 grpc.ServerStreamingServer[notificationv1.SendResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Send", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -284,10 +284,10 @@ func (mr *MockNotificationServiceServerMockRecorder) Send(arg0, arg1 any) *gomoc
 }
 
 // Status mocks base method.
-func (m *MockNotificationServiceServer) Status(arg0 context.Context, arg1 *v1.StatusRequest) (*v1.StatusResponse, error) {
+func (m *MockNotificationServiceServer) Status(arg0 context.Context, arg1 *commonv1.StatusRequest) (*commonv1.StatusResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Status", arg0, arg1)
-	ret0, _ := ret[0].(*v1.StatusResponse)
+	ret0, _ := ret[0].(*commonv1.StatusResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -299,10 +299,10 @@ func (mr *MockNotificationServiceServerMockRecorder) Status(arg0, arg1 any) *gom
 }
 
 // StatusUpdate mocks base method.
-func (m *MockNotificationServiceServer) StatusUpdate(arg0 context.Context, arg1 *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error) {
+func (m *MockNotificationServiceServer) StatusUpdate(arg0 context.Context, arg1 *commonv1.StatusUpdateRequest) (*commonv1.StatusUpdateResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "StatusUpdate", arg0, arg1)
-	ret0, _ := ret[0].(*v1.StatusUpdateResponse)
+	ret0, _ := ret[0].(*commonv1.StatusUpdateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -314,10 +314,10 @@ func (mr *MockNotificationServiceServerMockRecorder) StatusUpdate(arg0, arg1 any
 }
 
 // TemplateSave mocks base method.
-func (m *MockNotificationServiceServer) TemplateSave(arg0 context.Context, arg1 *v10.TemplateSaveRequest) (*v10.TemplateSaveResponse, error) {
+func (m *MockNotificationServiceServer) TemplateSave(arg0 context.Context, arg1 *notificationv1.TemplateSaveRequest) (*notificationv1.TemplateSaveResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "TemplateSave", arg0, arg1)
-	ret0, _ := ret[0].(*v10.TemplateSaveResponse)
+	ret0, _ := ret[0].(*notificationv1.TemplateSaveResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -329,7 +329,7 @@ func (mr *MockNotificationServiceServerMockRecorder) TemplateSave(arg0, arg1 any
 }
 
 // TemplateSearch mocks base method.
-func (m *MockNotificationServiceServer) TemplateSearch(arg0 *v10.TemplateSearchRequest, arg1 grpc.ServerStreamingServer[v10.TemplateSearchResponse]) error {
+func (m *MockNotificationServiceServer) TemplateSearch(arg0 *notificationv1.TemplateSearchRequest, arg1 grpc.ServerStreamingServer[notificationv1.TemplateSearchResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "TemplateSearch", arg0, arg1)
 	ret0, _ := ret[0].(error)

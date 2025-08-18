@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	v1 "github.com/antinvestor/apis/go/property/v1"
+	propertyv1 "github.com/antinvestor/apis/go/property/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -43,14 +43,14 @@ func (m *MockPropertyServiceClient) EXPECT() *MockPropertyServiceClientMockRecor
 }
 
 // AddLocality mocks base method.
-func (m *MockPropertyServiceClient) AddLocality(ctx context.Context, in *v1.AddLocalityRequest, opts ...grpc.CallOption) (*v1.AddLocalityResponse, error) {
+func (m *MockPropertyServiceClient) AddLocality(ctx context.Context, in *propertyv1.AddLocalityRequest, opts ...grpc.CallOption) (*propertyv1.AddLocalityResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "AddLocality", varargs...)
-	ret0, _ := ret[0].(*v1.AddLocalityResponse)
+	ret0, _ := ret[0].(*propertyv1.AddLocalityResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -63,14 +63,14 @@ func (mr *MockPropertyServiceClientMockRecorder) AddLocality(ctx, in any, opts .
 }
 
 // AddPropertyType mocks base method.
-func (m *MockPropertyServiceClient) AddPropertyType(ctx context.Context, in *v1.AddPropertyTypeRequest, opts ...grpc.CallOption) (*v1.AddPropertyTypeResponse, error) {
+func (m *MockPropertyServiceClient) AddPropertyType(ctx context.Context, in *propertyv1.AddPropertyTypeRequest, opts ...grpc.CallOption) (*propertyv1.AddPropertyTypeResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "AddPropertyType", varargs...)
-	ret0, _ := ret[0].(*v1.AddPropertyTypeResponse)
+	ret0, _ := ret[0].(*propertyv1.AddPropertyTypeResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -83,14 +83,14 @@ func (mr *MockPropertyServiceClientMockRecorder) AddPropertyType(ctx, in any, op
 }
 
 // AddSubscription mocks base method.
-func (m *MockPropertyServiceClient) AddSubscription(ctx context.Context, in *v1.AddSubscriptionRequest, opts ...grpc.CallOption) (*v1.AddSubscriptionResponse, error) {
+func (m *MockPropertyServiceClient) AddSubscription(ctx context.Context, in *propertyv1.AddSubscriptionRequest, opts ...grpc.CallOption) (*propertyv1.AddSubscriptionResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "AddSubscription", varargs...)
-	ret0, _ := ret[0].(*v1.AddSubscriptionResponse)
+	ret0, _ := ret[0].(*propertyv1.AddSubscriptionResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -103,14 +103,14 @@ func (mr *MockPropertyServiceClientMockRecorder) AddSubscription(ctx, in any, op
 }
 
 // CreateProperty mocks base method.
-func (m *MockPropertyServiceClient) CreateProperty(ctx context.Context, in *v1.CreatePropertyRequest, opts ...grpc.CallOption) (*v1.CreatePropertyResponse, error) {
+func (m *MockPropertyServiceClient) CreateProperty(ctx context.Context, in *propertyv1.CreatePropertyRequest, opts ...grpc.CallOption) (*propertyv1.CreatePropertyResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CreateProperty", varargs...)
-	ret0, _ := ret[0].(*v1.CreatePropertyResponse)
+	ret0, _ := ret[0].(*propertyv1.CreatePropertyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -123,14 +123,14 @@ func (mr *MockPropertyServiceClientMockRecorder) CreateProperty(ctx, in any, opt
 }
 
 // DeleteLocality mocks base method.
-func (m *MockPropertyServiceClient) DeleteLocality(ctx context.Context, in *v1.DeleteLocalityRequest, opts ...grpc.CallOption) (*v1.DeleteLocalityResponse, error) {
+func (m *MockPropertyServiceClient) DeleteLocality(ctx context.Context, in *propertyv1.DeleteLocalityRequest, opts ...grpc.CallOption) (*propertyv1.DeleteLocalityResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "DeleteLocality", varargs...)
-	ret0, _ := ret[0].(*v1.DeleteLocalityResponse)
+	ret0, _ := ret[0].(*propertyv1.DeleteLocalityResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -143,14 +143,14 @@ func (mr *MockPropertyServiceClientMockRecorder) DeleteLocality(ctx, in any, opt
 }
 
 // DeleteProperty mocks base method.
-func (m *MockPropertyServiceClient) DeleteProperty(ctx context.Context, in *v1.DeletePropertyRequest, opts ...grpc.CallOption) (*v1.DeletePropertyResponse, error) {
+func (m *MockPropertyServiceClient) DeleteProperty(ctx context.Context, in *propertyv1.DeletePropertyRequest, opts ...grpc.CallOption) (*propertyv1.DeletePropertyResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "DeleteProperty", varargs...)
-	ret0, _ := ret[0].(*v1.DeletePropertyResponse)
+	ret0, _ := ret[0].(*propertyv1.DeletePropertyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -163,14 +163,14 @@ func (mr *MockPropertyServiceClientMockRecorder) DeleteProperty(ctx, in any, opt
 }
 
 // DeleteSubscription mocks base method.
-func (m *MockPropertyServiceClient) DeleteSubscription(ctx context.Context, in *v1.DeleteSubscriptionRequest, opts ...grpc.CallOption) (*v1.DeleteSubscriptionResponse, error) {
+func (m *MockPropertyServiceClient) DeleteSubscription(ctx context.Context, in *propertyv1.DeleteSubscriptionRequest, opts ...grpc.CallOption) (*propertyv1.DeleteSubscriptionResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "DeleteSubscription", varargs...)
-	ret0, _ := ret[0].(*v1.DeleteSubscriptionResponse)
+	ret0, _ := ret[0].(*propertyv1.DeleteSubscriptionResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -183,14 +183,14 @@ func (mr *MockPropertyServiceClientMockRecorder) DeleteSubscription(ctx, in any,
 }
 
 // HistoryOfProperty mocks base method.
-func (m *MockPropertyServiceClient) HistoryOfProperty(ctx context.Context, in *v1.HistoryOfPropertyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.HistoryOfPropertyResponse], error) {
+func (m *MockPropertyServiceClient) HistoryOfProperty(ctx context.Context, in *propertyv1.HistoryOfPropertyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[propertyv1.HistoryOfPropertyResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "HistoryOfProperty", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.HistoryOfPropertyResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[propertyv1.HistoryOfPropertyResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -203,14 +203,14 @@ func (mr *MockPropertyServiceClientMockRecorder) HistoryOfProperty(ctx, in any, 
 }
 
 // ListPropertyType mocks base method.
-func (m *MockPropertyServiceClient) ListPropertyType(ctx context.Context, in *v1.ListPropertyTypeRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.ListPropertyTypeResponse], error) {
+func (m *MockPropertyServiceClient) ListPropertyType(ctx context.Context, in *propertyv1.ListPropertyTypeRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[propertyv1.ListPropertyTypeResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListPropertyType", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.ListPropertyTypeResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[propertyv1.ListPropertyTypeResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -223,14 +223,14 @@ func (mr *MockPropertyServiceClientMockRecorder) ListPropertyType(ctx, in any, o
 }
 
 // ListSubscription mocks base method.
-func (m *MockPropertyServiceClient) ListSubscription(ctx context.Context, in *v1.ListSubscriptionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.ListSubscriptionResponse], error) {
+func (m *MockPropertyServiceClient) ListSubscription(ctx context.Context, in *propertyv1.ListSubscriptionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[propertyv1.ListSubscriptionResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListSubscription", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.ListSubscriptionResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[propertyv1.ListSubscriptionResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -243,14 +243,14 @@ func (mr *MockPropertyServiceClientMockRecorder) ListSubscription(ctx, in any, o
 }
 
 // SearchProperty mocks base method.
-func (m *MockPropertyServiceClient) SearchProperty(ctx context.Context, in *v1.SearchPropertyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.SearchPropertyResponse], error) {
+func (m *MockPropertyServiceClient) SearchProperty(ctx context.Context, in *propertyv1.SearchPropertyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[propertyv1.SearchPropertyResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchProperty", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.SearchPropertyResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[propertyv1.SearchPropertyResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -263,14 +263,14 @@ func (mr *MockPropertyServiceClientMockRecorder) SearchProperty(ctx, in any, opt
 }
 
 // StateOfProperty mocks base method.
-func (m *MockPropertyServiceClient) StateOfProperty(ctx context.Context, in *v1.StateOfPropertyRequest, opts ...grpc.CallOption) (*v1.StateOfPropertyResponse, error) {
+func (m *MockPropertyServiceClient) StateOfProperty(ctx context.Context, in *propertyv1.StateOfPropertyRequest, opts ...grpc.CallOption) (*propertyv1.StateOfPropertyResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "StateOfProperty", varargs...)
-	ret0, _ := ret[0].(*v1.StateOfPropertyResponse)
+	ret0, _ := ret[0].(*propertyv1.StateOfPropertyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -283,14 +283,14 @@ func (mr *MockPropertyServiceClientMockRecorder) StateOfProperty(ctx, in any, op
 }
 
 // UpdateProperty mocks base method.
-func (m *MockPropertyServiceClient) UpdateProperty(ctx context.Context, in *v1.UpdatePropertyRequest, opts ...grpc.CallOption) (*v1.UpdatePropertyResponse, error) {
+func (m *MockPropertyServiceClient) UpdateProperty(ctx context.Context, in *propertyv1.UpdatePropertyRequest, opts ...grpc.CallOption) (*propertyv1.UpdatePropertyResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "UpdateProperty", varargs...)
-	ret0, _ := ret[0].(*v1.UpdatePropertyResponse)
+	ret0, _ := ret[0].(*propertyv1.UpdatePropertyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -327,10 +327,10 @@ func (m *MockPropertyServiceServer) EXPECT() *MockPropertyServiceServerMockRecor
 }
 
 // AddLocality mocks base method.
-func (m *MockPropertyServiceServer) AddLocality(arg0 context.Context, arg1 *v1.AddLocalityRequest) (*v1.AddLocalityResponse, error) {
+func (m *MockPropertyServiceServer) AddLocality(arg0 context.Context, arg1 *propertyv1.AddLocalityRequest) (*propertyv1.AddLocalityResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddLocality", arg0, arg1)
-	ret0, _ := ret[0].(*v1.AddLocalityResponse)
+	ret0, _ := ret[0].(*propertyv1.AddLocalityResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -342,10 +342,10 @@ func (mr *MockPropertyServiceServerMockRecorder) AddLocality(arg0, arg1 any) *go
 }
 
 // AddPropertyType mocks base method.
-func (m *MockPropertyServiceServer) AddPropertyType(arg0 context.Context, arg1 *v1.AddPropertyTypeRequest) (*v1.AddPropertyTypeResponse, error) {
+func (m *MockPropertyServiceServer) AddPropertyType(arg0 context.Context, arg1 *propertyv1.AddPropertyTypeRequest) (*propertyv1.AddPropertyTypeResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddPropertyType", arg0, arg1)
-	ret0, _ := ret[0].(*v1.AddPropertyTypeResponse)
+	ret0, _ := ret[0].(*propertyv1.AddPropertyTypeResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -357,10 +357,10 @@ func (mr *MockPropertyServiceServerMockRecorder) AddPropertyType(arg0, arg1 any)
 }
 
 // AddSubscription mocks base method.
-func (m *MockPropertyServiceServer) AddSubscription(arg0 context.Context, arg1 *v1.AddSubscriptionRequest) (*v1.AddSubscriptionResponse, error) {
+func (m *MockPropertyServiceServer) AddSubscription(arg0 context.Context, arg1 *propertyv1.AddSubscriptionRequest) (*propertyv1.AddSubscriptionResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddSubscription", arg0, arg1)
-	ret0, _ := ret[0].(*v1.AddSubscriptionResponse)
+	ret0, _ := ret[0].(*propertyv1.AddSubscriptionResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -372,10 +372,10 @@ func (mr *MockPropertyServiceServerMockRecorder) AddSubscription(arg0, arg1 any)
 }
 
 // CreateProperty mocks base method.
-func (m *MockPropertyServiceServer) CreateProperty(arg0 context.Context, arg1 *v1.CreatePropertyRequest) (*v1.CreatePropertyResponse, error) {
+func (m *MockPropertyServiceServer) CreateProperty(arg0 context.Context, arg1 *propertyv1.CreatePropertyRequest) (*propertyv1.CreatePropertyResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateProperty", arg0, arg1)
-	ret0, _ := ret[0].(*v1.CreatePropertyResponse)
+	ret0, _ := ret[0].(*propertyv1.CreatePropertyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -387,10 +387,10 @@ func (mr *MockPropertyServiceServerMockRecorder) CreateProperty(arg0, arg1 any) 
 }
 
 // DeleteLocality mocks base method.
-func (m *MockPropertyServiceServer) DeleteLocality(arg0 context.Context, arg1 *v1.DeleteLocalityRequest) (*v1.DeleteLocalityResponse, error) {
+func (m *MockPropertyServiceServer) DeleteLocality(arg0 context.Context, arg1 *propertyv1.DeleteLocalityRequest) (*propertyv1.DeleteLocalityResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteLocality", arg0, arg1)
-	ret0, _ := ret[0].(*v1.DeleteLocalityResponse)
+	ret0, _ := ret[0].(*propertyv1.DeleteLocalityResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -402,10 +402,10 @@ func (mr *MockPropertyServiceServerMockRecorder) DeleteLocality(arg0, arg1 any) 
 }
 
 // DeleteProperty mocks base method.
-func (m *MockPropertyServiceServer) DeleteProperty(arg0 context.Context, arg1 *v1.DeletePropertyRequest) (*v1.DeletePropertyResponse, error) {
+func (m *MockPropertyServiceServer) DeleteProperty(arg0 context.Context, arg1 *propertyv1.DeletePropertyRequest) (*propertyv1.DeletePropertyResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteProperty", arg0, arg1)
-	ret0, _ := ret[0].(*v1.DeletePropertyResponse)
+	ret0, _ := ret[0].(*propertyv1.DeletePropertyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -417,10 +417,10 @@ func (mr *MockPropertyServiceServerMockRecorder) DeleteProperty(arg0, arg1 any) 
 }
 
 // DeleteSubscription mocks base method.
-func (m *MockPropertyServiceServer) DeleteSubscription(arg0 context.Context, arg1 *v1.DeleteSubscriptionRequest) (*v1.DeleteSubscriptionResponse, error) {
+func (m *MockPropertyServiceServer) DeleteSubscription(arg0 context.Context, arg1 *propertyv1.DeleteSubscriptionRequest) (*propertyv1.DeleteSubscriptionResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteSubscription", arg0, arg1)
-	ret0, _ := ret[0].(*v1.DeleteSubscriptionResponse)
+	ret0, _ := ret[0].(*propertyv1.DeleteSubscriptionResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -432,7 +432,7 @@ func (mr *MockPropertyServiceServerMockRecorder) DeleteSubscription(arg0, arg1 a
 }
 
 // HistoryOfProperty mocks base method.
-func (m *MockPropertyServiceServer) HistoryOfProperty(arg0 *v1.HistoryOfPropertyRequest, arg1 grpc.ServerStreamingServer[v1.HistoryOfPropertyResponse]) error {
+func (m *MockPropertyServiceServer) HistoryOfProperty(arg0 *propertyv1.HistoryOfPropertyRequest, arg1 grpc.ServerStreamingServer[propertyv1.HistoryOfPropertyResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "HistoryOfProperty", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -446,7 +446,7 @@ func (mr *MockPropertyServiceServerMockRecorder) HistoryOfProperty(arg0, arg1 an
 }
 
 // ListPropertyType mocks base method.
-func (m *MockPropertyServiceServer) ListPropertyType(arg0 *v1.ListPropertyTypeRequest, arg1 grpc.ServerStreamingServer[v1.ListPropertyTypeResponse]) error {
+func (m *MockPropertyServiceServer) ListPropertyType(arg0 *propertyv1.ListPropertyTypeRequest, arg1 grpc.ServerStreamingServer[propertyv1.ListPropertyTypeResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListPropertyType", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -460,7 +460,7 @@ func (mr *MockPropertyServiceServerMockRecorder) ListPropertyType(arg0, arg1 any
 }
 
 // ListSubscription mocks base method.
-func (m *MockPropertyServiceServer) ListSubscription(arg0 *v1.ListSubscriptionRequest, arg1 grpc.ServerStreamingServer[v1.ListSubscriptionResponse]) error {
+func (m *MockPropertyServiceServer) ListSubscription(arg0 *propertyv1.ListSubscriptionRequest, arg1 grpc.ServerStreamingServer[propertyv1.ListSubscriptionResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListSubscription", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -474,7 +474,7 @@ func (mr *MockPropertyServiceServerMockRecorder) ListSubscription(arg0, arg1 any
 }
 
 // SearchProperty mocks base method.
-func (m *MockPropertyServiceServer) SearchProperty(arg0 *v1.SearchPropertyRequest, arg1 grpc.ServerStreamingServer[v1.SearchPropertyResponse]) error {
+func (m *MockPropertyServiceServer) SearchProperty(arg0 *propertyv1.SearchPropertyRequest, arg1 grpc.ServerStreamingServer[propertyv1.SearchPropertyResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchProperty", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -488,10 +488,10 @@ func (mr *MockPropertyServiceServerMockRecorder) SearchProperty(arg0, arg1 any) 
 }
 
 // StateOfProperty mocks base method.
-func (m *MockPropertyServiceServer) StateOfProperty(arg0 context.Context, arg1 *v1.StateOfPropertyRequest) (*v1.StateOfPropertyResponse, error) {
+func (m *MockPropertyServiceServer) StateOfProperty(arg0 context.Context, arg1 *propertyv1.StateOfPropertyRequest) (*propertyv1.StateOfPropertyResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "StateOfProperty", arg0, arg1)
-	ret0, _ := ret[0].(*v1.StateOfPropertyResponse)
+	ret0, _ := ret[0].(*propertyv1.StateOfPropertyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -503,10 +503,10 @@ func (mr *MockPropertyServiceServerMockRecorder) StateOfProperty(arg0, arg1 any)
 }
 
 // UpdateProperty mocks base method.
-func (m *MockPropertyServiceServer) UpdateProperty(arg0 context.Context, arg1 *v1.UpdatePropertyRequest) (*v1.UpdatePropertyResponse, error) {
+func (m *MockPropertyServiceServer) UpdateProperty(arg0 context.Context, arg1 *propertyv1.UpdatePropertyRequest) (*propertyv1.UpdatePropertyResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateProperty", arg0, arg1)
-	ret0, _ := ret[0].(*v1.UpdatePropertyResponse)
+	ret0, _ := ret[0].(*propertyv1.UpdatePropertyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

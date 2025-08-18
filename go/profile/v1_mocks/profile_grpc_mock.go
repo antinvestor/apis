@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	v1 "github.com/antinvestor/apis/go/profile/v1"
+	profilev1 "github.com/antinvestor/apis/go/profile/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -43,14 +43,14 @@ func (m *MockProfileServiceClient) EXPECT() *MockProfileServiceClientMockRecorde
 }
 
 // AddAddress mocks base method.
-func (m *MockProfileServiceClient) AddAddress(ctx context.Context, in *v1.AddAddressRequest, opts ...grpc.CallOption) (*v1.AddAddressResponse, error) {
+func (m *MockProfileServiceClient) AddAddress(ctx context.Context, in *profilev1.AddAddressRequest, opts ...grpc.CallOption) (*profilev1.AddAddressResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "AddAddress", varargs...)
-	ret0, _ := ret[0].(*v1.AddAddressResponse)
+	ret0, _ := ret[0].(*profilev1.AddAddressResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -63,14 +63,14 @@ func (mr *MockProfileServiceClientMockRecorder) AddAddress(ctx, in any, opts ...
 }
 
 // AddContact mocks base method.
-func (m *MockProfileServiceClient) AddContact(ctx context.Context, in *v1.AddContactRequest, opts ...grpc.CallOption) (*v1.AddContactResponse, error) {
+func (m *MockProfileServiceClient) AddContact(ctx context.Context, in *profilev1.AddContactRequest, opts ...grpc.CallOption) (*profilev1.AddContactResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "AddContact", varargs...)
-	ret0, _ := ret[0].(*v1.AddContactResponse)
+	ret0, _ := ret[0].(*profilev1.AddContactResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -83,14 +83,14 @@ func (mr *MockProfileServiceClientMockRecorder) AddContact(ctx, in any, opts ...
 }
 
 // AddRelationship mocks base method.
-func (m *MockProfileServiceClient) AddRelationship(ctx context.Context, in *v1.AddRelationshipRequest, opts ...grpc.CallOption) (*v1.AddRelationshipResponse, error) {
+func (m *MockProfileServiceClient) AddRelationship(ctx context.Context, in *profilev1.AddRelationshipRequest, opts ...grpc.CallOption) (*profilev1.AddRelationshipResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "AddRelationship", varargs...)
-	ret0, _ := ret[0].(*v1.AddRelationshipResponse)
+	ret0, _ := ret[0].(*profilev1.AddRelationshipResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -103,14 +103,14 @@ func (mr *MockProfileServiceClientMockRecorder) AddRelationship(ctx, in any, opt
 }
 
 // AddRoster mocks base method.
-func (m *MockProfileServiceClient) AddRoster(ctx context.Context, in *v1.AddRosterRequest, opts ...grpc.CallOption) (*v1.AddRosterResponse, error) {
+func (m *MockProfileServiceClient) AddRoster(ctx context.Context, in *profilev1.AddRosterRequest, opts ...grpc.CallOption) (*profilev1.AddRosterResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "AddRoster", varargs...)
-	ret0, _ := ret[0].(*v1.AddRosterResponse)
+	ret0, _ := ret[0].(*profilev1.AddRosterResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -123,14 +123,14 @@ func (mr *MockProfileServiceClientMockRecorder) AddRoster(ctx, in any, opts ...a
 }
 
 // CheckVerification mocks base method.
-func (m *MockProfileServiceClient) CheckVerification(ctx context.Context, in *v1.CheckVerificationRequest, opts ...grpc.CallOption) (*v1.CheckVerificationResponse, error) {
+func (m *MockProfileServiceClient) CheckVerification(ctx context.Context, in *profilev1.CheckVerificationRequest, opts ...grpc.CallOption) (*profilev1.CheckVerificationResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CheckVerification", varargs...)
-	ret0, _ := ret[0].(*v1.CheckVerificationResponse)
+	ret0, _ := ret[0].(*profilev1.CheckVerificationResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -143,14 +143,14 @@ func (mr *MockProfileServiceClientMockRecorder) CheckVerification(ctx, in any, o
 }
 
 // Create mocks base method.
-func (m *MockProfileServiceClient) Create(ctx context.Context, in *v1.CreateRequest, opts ...grpc.CallOption) (*v1.CreateResponse, error) {
+func (m *MockProfileServiceClient) Create(ctx context.Context, in *profilev1.CreateRequest, opts ...grpc.CallOption) (*profilev1.CreateResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Create", varargs...)
-	ret0, _ := ret[0].(*v1.CreateResponse)
+	ret0, _ := ret[0].(*profilev1.CreateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -163,14 +163,14 @@ func (mr *MockProfileServiceClientMockRecorder) Create(ctx, in any, opts ...any)
 }
 
 // CreateContactVerification mocks base method.
-func (m *MockProfileServiceClient) CreateContactVerification(ctx context.Context, in *v1.CreateContactVerificationRequest, opts ...grpc.CallOption) (*v1.CreateContactVerificationResponse, error) {
+func (m *MockProfileServiceClient) CreateContactVerification(ctx context.Context, in *profilev1.CreateContactVerificationRequest, opts ...grpc.CallOption) (*profilev1.CreateContactVerificationResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CreateContactVerification", varargs...)
-	ret0, _ := ret[0].(*v1.CreateContactVerificationResponse)
+	ret0, _ := ret[0].(*profilev1.CreateContactVerificationResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -183,14 +183,14 @@ func (mr *MockProfileServiceClientMockRecorder) CreateContactVerification(ctx, i
 }
 
 // DeleteRelationship mocks base method.
-func (m *MockProfileServiceClient) DeleteRelationship(ctx context.Context, in *v1.DeleteRelationshipRequest, opts ...grpc.CallOption) (*v1.DeleteRelationshipResponse, error) {
+func (m *MockProfileServiceClient) DeleteRelationship(ctx context.Context, in *profilev1.DeleteRelationshipRequest, opts ...grpc.CallOption) (*profilev1.DeleteRelationshipResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "DeleteRelationship", varargs...)
-	ret0, _ := ret[0].(*v1.DeleteRelationshipResponse)
+	ret0, _ := ret[0].(*profilev1.DeleteRelationshipResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -203,14 +203,14 @@ func (mr *MockProfileServiceClientMockRecorder) DeleteRelationship(ctx, in any, 
 }
 
 // GetByContact mocks base method.
-func (m *MockProfileServiceClient) GetByContact(ctx context.Context, in *v1.GetByContactRequest, opts ...grpc.CallOption) (*v1.GetByContactResponse, error) {
+func (m *MockProfileServiceClient) GetByContact(ctx context.Context, in *profilev1.GetByContactRequest, opts ...grpc.CallOption) (*profilev1.GetByContactResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetByContact", varargs...)
-	ret0, _ := ret[0].(*v1.GetByContactResponse)
+	ret0, _ := ret[0].(*profilev1.GetByContactResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -223,14 +223,14 @@ func (mr *MockProfileServiceClientMockRecorder) GetByContact(ctx, in any, opts .
 }
 
 // GetById mocks base method.
-func (m *MockProfileServiceClient) GetById(ctx context.Context, in *v1.GetByIdRequest, opts ...grpc.CallOption) (*v1.GetByIdResponse, error) {
+func (m *MockProfileServiceClient) GetById(ctx context.Context, in *profilev1.GetByIdRequest, opts ...grpc.CallOption) (*profilev1.GetByIdResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetById", varargs...)
-	ret0, _ := ret[0].(*v1.GetByIdResponse)
+	ret0, _ := ret[0].(*profilev1.GetByIdResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -243,14 +243,14 @@ func (mr *MockProfileServiceClientMockRecorder) GetById(ctx, in any, opts ...any
 }
 
 // ListRelationship mocks base method.
-func (m *MockProfileServiceClient) ListRelationship(ctx context.Context, in *v1.ListRelationshipRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.ListRelationshipResponse], error) {
+func (m *MockProfileServiceClient) ListRelationship(ctx context.Context, in *profilev1.ListRelationshipRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[profilev1.ListRelationshipResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListRelationship", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.ListRelationshipResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[profilev1.ListRelationshipResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -263,14 +263,14 @@ func (mr *MockProfileServiceClientMockRecorder) ListRelationship(ctx, in any, op
 }
 
 // Merge mocks base method.
-func (m *MockProfileServiceClient) Merge(ctx context.Context, in *v1.MergeRequest, opts ...grpc.CallOption) (*v1.MergeResponse, error) {
+func (m *MockProfileServiceClient) Merge(ctx context.Context, in *profilev1.MergeRequest, opts ...grpc.CallOption) (*profilev1.MergeResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Merge", varargs...)
-	ret0, _ := ret[0].(*v1.MergeResponse)
+	ret0, _ := ret[0].(*profilev1.MergeResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -283,14 +283,14 @@ func (mr *MockProfileServiceClientMockRecorder) Merge(ctx, in any, opts ...any) 
 }
 
 // RemoveContact mocks base method.
-func (m *MockProfileServiceClient) RemoveContact(ctx context.Context, in *v1.RemoveContactRequest, opts ...grpc.CallOption) (*v1.RemoveContactResponse, error) {
+func (m *MockProfileServiceClient) RemoveContact(ctx context.Context, in *profilev1.RemoveContactRequest, opts ...grpc.CallOption) (*profilev1.RemoveContactResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "RemoveContact", varargs...)
-	ret0, _ := ret[0].(*v1.RemoveContactResponse)
+	ret0, _ := ret[0].(*profilev1.RemoveContactResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -303,14 +303,14 @@ func (mr *MockProfileServiceClientMockRecorder) RemoveContact(ctx, in any, opts 
 }
 
 // RemoveRoster mocks base method.
-func (m *MockProfileServiceClient) RemoveRoster(ctx context.Context, in *v1.RemoveRosterRequest, opts ...grpc.CallOption) (*v1.RemoveRosterResponse, error) {
+func (m *MockProfileServiceClient) RemoveRoster(ctx context.Context, in *profilev1.RemoveRosterRequest, opts ...grpc.CallOption) (*profilev1.RemoveRosterResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "RemoveRoster", varargs...)
-	ret0, _ := ret[0].(*v1.RemoveRosterResponse)
+	ret0, _ := ret[0].(*profilev1.RemoveRosterResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -323,14 +323,14 @@ func (mr *MockProfileServiceClientMockRecorder) RemoveRoster(ctx, in any, opts .
 }
 
 // Search mocks base method.
-func (m *MockProfileServiceClient) Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.SearchResponse], error) {
+func (m *MockProfileServiceClient) Search(ctx context.Context, in *profilev1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[profilev1.SearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Search", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.SearchResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[profilev1.SearchResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -343,14 +343,14 @@ func (mr *MockProfileServiceClientMockRecorder) Search(ctx, in any, opts ...any)
 }
 
 // SearchRoster mocks base method.
-func (m *MockProfileServiceClient) SearchRoster(ctx context.Context, in *v1.SearchRosterRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.SearchRosterResponse], error) {
+func (m *MockProfileServiceClient) SearchRoster(ctx context.Context, in *profilev1.SearchRosterRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[profilev1.SearchRosterResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchRoster", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.SearchRosterResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[profilev1.SearchRosterResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -363,14 +363,14 @@ func (mr *MockProfileServiceClientMockRecorder) SearchRoster(ctx, in any, opts .
 }
 
 // Update mocks base method.
-func (m *MockProfileServiceClient) Update(ctx context.Context, in *v1.UpdateRequest, opts ...grpc.CallOption) (*v1.UpdateResponse, error) {
+func (m *MockProfileServiceClient) Update(ctx context.Context, in *profilev1.UpdateRequest, opts ...grpc.CallOption) (*profilev1.UpdateResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Update", varargs...)
-	ret0, _ := ret[0].(*v1.UpdateResponse)
+	ret0, _ := ret[0].(*profilev1.UpdateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -407,10 +407,10 @@ func (m *MockProfileServiceServer) EXPECT() *MockProfileServiceServerMockRecorde
 }
 
 // AddAddress mocks base method.
-func (m *MockProfileServiceServer) AddAddress(arg0 context.Context, arg1 *v1.AddAddressRequest) (*v1.AddAddressResponse, error) {
+func (m *MockProfileServiceServer) AddAddress(arg0 context.Context, arg1 *profilev1.AddAddressRequest) (*profilev1.AddAddressResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddAddress", arg0, arg1)
-	ret0, _ := ret[0].(*v1.AddAddressResponse)
+	ret0, _ := ret[0].(*profilev1.AddAddressResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -422,10 +422,10 @@ func (mr *MockProfileServiceServerMockRecorder) AddAddress(arg0, arg1 any) *gomo
 }
 
 // AddContact mocks base method.
-func (m *MockProfileServiceServer) AddContact(arg0 context.Context, arg1 *v1.AddContactRequest) (*v1.AddContactResponse, error) {
+func (m *MockProfileServiceServer) AddContact(arg0 context.Context, arg1 *profilev1.AddContactRequest) (*profilev1.AddContactResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddContact", arg0, arg1)
-	ret0, _ := ret[0].(*v1.AddContactResponse)
+	ret0, _ := ret[0].(*profilev1.AddContactResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -437,10 +437,10 @@ func (mr *MockProfileServiceServerMockRecorder) AddContact(arg0, arg1 any) *gomo
 }
 
 // AddRelationship mocks base method.
-func (m *MockProfileServiceServer) AddRelationship(arg0 context.Context, arg1 *v1.AddRelationshipRequest) (*v1.AddRelationshipResponse, error) {
+func (m *MockProfileServiceServer) AddRelationship(arg0 context.Context, arg1 *profilev1.AddRelationshipRequest) (*profilev1.AddRelationshipResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddRelationship", arg0, arg1)
-	ret0, _ := ret[0].(*v1.AddRelationshipResponse)
+	ret0, _ := ret[0].(*profilev1.AddRelationshipResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -452,10 +452,10 @@ func (mr *MockProfileServiceServerMockRecorder) AddRelationship(arg0, arg1 any) 
 }
 
 // AddRoster mocks base method.
-func (m *MockProfileServiceServer) AddRoster(arg0 context.Context, arg1 *v1.AddRosterRequest) (*v1.AddRosterResponse, error) {
+func (m *MockProfileServiceServer) AddRoster(arg0 context.Context, arg1 *profilev1.AddRosterRequest) (*profilev1.AddRosterResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddRoster", arg0, arg1)
-	ret0, _ := ret[0].(*v1.AddRosterResponse)
+	ret0, _ := ret[0].(*profilev1.AddRosterResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -467,10 +467,10 @@ func (mr *MockProfileServiceServerMockRecorder) AddRoster(arg0, arg1 any) *gomoc
 }
 
 // CheckVerification mocks base method.
-func (m *MockProfileServiceServer) CheckVerification(arg0 context.Context, arg1 *v1.CheckVerificationRequest) (*v1.CheckVerificationResponse, error) {
+func (m *MockProfileServiceServer) CheckVerification(arg0 context.Context, arg1 *profilev1.CheckVerificationRequest) (*profilev1.CheckVerificationResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CheckVerification", arg0, arg1)
-	ret0, _ := ret[0].(*v1.CheckVerificationResponse)
+	ret0, _ := ret[0].(*profilev1.CheckVerificationResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -482,10 +482,10 @@ func (mr *MockProfileServiceServerMockRecorder) CheckVerification(arg0, arg1 any
 }
 
 // Create mocks base method.
-func (m *MockProfileServiceServer) Create(arg0 context.Context, arg1 *v1.CreateRequest) (*v1.CreateResponse, error) {
+func (m *MockProfileServiceServer) Create(arg0 context.Context, arg1 *profilev1.CreateRequest) (*profilev1.CreateResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", arg0, arg1)
-	ret0, _ := ret[0].(*v1.CreateResponse)
+	ret0, _ := ret[0].(*profilev1.CreateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -497,10 +497,10 @@ func (mr *MockProfileServiceServerMockRecorder) Create(arg0, arg1 any) *gomock.C
 }
 
 // CreateContactVerification mocks base method.
-func (m *MockProfileServiceServer) CreateContactVerification(arg0 context.Context, arg1 *v1.CreateContactVerificationRequest) (*v1.CreateContactVerificationResponse, error) {
+func (m *MockProfileServiceServer) CreateContactVerification(arg0 context.Context, arg1 *profilev1.CreateContactVerificationRequest) (*profilev1.CreateContactVerificationResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateContactVerification", arg0, arg1)
-	ret0, _ := ret[0].(*v1.CreateContactVerificationResponse)
+	ret0, _ := ret[0].(*profilev1.CreateContactVerificationResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -512,10 +512,10 @@ func (mr *MockProfileServiceServerMockRecorder) CreateContactVerification(arg0, 
 }
 
 // DeleteRelationship mocks base method.
-func (m *MockProfileServiceServer) DeleteRelationship(arg0 context.Context, arg1 *v1.DeleteRelationshipRequest) (*v1.DeleteRelationshipResponse, error) {
+func (m *MockProfileServiceServer) DeleteRelationship(arg0 context.Context, arg1 *profilev1.DeleteRelationshipRequest) (*profilev1.DeleteRelationshipResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteRelationship", arg0, arg1)
-	ret0, _ := ret[0].(*v1.DeleteRelationshipResponse)
+	ret0, _ := ret[0].(*profilev1.DeleteRelationshipResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -527,10 +527,10 @@ func (mr *MockProfileServiceServerMockRecorder) DeleteRelationship(arg0, arg1 an
 }
 
 // GetByContact mocks base method.
-func (m *MockProfileServiceServer) GetByContact(arg0 context.Context, arg1 *v1.GetByContactRequest) (*v1.GetByContactResponse, error) {
+func (m *MockProfileServiceServer) GetByContact(arg0 context.Context, arg1 *profilev1.GetByContactRequest) (*profilev1.GetByContactResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetByContact", arg0, arg1)
-	ret0, _ := ret[0].(*v1.GetByContactResponse)
+	ret0, _ := ret[0].(*profilev1.GetByContactResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -542,10 +542,10 @@ func (mr *MockProfileServiceServerMockRecorder) GetByContact(arg0, arg1 any) *go
 }
 
 // GetById mocks base method.
-func (m *MockProfileServiceServer) GetById(arg0 context.Context, arg1 *v1.GetByIdRequest) (*v1.GetByIdResponse, error) {
+func (m *MockProfileServiceServer) GetById(arg0 context.Context, arg1 *profilev1.GetByIdRequest) (*profilev1.GetByIdResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetById", arg0, arg1)
-	ret0, _ := ret[0].(*v1.GetByIdResponse)
+	ret0, _ := ret[0].(*profilev1.GetByIdResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -557,7 +557,7 @@ func (mr *MockProfileServiceServerMockRecorder) GetById(arg0, arg1 any) *gomock.
 }
 
 // ListRelationship mocks base method.
-func (m *MockProfileServiceServer) ListRelationship(arg0 *v1.ListRelationshipRequest, arg1 grpc.ServerStreamingServer[v1.ListRelationshipResponse]) error {
+func (m *MockProfileServiceServer) ListRelationship(arg0 *profilev1.ListRelationshipRequest, arg1 grpc.ServerStreamingServer[profilev1.ListRelationshipResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListRelationship", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -571,10 +571,10 @@ func (mr *MockProfileServiceServerMockRecorder) ListRelationship(arg0, arg1 any)
 }
 
 // Merge mocks base method.
-func (m *MockProfileServiceServer) Merge(arg0 context.Context, arg1 *v1.MergeRequest) (*v1.MergeResponse, error) {
+func (m *MockProfileServiceServer) Merge(arg0 context.Context, arg1 *profilev1.MergeRequest) (*profilev1.MergeResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Merge", arg0, arg1)
-	ret0, _ := ret[0].(*v1.MergeResponse)
+	ret0, _ := ret[0].(*profilev1.MergeResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -586,10 +586,10 @@ func (mr *MockProfileServiceServerMockRecorder) Merge(arg0, arg1 any) *gomock.Ca
 }
 
 // RemoveContact mocks base method.
-func (m *MockProfileServiceServer) RemoveContact(arg0 context.Context, arg1 *v1.RemoveContactRequest) (*v1.RemoveContactResponse, error) {
+func (m *MockProfileServiceServer) RemoveContact(arg0 context.Context, arg1 *profilev1.RemoveContactRequest) (*profilev1.RemoveContactResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RemoveContact", arg0, arg1)
-	ret0, _ := ret[0].(*v1.RemoveContactResponse)
+	ret0, _ := ret[0].(*profilev1.RemoveContactResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -601,10 +601,10 @@ func (mr *MockProfileServiceServerMockRecorder) RemoveContact(arg0, arg1 any) *g
 }
 
 // RemoveRoster mocks base method.
-func (m *MockProfileServiceServer) RemoveRoster(arg0 context.Context, arg1 *v1.RemoveRosterRequest) (*v1.RemoveRosterResponse, error) {
+func (m *MockProfileServiceServer) RemoveRoster(arg0 context.Context, arg1 *profilev1.RemoveRosterRequest) (*profilev1.RemoveRosterResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RemoveRoster", arg0, arg1)
-	ret0, _ := ret[0].(*v1.RemoveRosterResponse)
+	ret0, _ := ret[0].(*profilev1.RemoveRosterResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -616,7 +616,7 @@ func (mr *MockProfileServiceServerMockRecorder) RemoveRoster(arg0, arg1 any) *go
 }
 
 // Search mocks base method.
-func (m *MockProfileServiceServer) Search(arg0 *v1.SearchRequest, arg1 grpc.ServerStreamingServer[v1.SearchResponse]) error {
+func (m *MockProfileServiceServer) Search(arg0 *profilev1.SearchRequest, arg1 grpc.ServerStreamingServer[profilev1.SearchResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -630,7 +630,7 @@ func (mr *MockProfileServiceServerMockRecorder) Search(arg0, arg1 any) *gomock.C
 }
 
 // SearchRoster mocks base method.
-func (m *MockProfileServiceServer) SearchRoster(arg0 *v1.SearchRosterRequest, arg1 grpc.ServerStreamingServer[v1.SearchRosterResponse]) error {
+func (m *MockProfileServiceServer) SearchRoster(arg0 *profilev1.SearchRosterRequest, arg1 grpc.ServerStreamingServer[profilev1.SearchRosterResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchRoster", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -644,10 +644,10 @@ func (mr *MockProfileServiceServerMockRecorder) SearchRoster(arg0, arg1 any) *go
 }
 
 // Update mocks base method.
-func (m *MockProfileServiceServer) Update(arg0 context.Context, arg1 *v1.UpdateRequest) (*v1.UpdateResponse, error) {
+func (m *MockProfileServiceServer) Update(arg0 context.Context, arg1 *profilev1.UpdateRequest) (*profilev1.UpdateResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Update", arg0, arg1)
-	ret0, _ := ret[0].(*v1.UpdateResponse)
+	ret0, _ := ret[0].(*profilev1.UpdateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

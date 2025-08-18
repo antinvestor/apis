@@ -13,8 +13,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	v1 "github.com/antinvestor/apis/go/common/v1"
-	v10 "github.com/antinvestor/apis/go/ocr/v1"
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
+	ocrv1 "github.com/antinvestor/apis/go/ocr/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -44,14 +44,14 @@ func (m *MockOCRServiceClient) EXPECT() *MockOCRServiceClientMockRecorder {
 }
 
 // Recognize mocks base method.
-func (m *MockOCRServiceClient) Recognize(ctx context.Context, in *v10.RecognizeRequest, opts ...grpc.CallOption) (*v10.RecognizeResponse, error) {
+func (m *MockOCRServiceClient) Recognize(ctx context.Context, in *ocrv1.RecognizeRequest, opts ...grpc.CallOption) (*ocrv1.RecognizeResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Recognize", varargs...)
-	ret0, _ := ret[0].(*v10.RecognizeResponse)
+	ret0, _ := ret[0].(*ocrv1.RecognizeResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -64,14 +64,14 @@ func (mr *MockOCRServiceClientMockRecorder) Recognize(ctx, in any, opts ...any) 
 }
 
 // Status mocks base method.
-func (m *MockOCRServiceClient) Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v10.StatusResponse, error) {
+func (m *MockOCRServiceClient) Status(ctx context.Context, in *commonv1.StatusRequest, opts ...grpc.CallOption) (*ocrv1.StatusResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Status", varargs...)
-	ret0, _ := ret[0].(*v10.StatusResponse)
+	ret0, _ := ret[0].(*ocrv1.StatusResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -108,10 +108,10 @@ func (m *MockOCRServiceServer) EXPECT() *MockOCRServiceServerMockRecorder {
 }
 
 // Recognize mocks base method.
-func (m *MockOCRServiceServer) Recognize(arg0 context.Context, arg1 *v10.RecognizeRequest) (*v10.RecognizeResponse, error) {
+func (m *MockOCRServiceServer) Recognize(arg0 context.Context, arg1 *ocrv1.RecognizeRequest) (*ocrv1.RecognizeResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Recognize", arg0, arg1)
-	ret0, _ := ret[0].(*v10.RecognizeResponse)
+	ret0, _ := ret[0].(*ocrv1.RecognizeResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -123,10 +123,10 @@ func (mr *MockOCRServiceServerMockRecorder) Recognize(arg0, arg1 any) *gomock.Ca
 }
 
 // Status mocks base method.
-func (m *MockOCRServiceServer) Status(arg0 context.Context, arg1 *v1.StatusRequest) (*v10.StatusResponse, error) {
+func (m *MockOCRServiceServer) Status(arg0 context.Context, arg1 *commonv1.StatusRequest) (*ocrv1.StatusResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Status", arg0, arg1)
-	ret0, _ := ret[0].(*v10.StatusResponse)
+	ret0, _ := ret[0].(*ocrv1.StatusResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

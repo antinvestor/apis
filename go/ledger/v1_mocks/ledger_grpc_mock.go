@@ -13,8 +13,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	v1 "github.com/antinvestor/apis/go/common/v1"
-	v10 "github.com/antinvestor/apis/go/ledger/v1"
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
+	ledgerv1 "github.com/antinvestor/apis/go/ledger/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -44,14 +44,14 @@ func (m *MockLedgerServiceClient) EXPECT() *MockLedgerServiceClientMockRecorder 
 }
 
 // CreateAccount mocks base method.
-func (m *MockLedgerServiceClient) CreateAccount(ctx context.Context, in *v10.Account, opts ...grpc.CallOption) (*v10.Account, error) {
+func (m *MockLedgerServiceClient) CreateAccount(ctx context.Context, in *ledgerv1.Account, opts ...grpc.CallOption) (*ledgerv1.Account, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CreateAccount", varargs...)
-	ret0, _ := ret[0].(*v10.Account)
+	ret0, _ := ret[0].(*ledgerv1.Account)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -64,14 +64,14 @@ func (mr *MockLedgerServiceClientMockRecorder) CreateAccount(ctx, in any, opts .
 }
 
 // CreateLedger mocks base method.
-func (m *MockLedgerServiceClient) CreateLedger(ctx context.Context, in *v10.Ledger, opts ...grpc.CallOption) (*v10.Ledger, error) {
+func (m *MockLedgerServiceClient) CreateLedger(ctx context.Context, in *ledgerv1.Ledger, opts ...grpc.CallOption) (*ledgerv1.Ledger, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CreateLedger", varargs...)
-	ret0, _ := ret[0].(*v10.Ledger)
+	ret0, _ := ret[0].(*ledgerv1.Ledger)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -84,14 +84,14 @@ func (mr *MockLedgerServiceClientMockRecorder) CreateLedger(ctx, in any, opts ..
 }
 
 // CreateTransaction mocks base method.
-func (m *MockLedgerServiceClient) CreateTransaction(ctx context.Context, in *v10.Transaction, opts ...grpc.CallOption) (*v10.Transaction, error) {
+func (m *MockLedgerServiceClient) CreateTransaction(ctx context.Context, in *ledgerv1.Transaction, opts ...grpc.CallOption) (*ledgerv1.Transaction, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "CreateTransaction", varargs...)
-	ret0, _ := ret[0].(*v10.Transaction)
+	ret0, _ := ret[0].(*ledgerv1.Transaction)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -104,14 +104,14 @@ func (mr *MockLedgerServiceClientMockRecorder) CreateTransaction(ctx, in any, op
 }
 
 // ReverseTransaction mocks base method.
-func (m *MockLedgerServiceClient) ReverseTransaction(ctx context.Context, in *v10.Transaction, opts ...grpc.CallOption) (*v10.Transaction, error) {
+func (m *MockLedgerServiceClient) ReverseTransaction(ctx context.Context, in *ledgerv1.Transaction, opts ...grpc.CallOption) (*ledgerv1.Transaction, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ReverseTransaction", varargs...)
-	ret0, _ := ret[0].(*v10.Transaction)
+	ret0, _ := ret[0].(*ledgerv1.Transaction)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -124,14 +124,14 @@ func (mr *MockLedgerServiceClientMockRecorder) ReverseTransaction(ctx, in any, o
 }
 
 // SearchAccounts mocks base method.
-func (m *MockLedgerServiceClient) SearchAccounts(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.Account], error) {
+func (m *MockLedgerServiceClient) SearchAccounts(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ledgerv1.Account], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchAccounts", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.Account])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ledgerv1.Account])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -144,14 +144,14 @@ func (mr *MockLedgerServiceClientMockRecorder) SearchAccounts(ctx, in any, opts 
 }
 
 // SearchLedgers mocks base method.
-func (m *MockLedgerServiceClient) SearchLedgers(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.Ledger], error) {
+func (m *MockLedgerServiceClient) SearchLedgers(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ledgerv1.Ledger], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchLedgers", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.Ledger])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ledgerv1.Ledger])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -164,14 +164,14 @@ func (mr *MockLedgerServiceClientMockRecorder) SearchLedgers(ctx, in any, opts .
 }
 
 // SearchTransactionEntries mocks base method.
-func (m *MockLedgerServiceClient) SearchTransactionEntries(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.TransactionEntry], error) {
+func (m *MockLedgerServiceClient) SearchTransactionEntries(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ledgerv1.TransactionEntry], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchTransactionEntries", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.TransactionEntry])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ledgerv1.TransactionEntry])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -184,14 +184,14 @@ func (mr *MockLedgerServiceClientMockRecorder) SearchTransactionEntries(ctx, in 
 }
 
 // SearchTransactions mocks base method.
-func (m *MockLedgerServiceClient) SearchTransactions(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.Transaction], error) {
+func (m *MockLedgerServiceClient) SearchTransactions(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ledgerv1.Transaction], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchTransactions", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.Transaction])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[ledgerv1.Transaction])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -204,14 +204,14 @@ func (mr *MockLedgerServiceClientMockRecorder) SearchTransactions(ctx, in any, o
 }
 
 // UpdateAccount mocks base method.
-func (m *MockLedgerServiceClient) UpdateAccount(ctx context.Context, in *v10.Account, opts ...grpc.CallOption) (*v10.Account, error) {
+func (m *MockLedgerServiceClient) UpdateAccount(ctx context.Context, in *ledgerv1.Account, opts ...grpc.CallOption) (*ledgerv1.Account, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "UpdateAccount", varargs...)
-	ret0, _ := ret[0].(*v10.Account)
+	ret0, _ := ret[0].(*ledgerv1.Account)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -224,14 +224,14 @@ func (mr *MockLedgerServiceClientMockRecorder) UpdateAccount(ctx, in any, opts .
 }
 
 // UpdateLedger mocks base method.
-func (m *MockLedgerServiceClient) UpdateLedger(ctx context.Context, in *v10.Ledger, opts ...grpc.CallOption) (*v10.Ledger, error) {
+func (m *MockLedgerServiceClient) UpdateLedger(ctx context.Context, in *ledgerv1.Ledger, opts ...grpc.CallOption) (*ledgerv1.Ledger, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "UpdateLedger", varargs...)
-	ret0, _ := ret[0].(*v10.Ledger)
+	ret0, _ := ret[0].(*ledgerv1.Ledger)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -244,14 +244,14 @@ func (mr *MockLedgerServiceClientMockRecorder) UpdateLedger(ctx, in any, opts ..
 }
 
 // UpdateTransaction mocks base method.
-func (m *MockLedgerServiceClient) UpdateTransaction(ctx context.Context, in *v10.Transaction, opts ...grpc.CallOption) (*v10.Transaction, error) {
+func (m *MockLedgerServiceClient) UpdateTransaction(ctx context.Context, in *ledgerv1.Transaction, opts ...grpc.CallOption) (*ledgerv1.Transaction, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "UpdateTransaction", varargs...)
-	ret0, _ := ret[0].(*v10.Transaction)
+	ret0, _ := ret[0].(*ledgerv1.Transaction)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -288,10 +288,10 @@ func (m *MockLedgerServiceServer) EXPECT() *MockLedgerServiceServerMockRecorder 
 }
 
 // CreateAccount mocks base method.
-func (m *MockLedgerServiceServer) CreateAccount(arg0 context.Context, arg1 *v10.Account) (*v10.Account, error) {
+func (m *MockLedgerServiceServer) CreateAccount(arg0 context.Context, arg1 *ledgerv1.Account) (*ledgerv1.Account, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateAccount", arg0, arg1)
-	ret0, _ := ret[0].(*v10.Account)
+	ret0, _ := ret[0].(*ledgerv1.Account)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -303,10 +303,10 @@ func (mr *MockLedgerServiceServerMockRecorder) CreateAccount(arg0, arg1 any) *go
 }
 
 // CreateLedger mocks base method.
-func (m *MockLedgerServiceServer) CreateLedger(arg0 context.Context, arg1 *v10.Ledger) (*v10.Ledger, error) {
+func (m *MockLedgerServiceServer) CreateLedger(arg0 context.Context, arg1 *ledgerv1.Ledger) (*ledgerv1.Ledger, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateLedger", arg0, arg1)
-	ret0, _ := ret[0].(*v10.Ledger)
+	ret0, _ := ret[0].(*ledgerv1.Ledger)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -318,10 +318,10 @@ func (mr *MockLedgerServiceServerMockRecorder) CreateLedger(arg0, arg1 any) *gom
 }
 
 // CreateTransaction mocks base method.
-func (m *MockLedgerServiceServer) CreateTransaction(arg0 context.Context, arg1 *v10.Transaction) (*v10.Transaction, error) {
+func (m *MockLedgerServiceServer) CreateTransaction(arg0 context.Context, arg1 *ledgerv1.Transaction) (*ledgerv1.Transaction, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateTransaction", arg0, arg1)
-	ret0, _ := ret[0].(*v10.Transaction)
+	ret0, _ := ret[0].(*ledgerv1.Transaction)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -333,10 +333,10 @@ func (mr *MockLedgerServiceServerMockRecorder) CreateTransaction(arg0, arg1 any)
 }
 
 // ReverseTransaction mocks base method.
-func (m *MockLedgerServiceServer) ReverseTransaction(arg0 context.Context, arg1 *v10.Transaction) (*v10.Transaction, error) {
+func (m *MockLedgerServiceServer) ReverseTransaction(arg0 context.Context, arg1 *ledgerv1.Transaction) (*ledgerv1.Transaction, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ReverseTransaction", arg0, arg1)
-	ret0, _ := ret[0].(*v10.Transaction)
+	ret0, _ := ret[0].(*ledgerv1.Transaction)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -348,7 +348,7 @@ func (mr *MockLedgerServiceServerMockRecorder) ReverseTransaction(arg0, arg1 any
 }
 
 // SearchAccounts mocks base method.
-func (m *MockLedgerServiceServer) SearchAccounts(arg0 *v1.SearchRequest, arg1 grpc.ServerStreamingServer[v10.Account]) error {
+func (m *MockLedgerServiceServer) SearchAccounts(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[ledgerv1.Account]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchAccounts", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -362,7 +362,7 @@ func (mr *MockLedgerServiceServerMockRecorder) SearchAccounts(arg0, arg1 any) *g
 }
 
 // SearchLedgers mocks base method.
-func (m *MockLedgerServiceServer) SearchLedgers(arg0 *v1.SearchRequest, arg1 grpc.ServerStreamingServer[v10.Ledger]) error {
+func (m *MockLedgerServiceServer) SearchLedgers(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[ledgerv1.Ledger]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchLedgers", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -376,7 +376,7 @@ func (mr *MockLedgerServiceServerMockRecorder) SearchLedgers(arg0, arg1 any) *go
 }
 
 // SearchTransactionEntries mocks base method.
-func (m *MockLedgerServiceServer) SearchTransactionEntries(arg0 *v1.SearchRequest, arg1 grpc.ServerStreamingServer[v10.TransactionEntry]) error {
+func (m *MockLedgerServiceServer) SearchTransactionEntries(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[ledgerv1.TransactionEntry]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchTransactionEntries", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -390,7 +390,7 @@ func (mr *MockLedgerServiceServerMockRecorder) SearchTransactionEntries(arg0, ar
 }
 
 // SearchTransactions mocks base method.
-func (m *MockLedgerServiceServer) SearchTransactions(arg0 *v1.SearchRequest, arg1 grpc.ServerStreamingServer[v10.Transaction]) error {
+func (m *MockLedgerServiceServer) SearchTransactions(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[ledgerv1.Transaction]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchTransactions", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -404,10 +404,10 @@ func (mr *MockLedgerServiceServerMockRecorder) SearchTransactions(arg0, arg1 any
 }
 
 // UpdateAccount mocks base method.
-func (m *MockLedgerServiceServer) UpdateAccount(arg0 context.Context, arg1 *v10.Account) (*v10.Account, error) {
+func (m *MockLedgerServiceServer) UpdateAccount(arg0 context.Context, arg1 *ledgerv1.Account) (*ledgerv1.Account, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateAccount", arg0, arg1)
-	ret0, _ := ret[0].(*v10.Account)
+	ret0, _ := ret[0].(*ledgerv1.Account)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -419,10 +419,10 @@ func (mr *MockLedgerServiceServerMockRecorder) UpdateAccount(arg0, arg1 any) *go
 }
 
 // UpdateLedger mocks base method.
-func (m *MockLedgerServiceServer) UpdateLedger(arg0 context.Context, arg1 *v10.Ledger) (*v10.Ledger, error) {
+func (m *MockLedgerServiceServer) UpdateLedger(arg0 context.Context, arg1 *ledgerv1.Ledger) (*ledgerv1.Ledger, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateLedger", arg0, arg1)
-	ret0, _ := ret[0].(*v10.Ledger)
+	ret0, _ := ret[0].(*ledgerv1.Ledger)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -434,10 +434,10 @@ func (mr *MockLedgerServiceServerMockRecorder) UpdateLedger(arg0, arg1 any) *gom
 }
 
 // UpdateTransaction mocks base method.
-func (m *MockLedgerServiceServer) UpdateTransaction(arg0 context.Context, arg1 *v10.Transaction) (*v10.Transaction, error) {
+func (m *MockLedgerServiceServer) UpdateTransaction(arg0 context.Context, arg1 *ledgerv1.Transaction) (*ledgerv1.Transaction, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateTransaction", arg0, arg1)
-	ret0, _ := ret[0].(*v10.Transaction)
+	ret0, _ := ret[0].(*ledgerv1.Transaction)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

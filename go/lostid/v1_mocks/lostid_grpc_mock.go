@@ -13,8 +13,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	v1 "github.com/antinvestor/apis/go/common/v1"
-	v10 "github.com/antinvestor/apis/go/lostid/v1"
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
+	lostidv1 "github.com/antinvestor/apis/go/lostid/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -44,14 +44,14 @@ func (m *MockLostIdServiceClient) EXPECT() *MockLostIdServiceClientMockRecorder 
 }
 
 // Collectible mocks base method.
-func (m *MockLostIdServiceClient) Collectible(ctx context.Context, in *v10.CollectibleRequest, opts ...grpc.CallOption) (*v10.CollectibleResponse, error) {
+func (m *MockLostIdServiceClient) Collectible(ctx context.Context, in *lostidv1.CollectibleRequest, opts ...grpc.CallOption) (*lostidv1.CollectibleResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Collectible", varargs...)
-	ret0, _ := ret[0].(*v10.CollectibleResponse)
+	ret0, _ := ret[0].(*lostidv1.CollectibleResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -64,14 +64,14 @@ func (mr *MockLostIdServiceClientMockRecorder) Collectible(ctx, in any, opts ...
 }
 
 // ListCollectible mocks base method.
-func (m *MockLostIdServiceClient) ListCollectible(ctx context.Context, in *v10.ListCollectibleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.ListCollectibleResponse], error) {
+func (m *MockLostIdServiceClient) ListCollectible(ctx context.Context, in *lostidv1.ListCollectibleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[lostidv1.ListCollectibleResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListCollectible", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.ListCollectibleResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[lostidv1.ListCollectibleResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -84,14 +84,14 @@ func (mr *MockLostIdServiceClientMockRecorder) ListCollectible(ctx, in any, opts
 }
 
 // ListSearch mocks base method.
-func (m *MockLostIdServiceClient) ListSearch(ctx context.Context, in *v10.ListSearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.ListSearchResponse], error) {
+func (m *MockLostIdServiceClient) ListSearch(ctx context.Context, in *lostidv1.ListSearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[lostidv1.ListSearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListSearch", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.ListSearchResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[lostidv1.ListSearchResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -104,14 +104,14 @@ func (mr *MockLostIdServiceClientMockRecorder) ListSearch(ctx, in any, opts ...a
 }
 
 // ListTransaction mocks base method.
-func (m *MockLostIdServiceClient) ListTransaction(ctx context.Context, in *v10.ListTransactionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.ListTransactionResponse], error) {
+func (m *MockLostIdServiceClient) ListTransaction(ctx context.Context, in *lostidv1.ListTransactionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[lostidv1.ListTransactionResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ListTransaction", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.ListTransactionResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[lostidv1.ListTransactionResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -124,14 +124,14 @@ func (mr *MockLostIdServiceClientMockRecorder) ListTransaction(ctx, in any, opts
 }
 
 // Progress mocks base method.
-func (m *MockLostIdServiceClient) Progress(ctx context.Context, in *v10.ProgressRequest, opts ...grpc.CallOption) (*v10.ProgressResponse, error) {
+func (m *MockLostIdServiceClient) Progress(ctx context.Context, in *lostidv1.ProgressRequest, opts ...grpc.CallOption) (*lostidv1.ProgressResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Progress", varargs...)
-	ret0, _ := ret[0].(*v10.ProgressResponse)
+	ret0, _ := ret[0].(*lostidv1.ProgressResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -144,14 +144,14 @@ func (mr *MockLostIdServiceClientMockRecorder) Progress(ctx, in any, opts ...any
 }
 
 // Search mocks base method.
-func (m *MockLostIdServiceClient) Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (*v10.SearchResponse, error) {
+func (m *MockLostIdServiceClient) Search(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (*lostidv1.SearchResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Search", varargs...)
-	ret0, _ := ret[0].(*v10.SearchResponse)
+	ret0, _ := ret[0].(*lostidv1.SearchResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -188,10 +188,10 @@ func (m *MockLostIdServiceServer) EXPECT() *MockLostIdServiceServerMockRecorder 
 }
 
 // Collectible mocks base method.
-func (m *MockLostIdServiceServer) Collectible(arg0 context.Context, arg1 *v10.CollectibleRequest) (*v10.CollectibleResponse, error) {
+func (m *MockLostIdServiceServer) Collectible(arg0 context.Context, arg1 *lostidv1.CollectibleRequest) (*lostidv1.CollectibleResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Collectible", arg0, arg1)
-	ret0, _ := ret[0].(*v10.CollectibleResponse)
+	ret0, _ := ret[0].(*lostidv1.CollectibleResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -203,7 +203,7 @@ func (mr *MockLostIdServiceServerMockRecorder) Collectible(arg0, arg1 any) *gomo
 }
 
 // ListCollectible mocks base method.
-func (m *MockLostIdServiceServer) ListCollectible(arg0 *v10.ListCollectibleRequest, arg1 grpc.ServerStreamingServer[v10.ListCollectibleResponse]) error {
+func (m *MockLostIdServiceServer) ListCollectible(arg0 *lostidv1.ListCollectibleRequest, arg1 grpc.ServerStreamingServer[lostidv1.ListCollectibleResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListCollectible", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -217,7 +217,7 @@ func (mr *MockLostIdServiceServerMockRecorder) ListCollectible(arg0, arg1 any) *
 }
 
 // ListSearch mocks base method.
-func (m *MockLostIdServiceServer) ListSearch(arg0 *v10.ListSearchRequest, arg1 grpc.ServerStreamingServer[v10.ListSearchResponse]) error {
+func (m *MockLostIdServiceServer) ListSearch(arg0 *lostidv1.ListSearchRequest, arg1 grpc.ServerStreamingServer[lostidv1.ListSearchResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListSearch", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -231,7 +231,7 @@ func (mr *MockLostIdServiceServerMockRecorder) ListSearch(arg0, arg1 any) *gomoc
 }
 
 // ListTransaction mocks base method.
-func (m *MockLostIdServiceServer) ListTransaction(arg0 *v10.ListTransactionRequest, arg1 grpc.ServerStreamingServer[v10.ListTransactionResponse]) error {
+func (m *MockLostIdServiceServer) ListTransaction(arg0 *lostidv1.ListTransactionRequest, arg1 grpc.ServerStreamingServer[lostidv1.ListTransactionResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListTransaction", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -245,10 +245,10 @@ func (mr *MockLostIdServiceServerMockRecorder) ListTransaction(arg0, arg1 any) *
 }
 
 // Progress mocks base method.
-func (m *MockLostIdServiceServer) Progress(arg0 context.Context, arg1 *v10.ProgressRequest) (*v10.ProgressResponse, error) {
+func (m *MockLostIdServiceServer) Progress(arg0 context.Context, arg1 *lostidv1.ProgressRequest) (*lostidv1.ProgressResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Progress", arg0, arg1)
-	ret0, _ := ret[0].(*v10.ProgressResponse)
+	ret0, _ := ret[0].(*lostidv1.ProgressResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -260,10 +260,10 @@ func (mr *MockLostIdServiceServerMockRecorder) Progress(arg0, arg1 any) *gomock.
 }
 
 // Search mocks base method.
-func (m *MockLostIdServiceServer) Search(arg0 context.Context, arg1 *v1.SearchRequest) (*v10.SearchResponse, error) {
+func (m *MockLostIdServiceServer) Search(arg0 context.Context, arg1 *commonv1.SearchRequest) (*lostidv1.SearchResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", arg0, arg1)
-	ret0, _ := ret[0].(*v10.SearchResponse)
+	ret0, _ := ret[0].(*lostidv1.SearchResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

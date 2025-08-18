@@ -13,8 +13,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	v1 "github.com/antinvestor/apis/go/common/v1"
-	v10 "github.com/antinvestor/apis/go/settings/v1"
+	commonv1 "github.com/antinvestor/apis/go/common/v1"
+	settingsv1 "github.com/antinvestor/apis/go/settings/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )
@@ -44,14 +44,14 @@ func (m *MockSettingsServiceClient) EXPECT() *MockSettingsServiceClientMockRecor
 }
 
 // Get mocks base method.
-func (m *MockSettingsServiceClient) Get(ctx context.Context, in *v10.GetRequest, opts ...grpc.CallOption) (*v10.GetResponse, error) {
+func (m *MockSettingsServiceClient) Get(ctx context.Context, in *settingsv1.GetRequest, opts ...grpc.CallOption) (*settingsv1.GetResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Get", varargs...)
-	ret0, _ := ret[0].(*v10.GetResponse)
+	ret0, _ := ret[0].(*settingsv1.GetResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -64,14 +64,14 @@ func (mr *MockSettingsServiceClientMockRecorder) Get(ctx, in any, opts ...any) *
 }
 
 // List mocks base method.
-func (m *MockSettingsServiceClient) List(ctx context.Context, in *v10.ListRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.ListResponse], error) {
+func (m *MockSettingsServiceClient) List(ctx context.Context, in *settingsv1.ListRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[settingsv1.ListResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "List", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.ListResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[settingsv1.ListResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -84,14 +84,14 @@ func (mr *MockSettingsServiceClientMockRecorder) List(ctx, in any, opts ...any) 
 }
 
 // Search mocks base method.
-func (m *MockSettingsServiceClient) Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v10.SearchResponse], error) {
+func (m *MockSettingsServiceClient) Search(ctx context.Context, in *commonv1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[settingsv1.SearchResponse], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Search", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[v10.SearchResponse])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[settingsv1.SearchResponse])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -104,14 +104,14 @@ func (mr *MockSettingsServiceClientMockRecorder) Search(ctx, in any, opts ...any
 }
 
 // Set mocks base method.
-func (m *MockSettingsServiceClient) Set(ctx context.Context, in *v10.SetRequest, opts ...grpc.CallOption) (*v10.SetResponse, error) {
+func (m *MockSettingsServiceClient) Set(ctx context.Context, in *settingsv1.SetRequest, opts ...grpc.CallOption) (*settingsv1.SetResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Set", varargs...)
-	ret0, _ := ret[0].(*v10.SetResponse)
+	ret0, _ := ret[0].(*settingsv1.SetResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -148,10 +148,10 @@ func (m *MockSettingsServiceServer) EXPECT() *MockSettingsServiceServerMockRecor
 }
 
 // Get mocks base method.
-func (m *MockSettingsServiceServer) Get(arg0 context.Context, arg1 *v10.GetRequest) (*v10.GetResponse, error) {
+func (m *MockSettingsServiceServer) Get(arg0 context.Context, arg1 *settingsv1.GetRequest) (*settingsv1.GetResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Get", arg0, arg1)
-	ret0, _ := ret[0].(*v10.GetResponse)
+	ret0, _ := ret[0].(*settingsv1.GetResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -163,7 +163,7 @@ func (mr *MockSettingsServiceServerMockRecorder) Get(arg0, arg1 any) *gomock.Cal
 }
 
 // List mocks base method.
-func (m *MockSettingsServiceServer) List(arg0 *v10.ListRequest, arg1 grpc.ServerStreamingServer[v10.ListResponse]) error {
+func (m *MockSettingsServiceServer) List(arg0 *settingsv1.ListRequest, arg1 grpc.ServerStreamingServer[settingsv1.ListResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -177,7 +177,7 @@ func (mr *MockSettingsServiceServerMockRecorder) List(arg0, arg1 any) *gomock.Ca
 }
 
 // Search mocks base method.
-func (m *MockSettingsServiceServer) Search(arg0 *v1.SearchRequest, arg1 grpc.ServerStreamingServer[v10.SearchResponse]) error {
+func (m *MockSettingsServiceServer) Search(arg0 *commonv1.SearchRequest, arg1 grpc.ServerStreamingServer[settingsv1.SearchResponse]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -191,10 +191,10 @@ func (mr *MockSettingsServiceServerMockRecorder) Search(arg0, arg1 any) *gomock.
 }
 
 // Set mocks base method.
-func (m *MockSettingsServiceServer) Set(arg0 context.Context, arg1 *v10.SetRequest) (*v10.SetResponse, error) {
+func (m *MockSettingsServiceServer) Set(arg0 context.Context, arg1 *settingsv1.SetRequest) (*settingsv1.SetResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Set", arg0, arg1)
-	ret0, _ := ret[0].(*v10.SetResponse)
+	ret0, _ := ret[0].(*settingsv1.SetResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
