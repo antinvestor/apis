@@ -1,7 +1,7 @@
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.7-20250717185734-6c6e0d3c608e.1 h1:/AZH8sVB6LHv8G+hZlAMCP31NevnesHwYgnlgS5Vt14=
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.7-20250717185734-6c6e0d3c608e.1/go.mod h1:eva/VCrd8X7xuJw+JtwCEyrCKiRRASukFqmirnWBvFU=
-github.com/antinvestor/apis/go/common v1.39.2 h1:wVaQCotpiuM3eI8svT2PNmUK3ytTTE0BIVyUtLE+QKs=
-github.com/antinvestor/apis/go/common v1.39.2/go.mod h1:al0S0c1aIu1w/5cd/MQ11yD6VjLP2v2Ew4T17w1a/YQ=
+github.com/antinvestor/apis/go/common v1.40.1 h1:3EKwgR9K3wT4EVBTYi9J/UQuvJpWz/W3PL991XmVC9I=
+github.com/antinvestor/apis/go/common v1.40.1/go.mod h1:LzKGFskBdeZbx2GKbN/pTQ10stHyc4XypKtUlIn7mxE=
 github.com/go-logr/logr v1.4.3 h1:CjnDlHq8ikf6E492q6eKboGOC0T8CDaOvkHCIg8idEI=
 github.com/go-logr/logr v1.4.3/go.mod h1:9T104GzyrTigFIr8wt5mBrctHMim0Nb2HLGrmQ40KvY=
 github.com/go-logr/stdr v1.2.2 h1:hSWxHoqTgW2S2qGc0LTAI563KZ5YKYRhT3MFKZMbjag=
