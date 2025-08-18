@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.10"
     id("net.nemerosa.versioning") version "3.1.0"
     id("maven-publish")
 }
@@ -61,14 +61,14 @@ subprojects {
     }
 
     dependencies {
-        api("com.google.protobuf:protobuf-java:4.31.1")
+        api("com.google.protobuf:protobuf-java:4.32.0")
         api("io.grpc:grpc-protobuf:1.74.0")
         api("io.grpc:grpc-services:1.74.0")
         api("io.grpc:grpc-stub:1.74.0")
         api("build.buf:protovalidate:0.13.0")
 
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0")
-        api("com.googlecode.libphonenumber:libphonenumber:9.0.11")
+        api("com.googlecode.libphonenumber:libphonenumber:9.0.12")
 
         api("org.slf4j:slf4j-api:2.0.17")
 
