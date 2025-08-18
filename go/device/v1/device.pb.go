@@ -1203,14 +1203,13 @@ func (x *RemoveResponse) GetData() *DeviceObject {
 type LogRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	DeviceId      string                 `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	LinkId        string                 `protobuf:"bytes,2,opt,name=link_id,json=linkId,proto3" json:"link_id,omitempty"`
+	SessionId     string                 `protobuf:"bytes,3,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
 	Ip            string                 `protobuf:"bytes,4,opt,name=ip,proto3" json:"ip,omitempty"`
 	Locale        string                 `protobuf:"bytes,5,opt,name=locale,proto3" json:"locale,omitempty"`
 	UserAgent     string                 `protobuf:"bytes,6,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
 	Os            string                 `protobuf:"bytes,7,opt,name=os,proto3" json:"os,omitempty"`
 	LastSeen      string                 `protobuf:"bytes,8,opt,name=last_seen,json=lastSeen,proto3" json:"last_seen,omitempty"`
 	Extras        map[string]string      `protobuf:"bytes,9,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	SessionId     string                 `protobuf:"bytes,10,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1252,9 +1251,9 @@ func (x *LogRequest) GetDeviceId() string {
 	return ""
 }
 
-func (x *LogRequest) GetLinkId() string {
+func (x *LogRequest) GetSessionId() string {
 	if x != nil {
-		return x.LinkId
+		return x.SessionId
 	}
 	return ""
 }
@@ -1299,13 +1298,6 @@ func (x *LogRequest) GetExtras() map[string]string {
 		return x.Extras
 	}
 	return nil
-}
-
-func (x *LogRequest) GetSessionId() string {
-	if x != nil {
-		return x.SessionId
-	}
-	return ""
 }
 
 type LogResponse struct {
@@ -1908,21 +1900,19 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\rRemoveRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"=\n" +
 	"\x0eRemoveResponse\x12+\n" +
-	"\x04data\x18\x01 \x01(\v2\x17.device.v1.DeviceObjectR\x04data\"\x85\x03\n" +
+	"\x04data\x18\x01 \x01(\v2\x17.device.v1.DeviceObjectR\x04data\"\xef\x02\n" +
 	"\n" +
-	"LogRequest\x128\n" +
-	"\tdevice_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x124\n" +
-	"\alink_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06linkId\x12\x0e\n" +
+	"LogRequest\x12;\n" +
+	"\tdevice_id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x00r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12:\n" +
+	"\n" +
+	"session_id\x18\x03 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tsessionId\x12\x0e\n" +
 	"\x02ip\x18\x04 \x01(\tR\x02ip\x12\x16\n" +
 	"\x06locale\x18\x05 \x01(\tR\x06locale\x12\x1d\n" +
 	"\n" +
 	"user_agent\x18\x06 \x01(\tR\tuserAgent\x12\x0e\n" +
 	"\x02os\x18\a \x01(\tR\x02os\x12\x1b\n" +
 	"\tlast_seen\x18\b \x01(\tR\blastSeen\x129\n" +
-	"\x06extras\x18\t \x03(\v2!.device.v1.LogRequest.ExtrasEntryR\x06extras\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\n" +
-	" \x01(\tR\tsessionId\x1a9\n" +
+	"\x06extras\x18\t \x03(\v2!.device.v1.LogRequest.ExtrasEntryR\x06extras\x1a9\n" +
 	"\vExtrasEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"7\n" +

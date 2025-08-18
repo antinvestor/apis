@@ -236,22 +236,24 @@ message RemoveResponse {
 // The request message containing the information necessary to create a key
 message LogRequest {
   string device_id = 1 [
+    (buf.validate.field).ignore = IGNORE_UNSPECIFIED,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  string link_id = 2 [
+
+  string session_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
+
   string ip = 4;
   string locale = 5;
   string user_agent = 6;
   string os = 7;
   string last_seen = 8;
   map<string, string> extras = 9;
-  string session_id = 10;
 }
 
 message LogResponse {

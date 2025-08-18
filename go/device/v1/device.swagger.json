@@ -814,7 +814,7 @@
         "deviceId": {
           "type": "string"
         },
-        "linkId": {
+        "sessionId": {
           "type": "string"
         },
         "ip": {
@@ -837,9 +837,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "sessionId": {
-          "type": "string"
         }
       },
       "title": "The request message containing the information necessary to create a key"
