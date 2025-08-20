@@ -38,4 +38,16 @@ public interface AddContactResponseOrBuilder extends
    * <code>.profile.v1.ProfileObject data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.profile.v1.ProfileObjectOrBuilder getDataOrBuilder();
+
+  /**
+   * <code>string verification_id = 2 [json_name = "verificationId"];</code>
+   * @return The verificationId.
+   */
+  java.lang.String getVerificationId();
+  /**
+   * <code>string verification_id = 2 [json_name = "verificationId"];</code>
+   * @return The bytes for verificationId.
+   */
+  com.google.protobuf.ByteString
+      getVerificationIdBytes();
 }

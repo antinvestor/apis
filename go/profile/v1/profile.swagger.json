@@ -864,6 +864,9 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/profile.v1.ProfileObject"
+        },
+        "verificationId": {
+          "type": "string"
         }
       }
     },

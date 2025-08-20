@@ -265,6 +265,7 @@ message AddContactRequest {
 
 message AddContactResponse {
   ProfileObject data = 1;
+  string verification_id = 2;
 }
 
 // The request message containing the information necessary to create a profile

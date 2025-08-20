@@ -1347,10 +1347,11 @@ func (x *AddContactRequest) GetExtras() map[string]string {
 }
 
 type AddContactResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *ProfileObject         `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Data           *ProfileObject         `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	VerificationId string                 `protobuf:"bytes,2,opt,name=verification_id,json=verificationId,proto3" json:"verification_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *AddContactResponse) Reset() {
@@ -1388,6 +1389,13 @@ func (x *AddContactResponse) GetData() *ProfileObject {
 		return x.Data
 	}
 	return nil
+}
+
+func (x *AddContactResponse) GetVerificationId() string {
+	if x != nil {
+		return x.VerificationId
+	}
+	return ""
 }
 
 // The request message containing the information necessary to create a profile
@@ -2813,9 +2821,10 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	"\x06extras\x18\x03 \x03(\v2).profile.v1.AddContactRequest.ExtrasEntryR\x06extras\x1a9\n" +
 	"\vExtrasEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"l\n" +
 	"\x12AddContactResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\xe1\x01\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\x12'\n" +
+	"\x0fverification_id\x18\x02 \x01(\tR\x0everificationId\"\xe1\x01\n" +
 	"\x14CreateContactRequest\x12.\n" +
 	"\x02id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x18\n" +
 	"\acontact\x18\x02 \x01(\tR\acontact\x12D\n" +

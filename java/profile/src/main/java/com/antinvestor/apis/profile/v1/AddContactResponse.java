@@ -42,6 +42,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private AddContactResponse() {
+    verificationId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -84,6 +85,45 @@ private static final long serialVersionUID = 0L;
     return data_ == null ? com.antinvestor.apis.profile.v1.ProfileObject.getDefaultInstance() : data_;
   }
 
+  public static final int VERIFICATION_ID_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object verificationId_ = "";
+  /**
+   * <code>string verification_id = 2 [json_name = "verificationId"];</code>
+   * @return The verificationId.
+   */
+  @java.lang.Override
+  public java.lang.String getVerificationId() {
+    java.lang.Object ref = verificationId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      verificationId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string verification_id = 2 [json_name = "verificationId"];</code>
+   * @return The bytes for verificationId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getVerificationIdBytes() {
+    java.lang.Object ref = verificationId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      verificationId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -101,6 +141,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeMessage(1, getData());
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(verificationId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, verificationId_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -113,6 +156,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, getData());
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(verificationId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, verificationId_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -134,6 +180,8 @@ private static final long serialVersionUID = 0L;
       if (!getData()
           .equals(other.getData())) return false;
     }
+    if (!getVerificationId()
+        .equals(other.getVerificationId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -149,6 +197,8 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + DATA_FIELD_NUMBER;
       hash = (53 * hash) + getData().hashCode();
     }
+    hash = (37 * hash) + VERIFICATION_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getVerificationId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -291,6 +341,7 @@ private static final long serialVersionUID = 0L;
         dataBuilder_.dispose();
         dataBuilder_ = null;
       }
+      verificationId_ = "";
       return this;
     }
 
@@ -331,6 +382,9 @@ private static final long serialVersionUID = 0L;
             : dataBuilder_.build();
         to_bitField0_ |= 0x00000001;
       }
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.verificationId_ = verificationId_;
+      }
       result.bitField0_ |= to_bitField0_;
     }
 
@@ -348,6 +402,11 @@ private static final long serialVersionUID = 0L;
       if (other == com.antinvestor.apis.profile.v1.AddContactResponse.getDefaultInstance()) return this;
       if (other.hasData()) {
         mergeData(other.getData());
+      }
+      if (!other.getVerificationId().isEmpty()) {
+        verificationId_ = other.verificationId_;
+        bitField0_ |= 0x00000002;
+        onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -382,6 +441,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000001;
               break;
             } // case 10
+            case 18: {
+              verificationId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 18
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -518,6 +582,78 @@ private static final long serialVersionUID = 0L;
         data_ = null;
       }
       return dataBuilder_;
+    }
+
+    private java.lang.Object verificationId_ = "";
+    /**
+     * <code>string verification_id = 2 [json_name = "verificationId"];</code>
+     * @return The verificationId.
+     */
+    public java.lang.String getVerificationId() {
+      java.lang.Object ref = verificationId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        verificationId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string verification_id = 2 [json_name = "verificationId"];</code>
+     * @return The bytes for verificationId.
+     */
+    public com.google.protobuf.ByteString
+        getVerificationIdBytes() {
+      java.lang.Object ref = verificationId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        verificationId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string verification_id = 2 [json_name = "verificationId"];</code>
+     * @param value The verificationId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setVerificationId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      verificationId_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string verification_id = 2 [json_name = "verificationId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearVerificationId() {
+      verificationId_ = getDefaultInstance().getVerificationId();
+      bitField0_ = (bitField0_ & ~0x00000002);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string verification_id = 2 [json_name = "verificationId"];</code>
+     * @param value The bytes for verificationId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setVerificationIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      verificationId_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
     }
 
     // @@protoc_insertion_point(builder_scope:profile.v1.AddContactResponse)
