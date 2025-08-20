@@ -122,13 +122,13 @@
         ]
       },
       "post": {
-        "summary": "Adds a new contact based on the request/this leads to automatic verification.",
-        "operationId": "ProfileService_AddContact",
+        "summary": "Creates a new free contact based on the details provided.",
+        "operationId": "ProfileService_CreateContact",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/profile.v1.AddContactResponse"
+              "$ref": "#/definitions/profile.v1.CreateContactResponse"
             }
           },
           "default": {
@@ -144,7 +144,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/profile.v1.AddContactRequest"
+              "$ref": "#/definitions/profile.v1.CreateContactRequest"
             }
           }
         ],
@@ -738,6 +738,45 @@
           "profile.v1.ProfileService"
         ]
       }
+    },
+    "/{id}/contact": {
+      "post": {
+        "summary": "Adds a new contact based on the request/this leads to automatic verification.",
+        "operationId": "ProfileService_AddContact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/profile.v1.AddContactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/profile.v1.ProfileService.AddContactBody"
+            }
+          }
+        ],
+        "tags": [
+          "profile.v1.ProfileService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -997,6 +1036,32 @@
       "description": "- EMAIL: buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX",
       "title": "buf:lint:ignore ENUM_VALUE_PREFIX"
     },
+    "profile.v1.CreateContactRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "contact": {
+          "type": "string"
+        },
+        "extras": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "The request message containing the information necessary to create a profile"
+    },
+    "profile.v1.CreateContactResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/profile.v1.ContactObject"
+        }
+      }
+    },
     "profile.v1.CreateContactVerificationResponse": {
       "type": "object",
       "properties": {
@@ -1135,6 +1200,21 @@
         }
       },
       "title": "The response message containing the full profile object"
+    },
+    "profile.v1.ProfileService.AddContactBody": {
+      "type": "object",
+      "properties": {
+        "contact": {
+          "type": "string"
+        },
+        "extras": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "The request message containing the information necessary to create a profile"
     },
     "profile.v1.ProfileService.CheckVerificationBody": {
       "type": "object",

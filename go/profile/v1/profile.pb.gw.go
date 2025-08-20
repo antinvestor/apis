@@ -254,12 +254,21 @@ func request_ProfileService_AddContact_0(ctx context.Context, marshaler runtime.
 	var (
 		protoReq AddContactRequest
 		metadata runtime.ServerMetadata
+		err      error
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	val, ok := pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
 	msg, err := client.AddContact(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -269,11 +278,47 @@ func local_request_ProfileService_AddContact_0(ctx context.Context, marshaler ru
 	var (
 		protoReq AddContactRequest
 		metadata runtime.ServerMetadata
+		err      error
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
+	val, ok := pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
 	msg, err := server.AddContact(ctx, &protoReq)
+	return msg, metadata, err
+}
+
+func request_ProfileService_CreateContact_0(ctx context.Context, marshaler runtime.Marshaler, client ProfileServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq CreateContactRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	msg, err := client.CreateContact(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_ProfileService_CreateContact_0(ctx context.Context, marshaler runtime.Marshaler, server ProfileServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq CreateContactRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	msg, err := server.CreateContact(ctx, &protoReq)
 	return msg, metadata, err
 }
 
@@ -754,7 +799,7 @@ func RegisterProfileServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/profile.v1.ProfileService/AddContact", runtime.WithHTTPPathPattern("/contact"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/profile.v1.ProfileService/AddContact", runtime.WithHTTPPathPattern("/{id}/contact"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -767,6 +812,26 @@ func RegisterProfileServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 			return
 		}
 		forward_ProfileService_AddContact_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodPost, pattern_ProfileService_CreateContact_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/profile.v1.ProfileService/CreateContact", runtime.WithHTTPPathPattern("/contact"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_ProfileService_CreateContact_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_ProfileService_CreateContact_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodPost, pattern_ProfileService_CreateContactVerification_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -1088,7 +1153,7 @@ func RegisterProfileServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/profile.v1.ProfileService/AddContact", runtime.WithHTTPPathPattern("/contact"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/profile.v1.ProfileService/AddContact", runtime.WithHTTPPathPattern("/{id}/contact"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1100,6 +1165,23 @@ func RegisterProfileServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 			return
 		}
 		forward_ProfileService_AddContact_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodPost, pattern_ProfileService_CreateContact_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/profile.v1.ProfileService/CreateContact", runtime.WithHTTPPathPattern("/contact"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_ProfileService_CreateContact_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_ProfileService_CreateContact_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodPost, pattern_ProfileService_CreateContactVerification_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -1281,7 +1363,8 @@ var (
 	pattern_ProfileService_Merge_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"merge"}, ""))
 	pattern_ProfileService_Create_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{""}, ""))
 	pattern_ProfileService_Update_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{1, 0, 4, 1, 5, 0}, []string{"id"}, ""))
-	pattern_ProfileService_AddContact_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"contact"}, ""))
+	pattern_ProfileService_AddContact_0                = runtime.MustPattern(runtime.NewPattern(1, []int{1, 0, 4, 1, 5, 0, 2, 1}, []string{"id", "contact"}, ""))
+	pattern_ProfileService_CreateContact_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"contact"}, ""))
 	pattern_ProfileService_CreateContactVerification_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3}, []string{"contact", "id", "verification", "create"}, ""))
 	pattern_ProfileService_CheckVerification_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3}, []string{"contact", "id", "verification", "check"}, ""))
 	pattern_ProfileService_RemoveContact_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"contact", "id"}, ""))
@@ -1302,6 +1385,7 @@ var (
 	forward_ProfileService_Create_0                    = runtime.ForwardResponseMessage
 	forward_ProfileService_Update_0                    = runtime.ForwardResponseMessage
 	forward_ProfileService_AddContact_0                = runtime.ForwardResponseMessage
+	forward_ProfileService_CreateContact_0             = runtime.ForwardResponseMessage
 	forward_ProfileService_CreateContactVerification_0 = runtime.ForwardResponseMessage
 	forward_ProfileService_CheckVerification_0         = runtime.ForwardResponseMessage
 	forward_ProfileService_RemoveContact_0             = runtime.ForwardResponseMessage

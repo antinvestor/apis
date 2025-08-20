@@ -40,6 +40,7 @@ const (
 	ProfileService_Create_FullMethodName                    = "/profile.v1.ProfileService/Create"
 	ProfileService_Update_FullMethodName                    = "/profile.v1.ProfileService/Update"
 	ProfileService_AddContact_FullMethodName                = "/profile.v1.ProfileService/AddContact"
+	ProfileService_CreateContact_FullMethodName             = "/profile.v1.ProfileService/CreateContact"
 	ProfileService_CreateContactVerification_FullMethodName = "/profile.v1.ProfileService/CreateContactVerification"
 	ProfileService_CheckVerification_FullMethodName         = "/profile.v1.ProfileService/CheckVerification"
 	ProfileService_RemoveContact_FullMethodName             = "/profile.v1.ProfileService/RemoveContact"
@@ -72,6 +73,8 @@ type ProfileServiceClient interface {
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
 	// Adds a new contact based on the request/this leads to automatic verification.
 	AddContact(ctx context.Context, in *AddContactRequest, opts ...grpc.CallOption) (*AddContactResponse, error)
+	// Creates a new free contact based on the details provided.
+	CreateContact(ctx context.Context, in *CreateContactRequest, opts ...grpc.CallOption) (*CreateContactResponse, error)
 	// Create a new contact verification request
 	CreateContactVerification(ctx context.Context, in *CreateContactVerificationRequest, opts ...grpc.CallOption) (*CreateContactVerificationResponse, error)
 	// Checks the status of a verification
@@ -175,6 +178,16 @@ func (c *profileServiceClient) AddContact(ctx context.Context, in *AddContactReq
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddContactResponse)
 	err := c.cc.Invoke(ctx, ProfileService_AddContact_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *profileServiceClient) CreateContact(ctx context.Context, in *CreateContactRequest, opts ...grpc.CallOption) (*CreateContactResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateContactResponse)
+	err := c.cc.Invoke(ctx, ProfileService_CreateContact_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -319,6 +332,8 @@ type ProfileServiceServer interface {
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
 	// Adds a new contact based on the request/this leads to automatic verification.
 	AddContact(context.Context, *AddContactRequest) (*AddContactResponse, error)
+	// Creates a new free contact based on the details provided.
+	CreateContact(context.Context, *CreateContactRequest) (*CreateContactResponse, error)
 	// Create a new contact verification request
 	CreateContactVerification(context.Context, *CreateContactVerificationRequest) (*CreateContactVerificationResponse, error)
 	// Checks the status of a verification
@@ -369,6 +384,9 @@ func (UnimplementedProfileServiceServer) Update(context.Context, *UpdateRequest)
 }
 func (UnimplementedProfileServiceServer) AddContact(context.Context, *AddContactRequest) (*AddContactResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddContact not implemented")
+}
+func (UnimplementedProfileServiceServer) CreateContact(context.Context, *CreateContactRequest) (*CreateContactResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateContact not implemented")
 }
 func (UnimplementedProfileServiceServer) CreateContactVerification(context.Context, *CreateContactVerificationRequest) (*CreateContactVerificationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateContactVerification not implemented")
@@ -536,6 +554,24 @@ func _ProfileService_AddContact_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProfileServiceServer).AddContact(ctx, req.(*AddContactRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProfileService_CreateContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateContactRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).CreateContact(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProfileService_CreateContact_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).CreateContact(ctx, req.(*CreateContactRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -736,6 +772,10 @@ var ProfileService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddContact",
 			Handler:    _ProfileService_AddContact_Handler,
+		},
+		{
+			MethodName: "CreateContact",
+			Handler:    _ProfileService_CreateContact_Handler,
 		},
 		{
 			MethodName: "CreateContactVerification",

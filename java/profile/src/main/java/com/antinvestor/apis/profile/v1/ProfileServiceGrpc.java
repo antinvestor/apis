@@ -246,6 +246,37 @@ public final class ProfileServiceGrpc {
     return getAddContactMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.CreateContactRequest,
+      com.antinvestor.apis.profile.v1.CreateContactResponse> getCreateContactMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CreateContact",
+      requestType = com.antinvestor.apis.profile.v1.CreateContactRequest.class,
+      responseType = com.antinvestor.apis.profile.v1.CreateContactResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.CreateContactRequest,
+      com.antinvestor.apis.profile.v1.CreateContactResponse> getCreateContactMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.CreateContactRequest, com.antinvestor.apis.profile.v1.CreateContactResponse> getCreateContactMethod;
+    if ((getCreateContactMethod = ProfileServiceGrpc.getCreateContactMethod) == null) {
+      synchronized (ProfileServiceGrpc.class) {
+        if ((getCreateContactMethod = ProfileServiceGrpc.getCreateContactMethod) == null) {
+          ProfileServiceGrpc.getCreateContactMethod = getCreateContactMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.profile.v1.CreateContactRequest, com.antinvestor.apis.profile.v1.CreateContactResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CreateContact"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.profile.v1.CreateContactRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.profile.v1.CreateContactResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ProfileServiceMethodDescriptorSupplier("CreateContact"))
+              .build();
+        }
+      }
+    }
+    return getCreateContactMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.profile.v1.CreateContactVerificationRequest,
       com.antinvestor.apis.profile.v1.CreateContactVerificationResponse> getCreateContactVerificationMethod;
 
@@ -694,6 +725,16 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
+     * Creates a new free contact based on the details provided.
+     * </pre>
+     */
+    default void createContact(com.antinvestor.apis.profile.v1.CreateContactRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.CreateContactResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreateContactMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * Create a new contact verification request
      * </pre>
      */
@@ -905,6 +946,17 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
+     * Creates a new free contact based on the details provided.
+     * </pre>
+     */
+    public void createContact(com.antinvestor.apis.profile.v1.CreateContactRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.CreateContactResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getCreateContactMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * Create a new contact verification request
      * </pre>
      */
@@ -1107,6 +1159,16 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
+     * Creates a new free contact based on the details provided.
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.CreateContactResponse createContact(com.antinvestor.apis.profile.v1.CreateContactRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
+          getChannel(), getCreateContactMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      * Create a new contact verification request
      * </pre>
      */
@@ -1302,6 +1364,16 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
+     * Creates a new free contact based on the details provided.
+     * </pre>
+     */
+    public com.antinvestor.apis.profile.v1.CreateContactResponse createContact(com.antinvestor.apis.profile.v1.CreateContactRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreateContactMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      * Create a new contact verification request
      * </pre>
      */
@@ -1490,6 +1562,17 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
+     * Creates a new free contact based on the details provided.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.CreateContactResponse> createContact(
+        com.antinvestor.apis.profile.v1.CreateContactRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getCreateContactMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * Create a new contact verification request
      * </pre>
      */
@@ -1584,16 +1667,17 @@ public final class ProfileServiceGrpc {
   private static final int METHODID_CREATE = 4;
   private static final int METHODID_UPDATE = 5;
   private static final int METHODID_ADD_CONTACT = 6;
-  private static final int METHODID_CREATE_CONTACT_VERIFICATION = 7;
-  private static final int METHODID_CHECK_VERIFICATION = 8;
-  private static final int METHODID_REMOVE_CONTACT = 9;
-  private static final int METHODID_SEARCH_ROSTER = 10;
-  private static final int METHODID_ADD_ROSTER = 11;
-  private static final int METHODID_REMOVE_ROSTER = 12;
-  private static final int METHODID_ADD_ADDRESS = 13;
-  private static final int METHODID_ADD_RELATIONSHIP = 14;
-  private static final int METHODID_DELETE_RELATIONSHIP = 15;
-  private static final int METHODID_LIST_RELATIONSHIP = 16;
+  private static final int METHODID_CREATE_CONTACT = 7;
+  private static final int METHODID_CREATE_CONTACT_VERIFICATION = 8;
+  private static final int METHODID_CHECK_VERIFICATION = 9;
+  private static final int METHODID_REMOVE_CONTACT = 10;
+  private static final int METHODID_SEARCH_ROSTER = 11;
+  private static final int METHODID_ADD_ROSTER = 12;
+  private static final int METHODID_REMOVE_ROSTER = 13;
+  private static final int METHODID_ADD_ADDRESS = 14;
+  private static final int METHODID_ADD_RELATIONSHIP = 15;
+  private static final int METHODID_DELETE_RELATIONSHIP = 16;
+  private static final int METHODID_LIST_RELATIONSHIP = 17;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1639,6 +1723,10 @@ public final class ProfileServiceGrpc {
         case METHODID_ADD_CONTACT:
           serviceImpl.addContact((com.antinvestor.apis.profile.v1.AddContactRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.AddContactResponse>) responseObserver);
+          break;
+        case METHODID_CREATE_CONTACT:
+          serviceImpl.createContact((com.antinvestor.apis.profile.v1.CreateContactRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.profile.v1.CreateContactResponse>) responseObserver);
           break;
         case METHODID_CREATE_CONTACT_VERIFICATION:
           serviceImpl.createContactVerification((com.antinvestor.apis.profile.v1.CreateContactVerificationRequest) request,
@@ -1747,6 +1835,13 @@ public final class ProfileServiceGrpc {
               com.antinvestor.apis.profile.v1.AddContactRequest,
               com.antinvestor.apis.profile.v1.AddContactResponse>(
                 service, METHODID_ADD_CONTACT)))
+        .addMethod(
+          getCreateContactMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.profile.v1.CreateContactRequest,
+              com.antinvestor.apis.profile.v1.CreateContactResponse>(
+                service, METHODID_CREATE_CONTACT)))
         .addMethod(
           getCreateContactVerificationMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -1872,6 +1967,7 @@ public final class ProfileServiceGrpc {
               .addMethod(getCreateMethod())
               .addMethod(getUpdateMethod())
               .addMethod(getAddContactMethod())
+              .addMethod(getCreateContactMethod())
               .addMethod(getCreateContactVerificationMethod())
               .addMethod(getCheckVerificationMethod())
               .addMethod(getRemoveContactMethod())

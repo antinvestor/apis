@@ -267,6 +267,22 @@ message AddContactResponse {
   ProfileObject data = 1;
 }
 
+// The request message containing the information necessary to create a profile
+message CreateContactRequest {
+  string id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string contact = 2;
+  map<string, string> extras = 3;
+}
+
+message CreateContactResponse {
+  ContactObject data = 1;
+}
+
 // The request message containing the information necessary to verify a contact
 message CreateContactVerificationRequest {
   string id = 1 [
@@ -516,6 +532,14 @@ service ProfileService {
 
   // Adds a new contact based on the request/this leads to automatic verification.
   rpc AddContact(AddContactRequest) returns (AddContactResponse) {
+    option (google.api.http) = {
+      post: "/{id}/contact"
+      body: "*"
+    };
+  }
+
+  // Creates a new free contact based on the details provided.
+  rpc CreateContact(CreateContactRequest) returns (CreateContactResponse) {
     option (google.api.http) = {
       post: "/contact"
       body: "*"
