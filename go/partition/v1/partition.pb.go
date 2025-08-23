@@ -27,6 +27,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -43,7 +44,7 @@ type TenantObject struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -92,7 +93,7 @@ func (x *TenantObject) GetDescription() string {
 	return ""
 }
 
-func (x *TenantObject) GetProperties() map[string]string {
+func (x *TenantObject) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -106,7 +107,7 @@ type PartitionCreateRequest struct {
 	TenantId      string                 `protobuf:"bytes,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	ParentId      string                 `protobuf:"bytes,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
 	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,5,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,5,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -169,7 +170,7 @@ func (x *PartitionCreateRequest) GetDescription() string {
 	return ""
 }
 
-func (x *PartitionCreateRequest) GetProperties() map[string]string {
+func (x *PartitionCreateRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -272,7 +273,7 @@ type ListTenantRequest struct {
 	StartDate     string                 `protobuf:"bytes,4,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
 	EndDate       string                 `protobuf:"bytes,5,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
 	Properties    []string               `protobuf:"bytes,6,rep,name=properties,proto3" json:"properties,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,7,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,7,opt,name=extras,proto3" json:"extras,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -349,7 +350,7 @@ func (x *ListTenantRequest) GetProperties() []string {
 	return nil
 }
 
-func (x *ListTenantRequest) GetExtras() map[string]string {
+func (x *ListTenantRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -405,7 +406,7 @@ type CreateTenantRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -454,7 +455,7 @@ func (x *CreateTenantRequest) GetDescription() string {
 	return ""
 }
 
-func (x *CreateTenantRequest) GetProperties() map[string]string {
+func (x *CreateTenantRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -601,7 +602,7 @@ type ListPartitionRequest struct {
 	StartDate     string                 `protobuf:"bytes,4,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
 	EndDate       string                 `protobuf:"bytes,5,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
 	Properties    []string               `protobuf:"bytes,6,rep,name=properties,proto3" json:"properties,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,7,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,7,opt,name=extras,proto3" json:"extras,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -678,7 +679,7 @@ func (x *ListPartitionRequest) GetProperties() []string {
 	return nil
 }
 
-func (x *ListPartitionRequest) GetExtras() map[string]string {
+func (x *ListPartitionRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -736,7 +737,7 @@ type CreatePartitionRequest struct {
 	ParentId      string                 `protobuf:"bytes,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,5,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,5,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -799,7 +800,7 @@ func (x *CreatePartitionRequest) GetDescription() string {
 	return ""
 }
 
-func (x *CreatePartitionRequest) GetProperties() map[string]string {
+func (x *CreatePartitionRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -856,7 +857,7 @@ type UpdatePartitionRequest struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	State         v1.STATE               `protobuf:"varint,4,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,5,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,5,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -919,7 +920,7 @@ func (x *UpdatePartitionRequest) GetState() v1.STATE {
 	return v1.STATE(0)
 }
 
-func (x *UpdatePartitionRequest) GetProperties() map[string]string {
+func (x *UpdatePartitionRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -978,7 +979,7 @@ type PartitionObject struct {
 	ParentId      string                 `protobuf:"bytes,4,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
 	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	State         v1.STATE               `protobuf:"varint,6,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,7,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,7,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1055,7 +1056,7 @@ func (x *PartitionObject) GetState() v1.STATE {
 	return v1.STATE(0)
 }
 
-func (x *PartitionObject) GetProperties() map[string]string {
+func (x *PartitionObject) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -1067,7 +1068,7 @@ type CreatePartitionRoleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PartitionId   string                 `protobuf:"bytes,1,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1116,7 +1117,7 @@ func (x *CreatePartitionRoleRequest) GetName() string {
 	return ""
 }
 
-func (x *CreatePartitionRoleRequest) GetProperties() map[string]string {
+func (x *CreatePartitionRoleRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -1172,7 +1173,7 @@ type PartitionRoleObject struct {
 	PartitionRoleId string                 `protobuf:"bytes,1,opt,name=partition_role_id,json=partitionRoleId,proto3" json:"partition_role_id,omitempty"`
 	PartitionId     string                 `protobuf:"bytes,2,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
 	Name            string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Properties      map[string]string      `protobuf:"bytes,4,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties      *structpb.Struct       `protobuf:"bytes,4,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1228,7 +1229,7 @@ func (x *PartitionRoleObject) GetName() string {
 	return ""
 }
 
-func (x *PartitionRoleObject) GetProperties() map[string]string {
+func (x *PartitionRoleObject) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -2544,35 +2545,29 @@ var File_partition_v1_partition_proto protoreflect.FileDescriptor
 
 const file_partition_v1_partition_proto_rawDesc = "" +
 	"\n" +
-	"\x1cpartition/v1/partition.proto\x12\fpartition.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xf4\x01\n" +
+	"\x1cpartition/v1/partition.proto\x12\fpartition.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa2\x01\n" +
 	"\fTenantObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12,\n" +
 	"\vdescription\x18\x02 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\n" +
-	"\x18\xf4\x03R\vdescription\x12J\n" +
+	"\x18\xf4\x03R\vdescription\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v2*.partition.v1.TenantObject.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xee\x02\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"\x92\x02\n" +
 	"\x16PartitionCreateRequest\x12\x1d\n" +
 	"\x04name\x18\x01 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x128\n" +
 	"\ttenant_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\btenantId\x128\n" +
 	"\tparent_id\x18\x03 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bparentId\x12,\n" +
 	"\vdescription\x18\x04 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\n" +
-	"\x18\xfa\x01R\vdescription\x12T\n" +
+	"\x18\xfa\x01R\vdescription\x127\n" +
 	"\n" +
-	"properties\x18\x05 \x03(\v24.partition.v1.PartitionCreateRequest.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +
+	"properties\x18\x05 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"?\n" +
 	"\x10GetTenantRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"C\n" +
 	"\x11GetTenantResponse\x12.\n" +
-	"\x04data\x18\x01 \x01(\v2\x1a.partition.v1.TenantObjectR\x04data\"\xad\x02\n" +
+	"\x04data\x18\x01 \x01(\v2\x1a.partition.v1.TenantObjectR\x04data\"\xde\x01\n" +
 	"\x11ListTenantRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x14\n" +
@@ -2582,30 +2577,24 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"\bend_date\x18\x05 \x01(\tR\aendDate\x12\x1e\n" +
 	"\n" +
 	"properties\x18\x06 \x03(\tR\n" +
-	"properties\x12C\n" +
-	"\x06extras\x18\a \x03(\v2+.partition.v1.ListTenantRequest.ExtrasEntryR\x06extras\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"D\n" +
+	"properties\x12/\n" +
+	"\x06extras\x18\a \x01(\v2\x17.google.protobuf.StructR\x06extras\"D\n" +
 	"\x12ListTenantResponse\x12.\n" +
-	"\x04data\x18\x01 \x03(\v2\x1a.partition.v1.TenantObjectR\x04data\"\xf4\x01\n" +
+	"\x04data\x18\x01 \x03(\v2\x1a.partition.v1.TenantObjectR\x04data\"\x9b\x01\n" +
 	"\x13CreateTenantRequest\x12\x1d\n" +
 	"\x04name\x18\x01 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12,\n" +
 	"\vdescription\x18\x02 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\n" +
-	"\x18\xf4\x03R\vdescription\x12Q\n" +
+	"\x18\xf4\x03R\vdescription\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v21.partition.v1.CreateTenantRequest.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"F\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"F\n" +
 	"\x14CreateTenantResponse\x12.\n" +
 	"\x04data\x18\x01 \x01(\v2\x1a.partition.v1.TenantObjectR\x04data\"B\n" +
 	"\x13GetPartitionRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"I\n" +
 	"\x14GetPartitionResponse\x121\n" +
-	"\x04data\x18\x01 \x01(\v2\x1d.partition.v1.PartitionObjectR\x04data\"\xb3\x02\n" +
+	"\x04data\x18\x01 \x01(\v2\x1d.partition.v1.PartitionObjectR\x04data\"\xe1\x01\n" +
 	"\x14ListPartitionRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x14\n" +
@@ -2615,43 +2604,34 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"\bend_date\x18\x05 \x01(\tR\aendDate\x12\x1e\n" +
 	"\n" +
 	"properties\x18\x06 \x03(\tR\n" +
-	"properties\x12F\n" +
-	"\x06extras\x18\a \x03(\v2..partition.v1.ListPartitionRequest.ExtrasEntryR\x06extras\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"J\n" +
+	"properties\x12/\n" +
+	"\x06extras\x18\a \x01(\v2\x17.google.protobuf.StructR\x06extras\"J\n" +
 	"\x15ListPartitionResponse\x121\n" +
-	"\x04data\x18\x01 \x03(\v2\x1d.partition.v1.PartitionObjectR\x04data\"\xee\x02\n" +
+	"\x04data\x18\x01 \x03(\v2\x1d.partition.v1.PartitionObjectR\x04data\"\x92\x02\n" +
 	"\x16CreatePartitionRequest\x128\n" +
 	"\ttenant_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\btenantId\x128\n" +
 	"\tparent_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bparentId\x12\x1d\n" +
 	"\x04name\x18\x03 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12,\n" +
 	"\vdescription\x18\x04 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\n" +
-	"\x18\xf4\x03R\vdescription\x12T\n" +
+	"\x18\xf4\x03R\vdescription\x127\n" +
 	"\n" +
-	"properties\x18\x05 \x03(\v24.partition.v1.CreatePartitionRequest.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"L\n" +
+	"properties\x18\x05 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"L\n" +
 	"\x17CreatePartitionResponse\x121\n" +
-	"\x04data\x18\x01 \x01(\v2\x1d.partition.v1.PartitionObjectR\x04data\"\xcf\x02\n" +
+	"\x04data\x18\x01 \x01(\v2\x1d.partition.v1.PartitionObjectR\x04data\"\xf3\x01\n" +
 	"\x16UpdatePartitionRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\n" +
 	"\x18\xf4\x03R\vdescription\x12&\n" +
-	"\x05state\x18\x04 \x01(\x0e2\x10.common.v1.STATER\x05state\x12T\n" +
+	"\x05state\x18\x04 \x01(\x0e2\x10.common.v1.STATER\x05state\x127\n" +
 	"\n" +
-	"properties\x18\x05 \x03(\v24.partition.v1.UpdatePartitionRequest.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"L\n" +
+	"properties\x18\x05 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"L\n" +
 	"\x17UpdatePartitionResponse\x121\n" +
-	"\x04data\x18\x01 \x01(\v2\x1d.partition.v1.PartitionObjectR\x04data\"\xb5\x03\n" +
+	"\x04data\x18\x01 \x01(\v2\x1d.partition.v1.PartitionObjectR\x04data\"\xe0\x02\n" +
 	"\x0fPartitionObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x128\n" +
@@ -2660,34 +2640,25 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"\vdescription\x18\x05 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\n" +
 	"\x18\xf4\x03R\vdescription\x12&\n" +
-	"\x05state\x18\x06 \x01(\x0e2\x10.common.v1.STATER\x05state\x12M\n" +
+	"\x05state\x18\x06 \x01(\x0e2\x10.common.v1.STATER\x05state\x127\n" +
 	"\n" +
-	"properties\x18\a \x03(\v2-.partition.v1.PartitionObject.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x94\x02\n" +
+	"properties\x18\a \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"\xb4\x01\n" +
 	"\x1aCreatePartitionRoleRequest\x12>\n" +
 	"\fpartition_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\vpartitionId\x12\x1d\n" +
-	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12X\n" +
+	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v28.partition.v1.CreatePartitionRoleRequest.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"T\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"T\n" +
 	"\x1bCreatePartitionRoleResponse\x125\n" +
-	"\x04data\x18\x01 \x01(\v2!.partition.v1.PartitionRoleObjectR\x04data\"\xcf\x02\n" +
+	"\x04data\x18\x01 \x01(\v2!.partition.v1.PartitionRoleObjectR\x04data\"\xf6\x01\n" +
 	"\x13PartitionRoleObject\x12G\n" +
 	"\x11partition_role_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x0fpartitionRoleId\x12>\n" +
 	"\fpartition_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\vpartitionId\x12\x1d\n" +
-	"\x04name\x18\x03 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12Q\n" +
+	"\x04name\x18\x03 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x127\n" +
 	"\n" +
-	"properties\x18\x04 \x03(\v21.partition.v1.PartitionRoleObject.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"I\n" +
+	"properties\x18\x04 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"I\n" +
 	"\x1aRemovePartitionRoleRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\";\n" +
 	"\x1bRemovePartitionRoleResponse\x12\x1c\n" +
@@ -2812,7 +2783,7 @@ func file_partition_v1_partition_proto_rawDescGZIP() []byte {
 	return file_partition_v1_partition_proto_rawDescData
 }
 
-var file_partition_v1_partition_proto_msgTypes = make([]protoimpl.MessageInfo, 55)
+var file_partition_v1_partition_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
 var file_partition_v1_partition_proto_goTypes = []any{
 	(*TenantObject)(nil),                // 0: partition.v1.TenantObject
 	(*PartitionCreateRequest)(nil),      // 1: partition.v1.PartitionCreateRequest
@@ -2859,45 +2830,36 @@ var file_partition_v1_partition_proto_goTypes = []any{
 	(*RemoveAccessRoleResponse)(nil),    // 42: partition.v1.RemoveAccessRoleResponse
 	(*ListAccessRoleRequest)(nil),       // 43: partition.v1.ListAccessRoleRequest
 	(*ListAccessRoleResponse)(nil),      // 44: partition.v1.ListAccessRoleResponse
-	nil,                                 // 45: partition.v1.TenantObject.PropertiesEntry
-	nil,                                 // 46: partition.v1.PartitionCreateRequest.PropertiesEntry
-	nil,                                 // 47: partition.v1.ListTenantRequest.ExtrasEntry
-	nil,                                 // 48: partition.v1.CreateTenantRequest.PropertiesEntry
-	nil,                                 // 49: partition.v1.ListPartitionRequest.ExtrasEntry
-	nil,                                 // 50: partition.v1.CreatePartitionRequest.PropertiesEntry
-	nil,                                 // 51: partition.v1.UpdatePartitionRequest.PropertiesEntry
-	nil,                                 // 52: partition.v1.PartitionObject.PropertiesEntry
-	nil,                                 // 53: partition.v1.CreatePartitionRoleRequest.PropertiesEntry
-	nil,                                 // 54: partition.v1.PartitionRoleObject.PropertiesEntry
-	(v1.STATE)(0),                       // 55: common.v1.STATE
+	(*structpb.Struct)(nil),             // 45: google.protobuf.Struct
+	(v1.STATE)(0),                       // 46: common.v1.STATE
 }
 var file_partition_v1_partition_proto_depIdxs = []int32{
-	45, // 0: partition.v1.TenantObject.properties:type_name -> partition.v1.TenantObject.PropertiesEntry
-	46, // 1: partition.v1.PartitionCreateRequest.properties:type_name -> partition.v1.PartitionCreateRequest.PropertiesEntry
+	45, // 0: partition.v1.TenantObject.properties:type_name -> google.protobuf.Struct
+	45, // 1: partition.v1.PartitionCreateRequest.properties:type_name -> google.protobuf.Struct
 	0,  // 2: partition.v1.GetTenantResponse.data:type_name -> partition.v1.TenantObject
-	47, // 3: partition.v1.ListTenantRequest.extras:type_name -> partition.v1.ListTenantRequest.ExtrasEntry
+	45, // 3: partition.v1.ListTenantRequest.extras:type_name -> google.protobuf.Struct
 	0,  // 4: partition.v1.ListTenantResponse.data:type_name -> partition.v1.TenantObject
-	48, // 5: partition.v1.CreateTenantRequest.properties:type_name -> partition.v1.CreateTenantRequest.PropertiesEntry
+	45, // 5: partition.v1.CreateTenantRequest.properties:type_name -> google.protobuf.Struct
 	0,  // 6: partition.v1.CreateTenantResponse.data:type_name -> partition.v1.TenantObject
 	16, // 7: partition.v1.GetPartitionResponse.data:type_name -> partition.v1.PartitionObject
-	49, // 8: partition.v1.ListPartitionRequest.extras:type_name -> partition.v1.ListPartitionRequest.ExtrasEntry
+	45, // 8: partition.v1.ListPartitionRequest.extras:type_name -> google.protobuf.Struct
 	16, // 9: partition.v1.ListPartitionResponse.data:type_name -> partition.v1.PartitionObject
-	50, // 10: partition.v1.CreatePartitionRequest.properties:type_name -> partition.v1.CreatePartitionRequest.PropertiesEntry
+	45, // 10: partition.v1.CreatePartitionRequest.properties:type_name -> google.protobuf.Struct
 	16, // 11: partition.v1.CreatePartitionResponse.data:type_name -> partition.v1.PartitionObject
-	55, // 12: partition.v1.UpdatePartitionRequest.state:type_name -> common.v1.STATE
-	51, // 13: partition.v1.UpdatePartitionRequest.properties:type_name -> partition.v1.UpdatePartitionRequest.PropertiesEntry
+	46, // 12: partition.v1.UpdatePartitionRequest.state:type_name -> common.v1.STATE
+	45, // 13: partition.v1.UpdatePartitionRequest.properties:type_name -> google.protobuf.Struct
 	16, // 14: partition.v1.UpdatePartitionResponse.data:type_name -> partition.v1.PartitionObject
-	55, // 15: partition.v1.PartitionObject.state:type_name -> common.v1.STATE
-	52, // 16: partition.v1.PartitionObject.properties:type_name -> partition.v1.PartitionObject.PropertiesEntry
-	53, // 17: partition.v1.CreatePartitionRoleRequest.properties:type_name -> partition.v1.CreatePartitionRoleRequest.PropertiesEntry
+	46, // 15: partition.v1.PartitionObject.state:type_name -> common.v1.STATE
+	45, // 16: partition.v1.PartitionObject.properties:type_name -> google.protobuf.Struct
+	45, // 17: partition.v1.CreatePartitionRoleRequest.properties:type_name -> google.protobuf.Struct
 	19, // 18: partition.v1.CreatePartitionRoleResponse.data:type_name -> partition.v1.PartitionRoleObject
-	54, // 19: partition.v1.PartitionRoleObject.properties:type_name -> partition.v1.PartitionRoleObject.PropertiesEntry
+	45, // 19: partition.v1.PartitionRoleObject.properties:type_name -> google.protobuf.Struct
 	19, // 20: partition.v1.ListPartitionRoleResponse.role:type_name -> partition.v1.PartitionRoleObject
-	55, // 21: partition.v1.PageObject.state:type_name -> common.v1.STATE
+	46, // 21: partition.v1.PageObject.state:type_name -> common.v1.STATE
 	24, // 22: partition.v1.CreatePageResponse.data:type_name -> partition.v1.PageObject
 	24, // 23: partition.v1.GetPageResponse.data:type_name -> partition.v1.PageObject
 	16, // 24: partition.v1.AccessObject.partition:type_name -> partition.v1.PartitionObject
-	55, // 25: partition.v1.AccessObject.state:type_name -> common.v1.STATE
+	46, // 25: partition.v1.AccessObject.state:type_name -> common.v1.STATE
 	31, // 26: partition.v1.CreateAccessResponse.data:type_name -> partition.v1.AccessObject
 	31, // 27: partition.v1.GetAccessResponse.data:type_name -> partition.v1.AccessObject
 	40, // 28: partition.v1.CreateAccessRoleResponse.data:type_name -> partition.v1.AccessRoleObject
@@ -2967,7 +2929,7 @@ func file_partition_v1_partition_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_partition_v1_partition_proto_rawDesc), len(file_partition_v1_partition_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   55,
+			NumMessages:   45,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

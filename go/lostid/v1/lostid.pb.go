@@ -29,6 +29,7 @@ import (
 	money "google.golang.org/genproto/googleapis/type/money"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -96,7 +97,7 @@ func (ItemType) EnumDescriptor() ([]byte, []int) {
 type CollectibleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FileId        []string               `protobuf:"bytes,1,rep,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,2,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,2,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -138,7 +139,7 @@ func (x *CollectibleRequest) GetFileId() []string {
 	return nil
 }
 
-func (x *CollectibleRequest) GetProperties() map[string]string {
+func (x *CollectibleRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -149,7 +150,7 @@ type CollectibleResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	FileId        []string               `protobuf:"bytes,2,rep,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	State         string                 `protobuf:"bytes,4,opt,name=state,proto3" json:"state,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -199,7 +200,7 @@ func (x *CollectibleResponse) GetFileId() []string {
 	return nil
 }
 
-func (x *CollectibleResponse) GetProperties() map[string]string {
+func (x *CollectibleResponse) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -343,7 +344,7 @@ type SearchResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Query         string                 `protobuf:"bytes,2,opt,name=query,proto3" json:"query,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	State         string                 `protobuf:"bytes,4,opt,name=state,proto3" json:"state,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -393,7 +394,7 @@ func (x *SearchResponse) GetQuery() string {
 	return ""
 }
 
-func (x *SearchResponse) GetProperties() map[string]string {
+func (x *SearchResponse) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -607,7 +608,7 @@ type ProgressResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Type          ItemType               `protobuf:"varint,2,opt,name=type,proto3,enum=lostid.v1.ItemType" json:"type,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	State         string                 `protobuf:"bytes,4,opt,name=state,proto3" json:"state,omitempty"`
 	Items         []*ProgressItem        `protobuf:"bytes,5,rep,name=items,proto3" json:"items,omitempty"`
 	Transactions  []*TransactionItem     `protobuf:"bytes,6,rep,name=transactions,proto3" json:"transactions,omitempty"`
@@ -659,7 +660,7 @@ func (x *ProgressResponse) GetType() ItemType {
 	return ItemType_COLLECTIBLE
 }
 
-func (x *ProgressResponse) GetProperties() map[string]string {
+func (x *ProgressResponse) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -943,25 +944,19 @@ var File_lostid_v1_lostid_proto protoreflect.FileDescriptor
 
 const file_lostid_v1_lostid_proto_rawDesc = "" +
 	"\n" +
-	"\x16lostid/v1/lostid.proto\x12\tlostid.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1agoogle/type/interval.proto\x1a\x17google/type/money.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xe1\x01\n" +
+	"\x16lostid/v1/lostid.proto\x12\tlostid.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1agoogle/type/interval.proto\x1a\x17google/type/money.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x8c\x01\n" +
 	"\x12CollectibleRequest\x12=\n" +
-	"\afile_id\x18\x01 \x03(\tB$\xbaH!\x92\x01\x1e\b\x01\x10\x05\"\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06fileId\x12M\n" +
+	"\afile_id\x18\x01 \x03(\tB$\xbaH!\x92\x01\x1e\b\x01\x10\x05\"\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06fileId\x127\n" +
 	"\n" +
-	"properties\x18\x02 \x03(\v2-.lostid.v1.CollectibleRequest.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe3\x01\n" +
+	"properties\x18\x02 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"\x8d\x01\n" +
 	"\x13CollectibleResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
-	"\afile_id\x18\x02 \x03(\tR\x06fileId\x12N\n" +
+	"\afile_id\x18\x02 \x03(\tR\x06fileId\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v2..lostid.v1.CollectibleResponse.PropertiesEntryR\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\x12\x14\n" +
-	"\x05state\x18\x04 \x01(\tR\x05state\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x96\x01\n" +
+	"\x05state\x18\x04 \x01(\tR\x05state\"\x96\x01\n" +
 	"\x16ListCollectibleRequest\x127\n" +
 	"\n" +
 	"pagination\x18\x01 \x01(\v2\x15.common.v1.PaginationH\x00R\n" +
@@ -969,17 +964,14 @@ const file_lostid_v1_lostid_proto_rawDesc = "" +
 	"\binterval\x18\x02 \x01(\v2\x15.google.type.IntervalH\x00R\bintervalB\x0e\n" +
 	"\x05range\x12\x05\xbaH\x02\b\x01\"M\n" +
 	"\x17ListCollectibleResponse\x122\n" +
-	"\x04data\x18\x01 \x03(\v2\x1e.lostid.v1.CollectibleResponseR\x04data\"\xd6\x01\n" +
+	"\x04data\x18\x01 \x03(\v2\x1e.lostid.v1.CollectibleResponseR\x04data\"\x85\x01\n" +
 	"\x0eSearchResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
-	"\x05query\x18\x02 \x01(\tR\x05query\x12I\n" +
+	"\x05query\x18\x02 \x01(\tR\x05query\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v2).lostid.v1.SearchResponse.PropertiesEntryR\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\x12\x14\n" +
-	"\x05state\x18\x04 \x01(\tR\x05state\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"q\n" +
+	"\x05state\x18\x04 \x01(\tR\x05state\"q\n" +
 	"\x0fProgressRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x121\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x13.lostid.v1.ItemTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\x04type\"\xa3\x01\n" +
@@ -993,19 +985,16 @@ const file_lostid_v1_lostid_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\bdatetime\x18\x02 \x01(\tR\bdatetime\x12\x14\n" +
 	"\x05state\x18\x03 \x01(\tR\x05state\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\"\xdc\x02\n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\"\x89\x02\n" +
 	"\x10ProgressResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
-	"\x04type\x18\x02 \x01(\x0e2\x13.lostid.v1.ItemTypeR\x04type\x12K\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x13.lostid.v1.ItemTypeR\x04type\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v2+.lostid.v1.ProgressResponse.PropertiesEntryR\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\x12\x14\n" +
 	"\x05state\x18\x04 \x01(\tR\x05state\x12-\n" +
 	"\x05items\x18\x05 \x03(\v2\x17.lostid.v1.ProgressItemR\x05items\x12>\n" +
-	"\ftransactions\x18\x06 \x03(\v2\x1a.lostid.v1.TransactionItemR\ftransactions\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x91\x01\n" +
+	"\ftransactions\x18\x06 \x03(\v2\x1a.lostid.v1.TransactionItemR\ftransactions\"\x91\x01\n" +
 	"\x11ListSearchRequest\x127\n" +
 	"\n" +
 	"pagination\x18\x01 \x01(\v2\x15.common.v1.PaginationH\x00R\n" +
@@ -1058,7 +1047,7 @@ func file_lostid_v1_lostid_proto_rawDescGZIP() []byte {
 }
 
 var file_lostid_v1_lostid_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_lostid_v1_lostid_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_lostid_v1_lostid_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_lostid_v1_lostid_proto_goTypes = []any{
 	(ItemType)(0),                   // 0: lostid.v1.ItemType
 	(*CollectibleRequest)(nil),      // 1: lostid.v1.CollectibleRequest
@@ -1074,37 +1063,34 @@ var file_lostid_v1_lostid_proto_goTypes = []any{
 	(*ListSearchResponse)(nil),      // 11: lostid.v1.ListSearchResponse
 	(*ListTransactionRequest)(nil),  // 12: lostid.v1.ListTransactionRequest
 	(*ListTransactionResponse)(nil), // 13: lostid.v1.ListTransactionResponse
-	nil,                             // 14: lostid.v1.CollectibleRequest.PropertiesEntry
-	nil,                             // 15: lostid.v1.CollectibleResponse.PropertiesEntry
-	nil,                             // 16: lostid.v1.SearchResponse.PropertiesEntry
-	nil,                             // 17: lostid.v1.ProgressResponse.PropertiesEntry
-	(*v1.Pagination)(nil),           // 18: common.v1.Pagination
-	(*interval.Interval)(nil),       // 19: google.type.Interval
-	(*money.Money)(nil),             // 20: google.type.Money
-	(*v1.SearchRequest)(nil),        // 21: common.v1.SearchRequest
+	(*structpb.Struct)(nil),         // 14: google.protobuf.Struct
+	(*v1.Pagination)(nil),           // 15: common.v1.Pagination
+	(*interval.Interval)(nil),       // 16: google.type.Interval
+	(*money.Money)(nil),             // 17: google.type.Money
+	(*v1.SearchRequest)(nil),        // 18: common.v1.SearchRequest
 }
 var file_lostid_v1_lostid_proto_depIdxs = []int32{
-	14, // 0: lostid.v1.CollectibleRequest.properties:type_name -> lostid.v1.CollectibleRequest.PropertiesEntry
-	15, // 1: lostid.v1.CollectibleResponse.properties:type_name -> lostid.v1.CollectibleResponse.PropertiesEntry
-	18, // 2: lostid.v1.ListCollectibleRequest.pagination:type_name -> common.v1.Pagination
-	19, // 3: lostid.v1.ListCollectibleRequest.interval:type_name -> google.type.Interval
+	14, // 0: lostid.v1.CollectibleRequest.properties:type_name -> google.protobuf.Struct
+	14, // 1: lostid.v1.CollectibleResponse.properties:type_name -> google.protobuf.Struct
+	15, // 2: lostid.v1.ListCollectibleRequest.pagination:type_name -> common.v1.Pagination
+	16, // 3: lostid.v1.ListCollectibleRequest.interval:type_name -> google.type.Interval
 	2,  // 4: lostid.v1.ListCollectibleResponse.data:type_name -> lostid.v1.CollectibleResponse
-	16, // 5: lostid.v1.SearchResponse.properties:type_name -> lostid.v1.SearchResponse.PropertiesEntry
+	14, // 5: lostid.v1.SearchResponse.properties:type_name -> google.protobuf.Struct
 	0,  // 6: lostid.v1.ProgressRequest.type:type_name -> lostid.v1.ItemType
-	20, // 7: lostid.v1.TransactionItem.amount:type_name -> google.type.Money
+	17, // 7: lostid.v1.TransactionItem.amount:type_name -> google.type.Money
 	0,  // 8: lostid.v1.ProgressResponse.type:type_name -> lostid.v1.ItemType
-	17, // 9: lostid.v1.ProgressResponse.properties:type_name -> lostid.v1.ProgressResponse.PropertiesEntry
+	14, // 9: lostid.v1.ProgressResponse.properties:type_name -> google.protobuf.Struct
 	8,  // 10: lostid.v1.ProgressResponse.items:type_name -> lostid.v1.ProgressItem
 	7,  // 11: lostid.v1.ProgressResponse.transactions:type_name -> lostid.v1.TransactionItem
-	18, // 12: lostid.v1.ListSearchRequest.pagination:type_name -> common.v1.Pagination
-	19, // 13: lostid.v1.ListSearchRequest.interval:type_name -> google.type.Interval
+	15, // 12: lostid.v1.ListSearchRequest.pagination:type_name -> common.v1.Pagination
+	16, // 13: lostid.v1.ListSearchRequest.interval:type_name -> google.type.Interval
 	5,  // 14: lostid.v1.ListSearchResponse.data:type_name -> lostid.v1.SearchResponse
-	18, // 15: lostid.v1.ListTransactionRequest.pagination:type_name -> common.v1.Pagination
-	19, // 16: lostid.v1.ListTransactionRequest.interval:type_name -> google.type.Interval
+	15, // 15: lostid.v1.ListTransactionRequest.pagination:type_name -> common.v1.Pagination
+	16, // 16: lostid.v1.ListTransactionRequest.interval:type_name -> google.type.Interval
 	7,  // 17: lostid.v1.ListTransactionResponse.data:type_name -> lostid.v1.TransactionItem
 	1,  // 18: lostid.v1.LostIdService.Collectible:input_type -> lostid.v1.CollectibleRequest
 	3,  // 19: lostid.v1.LostIdService.ListCollectible:input_type -> lostid.v1.ListCollectibleRequest
-	21, // 20: lostid.v1.LostIdService.Search:input_type -> common.v1.SearchRequest
+	18, // 20: lostid.v1.LostIdService.Search:input_type -> common.v1.SearchRequest
 	10, // 21: lostid.v1.LostIdService.ListSearch:input_type -> lostid.v1.ListSearchRequest
 	6,  // 22: lostid.v1.LostIdService.Progress:input_type -> lostid.v1.ProgressRequest
 	12, // 23: lostid.v1.LostIdService.ListTransaction:input_type -> lostid.v1.ListTransactionRequest
@@ -1144,7 +1130,7 @@ func file_lostid_v1_lostid_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_lostid_v1_lostid_proto_rawDesc), len(file_lostid_v1_lostid_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   17,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

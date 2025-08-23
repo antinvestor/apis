@@ -19,6 +19,7 @@ package partition.v1;
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/partition/v1;partitionv1";
@@ -66,7 +67,7 @@ message TenantObject {
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
   ];
-  map<string, string> properties = 3;
+  google.protobuf.Struct properties = 3;
 }
 
 //Request to create a new partition
@@ -89,7 +90,7 @@ message PartitionCreateRequest {
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 250
   ];
-  map<string, string> properties = 5;
+  google.protobuf.Struct properties = 5;
 }
 
 message GetTenantRequest {
@@ -111,7 +112,7 @@ message ListTenantRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  map<string, string> extras = 7;
+  google.protobuf.Struct extras = 7;
 }
 
 message ListTenantResponse {
@@ -128,7 +129,7 @@ message CreateTenantRequest {
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
   ];
-  map<string, string> properties = 3;
+  google.protobuf.Struct properties = 3;
 }
 
 message CreateTenantResponse {
@@ -154,7 +155,7 @@ message ListPartitionRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  map<string, string> extras = 7;
+  google.protobuf.Struct extras = 7;
 }
 
 message ListPartitionResponse {
@@ -181,7 +182,7 @@ message CreatePartitionRequest {
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
   ];
-  map<string, string> properties = 5;
+  google.protobuf.Struct properties = 5;
 }
 
 message CreatePartitionResponse {
@@ -203,7 +204,7 @@ message UpdatePartitionRequest {
     (buf.validate.field).string.max_len = 500
   ];
   common.v1.STATE state = 4;
-  map<string, string> properties = 5;
+  google.protobuf.Struct properties = 5;
 }
 
 message UpdatePartitionResponse {
@@ -235,7 +236,7 @@ message PartitionObject {
     (buf.validate.field).string.max_len = 500
   ];
   common.v1.STATE state = 6;
-  map<string, string> properties = 7;
+  google.protobuf.Struct properties = 7;
 }
 
 // Partition Roles
@@ -249,7 +250,7 @@ message CreatePartitionRoleRequest {
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
   ];
-  map<string, string> properties = 3;
+  google.protobuf.Struct properties = 3;
 }
 
 message CreatePartitionRoleResponse {
@@ -271,7 +272,7 @@ message PartitionRoleObject {
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
   ];
-  map<string, string> properties = 4;
+  google.protobuf.Struct properties = 4;
 }
 
 message RemovePartitionRoleRequest {

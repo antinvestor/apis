@@ -16,9 +16,10 @@ package propertyv1
 
 import (
 	"context"
+	"math"
+
 	"github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
-	"math"
 )
 
 const ctxKeyService = common.CtxServiceKey("propertyClientKey")
@@ -82,21 +83,6 @@ func NewPropertyClient(ctx context.Context, opts ...common.ClientOption) (*Prope
 	}
 
 	return c, nil
-}
-
-func (pc *PropertyClient) AddPropertyType(
-	ctx context.Context, name string, description string,
-	extras map[string]string) (*AddPropertyTypeResponse, error) {
-
-	propertyType := PropertyType{
-		Name:        name,
-		Description: description,
-		Extra:       extras,
-	}
-
-	return pc.svc.AddPropertyType(ctx, &AddPropertyTypeRequest{
-		Data: &propertyType,
-	})
 }
 
 func (pc *PropertyClient) ListPropertyType(

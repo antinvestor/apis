@@ -16,9 +16,10 @@ package profilev1
 
 import (
 	"context"
+	"math"
+
 	"github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
-	"math"
 )
 
 const ctxKeyService = common.CtxServiceKey("profileClientKey")
@@ -87,40 +88,6 @@ func (pc *ProfileClient) GetProfileByID(
 	}
 
 	response, err := pc.svc.GetById(ctx, &profileRequest)
-	if err != nil {
-		return nil, err
-	}
-	return response.Data, nil
-}
-
-func (pc *ProfileClient) CreateProfileByContactAndName(
-	ctx context.Context,
-	contact string,
-	name string) (*ProfileObject, error) {
-
-	properties := make(map[string]string)
-	properties["name"] = name
-
-	createProfileRequest := CreateRequest{
-		Contact:    contact,
-		Properties: properties,
-	}
-
-	response, err := pc.svc.Create(ctx, &createProfileRequest)
-	if err != nil {
-		return nil, err
-	}
-	return response.Data, nil
-}
-
-func (pc *ProfileClient) GetProfileByContact(ctx context.Context, contact string) (*ProfileObject, error) {
-
-	contactRequest := GetByContactRequest{
-		Contact: contact,
-	}
-
-	response, err := pc.svc.GetByContact(ctx, &contactRequest)
-
 	if err != nil {
 		return nil, err
 	}

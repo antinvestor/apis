@@ -46,11 +46,6 @@ public final class PropertyProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_property_v1_Locality_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_property_v1_Locality_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_property_v1_Locality_ExtrasEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_property_v1_AddLocalityRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -66,20 +61,10 @@ public final class PropertyProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_property_v1_PropertyState_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_property_v1_PropertyState_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_property_v1_PropertyState_ExtrasEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_property_v1_PropertyType_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_property_v1_PropertyType_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_property_v1_PropertyType_ExtraEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_property_v1_PropertyType_ExtraEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_property_v1_AddPropertyTypeRequest_descriptor;
   static final 
@@ -96,11 +81,6 @@ public final class PropertyProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_property_v1_Subscription_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_property_v1_Subscription_ExtraEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_property_v1_Subscription_ExtraEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_property_v1_AddSubscriptionRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -115,11 +95,6 @@ public final class PropertyProto {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_property_v1_Property_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_property_v1_Property_ExtraEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_property_v1_Property_ExtraEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_property_v1_CreatePropertyRequest_descriptor;
   static final 
@@ -136,11 +111,6 @@ public final class PropertyProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_property_v1_ListPropertyTypeRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_property_v1_ListPropertyTypeRequest_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_property_v1_ListPropertyTypeRequest_ExtrasEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_property_v1_ListPropertyTypeResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -150,11 +120,6 @@ public final class PropertyProto {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_property_v1_SearchPropertyRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_property_v1_SearchPropertyRequest_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_property_v1_SearchPropertyRequest_ExtrasEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_property_v1_SearchPropertyResponse_descriptor;
   static final 
@@ -206,11 +171,6 @@ public final class PropertyProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_property_v1_UpdatePropertyRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_property_v1_UpdatePropertyRequest_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_property_v1_UpdatePropertyRequest_ExtrasEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_property_v1_UpdatePropertyResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -247,184 +207,170 @@ public final class PropertyProto {
       "\n\032property/v1/property.proto\022\013property.v" +
       "1\032\033buf/validate/validate.proto\032\026common/v" +
       "1/common.proto\032\034google/api/annotations.p" +
-      "roto\032\037google/protobuf/timestamp.proto\032.p" +
-      "rotoc-gen-openapiv2/options/annotations." +
-      "proto\"\332\003\n\010Locality\022.\n\002id\030\001 \001(\tB\036\272H\033r\026\020\003\030" +
-      "(2\020[0-9a-z_-]{3,20}\330\001\001R\002id\022;\n\tparent_id\030" +
-      "\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\010p" +
-      "arentId\022\035\n\004name\030\005 \001(\tB\t\272H\006r\004\020\003\030<R\004name\022," +
-      "\n\013description\030\006 \001(\tB\n\272H\007r\002\0202\330\001\001R\013descrip" +
-      "tion\0229\n\006extras\030\007 \003(\0132!.property.v1.Local" +
-      "ity.ExtrasEntryR\006extras\0229\n\ncreated_at\030\010 " +
-      "\001(\0132\032.google.protobuf.TimestampR\tcreated" +
-      "At\022$\n\005point\030\003 \001(\tB\014\272H\tr\004\020\n\030d\330\001\001H\000R\005point" +
-      "\022+\n\010boundary\030\004 \001(\tB\r\272H\nr\005\020\n\030\200\020\330\001\001H\000R\010bou" +
-      "ndary\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024" +
-      "\n\005value\030\002 \001(\tR\005value:\0028\001B\020\n\007feature\022\005\272H\002" +
-      "\010\001\"?\n\022AddLocalityRequest\022)\n\004data\030\001 \001(\0132\025" +
-      ".property.v1.LocalityR\004data\"@\n\023AddLocali" +
-      "tyResponse\022)\n\004data\030\001 \001(\0132\025.property.v1.L" +
-      "ocalityR\004data\"\317\003\n\rPropertyState\022+\n\002id\030\001 " +
-      "\001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022;\n\n" +
-      "propertyid\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{" +
-      "3,20}R\npropertyid\022&\n\005state\030\003 \001(\0162\020.commo" +
-      "n.v1.STATER\005state\022)\n\006status\030\004 \001(\0162\021.comm" +
-      "on.v1.STATUSR\006status\022\035\n\004name\030\005 \001(\tB\t\272H\006r" +
-      "\004\020\003\030<R\004name\022,\n\013description\030\006 \001(\tB\n\272H\007r\002\020" +
-      "2\330\001\001R\013description\022>\n\006extras\030\007 \003(\0132&.prop" +
-      "erty.v1.PropertyState.ExtrasEntryR\006extra" +
-      "s\0229\n\ncreated_at\030\010 \001(\0132\032.google.protobuf." +
-      "TimestampR\tcreatedAt\0329\n\013ExtrasEntry\022\020\n\003k" +
-      "ey\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"" +
-      "\274\002\n\014PropertyType\022.\n\002id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2" +
-      "\020[0-9a-z_-]{3,20}\330\001\001R\002id\022\035\n\004name\030\002 \001(\tB\t" +
-      "\272H\006r\004\020\003\030<R\004name\022,\n\013description\030\003 \001(\tB\n\272H" +
-      "\007r\002\0202\330\001\001R\013description\022:\n\005extra\030\004 \003(\0132$.p" +
-      "roperty.v1.PropertyType.ExtraEntryR\005extr" +
-      "a\0229\n\ncreated_at\030\005 \001(\0132\032.google.protobuf." +
-      "TimestampR\tcreatedAt\0328\n\nExtraEntry\022\020\n\003ke" +
-      "y\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"G" +
-      "\n\026AddPropertyTypeRequest\022-\n\004data\030\001 \001(\0132\031" +
-      ".property.v1.PropertyTypeR\004data\"H\n\027AddPr" +
-      "opertyTypeResponse\022-\n\004data\030\001 \001(\0132\031.prope" +
-      "rty.v1.PropertyTypeR\004data\"\245\003\n\014Subscripti" +
-      "on\022.\n\002id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3," +
-      "20}\330\001\001R\002id\022*\n\013property_id\030\002 \001(\tB\t\272H\006r\004\020\003" +
-      "\030(R\npropertyId\022+\n\nprofile_id\030\003 \001(\tB\014\272H\tr" +
-      "\004\020\003\0302\330\001\001R\tprofileId\022 \n\004role\030\004 \001(\tB\014\272H\tr\004" +
-      "\020\003\0302\330\001\001R\004role\022:\n\005extra\030\005 \003(\0132$.property." +
-      "v1.Subscription.ExtraEntryR\005extra\0229\n\ncre" +
-      "ated_at\030\006 \001(\0132\032.google.protobuf.Timestam" +
-      "pR\tcreatedAt\0229\n\nexpires_at\030\007 \001(\0132\032.googl" +
-      "e.protobuf.TimestampR\texpiresAt\0328\n\nExtra" +
-      "Entry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005" +
-      "value:\0028\001\"G\n\026AddSubscriptionRequest\022-\n\004d" +
-      "ata\030\001 \001(\0132\031.property.v1.SubscriptionR\004da" +
-      "ta\"H\n\027AddSubscriptionResponse\022-\n\004data\030\001 " +
-      "\001(\0132\031.property.v1.SubscriptionR\004data\"\272\004\n" +
-      "\010Property\022.\n\002id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-" +
-      "z_-]{3,20}\330\001\001R\002id\022;\n\tparent_id\030\002 \001(\tB\036\272H" +
-      "\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\010parentId\022\035" +
-      "\n\004name\030\003 \001(\tB\t\272H\006r\004\020\003\030<R\004name\022,\n\013descrip" +
-      "tion\030\004 \001(\tB\n\272H\007r\002\0202\330\001\001R\013description\022>\n\rp" +
-      "roperty_type\030\005 \001(\0132\031.property.v1.Propert" +
-      "yTypeR\014propertyType\0221\n\010locality\030\006 \001(\0132\025." +
-      "property.v1.LocalityR\010locality\022C\n\nstarte" +
-      "d_at\030\007 \001(\0132\032.google.protobuf.TimestampB\010" +
-      "\272H\005\262\001\0028\001R\tstartedAt\0229\n\ncreated_at\030\010 \001(\0132" +
-      "\032.google.protobuf.TimestampR\tcreatedAt\022G" +
-      "\n\005extra\030\t \003(\0132 .property.v1.Property.Ext" +
-      "raEntryB\017\272H\014\232\001\006*\004r\002\020\003\330\001\001R\005extra\0328\n\nExtra" +
-      "Entry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005" +
-      "value:\0028\001\"B\n\025CreatePropertyRequest\022)\n\004da" +
-      "ta\030\001 \001(\0132\025.property.v1.PropertyR\004data\"C\n" +
-      "\026CreatePropertyResponse\022)\n\004data\030\001 \001(\0132\025." +
-      "property.v1.PropertyR\004data\"\270\002\n\027ListPrope" +
-      "rtyTypeRequest\022\024\n\005query\030\001 \001(\tR\005query\022\022\n\004" +
-      "page\030\002 \001(\003R\004page\022\024\n\005count\030\003 \001(\005R\005count\022\035" +
-      "\n\nstart_date\030\004 \001(\tR\tstartDate\022\031\n\010end_dat" +
-      "e\030\005 \001(\tR\007endDate\022\036\n\nproperties\030\006 \003(\tR\npr" +
-      "operties\022H\n\006extras\030\007 \003(\01320.property.v1.L" +
-      "istPropertyTypeRequest.ExtrasEntryR\006extr" +
-      "as\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005v" +
-      "alue\030\002 \001(\tR\005value:\0028\001\"I\n\030ListPropertyTyp" +
-      "eResponse\022-\n\004data\030\001 \003(\0132\031.property.v1.Pr" +
-      "opertyTypeR\004data\"\264\002\n\025SearchPropertyReque" +
-      "st\022\024\n\005query\030\001 \001(\tR\005query\022\022\n\004page\030\002 \001(\003R\004" +
-      "page\022\024\n\005count\030\003 \001(\005R\005count\022\035\n\nstart_date" +
-      "\030\004 \001(\tR\tstartDate\022\031\n\010end_date\030\005 \001(\tR\007end" +
-      "Date\022\036\n\nproperties\030\006 \003(\tR\nproperties\022F\n\006" +
-      "extras\030\007 \003(\0132..property.v1.SearchPropert" +
-      "yRequest.ExtrasEntryR\006extras\0329\n\013ExtrasEn" +
-      "try\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005va" +
-      "lue:\0028\001\"C\n\026SearchPropertyResponse\022)\n\004dat" +
-      "a\030\001 \003(\0132\025.property.v1.PropertyR\004data\"D\n\025" +
-      "DeleteLocalityRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026" +
-      "\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"2\n\026DeleteLoca" +
-      "lityResponse\022\030\n\007success\030\001 \001(\010R\007success\"D" +
-      "\n\025DeletePropertyRequest\022+\n\002id\030\001 \001(\tB\033\272H\030" +
-      "r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"2\n\026DeletePr" +
-      "opertyResponse\022\030\n\007success\030\001 \001(\010R\007success" +
-      "\"E\n\026StateOfPropertyRequest\022+\n\002id\030\001 \001(\tB\033" +
-      "\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"I\n\027State" +
-      "OfPropertyResponse\022.\n\004data\030\001 \001(\0132\032.prope" +
-      "rty.v1.PropertyStateR\004data\"G\n\030HistoryOfP" +
-      "ropertyRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[" +
-      "0-9a-z_-]{3,20}R\002id\"K\n\031HistoryOfProperty" +
-      "Response\022.\n\004data\030\001 \003(\0132\032.property.v1.Pro" +
-      "pertyStateR\004data\"\375\003\n\025UpdatePropertyReque" +
-      "st\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3," +
-      "20}R\002id\022&\n\005state\030\002 \001(\0162\020.common.v1.STATE" +
-      "R\005state\022)\n\006status\030\003 \001(\0162\021.common.v1.STAT" +
-      "USR\006status\022 \n\004name\030\004 \001(\tB\014\272H\tr\004\020\003\030<\330\001\001R\004" +
-      "name\022,\n\013description\030\005 \001(\tB\n\272H\007r\002\020<\330\001\001R\013d" +
-      "escription\022?\n\013guardian_id\030\006 \001(\tB\036\272H\033r\026\020\003" +
-      "\030(2\020[0-9a-z_-]{3,20}\330\001\001R\nguardianId\022?\n\013l" +
-      "ocality_id\030\007 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{" +
-      "3,20}\330\001\001R\nlocalityId\022W\n\006extras\030\010 \003(\0132..p" +
-      "roperty.v1.UpdatePropertyRequest.ExtrasE" +
-      "ntryB\017\272H\014\232\001\006*\004r\002\020\003\330\001\001R\006extras\0329\n\013ExtrasE" +
-      "ntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005v" +
-      "alue:\0028\001\"C\n\026UpdatePropertyResponse\022)\n\004da" +
-      "ta\030\001 \001(\0132\025.property.v1.PropertyR\004data\"P\n" +
-      "\027ListSubscriptionRequest\022\037\n\013property_id\030" +
-      "\001 \001(\tR\npropertyId\022\024\n\005query\030\002 \001(\tR\005query\"" +
-      "I\n\030ListSubscriptionResponse\022-\n\004data\030\001 \003(" +
-      "\0132\031.property.v1.SubscriptionR\004data\"H\n\031De" +
-      "leteSubscriptionRequest\022+\n\002id\030\001 \001(\tB\033\272H\030" +
-      "r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"6\n\032DeleteSu" +
-      "bscriptionResponse\022\030\n\007success\030\001 \001(\010R\007suc" +
-      "cess2\205\014\n\017PropertyService\022n\n\017AddPropertyT" +
-      "ype\022#.property.v1.AddPropertyTypeRequest" +
-      "\032$.property.v1.AddPropertyTypeResponse\"\020" +
-      "\202\323\344\223\002\n\"\005/type:\001*\022p\n\020ListPropertyType\022$.p" +
-      "roperty.v1.ListPropertyTypeRequest\032%.pro" +
-      "perty.v1.ListPropertyTypeResponse\"\r\202\323\344\223\002" +
-      "\007\022\005/type0\001\022f\n\013AddLocality\022\037.property.v1." +
-      "AddLocalityRequest\032 .property.v1.AddLoca" +
-      "lityResponse\"\024\202\323\344\223\002\016\"\t/locality:\001*\022q\n\016De" +
-      "leteLocality\022\".property.v1.DeleteLocalit" +
-      "yRequest\032#.property.v1.DeleteLocalityRes" +
-      "ponse\"\026\202\323\344\223\002\020*\016/locality/{id}\022g\n\016CreateP" +
-      "roperty\022\".property.v1.CreatePropertyRequ" +
-      "est\032#.property.v1.CreatePropertyResponse" +
-      "\"\014\202\323\344\223\002\006\"\001/:\001*\022k\n\016UpdateProperty\022\".prope" +
-      "rty.v1.UpdatePropertyRequest\032#.property." +
-      "v1.UpdatePropertyResponse\"\020\202\323\344\223\002\n2\005/{id}" +
-      ":\001*\022h\n\016DeleteProperty\022\".property.v1.Dele" +
-      "tePropertyRequest\032#.property.v1.DeletePr" +
-      "opertyResponse\"\r\202\323\344\223\002\007*\005/{id}\022q\n\017StateOf" +
-      "Property\022#.property.v1.StateOfPropertyRe" +
-      "quest\032$.property.v1.StateOfPropertyRespo" +
-      "nse\"\023\202\323\344\223\002\r\022\013/{id}/state\022{\n\021HistoryOfPro" +
-      "perty\022%.property.v1.HistoryOfPropertyReq" +
-      "uest\032&.property.v1.HistoryOfPropertyResp" +
-      "onse\"\025\202\323\344\223\002\017\022\r/{id}/history0\001\022l\n\016SearchP" +
-      "roperty\022\".property.v1.SearchPropertyRequ" +
-      "est\032#.property.v1.SearchPropertyResponse" +
-      "\"\017\202\323\344\223\002\t\022\007/search0\001\022\206\001\n\020ListSubscription" +
-      "\022$.property.v1.ListSubscriptionRequest\032%" +
-      ".property.v1.ListSubscriptionResponse\"#\202" +
-      "\323\344\223\002\035\022\033/{property_id}/subscription0\001\022\211\001\n" +
-      "\017AddSubscription\022#.property.v1.AddSubscr" +
-      "iptionRequest\032$.property.v1.AddSubscript" +
-      "ionResponse\"+\202\323\344\223\002%\" /{data.property_id}" +
-      "/subscription:\001*\022\201\001\n\022DeleteSubscription\022" +
-      "&.property.v1.DeleteSubscriptionRequest\032" +
-      "\'.property.v1.DeleteSubscriptionResponse" +
-      "\"\032\202\323\344\223\002\024*\022/{id}/subscriptionB\307\003\n com.ant" +
-      "investor.apis.property.v1B\rPropertyProto" +
-      "P\001Z>github.com/antinvestor/apis/go/prope" +
-      "rty/property/v1;propertyv1\242\002\003PXX\252\002\013Prope" +
-      "rty.V1\312\002\013Property\\V1\342\002\027Property\\V1\\GPBMe" +
-      "tadata\352\002\014Property::V1\222A\205\002\022r\n\020Property Se" +
-      "rvice\"Y\n\020Ant Investor Ltd\022/https://githu" +
-      "b.com/antinvestor/service-property\032\024info" +
-      "@antinvestor.com2\0031.0*\002\001\0022\020application/j" +
-      "son:\020application/jsonZY\nW\n\006bearer\022M\010\002\0228A" +
-      "uthentication token, prefixed by Bearer:" +
-      " Bearer <token>\032\rAuthorization \002b\014\n\n\n\006be" +
-      "arer\022\000b\006proto3"
+      "roto\032\034google/protobuf/struct.proto\032\037goog" +
+      "le/protobuf/timestamp.proto\032.protoc-gen-" +
+      "openapiv2/options/annotations.proto\"\225\003\n\010" +
+      "Locality\022.\n\002id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z" +
+      "_-]{3,20}\330\001\001R\002id\022;\n\tparent_id\030\002 \001(\tB\036\272H\033" +
+      "r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\010parentId\022\035\n" +
+      "\004name\030\005 \001(\tB\t\272H\006r\004\020\003\030<R\004name\022,\n\013descript" +
+      "ion\030\006 \001(\tB\n\272H\007r\002\0202\330\001\001R\013description\022/\n\006ex" +
+      "tras\030\007 \001(\0132\027.google.protobuf.StructR\006ext" +
+      "ras\0229\n\ncreated_at\030\010 \001(\0132\032.google.protobu" +
+      "f.TimestampR\tcreatedAt\022$\n\005point\030\003 \001(\tB\014\272" +
+      "H\tr\004\020\n\030d\330\001\001H\000R\005point\022+\n\010boundary\030\004 \001(\tB\r" +
+      "\272H\nr\005\020\n\030\200\020\330\001\001H\000R\010boundaryB\020\n\007feature\022\005\272H" +
+      "\002\010\001\"?\n\022AddLocalityRequest\022)\n\004data\030\001 \001(\0132" +
+      "\025.property.v1.LocalityR\004data\"@\n\023AddLocal" +
+      "ityResponse\022)\n\004data\030\001 \001(\0132\025.property.v1." +
+      "LocalityR\004data\"\205\003\n\rPropertyState\022+\n\002id\030\001" +
+      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022;\n" +
+      "\npropertyid\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]" +
+      "{3,20}R\npropertyid\022&\n\005state\030\003 \001(\0162\020.comm" +
+      "on.v1.STATER\005state\022)\n\006status\030\004 \001(\0162\021.com" +
+      "mon.v1.STATUSR\006status\022\035\n\004name\030\005 \001(\tB\t\272H\006" +
+      "r\004\020\003\030<R\004name\022,\n\013description\030\006 \001(\tB\n\272H\007r\002" +
+      "\0202\330\001\001R\013description\022/\n\006extras\030\007 \001(\0132\027.goo" +
+      "gle.protobuf.StructR\006extras\0229\n\ncreated_a" +
+      "t\030\010 \001(\0132\032.google.protobuf.TimestampR\tcre" +
+      "atedAt\"\365\001\n\014PropertyType\022.\n\002id\030\001 \001(\tB\036\272H\033" +
+      "r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\002id\022\035\n\004name\030" +
+      "\002 \001(\tB\t\272H\006r\004\020\003\030<R\004name\022,\n\013description\030\003 " +
+      "\001(\tB\n\272H\007r\002\0202\330\001\001R\013description\022-\n\005extra\030\004 " +
+      "\001(\0132\027.google.protobuf.StructR\005extra\0229\n\nc" +
+      "reated_at\030\005 \001(\0132\032.google.protobuf.Timest" +
+      "ampR\tcreatedAt\"G\n\026AddPropertyTypeRequest" +
+      "\022-\n\004data\030\001 \001(\0132\031.property.v1.PropertyTyp" +
+      "eR\004data\"H\n\027AddPropertyTypeResponse\022-\n\004da" +
+      "ta\030\001 \001(\0132\031.property.v1.PropertyTypeR\004dat" +
+      "a\"\336\002\n\014Subscription\022.\n\002id\030\001 \001(\tB\036\272H\033r\026\020\003\030" +
+      "(2\020[0-9a-z_-]{3,20}\330\001\001R\002id\022*\n\013property_i" +
+      "d\030\002 \001(\tB\t\272H\006r\004\020\003\030(R\npropertyId\022+\n\nprofil" +
+      "e_id\030\003 \001(\tB\014\272H\tr\004\020\003\0302\330\001\001R\tprofileId\022 \n\004r" +
+      "ole\030\004 \001(\tB\014\272H\tr\004\020\003\0302\330\001\001R\004role\022-\n\005extra\030\005" +
+      " \001(\0132\027.google.protobuf.StructR\005extra\0229\n\n" +
+      "created_at\030\006 \001(\0132\032.google.protobuf.Times" +
+      "tampR\tcreatedAt\0229\n\nexpires_at\030\007 \001(\0132\032.go" +
+      "ogle.protobuf.TimestampR\texpiresAt\"G\n\026Ad" +
+      "dSubscriptionRequest\022-\n\004data\030\001 \001(\0132\031.pro" +
+      "perty.v1.SubscriptionR\004data\"H\n\027AddSubscr" +
+      "iptionResponse\022-\n\004data\030\001 \001(\0132\031.property." +
+      "v1.SubscriptionR\004data\"\367\003\n\010Property\022.\n\002id" +
+      "\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\002" +
+      "id\022;\n\tparent_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-" +
+      "z_-]{3,20}\330\001\001R\010parentId\022\035\n\004name\030\003 \001(\tB\t\272" +
+      "H\006r\004\020\003\030<R\004name\022,\n\013description\030\004 \001(\tB\n\272H\007" +
+      "r\002\0202\330\001\001R\013description\022>\n\rproperty_type\030\005 " +
+      "\001(\0132\031.property.v1.PropertyTypeR\014property" +
+      "Type\0221\n\010locality\030\006 \001(\0132\025.property.v1.Loc" +
+      "alityR\010locality\022C\n\nstarted_at\030\007 \001(\0132\032.go" +
+      "ogle.protobuf.TimestampB\010\272H\005\262\001\0028\001R\tstart" +
+      "edAt\0229\n\ncreated_at\030\010 \001(\0132\032.google.protob" +
+      "uf.TimestampR\tcreatedAt\022>\n\005extra\030\t \001(\0132\027" +
+      ".google.protobuf.StructB\017\272H\014\232\001\006*\004r\002\020\003\330\001\001" +
+      "R\005extra\"B\n\025CreatePropertyRequest\022)\n\004data" +
+      "\030\001 \001(\0132\025.property.v1.PropertyR\004data\"C\n\026C" +
+      "reatePropertyResponse\022)\n\004data\030\001 \001(\0132\025.pr" +
+      "operty.v1.PropertyR\004data\"\344\001\n\027ListPropert" +
+      "yTypeRequest\022\024\n\005query\030\001 \001(\tR\005query\022\022\n\004pa" +
+      "ge\030\002 \001(\003R\004page\022\024\n\005count\030\003 \001(\005R\005count\022\035\n\n" +
+      "start_date\030\004 \001(\tR\tstartDate\022\031\n\010end_date\030" +
+      "\005 \001(\tR\007endDate\022\036\n\nproperties\030\006 \003(\tR\nprop" +
+      "erties\022/\n\006extras\030\007 \001(\0132\027.google.protobuf" +
+      ".StructR\006extras\"I\n\030ListPropertyTypeRespo" +
+      "nse\022-\n\004data\030\001 \003(\0132\031.property.v1.Property" +
+      "TypeR\004data\"\342\001\n\025SearchPropertyRequest\022\024\n\005" +
+      "query\030\001 \001(\tR\005query\022\022\n\004page\030\002 \001(\003R\004page\022\024" +
+      "\n\005count\030\003 \001(\005R\005count\022\035\n\nstart_date\030\004 \001(\t" +
+      "R\tstartDate\022\031\n\010end_date\030\005 \001(\tR\007endDate\022\036" +
+      "\n\nproperties\030\006 \003(\tR\nproperties\022/\n\006extras" +
+      "\030\007 \001(\0132\027.google.protobuf.StructR\006extras\"" +
+      "C\n\026SearchPropertyResponse\022)\n\004data\030\001 \003(\0132" +
+      "\025.property.v1.PropertyR\004data\"D\n\025DeleteLo" +
+      "calityRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0" +
+      "-9a-z_-]{3,20}R\002id\"2\n\026DeleteLocalityResp" +
+      "onse\022\030\n\007success\030\001 \001(\010R\007success\"D\n\025Delete" +
+      "PropertyRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020" +
+      "[0-9a-z_-]{3,20}R\002id\"2\n\026DeletePropertyRe" +
+      "sponse\022\030\n\007success\030\001 \001(\010R\007success\"E\n\026Stat" +
+      "eOfPropertyRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030" +
+      "(2\020[0-9a-z_-]{3,20}R\002id\"I\n\027StateOfProper" +
+      "tyResponse\022.\n\004data\030\001 \001(\0132\032.property.v1.P" +
+      "ropertyStateR\004data\"G\n\030HistoryOfPropertyR" +
+      "equest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-" +
+      "]{3,20}R\002id\"K\n\031HistoryOfPropertyResponse" +
+      "\022.\n\004data\030\001 \003(\0132\032.property.v1.PropertySta" +
+      "teR\004data\"\253\003\n\025UpdatePropertyRequest\022+\n\002id" +
+      "\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022" +
+      "&\n\005state\030\002 \001(\0162\020.common.v1.STATER\005state\022" +
+      ")\n\006status\030\003 \001(\0162\021.common.v1.STATUSR\006stat" +
+      "us\022 \n\004name\030\004 \001(\tB\014\272H\tr\004\020\003\030<\330\001\001R\004name\022,\n\013" +
+      "description\030\005 \001(\tB\n\272H\007r\002\020<\330\001\001R\013descripti" +
+      "on\022?\n\013guardian_id\030\006 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9" +
+      "a-z_-]{3,20}\330\001\001R\nguardianId\022?\n\013locality_" +
+      "id\030\007 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001" +
+      "R\nlocalityId\022@\n\006extras\030\010 \001(\0132\027.google.pr" +
+      "otobuf.StructB\017\272H\014\232\001\006*\004r\002\020\003\330\001\001R\006extras\"C" +
+      "\n\026UpdatePropertyResponse\022)\n\004data\030\001 \001(\0132\025" +
+      ".property.v1.PropertyR\004data\"P\n\027ListSubsc" +
+      "riptionRequest\022\037\n\013property_id\030\001 \001(\tR\npro" +
+      "pertyId\022\024\n\005query\030\002 \001(\tR\005query\"I\n\030ListSub" +
+      "scriptionResponse\022-\n\004data\030\001 \003(\0132\031.proper" +
+      "ty.v1.SubscriptionR\004data\"H\n\031DeleteSubscr" +
+      "iptionRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0" +
+      "-9a-z_-]{3,20}R\002id\"6\n\032DeleteSubscription" +
+      "Response\022\030\n\007success\030\001 \001(\010R\007success2\205\014\n\017P" +
+      "ropertyService\022n\n\017AddPropertyType\022#.prop" +
+      "erty.v1.AddPropertyTypeRequest\032$.propert" +
+      "y.v1.AddPropertyTypeResponse\"\020\202\323\344\223\002\n\"\005/t" +
+      "ype:\001*\022p\n\020ListPropertyType\022$.property.v1" +
+      ".ListPropertyTypeRequest\032%.property.v1.L" +
+      "istPropertyTypeResponse\"\r\202\323\344\223\002\007\022\005/type0\001" +
+      "\022f\n\013AddLocality\022\037.property.v1.AddLocalit" +
+      "yRequest\032 .property.v1.AddLocalityRespon" +
+      "se\"\024\202\323\344\223\002\016\"\t/locality:\001*\022q\n\016DeleteLocali" +
+      "ty\022\".property.v1.DeleteLocalityRequest\032#" +
+      ".property.v1.DeleteLocalityResponse\"\026\202\323\344" +
+      "\223\002\020*\016/locality/{id}\022g\n\016CreateProperty\022\"." +
+      "property.v1.CreatePropertyRequest\032#.prop" +
+      "erty.v1.CreatePropertyResponse\"\014\202\323\344\223\002\006\"\001" +
+      "/:\001*\022k\n\016UpdateProperty\022\".property.v1.Upd" +
+      "atePropertyRequest\032#.property.v1.UpdateP" +
+      "ropertyResponse\"\020\202\323\344\223\002\n2\005/{id}:\001*\022h\n\016Del" +
+      "eteProperty\022\".property.v1.DeleteProperty" +
+      "Request\032#.property.v1.DeletePropertyResp" +
+      "onse\"\r\202\323\344\223\002\007*\005/{id}\022q\n\017StateOfProperty\022#" +
+      ".property.v1.StateOfPropertyRequest\032$.pr" +
+      "operty.v1.StateOfPropertyResponse\"\023\202\323\344\223\002" +
+      "\r\022\013/{id}/state\022{\n\021HistoryOfProperty\022%.pr" +
+      "operty.v1.HistoryOfPropertyRequest\032&.pro" +
+      "perty.v1.HistoryOfPropertyResponse\"\025\202\323\344\223" +
+      "\002\017\022\r/{id}/history0\001\022l\n\016SearchProperty\022\"." +
+      "property.v1.SearchPropertyRequest\032#.prop" +
+      "erty.v1.SearchPropertyResponse\"\017\202\323\344\223\002\t\022\007" +
+      "/search0\001\022\206\001\n\020ListSubscription\022$.propert" +
+      "y.v1.ListSubscriptionRequest\032%.property." +
+      "v1.ListSubscriptionResponse\"#\202\323\344\223\002\035\022\033/{p" +
+      "roperty_id}/subscription0\001\022\211\001\n\017AddSubscr" +
+      "iption\022#.property.v1.AddSubscriptionRequ" +
+      "est\032$.property.v1.AddSubscriptionRespons" +
+      "e\"+\202\323\344\223\002%\" /{data.property_id}/subscript" +
+      "ion:\001*\022\201\001\n\022DeleteSubscription\022&.property" +
+      ".v1.DeleteSubscriptionRequest\032\'.property" +
+      ".v1.DeleteSubscriptionResponse\"\032\202\323\344\223\002\024*\022" +
+      "/{id}/subscriptionB\307\003\n com.antinvestor.a" +
+      "pis.property.v1B\rPropertyProtoP\001Z>github" +
+      ".com/antinvestor/apis/go/property/proper" +
+      "ty/v1;propertyv1\242\002\003PXX\252\002\013Property.V1\312\002\013P" +
+      "roperty\\V1\342\002\027Property\\V1\\GPBMetadata\352\002\014P" +
+      "roperty::V1\222A\205\002\022r\n\020Property Service\"Y\n\020A" +
+      "nt Investor Ltd\022/https://github.com/anti" +
+      "nvestor/service-property\032\024info@antinvest" +
+      "or.com2\0031.0*\002\001\0022\020application/json:\020appli" +
+      "cation/jsonZY\nW\n\006bearer\022M\010\002\0228Authenticat" +
+      "ion token, prefixed by Bearer: Bearer <t" +
+      "oken>\032\rAuthorization \002b\014\n\n\n\006bearer\022\000b\006pr" +
+      "oto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -432,6 +378,7 @@ public final class PropertyProto {
           build.buf.validate.ValidateProto.getDescriptor(),
           com.antinvestor.apis.common.v1.CommonProto.getDescriptor(),
           com.google.api.AnnotationsProto.getDescriptor(),
+          com.google.protobuf.StructProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
           grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor(),
         });
@@ -441,12 +388,6 @@ public final class PropertyProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_property_v1_Locality_descriptor,
         new java.lang.String[] { "Id", "ParentId", "Name", "Description", "Extras", "CreatedAt", "Point", "Boundary", "Feature", });
-    internal_static_property_v1_Locality_ExtrasEntry_descriptor =
-      internal_static_property_v1_Locality_descriptor.getNestedTypes().get(0);
-    internal_static_property_v1_Locality_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_property_v1_Locality_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_property_v1_AddLocalityRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_property_v1_AddLocalityRequest_fieldAccessorTable = new
@@ -465,24 +406,12 @@ public final class PropertyProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_property_v1_PropertyState_descriptor,
         new java.lang.String[] { "Id", "Propertyid", "State", "Status", "Name", "Description", "Extras", "CreatedAt", });
-    internal_static_property_v1_PropertyState_ExtrasEntry_descriptor =
-      internal_static_property_v1_PropertyState_descriptor.getNestedTypes().get(0);
-    internal_static_property_v1_PropertyState_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_property_v1_PropertyState_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_property_v1_PropertyType_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_property_v1_PropertyType_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_property_v1_PropertyType_descriptor,
         new java.lang.String[] { "Id", "Name", "Description", "Extra", "CreatedAt", });
-    internal_static_property_v1_PropertyType_ExtraEntry_descriptor =
-      internal_static_property_v1_PropertyType_descriptor.getNestedTypes().get(0);
-    internal_static_property_v1_PropertyType_ExtraEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_property_v1_PropertyType_ExtraEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_property_v1_AddPropertyTypeRequest_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_property_v1_AddPropertyTypeRequest_fieldAccessorTable = new
@@ -501,12 +430,6 @@ public final class PropertyProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_property_v1_Subscription_descriptor,
         new java.lang.String[] { "Id", "PropertyId", "ProfileId", "Role", "Extra", "CreatedAt", "ExpiresAt", });
-    internal_static_property_v1_Subscription_ExtraEntry_descriptor =
-      internal_static_property_v1_Subscription_descriptor.getNestedTypes().get(0);
-    internal_static_property_v1_Subscription_ExtraEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_property_v1_Subscription_ExtraEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_property_v1_AddSubscriptionRequest_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_property_v1_AddSubscriptionRequest_fieldAccessorTable = new
@@ -525,12 +448,6 @@ public final class PropertyProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_property_v1_Property_descriptor,
         new java.lang.String[] { "Id", "ParentId", "Name", "Description", "PropertyType", "Locality", "StartedAt", "CreatedAt", "Extra", });
-    internal_static_property_v1_Property_ExtraEntry_descriptor =
-      internal_static_property_v1_Property_descriptor.getNestedTypes().get(0);
-    internal_static_property_v1_Property_ExtraEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_property_v1_Property_ExtraEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_property_v1_CreatePropertyRequest_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_property_v1_CreatePropertyRequest_fieldAccessorTable = new
@@ -549,12 +466,6 @@ public final class PropertyProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_property_v1_ListPropertyTypeRequest_descriptor,
         new java.lang.String[] { "Query", "Page", "Count", "StartDate", "EndDate", "Properties", "Extras", });
-    internal_static_property_v1_ListPropertyTypeRequest_ExtrasEntry_descriptor =
-      internal_static_property_v1_ListPropertyTypeRequest_descriptor.getNestedTypes().get(0);
-    internal_static_property_v1_ListPropertyTypeRequest_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_property_v1_ListPropertyTypeRequest_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_property_v1_ListPropertyTypeResponse_descriptor =
       getDescriptor().getMessageTypes().get(14);
     internal_static_property_v1_ListPropertyTypeResponse_fieldAccessorTable = new
@@ -567,12 +478,6 @@ public final class PropertyProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_property_v1_SearchPropertyRequest_descriptor,
         new java.lang.String[] { "Query", "Page", "Count", "StartDate", "EndDate", "Properties", "Extras", });
-    internal_static_property_v1_SearchPropertyRequest_ExtrasEntry_descriptor =
-      internal_static_property_v1_SearchPropertyRequest_descriptor.getNestedTypes().get(0);
-    internal_static_property_v1_SearchPropertyRequest_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_property_v1_SearchPropertyRequest_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_property_v1_SearchPropertyResponse_descriptor =
       getDescriptor().getMessageTypes().get(16);
     internal_static_property_v1_SearchPropertyResponse_fieldAccessorTable = new
@@ -633,12 +538,6 @@ public final class PropertyProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_property_v1_UpdatePropertyRequest_descriptor,
         new java.lang.String[] { "Id", "State", "Status", "Name", "Description", "GuardianId", "LocalityId", "Extras", });
-    internal_static_property_v1_UpdatePropertyRequest_ExtrasEntry_descriptor =
-      internal_static_property_v1_UpdatePropertyRequest_descriptor.getNestedTypes().get(0);
-    internal_static_property_v1_UpdatePropertyRequest_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_property_v1_UpdatePropertyRequest_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_property_v1_UpdatePropertyResponse_descriptor =
       getDescriptor().getMessageTypes().get(26);
     internal_static_property_v1_UpdatePropertyResponse_fieldAccessorTable = new
@@ -673,6 +572,7 @@ public final class PropertyProto {
     build.buf.validate.ValidateProto.getDescriptor();
     com.antinvestor.apis.common.v1.CommonProto.getDescriptor();
     com.google.api.AnnotationsProto.getDescriptor();
+    com.google.protobuf.StructProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
     grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =

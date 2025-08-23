@@ -55,18 +55,6 @@ private static final long serialVersionUID = 0L;
     return com.antinvestor.apis.payment.v1.PaymentProto.internal_static_payment_v1_InitiatePromptRequest_descriptor;
   }
 
-  @SuppressWarnings({"rawtypes"})
-  @java.lang.Override
-  protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-      int number) {
-    switch (number) {
-      case 11:
-        return internalGetExtra();
-      default:
-        throw new RuntimeException(
-            "Invalid map field number: " + number);
-    }
-  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
@@ -393,98 +381,41 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int EXTRA_FIELD_NUMBER = 11;
-  private static final class ExtraDefaultEntryHolder {
-    static final com.google.protobuf.MapEntry<
-        java.lang.String, java.lang.String> defaultEntry =
-            com.google.protobuf.MapEntry
-            .<java.lang.String, java.lang.String>newDefaultInstance(
-                com.antinvestor.apis.payment.v1.PaymentProto.internal_static_payment_v1_InitiatePromptRequest_ExtraEntry_descriptor, 
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "",
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "");
-  }
-  @SuppressWarnings("serial")
-  private com.google.protobuf.MapField<
-      java.lang.String, java.lang.String> extra_;
-  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-  internalGetExtra() {
-    if (extra_ == null) {
-      return com.google.protobuf.MapField.emptyMapField(
-          ExtraDefaultEntryHolder.defaultEntry);
-    }
-    return extra_;
-  }
-  public int getExtraCount() {
-    return internalGetExtra().getMap().size();
+  private com.google.protobuf.Struct extra_;
+  /**
+   * <pre>
+   * Any additional metadata (e.g., notes, tags, correlation keys)
+   * </pre>
+   *
+   * <code>.google.protobuf.Struct extra = 11 [json_name = "extra"];</code>
+   * @return Whether the extra field is set.
+   */
+  @java.lang.Override
+  public boolean hasExtra() {
+    return ((bitField0_ & 0x00000010) != 0);
   }
   /**
    * <pre>
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
+   * <code>.google.protobuf.Struct extra = 11 [json_name = "extra"];</code>
+   * @return The extra.
    */
   @java.lang.Override
-  public boolean containsExtra(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    return internalGetExtra().getMap().containsKey(key);
-  }
-  /**
-   * Use {@link #getExtraMap()} instead.
-   */
-  @java.lang.Override
-  @java.lang.Deprecated
-  public java.util.Map<java.lang.String, java.lang.String> getExtra() {
-    return getExtraMap();
+  public com.google.protobuf.Struct getExtra() {
+    return extra_ == null ? com.google.protobuf.Struct.getDefaultInstance() : extra_;
   }
   /**
    * <pre>
    * Any additional metadata (e.g., notes, tags, correlation keys)
    * </pre>
    *
-   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
+   * <code>.google.protobuf.Struct extra = 11 [json_name = "extra"];</code>
    */
   @java.lang.Override
-  public java.util.Map<java.lang.String, java.lang.String> getExtraMap() {
-    return internalGetExtra().getMap();
-  }
-  /**
-   * <pre>
-   * Any additional metadata (e.g., notes, tags, correlation keys)
-   * </pre>
-   *
-   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
-   */
-  @java.lang.Override
-  public /* nullable */
-java.lang.String getExtraOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetExtra().getMap();
-    return map.containsKey(key) ? map.get(key) : defaultValue;
-  }
-  /**
-   * <pre>
-   * Any additional metadata (e.g., notes, tags, correlation keys)
-   * </pre>
-   *
-   * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
-   */
-  @java.lang.Override
-  public java.lang.String getExtraOrThrow(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetExtra().getMap();
-    if (!map.containsKey(key)) {
-      throw new java.lang.IllegalArgumentException();
-    }
-    return map.get(key);
+  public com.google.protobuf.StructOrBuilder getExtraOrBuilder() {
+    return extra_ == null ? com.google.protobuf.Struct.getDefaultInstance() : extra_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -531,12 +462,9 @@ java.lang.String defaultValue) {
     if (((bitField0_ & 0x00000008) != 0)) {
       output.writeMessage(10, getRecipientAccount());
     }
-    com.google.protobuf.GeneratedMessage
-      .serializeStringMapTo(
-        output,
-        internalGetExtra(),
-        ExtraDefaultEntryHolder.defaultEntry,
-        11);
+    if (((bitField0_ & 0x00000010) != 0)) {
+      output.writeMessage(11, getExtra());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -582,15 +510,9 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(10, getRecipientAccount());
     }
-    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-         : internalGetExtra().getMap().entrySet()) {
-      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-      extra__ = ExtraDefaultEntryHolder.defaultEntry.newBuilderForType()
-          .setKey(entry.getKey())
-          .setValue(entry.getValue())
-          .build();
+    if (((bitField0_ & 0x00000010) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(11, extra__);
+        .computeMessageSize(11, getExtra());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -637,8 +559,11 @@ java.lang.String defaultValue) {
       if (!getRecipientAccount()
           .equals(other.getRecipientAccount())) return false;
     }
-    if (!internalGetExtra().equals(
-        other.internalGetExtra())) return false;
+    if (hasExtra() != other.hasExtra()) return false;
+    if (hasExtra()) {
+      if (!getExtra()
+          .equals(other.getExtra())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -678,9 +603,9 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + RECIPIENT_ACCOUNT_FIELD_NUMBER;
       hash = (53 * hash) + getRecipientAccount().hashCode();
     }
-    if (!internalGetExtra().getMap().isEmpty()) {
+    if (hasExtra()) {
       hash = (37 * hash) + EXTRA_FIELD_NUMBER;
-      hash = (53 * hash) + internalGetExtra().hashCode();
+      hash = (53 * hash) + getExtra().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -791,28 +716,6 @@ java.lang.String defaultValue) {
       return com.antinvestor.apis.payment.v1.PaymentProto.internal_static_payment_v1_InitiatePromptRequest_descriptor;
     }
 
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 11:
-          return internalGetExtra();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 11:
-          return internalGetMutableExtra();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -838,6 +741,7 @@ java.lang.String defaultValue) {
         internalGetRecipientFieldBuilder();
         internalGetAmountFieldBuilder();
         internalGetRecipientAccountFieldBuilder();
+        internalGetExtraFieldBuilder();
       }
     }
     @java.lang.Override
@@ -870,7 +774,11 @@ java.lang.String defaultValue) {
         recipientAccountBuilder_.dispose();
         recipientAccountBuilder_ = null;
       }
-      internalGetMutableExtra().clear();
+      extra_ = null;
+      if (extraBuilder_ != null) {
+        extraBuilder_.dispose();
+        extraBuilder_ = null;
+      }
       return this;
     }
 
@@ -948,8 +856,10 @@ java.lang.String defaultValue) {
         to_bitField0_ |= 0x00000008;
       }
       if (((from_bitField0_ & 0x00000400) != 0)) {
-        result.extra_ = internalGetExtra();
-        result.extra_.makeImmutable();
+        result.extra_ = extraBuilder_ == null
+            ? extra_
+            : extraBuilder_.build();
+        to_bitField0_ |= 0x00000010;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1004,9 +914,9 @@ java.lang.String defaultValue) {
       if (other.hasRecipientAccount()) {
         mergeRecipientAccount(other.getRecipientAccount());
       }
-      internalGetMutableExtra().mergeFrom(
-          other.internalGetExtra());
-      bitField0_ |= 0x00000400;
+      if (other.hasExtra()) {
+        mergeExtra(other.getExtra());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1092,11 +1002,9 @@ java.lang.String defaultValue) {
               break;
             } // case 82
             case 90: {
-              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              extra__ = input.readMessage(
-                  ExtraDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              internalGetMutableExtra().getMutableMap().put(
-                  extra__.getKey(), extra__.getValue());
+              input.readMessage(
+                  internalGetExtraFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000400;
               break;
             } // case 90
@@ -2047,104 +1955,113 @@ java.lang.String defaultValue) {
       return recipientAccountBuilder_;
     }
 
-    private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> extra_;
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetExtra() {
-      if (extra_ == null) {
-        return com.google.protobuf.MapField.emptyMapField(
-            ExtraDefaultEntryHolder.defaultEntry);
-      }
-      return extra_;
+    private com.google.protobuf.Struct extra_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> extraBuilder_;
+    /**
+     * <pre>
+     * Any additional metadata (e.g., notes, tags, correlation keys)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct extra = 11 [json_name = "extra"];</code>
+     * @return Whether the extra field is set.
+     */
+    public boolean hasExtra() {
+      return ((bitField0_ & 0x00000400) != 0);
     }
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetMutableExtra() {
-      if (extra_ == null) {
-        extra_ = com.google.protobuf.MapField.newMapField(
-            ExtraDefaultEntryHolder.defaultEntry);
+    /**
+     * <pre>
+     * Any additional metadata (e.g., notes, tags, correlation keys)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct extra = 11 [json_name = "extra"];</code>
+     * @return The extra.
+     */
+    public com.google.protobuf.Struct getExtra() {
+      if (extraBuilder_ == null) {
+        return extra_ == null ? com.google.protobuf.Struct.getDefaultInstance() : extra_;
+      } else {
+        return extraBuilder_.getMessage();
       }
-      if (!extra_.isMutable()) {
-        extra_ = extra_.copy();
+    }
+    /**
+     * <pre>
+     * Any additional metadata (e.g., notes, tags, correlation keys)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct extra = 11 [json_name = "extra"];</code>
+     */
+    public Builder setExtra(com.google.protobuf.Struct value) {
+      if (extraBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        extra_ = value;
+      } else {
+        extraBuilder_.setMessage(value);
       }
       bitField0_ |= 0x00000400;
       onChanged();
-      return extra_;
-    }
-    public int getExtraCount() {
-      return internalGetExtra().getMap().size();
+      return this;
     }
     /**
      * <pre>
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
+     * <code>.google.protobuf.Struct extra = 11 [json_name = "extra"];</code>
      */
-    @java.lang.Override
-    public boolean containsExtra(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      return internalGetExtra().getMap().containsKey(key);
-    }
-    /**
-     * Use {@link #getExtraMap()} instead.
-     */
-    @java.lang.Override
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getExtra() {
-      return getExtraMap();
-    }
-    /**
-     * <pre>
-     * Any additional metadata (e.g., notes, tags, correlation keys)
-     * </pre>
-     *
-     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
-     */
-    @java.lang.Override
-    public java.util.Map<java.lang.String, java.lang.String> getExtraMap() {
-      return internalGetExtra().getMap();
-    }
-    /**
-     * <pre>
-     * Any additional metadata (e.g., notes, tags, correlation keys)
-     * </pre>
-     *
-     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
-     */
-    @java.lang.Override
-    public /* nullable */
-java.lang.String getExtraOrDefault(
-        java.lang.String key,
-        /* nullable */
-java.lang.String defaultValue) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetExtra().getMap();
-      return map.containsKey(key) ? map.get(key) : defaultValue;
-    }
-    /**
-     * <pre>
-     * Any additional metadata (e.g., notes, tags, correlation keys)
-     * </pre>
-     *
-     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
-     */
-    @java.lang.Override
-    public java.lang.String getExtraOrThrow(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetExtra().getMap();
-      if (!map.containsKey(key)) {
-        throw new java.lang.IllegalArgumentException();
+    public Builder setExtra(
+        com.google.protobuf.Struct.Builder builderForValue) {
+      if (extraBuilder_ == null) {
+        extra_ = builderForValue.build();
+      } else {
+        extraBuilder_.setMessage(builderForValue.build());
       }
-      return map.get(key);
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
     }
+    /**
+     * <pre>
+     * Any additional metadata (e.g., notes, tags, correlation keys)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct extra = 11 [json_name = "extra"];</code>
+     */
+    public Builder mergeExtra(com.google.protobuf.Struct value) {
+      if (extraBuilder_ == null) {
+        if (((bitField0_ & 0x00000400) != 0) &&
+          extra_ != null &&
+          extra_ != com.google.protobuf.Struct.getDefaultInstance()) {
+          getExtraBuilder().mergeFrom(value);
+        } else {
+          extra_ = value;
+        }
+      } else {
+        extraBuilder_.mergeFrom(value);
+      }
+      if (extra_ != null) {
+        bitField0_ |= 0x00000400;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Any additional metadata (e.g., notes, tags, correlation keys)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct extra = 11 [json_name = "extra"];</code>
+     */
     public Builder clearExtra() {
       bitField0_ = (bitField0_ & ~0x00000400);
-      internalGetMutableExtra().getMutableMap()
-          .clear();
+      extra_ = null;
+      if (extraBuilder_ != null) {
+        extraBuilder_.dispose();
+        extraBuilder_ = null;
+      }
+      onChanged();
       return this;
     }
     /**
@@ -2152,54 +2069,47 @@ java.lang.String defaultValue) {
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
+     * <code>.google.protobuf.Struct extra = 11 [json_name = "extra"];</code>
      */
-    public Builder removeExtra(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      internalGetMutableExtra().getMutableMap()
-          .remove(key);
-      return this;
-    }
-    /**
-     * Use alternate mutation accessors instead.
-     */
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String>
-        getMutableExtra() {
+    public com.google.protobuf.Struct.Builder getExtraBuilder() {
       bitField0_ |= 0x00000400;
-      return internalGetMutableExtra().getMutableMap();
+      onChanged();
+      return internalGetExtraFieldBuilder().getBuilder();
     }
     /**
      * <pre>
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
+     * <code>.google.protobuf.Struct extra = 11 [json_name = "extra"];</code>
      */
-    public Builder putExtra(
-        java.lang.String key,
-        java.lang.String value) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      if (value == null) { throw new NullPointerException("map value"); }
-      internalGetMutableExtra().getMutableMap()
-          .put(key, value);
-      bitField0_ |= 0x00000400;
-      return this;
+    public com.google.protobuf.StructOrBuilder getExtraOrBuilder() {
+      if (extraBuilder_ != null) {
+        return extraBuilder_.getMessageOrBuilder();
+      } else {
+        return extra_ == null ?
+            com.google.protobuf.Struct.getDefaultInstance() : extra_;
+      }
     }
     /**
      * <pre>
      * Any additional metadata (e.g., notes, tags, correlation keys)
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extra = 11 [json_name = "extra"];</code>
+     * <code>.google.protobuf.Struct extra = 11 [json_name = "extra"];</code>
      */
-    public Builder putAllExtra(
-        java.util.Map<java.lang.String, java.lang.String> values) {
-      internalGetMutableExtra().getMutableMap()
-          .putAll(values);
-      bitField0_ |= 0x00000400;
-      return this;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
+        internalGetExtraFieldBuilder() {
+      if (extraBuilder_ == null) {
+        extraBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder>(
+                getExtra(),
+                getParentForChildren(),
+                isClean());
+        extra_ = null;
+      }
+      return extraBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:payment.v1.InitiatePromptRequest)

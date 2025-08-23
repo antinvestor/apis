@@ -18,6 +18,7 @@ package device.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/device/v1;devicev1";
@@ -85,7 +86,7 @@ message KeyObject {
   ];
 
   bytes key = 3;
-  map<string, string> extra = 4;
+  google.protobuf.Struct extra = 4;
 }
 
 // Contained message representing a device's log
@@ -110,8 +111,8 @@ message DeviceLog {
   string user_agent = 6;
   string os = 7;
   string last_seen = 8;
-  map<string, string> location = 9;
-  map<string, string> extra = 10;
+  google.protobuf.Struct location = 9;
+  google.protobuf.Struct extra = 10;
 }
 
 // The response message containing the full device object
@@ -129,8 +130,8 @@ message DeviceObject {
   string last_seen = 7;
   string profile_id = 8;
   Locale locale = 9;
-  map<string, string> location = 11;
-  map<string, string> properties = 15;
+  google.protobuf.Struct location = 11;
+  google.protobuf.Struct properties = 15;
 }
 
 // The request message containing the device's hash
@@ -169,7 +170,7 @@ message SearchRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  map<string, string> extras = 7;
+  google.protobuf.Struct extras = 7;
 }
 
 message SearchResponse {
@@ -179,7 +180,7 @@ message SearchResponse {
 // The request message containing the information necessary to create a device
 message CreateRequest {
   string name = 2;
-  map<string, string> properties = 3;
+  google.protobuf.Struct properties = 3;
 }
 
 message CreateResponse {
@@ -194,7 +195,7 @@ message UpdateRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   string name = 2;
-  map<string, string> properties = 3;
+  google.protobuf.Struct properties = 3;
 }
 
 message UpdateResponse {
@@ -213,7 +214,7 @@ message LinkRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  map<string, string> properties = 3;
+  google.protobuf.Struct properties = 3;
 }
 
 message LinkResponse {
@@ -253,7 +254,7 @@ message LogRequest {
   string user_agent = 6;
   string os = 7;
   string last_seen = 8;
-  map<string, string> extras = 9;
+  google.protobuf.Struct extras = 9;
 }
 
 message LogResponse {
@@ -288,7 +289,7 @@ message AddKeyRequest {
   ];
   KeyType key_type = 3;
   bytes data = 4;
-  map<string, string> extras = 5;
+  google.protobuf.Struct extras = 5;
 }
 
 message AddKeyResponse {

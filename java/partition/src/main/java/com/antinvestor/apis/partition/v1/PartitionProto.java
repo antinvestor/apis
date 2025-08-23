@@ -46,20 +46,10 @@ public final class PartitionProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_partition_v1_TenantObject_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_partition_v1_TenantObject_PropertiesEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_partition_v1_TenantObject_PropertiesEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_partition_v1_PartitionCreateRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_partition_v1_PartitionCreateRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_partition_v1_PartitionCreateRequest_PropertiesEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_partition_v1_PartitionCreateRequest_PropertiesEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_partition_v1_GetTenantRequest_descriptor;
   static final 
@@ -76,11 +66,6 @@ public final class PartitionProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_partition_v1_ListTenantRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_partition_v1_ListTenantRequest_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_partition_v1_ListTenantRequest_ExtrasEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_partition_v1_ListTenantResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -90,11 +75,6 @@ public final class PartitionProto {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_partition_v1_CreateTenantRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_partition_v1_CreateTenantRequest_PropertiesEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_partition_v1_CreateTenantRequest_PropertiesEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_partition_v1_CreateTenantResponse_descriptor;
   static final 
@@ -116,11 +96,6 @@ public final class PartitionProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_partition_v1_ListPartitionRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_partition_v1_ListPartitionRequest_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_partition_v1_ListPartitionRequest_ExtrasEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_partition_v1_ListPartitionResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -130,11 +105,6 @@ public final class PartitionProto {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_partition_v1_CreatePartitionRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_partition_v1_CreatePartitionRequest_PropertiesEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_partition_v1_CreatePartitionRequest_PropertiesEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_partition_v1_CreatePartitionResponse_descriptor;
   static final 
@@ -146,11 +116,6 @@ public final class PartitionProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_partition_v1_UpdatePartitionRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_partition_v1_UpdatePartitionRequest_PropertiesEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_partition_v1_UpdatePartitionRequest_PropertiesEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_partition_v1_UpdatePartitionResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -161,20 +126,10 @@ public final class PartitionProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_partition_v1_PartitionObject_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_partition_v1_PartitionObject_PropertiesEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_partition_v1_PartitionObject_PropertiesEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_partition_v1_CreatePartitionRoleRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_partition_v1_CreatePartitionRoleRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_partition_v1_CreatePartitionRoleRequest_PropertiesEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_partition_v1_CreatePartitionRoleRequest_PropertiesEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_partition_v1_CreatePartitionRoleResponse_descriptor;
   static final 
@@ -185,11 +140,6 @@ public final class PartitionProto {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_partition_v1_PartitionRoleObject_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_partition_v1_PartitionRoleObject_PropertiesEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_partition_v1_PartitionRoleObject_PropertiesEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_partition_v1_RemovePartitionRoleRequest_descriptor;
   static final 
@@ -327,244 +277,223 @@ public final class PartitionProto {
       "\n\034partition/v1/partition.proto\022\014partitio" +
       "n.v1\032\033buf/validate/validate.proto\032\026commo" +
       "n/v1/common.proto\032\034google/api/annotation" +
-      "s.proto\032.protoc-gen-openapiv2/options/an" +
-      "notations.proto\"\364\001\n\014TenantObject\022+\n\002id\030\001" +
-      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022,\n" +
-      "\013description\030\002 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013descript" +
-      "ion\022J\n\nproperties\030\003 \003(\0132*.partition.v1.T" +
-      "enantObject.PropertiesEntryR\nproperties\032" +
-      "=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005" +
-      "value\030\002 \001(\tR\005value:\0028\001\"\356\002\n\026PartitionCrea" +
-      "teRequest\022\035\n\004name\030\001 \001(\tB\t\272H\006r\004\020\003\030dR\004name" +
-      "\0228\n\ttenant_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_" +
-      "-]{3,20}R\010tenantId\0228\n\tparent_id\030\003 \001(\tB\033\272" +
-      "H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010parentId\022,\n\013" +
-      "description\030\004 \001(\tB\n\272H\007r\005\020\n\030\372\001R\013descripti" +
-      "on\022T\n\nproperties\030\005 \003(\01324.partition.v1.Pa" +
-      "rtitionCreateRequest.PropertiesEntryR\npr" +
-      "operties\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\t" +
-      "R\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"?\n\020GetTe" +
-      "nantRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9" +
-      "a-z_-]{3,20}R\002id\"C\n\021GetTenantResponse\022.\n" +
-      "\004data\030\001 \001(\0132\032.partition.v1.TenantObjectR" +
-      "\004data\"\255\002\n\021ListTenantRequest\022\024\n\005query\030\001 \001" +
-      "(\tR\005query\022\022\n\004page\030\002 \001(\003R\004page\022\024\n\005count\030\003" +
-      " \001(\005R\005count\022\035\n\nstart_date\030\004 \001(\tR\tstartDa" +
-      "te\022\031\n\010end_date\030\005 \001(\tR\007endDate\022\036\n\npropert" +
-      "ies\030\006 \003(\tR\nproperties\022C\n\006extras\030\007 \003(\0132+." +
-      "partition.v1.ListTenantRequest.ExtrasEnt" +
-      "ryR\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003" +
-      "key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"D\n\022ListTen" +
-      "antResponse\022.\n\004data\030\001 \003(\0132\032.partition.v1" +
-      ".TenantObjectR\004data\"\364\001\n\023CreateTenantRequ" +
-      "est\022\035\n\004name\030\001 \001(\tB\t\272H\006r\004\020\003\030dR\004name\022,\n\013de" +
-      "scription\030\002 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013description" +
-      "\022Q\n\nproperties\030\003 \003(\01321.partition.v1.Crea" +
-      "teTenantRequest.PropertiesEntryR\npropert" +
-      "ies\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001(\tR\003key" +
-      "\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"F\n\024CreateTena" +
-      "ntResponse\022.\n\004data\030\001 \001(\0132\032.partition.v1." +
-      "TenantObjectR\004data\"B\n\023GetPartitionReques" +
-      "t\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,2" +
-      "0}R\002id\"I\n\024GetPartitionResponse\0221\n\004data\030\001" +
-      " \001(\0132\035.partition.v1.PartitionObjectR\004dat" +
-      "a\"\263\002\n\024ListPartitionRequest\022\024\n\005query\030\001 \001(" +
-      "\tR\005query\022\022\n\004page\030\002 \001(\003R\004page\022\024\n\005count\030\003 " +
-      "\001(\005R\005count\022\035\n\nstart_date\030\004 \001(\tR\tstartDat" +
-      "e\022\031\n\010end_date\030\005 \001(\tR\007endDate\022\036\n\nproperti" +
-      "es\030\006 \003(\tR\nproperties\022F\n\006extras\030\007 \003(\0132..p" +
-      "artition.v1.ListPartitionRequest.ExtrasE" +
-      "ntryR\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\t" +
-      "R\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"J\n\025ListP" +
-      "artitionResponse\0221\n\004data\030\001 \003(\0132\035.partiti" +
-      "on.v1.PartitionObjectR\004data\"\356\002\n\026CreatePa" +
-      "rtitionRequest\0228\n\ttenant_id\030\001 \001(\tB\033\272H\030r\026" +
-      "\020\003\030(2\020[0-9a-z_-]{3,20}R\010tenantId\0228\n\tpare" +
-      "nt_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}" +
-      "R\010parentId\022\035\n\004name\030\003 \001(\tB\t\272H\006r\004\020\003\030dR\004nam" +
-      "e\022,\n\013description\030\004 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013desc" +
-      "ription\022T\n\nproperties\030\005 \003(\01324.partition." +
-      "v1.CreatePartitionRequest.PropertiesEntr" +
-      "yR\nproperties\032=\n\017PropertiesEntry\022\020\n\003key\030" +
-      "\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"L\n\027" +
-      "CreatePartitionResponse\0221\n\004data\030\001 \001(\0132\035." +
-      "partition.v1.PartitionObjectR\004data\"\317\002\n\026U" +
-      "pdatePartitionRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026" +
-      "\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\035\n\004name\030\002 \001(\t" +
-      "B\t\272H\006r\004\020\003\030dR\004name\022,\n\013description\030\003 \001(\tB\n" +
-      "\272H\007r\005\020\n\030\364\003R\013description\022&\n\005state\030\004 \001(\0162\020" +
-      ".common.v1.STATER\005state\022T\n\nproperties\030\005 " +
-      "\003(\01324.partition.v1.UpdatePartitionReques" +
-      "t.PropertiesEntryR\nproperties\032=\n\017Propert" +
-      "iesEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(" +
-      "\tR\005value:\0028\001\"L\n\027UpdatePartitionResponse\022" +
-      "1\n\004data\030\001 \001(\0132\035.partition.v1.PartitionOb" +
-      "jectR\004data\"\265\003\n\017PartitionObject\022+\n\002id\030\001 \001" +
-      "(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\035\n\004n" +
-      "ame\030\002 \001(\tB\t\272H\006r\004\020\003\030dR\004name\0228\n\ttenant_id\030" +
-      "\003 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010tena" +
-      "ntId\0228\n\tparent_id\030\004 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9" +
-      "a-z_-]{3,20}R\010parentId\022,\n\013description\030\005 " +
-      "\001(\tB\n\272H\007r\005\020\n\030\364\003R\013description\022&\n\005state\030\006 " +
-      "\001(\0162\020.common.v1.STATER\005state\022M\n\nproperti" +
-      "es\030\007 \003(\0132-.partition.v1.PartitionObject." +
-      "PropertiesEntryR\nproperties\032=\n\017Propertie" +
-      "sEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR" +
-      "\005value:\0028\001\"\224\002\n\032CreatePartitionRoleReques" +
-      "t\022>\n\014partition_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9" +
-      "a-z_-]{3,20}R\013partitionId\022\035\n\004name\030\002 \001(\tB" +
-      "\t\272H\006r\004\020\003\030dR\004name\022X\n\nproperties\030\003 \003(\01328.p" +
-      "artition.v1.CreatePartitionRoleRequest.P" +
-      "ropertiesEntryR\nproperties\032=\n\017Properties" +
-      "Entry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005" +
-      "value:\0028\001\"T\n\033CreatePartitionRoleResponse" +
-      "\0225\n\004data\030\001 \001(\0132!.partition.v1.PartitionR" +
-      "oleObjectR\004data\"\317\002\n\023PartitionRoleObject\022" +
-      "G\n\021partition_role_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[" +
-      "0-9a-z_-]{3,20}R\017partitionRoleId\022>\n\014part" +
-      "ition_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3," +
-      "20}R\013partitionId\022\035\n\004name\030\003 \001(\tB\t\272H\006r\004\020\003\030" +
-      "dR\004name\022Q\n\nproperties\030\004 \003(\01321.partition." +
-      "v1.PartitionRoleObject.PropertiesEntryR\n" +
-      "properties\032=\n\017PropertiesEntry\022\020\n\003key\030\001 \001" +
-      "(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"I\n\032Rem" +
-      "ovePartitionRoleRequest\022+\n\002id\030\001 \001(\tB\033\272H\030" +
-      "r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\";\n\033RemovePa" +
-      "rtitionRoleResponse\022\034\n\tsucceeded\030\001 \001(\010R\t" +
-      "succeeded\"Z\n\030ListPartitionRoleRequest\022>\n" +
-      "\014partition_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_" +
-      "-]{3,20}R\013partitionId\"R\n\031ListPartitionRo" +
-      "leResponse\0225\n\004role\030\001 \003(\0132!.partition.v1." +
-      "PartitionRoleObjectR\004role\"\251\001\n\nPageObject" +
-      "\0224\n\007page_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]" +
-      "{3,20}R\006pageId\022\035\n\004name\030\002 \001(\tB\t\272H\006r\004\020\003\030dR" +
-      "\004name\022\036\n\004html\030\003 \001(\tB\n\272H\007r\005\020\004\030\210\'R\004html\022&\n" +
-      "\005state\030\004 \001(\0162\020.common.v1.STATER\005state\"\222\001" +
-      "\n\021CreatePageRequest\022>\n\014partition_id\030\001 \001(" +
-      "\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\013partitio" +
-      "nId\022\035\n\004name\030\002 \001(\tB\t\272H\006r\004\020\003\030dR\004name\022\036\n\004ht" +
-      "ml\030\003 \001(\tB\n\272H\007r\005\020\004\030\210\'R\004html\"B\n\022CreatePage" +
-      "Response\022,\n\004data\030\001 \001(\0132\030.partition.v1.Pa" +
-      "geObjectR\004data\"\256\001\n\016GetPageRequest\0227\n\007pag" +
-      "e_id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330" +
-      "\001\001R\006pageId\022A\n\014partition_id\030\002 \001(\tB\036\272H\033r\026\020" +
-      "\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\013partitionId\022 \n" +
-      "\004name\030\003 \001(\tB\014\272H\tr\004\020\003\030d\330\001\001R\004name\"?\n\017GetPa" +
-      "geResponse\022,\n\004data\030\001 \001(\0132\030.partition.v1." +
-      "PageObjectR\004data\"@\n\021RemovePageRequest\022+\n" +
-      "\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002" +
-      "id\"2\n\022RemovePageResponse\022\034\n\tsucceeded\030\001 " +
-      "\001(\010R\tsucceeded\"\351\001\n\014AccessObject\0228\n\tacces" +
-      "s_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R" +
-      "\010accessId\022:\n\nprofile_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(" +
-      "2\020[0-9a-z_-]{3,20}R\tprofileId\022;\n\tpartiti" +
-      "on\030\003 \001(\0132\035.partition.v1.PartitionObjectR" +
-      "\tpartition\022&\n\005state\030\004 \001(\0162\020.common.v1.ST" +
-      "ATER\005state\"\351\001\n\023CreateAccessRequest\022C\n\014pa" +
-      "rtition_id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{" +
-      "3,20}\330\001\001H\000R\013partitionId\022=\n\tclient_id\030\003 \001" +
-      "(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001H\000R\010cl" +
-      "ientId\022:\n\nprofile_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[" +
-      "0-9a-z_-]{3,20}R\tprofileIdB\022\n\tpartition\022" +
-      "\005\272H\002\010\000\"F\n\024CreateAccessResponse\022.\n\004data\030\001" +
-      " \001(\0132\032.partition.v1.AccessObjectR\004data\"\246" +
-      "\002\n\020GetAccessRequest\022;\n\taccess_id\030\001 \001(\tB\036" +
-      "\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\010accessId" +
-      "\022C\n\014partition_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a" +
-      "-z_-]{3,20}\330\001\001H\000R\013partitionId\022=\n\tclient_" +
-      "id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001" +
-      "H\000R\010clientId\022=\n\nprofile_id\030\004 \001(\tB\036\272H\033r\026\020" +
-      "\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\tprofileIdB\022\n\tp" +
-      "artition\022\005\272H\002\010\000\"C\n\021GetAccessResponse\022.\n\004" +
-      "data\030\001 \001(\0132\032.partition.v1.AccessObjectR\004" +
-      "data\"B\n\023RemoveAccessRequest\022+\n\002id\030\001 \001(\tB" +
-      "\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"4\n\024Remo" +
-      "veAccessResponse\022\034\n\tsucceeded\030\001 \001(\010R\tsuc" +
-      "ceeded\"\234\001\n\027CreateAccessRoleRequest\0228\n\tac" +
-      "cess_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,2" +
-      "0}R\010accessId\022G\n\021partition_role_id\030\002 \001(\tB" +
-      "\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\017partitionR" +
-      "oleId\"N\n\030CreateAccessRoleResponse\0222\n\004dat" +
-      "a\030\001 \001(\0132\036.partition.v1.AccessRoleObjectR" +
-      "\004data\"\306\001\n\020AccessRoleObject\022A\n\016access_rol" +
-      "e_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R" +
-      "\014accessRoleId\0228\n\taccess_id\030\002 \001(\tB\033\272H\030r\026\020" +
-      "\003\030(2\020[0-9a-z_-]{3,20}R\010accessId\0225\n\004role\030" +
-      "\003 \001(\0132!.partition.v1.PartitionRoleObject" +
-      "R\004role\"F\n\027RemoveAccessRoleRequest\022+\n\002id\030" +
-      "\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"8" +
-      "\n\030RemoveAccessRoleResponse\022\034\n\tsucceeded\030" +
-      "\001 \001(\010R\tsucceeded\"Q\n\025ListAccessRoleReques" +
-      "t\0228\n\taccess_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z" +
-      "_-]{3,20}R\010accessId\"L\n\026ListAccessRoleRes" +
-      "ponse\0222\n\004role\030\001 \003(\0132\036.partition.v1.Acces" +
-      "sRoleObjectR\004role2\362\020\n\020PartitionService\022b" +
-      "\n\tGetTenant\022\036.partition.v1.GetTenantRequ" +
-      "est\032\037.partition.v1.GetTenantResponse\"\024\202\323" +
-      "\344\223\002\016\022\014/tenant/{id}\022b\n\nListTenant\022\037.parti" +
-      "tion.v1.ListTenantRequest\032 .partition.v1" +
-      ".ListTenantResponse\"\017\202\323\344\223\002\t\022\007/tenant0\001\022i" +
-      "\n\014CreateTenant\022!.partition.v1.CreateTena" +
-      "ntRequest\032\".partition.v1.CreateTenantRes" +
-      "ponse\"\022\202\323\344\223\002\014\"\007/tenant:\001*\022n\n\rListPartiti" +
-      "on\022\".partition.v1.ListPartitionRequest\032#" +
-      ".partition.v1.ListPartitionResponse\"\022\202\323\344" +
-      "\223\002\014\022\n/partition0\001\022u\n\017CreatePartition\022$.p" +
-      "artition.v1.CreatePartitionRequest\032%.par" +
-      "tition.v1.CreatePartitionResponse\"\025\202\323\344\223\002" +
-      "\017\"\n/partition:\001*\022n\n\014GetPartition\022!.parti" +
-      "tion.v1.GetPartitionRequest\032\".partition." +
-      "v1.GetPartitionResponse\"\027\202\323\344\223\002\021\022\017/partit" +
-      "ion/{id}\022z\n\017UpdatePartition\022$.partition." +
-      "v1.UpdatePartitionRequest\032%.partition.v1" +
-      ".UpdatePartitionResponse\"\032\202\323\344\223\002\0242\017/parti" +
-      "tion/{id}:\001*\022\206\001\n\023CreatePartitionRole\022(.p" +
-      "artition.v1.CreatePartitionRoleRequest\032)" +
-      ".partition.v1.CreatePartitionRoleRespons" +
-      "e\"\032\202\323\344\223\002\024\"\017/partition/role:\001*\022\177\n\021ListPar" +
-      "titionRole\022&.partition.v1.ListPartitionR" +
-      "oleRequest\032\'.partition.v1.ListPartitionR" +
-      "oleResponse\"\027\202\323\344\223\002\021\022\017/partition/role0\001\022\210" +
-      "\001\n\023RemovePartitionRole\022(.partition.v1.Re" +
-      "movePartitionRoleRequest\032).partition.v1." +
-      "RemovePartitionRoleResponse\"\034\202\323\344\223\002\026*\024/pa" +
-      "rtition/role/{id}\022a\n\nCreatePage\022\037.partit" +
-      "ion.v1.CreatePageRequest\032 .partition.v1." +
-      "CreatePageResponse\"\020\202\323\344\223\002\n\"\005/page:\001*\022U\n\007" +
-      "GetPage\022\034.partition.v1.GetPageRequest\032\035." +
-      "partition.v1.GetPageResponse\"\r\202\323\344\223\002\007\022\005/p" +
-      "age\022c\n\nRemovePage\022\037.partition.v1.RemoveP" +
-      "ageRequest\032 .partition.v1.RemovePageResp" +
-      "onse\"\022\202\323\344\223\002\014*\n/page/{id}\022i\n\014CreateAccess" +
-      "\022!.partition.v1.CreateAccessRequest\032\".pa" +
-      "rtition.v1.CreateAccessResponse\"\022\202\323\344\223\002\014\"" +
-      "\007/access:\001*\022]\n\tGetAccess\022\036.partition.v1." +
-      "GetAccessRequest\032\037.partition.v1.GetAcces" +
-      "sResponse\"\017\202\323\344\223\002\t\022\007/access\022k\n\014RemoveAcce" +
-      "ss\022!.partition.v1.RemoveAccessRequest\032\"." +
-      "partition.v1.RemoveAccessResponse\"\024\202\323\344\223\002" +
-      "\016*\014/access/{id}\022z\n\020CreateAccessRole\022%.pa" +
-      "rtition.v1.CreateAccessRoleRequest\032&.par" +
-      "tition.v1.CreateAccessRoleResponse\"\027\202\323\344\223" +
-      "\002\021\"\014/access/role:\001*\022s\n\016ListAccessRole\022#." +
-      "partition.v1.ListAccessRoleRequest\032$.par" +
-      "tition.v1.ListAccessRoleResponse\"\024\202\323\344\223\002\016" +
-      "\022\014/access/role0\001\022|\n\020RemoveAccessRole\022%.p" +
-      "artition.v1.RemoveAccessRoleRequest\032&.pa" +
-      "rtition.v1.RemoveAccessRoleResponse\"\031\202\323\344" +
-      "\223\002\023*\021/access/role/{id}B\317\003\n!com.antinvest" +
-      "or.apis.partition.v1B\016PartitionProtoP\001ZA" +
-      "github.com/antinvestor/apis/go/partition" +
-      "/partition/v1;partitionv1\242\002\003PXX\252\002\014Partit" +
-      "ion.V1\312\002\014Partition\\V1\342\002\030Partition\\V1\\GPB" +
-      "Metadata\352\002\rPartition::V1\222A\204\002\022q\n\021Partitio" +
-      "n Service\"W\n\020Ant Investor Ltd\022-https://g" +
-      "ithub.com/antinvestor/service-lostid\032\024in" +
-      "fo@antinvestor.com2\0031.0*\002\001\0022\020application" +
-      "/json:\020application/jsonZY\nW\n\006bearer\022M\010\002\022" +
-      "8Authentication token, prefixed by Beare" +
-      "r: Bearer <token>\032\rAuthorization \002b\014\n\n\n\006" +
-      "bearer\022\000b\006proto3"
+      "s.proto\032\034google/protobuf/struct.proto\032.p" +
+      "rotoc-gen-openapiv2/options/annotations." +
+      "proto\"\242\001\n\014TenantObject\022+\n\002id\030\001 \001(\tB\033\272H\030r" +
+      "\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022,\n\013descripti" +
+      "on\030\002 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013description\0227\n\npro" +
+      "perties\030\003 \001(\0132\027.google.protobuf.StructR\n" +
+      "properties\"\222\002\n\026PartitionCreateRequest\022\035\n" +
+      "\004name\030\001 \001(\tB\t\272H\006r\004\020\003\030dR\004name\0228\n\ttenant_i" +
+      "d\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010te" +
+      "nantId\0228\n\tparent_id\030\003 \001(\tB\033\272H\030r\026\020\003\030(2\020[0" +
+      "-9a-z_-]{3,20}R\010parentId\022,\n\013description\030" +
+      "\004 \001(\tB\n\272H\007r\005\020\n\030\372\001R\013description\0227\n\nproper" +
+      "ties\030\005 \001(\0132\027.google.protobuf.StructR\npro" +
+      "perties\"?\n\020GetTenantRequest\022+\n\002id\030\001 \001(\tB" +
+      "\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"C\n\021GetT" +
+      "enantResponse\022.\n\004data\030\001 \001(\0132\032.partition." +
+      "v1.TenantObjectR\004data\"\336\001\n\021ListTenantRequ" +
+      "est\022\024\n\005query\030\001 \001(\tR\005query\022\022\n\004page\030\002 \001(\003R" +
+      "\004page\022\024\n\005count\030\003 \001(\005R\005count\022\035\n\nstart_dat" +
+      "e\030\004 \001(\tR\tstartDate\022\031\n\010end_date\030\005 \001(\tR\007en" +
+      "dDate\022\036\n\nproperties\030\006 \003(\tR\nproperties\022/\n" +
+      "\006extras\030\007 \001(\0132\027.google.protobuf.StructR\006" +
+      "extras\"D\n\022ListTenantResponse\022.\n\004data\030\001 \003" +
+      "(\0132\032.partition.v1.TenantObjectR\004data\"\233\001\n" +
+      "\023CreateTenantRequest\022\035\n\004name\030\001 \001(\tB\t\272H\006r" +
+      "\004\020\003\030dR\004name\022,\n\013description\030\002 \001(\tB\n\272H\007r\005\020" +
+      "\n\030\364\003R\013description\0227\n\nproperties\030\003 \001(\0132\027." +
+      "google.protobuf.StructR\nproperties\"F\n\024Cr" +
+      "eateTenantResponse\022.\n\004data\030\001 \001(\0132\032.parti" +
+      "tion.v1.TenantObjectR\004data\"B\n\023GetPartiti" +
+      "onRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-" +
+      "z_-]{3,20}R\002id\"I\n\024GetPartitionResponse\0221" +
+      "\n\004data\030\001 \001(\0132\035.partition.v1.PartitionObj" +
+      "ectR\004data\"\341\001\n\024ListPartitionRequest\022\024\n\005qu" +
+      "ery\030\001 \001(\tR\005query\022\022\n\004page\030\002 \001(\003R\004page\022\024\n\005" +
+      "count\030\003 \001(\005R\005count\022\035\n\nstart_date\030\004 \001(\tR\t" +
+      "startDate\022\031\n\010end_date\030\005 \001(\tR\007endDate\022\036\n\n" +
+      "properties\030\006 \003(\tR\nproperties\022/\n\006extras\030\007" +
+      " \001(\0132\027.google.protobuf.StructR\006extras\"J\n" +
+      "\025ListPartitionResponse\0221\n\004data\030\001 \003(\0132\035.p" +
+      "artition.v1.PartitionObjectR\004data\"\222\002\n\026Cr" +
+      "eatePartitionRequest\0228\n\ttenant_id\030\001 \001(\tB" +
+      "\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010tenantId\0228" +
+      "\n\tparent_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]" +
+      "{3,20}R\010parentId\022\035\n\004name\030\003 \001(\tB\t\272H\006r\004\020\003\030" +
+      "dR\004name\022,\n\013description\030\004 \001(\tB\n\272H\007r\005\020\n\030\364\003" +
+      "R\013description\0227\n\nproperties\030\005 \001(\0132\027.goog" +
+      "le.protobuf.StructR\nproperties\"L\n\027Create" +
+      "PartitionResponse\0221\n\004data\030\001 \001(\0132\035.partit" +
+      "ion.v1.PartitionObjectR\004data\"\363\001\n\026UpdateP" +
+      "artitionRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020" +
+      "[0-9a-z_-]{3,20}R\002id\022\035\n\004name\030\002 \001(\tB\t\272H\006r" +
+      "\004\020\003\030dR\004name\022,\n\013description\030\003 \001(\tB\n\272H\007r\005\020" +
+      "\n\030\364\003R\013description\022&\n\005state\030\004 \001(\0162\020.commo" +
+      "n.v1.STATER\005state\0227\n\nproperties\030\005 \001(\0132\027." +
+      "google.protobuf.StructR\nproperties\"L\n\027Up" +
+      "datePartitionResponse\0221\n\004data\030\001 \001(\0132\035.pa" +
+      "rtition.v1.PartitionObjectR\004data\"\340\002\n\017Par" +
+      "titionObject\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-" +
+      "9a-z_-]{3,20}R\002id\022\035\n\004name\030\002 \001(\tB\t\272H\006r\004\020\003" +
+      "\030dR\004name\0228\n\ttenant_id\030\003 \001(\tB\033\272H\030r\026\020\003\030(2\020" +
+      "[0-9a-z_-]{3,20}R\010tenantId\0228\n\tparent_id\030" +
+      "\004 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010pare" +
+      "ntId\022,\n\013description\030\005 \001(\tB\n\272H\007r\005\020\n\030\364\003R\013d" +
+      "escription\022&\n\005state\030\006 \001(\0162\020.common.v1.ST" +
+      "ATER\005state\0227\n\nproperties\030\007 \001(\0132\027.google." +
+      "protobuf.StructR\nproperties\"\264\001\n\032CreatePa" +
+      "rtitionRoleRequest\022>\n\014partition_id\030\001 \001(\t" +
+      "B\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\013partition" +
+      "Id\022\035\n\004name\030\002 \001(\tB\t\272H\006r\004\020\003\030dR\004name\0227\n\npro" +
+      "perties\030\003 \001(\0132\027.google.protobuf.StructR\n" +
+      "properties\"T\n\033CreatePartitionRoleRespons" +
+      "e\0225\n\004data\030\001 \001(\0132!.partition.v1.Partition" +
+      "RoleObjectR\004data\"\366\001\n\023PartitionRoleObject" +
+      "\022G\n\021partition_role_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020" +
+      "[0-9a-z_-]{3,20}R\017partitionRoleId\022>\n\014par" +
+      "tition_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3" +
+      ",20}R\013partitionId\022\035\n\004name\030\003 \001(\tB\t\272H\006r\004\020\003" +
+      "\030dR\004name\0227\n\nproperties\030\004 \001(\0132\027.google.pr" +
+      "otobuf.StructR\nproperties\"I\n\032RemoveParti" +
+      "tionRoleRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020" +
+      "[0-9a-z_-]{3,20}R\002id\";\n\033RemovePartitionR" +
+      "oleResponse\022\034\n\tsucceeded\030\001 \001(\010R\tsucceede" +
+      "d\"Z\n\030ListPartitionRoleRequest\022>\n\014partiti" +
+      "on_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}" +
+      "R\013partitionId\"R\n\031ListPartitionRoleRespon" +
+      "se\0225\n\004role\030\001 \003(\0132!.partition.v1.Partitio" +
+      "nRoleObjectR\004role\"\251\001\n\nPageObject\0224\n\007page" +
+      "_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006" +
+      "pageId\022\035\n\004name\030\002 \001(\tB\t\272H\006r\004\020\003\030dR\004name\022\036\n" +
+      "\004html\030\003 \001(\tB\n\272H\007r\005\020\004\030\210\'R\004html\022&\n\005state\030\004" +
+      " \001(\0162\020.common.v1.STATER\005state\"\222\001\n\021Create" +
+      "PageRequest\022>\n\014partition_id\030\001 \001(\tB\033\272H\030r\026" +
+      "\020\003\030(2\020[0-9a-z_-]{3,20}R\013partitionId\022\035\n\004n" +
+      "ame\030\002 \001(\tB\t\272H\006r\004\020\003\030dR\004name\022\036\n\004html\030\003 \001(\t" +
+      "B\n\272H\007r\005\020\004\030\210\'R\004html\"B\n\022CreatePageResponse" +
+      "\022,\n\004data\030\001 \001(\0132\030.partition.v1.PageObject" +
+      "R\004data\"\256\001\n\016GetPageRequest\0227\n\007page_id\030\001 \001" +
+      "(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\006page" +
+      "Id\022A\n\014partition_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-" +
+      "9a-z_-]{3,20}\330\001\001R\013partitionId\022 \n\004name\030\003 " +
+      "\001(\tB\014\272H\tr\004\020\003\030d\330\001\001R\004name\"?\n\017GetPageRespon" +
+      "se\022,\n\004data\030\001 \001(\0132\030.partition.v1.PageObje" +
+      "ctR\004data\"@\n\021RemovePageRequest\022+\n\002id\030\001 \001(" +
+      "\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"2\n\022Re" +
+      "movePageResponse\022\034\n\tsucceeded\030\001 \001(\010R\tsuc" +
+      "ceeded\"\351\001\n\014AccessObject\0228\n\taccess_id\030\001 \001" +
+      "(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010accessI" +
+      "d\022:\n\nprofile_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-" +
+      "z_-]{3,20}R\tprofileId\022;\n\tpartition\030\003 \001(\013" +
+      "2\035.partition.v1.PartitionObjectR\tpartiti" +
+      "on\022&\n\005state\030\004 \001(\0162\020.common.v1.STATER\005sta" +
+      "te\"\351\001\n\023CreateAccessRequest\022C\n\014partition_" +
+      "id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001" +
+      "H\000R\013partitionId\022=\n\tclient_id\030\003 \001(\tB\036\272H\033r" +
+      "\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001H\000R\010clientId\022:" +
+      "\n\nprofile_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-" +
+      "]{3,20}R\tprofileIdB\022\n\tpartition\022\005\272H\002\010\000\"F" +
+      "\n\024CreateAccessResponse\022.\n\004data\030\001 \001(\0132\032.p" +
+      "artition.v1.AccessObjectR\004data\"\246\002\n\020GetAc" +
+      "cessRequest\022;\n\taccess_id\030\001 \001(\tB\036\272H\033r\026\020\003\030" +
+      "(2\020[0-9a-z_-]{3,20}\330\001\001R\010accessId\022C\n\014part" +
+      "ition_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3," +
+      "20}\330\001\001H\000R\013partitionId\022=\n\tclient_id\030\003 \001(\t" +
+      "B\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001H\000R\010clie" +
+      "ntId\022=\n\nprofile_id\030\004 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-" +
+      "9a-z_-]{3,20}\330\001\001R\tprofileIdB\022\n\tpartition" +
+      "\022\005\272H\002\010\000\"C\n\021GetAccessResponse\022.\n\004data\030\001 \001" +
+      "(\0132\032.partition.v1.AccessObjectR\004data\"B\n\023" +
+      "RemoveAccessRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003" +
+      "\030(2\020[0-9a-z_-]{3,20}R\002id\"4\n\024RemoveAccess" +
+      "Response\022\034\n\tsucceeded\030\001 \001(\010R\tsucceeded\"\234" +
+      "\001\n\027CreateAccessRoleRequest\0228\n\taccess_id\030" +
+      "\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010acce" +
+      "ssId\022G\n\021partition_role_id\030\002 \001(\tB\033\272H\030r\026\020\003" +
+      "\030(2\020[0-9a-z_-]{3,20}R\017partitionRoleId\"N\n" +
+      "\030CreateAccessRoleResponse\0222\n\004data\030\001 \001(\0132" +
+      "\036.partition.v1.AccessRoleObjectR\004data\"\306\001" +
+      "\n\020AccessRoleObject\022A\n\016access_role_id\030\001 \001" +
+      "(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\014accessR" +
+      "oleId\0228\n\taccess_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-" +
+      "9a-z_-]{3,20}R\010accessId\0225\n\004role\030\003 \001(\0132!." +
+      "partition.v1.PartitionRoleObjectR\004role\"F" +
+      "\n\027RemoveAccessRoleRequest\022+\n\002id\030\001 \001(\tB\033\272" +
+      "H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"8\n\030Remove" +
+      "AccessRoleResponse\022\034\n\tsucceeded\030\001 \001(\010R\ts" +
+      "ucceeded\"Q\n\025ListAccessRoleRequest\0228\n\tacc" +
+      "ess_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20" +
+      "}R\010accessId\"L\n\026ListAccessRoleResponse\0222\n" +
+      "\004role\030\001 \003(\0132\036.partition.v1.AccessRoleObj" +
+      "ectR\004role2\362\020\n\020PartitionService\022b\n\tGetTen" +
+      "ant\022\036.partition.v1.GetTenantRequest\032\037.pa" +
+      "rtition.v1.GetTenantResponse\"\024\202\323\344\223\002\016\022\014/t" +
+      "enant/{id}\022b\n\nListTenant\022\037.partition.v1." +
+      "ListTenantRequest\032 .partition.v1.ListTen" +
+      "antResponse\"\017\202\323\344\223\002\t\022\007/tenant0\001\022i\n\014Create" +
+      "Tenant\022!.partition.v1.CreateTenantReques" +
+      "t\032\".partition.v1.CreateTenantResponse\"\022\202" +
+      "\323\344\223\002\014\"\007/tenant:\001*\022n\n\rListPartition\022\".par" +
+      "tition.v1.ListPartitionRequest\032#.partiti" +
+      "on.v1.ListPartitionResponse\"\022\202\323\344\223\002\014\022\n/pa" +
+      "rtition0\001\022u\n\017CreatePartition\022$.partition" +
+      ".v1.CreatePartitionRequest\032%.partition.v" +
+      "1.CreatePartitionResponse\"\025\202\323\344\223\002\017\"\n/part" +
+      "ition:\001*\022n\n\014GetPartition\022!.partition.v1." +
+      "GetPartitionRequest\032\".partition.v1.GetPa" +
+      "rtitionResponse\"\027\202\323\344\223\002\021\022\017/partition/{id}" +
+      "\022z\n\017UpdatePartition\022$.partition.v1.Updat" +
+      "ePartitionRequest\032%.partition.v1.UpdateP" +
+      "artitionResponse\"\032\202\323\344\223\002\0242\017/partition/{id" +
+      "}:\001*\022\206\001\n\023CreatePartitionRole\022(.partition" +
+      ".v1.CreatePartitionRoleRequest\032).partiti" +
+      "on.v1.CreatePartitionRoleResponse\"\032\202\323\344\223\002" +
+      "\024\"\017/partition/role:\001*\022\177\n\021ListPartitionRo" +
+      "le\022&.partition.v1.ListPartitionRoleReque" +
+      "st\032\'.partition.v1.ListPartitionRoleRespo" +
+      "nse\"\027\202\323\344\223\002\021\022\017/partition/role0\001\022\210\001\n\023Remov" +
+      "ePartitionRole\022(.partition.v1.RemovePart" +
+      "itionRoleRequest\032).partition.v1.RemovePa" +
+      "rtitionRoleResponse\"\034\202\323\344\223\002\026*\024/partition/" +
+      "role/{id}\022a\n\nCreatePage\022\037.partition.v1.C" +
+      "reatePageRequest\032 .partition.v1.CreatePa" +
+      "geResponse\"\020\202\323\344\223\002\n\"\005/page:\001*\022U\n\007GetPage\022" +
+      "\034.partition.v1.GetPageRequest\032\035.partitio" +
+      "n.v1.GetPageResponse\"\r\202\323\344\223\002\007\022\005/page\022c\n\nR" +
+      "emovePage\022\037.partition.v1.RemovePageReque" +
+      "st\032 .partition.v1.RemovePageResponse\"\022\202\323" +
+      "\344\223\002\014*\n/page/{id}\022i\n\014CreateAccess\022!.parti" +
+      "tion.v1.CreateAccessRequest\032\".partition." +
+      "v1.CreateAccessResponse\"\022\202\323\344\223\002\014\"\007/access" +
+      ":\001*\022]\n\tGetAccess\022\036.partition.v1.GetAcces" +
+      "sRequest\032\037.partition.v1.GetAccessRespons" +
+      "e\"\017\202\323\344\223\002\t\022\007/access\022k\n\014RemoveAccess\022!.par" +
+      "tition.v1.RemoveAccessRequest\032\".partitio" +
+      "n.v1.RemoveAccessResponse\"\024\202\323\344\223\002\016*\014/acce" +
+      "ss/{id}\022z\n\020CreateAccessRole\022%.partition." +
+      "v1.CreateAccessRoleRequest\032&.partition.v" +
+      "1.CreateAccessRoleResponse\"\027\202\323\344\223\002\021\"\014/acc" +
+      "ess/role:\001*\022s\n\016ListAccessRole\022#.partitio" +
+      "n.v1.ListAccessRoleRequest\032$.partition.v" +
+      "1.ListAccessRoleResponse\"\024\202\323\344\223\002\016\022\014/acces" +
+      "s/role0\001\022|\n\020RemoveAccessRole\022%.partition" +
+      ".v1.RemoveAccessRoleRequest\032&.partition." +
+      "v1.RemoveAccessRoleResponse\"\031\202\323\344\223\002\023*\021/ac" +
+      "cess/role/{id}B\317\003\n!com.antinvestor.apis." +
+      "partition.v1B\016PartitionProtoP\001ZAgithub.c" +
+      "om/antinvestor/apis/go/partition/partiti" +
+      "on/v1;partitionv1\242\002\003PXX\252\002\014Partition.V1\312\002" +
+      "\014Partition\\V1\342\002\030Partition\\V1\\GPBMetadata" +
+      "\352\002\rPartition::V1\222A\204\002\022q\n\021Partition Servic" +
+      "e\"W\n\020Ant Investor Ltd\022-https://github.co" +
+      "m/antinvestor/service-lostid\032\024info@antin" +
+      "vestor.com2\0031.0*\002\001\0022\020application/json:\020a" +
+      "pplication/jsonZY\nW\n\006bearer\022M\010\002\0228Authent" +
+      "ication token, prefixed by Bearer: Beare" +
+      "r <token>\032\rAuthorization \002b\014\n\n\n\006bearer\022\000" +
+      "b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -572,6 +501,7 @@ public final class PartitionProto {
           build.buf.validate.ValidateProto.getDescriptor(),
           com.antinvestor.apis.common.v1.CommonProto.getDescriptor(),
           com.google.api.AnnotationsProto.getDescriptor(),
+          com.google.protobuf.StructProto.getDescriptor(),
           grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor(),
         });
     internal_static_partition_v1_TenantObject_descriptor =
@@ -580,24 +510,12 @@ public final class PartitionProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_TenantObject_descriptor,
         new java.lang.String[] { "Id", "Description", "Properties", });
-    internal_static_partition_v1_TenantObject_PropertiesEntry_descriptor =
-      internal_static_partition_v1_TenantObject_descriptor.getNestedTypes().get(0);
-    internal_static_partition_v1_TenantObject_PropertiesEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_partition_v1_TenantObject_PropertiesEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_partition_v1_PartitionCreateRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_partition_v1_PartitionCreateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_PartitionCreateRequest_descriptor,
         new java.lang.String[] { "Name", "TenantId", "ParentId", "Description", "Properties", });
-    internal_static_partition_v1_PartitionCreateRequest_PropertiesEntry_descriptor =
-      internal_static_partition_v1_PartitionCreateRequest_descriptor.getNestedTypes().get(0);
-    internal_static_partition_v1_PartitionCreateRequest_PropertiesEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_partition_v1_PartitionCreateRequest_PropertiesEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_partition_v1_GetTenantRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_partition_v1_GetTenantRequest_fieldAccessorTable = new
@@ -616,12 +534,6 @@ public final class PartitionProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_ListTenantRequest_descriptor,
         new java.lang.String[] { "Query", "Page", "Count", "StartDate", "EndDate", "Properties", "Extras", });
-    internal_static_partition_v1_ListTenantRequest_ExtrasEntry_descriptor =
-      internal_static_partition_v1_ListTenantRequest_descriptor.getNestedTypes().get(0);
-    internal_static_partition_v1_ListTenantRequest_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_partition_v1_ListTenantRequest_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_partition_v1_ListTenantResponse_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_partition_v1_ListTenantResponse_fieldAccessorTable = new
@@ -634,12 +546,6 @@ public final class PartitionProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_CreateTenantRequest_descriptor,
         new java.lang.String[] { "Name", "Description", "Properties", });
-    internal_static_partition_v1_CreateTenantRequest_PropertiesEntry_descriptor =
-      internal_static_partition_v1_CreateTenantRequest_descriptor.getNestedTypes().get(0);
-    internal_static_partition_v1_CreateTenantRequest_PropertiesEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_partition_v1_CreateTenantRequest_PropertiesEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_partition_v1_CreateTenantResponse_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_partition_v1_CreateTenantResponse_fieldAccessorTable = new
@@ -664,12 +570,6 @@ public final class PartitionProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_ListPartitionRequest_descriptor,
         new java.lang.String[] { "Query", "Page", "Count", "StartDate", "EndDate", "Properties", "Extras", });
-    internal_static_partition_v1_ListPartitionRequest_ExtrasEntry_descriptor =
-      internal_static_partition_v1_ListPartitionRequest_descriptor.getNestedTypes().get(0);
-    internal_static_partition_v1_ListPartitionRequest_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_partition_v1_ListPartitionRequest_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_partition_v1_ListPartitionResponse_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_partition_v1_ListPartitionResponse_fieldAccessorTable = new
@@ -682,12 +582,6 @@ public final class PartitionProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_CreatePartitionRequest_descriptor,
         new java.lang.String[] { "TenantId", "ParentId", "Name", "Description", "Properties", });
-    internal_static_partition_v1_CreatePartitionRequest_PropertiesEntry_descriptor =
-      internal_static_partition_v1_CreatePartitionRequest_descriptor.getNestedTypes().get(0);
-    internal_static_partition_v1_CreatePartitionRequest_PropertiesEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_partition_v1_CreatePartitionRequest_PropertiesEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_partition_v1_CreatePartitionResponse_descriptor =
       getDescriptor().getMessageTypes().get(13);
     internal_static_partition_v1_CreatePartitionResponse_fieldAccessorTable = new
@@ -700,12 +594,6 @@ public final class PartitionProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_UpdatePartitionRequest_descriptor,
         new java.lang.String[] { "Id", "Name", "Description", "State", "Properties", });
-    internal_static_partition_v1_UpdatePartitionRequest_PropertiesEntry_descriptor =
-      internal_static_partition_v1_UpdatePartitionRequest_descriptor.getNestedTypes().get(0);
-    internal_static_partition_v1_UpdatePartitionRequest_PropertiesEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_partition_v1_UpdatePartitionRequest_PropertiesEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_partition_v1_UpdatePartitionResponse_descriptor =
       getDescriptor().getMessageTypes().get(15);
     internal_static_partition_v1_UpdatePartitionResponse_fieldAccessorTable = new
@@ -718,24 +606,12 @@ public final class PartitionProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_PartitionObject_descriptor,
         new java.lang.String[] { "Id", "Name", "TenantId", "ParentId", "Description", "State", "Properties", });
-    internal_static_partition_v1_PartitionObject_PropertiesEntry_descriptor =
-      internal_static_partition_v1_PartitionObject_descriptor.getNestedTypes().get(0);
-    internal_static_partition_v1_PartitionObject_PropertiesEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_partition_v1_PartitionObject_PropertiesEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_partition_v1_CreatePartitionRoleRequest_descriptor =
       getDescriptor().getMessageTypes().get(17);
     internal_static_partition_v1_CreatePartitionRoleRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_CreatePartitionRoleRequest_descriptor,
         new java.lang.String[] { "PartitionId", "Name", "Properties", });
-    internal_static_partition_v1_CreatePartitionRoleRequest_PropertiesEntry_descriptor =
-      internal_static_partition_v1_CreatePartitionRoleRequest_descriptor.getNestedTypes().get(0);
-    internal_static_partition_v1_CreatePartitionRoleRequest_PropertiesEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_partition_v1_CreatePartitionRoleRequest_PropertiesEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_partition_v1_CreatePartitionRoleResponse_descriptor =
       getDescriptor().getMessageTypes().get(18);
     internal_static_partition_v1_CreatePartitionRoleResponse_fieldAccessorTable = new
@@ -748,12 +624,6 @@ public final class PartitionProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_partition_v1_PartitionRoleObject_descriptor,
         new java.lang.String[] { "PartitionRoleId", "PartitionId", "Name", "Properties", });
-    internal_static_partition_v1_PartitionRoleObject_PropertiesEntry_descriptor =
-      internal_static_partition_v1_PartitionRoleObject_descriptor.getNestedTypes().get(0);
-    internal_static_partition_v1_PartitionRoleObject_PropertiesEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_partition_v1_PartitionRoleObject_PropertiesEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_partition_v1_RemovePartitionRoleRequest_descriptor =
       getDescriptor().getMessageTypes().get(20);
     internal_static_partition_v1_RemovePartitionRoleRequest_fieldAccessorTable = new
@@ -908,6 +778,7 @@ public final class PartitionProto {
     build.buf.validate.ValidateProto.getDescriptor();
     com.antinvestor.apis.common.v1.CommonProto.getDescriptor();
     com.google.api.AnnotationsProto.getDescriptor();
+    com.google.protobuf.StructProto.getDescriptor();
     grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();

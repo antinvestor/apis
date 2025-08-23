@@ -49,70 +49,32 @@ public interface TemplateSaveRequestOrBuilder extends
       getLanguageCodeBytes();
 
   /**
-   * <code>map&lt;string, string&gt; data = 3 [json_name = "data"];</code>
+   * <code>.google.protobuf.Struct data = 3 [json_name = "data"];</code>
+   * @return Whether the data field is set.
    */
-  int getDataCount();
+  boolean hasData();
   /**
-   * <code>map&lt;string, string&gt; data = 3 [json_name = "data"];</code>
+   * <code>.google.protobuf.Struct data = 3 [json_name = "data"];</code>
+   * @return The data.
    */
-  boolean containsData(
-      java.lang.String key);
+  com.google.protobuf.Struct getData();
   /**
-   * Use {@link #getDataMap()} instead.
+   * <code>.google.protobuf.Struct data = 3 [json_name = "data"];</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getData();
-  /**
-   * <code>map&lt;string, string&gt; data = 3 [json_name = "data"];</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getDataMap();
-  /**
-   * <code>map&lt;string, string&gt; data = 3 [json_name = "data"];</code>
-   */
-  /* nullable */
-java.lang.String getDataOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; data = 3 [json_name = "data"];</code>
-   */
-  java.lang.String getDataOrThrow(
-      java.lang.String key);
+  com.google.protobuf.StructOrBuilder getDataOrBuilder();
 
   /**
-   * <code>map&lt;string, string&gt; extra = 4 [json_name = "extra"];</code>
+   * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
+   * @return Whether the extra field is set.
    */
-  int getExtraCount();
+  boolean hasExtra();
   /**
-   * <code>map&lt;string, string&gt; extra = 4 [json_name = "extra"];</code>
+   * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
+   * @return The extra.
    */
-  boolean containsExtra(
-      java.lang.String key);
+  com.google.protobuf.Struct getExtra();
   /**
-   * Use {@link #getExtraMap()} instead.
+   * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtra();
-  /**
-   * <code>map&lt;string, string&gt; extra = 4 [json_name = "extra"];</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtraMap();
-  /**
-   * <code>map&lt;string, string&gt; extra = 4 [json_name = "extra"];</code>
-   */
-  /* nullable */
-java.lang.String getExtraOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; extra = 4 [json_name = "extra"];</code>
-   */
-  java.lang.String getExtraOrThrow(
-      java.lang.String key);
+  com.google.protobuf.StructOrBuilder getExtraOrBuilder();
 }

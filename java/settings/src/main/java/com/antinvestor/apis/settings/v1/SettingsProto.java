@@ -97,48 +97,48 @@ public final class SettingsProto {
       "\n\032settings/v1/settings.proto\022\013settings.v" +
       "1\032\033buf/validate/validate.proto\032\026common/v" +
       "1/common.proto\032\034google/api/annotations.p" +
-      "roto\032.protoc-gen-openapiv2/options/annot" +
-      "ations.proto\"\313\001\n\007Setting\022\033\n\004name\030\001 \001(\tB\007" +
-      "\272H\004r\002\020\002R\004name\022\"\n\006object\030\002 \001(\tB\n\272H\007r\002\020\002\330\001" +
-      "\001R\006object\022;\n\tobject_id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2" +
-      "\020[0-9a-z_-]{3,20}\330\001\001R\010objectId\022\036\n\004lang\030\004" +
-      " \001(\tB\n\272H\007r\002\020\002\330\001\001R\004lang\022\"\n\006module\030\005 \001(\tB\n" +
-      "\272H\007r\002\020\003\330\001\001R\006module\"\224\001\n\rSettingObject\022+\n\002" +
-      "id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002i" +
-      "d\022&\n\003key\030\002 \001(\0132\024.settings.v1.SettingR\003ke" +
-      "y\022\024\n\005value\030\003 \001(\tR\005value\022\030\n\007updated\030\004 \001(\t" +
-      "R\007updated\"4\n\nGetRequest\022&\n\003key\030\001 \001(\0132\024.s" +
-      "ettings.v1.SettingR\003key\"=\n\013GetResponse\022." +
-      "\n\004data\030\001 \001(\0132\032.settings.v1.SettingObject" +
-      "R\004data\"@\n\016SearchResponse\022.\n\004data\030\001 \003(\0132\032" +
-      ".settings.v1.SettingObjectR\004data\"5\n\013List" +
-      "Request\022&\n\003key\030\001 \001(\0132\024.settings.v1.Setti" +
-      "ngR\003key\">\n\014ListResponse\022.\n\004data\030\001 \003(\0132\032." +
-      "settings.v1.SettingObjectR\004data\"J\n\nSetRe" +
-      "quest\022&\n\003key\030\001 \001(\0132\024.settings.v1.Setting" +
-      "R\003key\022\024\n\005value\030\002 \001(\tR\005value\"=\n\013SetRespon" +
-      "se\022.\n\004data\030\001 \001(\0132\032.settings.v1.SettingOb" +
-      "jectR\004data2\303\002\n\017SettingsService\022C\n\003Get\022\027." +
-      "settings.v1.GetRequest\032\030.settings.v1.Get" +
-      "Response\"\t\202\323\344\223\002\003\022\001/\022L\n\004List\022\030.settings.v" +
-      "1.ListRequest\032\031.settings.v1.ListResponse" +
-      "\"\r\202\323\344\223\002\007\022\005/list0\001\022R\n\006Search\022\030.common.v1." +
-      "SearchRequest\032\033.settings.v1.SearchRespon" +
-      "se\"\017\202\323\344\223\002\t\022\007/search0\001\022I\n\003Set\022\027.settings." +
-      "v1.SetRequest\032\030.settings.v1.SetResponse\"" +
-      "\017\202\323\344\223\002\t\"\004/set:\001*B\307\003\n com.antinvestor.api" +
-      "s.settings.v1B\rSettingsProtoP\001Z>github.c" +
-      "om/antinvestor/apis/go/settings/settings" +
-      "/v1;settingsv1\242\002\003SXX\252\002\013Settings.V1\312\002\013Set" +
-      "tings\\V1\342\002\027Settings\\V1\\GPBMetadata\352\002\014Set" +
-      "tings::V1\222A\205\002\022r\n\020Settings Service\"Y\n\020Ant" +
-      " Investor Ltd\022/https://github.com/antinv" +
-      "estor/service-settings\032\024info@antinvestor" +
-      ".com2\0031.0*\002\001\0022\020application/json:\020applica" +
-      "tion/jsonZY\nW\n\006bearer\022M\010\002\0228Authenticatio" +
-      "n token, prefixed by Bearer: Bearer <tok" +
-      "en>\032\rAuthorization \002b\014\n\n\n\006bearer\022\000b\006prot" +
-      "o3"
+      "roto\032\034google/protobuf/struct.proto\032.prot" +
+      "oc-gen-openapiv2/options/annotations.pro" +
+      "to\"\313\001\n\007Setting\022\033\n\004name\030\001 \001(\tB\007\272H\004r\002\020\002R\004n" +
+      "ame\022\"\n\006object\030\002 \001(\tB\n\272H\007r\002\020\002\330\001\001R\006object\022" +
+      ";\n\tobject_id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-" +
+      "]{3,20}\330\001\001R\010objectId\022\036\n\004lang\030\004 \001(\tB\n\272H\007r" +
+      "\002\020\002\330\001\001R\004lang\022\"\n\006module\030\005 \001(\tB\n\272H\007r\002\020\003\330\001\001" +
+      "R\006module\"\224\001\n\rSettingObject\022+\n\002id\030\001 \001(\tB\033" +
+      "\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022&\n\003key\030\002" +
+      " \001(\0132\024.settings.v1.SettingR\003key\022\024\n\005value" +
+      "\030\003 \001(\tR\005value\022\030\n\007updated\030\004 \001(\tR\007updated\"" +
+      "4\n\nGetRequest\022&\n\003key\030\001 \001(\0132\024.settings.v1" +
+      ".SettingR\003key\"=\n\013GetResponse\022.\n\004data\030\001 \001" +
+      "(\0132\032.settings.v1.SettingObjectR\004data\"@\n\016" +
+      "SearchResponse\022.\n\004data\030\001 \003(\0132\032.settings." +
+      "v1.SettingObjectR\004data\"5\n\013ListRequest\022&\n" +
+      "\003key\030\001 \001(\0132\024.settings.v1.SettingR\003key\">\n" +
+      "\014ListResponse\022.\n\004data\030\001 \003(\0132\032.settings.v" +
+      "1.SettingObjectR\004data\"J\n\nSetRequest\022&\n\003k" +
+      "ey\030\001 \001(\0132\024.settings.v1.SettingR\003key\022\024\n\005v" +
+      "alue\030\002 \001(\tR\005value\"=\n\013SetResponse\022.\n\004data" +
+      "\030\001 \001(\0132\032.settings.v1.SettingObjectR\004data" +
+      "2\303\002\n\017SettingsService\022C\n\003Get\022\027.settings.v" +
+      "1.GetRequest\032\030.settings.v1.GetResponse\"\t" +
+      "\202\323\344\223\002\003\022\001/\022L\n\004List\022\030.settings.v1.ListRequ" +
+      "est\032\031.settings.v1.ListResponse\"\r\202\323\344\223\002\007\022\005" +
+      "/list0\001\022R\n\006Search\022\030.common.v1.SearchRequ" +
+      "est\032\033.settings.v1.SearchResponse\"\017\202\323\344\223\002\t" +
+      "\022\007/search0\001\022I\n\003Set\022\027.settings.v1.SetRequ" +
+      "est\032\030.settings.v1.SetResponse\"\017\202\323\344\223\002\t\"\004/" +
+      "set:\001*B\307\003\n com.antinvestor.apis.settings" +
+      ".v1B\rSettingsProtoP\001Z>github.com/antinve" +
+      "stor/apis/go/settings/settings/v1;settin" +
+      "gsv1\242\002\003SXX\252\002\013Settings.V1\312\002\013Settings\\V1\342\002" +
+      "\027Settings\\V1\\GPBMetadata\352\002\014Settings::V1\222" +
+      "A\205\002\022r\n\020Settings Service\"Y\n\020Ant Investor " +
+      "Ltd\022/https://github.com/antinvestor/serv" +
+      "ice-settings\032\024info@antinvestor.com2\0031.0*" +
+      "\002\001\0022\020application/json:\020application/jsonZ" +
+      "Y\nW\n\006bearer\022M\010\002\0228Authentication token, p" +
+      "refixed by Bearer: Bearer <token>\032\rAutho" +
+      "rization \002b\014\n\n\n\006bearer\022\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -146,6 +146,7 @@ public final class SettingsProto {
           build.buf.validate.ValidateProto.getDescriptor(),
           com.antinvestor.apis.common.v1.CommonProto.getDescriptor(),
           com.google.api.AnnotationsProto.getDescriptor(),
+          com.google.protobuf.StructProto.getDescriptor(),
           grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor(),
         });
     internal_static_settings_v1_Setting_descriptor =
@@ -206,6 +207,7 @@ public final class SettingsProto {
     build.buf.validate.ValidateProto.getDescriptor();
     com.antinvestor.apis.common.v1.CommonProto.getDescriptor();
     com.google.api.AnnotationsProto.getDescriptor();
+    com.google.protobuf.StructProto.getDescriptor();
     grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();

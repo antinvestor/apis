@@ -26,6 +26,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -176,7 +177,7 @@ type KeyObject struct {
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	Key           []byte                 `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`
-	Extra         map[string]string      `protobuf:"bytes,4,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -232,7 +233,7 @@ func (x *KeyObject) GetKey() []byte {
 	return nil
 }
 
-func (x *KeyObject) GetExtra() map[string]string {
+func (x *KeyObject) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -250,8 +251,8 @@ type DeviceLog struct {
 	UserAgent     string                 `protobuf:"bytes,6,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
 	Os            string                 `protobuf:"bytes,7,opt,name=os,proto3" json:"os,omitempty"`
 	LastSeen      string                 `protobuf:"bytes,8,opt,name=last_seen,json=lastSeen,proto3" json:"last_seen,omitempty"`
-	Location      map[string]string      `protobuf:"bytes,9,rep,name=location,proto3" json:"location,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Extra         map[string]string      `protobuf:"bytes,10,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Location      *structpb.Struct       `protobuf:"bytes,9,opt,name=location,proto3" json:"location,omitempty"`
+	Extra         *structpb.Struct       `protobuf:"bytes,10,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -342,14 +343,14 @@ func (x *DeviceLog) GetLastSeen() string {
 	return ""
 }
 
-func (x *DeviceLog) GetLocation() map[string]string {
+func (x *DeviceLog) GetLocation() *structpb.Struct {
 	if x != nil {
 		return x.Location
 	}
 	return nil
 }
 
-func (x *DeviceLog) GetExtra() map[string]string {
+func (x *DeviceLog) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -368,8 +369,8 @@ type DeviceObject struct {
 	LastSeen      string                 `protobuf:"bytes,7,opt,name=last_seen,json=lastSeen,proto3" json:"last_seen,omitempty"`
 	ProfileId     string                 `protobuf:"bytes,8,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`
 	Locale        *Locale                `protobuf:"bytes,9,opt,name=locale,proto3" json:"locale,omitempty"`
-	Location      map[string]string      `protobuf:"bytes,11,rep,name=location,proto3" json:"location,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Properties    map[string]string      `protobuf:"bytes,15,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Location      *structpb.Struct       `protobuf:"bytes,11,opt,name=location,proto3" json:"location,omitempty"`
+	Properties    *structpb.Struct       `protobuf:"bytes,15,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -467,14 +468,14 @@ func (x *DeviceObject) GetLocale() *Locale {
 	return nil
 }
 
-func (x *DeviceObject) GetLocation() map[string]string {
+func (x *DeviceObject) GetLocation() *structpb.Struct {
 	if x != nil {
 		return x.Location
 	}
 	return nil
 }
 
-func (x *DeviceObject) GetProperties() map[string]string {
+func (x *DeviceObject) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -675,7 +676,7 @@ type SearchRequest struct {
 	StartDate     string                 `protobuf:"bytes,4,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
 	EndDate       string                 `protobuf:"bytes,5,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
 	Properties    []string               `protobuf:"bytes,6,rep,name=properties,proto3" json:"properties,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,7,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,7,opt,name=extras,proto3" json:"extras,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -752,7 +753,7 @@ func (x *SearchRequest) GetProperties() []string {
 	return nil
 }
 
-func (x *SearchRequest) GetExtras() map[string]string {
+func (x *SearchRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -807,7 +808,7 @@ func (x *SearchResponse) GetData() []*DeviceObject {
 type CreateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -849,7 +850,7 @@ func (x *CreateRequest) GetName() string {
 	return ""
 }
 
-func (x *CreateRequest) GetProperties() map[string]string {
+func (x *CreateRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -905,7 +906,7 @@ type UpdateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -954,7 +955,7 @@ func (x *UpdateRequest) GetName() string {
 	return ""
 }
 
-func (x *UpdateRequest) GetProperties() map[string]string {
+func (x *UpdateRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -1010,7 +1011,7 @@ type LinkRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	ProfileId     string                 `protobuf:"bytes,2,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1059,7 +1060,7 @@ func (x *LinkRequest) GetProfileId() string {
 	return ""
 }
 
-func (x *LinkRequest) GetProperties() map[string]string {
+func (x *LinkRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -1209,7 +1210,7 @@ type LogRequest struct {
 	UserAgent     string                 `protobuf:"bytes,6,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
 	Os            string                 `protobuf:"bytes,7,opt,name=os,proto3" json:"os,omitempty"`
 	LastSeen      string                 `protobuf:"bytes,8,opt,name=last_seen,json=lastSeen,proto3" json:"last_seen,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,9,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,9,opt,name=extras,proto3" json:"extras,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1293,7 +1294,7 @@ func (x *LogRequest) GetLastSeen() string {
 	return ""
 }
 
-func (x *LogRequest) GetExtras() map[string]string {
+func (x *LogRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -1448,7 +1449,7 @@ type AddKeyRequest struct {
 	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	KeyType       KeyType                `protobuf:"varint,3,opt,name=key_type,json=keyType,proto3,enum=device.v1.KeyType" json:"key_type,omitempty"`
 	Data          []byte                 `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,5,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,5,opt,name=extras,proto3" json:"extras,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1511,7 +1512,7 @@ func (x *AddKeyRequest) GetData() []byte {
 	return nil
 }
 
-func (x *AddKeyRequest) GetExtras() map[string]string {
+func (x *AddKeyRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -1776,7 +1777,7 @@ var File_device_v1_device_proto protoreflect.FileDescriptor
 
 const file_device_v1_device_proto_rawDesc = "" +
 	"\n" +
-	"\x16device/v1/device.proto\x12\tdevice.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xb4\x01\n" +
+	"\x16device/v1/device.proto\x12\tdevice.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xb4\x01\n" +
 	"\x06Locale\x12\x1a\n" +
 	"\blanguage\x18\x01 \x03(\tR\blanguage\x12\x1a\n" +
 	"\btimezone\x18\x05 \x01(\tR\btimezone\x12\x1d\n" +
@@ -1785,16 +1786,12 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\bcurrency\x18\b \x01(\tR\bcurrency\x12#\n" +
 	"\rcurrency_name\x18\t \x01(\tR\fcurrencyName\x12\x12\n" +
 	"\x04code\x18\n" +
-	" \x01(\tR\x04code\"\xf5\x01\n" +
+	" \x01(\tR\x04code\"\xb3\x01\n" +
 	"\tKeyObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x128\n" +
 	"\tdevice_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12\x10\n" +
-	"\x03key\x18\x03 \x01(\fR\x03key\x125\n" +
-	"\x05extra\x18\x04 \x03(\v2\x1f.device.v1.KeyObject.ExtraEntryR\x05extra\x1a8\n" +
-	"\n" +
-	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa3\x04\n" +
+	"\x03key\x18\x03 \x01(\fR\x03key\x12-\n" +
+	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x99\x03\n" +
 	"\tDeviceLog\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x128\n" +
 	"\tdevice_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12:\n" +
@@ -1805,17 +1802,10 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\n" +
 	"user_agent\x18\x06 \x01(\tR\tuserAgent\x12\x0e\n" +
 	"\x02os\x18\a \x01(\tR\x02os\x12\x1b\n" +
-	"\tlast_seen\x18\b \x01(\tR\blastSeen\x12>\n" +
-	"\blocation\x18\t \x03(\v2\".device.v1.DeviceLog.LocationEntryR\blocation\x125\n" +
+	"\tlast_seen\x18\b \x01(\tR\blastSeen\x123\n" +
+	"\blocation\x18\t \x01(\v2\x17.google.protobuf.StructR\blocation\x12-\n" +
 	"\x05extra\x18\n" +
-	" \x03(\v2\x1f.device.v1.DeviceLog.ExtraEntryR\x05extra\x1a;\n" +
-	"\rLocationEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a8\n" +
-	"\n" +
-	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9c\x04\n" +
+	" \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x82\x03\n" +
 	"\fDeviceObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
@@ -1828,17 +1818,11 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\tlast_seen\x18\a \x01(\tR\blastSeen\x12\x1d\n" +
 	"\n" +
 	"profile_id\x18\b \x01(\tR\tprofileId\x12)\n" +
-	"\x06locale\x18\t \x01(\v2\x11.device.v1.LocaleR\x06locale\x12A\n" +
-	"\blocation\x18\v \x03(\v2%.device.v1.DeviceObject.LocationEntryR\blocation\x12G\n" +
+	"\x06locale\x18\t \x01(\v2\x11.device.v1.LocaleR\x06locale\x123\n" +
+	"\blocation\x18\v \x01(\v2\x17.google.protobuf.StructR\blocation\x127\n" +
 	"\n" +
-	"properties\x18\x0f \x03(\v2'.device.v1.DeviceObject.PropertiesEntryR\n" +
-	"properties\x1a;\n" +
-	"\rLocationEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"`\n" +
+	"properties\x18\x0f \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"`\n" +
 	"\x0eGetByIdRequest\x120\n" +
 	"\x02id\x18\x01 \x03(\tB \xbaH\x1d\x92\x01\x1a\"\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1c\n" +
 	"\textensive\x18\x02 \x01(\bR\textensive\">\n" +
@@ -1847,7 +1831,7 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\x15GetBySessionIdRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"E\n" +
 	"\x16GetBySessionIdResponse\x12+\n" +
-	"\x04data\x18\x01 \x01(\v2\x17.device.v1.DeviceObjectR\x04data\"\xa2\x02\n" +
+	"\x04data\x18\x01 \x01(\v2\x17.device.v1.DeviceObjectR\x04data\"\xda\x01\n" +
 	"\rSearchRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x14\n" +
@@ -1857,50 +1841,38 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\bend_date\x18\x05 \x01(\tR\aendDate\x12\x1e\n" +
 	"\n" +
 	"properties\x18\x06 \x03(\tR\n" +
-	"properties\x12<\n" +
-	"\x06extras\x18\a \x03(\v2$.device.v1.SearchRequest.ExtrasEntryR\x06extras\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"=\n" +
+	"properties\x12/\n" +
+	"\x06extras\x18\a \x01(\v2\x17.google.protobuf.StructR\x06extras\"=\n" +
 	"\x0eSearchResponse\x12+\n" +
-	"\x04data\x18\x01 \x03(\v2\x17.device.v1.DeviceObjectR\x04data\"\xac\x01\n" +
+	"\x04data\x18\x01 \x03(\v2\x17.device.v1.DeviceObjectR\x04data\"\\\n" +
 	"\rCreateRequest\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12H\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v2(.device.v1.CreateRequest.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"=\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"=\n" +
 	"\x0eCreateResponse\x12+\n" +
-	"\x04data\x18\x01 \x01(\v2\x17.device.v1.DeviceObjectR\x04data\"\xd9\x01\n" +
+	"\x04data\x18\x01 \x01(\v2\x17.device.v1.DeviceObjectR\x04data\"\x89\x01\n" +
 	"\rUpdateRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12H\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v2(.device.v1.UpdateRequest.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"=\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"=\n" +
 	"\x0eUpdateResponse\x12+\n" +
-	"\x04data\x18\x01 \x01(\v2\x17.device.v1.DeviceObjectR\x04data\"\xfd\x01\n" +
+	"\x04data\x18\x01 \x01(\v2\x17.device.v1.DeviceObjectR\x04data\"\xaf\x01\n" +
 	"\vLinkRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12:\n" +
 	"\n" +
-	"profile_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tprofileId\x12F\n" +
+	"profile_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tprofileId\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v2&.device.v1.LinkRequest.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\";\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\";\n" +
 	"\fLinkResponse\x12+\n" +
 	"\x04data\x18\x01 \x01(\v2\x17.device.v1.DeviceObjectR\x04data\"<\n" +
 	"\rRemoveRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"=\n" +
 	"\x0eRemoveResponse\x12+\n" +
-	"\x04data\x18\x01 \x01(\v2\x17.device.v1.DeviceObjectR\x04data\"\xef\x02\n" +
+	"\x04data\x18\x01 \x01(\v2\x17.device.v1.DeviceObjectR\x04data\"\xaa\x02\n" +
 	"\n" +
 	"LogRequest\x12;\n" +
 	"\tdevice_id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12:\n" +
@@ -1911,27 +1883,21 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\n" +
 	"user_agent\x18\x06 \x01(\tR\tuserAgent\x12\x0e\n" +
 	"\x02os\x18\a \x01(\tR\x02os\x12\x1b\n" +
-	"\tlast_seen\x18\b \x01(\tR\blastSeen\x129\n" +
-	"\x06extras\x18\t \x03(\v2!.device.v1.LogRequest.ExtrasEntryR\x06extras\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"7\n" +
+	"\tlast_seen\x18\b \x01(\tR\blastSeen\x12/\n" +
+	"\x06extras\x18\t \x01(\v2\x17.google.protobuf.StructR\x06extras\"7\n" +
 	"\vLogResponse\x12(\n" +
 	"\x04data\x18\x01 \x01(\v2\x14.device.v1.DeviceLogR\x04data\"a\n" +
 	"\x0fListLogsRequest\x128\n" +
 	"\tdevice_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x05R\x05count\"<\n" +
 	"\x10ListLogsResponse\x12(\n" +
-	"\x04data\x18\x01 \x03(\v2\x14.device.v1.DeviceLogR\x04data\"\xb2\x02\n" +
+	"\x04data\x18\x01 \x03(\v2\x14.device.v1.DeviceLogR\x04data\"\xea\x01\n" +
 	"\rAddKeyRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x128\n" +
 	"\tdevice_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12-\n" +
 	"\bkey_type\x18\x03 \x01(\x0e2\x12.device.v1.KeyTypeR\akeyType\x12\x12\n" +
-	"\x04data\x18\x04 \x01(\fR\x04data\x12<\n" +
-	"\x06extras\x18\x05 \x03(\v2$.device.v1.AddKeyRequest.ExtrasEntryR\x06extras\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\":\n" +
+	"\x04data\x18\x04 \x01(\fR\x04data\x12/\n" +
+	"\x06extras\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x06extras\":\n" +
 	"\x0eAddKeyResponse\x12(\n" +
 	"\x04data\x18\x01 \x01(\v2\x14.device.v1.KeyObjectR\x04data\"D\n" +
 	"\x10RemoveKeyRequest\x120\n" +
@@ -1991,7 +1957,7 @@ func file_device_v1_device_proto_rawDescGZIP() []byte {
 }
 
 var file_device_v1_device_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_device_v1_device_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
+var file_device_v1_device_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_device_v1_device_proto_goTypes = []any{
 	(KeyType)(0),                   // 0: device.v1.KeyType
 	(*Locale)(nil),                 // 1: device.v1.Locale
@@ -2022,42 +1988,32 @@ var file_device_v1_device_proto_goTypes = []any{
 	(*RemoveKeyResponse)(nil),      // 26: device.v1.RemoveKeyResponse
 	(*SearchKeyRequest)(nil),       // 27: device.v1.SearchKeyRequest
 	(*SearchKeyResponse)(nil),      // 28: device.v1.SearchKeyResponse
-	nil,                            // 29: device.v1.KeyObject.ExtraEntry
-	nil,                            // 30: device.v1.DeviceLog.LocationEntry
-	nil,                            // 31: device.v1.DeviceLog.ExtraEntry
-	nil,                            // 32: device.v1.DeviceObject.LocationEntry
-	nil,                            // 33: device.v1.DeviceObject.PropertiesEntry
-	nil,                            // 34: device.v1.SearchRequest.ExtrasEntry
-	nil,                            // 35: device.v1.CreateRequest.PropertiesEntry
-	nil,                            // 36: device.v1.UpdateRequest.PropertiesEntry
-	nil,                            // 37: device.v1.LinkRequest.PropertiesEntry
-	nil,                            // 38: device.v1.LogRequest.ExtrasEntry
-	nil,                            // 39: device.v1.AddKeyRequest.ExtrasEntry
+	(*structpb.Struct)(nil),        // 29: google.protobuf.Struct
 }
 var file_device_v1_device_proto_depIdxs = []int32{
-	29, // 0: device.v1.KeyObject.extra:type_name -> device.v1.KeyObject.ExtraEntry
+	29, // 0: device.v1.KeyObject.extra:type_name -> google.protobuf.Struct
 	1,  // 1: device.v1.DeviceLog.locale:type_name -> device.v1.Locale
-	30, // 2: device.v1.DeviceLog.location:type_name -> device.v1.DeviceLog.LocationEntry
-	31, // 3: device.v1.DeviceLog.extra:type_name -> device.v1.DeviceLog.ExtraEntry
+	29, // 2: device.v1.DeviceLog.location:type_name -> google.protobuf.Struct
+	29, // 3: device.v1.DeviceLog.extra:type_name -> google.protobuf.Struct
 	1,  // 4: device.v1.DeviceObject.locale:type_name -> device.v1.Locale
-	32, // 5: device.v1.DeviceObject.location:type_name -> device.v1.DeviceObject.LocationEntry
-	33, // 6: device.v1.DeviceObject.properties:type_name -> device.v1.DeviceObject.PropertiesEntry
+	29, // 5: device.v1.DeviceObject.location:type_name -> google.protobuf.Struct
+	29, // 6: device.v1.DeviceObject.properties:type_name -> google.protobuf.Struct
 	4,  // 7: device.v1.GetByIdResponse.data:type_name -> device.v1.DeviceObject
 	4,  // 8: device.v1.GetBySessionIdResponse.data:type_name -> device.v1.DeviceObject
-	34, // 9: device.v1.SearchRequest.extras:type_name -> device.v1.SearchRequest.ExtrasEntry
+	29, // 9: device.v1.SearchRequest.extras:type_name -> google.protobuf.Struct
 	4,  // 10: device.v1.SearchResponse.data:type_name -> device.v1.DeviceObject
-	35, // 11: device.v1.CreateRequest.properties:type_name -> device.v1.CreateRequest.PropertiesEntry
+	29, // 11: device.v1.CreateRequest.properties:type_name -> google.protobuf.Struct
 	4,  // 12: device.v1.CreateResponse.data:type_name -> device.v1.DeviceObject
-	36, // 13: device.v1.UpdateRequest.properties:type_name -> device.v1.UpdateRequest.PropertiesEntry
+	29, // 13: device.v1.UpdateRequest.properties:type_name -> google.protobuf.Struct
 	4,  // 14: device.v1.UpdateResponse.data:type_name -> device.v1.DeviceObject
-	37, // 15: device.v1.LinkRequest.properties:type_name -> device.v1.LinkRequest.PropertiesEntry
+	29, // 15: device.v1.LinkRequest.properties:type_name -> google.protobuf.Struct
 	4,  // 16: device.v1.LinkResponse.data:type_name -> device.v1.DeviceObject
 	4,  // 17: device.v1.RemoveResponse.data:type_name -> device.v1.DeviceObject
-	38, // 18: device.v1.LogRequest.extras:type_name -> device.v1.LogRequest.ExtrasEntry
+	29, // 18: device.v1.LogRequest.extras:type_name -> google.protobuf.Struct
 	3,  // 19: device.v1.LogResponse.data:type_name -> device.v1.DeviceLog
 	3,  // 20: device.v1.ListLogsResponse.data:type_name -> device.v1.DeviceLog
 	0,  // 21: device.v1.AddKeyRequest.key_type:type_name -> device.v1.KeyType
-	39, // 22: device.v1.AddKeyRequest.extras:type_name -> device.v1.AddKeyRequest.ExtrasEntry
+	29, // 22: device.v1.AddKeyRequest.extras:type_name -> google.protobuf.Struct
 	2,  // 23: device.v1.AddKeyResponse.data:type_name -> device.v1.KeyObject
 	0,  // 24: device.v1.SearchKeyRequest.key_type:type_name -> device.v1.KeyType
 	2,  // 25: device.v1.SearchKeyResponse.data:type_name -> device.v1.KeyObject
@@ -2103,7 +2059,7 @@ func file_device_v1_device_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_device_v1_device_proto_rawDesc), len(file_device_v1_device_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   39,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

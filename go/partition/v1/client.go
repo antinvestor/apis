@@ -16,9 +16,10 @@ package partitionv1
 
 import (
 	"context"
+	"math"
+
 	"github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
-	"math"
 )
 
 var ctxKeyService = common.CtxServiceKey("partitionClientKey")
@@ -131,29 +132,6 @@ func (pc *PartitionClient) GetTenant(ctx context.Context, tenantId string) (*Ten
 
 }
 
-// NewTenant used to create a new tenant instance.
-// This is a fairly static and infrequently used option that creates an almost physical data separation
-// To allow the use of same databases in a multitentant fashion.
-func (pc *PartitionClient) NewTenant(
-	ctx context.Context,
-	name string,
-	description string,
-	props map[string]string) (*TenantObject, error) {
-
-	request := CreateTenantRequest{
-		Name:        name,
-		Description: description,
-		Properties:  props,
-	}
-
-	response, err := pc.svc.CreateTenant(ctx, &request)
-
-	if err != nil {
-		return nil, err
-	}
-	return response.GetData(), nil
-}
-
 // ListPartitions obtains partitions tied to the query parameter
 func (pc *PartitionClient) ListPartitions(
 	ctx context.Context,
@@ -191,13 +169,6 @@ func (pc *PartitionClient) ListPartitions(
 
 }
 
-// NewPartition Creates a further logical multitenant environment at a softer level.
-// This separation at the partition level is enforced at the application level that is consuming the api.
-func (pc *PartitionClient) NewPartition(ctx context.Context, tenantId string, name string, description string,
-	props map[string]string) (*PartitionObject, error) {
-	return pc.newPartition(ctx, tenantId, "", name, description, props)
-}
-
 // GetPartition Obtains the partition by the id  supplied.
 func (pc *PartitionClient) GetPartition(ctx context.Context, partitionId string) (*PartitionObject, error) {
 
@@ -210,75 +181,6 @@ func (pc *PartitionClient) GetPartition(ctx context.Context, partitionId string)
 		return nil, err
 	}
 	return response.GetData(), nil
-}
-
-// NewChildPartition partitions can have children, for example a bank can have multiple branches
-func (pc *PartitionClient) NewChildPartition(ctx context.Context, tenantId string, parentId string, name string,
-	description string, props map[string]string) (*PartitionObject, error) {
-	return pc.newPartition(ctx, tenantId, parentId, name, description, props)
-}
-
-func (pc *PartitionClient) newPartition(ctx context.Context, tenantId string,
-	parentId string, name string, description string, props map[string]string) (*PartitionObject, error) {
-
-	request := CreatePartitionRequest{
-		TenantId:    tenantId,
-		ParentId:    parentId,
-		Name:        name,
-		Description: description,
-		Properties:  props,
-	}
-
-	response, err := pc.svc.CreatePartition(ctx, &request)
-
-	if err != nil {
-		return nil, err
-	}
-	return response.GetData(), nil
-}
-
-func (pc *PartitionClient) UpdatePartition(ctx context.Context, partitionId string,
-	name string, description string, props map[string]string) (*PartitionObject, error) {
-
-	request := UpdatePartitionRequest{
-		Id:          partitionId,
-		Name:        name,
-		Description: description,
-		Properties:  props,
-	}
-
-	response, err := pc.svc.UpdatePartition(ctx, &request)
-
-	if err != nil {
-		return nil, err
-	}
-	return response.GetData(), nil
-}
-
-func (pc *PartitionClient) CreatePartitionRole(ctx context.Context, partitionId string,
-	name string, props map[string]string) (*PartitionRoleObject, error) {
-
-	request := CreatePartitionRoleRequest{
-		Name:        name,
-		PartitionId: partitionId,
-		Properties:  props,
-	}
-
-	response, err := pc.svc.CreatePartitionRole(ctx, &request)
-
-	if err != nil {
-		return nil, err
-	}
-	return response.GetData(), nil
-}
-
-func (pc *PartitionClient) RemovePartitionRole(ctx context.Context, partitionRoleId string) (*RemovePartitionRoleResponse, error) {
-
-	request := RemovePartitionRoleRequest{
-		Id: partitionRoleId,
-	}
-
-	return pc.svc.RemovePartitionRole(ctx, &request)
 }
 
 func (pc *PartitionClient) ListPartitionRoles(

@@ -37,38 +37,19 @@ public interface UpdateRequestOrBuilder extends
       getIdBytes();
 
   /**
-   * <code>map&lt;string, string&gt; properties = 2 [json_name = "properties"];</code>
+   * <code>.google.protobuf.Struct properties = 2 [json_name = "properties"];</code>
+   * @return Whether the properties field is set.
    */
-  int getPropertiesCount();
+  boolean hasProperties();
   /**
-   * <code>map&lt;string, string&gt; properties = 2 [json_name = "properties"];</code>
+   * <code>.google.protobuf.Struct properties = 2 [json_name = "properties"];</code>
+   * @return The properties.
    */
-  boolean containsProperties(
-      java.lang.String key);
+  com.google.protobuf.Struct getProperties();
   /**
-   * Use {@link #getPropertiesMap()} instead.
+   * <code>.google.protobuf.Struct properties = 2 [json_name = "properties"];</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getProperties();
-  /**
-   * <code>map&lt;string, string&gt; properties = 2 [json_name = "properties"];</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getPropertiesMap();
-  /**
-   * <code>map&lt;string, string&gt; properties = 2 [json_name = "properties"];</code>
-   */
-  /* nullable */
-java.lang.String getPropertiesOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; properties = 2 [json_name = "properties"];</code>
-   */
-  java.lang.String getPropertiesOrThrow(
-      java.lang.String key);
+  com.google.protobuf.StructOrBuilder getPropertiesOrBuilder();
 
   /**
    * <code>.common.v1.STATE state = 3 [json_name = "state"];</code>

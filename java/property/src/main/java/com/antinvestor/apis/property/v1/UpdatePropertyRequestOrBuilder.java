@@ -107,36 +107,17 @@ public interface UpdatePropertyRequestOrBuilder extends
       getLocalityIdBytes();
 
   /**
-   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras", (.buf.validate.field) = { ... }</code>
+   * <code>.google.protobuf.Struct extras = 8 [json_name = "extras", (.buf.validate.field) = { ... }</code>
+   * @return Whether the extras field is set.
    */
-  int getExtrasCount();
+  boolean hasExtras();
   /**
-   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras", (.buf.validate.field) = { ... }</code>
+   * <code>.google.protobuf.Struct extras = 8 [json_name = "extras", (.buf.validate.field) = { ... }</code>
+   * @return The extras.
    */
-  boolean containsExtras(
-      java.lang.String key);
+  com.google.protobuf.Struct getExtras();
   /**
-   * Use {@link #getExtrasMap()} instead.
+   * <code>.google.protobuf.Struct extras = 8 [json_name = "extras", (.buf.validate.field) = { ... }</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtras();
-  /**
-   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras", (.buf.validate.field) = { ... }</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtrasMap();
-  /**
-   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras", (.buf.validate.field) = { ... }</code>
-   */
-  /* nullable */
-java.lang.String getExtrasOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; extras = 8 [json_name = "extras", (.buf.validate.field) = { ... }</code>
-   */
-  java.lang.String getExtrasOrThrow(
-      java.lang.String key);
+  com.google.protobuf.StructOrBuilder getExtrasOrBuilder();
 }

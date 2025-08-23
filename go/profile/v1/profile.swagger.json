@@ -513,7 +513,7 @@
             "name": "extras",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "object"
           },
           {
             "name": "profileId",
@@ -663,7 +663,7 @@
             "name": "extras",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "object"
           }
         ],
         "tags": [
@@ -802,6 +802,14 @@
       },
       "additionalProperties": {}
     },
+    "google.protobuf.NullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
     "google.rpc.Status": {
       "type": "object",
       "properties": {
@@ -851,10 +859,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "The request message containing the information necessary to create a profile"
@@ -892,10 +897,7 @@
           "$ref": "#/definitions/profile.v1.RelationshipType"
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "The request message containing the information necessary to create a profile"
@@ -1022,10 +1024,7 @@
           "$ref": "#/definitions/common.v1.STATE"
         },
         "extra": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },
@@ -1049,10 +1048,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "The request message containing the information necessary to create a profile"
@@ -1086,10 +1082,7 @@
           "type": "string"
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "The request message containing the information necessary to create a profile"
@@ -1179,10 +1172,7 @@
           "$ref": "#/definitions/profile.v1.ProfileType"
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "contacts": {
           "type": "array",
@@ -1211,10 +1201,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "The request message containing the information necessary to create a profile"
@@ -1247,10 +1234,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "state": {
           "$ref": "#/definitions/common.v1.STATE"
@@ -1279,10 +1263,7 @@
           "$ref": "#/definitions/profile.v1.RelationshipType"
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "childEntry": {
           "$ref": "#/definitions/profile.v1.EntryItem"
@@ -1336,10 +1317,7 @@
           "$ref": "#/definitions/profile.v1.ContactObject"
         },
         "extra": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },

@@ -103,38 +103,19 @@ public interface NotificationOrBuilder extends
       getTemplateBytes();
 
   /**
-   * <code>map&lt;string, string&gt; payload = 8 [json_name = "payload"];</code>
+   * <code>.google.protobuf.Struct payload = 8 [json_name = "payload"];</code>
+   * @return Whether the payload field is set.
    */
-  int getPayloadCount();
+  boolean hasPayload();
   /**
-   * <code>map&lt;string, string&gt; payload = 8 [json_name = "payload"];</code>
+   * <code>.google.protobuf.Struct payload = 8 [json_name = "payload"];</code>
+   * @return The payload.
    */
-  boolean containsPayload(
-      java.lang.String key);
+  com.google.protobuf.Struct getPayload();
   /**
-   * Use {@link #getPayloadMap()} instead.
+   * <code>.google.protobuf.Struct payload = 8 [json_name = "payload"];</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getPayload();
-  /**
-   * <code>map&lt;string, string&gt; payload = 8 [json_name = "payload"];</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getPayloadMap();
-  /**
-   * <code>map&lt;string, string&gt; payload = 8 [json_name = "payload"];</code>
-   */
-  /* nullable */
-java.lang.String getPayloadOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; payload = 8 [json_name = "payload"];</code>
-   */
-  java.lang.String getPayloadOrThrow(
-      java.lang.String key);
+  com.google.protobuf.StructOrBuilder getPayloadOrBuilder();
 
   /**
    * <code>string data = 9 [json_name = "data"];</code>
@@ -200,38 +181,19 @@ java.lang.String defaultValue);
   com.antinvestor.apis.common.v1.StatusResponseOrBuilder getStatusOrBuilder();
 
   /**
-   * <code>map&lt;string, string&gt; extras = 15 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 15 [json_name = "extras"];</code>
+   * @return Whether the extras field is set.
    */
-  int getExtrasCount();
+  boolean hasExtras();
   /**
-   * <code>map&lt;string, string&gt; extras = 15 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 15 [json_name = "extras"];</code>
+   * @return The extras.
    */
-  boolean containsExtras(
-      java.lang.String key);
+  com.google.protobuf.Struct getExtras();
   /**
-   * Use {@link #getExtrasMap()} instead.
+   * <code>.google.protobuf.Struct extras = 15 [json_name = "extras"];</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtras();
-  /**
-   * <code>map&lt;string, string&gt; extras = 15 [json_name = "extras"];</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtrasMap();
-  /**
-   * <code>map&lt;string, string&gt; extras = 15 [json_name = "extras"];</code>
-   */
-  /* nullable */
-java.lang.String getExtrasOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; extras = 15 [json_name = "extras"];</code>
-   */
-  java.lang.String getExtrasOrThrow(
-      java.lang.String key);
+  com.google.protobuf.StructOrBuilder getExtrasOrBuilder();
 
   /**
    * <code>.notification.v1.PRIORITY priority = 16 [json_name = "priority"];</code>

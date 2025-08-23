@@ -16,10 +16,11 @@ package notificationv1
 
 import (
 	"context"
+	"math"
+
 	"github.com/antinvestor/apis/go/common"
 	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	"google.golang.org/grpc"
-	"math"
 )
 
 const ctxKeyService = common.CtxServiceKey("notificationClientKey")
@@ -163,21 +164,6 @@ func (nc *NotificationClient) Receive(ctx context.Context, messages []*Notificat
 
 }
 
-func (nc *NotificationClient) UpdateStatus(ctx context.Context, notificationId string,
-	state commonv1.STATE, status commonv1.STATUS, externalId string,
-	extras map[string]string) (*commonv1.StatusUpdateResponse, error) {
-
-	messageStatus := commonv1.StatusUpdateRequest{
-		Id:         notificationId,
-		State:      state,
-		Status:     status,
-		ExternalId: externalId,
-		Extras:     extras,
-	}
-
-	return nc.svc.StatusUpdate(ctx, &messageStatus)
-}
-
 func (nc *NotificationClient) GetTemplate(ctx context.Context, name string, language string) (*Template, error) {
 
 	searchRequest := TemplateSearchRequest{
@@ -233,20 +219,4 @@ func (nc *NotificationClient) SearchTemplate(ctx context.Context, query string, 
 
 	return templateChannel, nil
 
-}
-
-func (nc *NotificationClient) SaveTemplate(ctx context.Context, name string, language string, data map[string]string) (*Template, error) {
-
-	templateSaveRequest := &TemplateSaveRequest{
-		Name:         name,
-		LanguageCode: language,
-		Data:         data,
-	}
-
-	response, err := nc.svc.TemplateSave(ctx, templateSaveRequest)
-	if err != nil {
-		return nil, err
-	}
-
-	return response.GetData(), nil
 }

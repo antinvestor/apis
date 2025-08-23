@@ -136,70 +136,32 @@ public interface DeviceObjectOrBuilder extends
   com.antinvestor.apis.device.v1.LocaleOrBuilder getLocaleOrBuilder();
 
   /**
-   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
+   * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
+   * @return Whether the location field is set.
    */
-  int getLocationCount();
+  boolean hasLocation();
   /**
-   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
+   * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
+   * @return The location.
    */
-  boolean containsLocation(
-      java.lang.String key);
+  com.google.protobuf.Struct getLocation();
   /**
-   * Use {@link #getLocationMap()} instead.
+   * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getLocation();
-  /**
-   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getLocationMap();
-  /**
-   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
-   */
-  /* nullable */
-java.lang.String getLocationOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
-   */
-  java.lang.String getLocationOrThrow(
-      java.lang.String key);
+  com.google.protobuf.StructOrBuilder getLocationOrBuilder();
 
   /**
-   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
+   * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
+   * @return Whether the properties field is set.
    */
-  int getPropertiesCount();
+  boolean hasProperties();
   /**
-   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
+   * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
+   * @return The properties.
    */
-  boolean containsProperties(
-      java.lang.String key);
+  com.google.protobuf.Struct getProperties();
   /**
-   * Use {@link #getPropertiesMap()} instead.
+   * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getProperties();
-  /**
-   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getPropertiesMap();
-  /**
-   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
-   */
-  /* nullable */
-java.lang.String getPropertiesOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
-   */
-  java.lang.String getPropertiesOrThrow(
-      java.lang.String key);
+  com.google.protobuf.StructOrBuilder getPropertiesOrBuilder();
 }

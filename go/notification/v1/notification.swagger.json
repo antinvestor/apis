@@ -147,7 +147,7 @@
             "name": "extras",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "object"
           }
         ],
         "tags": [
@@ -279,7 +279,7 @@
             "name": "extras",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "object"
           }
         ],
         "tags": [
@@ -438,10 +438,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },
@@ -509,10 +506,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },
@@ -532,6 +526,14 @@
         }
       },
       "additionalProperties": {}
+    },
+    "google.protobuf.NullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
     },
     "google.rpc.Status": {
       "type": "object",
@@ -565,10 +567,7 @@
           "type": "string"
         },
         "extra": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },
@@ -594,10 +593,7 @@
           "type": "string"
         },
         "payload": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "data": {
           "type": "string"
@@ -618,10 +614,7 @@
           "$ref": "#/definitions/common.v1.StatusResponse"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "priority": {
           "$ref": "#/definitions/notification.v1.PRIORITY"
@@ -649,10 +642,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },
@@ -756,10 +746,7 @@
           }
         },
         "extra": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },
@@ -790,16 +777,10 @@
           "type": "string"
         },
         "data": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "extra": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },

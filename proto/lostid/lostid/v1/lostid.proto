@@ -19,6 +19,7 @@ package lostid.v1;
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
 import "google/type/interval.proto";
 import "google/type/money.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
@@ -71,13 +72,13 @@ message CollectibleRequest {
       }
     }
   ];
-  map<string, string> properties = 2;
+  google.protobuf.Struct properties = 2;
 }
 
 message CollectibleResponse {
   string id = 1;
   repeated string file_id = 2;
-  map<string, string> properties = 3;
+  google.protobuf.Struct properties = 3;
   string state = 4;
 }
 
@@ -98,7 +99,7 @@ message ListCollectibleResponse {
 message SearchResponse {
   string id = 1;
   string query = 2;
-  map<string, string> properties = 3;
+  google.protobuf.Struct properties = 3;
   string state = 4;
 }
 
@@ -137,7 +138,7 @@ message ProgressItem {
 message ProgressResponse {
   string id = 1;
   ItemType type = 2;
-  map<string, string> properties = 3;
+  google.protobuf.Struct properties = 3;
   string state = 4;
   repeated ProgressItem items = 5;
   repeated TransactionItem transactions = 6;

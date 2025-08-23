@@ -19,6 +19,7 @@ package notification.v1;
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/notification/v1;notificationv1";
@@ -73,7 +74,7 @@ message Language {
   ];
   string code = 2;
   string name = 3;
-  map<string, string> extra = 4;
+  google.protobuf.Struct extra = 4;
 }
 
 message TemplateData {
@@ -100,7 +101,7 @@ message Template {
   string name = 2;
 
   repeated TemplateData data = 4;
-  map<string, string> extra = 5;
+  google.protobuf.Struct extra = 5;
 }
 
 message Notification {
@@ -124,7 +125,7 @@ message Notification {
 
   string type = 6;
   string template = 7;
-  map<string, string> payload = 8;
+  google.protobuf.Struct payload = 8;
   string data = 9;
   string language = 10;
   bool out_bound = 11;
@@ -136,7 +137,7 @@ message Notification {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   common.v1.StatusResponse status = 14 [(buf.validate.field).ignore = IGNORE_ALWAYS];
-  map<string, string> extras = 15;
+  google.protobuf.Struct extras = 15;
 
   PRIORITY priority = 16;
 }
@@ -190,8 +191,8 @@ message TemplateSearchResponse {
 message TemplateSaveRequest {
   string name = 1;
   string language_code = 2;
-  map<string, string> data = 3;
-  map<string, string> extra = 4;
+  google.protobuf.Struct data = 3;
+  google.protobuf.Struct extra = 4;
 }
 
 message TemplateSaveResponse {

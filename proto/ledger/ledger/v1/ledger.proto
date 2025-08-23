@@ -18,6 +18,7 @@ package ledger.v1;
 
 import "common/v1/common.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
 import "google/type/money.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -74,14 +75,14 @@ message Ledger {
   string reference = 1;
   LedgerType type = 2;
   string parent = 3;
-  map<string, string> data = 4;
+  google.protobuf.Struct data = 4;
 }
 
 message Account {
   string reference = 1;
   string ledger = 3;
   google.type.Money balance = 4;
-  map<string, string> data = 5;
+  google.protobuf.Struct data = 5;
   google.type.Money uncleared_balance = 6;
   google.type.Money reserved_balance = 7;
 }
@@ -108,7 +109,7 @@ message Transaction {
   string reference = 1;
   string currency = 2;
   string transacted_at = 3;
-  map<string, string> data = 4;
+  google.protobuf.Struct data = 4;
   repeated TransactionEntry entries = 5;
   bool cleared = 6;
   TransactionType type = 7;

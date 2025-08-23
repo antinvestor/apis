@@ -27,6 +27,7 @@ import (
 	money "google.golang.org/genproto/googleapis/type/money"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -196,7 +197,7 @@ type Ledger struct {
 	Reference     string                 `protobuf:"bytes,1,opt,name=reference,proto3" json:"reference,omitempty"`
 	Type          LedgerType             `protobuf:"varint,2,opt,name=type,proto3,enum=ledger.v1.LedgerType" json:"type,omitempty"`
 	Parent        string                 `protobuf:"bytes,3,opt,name=parent,proto3" json:"parent,omitempty"`
-	Data          map[string]string      `protobuf:"bytes,4,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Data          *structpb.Struct       `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -252,7 +253,7 @@ func (x *Ledger) GetParent() string {
 	return ""
 }
 
-func (x *Ledger) GetData() map[string]string {
+func (x *Ledger) GetData() *structpb.Struct {
 	if x != nil {
 		return x.Data
 	}
@@ -264,7 +265,7 @@ type Account struct {
 	Reference        string                 `protobuf:"bytes,1,opt,name=reference,proto3" json:"reference,omitempty"`
 	Ledger           string                 `protobuf:"bytes,3,opt,name=ledger,proto3" json:"ledger,omitempty"`
 	Balance          *money.Money           `protobuf:"bytes,4,opt,name=balance,proto3" json:"balance,omitempty"`
-	Data             map[string]string      `protobuf:"bytes,5,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Data             *structpb.Struct       `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
 	UnclearedBalance *money.Money           `protobuf:"bytes,6,opt,name=uncleared_balance,json=unclearedBalance,proto3" json:"uncleared_balance,omitempty"`
 	ReservedBalance  *money.Money           `protobuf:"bytes,7,opt,name=reserved_balance,json=reservedBalance,proto3" json:"reserved_balance,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -322,7 +323,7 @@ func (x *Account) GetBalance() *money.Money {
 	return nil
 }
 
-func (x *Account) GetData() map[string]string {
+func (x *Account) GetData() *structpb.Struct {
 	if x != nil {
 		return x.Data
 	}
@@ -440,7 +441,7 @@ type Transaction struct {
 	Reference     string                 `protobuf:"bytes,1,opt,name=reference,proto3" json:"reference,omitempty"`
 	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	TransactedAt  string                 `protobuf:"bytes,3,opt,name=transacted_at,json=transactedAt,proto3" json:"transacted_at,omitempty"`
-	Data          map[string]string      `protobuf:"bytes,4,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Data          *structpb.Struct       `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
 	Entries       []*TransactionEntry    `protobuf:"bytes,5,rep,name=entries,proto3" json:"entries,omitempty"`
 	Cleared       bool                   `protobuf:"varint,6,opt,name=cleared,proto3" json:"cleared,omitempty"`
 	Type          TransactionType        `protobuf:"varint,7,opt,name=type,proto3,enum=ledger.v1.TransactionType" json:"type,omitempty"`
@@ -499,7 +500,7 @@ func (x *Transaction) GetTransactedAt() string {
 	return ""
 }
 
-func (x *Transaction) GetData() map[string]string {
+func (x *Transaction) GetData() *structpb.Struct {
 	if x != nil {
 		return x.Data
 	}
@@ -531,27 +532,21 @@ var File_ledger_v1_ledger_proto protoreflect.FileDescriptor
 
 const file_ledger_v1_ledger_proto_rawDesc = "" +
 	"\n" +
-	"\x16ledger/v1/ledger.proto\x12\tledger.v1\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/type/money.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"%\n" +
+	"\x16ledger/v1/ledger.proto\x12\tledger.v1\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x17google/type/money.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"%\n" +
 	"\rSearchRequest\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\"\xd3\x01\n" +
+	"\x05query\x18\x01 \x01(\tR\x05query\"\x96\x01\n" +
 	"\x06Ledger\x12\x1c\n" +
 	"\treference\x18\x01 \x01(\tR\treference\x12)\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x15.ledger.v1.LedgerTypeR\x04type\x12\x16\n" +
-	"\x06parent\x18\x03 \x01(\tR\x06parent\x12/\n" +
-	"\x04data\x18\x04 \x03(\v2\x1b.ledger.v1.Ledger.DataEntryR\x04data\x1a7\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd8\x02\n" +
+	"\x06parent\x18\x03 \x01(\tR\x06parent\x12+\n" +
+	"\x04data\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x04data\"\x9a\x02\n" +
 	"\aAccount\x12\x1c\n" +
 	"\treference\x18\x01 \x01(\tR\treference\x12\x16\n" +
 	"\x06ledger\x18\x03 \x01(\tR\x06ledger\x12,\n" +
-	"\abalance\x18\x04 \x01(\v2\x12.google.type.MoneyR\abalance\x120\n" +
-	"\x04data\x18\x05 \x03(\v2\x1c.ledger.v1.Account.DataEntryR\x04data\x12?\n" +
+	"\abalance\x18\x04 \x01(\v2\x12.google.type.MoneyR\abalance\x12+\n" +
+	"\x04data\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x04data\x12?\n" +
 	"\x11uncleared_balance\x18\x06 \x01(\v2\x12.google.type.MoneyR\x10unclearedBalance\x12=\n" +
-	"\x10reserved_balance\x18\a \x01(\v2\x12.google.type.MoneyR\x0freservedBalance\x1a7\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x8b\x02\n" +
+	"\x10reserved_balance\x18\a \x01(\v2\x12.google.type.MoneyR\x0freservedBalance\"\x8b\x02\n" +
 	"\x10TransactionEntry\x12\x18\n" +
 	"\aaccount\x18\x01 \x01(\tR\aaccount\x12 \n" +
 	"\vtransaction\x18\x02 \x01(\tR\vtransaction\x12#\n" +
@@ -561,18 +556,15 @@ const file_ledger_v1_ledger_proto_rawDesc = "" +
 	"\vacc_balance\x18\x06 \x01(\v2\x12.google.type.MoneyR\n" +
 	"accBalance\x12\x1d\n" +
 	"\n" +
-	"cleared_at\x18\a \x01(\tR\tclearedAt\"\xdc\x02\n" +
+	"cleared_at\x18\a \x01(\tR\tclearedAt\"\x9a\x02\n" +
 	"\vTransaction\x12\x1c\n" +
 	"\treference\x18\x01 \x01(\tR\treference\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12#\n" +
-	"\rtransacted_at\x18\x03 \x01(\tR\ftransactedAt\x124\n" +
-	"\x04data\x18\x04 \x03(\v2 .ledger.v1.Transaction.DataEntryR\x04data\x125\n" +
+	"\rtransacted_at\x18\x03 \x01(\tR\ftransactedAt\x12+\n" +
+	"\x04data\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x04data\x125\n" +
 	"\aentries\x18\x05 \x03(\v2\x1b.ledger.v1.TransactionEntryR\aentries\x12\x18\n" +
 	"\acleared\x18\x06 \x01(\bR\acleared\x12.\n" +
-	"\x04type\x18\a \x01(\x0e2\x1a.ledger.v1.TransactionTypeR\x04type\x1a7\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*L\n" +
+	"\x04type\x18\a \x01(\x0e2\x1a.ledger.v1.TransactionTypeR\x04type*L\n" +
 	"\n" +
 	"LedgerType\x12\t\n" +
 	"\x05ASSET\x10\x00\x12\r\n" +
@@ -622,7 +614,7 @@ func file_ledger_v1_ledger_proto_rawDescGZIP() []byte {
 }
 
 var file_ledger_v1_ledger_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_ledger_v1_ledger_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_ledger_v1_ledger_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_ledger_v1_ledger_proto_goTypes = []any{
 	(LedgerType)(0),          // 0: ledger.v1.LedgerType
 	(TransactionType)(0),     // 1: ledger.v1.TransactionType
@@ -631,35 +623,33 @@ var file_ledger_v1_ledger_proto_goTypes = []any{
 	(*Account)(nil),          // 4: ledger.v1.Account
 	(*TransactionEntry)(nil), // 5: ledger.v1.TransactionEntry
 	(*Transaction)(nil),      // 6: ledger.v1.Transaction
-	nil,                      // 7: ledger.v1.Ledger.DataEntry
-	nil,                      // 8: ledger.v1.Account.DataEntry
-	nil,                      // 9: ledger.v1.Transaction.DataEntry
-	(*money.Money)(nil),      // 10: google.type.Money
-	(*v1.SearchRequest)(nil), // 11: common.v1.SearchRequest
+	(*structpb.Struct)(nil),  // 7: google.protobuf.Struct
+	(*money.Money)(nil),      // 8: google.type.Money
+	(*v1.SearchRequest)(nil), // 9: common.v1.SearchRequest
 }
 var file_ledger_v1_ledger_proto_depIdxs = []int32{
 	0,  // 0: ledger.v1.Ledger.type:type_name -> ledger.v1.LedgerType
-	7,  // 1: ledger.v1.Ledger.data:type_name -> ledger.v1.Ledger.DataEntry
-	10, // 2: ledger.v1.Account.balance:type_name -> google.type.Money
-	8,  // 3: ledger.v1.Account.data:type_name -> ledger.v1.Account.DataEntry
-	10, // 4: ledger.v1.Account.uncleared_balance:type_name -> google.type.Money
-	10, // 5: ledger.v1.Account.reserved_balance:type_name -> google.type.Money
-	10, // 6: ledger.v1.TransactionEntry.amount:type_name -> google.type.Money
-	10, // 7: ledger.v1.TransactionEntry.acc_balance:type_name -> google.type.Money
-	9,  // 8: ledger.v1.Transaction.data:type_name -> ledger.v1.Transaction.DataEntry
+	7,  // 1: ledger.v1.Ledger.data:type_name -> google.protobuf.Struct
+	8,  // 2: ledger.v1.Account.balance:type_name -> google.type.Money
+	7,  // 3: ledger.v1.Account.data:type_name -> google.protobuf.Struct
+	8,  // 4: ledger.v1.Account.uncleared_balance:type_name -> google.type.Money
+	8,  // 5: ledger.v1.Account.reserved_balance:type_name -> google.type.Money
+	8,  // 6: ledger.v1.TransactionEntry.amount:type_name -> google.type.Money
+	8,  // 7: ledger.v1.TransactionEntry.acc_balance:type_name -> google.type.Money
+	7,  // 8: ledger.v1.Transaction.data:type_name -> google.protobuf.Struct
 	5,  // 9: ledger.v1.Transaction.entries:type_name -> ledger.v1.TransactionEntry
 	1,  // 10: ledger.v1.Transaction.type:type_name -> ledger.v1.TransactionType
-	11, // 11: ledger.v1.LedgerService.SearchLedgers:input_type -> common.v1.SearchRequest
+	9,  // 11: ledger.v1.LedgerService.SearchLedgers:input_type -> common.v1.SearchRequest
 	3,  // 12: ledger.v1.LedgerService.CreateLedger:input_type -> ledger.v1.Ledger
 	3,  // 13: ledger.v1.LedgerService.UpdateLedger:input_type -> ledger.v1.Ledger
-	11, // 14: ledger.v1.LedgerService.SearchAccounts:input_type -> common.v1.SearchRequest
+	9,  // 14: ledger.v1.LedgerService.SearchAccounts:input_type -> common.v1.SearchRequest
 	4,  // 15: ledger.v1.LedgerService.CreateAccount:input_type -> ledger.v1.Account
 	4,  // 16: ledger.v1.LedgerService.UpdateAccount:input_type -> ledger.v1.Account
-	11, // 17: ledger.v1.LedgerService.SearchTransactions:input_type -> common.v1.SearchRequest
+	9,  // 17: ledger.v1.LedgerService.SearchTransactions:input_type -> common.v1.SearchRequest
 	6,  // 18: ledger.v1.LedgerService.CreateTransaction:input_type -> ledger.v1.Transaction
 	6,  // 19: ledger.v1.LedgerService.ReverseTransaction:input_type -> ledger.v1.Transaction
 	6,  // 20: ledger.v1.LedgerService.UpdateTransaction:input_type -> ledger.v1.Transaction
-	11, // 21: ledger.v1.LedgerService.SearchTransactionEntries:input_type -> common.v1.SearchRequest
+	9,  // 21: ledger.v1.LedgerService.SearchTransactionEntries:input_type -> common.v1.SearchRequest
 	3,  // 22: ledger.v1.LedgerService.SearchLedgers:output_type -> ledger.v1.Ledger
 	3,  // 23: ledger.v1.LedgerService.CreateLedger:output_type -> ledger.v1.Ledger
 	3,  // 24: ledger.v1.LedgerService.UpdateLedger:output_type -> ledger.v1.Ledger
@@ -689,7 +679,7 @@ func file_ledger_v1_ledger_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ledger_v1_ledger_proto_rawDesc), len(file_ledger_v1_ledger_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   8,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -27,6 +27,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -46,7 +47,7 @@ type Locality struct {
 	ParentId    string                 `protobuf:"bytes,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
 	Name        string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	Description string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	Extras      map[string]string      `protobuf:"bytes,7,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras      *structpb.Struct       `protobuf:"bytes,7,opt,name=extras,proto3" json:"extras,omitempty"`
 	CreatedAt   *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Types that are valid to be assigned to Feature:
 	//
@@ -115,7 +116,7 @@ func (x *Locality) GetDescription() string {
 	return ""
 }
 
-func (x *Locality) GetExtras() map[string]string {
+func (x *Locality) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -266,7 +267,7 @@ type PropertyState struct {
 	Status        v1.STATUS              `protobuf:"varint,4,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`
 	Name          string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,7,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,7,opt,name=extras,proto3" json:"extras,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -344,7 +345,7 @@ func (x *PropertyState) GetDescription() string {
 	return ""
 }
 
-func (x *PropertyState) GetExtras() map[string]string {
+func (x *PropertyState) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -363,7 +364,7 @@ type PropertyType struct {
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Extra         map[string]string      `protobuf:"bytes,4,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -420,7 +421,7 @@ func (x *PropertyType) GetDescription() string {
 	return ""
 }
 
-func (x *PropertyType) GetExtra() map[string]string {
+func (x *PropertyType) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -528,7 +529,7 @@ type Subscription struct {
 	PropertyId    string                 `protobuf:"bytes,2,opt,name=property_id,json=propertyId,proto3" json:"property_id,omitempty"`
 	ProfileId     string                 `protobuf:"bytes,3,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`
 	Role          string                 `protobuf:"bytes,4,opt,name=role,proto3" json:"role,omitempty"`
-	Extra         map[string]string      `protobuf:"bytes,5,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extra         *structpb.Struct       `protobuf:"bytes,5,opt,name=extra,proto3" json:"extra,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -593,7 +594,7 @@ func (x *Subscription) GetRole() string {
 	return ""
 }
 
-func (x *Subscription) GetExtra() map[string]string {
+func (x *Subscription) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -712,7 +713,7 @@ type Property struct {
 	Locality      *Locality              `protobuf:"bytes,6,opt,name=locality,proto3" json:"locality,omitempty"`
 	StartedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Extra         map[string]string      `protobuf:"bytes,9,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extra         *structpb.Struct       `protobuf:"bytes,9,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -803,7 +804,7 @@ func (x *Property) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *Property) GetExtra() map[string]string {
+func (x *Property) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -906,7 +907,7 @@ type ListPropertyTypeRequest struct {
 	StartDate     string                 `protobuf:"bytes,4,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
 	EndDate       string                 `protobuf:"bytes,5,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
 	Properties    []string               `protobuf:"bytes,6,rep,name=properties,proto3" json:"properties,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,7,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,7,opt,name=extras,proto3" json:"extras,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -983,7 +984,7 @@ func (x *ListPropertyTypeRequest) GetProperties() []string {
 	return nil
 }
 
-func (x *ListPropertyTypeRequest) GetExtras() map[string]string {
+func (x *ListPropertyTypeRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -1042,7 +1043,7 @@ type SearchPropertyRequest struct {
 	StartDate     string                 `protobuf:"bytes,4,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
 	EndDate       string                 `protobuf:"bytes,5,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
 	Properties    []string               `protobuf:"bytes,6,rep,name=properties,proto3" json:"properties,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,7,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,7,opt,name=extras,proto3" json:"extras,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1119,7 +1120,7 @@ func (x *SearchPropertyRequest) GetProperties() []string {
 	return nil
 }
 
-func (x *SearchPropertyRequest) GetExtras() map[string]string {
+func (x *SearchPropertyRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -1531,7 +1532,7 @@ type UpdatePropertyRequest struct {
 	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	GuardianId    string                 `protobuf:"bytes,6,opt,name=guardian_id,json=guardianId,proto3" json:"guardian_id,omitempty"`
 	LocalityId    string                 `protobuf:"bytes,7,opt,name=locality_id,json=localityId,proto3" json:"locality_id,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,8,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,8,opt,name=extras,proto3" json:"extras,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1615,7 +1616,7 @@ func (x *UpdatePropertyRequest) GetLocalityId() string {
 	return ""
 }
 
-func (x *UpdatePropertyRequest) GetExtras() map[string]string {
+func (x *UpdatePropertyRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -1854,29 +1855,26 @@ var File_property_v1_property_proto protoreflect.FileDescriptor
 
 const file_property_v1_property_proto_rawDesc = "" +
 	"\n" +
-	"\x1aproperty/v1/property.proto\x12\vproperty.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xda\x03\n" +
+	"\x1aproperty/v1/property.proto\x12\vproperty.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x95\x03\n" +
 	"\bLocality\x12.\n" +
 	"\x02id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12;\n" +
 	"\tparent_id\x18\x02 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bparentId\x12\x1d\n" +
 	"\x04name\x18\x05 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18<R\x04name\x12,\n" +
 	"\vdescription\x18\x06 \x01(\tB\n" +
-	"\xbaH\a\xd8\x01\x01r\x02\x102R\vdescription\x129\n" +
-	"\x06extras\x18\a \x03(\v2!.property.v1.Locality.ExtrasEntryR\x06extras\x129\n" +
+	"\xbaH\a\xd8\x01\x01r\x02\x102R\vdescription\x12/\n" +
+	"\x06extras\x18\a \x01(\v2\x17.google.protobuf.StructR\x06extras\x129\n" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12$\n" +
 	"\x05point\x18\x03 \x01(\tB\f\xbaH\t\xd8\x01\x01r\x04\x10\n" +
 	"\x18dH\x00R\x05point\x12+\n" +
 	"\bboundary\x18\x04 \x01(\tB\r\xbaH\n" +
 	"\xd8\x01\x01r\x05\x10\n" +
-	"\x18\x80\x10H\x00R\bboundary\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x10\n" +
+	"\x18\x80\x10H\x00R\bboundaryB\x10\n" +
 	"\afeature\x12\x05\xbaH\x02\b\x01\"?\n" +
 	"\x12AddLocalityRequest\x12)\n" +
 	"\x04data\x18\x01 \x01(\v2\x15.property.v1.LocalityR\x04data\"@\n" +
 	"\x13AddLocalityResponse\x12)\n" +
-	"\x04data\x18\x01 \x01(\v2\x15.property.v1.LocalityR\x04data\"\xcf\x03\n" +
+	"\x04data\x18\x01 \x01(\v2\x15.property.v1.LocalityR\x04data\"\x85\x03\n" +
 	"\rPropertyState\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12;\n" +
 	"\n" +
@@ -1886,49 +1884,38 @@ const file_property_v1_property_proto_rawDesc = "" +
 	"\x06status\x18\x04 \x01(\x0e2\x11.common.v1.STATUSR\x06status\x12\x1d\n" +
 	"\x04name\x18\x05 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18<R\x04name\x12,\n" +
 	"\vdescription\x18\x06 \x01(\tB\n" +
-	"\xbaH\a\xd8\x01\x01r\x02\x102R\vdescription\x12>\n" +
-	"\x06extras\x18\a \x03(\v2&.property.v1.PropertyState.ExtrasEntryR\x06extras\x129\n" +
+	"\xbaH\a\xd8\x01\x01r\x02\x102R\vdescription\x12/\n" +
+	"\x06extras\x18\a \x01(\v2\x17.google.protobuf.StructR\x06extras\x129\n" +
 	"\n" +
-	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xbc\x02\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xf5\x01\n" +
 	"\fPropertyType\x12.\n" +
 	"\x02id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18<R\x04name\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
-	"\xbaH\a\xd8\x01\x01r\x02\x102R\vdescription\x12:\n" +
-	"\x05extra\x18\x04 \x03(\v2$.property.v1.PropertyType.ExtraEntryR\x05extra\x129\n" +
+	"\xbaH\a\xd8\x01\x01r\x02\x102R\vdescription\x12-\n" +
+	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a8\n" +
-	"\n" +
-	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"G\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"G\n" +
 	"\x16AddPropertyTypeRequest\x12-\n" +
 	"\x04data\x18\x01 \x01(\v2\x19.property.v1.PropertyTypeR\x04data\"H\n" +
 	"\x17AddPropertyTypeResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.property.v1.PropertyTypeR\x04data\"\xa5\x03\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.property.v1.PropertyTypeR\x04data\"\xde\x02\n" +
 	"\fSubscription\x12.\n" +
 	"\x02id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12*\n" +
 	"\vproperty_id\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18(R\n" +
 	"propertyId\x12+\n" +
 	"\n" +
 	"profile_id\x18\x03 \x01(\tB\f\xbaH\t\xd8\x01\x01r\x04\x10\x03\x182R\tprofileId\x12 \n" +
-	"\x04role\x18\x04 \x01(\tB\f\xbaH\t\xd8\x01\x01r\x04\x10\x03\x182R\x04role\x12:\n" +
-	"\x05extra\x18\x05 \x03(\v2$.property.v1.Subscription.ExtraEntryR\x05extra\x129\n" +
+	"\x04role\x18\x04 \x01(\tB\f\xbaH\t\xd8\x01\x01r\x04\x10\x03\x182R\x04role\x12-\n" +
+	"\x05extra\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x05extra\x129\n" +
 	"\n" +
 	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"expires_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x1a8\n" +
-	"\n" +
-	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"G\n" +
+	"expires_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"G\n" +
 	"\x16AddSubscriptionRequest\x12-\n" +
 	"\x04data\x18\x01 \x01(\v2\x19.property.v1.SubscriptionR\x04data\"H\n" +
 	"\x17AddSubscriptionResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.property.v1.SubscriptionR\x04data\"\xba\x04\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.property.v1.SubscriptionR\x04data\"\xf7\x03\n" +
 	"\bProperty\x12.\n" +
 	"\x02id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12;\n" +
 	"\tparent_id\x18\x02 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bparentId\x12\x1d\n" +
@@ -1940,16 +1927,12 @@ const file_property_v1_property_proto_rawDesc = "" +
 	"\n" +
 	"started_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\b\xbaH\x05\xb2\x01\x028\x01R\tstartedAt\x129\n" +
 	"\n" +
-	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12G\n" +
-	"\x05extra\x18\t \x03(\v2 .property.v1.Property.ExtraEntryB\x0f\xbaH\f\xd8\x01\x01\x9a\x01\x06*\x04r\x02\x10\x03R\x05extra\x1a8\n" +
-	"\n" +
-	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"B\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12>\n" +
+	"\x05extra\x18\t \x01(\v2\x17.google.protobuf.StructB\x0f\xbaH\f\xd8\x01\x01\x9a\x01\x06*\x04r\x02\x10\x03R\x05extra\"B\n" +
 	"\x15CreatePropertyRequest\x12)\n" +
 	"\x04data\x18\x01 \x01(\v2\x15.property.v1.PropertyR\x04data\"C\n" +
 	"\x16CreatePropertyResponse\x12)\n" +
-	"\x04data\x18\x01 \x01(\v2\x15.property.v1.PropertyR\x04data\"\xb8\x02\n" +
+	"\x04data\x18\x01 \x01(\v2\x15.property.v1.PropertyR\x04data\"\xe4\x01\n" +
 	"\x17ListPropertyTypeRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x14\n" +
@@ -1959,13 +1942,10 @@ const file_property_v1_property_proto_rawDesc = "" +
 	"\bend_date\x18\x05 \x01(\tR\aendDate\x12\x1e\n" +
 	"\n" +
 	"properties\x18\x06 \x03(\tR\n" +
-	"properties\x12H\n" +
-	"\x06extras\x18\a \x03(\v20.property.v1.ListPropertyTypeRequest.ExtrasEntryR\x06extras\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"I\n" +
+	"properties\x12/\n" +
+	"\x06extras\x18\a \x01(\v2\x17.google.protobuf.StructR\x06extras\"I\n" +
 	"\x18ListPropertyTypeResponse\x12-\n" +
-	"\x04data\x18\x01 \x03(\v2\x19.property.v1.PropertyTypeR\x04data\"\xb4\x02\n" +
+	"\x04data\x18\x01 \x03(\v2\x19.property.v1.PropertyTypeR\x04data\"\xe2\x01\n" +
 	"\x15SearchPropertyRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x14\n" +
@@ -1975,11 +1955,8 @@ const file_property_v1_property_proto_rawDesc = "" +
 	"\bend_date\x18\x05 \x01(\tR\aendDate\x12\x1e\n" +
 	"\n" +
 	"properties\x18\x06 \x03(\tR\n" +
-	"properties\x12F\n" +
-	"\x06extras\x18\a \x03(\v2..property.v1.SearchPropertyRequest.ExtrasEntryR\x06extras\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
+	"properties\x12/\n" +
+	"\x06extras\x18\a \x01(\v2\x17.google.protobuf.StructR\x06extras\"C\n" +
 	"\x16SearchPropertyResponse\x12)\n" +
 	"\x04data\x18\x01 \x03(\v2\x15.property.v1.PropertyR\x04data\"D\n" +
 	"\x15DeleteLocalityRequest\x12+\n" +
@@ -1997,7 +1974,7 @@ const file_property_v1_property_proto_rawDesc = "" +
 	"\x18HistoryOfPropertyRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"K\n" +
 	"\x19HistoryOfPropertyResponse\x12.\n" +
-	"\x04data\x18\x01 \x03(\v2\x1a.property.v1.PropertyStateR\x04data\"\xfd\x03\n" +
+	"\x04data\x18\x01 \x03(\v2\x1a.property.v1.PropertyStateR\x04data\"\xab\x03\n" +
 	"\x15UpdatePropertyRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12&\n" +
 	"\x05state\x18\x02 \x01(\x0e2\x10.common.v1.STATER\x05state\x12)\n" +
@@ -2008,11 +1985,8 @@ const file_property_v1_property_proto_rawDesc = "" +
 	"\vguardian_id\x18\x06 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\n" +
 	"guardianId\x12?\n" +
 	"\vlocality_id\x18\a \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\n" +
-	"localityId\x12W\n" +
-	"\x06extras\x18\b \x03(\v2..property.v1.UpdatePropertyRequest.ExtrasEntryB\x0f\xbaH\f\xd8\x01\x01\x9a\x01\x06*\x04r\x02\x10\x03R\x06extras\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
+	"localityId\x12@\n" +
+	"\x06extras\x18\b \x01(\v2\x17.google.protobuf.StructB\x0f\xbaH\f\xd8\x01\x01\x9a\x01\x06*\x04r\x02\x10\x03R\x06extras\"C\n" +
 	"\x16UpdatePropertyResponse\x12)\n" +
 	"\x04data\x18\x01 \x01(\v2\x15.property.v1.PropertyR\x04data\"P\n" +
 	"\x17ListSubscriptionRequest\x12\x1f\n" +
@@ -2062,7 +2036,7 @@ func file_property_v1_property_proto_rawDescGZIP() []byte {
 	return file_property_v1_property_proto_rawDescData
 }
 
-var file_property_v1_property_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
+var file_property_v1_property_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
 var file_property_v1_property_proto_goTypes = []any{
 	(*Locality)(nil),                   // 0: property.v1.Locality
 	(*AddLocalityRequest)(nil),         // 1: property.v1.AddLocalityRequest
@@ -2095,52 +2069,45 @@ var file_property_v1_property_proto_goTypes = []any{
 	(*ListSubscriptionResponse)(nil),   // 28: property.v1.ListSubscriptionResponse
 	(*DeleteSubscriptionRequest)(nil),  // 29: property.v1.DeleteSubscriptionRequest
 	(*DeleteSubscriptionResponse)(nil), // 30: property.v1.DeleteSubscriptionResponse
-	nil,                                // 31: property.v1.Locality.ExtrasEntry
-	nil,                                // 32: property.v1.PropertyState.ExtrasEntry
-	nil,                                // 33: property.v1.PropertyType.ExtraEntry
-	nil,                                // 34: property.v1.Subscription.ExtraEntry
-	nil,                                // 35: property.v1.Property.ExtraEntry
-	nil,                                // 36: property.v1.ListPropertyTypeRequest.ExtrasEntry
-	nil,                                // 37: property.v1.SearchPropertyRequest.ExtrasEntry
-	nil,                                // 38: property.v1.UpdatePropertyRequest.ExtrasEntry
-	(*timestamppb.Timestamp)(nil),      // 39: google.protobuf.Timestamp
-	(v1.STATE)(0),                      // 40: common.v1.STATE
-	(v1.STATUS)(0),                     // 41: common.v1.STATUS
+	(*structpb.Struct)(nil),            // 31: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),      // 32: google.protobuf.Timestamp
+	(v1.STATE)(0),                      // 33: common.v1.STATE
+	(v1.STATUS)(0),                     // 34: common.v1.STATUS
 }
 var file_property_v1_property_proto_depIdxs = []int32{
-	31, // 0: property.v1.Locality.extras:type_name -> property.v1.Locality.ExtrasEntry
-	39, // 1: property.v1.Locality.created_at:type_name -> google.protobuf.Timestamp
+	31, // 0: property.v1.Locality.extras:type_name -> google.protobuf.Struct
+	32, // 1: property.v1.Locality.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 2: property.v1.AddLocalityRequest.data:type_name -> property.v1.Locality
 	0,  // 3: property.v1.AddLocalityResponse.data:type_name -> property.v1.Locality
-	40, // 4: property.v1.PropertyState.state:type_name -> common.v1.STATE
-	41, // 5: property.v1.PropertyState.status:type_name -> common.v1.STATUS
-	32, // 6: property.v1.PropertyState.extras:type_name -> property.v1.PropertyState.ExtrasEntry
-	39, // 7: property.v1.PropertyState.created_at:type_name -> google.protobuf.Timestamp
-	33, // 8: property.v1.PropertyType.extra:type_name -> property.v1.PropertyType.ExtraEntry
-	39, // 9: property.v1.PropertyType.created_at:type_name -> google.protobuf.Timestamp
+	33, // 4: property.v1.PropertyState.state:type_name -> common.v1.STATE
+	34, // 5: property.v1.PropertyState.status:type_name -> common.v1.STATUS
+	31, // 6: property.v1.PropertyState.extras:type_name -> google.protobuf.Struct
+	32, // 7: property.v1.PropertyState.created_at:type_name -> google.protobuf.Timestamp
+	31, // 8: property.v1.PropertyType.extra:type_name -> google.protobuf.Struct
+	32, // 9: property.v1.PropertyType.created_at:type_name -> google.protobuf.Timestamp
 	4,  // 10: property.v1.AddPropertyTypeRequest.data:type_name -> property.v1.PropertyType
 	4,  // 11: property.v1.AddPropertyTypeResponse.data:type_name -> property.v1.PropertyType
-	34, // 12: property.v1.Subscription.extra:type_name -> property.v1.Subscription.ExtraEntry
-	39, // 13: property.v1.Subscription.created_at:type_name -> google.protobuf.Timestamp
-	39, // 14: property.v1.Subscription.expires_at:type_name -> google.protobuf.Timestamp
+	31, // 12: property.v1.Subscription.extra:type_name -> google.protobuf.Struct
+	32, // 13: property.v1.Subscription.created_at:type_name -> google.protobuf.Timestamp
+	32, // 14: property.v1.Subscription.expires_at:type_name -> google.protobuf.Timestamp
 	7,  // 15: property.v1.AddSubscriptionRequest.data:type_name -> property.v1.Subscription
 	7,  // 16: property.v1.AddSubscriptionResponse.data:type_name -> property.v1.Subscription
 	4,  // 17: property.v1.Property.property_type:type_name -> property.v1.PropertyType
 	0,  // 18: property.v1.Property.locality:type_name -> property.v1.Locality
-	39, // 19: property.v1.Property.started_at:type_name -> google.protobuf.Timestamp
-	39, // 20: property.v1.Property.created_at:type_name -> google.protobuf.Timestamp
-	35, // 21: property.v1.Property.extra:type_name -> property.v1.Property.ExtraEntry
+	32, // 19: property.v1.Property.started_at:type_name -> google.protobuf.Timestamp
+	32, // 20: property.v1.Property.created_at:type_name -> google.protobuf.Timestamp
+	31, // 21: property.v1.Property.extra:type_name -> google.protobuf.Struct
 	10, // 22: property.v1.CreatePropertyRequest.data:type_name -> property.v1.Property
 	10, // 23: property.v1.CreatePropertyResponse.data:type_name -> property.v1.Property
-	36, // 24: property.v1.ListPropertyTypeRequest.extras:type_name -> property.v1.ListPropertyTypeRequest.ExtrasEntry
+	31, // 24: property.v1.ListPropertyTypeRequest.extras:type_name -> google.protobuf.Struct
 	4,  // 25: property.v1.ListPropertyTypeResponse.data:type_name -> property.v1.PropertyType
-	37, // 26: property.v1.SearchPropertyRequest.extras:type_name -> property.v1.SearchPropertyRequest.ExtrasEntry
+	31, // 26: property.v1.SearchPropertyRequest.extras:type_name -> google.protobuf.Struct
 	10, // 27: property.v1.SearchPropertyResponse.data:type_name -> property.v1.Property
 	3,  // 28: property.v1.StateOfPropertyResponse.data:type_name -> property.v1.PropertyState
 	3,  // 29: property.v1.HistoryOfPropertyResponse.data:type_name -> property.v1.PropertyState
-	40, // 30: property.v1.UpdatePropertyRequest.state:type_name -> common.v1.STATE
-	41, // 31: property.v1.UpdatePropertyRequest.status:type_name -> common.v1.STATUS
-	38, // 32: property.v1.UpdatePropertyRequest.extras:type_name -> property.v1.UpdatePropertyRequest.ExtrasEntry
+	33, // 30: property.v1.UpdatePropertyRequest.state:type_name -> common.v1.STATE
+	34, // 31: property.v1.UpdatePropertyRequest.status:type_name -> common.v1.STATUS
+	31, // 32: property.v1.UpdatePropertyRequest.extras:type_name -> google.protobuf.Struct
 	10, // 33: property.v1.UpdatePropertyResponse.data:type_name -> property.v1.Property
 	7,  // 34: property.v1.ListSubscriptionResponse.data:type_name -> property.v1.Subscription
 	5,  // 35: property.v1.PropertyService.AddPropertyType:input_type -> property.v1.AddPropertyTypeRequest
@@ -2191,7 +2158,7 @@ func file_property_v1_property_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_property_v1_property_proto_rawDesc), len(file_property_v1_property_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   39,
+			NumMessages:   31,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

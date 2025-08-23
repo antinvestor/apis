@@ -79,18 +79,6 @@ func NewOCRClient(ctx context.Context, opts ...common.ClientOption) (*OCRClient,
 	return Init(clientBase, NewOCRServiceClient(clientBase.Connection())), nil
 }
 
-func (oc *OCRClient) Recognize(ctx context.Context, id string, language string, properties map[string]string, fileId ...string) (*RecognizeResponse, error) {
-
-	ocrRequest := RecognizeRequest{
-		ReferenceId: id,
-		LanguageId:  language,
-		FileId:      fileId,
-		Properties:  properties,
-	}
-
-	return oc.svc.Recognize(ctx, &ocrRequest)
-}
-
 func (oc *OCRClient) StatusCheck(ctx context.Context, id string) (*StatusResponse, error) {
 
 	statusCheckRequest := commonv1.StatusRequest{

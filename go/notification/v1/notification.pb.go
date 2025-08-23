@@ -27,6 +27,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -95,7 +96,7 @@ type Language struct {
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Extra         map[string]string      `protobuf:"bytes,4,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -151,7 +152,7 @@ func (x *Language) GetName() string {
 	return ""
 }
 
-func (x *Language) GetExtra() map[string]string {
+func (x *Language) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -231,7 +232,7 @@ type Template struct {
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Data          []*TemplateData        `protobuf:"bytes,4,rep,name=data,proto3" json:"data,omitempty"`
-	Extra         map[string]string      `protobuf:"bytes,5,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extra         *structpb.Struct       `protobuf:"bytes,5,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -287,7 +288,7 @@ func (x *Template) GetData() []*TemplateData {
 	return nil
 }
 
-func (x *Template) GetExtra() map[string]string {
+func (x *Template) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -302,14 +303,14 @@ type Notification struct {
 	Recipient     *v1.ContactLink        `protobuf:"bytes,4,opt,name=recipient,proto3" json:"recipient,omitempty"`
 	Type          string                 `protobuf:"bytes,6,opt,name=type,proto3" json:"type,omitempty"`
 	Template      string                 `protobuf:"bytes,7,opt,name=template,proto3" json:"template,omitempty"`
-	Payload       map[string]string      `protobuf:"bytes,8,rep,name=payload,proto3" json:"payload,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Payload       *structpb.Struct       `protobuf:"bytes,8,opt,name=payload,proto3" json:"payload,omitempty"`
 	Data          string                 `protobuf:"bytes,9,opt,name=data,proto3" json:"data,omitempty"`
 	Language      string                 `protobuf:"bytes,10,opt,name=language,proto3" json:"language,omitempty"`
 	OutBound      bool                   `protobuf:"varint,11,opt,name=out_bound,json=outBound,proto3" json:"out_bound,omitempty"`
 	AutoRelease   bool                   `protobuf:"varint,12,opt,name=auto_release,json=autoRelease,proto3" json:"auto_release,omitempty"`
 	RouteId       string                 `protobuf:"bytes,13,opt,name=route_id,json=routeId,proto3" json:"route_id,omitempty"`
 	Status        *v1.StatusResponse     `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,15,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,15,opt,name=extras,proto3" json:"extras,omitempty"`
 	Priority      PRIORITY               `protobuf:"varint,16,opt,name=priority,proto3,enum=notification.v1.PRIORITY" json:"priority,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -387,7 +388,7 @@ func (x *Notification) GetTemplate() string {
 	return ""
 }
 
-func (x *Notification) GetPayload() map[string]string {
+func (x *Notification) GetPayload() *structpb.Struct {
 	if x != nil {
 		return x.Payload
 	}
@@ -436,7 +437,7 @@ func (x *Notification) GetStatus() *v1.StatusResponse {
 	return nil
 }
 
-func (x *Notification) GetExtras() map[string]string {
+func (x *Notification) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -882,8 +883,8 @@ type TemplateSaveRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	LanguageCode  string                 `protobuf:"bytes,2,opt,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"`
-	Data          map[string]string      `protobuf:"bytes,3,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Extra         map[string]string      `protobuf:"bytes,4,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Data          *structpb.Struct       `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -932,14 +933,14 @@ func (x *TemplateSaveRequest) GetLanguageCode() string {
 	return ""
 }
 
-func (x *TemplateSaveRequest) GetData() map[string]string {
+func (x *TemplateSaveRequest) GetData() *structpb.Struct {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-func (x *TemplateSaveRequest) GetExtra() map[string]string {
+func (x *TemplateSaveRequest) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -994,53 +995,39 @@ var File_notification_v1_notification_proto protoreflect.FileDescriptor
 
 const file_notification_v1_notification_proto_rawDesc = "" +
 	"\n" +
-	"\"notification/v1/notification.proto\x12\x0fnotification.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd8\x01\n" +
+	"\"notification/v1/notification.proto\x12\x0fnotification.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x91\x01\n" +
 	"\bLanguage\x12.\n" +
 	"\x02id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12:\n" +
-	"\x05extra\x18\x04 \x03(\v2$.notification.v1.Language.ExtraEntryR\x05extra\x1a8\n" +
-	"\n" +
-	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa1\x01\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12-\n" +
+	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xa1\x01\n" +
 	"\fTemplateData\x12.\n" +
 	"\x02id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x16\n" +
 	"\x06detail\x18\x03 \x01(\tR\x06detail\x125\n" +
-	"\blanguage\x18\x04 \x01(\v2\x19.notification.v1.LanguageR\blanguage\"\xf7\x01\n" +
+	"\blanguage\x18\x04 \x01(\v2\x19.notification.v1.LanguageR\blanguage\"\xb0\x01\n" +
 	"\bTemplate\x12.\n" +
 	"\x02id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x121\n" +
-	"\x04data\x18\x04 \x03(\v2\x1d.notification.v1.TemplateDataR\x04data\x12:\n" +
-	"\x05extra\x18\x05 \x03(\v2$.notification.v1.Template.ExtraEntryR\x05extra\x1a8\n" +
-	"\n" +
-	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xae\x06\n" +
+	"\x04data\x18\x04 \x03(\v2\x1d.notification.v1.TemplateDataR\x04data\x12-\n" +
+	"\x05extra\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x92\x05\n" +
 	"\fNotification\x12.\n" +
 	"\x02id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12;\n" +
 	"\tparent_id\x18\x02 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bparentId\x12.\n" +
 	"\x06source\x18\x03 \x01(\v2\x16.common.v1.ContactLinkR\x06source\x124\n" +
 	"\trecipient\x18\x04 \x01(\v2\x16.common.v1.ContactLinkR\trecipient\x12\x12\n" +
 	"\x04type\x18\x06 \x01(\tR\x04type\x12\x1a\n" +
-	"\btemplate\x18\a \x01(\tR\btemplate\x12D\n" +
-	"\apayload\x18\b \x03(\v2*.notification.v1.Notification.PayloadEntryR\apayload\x12\x12\n" +
+	"\btemplate\x18\a \x01(\tR\btemplate\x121\n" +
+	"\apayload\x18\b \x01(\v2\x17.google.protobuf.StructR\apayload\x12\x12\n" +
 	"\x04data\x18\t \x01(\tR\x04data\x12\x1a\n" +
 	"\blanguage\x18\n" +
 	" \x01(\tR\blanguage\x12\x1b\n" +
 	"\tout_bound\x18\v \x01(\bR\boutBound\x12!\n" +
 	"\fauto_release\x18\f \x01(\bR\vautoRelease\x129\n" +
 	"\broute_id\x18\r \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\arouteId\x129\n" +
-	"\x06status\x18\x0e \x01(\v2\x19.common.v1.StatusResponseB\x06\xbaH\x03\xd8\x01\x03R\x06status\x12A\n" +
-	"\x06extras\x18\x0f \x03(\v2).notification.v1.Notification.ExtrasEntryR\x06extras\x125\n" +
-	"\bpriority\x18\x10 \x01(\x0e2\x19.notification.v1.PRIORITYR\bpriority\x1a:\n" +
-	"\fPayloadEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
+	"\x06status\x18\x0e \x01(\v2\x19.common.v1.StatusResponseB\x06\xbaH\x03\xd8\x01\x03R\x06status\x12/\n" +
+	"\x06extras\x18\x0f \x01(\v2\x17.google.protobuf.StructR\x06extras\x125\n" +
+	"\bpriority\x18\x10 \x01(\x0e2\x19.notification.v1.PRIORITYR\bpriority\"C\n" +
 	"\x0eSearchResponse\x121\n" +
 	"\x04data\x18\x01 \x03(\v2\x1d.notification.v1.NotificationR\x04data\"@\n" +
 	"\vSendRequest\x121\n" +
@@ -1062,19 +1049,12 @@ const file_notification_v1_notification_proto_rawDesc = "" +
 	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x14\n" +
 	"\x05count\x18\x04 \x01(\x05R\x05count\"G\n" +
 	"\x16TemplateSearchResponse\x12-\n" +
-	"\x04data\x18\x01 \x03(\v2\x19.notification.v1.TemplateR\x04data\"\xcc\x02\n" +
+	"\x04data\x18\x01 \x03(\v2\x19.notification.v1.TemplateR\x04data\"\xaa\x01\n" +
 	"\x13TemplateSaveRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12#\n" +
-	"\rlanguage_code\x18\x02 \x01(\tR\flanguageCode\x12B\n" +
-	"\x04data\x18\x03 \x03(\v2..notification.v1.TemplateSaveRequest.DataEntryR\x04data\x12E\n" +
-	"\x05extra\x18\x04 \x03(\v2/.notification.v1.TemplateSaveRequest.ExtraEntryR\x05extra\x1a7\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a8\n" +
-	"\n" +
-	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"E\n" +
+	"\rlanguage_code\x18\x02 \x01(\tR\flanguageCode\x12+\n" +
+	"\x04data\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x04data\x12-\n" +
+	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\"E\n" +
 	"\x14TemplateSaveResponse\x12-\n" +
 	"\x04data\x18\x01 \x01(\v2\x19.notification.v1.TemplateR\x04data*+\n" +
 	"\bPRIORITY\x12\b\n" +
@@ -1113,7 +1093,7 @@ func file_notification_v1_notification_proto_rawDescGZIP() []byte {
 }
 
 var file_notification_v1_notification_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_notification_v1_notification_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_notification_v1_notification_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_notification_v1_notification_proto_goTypes = []any{
 	(PRIORITY)(0),                   // 0: notification.v1.PRIORITY
 	(*Language)(nil),                // 1: notification.v1.Language
@@ -1131,54 +1111,49 @@ var file_notification_v1_notification_proto_goTypes = []any{
 	(*TemplateSearchResponse)(nil),  // 13: notification.v1.TemplateSearchResponse
 	(*TemplateSaveRequest)(nil),     // 14: notification.v1.TemplateSaveRequest
 	(*TemplateSaveResponse)(nil),    // 15: notification.v1.TemplateSaveResponse
-	nil,                             // 16: notification.v1.Language.ExtraEntry
-	nil,                             // 17: notification.v1.Template.ExtraEntry
-	nil,                             // 18: notification.v1.Notification.PayloadEntry
-	nil,                             // 19: notification.v1.Notification.ExtrasEntry
-	nil,                             // 20: notification.v1.TemplateSaveRequest.DataEntry
-	nil,                             // 21: notification.v1.TemplateSaveRequest.ExtraEntry
-	(*v1.ContactLink)(nil),          // 22: common.v1.ContactLink
-	(*v1.StatusResponse)(nil),       // 23: common.v1.StatusResponse
-	(*v1.SearchRequest)(nil),        // 24: common.v1.SearchRequest
-	(*v1.StatusRequest)(nil),        // 25: common.v1.StatusRequest
-	(*v1.StatusUpdateRequest)(nil),  // 26: common.v1.StatusUpdateRequest
-	(*v1.StatusUpdateResponse)(nil), // 27: common.v1.StatusUpdateResponse
+	(*structpb.Struct)(nil),         // 16: google.protobuf.Struct
+	(*v1.ContactLink)(nil),          // 17: common.v1.ContactLink
+	(*v1.StatusResponse)(nil),       // 18: common.v1.StatusResponse
+	(*v1.SearchRequest)(nil),        // 19: common.v1.SearchRequest
+	(*v1.StatusRequest)(nil),        // 20: common.v1.StatusRequest
+	(*v1.StatusUpdateRequest)(nil),  // 21: common.v1.StatusUpdateRequest
+	(*v1.StatusUpdateResponse)(nil), // 22: common.v1.StatusUpdateResponse
 }
 var file_notification_v1_notification_proto_depIdxs = []int32{
-	16, // 0: notification.v1.Language.extra:type_name -> notification.v1.Language.ExtraEntry
+	16, // 0: notification.v1.Language.extra:type_name -> google.protobuf.Struct
 	1,  // 1: notification.v1.TemplateData.language:type_name -> notification.v1.Language
 	2,  // 2: notification.v1.Template.data:type_name -> notification.v1.TemplateData
-	17, // 3: notification.v1.Template.extra:type_name -> notification.v1.Template.ExtraEntry
-	22, // 4: notification.v1.Notification.source:type_name -> common.v1.ContactLink
-	22, // 5: notification.v1.Notification.recipient:type_name -> common.v1.ContactLink
-	18, // 6: notification.v1.Notification.payload:type_name -> notification.v1.Notification.PayloadEntry
-	23, // 7: notification.v1.Notification.status:type_name -> common.v1.StatusResponse
-	19, // 8: notification.v1.Notification.extras:type_name -> notification.v1.Notification.ExtrasEntry
+	16, // 3: notification.v1.Template.extra:type_name -> google.protobuf.Struct
+	17, // 4: notification.v1.Notification.source:type_name -> common.v1.ContactLink
+	17, // 5: notification.v1.Notification.recipient:type_name -> common.v1.ContactLink
+	16, // 6: notification.v1.Notification.payload:type_name -> google.protobuf.Struct
+	18, // 7: notification.v1.Notification.status:type_name -> common.v1.StatusResponse
+	16, // 8: notification.v1.Notification.extras:type_name -> google.protobuf.Struct
 	0,  // 9: notification.v1.Notification.priority:type_name -> notification.v1.PRIORITY
 	4,  // 10: notification.v1.SearchResponse.data:type_name -> notification.v1.Notification
 	4,  // 11: notification.v1.SendRequest.data:type_name -> notification.v1.Notification
-	23, // 12: notification.v1.SendResponse.data:type_name -> common.v1.StatusResponse
-	23, // 13: notification.v1.ReleaseResponse.data:type_name -> common.v1.StatusResponse
+	18, // 12: notification.v1.SendResponse.data:type_name -> common.v1.StatusResponse
+	18, // 13: notification.v1.ReleaseResponse.data:type_name -> common.v1.StatusResponse
 	4,  // 14: notification.v1.ReceiveRequest.data:type_name -> notification.v1.Notification
-	23, // 15: notification.v1.ReceiveResponse.data:type_name -> common.v1.StatusResponse
+	18, // 15: notification.v1.ReceiveResponse.data:type_name -> common.v1.StatusResponse
 	3,  // 16: notification.v1.TemplateSearchResponse.data:type_name -> notification.v1.Template
-	20, // 17: notification.v1.TemplateSaveRequest.data:type_name -> notification.v1.TemplateSaveRequest.DataEntry
-	21, // 18: notification.v1.TemplateSaveRequest.extra:type_name -> notification.v1.TemplateSaveRequest.ExtraEntry
+	16, // 17: notification.v1.TemplateSaveRequest.data:type_name -> google.protobuf.Struct
+	16, // 18: notification.v1.TemplateSaveRequest.extra:type_name -> google.protobuf.Struct
 	3,  // 19: notification.v1.TemplateSaveResponse.data:type_name -> notification.v1.Template
 	6,  // 20: notification.v1.NotificationService.Send:input_type -> notification.v1.SendRequest
 	8,  // 21: notification.v1.NotificationService.Release:input_type -> notification.v1.ReleaseRequest
 	10, // 22: notification.v1.NotificationService.Receive:input_type -> notification.v1.ReceiveRequest
-	24, // 23: notification.v1.NotificationService.Search:input_type -> common.v1.SearchRequest
-	25, // 24: notification.v1.NotificationService.Status:input_type -> common.v1.StatusRequest
-	26, // 25: notification.v1.NotificationService.StatusUpdate:input_type -> common.v1.StatusUpdateRequest
+	19, // 23: notification.v1.NotificationService.Search:input_type -> common.v1.SearchRequest
+	20, // 24: notification.v1.NotificationService.Status:input_type -> common.v1.StatusRequest
+	21, // 25: notification.v1.NotificationService.StatusUpdate:input_type -> common.v1.StatusUpdateRequest
 	12, // 26: notification.v1.NotificationService.TemplateSearch:input_type -> notification.v1.TemplateSearchRequest
 	14, // 27: notification.v1.NotificationService.TemplateSave:input_type -> notification.v1.TemplateSaveRequest
 	7,  // 28: notification.v1.NotificationService.Send:output_type -> notification.v1.SendResponse
 	9,  // 29: notification.v1.NotificationService.Release:output_type -> notification.v1.ReleaseResponse
 	11, // 30: notification.v1.NotificationService.Receive:output_type -> notification.v1.ReceiveResponse
 	5,  // 31: notification.v1.NotificationService.Search:output_type -> notification.v1.SearchResponse
-	23, // 32: notification.v1.NotificationService.Status:output_type -> common.v1.StatusResponse
-	27, // 33: notification.v1.NotificationService.StatusUpdate:output_type -> common.v1.StatusUpdateResponse
+	18, // 32: notification.v1.NotificationService.Status:output_type -> common.v1.StatusResponse
+	22, // 33: notification.v1.NotificationService.StatusUpdate:output_type -> common.v1.StatusUpdateResponse
 	13, // 34: notification.v1.NotificationService.TemplateSearch:output_type -> notification.v1.TemplateSearchResponse
 	15, // 35: notification.v1.NotificationService.TemplateSave:output_type -> notification.v1.TemplateSaveResponse
 	28, // [28:36] is the sub-list for method output_type
@@ -1199,7 +1174,7 @@ func file_notification_v1_notification_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_notification_v1_notification_proto_rawDesc), len(file_notification_v1_notification_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   21,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

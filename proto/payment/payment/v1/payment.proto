@@ -19,6 +19,7 @@ package payment.v1;
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
 import "google/type/money.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -73,7 +74,7 @@ message Payment {
   string date_created = 13;
   string date_processed = 14;
   bool outbound = 15;
-  map<string, string> extra = 16;
+  google.protobuf.Struct extra = 16;
 }
 
 message ReconcileRequest {
@@ -134,7 +135,7 @@ message InitiatePromptRequest {
   // Merchant information for the payment
   Account recipient_account = 10;
   // Any additional metadata (e.g., notes, tags, correlation keys)
-  map<string, string> extra = 11;
+  google.protobuf.Struct extra = 11;
 }
 
 message InitiatePromptResponse {

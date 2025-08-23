@@ -61,20 +61,6 @@ private static final long serialVersionUID = 0L;
     return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_descriptor;
   }
 
-  @SuppressWarnings({"rawtypes"})
-  @java.lang.Override
-  protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-      int number) {
-    switch (number) {
-      case 11:
-        return internalGetLocation();
-      case 15:
-        return internalGetProperties();
-      default:
-        throw new RuntimeException(
-            "Invalid map field number: " + number);
-    }
-  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
@@ -423,161 +409,55 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int LOCATION_FIELD_NUMBER = 11;
-  private static final class LocationDefaultEntryHolder {
-    static final com.google.protobuf.MapEntry<
-        java.lang.String, java.lang.String> defaultEntry =
-            com.google.protobuf.MapEntry
-            .<java.lang.String, java.lang.String>newDefaultInstance(
-                com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_LocationEntry_descriptor, 
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "",
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "");
-  }
-  @SuppressWarnings("serial")
-  private com.google.protobuf.MapField<
-      java.lang.String, java.lang.String> location_;
-  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-  internalGetLocation() {
-    if (location_ == null) {
-      return com.google.protobuf.MapField.emptyMapField(
-          LocationDefaultEntryHolder.defaultEntry);
-    }
-    return location_;
-  }
-  public int getLocationCount() {
-    return internalGetLocation().getMap().size();
-  }
+  private com.google.protobuf.Struct location_;
   /**
-   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
+   * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
+   * @return Whether the location field is set.
    */
   @java.lang.Override
-  public boolean containsLocation(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    return internalGetLocation().getMap().containsKey(key);
+  public boolean hasLocation() {
+    return ((bitField0_ & 0x00000002) != 0);
   }
   /**
-   * Use {@link #getLocationMap()} instead.
+   * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
+   * @return The location.
    */
   @java.lang.Override
-  @java.lang.Deprecated
-  public java.util.Map<java.lang.String, java.lang.String> getLocation() {
-    return getLocationMap();
+  public com.google.protobuf.Struct getLocation() {
+    return location_ == null ? com.google.protobuf.Struct.getDefaultInstance() : location_;
   }
   /**
-   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
+   * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
    */
   @java.lang.Override
-  public java.util.Map<java.lang.String, java.lang.String> getLocationMap() {
-    return internalGetLocation().getMap();
-  }
-  /**
-   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
-   */
-  @java.lang.Override
-  public /* nullable */
-java.lang.String getLocationOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetLocation().getMap();
-    return map.containsKey(key) ? map.get(key) : defaultValue;
-  }
-  /**
-   * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
-   */
-  @java.lang.Override
-  public java.lang.String getLocationOrThrow(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetLocation().getMap();
-    if (!map.containsKey(key)) {
-      throw new java.lang.IllegalArgumentException();
-    }
-    return map.get(key);
+  public com.google.protobuf.StructOrBuilder getLocationOrBuilder() {
+    return location_ == null ? com.google.protobuf.Struct.getDefaultInstance() : location_;
   }
 
   public static final int PROPERTIES_FIELD_NUMBER = 15;
-  private static final class PropertiesDefaultEntryHolder {
-    static final com.google.protobuf.MapEntry<
-        java.lang.String, java.lang.String> defaultEntry =
-            com.google.protobuf.MapEntry
-            .<java.lang.String, java.lang.String>newDefaultInstance(
-                com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_PropertiesEntry_descriptor, 
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "",
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "");
-  }
-  @SuppressWarnings("serial")
-  private com.google.protobuf.MapField<
-      java.lang.String, java.lang.String> properties_;
-  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-  internalGetProperties() {
-    if (properties_ == null) {
-      return com.google.protobuf.MapField.emptyMapField(
-          PropertiesDefaultEntryHolder.defaultEntry);
-    }
-    return properties_;
-  }
-  public int getPropertiesCount() {
-    return internalGetProperties().getMap().size();
-  }
+  private com.google.protobuf.Struct properties_;
   /**
-   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
+   * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
+   * @return Whether the properties field is set.
    */
   @java.lang.Override
-  public boolean containsProperties(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    return internalGetProperties().getMap().containsKey(key);
+  public boolean hasProperties() {
+    return ((bitField0_ & 0x00000004) != 0);
   }
   /**
-   * Use {@link #getPropertiesMap()} instead.
+   * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
+   * @return The properties.
    */
   @java.lang.Override
-  @java.lang.Deprecated
-  public java.util.Map<java.lang.String, java.lang.String> getProperties() {
-    return getPropertiesMap();
+  public com.google.protobuf.Struct getProperties() {
+    return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
   }
   /**
-   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
+   * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
    */
   @java.lang.Override
-  public java.util.Map<java.lang.String, java.lang.String> getPropertiesMap() {
-    return internalGetProperties().getMap();
-  }
-  /**
-   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
-   */
-  @java.lang.Override
-  public /* nullable */
-java.lang.String getPropertiesOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetProperties().getMap();
-    return map.containsKey(key) ? map.get(key) : defaultValue;
-  }
-  /**
-   * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
-   */
-  @java.lang.Override
-  public java.lang.String getPropertiesOrThrow(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetProperties().getMap();
-    if (!map.containsKey(key)) {
-      throw new java.lang.IllegalArgumentException();
-    }
-    return map.get(key);
+  public com.google.protobuf.StructOrBuilder getPropertiesOrBuilder() {
+    return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -621,18 +501,12 @@ java.lang.String defaultValue) {
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeMessage(9, getLocale());
     }
-    com.google.protobuf.GeneratedMessage
-      .serializeStringMapTo(
-        output,
-        internalGetLocation(),
-        LocationDefaultEntryHolder.defaultEntry,
-        11);
-    com.google.protobuf.GeneratedMessage
-      .serializeStringMapTo(
-        output,
-        internalGetProperties(),
-        PropertiesDefaultEntryHolder.defaultEntry,
-        15);
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(11, getLocation());
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      output.writeMessage(15, getProperties());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -670,25 +544,13 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(9, getLocale());
     }
-    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-         : internalGetLocation().getMap().entrySet()) {
-      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-      location__ = LocationDefaultEntryHolder.defaultEntry.newBuilderForType()
-          .setKey(entry.getKey())
-          .setValue(entry.getValue())
-          .build();
+    if (((bitField0_ & 0x00000002) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(11, location__);
+        .computeMessageSize(11, getLocation());
     }
-    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-         : internalGetProperties().getMap().entrySet()) {
-      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-      properties__ = PropertiesDefaultEntryHolder.defaultEntry.newBuilderForType()
-          .setKey(entry.getKey())
-          .setValue(entry.getValue())
-          .build();
+    if (((bitField0_ & 0x00000004) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(15, properties__);
+        .computeMessageSize(15, getProperties());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -726,10 +588,16 @@ java.lang.String defaultValue) {
       if (!getLocale()
           .equals(other.getLocale())) return false;
     }
-    if (!internalGetLocation().equals(
-        other.internalGetLocation())) return false;
-    if (!internalGetProperties().equals(
-        other.internalGetProperties())) return false;
+    if (hasLocation() != other.hasLocation()) return false;
+    if (hasLocation()) {
+      if (!getLocation()
+          .equals(other.getLocation())) return false;
+    }
+    if (hasProperties() != other.hasProperties()) return false;
+    if (hasProperties()) {
+      if (!getProperties()
+          .equals(other.getProperties())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -761,13 +629,13 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + LOCALE_FIELD_NUMBER;
       hash = (53 * hash) + getLocale().hashCode();
     }
-    if (!internalGetLocation().getMap().isEmpty()) {
+    if (hasLocation()) {
       hash = (37 * hash) + LOCATION_FIELD_NUMBER;
-      hash = (53 * hash) + internalGetLocation().hashCode();
+      hash = (53 * hash) + getLocation().hashCode();
     }
-    if (!internalGetProperties().getMap().isEmpty()) {
+    if (hasProperties()) {
       hash = (37 * hash) + PROPERTIES_FIELD_NUMBER;
-      hash = (53 * hash) + internalGetProperties().hashCode();
+      hash = (53 * hash) + getProperties().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -882,32 +750,6 @@ java.lang.String defaultValue) {
       return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeviceObject_descriptor;
     }
 
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 11:
-          return internalGetLocation();
-        case 15:
-          return internalGetProperties();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 11:
-          return internalGetMutableLocation();
-        case 15:
-          return internalGetMutableProperties();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -930,6 +772,8 @@ java.lang.String defaultValue) {
       if (com.google.protobuf.GeneratedMessage
               .alwaysUseFieldBuilders) {
         internalGetLocaleFieldBuilder();
+        internalGetLocationFieldBuilder();
+        internalGetPropertiesFieldBuilder();
       }
     }
     @java.lang.Override
@@ -949,8 +793,16 @@ java.lang.String defaultValue) {
         localeBuilder_.dispose();
         localeBuilder_ = null;
       }
-      internalGetMutableLocation().clear();
-      internalGetMutableProperties().clear();
+      location_ = null;
+      if (locationBuilder_ != null) {
+        locationBuilder_.dispose();
+        locationBuilder_ = null;
+      }
+      properties_ = null;
+      if (propertiesBuilder_ != null) {
+        propertiesBuilder_.dispose();
+        propertiesBuilder_ = null;
+      }
       return this;
     }
 
@@ -1016,12 +868,16 @@ java.lang.String defaultValue) {
         to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00000200) != 0)) {
-        result.location_ = internalGetLocation();
-        result.location_.makeImmutable();
+        result.location_ = locationBuilder_ == null
+            ? location_
+            : locationBuilder_.build();
+        to_bitField0_ |= 0x00000002;
       }
       if (((from_bitField0_ & 0x00000400) != 0)) {
-        result.properties_ = internalGetProperties();
-        result.properties_.makeImmutable();
+        result.properties_ = propertiesBuilder_ == null
+            ? properties_
+            : propertiesBuilder_.build();
+        to_bitField0_ |= 0x00000004;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -1081,12 +937,12 @@ java.lang.String defaultValue) {
       if (other.hasLocale()) {
         mergeLocale(other.getLocale());
       }
-      internalGetMutableLocation().mergeFrom(
-          other.internalGetLocation());
-      bitField0_ |= 0x00000200;
-      internalGetMutableProperties().mergeFrom(
-          other.internalGetProperties());
-      bitField0_ |= 0x00000400;
+      if (other.hasLocation()) {
+        mergeLocation(other.getLocation());
+      }
+      if (other.hasProperties()) {
+        mergeProperties(other.getProperties());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1161,20 +1017,16 @@ java.lang.String defaultValue) {
               break;
             } // case 74
             case 90: {
-              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              location__ = input.readMessage(
-                  LocationDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              internalGetMutableLocation().getMutableMap().put(
-                  location__.getKey(), location__.getValue());
+              input.readMessage(
+                  internalGetLocationFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000200;
               break;
             } // case 90
             case 122: {
-              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              properties__ = input.readMessage(
-                  PropertiesDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              internalGetMutableProperties().getMutableMap().put(
-                  properties__.getKey(), properties__.getValue());
+              input.readMessage(
+                  internalGetPropertiesFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000400;
               break;
             } // case 122
@@ -1892,258 +1744,246 @@ java.lang.String defaultValue) {
       return localeBuilder_;
     }
 
-    private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> location_;
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetLocation() {
-      if (location_ == null) {
-        return com.google.protobuf.MapField.emptyMapField(
-            LocationDefaultEntryHolder.defaultEntry);
-      }
-      return location_;
+    private com.google.protobuf.Struct location_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> locationBuilder_;
+    /**
+     * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
+     * @return Whether the location field is set.
+     */
+    public boolean hasLocation() {
+      return ((bitField0_ & 0x00000200) != 0);
     }
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetMutableLocation() {
-      if (location_ == null) {
-        location_ = com.google.protobuf.MapField.newMapField(
-            LocationDefaultEntryHolder.defaultEntry);
+    /**
+     * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
+     * @return The location.
+     */
+    public com.google.protobuf.Struct getLocation() {
+      if (locationBuilder_ == null) {
+        return location_ == null ? com.google.protobuf.Struct.getDefaultInstance() : location_;
+      } else {
+        return locationBuilder_.getMessage();
       }
-      if (!location_.isMutable()) {
-        location_ = location_.copy();
+    }
+    /**
+     * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
+     */
+    public Builder setLocation(com.google.protobuf.Struct value) {
+      if (locationBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        location_ = value;
+      } else {
+        locationBuilder_.setMessage(value);
       }
       bitField0_ |= 0x00000200;
       onChanged();
-      return location_;
-    }
-    public int getLocationCount() {
-      return internalGetLocation().getMap().size();
+      return this;
     }
     /**
-     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
+     * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
      */
-    @java.lang.Override
-    public boolean containsLocation(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      return internalGetLocation().getMap().containsKey(key);
-    }
-    /**
-     * Use {@link #getLocationMap()} instead.
-     */
-    @java.lang.Override
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getLocation() {
-      return getLocationMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
-     */
-    @java.lang.Override
-    public java.util.Map<java.lang.String, java.lang.String> getLocationMap() {
-      return internalGetLocation().getMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
-     */
-    @java.lang.Override
-    public /* nullable */
-java.lang.String getLocationOrDefault(
-        java.lang.String key,
-        /* nullable */
-java.lang.String defaultValue) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetLocation().getMap();
-      return map.containsKey(key) ? map.get(key) : defaultValue;
-    }
-    /**
-     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
-     */
-    @java.lang.Override
-    public java.lang.String getLocationOrThrow(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetLocation().getMap();
-      if (!map.containsKey(key)) {
-        throw new java.lang.IllegalArgumentException();
+    public Builder setLocation(
+        com.google.protobuf.Struct.Builder builderForValue) {
+      if (locationBuilder_ == null) {
+        location_ = builderForValue.build();
+      } else {
+        locationBuilder_.setMessage(builderForValue.build());
       }
-      return map.get(key);
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
     }
+    /**
+     * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
+     */
+    public Builder mergeLocation(com.google.protobuf.Struct value) {
+      if (locationBuilder_ == null) {
+        if (((bitField0_ & 0x00000200) != 0) &&
+          location_ != null &&
+          location_ != com.google.protobuf.Struct.getDefaultInstance()) {
+          getLocationBuilder().mergeFrom(value);
+        } else {
+          location_ = value;
+        }
+      } else {
+        locationBuilder_.mergeFrom(value);
+      }
+      if (location_ != null) {
+        bitField0_ |= 0x00000200;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
+     */
     public Builder clearLocation() {
       bitField0_ = (bitField0_ & ~0x00000200);
-      internalGetMutableLocation().getMutableMap()
-          .clear();
+      location_ = null;
+      if (locationBuilder_ != null) {
+        locationBuilder_.dispose();
+        locationBuilder_ = null;
+      }
+      onChanged();
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
+     * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
      */
-    public Builder removeLocation(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      internalGetMutableLocation().getMutableMap()
-          .remove(key);
-      return this;
-    }
-    /**
-     * Use alternate mutation accessors instead.
-     */
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String>
-        getMutableLocation() {
+    public com.google.protobuf.Struct.Builder getLocationBuilder() {
       bitField0_ |= 0x00000200;
-      return internalGetMutableLocation().getMutableMap();
+      onChanged();
+      return internalGetLocationFieldBuilder().getBuilder();
     }
     /**
-     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
+     * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
      */
-    public Builder putLocation(
-        java.lang.String key,
-        java.lang.String value) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      if (value == null) { throw new NullPointerException("map value"); }
-      internalGetMutableLocation().getMutableMap()
-          .put(key, value);
-      bitField0_ |= 0x00000200;
-      return this;
+    public com.google.protobuf.StructOrBuilder getLocationOrBuilder() {
+      if (locationBuilder_ != null) {
+        return locationBuilder_.getMessageOrBuilder();
+      } else {
+        return location_ == null ?
+            com.google.protobuf.Struct.getDefaultInstance() : location_;
+      }
     }
     /**
-     * <code>map&lt;string, string&gt; location = 11 [json_name = "location"];</code>
+     * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
      */
-    public Builder putAllLocation(
-        java.util.Map<java.lang.String, java.lang.String> values) {
-      internalGetMutableLocation().getMutableMap()
-          .putAll(values);
-      bitField0_ |= 0x00000200;
-      return this;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
+        internalGetLocationFieldBuilder() {
+      if (locationBuilder_ == null) {
+        locationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder>(
+                getLocation(),
+                getParentForChildren(),
+                isClean());
+        location_ = null;
+      }
+      return locationBuilder_;
     }
 
-    private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> properties_;
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetProperties() {
-      if (properties_ == null) {
-        return com.google.protobuf.MapField.emptyMapField(
-            PropertiesDefaultEntryHolder.defaultEntry);
-      }
-      return properties_;
+    private com.google.protobuf.Struct properties_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> propertiesBuilder_;
+    /**
+     * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
+     * @return Whether the properties field is set.
+     */
+    public boolean hasProperties() {
+      return ((bitField0_ & 0x00000400) != 0);
     }
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetMutableProperties() {
-      if (properties_ == null) {
-        properties_ = com.google.protobuf.MapField.newMapField(
-            PropertiesDefaultEntryHolder.defaultEntry);
+    /**
+     * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
+     * @return The properties.
+     */
+    public com.google.protobuf.Struct getProperties() {
+      if (propertiesBuilder_ == null) {
+        return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
+      } else {
+        return propertiesBuilder_.getMessage();
       }
-      if (!properties_.isMutable()) {
-        properties_ = properties_.copy();
+    }
+    /**
+     * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
+     */
+    public Builder setProperties(com.google.protobuf.Struct value) {
+      if (propertiesBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        properties_ = value;
+      } else {
+        propertiesBuilder_.setMessage(value);
       }
       bitField0_ |= 0x00000400;
       onChanged();
-      return properties_;
-    }
-    public int getPropertiesCount() {
-      return internalGetProperties().getMap().size();
+      return this;
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
+     * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
      */
-    @java.lang.Override
-    public boolean containsProperties(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      return internalGetProperties().getMap().containsKey(key);
-    }
-    /**
-     * Use {@link #getPropertiesMap()} instead.
-     */
-    @java.lang.Override
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getProperties() {
-      return getPropertiesMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
-     */
-    @java.lang.Override
-    public java.util.Map<java.lang.String, java.lang.String> getPropertiesMap() {
-      return internalGetProperties().getMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
-     */
-    @java.lang.Override
-    public /* nullable */
-java.lang.String getPropertiesOrDefault(
-        java.lang.String key,
-        /* nullable */
-java.lang.String defaultValue) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetProperties().getMap();
-      return map.containsKey(key) ? map.get(key) : defaultValue;
-    }
-    /**
-     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
-     */
-    @java.lang.Override
-    public java.lang.String getPropertiesOrThrow(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetProperties().getMap();
-      if (!map.containsKey(key)) {
-        throw new java.lang.IllegalArgumentException();
+    public Builder setProperties(
+        com.google.protobuf.Struct.Builder builderForValue) {
+      if (propertiesBuilder_ == null) {
+        properties_ = builderForValue.build();
+      } else {
+        propertiesBuilder_.setMessage(builderForValue.build());
       }
-      return map.get(key);
+      bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
     }
+    /**
+     * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
+     */
+    public Builder mergeProperties(com.google.protobuf.Struct value) {
+      if (propertiesBuilder_ == null) {
+        if (((bitField0_ & 0x00000400) != 0) &&
+          properties_ != null &&
+          properties_ != com.google.protobuf.Struct.getDefaultInstance()) {
+          getPropertiesBuilder().mergeFrom(value);
+        } else {
+          properties_ = value;
+        }
+      } else {
+        propertiesBuilder_.mergeFrom(value);
+      }
+      if (properties_ != null) {
+        bitField0_ |= 0x00000400;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
+     */
     public Builder clearProperties() {
       bitField0_ = (bitField0_ & ~0x00000400);
-      internalGetMutableProperties().getMutableMap()
-          .clear();
+      properties_ = null;
+      if (propertiesBuilder_ != null) {
+        propertiesBuilder_.dispose();
+        propertiesBuilder_ = null;
+      }
+      onChanged();
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
+     * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
      */
-    public Builder removeProperties(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      internalGetMutableProperties().getMutableMap()
-          .remove(key);
-      return this;
-    }
-    /**
-     * Use alternate mutation accessors instead.
-     */
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String>
-        getMutableProperties() {
+    public com.google.protobuf.Struct.Builder getPropertiesBuilder() {
       bitField0_ |= 0x00000400;
-      return internalGetMutableProperties().getMutableMap();
+      onChanged();
+      return internalGetPropertiesFieldBuilder().getBuilder();
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
+     * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
      */
-    public Builder putProperties(
-        java.lang.String key,
-        java.lang.String value) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      if (value == null) { throw new NullPointerException("map value"); }
-      internalGetMutableProperties().getMutableMap()
-          .put(key, value);
-      bitField0_ |= 0x00000400;
-      return this;
+    public com.google.protobuf.StructOrBuilder getPropertiesOrBuilder() {
+      if (propertiesBuilder_ != null) {
+        return propertiesBuilder_.getMessageOrBuilder();
+      } else {
+        return properties_ == null ?
+            com.google.protobuf.Struct.getDefaultInstance() : properties_;
+      }
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 15 [json_name = "properties"];</code>
+     * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
      */
-    public Builder putAllProperties(
-        java.util.Map<java.lang.String, java.lang.String> values) {
-      internalGetMutableProperties().getMutableMap()
-          .putAll(values);
-      bitField0_ |= 0x00000400;
-      return this;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
+        internalGetPropertiesFieldBuilder() {
+      if (propertiesBuilder_ == null) {
+        propertiesBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder>(
+                getProperties(),
+                getParentForChildren(),
+                isClean());
+        properties_ = null;
+      }
+      return propertiesBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:device.v1.DeviceObject)

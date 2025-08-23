@@ -133,36 +133,17 @@ public interface PropertyOrBuilder extends
   com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();
 
   /**
-   * <code>map&lt;string, string&gt; extra = 9 [json_name = "extra", (.buf.validate.field) = { ... }</code>
+   * <code>.google.protobuf.Struct extra = 9 [json_name = "extra", (.buf.validate.field) = { ... }</code>
+   * @return Whether the extra field is set.
    */
-  int getExtraCount();
+  boolean hasExtra();
   /**
-   * <code>map&lt;string, string&gt; extra = 9 [json_name = "extra", (.buf.validate.field) = { ... }</code>
+   * <code>.google.protobuf.Struct extra = 9 [json_name = "extra", (.buf.validate.field) = { ... }</code>
+   * @return The extra.
    */
-  boolean containsExtra(
-      java.lang.String key);
+  com.google.protobuf.Struct getExtra();
   /**
-   * Use {@link #getExtraMap()} instead.
+   * <code>.google.protobuf.Struct extra = 9 [json_name = "extra", (.buf.validate.field) = { ... }</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtra();
-  /**
-   * <code>map&lt;string, string&gt; extra = 9 [json_name = "extra", (.buf.validate.field) = { ... }</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtraMap();
-  /**
-   * <code>map&lt;string, string&gt; extra = 9 [json_name = "extra", (.buf.validate.field) = { ... }</code>
-   */
-  /* nullable */
-java.lang.String getExtraOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; extra = 9 [json_name = "extra", (.buf.validate.field) = { ... }</code>
-   */
-  java.lang.String getExtraOrThrow(
-      java.lang.String key);
+  com.google.protobuf.StructOrBuilder getExtraOrBuilder();
 }

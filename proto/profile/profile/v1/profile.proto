@@ -19,6 +19,7 @@ package profile.v1;
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/profile/v1;profilev1";
@@ -84,7 +85,7 @@ message ContactObject {
   bool verified = 4;
   CommunicationLevel communication_level = 5;
   common.v1.STATE state = 6;
-  map<string, string> extra = 7;
+  google.protobuf.Struct extra = 7;
 }
 
 message RosterObject {
@@ -99,7 +100,7 @@ message RosterObject {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   ContactObject contact = 3;
-  map<string, string> extra = 4;
+  google.protobuf.Struct extra = 4;
 }
 
 message AddressObject {
@@ -142,7 +143,7 @@ message ProfileObject {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   ProfileType type = 2;
-  map<string, string> properties = 3;
+  google.protobuf.Struct properties = 3;
   repeated ContactObject contacts = 4;
   repeated AddressObject addresses = 5;
   common.v1.STATE state = 6;
@@ -170,7 +171,7 @@ message RelationshipObject {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   RelationshipType type = 2;
-  map<string, string> properties = 3;
+  google.protobuf.Struct properties = 3;
 
   EntryItem child_entry = 4;
   EntryItem parent_entry = 5;
@@ -198,7 +199,7 @@ message SearchRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  map<string, string> extras = 7;
+  google.protobuf.Struct extras = 7;
 }
 
 message SearchResponse {
@@ -230,7 +231,7 @@ message CreateRequest {
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 255
   ];
-  map<string, string> properties = 3;
+  google.protobuf.Struct properties = 3;
 }
 
 message CreateResponse {
@@ -244,7 +245,7 @@ message UpdateRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  map<string, string> properties = 2;
+  google.protobuf.Struct properties = 2;
   common.v1.STATE state = 3;
 }
 
@@ -260,7 +261,7 @@ message AddContactRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   string contact = 2;
-  map<string, string> extras = 3;
+  google.protobuf.Struct extras = 3;
 }
 
 message AddContactResponse {
@@ -277,7 +278,7 @@ message CreateContactRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   string contact = 2;
-  map<string, string> extras = 3;
+  google.protobuf.Struct extras = 3;
 }
 
 message CreateContactResponse {
@@ -347,7 +348,7 @@ message SearchRosterRequest {
   string start_date = 4;
   string end_date = 5;
   repeated string properties = 6;
-  map<string, string> extras = 7;
+  google.protobuf.Struct extras = 7;
   string profile_id = 8 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
@@ -464,7 +465,7 @@ message AddRelationshipRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   RelationshipType type = 6;
-  map<string, string> properties = 7;
+  google.protobuf.Struct properties = 7;
 }
 
 message AddRelationshipResponse {

@@ -245,7 +245,7 @@
             "name": "extras",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "object"
           }
         ],
         "tags": [
@@ -433,6 +433,14 @@
       },
       "additionalProperties": {}
     },
+    "google.protobuf.NullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
     "google.rpc.Status": {
       "type": "object",
       "properties": {
@@ -498,10 +506,7 @@
           }
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "Request to log a Collectible card"
@@ -519,10 +524,7 @@
           }
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "state": {
           "type": "string"
@@ -603,10 +605,7 @@
           "$ref": "#/definitions/lostid.v1.ItemType"
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "state": {
           "type": "string"
@@ -637,10 +636,7 @@
           "type": "string"
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "state": {
           "type": "string"

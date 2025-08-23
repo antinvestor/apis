@@ -51,18 +51,6 @@ private static final long serialVersionUID = 0L;
     return com.antinvestor.apis.ledger.v1.LedgerProto.internal_static_ledger_v1_Account_descriptor;
   }
 
-  @SuppressWarnings({"rawtypes"})
-  @java.lang.Override
-  protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-      int number) {
-    switch (number) {
-      case 5:
-        return internalGetData();
-      default:
-        throw new RuntimeException(
-            "Invalid map field number: " + number);
-    }
-  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
@@ -177,82 +165,29 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int DATA_FIELD_NUMBER = 5;
-  private static final class DataDefaultEntryHolder {
-    static final com.google.protobuf.MapEntry<
-        java.lang.String, java.lang.String> defaultEntry =
-            com.google.protobuf.MapEntry
-            .<java.lang.String, java.lang.String>newDefaultInstance(
-                com.antinvestor.apis.ledger.v1.LedgerProto.internal_static_ledger_v1_Account_DataEntry_descriptor, 
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "",
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "");
-  }
-  @SuppressWarnings("serial")
-  private com.google.protobuf.MapField<
-      java.lang.String, java.lang.String> data_;
-  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-  internalGetData() {
-    if (data_ == null) {
-      return com.google.protobuf.MapField.emptyMapField(
-          DataDefaultEntryHolder.defaultEntry);
-    }
-    return data_;
-  }
-  public int getDataCount() {
-    return internalGetData().getMap().size();
-  }
+  private com.google.protobuf.Struct data_;
   /**
-   * <code>map&lt;string, string&gt; data = 5 [json_name = "data"];</code>
+   * <code>.google.protobuf.Struct data = 5 [json_name = "data"];</code>
+   * @return Whether the data field is set.
    */
   @java.lang.Override
-  public boolean containsData(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    return internalGetData().getMap().containsKey(key);
+  public boolean hasData() {
+    return ((bitField0_ & 0x00000002) != 0);
   }
   /**
-   * Use {@link #getDataMap()} instead.
+   * <code>.google.protobuf.Struct data = 5 [json_name = "data"];</code>
+   * @return The data.
    */
   @java.lang.Override
-  @java.lang.Deprecated
-  public java.util.Map<java.lang.String, java.lang.String> getData() {
-    return getDataMap();
+  public com.google.protobuf.Struct getData() {
+    return data_ == null ? com.google.protobuf.Struct.getDefaultInstance() : data_;
   }
   /**
-   * <code>map&lt;string, string&gt; data = 5 [json_name = "data"];</code>
+   * <code>.google.protobuf.Struct data = 5 [json_name = "data"];</code>
    */
   @java.lang.Override
-  public java.util.Map<java.lang.String, java.lang.String> getDataMap() {
-    return internalGetData().getMap();
-  }
-  /**
-   * <code>map&lt;string, string&gt; data = 5 [json_name = "data"];</code>
-   */
-  @java.lang.Override
-  public /* nullable */
-java.lang.String getDataOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetData().getMap();
-    return map.containsKey(key) ? map.get(key) : defaultValue;
-  }
-  /**
-   * <code>map&lt;string, string&gt; data = 5 [json_name = "data"];</code>
-   */
-  @java.lang.Override
-  public java.lang.String getDataOrThrow(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetData().getMap();
-    if (!map.containsKey(key)) {
-      throw new java.lang.IllegalArgumentException();
-    }
-    return map.get(key);
+  public com.google.protobuf.StructOrBuilder getDataOrBuilder() {
+    return data_ == null ? com.google.protobuf.Struct.getDefaultInstance() : data_;
   }
 
   public static final int UNCLEARED_BALANCE_FIELD_NUMBER = 6;
@@ -263,7 +198,7 @@ java.lang.String defaultValue) {
    */
   @java.lang.Override
   public boolean hasUnclearedBalance() {
-    return ((bitField0_ & 0x00000002) != 0);
+    return ((bitField0_ & 0x00000004) != 0);
   }
   /**
    * <code>.google.type.Money uncleared_balance = 6 [json_name = "unclearedBalance"];</code>
@@ -289,7 +224,7 @@ java.lang.String defaultValue) {
    */
   @java.lang.Override
   public boolean hasReservedBalance() {
-    return ((bitField0_ & 0x00000004) != 0);
+    return ((bitField0_ & 0x00000008) != 0);
   }
   /**
    * <code>.google.type.Money reserved_balance = 7 [json_name = "reservedBalance"];</code>
@@ -330,16 +265,13 @@ java.lang.String defaultValue) {
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeMessage(4, getBalance());
     }
-    com.google.protobuf.GeneratedMessage
-      .serializeStringMapTo(
-        output,
-        internalGetData(),
-        DataDefaultEntryHolder.defaultEntry,
-        5);
     if (((bitField0_ & 0x00000002) != 0)) {
-      output.writeMessage(6, getUnclearedBalance());
+      output.writeMessage(5, getData());
     }
     if (((bitField0_ & 0x00000004) != 0)) {
+      output.writeMessage(6, getUnclearedBalance());
+    }
+    if (((bitField0_ & 0x00000008) != 0)) {
       output.writeMessage(7, getReservedBalance());
     }
     getUnknownFields().writeTo(output);
@@ -361,21 +293,15 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(4, getBalance());
     }
-    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-         : internalGetData().getMap().entrySet()) {
-      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-      data__ = DataDefaultEntryHolder.defaultEntry.newBuilderForType()
-          .setKey(entry.getKey())
-          .setValue(entry.getValue())
-          .build();
-      size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, data__);
-    }
     if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(5, getData());
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(6, getUnclearedBalance());
     }
-    if (((bitField0_ & 0x00000004) != 0)) {
+    if (((bitField0_ & 0x00000008) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(7, getReservedBalance());
     }
@@ -403,8 +329,11 @@ java.lang.String defaultValue) {
       if (!getBalance()
           .equals(other.getBalance())) return false;
     }
-    if (!internalGetData().equals(
-        other.internalGetData())) return false;
+    if (hasData() != other.hasData()) return false;
+    if (hasData()) {
+      if (!getData()
+          .equals(other.getData())) return false;
+    }
     if (hasUnclearedBalance() != other.hasUnclearedBalance()) return false;
     if (hasUnclearedBalance()) {
       if (!getUnclearedBalance()
@@ -434,9 +363,9 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + BALANCE_FIELD_NUMBER;
       hash = (53 * hash) + getBalance().hashCode();
     }
-    if (!internalGetData().getMap().isEmpty()) {
+    if (hasData()) {
       hash = (37 * hash) + DATA_FIELD_NUMBER;
-      hash = (53 * hash) + internalGetData().hashCode();
+      hash = (53 * hash) + getData().hashCode();
     }
     if (hasUnclearedBalance()) {
       hash = (37 * hash) + UNCLEARED_BALANCE_FIELD_NUMBER;
@@ -555,28 +484,6 @@ java.lang.String defaultValue) {
       return com.antinvestor.apis.ledger.v1.LedgerProto.internal_static_ledger_v1_Account_descriptor;
     }
 
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 5:
-          return internalGetData();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 5:
-          return internalGetMutableData();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -599,6 +506,7 @@ java.lang.String defaultValue) {
       if (com.google.protobuf.GeneratedMessage
               .alwaysUseFieldBuilders) {
         internalGetBalanceFieldBuilder();
+        internalGetDataFieldBuilder();
         internalGetUnclearedBalanceFieldBuilder();
         internalGetReservedBalanceFieldBuilder();
       }
@@ -614,7 +522,11 @@ java.lang.String defaultValue) {
         balanceBuilder_.dispose();
         balanceBuilder_ = null;
       }
-      internalGetMutableData().clear();
+      data_ = null;
+      if (dataBuilder_ != null) {
+        dataBuilder_.dispose();
+        dataBuilder_ = null;
+      }
       unclearedBalance_ = null;
       if (unclearedBalanceBuilder_ != null) {
         unclearedBalanceBuilder_.dispose();
@@ -672,20 +584,22 @@ java.lang.String defaultValue) {
         to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.data_ = internalGetData();
-        result.data_.makeImmutable();
+        result.data_ = dataBuilder_ == null
+            ? data_
+            : dataBuilder_.build();
+        to_bitField0_ |= 0x00000002;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
         result.unclearedBalance_ = unclearedBalanceBuilder_ == null
             ? unclearedBalance_
             : unclearedBalanceBuilder_.build();
-        to_bitField0_ |= 0x00000002;
+        to_bitField0_ |= 0x00000004;
       }
       if (((from_bitField0_ & 0x00000020) != 0)) {
         result.reservedBalance_ = reservedBalanceBuilder_ == null
             ? reservedBalance_
             : reservedBalanceBuilder_.build();
-        to_bitField0_ |= 0x00000004;
+        to_bitField0_ |= 0x00000008;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -715,9 +629,9 @@ java.lang.String defaultValue) {
       if (other.hasBalance()) {
         mergeBalance(other.getBalance());
       }
-      internalGetMutableData().mergeFrom(
-          other.internalGetData());
-      bitField0_ |= 0x00000008;
+      if (other.hasData()) {
+        mergeData(other.getData());
+      }
       if (other.hasUnclearedBalance()) {
         mergeUnclearedBalance(other.getUnclearedBalance());
       }
@@ -768,11 +682,9 @@ java.lang.String defaultValue) {
               break;
             } // case 34
             case 42: {
-              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              data__ = input.readMessage(
-                  DataDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              internalGetMutableData().getMutableMap().put(
-                  data__.getKey(), data__.getValue());
+              input.readMessage(
+                  internalGetDataFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000008;
               break;
             } // case 42
@@ -1072,131 +984,125 @@ java.lang.String defaultValue) {
       return balanceBuilder_;
     }
 
-    private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> data_;
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetData() {
-      if (data_ == null) {
-        return com.google.protobuf.MapField.emptyMapField(
-            DataDefaultEntryHolder.defaultEntry);
-      }
-      return data_;
+    private com.google.protobuf.Struct data_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> dataBuilder_;
+    /**
+     * <code>.google.protobuf.Struct data = 5 [json_name = "data"];</code>
+     * @return Whether the data field is set.
+     */
+    public boolean hasData() {
+      return ((bitField0_ & 0x00000008) != 0);
     }
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetMutableData() {
-      if (data_ == null) {
-        data_ = com.google.protobuf.MapField.newMapField(
-            DataDefaultEntryHolder.defaultEntry);
+    /**
+     * <code>.google.protobuf.Struct data = 5 [json_name = "data"];</code>
+     * @return The data.
+     */
+    public com.google.protobuf.Struct getData() {
+      if (dataBuilder_ == null) {
+        return data_ == null ? com.google.protobuf.Struct.getDefaultInstance() : data_;
+      } else {
+        return dataBuilder_.getMessage();
       }
-      if (!data_.isMutable()) {
-        data_ = data_.copy();
+    }
+    /**
+     * <code>.google.protobuf.Struct data = 5 [json_name = "data"];</code>
+     */
+    public Builder setData(com.google.protobuf.Struct value) {
+      if (dataBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        data_ = value;
+      } else {
+        dataBuilder_.setMessage(value);
       }
       bitField0_ |= 0x00000008;
       onChanged();
-      return data_;
-    }
-    public int getDataCount() {
-      return internalGetData().getMap().size();
+      return this;
     }
     /**
-     * <code>map&lt;string, string&gt; data = 5 [json_name = "data"];</code>
+     * <code>.google.protobuf.Struct data = 5 [json_name = "data"];</code>
      */
-    @java.lang.Override
-    public boolean containsData(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      return internalGetData().getMap().containsKey(key);
-    }
-    /**
-     * Use {@link #getDataMap()} instead.
-     */
-    @java.lang.Override
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getData() {
-      return getDataMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; data = 5 [json_name = "data"];</code>
-     */
-    @java.lang.Override
-    public java.util.Map<java.lang.String, java.lang.String> getDataMap() {
-      return internalGetData().getMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; data = 5 [json_name = "data"];</code>
-     */
-    @java.lang.Override
-    public /* nullable */
-java.lang.String getDataOrDefault(
-        java.lang.String key,
-        /* nullable */
-java.lang.String defaultValue) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetData().getMap();
-      return map.containsKey(key) ? map.get(key) : defaultValue;
-    }
-    /**
-     * <code>map&lt;string, string&gt; data = 5 [json_name = "data"];</code>
-     */
-    @java.lang.Override
-    public java.lang.String getDataOrThrow(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetData().getMap();
-      if (!map.containsKey(key)) {
-        throw new java.lang.IllegalArgumentException();
+    public Builder setData(
+        com.google.protobuf.Struct.Builder builderForValue) {
+      if (dataBuilder_ == null) {
+        data_ = builderForValue.build();
+      } else {
+        dataBuilder_.setMessage(builderForValue.build());
       }
-      return map.get(key);
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
     }
+    /**
+     * <code>.google.protobuf.Struct data = 5 [json_name = "data"];</code>
+     */
+    public Builder mergeData(com.google.protobuf.Struct value) {
+      if (dataBuilder_ == null) {
+        if (((bitField0_ & 0x00000008) != 0) &&
+          data_ != null &&
+          data_ != com.google.protobuf.Struct.getDefaultInstance()) {
+          getDataBuilder().mergeFrom(value);
+        } else {
+          data_ = value;
+        }
+      } else {
+        dataBuilder_.mergeFrom(value);
+      }
+      if (data_ != null) {
+        bitField0_ |= 0x00000008;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Struct data = 5 [json_name = "data"];</code>
+     */
     public Builder clearData() {
       bitField0_ = (bitField0_ & ~0x00000008);
-      internalGetMutableData().getMutableMap()
-          .clear();
+      data_ = null;
+      if (dataBuilder_ != null) {
+        dataBuilder_.dispose();
+        dataBuilder_ = null;
+      }
+      onChanged();
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; data = 5 [json_name = "data"];</code>
+     * <code>.google.protobuf.Struct data = 5 [json_name = "data"];</code>
      */
-    public Builder removeData(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      internalGetMutableData().getMutableMap()
-          .remove(key);
-      return this;
-    }
-    /**
-     * Use alternate mutation accessors instead.
-     */
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String>
-        getMutableData() {
+    public com.google.protobuf.Struct.Builder getDataBuilder() {
       bitField0_ |= 0x00000008;
-      return internalGetMutableData().getMutableMap();
+      onChanged();
+      return internalGetDataFieldBuilder().getBuilder();
     }
     /**
-     * <code>map&lt;string, string&gt; data = 5 [json_name = "data"];</code>
+     * <code>.google.protobuf.Struct data = 5 [json_name = "data"];</code>
      */
-    public Builder putData(
-        java.lang.String key,
-        java.lang.String value) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      if (value == null) { throw new NullPointerException("map value"); }
-      internalGetMutableData().getMutableMap()
-          .put(key, value);
-      bitField0_ |= 0x00000008;
-      return this;
+    public com.google.protobuf.StructOrBuilder getDataOrBuilder() {
+      if (dataBuilder_ != null) {
+        return dataBuilder_.getMessageOrBuilder();
+      } else {
+        return data_ == null ?
+            com.google.protobuf.Struct.getDefaultInstance() : data_;
+      }
     }
     /**
-     * <code>map&lt;string, string&gt; data = 5 [json_name = "data"];</code>
+     * <code>.google.protobuf.Struct data = 5 [json_name = "data"];</code>
      */
-    public Builder putAllData(
-        java.util.Map<java.lang.String, java.lang.String> values) {
-      internalGetMutableData().getMutableMap()
-          .putAll(values);
-      bitField0_ |= 0x00000008;
-      return this;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
+        internalGetDataFieldBuilder() {
+      if (dataBuilder_ == null) {
+        dataBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder>(
+                getData(),
+                getParentForChildren(),
+                isClean());
+        data_ = null;
+      }
+      return dataBuilder_;
     }
 
     private com.google.type.Money unclearedBalance_;

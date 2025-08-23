@@ -209,36 +209,17 @@ public interface PaymentOrBuilder extends
   boolean getOutbound();
 
   /**
-   * <code>map&lt;string, string&gt; extra = 16 [json_name = "extra"];</code>
+   * <code>.google.protobuf.Struct extra = 16 [json_name = "extra"];</code>
+   * @return Whether the extra field is set.
    */
-  int getExtraCount();
+  boolean hasExtra();
   /**
-   * <code>map&lt;string, string&gt; extra = 16 [json_name = "extra"];</code>
+   * <code>.google.protobuf.Struct extra = 16 [json_name = "extra"];</code>
+   * @return The extra.
    */
-  boolean containsExtra(
-      java.lang.String key);
+  com.google.protobuf.Struct getExtra();
   /**
-   * Use {@link #getExtraMap()} instead.
+   * <code>.google.protobuf.Struct extra = 16 [json_name = "extra"];</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtra();
-  /**
-   * <code>map&lt;string, string&gt; extra = 16 [json_name = "extra"];</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtraMap();
-  /**
-   * <code>map&lt;string, string&gt; extra = 16 [json_name = "extra"];</code>
-   */
-  /* nullable */
-java.lang.String getExtraOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; extra = 16 [json_name = "extra"];</code>
-   */
-  java.lang.String getExtraOrThrow(
-      java.lang.String key);
+  com.google.protobuf.StructOrBuilder getExtraOrBuilder();
 }

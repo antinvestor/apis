@@ -281,7 +281,7 @@
             "name": "extras",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "object"
           }
         ],
         "tags": [
@@ -390,7 +390,7 @@
             "name": "extras",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "object"
           }
         ],
         "tags": [
@@ -459,10 +459,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },
@@ -530,10 +527,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },
@@ -553,6 +547,14 @@
         }
       },
       "additionalProperties": {}
+    },
+    "google.protobuf.NullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
     },
     "google.rpc.Status": {
       "type": "object",
@@ -694,9 +696,6 @@
         },
         "extra": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
           "title": "Any additional metadata (e.g., notes, tags, correlation keys)"
         }
       }
@@ -767,10 +766,7 @@
           "type": "boolean"
         },
         "extra": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },
@@ -839,10 +835,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },

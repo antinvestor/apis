@@ -27,6 +27,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -45,7 +46,7 @@ type OCRFile struct {
 	Language      string                 `protobuf:"bytes,2,opt,name=language,proto3" json:"language,omitempty"`
 	Status        v1.STATUS              `protobuf:"varint,3,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`
 	Text          string                 `protobuf:"bytes,4,opt,name=text,proto3" json:"text,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,5,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,5,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -108,7 +109,7 @@ func (x *OCRFile) GetText() string {
 	return ""
 }
 
-func (x *OCRFile) GetProperties() map[string]string {
+func (x *OCRFile) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -120,7 +121,7 @@ type RecognizeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ReferenceId   string                 `protobuf:"bytes,1,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
 	LanguageId    string                 `protobuf:"bytes,2,opt,name=language_id,json=languageId,proto3" json:"language_id,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	Async         bool                   `protobuf:"varint,4,opt,name=async,proto3" json:"async,omitempty"`
 	FileId        []string               `protobuf:"bytes,5,rep,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -171,7 +172,7 @@ func (x *RecognizeRequest) GetLanguageId() string {
 	return ""
 }
 
-func (x *RecognizeRequest) GetProperties() map[string]string {
+func (x *RecognizeRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -292,31 +293,25 @@ var File_ocr_v1_ocr_proto protoreflect.FileDescriptor
 
 const file_ocr_v1_ocr_proto_rawDesc = "" +
 	"\n" +
-	"\x10ocr/v1/ocr.proto\x12\x06ocr.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xfd\x01\n" +
+	"\x10ocr/v1/ocr.proto\x12\x06ocr.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xb6\x01\n" +
 	"\aOCRFile\x12\x17\n" +
 	"\afile_id\x18\x01 \x01(\tR\x06fileId\x12\x1a\n" +
 	"\blanguage\x18\x02 \x01(\tR\blanguage\x12)\n" +
 	"\x06status\x18\x03 \x01(\x0e2\x11.common.v1.STATUSR\x06status\x12\x12\n" +
-	"\x04text\x18\x04 \x01(\tR\x04text\x12?\n" +
+	"\x04text\x18\x04 \x01(\tR\x04text\x127\n" +
 	"\n" +
-	"properties\x18\x05 \x03(\v2\x1f.ocr.v1.OCRFile.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe8\x02\n" +
+	"properties\x18\x05 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"\x98\x02\n" +
 	"\x10RecognizeRequest\x12>\n" +
 	"\freference_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\vreferenceId\x126\n" +
 	"\vlanguage_id\x18\x02 \x01(\tB\x15\xbaH\x12r\x10\x10\x02\x18\x032\n" +
 	"[a-z]{2,3}R\n" +
-	"languageId\x12H\n" +
+	"languageId\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v2(.ocr.v1.RecognizeRequest.PropertiesEntryR\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\x12\x14\n" +
 	"\x05async\x18\x04 \x01(\bR\x05async\x12=\n" +
-	"\afile_id\x18\x05 \x03(\tB$\xbaH!\x92\x01\x1e\b\x01\x10\x05\"\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06fileId\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"_\n" +
+	"\afile_id\x18\x05 \x03(\tB$\xbaH!\x92\x01\x1e\b\x01\x10\x05\"\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06fileId\"_\n" +
 	"\x11RecognizeResponse\x12!\n" +
 	"\freference_id\x18\x01 \x01(\tR\vreferenceId\x12'\n" +
 	"\x06result\x18\x02 \x03(\v2\x0f.ocr.v1.OCRFileR\x06result\"?\n" +
@@ -348,25 +343,24 @@ func file_ocr_v1_ocr_proto_rawDescGZIP() []byte {
 	return file_ocr_v1_ocr_proto_rawDescData
 }
 
-var file_ocr_v1_ocr_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_ocr_v1_ocr_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_ocr_v1_ocr_proto_goTypes = []any{
 	(*OCRFile)(nil),           // 0: ocr.v1.OCRFile
 	(*RecognizeRequest)(nil),  // 1: ocr.v1.RecognizeRequest
 	(*RecognizeResponse)(nil), // 2: ocr.v1.RecognizeResponse
 	(*StatusResponse)(nil),    // 3: ocr.v1.StatusResponse
-	nil,                       // 4: ocr.v1.OCRFile.PropertiesEntry
-	nil,                       // 5: ocr.v1.RecognizeRequest.PropertiesEntry
-	(v1.STATUS)(0),            // 6: common.v1.STATUS
-	(*v1.StatusRequest)(nil),  // 7: common.v1.StatusRequest
+	(v1.STATUS)(0),            // 4: common.v1.STATUS
+	(*structpb.Struct)(nil),   // 5: google.protobuf.Struct
+	(*v1.StatusRequest)(nil),  // 6: common.v1.StatusRequest
 }
 var file_ocr_v1_ocr_proto_depIdxs = []int32{
-	6, // 0: ocr.v1.OCRFile.status:type_name -> common.v1.STATUS
-	4, // 1: ocr.v1.OCRFile.properties:type_name -> ocr.v1.OCRFile.PropertiesEntry
-	5, // 2: ocr.v1.RecognizeRequest.properties:type_name -> ocr.v1.RecognizeRequest.PropertiesEntry
+	4, // 0: ocr.v1.OCRFile.status:type_name -> common.v1.STATUS
+	5, // 1: ocr.v1.OCRFile.properties:type_name -> google.protobuf.Struct
+	5, // 2: ocr.v1.RecognizeRequest.properties:type_name -> google.protobuf.Struct
 	0, // 3: ocr.v1.RecognizeResponse.result:type_name -> ocr.v1.OCRFile
 	2, // 4: ocr.v1.StatusResponse.data:type_name -> ocr.v1.RecognizeResponse
 	1, // 5: ocr.v1.OCRService.Recognize:input_type -> ocr.v1.RecognizeRequest
-	7, // 6: ocr.v1.OCRService.Status:input_type -> common.v1.StatusRequest
+	6, // 6: ocr.v1.OCRService.Status:input_type -> common.v1.StatusRequest
 	2, // 7: ocr.v1.OCRService.Recognize:output_type -> ocr.v1.RecognizeResponse
 	3, // 8: ocr.v1.OCRService.Status:output_type -> ocr.v1.StatusResponse
 	7, // [7:9] is the sub-list for method output_type
@@ -387,7 +381,7 @@ func file_ocr_v1_ocr_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ocr_v1_ocr_proto_rawDesc), len(file_ocr_v1_ocr_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

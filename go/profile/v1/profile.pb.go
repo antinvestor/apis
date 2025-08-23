@@ -27,6 +27,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -255,7 +256,7 @@ type ContactObject struct {
 	Verified           bool                   `protobuf:"varint,4,opt,name=verified,proto3" json:"verified,omitempty"`
 	CommunicationLevel CommunicationLevel     `protobuf:"varint,5,opt,name=communication_level,json=communicationLevel,proto3,enum=profile.v1.CommunicationLevel" json:"communication_level,omitempty"`
 	State              v1.STATE               `protobuf:"varint,6,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
-	Extra              map[string]string      `protobuf:"bytes,7,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extra              *structpb.Struct       `protobuf:"bytes,7,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -332,7 +333,7 @@ func (x *ContactObject) GetState() v1.STATE {
 	return v1.STATE(0)
 }
 
-func (x *ContactObject) GetExtra() map[string]string {
+func (x *ContactObject) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -344,7 +345,7 @@ type RosterObject struct {
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	ProfileId     string                 `protobuf:"bytes,2,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`
 	Contact       *ContactObject         `protobuf:"bytes,3,opt,name=contact,proto3" json:"contact,omitempty"`
-	Extra         map[string]string      `protobuf:"bytes,4,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -400,7 +401,7 @@ func (x *RosterObject) GetContact() *ContactObject {
 	return nil
 }
 
-func (x *RosterObject) GetExtra() map[string]string {
+func (x *RosterObject) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -536,7 +537,7 @@ type ProfileObject struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Type          ProfileType            `protobuf:"varint,2,opt,name=type,proto3,enum=profile.v1.ProfileType" json:"type,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	Contacts      []*ContactObject       `protobuf:"bytes,4,rep,name=contacts,proto3" json:"contacts,omitempty"`
 	Addresses     []*AddressObject       `protobuf:"bytes,5,rep,name=addresses,proto3" json:"addresses,omitempty"`
 	State         v1.STATE               `protobuf:"varint,6,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
@@ -588,7 +589,7 @@ func (x *ProfileObject) GetType() ProfileType {
 	return ProfileType_PERSON
 }
 
-func (x *ProfileObject) GetProperties() map[string]string {
+func (x *ProfileObject) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -673,7 +674,7 @@ type RelationshipObject struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Type          RelationshipType       `protobuf:"varint,2,opt,name=type,proto3,enum=profile.v1.RelationshipType" json:"type,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	ChildEntry    *EntryItem             `protobuf:"bytes,4,opt,name=child_entry,json=childEntry,proto3" json:"child_entry,omitempty"`
 	ParentEntry   *EntryItem             `protobuf:"bytes,5,opt,name=parent_entry,json=parentEntry,proto3" json:"parent_entry,omitempty"`
 	PeerProfile   *ProfileObject         `protobuf:"bytes,6,opt,name=peer_profile,json=peerProfile,proto3" json:"peer_profile,omitempty"`
@@ -725,7 +726,7 @@ func (x *RelationshipObject) GetType() RelationshipType {
 	return RelationshipType_MEMBER
 }
 
-func (x *RelationshipObject) GetProperties() map[string]string {
+func (x *RelationshipObject) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -850,7 +851,7 @@ type SearchRequest struct {
 	StartDate     string                 `protobuf:"bytes,4,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
 	EndDate       string                 `protobuf:"bytes,5,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
 	Properties    []string               `protobuf:"bytes,6,rep,name=properties,proto3" json:"properties,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,7,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,7,opt,name=extras,proto3" json:"extras,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -927,7 +928,7 @@ func (x *SearchRequest) GetProperties() []string {
 	return nil
 }
 
-func (x *SearchRequest) GetExtras() map[string]string {
+func (x *SearchRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -1080,7 +1081,7 @@ type CreateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Type          ProfileType            `protobuf:"varint,1,opt,name=type,proto3,enum=profile.v1.ProfileType" json:"type,omitempty"`
 	Contact       string                 `protobuf:"bytes,2,opt,name=contact,proto3" json:"contact,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1129,7 +1130,7 @@ func (x *CreateRequest) GetContact() string {
 	return ""
 }
 
-func (x *CreateRequest) GetProperties() map[string]string {
+func (x *CreateRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -1184,7 +1185,7 @@ func (x *CreateResponse) GetData() *ProfileObject {
 type UpdateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,2,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,2,opt,name=properties,proto3" json:"properties,omitempty"`
 	State         v1.STATE               `protobuf:"varint,3,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1227,7 +1228,7 @@ func (x *UpdateRequest) GetId() string {
 	return ""
 }
 
-func (x *UpdateRequest) GetProperties() map[string]string {
+func (x *UpdateRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -1290,7 +1291,7 @@ type AddContactRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Contact       string                 `protobuf:"bytes,2,opt,name=contact,proto3" json:"contact,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,3,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,3,opt,name=extras,proto3" json:"extras,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1339,7 +1340,7 @@ func (x *AddContactRequest) GetContact() string {
 	return ""
 }
 
-func (x *AddContactRequest) GetExtras() map[string]string {
+func (x *AddContactRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -1403,7 +1404,7 @@ type CreateContactRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Contact       string                 `protobuf:"bytes,2,opt,name=contact,proto3" json:"contact,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,3,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,3,opt,name=extras,proto3" json:"extras,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1452,7 +1453,7 @@ func (x *CreateContactRequest) GetContact() string {
 	return ""
 }
 
-func (x *CreateContactRequest) GetExtras() map[string]string {
+func (x *CreateContactRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -1834,7 +1835,7 @@ type SearchRosterRequest struct {
 	StartDate     string                 `protobuf:"bytes,4,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
 	EndDate       string                 `protobuf:"bytes,5,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
 	Properties    []string               `protobuf:"bytes,6,rep,name=properties,proto3" json:"properties,omitempty"`
-	Extras        map[string]string      `protobuf:"bytes,7,rep,name=extras,proto3" json:"extras,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Extras        *structpb.Struct       `protobuf:"bytes,7,opt,name=extras,proto3" json:"extras,omitempty"`
 	ProfileId     string                 `protobuf:"bytes,8,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1912,7 +1913,7 @@ func (x *SearchRosterRequest) GetProperties() []string {
 	return nil
 }
 
-func (x *SearchRosterRequest) GetExtras() map[string]string {
+func (x *SearchRosterRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
 	}
@@ -2470,7 +2471,7 @@ type AddRelationshipRequest struct {
 	Child         string                 `protobuf:"bytes,4,opt,name=child,proto3" json:"child,omitempty"`
 	ChildId       string                 `protobuf:"bytes,5,opt,name=child_id,json=childId,proto3" json:"child_id,omitempty"`
 	Type          RelationshipType       `protobuf:"varint,6,opt,name=type,proto3,enum=profile.v1.RelationshipType" json:"type,omitempty"`
-	Properties    map[string]string      `protobuf:"bytes,7,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Properties    *structpb.Struct       `protobuf:"bytes,7,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2547,7 +2548,7 @@ func (x *AddRelationshipRequest) GetType() RelationshipType {
 	return RelationshipType_MEMBER
 }
 
-func (x *AddRelationshipRequest) GetProperties() map[string]string {
+func (x *AddRelationshipRequest) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
 	}
@@ -2700,29 +2701,21 @@ var File_profile_v1_profile_proto protoreflect.FileDescriptor
 const file_profile_v1_profile_proto_rawDesc = "" +
 	"\n" +
 	"\x18profile/v1/profile.proto\x12\n" +
-	"profile.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x8c\x03\n" +
+	"profile.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc5\x02\n" +
 	"\rContactObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12+\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x17.profile.v1.ContactTypeR\x04type\x12\x16\n" +
 	"\x06detail\x18\x03 \x01(\tR\x06detail\x12\x1a\n" +
 	"\bverified\x18\x04 \x01(\bR\bverified\x12O\n" +
 	"\x13communication_level\x18\x05 \x01(\x0e2\x1e.profile.v1.CommunicationLevelR\x12communicationLevel\x12&\n" +
-	"\x05state\x18\x06 \x01(\x0e2\x10.common.v1.STATER\x05state\x12:\n" +
-	"\x05extra\x18\a \x03(\v2$.profile.v1.ContactObject.ExtraEntryR\x05extra\x1a8\n" +
-	"\n" +
-	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa1\x02\n" +
+	"\x05state\x18\x06 \x01(\x0e2\x10.common.v1.STATER\x05state\x12-\n" +
+	"\x05extra\x18\a \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xdb\x01\n" +
 	"\fRosterObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12:\n" +
 	"\n" +
 	"profile_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tprofileId\x123\n" +
-	"\acontact\x18\x03 \x01(\v2\x19.profile.v1.ContactObjectR\acontact\x129\n" +
-	"\x05extra\x18\x04 \x03(\v2#.profile.v1.RosterObject.ExtraEntryR\x05extra\x1a8\n" +
-	"\n" +
-	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc3\x02\n" +
+	"\acontact\x18\x03 \x01(\v2\x19.profile.v1.ContactObjectR\acontact\x12-\n" +
+	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xc3\x02\n" +
 	"\rAddressObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12\x18\n" +
@@ -2737,40 +2730,34 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	" \x01(\x01R\tlongitude\x12 \n" +
 	"\x05extra\x18\v \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\n" +
-	"\x18\xf4\x03R\x05extra\"\x8b\x03\n" +
+	"\x18\xf4\x03R\x05extra\"\xba\x02\n" +
 	"\rProfileObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12+\n" +
-	"\x04type\x18\x02 \x01(\x0e2\x17.profile.v1.ProfileTypeR\x04type\x12I\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x17.profile.v1.ProfileTypeR\x04type\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v2).profile.v1.ProfileObject.PropertiesEntryR\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\x125\n" +
 	"\bcontacts\x18\x04 \x03(\v2\x19.profile.v1.ContactObjectR\bcontacts\x127\n" +
 	"\taddresses\x18\x05 \x03(\v2\x19.profile.v1.AddressObjectR\taddresses\x12&\n" +
-	"\x05state\x18\x06 \x01(\x0e2\x10.common.v1.STATER\x05state\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"I\n" +
+	"\x05state\x18\x06 \x01(\x0e2\x10.common.v1.STATER\x05state\"I\n" +
 	"\tEntryItem\x12\x1f\n" +
 	"\vobject_name\x18\x01 \x01(\tR\n" +
 	"objectName\x12\x1b\n" +
-	"\tobject_id\x18\x02 \x01(\tR\bobjectId\"\xb2\x03\n" +
+	"\tobject_id\x18\x02 \x01(\tR\bobjectId\"\xdc\x02\n" +
 	"\x12RelationshipObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x120\n" +
-	"\x04type\x18\x02 \x01(\x0e2\x1c.profile.v1.RelationshipTypeR\x04type\x12N\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x1c.profile.v1.RelationshipTypeR\x04type\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v2..profile.v1.RelationshipObject.PropertiesEntryR\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\x126\n" +
 	"\vchild_entry\x18\x04 \x01(\v2\x15.profile.v1.EntryItemR\n" +
 	"childEntry\x128\n" +
 	"\fparent_entry\x18\x05 \x01(\v2\x15.profile.v1.EntryItemR\vparentEntry\x12<\n" +
-	"\fpeer_profile\x18\x06 \x01(\v2\x19.profile.v1.ProfileObjectR\vpeerProfile\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"=\n" +
+	"\fpeer_profile\x18\x06 \x01(\v2\x19.profile.v1.ProfileObjectR\vpeerProfile\"=\n" +
 	"\x0eGetByIdRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"@\n" +
 	"\x0fGetByIdResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\xa3\x02\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\xda\x01\n" +
 	"\rSearchRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x14\n" +
@@ -2780,58 +2767,43 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	"\bend_date\x18\x05 \x01(\tR\aendDate\x12\x1e\n" +
 	"\n" +
 	"properties\x18\x06 \x03(\tR\n" +
-	"properties\x12=\n" +
-	"\x06extras\x18\a \x03(\v2%.profile.v1.SearchRequest.ExtrasEntryR\x06extras\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +
+	"properties\x12/\n" +
+	"\x06extras\x18\a \x01(\v2\x17.google.protobuf.StructR\x06extras\"?\n" +
 	"\x0eSearchResponse\x12-\n" +
 	"\x04data\x18\x01 \x03(\v2\x19.profile.v1.ProfileObjectR\x04data\"r\n" +
 	"\fMergeRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x125\n" +
 	"\amergeid\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\amergeid\">\n" +
 	"\rMergeResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\xf6\x01\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\xa5\x01\n" +
 	"\rCreateRequest\x125\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x17.profile.v1.ProfileTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\x04type\x12$\n" +
 	"\acontact\x18\x02 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x03\x18\xff\x01R\acontact\x12I\n" +
+	"\xbaH\ar\x05\x10\x03\x18\xff\x01R\acontact\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x03(\v2).profile.v1.CreateRequest.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +
+	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"?\n" +
 	"\x0eCreateResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\xee\x01\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\x9d\x01\n" +
 	"\rUpdateRequest\x12+\n" +
-	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12I\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x127\n" +
 	"\n" +
-	"properties\x18\x02 \x03(\v2).profile.v1.UpdateRequest.PropertiesEntryR\n" +
+	"properties\x18\x02 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\x12&\n" +
-	"\x05state\x18\x03 \x01(\x0e2\x10.common.v1.STATER\x05state\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +
+	"\x05state\x18\x03 \x01(\x0e2\x10.common.v1.STATER\x05state\"?\n" +
 	"\x0eUpdateResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\xd8\x01\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\x8b\x01\n" +
 	"\x11AddContactRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x18\n" +
-	"\acontact\x18\x02 \x01(\tR\acontact\x12A\n" +
-	"\x06extras\x18\x03 \x03(\v2).profile.v1.AddContactRequest.ExtrasEntryR\x06extras\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"l\n" +
+	"\acontact\x18\x02 \x01(\tR\acontact\x12/\n" +
+	"\x06extras\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x06extras\"l\n" +
 	"\x12AddContactResponse\x12-\n" +
 	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\x12'\n" +
-	"\x0fverification_id\x18\x02 \x01(\tR\x0everificationId\"\xe1\x01\n" +
+	"\x0fverification_id\x18\x02 \x01(\tR\x0everificationId\"\x91\x01\n" +
 	"\x14CreateContactRequest\x12.\n" +
 	"\x02id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x18\n" +
-	"\acontact\x18\x02 \x01(\tR\acontact\x12D\n" +
-	"\x06extras\x18\x03 \x03(\v2,.profile.v1.CreateContactRequest.ExtrasEntryR\x06extras\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"F\n" +
+	"\acontact\x18\x02 \x01(\tR\acontact\x12/\n" +
+	"\x06extras\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x06extras\"F\n" +
 	"\x15CreateContactResponse\x12-\n" +
 	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ContactObjectR\x04data\"\xcb\x01\n" +
 	" CreateContactVerificationRequest\x12+\n" +
@@ -2853,7 +2825,7 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	"\x14RemoveContactRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"F\n" +
 	"\x15RemoveContactResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\xf0\x02\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.profile.v1.ProfileObjectR\x04data\"\xa1\x02\n" +
 	"\x13SearchRosterRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x14\n" +
@@ -2863,13 +2835,10 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	"\bend_date\x18\x05 \x01(\tR\aendDate\x12\x1e\n" +
 	"\n" +
 	"properties\x18\x06 \x03(\tR\n" +
-	"properties\x12C\n" +
-	"\x06extras\x18\a \x03(\v2+.profile.v1.SearchRosterRequest.ExtrasEntryR\x06extras\x12?\n" +
+	"properties\x12/\n" +
+	"\x06extras\x18\a \x01(\v2\x17.google.protobuf.StructR\x06extras\x12?\n" +
 	"\n" +
-	"profile_id\x18\b \x01(\tB \xbaH\x1d\xd8\x01\x01r\x18\x10\x03\x18\xfa\x012\x11[0-9a-z_-]{3,250}R\tprofileId\x1a9\n" +
-	"\vExtrasEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"D\n" +
+	"profile_id\x18\b \x01(\tB \xbaH\x1d\xd8\x01\x01r\x18\x10\x03\x18\xfa\x012\x11[0-9a-z_-]{3,250}R\tprofileId\"D\n" +
 	"\x14SearchRosterResponse\x12,\n" +
 	"\x04data\x18\x01 \x03(\v2\x18.profile.v1.RosterObjectR\x04data\"E\n" +
 	"\x10AddRosterRequest\x121\n" +
@@ -2897,20 +2866,17 @@ const file_profile_v1_profile_proto_rawDesc = "" +
 	"\x05count\x18\x05 \x01(\x05R\x05count\x12'\n" +
 	"\x0finvert_relation\x18\x06 \x01(\bR\x0einvertRelation\"N\n" +
 	"\x18ListRelationshipResponse\x122\n" +
-	"\x04data\x18\x01 \x03(\v2\x1e.profile.v1.RelationshipObjectR\x04data\"\xf2\x03\n" +
+	"\x04data\x18\x01 \x03(\v2\x1e.profile.v1.RelationshipObjectR\x04data\"\x98\x03\n" +
 	"\x16AddRelationshipRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12:\n" +
 	"\x06parent\x18\x02 \x01(\tB\"\xbaH\x1fr\x1d\x10\x03\x18(R\aContactR\aProfileR\x05GroupR\x06parent\x128\n" +
 	"\tparent_id\x18\x03 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bparentId\x128\n" +
 	"\x05child\x18\x04 \x01(\tB\"\xbaH\x1fr\x1d\x10\x03\x18(R\aContactR\aProfileR\x05GroupR\x05child\x126\n" +
 	"\bchild_id\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\achildId\x120\n" +
-	"\x04type\x18\x06 \x01(\x0e2\x1c.profile.v1.RelationshipTypeR\x04type\x12R\n" +
+	"\x04type\x18\x06 \x01(\x0e2\x1c.profile.v1.RelationshipTypeR\x04type\x127\n" +
 	"\n" +
-	"properties\x18\a \x03(\v22.profile.v1.AddRelationshipRequest.PropertiesEntryR\n" +
-	"properties\x1a=\n" +
-	"\x0fPropertiesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"M\n" +
+	"properties\x18\a \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"M\n" +
 	"\x17AddRelationshipResponse\x122\n" +
 	"\x04data\x18\x01 \x01(\v2\x1e.profile.v1.RelationshipObjectR\x04data\"\x85\x01\n" +
 	"\x19DeleteRelationshipRequest\x12+\n" +
@@ -2987,7 +2953,7 @@ func file_profile_v1_profile_proto_rawDescGZIP() []byte {
 }
 
 var file_profile_v1_profile_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_profile_v1_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 53)
+var file_profile_v1_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
 var file_profile_v1_profile_proto_goTypes = []any{
 	(ContactType)(0),                          // 0: profile.v1.ContactType
 	(CommunicationLevel)(0),                   // 1: profile.v1.CommunicationLevel
@@ -3035,52 +3001,42 @@ var file_profile_v1_profile_proto_goTypes = []any{
 	(*AddRelationshipResponse)(nil),           // 43: profile.v1.AddRelationshipResponse
 	(*DeleteRelationshipRequest)(nil),         // 44: profile.v1.DeleteRelationshipRequest
 	(*DeleteRelationshipResponse)(nil),        // 45: profile.v1.DeleteRelationshipResponse
-	nil,                                       // 46: profile.v1.ContactObject.ExtraEntry
-	nil,                                       // 47: profile.v1.RosterObject.ExtraEntry
-	nil,                                       // 48: profile.v1.ProfileObject.PropertiesEntry
-	nil,                                       // 49: profile.v1.RelationshipObject.PropertiesEntry
-	nil,                                       // 50: profile.v1.SearchRequest.ExtrasEntry
-	nil,                                       // 51: profile.v1.CreateRequest.PropertiesEntry
-	nil,                                       // 52: profile.v1.UpdateRequest.PropertiesEntry
-	nil,                                       // 53: profile.v1.AddContactRequest.ExtrasEntry
-	nil,                                       // 54: profile.v1.CreateContactRequest.ExtrasEntry
-	nil,                                       // 55: profile.v1.SearchRosterRequest.ExtrasEntry
-	nil,                                       // 56: profile.v1.AddRelationshipRequest.PropertiesEntry
-	(v1.STATE)(0),                             // 57: common.v1.STATE
+	(v1.STATE)(0),                             // 46: common.v1.STATE
+	(*structpb.Struct)(nil),                   // 47: google.protobuf.Struct
 }
 var file_profile_v1_profile_proto_depIdxs = []int32{
 	0,  // 0: profile.v1.ContactObject.type:type_name -> profile.v1.ContactType
 	1,  // 1: profile.v1.ContactObject.communication_level:type_name -> profile.v1.CommunicationLevel
-	57, // 2: profile.v1.ContactObject.state:type_name -> common.v1.STATE
-	46, // 3: profile.v1.ContactObject.extra:type_name -> profile.v1.ContactObject.ExtraEntry
+	46, // 2: profile.v1.ContactObject.state:type_name -> common.v1.STATE
+	47, // 3: profile.v1.ContactObject.extra:type_name -> google.protobuf.Struct
 	4,  // 4: profile.v1.RosterObject.contact:type_name -> profile.v1.ContactObject
-	47, // 5: profile.v1.RosterObject.extra:type_name -> profile.v1.RosterObject.ExtraEntry
+	47, // 5: profile.v1.RosterObject.extra:type_name -> google.protobuf.Struct
 	2,  // 6: profile.v1.ProfileObject.type:type_name -> profile.v1.ProfileType
-	48, // 7: profile.v1.ProfileObject.properties:type_name -> profile.v1.ProfileObject.PropertiesEntry
+	47, // 7: profile.v1.ProfileObject.properties:type_name -> google.protobuf.Struct
 	4,  // 8: profile.v1.ProfileObject.contacts:type_name -> profile.v1.ContactObject
 	6,  // 9: profile.v1.ProfileObject.addresses:type_name -> profile.v1.AddressObject
-	57, // 10: profile.v1.ProfileObject.state:type_name -> common.v1.STATE
+	46, // 10: profile.v1.ProfileObject.state:type_name -> common.v1.STATE
 	3,  // 11: profile.v1.RelationshipObject.type:type_name -> profile.v1.RelationshipType
-	49, // 12: profile.v1.RelationshipObject.properties:type_name -> profile.v1.RelationshipObject.PropertiesEntry
+	47, // 12: profile.v1.RelationshipObject.properties:type_name -> google.protobuf.Struct
 	8,  // 13: profile.v1.RelationshipObject.child_entry:type_name -> profile.v1.EntryItem
 	8,  // 14: profile.v1.RelationshipObject.parent_entry:type_name -> profile.v1.EntryItem
 	7,  // 15: profile.v1.RelationshipObject.peer_profile:type_name -> profile.v1.ProfileObject
 	7,  // 16: profile.v1.GetByIdResponse.data:type_name -> profile.v1.ProfileObject
-	50, // 17: profile.v1.SearchRequest.extras:type_name -> profile.v1.SearchRequest.ExtrasEntry
+	47, // 17: profile.v1.SearchRequest.extras:type_name -> google.protobuf.Struct
 	7,  // 18: profile.v1.SearchResponse.data:type_name -> profile.v1.ProfileObject
 	7,  // 19: profile.v1.MergeResponse.data:type_name -> profile.v1.ProfileObject
 	2,  // 20: profile.v1.CreateRequest.type:type_name -> profile.v1.ProfileType
-	51, // 21: profile.v1.CreateRequest.properties:type_name -> profile.v1.CreateRequest.PropertiesEntry
+	47, // 21: profile.v1.CreateRequest.properties:type_name -> google.protobuf.Struct
 	7,  // 22: profile.v1.CreateResponse.data:type_name -> profile.v1.ProfileObject
-	52, // 23: profile.v1.UpdateRequest.properties:type_name -> profile.v1.UpdateRequest.PropertiesEntry
-	57, // 24: profile.v1.UpdateRequest.state:type_name -> common.v1.STATE
+	47, // 23: profile.v1.UpdateRequest.properties:type_name -> google.protobuf.Struct
+	46, // 24: profile.v1.UpdateRequest.state:type_name -> common.v1.STATE
 	7,  // 25: profile.v1.UpdateResponse.data:type_name -> profile.v1.ProfileObject
-	53, // 26: profile.v1.AddContactRequest.extras:type_name -> profile.v1.AddContactRequest.ExtrasEntry
+	47, // 26: profile.v1.AddContactRequest.extras:type_name -> google.protobuf.Struct
 	7,  // 27: profile.v1.AddContactResponse.data:type_name -> profile.v1.ProfileObject
-	54, // 28: profile.v1.CreateContactRequest.extras:type_name -> profile.v1.CreateContactRequest.ExtrasEntry
+	47, // 28: profile.v1.CreateContactRequest.extras:type_name -> google.protobuf.Struct
 	4,  // 29: profile.v1.CreateContactResponse.data:type_name -> profile.v1.ContactObject
 	7,  // 30: profile.v1.RemoveContactResponse.data:type_name -> profile.v1.ProfileObject
-	55, // 31: profile.v1.SearchRosterRequest.extras:type_name -> profile.v1.SearchRosterRequest.ExtrasEntry
+	47, // 31: profile.v1.SearchRosterRequest.extras:type_name -> google.protobuf.Struct
 	5,  // 32: profile.v1.SearchRosterResponse.data:type_name -> profile.v1.RosterObject
 	20, // 33: profile.v1.AddRosterRequest.data:type_name -> profile.v1.AddContactRequest
 	5,  // 34: profile.v1.AddRosterResponse.data:type_name -> profile.v1.RosterObject
@@ -3090,7 +3046,7 @@ var file_profile_v1_profile_proto_depIdxs = []int32{
 	7,  // 38: profile.v1.GetByContactResponse.data:type_name -> profile.v1.ProfileObject
 	9,  // 39: profile.v1.ListRelationshipResponse.data:type_name -> profile.v1.RelationshipObject
 	3,  // 40: profile.v1.AddRelationshipRequest.type:type_name -> profile.v1.RelationshipType
-	56, // 41: profile.v1.AddRelationshipRequest.properties:type_name -> profile.v1.AddRelationshipRequest.PropertiesEntry
+	47, // 41: profile.v1.AddRelationshipRequest.properties:type_name -> google.protobuf.Struct
 	9,  // 42: profile.v1.AddRelationshipResponse.data:type_name -> profile.v1.RelationshipObject
 	9,  // 43: profile.v1.DeleteRelationshipResponse.data:type_name -> profile.v1.RelationshipObject
 	10, // 44: profile.v1.ProfileService.GetById:input_type -> profile.v1.GetByIdRequest
@@ -3147,7 +3103,7 @@ func file_profile_v1_profile_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_profile_v1_profile_proto_rawDesc), len(file_profile_v1_profile_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   53,
+			NumMessages:   42,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

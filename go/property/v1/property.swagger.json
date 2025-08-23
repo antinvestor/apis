@@ -196,7 +196,7 @@
             "name": "extras",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "object"
           }
         ],
         "tags": [
@@ -278,7 +278,7 @@
             "name": "extras",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "object"
           }
         ],
         "tags": [
@@ -609,6 +609,14 @@
       },
       "additionalProperties": {}
     },
+    "google.protobuf.NullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
     "google.rpc.Status": {
       "type": "object",
       "properties": {
@@ -760,10 +768,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "createdAt": {
           "type": "string",
@@ -807,10 +812,7 @@
           "format": "date-time"
         },
         "extra": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },
@@ -830,10 +832,7 @@
               "type": "string"
             },
             "extra": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
+              "type": "object"
             },
             "createdAt": {
               "type": "string",
@@ -869,10 +868,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       }
     },
@@ -898,10 +894,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "createdAt": {
           "type": "string",
@@ -922,10 +915,7 @@
           "type": "string"
         },
         "extra": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "createdAt": {
           "type": "string",
@@ -969,10 +959,7 @@
           "type": "string"
         },
         "extra": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "createdAt": {
           "type": "string",

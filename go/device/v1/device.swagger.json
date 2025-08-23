@@ -388,7 +388,7 @@
             "name": "extras",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "object"
           }
         ],
         "tags": [
@@ -554,10 +554,7 @@
           "format": "byte"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "The request message containing the information necessary to create a key"
@@ -577,10 +574,7 @@
           "type": "string"
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "The request message containing the information necessary to create a device"
@@ -621,16 +615,10 @@
           "type": "string"
         },
         "location": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "extra": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "Contained message representing a device's log"
@@ -666,16 +654,10 @@
           "$ref": "#/definitions/device.v1.Locale"
         },
         "location": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "The response message containing the full device object"
@@ -687,10 +669,7 @@
           "type": "string"
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "The request message has data to link a session to a user"
@@ -702,10 +681,7 @@
           "type": "string"
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "The request message containing the information necessary to update a device"
@@ -744,10 +720,7 @@
           "format": "byte"
         },
         "extra": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "The response message containing the full device key object"
@@ -833,10 +806,7 @@
           "type": "string"
         },
         "extras": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "object"
         }
       },
       "title": "The request message containing the information necessary to create a key"
@@ -908,6 +878,14 @@
         }
       },
       "additionalProperties": {}
+    },
+    "google.protobuf.NullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
     },
     "google.rpc.Status": {
       "type": "object",

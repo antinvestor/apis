@@ -55,18 +55,6 @@ private static final long serialVersionUID = 0L;
     return com.antinvestor.apis.profile.v1.ProfileProto.internal_static_profile_v1_RelationshipObject_descriptor;
   }
 
-  @SuppressWarnings({"rawtypes"})
-  @java.lang.Override
-  protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-      int number) {
-    switch (number) {
-      case 3:
-        return internalGetProperties();
-      default:
-        throw new RuntimeException(
-            "Invalid map field number: " + number);
-    }
-  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
@@ -134,82 +122,29 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int PROPERTIES_FIELD_NUMBER = 3;
-  private static final class PropertiesDefaultEntryHolder {
-    static final com.google.protobuf.MapEntry<
-        java.lang.String, java.lang.String> defaultEntry =
-            com.google.protobuf.MapEntry
-            .<java.lang.String, java.lang.String>newDefaultInstance(
-                com.antinvestor.apis.profile.v1.ProfileProto.internal_static_profile_v1_RelationshipObject_PropertiesEntry_descriptor, 
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "",
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "");
-  }
-  @SuppressWarnings("serial")
-  private com.google.protobuf.MapField<
-      java.lang.String, java.lang.String> properties_;
-  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-  internalGetProperties() {
-    if (properties_ == null) {
-      return com.google.protobuf.MapField.emptyMapField(
-          PropertiesDefaultEntryHolder.defaultEntry);
-    }
-    return properties_;
-  }
-  public int getPropertiesCount() {
-    return internalGetProperties().getMap().size();
-  }
+  private com.google.protobuf.Struct properties_;
   /**
-   * <code>map&lt;string, string&gt; properties = 3 [json_name = "properties"];</code>
+   * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
+   * @return Whether the properties field is set.
    */
   @java.lang.Override
-  public boolean containsProperties(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    return internalGetProperties().getMap().containsKey(key);
+  public boolean hasProperties() {
+    return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * Use {@link #getPropertiesMap()} instead.
+   * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
+   * @return The properties.
    */
   @java.lang.Override
-  @java.lang.Deprecated
-  public java.util.Map<java.lang.String, java.lang.String> getProperties() {
-    return getPropertiesMap();
+  public com.google.protobuf.Struct getProperties() {
+    return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
   }
   /**
-   * <code>map&lt;string, string&gt; properties = 3 [json_name = "properties"];</code>
+   * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    */
   @java.lang.Override
-  public java.util.Map<java.lang.String, java.lang.String> getPropertiesMap() {
-    return internalGetProperties().getMap();
-  }
-  /**
-   * <code>map&lt;string, string&gt; properties = 3 [json_name = "properties"];</code>
-   */
-  @java.lang.Override
-  public /* nullable */
-java.lang.String getPropertiesOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetProperties().getMap();
-    return map.containsKey(key) ? map.get(key) : defaultValue;
-  }
-  /**
-   * <code>map&lt;string, string&gt; properties = 3 [json_name = "properties"];</code>
-   */
-  @java.lang.Override
-  public java.lang.String getPropertiesOrThrow(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetProperties().getMap();
-    if (!map.containsKey(key)) {
-      throw new java.lang.IllegalArgumentException();
-    }
-    return map.get(key);
+  public com.google.protobuf.StructOrBuilder getPropertiesOrBuilder() {
+    return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
   }
 
   public static final int CHILD_ENTRY_FIELD_NUMBER = 4;
@@ -220,7 +155,7 @@ java.lang.String defaultValue) {
    */
   @java.lang.Override
   public boolean hasChildEntry() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return ((bitField0_ & 0x00000002) != 0);
   }
   /**
    * <code>.profile.v1.EntryItem child_entry = 4 [json_name = "childEntry"];</code>
@@ -246,7 +181,7 @@ java.lang.String defaultValue) {
    */
   @java.lang.Override
   public boolean hasParentEntry() {
-    return ((bitField0_ & 0x00000002) != 0);
+    return ((bitField0_ & 0x00000004) != 0);
   }
   /**
    * <code>.profile.v1.EntryItem parent_entry = 5 [json_name = "parentEntry"];</code>
@@ -272,7 +207,7 @@ java.lang.String defaultValue) {
    */
   @java.lang.Override
   public boolean hasPeerProfile() {
-    return ((bitField0_ & 0x00000004) != 0);
+    return ((bitField0_ & 0x00000008) != 0);
   }
   /**
    * <code>.profile.v1.ProfileObject peer_profile = 6 [json_name = "peerProfile"];</code>
@@ -310,19 +245,16 @@ java.lang.String defaultValue) {
     if (type_ != com.antinvestor.apis.profile.v1.RelationshipType.MEMBER.getNumber()) {
       output.writeEnum(2, type_);
     }
-    com.google.protobuf.GeneratedMessage
-      .serializeStringMapTo(
-        output,
-        internalGetProperties(),
-        PropertiesDefaultEntryHolder.defaultEntry,
-        3);
     if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(4, getChildEntry());
+      output.writeMessage(3, getProperties());
     }
     if (((bitField0_ & 0x00000002) != 0)) {
-      output.writeMessage(5, getParentEntry());
+      output.writeMessage(4, getChildEntry());
     }
     if (((bitField0_ & 0x00000004) != 0)) {
+      output.writeMessage(5, getParentEntry());
+    }
+    if (((bitField0_ & 0x00000008) != 0)) {
       output.writeMessage(6, getPeerProfile());
     }
     getUnknownFields().writeTo(output);
@@ -341,25 +273,19 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(2, type_);
     }
-    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-         : internalGetProperties().getMap().entrySet()) {
-      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-      properties__ = PropertiesDefaultEntryHolder.defaultEntry.newBuilderForType()
-          .setKey(entry.getKey())
-          .setValue(entry.getValue())
-          .build();
-      size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, properties__);
-    }
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(4, getChildEntry());
+        .computeMessageSize(3, getProperties());
     }
     if (((bitField0_ & 0x00000002) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(5, getParentEntry());
+        .computeMessageSize(4, getChildEntry());
     }
     if (((bitField0_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(5, getParentEntry());
+    }
+    if (((bitField0_ & 0x00000008) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(6, getPeerProfile());
     }
@@ -381,8 +307,11 @@ java.lang.String defaultValue) {
     if (!getId()
         .equals(other.getId())) return false;
     if (type_ != other.type_) return false;
-    if (!internalGetProperties().equals(
-        other.internalGetProperties())) return false;
+    if (hasProperties() != other.hasProperties()) return false;
+    if (hasProperties()) {
+      if (!getProperties()
+          .equals(other.getProperties())) return false;
+    }
     if (hasChildEntry() != other.hasChildEntry()) return false;
     if (hasChildEntry()) {
       if (!getChildEntry()
@@ -413,9 +342,9 @@ java.lang.String defaultValue) {
     hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + TYPE_FIELD_NUMBER;
     hash = (53 * hash) + type_;
-    if (!internalGetProperties().getMap().isEmpty()) {
+    if (hasProperties()) {
       hash = (37 * hash) + PROPERTIES_FIELD_NUMBER;
-      hash = (53 * hash) + internalGetProperties().hashCode();
+      hash = (53 * hash) + getProperties().hashCode();
     }
     if (hasChildEntry()) {
       hash = (37 * hash) + CHILD_ENTRY_FIELD_NUMBER;
@@ -542,28 +471,6 @@ java.lang.String defaultValue) {
       return com.antinvestor.apis.profile.v1.ProfileProto.internal_static_profile_v1_RelationshipObject_descriptor;
     }
 
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 3:
-          return internalGetProperties();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 3:
-          return internalGetMutableProperties();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -585,6 +492,7 @@ java.lang.String defaultValue) {
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessage
               .alwaysUseFieldBuilders) {
+        internalGetPropertiesFieldBuilder();
         internalGetChildEntryFieldBuilder();
         internalGetParentEntryFieldBuilder();
         internalGetPeerProfileFieldBuilder();
@@ -596,7 +504,11 @@ java.lang.String defaultValue) {
       bitField0_ = 0;
       id_ = "";
       type_ = 0;
-      internalGetMutableProperties().clear();
+      properties_ = null;
+      if (propertiesBuilder_ != null) {
+        propertiesBuilder_.dispose();
+        propertiesBuilder_ = null;
+      }
       childEntry_ = null;
       if (childEntryBuilder_ != null) {
         childEntryBuilder_.dispose();
@@ -651,28 +563,30 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.type_ = type_;
       }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.properties_ = internalGetProperties();
-        result.properties_.makeImmutable();
-      }
       int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.properties_ = propertiesBuilder_ == null
+            ? properties_
+            : propertiesBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
       if (((from_bitField0_ & 0x00000008) != 0)) {
         result.childEntry_ = childEntryBuilder_ == null
             ? childEntry_
             : childEntryBuilder_.build();
-        to_bitField0_ |= 0x00000001;
+        to_bitField0_ |= 0x00000002;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
         result.parentEntry_ = parentEntryBuilder_ == null
             ? parentEntry_
             : parentEntryBuilder_.build();
-        to_bitField0_ |= 0x00000002;
+        to_bitField0_ |= 0x00000004;
       }
       if (((from_bitField0_ & 0x00000020) != 0)) {
         result.peerProfile_ = peerProfileBuilder_ == null
             ? peerProfile_
             : peerProfileBuilder_.build();
-        to_bitField0_ |= 0x00000004;
+        to_bitField0_ |= 0x00000008;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -697,9 +611,9 @@ java.lang.String defaultValue) {
       if (other.type_ != 0) {
         setTypeValue(other.getTypeValue());
       }
-      internalGetMutableProperties().mergeFrom(
-          other.internalGetProperties());
-      bitField0_ |= 0x00000004;
+      if (other.hasProperties()) {
+        mergeProperties(other.getProperties());
+      }
       if (other.hasChildEntry()) {
         mergeChildEntry(other.getChildEntry());
       }
@@ -746,11 +660,9 @@ java.lang.String defaultValue) {
               break;
             } // case 16
             case 26: {
-              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              properties__ = input.readMessage(
-                  PropertiesDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              internalGetMutableProperties().getMutableMap().put(
-                  properties__.getKey(), properties__.getValue());
+              input.readMessage(
+                  internalGetPropertiesFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000004;
               break;
             } // case 26
@@ -915,131 +827,125 @@ java.lang.String defaultValue) {
       return this;
     }
 
-    private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> properties_;
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetProperties() {
-      if (properties_ == null) {
-        return com.google.protobuf.MapField.emptyMapField(
-            PropertiesDefaultEntryHolder.defaultEntry);
-      }
-      return properties_;
+    private com.google.protobuf.Struct properties_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> propertiesBuilder_;
+    /**
+     * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
+     * @return Whether the properties field is set.
+     */
+    public boolean hasProperties() {
+      return ((bitField0_ & 0x00000004) != 0);
     }
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-        internalGetMutableProperties() {
-      if (properties_ == null) {
-        properties_ = com.google.protobuf.MapField.newMapField(
-            PropertiesDefaultEntryHolder.defaultEntry);
+    /**
+     * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
+     * @return The properties.
+     */
+    public com.google.protobuf.Struct getProperties() {
+      if (propertiesBuilder_ == null) {
+        return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
+      } else {
+        return propertiesBuilder_.getMessage();
       }
-      if (!properties_.isMutable()) {
-        properties_ = properties_.copy();
+    }
+    /**
+     * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
+     */
+    public Builder setProperties(com.google.protobuf.Struct value) {
+      if (propertiesBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        properties_ = value;
+      } else {
+        propertiesBuilder_.setMessage(value);
       }
       bitField0_ |= 0x00000004;
       onChanged();
-      return properties_;
-    }
-    public int getPropertiesCount() {
-      return internalGetProperties().getMap().size();
+      return this;
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 3 [json_name = "properties"];</code>
+     * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
-    @java.lang.Override
-    public boolean containsProperties(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      return internalGetProperties().getMap().containsKey(key);
-    }
-    /**
-     * Use {@link #getPropertiesMap()} instead.
-     */
-    @java.lang.Override
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getProperties() {
-      return getPropertiesMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; properties = 3 [json_name = "properties"];</code>
-     */
-    @java.lang.Override
-    public java.util.Map<java.lang.String, java.lang.String> getPropertiesMap() {
-      return internalGetProperties().getMap();
-    }
-    /**
-     * <code>map&lt;string, string&gt; properties = 3 [json_name = "properties"];</code>
-     */
-    @java.lang.Override
-    public /* nullable */
-java.lang.String getPropertiesOrDefault(
-        java.lang.String key,
-        /* nullable */
-java.lang.String defaultValue) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetProperties().getMap();
-      return map.containsKey(key) ? map.get(key) : defaultValue;
-    }
-    /**
-     * <code>map&lt;string, string&gt; properties = 3 [json_name = "properties"];</code>
-     */
-    @java.lang.Override
-    public java.lang.String getPropertiesOrThrow(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetProperties().getMap();
-      if (!map.containsKey(key)) {
-        throw new java.lang.IllegalArgumentException();
+    public Builder setProperties(
+        com.google.protobuf.Struct.Builder builderForValue) {
+      if (propertiesBuilder_ == null) {
+        properties_ = builderForValue.build();
+      } else {
+        propertiesBuilder_.setMessage(builderForValue.build());
       }
-      return map.get(key);
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
     }
+    /**
+     * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
+     */
+    public Builder mergeProperties(com.google.protobuf.Struct value) {
+      if (propertiesBuilder_ == null) {
+        if (((bitField0_ & 0x00000004) != 0) &&
+          properties_ != null &&
+          properties_ != com.google.protobuf.Struct.getDefaultInstance()) {
+          getPropertiesBuilder().mergeFrom(value);
+        } else {
+          properties_ = value;
+        }
+      } else {
+        propertiesBuilder_.mergeFrom(value);
+      }
+      if (properties_ != null) {
+        bitField0_ |= 0x00000004;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
+     */
     public Builder clearProperties() {
       bitField0_ = (bitField0_ & ~0x00000004);
-      internalGetMutableProperties().getMutableMap()
-          .clear();
+      properties_ = null;
+      if (propertiesBuilder_ != null) {
+        propertiesBuilder_.dispose();
+        propertiesBuilder_ = null;
+      }
+      onChanged();
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 3 [json_name = "properties"];</code>
+     * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
-    public Builder removeProperties(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      internalGetMutableProperties().getMutableMap()
-          .remove(key);
-      return this;
-    }
-    /**
-     * Use alternate mutation accessors instead.
-     */
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String>
-        getMutableProperties() {
+    public com.google.protobuf.Struct.Builder getPropertiesBuilder() {
       bitField0_ |= 0x00000004;
-      return internalGetMutableProperties().getMutableMap();
+      onChanged();
+      return internalGetPropertiesFieldBuilder().getBuilder();
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 3 [json_name = "properties"];</code>
+     * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
-    public Builder putProperties(
-        java.lang.String key,
-        java.lang.String value) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      if (value == null) { throw new NullPointerException("map value"); }
-      internalGetMutableProperties().getMutableMap()
-          .put(key, value);
-      bitField0_ |= 0x00000004;
-      return this;
+    public com.google.protobuf.StructOrBuilder getPropertiesOrBuilder() {
+      if (propertiesBuilder_ != null) {
+        return propertiesBuilder_.getMessageOrBuilder();
+      } else {
+        return properties_ == null ?
+            com.google.protobuf.Struct.getDefaultInstance() : properties_;
+      }
     }
     /**
-     * <code>map&lt;string, string&gt; properties = 3 [json_name = "properties"];</code>
+     * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
-    public Builder putAllProperties(
-        java.util.Map<java.lang.String, java.lang.String> values) {
-      internalGetMutableProperties().getMutableMap()
-          .putAll(values);
-      bitField0_ |= 0x00000004;
-      return this;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
+        internalGetPropertiesFieldBuilder() {
+      if (propertiesBuilder_ == null) {
+        propertiesBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder>(
+                getProperties(),
+                getParentForChildren(),
+                isClean());
+        properties_ = null;
+      }
+      return propertiesBuilder_;
     }
 
     private com.antinvestor.apis.profile.v1.EntryItem childEntry_;
