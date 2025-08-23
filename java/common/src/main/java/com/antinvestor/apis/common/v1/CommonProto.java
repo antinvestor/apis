@@ -51,40 +51,20 @@ public final class CommonProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_common_v1_SearchRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_common_v1_SearchRequest_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_common_v1_SearchRequest_ExtrasEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_common_v1_StatusRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_common_v1_StatusRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_common_v1_StatusRequest_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_common_v1_StatusRequest_ExtrasEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_common_v1_StatusResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_common_v1_StatusResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_common_v1_StatusResponse_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_common_v1_StatusResponse_ExtrasEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_common_v1_StatusUpdateRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_common_v1_StatusUpdateRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_common_v1_StatusUpdateRequest_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_common_v1_StatusUpdateRequest_ExtrasEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_common_v1_StatusUpdateResponse_descriptor;
   static final 
@@ -95,11 +75,6 @@ public final class CommonProto {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_common_v1_ContactLink_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_common_v1_ContactLink_ExtrasEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_common_v1_ContactLink_ExtrasEntry_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -110,66 +85,59 @@ public final class CommonProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026common/v1/common.proto\022\tcommon.v1\032\033buf" +
-      "/validate/validate.proto\"p\n\nPagination\022\024" +
-      "\n\005count\030\001 \001(\005R\005count\022\022\n\004page\030\002 \001(\005R\004page" +
-      "\022\035\n\nstart_date\030\003 \001(\tR\tstartDate\022\031\n\010end_d" +
-      "ate\030\004 \001(\tR\007endDate\"\210\002\n\rSearchRequest\022\024\n\005" +
-      "query\030\001 \001(\tR\005query\022\031\n\010id_query\030\002 \001(\tR\007id" +
-      "Query\022-\n\006limits\030\003 \001(\0132\025.common.v1.Pagina" +
-      "tionR\006limits\022\036\n\nproperties\030\007 \003(\tR\nproper" +
-      "ties\022<\n\006extras\030\010 \003(\0132$.common.v1.SearchR" +
-      "equest.ExtrasEntryR\006extras\0329\n\013ExtrasEntr" +
-      "y\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005valu" +
-      "e:\0028\001\"\265\001\n\rStatusRequest\022+\n\002id\030\001 \001(\tB\033\272H\030" +
-      "r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022<\n\006extras\030\002" +
-      " \003(\0132$.common.v1.StatusRequest.ExtrasEnt" +
-      "ryR\006extras\0329\n\013ExtrasEntry\022\020\n\003key\030\001 \001(\tR\003" +
-      "key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"\316\002\n\016Status" +
-      "Response\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z" +
-      "_-]{3,20}R\002id\022&\n\005state\030\002 \001(\0162\020.common.v1" +
-      ".STATER\005state\022)\n\006status\030\003 \001(\0162\021.common.v" +
-      "1.STATUSR\006status\022\037\n\013external_id\030\004 \001(\tR\ne" +
-      "xternalId\022!\n\014transient_id\030\005 \001(\tR\013transie" +
-      "ntId\022=\n\006extras\030\006 \003(\0132%.common.v1.StatusR" +
-      "esponse.ExtrasEntryR\006extras\0329\n\013ExtrasEnt" +
-      "ry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005val" +
-      "ue:\0028\001\"\265\002\n\023StatusUpdateRequest\022+\n\002id\030\001 \001" +
-      "(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022&\n\005s" +
-      "tate\030\002 \001(\0162\020.common.v1.STATER\005state\022)\n\006s" +
-      "tatus\030\003 \001(\0162\021.common.v1.STATUSR\006status\022\037" +
-      "\n\013external_id\030\004 \001(\tR\nexternalId\022B\n\006extra" +
-      "s\030\005 \003(\0132*.common.v1.StatusUpdateRequest." +
-      "ExtrasEntryR\006extras\0329\n\013ExtrasEntry\022\020\n\003ke" +
-      "y\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"E" +
-      "\n\024StatusUpdateResponse\022-\n\004data\030\001 \001(\0132\031.c" +
-      "ommon.v1.StatusResponseR\004data\"\220\004\n\013Contac" +
-      "tLink\022C\n\014profile_name\030\001 \001(\tB \272H\035r\030\020\003\030\372\0012" +
-      "\021[0-9a-z_-]{3,250}\330\001\001R\013profileName\022C\n\014pr" +
-      "ofile_type\030\002 \001(\tB \272H\035r\030\020\003\030\372\0012\021[0-9a-z_-]" +
-      "{3,250}\330\001\001R\013profileType\022=\n\nprofile_id\030\003 " +
-      "\001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,40}\330\001\001R\tpro" +
-      "fileId\022H\n\020profile_image_id\030\004 \001(\tB\036\272H\033r\026\020" +
-      "\003\030(2\020[0-9a-z_-]{3,40}\330\001\001R\016profileImageId" +
-      "\022=\n\ncontact_id\030\010 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z" +
-      "_-]{3,40}\330\001\001R\tcontactId\0228\n\006detail\030\t \001(\tB" +
-      " \272H\035r\030\020\003\030\372\0012\021[0-9a-z_-]{3,250}\330\001\001R\006detai" +
-      "l\022:\n\006extras\030\n \003(\0132\".common.v1.ContactLin" +
-      "k.ExtrasEntryR\006extras\0329\n\013ExtrasEntry\022\020\n\003" +
-      "key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001" +
-      "*H\n\005STATE\022\013\n\007CREATED\020\000\022\013\n\007CHECKED\020\001\022\n\n\006A" +
-      "CTIVE\020\002\022\014\n\010INACTIVE\020\003\022\013\n\007DELETED\020\004*M\n\006ST" +
-      "ATUS\022\013\n\007UNKNOWN\020\000\022\n\n\006QUEUED\020\001\022\016\n\nIN_PROC" +
-      "ESS\020\002\022\n\n\006FAILED\020\003\022\016\n\nSUCCESSFUL\020\004B\257\001\n\036co" +
-      "m.antinvestor.apis.common.v1B\013CommonProt" +
-      "oP\001Z8github.com/antinvestor/apis/go/comm" +
-      "on/common/v1;commonv1\370\001\001\242\002\003CXX\252\002\tCommon." +
-      "V1\312\002\tCommon\\V1\342\002\025Common\\V1\\GPBMetadata\352\002" +
-      "\nCommon::V1b\006proto3"
+      "/validate/validate.proto\032\034google/protobu" +
+      "f/struct.proto\"p\n\nPagination\022\024\n\005count\030\001 " +
+      "\001(\005R\005count\022\022\n\004page\030\002 \001(\005R\004page\022\035\n\nstart_" +
+      "date\030\003 \001(\tR\tstartDate\022\031\n\010end_date\030\004 \001(\tR" +
+      "\007endDate\"\300\001\n\rSearchRequest\022\024\n\005query\030\001 \001(" +
+      "\tR\005query\022\031\n\010id_query\030\002 \001(\tR\007idQuery\022-\n\006l" +
+      "imits\030\003 \001(\0132\025.common.v1.PaginationR\006limi" +
+      "ts\022\036\n\nproperties\030\007 \003(\tR\nproperties\022/\n\006ex" +
+      "tras\030\010 \001(\0132\027.google.protobuf.StructR\006ext" +
+      "ras\"m\n\rStatusRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020" +
+      "\003\030(2\020[0-9a-z_-]{3,20}R\002id\022/\n\006extras\030\002 \001(" +
+      "\0132\027.google.protobuf.StructR\006extras\"\205\002\n\016S" +
+      "tatusResponse\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0" +
+      "-9a-z_-]{3,20}R\002id\022&\n\005state\030\002 \001(\0162\020.comm" +
+      "on.v1.STATER\005state\022)\n\006status\030\003 \001(\0162\021.com" +
+      "mon.v1.STATUSR\006status\022\037\n\013external_id\030\004 \001" +
+      "(\tR\nexternalId\022!\n\014transient_id\030\005 \001(\tR\013tr" +
+      "ansientId\022/\n\006extras\030\006 \001(\0132\027.google.proto" +
+      "buf.StructR\006extras\"\347\001\n\023StatusUpdateReque" +
+      "st\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3," +
+      "20}R\002id\022&\n\005state\030\002 \001(\0162\020.common.v1.STATE" +
+      "R\005state\022)\n\006status\030\003 \001(\0162\021.common.v1.STAT" +
+      "USR\006status\022\037\n\013external_id\030\004 \001(\tR\nexterna" +
+      "lId\022/\n\006extras\030\005 \001(\0132\027.google.protobuf.St" +
+      "ructR\006extras\"E\n\024StatusUpdateResponse\022-\n\004" +
+      "data\030\001 \001(\0132\031.common.v1.StatusResponseR\004d" +
+      "ata\"\312\003\n\013ContactLink\022C\n\014profile_name\030\001 \001(" +
+      "\tB \272H\035r\030\020\003\030\372\0012\021[0-9a-z_-]{3,250}\330\001\001R\013pro" +
+      "fileName\022C\n\014profile_type\030\002 \001(\tB \272H\035r\030\020\003\030" +
+      "\372\0012\021[0-9a-z_-]{3,250}\330\001\001R\013profileType\022=\n" +
+      "\nprofile_id\030\003 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]" +
+      "{3,40}\330\001\001R\tprofileId\022H\n\020profile_image_id" +
+      "\030\004 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,40}\330\001\001R\016" +
+      "profileImageId\022=\n\ncontact_id\030\010 \001(\tB\036\272H\033r" +
+      "\026\020\003\030(2\020[0-9a-z_-]{3,40}\330\001\001R\tcontactId\0228\n" +
+      "\006detail\030\t \001(\tB \272H\035r\030\020\003\030\372\0012\021[0-9a-z_-]{3," +
+      "250}\330\001\001R\006detail\022/\n\006extras\030\n \001(\0132\027.google" +
+      ".protobuf.StructR\006extras*H\n\005STATE\022\013\n\007CRE" +
+      "ATED\020\000\022\013\n\007CHECKED\020\001\022\n\n\006ACTIVE\020\002\022\014\n\010INACT" +
+      "IVE\020\003\022\013\n\007DELETED\020\004*M\n\006STATUS\022\013\n\007UNKNOWN\020" +
+      "\000\022\n\n\006QUEUED\020\001\022\016\n\nIN_PROCESS\020\002\022\n\n\006FAILED\020" +
+      "\003\022\016\n\nSUCCESSFUL\020\004B\257\001\n\036com.antinvestor.ap" +
+      "is.common.v1B\013CommonProtoP\001Z8github.com/" +
+      "antinvestor/apis/go/common/common/v1;com" +
+      "monv1\370\001\001\242\002\003CXX\252\002\tCommon.V1\312\002\tCommon\\V1\342\002" +
+      "\025Common\\V1\\GPBMetadata\352\002\nCommon::V1b\006pro" +
+      "to3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           build.buf.validate.ValidateProto.getDescriptor(),
+          com.google.protobuf.StructProto.getDescriptor(),
         });
     internal_static_common_v1_Pagination_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -183,48 +151,24 @@ public final class CommonProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_common_v1_SearchRequest_descriptor,
         new java.lang.String[] { "Query", "IdQuery", "Limits", "Properties", "Extras", });
-    internal_static_common_v1_SearchRequest_ExtrasEntry_descriptor =
-      internal_static_common_v1_SearchRequest_descriptor.getNestedTypes().get(0);
-    internal_static_common_v1_SearchRequest_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_common_v1_SearchRequest_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_common_v1_StatusRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_common_v1_StatusRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_common_v1_StatusRequest_descriptor,
         new java.lang.String[] { "Id", "Extras", });
-    internal_static_common_v1_StatusRequest_ExtrasEntry_descriptor =
-      internal_static_common_v1_StatusRequest_descriptor.getNestedTypes().get(0);
-    internal_static_common_v1_StatusRequest_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_common_v1_StatusRequest_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_common_v1_StatusResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_common_v1_StatusResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_common_v1_StatusResponse_descriptor,
         new java.lang.String[] { "Id", "State", "Status", "ExternalId", "TransientId", "Extras", });
-    internal_static_common_v1_StatusResponse_ExtrasEntry_descriptor =
-      internal_static_common_v1_StatusResponse_descriptor.getNestedTypes().get(0);
-    internal_static_common_v1_StatusResponse_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_common_v1_StatusResponse_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_common_v1_StatusUpdateRequest_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_common_v1_StatusUpdateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_common_v1_StatusUpdateRequest_descriptor,
         new java.lang.String[] { "Id", "State", "Status", "ExternalId", "Extras", });
-    internal_static_common_v1_StatusUpdateRequest_ExtrasEntry_descriptor =
-      internal_static_common_v1_StatusUpdateRequest_descriptor.getNestedTypes().get(0);
-    internal_static_common_v1_StatusUpdateRequest_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_common_v1_StatusUpdateRequest_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     internal_static_common_v1_StatusUpdateResponse_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_common_v1_StatusUpdateResponse_fieldAccessorTable = new
@@ -237,14 +181,9 @@ public final class CommonProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_common_v1_ContactLink_descriptor,
         new java.lang.String[] { "ProfileName", "ProfileType", "ProfileId", "ProfileImageId", "ContactId", "Detail", "Extras", });
-    internal_static_common_v1_ContactLink_ExtrasEntry_descriptor =
-      internal_static_common_v1_ContactLink_descriptor.getNestedTypes().get(0);
-    internal_static_common_v1_ContactLink_ExtrasEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_common_v1_ContactLink_ExtrasEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
     descriptor.resolveAllFeaturesImmutable();
     build.buf.validate.ValidateProto.getDescriptor();
+    com.google.protobuf.StructProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(build.buf.validate.ValidateProto.field);

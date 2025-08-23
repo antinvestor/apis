@@ -71,36 +71,17 @@ public interface StatusUpdateRequestOrBuilder extends
       getExternalIdBytes();
 
   /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+   * @return Whether the extras field is set.
    */
-  int getExtrasCount();
+  boolean hasExtras();
   /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+   * @return The extras.
    */
-  boolean containsExtras(
-      java.lang.String key);
+  com.google.protobuf.Struct getExtras();
   /**
-   * Use {@link #getExtrasMap()} instead.
+   * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtras();
-  /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getExtrasMap();
-  /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-   */
-  /* nullable */
-java.lang.String getExtrasOrDefault(
-      java.lang.String key,
-      /* nullable */
-java.lang.String defaultValue);
-  /**
-   * <code>map&lt;string, string&gt; extras = 5 [json_name = "extras"];</code>
-   */
-  java.lang.String getExtrasOrThrow(
-      java.lang.String key);
+  com.google.protobuf.StructOrBuilder getExtrasOrBuilder();
 }
