@@ -80,22 +80,6 @@ updates:
       prefix: "chore"
       include: "scope"
 
-  # Gradle - files subproject
-  - package-ecosystem: "gradle"
-    directory: "/java/files"
-    schedule:
-      interval: "daily"
-      time: "09:00"
-    open-pull-requests-limit: 20
-    reviewers:
-      - "antinvestor/maintainers"
-    labels:
-      - "dependencies"
-      - "java"
-    commit-message:
-      prefix: "chore"
-      include: "scope"
-
   # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
