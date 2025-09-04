@@ -12,7 +12,7 @@ jobs:
       - name: Checkout new code for testing
         uses: actions/checkout@v5
       - name: Setup go testing infrastructure
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           go-version: 'stable'
 
