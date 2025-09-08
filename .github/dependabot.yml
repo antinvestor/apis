@@ -2,7 +2,7 @@ version: 2
 updates:
   # Go modules - common
   - package-ecosystem: "gomod"
-    directory: "/go/*"
+    directories: "/go/*"
     schedule:
       interval: "daily"
       time: "09:00"
