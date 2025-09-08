@@ -2,55 +2,7 @@ version: 2
 updates:
   # Go modules - common
   - package-ecosystem: "gomod"
-    directory: "/go/common"
-    schedule:
-      interval: "daily"
-      time: "09:00"
-    open-pull-requests-limit: 20
-    reviewers:
-      - "antinvestor/maintainers"
-    labels:
-      - "dependencies"
-      - "go"
-    commit-message:
-      prefix: "chore"
-      include: "scope"
-
-  # Go modules - device
-  - package-ecosystem: "gomod"
-    directory: "/go/device"
-    schedule:
-      interval: "daily"
-      time: "09:00"
-    open-pull-requests-limit: 20
-    reviewers:
-      - "antinvestor/maintainers"
-    labels:
-      - "dependencies"
-      - "go"
-    commit-message:
-      prefix: "chore"
-      include: "scope"
-
-  # Go modules - files
-  - package-ecosystem: "gomod"
-    directory: "/go/files"
-    schedule:
-      interval: "daily"
-      time: "09:00"
-    open-pull-requests-limit: 20
-    reviewers:
-      - "antinvestor/maintainers"
-    labels:
-      - "dependencies"
-      - "go"
-    commit-message:
-      prefix: "chore"
-      include: "scope"
-
-  # Go modules - ledger
-  - package-ecosystem: "gomod"
-    directory: "/go/ledger"
+    directory: "/go/*"
     schedule:
       interval: "daily"
       time: "09:00"
