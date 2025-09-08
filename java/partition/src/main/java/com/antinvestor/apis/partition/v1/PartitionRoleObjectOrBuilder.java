@@ -74,4 +74,19 @@ public interface PartitionRoleObjectOrBuilder extends
    * <code>.google.protobuf.Struct properties = 4 [json_name = "properties"];</code>
    */
   com.google.protobuf.StructOrBuilder getPropertiesOrBuilder();
+
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+   * @return Whether the createdAt field is set.
+   */
+  boolean hasCreatedAt();
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+   * @return The createdAt.
+   */
+  com.google.protobuf.Timestamp getCreatedAt();
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();
 }

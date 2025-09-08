@@ -61,6 +61,7 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.partition.v1.PageObject.class, com.antinvestor.apis.partition.v1.PageObject.Builder.class);
   }
 
+  private int bitField0_;
   public static final int PAGE_ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object pageId_ = "";
@@ -196,6 +197,32 @@ private static final long serialVersionUID = 0L;
     return result == null ? com.antinvestor.apis.common.v1.STATE.UNRECOGNIZED : result;
   }
 
+  public static final int CREATED_AT_FIELD_NUMBER = 5;
+  private com.google.protobuf.Timestamp createdAt_;
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+   * @return Whether the createdAt field is set.
+   */
+  @java.lang.Override
+  public boolean hasCreatedAt() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+   * @return The createdAt.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Timestamp getCreatedAt() {
+    return createdAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createdAt_;
+  }
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder() {
+    return createdAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createdAt_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -222,6 +249,9 @@ private static final long serialVersionUID = 0L;
     if (state_ != com.antinvestor.apis.common.v1.STATE.CREATED.getNumber()) {
       output.writeEnum(4, state_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(5, getCreatedAt());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -243,6 +273,10 @@ private static final long serialVersionUID = 0L;
     if (state_ != com.antinvestor.apis.common.v1.STATE.CREATED.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(4, state_);
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(5, getCreatedAt());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -266,6 +300,11 @@ private static final long serialVersionUID = 0L;
     if (!getHtml()
         .equals(other.getHtml())) return false;
     if (state_ != other.state_) return false;
+    if (hasCreatedAt() != other.hasCreatedAt()) return false;
+    if (hasCreatedAt()) {
+      if (!getCreatedAt()
+          .equals(other.getCreatedAt())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -285,6 +324,10 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getHtml().hashCode();
     hash = (37 * hash) + STATE_FIELD_NUMBER;
     hash = (53 * hash) + state_;
+    if (hasCreatedAt()) {
+      hash = (37 * hash) + CREATED_AT_FIELD_NUMBER;
+      hash = (53 * hash) + getCreatedAt().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -404,13 +447,19 @@ private static final long serialVersionUID = 0L;
 
     // Construct using com.antinvestor.apis.partition.v1.PageObject.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessage
+              .alwaysUseFieldBuilders) {
+        internalGetCreatedAtFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -420,6 +469,11 @@ private static final long serialVersionUID = 0L;
       name_ = "";
       html_ = "";
       state_ = 0;
+      createdAt_ = null;
+      if (createdAtBuilder_ != null) {
+        createdAtBuilder_.dispose();
+        createdAtBuilder_ = null;
+      }
       return this;
     }
 
@@ -465,6 +519,14 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000008) != 0)) {
         result.state_ = state_;
       }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.createdAt_ = createdAtBuilder_ == null
+            ? createdAt_
+            : createdAtBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -496,6 +558,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.state_ != 0) {
         setStateValue(other.getStateValue());
+      }
+      if (other.hasCreatedAt()) {
+        mergeCreatedAt(other.getCreatedAt());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -543,6 +608,13 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000008;
               break;
             } // case 32
+            case 42: {
+              input.readMessage(
+                  internalGetCreatedAtFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 42
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -825,6 +897,127 @@ private static final long serialVersionUID = 0L;
       state_ = 0;
       onChanged();
       return this;
+    }
+
+    private com.google.protobuf.Timestamp createdAt_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> createdAtBuilder_;
+    /**
+     * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+     * @return Whether the createdAt field is set.
+     */
+    public boolean hasCreatedAt() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+     * @return The createdAt.
+     */
+    public com.google.protobuf.Timestamp getCreatedAt() {
+      if (createdAtBuilder_ == null) {
+        return createdAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createdAt_;
+      } else {
+        return createdAtBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+     */
+    public Builder setCreatedAt(com.google.protobuf.Timestamp value) {
+      if (createdAtBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        createdAt_ = value;
+      } else {
+        createdAtBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+     */
+    public Builder setCreatedAt(
+        com.google.protobuf.Timestamp.Builder builderForValue) {
+      if (createdAtBuilder_ == null) {
+        createdAt_ = builderForValue.build();
+      } else {
+        createdAtBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+     */
+    public Builder mergeCreatedAt(com.google.protobuf.Timestamp value) {
+      if (createdAtBuilder_ == null) {
+        if (((bitField0_ & 0x00000010) != 0) &&
+          createdAt_ != null &&
+          createdAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+          getCreatedAtBuilder().mergeFrom(value);
+        } else {
+          createdAt_ = value;
+        }
+      } else {
+        createdAtBuilder_.mergeFrom(value);
+      }
+      if (createdAt_ != null) {
+        bitField0_ |= 0x00000010;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+     */
+    public Builder clearCreatedAt() {
+      bitField0_ = (bitField0_ & ~0x00000010);
+      createdAt_ = null;
+      if (createdAtBuilder_ != null) {
+        createdAtBuilder_.dispose();
+        createdAtBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+     */
+    public com.google.protobuf.Timestamp.Builder getCreatedAtBuilder() {
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return internalGetCreatedAtFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+     */
+    public com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder() {
+      if (createdAtBuilder_ != null) {
+        return createdAtBuilder_.getMessageOrBuilder();
+      } else {
+        return createdAt_ == null ?
+            com.google.protobuf.Timestamp.getDefaultInstance() : createdAt_;
+      }
+    }
+    /**
+     * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+        internalGetCreatedAtFieldBuilder() {
+      if (createdAtBuilder_ == null) {
+        createdAtBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                getCreatedAt(),
+                getParentForChildren(),
+                isClean());
+        createdAt_ = null;
+      }
+      return createdAtBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:partition.v1.PageObject)

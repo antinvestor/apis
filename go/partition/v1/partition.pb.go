@@ -28,6 +28,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -43,8 +44,10 @@ const (
 type TenantObject struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	Properties    *structpb.Struct       `protobuf:"bytes,3,opt,name=properties,proto3" json:"properties,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Properties    *structpb.Struct       `protobuf:"bytes,4,opt,name=properties,proto3" json:"properties,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -86,6 +89,13 @@ func (x *TenantObject) GetId() string {
 	return ""
 }
 
+func (x *TenantObject) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 func (x *TenantObject) GetDescription() string {
 	if x != nil {
 		return x.Description
@@ -96,6 +106,13 @@ func (x *TenantObject) GetDescription() string {
 func (x *TenantObject) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
+	}
+	return nil
+}
+
+func (x *TenantObject) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
 	}
 	return nil
 }
@@ -980,6 +997,7 @@ type PartitionObject struct {
 	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	State         v1.STATE               `protobuf:"varint,6,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
 	Properties    *structpb.Struct       `protobuf:"bytes,7,opt,name=properties,proto3" json:"properties,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1059,6 +1077,13 @@ func (x *PartitionObject) GetState() v1.STATE {
 func (x *PartitionObject) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
+	}
+	return nil
+}
+
+func (x *PartitionObject) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
 	}
 	return nil
 }
@@ -1174,6 +1199,7 @@ type PartitionRoleObject struct {
 	PartitionId     string                 `protobuf:"bytes,2,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
 	Name            string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Properties      *structpb.Struct       `protobuf:"bytes,4,opt,name=properties,proto3" json:"properties,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1232,6 +1258,13 @@ func (x *PartitionRoleObject) GetName() string {
 func (x *PartitionRoleObject) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
+	}
+	return nil
+}
+
+func (x *PartitionRoleObject) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
 	}
 	return nil
 }
@@ -1418,6 +1451,7 @@ type PageObject struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Html          string                 `protobuf:"bytes,3,opt,name=html,proto3" json:"html,omitempty"`
 	State         v1.STATE               `protobuf:"varint,4,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1478,6 +1512,13 @@ func (x *PageObject) GetState() v1.STATE {
 		return x.State
 	}
 	return v1.STATE(0)
+}
+
+func (x *PageObject) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
 }
 
 type CreatePageRequest struct {
@@ -1782,6 +1823,7 @@ type AccessObject struct {
 	ProfileId     string                 `protobuf:"bytes,2,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`
 	Partition     *PartitionObject       `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
 	State         v1.STATE               `protobuf:"varint,4,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1842,6 +1884,13 @@ func (x *AccessObject) GetState() v1.STATE {
 		return x.State
 	}
 	return v1.STATE(0)
+}
+
+func (x *AccessObject) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
 }
 
 type CreateAccessRequest struct {
@@ -2545,15 +2594,18 @@ var File_partition_v1_partition_proto protoreflect.FileDescriptor
 
 const file_partition_v1_partition_proto_rawDesc = "" +
 	"\n" +
-	"\x1cpartition/v1/partition.proto\x12\fpartition.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa2\x01\n" +
+	"\x1cpartition/v1/partition.proto\x12\fpartition.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xfc\x01\n" +
 	"\fTenantObject\x12+\n" +
-	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12,\n" +
-	"\vdescription\x18\x02 \x01(\tB\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1d\n" +
+	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12,\n" +
+	"\vdescription\x18\x03 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\n" +
 	"\x18\xf4\x03R\vdescription\x127\n" +
 	"\n" +
-	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
-	"properties\"\x92\x02\n" +
+	"properties\x18\x04 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x92\x02\n" +
 	"\x16PartitionCreateRequest\x12\x1d\n" +
 	"\x04name\x18\x01 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x128\n" +
 	"\ttenant_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\btenantId\x128\n" +
@@ -2631,7 +2683,7 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"properties\x18\x05 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\"L\n" +
 	"\x17UpdatePartitionResponse\x121\n" +
-	"\x04data\x18\x01 \x01(\v2\x1d.partition.v1.PartitionObjectR\x04data\"\xe0\x02\n" +
+	"\x04data\x18\x01 \x01(\v2\x1d.partition.v1.PartitionObjectR\x04data\"\x9b\x03\n" +
 	"\x0fPartitionObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x128\n" +
@@ -2643,7 +2695,9 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"\x05state\x18\x06 \x01(\x0e2\x10.common.v1.STATER\x05state\x127\n" +
 	"\n" +
 	"properties\x18\a \x01(\v2\x17.google.protobuf.StructR\n" +
-	"properties\"\xb4\x01\n" +
+	"properties\x129\n" +
+	"\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xb4\x01\n" +
 	"\x1aCreatePartitionRoleRequest\x12>\n" +
 	"\fpartition_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\vpartitionId\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x127\n" +
@@ -2651,14 +2705,16 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\"T\n" +
 	"\x1bCreatePartitionRoleResponse\x125\n" +
-	"\x04data\x18\x01 \x01(\v2!.partition.v1.PartitionRoleObjectR\x04data\"\xf6\x01\n" +
+	"\x04data\x18\x01 \x01(\v2!.partition.v1.PartitionRoleObjectR\x04data\"\xb1\x02\n" +
 	"\x13PartitionRoleObject\x12G\n" +
 	"\x11partition_role_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x0fpartitionRoleId\x12>\n" +
 	"\fpartition_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\vpartitionId\x12\x1d\n" +
 	"\x04name\x18\x03 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x127\n" +
 	"\n" +
 	"properties\x18\x04 \x01(\v2\x17.google.protobuf.StructR\n" +
-	"properties\"I\n" +
+	"properties\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"I\n" +
 	"\x1aRemovePartitionRoleRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\";\n" +
 	"\x1bRemovePartitionRoleResponse\x12\x1c\n" +
@@ -2666,14 +2722,16 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"\x18ListPartitionRoleRequest\x12>\n" +
 	"\fpartition_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\vpartitionId\"R\n" +
 	"\x19ListPartitionRoleResponse\x125\n" +
-	"\x04role\x18\x01 \x03(\v2!.partition.v1.PartitionRoleObjectR\x04role\"\xa9\x01\n" +
+	"\x04role\x18\x01 \x03(\v2!.partition.v1.PartitionRoleObjectR\x04role\"\xe4\x01\n" +
 	"\n" +
 	"PageObject\x124\n" +
 	"\apage_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06pageId\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12\x1e\n" +
 	"\x04html\x18\x03 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x04\x18\x88'R\x04html\x12&\n" +
-	"\x05state\x18\x04 \x01(\x0e2\x10.common.v1.STATER\x05state\"\x92\x01\n" +
+	"\x05state\x18\x04 \x01(\x0e2\x10.common.v1.STATER\x05state\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x92\x01\n" +
 	"\x11CreatePageRequest\x12>\n" +
 	"\fpartition_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\vpartitionId\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12\x1e\n" +
@@ -2690,13 +2748,15 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"\x11RemovePageRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"2\n" +
 	"\x12RemovePageResponse\x12\x1c\n" +
-	"\tsucceeded\x18\x01 \x01(\bR\tsucceeded\"\xe9\x01\n" +
+	"\tsucceeded\x18\x01 \x01(\bR\tsucceeded\"\xa4\x02\n" +
 	"\fAccessObject\x128\n" +
 	"\taccess_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\baccessId\x12:\n" +
 	"\n" +
 	"profile_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tprofileId\x12;\n" +
 	"\tpartition\x18\x03 \x01(\v2\x1d.partition.v1.PartitionObjectR\tpartition\x12&\n" +
-	"\x05state\x18\x04 \x01(\x0e2\x10.common.v1.STATER\x05state\"\xe9\x01\n" +
+	"\x05state\x18\x04 \x01(\x0e2\x10.common.v1.STATER\x05state\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xe9\x01\n" +
 	"\x13CreateAccessRequest\x12C\n" +
 	"\fpartition_id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}H\x00R\vpartitionId\x12=\n" +
 	"\tclient_id\x18\x03 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}H\x00R\bclientId\x12:\n" +
@@ -2831,83 +2891,89 @@ var file_partition_v1_partition_proto_goTypes = []any{
 	(*ListAccessRoleRequest)(nil),       // 43: partition.v1.ListAccessRoleRequest
 	(*ListAccessRoleResponse)(nil),      // 44: partition.v1.ListAccessRoleResponse
 	(*structpb.Struct)(nil),             // 45: google.protobuf.Struct
-	(v1.STATE)(0),                       // 46: common.v1.STATE
+	(*timestamppb.Timestamp)(nil),       // 46: google.protobuf.Timestamp
+	(v1.STATE)(0),                       // 47: common.v1.STATE
 }
 var file_partition_v1_partition_proto_depIdxs = []int32{
 	45, // 0: partition.v1.TenantObject.properties:type_name -> google.protobuf.Struct
-	45, // 1: partition.v1.PartitionCreateRequest.properties:type_name -> google.protobuf.Struct
-	0,  // 2: partition.v1.GetTenantResponse.data:type_name -> partition.v1.TenantObject
-	45, // 3: partition.v1.ListTenantRequest.extras:type_name -> google.protobuf.Struct
-	0,  // 4: partition.v1.ListTenantResponse.data:type_name -> partition.v1.TenantObject
-	45, // 5: partition.v1.CreateTenantRequest.properties:type_name -> google.protobuf.Struct
-	0,  // 6: partition.v1.CreateTenantResponse.data:type_name -> partition.v1.TenantObject
-	16, // 7: partition.v1.GetPartitionResponse.data:type_name -> partition.v1.PartitionObject
-	45, // 8: partition.v1.ListPartitionRequest.extras:type_name -> google.protobuf.Struct
-	16, // 9: partition.v1.ListPartitionResponse.data:type_name -> partition.v1.PartitionObject
-	45, // 10: partition.v1.CreatePartitionRequest.properties:type_name -> google.protobuf.Struct
-	16, // 11: partition.v1.CreatePartitionResponse.data:type_name -> partition.v1.PartitionObject
-	46, // 12: partition.v1.UpdatePartitionRequest.state:type_name -> common.v1.STATE
-	45, // 13: partition.v1.UpdatePartitionRequest.properties:type_name -> google.protobuf.Struct
-	16, // 14: partition.v1.UpdatePartitionResponse.data:type_name -> partition.v1.PartitionObject
-	46, // 15: partition.v1.PartitionObject.state:type_name -> common.v1.STATE
-	45, // 16: partition.v1.PartitionObject.properties:type_name -> google.protobuf.Struct
-	45, // 17: partition.v1.CreatePartitionRoleRequest.properties:type_name -> google.protobuf.Struct
-	19, // 18: partition.v1.CreatePartitionRoleResponse.data:type_name -> partition.v1.PartitionRoleObject
-	45, // 19: partition.v1.PartitionRoleObject.properties:type_name -> google.protobuf.Struct
-	19, // 20: partition.v1.ListPartitionRoleResponse.role:type_name -> partition.v1.PartitionRoleObject
-	46, // 21: partition.v1.PageObject.state:type_name -> common.v1.STATE
-	24, // 22: partition.v1.CreatePageResponse.data:type_name -> partition.v1.PageObject
-	24, // 23: partition.v1.GetPageResponse.data:type_name -> partition.v1.PageObject
-	16, // 24: partition.v1.AccessObject.partition:type_name -> partition.v1.PartitionObject
-	46, // 25: partition.v1.AccessObject.state:type_name -> common.v1.STATE
-	31, // 26: partition.v1.CreateAccessResponse.data:type_name -> partition.v1.AccessObject
-	31, // 27: partition.v1.GetAccessResponse.data:type_name -> partition.v1.AccessObject
-	40, // 28: partition.v1.CreateAccessRoleResponse.data:type_name -> partition.v1.AccessRoleObject
-	19, // 29: partition.v1.AccessRoleObject.role:type_name -> partition.v1.PartitionRoleObject
-	40, // 30: partition.v1.ListAccessRoleResponse.role:type_name -> partition.v1.AccessRoleObject
-	2,  // 31: partition.v1.PartitionService.GetTenant:input_type -> partition.v1.GetTenantRequest
-	4,  // 32: partition.v1.PartitionService.ListTenant:input_type -> partition.v1.ListTenantRequest
-	6,  // 33: partition.v1.PartitionService.CreateTenant:input_type -> partition.v1.CreateTenantRequest
-	10, // 34: partition.v1.PartitionService.ListPartition:input_type -> partition.v1.ListPartitionRequest
-	12, // 35: partition.v1.PartitionService.CreatePartition:input_type -> partition.v1.CreatePartitionRequest
-	8,  // 36: partition.v1.PartitionService.GetPartition:input_type -> partition.v1.GetPartitionRequest
-	14, // 37: partition.v1.PartitionService.UpdatePartition:input_type -> partition.v1.UpdatePartitionRequest
-	17, // 38: partition.v1.PartitionService.CreatePartitionRole:input_type -> partition.v1.CreatePartitionRoleRequest
-	22, // 39: partition.v1.PartitionService.ListPartitionRole:input_type -> partition.v1.ListPartitionRoleRequest
-	20, // 40: partition.v1.PartitionService.RemovePartitionRole:input_type -> partition.v1.RemovePartitionRoleRequest
-	25, // 41: partition.v1.PartitionService.CreatePage:input_type -> partition.v1.CreatePageRequest
-	27, // 42: partition.v1.PartitionService.GetPage:input_type -> partition.v1.GetPageRequest
-	29, // 43: partition.v1.PartitionService.RemovePage:input_type -> partition.v1.RemovePageRequest
-	32, // 44: partition.v1.PartitionService.CreateAccess:input_type -> partition.v1.CreateAccessRequest
-	34, // 45: partition.v1.PartitionService.GetAccess:input_type -> partition.v1.GetAccessRequest
-	36, // 46: partition.v1.PartitionService.RemoveAccess:input_type -> partition.v1.RemoveAccessRequest
-	38, // 47: partition.v1.PartitionService.CreateAccessRole:input_type -> partition.v1.CreateAccessRoleRequest
-	43, // 48: partition.v1.PartitionService.ListAccessRole:input_type -> partition.v1.ListAccessRoleRequest
-	41, // 49: partition.v1.PartitionService.RemoveAccessRole:input_type -> partition.v1.RemoveAccessRoleRequest
-	3,  // 50: partition.v1.PartitionService.GetTenant:output_type -> partition.v1.GetTenantResponse
-	5,  // 51: partition.v1.PartitionService.ListTenant:output_type -> partition.v1.ListTenantResponse
-	7,  // 52: partition.v1.PartitionService.CreateTenant:output_type -> partition.v1.CreateTenantResponse
-	11, // 53: partition.v1.PartitionService.ListPartition:output_type -> partition.v1.ListPartitionResponse
-	13, // 54: partition.v1.PartitionService.CreatePartition:output_type -> partition.v1.CreatePartitionResponse
-	9,  // 55: partition.v1.PartitionService.GetPartition:output_type -> partition.v1.GetPartitionResponse
-	15, // 56: partition.v1.PartitionService.UpdatePartition:output_type -> partition.v1.UpdatePartitionResponse
-	18, // 57: partition.v1.PartitionService.CreatePartitionRole:output_type -> partition.v1.CreatePartitionRoleResponse
-	23, // 58: partition.v1.PartitionService.ListPartitionRole:output_type -> partition.v1.ListPartitionRoleResponse
-	21, // 59: partition.v1.PartitionService.RemovePartitionRole:output_type -> partition.v1.RemovePartitionRoleResponse
-	26, // 60: partition.v1.PartitionService.CreatePage:output_type -> partition.v1.CreatePageResponse
-	28, // 61: partition.v1.PartitionService.GetPage:output_type -> partition.v1.GetPageResponse
-	30, // 62: partition.v1.PartitionService.RemovePage:output_type -> partition.v1.RemovePageResponse
-	33, // 63: partition.v1.PartitionService.CreateAccess:output_type -> partition.v1.CreateAccessResponse
-	35, // 64: partition.v1.PartitionService.GetAccess:output_type -> partition.v1.GetAccessResponse
-	37, // 65: partition.v1.PartitionService.RemoveAccess:output_type -> partition.v1.RemoveAccessResponse
-	39, // 66: partition.v1.PartitionService.CreateAccessRole:output_type -> partition.v1.CreateAccessRoleResponse
-	44, // 67: partition.v1.PartitionService.ListAccessRole:output_type -> partition.v1.ListAccessRoleResponse
-	42, // 68: partition.v1.PartitionService.RemoveAccessRole:output_type -> partition.v1.RemoveAccessRoleResponse
-	50, // [50:69] is the sub-list for method output_type
-	31, // [31:50] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	46, // 1: partition.v1.TenantObject.created_at:type_name -> google.protobuf.Timestamp
+	45, // 2: partition.v1.PartitionCreateRequest.properties:type_name -> google.protobuf.Struct
+	0,  // 3: partition.v1.GetTenantResponse.data:type_name -> partition.v1.TenantObject
+	45, // 4: partition.v1.ListTenantRequest.extras:type_name -> google.protobuf.Struct
+	0,  // 5: partition.v1.ListTenantResponse.data:type_name -> partition.v1.TenantObject
+	45, // 6: partition.v1.CreateTenantRequest.properties:type_name -> google.protobuf.Struct
+	0,  // 7: partition.v1.CreateTenantResponse.data:type_name -> partition.v1.TenantObject
+	16, // 8: partition.v1.GetPartitionResponse.data:type_name -> partition.v1.PartitionObject
+	45, // 9: partition.v1.ListPartitionRequest.extras:type_name -> google.protobuf.Struct
+	16, // 10: partition.v1.ListPartitionResponse.data:type_name -> partition.v1.PartitionObject
+	45, // 11: partition.v1.CreatePartitionRequest.properties:type_name -> google.protobuf.Struct
+	16, // 12: partition.v1.CreatePartitionResponse.data:type_name -> partition.v1.PartitionObject
+	47, // 13: partition.v1.UpdatePartitionRequest.state:type_name -> common.v1.STATE
+	45, // 14: partition.v1.UpdatePartitionRequest.properties:type_name -> google.protobuf.Struct
+	16, // 15: partition.v1.UpdatePartitionResponse.data:type_name -> partition.v1.PartitionObject
+	47, // 16: partition.v1.PartitionObject.state:type_name -> common.v1.STATE
+	45, // 17: partition.v1.PartitionObject.properties:type_name -> google.protobuf.Struct
+	46, // 18: partition.v1.PartitionObject.created_at:type_name -> google.protobuf.Timestamp
+	45, // 19: partition.v1.CreatePartitionRoleRequest.properties:type_name -> google.protobuf.Struct
+	19, // 20: partition.v1.CreatePartitionRoleResponse.data:type_name -> partition.v1.PartitionRoleObject
+	45, // 21: partition.v1.PartitionRoleObject.properties:type_name -> google.protobuf.Struct
+	46, // 22: partition.v1.PartitionRoleObject.created_at:type_name -> google.protobuf.Timestamp
+	19, // 23: partition.v1.ListPartitionRoleResponse.role:type_name -> partition.v1.PartitionRoleObject
+	47, // 24: partition.v1.PageObject.state:type_name -> common.v1.STATE
+	46, // 25: partition.v1.PageObject.created_at:type_name -> google.protobuf.Timestamp
+	24, // 26: partition.v1.CreatePageResponse.data:type_name -> partition.v1.PageObject
+	24, // 27: partition.v1.GetPageResponse.data:type_name -> partition.v1.PageObject
+	16, // 28: partition.v1.AccessObject.partition:type_name -> partition.v1.PartitionObject
+	47, // 29: partition.v1.AccessObject.state:type_name -> common.v1.STATE
+	46, // 30: partition.v1.AccessObject.created_at:type_name -> google.protobuf.Timestamp
+	31, // 31: partition.v1.CreateAccessResponse.data:type_name -> partition.v1.AccessObject
+	31, // 32: partition.v1.GetAccessResponse.data:type_name -> partition.v1.AccessObject
+	40, // 33: partition.v1.CreateAccessRoleResponse.data:type_name -> partition.v1.AccessRoleObject
+	19, // 34: partition.v1.AccessRoleObject.role:type_name -> partition.v1.PartitionRoleObject
+	40, // 35: partition.v1.ListAccessRoleResponse.role:type_name -> partition.v1.AccessRoleObject
+	2,  // 36: partition.v1.PartitionService.GetTenant:input_type -> partition.v1.GetTenantRequest
+	4,  // 37: partition.v1.PartitionService.ListTenant:input_type -> partition.v1.ListTenantRequest
+	6,  // 38: partition.v1.PartitionService.CreateTenant:input_type -> partition.v1.CreateTenantRequest
+	10, // 39: partition.v1.PartitionService.ListPartition:input_type -> partition.v1.ListPartitionRequest
+	12, // 40: partition.v1.PartitionService.CreatePartition:input_type -> partition.v1.CreatePartitionRequest
+	8,  // 41: partition.v1.PartitionService.GetPartition:input_type -> partition.v1.GetPartitionRequest
+	14, // 42: partition.v1.PartitionService.UpdatePartition:input_type -> partition.v1.UpdatePartitionRequest
+	17, // 43: partition.v1.PartitionService.CreatePartitionRole:input_type -> partition.v1.CreatePartitionRoleRequest
+	22, // 44: partition.v1.PartitionService.ListPartitionRole:input_type -> partition.v1.ListPartitionRoleRequest
+	20, // 45: partition.v1.PartitionService.RemovePartitionRole:input_type -> partition.v1.RemovePartitionRoleRequest
+	25, // 46: partition.v1.PartitionService.CreatePage:input_type -> partition.v1.CreatePageRequest
+	27, // 47: partition.v1.PartitionService.GetPage:input_type -> partition.v1.GetPageRequest
+	29, // 48: partition.v1.PartitionService.RemovePage:input_type -> partition.v1.RemovePageRequest
+	32, // 49: partition.v1.PartitionService.CreateAccess:input_type -> partition.v1.CreateAccessRequest
+	34, // 50: partition.v1.PartitionService.GetAccess:input_type -> partition.v1.GetAccessRequest
+	36, // 51: partition.v1.PartitionService.RemoveAccess:input_type -> partition.v1.RemoveAccessRequest
+	38, // 52: partition.v1.PartitionService.CreateAccessRole:input_type -> partition.v1.CreateAccessRoleRequest
+	43, // 53: partition.v1.PartitionService.ListAccessRole:input_type -> partition.v1.ListAccessRoleRequest
+	41, // 54: partition.v1.PartitionService.RemoveAccessRole:input_type -> partition.v1.RemoveAccessRoleRequest
+	3,  // 55: partition.v1.PartitionService.GetTenant:output_type -> partition.v1.GetTenantResponse
+	5,  // 56: partition.v1.PartitionService.ListTenant:output_type -> partition.v1.ListTenantResponse
+	7,  // 57: partition.v1.PartitionService.CreateTenant:output_type -> partition.v1.CreateTenantResponse
+	11, // 58: partition.v1.PartitionService.ListPartition:output_type -> partition.v1.ListPartitionResponse
+	13, // 59: partition.v1.PartitionService.CreatePartition:output_type -> partition.v1.CreatePartitionResponse
+	9,  // 60: partition.v1.PartitionService.GetPartition:output_type -> partition.v1.GetPartitionResponse
+	15, // 61: partition.v1.PartitionService.UpdatePartition:output_type -> partition.v1.UpdatePartitionResponse
+	18, // 62: partition.v1.PartitionService.CreatePartitionRole:output_type -> partition.v1.CreatePartitionRoleResponse
+	23, // 63: partition.v1.PartitionService.ListPartitionRole:output_type -> partition.v1.ListPartitionRoleResponse
+	21, // 64: partition.v1.PartitionService.RemovePartitionRole:output_type -> partition.v1.RemovePartitionRoleResponse
+	26, // 65: partition.v1.PartitionService.CreatePage:output_type -> partition.v1.CreatePageResponse
+	28, // 66: partition.v1.PartitionService.GetPage:output_type -> partition.v1.GetPageResponse
+	30, // 67: partition.v1.PartitionService.RemovePage:output_type -> partition.v1.RemovePageResponse
+	33, // 68: partition.v1.PartitionService.CreateAccess:output_type -> partition.v1.CreateAccessResponse
+	35, // 69: partition.v1.PartitionService.GetAccess:output_type -> partition.v1.GetAccessResponse
+	37, // 70: partition.v1.PartitionService.RemoveAccess:output_type -> partition.v1.RemoveAccessResponse
+	39, // 71: partition.v1.PartitionService.CreateAccessRole:output_type -> partition.v1.CreateAccessRoleResponse
+	44, // 72: partition.v1.PartitionService.ListAccessRole:output_type -> partition.v1.ListAccessRoleResponse
+	42, // 73: partition.v1.PartitionService.RemoveAccessRole:output_type -> partition.v1.RemoveAccessRoleResponse
+	55, // [55:74] is the sub-list for method output_type
+	36, // [36:55] is the sub-list for method input_type
+	36, // [36:36] is the sub-list for extension type_name
+	36, // [36:36] is the sub-list for extension extendee
+	0,  // [0:36] is the sub-list for field type_name
 }
 
 func init() { file_partition_v1_partition_proto_init() }

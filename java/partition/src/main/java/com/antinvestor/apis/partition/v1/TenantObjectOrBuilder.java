@@ -37,29 +37,56 @@ public interface TenantObjectOrBuilder extends
       getIdBytes();
 
   /**
-   * <code>string description = 2 [json_name = "description", (.buf.validate.field) = { ... }</code>
+   * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
+   * @return The name.
+   */
+  java.lang.String getName();
+  /**
+   * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for name.
+   */
+  com.google.protobuf.ByteString
+      getNameBytes();
+
+  /**
+   * <code>string description = 3 [json_name = "description", (.buf.validate.field) = { ... }</code>
    * @return The description.
    */
   java.lang.String getDescription();
   /**
-   * <code>string description = 2 [json_name = "description", (.buf.validate.field) = { ... }</code>
+   * <code>string description = 3 [json_name = "description", (.buf.validate.field) = { ... }</code>
    * @return The bytes for description.
    */
   com.google.protobuf.ByteString
       getDescriptionBytes();
 
   /**
-   * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
+   * <code>.google.protobuf.Struct properties = 4 [json_name = "properties"];</code>
    * @return Whether the properties field is set.
    */
   boolean hasProperties();
   /**
-   * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
+   * <code>.google.protobuf.Struct properties = 4 [json_name = "properties"];</code>
    * @return The properties.
    */
   com.google.protobuf.Struct getProperties();
   /**
-   * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
+   * <code>.google.protobuf.Struct properties = 4 [json_name = "properties"];</code>
    */
   com.google.protobuf.StructOrBuilder getPropertiesOrBuilder();
+
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+   * @return Whether the createdAt field is set.
+   */
+  boolean hasCreatedAt();
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+   * @return The createdAt.
+   */
+  com.google.protobuf.Timestamp getCreatedAt();
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();
 }

@@ -70,4 +70,19 @@ public interface PageObjectOrBuilder extends
    * @return The state.
    */
   com.antinvestor.apis.common.v1.STATE getState();
+
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+   * @return Whether the createdAt field is set.
+   */
+  boolean hasCreatedAt();
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+   * @return The createdAt.
+   */
+  com.google.protobuf.Timestamp getCreatedAt();
+  /**
+   * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();
 }
