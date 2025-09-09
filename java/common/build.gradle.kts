@@ -4,7 +4,7 @@ dependencies {
     implementation("com.moandjiezana.toml:toml4j:0.7.2")
     implementation("com.auth0:jwks-rsa:0.23.0")
 
-    implementation("io.jsonwebtoken:jjwt-api:0.12.7")
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.7")
-    runtimeOnly("io.jsonwebtoken:jjwt-gson:0.12.7")
+    implementation("io.jsonwebtoken:jjwt-api:0.13.0")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.13.0")
+    runtimeOnly("io.jsonwebtoken:jjwt-gson:0.13.0")
 }
