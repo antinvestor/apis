@@ -45,6 +45,7 @@ private static final long serialVersionUID = 0L;
     id_ = "";
     name_ = "";
     description_ = "";
+    state_ = 0;
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -230,6 +231,24 @@ private static final long serialVersionUID = 0L;
     return createdAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createdAt_;
   }
 
+  public static final int STATE_FIELD_NUMBER = 6;
+  private int state_ = 0;
+  /**
+   * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
+   * @return The enum numeric value on the wire for state.
+   */
+  @java.lang.Override public int getStateValue() {
+    return state_;
+  }
+  /**
+   * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
+   * @return The state.
+   */
+  @java.lang.Override public com.antinvestor.apis.common.v1.STATE getState() {
+    com.antinvestor.apis.common.v1.STATE result = com.antinvestor.apis.common.v1.STATE.forNumber(state_);
+    return result == null ? com.antinvestor.apis.common.v1.STATE.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -259,6 +278,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000002) != 0)) {
       output.writeMessage(5, getCreatedAt());
     }
+    if (state_ != com.antinvestor.apis.common.v1.STATE.CREATED.getNumber()) {
+      output.writeEnum(6, state_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -284,6 +306,10 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000002) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(5, getCreatedAt());
+    }
+    if (state_ != com.antinvestor.apis.common.v1.STATE.CREATED.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(6, state_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -316,6 +342,7 @@ private static final long serialVersionUID = 0L;
       if (!getCreatedAt()
           .equals(other.getCreatedAt())) return false;
     }
+    if (state_ != other.state_) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -341,6 +368,8 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + CREATED_AT_FIELD_NUMBER;
       hash = (53 * hash) + getCreatedAt().hashCode();
     }
+    hash = (37 * hash) + STATE_FIELD_NUMBER;
+    hash = (53 * hash) + state_;
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -492,6 +521,7 @@ private static final long serialVersionUID = 0L;
         createdAtBuilder_.dispose();
         createdAtBuilder_ = null;
       }
+      state_ = 0;
       return this;
     }
 
@@ -547,6 +577,9 @@ private static final long serialVersionUID = 0L;
             : createdAtBuilder_.build();
         to_bitField0_ |= 0x00000002;
       }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.state_ = state_;
+      }
       result.bitField0_ |= to_bitField0_;
     }
 
@@ -582,6 +615,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.hasCreatedAt()) {
         mergeCreatedAt(other.getCreatedAt());
+      }
+      if (other.state_ != 0) {
+        setStateValue(other.getStateValue());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -638,6 +674,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000010;
               break;
             } // case 42
+            case 48: {
+              state_ = input.readEnum();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 48
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1111,6 +1152,57 @@ private static final long serialVersionUID = 0L;
         createdAt_ = null;
       }
       return createdAtBuilder_;
+    }
+
+    private int state_ = 0;
+    /**
+     * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
+     * @return The enum numeric value on the wire for state.
+     */
+    @java.lang.Override public int getStateValue() {
+      return state_;
+    }
+    /**
+     * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
+     * @param value The enum numeric value on the wire for state to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStateValue(int value) {
+      state_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
+     * @return The state.
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.common.v1.STATE getState() {
+      com.antinvestor.apis.common.v1.STATE result = com.antinvestor.apis.common.v1.STATE.forNumber(state_);
+      return result == null ? com.antinvestor.apis.common.v1.STATE.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
+     * @param value The state to set.
+     * @return This builder for chaining.
+     */
+    public Builder setState(com.antinvestor.apis.common.v1.STATE value) {
+      if (value == null) { throw new NullPointerException(); }
+      bitField0_ |= 0x00000020;
+      state_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearState() {
+      bitField0_ = (bitField0_ & ~0x00000020);
+      state_ = 0;
+      onChanged();
+      return this;
     }
 
     // @@protoc_insertion_point(builder_scope:partition.v1.TenantObject)

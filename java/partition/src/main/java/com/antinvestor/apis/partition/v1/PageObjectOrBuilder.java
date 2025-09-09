@@ -25,16 +25,16 @@ public interface PageObjectOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string page_id = 1 [json_name = "pageId", (.buf.validate.field) = { ... }</code>
-   * @return The pageId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The id.
    */
-  java.lang.String getPageId();
+  java.lang.String getId();
   /**
-   * <code>string page_id = 1 [json_name = "pageId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for pageId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for id.
    */
   com.google.protobuf.ByteString
-      getPageIdBytes();
+      getIdBytes();
 
   /**
    * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
@@ -85,4 +85,19 @@ public interface PageObjectOrBuilder extends
    * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
    */
   com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();
+
+  /**
+   * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+   * @return Whether the properties field is set.
+   */
+  boolean hasProperties();
+  /**
+   * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+   * @return The properties.
+   */
+  com.google.protobuf.Struct getProperties();
+  /**
+   * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+   */
+  com.google.protobuf.StructOrBuilder getPropertiesOrBuilder();
 }

@@ -48,6 +48,7 @@ type TenantObject struct {
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	Properties    *structpb.Struct       `protobuf:"bytes,4,opt,name=properties,proto3" json:"properties,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	State         v1.STATE               `protobuf:"varint,6,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -115,6 +116,13 @@ func (x *TenantObject) GetCreatedAt() *timestamppb.Timestamp {
 		return x.CreatedAt
 	}
 	return nil
+}
+
+func (x *TenantObject) GetState() v1.STATE {
+	if x != nil {
+		return x.State
+	}
+	return v1.STATE(0)
 }
 
 // Request to create a new partition
@@ -523,6 +531,126 @@ func (x *CreateTenantResponse) GetData() *TenantObject {
 	return nil
 }
 
+type UpdateTenantRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	State         v1.STATE               `protobuf:"varint,4,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
+	Properties    *structpb.Struct       `protobuf:"bytes,5,opt,name=properties,proto3" json:"properties,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateTenantRequest) Reset() {
+	*x = UpdateTenantRequest{}
+	mi := &file_partition_v1_partition_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateTenantRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTenantRequest) ProtoMessage() {}
+
+func (x *UpdateTenantRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_partition_v1_partition_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTenantRequest.ProtoReflect.Descriptor instead.
+func (*UpdateTenantRequest) Descriptor() ([]byte, []int) {
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *UpdateTenantRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UpdateTenantRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateTenantRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *UpdateTenantRequest) GetState() v1.STATE {
+	if x != nil {
+		return x.State
+	}
+	return v1.STATE(0)
+}
+
+func (x *UpdateTenantRequest) GetProperties() *structpb.Struct {
+	if x != nil {
+		return x.Properties
+	}
+	return nil
+}
+
+type UpdateTenantResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          *TenantObject          `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateTenantResponse) Reset() {
+	*x = UpdateTenantResponse{}
+	mi := &file_partition_v1_partition_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateTenantResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTenantResponse) ProtoMessage() {}
+
+func (x *UpdateTenantResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_partition_v1_partition_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTenantResponse.ProtoReflect.Descriptor instead.
+func (*UpdateTenantResponse) Descriptor() ([]byte, []int) {
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *UpdateTenantResponse) GetData() *TenantObject {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 type GetPartitionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -532,7 +660,7 @@ type GetPartitionRequest struct {
 
 func (x *GetPartitionRequest) Reset() {
 	*x = GetPartitionRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[8]
+	mi := &file_partition_v1_partition_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -544,7 +672,7 @@ func (x *GetPartitionRequest) String() string {
 func (*GetPartitionRequest) ProtoMessage() {}
 
 func (x *GetPartitionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[8]
+	mi := &file_partition_v1_partition_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -557,7 +685,7 @@ func (x *GetPartitionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPartitionRequest.ProtoReflect.Descriptor instead.
 func (*GetPartitionRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{8}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetPartitionRequest) GetId() string {
@@ -576,7 +704,7 @@ type GetPartitionResponse struct {
 
 func (x *GetPartitionResponse) Reset() {
 	*x = GetPartitionResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[9]
+	mi := &file_partition_v1_partition_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -588,7 +716,7 @@ func (x *GetPartitionResponse) String() string {
 func (*GetPartitionResponse) ProtoMessage() {}
 
 func (x *GetPartitionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[9]
+	mi := &file_partition_v1_partition_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -601,7 +729,7 @@ func (x *GetPartitionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPartitionResponse.ProtoReflect.Descriptor instead.
 func (*GetPartitionResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{9}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetPartitionResponse) GetData() *PartitionObject {
@@ -626,7 +754,7 @@ type ListPartitionRequest struct {
 
 func (x *ListPartitionRequest) Reset() {
 	*x = ListPartitionRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[10]
+	mi := &file_partition_v1_partition_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -638,7 +766,7 @@ func (x *ListPartitionRequest) String() string {
 func (*ListPartitionRequest) ProtoMessage() {}
 
 func (x *ListPartitionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[10]
+	mi := &file_partition_v1_partition_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -651,7 +779,7 @@ func (x *ListPartitionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPartitionRequest.ProtoReflect.Descriptor instead.
 func (*ListPartitionRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{10}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ListPartitionRequest) GetQuery() string {
@@ -712,7 +840,7 @@ type ListPartitionResponse struct {
 
 func (x *ListPartitionResponse) Reset() {
 	*x = ListPartitionResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[11]
+	mi := &file_partition_v1_partition_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -724,7 +852,7 @@ func (x *ListPartitionResponse) String() string {
 func (*ListPartitionResponse) ProtoMessage() {}
 
 func (x *ListPartitionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[11]
+	mi := &file_partition_v1_partition_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -737,7 +865,7 @@ func (x *ListPartitionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPartitionResponse.ProtoReflect.Descriptor instead.
 func (*ListPartitionResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{11}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListPartitionResponse) GetData() []*PartitionObject {
@@ -761,7 +889,7 @@ type CreatePartitionRequest struct {
 
 func (x *CreatePartitionRequest) Reset() {
 	*x = CreatePartitionRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[12]
+	mi := &file_partition_v1_partition_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -773,7 +901,7 @@ func (x *CreatePartitionRequest) String() string {
 func (*CreatePartitionRequest) ProtoMessage() {}
 
 func (x *CreatePartitionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[12]
+	mi := &file_partition_v1_partition_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -786,7 +914,7 @@ func (x *CreatePartitionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePartitionRequest.ProtoReflect.Descriptor instead.
 func (*CreatePartitionRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{12}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CreatePartitionRequest) GetTenantId() string {
@@ -833,7 +961,7 @@ type CreatePartitionResponse struct {
 
 func (x *CreatePartitionResponse) Reset() {
 	*x = CreatePartitionResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[13]
+	mi := &file_partition_v1_partition_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -845,7 +973,7 @@ func (x *CreatePartitionResponse) String() string {
 func (*CreatePartitionResponse) ProtoMessage() {}
 
 func (x *CreatePartitionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[13]
+	mi := &file_partition_v1_partition_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -858,7 +986,7 @@ func (x *CreatePartitionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePartitionResponse.ProtoReflect.Descriptor instead.
 func (*CreatePartitionResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{13}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *CreatePartitionResponse) GetData() *PartitionObject {
@@ -881,7 +1009,7 @@ type UpdatePartitionRequest struct {
 
 func (x *UpdatePartitionRequest) Reset() {
 	*x = UpdatePartitionRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[14]
+	mi := &file_partition_v1_partition_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -893,7 +1021,7 @@ func (x *UpdatePartitionRequest) String() string {
 func (*UpdatePartitionRequest) ProtoMessage() {}
 
 func (x *UpdatePartitionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[14]
+	mi := &file_partition_v1_partition_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -906,7 +1034,7 @@ func (x *UpdatePartitionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePartitionRequest.ProtoReflect.Descriptor instead.
 func (*UpdatePartitionRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{14}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *UpdatePartitionRequest) GetId() string {
@@ -953,7 +1081,7 @@ type UpdatePartitionResponse struct {
 
 func (x *UpdatePartitionResponse) Reset() {
 	*x = UpdatePartitionResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[15]
+	mi := &file_partition_v1_partition_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -965,7 +1093,7 @@ func (x *UpdatePartitionResponse) String() string {
 func (*UpdatePartitionResponse) ProtoMessage() {}
 
 func (x *UpdatePartitionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[15]
+	mi := &file_partition_v1_partition_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -978,7 +1106,7 @@ func (x *UpdatePartitionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePartitionResponse.ProtoReflect.Descriptor instead.
 func (*UpdatePartitionResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{15}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *UpdatePartitionResponse) GetData() *PartitionObject {
@@ -1004,7 +1132,7 @@ type PartitionObject struct {
 
 func (x *PartitionObject) Reset() {
 	*x = PartitionObject{}
-	mi := &file_partition_v1_partition_proto_msgTypes[16]
+	mi := &file_partition_v1_partition_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1016,7 +1144,7 @@ func (x *PartitionObject) String() string {
 func (*PartitionObject) ProtoMessage() {}
 
 func (x *PartitionObject) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[16]
+	mi := &file_partition_v1_partition_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1029,7 +1157,7 @@ func (x *PartitionObject) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PartitionObject.ProtoReflect.Descriptor instead.
 func (*PartitionObject) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{16}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *PartitionObject) GetId() string {
@@ -1100,7 +1228,7 @@ type CreatePartitionRoleRequest struct {
 
 func (x *CreatePartitionRoleRequest) Reset() {
 	*x = CreatePartitionRoleRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[17]
+	mi := &file_partition_v1_partition_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1112,7 +1240,7 @@ func (x *CreatePartitionRoleRequest) String() string {
 func (*CreatePartitionRoleRequest) ProtoMessage() {}
 
 func (x *CreatePartitionRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[17]
+	mi := &file_partition_v1_partition_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1125,7 +1253,7 @@ func (x *CreatePartitionRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePartitionRoleRequest.ProtoReflect.Descriptor instead.
 func (*CreatePartitionRoleRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{17}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CreatePartitionRoleRequest) GetPartitionId() string {
@@ -1158,7 +1286,7 @@ type CreatePartitionRoleResponse struct {
 
 func (x *CreatePartitionRoleResponse) Reset() {
 	*x = CreatePartitionRoleResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[18]
+	mi := &file_partition_v1_partition_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1170,7 +1298,7 @@ func (x *CreatePartitionRoleResponse) String() string {
 func (*CreatePartitionRoleResponse) ProtoMessage() {}
 
 func (x *CreatePartitionRoleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[18]
+	mi := &file_partition_v1_partition_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1183,7 +1311,7 @@ func (x *CreatePartitionRoleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePartitionRoleResponse.ProtoReflect.Descriptor instead.
 func (*CreatePartitionRoleResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{18}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *CreatePartitionRoleResponse) GetData() *PartitionRoleObject {
@@ -1194,19 +1322,20 @@ func (x *CreatePartitionRoleResponse) GetData() *PartitionRoleObject {
 }
 
 type PartitionRoleObject struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	PartitionRoleId string                 `protobuf:"bytes,1,opt,name=partition_role_id,json=partitionRoleId,proto3" json:"partition_role_id,omitempty"`
-	PartitionId     string                 `protobuf:"bytes,2,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
-	Name            string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Properties      *structpb.Struct       `protobuf:"bytes,4,opt,name=properties,proto3" json:"properties,omitempty"`
-	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,2,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Properties    *structpb.Struct       `protobuf:"bytes,4,opt,name=properties,proto3" json:"properties,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	State         v1.STATE               `protobuf:"varint,6,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PartitionRoleObject) Reset() {
 	*x = PartitionRoleObject{}
-	mi := &file_partition_v1_partition_proto_msgTypes[19]
+	mi := &file_partition_v1_partition_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1218,7 +1347,7 @@ func (x *PartitionRoleObject) String() string {
 func (*PartitionRoleObject) ProtoMessage() {}
 
 func (x *PartitionRoleObject) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[19]
+	mi := &file_partition_v1_partition_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1231,12 +1360,12 @@ func (x *PartitionRoleObject) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PartitionRoleObject.ProtoReflect.Descriptor instead.
 func (*PartitionRoleObject) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{19}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *PartitionRoleObject) GetPartitionRoleId() string {
+func (x *PartitionRoleObject) GetId() string {
 	if x != nil {
-		return x.PartitionRoleId
+		return x.Id
 	}
 	return ""
 }
@@ -1269,6 +1398,13 @@ func (x *PartitionRoleObject) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *PartitionRoleObject) GetState() v1.STATE {
+	if x != nil {
+		return x.State
+	}
+	return v1.STATE(0)
+}
+
 type RemovePartitionRoleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1278,7 +1414,7 @@ type RemovePartitionRoleRequest struct {
 
 func (x *RemovePartitionRoleRequest) Reset() {
 	*x = RemovePartitionRoleRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[20]
+	mi := &file_partition_v1_partition_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1290,7 +1426,7 @@ func (x *RemovePartitionRoleRequest) String() string {
 func (*RemovePartitionRoleRequest) ProtoMessage() {}
 
 func (x *RemovePartitionRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[20]
+	mi := &file_partition_v1_partition_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1303,7 +1439,7 @@ func (x *RemovePartitionRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemovePartitionRoleRequest.ProtoReflect.Descriptor instead.
 func (*RemovePartitionRoleRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{20}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *RemovePartitionRoleRequest) GetId() string {
@@ -1322,7 +1458,7 @@ type RemovePartitionRoleResponse struct {
 
 func (x *RemovePartitionRoleResponse) Reset() {
 	*x = RemovePartitionRoleResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[21]
+	mi := &file_partition_v1_partition_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1334,7 +1470,7 @@ func (x *RemovePartitionRoleResponse) String() string {
 func (*RemovePartitionRoleResponse) ProtoMessage() {}
 
 func (x *RemovePartitionRoleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[21]
+	mi := &file_partition_v1_partition_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1347,7 +1483,7 @@ func (x *RemovePartitionRoleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemovePartitionRoleResponse.ProtoReflect.Descriptor instead.
 func (*RemovePartitionRoleResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{21}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *RemovePartitionRoleResponse) GetSucceeded() bool {
@@ -1366,7 +1502,7 @@ type ListPartitionRoleRequest struct {
 
 func (x *ListPartitionRoleRequest) Reset() {
 	*x = ListPartitionRoleRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[22]
+	mi := &file_partition_v1_partition_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1378,7 +1514,7 @@ func (x *ListPartitionRoleRequest) String() string {
 func (*ListPartitionRoleRequest) ProtoMessage() {}
 
 func (x *ListPartitionRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[22]
+	mi := &file_partition_v1_partition_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1391,7 +1527,7 @@ func (x *ListPartitionRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPartitionRoleRequest.ProtoReflect.Descriptor instead.
 func (*ListPartitionRoleRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{22}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListPartitionRoleRequest) GetPartitionId() string {
@@ -1410,7 +1546,7 @@ type ListPartitionRoleResponse struct {
 
 func (x *ListPartitionRoleResponse) Reset() {
 	*x = ListPartitionRoleResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[23]
+	mi := &file_partition_v1_partition_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1422,7 +1558,7 @@ func (x *ListPartitionRoleResponse) String() string {
 func (*ListPartitionRoleResponse) ProtoMessage() {}
 
 func (x *ListPartitionRoleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[23]
+	mi := &file_partition_v1_partition_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1435,7 +1571,7 @@ func (x *ListPartitionRoleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPartitionRoleResponse.ProtoReflect.Descriptor instead.
 func (*ListPartitionRoleResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{23}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListPartitionRoleResponse) GetRole() []*PartitionRoleObject {
@@ -1447,18 +1583,19 @@ func (x *ListPartitionRoleResponse) GetRole() []*PartitionRoleObject {
 
 type PageObject struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PageId        string                 `protobuf:"bytes,1,opt,name=page_id,json=pageId,proto3" json:"page_id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Html          string                 `protobuf:"bytes,3,opt,name=html,proto3" json:"html,omitempty"`
 	State         v1.STATE               `protobuf:"varint,4,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Properties    *structpb.Struct       `protobuf:"bytes,6,opt,name=properties,proto3" json:"properties,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PageObject) Reset() {
 	*x = PageObject{}
-	mi := &file_partition_v1_partition_proto_msgTypes[24]
+	mi := &file_partition_v1_partition_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1470,7 +1607,7 @@ func (x *PageObject) String() string {
 func (*PageObject) ProtoMessage() {}
 
 func (x *PageObject) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[24]
+	mi := &file_partition_v1_partition_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1483,12 +1620,12 @@ func (x *PageObject) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageObject.ProtoReflect.Descriptor instead.
 func (*PageObject) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{24}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{26}
 }
 
-func (x *PageObject) GetPageId() string {
+func (x *PageObject) GetId() string {
 	if x != nil {
-		return x.PageId
+		return x.Id
 	}
 	return ""
 }
@@ -1521,6 +1658,13 @@ func (x *PageObject) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *PageObject) GetProperties() *structpb.Struct {
+	if x != nil {
+		return x.Properties
+	}
+	return nil
+}
+
 type CreatePageRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PartitionId   string                 `protobuf:"bytes,1,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
@@ -1532,7 +1676,7 @@ type CreatePageRequest struct {
 
 func (x *CreatePageRequest) Reset() {
 	*x = CreatePageRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[25]
+	mi := &file_partition_v1_partition_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1544,7 +1688,7 @@ func (x *CreatePageRequest) String() string {
 func (*CreatePageRequest) ProtoMessage() {}
 
 func (x *CreatePageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[25]
+	mi := &file_partition_v1_partition_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1557,7 +1701,7 @@ func (x *CreatePageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePageRequest.ProtoReflect.Descriptor instead.
 func (*CreatePageRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{25}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *CreatePageRequest) GetPartitionId() string {
@@ -1590,7 +1734,7 @@ type CreatePageResponse struct {
 
 func (x *CreatePageResponse) Reset() {
 	*x = CreatePageResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[26]
+	mi := &file_partition_v1_partition_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1602,7 +1746,7 @@ func (x *CreatePageResponse) String() string {
 func (*CreatePageResponse) ProtoMessage() {}
 
 func (x *CreatePageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[26]
+	mi := &file_partition_v1_partition_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1615,7 +1759,7 @@ func (x *CreatePageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePageResponse.ProtoReflect.Descriptor instead.
 func (*CreatePageResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{26}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *CreatePageResponse) GetData() *PageObject {
@@ -1636,7 +1780,7 @@ type GetPageRequest struct {
 
 func (x *GetPageRequest) Reset() {
 	*x = GetPageRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[27]
+	mi := &file_partition_v1_partition_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1648,7 +1792,7 @@ func (x *GetPageRequest) String() string {
 func (*GetPageRequest) ProtoMessage() {}
 
 func (x *GetPageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[27]
+	mi := &file_partition_v1_partition_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1661,7 +1805,7 @@ func (x *GetPageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPageRequest.ProtoReflect.Descriptor instead.
 func (*GetPageRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{27}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GetPageRequest) GetPageId() string {
@@ -1694,7 +1838,7 @@ type GetPageResponse struct {
 
 func (x *GetPageResponse) Reset() {
 	*x = GetPageResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[28]
+	mi := &file_partition_v1_partition_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1706,7 +1850,7 @@ func (x *GetPageResponse) String() string {
 func (*GetPageResponse) ProtoMessage() {}
 
 func (x *GetPageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[28]
+	mi := &file_partition_v1_partition_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1719,7 +1863,7 @@ func (x *GetPageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPageResponse.ProtoReflect.Descriptor instead.
 func (*GetPageResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{28}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *GetPageResponse) GetData() *PageObject {
@@ -1738,7 +1882,7 @@ type RemovePageRequest struct {
 
 func (x *RemovePageRequest) Reset() {
 	*x = RemovePageRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[29]
+	mi := &file_partition_v1_partition_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1750,7 +1894,7 @@ func (x *RemovePageRequest) String() string {
 func (*RemovePageRequest) ProtoMessage() {}
 
 func (x *RemovePageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[29]
+	mi := &file_partition_v1_partition_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1763,7 +1907,7 @@ func (x *RemovePageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemovePageRequest.ProtoReflect.Descriptor instead.
 func (*RemovePageRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{29}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *RemovePageRequest) GetId() string {
@@ -1782,7 +1926,7 @@ type RemovePageResponse struct {
 
 func (x *RemovePageResponse) Reset() {
 	*x = RemovePageResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[30]
+	mi := &file_partition_v1_partition_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1794,7 +1938,7 @@ func (x *RemovePageResponse) String() string {
 func (*RemovePageResponse) ProtoMessage() {}
 
 func (x *RemovePageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[30]
+	mi := &file_partition_v1_partition_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1807,7 +1951,7 @@ func (x *RemovePageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemovePageResponse.ProtoReflect.Descriptor instead.
 func (*RemovePageResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{30}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *RemovePageResponse) GetSucceeded() bool {
@@ -1819,7 +1963,7 @@ func (x *RemovePageResponse) GetSucceeded() bool {
 
 type AccessObject struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccessId      string                 `protobuf:"bytes,1,opt,name=access_id,json=accessId,proto3" json:"access_id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	ProfileId     string                 `protobuf:"bytes,2,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`
 	Partition     *PartitionObject       `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
 	State         v1.STATE               `protobuf:"varint,4,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
@@ -1830,7 +1974,7 @@ type AccessObject struct {
 
 func (x *AccessObject) Reset() {
 	*x = AccessObject{}
-	mi := &file_partition_v1_partition_proto_msgTypes[31]
+	mi := &file_partition_v1_partition_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1842,7 +1986,7 @@ func (x *AccessObject) String() string {
 func (*AccessObject) ProtoMessage() {}
 
 func (x *AccessObject) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[31]
+	mi := &file_partition_v1_partition_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1855,12 +1999,12 @@ func (x *AccessObject) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccessObject.ProtoReflect.Descriptor instead.
 func (*AccessObject) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{31}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{33}
 }
 
-func (x *AccessObject) GetAccessId() string {
+func (x *AccessObject) GetId() string {
 	if x != nil {
-		return x.AccessId
+		return x.Id
 	}
 	return ""
 }
@@ -1907,7 +2051,7 @@ type CreateAccessRequest struct {
 
 func (x *CreateAccessRequest) Reset() {
 	*x = CreateAccessRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[32]
+	mi := &file_partition_v1_partition_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1919,7 +2063,7 @@ func (x *CreateAccessRequest) String() string {
 func (*CreateAccessRequest) ProtoMessage() {}
 
 func (x *CreateAccessRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[32]
+	mi := &file_partition_v1_partition_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1932,7 +2076,7 @@ func (x *CreateAccessRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAccessRequest.ProtoReflect.Descriptor instead.
 func (*CreateAccessRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{32}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *CreateAccessRequest) GetPartition() isCreateAccessRequest_Partition {
@@ -1992,7 +2136,7 @@ type CreateAccessResponse struct {
 
 func (x *CreateAccessResponse) Reset() {
 	*x = CreateAccessResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[33]
+	mi := &file_partition_v1_partition_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2004,7 +2148,7 @@ func (x *CreateAccessResponse) String() string {
 func (*CreateAccessResponse) ProtoMessage() {}
 
 func (x *CreateAccessResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[33]
+	mi := &file_partition_v1_partition_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2017,7 +2161,7 @@ func (x *CreateAccessResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAccessResponse.ProtoReflect.Descriptor instead.
 func (*CreateAccessResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{33}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *CreateAccessResponse) GetData() *AccessObject {
@@ -2042,7 +2186,7 @@ type GetAccessRequest struct {
 
 func (x *GetAccessRequest) Reset() {
 	*x = GetAccessRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[34]
+	mi := &file_partition_v1_partition_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2054,7 +2198,7 @@ func (x *GetAccessRequest) String() string {
 func (*GetAccessRequest) ProtoMessage() {}
 
 func (x *GetAccessRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[34]
+	mi := &file_partition_v1_partition_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2067,7 +2211,7 @@ func (x *GetAccessRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAccessRequest.ProtoReflect.Descriptor instead.
 func (*GetAccessRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{34}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *GetAccessRequest) GetAccessId() string {
@@ -2134,7 +2278,7 @@ type GetAccessResponse struct {
 
 func (x *GetAccessResponse) Reset() {
 	*x = GetAccessResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[35]
+	mi := &file_partition_v1_partition_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2146,7 +2290,7 @@ func (x *GetAccessResponse) String() string {
 func (*GetAccessResponse) ProtoMessage() {}
 
 func (x *GetAccessResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[35]
+	mi := &file_partition_v1_partition_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2159,7 +2303,7 @@ func (x *GetAccessResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAccessResponse.ProtoReflect.Descriptor instead.
 func (*GetAccessResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{35}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *GetAccessResponse) GetData() *AccessObject {
@@ -2178,7 +2322,7 @@ type RemoveAccessRequest struct {
 
 func (x *RemoveAccessRequest) Reset() {
 	*x = RemoveAccessRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[36]
+	mi := &file_partition_v1_partition_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2190,7 +2334,7 @@ func (x *RemoveAccessRequest) String() string {
 func (*RemoveAccessRequest) ProtoMessage() {}
 
 func (x *RemoveAccessRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[36]
+	mi := &file_partition_v1_partition_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2203,7 +2347,7 @@ func (x *RemoveAccessRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveAccessRequest.ProtoReflect.Descriptor instead.
 func (*RemoveAccessRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{36}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *RemoveAccessRequest) GetId() string {
@@ -2222,7 +2366,7 @@ type RemoveAccessResponse struct {
 
 func (x *RemoveAccessResponse) Reset() {
 	*x = RemoveAccessResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[37]
+	mi := &file_partition_v1_partition_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2234,7 +2378,7 @@ func (x *RemoveAccessResponse) String() string {
 func (*RemoveAccessResponse) ProtoMessage() {}
 
 func (x *RemoveAccessResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[37]
+	mi := &file_partition_v1_partition_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2247,7 +2391,7 @@ func (x *RemoveAccessResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveAccessResponse.ProtoReflect.Descriptor instead.
 func (*RemoveAccessResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{37}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *RemoveAccessResponse) GetSucceeded() bool {
@@ -2268,7 +2412,7 @@ type CreateAccessRoleRequest struct {
 
 func (x *CreateAccessRoleRequest) Reset() {
 	*x = CreateAccessRoleRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[38]
+	mi := &file_partition_v1_partition_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2280,7 +2424,7 @@ func (x *CreateAccessRoleRequest) String() string {
 func (*CreateAccessRoleRequest) ProtoMessage() {}
 
 func (x *CreateAccessRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[38]
+	mi := &file_partition_v1_partition_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2293,7 +2437,7 @@ func (x *CreateAccessRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAccessRoleRequest.ProtoReflect.Descriptor instead.
 func (*CreateAccessRoleRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{38}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *CreateAccessRoleRequest) GetAccessId() string {
@@ -2319,7 +2463,7 @@ type CreateAccessRoleResponse struct {
 
 func (x *CreateAccessRoleResponse) Reset() {
 	*x = CreateAccessRoleResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[39]
+	mi := &file_partition_v1_partition_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2331,7 +2475,7 @@ func (x *CreateAccessRoleResponse) String() string {
 func (*CreateAccessRoleResponse) ProtoMessage() {}
 
 func (x *CreateAccessRoleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[39]
+	mi := &file_partition_v1_partition_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2344,7 +2488,7 @@ func (x *CreateAccessRoleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAccessRoleResponse.ProtoReflect.Descriptor instead.
 func (*CreateAccessRoleResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{39}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *CreateAccessRoleResponse) GetData() *AccessRoleObject {
@@ -2365,7 +2509,7 @@ type AccessRoleObject struct {
 
 func (x *AccessRoleObject) Reset() {
 	*x = AccessRoleObject{}
-	mi := &file_partition_v1_partition_proto_msgTypes[40]
+	mi := &file_partition_v1_partition_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2377,7 +2521,7 @@ func (x *AccessRoleObject) String() string {
 func (*AccessRoleObject) ProtoMessage() {}
 
 func (x *AccessRoleObject) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[40]
+	mi := &file_partition_v1_partition_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2390,7 +2534,7 @@ func (x *AccessRoleObject) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccessRoleObject.ProtoReflect.Descriptor instead.
 func (*AccessRoleObject) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{40}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *AccessRoleObject) GetAccessRoleId() string {
@@ -2423,7 +2567,7 @@ type RemoveAccessRoleRequest struct {
 
 func (x *RemoveAccessRoleRequest) Reset() {
 	*x = RemoveAccessRoleRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[41]
+	mi := &file_partition_v1_partition_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2435,7 +2579,7 @@ func (x *RemoveAccessRoleRequest) String() string {
 func (*RemoveAccessRoleRequest) ProtoMessage() {}
 
 func (x *RemoveAccessRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[41]
+	mi := &file_partition_v1_partition_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2448,7 +2592,7 @@ func (x *RemoveAccessRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveAccessRoleRequest.ProtoReflect.Descriptor instead.
 func (*RemoveAccessRoleRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{41}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *RemoveAccessRoleRequest) GetId() string {
@@ -2467,7 +2611,7 @@ type RemoveAccessRoleResponse struct {
 
 func (x *RemoveAccessRoleResponse) Reset() {
 	*x = RemoveAccessRoleResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[42]
+	mi := &file_partition_v1_partition_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2479,7 +2623,7 @@ func (x *RemoveAccessRoleResponse) String() string {
 func (*RemoveAccessRoleResponse) ProtoMessage() {}
 
 func (x *RemoveAccessRoleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[42]
+	mi := &file_partition_v1_partition_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2492,7 +2636,7 @@ func (x *RemoveAccessRoleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveAccessRoleResponse.ProtoReflect.Descriptor instead.
 func (*RemoveAccessRoleResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{42}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *RemoveAccessRoleResponse) GetSucceeded() bool {
@@ -2511,7 +2655,7 @@ type ListAccessRoleRequest struct {
 
 func (x *ListAccessRoleRequest) Reset() {
 	*x = ListAccessRoleRequest{}
-	mi := &file_partition_v1_partition_proto_msgTypes[43]
+	mi := &file_partition_v1_partition_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2523,7 +2667,7 @@ func (x *ListAccessRoleRequest) String() string {
 func (*ListAccessRoleRequest) ProtoMessage() {}
 
 func (x *ListAccessRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[43]
+	mi := &file_partition_v1_partition_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2536,7 +2680,7 @@ func (x *ListAccessRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAccessRoleRequest.ProtoReflect.Descriptor instead.
 func (*ListAccessRoleRequest) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{43}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *ListAccessRoleRequest) GetAccessId() string {
@@ -2555,7 +2699,7 @@ type ListAccessRoleResponse struct {
 
 func (x *ListAccessRoleResponse) Reset() {
 	*x = ListAccessRoleResponse{}
-	mi := &file_partition_v1_partition_proto_msgTypes[44]
+	mi := &file_partition_v1_partition_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2567,7 +2711,7 @@ func (x *ListAccessRoleResponse) String() string {
 func (*ListAccessRoleResponse) ProtoMessage() {}
 
 func (x *ListAccessRoleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_partition_v1_partition_proto_msgTypes[44]
+	mi := &file_partition_v1_partition_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2580,7 +2724,7 @@ func (x *ListAccessRoleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAccessRoleResponse.ProtoReflect.Descriptor instead.
 func (*ListAccessRoleResponse) Descriptor() ([]byte, []int) {
-	return file_partition_v1_partition_proto_rawDescGZIP(), []int{44}
+	return file_partition_v1_partition_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *ListAccessRoleResponse) GetRole() []*AccessRoleObject {
@@ -2594,7 +2738,7 @@ var File_partition_v1_partition_proto protoreflect.FileDescriptor
 
 const file_partition_v1_partition_proto_rawDesc = "" +
 	"\n" +
-	"\x1cpartition/v1/partition.proto\x12\fpartition.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xfc\x01\n" +
+	"\x1cpartition/v1/partition.proto\x12\fpartition.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa4\x02\n" +
 	"\fTenantObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12,\n" +
@@ -2605,7 +2749,8 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"properties\x18\x04 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x92\x02\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12&\n" +
+	"\x05state\x18\x06 \x01(\x0e2\x10.common.v1.STATER\x05state\"\x92\x02\n" +
 	"\x16PartitionCreateRequest\x12\x1d\n" +
 	"\x04name\x18\x01 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x128\n" +
 	"\ttenant_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\btenantId\x128\n" +
@@ -2642,6 +2787,18 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\"F\n" +
 	"\x14CreateTenantResponse\x12.\n" +
+	"\x04data\x18\x01 \x01(\v2\x1a.partition.v1.TenantObjectR\x04data\"\xf0\x01\n" +
+	"\x13UpdateTenantRequest\x12+\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1d\n" +
+	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12,\n" +
+	"\vdescription\x18\x03 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\n" +
+	"\x18\xf4\x03R\vdescription\x12&\n" +
+	"\x05state\x18\x04 \x01(\x0e2\x10.common.v1.STATER\x05state\x127\n" +
+	"\n" +
+	"properties\x18\x05 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"F\n" +
+	"\x14UpdateTenantResponse\x12.\n" +
 	"\x04data\x18\x01 \x01(\v2\x1a.partition.v1.TenantObjectR\x04data\"B\n" +
 	"\x13GetPartitionRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"I\n" +
@@ -2705,16 +2862,17 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"properties\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\"T\n" +
 	"\x1bCreatePartitionRoleResponse\x125\n" +
-	"\x04data\x18\x01 \x01(\v2!.partition.v1.PartitionRoleObjectR\x04data\"\xb1\x02\n" +
-	"\x13PartitionRoleObject\x12G\n" +
-	"\x11partition_role_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x0fpartitionRoleId\x12>\n" +
+	"\x04data\x18\x01 \x01(\v2!.partition.v1.PartitionRoleObjectR\x04data\"\xbd\x02\n" +
+	"\x13PartitionRoleObject\x12+\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12>\n" +
 	"\fpartition_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\vpartitionId\x12\x1d\n" +
 	"\x04name\x18\x03 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x127\n" +
 	"\n" +
 	"properties\x18\x04 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"properties\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"I\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12&\n" +
+	"\x05state\x18\x06 \x01(\x0e2\x10.common.v1.STATER\x05state\"I\n" +
 	"\x1aRemovePartitionRoleRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\";\n" +
 	"\x1bRemovePartitionRoleResponse\x12\x1c\n" +
@@ -2722,16 +2880,19 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"\x18ListPartitionRoleRequest\x12>\n" +
 	"\fpartition_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\vpartitionId\"R\n" +
 	"\x19ListPartitionRoleResponse\x125\n" +
-	"\x04role\x18\x01 \x03(\v2!.partition.v1.PartitionRoleObjectR\x04role\"\xe4\x01\n" +
+	"\x04role\x18\x01 \x03(\v2!.partition.v1.PartitionRoleObjectR\x04role\"\x94\x02\n" +
 	"\n" +
-	"PageObject\x124\n" +
-	"\apage_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06pageId\x12\x1d\n" +
+	"PageObject\x12+\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12\x1e\n" +
 	"\x04html\x18\x03 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x04\x18\x88'R\x04html\x12&\n" +
 	"\x05state\x18\x04 \x01(\x0e2\x10.common.v1.STATER\x05state\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x92\x01\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x127\n" +
+	"\n" +
+	"properties\x18\x06 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"properties\"\x92\x01\n" +
 	"\x11CreatePageRequest\x12>\n" +
 	"\fpartition_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\vpartitionId\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x03\x18dR\x04name\x12\x1e\n" +
@@ -2748,9 +2909,9 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"\x11RemovePageRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"2\n" +
 	"\x12RemovePageResponse\x12\x1c\n" +
-	"\tsucceeded\x18\x01 \x01(\bR\tsucceeded\"\xa4\x02\n" +
-	"\fAccessObject\x128\n" +
-	"\taccess_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\baccessId\x12:\n" +
+	"\tsucceeded\x18\x01 \x01(\bR\tsucceeded\"\x97\x02\n" +
+	"\fAccessObject\x12+\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12:\n" +
 	"\n" +
 	"profile_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tprofileId\x12;\n" +
 	"\tpartition\x18\x03 \x01(\v2\x1d.partition.v1.PartitionObjectR\tpartition\x12&\n" +
@@ -2794,12 +2955,13 @@ const file_partition_v1_partition_proto_rawDesc = "" +
 	"\x15ListAccessRoleRequest\x128\n" +
 	"\taccess_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\baccessId\"L\n" +
 	"\x16ListAccessRoleResponse\x122\n" +
-	"\x04role\x18\x01 \x03(\v2\x1e.partition.v1.AccessRoleObjectR\x04role2\xf2\x10\n" +
+	"\x04role\x18\x01 \x03(\v2\x1e.partition.v1.AccessRoleObjectR\x04role2\xe2\x11\n" +
 	"\x10PartitionService\x12b\n" +
 	"\tGetTenant\x12\x1e.partition.v1.GetTenantRequest\x1a\x1f.partition.v1.GetTenantResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/tenant/{id}\x12b\n" +
 	"\n" +
 	"ListTenant\x12\x1f.partition.v1.ListTenantRequest\x1a .partition.v1.ListTenantResponse\"\x0f\x82\xd3\xe4\x93\x02\t\x12\a/tenant0\x01\x12i\n" +
 	"\fCreateTenant\x12!.partition.v1.CreateTenantRequest\x1a\".partition.v1.CreateTenantResponse\"\x12\x82\xd3\xe4\x93\x02\f:\x01*\"\a/tenant\x12n\n" +
+	"\fUpdateTenant\x12!.partition.v1.UpdateTenantRequest\x1a\".partition.v1.UpdateTenantResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*2\f/tenant/{id}\x12n\n" +
 	"\rListPartition\x12\".partition.v1.ListPartitionRequest\x1a#.partition.v1.ListPartitionResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
 	"/partition0\x01\x12u\n" +
 	"\x0fCreatePartition\x12$.partition.v1.CreatePartitionRequest\x1a%.partition.v1.CreatePartitionResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
@@ -2843,7 +3005,7 @@ func file_partition_v1_partition_proto_rawDescGZIP() []byte {
 	return file_partition_v1_partition_proto_rawDescData
 }
 
-var file_partition_v1_partition_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
+var file_partition_v1_partition_proto_msgTypes = make([]protoimpl.MessageInfo, 47)
 var file_partition_v1_partition_proto_goTypes = []any{
 	(*TenantObject)(nil),                // 0: partition.v1.TenantObject
 	(*PartitionCreateRequest)(nil),      // 1: partition.v1.PartitionCreateRequest
@@ -2853,127 +3015,137 @@ var file_partition_v1_partition_proto_goTypes = []any{
 	(*ListTenantResponse)(nil),          // 5: partition.v1.ListTenantResponse
 	(*CreateTenantRequest)(nil),         // 6: partition.v1.CreateTenantRequest
 	(*CreateTenantResponse)(nil),        // 7: partition.v1.CreateTenantResponse
-	(*GetPartitionRequest)(nil),         // 8: partition.v1.GetPartitionRequest
-	(*GetPartitionResponse)(nil),        // 9: partition.v1.GetPartitionResponse
-	(*ListPartitionRequest)(nil),        // 10: partition.v1.ListPartitionRequest
-	(*ListPartitionResponse)(nil),       // 11: partition.v1.ListPartitionResponse
-	(*CreatePartitionRequest)(nil),      // 12: partition.v1.CreatePartitionRequest
-	(*CreatePartitionResponse)(nil),     // 13: partition.v1.CreatePartitionResponse
-	(*UpdatePartitionRequest)(nil),      // 14: partition.v1.UpdatePartitionRequest
-	(*UpdatePartitionResponse)(nil),     // 15: partition.v1.UpdatePartitionResponse
-	(*PartitionObject)(nil),             // 16: partition.v1.PartitionObject
-	(*CreatePartitionRoleRequest)(nil),  // 17: partition.v1.CreatePartitionRoleRequest
-	(*CreatePartitionRoleResponse)(nil), // 18: partition.v1.CreatePartitionRoleResponse
-	(*PartitionRoleObject)(nil),         // 19: partition.v1.PartitionRoleObject
-	(*RemovePartitionRoleRequest)(nil),  // 20: partition.v1.RemovePartitionRoleRequest
-	(*RemovePartitionRoleResponse)(nil), // 21: partition.v1.RemovePartitionRoleResponse
-	(*ListPartitionRoleRequest)(nil),    // 22: partition.v1.ListPartitionRoleRequest
-	(*ListPartitionRoleResponse)(nil),   // 23: partition.v1.ListPartitionRoleResponse
-	(*PageObject)(nil),                  // 24: partition.v1.PageObject
-	(*CreatePageRequest)(nil),           // 25: partition.v1.CreatePageRequest
-	(*CreatePageResponse)(nil),          // 26: partition.v1.CreatePageResponse
-	(*GetPageRequest)(nil),              // 27: partition.v1.GetPageRequest
-	(*GetPageResponse)(nil),             // 28: partition.v1.GetPageResponse
-	(*RemovePageRequest)(nil),           // 29: partition.v1.RemovePageRequest
-	(*RemovePageResponse)(nil),          // 30: partition.v1.RemovePageResponse
-	(*AccessObject)(nil),                // 31: partition.v1.AccessObject
-	(*CreateAccessRequest)(nil),         // 32: partition.v1.CreateAccessRequest
-	(*CreateAccessResponse)(nil),        // 33: partition.v1.CreateAccessResponse
-	(*GetAccessRequest)(nil),            // 34: partition.v1.GetAccessRequest
-	(*GetAccessResponse)(nil),           // 35: partition.v1.GetAccessResponse
-	(*RemoveAccessRequest)(nil),         // 36: partition.v1.RemoveAccessRequest
-	(*RemoveAccessResponse)(nil),        // 37: partition.v1.RemoveAccessResponse
-	(*CreateAccessRoleRequest)(nil),     // 38: partition.v1.CreateAccessRoleRequest
-	(*CreateAccessRoleResponse)(nil),    // 39: partition.v1.CreateAccessRoleResponse
-	(*AccessRoleObject)(nil),            // 40: partition.v1.AccessRoleObject
-	(*RemoveAccessRoleRequest)(nil),     // 41: partition.v1.RemoveAccessRoleRequest
-	(*RemoveAccessRoleResponse)(nil),    // 42: partition.v1.RemoveAccessRoleResponse
-	(*ListAccessRoleRequest)(nil),       // 43: partition.v1.ListAccessRoleRequest
-	(*ListAccessRoleResponse)(nil),      // 44: partition.v1.ListAccessRoleResponse
-	(*structpb.Struct)(nil),             // 45: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),       // 46: google.protobuf.Timestamp
-	(v1.STATE)(0),                       // 47: common.v1.STATE
+	(*UpdateTenantRequest)(nil),         // 8: partition.v1.UpdateTenantRequest
+	(*UpdateTenantResponse)(nil),        // 9: partition.v1.UpdateTenantResponse
+	(*GetPartitionRequest)(nil),         // 10: partition.v1.GetPartitionRequest
+	(*GetPartitionResponse)(nil),        // 11: partition.v1.GetPartitionResponse
+	(*ListPartitionRequest)(nil),        // 12: partition.v1.ListPartitionRequest
+	(*ListPartitionResponse)(nil),       // 13: partition.v1.ListPartitionResponse
+	(*CreatePartitionRequest)(nil),      // 14: partition.v1.CreatePartitionRequest
+	(*CreatePartitionResponse)(nil),     // 15: partition.v1.CreatePartitionResponse
+	(*UpdatePartitionRequest)(nil),      // 16: partition.v1.UpdatePartitionRequest
+	(*UpdatePartitionResponse)(nil),     // 17: partition.v1.UpdatePartitionResponse
+	(*PartitionObject)(nil),             // 18: partition.v1.PartitionObject
+	(*CreatePartitionRoleRequest)(nil),  // 19: partition.v1.CreatePartitionRoleRequest
+	(*CreatePartitionRoleResponse)(nil), // 20: partition.v1.CreatePartitionRoleResponse
+	(*PartitionRoleObject)(nil),         // 21: partition.v1.PartitionRoleObject
+	(*RemovePartitionRoleRequest)(nil),  // 22: partition.v1.RemovePartitionRoleRequest
+	(*RemovePartitionRoleResponse)(nil), // 23: partition.v1.RemovePartitionRoleResponse
+	(*ListPartitionRoleRequest)(nil),    // 24: partition.v1.ListPartitionRoleRequest
+	(*ListPartitionRoleResponse)(nil),   // 25: partition.v1.ListPartitionRoleResponse
+	(*PageObject)(nil),                  // 26: partition.v1.PageObject
+	(*CreatePageRequest)(nil),           // 27: partition.v1.CreatePageRequest
+	(*CreatePageResponse)(nil),          // 28: partition.v1.CreatePageResponse
+	(*GetPageRequest)(nil),              // 29: partition.v1.GetPageRequest
+	(*GetPageResponse)(nil),             // 30: partition.v1.GetPageResponse
+	(*RemovePageRequest)(nil),           // 31: partition.v1.RemovePageRequest
+	(*RemovePageResponse)(nil),          // 32: partition.v1.RemovePageResponse
+	(*AccessObject)(nil),                // 33: partition.v1.AccessObject
+	(*CreateAccessRequest)(nil),         // 34: partition.v1.CreateAccessRequest
+	(*CreateAccessResponse)(nil),        // 35: partition.v1.CreateAccessResponse
+	(*GetAccessRequest)(nil),            // 36: partition.v1.GetAccessRequest
+	(*GetAccessResponse)(nil),           // 37: partition.v1.GetAccessResponse
+	(*RemoveAccessRequest)(nil),         // 38: partition.v1.RemoveAccessRequest
+	(*RemoveAccessResponse)(nil),        // 39: partition.v1.RemoveAccessResponse
+	(*CreateAccessRoleRequest)(nil),     // 40: partition.v1.CreateAccessRoleRequest
+	(*CreateAccessRoleResponse)(nil),    // 41: partition.v1.CreateAccessRoleResponse
+	(*AccessRoleObject)(nil),            // 42: partition.v1.AccessRoleObject
+	(*RemoveAccessRoleRequest)(nil),     // 43: partition.v1.RemoveAccessRoleRequest
+	(*RemoveAccessRoleResponse)(nil),    // 44: partition.v1.RemoveAccessRoleResponse
+	(*ListAccessRoleRequest)(nil),       // 45: partition.v1.ListAccessRoleRequest
+	(*ListAccessRoleResponse)(nil),      // 46: partition.v1.ListAccessRoleResponse
+	(*structpb.Struct)(nil),             // 47: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),       // 48: google.protobuf.Timestamp
+	(v1.STATE)(0),                       // 49: common.v1.STATE
 }
 var file_partition_v1_partition_proto_depIdxs = []int32{
-	45, // 0: partition.v1.TenantObject.properties:type_name -> google.protobuf.Struct
-	46, // 1: partition.v1.TenantObject.created_at:type_name -> google.protobuf.Timestamp
-	45, // 2: partition.v1.PartitionCreateRequest.properties:type_name -> google.protobuf.Struct
-	0,  // 3: partition.v1.GetTenantResponse.data:type_name -> partition.v1.TenantObject
-	45, // 4: partition.v1.ListTenantRequest.extras:type_name -> google.protobuf.Struct
-	0,  // 5: partition.v1.ListTenantResponse.data:type_name -> partition.v1.TenantObject
-	45, // 6: partition.v1.CreateTenantRequest.properties:type_name -> google.protobuf.Struct
-	0,  // 7: partition.v1.CreateTenantResponse.data:type_name -> partition.v1.TenantObject
-	16, // 8: partition.v1.GetPartitionResponse.data:type_name -> partition.v1.PartitionObject
-	45, // 9: partition.v1.ListPartitionRequest.extras:type_name -> google.protobuf.Struct
-	16, // 10: partition.v1.ListPartitionResponse.data:type_name -> partition.v1.PartitionObject
-	45, // 11: partition.v1.CreatePartitionRequest.properties:type_name -> google.protobuf.Struct
-	16, // 12: partition.v1.CreatePartitionResponse.data:type_name -> partition.v1.PartitionObject
-	47, // 13: partition.v1.UpdatePartitionRequest.state:type_name -> common.v1.STATE
-	45, // 14: partition.v1.UpdatePartitionRequest.properties:type_name -> google.protobuf.Struct
-	16, // 15: partition.v1.UpdatePartitionResponse.data:type_name -> partition.v1.PartitionObject
-	47, // 16: partition.v1.PartitionObject.state:type_name -> common.v1.STATE
-	45, // 17: partition.v1.PartitionObject.properties:type_name -> google.protobuf.Struct
-	46, // 18: partition.v1.PartitionObject.created_at:type_name -> google.protobuf.Timestamp
-	45, // 19: partition.v1.CreatePartitionRoleRequest.properties:type_name -> google.protobuf.Struct
-	19, // 20: partition.v1.CreatePartitionRoleResponse.data:type_name -> partition.v1.PartitionRoleObject
-	45, // 21: partition.v1.PartitionRoleObject.properties:type_name -> google.protobuf.Struct
-	46, // 22: partition.v1.PartitionRoleObject.created_at:type_name -> google.protobuf.Timestamp
-	19, // 23: partition.v1.ListPartitionRoleResponse.role:type_name -> partition.v1.PartitionRoleObject
-	47, // 24: partition.v1.PageObject.state:type_name -> common.v1.STATE
-	46, // 25: partition.v1.PageObject.created_at:type_name -> google.protobuf.Timestamp
-	24, // 26: partition.v1.CreatePageResponse.data:type_name -> partition.v1.PageObject
-	24, // 27: partition.v1.GetPageResponse.data:type_name -> partition.v1.PageObject
-	16, // 28: partition.v1.AccessObject.partition:type_name -> partition.v1.PartitionObject
-	47, // 29: partition.v1.AccessObject.state:type_name -> common.v1.STATE
-	46, // 30: partition.v1.AccessObject.created_at:type_name -> google.protobuf.Timestamp
-	31, // 31: partition.v1.CreateAccessResponse.data:type_name -> partition.v1.AccessObject
-	31, // 32: partition.v1.GetAccessResponse.data:type_name -> partition.v1.AccessObject
-	40, // 33: partition.v1.CreateAccessRoleResponse.data:type_name -> partition.v1.AccessRoleObject
-	19, // 34: partition.v1.AccessRoleObject.role:type_name -> partition.v1.PartitionRoleObject
-	40, // 35: partition.v1.ListAccessRoleResponse.role:type_name -> partition.v1.AccessRoleObject
-	2,  // 36: partition.v1.PartitionService.GetTenant:input_type -> partition.v1.GetTenantRequest
-	4,  // 37: partition.v1.PartitionService.ListTenant:input_type -> partition.v1.ListTenantRequest
-	6,  // 38: partition.v1.PartitionService.CreateTenant:input_type -> partition.v1.CreateTenantRequest
-	10, // 39: partition.v1.PartitionService.ListPartition:input_type -> partition.v1.ListPartitionRequest
-	12, // 40: partition.v1.PartitionService.CreatePartition:input_type -> partition.v1.CreatePartitionRequest
-	8,  // 41: partition.v1.PartitionService.GetPartition:input_type -> partition.v1.GetPartitionRequest
-	14, // 42: partition.v1.PartitionService.UpdatePartition:input_type -> partition.v1.UpdatePartitionRequest
-	17, // 43: partition.v1.PartitionService.CreatePartitionRole:input_type -> partition.v1.CreatePartitionRoleRequest
-	22, // 44: partition.v1.PartitionService.ListPartitionRole:input_type -> partition.v1.ListPartitionRoleRequest
-	20, // 45: partition.v1.PartitionService.RemovePartitionRole:input_type -> partition.v1.RemovePartitionRoleRequest
-	25, // 46: partition.v1.PartitionService.CreatePage:input_type -> partition.v1.CreatePageRequest
-	27, // 47: partition.v1.PartitionService.GetPage:input_type -> partition.v1.GetPageRequest
-	29, // 48: partition.v1.PartitionService.RemovePage:input_type -> partition.v1.RemovePageRequest
-	32, // 49: partition.v1.PartitionService.CreateAccess:input_type -> partition.v1.CreateAccessRequest
-	34, // 50: partition.v1.PartitionService.GetAccess:input_type -> partition.v1.GetAccessRequest
-	36, // 51: partition.v1.PartitionService.RemoveAccess:input_type -> partition.v1.RemoveAccessRequest
-	38, // 52: partition.v1.PartitionService.CreateAccessRole:input_type -> partition.v1.CreateAccessRoleRequest
-	43, // 53: partition.v1.PartitionService.ListAccessRole:input_type -> partition.v1.ListAccessRoleRequest
-	41, // 54: partition.v1.PartitionService.RemoveAccessRole:input_type -> partition.v1.RemoveAccessRoleRequest
-	3,  // 55: partition.v1.PartitionService.GetTenant:output_type -> partition.v1.GetTenantResponse
-	5,  // 56: partition.v1.PartitionService.ListTenant:output_type -> partition.v1.ListTenantResponse
-	7,  // 57: partition.v1.PartitionService.CreateTenant:output_type -> partition.v1.CreateTenantResponse
-	11, // 58: partition.v1.PartitionService.ListPartition:output_type -> partition.v1.ListPartitionResponse
-	13, // 59: partition.v1.PartitionService.CreatePartition:output_type -> partition.v1.CreatePartitionResponse
-	9,  // 60: partition.v1.PartitionService.GetPartition:output_type -> partition.v1.GetPartitionResponse
-	15, // 61: partition.v1.PartitionService.UpdatePartition:output_type -> partition.v1.UpdatePartitionResponse
-	18, // 62: partition.v1.PartitionService.CreatePartitionRole:output_type -> partition.v1.CreatePartitionRoleResponse
-	23, // 63: partition.v1.PartitionService.ListPartitionRole:output_type -> partition.v1.ListPartitionRoleResponse
-	21, // 64: partition.v1.PartitionService.RemovePartitionRole:output_type -> partition.v1.RemovePartitionRoleResponse
-	26, // 65: partition.v1.PartitionService.CreatePage:output_type -> partition.v1.CreatePageResponse
-	28, // 66: partition.v1.PartitionService.GetPage:output_type -> partition.v1.GetPageResponse
-	30, // 67: partition.v1.PartitionService.RemovePage:output_type -> partition.v1.RemovePageResponse
-	33, // 68: partition.v1.PartitionService.CreateAccess:output_type -> partition.v1.CreateAccessResponse
-	35, // 69: partition.v1.PartitionService.GetAccess:output_type -> partition.v1.GetAccessResponse
-	37, // 70: partition.v1.PartitionService.RemoveAccess:output_type -> partition.v1.RemoveAccessResponse
-	39, // 71: partition.v1.PartitionService.CreateAccessRole:output_type -> partition.v1.CreateAccessRoleResponse
-	44, // 72: partition.v1.PartitionService.ListAccessRole:output_type -> partition.v1.ListAccessRoleResponse
-	42, // 73: partition.v1.PartitionService.RemoveAccessRole:output_type -> partition.v1.RemoveAccessRoleResponse
-	55, // [55:74] is the sub-list for method output_type
-	36, // [36:55] is the sub-list for method input_type
-	36, // [36:36] is the sub-list for extension type_name
-	36, // [36:36] is the sub-list for extension extendee
-	0,  // [0:36] is the sub-list for field type_name
+	47, // 0: partition.v1.TenantObject.properties:type_name -> google.protobuf.Struct
+	48, // 1: partition.v1.TenantObject.created_at:type_name -> google.protobuf.Timestamp
+	49, // 2: partition.v1.TenantObject.state:type_name -> common.v1.STATE
+	47, // 3: partition.v1.PartitionCreateRequest.properties:type_name -> google.protobuf.Struct
+	0,  // 4: partition.v1.GetTenantResponse.data:type_name -> partition.v1.TenantObject
+	47, // 5: partition.v1.ListTenantRequest.extras:type_name -> google.protobuf.Struct
+	0,  // 6: partition.v1.ListTenantResponse.data:type_name -> partition.v1.TenantObject
+	47, // 7: partition.v1.CreateTenantRequest.properties:type_name -> google.protobuf.Struct
+	0,  // 8: partition.v1.CreateTenantResponse.data:type_name -> partition.v1.TenantObject
+	49, // 9: partition.v1.UpdateTenantRequest.state:type_name -> common.v1.STATE
+	47, // 10: partition.v1.UpdateTenantRequest.properties:type_name -> google.protobuf.Struct
+	0,  // 11: partition.v1.UpdateTenantResponse.data:type_name -> partition.v1.TenantObject
+	18, // 12: partition.v1.GetPartitionResponse.data:type_name -> partition.v1.PartitionObject
+	47, // 13: partition.v1.ListPartitionRequest.extras:type_name -> google.protobuf.Struct
+	18, // 14: partition.v1.ListPartitionResponse.data:type_name -> partition.v1.PartitionObject
+	47, // 15: partition.v1.CreatePartitionRequest.properties:type_name -> google.protobuf.Struct
+	18, // 16: partition.v1.CreatePartitionResponse.data:type_name -> partition.v1.PartitionObject
+	49, // 17: partition.v1.UpdatePartitionRequest.state:type_name -> common.v1.STATE
+	47, // 18: partition.v1.UpdatePartitionRequest.properties:type_name -> google.protobuf.Struct
+	18, // 19: partition.v1.UpdatePartitionResponse.data:type_name -> partition.v1.PartitionObject
+	49, // 20: partition.v1.PartitionObject.state:type_name -> common.v1.STATE
+	47, // 21: partition.v1.PartitionObject.properties:type_name -> google.protobuf.Struct
+	48, // 22: partition.v1.PartitionObject.created_at:type_name -> google.protobuf.Timestamp
+	47, // 23: partition.v1.CreatePartitionRoleRequest.properties:type_name -> google.protobuf.Struct
+	21, // 24: partition.v1.CreatePartitionRoleResponse.data:type_name -> partition.v1.PartitionRoleObject
+	47, // 25: partition.v1.PartitionRoleObject.properties:type_name -> google.protobuf.Struct
+	48, // 26: partition.v1.PartitionRoleObject.created_at:type_name -> google.protobuf.Timestamp
+	49, // 27: partition.v1.PartitionRoleObject.state:type_name -> common.v1.STATE
+	21, // 28: partition.v1.ListPartitionRoleResponse.role:type_name -> partition.v1.PartitionRoleObject
+	49, // 29: partition.v1.PageObject.state:type_name -> common.v1.STATE
+	48, // 30: partition.v1.PageObject.created_at:type_name -> google.protobuf.Timestamp
+	47, // 31: partition.v1.PageObject.properties:type_name -> google.protobuf.Struct
+	26, // 32: partition.v1.CreatePageResponse.data:type_name -> partition.v1.PageObject
+	26, // 33: partition.v1.GetPageResponse.data:type_name -> partition.v1.PageObject
+	18, // 34: partition.v1.AccessObject.partition:type_name -> partition.v1.PartitionObject
+	49, // 35: partition.v1.AccessObject.state:type_name -> common.v1.STATE
+	48, // 36: partition.v1.AccessObject.created_at:type_name -> google.protobuf.Timestamp
+	33, // 37: partition.v1.CreateAccessResponse.data:type_name -> partition.v1.AccessObject
+	33, // 38: partition.v1.GetAccessResponse.data:type_name -> partition.v1.AccessObject
+	42, // 39: partition.v1.CreateAccessRoleResponse.data:type_name -> partition.v1.AccessRoleObject
+	21, // 40: partition.v1.AccessRoleObject.role:type_name -> partition.v1.PartitionRoleObject
+	42, // 41: partition.v1.ListAccessRoleResponse.role:type_name -> partition.v1.AccessRoleObject
+	2,  // 42: partition.v1.PartitionService.GetTenant:input_type -> partition.v1.GetTenantRequest
+	4,  // 43: partition.v1.PartitionService.ListTenant:input_type -> partition.v1.ListTenantRequest
+	6,  // 44: partition.v1.PartitionService.CreateTenant:input_type -> partition.v1.CreateTenantRequest
+	8,  // 45: partition.v1.PartitionService.UpdateTenant:input_type -> partition.v1.UpdateTenantRequest
+	12, // 46: partition.v1.PartitionService.ListPartition:input_type -> partition.v1.ListPartitionRequest
+	14, // 47: partition.v1.PartitionService.CreatePartition:input_type -> partition.v1.CreatePartitionRequest
+	10, // 48: partition.v1.PartitionService.GetPartition:input_type -> partition.v1.GetPartitionRequest
+	16, // 49: partition.v1.PartitionService.UpdatePartition:input_type -> partition.v1.UpdatePartitionRequest
+	19, // 50: partition.v1.PartitionService.CreatePartitionRole:input_type -> partition.v1.CreatePartitionRoleRequest
+	24, // 51: partition.v1.PartitionService.ListPartitionRole:input_type -> partition.v1.ListPartitionRoleRequest
+	22, // 52: partition.v1.PartitionService.RemovePartitionRole:input_type -> partition.v1.RemovePartitionRoleRequest
+	27, // 53: partition.v1.PartitionService.CreatePage:input_type -> partition.v1.CreatePageRequest
+	29, // 54: partition.v1.PartitionService.GetPage:input_type -> partition.v1.GetPageRequest
+	31, // 55: partition.v1.PartitionService.RemovePage:input_type -> partition.v1.RemovePageRequest
+	34, // 56: partition.v1.PartitionService.CreateAccess:input_type -> partition.v1.CreateAccessRequest
+	36, // 57: partition.v1.PartitionService.GetAccess:input_type -> partition.v1.GetAccessRequest
+	38, // 58: partition.v1.PartitionService.RemoveAccess:input_type -> partition.v1.RemoveAccessRequest
+	40, // 59: partition.v1.PartitionService.CreateAccessRole:input_type -> partition.v1.CreateAccessRoleRequest
+	45, // 60: partition.v1.PartitionService.ListAccessRole:input_type -> partition.v1.ListAccessRoleRequest
+	43, // 61: partition.v1.PartitionService.RemoveAccessRole:input_type -> partition.v1.RemoveAccessRoleRequest
+	3,  // 62: partition.v1.PartitionService.GetTenant:output_type -> partition.v1.GetTenantResponse
+	5,  // 63: partition.v1.PartitionService.ListTenant:output_type -> partition.v1.ListTenantResponse
+	7,  // 64: partition.v1.PartitionService.CreateTenant:output_type -> partition.v1.CreateTenantResponse
+	9,  // 65: partition.v1.PartitionService.UpdateTenant:output_type -> partition.v1.UpdateTenantResponse
+	13, // 66: partition.v1.PartitionService.ListPartition:output_type -> partition.v1.ListPartitionResponse
+	15, // 67: partition.v1.PartitionService.CreatePartition:output_type -> partition.v1.CreatePartitionResponse
+	11, // 68: partition.v1.PartitionService.GetPartition:output_type -> partition.v1.GetPartitionResponse
+	17, // 69: partition.v1.PartitionService.UpdatePartition:output_type -> partition.v1.UpdatePartitionResponse
+	20, // 70: partition.v1.PartitionService.CreatePartitionRole:output_type -> partition.v1.CreatePartitionRoleResponse
+	25, // 71: partition.v1.PartitionService.ListPartitionRole:output_type -> partition.v1.ListPartitionRoleResponse
+	23, // 72: partition.v1.PartitionService.RemovePartitionRole:output_type -> partition.v1.RemovePartitionRoleResponse
+	28, // 73: partition.v1.PartitionService.CreatePage:output_type -> partition.v1.CreatePageResponse
+	30, // 74: partition.v1.PartitionService.GetPage:output_type -> partition.v1.GetPageResponse
+	32, // 75: partition.v1.PartitionService.RemovePage:output_type -> partition.v1.RemovePageResponse
+	35, // 76: partition.v1.PartitionService.CreateAccess:output_type -> partition.v1.CreateAccessResponse
+	37, // 77: partition.v1.PartitionService.GetAccess:output_type -> partition.v1.GetAccessResponse
+	39, // 78: partition.v1.PartitionService.RemoveAccess:output_type -> partition.v1.RemoveAccessResponse
+	41, // 79: partition.v1.PartitionService.CreateAccessRole:output_type -> partition.v1.CreateAccessRoleResponse
+	46, // 80: partition.v1.PartitionService.ListAccessRole:output_type -> partition.v1.ListAccessRoleResponse
+	44, // 81: partition.v1.PartitionService.RemoveAccessRole:output_type -> partition.v1.RemoveAccessRoleResponse
+	62, // [62:82] is the sub-list for method output_type
+	42, // [42:62] is the sub-list for method input_type
+	42, // [42:42] is the sub-list for extension type_name
+	42, // [42:42] is the sub-list for extension extendee
+	0,  // [0:42] is the sub-list for field type_name
 }
 
 func init() { file_partition_v1_partition_proto_init() }
@@ -2981,11 +3153,11 @@ func file_partition_v1_partition_proto_init() {
 	if File_partition_v1_partition_proto != nil {
 		return
 	}
-	file_partition_v1_partition_proto_msgTypes[32].OneofWrappers = []any{
+	file_partition_v1_partition_proto_msgTypes[34].OneofWrappers = []any{
 		(*CreateAccessRequest_PartitionId)(nil),
 		(*CreateAccessRequest_ClientId)(nil),
 	}
-	file_partition_v1_partition_proto_msgTypes[34].OneofWrappers = []any{
+	file_partition_v1_partition_proto_msgTypes[36].OneofWrappers = []any{
 		(*GetAccessRequest_PartitionId)(nil),
 		(*GetAccessRequest_ClientId)(nil),
 	}
@@ -2995,7 +3167,7 @@ func file_partition_v1_partition_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_partition_v1_partition_proto_rawDesc), len(file_partition_v1_partition_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   45,
+			NumMessages:   47,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

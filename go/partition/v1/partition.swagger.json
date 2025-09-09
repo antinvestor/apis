@@ -768,6 +768,43 @@
         "tags": [
           "partition.v1.PartitionService"
         ]
+      },
+      "patch": {
+        "summary": "Update an existing tenant object",
+        "operationId": "PartitionService_UpdateTenant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partition.v1.UpdateTenantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partition.v1.PartitionService.UpdateTenantBody"
+            }
+          }
+        ],
+        "tags": [
+          "partition.v1.PartitionService"
+        ]
       }
     }
   },
@@ -824,7 +861,7 @@
     "partition.v1.AccessObject": {
       "type": "object",
       "properties": {
-        "accessId": {
+        "id": {
           "type": "string"
         },
         "profileId": {
@@ -1078,7 +1115,7 @@
     "partition.v1.PageObject": {
       "type": "object",
       "properties": {
-        "pageId": {
+        "id": {
           "type": "string"
         },
         "name": {
@@ -1093,6 +1130,9 @@
         "createdAt": {
           "type": "string",
           "format": "date-time"
+        },
+        "properties": {
+          "type": "object"
         }
       }
     },
@@ -1129,7 +1169,7 @@
     "partition.v1.PartitionRoleObject": {
       "type": "object",
       "properties": {
-        "partitionRoleId": {
+        "id": {
           "type": "string"
         },
         "partitionId": {
@@ -1144,10 +1184,30 @@
         "createdAt": {
           "type": "string",
           "format": "date-time"
+        },
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
         }
       }
     },
     "partition.v1.PartitionService.UpdatePartitionBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
+        },
+        "properties": {
+          "type": "object"
+        }
+      }
+    },
+    "partition.v1.PartitionService.UpdateTenantBody": {
       "type": "object",
       "properties": {
         "name": {
@@ -1214,6 +1274,9 @@
         "createdAt": {
           "type": "string",
           "format": "date-time"
+        },
+        "state": {
+          "$ref": "#/definitions/common.v1.STATE"
         }
       }
     },
@@ -1222,6 +1285,14 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/partition.v1.PartitionObject"
+        }
+      }
+    },
+    "partition.v1.UpdateTenantResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/partition.v1.TenantObject"
         }
       }
     }

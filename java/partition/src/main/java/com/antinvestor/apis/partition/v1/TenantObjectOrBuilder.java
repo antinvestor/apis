@@ -89,4 +89,15 @@ public interface TenantObjectOrBuilder extends
    * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
    */
   com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();
+
+  /**
+   * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
+   * @return The enum numeric value on the wire for state.
+   */
+  int getStateValue();
+  /**
+   * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
+   * @return The state.
+   */
+  com.antinvestor.apis.common.v1.STATE getState();
 }

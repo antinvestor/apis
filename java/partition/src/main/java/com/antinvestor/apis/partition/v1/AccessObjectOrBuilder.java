@@ -25,16 +25,16 @@ public interface AccessObjectOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-   * @return The accessId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The id.
    */
-  java.lang.String getAccessId();
+  java.lang.String getId();
   /**
-   * <code>string access_id = 1 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for accessId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for id.
    */
   com.google.protobuf.ByteString
-      getAccessIdBytes();
+      getIdBytes();
 
   /**
    * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>

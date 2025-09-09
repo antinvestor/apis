@@ -143,6 +143,51 @@ func local_request_PartitionService_CreateTenant_0(ctx context.Context, marshale
 	return msg, metadata, err
 }
 
+func request_PartitionService_UpdateTenant_0(ctx context.Context, marshaler runtime.Marshaler, client PartitionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq UpdateTenantRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	val, ok := pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+	msg, err := client.UpdateTenant(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_PartitionService_UpdateTenant_0(ctx context.Context, marshaler runtime.Marshaler, server PartitionServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq UpdateTenantRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	val, ok := pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+	msg, err := server.UpdateTenant(ctx, &protoReq)
+	return msg, metadata, err
+}
+
 var filter_PartitionService_ListPartition_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_PartitionService_ListPartition_0(ctx context.Context, marshaler runtime.Marshaler, client PartitionServiceClient, req *http.Request, pathParams map[string]string) (PartitionService_ListPartitionClient, runtime.ServerMetadata, error) {
@@ -725,6 +770,26 @@ func RegisterPartitionServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		}
 		forward_PartitionService_CreateTenant_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodPatch, pattern_PartitionService_UpdateTenant_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/partition.v1.PartitionService/UpdateTenant", runtime.WithHTTPPathPattern("/tenant/{id}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_PartitionService_UpdateTenant_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_PartitionService_UpdateTenant_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 
 	mux.Handle(http.MethodGet, pattern_PartitionService_ListPartition_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
@@ -1097,6 +1162,23 @@ func RegisterPartitionServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		}
 		forward_PartitionService_CreateTenant_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodPatch, pattern_PartitionService_UpdateTenant_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/partition.v1.PartitionService/UpdateTenant", runtime.WithHTTPPathPattern("/tenant/{id}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_PartitionService_UpdateTenant_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_PartitionService_UpdateTenant_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	mux.Handle(http.MethodGet, pattern_PartitionService_ListPartition_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1376,6 +1458,7 @@ var (
 	pattern_PartitionService_GetTenant_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"tenant", "id"}, ""))
 	pattern_PartitionService_ListTenant_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"tenant"}, ""))
 	pattern_PartitionService_CreateTenant_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"tenant"}, ""))
+	pattern_PartitionService_UpdateTenant_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"tenant", "id"}, ""))
 	pattern_PartitionService_ListPartition_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"partition"}, ""))
 	pattern_PartitionService_CreatePartition_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"partition"}, ""))
 	pattern_PartitionService_GetPartition_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"partition", "id"}, ""))
@@ -1398,6 +1481,7 @@ var (
 	forward_PartitionService_GetTenant_0           = runtime.ForwardResponseMessage
 	forward_PartitionService_ListTenant_0          = runtime.ForwardResponseStream
 	forward_PartitionService_CreateTenant_0        = runtime.ForwardResponseMessage
+	forward_PartitionService_UpdateTenant_0        = runtime.ForwardResponseMessage
 	forward_PartitionService_ListPartition_0       = runtime.ForwardResponseStream
 	forward_PartitionService_CreatePartition_0     = runtime.ForwardResponseMessage
 	forward_PartitionService_GetPartition_0        = runtime.ForwardResponseMessage

@@ -422,6 +422,26 @@ func (mr *MockPartitionServiceClientMockRecorder) UpdatePartition(ctx, in any, o
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdatePartition", reflect.TypeOf((*MockPartitionServiceClient)(nil).UpdatePartition), varargs...)
 }
 
+// UpdateTenant mocks base method.
+func (m *MockPartitionServiceClient) UpdateTenant(ctx context.Context, in *partitionv1.UpdateTenantRequest, opts ...grpc.CallOption) (*partitionv1.UpdateTenantResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateTenant", varargs...)
+	ret0, _ := ret[0].(*partitionv1.UpdateTenantResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTenant indicates an expected call of UpdateTenant.
+func (mr *MockPartitionServiceClientMockRecorder) UpdateTenant(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTenant", reflect.TypeOf((*MockPartitionServiceClient)(nil).UpdateTenant), varargs...)
+}
+
 // MockPartitionServiceServer is a mock of PartitionServiceServer interface.
 type MockPartitionServiceServer struct {
 	ctrl     *gomock.Controller
@@ -725,6 +745,21 @@ func (m *MockPartitionServiceServer) UpdatePartition(arg0 context.Context, arg1 
 func (mr *MockPartitionServiceServerMockRecorder) UpdatePartition(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdatePartition", reflect.TypeOf((*MockPartitionServiceServer)(nil).UpdatePartition), arg0, arg1)
+}
+
+// UpdateTenant mocks base method.
+func (m *MockPartitionServiceServer) UpdateTenant(arg0 context.Context, arg1 *partitionv1.UpdateTenantRequest) (*partitionv1.UpdateTenantResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateTenant", arg0, arg1)
+	ret0, _ := ret[0].(*partitionv1.UpdateTenantResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTenant indicates an expected call of UpdateTenant.
+func (mr *MockPartitionServiceServerMockRecorder) UpdateTenant(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTenant", reflect.TypeOf((*MockPartitionServiceServer)(nil).UpdateTenant), arg0, arg1)
 }
 
 // mustEmbedUnimplementedPartitionServiceServer mocks base method.

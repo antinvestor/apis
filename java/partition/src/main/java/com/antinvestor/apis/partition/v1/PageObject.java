@@ -42,7 +42,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private PageObject() {
-    pageId_ = "";
+    id_ = "";
     name_ = "";
     html_ = "";
     state_ = 0;
@@ -62,39 +62,39 @@ private static final long serialVersionUID = 0L;
   }
 
   private int bitField0_;
-  public static final int PAGE_ID_FIELD_NUMBER = 1;
+  public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object pageId_ = "";
+  private volatile java.lang.Object id_ = "";
   /**
-   * <code>string page_id = 1 [json_name = "pageId", (.buf.validate.field) = { ... }</code>
-   * @return The pageId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The id.
    */
   @java.lang.Override
-  public java.lang.String getPageId() {
-    java.lang.Object ref = pageId_;
+  public java.lang.String getId() {
+    java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      pageId_ = s;
+      id_ = s;
       return s;
     }
   }
   /**
-   * <code>string page_id = 1 [json_name = "pageId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for pageId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for id.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getPageIdBytes() {
-    java.lang.Object ref = pageId_;
+      getIdBytes() {
+    java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      pageId_ = b;
+      id_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -223,6 +223,32 @@ private static final long serialVersionUID = 0L;
     return createdAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createdAt_;
   }
 
+  public static final int PROPERTIES_FIELD_NUMBER = 6;
+  private com.google.protobuf.Struct properties_;
+  /**
+   * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+   * @return Whether the properties field is set.
+   */
+  @java.lang.Override
+  public boolean hasProperties() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+   * @return The properties.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Struct getProperties() {
+    return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
+  }
+  /**
+   * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.StructOrBuilder getPropertiesOrBuilder() {
+    return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -237,8 +263,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(pageId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, pageId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, name_);
@@ -252,6 +278,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeMessage(5, getCreatedAt());
     }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(6, getProperties());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -261,8 +290,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(pageId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, pageId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(2, name_);
@@ -277,6 +306,10 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(5, getCreatedAt());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(6, getProperties());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -293,8 +326,8 @@ private static final long serialVersionUID = 0L;
     }
     com.antinvestor.apis.partition.v1.PageObject other = (com.antinvestor.apis.partition.v1.PageObject) obj;
 
-    if (!getPageId()
-        .equals(other.getPageId())) return false;
+    if (!getId()
+        .equals(other.getId())) return false;
     if (!getName()
         .equals(other.getName())) return false;
     if (!getHtml()
@@ -304,6 +337,11 @@ private static final long serialVersionUID = 0L;
     if (hasCreatedAt()) {
       if (!getCreatedAt()
           .equals(other.getCreatedAt())) return false;
+    }
+    if (hasProperties() != other.hasProperties()) return false;
+    if (hasProperties()) {
+      if (!getProperties()
+          .equals(other.getProperties())) return false;
     }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
@@ -316,8 +354,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + PAGE_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getPageId().hashCode();
+    hash = (37 * hash) + ID_FIELD_NUMBER;
+    hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + NAME_FIELD_NUMBER;
     hash = (53 * hash) + getName().hashCode();
     hash = (37 * hash) + HTML_FIELD_NUMBER;
@@ -327,6 +365,10 @@ private static final long serialVersionUID = 0L;
     if (hasCreatedAt()) {
       hash = (37 * hash) + CREATED_AT_FIELD_NUMBER;
       hash = (53 * hash) + getCreatedAt().hashCode();
+    }
+    if (hasProperties()) {
+      hash = (37 * hash) + PROPERTIES_FIELD_NUMBER;
+      hash = (53 * hash) + getProperties().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -459,13 +501,14 @@ private static final long serialVersionUID = 0L;
       if (com.google.protobuf.GeneratedMessage
               .alwaysUseFieldBuilders) {
         internalGetCreatedAtFieldBuilder();
+        internalGetPropertiesFieldBuilder();
       }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      pageId_ = "";
+      id_ = "";
       name_ = "";
       html_ = "";
       state_ = 0;
@@ -473,6 +516,11 @@ private static final long serialVersionUID = 0L;
       if (createdAtBuilder_ != null) {
         createdAtBuilder_.dispose();
         createdAtBuilder_ = null;
+      }
+      properties_ = null;
+      if (propertiesBuilder_ != null) {
+        propertiesBuilder_.dispose();
+        propertiesBuilder_ = null;
       }
       return this;
     }
@@ -508,7 +556,7 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(com.antinvestor.apis.partition.v1.PageObject result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.pageId_ = pageId_;
+        result.id_ = id_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.name_ = name_;
@@ -526,6 +574,12 @@ private static final long serialVersionUID = 0L;
             : createdAtBuilder_.build();
         to_bitField0_ |= 0x00000001;
       }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.properties_ = propertiesBuilder_ == null
+            ? properties_
+            : propertiesBuilder_.build();
+        to_bitField0_ |= 0x00000002;
+      }
       result.bitField0_ |= to_bitField0_;
     }
 
@@ -541,8 +595,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.antinvestor.apis.partition.v1.PageObject other) {
       if (other == com.antinvestor.apis.partition.v1.PageObject.getDefaultInstance()) return this;
-      if (!other.getPageId().isEmpty()) {
-        pageId_ = other.pageId_;
+      if (!other.getId().isEmpty()) {
+        id_ = other.id_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
@@ -561,6 +615,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.hasCreatedAt()) {
         mergeCreatedAt(other.getCreatedAt());
+      }
+      if (other.hasProperties()) {
+        mergeProperties(other.getProperties());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -589,7 +646,7 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              pageId_ = input.readStringRequireUtf8();
+              id_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
@@ -615,6 +672,13 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000010;
               break;
             } // case 42
+            case 50: {
+              input.readMessage(
+                  internalGetPropertiesFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 50
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -632,73 +696,73 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object pageId_ = "";
+    private java.lang.Object id_ = "";
     /**
-     * <code>string page_id = 1 [json_name = "pageId", (.buf.validate.field) = { ... }</code>
-     * @return The pageId.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @return The id.
      */
-    public java.lang.String getPageId() {
-      java.lang.Object ref = pageId_;
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        pageId_ = s;
+        id_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string page_id = 1 [json_name = "pageId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for pageId.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for id.
      */
     public com.google.protobuf.ByteString
-        getPageIdBytes() {
-      java.lang.Object ref = pageId_;
+        getIdBytes() {
+      java.lang.Object ref = id_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        pageId_ = b;
+        id_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string page_id = 1 [json_name = "pageId", (.buf.validate.field) = { ... }</code>
-     * @param value The pageId to set.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @param value The id to set.
      * @return This builder for chaining.
      */
-    public Builder setPageId(
+    public Builder setId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      pageId_ = value;
+      id_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>string page_id = 1 [json_name = "pageId", (.buf.validate.field) = { ... }</code>
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearPageId() {
-      pageId_ = getDefaultInstance().getPageId();
+    public Builder clearId() {
+      id_ = getDefaultInstance().getId();
       bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>string page_id = 1 [json_name = "pageId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for pageId to set.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for id to set.
      * @return This builder for chaining.
      */
-    public Builder setPageIdBytes(
+    public Builder setIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      pageId_ = value;
+      id_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
@@ -1018,6 +1082,127 @@ private static final long serialVersionUID = 0L;
         createdAt_ = null;
       }
       return createdAtBuilder_;
+    }
+
+    private com.google.protobuf.Struct properties_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> propertiesBuilder_;
+    /**
+     * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+     * @return Whether the properties field is set.
+     */
+    public boolean hasProperties() {
+      return ((bitField0_ & 0x00000020) != 0);
+    }
+    /**
+     * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+     * @return The properties.
+     */
+    public com.google.protobuf.Struct getProperties() {
+      if (propertiesBuilder_ == null) {
+        return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
+      } else {
+        return propertiesBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+     */
+    public Builder setProperties(com.google.protobuf.Struct value) {
+      if (propertiesBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        properties_ = value;
+      } else {
+        propertiesBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+     */
+    public Builder setProperties(
+        com.google.protobuf.Struct.Builder builderForValue) {
+      if (propertiesBuilder_ == null) {
+        properties_ = builderForValue.build();
+      } else {
+        propertiesBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+     */
+    public Builder mergeProperties(com.google.protobuf.Struct value) {
+      if (propertiesBuilder_ == null) {
+        if (((bitField0_ & 0x00000020) != 0) &&
+          properties_ != null &&
+          properties_ != com.google.protobuf.Struct.getDefaultInstance()) {
+          getPropertiesBuilder().mergeFrom(value);
+        } else {
+          properties_ = value;
+        }
+      } else {
+        propertiesBuilder_.mergeFrom(value);
+      }
+      if (properties_ != null) {
+        bitField0_ |= 0x00000020;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+     */
+    public Builder clearProperties() {
+      bitField0_ = (bitField0_ & ~0x00000020);
+      properties_ = null;
+      if (propertiesBuilder_ != null) {
+        propertiesBuilder_.dispose();
+        propertiesBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+     */
+    public com.google.protobuf.Struct.Builder getPropertiesBuilder() {
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return internalGetPropertiesFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+     */
+    public com.google.protobuf.StructOrBuilder getPropertiesOrBuilder() {
+      if (propertiesBuilder_ != null) {
+        return propertiesBuilder_.getMessageOrBuilder();
+      } else {
+        return properties_ == null ?
+            com.google.protobuf.Struct.getDefaultInstance() : properties_;
+      }
+    }
+    /**
+     * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
+        internalGetPropertiesFieldBuilder() {
+      if (propertiesBuilder_ == null) {
+        propertiesBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder>(
+                getProperties(),
+                getParentForChildren(),
+                isClean());
+        properties_ = null;
+      }
+      return propertiesBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:partition.v1.PageObject)

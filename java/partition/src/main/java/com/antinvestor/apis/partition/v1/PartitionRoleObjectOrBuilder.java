@@ -25,16 +25,16 @@ public interface PartitionRoleObjectOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string partition_role_id = 1 [json_name = "partitionRoleId", (.buf.validate.field) = { ... }</code>
-   * @return The partitionRoleId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The id.
    */
-  java.lang.String getPartitionRoleId();
+  java.lang.String getId();
   /**
-   * <code>string partition_role_id = 1 [json_name = "partitionRoleId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for partitionRoleId.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for id.
    */
   com.google.protobuf.ByteString
-      getPartitionRoleIdBytes();
+      getIdBytes();
 
   /**
    * <code>string partition_id = 2 [json_name = "partitionId", (.buf.validate.field) = { ... }</code>
@@ -89,4 +89,15 @@ public interface PartitionRoleObjectOrBuilder extends
    * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
    */
   com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();
+
+  /**
+   * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
+   * @return The enum numeric value on the wire for state.
+   */
+  int getStateValue();
+  /**
+   * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
+   * @return The state.
+   */
+  com.antinvestor.apis.common.v1.STATE getState();
 }
