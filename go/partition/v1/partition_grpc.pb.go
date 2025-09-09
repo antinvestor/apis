@@ -40,6 +40,7 @@ const (
 	PartitionService_ListPartition_FullMethodName       = "/partition.v1.PartitionService/ListPartition"
 	PartitionService_CreatePartition_FullMethodName     = "/partition.v1.PartitionService/CreatePartition"
 	PartitionService_GetPartition_FullMethodName        = "/partition.v1.PartitionService/GetPartition"
+	PartitionService_GetPartitionParents_FullMethodName = "/partition.v1.PartitionService/GetPartitionParents"
 	PartitionService_UpdatePartition_FullMethodName     = "/partition.v1.PartitionService/UpdatePartition"
 	PartitionService_CreatePartitionRole_FullMethodName = "/partition.v1.PartitionService/CreatePartitionRole"
 	PartitionService_ListPartitionRole_FullMethodName   = "/partition.v1.PartitionService/ListPartitionRole"
@@ -73,6 +74,8 @@ type PartitionServiceClient interface {
 	CreatePartition(ctx context.Context, in *CreatePartitionRequest, opts ...grpc.CallOption) (*CreatePartitionResponse, error)
 	// Get an existing partition object
 	GetPartition(ctx context.Context, in *GetPartitionRequest, opts ...grpc.CallOption) (*GetPartitionResponse, error)
+	// Get a partition parents object
+	GetPartitionParents(ctx context.Context, in *GetPartitionParentsRequest, opts ...grpc.CallOption) (*GetPartitionParentsResponse, error)
 	// Update an existing partition object
 	UpdatePartition(ctx context.Context, in *UpdatePartitionRequest, opts ...grpc.CallOption) (*UpdatePartitionResponse, error)
 	// Create a partition Role for a particular partition
@@ -191,6 +194,16 @@ func (c *partitionServiceClient) GetPartition(ctx context.Context, in *GetPartit
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetPartitionResponse)
 	err := c.cc.Invoke(ctx, PartitionService_GetPartition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *partitionServiceClient) GetPartitionParents(ctx context.Context, in *GetPartitionParentsRequest, opts ...grpc.CallOption) (*GetPartitionParentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPartitionParentsResponse)
+	err := c.cc.Invoke(ctx, PartitionService_GetPartitionParents_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -363,6 +376,8 @@ type PartitionServiceServer interface {
 	CreatePartition(context.Context, *CreatePartitionRequest) (*CreatePartitionResponse, error)
 	// Get an existing partition object
 	GetPartition(context.Context, *GetPartitionRequest) (*GetPartitionResponse, error)
+	// Get a partition parents object
+	GetPartitionParents(context.Context, *GetPartitionParentsRequest) (*GetPartitionParentsResponse, error)
 	// Update an existing partition object
 	UpdatePartition(context.Context, *UpdatePartitionRequest) (*UpdatePartitionResponse, error)
 	// Create a partition Role for a particular partition
@@ -419,6 +434,9 @@ func (UnimplementedPartitionServiceServer) CreatePartition(context.Context, *Cre
 }
 func (UnimplementedPartitionServiceServer) GetPartition(context.Context, *GetPartitionRequest) (*GetPartitionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPartition not implemented")
+}
+func (UnimplementedPartitionServiceServer) GetPartitionParents(context.Context, *GetPartitionParentsRequest) (*GetPartitionParentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPartitionParents not implemented")
 }
 func (UnimplementedPartitionServiceServer) UpdatePartition(context.Context, *UpdatePartitionRequest) (*UpdatePartitionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePartition not implemented")
@@ -588,6 +606,24 @@ func _PartitionService_GetPartition_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PartitionServiceServer).GetPartition(ctx, req.(*GetPartitionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PartitionService_GetPartitionParents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPartitionParentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PartitionServiceServer).GetPartitionParents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PartitionService_GetPartitionParents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PartitionServiceServer).GetPartitionParents(ctx, req.(*GetPartitionParentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -838,6 +874,10 @@ var PartitionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPartition",
 			Handler:    _PartitionService_GetPartition_Handler,
+		},
+		{
+			MethodName: "GetPartitionParents",
+			Handler:    _PartitionService_GetPartitionParents_Handler,
 		},
 		{
 			MethodName: "UpdatePartition",

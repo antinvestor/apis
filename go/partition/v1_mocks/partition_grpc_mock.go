@@ -222,6 +222,26 @@ func (mr *MockPartitionServiceClientMockRecorder) GetPartition(ctx, in any, opts
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPartition", reflect.TypeOf((*MockPartitionServiceClient)(nil).GetPartition), varargs...)
 }
 
+// GetPartitionParents mocks base method.
+func (m *MockPartitionServiceClient) GetPartitionParents(ctx context.Context, in *partitionv1.GetPartitionParentsRequest, opts ...grpc.CallOption) (*partitionv1.GetPartitionParentsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetPartitionParents", varargs...)
+	ret0, _ := ret[0].(*partitionv1.GetPartitionParentsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetPartitionParents indicates an expected call of GetPartitionParents.
+func (mr *MockPartitionServiceClientMockRecorder) GetPartitionParents(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPartitionParents", reflect.TypeOf((*MockPartitionServiceClient)(nil).GetPartitionParents), varargs...)
+}
+
 // GetTenant mocks base method.
 func (m *MockPartitionServiceClient) GetTenant(ctx context.Context, in *partitionv1.GetTenantRequest, opts ...grpc.CallOption) (*partitionv1.GetTenantResponse, error) {
 	m.ctrl.T.Helper()
@@ -599,6 +619,21 @@ func (m *MockPartitionServiceServer) GetPartition(arg0 context.Context, arg1 *pa
 func (mr *MockPartitionServiceServerMockRecorder) GetPartition(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPartition", reflect.TypeOf((*MockPartitionServiceServer)(nil).GetPartition), arg0, arg1)
+}
+
+// GetPartitionParents mocks base method.
+func (m *MockPartitionServiceServer) GetPartitionParents(arg0 context.Context, arg1 *partitionv1.GetPartitionParentsRequest) (*partitionv1.GetPartitionParentsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetPartitionParents", arg0, arg1)
+	ret0, _ := ret[0].(*partitionv1.GetPartitionParentsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetPartitionParents indicates an expected call of GetPartitionParents.
+func (mr *MockPartitionServiceServerMockRecorder) GetPartitionParents(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPartitionParents", reflect.TypeOf((*MockPartitionServiceServer)(nil).GetPartitionParents), arg0, arg1)
 }
 
 // GetTenant mocks base method.

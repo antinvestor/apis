@@ -243,6 +243,37 @@ public final class PartitionServiceGrpc {
     return getGetPartitionMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.partition.v1.GetPartitionParentsRequest,
+      com.antinvestor.apis.partition.v1.GetPartitionParentsResponse> getGetPartitionParentsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetPartitionParents",
+      requestType = com.antinvestor.apis.partition.v1.GetPartitionParentsRequest.class,
+      responseType = com.antinvestor.apis.partition.v1.GetPartitionParentsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.partition.v1.GetPartitionParentsRequest,
+      com.antinvestor.apis.partition.v1.GetPartitionParentsResponse> getGetPartitionParentsMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.partition.v1.GetPartitionParentsRequest, com.antinvestor.apis.partition.v1.GetPartitionParentsResponse> getGetPartitionParentsMethod;
+    if ((getGetPartitionParentsMethod = PartitionServiceGrpc.getGetPartitionParentsMethod) == null) {
+      synchronized (PartitionServiceGrpc.class) {
+        if ((getGetPartitionParentsMethod = PartitionServiceGrpc.getGetPartitionParentsMethod) == null) {
+          PartitionServiceGrpc.getGetPartitionParentsMethod = getGetPartitionParentsMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.partition.v1.GetPartitionParentsRequest, com.antinvestor.apis.partition.v1.GetPartitionParentsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetPartitionParents"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.partition.v1.GetPartitionParentsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.partition.v1.GetPartitionParentsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new PartitionServiceMethodDescriptorSupplier("GetPartitionParents"))
+              .build();
+        }
+      }
+    }
+    return getGetPartitionParentsMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.partition.v1.UpdatePartitionRequest,
       com.antinvestor.apis.partition.v1.UpdatePartitionResponse> getUpdatePartitionMethod;
 
@@ -781,6 +812,16 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
+     * Get a partition parents object
+     * </pre>
+     */
+    default void getPartitionParents(com.antinvestor.apis.partition.v1.GetPartitionParentsRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.partition.v1.GetPartitionParentsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetPartitionParentsMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * Update an existing partition object
      * </pre>
      */
@@ -1012,6 +1053,17 @@ public final class PartitionServiceGrpc {
         io.grpc.stub.StreamObserver<com.antinvestor.apis.partition.v1.GetPartitionResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetPartitionMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Get a partition parents object
+     * </pre>
+     */
+    public void getPartitionParents(com.antinvestor.apis.partition.v1.GetPartitionParentsRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.partition.v1.GetPartitionParentsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetPartitionParentsMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -1250,6 +1302,16 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
+     * Get a partition parents object
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.GetPartitionParentsResponse getPartitionParents(com.antinvestor.apis.partition.v1.GetPartitionParentsRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
+          getChannel(), getGetPartitionParentsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      * Update an existing partition object
      * </pre>
      */
@@ -1473,6 +1535,16 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
+     * Get a partition parents object
+     * </pre>
+     */
+    public com.antinvestor.apis.partition.v1.GetPartitionParentsResponse getPartitionParents(com.antinvestor.apis.partition.v1.GetPartitionParentsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetPartitionParentsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      * Update an existing partition object
      * </pre>
      */
@@ -1677,6 +1749,17 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
+     * Get a partition parents object
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.GetPartitionParentsResponse> getPartitionParents(
+        com.antinvestor.apis.partition.v1.GetPartitionParentsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetPartitionParentsMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * Update an existing partition object
      * </pre>
      */
@@ -1804,19 +1887,20 @@ public final class PartitionServiceGrpc {
   private static final int METHODID_LIST_PARTITION = 4;
   private static final int METHODID_CREATE_PARTITION = 5;
   private static final int METHODID_GET_PARTITION = 6;
-  private static final int METHODID_UPDATE_PARTITION = 7;
-  private static final int METHODID_CREATE_PARTITION_ROLE = 8;
-  private static final int METHODID_LIST_PARTITION_ROLE = 9;
-  private static final int METHODID_REMOVE_PARTITION_ROLE = 10;
-  private static final int METHODID_CREATE_PAGE = 11;
-  private static final int METHODID_GET_PAGE = 12;
-  private static final int METHODID_REMOVE_PAGE = 13;
-  private static final int METHODID_CREATE_ACCESS = 14;
-  private static final int METHODID_GET_ACCESS = 15;
-  private static final int METHODID_REMOVE_ACCESS = 16;
-  private static final int METHODID_CREATE_ACCESS_ROLE = 17;
-  private static final int METHODID_LIST_ACCESS_ROLE = 18;
-  private static final int METHODID_REMOVE_ACCESS_ROLE = 19;
+  private static final int METHODID_GET_PARTITION_PARENTS = 7;
+  private static final int METHODID_UPDATE_PARTITION = 8;
+  private static final int METHODID_CREATE_PARTITION_ROLE = 9;
+  private static final int METHODID_LIST_PARTITION_ROLE = 10;
+  private static final int METHODID_REMOVE_PARTITION_ROLE = 11;
+  private static final int METHODID_CREATE_PAGE = 12;
+  private static final int METHODID_GET_PAGE = 13;
+  private static final int METHODID_REMOVE_PAGE = 14;
+  private static final int METHODID_CREATE_ACCESS = 15;
+  private static final int METHODID_GET_ACCESS = 16;
+  private static final int METHODID_REMOVE_ACCESS = 17;
+  private static final int METHODID_CREATE_ACCESS_ROLE = 18;
+  private static final int METHODID_LIST_ACCESS_ROLE = 19;
+  private static final int METHODID_REMOVE_ACCESS_ROLE = 20;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1862,6 +1946,10 @@ public final class PartitionServiceGrpc {
         case METHODID_GET_PARTITION:
           serviceImpl.getPartition((com.antinvestor.apis.partition.v1.GetPartitionRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.partition.v1.GetPartitionResponse>) responseObserver);
+          break;
+        case METHODID_GET_PARTITION_PARENTS:
+          serviceImpl.getPartitionParents((com.antinvestor.apis.partition.v1.GetPartitionParentsRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.partition.v1.GetPartitionParentsResponse>) responseObserver);
           break;
         case METHODID_UPDATE_PARTITION:
           serviceImpl.updatePartition((com.antinvestor.apis.partition.v1.UpdatePartitionRequest) request,
@@ -1982,6 +2070,13 @@ public final class PartitionServiceGrpc {
               com.antinvestor.apis.partition.v1.GetPartitionRequest,
               com.antinvestor.apis.partition.v1.GetPartitionResponse>(
                 service, METHODID_GET_PARTITION)))
+        .addMethod(
+          getGetPartitionParentsMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.partition.v1.GetPartitionParentsRequest,
+              com.antinvestor.apis.partition.v1.GetPartitionParentsResponse>(
+                service, METHODID_GET_PARTITION_PARENTS)))
         .addMethod(
           getUpdatePartitionMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -2128,6 +2223,7 @@ public final class PartitionServiceGrpc {
               .addMethod(getListPartitionMethod())
               .addMethod(getCreatePartitionMethod())
               .addMethod(getGetPartitionMethod())
+              .addMethod(getGetPartitionParentsMethod())
               .addMethod(getUpdatePartitionMethod())
               .addMethod(getCreatePartitionRoleMethod())
               .addMethod(getListPartitionRoleMethod())

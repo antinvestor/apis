@@ -456,6 +456,37 @@
         ]
       }
     },
+    "/partition/parents/{id}": {
+      "get": {
+        "summary": "Get a partition parents object",
+        "operationId": "PartitionService_GetPartitionParents",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/partition.v1.GetPartitionParentsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "partition.v1.PartitionService"
+        ]
+      }
+    },
     "/partition/role": {
       "get": {
         "summary": "List partition roles available for this particular partition",
@@ -1045,6 +1076,18 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/partition.v1.PageObject"
+        }
+      }
+    },
+    "partition.v1.GetPartitionParentsResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/partition.v1.PartitionObject"
+          }
         }
       }
     },
