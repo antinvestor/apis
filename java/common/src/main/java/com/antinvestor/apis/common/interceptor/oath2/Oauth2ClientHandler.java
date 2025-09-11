@@ -90,8 +90,7 @@ public class Oauth2ClientHandler {
                     .oauth2ServiceTokenUri(optionalConfiguration.tokenEndpoint)
                     .apiKey(apiKeyValue)
                     .apiSecret(apiSecretValue)
-                    .audience(audienceList)
-                    .scope("offline_access");
+                    .audience(audienceList);
 
             return oauth2service;
         }
