@@ -3,7 +3,6 @@
 .travis.yml
 README.md
 api/openapi.yaml
-build.gradle
 build.sbt
 docs/CreateContent200Response.md
 docs/Error.md

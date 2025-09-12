@@ -7,10 +7,21 @@ repositories {
     mavenCentral()
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.diffplug.spotless:spotless-plugin-gradle:7.2.1")
+    }
+}
+
 subprojects {
 
     apply(plugin = "java-library")
     apply(plugin = "maven-publish")
+    apply(plugin = "com.diffplug.spotless")
+
     group = "com.antinvestor.apis"
     // Use the version property passed from command line (e.g., -Pversion=v1.0.0)
     version = project.findProperty("version")?.toString()?.removePrefix("v") ?: "0.0.0-SNAPSHOT"
@@ -76,6 +87,29 @@ subprojects {
             val test by getting(JvmTestSuite::class) {
                 useJUnitJupiter()
             }
+        }
+    }
+    
+    // Use spotless plugin to automatically format code, remove unused import, etc
+    // To apply changes directly to the file, run `gradlew spotlessApply`
+    // Ref: https://github.com/diffplug/spotless/tree/main/plugin-gradle
+    configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+        // comment out below to run spotless as part of the `check` task
+        isEnforceCheck = false
+        format("misc") {
+            // define the files (e.g. '*.gradle', '*.md') to apply `misc` to
+            target(".gitignore")
+            // define the steps to apply to those files
+            trimTrailingWhitespace()
+            indentWithSpaces() // Takes an integer argument if you don't like 4
+            endWithNewline()
+        }
+        java {
+            // don't need to set target, it is inferred from java
+            // apply a specific flavor of google-java-format
+            googleJavaFormat("1.8").aosp().reflowLongStrings()
+            removeUnusedImports()
+            importOrder()
         }
     }
 

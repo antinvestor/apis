@@ -82,6 +82,7 @@ golang_build_all: generate ## Build all packages
 	$(call golang_build,settings)
 	$(call golang_build,ledger)
 	$(call golang_build,lostid)
+	$(call golang_build,files)
 
 
 .PHONY: lintfix
