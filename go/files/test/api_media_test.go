@@ -25,10 +25,11 @@ package file_v1
 
 import (
 	"context"
+	"testing"
+
 	openapiclient "github.com/antinvestor/apis/go/files"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_file_v1_MediaAPIService(t *testing.T) {
@@ -52,7 +53,7 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.MediaAPI.GetConfig(context.Background()).Execute()
+		resp, httpRes, err := apiClient.MediaAPI.GetConfigAuthed(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -64,10 +65,10 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var serverName interface{}
-		var mediaId interface{}
+		var serverName string
+		var mediaId string
 
-		resp, httpRes, err := apiClient.MediaAPI.GetContent(context.Background(), serverName, mediaId).Execute()
+		resp, httpRes, err := apiClient.MediaAPI.GetContentAuthed(context.Background(), serverName, mediaId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -79,11 +80,11 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var serverName interface{}
-		var mediaId interface{}
-		var fileName interface{}
+		var serverName string
+		var mediaId string
+		var fileName string
 
-		resp, httpRes, err := apiClient.MediaAPI.GetContentOverrideName(context.Background(), serverName, mediaId, fileName).Execute()
+		resp, httpRes, err := apiClient.MediaAPI.GetContentOverrideNameAuthed(context.Background(), serverName, mediaId, fileName).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -95,10 +96,10 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var serverName interface{}
-		var mediaId interface{}
+		var serverName string
+		var mediaId string
 
-		resp, httpRes, err := apiClient.MediaAPI.GetContentThumbnail(context.Background(), serverName, mediaId).Execute()
+		resp, httpRes, err := apiClient.MediaAPI.GetContentThumbnailAuthed(context.Background(), serverName, mediaId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -110,7 +111,7 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.MediaAPI.GetUrlPreview(context.Background()).Execute()
+		resp, httpRes, err := apiClient.MediaAPI.GetUrlPreviewAuthed(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -134,8 +135,8 @@ func Test_file_v1_MediaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var serverName interface{}
-		var mediaId interface{}
+		var serverName string
+		var mediaId string
 
 		resp, httpRes, err := apiClient.MediaAPI.UploadContentToMXC(context.Background(), serverName, mediaId).Execute()
 

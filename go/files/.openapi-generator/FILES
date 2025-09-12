@@ -16,7 +16,6 @@ docs/MediaMetadata.md
 docs/SearchMedia200Response.md
 docs/UploadContent200Response.md
 git_push.sh
-go.mod
 go.sum
 model_create_content_200_response.go
 model_error.go
