@@ -71,15 +71,6 @@ public class NotificationClient extends GrpcClientBase<NotificationServiceGrpc.N
     }
 
 
-    public StatusResponse send(Context context, Notification notification) {
-        var sendRequest = SendRequest.newBuilder().setData(notification).build();
-        return stub(context).send(sendRequest).getData();
-    }
-
-    public StatusResponse receive(Context context, Notification notification) {
-        var receiveRequest = ReceiveRequest.newBuilder().setData(notification).build();
-        return stub(context).receive(receiveRequest).getData();
-    }
 
     public StatusResponse update(Context context, STATE state, STATUS status, String externalId) {
 
@@ -136,74 +127,4 @@ public class NotificationClient extends GrpcClientBase<NotificationServiceGrpc.N
         };
 
     }
-
-
-    public Template templeteSave(Context context, String name, String languageCode, Map<String, String> data) {
-        return templeteSave(context, name, languageCode, data, Collections.emptyMap());
-    }
-
-    public Template templeteSave(Context context, String name, String languageCode, Map<String, String> data, Map<String, String> extra) {
-        var saveRequest = TemplateSaveRequest.
-                newBuilder().
-                setName(name).
-                setLanguageCode(languageCode).
-                putAllData(data).
-                putAllExtra(extra).
-                build();
-        return stub(context).templateSave(saveRequest).getData();
-    }
-
-
-    public Iterator<List<Template>> templateSearch(Context context, String query, String languageCode, int page, int size) {
-
-        var filterBuilder = TemplateSearchRequest.newBuilder()
-                .setPage(page)
-                .setCount(size);
-
-        if (!TextUtils.isBlank(query)) {
-            filterBuilder = filterBuilder.setQuery(query);
-        }
-
-        if (!TextUtils.isBlank(languageCode)) {
-            filterBuilder = filterBuilder.setLanguageCode(languageCode);
-        }
-
-        var response = stub(context).templateSearch(filterBuilder.build());
-
-        return new Iterator<>() {
-            @Override
-            public boolean hasNext() {
-                return response.hasNext();
-            }
-
-            @Override
-            public List<Template> next() {
-                return response.next().getDataList();
-            }
-        };
-
-    }
-
-
-    public Optional<Template> templateGet(Context context, String query, String languageCode) {
-
-        var searchRequest = TemplateSearchRequest.newBuilder()
-                .setQuery(query)
-                .setLanguageCode(languageCode).
-                build();
-
-        var response = stub(context).templateSearch(searchRequest);
-
-        if (response.hasNext()) {
-            var templatesList = response.next();
-            if (templatesList.getDataCount() > 0) {
-                return Optional.of(templatesList.getData(0));
-            }
-        }
-
-        return Optional.empty();
-
-    }
-
-
 }

@@ -18,15 +18,12 @@ package com.antinvestor.apis.payment.client;
 import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
-import com.antinvestor.apis.common.context.DefaultContext;
-import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.common.v1.Pagination;
 import com.antinvestor.apis.common.v1.SearchRequest;
 import com.antinvestor.apis.common.v1.StatusResponse;
 import com.antinvestor.apis.common.v1.StatusUpdateRequest;
 import com.antinvestor.apis.payment.v1.*;
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 

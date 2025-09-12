@@ -21,6 +21,8 @@ import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
 import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
+import com.antinvestor.apis.common.utilities.ProtoStructUtil;
+import com.antinvestor.apis.common.v1.SearchRequest;
 import com.antinvestor.apis.ledger.v1.*;
 import com.google.type.Money;
 import io.grpc.ManagedChannel;
@@ -78,7 +80,7 @@ public class LedgerClient extends GrpcClientBase<LedgerServiceGrpc.LedgerService
         return stub(context).searchLedgers(searchRequest);
     }
 
-    public Ledger createLedger(Context context, String parent, LedgerType type, Map<String, String> data) {
+    public Ledger createLedger(Context context, String parent, LedgerType type, Map<String, Object> data) {
 
         Ledger.Builder ledgerBuilder = Ledger.newBuilder()
                 .setType(type);
@@ -88,17 +90,19 @@ public class LedgerClient extends GrpcClientBase<LedgerServiceGrpc.LedgerService
         }
 
         if (!Objects.isNull(data)) {
-            ledgerBuilder.putAllData(data);
+
+            ledgerBuilder.setData(ProtoStructUtil.fromMap(data));
         }
 
         return stub(context).createLedger(ledgerBuilder.build());
     }
 
-    public Optional<Ledger> updateLedger(Context context, String reference, Map<String, String> data) {
+    public Optional<Ledger> updateLedger(Context context, String reference, Map<String, Object> data) {
         Optional<Ledger> optionalLedger = getLedger(context, reference);
         if (optionalLedger.isPresent()) {
-            optionalLedger.get().getDataMap().putAll(data);
-            return Optional.of(stub(context).updateLedger(optionalLedger.get()));
+            var ledger = optionalLedger.get();
+            ledger = ledger.toBuilder().setData(ProtoStructUtil.fromMap(data)).build();
+            return Optional.of(stub(context).updateLedger(ledger));
         } else {
             return Optional.empty();
         }
@@ -124,7 +128,7 @@ public class LedgerClient extends GrpcClientBase<LedgerServiceGrpc.LedgerService
         return stub(context).searchAccounts(searchRequest);
     }
 
-    public Account createAccount(Context context, String ledgerReference, String currencyCode, Map<String, String> data) {
+    public Account createAccount(Context context, String ledgerReference, String currencyCode, Map<String, Object> data) {
 
         Money money = Money.newBuilder().setUnits(0).setNanos(0).setCurrencyCode(currencyCode).build();
         Account.Builder accountBuilder = Account.newBuilder()
@@ -132,17 +136,17 @@ public class LedgerClient extends GrpcClientBase<LedgerServiceGrpc.LedgerService
                 .setLedger(ledgerReference);
 
         if (!Objects.isNull(data)) {
-            accountBuilder.putAllData(data);
+            accountBuilder.setData(ProtoStructUtil.fromMap(data));
         }
 
         return stub(context).createAccount(accountBuilder.build());
     }
 
-    public Optional<Account> updateAccount(Context context, String reference, Map<String, String> data) {
+    public Optional<Account> updateAccount(Context context, String reference, Map<String, Object> data) {
 
         Account.Builder accountBuilder = Account.newBuilder()
                 .setReference(reference)
-                .putAllData(data);
+                .setData(ProtoStructUtil.fromMap(data));
 
         return Optional.of(stub(context).updateAccount(accountBuilder.build()));
     }
@@ -189,13 +193,13 @@ public class LedgerClient extends GrpcClientBase<LedgerServiceGrpc.LedgerService
         }
     }
 
-    public Optional<Transaction> updateTransaction(Context context, String reference, Map<String, String> data) {
+    public Optional<Transaction> updateTransaction(Context context, String reference, Map<String, Object> data) {
         Optional<Transaction> optionalTransaction = getTransaction(context, reference);
 
         if (optionalTransaction.isPresent()) {
 
             Transaction.Builder transactionBuilder = Transaction.newBuilder(optionalTransaction.get());
-            transactionBuilder.putAllData(data);
+            transactionBuilder.setData(ProtoStructUtil.fromMap(data));
             Transaction transaction = transactionBuilder.build();
             return Optional.of(stub(context).updateTransaction(transaction));
         } else {

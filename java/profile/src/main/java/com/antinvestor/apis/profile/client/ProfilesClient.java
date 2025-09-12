@@ -17,11 +17,9 @@ package com.antinvestor.apis.profile.client;
 import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
-import com.antinvestor.apis.common.context.DefaultContext;
-import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
+import com.antinvestor.apis.common.utilities.ProtoStructUtil;
 import com.antinvestor.apis.profile.v1.*;
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -75,13 +73,13 @@ public class ProfilesClient extends GrpcClientBase<ProfileServiceGrpc.ProfileSer
         return Optional.of(stub(context).merge(mergeRequest).getData());
     }
 
-    public Optional<ProfileObject> createProfile(Context context, ProfileType profileType, String contact, Map<String, String> properties) {
-        var createRequest = CreateRequest.newBuilder().setType(profileType).setContact(contact).putAllProperties(properties).build();
+    public Optional<ProfileObject> createProfile(Context context, ProfileType profileType, String contact, Map<String, Object> properties) {
+        var createRequest = CreateRequest.newBuilder().setType(profileType).setContact(contact).setProperties(ProtoStructUtil.fromMap(properties)).build();
         return Optional.of(stub(context).create(createRequest).getData());
     }
 
-    public Optional<ProfileObject> update(Context context, String profileId, Map<String, String> properties) {
-        var updateRequest = UpdateRequest.newBuilder().setId(profileId).putAllProperties(properties).build();
+    public Optional<ProfileObject> update(Context context, String profileId, Map<String, Object> properties) {
+        var updateRequest = UpdateRequest.newBuilder().setId(profileId).setProperties(ProtoStructUtil.fromMap(properties)).build();
         return Optional.of(stub(context).update(updateRequest).getData());
     }
 
@@ -107,9 +105,9 @@ public class ProfilesClient extends GrpcClientBase<ProfileServiceGrpc.ProfileSer
         return Optional.of(stub(context).getByContact(profileContactRequest).getData());
     }
 
-    public Optional<RelationshipObject> addRelationship(Context context, String relationshipId, String parent, String parentId, String child, String childId, RelationshipType relationshipType, Map<String, String> extras) {
+    public Optional<RelationshipObject> addRelationship(Context context, String relationshipId, String parent, String parentId, String child, String childId, RelationshipType relationshipType, Map<String, Object> extras) {
 
-        var addRelationshipReq = AddRelationshipRequest.newBuilder().setId(relationshipId).setParent(parent).setParentId(parentId).setChild(child).setChildId(childId).setType(relationshipType).putAllProperties(extras).build();
+        var addRelationshipReq = AddRelationshipRequest.newBuilder().setId(relationshipId).setParent(parent).setParentId(parentId).setChild(child).setChildId(childId).setType(relationshipType).setProperties(ProtoStructUtil.fromMap(extras)).build();
 
         return Optional.of(stub(context).addRelationship(addRelationshipReq).getData());
 

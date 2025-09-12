@@ -25,11 +25,9 @@ package com.antinvestor.apis.partition.client;
 import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
-import com.antinvestor.apis.common.context.DefaultContext;
-import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
+import com.antinvestor.apis.common.utilities.ProtoStructUtil;
 import com.antinvestor.apis.partition.v1.*;
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -87,11 +85,11 @@ public class PartitionClient extends GrpcClientBase<PartitionServiceGrpc.Partiti
         };
     }
 
-    public Optional<TenantObject> createTenant(Context context, String name, String description, Map<String, String> properties) {
+    public Optional<TenantObject> createTenant(Context context, String name, String description, Map<String, Object> properties) {
         var request = CreateTenantRequest.newBuilder()
                 .setName(name)
                 .setDescription(description)
-                .putAllProperties(properties)
+                .setProperties(ProtoStructUtil.fromMap(properties))
                 .build();
         return Optional.of(stub(context).createTenant(request).getData());
     }
@@ -117,11 +115,11 @@ public class PartitionClient extends GrpcClientBase<PartitionServiceGrpc.Partiti
         };
     }
 
-    public Optional<PartitionRoleObject> createPartitionRole(Context context, String partitionId, String name, Map<String, String> properties) {
+    public Optional<PartitionRoleObject> createPartitionRole(Context context, String partitionId, String name, Map<String, Object> properties) {
         var request = CreatePartitionRoleRequest.newBuilder()
                 .setPartitionId(partitionId)
                 .setName(name)
-                .putAllProperties(properties)
+                .setProperties(ProtoStructUtil.fromMap(properties))
                 .build();
         return Optional.of(stub(context).createPartitionRole(request).getData());
     }

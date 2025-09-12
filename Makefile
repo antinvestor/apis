@@ -129,8 +129,10 @@ openapi_files_gen_java: ## Generate the java open api spec for the files server
 	$(DOCKER) run --rm \
 		-v "${CUR_DIR}proto/files:/local/proto" \
 		-v "${CUR_DIR}java/files:/local/java" \
+		-v "${CUR_DIR}java/files/.openapi-generator/templates:/local/templates" \
 		openapitools/openapi-generator-cli:latest generate \
 		-g java -o /local/java/ \
+		-t /local/templates \
 		--git-repo-id apis/java/files --git-user-id antinvestor \
         --additional-properties artifactId=files,hideGenerationTimestamp=true,groupId=com.antinvestor.apis,library=native \
         --package-name com.antinvestor.apis.files \

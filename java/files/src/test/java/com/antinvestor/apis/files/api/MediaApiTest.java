@@ -31,8 +31,8 @@ import com.antinvestor.apis.files.invoker.ApiException;
 import com.antinvestor.apis.files.model.CreateContent200Response;
 import com.antinvestor.apis.files.model.Error;
 import com.antinvestor.apis.files.model.Error1;
-import com.antinvestor.apis.files.model.GetConfig200Response;
-import com.antinvestor.apis.files.model.GetUrlPreview200Response;
+import com.antinvestor.apis.files.model.GetConfigAuthed200Response;
+import com.antinvestor.apis.files.model.GetUrlPreviewAuthed200Response;
 import com.antinvestor.apis.files.model.UploadContent200Response;
 import org.junit.Test;
 import org.junit.Ignore;
@@ -79,8 +79,8 @@ public class MediaApiTest {
      */
     @Test
     public void getConfigTest() throws ApiException {
-        GetConfig200Response response = 
-        api.getConfig();
+        GetConfigAuthed200Response response = 
+        api.getConfigAuthed();
         
         // TODO: test validations
     }
@@ -95,11 +95,11 @@ public class MediaApiTest {
      */
     @Test
     public void getContentTest() throws ApiException {
-        Object serverName = null;
-        Object mediaId = null;
-        Object timeoutMs = null;
+        String serverName = null;
+        String mediaId = null;
+        Long timeoutMs = null;
         Object response = 
-        api.getContent(serverName, mediaId, timeoutMs);
+        api.getContentAuthed(serverName, mediaId, timeoutMs);
         
         // TODO: test validations
     }
@@ -114,12 +114,12 @@ public class MediaApiTest {
      */
     @Test
     public void getContentOverrideNameTest() throws ApiException {
-        Object serverName = null;
-        Object mediaId = null;
-        Object fileName = null;
-        Object timeoutMs = null;
+        String serverName = null;
+        String mediaId = null;
+        String fileName = null;
+        Long timeoutMs = null;
         Object response = 
-        api.getContentOverrideName(serverName, mediaId, fileName, timeoutMs);
+        api.getContentOverrideNameAuthed(serverName, mediaId, fileName, timeoutMs);
         
         // TODO: test validations
     }
@@ -134,15 +134,15 @@ public class MediaApiTest {
      */
     @Test
     public void getContentThumbnailTest() throws ApiException {
-        Object serverName = null;
-        Object mediaId = null;
-        Object width = null;
-        Object height = null;
-        Object method = null;
-        Object timeoutMs = null;
-        Object animated = null;
+        String serverName = null;
+        String mediaId = null;
+        Integer width = null;
+        Integer height = null;
+        String method = null;
+        Long timeoutMs = null;
+        Boolean animated = null;
         Object response = 
-        api.getContentThumbnail(serverName, mediaId, width, height, method, timeoutMs, animated);
+        api.getContentThumbnailAuthed(serverName, mediaId, width, height, method, timeoutMs, animated);
         
         // TODO: test validations
     }
@@ -157,10 +157,10 @@ public class MediaApiTest {
      */
     @Test
     public void getUrlPreviewTest() throws ApiException {
-        Object url = null;
-        Object ts = null;
-        GetUrlPreview200Response response = 
-        api.getUrlPreview(url, ts);
+        java.net.URI url = null;
+        Long ts = null;
+        GetUrlPreviewAuthed200Response response = 
+        api.getUrlPreviewAuthed(url, ts);
         
         // TODO: test validations
     }
@@ -194,8 +194,8 @@ public class MediaApiTest {
      */
     @Test
     public void uploadContentToMXCTest() throws ApiException {
-        Object serverName = null;
-        Object mediaId = null;
+        String serverName = null;
+        String mediaId = null;
         Object body = null;
         String contentType = null;
         String filename = null;

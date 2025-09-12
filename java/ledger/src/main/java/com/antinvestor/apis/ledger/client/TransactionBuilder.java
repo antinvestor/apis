@@ -17,14 +17,13 @@ package com.antinvestor.apis.ledger.client;
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.exceptions.STATUSCODES;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
-import com.antinvestor.apis.common.utilities.MoneyUtil;
+import com.antinvestor.apis.common.utilities.ProtoStructUtil;
 import com.antinvestor.apis.common.utilities.TextUtils;
 import com.antinvestor.apis.ledger.v1.TransactionType;
 import com.google.type.Money;
 import com.antinvestor.apis.ledger.v1.Transaction;
 import com.antinvestor.apis.ledger.v1.TransactionEntry;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -32,7 +31,7 @@ import java.util.*;
 
 public class TransactionBuilder {
 
-    private final Map<String, String> data;
+    private final Map<String, Object> data;
     private final List<LocalEntry> creditEntries = new ArrayList<>();
     private final List<LocalEntry> debitEntries = new ArrayList<>();
     private String transactionDate;
@@ -41,17 +40,17 @@ public class TransactionBuilder {
     private TransactionType transactionType = TransactionType.NORMAL;
 
 
-    private TransactionBuilder(Map<String, String> data) {
+    private TransactionBuilder(Map<String, Object> data) {
         this.data = data;
     }
 
-    public static TransactionBuilder newBuilder(Map<String, String> data) {
+    public static TransactionBuilder newBuilder(Map<String, Object> data) {
         return new TransactionBuilder(data);
     }
 
     public static TransactionBuilder newBuilder(String description) {
 
-        Map<String, String> data = new HashMap<>();
+        Map<String, Object> data = new HashMap<>();
         data.put("description", Objects.toString(description, ""));
         return new TransactionBuilder(data);
     }
@@ -85,7 +84,7 @@ public class TransactionBuilder {
         return this;
     }
 
-    public TransactionBuilder putAllData(Map<String, String> data) {
+    public TransactionBuilder putAllData(Map<String, Object> data) {
         this.data.putAll(data);
         return this;
     }
@@ -108,11 +107,7 @@ public class TransactionBuilder {
             transactionDate = LocalDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME);
         }
 
-        Transaction.Builder transactionBuilder = Transaction.newBuilder()
-                .setTransactedAt(transactionDate)
-                .setType(transactionType)
-                .setCleared(cleared)
-                .putAllData(data);
+        Transaction.Builder transactionBuilder = Transaction.newBuilder().setTransactedAt(transactionDate).setType(transactionType).setCleared(cleared).setData(ProtoStructUtil.fromMap(data));
 
         if (!TextUtils.isEmpty(reference)) {
             transactionBuilder.setReference(reference);
@@ -122,11 +117,7 @@ public class TransactionBuilder {
 
             currencyCode = validateCurrency(currencyCode, localEntry);
 
-            TransactionEntry transactionEntry = TransactionEntry.newBuilder()
-                    .setAccount(localEntry.accountReference)
-                    .setAmount(localEntry.amount)
-                    .setCredit(false)
-                    .build();
+            TransactionEntry transactionEntry = TransactionEntry.newBuilder().setAccount(localEntry.accountReference).setAmount(localEntry.amount).setCredit(false).build();
 
             transactionBuilder.addEntries(transactionEntry);
         }
@@ -135,11 +126,7 @@ public class TransactionBuilder {
 
             currencyCode = validateCurrency(currencyCode, localEntry);
 
-            TransactionEntry transactionEntry = TransactionEntry.newBuilder()
-                    .setAccount(localEntry.accountReference)
-                    .setAmount(localEntry.amount)
-                    .setCredit(true)
-                    .build();
+            TransactionEntry transactionEntry = TransactionEntry.newBuilder().setAccount(localEntry.accountReference).setAmount(localEntry.amount).setCredit(true).build();
 
             transactionBuilder.addEntries(transactionEntry);
         }
