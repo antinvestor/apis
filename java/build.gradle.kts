@@ -1,6 +1,5 @@
 plugins {
     kotlin("jvm") version "2.2.10"
-    id("net.nemerosa.versioning") version "3.1.0"
     id("maven-publish")
 }
 
@@ -12,14 +11,9 @@ subprojects {
 
     apply(plugin = "java-library")
     apply(plugin = "maven-publish")
-    apply(plugin = "net.nemerosa.versioning")
-
-    versioning{
-        scm = "git"
-        gitRepoRootDir = "../"
-    }
     group = "com.antinvestor.apis"
-    version = versioning.info.tag
+    // Use the version property passed from command line (e.g., -Pversion=v1.0.0)
+    version = project.findProperty("version")?.toString()?.removePrefix("v") ?: "0.0.0-SNAPSHOT"
 
     repositories {
         mavenCentral() // Add Maven Central Repository
@@ -29,10 +23,10 @@ subprojects {
         manifest {
             attributes(
                 "Specification-Title" to project.name + project.version,
-                "Specification-Version" to versioning.info.full,
+                "Specification-Version" to project.version,
                 "Specification-Vendor" to "Ant Investor Ltd",
                 "Implementation-Title" to project.group.toString() + "." + project.name,
-                "Implementation-Version" to versioning.info.build,
+                "Implementation-Version" to project.version,
                 "Implementation-Vendor" to "Ant Investor Ltd"
             )
         }
