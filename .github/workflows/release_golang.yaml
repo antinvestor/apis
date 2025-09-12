@@ -48,7 +48,7 @@ jobs:
       
 
       - uses: rickstaa/action-create-tag@v1
-        #if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.go_module_changed.outputs.changed == 'true'
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.go_module_changed.outputs.changed == 'true'
         id: "tag_create"
         with:
           tag: go/${{ matrix.api_module }}/${{github.ref_name}}
