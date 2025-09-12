@@ -46,7 +46,7 @@ public class NotificationClient extends GrpcClientBase<NotificationServiceGrpc.N
         return  new ConnectionConfig(cfg.notificationsHostUrl(), cfg.notificationsHostPort(), cfg.authInterceptorEnabled() );
     }
 
-    private NotificationServiceGrpc.NotificationServiceBlockingStub stub(Context context) {
+    public NotificationServiceGrpc.NotificationServiceBlockingStub stub(Context context) {
 
         var stub = NotificationServiceGrpc.newBlockingStub(getChannel());
         return setupStub(context, stub);

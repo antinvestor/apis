@@ -18,15 +18,12 @@ package com.antinvestor.apis.ledger.client;
 import com.antinvestor.apis.common.base.GrpcClientBase;
 import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.Context;
-import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
-import com.antinvestor.apis.common.interceptor.ClientSideGrpcInterceptor;
 import com.antinvestor.apis.common.utilities.ProtoStructUtil;
 import com.antinvestor.apis.common.v1.SearchRequest;
 import com.antinvestor.apis.ledger.v1.*;
 import com.google.type.Money;
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -54,7 +51,7 @@ public class LedgerClient extends GrpcClientBase<LedgerServiceGrpc.LedgerService
         return  new ConnectionConfig(cfg.ledgerHostUrl(), cfg.ledgerHostPort(), cfg.authInterceptorEnabled() );
     }
 
-    private LedgerServiceGrpc.LedgerServiceBlockingStub stub(Context context) {
+    public LedgerServiceGrpc.LedgerServiceBlockingStub stub(Context context) {
 
         var stub = LedgerServiceGrpc.newBlockingStub(getChannel());
         return setupStub(context, stub);

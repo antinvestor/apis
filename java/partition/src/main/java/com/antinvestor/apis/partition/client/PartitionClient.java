@@ -51,7 +51,7 @@ public class PartitionClient extends GrpcClientBase<PartitionServiceGrpc.Partiti
         return  new ConnectionConfig(cfg.partitionsHostUrl(), cfg.partitionsHostPort(), cfg.authInterceptorEnabled() );
     }
 
-    private PartitionServiceGrpc.PartitionServiceBlockingStub stub(Context context) {
+    public PartitionServiceGrpc.PartitionServiceBlockingStub stub(Context context) {
 
         var stub =  PartitionServiceGrpc.newBlockingStub(getChannel());
         return setupStub(context, stub);

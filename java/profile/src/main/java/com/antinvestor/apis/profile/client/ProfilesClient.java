@@ -46,7 +46,7 @@ public class ProfilesClient extends GrpcClientBase<ProfileServiceGrpc.ProfileSer
         return  new ConnectionConfig(cfg.profilesHostUrl(), cfg.profilesHostPort(), cfg.authInterceptorEnabled() );
     }
 
-    private ProfileServiceGrpc.ProfileServiceBlockingStub stub(Context context) {
+    public ProfileServiceGrpc.ProfileServiceBlockingStub stub(Context context) {
         var stub = ProfileServiceGrpc.newBlockingStub(getChannel());
         return setupStub(context, stub);
     }

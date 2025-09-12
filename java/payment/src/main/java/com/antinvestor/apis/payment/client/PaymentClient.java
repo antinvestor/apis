@@ -52,7 +52,7 @@ public class PaymentClient extends GrpcClientBase<PaymentServiceGrpc.PaymentServ
         return  new ConnectionConfig(cfg.paymentsHostUrl(), cfg.paymentsHostPort(), cfg.authInterceptorEnabled() );
     }
 
-    private PaymentServiceGrpc.PaymentServiceBlockingStub stub(Context context) {
+    public PaymentServiceGrpc.PaymentServiceBlockingStub stub(Context context) {
         var stub =  PaymentServiceGrpc.newBlockingStub(getChannel());
         return setupStub(context, stub);
     }

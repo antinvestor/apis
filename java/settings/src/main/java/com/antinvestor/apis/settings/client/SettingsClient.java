@@ -52,7 +52,7 @@ public class SettingsClient extends GrpcClientBase<SettingsServiceGrpc.SettingsS
         return  new ConnectionConfig(cfg.settingsHostUrl(), cfg.settingsHostPort(), cfg.authInterceptorEnabled() );
     }
 
-    private SettingsServiceGrpc.SettingsServiceBlockingStub stub(Context context) {
+    public SettingsServiceGrpc.SettingsServiceBlockingStub stub(Context context) {
 
         var stub = SettingsServiceGrpc.newBlockingStub(getChannel());
         return setupStub(context, stub);

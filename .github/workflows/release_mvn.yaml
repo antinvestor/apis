@@ -79,7 +79,7 @@ jobs:
           fi
 
       - name: Run publish action
-        #if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.java_module_changed.outputs.changed == 'true'
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.java_module_changed.outputs.changed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: java
