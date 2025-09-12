@@ -27,7 +27,7 @@ jobs:
             echo "No tags found for go/${{ matrix.api_module }}."
           else
             LATEST_TAG=$(echo "$TAGS" | head -n 1)
-            SECOND_LATEST_TAG=$(echo "$TAGS" | tail -n 1)
+            SECOND_LATEST_TAG=$(echo "$TAGS" | sed -n '2p')
             echo "latest_tag=$LATEST_TAG" >> $GITHUB_ENV
             echo "second_latest_tag=$SECOND_LATEST_TAG" >> $GITHUB_ENV
             echo "not_enough_tags=false" >> $GITHUB_OUTPUT
