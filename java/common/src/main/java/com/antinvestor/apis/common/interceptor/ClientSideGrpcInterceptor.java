@@ -18,7 +18,7 @@ import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultKeys;
 import com.antinvestor.apis.common.exceptions.RetriableException;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
-import com.antinvestor.apis.common.interceptor.oath2.Oauth2ClientHandler;
+import com.antinvestor.apis.common.interceptor.oauth2.Oauth2ClientHandler;
 import com.antinvestor.apis.common.utilities.AuthenticationUtil;
 import io.grpc.*;
 import org.slf4j.Logger;

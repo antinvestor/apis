@@ -16,7 +16,7 @@ package com.antinvestor.apis.common.utilities;
 
 import com.antinvestor.apis.common.context.Context;
 import com.antinvestor.apis.common.context.DefaultContext;
-import com.antinvestor.apis.common.interceptor.oath2.Oauth2ClientHandler;
+import com.antinvestor.apis.common.interceptor.oauth2.Oauth2ClientHandler;
 import com.moandjiezana.toml.Toml;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,9 @@ public class AuthenticationUtil {
     public static final String TENANT_AUTH_ID = "id";
     public static final String TENANT_AUTH_API_KEY = "api_key";
     public static final String TENANT_AUTH_API_SECRET = "api_secret";
+    public static final String TENANT_AUTH_USER_AGENT = "user_agent";
     public static final String TENANT_AUTH_AUDIENCE = "audience";
+    public static final String TENANT_AUTH_SCOPE = "scope";
     public static final String TENANT_OAUTH2_SERVER = "oauth2_server_uri";
     public static final String TENANT_TABLE_NAME = "tenant";
     private static final Logger log = LoggerFactory.getLogger(AuthenticationUtil.class);
@@ -70,10 +72,12 @@ public class AuthenticationUtil {
             String oauth2ServerUri = tenantConfig.getString(AuthenticationUtil.TENANT_OAUTH2_SERVER);
             String authApiKey = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_API_KEY);
             String authSecret = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_API_SECRET);
+            String userAgent = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_USER_AGENT);
             List<String> authAudience = tenantConfig.getList(AuthenticationUtil.TENANT_AUTH_AUDIENCE, List.of());
+            List<String> authScopes = tenantConfig.getList(AuthenticationUtil.TENANT_AUTH_SCOPE, List.of());
 
             var tenantId = tenantConfig.getString(AuthenticationUtil.TENANT_AUTH_ID);
-            var handler = Oauth2ClientHandler.from(oauth2ServerUri, authApiKey, authSecret, authAudience);
+            var handler = Oauth2ClientHandler.from(oauth2ServerUri, authApiKey, authSecret, authAudience, authScopes, userAgent);
             if (handler.isEmpty()) {
                 log.atWarn().addKeyValue("tenantId", tenantId).addKeyValue("configuration", tenantConfig.toMap()).log("could not create handler from tenant config");
                 throw new RuntimeException("could not instantiate handler from configuration provided ");

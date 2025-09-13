@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.antinvestor.apis.common.interceptor.oath2;
+package com.antinvestor.apis.common.interceptor.oauth2;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -40,7 +40,7 @@ public class Oauth2Client {
     private String callback;
     private String apiKey;
     private String apiSecret;
-    private String scope;
+    private List<String> scopes;
     private List<String> audience;
     private String responseType = "code";
     private String userAgent;
@@ -75,8 +75,8 @@ public class Oauth2Client {
         return this;
     }
 
-    public Oauth2Client scope(String scope) {
-        this.scope = scope;
+    public Oauth2Client scope(List<String> scopes) {
+        this.scopes = scopes;
         return this;
     }
 
@@ -106,13 +106,16 @@ public class Oauth2Client {
             if (!result.isEmpty()) {
                 result.append("&");
             }
-            var encodedName = URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8);
-            var encodedValue = URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8);
-            result.append(encodedName);
-            if (Objects.nonNull(encodedValue)) {
-                result.append("=");
-                result.append(encodedValue);
+            if (Objects.isNull(e.getValue())) {
+                continue;
             }
+
+
+            var encodedName = URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8);
+            result.append(encodedName);
+
+            var encodedValue = URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8);
+            result.append("=").append(encodedValue);
         }
         return HttpRequest.BodyPublishers.ofString(result.toString());
     }
@@ -122,7 +125,9 @@ public class Oauth2Client {
         Map<String, String> parameters = new HashMap<>();
         parameters.put(OAuthConstants.CLIENT_ID, apiKey);
         parameters.put(OAuthConstants.CLIENT_SECRET, apiSecret);
-        parameters.put(OAuthConstants.SCOPE, scope);
+        if (Objects.nonNull(scopes) && !scopes.isEmpty()) {
+            parameters.put(OAuthConstants.SCOPE, String.join(" ", scopes));
+        }
         if (Objects.nonNull(audience) && !audience.isEmpty()) {
             parameters.put(OAuthConstants.AUDIENCE, String.join(" ", audience));
         }
@@ -134,7 +139,7 @@ public class Oauth2Client {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(oauth2ServiceTokenUri)
                 .POST(form)
-                .header(OAuthConstants.USER_AGENT_HEADER_NAME, "Stawi Client")
+                .header(OAuthConstants.USER_AGENT_HEADER_NAME, userAgent)
                 .headers("Content-Type", "application/x-www-form-urlencoded")
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());

@@ -14,12 +14,11 @@
 
 package com.antinvestor.apis.common.interceptor;
 
-import com.antinvestor.apis.common.config.DefaultConfig;
 import com.antinvestor.apis.common.context.DefaultContext;
 import com.antinvestor.apis.common.context.DefaultKeys;
 import com.antinvestor.apis.common.exceptions.RetriableException;
 import com.antinvestor.apis.common.exceptions.UnRetriableException;
-import com.antinvestor.apis.common.interceptor.oath2.JwtKeyResolver;
+import com.antinvestor.apis.common.interceptor.oauth2.JwtKeyResolver;
 import io.grpc.*;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;

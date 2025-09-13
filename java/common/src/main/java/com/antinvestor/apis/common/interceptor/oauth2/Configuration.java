@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.antinvestor.apis.common.interceptor.oath2;
+package com.antinvestor.apis.common.interceptor.oauth2;
 
 import java.util.List;
 
