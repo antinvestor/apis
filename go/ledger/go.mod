@@ -5,7 +5,7 @@ go 1.25
 //replace github.com/antinvestor/apis/go/common => ../common
 
 require (
-	github.com/antinvestor/apis/go/common v1.44.0
+	github.com/antinvestor/apis/go/common v1.44.1
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.2
 	go.uber.org/mock v0.6.0
 	google.golang.org/genproto v0.0.0-20250908214217-97024824d090
