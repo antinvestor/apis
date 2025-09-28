@@ -69,7 +69,7 @@ jobs:
         if: steps.get_tags.outputs.not_enough_tags == 'false'
         id: java_module_changed
         run: |
-          CHANGES=$(git diff --name-only ${{ env.second_latest_tag }} HEAD | grep 'java/${{ matrix.api_module }}' || true)
+          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'java/${{ matrix.api_module }}' || true)
           if [[ -n "$CHANGES" ]]; then
             echo "Changes found in java/${{ matrix.api_module }}"
             echo "changed=true" >> $GITHUB_OUTPUT
