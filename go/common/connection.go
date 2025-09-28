@@ -30,6 +30,7 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
 
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )
@@ -254,7 +255,7 @@ func DialConnection(_ context.Context, opts ...ClientOption) (*grpc.ClientConn, 
 		creds := credentials.NewClientTLSFromCert(pool, "")
 		certDialOption = grpc.WithTransportCredentials(creds)
 	}
-	dialOptions = append(dialOptions, certDialOption)
+	dialOptions = append(dialOptions, certDialOption, grpc.WithStatsHandler(otelgrpc.NewClientHandler()))
 
 	if !ds.NoAuth { // Create a new interceptor
 		jwt := &JWTInterceptor{}
@@ -279,8 +280,8 @@ func DialConnection(_ context.Context, opts ...ClientOption) (*grpc.ClientConn, 
 			}
 		}
 
-		unaryInterceptOption := grpc.WithUnaryInterceptor(jwt.UnaryClientInterceptor)
-		streamInterceptOption := grpc.WithStreamInterceptor(jwt.StreamClientInterceptor)
+		unaryInterceptOption := grpc.WithChainUnaryInterceptor(jwt.UnaryClientInterceptor)
+		streamInterceptOption := grpc.WithChainStreamInterceptor(jwt.StreamClientInterceptor)
 		dialOptions = append(dialOptions, unaryInterceptOption, streamInterceptOption)
 	}
 
