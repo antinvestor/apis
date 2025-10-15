@@ -202,127 +202,126 @@ public final class DeviceProto extends com.google.protobuf.GeneratedFile {
       "z_-]{3,20}R\002id\0228\n\tdevice_id\030\002 \001(\tB\033\272H\030r\026" +
       "\020\003\030(2\020[0-9a-z_-]{3,20}R\010deviceId\022\020\n\003key\030" +
       "\003 \001(\014R\003key\022-\n\005extra\030\004 \001(\0132\027.google.proto" +
-      "buf.StructR\005extra\"\231\003\n\tDeviceLog\022+\n\002id\030\001 " +
+      "buf.StructR\005extra\"\374\002\n\tDeviceLog\022+\n\002id\030\001 " +
       "\001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\0228\n\t" +
       "device_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3" +
-      ",20}R\010deviceId\022:\n\nsession_id\030\003 \001(\tB\033\272H\030r" +
-      "\026\020\003\030(2\020[0-9a-z_-]{3,20}R\tsessionId\022\016\n\002ip" +
-      "\030\004 \001(\tR\002ip\022)\n\006locale\030\005 \001(\0132\021.device.v1.L" +
-      "ocaleR\006locale\022\035\n\nuser_agent\030\006 \001(\tR\tuserA" +
-      "gent\022\016\n\002os\030\007 \001(\tR\002os\022\033\n\tlast_seen\030\010 \001(\tR" +
-      "\010lastSeen\0223\n\010location\030\t \001(\0132\027.google.pro" +
-      "tobuf.StructR\010location\022-\n\005extra\030\n \001(\0132\027." +
-      "google.protobuf.StructR\005extra\"\202\003\n\014Device" +
-      "Object\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-" +
-      "]{3,20}R\002id\022\022\n\004name\030\002 \001(\tR\004name\022\035\n\nsessi" +
-      "on_id\030\003 \001(\tR\tsessionId\022\016\n\002ip\030\004 \001(\tR\002ip\022\035" +
-      "\n\nuser_agent\030\005 \001(\tR\tuserAgent\022\016\n\002os\030\006 \001(" +
-      "\tR\002os\022\033\n\tlast_seen\030\007 \001(\tR\010lastSeen\022\035\n\npr" +
-      "ofile_id\030\010 \001(\tR\tprofileId\022)\n\006locale\030\t \001(" +
-      "\0132\021.device.v1.LocaleR\006locale\0223\n\010location" +
-      "\030\013 \001(\0132\027.google.protobuf.StructR\010locatio" +
-      "n\0227\n\nproperties\030\017 \001(\0132\027.google.protobuf." +
-      "StructR\nproperties\"`\n\016GetByIdRequest\0220\n\002" +
-      "id\030\001 \003(\tB \272H\035\222\001\032\"\030r\026\020\003\030(2\020[0-9a-z_-]{3,2" +
-      "0}R\002id\022\034\n\textensive\030\002 \001(\010R\textensive\">\n\017" +
-      "GetByIdResponse\022+\n\004data\030\001 \003(\0132\027.device.v" +
-      "1.DeviceObjectR\004data\"D\n\025GetBySessionIdRe" +
-      "quest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]" +
-      "{3,20}R\002id\"E\n\026GetBySessionIdResponse\022+\n\004" +
-      "data\030\001 \001(\0132\027.device.v1.DeviceObjectR\004dat" +
-      "a\"\332\001\n\rSearchRequest\022\024\n\005query\030\001 \001(\tR\005quer" +
-      "y\022\022\n\004page\030\002 \001(\005R\004page\022\024\n\005count\030\003 \001(\005R\005co" +
-      "unt\022\035\n\nstart_date\030\004 \001(\tR\tstartDate\022\031\n\010en" +
-      "d_date\030\005 \001(\tR\007endDate\022\036\n\nproperties\030\006 \003(" +
-      "\tR\nproperties\022/\n\006extras\030\007 \001(\0132\027.google.p" +
-      "rotobuf.StructR\006extras\"=\n\016SearchResponse" +
-      "\022+\n\004data\030\001 \003(\0132\027.device.v1.DeviceObjectR" +
-      "\004data\"\\\n\rCreateRequest\022\022\n\004name\030\002 \001(\tR\004na" +
-      "me\0227\n\nproperties\030\003 \001(\0132\027.google.protobuf" +
-      ".StructR\nproperties\"=\n\016CreateResponse\022+\n" +
-      "\004data\030\001 \001(\0132\027.device.v1.DeviceObjectR\004da" +
-      "ta\"\211\001\n\rUpdateRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020" +
-      "\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\022\n\004name\030\002 \001(\tR" +
-      "\004name\0227\n\nproperties\030\003 \001(\0132\027.google.proto" +
-      "buf.StructR\nproperties\"=\n\016UpdateResponse" +
-      "\022+\n\004data\030\001 \001(\0132\027.device.v1.DeviceObjectR" +
-      "\004data\"\257\001\n\013LinkRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026" +
-      "\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022:\n\nprofile_id" +
-      "\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\tpro" +
-      "fileId\0227\n\nproperties\030\003 \001(\0132\027.google.prot" +
-      "obuf.StructR\nproperties\";\n\014LinkResponse\022" +
-      "+\n\004data\030\001 \001(\0132\027.device.v1.DeviceObjectR\004" +
-      "data\"<\n\rRemoveRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026" +
-      "\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"=\n\016RemoveResp" +
-      "onse\022+\n\004data\030\001 \001(\0132\027.device.v1.DeviceObj" +
-      "ectR\004data\"\252\002\n\nLogRequest\022;\n\tdevice_id\030\001 " +
-      "\001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\010dev" +
-      "iceId\022:\n\nsession_id\030\003 \001(\tB\033\272H\030r\026\020\003\030(2\020[0" +
-      "-9a-z_-]{3,20}R\tsessionId\022\016\n\002ip\030\004 \001(\tR\002i" +
-      "p\022\026\n\006locale\030\005 \001(\tR\006locale\022\035\n\nuser_agent\030" +
-      "\006 \001(\tR\tuserAgent\022\016\n\002os\030\007 \001(\tR\002os\022\033\n\tlast" +
-      "_seen\030\010 \001(\tR\010lastSeen\022/\n\006extras\030\t \001(\0132\027." +
-      "google.protobuf.StructR\006extras\"7\n\013LogRes" +
-      "ponse\022(\n\004data\030\001 \001(\0132\024.device.v1.DeviceLo" +
-      "gR\004data\"a\n\017ListLogsRequest\0228\n\tdevice_id\030" +
-      "\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010devi" +
-      "ceId\022\024\n\005count\030\002 \001(\005R\005count\"<\n\020ListLogsRe" +
-      "sponse\022(\n\004data\030\001 \003(\0132\024.device.v1.DeviceL" +
-      "ogR\004data\"\352\001\n\rAddKeyRequest\022+\n\002id\030\001 \001(\tB\033" +
-      "\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\0228\n\tdevic" +
-      "e_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R" +
-      "\010deviceId\022-\n\010key_type\030\003 \001(\0162\022.device.v1." +
-      "KeyTypeR\007keyType\022\022\n\004data\030\004 \001(\014R\004data\022/\n\006" +
-      "extras\030\005 \001(\0132\027.google.protobuf.StructR\006e" +
-      "xtras\":\n\016AddKeyResponse\022(\n\004data\030\001 \001(\0132\024." +
-      "device.v1.KeyObjectR\004data\"D\n\020RemoveKeyRe" +
-      "quest\0220\n\002id\030\001 \003(\tB \272H\035\222\001\032\"\030r\026\020\003\030(2\020[0-9a" +
-      "-z_-]{3,20}R\002id\"#\n\021RemoveKeyResponse\022\016\n\002" +
-      "id\030\001 \003(\tR\002id\"\273\001\n\020SearchKeyRequest\022\024\n\005que" +
-      "ry\030\001 \001(\tR\005query\0228\n\tdevice_id\030\002 \001(\tB\033\272H\030r" +
-      "\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010deviceId\022-\n\010key" +
-      "_type\030\003 \001(\0162\022.device.v1.KeyTypeR\007keyType" +
-      "\022\022\n\004page\030\004 \001(\005R\004page\022\024\n\005count\030\005 \001(\005R\005cou" +
-      "nt\"=\n\021SearchKeyResponse\022(\n\004data\030\001 \003(\0132\024." +
-      "device.v1.KeyObjectR\004data*/\n\007KeyType\022\016\n\n" +
-      "MATRIX_KEY\020\000\022\024\n\020NOTIFICATION_KEY\020\0012\200\010\n\rD" +
-      "eviceService\022O\n\007GetById\022\031.device.v1.GetB" +
-      "yIdRequest\032\032.device.v1.GetByIdResponse\"\r" +
-      "\202\323\344\223\002\007\022\005/{id}\022l\n\016GetBySessionId\022 .device" +
-      ".v1.GetBySessionIdRequest\032!.device.v1.Ge" +
-      "tBySessionIdResponse\"\025\202\323\344\223\002\017\022\r/session/{" +
-      "id}\022P\n\006Search\022\030.device.v1.SearchRequest\032" +
-      "\031.device.v1.SearchResponse\"\017\202\323\344\223\002\t\022\007/sea" +
-      "rch0\001\022K\n\006Create\022\030.device.v1.CreateReques" +
-      "t\032\031.device.v1.CreateResponse\"\014\202\323\344\223\002\006\"\001/:" +
-      "\001*\022O\n\006Update\022\030.device.v1.UpdateRequest\032\031" +
-      ".device.v1.UpdateResponse\"\020\202\323\344\223\002\n2\005/{id}" +
-      ":\001*\022N\n\004Link\022\026.device.v1.LinkRequest\032\027.de" +
-      "vice.v1.LinkResponse\"\025\202\323\344\223\002\0172\n/link/{id}" +
-      ":\001*\022L\n\006Remove\022\030.device.v1.RemoveRequest\032" +
-      "\031.device.v1.RemoveResponse\"\r\202\323\344\223\002\007*\005/{id" +
-      "}\022F\n\003Log\022\025.device.v1.LogRequest\032\026.device" +
-      ".v1.LogResponse\"\020\202\323\344\223\002\n\"\005/logs:\001*\022T\n\010Lis" +
-      "tLogs\022\032.device.v1.ListLogsRequest\032\033.devi" +
-      "ce.v1.ListLogsResponse\"\r\202\323\344\223\002\007\022\005/logs0\001\022" +
-      "O\n\006AddKey\022\030.device.v1.AddKeyRequest\032\031.de" +
-      "vice.v1.AddKeyResponse\"\020\202\323\344\223\002\n\"\005/keys:\001*" +
-      "\022Z\n\tRemoveKey\022\033.device.v1.RemoveKeyReque" +
-      "st\032\034.device.v1.RemoveKeyResponse\"\022\202\323\344\223\002\014" +
-      "*\n/keys/{id}\022W\n\tSearchKey\022\033.device.v1.Se" +
-      "archKeyRequest\032\034.device.v1.SearchKeyResp" +
-      "onse\"\r\202\323\344\223\002\007\022\005/keys0\001B\261\003\n\036com.antinvesto" +
-      "r.apis.device.v1B\013DeviceProtoP\001Z8github." +
-      "com/antinvestor/apis/go/device/device/v1" +
-      ";devicev1\242\002\003DXX\252\002\tDevice.V1\312\002\tDevice\\V1\342" +
-      "\002\025Device\\V1\\GPBMetadata\352\002\nDevice::V1\222A\201\002" +
-      "\022n\n\016Device Service\"W\n\020Ant Investor Ltd\022-" +
-      "https://github.com/antinvestor/service-d" +
-      "evice\032\024info@antinvestor.com2\0031.0*\002\001\0022\020ap" +
-      "plication/json:\020application/jsonZY\nW\n\006be" +
-      "arer\022M\010\002\0228Authentication token, prefixed" +
-      " by Bearer: Bearer <token>\032\rAuthorizatio" +
-      "n \002b\014\n\n\n\006bearer\022\000b\006proto3"
+      ",20}R\010deviceId\022\035\n\nsession_id\030\003 \001(\tR\tsess" +
+      "ionId\022\016\n\002ip\030\004 \001(\tR\002ip\022)\n\006locale\030\005 \001(\0132\021." +
+      "device.v1.LocaleR\006locale\022\035\n\nuser_agent\030\006" +
+      " \001(\tR\tuserAgent\022\016\n\002os\030\007 \001(\tR\002os\022\033\n\tlast_" +
+      "seen\030\010 \001(\tR\010lastSeen\0223\n\010location\030\t \001(\0132\027" +
+      ".google.protobuf.StructR\010location\022-\n\005ext" +
+      "ra\030\n \001(\0132\027.google.protobuf.StructR\005extra" +
+      "\"\202\003\n\014DeviceObject\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(" +
+      "2\020[0-9a-z_-]{3,20}R\002id\022\022\n\004name\030\002 \001(\tR\004na" +
+      "me\022\035\n\nsession_id\030\003 \001(\tR\tsessionId\022\016\n\002ip\030" +
+      "\004 \001(\tR\002ip\022\035\n\nuser_agent\030\005 \001(\tR\tuserAgent" +
+      "\022\016\n\002os\030\006 \001(\tR\002os\022\033\n\tlast_seen\030\007 \001(\tR\010las" +
+      "tSeen\022\035\n\nprofile_id\030\010 \001(\tR\tprofileId\022)\n\006" +
+      "locale\030\t \001(\0132\021.device.v1.LocaleR\006locale\022" +
+      "3\n\010location\030\013 \001(\0132\027.google.protobuf.Stru" +
+      "ctR\010location\0227\n\nproperties\030\017 \001(\0132\027.googl" +
+      "e.protobuf.StructR\nproperties\"`\n\016GetById" +
+      "Request\0220\n\002id\030\001 \003(\tB \272H\035\222\001\032\"\030r\026\020\003\030(2\020[0-" +
+      "9a-z_-]{3,20}R\002id\022\034\n\textensive\030\002 \001(\010R\tex" +
+      "tensive\">\n\017GetByIdResponse\022+\n\004data\030\001 \003(\013" +
+      "2\027.device.v1.DeviceObjectR\004data\"D\n\025GetBy" +
+      "SessionIdRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2" +
+      "\020[0-9a-z_-]{3,20}R\002id\"E\n\026GetBySessionIdR" +
+      "esponse\022+\n\004data\030\001 \001(\0132\027.device.v1.Device" +
+      "ObjectR\004data\"\332\001\n\rSearchRequest\022\024\n\005query\030" +
+      "\001 \001(\tR\005query\022\022\n\004page\030\002 \001(\005R\004page\022\024\n\005coun" +
+      "t\030\003 \001(\005R\005count\022\035\n\nstart_date\030\004 \001(\tR\tstar" +
+      "tDate\022\031\n\010end_date\030\005 \001(\tR\007endDate\022\036\n\nprop" +
+      "erties\030\006 \003(\tR\nproperties\022/\n\006extras\030\007 \001(\013" +
+      "2\027.google.protobuf.StructR\006extras\"=\n\016Sea" +
+      "rchResponse\022+\n\004data\030\001 \003(\0132\027.device.v1.De" +
+      "viceObjectR\004data\"\\\n\rCreateRequest\022\022\n\004nam" +
+      "e\030\002 \001(\tR\004name\0227\n\nproperties\030\003 \001(\0132\027.goog" +
+      "le.protobuf.StructR\nproperties\"=\n\016Create" +
+      "Response\022+\n\004data\030\001 \001(\0132\027.device.v1.Devic" +
+      "eObjectR\004data\"\211\001\n\rUpdateRequest\022+\n\002id\030\001 " +
+      "\001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\022\n\004" +
+      "name\030\002 \001(\tR\004name\0227\n\nproperties\030\003 \001(\0132\027.g" +
+      "oogle.protobuf.StructR\nproperties\"=\n\016Upd" +
+      "ateResponse\022+\n\004data\030\001 \001(\0132\027.device.v1.De" +
+      "viceObjectR\004data\"\257\001\n\013LinkRequest\022+\n\002id\030\001" +
+      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022:\n" +
+      "\nprofile_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]" +
+      "{3,20}R\tprofileId\0227\n\nproperties\030\003 \001(\0132\027." +
+      "google.protobuf.StructR\nproperties\";\n\014Li" +
+      "nkResponse\022+\n\004data\030\001 \001(\0132\027.device.v1.Dev" +
+      "iceObjectR\004data\"<\n\rRemoveRequest\022+\n\002id\030\001" +
+      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"=\n" +
+      "\016RemoveResponse\022+\n\004data\030\001 \001(\0132\027.device.v" +
+      "1.DeviceObjectR\004data\"\252\002\n\nLogRequest\022;\n\td" +
+      "evice_id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-]{3," +
+      "20}\330\001\001R\010deviceId\022:\n\nsession_id\030\003 \001(\tB\033\272H" +
+      "\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\tsessionId\022\016\n\002" +
+      "ip\030\004 \001(\tR\002ip\022\026\n\006locale\030\005 \001(\tR\006locale\022\035\n\n" +
+      "user_agent\030\006 \001(\tR\tuserAgent\022\016\n\002os\030\007 \001(\tR" +
+      "\002os\022\033\n\tlast_seen\030\010 \001(\tR\010lastSeen\022/\n\006extr" +
+      "as\030\t \001(\0132\027.google.protobuf.StructR\006extra" +
+      "s\"7\n\013LogResponse\022(\n\004data\030\001 \001(\0132\024.device." +
+      "v1.DeviceLogR\004data\"a\n\017ListLogsRequest\0228\n" +
+      "\tdevice_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{" +
+      "3,20}R\010deviceId\022\024\n\005count\030\002 \001(\005R\005count\"<\n" +
+      "\020ListLogsResponse\022(\n\004data\030\001 \003(\0132\024.device" +
+      ".v1.DeviceLogR\004data\"\352\001\n\rAddKeyRequest\022+\n" +
+      "\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002" +
+      "id\0228\n\tdevice_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-" +
+      "z_-]{3,20}R\010deviceId\022-\n\010key_type\030\003 \001(\0162\022" +
+      ".device.v1.KeyTypeR\007keyType\022\022\n\004data\030\004 \001(" +
+      "\014R\004data\022/\n\006extras\030\005 \001(\0132\027.google.protobu" +
+      "f.StructR\006extras\":\n\016AddKeyResponse\022(\n\004da" +
+      "ta\030\001 \001(\0132\024.device.v1.KeyObjectR\004data\"D\n\020" +
+      "RemoveKeyRequest\0220\n\002id\030\001 \003(\tB \272H\035\222\001\032\"\030r\026" +
+      "\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"#\n\021RemoveKeyR" +
+      "esponse\022\016\n\002id\030\001 \003(\tR\002id\"\273\001\n\020SearchKeyReq" +
+      "uest\022\024\n\005query\030\001 \001(\tR\005query\0228\n\tdevice_id\030" +
+      "\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010devi" +
+      "ceId\022-\n\010key_type\030\003 \001(\0162\022.device.v1.KeyTy" +
+      "peR\007keyType\022\022\n\004page\030\004 \001(\005R\004page\022\024\n\005count" +
+      "\030\005 \001(\005R\005count\"=\n\021SearchKeyResponse\022(\n\004da" +
+      "ta\030\001 \003(\0132\024.device.v1.KeyObjectR\004data*/\n\007" +
+      "KeyType\022\016\n\nMATRIX_KEY\020\000\022\024\n\020NOTIFICATION_" +
+      "KEY\020\0012\200\010\n\rDeviceService\022O\n\007GetById\022\031.dev" +
+      "ice.v1.GetByIdRequest\032\032.device.v1.GetByI" +
+      "dResponse\"\r\202\323\344\223\002\007\022\005/{id}\022l\n\016GetBySession" +
+      "Id\022 .device.v1.GetBySessionIdRequest\032!.d" +
+      "evice.v1.GetBySessionIdResponse\"\025\202\323\344\223\002\017\022" +
+      "\r/session/{id}\022P\n\006Search\022\030.device.v1.Sea" +
+      "rchRequest\032\031.device.v1.SearchResponse\"\017\202" +
+      "\323\344\223\002\t\022\007/search0\001\022K\n\006Create\022\030.device.v1.C" +
+      "reateRequest\032\031.device.v1.CreateResponse\"" +
+      "\014\202\323\344\223\002\006\"\001/:\001*\022O\n\006Update\022\030.device.v1.Upda" +
+      "teRequest\032\031.device.v1.UpdateResponse\"\020\202\323" +
+      "\344\223\002\n2\005/{id}:\001*\022N\n\004Link\022\026.device.v1.LinkR" +
+      "equest\032\027.device.v1.LinkResponse\"\025\202\323\344\223\002\0172" +
+      "\n/link/{id}:\001*\022L\n\006Remove\022\030.device.v1.Rem" +
+      "oveRequest\032\031.device.v1.RemoveResponse\"\r\202" +
+      "\323\344\223\002\007*\005/{id}\022F\n\003Log\022\025.device.v1.LogReque" +
+      "st\032\026.device.v1.LogResponse\"\020\202\323\344\223\002\n\"\005/log" +
+      "s:\001*\022T\n\010ListLogs\022\032.device.v1.ListLogsReq" +
+      "uest\032\033.device.v1.ListLogsResponse\"\r\202\323\344\223\002" +
+      "\007\022\005/logs0\001\022O\n\006AddKey\022\030.device.v1.AddKeyR" +
+      "equest\032\031.device.v1.AddKeyResponse\"\020\202\323\344\223\002" +
+      "\n\"\005/keys:\001*\022Z\n\tRemoveKey\022\033.device.v1.Rem" +
+      "oveKeyRequest\032\034.device.v1.RemoveKeyRespo" +
+      "nse\"\022\202\323\344\223\002\014*\n/keys/{id}\022W\n\tSearchKey\022\033.d" +
+      "evice.v1.SearchKeyRequest\032\034.device.v1.Se" +
+      "archKeyResponse\"\r\202\323\344\223\002\007\022\005/keys0\001B\261\003\n\036com" +
+      ".antinvestor.apis.device.v1B\013DeviceProto" +
+      "P\001Z8github.com/antinvestor/apis/go/devic" +
+      "e/device/v1;devicev1\242\002\003DXX\252\002\tDevice.V1\312\002" +
+      "\tDevice\\V1\342\002\025Device\\V1\\GPBMetadata\352\002\nDev" +
+      "ice::V1\222A\201\002\022n\n\016Device Service\"W\n\020Ant Inv" +
+      "estor Ltd\022-https://github.com/antinvesto" +
+      "r/service-device\032\024info@antinvestor.com2\003" +
+      "1.0*\002\001\0022\020application/json:\020application/j" +
+      "sonZY\nW\n\006bearer\022M\010\002\0228Authentication toke" +
+      "n, prefixed by Bearer: Bearer <token>\032\rA" +
+      "uthorization \002b\014\n\n\n\006bearer\022\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
