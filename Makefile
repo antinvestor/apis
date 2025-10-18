@@ -72,6 +72,7 @@ clean: ## Delete intermediate build artifacts
 .PHONY: golang_build_all
 golang_build_all: generate ## Build all packages
 	$(call golang_build,common)
+	$(call golang_build,chat)
 	$(call golang_build,device)
 	$(call golang_build,notification)
 	$(call golang_build,ocr)
@@ -88,6 +89,7 @@ golang_build_all: generate ## Build all packages
 .PHONY: lintfix
 lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some lint errors
 	$(call lint_fix_module,common)
+	$(call lint_fix_module,chat)
 	$(call lint_fix_module,device)
 	$(call lint_fix_module,notification)
 	$(call lint_fix_module,ocr)
@@ -103,6 +105,7 @@ lintfix: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Automatically fix some
 golang_lint_all: $(BIN)/golangci-lint $(BIN)/buf $(BIN)/gomock ## Lint Go and protobuf
 	test -z "$$($(BIN)/buf format -d . | tee /dev/stderr)"
 	$(call golang_lint,common)
+	$(call golang_lint,chat)
 	$(call golang_lint,device)
 	$(call golang_lint,notification)
 	$(call golang_lint,ocr)
@@ -146,6 +149,7 @@ openapi_files_gen_java: ## Generate the java open api spec for the files server
 
 .PHONY: generate_grpc_mocks
 generate_grpc_mocks:
+	$(call mock_package,chat,v1)
 	$(call mock_package,device,v1)
 	$(call mock_package,notification,v1)
 	$(call mock_package,ocr,v1)
@@ -160,6 +164,7 @@ generate_grpc_mocks:
 .PHONY: generate_buf_gen
 generate_buf_gen:
 	$(call buf_generate,common)
+	$(call buf_generate,chat)
 	$(call buf_generate,device)
 	$(call buf_generate,notification)
 	$(call buf_generate,ledger)

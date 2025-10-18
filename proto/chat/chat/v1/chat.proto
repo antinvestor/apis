@@ -1,0 +1,454 @@
+// Copyright 2023-2024 Ant Investor Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package chat.v1;
+
+// -----------------------------------------------------
+// Core notes (normative):
+// - All timestamps are RFC3339 / google.protobuf.Timestamp.
+// - All flows should be idempotent / accept idempotency keys where relevant.
+// - Servers must enforce permission checks for each RPC (see AuthClaims below).
+// -----------------------------------------------------
+
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/antinvestor/apis/go/chat/v1;chatv1";
+option java_multiple_files = true;
+option java_package = "chatv1";
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "chat Service"
+    version: "1.0"
+    contact: {
+      name: "Ant Investor Ltd"
+      url: "https://github.com/antinvestor/service-chat"
+      email: "info@antinvestor.com"
+    }
+  }
+
+  schemes: HTTP
+  schemes: HTTPS
+  consumes: "application/json"
+  produces: "application/json"
+
+  security_definitions: {
+    security: {
+      key: "bearer"
+      value: {
+        type: TYPE_API_KEY
+        in: IN_HEADER
+        name: "Authorization"
+        description: "Authentication token, prefixed by Bearer: Bearer <token>"
+      }
+    }
+  }
+  security: {
+    security_requirement: {key: "bearer"}
+  }
+};
+
+// Standard error codes used by API responses.
+// Use gRPC status codes; the application-level ErrorDetail below may carry more.
+message ErrorDetail {
+  int32 code = 1;         // application code (see doc)
+  string message = 2;     // human readable
+  map<string,string> meta = 3; // additional machine-readable data
+}
+
+// -----------------------------------------------------
+// Authentication & Authorization (claims):
+// - Clients authenticate using JWT from OIDC provider (short TTL).
+// - Server-side/machine clients use mTLS + service account token or OAuth2 client creds.
+// - Required claims in JWT: tenant_id, sub (profile_id), scope (space-separated or array).
+// - Role-based scopes: "room.send", "room.manage", "room.read", "presence.write", "device.manage", "bot.*"
+// - Servers MUST reject tokens missing tenant_id or sub.
+// -----------------------------------------------------
+
+// -----------------------------------------------------
+// MAIN SERVICE: ChatService
+// - Connect: BiDi streaming for a unified event timeline.
+// - Message ops: SendMessage (unified), GetHistory (cursor-based).
+// - Room ops: create/update/manage members/roles.
+// - Device & presence: register device, presence updates.
+// - BotService included below for integration (service accounts).
+// -----------------------------------------------------
+
+service ChatService {
+  // Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
+  // Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
+  // Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
+  rpc Connect(stream ConnectRequest) returns (stream ServerEvent){
+    option (google.api.http) = {
+      post: "/connect"
+      body: "*"
+    };
+  }
+
+  // Send a message (unified message model). Idempotent if idempotency_key is provided.
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse){
+    option (google.api.http) = {
+      post: "/"
+      body: "*"
+    };
+  }
+
+  // Fetch history for a room. Cursor-based paging (cursor = opaque server token).
+  rpc GetHistory(GetHistoryRequest) returns (GetHistoryResponse){
+    option (google.api.http) = {get: "/"};
+  }
+
+  // Room lifecycle & management
+  rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse){
+    option (google.api.http) = {
+      post: "/room"
+      body: "*"
+    };
+  }
+  rpc SearchRooms(SearchRoomsRequest) returns (stream SearchRoomsResponse){
+    option (google.api.http) = {get: "/room"};
+  }
+  rpc UpdateRoom(UpdateRoomRequest) returns (UpdateRoomResponse){
+    option (google.api.http) = {
+      patch: "/room/{room_id}"
+      body: "*"
+    };
+  }
+  rpc DeleteRoom(DeleteRoomRequest) returns (DeleteRoomResponse){
+    option (google.api.http) = {
+      delete: "/room/{room_id}"
+    };
+  }
+
+  // Subscriptionship & roles
+  rpc AddRoomSubscriptions(AddRoomSubscriptionsRequest) returns (AddRoomSubscriptionsResponse){
+    option (google.api.http) = {
+      post: "/room/{room_id}/subscription"
+      body: "*"
+    };
+  }
+  rpc RemoveRoomSubscriptions(RemoveRoomSubscriptionsRequest) returns (RemoveRoomSubscriptionsResponse){
+    option (google.api.http) = {
+      delete: "/room/{room_id}/subscription"
+    };
+  }
+  rpc UpdateSubscriptionRole(UpdateSubscriptionRoleRequest) returns (UpdateSubscriptionRoleResponse){
+    option (google.api.http) = {
+      patch: "/room/{room_id}/subscription/{profile_id}/role"
+      body: "*"
+    };
+  }
+  rpc SearchRoomSubscriptions(SearchRoomSubscriptionsRequest) returns (SearchRoomSubscriptionsResponse){
+    option (google.api.http) = {get: "/room/{room_id}/subscription"};
+  }
+}
+
+// -----------------------------------------------------
+// Events & Payloads
+// -----------------------------------------------------
+
+// Server -> Client event payload. All events in a room are delivered over Connect stream.
+// event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
+// sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
+message ServerEvent {
+  string id = 3 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  google.protobuf.Timestamp timestamp = 5;
+  oneof payload {
+    RoomEvent message = 10;
+    PresenceEvent presence_event = 12; // user presence change affecting the room
+    ReceiptEvent receipt_event = 13;
+    TypingEvent typing_event = 14;
+  }
+}
+// Unified message (user / bot / system / signalling)
+message RoomEvent {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];                           // client-supplied or server-generated UUID
+  string room_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];         // room_id
+  string sender_id = 3;         // profile_id or service/bot id
+  RoomEventType type = 4;         // text, attachment, call_offer, etc.
+  google.protobuf.Struct payload = 6; // e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
+  google.protobuf.Timestamp sent_at = 7;
+  bool edited = 8;
+  bool redacted = 9;
+  string replaces_event_id = 10; // if this message replaces another (edit)
+  string relates_to_event_id = 11; // for reactions / replies
+}
+
+// Allowed message types. Extendable via new enum values; clients must ignore unknown values.
+enum RoomEventType {
+  MESSAGE_TYPE_UNSPECIFIED = 0;
+  MESSAGE_TYPE_EVENT = 1;
+  MESSAGE_TYPE_TEXT = 2;
+  MESSAGE_TYPE_ATTACHMENT = 3;
+  MESSAGE_TYPE_REACTION = 7;
+  MESSAGE_TYPE_ENCRYPTED = 6; // opaque ciphertext
+  MESSAGE_TYPE_SYSTEM = 10;
+  MESSAGE_TYPE_CALL_OFFER = 21;
+  MESSAGE_TYPE_CALL_ANSWER = 22;
+  MESSAGE_TYPE_CALL_ICE = 23;
+  MESSAGE_TYPE_CALL_END = 24;
+
+  MESSAGE_TYPE_CUSTOM = 100;  // vendor/app specific; metadata must indicate schema
+}
+
+// Presence event affecting a user (and visible to rooms the user is a member of)
+message PresenceEvent {
+  string profile_id = 1;
+  PresenceStatus status = 2;
+  string status_msg = 3;
+  google.protobuf.Timestamp last_active = 4;
+}
+
+enum PresenceStatus {
+  PRESENCE_UNKNOWN = 0;
+  PRESENCE_OFFLINE = 1;
+  PRESENCE_ONLINE = 2;
+  PRESENCE_AWAY = 3;
+  PRESENCE_BUSY = 4;
+}
+
+// Read receipts
+message ReceiptEvent {
+  string profile_id = 1;
+  string room_id = 2;
+  string message_id = 3;
+  google.protobuf.Timestamp read_at = 5;
+}
+
+// Typing indicator
+message TypingEvent {
+  string profile_id = 1;
+  string room_id = 2;
+  bool typing = 3;
+  google.protobuf.Timestamp since = 5;
+}
+
+// -----------------------------------------------------
+// Connect stream: client -> server low-level requests inside stream
+// -----------------------------------------------------
+
+// Client message over Connect stream. After initial connect frame, client sends acks/commands.
+message ConnectRequest {
+  // Servers should validate auth token before accepting further payload.
+  string session_id = 2;
+  string device_id = 3;
+  string auth_token = 4; // JWT or short-lived token; also accepted via metadata at the transport layer
+
+  // Optional resume token: server-supplied resume_token from previous session.
+  // Server will validate and accept resume only if resume window allows it.
+  string resume_token = 5;
+
+  // The client can send various payloads inside the stream after initial auth:
+  oneof payload {
+    StreamAck ack = 10;
+    ClientCommand command = 12;
+  }
+}
+
+// Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
+// ack_event_id: last event_id client processed (inclusive).
+message StreamAck {
+  string event_id = 1;
+  google.protobuf.Timestamp ack_at = 3;
+  google.protobuf.Struct metadata = 6;
+}
+
+// Generic client commands (typing, read markers that aren't receipts)
+message ClientCommand {
+  oneof cmd {
+    TypingUpdate typing = 1;
+    ReadMarker read_marker = 2; // marker for "read up to X"
+  }
+}
+message TypingUpdate {
+  string room_id = 1;
+  bool typing = 2;
+}
+message ReadMarker {
+  string room_id = 1;
+  string up_to_event_id = 2;
+}
+
+// -----------------------------------------------------
+// Message RPCs (unified send + get history)
+// -----------------------------------------------------
+
+message SendMessageRequest {
+  repeated RoomEvent message = 4;          // message payload (server will assign final message_id if empty)
+}
+
+message SendMessageResponse {
+  repeated StreamAck ack = 1;
+}
+
+// History request: paging via opaque cursor. 'limit' is capped by server (e.g. 100).
+message GetHistoryRequest {
+  string room_id = 2;
+  string cursor = 3; // opaque token from prior GetHistoryResponse
+  int32 limit = 4;
+  // direction: FORWARD means older -> newer; BACKWARD newer -> older (default BACKWARD).
+  bool forward = 5;
+}
+
+message GetHistoryResponse {
+  repeated ServerEvent events = 1;
+  string next_cursor = 2; // opaque; empty when no more pages
+  string prev_cursor = 3;
+}
+
+// -----------------------------------------------------
+// Room APIs
+// -----------------------------------------------------
+
+message Room {
+  string id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string name = 3;
+  string description = 4;
+  bool is_private = 5;
+  google.protobuf.Struct metadata = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+  string creator_id = 9;
+}
+
+message CreateRoomRequest {
+  string id = 3 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ]; // optional client-provided idempotency key
+  string name = 4;
+  string description = 5;
+  bool is_private = 6;
+  repeated string members = 7; // optional
+  google.protobuf.Struct metadata = 8;
+}
+
+message CreateRoomResponse {
+  Room room = 1;
+  ErrorDetail error = 2;
+}
+
+message SearchRoomsRequest {
+  string query = 1;
+  int32 page = 2;
+  int32 count = 3;
+  string start_date = 4;
+  string end_date = 5;
+  repeated string properties = 6;
+  google.protobuf.Struct extras = 7;
+}
+
+message SearchRoomsResponse {
+  repeated Room data = 1;
+}
+
+
+message UpdateRoomRequest {
+  string room_id = 2;
+  string name = 3;
+  string topic = 4;
+  google.protobuf.Struct metadata = 5;
+}
+
+message UpdateRoomResponse {
+  Room room = 1;
+  ErrorDetail error = 2;
+}
+
+message DeleteRoomRequest {
+  string room_id = 2;
+}
+
+message DeleteRoomResponse {
+  string room_id = 1;
+  ErrorDetail error = 2;
+}
+
+// -----------------------------------------------------
+// Subscriptionship & roles
+// -----------------------------------------------------
+
+message RoomSubscription {
+  string room_id = 2;
+  string profile_id = 3;
+  repeated string roles = 4; // e.g. ["owner","moderator","member","guest"]
+  google.protobuf.Timestamp joined_at = 5;
+  google.protobuf.Timestamp last_active = 6;
+}
+
+message AddRoomSubscriptionsRequest {
+  string room_id = 2;
+  repeated RoomSubscription members = 3; // include roles if desired
+}
+
+message AddRoomSubscriptionsResponse {
+  string room_id = 1;
+  ErrorDetail error = 3;
+}
+
+message RemoveRoomSubscriptionsRequest {
+  string room_id = 2;
+  repeated string profile_ids = 3;
+}
+
+message RemoveRoomSubscriptionsResponse {
+  string room_id = 1;
+  ErrorDetail error = 3;
+}
+
+message UpdateSubscriptionRoleRequest {
+  string room_id = 2;
+  string profile_id = 3;
+  repeated string roles = 4;
+}
+
+message UpdateSubscriptionRoleResponse {
+  string room_id = 1;
+  ErrorDetail error = 3;
+}
+
+message SearchRoomSubscriptionsRequest {
+  string room_id = 2;
+  int32 limit = 3;
+  string cursor = 4;
+}
+message SearchRoomSubscriptionsResponse {
+  string room_id = 1;
+  repeated RoomSubscription members = 2;
+  string next_cursor = 3;
+}
