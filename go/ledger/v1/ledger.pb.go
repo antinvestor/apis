@@ -22,8 +22,7 @@ package ledgerv1
 
 import (
 	v1 "github.com/antinvestor/apis/go/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
+	_ "github.com/google/gnostic/openapiv3"
 	money "google.golang.org/genproto/googleapis/type/money"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -40,16 +39,18 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// LedgerType defines the fundamental accounting categories.
+// Based on standard accounting equation: Assets = Liabilities + Capital + (Income - Expenses)
 // buf:lint:ignore ENUM_VALUE_PREFIX
 type LedgerType int32
 
 const (
 	// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-	LedgerType_ASSET     LedgerType = 0
-	LedgerType_LIABILITY LedgerType = 1
-	LedgerType_INCOME    LedgerType = 2
-	LedgerType_EXPENSE   LedgerType = 3
-	LedgerType_CAPITAL   LedgerType = 4
+	LedgerType_ASSET     LedgerType = 0 // Resources owned (cash, receivables, inventory, equipment)
+	LedgerType_LIABILITY LedgerType = 1 // Obligations owed (payables, loans, accrued expenses)
+	LedgerType_INCOME    LedgerType = 2 // Revenue and gains (sales, interest income, fees)
+	LedgerType_EXPENSE   LedgerType = 3 // Costs and losses (salaries, rent, utilities, depreciation)
+	LedgerType_CAPITAL   LedgerType = 4 // Owner's equity (investments, retained earnings)
 )
 
 // Enum value maps for LedgerType.
@@ -97,14 +98,15 @@ func (LedgerType) EnumDescriptor() ([]byte, []int) {
 	return file_ledger_v1_ledger_proto_rawDescGZIP(), []int{0}
 }
 
+// TransactionType defines the nature of a transaction.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 type TransactionType int32
 
 const (
 	// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-	TransactionType_NORMAL      TransactionType = 0
-	TransactionType_REVERSAL    TransactionType = 1
-	TransactionType_RESERVATION TransactionType = 2
+	TransactionType_NORMAL      TransactionType = 0 // Standard transaction
+	TransactionType_REVERSAL    TransactionType = 1 // Reverses a previous transaction (creates offsetting entries)
+	TransactionType_RESERVATION TransactionType = 2 // Temporary hold/reservation (e.g., pending payment authorization)
 )
 
 // Enum value maps for TransactionType.
@@ -148,63 +150,21 @@ func (TransactionType) EnumDescriptor() ([]byte, []int) {
 	return file_ledger_v1_ledger_proto_rawDescGZIP(), []int{1}
 }
 
-type SearchRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SearchRequest) Reset() {
-	*x = SearchRequest{}
-	mi := &file_ledger_v1_ledger_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SearchRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SearchRequest) ProtoMessage() {}
-
-func (x *SearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_ledger_v1_ledger_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SearchRequest.ProtoReflect.Descriptor instead.
-func (*SearchRequest) Descriptor() ([]byte, []int) {
-	return file_ledger_v1_ledger_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *SearchRequest) GetQuery() string {
-	if x != nil {
-		return x.Query
-	}
-	return ""
-}
-
+// Ledger represents a category in the chart of accounts.
+// Ledgers can be hierarchical with parent-child relationships.
 type Ledger struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Reference     string                 `protobuf:"bytes,1,opt,name=reference,proto3" json:"reference,omitempty"`
-	Type          LedgerType             `protobuf:"varint,2,opt,name=type,proto3,enum=ledger.v1.LedgerType" json:"type,omitempty"`
-	Parent        string                 `protobuf:"bytes,3,opt,name=parent,proto3" json:"parent,omitempty"`
-	Data          *structpb.Struct       `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
+	Reference     string                 `protobuf:"bytes,1,opt,name=reference,proto3" json:"reference,omitempty"`                  // Unique reference/code for the ledger (e.g., "1000", "CASH")
+	Type          LedgerType             `protobuf:"varint,2,opt,name=type,proto3,enum=ledger.v1.LedgerType" json:"type,omitempty"` // Accounting category type
+	Parent        string                 `protobuf:"bytes,3,opt,name=parent,proto3" json:"parent,omitempty"`                        // Parent ledger reference for hierarchical structure
+	Data          *structpb.Struct       `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`                            // Additional ledger metadata (name, description, etc.)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Ledger) Reset() {
 	*x = Ledger{}
-	mi := &file_ledger_v1_ledger_proto_msgTypes[1]
+	mi := &file_ledger_v1_ledger_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -216,7 +176,7 @@ func (x *Ledger) String() string {
 func (*Ledger) ProtoMessage() {}
 
 func (x *Ledger) ProtoReflect() protoreflect.Message {
-	mi := &file_ledger_v1_ledger_proto_msgTypes[1]
+	mi := &file_ledger_v1_ledger_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -229,7 +189,7 @@ func (x *Ledger) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Ledger.ProtoReflect.Descriptor instead.
 func (*Ledger) Descriptor() ([]byte, []int) {
-	return file_ledger_v1_ledger_proto_rawDescGZIP(), []int{1}
+	return file_ledger_v1_ledger_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Ledger) GetReference() string {
@@ -260,21 +220,23 @@ func (x *Ledger) GetData() *structpb.Struct {
 	return nil
 }
 
+// Account represents a specific account within a ledger.
+// Tracks balances and supports multi-currency operations.
 type Account struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	Reference        string                 `protobuf:"bytes,1,opt,name=reference,proto3" json:"reference,omitempty"`
-	Ledger           string                 `protobuf:"bytes,3,opt,name=ledger,proto3" json:"ledger,omitempty"`
-	Balance          *money.Money           `protobuf:"bytes,4,opt,name=balance,proto3" json:"balance,omitempty"`
-	Data             *structpb.Struct       `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
-	UnclearedBalance *money.Money           `protobuf:"bytes,6,opt,name=uncleared_balance,json=unclearedBalance,proto3" json:"uncleared_balance,omitempty"`
-	ReservedBalance  *money.Money           `protobuf:"bytes,7,opt,name=reserved_balance,json=reservedBalance,proto3" json:"reserved_balance,omitempty"`
+	Reference        string                 `protobuf:"bytes,1,opt,name=reference,proto3" json:"reference,omitempty"`                                       // Unique account reference/number
+	Ledger           string                 `protobuf:"bytes,3,opt,name=ledger,proto3" json:"ledger,omitempty"`                                             // Ledger this account belongs to
+	Balance          *money.Money           `protobuf:"bytes,4,opt,name=balance,proto3" json:"balance,omitempty"`                                           // Current cleared balance
+	Data             *structpb.Struct       `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`                                                 // Additional account metadata (owner, description, etc.)
+	UnclearedBalance *money.Money           `protobuf:"bytes,6,opt,name=uncleared_balance,json=unclearedBalance,proto3" json:"uncleared_balance,omitempty"` // Balance including uncleared transactions
+	ReservedBalance  *money.Money           `protobuf:"bytes,7,opt,name=reserved_balance,json=reservedBalance,proto3" json:"reserved_balance,omitempty"`    // Amount held in reservations
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Account) Reset() {
 	*x = Account{}
-	mi := &file_ledger_v1_ledger_proto_msgTypes[2]
+	mi := &file_ledger_v1_ledger_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -286,7 +248,7 @@ func (x *Account) String() string {
 func (*Account) ProtoMessage() {}
 
 func (x *Account) ProtoReflect() protoreflect.Message {
-	mi := &file_ledger_v1_ledger_proto_msgTypes[2]
+	mi := &file_ledger_v1_ledger_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -299,7 +261,7 @@ func (x *Account) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Account.ProtoReflect.Descriptor instead.
 func (*Account) Descriptor() ([]byte, []int) {
-	return file_ledger_v1_ledger_proto_rawDescGZIP(), []int{2}
+	return file_ledger_v1_ledger_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Account) GetReference() string {
@@ -344,22 +306,24 @@ func (x *Account) GetReservedBalance() *money.Money {
 	return nil
 }
 
+// TransactionEntry represents one side of a double-entry transaction.
+// Each transaction must have at least two entries with balanced debits and credits.
 type TransactionEntry struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Account       string                 `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
-	Transaction   string                 `protobuf:"bytes,2,opt,name=transaction,proto3" json:"transaction,omitempty"`
-	TransactedAt  string                 `protobuf:"bytes,3,opt,name=transacted_at,json=transactedAt,proto3" json:"transacted_at,omitempty"`
-	Amount        *money.Money           `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`
-	Credit        bool                   `protobuf:"varint,5,opt,name=credit,proto3" json:"credit,omitempty"`
-	AccBalance    *money.Money           `protobuf:"bytes,6,opt,name=acc_balance,json=accBalance,proto3" json:"acc_balance,omitempty"`
-	ClearedAt     string                 `protobuf:"bytes,7,opt,name=cleared_at,json=clearedAt,proto3" json:"cleared_at,omitempty"`
+	Account       string                 `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`                               // Account reference for this entry
+	Transaction   string                 `protobuf:"bytes,2,opt,name=transaction,proto3" json:"transaction,omitempty"`                       // Transaction reference this entry belongs to
+	TransactedAt  string                 `protobuf:"bytes,3,opt,name=transacted_at,json=transactedAt,proto3" json:"transacted_at,omitempty"` // Transaction timestamp (RFC3339)
+	Amount        *money.Money           `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`                                 // Amount for this entry
+	Credit        bool                   `protobuf:"varint,5,opt,name=credit,proto3" json:"credit,omitempty"`                                // True if credit, false if debit
+	AccBalance    *money.Money           `protobuf:"bytes,6,opt,name=acc_balance,json=accBalance,proto3" json:"acc_balance,omitempty"`       // Account balance after this entry
+	ClearedAt     string                 `protobuf:"bytes,7,opt,name=cleared_at,json=clearedAt,proto3" json:"cleared_at,omitempty"`          // When this entry was cleared (RFC3339)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TransactionEntry) Reset() {
 	*x = TransactionEntry{}
-	mi := &file_ledger_v1_ledger_proto_msgTypes[3]
+	mi := &file_ledger_v1_ledger_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -371,7 +335,7 @@ func (x *TransactionEntry) String() string {
 func (*TransactionEntry) ProtoMessage() {}
 
 func (x *TransactionEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_ledger_v1_ledger_proto_msgTypes[3]
+	mi := &file_ledger_v1_ledger_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -384,7 +348,7 @@ func (x *TransactionEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransactionEntry.ProtoReflect.Descriptor instead.
 func (*TransactionEntry) Descriptor() ([]byte, []int) {
-	return file_ledger_v1_ledger_proto_rawDescGZIP(), []int{3}
+	return file_ledger_v1_ledger_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *TransactionEntry) GetAccount() string {
@@ -436,22 +400,24 @@ func (x *TransactionEntry) GetClearedAt() string {
 	return ""
 }
 
+// Transaction represents a complete double-entry transaction.
+// Must contain balanced entries (sum of debits = sum of credits).
 type Transaction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Reference     string                 `protobuf:"bytes,1,opt,name=reference,proto3" json:"reference,omitempty"`
-	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	TransactedAt  string                 `protobuf:"bytes,3,opt,name=transacted_at,json=transactedAt,proto3" json:"transacted_at,omitempty"`
-	Data          *structpb.Struct       `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
-	Entries       []*TransactionEntry    `protobuf:"bytes,5,rep,name=entries,proto3" json:"entries,omitempty"`
-	Cleared       bool                   `protobuf:"varint,6,opt,name=cleared,proto3" json:"cleared,omitempty"`
-	Type          TransactionType        `protobuf:"varint,7,opt,name=type,proto3,enum=ledger.v1.TransactionType" json:"type,omitempty"`
+	Reference     string                 `protobuf:"bytes,1,opt,name=reference,proto3" json:"reference,omitempty"`                           // Unique transaction reference/ID
+	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`                             // Currency code for all entries (ISO 4217)
+	TransactedAt  string                 `protobuf:"bytes,3,opt,name=transacted_at,json=transactedAt,proto3" json:"transacted_at,omitempty"` // Transaction timestamp (RFC3339)
+	Data          *structpb.Struct       `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`                                     // Additional transaction metadata (description, source, etc.)
+	Entries       []*TransactionEntry    `protobuf:"bytes,5,rep,name=entries,proto3" json:"entries,omitempty"`                               // Transaction entries (must be balanced)
+	Cleared       bool                   `protobuf:"varint,6,opt,name=cleared,proto3" json:"cleared,omitempty"`                              // Whether transaction has been cleared/posted
+	Type          TransactionType        `protobuf:"varint,7,opt,name=type,proto3,enum=ledger.v1.TransactionType" json:"type,omitempty"`     // Transaction type (normal, reversal, reservation)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Transaction) Reset() {
 	*x = Transaction{}
-	mi := &file_ledger_v1_ledger_proto_msgTypes[4]
+	mi := &file_ledger_v1_ledger_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -463,7 +429,7 @@ func (x *Transaction) String() string {
 func (*Transaction) ProtoMessage() {}
 
 func (x *Transaction) ProtoReflect() protoreflect.Message {
-	mi := &file_ledger_v1_ledger_proto_msgTypes[4]
+	mi := &file_ledger_v1_ledger_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -476,7 +442,7 @@ func (x *Transaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Transaction.ProtoReflect.Descriptor instead.
 func (*Transaction) Descriptor() ([]byte, []int) {
-	return file_ledger_v1_ledger_proto_rawDescGZIP(), []int{4}
+	return file_ledger_v1_ledger_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Transaction) GetReference() string {
@@ -532,9 +498,7 @@ var File_ledger_v1_ledger_proto protoreflect.FileDescriptor
 
 const file_ledger_v1_ledger_proto_rawDesc = "" +
 	"\n" +
-	"\x16ledger/v1/ledger.proto\x12\tledger.v1\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x17google/type/money.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"%\n" +
-	"\rSearchRequest\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\"\x96\x01\n" +
+	"\x16ledger/v1/ledger.proto\x12\tledger.v1\x1a\x16common/v1/common.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x17google/type/money.proto\x1a$gnostic/openapi/v3/annotations.proto\"\x96\x01\n" +
 	"\x06Ledger\x12\x1c\n" +
 	"\treference\x18\x01 \x01(\tR\treference\x12)\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x15.ledger.v1.LedgerTypeR\x04type\x12\x16\n" +
@@ -577,28 +541,39 @@ const file_ledger_v1_ledger_proto_rawDesc = "" +
 	"\n" +
 	"\x06NORMAL\x10\x00\x12\f\n" +
 	"\bREVERSAL\x10\x01\x12\x0f\n" +
-	"\vRESERVATION\x10\x022\x88\b\n" +
-	"\rLedgerService\x12O\n" +
-	"\rSearchLedgers\x12\x18.common.v1.SearchRequest\x1a\x11.ledger.v1.Ledger\"\x0f\x82\xd3\xe4\x93\x02\t\x12\a/ledger0\x01\x12H\n" +
-	"\fCreateLedger\x12\x11.ledger.v1.Ledger\x1a\x11.ledger.v1.Ledger\"\x12\x82\xd3\xe4\x93\x02\f:\x01*\"\a/ledger\x12T\n" +
-	"\fUpdateLedger\x12\x11.ledger.v1.Ledger\x1a\x11.ledger.v1.Ledger\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*2\x13/ledger/{reference}\x12R\n" +
-	"\x0eSearchAccounts\x12\x18.common.v1.SearchRequest\x1a\x12.ledger.v1.Account\"\x10\x82\xd3\xe4\x93\x02\n" +
-	"\x12\b/account0\x01\x12L\n" +
-	"\rCreateAccount\x12\x12.ledger.v1.Account\x1a\x12.ledger.v1.Account\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/account\x12X\n" +
-	"\rUpdateAccount\x12\x12.ledger.v1.Account\x1a\x12.ledger.v1.Account\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*2\x14/account/{reference}\x12^\n" +
-	"\x12SearchTransactions\x12\x18.common.v1.SearchRequest\x1a\x16.ledger.v1.Transaction\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/transaction0\x01\x12\\\n" +
-	"\x11CreateTransaction\x12\x16.ledger.v1.Transaction\x1a\x16.ledger.v1.Transaction\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/transaction\x12q\n" +
-	"\x12ReverseTransaction\x12\x16.ledger.v1.Transaction\x1a\x16.ledger.v1.Transaction\"+\x82\xd3\xe4\x93\x02%:\x01*\" /transaction/{reference}/reverse\x12h\n" +
-	"\x11UpdateTransaction\x12\x16.ledger.v1.Transaction\x1a\x16.ledger.v1.Transaction\"#\x82\xd3\xe4\x93\x02\x1d:\x01*2\x18/transaction/{reference}\x12o\n" +
-	"\x18SearchTransactionEntries\x12\x18.common.v1.SearchRequest\x1a\x1b.ledger.v1.TransactionEntry\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/transaction/entry0\x01B\xb1\x03\x92A\x81\x02\x12n\n" +
-	"\x0eLedger Service\"W\n" +
-	"\x10Ant Investor Ltd\x12-https://github.com/antinvestor/service-ledger\x1a\x14info@antinvestor.com2\x031.0*\x02\x01\x022\x10application/json:\x10application/jsonZY\n" +
-	"W\n" +
-	"\x06bearer\x12M\b\x02\x128Authentication token, prefixed by Bearer: Bearer <token>\x1a\rAuthorization \x02b\f\n" +
+	"\vRESERVATION\x10\x022\xdf\x18\n" +
+	"\rLedgerService\x12\x8d\x02\n" +
+	"\rSearchLedgers\x12\x18.common.v1.SearchRequest\x1a\x11.ledger.v1.Ledger\"\xcc\x01\xbaG\xc8\x01\n" +
+	"\aLedgers\x12\x0eSearch ledgers\x1a\x9d\x01Searches for ledgers in the chart of accounts. Supports filtering by ledger type, parent ledger, and custom properties. Returns a stream of matching ledgers.*\rsearchLedgers0\x01\x12\x92\x02\n" +
+	"\fCreateLedger\x12\x11.ledger.v1.Ledger\x1a\x11.ledger.v1.Ledger\"\xdb\x01\xbaG\xd7\x01\n" +
+	"\aLedgers\x12\x13Create a new ledger\x1a\xa8\x01Creates a new ledger in the chart of accounts. Ledgers represent accounting categories (Asset, Liability, Income, Expense, Capital) and can be organized hierarchically.*\fcreateLedger\x12\xe1\x01\n" +
+	"\fUpdateLedger\x12\x11.ledger.v1.Ledger\x1a\x11.ledger.v1.Ledger\"\xaa\x01\xbaG\xa6\x01\n" +
+	"\aLedgers\x12\x16Update ledger metadata\x1auUpdates an existing ledger's metadata and properties. The ledger type and reference cannot be changed after creation.*\fupdateLedger\x12\x9c\x02\n" +
+	"\x0eSearchAccounts\x12\x18.common.v1.SearchRequest\x1a\x12.ledger.v1.Account\"\xd9\x01\xbaG\xd5\x01\n" +
+	"\bAccounts\x12\x0fSearch accounts\x1a\xa7\x01Searches for accounts matching specified criteria. Supports filtering by ledger, balance range, currency, and custom properties. Returns a stream of matching accounts.*\x0esearchAccounts0\x01\x12\xf4\x01\n" +
+	"\rCreateAccount\x12\x12.ledger.v1.Account\x1a\x12.ledger.v1.Account\"\xba\x01\xbaG\xb6\x01\n" +
+	"\bAccounts\x12\x14Create a new account\x1a\x84\x01Creates a new account within a ledger. Accounts track balances (cleared, uncleared, reserved) and support multi-currency operations.*\rcreateAccount\x12\xf7\x01\n" +
+	"\rUpdateAccount\x12\x12.ledger.v1.Account\x1a\x12.ledger.v1.Account\"\xbd\x01\xbaG\xb9\x01\n" +
+	"\bAccounts\x12\x17Update account metadata\x1a\x84\x01Updates an existing account's metadata and properties. Account balances are updated through transactions, not directly via this RPC.*\rupdateAccount\x12\xc5\x02\n" +
+	"\x12SearchTransactions\x12\x18.common.v1.SearchRequest\x1a\x16.ledger.v1.Transaction\"\xfa\x01\xbaG\xf6\x01\n" +
+	"\fTransactions\x12\x13Search transactions\x1a\xbc\x01Searches for transactions matching specified criteria. Supports filtering by date range, account, currency, cleared status, and transaction type. Returns a stream of matching transactions.*\x12searchTransactions0\x01\x12\xb4\x02\n" +
+	"\x11CreateTransaction\x12\x16.ledger.v1.Transaction\x1a\x16.ledger.v1.Transaction\"\xee\x01\xbaG\xea\x01\n" +
+	"\fTransactions\x12\x18Create a new transaction\x1a\xac\x01Creates a new double-entry transaction. The transaction must contain at least two entries with balanced debits and credits. Updates affected account balances automatically.*\x11createTransaction\x12\x9e\x02\n" +
+	"\x12ReverseTransaction\x12\x16.ledger.v1.Transaction\x1a\x16.ledger.v1.Transaction\"\xd7\x01\xbaG\xd3\x01\n" +
+	"\fTransactions\x12\x15Reverse a transaction\x1a\x97\x01Reverses a transaction by creating a new REVERSAL transaction with inverted entries. The original transaction remains in the ledger for audit purposes.*\x12reverseTransaction\x12\xa8\x02\n" +
+	"\x11UpdateTransaction\x12\x16.ledger.v1.Transaction\x1a\x16.ledger.v1.Transaction\"\xe2\x01\xbaG\xde\x01\n" +
+	"\fTransactions\x12\x1bUpdate transaction metadata\x1a\x9d\x01Updates a transaction's metadata and properties. Transaction entries and amounts cannot be changed after creation - use ReverseTransaction to correct errors.*\x11updateTransaction\x12\xe9\x02\n" +
+	"\x18SearchTransactionEntries\x12\x18.common.v1.SearchRequest\x1a\x1b.ledger.v1.TransactionEntry\"\x93\x02\xbaG\x8f\x02\n" +
+	"\fTransactions\x12\x1aSearch transaction entries\x1a\xc8\x01Searches for individual transaction entries. Useful for generating account statements, reconciliation, and detailed transaction analysis. Supports filtering by account, date range, and cleared status.*\x18searchTransactionEntries0\x01B\x80\a\xbaG\xd7\x05\x12\xab\x05\n" +
+	"\x0eLedger Service\x12\xec\x03The Ledger Service provides double-entry bookkeeping and financial accounting capabilities. It supports hierarchical chart of accounts, multi-currency transactions, transaction reversals, and balance tracking. The service follows standard accounting principles with ledger types (Asset, Liability, Income, Expense, Capital) and ensures all transactions are balanced (debits equal credits). Supports both cleared and uncleared transactions with reservation capabilities for pending operations.\"W\n" +
+	"\x10Ant Investor Ltd\x12-https://github.com/antinvestor/service-ledger\x1a\x14info@antinvestor.com*I\n" +
+	"\x0eApache License\x127https://github.com/antinvestor/apis/blob/master/LICENSE2\x06v1.0.0*':%\n" +
+	"#\n" +
 	"\n" +
-	"\n" +
-	"\x06bearer\x12\x00\n" +
-	"\x1ecom.antinvestor.apis.ledger.v1B\vLedgerProtoP\x01Z8github.com/antinvestor/apis/go/ledger/ledger/v1;ledgerv1\xa2\x02\x03LXX\xaa\x02\tLedger.V1\xca\x02\tLedger\\V1\xe2\x02\x15Ledger\\V1\\GPBMetadata\xea\x02\n" +
+	"BearerAuth\x12\x15\n" +
+	"\x13\n" +
+	"\x04http*\x06bearer2\x03JWT\n" +
+	"\x1ecom.antinvestor.apis.ledger.v1B\vLedgerProtoP\x01Z1github.com/antinvestor/apis/go/ledger/v1;ledgerv1\xa2\x02\x03LXX\xaa\x02\tLedger.V1\xca\x02\tLedger\\V1\xe2\x02\x15Ledger\\V1\\GPBMetadata\xea\x02\n" +
 	"Ledger::V1b\x06proto3"
 
 var (
@@ -614,53 +589,52 @@ func file_ledger_v1_ledger_proto_rawDescGZIP() []byte {
 }
 
 var file_ledger_v1_ledger_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_ledger_v1_ledger_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_ledger_v1_ledger_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_ledger_v1_ledger_proto_goTypes = []any{
 	(LedgerType)(0),          // 0: ledger.v1.LedgerType
 	(TransactionType)(0),     // 1: ledger.v1.TransactionType
-	(*SearchRequest)(nil),    // 2: ledger.v1.SearchRequest
-	(*Ledger)(nil),           // 3: ledger.v1.Ledger
-	(*Account)(nil),          // 4: ledger.v1.Account
-	(*TransactionEntry)(nil), // 5: ledger.v1.TransactionEntry
-	(*Transaction)(nil),      // 6: ledger.v1.Transaction
-	(*structpb.Struct)(nil),  // 7: google.protobuf.Struct
-	(*money.Money)(nil),      // 8: google.type.Money
-	(*v1.SearchRequest)(nil), // 9: common.v1.SearchRequest
+	(*Ledger)(nil),           // 2: ledger.v1.Ledger
+	(*Account)(nil),          // 3: ledger.v1.Account
+	(*TransactionEntry)(nil), // 4: ledger.v1.TransactionEntry
+	(*Transaction)(nil),      // 5: ledger.v1.Transaction
+	(*structpb.Struct)(nil),  // 6: google.protobuf.Struct
+	(*money.Money)(nil),      // 7: google.type.Money
+	(*v1.SearchRequest)(nil), // 8: common.v1.SearchRequest
 }
 var file_ledger_v1_ledger_proto_depIdxs = []int32{
 	0,  // 0: ledger.v1.Ledger.type:type_name -> ledger.v1.LedgerType
-	7,  // 1: ledger.v1.Ledger.data:type_name -> google.protobuf.Struct
-	8,  // 2: ledger.v1.Account.balance:type_name -> google.type.Money
-	7,  // 3: ledger.v1.Account.data:type_name -> google.protobuf.Struct
-	8,  // 4: ledger.v1.Account.uncleared_balance:type_name -> google.type.Money
-	8,  // 5: ledger.v1.Account.reserved_balance:type_name -> google.type.Money
-	8,  // 6: ledger.v1.TransactionEntry.amount:type_name -> google.type.Money
-	8,  // 7: ledger.v1.TransactionEntry.acc_balance:type_name -> google.type.Money
-	7,  // 8: ledger.v1.Transaction.data:type_name -> google.protobuf.Struct
-	5,  // 9: ledger.v1.Transaction.entries:type_name -> ledger.v1.TransactionEntry
+	6,  // 1: ledger.v1.Ledger.data:type_name -> google.protobuf.Struct
+	7,  // 2: ledger.v1.Account.balance:type_name -> google.type.Money
+	6,  // 3: ledger.v1.Account.data:type_name -> google.protobuf.Struct
+	7,  // 4: ledger.v1.Account.uncleared_balance:type_name -> google.type.Money
+	7,  // 5: ledger.v1.Account.reserved_balance:type_name -> google.type.Money
+	7,  // 6: ledger.v1.TransactionEntry.amount:type_name -> google.type.Money
+	7,  // 7: ledger.v1.TransactionEntry.acc_balance:type_name -> google.type.Money
+	6,  // 8: ledger.v1.Transaction.data:type_name -> google.protobuf.Struct
+	4,  // 9: ledger.v1.Transaction.entries:type_name -> ledger.v1.TransactionEntry
 	1,  // 10: ledger.v1.Transaction.type:type_name -> ledger.v1.TransactionType
-	9,  // 11: ledger.v1.LedgerService.SearchLedgers:input_type -> common.v1.SearchRequest
-	3,  // 12: ledger.v1.LedgerService.CreateLedger:input_type -> ledger.v1.Ledger
-	3,  // 13: ledger.v1.LedgerService.UpdateLedger:input_type -> ledger.v1.Ledger
-	9,  // 14: ledger.v1.LedgerService.SearchAccounts:input_type -> common.v1.SearchRequest
-	4,  // 15: ledger.v1.LedgerService.CreateAccount:input_type -> ledger.v1.Account
-	4,  // 16: ledger.v1.LedgerService.UpdateAccount:input_type -> ledger.v1.Account
-	9,  // 17: ledger.v1.LedgerService.SearchTransactions:input_type -> common.v1.SearchRequest
-	6,  // 18: ledger.v1.LedgerService.CreateTransaction:input_type -> ledger.v1.Transaction
-	6,  // 19: ledger.v1.LedgerService.ReverseTransaction:input_type -> ledger.v1.Transaction
-	6,  // 20: ledger.v1.LedgerService.UpdateTransaction:input_type -> ledger.v1.Transaction
-	9,  // 21: ledger.v1.LedgerService.SearchTransactionEntries:input_type -> common.v1.SearchRequest
-	3,  // 22: ledger.v1.LedgerService.SearchLedgers:output_type -> ledger.v1.Ledger
-	3,  // 23: ledger.v1.LedgerService.CreateLedger:output_type -> ledger.v1.Ledger
-	3,  // 24: ledger.v1.LedgerService.UpdateLedger:output_type -> ledger.v1.Ledger
-	4,  // 25: ledger.v1.LedgerService.SearchAccounts:output_type -> ledger.v1.Account
-	4,  // 26: ledger.v1.LedgerService.CreateAccount:output_type -> ledger.v1.Account
-	4,  // 27: ledger.v1.LedgerService.UpdateAccount:output_type -> ledger.v1.Account
-	6,  // 28: ledger.v1.LedgerService.SearchTransactions:output_type -> ledger.v1.Transaction
-	6,  // 29: ledger.v1.LedgerService.CreateTransaction:output_type -> ledger.v1.Transaction
-	6,  // 30: ledger.v1.LedgerService.ReverseTransaction:output_type -> ledger.v1.Transaction
-	6,  // 31: ledger.v1.LedgerService.UpdateTransaction:output_type -> ledger.v1.Transaction
-	5,  // 32: ledger.v1.LedgerService.SearchTransactionEntries:output_type -> ledger.v1.TransactionEntry
+	8,  // 11: ledger.v1.LedgerService.SearchLedgers:input_type -> common.v1.SearchRequest
+	2,  // 12: ledger.v1.LedgerService.CreateLedger:input_type -> ledger.v1.Ledger
+	2,  // 13: ledger.v1.LedgerService.UpdateLedger:input_type -> ledger.v1.Ledger
+	8,  // 14: ledger.v1.LedgerService.SearchAccounts:input_type -> common.v1.SearchRequest
+	3,  // 15: ledger.v1.LedgerService.CreateAccount:input_type -> ledger.v1.Account
+	3,  // 16: ledger.v1.LedgerService.UpdateAccount:input_type -> ledger.v1.Account
+	8,  // 17: ledger.v1.LedgerService.SearchTransactions:input_type -> common.v1.SearchRequest
+	5,  // 18: ledger.v1.LedgerService.CreateTransaction:input_type -> ledger.v1.Transaction
+	5,  // 19: ledger.v1.LedgerService.ReverseTransaction:input_type -> ledger.v1.Transaction
+	5,  // 20: ledger.v1.LedgerService.UpdateTransaction:input_type -> ledger.v1.Transaction
+	8,  // 21: ledger.v1.LedgerService.SearchTransactionEntries:input_type -> common.v1.SearchRequest
+	2,  // 22: ledger.v1.LedgerService.SearchLedgers:output_type -> ledger.v1.Ledger
+	2,  // 23: ledger.v1.LedgerService.CreateLedger:output_type -> ledger.v1.Ledger
+	2,  // 24: ledger.v1.LedgerService.UpdateLedger:output_type -> ledger.v1.Ledger
+	3,  // 25: ledger.v1.LedgerService.SearchAccounts:output_type -> ledger.v1.Account
+	3,  // 26: ledger.v1.LedgerService.CreateAccount:output_type -> ledger.v1.Account
+	3,  // 27: ledger.v1.LedgerService.UpdateAccount:output_type -> ledger.v1.Account
+	5,  // 28: ledger.v1.LedgerService.SearchTransactions:output_type -> ledger.v1.Transaction
+	5,  // 29: ledger.v1.LedgerService.CreateTransaction:output_type -> ledger.v1.Transaction
+	5,  // 30: ledger.v1.LedgerService.ReverseTransaction:output_type -> ledger.v1.Transaction
+	5,  // 31: ledger.v1.LedgerService.UpdateTransaction:output_type -> ledger.v1.Transaction
+	4,  // 32: ledger.v1.LedgerService.SearchTransactionEntries:output_type -> ledger.v1.TransactionEntry
 	22, // [22:33] is the sub-list for method output_type
 	11, // [11:22] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name
@@ -679,7 +653,7 @@ func file_ledger_v1_ledger_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ledger_v1_ledger_proto_rawDesc), len(file_ledger_v1_ledger_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   5,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

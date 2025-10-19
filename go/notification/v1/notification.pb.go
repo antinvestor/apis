@@ -23,8 +23,7 @@ package notificationv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/antinvestor/apis/go/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
+	_ "github.com/google/gnostic/openapiv3"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -40,14 +39,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// PRIORITY defines the delivery priority for notifications.
+// Higher priority notifications are processed and delivered first.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 type PRIORITY int32
 
 const (
 	// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-	PRIORITY_HIGH     PRIORITY = 0
-	PRIORITY_LOW      PRIORITY = 1
-	PRIORITY_VERY_LOW PRIORITY = 2
+	PRIORITY_HIGH     PRIORITY = 0 // Critical notifications (security alerts, payment confirmations)
+	PRIORITY_LOW      PRIORITY = 1 // Standard notifications (updates, reminders)
+	PRIORITY_VERY_LOW PRIORITY = 2 // Low-priority notifications (marketing, newsletters)
 )
 
 // Enum value maps for PRIORITY.
@@ -91,12 +92,13 @@ func (PRIORITY) EnumDescriptor() ([]byte, []int) {
 	return file_notification_v1_notification_proto_rawDescGZIP(), []int{0}
 }
 
+// Language represents a supported language for notification templates.
 type Language struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`       // Unique identifier for the language
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`   // ISO 639-1 language code (e.g., "en", "es", "fr")
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`   // Human-readable language name
+	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"` // Additional language metadata
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -159,12 +161,14 @@ func (x *Language) GetExtra() *structpb.Struct {
 	return nil
 }
 
+// TemplateData represents localized content for a notification template.
+// Each template can have multiple TemplateData entries for different languages.
 type TemplateData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	Detail        string                 `protobuf:"bytes,3,opt,name=detail,proto3" json:"detail,omitempty"`
-	Language      *Language              `protobuf:"bytes,4,opt,name=language,proto3" json:"language,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`             // Unique identifier for this template data
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`         // Content type (e.g., "email", "sms", "push", "in-app")
+	Detail        string                 `protobuf:"bytes,3,opt,name=detail,proto3" json:"detail,omitempty"`     // Template content with placeholders (e.g., "Hello {{name}}")
+	Language      *Language              `protobuf:"bytes,4,opt,name=language,proto3" json:"language,omitempty"` // Language for this template content
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -227,12 +231,14 @@ func (x *TemplateData) GetLanguage() *Language {
 	return nil
 }
 
+// Template represents a notification template with localized content.
+// Templates enable consistent, reusable notification formatting.
 type Template struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Data          []*TemplateData        `protobuf:"bytes,4,rep,name=data,proto3" json:"data,omitempty"`
-	Extra         *structpb.Struct       `protobuf:"bytes,5,opt,name=extra,proto3" json:"extra,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`       // Unique identifier for the template
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`   // Template name (e.g., "welcome_email", "password_reset")
+	Data          []*TemplateData        `protobuf:"bytes,4,rep,name=data,proto3" json:"data,omitempty"`   // Localized template content for different languages/channels
+	Extra         *structpb.Struct       `protobuf:"bytes,5,opt,name=extra,proto3" json:"extra,omitempty"` // Additional template metadata
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -295,23 +301,25 @@ func (x *Template) GetExtra() *structpb.Struct {
 	return nil
 }
 
+// Notification represents a notification to be sent or received.
+// Supports multi-channel delivery (email, SMS, push, in-app) with templating.
 type Notification struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	ParentId      string                 `protobuf:"bytes,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	Source        *v1.ContactLink        `protobuf:"bytes,3,opt,name=source,proto3" json:"source,omitempty"`
-	Recipient     *v1.ContactLink        `protobuf:"bytes,4,opt,name=recipient,proto3" json:"recipient,omitempty"`
-	Type          string                 `protobuf:"bytes,6,opt,name=type,proto3" json:"type,omitempty"`
-	Template      string                 `protobuf:"bytes,7,opt,name=template,proto3" json:"template,omitempty"`
-	Payload       *structpb.Struct       `protobuf:"bytes,8,opt,name=payload,proto3" json:"payload,omitempty"`
-	Data          string                 `protobuf:"bytes,9,opt,name=data,proto3" json:"data,omitempty"`
-	Language      string                 `protobuf:"bytes,10,opt,name=language,proto3" json:"language,omitempty"`
-	OutBound      bool                   `protobuf:"varint,11,opt,name=out_bound,json=outBound,proto3" json:"out_bound,omitempty"`
-	AutoRelease   bool                   `protobuf:"varint,12,opt,name=auto_release,json=autoRelease,proto3" json:"auto_release,omitempty"`
-	RouteId       string                 `protobuf:"bytes,13,opt,name=route_id,json=routeId,proto3" json:"route_id,omitempty"`
-	Status        *v1.StatusResponse     `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`
-	Extras        *structpb.Struct       `protobuf:"bytes,15,opt,name=extras,proto3" json:"extras,omitempty"`
-	Priority      PRIORITY               `protobuf:"varint,16,opt,name=priority,proto3,enum=notification.v1.PRIORITY" json:"priority,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                             // Unique identifier for the notification
+	ParentId      string                 `protobuf:"bytes,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`                 // Parent notification ID (for threading/grouping)
+	Source        *v1.ContactLink        `protobuf:"bytes,3,opt,name=source,proto3" json:"source,omitempty"`                                     // Sender information
+	Recipient     *v1.ContactLink        `protobuf:"bytes,4,opt,name=recipient,proto3" json:"recipient,omitempty"`                               // Recipient information
+	Type          string                 `protobuf:"bytes,6,opt,name=type,proto3" json:"type,omitempty"`                                         // Notification type (e.g., "email", "sms", "push", "in-app")
+	Template      string                 `protobuf:"bytes,7,opt,name=template,proto3" json:"template,omitempty"`                                 // Template ID to use for rendering
+	Payload       *structpb.Struct       `protobuf:"bytes,8,opt,name=payload,proto3" json:"payload,omitempty"`                                   // Template variables (e.g., {"name": "John", "amount": "$100"})
+	Data          string                 `protobuf:"bytes,9,opt,name=data,proto3" json:"data,omitempty"`                                         // Pre-rendered notification content (if not using template)
+	Language      string                 `protobuf:"bytes,10,opt,name=language,proto3" json:"language,omitempty"`                                // Preferred language code for the notification
+	OutBound      bool                   `protobuf:"varint,11,opt,name=out_bound,json=outBound,proto3" json:"out_bound,omitempty"`               // True if outgoing, false if incoming
+	AutoRelease   bool                   `protobuf:"varint,12,opt,name=auto_release,json=autoRelease,proto3" json:"auto_release,omitempty"`      // If true, automatically release after queuing
+	RouteId       string                 `protobuf:"bytes,13,opt,name=route_id,json=routeId,proto3" json:"route_id,omitempty"`                   // Routing identifier for delivery channel selection
+	Status        *v1.StatusResponse     `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`                                    // Current status
+	Extras        *structpb.Struct       `protobuf:"bytes,15,opt,name=extras,proto3" json:"extras,omitempty"`                                    // Additional notification metadata
+	Priority      PRIORITY               `protobuf:"varint,16,opt,name=priority,proto3,enum=notification.v1.PRIORITY" json:"priority,omitempty"` // Delivery priority
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -451,9 +459,10 @@ func (x *Notification) GetPriority() PRIORITY {
 	return PRIORITY_HIGH
 }
 
+// SearchResponse returns notifications matching search criteria.
 type SearchResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*Notification        `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Data          []*Notification        `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"` // List of matching notifications
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -495,9 +504,10 @@ func (x *SearchResponse) GetData() []*Notification {
 	return nil
 }
 
+// SendRequest queues one or more notifications for delivery.
 type SendRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*Notification        `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Data          []*Notification        `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"` // Notifications to queue
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -539,9 +549,10 @@ func (x *SendRequest) GetData() []*Notification {
 	return nil
 }
 
+// SendResponse returns the status of queued notifications.
 type SendResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*v1.StatusResponse   `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Data          []*v1.StatusResponse   `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"` // Status for each queued notification
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -583,10 +594,12 @@ func (x *SendResponse) GetData() []*v1.StatusResponse {
 	return nil
 }
 
+// ReleaseRequest releases queued notifications for immediate delivery.
+// Used for batch processing where notifications are queued first, then released together.
 type ReleaseRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            []string               `protobuf:"bytes,1,rep,name=id,proto3" json:"id,omitempty"`
-	Comment       string                 `protobuf:"bytes,2,opt,name=comment,proto3" json:"comment,omitempty"`
+	Id            []string               `protobuf:"bytes,1,rep,name=id,proto3" json:"id,omitempty"`           // List of notification IDs to release
+	Comment       string                 `protobuf:"bytes,2,opt,name=comment,proto3" json:"comment,omitempty"` // Optional comment for audit trail
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -635,9 +648,10 @@ func (x *ReleaseRequest) GetComment() string {
 	return ""
 }
 
+// ReleaseResponse returns the status of released notifications.
 type ReleaseResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*v1.StatusResponse   `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Data          []*v1.StatusResponse   `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"` // Status for each released notification
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -679,9 +693,11 @@ func (x *ReleaseResponse) GetData() []*v1.StatusResponse {
 	return nil
 }
 
+// ReceiveRequest acknowledges receipt of notifications by the client.
+// Used for tracking delivery confirmation.
 type ReceiveRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*Notification        `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Data          []*Notification        `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"` // Notifications being acknowledged
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -723,9 +739,10 @@ func (x *ReceiveRequest) GetData() []*Notification {
 	return nil
 }
 
+// ReceiveResponse returns the status of acknowledged notifications.
 type ReceiveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*v1.StatusResponse   `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Data          []*v1.StatusResponse   `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"` // Status for each acknowledged notification
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -767,12 +784,13 @@ func (x *ReceiveResponse) GetData() []*v1.StatusResponse {
 	return nil
 }
 
+// TemplateSearchRequest searches for notification templates.
 type TemplateSearchRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
-	LanguageCode  string                 `protobuf:"bytes,2,opt,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"`
-	Page          int64                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	Count         int32                  `protobuf:"varint,4,opt,name=count,proto3" json:"count,omitempty"`
+	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`                                   // Search query (template name, content, etc.)
+	LanguageCode  string                 `protobuf:"bytes,2,opt,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"` // Filter by language code
+	Page          int64                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`                                    // Page number for pagination
+	Count         int32                  `protobuf:"varint,4,opt,name=count,proto3" json:"count,omitempty"`                                  // Number of results per page
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -835,9 +853,10 @@ func (x *TemplateSearchRequest) GetCount() int32 {
 	return 0
 }
 
+// TemplateSearchResponse returns matching templates.
 type TemplateSearchResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*Template            `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Data          []*Template            `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"` // List of matching templates
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -879,12 +898,13 @@ func (x *TemplateSearchResponse) GetData() []*Template {
 	return nil
 }
 
+// TemplateSaveRequest creates or updates a notification template.
 type TemplateSaveRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	LanguageCode  string                 `protobuf:"bytes,2,opt,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"`
-	Data          *structpb.Struct       `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
-	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`                                     // Template name
+	LanguageCode  string                 `protobuf:"bytes,2,opt,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"` // Language code for the template
+	Data          *structpb.Struct       `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`                                     // Template content and configuration
+	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`                                   // Additional template metadata
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -947,9 +967,10 @@ func (x *TemplateSaveRequest) GetExtra() *structpb.Struct {
 	return nil
 }
 
+// TemplateSaveResponse returns the saved template.
 type TemplateSaveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *Template              `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Data          *Template              `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"` // The saved template
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -995,7 +1016,7 @@ var File_notification_v1_notification_proto protoreflect.FileDescriptor
 
 const file_notification_v1_notification_proto_rawDesc = "" +
 	"\n" +
-	"\"notification/v1/notification.proto\x12\x0fnotification.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x91\x01\n" +
+	"\"notification/v1/notification.proto\x12\x0fnotification.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a$gnostic/openapi/v3/annotations.proto\"\x91\x01\n" +
 	"\bLanguage\x12.\n" +
 	"\x02id\x18\x01 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
@@ -1060,25 +1081,33 @@ const file_notification_v1_notification_proto_rawDesc = "" +
 	"\bPRIORITY\x12\b\n" +
 	"\x04HIGH\x10\x00\x12\a\n" +
 	"\x03LOW\x10\x01\x12\f\n" +
-	"\bVERY_LOW\x10\x022\xc4\x06\n" +
-	"\x13NotificationService\x12W\n" +
-	"\x04Send\x12\x1c.notification.v1.SendRequest\x1a\x1d.notification.v1.SendResponse\"\x10\x82\xd3\xe4\x93\x02\n" +
-	":\x01*\"\x05/send0\x01\x12m\n" +
-	"\aRelease\x12\x1f.notification.v1.ReleaseRequest\x1a .notification.v1.ReleaseResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/send/release/{id}0\x01\x12c\n" +
-	"\aReceive\x12\x1f.notification.v1.ReceiveRequest\x1a .notification.v1.ReceiveResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/receive0\x01\x12V\n" +
-	"\x06Search\x12\x18.common.v1.SearchRequest\x1a\x1f.notification.v1.SearchResponse\"\x0f\x82\xd3\xe4\x93\x02\t\x12\a/search0\x01\x12S\n" +
-	"\x06Status\x12\x18.common.v1.StatusRequest\x1a\x19.common.v1.StatusResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/status/{id}\x12h\n" +
-	"\fStatusUpdate\x12\x1e.common.v1.StatusUpdateRequest\x1a\x1f.common.v1.StatusUpdateResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*2\f/status/{id}\x12v\n" +
-	"\x0eTemplateSearch\x12&.notification.v1.TemplateSearchRequest\x1a'.notification.v1.TemplateSearchResponse\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/template0\x01\x12q\n" +
-	"\fTemplateSave\x12$.notification.v1.TemplateSaveRequest\x1a%.notification.v1.TemplateSaveResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/templateB\xed\x03\x92A\x87\x02\x12t\n" +
-	"\x14Notification Service\"W\n" +
-	"\x10Ant Investor Ltd\x12-https://github.com/antinvestor/service-lostid\x1a\x14info@antinvestor.com2\x031.0*\x02\x01\x022\x10application/json:\x10application/jsonZY\n" +
-	"W\n" +
-	"\x06bearer\x12M\b\x02\x128Authentication token, prefixed by Bearer: Bearer <token>\x1a\rAuthorization \x02b\f\n" +
+	"\bVERY_LOW\x10\x022\x8e\x14\n" +
+	"\x13NotificationService\x12\xc7\x02\n" +
+	"\x04Send\x12\x1c.notification.v1.SendRequest\x1a\x1d.notification.v1.SendResponse\"\xff\x01\xbaG\xfb\x01\n" +
+	"\rNotifications\x12 Queue notifications for delivery\x1a\xb4\x01Queues one or more notifications for delivery. Notifications can be configured to auto-release or require manual release via the Release RPC. Supports batch queuing for efficiency.*\x11sendNotifications0\x01\x12\xdf\x02\n" +
+	"\aRelease\x12\x1f.notification.v1.ReleaseRequest\x1a .notification.v1.ReleaseResponse\"\x8e\x02\xbaG\x8a\x02\n" +
+	"\rNotifications\x12\x1cRelease queued notifications\x1a\xc4\x01Releases queued notifications for immediate delivery. Used for batch processing scenarios where notifications are queued first and released together. Returns delivery status for each notification.*\x14releaseNotifications0\x01\x12\xa3\x02\n" +
+	"\aReceive\x12\x1f.notification.v1.ReceiveRequest\x1a .notification.v1.ReceiveResponse\"\xd2\x01\xbaG\xce\x01\n" +
+	"\rNotifications\x12 Acknowledge notification receipt\x1a\x84\x01Acknowledges receipt of notifications by the client. Used for tracking delivery confirmation, read receipts, and engagement metrics.*\x14receiveNotifications0\x01\x12\xb1\x02\n" +
+	"\x06Search\x12\x18.common.v1.SearchRequest\x1a\x1f.notification.v1.SearchResponse\"\xe9\x01\xbaG\xe5\x01\n" +
+	"\rNotifications\x12\x14Search notifications\x1a\xa8\x01Searches for notifications matching specified criteria including date range, type, status, recipient, and custom properties. Returns a stream of matching notifications.*\x13searchNotifications0\x01\x12\x97\x02\n" +
+	"\x06Status\x12\x18.common.v1.StatusRequest\x1a\x19.common.v1.StatusResponse\"\xd7\x01\xbaG\xd3\x01\n" +
+	"\rNotifications\x12\x17Get notification status\x1a\x91\x01Retrieves the current status of a notification including delivery state, timestamps, and error information if the notification failed to deliver.*\x15getNotificationStatus\x12\xbe\x02\n" +
+	"\fStatusUpdate\x12\x1e.common.v1.StatusUpdateRequest\x1a\x1f.common.v1.StatusUpdateResponse\"\xec\x01\xbaG\xe8\x01\n" +
+	"\rNotifications\x12\x1aUpdate notification status\x1a\xa0\x01Updates the status of a notification. Typically used by delivery workers to update notification state during processing (queued, in-process, delivered, failed).*\x18updateNotificationStatus\x12\xc3\x02\n" +
+	"\x0eTemplateSearch\x12&.notification.v1.TemplateSearchRequest\x1a'.notification.v1.TemplateSearchResponse\"\xdd\x01\xbaG\xd9\x01\n" +
+	"\tTemplates\x12\x1dSearch notification templates\x1a\x9b\x01Searches for notification templates matching specified criteria including template name, language, and content. Used for template management and selection.*\x0fsearchTemplates0\x01\x12\xcf\x02\n" +
+	"\fTemplateSave\x12$.notification.v1.TemplateSaveRequest\x1a%.notification.v1.TemplateSaveResponse\"\xf1\x01\xbaG\xed\x01\n" +
+	"\tTemplates\x12\x19Create or update template\x1a\xb6\x01Creates or updates a notification template. Templates enable consistent, reusable notification formatting with support for multiple languages and channels (email, SMS, push, in-app).*\fsaveTemplateB\xfb\x06\xbaG\xa2\x05\x12\xf6\x04\n" +
+	"\x14Notification Service\x12\xab\x03The Notification Service provides multi-channel notification delivery capabilities including email, SMS, push notifications, and in-app messaging. It supports templated notifications with localization, priority-based delivery, and batch processing through queue-and-release mechanisms. The service enables applications to send transactional and marketing notifications with tracking, status updates, and delivery confirmations.\"]\n" +
+	"\x10Ant Investor Ltd\x123https://github.com/antinvestor/service-notification\x1a\x14info@antinvestor.com*I\n" +
+	"\x0eApache License\x127https://github.com/antinvestor/apis/blob/master/LICENSE2\x06v1.0.0*':%\n" +
+	"#\n" +
 	"\n" +
-	"\n" +
-	"\x06bearer\x12\x00\n" +
-	"$com.antinvestor.apis.notification.v1B\x11NotificationProtoP\x01ZJgithub.com/antinvestor/apis/go/notification/notification/v1;notificationv1\xa2\x02\x03NXX\xaa\x02\x0fNotification.V1\xca\x02\x0fNotification\\V1\xe2\x02\x1bNotification\\V1\\GPBMetadata\xea\x02\x10Notification::V1b\x06proto3"
+	"BearerAuth\x12\x15\n" +
+	"\x13\n" +
+	"\x04http*\x06bearer2\x03JWT\n" +
+	"$com.antinvestor.apis.notification.v1B\x11NotificationProtoP\x01Z=github.com/antinvestor/apis/go/notification/v1;notificationv1\xa2\x02\x03NXX\xaa\x02\x0fNotification.V1\xca\x02\x0fNotification\\V1\xe2\x02\x1bNotification\\V1\\GPBMetadata\xea\x02\x10Notification::V1b\x06proto3"
 
 var (
 	file_notification_v1_notification_proto_rawDescOnce sync.Once

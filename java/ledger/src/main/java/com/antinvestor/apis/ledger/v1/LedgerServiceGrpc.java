@@ -18,7 +18,8 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  * <pre>
- * The ledger service definition.
+ * LedgerService provides double-entry bookkeeping and financial accounting.
+ * All RPCs require authentication via Bearer token.
  * </pre>
  */
 @io.grpc.stub.annotations.GrpcGenerated
@@ -431,14 +432,16 @@ public final class LedgerServiceGrpc {
 
   /**
    * <pre>
-   * The ledger service definition.
+   * LedgerService provides double-entry bookkeeping and financial accounting.
+   * All RPCs require authentication via Bearer token.
    * </pre>
    */
   public interface AsyncService {
 
     /**
      * <pre>
-     * Searches for an ledger based on details
+     * SearchLedgers finds ledgers in the chart of accounts.
+     * Supports filtering by type, parent, and custom properties.
      * </pre>
      */
     default void searchLedgers(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -448,7 +451,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new ledger based on supplied data
+     * CreateLedger creates a new ledger in the chart of accounts.
+     * Ledgers can be hierarchical with parent-child relationships.
      * </pre>
      */
     default void createLedger(com.antinvestor.apis.ledger.v1.Ledger request,
@@ -458,7 +462,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates the data component of the ledger.
+     * UpdateLedger updates an existing ledger's metadata.
+     * The ledger type and reference cannot be changed.
      * </pre>
      */
     default void updateLedger(com.antinvestor.apis.ledger.v1.Ledger request,
@@ -468,7 +473,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for an account based on details
+     * SearchAccounts finds accounts matching specified criteria.
+     * Supports filtering by ledger, balance range, and custom properties.
      * </pre>
      */
     default void searchAccounts(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -478,7 +484,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new account based on supplied data
+     * CreateAccount creates a new account within a ledger.
+     * Each account tracks balances and transaction history.
      * </pre>
      */
     default void createAccount(com.antinvestor.apis.ledger.v1.Account request,
@@ -488,7 +495,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates the data component of the account.
+     * UpdateAccount updates an existing account's metadata.
+     * Balances are updated through transactions, not directly.
      * </pre>
      */
     default void updateAccount(com.antinvestor.apis.ledger.v1.Account request,
@@ -498,7 +506,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for a transaction based on details
+     * SearchTransactions finds transactions matching specified criteria.
+     * Supports filtering by date range, account, currency, and status.
      * </pre>
      */
     default void searchTransactions(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -508,7 +517,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new transaction
+     * CreateTransaction creates a new double-entry transaction.
+     * All entries must be balanced (sum of debits = sum of credits).
      * </pre>
      */
     default void createTransaction(com.antinvestor.apis.ledger.v1.Transaction request,
@@ -518,7 +528,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Reverses a transaction by creating a new one with inverted entries
+     * ReverseTransaction reverses a transaction by creating offsetting entries.
+     * Creates a new REVERSAL transaction that negates the original.
      * </pre>
      */
     default void reverseTransaction(com.antinvestor.apis.ledger.v1.Transaction request,
@@ -528,7 +539,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates a transaction's details
+     * UpdateTransaction updates a transaction's metadata.
+     * Entries and amounts cannot be changed after creation.
      * </pre>
      */
     default void updateTransaction(com.antinvestor.apis.ledger.v1.Transaction request,
@@ -538,7 +550,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for entries matching the search details
+     * SearchTransactionEntries finds individual transaction entries.
+     * Useful for account statement generation and reconciliation.
      * </pre>
      */
     default void searchTransactionEntries(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -550,7 +563,8 @@ public final class LedgerServiceGrpc {
   /**
    * Base class for the server implementation of the service LedgerService.
    * <pre>
-   * The ledger service definition.
+   * LedgerService provides double-entry bookkeeping and financial accounting.
+   * All RPCs require authentication via Bearer token.
    * </pre>
    */
   public static abstract class LedgerServiceImplBase
@@ -564,7 +578,8 @@ public final class LedgerServiceGrpc {
   /**
    * A stub to allow clients to do asynchronous rpc calls to service LedgerService.
    * <pre>
-   * The ledger service definition.
+   * LedgerService provides double-entry bookkeeping and financial accounting.
+   * All RPCs require authentication via Bearer token.
    * </pre>
    */
   public static final class LedgerServiceStub
@@ -582,7 +597,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for an ledger based on details
+     * SearchLedgers finds ledgers in the chart of accounts.
+     * Supports filtering by type, parent, and custom properties.
      * </pre>
      */
     public void searchLedgers(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -593,7 +609,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new ledger based on supplied data
+     * CreateLedger creates a new ledger in the chart of accounts.
+     * Ledgers can be hierarchical with parent-child relationships.
      * </pre>
      */
     public void createLedger(com.antinvestor.apis.ledger.v1.Ledger request,
@@ -604,7 +621,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates the data component of the ledger.
+     * UpdateLedger updates an existing ledger's metadata.
+     * The ledger type and reference cannot be changed.
      * </pre>
      */
     public void updateLedger(com.antinvestor.apis.ledger.v1.Ledger request,
@@ -615,7 +633,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for an account based on details
+     * SearchAccounts finds accounts matching specified criteria.
+     * Supports filtering by ledger, balance range, and custom properties.
      * </pre>
      */
     public void searchAccounts(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -626,7 +645,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new account based on supplied data
+     * CreateAccount creates a new account within a ledger.
+     * Each account tracks balances and transaction history.
      * </pre>
      */
     public void createAccount(com.antinvestor.apis.ledger.v1.Account request,
@@ -637,7 +657,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates the data component of the account.
+     * UpdateAccount updates an existing account's metadata.
+     * Balances are updated through transactions, not directly.
      * </pre>
      */
     public void updateAccount(com.antinvestor.apis.ledger.v1.Account request,
@@ -648,7 +669,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for a transaction based on details
+     * SearchTransactions finds transactions matching specified criteria.
+     * Supports filtering by date range, account, currency, and status.
      * </pre>
      */
     public void searchTransactions(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -659,7 +681,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new transaction
+     * CreateTransaction creates a new double-entry transaction.
+     * All entries must be balanced (sum of debits = sum of credits).
      * </pre>
      */
     public void createTransaction(com.antinvestor.apis.ledger.v1.Transaction request,
@@ -670,7 +693,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Reverses a transaction by creating a new one with inverted entries
+     * ReverseTransaction reverses a transaction by creating offsetting entries.
+     * Creates a new REVERSAL transaction that negates the original.
      * </pre>
      */
     public void reverseTransaction(com.antinvestor.apis.ledger.v1.Transaction request,
@@ -681,7 +705,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates a transaction's details
+     * UpdateTransaction updates a transaction's metadata.
+     * Entries and amounts cannot be changed after creation.
      * </pre>
      */
     public void updateTransaction(com.antinvestor.apis.ledger.v1.Transaction request,
@@ -692,7 +717,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for entries matching the search details
+     * SearchTransactionEntries finds individual transaction entries.
+     * Useful for account statement generation and reconciliation.
      * </pre>
      */
     public void searchTransactionEntries(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -705,7 +731,8 @@ public final class LedgerServiceGrpc {
   /**
    * A stub to allow clients to do synchronous rpc calls to service LedgerService.
    * <pre>
-   * The ledger service definition.
+   * LedgerService provides double-entry bookkeeping and financial accounting.
+   * All RPCs require authentication via Bearer token.
    * </pre>
    */
   public static final class LedgerServiceBlockingV2Stub
@@ -723,7 +750,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for an ledger based on details
+     * SearchLedgers finds ledgers in the chart of accounts.
+     * Supports filtering by type, parent, and custom properties.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -735,7 +763,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new ledger based on supplied data
+     * CreateLedger creates a new ledger in the chart of accounts.
+     * Ledgers can be hierarchical with parent-child relationships.
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Ledger createLedger(com.antinvestor.apis.ledger.v1.Ledger request) throws io.grpc.StatusException {
@@ -745,7 +774,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates the data component of the ledger.
+     * UpdateLedger updates an existing ledger's metadata.
+     * The ledger type and reference cannot be changed.
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Ledger updateLedger(com.antinvestor.apis.ledger.v1.Ledger request) throws io.grpc.StatusException {
@@ -755,7 +785,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for an account based on details
+     * SearchAccounts finds accounts matching specified criteria.
+     * Supports filtering by ledger, balance range, and custom properties.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -767,7 +798,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new account based on supplied data
+     * CreateAccount creates a new account within a ledger.
+     * Each account tracks balances and transaction history.
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Account createAccount(com.antinvestor.apis.ledger.v1.Account request) throws io.grpc.StatusException {
@@ -777,7 +809,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates the data component of the account.
+     * UpdateAccount updates an existing account's metadata.
+     * Balances are updated through transactions, not directly.
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Account updateAccount(com.antinvestor.apis.ledger.v1.Account request) throws io.grpc.StatusException {
@@ -787,7 +820,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for a transaction based on details
+     * SearchTransactions finds transactions matching specified criteria.
+     * Supports filtering by date range, account, currency, and status.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -799,7 +833,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new transaction
+     * CreateTransaction creates a new double-entry transaction.
+     * All entries must be balanced (sum of debits = sum of credits).
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Transaction createTransaction(com.antinvestor.apis.ledger.v1.Transaction request) throws io.grpc.StatusException {
@@ -809,7 +844,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Reverses a transaction by creating a new one with inverted entries
+     * ReverseTransaction reverses a transaction by creating offsetting entries.
+     * Creates a new REVERSAL transaction that negates the original.
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Transaction reverseTransaction(com.antinvestor.apis.ledger.v1.Transaction request) throws io.grpc.StatusException {
@@ -819,7 +855,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates a transaction's details
+     * UpdateTransaction updates a transaction's metadata.
+     * Entries and amounts cannot be changed after creation.
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Transaction updateTransaction(com.antinvestor.apis.ledger.v1.Transaction request) throws io.grpc.StatusException {
@@ -829,7 +866,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for entries matching the search details
+     * SearchTransactionEntries finds individual transaction entries.
+     * Useful for account statement generation and reconciliation.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -843,7 +881,8 @@ public final class LedgerServiceGrpc {
   /**
    * A stub to allow clients to do limited synchronous rpc calls to service LedgerService.
    * <pre>
-   * The ledger service definition.
+   * LedgerService provides double-entry bookkeeping and financial accounting.
+   * All RPCs require authentication via Bearer token.
    * </pre>
    */
   public static final class LedgerServiceBlockingStub
@@ -861,7 +900,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for an ledger based on details
+     * SearchLedgers finds ledgers in the chart of accounts.
+     * Supports filtering by type, parent, and custom properties.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.ledger.v1.Ledger> searchLedgers(
@@ -872,7 +912,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new ledger based on supplied data
+     * CreateLedger creates a new ledger in the chart of accounts.
+     * Ledgers can be hierarchical with parent-child relationships.
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Ledger createLedger(com.antinvestor.apis.ledger.v1.Ledger request) {
@@ -882,7 +923,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates the data component of the ledger.
+     * UpdateLedger updates an existing ledger's metadata.
+     * The ledger type and reference cannot be changed.
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Ledger updateLedger(com.antinvestor.apis.ledger.v1.Ledger request) {
@@ -892,7 +934,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for an account based on details
+     * SearchAccounts finds accounts matching specified criteria.
+     * Supports filtering by ledger, balance range, and custom properties.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.ledger.v1.Account> searchAccounts(
@@ -903,7 +946,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new account based on supplied data
+     * CreateAccount creates a new account within a ledger.
+     * Each account tracks balances and transaction history.
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Account createAccount(com.antinvestor.apis.ledger.v1.Account request) {
@@ -913,7 +957,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates the data component of the account.
+     * UpdateAccount updates an existing account's metadata.
+     * Balances are updated through transactions, not directly.
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Account updateAccount(com.antinvestor.apis.ledger.v1.Account request) {
@@ -923,7 +968,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for a transaction based on details
+     * SearchTransactions finds transactions matching specified criteria.
+     * Supports filtering by date range, account, currency, and status.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.ledger.v1.Transaction> searchTransactions(
@@ -934,7 +980,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new transaction
+     * CreateTransaction creates a new double-entry transaction.
+     * All entries must be balanced (sum of debits = sum of credits).
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Transaction createTransaction(com.antinvestor.apis.ledger.v1.Transaction request) {
@@ -944,7 +991,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Reverses a transaction by creating a new one with inverted entries
+     * ReverseTransaction reverses a transaction by creating offsetting entries.
+     * Creates a new REVERSAL transaction that negates the original.
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Transaction reverseTransaction(com.antinvestor.apis.ledger.v1.Transaction request) {
@@ -954,7 +1002,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates a transaction's details
+     * UpdateTransaction updates a transaction's metadata.
+     * Entries and amounts cannot be changed after creation.
      * </pre>
      */
     public com.antinvestor.apis.ledger.v1.Transaction updateTransaction(com.antinvestor.apis.ledger.v1.Transaction request) {
@@ -964,7 +1013,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Searches for entries matching the search details
+     * SearchTransactionEntries finds individual transaction entries.
+     * Useful for account statement generation and reconciliation.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.ledger.v1.TransactionEntry> searchTransactionEntries(
@@ -977,7 +1027,8 @@ public final class LedgerServiceGrpc {
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service LedgerService.
    * <pre>
-   * The ledger service definition.
+   * LedgerService provides double-entry bookkeeping and financial accounting.
+   * All RPCs require authentication via Bearer token.
    * </pre>
    */
   public static final class LedgerServiceFutureStub
@@ -995,7 +1046,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new ledger based on supplied data
+     * CreateLedger creates a new ledger in the chart of accounts.
+     * Ledgers can be hierarchical with parent-child relationships.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.ledger.v1.Ledger> createLedger(
@@ -1006,7 +1058,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates the data component of the ledger.
+     * UpdateLedger updates an existing ledger's metadata.
+     * The ledger type and reference cannot be changed.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.ledger.v1.Ledger> updateLedger(
@@ -1017,7 +1070,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new account based on supplied data
+     * CreateAccount creates a new account within a ledger.
+     * Each account tracks balances and transaction history.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.ledger.v1.Account> createAccount(
@@ -1028,7 +1082,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates the data component of the account.
+     * UpdateAccount updates an existing account's metadata.
+     * Balances are updated through transactions, not directly.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.ledger.v1.Account> updateAccount(
@@ -1039,7 +1094,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new transaction
+     * CreateTransaction creates a new double-entry transaction.
+     * All entries must be balanced (sum of debits = sum of credits).
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.ledger.v1.Transaction> createTransaction(
@@ -1050,7 +1106,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Reverses a transaction by creating a new one with inverted entries
+     * ReverseTransaction reverses a transaction by creating offsetting entries.
+     * Creates a new REVERSAL transaction that negates the original.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.ledger.v1.Transaction> reverseTransaction(
@@ -1061,7 +1118,8 @@ public final class LedgerServiceGrpc {
 
     /**
      * <pre>
-     * Updates a transaction's details
+     * UpdateTransaction updates a transaction's metadata.
+     * Entries and amounts cannot be changed after creation.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.ledger.v1.Transaction> updateTransaction(

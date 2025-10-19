@@ -51,29 +51,41 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// The ledger service definition.
+// LedgerService provides double-entry bookkeeping and financial accounting.
+// All RPCs require authentication via Bearer token.
 type LedgerServiceClient interface {
-	// Searches for an ledger based on details
+	// SearchLedgers finds ledgers in the chart of accounts.
+	// Supports filtering by type, parent, and custom properties.
 	SearchLedgers(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Ledger], error)
-	// Creates a new ledger based on supplied data
+	// CreateLedger creates a new ledger in the chart of accounts.
+	// Ledgers can be hierarchical with parent-child relationships.
 	CreateLedger(ctx context.Context, in *Ledger, opts ...grpc.CallOption) (*Ledger, error)
-	// Updates the data component of the ledger.
+	// UpdateLedger updates an existing ledger's metadata.
+	// The ledger type and reference cannot be changed.
 	UpdateLedger(ctx context.Context, in *Ledger, opts ...grpc.CallOption) (*Ledger, error)
-	// Searches for an account based on details
+	// SearchAccounts finds accounts matching specified criteria.
+	// Supports filtering by ledger, balance range, and custom properties.
 	SearchAccounts(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Account], error)
-	// Creates a new account based on supplied data
+	// CreateAccount creates a new account within a ledger.
+	// Each account tracks balances and transaction history.
 	CreateAccount(ctx context.Context, in *Account, opts ...grpc.CallOption) (*Account, error)
-	// Updates the data component of the account.
+	// UpdateAccount updates an existing account's metadata.
+	// Balances are updated through transactions, not directly.
 	UpdateAccount(ctx context.Context, in *Account, opts ...grpc.CallOption) (*Account, error)
-	// Searches for a transaction based on details
+	// SearchTransactions finds transactions matching specified criteria.
+	// Supports filtering by date range, account, currency, and status.
 	SearchTransactions(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Transaction], error)
-	// Creates a new transaction
+	// CreateTransaction creates a new double-entry transaction.
+	// All entries must be balanced (sum of debits = sum of credits).
 	CreateTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Transaction, error)
-	// Reverses a transaction by creating a new one with inverted entries
+	// ReverseTransaction reverses a transaction by creating offsetting entries.
+	// Creates a new REVERSAL transaction that negates the original.
 	ReverseTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Transaction, error)
-	// Updates a transaction's details
+	// UpdateTransaction updates a transaction's metadata.
+	// Entries and amounts cannot be changed after creation.
 	UpdateTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Transaction, error)
-	// Searches for entries matching the search details
+	// SearchTransactionEntries finds individual transaction entries.
+	// Useful for account statement generation and reconciliation.
 	SearchTransactionEntries(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TransactionEntry], error)
 }
 
@@ -235,29 +247,41 @@ type LedgerService_SearchTransactionEntriesClient = grpc.ServerStreamingClient[T
 // All implementations must embed UnimplementedLedgerServiceServer
 // for forward compatibility.
 //
-// The ledger service definition.
+// LedgerService provides double-entry bookkeeping and financial accounting.
+// All RPCs require authentication via Bearer token.
 type LedgerServiceServer interface {
-	// Searches for an ledger based on details
+	// SearchLedgers finds ledgers in the chart of accounts.
+	// Supports filtering by type, parent, and custom properties.
 	SearchLedgers(*v1.SearchRequest, grpc.ServerStreamingServer[Ledger]) error
-	// Creates a new ledger based on supplied data
+	// CreateLedger creates a new ledger in the chart of accounts.
+	// Ledgers can be hierarchical with parent-child relationships.
 	CreateLedger(context.Context, *Ledger) (*Ledger, error)
-	// Updates the data component of the ledger.
+	// UpdateLedger updates an existing ledger's metadata.
+	// The ledger type and reference cannot be changed.
 	UpdateLedger(context.Context, *Ledger) (*Ledger, error)
-	// Searches for an account based on details
+	// SearchAccounts finds accounts matching specified criteria.
+	// Supports filtering by ledger, balance range, and custom properties.
 	SearchAccounts(*v1.SearchRequest, grpc.ServerStreamingServer[Account]) error
-	// Creates a new account based on supplied data
+	// CreateAccount creates a new account within a ledger.
+	// Each account tracks balances and transaction history.
 	CreateAccount(context.Context, *Account) (*Account, error)
-	// Updates the data component of the account.
+	// UpdateAccount updates an existing account's metadata.
+	// Balances are updated through transactions, not directly.
 	UpdateAccount(context.Context, *Account) (*Account, error)
-	// Searches for a transaction based on details
+	// SearchTransactions finds transactions matching specified criteria.
+	// Supports filtering by date range, account, currency, and status.
 	SearchTransactions(*v1.SearchRequest, grpc.ServerStreamingServer[Transaction]) error
-	// Creates a new transaction
+	// CreateTransaction creates a new double-entry transaction.
+	// All entries must be balanced (sum of debits = sum of credits).
 	CreateTransaction(context.Context, *Transaction) (*Transaction, error)
-	// Reverses a transaction by creating a new one with inverted entries
+	// ReverseTransaction reverses a transaction by creating offsetting entries.
+	// Creates a new REVERSAL transaction that negates the original.
 	ReverseTransaction(context.Context, *Transaction) (*Transaction, error)
-	// Updates a transaction's details
+	// UpdateTransaction updates a transaction's metadata.
+	// Entries and amounts cannot be changed after creation.
 	UpdateTransaction(context.Context, *Transaction) (*Transaction, error)
-	// Searches for entries matching the search details
+	// SearchTransactionEntries finds individual transaction entries.
+	// Useful for account statement generation and reconciliation.
 	SearchTransactionEntries(*v1.SearchRequest, grpc.ServerStreamingServer[TransactionEntry]) error
 	mustEmbedUnimplementedLedgerServiceServer()
 }
