@@ -16,50 +16,78 @@ syntax = "proto3";
 
 package lostid.v1;
 
+// -----------------------------------------------------
+// Core notes (normative):
+// - Lost ID Service manages lost and found identification documents
+// - Supports collectible item registration with image uploads
+// - Tracks search requests and matching progress
+// - Maintains transaction history for rewards and fees
+// - All timestamps are RFC3339 / google.protobuf.Timestamp
+// -----------------------------------------------------
+
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
-import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/type/interval.proto";
 import "google/type/money.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/lostid/v1;lostidv1";
 option java_multiple_files = true;
 option java_package = "lostidv1";
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+
+option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Lost ID Service"
-    version: "1.0"
+    title: "Lost ID Service";
+    version: "v1.0.0";
+    description: "The Lost ID Service provides a platform for managing lost and found identification documents. It enables users to register found items (collectibles) with images, search for lost items, track matching progress, and manage financial transactions related to rewards and service fees. The service facilitates reuniting people with their lost identification documents through a secure, tracked process.";
     contact: {
-      name: "Ant Investor Ltd"
-      url: "https://github.com/antinvestor/service-lostid"
-      email: "info@antinvestor.com"
+      name: "Ant Investor Ltd";
+      url: "https://github.com/antinvestor/service-lostid";
+      email: "info@antinvestor.com";
+    }
+    license: {
+      name: "Apache License";
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
     }
   }
-
-  schemes: HTTP
-  schemes: HTTPS
-  consumes: "application/json"
-  produces: "application/json"
-
-  security_definitions: {
-    security: {
-      key: "bearer"
-      value: {
-        type: TYPE_API_KEY
-        in: IN_HEADER
-        name: "Authorization"
-        description: "Authentication token, prefixed by Bearer: Bearer <token>"
-      }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BearerAuth";
+          value: {
+            security_scheme: {
+              type: "http";
+              scheme: "bearer";
+              bearer_format: "JWT";
+            }
+          }
+        }
+      ]
     }
-  }
-  security: {
-    security_requirement: {key: "bearer"}
   }
 };
 
-//Request to log a Collectible card
+// -----------------------------------------------------
+// Enumerations
+// -----------------------------------------------------
+
+// ItemType defines the types of items tracked in the system.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum ItemType {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  COLLECTIBLE = 0;  // Found item registered in the system
+  SEARCH = 1;       // Search request for a lost item
+  TRANSACTION = 2;  // Financial transaction (reward, fee)
+}
+
+// -----------------------------------------------------
+// Collectible Messages
+// -----------------------------------------------------
+
+// CollectibleRequest registers a found identification document.
+// Supports up to 5 images of the found item.
 message CollectibleRequest {
   repeated string file_id = 1 [
     (buf.validate.field).repeated.min_items = 1,
@@ -71,134 +99,193 @@ message CollectibleRequest {
         pattern: "[0-9a-z_-]{3,20}"
       }
     }
-  ];
-  google.protobuf.Struct properties = 2;
+  ];  // File IDs of uploaded images (1-5 images)
+  google.protobuf.Struct properties = 2;  // Additional item details (type, location found, etc.)
 }
 
+// CollectibleResponse returns the registered collectible item.
 message CollectibleResponse {
-  string id = 1;
-  repeated string file_id = 2;
-  google.protobuf.Struct properties = 3;
-  string state = 4;
+  string id = 1;                          // Unique collectible ID
+  repeated string file_id = 2;            // Associated image file IDs
+  google.protobuf.Struct properties = 3;  // Item properties
+  string state = 4;                       // Current state (registered, matched, claimed, etc.)
 }
 
+// ListCollectibleRequest retrieves collectibles by pagination or time range.
 message ListCollectibleRequest {
   oneof range {
     // either pagination or time interval must be set.
     option (buf.validate.oneof).required = true;
 
-    common.v1.Pagination pagination = 1;
-    google.type.Interval interval = 2;
+    common.v1.Pagination pagination = 1;  // Offset-based pagination
+    google.type.Interval interval = 2;    // Time range filter
   }
 }
 
+// ListCollectibleResponse returns a list of collectibles.
 message ListCollectibleResponse {
-  repeated CollectibleResponse data = 1;
+  repeated CollectibleResponse data = 1;  // List of collectibles
 }
 
+// -----------------------------------------------------
+// Search Messages
+// -----------------------------------------------------
+
+// SearchResponse returns a search request for a lost item.
 message SearchResponse {
-  string id = 1;
-  string query = 2;
-  google.protobuf.Struct properties = 3;
-  string state = 4;
+  string id = 1;                          // Unique search ID
+  string query = 2;                       // Search query/description
+  google.protobuf.Struct properties = 3;  // Search criteria
+  string state = 4;                       // Current state (active, matched, closed)
 }
 
-// buf:lint:ignore ENUM_VALUE_PREFIX
-enum ItemType {
-  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  COLLECTIBLE = 0;
-  SEARCH = 1;
-  TRANSACTION = 2;
-}
-
-message ProgressRequest {
-  string id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  ItemType type = 2 [(buf.validate.field).enum.defined_only = true];
-}
-
-message TransactionItem {
-  string id = 1;
-  string datetime = 2;
-  bool credit = 3;
-  google.type.Money amount = 4;
-  string description = 5;
-}
-
-message ProgressItem {
-  string id = 1;
-  string datetime = 2;
-  string state = 3;
-  string description = 4;
-}
-
-message ProgressResponse {
-  string id = 1;
-  ItemType type = 2;
-  google.protobuf.Struct properties = 3;
-  string state = 4;
-  repeated ProgressItem items = 5;
-  repeated TransactionItem transactions = 6;
-}
-
+// ListSearchRequest retrieves searches by pagination or time range.
 message ListSearchRequest {
   oneof range {
     // either pagination or time interval must be set.
     option (buf.validate.oneof).required = true;
 
-    common.v1.Pagination pagination = 1;
-    google.type.Interval interval = 2;
+    common.v1.Pagination pagination = 1;  // Offset-based pagination
+    google.type.Interval interval = 2;    // Time range filter
   }
 }
 
+// ListSearchResponse returns a list of searches.
 message ListSearchResponse {
-  repeated SearchResponse data = 1;
+  repeated SearchResponse data = 1;  // List of search requests
 }
 
+// -----------------------------------------------------
+// Progress Tracking Messages
+// -----------------------------------------------------
+
+// ProgressRequest retrieves progress for a collectible or search.
+message ProgressRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];  // Item ID (collectible or search)
+  ItemType type = 2 [(buf.validate.field).enum.defined_only = true];  // Item type
+}
+
+// ProgressItem represents a status update in the item's lifecycle.
+message ProgressItem {
+  string id = 1;          // Progress entry ID
+  string datetime = 2;    // Timestamp of this update (RFC3339)
+  string state = 3;       // State at this point (registered, matched, claimed, etc.)
+  string description = 4; // Human-readable description of the update
+}
+
+// TransactionItem represents a financial transaction.
+message TransactionItem {
+  string id = 1;                // Transaction ID
+  string datetime = 2;          // Transaction timestamp (RFC3339)
+  bool credit = 3;              // True if credit, false if debit
+  google.type.Money amount = 4; // Transaction amount
+  string description = 5;       // Transaction description (reward, fee, etc.)
+}
+
+// ProgressResponse returns the complete progress history for an item.
+message ProgressResponse {
+  string id = 1;                          // Item ID
+  ItemType type = 2;                      // Item type
+  google.protobuf.Struct properties = 3;  // Item properties
+  string state = 4;                       // Current state
+  repeated ProgressItem items = 5;        // Progress history
+  repeated TransactionItem transactions = 6; // Associated financial transactions
+}
+
+// -----------------------------------------------------
+// Transaction Messages
+// -----------------------------------------------------
+
+// ListTransactionRequest retrieves transactions by pagination or time range.
 message ListTransactionRequest {
   oneof range {
     // either pagination or time interval must be set.
     option (buf.validate.oneof).required = true;
 
-    common.v1.Pagination pagination = 1;
-    google.type.Interval interval = 2;
+    common.v1.Pagination pagination = 1;  // Offset-based pagination
+    google.type.Interval interval = 2;    // Time range filter
   }
 }
 
+// ListTransactionResponse returns a list of transactions.
 message ListTransactionResponse {
-  repeated TransactionItem data = 1;
+  repeated TransactionItem data = 1;  // List of transactions
 }
 
+// -----------------------------------------------------
+// Lost ID Service
+// -----------------------------------------------------
+
+// LostIdService manages lost and found identification documents.
+// All RPCs require authentication via Bearer token.
 service LostIdService {
-  // Log a new Collectible request
+  // Collectible registers a found identification document.
+  // Supports up to 5 images of the found item.
   rpc Collectible(CollectibleRequest) returns (CollectibleResponse) {
-    option (google.api.http) = {
-      post: "/collectible"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "registerCollectible"
+      summary: "Register found item"
+      description: "Registers a found identification document in the system. Supports uploading 1-5 images of the found item along with details like location found, item type, and description. The system will attempt to match with active search requests."
+      tags: "Collectibles"
     };
   }
 
+  // ListCollectible retrieves registered collectibles.
+  // Supports pagination or time-based filtering.
   rpc ListCollectible(ListCollectibleRequest) returns (stream ListCollectibleResponse) {
-    option (google.api.http) = {get: "/collectible"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listCollectibles"
+      summary: "List found items"
+      description: "Retrieves a list of registered collectibles (found items). Supports both offset-based pagination and time range filtering. Returns a stream of collectibles."
+      tags: "Collectibles"
+    };
   }
 
-  // Log a new search request
+  // Search creates a search request for a lost item.
+  // The system will attempt to match with registered collectibles.
   rpc Search(common.v1.SearchRequest) returns (SearchResponse) {
-    option (google.api.http) = {get: "/search"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchLostItem"
+      summary: "Search for lost item"
+      description: "Creates a search request for a lost identification document. Provide details like item type, location lost, and description. The system will attempt to match with registered collectibles and notify if a match is found."
+      tags: "Searches"
+    };
   }
 
+  // ListSearch retrieves search requests.
+  // Supports pagination or time-based filtering.
   rpc ListSearch(ListSearchRequest) returns (stream ListSearchResponse) {
-    option (google.api.http) = {get: "/searches"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listSearches"
+      summary: "List search requests"
+      description: "Retrieves a list of search requests for lost items. Supports both offset-based pagination and time range filtering. Returns a stream of search requests."
+      tags: "Searches"
+    };
   }
 
+  // Progress retrieves the complete history for a collectible or search.
+  // Includes status updates and financial transactions.
   rpc Progress(ProgressRequest) returns (ProgressResponse) {
-    option (google.api.http) = {get: "/progress"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getProgress"
+      summary: "Get item progress"
+      description: "Retrieves the complete progress history for a collectible or search request. Includes all status updates (registered, matched, claimed) and associated financial transactions (rewards, fees)."
+      tags: "Progress"
+    };
   }
 
+  // ListTransaction retrieves financial transactions.
+  // Includes rewards paid and service fees charged.
   rpc ListTransaction(ListTransactionRequest) returns (stream ListTransactionResponse) {
-    option (google.api.http) = {get: "/transaction"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listTransactions"
+      summary: "List financial transactions"
+      description: "Retrieves a list of financial transactions including rewards paid to finders and service fees charged. Supports both offset-based pagination and time range filtering."
+      tags: "Transactions"
+    };
   }
 }

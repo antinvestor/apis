@@ -3,12 +3,15 @@ on:
   push:
     tags:
       - "v*.*.*"
+    paths:
+      - 'go/**'
+      - 'proto/**'
 
 jobs:
   create-tag:
     strategy:
       matrix:
-        api_module: [ common,device,ledger,lostid,notification,ocr,partition,payment,profile,property,settings,files ]
+        api_module: [ common,chat,device,ledger,lostid,notification,ocr,partition,payment,profile,property,settings,files ]
 
     runs-on: ubuntu-latest
     steps:

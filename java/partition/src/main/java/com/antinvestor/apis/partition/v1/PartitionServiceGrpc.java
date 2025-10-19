@@ -17,6 +17,10 @@ package com.antinvestor.apis.partition.v1;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
+ * <pre>
+ * PartitionService provides multi-tenancy and data isolation.
+ * All RPCs require authentication via Bearer token.
+ * </pre>
  */
 @io.grpc.stub.annotations.GrpcGenerated
 public final class PartitionServiceGrpc {
@@ -737,12 +741,16 @@ public final class PartitionServiceGrpc {
   }
 
   /**
+   * <pre>
+   * PartitionService provides multi-tenancy and data isolation.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public interface AsyncService {
 
     /**
      * <pre>
-     * Get a tenant in the system matching the id
+     * GetTenant retrieves a tenant by ID.
      * </pre>
      */
     default void getTenant(com.antinvestor.apis.partition.v1.GetTenantRequest request,
@@ -752,7 +760,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List all tenants in the system matching the query in some way
+     * ListTenant retrieves all tenants matching criteria.
      * </pre>
      */
     default void listTenant(com.antinvestor.apis.partition.v1.ListTenantRequest request,
@@ -762,7 +770,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Log a new tenant request
+     * CreateTenant creates a new tenant.
      * </pre>
      */
     default void createTenant(com.antinvestor.apis.partition.v1.CreateTenantRequest request,
@@ -772,7 +780,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Update an existing tenant object
+     * UpdateTenant updates an existing tenant.
      * </pre>
      */
     default void updateTenant(com.antinvestor.apis.partition.v1.UpdateTenantRequest request,
@@ -782,7 +790,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List all partitions in the system matching the query in some way
+     * ListPartition retrieves all partitions matching criteria.
      * </pre>
      */
     default void listPartition(com.antinvestor.apis.partition.v1.ListPartitionRequest request,
@@ -792,7 +800,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Log a new partition request
+     * CreatePartition creates a new partition.
      * </pre>
      */
     default void createPartition(com.antinvestor.apis.partition.v1.CreatePartitionRequest request,
@@ -802,7 +810,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get an existing partition object
+     * GetPartition retrieves a partition by ID.
      * </pre>
      */
     default void getPartition(com.antinvestor.apis.partition.v1.GetPartitionRequest request,
@@ -812,7 +820,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get a partition parents object
+     * GetPartitionParents retrieves the parent hierarchy.
      * </pre>
      */
     default void getPartitionParents(com.antinvestor.apis.partition.v1.GetPartitionParentsRequest request,
@@ -822,7 +830,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Update an existing partition object
+     * UpdatePartition updates an existing partition.
      * </pre>
      */
     default void updatePartition(com.antinvestor.apis.partition.v1.UpdatePartitionRequest request,
@@ -832,7 +840,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Create a partition Role for a particular partition
+     * CreatePartitionRole creates a role within a partition.
      * </pre>
      */
     default void createPartitionRole(com.antinvestor.apis.partition.v1.CreatePartitionRoleRequest request,
@@ -842,7 +850,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List partition roles available for this particular partition
+     * ListPartitionRole retrieves all roles for a partition.
      * </pre>
      */
     default void listPartitionRole(com.antinvestor.apis.partition.v1.ListPartitionRoleRequest request,
@@ -852,7 +860,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Remove a partition role that is not required
+     * RemovePartitionRole deletes a partition role.
      * </pre>
      */
     default void removePartitionRole(com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest request,
@@ -862,7 +870,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new page for access or customization of how a partition looks like
+     * CreatePage creates a custom UI page for a partition.
      * </pre>
      */
     default void createPage(com.antinvestor.apis.partition.v1.CreatePageRequest request,
@@ -872,7 +880,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a new page specific to a partition
+     * GetPage retrieves a custom page.
      * </pre>
      */
     default void getPage(com.antinvestor.apis.partition.v1.GetPageRequest request,
@@ -882,7 +890,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Removes a page from being accessible for a partition
+     * RemovePage deletes a custom page.
      * </pre>
      */
     default void removePage(com.antinvestor.apis.partition.v1.RemovePageRequest request,
@@ -892,7 +900,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Creates a users ability to access a partition
+     * CreateAccess grants a profile access to a partition.
      * </pre>
      */
     default void createAccess(com.antinvestor.apis.partition.v1.CreateAccessRequest request,
@@ -902,7 +910,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a users access to a partition by access id or partition and profile id
+     * GetAccess retrieves an access grant.
      * </pre>
      */
     default void getAccess(com.antinvestor.apis.partition.v1.GetAccessRequest request,
@@ -912,7 +920,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Removes a user's ability to access a partition
+     * RemoveAccess revokes a profile's access to a partition.
      * </pre>
      */
     default void removeAccess(com.antinvestor.apis.partition.v1.RemoveAccessRequest request,
@@ -922,7 +930,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Create an access Role for a particular access
+     * CreateAccessRole assigns a role to an access grant.
      * </pre>
      */
     default void createAccessRole(com.antinvestor.apis.partition.v1.CreateAccessRoleRequest request,
@@ -932,7 +940,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List access roles available for this particular access
+     * ListAccessRole retrieves all roles for an access grant.
      * </pre>
      */
     default void listAccessRole(com.antinvestor.apis.partition.v1.ListAccessRoleRequest request,
@@ -942,7 +950,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Remove an access role that is not required
+     * RemoveAccessRole removes a role from an access grant.
      * </pre>
      */
     default void removeAccessRole(com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest request,
@@ -953,6 +961,10 @@ public final class PartitionServiceGrpc {
 
   /**
    * Base class for the server implementation of the service PartitionService.
+   * <pre>
+   * PartitionService provides multi-tenancy and data isolation.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static abstract class PartitionServiceImplBase
       implements io.grpc.BindableService, AsyncService {
@@ -964,6 +976,10 @@ public final class PartitionServiceGrpc {
 
   /**
    * A stub to allow clients to do asynchronous rpc calls to service PartitionService.
+   * <pre>
+   * PartitionService provides multi-tenancy and data isolation.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class PartitionServiceStub
       extends io.grpc.stub.AbstractAsyncStub<PartitionServiceStub> {
@@ -980,7 +996,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get a tenant in the system matching the id
+     * GetTenant retrieves a tenant by ID.
      * </pre>
      */
     public void getTenant(com.antinvestor.apis.partition.v1.GetTenantRequest request,
@@ -991,7 +1007,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List all tenants in the system matching the query in some way
+     * ListTenant retrieves all tenants matching criteria.
      * </pre>
      */
     public void listTenant(com.antinvestor.apis.partition.v1.ListTenantRequest request,
@@ -1002,7 +1018,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Log a new tenant request
+     * CreateTenant creates a new tenant.
      * </pre>
      */
     public void createTenant(com.antinvestor.apis.partition.v1.CreateTenantRequest request,
@@ -1013,7 +1029,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Update an existing tenant object
+     * UpdateTenant updates an existing tenant.
      * </pre>
      */
     public void updateTenant(com.antinvestor.apis.partition.v1.UpdateTenantRequest request,
@@ -1024,7 +1040,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List all partitions in the system matching the query in some way
+     * ListPartition retrieves all partitions matching criteria.
      * </pre>
      */
     public void listPartition(com.antinvestor.apis.partition.v1.ListPartitionRequest request,
@@ -1035,7 +1051,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Log a new partition request
+     * CreatePartition creates a new partition.
      * </pre>
      */
     public void createPartition(com.antinvestor.apis.partition.v1.CreatePartitionRequest request,
@@ -1046,7 +1062,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get an existing partition object
+     * GetPartition retrieves a partition by ID.
      * </pre>
      */
     public void getPartition(com.antinvestor.apis.partition.v1.GetPartitionRequest request,
@@ -1057,7 +1073,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get a partition parents object
+     * GetPartitionParents retrieves the parent hierarchy.
      * </pre>
      */
     public void getPartitionParents(com.antinvestor.apis.partition.v1.GetPartitionParentsRequest request,
@@ -1068,7 +1084,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Update an existing partition object
+     * UpdatePartition updates an existing partition.
      * </pre>
      */
     public void updatePartition(com.antinvestor.apis.partition.v1.UpdatePartitionRequest request,
@@ -1079,7 +1095,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Create a partition Role for a particular partition
+     * CreatePartitionRole creates a role within a partition.
      * </pre>
      */
     public void createPartitionRole(com.antinvestor.apis.partition.v1.CreatePartitionRoleRequest request,
@@ -1090,7 +1106,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List partition roles available for this particular partition
+     * ListPartitionRole retrieves all roles for a partition.
      * </pre>
      */
     public void listPartitionRole(com.antinvestor.apis.partition.v1.ListPartitionRoleRequest request,
@@ -1101,7 +1117,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Remove a partition role that is not required
+     * RemovePartitionRole deletes a partition role.
      * </pre>
      */
     public void removePartitionRole(com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest request,
@@ -1112,7 +1128,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new page for access or customization of how a partition looks like
+     * CreatePage creates a custom UI page for a partition.
      * </pre>
      */
     public void createPage(com.antinvestor.apis.partition.v1.CreatePageRequest request,
@@ -1123,7 +1139,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a new page specific to a partition
+     * GetPage retrieves a custom page.
      * </pre>
      */
     public void getPage(com.antinvestor.apis.partition.v1.GetPageRequest request,
@@ -1134,7 +1150,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Removes a page from being accessible for a partition
+     * RemovePage deletes a custom page.
      * </pre>
      */
     public void removePage(com.antinvestor.apis.partition.v1.RemovePageRequest request,
@@ -1145,7 +1161,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Creates a users ability to access a partition
+     * CreateAccess grants a profile access to a partition.
      * </pre>
      */
     public void createAccess(com.antinvestor.apis.partition.v1.CreateAccessRequest request,
@@ -1156,7 +1172,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a users access to a partition by access id or partition and profile id
+     * GetAccess retrieves an access grant.
      * </pre>
      */
     public void getAccess(com.antinvestor.apis.partition.v1.GetAccessRequest request,
@@ -1167,7 +1183,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Removes a user's ability to access a partition
+     * RemoveAccess revokes a profile's access to a partition.
      * </pre>
      */
     public void removeAccess(com.antinvestor.apis.partition.v1.RemoveAccessRequest request,
@@ -1178,7 +1194,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Create an access Role for a particular access
+     * CreateAccessRole assigns a role to an access grant.
      * </pre>
      */
     public void createAccessRole(com.antinvestor.apis.partition.v1.CreateAccessRoleRequest request,
@@ -1189,7 +1205,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List access roles available for this particular access
+     * ListAccessRole retrieves all roles for an access grant.
      * </pre>
      */
     public void listAccessRole(com.antinvestor.apis.partition.v1.ListAccessRoleRequest request,
@@ -1200,7 +1216,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Remove an access role that is not required
+     * RemoveAccessRole removes a role from an access grant.
      * </pre>
      */
     public void removeAccessRole(com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest request,
@@ -1212,6 +1228,10 @@ public final class PartitionServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service PartitionService.
+   * <pre>
+   * PartitionService provides multi-tenancy and data isolation.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class PartitionServiceBlockingV2Stub
       extends io.grpc.stub.AbstractBlockingStub<PartitionServiceBlockingV2Stub> {
@@ -1228,7 +1248,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get a tenant in the system matching the id
+     * GetTenant retrieves a tenant by ID.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.GetTenantResponse getTenant(com.antinvestor.apis.partition.v1.GetTenantRequest request) throws io.grpc.StatusException {
@@ -1238,7 +1258,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List all tenants in the system matching the query in some way
+     * ListTenant retrieves all tenants matching criteria.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -1250,7 +1270,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Log a new tenant request
+     * CreateTenant creates a new tenant.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.CreateTenantResponse createTenant(com.antinvestor.apis.partition.v1.CreateTenantRequest request) throws io.grpc.StatusException {
@@ -1260,7 +1280,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Update an existing tenant object
+     * UpdateTenant updates an existing tenant.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.UpdateTenantResponse updateTenant(com.antinvestor.apis.partition.v1.UpdateTenantRequest request) throws io.grpc.StatusException {
@@ -1270,7 +1290,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List all partitions in the system matching the query in some way
+     * ListPartition retrieves all partitions matching criteria.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -1282,7 +1302,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Log a new partition request
+     * CreatePartition creates a new partition.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.CreatePartitionResponse createPartition(com.antinvestor.apis.partition.v1.CreatePartitionRequest request) throws io.grpc.StatusException {
@@ -1292,7 +1312,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get an existing partition object
+     * GetPartition retrieves a partition by ID.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.GetPartitionResponse getPartition(com.antinvestor.apis.partition.v1.GetPartitionRequest request) throws io.grpc.StatusException {
@@ -1302,7 +1322,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get a partition parents object
+     * GetPartitionParents retrieves the parent hierarchy.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.GetPartitionParentsResponse getPartitionParents(com.antinvestor.apis.partition.v1.GetPartitionParentsRequest request) throws io.grpc.StatusException {
@@ -1312,7 +1332,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Update an existing partition object
+     * UpdatePartition updates an existing partition.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.UpdatePartitionResponse updatePartition(com.antinvestor.apis.partition.v1.UpdatePartitionRequest request) throws io.grpc.StatusException {
@@ -1322,7 +1342,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Create a partition Role for a particular partition
+     * CreatePartitionRole creates a role within a partition.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.CreatePartitionRoleResponse createPartitionRole(com.antinvestor.apis.partition.v1.CreatePartitionRoleRequest request) throws io.grpc.StatusException {
@@ -1332,7 +1352,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List partition roles available for this particular partition
+     * ListPartitionRole retrieves all roles for a partition.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -1344,7 +1364,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Remove a partition role that is not required
+     * RemovePartitionRole deletes a partition role.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.RemovePartitionRoleResponse removePartitionRole(com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest request) throws io.grpc.StatusException {
@@ -1354,7 +1374,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new page for access or customization of how a partition looks like
+     * CreatePage creates a custom UI page for a partition.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.CreatePageResponse createPage(com.antinvestor.apis.partition.v1.CreatePageRequest request) throws io.grpc.StatusException {
@@ -1364,7 +1384,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a new page specific to a partition
+     * GetPage retrieves a custom page.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.GetPageResponse getPage(com.antinvestor.apis.partition.v1.GetPageRequest request) throws io.grpc.StatusException {
@@ -1374,7 +1394,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Removes a page from being accessible for a partition
+     * RemovePage deletes a custom page.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.RemovePageResponse removePage(com.antinvestor.apis.partition.v1.RemovePageRequest request) throws io.grpc.StatusException {
@@ -1384,7 +1404,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Creates a users ability to access a partition
+     * CreateAccess grants a profile access to a partition.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.CreateAccessResponse createAccess(com.antinvestor.apis.partition.v1.CreateAccessRequest request) throws io.grpc.StatusException {
@@ -1394,7 +1414,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a users access to a partition by access id or partition and profile id
+     * GetAccess retrieves an access grant.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.GetAccessResponse getAccess(com.antinvestor.apis.partition.v1.GetAccessRequest request) throws io.grpc.StatusException {
@@ -1404,7 +1424,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Removes a user's ability to access a partition
+     * RemoveAccess revokes a profile's access to a partition.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.RemoveAccessResponse removeAccess(com.antinvestor.apis.partition.v1.RemoveAccessRequest request) throws io.grpc.StatusException {
@@ -1414,7 +1434,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Create an access Role for a particular access
+     * CreateAccessRole assigns a role to an access grant.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.CreateAccessRoleResponse createAccessRole(com.antinvestor.apis.partition.v1.CreateAccessRoleRequest request) throws io.grpc.StatusException {
@@ -1424,7 +1444,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List access roles available for this particular access
+     * ListAccessRole retrieves all roles for an access grant.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -1436,7 +1456,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Remove an access role that is not required
+     * RemoveAccessRole removes a role from an access grant.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.RemoveAccessRoleResponse removeAccessRole(com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest request) throws io.grpc.StatusException {
@@ -1447,6 +1467,10 @@ public final class PartitionServiceGrpc {
 
   /**
    * A stub to allow clients to do limited synchronous rpc calls to service PartitionService.
+   * <pre>
+   * PartitionService provides multi-tenancy and data isolation.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class PartitionServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<PartitionServiceBlockingStub> {
@@ -1463,7 +1487,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get a tenant in the system matching the id
+     * GetTenant retrieves a tenant by ID.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.GetTenantResponse getTenant(com.antinvestor.apis.partition.v1.GetTenantRequest request) {
@@ -1473,7 +1497,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List all tenants in the system matching the query in some way
+     * ListTenant retrieves all tenants matching criteria.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.partition.v1.ListTenantResponse> listTenant(
@@ -1484,7 +1508,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Log a new tenant request
+     * CreateTenant creates a new tenant.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.CreateTenantResponse createTenant(com.antinvestor.apis.partition.v1.CreateTenantRequest request) {
@@ -1494,7 +1518,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Update an existing tenant object
+     * UpdateTenant updates an existing tenant.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.UpdateTenantResponse updateTenant(com.antinvestor.apis.partition.v1.UpdateTenantRequest request) {
@@ -1504,7 +1528,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List all partitions in the system matching the query in some way
+     * ListPartition retrieves all partitions matching criteria.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.partition.v1.ListPartitionResponse> listPartition(
@@ -1515,7 +1539,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Log a new partition request
+     * CreatePartition creates a new partition.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.CreatePartitionResponse createPartition(com.antinvestor.apis.partition.v1.CreatePartitionRequest request) {
@@ -1525,7 +1549,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get an existing partition object
+     * GetPartition retrieves a partition by ID.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.GetPartitionResponse getPartition(com.antinvestor.apis.partition.v1.GetPartitionRequest request) {
@@ -1535,7 +1559,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get a partition parents object
+     * GetPartitionParents retrieves the parent hierarchy.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.GetPartitionParentsResponse getPartitionParents(com.antinvestor.apis.partition.v1.GetPartitionParentsRequest request) {
@@ -1545,7 +1569,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Update an existing partition object
+     * UpdatePartition updates an existing partition.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.UpdatePartitionResponse updatePartition(com.antinvestor.apis.partition.v1.UpdatePartitionRequest request) {
@@ -1555,7 +1579,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Create a partition Role for a particular partition
+     * CreatePartitionRole creates a role within a partition.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.CreatePartitionRoleResponse createPartitionRole(com.antinvestor.apis.partition.v1.CreatePartitionRoleRequest request) {
@@ -1565,7 +1589,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List partition roles available for this particular partition
+     * ListPartitionRole retrieves all roles for a partition.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.partition.v1.ListPartitionRoleResponse> listPartitionRole(
@@ -1576,7 +1600,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Remove a partition role that is not required
+     * RemovePartitionRole deletes a partition role.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.RemovePartitionRoleResponse removePartitionRole(com.antinvestor.apis.partition.v1.RemovePartitionRoleRequest request) {
@@ -1586,7 +1610,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new page for access or customization of how a partition looks like
+     * CreatePage creates a custom UI page for a partition.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.CreatePageResponse createPage(com.antinvestor.apis.partition.v1.CreatePageRequest request) {
@@ -1596,7 +1620,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a new page specific to a partition
+     * GetPage retrieves a custom page.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.GetPageResponse getPage(com.antinvestor.apis.partition.v1.GetPageRequest request) {
@@ -1606,7 +1630,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Removes a page from being accessible for a partition
+     * RemovePage deletes a custom page.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.RemovePageResponse removePage(com.antinvestor.apis.partition.v1.RemovePageRequest request) {
@@ -1616,7 +1640,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Creates a users ability to access a partition
+     * CreateAccess grants a profile access to a partition.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.CreateAccessResponse createAccess(com.antinvestor.apis.partition.v1.CreateAccessRequest request) {
@@ -1626,7 +1650,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a users access to a partition by access id or partition and profile id
+     * GetAccess retrieves an access grant.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.GetAccessResponse getAccess(com.antinvestor.apis.partition.v1.GetAccessRequest request) {
@@ -1636,7 +1660,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Removes a user's ability to access a partition
+     * RemoveAccess revokes a profile's access to a partition.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.RemoveAccessResponse removeAccess(com.antinvestor.apis.partition.v1.RemoveAccessRequest request) {
@@ -1646,7 +1670,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Create an access Role for a particular access
+     * CreateAccessRole assigns a role to an access grant.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.CreateAccessRoleResponse createAccessRole(com.antinvestor.apis.partition.v1.CreateAccessRoleRequest request) {
@@ -1656,7 +1680,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * List access roles available for this particular access
+     * ListAccessRole retrieves all roles for an access grant.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.partition.v1.ListAccessRoleResponse> listAccessRole(
@@ -1667,7 +1691,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Remove an access role that is not required
+     * RemoveAccessRole removes a role from an access grant.
      * </pre>
      */
     public com.antinvestor.apis.partition.v1.RemoveAccessRoleResponse removeAccessRole(com.antinvestor.apis.partition.v1.RemoveAccessRoleRequest request) {
@@ -1678,6 +1702,10 @@ public final class PartitionServiceGrpc {
 
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service PartitionService.
+   * <pre>
+   * PartitionService provides multi-tenancy and data isolation.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class PartitionServiceFutureStub
       extends io.grpc.stub.AbstractFutureStub<PartitionServiceFutureStub> {
@@ -1694,7 +1722,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get a tenant in the system matching the id
+     * GetTenant retrieves a tenant by ID.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.GetTenantResponse> getTenant(
@@ -1705,7 +1733,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Log a new tenant request
+     * CreateTenant creates a new tenant.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.CreateTenantResponse> createTenant(
@@ -1716,7 +1744,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Update an existing tenant object
+     * UpdateTenant updates an existing tenant.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.UpdateTenantResponse> updateTenant(
@@ -1727,7 +1755,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Log a new partition request
+     * CreatePartition creates a new partition.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.CreatePartitionResponse> createPartition(
@@ -1738,7 +1766,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get an existing partition object
+     * GetPartition retrieves a partition by ID.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.GetPartitionResponse> getPartition(
@@ -1749,7 +1777,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Get a partition parents object
+     * GetPartitionParents retrieves the parent hierarchy.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.GetPartitionParentsResponse> getPartitionParents(
@@ -1760,7 +1788,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Update an existing partition object
+     * UpdatePartition updates an existing partition.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.UpdatePartitionResponse> updatePartition(
@@ -1771,7 +1799,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Create a partition Role for a particular partition
+     * CreatePartitionRole creates a role within a partition.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.CreatePartitionRoleResponse> createPartitionRole(
@@ -1782,7 +1810,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Remove a partition role that is not required
+     * RemovePartitionRole deletes a partition role.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.RemovePartitionRoleResponse> removePartitionRole(
@@ -1793,7 +1821,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new page for access or customization of how a partition looks like
+     * CreatePage creates a custom UI page for a partition.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.CreatePageResponse> createPage(
@@ -1804,7 +1832,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a new page specific to a partition
+     * GetPage retrieves a custom page.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.GetPageResponse> getPage(
@@ -1815,7 +1843,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Removes a page from being accessible for a partition
+     * RemovePage deletes a custom page.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.RemovePageResponse> removePage(
@@ -1826,7 +1854,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Creates a users ability to access a partition
+     * CreateAccess grants a profile access to a partition.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.CreateAccessResponse> createAccess(
@@ -1837,7 +1865,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a users access to a partition by access id or partition and profile id
+     * GetAccess retrieves an access grant.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.GetAccessResponse> getAccess(
@@ -1848,7 +1876,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Removes a user's ability to access a partition
+     * RemoveAccess revokes a profile's access to a partition.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.RemoveAccessResponse> removeAccess(
@@ -1859,7 +1887,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Create an access Role for a particular access
+     * CreateAccessRole assigns a role to an access grant.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.CreateAccessRoleResponse> createAccessRole(
@@ -1870,7 +1898,7 @@ public final class PartitionServiceGrpc {
 
     /**
      * <pre>
-     * Remove an access role that is not required
+     * RemoveAccessRole removes a role from an access grant.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.partition.v1.RemoveAccessRoleResponse> removeAccessRole(

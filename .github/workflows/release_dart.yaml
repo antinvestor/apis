@@ -1,0 +1,179 @@
+name: Release Dart Packages
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+    paths:
+      - 'dart/**'
+      - 'proto/**'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force release all packages'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  release:
+    strategy:
+      matrix:
+        package: [common, chat, device, notification, ocr, partition, payment, profile, property, settings, ledger, lostid, files]
+      fail-fast: false
+    
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Check for changes
+        id: check_changes
+        run: |
+          PACKAGE="${{ matrix.package }}"
+          
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.force }}" = "true" ]; then
+            echo "Force release enabled"
+            echo "should_release=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Check if package files or proto files changed
+          if git diff --name-only HEAD~1 HEAD | grep -E "(^dart/${PACKAGE}/|^proto/${PACKAGE}/)" > /dev/null; then
+            echo "Changes detected in $PACKAGE"
+            echo "should_release=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes detected in $PACKAGE"
+            echo "should_release=false" >> $GITHUB_OUTPUT
+          fi
+          
+          # Special case: if common package changed, all packages should be released
+          if [ "$PACKAGE" != "common" ]; then
+            if git diff --name-only HEAD~1 HEAD | grep -E "^dart/common/" > /dev/null; then
+              echo "Common package changed - releasing $PACKAGE"
+              echo "should_release=true" >> $GITHUB_OUTPUT
+            fi
+          fi
+      
+      - name: Setup Dart
+        if: steps.check_changes.outputs.should_release == 'true'
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      
+      - name: Configure Git
+        if: steps.check_changes.outputs.should_release == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Setup pub credentials
+        if: steps.check_changes.outputs.should_release == 'true'
+        run: |
+          mkdir -p ~/.config/dart
+          echo '${{ secrets.PUB_DEV_CREDENTIALS }}' > ~/.config/dart/pub-credentials.json
+      
+      - name: Release package
+        if: steps.check_changes.outputs.should_release == 'true'
+        run: |
+          PACKAGE="${{ matrix.package }}"
+          PACKAGE_DIR="dart/$PACKAGE"
+          
+          echo "================================================"
+          echo "Processing package: $PACKAGE"
+          echo "================================================"
+          
+          if [ ! -d "$PACKAGE_DIR" ]; then
+            echo "  Package directory not found: $PACKAGE_DIR"
+            exit 1
+          fi
+          
+          cd "$PACKAGE_DIR"
+          
+          # Get current version
+          CURRENT_VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //')
+          PACKAGE_NAME=$(grep '^name:' pubspec.yaml | sed 's/name: //')
+          echo "Current version: $CURRENT_VERSION"
+          echo "Package name: $PACKAGE_NAME"
+          
+          # Parse version components and bump patch version
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
+          PATCH=$((PATCH + 1))
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          echo "New version: $NEW_VERSION"
+          
+          # Update version in pubspec.yaml
+          sed -i "s/^version: .*/version: $NEW_VERSION/" pubspec.yaml
+          
+          # Update CHANGELOG.md
+          if [ -f "CHANGELOG.md" ]; then
+            DATE=$(date +%Y-%m-%d)
+            sed -i "1i## $NEW_VERSION - $DATE\n\n- Version bump\n" CHANGELOG.md
+          fi
+          
+          # Install dependencies
+          echo "Installing dependencies..."
+          dart pub get
+          
+          # Run analysis
+          echo "Running dart analyze..."
+          dart analyze
+          
+          # Dry run publish
+          echo "Running dry-run publish..."
+          dart pub publish --dry-run
+          
+          # Publish to pub.dev
+          echo "Publishing to pub.dev..."
+          dart pub publish --force
+          
+          echo "✅ Successfully published $PACKAGE v$NEW_VERSION"
+          
+          # Commit version bump
+          git add pubspec.yaml CHANGELOG.md 2>/dev/null || true
+          git commit -m "chore(dart/$PACKAGE): bump version to $NEW_VERSION" || true
+          
+          # Create git tag
+          TAG="dart/${PACKAGE}/v${NEW_VERSION}"
+          git tag -a "$TAG" -m "Release $PACKAGE v$NEW_VERSION"
+          echo "Created tag: $TAG"
+          
+          # Pull latest changes to avoid conflicts
+          git pull --rebase origin main || true
+          
+          # Push commit and tag
+          git push origin main || echo "⚠️  Failed to push commit"
+          git push origin "$TAG" || echo "⚠️  Failed to push tag"
+      
+      - name: Create GitHub Release
+        if: success() && steps.check_changes.outputs.should_release == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PACKAGE="${{ matrix.package }}"
+          VERSION=$(grep '^version:' "dart/$PACKAGE/pubspec.yaml" | sed 's/version: //')
+          PACKAGE_NAME=$(grep '^name:' "dart/$PACKAGE/pubspec.yaml" | sed 's/name: //')
+          TAG="dart/${PACKAGE}/v${VERSION}"
+          
+          # Create release notes
+          RELEASE_NOTES="# ${PACKAGE_NAME} v${VERSION}\n\n"
+          RELEASE_NOTES="${RELEASE_NOTES}Released Dart package: **${PACKAGE}**\n\n"
+          RELEASE_NOTES="${RELEASE_NOTES}## Installation\n\n"
+          RELEASE_NOTES="${RELEASE_NOTES}\`\`\`yaml\n"
+          RELEASE_NOTES="${RELEASE_NOTES}dependencies:\n"
+          RELEASE_NOTES="${RELEASE_NOTES}  ${PACKAGE_NAME}: ^${VERSION}\n"
+          RELEASE_NOTES="${RELEASE_NOTES}\`\`\`\n\n"
+          RELEASE_NOTES="${RELEASE_NOTES}## Links\n\n"
+          RELEASE_NOTES="${RELEASE_NOTES}- [pub.dev](https://pub.dev/packages/${PACKAGE_NAME})\n"
+          RELEASE_NOTES="${RELEASE_NOTES}- [Documentation](https://pub.dev/documentation/${PACKAGE_NAME}/latest/)\n"
+          
+          # Create release
+          echo -e "$RELEASE_NOTES" | gh release create "$TAG" \
+            --title "${PACKAGE_NAME} v${VERSION}" \
+            --notes-file - \
+            --target main

@@ -16,124 +16,176 @@ syntax = "proto3";
 
 package settings.v1;
 
+// -----------------------------------------------------
+// Core notes (normative):
+// - Settings Service provides hierarchical configuration management
+// - Settings can be scoped by object, object_id, language, and module
+// - Supports multi-tenancy and localization
+// - Settings are versioned with update timestamps
+// -----------------------------------------------------
+
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
-import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/settings/v1;settingsv1";
 option java_multiple_files = true;
 option java_package = "settingsv1";
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+
+option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Settings Service"
-    version: "1.0"
+    title: "Settings Service";
+    version: "v1.0.0";
+    description: "The Settings Service provides hierarchical configuration management for applications and services. It supports multi-level scoping (global, object-level, instance-level), localization, and module-specific settings. Settings can be organized by object type, object ID, language, and module, enabling flexible configuration management for multi-tenant applications with internationalization support.";
     contact: {
-      name: "Ant Investor Ltd"
-      url: "https://github.com/antinvestor/service-settings"
-      email: "info@antinvestor.com"
+      name: "Ant Investor Ltd";
+      url: "https://github.com/antinvestor/service-settings";
+      email: "info@antinvestor.com";
+    }
+    license: {
+      name: "Apache License";
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
     }
   }
-
-  schemes: HTTP
-  schemes: HTTPS
-  consumes: "application/json"
-  produces: "application/json"
-
-  security_definitions: {
-    security: {
-      key: "bearer"
-      value: {
-        type: TYPE_API_KEY
-        in: IN_HEADER
-        name: "Authorization"
-        description: "Authentication token, prefixed by Bearer: Bearer <token>"
-      }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BearerAuth";
+          value: {
+            security_scheme: {
+              type: "http";
+              scheme: "bearer";
+              bearer_format: "JWT";
+            }
+          }
+        }
+      ]
     }
-  }
-  security: {
-    security_requirement: {key: "bearer"}
   }
 };
 
+// Setting represents a hierarchical key for configuration lookup.
+// Supports multi-level scoping for flexible configuration management.
 message Setting {
-  string name = 1 [(buf.validate.field).string.min_len = 2];
+  string name = 1 [(buf.validate.field).string.min_len = 2];  // Setting name (e.g., "theme", "max_upload_size")
   string object = 2 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 2
-  ];
+  ];  // Object type scope (e.g., "user", "organization", "application")
   string object_id = 3 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Specific object instance ID (for instance-level settings)
   string lang = 4 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 2
-  ];
+  ];  // Language code for localized settings (ISO 639-1)
   string module = 5 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3
-  ];
+  ];  // Module or feature scope (e.g., "billing", "notifications")
 }
 
+// SettingObject represents a stored setting with its value and metadata.
 message SettingObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  Setting key = 2;
-  string value = 3;
-  string updated = 4;
+  ];  // Unique identifier for this setting instance
+  Setting key = 2;      // Hierarchical key identifying the setting
+  string value = 3;     // Setting value (JSON string for complex values)
+  string updated = 4;   // Last update timestamp (RFC3339)
 }
 
+// GetRequest retrieves a single setting value.
 message GetRequest {
-  Setting key = 1;
+  Setting key = 1;  // Setting key to retrieve
 }
 
+// GetResponse returns the requested setting.
 message GetResponse {
-  SettingObject data = 1;
+  SettingObject data = 1;  // The requested setting
 }
 
+// SearchResponse returns settings matching search criteria.
 message SearchResponse {
-  repeated SettingObject data = 1;
+  repeated SettingObject data = 1;  // List of matching settings
 }
 
+// ListRequest retrieves all settings matching a partial key.
 message ListRequest {
-  Setting key = 1;
+  Setting key = 1;  // Partial key for filtering (empty fields match all)
 }
 
+// ListResponse returns matching settings.
 message ListResponse {
-  repeated SettingObject data = 1;
+  repeated SettingObject data = 1;  // List of matching settings
 }
 
+// SetRequest creates or updates a setting value.
 message SetRequest {
-  Setting key = 1;
-  string value = 2;
+  Setting key = 1;    // Setting key to set
+  string value = 2;   // New value for the setting
 }
 
+// SetResponse returns the updated setting.
 message SetResponse {
-  SettingObject data = 1;
+  SettingObject data = 1;  // The updated setting
 }
 
+// -----------------------------------------------------
+// Settings Service
+// -----------------------------------------------------
+
+// SettingsService provides hierarchical configuration management.
+// All RPCs require authentication via Bearer token.
 service SettingsService {
-  // Gets a single setting and its stored value
+  // Get retrieves a single setting value by its hierarchical key.
+  // Returns the most specific matching setting based on the key hierarchy.
   rpc Get(GetRequest) returns (GetResponse) {
-    option (google.api.http) = {get: "/"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getSetting"
+      summary: "Get a setting value"
+      description: "Retrieves a single setting value by its hierarchical key. The service returns the most specific matching setting based on the key hierarchy (instance-level > object-level > global)."
+      tags: "Settings"
+    };
   }
+
+  // List retrieves all settings matching a partial key.
+  // Empty fields in the key act as wildcards.
   rpc List(ListRequest) returns (stream ListResponse) {
-    option (google.api.http) = {get: "/list"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listSettings"
+      summary: "List settings by partial key"
+      description: "Retrieves all settings matching a partial key. Empty fields in the key act as wildcards, allowing flexible queries (e.g., all settings for an object type, all settings in a language)."
+      tags: "Settings"
+    };
   }
+
+  // Search finds settings matching specified criteria.
+  // Supports full-text search and filtering.
   rpc Search(common.v1.SearchRequest) returns (stream SearchResponse) {
-    option (google.api.http) = {get: "/search"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchSettings"
+      summary: "Search settings"
+      description: "Searches for settings matching specified criteria including full-text search on names and values, date range filtering, and custom properties."
+      tags: "Settings"
+    };
   }
+
+  // Set creates or updates a setting value.
+  // Creates a new setting if it doesn't exist, updates if it does.
   rpc Set(SetRequest) returns (SetResponse) {
-    option (google.api.http) = {
-      post: "/set"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "setSetting"
+      summary: "Create or update a setting"
+      description: "Creates or updates a setting value. If the setting exists, it is updated with the new value and timestamp. If it doesn't exist, a new setting is created."
+      tags: "Settings"
     };
   }
 }

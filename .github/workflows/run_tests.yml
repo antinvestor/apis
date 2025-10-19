@@ -19,4 +19,5 @@ jobs:
       - name: Run build setup
         env:
           GOTOOLCHAIN: go1.25.0+auto
+          BUF_TOKEN: ${{ secrets.BUF_TOKEN }}
         run: make

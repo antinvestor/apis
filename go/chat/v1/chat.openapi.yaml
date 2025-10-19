@@ -1,0 +1,1249 @@
+openapi: 3.1.0
+info:
+  title: Chat Service
+  description: The Chat Service provides endpoints for real-time, secure messaging between users and devices. It supports sending, receiving, and synchronizing messages across rooms, direct chats, and group conversations, with optional end-to-end encryption. The service is designed for mobile, desktop, and web clients, supporting both streaming and standard request-response operations. APIs are consistent, well-structured, and optimized for low-latency delivery, even on limited network connections.
+  contact:
+    name: Ant Investor Ltd
+    url: https://github.com/antinvestor/service-chat
+    email: info@antinvestor.com
+  license:
+    name: Apache License
+    url: https://github.com/antinvestor/apis/blob/master/LICENSE
+  version: v1.0.0
+paths:
+  /chat.v1.ChatService/AddRoomSubscriptions:
+    post:
+      tags:
+        - Subscriptions
+        - chat.v1.ChatService
+      summary: Add members to a room
+      description: Adds one or more users to a chat room with specified roles. The requesting user must have owner or moderator privileges in the room.
+      operationId: addRoomSubscriptions
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.AddRoomSubscriptionsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.AddRoomSubscriptionsResponse'
+  /chat.v1.ChatService/Connect: {}
+  /chat.v1.ChatService/CreateRoom:
+    post:
+      tags:
+        - Rooms
+        - chat.v1.ChatService
+      summary: Create a new chat room
+      description: Creates a new chat room with specified configuration. The creator is automatically added as a member with owner privileges. Supports both public and private rooms.
+      operationId: createRoom
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.CreateRoomRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.CreateRoomResponse'
+  /chat.v1.ChatService/DeleteRoom:
+    post:
+      tags:
+        - Rooms
+        - chat.v1.ChatService
+      summary: Delete a chat room
+      description: Permanently deletes a chat room and all its messages. This action cannot be undone. Only room owners can delete rooms.
+      operationId: deleteRoom
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.DeleteRoomRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.DeleteRoomResponse'
+  /chat.v1.ChatService/GetHistory:
+    post:
+      tags:
+        - Messages
+        - chat.v1.ChatService
+      summary: Retrieve message history for a room
+      description: Fetches paginated message history for a specified room using cursor-based navigation. Supports forward and backward pagination.
+      operationId: getHistory
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.GetHistoryRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetHistoryResponse'
+  /chat.v1.ChatService/RemoveRoomSubscriptions:
+    post:
+      tags:
+        - Subscriptions
+        - chat.v1.ChatService
+      summary: Remove members from a room
+      description: Removes one or more users from a chat room. The requesting user must have owner or moderator privileges in the room, unless removing themselves.
+      operationId: removeRoomSubscriptions
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.RemoveRoomSubscriptionsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.RemoveRoomSubscriptionsResponse'
+  /chat.v1.ChatService/SearchRoomSubscriptions:
+    post:
+      tags:
+        - Subscriptions
+        - chat.v1.ChatService
+      summary: List room members
+      description: Retrieves a paginated list of users subscribed to a room, along with their roles and activity information.
+      operationId: searchRoomSubscriptions
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.SearchRoomSubscriptionsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.SearchRoomSubscriptionsResponse'
+  /chat.v1.ChatService/SearchRooms: {}
+  /chat.v1.ChatService/SendMessage:
+    post:
+      tags:
+        - Messages
+        - chat.v1.ChatService
+      summary: Send a message to a room
+      description: Sends one or more messages to chat rooms. Supports text, attachments, reactions, and system messages. Idempotent when idempotency_key header is provided.
+      operationId: sendMessage
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.SendMessageRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.SendMessageResponse'
+  /chat.v1.ChatService/UpdateRoom:
+    post:
+      tags:
+        - Rooms
+        - chat.v1.ChatService
+      summary: Update a chat room
+      description: Updates the configuration of an existing chat room including name, topic, and metadata. Only room owners and moderators can update room settings.
+      operationId: updateRoom
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.UpdateRoomRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.UpdateRoomResponse'
+  /chat.v1.ChatService/UpdateSubscriptionRole:
+    post:
+      tags:
+        - Subscriptions
+        - chat.v1.ChatService
+      summary: Update a member's role in a room
+      description: Updates the role(s) of a user in a chat room. The requesting user must have owner or moderator privileges in the room.
+      operationId: updateSubscriptionRole
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.UpdateSubscriptionRoleRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.UpdateSubscriptionRoleResponse'
+components:
+  schemas:
+    chat.v1.AddRoomSubscriptionsRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.RoomSubscription'
+          title: members
+          description: include roles if desired
+      title: AddRoomSubscriptionsRequest
+      additionalProperties: false
+    chat.v1.AddRoomSubscriptionsResponse:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        error:
+          title: error
+          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+      title: AddRoomSubscriptionsResponse
+      additionalProperties: false
+    chat.v1.ClientCommand:
+      type: object
+      oneOf:
+        - properties:
+            readMarker:
+              title: read_marker
+              description: marker for "read up to X"
+              $ref: '#/components/schemas/chat.v1.ReadMarker'
+          title: read_marker
+          required:
+            - readMarker
+        - properties:
+            typing:
+              title: typing
+              $ref: '#/components/schemas/chat.v1.TypingUpdate'
+          title: typing
+          required:
+            - typing
+      title: ClientCommand
+      additionalProperties: false
+      description: Generic client commands (typing, read markers that aren't receipts)
+    chat.v1.ConnectRequest:
+      type: object
+      allOf:
+        - properties:
+            sessionId:
+              type: string
+              title: session_id
+              description: Servers should validate auth token before accepting further payload.
+            deviceId:
+              type: string
+              title: device_id
+            authToken:
+              type: string
+              title: auth_token
+              description: JWT or short-lived token; also accepted via metadata at the transport layer
+            resumeToken:
+              type: string
+              title: resume_token
+              description: |-
+                Optional resume token: server-supplied resume_token from previous session.
+                 Server will validate and accept resume only if resume window allows it.
+        - oneOf:
+            - properties:
+                ack:
+                  title: ack
+                  $ref: '#/components/schemas/chat.v1.StreamAck'
+              title: ack
+              required:
+                - ack
+            - properties:
+                command:
+                  title: command
+                  $ref: '#/components/schemas/chat.v1.ClientCommand'
+              title: command
+              required:
+                - command
+      title: ConnectRequest
+      additionalProperties: false
+      description: Client message over Connect stream. After initial connect frame, client sends acks/commands.
+    chat.v1.CreateRoomRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: optional client-provided idempotency key
+        name:
+          type: string
+          title: name
+        description:
+          type: string
+          title: description
+        isPrivate:
+          type: boolean
+          title: is_private
+        members:
+          type: array
+          items:
+            type: string
+          title: members
+          description: optional
+        metadata:
+          title: metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CreateRoomRequest
+      additionalProperties: false
+    chat.v1.CreateRoomResponse:
+      type: object
+      properties:
+        room:
+          title: room
+          $ref: '#/components/schemas/chat.v1.Room'
+        error:
+          title: error
+          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+      title: CreateRoomResponse
+      additionalProperties: false
+    chat.v1.DeleteRoomRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+      title: DeleteRoomRequest
+      additionalProperties: false
+    chat.v1.DeleteRoomResponse:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        error:
+          title: error
+          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+      title: DeleteRoomResponse
+      additionalProperties: false
+    chat.v1.ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: integer
+          title: code
+          format: int32
+          description: application code (see doc)
+        message:
+          type: string
+          title: message
+          description: human readable
+        meta:
+          type: object
+          title: meta
+          additionalProperties:
+            type: string
+            title: value
+          description: additional machine-readable data
+      title: ErrorDetail
+      additionalProperties: false
+      description: |-
+        Standard error codes used by API responses.
+         Use gRPC status codes; the application-level ErrorDetail below may carry more.
+    chat.v1.ErrorDetail.MetaEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: MetaEntry
+      additionalProperties: false
+    chat.v1.GetHistoryRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        cursor:
+          type: string
+          title: cursor
+          description: opaque token from prior GetHistoryResponse
+        limit:
+          type: integer
+          title: limit
+          format: int32
+        forward:
+          type: boolean
+          title: forward
+          description: 'direction: FORWARD means older -> newer; BACKWARD newer -> older (default BACKWARD).'
+      title: GetHistoryRequest
+      additionalProperties: false
+      description: 'History request: paging via opaque cursor. ''limit'' is capped by server (e.g. 100).'
+    chat.v1.GetHistoryResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.ServerEvent'
+          title: events
+        nextCursor:
+          type: string
+          title: next_cursor
+          description: opaque; empty when no more pages
+        prevCursor:
+          type: string
+          title: prev_cursor
+      title: GetHistoryResponse
+      additionalProperties: false
+    chat.v1.PresenceEvent:
+      type: object
+      properties:
+        profileId:
+          type: string
+          title: profile_id
+        status:
+          title: status
+          $ref: '#/components/schemas/chat.v1.PresenceStatus'
+        statusMsg:
+          type: string
+          title: status_msg
+        lastActive:
+          title: last_active
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: PresenceEvent
+      additionalProperties: false
+      description: Presence event affecting a user (and visible to rooms the user is a member of)
+    chat.v1.PresenceStatus:
+      type: string
+      title: PresenceStatus
+      enum:
+        - PRESENCE_UNKNOWN
+        - PRESENCE_OFFLINE
+        - PRESENCE_ONLINE
+        - PRESENCE_AWAY
+        - PRESENCE_BUSY
+    chat.v1.ReadMarker:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        upToEventId:
+          type: string
+          title: up_to_event_id
+      title: ReadMarker
+      additionalProperties: false
+    chat.v1.ReceiptEvent:
+      type: object
+      properties:
+        profileId:
+          type: string
+          title: profile_id
+        roomId:
+          type: string
+          title: room_id
+        messageId:
+          type: string
+          title: message_id
+        readAt:
+          title: read_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: ReceiptEvent
+      additionalProperties: false
+      description: Read receipts
+    chat.v1.RemoveRoomSubscriptionsRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        profileIds:
+          type: array
+          items:
+            type: string
+          title: profile_ids
+      title: RemoveRoomSubscriptionsRequest
+      additionalProperties: false
+    chat.v1.RemoveRoomSubscriptionsResponse:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        error:
+          title: error
+          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+      title: RemoveRoomSubscriptionsResponse
+      additionalProperties: false
+    chat.v1.Room:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        name:
+          type: string
+          title: name
+        description:
+          type: string
+          title: description
+        isPrivate:
+          type: boolean
+          title: is_private
+        metadata:
+          title: metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        createdAt:
+          title: created_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        updatedAt:
+          title: updated_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        creatorId:
+          type: string
+          title: creator_id
+      title: Room
+      additionalProperties: false
+    chat.v1.RoomEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: client-supplied or server-generated UUID
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: room_id
+        senderId:
+          type: string
+          title: sender_id
+          description: profile_id or service/bot id
+        type:
+          title: type
+          description: text, attachment, call_offer, etc.
+          $ref: '#/components/schemas/chat.v1.RoomEventType'
+        payload:
+          title: payload
+          description: e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        sentAt:
+          title: sent_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        edited:
+          type: boolean
+          title: edited
+        redacted:
+          type: boolean
+          title: redacted
+        replacesEventId:
+          type: string
+          title: replaces_event_id
+          description: if this message replaces another (edit)
+        relatesToEventId:
+          type: string
+          title: relates_to_event_id
+          description: for reactions / replies
+      title: RoomEvent
+      additionalProperties: false
+      description: Unified message (user / bot / system / signalling)
+    chat.v1.RoomEventType:
+      type: string
+      title: RoomEventType
+      enum:
+        - MESSAGE_TYPE_UNSPECIFIED
+        - MESSAGE_TYPE_EVENT
+        - MESSAGE_TYPE_TEXT
+        - MESSAGE_TYPE_ATTACHMENT
+        - MESSAGE_TYPE_REACTION
+        - MESSAGE_TYPE_ENCRYPTED
+        - MESSAGE_TYPE_SYSTEM
+        - MESSAGE_TYPE_CALL_OFFER
+        - MESSAGE_TYPE_CALL_ANSWER
+        - MESSAGE_TYPE_CALL_ICE
+        - MESSAGE_TYPE_CALL_END
+        - MESSAGE_TYPE_CUSTOM
+      description: Allowed message types. Extendable via new enum values; clients must ignore unknown values.
+    chat.v1.RoomSubscription:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        profileId:
+          type: string
+          title: profile_id
+        roles:
+          type: array
+          items:
+            type: string
+          title: roles
+          description: e.g. ["owner","moderator","member","guest"]
+        joinedAt:
+          title: joined_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        lastActive:
+          title: last_active
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: RoomSubscription
+      additionalProperties: false
+    chat.v1.SearchRoomSubscriptionsRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        limit:
+          type: integer
+          title: limit
+          format: int32
+        cursor:
+          type: string
+          title: cursor
+      title: SearchRoomSubscriptionsRequest
+      additionalProperties: false
+    chat.v1.SearchRoomSubscriptionsResponse:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.RoomSubscription'
+          title: members
+        nextCursor:
+          type: string
+          title: next_cursor
+      title: SearchRoomSubscriptionsResponse
+      additionalProperties: false
+    chat.v1.SearchRoomsRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          title: query
+        page:
+          type: integer
+          title: page
+          format: int32
+        count:
+          type: integer
+          title: count
+          format: int32
+        startDate:
+          type: string
+          title: start_date
+        endDate:
+          type: string
+          title: end_date
+        properties:
+          type: array
+          items:
+            type: string
+          title: properties
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: SearchRoomsRequest
+      additionalProperties: false
+    chat.v1.SearchRoomsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.Room'
+          title: data
+      title: SearchRoomsResponse
+      additionalProperties: false
+    chat.v1.SendMessageRequest:
+      type: object
+      properties:
+        message:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.RoomEvent'
+          title: message
+          description: message payload (server will assign final message_id if empty)
+      title: SendMessageRequest
+      additionalProperties: false
+    chat.v1.SendMessageResponse:
+      type: object
+      properties:
+        ack:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.StreamAck'
+          title: ack
+      title: SendMessageResponse
+      additionalProperties: false
+    chat.v1.ServerEvent:
+      type: object
+      allOf:
+        - properties:
+            id:
+              type: string
+              title: id
+              maxLength: 40
+              minLength: 3
+              pattern: '[0-9a-z_-]{3,20}'
+            timestamp:
+              title: timestamp
+              $ref: '#/components/schemas/google.protobuf.Timestamp'
+        - oneOf:
+            - properties:
+                message:
+                  title: message
+                  $ref: '#/components/schemas/chat.v1.RoomEvent'
+              title: message
+              required:
+                - message
+            - properties:
+                presenceEvent:
+                  title: presence_event
+                  description: user presence change affecting the room
+                  $ref: '#/components/schemas/chat.v1.PresenceEvent'
+              title: presence_event
+              required:
+                - presenceEvent
+            - properties:
+                receiptEvent:
+                  title: receipt_event
+                  $ref: '#/components/schemas/chat.v1.ReceiptEvent'
+              title: receipt_event
+              required:
+                - receiptEvent
+            - properties:
+                typingEvent:
+                  title: typing_event
+                  $ref: '#/components/schemas/chat.v1.TypingEvent'
+              title: typing_event
+              required:
+                - typingEvent
+      title: ServerEvent
+      additionalProperties: false
+      description: |-
+        Server -> Client event payload. All events in a room are delivered over Connect stream.
+         event_id: globally unique id (opaque string) assigned by server, strictly monotonically increasing per room.
+         sequence: strictly increasing 64-bit integer per-room sequence number (useful for resume & ordering).
+    chat.v1.StreamAck:
+      type: object
+      properties:
+        eventId:
+          type: string
+          title: event_id
+        ackAt:
+          title: ack_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        metadata:
+          title: metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: StreamAck
+      additionalProperties: false
+      description: |-
+        Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
+         ack_event_id: last event_id client processed (inclusive).
+    chat.v1.TypingEvent:
+      type: object
+      properties:
+        profileId:
+          type: string
+          title: profile_id
+        roomId:
+          type: string
+          title: room_id
+        typing:
+          type: boolean
+          title: typing
+        since:
+          title: since
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: TypingEvent
+      additionalProperties: false
+      description: Typing indicator
+    chat.v1.TypingUpdate:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        typing:
+          type: boolean
+          title: typing
+      title: TypingUpdate
+      additionalProperties: false
+    chat.v1.UpdateRoomRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        name:
+          type: string
+          title: name
+        topic:
+          type: string
+          title: topic
+        metadata:
+          title: metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: UpdateRoomRequest
+      additionalProperties: false
+    chat.v1.UpdateRoomResponse:
+      type: object
+      properties:
+        room:
+          title: room
+          $ref: '#/components/schemas/chat.v1.Room'
+        error:
+          title: error
+          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+      title: UpdateRoomResponse
+      additionalProperties: false
+    chat.v1.UpdateSubscriptionRoleRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        profileId:
+          type: string
+          title: profile_id
+        roles:
+          type: array
+          items:
+            type: string
+          title: roles
+      title: UpdateSubscriptionRoleRequest
+      additionalProperties: false
+    chat.v1.UpdateSubscriptionRoleResponse:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        error:
+          title: error
+          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+      title: UpdateSubscriptionRoleResponse
+      additionalProperties: false
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    google.protobuf.ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          title: values
+          description: Repeated field of dynamically typed values.
+      title: ListValue
+      additionalProperties: false
+      description: |-
+        `ListValue` is a wrapper around a repeated field of values.
+
+         The JSON representation for `ListValue` is JSON array.
+    google.protobuf.NullValue:
+      type: string
+      title: NullValue
+      enum:
+        - NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+         `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+    google.protobuf.Struct:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/google.protobuf.Value'
+      description: |-
+        `Struct` represents a structured data value, consisting of fields
+         which map to dynamically typed values. In some languages, `Struct`
+         might be supported by a native representation. For example, in
+         scripting languages like JS a struct is represented as an
+         object. The details of that representation are described together
+         with the proto support for the language.
+
+         The JSON representation for `Struct` is JSON object.
+    google.protobuf.Struct.FieldsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          title: value
+          $ref: '#/components/schemas/google.protobuf.Value'
+      title: FieldsEntry
+      additionalProperties: false
+    google.protobuf.Timestamp:
+      type: string
+      examples:
+        - "2023-01-15T01:30:15.01Z"
+        - "2024-12-25T12:00:00Z"
+      format: date-time
+      description: |-
+        A Timestamp represents a point in time independent of any time zone or local
+         calendar, encoded as a count of seconds and fractions of seconds at
+         nanosecond resolution. The count is relative to an epoch at UTC midnight on
+         January 1, 1970, in the proleptic Gregorian calendar which extends the
+         Gregorian calendar backwards to year one.
+
+         All minutes are 60 seconds long. Leap seconds are "smeared" so that no leap
+         second table is needed for interpretation, using a [24-hour linear
+         smear](https://developers.google.com/time/smear).
+
+         The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
+         restricting to that range, we ensure that we can convert to and from [RFC
+         3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.
+
+         # Examples
+
+         Example 1: Compute Timestamp from POSIX `time()`.
+
+             Timestamp timestamp;
+             timestamp.set_seconds(time(NULL));
+             timestamp.set_nanos(0);
+
+         Example 2: Compute Timestamp from POSIX `gettimeofday()`.
+
+             struct timeval tv;
+             gettimeofday(&tv, NULL);
+
+             Timestamp timestamp;
+             timestamp.set_seconds(tv.tv_sec);
+             timestamp.set_nanos(tv.tv_usec * 1000);
+
+         Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
+
+             FILETIME ft;
+             GetSystemTimeAsFileTime(&ft);
+             UINT64 ticks = (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
+
+             // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
+             // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
+             Timestamp timestamp;
+             timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
+             timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
+
+         Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
+
+             long millis = System.currentTimeMillis();
+
+             Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+                 .setNanos((int) ((millis % 1000) * 1000000)).build();
+
+         Example 5: Compute Timestamp from Java `Instant.now()`.
+
+             Instant now = Instant.now();
+
+             Timestamp timestamp =
+                 Timestamp.newBuilder().setSeconds(now.getEpochSecond())
+                     .setNanos(now.getNano()).build();
+
+         Example 6: Compute Timestamp from current time in Python.
+
+             timestamp = Timestamp()
+             timestamp.GetCurrentTime()
+
+         # JSON Mapping
+
+         In JSON format, the Timestamp type is encoded as a string in the
+         [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the
+         format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z"
+         where {year} is always expressed using four digits while {month}, {day},
+         {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
+         seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
+         are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone
+         is required. A proto3 JSON serializer should always use UTC (as indicated by
+         "Z") when printing the Timestamp type and a proto3 JSON parser should be
+         able to accept both UTC and other timezones (as indicated by an offset).
+
+         For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past
+         01:30 UTC on January 15, 2017.
+
+         In JavaScript, one can convert a Date object to this format using the
+         standard
+         [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
+         method. In Python, a standard `datetime.datetime` object can be converted
+         to this format using
+         [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
+         the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use
+         the Joda Time's [`ISODateTimeFormat.dateTime()`](
+         http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()
+         ) to obtain a formatter capable of generating timestamps in this format.
+    google.protobuf.Value:
+      oneOf:
+        - type: "null"
+        - type: number
+        - type: string
+        - type: boolean
+        - type: array
+        - type: object
+          additionalProperties: true
+      description: |-
+        `Value` represents a dynamically typed value which can be either
+         null, a number, a string, a boolean, a recursive struct value, or a
+         list of values. A producer of value is expected to set one of these
+         variants. Absence of any variant indicates an error.
+
+         The JSON representation for `Value` is JSON value.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security: []
+tags:
+  - name: chat.v1.ChatService

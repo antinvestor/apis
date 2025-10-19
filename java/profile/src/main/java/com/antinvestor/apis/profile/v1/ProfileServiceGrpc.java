@@ -18,7 +18,8 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  * <pre>
- * The profile service definition.
+ * ProfileService manages user and entity profiles.
+ * All RPCs require authentication via Bearer token.
  * </pre>
  */
 @io.grpc.stub.annotations.GrpcGenerated
@@ -648,14 +649,15 @@ public final class ProfileServiceGrpc {
 
   /**
    * <pre>
-   * The profile service definition.
+   * ProfileService manages user and entity profiles.
+   * All RPCs require authentication via Bearer token.
    * </pre>
    */
   public interface AsyncService {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * GetById retrieves a profile by its unique ID.
      * </pre>
      */
     default void getById(com.antinvestor.apis.profile.v1.GetByIdRequest request,
@@ -665,7 +667,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * GetByContact retrieves a profile by contact information.
      * </pre>
      */
     default void getByContact(com.antinvestor.apis.profile.v1.GetByContactRequest request,
@@ -675,7 +677,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * Search finds profiles matching specified criteria.
      * </pre>
      */
     default void search(com.antinvestor.apis.profile.v1.SearchRequest request,
@@ -685,7 +687,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Uses data found in the profile from mergeHash to update the current profile.
+     * Merge combines two profiles into one.
      * </pre>
      */
     default void merge(com.antinvestor.apis.profile.v1.MergeRequest request,
@@ -695,7 +697,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new profile based on the request.
+     * Create creates a new profile.
      * </pre>
      */
     default void create(com.antinvestor.apis.profile.v1.CreateRequest request,
@@ -705,7 +707,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new profile based on the request.
+     * Update updates an existing profile's properties.
      * </pre>
      */
     default void update(com.antinvestor.apis.profile.v1.UpdateRequest request,
@@ -715,7 +717,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new contact based on the request/this leads to automatic verification.
+     * AddContact adds a new contact to a profile with automatic verification.
      * </pre>
      */
     default void addContact(com.antinvestor.apis.profile.v1.AddContactRequest request,
@@ -725,7 +727,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new free contact based on the details provided.
+     * CreateContact creates a standalone contact not linked to a profile.
      * </pre>
      */
     default void createContact(com.antinvestor.apis.profile.v1.CreateContactRequest request,
@@ -735,7 +737,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Create a new contact verification request
+     * CreateContactVerification initiates contact verification.
      * </pre>
      */
     default void createContactVerification(com.antinvestor.apis.profile.v1.CreateContactVerificationRequest request,
@@ -745,7 +747,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     *Checks the status of a verification
+     * CheckVerification verifies a contact using the provided code.
      * </pre>
      */
     default void checkVerification(com.antinvestor.apis.profile.v1.CheckVerificationRequest request,
@@ -755,7 +757,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Removes an old contact based on this request's id
+     * RemoveContact removes a contact from a profile.
      * </pre>
      */
     default void removeContact(com.antinvestor.apis.profile.v1.RemoveContactRequest request,
@@ -765,7 +767,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Searches all contacts tied to a users profile and based on the active request.
+     * SearchRoster searches a user's contact roster.
      * </pre>
      */
     default void searchRoster(com.antinvestor.apis.profile.v1.SearchRosterRequest request,
@@ -775,7 +777,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new contact based on the request/this leads to automatic verification.
+     * AddRoster adds multiple contacts to a user's roster.
      * </pre>
      */
     default void addRoster(com.antinvestor.apis.profile.v1.AddRosterRequest request,
@@ -785,7 +787,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Removes a contact from a user's circle based on this request's id
+     * RemoveRoster removes a contact from a user's roster.
      * </pre>
      */
     default void removeRoster(com.antinvestor.apis.profile.v1.RemoveRosterRequest request,
@@ -795,7 +797,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new address based on the request.
+     * AddAddress adds a new address to a profile.
      * </pre>
      */
     default void addAddress(com.antinvestor.apis.profile.v1.AddAddressRequest request,
@@ -805,7 +807,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new relationship between different proiles.
+     * AddRelationship creates a relationship between profiles.
      * </pre>
      */
     default void addRelationship(com.antinvestor.apis.profile.v1.AddRelationshipRequest request,
@@ -815,7 +817,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Remove an existing relationship between profiles.
+     * DeleteRelationship removes a relationship between profiles.
      * </pre>
      */
     default void deleteRelationship(com.antinvestor.apis.profile.v1.DeleteRelationshipRequest request,
@@ -825,7 +827,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Lists relationships a profile has.
+     * ListRelationship lists all relationships for a profile.
      * </pre>
      */
     default void listRelationship(com.antinvestor.apis.profile.v1.ListRelationshipRequest request,
@@ -837,7 +839,8 @@ public final class ProfileServiceGrpc {
   /**
    * Base class for the server implementation of the service ProfileService.
    * <pre>
-   * The profile service definition.
+   * ProfileService manages user and entity profiles.
+   * All RPCs require authentication via Bearer token.
    * </pre>
    */
   public static abstract class ProfileServiceImplBase
@@ -851,7 +854,8 @@ public final class ProfileServiceGrpc {
   /**
    * A stub to allow clients to do asynchronous rpc calls to service ProfileService.
    * <pre>
-   * The profile service definition.
+   * ProfileService manages user and entity profiles.
+   * All RPCs require authentication via Bearer token.
    * </pre>
    */
   public static final class ProfileServiceStub
@@ -869,7 +873,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * GetById retrieves a profile by its unique ID.
      * </pre>
      */
     public void getById(com.antinvestor.apis.profile.v1.GetByIdRequest request,
@@ -880,7 +884,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * GetByContact retrieves a profile by contact information.
      * </pre>
      */
     public void getByContact(com.antinvestor.apis.profile.v1.GetByContactRequest request,
@@ -891,7 +895,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * Search finds profiles matching specified criteria.
      * </pre>
      */
     public void search(com.antinvestor.apis.profile.v1.SearchRequest request,
@@ -902,7 +906,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Uses data found in the profile from mergeHash to update the current profile.
+     * Merge combines two profiles into one.
      * </pre>
      */
     public void merge(com.antinvestor.apis.profile.v1.MergeRequest request,
@@ -913,7 +917,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new profile based on the request.
+     * Create creates a new profile.
      * </pre>
      */
     public void create(com.antinvestor.apis.profile.v1.CreateRequest request,
@@ -924,7 +928,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new profile based on the request.
+     * Update updates an existing profile's properties.
      * </pre>
      */
     public void update(com.antinvestor.apis.profile.v1.UpdateRequest request,
@@ -935,7 +939,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new contact based on the request/this leads to automatic verification.
+     * AddContact adds a new contact to a profile with automatic verification.
      * </pre>
      */
     public void addContact(com.antinvestor.apis.profile.v1.AddContactRequest request,
@@ -946,7 +950,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new free contact based on the details provided.
+     * CreateContact creates a standalone contact not linked to a profile.
      * </pre>
      */
     public void createContact(com.antinvestor.apis.profile.v1.CreateContactRequest request,
@@ -957,7 +961,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Create a new contact verification request
+     * CreateContactVerification initiates contact verification.
      * </pre>
      */
     public void createContactVerification(com.antinvestor.apis.profile.v1.CreateContactVerificationRequest request,
@@ -968,7 +972,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     *Checks the status of a verification
+     * CheckVerification verifies a contact using the provided code.
      * </pre>
      */
     public void checkVerification(com.antinvestor.apis.profile.v1.CheckVerificationRequest request,
@@ -979,7 +983,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Removes an old contact based on this request's id
+     * RemoveContact removes a contact from a profile.
      * </pre>
      */
     public void removeContact(com.antinvestor.apis.profile.v1.RemoveContactRequest request,
@@ -990,7 +994,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Searches all contacts tied to a users profile and based on the active request.
+     * SearchRoster searches a user's contact roster.
      * </pre>
      */
     public void searchRoster(com.antinvestor.apis.profile.v1.SearchRosterRequest request,
@@ -1001,7 +1005,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new contact based on the request/this leads to automatic verification.
+     * AddRoster adds multiple contacts to a user's roster.
      * </pre>
      */
     public void addRoster(com.antinvestor.apis.profile.v1.AddRosterRequest request,
@@ -1012,7 +1016,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Removes a contact from a user's circle based on this request's id
+     * RemoveRoster removes a contact from a user's roster.
      * </pre>
      */
     public void removeRoster(com.antinvestor.apis.profile.v1.RemoveRosterRequest request,
@@ -1023,7 +1027,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new address based on the request.
+     * AddAddress adds a new address to a profile.
      * </pre>
      */
     public void addAddress(com.antinvestor.apis.profile.v1.AddAddressRequest request,
@@ -1034,7 +1038,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new relationship between different proiles.
+     * AddRelationship creates a relationship between profiles.
      * </pre>
      */
     public void addRelationship(com.antinvestor.apis.profile.v1.AddRelationshipRequest request,
@@ -1045,7 +1049,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Remove an existing relationship between profiles.
+     * DeleteRelationship removes a relationship between profiles.
      * </pre>
      */
     public void deleteRelationship(com.antinvestor.apis.profile.v1.DeleteRelationshipRequest request,
@@ -1056,7 +1060,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Lists relationships a profile has.
+     * ListRelationship lists all relationships for a profile.
      * </pre>
      */
     public void listRelationship(com.antinvestor.apis.profile.v1.ListRelationshipRequest request,
@@ -1069,7 +1073,8 @@ public final class ProfileServiceGrpc {
   /**
    * A stub to allow clients to do synchronous rpc calls to service ProfileService.
    * <pre>
-   * The profile service definition.
+   * ProfileService manages user and entity profiles.
+   * All RPCs require authentication via Bearer token.
    * </pre>
    */
   public static final class ProfileServiceBlockingV2Stub
@@ -1087,7 +1092,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * GetById retrieves a profile by its unique ID.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.GetByIdResponse getById(com.antinvestor.apis.profile.v1.GetByIdRequest request) throws io.grpc.StatusException {
@@ -1097,7 +1102,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * GetByContact retrieves a profile by contact information.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.GetByContactResponse getByContact(com.antinvestor.apis.profile.v1.GetByContactRequest request) throws io.grpc.StatusException {
@@ -1107,7 +1112,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * Search finds profiles matching specified criteria.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -1119,7 +1124,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Uses data found in the profile from mergeHash to update the current profile.
+     * Merge combines two profiles into one.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.MergeResponse merge(com.antinvestor.apis.profile.v1.MergeRequest request) throws io.grpc.StatusException {
@@ -1129,7 +1134,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new profile based on the request.
+     * Create creates a new profile.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.CreateResponse create(com.antinvestor.apis.profile.v1.CreateRequest request) throws io.grpc.StatusException {
@@ -1139,7 +1144,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new profile based on the request.
+     * Update updates an existing profile's properties.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.UpdateResponse update(com.antinvestor.apis.profile.v1.UpdateRequest request) throws io.grpc.StatusException {
@@ -1149,7 +1154,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new contact based on the request/this leads to automatic verification.
+     * AddContact adds a new contact to a profile with automatic verification.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.AddContactResponse addContact(com.antinvestor.apis.profile.v1.AddContactRequest request) throws io.grpc.StatusException {
@@ -1159,7 +1164,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new free contact based on the details provided.
+     * CreateContact creates a standalone contact not linked to a profile.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.CreateContactResponse createContact(com.antinvestor.apis.profile.v1.CreateContactRequest request) throws io.grpc.StatusException {
@@ -1169,7 +1174,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Create a new contact verification request
+     * CreateContactVerification initiates contact verification.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.CreateContactVerificationResponse createContactVerification(com.antinvestor.apis.profile.v1.CreateContactVerificationRequest request) throws io.grpc.StatusException {
@@ -1179,7 +1184,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     *Checks the status of a verification
+     * CheckVerification verifies a contact using the provided code.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.CheckVerificationResponse checkVerification(com.antinvestor.apis.profile.v1.CheckVerificationRequest request) throws io.grpc.StatusException {
@@ -1189,7 +1194,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Removes an old contact based on this request's id
+     * RemoveContact removes a contact from a profile.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.RemoveContactResponse removeContact(com.antinvestor.apis.profile.v1.RemoveContactRequest request) throws io.grpc.StatusException {
@@ -1199,7 +1204,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Searches all contacts tied to a users profile and based on the active request.
+     * SearchRoster searches a user's contact roster.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -1211,7 +1216,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new contact based on the request/this leads to automatic verification.
+     * AddRoster adds multiple contacts to a user's roster.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.AddRosterResponse addRoster(com.antinvestor.apis.profile.v1.AddRosterRequest request) throws io.grpc.StatusException {
@@ -1221,7 +1226,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Removes a contact from a user's circle based on this request's id
+     * RemoveRoster removes a contact from a user's roster.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.RemoveRosterResponse removeRoster(com.antinvestor.apis.profile.v1.RemoveRosterRequest request) throws io.grpc.StatusException {
@@ -1231,7 +1236,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new address based on the request.
+     * AddAddress adds a new address to a profile.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.AddAddressResponse addAddress(com.antinvestor.apis.profile.v1.AddAddressRequest request) throws io.grpc.StatusException {
@@ -1241,7 +1246,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new relationship between different proiles.
+     * AddRelationship creates a relationship between profiles.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.AddRelationshipResponse addRelationship(com.antinvestor.apis.profile.v1.AddRelationshipRequest request) throws io.grpc.StatusException {
@@ -1251,7 +1256,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Remove an existing relationship between profiles.
+     * DeleteRelationship removes a relationship between profiles.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.DeleteRelationshipResponse deleteRelationship(com.antinvestor.apis.profile.v1.DeleteRelationshipRequest request) throws io.grpc.StatusException {
@@ -1261,7 +1266,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Lists relationships a profile has.
+     * ListRelationship lists all relationships for a profile.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -1275,7 +1280,8 @@ public final class ProfileServiceGrpc {
   /**
    * A stub to allow clients to do limited synchronous rpc calls to service ProfileService.
    * <pre>
-   * The profile service definition.
+   * ProfileService manages user and entity profiles.
+   * All RPCs require authentication via Bearer token.
    * </pre>
    */
   public static final class ProfileServiceBlockingStub
@@ -1293,7 +1299,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * GetById retrieves a profile by its unique ID.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.GetByIdResponse getById(com.antinvestor.apis.profile.v1.GetByIdRequest request) {
@@ -1303,7 +1309,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * GetByContact retrieves a profile by contact information.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.GetByContactResponse getByContact(com.antinvestor.apis.profile.v1.GetByContactRequest request) {
@@ -1313,7 +1319,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * Search finds profiles matching specified criteria.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.profile.v1.SearchResponse> search(
@@ -1324,7 +1330,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Uses data found in the profile from mergeHash to update the current profile.
+     * Merge combines two profiles into one.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.MergeResponse merge(com.antinvestor.apis.profile.v1.MergeRequest request) {
@@ -1334,7 +1340,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new profile based on the request.
+     * Create creates a new profile.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.CreateResponse create(com.antinvestor.apis.profile.v1.CreateRequest request) {
@@ -1344,7 +1350,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new profile based on the request.
+     * Update updates an existing profile's properties.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.UpdateResponse update(com.antinvestor.apis.profile.v1.UpdateRequest request) {
@@ -1354,7 +1360,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new contact based on the request/this leads to automatic verification.
+     * AddContact adds a new contact to a profile with automatic verification.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.AddContactResponse addContact(com.antinvestor.apis.profile.v1.AddContactRequest request) {
@@ -1364,7 +1370,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new free contact based on the details provided.
+     * CreateContact creates a standalone contact not linked to a profile.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.CreateContactResponse createContact(com.antinvestor.apis.profile.v1.CreateContactRequest request) {
@@ -1374,7 +1380,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Create a new contact verification request
+     * CreateContactVerification initiates contact verification.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.CreateContactVerificationResponse createContactVerification(com.antinvestor.apis.profile.v1.CreateContactVerificationRequest request) {
@@ -1384,7 +1390,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     *Checks the status of a verification
+     * CheckVerification verifies a contact using the provided code.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.CheckVerificationResponse checkVerification(com.antinvestor.apis.profile.v1.CheckVerificationRequest request) {
@@ -1394,7 +1400,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Removes an old contact based on this request's id
+     * RemoveContact removes a contact from a profile.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.RemoveContactResponse removeContact(com.antinvestor.apis.profile.v1.RemoveContactRequest request) {
@@ -1404,7 +1410,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Searches all contacts tied to a users profile and based on the active request.
+     * SearchRoster searches a user's contact roster.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.profile.v1.SearchRosterResponse> searchRoster(
@@ -1415,7 +1421,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new contact based on the request/this leads to automatic verification.
+     * AddRoster adds multiple contacts to a user's roster.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.AddRosterResponse addRoster(com.antinvestor.apis.profile.v1.AddRosterRequest request) {
@@ -1425,7 +1431,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Removes a contact from a user's circle based on this request's id
+     * RemoveRoster removes a contact from a user's roster.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.RemoveRosterResponse removeRoster(com.antinvestor.apis.profile.v1.RemoveRosterRequest request) {
@@ -1435,7 +1441,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new address based on the request.
+     * AddAddress adds a new address to a profile.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.AddAddressResponse addAddress(com.antinvestor.apis.profile.v1.AddAddressRequest request) {
@@ -1445,7 +1451,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new relationship between different proiles.
+     * AddRelationship creates a relationship between profiles.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.AddRelationshipResponse addRelationship(com.antinvestor.apis.profile.v1.AddRelationshipRequest request) {
@@ -1455,7 +1461,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Remove an existing relationship between profiles.
+     * DeleteRelationship removes a relationship between profiles.
      * </pre>
      */
     public com.antinvestor.apis.profile.v1.DeleteRelationshipResponse deleteRelationship(com.antinvestor.apis.profile.v1.DeleteRelationshipRequest request) {
@@ -1465,7 +1471,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Lists relationships a profile has.
+     * ListRelationship lists all relationships for a profile.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.profile.v1.ListRelationshipResponse> listRelationship(
@@ -1478,7 +1484,8 @@ public final class ProfileServiceGrpc {
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service ProfileService.
    * <pre>
-   * The profile service definition.
+   * ProfileService manages user and entity profiles.
+   * All RPCs require authentication via Bearer token.
    * </pre>
    */
   public static final class ProfileServiceFutureStub
@@ -1496,7 +1503,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * GetById retrieves a profile by its unique ID.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.GetByIdResponse> getById(
@@ -1507,7 +1514,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a profile by its hash
+     * GetByContact retrieves a profile by contact information.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.GetByContactResponse> getByContact(
@@ -1518,7 +1525,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Uses data found in the profile from mergeHash to update the current profile.
+     * Merge combines two profiles into one.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.MergeResponse> merge(
@@ -1529,7 +1536,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new profile based on the request.
+     * Create creates a new profile.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.CreateResponse> create(
@@ -1540,7 +1547,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new profile based on the request.
+     * Update updates an existing profile's properties.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.UpdateResponse> update(
@@ -1551,7 +1558,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new contact based on the request/this leads to automatic verification.
+     * AddContact adds a new contact to a profile with automatic verification.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.AddContactResponse> addContact(
@@ -1562,7 +1569,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new free contact based on the details provided.
+     * CreateContact creates a standalone contact not linked to a profile.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.CreateContactResponse> createContact(
@@ -1573,7 +1580,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Create a new contact verification request
+     * CreateContactVerification initiates contact verification.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.CreateContactVerificationResponse> createContactVerification(
@@ -1584,7 +1591,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     *Checks the status of a verification
+     * CheckVerification verifies a contact using the provided code.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.CheckVerificationResponse> checkVerification(
@@ -1595,7 +1602,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Removes an old contact based on this request's id
+     * RemoveContact removes a contact from a profile.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.RemoveContactResponse> removeContact(
@@ -1606,7 +1613,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new contact based on the request/this leads to automatic verification.
+     * AddRoster adds multiple contacts to a user's roster.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.AddRosterResponse> addRoster(
@@ -1617,7 +1624,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Removes a contact from a user's circle based on this request's id
+     * RemoveRoster removes a contact from a user's roster.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.RemoveRosterResponse> removeRoster(
@@ -1628,7 +1635,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new address based on the request.
+     * AddAddress adds a new address to a profile.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.AddAddressResponse> addAddress(
@@ -1639,7 +1646,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new relationship between different proiles.
+     * AddRelationship creates a relationship between profiles.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.AddRelationshipResponse> addRelationship(
@@ -1650,7 +1657,7 @@ public final class ProfileServiceGrpc {
 
     /**
      * <pre>
-     * Remove an existing relationship between profiles.
+     * DeleteRelationship removes a relationship between profiles.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.profile.v1.DeleteRelationshipResponse> deleteRelationship(

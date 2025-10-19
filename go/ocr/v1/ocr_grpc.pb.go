@@ -41,10 +41,15 @@ const (
 // OCRServiceClient is the client API for OCRService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// OCRService provides optical character recognition capabilities.
+// All RPCs require authentication via Bearer token.
 type OCRServiceClient interface {
-	// Perform a new ocr process request
+	// Recognize performs OCR on one or more files.
+	// Supports both synchronous and asynchronous processing.
 	Recognize(ctx context.Context, in *RecognizeRequest, opts ...grpc.CallOption) (*RecognizeResponse, error)
-	// Check the status of request if queued
+	// Status retrieves the current status of an async OCR request.
+	// Returns processing status and results if available.
 	Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error)
 }
 
@@ -79,10 +84,15 @@ func (c *oCRServiceClient) Status(ctx context.Context, in *v1.StatusRequest, opt
 // OCRServiceServer is the server API for OCRService service.
 // All implementations must embed UnimplementedOCRServiceServer
 // for forward compatibility.
+//
+// OCRService provides optical character recognition capabilities.
+// All RPCs require authentication via Bearer token.
 type OCRServiceServer interface {
-	// Perform a new ocr process request
+	// Recognize performs OCR on one or more files.
+	// Supports both synchronous and asynchronous processing.
 	Recognize(context.Context, *RecognizeRequest) (*RecognizeResponse, error)
-	// Check the status of request if queued
+	// Status retrieves the current status of an async OCR request.
+	// Returns processing status and results if available.
 	Status(context.Context, *v1.StatusRequest) (*StatusResponse, error)
 	mustEmbedUnimplementedOCRServiceServer()
 }
