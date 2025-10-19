@@ -17,6 +17,10 @@ package com.antinvestor.apis.ocr.v1;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
+ * <pre>
+ * OCRService provides optical character recognition capabilities.
+ * All RPCs require authentication via Bearer token.
+ * </pre>
  */
 @io.grpc.stub.annotations.GrpcGenerated
 public final class OCRServiceGrpc {
@@ -148,12 +152,17 @@ public final class OCRServiceGrpc {
   }
 
   /**
+   * <pre>
+   * OCRService provides optical character recognition capabilities.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public interface AsyncService {
 
     /**
      * <pre>
-     * Perform a new ocr process request
+     * Recognize performs OCR on one or more files.
+     * Supports both synchronous and asynchronous processing.
      * </pre>
      */
     default void recognize(com.antinvestor.apis.ocr.v1.RecognizeRequest request,
@@ -163,7 +172,8 @@ public final class OCRServiceGrpc {
 
     /**
      * <pre>
-     * Check the status of request if queued
+     * Status retrieves the current status of an async OCR request.
+     * Returns processing status and results if available.
      * </pre>
      */
     default void status(com.antinvestor.apis.common.v1.StatusRequest request,
@@ -174,6 +184,10 @@ public final class OCRServiceGrpc {
 
   /**
    * Base class for the server implementation of the service OCRService.
+   * <pre>
+   * OCRService provides optical character recognition capabilities.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static abstract class OCRServiceImplBase
       implements io.grpc.BindableService, AsyncService {
@@ -185,6 +199,10 @@ public final class OCRServiceGrpc {
 
   /**
    * A stub to allow clients to do asynchronous rpc calls to service OCRService.
+   * <pre>
+   * OCRService provides optical character recognition capabilities.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class OCRServiceStub
       extends io.grpc.stub.AbstractAsyncStub<OCRServiceStub> {
@@ -201,7 +219,8 @@ public final class OCRServiceGrpc {
 
     /**
      * <pre>
-     * Perform a new ocr process request
+     * Recognize performs OCR on one or more files.
+     * Supports both synchronous and asynchronous processing.
      * </pre>
      */
     public void recognize(com.antinvestor.apis.ocr.v1.RecognizeRequest request,
@@ -212,7 +231,8 @@ public final class OCRServiceGrpc {
 
     /**
      * <pre>
-     * Check the status of request if queued
+     * Status retrieves the current status of an async OCR request.
+     * Returns processing status and results if available.
      * </pre>
      */
     public void status(com.antinvestor.apis.common.v1.StatusRequest request,
@@ -224,6 +244,10 @@ public final class OCRServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service OCRService.
+   * <pre>
+   * OCRService provides optical character recognition capabilities.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class OCRServiceBlockingV2Stub
       extends io.grpc.stub.AbstractBlockingStub<OCRServiceBlockingV2Stub> {
@@ -240,7 +264,8 @@ public final class OCRServiceGrpc {
 
     /**
      * <pre>
-     * Perform a new ocr process request
+     * Recognize performs OCR on one or more files.
+     * Supports both synchronous and asynchronous processing.
      * </pre>
      */
     public com.antinvestor.apis.ocr.v1.RecognizeResponse recognize(com.antinvestor.apis.ocr.v1.RecognizeRequest request) throws io.grpc.StatusException {
@@ -250,7 +275,8 @@ public final class OCRServiceGrpc {
 
     /**
      * <pre>
-     * Check the status of request if queued
+     * Status retrieves the current status of an async OCR request.
+     * Returns processing status and results if available.
      * </pre>
      */
     public com.antinvestor.apis.ocr.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) throws io.grpc.StatusException {
@@ -261,6 +287,10 @@ public final class OCRServiceGrpc {
 
   /**
    * A stub to allow clients to do limited synchronous rpc calls to service OCRService.
+   * <pre>
+   * OCRService provides optical character recognition capabilities.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class OCRServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<OCRServiceBlockingStub> {
@@ -277,7 +307,8 @@ public final class OCRServiceGrpc {
 
     /**
      * <pre>
-     * Perform a new ocr process request
+     * Recognize performs OCR on one or more files.
+     * Supports both synchronous and asynchronous processing.
      * </pre>
      */
     public com.antinvestor.apis.ocr.v1.RecognizeResponse recognize(com.antinvestor.apis.ocr.v1.RecognizeRequest request) {
@@ -287,7 +318,8 @@ public final class OCRServiceGrpc {
 
     /**
      * <pre>
-     * Check the status of request if queued
+     * Status retrieves the current status of an async OCR request.
+     * Returns processing status and results if available.
      * </pre>
      */
     public com.antinvestor.apis.ocr.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) {
@@ -298,6 +330,10 @@ public final class OCRServiceGrpc {
 
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service OCRService.
+   * <pre>
+   * OCRService provides optical character recognition capabilities.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class OCRServiceFutureStub
       extends io.grpc.stub.AbstractFutureStub<OCRServiceFutureStub> {
@@ -314,7 +350,8 @@ public final class OCRServiceGrpc {
 
     /**
      * <pre>
-     * Perform a new ocr process request
+     * Recognize performs OCR on one or more files.
+     * Supports both synchronous and asynchronous processing.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.ocr.v1.RecognizeResponse> recognize(
@@ -325,7 +362,8 @@ public final class OCRServiceGrpc {
 
     /**
      * <pre>
-     * Check the status of request if queued
+     * Status retrieves the current status of an async OCR request.
+     * Returns processing status and results if available.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.ocr.v1.StatusResponse> status(

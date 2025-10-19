@@ -17,6 +17,10 @@ package com.antinvestor.apis.lostid.v1;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
+ * <pre>
+ * LostIdService manages lost and found identification documents.
+ * All RPCs require authentication via Bearer token.
+ * </pre>
  */
 @io.grpc.stub.annotations.GrpcGenerated
 public final class LostIdServiceGrpc {
@@ -272,12 +276,17 @@ public final class LostIdServiceGrpc {
   }
 
   /**
+   * <pre>
+   * LostIdService manages lost and found identification documents.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public interface AsyncService {
 
     /**
      * <pre>
-     * Log a new Collectible request
+     * Collectible registers a found identification document.
+     * Supports up to 5 images of the found item.
      * </pre>
      */
     default void collectible(com.antinvestor.apis.lostid.v1.CollectibleRequest request,
@@ -286,6 +295,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * ListCollectible retrieves registered collectibles.
+     * Supports pagination or time-based filtering.
+     * </pre>
      */
     default void listCollectible(com.antinvestor.apis.lostid.v1.ListCollectibleRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.lostid.v1.ListCollectibleResponse> responseObserver) {
@@ -294,7 +307,8 @@ public final class LostIdServiceGrpc {
 
     /**
      * <pre>
-     * Log a new search request
+     * Search creates a search request for a lost item.
+     * The system will attempt to match with registered collectibles.
      * </pre>
      */
     default void search(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -303,6 +317,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * ListSearch retrieves search requests.
+     * Supports pagination or time-based filtering.
+     * </pre>
      */
     default void listSearch(com.antinvestor.apis.lostid.v1.ListSearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.lostid.v1.ListSearchResponse> responseObserver) {
@@ -310,6 +328,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Progress retrieves the complete history for a collectible or search.
+     * Includes status updates and financial transactions.
+     * </pre>
      */
     default void progress(com.antinvestor.apis.lostid.v1.ProgressRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.lostid.v1.ProgressResponse> responseObserver) {
@@ -317,6 +339,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * ListTransaction retrieves financial transactions.
+     * Includes rewards paid and service fees charged.
+     * </pre>
      */
     default void listTransaction(com.antinvestor.apis.lostid.v1.ListTransactionRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.lostid.v1.ListTransactionResponse> responseObserver) {
@@ -326,6 +352,10 @@ public final class LostIdServiceGrpc {
 
   /**
    * Base class for the server implementation of the service LostIdService.
+   * <pre>
+   * LostIdService manages lost and found identification documents.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static abstract class LostIdServiceImplBase
       implements io.grpc.BindableService, AsyncService {
@@ -337,6 +367,10 @@ public final class LostIdServiceGrpc {
 
   /**
    * A stub to allow clients to do asynchronous rpc calls to service LostIdService.
+   * <pre>
+   * LostIdService manages lost and found identification documents.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class LostIdServiceStub
       extends io.grpc.stub.AbstractAsyncStub<LostIdServiceStub> {
@@ -353,7 +387,8 @@ public final class LostIdServiceGrpc {
 
     /**
      * <pre>
-     * Log a new Collectible request
+     * Collectible registers a found identification document.
+     * Supports up to 5 images of the found item.
      * </pre>
      */
     public void collectible(com.antinvestor.apis.lostid.v1.CollectibleRequest request,
@@ -363,6 +398,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * ListCollectible retrieves registered collectibles.
+     * Supports pagination or time-based filtering.
+     * </pre>
      */
     public void listCollectible(com.antinvestor.apis.lostid.v1.ListCollectibleRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.lostid.v1.ListCollectibleResponse> responseObserver) {
@@ -372,7 +411,8 @@ public final class LostIdServiceGrpc {
 
     /**
      * <pre>
-     * Log a new search request
+     * Search creates a search request for a lost item.
+     * The system will attempt to match with registered collectibles.
      * </pre>
      */
     public void search(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -382,6 +422,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * ListSearch retrieves search requests.
+     * Supports pagination or time-based filtering.
+     * </pre>
      */
     public void listSearch(com.antinvestor.apis.lostid.v1.ListSearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.lostid.v1.ListSearchResponse> responseObserver) {
@@ -390,6 +434,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Progress retrieves the complete history for a collectible or search.
+     * Includes status updates and financial transactions.
+     * </pre>
      */
     public void progress(com.antinvestor.apis.lostid.v1.ProgressRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.lostid.v1.ProgressResponse> responseObserver) {
@@ -398,6 +446,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * ListTransaction retrieves financial transactions.
+     * Includes rewards paid and service fees charged.
+     * </pre>
      */
     public void listTransaction(com.antinvestor.apis.lostid.v1.ListTransactionRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.lostid.v1.ListTransactionResponse> responseObserver) {
@@ -408,6 +460,10 @@ public final class LostIdServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service LostIdService.
+   * <pre>
+   * LostIdService manages lost and found identification documents.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class LostIdServiceBlockingV2Stub
       extends io.grpc.stub.AbstractBlockingStub<LostIdServiceBlockingV2Stub> {
@@ -424,7 +480,8 @@ public final class LostIdServiceGrpc {
 
     /**
      * <pre>
-     * Log a new Collectible request
+     * Collectible registers a found identification document.
+     * Supports up to 5 images of the found item.
      * </pre>
      */
     public com.antinvestor.apis.lostid.v1.CollectibleResponse collectible(com.antinvestor.apis.lostid.v1.CollectibleRequest request) throws io.grpc.StatusException {
@@ -433,6 +490,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * ListCollectible retrieves registered collectibles.
+     * Supports pagination or time-based filtering.
+     * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
     public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.lostid.v1.ListCollectibleResponse>
@@ -443,7 +504,8 @@ public final class LostIdServiceGrpc {
 
     /**
      * <pre>
-     * Log a new search request
+     * Search creates a search request for a lost item.
+     * The system will attempt to match with registered collectibles.
      * </pre>
      */
     public com.antinvestor.apis.lostid.v1.SearchResponse search(com.antinvestor.apis.common.v1.SearchRequest request) throws io.grpc.StatusException {
@@ -452,6 +514,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * ListSearch retrieves search requests.
+     * Supports pagination or time-based filtering.
+     * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
     public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.lostid.v1.ListSearchResponse>
@@ -461,6 +527,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Progress retrieves the complete history for a collectible or search.
+     * Includes status updates and financial transactions.
+     * </pre>
      */
     public com.antinvestor.apis.lostid.v1.ProgressResponse progress(com.antinvestor.apis.lostid.v1.ProgressRequest request) throws io.grpc.StatusException {
       return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
@@ -468,6 +538,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * ListTransaction retrieves financial transactions.
+     * Includes rewards paid and service fees charged.
+     * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
     public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.lostid.v1.ListTransactionResponse>
@@ -479,6 +553,10 @@ public final class LostIdServiceGrpc {
 
   /**
    * A stub to allow clients to do limited synchronous rpc calls to service LostIdService.
+   * <pre>
+   * LostIdService manages lost and found identification documents.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class LostIdServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<LostIdServiceBlockingStub> {
@@ -495,7 +573,8 @@ public final class LostIdServiceGrpc {
 
     /**
      * <pre>
-     * Log a new Collectible request
+     * Collectible registers a found identification document.
+     * Supports up to 5 images of the found item.
      * </pre>
      */
     public com.antinvestor.apis.lostid.v1.CollectibleResponse collectible(com.antinvestor.apis.lostid.v1.CollectibleRequest request) {
@@ -504,6 +583,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * ListCollectible retrieves registered collectibles.
+     * Supports pagination or time-based filtering.
+     * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.lostid.v1.ListCollectibleResponse> listCollectible(
         com.antinvestor.apis.lostid.v1.ListCollectibleRequest request) {
@@ -513,7 +596,8 @@ public final class LostIdServiceGrpc {
 
     /**
      * <pre>
-     * Log a new search request
+     * Search creates a search request for a lost item.
+     * The system will attempt to match with registered collectibles.
      * </pre>
      */
     public com.antinvestor.apis.lostid.v1.SearchResponse search(com.antinvestor.apis.common.v1.SearchRequest request) {
@@ -522,6 +606,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * ListSearch retrieves search requests.
+     * Supports pagination or time-based filtering.
+     * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.lostid.v1.ListSearchResponse> listSearch(
         com.antinvestor.apis.lostid.v1.ListSearchRequest request) {
@@ -530,6 +618,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Progress retrieves the complete history for a collectible or search.
+     * Includes status updates and financial transactions.
+     * </pre>
      */
     public com.antinvestor.apis.lostid.v1.ProgressResponse progress(com.antinvestor.apis.lostid.v1.ProgressRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -537,6 +629,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * ListTransaction retrieves financial transactions.
+     * Includes rewards paid and service fees charged.
+     * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.lostid.v1.ListTransactionResponse> listTransaction(
         com.antinvestor.apis.lostid.v1.ListTransactionRequest request) {
@@ -547,6 +643,10 @@ public final class LostIdServiceGrpc {
 
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service LostIdService.
+   * <pre>
+   * LostIdService manages lost and found identification documents.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class LostIdServiceFutureStub
       extends io.grpc.stub.AbstractFutureStub<LostIdServiceFutureStub> {
@@ -563,7 +663,8 @@ public final class LostIdServiceGrpc {
 
     /**
      * <pre>
-     * Log a new Collectible request
+     * Collectible registers a found identification document.
+     * Supports up to 5 images of the found item.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.lostid.v1.CollectibleResponse> collectible(
@@ -574,7 +675,8 @@ public final class LostIdServiceGrpc {
 
     /**
      * <pre>
-     * Log a new search request
+     * Search creates a search request for a lost item.
+     * The system will attempt to match with registered collectibles.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.lostid.v1.SearchResponse> search(
@@ -584,6 +686,10 @@ public final class LostIdServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Progress retrieves the complete history for a collectible or search.
+     * Includes status updates and financial transactions.
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.lostid.v1.ProgressResponse> progress(
         com.antinvestor.apis.lostid.v1.ProgressRequest request) {

@@ -51,31 +51,44 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// The device service definition.
+// DeviceService provides comprehensive device management capabilities.
+// All RPCs require authentication via Bearer token unless otherwise specified.
 type DeviceServiceClient interface {
-	// Obtains a device by its hash
+	// GetById retrieves one or more devices by their unique identifiers.
+	// Supports batch retrieval for efficiency.
 	GetById(ctx context.Context, in *GetByIdRequest, opts ...grpc.CallOption) (*GetByIdResponse, error)
-	// Obtains a device by its session id
+	// GetBySessionId retrieves a device by its active session identifier.
+	// Useful for resolving devices from session tokens.
 	GetBySessionId(ctx context.Context, in *GetBySessionIdRequest, opts ...grpc.CallOption) (*GetBySessionIdResponse, error)
-	// Obtains a device by its hash
+	// Search finds devices matching specified criteria.
+	// Supports filtering by date range, properties, and full-text search.
 	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error)
-	// Creates a new device based on the request.
+	// Create registers a new device in the system.
+	// Returns a unique device ID that should be stored by the client.
 	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
-	// Updates an existing device based on the request.
+	// Update modifies an existing device's information.
+	// Only the device owner or administrators can update device information.
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
-	// Links an existing device session based on the request to a profile.
+	// Link associates a device with a user profile.
+	// Required before the device can be used for authenticated operations.
 	Link(ctx context.Context, in *LinkRequest, opts ...grpc.CallOption) (*LinkResponse, error)
-	// Removes an existing device based on the request.
+	// Remove deletes a device from the system.
+	// This operation cannot be undone.
 	Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (*RemoveResponse, error)
-	// Log a new key based on the request.
+	// Log creates a new activity log entry for a device.
+	// Used for session tracking and security auditing.
 	Log(ctx context.Context, in *LogRequest, opts ...grpc.CallOption) (*LogResponse, error)
-	// Lists logs the a device has/owns.
+	// ListLogs retrieves activity logs for a device.
+	// Returns a stream of log entries for the specified device.
 	ListLogs(ctx context.Context, in *ListLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListLogsResponse], error)
-	// Adds a new key based on the request.
+	// AddKey adds an encryption key to a device.
+	// Keys are used for secure communications (Matrix E2EE, push notifications).
 	AddKey(ctx context.Context, in *AddKeyRequest, opts ...grpc.CallOption) (*AddKeyResponse, error)
-	// Removes an old device keys based on this request's id
+	// RemoveKey removes encryption keys from a device.
+	// Used for key rotation or when removing a device.
 	RemoveKey(ctx context.Context, in *RemoveKeyRequest, opts ...grpc.CallOption) (*RemoveKeyResponse, error)
-	// Lists all the keys a device has/owns.
+	// SearchKey finds encryption keys associated with a device.
+	// Supports filtering by key type and pagination.
 	SearchKey(ctx context.Context, in *SearchKeyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchKeyResponse], error)
 }
 
@@ -238,31 +251,44 @@ type DeviceService_SearchKeyClient = grpc.ServerStreamingClient[SearchKeyRespons
 // All implementations must embed UnimplementedDeviceServiceServer
 // for forward compatibility.
 //
-// The device service definition.
+// DeviceService provides comprehensive device management capabilities.
+// All RPCs require authentication via Bearer token unless otherwise specified.
 type DeviceServiceServer interface {
-	// Obtains a device by its hash
+	// GetById retrieves one or more devices by their unique identifiers.
+	// Supports batch retrieval for efficiency.
 	GetById(context.Context, *GetByIdRequest) (*GetByIdResponse, error)
-	// Obtains a device by its session id
+	// GetBySessionId retrieves a device by its active session identifier.
+	// Useful for resolving devices from session tokens.
 	GetBySessionId(context.Context, *GetBySessionIdRequest) (*GetBySessionIdResponse, error)
-	// Obtains a device by its hash
+	// Search finds devices matching specified criteria.
+	// Supports filtering by date range, properties, and full-text search.
 	Search(*SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error
-	// Creates a new device based on the request.
+	// Create registers a new device in the system.
+	// Returns a unique device ID that should be stored by the client.
 	Create(context.Context, *CreateRequest) (*CreateResponse, error)
-	// Updates an existing device based on the request.
+	// Update modifies an existing device's information.
+	// Only the device owner or administrators can update device information.
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
-	// Links an existing device session based on the request to a profile.
+	// Link associates a device with a user profile.
+	// Required before the device can be used for authenticated operations.
 	Link(context.Context, *LinkRequest) (*LinkResponse, error)
-	// Removes an existing device based on the request.
+	// Remove deletes a device from the system.
+	// This operation cannot be undone.
 	Remove(context.Context, *RemoveRequest) (*RemoveResponse, error)
-	// Log a new key based on the request.
+	// Log creates a new activity log entry for a device.
+	// Used for session tracking and security auditing.
 	Log(context.Context, *LogRequest) (*LogResponse, error)
-	// Lists logs the a device has/owns.
+	// ListLogs retrieves activity logs for a device.
+	// Returns a stream of log entries for the specified device.
 	ListLogs(*ListLogsRequest, grpc.ServerStreamingServer[ListLogsResponse]) error
-	// Adds a new key based on the request.
+	// AddKey adds an encryption key to a device.
+	// Keys are used for secure communications (Matrix E2EE, push notifications).
 	AddKey(context.Context, *AddKeyRequest) (*AddKeyResponse, error)
-	// Removes an old device keys based on this request's id
+	// RemoveKey removes encryption keys from a device.
+	// Used for key rotation or when removing a device.
 	RemoveKey(context.Context, *RemoveKeyRequest) (*RemoveKeyResponse, error)
-	// Lists all the keys a device has/owns.
+	// SearchKey finds encryption keys associated with a device.
+	// Supports filtering by key type and pagination.
 	SearchKey(*SearchKeyRequest, grpc.ServerStreamingServer[SearchKeyResponse]) error
 	mustEmbedUnimplementedDeviceServiceServer()
 }
