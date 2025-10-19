@@ -9,7 +9,7 @@ require (
 	go.uber.org/mock v0.6.0
 	google.golang.org/genproto v0.0.0-20250922171735-9219d122eba9
 	google.golang.org/grpc v1.75.1
-	google.golang.org/protobuf v1.36.9
+	google.golang.org/protobuf v1.36.10
 )
 
 require (
