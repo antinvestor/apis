@@ -1,0 +1,1073 @@
+openapi: 3.1.0
+info:
+  title: Payment Service
+  description: The Payment Service provides comprehensive payment processing capabilities including inbound and outbound payments, payment link generation, reconciliation, and multi-channel payment routing. It supports various payment methods (mobile money, bank transfers, cards) and follows a queue-and-release pattern for batch processing. The service handles payment lifecycle management from initiation through completion with full audit trails.
+  contact:
+    name: Ant Investor Ltd
+    url: https://github.com/antinvestor/service-payment
+    email: info@antinvestor.com
+  license:
+    name: Apache License
+    url: https://github.com/antinvestor/apis/blob/master/LICENSE
+  version: v1.0.0
+paths:
+  /payment.v1.PaymentService/CreatePaymentLink:
+    post:
+      tags:
+        - Payment Links
+        - payment.v1.PaymentService
+      summary: Create payment link
+      description: Creates a shareable payment link for customer-initiated payments. Supports fixed or variable amounts, expiration dates, and multiple notification methods (email, SMS). Useful for invoices, donations, and subscriptions.
+      operationId: createPaymentLink
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/payment.v1.CreatePaymentLinkRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/payment.v1.CreatePaymentLinkResponse'
+  /payment.v1.PaymentService/InitiatePrompt:
+    post:
+      tags:
+        - Payments
+        - payment.v1.PaymentService
+      summary: Initiate payment prompt
+      description: Initiates a payment prompt to the customer's device. For mobile money (e.g., M-PESA), this triggers an STK push prompt. For other methods, it may send a payment request notification.
+      operationId: initiatePaymentPrompt
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/payment.v1.InitiatePromptRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/payment.v1.InitiatePromptResponse'
+  /payment.v1.PaymentService/Receive:
+    post:
+      tags:
+        - Payments
+        - payment.v1.PaymentService
+      summary: Queue inbound payment
+      description: Queues an inbound payment for processing. Used to record expected incoming payments and match them with actual receipts during reconciliation.
+      operationId: receivePayment
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/payment.v1.ReceiveRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/payment.v1.ReceiveResponse'
+  /payment.v1.PaymentService/Reconcile:
+    post:
+      tags:
+        - Reconciliation
+        - payment.v1.PaymentService
+      summary: Reconcile external transaction
+      description: Reconciles an external transaction (from mobile money provider, bank statement) with internal payment records. Matches based on external transaction ID, amount, and route.
+      operationId: reconcilePayment
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/payment.v1.ReconcileRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/payment.v1.ReconcileResponse'
+  /payment.v1.PaymentService/Release:
+    post:
+      tags:
+        - Payments
+        - payment.v1.PaymentService
+      summary: Release queued payment
+      description: Releases a queued payment for processing. This triggers the actual payment transfer through the specified route. Supports batch processing by releasing multiple payments together.
+      operationId: releasePayment
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/payment.v1.ReleaseRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/payment.v1.ReleaseResponse'
+  /payment.v1.PaymentService/Search: {}
+  /payment.v1.PaymentService/Send:
+    post:
+      tags:
+        - Payments
+        - payment.v1.PaymentService
+      summary: Queue outbound payment
+      description: Queues an outbound payment for processing. The payment is validated and queued but not processed until explicitly released via the Release RPC. Supports multiple payment routes including mobile money, bank transfers, and cards.
+      operationId: sendPayment
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/payment.v1.SendRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/payment.v1.SendResponse'
+  /payment.v1.PaymentService/Status:
+    post:
+      tags:
+        - Payments
+        - payment.v1.PaymentService
+      summary: Get payment status
+      description: Retrieves the current status of a payment including processing state (queued, processing, completed, failed) and detailed status information.
+      operationId: getPaymentStatus
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/common.v1.StatusRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/common.v1.StatusResponse'
+  /payment.v1.PaymentService/StatusUpdate:
+    post:
+      tags:
+        - Payments
+        - payment.v1.PaymentService
+      summary: Update payment status
+      description: Updates the status of a payment. Used for manual status corrections, workflow progression, or handling exceptional cases that require manual intervention.
+      operationId: updatePaymentStatus
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/common.v1.StatusUpdateRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/common.v1.StatusUpdateResponse'
+components:
+  schemas:
+    common.v1.ContactLink:
+      type: object
+      properties:
+        profileName:
+          type: string
+          title: profile_name
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+        profileType:
+          type: string
+          title: profile_type
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        profileImageId:
+          type: string
+          title: profile_image_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        contactId:
+          type: string
+          title: contact_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        detail:
+          type: string
+          title: detail
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: ContactLink
+      additionalProperties: false
+    common.v1.Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          title: count
+          format: int32
+        page:
+          type: integer
+          title: page
+          format: int32
+        startDate:
+          type: string
+          title: start_date
+        endDate:
+          type: string
+          title: end_date
+      title: Pagination
+      additionalProperties: false
+    common.v1.STATE:
+      type: string
+      title: STATE
+      enum:
+        - CREATED
+        - CHECKED
+        - ACTIVE
+        - INACTIVE
+        - DELETED
+      description: buf:lint:ignore ENUM_VALUE_PREFIX
+    common.v1.STATUS:
+      type: string
+      title: STATUS
+      enum:
+        - UNKNOWN
+        - QUEUED
+        - IN_PROCESS
+        - FAILED
+        - SUCCESSFUL
+      description: buf:lint:ignore ENUM_VALUE_PREFIX
+    common.v1.SearchRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          title: query
+        idQuery:
+          type: string
+          title: id_query
+        limits:
+          title: limits
+          $ref: '#/components/schemas/common.v1.Pagination'
+        properties:
+          type: array
+          items:
+            type: string
+          title: properties
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: SearchRequest
+      additionalProperties: false
+    common.v1.StatusRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: StatusRequest
+      additionalProperties: false
+    common.v1.StatusResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        state:
+          title: state
+          $ref: '#/components/schemas/common.v1.STATE'
+        status:
+          title: status
+          $ref: '#/components/schemas/common.v1.STATUS'
+        externalId:
+          type: string
+          title: external_id
+        transientId:
+          type: string
+          title: transient_id
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: StatusResponse
+      additionalProperties: false
+    common.v1.StatusUpdateRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        state:
+          title: state
+          $ref: '#/components/schemas/common.v1.STATE'
+        status:
+          title: status
+          $ref: '#/components/schemas/common.v1.STATUS'
+        externalId:
+          type: string
+          title: external_id
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: StatusUpdateRequest
+      additionalProperties: false
+    common.v1.StatusUpdateResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/common.v1.StatusResponse'
+      title: StatusUpdateResponse
+      additionalProperties: false
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    google.protobuf.ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          title: values
+          description: Repeated field of dynamically typed values.
+      title: ListValue
+      additionalProperties: false
+      description: |-
+        `ListValue` is a wrapper around a repeated field of values.
+
+         The JSON representation for `ListValue` is JSON array.
+    google.protobuf.NullValue:
+      type: string
+      title: NullValue
+      enum:
+        - NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+         `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+    google.protobuf.Struct:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/google.protobuf.Value'
+      description: |-
+        `Struct` represents a structured data value, consisting of fields
+         which map to dynamically typed values. In some languages, `Struct`
+         might be supported by a native representation. For example, in
+         scripting languages like JS a struct is represented as an
+         object. The details of that representation are described together
+         with the proto support for the language.
+
+         The JSON representation for `Struct` is JSON object.
+    google.protobuf.Struct.FieldsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          title: value
+          $ref: '#/components/schemas/google.protobuf.Value'
+      title: FieldsEntry
+      additionalProperties: false
+    google.protobuf.Value:
+      oneOf:
+        - type: "null"
+        - type: number
+        - type: string
+        - type: boolean
+        - type: array
+        - type: object
+          additionalProperties: true
+      description: |-
+        `Value` represents a dynamically typed value which can be either
+         null, a number, a string, a boolean, a recursive struct value, or a
+         list of values. A producer of value is expected to set one of these
+         variants. Absence of any variant indicates an error.
+
+         The JSON representation for `Value` is JSON value.
+    google.type.Money:
+      type: object
+      properties:
+        currencyCode:
+          type: string
+          title: currency_code
+          description: The three-letter currency code defined in ISO 4217.
+        units:
+          type:
+            - integer
+            - string
+          title: units
+          format: int64
+          description: |-
+            The whole units of the amount.
+             For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+        nanos:
+          type: integer
+          title: nanos
+          format: int32
+          description: |-
+            Number of nano (10^-9) units of the amount.
+             The value must be between -999,999,999 and +999,999,999 inclusive.
+             If `units` is positive, `nanos` must be positive or zero.
+             If `units` is zero, `nanos` can be positive, zero, or negative.
+             If `units` is negative, `nanos` must be negative or zero.
+             For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+      title: Money
+      additionalProperties: false
+      description: Represents an amount of money with its currency type.
+    payment.v1.Account:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          title: account_number
+          description: Account number to be credited
+        countryCode:
+          type: string
+          title: country_code
+          description: Country code (ISO 3166-1 alpha-2)
+        name:
+          type: string
+          title: name
+          description: Account holder name
+      title: Account
+      additionalProperties: false
+      description: Account represents a merchant or recipient account.
+    payment.v1.CreatePaymentLinkRequest:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/payment.v1.Customer'
+          title: customers
+          description: Customers to notify
+        paymentLink:
+          title: payment_link
+          description: Payment link details
+          $ref: '#/components/schemas/payment.v1.PaymentLink'
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/payment.v1.NotificationType'
+          title: notifications
+          description: Notification methods
+      title: CreatePaymentLinkRequest
+      additionalProperties: false
+      description: CreatePaymentLinkRequest creates a new payment link.
+    payment.v1.CreatePaymentLinkResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: Status response with link
+          $ref: '#/components/schemas/common.v1.StatusResponse'
+      title: CreatePaymentLinkResponse
+      additionalProperties: false
+      description: CreatePaymentLinkResponse returns the created payment link.
+    payment.v1.Customer:
+      type: object
+      properties:
+        source:
+          title: source
+          description: Customer contact information
+          $ref: '#/components/schemas/common.v1.ContactLink'
+        firstAddress:
+          type: string
+          title: first_address
+          description: Primary address line
+        countryCode:
+          type: string
+          title: country_code
+          description: Country code (ISO 3166-1 alpha-2)
+        postalOrZipCode:
+          type: string
+          title: postal_or_zip_code
+          description: Postal/ZIP code
+        customerExternalRef:
+          type: string
+          title: customer_external_ref
+          description: External customer reference
+      title: Customer
+      additionalProperties: false
+      description: Customer represents a payment link customer.
+    payment.v1.InitiatePromptRequest:
+      type: object
+      properties:
+        source:
+          title: source
+          description: Payment source
+          $ref: '#/components/schemas/common.v1.ContactLink'
+        recipient:
+          title: recipient
+          description: Payment recipient
+          $ref: '#/components/schemas/common.v1.ContactLink'
+        amount:
+          title: amount
+          description: Payment amount
+          $ref: '#/components/schemas/google.type.Money'
+        dateCreated:
+          type: string
+          title: date_created
+          description: Creation timestamp (RFC3339)
+        deviceId:
+          type: string
+          title: device_id
+          description: Device ID for prompt
+        id:
+          type: string
+          title: id
+          description: Payment ID
+        state:
+          title: state
+          description: Processing state
+          $ref: '#/components/schemas/common.v1.STATE'
+        status:
+          title: status
+          description: Payment status
+          $ref: '#/components/schemas/common.v1.STATUS'
+        route:
+          type: string
+          title: route
+          description: Payment route hint (M-PESA, RTGS, INTERNAL)
+        recipientAccount:
+          title: recipient_account
+          description: Merchant account information
+          $ref: '#/components/schemas/payment.v1.Account'
+        extra:
+          title: extra
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: InitiatePromptRequest
+      additionalProperties: false
+      description: InitiatePromptRequest initiates a payment prompt (e.g., STK push).
+    payment.v1.InitiatePromptResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: Status response
+          $ref: '#/components/schemas/common.v1.StatusResponse'
+      title: InitiatePromptResponse
+      additionalProperties: false
+      description: InitiatePromptResponse confirms prompt initiation.
+    payment.v1.NotificationType:
+      type: string
+      title: NotificationType
+      enum:
+        - NOTIFICATION_TYPE_UNSPECIFIED
+        - NOTIFICATION_TYPE_EMAIL
+        - NOTIFICATION_TYPE_SMS
+      description: NotificationType defines how customers are notified about payment links.
+    payment.v1.Payment:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique payment ID
+        transactionId:
+          type: string
+          title: transaction_id
+          description: Associated transaction ID (ledger)
+        referenceId:
+          type: string
+          title: reference_id
+          description: External reference (invoice, order)
+        batchId:
+          type: string
+          title: batch_id
+          description: Batch ID for grouped payments
+        externalTransactionId:
+          type: string
+          title: external_transaction_id
+          description: Provider's transaction ID (M-PESA, bank)
+        route:
+          type: string
+          title: route
+          description: Payment route (M-PESA, RTGS, CARD, INTERNAL)
+        source:
+          title: source
+          description: Payment source (payer)
+          $ref: '#/components/schemas/common.v1.ContactLink'
+        recipient:
+          title: recipient
+          description: Payment recipient (payee)
+          $ref: '#/components/schemas/common.v1.ContactLink'
+        amount:
+          title: amount
+          description: Payment amount
+          $ref: '#/components/schemas/google.type.Money'
+        cost:
+          title: cost
+          description: Transaction cost/fee
+          $ref: '#/components/schemas/google.type.Money'
+        state:
+          title: state
+          description: Processing state
+          $ref: '#/components/schemas/common.v1.STATE'
+        status:
+          title: status
+          description: Payment status
+          $ref: '#/components/schemas/common.v1.STATUS'
+        dateCreated:
+          type: string
+          title: date_created
+          description: Creation timestamp (RFC3339)
+        dateProcessed:
+          type: string
+          title: date_processed
+          description: Processing timestamp (RFC3339)
+        outbound:
+          type: boolean
+          title: outbound
+          description: True if outbound, false if inbound
+        extra:
+          title: extra
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: Payment
+      additionalProperties: false
+      description: Payment represents a payment transaction.
+    payment.v1.PaymentLink:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique payment link ID
+        expiryDate:
+          type: string
+          title: expiry_date
+          description: Link expiration date (RFC3339)
+        saleDate:
+          type: string
+          title: sale_date
+          description: Sale date (RFC3339)
+        paymentLinkType:
+          type: string
+          title: payment_link_type
+          description: Link type (invoice, donation, subscription)
+        saleType:
+          type: string
+          title: sale_type
+          description: Sale type (goods, services)
+        name:
+          type: string
+          title: name
+          description: Payment link name/title
+        description:
+          type: string
+          title: description
+          description: Payment description
+        externalRef:
+          type: string
+          title: external_ref
+          description: External reference (invoice number)
+        paymentLinkRef:
+          type: string
+          title: payment_link_ref
+          description: Generated payment link reference
+        redirectUrl:
+          type: string
+          title: redirect_url
+          description: Post-payment redirect URL
+        amountOption:
+          type: string
+          title: amount_option
+          description: Amount option (fixed, variable, minimum)
+        amount:
+          title: amount
+          description: Payment amount (if fixed)
+          $ref: '#/components/schemas/google.type.Money'
+        currency:
+          type: string
+          title: currency
+          description: Currency code (ISO 4217)
+      title: PaymentLink
+      additionalProperties: false
+      description: PaymentLink represents a shareable payment link.
+    payment.v1.ReceiveRequest:
+      type: object
+      properties:
+        data:
+          title: data
+          description: Payment to receive
+          $ref: '#/components/schemas/payment.v1.Payment'
+      title: ReceiveRequest
+      additionalProperties: false
+      description: ReceiveRequest queues an inbound payment.
+    payment.v1.ReceiveResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: Status response
+          $ref: '#/components/schemas/common.v1.StatusResponse'
+      title: ReceiveResponse
+      additionalProperties: false
+      description: ReceiveResponse confirms payment queuing.
+    payment.v1.ReconcileRequest:
+      type: object
+      properties:
+        externalTransactionId:
+          type: string
+          title: external_transaction_id
+          description: Provider's transaction ID
+        route:
+          type: string
+          title: route
+          description: Payment route
+        outbound:
+          type: boolean
+          title: outbound
+          description: Payment direction
+        amount:
+          title: amount
+          description: Transaction amount
+          $ref: '#/components/schemas/google.type.Money'
+        owner:
+          type: string
+          title: owner
+          description: Account owner
+        countryCode:
+          type: string
+          title: country_code
+          description: Country code (ISO 3166-1 alpha-2)
+      title: ReconcileRequest
+      additionalProperties: false
+      description: ReconcileRequest reconciles an external transaction.
+    payment.v1.ReconcileResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Internal payment ID
+        transactionId:
+          type: string
+          title: transaction_id
+          description: Transaction ID
+        referenceId:
+          type: string
+          title: reference_id
+          description: Reference ID
+        status:
+          title: status
+          description: Reconciliation status
+          $ref: '#/components/schemas/common.v1.STATUS'
+        description:
+          type: string
+          title: description
+          description: Status description
+      title: ReconcileResponse
+      additionalProperties: false
+      description: ReconcileResponse returns reconciliation result.
+    payment.v1.ReleaseRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Payment ID to release
+        comment:
+          type: string
+          title: comment
+          description: Release comment/reason
+      title: ReleaseRequest
+      additionalProperties: false
+      description: ReleaseRequest releases a queued payment for processing.
+    payment.v1.ReleaseResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: Status response
+          $ref: '#/components/schemas/common.v1.StatusResponse'
+      title: ReleaseResponse
+      additionalProperties: false
+      description: ReleaseResponse confirms payment release.
+    payment.v1.SearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/payment.v1.Payment'
+          title: data
+          description: List of matching payments
+      title: SearchResponse
+      additionalProperties: false
+      description: SearchResponse returns payment search results.
+    payment.v1.SendRequest:
+      type: object
+      properties:
+        data:
+          title: data
+          description: Payment to send
+          $ref: '#/components/schemas/payment.v1.Payment'
+      title: SendRequest
+      additionalProperties: false
+      description: SendRequest queues an outbound payment.
+    payment.v1.SendResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: Status response
+          $ref: '#/components/schemas/common.v1.StatusResponse'
+      title: SendResponse
+      additionalProperties: false
+      description: SendResponse confirms payment queuing.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security: []
+tags:
+  - name: payment.v1.PaymentService
+    description: |-
+      PaymentService handles payment processing and reconciliation.
+       All RPCs require authentication via Bearer token.

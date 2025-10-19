@@ -25,11 +25,19 @@ public interface ReleaseRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Payment ID to release
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Payment ID to release
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface ReleaseRequestOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Release comment/reason
+   * </pre>
+   *
    * <code>string comment = 2 [json_name = "comment"];</code>
    * @return The comment.
    */
   java.lang.String getComment();
   /**
+   * <pre>
+   * Release comment/reason
+   * </pre>
+   *
    * <code>string comment = 2 [json_name = "comment"];</code>
    * @return The bytes for comment.
    */

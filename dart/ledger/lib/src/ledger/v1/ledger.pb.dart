@@ -24,62 +24,8 @@ export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 export 'ledger.pbenum.dart';
 
-class SearchRequest extends $pb.GeneratedMessage {
-  factory SearchRequest({
-    $core.String? query,
-  }) {
-    final result = create();
-    if (query != null) result.query = query;
-    return result;
-  }
-
-  SearchRequest._();
-
-  factory SearchRequest.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory SearchRequest.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SearchRequest',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'ledger.v1'),
-      createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'query')
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SearchRequest clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SearchRequest copyWith(void Function(SearchRequest) updates) =>
-      super.copyWith((message) => updates(message as SearchRequest))
-          as SearchRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static SearchRequest create() => SearchRequest._();
-  @$core.override
-  SearchRequest createEmptyInstance() => create();
-  static $pb.PbList<SearchRequest> createRepeated() =>
-      $pb.PbList<SearchRequest>();
-  @$core.pragma('dart2js:noInline')
-  static SearchRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SearchRequest>(create);
-  static SearchRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get query => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set query($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasQuery() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearQuery() => $_clearField(1);
-}
-
+/// Ledger represents a category in the chart of accounts.
+/// Ledgers can be hierarchical with parent-child relationships.
 class Ledger extends $pb.GeneratedMessage {
   factory Ledger({
     $core.String? reference,
@@ -174,6 +120,8 @@ class Ledger extends $pb.GeneratedMessage {
   $0.Struct ensureData() => $_ensure(3);
 }
 
+/// Account represents a specific account within a ledger.
+/// Tracks balances and supports multi-currency operations.
 class Account extends $pb.GeneratedMessage {
   factory Account({
     $core.String? reference,
@@ -300,6 +248,8 @@ class Account extends $pb.GeneratedMessage {
   $1.Money ensureReservedBalance() => $_ensure(5);
 }
 
+/// TransactionEntry represents one side of a double-entry transaction.
+/// Each transaction must have at least two entries with balanced debits and credits.
 class TransactionEntry extends $pb.GeneratedMessage {
   factory TransactionEntry({
     $core.String? account,
@@ -434,6 +384,8 @@ class TransactionEntry extends $pb.GeneratedMessage {
   void clearClearedAt() => $_clearField(7);
 }
 
+/// Transaction represents a complete double-entry transaction.
+/// Must contain balanced entries (sum of debits = sum of credits).
 class Transaction extends $pb.GeneratedMessage {
   factory Transaction({
     $core.String? reference,
@@ -560,71 +512,83 @@ class Transaction extends $pb.GeneratedMessage {
   void clearType() => $_clearField(7);
 }
 
-/// The ledger service definition.
+/// LedgerService provides double-entry bookkeeping and financial accounting.
+/// All RPCs require authentication via Bearer token.
 class LedgerServiceApi {
   final $pb.RpcClient _client;
 
   LedgerServiceApi(this._client);
 
-  /// Searches for an ledger based on details
+  /// SearchLedgers finds ledgers in the chart of accounts.
+  /// Supports filtering by type, parent, and custom properties.
   $async.Future<Ledger> searchLedgers(
           $pb.ClientContext? ctx, $2.SearchRequest request) =>
       _client.invoke<Ledger>(
           ctx, 'LedgerService', 'SearchLedgers', request, Ledger());
 
-  /// Creates a new ledger based on supplied data
+  /// CreateLedger creates a new ledger in the chart of accounts.
+  /// Ledgers can be hierarchical with parent-child relationships.
   $async.Future<Ledger> createLedger($pb.ClientContext? ctx, Ledger request) =>
       _client.invoke<Ledger>(
           ctx, 'LedgerService', 'CreateLedger', request, Ledger());
 
-  /// Updates the data component of the ledger.
+  /// UpdateLedger updates an existing ledger's metadata.
+  /// The ledger type and reference cannot be changed.
   $async.Future<Ledger> updateLedger($pb.ClientContext? ctx, Ledger request) =>
       _client.invoke<Ledger>(
           ctx, 'LedgerService', 'UpdateLedger', request, Ledger());
 
-  /// Searches for an account based on details
+  /// SearchAccounts finds accounts matching specified criteria.
+  /// Supports filtering by ledger, balance range, and custom properties.
   $async.Future<Account> searchAccounts(
           $pb.ClientContext? ctx, $2.SearchRequest request) =>
       _client.invoke<Account>(
           ctx, 'LedgerService', 'SearchAccounts', request, Account());
 
-  /// Creates a new account based on supplied data
+  /// CreateAccount creates a new account within a ledger.
+  /// Each account tracks balances and transaction history.
   $async.Future<Account> createAccount(
           $pb.ClientContext? ctx, Account request) =>
       _client.invoke<Account>(
           ctx, 'LedgerService', 'CreateAccount', request, Account());
 
-  /// Updates the data component of the account.
+  /// UpdateAccount updates an existing account's metadata.
+  /// Balances are updated through transactions, not directly.
   $async.Future<Account> updateAccount(
           $pb.ClientContext? ctx, Account request) =>
       _client.invoke<Account>(
           ctx, 'LedgerService', 'UpdateAccount', request, Account());
 
-  /// Searches for a transaction based on details
+  /// SearchTransactions finds transactions matching specified criteria.
+  /// Supports filtering by date range, account, currency, and status.
   $async.Future<Transaction> searchTransactions(
           $pb.ClientContext? ctx, $2.SearchRequest request) =>
       _client.invoke<Transaction>(
           ctx, 'LedgerService', 'SearchTransactions', request, Transaction());
 
-  /// Creates a new transaction
+  /// CreateTransaction creates a new double-entry transaction.
+  /// All entries must be balanced (sum of debits = sum of credits).
   $async.Future<Transaction> createTransaction(
           $pb.ClientContext? ctx, Transaction request) =>
       _client.invoke<Transaction>(
           ctx, 'LedgerService', 'CreateTransaction', request, Transaction());
 
-  /// Reverses a transaction by creating a new one with inverted entries
+  /// ReverseTransaction reverses a transaction by creating offsetting entries.
+  /// Creates a new REVERSAL transaction that negates the original.
   $async.Future<Transaction> reverseTransaction(
           $pb.ClientContext? ctx, Transaction request) =>
       _client.invoke<Transaction>(
           ctx, 'LedgerService', 'ReverseTransaction', request, Transaction());
 
-  /// Updates a transaction's details
+  /// UpdateTransaction updates a transaction's metadata.
+  /// Entries and amounts cannot be changed after creation.
   $async.Future<Transaction> updateTransaction(
           $pb.ClientContext? ctx, Transaction request) =>
       _client.invoke<Transaction>(
           ctx, 'LedgerService', 'UpdateTransaction', request, Transaction());
 
-  /// Searches for entries matching the search details
+  /// SearchTransactionEntries finds individual transaction entries.
+  /// Useful for account statement generation and reconciliation.
   $async.Future<TransactionEntry> searchTransactionEntries(
           $pb.ClientContext? ctx, $2.SearchRequest request) =>
       _client.invoke<TransactionEntry>(ctx, 'LedgerService',

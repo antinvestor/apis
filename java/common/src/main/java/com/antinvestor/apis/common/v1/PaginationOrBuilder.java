@@ -25,23 +25,39 @@ public interface PaginationOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Number of items per page (limit)
+   * </pre>
+   *
    * <code>int32 count = 1 [json_name = "count"];</code>
    * @return The count.
    */
   int getCount();
 
   /**
+   * <pre>
+   * Page number (0-indexed or 1-indexed depending on service)
+   * </pre>
+   *
    * <code>int32 page = 2 [json_name = "page"];</code>
    * @return The page.
    */
   int getPage();
 
   /**
+   * <pre>
+   * Optional: Filter results from this date (RFC3339 format)
+   * </pre>
+   *
    * <code>string start_date = 3 [json_name = "startDate"];</code>
    * @return The startDate.
    */
   java.lang.String getStartDate();
   /**
+   * <pre>
+   * Optional: Filter results from this date (RFC3339 format)
+   * </pre>
+   *
    * <code>string start_date = 3 [json_name = "startDate"];</code>
    * @return The bytes for startDate.
    */
@@ -49,11 +65,19 @@ public interface PaginationOrBuilder extends
       getStartDateBytes();
 
   /**
+   * <pre>
+   * Optional: Filter results until this date (RFC3339 format)
+   * </pre>
+   *
    * <code>string end_date = 4 [json_name = "endDate"];</code>
    * @return The endDate.
    */
   java.lang.String getEndDate();
   /**
+   * <pre>
+   * Optional: Filter results until this date (RFC3339 format)
+   * </pre>
+   *
    * <code>string end_date = 4 [json_name = "endDate"];</code>
    * @return The bytes for endDate.
    */

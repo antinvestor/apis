@@ -20,20 +20,36 @@
 package com.antinvestor.apis.payment.v1;
 
 /**
+ * <pre>
+ * NotificationType defines how customers are notified about payment links.
+ * </pre>
+ *
  * Protobuf enum {@code payment.v1.NotificationType}
  */
 @com.google.protobuf.Generated
 public enum NotificationType
     implements com.google.protobuf.ProtocolMessageEnum {
   /**
+   * <pre>
+   * No notification preference specified
+   * </pre>
+   *
    * <code>NOTIFICATION_TYPE_UNSPECIFIED = 0;</code>
    */
   NOTIFICATION_TYPE_UNSPECIFIED(0),
   /**
+   * <pre>
+   * Send payment link via email
+   * </pre>
+   *
    * <code>NOTIFICATION_TYPE_EMAIL = 1;</code>
    */
   NOTIFICATION_TYPE_EMAIL(1),
   /**
+   * <pre>
+   * Send payment link via SMS
+   * </pre>
+   *
    * <code>NOTIFICATION_TYPE_SMS = 2;</code>
    */
   NOTIFICATION_TYPE_SMS(2),
@@ -50,14 +66,26 @@ public enum NotificationType
       "NotificationType");
   }
   /**
+   * <pre>
+   * No notification preference specified
+   * </pre>
+   *
    * <code>NOTIFICATION_TYPE_UNSPECIFIED = 0;</code>
    */
   public static final int NOTIFICATION_TYPE_UNSPECIFIED_VALUE = 0;
   /**
+   * <pre>
+   * Send payment link via email
+   * </pre>
+   *
    * <code>NOTIFICATION_TYPE_EMAIL = 1;</code>
    */
   public static final int NOTIFICATION_TYPE_EMAIL_VALUE = 1;
   /**
+   * <pre>
+   * Send payment link via SMS
+   * </pre>
+   *
    * <code>NOTIFICATION_TYPE_SMS = 2;</code>
    */
   public static final int NOTIFICATION_TYPE_SMS_VALUE = 2;

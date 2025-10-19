@@ -7,11 +7,14 @@ import "package:connectrpc/connect.dart" as connect;
 import "notification.pb.dart" as notificationv1notification;
 import "../../common/v1/common.pb.dart" as commonv1common;
 
+/// NotificationService provides multi-channel notification delivery.
+/// All RPCs require authentication via Bearer token unless otherwise specified.
 abstract final class NotificationService {
   /// Fully-qualified name of the NotificationService service.
   static const name = 'notification.v1.NotificationService';
 
-  /// Send method for queueing massages as requested
+  /// Send queues one or more notifications for delivery.
+  /// Notifications can be auto-released or manually released via the Release RPC.
   static const send = connect.Spec(
     '/$name/Send',
     connect.StreamType.server,
@@ -19,7 +22,8 @@ abstract final class NotificationService {
     notificationv1notification.SendResponse.new,
   );
 
-  /// Release method for releasing queued massages and returns if notification status if released
+  /// Release triggers delivery of queued notifications.
+  /// Used for batch processing where notifications are queued first, then released together.
   static const release = connect.Spec(
     '/$name/Release',
     connect.StreamType.server,
@@ -27,7 +31,8 @@ abstract final class NotificationService {
     notificationv1notification.ReleaseResponse.new,
   );
 
-  /// Receive method is for client request for particular notification responses from system
+  /// Receive acknowledges receipt of notifications by the client.
+  /// Used for tracking delivery confirmation and read receipts.
   static const receive = connect.Spec(
     '/$name/Receive',
     connect.StreamType.server,
@@ -35,7 +40,8 @@ abstract final class NotificationService {
     notificationv1notification.ReceiveResponse.new,
   );
 
-  /// Search method is for client request for particular notification details from system
+  /// Search finds notifications matching specified criteria.
+  /// Supports filtering by date range, type, status, and custom properties.
   static const search = connect.Spec(
     '/$name/Search',
     connect.StreamType.server,
@@ -43,7 +49,8 @@ abstract final class NotificationService {
     notificationv1notification.SearchResponse.new,
   );
 
-  /// Status request to determine if notification is prepared or released
+  /// Status retrieves the current status of a notification.
+  /// Returns delivery status, timestamps, and error information if applicable.
   static const status = connect.Spec(
     '/$name/Status',
     connect.StreamType.unary,
@@ -51,7 +58,8 @@ abstract final class NotificationService {
     commonv1common.StatusResponse.new,
   );
 
-  /// Status update request to allow continuation of notification processing
+  /// StatusUpdate updates the status of a notification.
+  /// Used by delivery workers to update notification state during processing.
   static const statusUpdate = connect.Spec(
     '/$name/StatusUpdate',
     connect.StreamType.unary,
@@ -59,7 +67,8 @@ abstract final class NotificationService {
     commonv1common.StatusUpdateResponse.new,
   );
 
-  /// Utility to allow system obtain templates within the system
+  /// TemplateSearch finds notification templates matching specified criteria.
+  /// Supports filtering by language and template name.
   static const templateSearch = connect.Spec(
     '/$name/TemplateSearch',
     connect.StreamType.server,
@@ -67,6 +76,8 @@ abstract final class NotificationService {
     notificationv1notification.TemplateSearchResponse.new,
   );
 
+  /// TemplateSave creates or updates a notification template.
+  /// Templates enable consistent, reusable notification formatting with localization.
   static const templateSave = connect.Spec(
     '/$name/TemplateSave',
     connect.StreamType.unary,

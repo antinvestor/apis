@@ -25,16 +25,28 @@ public interface StatusResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Current OCR results and status
+   * </pre>
+   *
    * <code>.ocr.v1.RecognizeResponse data = 1 [json_name = "data"];</code>
    * @return Whether the data field is set.
    */
   boolean hasData();
   /**
+   * <pre>
+   * Current OCR results and status
+   * </pre>
+   *
    * <code>.ocr.v1.RecognizeResponse data = 1 [json_name = "data"];</code>
    * @return The data.
    */
   com.antinvestor.apis.ocr.v1.RecognizeResponse getData();
   /**
+   * <pre>
+   * Current OCR results and status
+   * </pre>
+   *
    * <code>.ocr.v1.RecognizeResponse data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.ocr.v1.RecognizeResponseOrBuilder getDataOrBuilder();

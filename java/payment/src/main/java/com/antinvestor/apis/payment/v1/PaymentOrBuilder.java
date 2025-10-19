@@ -25,11 +25,19 @@ public interface PaymentOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique payment ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Unique payment ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface PaymentOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Associated transaction ID (ledger)
+   * </pre>
+   *
    * <code>string transaction_id = 2 [json_name = "transactionId"];</code>
    * @return The transactionId.
    */
   java.lang.String getTransactionId();
   /**
+   * <pre>
+   * Associated transaction ID (ledger)
+   * </pre>
+   *
    * <code>string transaction_id = 2 [json_name = "transactionId"];</code>
    * @return The bytes for transactionId.
    */
@@ -49,11 +65,19 @@ public interface PaymentOrBuilder extends
       getTransactionIdBytes();
 
   /**
+   * <pre>
+   * External reference (invoice, order)
+   * </pre>
+   *
    * <code>string reference_id = 3 [json_name = "referenceId"];</code>
    * @return The referenceId.
    */
   java.lang.String getReferenceId();
   /**
+   * <pre>
+   * External reference (invoice, order)
+   * </pre>
+   *
    * <code>string reference_id = 3 [json_name = "referenceId"];</code>
    * @return The bytes for referenceId.
    */
@@ -61,11 +85,19 @@ public interface PaymentOrBuilder extends
       getReferenceIdBytes();
 
   /**
+   * <pre>
+   * Batch ID for grouped payments
+   * </pre>
+   *
    * <code>string batch_id = 4 [json_name = "batchId"];</code>
    * @return The batchId.
    */
   java.lang.String getBatchId();
   /**
+   * <pre>
+   * Batch ID for grouped payments
+   * </pre>
+   *
    * <code>string batch_id = 4 [json_name = "batchId"];</code>
    * @return The bytes for batchId.
    */
@@ -73,11 +105,19 @@ public interface PaymentOrBuilder extends
       getBatchIdBytes();
 
   /**
+   * <pre>
+   * Provider's transaction ID (M-PESA, bank)
+   * </pre>
+   *
    * <code>string external_transaction_id = 5 [json_name = "externalTransactionId"];</code>
    * @return The externalTransactionId.
    */
   java.lang.String getExternalTransactionId();
   /**
+   * <pre>
+   * Provider's transaction ID (M-PESA, bank)
+   * </pre>
+   *
    * <code>string external_transaction_id = 5 [json_name = "externalTransactionId"];</code>
    * @return The bytes for externalTransactionId.
    */
@@ -85,11 +125,19 @@ public interface PaymentOrBuilder extends
       getExternalTransactionIdBytes();
 
   /**
+   * <pre>
+   * Payment route (M-PESA, RTGS, CARD, INTERNAL)
+   * </pre>
+   *
    * <code>string route = 6 [json_name = "route"];</code>
    * @return The route.
    */
   java.lang.String getRoute();
   /**
+   * <pre>
+   * Payment route (M-PESA, RTGS, CARD, INTERNAL)
+   * </pre>
+   *
    * <code>string route = 6 [json_name = "route"];</code>
    * @return The bytes for route.
    */
@@ -97,93 +145,165 @@ public interface PaymentOrBuilder extends
       getRouteBytes();
 
   /**
+   * <pre>
+   * Payment source (payer)
+   * </pre>
+   *
    * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
    * @return Whether the source field is set.
    */
   boolean hasSource();
   /**
+   * <pre>
+   * Payment source (payer)
+   * </pre>
+   *
    * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
    * @return The source.
    */
   com.antinvestor.apis.common.v1.ContactLink getSource();
   /**
+   * <pre>
+   * Payment source (payer)
+   * </pre>
+   *
    * <code>.common.v1.ContactLink source = 7 [json_name = "source"];</code>
    */
   com.antinvestor.apis.common.v1.ContactLinkOrBuilder getSourceOrBuilder();
 
   /**
+   * <pre>
+   * Payment recipient (payee)
+   * </pre>
+   *
    * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
    * @return Whether the recipient field is set.
    */
   boolean hasRecipient();
   /**
+   * <pre>
+   * Payment recipient (payee)
+   * </pre>
+   *
    * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
    * @return The recipient.
    */
   com.antinvestor.apis.common.v1.ContactLink getRecipient();
   /**
+   * <pre>
+   * Payment recipient (payee)
+   * </pre>
+   *
    * <code>.common.v1.ContactLink recipient = 8 [json_name = "recipient"];</code>
    */
   com.antinvestor.apis.common.v1.ContactLinkOrBuilder getRecipientOrBuilder();
 
   /**
+   * <pre>
+   * Payment amount
+   * </pre>
+   *
    * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
    * @return Whether the amount field is set.
    */
   boolean hasAmount();
   /**
+   * <pre>
+   * Payment amount
+   * </pre>
+   *
    * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
    * @return The amount.
    */
   com.google.type.Money getAmount();
   /**
+   * <pre>
+   * Payment amount
+   * </pre>
+   *
    * <code>.google.type.Money amount = 9 [json_name = "amount"];</code>
    */
   com.google.type.MoneyOrBuilder getAmountOrBuilder();
 
   /**
+   * <pre>
+   * Transaction cost/fee
+   * </pre>
+   *
    * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
    * @return Whether the cost field is set.
    */
   boolean hasCost();
   /**
+   * <pre>
+   * Transaction cost/fee
+   * </pre>
+   *
    * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
    * @return The cost.
    */
   com.google.type.Money getCost();
   /**
+   * <pre>
+   * Transaction cost/fee
+   * </pre>
+   *
    * <code>.google.type.Money cost = 10 [json_name = "cost"];</code>
    */
   com.google.type.MoneyOrBuilder getCostOrBuilder();
 
   /**
+   * <pre>
+   * Processing state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 11 [json_name = "state"];</code>
    * @return The enum numeric value on the wire for state.
    */
   int getStateValue();
   /**
+   * <pre>
+   * Processing state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 11 [json_name = "state"];</code>
    * @return The state.
    */
   com.antinvestor.apis.common.v1.STATE getState();
 
   /**
+   * <pre>
+   * Payment status
+   * </pre>
+   *
    * <code>.common.v1.STATUS status = 12 [json_name = "status"];</code>
    * @return The enum numeric value on the wire for status.
    */
   int getStatusValue();
   /**
+   * <pre>
+   * Payment status
+   * </pre>
+   *
    * <code>.common.v1.STATUS status = 12 [json_name = "status"];</code>
    * @return The status.
    */
   com.antinvestor.apis.common.v1.STATUS getStatus();
 
   /**
+   * <pre>
+   * Creation timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string date_created = 13 [json_name = "dateCreated"];</code>
    * @return The dateCreated.
    */
   java.lang.String getDateCreated();
   /**
+   * <pre>
+   * Creation timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string date_created = 13 [json_name = "dateCreated"];</code>
    * @return The bytes for dateCreated.
    */
@@ -191,11 +311,19 @@ public interface PaymentOrBuilder extends
       getDateCreatedBytes();
 
   /**
+   * <pre>
+   * Processing timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string date_processed = 14 [json_name = "dateProcessed"];</code>
    * @return The dateProcessed.
    */
   java.lang.String getDateProcessed();
   /**
+   * <pre>
+   * Processing timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string date_processed = 14 [json_name = "dateProcessed"];</code>
    * @return The bytes for dateProcessed.
    */
@@ -203,22 +331,38 @@ public interface PaymentOrBuilder extends
       getDateProcessedBytes();
 
   /**
+   * <pre>
+   * True if outbound, false if inbound
+   * </pre>
+   *
    * <code>bool outbound = 15 [json_name = "outbound"];</code>
    * @return The outbound.
    */
   boolean getOutbound();
 
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 16 [json_name = "extra"];</code>
    * @return Whether the extra field is set.
    */
   boolean hasExtra();
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 16 [json_name = "extra"];</code>
    * @return The extra.
    */
   com.google.protobuf.Struct getExtra();
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 16 [json_name = "extra"];</code>
    */
   com.google.protobuf.StructOrBuilder getExtraOrBuilder();

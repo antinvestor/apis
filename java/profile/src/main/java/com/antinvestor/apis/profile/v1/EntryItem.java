@@ -20,6 +20,10 @@
 package com.antinvestor.apis.profile.v1;
 
 /**
+ * <pre>
+ * EntryItem identifies an object in a relationship.
+ * </pre>
+ *
  * Protobuf type {@code profile.v1.EntryItem}
  */
 @com.google.protobuf.Generated
@@ -63,6 +67,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object objectName_ = "";
   /**
+   * <pre>
+   * Object type (Contact, Profile, Group)
+   * </pre>
+   *
    * <code>string object_name = 1 [json_name = "objectName"];</code>
    * @return The objectName.
    */
@@ -80,6 +88,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Object type (Contact, Profile, Group)
+   * </pre>
+   *
    * <code>string object_name = 1 [json_name = "objectName"];</code>
    * @return The bytes for objectName.
    */
@@ -102,6 +114,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object objectId_ = "";
   /**
+   * <pre>
+   * Object ID
+   * </pre>
+   *
    * <code>string object_id = 2 [json_name = "objectId"];</code>
    * @return The objectId.
    */
@@ -119,6 +135,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Object ID
+   * </pre>
+   *
    * <code>string object_id = 2 [json_name = "objectId"];</code>
    * @return The bytes for objectId.
    */
@@ -304,6 +324,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * EntryItem identifies an object in a relationship.
+   * </pre>
+   *
    * Protobuf type {@code profile.v1.EntryItem}
    */
   public static final class Builder extends
@@ -457,6 +481,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object objectName_ = "";
     /**
+     * <pre>
+     * Object type (Contact, Profile, Group)
+     * </pre>
+     *
      * <code>string object_name = 1 [json_name = "objectName"];</code>
      * @return The objectName.
      */
@@ -473,6 +501,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Object type (Contact, Profile, Group)
+     * </pre>
+     *
      * <code>string object_name = 1 [json_name = "objectName"];</code>
      * @return The bytes for objectName.
      */
@@ -490,6 +522,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Object type (Contact, Profile, Group)
+     * </pre>
+     *
      * <code>string object_name = 1 [json_name = "objectName"];</code>
      * @param value The objectName to set.
      * @return This builder for chaining.
@@ -503,6 +539,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Object type (Contact, Profile, Group)
+     * </pre>
+     *
      * <code>string object_name = 1 [json_name = "objectName"];</code>
      * @return This builder for chaining.
      */
@@ -513,6 +553,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Object type (Contact, Profile, Group)
+     * </pre>
+     *
      * <code>string object_name = 1 [json_name = "objectName"];</code>
      * @param value The bytes for objectName to set.
      * @return This builder for chaining.
@@ -529,6 +573,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object objectId_ = "";
     /**
+     * <pre>
+     * Object ID
+     * </pre>
+     *
      * <code>string object_id = 2 [json_name = "objectId"];</code>
      * @return The objectId.
      */
@@ -545,6 +593,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Object ID
+     * </pre>
+     *
      * <code>string object_id = 2 [json_name = "objectId"];</code>
      * @return The bytes for objectId.
      */
@@ -562,6 +614,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Object ID
+     * </pre>
+     *
      * <code>string object_id = 2 [json_name = "objectId"];</code>
      * @param value The objectId to set.
      * @return This builder for chaining.
@@ -575,6 +631,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Object ID
+     * </pre>
+     *
      * <code>string object_id = 2 [json_name = "objectId"];</code>
      * @return This builder for chaining.
      */
@@ -585,6 +645,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Object ID
+     * </pre>
+     *
      * <code>string object_id = 2 [json_name = "objectId"];</code>
      * @param value The bytes for objectId to set.
      * @return This builder for chaining.

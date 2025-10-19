@@ -261,9 +261,8 @@ public final class ProfileProto extends com.google.protobuf.GeneratedFile {
     java.lang.String[] descriptorData = {
       "\n\030profile/v1/profile.proto\022\nprofile.v1\032\033" +
       "buf/validate/validate.proto\032\026common/v1/c" +
-      "ommon.proto\032\034google/api/annotations.prot" +
-      "o\032\034google/protobuf/struct.proto\032.protoc-" +
-      "gen-openapiv2/options/annotations.proto\"" +
+      "ommon.proto\032\034google/protobuf/struct.prot" +
+      "o\032$gnostic/openapi/v3/annotations.proto\"" +
       "\305\002\n\rContactObject\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(" +
       "2\020[0-9a-z_-]{3,20}R\002id\022+\n\004type\030\002 \001(\0162\027.p" +
       "rofile.v1.ContactTypeR\004type\022\026\n\006detail\030\003 " +
@@ -417,76 +416,150 @@ public final class ProfileProto extends com.google.protobuf.GeneratedFile {
       "STEM_ALERTS\020\003\022\016\n\nNO_CONTACT\020\004*3\n\013Profile" +
       "Type\022\n\n\006PERSON\020\000\022\017\n\013INSTITUTION\020\001\022\007\n\003BOT" +
       "\020\002*@\n\020RelationshipType\022\n\n\006MEMBER\020\000\022\016\n\nAF" +
-      "FILIATED\020\001\022\020\n\014BLACK_LISTED\020\0022\205\017\n\016Profile" +
-      "Service\022Q\n\007GetById\022\032.profile.v1.GetByIdR" +
-      "equest\032\033.profile.v1.GetByIdResponse\"\r\202\323\344" +
-      "\223\002\007\022\005/{id}\022c\n\014GetByContact\022\037.profile.v1." +
-      "GetByContactRequest\032 .profile.v1.GetByCo" +
-      "ntactResponse\"\020\202\323\344\223\002\n\022\010/contact\022R\n\006Searc" +
-      "h\022\031.profile.v1.SearchRequest\032\032.profile.v" +
-      "1.SearchResponse\"\017\202\323\344\223\002\t\022\007/search0\001\022O\n\005M" +
-      "erge\022\030.profile.v1.MergeRequest\032\031.profile" +
-      ".v1.MergeResponse\"\021\202\323\344\223\002\013\"\006/merge:\001*\022M\n\006" +
-      "Create\022\031.profile.v1.CreateRequest\032\032.prof" +
-      "ile.v1.CreateResponse\"\014\202\323\344\223\002\006\"\001/:\001*\022Q\n\006U" +
-      "pdate\022\031.profile.v1.UpdateRequest\032\032.profi" +
-      "le.v1.UpdateResponse\"\020\202\323\344\223\002\n2\005/{id}:\001*\022e" +
-      "\n\nAddContact\022\035.profile.v1.AddContactRequ" +
-      "est\032\036.profile.v1.AddContactResponse\"\030\202\323\344" +
-      "\223\002\022\"\r/{id}/contact:\001*\022i\n\rCreateContact\022 " +
-      ".profile.v1.CreateContactRequest\032!.profi" +
-      "le.v1.CreateContactResponse\"\023\202\323\344\223\002\r\"\010/co" +
-      "ntact:\001*\022\246\001\n\031CreateContactVerification\022," +
-      ".profile.v1.CreateContactVerificationReq" +
-      "uest\032-.profile.v1.CreateContactVerificat" +
-      "ionResponse\",\202\323\344\223\002&\"!/contact/{id}/verif" +
-      "ication/create:\001*\022\215\001\n\021CheckVerification\022" +
-      "$.profile.v1.CheckVerificationRequest\032%." +
-      "profile.v1.CheckVerificationResponse\"+\202\323" +
-      "\344\223\002%\" /contact/{id}/verification/check:\001" +
-      "*\022k\n\rRemoveContact\022 .profile.v1.RemoveCo" +
-      "ntactRequest\032!.profile.v1.RemoveContactR" +
-      "esponse\"\025\202\323\344\223\002\017*\r/contact/{id}\022d\n\014Search" +
-      "Roster\022\037.profile.v1.SearchRosterRequest\032" +
-      " .profile.v1.SearchRosterResponse\"\017\202\323\344\223\002" +
-      "\t\022\007/roster0\001\022\\\n\tAddRoster\022\034.profile.v1.A" +
-      "ddRosterRequest\032\035.profile.v1.AddRosterRe" +
-      "sponse\"\022\202\323\344\223\002\014\"\007/roster:\001*\022g\n\014RemoveRost" +
-      "er\022\037.profile.v1.RemoveRosterRequest\032 .pr" +
-      "ofile.v1.RemoveRosterResponse\"\024\202\323\344\223\002\016*\014/" +
-      "roster/{id}\022`\n\nAddAddress\022\035.profile.v1.A" +
-      "ddAddressRequest\032\036.profile.v1.AddAddress" +
-      "Response\"\023\202\323\344\223\002\r\"\010/address:\001*\022t\n\017AddRela" +
-      "tionship\022\".profile.v1.AddRelationshipReq" +
-      "uest\032#.profile.v1.AddRelationshipRespons" +
-      "e\"\030\202\323\344\223\002\022\"\r/relationship:\001*\022\177\n\022DeleteRel" +
-      "ationship\022%.profile.v1.DeleteRelationshi" +
-      "pRequest\032&.profile.v1.DeleteRelationship" +
-      "Response\"\032\202\323\344\223\002\024*\022/relationship/{id}\022v\n\020" +
-      "ListRelationship\022#.profile.v1.ListRelati" +
-      "onshipRequest\032$.profile.v1.ListRelations" +
-      "hipResponse\"\025\202\323\344\223\002\017\022\r/relationship0\001B\274\003\n" +
-      "\037com.antinvestor.apis.profile.v1B\014Profil" +
-      "eProtoP\001Z;github.com/antinvestor/apis/go" +
-      "/profile/profile/v1;profilev1\242\002\003PXX\252\002\nPr" +
-      "ofile.V1\312\002\nProfile\\V1\342\002\026Profile\\V1\\GPBMe" +
-      "tadata\352\002\013Profile::V1\222A\203\002\022p\n\017Profile Serv" +
-      "ice\"X\n\020Ant Investor Ltd\022.https://github." +
-      "com/antinvestor/service-profile\032\024info@an" +
-      "tinvestor.com2\0031.0*\002\001\0022\020application/json" +
-      ":\020application/jsonZY\nW\n\006bearer\022M\010\002\0228Auth" +
-      "entication token, prefixed by Bearer: Be" +
-      "arer <token>\032\rAuthorization \002b\014\n\n\n\006beare" +
-      "r\022\000b\006proto3"
+      "FILIATED\020\001\022\020\n\014BLACK_LISTED\020\0022\306#\n\016Profile" +
+      "Service\022\334\001\n\007GetById\022\032.profile.v1.GetById" +
+      "Request\032\033.profile.v1.GetByIdResponse\"\227\001\272" +
+      "G\223\001\n\010Profiles\022\021Get profile by ID\032dRetrie" +
+      "ves a complete profile by its unique ide" +
+      "ntifier including contacts, addresses, a" +
+      "nd properties.*\016getProfileById\022\340\001\n\014GetBy" +
+      "Contact\022\037.profile.v1.GetByContactRequest" +
+      "\032 .profile.v1.GetByContactResponse\"\214\001\272G\210" +
+      "\001\n\010Profiles\022\026Get profile by contact\032ORet" +
+      "rieves a profile associated with a speci" +
+      "fic contact (email or phone number).*\023ge" +
+      "tProfileByContact\022\212\002\n\006Search\022\031.profile.v" +
+      "1.SearchRequest\032\032.profile.v1.SearchRespo" +
+      "nse\"\306\001\272G\302\001\n\010Profiles\022\017Search profiles\032\224\001" +
+      "Searches for profiles matching specified" +
+      " criteria including name, contact, date " +
+      "range, and custom properties. Returns a " +
+      "stream of matching profiles.*\016searchProf" +
+      "iles0\001\022\341\001\n\005Merge\022\030.profile.v1.MergeReque" +
+      "st\032\031.profile.v1.MergeResponse\"\242\001\272G\236\001\n\010Pr" +
+      "ofiles\022\016Merge profiles\032sMerges two profi" +
+      "les by combining their data. The merge s" +
+      "ource profile data is incorporated into " +
+      "the target profile.*\rmergeProfiles\022\332\001\n\006C" +
+      "reate\022\031.profile.v1.CreateRequest\032\032.profi" +
+      "le.v1.CreateResponse\"\230\001\272G\224\001\n\010Profiles\022\016C" +
+      "reate profile\032iCreates a new profile wit" +
+      "h the specified type (person, institutio" +
+      "n, bot) and initial contact information." +
+      "*\rcreateProfile\022\332\001\n\006Update\022\031.profile.v1." +
+      "UpdateRequest\032\032.profile.v1.UpdateRespons" +
+      "e\"\230\001\272G\224\001\n\010Profiles\022\016Update profile\032iUpda" +
+      "tes an existing profile\'s properties and" +
+      " state. Contacts and addresses are manag" +
+      "ed via separate RPCs.*\rupdateProfile\022\212\002\n" +
+      "\nAddContact\022\035.profile.v1.AddContactReque" +
+      "st\032\036.profile.v1.AddContactResponse\"\274\001\272G\270" +
+      "\001\n\010Contacts\022\026Add contact to profile\032\207\001Ad" +
+      "ds a new contact (email or phone) to a p" +
+      "rofile and initiates automatic verificat" +
+      "ion. Returns the updated profile and ver" +
+      "ification ID.*\naddContact\022\373\001\n\rCreateCont" +
+      "act\022 .profile.v1.CreateContactRequest\032!." +
+      "profile.v1.CreateContactResponse\"\244\001\272G\240\001\n" +
+      "\010Contacts\022\031Create standalone contact\032jCr" +
+      "eates a standalone contact that can late" +
+      "r be linked to a profile. Useful for pre" +
+      "-registration scenarios.*\rcreateContact\022" +
+      "\301\002\n\031CreateContactVerification\022,.profile." +
+      "v1.CreateContactVerificationRequest\032-.pr" +
+      "ofile.v1.CreateContactVerificationRespon" +
+      "se\"\306\001\272G\302\001\n\010Contacts\022\033Create contact veri" +
+      "fication\032~Initiates contact verification" +
+      " by sending a verification code via emai" +
+      "l or SMS. The code expires after the spe" +
+      "cified duration.*\031createContactVerificat" +
+      "ion\022\226\002\n\021CheckVerification\022$.profile.v1.C" +
+      "heckVerificationRequest\032%.profile.v1.Che" +
+      "ckVerificationResponse\"\263\001\272G\257\001\n\010Contacts\022" +
+      "\027Check verification code\032wVerifies a con" +
+      "tact by checking the provided verificati" +
+      "on code. Tracks verification attempts an" +
+      "d returns success status.*\021checkVerifica" +
+      "tion\022\342\001\n\rRemoveContact\022 .profile.v1.Remo" +
+      "veContactRequest\032!.profile.v1.RemoveCont" +
+      "actResponse\"\213\001\272G\207\001\n\010Contacts\022\016Remove con" +
+      "tact\032\\Removes a contact from a profile. " +
+      "The contact is disassociated but may rem" +
+      "ain in the system.*\rremoveContact\022\224\002\n\014Se" +
+      "archRoster\022\037.profile.v1.SearchRosterRequ" +
+      "est\032 .profile.v1.SearchRosterResponse\"\276\001" +
+      "\272G\272\001\n\006Roster\022\rSearch roster\032\222\001Searches a" +
+      " user\'s contact roster (contact list) wi" +
+      "th filtering by date range, properties, " +
+      "and custom criteria. Returns a stream of" +
+      " roster entries.*\014searchRoster0\001\022\331\001\n\tAdd" +
+      "Roster\022\034.profile.v1.AddRosterRequest\032\035.p" +
+      "rofile.v1.AddRosterResponse\"\216\001\272G\212\001\n\006Rost" +
+      "er\022\022Add roster entries\032aAdds multiple co" +
+      "ntacts to a user\'s roster (contact list)" +
+      ". Each contact is verified automatically" +
+      ".*\taddRoster\022\370\001\n\014RemoveRoster\022\037.profile." +
+      "v1.RemoveRosterRequest\032 .profile.v1.Remo" +
+      "veRosterResponse\"\244\001\272G\240\001\n\006Roster\022\023Remove " +
+      "roster entry\032sRemoves a contact from a u" +
+      "ser\'s roster (contact list). The profile" +
+      " remains but is no longer in the user\'s " +
+      "contacts.*\014removeRoster\022\314\001\n\nAddAddress\022\035" +
+      ".profile.v1.AddAddressRequest\032\036.profile." +
+      "v1.AddAddressResponse\"\177\272G|\n\tAddresses\022\013A" +
+      "dd address\032VAdds a new physical address " +
+      "to a profile with optional geocoding (la" +
+      "titude/longitude).*\naddAddress\022\210\002\n\017AddRe" +
+      "lationship\022\".profile.v1.AddRelationshipR" +
+      "equest\032#.profile.v1.AddRelationshipRespo" +
+      "nse\"\253\001\272G\247\001\n\rRelationships\022\020Add relations" +
+      "hip\032sCreates a relationship between two " +
+      "profiles (member, affiliated, blackliste" +
+      "d). Supports hierarchical relationships." +
+      "*\017addRelationship\022\204\002\n\022DeleteRelationship" +
+      "\022%.profile.v1.DeleteRelationshipRequest\032" +
+      "&.profile.v1.DeleteRelationshipResponse\"" +
+      "\236\001\272G\232\001\n\rRelationships\022\023Delete relationsh" +
+      "ip\032`Removes an existing relationship bet" +
+      "ween profiles. The profiles remain but a" +
+      "re no longer linked.*\022deleteRelationship" +
+      "\022\252\002\n\020ListRelationship\022#.profile.v1.ListR" +
+      "elationshipRequest\032$.profile.v1.ListRela" +
+      "tionshipResponse\"\310\001\272G\304\001\n\rRelationships\022\022" +
+      "List relationships\032\213\001Lists all relations" +
+      "hips for a profile with optional filteri" +
+      "ng by type and related profiles. Support" +
+      "s pagination and relationship inversion." +
+      "*\021listRelationships0\001B\266\006\n\037com.antinvesto" +
+      "r.apis.profile.v1B\014ProfileProtoP\001Z3githu" +
+      "b.com/antinvestor/apis/go/profile/v1;pro" +
+      "filev1\242\002\003PXX\252\002\nProfile.V1\312\002\nProfile\\V1\342\002" +
+      "\026Profile\\V1\\GPBMetadata\352\002\013Profile::V1\272G\205" +
+      "\005\022\331\004\n\017Profile Service\022\230\003The Profile Serv" +
+      "ice manages user and entity profiles inc" +
+      "luding persons, institutions, and bots. " +
+      "It provides comprehensive profile manage" +
+      "ment with contact verification (email, p" +
+      "hone), roster management for user contac" +
+      "t lists, relationship tracking between p" +
+      "rofiles, and address management with geo" +
+      "coding support. The service supports pro" +
+      "file merging, communication preferences," +
+      " and hierarchical relationships.\"X\n\020Ant " +
+      "Investor Ltd\022.https://github.com/antinve" +
+      "stor/service-profile\032\024info@antinvestor.c" +
+      "om*I\n\016Apache License\0227https://github.com" +
+      "/antinvestor/apis/blob/master/LICENSE2\006v" +
+      "1.0.0*\':%\n#\n\nBearerAuth\022\025\n\023\n\004http*\006beare" +
+      "r2\003JWTb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           build.buf.validate.ValidateProto.getDescriptor(),
           com.antinvestor.apis.common.v1.CommonProto.getDescriptor(),
-          com.google.api.AnnotationsProto.getDescriptor(),
           com.google.protobuf.StructProto.getDescriptor(),
-          grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor(),
+          org.openapi_v3.AnnotationsProto.getDescriptor(),
         });
     internal_static_profile_v1_ContactObject_descriptor =
       getDescriptor().getMessageType(0);
@@ -743,14 +816,13 @@ public final class ProfileProto extends com.google.protobuf.GeneratedFile {
     descriptor.resolveAllFeaturesImmutable();
     build.buf.validate.ValidateProto.getDescriptor();
     com.antinvestor.apis.common.v1.CommonProto.getDescriptor();
-    com.google.api.AnnotationsProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();
-    grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor();
+    org.openapi_v3.AnnotationsProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(build.buf.validate.ValidateProto.field);
-    registry.add(com.google.api.AnnotationsProto.http);
-    registry.add(grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.openapiv2Swagger);
+    registry.add(org.openapi_v3.AnnotationsProto.document);
+    registry.add(org.openapi_v3.AnnotationsProto.operation);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
   }

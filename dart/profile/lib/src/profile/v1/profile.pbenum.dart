@@ -14,6 +14,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// ContactType defines the type of contact information.
 /// buf:lint:ignore ENUM_VALUE_PREFIX
 class ContactType extends $pb.ProtobufEnum {
   /// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
@@ -35,6 +36,7 @@ class ContactType extends $pb.ProtobufEnum {
   const ContactType._(super.value, super.name);
 }
 
+/// CommunicationLevel defines user's communication preferences.
 /// buf:lint:ignore ENUM_VALUE_PREFIX
 class CommunicationLevel extends $pb.ProtobufEnum {
   /// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
@@ -65,6 +67,7 @@ class CommunicationLevel extends $pb.ProtobufEnum {
   const CommunicationLevel._(super.value, super.name);
 }
 
+/// ProfileType defines the type of profile entity.
 /// buf:lint:ignore ENUM_VALUE_PREFIX
 class ProfileType extends $pb.ProtobufEnum {
   /// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
@@ -88,7 +91,7 @@ class ProfileType extends $pb.ProtobufEnum {
   const ProfileType._(super.value, super.name);
 }
 
-/// RelationshipType enum represents the way two profiles are linked.
+/// RelationshipType defines how two profiles are linked.
 /// buf:lint:ignore ENUM_VALUE_PREFIX
 class RelationshipType extends $pb.ProtobufEnum {
   /// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX

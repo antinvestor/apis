@@ -21,6 +21,7 @@ package com.antinvestor.apis.lostid.v1;
 
 /**
  * <pre>
+ * ItemType defines the types of items tracked in the system.
  * buf:lint:ignore ENUM_VALUE_PREFIX
  * </pre>
  *
@@ -38,10 +39,18 @@ public enum ItemType
    */
   COLLECTIBLE(0),
   /**
+   * <pre>
+   * Search request for a lost item
+   * </pre>
+   *
    * <code>SEARCH = 1;</code>
    */
   SEARCH(1),
   /**
+   * <pre>
+   * Financial transaction (reward, fee)
+   * </pre>
+   *
    * <code>TRANSACTION = 2;</code>
    */
   TRANSACTION(2),
@@ -66,10 +75,18 @@ public enum ItemType
    */
   public static final int COLLECTIBLE_VALUE = 0;
   /**
+   * <pre>
+   * Search request for a lost item
+   * </pre>
+   *
    * <code>SEARCH = 1;</code>
    */
   public static final int SEARCH_VALUE = 1;
   /**
+   * <pre>
+   * Financial transaction (reward, fee)
+   * </pre>
+   *
    * <code>TRANSACTION = 2;</code>
    */
   public static final int TRANSACTION_VALUE = 2;

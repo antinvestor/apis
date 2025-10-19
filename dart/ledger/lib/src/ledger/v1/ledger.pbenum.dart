@@ -14,6 +14,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// LedgerType defines the fundamental accounting categories.
+/// Based on standard accounting equation: Assets = Liabilities + Capital + (Income - Expenses)
 /// buf:lint:ignore ENUM_VALUE_PREFIX
 class LedgerType extends $pb.ProtobufEnum {
   /// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
@@ -44,6 +46,7 @@ class LedgerType extends $pb.ProtobufEnum {
   const LedgerType._(super.value, super.name);
 }
 
+/// TransactionType defines the nature of a transaction.
 /// buf:lint:ignore ENUM_VALUE_PREFIX
 class TransactionType extends $pb.ProtobufEnum {
   /// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX

@@ -20,6 +20,10 @@
 package com.antinvestor.apis.device.v1;
 
 /**
+ * <pre>
+ * CreateResponse returns the newly created device.
+ * </pre>
+ *
  * Protobuf type {@code device.v1.CreateResponse}
  */
 @com.google.protobuf.Generated
@@ -61,6 +65,10 @@ private static final long serialVersionUID = 0L;
   public static final int DATA_FIELD_NUMBER = 1;
   private com.antinvestor.apis.device.v1.DeviceObject data_;
   /**
+   * <pre>
+   * The created device object
+   * </pre>
+   *
    * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
    * @return Whether the data field is set.
    */
@@ -69,6 +77,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * The created device object
+   * </pre>
+   *
    * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
    * @return The data.
    */
@@ -77,6 +89,10 @@ private static final long serialVersionUID = 0L;
     return data_ == null ? com.antinvestor.apis.device.v1.DeviceObject.getDefaultInstance() : data_;
   }
   /**
+   * <pre>
+   * The created device object
+   * </pre>
+   *
    * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -247,6 +263,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * CreateResponse returns the newly created device.
+   * </pre>
+   *
    * Protobuf type {@code device.v1.CreateResponse}
    */
   public static final class Builder extends
@@ -403,6 +423,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.antinvestor.apis.device.v1.DeviceObject, com.antinvestor.apis.device.v1.DeviceObject.Builder, com.antinvestor.apis.device.v1.DeviceObjectOrBuilder> dataBuilder_;
     /**
+     * <pre>
+     * The created device object
+     * </pre>
+     *
      * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
      * @return Whether the data field is set.
      */
@@ -410,6 +434,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
+     * <pre>
+     * The created device object
+     * </pre>
+     *
      * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
      * @return The data.
      */
@@ -421,6 +449,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * The created device object
+     * </pre>
+     *
      * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
      */
     public Builder setData(com.antinvestor.apis.device.v1.DeviceObject value) {
@@ -437,6 +469,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * The created device object
+     * </pre>
+     *
      * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
      */
     public Builder setData(
@@ -451,6 +487,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * The created device object
+     * </pre>
+     *
      * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
      */
     public Builder mergeData(com.antinvestor.apis.device.v1.DeviceObject value) {
@@ -472,6 +512,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * The created device object
+     * </pre>
+     *
      * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
      */
     public Builder clearData() {
@@ -485,6 +529,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * The created device object
+     * </pre>
+     *
      * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.device.v1.DeviceObject.Builder getDataBuilder() {
@@ -493,6 +541,10 @@ private static final long serialVersionUID = 0L;
       return internalGetDataFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * The created device object
+     * </pre>
+     *
      * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.device.v1.DeviceObjectOrBuilder getDataOrBuilder() {
@@ -504,6 +556,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * The created device object
+     * </pre>
+     *
      * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<

@@ -20,6 +20,10 @@
 package com.antinvestor.apis.payment.v1;
 
 /**
+ * <pre>
+ * CreatePaymentLinkRequest creates a new payment link.
+ * </pre>
+ *
  * Protobuf type {@code payment.v1.CreatePaymentLinkRequest}
  */
 @com.google.protobuf.Generated
@@ -64,6 +68,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private java.util.List<com.antinvestor.apis.payment.v1.Customer> customers_;
   /**
+   * <pre>
+   * Customers to notify
+   * </pre>
+   *
    * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
    */
   @java.lang.Override
@@ -71,6 +79,10 @@ private static final long serialVersionUID = 0L;
     return customers_;
   }
   /**
+   * <pre>
+   * Customers to notify
+   * </pre>
+   *
    * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
    */
   @java.lang.Override
@@ -79,6 +91,10 @@ private static final long serialVersionUID = 0L;
     return customers_;
   }
   /**
+   * <pre>
+   * Customers to notify
+   * </pre>
+   *
    * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
    */
   @java.lang.Override
@@ -86,6 +102,10 @@ private static final long serialVersionUID = 0L;
     return customers_.size();
   }
   /**
+   * <pre>
+   * Customers to notify
+   * </pre>
+   *
    * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
    */
   @java.lang.Override
@@ -93,6 +113,10 @@ private static final long serialVersionUID = 0L;
     return customers_.get(index);
   }
   /**
+   * <pre>
+   * Customers to notify
+   * </pre>
+   *
    * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
    */
   @java.lang.Override
@@ -104,6 +128,10 @@ private static final long serialVersionUID = 0L;
   public static final int PAYMENT_LINK_FIELD_NUMBER = 2;
   private com.antinvestor.apis.payment.v1.PaymentLink paymentLink_;
   /**
+   * <pre>
+   * Payment link details
+   * </pre>
+   *
    * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
    * @return Whether the paymentLink field is set.
    */
@@ -112,6 +140,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Payment link details
+   * </pre>
+   *
    * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
    * @return The paymentLink.
    */
@@ -120,6 +152,10 @@ private static final long serialVersionUID = 0L;
     return paymentLink_ == null ? com.antinvestor.apis.payment.v1.PaymentLink.getDefaultInstance() : paymentLink_;
   }
   /**
+   * <pre>
+   * Payment link details
+   * </pre>
+   *
    * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
    */
   @java.lang.Override
@@ -141,6 +177,10 @@ private static final long serialVersionUID = 0L;
             }
           };
   /**
+   * <pre>
+   * Notification methods
+   * </pre>
+   *
    * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
    * @return A list containing the notifications.
    */
@@ -150,6 +190,10 @@ private static final long serialVersionUID = 0L;
         com.antinvestor.apis.payment.v1.NotificationType>(notifications_, notifications_converter_);
   }
   /**
+   * <pre>
+   * Notification methods
+   * </pre>
+   *
    * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
    * @return The count of notifications.
    */
@@ -158,6 +202,10 @@ private static final long serialVersionUID = 0L;
     return notifications_.size();
   }
   /**
+   * <pre>
+   * Notification methods
+   * </pre>
+   *
    * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
    * @param index The index of the element to return.
    * @return The notifications at the given index.
@@ -167,6 +215,10 @@ private static final long serialVersionUID = 0L;
     return notifications_converter_.convert(notifications_.getInt(index));
   }
   /**
+   * <pre>
+   * Notification methods
+   * </pre>
+   *
    * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
    * @return A list containing the enum numeric values on the wire for notifications.
    */
@@ -176,6 +228,10 @@ private static final long serialVersionUID = 0L;
     return notifications_;
   }
   /**
+   * <pre>
+   * Notification methods
+   * </pre>
+   *
    * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
    * @param index The index of the value to return.
    * @return The enum numeric value on the wire of notifications at the given index.
@@ -387,6 +443,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * CreatePaymentLinkRequest creates a new payment link.
+   * </pre>
+   *
    * Protobuf type {@code payment.v1.CreatePaymentLinkRequest}
    */
   public static final class Builder extends
@@ -644,6 +704,10 @@ private static final long serialVersionUID = 0L;
         com.antinvestor.apis.payment.v1.Customer, com.antinvestor.apis.payment.v1.Customer.Builder, com.antinvestor.apis.payment.v1.CustomerOrBuilder> customersBuilder_;
 
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public java.util.List<com.antinvestor.apis.payment.v1.Customer> getCustomersList() {
@@ -654,6 +718,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public int getCustomersCount() {
@@ -664,6 +732,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public com.antinvestor.apis.payment.v1.Customer getCustomers(int index) {
@@ -674,6 +746,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public Builder setCustomers(
@@ -691,6 +767,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public Builder setCustomers(
@@ -705,6 +785,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public Builder addCustomers(com.antinvestor.apis.payment.v1.Customer value) {
@@ -721,6 +805,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public Builder addCustomers(
@@ -738,6 +826,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public Builder addCustomers(
@@ -752,6 +844,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public Builder addCustomers(
@@ -766,6 +862,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public Builder addAllCustomers(
@@ -781,6 +881,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public Builder clearCustomers() {
@@ -794,6 +898,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public Builder removeCustomers(int index) {
@@ -807,6 +915,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public com.antinvestor.apis.payment.v1.Customer.Builder getCustomersBuilder(
@@ -814,6 +926,10 @@ private static final long serialVersionUID = 0L;
       return internalGetCustomersFieldBuilder().getBuilder(index);
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public com.antinvestor.apis.payment.v1.CustomerOrBuilder getCustomersOrBuilder(
@@ -824,6 +940,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public java.util.List<? extends com.antinvestor.apis.payment.v1.CustomerOrBuilder> 
@@ -835,6 +955,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public com.antinvestor.apis.payment.v1.Customer.Builder addCustomersBuilder() {
@@ -842,6 +966,10 @@ private static final long serialVersionUID = 0L;
           com.antinvestor.apis.payment.v1.Customer.getDefaultInstance());
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public com.antinvestor.apis.payment.v1.Customer.Builder addCustomersBuilder(
@@ -850,6 +978,10 @@ private static final long serialVersionUID = 0L;
           index, com.antinvestor.apis.payment.v1.Customer.getDefaultInstance());
     }
     /**
+     * <pre>
+     * Customers to notify
+     * </pre>
+     *
      * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
      */
     public java.util.List<com.antinvestor.apis.payment.v1.Customer.Builder> 
@@ -875,6 +1007,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.antinvestor.apis.payment.v1.PaymentLink, com.antinvestor.apis.payment.v1.PaymentLink.Builder, com.antinvestor.apis.payment.v1.PaymentLinkOrBuilder> paymentLinkBuilder_;
     /**
+     * <pre>
+     * Payment link details
+     * </pre>
+     *
      * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
      * @return Whether the paymentLink field is set.
      */
@@ -882,6 +1018,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
+     * <pre>
+     * Payment link details
+     * </pre>
+     *
      * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
      * @return The paymentLink.
      */
@@ -893,6 +1033,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Payment link details
+     * </pre>
+     *
      * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
      */
     public Builder setPaymentLink(com.antinvestor.apis.payment.v1.PaymentLink value) {
@@ -909,6 +1053,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment link details
+     * </pre>
+     *
      * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
      */
     public Builder setPaymentLink(
@@ -923,6 +1071,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment link details
+     * </pre>
+     *
      * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
      */
     public Builder mergePaymentLink(com.antinvestor.apis.payment.v1.PaymentLink value) {
@@ -944,6 +1096,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment link details
+     * </pre>
+     *
      * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
      */
     public Builder clearPaymentLink() {
@@ -957,6 +1113,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment link details
+     * </pre>
+     *
      * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
      */
     public com.antinvestor.apis.payment.v1.PaymentLink.Builder getPaymentLinkBuilder() {
@@ -965,6 +1125,10 @@ private static final long serialVersionUID = 0L;
       return internalGetPaymentLinkFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Payment link details
+     * </pre>
+     *
      * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
      */
     public com.antinvestor.apis.payment.v1.PaymentLinkOrBuilder getPaymentLinkOrBuilder() {
@@ -976,6 +1140,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Payment link details
+     * </pre>
+     *
      * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
@@ -1000,6 +1168,10 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00000004;
     }
     /**
+     * <pre>
+     * Notification methods
+     * </pre>
+     *
      * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
      * @return A list containing the notifications.
      */
@@ -1008,6 +1180,10 @@ private static final long serialVersionUID = 0L;
           com.antinvestor.apis.payment.v1.NotificationType>(notifications_, notifications_converter_);
     }
     /**
+     * <pre>
+     * Notification methods
+     * </pre>
+     *
      * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
      * @return The count of notifications.
      */
@@ -1015,6 +1191,10 @@ private static final long serialVersionUID = 0L;
       return notifications_.size();
     }
     /**
+     * <pre>
+     * Notification methods
+     * </pre>
+     *
      * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
      * @param index The index of the element to return.
      * @return The notifications at the given index.
@@ -1023,6 +1203,10 @@ private static final long serialVersionUID = 0L;
       return notifications_converter_.convert(notifications_.getInt(index));
     }
     /**
+     * <pre>
+     * Notification methods
+     * </pre>
+     *
      * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
      * @param index The index to set the value at.
      * @param value The notifications to set.
@@ -1037,6 +1221,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notification methods
+     * </pre>
+     *
      * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
      * @param value The notifications to add.
      * @return This builder for chaining.
@@ -1049,6 +1237,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notification methods
+     * </pre>
+     *
      * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
      * @param values The notifications to add.
      * @return This builder for chaining.
@@ -1063,6 +1255,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notification methods
+     * </pre>
+     *
      * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
      * @return This builder for chaining.
      */
@@ -1073,6 +1269,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notification methods
+     * </pre>
+     *
      * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
      * @return A list containing the enum numeric values on the wire for notifications.
      */
@@ -1082,6 +1282,10 @@ private static final long serialVersionUID = 0L;
       return notifications_;
     }
     /**
+     * <pre>
+     * Notification methods
+     * </pre>
+     *
      * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
      * @param index The index of the value to return.
      * @return The enum numeric value on the wire of notifications at the given index.
@@ -1090,6 +1294,10 @@ private static final long serialVersionUID = 0L;
       return notifications_.getInt(index);
     }
     /**
+     * <pre>
+     * Notification methods
+     * </pre>
+     *
      * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
      * @param index The index to set the value at.
      * @param value The enum numeric value on the wire for notifications to set.
@@ -1103,6 +1311,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notification methods
+     * </pre>
+     *
      * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
      * @param value The enum numeric value on the wire for notifications to add.
      * @return This builder for chaining.
@@ -1114,6 +1326,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notification methods
+     * </pre>
+     *
      * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
      * @param values The enum numeric values on the wire for notifications to add.
      * @return This builder for chaining.

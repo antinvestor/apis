@@ -25,11 +25,19 @@ public interface SettingOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Setting name (e.g., "theme", "max_upload_size")
+   * </pre>
+   *
    * <code>string name = 1 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The name.
    */
   java.lang.String getName();
   /**
+   * <pre>
+   * Setting name (e.g., "theme", "max_upload_size")
+   * </pre>
+   *
    * <code>string name = 1 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The bytes for name.
    */
@@ -37,11 +45,19 @@ public interface SettingOrBuilder extends
       getNameBytes();
 
   /**
+   * <pre>
+   * Object type scope (e.g., "user", "organization", "application")
+   * </pre>
+   *
    * <code>string object = 2 [json_name = "object", (.buf.validate.field) = { ... }</code>
    * @return The object.
    */
   java.lang.String getObject();
   /**
+   * <pre>
+   * Object type scope (e.g., "user", "organization", "application")
+   * </pre>
+   *
    * <code>string object = 2 [json_name = "object", (.buf.validate.field) = { ... }</code>
    * @return The bytes for object.
    */
@@ -49,11 +65,19 @@ public interface SettingOrBuilder extends
       getObjectBytes();
 
   /**
+   * <pre>
+   * Specific object instance ID (for instance-level settings)
+   * </pre>
+   *
    * <code>string object_id = 3 [json_name = "objectId", (.buf.validate.field) = { ... }</code>
    * @return The objectId.
    */
   java.lang.String getObjectId();
   /**
+   * <pre>
+   * Specific object instance ID (for instance-level settings)
+   * </pre>
+   *
    * <code>string object_id = 3 [json_name = "objectId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for objectId.
    */
@@ -61,11 +85,19 @@ public interface SettingOrBuilder extends
       getObjectIdBytes();
 
   /**
+   * <pre>
+   * Language code for localized settings (ISO 639-1)
+   * </pre>
+   *
    * <code>string lang = 4 [json_name = "lang", (.buf.validate.field) = { ... }</code>
    * @return The lang.
    */
   java.lang.String getLang();
   /**
+   * <pre>
+   * Language code for localized settings (ISO 639-1)
+   * </pre>
+   *
    * <code>string lang = 4 [json_name = "lang", (.buf.validate.field) = { ... }</code>
    * @return The bytes for lang.
    */
@@ -73,11 +105,19 @@ public interface SettingOrBuilder extends
       getLangBytes();
 
   /**
+   * <pre>
+   * Module or feature scope (e.g., "billing", "notifications")
+   * </pre>
+   *
    * <code>string module = 5 [json_name = "module", (.buf.validate.field) = { ... }</code>
    * @return The module.
    */
   java.lang.String getModule();
   /**
+   * <pre>
+   * Module or feature scope (e.g., "billing", "notifications")
+   * </pre>
+   *
    * <code>string module = 5 [json_name = "module", (.buf.validate.field) = { ... }</code>
    * @return The bytes for module.
    */

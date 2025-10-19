@@ -25,11 +25,19 @@ public interface RecognizeResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Reference ID from the request
+   * </pre>
+   *
    * <code>string reference_id = 1 [json_name = "referenceId"];</code>
    * @return The referenceId.
    */
   java.lang.String getReferenceId();
   /**
+   * <pre>
+   * Reference ID from the request
+   * </pre>
+   *
    * <code>string reference_id = 1 [json_name = "referenceId"];</code>
    * @return The bytes for referenceId.
    */
@@ -37,24 +45,44 @@ public interface RecognizeResponseOrBuilder extends
       getReferenceIdBytes();
 
   /**
+   * <pre>
+   * OCR results for each processed file
+   * </pre>
+   *
    * <code>repeated .ocr.v1.OCRFile result = 2 [json_name = "result"];</code>
    */
   java.util.List<com.antinvestor.apis.ocr.v1.OCRFile> 
       getResultList();
   /**
+   * <pre>
+   * OCR results for each processed file
+   * </pre>
+   *
    * <code>repeated .ocr.v1.OCRFile result = 2 [json_name = "result"];</code>
    */
   com.antinvestor.apis.ocr.v1.OCRFile getResult(int index);
   /**
+   * <pre>
+   * OCR results for each processed file
+   * </pre>
+   *
    * <code>repeated .ocr.v1.OCRFile result = 2 [json_name = "result"];</code>
    */
   int getResultCount();
   /**
+   * <pre>
+   * OCR results for each processed file
+   * </pre>
+   *
    * <code>repeated .ocr.v1.OCRFile result = 2 [json_name = "result"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.ocr.v1.OCRFileOrBuilder> 
       getResultOrBuilderList();
   /**
+   * <pre>
+   * OCR results for each processed file
+   * </pre>
+   *
    * <code>repeated .ocr.v1.OCRFile result = 2 [json_name = "result"];</code>
    */
   com.antinvestor.apis.ocr.v1.OCRFileOrBuilder getResultOrBuilder(

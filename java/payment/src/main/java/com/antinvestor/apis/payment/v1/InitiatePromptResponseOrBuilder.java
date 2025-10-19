@@ -25,16 +25,28 @@ public interface InitiatePromptResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Status response
+   * </pre>
+   *
    * <code>.common.v1.StatusResponse data = 1 [json_name = "data"];</code>
    * @return Whether the data field is set.
    */
   boolean hasData();
   /**
+   * <pre>
+   * Status response
+   * </pre>
+   *
    * <code>.common.v1.StatusResponse data = 1 [json_name = "data"];</code>
    * @return The data.
    */
   com.antinvestor.apis.common.v1.StatusResponse getData();
   /**
+   * <pre>
+   * Status response
+   * </pre>
+   *
    * <code>.common.v1.StatusResponse data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.common.v1.StatusResponseOrBuilder getDataOrBuilder();

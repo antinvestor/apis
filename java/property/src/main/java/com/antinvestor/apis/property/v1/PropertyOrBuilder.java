@@ -25,11 +25,19 @@ public interface PropertyOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique property ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Unique property ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface PropertyOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Parent property ID for hierarchical structures
+   * </pre>
+   *
    * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
    * @return The parentId.
    */
   java.lang.String getParentId();
   /**
+   * <pre>
+   * Parent property ID for hierarchical structures
+   * </pre>
+   *
    * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for parentId.
    */
@@ -49,11 +65,19 @@ public interface PropertyOrBuilder extends
       getParentIdBytes();
 
   /**
+   * <pre>
+   * Property name
+   * </pre>
+   *
    * <code>string name = 3 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The name.
    */
   java.lang.String getName();
   /**
+   * <pre>
+   * Property name
+   * </pre>
+   *
    * <code>string name = 3 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The bytes for name.
    */
@@ -61,11 +85,19 @@ public interface PropertyOrBuilder extends
       getNameBytes();
 
   /**
+   * <pre>
+   * Property description
+   * </pre>
+   *
    * <code>string description = 4 [json_name = "description", (.buf.validate.field) = { ... }</code>
    * @return The description.
    */
   java.lang.String getDescription();
   /**
+   * <pre>
+   * Property description
+   * </pre>
+   *
    * <code>string description = 4 [json_name = "description", (.buf.validate.field) = { ... }</code>
    * @return The bytes for description.
    */
@@ -73,76 +105,136 @@ public interface PropertyOrBuilder extends
       getDescriptionBytes();
 
   /**
+   * <pre>
+   * Property classification
+   * </pre>
+   *
    * <code>.property.v1.PropertyType property_type = 5 [json_name = "propertyType"];</code>
    * @return Whether the propertyType field is set.
    */
   boolean hasPropertyType();
   /**
+   * <pre>
+   * Property classification
+   * </pre>
+   *
    * <code>.property.v1.PropertyType property_type = 5 [json_name = "propertyType"];</code>
    * @return The propertyType.
    */
   com.antinvestor.apis.property.v1.PropertyType getPropertyType();
   /**
+   * <pre>
+   * Property classification
+   * </pre>
+   *
    * <code>.property.v1.PropertyType property_type = 5 [json_name = "propertyType"];</code>
    */
   com.antinvestor.apis.property.v1.PropertyTypeOrBuilder getPropertyTypeOrBuilder();
 
   /**
+   * <pre>
+   * Geographic location
+   * </pre>
+   *
    * <code>.property.v1.Locality locality = 6 [json_name = "locality"];</code>
    * @return Whether the locality field is set.
    */
   boolean hasLocality();
   /**
+   * <pre>
+   * Geographic location
+   * </pre>
+   *
    * <code>.property.v1.Locality locality = 6 [json_name = "locality"];</code>
    * @return The locality.
    */
   com.antinvestor.apis.property.v1.Locality getLocality();
   /**
+   * <pre>
+   * Geographic location
+   * </pre>
+   *
    * <code>.property.v1.Locality locality = 6 [json_name = "locality"];</code>
    */
   com.antinvestor.apis.property.v1.LocalityOrBuilder getLocalityOrBuilder();
 
   /**
+   * <pre>
+   * Property start date
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp started_at = 7 [json_name = "startedAt", (.buf.validate.field) = { ... }</code>
    * @return Whether the startedAt field is set.
    */
   boolean hasStartedAt();
   /**
+   * <pre>
+   * Property start date
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp started_at = 7 [json_name = "startedAt", (.buf.validate.field) = { ... }</code>
    * @return The startedAt.
    */
   com.google.protobuf.Timestamp getStartedAt();
   /**
+   * <pre>
+   * Property start date
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp started_at = 7 [json_name = "startedAt", (.buf.validate.field) = { ... }</code>
    */
   com.google.protobuf.TimestampOrBuilder getStartedAtOrBuilder();
 
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 8 [json_name = "createdAt"];</code>
    * @return Whether the createdAt field is set.
    */
   boolean hasCreatedAt();
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 8 [json_name = "createdAt"];</code>
    * @return The createdAt.
    */
   com.google.protobuf.Timestamp getCreatedAt();
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 8 [json_name = "createdAt"];</code>
    */
   com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();
 
   /**
+   * <pre>
+   * Additional property metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 9 [json_name = "extra", (.buf.validate.field) = { ... }</code>
    * @return Whether the extra field is set.
    */
   boolean hasExtra();
   /**
+   * <pre>
+   * Additional property metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 9 [json_name = "extra", (.buf.validate.field) = { ... }</code>
    * @return The extra.
    */
   com.google.protobuf.Struct getExtra();
   /**
+   * <pre>
+   * Additional property metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 9 [json_name = "extra", (.buf.validate.field) = { ... }</code>
    */
   com.google.protobuf.StructOrBuilder getExtraOrBuilder();

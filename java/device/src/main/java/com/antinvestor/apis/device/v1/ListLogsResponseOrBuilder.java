@@ -25,24 +25,44 @@ public interface ListLogsResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * List of log entries
+   * </pre>
+   *
    * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
   java.util.List<com.antinvestor.apis.device.v1.DeviceLog> 
       getDataList();
   /**
+   * <pre>
+   * List of log entries
+   * </pre>
+   *
    * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.device.v1.DeviceLog getData(int index);
   /**
+   * <pre>
+   * List of log entries
+   * </pre>
+   *
    * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
   int getDataCount();
   /**
+   * <pre>
+   * List of log entries
+   * </pre>
+   *
    * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.device.v1.DeviceLogOrBuilder> 
       getDataOrBuilderList();
   /**
+   * <pre>
+   * List of log entries
+   * </pre>
+   *
    * <code>repeated .device.v1.DeviceLog data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.device.v1.DeviceLogOrBuilder getDataOrBuilder(

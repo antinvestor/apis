@@ -21,7 +21,8 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * The response message containing the full device key object
+ * KeyObject represents an encryption key associated with a device.
+ * Keys are used for secure communications and must be properly managed.
  * </pre>
  *
  * Protobuf type {@code device.v1.KeyObject}
@@ -69,6 +70,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
   /**
+   * <pre>
+   * Unique identifier for the key
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
@@ -86,6 +91,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Unique identifier for the key
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -108,6 +117,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object deviceId_ = "";
   /**
+   * <pre>
+   * Device this key belongs to
+   * </pre>
+   *
    * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
    * @return The deviceId.
    */
@@ -125,6 +138,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Device this key belongs to
+   * </pre>
+   *
    * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for deviceId.
    */
@@ -146,6 +163,10 @@ private static final long serialVersionUID = 0L;
   public static final int KEY_FIELD_NUMBER = 3;
   private com.google.protobuf.ByteString key_ = com.google.protobuf.ByteString.EMPTY;
   /**
+   * <pre>
+   * The actual encryption key material (encrypted at rest)
+   * </pre>
+   *
    * <code>bytes key = 3 [json_name = "key"];</code>
    * @return The key.
    */
@@ -157,6 +178,10 @@ private static final long serialVersionUID = 0L;
   public static final int EXTRA_FIELD_NUMBER = 4;
   private com.google.protobuf.Struct extra_;
   /**
+   * <pre>
+   * Additional key metadata (algorithm, expiry, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
    * @return Whether the extra field is set.
    */
@@ -165,6 +190,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Additional key metadata (algorithm, expiry, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
    * @return The extra.
    */
@@ -173,6 +202,10 @@ private static final long serialVersionUID = 0L;
     return extra_ == null ? com.google.protobuf.Struct.getDefaultInstance() : extra_;
   }
   /**
+   * <pre>
+   * Additional key metadata (algorithm, expiry, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
    */
   @java.lang.Override
@@ -375,7 +408,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The response message containing the full device key object
+   * KeyObject represents an encryption key associated with a device.
+   * Keys are used for secure communications and must be properly managed.
    * </pre>
    *
    * Protobuf type {@code device.v1.KeyObject}
@@ -572,6 +606,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object id_ = "";
     /**
+     * <pre>
+     * Unique identifier for the key
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The id.
      */
@@ -588,6 +626,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique identifier for the key
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The bytes for id.
      */
@@ -605,6 +647,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique identifier for the key
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The id to set.
      * @return This builder for chaining.
@@ -618,6 +664,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique identifier for the key
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -628,6 +678,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique identifier for the key
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for id to set.
      * @return This builder for chaining.
@@ -644,6 +698,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object deviceId_ = "";
     /**
+     * <pre>
+     * Device this key belongs to
+     * </pre>
+     *
      * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return The deviceId.
      */
@@ -660,6 +718,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Device this key belongs to
+     * </pre>
+     *
      * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for deviceId.
      */
@@ -677,6 +739,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Device this key belongs to
+     * </pre>
+     *
      * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @param value The deviceId to set.
      * @return This builder for chaining.
@@ -690,6 +756,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Device this key belongs to
+     * </pre>
+     *
      * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -700,6 +770,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Device this key belongs to
+     * </pre>
+     *
      * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for deviceId to set.
      * @return This builder for chaining.
@@ -716,6 +790,10 @@ private static final long serialVersionUID = 0L;
 
     private com.google.protobuf.ByteString key_ = com.google.protobuf.ByteString.EMPTY;
     /**
+     * <pre>
+     * The actual encryption key material (encrypted at rest)
+     * </pre>
+     *
      * <code>bytes key = 3 [json_name = "key"];</code>
      * @return The key.
      */
@@ -724,6 +802,10 @@ private static final long serialVersionUID = 0L;
       return key_;
     }
     /**
+     * <pre>
+     * The actual encryption key material (encrypted at rest)
+     * </pre>
+     *
      * <code>bytes key = 3 [json_name = "key"];</code>
      * @param value The key to set.
      * @return This builder for chaining.
@@ -736,6 +818,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * The actual encryption key material (encrypted at rest)
+     * </pre>
+     *
      * <code>bytes key = 3 [json_name = "key"];</code>
      * @return This builder for chaining.
      */
@@ -750,6 +836,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> extraBuilder_;
     /**
+     * <pre>
+     * Additional key metadata (algorithm, expiry, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
      * @return Whether the extra field is set.
      */
@@ -757,6 +847,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000008) != 0);
     }
     /**
+     * <pre>
+     * Additional key metadata (algorithm, expiry, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
      * @return The extra.
      */
@@ -768,6 +862,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional key metadata (algorithm, expiry, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
      */
     public Builder setExtra(com.google.protobuf.Struct value) {
@@ -784,6 +882,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional key metadata (algorithm, expiry, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
      */
     public Builder setExtra(
@@ -798,6 +900,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional key metadata (algorithm, expiry, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
      */
     public Builder mergeExtra(com.google.protobuf.Struct value) {
@@ -819,6 +925,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional key metadata (algorithm, expiry, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
      */
     public Builder clearExtra() {
@@ -832,6 +942,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional key metadata (algorithm, expiry, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
      */
     public com.google.protobuf.Struct.Builder getExtraBuilder() {
@@ -840,6 +954,10 @@ private static final long serialVersionUID = 0L;
       return internalGetExtraFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Additional key metadata (algorithm, expiry, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
      */
     public com.google.protobuf.StructOrBuilder getExtraOrBuilder() {
@@ -851,6 +969,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional key metadata (algorithm, expiry, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<

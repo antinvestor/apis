@@ -21,7 +21,8 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * The request message has data to link a session to a user
+ * LinkRequest links a device to a user profile.
+ * Devices must be linked before they can be used for authenticated operations.
  * </pre>
  *
  * Protobuf type {@code device.v1.LinkRequest}
@@ -68,6 +69,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
   /**
+   * <pre>
+   * Device ID to link
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
@@ -85,6 +90,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Device ID to link
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -107,6 +116,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object profileId_ = "";
   /**
+   * <pre>
+   * Profile ID to link the device to
+   * </pre>
+   *
    * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The profileId.
    */
@@ -124,6 +137,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Profile ID to link the device to
+   * </pre>
+   *
    * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileId.
    */
@@ -145,6 +162,10 @@ private static final long serialVersionUID = 0L;
   public static final int PROPERTIES_FIELD_NUMBER = 3;
   private com.google.protobuf.Struct properties_;
   /**
+   * <pre>
+   * Additional linking properties
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    * @return Whether the properties field is set.
    */
@@ -153,6 +174,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Additional linking properties
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    * @return The properties.
    */
@@ -161,6 +186,10 @@ private static final long serialVersionUID = 0L;
     return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
   }
   /**
+   * <pre>
+   * Additional linking properties
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    */
   @java.lang.Override
@@ -352,7 +381,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The request message has data to link a session to a user
+   * LinkRequest links a device to a user profile.
+   * Devices must be linked before they can be used for authenticated operations.
    * </pre>
    *
    * Protobuf type {@code device.v1.LinkRequest}
@@ -537,6 +567,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object id_ = "";
     /**
+     * <pre>
+     * Device ID to link
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The id.
      */
@@ -553,6 +587,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Device ID to link
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The bytes for id.
      */
@@ -570,6 +608,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Device ID to link
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The id to set.
      * @return This builder for chaining.
@@ -583,6 +625,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Device ID to link
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -593,6 +639,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Device ID to link
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for id to set.
      * @return This builder for chaining.
@@ -609,6 +659,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object profileId_ = "";
     /**
+     * <pre>
+     * Profile ID to link the device to
+     * </pre>
+     *
      * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return The profileId.
      */
@@ -625,6 +679,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Profile ID to link the device to
+     * </pre>
+     *
      * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for profileId.
      */
@@ -642,6 +700,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Profile ID to link the device to
+     * </pre>
+     *
      * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @param value The profileId to set.
      * @return This builder for chaining.
@@ -655,6 +717,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Profile ID to link the device to
+     * </pre>
+     *
      * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -665,6 +731,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Profile ID to link the device to
+     * </pre>
+     *
      * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for profileId to set.
      * @return This builder for chaining.
@@ -683,6 +753,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> propertiesBuilder_;
     /**
+     * <pre>
+     * Additional linking properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      * @return Whether the properties field is set.
      */
@@ -690,6 +764,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000004) != 0);
     }
     /**
+     * <pre>
+     * Additional linking properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      * @return The properties.
      */
@@ -701,6 +779,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional linking properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public Builder setProperties(com.google.protobuf.Struct value) {
@@ -717,6 +799,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional linking properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public Builder setProperties(
@@ -731,6 +817,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional linking properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public Builder mergeProperties(com.google.protobuf.Struct value) {
@@ -752,6 +842,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional linking properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public Builder clearProperties() {
@@ -765,6 +859,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional linking properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public com.google.protobuf.Struct.Builder getPropertiesBuilder() {
@@ -773,6 +871,10 @@ private static final long serialVersionUID = 0L;
       return internalGetPropertiesFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Additional linking properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public com.google.protobuf.StructOrBuilder getPropertiesOrBuilder() {
@@ -784,6 +886,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional linking properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<

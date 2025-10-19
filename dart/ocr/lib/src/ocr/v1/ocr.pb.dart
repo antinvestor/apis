@@ -20,6 +20,7 @@ import '../../google/protobuf/struct.pb.dart' as $0;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
+/// OCRFile represents the result of OCR processing for a single file.
 class OCRFile extends $pb.GeneratedMessage {
   factory OCRFile({
     $core.String? fileId,
@@ -126,7 +127,8 @@ class OCRFile extends $pb.GeneratedMessage {
   $0.Struct ensureProperties() => $_ensure(4);
 }
 
-/// Request to determine text found in a file
+/// RecognizeRequest initiates OCR processing for one or more files.
+/// Supports both synchronous and asynchronous processing modes.
 class RecognizeRequest extends $pb.GeneratedMessage {
   factory RecognizeRequest({
     $core.String? referenceId,
@@ -228,6 +230,7 @@ class RecognizeRequest extends $pb.GeneratedMessage {
   $pb.PbList<$core.String> get fileId => $_getList(4);
 }
 
+/// RecognizeResponse returns OCR results for the requested files.
 class RecognizeResponse extends $pb.GeneratedMessage {
   factory RecognizeResponse({
     $core.String? referenceId,
@@ -291,6 +294,7 @@ class RecognizeResponse extends $pb.GeneratedMessage {
   $pb.PbList<OCRFile> get result => $_getList(1);
 }
 
+/// StatusResponse returns the status of an async OCR request.
 class StatusResponse extends $pb.GeneratedMessage {
   factory StatusResponse({
     RecognizeResponse? data,
@@ -350,18 +354,22 @@ class StatusResponse extends $pb.GeneratedMessage {
   RecognizeResponse ensureData() => $_ensure(0);
 }
 
+/// OCRService provides optical character recognition capabilities.
+/// All RPCs require authentication via Bearer token.
 class OCRServiceApi {
   final $pb.RpcClient _client;
 
   OCRServiceApi(this._client);
 
-  /// Perform a new ocr process request
+  /// Recognize performs OCR on one or more files.
+  /// Supports both synchronous and asynchronous processing.
   $async.Future<RecognizeResponse> recognize(
           $pb.ClientContext? ctx, RecognizeRequest request) =>
       _client.invoke<RecognizeResponse>(
           ctx, 'OCRService', 'Recognize', request, RecognizeResponse());
 
-  /// Check the status of request if queued
+  /// Status retrieves the current status of an async OCR request.
+  /// Returns processing status and results if available.
   $async.Future<StatusResponse> status(
           $pb.ClientContext? ctx, $1.StatusRequest request) =>
       _client.invoke<StatusResponse>(

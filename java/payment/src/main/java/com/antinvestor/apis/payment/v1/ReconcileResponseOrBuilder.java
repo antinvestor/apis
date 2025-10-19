@@ -25,11 +25,19 @@ public interface ReconcileResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Internal payment ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Internal payment ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface ReconcileResponseOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Transaction ID
+   * </pre>
+   *
    * <code>string transaction_id = 2 [json_name = "transactionId"];</code>
    * @return The transactionId.
    */
   java.lang.String getTransactionId();
   /**
+   * <pre>
+   * Transaction ID
+   * </pre>
+   *
    * <code>string transaction_id = 2 [json_name = "transactionId"];</code>
    * @return The bytes for transactionId.
    */
@@ -49,11 +65,19 @@ public interface ReconcileResponseOrBuilder extends
       getTransactionIdBytes();
 
   /**
+   * <pre>
+   * Reference ID
+   * </pre>
+   *
    * <code>string reference_id = 3 [json_name = "referenceId"];</code>
    * @return The referenceId.
    */
   java.lang.String getReferenceId();
   /**
+   * <pre>
+   * Reference ID
+   * </pre>
+   *
    * <code>string reference_id = 3 [json_name = "referenceId"];</code>
    * @return The bytes for referenceId.
    */
@@ -61,22 +85,38 @@ public interface ReconcileResponseOrBuilder extends
       getReferenceIdBytes();
 
   /**
+   * <pre>
+   * Reconciliation status
+   * </pre>
+   *
    * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
    * @return The enum numeric value on the wire for status.
    */
   int getStatusValue();
   /**
+   * <pre>
+   * Reconciliation status
+   * </pre>
+   *
    * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
    * @return The status.
    */
   com.antinvestor.apis.common.v1.STATUS getStatus();
 
   /**
+   * <pre>
+   * Status description
+   * </pre>
+   *
    * <code>string description = 5 [json_name = "description"];</code>
    * @return The description.
    */
   java.lang.String getDescription();
   /**
+   * <pre>
+   * Status description
+   * </pre>
+   *
    * <code>string description = 5 [json_name = "description"];</code>
    * @return The bytes for description.
    */

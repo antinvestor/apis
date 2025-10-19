@@ -25,26 +25,46 @@ public interface CustomerOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Customer contact information
+   * </pre>
+   *
    * <code>.common.v1.ContactLink source = 1 [json_name = "source"];</code>
    * @return Whether the source field is set.
    */
   boolean hasSource();
   /**
+   * <pre>
+   * Customer contact information
+   * </pre>
+   *
    * <code>.common.v1.ContactLink source = 1 [json_name = "source"];</code>
    * @return The source.
    */
   com.antinvestor.apis.common.v1.ContactLink getSource();
   /**
+   * <pre>
+   * Customer contact information
+   * </pre>
+   *
    * <code>.common.v1.ContactLink source = 1 [json_name = "source"];</code>
    */
   com.antinvestor.apis.common.v1.ContactLinkOrBuilder getSourceOrBuilder();
 
   /**
+   * <pre>
+   * Primary address line
+   * </pre>
+   *
    * <code>string first_address = 2 [json_name = "firstAddress"];</code>
    * @return The firstAddress.
    */
   java.lang.String getFirstAddress();
   /**
+   * <pre>
+   * Primary address line
+   * </pre>
+   *
    * <code>string first_address = 2 [json_name = "firstAddress"];</code>
    * @return The bytes for firstAddress.
    */
@@ -52,11 +72,19 @@ public interface CustomerOrBuilder extends
       getFirstAddressBytes();
 
   /**
+   * <pre>
+   * Country code (ISO 3166-1 alpha-2)
+   * </pre>
+   *
    * <code>string country_code = 3 [json_name = "countryCode"];</code>
    * @return The countryCode.
    */
   java.lang.String getCountryCode();
   /**
+   * <pre>
+   * Country code (ISO 3166-1 alpha-2)
+   * </pre>
+   *
    * <code>string country_code = 3 [json_name = "countryCode"];</code>
    * @return The bytes for countryCode.
    */
@@ -64,11 +92,19 @@ public interface CustomerOrBuilder extends
       getCountryCodeBytes();
 
   /**
+   * <pre>
+   * Postal/ZIP code
+   * </pre>
+   *
    * <code>string postal_or_zip_code = 4 [json_name = "postalOrZipCode"];</code>
    * @return The postalOrZipCode.
    */
   java.lang.String getPostalOrZipCode();
   /**
+   * <pre>
+   * Postal/ZIP code
+   * </pre>
+   *
    * <code>string postal_or_zip_code = 4 [json_name = "postalOrZipCode"];</code>
    * @return The bytes for postalOrZipCode.
    */
@@ -76,11 +112,19 @@ public interface CustomerOrBuilder extends
       getPostalOrZipCodeBytes();
 
   /**
+   * <pre>
+   * External customer reference
+   * </pre>
+   *
    * <code>string customer_external_ref = 5 [json_name = "customerExternalRef"];</code>
    * @return The customerExternalRef.
    */
   java.lang.String getCustomerExternalRef();
   /**
+   * <pre>
+   * External customer reference
+   * </pre>
+   *
    * <code>string customer_external_ref = 5 [json_name = "customerExternalRef"];</code>
    * @return The bytes for customerExternalRef.
    */

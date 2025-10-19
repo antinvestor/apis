@@ -20,10 +20,6 @@
 package com.antinvestor.apis.partition.v1;
 
 /**
- * <pre>
- * Access Roles
- * </pre>
- *
  * Protobuf type {@code partition.v1.CreateAccessRoleRequest}
  */
 @com.google.protobuf.Generated
@@ -308,10 +304,6 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * <pre>
-   * Access Roles
-   * </pre>
-   *
    * Protobuf type {@code partition.v1.CreateAccessRoleRequest}
    */
   public static final class Builder extends

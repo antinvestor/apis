@@ -25,16 +25,28 @@ public interface ReceiveRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Payment to receive
+   * </pre>
+   *
    * <code>.payment.v1.Payment data = 1 [json_name = "data"];</code>
    * @return Whether the data field is set.
    */
   boolean hasData();
   /**
+   * <pre>
+   * Payment to receive
+   * </pre>
+   *
    * <code>.payment.v1.Payment data = 1 [json_name = "data"];</code>
    * @return The data.
    */
   com.antinvestor.apis.payment.v1.Payment getData();
   /**
+   * <pre>
+   * Payment to receive
+   * </pre>
+   *
    * <code>.payment.v1.Payment data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.payment.v1.PaymentOrBuilder getDataOrBuilder();

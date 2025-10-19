@@ -25,11 +25,19 @@ public interface ProgressItemOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Progress entry ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Progress entry ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface ProgressItemOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Timestamp of this update (RFC3339)
+   * </pre>
+   *
    * <code>string datetime = 2 [json_name = "datetime"];</code>
    * @return The datetime.
    */
   java.lang.String getDatetime();
   /**
+   * <pre>
+   * Timestamp of this update (RFC3339)
+   * </pre>
+   *
    * <code>string datetime = 2 [json_name = "datetime"];</code>
    * @return The bytes for datetime.
    */
@@ -49,11 +65,19 @@ public interface ProgressItemOrBuilder extends
       getDatetimeBytes();
 
   /**
+   * <pre>
+   * State at this point (registered, matched, claimed, etc.)
+   * </pre>
+   *
    * <code>string state = 3 [json_name = "state"];</code>
    * @return The state.
    */
   java.lang.String getState();
   /**
+   * <pre>
+   * State at this point (registered, matched, claimed, etc.)
+   * </pre>
+   *
    * <code>string state = 3 [json_name = "state"];</code>
    * @return The bytes for state.
    */
@@ -61,11 +85,19 @@ public interface ProgressItemOrBuilder extends
       getStateBytes();
 
   /**
+   * <pre>
+   * Human-readable description of the update
+   * </pre>
+   *
    * <code>string description = 4 [json_name = "description"];</code>
    * @return The description.
    */
   java.lang.String getDescription();
   /**
+   * <pre>
+   * Human-readable description of the update
+   * </pre>
+   *
    * <code>string description = 4 [json_name = "description"];</code>
    * @return The bytes for description.
    */

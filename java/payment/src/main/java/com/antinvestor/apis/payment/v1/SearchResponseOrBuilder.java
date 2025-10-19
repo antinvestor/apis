@@ -25,24 +25,44 @@ public interface SearchResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * List of matching payments
+   * </pre>
+   *
    * <code>repeated .payment.v1.Payment data = 1 [json_name = "data"];</code>
    */
   java.util.List<com.antinvestor.apis.payment.v1.Payment> 
       getDataList();
   /**
+   * <pre>
+   * List of matching payments
+   * </pre>
+   *
    * <code>repeated .payment.v1.Payment data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.payment.v1.Payment getData(int index);
   /**
+   * <pre>
+   * List of matching payments
+   * </pre>
+   *
    * <code>repeated .payment.v1.Payment data = 1 [json_name = "data"];</code>
    */
   int getDataCount();
   /**
+   * <pre>
+   * List of matching payments
+   * </pre>
+   *
    * <code>repeated .payment.v1.Payment data = 1 [json_name = "data"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.payment.v1.PaymentOrBuilder> 
       getDataOrBuilderList();
   /**
+   * <pre>
+   * List of matching payments
+   * </pre>
+   *
    * <code>repeated .payment.v1.Payment data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.payment.v1.PaymentOrBuilder getDataOrBuilder(

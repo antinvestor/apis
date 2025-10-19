@@ -20,6 +20,11 @@
 package com.antinvestor.apis.device.v1;
 
 /**
+ * <pre>
+ * Locale represents the localization settings for a device.
+ * Used to provide localized content and format data appropriately for the user.
+ * </pre>
+ *
  * Protobuf type {@code device.v1.Locale}
  */
 @com.google.protobuf.Generated
@@ -69,6 +74,10 @@ private static final long serialVersionUID = 0L;
   private com.google.protobuf.LazyStringArrayList language_ =
       com.google.protobuf.LazyStringArrayList.emptyList();
   /**
+   * <pre>
+   * Preferred languages in priority order (e.g., ["en-US", "en"])
+   * </pre>
+   *
    * <code>repeated string language = 1 [json_name = "language"];</code>
    * @return A list containing the language.
    */
@@ -77,6 +86,10 @@ private static final long serialVersionUID = 0L;
     return language_;
   }
   /**
+   * <pre>
+   * Preferred languages in priority order (e.g., ["en-US", "en"])
+   * </pre>
+   *
    * <code>repeated string language = 1 [json_name = "language"];</code>
    * @return The count of language.
    */
@@ -84,6 +97,10 @@ private static final long serialVersionUID = 0L;
     return language_.size();
   }
   /**
+   * <pre>
+   * Preferred languages in priority order (e.g., ["en-US", "en"])
+   * </pre>
+   *
    * <code>repeated string language = 1 [json_name = "language"];</code>
    * @param index The index of the element to return.
    * @return The language at the given index.
@@ -92,6 +109,10 @@ private static final long serialVersionUID = 0L;
     return language_.get(index);
   }
   /**
+   * <pre>
+   * Preferred languages in priority order (e.g., ["en-US", "en"])
+   * </pre>
+   *
    * <code>repeated string language = 1 [json_name = "language"];</code>
    * @param index The index of the value to return.
    * @return The bytes of the language at the given index.
@@ -105,6 +126,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object timezone_ = "";
   /**
+   * <pre>
+   * IANA timezone identifier (e.g., "America/New_York")
+   * </pre>
+   *
    * <code>string timezone = 5 [json_name = "timezone"];</code>
    * @return The timezone.
    */
@@ -122,6 +147,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * IANA timezone identifier (e.g., "America/New_York")
+   * </pre>
+   *
    * <code>string timezone = 5 [json_name = "timezone"];</code>
    * @return The bytes for timezone.
    */
@@ -144,6 +173,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object utcOffset_ = "";
   /**
+   * <pre>
+   * UTC offset in format "+HH:MM" or "-HH:MM"
+   * </pre>
+   *
    * <code>string utc_offset = 6 [json_name = "utcOffset"];</code>
    * @return The utcOffset.
    */
@@ -161,6 +194,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * UTC offset in format "+HH:MM" or "-HH:MM"
+   * </pre>
+   *
    * <code>string utc_offset = 6 [json_name = "utcOffset"];</code>
    * @return The bytes for utcOffset.
    */
@@ -183,6 +220,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object currency_ = "";
   /**
+   * <pre>
+   * ISO 4217 currency code (e.g., "USD", "EUR")
+   * </pre>
+   *
    * <code>string currency = 8 [json_name = "currency"];</code>
    * @return The currency.
    */
@@ -200,6 +241,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * ISO 4217 currency code (e.g., "USD", "EUR")
+   * </pre>
+   *
    * <code>string currency = 8 [json_name = "currency"];</code>
    * @return The bytes for currency.
    */
@@ -222,6 +267,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object currencyName_ = "";
   /**
+   * <pre>
+   * Human-readable currency name
+   * </pre>
+   *
    * <code>string currency_name = 9 [json_name = "currencyName"];</code>
    * @return The currencyName.
    */
@@ -239,6 +288,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Human-readable currency name
+   * </pre>
+   *
    * <code>string currency_name = 9 [json_name = "currencyName"];</code>
    * @return The bytes for currencyName.
    */
@@ -261,6 +314,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object code_ = "";
   /**
+   * <pre>
+   * ISO 3166-1 alpha-2 country code (e.g., "US", "GB")
+   * </pre>
+   *
    * <code>string code = 10 [json_name = "code"];</code>
    * @return The code.
    */
@@ -278,6 +335,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * ISO 3166-1 alpha-2 country code (e.g., "US", "GB")
+   * </pre>
+   *
    * <code>string code = 10 [json_name = "code"];</code>
    * @return The bytes for code.
    */
@@ -510,6 +571,11 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * Locale represents the localization settings for a device.
+   * Used to provide localized content and format data appropriately for the user.
+   * </pre>
+   *
    * Protobuf type {@code device.v1.Locale}
    */
   public static final class Builder extends
@@ -734,6 +800,10 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00000001;
     }
     /**
+     * <pre>
+     * Preferred languages in priority order (e.g., ["en-US", "en"])
+     * </pre>
+     *
      * <code>repeated string language = 1 [json_name = "language"];</code>
      * @return A list containing the language.
      */
@@ -743,6 +813,10 @@ private static final long serialVersionUID = 0L;
       return language_;
     }
     /**
+     * <pre>
+     * Preferred languages in priority order (e.g., ["en-US", "en"])
+     * </pre>
+     *
      * <code>repeated string language = 1 [json_name = "language"];</code>
      * @return The count of language.
      */
@@ -750,6 +824,10 @@ private static final long serialVersionUID = 0L;
       return language_.size();
     }
     /**
+     * <pre>
+     * Preferred languages in priority order (e.g., ["en-US", "en"])
+     * </pre>
+     *
      * <code>repeated string language = 1 [json_name = "language"];</code>
      * @param index The index of the element to return.
      * @return The language at the given index.
@@ -758,6 +836,10 @@ private static final long serialVersionUID = 0L;
       return language_.get(index);
     }
     /**
+     * <pre>
+     * Preferred languages in priority order (e.g., ["en-US", "en"])
+     * </pre>
+     *
      * <code>repeated string language = 1 [json_name = "language"];</code>
      * @param index The index of the value to return.
      * @return The bytes of the language at the given index.
@@ -767,6 +849,10 @@ private static final long serialVersionUID = 0L;
       return language_.getByteString(index);
     }
     /**
+     * <pre>
+     * Preferred languages in priority order (e.g., ["en-US", "en"])
+     * </pre>
+     *
      * <code>repeated string language = 1 [json_name = "language"];</code>
      * @param index The index to set the value at.
      * @param value The language to set.
@@ -782,6 +868,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Preferred languages in priority order (e.g., ["en-US", "en"])
+     * </pre>
+     *
      * <code>repeated string language = 1 [json_name = "language"];</code>
      * @param value The language to add.
      * @return This builder for chaining.
@@ -796,6 +886,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Preferred languages in priority order (e.g., ["en-US", "en"])
+     * </pre>
+     *
      * <code>repeated string language = 1 [json_name = "language"];</code>
      * @param values The language to add.
      * @return This builder for chaining.
@@ -810,6 +904,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Preferred languages in priority order (e.g., ["en-US", "en"])
+     * </pre>
+     *
      * <code>repeated string language = 1 [json_name = "language"];</code>
      * @return This builder for chaining.
      */
@@ -821,6 +919,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Preferred languages in priority order (e.g., ["en-US", "en"])
+     * </pre>
+     *
      * <code>repeated string language = 1 [json_name = "language"];</code>
      * @param value The bytes of the language to add.
      * @return This builder for chaining.
@@ -838,6 +940,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object timezone_ = "";
     /**
+     * <pre>
+     * IANA timezone identifier (e.g., "America/New_York")
+     * </pre>
+     *
      * <code>string timezone = 5 [json_name = "timezone"];</code>
      * @return The timezone.
      */
@@ -854,6 +960,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * IANA timezone identifier (e.g., "America/New_York")
+     * </pre>
+     *
      * <code>string timezone = 5 [json_name = "timezone"];</code>
      * @return The bytes for timezone.
      */
@@ -871,6 +981,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * IANA timezone identifier (e.g., "America/New_York")
+     * </pre>
+     *
      * <code>string timezone = 5 [json_name = "timezone"];</code>
      * @param value The timezone to set.
      * @return This builder for chaining.
@@ -884,6 +998,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * IANA timezone identifier (e.g., "America/New_York")
+     * </pre>
+     *
      * <code>string timezone = 5 [json_name = "timezone"];</code>
      * @return This builder for chaining.
      */
@@ -894,6 +1012,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * IANA timezone identifier (e.g., "America/New_York")
+     * </pre>
+     *
      * <code>string timezone = 5 [json_name = "timezone"];</code>
      * @param value The bytes for timezone to set.
      * @return This builder for chaining.
@@ -910,6 +1032,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object utcOffset_ = "";
     /**
+     * <pre>
+     * UTC offset in format "+HH:MM" or "-HH:MM"
+     * </pre>
+     *
      * <code>string utc_offset = 6 [json_name = "utcOffset"];</code>
      * @return The utcOffset.
      */
@@ -926,6 +1052,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * UTC offset in format "+HH:MM" or "-HH:MM"
+     * </pre>
+     *
      * <code>string utc_offset = 6 [json_name = "utcOffset"];</code>
      * @return The bytes for utcOffset.
      */
@@ -943,6 +1073,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * UTC offset in format "+HH:MM" or "-HH:MM"
+     * </pre>
+     *
      * <code>string utc_offset = 6 [json_name = "utcOffset"];</code>
      * @param value The utcOffset to set.
      * @return This builder for chaining.
@@ -956,6 +1090,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * UTC offset in format "+HH:MM" or "-HH:MM"
+     * </pre>
+     *
      * <code>string utc_offset = 6 [json_name = "utcOffset"];</code>
      * @return This builder for chaining.
      */
@@ -966,6 +1104,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * UTC offset in format "+HH:MM" or "-HH:MM"
+     * </pre>
+     *
      * <code>string utc_offset = 6 [json_name = "utcOffset"];</code>
      * @param value The bytes for utcOffset to set.
      * @return This builder for chaining.
@@ -982,6 +1124,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object currency_ = "";
     /**
+     * <pre>
+     * ISO 4217 currency code (e.g., "USD", "EUR")
+     * </pre>
+     *
      * <code>string currency = 8 [json_name = "currency"];</code>
      * @return The currency.
      */
@@ -998,6 +1144,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * ISO 4217 currency code (e.g., "USD", "EUR")
+     * </pre>
+     *
      * <code>string currency = 8 [json_name = "currency"];</code>
      * @return The bytes for currency.
      */
@@ -1015,6 +1165,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * ISO 4217 currency code (e.g., "USD", "EUR")
+     * </pre>
+     *
      * <code>string currency = 8 [json_name = "currency"];</code>
      * @param value The currency to set.
      * @return This builder for chaining.
@@ -1028,6 +1182,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * ISO 4217 currency code (e.g., "USD", "EUR")
+     * </pre>
+     *
      * <code>string currency = 8 [json_name = "currency"];</code>
      * @return This builder for chaining.
      */
@@ -1038,6 +1196,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * ISO 4217 currency code (e.g., "USD", "EUR")
+     * </pre>
+     *
      * <code>string currency = 8 [json_name = "currency"];</code>
      * @param value The bytes for currency to set.
      * @return This builder for chaining.
@@ -1054,6 +1216,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object currencyName_ = "";
     /**
+     * <pre>
+     * Human-readable currency name
+     * </pre>
+     *
      * <code>string currency_name = 9 [json_name = "currencyName"];</code>
      * @return The currencyName.
      */
@@ -1070,6 +1236,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Human-readable currency name
+     * </pre>
+     *
      * <code>string currency_name = 9 [json_name = "currencyName"];</code>
      * @return The bytes for currencyName.
      */
@@ -1087,6 +1257,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Human-readable currency name
+     * </pre>
+     *
      * <code>string currency_name = 9 [json_name = "currencyName"];</code>
      * @param value The currencyName to set.
      * @return This builder for chaining.
@@ -1100,6 +1274,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Human-readable currency name
+     * </pre>
+     *
      * <code>string currency_name = 9 [json_name = "currencyName"];</code>
      * @return This builder for chaining.
      */
@@ -1110,6 +1288,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Human-readable currency name
+     * </pre>
+     *
      * <code>string currency_name = 9 [json_name = "currencyName"];</code>
      * @param value The bytes for currencyName to set.
      * @return This builder for chaining.
@@ -1126,6 +1308,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object code_ = "";
     /**
+     * <pre>
+     * ISO 3166-1 alpha-2 country code (e.g., "US", "GB")
+     * </pre>
+     *
      * <code>string code = 10 [json_name = "code"];</code>
      * @return The code.
      */
@@ -1142,6 +1328,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * ISO 3166-1 alpha-2 country code (e.g., "US", "GB")
+     * </pre>
+     *
      * <code>string code = 10 [json_name = "code"];</code>
      * @return The bytes for code.
      */
@@ -1159,6 +1349,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * ISO 3166-1 alpha-2 country code (e.g., "US", "GB")
+     * </pre>
+     *
      * <code>string code = 10 [json_name = "code"];</code>
      * @param value The code to set.
      * @return This builder for chaining.
@@ -1172,6 +1366,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * ISO 3166-1 alpha-2 country code (e.g., "US", "GB")
+     * </pre>
+     *
      * <code>string code = 10 [json_name = "code"];</code>
      * @return This builder for chaining.
      */
@@ -1182,6 +1380,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * ISO 3166-1 alpha-2 country code (e.g., "US", "GB")
+     * </pre>
+     *
      * <code>string code = 10 [json_name = "code"];</code>
      * @param value The bytes for code to set.
      * @return This builder for chaining.

@@ -25,16 +25,28 @@ public interface GetResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * The requested setting
+   * </pre>
+   *
    * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    * @return Whether the data field is set.
    */
   boolean hasData();
   /**
+   * <pre>
+   * The requested setting
+   * </pre>
+   *
    * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    * @return The data.
    */
   com.antinvestor.apis.settings.v1.SettingObject getData();
   /**
+   * <pre>
+   * The requested setting
+   * </pre>
+   *
    * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.settings.v1.SettingObjectOrBuilder getDataOrBuilder();

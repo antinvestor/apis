@@ -20,6 +20,10 @@
 package com.antinvestor.apis.payment.v1;
 
 /**
+ * <pre>
+ * PaymentLink represents a shareable payment link.
+ * </pre>
+ *
  * Protobuf type {@code payment.v1.PaymentLink}
  */
 @com.google.protobuf.Generated
@@ -74,6 +78,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
   /**
+   * <pre>
+   * Unique payment link ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
@@ -91,6 +99,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Unique payment link ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -113,6 +125,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object expiryDate_ = "";
   /**
+   * <pre>
+   * Link expiration date (RFC3339)
+   * </pre>
+   *
    * <code>string expiry_date = 2 [json_name = "expiryDate"];</code>
    * @return The expiryDate.
    */
@@ -130,6 +146,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Link expiration date (RFC3339)
+   * </pre>
+   *
    * <code>string expiry_date = 2 [json_name = "expiryDate"];</code>
    * @return The bytes for expiryDate.
    */
@@ -152,6 +172,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object saleDate_ = "";
   /**
+   * <pre>
+   * Sale date (RFC3339)
+   * </pre>
+   *
    * <code>string sale_date = 3 [json_name = "saleDate"];</code>
    * @return The saleDate.
    */
@@ -169,6 +193,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Sale date (RFC3339)
+   * </pre>
+   *
    * <code>string sale_date = 3 [json_name = "saleDate"];</code>
    * @return The bytes for saleDate.
    */
@@ -191,6 +219,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object paymentLinkType_ = "";
   /**
+   * <pre>
+   * Link type (invoice, donation, subscription)
+   * </pre>
+   *
    * <code>string payment_link_type = 4 [json_name = "paymentLinkType"];</code>
    * @return The paymentLinkType.
    */
@@ -208,6 +240,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Link type (invoice, donation, subscription)
+   * </pre>
+   *
    * <code>string payment_link_type = 4 [json_name = "paymentLinkType"];</code>
    * @return The bytes for paymentLinkType.
    */
@@ -230,6 +266,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object saleType_ = "";
   /**
+   * <pre>
+   * Sale type (goods, services)
+   * </pre>
+   *
    * <code>string sale_type = 5 [json_name = "saleType"];</code>
    * @return The saleType.
    */
@@ -247,6 +287,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Sale type (goods, services)
+   * </pre>
+   *
    * <code>string sale_type = 5 [json_name = "saleType"];</code>
    * @return The bytes for saleType.
    */
@@ -269,6 +313,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object name_ = "";
   /**
+   * <pre>
+   * Payment link name/title
+   * </pre>
+   *
    * <code>string name = 6 [json_name = "name"];</code>
    * @return The name.
    */
@@ -286,6 +334,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Payment link name/title
+   * </pre>
+   *
    * <code>string name = 6 [json_name = "name"];</code>
    * @return The bytes for name.
    */
@@ -308,6 +360,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object description_ = "";
   /**
+   * <pre>
+   * Payment description
+   * </pre>
+   *
    * <code>string description = 7 [json_name = "description"];</code>
    * @return The description.
    */
@@ -325,6 +381,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Payment description
+   * </pre>
+   *
    * <code>string description = 7 [json_name = "description"];</code>
    * @return The bytes for description.
    */
@@ -347,6 +407,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object externalRef_ = "";
   /**
+   * <pre>
+   * External reference (invoice number)
+   * </pre>
+   *
    * <code>string external_ref = 8 [json_name = "externalRef"];</code>
    * @return The externalRef.
    */
@@ -364,6 +428,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * External reference (invoice number)
+   * </pre>
+   *
    * <code>string external_ref = 8 [json_name = "externalRef"];</code>
    * @return The bytes for externalRef.
    */
@@ -386,6 +454,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object paymentLinkRef_ = "";
   /**
+   * <pre>
+   * Generated payment link reference
+   * </pre>
+   *
    * <code>string payment_link_ref = 9 [json_name = "paymentLinkRef"];</code>
    * @return The paymentLinkRef.
    */
@@ -403,6 +475,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Generated payment link reference
+   * </pre>
+   *
    * <code>string payment_link_ref = 9 [json_name = "paymentLinkRef"];</code>
    * @return The bytes for paymentLinkRef.
    */
@@ -425,6 +501,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object redirectUrl_ = "";
   /**
+   * <pre>
+   * Post-payment redirect URL
+   * </pre>
+   *
    * <code>string redirect_url = 10 [json_name = "redirectUrl"];</code>
    * @return The redirectUrl.
    */
@@ -442,6 +522,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Post-payment redirect URL
+   * </pre>
+   *
    * <code>string redirect_url = 10 [json_name = "redirectUrl"];</code>
    * @return The bytes for redirectUrl.
    */
@@ -464,6 +548,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object amountOption_ = "";
   /**
+   * <pre>
+   * Amount option (fixed, variable, minimum)
+   * </pre>
+   *
    * <code>string amount_option = 11 [json_name = "amountOption"];</code>
    * @return The amountOption.
    */
@@ -481,6 +569,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Amount option (fixed, variable, minimum)
+   * </pre>
+   *
    * <code>string amount_option = 11 [json_name = "amountOption"];</code>
    * @return The bytes for amountOption.
    */
@@ -502,6 +594,10 @@ private static final long serialVersionUID = 0L;
   public static final int AMOUNT_FIELD_NUMBER = 12;
   private com.google.type.Money amount_;
   /**
+   * <pre>
+   * Payment amount (if fixed)
+   * </pre>
+   *
    * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
    * @return Whether the amount field is set.
    */
@@ -510,6 +606,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Payment amount (if fixed)
+   * </pre>
+   *
    * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
    * @return The amount.
    */
@@ -518,6 +618,10 @@ private static final long serialVersionUID = 0L;
     return amount_ == null ? com.google.type.Money.getDefaultInstance() : amount_;
   }
   /**
+   * <pre>
+   * Payment amount (if fixed)
+   * </pre>
+   *
    * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
    */
   @java.lang.Override
@@ -529,6 +633,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object currency_ = "";
   /**
+   * <pre>
+   * Currency code (ISO 4217)
+   * </pre>
+   *
    * <code>string currency = 13 [json_name = "currency"];</code>
    * @return The currency.
    */
@@ -546,6 +654,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Currency code (ISO 4217)
+   * </pre>
+   *
    * <code>string currency = 13 [json_name = "currency"];</code>
    * @return The bytes for currency.
    */
@@ -847,6 +959,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * PaymentLink represents a shareable payment link.
+   * </pre>
+   *
    * Protobuf type {@code payment.v1.PaymentLink}
    */
   public static final class Builder extends
@@ -1169,6 +1285,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object id_ = "";
     /**
+     * <pre>
+     * Unique payment link ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The id.
      */
@@ -1185,6 +1305,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique payment link ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The bytes for id.
      */
@@ -1202,6 +1326,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique payment link ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The id to set.
      * @return This builder for chaining.
@@ -1215,6 +1343,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique payment link ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -1225,6 +1357,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique payment link ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for id to set.
      * @return This builder for chaining.
@@ -1241,6 +1377,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object expiryDate_ = "";
     /**
+     * <pre>
+     * Link expiration date (RFC3339)
+     * </pre>
+     *
      * <code>string expiry_date = 2 [json_name = "expiryDate"];</code>
      * @return The expiryDate.
      */
@@ -1257,6 +1397,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Link expiration date (RFC3339)
+     * </pre>
+     *
      * <code>string expiry_date = 2 [json_name = "expiryDate"];</code>
      * @return The bytes for expiryDate.
      */
@@ -1274,6 +1418,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Link expiration date (RFC3339)
+     * </pre>
+     *
      * <code>string expiry_date = 2 [json_name = "expiryDate"];</code>
      * @param value The expiryDate to set.
      * @return This builder for chaining.
@@ -1287,6 +1435,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Link expiration date (RFC3339)
+     * </pre>
+     *
      * <code>string expiry_date = 2 [json_name = "expiryDate"];</code>
      * @return This builder for chaining.
      */
@@ -1297,6 +1449,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Link expiration date (RFC3339)
+     * </pre>
+     *
      * <code>string expiry_date = 2 [json_name = "expiryDate"];</code>
      * @param value The bytes for expiryDate to set.
      * @return This builder for chaining.
@@ -1313,6 +1469,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object saleDate_ = "";
     /**
+     * <pre>
+     * Sale date (RFC3339)
+     * </pre>
+     *
      * <code>string sale_date = 3 [json_name = "saleDate"];</code>
      * @return The saleDate.
      */
@@ -1329,6 +1489,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Sale date (RFC3339)
+     * </pre>
+     *
      * <code>string sale_date = 3 [json_name = "saleDate"];</code>
      * @return The bytes for saleDate.
      */
@@ -1346,6 +1510,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Sale date (RFC3339)
+     * </pre>
+     *
      * <code>string sale_date = 3 [json_name = "saleDate"];</code>
      * @param value The saleDate to set.
      * @return This builder for chaining.
@@ -1359,6 +1527,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Sale date (RFC3339)
+     * </pre>
+     *
      * <code>string sale_date = 3 [json_name = "saleDate"];</code>
      * @return This builder for chaining.
      */
@@ -1369,6 +1541,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Sale date (RFC3339)
+     * </pre>
+     *
      * <code>string sale_date = 3 [json_name = "saleDate"];</code>
      * @param value The bytes for saleDate to set.
      * @return This builder for chaining.
@@ -1385,6 +1561,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object paymentLinkType_ = "";
     /**
+     * <pre>
+     * Link type (invoice, donation, subscription)
+     * </pre>
+     *
      * <code>string payment_link_type = 4 [json_name = "paymentLinkType"];</code>
      * @return The paymentLinkType.
      */
@@ -1401,6 +1581,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Link type (invoice, donation, subscription)
+     * </pre>
+     *
      * <code>string payment_link_type = 4 [json_name = "paymentLinkType"];</code>
      * @return The bytes for paymentLinkType.
      */
@@ -1418,6 +1602,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Link type (invoice, donation, subscription)
+     * </pre>
+     *
      * <code>string payment_link_type = 4 [json_name = "paymentLinkType"];</code>
      * @param value The paymentLinkType to set.
      * @return This builder for chaining.
@@ -1431,6 +1619,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Link type (invoice, donation, subscription)
+     * </pre>
+     *
      * <code>string payment_link_type = 4 [json_name = "paymentLinkType"];</code>
      * @return This builder for chaining.
      */
@@ -1441,6 +1633,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Link type (invoice, donation, subscription)
+     * </pre>
+     *
      * <code>string payment_link_type = 4 [json_name = "paymentLinkType"];</code>
      * @param value The bytes for paymentLinkType to set.
      * @return This builder for chaining.
@@ -1457,6 +1653,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object saleType_ = "";
     /**
+     * <pre>
+     * Sale type (goods, services)
+     * </pre>
+     *
      * <code>string sale_type = 5 [json_name = "saleType"];</code>
      * @return The saleType.
      */
@@ -1473,6 +1673,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Sale type (goods, services)
+     * </pre>
+     *
      * <code>string sale_type = 5 [json_name = "saleType"];</code>
      * @return The bytes for saleType.
      */
@@ -1490,6 +1694,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Sale type (goods, services)
+     * </pre>
+     *
      * <code>string sale_type = 5 [json_name = "saleType"];</code>
      * @param value The saleType to set.
      * @return This builder for chaining.
@@ -1503,6 +1711,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Sale type (goods, services)
+     * </pre>
+     *
      * <code>string sale_type = 5 [json_name = "saleType"];</code>
      * @return This builder for chaining.
      */
@@ -1513,6 +1725,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Sale type (goods, services)
+     * </pre>
+     *
      * <code>string sale_type = 5 [json_name = "saleType"];</code>
      * @param value The bytes for saleType to set.
      * @return This builder for chaining.
@@ -1529,6 +1745,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object name_ = "";
     /**
+     * <pre>
+     * Payment link name/title
+     * </pre>
+     *
      * <code>string name = 6 [json_name = "name"];</code>
      * @return The name.
      */
@@ -1545,6 +1765,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Payment link name/title
+     * </pre>
+     *
      * <code>string name = 6 [json_name = "name"];</code>
      * @return The bytes for name.
      */
@@ -1562,6 +1786,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Payment link name/title
+     * </pre>
+     *
      * <code>string name = 6 [json_name = "name"];</code>
      * @param value The name to set.
      * @return This builder for chaining.
@@ -1575,6 +1803,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment link name/title
+     * </pre>
+     *
      * <code>string name = 6 [json_name = "name"];</code>
      * @return This builder for chaining.
      */
@@ -1585,6 +1817,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment link name/title
+     * </pre>
+     *
      * <code>string name = 6 [json_name = "name"];</code>
      * @param value The bytes for name to set.
      * @return This builder for chaining.
@@ -1601,6 +1837,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object description_ = "";
     /**
+     * <pre>
+     * Payment description
+     * </pre>
+     *
      * <code>string description = 7 [json_name = "description"];</code>
      * @return The description.
      */
@@ -1617,6 +1857,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Payment description
+     * </pre>
+     *
      * <code>string description = 7 [json_name = "description"];</code>
      * @return The bytes for description.
      */
@@ -1634,6 +1878,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Payment description
+     * </pre>
+     *
      * <code>string description = 7 [json_name = "description"];</code>
      * @param value The description to set.
      * @return This builder for chaining.
@@ -1647,6 +1895,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment description
+     * </pre>
+     *
      * <code>string description = 7 [json_name = "description"];</code>
      * @return This builder for chaining.
      */
@@ -1657,6 +1909,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment description
+     * </pre>
+     *
      * <code>string description = 7 [json_name = "description"];</code>
      * @param value The bytes for description to set.
      * @return This builder for chaining.
@@ -1673,6 +1929,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object externalRef_ = "";
     /**
+     * <pre>
+     * External reference (invoice number)
+     * </pre>
+     *
      * <code>string external_ref = 8 [json_name = "externalRef"];</code>
      * @return The externalRef.
      */
@@ -1689,6 +1949,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * External reference (invoice number)
+     * </pre>
+     *
      * <code>string external_ref = 8 [json_name = "externalRef"];</code>
      * @return The bytes for externalRef.
      */
@@ -1706,6 +1970,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * External reference (invoice number)
+     * </pre>
+     *
      * <code>string external_ref = 8 [json_name = "externalRef"];</code>
      * @param value The externalRef to set.
      * @return This builder for chaining.
@@ -1719,6 +1987,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * External reference (invoice number)
+     * </pre>
+     *
      * <code>string external_ref = 8 [json_name = "externalRef"];</code>
      * @return This builder for chaining.
      */
@@ -1729,6 +2001,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * External reference (invoice number)
+     * </pre>
+     *
      * <code>string external_ref = 8 [json_name = "externalRef"];</code>
      * @param value The bytes for externalRef to set.
      * @return This builder for chaining.
@@ -1745,6 +2021,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object paymentLinkRef_ = "";
     /**
+     * <pre>
+     * Generated payment link reference
+     * </pre>
+     *
      * <code>string payment_link_ref = 9 [json_name = "paymentLinkRef"];</code>
      * @return The paymentLinkRef.
      */
@@ -1761,6 +2041,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Generated payment link reference
+     * </pre>
+     *
      * <code>string payment_link_ref = 9 [json_name = "paymentLinkRef"];</code>
      * @return The bytes for paymentLinkRef.
      */
@@ -1778,6 +2062,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Generated payment link reference
+     * </pre>
+     *
      * <code>string payment_link_ref = 9 [json_name = "paymentLinkRef"];</code>
      * @param value The paymentLinkRef to set.
      * @return This builder for chaining.
@@ -1791,6 +2079,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Generated payment link reference
+     * </pre>
+     *
      * <code>string payment_link_ref = 9 [json_name = "paymentLinkRef"];</code>
      * @return This builder for chaining.
      */
@@ -1801,6 +2093,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Generated payment link reference
+     * </pre>
+     *
      * <code>string payment_link_ref = 9 [json_name = "paymentLinkRef"];</code>
      * @param value The bytes for paymentLinkRef to set.
      * @return This builder for chaining.
@@ -1817,6 +2113,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object redirectUrl_ = "";
     /**
+     * <pre>
+     * Post-payment redirect URL
+     * </pre>
+     *
      * <code>string redirect_url = 10 [json_name = "redirectUrl"];</code>
      * @return The redirectUrl.
      */
@@ -1833,6 +2133,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Post-payment redirect URL
+     * </pre>
+     *
      * <code>string redirect_url = 10 [json_name = "redirectUrl"];</code>
      * @return The bytes for redirectUrl.
      */
@@ -1850,6 +2154,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Post-payment redirect URL
+     * </pre>
+     *
      * <code>string redirect_url = 10 [json_name = "redirectUrl"];</code>
      * @param value The redirectUrl to set.
      * @return This builder for chaining.
@@ -1863,6 +2171,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Post-payment redirect URL
+     * </pre>
+     *
      * <code>string redirect_url = 10 [json_name = "redirectUrl"];</code>
      * @return This builder for chaining.
      */
@@ -1873,6 +2185,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Post-payment redirect URL
+     * </pre>
+     *
      * <code>string redirect_url = 10 [json_name = "redirectUrl"];</code>
      * @param value The bytes for redirectUrl to set.
      * @return This builder for chaining.
@@ -1889,6 +2205,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object amountOption_ = "";
     /**
+     * <pre>
+     * Amount option (fixed, variable, minimum)
+     * </pre>
+     *
      * <code>string amount_option = 11 [json_name = "amountOption"];</code>
      * @return The amountOption.
      */
@@ -1905,6 +2225,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Amount option (fixed, variable, minimum)
+     * </pre>
+     *
      * <code>string amount_option = 11 [json_name = "amountOption"];</code>
      * @return The bytes for amountOption.
      */
@@ -1922,6 +2246,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Amount option (fixed, variable, minimum)
+     * </pre>
+     *
      * <code>string amount_option = 11 [json_name = "amountOption"];</code>
      * @param value The amountOption to set.
      * @return This builder for chaining.
@@ -1935,6 +2263,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Amount option (fixed, variable, minimum)
+     * </pre>
+     *
      * <code>string amount_option = 11 [json_name = "amountOption"];</code>
      * @return This builder for chaining.
      */
@@ -1945,6 +2277,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Amount option (fixed, variable, minimum)
+     * </pre>
+     *
      * <code>string amount_option = 11 [json_name = "amountOption"];</code>
      * @param value The bytes for amountOption to set.
      * @return This builder for chaining.
@@ -1963,6 +2299,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> amountBuilder_;
     /**
+     * <pre>
+     * Payment amount (if fixed)
+     * </pre>
+     *
      * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
      * @return Whether the amount field is set.
      */
@@ -1970,6 +2310,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000800) != 0);
     }
     /**
+     * <pre>
+     * Payment amount (if fixed)
+     * </pre>
+     *
      * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
      * @return The amount.
      */
@@ -1981,6 +2325,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Payment amount (if fixed)
+     * </pre>
+     *
      * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
      */
     public Builder setAmount(com.google.type.Money value) {
@@ -1997,6 +2345,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment amount (if fixed)
+     * </pre>
+     *
      * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
      */
     public Builder setAmount(
@@ -2011,6 +2363,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment amount (if fixed)
+     * </pre>
+     *
      * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
      */
     public Builder mergeAmount(com.google.type.Money value) {
@@ -2032,6 +2388,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment amount (if fixed)
+     * </pre>
+     *
      * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
      */
     public Builder clearAmount() {
@@ -2045,6 +2405,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment amount (if fixed)
+     * </pre>
+     *
      * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
      */
     public com.google.type.Money.Builder getAmountBuilder() {
@@ -2053,6 +2417,10 @@ private static final long serialVersionUID = 0L;
       return internalGetAmountFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Payment amount (if fixed)
+     * </pre>
+     *
      * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
      */
     public com.google.type.MoneyOrBuilder getAmountOrBuilder() {
@@ -2064,6 +2432,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Payment amount (if fixed)
+     * </pre>
+     *
      * <code>.google.type.Money amount = 12 [json_name = "amount"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
@@ -2082,6 +2454,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object currency_ = "";
     /**
+     * <pre>
+     * Currency code (ISO 4217)
+     * </pre>
+     *
      * <code>string currency = 13 [json_name = "currency"];</code>
      * @return The currency.
      */
@@ -2098,6 +2474,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Currency code (ISO 4217)
+     * </pre>
+     *
      * <code>string currency = 13 [json_name = "currency"];</code>
      * @return The bytes for currency.
      */
@@ -2115,6 +2495,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Currency code (ISO 4217)
+     * </pre>
+     *
      * <code>string currency = 13 [json_name = "currency"];</code>
      * @param value The currency to set.
      * @return This builder for chaining.
@@ -2128,6 +2512,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Currency code (ISO 4217)
+     * </pre>
+     *
      * <code>string currency = 13 [json_name = "currency"];</code>
      * @return This builder for chaining.
      */
@@ -2138,6 +2526,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Currency code (ISO 4217)
+     * </pre>
+     *
      * <code>string currency = 13 [json_name = "currency"];</code>
      * @param value The bytes for currency to set.
      * @return This builder for chaining.

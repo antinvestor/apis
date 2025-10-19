@@ -20,6 +20,10 @@
 package com.antinvestor.apis.payment.v1;
 
 /**
+ * <pre>
+ * Account represents a merchant or recipient account.
+ * </pre>
+ *
  * Protobuf type {@code payment.v1.Account}
  */
 @com.google.protobuf.Generated
@@ -65,7 +69,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object accountNumber_ = "";
   /**
    * <pre>
-   * Account to be credited once customers make payments
+   * Account number to be credited
    * </pre>
    *
    * <code>string account_number = 1 [json_name = "accountNumber"];</code>
@@ -86,7 +90,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Account to be credited once customers make payments
+   * Account number to be credited
    * </pre>
    *
    * <code>string account_number = 1 [json_name = "accountNumber"];</code>
@@ -111,6 +115,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object countryCode_ = "";
   /**
+   * <pre>
+   * Country code (ISO 3166-1 alpha-2)
+   * </pre>
+   *
    * <code>string country_code = 2 [json_name = "countryCode"];</code>
    * @return The countryCode.
    */
@@ -128,6 +136,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Country code (ISO 3166-1 alpha-2)
+   * </pre>
+   *
    * <code>string country_code = 2 [json_name = "countryCode"];</code>
    * @return The bytes for countryCode.
    */
@@ -150,6 +162,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object name_ = "";
   /**
+   * <pre>
+   * Account holder name
+   * </pre>
+   *
    * <code>string name = 3 [json_name = "name"];</code>
    * @return The name.
    */
@@ -167,6 +183,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Account holder name
+   * </pre>
+   *
    * <code>string name = 3 [json_name = "name"];</code>
    * @return The bytes for name.
    */
@@ -362,6 +382,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * Account represents a merchant or recipient account.
+   * </pre>
+   *
    * Protobuf type {@code payment.v1.Account}
    */
   public static final class Builder extends
@@ -530,7 +554,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object accountNumber_ = "";
     /**
      * <pre>
-     * Account to be credited once customers make payments
+     * Account number to be credited
      * </pre>
      *
      * <code>string account_number = 1 [json_name = "accountNumber"];</code>
@@ -550,7 +574,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Account to be credited once customers make payments
+     * Account number to be credited
      * </pre>
      *
      * <code>string account_number = 1 [json_name = "accountNumber"];</code>
@@ -571,7 +595,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Account to be credited once customers make payments
+     * Account number to be credited
      * </pre>
      *
      * <code>string account_number = 1 [json_name = "accountNumber"];</code>
@@ -588,7 +612,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Account to be credited once customers make payments
+     * Account number to be credited
      * </pre>
      *
      * <code>string account_number = 1 [json_name = "accountNumber"];</code>
@@ -602,7 +626,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Account to be credited once customers make payments
+     * Account number to be credited
      * </pre>
      *
      * <code>string account_number = 1 [json_name = "accountNumber"];</code>
@@ -621,6 +645,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object countryCode_ = "";
     /**
+     * <pre>
+     * Country code (ISO 3166-1 alpha-2)
+     * </pre>
+     *
      * <code>string country_code = 2 [json_name = "countryCode"];</code>
      * @return The countryCode.
      */
@@ -637,6 +665,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Country code (ISO 3166-1 alpha-2)
+     * </pre>
+     *
      * <code>string country_code = 2 [json_name = "countryCode"];</code>
      * @return The bytes for countryCode.
      */
@@ -654,6 +686,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Country code (ISO 3166-1 alpha-2)
+     * </pre>
+     *
      * <code>string country_code = 2 [json_name = "countryCode"];</code>
      * @param value The countryCode to set.
      * @return This builder for chaining.
@@ -667,6 +703,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Country code (ISO 3166-1 alpha-2)
+     * </pre>
+     *
      * <code>string country_code = 2 [json_name = "countryCode"];</code>
      * @return This builder for chaining.
      */
@@ -677,6 +717,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Country code (ISO 3166-1 alpha-2)
+     * </pre>
+     *
      * <code>string country_code = 2 [json_name = "countryCode"];</code>
      * @param value The bytes for countryCode to set.
      * @return This builder for chaining.
@@ -693,6 +737,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object name_ = "";
     /**
+     * <pre>
+     * Account holder name
+     * </pre>
+     *
      * <code>string name = 3 [json_name = "name"];</code>
      * @return The name.
      */
@@ -709,6 +757,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Account holder name
+     * </pre>
+     *
      * <code>string name = 3 [json_name = "name"];</code>
      * @return The bytes for name.
      */
@@ -726,6 +778,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Account holder name
+     * </pre>
+     *
      * <code>string name = 3 [json_name = "name"];</code>
      * @param value The name to set.
      * @return This builder for chaining.
@@ -739,6 +795,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Account holder name
+     * </pre>
+     *
      * <code>string name = 3 [json_name = "name"];</code>
      * @return This builder for chaining.
      */
@@ -749,6 +809,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Account holder name
+     * </pre>
+     *
      * <code>string name = 3 [json_name = "name"];</code>
      * @param value The bytes for name to set.
      * @return This builder for chaining.

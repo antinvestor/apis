@@ -20,6 +20,10 @@
 package com.antinvestor.apis.lostid.v1;
 
 /**
+ * <pre>
+ * TransactionItem represents a financial transaction.
+ * </pre>
+ *
  * Protobuf type {@code lostid.v1.TransactionItem}
  */
 @com.google.protobuf.Generated
@@ -65,6 +69,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
   /**
+   * <pre>
+   * Transaction ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The id.
    */
@@ -82,6 +90,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Transaction ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The bytes for id.
    */
@@ -104,6 +116,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object datetime_ = "";
   /**
+   * <pre>
+   * Transaction timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string datetime = 2 [json_name = "datetime"];</code>
    * @return The datetime.
    */
@@ -121,6 +137,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Transaction timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string datetime = 2 [json_name = "datetime"];</code>
    * @return The bytes for datetime.
    */
@@ -142,6 +162,10 @@ private static final long serialVersionUID = 0L;
   public static final int CREDIT_FIELD_NUMBER = 3;
   private boolean credit_ = false;
   /**
+   * <pre>
+   * True if credit, false if debit
+   * </pre>
+   *
    * <code>bool credit = 3 [json_name = "credit"];</code>
    * @return The credit.
    */
@@ -153,6 +177,10 @@ private static final long serialVersionUID = 0L;
   public static final int AMOUNT_FIELD_NUMBER = 4;
   private com.google.type.Money amount_;
   /**
+   * <pre>
+   * Transaction amount
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    * @return Whether the amount field is set.
    */
@@ -161,6 +189,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Transaction amount
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    * @return The amount.
    */
@@ -169,6 +201,10 @@ private static final long serialVersionUID = 0L;
     return amount_ == null ? com.google.type.Money.getDefaultInstance() : amount_;
   }
   /**
+   * <pre>
+   * Transaction amount
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    */
   @java.lang.Override
@@ -180,6 +216,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object description_ = "";
   /**
+   * <pre>
+   * Transaction description (reward, fee, etc.)
+   * </pre>
+   *
    * <code>string description = 5 [json_name = "description"];</code>
    * @return The description.
    */
@@ -197,6 +237,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Transaction description (reward, fee, etc.)
+   * </pre>
+   *
    * <code>string description = 5 [json_name = "description"];</code>
    * @return The bytes for description.
    */
@@ -420,6 +464,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * TransactionItem represents a financial transaction.
+   * </pre>
+   *
    * Protobuf type {@code lostid.v1.TransactionItem}
    */
   public static final class Builder extends
@@ -628,6 +676,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object id_ = "";
     /**
+     * <pre>
+     * Transaction ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @return The id.
      */
@@ -644,6 +696,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @return The bytes for id.
      */
@@ -661,6 +717,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @param value The id to set.
      * @return This builder for chaining.
@@ -674,6 +734,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @return This builder for chaining.
      */
@@ -684,6 +748,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @param value The bytes for id to set.
      * @return This builder for chaining.
@@ -700,6 +768,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object datetime_ = "";
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string datetime = 2 [json_name = "datetime"];</code>
      * @return The datetime.
      */
@@ -716,6 +788,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string datetime = 2 [json_name = "datetime"];</code>
      * @return The bytes for datetime.
      */
@@ -733,6 +809,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string datetime = 2 [json_name = "datetime"];</code>
      * @param value The datetime to set.
      * @return This builder for chaining.
@@ -746,6 +826,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string datetime = 2 [json_name = "datetime"];</code>
      * @return This builder for chaining.
      */
@@ -756,6 +840,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string datetime = 2 [json_name = "datetime"];</code>
      * @param value The bytes for datetime to set.
      * @return This builder for chaining.
@@ -772,6 +860,10 @@ private static final long serialVersionUID = 0L;
 
     private boolean credit_ ;
     /**
+     * <pre>
+     * True if credit, false if debit
+     * </pre>
+     *
      * <code>bool credit = 3 [json_name = "credit"];</code>
      * @return The credit.
      */
@@ -780,6 +872,10 @@ private static final long serialVersionUID = 0L;
       return credit_;
     }
     /**
+     * <pre>
+     * True if credit, false if debit
+     * </pre>
+     *
      * <code>bool credit = 3 [json_name = "credit"];</code>
      * @param value The credit to set.
      * @return This builder for chaining.
@@ -792,6 +888,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * True if credit, false if debit
+     * </pre>
+     *
      * <code>bool credit = 3 [json_name = "credit"];</code>
      * @return This builder for chaining.
      */
@@ -806,6 +906,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> amountBuilder_;
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      * @return Whether the amount field is set.
      */
@@ -813,6 +917,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000008) != 0);
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      * @return The amount.
      */
@@ -824,6 +932,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public Builder setAmount(com.google.type.Money value) {
@@ -840,6 +952,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public Builder setAmount(
@@ -854,6 +970,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public Builder mergeAmount(com.google.type.Money value) {
@@ -875,6 +995,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public Builder clearAmount() {
@@ -888,6 +1012,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public com.google.type.Money.Builder getAmountBuilder() {
@@ -896,6 +1024,10 @@ private static final long serialVersionUID = 0L;
       return internalGetAmountFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public com.google.type.MoneyOrBuilder getAmountOrBuilder() {
@@ -907,6 +1039,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
@@ -925,6 +1061,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object description_ = "";
     /**
+     * <pre>
+     * Transaction description (reward, fee, etc.)
+     * </pre>
+     *
      * <code>string description = 5 [json_name = "description"];</code>
      * @return The description.
      */
@@ -941,6 +1081,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction description (reward, fee, etc.)
+     * </pre>
+     *
      * <code>string description = 5 [json_name = "description"];</code>
      * @return The bytes for description.
      */
@@ -958,6 +1102,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction description (reward, fee, etc.)
+     * </pre>
+     *
      * <code>string description = 5 [json_name = "description"];</code>
      * @param value The description to set.
      * @return This builder for chaining.
@@ -971,6 +1119,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction description (reward, fee, etc.)
+     * </pre>
+     *
      * <code>string description = 5 [json_name = "description"];</code>
      * @return This builder for chaining.
      */
@@ -981,6 +1133,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction description (reward, fee, etc.)
+     * </pre>
+     *
      * <code>string description = 5 [json_name = "description"];</code>
      * @param value The bytes for description to set.
      * @return This builder for chaining.

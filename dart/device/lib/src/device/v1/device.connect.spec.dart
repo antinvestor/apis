@@ -6,12 +6,14 @@
 import "package:connectrpc/connect.dart" as connect;
 import "device.pb.dart" as devicev1device;
 
-/// The device service definition.
+/// DeviceService provides comprehensive device management capabilities.
+/// All RPCs require authentication via Bearer token unless otherwise specified.
 abstract final class DeviceService {
   /// Fully-qualified name of the DeviceService service.
   static const name = 'device.v1.DeviceService';
 
-  /// Obtains a device by its hash
+  /// GetById retrieves one or more devices by their unique identifiers.
+  /// Supports batch retrieval for efficiency.
   static const getById = connect.Spec(
     '/$name/GetById',
     connect.StreamType.unary,
@@ -19,7 +21,8 @@ abstract final class DeviceService {
     devicev1device.GetByIdResponse.new,
   );
 
-  /// Obtains a device by its session id
+  /// GetBySessionId retrieves a device by its active session identifier.
+  /// Useful for resolving devices from session tokens.
   static const getBySessionId = connect.Spec(
     '/$name/GetBySessionId',
     connect.StreamType.unary,
@@ -27,7 +30,8 @@ abstract final class DeviceService {
     devicev1device.GetBySessionIdResponse.new,
   );
 
-  /// Obtains a device by its hash
+  /// Search finds devices matching specified criteria.
+  /// Supports filtering by date range, properties, and full-text search.
   static const search = connect.Spec(
     '/$name/Search',
     connect.StreamType.server,
@@ -35,7 +39,8 @@ abstract final class DeviceService {
     devicev1device.SearchResponse.new,
   );
 
-  /// Creates a new device based on the request.
+  /// Create registers a new device in the system.
+  /// Returns a unique device ID that should be stored by the client.
   static const create = connect.Spec(
     '/$name/Create',
     connect.StreamType.unary,
@@ -43,7 +48,8 @@ abstract final class DeviceService {
     devicev1device.CreateResponse.new,
   );
 
-  /// Updates an existing device based on the request.
+  /// Update modifies an existing device's information.
+  /// Only the device owner or administrators can update device information.
   static const update = connect.Spec(
     '/$name/Update',
     connect.StreamType.unary,
@@ -51,7 +57,8 @@ abstract final class DeviceService {
     devicev1device.UpdateResponse.new,
   );
 
-  /// Links an existing device session based on the request to a profile.
+  /// Link associates a device with a user profile.
+  /// Required before the device can be used for authenticated operations.
   static const link = connect.Spec(
     '/$name/Link',
     connect.StreamType.unary,
@@ -59,7 +66,8 @@ abstract final class DeviceService {
     devicev1device.LinkResponse.new,
   );
 
-  /// Removes an existing device based on the request.
+  /// Remove deletes a device from the system.
+  /// This operation cannot be undone.
   static const remove = connect.Spec(
     '/$name/Remove',
     connect.StreamType.unary,
@@ -67,7 +75,8 @@ abstract final class DeviceService {
     devicev1device.RemoveResponse.new,
   );
 
-  /// Log a new key based on the request.
+  /// Log creates a new activity log entry for a device.
+  /// Used for session tracking and security auditing.
   static const log = connect.Spec(
     '/$name/Log',
     connect.StreamType.unary,
@@ -75,7 +84,8 @@ abstract final class DeviceService {
     devicev1device.LogResponse.new,
   );
 
-  /// Lists logs the a device has/owns.
+  /// ListLogs retrieves activity logs for a device.
+  /// Returns a stream of log entries for the specified device.
   static const listLogs = connect.Spec(
     '/$name/ListLogs',
     connect.StreamType.server,
@@ -83,7 +93,8 @@ abstract final class DeviceService {
     devicev1device.ListLogsResponse.new,
   );
 
-  /// Adds a new key based on the request.
+  /// AddKey adds an encryption key to a device.
+  /// Keys are used for secure communications (Matrix E2EE, push notifications).
   static const addKey = connect.Spec(
     '/$name/AddKey',
     connect.StreamType.unary,
@@ -91,7 +102,8 @@ abstract final class DeviceService {
     devicev1device.AddKeyResponse.new,
   );
 
-  /// Removes an old device keys based on this request's id
+  /// RemoveKey removes encryption keys from a device.
+  /// Used for key rotation or when removing a device.
   static const removeKey = connect.Spec(
     '/$name/RemoveKey',
     connect.StreamType.unary,
@@ -99,7 +111,8 @@ abstract final class DeviceService {
     devicev1device.RemoveKeyResponse.new,
   );
 
-  /// Lists all the keys a device has/owns.
+  /// SearchKey finds encryption keys associated with a device.
+  /// Supports filtering by key type and pagination.
   static const searchKey = connect.Spec(
     '/$name/SearchKey',
     connect.StreamType.server,

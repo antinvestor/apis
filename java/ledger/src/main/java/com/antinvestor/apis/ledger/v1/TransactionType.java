@@ -21,6 +21,7 @@ package com.antinvestor.apis.ledger.v1;
 
 /**
  * <pre>
+ * TransactionType defines the nature of a transaction.
  * buf:lint:ignore ENUM_VALUE_PREFIX
  * </pre>
  *
@@ -38,10 +39,18 @@ public enum TransactionType
    */
   NORMAL(0),
   /**
+   * <pre>
+   * Reverses a previous transaction (creates offsetting entries)
+   * </pre>
+   *
    * <code>REVERSAL = 1;</code>
    */
   REVERSAL(1),
   /**
+   * <pre>
+   * Temporary hold/reservation (e.g., pending payment authorization)
+   * </pre>
+   *
    * <code>RESERVATION = 2;</code>
    */
   RESERVATION(2),
@@ -66,10 +75,18 @@ public enum TransactionType
    */
   public static final int NORMAL_VALUE = 0;
   /**
+   * <pre>
+   * Reverses a previous transaction (creates offsetting entries)
+   * </pre>
+   *
    * <code>REVERSAL = 1;</code>
    */
   public static final int REVERSAL_VALUE = 1;
   /**
+   * <pre>
+   * Temporary hold/reservation (e.g., pending payment authorization)
+   * </pre>
+   *
    * <code>RESERVATION = 2;</code>
    */
   public static final int RESERVATION_VALUE = 2;

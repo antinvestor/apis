@@ -17,6 +17,10 @@ package com.antinvestor.apis.notification.v1;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
+ * <pre>
+ * NotificationService provides multi-channel notification delivery.
+ * All RPCs require authentication via Bearer token unless otherwise specified.
+ * </pre>
  */
 @io.grpc.stub.annotations.GrpcGenerated
 public final class NotificationServiceGrpc {
@@ -334,12 +338,17 @@ public final class NotificationServiceGrpc {
   }
 
   /**
+   * <pre>
+   * NotificationService provides multi-channel notification delivery.
+   * All RPCs require authentication via Bearer token unless otherwise specified.
+   * </pre>
    */
   public interface AsyncService {
 
     /**
      * <pre>
-     *Send method for queueing massages as requested
+     * Send queues one or more notifications for delivery.
+     * Notifications can be auto-released or manually released via the Release RPC.
      * </pre>
      */
     default void send(com.antinvestor.apis.notification.v1.SendRequest request,
@@ -349,7 +358,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Release method for releasing queued massages and returns if notification status if released
+     * Release triggers delivery of queued notifications.
+     * Used for batch processing where notifications are queued first, then released together.
      * </pre>
      */
     default void release(com.antinvestor.apis.notification.v1.ReleaseRequest request,
@@ -359,7 +369,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Receive method is for client request for particular notification responses from system
+     * Receive acknowledges receipt of notifications by the client.
+     * Used for tracking delivery confirmation and read receipts.
      * </pre>
      */
     default void receive(com.antinvestor.apis.notification.v1.ReceiveRequest request,
@@ -369,7 +380,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Search method is for client request for particular notification details from system
+     * Search finds notifications matching specified criteria.
+     * Supports filtering by date range, type, status, and custom properties.
      * </pre>
      */
     default void search(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -379,7 +391,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if notification is prepared or released
+     * Status retrieves the current status of a notification.
+     * Returns delivery status, timestamps, and error information if applicable.
      * </pre>
      */
     default void status(com.antinvestor.apis.common.v1.StatusRequest request,
@@ -389,7 +402,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status update request to allow continuation of notification processing
+     * StatusUpdate updates the status of a notification.
+     * Used by delivery workers to update notification state during processing.
      * </pre>
      */
     default void statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request,
@@ -399,7 +413,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     * Utility to allow system obtain templates within the system
+     * TemplateSearch finds notification templates matching specified criteria.
+     * Supports filtering by language and template name.
      * </pre>
      */
     default void templateSearch(com.antinvestor.apis.notification.v1.TemplateSearchRequest request,
@@ -408,6 +423,10 @@ public final class NotificationServiceGrpc {
     }
 
     /**
+     * <pre>
+     * TemplateSave creates or updates a notification template.
+     * Templates enable consistent, reusable notification formatting with localization.
+     * </pre>
      */
     default void templateSave(com.antinvestor.apis.notification.v1.TemplateSaveRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.TemplateSaveResponse> responseObserver) {
@@ -417,6 +436,10 @@ public final class NotificationServiceGrpc {
 
   /**
    * Base class for the server implementation of the service NotificationService.
+   * <pre>
+   * NotificationService provides multi-channel notification delivery.
+   * All RPCs require authentication via Bearer token unless otherwise specified.
+   * </pre>
    */
   public static abstract class NotificationServiceImplBase
       implements io.grpc.BindableService, AsyncService {
@@ -428,6 +451,10 @@ public final class NotificationServiceGrpc {
 
   /**
    * A stub to allow clients to do asynchronous rpc calls to service NotificationService.
+   * <pre>
+   * NotificationService provides multi-channel notification delivery.
+   * All RPCs require authentication via Bearer token unless otherwise specified.
+   * </pre>
    */
   public static final class NotificationServiceStub
       extends io.grpc.stub.AbstractAsyncStub<NotificationServiceStub> {
@@ -444,7 +471,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Send method for queueing massages as requested
+     * Send queues one or more notifications for delivery.
+     * Notifications can be auto-released or manually released via the Release RPC.
      * </pre>
      */
     public void send(com.antinvestor.apis.notification.v1.SendRequest request,
@@ -455,7 +483,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Release method for releasing queued massages and returns if notification status if released
+     * Release triggers delivery of queued notifications.
+     * Used for batch processing where notifications are queued first, then released together.
      * </pre>
      */
     public void release(com.antinvestor.apis.notification.v1.ReleaseRequest request,
@@ -466,7 +495,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Receive method is for client request for particular notification responses from system
+     * Receive acknowledges receipt of notifications by the client.
+     * Used for tracking delivery confirmation and read receipts.
      * </pre>
      */
     public void receive(com.antinvestor.apis.notification.v1.ReceiveRequest request,
@@ -477,7 +507,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Search method is for client request for particular notification details from system
+     * Search finds notifications matching specified criteria.
+     * Supports filtering by date range, type, status, and custom properties.
      * </pre>
      */
     public void search(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -488,7 +519,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if notification is prepared or released
+     * Status retrieves the current status of a notification.
+     * Returns delivery status, timestamps, and error information if applicable.
      * </pre>
      */
     public void status(com.antinvestor.apis.common.v1.StatusRequest request,
@@ -499,7 +531,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status update request to allow continuation of notification processing
+     * StatusUpdate updates the status of a notification.
+     * Used by delivery workers to update notification state during processing.
      * </pre>
      */
     public void statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request,
@@ -510,7 +543,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     * Utility to allow system obtain templates within the system
+     * TemplateSearch finds notification templates matching specified criteria.
+     * Supports filtering by language and template name.
      * </pre>
      */
     public void templateSearch(com.antinvestor.apis.notification.v1.TemplateSearchRequest request,
@@ -520,6 +554,10 @@ public final class NotificationServiceGrpc {
     }
 
     /**
+     * <pre>
+     * TemplateSave creates or updates a notification template.
+     * Templates enable consistent, reusable notification formatting with localization.
+     * </pre>
      */
     public void templateSave(com.antinvestor.apis.notification.v1.TemplateSaveRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.notification.v1.TemplateSaveResponse> responseObserver) {
@@ -530,6 +568,10 @@ public final class NotificationServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service NotificationService.
+   * <pre>
+   * NotificationService provides multi-channel notification delivery.
+   * All RPCs require authentication via Bearer token unless otherwise specified.
+   * </pre>
    */
   public static final class NotificationServiceBlockingV2Stub
       extends io.grpc.stub.AbstractBlockingStub<NotificationServiceBlockingV2Stub> {
@@ -546,7 +588,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Send method for queueing massages as requested
+     * Send queues one or more notifications for delivery.
+     * Notifications can be auto-released or manually released via the Release RPC.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -558,7 +601,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Release method for releasing queued massages and returns if notification status if released
+     * Release triggers delivery of queued notifications.
+     * Used for batch processing where notifications are queued first, then released together.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -570,7 +614,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Receive method is for client request for particular notification responses from system
+     * Receive acknowledges receipt of notifications by the client.
+     * Used for tracking delivery confirmation and read receipts.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -582,7 +627,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Search method is for client request for particular notification details from system
+     * Search finds notifications matching specified criteria.
+     * Supports filtering by date range, type, status, and custom properties.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -594,7 +640,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if notification is prepared or released
+     * Status retrieves the current status of a notification.
+     * Returns delivery status, timestamps, and error information if applicable.
      * </pre>
      */
     public com.antinvestor.apis.common.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) throws io.grpc.StatusException {
@@ -604,7 +651,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status update request to allow continuation of notification processing
+     * StatusUpdate updates the status of a notification.
+     * Used by delivery workers to update notification state during processing.
      * </pre>
      */
     public com.antinvestor.apis.common.v1.StatusUpdateResponse statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request) throws io.grpc.StatusException {
@@ -614,7 +662,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     * Utility to allow system obtain templates within the system
+     * TemplateSearch finds notification templates matching specified criteria.
+     * Supports filtering by language and template name.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -625,6 +674,10 @@ public final class NotificationServiceGrpc {
     }
 
     /**
+     * <pre>
+     * TemplateSave creates or updates a notification template.
+     * Templates enable consistent, reusable notification formatting with localization.
+     * </pre>
      */
     public com.antinvestor.apis.notification.v1.TemplateSaveResponse templateSave(com.antinvestor.apis.notification.v1.TemplateSaveRequest request) throws io.grpc.StatusException {
       return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
@@ -634,6 +687,10 @@ public final class NotificationServiceGrpc {
 
   /**
    * A stub to allow clients to do limited synchronous rpc calls to service NotificationService.
+   * <pre>
+   * NotificationService provides multi-channel notification delivery.
+   * All RPCs require authentication via Bearer token unless otherwise specified.
+   * </pre>
    */
   public static final class NotificationServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<NotificationServiceBlockingStub> {
@@ -650,7 +707,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Send method for queueing massages as requested
+     * Send queues one or more notifications for delivery.
+     * Notifications can be auto-released or manually released via the Release RPC.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.notification.v1.SendResponse> send(
@@ -661,7 +719,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Release method for releasing queued massages and returns if notification status if released
+     * Release triggers delivery of queued notifications.
+     * Used for batch processing where notifications are queued first, then released together.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.notification.v1.ReleaseResponse> release(
@@ -672,7 +731,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Receive method is for client request for particular notification responses from system
+     * Receive acknowledges receipt of notifications by the client.
+     * Used for tracking delivery confirmation and read receipts.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.notification.v1.ReceiveResponse> receive(
@@ -683,7 +743,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Search method is for client request for particular notification details from system
+     * Search finds notifications matching specified criteria.
+     * Supports filtering by date range, type, status, and custom properties.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.notification.v1.SearchResponse> search(
@@ -694,7 +755,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if notification is prepared or released
+     * Status retrieves the current status of a notification.
+     * Returns delivery status, timestamps, and error information if applicable.
      * </pre>
      */
     public com.antinvestor.apis.common.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) {
@@ -704,7 +766,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status update request to allow continuation of notification processing
+     * StatusUpdate updates the status of a notification.
+     * Used by delivery workers to update notification state during processing.
      * </pre>
      */
     public com.antinvestor.apis.common.v1.StatusUpdateResponse statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request) {
@@ -714,7 +777,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     * Utility to allow system obtain templates within the system
+     * TemplateSearch finds notification templates matching specified criteria.
+     * Supports filtering by language and template name.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.notification.v1.TemplateSearchResponse> templateSearch(
@@ -724,6 +788,10 @@ public final class NotificationServiceGrpc {
     }
 
     /**
+     * <pre>
+     * TemplateSave creates or updates a notification template.
+     * Templates enable consistent, reusable notification formatting with localization.
+     * </pre>
      */
     public com.antinvestor.apis.notification.v1.TemplateSaveResponse templateSave(com.antinvestor.apis.notification.v1.TemplateSaveRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -733,6 +801,10 @@ public final class NotificationServiceGrpc {
 
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service NotificationService.
+   * <pre>
+   * NotificationService provides multi-channel notification delivery.
+   * All RPCs require authentication via Bearer token unless otherwise specified.
+   * </pre>
    */
   public static final class NotificationServiceFutureStub
       extends io.grpc.stub.AbstractFutureStub<NotificationServiceFutureStub> {
@@ -749,7 +821,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if notification is prepared or released
+     * Status retrieves the current status of a notification.
+     * Returns delivery status, timestamps, and error information if applicable.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.common.v1.StatusResponse> status(
@@ -760,7 +833,8 @@ public final class NotificationServiceGrpc {
 
     /**
      * <pre>
-     *Status update request to allow continuation of notification processing
+     * StatusUpdate updates the status of a notification.
+     * Used by delivery workers to update notification state during processing.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.common.v1.StatusUpdateResponse> statusUpdate(
@@ -770,6 +844,10 @@ public final class NotificationServiceGrpc {
     }
 
     /**
+     * <pre>
+     * TemplateSave creates or updates a notification template.
+     * Templates enable consistent, reusable notification formatting with localization.
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.notification.v1.TemplateSaveResponse> templateSave(
         com.antinvestor.apis.notification.v1.TemplateSaveRequest request) {

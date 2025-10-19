@@ -21,7 +21,7 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * The request message containing the information necessary to create a device
+ * CreateRequest registers a new device in the system.
  * </pre>
  *
  * Protobuf type {@code device.v1.CreateRequest}
@@ -67,6 +67,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object name_ = "";
   /**
+   * <pre>
+   * User-friendly name for the device
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name"];</code>
    * @return The name.
    */
@@ -84,6 +88,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * User-friendly name for the device
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name"];</code>
    * @return The bytes for name.
    */
@@ -105,6 +113,10 @@ private static final long serialVersionUID = 0L;
   public static final int PROPERTIES_FIELD_NUMBER = 3;
   private com.google.protobuf.Struct properties_;
   /**
+   * <pre>
+   * Device properties (model, manufacturer, OS version, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    * @return Whether the properties field is set.
    */
@@ -113,6 +125,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Device properties (model, manufacturer, OS version, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    * @return The properties.
    */
@@ -121,6 +137,10 @@ private static final long serialVersionUID = 0L;
     return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
   }
   /**
+   * <pre>
+   * Device properties (model, manufacturer, OS version, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    */
   @java.lang.Override
@@ -302,7 +322,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The request message containing the information necessary to create a device
+   * CreateRequest registers a new device in the system.
    * </pre>
    *
    * Protobuf type {@code device.v1.CreateRequest}
@@ -473,6 +493,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object name_ = "";
     /**
+     * <pre>
+     * User-friendly name for the device
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name"];</code>
      * @return The name.
      */
@@ -489,6 +513,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * User-friendly name for the device
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name"];</code>
      * @return The bytes for name.
      */
@@ -506,6 +534,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * User-friendly name for the device
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name"];</code>
      * @param value The name to set.
      * @return This builder for chaining.
@@ -519,6 +551,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * User-friendly name for the device
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name"];</code>
      * @return This builder for chaining.
      */
@@ -529,6 +565,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * User-friendly name for the device
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name"];</code>
      * @param value The bytes for name to set.
      * @return This builder for chaining.
@@ -547,6 +587,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> propertiesBuilder_;
     /**
+     * <pre>
+     * Device properties (model, manufacturer, OS version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      * @return Whether the properties field is set.
      */
@@ -554,6 +598,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
+     * <pre>
+     * Device properties (model, manufacturer, OS version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      * @return The properties.
      */
@@ -565,6 +613,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Device properties (model, manufacturer, OS version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public Builder setProperties(com.google.protobuf.Struct value) {
@@ -581,6 +633,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Device properties (model, manufacturer, OS version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public Builder setProperties(
@@ -595,6 +651,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Device properties (model, manufacturer, OS version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public Builder mergeProperties(com.google.protobuf.Struct value) {
@@ -616,6 +676,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Device properties (model, manufacturer, OS version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public Builder clearProperties() {
@@ -629,6 +693,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Device properties (model, manufacturer, OS version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public com.google.protobuf.Struct.Builder getPropertiesBuilder() {
@@ -637,6 +705,10 @@ private static final long serialVersionUID = 0L;
       return internalGetPropertiesFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Device properties (model, manufacturer, OS version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public com.google.protobuf.StructOrBuilder getPropertiesOrBuilder() {
@@ -648,6 +720,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Device properties (model, manufacturer, OS version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<

@@ -25,11 +25,19 @@ public interface UpdateRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Device ID to update
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Device ID to update
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface UpdateRequestOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * New device name (if changing)
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name"];</code>
    * @return The name.
    */
   java.lang.String getName();
   /**
+   * <pre>
+   * New device name (if changing)
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name"];</code>
    * @return The bytes for name.
    */
@@ -49,16 +65,28 @@ public interface UpdateRequestOrBuilder extends
       getNameBytes();
 
   /**
+   * <pre>
+   * Updated device properties
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    * @return Whether the properties field is set.
    */
   boolean hasProperties();
   /**
+   * <pre>
+   * Updated device properties
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    * @return The properties.
    */
   com.google.protobuf.Struct getProperties();
   /**
+   * <pre>
+   * Updated device properties
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    */
   com.google.protobuf.StructOrBuilder getPropertiesOrBuilder();

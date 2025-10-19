@@ -6,11 +6,13 @@
 import "package:connectrpc/connect.dart" as connect;
 import "property.pb.dart" as propertyv1property;
 
+/// PropertyService manages real estate and asset properties.
+/// All RPCs require authentication via Bearer token.
 abstract final class PropertyService {
   /// Fully-qualified name of the PropertyService service.
   static const name = 'property.v1.PropertyService';
 
-  /// Create method for adding a new property type into the system
+  /// AddPropertyType creates a new property type classification.
   static const addPropertyType = connect.Spec(
     '/$name/AddPropertyType',
     connect.StreamType.unary,
@@ -18,7 +20,7 @@ abstract final class PropertyService {
     propertyv1property.AddPropertyTypeResponse.new,
   );
 
-  /// List method for showing all property types in the system
+  /// ListPropertyType retrieves all property types.
   static const listPropertyType = connect.Spec(
     '/$name/ListPropertyType',
     connect.StreamType.server,
@@ -26,7 +28,7 @@ abstract final class PropertyService {
     propertyv1property.ListPropertyTypeResponse.new,
   );
 
-  /// Create method for adding a new locality into the system
+  /// AddLocality creates a new geographic locality.
   static const addLocality = connect.Spec(
     '/$name/AddLocality',
     connect.StreamType.unary,
@@ -34,7 +36,7 @@ abstract final class PropertyService {
     propertyv1property.AddLocalityResponse.new,
   );
 
-  /// Delete method for removing an existing locality from the system
+  /// DeleteLocality removes a locality from the system.
   static const deleteLocality = connect.Spec(
     '/$name/DeleteLocality',
     connect.StreamType.unary,
@@ -42,7 +44,7 @@ abstract final class PropertyService {
     propertyv1property.DeleteLocalityResponse.new,
   );
 
-  /// Create method for adding a new property into the system
+  /// CreateProperty creates a new property.
   static const createProperty = connect.Spec(
     '/$name/CreateProperty',
     connect.StreamType.unary,
@@ -50,7 +52,7 @@ abstract final class PropertyService {
     propertyv1property.CreatePropertyResponse.new,
   );
 
-  /// Update property request to modify its current form to another
+  /// UpdateProperty updates an existing property.
   static const updateProperty = connect.Spec(
     '/$name/UpdateProperty',
     connect.StreamType.unary,
@@ -58,7 +60,7 @@ abstract final class PropertyService {
     propertyv1property.UpdatePropertyResponse.new,
   );
 
-  /// Delete property request to modify its current form to another
+  /// DeleteProperty removes a property from the system.
   static const deleteProperty = connect.Spec(
     '/$name/DeleteProperty',
     connect.StreamType.unary,
@@ -66,7 +68,7 @@ abstract final class PropertyService {
     propertyv1property.DeletePropertyResponse.new,
   );
 
-  /// State request to determine active state and status of a property
+  /// StateOfProperty retrieves the current state of a property.
   static const stateOfProperty = connect.Spec(
     '/$name/StateOfProperty',
     connect.StreamType.unary,
@@ -74,7 +76,7 @@ abstract final class PropertyService {
     propertyv1property.StateOfPropertyResponse.new,
   );
 
-  /// History request returns all the state transitions a property has had over its lifetime in the system
+  /// HistoryOfProperty retrieves the complete state history.
   static const historyOfProperty = connect.Spec(
     '/$name/HistoryOfProperty',
     connect.StreamType.server,
@@ -82,7 +84,7 @@ abstract final class PropertyService {
     propertyv1property.HistoryOfPropertyResponse.new,
   );
 
-  /// Search method is for client request to query for properties that match query
+  /// SearchProperty finds properties matching criteria.
   static const searchProperty = connect.Spec(
     '/$name/SearchProperty',
     connect.StreamType.server,
@@ -90,7 +92,7 @@ abstract final class PropertyService {
     propertyv1property.SearchPropertyResponse.new,
   );
 
-  /// ListSubscriptions for a particular property
+  /// ListSubscription retrieves subscriptions for a property.
   static const listSubscription = connect.Spec(
     '/$name/ListSubscription',
     connect.StreamType.server,
@@ -98,7 +100,7 @@ abstract final class PropertyService {
     propertyv1property.ListSubscriptionResponse.new,
   );
 
-  /// AddSubscription for a profile to a property
+  /// AddSubscription grants a profile access to a property.
   static const addSubscription = connect.Spec(
     '/$name/AddSubscription',
     connect.StreamType.unary,
@@ -106,7 +108,7 @@ abstract final class PropertyService {
     propertyv1property.AddSubscriptionResponse.new,
   );
 
-  /// Delete subscription of profile to a property
+  /// DeleteSubscription revokes a profile's access to a property.
   static const deleteSubscription = connect.Spec(
     '/$name/DeleteSubscription',
     connect.StreamType.unary,

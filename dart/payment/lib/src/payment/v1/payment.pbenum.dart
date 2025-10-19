@@ -14,6 +14,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// NotificationType defines how customers are notified about payment links.
 class NotificationType extends $pb.ProtobufEnum {
   static const NotificationType NOTIFICATION_TYPE_UNSPECIFIED =
       NotificationType._(

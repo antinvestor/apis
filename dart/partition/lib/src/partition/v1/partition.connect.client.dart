@@ -7,8 +7,10 @@ import "package:connectrpc/connect.dart" as connect;
 import "partition.pb.dart" as partitionv1partition;
 import "partition.connect.spec.dart" as specs;
 
+/// PartitionService provides multi-tenancy and data isolation.
+/// All RPCs require authentication via Bearer token.
 extension type PartitionServiceClient (connect.Transport _transport) {
-  /// Get a tenant in the system matching the id
+  /// GetTenant retrieves a tenant by ID.
   Future<partitionv1partition.GetTenantResponse> getTenant(
     partitionv1partition.GetTenantRequest input, {
     connect.Headers? headers,
@@ -26,7 +28,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// List all tenants in the system matching the query in some way
+  /// ListTenant retrieves all tenants matching criteria.
   Stream<partitionv1partition.ListTenantResponse> listTenant(
     partitionv1partition.ListTenantRequest input, {
     connect.Headers? headers,
@@ -44,7 +46,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Log a new tenant request
+  /// CreateTenant creates a new tenant.
   Future<partitionv1partition.CreateTenantResponse> createTenant(
     partitionv1partition.CreateTenantRequest input, {
     connect.Headers? headers,
@@ -62,7 +64,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Update an existing tenant object
+  /// UpdateTenant updates an existing tenant.
   Future<partitionv1partition.UpdateTenantResponse> updateTenant(
     partitionv1partition.UpdateTenantRequest input, {
     connect.Headers? headers,
@@ -80,7 +82,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// List all partitions in the system matching the query in some way
+  /// ListPartition retrieves all partitions matching criteria.
   Stream<partitionv1partition.ListPartitionResponse> listPartition(
     partitionv1partition.ListPartitionRequest input, {
     connect.Headers? headers,
@@ -98,7 +100,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Log a new partition request
+  /// CreatePartition creates a new partition.
   Future<partitionv1partition.CreatePartitionResponse> createPartition(
     partitionv1partition.CreatePartitionRequest input, {
     connect.Headers? headers,
@@ -116,7 +118,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Get an existing partition object
+  /// GetPartition retrieves a partition by ID.
   Future<partitionv1partition.GetPartitionResponse> getPartition(
     partitionv1partition.GetPartitionRequest input, {
     connect.Headers? headers,
@@ -134,7 +136,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Get a partition parents object
+  /// GetPartitionParents retrieves the parent hierarchy.
   Future<partitionv1partition.GetPartitionParentsResponse> getPartitionParents(
     partitionv1partition.GetPartitionParentsRequest input, {
     connect.Headers? headers,
@@ -152,7 +154,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Update an existing partition object
+  /// UpdatePartition updates an existing partition.
   Future<partitionv1partition.UpdatePartitionResponse> updatePartition(
     partitionv1partition.UpdatePartitionRequest input, {
     connect.Headers? headers,
@@ -170,7 +172,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Create a partition Role for a particular partition
+  /// CreatePartitionRole creates a role within a partition.
   Future<partitionv1partition.CreatePartitionRoleResponse> createPartitionRole(
     partitionv1partition.CreatePartitionRoleRequest input, {
     connect.Headers? headers,
@@ -188,7 +190,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// List partition roles available for this particular partition
+  /// ListPartitionRole retrieves all roles for a partition.
   Stream<partitionv1partition.ListPartitionRoleResponse> listPartitionRole(
     partitionv1partition.ListPartitionRoleRequest input, {
     connect.Headers? headers,
@@ -206,7 +208,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Remove a partition role that is not required
+  /// RemovePartitionRole deletes a partition role.
   Future<partitionv1partition.RemovePartitionRoleResponse> removePartitionRole(
     partitionv1partition.RemovePartitionRoleRequest input, {
     connect.Headers? headers,
@@ -224,7 +226,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Creates a new page for access or customization of how a partition looks like
+  /// CreatePage creates a custom UI page for a partition.
   Future<partitionv1partition.CreatePageResponse> createPage(
     partitionv1partition.CreatePageRequest input, {
     connect.Headers? headers,
@@ -242,7 +244,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Obtains a new page specific to a partition
+  /// GetPage retrieves a custom page.
   Future<partitionv1partition.GetPageResponse> getPage(
     partitionv1partition.GetPageRequest input, {
     connect.Headers? headers,
@@ -260,7 +262,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Removes a page from being accessible for a partition
+  /// RemovePage deletes a custom page.
   Future<partitionv1partition.RemovePageResponse> removePage(
     partitionv1partition.RemovePageRequest input, {
     connect.Headers? headers,
@@ -278,7 +280,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Creates a users ability to access a partition
+  /// CreateAccess grants a profile access to a partition.
   Future<partitionv1partition.CreateAccessResponse> createAccess(
     partitionv1partition.CreateAccessRequest input, {
     connect.Headers? headers,
@@ -296,7 +298,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Obtains a users access to a partition by access id or partition and profile id
+  /// GetAccess retrieves an access grant.
   Future<partitionv1partition.GetAccessResponse> getAccess(
     partitionv1partition.GetAccessRequest input, {
     connect.Headers? headers,
@@ -314,7 +316,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Removes a user's ability to access a partition
+  /// RemoveAccess revokes a profile's access to a partition.
   Future<partitionv1partition.RemoveAccessResponse> removeAccess(
     partitionv1partition.RemoveAccessRequest input, {
     connect.Headers? headers,
@@ -332,7 +334,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Create an access Role for a particular access
+  /// CreateAccessRole assigns a role to an access grant.
   Future<partitionv1partition.CreateAccessRoleResponse> createAccessRole(
     partitionv1partition.CreateAccessRoleRequest input, {
     connect.Headers? headers,
@@ -350,7 +352,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// List access roles available for this particular access
+  /// ListAccessRole retrieves all roles for an access grant.
   Stream<partitionv1partition.ListAccessRoleResponse> listAccessRole(
     partitionv1partition.ListAccessRoleRequest input, {
     connect.Headers? headers,
@@ -368,7 +370,7 @@ extension type PartitionServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Remove an access role that is not required
+  /// RemoveAccessRole removes a role from an access grant.
   Future<partitionv1partition.RemoveAccessRoleResponse> removeAccessRole(
     partitionv1partition.RemoveAccessRoleRequest input, {
     connect.Headers? headers,

@@ -14,6 +14,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// PRIORITY defines the delivery priority for notifications.
+/// Higher priority notifications are processed and delivered first.
 /// buf:lint:ignore ENUM_VALUE_PREFIX
 class PRIORITY extends $pb.ProtobufEnum {
   /// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX

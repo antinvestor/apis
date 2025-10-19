@@ -25,31 +25,55 @@ public interface ListTransactionRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Offset-based pagination
+   * </pre>
+   *
    * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
    * @return Whether the pagination field is set.
    */
   boolean hasPagination();
   /**
+   * <pre>
+   * Offset-based pagination
+   * </pre>
+   *
    * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
    * @return The pagination.
    */
   com.antinvestor.apis.common.v1.Pagination getPagination();
   /**
+   * <pre>
+   * Offset-based pagination
+   * </pre>
+   *
    * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
    */
   com.antinvestor.apis.common.v1.PaginationOrBuilder getPaginationOrBuilder();
 
   /**
+   * <pre>
+   * Time range filter
+   * </pre>
+   *
    * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
    * @return Whether the interval field is set.
    */
   boolean hasInterval();
   /**
+   * <pre>
+   * Time range filter
+   * </pre>
+   *
    * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
    * @return The interval.
    */
   com.google.type.Interval getInterval();
   /**
+   * <pre>
+   * Time range filter
+   * </pre>
+   *
    * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
    */
   com.google.type.IntervalOrBuilder getIntervalOrBuilder();

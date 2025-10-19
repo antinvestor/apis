@@ -25,11 +25,19 @@ public interface ContactLinkOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Display name of the profile
+   * </pre>
+   *
    * <code>string profile_name = 1 [json_name = "profileName", (.buf.validate.field) = { ... }</code>
    * @return The profileName.
    */
   java.lang.String getProfileName();
   /**
+   * <pre>
+   * Display name of the profile
+   * </pre>
+   *
    * <code>string profile_name = 1 [json_name = "profileName", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileName.
    */
@@ -37,11 +45,19 @@ public interface ContactLinkOrBuilder extends
       getProfileNameBytes();
 
   /**
+   * <pre>
+   * Type of profile (e.g., "user", "organization", "service")
+   * </pre>
+   *
    * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
    * @return The profileType.
    */
   java.lang.String getProfileType();
   /**
+   * <pre>
+   * Type of profile (e.g., "user", "organization", "service")
+   * </pre>
+   *
    * <code>string profile_type = 2 [json_name = "profileType", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileType.
    */
@@ -49,11 +65,19 @@ public interface ContactLinkOrBuilder extends
       getProfileTypeBytes();
 
   /**
+   * <pre>
+   * Unique identifier of the profile
+   * </pre>
+   *
    * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The profileId.
    */
   java.lang.String getProfileId();
   /**
+   * <pre>
+   * Unique identifier of the profile
+   * </pre>
+   *
    * <code>string profile_id = 3 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileId.
    */
@@ -61,11 +85,19 @@ public interface ContactLinkOrBuilder extends
       getProfileIdBytes();
 
   /**
+   * <pre>
+   * Identifier of the profile's image/avatar
+   * </pre>
+   *
    * <code>string profile_image_id = 4 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
    * @return The profileImageId.
    */
   java.lang.String getProfileImageId();
   /**
+   * <pre>
+   * Identifier of the profile's image/avatar
+   * </pre>
+   *
    * <code>string profile_image_id = 4 [json_name = "profileImageId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileImageId.
    */
@@ -73,11 +105,19 @@ public interface ContactLinkOrBuilder extends
       getProfileImageIdBytes();
 
   /**
+   * <pre>
+   * Unique identifier of the contact
+   * </pre>
+   *
    * <code>string contact_id = 8 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
    * @return The contactId.
    */
   java.lang.String getContactId();
   /**
+   * <pre>
+   * Unique identifier of the contact
+   * </pre>
+   *
    * <code>string contact_id = 8 [json_name = "contactId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for contactId.
    */
@@ -85,11 +125,19 @@ public interface ContactLinkOrBuilder extends
       getContactIdBytes();
 
   /**
+   * <pre>
+   * Additional contact details (e.g., email, phone, handle)
+   * </pre>
+   *
    * <code>string detail = 9 [json_name = "detail", (.buf.validate.field) = { ... }</code>
    * @return The detail.
    */
   java.lang.String getDetail();
   /**
+   * <pre>
+   * Additional contact details (e.g., email, phone, handle)
+   * </pre>
+   *
    * <code>string detail = 9 [json_name = "detail", (.buf.validate.field) = { ... }</code>
    * @return The bytes for detail.
    */
@@ -97,16 +145,28 @@ public interface ContactLinkOrBuilder extends
       getDetailBytes();
 
   /**
+   * <pre>
+   * Extended metadata for the contact link
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 10 [json_name = "extras"];</code>
    * @return Whether the extras field is set.
    */
   boolean hasExtras();
   /**
+   * <pre>
+   * Extended metadata for the contact link
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 10 [json_name = "extras"];</code>
    * @return The extras.
    */
   com.google.protobuf.Struct getExtras();
   /**
+   * <pre>
+   * Extended metadata for the contact link
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 10 [json_name = "extras"];</code>
    */
   com.google.protobuf.StructOrBuilder getExtrasOrBuilder();

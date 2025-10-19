@@ -25,11 +25,19 @@ public interface PartitionObjectOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique partition ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Unique partition ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface PartitionObjectOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Partition name (department, project, team)
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The name.
    */
   java.lang.String getName();
   /**
+   * <pre>
+   * Partition name (department, project, team)
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The bytes for name.
    */
@@ -49,11 +65,19 @@ public interface PartitionObjectOrBuilder extends
       getNameBytes();
 
   /**
+   * <pre>
+   * Parent tenant ID
+   * </pre>
+   *
    * <code>string tenant_id = 3 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
    * @return The tenantId.
    */
   java.lang.String getTenantId();
   /**
+   * <pre>
+   * Parent tenant ID
+   * </pre>
+   *
    * <code>string tenant_id = 3 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for tenantId.
    */
@@ -61,11 +85,19 @@ public interface PartitionObjectOrBuilder extends
       getTenantIdBytes();
 
   /**
+   * <pre>
+   * Parent partition ID for hierarchical structure
+   * </pre>
+   *
    * <code>string parent_id = 4 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
    * @return The parentId.
    */
   java.lang.String getParentId();
   /**
+   * <pre>
+   * Parent partition ID for hierarchical structure
+   * </pre>
+   *
    * <code>string parent_id = 4 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for parentId.
    */
@@ -73,11 +105,19 @@ public interface PartitionObjectOrBuilder extends
       getParentIdBytes();
 
   /**
+   * <pre>
+   * Partition description
+   * </pre>
+   *
    * <code>string description = 5 [json_name = "description", (.buf.validate.field) = { ... }</code>
    * @return The description.
    */
   java.lang.String getDescription();
   /**
+   * <pre>
+   * Partition description
+   * </pre>
+   *
    * <code>string description = 5 [json_name = "description", (.buf.validate.field) = { ... }</code>
    * @return The bytes for description.
    */
@@ -85,42 +125,74 @@ public interface PartitionObjectOrBuilder extends
       getDescriptionBytes();
 
   /**
+   * <pre>
+   * Partition state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
    * @return The enum numeric value on the wire for state.
    */
   int getStateValue();
   /**
+   * <pre>
+   * Partition state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
    * @return The state.
    */
   com.antinvestor.apis.common.v1.STATE getState();
 
   /**
+   * <pre>
+   * Additional partition metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 7 [json_name = "properties"];</code>
    * @return Whether the properties field is set.
    */
   boolean hasProperties();
   /**
+   * <pre>
+   * Additional partition metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 7 [json_name = "properties"];</code>
    * @return The properties.
    */
   com.google.protobuf.Struct getProperties();
   /**
+   * <pre>
+   * Additional partition metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 7 [json_name = "properties"];</code>
    */
   com.google.protobuf.StructOrBuilder getPropertiesOrBuilder();
 
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 8 [json_name = "createdAt"];</code>
    * @return Whether the createdAt field is set.
    */
   boolean hasCreatedAt();
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 8 [json_name = "createdAt"];</code>
    * @return The createdAt.
    */
   com.google.protobuf.Timestamp getCreatedAt();
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 8 [json_name = "createdAt"];</code>
    */
   com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();

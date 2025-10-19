@@ -1,0 +1,786 @@
+openapi: 3.1.0
+info:
+  title: Notification Service
+  description: The Notification Service provides multi-channel notification delivery capabilities including email, SMS, push notifications, and in-app messaging. It supports templated notifications with localization, priority-based delivery, and batch processing through queue-and-release mechanisms. The service enables applications to send transactional and marketing notifications with tracking, status updates, and delivery confirmations.
+  contact:
+    name: Ant Investor Ltd
+    url: https://github.com/antinvestor/service-notification
+    email: info@antinvestor.com
+  license:
+    name: Apache License
+    url: https://github.com/antinvestor/apis/blob/master/LICENSE
+  version: v1.0.0
+paths:
+  /notification.v1.NotificationService/Receive: {}
+  /notification.v1.NotificationService/Release: {}
+  /notification.v1.NotificationService/Search: {}
+  /notification.v1.NotificationService/Send: {}
+  /notification.v1.NotificationService/Status:
+    post:
+      tags:
+        - Notifications
+        - notification.v1.NotificationService
+      summary: Get notification status
+      description: Retrieves the current status of a notification including delivery state, timestamps, and error information if the notification failed to deliver.
+      operationId: getNotificationStatus
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/common.v1.StatusRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/common.v1.StatusResponse'
+  /notification.v1.NotificationService/StatusUpdate:
+    post:
+      tags:
+        - Notifications
+        - notification.v1.NotificationService
+      summary: Update notification status
+      description: Updates the status of a notification. Typically used by delivery workers to update notification state during processing (queued, in-process, delivered, failed).
+      operationId: updateNotificationStatus
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/common.v1.StatusUpdateRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/common.v1.StatusUpdateResponse'
+  /notification.v1.NotificationService/TemplateSave:
+    post:
+      tags:
+        - Templates
+        - notification.v1.NotificationService
+      summary: Create or update template
+      description: Creates or updates a notification template. Templates enable consistent, reusable notification formatting with support for multiple languages and channels (email, SMS, push, in-app).
+      operationId: saveTemplate
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/notification.v1.TemplateSaveRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notification.v1.TemplateSaveResponse'
+  /notification.v1.NotificationService/TemplateSearch: {}
+components:
+  schemas:
+    common.v1.ContactLink:
+      type: object
+      properties:
+        profileName:
+          type: string
+          title: profile_name
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+        profileType:
+          type: string
+          title: profile_type
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        profileImageId:
+          type: string
+          title: profile_image_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        contactId:
+          type: string
+          title: contact_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,40}'
+        detail:
+          type: string
+          title: detail
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: ContactLink
+      additionalProperties: false
+    common.v1.Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          title: count
+          format: int32
+        page:
+          type: integer
+          title: page
+          format: int32
+        startDate:
+          type: string
+          title: start_date
+        endDate:
+          type: string
+          title: end_date
+      title: Pagination
+      additionalProperties: false
+    common.v1.STATE:
+      type: string
+      title: STATE
+      enum:
+        - CREATED
+        - CHECKED
+        - ACTIVE
+        - INACTIVE
+        - DELETED
+      description: buf:lint:ignore ENUM_VALUE_PREFIX
+    common.v1.STATUS:
+      type: string
+      title: STATUS
+      enum:
+        - UNKNOWN
+        - QUEUED
+        - IN_PROCESS
+        - FAILED
+        - SUCCESSFUL
+      description: buf:lint:ignore ENUM_VALUE_PREFIX
+    common.v1.SearchRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          title: query
+        idQuery:
+          type: string
+          title: id_query
+        limits:
+          title: limits
+          $ref: '#/components/schemas/common.v1.Pagination'
+        properties:
+          type: array
+          items:
+            type: string
+          title: properties
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: SearchRequest
+      additionalProperties: false
+    common.v1.StatusRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: StatusRequest
+      additionalProperties: false
+    common.v1.StatusResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        state:
+          title: state
+          $ref: '#/components/schemas/common.v1.STATE'
+        status:
+          title: status
+          $ref: '#/components/schemas/common.v1.STATUS'
+        externalId:
+          type: string
+          title: external_id
+        transientId:
+          type: string
+          title: transient_id
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: StatusResponse
+      additionalProperties: false
+    common.v1.StatusUpdateRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        state:
+          title: state
+          $ref: '#/components/schemas/common.v1.STATE'
+        status:
+          title: status
+          $ref: '#/components/schemas/common.v1.STATUS'
+        externalId:
+          type: string
+          title: external_id
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: StatusUpdateRequest
+      additionalProperties: false
+    common.v1.StatusUpdateResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/common.v1.StatusResponse'
+      title: StatusUpdateResponse
+      additionalProperties: false
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    google.protobuf.ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          title: values
+          description: Repeated field of dynamically typed values.
+      title: ListValue
+      additionalProperties: false
+      description: |-
+        `ListValue` is a wrapper around a repeated field of values.
+
+         The JSON representation for `ListValue` is JSON array.
+    google.protobuf.NullValue:
+      type: string
+      title: NullValue
+      enum:
+        - NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+         `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+    google.protobuf.Struct:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/google.protobuf.Value'
+      description: |-
+        `Struct` represents a structured data value, consisting of fields
+         which map to dynamically typed values. In some languages, `Struct`
+         might be supported by a native representation. For example, in
+         scripting languages like JS a struct is represented as an
+         object. The details of that representation are described together
+         with the proto support for the language.
+
+         The JSON representation for `Struct` is JSON object.
+    google.protobuf.Struct.FieldsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          title: value
+          $ref: '#/components/schemas/google.protobuf.Value'
+      title: FieldsEntry
+      additionalProperties: false
+    google.protobuf.Value:
+      oneOf:
+        - type: "null"
+        - type: number
+        - type: string
+        - type: boolean
+        - type: array
+        - type: object
+          additionalProperties: true
+      description: |-
+        `Value` represents a dynamically typed value which can be either
+         null, a number, a string, a boolean, a recursive struct value, or a
+         list of values. A producer of value is expected to set one of these
+         variants. Absence of any variant indicates an error.
+
+         The JSON representation for `Value` is JSON value.
+    notification.v1.Language:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique identifier for the language
+        code:
+          type: string
+          title: code
+          description: ISO 639-1 language code (e.g., "en", "es", "fr")
+        name:
+          type: string
+          title: name
+          description: Human-readable language name
+        extra:
+          title: extra
+          description: Additional language metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: Language
+      additionalProperties: false
+      description: Language represents a supported language for notification templates.
+    notification.v1.Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique identifier for the notification
+        parentId:
+          type: string
+          title: parent_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Parent notification ID (for threading/grouping)
+        source:
+          title: source
+          description: Sender information
+          $ref: '#/components/schemas/common.v1.ContactLink'
+        recipient:
+          title: recipient
+          description: Recipient information
+          $ref: '#/components/schemas/common.v1.ContactLink'
+        type:
+          type: string
+          title: type
+          description: Notification type (e.g., "email", "sms", "push", "in-app")
+        template:
+          type: string
+          title: template
+          description: Template ID to use for rendering
+        payload:
+          title: payload
+          description: 'Template variables (e.g., {"name": "John", "amount": "$100"})'
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        data:
+          type: string
+          title: data
+          description: Pre-rendered notification content (if not using template)
+        language:
+          type: string
+          title: language
+          description: Preferred language code for the notification
+        outBound:
+          type: boolean
+          title: out_bound
+          description: True if outgoing, false if incoming
+        autoRelease:
+          type: boolean
+          title: auto_release
+          description: If true, automatically release after queuing
+        routeId:
+          type: string
+          title: route_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Routing identifier for delivery channel selection
+        status:
+          title: status
+          description: Current status
+          $ref: '#/components/schemas/common.v1.StatusResponse'
+        extras:
+          title: extras
+          description: Additional notification metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        priority:
+          title: priority
+          description: Delivery priority
+          $ref: '#/components/schemas/notification.v1.PRIORITY'
+      title: Notification
+      additionalProperties: false
+      description: |-
+        Notification represents a notification to be sent or received.
+         Supports multi-channel delivery (email, SMS, push, in-app) with templating.
+    notification.v1.PRIORITY:
+      type: string
+      title: PRIORITY
+      enum:
+        - HIGH
+        - LOW
+        - VERY_LOW
+      description: |-
+        PRIORITY defines the delivery priority for notifications.
+         Higher priority notifications are processed and delivered first.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    notification.v1.ReceiveRequest:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/notification.v1.Notification'
+          title: data
+          description: Notifications being acknowledged
+      title: ReceiveRequest
+      additionalProperties: false
+      description: |-
+        ReceiveRequest acknowledges receipt of notifications by the client.
+         Used for tracking delivery confirmation.
+    notification.v1.ReceiveResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/common.v1.StatusResponse'
+          title: data
+          description: Status for each acknowledged notification
+      title: ReceiveResponse
+      additionalProperties: false
+      description: ReceiveResponse returns the status of acknowledged notifications.
+    notification.v1.ReleaseRequest:
+      type: object
+      properties:
+        id:
+          type: array
+          items:
+            type: string
+            maxLength: 40
+            minLength: 3
+            pattern: '[0-9a-z_-]{3,20}'
+          title: id
+          description: List of notification IDs to release
+        comment:
+          type: string
+          title: comment
+          description: Optional comment for audit trail
+      title: ReleaseRequest
+      additionalProperties: false
+      description: |-
+        ReleaseRequest releases queued notifications for immediate delivery.
+         Used for batch processing where notifications are queued first, then released together.
+    notification.v1.ReleaseResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/common.v1.StatusResponse'
+          title: data
+          description: Status for each released notification
+      title: ReleaseResponse
+      additionalProperties: false
+      description: ReleaseResponse returns the status of released notifications.
+    notification.v1.SearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/notification.v1.Notification'
+          title: data
+          description: List of matching notifications
+      title: SearchResponse
+      additionalProperties: false
+      description: SearchResponse returns notifications matching search criteria.
+    notification.v1.SendRequest:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/notification.v1.Notification'
+          title: data
+          description: Notifications to queue
+      title: SendRequest
+      additionalProperties: false
+      description: SendRequest queues one or more notifications for delivery.
+    notification.v1.SendResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/common.v1.StatusResponse'
+          title: data
+          description: Status for each queued notification
+      title: SendResponse
+      additionalProperties: false
+      description: SendResponse returns the status of queued notifications.
+    notification.v1.Template:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique identifier for the template
+        name:
+          type: string
+          title: name
+          description: Template name (e.g., "welcome_email", "password_reset")
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/notification.v1.TemplateData'
+          title: data
+          description: Localized template content for different languages/channels
+        extra:
+          title: extra
+          description: Additional template metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: Template
+      additionalProperties: false
+      description: |-
+        Template represents a notification template with localized content.
+         Templates enable consistent, reusable notification formatting.
+    notification.v1.TemplateData:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique identifier for this template data
+        type:
+          type: string
+          title: type
+          description: Content type (e.g., "email", "sms", "push", "in-app")
+        detail:
+          type: string
+          title: detail
+          description: Template content with placeholders (e.g., "Hello {{name}}")
+        language:
+          title: language
+          description: Language for this template content
+          $ref: '#/components/schemas/notification.v1.Language'
+      title: TemplateData
+      additionalProperties: false
+      description: |-
+        TemplateData represents localized content for a notification template.
+         Each template can have multiple TemplateData entries for different languages.
+    notification.v1.TemplateSaveRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          title: name
+          description: Template name
+        languageCode:
+          type: string
+          title: language_code
+          description: Language code for the template
+        data:
+          title: data
+          description: Template content and configuration
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        extra:
+          title: extra
+          description: Additional template metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: TemplateSaveRequest
+      additionalProperties: false
+      description: TemplateSaveRequest creates or updates a notification template.
+    notification.v1.TemplateSaveResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: The saved template
+          $ref: '#/components/schemas/notification.v1.Template'
+      title: TemplateSaveResponse
+      additionalProperties: false
+      description: TemplateSaveResponse returns the saved template.
+    notification.v1.TemplateSearchRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          title: query
+          description: Search query (template name, content, etc.)
+        languageCode:
+          type: string
+          title: language_code
+          description: Filter by language code
+        page:
+          type:
+            - integer
+            - string
+          title: page
+          format: int64
+          description: Page number for pagination
+        count:
+          type: integer
+          title: count
+          format: int32
+          description: Number of results per page
+      title: TemplateSearchRequest
+      additionalProperties: false
+      description: TemplateSearchRequest searches for notification templates.
+    notification.v1.TemplateSearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/notification.v1.Template'
+          title: data
+          description: List of matching templates
+      title: TemplateSearchResponse
+      additionalProperties: false
+      description: TemplateSearchResponse returns matching templates.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security: []
+tags:
+  - name: notification.v1.NotificationService
+    description: |-
+      NotificationService provides multi-channel notification delivery.
+       All RPCs require authentication via Bearer token unless otherwise specified.

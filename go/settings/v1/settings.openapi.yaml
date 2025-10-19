@@ -1,0 +1,415 @@
+openapi: 3.1.0
+info:
+  title: Settings Service
+  description: The Settings Service provides hierarchical configuration management for applications and services. It supports multi-level scoping (global, object-level, instance-level), localization, and module-specific settings. Settings can be organized by object type, object ID, language, and module, enabling flexible configuration management for multi-tenant applications with internationalization support.
+  contact:
+    name: Ant Investor Ltd
+    url: https://github.com/antinvestor/service-settings
+    email: info@antinvestor.com
+  license:
+    name: Apache License
+    url: https://github.com/antinvestor/apis/blob/master/LICENSE
+  version: v1.0.0
+paths:
+  /settings.v1.SettingsService/Get:
+    post:
+      tags:
+        - Settings
+        - settings.v1.SettingsService
+      summary: Get a setting value
+      description: Retrieves a single setting value by its hierarchical key. The service returns the most specific matching setting based on the key hierarchy (instance-level > object-level > global).
+      operationId: getSetting
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/settings.v1.GetRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/settings.v1.GetResponse'
+  /settings.v1.SettingsService/List: {}
+  /settings.v1.SettingsService/Search: {}
+  /settings.v1.SettingsService/Set:
+    post:
+      tags:
+        - Settings
+        - settings.v1.SettingsService
+      summary: Create or update a setting
+      description: Creates or updates a setting value. If the setting exists, it is updated with the new value and timestamp. If it doesn't exist, a new setting is created.
+      operationId: setSetting
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/settings.v1.SetRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/settings.v1.SetResponse'
+components:
+  schemas:
+    common.v1.Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          title: count
+          format: int32
+        page:
+          type: integer
+          title: page
+          format: int32
+        startDate:
+          type: string
+          title: start_date
+        endDate:
+          type: string
+          title: end_date
+      title: Pagination
+      additionalProperties: false
+    common.v1.SearchRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          title: query
+        idQuery:
+          type: string
+          title: id_query
+        limits:
+          title: limits
+          $ref: '#/components/schemas/common.v1.Pagination'
+        properties:
+          type: array
+          items:
+            type: string
+          title: properties
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: SearchRequest
+      additionalProperties: false
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    google.protobuf.ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          title: values
+          description: Repeated field of dynamically typed values.
+      title: ListValue
+      additionalProperties: false
+      description: |-
+        `ListValue` is a wrapper around a repeated field of values.
+
+         The JSON representation for `ListValue` is JSON array.
+    google.protobuf.NullValue:
+      type: string
+      title: NullValue
+      enum:
+        - NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+         `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+    google.protobuf.Struct:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/google.protobuf.Value'
+      description: |-
+        `Struct` represents a structured data value, consisting of fields
+         which map to dynamically typed values. In some languages, `Struct`
+         might be supported by a native representation. For example, in
+         scripting languages like JS a struct is represented as an
+         object. The details of that representation are described together
+         with the proto support for the language.
+
+         The JSON representation for `Struct` is JSON object.
+    google.protobuf.Struct.FieldsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          title: value
+          $ref: '#/components/schemas/google.protobuf.Value'
+      title: FieldsEntry
+      additionalProperties: false
+    google.protobuf.Value:
+      oneOf:
+        - type: "null"
+        - type: number
+        - type: string
+        - type: boolean
+        - type: array
+        - type: object
+          additionalProperties: true
+      description: |-
+        `Value` represents a dynamically typed value which can be either
+         null, a number, a string, a boolean, a recursive struct value, or a
+         list of values. A producer of value is expected to set one of these
+         variants. Absence of any variant indicates an error.
+
+         The JSON representation for `Value` is JSON value.
+    settings.v1.GetRequest:
+      type: object
+      properties:
+        key:
+          title: key
+          description: Setting key to retrieve
+          $ref: '#/components/schemas/settings.v1.Setting'
+      title: GetRequest
+      additionalProperties: false
+      description: GetRequest retrieves a single setting value.
+    settings.v1.GetResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: The requested setting
+          $ref: '#/components/schemas/settings.v1.SettingObject'
+      title: GetResponse
+      additionalProperties: false
+      description: GetResponse returns the requested setting.
+    settings.v1.ListRequest:
+      type: object
+      properties:
+        key:
+          title: key
+          description: Partial key for filtering (empty fields match all)
+          $ref: '#/components/schemas/settings.v1.Setting'
+      title: ListRequest
+      additionalProperties: false
+      description: ListRequest retrieves all settings matching a partial key.
+    settings.v1.ListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/settings.v1.SettingObject'
+          title: data
+          description: List of matching settings
+      title: ListResponse
+      additionalProperties: false
+      description: ListResponse returns matching settings.
+    settings.v1.SearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/settings.v1.SettingObject'
+          title: data
+          description: List of matching settings
+      title: SearchResponse
+      additionalProperties: false
+      description: SearchResponse returns settings matching search criteria.
+    settings.v1.SetRequest:
+      type: object
+      properties:
+        key:
+          title: key
+          description: Setting key to set
+          $ref: '#/components/schemas/settings.v1.Setting'
+        value:
+          type: string
+          title: value
+          description: New value for the setting
+      title: SetRequest
+      additionalProperties: false
+      description: SetRequest creates or updates a setting value.
+    settings.v1.SetResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: The updated setting
+          $ref: '#/components/schemas/settings.v1.SettingObject'
+      title: SetResponse
+      additionalProperties: false
+      description: SetResponse returns the updated setting.
+    settings.v1.Setting:
+      type: object
+      properties:
+        name:
+          type: string
+          title: name
+          minLength: 2
+          description: Setting name (e.g., "theme", "max_upload_size")
+        object:
+          type: string
+          title: object
+          minLength: 2
+          description: Object type scope (e.g., "user", "organization", "application")
+        objectId:
+          type: string
+          title: object_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Specific object instance ID (for instance-level settings)
+        lang:
+          type: string
+          title: lang
+          minLength: 2
+          description: Language code for localized settings (ISO 639-1)
+        module:
+          type: string
+          title: module
+          minLength: 3
+          description: Module or feature scope (e.g., "billing", "notifications")
+      title: Setting
+      additionalProperties: false
+      description: |-
+        Setting represents a hierarchical key for configuration lookup.
+         Supports multi-level scoping for flexible configuration management.
+    settings.v1.SettingObject:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique identifier for this setting instance
+        key:
+          title: key
+          description: Hierarchical key identifying the setting
+          $ref: '#/components/schemas/settings.v1.Setting'
+        value:
+          type: string
+          title: value
+          description: Setting value (JSON string for complex values)
+        updated:
+          type: string
+          title: updated
+          description: Last update timestamp (RFC3339)
+      title: SettingObject
+      additionalProperties: false
+      description: SettingObject represents a stored setting with its value and metadata.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security: []
+tags:
+  - name: settings.v1.SettingsService
+    description: |-
+      SettingsService provides hierarchical configuration management.
+       All RPCs require authentication via Bearer token.

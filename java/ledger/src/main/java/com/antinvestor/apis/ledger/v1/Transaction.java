@@ -20,6 +20,11 @@
 package com.antinvestor.apis.ledger.v1;
 
 /**
+ * <pre>
+ * Transaction represents a complete double-entry transaction.
+ * Must contain balanced entries (sum of debits = sum of credits).
+ * </pre>
+ *
  * Protobuf type {@code ledger.v1.Transaction}
  */
 @com.google.protobuf.Generated
@@ -67,6 +72,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object reference_ = "";
   /**
+   * <pre>
+   * Unique transaction reference/ID
+   * </pre>
+   *
    * <code>string reference = 1 [json_name = "reference"];</code>
    * @return The reference.
    */
@@ -84,6 +93,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Unique transaction reference/ID
+   * </pre>
+   *
    * <code>string reference = 1 [json_name = "reference"];</code>
    * @return The bytes for reference.
    */
@@ -106,6 +119,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object currency_ = "";
   /**
+   * <pre>
+   * Currency code for all entries (ISO 4217)
+   * </pre>
+   *
    * <code>string currency = 2 [json_name = "currency"];</code>
    * @return The currency.
    */
@@ -123,6 +140,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Currency code for all entries (ISO 4217)
+   * </pre>
+   *
    * <code>string currency = 2 [json_name = "currency"];</code>
    * @return The bytes for currency.
    */
@@ -145,6 +166,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object transactedAt_ = "";
   /**
+   * <pre>
+   * Transaction timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
    * @return The transactedAt.
    */
@@ -162,6 +187,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Transaction timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
    * @return The bytes for transactedAt.
    */
@@ -183,6 +212,10 @@ private static final long serialVersionUID = 0L;
   public static final int DATA_FIELD_NUMBER = 4;
   private com.google.protobuf.Struct data_;
   /**
+   * <pre>
+   * Additional transaction metadata (description, source, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct data = 4 [json_name = "data"];</code>
    * @return Whether the data field is set.
    */
@@ -191,6 +224,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Additional transaction metadata (description, source, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct data = 4 [json_name = "data"];</code>
    * @return The data.
    */
@@ -199,6 +236,10 @@ private static final long serialVersionUID = 0L;
     return data_ == null ? com.google.protobuf.Struct.getDefaultInstance() : data_;
   }
   /**
+   * <pre>
+   * Additional transaction metadata (description, source, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct data = 4 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -210,6 +251,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private java.util.List<com.antinvestor.apis.ledger.v1.TransactionEntry> entries_;
   /**
+   * <pre>
+   * Transaction entries (must be balanced)
+   * </pre>
+   *
    * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
    */
   @java.lang.Override
@@ -217,6 +262,10 @@ private static final long serialVersionUID = 0L;
     return entries_;
   }
   /**
+   * <pre>
+   * Transaction entries (must be balanced)
+   * </pre>
+   *
    * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
    */
   @java.lang.Override
@@ -225,6 +274,10 @@ private static final long serialVersionUID = 0L;
     return entries_;
   }
   /**
+   * <pre>
+   * Transaction entries (must be balanced)
+   * </pre>
+   *
    * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
    */
   @java.lang.Override
@@ -232,6 +285,10 @@ private static final long serialVersionUID = 0L;
     return entries_.size();
   }
   /**
+   * <pre>
+   * Transaction entries (must be balanced)
+   * </pre>
+   *
    * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
    */
   @java.lang.Override
@@ -239,6 +296,10 @@ private static final long serialVersionUID = 0L;
     return entries_.get(index);
   }
   /**
+   * <pre>
+   * Transaction entries (must be balanced)
+   * </pre>
+   *
    * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
    */
   @java.lang.Override
@@ -250,6 +311,10 @@ private static final long serialVersionUID = 0L;
   public static final int CLEARED_FIELD_NUMBER = 6;
   private boolean cleared_ = false;
   /**
+   * <pre>
+   * Whether transaction has been cleared/posted
+   * </pre>
+   *
    * <code>bool cleared = 6 [json_name = "cleared"];</code>
    * @return The cleared.
    */
@@ -261,6 +326,10 @@ private static final long serialVersionUID = 0L;
   public static final int TYPE_FIELD_NUMBER = 7;
   private int type_ = 0;
   /**
+   * <pre>
+   * Transaction type (normal, reversal, reservation)
+   * </pre>
+   *
    * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
    * @return The enum numeric value on the wire for type.
    */
@@ -268,6 +337,10 @@ private static final long serialVersionUID = 0L;
     return type_;
   }
   /**
+   * <pre>
+   * Transaction type (normal, reversal, reservation)
+   * </pre>
+   *
    * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
    * @return The type.
    */
@@ -504,6 +577,11 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * Transaction represents a complete double-entry transaction.
+   * Must contain balanced entries (sum of debits = sum of credits).
+   * </pre>
+   *
    * Protobuf type {@code ledger.v1.Transaction}
    */
   public static final class Builder extends
@@ -784,6 +862,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object reference_ = "";
     /**
+     * <pre>
+     * Unique transaction reference/ID
+     * </pre>
+     *
      * <code>string reference = 1 [json_name = "reference"];</code>
      * @return The reference.
      */
@@ -800,6 +882,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique transaction reference/ID
+     * </pre>
+     *
      * <code>string reference = 1 [json_name = "reference"];</code>
      * @return The bytes for reference.
      */
@@ -817,6 +903,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique transaction reference/ID
+     * </pre>
+     *
      * <code>string reference = 1 [json_name = "reference"];</code>
      * @param value The reference to set.
      * @return This builder for chaining.
@@ -830,6 +920,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique transaction reference/ID
+     * </pre>
+     *
      * <code>string reference = 1 [json_name = "reference"];</code>
      * @return This builder for chaining.
      */
@@ -840,6 +934,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique transaction reference/ID
+     * </pre>
+     *
      * <code>string reference = 1 [json_name = "reference"];</code>
      * @param value The bytes for reference to set.
      * @return This builder for chaining.
@@ -856,6 +954,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object currency_ = "";
     /**
+     * <pre>
+     * Currency code for all entries (ISO 4217)
+     * </pre>
+     *
      * <code>string currency = 2 [json_name = "currency"];</code>
      * @return The currency.
      */
@@ -872,6 +974,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Currency code for all entries (ISO 4217)
+     * </pre>
+     *
      * <code>string currency = 2 [json_name = "currency"];</code>
      * @return The bytes for currency.
      */
@@ -889,6 +995,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Currency code for all entries (ISO 4217)
+     * </pre>
+     *
      * <code>string currency = 2 [json_name = "currency"];</code>
      * @param value The currency to set.
      * @return This builder for chaining.
@@ -902,6 +1012,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Currency code for all entries (ISO 4217)
+     * </pre>
+     *
      * <code>string currency = 2 [json_name = "currency"];</code>
      * @return This builder for chaining.
      */
@@ -912,6 +1026,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Currency code for all entries (ISO 4217)
+     * </pre>
+     *
      * <code>string currency = 2 [json_name = "currency"];</code>
      * @param value The bytes for currency to set.
      * @return This builder for chaining.
@@ -928,6 +1046,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object transactedAt_ = "";
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
      * @return The transactedAt.
      */
@@ -944,6 +1066,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
      * @return The bytes for transactedAt.
      */
@@ -961,6 +1087,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
      * @param value The transactedAt to set.
      * @return This builder for chaining.
@@ -974,6 +1104,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
      * @return This builder for chaining.
      */
@@ -984,6 +1118,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
      * @param value The bytes for transactedAt to set.
      * @return This builder for chaining.
@@ -1002,6 +1140,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> dataBuilder_;
     /**
+     * <pre>
+     * Additional transaction metadata (description, source, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct data = 4 [json_name = "data"];</code>
      * @return Whether the data field is set.
      */
@@ -1009,6 +1151,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000008) != 0);
     }
     /**
+     * <pre>
+     * Additional transaction metadata (description, source, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct data = 4 [json_name = "data"];</code>
      * @return The data.
      */
@@ -1020,6 +1166,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional transaction metadata (description, source, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct data = 4 [json_name = "data"];</code>
      */
     public Builder setData(com.google.protobuf.Struct value) {
@@ -1036,6 +1186,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional transaction metadata (description, source, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct data = 4 [json_name = "data"];</code>
      */
     public Builder setData(
@@ -1050,6 +1204,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional transaction metadata (description, source, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct data = 4 [json_name = "data"];</code>
      */
     public Builder mergeData(com.google.protobuf.Struct value) {
@@ -1071,6 +1229,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional transaction metadata (description, source, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct data = 4 [json_name = "data"];</code>
      */
     public Builder clearData() {
@@ -1084,6 +1246,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional transaction metadata (description, source, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct data = 4 [json_name = "data"];</code>
      */
     public com.google.protobuf.Struct.Builder getDataBuilder() {
@@ -1092,6 +1258,10 @@ private static final long serialVersionUID = 0L;
       return internalGetDataFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Additional transaction metadata (description, source, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct data = 4 [json_name = "data"];</code>
      */
     public com.google.protobuf.StructOrBuilder getDataOrBuilder() {
@@ -1103,6 +1273,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional transaction metadata (description, source, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct data = 4 [json_name = "data"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
@@ -1132,6 +1306,10 @@ private static final long serialVersionUID = 0L;
         com.antinvestor.apis.ledger.v1.TransactionEntry, com.antinvestor.apis.ledger.v1.TransactionEntry.Builder, com.antinvestor.apis.ledger.v1.TransactionEntryOrBuilder> entriesBuilder_;
 
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public java.util.List<com.antinvestor.apis.ledger.v1.TransactionEntry> getEntriesList() {
@@ -1142,6 +1320,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public int getEntriesCount() {
@@ -1152,6 +1334,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public com.antinvestor.apis.ledger.v1.TransactionEntry getEntries(int index) {
@@ -1162,6 +1348,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public Builder setEntries(
@@ -1179,6 +1369,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public Builder setEntries(
@@ -1193,6 +1387,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public Builder addEntries(com.antinvestor.apis.ledger.v1.TransactionEntry value) {
@@ -1209,6 +1407,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public Builder addEntries(
@@ -1226,6 +1428,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public Builder addEntries(
@@ -1240,6 +1446,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public Builder addEntries(
@@ -1254,6 +1464,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public Builder addAllEntries(
@@ -1269,6 +1483,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public Builder clearEntries() {
@@ -1282,6 +1500,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public Builder removeEntries(int index) {
@@ -1295,6 +1517,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public com.antinvestor.apis.ledger.v1.TransactionEntry.Builder getEntriesBuilder(
@@ -1302,6 +1528,10 @@ private static final long serialVersionUID = 0L;
       return internalGetEntriesFieldBuilder().getBuilder(index);
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public com.antinvestor.apis.ledger.v1.TransactionEntryOrBuilder getEntriesOrBuilder(
@@ -1312,6 +1542,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public java.util.List<? extends com.antinvestor.apis.ledger.v1.TransactionEntryOrBuilder> 
@@ -1323,6 +1557,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public com.antinvestor.apis.ledger.v1.TransactionEntry.Builder addEntriesBuilder() {
@@ -1330,6 +1568,10 @@ private static final long serialVersionUID = 0L;
           com.antinvestor.apis.ledger.v1.TransactionEntry.getDefaultInstance());
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public com.antinvestor.apis.ledger.v1.TransactionEntry.Builder addEntriesBuilder(
@@ -1338,6 +1580,10 @@ private static final long serialVersionUID = 0L;
           index, com.antinvestor.apis.ledger.v1.TransactionEntry.getDefaultInstance());
     }
     /**
+     * <pre>
+     * Transaction entries (must be balanced)
+     * </pre>
+     *
      * <code>repeated .ledger.v1.TransactionEntry entries = 5 [json_name = "entries"];</code>
      */
     public java.util.List<com.antinvestor.apis.ledger.v1.TransactionEntry.Builder> 
@@ -1361,6 +1607,10 @@ private static final long serialVersionUID = 0L;
 
     private boolean cleared_ ;
     /**
+     * <pre>
+     * Whether transaction has been cleared/posted
+     * </pre>
+     *
      * <code>bool cleared = 6 [json_name = "cleared"];</code>
      * @return The cleared.
      */
@@ -1369,6 +1619,10 @@ private static final long serialVersionUID = 0L;
       return cleared_;
     }
     /**
+     * <pre>
+     * Whether transaction has been cleared/posted
+     * </pre>
+     *
      * <code>bool cleared = 6 [json_name = "cleared"];</code>
      * @param value The cleared to set.
      * @return This builder for chaining.
@@ -1381,6 +1635,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Whether transaction has been cleared/posted
+     * </pre>
+     *
      * <code>bool cleared = 6 [json_name = "cleared"];</code>
      * @return This builder for chaining.
      */
@@ -1393,6 +1651,10 @@ private static final long serialVersionUID = 0L;
 
     private int type_ = 0;
     /**
+     * <pre>
+     * Transaction type (normal, reversal, reservation)
+     * </pre>
+     *
      * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
      * @return The enum numeric value on the wire for type.
      */
@@ -1400,6 +1662,10 @@ private static final long serialVersionUID = 0L;
       return type_;
     }
     /**
+     * <pre>
+     * Transaction type (normal, reversal, reservation)
+     * </pre>
+     *
      * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
      * @param value The enum numeric value on the wire for type to set.
      * @return This builder for chaining.
@@ -1411,6 +1677,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction type (normal, reversal, reservation)
+     * </pre>
+     *
      * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
      * @return The type.
      */
@@ -1420,6 +1690,10 @@ private static final long serialVersionUID = 0L;
       return result == null ? com.antinvestor.apis.ledger.v1.TransactionType.UNRECOGNIZED : result;
     }
     /**
+     * <pre>
+     * Transaction type (normal, reversal, reservation)
+     * </pre>
+     *
      * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
      * @param value The type to set.
      * @return This builder for chaining.
@@ -1432,6 +1706,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction type (normal, reversal, reservation)
+     * </pre>
+     *
      * <code>.ledger.v1.TransactionType type = 7 [json_name = "type"];</code>
      * @return This builder for chaining.
      */

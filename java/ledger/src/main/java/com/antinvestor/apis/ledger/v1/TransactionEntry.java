@@ -20,6 +20,11 @@
 package com.antinvestor.apis.ledger.v1;
 
 /**
+ * <pre>
+ * TransactionEntry represents one side of a double-entry transaction.
+ * Each transaction must have at least two entries with balanced debits and credits.
+ * </pre>
+ *
  * Protobuf type {@code ledger.v1.TransactionEntry}
  */
 @com.google.protobuf.Generated
@@ -66,6 +71,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object account_ = "";
   /**
+   * <pre>
+   * Account reference for this entry
+   * </pre>
+   *
    * <code>string account = 1 [json_name = "account"];</code>
    * @return The account.
    */
@@ -83,6 +92,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Account reference for this entry
+   * </pre>
+   *
    * <code>string account = 1 [json_name = "account"];</code>
    * @return The bytes for account.
    */
@@ -105,6 +118,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object transaction_ = "";
   /**
+   * <pre>
+   * Transaction reference this entry belongs to
+   * </pre>
+   *
    * <code>string transaction = 2 [json_name = "transaction"];</code>
    * @return The transaction.
    */
@@ -122,6 +139,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Transaction reference this entry belongs to
+   * </pre>
+   *
    * <code>string transaction = 2 [json_name = "transaction"];</code>
    * @return The bytes for transaction.
    */
@@ -144,6 +165,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object transactedAt_ = "";
   /**
+   * <pre>
+   * Transaction timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
    * @return The transactedAt.
    */
@@ -161,6 +186,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Transaction timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
    * @return The bytes for transactedAt.
    */
@@ -182,6 +211,10 @@ private static final long serialVersionUID = 0L;
   public static final int AMOUNT_FIELD_NUMBER = 4;
   private com.google.type.Money amount_;
   /**
+   * <pre>
+   * Amount for this entry
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    * @return Whether the amount field is set.
    */
@@ -190,6 +223,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Amount for this entry
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    * @return The amount.
    */
@@ -198,6 +235,10 @@ private static final long serialVersionUID = 0L;
     return amount_ == null ? com.google.type.Money.getDefaultInstance() : amount_;
   }
   /**
+   * <pre>
+   * Amount for this entry
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    */
   @java.lang.Override
@@ -208,6 +249,10 @@ private static final long serialVersionUID = 0L;
   public static final int CREDIT_FIELD_NUMBER = 5;
   private boolean credit_ = false;
   /**
+   * <pre>
+   * True if credit, false if debit
+   * </pre>
+   *
    * <code>bool credit = 5 [json_name = "credit"];</code>
    * @return The credit.
    */
@@ -219,6 +264,10 @@ private static final long serialVersionUID = 0L;
   public static final int ACC_BALANCE_FIELD_NUMBER = 6;
   private com.google.type.Money accBalance_;
   /**
+   * <pre>
+   * Account balance after this entry
+   * </pre>
+   *
    * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
    * @return Whether the accBalance field is set.
    */
@@ -227,6 +276,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000002) != 0);
   }
   /**
+   * <pre>
+   * Account balance after this entry
+   * </pre>
+   *
    * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
    * @return The accBalance.
    */
@@ -235,6 +288,10 @@ private static final long serialVersionUID = 0L;
     return accBalance_ == null ? com.google.type.Money.getDefaultInstance() : accBalance_;
   }
   /**
+   * <pre>
+   * Account balance after this entry
+   * </pre>
+   *
    * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
    */
   @java.lang.Override
@@ -246,6 +303,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object clearedAt_ = "";
   /**
+   * <pre>
+   * When this entry was cleared (RFC3339)
+   * </pre>
+   *
    * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
    * @return The clearedAt.
    */
@@ -263,6 +324,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * When this entry was cleared (RFC3339)
+   * </pre>
+   *
    * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
    * @return The bytes for clearedAt.
    */
@@ -512,6 +577,11 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * TransactionEntry represents one side of a double-entry transaction.
+   * Each transaction must have at least two entries with balanced debits and credits.
+   * </pre>
+   *
    * Protobuf type {@code ledger.v1.TransactionEntry}
    */
   public static final class Builder extends
@@ -756,6 +826,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object account_ = "";
     /**
+     * <pre>
+     * Account reference for this entry
+     * </pre>
+     *
      * <code>string account = 1 [json_name = "account"];</code>
      * @return The account.
      */
@@ -772,6 +846,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Account reference for this entry
+     * </pre>
+     *
      * <code>string account = 1 [json_name = "account"];</code>
      * @return The bytes for account.
      */
@@ -789,6 +867,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Account reference for this entry
+     * </pre>
+     *
      * <code>string account = 1 [json_name = "account"];</code>
      * @param value The account to set.
      * @return This builder for chaining.
@@ -802,6 +884,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Account reference for this entry
+     * </pre>
+     *
      * <code>string account = 1 [json_name = "account"];</code>
      * @return This builder for chaining.
      */
@@ -812,6 +898,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Account reference for this entry
+     * </pre>
+     *
      * <code>string account = 1 [json_name = "account"];</code>
      * @param value The bytes for account to set.
      * @return This builder for chaining.
@@ -828,6 +918,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object transaction_ = "";
     /**
+     * <pre>
+     * Transaction reference this entry belongs to
+     * </pre>
+     *
      * <code>string transaction = 2 [json_name = "transaction"];</code>
      * @return The transaction.
      */
@@ -844,6 +938,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction reference this entry belongs to
+     * </pre>
+     *
      * <code>string transaction = 2 [json_name = "transaction"];</code>
      * @return The bytes for transaction.
      */
@@ -861,6 +959,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction reference this entry belongs to
+     * </pre>
+     *
      * <code>string transaction = 2 [json_name = "transaction"];</code>
      * @param value The transaction to set.
      * @return This builder for chaining.
@@ -874,6 +976,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction reference this entry belongs to
+     * </pre>
+     *
      * <code>string transaction = 2 [json_name = "transaction"];</code>
      * @return This builder for chaining.
      */
@@ -884,6 +990,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction reference this entry belongs to
+     * </pre>
+     *
      * <code>string transaction = 2 [json_name = "transaction"];</code>
      * @param value The bytes for transaction to set.
      * @return This builder for chaining.
@@ -900,6 +1010,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object transactedAt_ = "";
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
      * @return The transactedAt.
      */
@@ -916,6 +1030,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
      * @return The bytes for transactedAt.
      */
@@ -933,6 +1051,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
      * @param value The transactedAt to set.
      * @return This builder for chaining.
@@ -946,6 +1068,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
      * @return This builder for chaining.
      */
@@ -956,6 +1082,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction timestamp (RFC3339)
+     * </pre>
+     *
      * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
      * @param value The bytes for transactedAt to set.
      * @return This builder for chaining.
@@ -974,6 +1104,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> amountBuilder_;
     /**
+     * <pre>
+     * Amount for this entry
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      * @return Whether the amount field is set.
      */
@@ -981,6 +1115,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000008) != 0);
     }
     /**
+     * <pre>
+     * Amount for this entry
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      * @return The amount.
      */
@@ -992,6 +1130,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Amount for this entry
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public Builder setAmount(com.google.type.Money value) {
@@ -1008,6 +1150,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Amount for this entry
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public Builder setAmount(
@@ -1022,6 +1168,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Amount for this entry
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public Builder mergeAmount(com.google.type.Money value) {
@@ -1043,6 +1193,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Amount for this entry
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public Builder clearAmount() {
@@ -1056,6 +1210,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Amount for this entry
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public com.google.type.Money.Builder getAmountBuilder() {
@@ -1064,6 +1222,10 @@ private static final long serialVersionUID = 0L;
       return internalGetAmountFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Amount for this entry
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public com.google.type.MoneyOrBuilder getAmountOrBuilder() {
@@ -1075,6 +1237,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Amount for this entry
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
@@ -1093,6 +1259,10 @@ private static final long serialVersionUID = 0L;
 
     private boolean credit_ ;
     /**
+     * <pre>
+     * True if credit, false if debit
+     * </pre>
+     *
      * <code>bool credit = 5 [json_name = "credit"];</code>
      * @return The credit.
      */
@@ -1101,6 +1271,10 @@ private static final long serialVersionUID = 0L;
       return credit_;
     }
     /**
+     * <pre>
+     * True if credit, false if debit
+     * </pre>
+     *
      * <code>bool credit = 5 [json_name = "credit"];</code>
      * @param value The credit to set.
      * @return This builder for chaining.
@@ -1113,6 +1287,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * True if credit, false if debit
+     * </pre>
+     *
      * <code>bool credit = 5 [json_name = "credit"];</code>
      * @return This builder for chaining.
      */
@@ -1127,6 +1305,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> accBalanceBuilder_;
     /**
+     * <pre>
+     * Account balance after this entry
+     * </pre>
+     *
      * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
      * @return Whether the accBalance field is set.
      */
@@ -1134,6 +1316,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000020) != 0);
     }
     /**
+     * <pre>
+     * Account balance after this entry
+     * </pre>
+     *
      * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
      * @return The accBalance.
      */
@@ -1145,6 +1331,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Account balance after this entry
+     * </pre>
+     *
      * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
      */
     public Builder setAccBalance(com.google.type.Money value) {
@@ -1161,6 +1351,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Account balance after this entry
+     * </pre>
+     *
      * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
      */
     public Builder setAccBalance(
@@ -1175,6 +1369,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Account balance after this entry
+     * </pre>
+     *
      * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
      */
     public Builder mergeAccBalance(com.google.type.Money value) {
@@ -1196,6 +1394,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Account balance after this entry
+     * </pre>
+     *
      * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
      */
     public Builder clearAccBalance() {
@@ -1209,6 +1411,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Account balance after this entry
+     * </pre>
+     *
      * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
      */
     public com.google.type.Money.Builder getAccBalanceBuilder() {
@@ -1217,6 +1423,10 @@ private static final long serialVersionUID = 0L;
       return internalGetAccBalanceFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Account balance after this entry
+     * </pre>
+     *
      * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
      */
     public com.google.type.MoneyOrBuilder getAccBalanceOrBuilder() {
@@ -1228,6 +1438,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Account balance after this entry
+     * </pre>
+     *
      * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
@@ -1246,6 +1460,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object clearedAt_ = "";
     /**
+     * <pre>
+     * When this entry was cleared (RFC3339)
+     * </pre>
+     *
      * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
      * @return The clearedAt.
      */
@@ -1262,6 +1480,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * When this entry was cleared (RFC3339)
+     * </pre>
+     *
      * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
      * @return The bytes for clearedAt.
      */
@@ -1279,6 +1501,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * When this entry was cleared (RFC3339)
+     * </pre>
+     *
      * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
      * @param value The clearedAt to set.
      * @return This builder for chaining.
@@ -1292,6 +1518,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * When this entry was cleared (RFC3339)
+     * </pre>
+     *
      * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
      * @return This builder for chaining.
      */
@@ -1302,6 +1532,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * When this entry was cleared (RFC3339)
+     * </pre>
+     *
      * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
      * @param value The bytes for clearedAt to set.
      * @return This builder for chaining.

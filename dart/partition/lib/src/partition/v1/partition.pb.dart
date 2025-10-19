@@ -22,6 +22,7 @@ import '../../google/protobuf/timestamp.pb.dart' as $1;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
+/// TenantObject represents a top-level organizational unit.
 class TenantObject extends $pb.GeneratedMessage {
   factory TenantObject({
     $core.String? id,
@@ -1597,6 +1598,7 @@ class UpdatePartitionResponse extends $pb.GeneratedMessage {
   PartitionObject ensureData() => $_ensure(0);
 }
 
+/// PartitionObject represents a data partition within a tenant.
 class PartitionObject extends $pb.GeneratedMessage {
   factory PartitionObject({
     $core.String? id,
@@ -1744,7 +1746,448 @@ class PartitionObject extends $pb.GeneratedMessage {
   $1.Timestamp ensureCreatedAt() => $_ensure(7);
 }
 
-/// Partition Roles
+/// PartitionRoleObject represents a role within a partition.
+class PartitionRoleObject extends $pb.GeneratedMessage {
+  factory PartitionRoleObject({
+    $core.String? id,
+    $core.String? partitionId,
+    $core.String? name,
+    $0.Struct? properties,
+    $1.Timestamp? createdAt,
+    $2.STATE? state,
+  }) {
+    final result = create();
+    if (id != null) result.id = id;
+    if (partitionId != null) result.partitionId = partitionId;
+    if (name != null) result.name = name;
+    if (properties != null) result.properties = properties;
+    if (createdAt != null) result.createdAt = createdAt;
+    if (state != null) result.state = state;
+    return result;
+  }
+
+  PartitionRoleObject._();
+
+  factory PartitionRoleObject.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory PartitionRoleObject.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'PartitionRoleObject',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'partitionId')
+    ..aOS(3, _omitFieldNames ? '' : 'name')
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'properties',
+        subBuilder: $0.Struct.create)
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt',
+        subBuilder: $1.Timestamp.create)
+    ..aE<$2.STATE>(6, _omitFieldNames ? '' : 'state',
+        enumValues: $2.STATE.values)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PartitionRoleObject clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PartitionRoleObject copyWith(void Function(PartitionRoleObject) updates) =>
+      super.copyWith((message) => updates(message as PartitionRoleObject))
+          as PartitionRoleObject;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PartitionRoleObject create() => PartitionRoleObject._();
+  @$core.override
+  PartitionRoleObject createEmptyInstance() => create();
+  static $pb.PbList<PartitionRoleObject> createRepeated() =>
+      $pb.PbList<PartitionRoleObject>();
+  @$core.pragma('dart2js:noInline')
+  static PartitionRoleObject getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PartitionRoleObject>(create);
+  static PartitionRoleObject? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get partitionId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set partitionId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPartitionId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPartitionId() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get name => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set name($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearName() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $0.Struct get properties => $_getN(3);
+  @$pb.TagNumber(4)
+  set properties($0.Struct value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasProperties() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearProperties() => $_clearField(4);
+  @$pb.TagNumber(4)
+  $0.Struct ensureProperties() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $1.Timestamp get createdAt => $_getN(4);
+  @$pb.TagNumber(5)
+  set createdAt($1.Timestamp value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCreatedAt() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCreatedAt() => $_clearField(5);
+  @$pb.TagNumber(5)
+  $1.Timestamp ensureCreatedAt() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  $2.STATE get state => $_getN(5);
+  @$pb.TagNumber(6)
+  set state($2.STATE value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasState() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearState() => $_clearField(6);
+}
+
+/// PageObject represents a custom UI page for a partition.
+class PageObject extends $pb.GeneratedMessage {
+  factory PageObject({
+    $core.String? id,
+    $core.String? name,
+    $core.String? html,
+    $2.STATE? state,
+    $1.Timestamp? createdAt,
+    $0.Struct? properties,
+  }) {
+    final result = create();
+    if (id != null) result.id = id;
+    if (name != null) result.name = name;
+    if (html != null) result.html = html;
+    if (state != null) result.state = state;
+    if (createdAt != null) result.createdAt = createdAt;
+    if (properties != null) result.properties = properties;
+    return result;
+  }
+
+  PageObject._();
+
+  factory PageObject.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory PageObject.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'PageObject',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..aOS(3, _omitFieldNames ? '' : 'html')
+    ..aE<$2.STATE>(4, _omitFieldNames ? '' : 'state',
+        enumValues: $2.STATE.values)
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt',
+        subBuilder: $1.Timestamp.create)
+    ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'properties',
+        subBuilder: $0.Struct.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PageObject clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PageObject copyWith(void Function(PageObject) updates) =>
+      super.copyWith((message) => updates(message as PageObject)) as PageObject;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PageObject create() => PageObject._();
+  @$core.override
+  PageObject createEmptyInstance() => create();
+  static $pb.PbList<PageObject> createRepeated() => $pb.PbList<PageObject>();
+  @$core.pragma('dart2js:noInline')
+  static PageObject getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PageObject>(create);
+  static PageObject? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get html => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set html($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasHtml() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearHtml() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $2.STATE get state => $_getN(3);
+  @$pb.TagNumber(4)
+  set state($2.STATE value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasState() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearState() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $1.Timestamp get createdAt => $_getN(4);
+  @$pb.TagNumber(5)
+  set createdAt($1.Timestamp value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCreatedAt() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCreatedAt() => $_clearField(5);
+  @$pb.TagNumber(5)
+  $1.Timestamp ensureCreatedAt() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  $0.Struct get properties => $_getN(5);
+  @$pb.TagNumber(6)
+  set properties($0.Struct value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasProperties() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearProperties() => $_clearField(6);
+  @$pb.TagNumber(6)
+  $0.Struct ensureProperties() => $_ensure(5);
+}
+
+/// AccessObject represents a profile's access to a partition.
+class AccessObject extends $pb.GeneratedMessage {
+  factory AccessObject({
+    $core.String? id,
+    $core.String? profileId,
+    PartitionObject? partition,
+    $2.STATE? state,
+    $1.Timestamp? createdAt,
+  }) {
+    final result = create();
+    if (id != null) result.id = id;
+    if (profileId != null) result.profileId = profileId;
+    if (partition != null) result.partition = partition;
+    if (state != null) result.state = state;
+    if (createdAt != null) result.createdAt = createdAt;
+    return result;
+  }
+
+  AccessObject._();
+
+  factory AccessObject.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory AccessObject.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'AccessObject',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'profileId')
+    ..aOM<PartitionObject>(3, _omitFieldNames ? '' : 'partition',
+        subBuilder: PartitionObject.create)
+    ..aE<$2.STATE>(4, _omitFieldNames ? '' : 'state',
+        enumValues: $2.STATE.values)
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt',
+        subBuilder: $1.Timestamp.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AccessObject clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AccessObject copyWith(void Function(AccessObject) updates) =>
+      super.copyWith((message) => updates(message as AccessObject))
+          as AccessObject;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AccessObject create() => AccessObject._();
+  @$core.override
+  AccessObject createEmptyInstance() => create();
+  static $pb.PbList<AccessObject> createRepeated() =>
+      $pb.PbList<AccessObject>();
+  @$core.pragma('dart2js:noInline')
+  static AccessObject getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<AccessObject>(create);
+  static AccessObject? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get profileId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set profileId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasProfileId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfileId() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  PartitionObject get partition => $_getN(2);
+  @$pb.TagNumber(3)
+  set partition(PartitionObject value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPartition() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPartition() => $_clearField(3);
+  @$pb.TagNumber(3)
+  PartitionObject ensurePartition() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $2.STATE get state => $_getN(3);
+  @$pb.TagNumber(4)
+  set state($2.STATE value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasState() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearState() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $1.Timestamp get createdAt => $_getN(4);
+  @$pb.TagNumber(5)
+  set createdAt($1.Timestamp value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCreatedAt() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCreatedAt() => $_clearField(5);
+  @$pb.TagNumber(5)
+  $1.Timestamp ensureCreatedAt() => $_ensure(4);
+}
+
+/// AccessRoleObject links an access grant to a partition role.
+class AccessRoleObject extends $pb.GeneratedMessage {
+  factory AccessRoleObject({
+    $core.String? accessRoleId,
+    $core.String? accessId,
+    PartitionRoleObject? role,
+  }) {
+    final result = create();
+    if (accessRoleId != null) result.accessRoleId = accessRoleId;
+    if (accessId != null) result.accessId = accessId;
+    if (role != null) result.role = role;
+    return result;
+  }
+
+  AccessRoleObject._();
+
+  factory AccessRoleObject.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory AccessRoleObject.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'AccessRoleObject',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'accessRoleId')
+    ..aOS(2, _omitFieldNames ? '' : 'accessId')
+    ..aOM<PartitionRoleObject>(3, _omitFieldNames ? '' : 'role',
+        subBuilder: PartitionRoleObject.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AccessRoleObject clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AccessRoleObject copyWith(void Function(AccessRoleObject) updates) =>
+      super.copyWith((message) => updates(message as AccessRoleObject))
+          as AccessRoleObject;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AccessRoleObject create() => AccessRoleObject._();
+  @$core.override
+  AccessRoleObject createEmptyInstance() => create();
+  static $pb.PbList<AccessRoleObject> createRepeated() =>
+      $pb.PbList<AccessRoleObject>();
+  @$core.pragma('dart2js:noInline')
+  static AccessRoleObject getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<AccessRoleObject>(create);
+  static AccessRoleObject? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accessRoleId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accessRoleId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasAccessRoleId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccessRoleId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get accessId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set accessId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasAccessId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAccessId() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  PartitionRoleObject get role => $_getN(2);
+  @$pb.TagNumber(3)
+  set role(PartitionRoleObject value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasRole() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRole() => $_clearField(3);
+  @$pb.TagNumber(3)
+  PartitionRoleObject ensureRole() => $_ensure(2);
+}
+
 class CreatePartitionRoleRequest extends $pb.GeneratedMessage {
   factory CreatePartitionRoleRequest({
     $core.String? partitionId,
@@ -1890,129 +2333,6 @@ class CreatePartitionRoleResponse extends $pb.GeneratedMessage {
   void clearData() => $_clearField(1);
   @$pb.TagNumber(1)
   PartitionRoleObject ensureData() => $_ensure(0);
-}
-
-class PartitionRoleObject extends $pb.GeneratedMessage {
-  factory PartitionRoleObject({
-    $core.String? id,
-    $core.String? partitionId,
-    $core.String? name,
-    $0.Struct? properties,
-    $1.Timestamp? createdAt,
-    $2.STATE? state,
-  }) {
-    final result = create();
-    if (id != null) result.id = id;
-    if (partitionId != null) result.partitionId = partitionId;
-    if (name != null) result.name = name;
-    if (properties != null) result.properties = properties;
-    if (createdAt != null) result.createdAt = createdAt;
-    if (state != null) result.state = state;
-    return result;
-  }
-
-  PartitionRoleObject._();
-
-  factory PartitionRoleObject.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory PartitionRoleObject.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'PartitionRoleObject',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'),
-      createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..aOS(2, _omitFieldNames ? '' : 'partitionId')
-    ..aOS(3, _omitFieldNames ? '' : 'name')
-    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'properties',
-        subBuilder: $0.Struct.create)
-    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt',
-        subBuilder: $1.Timestamp.create)
-    ..aE<$2.STATE>(6, _omitFieldNames ? '' : 'state',
-        enumValues: $2.STATE.values)
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PartitionRoleObject clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PartitionRoleObject copyWith(void Function(PartitionRoleObject) updates) =>
-      super.copyWith((message) => updates(message as PartitionRoleObject))
-          as PartitionRoleObject;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PartitionRoleObject create() => PartitionRoleObject._();
-  @$core.override
-  PartitionRoleObject createEmptyInstance() => create();
-  static $pb.PbList<PartitionRoleObject> createRepeated() =>
-      $pb.PbList<PartitionRoleObject>();
-  @$core.pragma('dart2js:noInline')
-  static PartitionRoleObject getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PartitionRoleObject>(create);
-  static PartitionRoleObject? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set id($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get partitionId => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set partitionId($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasPartitionId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearPartitionId() => $_clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get name => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set name($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasName() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearName() => $_clearField(3);
-
-  @$pb.TagNumber(4)
-  $0.Struct get properties => $_getN(3);
-  @$pb.TagNumber(4)
-  set properties($0.Struct value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasProperties() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearProperties() => $_clearField(4);
-  @$pb.TagNumber(4)
-  $0.Struct ensureProperties() => $_ensure(3);
-
-  @$pb.TagNumber(5)
-  $1.Timestamp get createdAt => $_getN(4);
-  @$pb.TagNumber(5)
-  set createdAt($1.Timestamp value) => $_setField(5, value);
-  @$pb.TagNumber(5)
-  $core.bool hasCreatedAt() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearCreatedAt() => $_clearField(5);
-  @$pb.TagNumber(5)
-  $1.Timestamp ensureCreatedAt() => $_ensure(4);
-
-  @$pb.TagNumber(6)
-  $2.STATE get state => $_getN(5);
-  @$pb.TagNumber(6)
-  set state($2.STATE value) => $_setField(6, value);
-  @$pb.TagNumber(6)
-  $core.bool hasState() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearState() => $_clearField(6);
 }
 
 class RemovePartitionRoleRequest extends $pb.GeneratedMessage {
@@ -2239,127 +2559,6 @@ class ListPartitionRoleResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $pb.PbList<PartitionRoleObject> get role => $_getList(0);
-}
-
-class PageObject extends $pb.GeneratedMessage {
-  factory PageObject({
-    $core.String? id,
-    $core.String? name,
-    $core.String? html,
-    $2.STATE? state,
-    $1.Timestamp? createdAt,
-    $0.Struct? properties,
-  }) {
-    final result = create();
-    if (id != null) result.id = id;
-    if (name != null) result.name = name;
-    if (html != null) result.html = html;
-    if (state != null) result.state = state;
-    if (createdAt != null) result.createdAt = createdAt;
-    if (properties != null) result.properties = properties;
-    return result;
-  }
-
-  PageObject._();
-
-  factory PageObject.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory PageObject.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'PageObject',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'),
-      createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aOS(3, _omitFieldNames ? '' : 'html')
-    ..aE<$2.STATE>(4, _omitFieldNames ? '' : 'state',
-        enumValues: $2.STATE.values)
-    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt',
-        subBuilder: $1.Timestamp.create)
-    ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'properties',
-        subBuilder: $0.Struct.create)
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PageObject clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PageObject copyWith(void Function(PageObject) updates) =>
-      super.copyWith((message) => updates(message as PageObject)) as PageObject;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PageObject create() => PageObject._();
-  @$core.override
-  PageObject createEmptyInstance() => create();
-  static $pb.PbList<PageObject> createRepeated() => $pb.PbList<PageObject>();
-  @$core.pragma('dart2js:noInline')
-  static PageObject getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PageObject>(create);
-  static PageObject? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set id($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get name => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set name($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasName() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearName() => $_clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get html => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set html($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasHtml() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearHtml() => $_clearField(3);
-
-  @$pb.TagNumber(4)
-  $2.STATE get state => $_getN(3);
-  @$pb.TagNumber(4)
-  set state($2.STATE value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasState() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearState() => $_clearField(4);
-
-  @$pb.TagNumber(5)
-  $1.Timestamp get createdAt => $_getN(4);
-  @$pb.TagNumber(5)
-  set createdAt($1.Timestamp value) => $_setField(5, value);
-  @$pb.TagNumber(5)
-  $core.bool hasCreatedAt() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearCreatedAt() => $_clearField(5);
-  @$pb.TagNumber(5)
-  $1.Timestamp ensureCreatedAt() => $_ensure(4);
-
-  @$pb.TagNumber(6)
-  $0.Struct get properties => $_getN(5);
-  @$pb.TagNumber(6)
-  set properties($0.Struct value) => $_setField(6, value);
-  @$pb.TagNumber(6)
-  $core.bool hasProperties() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearProperties() => $_clearField(6);
-  @$pb.TagNumber(6)
-  $0.Struct ensureProperties() => $_ensure(5);
 }
 
 class CreatePageRequest extends $pb.GeneratedMessage {
@@ -2750,117 +2949,6 @@ class RemovePageResponse extends $pb.GeneratedMessage {
   $core.bool hasSucceeded() => $_has(0);
   @$pb.TagNumber(1)
   void clearSucceeded() => $_clearField(1);
-}
-
-class AccessObject extends $pb.GeneratedMessage {
-  factory AccessObject({
-    $core.String? id,
-    $core.String? profileId,
-    PartitionObject? partition,
-    $2.STATE? state,
-    $1.Timestamp? createdAt,
-  }) {
-    final result = create();
-    if (id != null) result.id = id;
-    if (profileId != null) result.profileId = profileId;
-    if (partition != null) result.partition = partition;
-    if (state != null) result.state = state;
-    if (createdAt != null) result.createdAt = createdAt;
-    return result;
-  }
-
-  AccessObject._();
-
-  factory AccessObject.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory AccessObject.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'AccessObject',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'),
-      createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..aOS(2, _omitFieldNames ? '' : 'profileId')
-    ..aOM<PartitionObject>(3, _omitFieldNames ? '' : 'partition',
-        subBuilder: PartitionObject.create)
-    ..aE<$2.STATE>(4, _omitFieldNames ? '' : 'state',
-        enumValues: $2.STATE.values)
-    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt',
-        subBuilder: $1.Timestamp.create)
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AccessObject clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AccessObject copyWith(void Function(AccessObject) updates) =>
-      super.copyWith((message) => updates(message as AccessObject))
-          as AccessObject;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static AccessObject create() => AccessObject._();
-  @$core.override
-  AccessObject createEmptyInstance() => create();
-  static $pb.PbList<AccessObject> createRepeated() =>
-      $pb.PbList<AccessObject>();
-  @$core.pragma('dart2js:noInline')
-  static AccessObject getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<AccessObject>(create);
-  static AccessObject? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set id($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get profileId => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set profileId($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasProfileId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearProfileId() => $_clearField(2);
-
-  @$pb.TagNumber(3)
-  PartitionObject get partition => $_getN(2);
-  @$pb.TagNumber(3)
-  set partition(PartitionObject value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasPartition() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearPartition() => $_clearField(3);
-  @$pb.TagNumber(3)
-  PartitionObject ensurePartition() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  $2.STATE get state => $_getN(3);
-  @$pb.TagNumber(4)
-  set state($2.STATE value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasState() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearState() => $_clearField(4);
-
-  @$pb.TagNumber(5)
-  $1.Timestamp get createdAt => $_getN(4);
-  @$pb.TagNumber(5)
-  set createdAt($1.Timestamp value) => $_setField(5, value);
-  @$pb.TagNumber(5)
-  $core.bool hasCreatedAt() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearCreatedAt() => $_clearField(5);
-  @$pb.TagNumber(5)
-  $1.Timestamp ensureCreatedAt() => $_ensure(4);
 }
 
 enum CreateAccessRequest_Partition { partitionId, clientId, notSet }
@@ -3299,7 +3387,6 @@ class RemoveAccessResponse extends $pb.GeneratedMessage {
   void clearSucceeded() => $_clearField(1);
 }
 
-/// Access Roles
 class CreateAccessRoleRequest extends $pb.GeneratedMessage {
   factory CreateAccessRoleRequest({
     $core.String? accessId,
@@ -3427,89 +3514,6 @@ class CreateAccessRoleResponse extends $pb.GeneratedMessage {
   void clearData() => $_clearField(1);
   @$pb.TagNumber(1)
   AccessRoleObject ensureData() => $_ensure(0);
-}
-
-class AccessRoleObject extends $pb.GeneratedMessage {
-  factory AccessRoleObject({
-    $core.String? accessRoleId,
-    $core.String? accessId,
-    PartitionRoleObject? role,
-  }) {
-    final result = create();
-    if (accessRoleId != null) result.accessRoleId = accessRoleId;
-    if (accessId != null) result.accessId = accessId;
-    if (role != null) result.role = role;
-    return result;
-  }
-
-  AccessRoleObject._();
-
-  factory AccessRoleObject.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory AccessRoleObject.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'AccessRoleObject',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'partition.v1'),
-      createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'accessRoleId')
-    ..aOS(2, _omitFieldNames ? '' : 'accessId')
-    ..aOM<PartitionRoleObject>(3, _omitFieldNames ? '' : 'role',
-        subBuilder: PartitionRoleObject.create)
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AccessRoleObject clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AccessRoleObject copyWith(void Function(AccessRoleObject) updates) =>
-      super.copyWith((message) => updates(message as AccessRoleObject))
-          as AccessRoleObject;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static AccessRoleObject create() => AccessRoleObject._();
-  @$core.override
-  AccessRoleObject createEmptyInstance() => create();
-  static $pb.PbList<AccessRoleObject> createRepeated() =>
-      $pb.PbList<AccessRoleObject>();
-  @$core.pragma('dart2js:noInline')
-  static AccessRoleObject getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<AccessRoleObject>(create);
-  static AccessRoleObject? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get accessRoleId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set accessRoleId($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasAccessRoleId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearAccessRoleId() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get accessId => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set accessId($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasAccessId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearAccessId() => $_clearField(2);
-
-  @$pb.TagNumber(3)
-  PartitionRoleObject get role => $_getN(2);
-  @$pb.TagNumber(3)
-  set role(PartitionRoleObject value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasRole() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearRole() => $_clearField(3);
-  @$pb.TagNumber(3)
-  PartitionRoleObject ensureRole() => $_ensure(2);
 }
 
 class RemoveAccessRoleRequest extends $pb.GeneratedMessage {
@@ -3735,132 +3739,134 @@ class ListAccessRoleResponse extends $pb.GeneratedMessage {
   $pb.PbList<AccessRoleObject> get role => $_getList(0);
 }
 
+/// PartitionService provides multi-tenancy and data isolation.
+/// All RPCs require authentication via Bearer token.
 class PartitionServiceApi {
   final $pb.RpcClient _client;
 
   PartitionServiceApi(this._client);
 
-  /// Get a tenant in the system matching the id
+  /// GetTenant retrieves a tenant by ID.
   $async.Future<GetTenantResponse> getTenant(
           $pb.ClientContext? ctx, GetTenantRequest request) =>
       _client.invoke<GetTenantResponse>(
           ctx, 'PartitionService', 'GetTenant', request, GetTenantResponse());
 
-  /// List all tenants in the system matching the query in some way
+  /// ListTenant retrieves all tenants matching criteria.
   $async.Future<ListTenantResponse> listTenant(
           $pb.ClientContext? ctx, ListTenantRequest request) =>
       _client.invoke<ListTenantResponse>(
           ctx, 'PartitionService', 'ListTenant', request, ListTenantResponse());
 
-  /// Log a new tenant request
+  /// CreateTenant creates a new tenant.
   $async.Future<CreateTenantResponse> createTenant(
           $pb.ClientContext? ctx, CreateTenantRequest request) =>
       _client.invoke<CreateTenantResponse>(ctx, 'PartitionService',
           'CreateTenant', request, CreateTenantResponse());
 
-  /// Update an existing tenant object
+  /// UpdateTenant updates an existing tenant.
   $async.Future<UpdateTenantResponse> updateTenant(
           $pb.ClientContext? ctx, UpdateTenantRequest request) =>
       _client.invoke<UpdateTenantResponse>(ctx, 'PartitionService',
           'UpdateTenant', request, UpdateTenantResponse());
 
-  /// List all partitions in the system matching the query in some way
+  /// ListPartition retrieves all partitions matching criteria.
   $async.Future<ListPartitionResponse> listPartition(
           $pb.ClientContext? ctx, ListPartitionRequest request) =>
       _client.invoke<ListPartitionResponse>(ctx, 'PartitionService',
           'ListPartition', request, ListPartitionResponse());
 
-  /// Log a new partition request
+  /// CreatePartition creates a new partition.
   $async.Future<CreatePartitionResponse> createPartition(
           $pb.ClientContext? ctx, CreatePartitionRequest request) =>
       _client.invoke<CreatePartitionResponse>(ctx, 'PartitionService',
           'CreatePartition', request, CreatePartitionResponse());
 
-  /// Get an existing partition object
+  /// GetPartition retrieves a partition by ID.
   $async.Future<GetPartitionResponse> getPartition(
           $pb.ClientContext? ctx, GetPartitionRequest request) =>
       _client.invoke<GetPartitionResponse>(ctx, 'PartitionService',
           'GetPartition', request, GetPartitionResponse());
 
-  /// Get a partition parents object
+  /// GetPartitionParents retrieves the parent hierarchy.
   $async.Future<GetPartitionParentsResponse> getPartitionParents(
           $pb.ClientContext? ctx, GetPartitionParentsRequest request) =>
       _client.invoke<GetPartitionParentsResponse>(ctx, 'PartitionService',
           'GetPartitionParents', request, GetPartitionParentsResponse());
 
-  /// Update an existing partition object
+  /// UpdatePartition updates an existing partition.
   $async.Future<UpdatePartitionResponse> updatePartition(
           $pb.ClientContext? ctx, UpdatePartitionRequest request) =>
       _client.invoke<UpdatePartitionResponse>(ctx, 'PartitionService',
           'UpdatePartition', request, UpdatePartitionResponse());
 
-  /// Create a partition Role for a particular partition
+  /// CreatePartitionRole creates a role within a partition.
   $async.Future<CreatePartitionRoleResponse> createPartitionRole(
           $pb.ClientContext? ctx, CreatePartitionRoleRequest request) =>
       _client.invoke<CreatePartitionRoleResponse>(ctx, 'PartitionService',
           'CreatePartitionRole', request, CreatePartitionRoleResponse());
 
-  /// List partition roles available for this particular partition
+  /// ListPartitionRole retrieves all roles for a partition.
   $async.Future<ListPartitionRoleResponse> listPartitionRole(
           $pb.ClientContext? ctx, ListPartitionRoleRequest request) =>
       _client.invoke<ListPartitionRoleResponse>(ctx, 'PartitionService',
           'ListPartitionRole', request, ListPartitionRoleResponse());
 
-  /// Remove a partition role that is not required
+  /// RemovePartitionRole deletes a partition role.
   $async.Future<RemovePartitionRoleResponse> removePartitionRole(
           $pb.ClientContext? ctx, RemovePartitionRoleRequest request) =>
       _client.invoke<RemovePartitionRoleResponse>(ctx, 'PartitionService',
           'RemovePartitionRole', request, RemovePartitionRoleResponse());
 
-  /// Creates a new page for access or customization of how a partition looks like
+  /// CreatePage creates a custom UI page for a partition.
   $async.Future<CreatePageResponse> createPage(
           $pb.ClientContext? ctx, CreatePageRequest request) =>
       _client.invoke<CreatePageResponse>(
           ctx, 'PartitionService', 'CreatePage', request, CreatePageResponse());
 
-  /// Obtains a new page specific to a partition
+  /// GetPage retrieves a custom page.
   $async.Future<GetPageResponse> getPage(
           $pb.ClientContext? ctx, GetPageRequest request) =>
       _client.invoke<GetPageResponse>(
           ctx, 'PartitionService', 'GetPage', request, GetPageResponse());
 
-  /// Removes a page from being accessible for a partition
+  /// RemovePage deletes a custom page.
   $async.Future<RemovePageResponse> removePage(
           $pb.ClientContext? ctx, RemovePageRequest request) =>
       _client.invoke<RemovePageResponse>(
           ctx, 'PartitionService', 'RemovePage', request, RemovePageResponse());
 
-  /// Creates a users ability to access a partition
+  /// CreateAccess grants a profile access to a partition.
   $async.Future<CreateAccessResponse> createAccess(
           $pb.ClientContext? ctx, CreateAccessRequest request) =>
       _client.invoke<CreateAccessResponse>(ctx, 'PartitionService',
           'CreateAccess', request, CreateAccessResponse());
 
-  /// Obtains a users access to a partition by access id or partition and profile id
+  /// GetAccess retrieves an access grant.
   $async.Future<GetAccessResponse> getAccess(
           $pb.ClientContext? ctx, GetAccessRequest request) =>
       _client.invoke<GetAccessResponse>(
           ctx, 'PartitionService', 'GetAccess', request, GetAccessResponse());
 
-  /// Removes a user's ability to access a partition
+  /// RemoveAccess revokes a profile's access to a partition.
   $async.Future<RemoveAccessResponse> removeAccess(
           $pb.ClientContext? ctx, RemoveAccessRequest request) =>
       _client.invoke<RemoveAccessResponse>(ctx, 'PartitionService',
           'RemoveAccess', request, RemoveAccessResponse());
 
-  /// Create an access Role for a particular access
+  /// CreateAccessRole assigns a role to an access grant.
   $async.Future<CreateAccessRoleResponse> createAccessRole(
           $pb.ClientContext? ctx, CreateAccessRoleRequest request) =>
       _client.invoke<CreateAccessRoleResponse>(ctx, 'PartitionService',
           'CreateAccessRole', request, CreateAccessRoleResponse());
 
-  /// List access roles available for this particular access
+  /// ListAccessRole retrieves all roles for an access grant.
   $async.Future<ListAccessRoleResponse> listAccessRole(
           $pb.ClientContext? ctx, ListAccessRoleRequest request) =>
       _client.invoke<ListAccessRoleResponse>(ctx, 'PartitionService',
           'ListAccessRole', request, ListAccessRoleResponse());
 
-  /// Remove an access role that is not required
+  /// RemoveAccessRole removes a role from an access grant.
   $async.Future<RemoveAccessRoleResponse> removeAccessRole(
           $pb.ClientContext? ctx, RemoveAccessRoleRequest request) =>
       _client.invoke<RemoveAccessRoleResponse>(ctx, 'PartitionService',

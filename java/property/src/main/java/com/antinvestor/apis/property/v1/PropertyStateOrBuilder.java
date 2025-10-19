@@ -25,11 +25,19 @@ public interface PropertyStateOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique state record ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Unique state record ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface PropertyStateOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Associated property ID
+   * </pre>
+   *
    * <code>string propertyid = 2 [json_name = "propertyid", (.buf.validate.field) = { ... }</code>
    * @return The propertyid.
    */
   java.lang.String getPropertyid();
   /**
+   * <pre>
+   * Associated property ID
+   * </pre>
+   *
    * <code>string propertyid = 2 [json_name = "propertyid", (.buf.validate.field) = { ... }</code>
    * @return The bytes for propertyid.
    */
@@ -49,33 +65,57 @@ public interface PropertyStateOrBuilder extends
       getPropertyidBytes();
 
   /**
+   * <pre>
+   * Property state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 3 [json_name = "state"];</code>
    * @return The enum numeric value on the wire for state.
    */
   int getStateValue();
   /**
+   * <pre>
+   * Property state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 3 [json_name = "state"];</code>
    * @return The state.
    */
   com.antinvestor.apis.common.v1.STATE getState();
 
   /**
+   * <pre>
+   * Property status
+   * </pre>
+   *
    * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
    * @return The enum numeric value on the wire for status.
    */
   int getStatusValue();
   /**
+   * <pre>
+   * Property status
+   * </pre>
+   *
    * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
    * @return The status.
    */
   com.antinvestor.apis.common.v1.STATUS getStatus();
 
   /**
+   * <pre>
+   * State name/label
+   * </pre>
+   *
    * <code>string name = 5 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The name.
    */
   java.lang.String getName();
   /**
+   * <pre>
+   * State name/label
+   * </pre>
+   *
    * <code>string name = 5 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The bytes for name.
    */
@@ -83,11 +123,19 @@ public interface PropertyStateOrBuilder extends
       getNameBytes();
 
   /**
+   * <pre>
+   * State description
+   * </pre>
+   *
    * <code>string description = 6 [json_name = "description", (.buf.validate.field) = { ... }</code>
    * @return The description.
    */
   java.lang.String getDescription();
   /**
+   * <pre>
+   * State description
+   * </pre>
+   *
    * <code>string description = 6 [json_name = "description", (.buf.validate.field) = { ... }</code>
    * @return The bytes for description.
    */
@@ -95,31 +143,55 @@ public interface PropertyStateOrBuilder extends
       getDescriptionBytes();
 
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
    * @return Whether the extras field is set.
    */
   boolean hasExtras();
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
    * @return The extras.
    */
   com.google.protobuf.Struct getExtras();
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
    */
   com.google.protobuf.StructOrBuilder getExtrasOrBuilder();
 
   /**
+   * <pre>
+   * State timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 8 [json_name = "createdAt"];</code>
    * @return Whether the createdAt field is set.
    */
   boolean hasCreatedAt();
   /**
+   * <pre>
+   * State timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 8 [json_name = "createdAt"];</code>
    * @return The createdAt.
    */
   com.google.protobuf.Timestamp getCreatedAt();
   /**
+   * <pre>
+   * State timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 8 [json_name = "createdAt"];</code>
    */
   com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();

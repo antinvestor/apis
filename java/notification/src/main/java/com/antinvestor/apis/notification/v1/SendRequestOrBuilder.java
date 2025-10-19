@@ -25,24 +25,44 @@ public interface SendRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Notifications to queue
+   * </pre>
+   *
    * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
    */
   java.util.List<com.antinvestor.apis.notification.v1.Notification> 
       getDataList();
   /**
+   * <pre>
+   * Notifications to queue
+   * </pre>
+   *
    * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.notification.v1.Notification getData(int index);
   /**
+   * <pre>
+   * Notifications to queue
+   * </pre>
+   *
    * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
    */
   int getDataCount();
   /**
+   * <pre>
+   * Notifications to queue
+   * </pre>
+   *
    * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.notification.v1.NotificationOrBuilder> 
       getDataOrBuilderList();
   /**
+   * <pre>
+   * Notifications to queue
+   * </pre>
+   *
    * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.notification.v1.NotificationOrBuilder getDataOrBuilder(

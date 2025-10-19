@@ -25,26 +25,46 @@ public interface SetRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Setting key to set
+   * </pre>
+   *
    * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
    * @return Whether the key field is set.
    */
   boolean hasKey();
   /**
+   * <pre>
+   * Setting key to set
+   * </pre>
+   *
    * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
    * @return The key.
    */
   com.antinvestor.apis.settings.v1.Setting getKey();
   /**
+   * <pre>
+   * Setting key to set
+   * </pre>
+   *
    * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
    */
   com.antinvestor.apis.settings.v1.SettingOrBuilder getKeyOrBuilder();
 
   /**
+   * <pre>
+   * New value for the setting
+   * </pre>
+   *
    * <code>string value = 2 [json_name = "value"];</code>
    * @return The value.
    */
   java.lang.String getValue();
   /**
+   * <pre>
+   * New value for the setting
+   * </pre>
+   *
    * <code>string value = 2 [json_name = "value"];</code>
    * @return The bytes for value.
    */

@@ -21,7 +21,7 @@ package com.antinvestor.apis.profile.v1;
 
 /**
  * <pre>
- * RelationshipType enum represents the way two profiles are linked.
+ * RelationshipType defines how two profiles are linked.
  * buf:lint:ignore ENUM_VALUE_PREFIX
  * </pre>
  *
@@ -39,10 +39,18 @@ public enum RelationshipType
    */
   MEMBER(0),
   /**
+   * <pre>
+   * Affiliated or associated with
+   * </pre>
+   *
    * <code>AFFILIATED = 1;</code>
    */
   AFFILIATED(1),
   /**
+   * <pre>
+   * Blocked or blacklisted
+   * </pre>
+   *
    * <code>BLACK_LISTED = 2;</code>
    */
   BLACK_LISTED(2),
@@ -67,10 +75,18 @@ public enum RelationshipType
    */
   public static final int MEMBER_VALUE = 0;
   /**
+   * <pre>
+   * Affiliated or associated with
+   * </pre>
+   *
    * <code>AFFILIATED = 1;</code>
    */
   public static final int AFFILIATED_VALUE = 1;
   /**
+   * <pre>
+   * Blocked or blacklisted
+   * </pre>
+   *
    * <code>BLACK_LISTED = 2;</code>
    */
   public static final int BLACK_LISTED_VALUE = 2;

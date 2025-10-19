@@ -21,6 +21,8 @@ package com.antinvestor.apis.common.v1;
 
 /**
  * <pre>
+ * STATUS represents the processing status of an operation or task.
+ * This enum is used for tracking asynchronous operations, jobs, and workflows.
  * buf:lint:ignore ENUM_VALUE_PREFIX
  * </pre>
  *
@@ -38,18 +40,34 @@ public enum STATUS
    */
   UNKNOWN(0),
   /**
+   * <pre>
+   * Operation is queued and waiting to be processed
+   * </pre>
+   *
    * <code>QUEUED = 1;</code>
    */
   QUEUED(1),
   /**
+   * <pre>
+   * Operation is currently being processed
+   * </pre>
+   *
    * <code>IN_PROCESS = 2;</code>
    */
   IN_PROCESS(2),
   /**
+   * <pre>
+   * Operation has failed and will not complete successfully
+   * </pre>
+   *
    * <code>FAILED = 3;</code>
    */
   FAILED(3),
   /**
+   * <pre>
+   * Operation has completed successfully
+   * </pre>
+   *
    * <code>SUCCESSFUL = 4;</code>
    */
   SUCCESSFUL(4),
@@ -74,18 +92,34 @@ public enum STATUS
    */
   public static final int UNKNOWN_VALUE = 0;
   /**
+   * <pre>
+   * Operation is queued and waiting to be processed
+   * </pre>
+   *
    * <code>QUEUED = 1;</code>
    */
   public static final int QUEUED_VALUE = 1;
   /**
+   * <pre>
+   * Operation is currently being processed
+   * </pre>
+   *
    * <code>IN_PROCESS = 2;</code>
    */
   public static final int IN_PROCESS_VALUE = 2;
   /**
+   * <pre>
+   * Operation has failed and will not complete successfully
+   * </pre>
+   *
    * <code>FAILED = 3;</code>
    */
   public static final int FAILED_VALUE = 3;
   /**
+   * <pre>
+   * Operation has completed successfully
+   * </pre>
+   *
    * <code>SUCCESSFUL = 4;</code>
    */
   public static final int SUCCESSFUL_VALUE = 4;

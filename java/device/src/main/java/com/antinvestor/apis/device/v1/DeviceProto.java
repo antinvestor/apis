@@ -190,9 +190,8 @@ public final class DeviceProto extends com.google.protobuf.GeneratedFile {
   static {
     java.lang.String[] descriptorData = {
       "\n\026device/v1/device.proto\022\tdevice.v1\032\033buf" +
-      "/validate/validate.proto\032\034google/api/ann" +
-      "otations.proto\032\034google/protobuf/struct.p" +
-      "roto\032.protoc-gen-openapiv2/options/annot" +
+      "/validate/validate.proto\032\034google/protobu" +
+      "f/struct.proto\032$gnostic/openapi/v3/annot" +
       "ations.proto\"\264\001\n\006Locale\022\032\n\010language\030\001 \003(" +
       "\tR\010language\022\032\n\010timezone\030\005 \001(\tR\010timezone\022" +
       "\035\n\nutc_offset\030\006 \001(\tR\tutcOffset\022\032\n\010curren" +
@@ -285,51 +284,114 @@ public final class DeviceProto extends com.google.protobuf.GeneratedFile {
       "\030\005 \001(\005R\005count\"=\n\021SearchKeyResponse\022(\n\004da" +
       "ta\030\001 \003(\0132\024.device.v1.KeyObjectR\004data*/\n\007" +
       "KeyType\022\016\n\nMATRIX_KEY\020\000\022\024\n\020NOTIFICATION_" +
-      "KEY\020\0012\200\010\n\rDeviceService\022O\n\007GetById\022\031.dev" +
-      "ice.v1.GetByIdRequest\032\032.device.v1.GetByI" +
-      "dResponse\"\r\202\323\344\223\002\007\022\005/{id}\022l\n\016GetBySession" +
-      "Id\022 .device.v1.GetBySessionIdRequest\032!.d" +
-      "evice.v1.GetBySessionIdResponse\"\025\202\323\344\223\002\017\022" +
-      "\r/session/{id}\022P\n\006Search\022\030.device.v1.Sea" +
-      "rchRequest\032\031.device.v1.SearchResponse\"\017\202" +
-      "\323\344\223\002\t\022\007/search0\001\022K\n\006Create\022\030.device.v1.C" +
-      "reateRequest\032\031.device.v1.CreateResponse\"" +
-      "\014\202\323\344\223\002\006\"\001/:\001*\022O\n\006Update\022\030.device.v1.Upda" +
-      "teRequest\032\031.device.v1.UpdateResponse\"\020\202\323" +
-      "\344\223\002\n2\005/{id}:\001*\022N\n\004Link\022\026.device.v1.LinkR" +
-      "equest\032\027.device.v1.LinkResponse\"\025\202\323\344\223\002\0172" +
-      "\n/link/{id}:\001*\022L\n\006Remove\022\030.device.v1.Rem" +
-      "oveRequest\032\031.device.v1.RemoveResponse\"\r\202" +
-      "\323\344\223\002\007*\005/{id}\022F\n\003Log\022\025.device.v1.LogReque" +
-      "st\032\026.device.v1.LogResponse\"\020\202\323\344\223\002\n\"\005/log" +
-      "s:\001*\022T\n\010ListLogs\022\032.device.v1.ListLogsReq" +
-      "uest\032\033.device.v1.ListLogsResponse\"\r\202\323\344\223\002" +
-      "\007\022\005/logs0\001\022O\n\006AddKey\022\030.device.v1.AddKeyR" +
-      "equest\032\031.device.v1.AddKeyResponse\"\020\202\323\344\223\002" +
-      "\n\"\005/keys:\001*\022Z\n\tRemoveKey\022\033.device.v1.Rem" +
-      "oveKeyRequest\032\034.device.v1.RemoveKeyRespo" +
-      "nse\"\022\202\323\344\223\002\014*\n/keys/{id}\022W\n\tSearchKey\022\033.d" +
-      "evice.v1.SearchKeyRequest\032\034.device.v1.Se" +
-      "archKeyResponse\"\r\202\323\344\223\002\007\022\005/keys0\001B\261\003\n\036com" +
-      ".antinvestor.apis.device.v1B\013DeviceProto" +
-      "P\001Z8github.com/antinvestor/apis/go/devic" +
-      "e/device/v1;devicev1\242\002\003DXX\252\002\tDevice.V1\312\002" +
-      "\tDevice\\V1\342\002\025Device\\V1\\GPBMetadata\352\002\nDev" +
-      "ice::V1\222A\201\002\022n\n\016Device Service\"W\n\020Ant Inv" +
-      "estor Ltd\022-https://github.com/antinvesto" +
-      "r/service-device\032\024info@antinvestor.com2\003" +
-      "1.0*\002\001\0022\020application/json:\020application/j" +
-      "sonZY\nW\n\006bearer\022M\010\002\0228Authentication toke" +
-      "n, prefixed by Bearer: Bearer <token>\032\rA" +
-      "uthorization \002b\014\n\n\n\006bearer\022\000b\006proto3"
+      "KEY\020\0012\253\030\n\rDeviceService\022\206\002\n\007GetById\022\031.de" +
+      "vice.v1.GetByIdRequest\032\032.device.v1.GetBy" +
+      "IdResponse\"\303\001\272G\277\001\n\007Devices\022\021Get devices " +
+      "by ID\032\221\001Retrieves one or more devices by" +
+      " their unique identifiers. Supports batc" +
+      "h retrieval and optional extensive detai" +
+      "ls including logs and key counts.*\rgetDe" +
+      "viceById\022\203\002\n\016GetBySessionId\022 .device.v1." +
+      "GetBySessionIdRequest\032!.device.v1.GetByS" +
+      "essionIdResponse\"\253\001\272G\247\001\n\007Devices\022\030Get de" +
+      "vice by session ID\032lRetrieves a device b" +
+      "y its active session identifier. Used to" +
+      " resolve device information from session" +
+      " tokens.*\024getDeviceBySessionId\022\205\002\n\006Searc" +
+      "h\022\030.device.v1.SearchRequest\032\031.device.v1." +
+      "SearchResponse\"\303\001\272G\277\001\n\007Devices\022\016Search d" +
+      "evices\032\224\001Searches for devices matching s" +
+      "pecified criteria including device name," +
+      " OS, date range, and custom properties. " +
+      "Returns a stream of matching devices.*\rs" +
+      "earchDevices0\001\022\365\001\n\006Create\022\030.device.v1.Cr" +
+      "eateRequest\032\031.device.v1.CreateResponse\"\265" +
+      "\001\272G\261\001\n\007Devices\022\025Register a new device\032\200\001" +
+      "Registers a new device in the system. Th" +
+      "e device must be linked to a profile bef" +
+      "ore it can be used for authenticated ope" +
+      "rations.*\014createDevice\022\355\001\n\006Update\022\030.devi" +
+      "ce.v1.UpdateRequest\032\031.device.v1.UpdateRe" +
+      "sponse\"\255\001\272G\251\001\n\007Devices\022\031Update device in" +
+      "formation\032uUpdates an existing device\'s " +
+      "name and properties. Only the device own" +
+      "er or administrators can perform this op" +
+      "eration.*\014updateDevice\022\345\001\n\004Link\022\026.device" +
+      ".v1.LinkRequest\032\027.device.v1.LinkResponse" +
+      "\"\253\001\272G\247\001\n\007Devices\022\026Link device to profile" +
+      "\032xLinks a device to a user profile. This" +
+      " operation is required before the device" +
+      " can be used for authenticated operation" +
+      "s.*\nlinkDevice\022\214\002\n\006Remove\022\030.device.v1.Re" +
+      "moveRequest\032\031.device.v1.RemoveResponse\"\314" +
+      "\001\272G\310\001\n\007Devices\022\017Remove a device\032\235\001Remove" +
+      "s a device from the system. This operati" +
+      "on is typically used when a user logs ou" +
+      "t or removes a device from their account" +
+      ". This action cannot be undone.*\014removeD" +
+      "evice\022\202\002\n\003Log\022\025.device.v1.LogRequest\032\026.d" +
+      "evice.v1.LogResponse\"\313\001\272G\307\001\n\013Device Logs" +
+      "\022\023Log device activity\032\217\001Creates a new ac" +
+      "tivity log entry for a device. Used for " +
+      "tracking device sessions, locations, and" +
+      " activity for security auditing and comp" +
+      "liance.*\021logDeviceActivity\022\203\002\n\010ListLogs\022" +
+      "\032.device.v1.ListLogsRequest\032\033.device.v1." +
+      "ListLogsResponse\"\273\001\272G\267\001\n\013Device Logs\022\031Li" +
+      "st device activity logs\032}Retrieves activ" +
+      "ity logs for a device. Useful for securi" +
+      "ty auditing, tracking device usage patte" +
+      "rns, and compliance reporting.*\016listDevi" +
+      "ceLogs0\001\022\217\002\n\006AddKey\022\030.device.v1.AddKeyRe" +
+      "quest\032\031.device.v1.AddKeyResponse\"\317\001\272G\313\001\n" +
+      "\013Device Keys\022\022Add encryption key\032\231\001Adds " +
+      "an encryption key to a device. Keys are " +
+      "used for secure communications including" +
+      " Matrix end-to-end encryption and secure" +
+      " push notification delivery.*\014addDeviceK" +
+      "ey\022\370\001\n\tRemoveKey\022\033.device.v1.RemoveKeyRe" +
+      "quest\032\034.device.v1.RemoveKeyResponse\"\257\001\272G" +
+      "\253\001\n\013Device Keys\022\026Remove encryption keys\032" +
+      "sRemoves one or more encryption keys fro" +
+      "m a device. Used for key rotation or whe" +
+      "n removing a device from the system.*\017re" +
+      "moveDeviceKey\022\213\002\n\tSearchKey\022\033.device.v1." +
+      "SearchKeyRequest\032\034.device.v1.SearchKeyRe" +
+      "sponse\"\300\001\272G\274\001\n\013Device Keys\022\035Search devic" +
+      "e encryption keys\032|Searches for encrypti" +
+      "on keys associated with a device. Suppor" +
+      "ts filtering by key type (Matrix, Notifi" +
+      "cation) and pagination.*\020searchDeviceKey" +
+      "s0\001B\207\007\n\036com.antinvestor.apis.device.v1B\013" +
+      "DeviceProtoP\001Z1github.com/antinvestor/ap" +
+      "is/go/device/v1;devicev1\242\002\003DXX\252\002\tDevice." +
+      "V1\312\002\tDevice\\V1\342\002\025Device\\V1\\GPBMetadata\352\002" +
+      "\nDevice::V1\272G\336\005\022\262\005\n\016Device Service\022\363\003The" +
+      " Device Service provides comprehensive d" +
+      "evice management capabilities including " +
+      "device registration, session tracking, k" +
+      "ey management, and security auditing. It" +
+      " enables applications to register and tr" +
+      "ack user devices across platforms (mobil" +
+      "e, web, desktop), manage encryption keys" +
+      " for secure communications, and maintain" +
+      " detailed logs of device activity for se" +
+      "curity and compliance purposes. The serv" +
+      "ice supports multi-device scenarios wher" +
+      "e users can have multiple active devices" +
+      " simultaneously.\"W\n\020Ant Investor Ltd\022-ht" +
+      "tps://github.com/antinvestor/service-dev" +
+      "ice\032\024info@antinvestor.com*I\n\016Apache Lice" +
+      "nse\0227https://github.com/antinvestor/apis" +
+      "/blob/master/LICENSE2\006v1.0.0*\':%\n#\n\nBear" +
+      "erAuth\022\025\n\023\n\004http*\006bearer2\003JWTb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           build.buf.validate.ValidateProto.getDescriptor(),
-          com.google.api.AnnotationsProto.getDescriptor(),
           com.google.protobuf.StructProto.getDescriptor(),
-          grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor(),
+          org.openapi_v3.AnnotationsProto.getDescriptor(),
         });
     internal_static_device_v1_Locale_descriptor =
       getDescriptor().getMessageType(0);
@@ -501,14 +563,13 @@ public final class DeviceProto extends com.google.protobuf.GeneratedFile {
         new java.lang.String[] { "Data", });
     descriptor.resolveAllFeaturesImmutable();
     build.buf.validate.ValidateProto.getDescriptor();
-    com.google.api.AnnotationsProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();
-    grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor();
+    org.openapi_v3.AnnotationsProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(build.buf.validate.ValidateProto.field);
-    registry.add(com.google.api.AnnotationsProto.http);
-    registry.add(grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.openapiv2Swagger);
+    registry.add(org.openapi_v3.AnnotationsProto.document);
+    registry.add(org.openapi_v3.AnnotationsProto.operation);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
   }

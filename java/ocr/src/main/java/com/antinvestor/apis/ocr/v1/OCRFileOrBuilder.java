@@ -25,11 +25,19 @@ public interface OCRFileOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique identifier of the processed file
+   * </pre>
+   *
    * <code>string file_id = 1 [json_name = "fileId"];</code>
    * @return The fileId.
    */
   java.lang.String getFileId();
   /**
+   * <pre>
+   * Unique identifier of the processed file
+   * </pre>
+   *
    * <code>string file_id = 1 [json_name = "fileId"];</code>
    * @return The bytes for fileId.
    */
@@ -37,11 +45,19 @@ public interface OCRFileOrBuilder extends
       getFileIdBytes();
 
   /**
+   * <pre>
+   * Detected or specified language code (ISO 639-1)
+   * </pre>
+   *
    * <code>string language = 2 [json_name = "language"];</code>
    * @return The language.
    */
   java.lang.String getLanguage();
   /**
+   * <pre>
+   * Detected or specified language code (ISO 639-1)
+   * </pre>
+   *
    * <code>string language = 2 [json_name = "language"];</code>
    * @return The bytes for language.
    */
@@ -49,22 +65,38 @@ public interface OCRFileOrBuilder extends
       getLanguageBytes();
 
   /**
+   * <pre>
+   * Processing status (QUEUED, IN_PROCESS, SUCCESSFUL, FAILED)
+   * </pre>
+   *
    * <code>.common.v1.STATUS status = 3 [json_name = "status"];</code>
    * @return The enum numeric value on the wire for status.
    */
   int getStatusValue();
   /**
+   * <pre>
+   * Processing status (QUEUED, IN_PROCESS, SUCCESSFUL, FAILED)
+   * </pre>
+   *
    * <code>.common.v1.STATUS status = 3 [json_name = "status"];</code>
    * @return The status.
    */
   com.antinvestor.apis.common.v1.STATUS getStatus();
 
   /**
+   * <pre>
+   * Extracted text content
+   * </pre>
+   *
    * <code>string text = 4 [json_name = "text"];</code>
    * @return The text.
    */
   java.lang.String getText();
   /**
+   * <pre>
+   * Extracted text content
+   * </pre>
+   *
    * <code>string text = 4 [json_name = "text"];</code>
    * @return The bytes for text.
    */
@@ -72,16 +104,28 @@ public interface OCRFileOrBuilder extends
       getTextBytes();
 
   /**
+   * <pre>
+   * Additional metadata (confidence scores, bounding boxes, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 5 [json_name = "properties"];</code>
    * @return Whether the properties field is set.
    */
   boolean hasProperties();
   /**
+   * <pre>
+   * Additional metadata (confidence scores, bounding boxes, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 5 [json_name = "properties"];</code>
    * @return The properties.
    */
   com.google.protobuf.Struct getProperties();
   /**
+   * <pre>
+   * Additional metadata (confidence scores, bounding boxes, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 5 [json_name = "properties"];</code>
    */
   com.google.protobuf.StructOrBuilder getPropertiesOrBuilder();

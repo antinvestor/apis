@@ -8,9 +8,11 @@ import "ledger.pb.dart" as ledgerv1ledger;
 import "../../common/v1/common.pb.dart" as commonv1common;
 import "ledger.connect.spec.dart" as specs;
 
-/// The ledger service definition.
+/// LedgerService provides double-entry bookkeeping and financial accounting.
+/// All RPCs require authentication via Bearer token.
 extension type LedgerServiceClient (connect.Transport _transport) {
-  /// Searches for an ledger based on details
+  /// SearchLedgers finds ledgers in the chart of accounts.
+  /// Supports filtering by type, parent, and custom properties.
   Stream<ledgerv1ledger.Ledger> searchLedgers(
     commonv1common.SearchRequest input, {
     connect.Headers? headers,
@@ -28,7 +30,8 @@ extension type LedgerServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Creates a new ledger based on supplied data
+  /// CreateLedger creates a new ledger in the chart of accounts.
+  /// Ledgers can be hierarchical with parent-child relationships.
   Future<ledgerv1ledger.Ledger> createLedger(
     ledgerv1ledger.Ledger input, {
     connect.Headers? headers,
@@ -46,7 +49,8 @@ extension type LedgerServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Updates the data component of the ledger.
+  /// UpdateLedger updates an existing ledger's metadata.
+  /// The ledger type and reference cannot be changed.
   Future<ledgerv1ledger.Ledger> updateLedger(
     ledgerv1ledger.Ledger input, {
     connect.Headers? headers,
@@ -64,7 +68,8 @@ extension type LedgerServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Searches for an account based on details
+  /// SearchAccounts finds accounts matching specified criteria.
+  /// Supports filtering by ledger, balance range, and custom properties.
   Stream<ledgerv1ledger.Account> searchAccounts(
     commonv1common.SearchRequest input, {
     connect.Headers? headers,
@@ -82,7 +87,8 @@ extension type LedgerServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Creates a new account based on supplied data
+  /// CreateAccount creates a new account within a ledger.
+  /// Each account tracks balances and transaction history.
   Future<ledgerv1ledger.Account> createAccount(
     ledgerv1ledger.Account input, {
     connect.Headers? headers,
@@ -100,7 +106,8 @@ extension type LedgerServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Updates the data component of the account.
+  /// UpdateAccount updates an existing account's metadata.
+  /// Balances are updated through transactions, not directly.
   Future<ledgerv1ledger.Account> updateAccount(
     ledgerv1ledger.Account input, {
     connect.Headers? headers,
@@ -118,7 +125,8 @@ extension type LedgerServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Searches for a transaction based on details
+  /// SearchTransactions finds transactions matching specified criteria.
+  /// Supports filtering by date range, account, currency, and status.
   Stream<ledgerv1ledger.Transaction> searchTransactions(
     commonv1common.SearchRequest input, {
     connect.Headers? headers,
@@ -136,7 +144,8 @@ extension type LedgerServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Creates a new transaction
+  /// CreateTransaction creates a new double-entry transaction.
+  /// All entries must be balanced (sum of debits = sum of credits).
   Future<ledgerv1ledger.Transaction> createTransaction(
     ledgerv1ledger.Transaction input, {
     connect.Headers? headers,
@@ -154,7 +163,8 @@ extension type LedgerServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Reverses a transaction by creating a new one with inverted entries
+  /// ReverseTransaction reverses a transaction by creating offsetting entries.
+  /// Creates a new REVERSAL transaction that negates the original.
   Future<ledgerv1ledger.Transaction> reverseTransaction(
     ledgerv1ledger.Transaction input, {
     connect.Headers? headers,
@@ -172,7 +182,8 @@ extension type LedgerServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Updates a transaction's details
+  /// UpdateTransaction updates a transaction's metadata.
+  /// Entries and amounts cannot be changed after creation.
   Future<ledgerv1ledger.Transaction> updateTransaction(
     ledgerv1ledger.Transaction input, {
     connect.Headers? headers,
@@ -190,7 +201,8 @@ extension type LedgerServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Searches for entries matching the search details
+  /// SearchTransactionEntries finds individual transaction entries.
+  /// Useful for account statement generation and reconciliation.
   Stream<ledgerv1ledger.TransactionEntry> searchTransactionEntries(
     commonv1common.SearchRequest input, {
     connect.Headers? headers,

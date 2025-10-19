@@ -22,7 +22,7 @@ managed:
     - file_option: java_package_prefix
       value: com.antinvestor.apis
     - file_option: go_package_prefix
-      value: github.com/antinvestor/apis/go/payment
+      value: github.com/antinvestor/apis/go
 plugins:
   - remote: buf.build/grpc/go
     out: ../../go/

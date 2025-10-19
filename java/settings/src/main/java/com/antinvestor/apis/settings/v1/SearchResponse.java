@@ -20,6 +20,10 @@
 package com.antinvestor.apis.settings.v1;
 
 /**
+ * <pre>
+ * SearchResponse returns settings matching search criteria.
+ * </pre>
+ *
  * Protobuf type {@code settings.v1.SearchResponse}
  */
 @com.google.protobuf.Generated
@@ -62,6 +66,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private java.util.List<com.antinvestor.apis.settings.v1.SettingObject> data_;
   /**
+   * <pre>
+   * List of matching settings
+   * </pre>
+   *
    * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -69,6 +77,10 @@ private static final long serialVersionUID = 0L;
     return data_;
   }
   /**
+   * <pre>
+   * List of matching settings
+   * </pre>
+   *
    * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -77,6 +89,10 @@ private static final long serialVersionUID = 0L;
     return data_;
   }
   /**
+   * <pre>
+   * List of matching settings
+   * </pre>
+   *
    * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -84,6 +100,10 @@ private static final long serialVersionUID = 0L;
     return data_.size();
   }
   /**
+   * <pre>
+   * List of matching settings
+   * </pre>
+   *
    * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -91,6 +111,10 @@ private static final long serialVersionUID = 0L;
     return data_.get(index);
   }
   /**
+   * <pre>
+   * List of matching settings
+   * </pre>
+   *
    * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -259,6 +283,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * SearchResponse returns settings matching search criteria.
+   * </pre>
+   *
    * Protobuf type {@code settings.v1.SearchResponse}
    */
   public static final class Builder extends
@@ -454,6 +482,10 @@ private static final long serialVersionUID = 0L;
         com.antinvestor.apis.settings.v1.SettingObject, com.antinvestor.apis.settings.v1.SettingObject.Builder, com.antinvestor.apis.settings.v1.SettingObjectOrBuilder> dataBuilder_;
 
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public java.util.List<com.antinvestor.apis.settings.v1.SettingObject> getDataList() {
@@ -464,6 +496,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public int getDataCount() {
@@ -474,6 +510,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.settings.v1.SettingObject getData(int index) {
@@ -484,6 +524,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder setData(
@@ -501,6 +545,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder setData(
@@ -515,6 +563,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder addData(com.antinvestor.apis.settings.v1.SettingObject value) {
@@ -531,6 +583,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder addData(
@@ -548,6 +604,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder addData(
@@ -562,6 +622,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder addData(
@@ -576,6 +640,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder addAllData(
@@ -591,6 +659,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder clearData() {
@@ -604,6 +676,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder removeData(int index) {
@@ -617,6 +693,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.settings.v1.SettingObject.Builder getDataBuilder(
@@ -624,6 +704,10 @@ private static final long serialVersionUID = 0L;
       return internalGetDataFieldBuilder().getBuilder(index);
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.settings.v1.SettingObjectOrBuilder getDataOrBuilder(
@@ -634,6 +718,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public java.util.List<? extends com.antinvestor.apis.settings.v1.SettingObjectOrBuilder> 
@@ -645,6 +733,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.settings.v1.SettingObject.Builder addDataBuilder() {
@@ -652,6 +744,10 @@ private static final long serialVersionUID = 0L;
           com.antinvestor.apis.settings.v1.SettingObject.getDefaultInstance());
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.settings.v1.SettingObject.Builder addDataBuilder(
@@ -660,6 +756,10 @@ private static final long serialVersionUID = 0L;
           index, com.antinvestor.apis.settings.v1.SettingObject.getDefaultInstance());
     }
     /**
+     * <pre>
+     * List of matching settings
+     * </pre>
+     *
      * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public java.util.List<com.antinvestor.apis.settings.v1.SettingObject.Builder> 

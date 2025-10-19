@@ -253,9 +253,24 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
 
 /// Descriptor for `SettingsService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
 final $typed_data.Uint8List settingsServiceDescriptor = $convert.base64Decode(
-    'Cg9TZXR0aW5nc1NlcnZpY2USQwoDR2V0Ehcuc2V0dGluZ3MudjEuR2V0UmVxdWVzdBoYLnNldH'
-    'RpbmdzLnYxLkdldFJlc3BvbnNlIgmC0+STAgMSAS8STAoETGlzdBIYLnNldHRpbmdzLnYxLkxp'
-    'c3RSZXF1ZXN0Ghkuc2V0dGluZ3MudjEuTGlzdFJlc3BvbnNlIg2C0+STAgcSBS9saXN0MAESUg'
-    'oGU2VhcmNoEhguY29tbW9uLnYxLlNlYXJjaFJlcXVlc3QaGy5zZXR0aW5ncy52MS5TZWFyY2hS'
-    'ZXNwb25zZSIPgtPkkwIJEgcvc2VhcmNoMAESSQoDU2V0Ehcuc2V0dGluZ3MudjEuU2V0UmVxdW'
-    'VzdBoYLnNldHRpbmdzLnYxLlNldFJlc3BvbnNlIg+C0+STAgk6ASoiBC9zZXQ=');
+    'Cg9TZXR0aW5nc1NlcnZpY2USogIKA0dldBIXLnNldHRpbmdzLnYxLkdldFJlcXVlc3QaGC5zZX'
+    'R0aW5ncy52MS5HZXRSZXNwb25zZSLnAbpH4wEKCFNldHRpbmdzEhNHZXQgYSBzZXR0aW5nIHZh'
+    'bHVlGrUBUmV0cmlldmVzIGEgc2luZ2xlIHNldHRpbmcgdmFsdWUgYnkgaXRzIGhpZXJhcmNoaW'
+    'NhbCBrZXkuIFRoZSBzZXJ2aWNlIHJldHVybnMgdGhlIG1vc3Qgc3BlY2lmaWMgbWF0Y2hpbmcg'
+    'c2V0dGluZyBiYXNlZCBvbiB0aGUga2V5IGhpZXJhcmNoeSAoaW5zdGFuY2UtbGV2ZWwgPiBvYm'
+    'plY3QtbGV2ZWwgPiBnbG9iYWwpLioKZ2V0U2V0dGluZxK0AgoETGlzdBIYLnNldHRpbmdzLnYx'
+    'Lkxpc3RSZXF1ZXN0Ghkuc2V0dGluZ3MudjEuTGlzdFJlc3BvbnNlIvQBukfwAQoIU2V0dGluZ3'
+    'MSHExpc3Qgc2V0dGluZ3MgYnkgcGFydGlhbCBrZXkatwFSZXRyaWV2ZXMgYWxsIHNldHRpbmdz'
+    'IG1hdGNoaW5nIGEgcGFydGlhbCBrZXkuIEVtcHR5IGZpZWxkcyBpbiB0aGUga2V5IGFjdCBhcy'
+    'B3aWxkY2FyZHMsIGFsbG93aW5nIGZsZXhpYmxlIHF1ZXJpZXMgKGUuZy4sIGFsbCBzZXR0aW5n'
+    'cyBmb3IgYW4gb2JqZWN0IHR5cGUsIGFsbCBzZXR0aW5ncyBpbiBhIGxhbmd1YWdlKS4qDGxpc3'
+    'RTZXR0aW5nczABEoQCCgZTZWFyY2gSGC5jb21tb24udjEuU2VhcmNoUmVxdWVzdBobLnNldHRp'
+    'bmdzLnYxLlNlYXJjaFJlc3BvbnNlIsABuke8AQoIU2V0dGluZ3MSD1NlYXJjaCBzZXR0aW5ncx'
+    'qOAVNlYXJjaGVzIGZvciBzZXR0aW5ncyBtYXRjaGluZyBzcGVjaWZpZWQgY3JpdGVyaWEgaW5j'
+    'bHVkaW5nIGZ1bGwtdGV4dCBzZWFyY2ggb24gbmFtZXMgYW5kIHZhbHVlcywgZGF0ZSByYW5nZS'
+    'BmaWx0ZXJpbmcsIGFuZCBjdXN0b20gcHJvcGVydGllcy4qDnNlYXJjaFNldHRpbmdzMAESjQIK'
+    'A1NldBIXLnNldHRpbmdzLnYxLlNldFJlcXVlc3QaGC5zZXR0aW5ncy52MS5TZXRSZXNwb25zZS'
+    'LSAbpHzgEKCFNldHRpbmdzEhpDcmVhdGUgb3IgdXBkYXRlIGEgc2V0dGluZxqZAUNyZWF0ZXMg'
+    'b3IgdXBkYXRlcyBhIHNldHRpbmcgdmFsdWUuIElmIHRoZSBzZXR0aW5nIGV4aXN0cywgaXQgaX'
+    'MgdXBkYXRlZCB3aXRoIHRoZSBuZXcgdmFsdWUgYW5kIHRpbWVzdGFtcC4gSWYgaXQgZG9lc24n'
+    'dCBleGlzdCwgYSBuZXcgc2V0dGluZyBpcyBjcmVhdGVkLioKc2V0U2V0dGluZw==');

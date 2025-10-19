@@ -20,6 +20,10 @@
 package com.antinvestor.apis.notification.v1;
 
 /**
+ * <pre>
+ * TemplateSearchRequest searches for notification templates.
+ * </pre>
+ *
  * Protobuf type {@code notification.v1.TemplateSearchRequest}
  */
 @com.google.protobuf.Generated
@@ -63,6 +67,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object query_ = "";
   /**
+   * <pre>
+   * Search query (template name, content, etc.)
+   * </pre>
+   *
    * <code>string query = 1 [json_name = "query"];</code>
    * @return The query.
    */
@@ -80,6 +88,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Search query (template name, content, etc.)
+   * </pre>
+   *
    * <code>string query = 1 [json_name = "query"];</code>
    * @return The bytes for query.
    */
@@ -102,6 +114,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object languageCode_ = "";
   /**
+   * <pre>
+   * Filter by language code
+   * </pre>
+   *
    * <code>string language_code = 2 [json_name = "languageCode"];</code>
    * @return The languageCode.
    */
@@ -119,6 +135,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Filter by language code
+   * </pre>
+   *
    * <code>string language_code = 2 [json_name = "languageCode"];</code>
    * @return The bytes for languageCode.
    */
@@ -140,6 +160,10 @@ private static final long serialVersionUID = 0L;
   public static final int PAGE_FIELD_NUMBER = 3;
   private long page_ = 0L;
   /**
+   * <pre>
+   * Page number for pagination
+   * </pre>
+   *
    * <code>int64 page = 3 [json_name = "page"];</code>
    * @return The page.
    */
@@ -151,6 +175,10 @@ private static final long serialVersionUID = 0L;
   public static final int COUNT_FIELD_NUMBER = 4;
   private int count_ = 0;
   /**
+   * <pre>
+   * Number of results per page
+   * </pre>
+   *
    * <code>int32 count = 4 [json_name = "count"];</code>
    * @return The count.
    */
@@ -349,6 +377,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * TemplateSearchRequest searches for notification templates.
+   * </pre>
+   *
    * Protobuf type {@code notification.v1.TemplateSearchRequest}
    */
   public static final class Builder extends
@@ -526,6 +558,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object query_ = "";
     /**
+     * <pre>
+     * Search query (template name, content, etc.)
+     * </pre>
+     *
      * <code>string query = 1 [json_name = "query"];</code>
      * @return The query.
      */
@@ -542,6 +578,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Search query (template name, content, etc.)
+     * </pre>
+     *
      * <code>string query = 1 [json_name = "query"];</code>
      * @return The bytes for query.
      */
@@ -559,6 +599,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Search query (template name, content, etc.)
+     * </pre>
+     *
      * <code>string query = 1 [json_name = "query"];</code>
      * @param value The query to set.
      * @return This builder for chaining.
@@ -572,6 +616,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Search query (template name, content, etc.)
+     * </pre>
+     *
      * <code>string query = 1 [json_name = "query"];</code>
      * @return This builder for chaining.
      */
@@ -582,6 +630,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Search query (template name, content, etc.)
+     * </pre>
+     *
      * <code>string query = 1 [json_name = "query"];</code>
      * @param value The bytes for query to set.
      * @return This builder for chaining.
@@ -598,6 +650,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object languageCode_ = "";
     /**
+     * <pre>
+     * Filter by language code
+     * </pre>
+     *
      * <code>string language_code = 2 [json_name = "languageCode"];</code>
      * @return The languageCode.
      */
@@ -614,6 +670,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Filter by language code
+     * </pre>
+     *
      * <code>string language_code = 2 [json_name = "languageCode"];</code>
      * @return The bytes for languageCode.
      */
@@ -631,6 +691,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Filter by language code
+     * </pre>
+     *
      * <code>string language_code = 2 [json_name = "languageCode"];</code>
      * @param value The languageCode to set.
      * @return This builder for chaining.
@@ -644,6 +708,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Filter by language code
+     * </pre>
+     *
      * <code>string language_code = 2 [json_name = "languageCode"];</code>
      * @return This builder for chaining.
      */
@@ -654,6 +722,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Filter by language code
+     * </pre>
+     *
      * <code>string language_code = 2 [json_name = "languageCode"];</code>
      * @param value The bytes for languageCode to set.
      * @return This builder for chaining.
@@ -670,6 +742,10 @@ private static final long serialVersionUID = 0L;
 
     private long page_ ;
     /**
+     * <pre>
+     * Page number for pagination
+     * </pre>
+     *
      * <code>int64 page = 3 [json_name = "page"];</code>
      * @return The page.
      */
@@ -678,6 +754,10 @@ private static final long serialVersionUID = 0L;
       return page_;
     }
     /**
+     * <pre>
+     * Page number for pagination
+     * </pre>
+     *
      * <code>int64 page = 3 [json_name = "page"];</code>
      * @param value The page to set.
      * @return This builder for chaining.
@@ -690,6 +770,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Page number for pagination
+     * </pre>
+     *
      * <code>int64 page = 3 [json_name = "page"];</code>
      * @return This builder for chaining.
      */
@@ -702,6 +786,10 @@ private static final long serialVersionUID = 0L;
 
     private int count_ ;
     /**
+     * <pre>
+     * Number of results per page
+     * </pre>
+     *
      * <code>int32 count = 4 [json_name = "count"];</code>
      * @return The count.
      */
@@ -710,6 +798,10 @@ private static final long serialVersionUID = 0L;
       return count_;
     }
     /**
+     * <pre>
+     * Number of results per page
+     * </pre>
+     *
      * <code>int32 count = 4 [json_name = "count"];</code>
      * @param value The count to set.
      * @return This builder for chaining.
@@ -722,6 +814,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Number of results per page
+     * </pre>
+     *
      * <code>int32 count = 4 [json_name = "count"];</code>
      * @return This builder for chaining.
      */

@@ -21,6 +21,8 @@ package com.antinvestor.apis.common.v1;
 
 /**
  * <pre>
+ * STATE represents the lifecycle state of an entity across all services.
+ * This enum provides a consistent way to track entity states from creation to deletion.
  * buf:lint:ignore ENUM_VALUE_PREFIX
  * </pre>
  *
@@ -38,18 +40,34 @@ public enum STATE
    */
   CREATED(0),
   /**
+   * <pre>
+   * Entity has been verified and is pending activation
+   * </pre>
+   *
    * <code>CHECKED = 1;</code>
    */
   CHECKED(1),
   /**
+   * <pre>
+   * Entity is active and operational
+   * </pre>
+   *
    * <code>ACTIVE = 2;</code>
    */
   ACTIVE(2),
   /**
+   * <pre>
+   * Entity is temporarily inactive but can be reactivated
+   * </pre>
+   *
    * <code>INACTIVE = 3;</code>
    */
   INACTIVE(3),
   /**
+   * <pre>
+   * Entity has been soft-deleted and should not be used
+   * </pre>
+   *
    * <code>DELETED = 4;</code>
    */
   DELETED(4),
@@ -74,18 +92,34 @@ public enum STATE
    */
   public static final int CREATED_VALUE = 0;
   /**
+   * <pre>
+   * Entity has been verified and is pending activation
+   * </pre>
+   *
    * <code>CHECKED = 1;</code>
    */
   public static final int CHECKED_VALUE = 1;
   /**
+   * <pre>
+   * Entity is active and operational
+   * </pre>
+   *
    * <code>ACTIVE = 2;</code>
    */
   public static final int ACTIVE_VALUE = 2;
   /**
+   * <pre>
+   * Entity is temporarily inactive but can be reactivated
+   * </pre>
+   *
    * <code>INACTIVE = 3;</code>
    */
   public static final int INACTIVE_VALUE = 3;
   /**
+   * <pre>
+   * Entity has been soft-deleted and should not be used
+   * </pre>
+   *
    * <code>DELETED = 4;</code>
    */
   public static final int DELETED_VALUE = 4;

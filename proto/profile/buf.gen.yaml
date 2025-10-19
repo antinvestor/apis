@@ -5,13 +5,9 @@ managed:
     - file_option: java_package
       module: buf.build/bufbuild/protovalidate
     - file_option: java_package
-      module: buf.build/googleapis/googleapis
-    - file_option: java_package
       module: buf.build/gnostic/gnostic
     - file_option: go_package
       module: buf.build/bufbuild/protovalidate
-    - file_option: go_package
-      module: buf.build/googleapis/googleapis
     - file_option: go_package
       module: buf.build/gnostic/gnostic
     - file_option: go_package
@@ -22,7 +18,7 @@ managed:
     - file_option: java_package_prefix
       value: com.antinvestor.apis
     - file_option: go_package_prefix
-      value: github.com/antinvestor/apis/go/profile
+      value: github.com/antinvestor/apis/go
 plugins:
   - remote: buf.build/grpc/go
     out: ../../go/

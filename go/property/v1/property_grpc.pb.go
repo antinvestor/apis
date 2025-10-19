@@ -51,32 +51,35 @@ const (
 // PropertyServiceClient is the client API for PropertyService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// PropertyService manages real estate and asset properties.
+// All RPCs require authentication via Bearer token.
 type PropertyServiceClient interface {
-	// Create method for adding a new property type into the system
+	// AddPropertyType creates a new property type classification.
 	AddPropertyType(ctx context.Context, in *AddPropertyTypeRequest, opts ...grpc.CallOption) (*AddPropertyTypeResponse, error)
-	// List method for showing all property types in the system
+	// ListPropertyType retrieves all property types.
 	ListPropertyType(ctx context.Context, in *ListPropertyTypeRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListPropertyTypeResponse], error)
-	// Create method for adding a new locality into the system
+	// AddLocality creates a new geographic locality.
 	AddLocality(ctx context.Context, in *AddLocalityRequest, opts ...grpc.CallOption) (*AddLocalityResponse, error)
-	// Delete method for removing an existing locality from the system
+	// DeleteLocality removes a locality from the system.
 	DeleteLocality(ctx context.Context, in *DeleteLocalityRequest, opts ...grpc.CallOption) (*DeleteLocalityResponse, error)
-	// Create method for adding a new property into the system
+	// CreateProperty creates a new property.
 	CreateProperty(ctx context.Context, in *CreatePropertyRequest, opts ...grpc.CallOption) (*CreatePropertyResponse, error)
-	// Update property request to modify its current form to another
+	// UpdateProperty updates an existing property.
 	UpdateProperty(ctx context.Context, in *UpdatePropertyRequest, opts ...grpc.CallOption) (*UpdatePropertyResponse, error)
-	// Delete property request to modify its current form to another
+	// DeleteProperty removes a property from the system.
 	DeleteProperty(ctx context.Context, in *DeletePropertyRequest, opts ...grpc.CallOption) (*DeletePropertyResponse, error)
-	// State request to determine active state and status of a property
+	// StateOfProperty retrieves the current state of a property.
 	StateOfProperty(ctx context.Context, in *StateOfPropertyRequest, opts ...grpc.CallOption) (*StateOfPropertyResponse, error)
-	// History request returns all the state transitions a property has had over its lifetime in the system
+	// HistoryOfProperty retrieves the complete state history.
 	HistoryOfProperty(ctx context.Context, in *HistoryOfPropertyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HistoryOfPropertyResponse], error)
-	// Search method is for client request to query for properties that match query
+	// SearchProperty finds properties matching criteria.
 	SearchProperty(ctx context.Context, in *SearchPropertyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchPropertyResponse], error)
-	// ListSubscriptions for a particular property
+	// ListSubscription retrieves subscriptions for a property.
 	ListSubscription(ctx context.Context, in *ListSubscriptionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListSubscriptionResponse], error)
-	// AddSubscription for a profile to a property
+	// AddSubscription grants a profile access to a property.
 	AddSubscription(ctx context.Context, in *AddSubscriptionRequest, opts ...grpc.CallOption) (*AddSubscriptionResponse, error)
-	// Delete subscription of profile to a property
+	// DeleteSubscription revokes a profile's access to a property.
 	DeleteSubscription(ctx context.Context, in *DeleteSubscriptionRequest, opts ...grpc.CallOption) (*DeleteSubscriptionResponse, error)
 }
 
@@ -257,32 +260,35 @@ func (c *propertyServiceClient) DeleteSubscription(ctx context.Context, in *Dele
 // PropertyServiceServer is the server API for PropertyService service.
 // All implementations must embed UnimplementedPropertyServiceServer
 // for forward compatibility.
+//
+// PropertyService manages real estate and asset properties.
+// All RPCs require authentication via Bearer token.
 type PropertyServiceServer interface {
-	// Create method for adding a new property type into the system
+	// AddPropertyType creates a new property type classification.
 	AddPropertyType(context.Context, *AddPropertyTypeRequest) (*AddPropertyTypeResponse, error)
-	// List method for showing all property types in the system
+	// ListPropertyType retrieves all property types.
 	ListPropertyType(*ListPropertyTypeRequest, grpc.ServerStreamingServer[ListPropertyTypeResponse]) error
-	// Create method for adding a new locality into the system
+	// AddLocality creates a new geographic locality.
 	AddLocality(context.Context, *AddLocalityRequest) (*AddLocalityResponse, error)
-	// Delete method for removing an existing locality from the system
+	// DeleteLocality removes a locality from the system.
 	DeleteLocality(context.Context, *DeleteLocalityRequest) (*DeleteLocalityResponse, error)
-	// Create method for adding a new property into the system
+	// CreateProperty creates a new property.
 	CreateProperty(context.Context, *CreatePropertyRequest) (*CreatePropertyResponse, error)
-	// Update property request to modify its current form to another
+	// UpdateProperty updates an existing property.
 	UpdateProperty(context.Context, *UpdatePropertyRequest) (*UpdatePropertyResponse, error)
-	// Delete property request to modify its current form to another
+	// DeleteProperty removes a property from the system.
 	DeleteProperty(context.Context, *DeletePropertyRequest) (*DeletePropertyResponse, error)
-	// State request to determine active state and status of a property
+	// StateOfProperty retrieves the current state of a property.
 	StateOfProperty(context.Context, *StateOfPropertyRequest) (*StateOfPropertyResponse, error)
-	// History request returns all the state transitions a property has had over its lifetime in the system
+	// HistoryOfProperty retrieves the complete state history.
 	HistoryOfProperty(*HistoryOfPropertyRequest, grpc.ServerStreamingServer[HistoryOfPropertyResponse]) error
-	// Search method is for client request to query for properties that match query
+	// SearchProperty finds properties matching criteria.
 	SearchProperty(*SearchPropertyRequest, grpc.ServerStreamingServer[SearchPropertyResponse]) error
-	// ListSubscriptions for a particular property
+	// ListSubscription retrieves subscriptions for a property.
 	ListSubscription(*ListSubscriptionRequest, grpc.ServerStreamingServer[ListSubscriptionResponse]) error
-	// AddSubscription for a profile to a property
+	// AddSubscription grants a profile access to a property.
 	AddSubscription(context.Context, *AddSubscriptionRequest) (*AddSubscriptionResponse, error)
-	// Delete subscription of profile to a property
+	// DeleteSubscription revokes a profile's access to a property.
 	DeleteSubscription(context.Context, *DeleteSubscriptionRequest) (*DeleteSubscriptionResponse, error)
 	mustEmbedUnimplementedPropertyServiceServer()
 }

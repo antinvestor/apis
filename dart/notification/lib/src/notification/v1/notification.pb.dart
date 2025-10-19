@@ -24,6 +24,7 @@ export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 export 'notification.pbenum.dart';
 
+/// Language represents a supported language for notification templates.
 class Language extends $pb.GeneratedMessage {
   factory Language({
     $core.String? id,
@@ -118,6 +119,8 @@ class Language extends $pb.GeneratedMessage {
   $0.Struct ensureExtra() => $_ensure(3);
 }
 
+/// TemplateData represents localized content for a notification template.
+/// Each template can have multiple TemplateData entries for different languages.
 class TemplateData extends $pb.GeneratedMessage {
   factory TemplateData({
     $core.String? id,
@@ -214,6 +217,8 @@ class TemplateData extends $pb.GeneratedMessage {
   Language ensureLanguage() => $_ensure(3);
 }
 
+/// Template represents a notification template with localized content.
+/// Templates enable consistent, reusable notification formatting.
 class Template extends $pb.GeneratedMessage {
   factory Template({
     $core.String? id,
@@ -303,6 +308,8 @@ class Template extends $pb.GeneratedMessage {
   $0.Struct ensureExtra() => $_ensure(3);
 }
 
+/// Notification represents a notification to be sent or received.
+/// Supports multi-channel delivery (email, SMS, push, in-app) with templating.
 class Notification extends $pb.GeneratedMessage {
   factory Notification({
     $core.String? id,
@@ -544,6 +551,7 @@ class Notification extends $pb.GeneratedMessage {
   void clearPriority() => $_clearField(16);
 }
 
+/// SearchResponse returns notifications matching search criteria.
 class SearchResponse extends $pb.GeneratedMessage {
   factory SearchResponse({
     $core.Iterable<Notification>? data,
@@ -596,6 +604,7 @@ class SearchResponse extends $pb.GeneratedMessage {
   $pb.PbList<Notification> get data => $_getList(0);
 }
 
+/// SendRequest queues one or more notifications for delivery.
 class SendRequest extends $pb.GeneratedMessage {
   factory SendRequest({
     $core.Iterable<Notification>? data,
@@ -647,6 +656,7 @@ class SendRequest extends $pb.GeneratedMessage {
   $pb.PbList<Notification> get data => $_getList(0);
 }
 
+/// SendResponse returns the status of queued notifications.
 class SendResponse extends $pb.GeneratedMessage {
   factory SendResponse({
     $core.Iterable<$1.StatusResponse>? data,
@@ -699,6 +709,8 @@ class SendResponse extends $pb.GeneratedMessage {
   $pb.PbList<$1.StatusResponse> get data => $_getList(0);
 }
 
+/// ReleaseRequest releases queued notifications for immediate delivery.
+/// Used for batch processing where notifications are queued first, then released together.
 class ReleaseRequest extends $pb.GeneratedMessage {
   factory ReleaseRequest({
     $core.Iterable<$core.String>? id,
@@ -762,6 +774,7 @@ class ReleaseRequest extends $pb.GeneratedMessage {
   void clearComment() => $_clearField(2);
 }
 
+/// ReleaseResponse returns the status of released notifications.
 class ReleaseResponse extends $pb.GeneratedMessage {
   factory ReleaseResponse({
     $core.Iterable<$1.StatusResponse>? data,
@@ -814,6 +827,8 @@ class ReleaseResponse extends $pb.GeneratedMessage {
   $pb.PbList<$1.StatusResponse> get data => $_getList(0);
 }
 
+/// ReceiveRequest acknowledges receipt of notifications by the client.
+/// Used for tracking delivery confirmation.
 class ReceiveRequest extends $pb.GeneratedMessage {
   factory ReceiveRequest({
     $core.Iterable<Notification>? data,
@@ -866,6 +881,7 @@ class ReceiveRequest extends $pb.GeneratedMessage {
   $pb.PbList<Notification> get data => $_getList(0);
 }
 
+/// ReceiveResponse returns the status of acknowledged notifications.
 class ReceiveResponse extends $pb.GeneratedMessage {
   factory ReceiveResponse({
     $core.Iterable<$1.StatusResponse>? data,
@@ -918,6 +934,7 @@ class ReceiveResponse extends $pb.GeneratedMessage {
   $pb.PbList<$1.StatusResponse> get data => $_getList(0);
 }
 
+/// TemplateSearchRequest searches for notification templates.
 class TemplateSearchRequest extends $pb.GeneratedMessage {
   factory TemplateSearchRequest({
     $core.String? query,
@@ -1012,6 +1029,7 @@ class TemplateSearchRequest extends $pb.GeneratedMessage {
   void clearCount() => $_clearField(4);
 }
 
+/// TemplateSearchResponse returns matching templates.
 class TemplateSearchResponse extends $pb.GeneratedMessage {
   factory TemplateSearchResponse({
     $core.Iterable<Template>? data,
@@ -1065,6 +1083,7 @@ class TemplateSearchResponse extends $pb.GeneratedMessage {
   $pb.PbList<Template> get data => $_getList(0);
 }
 
+/// TemplateSaveRequest creates or updates a notification template.
 class TemplateSaveRequest extends $pb.GeneratedMessage {
   factory TemplateSaveRequest({
     $core.String? name,
@@ -1164,6 +1183,7 @@ class TemplateSaveRequest extends $pb.GeneratedMessage {
   $0.Struct ensureExtra() => $_ensure(3);
 }
 
+/// TemplateSaveResponse returns the saved template.
 class TemplateSaveResponse extends $pb.GeneratedMessage {
   factory TemplateSaveResponse({
     Template? data,
@@ -1224,52 +1244,64 @@ class TemplateSaveResponse extends $pb.GeneratedMessage {
   Template ensureData() => $_ensure(0);
 }
 
+/// NotificationService provides multi-channel notification delivery.
+/// All RPCs require authentication via Bearer token unless otherwise specified.
 class NotificationServiceApi {
   final $pb.RpcClient _client;
 
   NotificationServiceApi(this._client);
 
-  /// Send method for queueing massages as requested
+  /// Send queues one or more notifications for delivery.
+  /// Notifications can be auto-released or manually released via the Release RPC.
   $async.Future<SendResponse> send(
           $pb.ClientContext? ctx, SendRequest request) =>
       _client.invoke<SendResponse>(
           ctx, 'NotificationService', 'Send', request, SendResponse());
 
-  /// Release method for releasing queued massages and returns if notification status if released
+  /// Release triggers delivery of queued notifications.
+  /// Used for batch processing where notifications are queued first, then released together.
   $async.Future<ReleaseResponse> release(
           $pb.ClientContext? ctx, ReleaseRequest request) =>
       _client.invoke<ReleaseResponse>(
           ctx, 'NotificationService', 'Release', request, ReleaseResponse());
 
-  /// Receive method is for client request for particular notification responses from system
+  /// Receive acknowledges receipt of notifications by the client.
+  /// Used for tracking delivery confirmation and read receipts.
   $async.Future<ReceiveResponse> receive(
           $pb.ClientContext? ctx, ReceiveRequest request) =>
       _client.invoke<ReceiveResponse>(
           ctx, 'NotificationService', 'Receive', request, ReceiveResponse());
 
-  /// Search method is for client request for particular notification details from system
+  /// Search finds notifications matching specified criteria.
+  /// Supports filtering by date range, type, status, and custom properties.
   $async.Future<SearchResponse> search(
           $pb.ClientContext? ctx, $1.SearchRequest request) =>
       _client.invoke<SearchResponse>(
           ctx, 'NotificationService', 'Search', request, SearchResponse());
 
-  /// Status request to determine if notification is prepared or released
+  /// Status retrieves the current status of a notification.
+  /// Returns delivery status, timestamps, and error information if applicable.
   $async.Future<$1.StatusResponse> status(
           $pb.ClientContext? ctx, $1.StatusRequest request) =>
       _client.invoke<$1.StatusResponse>(
           ctx, 'NotificationService', 'Status', request, $1.StatusResponse());
 
-  /// Status update request to allow continuation of notification processing
+  /// StatusUpdate updates the status of a notification.
+  /// Used by delivery workers to update notification state during processing.
   $async.Future<$1.StatusUpdateResponse> statusUpdate(
           $pb.ClientContext? ctx, $1.StatusUpdateRequest request) =>
       _client.invoke<$1.StatusUpdateResponse>(ctx, 'NotificationService',
           'StatusUpdate', request, $1.StatusUpdateResponse());
 
-  /// Utility to allow system obtain templates within the system
+  /// TemplateSearch finds notification templates matching specified criteria.
+  /// Supports filtering by language and template name.
   $async.Future<TemplateSearchResponse> templateSearch(
           $pb.ClientContext? ctx, TemplateSearchRequest request) =>
       _client.invoke<TemplateSearchResponse>(ctx, 'NotificationService',
           'TemplateSearch', request, TemplateSearchResponse());
+
+  /// TemplateSave creates or updates a notification template.
+  /// Templates enable consistent, reusable notification formatting with localization.
   $async.Future<TemplateSaveResponse> templateSave(
           $pb.ClientContext? ctx, TemplateSaveRequest request) =>
       _client.invoke<TemplateSaveResponse>(ctx, 'NotificationService',

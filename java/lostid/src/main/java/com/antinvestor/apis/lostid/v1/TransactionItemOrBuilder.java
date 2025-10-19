@@ -25,11 +25,19 @@ public interface TransactionItemOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Transaction ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Transaction ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface TransactionItemOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Transaction timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string datetime = 2 [json_name = "datetime"];</code>
    * @return The datetime.
    */
   java.lang.String getDatetime();
   /**
+   * <pre>
+   * Transaction timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string datetime = 2 [json_name = "datetime"];</code>
    * @return The bytes for datetime.
    */
@@ -49,32 +65,56 @@ public interface TransactionItemOrBuilder extends
       getDatetimeBytes();
 
   /**
+   * <pre>
+   * True if credit, false if debit
+   * </pre>
+   *
    * <code>bool credit = 3 [json_name = "credit"];</code>
    * @return The credit.
    */
   boolean getCredit();
 
   /**
+   * <pre>
+   * Transaction amount
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    * @return Whether the amount field is set.
    */
   boolean hasAmount();
   /**
+   * <pre>
+   * Transaction amount
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    * @return The amount.
    */
   com.google.type.Money getAmount();
   /**
+   * <pre>
+   * Transaction amount
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    */
   com.google.type.MoneyOrBuilder getAmountOrBuilder();
 
   /**
+   * <pre>
+   * Transaction description (reward, fee, etc.)
+   * </pre>
+   *
    * <code>string description = 5 [json_name = "description"];</code>
    * @return The description.
    */
   java.lang.String getDescription();
   /**
+   * <pre>
+   * Transaction description (reward, fee, etc.)
+   * </pre>
+   *
    * <code>string description = 5 [json_name = "description"];</code>
    * @return The bytes for description.
    */

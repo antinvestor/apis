@@ -22,6 +22,8 @@ export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 export 'device.pbenum.dart';
 
+/// Locale represents the localization settings for a device.
+/// Used to provide localized content and format data appropriately for the user.
 class Locale extends $pb.GeneratedMessage {
   factory Locale({
     $core.Iterable<$core.String>? language,
@@ -130,7 +132,8 @@ class Locale extends $pb.GeneratedMessage {
   void clearCode() => $_clearField(10);
 }
 
-/// The response message containing the full device key object
+/// KeyObject represents an encryption key associated with a device.
+/// Keys are used for secure communications and must be properly managed.
 class KeyObject extends $pb.GeneratedMessage {
   factory KeyObject({
     $core.String? id,
@@ -225,7 +228,8 @@ class KeyObject extends $pb.GeneratedMessage {
   $0.Struct ensureExtra() => $_ensure(3);
 }
 
-/// Contained message representing a device's log
+/// DeviceLog represents an activity log entry for a device.
+/// Logs track device sessions, locations, and activity for security auditing.
 class DeviceLog extends $pb.GeneratedMessage {
   factory DeviceLog({
     $core.String? id,
@@ -396,7 +400,8 @@ class DeviceLog extends $pb.GeneratedMessage {
   $0.Struct ensureExtra() => $_ensure(9);
 }
 
-/// The response message containing the full device object
+/// DeviceObject represents a registered device in the system.
+/// Devices must be registered and linked to a profile before use.
 class DeviceObject extends $pb.GeneratedMessage {
   factory DeviceObject({
     $core.String? id,
@@ -581,7 +586,7 @@ class DeviceObject extends $pb.GeneratedMessage {
   $0.Struct ensureProperties() => $_ensure(10);
 }
 
-/// The request message containing the device's hash
+/// GetByIdRequest retrieves one or more devices by their unique identifiers.
 class GetByIdRequest extends $pb.GeneratedMessage {
   factory GetByIdRequest({
     $core.Iterable<$core.String>? id,
@@ -644,6 +649,7 @@ class GetByIdRequest extends $pb.GeneratedMessage {
   void clearExtensive() => $_clearField(2);
 }
 
+/// GetByIdResponse returns the requested devices.
 class GetByIdResponse extends $pb.GeneratedMessage {
   factory GetByIdResponse({
     $core.Iterable<DeviceObject>? data,
@@ -695,7 +701,7 @@ class GetByIdResponse extends $pb.GeneratedMessage {
   $pb.PbList<DeviceObject> get data => $_getList(0);
 }
 
-/// The request message containing the device's hash
+/// GetBySessionIdRequest retrieves a device by its active session identifier.
 class GetBySessionIdRequest extends $pb.GeneratedMessage {
   factory GetBySessionIdRequest({
     $core.String? id,
@@ -753,6 +759,7 @@ class GetBySessionIdRequest extends $pb.GeneratedMessage {
   void clearId() => $_clearField(1);
 }
 
+/// GetBySessionIdResponse returns the device associated with the session.
 class GetBySessionIdResponse extends $pb.GeneratedMessage {
   factory GetBySessionIdResponse({
     DeviceObject? data,
@@ -813,6 +820,7 @@ class GetBySessionIdResponse extends $pb.GeneratedMessage {
   DeviceObject ensureData() => $_ensure(0);
 }
 
+/// SearchRequest searches for devices matching specified criteria.
 class SearchRequest extends $pb.GeneratedMessage {
   factory SearchRequest({
     $core.String? query,
@@ -938,6 +946,7 @@ class SearchRequest extends $pb.GeneratedMessage {
   $0.Struct ensureExtras() => $_ensure(6);
 }
 
+/// SearchResponse returns devices matching the search criteria.
 class SearchResponse extends $pb.GeneratedMessage {
   factory SearchResponse({
     $core.Iterable<DeviceObject>? data,
@@ -989,7 +998,7 @@ class SearchResponse extends $pb.GeneratedMessage {
   $pb.PbList<DeviceObject> get data => $_getList(0);
 }
 
-/// The request message containing the information necessary to create a device
+/// CreateRequest registers a new device in the system.
 class CreateRequest extends $pb.GeneratedMessage {
   factory CreateRequest({
     $core.String? name,
@@ -1061,6 +1070,7 @@ class CreateRequest extends $pb.GeneratedMessage {
   $0.Struct ensureProperties() => $_ensure(1);
 }
 
+/// CreateResponse returns the newly created device.
 class CreateResponse extends $pb.GeneratedMessage {
   factory CreateResponse({
     DeviceObject? data,
@@ -1120,7 +1130,7 @@ class CreateResponse extends $pb.GeneratedMessage {
   DeviceObject ensureData() => $_ensure(0);
 }
 
-/// The request message containing the information necessary to update a device
+/// UpdateRequest updates an existing device's information.
 class UpdateRequest extends $pb.GeneratedMessage {
   factory UpdateRequest({
     $core.String? id,
@@ -1204,6 +1214,7 @@ class UpdateRequest extends $pb.GeneratedMessage {
   $0.Struct ensureProperties() => $_ensure(2);
 }
 
+/// UpdateResponse returns the updated device.
 class UpdateResponse extends $pb.GeneratedMessage {
   factory UpdateResponse({
     DeviceObject? data,
@@ -1263,7 +1274,8 @@ class UpdateResponse extends $pb.GeneratedMessage {
   DeviceObject ensureData() => $_ensure(0);
 }
 
-/// The request message has data to link a session to a user
+/// LinkRequest links a device to a user profile.
+/// Devices must be linked before they can be used for authenticated operations.
 class LinkRequest extends $pb.GeneratedMessage {
   factory LinkRequest({
     $core.String? id,
@@ -1346,6 +1358,7 @@ class LinkRequest extends $pb.GeneratedMessage {
   $0.Struct ensureProperties() => $_ensure(2);
 }
 
+/// LinkResponse returns the linked device.
 class LinkResponse extends $pb.GeneratedMessage {
   factory LinkResponse({
     DeviceObject? data,
@@ -1405,7 +1418,8 @@ class LinkResponse extends $pb.GeneratedMessage {
   DeviceObject ensureData() => $_ensure(0);
 }
 
-/// The request message containing the information necessary to remove a device
+/// RemoveRequest removes a device from the system.
+/// This is typically used when a user logs out or removes a device from their account.
 class RemoveRequest extends $pb.GeneratedMessage {
   factory RemoveRequest({
     $core.String? id,
@@ -1462,6 +1476,7 @@ class RemoveRequest extends $pb.GeneratedMessage {
   void clearId() => $_clearField(1);
 }
 
+/// RemoveResponse returns the removed device.
 class RemoveResponse extends $pb.GeneratedMessage {
   factory RemoveResponse({
     DeviceObject? data,
@@ -1521,7 +1536,8 @@ class RemoveResponse extends $pb.GeneratedMessage {
   DeviceObject ensureData() => $_ensure(0);
 }
 
-/// The request message containing the information necessary to create a key
+/// LogRequest creates a new activity log entry for a device.
+/// Used for tracking device sessions and security auditing.
 class LogRequest extends $pb.GeneratedMessage {
   factory LogRequest({
     $core.String? deviceId,
@@ -1663,6 +1679,7 @@ class LogRequest extends $pb.GeneratedMessage {
   $0.Struct ensureExtras() => $_ensure(7);
 }
 
+/// LogResponse returns the created log entry.
 class LogResponse extends $pb.GeneratedMessage {
   factory LogResponse({
     DeviceLog? data,
@@ -1721,7 +1738,8 @@ class LogResponse extends $pb.GeneratedMessage {
   DeviceLog ensureData() => $_ensure(0);
 }
 
-/// Request message to list device logs related to the supplied device id
+/// ListLogsRequest retrieves activity logs for a device.
+/// Useful for security auditing and tracking device usage patterns.
 class ListLogsRequest extends $pb.GeneratedMessage {
   factory ListLogsRequest({
     $core.String? deviceId,
@@ -1790,6 +1808,7 @@ class ListLogsRequest extends $pb.GeneratedMessage {
   void clearCount() => $_clearField(2);
 }
 
+/// ListLogsResponse returns device activity logs.
 class ListLogsResponse extends $pb.GeneratedMessage {
   factory ListLogsResponse({
     $core.Iterable<DeviceLog>? data,
@@ -1841,7 +1860,8 @@ class ListLogsResponse extends $pb.GeneratedMessage {
   $pb.PbList<DeviceLog> get data => $_getList(0);
 }
 
-/// The request message containing the information necessary to create a key
+/// AddKeyRequest adds an encryption key to a device.
+/// Keys are used for secure communications (Matrix E2EE, push notifications, etc.).
 class AddKeyRequest extends $pb.GeneratedMessage {
   factory AddKeyRequest({
     $core.String? id,
@@ -1951,6 +1971,7 @@ class AddKeyRequest extends $pb.GeneratedMessage {
   $0.Struct ensureExtras() => $_ensure(4);
 }
 
+/// AddKeyResponse returns the created key.
 class AddKeyResponse extends $pb.GeneratedMessage {
   factory AddKeyResponse({
     KeyObject? data,
@@ -2010,7 +2031,8 @@ class AddKeyResponse extends $pb.GeneratedMessage {
   KeyObject ensureData() => $_ensure(0);
 }
 
-/// The request message containing the information necessary to remove a key
+/// RemoveKeyRequest removes one or more encryption keys from a device.
+/// Used when rotating keys or removing a device.
 class RemoveKeyRequest extends $pb.GeneratedMessage {
   factory RemoveKeyRequest({
     $core.Iterable<$core.String>? id,
@@ -2061,6 +2083,7 @@ class RemoveKeyRequest extends $pb.GeneratedMessage {
   $pb.PbList<$core.String> get id => $_getList(0);
 }
 
+/// RemoveKeyResponse returns the IDs of removed keys.
 class RemoveKeyResponse extends $pb.GeneratedMessage {
   factory RemoveKeyResponse({
     $core.Iterable<$core.String>? id,
@@ -2111,7 +2134,7 @@ class RemoveKeyResponse extends $pb.GeneratedMessage {
   $pb.PbList<$core.String> get id => $_getList(0);
 }
 
-/// Request message to list all keys related to the supplied device id
+/// SearchKeyRequest searches for encryption keys associated with a device.
 class SearchKeyRequest extends $pb.GeneratedMessage {
   factory SearchKeyRequest({
     $core.String? query,
@@ -2217,6 +2240,7 @@ class SearchKeyRequest extends $pb.GeneratedMessage {
   void clearCount() => $_clearField(5);
 }
 
+/// SearchKeyResponse returns matching encryption keys.
 class SearchKeyResponse extends $pb.GeneratedMessage {
   factory SearchKeyResponse({
     $core.Iterable<KeyObject>? data,
@@ -2268,78 +2292,91 @@ class SearchKeyResponse extends $pb.GeneratedMessage {
   $pb.PbList<KeyObject> get data => $_getList(0);
 }
 
-/// The device service definition.
+/// DeviceService provides comprehensive device management capabilities.
+/// All RPCs require authentication via Bearer token unless otherwise specified.
 class DeviceServiceApi {
   final $pb.RpcClient _client;
 
   DeviceServiceApi(this._client);
 
-  /// Obtains a device by its hash
+  /// GetById retrieves one or more devices by their unique identifiers.
+  /// Supports batch retrieval for efficiency.
   $async.Future<GetByIdResponse> getById(
           $pb.ClientContext? ctx, GetByIdRequest request) =>
       _client.invoke<GetByIdResponse>(
           ctx, 'DeviceService', 'GetById', request, GetByIdResponse());
 
-  /// Obtains a device by its session id
+  /// GetBySessionId retrieves a device by its active session identifier.
+  /// Useful for resolving devices from session tokens.
   $async.Future<GetBySessionIdResponse> getBySessionId(
           $pb.ClientContext? ctx, GetBySessionIdRequest request) =>
       _client.invoke<GetBySessionIdResponse>(ctx, 'DeviceService',
           'GetBySessionId', request, GetBySessionIdResponse());
 
-  /// Obtains a device by its hash
+  /// Search finds devices matching specified criteria.
+  /// Supports filtering by date range, properties, and full-text search.
   $async.Future<SearchResponse> search(
           $pb.ClientContext? ctx, SearchRequest request) =>
       _client.invoke<SearchResponse>(
           ctx, 'DeviceService', 'Search', request, SearchResponse());
 
-  /// Creates a new device based on the request.
+  /// Create registers a new device in the system.
+  /// Returns a unique device ID that should be stored by the client.
   $async.Future<CreateResponse> create_(
           $pb.ClientContext? ctx, CreateRequest request) =>
       _client.invoke<CreateResponse>(
           ctx, 'DeviceService', 'Create', request, CreateResponse());
 
-  /// Updates an existing device based on the request.
+  /// Update modifies an existing device's information.
+  /// Only the device owner or administrators can update device information.
   $async.Future<UpdateResponse> update(
           $pb.ClientContext? ctx, UpdateRequest request) =>
       _client.invoke<UpdateResponse>(
           ctx, 'DeviceService', 'Update', request, UpdateResponse());
 
-  /// Links an existing device session based on the request to a profile.
+  /// Link associates a device with a user profile.
+  /// Required before the device can be used for authenticated operations.
   $async.Future<LinkResponse> link(
           $pb.ClientContext? ctx, LinkRequest request) =>
       _client.invoke<LinkResponse>(
           ctx, 'DeviceService', 'Link', request, LinkResponse());
 
-  /// Removes an existing device based on the request.
+  /// Remove deletes a device from the system.
+  /// This operation cannot be undone.
   $async.Future<RemoveResponse> remove(
           $pb.ClientContext? ctx, RemoveRequest request) =>
       _client.invoke<RemoveResponse>(
           ctx, 'DeviceService', 'Remove', request, RemoveResponse());
 
-  /// Log a new key based on the request.
+  /// Log creates a new activity log entry for a device.
+  /// Used for session tracking and security auditing.
   $async.Future<LogResponse> log($pb.ClientContext? ctx, LogRequest request) =>
       _client.invoke<LogResponse>(
           ctx, 'DeviceService', 'Log', request, LogResponse());
 
-  /// Lists logs the a device has/owns.
+  /// ListLogs retrieves activity logs for a device.
+  /// Returns a stream of log entries for the specified device.
   $async.Future<ListLogsResponse> listLogs(
           $pb.ClientContext? ctx, ListLogsRequest request) =>
       _client.invoke<ListLogsResponse>(
           ctx, 'DeviceService', 'ListLogs', request, ListLogsResponse());
 
-  /// Adds a new key based on the request.
+  /// AddKey adds an encryption key to a device.
+  /// Keys are used for secure communications (Matrix E2EE, push notifications).
   $async.Future<AddKeyResponse> addKey(
           $pb.ClientContext? ctx, AddKeyRequest request) =>
       _client.invoke<AddKeyResponse>(
           ctx, 'DeviceService', 'AddKey', request, AddKeyResponse());
 
-  /// Removes an old device keys based on this request's id
+  /// RemoveKey removes encryption keys from a device.
+  /// Used for key rotation or when removing a device.
   $async.Future<RemoveKeyResponse> removeKey(
           $pb.ClientContext? ctx, RemoveKeyRequest request) =>
       _client.invoke<RemoveKeyResponse>(
           ctx, 'DeviceService', 'RemoveKey', request, RemoveKeyResponse());
 
-  /// Lists all the keys a device has/owns.
+  /// SearchKey finds encryption keys associated with a device.
+  /// Supports filtering by key type and pagination.
   $async.Future<SearchKeyResponse> searchKey(
           $pb.ClientContext? ctx, SearchKeyRequest request) =>
       _client.invoke<SearchKeyResponse>(

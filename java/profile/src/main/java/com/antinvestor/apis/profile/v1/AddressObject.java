@@ -20,6 +20,10 @@
 package com.antinvestor.apis.profile.v1;
 
 /**
+ * <pre>
+ * AddressObject represents a physical address with geocoding.
+ * </pre>
+ *
  * Protobuf type {@code profile.v1.AddressObject}
  */
 @com.google.protobuf.Generated
@@ -70,6 +74,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
   /**
+   * <pre>
+   * Unique address ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
@@ -87,6 +95,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Unique address ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -109,6 +121,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object name_ = "";
   /**
+   * <pre>
+   * Address name/label (e.g., "Home", "Office")
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The name.
    */
@@ -126,6 +142,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Address name/label (e.g., "Home", "Office")
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The bytes for name.
    */
@@ -148,6 +168,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object country_ = "";
   /**
+   * <pre>
+   * Country name or code
+   * </pre>
+   *
    * <code>string country = 3 [json_name = "country"];</code>
    * @return The country.
    */
@@ -165,6 +189,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Country name or code
+   * </pre>
+   *
    * <code>string country = 3 [json_name = "country"];</code>
    * @return The bytes for country.
    */
@@ -187,6 +215,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object city_ = "";
   /**
+   * <pre>
+   * City name
+   * </pre>
+   *
    * <code>string city = 4 [json_name = "city"];</code>
    * @return The city.
    */
@@ -204,6 +236,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * City name
+   * </pre>
+   *
    * <code>string city = 4 [json_name = "city"];</code>
    * @return The bytes for city.
    */
@@ -226,6 +262,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object area_ = "";
   /**
+   * <pre>
+   * Area/district/neighborhood
+   * </pre>
+   *
    * <code>string area = 5 [json_name = "area"];</code>
    * @return The area.
    */
@@ -243,6 +283,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Area/district/neighborhood
+   * </pre>
+   *
    * <code>string area = 5 [json_name = "area"];</code>
    * @return The bytes for area.
    */
@@ -265,6 +309,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object street_ = "";
   /**
+   * <pre>
+   * Street name
+   * </pre>
+   *
    * <code>string street = 6 [json_name = "street"];</code>
    * @return The street.
    */
@@ -282,6 +330,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Street name
+   * </pre>
+   *
    * <code>string street = 6 [json_name = "street"];</code>
    * @return The bytes for street.
    */
@@ -304,6 +356,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object house_ = "";
   /**
+   * <pre>
+   * House/building number
+   * </pre>
+   *
    * <code>string house = 7 [json_name = "house"];</code>
    * @return The house.
    */
@@ -321,6 +377,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * House/building number
+   * </pre>
+   *
    * <code>string house = 7 [json_name = "house"];</code>
    * @return The bytes for house.
    */
@@ -343,6 +403,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object postcode_ = "";
   /**
+   * <pre>
+   * Postal/ZIP code
+   * </pre>
+   *
    * <code>string postcode = 8 [json_name = "postcode"];</code>
    * @return The postcode.
    */
@@ -360,6 +424,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Postal/ZIP code
+   * </pre>
+   *
    * <code>string postcode = 8 [json_name = "postcode"];</code>
    * @return The bytes for postcode.
    */
@@ -381,6 +449,10 @@ private static final long serialVersionUID = 0L;
   public static final int LATITUDE_FIELD_NUMBER = 9;
   private double latitude_ = 0D;
   /**
+   * <pre>
+   * Latitude coordinate
+   * </pre>
+   *
    * <code>double latitude = 9 [json_name = "latitude"];</code>
    * @return The latitude.
    */
@@ -392,6 +464,10 @@ private static final long serialVersionUID = 0L;
   public static final int LONGITUDE_FIELD_NUMBER = 10;
   private double longitude_ = 0D;
   /**
+   * <pre>
+   * Longitude coordinate
+   * </pre>
+   *
    * <code>double longitude = 10 [json_name = "longitude"];</code>
    * @return The longitude.
    */
@@ -404,6 +480,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object extra_ = "";
   /**
+   * <pre>
+   * Additional address details
+   * </pre>
+   *
    * <code>string extra = 11 [json_name = "extra", (.buf.validate.field) = { ... }</code>
    * @return The extra.
    */
@@ -421,6 +501,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Additional address details
+   * </pre>
+   *
    * <code>string extra = 11 [json_name = "extra", (.buf.validate.field) = { ... }</code>
    * @return The bytes for extra.
    */
@@ -702,6 +786,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * AddressObject represents a physical address with geocoding.
+   * </pre>
+   *
    * Protobuf type {@code profile.v1.AddressObject}
    */
   public static final class Builder extends
@@ -977,6 +1065,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object id_ = "";
     /**
+     * <pre>
+     * Unique address ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The id.
      */
@@ -993,6 +1085,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique address ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The bytes for id.
      */
@@ -1010,6 +1106,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique address ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The id to set.
      * @return This builder for chaining.
@@ -1023,6 +1123,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique address ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -1033,6 +1137,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique address ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for id to set.
      * @return This builder for chaining.
@@ -1049,6 +1157,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object name_ = "";
     /**
+     * <pre>
+     * Address name/label (e.g., "Home", "Office")
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
      * @return The name.
      */
@@ -1065,6 +1177,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Address name/label (e.g., "Home", "Office")
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
      * @return The bytes for name.
      */
@@ -1082,6 +1198,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Address name/label (e.g., "Home", "Office")
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
      * @param value The name to set.
      * @return This builder for chaining.
@@ -1095,6 +1215,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Address name/label (e.g., "Home", "Office")
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -1105,6 +1229,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Address name/label (e.g., "Home", "Office")
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for name to set.
      * @return This builder for chaining.
@@ -1121,6 +1249,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object country_ = "";
     /**
+     * <pre>
+     * Country name or code
+     * </pre>
+     *
      * <code>string country = 3 [json_name = "country"];</code>
      * @return The country.
      */
@@ -1137,6 +1269,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Country name or code
+     * </pre>
+     *
      * <code>string country = 3 [json_name = "country"];</code>
      * @return The bytes for country.
      */
@@ -1154,6 +1290,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Country name or code
+     * </pre>
+     *
      * <code>string country = 3 [json_name = "country"];</code>
      * @param value The country to set.
      * @return This builder for chaining.
@@ -1167,6 +1307,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Country name or code
+     * </pre>
+     *
      * <code>string country = 3 [json_name = "country"];</code>
      * @return This builder for chaining.
      */
@@ -1177,6 +1321,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Country name or code
+     * </pre>
+     *
      * <code>string country = 3 [json_name = "country"];</code>
      * @param value The bytes for country to set.
      * @return This builder for chaining.
@@ -1193,6 +1341,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object city_ = "";
     /**
+     * <pre>
+     * City name
+     * </pre>
+     *
      * <code>string city = 4 [json_name = "city"];</code>
      * @return The city.
      */
@@ -1209,6 +1361,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * City name
+     * </pre>
+     *
      * <code>string city = 4 [json_name = "city"];</code>
      * @return The bytes for city.
      */
@@ -1226,6 +1382,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * City name
+     * </pre>
+     *
      * <code>string city = 4 [json_name = "city"];</code>
      * @param value The city to set.
      * @return This builder for chaining.
@@ -1239,6 +1399,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * City name
+     * </pre>
+     *
      * <code>string city = 4 [json_name = "city"];</code>
      * @return This builder for chaining.
      */
@@ -1249,6 +1413,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * City name
+     * </pre>
+     *
      * <code>string city = 4 [json_name = "city"];</code>
      * @param value The bytes for city to set.
      * @return This builder for chaining.
@@ -1265,6 +1433,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object area_ = "";
     /**
+     * <pre>
+     * Area/district/neighborhood
+     * </pre>
+     *
      * <code>string area = 5 [json_name = "area"];</code>
      * @return The area.
      */
@@ -1281,6 +1453,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Area/district/neighborhood
+     * </pre>
+     *
      * <code>string area = 5 [json_name = "area"];</code>
      * @return The bytes for area.
      */
@@ -1298,6 +1474,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Area/district/neighborhood
+     * </pre>
+     *
      * <code>string area = 5 [json_name = "area"];</code>
      * @param value The area to set.
      * @return This builder for chaining.
@@ -1311,6 +1491,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Area/district/neighborhood
+     * </pre>
+     *
      * <code>string area = 5 [json_name = "area"];</code>
      * @return This builder for chaining.
      */
@@ -1321,6 +1505,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Area/district/neighborhood
+     * </pre>
+     *
      * <code>string area = 5 [json_name = "area"];</code>
      * @param value The bytes for area to set.
      * @return This builder for chaining.
@@ -1337,6 +1525,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object street_ = "";
     /**
+     * <pre>
+     * Street name
+     * </pre>
+     *
      * <code>string street = 6 [json_name = "street"];</code>
      * @return The street.
      */
@@ -1353,6 +1545,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Street name
+     * </pre>
+     *
      * <code>string street = 6 [json_name = "street"];</code>
      * @return The bytes for street.
      */
@@ -1370,6 +1566,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Street name
+     * </pre>
+     *
      * <code>string street = 6 [json_name = "street"];</code>
      * @param value The street to set.
      * @return This builder for chaining.
@@ -1383,6 +1583,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Street name
+     * </pre>
+     *
      * <code>string street = 6 [json_name = "street"];</code>
      * @return This builder for chaining.
      */
@@ -1393,6 +1597,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Street name
+     * </pre>
+     *
      * <code>string street = 6 [json_name = "street"];</code>
      * @param value The bytes for street to set.
      * @return This builder for chaining.
@@ -1409,6 +1617,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object house_ = "";
     /**
+     * <pre>
+     * House/building number
+     * </pre>
+     *
      * <code>string house = 7 [json_name = "house"];</code>
      * @return The house.
      */
@@ -1425,6 +1637,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * House/building number
+     * </pre>
+     *
      * <code>string house = 7 [json_name = "house"];</code>
      * @return The bytes for house.
      */
@@ -1442,6 +1658,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * House/building number
+     * </pre>
+     *
      * <code>string house = 7 [json_name = "house"];</code>
      * @param value The house to set.
      * @return This builder for chaining.
@@ -1455,6 +1675,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * House/building number
+     * </pre>
+     *
      * <code>string house = 7 [json_name = "house"];</code>
      * @return This builder for chaining.
      */
@@ -1465,6 +1689,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * House/building number
+     * </pre>
+     *
      * <code>string house = 7 [json_name = "house"];</code>
      * @param value The bytes for house to set.
      * @return This builder for chaining.
@@ -1481,6 +1709,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object postcode_ = "";
     /**
+     * <pre>
+     * Postal/ZIP code
+     * </pre>
+     *
      * <code>string postcode = 8 [json_name = "postcode"];</code>
      * @return The postcode.
      */
@@ -1497,6 +1729,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Postal/ZIP code
+     * </pre>
+     *
      * <code>string postcode = 8 [json_name = "postcode"];</code>
      * @return The bytes for postcode.
      */
@@ -1514,6 +1750,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Postal/ZIP code
+     * </pre>
+     *
      * <code>string postcode = 8 [json_name = "postcode"];</code>
      * @param value The postcode to set.
      * @return This builder for chaining.
@@ -1527,6 +1767,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Postal/ZIP code
+     * </pre>
+     *
      * <code>string postcode = 8 [json_name = "postcode"];</code>
      * @return This builder for chaining.
      */
@@ -1537,6 +1781,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Postal/ZIP code
+     * </pre>
+     *
      * <code>string postcode = 8 [json_name = "postcode"];</code>
      * @param value The bytes for postcode to set.
      * @return This builder for chaining.
@@ -1553,6 +1801,10 @@ private static final long serialVersionUID = 0L;
 
     private double latitude_ ;
     /**
+     * <pre>
+     * Latitude coordinate
+     * </pre>
+     *
      * <code>double latitude = 9 [json_name = "latitude"];</code>
      * @return The latitude.
      */
@@ -1561,6 +1813,10 @@ private static final long serialVersionUID = 0L;
       return latitude_;
     }
     /**
+     * <pre>
+     * Latitude coordinate
+     * </pre>
+     *
      * <code>double latitude = 9 [json_name = "latitude"];</code>
      * @param value The latitude to set.
      * @return This builder for chaining.
@@ -1573,6 +1829,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Latitude coordinate
+     * </pre>
+     *
      * <code>double latitude = 9 [json_name = "latitude"];</code>
      * @return This builder for chaining.
      */
@@ -1585,6 +1845,10 @@ private static final long serialVersionUID = 0L;
 
     private double longitude_ ;
     /**
+     * <pre>
+     * Longitude coordinate
+     * </pre>
+     *
      * <code>double longitude = 10 [json_name = "longitude"];</code>
      * @return The longitude.
      */
@@ -1593,6 +1857,10 @@ private static final long serialVersionUID = 0L;
       return longitude_;
     }
     /**
+     * <pre>
+     * Longitude coordinate
+     * </pre>
+     *
      * <code>double longitude = 10 [json_name = "longitude"];</code>
      * @param value The longitude to set.
      * @return This builder for chaining.
@@ -1605,6 +1873,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Longitude coordinate
+     * </pre>
+     *
      * <code>double longitude = 10 [json_name = "longitude"];</code>
      * @return This builder for chaining.
      */
@@ -1617,6 +1889,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object extra_ = "";
     /**
+     * <pre>
+     * Additional address details
+     * </pre>
+     *
      * <code>string extra = 11 [json_name = "extra", (.buf.validate.field) = { ... }</code>
      * @return The extra.
      */
@@ -1633,6 +1909,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional address details
+     * </pre>
+     *
      * <code>string extra = 11 [json_name = "extra", (.buf.validate.field) = { ... }</code>
      * @return The bytes for extra.
      */
@@ -1650,6 +1930,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional address details
+     * </pre>
+     *
      * <code>string extra = 11 [json_name = "extra", (.buf.validate.field) = { ... }</code>
      * @param value The extra to set.
      * @return This builder for chaining.
@@ -1663,6 +1947,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional address details
+     * </pre>
+     *
      * <code>string extra = 11 [json_name = "extra", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -1673,6 +1961,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional address details
+     * </pre>
+     *
      * <code>string extra = 11 [json_name = "extra", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for extra to set.
      * @return This builder for chaining.

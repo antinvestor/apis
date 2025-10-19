@@ -20,6 +20,10 @@
 package com.antinvestor.apis.device.v1;
 
 /**
+ * <pre>
+ * RemoveKeyResponse returns the IDs of removed keys.
+ * </pre>
+ *
  * Protobuf type {@code device.v1.RemoveKeyResponse}
  */
 @com.google.protobuf.Generated
@@ -64,6 +68,10 @@ private static final long serialVersionUID = 0L;
   private com.google.protobuf.LazyStringArrayList id_ =
       com.google.protobuf.LazyStringArrayList.emptyList();
   /**
+   * <pre>
+   * List of removed key IDs
+   * </pre>
+   *
    * <code>repeated string id = 1 [json_name = "id"];</code>
    * @return A list containing the id.
    */
@@ -72,6 +80,10 @@ private static final long serialVersionUID = 0L;
     return id_;
   }
   /**
+   * <pre>
+   * List of removed key IDs
+   * </pre>
+   *
    * <code>repeated string id = 1 [json_name = "id"];</code>
    * @return The count of id.
    */
@@ -79,6 +91,10 @@ private static final long serialVersionUID = 0L;
     return id_.size();
   }
   /**
+   * <pre>
+   * List of removed key IDs
+   * </pre>
+   *
    * <code>repeated string id = 1 [json_name = "id"];</code>
    * @param index The index of the element to return.
    * @return The id at the given index.
@@ -87,6 +103,10 @@ private static final long serialVersionUID = 0L;
     return id_.get(index);
   }
   /**
+   * <pre>
+   * List of removed key IDs
+   * </pre>
+   *
    * <code>repeated string id = 1 [json_name = "id"];</code>
    * @param index The index of the value to return.
    * @return The bytes of the id at the given index.
@@ -260,6 +280,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * RemoveKeyResponse returns the IDs of removed keys.
+   * </pre>
+   *
    * Protobuf type {@code device.v1.RemoveKeyResponse}
    */
   public static final class Builder extends
@@ -414,6 +438,10 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00000001;
     }
     /**
+     * <pre>
+     * List of removed key IDs
+     * </pre>
+     *
      * <code>repeated string id = 1 [json_name = "id"];</code>
      * @return A list containing the id.
      */
@@ -423,6 +451,10 @@ private static final long serialVersionUID = 0L;
       return id_;
     }
     /**
+     * <pre>
+     * List of removed key IDs
+     * </pre>
+     *
      * <code>repeated string id = 1 [json_name = "id"];</code>
      * @return The count of id.
      */
@@ -430,6 +462,10 @@ private static final long serialVersionUID = 0L;
       return id_.size();
     }
     /**
+     * <pre>
+     * List of removed key IDs
+     * </pre>
+     *
      * <code>repeated string id = 1 [json_name = "id"];</code>
      * @param index The index of the element to return.
      * @return The id at the given index.
@@ -438,6 +474,10 @@ private static final long serialVersionUID = 0L;
       return id_.get(index);
     }
     /**
+     * <pre>
+     * List of removed key IDs
+     * </pre>
+     *
      * <code>repeated string id = 1 [json_name = "id"];</code>
      * @param index The index of the value to return.
      * @return The bytes of the id at the given index.
@@ -447,6 +487,10 @@ private static final long serialVersionUID = 0L;
       return id_.getByteString(index);
     }
     /**
+     * <pre>
+     * List of removed key IDs
+     * </pre>
+     *
      * <code>repeated string id = 1 [json_name = "id"];</code>
      * @param index The index to set the value at.
      * @param value The id to set.
@@ -462,6 +506,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of removed key IDs
+     * </pre>
+     *
      * <code>repeated string id = 1 [json_name = "id"];</code>
      * @param value The id to add.
      * @return This builder for chaining.
@@ -476,6 +524,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of removed key IDs
+     * </pre>
+     *
      * <code>repeated string id = 1 [json_name = "id"];</code>
      * @param values The id to add.
      * @return This builder for chaining.
@@ -490,6 +542,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of removed key IDs
+     * </pre>
+     *
      * <code>repeated string id = 1 [json_name = "id"];</code>
      * @return This builder for chaining.
      */
@@ -501,6 +557,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * List of removed key IDs
+     * </pre>
+     *
      * <code>repeated string id = 1 [json_name = "id"];</code>
      * @param value The bytes of the id to add.
      * @return This builder for chaining.

@@ -25,11 +25,19 @@ public interface AddKeyRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique identifier for the key
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Unique identifier for the key
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface AddKeyRequestOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Device this key belongs to
+   * </pre>
+   *
    * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
    * @return The deviceId.
    */
   java.lang.String getDeviceId();
   /**
+   * <pre>
+   * Device this key belongs to
+   * </pre>
+   *
    * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for deviceId.
    */
@@ -49,33 +65,57 @@ public interface AddKeyRequestOrBuilder extends
       getDeviceIdBytes();
 
   /**
+   * <pre>
+   * Type of key (Matrix, Notification, etc.)
+   * </pre>
+   *
    * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
    * @return The enum numeric value on the wire for keyType.
    */
   int getKeyTypeValue();
   /**
+   * <pre>
+   * Type of key (Matrix, Notification, etc.)
+   * </pre>
+   *
    * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
    * @return The keyType.
    */
   com.antinvestor.apis.device.v1.KeyType getKeyType();
 
   /**
+   * <pre>
+   * The key material (will be encrypted at rest)
+   * </pre>
+   *
    * <code>bytes data = 4 [json_name = "data"];</code>
    * @return The data.
    */
   com.google.protobuf.ByteString getData();
 
   /**
+   * <pre>
+   * Additional key metadata (algorithm, expiry, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
    * @return Whether the extras field is set.
    */
   boolean hasExtras();
   /**
+   * <pre>
+   * Additional key metadata (algorithm, expiry, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
    * @return The extras.
    */
   com.google.protobuf.Struct getExtras();
   /**
+   * <pre>
+   * Additional key metadata (algorithm, expiry, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
    */
   com.google.protobuf.StructOrBuilder getExtrasOrBuilder();

@@ -20,6 +20,10 @@
 package com.antinvestor.apis.settings.v1;
 
 /**
+ * <pre>
+ * GetRequest retrieves a single setting value.
+ * </pre>
+ *
  * Protobuf type {@code settings.v1.GetRequest}
  */
 @com.google.protobuf.Generated
@@ -61,6 +65,10 @@ private static final long serialVersionUID = 0L;
   public static final int KEY_FIELD_NUMBER = 1;
   private com.antinvestor.apis.settings.v1.Setting key_;
   /**
+   * <pre>
+   * Setting key to retrieve
+   * </pre>
+   *
    * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
    * @return Whether the key field is set.
    */
@@ -69,6 +77,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Setting key to retrieve
+   * </pre>
+   *
    * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
    * @return The key.
    */
@@ -77,6 +89,10 @@ private static final long serialVersionUID = 0L;
     return key_ == null ? com.antinvestor.apis.settings.v1.Setting.getDefaultInstance() : key_;
   }
   /**
+   * <pre>
+   * Setting key to retrieve
+   * </pre>
+   *
    * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
    */
   @java.lang.Override
@@ -247,6 +263,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * GetRequest retrieves a single setting value.
+   * </pre>
+   *
    * Protobuf type {@code settings.v1.GetRequest}
    */
   public static final class Builder extends
@@ -403,6 +423,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.antinvestor.apis.settings.v1.Setting, com.antinvestor.apis.settings.v1.Setting.Builder, com.antinvestor.apis.settings.v1.SettingOrBuilder> keyBuilder_;
     /**
+     * <pre>
+     * Setting key to retrieve
+     * </pre>
+     *
      * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
      * @return Whether the key field is set.
      */
@@ -410,6 +434,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
+     * <pre>
+     * Setting key to retrieve
+     * </pre>
+     *
      * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
      * @return The key.
      */
@@ -421,6 +449,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Setting key to retrieve
+     * </pre>
+     *
      * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
      */
     public Builder setKey(com.antinvestor.apis.settings.v1.Setting value) {
@@ -437,6 +469,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Setting key to retrieve
+     * </pre>
+     *
      * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
      */
     public Builder setKey(
@@ -451,6 +487,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Setting key to retrieve
+     * </pre>
+     *
      * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
      */
     public Builder mergeKey(com.antinvestor.apis.settings.v1.Setting value) {
@@ -472,6 +512,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Setting key to retrieve
+     * </pre>
+     *
      * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
      */
     public Builder clearKey() {
@@ -485,6 +529,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Setting key to retrieve
+     * </pre>
+     *
      * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
      */
     public com.antinvestor.apis.settings.v1.Setting.Builder getKeyBuilder() {
@@ -493,6 +541,10 @@ private static final long serialVersionUID = 0L;
       return internalGetKeyFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Setting key to retrieve
+     * </pre>
+     *
      * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
      */
     public com.antinvestor.apis.settings.v1.SettingOrBuilder getKeyOrBuilder() {
@@ -504,6 +556,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Setting key to retrieve
+     * </pre>
+     *
      * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<

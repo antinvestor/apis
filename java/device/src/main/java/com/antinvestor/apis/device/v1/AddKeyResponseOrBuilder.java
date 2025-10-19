@@ -25,16 +25,28 @@ public interface AddKeyResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * The created key object
+   * </pre>
+   *
    * <code>.device.v1.KeyObject data = 1 [json_name = "data"];</code>
    * @return Whether the data field is set.
    */
   boolean hasData();
   /**
+   * <pre>
+   * The created key object
+   * </pre>
+   *
    * <code>.device.v1.KeyObject data = 1 [json_name = "data"];</code>
    * @return The data.
    */
   com.antinvestor.apis.device.v1.KeyObject getData();
   /**
+   * <pre>
+   * The created key object
+   * </pre>
+   *
    * <code>.device.v1.KeyObject data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.device.v1.KeyObjectOrBuilder getDataOrBuilder();

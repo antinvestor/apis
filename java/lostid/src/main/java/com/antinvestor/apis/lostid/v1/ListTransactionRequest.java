@@ -20,6 +20,10 @@
 package com.antinvestor.apis.lostid.v1;
 
 /**
+ * <pre>
+ * ListTransactionRequest retrieves transactions by pagination or time range.
+ * </pre>
+ *
  * Protobuf type {@code lostid.v1.ListTransactionRequest}
  */
 @com.google.protobuf.Generated
@@ -101,6 +105,10 @@ private static final long serialVersionUID = 0L;
 
   public static final int PAGINATION_FIELD_NUMBER = 1;
   /**
+   * <pre>
+   * Offset-based pagination
+   * </pre>
+   *
    * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
    * @return Whether the pagination field is set.
    */
@@ -109,6 +117,10 @@ private static final long serialVersionUID = 0L;
     return rangeCase_ == 1;
   }
   /**
+   * <pre>
+   * Offset-based pagination
+   * </pre>
+   *
    * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
    * @return The pagination.
    */
@@ -120,6 +132,10 @@ private static final long serialVersionUID = 0L;
     return com.antinvestor.apis.common.v1.Pagination.getDefaultInstance();
   }
   /**
+   * <pre>
+   * Offset-based pagination
+   * </pre>
+   *
    * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
    */
   @java.lang.Override
@@ -132,6 +148,10 @@ private static final long serialVersionUID = 0L;
 
   public static final int INTERVAL_FIELD_NUMBER = 2;
   /**
+   * <pre>
+   * Time range filter
+   * </pre>
+   *
    * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
    * @return Whether the interval field is set.
    */
@@ -140,6 +160,10 @@ private static final long serialVersionUID = 0L;
     return rangeCase_ == 2;
   }
   /**
+   * <pre>
+   * Time range filter
+   * </pre>
+   *
    * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
    * @return The interval.
    */
@@ -151,6 +175,10 @@ private static final long serialVersionUID = 0L;
     return com.google.type.Interval.getDefaultInstance();
   }
   /**
+   * <pre>
+   * Time range filter
+   * </pre>
+   *
    * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
    */
   @java.lang.Override
@@ -347,6 +375,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * ListTransactionRequest retrieves transactions by pagination or time range.
+   * </pre>
+   *
    * Protobuf type {@code lostid.v1.ListTransactionRequest}
    */
   public static final class Builder extends
@@ -537,6 +569,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.antinvestor.apis.common.v1.Pagination, com.antinvestor.apis.common.v1.Pagination.Builder, com.antinvestor.apis.common.v1.PaginationOrBuilder> paginationBuilder_;
     /**
+     * <pre>
+     * Offset-based pagination
+     * </pre>
+     *
      * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      * @return Whether the pagination field is set.
      */
@@ -545,6 +581,10 @@ private static final long serialVersionUID = 0L;
       return rangeCase_ == 1;
     }
     /**
+     * <pre>
+     * Offset-based pagination
+     * </pre>
+     *
      * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      * @return The pagination.
      */
@@ -563,6 +603,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Offset-based pagination
+     * </pre>
+     *
      * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
     public Builder setPagination(com.antinvestor.apis.common.v1.Pagination value) {
@@ -579,6 +623,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Offset-based pagination
+     * </pre>
+     *
      * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
     public Builder setPagination(
@@ -593,6 +641,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Offset-based pagination
+     * </pre>
+     *
      * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
     public Builder mergePagination(com.antinvestor.apis.common.v1.Pagination value) {
@@ -616,6 +668,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Offset-based pagination
+     * </pre>
+     *
      * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
     public Builder clearPagination() {
@@ -635,12 +691,20 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Offset-based pagination
+     * </pre>
+     *
      * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
     public com.antinvestor.apis.common.v1.Pagination.Builder getPaginationBuilder() {
       return internalGetPaginationFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Offset-based pagination
+     * </pre>
+     *
      * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
     @java.lang.Override
@@ -655,6 +719,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Offset-based pagination
+     * </pre>
+     *
      * <code>.common.v1.Pagination pagination = 1 [json_name = "pagination"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
@@ -679,6 +747,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.type.Interval, com.google.type.Interval.Builder, com.google.type.IntervalOrBuilder> intervalBuilder_;
     /**
+     * <pre>
+     * Time range filter
+     * </pre>
+     *
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      * @return Whether the interval field is set.
      */
@@ -687,6 +759,10 @@ private static final long serialVersionUID = 0L;
       return rangeCase_ == 2;
     }
     /**
+     * <pre>
+     * Time range filter
+     * </pre>
+     *
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      * @return The interval.
      */
@@ -705,6 +781,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Time range filter
+     * </pre>
+     *
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
     public Builder setInterval(com.google.type.Interval value) {
@@ -721,6 +801,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Time range filter
+     * </pre>
+     *
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
     public Builder setInterval(
@@ -735,6 +819,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Time range filter
+     * </pre>
+     *
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
     public Builder mergeInterval(com.google.type.Interval value) {
@@ -758,6 +846,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Time range filter
+     * </pre>
+     *
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
     public Builder clearInterval() {
@@ -777,12 +869,20 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Time range filter
+     * </pre>
+     *
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
     public com.google.type.Interval.Builder getIntervalBuilder() {
       return internalGetIntervalFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Time range filter
+     * </pre>
+     *
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
     @java.lang.Override
@@ -797,6 +897,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Time range filter
+     * </pre>
+     *
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<

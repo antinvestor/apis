@@ -7,11 +7,14 @@ import "package:connectrpc/connect.dart" as connect;
 import "payment.pb.dart" as paymentv1payment;
 import "../../common/v1/common.pb.dart" as commonv1common;
 
+/// PaymentService handles payment processing and reconciliation.
+/// All RPCs require authentication via Bearer token.
 abstract final class PaymentService {
   /// Fully-qualified name of the PaymentService service.
   static const name = 'payment.v1.PaymentService';
 
-  /// Send method for queueing outbound payments as requested
+  /// Send queues an outbound payment for processing.
+  /// Payments are queued and require Release to process.
   static const send = connect.Spec(
     '/$name/Send',
     connect.StreamType.unary,
@@ -19,7 +22,8 @@ abstract final class PaymentService {
     paymentv1payment.SendResponse.new,
   );
 
-  /// Send method for queueing inbound payments as requested
+  /// Receive queues an inbound payment for processing.
+  /// Used for recording expected incoming payments.
   static const receive = connect.Spec(
     '/$name/Receive',
     connect.StreamType.unary,
@@ -27,7 +31,8 @@ abstract final class PaymentService {
     paymentv1payment.ReceiveResponse.new,
   );
 
-  /// Initiate method for initiating payments as requested
+  /// InitiatePrompt initiates a payment prompt to the customer.
+  /// Triggers payment prompts like M-PESA STK push.
   static const initiatePrompt = connect.Spec(
     '/$name/InitiatePrompt',
     connect.StreamType.unary,
@@ -35,7 +40,8 @@ abstract final class PaymentService {
     paymentv1payment.InitiatePromptResponse.new,
   );
 
-  /// createPaymentLink method for creating payment links as requested
+  /// CreatePaymentLink generates a shareable payment link.
+  /// Customers can use the link to make payments via web interface.
   static const createPaymentLink = connect.Spec(
     '/$name/CreatePaymentLink',
     connect.StreamType.unary,
@@ -43,7 +49,8 @@ abstract final class PaymentService {
     paymentv1payment.CreatePaymentLinkResponse.new,
   );
 
-  /// Status request to determine if payment is prepared or released
+  /// Status retrieves the current status of a payment.
+  /// Returns processing state and status details.
   static const status = connect.Spec(
     '/$name/Status',
     connect.StreamType.unary,
@@ -51,7 +58,8 @@ abstract final class PaymentService {
     commonv1common.StatusResponse.new,
   );
 
-  /// Status update request to allow continuation of payment processing
+  /// StatusUpdate updates the status of a payment.
+  /// Used for manual status corrections or workflow progression.
   static const statusUpdate = connect.Spec(
     '/$name/StatusUpdate',
     connect.StreamType.unary,
@@ -59,7 +67,8 @@ abstract final class PaymentService {
     commonv1common.StatusUpdateResponse.new,
   );
 
-  /// Release method for releasing queued payments and returns if status is not released
+  /// Release releases a queued payment for processing.
+  /// Queued payments must be released to initiate actual transfer.
   static const release = connect.Spec(
     '/$name/Release',
     connect.StreamType.unary,
@@ -67,7 +76,8 @@ abstract final class PaymentService {
     paymentv1payment.ReleaseResponse.new,
   );
 
-  /// Search method is for client request look for payments matching supplied details from the system
+  /// Search finds payments matching specified criteria.
+  /// Supports filtering by date, amount, status, route, and more.
   static const search = connect.Spec(
     '/$name/Search',
     connect.StreamType.server,
@@ -75,6 +85,8 @@ abstract final class PaymentService {
     paymentv1payment.SearchResponse.new,
   );
 
+  /// Reconcile matches external transactions with internal payments.
+  /// Used for payment reconciliation with provider statements.
   static const reconcile = connect.Spec(
     '/$name/Reconcile',
     connect.StreamType.unary,

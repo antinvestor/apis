@@ -25,16 +25,28 @@ public interface CreateResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * The created device object
+   * </pre>
+   *
    * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
    * @return Whether the data field is set.
    */
   boolean hasData();
   /**
+   * <pre>
+   * The created device object
+   * </pre>
+   *
    * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
    * @return The data.
    */
   com.antinvestor.apis.device.v1.DeviceObject getData();
   /**
+   * <pre>
+   * The created device object
+   * </pre>
+   *
    * <code>.device.v1.DeviceObject data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.device.v1.DeviceObjectOrBuilder getDataOrBuilder();

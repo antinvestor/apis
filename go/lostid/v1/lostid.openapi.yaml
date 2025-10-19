@@ -1,0 +1,751 @@
+openapi: 3.1.0
+info:
+  title: Lost ID Service
+  description: The Lost ID Service provides a platform for managing lost and found identification documents. It enables users to register found items (collectibles) with images, search for lost items, track matching progress, and manage financial transactions related to rewards and service fees. The service facilitates reuniting people with their lost identification documents through a secure, tracked process.
+  contact:
+    name: Ant Investor Ltd
+    url: https://github.com/antinvestor/service-lostid
+    email: info@antinvestor.com
+  license:
+    name: Apache License
+    url: https://github.com/antinvestor/apis/blob/master/LICENSE
+  version: v1.0.0
+paths:
+  /lostid.v1.LostIdService/Collectible:
+    post:
+      tags:
+        - Collectibles
+        - lostid.v1.LostIdService
+      summary: Register found item
+      description: Registers a found identification document in the system. Supports uploading 1-5 images of the found item along with details like location found, item type, and description. The system will attempt to match with active search requests.
+      operationId: registerCollectible
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/lostid.v1.CollectibleRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/lostid.v1.CollectibleResponse'
+  /lostid.v1.LostIdService/ListCollectible: {}
+  /lostid.v1.LostIdService/ListSearch: {}
+  /lostid.v1.LostIdService/ListTransaction: {}
+  /lostid.v1.LostIdService/Progress:
+    post:
+      tags:
+        - Progress
+        - lostid.v1.LostIdService
+      summary: Get item progress
+      description: Retrieves the complete progress history for a collectible or search request. Includes all status updates (registered, matched, claimed) and associated financial transactions (rewards, fees).
+      operationId: getProgress
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/lostid.v1.ProgressRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/lostid.v1.ProgressResponse'
+  /lostid.v1.LostIdService/Search:
+    post:
+      tags:
+        - Searches
+        - lostid.v1.LostIdService
+      summary: Search for lost item
+      description: Creates a search request for a lost identification document. Provide details like item type, location lost, and description. The system will attempt to match with registered collectibles and notify if a match is found.
+      operationId: searchLostItem
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/common.v1.SearchRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/lostid.v1.SearchResponse'
+components:
+  schemas:
+    common.v1.Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          title: count
+          format: int32
+        page:
+          type: integer
+          title: page
+          format: int32
+        startDate:
+          type: string
+          title: start_date
+        endDate:
+          type: string
+          title: end_date
+      title: Pagination
+      additionalProperties: false
+    common.v1.SearchRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          title: query
+        idQuery:
+          type: string
+          title: id_query
+        limits:
+          title: limits
+          $ref: '#/components/schemas/common.v1.Pagination'
+        properties:
+          type: array
+          items:
+            type: string
+          title: properties
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: SearchRequest
+      additionalProperties: false
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    google.protobuf.ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          title: values
+          description: Repeated field of dynamically typed values.
+      title: ListValue
+      additionalProperties: false
+      description: |-
+        `ListValue` is a wrapper around a repeated field of values.
+
+         The JSON representation for `ListValue` is JSON array.
+    google.protobuf.NullValue:
+      type: string
+      title: NullValue
+      enum:
+        - NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+         `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+    google.protobuf.Struct:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/google.protobuf.Value'
+      description: |-
+        `Struct` represents a structured data value, consisting of fields
+         which map to dynamically typed values. In some languages, `Struct`
+         might be supported by a native representation. For example, in
+         scripting languages like JS a struct is represented as an
+         object. The details of that representation are described together
+         with the proto support for the language.
+
+         The JSON representation for `Struct` is JSON object.
+    google.protobuf.Struct.FieldsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          title: value
+          $ref: '#/components/schemas/google.protobuf.Value'
+      title: FieldsEntry
+      additionalProperties: false
+    google.protobuf.Timestamp:
+      type: string
+      examples:
+        - "2023-01-15T01:30:15.01Z"
+        - "2024-12-25T12:00:00Z"
+      format: date-time
+      description: |-
+        A Timestamp represents a point in time independent of any time zone or local
+         calendar, encoded as a count of seconds and fractions of seconds at
+         nanosecond resolution. The count is relative to an epoch at UTC midnight on
+         January 1, 1970, in the proleptic Gregorian calendar which extends the
+         Gregorian calendar backwards to year one.
+
+         All minutes are 60 seconds long. Leap seconds are "smeared" so that no leap
+         second table is needed for interpretation, using a [24-hour linear
+         smear](https://developers.google.com/time/smear).
+
+         The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
+         restricting to that range, we ensure that we can convert to and from [RFC
+         3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.
+
+         # Examples
+
+         Example 1: Compute Timestamp from POSIX `time()`.
+
+             Timestamp timestamp;
+             timestamp.set_seconds(time(NULL));
+             timestamp.set_nanos(0);
+
+         Example 2: Compute Timestamp from POSIX `gettimeofday()`.
+
+             struct timeval tv;
+             gettimeofday(&tv, NULL);
+
+             Timestamp timestamp;
+             timestamp.set_seconds(tv.tv_sec);
+             timestamp.set_nanos(tv.tv_usec * 1000);
+
+         Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
+
+             FILETIME ft;
+             GetSystemTimeAsFileTime(&ft);
+             UINT64 ticks = (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
+
+             // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
+             // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
+             Timestamp timestamp;
+             timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
+             timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
+
+         Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
+
+             long millis = System.currentTimeMillis();
+
+             Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+                 .setNanos((int) ((millis % 1000) * 1000000)).build();
+
+         Example 5: Compute Timestamp from Java `Instant.now()`.
+
+             Instant now = Instant.now();
+
+             Timestamp timestamp =
+                 Timestamp.newBuilder().setSeconds(now.getEpochSecond())
+                     .setNanos(now.getNano()).build();
+
+         Example 6: Compute Timestamp from current time in Python.
+
+             timestamp = Timestamp()
+             timestamp.GetCurrentTime()
+
+         # JSON Mapping
+
+         In JSON format, the Timestamp type is encoded as a string in the
+         [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the
+         format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z"
+         where {year} is always expressed using four digits while {month}, {day},
+         {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
+         seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
+         are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone
+         is required. A proto3 JSON serializer should always use UTC (as indicated by
+         "Z") when printing the Timestamp type and a proto3 JSON parser should be
+         able to accept both UTC and other timezones (as indicated by an offset).
+
+         For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past
+         01:30 UTC on January 15, 2017.
+
+         In JavaScript, one can convert a Date object to this format using the
+         standard
+         [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
+         method. In Python, a standard `datetime.datetime` object can be converted
+         to this format using
+         [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
+         the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use
+         the Joda Time's [`ISODateTimeFormat.dateTime()`](
+         http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()
+         ) to obtain a formatter capable of generating timestamps in this format.
+    google.protobuf.Value:
+      oneOf:
+        - type: "null"
+        - type: number
+        - type: string
+        - type: boolean
+        - type: array
+        - type: object
+          additionalProperties: true
+      description: |-
+        `Value` represents a dynamically typed value which can be either
+         null, a number, a string, a boolean, a recursive struct value, or a
+         list of values. A producer of value is expected to set one of these
+         variants. Absence of any variant indicates an error.
+
+         The JSON representation for `Value` is JSON value.
+    google.type.Interval:
+      type: object
+      properties:
+        startTime:
+          title: start_time
+          description: |-
+            Optional. Inclusive start of the interval.
+
+             If specified, a Timestamp matching this interval will have to be the same
+             or after the start.
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        endTime:
+          title: end_time
+          description: |-
+            Optional. Exclusive end of the interval.
+
+             If specified, a Timestamp matching this interval will have to be before the
+             end.
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: Interval
+      additionalProperties: false
+      description: |-
+        Represents a time interval, encoded as a Timestamp start (inclusive) and a
+         Timestamp end (exclusive).
+
+         The start must be less than or equal to the end.
+         When the start equals the end, the interval is empty (matches no time).
+         When both start and end are unspecified, the interval matches any time.
+    google.type.Money:
+      type: object
+      properties:
+        currencyCode:
+          type: string
+          title: currency_code
+          description: The three-letter currency code defined in ISO 4217.
+        units:
+          type:
+            - integer
+            - string
+          title: units
+          format: int64
+          description: |-
+            The whole units of the amount.
+             For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+        nanos:
+          type: integer
+          title: nanos
+          format: int32
+          description: |-
+            Number of nano (10^-9) units of the amount.
+             The value must be between -999,999,999 and +999,999,999 inclusive.
+             If `units` is positive, `nanos` must be positive or zero.
+             If `units` is zero, `nanos` can be positive, zero, or negative.
+             If `units` is negative, `nanos` must be negative or zero.
+             For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+      title: Money
+      additionalProperties: false
+      description: Represents an amount of money with its currency type.
+    lostid.v1.CollectibleRequest:
+      type: object
+      properties:
+        fileId:
+          type: array
+          items:
+            type: string
+            maxLength: 40
+            minLength: 3
+            pattern: '[0-9a-z_-]{3,20}'
+            maxItems: 5
+            minItems: 1
+          title: file_id
+          maxItems: 5
+          minItems: 1
+          description: File IDs of uploaded images (1-5 images)
+        properties:
+          title: properties
+          description: Additional item details (type, location found, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CollectibleRequest
+      additionalProperties: false
+      description: |-
+        CollectibleRequest registers a found identification document.
+         Supports up to 5 images of the found item.
+    lostid.v1.CollectibleResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique collectible ID
+        fileId:
+          type: array
+          items:
+            type: string
+          title: file_id
+          description: Associated image file IDs
+        properties:
+          title: properties
+          description: Item properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        state:
+          type: string
+          title: state
+          description: Current state (registered, matched, claimed, etc.)
+      title: CollectibleResponse
+      additionalProperties: false
+      description: CollectibleResponse returns the registered collectible item.
+    lostid.v1.ItemType:
+      type: string
+      title: ItemType
+      enum:
+        - COLLECTIBLE
+        - SEARCH
+        - TRANSACTION
+      description: |-
+        ItemType defines the types of items tracked in the system.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    lostid.v1.ListCollectibleRequest:
+      type: object
+      oneOf:
+        - properties:
+            interval:
+              title: interval
+              description: Time range filter
+              $ref: '#/components/schemas/google.type.Interval'
+          title: interval
+          required:
+            - interval
+        - properties:
+            pagination:
+              title: pagination
+              description: Offset-based pagination
+              $ref: '#/components/schemas/common.v1.Pagination'
+          title: pagination
+          required:
+            - pagination
+      title: ListCollectibleRequest
+      additionalProperties: false
+      description: ListCollectibleRequest retrieves collectibles by pagination or time range.
+    lostid.v1.ListCollectibleResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/lostid.v1.CollectibleResponse'
+          title: data
+          description: List of collectibles
+      title: ListCollectibleResponse
+      additionalProperties: false
+      description: ListCollectibleResponse returns a list of collectibles.
+    lostid.v1.ListSearchRequest:
+      type: object
+      oneOf:
+        - properties:
+            interval:
+              title: interval
+              description: Time range filter
+              $ref: '#/components/schemas/google.type.Interval'
+          title: interval
+          required:
+            - interval
+        - properties:
+            pagination:
+              title: pagination
+              description: Offset-based pagination
+              $ref: '#/components/schemas/common.v1.Pagination'
+          title: pagination
+          required:
+            - pagination
+      title: ListSearchRequest
+      additionalProperties: false
+      description: ListSearchRequest retrieves searches by pagination or time range.
+    lostid.v1.ListSearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/lostid.v1.SearchResponse'
+          title: data
+          description: List of search requests
+      title: ListSearchResponse
+      additionalProperties: false
+      description: ListSearchResponse returns a list of searches.
+    lostid.v1.ListTransactionRequest:
+      type: object
+      oneOf:
+        - properties:
+            interval:
+              title: interval
+              description: Time range filter
+              $ref: '#/components/schemas/google.type.Interval'
+          title: interval
+          required:
+            - interval
+        - properties:
+            pagination:
+              title: pagination
+              description: Offset-based pagination
+              $ref: '#/components/schemas/common.v1.Pagination'
+          title: pagination
+          required:
+            - pagination
+      title: ListTransactionRequest
+      additionalProperties: false
+      description: ListTransactionRequest retrieves transactions by pagination or time range.
+    lostid.v1.ListTransactionResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/lostid.v1.TransactionItem'
+          title: data
+          description: List of transactions
+      title: ListTransactionResponse
+      additionalProperties: false
+      description: ListTransactionResponse returns a list of transactions.
+    lostid.v1.ProgressItem:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Progress entry ID
+        datetime:
+          type: string
+          title: datetime
+          description: Timestamp of this update (RFC3339)
+        state:
+          type: string
+          title: state
+          description: State at this point (registered, matched, claimed, etc.)
+        description:
+          type: string
+          title: description
+          description: Human-readable description of the update
+      title: ProgressItem
+      additionalProperties: false
+      description: ProgressItem represents a status update in the item's lifecycle.
+    lostid.v1.ProgressRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Item ID (collectible or search)
+        type:
+          title: type
+          description: Item type
+          $ref: '#/components/schemas/lostid.v1.ItemType'
+      title: ProgressRequest
+      additionalProperties: false
+      description: ProgressRequest retrieves progress for a collectible or search.
+    lostid.v1.ProgressResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Item ID
+        type:
+          title: type
+          description: Item type
+          $ref: '#/components/schemas/lostid.v1.ItemType'
+        properties:
+          title: properties
+          description: Item properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        state:
+          type: string
+          title: state
+          description: Current state
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/lostid.v1.ProgressItem'
+          title: items
+          description: Progress history
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/lostid.v1.TransactionItem'
+          title: transactions
+          description: Associated financial transactions
+      title: ProgressResponse
+      additionalProperties: false
+      description: ProgressResponse returns the complete progress history for an item.
+    lostid.v1.SearchResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Unique search ID
+        query:
+          type: string
+          title: query
+          description: Search query/description
+        properties:
+          title: properties
+          description: Search criteria
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        state:
+          type: string
+          title: state
+          description: Current state (active, matched, closed)
+      title: SearchResponse
+      additionalProperties: false
+      description: SearchResponse returns a search request for a lost item.
+    lostid.v1.TransactionItem:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          description: Transaction ID
+        datetime:
+          type: string
+          title: datetime
+          description: Transaction timestamp (RFC3339)
+        credit:
+          type: boolean
+          title: credit
+          description: True if credit, false if debit
+        amount:
+          title: amount
+          description: Transaction amount
+          $ref: '#/components/schemas/google.type.Money'
+        description:
+          type: string
+          title: description
+          description: Transaction description (reward, fee, etc.)
+      title: TransactionItem
+      additionalProperties: false
+      description: TransactionItem represents a financial transaction.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security: []
+tags:
+  - name: lostid.v1.LostIdService
+    description: |-
+      LostIdService manages lost and found identification documents.
+       All RPCs require authentication via Bearer token.

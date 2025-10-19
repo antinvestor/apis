@@ -25,11 +25,19 @@ public interface SearchRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Full-text search query string
+   * </pre>
+   *
    * <code>string query = 1 [json_name = "query"];</code>
    * @return The query.
    */
   java.lang.String getQuery();
   /**
+   * <pre>
+   * Full-text search query string
+   * </pre>
+   *
    * <code>string query = 1 [json_name = "query"];</code>
    * @return The bytes for query.
    */
@@ -37,11 +45,19 @@ public interface SearchRequestOrBuilder extends
       getQueryBytes();
 
   /**
+   * <pre>
+   * Specific ID or ID pattern to search for
+   * </pre>
+   *
    * <code>string id_query = 2 [json_name = "idQuery"];</code>
    * @return The idQuery.
    */
   java.lang.String getIdQuery();
   /**
+   * <pre>
+   * Specific ID or ID pattern to search for
+   * </pre>
+   *
    * <code>string id_query = 2 [json_name = "idQuery"];</code>
    * @return The bytes for idQuery.
    */
@@ -49,38 +65,66 @@ public interface SearchRequestOrBuilder extends
       getIdQueryBytes();
 
   /**
+   * <pre>
+   * Pagination parameters
+   * </pre>
+   *
    * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
    * @return Whether the limits field is set.
    */
   boolean hasLimits();
   /**
+   * <pre>
+   * Pagination parameters
+   * </pre>
+   *
    * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
    * @return The limits.
    */
   com.antinvestor.apis.common.v1.Pagination getLimits();
   /**
+   * <pre>
+   * Pagination parameters
+   * </pre>
+   *
    * <code>.common.v1.Pagination limits = 3 [json_name = "limits"];</code>
    */
   com.antinvestor.apis.common.v1.PaginationOrBuilder getLimitsOrBuilder();
 
   /**
+   * <pre>
+   * Specific properties/fields to include in results
+   * </pre>
+   *
    * <code>repeated string properties = 7 [json_name = "properties"];</code>
    * @return A list containing the properties.
    */
   java.util.List<java.lang.String>
       getPropertiesList();
   /**
+   * <pre>
+   * Specific properties/fields to include in results
+   * </pre>
+   *
    * <code>repeated string properties = 7 [json_name = "properties"];</code>
    * @return The count of properties.
    */
   int getPropertiesCount();
   /**
+   * <pre>
+   * Specific properties/fields to include in results
+   * </pre>
+   *
    * <code>repeated string properties = 7 [json_name = "properties"];</code>
    * @param index The index of the element to return.
    * @return The properties at the given index.
    */
   java.lang.String getProperties(int index);
   /**
+   * <pre>
+   * Specific properties/fields to include in results
+   * </pre>
+   *
    * <code>repeated string properties = 7 [json_name = "properties"];</code>
    * @param index The index of the value to return.
    * @return The bytes of the properties at the given index.
@@ -89,16 +133,28 @@ public interface SearchRequestOrBuilder extends
       getPropertiesBytes(int index);
 
   /**
+   * <pre>
+   * Service-specific additional search parameters
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 8 [json_name = "extras"];</code>
    * @return Whether the extras field is set.
    */
   boolean hasExtras();
   /**
+   * <pre>
+   * Service-specific additional search parameters
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 8 [json_name = "extras"];</code>
    * @return The extras.
    */
   com.google.protobuf.Struct getExtras();
   /**
+   * <pre>
+   * Service-specific additional search parameters
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 8 [json_name = "extras"];</code>
    */
   com.google.protobuf.StructOrBuilder getExtrasOrBuilder();

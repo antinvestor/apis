@@ -25,24 +25,44 @@ public interface ListCollectibleResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * List of collectibles
+   * </pre>
+   *
    * <code>repeated .lostid.v1.CollectibleResponse data = 1 [json_name = "data"];</code>
    */
   java.util.List<com.antinvestor.apis.lostid.v1.CollectibleResponse> 
       getDataList();
   /**
+   * <pre>
+   * List of collectibles
+   * </pre>
+   *
    * <code>repeated .lostid.v1.CollectibleResponse data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.lostid.v1.CollectibleResponse getData(int index);
   /**
+   * <pre>
+   * List of collectibles
+   * </pre>
+   *
    * <code>repeated .lostid.v1.CollectibleResponse data = 1 [json_name = "data"];</code>
    */
   int getDataCount();
   /**
+   * <pre>
+   * List of collectibles
+   * </pre>
+   *
    * <code>repeated .lostid.v1.CollectibleResponse data = 1 [json_name = "data"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.lostid.v1.CollectibleResponseOrBuilder> 
       getDataOrBuilderList();
   /**
+   * <pre>
+   * List of collectibles
+   * </pre>
+   *
    * <code>repeated .lostid.v1.CollectibleResponse data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.lostid.v1.CollectibleResponseOrBuilder getDataOrBuilder(

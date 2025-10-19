@@ -25,23 +25,39 @@ public interface RemoveKeyRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * List of key IDs to remove
+   * </pre>
+   *
    * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return A list containing the id.
    */
   java.util.List<java.lang.String>
       getIdList();
   /**
+   * <pre>
+   * List of key IDs to remove
+   * </pre>
+   *
    * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The count of id.
    */
   int getIdCount();
   /**
+   * <pre>
+   * List of key IDs to remove
+   * </pre>
+   *
    * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @param index The index of the element to return.
    * @return The id at the given index.
    */
   java.lang.String getId(int index);
   /**
+   * <pre>
+   * List of key IDs to remove
+   * </pre>
+   *
    * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @param index The index of the value to return.
    * @return The bytes of the id at the given index.

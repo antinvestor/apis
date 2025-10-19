@@ -24,6 +24,7 @@ export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 export 'profile.pbenum.dart';
 
+/// ContactObject represents a contact method (email or phone).
 class ContactObject extends $pb.GeneratedMessage {
   factory ContactObject({
     $core.String? id,
@@ -159,6 +160,7 @@ class ContactObject extends $pb.GeneratedMessage {
   $0.Struct ensureExtra() => $_ensure(6);
 }
 
+/// RosterObject represents a contact in a user's roster/contact list.
 class RosterObject extends $pb.GeneratedMessage {
   factory RosterObject({
     $core.String? id,
@@ -257,6 +259,7 @@ class RosterObject extends $pb.GeneratedMessage {
   $0.Struct ensureExtra() => $_ensure(3);
 }
 
+/// AddressObject represents a physical address with geocoding.
 class AddressObject extends $pb.GeneratedMessage {
   factory AddressObject({
     $core.String? id,
@@ -433,7 +436,7 @@ class AddressObject extends $pb.GeneratedMessage {
   void clearExtra() => $_clearField(11);
 }
 
-/// The response message containing the full profile object
+/// ProfileObject represents a complete user or entity profile.
 class ProfileObject extends $pb.GeneratedMessage {
   factory ProfileObject({
     $core.String? id,
@@ -545,6 +548,7 @@ class ProfileObject extends $pb.GeneratedMessage {
   void clearState() => $_clearField(6);
 }
 
+/// EntryItem identifies an object in a relationship.
 class EntryItem extends $pb.GeneratedMessage {
   factory EntryItem({
     $core.String? objectName,
@@ -611,7 +615,7 @@ class EntryItem extends $pb.GeneratedMessage {
   void clearObjectId() => $_clearField(2);
 }
 
-/// A Relationship object
+/// RelationshipObject represents a relationship between two profiles.
 class RelationshipObject extends $pb.GeneratedMessage {
   factory RelationshipObject({
     $core.String? id,
@@ -3331,61 +3335,62 @@ class DeleteRelationshipResponse extends $pb.GeneratedMessage {
   RelationshipObject ensureData() => $_ensure(0);
 }
 
-/// The profile service definition.
+/// ProfileService manages user and entity profiles.
+/// All RPCs require authentication via Bearer token.
 class ProfileServiceApi {
   final $pb.RpcClient _client;
 
   ProfileServiceApi(this._client);
 
-  /// Obtains a profile by its hash
+  /// GetById retrieves a profile by its unique ID.
   $async.Future<GetByIdResponse> getById(
           $pb.ClientContext? ctx, GetByIdRequest request) =>
       _client.invoke<GetByIdResponse>(
           ctx, 'ProfileService', 'GetById', request, GetByIdResponse());
 
-  /// Obtains a profile by its hash
+  /// GetByContact retrieves a profile by contact information.
   $async.Future<GetByContactResponse> getByContact(
           $pb.ClientContext? ctx, GetByContactRequest request) =>
       _client.invoke<GetByContactResponse>(ctx, 'ProfileService',
           'GetByContact', request, GetByContactResponse());
 
-  /// Obtains a profile by its hash
+  /// Search finds profiles matching specified criteria.
   $async.Future<SearchResponse> search(
           $pb.ClientContext? ctx, SearchRequest request) =>
       _client.invoke<SearchResponse>(
           ctx, 'ProfileService', 'Search', request, SearchResponse());
 
-  /// Uses data found in the profile from mergeHash to update the current profile.
+  /// Merge combines two profiles into one.
   $async.Future<MergeResponse> merge(
           $pb.ClientContext? ctx, MergeRequest request) =>
       _client.invoke<MergeResponse>(
           ctx, 'ProfileService', 'Merge', request, MergeResponse());
 
-  /// Creates a new profile based on the request.
+  /// Create creates a new profile.
   $async.Future<CreateResponse> create_(
           $pb.ClientContext? ctx, CreateRequest request) =>
       _client.invoke<CreateResponse>(
           ctx, 'ProfileService', 'Create', request, CreateResponse());
 
-  /// Creates a new profile based on the request.
+  /// Update updates an existing profile's properties.
   $async.Future<UpdateResponse> update(
           $pb.ClientContext? ctx, UpdateRequest request) =>
       _client.invoke<UpdateResponse>(
           ctx, 'ProfileService', 'Update', request, UpdateResponse());
 
-  /// Adds a new contact based on the request/this leads to automatic verification.
+  /// AddContact adds a new contact to a profile with automatic verification.
   $async.Future<AddContactResponse> addContact(
           $pb.ClientContext? ctx, AddContactRequest request) =>
       _client.invoke<AddContactResponse>(
           ctx, 'ProfileService', 'AddContact', request, AddContactResponse());
 
-  /// Creates a new free contact based on the details provided.
+  /// CreateContact creates a standalone contact not linked to a profile.
   $async.Future<CreateContactResponse> createContact(
           $pb.ClientContext? ctx, CreateContactRequest request) =>
       _client.invoke<CreateContactResponse>(ctx, 'ProfileService',
           'CreateContact', request, CreateContactResponse());
 
-  /// Create a new contact verification request
+  /// CreateContactVerification initiates contact verification.
   $async.Future<CreateContactVerificationResponse> createContactVerification(
           $pb.ClientContext? ctx, CreateContactVerificationRequest request) =>
       _client.invoke<CreateContactVerificationResponse>(
@@ -3395,55 +3400,55 @@ class ProfileServiceApi {
           request,
           CreateContactVerificationResponse());
 
-  /// Checks the status of a verification
+  /// CheckVerification verifies a contact using the provided code.
   $async.Future<CheckVerificationResponse> checkVerification(
           $pb.ClientContext? ctx, CheckVerificationRequest request) =>
       _client.invoke<CheckVerificationResponse>(ctx, 'ProfileService',
           'CheckVerification', request, CheckVerificationResponse());
 
-  /// Removes an old contact based on this request's id
+  /// RemoveContact removes a contact from a profile.
   $async.Future<RemoveContactResponse> removeContact(
           $pb.ClientContext? ctx, RemoveContactRequest request) =>
       _client.invoke<RemoveContactResponse>(ctx, 'ProfileService',
           'RemoveContact', request, RemoveContactResponse());
 
-  /// Searches all contacts tied to a users profile and based on the active request.
+  /// SearchRoster searches a user's contact roster.
   $async.Future<SearchRosterResponse> searchRoster(
           $pb.ClientContext? ctx, SearchRosterRequest request) =>
       _client.invoke<SearchRosterResponse>(ctx, 'ProfileService',
           'SearchRoster', request, SearchRosterResponse());
 
-  /// Adds a new contact based on the request/this leads to automatic verification.
+  /// AddRoster adds multiple contacts to a user's roster.
   $async.Future<AddRosterResponse> addRoster(
           $pb.ClientContext? ctx, AddRosterRequest request) =>
       _client.invoke<AddRosterResponse>(
           ctx, 'ProfileService', 'AddRoster', request, AddRosterResponse());
 
-  /// Removes a contact from a user's circle based on this request's id
+  /// RemoveRoster removes a contact from a user's roster.
   $async.Future<RemoveRosterResponse> removeRoster(
           $pb.ClientContext? ctx, RemoveRosterRequest request) =>
       _client.invoke<RemoveRosterResponse>(ctx, 'ProfileService',
           'RemoveRoster', request, RemoveRosterResponse());
 
-  /// Adds a new address based on the request.
+  /// AddAddress adds a new address to a profile.
   $async.Future<AddAddressResponse> addAddress(
           $pb.ClientContext? ctx, AddAddressRequest request) =>
       _client.invoke<AddAddressResponse>(
           ctx, 'ProfileService', 'AddAddress', request, AddAddressResponse());
 
-  /// Adds a new relationship between different proiles.
+  /// AddRelationship creates a relationship between profiles.
   $async.Future<AddRelationshipResponse> addRelationship(
           $pb.ClientContext? ctx, AddRelationshipRequest request) =>
       _client.invoke<AddRelationshipResponse>(ctx, 'ProfileService',
           'AddRelationship', request, AddRelationshipResponse());
 
-  /// Remove an existing relationship between profiles.
+  /// DeleteRelationship removes a relationship between profiles.
   $async.Future<DeleteRelationshipResponse> deleteRelationship(
           $pb.ClientContext? ctx, DeleteRelationshipRequest request) =>
       _client.invoke<DeleteRelationshipResponse>(ctx, 'ProfileService',
           'DeleteRelationship', request, DeleteRelationshipResponse());
 
-  /// Lists relationships a profile has.
+  /// ListRelationship lists all relationships for a profile.
   $async.Future<ListRelationshipResponse> listRelationship(
           $pb.ClientContext? ctx, ListRelationshipRequest request) =>
       _client.invoke<ListRelationshipResponse>(ctx, 'ProfileService',

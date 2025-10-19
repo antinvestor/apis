@@ -3,7 +3,6 @@ name: buf.build/antinvestor/setting-s
 deps:
   - buf.build/antinvestor/common
   - buf.build/bufbuild/protovalidate
-  - buf.build/googleapis/googleapis
   - buf.build/gnostic/gnostic
 
 lint:

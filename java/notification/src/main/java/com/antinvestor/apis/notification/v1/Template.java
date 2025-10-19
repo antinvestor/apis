@@ -20,6 +20,11 @@
 package com.antinvestor.apis.notification.v1;
 
 /**
+ * <pre>
+ * Template represents a notification template with localized content.
+ * Templates enable consistent, reusable notification formatting.
+ * </pre>
+ *
  * Protobuf type {@code notification.v1.Template}
  */
 @com.google.protobuf.Generated
@@ -65,6 +70,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
   /**
+   * <pre>
+   * Unique identifier for the template
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
@@ -82,6 +91,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Unique identifier for the template
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -104,6 +117,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object name_ = "";
   /**
+   * <pre>
+   * Template name (e.g., "welcome_email", "password_reset")
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name"];</code>
    * @return The name.
    */
@@ -121,6 +138,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Template name (e.g., "welcome_email", "password_reset")
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name"];</code>
    * @return The bytes for name.
    */
@@ -143,6 +164,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private java.util.List<com.antinvestor.apis.notification.v1.TemplateData> data_;
   /**
+   * <pre>
+   * Localized template content for different languages/channels
+   * </pre>
+   *
    * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -150,6 +175,10 @@ private static final long serialVersionUID = 0L;
     return data_;
   }
   /**
+   * <pre>
+   * Localized template content for different languages/channels
+   * </pre>
+   *
    * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -158,6 +187,10 @@ private static final long serialVersionUID = 0L;
     return data_;
   }
   /**
+   * <pre>
+   * Localized template content for different languages/channels
+   * </pre>
+   *
    * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -165,6 +198,10 @@ private static final long serialVersionUID = 0L;
     return data_.size();
   }
   /**
+   * <pre>
+   * Localized template content for different languages/channels
+   * </pre>
+   *
    * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -172,6 +209,10 @@ private static final long serialVersionUID = 0L;
     return data_.get(index);
   }
   /**
+   * <pre>
+   * Localized template content for different languages/channels
+   * </pre>
+   *
    * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -183,6 +224,10 @@ private static final long serialVersionUID = 0L;
   public static final int EXTRA_FIELD_NUMBER = 5;
   private com.google.protobuf.Struct extra_;
   /**
+   * <pre>
+   * Additional template metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 5 [json_name = "extra"];</code>
    * @return Whether the extra field is set.
    */
@@ -191,6 +236,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Additional template metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 5 [json_name = "extra"];</code>
    * @return The extra.
    */
@@ -199,6 +248,10 @@ private static final long serialVersionUID = 0L;
     return extra_ == null ? com.google.protobuf.Struct.getDefaultInstance() : extra_;
   }
   /**
+   * <pre>
+   * Additional template metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 5 [json_name = "extra"];</code>
    */
   @java.lang.Override
@@ -402,6 +455,11 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * Template represents a notification template with localized content.
+   * Templates enable consistent, reusable notification formatting.
+   * </pre>
+   *
    * Protobuf type {@code notification.v1.Template}
    */
   public static final class Builder extends
@@ -644,6 +702,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object id_ = "";
     /**
+     * <pre>
+     * Unique identifier for the template
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The id.
      */
@@ -660,6 +722,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique identifier for the template
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The bytes for id.
      */
@@ -677,6 +743,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique identifier for the template
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The id to set.
      * @return This builder for chaining.
@@ -690,6 +760,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique identifier for the template
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -700,6 +774,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique identifier for the template
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for id to set.
      * @return This builder for chaining.
@@ -716,6 +794,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object name_ = "";
     /**
+     * <pre>
+     * Template name (e.g., "welcome_email", "password_reset")
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name"];</code>
      * @return The name.
      */
@@ -732,6 +814,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Template name (e.g., "welcome_email", "password_reset")
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name"];</code>
      * @return The bytes for name.
      */
@@ -749,6 +835,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Template name (e.g., "welcome_email", "password_reset")
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name"];</code>
      * @param value The name to set.
      * @return This builder for chaining.
@@ -762,6 +852,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Template name (e.g., "welcome_email", "password_reset")
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name"];</code>
      * @return This builder for chaining.
      */
@@ -772,6 +866,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Template name (e.g., "welcome_email", "password_reset")
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name"];</code>
      * @param value The bytes for name to set.
      * @return This builder for chaining.
@@ -799,6 +897,10 @@ private static final long serialVersionUID = 0L;
         com.antinvestor.apis.notification.v1.TemplateData, com.antinvestor.apis.notification.v1.TemplateData.Builder, com.antinvestor.apis.notification.v1.TemplateDataOrBuilder> dataBuilder_;
 
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public java.util.List<com.antinvestor.apis.notification.v1.TemplateData> getDataList() {
@@ -809,6 +911,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public int getDataCount() {
@@ -819,6 +925,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.notification.v1.TemplateData getData(int index) {
@@ -829,6 +939,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public Builder setData(
@@ -846,6 +960,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public Builder setData(
@@ -860,6 +978,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public Builder addData(com.antinvestor.apis.notification.v1.TemplateData value) {
@@ -876,6 +998,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public Builder addData(
@@ -893,6 +1019,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public Builder addData(
@@ -907,6 +1037,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public Builder addData(
@@ -921,6 +1055,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public Builder addAllData(
@@ -936,6 +1074,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public Builder clearData() {
@@ -949,6 +1091,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public Builder removeData(int index) {
@@ -962,6 +1108,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.notification.v1.TemplateData.Builder getDataBuilder(
@@ -969,6 +1119,10 @@ private static final long serialVersionUID = 0L;
       return internalGetDataFieldBuilder().getBuilder(index);
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.notification.v1.TemplateDataOrBuilder getDataOrBuilder(
@@ -979,6 +1133,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public java.util.List<? extends com.antinvestor.apis.notification.v1.TemplateDataOrBuilder> 
@@ -990,6 +1148,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.notification.v1.TemplateData.Builder addDataBuilder() {
@@ -997,6 +1159,10 @@ private static final long serialVersionUID = 0L;
           com.antinvestor.apis.notification.v1.TemplateData.getDefaultInstance());
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.notification.v1.TemplateData.Builder addDataBuilder(
@@ -1005,6 +1171,10 @@ private static final long serialVersionUID = 0L;
           index, com.antinvestor.apis.notification.v1.TemplateData.getDefaultInstance());
     }
     /**
+     * <pre>
+     * Localized template content for different languages/channels
+     * </pre>
+     *
      * <code>repeated .notification.v1.TemplateData data = 4 [json_name = "data"];</code>
      */
     public java.util.List<com.antinvestor.apis.notification.v1.TemplateData.Builder> 
@@ -1030,6 +1200,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> extraBuilder_;
     /**
+     * <pre>
+     * Additional template metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 5 [json_name = "extra"];</code>
      * @return Whether the extra field is set.
      */
@@ -1037,6 +1211,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000008) != 0);
     }
     /**
+     * <pre>
+     * Additional template metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 5 [json_name = "extra"];</code>
      * @return The extra.
      */
@@ -1048,6 +1226,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional template metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 5 [json_name = "extra"];</code>
      */
     public Builder setExtra(com.google.protobuf.Struct value) {
@@ -1064,6 +1246,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional template metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 5 [json_name = "extra"];</code>
      */
     public Builder setExtra(
@@ -1078,6 +1264,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional template metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 5 [json_name = "extra"];</code>
      */
     public Builder mergeExtra(com.google.protobuf.Struct value) {
@@ -1099,6 +1289,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional template metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 5 [json_name = "extra"];</code>
      */
     public Builder clearExtra() {
@@ -1112,6 +1306,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional template metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 5 [json_name = "extra"];</code>
      */
     public com.google.protobuf.Struct.Builder getExtraBuilder() {
@@ -1120,6 +1318,10 @@ private static final long serialVersionUID = 0L;
       return internalGetExtraFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Additional template metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 5 [json_name = "extra"];</code>
      */
     public com.google.protobuf.StructOrBuilder getExtraOrBuilder() {
@@ -1131,6 +1333,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional template metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extra = 5 [json_name = "extra"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<

@@ -25,7 +25,8 @@ export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 export 'lostid.pbenum.dart';
 
-/// Request to log a Collectible card
+/// CollectibleRequest registers a found identification document.
+/// Supports up to 5 images of the found item.
 class CollectibleRequest extends $pb.GeneratedMessage {
   factory CollectibleRequest({
     $core.Iterable<$core.String>? fileId,
@@ -91,6 +92,7 @@ class CollectibleRequest extends $pb.GeneratedMessage {
   $0.Struct ensureProperties() => $_ensure(1);
 }
 
+/// CollectibleResponse returns the registered collectible item.
 class CollectibleResponse extends $pb.GeneratedMessage {
   factory CollectibleResponse({
     $core.String? id,
@@ -182,6 +184,7 @@ class CollectibleResponse extends $pb.GeneratedMessage {
 
 enum ListCollectibleRequest_Range { pagination, interval, notSet }
 
+/// ListCollectibleRequest retrieves collectibles by pagination or time range.
 class ListCollectibleRequest extends $pb.GeneratedMessage {
   factory ListCollectibleRequest({
     $1.Pagination? pagination,
@@ -272,6 +275,7 @@ class ListCollectibleRequest extends $pb.GeneratedMessage {
   $2.Interval ensureInterval() => $_ensure(1);
 }
 
+/// ListCollectibleResponse returns a list of collectibles.
 class ListCollectibleResponse extends $pb.GeneratedMessage {
   factory ListCollectibleResponse({
     $core.Iterable<CollectibleResponse>? data,
@@ -324,6 +328,7 @@ class ListCollectibleResponse extends $pb.GeneratedMessage {
   $pb.PbList<CollectibleResponse> get data => $_getList(0);
 }
 
+/// SearchResponse returns a search request for a lost item.
 class SearchResponse extends $pb.GeneratedMessage {
   factory SearchResponse({
     $core.String? id,
@@ -419,6 +424,151 @@ class SearchResponse extends $pb.GeneratedMessage {
   void clearState() => $_clearField(4);
 }
 
+enum ListSearchRequest_Range { pagination, interval, notSet }
+
+/// ListSearchRequest retrieves searches by pagination or time range.
+class ListSearchRequest extends $pb.GeneratedMessage {
+  factory ListSearchRequest({
+    $1.Pagination? pagination,
+    $2.Interval? interval,
+  }) {
+    final result = create();
+    if (pagination != null) result.pagination = pagination;
+    if (interval != null) result.interval = interval;
+    return result;
+  }
+
+  ListSearchRequest._();
+
+  factory ListSearchRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ListSearchRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static const $core.Map<$core.int, ListSearchRequest_Range>
+      _ListSearchRequest_RangeByTag = {
+    1: ListSearchRequest_Range.pagination,
+    2: ListSearchRequest_Range.interval,
+    0: ListSearchRequest_Range.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ListSearchRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'),
+      createEmptyInstance: create)
+    ..oo(0, [1, 2])
+    ..aOM<$1.Pagination>(1, _omitFieldNames ? '' : 'pagination',
+        subBuilder: $1.Pagination.create)
+    ..aOM<$2.Interval>(2, _omitFieldNames ? '' : 'interval',
+        subBuilder: $2.Interval.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListSearchRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListSearchRequest copyWith(void Function(ListSearchRequest) updates) =>
+      super.copyWith((message) => updates(message as ListSearchRequest))
+          as ListSearchRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListSearchRequest create() => ListSearchRequest._();
+  @$core.override
+  ListSearchRequest createEmptyInstance() => create();
+  static $pb.PbList<ListSearchRequest> createRepeated() =>
+      $pb.PbList<ListSearchRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListSearchRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListSearchRequest>(create);
+  static ListSearchRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  @$pb.TagNumber(2)
+  ListSearchRequest_Range whichRange() =>
+      _ListSearchRequest_RangeByTag[$_whichOneof(0)]!;
+  @$pb.TagNumber(1)
+  @$pb.TagNumber(2)
+  void clearRange() => $_clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  $1.Pagination get pagination => $_getN(0);
+  @$pb.TagNumber(1)
+  set pagination($1.Pagination value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPagination() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPagination() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $1.Pagination ensurePagination() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $2.Interval get interval => $_getN(1);
+  @$pb.TagNumber(2)
+  set interval($2.Interval value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasInterval() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearInterval() => $_clearField(2);
+  @$pb.TagNumber(2)
+  $2.Interval ensureInterval() => $_ensure(1);
+}
+
+/// ListSearchResponse returns a list of searches.
+class ListSearchResponse extends $pb.GeneratedMessage {
+  factory ListSearchResponse({
+    $core.Iterable<SearchResponse>? data,
+  }) {
+    final result = create();
+    if (data != null) result.data.addAll(data);
+    return result;
+  }
+
+  ListSearchResponse._();
+
+  factory ListSearchResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ListSearchResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ListSearchResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'),
+      createEmptyInstance: create)
+    ..pPM<SearchResponse>(1, _omitFieldNames ? '' : 'data',
+        subBuilder: SearchResponse.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListSearchResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListSearchResponse copyWith(void Function(ListSearchResponse) updates) =>
+      super.copyWith((message) => updates(message as ListSearchResponse))
+          as ListSearchResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListSearchResponse create() => ListSearchResponse._();
+  @$core.override
+  ListSearchResponse createEmptyInstance() => create();
+  static $pb.PbList<ListSearchResponse> createRepeated() =>
+      $pb.PbList<ListSearchResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListSearchResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListSearchResponse>(create);
+  static ListSearchResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<SearchResponse> get data => $_getList(0);
+}
+
+/// ProgressRequest retrieves progress for a collectible or search.
 class ProgressRequest extends $pb.GeneratedMessage {
   factory ProgressRequest({
     $core.String? id,
@@ -488,6 +638,100 @@ class ProgressRequest extends $pb.GeneratedMessage {
   void clearType() => $_clearField(2);
 }
 
+/// ProgressItem represents a status update in the item's lifecycle.
+class ProgressItem extends $pb.GeneratedMessage {
+  factory ProgressItem({
+    $core.String? id,
+    $core.String? datetime,
+    $core.String? state,
+    $core.String? description,
+  }) {
+    final result = create();
+    if (id != null) result.id = id;
+    if (datetime != null) result.datetime = datetime;
+    if (state != null) result.state = state;
+    if (description != null) result.description = description;
+    return result;
+  }
+
+  ProgressItem._();
+
+  factory ProgressItem.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ProgressItem.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ProgressItem',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'datetime')
+    ..aOS(3, _omitFieldNames ? '' : 'state')
+    ..aOS(4, _omitFieldNames ? '' : 'description')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ProgressItem clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ProgressItem copyWith(void Function(ProgressItem) updates) =>
+      super.copyWith((message) => updates(message as ProgressItem))
+          as ProgressItem;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ProgressItem create() => ProgressItem._();
+  @$core.override
+  ProgressItem createEmptyInstance() => create();
+  static $pb.PbList<ProgressItem> createRepeated() =>
+      $pb.PbList<ProgressItem>();
+  @$core.pragma('dart2js:noInline')
+  static ProgressItem getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ProgressItem>(create);
+  static ProgressItem? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get datetime => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set datetime($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDatetime() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDatetime() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get state => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set state($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasState() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearState() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get description => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set description($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasDescription() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDescription() => $_clearField(4);
+}
+
+/// TransactionItem represents a financial transaction.
 class TransactionItem extends $pb.GeneratedMessage {
   factory TransactionItem({
     $core.String? id,
@@ -595,98 +839,7 @@ class TransactionItem extends $pb.GeneratedMessage {
   void clearDescription() => $_clearField(5);
 }
 
-class ProgressItem extends $pb.GeneratedMessage {
-  factory ProgressItem({
-    $core.String? id,
-    $core.String? datetime,
-    $core.String? state,
-    $core.String? description,
-  }) {
-    final result = create();
-    if (id != null) result.id = id;
-    if (datetime != null) result.datetime = datetime;
-    if (state != null) result.state = state;
-    if (description != null) result.description = description;
-    return result;
-  }
-
-  ProgressItem._();
-
-  factory ProgressItem.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory ProgressItem.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ProgressItem',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'),
-      createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..aOS(2, _omitFieldNames ? '' : 'datetime')
-    ..aOS(3, _omitFieldNames ? '' : 'state')
-    ..aOS(4, _omitFieldNames ? '' : 'description')
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ProgressItem clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ProgressItem copyWith(void Function(ProgressItem) updates) =>
-      super.copyWith((message) => updates(message as ProgressItem))
-          as ProgressItem;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ProgressItem create() => ProgressItem._();
-  @$core.override
-  ProgressItem createEmptyInstance() => create();
-  static $pb.PbList<ProgressItem> createRepeated() =>
-      $pb.PbList<ProgressItem>();
-  @$core.pragma('dart2js:noInline')
-  static ProgressItem getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ProgressItem>(create);
-  static ProgressItem? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set id($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get datetime => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set datetime($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasDatetime() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearDatetime() => $_clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get state => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set state($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasState() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearState() => $_clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.String get description => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set description($core.String value) => $_setString(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasDescription() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearDescription() => $_clearField(4);
-}
-
+/// ProgressResponse returns the complete progress history for an item.
 class ProgressResponse extends $pb.GeneratedMessage {
   factory ProgressResponse({
     $core.String? id,
@@ -797,150 +950,9 @@ class ProgressResponse extends $pb.GeneratedMessage {
   $pb.PbList<TransactionItem> get transactions => $_getList(5);
 }
 
-enum ListSearchRequest_Range { pagination, interval, notSet }
-
-class ListSearchRequest extends $pb.GeneratedMessage {
-  factory ListSearchRequest({
-    $1.Pagination? pagination,
-    $2.Interval? interval,
-  }) {
-    final result = create();
-    if (pagination != null) result.pagination = pagination;
-    if (interval != null) result.interval = interval;
-    return result;
-  }
-
-  ListSearchRequest._();
-
-  factory ListSearchRequest.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory ListSearchRequest.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static const $core.Map<$core.int, ListSearchRequest_Range>
-      _ListSearchRequest_RangeByTag = {
-    1: ListSearchRequest_Range.pagination,
-    2: ListSearchRequest_Range.interval,
-    0: ListSearchRequest_Range.notSet
-  };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ListSearchRequest',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'),
-      createEmptyInstance: create)
-    ..oo(0, [1, 2])
-    ..aOM<$1.Pagination>(1, _omitFieldNames ? '' : 'pagination',
-        subBuilder: $1.Pagination.create)
-    ..aOM<$2.Interval>(2, _omitFieldNames ? '' : 'interval',
-        subBuilder: $2.Interval.create)
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListSearchRequest clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListSearchRequest copyWith(void Function(ListSearchRequest) updates) =>
-      super.copyWith((message) => updates(message as ListSearchRequest))
-          as ListSearchRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ListSearchRequest create() => ListSearchRequest._();
-  @$core.override
-  ListSearchRequest createEmptyInstance() => create();
-  static $pb.PbList<ListSearchRequest> createRepeated() =>
-      $pb.PbList<ListSearchRequest>();
-  @$core.pragma('dart2js:noInline')
-  static ListSearchRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ListSearchRequest>(create);
-  static ListSearchRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  @$pb.TagNumber(2)
-  ListSearchRequest_Range whichRange() =>
-      _ListSearchRequest_RangeByTag[$_whichOneof(0)]!;
-  @$pb.TagNumber(1)
-  @$pb.TagNumber(2)
-  void clearRange() => $_clearField($_whichOneof(0));
-
-  @$pb.TagNumber(1)
-  $1.Pagination get pagination => $_getN(0);
-  @$pb.TagNumber(1)
-  set pagination($1.Pagination value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasPagination() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearPagination() => $_clearField(1);
-  @$pb.TagNumber(1)
-  $1.Pagination ensurePagination() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $2.Interval get interval => $_getN(1);
-  @$pb.TagNumber(2)
-  set interval($2.Interval value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasInterval() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearInterval() => $_clearField(2);
-  @$pb.TagNumber(2)
-  $2.Interval ensureInterval() => $_ensure(1);
-}
-
-class ListSearchResponse extends $pb.GeneratedMessage {
-  factory ListSearchResponse({
-    $core.Iterable<SearchResponse>? data,
-  }) {
-    final result = create();
-    if (data != null) result.data.addAll(data);
-    return result;
-  }
-
-  ListSearchResponse._();
-
-  factory ListSearchResponse.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory ListSearchResponse.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ListSearchResponse',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'lostid.v1'),
-      createEmptyInstance: create)
-    ..pPM<SearchResponse>(1, _omitFieldNames ? '' : 'data',
-        subBuilder: SearchResponse.create)
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListSearchResponse clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListSearchResponse copyWith(void Function(ListSearchResponse) updates) =>
-      super.copyWith((message) => updates(message as ListSearchResponse))
-          as ListSearchResponse;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ListSearchResponse create() => ListSearchResponse._();
-  @$core.override
-  ListSearchResponse createEmptyInstance() => create();
-  static $pb.PbList<ListSearchResponse> createRepeated() =>
-      $pb.PbList<ListSearchResponse>();
-  @$core.pragma('dart2js:noInline')
-  static ListSearchResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ListSearchResponse>(create);
-  static ListSearchResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $pb.PbList<SearchResponse> get data => $_getList(0);
-}
-
 enum ListTransactionRequest_Range { pagination, interval, notSet }
 
+/// ListTransactionRequest retrieves transactions by pagination or time range.
 class ListTransactionRequest extends $pb.GeneratedMessage {
   factory ListTransactionRequest({
     $1.Pagination? pagination,
@@ -1031,6 +1043,7 @@ class ListTransactionRequest extends $pb.GeneratedMessage {
   $2.Interval ensureInterval() => $_ensure(1);
 }
 
+/// ListTransactionResponse returns a list of transactions.
 class ListTransactionResponse extends $pb.GeneratedMessage {
   factory ListTransactionResponse({
     $core.Iterable<TransactionItem>? data,
@@ -1083,34 +1096,50 @@ class ListTransactionResponse extends $pb.GeneratedMessage {
   $pb.PbList<TransactionItem> get data => $_getList(0);
 }
 
+/// LostIdService manages lost and found identification documents.
+/// All RPCs require authentication via Bearer token.
 class LostIdServiceApi {
   final $pb.RpcClient _client;
 
   LostIdServiceApi(this._client);
 
-  /// Log a new Collectible request
+  /// Collectible registers a found identification document.
+  /// Supports up to 5 images of the found item.
   $async.Future<CollectibleResponse> collectible(
           $pb.ClientContext? ctx, CollectibleRequest request) =>
       _client.invoke<CollectibleResponse>(
           ctx, 'LostIdService', 'Collectible', request, CollectibleResponse());
+
+  /// ListCollectible retrieves registered collectibles.
+  /// Supports pagination or time-based filtering.
   $async.Future<ListCollectibleResponse> listCollectible(
           $pb.ClientContext? ctx, ListCollectibleRequest request) =>
       _client.invoke<ListCollectibleResponse>(ctx, 'LostIdService',
           'ListCollectible', request, ListCollectibleResponse());
 
-  /// Log a new search request
+  /// Search creates a search request for a lost item.
+  /// The system will attempt to match with registered collectibles.
   $async.Future<SearchResponse> search(
           $pb.ClientContext? ctx, $1.SearchRequest request) =>
       _client.invoke<SearchResponse>(
           ctx, 'LostIdService', 'Search', request, SearchResponse());
+
+  /// ListSearch retrieves search requests.
+  /// Supports pagination or time-based filtering.
   $async.Future<ListSearchResponse> listSearch(
           $pb.ClientContext? ctx, ListSearchRequest request) =>
       _client.invoke<ListSearchResponse>(
           ctx, 'LostIdService', 'ListSearch', request, ListSearchResponse());
+
+  /// Progress retrieves the complete history for a collectible or search.
+  /// Includes status updates and financial transactions.
   $async.Future<ProgressResponse> progress(
           $pb.ClientContext? ctx, ProgressRequest request) =>
       _client.invoke<ProgressResponse>(
           ctx, 'LostIdService', 'Progress', request, ProgressResponse());
+
+  /// ListTransaction retrieves financial transactions.
+  /// Includes rewards paid and service fees charged.
   $async.Future<ListTransactionResponse> listTransaction(
           $pb.ClientContext? ctx, ListTransactionRequest request) =>
       _client.invoke<ListTransactionResponse>(ctx, 'LostIdService',

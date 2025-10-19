@@ -46,20 +46,20 @@ public final class PaymentProto extends com.google.protobuf.GeneratedFile {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_payment_v1_Payment_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_payment_v1_ReconcileRequest_descriptor;
+    internal_static_payment_v1_Account_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_payment_v1_ReconcileRequest_fieldAccessorTable;
+      internal_static_payment_v1_Account_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_payment_v1_ReconcileResponse_descriptor;
+    internal_static_payment_v1_Customer_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_payment_v1_ReconcileResponse_fieldAccessorTable;
+      internal_static_payment_v1_Customer_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_payment_v1_SearchResponse_descriptor;
+    internal_static_payment_v1_PaymentLink_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_payment_v1_SearchResponse_fieldAccessorTable;
+      internal_static_payment_v1_PaymentLink_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_payment_v1_SendRequest_descriptor;
   static final 
@@ -81,11 +81,6 @@ public final class PaymentProto extends com.google.protobuf.GeneratedFile {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_payment_v1_ReceiveResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_payment_v1_Account_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_payment_v1_Account_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_payment_v1_InitiatePromptRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -106,15 +101,20 @@ public final class PaymentProto extends com.google.protobuf.GeneratedFile {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_payment_v1_ReleaseResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_payment_v1_Customer_descriptor;
+    internal_static_payment_v1_ReconcileRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_payment_v1_Customer_fieldAccessorTable;
+      internal_static_payment_v1_ReconcileRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_payment_v1_PaymentLink_descriptor;
+    internal_static_payment_v1_ReconcileResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_payment_v1_PaymentLink_fieldAccessorTable;
+      internal_static_payment_v1_ReconcileResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_payment_v1_SearchResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_payment_v1_SearchResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_payment_v1_CreatePaymentLinkRequest_descriptor;
   static final 
@@ -136,10 +136,9 @@ public final class PaymentProto extends com.google.protobuf.GeneratedFile {
     java.lang.String[] descriptorData = {
       "\n\030payment/v1/payment.proto\022\npayment.v1\032\033" +
       "buf/validate/validate.proto\032\026common/v1/c" +
-      "ommon.proto\032\034google/api/annotations.prot" +
-      "o\032\034google/protobuf/struct.proto\032\027google/" +
-      "type/money.proto\032.protoc-gen-openapiv2/o" +
-      "ptions/annotations.proto\"\356\004\n\007Payment\022\016\n\002" +
+      "ommon.proto\032\034google/protobuf/struct.prot" +
+      "o\032\027google/type/money.proto\032$gnostic/open" +
+      "api/v3/annotations.proto\"\356\004\n\007Payment\022\016\n\002" +
       "id\030\001 \001(\tR\002id\022%\n\016transaction_id\030\002 \001(\tR\rtr" +
       "ansactionId\022!\n\014reference_id\030\003 \001(\tR\013refer" +
       "enceId\022\031\n\010batch_id\030\004 \001(\tR\007batchId\0226\n\027ext" +
@@ -155,62 +154,62 @@ public final class PaymentProto extends com.google.protobuf.GeneratedFile {
       "(\tR\013dateCreated\022%\n\016date_processed\030\016 \001(\tR" +
       "\rdateProcessed\022\032\n\010outbound\030\017 \001(\010R\010outbou" +
       "nd\022-\n\005extra\030\020 \001(\0132\027.google.protobuf.Stru" +
-      "ctR\005extra\"\341\001\n\020ReconcileRequest\0226\n\027extern" +
-      "al_transaction_id\030\001 \001(\tR\025externalTransac" +
-      "tionId\022\024\n\005route\030\002 \001(\tR\005route\022\032\n\010outbound" +
-      "\030\003 \001(\010R\010outbound\022*\n\006amount\030\004 \001(\0132\022.googl" +
-      "e.type.MoneyR\006amount\022\024\n\005owner\030\005 \001(\tR\005own" +
-      "er\022!\n\014country_code\030\006 \001(\tR\013countryCode\"\272\001" +
-      "\n\021ReconcileResponse\022\016\n\002id\030\001 \001(\tR\002id\022%\n\016t" +
-      "ransaction_id\030\002 \001(\tR\rtransactionId\022!\n\014re" +
-      "ference_id\030\003 \001(\tR\013referenceId\022)\n\006status\030" +
-      "\004 \001(\0162\021.common.v1.STATUSR\006status\022 \n\013desc" +
-      "ription\030\005 \001(\tR\013description\"9\n\016SearchResp" +
-      "onse\022\'\n\004data\030\001 \003(\0132\023.payment.v1.PaymentR" +
-      "\004data\"6\n\013SendRequest\022\'\n\004data\030\001 \001(\0132\023.pay" +
-      "ment.v1.PaymentR\004data\"=\n\014SendResponse\022-\n" +
-      "\004data\030\001 \001(\0132\031.common.v1.StatusResponseR\004" +
-      "data\"9\n\016ReceiveRequest\022\'\n\004data\030\001 \001(\0132\023.p" +
-      "ayment.v1.PaymentR\004data\"@\n\017ReceiveRespon" +
-      "se\022-\n\004data\030\001 \001(\0132\031.common.v1.StatusRespo" +
-      "nseR\004data\"g\n\007Account\022%\n\016account_number\030\001" +
+      "ctR\005extra\"g\n\007Account\022%\n\016account_number\030\001" +
       " \001(\tR\raccountNumber\022!\n\014country_code\030\002 \001(" +
-      "\tR\013countryCode\022\022\n\004name\030\003 \001(\tR\004name\"\323\003\n\025I" +
-      "nitiatePromptRequest\022.\n\006source\030\001 \001(\0132\026.c" +
-      "ommon.v1.ContactLinkR\006source\0224\n\trecipien" +
-      "t\030\002 \001(\0132\026.common.v1.ContactLinkR\trecipie" +
-      "nt\022*\n\006amount\030\003 \001(\0132\022.google.type.MoneyR\006" +
-      "amount\022!\n\014date_created\030\004 \001(\tR\013dateCreate" +
-      "d\022\033\n\tdevice_id\030\005 \001(\tR\010deviceId\022\016\n\002id\030\006 \001" +
-      "(\tR\002id\022&\n\005state\030\007 \001(\0162\020.common.v1.STATER" +
-      "\005state\022)\n\006status\030\010 \001(\0162\021.common.v1.STATU" +
-      "SR\006status\022\024\n\005route\030\t \001(\tR\005route\022@\n\021recip" +
-      "ient_account\030\n \001(\0132\023.payment.v1.AccountR" +
-      "\020recipientAccount\022-\n\005extra\030\013 \001(\0132\027.googl" +
-      "e.protobuf.StructR\005extra\"G\n\026InitiateProm" +
-      "ptResponse\022-\n\004data\030\001 \001(\0132\031.common.v1.Sta" +
-      "tusResponseR\004data\"W\n\016ReleaseRequest\022+\n\002i" +
-      "d\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id" +
-      "\022\030\n\007comment\030\002 \001(\tR\007comment\"@\n\017ReleaseRes" +
-      "ponse\022-\n\004data\030\001 \001(\0132\031.common.v1.StatusRe" +
-      "sponseR\004data\"\343\001\n\010Customer\022.\n\006source\030\001 \001(" +
-      "\0132\026.common.v1.ContactLinkR\006source\022#\n\rfir" +
-      "st_address\030\002 \001(\tR\014firstAddress\022!\n\014countr" +
-      "y_code\030\003 \001(\tR\013countryCode\022+\n\022postal_or_z" +
-      "ip_code\030\004 \001(\tR\017postalOrZipCode\0222\n\025custom" +
-      "er_external_ref\030\005 \001(\tR\023customerExternalR" +
-      "ef\"\324\003\n\013PaymentLink\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030" +
-      "(2\020[0-9a-z_-]{3,20}R\002id\022\037\n\013expiry_date\030\002" +
-      " \001(\tR\nexpiryDate\022\033\n\tsale_date\030\003 \001(\tR\010sal" +
-      "eDate\022*\n\021payment_link_type\030\004 \001(\tR\017paymen" +
-      "tLinkType\022\033\n\tsale_type\030\005 \001(\tR\010saleType\022\022" +
-      "\n\004name\030\006 \001(\tR\004name\022 \n\013description\030\007 \001(\tR" +
-      "\013description\022!\n\014external_ref\030\010 \001(\tR\013exte" +
-      "rnalRef\022(\n\020payment_link_ref\030\t \001(\tR\016payme" +
-      "ntLinkRef\022!\n\014redirect_url\030\n \001(\tR\013redirec" +
-      "tUrl\022#\n\ramount_option\030\013 \001(\tR\014amountOptio" +
-      "n\022*\n\006amount\030\014 \001(\0132\022.google.type.MoneyR\006a" +
-      "mount\022\032\n\010currency\030\r \001(\tR\010currency\"\316\001\n\030Cr" +
+      "\tR\013countryCode\022\022\n\004name\030\003 \001(\tR\004name\"\343\001\n\010C" +
+      "ustomer\022.\n\006source\030\001 \001(\0132\026.common.v1.Cont" +
+      "actLinkR\006source\022#\n\rfirst_address\030\002 \001(\tR\014" +
+      "firstAddress\022!\n\014country_code\030\003 \001(\tR\013coun" +
+      "tryCode\022+\n\022postal_or_zip_code\030\004 \001(\tR\017pos" +
+      "talOrZipCode\0222\n\025customer_external_ref\030\005 " +
+      "\001(\tR\023customerExternalRef\"\324\003\n\013PaymentLink" +
+      "\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20" +
+      "}R\002id\022\037\n\013expiry_date\030\002 \001(\tR\nexpiryDate\022\033" +
+      "\n\tsale_date\030\003 \001(\tR\010saleDate\022*\n\021payment_l" +
+      "ink_type\030\004 \001(\tR\017paymentLinkType\022\033\n\tsale_" +
+      "type\030\005 \001(\tR\010saleType\022\022\n\004name\030\006 \001(\tR\004name" +
+      "\022 \n\013description\030\007 \001(\tR\013description\022!\n\014ex" +
+      "ternal_ref\030\010 \001(\tR\013externalRef\022(\n\020payment" +
+      "_link_ref\030\t \001(\tR\016paymentLinkRef\022!\n\014redir" +
+      "ect_url\030\n \001(\tR\013redirectUrl\022#\n\ramount_opt" +
+      "ion\030\013 \001(\tR\014amountOption\022*\n\006amount\030\014 \001(\0132" +
+      "\022.google.type.MoneyR\006amount\022\032\n\010currency\030" +
+      "\r \001(\tR\010currency\"6\n\013SendRequest\022\'\n\004data\030\001" +
+      " \001(\0132\023.payment.v1.PaymentR\004data\"=\n\014SendR" +
+      "esponse\022-\n\004data\030\001 \001(\0132\031.common.v1.Status" +
+      "ResponseR\004data\"9\n\016ReceiveRequest\022\'\n\004data" +
+      "\030\001 \001(\0132\023.payment.v1.PaymentR\004data\"@\n\017Rec" +
+      "eiveResponse\022-\n\004data\030\001 \001(\0132\031.common.v1.S" +
+      "tatusResponseR\004data\"\323\003\n\025InitiatePromptRe" +
+      "quest\022.\n\006source\030\001 \001(\0132\026.common.v1.Contac" +
+      "tLinkR\006source\0224\n\trecipient\030\002 \001(\0132\026.commo" +
+      "n.v1.ContactLinkR\trecipient\022*\n\006amount\030\003 " +
+      "\001(\0132\022.google.type.MoneyR\006amount\022!\n\014date_" +
+      "created\030\004 \001(\tR\013dateCreated\022\033\n\tdevice_id\030" +
+      "\005 \001(\tR\010deviceId\022\016\n\002id\030\006 \001(\tR\002id\022&\n\005state" +
+      "\030\007 \001(\0162\020.common.v1.STATER\005state\022)\n\006statu" +
+      "s\030\010 \001(\0162\021.common.v1.STATUSR\006status\022\024\n\005ro" +
+      "ute\030\t \001(\tR\005route\022@\n\021recipient_account\030\n " +
+      "\001(\0132\023.payment.v1.AccountR\020recipientAccou" +
+      "nt\022-\n\005extra\030\013 \001(\0132\027.google.protobuf.Stru" +
+      "ctR\005extra\"G\n\026InitiatePromptResponse\022-\n\004d" +
+      "ata\030\001 \001(\0132\031.common.v1.StatusResponseR\004da" +
+      "ta\"W\n\016ReleaseRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020" +
+      "\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\030\n\007comment\030\002 \001" +
+      "(\tR\007comment\"@\n\017ReleaseResponse\022-\n\004data\030\001" +
+      " \001(\0132\031.common.v1.StatusResponseR\004data\"\341\001" +
+      "\n\020ReconcileRequest\0226\n\027external_transacti" +
+      "on_id\030\001 \001(\tR\025externalTransactionId\022\024\n\005ro" +
+      "ute\030\002 \001(\tR\005route\022\032\n\010outbound\030\003 \001(\010R\010outb" +
+      "ound\022*\n\006amount\030\004 \001(\0132\022.google.type.Money" +
+      "R\006amount\022\024\n\005owner\030\005 \001(\tR\005owner\022!\n\014countr" +
+      "y_code\030\006 \001(\tR\013countryCode\"\272\001\n\021ReconcileR" +
+      "esponse\022\016\n\002id\030\001 \001(\tR\002id\022%\n\016transaction_i" +
+      "d\030\002 \001(\tR\rtransactionId\022!\n\014reference_id\030\003" +
+      " \001(\tR\013referenceId\022)\n\006status\030\004 \001(\0162\021.comm" +
+      "on.v1.STATUSR\006status\022 \n\013description\030\005 \001(" +
+      "\tR\013description\"9\n\016SearchResponse\022\'\n\004data" +
+      "\030\001 \003(\0132\023.payment.v1.PaymentR\004data\"\316\001\n\030Cr" +
       "eatePaymentLinkRequest\0222\n\tcustomers\030\001 \003(" +
       "\0132\024.payment.v1.CustomerR\tcustomers\022:\n\014pa" +
       "yment_link\030\002 \001(\0132\027.payment.v1.PaymentLin" +
@@ -220,51 +219,109 @@ public final class PaymentProto extends com.google.protobuf.GeneratedFile {
       "\001 \001(\0132\031.common.v1.StatusResponseR\004data*m" +
       "\n\020NotificationType\022!\n\035NOTIFICATION_TYPE_" +
       "UNSPECIFIED\020\000\022\033\n\027NOTIFICATION_TYPE_EMAIL" +
-      "\020\001\022\031\n\025NOTIFICATION_TYPE_SMS\020\0022\203\007\n\016Paymen" +
-      "tService\022K\n\004Send\022\027.payment.v1.SendReques" +
-      "t\032\030.payment.v1.SendResponse\"\020\202\323\344\223\002\n\"\005/se" +
-      "nd:\001*\022W\n\007Receive\022\032.payment.v1.ReceiveReq" +
-      "uest\032\033.payment.v1.ReceiveResponse\"\023\202\323\344\223\002" +
-      "\r\"\010/receive:\001*\022t\n\016InitiatePrompt\022!.payme" +
-      "nt.v1.InitiatePromptRequest\032\".payment.v1" +
-      ".InitiatePromptResponse\"\033\202\323\344\223\002\025\"\020/initia" +
-      "te/prompt:\001*\022\201\001\n\021CreatePaymentLink\022$.pay" +
-      "ment.v1.CreatePaymentLinkRequest\032%.payme" +
-      "nt.v1.CreatePaymentLinkResponse\"\037\202\323\344\223\002\031\"" +
-      "\024/create-payment-link:\001*\022S\n\006Status\022\030.com" +
-      "mon.v1.StatusRequest\032\031.common.v1.StatusR" +
-      "esponse\"\024\202\323\344\223\002\016\022\014/status/{id}\022h\n\014StatusU" +
-      "pdate\022\036.common.v1.StatusUpdateRequest\032\037." +
-      "common.v1.StatusUpdateResponse\"\027\202\323\344\223\002\021\032\014" +
-      "/status/{id}:\001*\022a\n\007Release\022\032.payment.v1." +
-      "ReleaseRequest\032\033.payment.v1.ReleaseRespo" +
-      "nse\"\035\202\323\344\223\002\027\"\022/send/release/{id}:\001*\022Q\n\006Se" +
-      "arch\022\030.common.v1.SearchRequest\032\032.payment" +
-      ".v1.SearchResponse\"\017\202\323\344\223\002\t\022\007/search0\001\022\\\n" +
-      "\tReconcile\022\034.payment.v1.ReconcileRequest" +
-      "\032\035.payment.v1.ReconcileResponse\"\022\202\323\344\223\002\014\022" +
-      "\n/reconcileB\273\003\n\037com.antinvestor.apis.pay" +
-      "ment.v1B\014PaymentProtoP\001Z;github.com/anti" +
-      "nvestor/apis/go/payment/payment/v1;payme" +
-      "ntv1\242\002\003PXX\252\002\nPayment.V1\312\002\nPayment\\V1\342\002\026P" +
-      "ayment\\V1\\GPBMetadata\352\002\013Payment::V1\222A\202\002\022" +
-      "o\n\017Payment Service\"W\n\020Ant Investor Ltd\022-" +
-      "https://github.com/antinvestor/service-l" +
-      "ostid\032\024info@antinvestor.com2\0031.0*\002\001\0022\020ap" +
-      "plication/json:\020application/jsonZY\nW\n\006be" +
-      "arer\022M\010\002\0228Authentication token, prefixed" +
-      " by Bearer: Bearer <token>\032\rAuthorizatio" +
-      "n \002b\014\n\n\n\006bearer\022\000b\006proto3"
+      "\020\001\022\031\n\025NOTIFICATION_TYPE_SMS\020\0022\245\026\n\016Paymen" +
+      "tService\022\325\002\n\004Send\022\027.payment.v1.SendReque" +
+      "st\032\030.payment.v1.SendResponse\"\231\002\272G\225\002\n\010Pay" +
+      "ments\022\026Queue outbound payment\032\343\001Queues a" +
+      "n outbound payment for processing. The p" +
+      "ayment is validated and queued but not p" +
+      "rocessed until explicitly released via t" +
+      "he Release RPC. Supports multiple paymen" +
+      "t routes including mobile money, bank tr" +
+      "ansfers, and cards.*\013sendPayment\022\213\002\n\007Rec" +
+      "eive\022\032.payment.v1.ReceiveRequest\032\033.payme" +
+      "nt.v1.ReceiveResponse\"\306\001\272G\302\001\n\010Payments\022\025" +
+      "Queue inbound payment\032\216\001Queues an inboun" +
+      "d payment for processing. Used to record" +
+      " expected incoming payments and match th" +
+      "em with actual receipts during reconcili" +
+      "ation.*\016receivePayment\022\321\002\n\016InitiatePromp" +
+      "t\022!.payment.v1.InitiatePromptRequest\032\".p" +
+      "ayment.v1.InitiatePromptResponse\"\367\001\272G\363\001\n" +
+      "\010Payments\022\027Initiate payment prompt\032\266\001Ini" +
+      "tiates a payment prompt to the customer\'" +
+      "s device. For mobile money (e.g., M-PESA" +
+      "), this triggers an STK push prompt. For" +
+      " other methods, it may send a payment re" +
+      "quest notification.*\025initiatePaymentProm" +
+      "pt\022\373\002\n\021CreatePaymentLink\022$.payment.v1.Cr" +
+      "eatePaymentLinkRequest\032%.payment.v1.Crea" +
+      "tePaymentLinkResponse\"\230\002\272G\224\002\n\rPayment Li" +
+      "nks\022\023Create payment link\032\332\001Creates a sha" +
+      "reable payment link for customer-initiat" +
+      "ed payments. Supports fixed or variable " +
+      "amounts, expiration dates, and multiple " +
+      "notification methods (email, SMS). Usefu" +
+      "l for invoices, donations, and subscript" +
+      "ions.*\021createPaymentLink\022\204\002\n\006Status\022\030.co" +
+      "mmon.v1.StatusRequest\032\031.common.v1.Status" +
+      "Response\"\304\001\272G\300\001\n\010Payments\022\022Get payment s" +
+      "tatus\032\215\001Retrieves the current status of " +
+      "a payment including processing state (qu" +
+      "eued, processing, completed, failed) and" +
+      " detailed status information.*\020getPaymen" +
+      "tStatus\022\251\002\n\014StatusUpdate\022\036.common.v1.Sta" +
+      "tusUpdateRequest\032\037.common.v1.StatusUpdat" +
+      "eResponse\"\327\001\272G\323\001\n\010Payments\022\025Update payme" +
+      "nt status\032\232\001Updates the status of a paym" +
+      "ent. Used for manual status corrections," +
+      " workflow progression, or handling excep" +
+      "tional cases that require manual interve" +
+      "ntion.*\023updatePaymentStatus\022\261\002\n\007Release\022" +
+      "\032.payment.v1.ReleaseRequest\032\033.payment.v1" +
+      ".ReleaseResponse\"\354\001\272G\350\001\n\010Payments\022\026Relea" +
+      "se queued payment\032\263\001Releases a queued pa" +
+      "yment for processing. This triggers the " +
+      "actual payment transfer through the spec" +
+      "ified route. Supports batch processing b" +
+      "y releasing multiple payments together.*" +
+      "\016releasePayment\022\261\002\n\006Search\022\030.common.v1.S" +
+      "earchRequest\032\032.payment.v1.SearchResponse" +
+      "\"\356\001\272G\352\001\n\010Payments\022\017Search payments\032\274\001Sea" +
+      "rches for payments matching specified cr" +
+      "iteria. Supports filtering by date range" +
+      ", amount, status, route, source, recipie" +
+      "nt, and custom properties. Returns a str" +
+      "eam of matching payments.*\016searchPayment" +
+      "s0\001\022\277\002\n\tReconcile\022\034.payment.v1.Reconcile" +
+      "Request\032\035.payment.v1.ReconcileResponse\"\364" +
+      "\001\272G\360\001\n\016Reconciliation\022\036Reconcile externa" +
+      "l transaction\032\253\001Reconciles an external t" +
+      "ransaction (from mobile money provider, " +
+      "bank statement) with internal payment re" +
+      "cords. Matches based on external transac" +
+      "tion ID, amount, and route.*\020reconcilePa" +
+      "ymentB\321\006\n\037com.antinvestor.apis.payment.v" +
+      "1B\014PaymentProtoP\001Z3github.com/antinvesto" +
+      "r/apis/go/payment/v1;paymentv1\242\002\003PXX\252\002\nP" +
+      "ayment.V1\312\002\nPayment\\V1\342\002\026Payment\\V1\\GPBM" +
+      "etadata\352\002\013Payment::V1\272G\240\005\022\364\004\n\017Payment Se" +
+      "rvice\022\263\003The Payment Service provides com" +
+      "prehensive payment processing capabiliti" +
+      "es including inbound and outbound paymen" +
+      "ts, payment link generation, reconciliat" +
+      "ion, and multi-channel payment routing. " +
+      "It supports various payment methods (mob" +
+      "ile money, bank transfers, cards) and fo" +
+      "llows a queue-and-release pattern for ba" +
+      "tch processing. The service handles paym" +
+      "ent lifecycle management from initiation" +
+      " through completion with full audit trai" +
+      "ls.\"X\n\020Ant Investor Ltd\022.https://github." +
+      "com/antinvestor/service-payment\032\024info@an" +
+      "tinvestor.com*I\n\016Apache License\0227https:/" +
+      "/github.com/antinvestor/apis/blob/master" +
+      "/LICENSE2\006v1.0.0*\':%\n#\n\nBearerAuth\022\025\n\023\n\004" +
+      "http*\006bearer2\003JWTb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           build.buf.validate.ValidateProto.getDescriptor(),
           com.antinvestor.apis.common.v1.CommonProto.getDescriptor(),
-          com.google.api.AnnotationsProto.getDescriptor(),
           com.google.protobuf.StructProto.getDescriptor(),
           com.google.type.MoneyProto.getDescriptor(),
-          grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor(),
+          org.openapi_v3.AnnotationsProto.getDescriptor(),
         });
     internal_static_payment_v1_Payment_descriptor =
       getDescriptor().getMessageType(0);
@@ -272,24 +329,24 @@ public final class PaymentProto extends com.google.protobuf.GeneratedFile {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_payment_v1_Payment_descriptor,
         new java.lang.String[] { "Id", "TransactionId", "ReferenceId", "BatchId", "ExternalTransactionId", "Route", "Source", "Recipient", "Amount", "Cost", "State", "Status", "DateCreated", "DateProcessed", "Outbound", "Extra", });
-    internal_static_payment_v1_ReconcileRequest_descriptor =
+    internal_static_payment_v1_Account_descriptor =
       getDescriptor().getMessageType(1);
-    internal_static_payment_v1_ReconcileRequest_fieldAccessorTable = new
+    internal_static_payment_v1_Account_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_payment_v1_ReconcileRequest_descriptor,
-        new java.lang.String[] { "ExternalTransactionId", "Route", "Outbound", "Amount", "Owner", "CountryCode", });
-    internal_static_payment_v1_ReconcileResponse_descriptor =
+        internal_static_payment_v1_Account_descriptor,
+        new java.lang.String[] { "AccountNumber", "CountryCode", "Name", });
+    internal_static_payment_v1_Customer_descriptor =
       getDescriptor().getMessageType(2);
-    internal_static_payment_v1_ReconcileResponse_fieldAccessorTable = new
+    internal_static_payment_v1_Customer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_payment_v1_ReconcileResponse_descriptor,
-        new java.lang.String[] { "Id", "TransactionId", "ReferenceId", "Status", "Description", });
-    internal_static_payment_v1_SearchResponse_descriptor =
+        internal_static_payment_v1_Customer_descriptor,
+        new java.lang.String[] { "Source", "FirstAddress", "CountryCode", "PostalOrZipCode", "CustomerExternalRef", });
+    internal_static_payment_v1_PaymentLink_descriptor =
       getDescriptor().getMessageType(3);
-    internal_static_payment_v1_SearchResponse_fieldAccessorTable = new
+    internal_static_payment_v1_PaymentLink_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_payment_v1_SearchResponse_descriptor,
-        new java.lang.String[] { "Data", });
+        internal_static_payment_v1_PaymentLink_descriptor,
+        new java.lang.String[] { "Id", "ExpiryDate", "SaleDate", "PaymentLinkType", "SaleType", "Name", "Description", "ExternalRef", "PaymentLinkRef", "RedirectUrl", "AmountOption", "Amount", "Currency", });
     internal_static_payment_v1_SendRequest_descriptor =
       getDescriptor().getMessageType(4);
     internal_static_payment_v1_SendRequest_fieldAccessorTable = new
@@ -314,48 +371,48 @@ public final class PaymentProto extends com.google.protobuf.GeneratedFile {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_payment_v1_ReceiveResponse_descriptor,
         new java.lang.String[] { "Data", });
-    internal_static_payment_v1_Account_descriptor =
-      getDescriptor().getMessageType(8);
-    internal_static_payment_v1_Account_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_payment_v1_Account_descriptor,
-        new java.lang.String[] { "AccountNumber", "CountryCode", "Name", });
     internal_static_payment_v1_InitiatePromptRequest_descriptor =
-      getDescriptor().getMessageType(9);
+      getDescriptor().getMessageType(8);
     internal_static_payment_v1_InitiatePromptRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_payment_v1_InitiatePromptRequest_descriptor,
         new java.lang.String[] { "Source", "Recipient", "Amount", "DateCreated", "DeviceId", "Id", "State", "Status", "Route", "RecipientAccount", "Extra", });
     internal_static_payment_v1_InitiatePromptResponse_descriptor =
-      getDescriptor().getMessageType(10);
+      getDescriptor().getMessageType(9);
     internal_static_payment_v1_InitiatePromptResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_payment_v1_InitiatePromptResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_payment_v1_ReleaseRequest_descriptor =
-      getDescriptor().getMessageType(11);
+      getDescriptor().getMessageType(10);
     internal_static_payment_v1_ReleaseRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_payment_v1_ReleaseRequest_descriptor,
         new java.lang.String[] { "Id", "Comment", });
     internal_static_payment_v1_ReleaseResponse_descriptor =
-      getDescriptor().getMessageType(12);
+      getDescriptor().getMessageType(11);
     internal_static_payment_v1_ReleaseResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_payment_v1_ReleaseResponse_descriptor,
         new java.lang.String[] { "Data", });
-    internal_static_payment_v1_Customer_descriptor =
+    internal_static_payment_v1_ReconcileRequest_descriptor =
+      getDescriptor().getMessageType(12);
+    internal_static_payment_v1_ReconcileRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_payment_v1_ReconcileRequest_descriptor,
+        new java.lang.String[] { "ExternalTransactionId", "Route", "Outbound", "Amount", "Owner", "CountryCode", });
+    internal_static_payment_v1_ReconcileResponse_descriptor =
       getDescriptor().getMessageType(13);
-    internal_static_payment_v1_Customer_fieldAccessorTable = new
+    internal_static_payment_v1_ReconcileResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_payment_v1_Customer_descriptor,
-        new java.lang.String[] { "Source", "FirstAddress", "CountryCode", "PostalOrZipCode", "CustomerExternalRef", });
-    internal_static_payment_v1_PaymentLink_descriptor =
+        internal_static_payment_v1_ReconcileResponse_descriptor,
+        new java.lang.String[] { "Id", "TransactionId", "ReferenceId", "Status", "Description", });
+    internal_static_payment_v1_SearchResponse_descriptor =
       getDescriptor().getMessageType(14);
-    internal_static_payment_v1_PaymentLink_fieldAccessorTable = new
+    internal_static_payment_v1_SearchResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_payment_v1_PaymentLink_descriptor,
-        new java.lang.String[] { "Id", "ExpiryDate", "SaleDate", "PaymentLinkType", "SaleType", "Name", "Description", "ExternalRef", "PaymentLinkRef", "RedirectUrl", "AmountOption", "Amount", "Currency", });
+        internal_static_payment_v1_SearchResponse_descriptor,
+        new java.lang.String[] { "Data", });
     internal_static_payment_v1_CreatePaymentLinkRequest_descriptor =
       getDescriptor().getMessageType(15);
     internal_static_payment_v1_CreatePaymentLinkRequest_fieldAccessorTable = new
@@ -371,15 +428,14 @@ public final class PaymentProto extends com.google.protobuf.GeneratedFile {
     descriptor.resolveAllFeaturesImmutable();
     build.buf.validate.ValidateProto.getDescriptor();
     com.antinvestor.apis.common.v1.CommonProto.getDescriptor();
-    com.google.api.AnnotationsProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();
     com.google.type.MoneyProto.getDescriptor();
-    grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.getDescriptor();
+    org.openapi_v3.AnnotationsProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(build.buf.validate.ValidateProto.field);
-    registry.add(com.google.api.AnnotationsProto.http);
-    registry.add(grpc.gateway.protoc_gen_openapiv2.options.AnnotationsProto.openapiv2Swagger);
+    registry.add(org.openapi_v3.AnnotationsProto.document);
+    registry.add(org.openapi_v3.AnnotationsProto.operation);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
   }

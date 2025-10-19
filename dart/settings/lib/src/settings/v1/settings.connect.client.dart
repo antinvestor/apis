@@ -8,8 +8,11 @@ import "settings.pb.dart" as settingsv1settings;
 import "settings.connect.spec.dart" as specs;
 import "../../common/v1/common.pb.dart" as commonv1common;
 
+/// SettingsService provides hierarchical configuration management.
+/// All RPCs require authentication via Bearer token.
 extension type SettingsServiceClient (connect.Transport _transport) {
-  /// Gets a single setting and its stored value
+  /// Get retrieves a single setting value by its hierarchical key.
+  /// Returns the most specific matching setting based on the key hierarchy.
   Future<settingsv1settings.GetResponse> get(
     settingsv1settings.GetRequest input, {
     connect.Headers? headers,
@@ -27,6 +30,8 @@ extension type SettingsServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// List retrieves all settings matching a partial key.
+  /// Empty fields in the key act as wildcards.
   Stream<settingsv1settings.ListResponse> list(
     settingsv1settings.ListRequest input, {
     connect.Headers? headers,
@@ -44,6 +49,8 @@ extension type SettingsServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// Search finds settings matching specified criteria.
+  /// Supports full-text search and filtering.
   Stream<settingsv1settings.SearchResponse> search(
     commonv1common.SearchRequest input, {
     connect.Headers? headers,
@@ -61,6 +68,8 @@ extension type SettingsServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// Set creates or updates a setting value.
+  /// Creates a new setting if it doesn't exist, updates if it does.
   Future<settingsv1settings.SetResponse> set(
     settingsv1settings.SetRequest input, {
     connect.Headers? headers,

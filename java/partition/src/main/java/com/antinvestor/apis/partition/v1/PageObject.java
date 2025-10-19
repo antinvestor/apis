@@ -20,6 +20,10 @@
 package com.antinvestor.apis.partition.v1;
 
 /**
+ * <pre>
+ * PageObject represents a custom UI page for a partition.
+ * </pre>
+ *
  * Protobuf type {@code partition.v1.PageObject}
  */
 @com.google.protobuf.Generated
@@ -66,6 +70,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
   /**
+   * <pre>
+   * Unique page ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
@@ -83,6 +91,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Unique page ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -105,6 +117,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object name_ = "";
   /**
+   * <pre>
+   * Page name
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The name.
    */
@@ -122,6 +138,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Page name
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The bytes for name.
    */
@@ -144,6 +164,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object html_ = "";
   /**
+   * <pre>
+   * HTML content for the page
+   * </pre>
+   *
    * <code>string html = 3 [json_name = "html", (.buf.validate.field) = { ... }</code>
    * @return The html.
    */
@@ -161,6 +185,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * HTML content for the page
+   * </pre>
+   *
    * <code>string html = 3 [json_name = "html", (.buf.validate.field) = { ... }</code>
    * @return The bytes for html.
    */
@@ -182,6 +210,10 @@ private static final long serialVersionUID = 0L;
   public static final int STATE_FIELD_NUMBER = 4;
   private int state_ = 0;
   /**
+   * <pre>
+   * Page state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 4 [json_name = "state"];</code>
    * @return The enum numeric value on the wire for state.
    */
@@ -189,6 +221,10 @@ private static final long serialVersionUID = 0L;
     return state_;
   }
   /**
+   * <pre>
+   * Page state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 4 [json_name = "state"];</code>
    * @return The state.
    */
@@ -200,6 +236,10 @@ private static final long serialVersionUID = 0L;
   public static final int CREATED_AT_FIELD_NUMBER = 5;
   private com.google.protobuf.Timestamp createdAt_;
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
    * @return Whether the createdAt field is set.
    */
@@ -208,6 +248,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
    * @return The createdAt.
    */
@@ -216,6 +260,10 @@ private static final long serialVersionUID = 0L;
     return createdAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : createdAt_;
   }
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
    */
   @java.lang.Override
@@ -226,6 +274,10 @@ private static final long serialVersionUID = 0L;
   public static final int PROPERTIES_FIELD_NUMBER = 6;
   private com.google.protobuf.Struct properties_;
   /**
+   * <pre>
+   * Additional page metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
    * @return Whether the properties field is set.
    */
@@ -234,6 +286,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000002) != 0);
   }
   /**
+   * <pre>
+   * Additional page metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
    * @return The properties.
    */
@@ -242,6 +298,10 @@ private static final long serialVersionUID = 0L;
     return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
   }
   /**
+   * <pre>
+   * Additional page metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
    */
   @java.lang.Override
@@ -468,6 +528,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * PageObject represents a custom UI page for a partition.
+   * </pre>
+   *
    * Protobuf type {@code partition.v1.PageObject}
    */
   public static final class Builder extends
@@ -698,6 +762,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object id_ = "";
     /**
+     * <pre>
+     * Unique page ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The id.
      */
@@ -714,6 +782,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique page ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return The bytes for id.
      */
@@ -731,6 +803,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique page ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The id to set.
      * @return This builder for chaining.
@@ -744,6 +820,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique page ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -754,6 +834,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique page ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for id to set.
      * @return This builder for chaining.
@@ -770,6 +854,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object name_ = "";
     /**
+     * <pre>
+     * Page name
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
      * @return The name.
      */
@@ -786,6 +874,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Page name
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
      * @return The bytes for name.
      */
@@ -803,6 +895,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Page name
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
      * @param value The name to set.
      * @return This builder for chaining.
@@ -816,6 +912,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Page name
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -826,6 +926,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Page name
+     * </pre>
+     *
      * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for name to set.
      * @return This builder for chaining.
@@ -842,6 +946,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object html_ = "";
     /**
+     * <pre>
+     * HTML content for the page
+     * </pre>
+     *
      * <code>string html = 3 [json_name = "html", (.buf.validate.field) = { ... }</code>
      * @return The html.
      */
@@ -858,6 +966,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * HTML content for the page
+     * </pre>
+     *
      * <code>string html = 3 [json_name = "html", (.buf.validate.field) = { ... }</code>
      * @return The bytes for html.
      */
@@ -875,6 +987,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * HTML content for the page
+     * </pre>
+     *
      * <code>string html = 3 [json_name = "html", (.buf.validate.field) = { ... }</code>
      * @param value The html to set.
      * @return This builder for chaining.
@@ -888,6 +1004,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * HTML content for the page
+     * </pre>
+     *
      * <code>string html = 3 [json_name = "html", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -898,6 +1018,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * HTML content for the page
+     * </pre>
+     *
      * <code>string html = 3 [json_name = "html", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for html to set.
      * @return This builder for chaining.
@@ -914,6 +1038,10 @@ private static final long serialVersionUID = 0L;
 
     private int state_ = 0;
     /**
+     * <pre>
+     * Page state
+     * </pre>
+     *
      * <code>.common.v1.STATE state = 4 [json_name = "state"];</code>
      * @return The enum numeric value on the wire for state.
      */
@@ -921,6 +1049,10 @@ private static final long serialVersionUID = 0L;
       return state_;
     }
     /**
+     * <pre>
+     * Page state
+     * </pre>
+     *
      * <code>.common.v1.STATE state = 4 [json_name = "state"];</code>
      * @param value The enum numeric value on the wire for state to set.
      * @return This builder for chaining.
@@ -932,6 +1064,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Page state
+     * </pre>
+     *
      * <code>.common.v1.STATE state = 4 [json_name = "state"];</code>
      * @return The state.
      */
@@ -941,6 +1077,10 @@ private static final long serialVersionUID = 0L;
       return result == null ? com.antinvestor.apis.common.v1.STATE.UNRECOGNIZED : result;
     }
     /**
+     * <pre>
+     * Page state
+     * </pre>
+     *
      * <code>.common.v1.STATE state = 4 [json_name = "state"];</code>
      * @param value The state to set.
      * @return This builder for chaining.
@@ -953,6 +1093,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Page state
+     * </pre>
+     *
      * <code>.common.v1.STATE state = 4 [json_name = "state"];</code>
      * @return This builder for chaining.
      */
@@ -967,6 +1111,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> createdAtBuilder_;
     /**
+     * <pre>
+     * Creation timestamp
+     * </pre>
+     *
      * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
      * @return Whether the createdAt field is set.
      */
@@ -974,6 +1122,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000010) != 0);
     }
     /**
+     * <pre>
+     * Creation timestamp
+     * </pre>
+     *
      * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
      * @return The createdAt.
      */
@@ -985,6 +1137,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Creation timestamp
+     * </pre>
+     *
      * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
      */
     public Builder setCreatedAt(com.google.protobuf.Timestamp value) {
@@ -1001,6 +1157,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Creation timestamp
+     * </pre>
+     *
      * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
      */
     public Builder setCreatedAt(
@@ -1015,6 +1175,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Creation timestamp
+     * </pre>
+     *
      * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
      */
     public Builder mergeCreatedAt(com.google.protobuf.Timestamp value) {
@@ -1036,6 +1200,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Creation timestamp
+     * </pre>
+     *
      * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
      */
     public Builder clearCreatedAt() {
@@ -1049,6 +1217,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Creation timestamp
+     * </pre>
+     *
      * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
      */
     public com.google.protobuf.Timestamp.Builder getCreatedAtBuilder() {
@@ -1057,6 +1229,10 @@ private static final long serialVersionUID = 0L;
       return internalGetCreatedAtFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Creation timestamp
+     * </pre>
+     *
      * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
      */
     public com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder() {
@@ -1068,6 +1244,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Creation timestamp
+     * </pre>
+     *
      * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
@@ -1088,6 +1268,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> propertiesBuilder_;
     /**
+     * <pre>
+     * Additional page metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
      * @return Whether the properties field is set.
      */
@@ -1095,6 +1279,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000020) != 0);
     }
     /**
+     * <pre>
+     * Additional page metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
      * @return The properties.
      */
@@ -1106,6 +1294,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional page metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
      */
     public Builder setProperties(com.google.protobuf.Struct value) {
@@ -1122,6 +1314,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional page metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
      */
     public Builder setProperties(
@@ -1136,6 +1332,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional page metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
      */
     public Builder mergeProperties(com.google.protobuf.Struct value) {
@@ -1157,6 +1357,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional page metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
      */
     public Builder clearProperties() {
@@ -1170,6 +1374,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional page metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
      */
     public com.google.protobuf.Struct.Builder getPropertiesBuilder() {
@@ -1178,6 +1386,10 @@ private static final long serialVersionUID = 0L;
       return internalGetPropertiesFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Additional page metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
      */
     public com.google.protobuf.StructOrBuilder getPropertiesOrBuilder() {
@@ -1189,6 +1401,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional page metadata
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 6 [json_name = "properties"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<

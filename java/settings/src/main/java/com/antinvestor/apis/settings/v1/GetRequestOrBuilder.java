@@ -25,16 +25,28 @@ public interface GetRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Setting key to retrieve
+   * </pre>
+   *
    * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
    * @return Whether the key field is set.
    */
   boolean hasKey();
   /**
+   * <pre>
+   * Setting key to retrieve
+   * </pre>
+   *
    * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
    * @return The key.
    */
   com.antinvestor.apis.settings.v1.Setting getKey();
   /**
+   * <pre>
+   * Setting key to retrieve
+   * </pre>
+   *
    * <code>.settings.v1.Setting key = 1 [json_name = "key"];</code>
    */
   com.antinvestor.apis.settings.v1.SettingOrBuilder getKeyOrBuilder();

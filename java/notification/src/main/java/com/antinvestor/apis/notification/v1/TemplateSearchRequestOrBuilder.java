@@ -25,11 +25,19 @@ public interface TemplateSearchRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Search query (template name, content, etc.)
+   * </pre>
+   *
    * <code>string query = 1 [json_name = "query"];</code>
    * @return The query.
    */
   java.lang.String getQuery();
   /**
+   * <pre>
+   * Search query (template name, content, etc.)
+   * </pre>
+   *
    * <code>string query = 1 [json_name = "query"];</code>
    * @return The bytes for query.
    */
@@ -37,11 +45,19 @@ public interface TemplateSearchRequestOrBuilder extends
       getQueryBytes();
 
   /**
+   * <pre>
+   * Filter by language code
+   * </pre>
+   *
    * <code>string language_code = 2 [json_name = "languageCode"];</code>
    * @return The languageCode.
    */
   java.lang.String getLanguageCode();
   /**
+   * <pre>
+   * Filter by language code
+   * </pre>
+   *
    * <code>string language_code = 2 [json_name = "languageCode"];</code>
    * @return The bytes for languageCode.
    */
@@ -49,12 +65,20 @@ public interface TemplateSearchRequestOrBuilder extends
       getLanguageCodeBytes();
 
   /**
+   * <pre>
+   * Page number for pagination
+   * </pre>
+   *
    * <code>int64 page = 3 [json_name = "page"];</code>
    * @return The page.
    */
   long getPage();
 
   /**
+   * <pre>
+   * Number of results per page
+   * </pre>
+   *
    * <code>int32 count = 4 [json_name = "count"];</code>
    * @return The count.
    */

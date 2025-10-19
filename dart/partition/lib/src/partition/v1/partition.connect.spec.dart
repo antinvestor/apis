@@ -6,11 +6,13 @@
 import "package:connectrpc/connect.dart" as connect;
 import "partition.pb.dart" as partitionv1partition;
 
+/// PartitionService provides multi-tenancy and data isolation.
+/// All RPCs require authentication via Bearer token.
 abstract final class PartitionService {
   /// Fully-qualified name of the PartitionService service.
   static const name = 'partition.v1.PartitionService';
 
-  /// Get a tenant in the system matching the id
+  /// GetTenant retrieves a tenant by ID.
   static const getTenant = connect.Spec(
     '/$name/GetTenant',
     connect.StreamType.unary,
@@ -18,7 +20,7 @@ abstract final class PartitionService {
     partitionv1partition.GetTenantResponse.new,
   );
 
-  /// List all tenants in the system matching the query in some way
+  /// ListTenant retrieves all tenants matching criteria.
   static const listTenant = connect.Spec(
     '/$name/ListTenant',
     connect.StreamType.server,
@@ -26,7 +28,7 @@ abstract final class PartitionService {
     partitionv1partition.ListTenantResponse.new,
   );
 
-  /// Log a new tenant request
+  /// CreateTenant creates a new tenant.
   static const createTenant = connect.Spec(
     '/$name/CreateTenant',
     connect.StreamType.unary,
@@ -34,7 +36,7 @@ abstract final class PartitionService {
     partitionv1partition.CreateTenantResponse.new,
   );
 
-  /// Update an existing tenant object
+  /// UpdateTenant updates an existing tenant.
   static const updateTenant = connect.Spec(
     '/$name/UpdateTenant',
     connect.StreamType.unary,
@@ -42,7 +44,7 @@ abstract final class PartitionService {
     partitionv1partition.UpdateTenantResponse.new,
   );
 
-  /// List all partitions in the system matching the query in some way
+  /// ListPartition retrieves all partitions matching criteria.
   static const listPartition = connect.Spec(
     '/$name/ListPartition',
     connect.StreamType.server,
@@ -50,7 +52,7 @@ abstract final class PartitionService {
     partitionv1partition.ListPartitionResponse.new,
   );
 
-  /// Log a new partition request
+  /// CreatePartition creates a new partition.
   static const createPartition = connect.Spec(
     '/$name/CreatePartition',
     connect.StreamType.unary,
@@ -58,7 +60,7 @@ abstract final class PartitionService {
     partitionv1partition.CreatePartitionResponse.new,
   );
 
-  /// Get an existing partition object
+  /// GetPartition retrieves a partition by ID.
   static const getPartition = connect.Spec(
     '/$name/GetPartition',
     connect.StreamType.unary,
@@ -66,7 +68,7 @@ abstract final class PartitionService {
     partitionv1partition.GetPartitionResponse.new,
   );
 
-  /// Get a partition parents object
+  /// GetPartitionParents retrieves the parent hierarchy.
   static const getPartitionParents = connect.Spec(
     '/$name/GetPartitionParents',
     connect.StreamType.unary,
@@ -74,7 +76,7 @@ abstract final class PartitionService {
     partitionv1partition.GetPartitionParentsResponse.new,
   );
 
-  /// Update an existing partition object
+  /// UpdatePartition updates an existing partition.
   static const updatePartition = connect.Spec(
     '/$name/UpdatePartition',
     connect.StreamType.unary,
@@ -82,7 +84,7 @@ abstract final class PartitionService {
     partitionv1partition.UpdatePartitionResponse.new,
   );
 
-  /// Create a partition Role for a particular partition
+  /// CreatePartitionRole creates a role within a partition.
   static const createPartitionRole = connect.Spec(
     '/$name/CreatePartitionRole',
     connect.StreamType.unary,
@@ -90,7 +92,7 @@ abstract final class PartitionService {
     partitionv1partition.CreatePartitionRoleResponse.new,
   );
 
-  /// List partition roles available for this particular partition
+  /// ListPartitionRole retrieves all roles for a partition.
   static const listPartitionRole = connect.Spec(
     '/$name/ListPartitionRole',
     connect.StreamType.server,
@@ -98,7 +100,7 @@ abstract final class PartitionService {
     partitionv1partition.ListPartitionRoleResponse.new,
   );
 
-  /// Remove a partition role that is not required
+  /// RemovePartitionRole deletes a partition role.
   static const removePartitionRole = connect.Spec(
     '/$name/RemovePartitionRole',
     connect.StreamType.unary,
@@ -106,7 +108,7 @@ abstract final class PartitionService {
     partitionv1partition.RemovePartitionRoleResponse.new,
   );
 
-  /// Creates a new page for access or customization of how a partition looks like
+  /// CreatePage creates a custom UI page for a partition.
   static const createPage = connect.Spec(
     '/$name/CreatePage',
     connect.StreamType.unary,
@@ -114,7 +116,7 @@ abstract final class PartitionService {
     partitionv1partition.CreatePageResponse.new,
   );
 
-  /// Obtains a new page specific to a partition
+  /// GetPage retrieves a custom page.
   static const getPage = connect.Spec(
     '/$name/GetPage',
     connect.StreamType.unary,
@@ -122,7 +124,7 @@ abstract final class PartitionService {
     partitionv1partition.GetPageResponse.new,
   );
 
-  /// Removes a page from being accessible for a partition
+  /// RemovePage deletes a custom page.
   static const removePage = connect.Spec(
     '/$name/RemovePage',
     connect.StreamType.unary,
@@ -130,7 +132,7 @@ abstract final class PartitionService {
     partitionv1partition.RemovePageResponse.new,
   );
 
-  /// Creates a users ability to access a partition
+  /// CreateAccess grants a profile access to a partition.
   static const createAccess = connect.Spec(
     '/$name/CreateAccess',
     connect.StreamType.unary,
@@ -138,7 +140,7 @@ abstract final class PartitionService {
     partitionv1partition.CreateAccessResponse.new,
   );
 
-  /// Obtains a users access to a partition by access id or partition and profile id
+  /// GetAccess retrieves an access grant.
   static const getAccess = connect.Spec(
     '/$name/GetAccess',
     connect.StreamType.unary,
@@ -146,7 +148,7 @@ abstract final class PartitionService {
     partitionv1partition.GetAccessResponse.new,
   );
 
-  /// Removes a user's ability to access a partition
+  /// RemoveAccess revokes a profile's access to a partition.
   static const removeAccess = connect.Spec(
     '/$name/RemoveAccess',
     connect.StreamType.unary,
@@ -154,7 +156,7 @@ abstract final class PartitionService {
     partitionv1partition.RemoveAccessResponse.new,
   );
 
-  /// Create an access Role for a particular access
+  /// CreateAccessRole assigns a role to an access grant.
   static const createAccessRole = connect.Spec(
     '/$name/CreateAccessRole',
     connect.StreamType.unary,
@@ -162,7 +164,7 @@ abstract final class PartitionService {
     partitionv1partition.CreateAccessRoleResponse.new,
   );
 
-  /// List access roles available for this particular access
+  /// ListAccessRole retrieves all roles for an access grant.
   static const listAccessRole = connect.Spec(
     '/$name/ListAccessRole',
     connect.StreamType.server,
@@ -170,7 +172,7 @@ abstract final class PartitionService {
     partitionv1partition.ListAccessRoleResponse.new,
   );
 
-  /// Remove an access role that is not required
+  /// RemoveAccessRole removes a role from an access grant.
   static const removeAccessRole = connect.Spec(
     '/$name/RemoveAccessRole',
     connect.StreamType.unary,

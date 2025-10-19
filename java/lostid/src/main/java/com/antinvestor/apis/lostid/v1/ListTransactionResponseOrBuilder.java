@@ -25,24 +25,44 @@ public interface ListTransactionResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * List of transactions
+   * </pre>
+   *
    * <code>repeated .lostid.v1.TransactionItem data = 1 [json_name = "data"];</code>
    */
   java.util.List<com.antinvestor.apis.lostid.v1.TransactionItem> 
       getDataList();
   /**
+   * <pre>
+   * List of transactions
+   * </pre>
+   *
    * <code>repeated .lostid.v1.TransactionItem data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.lostid.v1.TransactionItem getData(int index);
   /**
+   * <pre>
+   * List of transactions
+   * </pre>
+   *
    * <code>repeated .lostid.v1.TransactionItem data = 1 [json_name = "data"];</code>
    */
   int getDataCount();
   /**
+   * <pre>
+   * List of transactions
+   * </pre>
+   *
    * <code>repeated .lostid.v1.TransactionItem data = 1 [json_name = "data"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.lostid.v1.TransactionItemOrBuilder> 
       getDataOrBuilderList();
   /**
+   * <pre>
+   * List of transactions
+   * </pre>
+   *
    * <code>repeated .lostid.v1.TransactionItem data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.lostid.v1.TransactionItemOrBuilder getDataOrBuilder(

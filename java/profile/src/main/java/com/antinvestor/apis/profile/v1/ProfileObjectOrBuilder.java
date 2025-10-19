@@ -25,11 +25,19 @@ public interface ProfileObjectOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique profile ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Unique profile ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,85 +45,153 @@ public interface ProfileObjectOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Profile type (person, institution, bot)
+   * </pre>
+   *
    * <code>.profile.v1.ProfileType type = 2 [json_name = "type"];</code>
    * @return The enum numeric value on the wire for type.
    */
   int getTypeValue();
   /**
+   * <pre>
+   * Profile type (person, institution, bot)
+   * </pre>
+   *
    * <code>.profile.v1.ProfileType type = 2 [json_name = "type"];</code>
    * @return The type.
    */
   com.antinvestor.apis.profile.v1.ProfileType getType();
 
   /**
+   * <pre>
+   * Profile properties (name, bio, avatar, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    * @return Whether the properties field is set.
    */
   boolean hasProperties();
   /**
+   * <pre>
+   * Profile properties (name, bio, avatar, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    * @return The properties.
    */
   com.google.protobuf.Struct getProperties();
   /**
+   * <pre>
+   * Profile properties (name, bio, avatar, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    */
   com.google.protobuf.StructOrBuilder getPropertiesOrBuilder();
 
   /**
+   * <pre>
+   * Associated contacts
+   * </pre>
+   *
    * <code>repeated .profile.v1.ContactObject contacts = 4 [json_name = "contacts"];</code>
    */
   java.util.List<com.antinvestor.apis.profile.v1.ContactObject> 
       getContactsList();
   /**
+   * <pre>
+   * Associated contacts
+   * </pre>
+   *
    * <code>repeated .profile.v1.ContactObject contacts = 4 [json_name = "contacts"];</code>
    */
   com.antinvestor.apis.profile.v1.ContactObject getContacts(int index);
   /**
+   * <pre>
+   * Associated contacts
+   * </pre>
+   *
    * <code>repeated .profile.v1.ContactObject contacts = 4 [json_name = "contacts"];</code>
    */
   int getContactsCount();
   /**
+   * <pre>
+   * Associated contacts
+   * </pre>
+   *
    * <code>repeated .profile.v1.ContactObject contacts = 4 [json_name = "contacts"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.profile.v1.ContactObjectOrBuilder> 
       getContactsOrBuilderList();
   /**
+   * <pre>
+   * Associated contacts
+   * </pre>
+   *
    * <code>repeated .profile.v1.ContactObject contacts = 4 [json_name = "contacts"];</code>
    */
   com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getContactsOrBuilder(
       int index);
 
   /**
+   * <pre>
+   * Associated addresses
+   * </pre>
+   *
    * <code>repeated .profile.v1.AddressObject addresses = 5 [json_name = "addresses"];</code>
    */
   java.util.List<com.antinvestor.apis.profile.v1.AddressObject> 
       getAddressesList();
   /**
+   * <pre>
+   * Associated addresses
+   * </pre>
+   *
    * <code>repeated .profile.v1.AddressObject addresses = 5 [json_name = "addresses"];</code>
    */
   com.antinvestor.apis.profile.v1.AddressObject getAddresses(int index);
   /**
+   * <pre>
+   * Associated addresses
+   * </pre>
+   *
    * <code>repeated .profile.v1.AddressObject addresses = 5 [json_name = "addresses"];</code>
    */
   int getAddressesCount();
   /**
+   * <pre>
+   * Associated addresses
+   * </pre>
+   *
    * <code>repeated .profile.v1.AddressObject addresses = 5 [json_name = "addresses"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.profile.v1.AddressObjectOrBuilder> 
       getAddressesOrBuilderList();
   /**
+   * <pre>
+   * Associated addresses
+   * </pre>
+   *
    * <code>repeated .profile.v1.AddressObject addresses = 5 [json_name = "addresses"];</code>
    */
   com.antinvestor.apis.profile.v1.AddressObjectOrBuilder getAddressesOrBuilder(
       int index);
 
   /**
+   * <pre>
+   * Profile state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
    * @return The enum numeric value on the wire for state.
    */
   int getStateValue();
   /**
+   * <pre>
+   * Profile state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
    * @return The state.
    */

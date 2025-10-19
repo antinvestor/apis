@@ -19,6 +19,8 @@ import '../../common/v1/common.pb.dart' as $0;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
+/// Setting represents a hierarchical key for configuration lookup.
+/// Supports multi-level scoping for flexible configuration management.
 class Setting extends $pb.GeneratedMessage {
   factory Setting({
     $core.String? name,
@@ -121,6 +123,7 @@ class Setting extends $pb.GeneratedMessage {
   void clearModule() => $_clearField(5);
 }
 
+/// SettingObject represents a stored setting with its value and metadata.
 class SettingObject extends $pb.GeneratedMessage {
   factory SettingObject({
     $core.String? id,
@@ -215,6 +218,7 @@ class SettingObject extends $pb.GeneratedMessage {
   void clearUpdated() => $_clearField(4);
 }
 
+/// GetRequest retrieves a single setting value.
 class GetRequest extends $pb.GeneratedMessage {
   factory GetRequest({
     Setting? key,
@@ -271,6 +275,7 @@ class GetRequest extends $pb.GeneratedMessage {
   Setting ensureKey() => $_ensure(0);
 }
 
+/// GetResponse returns the requested setting.
 class GetResponse extends $pb.GeneratedMessage {
   factory GetResponse({
     SettingObject? data,
@@ -329,6 +334,7 @@ class GetResponse extends $pb.GeneratedMessage {
   SettingObject ensureData() => $_ensure(0);
 }
 
+/// SearchResponse returns settings matching search criteria.
 class SearchResponse extends $pb.GeneratedMessage {
   factory SearchResponse({
     $core.Iterable<SettingObject>? data,
@@ -380,6 +386,7 @@ class SearchResponse extends $pb.GeneratedMessage {
   $pb.PbList<SettingObject> get data => $_getList(0);
 }
 
+/// ListRequest retrieves all settings matching a partial key.
 class ListRequest extends $pb.GeneratedMessage {
   factory ListRequest({
     Setting? key,
@@ -437,6 +444,7 @@ class ListRequest extends $pb.GeneratedMessage {
   Setting ensureKey() => $_ensure(0);
 }
 
+/// ListResponse returns matching settings.
 class ListResponse extends $pb.GeneratedMessage {
   factory ListResponse({
     $core.Iterable<SettingObject>? data,
@@ -488,6 +496,7 @@ class ListResponse extends $pb.GeneratedMessage {
   $pb.PbList<SettingObject> get data => $_getList(0);
 }
 
+/// SetRequest creates or updates a setting value.
 class SetRequest extends $pb.GeneratedMessage {
   factory SetRequest({
     Setting? key,
@@ -556,6 +565,7 @@ class SetRequest extends $pb.GeneratedMessage {
   void clearValue() => $_clearField(2);
 }
 
+/// SetResponse returns the updated setting.
 class SetResponse extends $pb.GeneratedMessage {
   factory SetResponse({
     SettingObject? data,
@@ -614,23 +624,35 @@ class SetResponse extends $pb.GeneratedMessage {
   SettingObject ensureData() => $_ensure(0);
 }
 
+/// SettingsService provides hierarchical configuration management.
+/// All RPCs require authentication via Bearer token.
 class SettingsServiceApi {
   final $pb.RpcClient _client;
 
   SettingsServiceApi(this._client);
 
-  /// Gets a single setting and its stored value
+  /// Get retrieves a single setting value by its hierarchical key.
+  /// Returns the most specific matching setting based on the key hierarchy.
   $async.Future<GetResponse> get($pb.ClientContext? ctx, GetRequest request) =>
       _client.invoke<GetResponse>(
           ctx, 'SettingsService', 'Get', request, GetResponse());
+
+  /// List retrieves all settings matching a partial key.
+  /// Empty fields in the key act as wildcards.
   $async.Future<ListResponse> list(
           $pb.ClientContext? ctx, ListRequest request) =>
       _client.invoke<ListResponse>(
           ctx, 'SettingsService', 'List', request, ListResponse());
+
+  /// Search finds settings matching specified criteria.
+  /// Supports full-text search and filtering.
   $async.Future<SearchResponse> search(
           $pb.ClientContext? ctx, $0.SearchRequest request) =>
       _client.invoke<SearchResponse>(
           ctx, 'SettingsService', 'Search', request, SearchResponse());
+
+  /// Set creates or updates a setting value.
+  /// Creates a new setting if it doesn't exist, updates if it does.
   $async.Future<SetResponse> set($pb.ClientContext? ctx, SetRequest request) =>
       _client.invoke<SetResponse>(
           ctx, 'SettingsService', 'Set', request, SetResponse());

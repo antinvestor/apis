@@ -21,7 +21,8 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * The request message containing the information necessary to create a key
+ * LogRequest creates a new activity log entry for a device.
+ * Used for tracking device sessions and security auditing.
  * </pre>
  *
  * Protobuf type {@code device.v1.LogRequest}
@@ -73,6 +74,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object deviceId_ = "";
   /**
+   * <pre>
+   * Device ID (optional if session_id is provided)
+   * </pre>
+   *
    * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
    * @return The deviceId.
    */
@@ -90,6 +95,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Device ID (optional if session_id is provided)
+   * </pre>
+   *
    * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for deviceId.
    */
@@ -112,6 +121,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object sessionId_ = "";
   /**
+   * <pre>
+   * Session identifier for this activity
+   * </pre>
+   *
    * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
    * @return The sessionId.
    */
@@ -129,6 +142,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Session identifier for this activity
+   * </pre>
+   *
    * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for sessionId.
    */
@@ -151,6 +168,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object ip_ = "";
   /**
+   * <pre>
+   * IP address of the device
+   * </pre>
+   *
    * <code>string ip = 4 [json_name = "ip"];</code>
    * @return The ip.
    */
@@ -168,6 +189,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * IP address of the device
+   * </pre>
+   *
    * <code>string ip = 4 [json_name = "ip"];</code>
    * @return The bytes for ip.
    */
@@ -190,6 +215,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object locale_ = "";
   /**
+   * <pre>
+   * Locale settings (JSON string)
+   * </pre>
+   *
    * <code>string locale = 5 [json_name = "locale"];</code>
    * @return The locale.
    */
@@ -207,6 +236,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Locale settings (JSON string)
+   * </pre>
+   *
    * <code>string locale = 5 [json_name = "locale"];</code>
    * @return The bytes for locale.
    */
@@ -229,6 +262,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object userAgent_ = "";
   /**
+   * <pre>
+   * User agent string
+   * </pre>
+   *
    * <code>string user_agent = 6 [json_name = "userAgent"];</code>
    * @return The userAgent.
    */
@@ -246,6 +283,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * User agent string
+   * </pre>
+   *
    * <code>string user_agent = 6 [json_name = "userAgent"];</code>
    * @return The bytes for userAgent.
    */
@@ -268,6 +309,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object os_ = "";
   /**
+   * <pre>
+   * Operating system and version
+   * </pre>
+   *
    * <code>string os = 7 [json_name = "os"];</code>
    * @return The os.
    */
@@ -285,6 +330,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Operating system and version
+   * </pre>
+   *
    * <code>string os = 7 [json_name = "os"];</code>
    * @return The bytes for os.
    */
@@ -307,6 +356,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object lastSeen_ = "";
   /**
+   * <pre>
+   * Timestamp of this activity (RFC3339)
+   * </pre>
+   *
    * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
    * @return The lastSeen.
    */
@@ -324,6 +377,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Timestamp of this activity (RFC3339)
+   * </pre>
+   *
    * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
    * @return The bytes for lastSeen.
    */
@@ -345,6 +402,10 @@ private static final long serialVersionUID = 0L;
   public static final int EXTRAS_FIELD_NUMBER = 9;
   private com.google.protobuf.Struct extras_;
   /**
+   * <pre>
+   * Additional log data (location, app version, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
    * @return Whether the extras field is set.
    */
@@ -353,6 +414,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Additional log data (location, app version, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
    * @return The extras.
    */
@@ -361,6 +426,10 @@ private static final long serialVersionUID = 0L;
     return extras_ == null ? com.google.protobuf.Struct.getDefaultInstance() : extras_;
   }
   /**
+   * <pre>
+   * Additional log data (location, app version, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
    */
   @java.lang.Override
@@ -602,7 +671,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The request message containing the information necessary to create a key
+   * LogRequest creates a new activity log entry for a device.
+   * Used for tracking device sessions and security auditing.
    * </pre>
    *
    * Protobuf type {@code device.v1.LogRequest}
@@ -857,6 +927,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object deviceId_ = "";
     /**
+     * <pre>
+     * Device ID (optional if session_id is provided)
+     * </pre>
+     *
      * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return The deviceId.
      */
@@ -873,6 +947,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Device ID (optional if session_id is provided)
+     * </pre>
+     *
      * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for deviceId.
      */
@@ -890,6 +968,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Device ID (optional if session_id is provided)
+     * </pre>
+     *
      * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @param value The deviceId to set.
      * @return This builder for chaining.
@@ -903,6 +985,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Device ID (optional if session_id is provided)
+     * </pre>
+     *
      * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -913,6 +999,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Device ID (optional if session_id is provided)
+     * </pre>
+     *
      * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for deviceId to set.
      * @return This builder for chaining.
@@ -929,6 +1019,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object sessionId_ = "";
     /**
+     * <pre>
+     * Session identifier for this activity
+     * </pre>
+     *
      * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
      * @return The sessionId.
      */
@@ -945,6 +1039,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Session identifier for this activity
+     * </pre>
+     *
      * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for sessionId.
      */
@@ -962,6 +1060,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Session identifier for this activity
+     * </pre>
+     *
      * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
      * @param value The sessionId to set.
      * @return This builder for chaining.
@@ -975,6 +1077,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Session identifier for this activity
+     * </pre>
+     *
      * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -985,6 +1091,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Session identifier for this activity
+     * </pre>
+     *
      * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for sessionId to set.
      * @return This builder for chaining.
@@ -1001,6 +1111,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object ip_ = "";
     /**
+     * <pre>
+     * IP address of the device
+     * </pre>
+     *
      * <code>string ip = 4 [json_name = "ip"];</code>
      * @return The ip.
      */
@@ -1017,6 +1131,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * IP address of the device
+     * </pre>
+     *
      * <code>string ip = 4 [json_name = "ip"];</code>
      * @return The bytes for ip.
      */
@@ -1034,6 +1152,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * IP address of the device
+     * </pre>
+     *
      * <code>string ip = 4 [json_name = "ip"];</code>
      * @param value The ip to set.
      * @return This builder for chaining.
@@ -1047,6 +1169,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * IP address of the device
+     * </pre>
+     *
      * <code>string ip = 4 [json_name = "ip"];</code>
      * @return This builder for chaining.
      */
@@ -1057,6 +1183,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * IP address of the device
+     * </pre>
+     *
      * <code>string ip = 4 [json_name = "ip"];</code>
      * @param value The bytes for ip to set.
      * @return This builder for chaining.
@@ -1073,6 +1203,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object locale_ = "";
     /**
+     * <pre>
+     * Locale settings (JSON string)
+     * </pre>
+     *
      * <code>string locale = 5 [json_name = "locale"];</code>
      * @return The locale.
      */
@@ -1089,6 +1223,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Locale settings (JSON string)
+     * </pre>
+     *
      * <code>string locale = 5 [json_name = "locale"];</code>
      * @return The bytes for locale.
      */
@@ -1106,6 +1244,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Locale settings (JSON string)
+     * </pre>
+     *
      * <code>string locale = 5 [json_name = "locale"];</code>
      * @param value The locale to set.
      * @return This builder for chaining.
@@ -1119,6 +1261,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Locale settings (JSON string)
+     * </pre>
+     *
      * <code>string locale = 5 [json_name = "locale"];</code>
      * @return This builder for chaining.
      */
@@ -1129,6 +1275,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Locale settings (JSON string)
+     * </pre>
+     *
      * <code>string locale = 5 [json_name = "locale"];</code>
      * @param value The bytes for locale to set.
      * @return This builder for chaining.
@@ -1145,6 +1295,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object userAgent_ = "";
     /**
+     * <pre>
+     * User agent string
+     * </pre>
+     *
      * <code>string user_agent = 6 [json_name = "userAgent"];</code>
      * @return The userAgent.
      */
@@ -1161,6 +1315,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * User agent string
+     * </pre>
+     *
      * <code>string user_agent = 6 [json_name = "userAgent"];</code>
      * @return The bytes for userAgent.
      */
@@ -1178,6 +1336,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * User agent string
+     * </pre>
+     *
      * <code>string user_agent = 6 [json_name = "userAgent"];</code>
      * @param value The userAgent to set.
      * @return This builder for chaining.
@@ -1191,6 +1353,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * User agent string
+     * </pre>
+     *
      * <code>string user_agent = 6 [json_name = "userAgent"];</code>
      * @return This builder for chaining.
      */
@@ -1201,6 +1367,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * User agent string
+     * </pre>
+     *
      * <code>string user_agent = 6 [json_name = "userAgent"];</code>
      * @param value The bytes for userAgent to set.
      * @return This builder for chaining.
@@ -1217,6 +1387,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object os_ = "";
     /**
+     * <pre>
+     * Operating system and version
+     * </pre>
+     *
      * <code>string os = 7 [json_name = "os"];</code>
      * @return The os.
      */
@@ -1233,6 +1407,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Operating system and version
+     * </pre>
+     *
      * <code>string os = 7 [json_name = "os"];</code>
      * @return The bytes for os.
      */
@@ -1250,6 +1428,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Operating system and version
+     * </pre>
+     *
      * <code>string os = 7 [json_name = "os"];</code>
      * @param value The os to set.
      * @return This builder for chaining.
@@ -1263,6 +1445,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Operating system and version
+     * </pre>
+     *
      * <code>string os = 7 [json_name = "os"];</code>
      * @return This builder for chaining.
      */
@@ -1273,6 +1459,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Operating system and version
+     * </pre>
+     *
      * <code>string os = 7 [json_name = "os"];</code>
      * @param value The bytes for os to set.
      * @return This builder for chaining.
@@ -1289,6 +1479,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object lastSeen_ = "";
     /**
+     * <pre>
+     * Timestamp of this activity (RFC3339)
+     * </pre>
+     *
      * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
      * @return The lastSeen.
      */
@@ -1305,6 +1499,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Timestamp of this activity (RFC3339)
+     * </pre>
+     *
      * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
      * @return The bytes for lastSeen.
      */
@@ -1322,6 +1520,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Timestamp of this activity (RFC3339)
+     * </pre>
+     *
      * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
      * @param value The lastSeen to set.
      * @return This builder for chaining.
@@ -1335,6 +1537,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Timestamp of this activity (RFC3339)
+     * </pre>
+     *
      * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
      * @return This builder for chaining.
      */
@@ -1345,6 +1551,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Timestamp of this activity (RFC3339)
+     * </pre>
+     *
      * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
      * @param value The bytes for lastSeen to set.
      * @return This builder for chaining.
@@ -1363,6 +1573,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> extrasBuilder_;
     /**
+     * <pre>
+     * Additional log data (location, app version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
      * @return Whether the extras field is set.
      */
@@ -1370,6 +1584,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000080) != 0);
     }
     /**
+     * <pre>
+     * Additional log data (location, app version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
      * @return The extras.
      */
@@ -1381,6 +1599,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional log data (location, app version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
      */
     public Builder setExtras(com.google.protobuf.Struct value) {
@@ -1397,6 +1619,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional log data (location, app version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
      */
     public Builder setExtras(
@@ -1411,6 +1637,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional log data (location, app version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
      */
     public Builder mergeExtras(com.google.protobuf.Struct value) {
@@ -1432,6 +1662,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional log data (location, app version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
      */
     public Builder clearExtras() {
@@ -1445,6 +1679,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Additional log data (location, app version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
      */
     public com.google.protobuf.Struct.Builder getExtrasBuilder() {
@@ -1453,6 +1691,10 @@ private static final long serialVersionUID = 0L;
       return internalGetExtrasFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Additional log data (location, app version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
      */
     public com.google.protobuf.StructOrBuilder getExtrasOrBuilder() {
@@ -1464,6 +1706,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Additional log data (location, app version, etc.)
+     * </pre>
+     *
      * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<

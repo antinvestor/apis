@@ -153,7 +153,16 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
 
 /// Descriptor for `OCRService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
 final $typed_data.Uint8List oCRServiceDescriptor = $convert.base64Decode(
-    'CgpPQ1JTZXJ2aWNlElcKCVJlY29nbml6ZRIYLm9jci52MS5SZWNvZ25pemVSZXF1ZXN0Ghkub2'
-    'NyLnYxLlJlY29nbml6ZVJlc3BvbnNlIhWC0+STAg86ASoiCi9yZWNvZ25pemUSSwoGU3RhdHVz'
-    'EhguY29tbW9uLnYxLlN0YXR1c1JlcXVlc3QaFi5vY3IudjEuU3RhdHVzUmVzcG9uc2UiD4LT5J'
-    'MCCRIHL3N0YXR1cw==');
+    'CgpPQ1JTZXJ2aWNlEv4CCglSZWNvZ25pemUSGC5vY3IudjEuUmVjb2duaXplUmVxdWVzdBoZLm'
+    '9jci52MS5SZWNvZ25pemVSZXNwb25zZSK7ArpHtwIKA09DUhIUUGVyZm9ybSBPQ1Igb24gZmls'
+    'ZXMaigJQZXJmb3JtcyBvcHRpY2FsIGNoYXJhY3RlciByZWNvZ25pdGlvbiBvbiBvbmUgb3IgbW'
+    '9yZSBmaWxlcyAoaW1hZ2VzIG9yIFBERnMpLiBTdXBwb3J0cyBib3RoIHN5bmNocm9ub3VzIHBy'
+    'b2Nlc3NpbmcgKHJldHVybnMgaW1tZWRpYXRlbHkgd2l0aCByZXN1bHRzKSBhbmQgYXN5bmNocm'
+    '9ub3VzIHByb2Nlc3NpbmcgKHF1ZXVlcyBmb3IgYmFja2dyb3VuZCBwcm9jZXNzaW5nKS4gQmF0'
+    'Y2ggcHJvY2Vzc2luZyBzdXBwb3J0cyB1cCB0byA1IGZpbGVzIHBlciByZXF1ZXN0LioNcmVjb2'
+    'duaXplVGV4dBKcAgoGU3RhdHVzEhguY29tbW9uLnYxLlN0YXR1c1JlcXVlc3QaFi5vY3IudjEu'
+    'U3RhdHVzUmVzcG9uc2Ui3wG6R9sBCgNPQ1ISFkdldCBPQ1IgcmVxdWVzdCBzdGF0dXMarQFSZX'
+    'RyaWV2ZXMgdGhlIGN1cnJlbnQgc3RhdHVzIG9mIGFuIGFzeW5jaHJvbm91cyBPQ1IgcmVxdWVz'
+    'dC4gUmV0dXJucyBwcm9jZXNzaW5nIHN0YXR1cyAocXVldWVkLCBpbi1wcm9jZXNzLCBzdWNjZX'
+    'NzZnVsLCBmYWlsZWQpIGFuZCBleHRyYWN0ZWQgdGV4dCBpZiBwcm9jZXNzaW5nIGlzIGNvbXBs'
+    'ZXRlLioMZ2V0T0NSU3RhdHVz');

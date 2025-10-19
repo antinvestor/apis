@@ -20,6 +20,10 @@
 package com.antinvestor.apis.lostid.v1;
 
 /**
+ * <pre>
+ * ProgressResponse returns the complete progress history for an item.
+ * </pre>
+ *
  * Protobuf type {@code lostid.v1.ProgressResponse}
  */
 @com.google.protobuf.Generated
@@ -67,6 +71,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
   /**
+   * <pre>
+   * Item ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The id.
    */
@@ -84,6 +92,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Item ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The bytes for id.
    */
@@ -105,6 +117,10 @@ private static final long serialVersionUID = 0L;
   public static final int TYPE_FIELD_NUMBER = 2;
   private int type_ = 0;
   /**
+   * <pre>
+   * Item type
+   * </pre>
+   *
    * <code>.lostid.v1.ItemType type = 2 [json_name = "type"];</code>
    * @return The enum numeric value on the wire for type.
    */
@@ -112,6 +128,10 @@ private static final long serialVersionUID = 0L;
     return type_;
   }
   /**
+   * <pre>
+   * Item type
+   * </pre>
+   *
    * <code>.lostid.v1.ItemType type = 2 [json_name = "type"];</code>
    * @return The type.
    */
@@ -123,6 +143,10 @@ private static final long serialVersionUID = 0L;
   public static final int PROPERTIES_FIELD_NUMBER = 3;
   private com.google.protobuf.Struct properties_;
   /**
+   * <pre>
+   * Item properties
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    * @return Whether the properties field is set.
    */
@@ -131,6 +155,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Item properties
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    * @return The properties.
    */
@@ -139,6 +167,10 @@ private static final long serialVersionUID = 0L;
     return properties_ == null ? com.google.protobuf.Struct.getDefaultInstance() : properties_;
   }
   /**
+   * <pre>
+   * Item properties
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    */
   @java.lang.Override
@@ -150,6 +182,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object state_ = "";
   /**
+   * <pre>
+   * Current state
+   * </pre>
+   *
    * <code>string state = 4 [json_name = "state"];</code>
    * @return The state.
    */
@@ -167,6 +203,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Current state
+   * </pre>
+   *
    * <code>string state = 4 [json_name = "state"];</code>
    * @return The bytes for state.
    */
@@ -189,6 +229,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private java.util.List<com.antinvestor.apis.lostid.v1.ProgressItem> items_;
   /**
+   * <pre>
+   * Progress history
+   * </pre>
+   *
    * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
    */
   @java.lang.Override
@@ -196,6 +240,10 @@ private static final long serialVersionUID = 0L;
     return items_;
   }
   /**
+   * <pre>
+   * Progress history
+   * </pre>
+   *
    * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
    */
   @java.lang.Override
@@ -204,6 +252,10 @@ private static final long serialVersionUID = 0L;
     return items_;
   }
   /**
+   * <pre>
+   * Progress history
+   * </pre>
+   *
    * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
    */
   @java.lang.Override
@@ -211,6 +263,10 @@ private static final long serialVersionUID = 0L;
     return items_.size();
   }
   /**
+   * <pre>
+   * Progress history
+   * </pre>
+   *
    * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
    */
   @java.lang.Override
@@ -218,6 +274,10 @@ private static final long serialVersionUID = 0L;
     return items_.get(index);
   }
   /**
+   * <pre>
+   * Progress history
+   * </pre>
+   *
    * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
    */
   @java.lang.Override
@@ -230,6 +290,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private java.util.List<com.antinvestor.apis.lostid.v1.TransactionItem> transactions_;
   /**
+   * <pre>
+   * Associated financial transactions
+   * </pre>
+   *
    * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
    */
   @java.lang.Override
@@ -237,6 +301,10 @@ private static final long serialVersionUID = 0L;
     return transactions_;
   }
   /**
+   * <pre>
+   * Associated financial transactions
+   * </pre>
+   *
    * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
    */
   @java.lang.Override
@@ -245,6 +313,10 @@ private static final long serialVersionUID = 0L;
     return transactions_;
   }
   /**
+   * <pre>
+   * Associated financial transactions
+   * </pre>
+   *
    * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
    */
   @java.lang.Override
@@ -252,6 +324,10 @@ private static final long serialVersionUID = 0L;
     return transactions_.size();
   }
   /**
+   * <pre>
+   * Associated financial transactions
+   * </pre>
+   *
    * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
    */
   @java.lang.Override
@@ -259,6 +335,10 @@ private static final long serialVersionUID = 0L;
     return transactions_.get(index);
   }
   /**
+   * <pre>
+   * Associated financial transactions
+   * </pre>
+   *
    * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
    */
   @java.lang.Override
@@ -486,6 +566,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * ProgressResponse returns the complete progress history for an item.
+   * </pre>
+   *
    * Protobuf type {@code lostid.v1.ProgressResponse}
    */
   public static final class Builder extends
@@ -796,6 +880,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object id_ = "";
     /**
+     * <pre>
+     * Item ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @return The id.
      */
@@ -812,6 +900,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Item ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @return The bytes for id.
      */
@@ -829,6 +921,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Item ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @param value The id to set.
      * @return This builder for chaining.
@@ -842,6 +938,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Item ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @return This builder for chaining.
      */
@@ -852,6 +952,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Item ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @param value The bytes for id to set.
      * @return This builder for chaining.
@@ -868,6 +972,10 @@ private static final long serialVersionUID = 0L;
 
     private int type_ = 0;
     /**
+     * <pre>
+     * Item type
+     * </pre>
+     *
      * <code>.lostid.v1.ItemType type = 2 [json_name = "type"];</code>
      * @return The enum numeric value on the wire for type.
      */
@@ -875,6 +983,10 @@ private static final long serialVersionUID = 0L;
       return type_;
     }
     /**
+     * <pre>
+     * Item type
+     * </pre>
+     *
      * <code>.lostid.v1.ItemType type = 2 [json_name = "type"];</code>
      * @param value The enum numeric value on the wire for type to set.
      * @return This builder for chaining.
@@ -886,6 +998,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Item type
+     * </pre>
+     *
      * <code>.lostid.v1.ItemType type = 2 [json_name = "type"];</code>
      * @return The type.
      */
@@ -895,6 +1011,10 @@ private static final long serialVersionUID = 0L;
       return result == null ? com.antinvestor.apis.lostid.v1.ItemType.UNRECOGNIZED : result;
     }
     /**
+     * <pre>
+     * Item type
+     * </pre>
+     *
      * <code>.lostid.v1.ItemType type = 2 [json_name = "type"];</code>
      * @param value The type to set.
      * @return This builder for chaining.
@@ -907,6 +1027,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Item type
+     * </pre>
+     *
      * <code>.lostid.v1.ItemType type = 2 [json_name = "type"];</code>
      * @return This builder for chaining.
      */
@@ -921,6 +1045,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> propertiesBuilder_;
     /**
+     * <pre>
+     * Item properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      * @return Whether the properties field is set.
      */
@@ -928,6 +1056,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000004) != 0);
     }
     /**
+     * <pre>
+     * Item properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      * @return The properties.
      */
@@ -939,6 +1071,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Item properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public Builder setProperties(com.google.protobuf.Struct value) {
@@ -955,6 +1091,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Item properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public Builder setProperties(
@@ -969,6 +1109,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Item properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public Builder mergeProperties(com.google.protobuf.Struct value) {
@@ -990,6 +1134,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Item properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public Builder clearProperties() {
@@ -1003,6 +1151,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Item properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public com.google.protobuf.Struct.Builder getPropertiesBuilder() {
@@ -1011,6 +1163,10 @@ private static final long serialVersionUID = 0L;
       return internalGetPropertiesFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Item properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     public com.google.protobuf.StructOrBuilder getPropertiesOrBuilder() {
@@ -1022,6 +1178,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Item properties
+     * </pre>
+     *
      * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
@@ -1040,6 +1200,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object state_ = "";
     /**
+     * <pre>
+     * Current state
+     * </pre>
+     *
      * <code>string state = 4 [json_name = "state"];</code>
      * @return The state.
      */
@@ -1056,6 +1220,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Current state
+     * </pre>
+     *
      * <code>string state = 4 [json_name = "state"];</code>
      * @return The bytes for state.
      */
@@ -1073,6 +1241,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Current state
+     * </pre>
+     *
      * <code>string state = 4 [json_name = "state"];</code>
      * @param value The state to set.
      * @return This builder for chaining.
@@ -1086,6 +1258,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Current state
+     * </pre>
+     *
      * <code>string state = 4 [json_name = "state"];</code>
      * @return This builder for chaining.
      */
@@ -1096,6 +1272,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Current state
+     * </pre>
+     *
      * <code>string state = 4 [json_name = "state"];</code>
      * @param value The bytes for state to set.
      * @return This builder for chaining.
@@ -1123,6 +1303,10 @@ private static final long serialVersionUID = 0L;
         com.antinvestor.apis.lostid.v1.ProgressItem, com.antinvestor.apis.lostid.v1.ProgressItem.Builder, com.antinvestor.apis.lostid.v1.ProgressItemOrBuilder> itemsBuilder_;
 
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public java.util.List<com.antinvestor.apis.lostid.v1.ProgressItem> getItemsList() {
@@ -1133,6 +1317,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public int getItemsCount() {
@@ -1143,6 +1331,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public com.antinvestor.apis.lostid.v1.ProgressItem getItems(int index) {
@@ -1153,6 +1345,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public Builder setItems(
@@ -1170,6 +1366,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public Builder setItems(
@@ -1184,6 +1384,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public Builder addItems(com.antinvestor.apis.lostid.v1.ProgressItem value) {
@@ -1200,6 +1404,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public Builder addItems(
@@ -1217,6 +1425,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public Builder addItems(
@@ -1231,6 +1443,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public Builder addItems(
@@ -1245,6 +1461,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public Builder addAllItems(
@@ -1260,6 +1480,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public Builder clearItems() {
@@ -1273,6 +1497,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public Builder removeItems(int index) {
@@ -1286,6 +1514,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public com.antinvestor.apis.lostid.v1.ProgressItem.Builder getItemsBuilder(
@@ -1293,6 +1525,10 @@ private static final long serialVersionUID = 0L;
       return internalGetItemsFieldBuilder().getBuilder(index);
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public com.antinvestor.apis.lostid.v1.ProgressItemOrBuilder getItemsOrBuilder(
@@ -1303,6 +1539,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public java.util.List<? extends com.antinvestor.apis.lostid.v1.ProgressItemOrBuilder> 
@@ -1314,6 +1554,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public com.antinvestor.apis.lostid.v1.ProgressItem.Builder addItemsBuilder() {
@@ -1321,6 +1565,10 @@ private static final long serialVersionUID = 0L;
           com.antinvestor.apis.lostid.v1.ProgressItem.getDefaultInstance());
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public com.antinvestor.apis.lostid.v1.ProgressItem.Builder addItemsBuilder(
@@ -1329,6 +1577,10 @@ private static final long serialVersionUID = 0L;
           index, com.antinvestor.apis.lostid.v1.ProgressItem.getDefaultInstance());
     }
     /**
+     * <pre>
+     * Progress history
+     * </pre>
+     *
      * <code>repeated .lostid.v1.ProgressItem items = 5 [json_name = "items"];</code>
      */
     public java.util.List<com.antinvestor.apis.lostid.v1.ProgressItem.Builder> 
@@ -1363,6 +1615,10 @@ private static final long serialVersionUID = 0L;
         com.antinvestor.apis.lostid.v1.TransactionItem, com.antinvestor.apis.lostid.v1.TransactionItem.Builder, com.antinvestor.apis.lostid.v1.TransactionItemOrBuilder> transactionsBuilder_;
 
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public java.util.List<com.antinvestor.apis.lostid.v1.TransactionItem> getTransactionsList() {
@@ -1373,6 +1629,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public int getTransactionsCount() {
@@ -1383,6 +1643,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public com.antinvestor.apis.lostid.v1.TransactionItem getTransactions(int index) {
@@ -1393,6 +1657,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public Builder setTransactions(
@@ -1410,6 +1678,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public Builder setTransactions(
@@ -1424,6 +1696,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public Builder addTransactions(com.antinvestor.apis.lostid.v1.TransactionItem value) {
@@ -1440,6 +1716,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public Builder addTransactions(
@@ -1457,6 +1737,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public Builder addTransactions(
@@ -1471,6 +1755,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public Builder addTransactions(
@@ -1485,6 +1773,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public Builder addAllTransactions(
@@ -1500,6 +1792,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public Builder clearTransactions() {
@@ -1513,6 +1809,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public Builder removeTransactions(int index) {
@@ -1526,6 +1826,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public com.antinvestor.apis.lostid.v1.TransactionItem.Builder getTransactionsBuilder(
@@ -1533,6 +1837,10 @@ private static final long serialVersionUID = 0L;
       return internalGetTransactionsFieldBuilder().getBuilder(index);
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public com.antinvestor.apis.lostid.v1.TransactionItemOrBuilder getTransactionsOrBuilder(
@@ -1543,6 +1851,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public java.util.List<? extends com.antinvestor.apis.lostid.v1.TransactionItemOrBuilder> 
@@ -1554,6 +1866,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public com.antinvestor.apis.lostid.v1.TransactionItem.Builder addTransactionsBuilder() {
@@ -1561,6 +1877,10 @@ private static final long serialVersionUID = 0L;
           com.antinvestor.apis.lostid.v1.TransactionItem.getDefaultInstance());
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public com.antinvestor.apis.lostid.v1.TransactionItem.Builder addTransactionsBuilder(
@@ -1569,6 +1889,10 @@ private static final long serialVersionUID = 0L;
           index, com.antinvestor.apis.lostid.v1.TransactionItem.getDefaultInstance());
     }
     /**
+     * <pre>
+     * Associated financial transactions
+     * </pre>
+     *
      * <code>repeated .lostid.v1.TransactionItem transactions = 6 [json_name = "transactions"];</code>
      */
     public java.util.List<com.antinvestor.apis.lostid.v1.TransactionItem.Builder> 

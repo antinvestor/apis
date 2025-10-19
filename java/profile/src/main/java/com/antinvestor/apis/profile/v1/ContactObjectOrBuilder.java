@@ -25,11 +25,19 @@ public interface ContactObjectOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique contact ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Unique contact ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,22 +45,38 @@ public interface ContactObjectOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Contact type (email or MSISDN)
+   * </pre>
+   *
    * <code>.profile.v1.ContactType type = 2 [json_name = "type"];</code>
    * @return The enum numeric value on the wire for type.
    */
   int getTypeValue();
   /**
+   * <pre>
+   * Contact type (email or MSISDN)
+   * </pre>
+   *
    * <code>.profile.v1.ContactType type = 2 [json_name = "type"];</code>
    * @return The type.
    */
   com.antinvestor.apis.profile.v1.ContactType getType();
 
   /**
+   * <pre>
+   * Contact detail (email address or phone number)
+   * </pre>
+   *
    * <code>string detail = 3 [json_name = "detail"];</code>
    * @return The detail.
    */
   java.lang.String getDetail();
   /**
+   * <pre>
+   * Contact detail (email address or phone number)
+   * </pre>
+   *
    * <code>string detail = 3 [json_name = "detail"];</code>
    * @return The bytes for detail.
    */
@@ -60,44 +84,76 @@ public interface ContactObjectOrBuilder extends
       getDetailBytes();
 
   /**
+   * <pre>
+   * Whether contact has been verified
+   * </pre>
+   *
    * <code>bool verified = 4 [json_name = "verified"];</code>
    * @return The verified.
    */
   boolean getVerified();
 
   /**
+   * <pre>
+   * User's communication preferences
+   * </pre>
+   *
    * <code>.profile.v1.CommunicationLevel communication_level = 5 [json_name = "communicationLevel"];</code>
    * @return The enum numeric value on the wire for communicationLevel.
    */
   int getCommunicationLevelValue();
   /**
+   * <pre>
+   * User's communication preferences
+   * </pre>
+   *
    * <code>.profile.v1.CommunicationLevel communication_level = 5 [json_name = "communicationLevel"];</code>
    * @return The communicationLevel.
    */
   com.antinvestor.apis.profile.v1.CommunicationLevel getCommunicationLevel();
 
   /**
+   * <pre>
+   * Contact state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
    * @return The enum numeric value on the wire for state.
    */
   int getStateValue();
   /**
+   * <pre>
+   * Contact state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
    * @return The state.
    */
   com.antinvestor.apis.common.v1.STATE getState();
 
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 7 [json_name = "extra"];</code>
    * @return Whether the extra field is set.
    */
   boolean hasExtra();
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 7 [json_name = "extra"];</code>
    * @return The extra.
    */
   com.google.protobuf.Struct getExtra();
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 7 [json_name = "extra"];</code>
    */
   com.google.protobuf.StructOrBuilder getExtraOrBuilder();

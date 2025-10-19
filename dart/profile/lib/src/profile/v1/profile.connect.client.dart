@@ -7,9 +7,10 @@ import "package:connectrpc/connect.dart" as connect;
 import "profile.pb.dart" as profilev1profile;
 import "profile.connect.spec.dart" as specs;
 
-/// The profile service definition.
+/// ProfileService manages user and entity profiles.
+/// All RPCs require authentication via Bearer token.
 extension type ProfileServiceClient (connect.Transport _transport) {
-  /// Obtains a profile by its hash
+  /// GetById retrieves a profile by its unique ID.
   Future<profilev1profile.GetByIdResponse> getById(
     profilev1profile.GetByIdRequest input, {
     connect.Headers? headers,
@@ -27,7 +28,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Obtains a profile by its hash
+  /// GetByContact retrieves a profile by contact information.
   Future<profilev1profile.GetByContactResponse> getByContact(
     profilev1profile.GetByContactRequest input, {
     connect.Headers? headers,
@@ -45,7 +46,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Obtains a profile by its hash
+  /// Search finds profiles matching specified criteria.
   Stream<profilev1profile.SearchResponse> search(
     profilev1profile.SearchRequest input, {
     connect.Headers? headers,
@@ -63,7 +64,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Uses data found in the profile from mergeHash to update the current profile.
+  /// Merge combines two profiles into one.
   Future<profilev1profile.MergeResponse> merge(
     profilev1profile.MergeRequest input, {
     connect.Headers? headers,
@@ -81,7 +82,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Creates a new profile based on the request.
+  /// Create creates a new profile.
   Future<profilev1profile.CreateResponse> create(
     profilev1profile.CreateRequest input, {
     connect.Headers? headers,
@@ -99,7 +100,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Creates a new profile based on the request.
+  /// Update updates an existing profile's properties.
   Future<profilev1profile.UpdateResponse> update(
     profilev1profile.UpdateRequest input, {
     connect.Headers? headers,
@@ -117,7 +118,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Adds a new contact based on the request/this leads to automatic verification.
+  /// AddContact adds a new contact to a profile with automatic verification.
   Future<profilev1profile.AddContactResponse> addContact(
     profilev1profile.AddContactRequest input, {
     connect.Headers? headers,
@@ -135,7 +136,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Creates a new free contact based on the details provided.
+  /// CreateContact creates a standalone contact not linked to a profile.
   Future<profilev1profile.CreateContactResponse> createContact(
     profilev1profile.CreateContactRequest input, {
     connect.Headers? headers,
@@ -153,7 +154,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Create a new contact verification request
+  /// CreateContactVerification initiates contact verification.
   Future<profilev1profile.CreateContactVerificationResponse> createContactVerification(
     profilev1profile.CreateContactVerificationRequest input, {
     connect.Headers? headers,
@@ -171,7 +172,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Checks the status of a verification
+  /// CheckVerification verifies a contact using the provided code.
   Future<profilev1profile.CheckVerificationResponse> checkVerification(
     profilev1profile.CheckVerificationRequest input, {
     connect.Headers? headers,
@@ -189,7 +190,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Removes an old contact based on this request's id
+  /// RemoveContact removes a contact from a profile.
   Future<profilev1profile.RemoveContactResponse> removeContact(
     profilev1profile.RemoveContactRequest input, {
     connect.Headers? headers,
@@ -207,7 +208,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Searches all contacts tied to a users profile and based on the active request.
+  /// SearchRoster searches a user's contact roster.
   Stream<profilev1profile.SearchRosterResponse> searchRoster(
     profilev1profile.SearchRosterRequest input, {
     connect.Headers? headers,
@@ -225,7 +226,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Adds a new contact based on the request/this leads to automatic verification.
+  /// AddRoster adds multiple contacts to a user's roster.
   Future<profilev1profile.AddRosterResponse> addRoster(
     profilev1profile.AddRosterRequest input, {
     connect.Headers? headers,
@@ -243,7 +244,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Removes a contact from a user's circle based on this request's id
+  /// RemoveRoster removes a contact from a user's roster.
   Future<profilev1profile.RemoveRosterResponse> removeRoster(
     profilev1profile.RemoveRosterRequest input, {
     connect.Headers? headers,
@@ -261,7 +262,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Adds a new address based on the request.
+  /// AddAddress adds a new address to a profile.
   Future<profilev1profile.AddAddressResponse> addAddress(
     profilev1profile.AddAddressRequest input, {
     connect.Headers? headers,
@@ -279,7 +280,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Adds a new relationship between different proiles.
+  /// AddRelationship creates a relationship between profiles.
   Future<profilev1profile.AddRelationshipResponse> addRelationship(
     profilev1profile.AddRelationshipRequest input, {
     connect.Headers? headers,
@@ -297,7 +298,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Remove an existing relationship between profiles.
+  /// DeleteRelationship removes a relationship between profiles.
   Future<profilev1profile.DeleteRelationshipResponse> deleteRelationship(
     profilev1profile.DeleteRelationshipRequest input, {
     connect.Headers? headers,
@@ -315,7 +316,7 @@ extension type ProfileServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Lists relationships a profile has.
+  /// ListRelationship lists all relationships for a profile.
   Stream<profilev1profile.ListRelationshipResponse> listRelationship(
     profilev1profile.ListRelationshipRequest input, {
     connect.Headers? headers,

@@ -7,12 +7,14 @@ import "package:connectrpc/connect.dart" as connect;
 import "../../common/v1/common.pb.dart" as commonv1common;
 import "ledger.pb.dart" as ledgerv1ledger;
 
-/// The ledger service definition.
+/// LedgerService provides double-entry bookkeeping and financial accounting.
+/// All RPCs require authentication via Bearer token.
 abstract final class LedgerService {
   /// Fully-qualified name of the LedgerService service.
   static const name = 'ledger.v1.LedgerService';
 
-  /// Searches for an ledger based on details
+  /// SearchLedgers finds ledgers in the chart of accounts.
+  /// Supports filtering by type, parent, and custom properties.
   static const searchLedgers = connect.Spec(
     '/$name/SearchLedgers',
     connect.StreamType.server,
@@ -20,7 +22,8 @@ abstract final class LedgerService {
     ledgerv1ledger.Ledger.new,
   );
 
-  /// Creates a new ledger based on supplied data
+  /// CreateLedger creates a new ledger in the chart of accounts.
+  /// Ledgers can be hierarchical with parent-child relationships.
   static const createLedger = connect.Spec(
     '/$name/CreateLedger',
     connect.StreamType.unary,
@@ -28,7 +31,8 @@ abstract final class LedgerService {
     ledgerv1ledger.Ledger.new,
   );
 
-  /// Updates the data component of the ledger.
+  /// UpdateLedger updates an existing ledger's metadata.
+  /// The ledger type and reference cannot be changed.
   static const updateLedger = connect.Spec(
     '/$name/UpdateLedger',
     connect.StreamType.unary,
@@ -36,7 +40,8 @@ abstract final class LedgerService {
     ledgerv1ledger.Ledger.new,
   );
 
-  /// Searches for an account based on details
+  /// SearchAccounts finds accounts matching specified criteria.
+  /// Supports filtering by ledger, balance range, and custom properties.
   static const searchAccounts = connect.Spec(
     '/$name/SearchAccounts',
     connect.StreamType.server,
@@ -44,7 +49,8 @@ abstract final class LedgerService {
     ledgerv1ledger.Account.new,
   );
 
-  /// Creates a new account based on supplied data
+  /// CreateAccount creates a new account within a ledger.
+  /// Each account tracks balances and transaction history.
   static const createAccount = connect.Spec(
     '/$name/CreateAccount',
     connect.StreamType.unary,
@@ -52,7 +58,8 @@ abstract final class LedgerService {
     ledgerv1ledger.Account.new,
   );
 
-  /// Updates the data component of the account.
+  /// UpdateAccount updates an existing account's metadata.
+  /// Balances are updated through transactions, not directly.
   static const updateAccount = connect.Spec(
     '/$name/UpdateAccount',
     connect.StreamType.unary,
@@ -60,7 +67,8 @@ abstract final class LedgerService {
     ledgerv1ledger.Account.new,
   );
 
-  /// Searches for a transaction based on details
+  /// SearchTransactions finds transactions matching specified criteria.
+  /// Supports filtering by date range, account, currency, and status.
   static const searchTransactions = connect.Spec(
     '/$name/SearchTransactions',
     connect.StreamType.server,
@@ -68,7 +76,8 @@ abstract final class LedgerService {
     ledgerv1ledger.Transaction.new,
   );
 
-  /// Creates a new transaction
+  /// CreateTransaction creates a new double-entry transaction.
+  /// All entries must be balanced (sum of debits = sum of credits).
   static const createTransaction = connect.Spec(
     '/$name/CreateTransaction',
     connect.StreamType.unary,
@@ -76,7 +85,8 @@ abstract final class LedgerService {
     ledgerv1ledger.Transaction.new,
   );
 
-  /// Reverses a transaction by creating a new one with inverted entries
+  /// ReverseTransaction reverses a transaction by creating offsetting entries.
+  /// Creates a new REVERSAL transaction that negates the original.
   static const reverseTransaction = connect.Spec(
     '/$name/ReverseTransaction',
     connect.StreamType.unary,
@@ -84,7 +94,8 @@ abstract final class LedgerService {
     ledgerv1ledger.Transaction.new,
   );
 
-  /// Updates a transaction's details
+  /// UpdateTransaction updates a transaction's metadata.
+  /// Entries and amounts cannot be changed after creation.
   static const updateTransaction = connect.Spec(
     '/$name/UpdateTransaction',
     connect.StreamType.unary,
@@ -92,7 +103,8 @@ abstract final class LedgerService {
     ledgerv1ledger.Transaction.new,
   );
 
-  /// Searches for entries matching the search details
+  /// SearchTransactionEntries finds individual transaction entries.
+  /// Useful for account statement generation and reconciliation.
   static const searchTransactionEntries = connect.Spec(
     '/$name/SearchTransactionEntries',
     connect.StreamType.server,

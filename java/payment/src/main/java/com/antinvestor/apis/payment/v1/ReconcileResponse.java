@@ -20,6 +20,10 @@
 package com.antinvestor.apis.payment.v1;
 
 /**
+ * <pre>
+ * ReconcileResponse returns reconciliation result.
+ * </pre>
+ *
  * Protobuf type {@code payment.v1.ReconcileResponse}
  */
 @com.google.protobuf.Generated
@@ -66,6 +70,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object id_ = "";
   /**
+   * <pre>
+   * Internal payment ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The id.
    */
@@ -83,6 +91,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Internal payment ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id"];</code>
    * @return The bytes for id.
    */
@@ -105,6 +117,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object transactionId_ = "";
   /**
+   * <pre>
+   * Transaction ID
+   * </pre>
+   *
    * <code>string transaction_id = 2 [json_name = "transactionId"];</code>
    * @return The transactionId.
    */
@@ -122,6 +138,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Transaction ID
+   * </pre>
+   *
    * <code>string transaction_id = 2 [json_name = "transactionId"];</code>
    * @return The bytes for transactionId.
    */
@@ -144,6 +164,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object referenceId_ = "";
   /**
+   * <pre>
+   * Reference ID
+   * </pre>
+   *
    * <code>string reference_id = 3 [json_name = "referenceId"];</code>
    * @return The referenceId.
    */
@@ -161,6 +185,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Reference ID
+   * </pre>
+   *
    * <code>string reference_id = 3 [json_name = "referenceId"];</code>
    * @return The bytes for referenceId.
    */
@@ -182,6 +210,10 @@ private static final long serialVersionUID = 0L;
   public static final int STATUS_FIELD_NUMBER = 4;
   private int status_ = 0;
   /**
+   * <pre>
+   * Reconciliation status
+   * </pre>
+   *
    * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
    * @return The enum numeric value on the wire for status.
    */
@@ -189,6 +221,10 @@ private static final long serialVersionUID = 0L;
     return status_;
   }
   /**
+   * <pre>
+   * Reconciliation status
+   * </pre>
+   *
    * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
    * @return The status.
    */
@@ -201,6 +237,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object description_ = "";
   /**
+   * <pre>
+   * Status description
+   * </pre>
+   *
    * <code>string description = 5 [json_name = "description"];</code>
    * @return The description.
    */
@@ -218,6 +258,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Status description
+   * </pre>
+   *
    * <code>string description = 5 [json_name = "description"];</code>
    * @return The bytes for description.
    */
@@ -433,6 +477,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * ReconcileResponse returns reconciliation result.
+   * </pre>
+   *
    * Protobuf type {@code payment.v1.ReconcileResponse}
    */
   public static final class Builder extends
@@ -626,6 +674,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object id_ = "";
     /**
+     * <pre>
+     * Internal payment ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @return The id.
      */
@@ -642,6 +694,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Internal payment ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @return The bytes for id.
      */
@@ -659,6 +715,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Internal payment ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @param value The id to set.
      * @return This builder for chaining.
@@ -672,6 +732,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Internal payment ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @return This builder for chaining.
      */
@@ -682,6 +746,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Internal payment ID
+     * </pre>
+     *
      * <code>string id = 1 [json_name = "id"];</code>
      * @param value The bytes for id to set.
      * @return This builder for chaining.
@@ -698,6 +766,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object transactionId_ = "";
     /**
+     * <pre>
+     * Transaction ID
+     * </pre>
+     *
      * <code>string transaction_id = 2 [json_name = "transactionId"];</code>
      * @return The transactionId.
      */
@@ -714,6 +786,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction ID
+     * </pre>
+     *
      * <code>string transaction_id = 2 [json_name = "transactionId"];</code>
      * @return The bytes for transactionId.
      */
@@ -731,6 +807,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction ID
+     * </pre>
+     *
      * <code>string transaction_id = 2 [json_name = "transactionId"];</code>
      * @param value The transactionId to set.
      * @return This builder for chaining.
@@ -744,6 +824,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction ID
+     * </pre>
+     *
      * <code>string transaction_id = 2 [json_name = "transactionId"];</code>
      * @return This builder for chaining.
      */
@@ -754,6 +838,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction ID
+     * </pre>
+     *
      * <code>string transaction_id = 2 [json_name = "transactionId"];</code>
      * @param value The bytes for transactionId to set.
      * @return This builder for chaining.
@@ -770,6 +858,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object referenceId_ = "";
     /**
+     * <pre>
+     * Reference ID
+     * </pre>
+     *
      * <code>string reference_id = 3 [json_name = "referenceId"];</code>
      * @return The referenceId.
      */
@@ -786,6 +878,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Reference ID
+     * </pre>
+     *
      * <code>string reference_id = 3 [json_name = "referenceId"];</code>
      * @return The bytes for referenceId.
      */
@@ -803,6 +899,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Reference ID
+     * </pre>
+     *
      * <code>string reference_id = 3 [json_name = "referenceId"];</code>
      * @param value The referenceId to set.
      * @return This builder for chaining.
@@ -816,6 +916,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Reference ID
+     * </pre>
+     *
      * <code>string reference_id = 3 [json_name = "referenceId"];</code>
      * @return This builder for chaining.
      */
@@ -826,6 +930,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Reference ID
+     * </pre>
+     *
      * <code>string reference_id = 3 [json_name = "referenceId"];</code>
      * @param value The bytes for referenceId to set.
      * @return This builder for chaining.
@@ -842,6 +950,10 @@ private static final long serialVersionUID = 0L;
 
     private int status_ = 0;
     /**
+     * <pre>
+     * Reconciliation status
+     * </pre>
+     *
      * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
      * @return The enum numeric value on the wire for status.
      */
@@ -849,6 +961,10 @@ private static final long serialVersionUID = 0L;
       return status_;
     }
     /**
+     * <pre>
+     * Reconciliation status
+     * </pre>
+     *
      * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
      * @param value The enum numeric value on the wire for status to set.
      * @return This builder for chaining.
@@ -860,6 +976,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Reconciliation status
+     * </pre>
+     *
      * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
      * @return The status.
      */
@@ -869,6 +989,10 @@ private static final long serialVersionUID = 0L;
       return result == null ? com.antinvestor.apis.common.v1.STATUS.UNRECOGNIZED : result;
     }
     /**
+     * <pre>
+     * Reconciliation status
+     * </pre>
+     *
      * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
      * @param value The status to set.
      * @return This builder for chaining.
@@ -881,6 +1005,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Reconciliation status
+     * </pre>
+     *
      * <code>.common.v1.STATUS status = 4 [json_name = "status"];</code>
      * @return This builder for chaining.
      */
@@ -893,6 +1021,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object description_ = "";
     /**
+     * <pre>
+     * Status description
+     * </pre>
+     *
      * <code>string description = 5 [json_name = "description"];</code>
      * @return The description.
      */
@@ -909,6 +1041,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Status description
+     * </pre>
+     *
      * <code>string description = 5 [json_name = "description"];</code>
      * @return The bytes for description.
      */
@@ -926,6 +1062,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Status description
+     * </pre>
+     *
      * <code>string description = 5 [json_name = "description"];</code>
      * @param value The description to set.
      * @return This builder for chaining.
@@ -939,6 +1079,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Status description
+     * </pre>
+     *
      * <code>string description = 5 [json_name = "description"];</code>
      * @return This builder for chaining.
      */
@@ -949,6 +1093,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Status description
+     * </pre>
+     *
      * <code>string description = 5 [json_name = "description"];</code>
      * @param value The bytes for description to set.
      * @return This builder for chaining.

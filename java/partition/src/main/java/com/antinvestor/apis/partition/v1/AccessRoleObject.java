@@ -20,6 +20,10 @@
 package com.antinvestor.apis.partition.v1;
 
 /**
+ * <pre>
+ * AccessRoleObject links an access grant to a partition role.
+ * </pre>
+ *
  * Protobuf type {@code partition.v1.AccessRoleObject}
  */
 @com.google.protobuf.Generated
@@ -64,6 +68,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object accessRoleId_ = "";
   /**
+   * <pre>
+   * Unique access role ID
+   * </pre>
+   *
    * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
    * @return The accessRoleId.
    */
@@ -81,6 +89,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Unique access role ID
+   * </pre>
+   *
    * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for accessRoleId.
    */
@@ -103,6 +115,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object accessId_ = "";
   /**
+   * <pre>
+   * Associated access ID
+   * </pre>
+   *
    * <code>string access_id = 2 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
    * @return The accessId.
    */
@@ -120,6 +136,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Associated access ID
+   * </pre>
+   *
    * <code>string access_id = 2 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for accessId.
    */
@@ -141,6 +161,10 @@ private static final long serialVersionUID = 0L;
   public static final int ROLE_FIELD_NUMBER = 3;
   private com.antinvestor.apis.partition.v1.PartitionRoleObject role_;
   /**
+   * <pre>
+   * Assigned partition role
+   * </pre>
+   *
    * <code>.partition.v1.PartitionRoleObject role = 3 [json_name = "role"];</code>
    * @return Whether the role field is set.
    */
@@ -149,6 +173,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Assigned partition role
+   * </pre>
+   *
    * <code>.partition.v1.PartitionRoleObject role = 3 [json_name = "role"];</code>
    * @return The role.
    */
@@ -157,6 +185,10 @@ private static final long serialVersionUID = 0L;
     return role_ == null ? com.antinvestor.apis.partition.v1.PartitionRoleObject.getDefaultInstance() : role_;
   }
   /**
+   * <pre>
+   * Assigned partition role
+   * </pre>
+   *
    * <code>.partition.v1.PartitionRoleObject role = 3 [json_name = "role"];</code>
    */
   @java.lang.Override
@@ -347,6 +379,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * AccessRoleObject links an access grant to a partition role.
+   * </pre>
+   *
    * Protobuf type {@code partition.v1.AccessRoleObject}
    */
   public static final class Builder extends
@@ -529,6 +565,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object accessRoleId_ = "";
     /**
+     * <pre>
+     * Unique access role ID
+     * </pre>
+     *
      * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
      * @return The accessRoleId.
      */
@@ -545,6 +585,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique access role ID
+     * </pre>
+     *
      * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for accessRoleId.
      */
@@ -562,6 +606,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Unique access role ID
+     * </pre>
+     *
      * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
      * @param value The accessRoleId to set.
      * @return This builder for chaining.
@@ -575,6 +623,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique access role ID
+     * </pre>
+     *
      * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -585,6 +637,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Unique access role ID
+     * </pre>
+     *
      * <code>string access_role_id = 1 [json_name = "accessRoleId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for accessRoleId to set.
      * @return This builder for chaining.
@@ -601,6 +657,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object accessId_ = "";
     /**
+     * <pre>
+     * Associated access ID
+     * </pre>
+     *
      * <code>string access_id = 2 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
      * @return The accessId.
      */
@@ -617,6 +677,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Associated access ID
+     * </pre>
+     *
      * <code>string access_id = 2 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for accessId.
      */
@@ -634,6 +698,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Associated access ID
+     * </pre>
+     *
      * <code>string access_id = 2 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
      * @param value The accessId to set.
      * @return This builder for chaining.
@@ -647,6 +715,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Associated access ID
+     * </pre>
+     *
      * <code>string access_id = 2 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -657,6 +729,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Associated access ID
+     * </pre>
+     *
      * <code>string access_id = 2 [json_name = "accessId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for accessId to set.
      * @return This builder for chaining.
@@ -675,6 +751,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.antinvestor.apis.partition.v1.PartitionRoleObject, com.antinvestor.apis.partition.v1.PartitionRoleObject.Builder, com.antinvestor.apis.partition.v1.PartitionRoleObjectOrBuilder> roleBuilder_;
     /**
+     * <pre>
+     * Assigned partition role
+     * </pre>
+     *
      * <code>.partition.v1.PartitionRoleObject role = 3 [json_name = "role"];</code>
      * @return Whether the role field is set.
      */
@@ -682,6 +762,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000004) != 0);
     }
     /**
+     * <pre>
+     * Assigned partition role
+     * </pre>
+     *
      * <code>.partition.v1.PartitionRoleObject role = 3 [json_name = "role"];</code>
      * @return The role.
      */
@@ -693,6 +777,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Assigned partition role
+     * </pre>
+     *
      * <code>.partition.v1.PartitionRoleObject role = 3 [json_name = "role"];</code>
      */
     public Builder setRole(com.antinvestor.apis.partition.v1.PartitionRoleObject value) {
@@ -709,6 +797,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Assigned partition role
+     * </pre>
+     *
      * <code>.partition.v1.PartitionRoleObject role = 3 [json_name = "role"];</code>
      */
     public Builder setRole(
@@ -723,6 +815,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Assigned partition role
+     * </pre>
+     *
      * <code>.partition.v1.PartitionRoleObject role = 3 [json_name = "role"];</code>
      */
     public Builder mergeRole(com.antinvestor.apis.partition.v1.PartitionRoleObject value) {
@@ -744,6 +840,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Assigned partition role
+     * </pre>
+     *
      * <code>.partition.v1.PartitionRoleObject role = 3 [json_name = "role"];</code>
      */
     public Builder clearRole() {
@@ -757,6 +857,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Assigned partition role
+     * </pre>
+     *
      * <code>.partition.v1.PartitionRoleObject role = 3 [json_name = "role"];</code>
      */
     public com.antinvestor.apis.partition.v1.PartitionRoleObject.Builder getRoleBuilder() {
@@ -765,6 +869,10 @@ private static final long serialVersionUID = 0L;
       return internalGetRoleFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Assigned partition role
+     * </pre>
+     *
      * <code>.partition.v1.PartitionRoleObject role = 3 [json_name = "role"];</code>
      */
     public com.antinvestor.apis.partition.v1.PartitionRoleObjectOrBuilder getRoleOrBuilder() {
@@ -776,6 +884,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Assigned partition role
+     * </pre>
+     *
      * <code>.partition.v1.PartitionRoleObject role = 3 [json_name = "role"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<

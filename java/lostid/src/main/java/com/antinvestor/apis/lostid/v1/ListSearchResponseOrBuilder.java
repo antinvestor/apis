@@ -25,24 +25,44 @@ public interface ListSearchResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * List of search requests
+   * </pre>
+   *
    * <code>repeated .lostid.v1.SearchResponse data = 1 [json_name = "data"];</code>
    */
   java.util.List<com.antinvestor.apis.lostid.v1.SearchResponse> 
       getDataList();
   /**
+   * <pre>
+   * List of search requests
+   * </pre>
+   *
    * <code>repeated .lostid.v1.SearchResponse data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.lostid.v1.SearchResponse getData(int index);
   /**
+   * <pre>
+   * List of search requests
+   * </pre>
+   *
    * <code>repeated .lostid.v1.SearchResponse data = 1 [json_name = "data"];</code>
    */
   int getDataCount();
   /**
+   * <pre>
+   * List of search requests
+   * </pre>
+   *
    * <code>repeated .lostid.v1.SearchResponse data = 1 [json_name = "data"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.lostid.v1.SearchResponseOrBuilder> 
       getDataOrBuilderList();
   /**
+   * <pre>
+   * List of search requests
+   * </pre>
+   *
    * <code>repeated .lostid.v1.SearchResponse data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.lostid.v1.SearchResponseOrBuilder getDataOrBuilder(

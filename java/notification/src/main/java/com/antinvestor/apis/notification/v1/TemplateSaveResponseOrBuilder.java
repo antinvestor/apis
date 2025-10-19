@@ -25,16 +25,28 @@ public interface TemplateSaveResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * The saved template
+   * </pre>
+   *
    * <code>.notification.v1.Template data = 1 [json_name = "data"];</code>
    * @return Whether the data field is set.
    */
   boolean hasData();
   /**
+   * <pre>
+   * The saved template
+   * </pre>
+   *
    * <code>.notification.v1.Template data = 1 [json_name = "data"];</code>
    * @return The data.
    */
   com.antinvestor.apis.notification.v1.Template getData();
   /**
+   * <pre>
+   * The saved template
+   * </pre>
+   *
    * <code>.notification.v1.Template data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.notification.v1.TemplateOrBuilder getDataOrBuilder();

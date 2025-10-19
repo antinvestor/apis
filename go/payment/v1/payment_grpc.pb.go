@@ -48,23 +48,36 @@ const (
 // PaymentServiceClient is the client API for PaymentService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// PaymentService handles payment processing and reconciliation.
+// All RPCs require authentication via Bearer token.
 type PaymentServiceClient interface {
-	// Send method for queueing outbound payments as requested
+	// Send queues an outbound payment for processing.
+	// Payments are queued and require Release to process.
 	Send(ctx context.Context, in *SendRequest, opts ...grpc.CallOption) (*SendResponse, error)
-	// Send method for queueing inbound payments as requested
+	// Receive queues an inbound payment for processing.
+	// Used for recording expected incoming payments.
 	Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (*ReceiveResponse, error)
-	// Initiate method for initiating payments as requested
+	// InitiatePrompt initiates a payment prompt to the customer.
+	// Triggers payment prompts like M-PESA STK push.
 	InitiatePrompt(ctx context.Context, in *InitiatePromptRequest, opts ...grpc.CallOption) (*InitiatePromptResponse, error)
-	// createPaymentLink method for creating payment links as requested
+	// CreatePaymentLink generates a shareable payment link.
+	// Customers can use the link to make payments via web interface.
 	CreatePaymentLink(ctx context.Context, in *CreatePaymentLinkRequest, opts ...grpc.CallOption) (*CreatePaymentLinkResponse, error)
-	// Status request to determine if payment is prepared or released
+	// Status retrieves the current status of a payment.
+	// Returns processing state and status details.
 	Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error)
-	// Status update request to allow continuation of payment processing
+	// StatusUpdate updates the status of a payment.
+	// Used for manual status corrections or workflow progression.
 	StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error)
-	// Release method for releasing queued payments and returns if status is not released
+	// Release releases a queued payment for processing.
+	// Queued payments must be released to initiate actual transfer.
 	Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (*ReleaseResponse, error)
-	// Search method is for client request look for payments matching supplied details from the system
+	// Search finds payments matching specified criteria.
+	// Supports filtering by date, amount, status, route, and more.
 	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error)
+	// Reconcile matches external transactions with internal payments.
+	// Used for payment reconciliation with provider statements.
 	Reconcile(ctx context.Context, in *ReconcileRequest, opts ...grpc.CallOption) (*ReconcileResponse, error)
 }
 
@@ -178,23 +191,36 @@ func (c *paymentServiceClient) Reconcile(ctx context.Context, in *ReconcileReque
 // PaymentServiceServer is the server API for PaymentService service.
 // All implementations must embed UnimplementedPaymentServiceServer
 // for forward compatibility.
+//
+// PaymentService handles payment processing and reconciliation.
+// All RPCs require authentication via Bearer token.
 type PaymentServiceServer interface {
-	// Send method for queueing outbound payments as requested
+	// Send queues an outbound payment for processing.
+	// Payments are queued and require Release to process.
 	Send(context.Context, *SendRequest) (*SendResponse, error)
-	// Send method for queueing inbound payments as requested
+	// Receive queues an inbound payment for processing.
+	// Used for recording expected incoming payments.
 	Receive(context.Context, *ReceiveRequest) (*ReceiveResponse, error)
-	// Initiate method for initiating payments as requested
+	// InitiatePrompt initiates a payment prompt to the customer.
+	// Triggers payment prompts like M-PESA STK push.
 	InitiatePrompt(context.Context, *InitiatePromptRequest) (*InitiatePromptResponse, error)
-	// createPaymentLink method for creating payment links as requested
+	// CreatePaymentLink generates a shareable payment link.
+	// Customers can use the link to make payments via web interface.
 	CreatePaymentLink(context.Context, *CreatePaymentLinkRequest) (*CreatePaymentLinkResponse, error)
-	// Status request to determine if payment is prepared or released
+	// Status retrieves the current status of a payment.
+	// Returns processing state and status details.
 	Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error)
-	// Status update request to allow continuation of payment processing
+	// StatusUpdate updates the status of a payment.
+	// Used for manual status corrections or workflow progression.
 	StatusUpdate(context.Context, *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error)
-	// Release method for releasing queued payments and returns if status is not released
+	// Release releases a queued payment for processing.
+	// Queued payments must be released to initiate actual transfer.
 	Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error)
-	// Search method is for client request look for payments matching supplied details from the system
+	// Search finds payments matching specified criteria.
+	// Supports filtering by date, amount, status, route, and more.
 	Search(*v1.SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error
+	// Reconcile matches external transactions with internal payments.
+	// Used for payment reconciliation with provider statements.
 	Reconcile(context.Context, *ReconcileRequest) (*ReconcileResponse, error)
 	mustEmbedUnimplementedPaymentServiceServer()
 }

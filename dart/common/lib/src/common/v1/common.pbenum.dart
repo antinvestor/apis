@@ -14,6 +14,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// STATE represents the lifecycle state of an entity across all services.
+/// This enum provides a consistent way to track entity states from creation to deletion.
 /// buf:lint:ignore ENUM_VALUE_PREFIX
 class STATE extends $pb.ProtobufEnum {
   /// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
@@ -39,6 +41,8 @@ class STATE extends $pb.ProtobufEnum {
   const STATE._(super.value, super.name);
 }
 
+/// STATUS represents the processing status of an operation or task.
+/// This enum is used for tracking asynchronous operations, jobs, and workflows.
 /// buf:lint:ignore ENUM_VALUE_PREFIX
 class STATUS extends $pb.ProtobufEnum {
   /// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX

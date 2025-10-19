@@ -20,6 +20,10 @@
 package com.antinvestor.apis.settings.v1;
 
 /**
+ * <pre>
+ * GetResponse returns the requested setting.
+ * </pre>
+ *
  * Protobuf type {@code settings.v1.GetResponse}
  */
 @com.google.protobuf.Generated
@@ -61,6 +65,10 @@ private static final long serialVersionUID = 0L;
   public static final int DATA_FIELD_NUMBER = 1;
   private com.antinvestor.apis.settings.v1.SettingObject data_;
   /**
+   * <pre>
+   * The requested setting
+   * </pre>
+   *
    * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    * @return Whether the data field is set.
    */
@@ -69,6 +77,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * The requested setting
+   * </pre>
+   *
    * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    * @return The data.
    */
@@ -77,6 +89,10 @@ private static final long serialVersionUID = 0L;
     return data_ == null ? com.antinvestor.apis.settings.v1.SettingObject.getDefaultInstance() : data_;
   }
   /**
+   * <pre>
+   * The requested setting
+   * </pre>
+   *
    * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -247,6 +263,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * GetResponse returns the requested setting.
+   * </pre>
+   *
    * Protobuf type {@code settings.v1.GetResponse}
    */
   public static final class Builder extends
@@ -403,6 +423,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.antinvestor.apis.settings.v1.SettingObject, com.antinvestor.apis.settings.v1.SettingObject.Builder, com.antinvestor.apis.settings.v1.SettingObjectOrBuilder> dataBuilder_;
     /**
+     * <pre>
+     * The requested setting
+     * </pre>
+     *
      * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      * @return Whether the data field is set.
      */
@@ -410,6 +434,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
+     * <pre>
+     * The requested setting
+     * </pre>
+     *
      * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      * @return The data.
      */
@@ -421,6 +449,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * The requested setting
+     * </pre>
+     *
      * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder setData(com.antinvestor.apis.settings.v1.SettingObject value) {
@@ -437,6 +469,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * The requested setting
+     * </pre>
+     *
      * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder setData(
@@ -451,6 +487,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * The requested setting
+     * </pre>
+     *
      * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder mergeData(com.antinvestor.apis.settings.v1.SettingObject value) {
@@ -472,6 +512,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * The requested setting
+     * </pre>
+     *
      * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public Builder clearData() {
@@ -485,6 +529,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * The requested setting
+     * </pre>
+     *
      * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.settings.v1.SettingObject.Builder getDataBuilder() {
@@ -493,6 +541,10 @@ private static final long serialVersionUID = 0L;
       return internalGetDataFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * The requested setting
+     * </pre>
+     *
      * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.settings.v1.SettingObjectOrBuilder getDataOrBuilder() {
@@ -504,6 +556,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * The requested setting
+     * </pre>
+     *
      * <code>.settings.v1.SettingObject data = 1 [json_name = "data"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<

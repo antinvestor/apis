@@ -25,11 +25,19 @@ public interface LogRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Device ID (optional if session_id is provided)
+   * </pre>
+   *
    * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
    * @return The deviceId.
    */
   java.lang.String getDeviceId();
   /**
+   * <pre>
+   * Device ID (optional if session_id is provided)
+   * </pre>
+   *
    * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for deviceId.
    */
@@ -37,11 +45,19 @@ public interface LogRequestOrBuilder extends
       getDeviceIdBytes();
 
   /**
+   * <pre>
+   * Session identifier for this activity
+   * </pre>
+   *
    * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
    * @return The sessionId.
    */
   java.lang.String getSessionId();
   /**
+   * <pre>
+   * Session identifier for this activity
+   * </pre>
+   *
    * <code>string session_id = 3 [json_name = "sessionId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for sessionId.
    */
@@ -49,11 +65,19 @@ public interface LogRequestOrBuilder extends
       getSessionIdBytes();
 
   /**
+   * <pre>
+   * IP address of the device
+   * </pre>
+   *
    * <code>string ip = 4 [json_name = "ip"];</code>
    * @return The ip.
    */
   java.lang.String getIp();
   /**
+   * <pre>
+   * IP address of the device
+   * </pre>
+   *
    * <code>string ip = 4 [json_name = "ip"];</code>
    * @return The bytes for ip.
    */
@@ -61,11 +85,19 @@ public interface LogRequestOrBuilder extends
       getIpBytes();
 
   /**
+   * <pre>
+   * Locale settings (JSON string)
+   * </pre>
+   *
    * <code>string locale = 5 [json_name = "locale"];</code>
    * @return The locale.
    */
   java.lang.String getLocale();
   /**
+   * <pre>
+   * Locale settings (JSON string)
+   * </pre>
+   *
    * <code>string locale = 5 [json_name = "locale"];</code>
    * @return The bytes for locale.
    */
@@ -73,11 +105,19 @@ public interface LogRequestOrBuilder extends
       getLocaleBytes();
 
   /**
+   * <pre>
+   * User agent string
+   * </pre>
+   *
    * <code>string user_agent = 6 [json_name = "userAgent"];</code>
    * @return The userAgent.
    */
   java.lang.String getUserAgent();
   /**
+   * <pre>
+   * User agent string
+   * </pre>
+   *
    * <code>string user_agent = 6 [json_name = "userAgent"];</code>
    * @return The bytes for userAgent.
    */
@@ -85,11 +125,19 @@ public interface LogRequestOrBuilder extends
       getUserAgentBytes();
 
   /**
+   * <pre>
+   * Operating system and version
+   * </pre>
+   *
    * <code>string os = 7 [json_name = "os"];</code>
    * @return The os.
    */
   java.lang.String getOs();
   /**
+   * <pre>
+   * Operating system and version
+   * </pre>
+   *
    * <code>string os = 7 [json_name = "os"];</code>
    * @return The bytes for os.
    */
@@ -97,11 +145,19 @@ public interface LogRequestOrBuilder extends
       getOsBytes();
 
   /**
+   * <pre>
+   * Timestamp of this activity (RFC3339)
+   * </pre>
+   *
    * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
    * @return The lastSeen.
    */
   java.lang.String getLastSeen();
   /**
+   * <pre>
+   * Timestamp of this activity (RFC3339)
+   * </pre>
+   *
    * <code>string last_seen = 8 [json_name = "lastSeen"];</code>
    * @return The bytes for lastSeen.
    */
@@ -109,16 +165,28 @@ public interface LogRequestOrBuilder extends
       getLastSeenBytes();
 
   /**
+   * <pre>
+   * Additional log data (location, app version, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
    * @return Whether the extras field is set.
    */
   boolean hasExtras();
   /**
+   * <pre>
+   * Additional log data (location, app version, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
    * @return The extras.
    */
   com.google.protobuf.Struct getExtras();
   /**
+   * <pre>
+   * Additional log data (location, app version, etc.)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 9 [json_name = "extras"];</code>
    */
   com.google.protobuf.StructOrBuilder getExtrasOrBuilder();

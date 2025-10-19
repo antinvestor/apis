@@ -25,24 +25,44 @@ public interface SendResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Status for each queued notification
+   * </pre>
+   *
    * <code>repeated .common.v1.StatusResponse data = 1 [json_name = "data"];</code>
    */
   java.util.List<com.antinvestor.apis.common.v1.StatusResponse> 
       getDataList();
   /**
+   * <pre>
+   * Status for each queued notification
+   * </pre>
+   *
    * <code>repeated .common.v1.StatusResponse data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.common.v1.StatusResponse getData(int index);
   /**
+   * <pre>
+   * Status for each queued notification
+   * </pre>
+   *
    * <code>repeated .common.v1.StatusResponse data = 1 [json_name = "data"];</code>
    */
   int getDataCount();
   /**
+   * <pre>
+   * Status for each queued notification
+   * </pre>
+   *
    * <code>repeated .common.v1.StatusResponse data = 1 [json_name = "data"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.common.v1.StatusResponseOrBuilder> 
       getDataOrBuilderList();
   /**
+   * <pre>
+   * Status for each queued notification
+   * </pre>
+   *
    * <code>repeated .common.v1.StatusResponse data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.common.v1.StatusResponseOrBuilder getDataOrBuilder(

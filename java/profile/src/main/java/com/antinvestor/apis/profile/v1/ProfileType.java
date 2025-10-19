@@ -21,6 +21,7 @@ package com.antinvestor.apis.profile.v1;
 
 /**
  * <pre>
+ * ProfileType defines the type of profile entity.
  * buf:lint:ignore ENUM_VALUE_PREFIX
  * </pre>
  *
@@ -38,10 +39,18 @@ public enum ProfileType
    */
   PERSON(0),
   /**
+   * <pre>
+   * Organization or institution
+   * </pre>
+   *
    * <code>INSTITUTION = 1;</code>
    */
   INSTITUTION(1),
   /**
+   * <pre>
+   * Automated bot or service account
+   * </pre>
+   *
    * <code>BOT = 2;</code>
    */
   BOT(2),
@@ -66,10 +75,18 @@ public enum ProfileType
    */
   public static final int PERSON_VALUE = 0;
   /**
+   * <pre>
+   * Organization or institution
+   * </pre>
+   *
    * <code>INSTITUTION = 1;</code>
    */
   public static final int INSTITUTION_VALUE = 1;
   /**
+   * <pre>
+   * Automated bot or service account
+   * </pre>
+   *
    * <code>BOT = 2;</code>
    */
   public static final int BOT_VALUE = 2;

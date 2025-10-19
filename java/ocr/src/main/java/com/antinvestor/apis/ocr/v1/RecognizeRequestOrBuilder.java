@@ -25,11 +25,19 @@ public interface RecognizeRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Client-provided reference ID for tracking
+   * </pre>
+   *
    * <code>string reference_id = 1 [json_name = "referenceId", (.buf.validate.field) = { ... }</code>
    * @return The referenceId.
    */
   java.lang.String getReferenceId();
   /**
+   * <pre>
+   * Client-provided reference ID for tracking
+   * </pre>
+   *
    * <code>string reference_id = 1 [json_name = "referenceId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for referenceId.
    */
@@ -37,11 +45,19 @@ public interface RecognizeRequestOrBuilder extends
       getReferenceIdBytes();
 
   /**
+   * <pre>
+   * Expected language code (e.g., "en", "es", "fr") for improved accuracy
+   * </pre>
+   *
    * <code>string language_id = 2 [json_name = "languageId", (.buf.validate.field) = { ... }</code>
    * @return The languageId.
    */
   java.lang.String getLanguageId();
   /**
+   * <pre>
+   * Expected language code (e.g., "en", "es", "fr") for improved accuracy
+   * </pre>
+   *
    * <code>string language_id = 2 [json_name = "languageId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for languageId.
    */
@@ -49,44 +65,76 @@ public interface RecognizeRequestOrBuilder extends
       getLanguageIdBytes();
 
   /**
+   * <pre>
+   * Processing options (DPI, preprocessing, output format)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    * @return Whether the properties field is set.
    */
   boolean hasProperties();
   /**
+   * <pre>
+   * Processing options (DPI, preprocessing, output format)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    * @return The properties.
    */
   com.google.protobuf.Struct getProperties();
   /**
+   * <pre>
+   * Processing options (DPI, preprocessing, output format)
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 3 [json_name = "properties"];</code>
    */
   com.google.protobuf.StructOrBuilder getPropertiesOrBuilder();
 
   /**
+   * <pre>
+   * If true, process asynchronously and return immediately
+   * </pre>
+   *
    * <code>bool async = 4 [json_name = "async"];</code>
    * @return The async.
    */
   boolean getAsync();
 
   /**
+   * <pre>
+   * List of file IDs to process (1-5 files per request)
+   * </pre>
+   *
    * <code>repeated string file_id = 5 [json_name = "fileId", (.buf.validate.field) = { ... }</code>
    * @return A list containing the fileId.
    */
   java.util.List<java.lang.String>
       getFileIdList();
   /**
+   * <pre>
+   * List of file IDs to process (1-5 files per request)
+   * </pre>
+   *
    * <code>repeated string file_id = 5 [json_name = "fileId", (.buf.validate.field) = { ... }</code>
    * @return The count of fileId.
    */
   int getFileIdCount();
   /**
+   * <pre>
+   * List of file IDs to process (1-5 files per request)
+   * </pre>
+   *
    * <code>repeated string file_id = 5 [json_name = "fileId", (.buf.validate.field) = { ... }</code>
    * @param index The index of the element to return.
    * @return The fileId at the given index.
    */
   java.lang.String getFileId(int index);
   /**
+   * <pre>
+   * List of file IDs to process (1-5 files per request)
+   * </pre>
+   *
    * <code>repeated string file_id = 5 [json_name = "fileId", (.buf.validate.field) = { ... }</code>
    * @param index The index of the value to return.
    * @return The bytes of the fileId at the given index.

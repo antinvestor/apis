@@ -25,24 +25,44 @@ public interface SearchResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * List of matching settings
+   * </pre>
+   *
    * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    */
   java.util.List<com.antinvestor.apis.settings.v1.SettingObject> 
       getDataList();
   /**
+   * <pre>
+   * List of matching settings
+   * </pre>
+   *
    * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.settings.v1.SettingObject getData(int index);
   /**
+   * <pre>
+   * List of matching settings
+   * </pre>
+   *
    * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    */
   int getDataCount();
   /**
+   * <pre>
+   * List of matching settings
+   * </pre>
+   *
    * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.settings.v1.SettingObjectOrBuilder> 
       getDataOrBuilderList();
   /**
+   * <pre>
+   * List of matching settings
+   * </pre>
+   *
    * <code>repeated .settings.v1.SettingObject data = 1 [json_name = "data"];</code>
    */
   com.antinvestor.apis.settings.v1.SettingObjectOrBuilder getDataOrBuilder(

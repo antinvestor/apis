@@ -25,67 +25,119 @@ public interface CreatePaymentLinkRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Customers to notify
+   * </pre>
+   *
    * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
    */
   java.util.List<com.antinvestor.apis.payment.v1.Customer> 
       getCustomersList();
   /**
+   * <pre>
+   * Customers to notify
+   * </pre>
+   *
    * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
    */
   com.antinvestor.apis.payment.v1.Customer getCustomers(int index);
   /**
+   * <pre>
+   * Customers to notify
+   * </pre>
+   *
    * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
    */
   int getCustomersCount();
   /**
+   * <pre>
+   * Customers to notify
+   * </pre>
+   *
    * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.payment.v1.CustomerOrBuilder> 
       getCustomersOrBuilderList();
   /**
+   * <pre>
+   * Customers to notify
+   * </pre>
+   *
    * <code>repeated .payment.v1.Customer customers = 1 [json_name = "customers"];</code>
    */
   com.antinvestor.apis.payment.v1.CustomerOrBuilder getCustomersOrBuilder(
       int index);
 
   /**
+   * <pre>
+   * Payment link details
+   * </pre>
+   *
    * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
    * @return Whether the paymentLink field is set.
    */
   boolean hasPaymentLink();
   /**
+   * <pre>
+   * Payment link details
+   * </pre>
+   *
    * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
    * @return The paymentLink.
    */
   com.antinvestor.apis.payment.v1.PaymentLink getPaymentLink();
   /**
+   * <pre>
+   * Payment link details
+   * </pre>
+   *
    * <code>.payment.v1.PaymentLink payment_link = 2 [json_name = "paymentLink"];</code>
    */
   com.antinvestor.apis.payment.v1.PaymentLinkOrBuilder getPaymentLinkOrBuilder();
 
   /**
+   * <pre>
+   * Notification methods
+   * </pre>
+   *
    * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
    * @return A list containing the notifications.
    */
   java.util.List<com.antinvestor.apis.payment.v1.NotificationType> getNotificationsList();
   /**
+   * <pre>
+   * Notification methods
+   * </pre>
+   *
    * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
    * @return The count of notifications.
    */
   int getNotificationsCount();
   /**
+   * <pre>
+   * Notification methods
+   * </pre>
+   *
    * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
    * @param index The index of the element to return.
    * @return The notifications at the given index.
    */
   com.antinvestor.apis.payment.v1.NotificationType getNotifications(int index);
   /**
+   * <pre>
+   * Notification methods
+   * </pre>
+   *
    * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
    * @return A list containing the enum numeric values on the wire for notifications.
    */
   java.util.List<java.lang.Integer>
   getNotificationsValueList();
   /**
+   * <pre>
+   * Notification methods
+   * </pre>
+   *
    * <code>repeated .payment.v1.NotificationType notifications = 3 [json_name = "notifications"];</code>
    * @param index The index of the value to return.
    * @return The enum numeric value on the wire of notifications at the given index.

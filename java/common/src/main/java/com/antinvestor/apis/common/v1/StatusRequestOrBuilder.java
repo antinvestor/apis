@@ -25,11 +25,19 @@ public interface StatusRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique identifier of the entity or operation
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Unique identifier of the entity or operation
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,16 +45,28 @@ public interface StatusRequestOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Additional context or parameters
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 2 [json_name = "extras"];</code>
    * @return Whether the extras field is set.
    */
   boolean hasExtras();
   /**
+   * <pre>
+   * Additional context or parameters
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 2 [json_name = "extras"];</code>
    * @return The extras.
    */
   com.google.protobuf.Struct getExtras();
   /**
+   * <pre>
+   * Additional context or parameters
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 2 [json_name = "extras"];</code>
    */
   com.google.protobuf.StructOrBuilder getExtrasOrBuilder();

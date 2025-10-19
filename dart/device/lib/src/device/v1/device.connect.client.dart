@@ -7,9 +7,11 @@ import "package:connectrpc/connect.dart" as connect;
 import "device.pb.dart" as devicev1device;
 import "device.connect.spec.dart" as specs;
 
-/// The device service definition.
+/// DeviceService provides comprehensive device management capabilities.
+/// All RPCs require authentication via Bearer token unless otherwise specified.
 extension type DeviceServiceClient (connect.Transport _transport) {
-  /// Obtains a device by its hash
+  /// GetById retrieves one or more devices by their unique identifiers.
+  /// Supports batch retrieval for efficiency.
   Future<devicev1device.GetByIdResponse> getById(
     devicev1device.GetByIdRequest input, {
     connect.Headers? headers,
@@ -27,7 +29,8 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Obtains a device by its session id
+  /// GetBySessionId retrieves a device by its active session identifier.
+  /// Useful for resolving devices from session tokens.
   Future<devicev1device.GetBySessionIdResponse> getBySessionId(
     devicev1device.GetBySessionIdRequest input, {
     connect.Headers? headers,
@@ -45,7 +48,8 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Obtains a device by its hash
+  /// Search finds devices matching specified criteria.
+  /// Supports filtering by date range, properties, and full-text search.
   Stream<devicev1device.SearchResponse> search(
     devicev1device.SearchRequest input, {
     connect.Headers? headers,
@@ -63,7 +67,8 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Creates a new device based on the request.
+  /// Create registers a new device in the system.
+  /// Returns a unique device ID that should be stored by the client.
   Future<devicev1device.CreateResponse> create(
     devicev1device.CreateRequest input, {
     connect.Headers? headers,
@@ -81,7 +86,8 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Updates an existing device based on the request.
+  /// Update modifies an existing device's information.
+  /// Only the device owner or administrators can update device information.
   Future<devicev1device.UpdateResponse> update(
     devicev1device.UpdateRequest input, {
     connect.Headers? headers,
@@ -99,7 +105,8 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Links an existing device session based on the request to a profile.
+  /// Link associates a device with a user profile.
+  /// Required before the device can be used for authenticated operations.
   Future<devicev1device.LinkResponse> link(
     devicev1device.LinkRequest input, {
     connect.Headers? headers,
@@ -117,7 +124,8 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Removes an existing device based on the request.
+  /// Remove deletes a device from the system.
+  /// This operation cannot be undone.
   Future<devicev1device.RemoveResponse> remove(
     devicev1device.RemoveRequest input, {
     connect.Headers? headers,
@@ -135,7 +143,8 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Log a new key based on the request.
+  /// Log creates a new activity log entry for a device.
+  /// Used for session tracking and security auditing.
   Future<devicev1device.LogResponse> log(
     devicev1device.LogRequest input, {
     connect.Headers? headers,
@@ -153,7 +162,8 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Lists logs the a device has/owns.
+  /// ListLogs retrieves activity logs for a device.
+  /// Returns a stream of log entries for the specified device.
   Stream<devicev1device.ListLogsResponse> listLogs(
     devicev1device.ListLogsRequest input, {
     connect.Headers? headers,
@@ -171,7 +181,8 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Adds a new key based on the request.
+  /// AddKey adds an encryption key to a device.
+  /// Keys are used for secure communications (Matrix E2EE, push notifications).
   Future<devicev1device.AddKeyResponse> addKey(
     devicev1device.AddKeyRequest input, {
     connect.Headers? headers,
@@ -189,7 +200,8 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Removes an old device keys based on this request's id
+  /// RemoveKey removes encryption keys from a device.
+  /// Used for key rotation or when removing a device.
   Future<devicev1device.RemoveKeyResponse> removeKey(
     devicev1device.RemoveKeyRequest input, {
     connect.Headers? headers,
@@ -207,7 +219,8 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Lists all the keys a device has/owns.
+  /// SearchKey finds encryption keys associated with a device.
+  /// Supports filtering by key type and pagination.
   Stream<devicev1device.SearchKeyResponse> searchKey(
     devicev1device.SearchKeyRequest input, {
     connect.Headers? headers,

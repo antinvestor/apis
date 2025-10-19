@@ -6,12 +6,13 @@
 import "package:connectrpc/connect.dart" as connect;
 import "profile.pb.dart" as profilev1profile;
 
-/// The profile service definition.
+/// ProfileService manages user and entity profiles.
+/// All RPCs require authentication via Bearer token.
 abstract final class ProfileService {
   /// Fully-qualified name of the ProfileService service.
   static const name = 'profile.v1.ProfileService';
 
-  /// Obtains a profile by its hash
+  /// GetById retrieves a profile by its unique ID.
   static const getById = connect.Spec(
     '/$name/GetById',
     connect.StreamType.unary,
@@ -19,7 +20,7 @@ abstract final class ProfileService {
     profilev1profile.GetByIdResponse.new,
   );
 
-  /// Obtains a profile by its hash
+  /// GetByContact retrieves a profile by contact information.
   static const getByContact = connect.Spec(
     '/$name/GetByContact',
     connect.StreamType.unary,
@@ -27,7 +28,7 @@ abstract final class ProfileService {
     profilev1profile.GetByContactResponse.new,
   );
 
-  /// Obtains a profile by its hash
+  /// Search finds profiles matching specified criteria.
   static const search = connect.Spec(
     '/$name/Search',
     connect.StreamType.server,
@@ -35,7 +36,7 @@ abstract final class ProfileService {
     profilev1profile.SearchResponse.new,
   );
 
-  /// Uses data found in the profile from mergeHash to update the current profile.
+  /// Merge combines two profiles into one.
   static const merge = connect.Spec(
     '/$name/Merge',
     connect.StreamType.unary,
@@ -43,7 +44,7 @@ abstract final class ProfileService {
     profilev1profile.MergeResponse.new,
   );
 
-  /// Creates a new profile based on the request.
+  /// Create creates a new profile.
   static const create = connect.Spec(
     '/$name/Create',
     connect.StreamType.unary,
@@ -51,7 +52,7 @@ abstract final class ProfileService {
     profilev1profile.CreateResponse.new,
   );
 
-  /// Creates a new profile based on the request.
+  /// Update updates an existing profile's properties.
   static const update = connect.Spec(
     '/$name/Update',
     connect.StreamType.unary,
@@ -59,7 +60,7 @@ abstract final class ProfileService {
     profilev1profile.UpdateResponse.new,
   );
 
-  /// Adds a new contact based on the request/this leads to automatic verification.
+  /// AddContact adds a new contact to a profile with automatic verification.
   static const addContact = connect.Spec(
     '/$name/AddContact',
     connect.StreamType.unary,
@@ -67,7 +68,7 @@ abstract final class ProfileService {
     profilev1profile.AddContactResponse.new,
   );
 
-  /// Creates a new free contact based on the details provided.
+  /// CreateContact creates a standalone contact not linked to a profile.
   static const createContact = connect.Spec(
     '/$name/CreateContact',
     connect.StreamType.unary,
@@ -75,7 +76,7 @@ abstract final class ProfileService {
     profilev1profile.CreateContactResponse.new,
   );
 
-  /// Create a new contact verification request
+  /// CreateContactVerification initiates contact verification.
   static const createContactVerification = connect.Spec(
     '/$name/CreateContactVerification',
     connect.StreamType.unary,
@@ -83,7 +84,7 @@ abstract final class ProfileService {
     profilev1profile.CreateContactVerificationResponse.new,
   );
 
-  /// Checks the status of a verification
+  /// CheckVerification verifies a contact using the provided code.
   static const checkVerification = connect.Spec(
     '/$name/CheckVerification',
     connect.StreamType.unary,
@@ -91,7 +92,7 @@ abstract final class ProfileService {
     profilev1profile.CheckVerificationResponse.new,
   );
 
-  /// Removes an old contact based on this request's id
+  /// RemoveContact removes a contact from a profile.
   static const removeContact = connect.Spec(
     '/$name/RemoveContact',
     connect.StreamType.unary,
@@ -99,7 +100,7 @@ abstract final class ProfileService {
     profilev1profile.RemoveContactResponse.new,
   );
 
-  /// Searches all contacts tied to a users profile and based on the active request.
+  /// SearchRoster searches a user's contact roster.
   static const searchRoster = connect.Spec(
     '/$name/SearchRoster',
     connect.StreamType.server,
@@ -107,7 +108,7 @@ abstract final class ProfileService {
     profilev1profile.SearchRosterResponse.new,
   );
 
-  /// Adds a new contact based on the request/this leads to automatic verification.
+  /// AddRoster adds multiple contacts to a user's roster.
   static const addRoster = connect.Spec(
     '/$name/AddRoster',
     connect.StreamType.unary,
@@ -115,7 +116,7 @@ abstract final class ProfileService {
     profilev1profile.AddRosterResponse.new,
   );
 
-  /// Removes a contact from a user's circle based on this request's id
+  /// RemoveRoster removes a contact from a user's roster.
   static const removeRoster = connect.Spec(
     '/$name/RemoveRoster',
     connect.StreamType.unary,
@@ -123,7 +124,7 @@ abstract final class ProfileService {
     profilev1profile.RemoveRosterResponse.new,
   );
 
-  /// Adds a new address based on the request.
+  /// AddAddress adds a new address to a profile.
   static const addAddress = connect.Spec(
     '/$name/AddAddress',
     connect.StreamType.unary,
@@ -131,7 +132,7 @@ abstract final class ProfileService {
     profilev1profile.AddAddressResponse.new,
   );
 
-  /// Adds a new relationship between different proiles.
+  /// AddRelationship creates a relationship between profiles.
   static const addRelationship = connect.Spec(
     '/$name/AddRelationship',
     connect.StreamType.unary,
@@ -139,7 +140,7 @@ abstract final class ProfileService {
     profilev1profile.AddRelationshipResponse.new,
   );
 
-  /// Remove an existing relationship between profiles.
+  /// DeleteRelationship removes a relationship between profiles.
   static const deleteRelationship = connect.Spec(
     '/$name/DeleteRelationship',
     connect.StreamType.unary,
@@ -147,7 +148,7 @@ abstract final class ProfileService {
     profilev1profile.DeleteRelationshipResponse.new,
   );
 
-  /// Lists relationships a profile has.
+  /// ListRelationship lists all relationships for a profile.
   static const listRelationship = connect.Spec(
     '/$name/ListRelationship',
     connect.StreamType.server,

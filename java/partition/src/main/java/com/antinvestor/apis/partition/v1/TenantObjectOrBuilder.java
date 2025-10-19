@@ -25,11 +25,19 @@ public interface TenantObjectOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique tenant ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Unique tenant ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface TenantObjectOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Tenant name (organization, company)
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The name.
    */
   java.lang.String getName();
   /**
+   * <pre>
+   * Tenant name (organization, company)
+   * </pre>
+   *
    * <code>string name = 2 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The bytes for name.
    */
@@ -49,11 +65,19 @@ public interface TenantObjectOrBuilder extends
       getNameBytes();
 
   /**
+   * <pre>
+   * Tenant description
+   * </pre>
+   *
    * <code>string description = 3 [json_name = "description", (.buf.validate.field) = { ... }</code>
    * @return The description.
    */
   java.lang.String getDescription();
   /**
+   * <pre>
+   * Tenant description
+   * </pre>
+   *
    * <code>string description = 3 [json_name = "description", (.buf.validate.field) = { ... }</code>
    * @return The bytes for description.
    */
@@ -61,41 +85,73 @@ public interface TenantObjectOrBuilder extends
       getDescriptionBytes();
 
   /**
+   * <pre>
+   * Additional tenant metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 4 [json_name = "properties"];</code>
    * @return Whether the properties field is set.
    */
   boolean hasProperties();
   /**
+   * <pre>
+   * Additional tenant metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 4 [json_name = "properties"];</code>
    * @return The properties.
    */
   com.google.protobuf.Struct getProperties();
   /**
+   * <pre>
+   * Additional tenant metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct properties = 4 [json_name = "properties"];</code>
    */
   com.google.protobuf.StructOrBuilder getPropertiesOrBuilder();
 
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
    * @return Whether the createdAt field is set.
    */
   boolean hasCreatedAt();
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
    * @return The createdAt.
    */
   com.google.protobuf.Timestamp getCreatedAt();
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 5 [json_name = "createdAt"];</code>
    */
   com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();
 
   /**
+   * <pre>
+   * Tenant state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
    * @return The enum numeric value on the wire for state.
    */
   int getStateValue();
   /**
+   * <pre>
+   * Tenant state
+   * </pre>
+   *
    * <code>.common.v1.STATE state = 6 [json_name = "state"];</code>
    * @return The state.
    */

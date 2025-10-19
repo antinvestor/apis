@@ -21,6 +21,7 @@ package com.antinvestor.apis.profile.v1;
 
 /**
  * <pre>
+ * ContactType defines the type of contact information.
  * buf:lint:ignore ENUM_VALUE_PREFIX
  * </pre>
  *
@@ -38,6 +39,10 @@ public enum ContactType
    */
   EMAIL(0),
   /**
+   * <pre>
+   * Mobile phone number (MSISDN format)
+   * </pre>
+   *
    * <code>MSISDN = 1;</code>
    */
   MSISDN(1),
@@ -62,6 +67,10 @@ public enum ContactType
    */
   public static final int EMAIL_VALUE = 0;
   /**
+   * <pre>
+   * Mobile phone number (MSISDN format)
+   * </pre>
+   *
    * <code>MSISDN = 1;</code>
    */
   public static final int MSISDN_VALUE = 1;

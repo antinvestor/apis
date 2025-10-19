@@ -25,11 +25,19 @@ public interface RosterObjectOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique roster entry ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Unique roster entry ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface RosterObjectOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Profile ID of the contact
+   * </pre>
+   *
    * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The profileId.
    */
   java.lang.String getProfileId();
   /**
+   * <pre>
+   * Profile ID of the contact
+   * </pre>
+   *
    * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileId.
    */
@@ -49,31 +65,55 @@ public interface RosterObjectOrBuilder extends
       getProfileIdBytes();
 
   /**
+   * <pre>
+   * Contact information
+   * </pre>
+   *
    * <code>.profile.v1.ContactObject contact = 3 [json_name = "contact"];</code>
    * @return Whether the contact field is set.
    */
   boolean hasContact();
   /**
+   * <pre>
+   * Contact information
+   * </pre>
+   *
    * <code>.profile.v1.ContactObject contact = 3 [json_name = "contact"];</code>
    * @return The contact.
    */
   com.antinvestor.apis.profile.v1.ContactObject getContact();
   /**
+   * <pre>
+   * Contact information
+   * </pre>
+   *
    * <code>.profile.v1.ContactObject contact = 3 [json_name = "contact"];</code>
    */
   com.antinvestor.apis.profile.v1.ContactObjectOrBuilder getContactOrBuilder();
 
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
    * @return Whether the extra field is set.
    */
   boolean hasExtra();
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
    * @return The extra.
    */
   com.google.protobuf.Struct getExtra();
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
    */
   com.google.protobuf.StructOrBuilder getExtraOrBuilder();

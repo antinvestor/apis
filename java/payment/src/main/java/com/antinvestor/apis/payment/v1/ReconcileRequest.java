@@ -20,6 +20,10 @@
 package com.antinvestor.apis.payment.v1;
 
 /**
+ * <pre>
+ * ReconcileRequest reconciles an external transaction.
+ * </pre>
+ *
  * Protobuf type {@code payment.v1.ReconcileRequest}
  */
 @com.google.protobuf.Generated
@@ -66,6 +70,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object externalTransactionId_ = "";
   /**
+   * <pre>
+   * Provider's transaction ID
+   * </pre>
+   *
    * <code>string external_transaction_id = 1 [json_name = "externalTransactionId"];</code>
    * @return The externalTransactionId.
    */
@@ -83,6 +91,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Provider's transaction ID
+   * </pre>
+   *
    * <code>string external_transaction_id = 1 [json_name = "externalTransactionId"];</code>
    * @return The bytes for externalTransactionId.
    */
@@ -105,6 +117,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object route_ = "";
   /**
+   * <pre>
+   * Payment route
+   * </pre>
+   *
    * <code>string route = 2 [json_name = "route"];</code>
    * @return The route.
    */
@@ -122,6 +138,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Payment route
+   * </pre>
+   *
    * <code>string route = 2 [json_name = "route"];</code>
    * @return The bytes for route.
    */
@@ -143,6 +163,10 @@ private static final long serialVersionUID = 0L;
   public static final int OUTBOUND_FIELD_NUMBER = 3;
   private boolean outbound_ = false;
   /**
+   * <pre>
+   * Payment direction
+   * </pre>
+   *
    * <code>bool outbound = 3 [json_name = "outbound"];</code>
    * @return The outbound.
    */
@@ -154,6 +178,10 @@ private static final long serialVersionUID = 0L;
   public static final int AMOUNT_FIELD_NUMBER = 4;
   private com.google.type.Money amount_;
   /**
+   * <pre>
+   * Transaction amount
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    * @return Whether the amount field is set.
    */
@@ -162,6 +190,10 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * Transaction amount
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    * @return The amount.
    */
@@ -170,6 +202,10 @@ private static final long serialVersionUID = 0L;
     return amount_ == null ? com.google.type.Money.getDefaultInstance() : amount_;
   }
   /**
+   * <pre>
+   * Transaction amount
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    */
   @java.lang.Override
@@ -181,6 +217,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object owner_ = "";
   /**
+   * <pre>
+   * Account owner
+   * </pre>
+   *
    * <code>string owner = 5 [json_name = "owner"];</code>
    * @return The owner.
    */
@@ -198,6 +238,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Account owner
+   * </pre>
+   *
    * <code>string owner = 5 [json_name = "owner"];</code>
    * @return The bytes for owner.
    */
@@ -220,6 +264,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object countryCode_ = "";
   /**
+   * <pre>
+   * Country code (ISO 3166-1 alpha-2)
+   * </pre>
+   *
    * <code>string country_code = 6 [json_name = "countryCode"];</code>
    * @return The countryCode.
    */
@@ -237,6 +285,10 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * Country code (ISO 3166-1 alpha-2)
+   * </pre>
+   *
    * <code>string country_code = 6 [json_name = "countryCode"];</code>
    * @return The bytes for countryCode.
    */
@@ -470,6 +522,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * ReconcileRequest reconciles an external transaction.
+   * </pre>
+   *
    * Protobuf type {@code payment.v1.ReconcileRequest}
    */
   public static final class Builder extends
@@ -692,6 +748,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object externalTransactionId_ = "";
     /**
+     * <pre>
+     * Provider's transaction ID
+     * </pre>
+     *
      * <code>string external_transaction_id = 1 [json_name = "externalTransactionId"];</code>
      * @return The externalTransactionId.
      */
@@ -708,6 +768,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Provider's transaction ID
+     * </pre>
+     *
      * <code>string external_transaction_id = 1 [json_name = "externalTransactionId"];</code>
      * @return The bytes for externalTransactionId.
      */
@@ -725,6 +789,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Provider's transaction ID
+     * </pre>
+     *
      * <code>string external_transaction_id = 1 [json_name = "externalTransactionId"];</code>
      * @param value The externalTransactionId to set.
      * @return This builder for chaining.
@@ -738,6 +806,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Provider's transaction ID
+     * </pre>
+     *
      * <code>string external_transaction_id = 1 [json_name = "externalTransactionId"];</code>
      * @return This builder for chaining.
      */
@@ -748,6 +820,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Provider's transaction ID
+     * </pre>
+     *
      * <code>string external_transaction_id = 1 [json_name = "externalTransactionId"];</code>
      * @param value The bytes for externalTransactionId to set.
      * @return This builder for chaining.
@@ -764,6 +840,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object route_ = "";
     /**
+     * <pre>
+     * Payment route
+     * </pre>
+     *
      * <code>string route = 2 [json_name = "route"];</code>
      * @return The route.
      */
@@ -780,6 +860,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Payment route
+     * </pre>
+     *
      * <code>string route = 2 [json_name = "route"];</code>
      * @return The bytes for route.
      */
@@ -797,6 +881,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Payment route
+     * </pre>
+     *
      * <code>string route = 2 [json_name = "route"];</code>
      * @param value The route to set.
      * @return This builder for chaining.
@@ -810,6 +898,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment route
+     * </pre>
+     *
      * <code>string route = 2 [json_name = "route"];</code>
      * @return This builder for chaining.
      */
@@ -820,6 +912,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment route
+     * </pre>
+     *
      * <code>string route = 2 [json_name = "route"];</code>
      * @param value The bytes for route to set.
      * @return This builder for chaining.
@@ -836,6 +932,10 @@ private static final long serialVersionUID = 0L;
 
     private boolean outbound_ ;
     /**
+     * <pre>
+     * Payment direction
+     * </pre>
+     *
      * <code>bool outbound = 3 [json_name = "outbound"];</code>
      * @return The outbound.
      */
@@ -844,6 +944,10 @@ private static final long serialVersionUID = 0L;
       return outbound_;
     }
     /**
+     * <pre>
+     * Payment direction
+     * </pre>
+     *
      * <code>bool outbound = 3 [json_name = "outbound"];</code>
      * @param value The outbound to set.
      * @return This builder for chaining.
@@ -856,6 +960,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Payment direction
+     * </pre>
+     *
      * <code>bool outbound = 3 [json_name = "outbound"];</code>
      * @return This builder for chaining.
      */
@@ -870,6 +978,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.type.Money, com.google.type.Money.Builder, com.google.type.MoneyOrBuilder> amountBuilder_;
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      * @return Whether the amount field is set.
      */
@@ -877,6 +989,10 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000008) != 0);
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      * @return The amount.
      */
@@ -888,6 +1004,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public Builder setAmount(com.google.type.Money value) {
@@ -904,6 +1024,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public Builder setAmount(
@@ -918,6 +1042,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public Builder mergeAmount(com.google.type.Money value) {
@@ -939,6 +1067,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public Builder clearAmount() {
@@ -952,6 +1084,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public com.google.type.Money.Builder getAmountBuilder() {
@@ -960,6 +1096,10 @@ private static final long serialVersionUID = 0L;
       return internalGetAmountFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     public com.google.type.MoneyOrBuilder getAmountOrBuilder() {
@@ -971,6 +1111,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Transaction amount
+     * </pre>
+     *
      * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
@@ -989,6 +1133,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object owner_ = "";
     /**
+     * <pre>
+     * Account owner
+     * </pre>
+     *
      * <code>string owner = 5 [json_name = "owner"];</code>
      * @return The owner.
      */
@@ -1005,6 +1153,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Account owner
+     * </pre>
+     *
      * <code>string owner = 5 [json_name = "owner"];</code>
      * @return The bytes for owner.
      */
@@ -1022,6 +1174,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Account owner
+     * </pre>
+     *
      * <code>string owner = 5 [json_name = "owner"];</code>
      * @param value The owner to set.
      * @return This builder for chaining.
@@ -1035,6 +1191,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Account owner
+     * </pre>
+     *
      * <code>string owner = 5 [json_name = "owner"];</code>
      * @return This builder for chaining.
      */
@@ -1045,6 +1205,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Account owner
+     * </pre>
+     *
      * <code>string owner = 5 [json_name = "owner"];</code>
      * @param value The bytes for owner to set.
      * @return This builder for chaining.
@@ -1061,6 +1225,10 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object countryCode_ = "";
     /**
+     * <pre>
+     * Country code (ISO 3166-1 alpha-2)
+     * </pre>
+     *
      * <code>string country_code = 6 [json_name = "countryCode"];</code>
      * @return The countryCode.
      */
@@ -1077,6 +1245,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Country code (ISO 3166-1 alpha-2)
+     * </pre>
+     *
      * <code>string country_code = 6 [json_name = "countryCode"];</code>
      * @return The bytes for countryCode.
      */
@@ -1094,6 +1266,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Country code (ISO 3166-1 alpha-2)
+     * </pre>
+     *
      * <code>string country_code = 6 [json_name = "countryCode"];</code>
      * @param value The countryCode to set.
      * @return This builder for chaining.
@@ -1107,6 +1283,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Country code (ISO 3166-1 alpha-2)
+     * </pre>
+     *
      * <code>string country_code = 6 [json_name = "countryCode"];</code>
      * @return This builder for chaining.
      */
@@ -1117,6 +1297,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Country code (ISO 3166-1 alpha-2)
+     * </pre>
+     *
      * <code>string country_code = 6 [json_name = "countryCode"];</code>
      * @param value The bytes for countryCode to set.
      * @return This builder for chaining.

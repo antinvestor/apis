@@ -25,11 +25,19 @@ public interface TemplateDataOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique identifier for this template data
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Unique identifier for this template data
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface TemplateDataOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Content type (e.g., "email", "sms", "push", "in-app")
+   * </pre>
+   *
    * <code>string type = 2 [json_name = "type"];</code>
    * @return The type.
    */
   java.lang.String getType();
   /**
+   * <pre>
+   * Content type (e.g., "email", "sms", "push", "in-app")
+   * </pre>
+   *
    * <code>string type = 2 [json_name = "type"];</code>
    * @return The bytes for type.
    */
@@ -49,11 +65,19 @@ public interface TemplateDataOrBuilder extends
       getTypeBytes();
 
   /**
+   * <pre>
+   * Template content with placeholders (e.g., "Hello {{name}}")
+   * </pre>
+   *
    * <code>string detail = 3 [json_name = "detail"];</code>
    * @return The detail.
    */
   java.lang.String getDetail();
   /**
+   * <pre>
+   * Template content with placeholders (e.g., "Hello {{name}}")
+   * </pre>
+   *
    * <code>string detail = 3 [json_name = "detail"];</code>
    * @return The bytes for detail.
    */
@@ -61,16 +85,28 @@ public interface TemplateDataOrBuilder extends
       getDetailBytes();
 
   /**
+   * <pre>
+   * Language for this template content
+   * </pre>
+   *
    * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
    * @return Whether the language field is set.
    */
   boolean hasLanguage();
   /**
+   * <pre>
+   * Language for this template content
+   * </pre>
+   *
    * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
    * @return The language.
    */
   com.antinvestor.apis.notification.v1.Language getLanguage();
   /**
+   * <pre>
+   * Language for this template content
+   * </pre>
+   *
    * <code>.notification.v1.Language language = 4 [json_name = "language"];</code>
    */
   com.antinvestor.apis.notification.v1.LanguageOrBuilder getLanguageOrBuilder();

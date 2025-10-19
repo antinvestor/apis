@@ -1,0 +1,1164 @@
+openapi: 3.1.0
+info:
+  title: Property Service
+  description: The Property Service manages real estate and asset properties with geospatial locality tracking, hierarchical structures, and subscription-based access control. It supports property type classification, state history tracking, and role-based subscriptions. Properties can be organized hierarchically and associated with geographic localities defined by points or boundaries.
+  contact:
+    name: Ant Investor Ltd
+    url: https://github.com/antinvestor/service-property
+    email: info@antinvestor.com
+  license:
+    name: Apache License
+    url: https://github.com/antinvestor/apis/blob/master/LICENSE
+  version: v1.0.0
+paths:
+  /property.v1.PropertyService/AddLocality:
+    post:
+      tags:
+        - Localities
+        - property.v1.PropertyService
+      summary: Add locality
+      description: Creates a new geographic locality with geospatial features (point or boundary). Supports hierarchical locality structures.
+      operationId: addLocality
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/property.v1.AddLocalityRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/property.v1.AddLocalityResponse'
+  /property.v1.PropertyService/AddPropertyType:
+    post:
+      tags:
+        - Property Types
+        - property.v1.PropertyService
+      summary: Add property type
+      description: Creates a new property type classification (residential, commercial, land, etc.) for categorizing properties.
+      operationId: addPropertyType
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/property.v1.AddPropertyTypeRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/property.v1.AddPropertyTypeResponse'
+  /property.v1.PropertyService/AddSubscription:
+    post:
+      tags:
+        - Subscriptions
+        - property.v1.PropertyService
+      summary: Add subscription
+      description: Grants a profile access to a property with a specific role (owner, manager, tenant, viewer). Supports expiration dates for time-limited access.
+      operationId: addSubscription
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/property.v1.AddSubscriptionRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/property.v1.AddSubscriptionResponse'
+  /property.v1.PropertyService/CreateProperty:
+    post:
+      tags:
+        - Properties
+        - property.v1.PropertyService
+      summary: Create property
+      description: Creates a new property with type classification, locality, and optional hierarchical parent. Properties can represent buildings, units, or land parcels.
+      operationId: createProperty
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/property.v1.CreatePropertyRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/property.v1.CreatePropertyResponse'
+  /property.v1.PropertyService/DeleteLocality:
+    post:
+      tags:
+        - Localities
+        - property.v1.PropertyService
+      summary: Delete locality
+      description: Removes a geographic locality from the system. Properties associated with this locality must be reassigned first.
+      operationId: deleteLocality
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/property.v1.DeleteLocalityRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/property.v1.DeleteLocalityResponse'
+  /property.v1.PropertyService/DeleteProperty:
+    post:
+      tags:
+        - Properties
+        - property.v1.PropertyService
+      summary: Delete property
+      description: Removes a property from the system. Child properties and subscriptions must be removed first.
+      operationId: deleteProperty
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/property.v1.DeletePropertyRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/property.v1.DeletePropertyResponse'
+  /property.v1.PropertyService/DeleteSubscription:
+    post:
+      tags:
+        - Subscriptions
+        - property.v1.PropertyService
+      summary: Delete subscription
+      description: Revokes a profile's access to a property by removing their subscription. The profile will no longer have access to the property.
+      operationId: deleteSubscription
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/property.v1.DeleteSubscriptionRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/property.v1.DeleteSubscriptionResponse'
+  /property.v1.PropertyService/HistoryOfProperty: {}
+  /property.v1.PropertyService/ListPropertyType: {}
+  /property.v1.PropertyService/ListSubscription: {}
+  /property.v1.PropertyService/SearchProperty: {}
+  /property.v1.PropertyService/StateOfProperty:
+    post:
+      tags:
+        - Properties
+        - property.v1.PropertyService
+      summary: Get property state
+      description: Retrieves the current state and status of a property including the latest state transition information.
+      operationId: getPropertyState
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/property.v1.StateOfPropertyRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/property.v1.StateOfPropertyResponse'
+  /property.v1.PropertyService/UpdateProperty:
+    post:
+      tags:
+        - Properties
+        - property.v1.PropertyService
+      summary: Update property
+      description: Updates an existing property's details including state, status, name, description, guardian, and locality. Creates a new state history entry.
+      operationId: updateProperty
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/property.v1.UpdatePropertyRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/property.v1.UpdatePropertyResponse'
+components:
+  schemas:
+    common.v1.STATE:
+      type: string
+      title: STATE
+      enum:
+        - CREATED
+        - CHECKED
+        - ACTIVE
+        - INACTIVE
+        - DELETED
+      description: buf:lint:ignore ENUM_VALUE_PREFIX
+    common.v1.STATUS:
+      type: string
+      title: STATUS
+      enum:
+        - UNKNOWN
+        - QUEUED
+        - IN_PROCESS
+        - FAILED
+        - SUCCESSFUL
+      description: buf:lint:ignore ENUM_VALUE_PREFIX
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    google.protobuf.ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          title: values
+          description: Repeated field of dynamically typed values.
+      title: ListValue
+      additionalProperties: false
+      description: |-
+        `ListValue` is a wrapper around a repeated field of values.
+
+         The JSON representation for `ListValue` is JSON array.
+    google.protobuf.NullValue:
+      type: string
+      title: NullValue
+      enum:
+        - NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+         `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+    google.protobuf.Struct:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/google.protobuf.Value'
+      description: |-
+        `Struct` represents a structured data value, consisting of fields
+         which map to dynamically typed values. In some languages, `Struct`
+         might be supported by a native representation. For example, in
+         scripting languages like JS a struct is represented as an
+         object. The details of that representation are described together
+         with the proto support for the language.
+
+         The JSON representation for `Struct` is JSON object.
+    google.protobuf.Struct.FieldsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          title: value
+          $ref: '#/components/schemas/google.protobuf.Value'
+      title: FieldsEntry
+      additionalProperties: false
+    google.protobuf.Timestamp:
+      type: string
+      examples:
+        - "2023-01-15T01:30:15.01Z"
+        - "2024-12-25T12:00:00Z"
+      format: date-time
+      description: |-
+        A Timestamp represents a point in time independent of any time zone or local
+         calendar, encoded as a count of seconds and fractions of seconds at
+         nanosecond resolution. The count is relative to an epoch at UTC midnight on
+         January 1, 1970, in the proleptic Gregorian calendar which extends the
+         Gregorian calendar backwards to year one.
+
+         All minutes are 60 seconds long. Leap seconds are "smeared" so that no leap
+         second table is needed for interpretation, using a [24-hour linear
+         smear](https://developers.google.com/time/smear).
+
+         The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
+         restricting to that range, we ensure that we can convert to and from [RFC
+         3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.
+
+         # Examples
+
+         Example 1: Compute Timestamp from POSIX `time()`.
+
+             Timestamp timestamp;
+             timestamp.set_seconds(time(NULL));
+             timestamp.set_nanos(0);
+
+         Example 2: Compute Timestamp from POSIX `gettimeofday()`.
+
+             struct timeval tv;
+             gettimeofday(&tv, NULL);
+
+             Timestamp timestamp;
+             timestamp.set_seconds(tv.tv_sec);
+             timestamp.set_nanos(tv.tv_usec * 1000);
+
+         Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
+
+             FILETIME ft;
+             GetSystemTimeAsFileTime(&ft);
+             UINT64 ticks = (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
+
+             // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
+             // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
+             Timestamp timestamp;
+             timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
+             timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
+
+         Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
+
+             long millis = System.currentTimeMillis();
+
+             Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+                 .setNanos((int) ((millis % 1000) * 1000000)).build();
+
+         Example 5: Compute Timestamp from Java `Instant.now()`.
+
+             Instant now = Instant.now();
+
+             Timestamp timestamp =
+                 Timestamp.newBuilder().setSeconds(now.getEpochSecond())
+                     .setNanos(now.getNano()).build();
+
+         Example 6: Compute Timestamp from current time in Python.
+
+             timestamp = Timestamp()
+             timestamp.GetCurrentTime()
+
+         # JSON Mapping
+
+         In JSON format, the Timestamp type is encoded as a string in the
+         [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the
+         format is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z"
+         where {year} is always expressed using four digits while {month}, {day},
+         {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
+         seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
+         are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone
+         is required. A proto3 JSON serializer should always use UTC (as indicated by
+         "Z") when printing the Timestamp type and a proto3 JSON parser should be
+         able to accept both UTC and other timezones (as indicated by an offset).
+
+         For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past
+         01:30 UTC on January 15, 2017.
+
+         In JavaScript, one can convert a Date object to this format using the
+         standard
+         [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
+         method. In Python, a standard `datetime.datetime` object can be converted
+         to this format using
+         [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
+         the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use
+         the Joda Time's [`ISODateTimeFormat.dateTime()`](
+         http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()
+         ) to obtain a formatter capable of generating timestamps in this format.
+    google.protobuf.Value:
+      oneOf:
+        - type: "null"
+        - type: number
+        - type: string
+        - type: boolean
+        - type: array
+        - type: object
+          additionalProperties: true
+      description: |-
+        `Value` represents a dynamically typed value which can be either
+         null, a number, a string, a boolean, a recursive struct value, or a
+         list of values. A producer of value is expected to set one of these
+         variants. Absence of any variant indicates an error.
+
+         The JSON representation for `Value` is JSON value.
+    property.v1.AddLocalityRequest:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/property.v1.Locality'
+      title: AddLocalityRequest
+      additionalProperties: false
+    property.v1.AddLocalityResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/property.v1.Locality'
+      title: AddLocalityResponse
+      additionalProperties: false
+    property.v1.AddPropertyTypeRequest:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/property.v1.PropertyType'
+      title: AddPropertyTypeRequest
+      additionalProperties: false
+    property.v1.AddPropertyTypeResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/property.v1.PropertyType'
+      title: AddPropertyTypeResponse
+      additionalProperties: false
+    property.v1.AddSubscriptionRequest:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/property.v1.Subscription'
+      title: AddSubscriptionRequest
+      additionalProperties: false
+    property.v1.AddSubscriptionResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/property.v1.Subscription'
+      title: AddSubscriptionResponse
+      additionalProperties: false
+    property.v1.CreatePropertyRequest:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/property.v1.Property'
+      title: CreatePropertyRequest
+      additionalProperties: false
+    property.v1.CreatePropertyResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/property.v1.Property'
+      title: CreatePropertyResponse
+      additionalProperties: false
+    property.v1.DeleteLocalityRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+      title: DeleteLocalityRequest
+      additionalProperties: false
+    property.v1.DeleteLocalityResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          title: success
+      title: DeleteLocalityResponse
+      additionalProperties: false
+    property.v1.DeletePropertyRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+      title: DeletePropertyRequest
+      additionalProperties: false
+    property.v1.DeletePropertyResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          title: success
+      title: DeletePropertyResponse
+      additionalProperties: false
+    property.v1.DeleteSubscriptionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+      title: DeleteSubscriptionRequest
+      additionalProperties: false
+    property.v1.DeleteSubscriptionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          title: success
+      title: DeleteSubscriptionResponse
+      additionalProperties: false
+    property.v1.HistoryOfPropertyRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+      title: HistoryOfPropertyRequest
+      additionalProperties: false
+    property.v1.HistoryOfPropertyResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/property.v1.PropertyState'
+          title: data
+      title: HistoryOfPropertyResponse
+      additionalProperties: false
+    property.v1.ListPropertyTypeRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          title: query
+        page:
+          type:
+            - integer
+            - string
+          title: page
+          format: int64
+        count:
+          type: integer
+          title: count
+          format: int32
+        startDate:
+          type: string
+          title: start_date
+        endDate:
+          type: string
+          title: end_date
+        properties:
+          type: array
+          items:
+            type: string
+          title: properties
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: ListPropertyTypeRequest
+      additionalProperties: false
+    property.v1.ListPropertyTypeResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/property.v1.PropertyType'
+          title: data
+      title: ListPropertyTypeResponse
+      additionalProperties: false
+    property.v1.ListSubscriptionRequest:
+      type: object
+      properties:
+        propertyId:
+          type: string
+          title: property_id
+        query:
+          type: string
+          title: query
+      title: ListSubscriptionRequest
+      additionalProperties: false
+    property.v1.ListSubscriptionResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/property.v1.Subscription'
+          title: data
+      title: ListSubscriptionResponse
+      additionalProperties: false
+    property.v1.Locality:
+      type: object
+      allOf:
+        - properties:
+            id:
+              type: string
+              title: id
+              maxLength: 40
+              minLength: 3
+              pattern: '[0-9a-z_-]{3,20}'
+              description: Unique locality ID
+            parentId:
+              type: string
+              title: parent_id
+              maxLength: 40
+              minLength: 3
+              pattern: '[0-9a-z_-]{3,20}'
+              description: Parent locality ID for hierarchical structure
+            name:
+              type: string
+              title: name
+              maxLength: 60
+              minLength: 3
+              description: Locality name (city, district, neighborhood)
+            description:
+              type: string
+              title: description
+              minLength: 50
+              description: Detailed description
+            extras:
+              title: extras
+              description: Additional metadata
+              $ref: '#/components/schemas/google.protobuf.Struct'
+            createdAt:
+              title: created_at
+              description: Creation timestamp
+              $ref: '#/components/schemas/google.protobuf.Timestamp'
+        - oneOf:
+            - properties:
+                boundary:
+                  type: string
+                  title: boundary
+                  maxLength: 2048
+                  minLength: 10
+                  description: Boundary polygon (GeoJSON or WKT format)
+              title: boundary
+              required:
+                - boundary
+            - properties:
+                point:
+                  type: string
+                  title: point
+                  maxLength: 100
+                  minLength: 10
+                  description: Point location (lat,lng format)
+              title: point
+              required:
+                - point
+      title: Locality
+      additionalProperties: false
+      description: Locality represents a geographic location with geospatial features.
+    property.v1.Property:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique property ID
+        parentId:
+          type: string
+          title: parent_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Parent property ID for hierarchical structures
+        name:
+          type: string
+          title: name
+          maxLength: 60
+          minLength: 3
+          description: Property name
+        description:
+          type: string
+          title: description
+          minLength: 50
+          description: Property description
+        propertyType:
+          title: property_type
+          description: Property classification
+          $ref: '#/components/schemas/property.v1.PropertyType'
+        locality:
+          title: locality
+          description: Geographic location
+          $ref: '#/components/schemas/property.v1.Locality'
+        startedAt:
+          title: started_at
+          description: |
+            Property start date
+            timestamp.lt_now = true
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        createdAt:
+          title: created_at
+          description: Creation timestamp
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        extra:
+          title: extra
+          description: Additional property metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: Property
+      additionalProperties: false
+      description: Property represents a real estate or asset property.
+    property.v1.PropertyState:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique state record ID
+        propertyid:
+          type: string
+          title: propertyid
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Associated property ID
+        state:
+          title: state
+          description: Property state
+          $ref: '#/components/schemas/common.v1.STATE'
+        status:
+          title: status
+          description: Property status
+          $ref: '#/components/schemas/common.v1.STATUS'
+        name:
+          type: string
+          title: name
+          maxLength: 60
+          minLength: 3
+          description: State name/label
+        description:
+          type: string
+          title: description
+          minLength: 50
+          description: State description
+        extras:
+          title: extras
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        createdAt:
+          title: created_at
+          description: State timestamp
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: PropertyState
+      additionalProperties: false
+      description: PropertyState represents a state snapshot in property history.
+    property.v1.PropertyType:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique property type ID
+        name:
+          type: string
+          title: name
+          maxLength: 60
+          minLength: 3
+          description: Type name (residential, commercial, land, etc.)
+        description:
+          type: string
+          title: description
+          minLength: 50
+          description: Type description
+        extra:
+          title: extra
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        createdAt:
+          title: created_at
+          description: Creation timestamp
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: PropertyType
+      additionalProperties: false
+      description: PropertyType defines a classification for properties.
+    property.v1.SearchPropertyRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          title: query
+        page:
+          type:
+            - integer
+            - string
+          title: page
+          format: int64
+        count:
+          type: integer
+          title: count
+          format: int32
+        startDate:
+          type: string
+          title: start_date
+        endDate:
+          type: string
+          title: end_date
+        properties:
+          type: array
+          items:
+            type: string
+          title: properties
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: SearchPropertyRequest
+      additionalProperties: false
+    property.v1.SearchPropertyResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/property.v1.Property'
+          title: data
+      title: SearchPropertyResponse
+      additionalProperties: false
+    property.v1.StateOfPropertyRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+      title: StateOfPropertyRequest
+      additionalProperties: false
+    property.v1.StateOfPropertyResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/property.v1.PropertyState'
+      title: StateOfPropertyResponse
+      additionalProperties: false
+    property.v1.Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique subscription ID
+        propertyId:
+          type: string
+          title: property_id
+          maxLength: 40
+          minLength: 3
+          description: Property ID
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 50
+          minLength: 3
+          description: Profile ID of subscriber
+        role:
+          type: string
+          title: role
+          maxLength: 50
+          minLength: 3
+          description: Role (owner, manager, tenant, viewer, etc.)
+        extra:
+          title: extra
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        createdAt:
+          title: created_at
+          description: Subscription start
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        expiresAt:
+          title: expires_at
+          description: Subscription expiry
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: Subscription
+      additionalProperties: false
+      description: Subscription represents a profile's access to a property with a role.
+    property.v1.UpdatePropertyRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        state:
+          title: state
+          $ref: '#/components/schemas/common.v1.STATE'
+        status:
+          title: status
+          $ref: '#/components/schemas/common.v1.STATUS'
+        name:
+          type: string
+          title: name
+          maxLength: 60
+          minLength: 3
+        description:
+          type: string
+          title: description
+          minLength: 60
+        guardianId:
+          type: string
+          title: guardian_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        localityId:
+          type: string
+          title: locality_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: UpdatePropertyRequest
+      additionalProperties: false
+    property.v1.UpdatePropertyResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/property.v1.Property'
+      title: UpdatePropertyResponse
+      additionalProperties: false
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security: []
+tags:
+  - name: property.v1.PropertyService
+    description: |-
+      PropertyService manages real estate and asset properties.
+       All RPCs require authentication via Bearer token.

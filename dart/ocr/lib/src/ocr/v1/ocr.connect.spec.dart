@@ -7,11 +7,14 @@ import "package:connectrpc/connect.dart" as connect;
 import "ocr.pb.dart" as ocrv1ocr;
 import "../../common/v1/common.pb.dart" as commonv1common;
 
+/// OCRService provides optical character recognition capabilities.
+/// All RPCs require authentication via Bearer token.
 abstract final class OCRService {
   /// Fully-qualified name of the OCRService service.
   static const name = 'ocr.v1.OCRService';
 
-  /// Perform a new ocr process request
+  /// Recognize performs OCR on one or more files.
+  /// Supports both synchronous and asynchronous processing.
   static const recognize = connect.Spec(
     '/$name/Recognize',
     connect.StreamType.unary,
@@ -19,7 +22,8 @@ abstract final class OCRService {
     ocrv1ocr.RecognizeResponse.new,
   );
 
-  /// Check the status of request if queued
+  /// Status retrieves the current status of an async OCR request.
+  /// Returns processing status and results if available.
   static const status = connect.Spec(
     '/$name/Status',
     connect.StreamType.unary,

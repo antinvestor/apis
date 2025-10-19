@@ -14,6 +14,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// KeyType defines the types of encryption keys that can be stored for a device.
+/// Different key types serve different purposes in the security infrastructure.
 /// buf:lint:ignore ENUM_VALUE_PREFIX
 class KeyType extends $pb.ProtobufEnum {
   /// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX

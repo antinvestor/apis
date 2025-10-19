@@ -25,11 +25,19 @@ public interface TransactionEntryOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Account reference for this entry
+   * </pre>
+   *
    * <code>string account = 1 [json_name = "account"];</code>
    * @return The account.
    */
   java.lang.String getAccount();
   /**
+   * <pre>
+   * Account reference for this entry
+   * </pre>
+   *
    * <code>string account = 1 [json_name = "account"];</code>
    * @return The bytes for account.
    */
@@ -37,11 +45,19 @@ public interface TransactionEntryOrBuilder extends
       getAccountBytes();
 
   /**
+   * <pre>
+   * Transaction reference this entry belongs to
+   * </pre>
+   *
    * <code>string transaction = 2 [json_name = "transaction"];</code>
    * @return The transaction.
    */
   java.lang.String getTransaction();
   /**
+   * <pre>
+   * Transaction reference this entry belongs to
+   * </pre>
+   *
    * <code>string transaction = 2 [json_name = "transaction"];</code>
    * @return The bytes for transaction.
    */
@@ -49,11 +65,19 @@ public interface TransactionEntryOrBuilder extends
       getTransactionBytes();
 
   /**
+   * <pre>
+   * Transaction timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
    * @return The transactedAt.
    */
   java.lang.String getTransactedAt();
   /**
+   * <pre>
+   * Transaction timestamp (RFC3339)
+   * </pre>
+   *
    * <code>string transacted_at = 3 [json_name = "transactedAt"];</code>
    * @return The bytes for transactedAt.
    */
@@ -61,47 +85,83 @@ public interface TransactionEntryOrBuilder extends
       getTransactedAtBytes();
 
   /**
+   * <pre>
+   * Amount for this entry
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    * @return Whether the amount field is set.
    */
   boolean hasAmount();
   /**
+   * <pre>
+   * Amount for this entry
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    * @return The amount.
    */
   com.google.type.Money getAmount();
   /**
+   * <pre>
+   * Amount for this entry
+   * </pre>
+   *
    * <code>.google.type.Money amount = 4 [json_name = "amount"];</code>
    */
   com.google.type.MoneyOrBuilder getAmountOrBuilder();
 
   /**
+   * <pre>
+   * True if credit, false if debit
+   * </pre>
+   *
    * <code>bool credit = 5 [json_name = "credit"];</code>
    * @return The credit.
    */
   boolean getCredit();
 
   /**
+   * <pre>
+   * Account balance after this entry
+   * </pre>
+   *
    * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
    * @return Whether the accBalance field is set.
    */
   boolean hasAccBalance();
   /**
+   * <pre>
+   * Account balance after this entry
+   * </pre>
+   *
    * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
    * @return The accBalance.
    */
   com.google.type.Money getAccBalance();
   /**
+   * <pre>
+   * Account balance after this entry
+   * </pre>
+   *
    * <code>.google.type.Money acc_balance = 6 [json_name = "accBalance"];</code>
    */
   com.google.type.MoneyOrBuilder getAccBalanceOrBuilder();
 
   /**
+   * <pre>
+   * When this entry was cleared (RFC3339)
+   * </pre>
+   *
    * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
    * @return The clearedAt.
    */
   java.lang.String getClearedAt();
   /**
+   * <pre>
+   * When this entry was cleared (RFC3339)
+   * </pre>
+   *
    * <code>string cleared_at = 7 [json_name = "clearedAt"];</code>
    * @return The bytes for clearedAt.
    */

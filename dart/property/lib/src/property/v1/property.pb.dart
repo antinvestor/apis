@@ -24,6 +24,7 @@ export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 enum Locality_Feature { point, boundary, notSet }
 
+/// Locality represents a geographic location with geospatial features.
 class Locality extends $pb.GeneratedMessage {
   factory Locality({
     $core.String? id,
@@ -299,6 +300,118 @@ class AddLocalityResponse extends $pb.GeneratedMessage {
   Locality ensureData() => $_ensure(0);
 }
 
+/// PropertyType defines a classification for properties.
+class PropertyType extends $pb.GeneratedMessage {
+  factory PropertyType({
+    $core.String? id,
+    $core.String? name,
+    $core.String? description,
+    $0.Struct? extra,
+    $1.Timestamp? createdAt,
+  }) {
+    final result = create();
+    if (id != null) result.id = id;
+    if (name != null) result.name = name;
+    if (description != null) result.description = description;
+    if (extra != null) result.extra = extra;
+    if (createdAt != null) result.createdAt = createdAt;
+    return result;
+  }
+
+  PropertyType._();
+
+  factory PropertyType.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory PropertyType.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'PropertyType',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'property.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..aOS(3, _omitFieldNames ? '' : 'description')
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'extra',
+        subBuilder: $0.Struct.create)
+    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt',
+        subBuilder: $1.Timestamp.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PropertyType clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PropertyType copyWith(void Function(PropertyType) updates) =>
+      super.copyWith((message) => updates(message as PropertyType))
+          as PropertyType;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PropertyType create() => PropertyType._();
+  @$core.override
+  PropertyType createEmptyInstance() => create();
+  static $pb.PbList<PropertyType> createRepeated() =>
+      $pb.PbList<PropertyType>();
+  @$core.pragma('dart2js:noInline')
+  static PropertyType getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PropertyType>(create);
+  static PropertyType? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get description => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set description($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasDescription() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearDescription() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $0.Struct get extra => $_getN(3);
+  @$pb.TagNumber(4)
+  set extra($0.Struct value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasExtra() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExtra() => $_clearField(4);
+  @$pb.TagNumber(4)
+  $0.Struct ensureExtra() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $1.Timestamp get createdAt => $_getN(4);
+  @$pb.TagNumber(5)
+  set createdAt($1.Timestamp value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCreatedAt() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCreatedAt() => $_clearField(5);
+  @$pb.TagNumber(5)
+  $1.Timestamp ensureCreatedAt() => $_ensure(4);
+}
+
+/// PropertyState represents a state snapshot in property history.
 class PropertyState extends $pb.GeneratedMessage {
   factory PropertyState({
     $core.String? id,
@@ -447,116 +560,6 @@ class PropertyState extends $pb.GeneratedMessage {
   $1.Timestamp ensureCreatedAt() => $_ensure(7);
 }
 
-class PropertyType extends $pb.GeneratedMessage {
-  factory PropertyType({
-    $core.String? id,
-    $core.String? name,
-    $core.String? description,
-    $0.Struct? extra,
-    $1.Timestamp? createdAt,
-  }) {
-    final result = create();
-    if (id != null) result.id = id;
-    if (name != null) result.name = name;
-    if (description != null) result.description = description;
-    if (extra != null) result.extra = extra;
-    if (createdAt != null) result.createdAt = createdAt;
-    return result;
-  }
-
-  PropertyType._();
-
-  factory PropertyType.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory PropertyType.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'PropertyType',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'property.v1'),
-      createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aOS(3, _omitFieldNames ? '' : 'description')
-    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'extra',
-        subBuilder: $0.Struct.create)
-    ..aOM<$1.Timestamp>(5, _omitFieldNames ? '' : 'createdAt',
-        subBuilder: $1.Timestamp.create)
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PropertyType clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PropertyType copyWith(void Function(PropertyType) updates) =>
-      super.copyWith((message) => updates(message as PropertyType))
-          as PropertyType;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PropertyType create() => PropertyType._();
-  @$core.override
-  PropertyType createEmptyInstance() => create();
-  static $pb.PbList<PropertyType> createRepeated() =>
-      $pb.PbList<PropertyType>();
-  @$core.pragma('dart2js:noInline')
-  static PropertyType getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PropertyType>(create);
-  static PropertyType? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set id($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get name => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set name($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasName() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearName() => $_clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get description => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set description($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasDescription() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearDescription() => $_clearField(3);
-
-  @$pb.TagNumber(4)
-  $0.Struct get extra => $_getN(3);
-  @$pb.TagNumber(4)
-  set extra($0.Struct value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasExtra() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearExtra() => $_clearField(4);
-  @$pb.TagNumber(4)
-  $0.Struct ensureExtra() => $_ensure(3);
-
-  @$pb.TagNumber(5)
-  $1.Timestamp get createdAt => $_getN(4);
-  @$pb.TagNumber(5)
-  set createdAt($1.Timestamp value) => $_setField(5, value);
-  @$pb.TagNumber(5)
-  $core.bool hasCreatedAt() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearCreatedAt() => $_clearField(5);
-  @$pb.TagNumber(5)
-  $1.Timestamp ensureCreatedAt() => $_ensure(4);
-}
-
 class AddPropertyTypeRequest extends $pb.GeneratedMessage {
   factory AddPropertyTypeRequest({
     PropertyType? data,
@@ -677,6 +680,7 @@ class AddPropertyTypeResponse extends $pb.GeneratedMessage {
   PropertyType ensureData() => $_ensure(0);
 }
 
+/// Subscription represents a profile's access to a property with a role.
 class Subscription extends $pb.GeneratedMessage {
   factory Subscription({
     $core.String? id,
@@ -934,6 +938,7 @@ class AddSubscriptionResponse extends $pb.GeneratedMessage {
   Subscription ensureData() => $_ensure(0);
 }
 
+/// Property represents a real estate or asset property.
 class Property extends $pb.GeneratedMessage {
   factory Property({
     $core.String? id,
@@ -2471,84 +2476,86 @@ class DeleteSubscriptionResponse extends $pb.GeneratedMessage {
   void clearSuccess() => $_clearField(1);
 }
 
+/// PropertyService manages real estate and asset properties.
+/// All RPCs require authentication via Bearer token.
 class PropertyServiceApi {
   final $pb.RpcClient _client;
 
   PropertyServiceApi(this._client);
 
-  /// Create method for adding a new property type into the system
+  /// AddPropertyType creates a new property type classification.
   $async.Future<AddPropertyTypeResponse> addPropertyType(
           $pb.ClientContext? ctx, AddPropertyTypeRequest request) =>
       _client.invoke<AddPropertyTypeResponse>(ctx, 'PropertyService',
           'AddPropertyType', request, AddPropertyTypeResponse());
 
-  /// List method for showing all property types in the system
+  /// ListPropertyType retrieves all property types.
   $async.Future<ListPropertyTypeResponse> listPropertyType(
           $pb.ClientContext? ctx, ListPropertyTypeRequest request) =>
       _client.invoke<ListPropertyTypeResponse>(ctx, 'PropertyService',
           'ListPropertyType', request, ListPropertyTypeResponse());
 
-  /// Create method for adding a new locality into the system
+  /// AddLocality creates a new geographic locality.
   $async.Future<AddLocalityResponse> addLocality(
           $pb.ClientContext? ctx, AddLocalityRequest request) =>
       _client.invoke<AddLocalityResponse>(ctx, 'PropertyService', 'AddLocality',
           request, AddLocalityResponse());
 
-  /// Delete method for removing an existing locality from the system
+  /// DeleteLocality removes a locality from the system.
   $async.Future<DeleteLocalityResponse> deleteLocality(
           $pb.ClientContext? ctx, DeleteLocalityRequest request) =>
       _client.invoke<DeleteLocalityResponse>(ctx, 'PropertyService',
           'DeleteLocality', request, DeleteLocalityResponse());
 
-  /// Create method for adding a new property into the system
+  /// CreateProperty creates a new property.
   $async.Future<CreatePropertyResponse> createProperty(
           $pb.ClientContext? ctx, CreatePropertyRequest request) =>
       _client.invoke<CreatePropertyResponse>(ctx, 'PropertyService',
           'CreateProperty', request, CreatePropertyResponse());
 
-  /// Update property request to modify its current form to another
+  /// UpdateProperty updates an existing property.
   $async.Future<UpdatePropertyResponse> updateProperty(
           $pb.ClientContext? ctx, UpdatePropertyRequest request) =>
       _client.invoke<UpdatePropertyResponse>(ctx, 'PropertyService',
           'UpdateProperty', request, UpdatePropertyResponse());
 
-  /// Delete property request to modify its current form to another
+  /// DeleteProperty removes a property from the system.
   $async.Future<DeletePropertyResponse> deleteProperty(
           $pb.ClientContext? ctx, DeletePropertyRequest request) =>
       _client.invoke<DeletePropertyResponse>(ctx, 'PropertyService',
           'DeleteProperty', request, DeletePropertyResponse());
 
-  /// State request to determine active state and status of a property
+  /// StateOfProperty retrieves the current state of a property.
   $async.Future<StateOfPropertyResponse> stateOfProperty(
           $pb.ClientContext? ctx, StateOfPropertyRequest request) =>
       _client.invoke<StateOfPropertyResponse>(ctx, 'PropertyService',
           'StateOfProperty', request, StateOfPropertyResponse());
 
-  /// History request returns all the state transitions a property has had over its lifetime in the system
+  /// HistoryOfProperty retrieves the complete state history.
   $async.Future<HistoryOfPropertyResponse> historyOfProperty(
           $pb.ClientContext? ctx, HistoryOfPropertyRequest request) =>
       _client.invoke<HistoryOfPropertyResponse>(ctx, 'PropertyService',
           'HistoryOfProperty', request, HistoryOfPropertyResponse());
 
-  /// Search method is for client request to query for properties that match query
+  /// SearchProperty finds properties matching criteria.
   $async.Future<SearchPropertyResponse> searchProperty(
           $pb.ClientContext? ctx, SearchPropertyRequest request) =>
       _client.invoke<SearchPropertyResponse>(ctx, 'PropertyService',
           'SearchProperty', request, SearchPropertyResponse());
 
-  /// ListSubscriptions for a particular property
+  /// ListSubscription retrieves subscriptions for a property.
   $async.Future<ListSubscriptionResponse> listSubscription(
           $pb.ClientContext? ctx, ListSubscriptionRequest request) =>
       _client.invoke<ListSubscriptionResponse>(ctx, 'PropertyService',
           'ListSubscription', request, ListSubscriptionResponse());
 
-  /// AddSubscription for a profile to a property
+  /// AddSubscription grants a profile access to a property.
   $async.Future<AddSubscriptionResponse> addSubscription(
           $pb.ClientContext? ctx, AddSubscriptionRequest request) =>
       _client.invoke<AddSubscriptionResponse>(ctx, 'PropertyService',
           'AddSubscription', request, AddSubscriptionResponse());
 
-  /// Delete subscription of profile to a property
+  /// DeleteSubscription revokes a profile's access to a property.
   $async.Future<DeleteSubscriptionResponse> deleteSubscription(
           $pb.ClientContext? ctx, DeleteSubscriptionRequest request) =>
       _client.invoke<DeleteSubscriptionResponse>(ctx, 'PropertyService',

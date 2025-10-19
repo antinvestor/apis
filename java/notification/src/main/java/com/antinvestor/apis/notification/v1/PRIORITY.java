@@ -21,6 +21,8 @@ package com.antinvestor.apis.notification.v1;
 
 /**
  * <pre>
+ * PRIORITY defines the delivery priority for notifications.
+ * Higher priority notifications are processed and delivered first.
  * buf:lint:ignore ENUM_VALUE_PREFIX
  * </pre>
  *
@@ -38,10 +40,18 @@ public enum PRIORITY
    */
   HIGH(0),
   /**
+   * <pre>
+   * Standard notifications (updates, reminders)
+   * </pre>
+   *
    * <code>LOW = 1;</code>
    */
   LOW(1),
   /**
+   * <pre>
+   * Low-priority notifications (marketing, newsletters)
+   * </pre>
+   *
    * <code>VERY_LOW = 2;</code>
    */
   VERY_LOW(2),
@@ -66,10 +76,18 @@ public enum PRIORITY
    */
   public static final int HIGH_VALUE = 0;
   /**
+   * <pre>
+   * Standard notifications (updates, reminders)
+   * </pre>
+   *
    * <code>LOW = 1;</code>
    */
   public static final int LOW_VALUE = 1;
   /**
+   * <pre>
+   * Low-priority notifications (marketing, newsletters)
+   * </pre>
+   *
    * <code>VERY_LOW = 2;</code>
    */
   public static final int VERY_LOW_VALUE = 2;

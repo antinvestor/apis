@@ -21,6 +21,8 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
+ * KeyType defines the types of encryption keys that can be stored for a device.
+ * Different key types serve different purposes in the security infrastructure.
  * buf:lint:ignore ENUM_VALUE_PREFIX
  * </pre>
  *
@@ -38,6 +40,10 @@ public enum KeyType
    */
   MATRIX_KEY(0),
   /**
+   * <pre>
+   * Key for secure push notification delivery
+   * </pre>
+   *
    * <code>NOTIFICATION_KEY = 1;</code>
    */
   NOTIFICATION_KEY(1),
@@ -62,6 +68,10 @@ public enum KeyType
    */
   public static final int MATRIX_KEY_VALUE = 0;
   /**
+   * <pre>
+   * Key for secure push notification delivery
+   * </pre>
+   *
    * <code>NOTIFICATION_KEY = 1;</code>
    */
   public static final int NOTIFICATION_KEY_VALUE = 1;

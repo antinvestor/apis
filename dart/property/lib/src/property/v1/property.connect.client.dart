@@ -7,8 +7,10 @@ import "package:connectrpc/connect.dart" as connect;
 import "property.pb.dart" as propertyv1property;
 import "property.connect.spec.dart" as specs;
 
+/// PropertyService manages real estate and asset properties.
+/// All RPCs require authentication via Bearer token.
 extension type PropertyServiceClient (connect.Transport _transport) {
-  /// Create method for adding a new property type into the system
+  /// AddPropertyType creates a new property type classification.
   Future<propertyv1property.AddPropertyTypeResponse> addPropertyType(
     propertyv1property.AddPropertyTypeRequest input, {
     connect.Headers? headers,
@@ -26,7 +28,7 @@ extension type PropertyServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// List method for showing all property types in the system
+  /// ListPropertyType retrieves all property types.
   Stream<propertyv1property.ListPropertyTypeResponse> listPropertyType(
     propertyv1property.ListPropertyTypeRequest input, {
     connect.Headers? headers,
@@ -44,7 +46,7 @@ extension type PropertyServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Create method for adding a new locality into the system
+  /// AddLocality creates a new geographic locality.
   Future<propertyv1property.AddLocalityResponse> addLocality(
     propertyv1property.AddLocalityRequest input, {
     connect.Headers? headers,
@@ -62,7 +64,7 @@ extension type PropertyServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Delete method for removing an existing locality from the system
+  /// DeleteLocality removes a locality from the system.
   Future<propertyv1property.DeleteLocalityResponse> deleteLocality(
     propertyv1property.DeleteLocalityRequest input, {
     connect.Headers? headers,
@@ -80,7 +82,7 @@ extension type PropertyServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Create method for adding a new property into the system
+  /// CreateProperty creates a new property.
   Future<propertyv1property.CreatePropertyResponse> createProperty(
     propertyv1property.CreatePropertyRequest input, {
     connect.Headers? headers,
@@ -98,7 +100,7 @@ extension type PropertyServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Update property request to modify its current form to another
+  /// UpdateProperty updates an existing property.
   Future<propertyv1property.UpdatePropertyResponse> updateProperty(
     propertyv1property.UpdatePropertyRequest input, {
     connect.Headers? headers,
@@ -116,7 +118,7 @@ extension type PropertyServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Delete property request to modify its current form to another
+  /// DeleteProperty removes a property from the system.
   Future<propertyv1property.DeletePropertyResponse> deleteProperty(
     propertyv1property.DeletePropertyRequest input, {
     connect.Headers? headers,
@@ -134,7 +136,7 @@ extension type PropertyServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// State request to determine active state and status of a property
+  /// StateOfProperty retrieves the current state of a property.
   Future<propertyv1property.StateOfPropertyResponse> stateOfProperty(
     propertyv1property.StateOfPropertyRequest input, {
     connect.Headers? headers,
@@ -152,7 +154,7 @@ extension type PropertyServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// History request returns all the state transitions a property has had over its lifetime in the system
+  /// HistoryOfProperty retrieves the complete state history.
   Stream<propertyv1property.HistoryOfPropertyResponse> historyOfProperty(
     propertyv1property.HistoryOfPropertyRequest input, {
     connect.Headers? headers,
@@ -170,7 +172,7 @@ extension type PropertyServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Search method is for client request to query for properties that match query
+  /// SearchProperty finds properties matching criteria.
   Stream<propertyv1property.SearchPropertyResponse> searchProperty(
     propertyv1property.SearchPropertyRequest input, {
     connect.Headers? headers,
@@ -188,7 +190,7 @@ extension type PropertyServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// ListSubscriptions for a particular property
+  /// ListSubscription retrieves subscriptions for a property.
   Stream<propertyv1property.ListSubscriptionResponse> listSubscription(
     propertyv1property.ListSubscriptionRequest input, {
     connect.Headers? headers,
@@ -206,7 +208,7 @@ extension type PropertyServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// AddSubscription for a profile to a property
+  /// AddSubscription grants a profile access to a property.
   Future<propertyv1property.AddSubscriptionResponse> addSubscription(
     propertyv1property.AddSubscriptionRequest input, {
     connect.Headers? headers,
@@ -224,7 +226,7 @@ extension type PropertyServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Delete subscription of profile to a property
+  /// DeleteSubscription revokes a profile's access to a property.
   Future<propertyv1property.DeleteSubscriptionResponse> deleteSubscription(
     propertyv1property.DeleteSubscriptionRequest input, {
     connect.Headers? headers,

@@ -25,11 +25,19 @@ public interface LocalityOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * Unique locality ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The id.
    */
   java.lang.String getId();
   /**
+   * <pre>
+   * Unique locality ID
+   * </pre>
+   *
    * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
    * @return The bytes for id.
    */
@@ -37,11 +45,19 @@ public interface LocalityOrBuilder extends
       getIdBytes();
 
   /**
+   * <pre>
+   * Parent locality ID for hierarchical structure
+   * </pre>
+   *
    * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
    * @return The parentId.
    */
   java.lang.String getParentId();
   /**
+   * <pre>
+   * Parent locality ID for hierarchical structure
+   * </pre>
+   *
    * <code>string parent_id = 2 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for parentId.
    */
@@ -49,11 +65,19 @@ public interface LocalityOrBuilder extends
       getParentIdBytes();
 
   /**
+   * <pre>
+   * Locality name (city, district, neighborhood)
+   * </pre>
+   *
    * <code>string name = 5 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The name.
    */
   java.lang.String getName();
   /**
+   * <pre>
+   * Locality name (city, district, neighborhood)
+   * </pre>
+   *
    * <code>string name = 5 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The bytes for name.
    */
@@ -61,11 +85,19 @@ public interface LocalityOrBuilder extends
       getNameBytes();
 
   /**
+   * <pre>
+   * Detailed description
+   * </pre>
+   *
    * <code>string description = 6 [json_name = "description", (.buf.validate.field) = { ... }</code>
    * @return The description.
    */
   java.lang.String getDescription();
   /**
+   * <pre>
+   * Detailed description
+   * </pre>
+   *
    * <code>string description = 6 [json_name = "description", (.buf.validate.field) = { ... }</code>
    * @return The bytes for description.
    */
@@ -73,46 +105,82 @@ public interface LocalityOrBuilder extends
       getDescriptionBytes();
 
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
    * @return Whether the extras field is set.
    */
   boolean hasExtras();
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
    * @return The extras.
    */
   com.google.protobuf.Struct getExtras();
   /**
+   * <pre>
+   * Additional metadata
+   * </pre>
+   *
    * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
    */
   com.google.protobuf.StructOrBuilder getExtrasOrBuilder();
 
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 8 [json_name = "createdAt"];</code>
    * @return Whether the createdAt field is set.
    */
   boolean hasCreatedAt();
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 8 [json_name = "createdAt"];</code>
    * @return The createdAt.
    */
   com.google.protobuf.Timestamp getCreatedAt();
   /**
+   * <pre>
+   * Creation timestamp
+   * </pre>
+   *
    * <code>.google.protobuf.Timestamp created_at = 8 [json_name = "createdAt"];</code>
    */
   com.google.protobuf.TimestampOrBuilder getCreatedAtOrBuilder();
 
   /**
+   * <pre>
+   * Point location (lat,lng format)
+   * </pre>
+   *
    * <code>string point = 3 [json_name = "point", (.buf.validate.field) = { ... }</code>
    * @return Whether the point field is set.
    */
   boolean hasPoint();
   /**
+   * <pre>
+   * Point location (lat,lng format)
+   * </pre>
+   *
    * <code>string point = 3 [json_name = "point", (.buf.validate.field) = { ... }</code>
    * @return The point.
    */
   java.lang.String getPoint();
   /**
+   * <pre>
+   * Point location (lat,lng format)
+   * </pre>
+   *
    * <code>string point = 3 [json_name = "point", (.buf.validate.field) = { ... }</code>
    * @return The bytes for point.
    */
@@ -120,16 +188,28 @@ public interface LocalityOrBuilder extends
       getPointBytes();
 
   /**
+   * <pre>
+   * Boundary polygon (GeoJSON or WKT format)
+   * </pre>
+   *
    * <code>string boundary = 4 [json_name = "boundary", (.buf.validate.field) = { ... }</code>
    * @return Whether the boundary field is set.
    */
   boolean hasBoundary();
   /**
+   * <pre>
+   * Boundary polygon (GeoJSON or WKT format)
+   * </pre>
+   *
    * <code>string boundary = 4 [json_name = "boundary", (.buf.validate.field) = { ... }</code>
    * @return The boundary.
    */
   java.lang.String getBoundary();
   /**
+   * <pre>
+   * Boundary polygon (GeoJSON or WKT format)
+   * </pre>
+   *
    * <code>string boundary = 4 [json_name = "boundary", (.buf.validate.field) = { ... }</code>
    * @return The bytes for boundary.
    */

@@ -14,6 +14,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// ItemType defines the types of items tracked in the system.
 /// buf:lint:ignore ENUM_VALUE_PREFIX
 class ItemType extends $pb.ProtobufEnum {
   /// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX

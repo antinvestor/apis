@@ -20,6 +20,11 @@
 package com.antinvestor.apis.notification.v1;
 
 /**
+ * <pre>
+ * ReceiveRequest acknowledges receipt of notifications by the client.
+ * Used for tracking delivery confirmation.
+ * </pre>
+ *
  * Protobuf type {@code notification.v1.ReceiveRequest}
  */
 @com.google.protobuf.Generated
@@ -62,6 +67,10 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private java.util.List<com.antinvestor.apis.notification.v1.Notification> data_;
   /**
+   * <pre>
+   * Notifications being acknowledged
+   * </pre>
+   *
    * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -69,6 +78,10 @@ private static final long serialVersionUID = 0L;
     return data_;
   }
   /**
+   * <pre>
+   * Notifications being acknowledged
+   * </pre>
+   *
    * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -77,6 +90,10 @@ private static final long serialVersionUID = 0L;
     return data_;
   }
   /**
+   * <pre>
+   * Notifications being acknowledged
+   * </pre>
+   *
    * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -84,6 +101,10 @@ private static final long serialVersionUID = 0L;
     return data_.size();
   }
   /**
+   * <pre>
+   * Notifications being acknowledged
+   * </pre>
+   *
    * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -91,6 +112,10 @@ private static final long serialVersionUID = 0L;
     return data_.get(index);
   }
   /**
+   * <pre>
+   * Notifications being acknowledged
+   * </pre>
+   *
    * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
    */
   @java.lang.Override
@@ -259,6 +284,11 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * ReceiveRequest acknowledges receipt of notifications by the client.
+   * Used for tracking delivery confirmation.
+   * </pre>
+   *
    * Protobuf type {@code notification.v1.ReceiveRequest}
    */
   public static final class Builder extends
@@ -454,6 +484,10 @@ private static final long serialVersionUID = 0L;
         com.antinvestor.apis.notification.v1.Notification, com.antinvestor.apis.notification.v1.Notification.Builder, com.antinvestor.apis.notification.v1.NotificationOrBuilder> dataBuilder_;
 
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public java.util.List<com.antinvestor.apis.notification.v1.Notification> getDataList() {
@@ -464,6 +498,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public int getDataCount() {
@@ -474,6 +512,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.notification.v1.Notification getData(int index) {
@@ -484,6 +526,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public Builder setData(
@@ -501,6 +547,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public Builder setData(
@@ -515,6 +565,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public Builder addData(com.antinvestor.apis.notification.v1.Notification value) {
@@ -531,6 +585,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public Builder addData(
@@ -548,6 +606,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public Builder addData(
@@ -562,6 +624,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public Builder addData(
@@ -576,6 +642,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public Builder addAllData(
@@ -591,6 +661,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public Builder clearData() {
@@ -604,6 +678,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public Builder removeData(int index) {
@@ -617,6 +695,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.notification.v1.Notification.Builder getDataBuilder(
@@ -624,6 +706,10 @@ private static final long serialVersionUID = 0L;
       return internalGetDataFieldBuilder().getBuilder(index);
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.notification.v1.NotificationOrBuilder getDataOrBuilder(
@@ -634,6 +720,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public java.util.List<? extends com.antinvestor.apis.notification.v1.NotificationOrBuilder> 
@@ -645,6 +735,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.notification.v1.Notification.Builder addDataBuilder() {
@@ -652,6 +746,10 @@ private static final long serialVersionUID = 0L;
           com.antinvestor.apis.notification.v1.Notification.getDefaultInstance());
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public com.antinvestor.apis.notification.v1.Notification.Builder addDataBuilder(
@@ -660,6 +758,10 @@ private static final long serialVersionUID = 0L;
           index, com.antinvestor.apis.notification.v1.Notification.getDefaultInstance());
     }
     /**
+     * <pre>
+     * Notifications being acknowledged
+     * </pre>
+     *
      * <code>repeated .notification.v1.Notification data = 1 [json_name = "data"];</code>
      */
     public java.util.List<com.antinvestor.apis.notification.v1.Notification.Builder> 
