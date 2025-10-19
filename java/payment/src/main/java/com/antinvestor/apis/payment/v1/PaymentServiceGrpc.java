@@ -17,6 +17,10 @@ package com.antinvestor.apis.payment.v1;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
+ * <pre>
+ * PaymentService handles payment processing and reconciliation.
+ * All RPCs require authentication via Bearer token.
+ * </pre>
  */
 @io.grpc.stub.annotations.GrpcGenerated
 public final class PaymentServiceGrpc {
@@ -365,12 +369,17 @@ public final class PaymentServiceGrpc {
   }
 
   /**
+   * <pre>
+   * PaymentService handles payment processing and reconciliation.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public interface AsyncService {
 
     /**
      * <pre>
-     *Send method for queueing outbound payments as requested
+     * Send queues an outbound payment for processing.
+     * Payments are queued and require Release to process.
      * </pre>
      */
     default void send(com.antinvestor.apis.payment.v1.SendRequest request,
@@ -380,7 +389,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Send method for queueing inbound payments as requested
+     * Receive queues an inbound payment for processing.
+     * Used for recording expected incoming payments.
      * </pre>
      */
     default void receive(com.antinvestor.apis.payment.v1.ReceiveRequest request,
@@ -390,7 +400,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Initiate method for initiating payments as requested
+     * InitiatePrompt initiates a payment prompt to the customer.
+     * Triggers payment prompts like M-PESA STK push.
      * </pre>
      */
     default void initiatePrompt(com.antinvestor.apis.payment.v1.InitiatePromptRequest request,
@@ -400,7 +411,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *createPaymentLink method for creating payment links as requested
+     * CreatePaymentLink generates a shareable payment link.
+     * Customers can use the link to make payments via web interface.
      * </pre>
      */
     default void createPaymentLink(com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest request,
@@ -410,7 +422,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if payment is prepared or released
+     * Status retrieves the current status of a payment.
+     * Returns processing state and status details.
      * </pre>
      */
     default void status(com.antinvestor.apis.common.v1.StatusRequest request,
@@ -420,7 +433,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Status update request to allow continuation of payment processing
+     * StatusUpdate updates the status of a payment.
+     * Used for manual status corrections or workflow progression.
      * </pre>
      */
     default void statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request,
@@ -430,7 +444,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Release method for releasing queued payments and returns if status is not released
+     * Release releases a queued payment for processing.
+     * Queued payments must be released to initiate actual transfer.
      * </pre>
      */
     default void release(com.antinvestor.apis.payment.v1.ReleaseRequest request,
@@ -440,7 +455,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Search method is for client request look for payments matching supplied details from the system
+     * Search finds payments matching specified criteria.
+     * Supports filtering by date, amount, status, route, and more.
      * </pre>
      */
     default void search(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -449,6 +465,10 @@ public final class PaymentServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Reconcile matches external transactions with internal payments.
+     * Used for payment reconciliation with provider statements.
+     * </pre>
      */
     default void reconcile(com.antinvestor.apis.payment.v1.ReconcileRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.payment.v1.ReconcileResponse> responseObserver) {
@@ -458,6 +478,10 @@ public final class PaymentServiceGrpc {
 
   /**
    * Base class for the server implementation of the service PaymentService.
+   * <pre>
+   * PaymentService handles payment processing and reconciliation.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static abstract class PaymentServiceImplBase
       implements io.grpc.BindableService, AsyncService {
@@ -469,6 +493,10 @@ public final class PaymentServiceGrpc {
 
   /**
    * A stub to allow clients to do asynchronous rpc calls to service PaymentService.
+   * <pre>
+   * PaymentService handles payment processing and reconciliation.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class PaymentServiceStub
       extends io.grpc.stub.AbstractAsyncStub<PaymentServiceStub> {
@@ -485,7 +513,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Send method for queueing outbound payments as requested
+     * Send queues an outbound payment for processing.
+     * Payments are queued and require Release to process.
      * </pre>
      */
     public void send(com.antinvestor.apis.payment.v1.SendRequest request,
@@ -496,7 +525,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Send method for queueing inbound payments as requested
+     * Receive queues an inbound payment for processing.
+     * Used for recording expected incoming payments.
      * </pre>
      */
     public void receive(com.antinvestor.apis.payment.v1.ReceiveRequest request,
@@ -507,7 +537,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Initiate method for initiating payments as requested
+     * InitiatePrompt initiates a payment prompt to the customer.
+     * Triggers payment prompts like M-PESA STK push.
      * </pre>
      */
     public void initiatePrompt(com.antinvestor.apis.payment.v1.InitiatePromptRequest request,
@@ -518,7 +549,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *createPaymentLink method for creating payment links as requested
+     * CreatePaymentLink generates a shareable payment link.
+     * Customers can use the link to make payments via web interface.
      * </pre>
      */
     public void createPaymentLink(com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest request,
@@ -529,7 +561,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if payment is prepared or released
+     * Status retrieves the current status of a payment.
+     * Returns processing state and status details.
      * </pre>
      */
     public void status(com.antinvestor.apis.common.v1.StatusRequest request,
@@ -540,7 +573,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Status update request to allow continuation of payment processing
+     * StatusUpdate updates the status of a payment.
+     * Used for manual status corrections or workflow progression.
      * </pre>
      */
     public void statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request,
@@ -551,7 +585,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Release method for releasing queued payments and returns if status is not released
+     * Release releases a queued payment for processing.
+     * Queued payments must be released to initiate actual transfer.
      * </pre>
      */
     public void release(com.antinvestor.apis.payment.v1.ReleaseRequest request,
@@ -562,7 +597,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Search method is for client request look for payments matching supplied details from the system
+     * Search finds payments matching specified criteria.
+     * Supports filtering by date, amount, status, route, and more.
      * </pre>
      */
     public void search(com.antinvestor.apis.common.v1.SearchRequest request,
@@ -572,6 +608,10 @@ public final class PaymentServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Reconcile matches external transactions with internal payments.
+     * Used for payment reconciliation with provider statements.
+     * </pre>
      */
     public void reconcile(com.antinvestor.apis.payment.v1.ReconcileRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.payment.v1.ReconcileResponse> responseObserver) {
@@ -582,6 +622,10 @@ public final class PaymentServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service PaymentService.
+   * <pre>
+   * PaymentService handles payment processing and reconciliation.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class PaymentServiceBlockingV2Stub
       extends io.grpc.stub.AbstractBlockingStub<PaymentServiceBlockingV2Stub> {
@@ -598,7 +642,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Send method for queueing outbound payments as requested
+     * Send queues an outbound payment for processing.
+     * Payments are queued and require Release to process.
      * </pre>
      */
     public com.antinvestor.apis.payment.v1.SendResponse send(com.antinvestor.apis.payment.v1.SendRequest request) throws io.grpc.StatusException {
@@ -608,7 +653,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Send method for queueing inbound payments as requested
+     * Receive queues an inbound payment for processing.
+     * Used for recording expected incoming payments.
      * </pre>
      */
     public com.antinvestor.apis.payment.v1.ReceiveResponse receive(com.antinvestor.apis.payment.v1.ReceiveRequest request) throws io.grpc.StatusException {
@@ -618,7 +664,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Initiate method for initiating payments as requested
+     * InitiatePrompt initiates a payment prompt to the customer.
+     * Triggers payment prompts like M-PESA STK push.
      * </pre>
      */
     public com.antinvestor.apis.payment.v1.InitiatePromptResponse initiatePrompt(com.antinvestor.apis.payment.v1.InitiatePromptRequest request) throws io.grpc.StatusException {
@@ -628,7 +675,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *createPaymentLink method for creating payment links as requested
+     * CreatePaymentLink generates a shareable payment link.
+     * Customers can use the link to make payments via web interface.
      * </pre>
      */
     public com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse createPaymentLink(com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest request) throws io.grpc.StatusException {
@@ -638,7 +686,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if payment is prepared or released
+     * Status retrieves the current status of a payment.
+     * Returns processing state and status details.
      * </pre>
      */
     public com.antinvestor.apis.common.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) throws io.grpc.StatusException {
@@ -648,7 +697,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Status update request to allow continuation of payment processing
+     * StatusUpdate updates the status of a payment.
+     * Used for manual status corrections or workflow progression.
      * </pre>
      */
     public com.antinvestor.apis.common.v1.StatusUpdateResponse statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request) throws io.grpc.StatusException {
@@ -658,7 +708,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Release method for releasing queued payments and returns if status is not released
+     * Release releases a queued payment for processing.
+     * Queued payments must be released to initiate actual transfer.
      * </pre>
      */
     public com.antinvestor.apis.payment.v1.ReleaseResponse release(com.antinvestor.apis.payment.v1.ReleaseRequest request) throws io.grpc.StatusException {
@@ -668,7 +719,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Search method is for client request look for payments matching supplied details from the system
+     * Search finds payments matching specified criteria.
+     * Supports filtering by date, amount, status, route, and more.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -679,6 +731,10 @@ public final class PaymentServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Reconcile matches external transactions with internal payments.
+     * Used for payment reconciliation with provider statements.
+     * </pre>
      */
     public com.antinvestor.apis.payment.v1.ReconcileResponse reconcile(com.antinvestor.apis.payment.v1.ReconcileRequest request) throws io.grpc.StatusException {
       return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
@@ -688,6 +744,10 @@ public final class PaymentServiceGrpc {
 
   /**
    * A stub to allow clients to do limited synchronous rpc calls to service PaymentService.
+   * <pre>
+   * PaymentService handles payment processing and reconciliation.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class PaymentServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<PaymentServiceBlockingStub> {
@@ -704,7 +764,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Send method for queueing outbound payments as requested
+     * Send queues an outbound payment for processing.
+     * Payments are queued and require Release to process.
      * </pre>
      */
     public com.antinvestor.apis.payment.v1.SendResponse send(com.antinvestor.apis.payment.v1.SendRequest request) {
@@ -714,7 +775,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Send method for queueing inbound payments as requested
+     * Receive queues an inbound payment for processing.
+     * Used for recording expected incoming payments.
      * </pre>
      */
     public com.antinvestor.apis.payment.v1.ReceiveResponse receive(com.antinvestor.apis.payment.v1.ReceiveRequest request) {
@@ -724,7 +786,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Initiate method for initiating payments as requested
+     * InitiatePrompt initiates a payment prompt to the customer.
+     * Triggers payment prompts like M-PESA STK push.
      * </pre>
      */
     public com.antinvestor.apis.payment.v1.InitiatePromptResponse initiatePrompt(com.antinvestor.apis.payment.v1.InitiatePromptRequest request) {
@@ -734,7 +797,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *createPaymentLink method for creating payment links as requested
+     * CreatePaymentLink generates a shareable payment link.
+     * Customers can use the link to make payments via web interface.
      * </pre>
      */
     public com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse createPaymentLink(com.antinvestor.apis.payment.v1.CreatePaymentLinkRequest request) {
@@ -744,7 +808,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if payment is prepared or released
+     * Status retrieves the current status of a payment.
+     * Returns processing state and status details.
      * </pre>
      */
     public com.antinvestor.apis.common.v1.StatusResponse status(com.antinvestor.apis.common.v1.StatusRequest request) {
@@ -754,7 +819,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Status update request to allow continuation of payment processing
+     * StatusUpdate updates the status of a payment.
+     * Used for manual status corrections or workflow progression.
      * </pre>
      */
     public com.antinvestor.apis.common.v1.StatusUpdateResponse statusUpdate(com.antinvestor.apis.common.v1.StatusUpdateRequest request) {
@@ -764,7 +830,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Release method for releasing queued payments and returns if status is not released
+     * Release releases a queued payment for processing.
+     * Queued payments must be released to initiate actual transfer.
      * </pre>
      */
     public com.antinvestor.apis.payment.v1.ReleaseResponse release(com.antinvestor.apis.payment.v1.ReleaseRequest request) {
@@ -774,7 +841,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Search method is for client request look for payments matching supplied details from the system
+     * Search finds payments matching specified criteria.
+     * Supports filtering by date, amount, status, route, and more.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.payment.v1.SearchResponse> search(
@@ -784,6 +852,10 @@ public final class PaymentServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Reconcile matches external transactions with internal payments.
+     * Used for payment reconciliation with provider statements.
+     * </pre>
      */
     public com.antinvestor.apis.payment.v1.ReconcileResponse reconcile(com.antinvestor.apis.payment.v1.ReconcileRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -793,6 +865,10 @@ public final class PaymentServiceGrpc {
 
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service PaymentService.
+   * <pre>
+   * PaymentService handles payment processing and reconciliation.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class PaymentServiceFutureStub
       extends io.grpc.stub.AbstractFutureStub<PaymentServiceFutureStub> {
@@ -809,7 +885,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Send method for queueing outbound payments as requested
+     * Send queues an outbound payment for processing.
+     * Payments are queued and require Release to process.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.payment.v1.SendResponse> send(
@@ -820,7 +897,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Send method for queueing inbound payments as requested
+     * Receive queues an inbound payment for processing.
+     * Used for recording expected incoming payments.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.payment.v1.ReceiveResponse> receive(
@@ -831,7 +909,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Initiate method for initiating payments as requested
+     * InitiatePrompt initiates a payment prompt to the customer.
+     * Triggers payment prompts like M-PESA STK push.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.payment.v1.InitiatePromptResponse> initiatePrompt(
@@ -842,7 +921,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *createPaymentLink method for creating payment links as requested
+     * CreatePaymentLink generates a shareable payment link.
+     * Customers can use the link to make payments via web interface.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.payment.v1.CreatePaymentLinkResponse> createPaymentLink(
@@ -853,7 +933,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Status request to determine if payment is prepared or released
+     * Status retrieves the current status of a payment.
+     * Returns processing state and status details.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.common.v1.StatusResponse> status(
@@ -864,7 +945,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Status update request to allow continuation of payment processing
+     * StatusUpdate updates the status of a payment.
+     * Used for manual status corrections or workflow progression.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.common.v1.StatusUpdateResponse> statusUpdate(
@@ -875,7 +957,8 @@ public final class PaymentServiceGrpc {
 
     /**
      * <pre>
-     *Release method for releasing queued payments and returns if status is not released
+     * Release releases a queued payment for processing.
+     * Queued payments must be released to initiate actual transfer.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.payment.v1.ReleaseResponse> release(
@@ -885,6 +968,10 @@ public final class PaymentServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Reconcile matches external transactions with internal payments.
+     * Used for payment reconciliation with provider statements.
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.payment.v1.ReconcileResponse> reconcile(
         com.antinvestor.apis.payment.v1.ReconcileRequest request) {

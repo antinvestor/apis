@@ -3,12 +3,15 @@ on:
   push:
     tags:
       - "v*.*.*"
+    paths:
+      - 'go/**'
+      - 'proto/**'
 
 jobs:
   create-tag:
     strategy:
       matrix:
-        api_module: [ common,device,ledger,lostid,notification,ocr,partition,payment,profile,property,settings,files ]
+        api_module: [ common,chat,device,ledger,lostid,notification,ocr,partition,payment,profile,property,settings,files ]
 
     runs-on: ubuntu-latest
     steps:
@@ -37,7 +40,7 @@ jobs:
         if: steps.get_tags.outputs.not_enough_tags == 'false'
         id: go_module_changed
         run: |
-          CHANGES=$(git diff --name-only ${{ env.second_latest_tag }} HEAD | grep 'go/${{ matrix.api_module }}' || true)
+          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'go/${{ matrix.api_module }}' || true)
           if [[ -n "$CHANGES" ]]; then
             echo "Changes found in go/${{ matrix.api_module }}"
             echo "changed=true" >> $GITHUB_OUTPUT

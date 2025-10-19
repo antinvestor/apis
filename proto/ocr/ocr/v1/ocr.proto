@@ -16,69 +16,80 @@ syntax = "proto3";
 
 package ocr.v1;
 
+// -----------------------------------------------------
+// Core notes (normative):
+// - OCR Service provides optical character recognition for document processing
+// - Supports multiple languages and file formats
+// - Async processing for large documents with status tracking
+// - Batch processing up to 5 files per request
+// -----------------------------------------------------
+
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
-import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/ocr/v1;ocrv1";
 option java_multiple_files = true;
 option java_package = "ocrv1";
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+
+option (gnostic.openapi.v3.document) = {
   info: {
-    title: "OCR Service"
-    version: "1.0"
+    title: "OCR Service";
+    version: "v1.0.0";
+    description: "The OCR (Optical Character Recognition) Service provides text extraction capabilities from images and documents. It supports multiple languages, various file formats (PDF, images), and both synchronous and asynchronous processing modes. The service is optimized for document processing workflows including invoice parsing, ID verification, and document digitization.";
     contact: {
-      name: "Ant Investor Ltd"
-      url: "https://github.com/antinvestor/service-lostid"
-      email: "info@antinvestor.com"
+      name: "Ant Investor Ltd";
+      url: "https://github.com/antinvestor/service-ocr";
+      email: "info@antinvestor.com";
+    }
+    license: {
+      name: "Apache License";
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
     }
   }
-
-  schemes: HTTP
-  schemes: HTTPS
-  consumes: "application/json"
-  produces: "application/json"
-
-  security_definitions: {
-    security: {
-      key: "bearer"
-      value: {
-        type: TYPE_API_KEY
-        in: IN_HEADER
-        name: "Authorization"
-        description: "Authentication token, prefixed by Bearer: Bearer <token>"
-      }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BearerAuth";
+          value: {
+            security_scheme: {
+              type: "http";
+              scheme: "bearer";
+              bearer_format: "JWT";
+            }
+          }
+        }
+      ]
     }
-  }
-  security: {
-    security_requirement: {key: "bearer"}
   }
 };
 
+// OCRFile represents the result of OCR processing for a single file.
 message OCRFile {
-  string file_id = 1;
-  string language = 2;
-  common.v1.STATUS status = 3;
-  string text = 4;
-  google.protobuf.Struct properties = 5;
+  string file_id = 1;                   // Unique identifier of the processed file
+  string language = 2;                  // Detected or specified language code (ISO 639-1)
+  common.v1.STATUS status = 3;          // Processing status (QUEUED, IN_PROCESS, SUCCESSFUL, FAILED)
+  string text = 4;                      // Extracted text content
+  google.protobuf.Struct properties = 5; // Additional metadata (confidence scores, bounding boxes, etc.)
 }
 
-//Request to determine text found in a file
+// RecognizeRequest initiates OCR processing for one or more files.
+// Supports both synchronous and asynchronous processing modes.
 message RecognizeRequest {
   string reference_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Client-provided reference ID for tracking
   string language_id = 2 [
     (buf.validate.field).string.min_len = 2,
     (buf.validate.field).string.max_len = 3,
     (buf.validate.field).string.pattern = "[a-z]{2,3}"
-  ];
-  google.protobuf.Struct properties = 3;
-  bool async = 4;
+  ];  // Expected language code (e.g., "en", "es", "fr") for improved accuracy
+  google.protobuf.Struct properties = 3;  // Processing options (DPI, preprocessing, output format)
+  bool async = 4;                          // If true, process asynchronously and return immediately
   repeated string file_id = 5 [
     (buf.validate.field).repeated.min_items = 1,
     (buf.validate.field).repeated.max_items = 5,
@@ -89,29 +100,46 @@ message RecognizeRequest {
         pattern: "[0-9a-z_-]{3,20}"
       }
     }
-  ];
+  ];  // List of file IDs to process (1-5 files per request)
 }
 
+// RecognizeResponse returns OCR results for the requested files.
 message RecognizeResponse {
-  string reference_id = 1;
-  repeated OCRFile result = 2;
+  string reference_id = 1;        // Reference ID from the request
+  repeated OCRFile result = 2;    // OCR results for each processed file
 }
 
+// StatusResponse returns the status of an async OCR request.
 message StatusResponse {
-  RecognizeResponse data = 1;
+  RecognizeResponse data = 1;  // Current OCR results and status
 }
 
+// -----------------------------------------------------
+// OCR Service
+// -----------------------------------------------------
+
+// OCRService provides optical character recognition capabilities.
+// All RPCs require authentication via Bearer token.
 service OCRService {
-  // Perform a new ocr process request
+  // Recognize performs OCR on one or more files.
+  // Supports both synchronous and asynchronous processing.
   rpc Recognize(RecognizeRequest) returns (RecognizeResponse) {
-    option (google.api.http) = {
-      post: "/recognize"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "recognizeText"
+      summary: "Perform OCR on files"
+      description: "Performs optical character recognition on one or more files (images or PDFs). Supports both synchronous processing (returns immediately with results) and asynchronous processing (queues for background processing). Batch processing supports up to 5 files per request."
+      tags: "OCR"
     };
   }
 
-  // Check the status of request if queued
+  // Status retrieves the current status of an async OCR request.
+  // Returns processing status and results if available.
   rpc Status(common.v1.StatusRequest) returns (StatusResponse) {
-    option (google.api.http) = {get: "/status"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getOCRStatus"
+      summary: "Get OCR request status"
+      description: "Retrieves the current status of an asynchronous OCR request. Returns processing status (queued, in-process, successful, failed) and extracted text if processing is complete."
+      tags: "OCR"
+    };
   }
 }

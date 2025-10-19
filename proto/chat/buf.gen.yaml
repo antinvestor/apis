@@ -1,0 +1,51 @@
+version: v2
+managed:
+  enabled: true
+  disable:
+    - file_option: java_package
+      module: buf.build/bufbuild/protovalidate
+    - file_option: java_package
+      module: buf.build/googleapis/googleapis
+    - file_option: go_package
+      module: buf.build/bufbuild/protovalidate
+    - file_option: go_package
+      module: buf.build/googleapis/googleapis
+    - file_option: go_package
+      module: buf.build/gnostic/gnostic
+  override:
+    - file_option: java_multiple_files
+      value: true
+    - file_option: java_package_prefix
+      value: com.antinvestor.apis
+    - file_option: go_package_prefix
+      value: github.com/antinvestor/apis/go
+plugins:
+  - remote: buf.build/grpc/go
+    out: ../../go/
+    opt: paths=source_relative
+  - remote: buf.build/protocolbuffers/go
+    out: ../../go/
+    opt: paths=source_relative
+  - remote: buf.build/connectrpc/go
+    out: ../../go/
+    opt:
+      - paths=source_relative
+  - remote: buf.build/community/sudorandom-connect-openapi
+    out: ../../go/
+    opt:
+      - features=connectrpc;gnostic;protovalidate
+      - content-types=json
+      - allow-get
+      - debug
+  - remote: buf.build/grpc/java
+    out: ../../java/chat/src/main/java/
+  - remote: buf.build/protocolbuffers/java
+    out: ../../java/chat/src/main/java/
+  - remote: buf.build/protocolbuffers/dart
+    out: ../../dart/chat/lib/src
+    include_wkt: true
+    include_imports: true
+  - remote: buf.build/connectrpc/dart
+    out: ../../dart/chat/lib/src
+
+

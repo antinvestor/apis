@@ -16,180 +16,255 @@ syntax = "proto3";
 
 package ledger.v1;
 
+// -----------------------------------------------------
+// Core notes (normative):
+// - Ledger Service provides double-entry bookkeeping and financial accounting
+// - Supports hierarchical chart of accounts with ledger types
+// - All transactions follow double-entry principles (debits = credits)
+// - Supports transaction reversals and reservations for pending transactions
+// - All monetary amounts use google.type.Money for currency safety
+// -----------------------------------------------------
+
 import "common/v1/common.proto";
-import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/type/money.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/ledger/v1;ledgerv1";
 option java_multiple_files = true;
 option java_package = "ledgerv1";
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+
+option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Ledger Service"
-    version: "1.0"
+    title: "Ledger Service";
+    version: "v1.0.0";
+    description: "The Ledger Service provides double-entry bookkeeping and financial accounting capabilities. It supports hierarchical chart of accounts, multi-currency transactions, transaction reversals, and balance tracking. The service follows standard accounting principles with ledger types (Asset, Liability, Income, Expense, Capital) and ensures all transactions are balanced (debits equal credits). Supports both cleared and uncleared transactions with reservation capabilities for pending operations.";
     contact: {
-      name: "Ant Investor Ltd"
-      url: "https://github.com/antinvestor/service-ledger"
-      email: "info@antinvestor.com"
+      name: "Ant Investor Ltd";
+      url: "https://github.com/antinvestor/service-ledger";
+      email: "info@antinvestor.com";
+    }
+    license: {
+      name: "Apache License";
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
     }
   }
-
-  schemes: HTTP
-  schemes: HTTPS
-  consumes: "application/json"
-  produces: "application/json"
-
-  security_definitions: {
-    security: {
-      key: "bearer"
-      value: {
-        type: TYPE_API_KEY
-        in: IN_HEADER
-        name: "Authorization"
-        description: "Authentication token, prefixed by Bearer: Bearer <token>"
-      }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BearerAuth";
+          value: {
+            security_scheme: {
+              type: "http";
+              scheme: "bearer";
+              bearer_format: "JWT";
+            }
+          }
+        }
+      ]
     }
-  }
-  security: {
-    security_requirement: {key: "bearer"}
   }
 };
 
-message SearchRequest {
-  string query = 1;
-}
+// -----------------------------------------------------
+// Enumerations
+// -----------------------------------------------------
 
+// LedgerType defines the fundamental accounting categories.
+// Based on standard accounting equation: Assets = Liabilities + Capital + (Income - Expenses)
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum LedgerType {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  ASSET = 0;
-  LIABILITY = 1;
-  INCOME = 2;
-  EXPENSE = 3;
-  CAPITAL = 4;
+  ASSET = 0;      // Resources owned (cash, receivables, inventory, equipment)
+  LIABILITY = 1;  // Obligations owed (payables, loans, accrued expenses)
+  INCOME = 2;     // Revenue and gains (sales, interest income, fees)
+  EXPENSE = 3;    // Costs and losses (salaries, rent, utilities, depreciation)
+  CAPITAL = 4;    // Owner's equity (investments, retained earnings)
 }
 
-message Ledger {
-  string reference = 1;
-  LedgerType type = 2;
-  string parent = 3;
-  google.protobuf.Struct data = 4;
-}
-
-message Account {
-  string reference = 1;
-  string ledger = 3;
-  google.type.Money balance = 4;
-  google.protobuf.Struct data = 5;
-  google.type.Money uncleared_balance = 6;
-  google.type.Money reserved_balance = 7;
-}
-
-message TransactionEntry {
-  string account = 1;
-  string transaction = 2;
-  string transacted_at = 3;
-  google.type.Money amount = 4;
-  bool credit = 5;
-  google.type.Money acc_balance = 6;
-  string cleared_at = 7;
-}
-
+// TransactionType defines the nature of a transaction.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum TransactionType {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  NORMAL = 0;
-  REVERSAL = 1;
-  RESERVATION = 2;
+  NORMAL = 0;      // Standard transaction
+  REVERSAL = 1;    // Reverses a previous transaction (creates offsetting entries)
+  RESERVATION = 2; // Temporary hold/reservation (e.g., pending payment authorization)
 }
 
+// -----------------------------------------------------
+// Core Data Types
+// -----------------------------------------------------
+
+// Ledger represents a category in the chart of accounts.
+// Ledgers can be hierarchical with parent-child relationships.
+message Ledger {
+  string reference = 1;           // Unique reference/code for the ledger (e.g., "1000", "CASH")
+  LedgerType type = 2;            // Accounting category type
+  string parent = 3;              // Parent ledger reference for hierarchical structure
+  google.protobuf.Struct data = 4; // Additional ledger metadata (name, description, etc.)
+}
+
+// Account represents a specific account within a ledger.
+// Tracks balances and supports multi-currency operations.
+message Account {
+  string reference = 1;                     // Unique account reference/number
+  string ledger = 3;                        // Ledger this account belongs to
+  google.type.Money balance = 4;            // Current cleared balance
+  google.protobuf.Struct data = 5;          // Additional account metadata (owner, description, etc.)
+  google.type.Money uncleared_balance = 6;  // Balance including uncleared transactions
+  google.type.Money reserved_balance = 7;   // Amount held in reservations
+}
+
+// TransactionEntry represents one side of a double-entry transaction.
+// Each transaction must have at least two entries with balanced debits and credits.
+message TransactionEntry {
+  string account = 1;              // Account reference for this entry
+  string transaction = 2;          // Transaction reference this entry belongs to
+  string transacted_at = 3;        // Transaction timestamp (RFC3339)
+  google.type.Money amount = 4;    // Amount for this entry
+  bool credit = 5;                 // True if credit, false if debit
+  google.type.Money acc_balance = 6; // Account balance after this entry
+  string cleared_at = 7;           // When this entry was cleared (RFC3339)
+}
+
+// Transaction represents a complete double-entry transaction.
+// Must contain balanced entries (sum of debits = sum of credits).
 message Transaction {
-  string reference = 1;
-  string currency = 2;
-  string transacted_at = 3;
-  google.protobuf.Struct data = 4;
-  repeated TransactionEntry entries = 5;
-  bool cleared = 6;
-  TransactionType type = 7;
+  string reference = 1;                   // Unique transaction reference/ID
+  string currency = 2;                    // Currency code for all entries (ISO 4217)
+  string transacted_at = 3;               // Transaction timestamp (RFC3339)
+  google.protobuf.Struct data = 4;        // Additional transaction metadata (description, source, etc.)
+  repeated TransactionEntry entries = 5;  // Transaction entries (must be balanced)
+  bool cleared = 6;                       // Whether transaction has been cleared/posted
+  TransactionType type = 7;               // Transaction type (normal, reversal, reservation)
 }
 
-// The ledger service definition.
+// -----------------------------------------------------
+// Ledger Service
+// -----------------------------------------------------
+
+// LedgerService provides double-entry bookkeeping and financial accounting.
+// All RPCs require authentication via Bearer token.
 service LedgerService {
-  // Searches for an ledger based on details
+  // SearchLedgers finds ledgers in the chart of accounts.
+  // Supports filtering by type, parent, and custom properties.
   rpc SearchLedgers(common.v1.SearchRequest) returns (stream Ledger) {
-    option (google.api.http) = {get: "/ledger"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchLedgers"
+      summary: "Search ledgers"
+      description: "Searches for ledgers in the chart of accounts. Supports filtering by ledger type, parent ledger, and custom properties. Returns a stream of matching ledgers."
+      tags: "Ledgers"
+    };
   }
 
-  // Creates a new ledger based on supplied data
+  // CreateLedger creates a new ledger in the chart of accounts.
+  // Ledgers can be hierarchical with parent-child relationships.
   rpc CreateLedger(Ledger) returns (Ledger) {
-    option (google.api.http) = {
-      post: "/ledger"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createLedger"
+      summary: "Create a new ledger"
+      description: "Creates a new ledger in the chart of accounts. Ledgers represent accounting categories (Asset, Liability, Income, Expense, Capital) and can be organized hierarchically."
+      tags: "Ledgers"
     };
   }
 
-  // Updates the data component of the ledger.
+  // UpdateLedger updates an existing ledger's metadata.
+  // The ledger type and reference cannot be changed.
   rpc UpdateLedger(Ledger) returns (Ledger) {
-    option (google.api.http) = {
-      patch: "/ledger/{reference}"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "updateLedger"
+      summary: "Update ledger metadata"
+      description: "Updates an existing ledger's metadata and properties. The ledger type and reference cannot be changed after creation."
+      tags: "Ledgers"
     };
   }
 
-  // Searches for an account based on details
+  // SearchAccounts finds accounts matching specified criteria.
+  // Supports filtering by ledger, balance range, and custom properties.
   rpc SearchAccounts(common.v1.SearchRequest) returns (stream Account) {
-    option (google.api.http) = {get: "/account"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchAccounts"
+      summary: "Search accounts"
+      description: "Searches for accounts matching specified criteria. Supports filtering by ledger, balance range, currency, and custom properties. Returns a stream of matching accounts."
+      tags: "Accounts"
+    };
   }
 
-  // Creates a new account based on supplied data
+  // CreateAccount creates a new account within a ledger.
+  // Each account tracks balances and transaction history.
   rpc CreateAccount(Account) returns (Account) {
-    option (google.api.http) = {
-      post: "/account"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createAccount"
+      summary: "Create a new account"
+      description: "Creates a new account within a ledger. Accounts track balances (cleared, uncleared, reserved) and support multi-currency operations."
+      tags: "Accounts"
     };
   }
 
-  // Updates the data component of the account.
+  // UpdateAccount updates an existing account's metadata.
+  // Balances are updated through transactions, not directly.
   rpc UpdateAccount(Account) returns (Account) {
-    option (google.api.http) = {
-      patch: "/account/{reference}"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "updateAccount"
+      summary: "Update account metadata"
+      description: "Updates an existing account's metadata and properties. Account balances are updated through transactions, not directly via this RPC."
+      tags: "Accounts"
     };
   }
 
-  // Searches for a transaction based on details
+  // SearchTransactions finds transactions matching specified criteria.
+  // Supports filtering by date range, account, currency, and status.
   rpc SearchTransactions(common.v1.SearchRequest) returns (stream Transaction) {
-    option (google.api.http) = {get: "/transaction"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchTransactions"
+      summary: "Search transactions"
+      description: "Searches for transactions matching specified criteria. Supports filtering by date range, account, currency, cleared status, and transaction type. Returns a stream of matching transactions."
+      tags: "Transactions"
+    };
   }
 
-  // Creates a new transaction
+  // CreateTransaction creates a new double-entry transaction.
+  // All entries must be balanced (sum of debits = sum of credits).
   rpc CreateTransaction(Transaction) returns (Transaction) {
-    option (google.api.http) = {
-      post: "/transaction"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createTransaction"
+      summary: "Create a new transaction"
+      description: "Creates a new double-entry transaction. The transaction must contain at least two entries with balanced debits and credits. Updates affected account balances automatically."
+      tags: "Transactions"
     };
   }
 
-  // Reverses a transaction by creating a new one with inverted entries
+  // ReverseTransaction reverses a transaction by creating offsetting entries.
+  // Creates a new REVERSAL transaction that negates the original.
   rpc ReverseTransaction(Transaction) returns (Transaction) {
-    option (google.api.http) = {
-      post: "/transaction/{reference}/reverse"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "reverseTransaction"
+      summary: "Reverse a transaction"
+      description: "Reverses a transaction by creating a new REVERSAL transaction with inverted entries. The original transaction remains in the ledger for audit purposes."
+      tags: "Transactions"
     };
   }
 
-  // Updates a transaction's details
+  // UpdateTransaction updates a transaction's metadata.
+  // Entries and amounts cannot be changed after creation.
   rpc UpdateTransaction(Transaction) returns (Transaction) {
-    option (google.api.http) = {
-      patch: "/transaction/{reference}"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "updateTransaction"
+      summary: "Update transaction metadata"
+      description: "Updates a transaction's metadata and properties. Transaction entries and amounts cannot be changed after creation - use ReverseTransaction to correct errors."
+      tags: "Transactions"
     };
   }
 
-  // Searches for entries matching the search details
+  // SearchTransactionEntries finds individual transaction entries.
+  // Useful for account statement generation and reconciliation.
   rpc SearchTransactionEntries(common.v1.SearchRequest) returns (stream TransactionEntry) {
-    option (google.api.http) = {get: "/transaction/entry"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchTransactionEntries"
+      summary: "Search transaction entries"
+      description: "Searches for individual transaction entries. Useful for generating account statements, reconciliation, and detailed transaction analysis. Supports filtering by account, date range, and cleared status."
+      tags: "Transactions"
+    };
   }
 }

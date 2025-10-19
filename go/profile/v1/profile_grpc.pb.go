@@ -57,43 +57,44 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// The profile service definition.
+// ProfileService manages user and entity profiles.
+// All RPCs require authentication via Bearer token.
 type ProfileServiceClient interface {
-	// Obtains a profile by its hash
+	// GetById retrieves a profile by its unique ID.
 	GetById(ctx context.Context, in *GetByIdRequest, opts ...grpc.CallOption) (*GetByIdResponse, error)
-	// Obtains a profile by its hash
+	// GetByContact retrieves a profile by contact information.
 	GetByContact(ctx context.Context, in *GetByContactRequest, opts ...grpc.CallOption) (*GetByContactResponse, error)
-	// Obtains a profile by its hash
+	// Search finds profiles matching specified criteria.
 	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error)
-	// Uses data found in the profile from mergeHash to update the current profile.
+	// Merge combines two profiles into one.
 	Merge(ctx context.Context, in *MergeRequest, opts ...grpc.CallOption) (*MergeResponse, error)
-	// Creates a new profile based on the request.
+	// Create creates a new profile.
 	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
-	// Creates a new profile based on the request.
+	// Update updates an existing profile's properties.
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
-	// Adds a new contact based on the request/this leads to automatic verification.
+	// AddContact adds a new contact to a profile with automatic verification.
 	AddContact(ctx context.Context, in *AddContactRequest, opts ...grpc.CallOption) (*AddContactResponse, error)
-	// Creates a new free contact based on the details provided.
+	// CreateContact creates a standalone contact not linked to a profile.
 	CreateContact(ctx context.Context, in *CreateContactRequest, opts ...grpc.CallOption) (*CreateContactResponse, error)
-	// Create a new contact verification request
+	// CreateContactVerification initiates contact verification.
 	CreateContactVerification(ctx context.Context, in *CreateContactVerificationRequest, opts ...grpc.CallOption) (*CreateContactVerificationResponse, error)
-	// Checks the status of a verification
+	// CheckVerification verifies a contact using the provided code.
 	CheckVerification(ctx context.Context, in *CheckVerificationRequest, opts ...grpc.CallOption) (*CheckVerificationResponse, error)
-	// Removes an old contact based on this request's id
+	// RemoveContact removes a contact from a profile.
 	RemoveContact(ctx context.Context, in *RemoveContactRequest, opts ...grpc.CallOption) (*RemoveContactResponse, error)
-	// Searches all contacts tied to a users profile and based on the active request.
+	// SearchRoster searches a user's contact roster.
 	SearchRoster(ctx context.Context, in *SearchRosterRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchRosterResponse], error)
-	// Adds a new contact based on the request/this leads to automatic verification.
+	// AddRoster adds multiple contacts to a user's roster.
 	AddRoster(ctx context.Context, in *AddRosterRequest, opts ...grpc.CallOption) (*AddRosterResponse, error)
-	// Removes a contact from a user's circle based on this request's id
+	// RemoveRoster removes a contact from a user's roster.
 	RemoveRoster(ctx context.Context, in *RemoveRosterRequest, opts ...grpc.CallOption) (*RemoveRosterResponse, error)
-	// Adds a new address based on the request.
+	// AddAddress adds a new address to a profile.
 	AddAddress(ctx context.Context, in *AddAddressRequest, opts ...grpc.CallOption) (*AddAddressResponse, error)
-	// Adds a new relationship between different proiles.
+	// AddRelationship creates a relationship between profiles.
 	AddRelationship(ctx context.Context, in *AddRelationshipRequest, opts ...grpc.CallOption) (*AddRelationshipResponse, error)
-	// Remove an existing relationship between profiles.
+	// DeleteRelationship removes a relationship between profiles.
 	DeleteRelationship(ctx context.Context, in *DeleteRelationshipRequest, opts ...grpc.CallOption) (*DeleteRelationshipResponse, error)
-	// Lists relationships a profile has.
+	// ListRelationship lists all relationships for a profile.
 	ListRelationship(ctx context.Context, in *ListRelationshipRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListRelationshipResponse], error)
 }
 
@@ -316,43 +317,44 @@ type ProfileService_ListRelationshipClient = grpc.ServerStreamingClient[ListRela
 // All implementations must embed UnimplementedProfileServiceServer
 // for forward compatibility.
 //
-// The profile service definition.
+// ProfileService manages user and entity profiles.
+// All RPCs require authentication via Bearer token.
 type ProfileServiceServer interface {
-	// Obtains a profile by its hash
+	// GetById retrieves a profile by its unique ID.
 	GetById(context.Context, *GetByIdRequest) (*GetByIdResponse, error)
-	// Obtains a profile by its hash
+	// GetByContact retrieves a profile by contact information.
 	GetByContact(context.Context, *GetByContactRequest) (*GetByContactResponse, error)
-	// Obtains a profile by its hash
+	// Search finds profiles matching specified criteria.
 	Search(*SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error
-	// Uses data found in the profile from mergeHash to update the current profile.
+	// Merge combines two profiles into one.
 	Merge(context.Context, *MergeRequest) (*MergeResponse, error)
-	// Creates a new profile based on the request.
+	// Create creates a new profile.
 	Create(context.Context, *CreateRequest) (*CreateResponse, error)
-	// Creates a new profile based on the request.
+	// Update updates an existing profile's properties.
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
-	// Adds a new contact based on the request/this leads to automatic verification.
+	// AddContact adds a new contact to a profile with automatic verification.
 	AddContact(context.Context, *AddContactRequest) (*AddContactResponse, error)
-	// Creates a new free contact based on the details provided.
+	// CreateContact creates a standalone contact not linked to a profile.
 	CreateContact(context.Context, *CreateContactRequest) (*CreateContactResponse, error)
-	// Create a new contact verification request
+	// CreateContactVerification initiates contact verification.
 	CreateContactVerification(context.Context, *CreateContactVerificationRequest) (*CreateContactVerificationResponse, error)
-	// Checks the status of a verification
+	// CheckVerification verifies a contact using the provided code.
 	CheckVerification(context.Context, *CheckVerificationRequest) (*CheckVerificationResponse, error)
-	// Removes an old contact based on this request's id
+	// RemoveContact removes a contact from a profile.
 	RemoveContact(context.Context, *RemoveContactRequest) (*RemoveContactResponse, error)
-	// Searches all contacts tied to a users profile and based on the active request.
+	// SearchRoster searches a user's contact roster.
 	SearchRoster(*SearchRosterRequest, grpc.ServerStreamingServer[SearchRosterResponse]) error
-	// Adds a new contact based on the request/this leads to automatic verification.
+	// AddRoster adds multiple contacts to a user's roster.
 	AddRoster(context.Context, *AddRosterRequest) (*AddRosterResponse, error)
-	// Removes a contact from a user's circle based on this request's id
+	// RemoveRoster removes a contact from a user's roster.
 	RemoveRoster(context.Context, *RemoveRosterRequest) (*RemoveRosterResponse, error)
-	// Adds a new address based on the request.
+	// AddAddress adds a new address to a profile.
 	AddAddress(context.Context, *AddAddressRequest) (*AddAddressResponse, error)
-	// Adds a new relationship between different proiles.
+	// AddRelationship creates a relationship between profiles.
 	AddRelationship(context.Context, *AddRelationshipRequest) (*AddRelationshipResponse, error)
-	// Remove an existing relationship between profiles.
+	// DeleteRelationship removes a relationship between profiles.
 	DeleteRelationship(context.Context, *DeleteRelationshipRequest) (*DeleteRelationshipResponse, error)
-	// Lists relationships a profile has.
+	// ListRelationship lists all relationships for a profile.
 	ListRelationship(*ListRelationshipRequest, grpc.ServerStreamingServer[ListRelationshipResponse]) error
 	mustEmbedUnimplementedProfileServiceServer()
 }
