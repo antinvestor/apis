@@ -1,4 +1,4 @@
-## 1.46.0
+## 1.46.1
 
 * Initial release
 * Support for real-time bi-directional streaming
