@@ -21,7 +21,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  antinvestor_api_common: ^1.0.0
+  antinvestor_api_common: ^1.46.0
 ```
 
 Then run:
