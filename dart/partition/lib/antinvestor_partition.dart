@@ -6,7 +6,7 @@
 ///
 /// ```dart
 /// import 'package:antinvestor_partition/antinvestor_partition.dart';
-/// import 'package:connectrpc/connectrpc.dart';
+/// import 'package:connectrpc/connect.dart';
 ///
 /// void main() async {
 ///   final channel = ClientChannel('https://api.example.com');
@@ -30,7 +30,7 @@ export 'src/partition/v1/partition.pbconnect.dart';
 
 // Re-export commonly used types from dependencies
 export 'package:protobuf/protobuf.dart' show GeneratedMessage;
-export 'package:connectrpc/connectrpc.dart'
+export 'package:connectrpc/connect.dart'
     show
         ClientChannel,
         ClientChannelBase,

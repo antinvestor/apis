@@ -40,33 +40,28 @@
 /// // Use with any service client
 /// final client = ChatServiceClient(
 ///   channel,
-///   interceptors: [interceptor],
 /// );
 /// ```
-library antinvestor_common;
+library;
 
 // Export authentication utilities
-export 'src/common/auth/token_refresh_interceptor.dart';
-export 'src/common/auth/token_manager.dart';
 export 'src/common/auth/jwt_utils.dart';
+export 'src/common/auth/token_manager.dart';
+export 'src/common/auth/token_refresh_interceptor.dart';
 
-// Export client factory
-export 'src/common/client/service_client_factory.dart';
+// Export client helpers
+export 'src/common/client/transport_helper.dart';
 
 // Export generated protobuf files
 export 'src/common/v1/common.pb.dart';
 export 'src/common/v1/common.pbenum.dart';
 export 'src/common/v1/common.pbjson.dart';
-export 'src/common/v1/common.pbconnect.dart';
 
 // Re-export commonly used types from dependencies
 export 'package:protobuf/protobuf.dart' show GeneratedMessage;
-export 'package:connectrpc/connectrpc.dart'
+export 'package:connectrpc/connect.dart'
     show
-        ClientChannel,
-        ClientChannelBase,
-        CallOptions,
+        Transport,
+        Interceptor,
         ConnectException,
-        ChannelOptions,
-        ChannelCredentials,
         Code;

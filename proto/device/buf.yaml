@@ -3,7 +3,7 @@ name: buf.build/antinvestor/device
 deps:
   - buf.build/bufbuild/protovalidate
   - buf.build/googleapis/googleapis
-  - buf.build/grpc-ecosystem/grpc-gateway
+  - buf.build/gnostic/gnostic
 
 lint:
   use:

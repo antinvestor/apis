@@ -184,10 +184,12 @@ class TokenManager {
     }
 
     if (_accessToken != null) {
-      _tokenChangedController.add(TokenPair(
-        accessToken: _accessToken!,
-        refreshToken: _refreshToken,
-      ));
+      _tokenChangedController.add(
+        TokenPair(
+          accessToken: _accessToken!,
+          refreshToken: _refreshToken,
+        ),
+      );
     }
   }
 

@@ -23,7 +23,7 @@ dart pub get
 
 ```dart
 import 'package:antinvestor_profile/antinvestor_profile.dart';
-import 'package:connectrpc/connectrpc.dart';
+import 'package:connectrpc/connect.dart';
 
 void main() async {
   final channel = ClientChannel('https://api.example.com');

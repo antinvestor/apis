@@ -16,65 +16,81 @@ syntax = "proto3";
 
 package partition.v1;
 
+// -----------------------------------------------------
+// Core notes (normative):
+// - Partition Service provides multi-tenancy and data isolation
+// - Tenants contain hierarchical partitions for organizational structure
+// - Role-based access control (RBAC) with partition and access roles
+// - Custom pages for partition-specific UI customization
+// - Profile-based access grants with role assignments
+// - All timestamps are RFC3339 / google.protobuf.Timestamp
+// -----------------------------------------------------
+
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
-import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/partition/v1;partitionv1";
 option java_multiple_files = true;
 option java_package = "partitionv1";
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+
+option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Partition Service"
-    version: "1.0"
+    title: "Partition Service";
+    version: "v1.0.0";
+    description: "The Partition Service provides multi-tenancy and data isolation capabilities with hierarchical partitions, role-based access control (RBAC), and custom UI pages. Tenants represent top-level organizational units containing hierarchical partitions for departments, projects, or teams. The service supports fine-grained access control through partition roles and access grants, enabling secure multi-tenant applications with customizable user experiences.";
     contact: {
-      name: "Ant Investor Ltd"
-      url: "https://github.com/antinvestor/service-lostid"
-      email: "info@antinvestor.com"
+      name: "Ant Investor Ltd";
+      url: "https://github.com/antinvestor/service-partition";
+      email: "info@antinvestor.com";
+    }
+    license: {
+      name: "Apache License";
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
     }
   }
-
-  schemes: HTTP
-  schemes: HTTPS
-  consumes: "application/json"
-  produces: "application/json"
-
-  security_definitions: {
-    security: {
-      key: "bearer"
-      value: {
-        type: TYPE_API_KEY
-        in: IN_HEADER
-        name: "Authorization"
-        description: "Authentication token, prefixed by Bearer: Bearer <token>"
-      }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BearerAuth";
+          value: {
+            security_scheme: {
+              type: "http";
+              scheme: "bearer";
+              bearer_format: "JWT";
+            }
+          }
+        }
+      ]
     }
-  }
-  security: {
-    security_requirement: {key: "bearer"}
   }
 };
 
+// -----------------------------------------------------
+// Core Data Types
+// -----------------------------------------------------
+
+// TenantObject represents a top-level organizational unit.
 message TenantObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];                    // Unique tenant ID
   string name = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
-  ];
+  ];                    // Tenant name (organization, company)
   string description = 3 [
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
-  ];
-  google.protobuf.Struct properties = 4;
-  google.protobuf.Timestamp created_at = 5;
-  common.v1.STATE state = 6;
+  ];                    // Tenant description
+  google.protobuf.Struct properties = 4;        // Additional tenant metadata
+  google.protobuf.Timestamp created_at = 5;     // Creation timestamp
+  common.v1.STATE state = 6;                    // Tenant state
 }
 
 //Request to create a new partition
@@ -252,36 +268,113 @@ message UpdatePartitionResponse {
   PartitionObject data = 1;
 }
 
+// PartitionObject represents a data partition within a tenant.
 message PartitionObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];                    // Unique partition ID
   string name = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
-  ];
+  ];                    // Partition name (department, project, team)
   string tenant_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];                    // Parent tenant ID
   string parent_id = 4 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];                    // Parent partition ID for hierarchical structure
   string description = 5 [
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
-  ];
-  common.v1.STATE state = 6;
-  google.protobuf.Struct properties = 7;
-  google.protobuf.Timestamp created_at = 8;
+  ];                    // Partition description
+  common.v1.STATE state = 6;                    // Partition state
+  google.protobuf.Struct properties = 7;        // Additional partition metadata
+  google.protobuf.Timestamp created_at = 8;     // Creation timestamp
 }
 
-// Partition Roles
+// PartitionRoleObject represents a role within a partition.
+message PartitionRoleObject {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];                    // Unique role ID
+  string partition_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];                    // Associated partition ID
+  string name = 3 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 100
+  ];                    // Role name (admin, editor, viewer, etc.)
+  google.protobuf.Struct properties = 4;        // Role permissions and metadata
+  google.protobuf.Timestamp created_at = 5;     // Creation timestamp
+  common.v1.STATE state = 6;                    // Role state
+}
+
+// PageObject represents a custom UI page for a partition.
+message PageObject {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];                    // Unique page ID
+  string name = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 100
+  ];                    // Page name
+  string html = 3 [
+    (buf.validate.field).string.min_len = 4,
+    (buf.validate.field).string.max_len = 5000
+  ];                    // HTML content for the page
+  common.v1.STATE state = 4;                    // Page state
+  google.protobuf.Timestamp created_at = 5;     // Creation timestamp
+  google.protobuf.Struct properties = 6;        // Additional page metadata
+}
+
+// AccessObject represents a profile's access to a partition.
+message AccessObject {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];                    // Unique access ID
+  string profile_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];                    // Profile ID with access
+  PartitionObject partition = 3;                // Partition being accessed
+  common.v1.STATE state = 4;                    // Access state
+  google.protobuf.Timestamp created_at = 5;     // Access grant timestamp
+}
+
+// AccessRoleObject links an access grant to a partition role.
+message AccessRoleObject {
+  string access_role_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];                    // Unique access role ID
+  string access_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];                    // Associated access ID
+  PartitionRoleObject role = 3;                 // Assigned partition role
+}
+
+// -----------------------------------------------------
+// Request/Response Messages
+// -----------------------------------------------------
+
 message CreatePartitionRoleRequest {
   string partition_id = 1 [
     (buf.validate.field).string.min_len = 3,
@@ -297,26 +390,6 @@ message CreatePartitionRoleRequest {
 
 message CreatePartitionRoleResponse {
   PartitionRoleObject data = 1;
-}
-
-message PartitionRoleObject {
-  string id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string partition_id = 2 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string name = 3 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 100
-  ];
-  google.protobuf.Struct properties = 4;
-  google.protobuf.Timestamp created_at = 5;
-  common.v1.STATE state = 6;
 }
 
 message RemovePartitionRoleRequest {
@@ -341,25 +414,6 @@ message ListPartitionRoleRequest {
 
 message ListPartitionRoleResponse {
   repeated PartitionRoleObject role = 1;
-}
-
-message PageObject {
-  string id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string name = 2 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 100
-  ];
-  string html = 3 [
-    (buf.validate.field).string.min_len = 4,
-    (buf.validate.field).string.max_len = 5000
-  ];
-  common.v1.STATE state = 4;
-  google.protobuf.Timestamp created_at = 5;
-  google.protobuf.Struct properties = 6;
 }
 
 message CreatePageRequest {
@@ -416,22 +470,6 @@ message RemovePageRequest {
 
 message RemovePageResponse {
   bool succeeded = 1;
-}
-
-message AccessObject {
-  string id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string profile_id = 2 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  PartitionObject partition = 3;
-  common.v1.STATE state = 4;
-  google.protobuf.Timestamp created_at = 5;
 }
 
 message CreateAccessRequest {
@@ -514,7 +552,6 @@ message RemoveAccessResponse {
   bool succeeded = 1;
 }
 
-// Access Roles
 message CreateAccessRoleRequest {
   string access_id = 1 [
     (buf.validate.field).string.min_len = 3,
@@ -532,20 +569,6 @@ message CreateAccessRoleResponse {
   AccessRoleObject data = 1;
 }
 
-message AccessRoleObject {
-  string access_role_id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string access_id = 2 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  PartitionRoleObject role = 3;
-}
-
 message RemoveAccessRoleRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
@@ -557,6 +580,7 @@ message RemoveAccessRoleRequest {
 message RemoveAccessRoleResponse {
   bool succeeded = 1;
 }
+
 message ListAccessRoleRequest {
   string access_id = 1 [
     (buf.validate.field).string.min_len = 3,
@@ -569,133 +593,220 @@ message ListAccessRoleResponse {
   repeated AccessRoleObject role = 1;
 }
 
+// -----------------------------------------------------
+// Partition Service
+// -----------------------------------------------------
+
+// PartitionService provides multi-tenancy and data isolation.
+// All RPCs require authentication via Bearer token.
 service PartitionService {
-  // Get a tenant in the system matching the id
+  // GetTenant retrieves a tenant by ID.
   rpc GetTenant(GetTenantRequest) returns (GetTenantResponse) {
-    option (google.api.http) = {get: "/tenant/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getTenant"
+      summary: "Get tenant"
+      description: "Retrieves a tenant by its unique identifier including all tenant metadata and properties."
+      tags: "Tenants"
+    };
   }
 
-  // List all tenants in the system matching the query in some way
+  // ListTenant retrieves all tenants matching criteria.
   rpc ListTenant(ListTenantRequest) returns (stream ListTenantResponse) {
-    option (google.api.http) = {get: "/tenant"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listTenants"
+      summary: "List tenants"
+      description: "Lists all tenants in the system with optional filtering by query, date range, and properties. Returns a stream of tenants."
+      tags: "Tenants"
+    };
   }
 
-  // Log a new tenant request
+  // CreateTenant creates a new tenant.
   rpc CreateTenant(CreateTenantRequest) returns (CreateTenantResponse) {
-    option (google.api.http) = {
-      post: "/tenant"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createTenant"
+      summary: "Create tenant"
+      description: "Creates a new tenant (top-level organizational unit) with name, description, and custom properties."
+      tags: "Tenants"
     };
   }
 
-  // Update an existing tenant object
+  // UpdateTenant updates an existing tenant.
   rpc UpdateTenant(UpdateTenantRequest) returns (UpdateTenantResponse) {
-    option (google.api.http) = {
-      patch: "/tenant/{id}"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "updateTenant"
+      summary: "Update tenant"
+      description: "Updates an existing tenant's name, description, state, and properties."
+      tags: "Tenants"
     };
   }
 
-  // List all partitions in the system matching the query in some way
+  // ListPartition retrieves all partitions matching criteria.
   rpc ListPartition(ListPartitionRequest) returns (stream ListPartitionResponse) {
-    option (google.api.http) = {get: "/partition"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listPartitions"
+      summary: "List partitions"
+      description: "Lists all partitions in the system with optional filtering by query, date range, and properties. Returns a stream of partitions."
+      tags: "Partitions"
+    };
   }
 
-  // Log a new partition request
+  // CreatePartition creates a new partition.
   rpc CreatePartition(CreatePartitionRequest) returns (CreatePartitionResponse) {
-    option (google.api.http) = {
-      post: "/partition"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createPartition"
+      summary: "Create partition"
+      description: "Creates a new partition within a tenant. Supports hierarchical structures with parent partitions."
+      tags: "Partitions"
     };
   }
 
-  // Get an existing partition object
+  // GetPartition retrieves a partition by ID.
   rpc GetPartition(GetPartitionRequest) returns (GetPartitionResponse) {
-    option (google.api.http) = {get: "/partition/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getPartition"
+      summary: "Get partition"
+      description: "Retrieves a partition by its unique identifier including all partition metadata and properties."
+      tags: "Partitions"
+    };
   }
 
-  // Get a partition parents object
+  // GetPartitionParents retrieves the parent hierarchy.
   rpc GetPartitionParents(GetPartitionParentsRequest) returns (GetPartitionParentsResponse) {
-    option (google.api.http) = {get: "/partition/parents/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getPartitionParents"
+      summary: "Get partition parents"
+      description: "Retrieves the complete parent hierarchy for a partition from the root tenant down to the partition."
+      tags: "Partitions"
+    };
   }
 
-  // Update an existing partition object
+  // UpdatePartition updates an existing partition.
   rpc UpdatePartition(UpdatePartitionRequest) returns (UpdatePartitionResponse) {
-    option (google.api.http) = {
-      patch: "/partition/{id}"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "updatePartition"
+      summary: "Update partition"
+      description: "Updates an existing partition's name, description, state, and properties."
+      tags: "Partitions"
     };
   }
 
-  // Create a partition Role for a particular partition
+  // CreatePartitionRole creates a role within a partition.
   rpc CreatePartitionRole(CreatePartitionRoleRequest) returns (CreatePartitionRoleResponse) {
-    option (google.api.http) = {
-      post: "/partition/role"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createPartitionRole"
+      summary: "Create partition role"
+      description: "Creates a new role within a partition for access control (admin, editor, viewer, etc.)."
+      tags: "Roles"
     };
   }
 
-  // List partition roles available for this particular partition
+  // ListPartitionRole retrieves all roles for a partition.
   rpc ListPartitionRole(ListPartitionRoleRequest) returns (stream ListPartitionRoleResponse) {
-    option (google.api.http) = {get: "/partition/role"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listPartitionRoles"
+      summary: "List partition roles"
+      description: "Lists all roles available for a specific partition. Returns a stream of partition roles."
+      tags: "Roles"
+    };
   }
 
-  // Remove a partition role that is not required
+  // RemovePartitionRole deletes a partition role.
   rpc RemovePartitionRole(RemovePartitionRoleRequest) returns (RemovePartitionRoleResponse) {
-    option (google.api.http) = {delete: "/partition/role/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "removePartitionRole"
+      summary: "Remove partition role"
+      description: "Removes a partition role. All access grants using this role must be removed first."
+      tags: "Roles"
+    };
   }
 
-  // Creates a new page for access or customization of how a partition looks like
+  // CreatePage creates a custom UI page for a partition.
   rpc CreatePage(CreatePageRequest) returns (CreatePageResponse) {
-    option (google.api.http) = {
-      post: "/page"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createPage"
+      summary: "Create custom page"
+      description: "Creates a custom UI page for a partition with HTML content. Enables partition-specific branding and customization."
+      tags: "Pages"
     };
   }
 
-  // Obtains a new page specific to a partition
+  // GetPage retrieves a custom page.
   rpc GetPage(GetPageRequest) returns (GetPageResponse) {
-    option (google.api.http) = {get: "/page"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getPage"
+      summary: "Get custom page"
+      description: "Retrieves a custom page by page ID, partition ID, or page name."
+      tags: "Pages"
+    };
   }
 
-  // Removes a page from being accessible for a partition
+  // RemovePage deletes a custom page.
   rpc RemovePage(RemovePageRequest) returns (RemovePageResponse) {
-    option (google.api.http) = {delete: "/page/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "removePage"
+      summary: "Remove custom page"
+      description: "Removes a custom page from a partition."
+      tags: "Pages"
+    };
   }
 
-  // Creates a users ability to access a partition
+  // CreateAccess grants a profile access to a partition.
   rpc CreateAccess(CreateAccessRequest) returns (CreateAccessResponse) {
-    option (google.api.http) = {
-      post: "/access"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createAccess"
+      summary: "Create access grant"
+      description: "Grants a profile access to a partition. The profile can then be assigned roles via CreateAccessRole."
+      tags: "Access"
     };
   }
 
-  // Obtains a users access to a partition by access id or partition and profile id
+  // GetAccess retrieves an access grant.
   rpc GetAccess(GetAccessRequest) returns (GetAccessResponse) {
-    option (google.api.http) = {get: "/access"};
-  }
-
-  // Removes a user's ability to access a partition
-  rpc RemoveAccess(RemoveAccessRequest) returns (RemoveAccessResponse) {
-    option (google.api.http) = {delete: "/access/{id}"};
-  }
-
-  // Create an access Role for a particular access
-  rpc CreateAccessRole(CreateAccessRoleRequest) returns (CreateAccessRoleResponse) {
-    option (google.api.http) = {
-      post: "/access/role"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getAccess"
+      summary: "Get access grant"
+      description: "Retrieves an access grant by access ID or by partition and profile ID combination."
+      tags: "Access"
     };
   }
 
-  // List access roles available for this particular access
-  rpc ListAccessRole(ListAccessRoleRequest) returns (stream ListAccessRoleResponse) {
-    option (google.api.http) = {get: "/access/role"};
+  // RemoveAccess revokes a profile's access to a partition.
+  rpc RemoveAccess(RemoveAccessRequest) returns (RemoveAccessResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "removeAccess"
+      summary: "Remove access grant"
+      description: "Revokes a profile's access to a partition. All associated access roles are also removed."
+      tags: "Access"
+    };
   }
 
-  // Remove an access role that is not required
+  // CreateAccessRole assigns a role to an access grant.
+  rpc CreateAccessRole(CreateAccessRoleRequest) returns (CreateAccessRoleResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createAccessRole"
+      summary: "Assign role to access"
+      description: "Assigns a partition role to an access grant, granting the profile specific permissions within the partition."
+      tags: "Access"
+    };
+  }
+
+  // ListAccessRole retrieves all roles for an access grant.
+  rpc ListAccessRole(ListAccessRoleRequest) returns (stream ListAccessRoleResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listAccessRoles"
+      summary: "List access roles"
+      description: "Lists all roles assigned to an access grant. Returns a stream of access roles."
+      tags: "Access"
+    };
+  }
+
+  // RemoveAccessRole removes a role from an access grant.
   rpc RemoveAccessRole(RemoveAccessRoleRequest) returns (RemoveAccessRoleResponse) {
-    option (google.api.http) = {delete: "/access/role/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "removeAccessRole"
+      summary: "Remove access role"
+      description: "Removes a specific role from an access grant. The profile retains access but loses the permissions of this role."
+      tags: "Access"
+    };
   }
 }

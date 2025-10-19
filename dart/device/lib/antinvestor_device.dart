@@ -6,7 +6,7 @@
 ///
 /// ```dart
 /// import 'package:antinvestor_device/antinvestor_device.dart';
-/// import 'package:connectrpc/connectrpc.dart';
+/// import 'package:connectrpc/connect.dart';
 ///
 /// void main() async {
 ///   final channel = ClientChannel('https://api.example.com');

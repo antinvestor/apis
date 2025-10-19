@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:connectrpc/connectrpc.dart';
+import 'package:connectrpc/connect.dart';
 
 /// Callback type for refreshing tokens.
 /// Should return a new access token or throw an exception if refresh fails.
@@ -18,7 +18,7 @@ typedef RefreshTokenGetter = String? Function();
 /// Callback type for updating the access token after refresh.
 typedef TokenSetter = void Function(String newToken);
 
-/// A Connect RPC interceptor that automatically refreshes expired access tokens.
+/// Creates a Connect RPC interceptor that automatically refreshes expired access tokens.
 ///
 /// This interceptor checks if the access token is expired before sending each request.
 /// If expired, it uses the refresh token to obtain a new access token and retries
@@ -27,7 +27,7 @@ typedef TokenSetter = void Function(String newToken);
 /// ## Usage
 ///
 /// ```dart
-/// final interceptor = TokenRefreshInterceptor(
+/// final interceptor = createTokenRefreshInterceptor(
 ///   getAccessToken: () => _accessToken,
 ///   getRefreshToken: () => _refreshToken,
 ///   setAccessToken: (newToken) => _accessToken = newToken,
@@ -46,220 +46,131 @@ typedef TokenSetter = void Function(String newToken);
 ///   },
 /// );
 ///
-/// final client = ServiceClient(
-///   channel,
+/// final transport = Transport(
+///   baseUrl: 'https://api.example.com',
 ///   interceptors: [interceptor],
 /// );
 /// ```
-class TokenRefreshInterceptor extends ClientInterceptor {
-  /// Callback to get the current access token
-  final TokenGetter getAccessToken;
+AnyFn<I, O> Function<I extends Object, O extends Object>(AnyFn<I, O> next)
+    createTokenRefreshInterceptor({
+  required TokenGetter getAccessToken,
+  required RefreshTokenGetter getRefreshToken,
+  required TokenSetter setAccessToken,
+  required TokenExpiryChecker isTokenExpired,
+  required TokenRefreshCallback refreshToken,
+}) {
+  final refreshLock = _AsyncLock();
+  Future<String>? refreshFuture;
 
-  /// Callback to get the current refresh token
-  final RefreshTokenGetter getRefreshToken;
-
-  /// Callback to update the access token after refresh
-  final TokenSetter setAccessToken;
-
-  /// Callback to check if the token is expired
-  final TokenExpiryChecker isTokenExpired;
-
-  /// Callback to refresh the token
-  final TokenRefreshCallback refreshToken;
-
-  /// Lock to ensure only one refresh happens at a time
-  final _refreshLock = _AsyncLock();
-
-  /// Cache for in-flight refresh operations
-  Future<String>? _refreshFuture;
-
-  TokenRefreshInterceptor({
-    required this.getAccessToken,
-    required this.getRefreshToken,
-    required this.setAccessToken,
-    required this.isTokenExpired,
-    required this.refreshToken,
-  });
-
-  @override
-  ResponseFuture<Q> interceptUnary<Q, R>(
-    ClientMethodBase<Q, R> method,
-    Q request,
-    CallOptions options,
-    UnaryInvoke<Q, R> invoke,
-  ) {
-    return ResponseFuture(
-      _interceptUnaryAsync(method, request, options, invoke),
-    );
-  }
-
-  Future<R> _interceptUnaryAsync<Q, R>(
-    ClientMethodBase<Q, R> method,
-    Q request,
-    CallOptions options,
-    UnaryInvoke<Q, R> invoke,
-  ) async {
-    // Check if token needs refresh
-    final currentToken = getAccessToken();
-    if (isTokenExpired(currentToken)) {
-      await _ensureValidToken();
-    }
-
-    // Add the (potentially refreshed) token to the request
-    final token = getAccessToken();
-    final updatedOptions = options.mergedWith(
-      CallOptions(
-        metadata: {
-          if (token != null) 'authorization': 'Bearer $token',
-        },
-      ),
-    );
-
-    try {
-      // Make the request
-      final response = await invoke(method, request, updatedOptions);
-      return response;
-    } on ConnectException catch (e) {
-      // If we get an unauthorized error, try refreshing and retrying once
-      if (e.code == Code.unauthenticated) {
-        await _ensureValidToken(forceRefresh: true);
-        
-        final newToken = getAccessToken();
-        final retryOptions = options.mergedWith(
-          CallOptions(
-            metadata: {
-              if (newToken != null) 'authorization': 'Bearer $newToken',
-            },
-          ),
-        );
-        
-        return await invoke(method, request, retryOptions);
-      }
-      rethrow;
-    }
-  }
-
-  @override
-  ResponseStream<R> interceptStreaming<Q, R>(
-    ClientMethodBase<Q, R> method,
-    Stream<Q> requests,
-    CallOptions options,
-    StreamInvoke<Q, R> invoke,
-  ) {
-    return ResponseStream(
-      _interceptStreamingAsync(method, requests, options, invoke),
-    );
-  }
-
-  Stream<R> _interceptStreamingAsync<Q, R>(
-    ClientMethodBase<Q, R> method,
-    Stream<Q> requests,
-    CallOptions options,
-    StreamInvoke<Q, R> invoke,
-  ) async* {
-    // Check if token needs refresh before starting the stream
-    final currentToken = getAccessToken();
-    if (isTokenExpired(currentToken)) {
-      await _ensureValidToken();
-    }
-
-    // Add the (potentially refreshed) token to the request
-    final token = getAccessToken();
-    final updatedOptions = options.mergedWith(
-      CallOptions(
-        metadata: {
-          if (token != null) 'authorization': 'Bearer $token',
-        },
-      ),
-    );
-
-    try {
-      // Start the stream
-      final responseStream = invoke(method, requests, updatedOptions);
-      await for (final response in responseStream) {
-        yield response;
-      }
-    } on ConnectException catch (e) {
-      // If we get an unauthorized error during streaming, try refreshing
-      if (e.code == Code.unauthenticated) {
-        await _ensureValidToken(forceRefresh: true);
-        
-        final newToken = getAccessToken();
-        final retryOptions = options.mergedWith(
-          CallOptions(
-            metadata: {
-              if (newToken != null) 'authorization': 'Bearer $newToken',
-            },
-          ),
-        );
-        
-        // Retry the stream
-        final retryStream = invoke(method, requests, retryOptions);
-        await for (final response in retryStream) {
-          yield response;
-        }
-      } else {
-        rethrow;
-      }
-    }
-  }
-
-  /// Ensures a valid token is available, refreshing if necessary.
-  ///
-  /// Uses a lock to ensure only one refresh operation happens at a time.
-  /// Multiple concurrent requests will wait for the same refresh operation.
-  Future<void> _ensureValidToken({bool forceRefresh = false}) async {
-    return _refreshLock.synchronized(() async {
+  Future<void> ensureValidToken({bool forceRefresh = false}) async {
+    return refreshLock.synchronized(() async {
       final currentToken = getAccessToken();
-      
+
       // Check again inside the lock - another request might have already refreshed
       if (!forceRefresh && !isTokenExpired(currentToken)) {
         return;
       }
 
       // If there's already a refresh in progress, wait for it
-      if (_refreshFuture != null) {
+      if (refreshFuture != null) {
         try {
-          await _refreshFuture;
+          await refreshFuture;
           return;
         } catch (_) {
           // If the previous refresh failed, we'll try again
-          _refreshFuture = null;
+          refreshFuture = null;
         }
       }
 
       // Start a new refresh operation
-      _refreshFuture = _performRefresh();
-      
+      refreshFuture = _performRefresh(
+        getRefreshToken,
+        refreshToken,
+        setAccessToken,
+      );
+
       try {
-        await _refreshFuture;
+        await refreshFuture;
       } finally {
-        _refreshFuture = null;
+        refreshFuture = null;
       }
     });
   }
 
-  /// Performs the actual token refresh operation.
-  Future<String> _performRefresh() async {
-    final currentRefreshToken = getRefreshToken();
-    
-    if (currentRefreshToken == null) {
-      throw ConnectException(
-        code: Code.unauthenticated,
-        message: 'No refresh token available',
-      );
-    }
+  return <I extends Object, O extends Object>(AnyFn<I, O> next) {
+    return (Request<I, O> request) async {
+      // Check if token needs refresh before the request
+      final currentToken = getAccessToken();
+      if (isTokenExpired(currentToken)) {
+        await ensureValidToken();
+      }
 
-    try {
-      final newAccessToken = await refreshToken(currentRefreshToken);
-      setAccessToken(newAccessToken);
-      return newAccessToken;
-    } catch (e) {
-      throw ConnectException(
-        code: Code.unauthenticated,
-        message: 'Token refresh failed: $e',
-      );
-    }
+      // Add the (potentially refreshed) token to the request headers
+      final token = getAccessToken();
+      if (token != null) {
+        request.headers['authorization'] = 'Bearer $token';
+      }
+
+      try {
+        // Make the request
+        final response = await next(request);
+
+        // Handle streaming responses
+        if (response is StreamResponse<I, O>) {
+          return StreamResponse(
+            response.spec,
+            response.headers,
+            response.message,
+            response.trailers,
+          );
+        }
+
+        return response;
+      } on ConnectException catch (e) {
+        // If we get an unauthorized error, try refreshing and retrying once
+        if (e.code == Code.unauthenticated) {
+          await ensureValidToken(forceRefresh: true);
+
+          // Update the token in headers
+          final newToken = getAccessToken();
+          if (newToken != null) {
+            request.headers['authorization'] = 'Bearer $newToken';
+          }
+
+          // Retry the request
+          return await next(request);
+        }
+        rethrow;
+      }
+    };
+  };
+}
+
+/// Performs the actual token refresh operation.
+Future<String> _performRefresh(
+  RefreshTokenGetter getRefreshToken,
+  TokenRefreshCallback refreshToken,
+  TokenSetter setAccessToken,
+) async {
+  final currentRefreshToken = getRefreshToken();
+
+  if (currentRefreshToken == null) {
+    throw ConnectException(
+      Code.unauthenticated,
+      'No refresh token available',
+    );
+  }
+
+  try {
+    final newAccessToken = await refreshToken(currentRefreshToken);
+    setAccessToken(newAccessToken);
+    return newAccessToken;
+  } catch (e) {
+    throw ConnectException(
+      Code.unauthenticated,
+      'Token refresh failed: $e',
+      cause: e,
+    );
   }
 }
 

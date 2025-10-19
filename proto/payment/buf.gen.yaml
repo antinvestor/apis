@@ -7,13 +7,13 @@ managed:
     - file_option: java_package
       module: buf.build/googleapis/googleapis
     - file_option: java_package
-      module: buf.build/grpc-ecosystem/grpc-gateway
+      module: buf.build/gnostic/gnostic
     - file_option: go_package
       module: buf.build/bufbuild/protovalidate
     - file_option: go_package
       module: buf.build/googleapis/googleapis
     - file_option: go_package
-      module: buf.build/grpc-ecosystem/grpc-gateway
+      module: buf.build/gnostic/gnostic
     - file_option: go_package
       module: buf.build/antinvestor/common
   override:
@@ -30,19 +30,17 @@ plugins:
   - remote: buf.build/protocolbuffers/go
     out: ../../go/
     opt: paths=source_relative
-  - remote: buf.build/grpc-ecosystem/gateway
+  - remote: buf.build/connectrpc/go
     out: ../../go/
     opt:
       - paths=source_relative
-      - generate_unbound_methods=true
-      - allow_repeated_fields_in_body=true
-  - remote: buf.build/grpc-ecosystem/openapiv2
+  - remote: buf.build/community/sudorandom-connect-openapi
     out: ../../go/
     opt:
-      - logtostderr=true
-      - fqn_for_openapi_name=true
-      - include_package_in_tags=true
-      - allow_repeated_fields_in_body=true
+      - features=connectrpc;gnostic;protovalidate
+      - content-types=json
+      - allow-get
+      - debug
   - remote: buf.build/grpc/java
     out: ../../java/payment/src/main/java/
   - remote: buf.build/protocolbuffers/java

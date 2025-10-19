@@ -1,4 +1,4 @@
-## 1.0.0
+## 1.46.0
 
 * Initial release
 * Media upload and download
