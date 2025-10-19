@@ -124,16 +124,6 @@ jobs:
           echo "Running dart analyze..."
           dart analyze
           
-          # Dry run publish
-          echo "Running dry-run publish..."
-          dart pub publish --dry-run
-          
-          # Publish to pub.dev
-          echo "Publishing to pub.dev..."
-          dart pub publish --force
-          
-          echo "✅ Successfully published $PACKAGE v$NEW_VERSION"
-          
           # Commit version bump
           git add pubspec.yaml CHANGELOG.md 2>/dev/null || true
           git commit -m "chore(dart/$PACKAGE): bump version to $NEW_VERSION" || true
@@ -149,6 +139,17 @@ jobs:
           # Push commit and tag
           git push origin main || echo "⚠️  Failed to push commit"
           git push origin "$TAG" || echo "⚠️  Failed to push tag"
+          
+          # Dry run publish
+          echo "Running dry-run publish..."
+          dart pub publish --dry-run
+          
+          # Publish to pub.dev
+          echo "Publishing to pub.dev..."
+          dart pub publish --force
+          
+          echo "✅ Successfully published $PACKAGE v$NEW_VERSION"
+      
       
       - name: Create GitHub Release
         if: success() && steps.check_changes.outputs.should_release == 'true'
