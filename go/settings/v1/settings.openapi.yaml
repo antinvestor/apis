@@ -96,40 +96,55 @@ components:
           type: integer
           title: count
           format: int32
+          description: Number of items per page (limit)
         page:
           type: integer
           title: page
           format: int32
+          description: Page number (0-indexed or 1-indexed depending on service)
         startDate:
           type: string
           title: start_date
+          description: 'Optional: Filter results from this date (RFC3339 format)'
         endDate:
           type: string
           title: end_date
+          description: 'Optional: Filter results until this date (RFC3339 format)'
       title: Pagination
       additionalProperties: false
+      description: |-
+        Pagination provides standard offset-based pagination parameters.
+         Used for list operations that return large result sets.
     common.v1.SearchRequest:
       type: object
       properties:
         query:
           type: string
           title: query
+          description: Full-text search query string
         idQuery:
           type: string
           title: id_query
+          description: Specific ID or ID pattern to search for
         limits:
           title: limits
+          description: Pagination parameters
           $ref: '#/components/schemas/common.v1.Pagination'
         properties:
           type: array
           items:
             type: string
           title: properties
+          description: Specific properties/fields to include in results
         extras:
           title: extras
+          description: Service-specific additional search parameters
           $ref: '#/components/schemas/google.protobuf.Struct'
       title: SearchRequest
       additionalProperties: false
+      description: |-
+        SearchRequest provides a standard structure for search operations across services.
+         Supports text search, ID-based queries, pagination, property filtering, and extensibility.
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version

@@ -21,6 +21,8 @@ export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 export 'common.pbenum.dart';
 
+/// Pagination provides standard offset-based pagination parameters.
+/// Used for list operations that return large result sets.
 class Pagination extends $pb.GeneratedMessage {
   factory Pagination({
     $core.int? count,
@@ -111,6 +113,8 @@ class Pagination extends $pb.GeneratedMessage {
   void clearEndDate() => $_clearField(4);
 }
 
+/// SearchRequest provides a standard structure for search operations across services.
+/// Supports text search, ID-based queries, pagination, property filtering, and extensibility.
 class SearchRequest extends $pb.GeneratedMessage {
   factory SearchRequest({
     $core.String? query,
@@ -215,6 +219,7 @@ class SearchRequest extends $pb.GeneratedMessage {
   $0.Struct ensureExtras() => $_ensure(4);
 }
 
+/// StatusRequest retrieves the current status of an entity or operation.
 class StatusRequest extends $pb.GeneratedMessage {
   factory StatusRequest({
     $core.String? id,
@@ -286,6 +291,7 @@ class StatusRequest extends $pb.GeneratedMessage {
   $0.Struct ensureExtras() => $_ensure(1);
 }
 
+/// StatusResponse returns the current state and status of an entity or operation.
 class StatusResponse extends $pb.GeneratedMessage {
   factory StatusResponse({
     $core.String? id,
@@ -405,6 +411,8 @@ class StatusResponse extends $pb.GeneratedMessage {
   $0.Struct ensureExtras() => $_ensure(5);
 }
 
+/// StatusUpdateRequest updates the state and/or status of an entity or operation.
+/// Used for state transitions and status updates by authorized services.
 class StatusUpdateRequest extends $pb.GeneratedMessage {
   factory StatusUpdateRequest({
     $core.String? id,
@@ -512,6 +520,7 @@ class StatusUpdateRequest extends $pb.GeneratedMessage {
   $0.Struct ensureExtras() => $_ensure(4);
 }
 
+/// StatusUpdateResponse returns the updated status after a status update operation.
 class StatusUpdateResponse extends $pb.GeneratedMessage {
   factory StatusUpdateResponse({
     StatusResponse? data,
@@ -571,6 +580,9 @@ class StatusUpdateResponse extends $pb.GeneratedMessage {
   StatusResponse ensureData() => $_ensure(0);
 }
 
+/// ContactLink represents a link between a contact and a profile in the system.
+/// Used for associating external contacts with internal profiles across services.
+/// This enables unified identity management and contact resolution.
 class ContactLink extends $pb.GeneratedMessage {
   factory ContactLink({
     $core.String? profileName,

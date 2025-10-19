@@ -96,7 +96,10 @@ components:
         - IN_PROCESS
         - FAILED
         - SUCCESSFUL
-      description: buf:lint:ignore ENUM_VALUE_PREFIX
+      description: |-
+        STATUS represents the processing status of an operation or task.
+         This enum is used for tracking asynchronous operations, jobs, and workflows.
+         buf:lint:ignore ENUM_VALUE_PREFIX
     common.v1.StatusRequest:
       type: object
       properties:
@@ -106,11 +109,14 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,20}'
+          description: Unique identifier of the entity or operation
         extras:
           title: extras
+          description: Additional context or parameters
           $ref: '#/components/schemas/google.protobuf.Struct'
       title: StatusRequest
       additionalProperties: false
+      description: StatusRequest retrieves the current status of an entity or operation.
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version

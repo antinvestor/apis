@@ -319,41 +319,52 @@ components:
           maxLength: 250
           minLength: 3
           pattern: '[0-9a-z_-]{3,250}'
+          description: Display name of the profile
         profileType:
           type: string
           title: profile_type
           maxLength: 250
           minLength: 3
           pattern: '[0-9a-z_-]{3,250}'
+          description: Type of profile (e.g., "user", "organization", "service")
         profileId:
           type: string
           title: profile_id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+          description: Unique identifier of the profile
         profileImageId:
           type: string
           title: profile_image_id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+          description: Identifier of the profile's image/avatar
         contactId:
           type: string
           title: contact_id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,40}'
+          description: Unique identifier of the contact
         detail:
           type: string
           title: detail
           maxLength: 250
           minLength: 3
           pattern: '[0-9a-z_-]{3,250}'
+          description: Additional contact details (e.g., email, phone, handle)
         extras:
           title: extras
+          description: Extended metadata for the contact link
           $ref: '#/components/schemas/google.protobuf.Struct'
       title: ContactLink
       additionalProperties: false
+      description: |-
+        ContactLink represents a link between a contact and a profile in the system.
+         Used for associating external contacts with internal profiles across services.
+         This enables unified identity management and contact resolution.
     common.v1.Pagination:
       type: object
       properties:
@@ -361,18 +372,25 @@ components:
           type: integer
           title: count
           format: int32
+          description: Number of items per page (limit)
         page:
           type: integer
           title: page
           format: int32
+          description: Page number (0-indexed or 1-indexed depending on service)
         startDate:
           type: string
           title: start_date
+          description: 'Optional: Filter results from this date (RFC3339 format)'
         endDate:
           type: string
           title: end_date
+          description: 'Optional: Filter results until this date (RFC3339 format)'
       title: Pagination
       additionalProperties: false
+      description: |-
+        Pagination provides standard offset-based pagination parameters.
+         Used for list operations that return large result sets.
     common.v1.STATE:
       type: string
       title: STATE
@@ -382,7 +400,10 @@ components:
         - ACTIVE
         - INACTIVE
         - DELETED
-      description: buf:lint:ignore ENUM_VALUE_PREFIX
+      description: |-
+        STATE represents the lifecycle state of an entity across all services.
+         This enum provides a consistent way to track entity states from creation to deletion.
+         buf:lint:ignore ENUM_VALUE_PREFIX
     common.v1.STATUS:
       type: string
       title: STATUS
@@ -392,29 +413,40 @@ components:
         - IN_PROCESS
         - FAILED
         - SUCCESSFUL
-      description: buf:lint:ignore ENUM_VALUE_PREFIX
+      description: |-
+        STATUS represents the processing status of an operation or task.
+         This enum is used for tracking asynchronous operations, jobs, and workflows.
+         buf:lint:ignore ENUM_VALUE_PREFIX
     common.v1.SearchRequest:
       type: object
       properties:
         query:
           type: string
           title: query
+          description: Full-text search query string
         idQuery:
           type: string
           title: id_query
+          description: Specific ID or ID pattern to search for
         limits:
           title: limits
+          description: Pagination parameters
           $ref: '#/components/schemas/common.v1.Pagination'
         properties:
           type: array
           items:
             type: string
           title: properties
+          description: Specific properties/fields to include in results
         extras:
           title: extras
+          description: Service-specific additional search parameters
           $ref: '#/components/schemas/google.protobuf.Struct'
       title: SearchRequest
       additionalProperties: false
+      description: |-
+        SearchRequest provides a standard structure for search operations across services.
+         Supports text search, ID-based queries, pagination, property filtering, and extensibility.
     common.v1.StatusRequest:
       type: object
       properties:
@@ -424,11 +456,14 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,20}'
+          description: Unique identifier of the entity or operation
         extras:
           title: extras
+          description: Additional context or parameters
           $ref: '#/components/schemas/google.protobuf.Struct'
       title: StatusRequest
       additionalProperties: false
+      description: StatusRequest retrieves the current status of an entity or operation.
     common.v1.StatusResponse:
       type: object
       properties:
@@ -438,23 +473,30 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,20}'
+          description: Unique identifier of the entity or operation
         state:
           title: state
+          description: Current lifecycle state
           $ref: '#/components/schemas/common.v1.STATE'
         status:
           title: status
+          description: Current processing status
           $ref: '#/components/schemas/common.v1.STATUS'
         externalId:
           type: string
           title: external_id
+          description: External system identifier (if applicable)
         transientId:
           type: string
           title: transient_id
+          description: Temporary identifier for tracking (e.g., session ID)
         extras:
           title: extras
+          description: Additional status information
           $ref: '#/components/schemas/google.protobuf.Struct'
       title: StatusResponse
       additionalProperties: false
+      description: StatusResponse returns the current state and status of an entity or operation.
     common.v1.StatusUpdateRequest:
       type: object
       properties:
@@ -464,28 +506,38 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,20}'
+          description: Unique identifier of the entity or operation
         state:
           title: state
+          description: New lifecycle state (if changing)
           $ref: '#/components/schemas/common.v1.STATE'
         status:
           title: status
+          description: New processing status (if changing)
           $ref: '#/components/schemas/common.v1.STATUS'
         externalId:
           type: string
           title: external_id
+          description: External system identifier to associate
         extras:
           title: extras
+          description: Additional update parameters
           $ref: '#/components/schemas/google.protobuf.Struct'
       title: StatusUpdateRequest
       additionalProperties: false
+      description: |-
+        StatusUpdateRequest updates the state and/or status of an entity or operation.
+         Used for state transitions and status updates by authorized services.
     common.v1.StatusUpdateResponse:
       type: object
       properties:
         data:
           title: data
+          description: Updated status information
           $ref: '#/components/schemas/common.v1.StatusResponse'
       title: StatusUpdateResponse
       additionalProperties: false
+      description: StatusUpdateResponse returns the updated status after a status update operation.
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version

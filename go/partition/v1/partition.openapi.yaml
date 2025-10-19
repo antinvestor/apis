@@ -655,7 +655,10 @@ components:
         - ACTIVE
         - INACTIVE
         - DELETED
-      description: buf:lint:ignore ENUM_VALUE_PREFIX
+      description: |-
+        STATE represents the lifecycle state of an entity across all services.
+         This enum provides a consistent way to track entity states from creation to deletion.
+         buf:lint:ignore ENUM_VALUE_PREFIX
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version

@@ -359,7 +359,10 @@ components:
         - ACTIVE
         - INACTIVE
         - DELETED
-      description: buf:lint:ignore ENUM_VALUE_PREFIX
+      description: |-
+        STATE represents the lifecycle state of an entity across all services.
+         This enum provides a consistent way to track entity states from creation to deletion.
+         buf:lint:ignore ENUM_VALUE_PREFIX
     common.v1.STATUS:
       type: string
       title: STATUS
@@ -369,7 +372,10 @@ components:
         - IN_PROCESS
         - FAILED
         - SUCCESSFUL
-      description: buf:lint:ignore ENUM_VALUE_PREFIX
+      description: |-
+        STATUS represents the processing status of an operation or task.
+         This enum is used for tracking asynchronous operations, jobs, and workflows.
+         buf:lint:ignore ENUM_VALUE_PREFIX
     connect-protocol-version:
       type: number
       title: Connect-Protocol-Version
