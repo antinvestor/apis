@@ -71,6 +71,7 @@ subprojects {
         api("io.grpc:grpc-services:1.76.0")
         api("io.grpc:grpc-stub:1.76.0")
         api("build.buf:protovalidate:1.0.0")
+        api("org.gnostic:gnostic-grpc:0.7.1")
 
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0")
         api("com.googlecode.libphonenumber:libphonenumber:9.0.16")
