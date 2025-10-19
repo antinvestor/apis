@@ -25,7 +25,7 @@
 ///   await channel.shutdown();
 /// }
 /// ```
-library antinvestor_chat;
+library;
 
 // Export client factory
 export 'src/client_factory.dart';
@@ -34,4 +34,5 @@ export 'src/client_factory.dart';
 export 'src/chat/v1/chat.pb.dart';
 export 'src/chat/v1/chat.pbenum.dart';
 export 'src/chat/v1/chat.pbjson.dart';
-export 'src/chat/v1/chat.pbconnect.dart';
+export 'src/chat/v1/chat.connect.client.dart';
+export 'src/chat/v1/chat.connect.spec.dart';
