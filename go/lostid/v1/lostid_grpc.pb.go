@@ -45,14 +45,27 @@ const (
 // LostIdServiceClient is the client API for LostIdService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// LostIdService manages lost and found identification documents.
+// All RPCs require authentication via Bearer token.
 type LostIdServiceClient interface {
-	// Log a new Collectible request
+	// Collectible registers a found identification document.
+	// Supports up to 5 images of the found item.
 	Collectible(ctx context.Context, in *CollectibleRequest, opts ...grpc.CallOption) (*CollectibleResponse, error)
+	// ListCollectible retrieves registered collectibles.
+	// Supports pagination or time-based filtering.
 	ListCollectible(ctx context.Context, in *ListCollectibleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListCollectibleResponse], error)
-	// Log a new search request
+	// Search creates a search request for a lost item.
+	// The system will attempt to match with registered collectibles.
 	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
+	// ListSearch retrieves search requests.
+	// Supports pagination or time-based filtering.
 	ListSearch(ctx context.Context, in *ListSearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListSearchResponse], error)
+	// Progress retrieves the complete history for a collectible or search.
+	// Includes status updates and financial transactions.
 	Progress(ctx context.Context, in *ProgressRequest, opts ...grpc.CallOption) (*ProgressResponse, error)
+	// ListTransaction retrieves financial transactions.
+	// Includes rewards paid and service fees charged.
 	ListTransaction(ctx context.Context, in *ListTransactionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListTransactionResponse], error)
 }
 
@@ -154,14 +167,27 @@ type LostIdService_ListTransactionClient = grpc.ServerStreamingClient[ListTransa
 // LostIdServiceServer is the server API for LostIdService service.
 // All implementations must embed UnimplementedLostIdServiceServer
 // for forward compatibility.
+//
+// LostIdService manages lost and found identification documents.
+// All RPCs require authentication via Bearer token.
 type LostIdServiceServer interface {
-	// Log a new Collectible request
+	// Collectible registers a found identification document.
+	// Supports up to 5 images of the found item.
 	Collectible(context.Context, *CollectibleRequest) (*CollectibleResponse, error)
+	// ListCollectible retrieves registered collectibles.
+	// Supports pagination or time-based filtering.
 	ListCollectible(*ListCollectibleRequest, grpc.ServerStreamingServer[ListCollectibleResponse]) error
-	// Log a new search request
+	// Search creates a search request for a lost item.
+	// The system will attempt to match with registered collectibles.
 	Search(context.Context, *v1.SearchRequest) (*SearchResponse, error)
+	// ListSearch retrieves search requests.
+	// Supports pagination or time-based filtering.
 	ListSearch(*ListSearchRequest, grpc.ServerStreamingServer[ListSearchResponse]) error
+	// Progress retrieves the complete history for a collectible or search.
+	// Includes status updates and financial transactions.
 	Progress(context.Context, *ProgressRequest) (*ProgressResponse, error)
+	// ListTransaction retrieves financial transactions.
+	// Includes rewards paid and service fees charged.
 	ListTransaction(*ListTransactionRequest, grpc.ServerStreamingServer[ListTransactionResponse]) error
 	mustEmbedUnimplementedLostIdServiceServer()
 }

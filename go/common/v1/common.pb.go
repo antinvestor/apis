@@ -22,6 +22,7 @@ package commonv1
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
+	_ "github.com/google/gnostic/openapiv3"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -37,16 +38,18 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// STATE represents the lifecycle state of an entity across all services.
+// This enum provides a consistent way to track entity states from creation to deletion.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 type STATE int32
 
 const (
 	// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-	STATE_CREATED  STATE = 0
-	STATE_CHECKED  STATE = 1
-	STATE_ACTIVE   STATE = 2
-	STATE_INACTIVE STATE = 3
-	STATE_DELETED  STATE = 4
+	STATE_CREATED  STATE = 0 // Entity has been created but not yet verified or activated
+	STATE_CHECKED  STATE = 1 // Entity has been verified and is pending activation
+	STATE_ACTIVE   STATE = 2 // Entity is active and operational
+	STATE_INACTIVE STATE = 3 // Entity is temporarily inactive but can be reactivated
+	STATE_DELETED  STATE = 4 // Entity has been soft-deleted and should not be used
 )
 
 // Enum value maps for STATE.
@@ -94,16 +97,18 @@ func (STATE) EnumDescriptor() ([]byte, []int) {
 	return file_common_v1_common_proto_rawDescGZIP(), []int{0}
 }
 
+// STATUS represents the processing status of an operation or task.
+// This enum is used for tracking asynchronous operations, jobs, and workflows.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 type STATUS int32
 
 const (
 	// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-	STATUS_UNKNOWN    STATUS = 0
-	STATUS_QUEUED     STATUS = 1
-	STATUS_IN_PROCESS STATUS = 2
-	STATUS_FAILED     STATUS = 3
-	STATUS_SUCCESSFUL STATUS = 4
+	STATUS_UNKNOWN    STATUS = 0 // Status is unknown or not yet determined
+	STATUS_QUEUED     STATUS = 1 // Operation is queued and waiting to be processed
+	STATUS_IN_PROCESS STATUS = 2 // Operation is currently being processed
+	STATUS_FAILED     STATUS = 3 // Operation has failed and will not complete successfully
+	STATUS_SUCCESSFUL STATUS = 4 // Operation has completed successfully
 )
 
 // Enum value maps for STATUS.
@@ -151,12 +156,14 @@ func (STATUS) EnumDescriptor() ([]byte, []int) {
 	return file_common_v1_common_proto_rawDescGZIP(), []int{1}
 }
 
+// Pagination provides standard offset-based pagination parameters.
+// Used for list operations that return large result sets.
 type Pagination struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Count         int32                  `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	StartDate     string                 `protobuf:"bytes,3,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
-	EndDate       string                 `protobuf:"bytes,4,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	Count         int32                  `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`                         // Number of items per page (limit)
+	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`                           // Page number (0-indexed or 1-indexed depending on service)
+	StartDate     string                 `protobuf:"bytes,3,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"` // Optional: Filter results from this date (RFC3339 format)
+	EndDate       string                 `protobuf:"bytes,4,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`       // Optional: Filter results until this date (RFC3339 format)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -219,13 +226,15 @@ func (x *Pagination) GetEndDate() string {
 	return ""
 }
 
+// SearchRequest provides a standard structure for search operations across services.
+// Supports text search, ID-based queries, pagination, property filtering, and extensibility.
 type SearchRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
-	IdQuery       string                 `protobuf:"bytes,2,opt,name=id_query,json=idQuery,proto3" json:"id_query,omitempty"`
-	Limits        *Pagination            `protobuf:"bytes,3,opt,name=limits,proto3" json:"limits,omitempty"`
-	Properties    []string               `protobuf:"bytes,7,rep,name=properties,proto3" json:"properties,omitempty"`
-	Extras        *structpb.Struct       `protobuf:"bytes,8,opt,name=extras,proto3" json:"extras,omitempty"`
+	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`                    // Full-text search query string
+	IdQuery       string                 `protobuf:"bytes,2,opt,name=id_query,json=idQuery,proto3" json:"id_query,omitempty"` // Specific ID or ID pattern to search for
+	Limits        *Pagination            `protobuf:"bytes,3,opt,name=limits,proto3" json:"limits,omitempty"`                  // Pagination parameters
+	Properties    []string               `protobuf:"bytes,7,rep,name=properties,proto3" json:"properties,omitempty"`          // Specific properties/fields to include in results
+	Extras        *structpb.Struct       `protobuf:"bytes,8,opt,name=extras,proto3" json:"extras,omitempty"`                  // Service-specific additional search parameters
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -295,10 +304,11 @@ func (x *SearchRequest) GetExtras() *structpb.Struct {
 	return nil
 }
 
+// StatusRequest retrieves the current status of an entity or operation.
 type StatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Extras        *structpb.Struct       `protobuf:"bytes,2,opt,name=extras,proto3" json:"extras,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`         // Unique identifier of the entity or operation
+	Extras        *structpb.Struct       `protobuf:"bytes,2,opt,name=extras,proto3" json:"extras,omitempty"` // Additional context or parameters
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -347,14 +357,15 @@ func (x *StatusRequest) GetExtras() *structpb.Struct {
 	return nil
 }
 
+// StatusResponse returns the current state and status of an entity or operation.
 type StatusResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	State         STATE                  `protobuf:"varint,2,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
-	Status        STATUS                 `protobuf:"varint,3,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`
-	ExternalId    string                 `protobuf:"bytes,4,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	TransientId   string                 `protobuf:"bytes,5,opt,name=transient_id,json=transientId,proto3" json:"transient_id,omitempty"`
-	Extras        *structpb.Struct       `protobuf:"bytes,6,opt,name=extras,proto3" json:"extras,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                      // Unique identifier of the entity or operation
+	State         STATE                  `protobuf:"varint,2,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`          // Current lifecycle state
+	Status        STATUS                 `protobuf:"varint,3,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`       // Current processing status
+	ExternalId    string                 `protobuf:"bytes,4,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`    // External system identifier (if applicable)
+	TransientId   string                 `protobuf:"bytes,5,opt,name=transient_id,json=transientId,proto3" json:"transient_id,omitempty"` // Temporary identifier for tracking (e.g., session ID)
+	Extras        *structpb.Struct       `protobuf:"bytes,6,opt,name=extras,proto3" json:"extras,omitempty"`                              // Additional status information
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -431,13 +442,15 @@ func (x *StatusResponse) GetExtras() *structpb.Struct {
 	return nil
 }
 
+// StatusUpdateRequest updates the state and/or status of an entity or operation.
+// Used for state transitions and status updates by authorized services.
 type StatusUpdateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	State         STATE                  `protobuf:"varint,2,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`
-	Status        STATUS                 `protobuf:"varint,3,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`
-	ExternalId    string                 `protobuf:"bytes,4,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	Extras        *structpb.Struct       `protobuf:"bytes,5,opt,name=extras,proto3" json:"extras,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                   // Unique identifier of the entity or operation
+	State         STATE                  `protobuf:"varint,2,opt,name=state,proto3,enum=common.v1.STATE" json:"state,omitempty"`       // New lifecycle state (if changing)
+	Status        STATUS                 `protobuf:"varint,3,opt,name=status,proto3,enum=common.v1.STATUS" json:"status,omitempty"`    // New processing status (if changing)
+	ExternalId    string                 `protobuf:"bytes,4,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"` // External system identifier to associate
+	Extras        *structpb.Struct       `protobuf:"bytes,5,opt,name=extras,proto3" json:"extras,omitempty"`                           // Additional update parameters
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -507,9 +520,10 @@ func (x *StatusUpdateRequest) GetExtras() *structpb.Struct {
 	return nil
 }
 
+// StatusUpdateResponse returns the updated status after a status update operation.
 type StatusUpdateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *StatusResponse        `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Data          *StatusResponse        `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"` // Updated status information
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -551,15 +565,18 @@ func (x *StatusUpdateResponse) GetData() *StatusResponse {
 	return nil
 }
 
+// ContactLink represents a link between a contact and a profile in the system.
+// Used for associating external contacts with internal profiles across services.
+// This enables unified identity management and contact resolution.
 type ContactLink struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	ProfileName    string                 `protobuf:"bytes,1,opt,name=profile_name,json=profileName,proto3" json:"profile_name,omitempty"`
-	ProfileType    string                 `protobuf:"bytes,2,opt,name=profile_type,json=profileType,proto3" json:"profile_type,omitempty"`
-	ProfileId      string                 `protobuf:"bytes,3,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`
-	ProfileImageId string                 `protobuf:"bytes,4,opt,name=profile_image_id,json=profileImageId,proto3" json:"profile_image_id,omitempty"`
-	ContactId      string                 `protobuf:"bytes,8,opt,name=contact_id,json=contactId,proto3" json:"contact_id,omitempty"`
-	Detail         string                 `protobuf:"bytes,9,opt,name=detail,proto3" json:"detail,omitempty"`
-	Extras         *structpb.Struct       `protobuf:"bytes,10,opt,name=extras,proto3" json:"extras,omitempty"`
+	ProfileName    string                 `protobuf:"bytes,1,opt,name=profile_name,json=profileName,proto3" json:"profile_name,omitempty"`            // Display name of the profile
+	ProfileType    string                 `protobuf:"bytes,2,opt,name=profile_type,json=profileType,proto3" json:"profile_type,omitempty"`            // Type of profile (e.g., "user", "organization", "service")
+	ProfileId      string                 `protobuf:"bytes,3,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`                  // Unique identifier of the profile
+	ProfileImageId string                 `protobuf:"bytes,4,opt,name=profile_image_id,json=profileImageId,proto3" json:"profile_image_id,omitempty"` // Identifier of the profile's image/avatar
+	ContactId      string                 `protobuf:"bytes,8,opt,name=contact_id,json=contactId,proto3" json:"contact_id,omitempty"`                  // Unique identifier of the contact
+	Detail         string                 `protobuf:"bytes,9,opt,name=detail,proto3" json:"detail,omitempty"`                                         // Additional contact details (e.g., email, phone, handle)
+	Extras         *structpb.Struct       `protobuf:"bytes,10,opt,name=extras,proto3" json:"extras,omitempty"`                                        // Extended metadata for the contact link
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -647,7 +664,7 @@ var File_common_v1_common_proto protoreflect.FileDescriptor
 
 const file_common_v1_common_proto_rawDesc = "" +
 	"\n" +
-	"\x16common/v1/common.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/protobuf/struct.proto\"p\n" +
+	"\x16common/v1/common.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a$gnostic/openapi/v3/annotations.proto\"p\n" +
 	"\n" +
 	"Pagination\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x05R\x05count\x12\x12\n" +
@@ -710,8 +727,11 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\n" +
 	"\x06FAILED\x10\x03\x12\x0e\n" +
 	"\n" +
-	"SUCCESSFUL\x10\x04B\xaf\x01\n" +
-	"\x1ecom.antinvestor.apis.common.v1B\vCommonProtoP\x01Z8github.com/antinvestor/apis/go/common/common/v1;commonv1\xf8\x01\x01\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
+	"SUCCESSFUL\x10\x04B\xba\x05\xbaG\x8e\x04\x12\x8b\x04\n" +
+	"\fCommon Types\x12\xd8\x02The Common Types library provides shared data structures, enumerations, and utility messages used across all Ant Investor API services. This includes standard state and status enums, pagination helpers, search request patterns, and contact linking structures. These types ensure consistency and interoperability across the entire API ecosystem.\"M\n" +
+	"\x10Ant Investor Ltd\x12#https://github.com/antinvestor/apis\x1a\x14info@antinvestor.com*I\n" +
+	"\x0eApache License\x127https://github.com/antinvestor/apis/blob/master/LICENSE2\x06v1.0.0\n" +
+	"\x1ecom.antinvestor.apis.common.v1B\vCommonProtoP\x01Z1github.com/antinvestor/apis/go/common/v1;commonv1\xf8\x01\x01\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
 	"Common::V1b\x06proto3"
 
 var (

@@ -1,0 +1,359 @@
+openapi: 3.1.0
+info:
+  title: OCR Service
+  description: The OCR (Optical Character Recognition) Service provides text extraction capabilities from images and documents. It supports multiple languages, various file formats (PDF, images), and both synchronous and asynchronous processing modes. The service is optimized for document processing workflows including invoice parsing, ID verification, and document digitization.
+  contact:
+    name: Ant Investor Ltd
+    url: https://github.com/antinvestor/service-ocr
+    email: info@antinvestor.com
+  license:
+    name: Apache License
+    url: https://github.com/antinvestor/apis/blob/master/LICENSE
+  version: v1.0.0
+paths:
+  /ocr.v1.OCRService/Recognize:
+    post:
+      tags:
+        - OCR
+        - ocr.v1.OCRService
+      summary: Perform OCR on files
+      description: Performs optical character recognition on one or more files (images or PDFs). Supports both synchronous processing (returns immediately with results) and asynchronous processing (queues for background processing). Batch processing supports up to 5 files per request.
+      operationId: recognizeText
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ocr.v1.RecognizeRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ocr.v1.RecognizeResponse'
+  /ocr.v1.OCRService/Status:
+    post:
+      tags:
+        - OCR
+        - ocr.v1.OCRService
+      summary: Get OCR request status
+      description: Retrieves the current status of an asynchronous OCR request. Returns processing status (queued, in-process, successful, failed) and extracted text if processing is complete.
+      operationId: getOCRStatus
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/common.v1.StatusRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ocr.v1.StatusResponse'
+components:
+  schemas:
+    common.v1.STATUS:
+      type: string
+      title: STATUS
+      enum:
+        - UNKNOWN
+        - QUEUED
+        - IN_PROCESS
+        - FAILED
+        - SUCCESSFUL
+      description: |-
+        STATUS represents the processing status of an operation or task.
+         This enum is used for tracking asynchronous operations, jobs, and workflows.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    common.v1.StatusRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique identifier of the entity or operation
+        extras:
+          title: extras
+          description: Additional context or parameters
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: StatusRequest
+      additionalProperties: false
+      description: StatusRequest retrieves the current status of an entity or operation.
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    google.protobuf.ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          title: values
+          description: Repeated field of dynamically typed values.
+      title: ListValue
+      additionalProperties: false
+      description: |-
+        `ListValue` is a wrapper around a repeated field of values.
+
+         The JSON representation for `ListValue` is JSON array.
+    google.protobuf.NullValue:
+      type: string
+      title: NullValue
+      enum:
+        - NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+         `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+    google.protobuf.Struct:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/google.protobuf.Value'
+      description: |-
+        `Struct` represents a structured data value, consisting of fields
+         which map to dynamically typed values. In some languages, `Struct`
+         might be supported by a native representation. For example, in
+         scripting languages like JS a struct is represented as an
+         object. The details of that representation are described together
+         with the proto support for the language.
+
+         The JSON representation for `Struct` is JSON object.
+    google.protobuf.Struct.FieldsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          title: value
+          $ref: '#/components/schemas/google.protobuf.Value'
+      title: FieldsEntry
+      additionalProperties: false
+    google.protobuf.Value:
+      oneOf:
+        - type: "null"
+        - type: number
+        - type: string
+        - type: boolean
+        - type: array
+        - type: object
+          additionalProperties: true
+      description: |-
+        `Value` represents a dynamically typed value which can be either
+         null, a number, a string, a boolean, a recursive struct value, or a
+         list of values. A producer of value is expected to set one of these
+         variants. Absence of any variant indicates an error.
+
+         The JSON representation for `Value` is JSON value.
+    ocr.v1.OCRFile:
+      type: object
+      properties:
+        fileId:
+          type: string
+          title: file_id
+          description: Unique identifier of the processed file
+        language:
+          type: string
+          title: language
+          description: Detected or specified language code (ISO 639-1)
+        status:
+          title: status
+          description: Processing status (QUEUED, IN_PROCESS, SUCCESSFUL, FAILED)
+          $ref: '#/components/schemas/common.v1.STATUS'
+        text:
+          type: string
+          title: text
+          description: Extracted text content
+        properties:
+          title: properties
+          description: Additional metadata (confidence scores, bounding boxes, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: OCRFile
+      additionalProperties: false
+      description: OCRFile represents the result of OCR processing for a single file.
+    ocr.v1.RecognizeRequest:
+      type: object
+      properties:
+        referenceId:
+          type: string
+          title: reference_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Client-provided reference ID for tracking
+        languageId:
+          type: string
+          title: language_id
+          maxLength: 3
+          minLength: 2
+          pattern: '[a-z]{2,3}'
+          description: Expected language code (e.g., "en", "es", "fr") for improved accuracy
+        properties:
+          title: properties
+          description: Processing options (DPI, preprocessing, output format)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        async:
+          type: boolean
+          title: async
+          description: If true, process asynchronously and return immediately
+        fileId:
+          type: array
+          items:
+            type: string
+            maxLength: 40
+            minLength: 3
+            pattern: '[0-9a-z_-]{3,20}'
+            maxItems: 5
+            minItems: 1
+          title: file_id
+          maxItems: 5
+          minItems: 1
+          description: List of file IDs to process (1-5 files per request)
+      title: RecognizeRequest
+      additionalProperties: false
+      description: |-
+        RecognizeRequest initiates OCR processing for one or more files.
+         Supports both synchronous and asynchronous processing modes.
+    ocr.v1.RecognizeResponse:
+      type: object
+      properties:
+        referenceId:
+          type: string
+          title: reference_id
+          description: Reference ID from the request
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/ocr.v1.OCRFile'
+          title: result
+          description: OCR results for each processed file
+      title: RecognizeResponse
+      additionalProperties: false
+      description: RecognizeResponse returns OCR results for the requested files.
+    ocr.v1.StatusResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: Current OCR results and status
+          $ref: '#/components/schemas/ocr.v1.RecognizeResponse'
+      title: StatusResponse
+      additionalProperties: false
+      description: StatusResponse returns the status of an async OCR request.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security: []
+tags:
+  - name: ocr.v1.OCRService
+    description: |-
+      OCRService provides optical character recognition capabilities.
+       All RPCs require authentication via Bearer token.

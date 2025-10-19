@@ -16,250 +16,329 @@ syntax = "proto3";
 
 package payment.v1;
 
+// -----------------------------------------------------
+// Core notes (normative):
+// - Payment Service handles payment processing and reconciliation
+// - Supports both inbound and outbound payments
+// - Multiple payment routes (mobile money, bank transfer, cards)
+// - Payment links for customer-initiated payments
+// - Queue-and-release pattern for batch processing
+// - All monetary amounts use google.type.Money for currency safety
+// -----------------------------------------------------
+
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
-import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/type/money.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/payment/v1;paymentv1";
 option java_multiple_files = true;
 option java_package = "paymentv1";
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+
+option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Payment Service"
-    version: "1.0"
+    title: "Payment Service";
+    version: "v1.0.0";
+    description: "The Payment Service provides comprehensive payment processing capabilities including inbound and outbound payments, payment link generation, reconciliation, and multi-channel payment routing. It supports various payment methods (mobile money, bank transfers, cards) and follows a queue-and-release pattern for batch processing. The service handles payment lifecycle management from initiation through completion with full audit trails.";
     contact: {
-      name: "Ant Investor Ltd"
-      url: "https://github.com/antinvestor/service-lostid"
-      email: "info@antinvestor.com"
+      name: "Ant Investor Ltd";
+      url: "https://github.com/antinvestor/service-payment";
+      email: "info@antinvestor.com";
+    }
+    license: {
+      name: "Apache License";
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
     }
   }
-
-  schemes: HTTP
-  schemes: HTTPS
-  consumes: "application/json"
-  produces: "application/json"
-
-  security_definitions: {
-    security: {
-      key: "bearer"
-      value: {
-        type: TYPE_API_KEY
-        in: IN_HEADER
-        name: "Authorization"
-        description: "Authentication token, prefixed by Bearer: Bearer <token>"
-      }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BearerAuth";
+          value: {
+            security_scheme: {
+              type: "http";
+              scheme: "bearer";
+              bearer_format: "JWT";
+            }
+          }
+        }
+      ]
     }
-  }
-  security: {
-    security_requirement: {key: "bearer"}
   }
 };
 
-message Payment {
-  string id = 1;
-  string transaction_id = 2;
-  string reference_id = 3;
-  string batch_id = 4;
-  string external_transaction_id = 5;
-  string route = 6;
-  common.v1.ContactLink source = 7;
-  common.v1.ContactLink recipient = 8;
-  google.type.Money amount = 9;
-  google.type.Money cost = 10;
-  common.v1.STATE state = 11;
-  common.v1.STATUS status = 12;
-  string date_created = 13;
-  string date_processed = 14;
-  bool outbound = 15;
-  google.protobuf.Struct extra = 16;
-}
+// -----------------------------------------------------
+// Enumerations
+// -----------------------------------------------------
 
-message ReconcileRequest {
-  string external_transaction_id = 1;
-  string route = 2;
-  bool outbound = 3;
-  google.type.Money amount = 4;
-  string owner = 5;
-  string country_code = 6;
-}
-
-message ReconcileResponse {
-  string id = 1;
-  string transaction_id = 2;
-  string reference_id = 3;
-  common.v1.STATUS status = 4;
-  string description = 5;
-}
-
-message SearchResponse {
-  repeated Payment data = 1;
-}
-
-message SendRequest {
-  Payment data = 1;
-}
-
-message SendResponse {
-  common.v1.StatusResponse data = 1;
-}
-
-message ReceiveRequest {
-  Payment data = 1;
-}
-
-message ReceiveResponse {
-  common.v1.StatusResponse data = 1;
-}
-
-message Account {
-  // Account to be credited once customers make payments
-  string account_number = 1;
-  string country_code = 2;
-  string name = 3;
-}
-
-message InitiatePromptRequest {
-  common.v1.ContactLink source = 1;
-  common.v1.ContactLink recipient = 2;
-  google.type.Money amount = 3;
-  string date_created = 4;
-  string device_id = 5;
-  string id = 6;
-  common.v1.STATE state = 7;
-  common.v1.STATUS status = 8;
-  // Optional route/hint for processing (e.g., "M-PESA", "RTGS", "INTERNAL")
-  string route = 9;
-  // Merchant information for the payment
-  Account recipient_account = 10;
-  // Any additional metadata (e.g., notes, tags, correlation keys)
-  google.protobuf.Struct extra = 11;
-}
-
-message InitiatePromptResponse {
-  common.v1.StatusResponse data = 1;
-}
-
-message ReleaseRequest {
-  string id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string comment = 2;
-}
-
-message ReleaseResponse {
-  common.v1.StatusResponse data = 1;
-}
-
-// --- Payment Link Creation ---
-
+// NotificationType defines how customers are notified about payment links.
 enum NotificationType {
-  NOTIFICATION_TYPE_UNSPECIFIED = 0;
-  NOTIFICATION_TYPE_EMAIL = 1;
-  NOTIFICATION_TYPE_SMS = 2;
+  NOTIFICATION_TYPE_UNSPECIFIED = 0;  // No notification preference specified
+  NOTIFICATION_TYPE_EMAIL = 1;        // Send payment link via email
+  NOTIFICATION_TYPE_SMS = 2;          // Send payment link via SMS
 }
 
+// -----------------------------------------------------
+// Core Data Types
+// -----------------------------------------------------
+
+// Payment represents a payment transaction.
+message Payment {
+  string id = 1;                          // Unique payment ID
+  string transaction_id = 2;              // Associated transaction ID (ledger)
+  string reference_id = 3;                // External reference (invoice, order)
+  string batch_id = 4;                    // Batch ID for grouped payments
+  string external_transaction_id = 5;     // Provider's transaction ID (M-PESA, bank)
+  string route = 6;                       // Payment route (M-PESA, RTGS, CARD, INTERNAL)
+  common.v1.ContactLink source = 7;       // Payment source (payer)
+  common.v1.ContactLink recipient = 8;    // Payment recipient (payee)
+  google.type.Money amount = 9;           // Payment amount
+  google.type.Money cost = 10;            // Transaction cost/fee
+  common.v1.STATE state = 11;             // Processing state
+  common.v1.STATUS status = 12;           // Payment status
+  string date_created = 13;               // Creation timestamp (RFC3339)
+  string date_processed = 14;             // Processing timestamp (RFC3339)
+  bool outbound = 15;                     // True if outbound, false if inbound
+  google.protobuf.Struct extra = 16;      // Additional metadata
+}
+
+// Account represents a merchant or recipient account.
+message Account {
+  string account_number = 1;  // Account number to be credited
+  string country_code = 2;    // Country code (ISO 3166-1 alpha-2)
+  string name = 3;            // Account holder name
+}
+
+// Customer represents a payment link customer.
 message Customer {
-  common.v1.ContactLink source = 1;
-  string first_address = 2;
-  string country_code = 3;
-  string postal_or_zip_code = 4;
-  string customer_external_ref = 5;
+  common.v1.ContactLink source = 1;  // Customer contact information
+  string first_address = 2;          // Primary address line
+  string country_code = 3;           // Country code (ISO 3166-1 alpha-2)
+  string postal_or_zip_code = 4;     // Postal/ZIP code
+  string customer_external_ref = 5;  // External customer reference
 }
 
+// PaymentLink represents a shareable payment link.
 message PaymentLink {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string expiry_date = 2;
-  string sale_date = 3;
-  string payment_link_type = 4;
-  string sale_type = 5;
-  string name = 6;
-  string description = 7;
-  string external_ref = 8;
-  string payment_link_ref = 9;
-  string redirect_url = 10;
-  string amount_option = 11;
-  google.type.Money amount = 12;
-  string currency = 13;
+  ];                                  // Unique payment link ID
+  string expiry_date = 2;             // Link expiration date (RFC3339)
+  string sale_date = 3;               // Sale date (RFC3339)
+  string payment_link_type = 4;       // Link type (invoice, donation, subscription)
+  string sale_type = 5;               // Sale type (goods, services)
+  string name = 6;                    // Payment link name/title
+  string description = 7;             // Payment description
+  string external_ref = 8;            // External reference (invoice number)
+  string payment_link_ref = 9;        // Generated payment link reference
+  string redirect_url = 10;           // Post-payment redirect URL
+  string amount_option = 11;          // Amount option (fixed, variable, minimum)
+  google.type.Money amount = 12;      // Payment amount (if fixed)
+  string currency = 13;               // Currency code (ISO 4217)
 }
 
+// -----------------------------------------------------
+// Request/Response Messages
+// -----------------------------------------------------
+
+// SendRequest queues an outbound payment.
+message SendRequest {
+  Payment data = 1;  // Payment to send
+}
+
+// SendResponse confirms payment queuing.
+message SendResponse {
+  common.v1.StatusResponse data = 1;  // Status response
+}
+
+// ReceiveRequest queues an inbound payment.
+message ReceiveRequest {
+  Payment data = 1;  // Payment to receive
+}
+
+// ReceiveResponse confirms payment queuing.
+message ReceiveResponse {
+  common.v1.StatusResponse data = 1;  // Status response
+}
+
+// InitiatePromptRequest initiates a payment prompt (e.g., STK push).
+message InitiatePromptRequest {
+  common.v1.ContactLink source = 1;   // Payment source
+  common.v1.ContactLink recipient = 2; // Payment recipient
+  google.type.Money amount = 3;        // Payment amount
+  string date_created = 4;             // Creation timestamp (RFC3339)
+  string device_id = 5;                // Device ID for prompt
+  string id = 6;                       // Payment ID
+  common.v1.STATE state = 7;           // Processing state
+  common.v1.STATUS status = 8;         // Payment status
+  string route = 9;                    // Payment route hint (M-PESA, RTGS, INTERNAL)
+  Account recipient_account = 10;      // Merchant account information
+  google.protobuf.Struct extra = 11;   // Additional metadata
+}
+
+// InitiatePromptResponse confirms prompt initiation.
+message InitiatePromptResponse {
+  common.v1.StatusResponse data = 1;  // Status response
+}
+
+// ReleaseRequest releases a queued payment for processing.
+message ReleaseRequest {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];                  // Payment ID to release
+  string comment = 2; // Release comment/reason
+}
+
+// ReleaseResponse confirms payment release.
+message ReleaseResponse {
+  common.v1.StatusResponse data = 1;  // Status response
+}
+
+// ReconcileRequest reconciles an external transaction.
+message ReconcileRequest {
+  string external_transaction_id = 1;  // Provider's transaction ID
+  string route = 2;                    // Payment route
+  bool outbound = 3;                   // Payment direction
+  google.type.Money amount = 4;        // Transaction amount
+  string owner = 5;                    // Account owner
+  string country_code = 6;             // Country code (ISO 3166-1 alpha-2)
+}
+
+// ReconcileResponse returns reconciliation result.
+message ReconcileResponse {
+  string id = 1;                  // Internal payment ID
+  string transaction_id = 2;      // Transaction ID
+  string reference_id = 3;        // Reference ID
+  common.v1.STATUS status = 4;    // Reconciliation status
+  string description = 5;         // Status description
+}
+
+// SearchResponse returns payment search results.
+message SearchResponse {
+  repeated Payment data = 1;  // List of matching payments
+}
+
+// CreatePaymentLinkRequest creates a new payment link.
 message CreatePaymentLinkRequest {
-  repeated Customer customers = 1;
-  PaymentLink payment_link = 2;
-  repeated NotificationType notifications = 3;
+  repeated Customer customers = 1;              // Customers to notify
+  PaymentLink payment_link = 2;                 // Payment link details
+  repeated NotificationType notifications = 3;  // Notification methods
 }
+
+// CreatePaymentLinkResponse returns the created payment link.
 message CreatePaymentLinkResponse {
-  common.v1.StatusResponse data = 1;
+  common.v1.StatusResponse data = 1;  // Status response with link
 }
 
+// -----------------------------------------------------
+// Payment Service
+// -----------------------------------------------------
+
+// PaymentService handles payment processing and reconciliation.
+// All RPCs require authentication via Bearer token.
 service PaymentService {
-  //Send method for queueing outbound payments as requested
+  // Send queues an outbound payment for processing.
+  // Payments are queued and require Release to process.
   rpc Send(SendRequest) returns (SendResponse) {
-    option (google.api.http) = {
-      post: "/send"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "sendPayment"
+      summary: "Queue outbound payment"
+      description: "Queues an outbound payment for processing. The payment is validated and queued but not processed until explicitly released via the Release RPC. Supports multiple payment routes including mobile money, bank transfers, and cards."
+      tags: "Payments"
     };
   }
 
-  //Send method for queueing inbound payments as requested
+  // Receive queues an inbound payment for processing.
+  // Used for recording expected incoming payments.
   rpc Receive(ReceiveRequest) returns (ReceiveResponse) {
-    option (google.api.http) = {
-      post: "/receive"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "receivePayment"
+      summary: "Queue inbound payment"
+      description: "Queues an inbound payment for processing. Used to record expected incoming payments and match them with actual receipts during reconciliation."
+      tags: "Payments"
     };
   }
 
-  //Initiate method for initiating payments as requested
+  // InitiatePrompt initiates a payment prompt to the customer.
+  // Triggers payment prompts like M-PESA STK push.
   rpc InitiatePrompt(InitiatePromptRequest) returns (InitiatePromptResponse) {
-    option (google.api.http) = {
-      post: "/initiate/prompt"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "initiatePaymentPrompt"
+      summary: "Initiate payment prompt"
+      description: "Initiates a payment prompt to the customer's device. For mobile money (e.g., M-PESA), this triggers an STK push prompt. For other methods, it may send a payment request notification."
+      tags: "Payments"
     };
   }
 
-  //createPaymentLink method for creating payment links as requested
+  // CreatePaymentLink generates a shareable payment link.
+  // Customers can use the link to make payments via web interface.
   rpc CreatePaymentLink(CreatePaymentLinkRequest) returns (CreatePaymentLinkResponse) {
-    option (google.api.http) = {
-      post: "/create-payment-link"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createPaymentLink"
+      summary: "Create payment link"
+      description: "Creates a shareable payment link for customer-initiated payments. Supports fixed or variable amounts, expiration dates, and multiple notification methods (email, SMS). Useful for invoices, donations, and subscriptions."
+      tags: "Payment Links"
     };
   }
 
-  //Status request to determine if payment is prepared or released
+  // Status retrieves the current status of a payment.
+  // Returns processing state and status details.
   rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse) {
-    option (google.api.http) = {get: "/status/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getPaymentStatus"
+      summary: "Get payment status"
+      description: "Retrieves the current status of a payment including processing state (queued, processing, completed, failed) and detailed status information."
+      tags: "Payments"
+    };
   }
 
-  //Status update request to allow continuation of payment processing
+  // StatusUpdate updates the status of a payment.
+  // Used for manual status corrections or workflow progression.
   rpc StatusUpdate(common.v1.StatusUpdateRequest) returns (common.v1.StatusUpdateResponse) {
-    option (google.api.http) = {
-      put: "/status/{id}"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "updatePaymentStatus"
+      summary: "Update payment status"
+      description: "Updates the status of a payment. Used for manual status corrections, workflow progression, or handling exceptional cases that require manual intervention."
+      tags: "Payments"
     };
   }
 
-  //Release method for releasing queued payments and returns if status is not released
+  // Release releases a queued payment for processing.
+  // Queued payments must be released to initiate actual transfer.
   rpc Release(ReleaseRequest) returns (ReleaseResponse) {
-    option (google.api.http) = {
-      post: "/send/release/{id}"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "releasePayment"
+      summary: "Release queued payment"
+      description: "Releases a queued payment for processing. This triggers the actual payment transfer through the specified route. Supports batch processing by releasing multiple payments together."
+      tags: "Payments"
     };
   }
 
-  //Search method is for client request look for payments matching supplied details from the system
+  // Search finds payments matching specified criteria.
+  // Supports filtering by date, amount, status, route, and more.
   rpc Search(common.v1.SearchRequest) returns (stream SearchResponse) {
-    option (google.api.http) = {get: "/search"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchPayments"
+      summary: "Search payments"
+      description: "Searches for payments matching specified criteria. Supports filtering by date range, amount, status, route, source, recipient, and custom properties. Returns a stream of matching payments."
+      tags: "Payments"
+    };
   }
 
+  // Reconcile matches external transactions with internal payments.
+  // Used for payment reconciliation with provider statements.
   rpc Reconcile(ReconcileRequest) returns (ReconcileResponse) {
-    option (google.api.http) = {get: "/reconcile"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "reconcilePayment"
+      summary: "Reconcile external transaction"
+      description: "Reconciles an external transaction (from mobile money provider, bank statement) with internal payment records. Matches based on external transaction ID, amount, and route."
+      tags: "Reconciliation"
+    };
   }
 }

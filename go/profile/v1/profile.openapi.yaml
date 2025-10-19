@@ -1,0 +1,1521 @@
+openapi: 3.1.0
+info:
+  title: Profile Service
+  description: The Profile Service manages user and entity profiles including persons, institutions, and bots. It provides comprehensive profile management with contact verification (email, phone), roster management for user contact lists, relationship tracking between profiles, and address management with geocoding support. The service supports profile merging, communication preferences, and hierarchical relationships.
+  contact:
+    name: Ant Investor Ltd
+    url: https://github.com/antinvestor/service-profile
+    email: info@antinvestor.com
+  license:
+    name: Apache License
+    url: https://github.com/antinvestor/apis/blob/master/LICENSE
+  version: v1.0.0
+paths:
+  /profile.v1.ProfileService/AddAddress:
+    post:
+      tags:
+        - Addresses
+        - profile.v1.ProfileService
+      summary: Add address
+      description: Adds a new physical address to a profile with optional geocoding (latitude/longitude).
+      operationId: addAddress
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.AddAddressRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.AddAddressResponse'
+  /profile.v1.ProfileService/AddContact:
+    post:
+      tags:
+        - Contacts
+        - profile.v1.ProfileService
+      summary: Add contact to profile
+      description: Adds a new contact (email or phone) to a profile and initiates automatic verification. Returns the updated profile and verification ID.
+      operationId: addContact
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.AddContactRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.AddContactResponse'
+  /profile.v1.ProfileService/AddRelationship:
+    post:
+      tags:
+        - Relationships
+        - profile.v1.ProfileService
+      summary: Add relationship
+      description: Creates a relationship between two profiles (member, affiliated, blacklisted). Supports hierarchical relationships.
+      operationId: addRelationship
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.AddRelationshipRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.AddRelationshipResponse'
+  /profile.v1.ProfileService/AddRoster:
+    post:
+      tags:
+        - Roster
+        - profile.v1.ProfileService
+      summary: Add roster entries
+      description: Adds multiple contacts to a user's roster (contact list). Each contact is verified automatically.
+      operationId: addRoster
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.AddRosterRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.AddRosterResponse'
+  /profile.v1.ProfileService/CheckVerification:
+    post:
+      tags:
+        - Contacts
+        - profile.v1.ProfileService
+      summary: Check verification code
+      description: Verifies a contact by checking the provided verification code. Tracks verification attempts and returns success status.
+      operationId: checkVerification
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.CheckVerificationRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.CheckVerificationResponse'
+  /profile.v1.ProfileService/Create:
+    post:
+      tags:
+        - Profiles
+        - profile.v1.ProfileService
+      summary: Create profile
+      description: Creates a new profile with the specified type (person, institution, bot) and initial contact information.
+      operationId: createProfile
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.CreateRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.CreateResponse'
+  /profile.v1.ProfileService/CreateContact:
+    post:
+      tags:
+        - Contacts
+        - profile.v1.ProfileService
+      summary: Create standalone contact
+      description: Creates a standalone contact that can later be linked to a profile. Useful for pre-registration scenarios.
+      operationId: createContact
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.CreateContactRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.CreateContactResponse'
+  /profile.v1.ProfileService/CreateContactVerification:
+    post:
+      tags:
+        - Contacts
+        - profile.v1.ProfileService
+      summary: Create contact verification
+      description: Initiates contact verification by sending a verification code via email or SMS. The code expires after the specified duration.
+      operationId: createContactVerification
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.CreateContactVerificationRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.CreateContactVerificationResponse'
+  /profile.v1.ProfileService/DeleteRelationship:
+    post:
+      tags:
+        - Relationships
+        - profile.v1.ProfileService
+      summary: Delete relationship
+      description: Removes an existing relationship between profiles. The profiles remain but are no longer linked.
+      operationId: deleteRelationship
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.DeleteRelationshipRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.DeleteRelationshipResponse'
+  /profile.v1.ProfileService/GetByContact:
+    post:
+      tags:
+        - Profiles
+        - profile.v1.ProfileService
+      summary: Get profile by contact
+      description: Retrieves a profile associated with a specific contact (email or phone number).
+      operationId: getProfileByContact
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.GetByContactRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.GetByContactResponse'
+  /profile.v1.ProfileService/GetById:
+    post:
+      tags:
+        - Profiles
+        - profile.v1.ProfileService
+      summary: Get profile by ID
+      description: Retrieves a complete profile by its unique identifier including contacts, addresses, and properties.
+      operationId: getProfileById
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.GetByIdRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.GetByIdResponse'
+  /profile.v1.ProfileService/ListRelationship: {}
+  /profile.v1.ProfileService/Merge:
+    post:
+      tags:
+        - Profiles
+        - profile.v1.ProfileService
+      summary: Merge profiles
+      description: Merges two profiles by combining their data. The merge source profile data is incorporated into the target profile.
+      operationId: mergeProfiles
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.MergeRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.MergeResponse'
+  /profile.v1.ProfileService/RemoveContact:
+    post:
+      tags:
+        - Contacts
+        - profile.v1.ProfileService
+      summary: Remove contact
+      description: Removes a contact from a profile. The contact is disassociated but may remain in the system.
+      operationId: removeContact
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.RemoveContactRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.RemoveContactResponse'
+  /profile.v1.ProfileService/RemoveRoster:
+    post:
+      tags:
+        - Roster
+        - profile.v1.ProfileService
+      summary: Remove roster entry
+      description: Removes a contact from a user's roster (contact list). The profile remains but is no longer in the user's contacts.
+      operationId: removeRoster
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.RemoveRosterRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.RemoveRosterResponse'
+  /profile.v1.ProfileService/Search: {}
+  /profile.v1.ProfileService/SearchRoster: {}
+  /profile.v1.ProfileService/Update:
+    post:
+      tags:
+        - Profiles
+        - profile.v1.ProfileService
+      summary: Update profile
+      description: Updates an existing profile's properties and state. Contacts and addresses are managed via separate RPCs.
+      operationId: updateProfile
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile.v1.UpdateRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile.v1.UpdateResponse'
+components:
+  schemas:
+    common.v1.STATE:
+      type: string
+      title: STATE
+      enum:
+        - CREATED
+        - CHECKED
+        - ACTIVE
+        - INACTIVE
+        - DELETED
+      description: |-
+        STATE represents the lifecycle state of an entity across all services.
+         This enum provides a consistent way to track entity states from creation to deletion.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    google.protobuf.ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Value'
+          title: values
+          description: Repeated field of dynamically typed values.
+      title: ListValue
+      additionalProperties: false
+      description: |-
+        `ListValue` is a wrapper around a repeated field of values.
+
+         The JSON representation for `ListValue` is JSON array.
+    google.protobuf.NullValue:
+      type: string
+      title: NullValue
+      enum:
+        - NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+         `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+    google.protobuf.Struct:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/google.protobuf.Value'
+      description: |-
+        `Struct` represents a structured data value, consisting of fields
+         which map to dynamically typed values. In some languages, `Struct`
+         might be supported by a native representation. For example, in
+         scripting languages like JS a struct is represented as an
+         object. The details of that representation are described together
+         with the proto support for the language.
+
+         The JSON representation for `Struct` is JSON object.
+    google.protobuf.Struct.FieldsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          title: value
+          $ref: '#/components/schemas/google.protobuf.Value'
+      title: FieldsEntry
+      additionalProperties: false
+    google.protobuf.Value:
+      oneOf:
+        - type: "null"
+        - type: number
+        - type: string
+        - type: boolean
+        - type: array
+        - type: object
+          additionalProperties: true
+      description: |-
+        `Value` represents a dynamically typed value which can be either
+         null, a number, a string, a boolean, a recursive struct value, or a
+         list of values. A producer of value is expected to set one of these
+         variants. Absence of any variant indicates an error.
+
+         The JSON representation for `Value` is JSON value.
+    profile.v1.AddAddressRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        address:
+          title: address
+          $ref: '#/components/schemas/profile.v1.AddressObject'
+      title: AddAddressRequest
+      additionalProperties: false
+      description: The request message containing the information necessary to create a profile
+    profile.v1.AddAddressResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/profile.v1.ProfileObject'
+      title: AddAddressResponse
+      additionalProperties: false
+    profile.v1.AddContactRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        contact:
+          type: string
+          title: contact
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: AddContactRequest
+      additionalProperties: false
+      description: The request message containing the information necessary to create a profile
+    profile.v1.AddContactResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/profile.v1.ProfileObject'
+        verificationId:
+          type: string
+          title: verification_id
+      title: AddContactResponse
+      additionalProperties: false
+    profile.v1.AddRelationshipRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        parent:
+          type: string
+          title: parent
+          maxLength: 40
+          minLength: 3
+          enum:
+            - Contact
+            - Profile
+            - Group
+        parentId:
+          type: string
+          title: parent_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        child:
+          type: string
+          title: child
+          maxLength: 40
+          minLength: 3
+          enum:
+            - Contact
+            - Profile
+            - Group
+        childId:
+          type: string
+          title: child_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        type:
+          title: type
+          $ref: '#/components/schemas/profile.v1.RelationshipType'
+        properties:
+          title: properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: AddRelationshipRequest
+      additionalProperties: false
+      description: The request message containing the information necessary to create a profile
+    profile.v1.AddRelationshipResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/profile.v1.RelationshipObject'
+      title: AddRelationshipResponse
+      additionalProperties: false
+    profile.v1.AddRosterRequest:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/profile.v1.AddContactRequest'
+          title: data
+      title: AddRosterRequest
+      additionalProperties: false
+    profile.v1.AddRosterResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/profile.v1.RosterObject'
+          title: data
+      title: AddRosterResponse
+      additionalProperties: false
+    profile.v1.AddressObject:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique address ID
+        name:
+          type: string
+          title: name
+          maxLength: 100
+          minLength: 3
+          description: Address name/label (e.g., "Home", "Office")
+        country:
+          type: string
+          title: country
+          description: Country name or code
+        city:
+          type: string
+          title: city
+          description: City name
+        area:
+          type: string
+          title: area
+          description: Area/district/neighborhood
+        street:
+          type: string
+          title: street
+          description: Street name
+        house:
+          type: string
+          title: house
+          description: House/building number
+        postcode:
+          type: string
+          title: postcode
+          description: Postal/ZIP code
+        latitude:
+          type: number
+          title: latitude
+          format: double
+          description: Latitude coordinate
+        longitude:
+          type: number
+          title: longitude
+          format: double
+          description: Longitude coordinate
+        extra:
+          type: string
+          title: extra
+          maxLength: 500
+          minLength: 10
+          description: Additional address details
+      title: AddressObject
+      additionalProperties: false
+      description: AddressObject represents a physical address with geocoding.
+    profile.v1.CheckVerificationRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        code:
+          type: string
+          title: code
+      title: CheckVerificationRequest
+      additionalProperties: false
+    profile.v1.CheckVerificationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+        checkAttempts:
+          type: integer
+          title: check_attempts
+          format: int32
+        success:
+          type: boolean
+          title: success
+      title: CheckVerificationResponse
+      additionalProperties: false
+    profile.v1.CommunicationLevel:
+      type: string
+      title: CommunicationLevel
+      enum:
+        - ALL
+        - INTERNAL_MARKETING
+        - IMPORTANT_ALERTS
+        - SYSTEM_ALERTS
+        - NO_CONTACT
+      description: |-
+        CommunicationLevel defines user's communication preferences.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    profile.v1.ContactObject:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique contact ID
+        type:
+          title: type
+          description: Contact type (email or MSISDN)
+          $ref: '#/components/schemas/profile.v1.ContactType'
+        detail:
+          type: string
+          title: detail
+          description: Contact detail (email address or phone number)
+        verified:
+          type: boolean
+          title: verified
+          description: Whether contact has been verified
+        communicationLevel:
+          title: communication_level
+          description: User's communication preferences
+          $ref: '#/components/schemas/profile.v1.CommunicationLevel'
+        state:
+          title: state
+          description: Contact state
+          $ref: '#/components/schemas/common.v1.STATE'
+        extra:
+          title: extra
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: ContactObject
+      additionalProperties: false
+      description: ContactObject represents a contact method (email or phone).
+    profile.v1.ContactType:
+      type: string
+      title: ContactType
+      enum:
+        - EMAIL
+        - MSISDN
+      description: |-
+        ContactType defines the type of contact information.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    profile.v1.CreateContactRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        contact:
+          type: string
+          title: contact
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CreateContactRequest
+      additionalProperties: false
+      description: The request message containing the information necessary to create a profile
+    profile.v1.CreateContactResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/profile.v1.ContactObject'
+      title: CreateContactResponse
+      additionalProperties: false
+    profile.v1.CreateContactVerificationRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        contactId:
+          type: string
+          title: contact_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        code:
+          type: string
+          title: code
+        durationToExpire:
+          type: string
+          title: durationToExpire
+          description: This is the string amount of time before code expires e.g. 3m or 500s
+      title: CreateContactVerificationRequest
+      additionalProperties: false
+      description: The request message containing the information necessary to verify a contact
+    profile.v1.CreateContactVerificationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        success:
+          type: boolean
+          title: success
+      title: CreateContactVerificationResponse
+      additionalProperties: false
+    profile.v1.CreateRequest:
+      type: object
+      properties:
+        type:
+          title: type
+          $ref: '#/components/schemas/profile.v1.ProfileType'
+        contact:
+          type: string
+          title: contact
+          maxLength: 255
+          minLength: 3
+        properties:
+          title: properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: CreateRequest
+      additionalProperties: false
+      description: The request message containing the information necessary to create a profile
+    profile.v1.CreateResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/profile.v1.ProfileObject'
+      title: CreateResponse
+      additionalProperties: false
+    profile.v1.DeleteRelationshipRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        parentId:
+          type: string
+          title: parent_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+      title: DeleteRelationshipRequest
+      additionalProperties: false
+      description: The request message containing the information necessary to delete relationship to a profile
+    profile.v1.DeleteRelationshipResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/profile.v1.RelationshipObject'
+      title: DeleteRelationshipResponse
+      additionalProperties: false
+    profile.v1.EntryItem:
+      type: object
+      properties:
+        objectName:
+          type: string
+          title: object_name
+          description: Object type (Contact, Profile, Group)
+        objectId:
+          type: string
+          title: object_id
+          description: Object ID
+      title: EntryItem
+      additionalProperties: false
+      description: EntryItem identifies an object in a relationship.
+    profile.v1.GetByContactRequest:
+      type: object
+      properties:
+        contact:
+          type: string
+          title: contact
+      title: GetByContactRequest
+      additionalProperties: false
+      description: Request message containing a contact necessary to link to a profile
+    profile.v1.GetByContactResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/profile.v1.ProfileObject'
+      title: GetByContactResponse
+      additionalProperties: false
+    profile.v1.GetByIdRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+      title: GetByIdRequest
+      additionalProperties: false
+      description: The request message containing the profile's hash
+    profile.v1.GetByIdResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/profile.v1.ProfileObject'
+      title: GetByIdResponse
+      additionalProperties: false
+    profile.v1.ListRelationshipRequest:
+      type: object
+      properties:
+        peerName:
+          type: string
+          title: peer_name
+          maxLength: 40
+          minLength: 3
+          enum:
+            - Contact
+            - Profile
+            - Group
+        peerId:
+          type: string
+          title: peer_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        lastRelationshipId:
+          type: string
+          title: last_relationship_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        relatedChildrenId:
+          type: array
+          items:
+            type: string
+          title: related_children_id
+          description: Related profile ids to specifically search for.
+        count:
+          type: integer
+          title: count
+          format: int32
+        invertRelation:
+          type: boolean
+          title: invert_relation
+      title: ListRelationshipRequest
+      additionalProperties: false
+      description: Request message to list all profiles related to the supplied profile id
+    profile.v1.ListRelationshipResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/profile.v1.RelationshipObject'
+          title: data
+      title: ListRelationshipResponse
+      additionalProperties: false
+    profile.v1.MergeRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        mergeid:
+          type: string
+          title: mergeid
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+      title: MergeRequest
+      additionalProperties: false
+      description: The request message containing the profile's hash
+    profile.v1.MergeResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/profile.v1.ProfileObject'
+      title: MergeResponse
+      additionalProperties: false
+    profile.v1.ProfileObject:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique profile ID
+        type:
+          title: type
+          description: Profile type (person, institution, bot)
+          $ref: '#/components/schemas/profile.v1.ProfileType'
+        properties:
+          title: properties
+          description: Profile properties (name, bio, avatar, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/profile.v1.ContactObject'
+          title: contacts
+          description: Associated contacts
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/profile.v1.AddressObject'
+          title: addresses
+          description: Associated addresses
+        state:
+          title: state
+          description: Profile state
+          $ref: '#/components/schemas/common.v1.STATE'
+      title: ProfileObject
+      additionalProperties: false
+      description: ProfileObject represents a complete user or entity profile.
+    profile.v1.ProfileType:
+      type: string
+      title: ProfileType
+      enum:
+        - PERSON
+        - INSTITUTION
+        - BOT
+      description: |-
+        ProfileType defines the type of profile entity.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    profile.v1.RelationshipObject:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique relationship ID
+        type:
+          title: type
+          description: Relationship type
+          $ref: '#/components/schemas/profile.v1.RelationshipType'
+        properties:
+          title: properties
+          description: Relationship properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        childEntry:
+          title: child_entry
+          description: Child entry in relationship
+          $ref: '#/components/schemas/profile.v1.EntryItem'
+        parentEntry:
+          title: parent_entry
+          description: Parent entry in relationship
+          $ref: '#/components/schemas/profile.v1.EntryItem'
+        peerProfile:
+          title: peer_profile
+          description: Peer profile information
+          $ref: '#/components/schemas/profile.v1.ProfileObject'
+      title: RelationshipObject
+      additionalProperties: false
+      description: RelationshipObject represents a relationship between two profiles.
+    profile.v1.RelationshipType:
+      type: string
+      title: RelationshipType
+      enum:
+        - MEMBER
+        - AFFILIATED
+        - BLACK_LISTED
+      description: |-
+        RelationshipType defines how two profiles are linked.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    profile.v1.RemoveContactRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+      title: RemoveContactRequest
+      additionalProperties: false
+      description: The request message containing the information necessary to remove a contact
+    profile.v1.RemoveContactResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/profile.v1.ProfileObject'
+      title: RemoveContactResponse
+      additionalProperties: false
+    profile.v1.RemoveRosterRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+      title: RemoveRosterRequest
+      additionalProperties: false
+    profile.v1.RemoveRosterResponse:
+      type: object
+      properties:
+        roster:
+          title: roster
+          $ref: '#/components/schemas/profile.v1.RosterObject'
+      title: RemoveRosterResponse
+      additionalProperties: false
+    profile.v1.RosterObject:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Unique roster entry ID
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Profile ID of the contact
+        contact:
+          title: contact
+          description: Contact information
+          $ref: '#/components/schemas/profile.v1.ContactObject'
+        extra:
+          title: extra
+          description: Additional metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: RosterObject
+      additionalProperties: false
+      description: RosterObject represents a contact in a user's roster/contact list.
+    profile.v1.SearchRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          title: query
+        page:
+          type:
+            - integer
+            - string
+          title: page
+          format: int64
+        count:
+          type: integer
+          title: count
+          format: int32
+        startDate:
+          type: string
+          title: start_date
+        endDate:
+          type: string
+          title: end_date
+        properties:
+          type: array
+          items:
+            type: string
+          title: properties
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: SearchRequest
+      additionalProperties: false
+    profile.v1.SearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/profile.v1.ProfileObject'
+          title: data
+      title: SearchResponse
+      additionalProperties: false
+    profile.v1.SearchRosterRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          title: query
+        page:
+          type:
+            - integer
+            - string
+          title: page
+          format: int64
+        count:
+          type: integer
+          title: count
+          format: int32
+        startDate:
+          type: string
+          title: start_date
+        endDate:
+          type: string
+          title: end_date
+        properties:
+          type: array
+          items:
+            type: string
+          title: properties
+        extras:
+          title: extras
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 250
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,250}'
+      title: SearchRosterRequest
+      additionalProperties: false
+    profile.v1.SearchRosterResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/profile.v1.RosterObject'
+          title: data
+      title: SearchRosterResponse
+      additionalProperties: false
+    profile.v1.UpdateRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        properties:
+          title: properties
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        state:
+          title: state
+          $ref: '#/components/schemas/common.v1.STATE'
+      title: UpdateRequest
+      additionalProperties: false
+      description: The request message containing the information necessary to create a profile
+    profile.v1.UpdateResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          $ref: '#/components/schemas/profile.v1.ProfileObject'
+      title: UpdateResponse
+      additionalProperties: false
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security: []
+tags:
+  - name: profile.v1.ProfileService
+    description: |-
+      ProfileService manages user and entity profiles.
+       All RPCs require authentication via Bearer token.

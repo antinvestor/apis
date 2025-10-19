@@ -47,21 +47,33 @@ const (
 // NotificationServiceClient is the client API for NotificationService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// NotificationService provides multi-channel notification delivery.
+// All RPCs require authentication via Bearer token unless otherwise specified.
 type NotificationServiceClient interface {
-	// Send method for queueing massages as requested
+	// Send queues one or more notifications for delivery.
+	// Notifications can be auto-released or manually released via the Release RPC.
 	Send(ctx context.Context, in *SendRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SendResponse], error)
-	// Release method for releasing queued massages and returns if notification status if released
+	// Release triggers delivery of queued notifications.
+	// Used for batch processing where notifications are queued first, then released together.
 	Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ReleaseResponse], error)
-	// Receive method is for client request for particular notification responses from system
+	// Receive acknowledges receipt of notifications by the client.
+	// Used for tracking delivery confirmation and read receipts.
 	Receive(ctx context.Context, in *ReceiveRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ReceiveResponse], error)
-	// Search method is for client request for particular notification details from system
+	// Search finds notifications matching specified criteria.
+	// Supports filtering by date range, type, status, and custom properties.
 	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error)
-	// Status request to determine if notification is prepared or released
+	// Status retrieves the current status of a notification.
+	// Returns delivery status, timestamps, and error information if applicable.
 	Status(ctx context.Context, in *v1.StatusRequest, opts ...grpc.CallOption) (*v1.StatusResponse, error)
-	// Status update request to allow continuation of notification processing
+	// StatusUpdate updates the status of a notification.
+	// Used by delivery workers to update notification state during processing.
 	StatusUpdate(ctx context.Context, in *v1.StatusUpdateRequest, opts ...grpc.CallOption) (*v1.StatusUpdateResponse, error)
-	// Utility to allow system obtain templates within the system
+	// TemplateSearch finds notification templates matching specified criteria.
+	// Supports filtering by language and template name.
 	TemplateSearch(ctx context.Context, in *TemplateSearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TemplateSearchResponse], error)
+	// TemplateSave creates or updates a notification template.
+	// Templates enable consistent, reusable notification formatting with localization.
 	TemplateSave(ctx context.Context, in *TemplateSaveRequest, opts ...grpc.CallOption) (*TemplateSaveResponse, error)
 }
 
@@ -201,21 +213,33 @@ func (c *notificationServiceClient) TemplateSave(ctx context.Context, in *Templa
 // NotificationServiceServer is the server API for NotificationService service.
 // All implementations must embed UnimplementedNotificationServiceServer
 // for forward compatibility.
+//
+// NotificationService provides multi-channel notification delivery.
+// All RPCs require authentication via Bearer token unless otherwise specified.
 type NotificationServiceServer interface {
-	// Send method for queueing massages as requested
+	// Send queues one or more notifications for delivery.
+	// Notifications can be auto-released or manually released via the Release RPC.
 	Send(*SendRequest, grpc.ServerStreamingServer[SendResponse]) error
-	// Release method for releasing queued massages and returns if notification status if released
+	// Release triggers delivery of queued notifications.
+	// Used for batch processing where notifications are queued first, then released together.
 	Release(*ReleaseRequest, grpc.ServerStreamingServer[ReleaseResponse]) error
-	// Receive method is for client request for particular notification responses from system
+	// Receive acknowledges receipt of notifications by the client.
+	// Used for tracking delivery confirmation and read receipts.
 	Receive(*ReceiveRequest, grpc.ServerStreamingServer[ReceiveResponse]) error
-	// Search method is for client request for particular notification details from system
+	// Search finds notifications matching specified criteria.
+	// Supports filtering by date range, type, status, and custom properties.
 	Search(*v1.SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error
-	// Status request to determine if notification is prepared or released
+	// Status retrieves the current status of a notification.
+	// Returns delivery status, timestamps, and error information if applicable.
 	Status(context.Context, *v1.StatusRequest) (*v1.StatusResponse, error)
-	// Status update request to allow continuation of notification processing
+	// StatusUpdate updates the status of a notification.
+	// Used by delivery workers to update notification state during processing.
 	StatusUpdate(context.Context, *v1.StatusUpdateRequest) (*v1.StatusUpdateResponse, error)
-	// Utility to allow system obtain templates within the system
+	// TemplateSearch finds notification templates matching specified criteria.
+	// Supports filtering by language and template name.
 	TemplateSearch(*TemplateSearchRequest, grpc.ServerStreamingServer[TemplateSearchResponse]) error
+	// TemplateSave creates or updates a notification template.
+	// Templates enable consistent, reusable notification formatting with localization.
 	TemplateSave(context.Context, *TemplateSaveRequest) (*TemplateSaveResponse, error)
 	mustEmbedUnimplementedNotificationServiceServer()
 }
