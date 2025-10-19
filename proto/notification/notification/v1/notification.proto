@@ -16,144 +16,184 @@ syntax = "proto3";
 
 package notification.v1;
 
+// -----------------------------------------------------
+// Core notes (normative):
+// - Notification Service manages multi-channel notifications (email, SMS, push, in-app)
+// - Supports templated notifications with localization
+// - Notifications can be queued and released for batch processing
+// - Priority-based delivery ensures critical notifications are sent first
+// - All timestamps are RFC3339 / google.protobuf.Timestamp
+// -----------------------------------------------------
+
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
-import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/notification/v1;notificationv1";
 option java_multiple_files = true;
 option java_package = "notificationv1";
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+
+option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Notification Service"
-    version: "1.0"
+    title: "Notification Service";
+    version: "v1.0.0";
+    description: "The Notification Service provides multi-channel notification delivery capabilities including email, SMS, push notifications, and in-app messaging. It supports templated notifications with localization, priority-based delivery, and batch processing through queue-and-release mechanisms. The service enables applications to send transactional and marketing notifications with tracking, status updates, and delivery confirmations.";
     contact: {
-      name: "Ant Investor Ltd"
-      url: "https://github.com/antinvestor/service-lostid"
-      email: "info@antinvestor.com"
+      name: "Ant Investor Ltd";
+      url: "https://github.com/antinvestor/service-notification";
+      email: "info@antinvestor.com";
+    }
+    license: {
+      name: "Apache License";
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
     }
   }
-
-  schemes: HTTP
-  schemes: HTTPS
-  consumes: "application/json"
-  produces: "application/json"
-
-  security_definitions: {
-    security: {
-      key: "bearer"
-      value: {
-        type: TYPE_API_KEY
-        in: IN_HEADER
-        name: "Authorization"
-        description: "Authentication token, prefixed by Bearer: Bearer <token>"
-      }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BearerAuth";
+          value: {
+            security_scheme: {
+              type: "http";
+              scheme: "bearer";
+              bearer_format: "JWT";
+            }
+          }
+        }
+      ]
     }
-  }
-  security: {
-    security_requirement: {key: "bearer"}
   }
 };
 
+// -----------------------------------------------------
+// Enumerations
+// -----------------------------------------------------
+
+// PRIORITY defines the delivery priority for notifications.
+// Higher priority notifications are processed and delivered first.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum PRIORITY {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  HIGH = 0;
-  LOW = 1;
-  VERY_LOW = 2;
+  HIGH = 0;      // Critical notifications (security alerts, payment confirmations)
+  LOW = 1;       // Standard notifications (updates, reminders)
+  VERY_LOW = 2;  // Low-priority notifications (marketing, newsletters)
 }
 
+// -----------------------------------------------------
+// Template Management
+// -----------------------------------------------------
+
+// Language represents a supported language for notification templates.
 message Language {
   string id = 1 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string code = 2;
-  string name = 3;
-  google.protobuf.Struct extra = 4;
+  ];  // Unique identifier for the language
+  string code = 2;                      // ISO 639-1 language code (e.g., "en", "es", "fr")
+  string name = 3;                      // Human-readable language name
+  google.protobuf.Struct extra = 4;     // Additional language metadata
 }
 
+// TemplateData represents localized content for a notification template.
+// Each template can have multiple TemplateData entries for different languages.
 message TemplateData {
   string id = 1 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Unique identifier for this template data
 
-  string type = 2;
-  string detail = 3;
+  string type = 2;      // Content type (e.g., "email", "sms", "push", "in-app")
+  string detail = 3;    // Template content with placeholders (e.g., "Hello {{name}}")
 
-  Language language = 4;
+  Language language = 4;  // Language for this template content
 }
 
+// Template represents a notification template with localized content.
+// Templates enable consistent, reusable notification formatting.
 message Template {
   string id = 1 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string name = 2;
+  ];  // Unique identifier for the template
+  string name = 2;                      // Template name (e.g., "welcome_email", "password_reset")
 
-  repeated TemplateData data = 4;
-  google.protobuf.Struct extra = 5;
+  repeated TemplateData data = 4;       // Localized template content for different languages/channels
+  google.protobuf.Struct extra = 5;     // Additional template metadata
 }
 
+// -----------------------------------------------------
+// Notification Messages
+// -----------------------------------------------------
+
+// Notification represents a notification to be sent or received.
+// Supports multi-channel delivery (email, SMS, push, in-app) with templating.
 message Notification {
   string id = 1 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Unique identifier for the notification
 
   string parent_id = 2 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Parent notification ID (for threading/grouping)
 
-  common.v1.ContactLink source = 3;
+  common.v1.ContactLink source = 3;     // Sender information
 
-  common.v1.ContactLink recipient = 4;
+  common.v1.ContactLink recipient = 4;  // Recipient information
 
-  string type = 6;
-  string template = 7;
-  google.protobuf.Struct payload = 8;
-  string data = 9;
-  string language = 10;
-  bool out_bound = 11;
-  bool auto_release = 12;
+  string type = 6;                              // Notification type (e.g., "email", "sms", "push", "in-app")
+  string template = 7;                          // Template ID to use for rendering
+  google.protobuf.Struct payload = 8;           // Template variables (e.g., {"name": "John", "amount": "$100"})
+  string data = 9;                              // Pre-rendered notification content (if not using template)
+  string language = 10;                         // Preferred language code for the notification
+  bool out_bound = 11;                          // True if outgoing, false if incoming
+  bool auto_release = 12;                       // If true, automatically release after queuing
   string route_id = 13 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  common.v1.StatusResponse status = 14 [(buf.validate.field).ignore = IGNORE_ALWAYS];
-  google.protobuf.Struct extras = 15;
+  ];  // Routing identifier for delivery channel selection
+  common.v1.StatusResponse status = 14 [(buf.validate.field).ignore = IGNORE_ALWAYS];  // Current status
+  google.protobuf.Struct extras = 15;           // Additional notification metadata
 
-  PRIORITY priority = 16;
+  PRIORITY priority = 16;  // Delivery priority
 }
 
+// -----------------------------------------------------
+// Request/Response Messages
+// -----------------------------------------------------
+
+// SearchResponse returns notifications matching search criteria.
 message SearchResponse {
-  repeated Notification data = 1;
+  repeated Notification data = 1;  // List of matching notifications
 }
 
+// SendRequest queues one or more notifications for delivery.
 message SendRequest {
-  repeated Notification data = 1;
+  repeated Notification data = 1;  // Notifications to queue
 }
 
+// SendResponse returns the status of queued notifications.
 message SendResponse {
-  repeated common.v1.StatusResponse data = 1;
+  repeated common.v1.StatusResponse data = 1;  // Status for each queued notification
 }
 
+// ReleaseRequest releases queued notifications for immediate delivery.
+// Used for batch processing where notifications are queued first, then released together.
 message ReleaseRequest {
   repeated string id = 1 [(buf.validate.field).repeated.items = {
     string: {
@@ -161,96 +201,144 @@ message ReleaseRequest {
       max_len: 40
       pattern: "[0-9a-z_-]{3,20}"
     }
-  }];
-  string comment = 2;
+  }];  // List of notification IDs to release
+  string comment = 2;  // Optional comment for audit trail
 }
 
+// ReleaseResponse returns the status of released notifications.
 message ReleaseResponse {
-  repeated common.v1.StatusResponse data = 1;
+  repeated common.v1.StatusResponse data = 1;  // Status for each released notification
 }
 
+// ReceiveRequest acknowledges receipt of notifications by the client.
+// Used for tracking delivery confirmation.
 message ReceiveRequest {
-  repeated Notification data = 1;
+  repeated Notification data = 1;  // Notifications being acknowledged
 }
 
+// ReceiveResponse returns the status of acknowledged notifications.
 message ReceiveResponse {
-  repeated common.v1.StatusResponse data = 1;
+  repeated common.v1.StatusResponse data = 1;  // Status for each acknowledged notification
 }
 
+// TemplateSearchRequest searches for notification templates.
 message TemplateSearchRequest {
-  string query = 1;
-  string language_code = 2;
-  int64 page = 3;
-  int32 count = 4;
+  string query = 1;         // Search query (template name, content, etc.)
+  string language_code = 2; // Filter by language code
+  int64 page = 3;           // Page number for pagination
+  int32 count = 4;          // Number of results per page
 }
 
+// TemplateSearchResponse returns matching templates.
 message TemplateSearchResponse {
-  repeated Template data = 1;
+  repeated Template data = 1;  // List of matching templates
 }
 
+// TemplateSaveRequest creates or updates a notification template.
 message TemplateSaveRequest {
-  string name = 1;
-  string language_code = 2;
-  google.protobuf.Struct data = 3;
-  google.protobuf.Struct extra = 4;
+  string name = 1;                      // Template name
+  string language_code = 2;             // Language code for the template
+  google.protobuf.Struct data = 3;      // Template content and configuration
+  google.protobuf.Struct extra = 4;     // Additional template metadata
 }
 
+// TemplateSaveResponse returns the saved template.
 message TemplateSaveResponse {
-  Template data = 1;
+  Template data = 1;  // The saved template
 }
 
+// -----------------------------------------------------
+// Notification Service
+// -----------------------------------------------------
+
+// NotificationService provides multi-channel notification delivery.
+// All RPCs require authentication via Bearer token unless otherwise specified.
 service NotificationService {
-  //Send method for queueing massages as requested
+  // Send queues one or more notifications for delivery.
+  // Notifications can be auto-released or manually released via the Release RPC.
   rpc Send(SendRequest) returns (stream SendResponse) {
-    option (google.api.http) = {
-      post: "/send"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "sendNotifications"
+      summary: "Queue notifications for delivery"
+      description: "Queues one or more notifications for delivery. Notifications can be configured to auto-release or require manual release via the Release RPC. Supports batch queuing for efficiency."
+      tags: "Notifications"
     };
   }
 
-  //Release method for releasing queued massages and returns if notification status if released
+  // Release triggers delivery of queued notifications.
+  // Used for batch processing where notifications are queued first, then released together.
   rpc Release(ReleaseRequest) returns (stream ReleaseResponse) {
-    option (google.api.http) = {
-      post: "/send/release/{id}"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "releaseNotifications"
+      summary: "Release queued notifications"
+      description: "Releases queued notifications for immediate delivery. Used for batch processing scenarios where notifications are queued first and released together. Returns delivery status for each notification."
+      tags: "Notifications"
     };
   }
 
-  //Receive method is for client request for particular notification responses from system
+  // Receive acknowledges receipt of notifications by the client.
+  // Used for tracking delivery confirmation and read receipts.
   rpc Receive(ReceiveRequest) returns (stream ReceiveResponse) {
-    option (google.api.http) = {
-      post: "/receive"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "receiveNotifications"
+      summary: "Acknowledge notification receipt"
+      description: "Acknowledges receipt of notifications by the client. Used for tracking delivery confirmation, read receipts, and engagement metrics."
+      tags: "Notifications"
     };
   }
 
-  //Search method is for client request for particular notification details from system
+  // Search finds notifications matching specified criteria.
+  // Supports filtering by date range, type, status, and custom properties.
   rpc Search(common.v1.SearchRequest) returns (stream SearchResponse) {
-    option (google.api.http) = {get: "/search"};
-  }
-
-  //Status request to determine if notification is prepared or released
-  rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse) {
-    option (google.api.http) = {get: "/status/{id}"};
-  }
-
-  //Status update request to allow continuation of notification processing
-  rpc StatusUpdate(common.v1.StatusUpdateRequest) returns (common.v1.StatusUpdateResponse) {
-    option (google.api.http) = {
-      patch: "/status/{id}"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchNotifications"
+      summary: "Search notifications"
+      description: "Searches for notifications matching specified criteria including date range, type, status, recipient, and custom properties. Returns a stream of matching notifications."
+      tags: "Notifications"
     };
   }
 
-  // Utility to allow system obtain templates within the system
-  rpc TemplateSearch(TemplateSearchRequest) returns (stream TemplateSearchResponse) {
-    option (google.api.http) = {get: "/template"};
+  // Status retrieves the current status of a notification.
+  // Returns delivery status, timestamps, and error information if applicable.
+  rpc Status(common.v1.StatusRequest) returns (common.v1.StatusResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getNotificationStatus"
+      summary: "Get notification status"
+      description: "Retrieves the current status of a notification including delivery state, timestamps, and error information if the notification failed to deliver."
+      tags: "Notifications"
+    };
   }
 
+  // StatusUpdate updates the status of a notification.
+  // Used by delivery workers to update notification state during processing.
+  rpc StatusUpdate(common.v1.StatusUpdateRequest) returns (common.v1.StatusUpdateResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "updateNotificationStatus"
+      summary: "Update notification status"
+      description: "Updates the status of a notification. Typically used by delivery workers to update notification state during processing (queued, in-process, delivered, failed)."
+      tags: "Notifications"
+    };
+  }
+
+  // TemplateSearch finds notification templates matching specified criteria.
+  // Supports filtering by language and template name.
+  rpc TemplateSearch(TemplateSearchRequest) returns (stream TemplateSearchResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchTemplates"
+      summary: "Search notification templates"
+      description: "Searches for notification templates matching specified criteria including template name, language, and content. Used for template management and selection."
+      tags: "Templates"
+    };
+  }
+
+  // TemplateSave creates or updates a notification template.
+  // Templates enable consistent, reusable notification formatting with localization.
   rpc TemplateSave(TemplateSaveRequest) returns (TemplateSaveResponse) {
-    option (google.api.http) = {
-      post: "/template"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "saveTemplate"
+      summary: "Create or update template"
+      description: "Creates or updates a notification template. Templates enable consistent, reusable notification formatting with support for multiple languages and channels (email, SMS, push, in-app)."
+      tags: "Templates"
     };
   }
 }

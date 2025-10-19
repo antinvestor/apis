@@ -17,6 +17,10 @@ package com.antinvestor.apis.property.v1;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
+ * <pre>
+ * PropertyService manages real estate and asset properties.
+ * All RPCs require authentication via Bearer token.
+ * </pre>
  */
 @io.grpc.stub.annotations.GrpcGenerated
 public final class PropertyServiceGrpc {
@@ -489,12 +493,16 @@ public final class PropertyServiceGrpc {
   }
 
   /**
+   * <pre>
+   * PropertyService manages real estate and asset properties.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public interface AsyncService {
 
     /**
      * <pre>
-     *Create method for adding a new property type into the system
+     * AddPropertyType creates a new property type classification.
      * </pre>
      */
     default void addPropertyType(com.antinvestor.apis.property.v1.AddPropertyTypeRequest request,
@@ -504,7 +512,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *List method for showing all property types in the system
+     * ListPropertyType retrieves all property types.
      * </pre>
      */
     default void listPropertyType(com.antinvestor.apis.property.v1.ListPropertyTypeRequest request,
@@ -514,7 +522,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new locality into the system
+     * AddLocality creates a new geographic locality.
      * </pre>
      */
     default void addLocality(com.antinvestor.apis.property.v1.AddLocalityRequest request,
@@ -524,7 +532,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete method for removing an existing locality from the system
+     * DeleteLocality removes a locality from the system.
      * </pre>
      */
     default void deleteLocality(com.antinvestor.apis.property.v1.DeleteLocalityRequest request,
@@ -534,7 +542,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new property into the system
+     * CreateProperty creates a new property.
      * </pre>
      */
     default void createProperty(com.antinvestor.apis.property.v1.CreatePropertyRequest request,
@@ -544,7 +552,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Update property request to modify its current form to another
+     * UpdateProperty updates an existing property.
      * </pre>
      */
     default void updateProperty(com.antinvestor.apis.property.v1.UpdatePropertyRequest request,
@@ -554,7 +562,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete property request to modify its current form to another
+     * DeleteProperty removes a property from the system.
      * </pre>
      */
     default void deleteProperty(com.antinvestor.apis.property.v1.DeletePropertyRequest request,
@@ -564,7 +572,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *State request to determine active state and status of a property
+     * StateOfProperty retrieves the current state of a property.
      * </pre>
      */
     default void stateOfProperty(com.antinvestor.apis.property.v1.StateOfPropertyRequest request,
@@ -574,7 +582,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *History request returns all the state transitions a property has had over its lifetime in the system
+     * HistoryOfProperty retrieves the complete state history.
      * </pre>
      */
     default void historyOfProperty(com.antinvestor.apis.property.v1.HistoryOfPropertyRequest request,
@@ -584,7 +592,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Search method is for client request to query for properties that match query
+     * SearchProperty finds properties matching criteria.
      * </pre>
      */
     default void searchProperty(com.antinvestor.apis.property.v1.SearchPropertyRequest request,
@@ -594,7 +602,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *ListSubscriptions for a particular property
+     * ListSubscription retrieves subscriptions for a property.
      * </pre>
      */
     default void listSubscription(com.antinvestor.apis.property.v1.ListSubscriptionRequest request,
@@ -604,7 +612,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *AddSubscription for a profile to a property
+     * AddSubscription grants a profile access to a property.
      * </pre>
      */
     default void addSubscription(com.antinvestor.apis.property.v1.AddSubscriptionRequest request,
@@ -614,7 +622,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete subscription of profile to a property
+     * DeleteSubscription revokes a profile's access to a property.
      * </pre>
      */
     default void deleteSubscription(com.antinvestor.apis.property.v1.DeleteSubscriptionRequest request,
@@ -625,6 +633,10 @@ public final class PropertyServiceGrpc {
 
   /**
    * Base class for the server implementation of the service PropertyService.
+   * <pre>
+   * PropertyService manages real estate and asset properties.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static abstract class PropertyServiceImplBase
       implements io.grpc.BindableService, AsyncService {
@@ -636,6 +648,10 @@ public final class PropertyServiceGrpc {
 
   /**
    * A stub to allow clients to do asynchronous rpc calls to service PropertyService.
+   * <pre>
+   * PropertyService manages real estate and asset properties.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class PropertyServiceStub
       extends io.grpc.stub.AbstractAsyncStub<PropertyServiceStub> {
@@ -652,7 +668,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new property type into the system
+     * AddPropertyType creates a new property type classification.
      * </pre>
      */
     public void addPropertyType(com.antinvestor.apis.property.v1.AddPropertyTypeRequest request,
@@ -663,7 +679,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *List method for showing all property types in the system
+     * ListPropertyType retrieves all property types.
      * </pre>
      */
     public void listPropertyType(com.antinvestor.apis.property.v1.ListPropertyTypeRequest request,
@@ -674,7 +690,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new locality into the system
+     * AddLocality creates a new geographic locality.
      * </pre>
      */
     public void addLocality(com.antinvestor.apis.property.v1.AddLocalityRequest request,
@@ -685,7 +701,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete method for removing an existing locality from the system
+     * DeleteLocality removes a locality from the system.
      * </pre>
      */
     public void deleteLocality(com.antinvestor.apis.property.v1.DeleteLocalityRequest request,
@@ -696,7 +712,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new property into the system
+     * CreateProperty creates a new property.
      * </pre>
      */
     public void createProperty(com.antinvestor.apis.property.v1.CreatePropertyRequest request,
@@ -707,7 +723,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Update property request to modify its current form to another
+     * UpdateProperty updates an existing property.
      * </pre>
      */
     public void updateProperty(com.antinvestor.apis.property.v1.UpdatePropertyRequest request,
@@ -718,7 +734,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete property request to modify its current form to another
+     * DeleteProperty removes a property from the system.
      * </pre>
      */
     public void deleteProperty(com.antinvestor.apis.property.v1.DeletePropertyRequest request,
@@ -729,7 +745,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *State request to determine active state and status of a property
+     * StateOfProperty retrieves the current state of a property.
      * </pre>
      */
     public void stateOfProperty(com.antinvestor.apis.property.v1.StateOfPropertyRequest request,
@@ -740,7 +756,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *History request returns all the state transitions a property has had over its lifetime in the system
+     * HistoryOfProperty retrieves the complete state history.
      * </pre>
      */
     public void historyOfProperty(com.antinvestor.apis.property.v1.HistoryOfPropertyRequest request,
@@ -751,7 +767,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Search method is for client request to query for properties that match query
+     * SearchProperty finds properties matching criteria.
      * </pre>
      */
     public void searchProperty(com.antinvestor.apis.property.v1.SearchPropertyRequest request,
@@ -762,7 +778,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *ListSubscriptions for a particular property
+     * ListSubscription retrieves subscriptions for a property.
      * </pre>
      */
     public void listSubscription(com.antinvestor.apis.property.v1.ListSubscriptionRequest request,
@@ -773,7 +789,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *AddSubscription for a profile to a property
+     * AddSubscription grants a profile access to a property.
      * </pre>
      */
     public void addSubscription(com.antinvestor.apis.property.v1.AddSubscriptionRequest request,
@@ -784,7 +800,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete subscription of profile to a property
+     * DeleteSubscription revokes a profile's access to a property.
      * </pre>
      */
     public void deleteSubscription(com.antinvestor.apis.property.v1.DeleteSubscriptionRequest request,
@@ -796,6 +812,10 @@ public final class PropertyServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service PropertyService.
+   * <pre>
+   * PropertyService manages real estate and asset properties.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class PropertyServiceBlockingV2Stub
       extends io.grpc.stub.AbstractBlockingStub<PropertyServiceBlockingV2Stub> {
@@ -812,7 +832,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new property type into the system
+     * AddPropertyType creates a new property type classification.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.AddPropertyTypeResponse addPropertyType(com.antinvestor.apis.property.v1.AddPropertyTypeRequest request) throws io.grpc.StatusException {
@@ -822,7 +842,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *List method for showing all property types in the system
+     * ListPropertyType retrieves all property types.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -834,7 +854,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new locality into the system
+     * AddLocality creates a new geographic locality.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.AddLocalityResponse addLocality(com.antinvestor.apis.property.v1.AddLocalityRequest request) throws io.grpc.StatusException {
@@ -844,7 +864,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete method for removing an existing locality from the system
+     * DeleteLocality removes a locality from the system.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.DeleteLocalityResponse deleteLocality(com.antinvestor.apis.property.v1.DeleteLocalityRequest request) throws io.grpc.StatusException {
@@ -854,7 +874,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new property into the system
+     * CreateProperty creates a new property.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.CreatePropertyResponse createProperty(com.antinvestor.apis.property.v1.CreatePropertyRequest request) throws io.grpc.StatusException {
@@ -864,7 +884,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Update property request to modify its current form to another
+     * UpdateProperty updates an existing property.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.UpdatePropertyResponse updateProperty(com.antinvestor.apis.property.v1.UpdatePropertyRequest request) throws io.grpc.StatusException {
@@ -874,7 +894,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete property request to modify its current form to another
+     * DeleteProperty removes a property from the system.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.DeletePropertyResponse deleteProperty(com.antinvestor.apis.property.v1.DeletePropertyRequest request) throws io.grpc.StatusException {
@@ -884,7 +904,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *State request to determine active state and status of a property
+     * StateOfProperty retrieves the current state of a property.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.StateOfPropertyResponse stateOfProperty(com.antinvestor.apis.property.v1.StateOfPropertyRequest request) throws io.grpc.StatusException {
@@ -894,7 +914,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *History request returns all the state transitions a property has had over its lifetime in the system
+     * HistoryOfProperty retrieves the complete state history.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -906,7 +926,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Search method is for client request to query for properties that match query
+     * SearchProperty finds properties matching criteria.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -918,7 +938,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *ListSubscriptions for a particular property
+     * ListSubscription retrieves subscriptions for a property.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -930,7 +950,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *AddSubscription for a profile to a property
+     * AddSubscription grants a profile access to a property.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.AddSubscriptionResponse addSubscription(com.antinvestor.apis.property.v1.AddSubscriptionRequest request) throws io.grpc.StatusException {
@@ -940,7 +960,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete subscription of profile to a property
+     * DeleteSubscription revokes a profile's access to a property.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.DeleteSubscriptionResponse deleteSubscription(com.antinvestor.apis.property.v1.DeleteSubscriptionRequest request) throws io.grpc.StatusException {
@@ -951,6 +971,10 @@ public final class PropertyServiceGrpc {
 
   /**
    * A stub to allow clients to do limited synchronous rpc calls to service PropertyService.
+   * <pre>
+   * PropertyService manages real estate and asset properties.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class PropertyServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<PropertyServiceBlockingStub> {
@@ -967,7 +991,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new property type into the system
+     * AddPropertyType creates a new property type classification.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.AddPropertyTypeResponse addPropertyType(com.antinvestor.apis.property.v1.AddPropertyTypeRequest request) {
@@ -977,7 +1001,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *List method for showing all property types in the system
+     * ListPropertyType retrieves all property types.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.property.v1.ListPropertyTypeResponse> listPropertyType(
@@ -988,7 +1012,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new locality into the system
+     * AddLocality creates a new geographic locality.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.AddLocalityResponse addLocality(com.antinvestor.apis.property.v1.AddLocalityRequest request) {
@@ -998,7 +1022,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete method for removing an existing locality from the system
+     * DeleteLocality removes a locality from the system.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.DeleteLocalityResponse deleteLocality(com.antinvestor.apis.property.v1.DeleteLocalityRequest request) {
@@ -1008,7 +1032,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new property into the system
+     * CreateProperty creates a new property.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.CreatePropertyResponse createProperty(com.antinvestor.apis.property.v1.CreatePropertyRequest request) {
@@ -1018,7 +1042,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Update property request to modify its current form to another
+     * UpdateProperty updates an existing property.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.UpdatePropertyResponse updateProperty(com.antinvestor.apis.property.v1.UpdatePropertyRequest request) {
@@ -1028,7 +1052,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete property request to modify its current form to another
+     * DeleteProperty removes a property from the system.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.DeletePropertyResponse deleteProperty(com.antinvestor.apis.property.v1.DeletePropertyRequest request) {
@@ -1038,7 +1062,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *State request to determine active state and status of a property
+     * StateOfProperty retrieves the current state of a property.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.StateOfPropertyResponse stateOfProperty(com.antinvestor.apis.property.v1.StateOfPropertyRequest request) {
@@ -1048,7 +1072,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *History request returns all the state transitions a property has had over its lifetime in the system
+     * HistoryOfProperty retrieves the complete state history.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.property.v1.HistoryOfPropertyResponse> historyOfProperty(
@@ -1059,7 +1083,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Search method is for client request to query for properties that match query
+     * SearchProperty finds properties matching criteria.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.property.v1.SearchPropertyResponse> searchProperty(
@@ -1070,7 +1094,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *ListSubscriptions for a particular property
+     * ListSubscription retrieves subscriptions for a property.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.property.v1.ListSubscriptionResponse> listSubscription(
@@ -1081,7 +1105,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *AddSubscription for a profile to a property
+     * AddSubscription grants a profile access to a property.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.AddSubscriptionResponse addSubscription(com.antinvestor.apis.property.v1.AddSubscriptionRequest request) {
@@ -1091,7 +1115,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete subscription of profile to a property
+     * DeleteSubscription revokes a profile's access to a property.
      * </pre>
      */
     public com.antinvestor.apis.property.v1.DeleteSubscriptionResponse deleteSubscription(com.antinvestor.apis.property.v1.DeleteSubscriptionRequest request) {
@@ -1102,6 +1126,10 @@ public final class PropertyServiceGrpc {
 
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service PropertyService.
+   * <pre>
+   * PropertyService manages real estate and asset properties.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class PropertyServiceFutureStub
       extends io.grpc.stub.AbstractFutureStub<PropertyServiceFutureStub> {
@@ -1118,7 +1146,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new property type into the system
+     * AddPropertyType creates a new property type classification.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.property.v1.AddPropertyTypeResponse> addPropertyType(
@@ -1129,7 +1157,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new locality into the system
+     * AddLocality creates a new geographic locality.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.property.v1.AddLocalityResponse> addLocality(
@@ -1140,7 +1168,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete method for removing an existing locality from the system
+     * DeleteLocality removes a locality from the system.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.property.v1.DeleteLocalityResponse> deleteLocality(
@@ -1151,7 +1179,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Create method for adding a new property into the system
+     * CreateProperty creates a new property.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.property.v1.CreatePropertyResponse> createProperty(
@@ -1162,7 +1190,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Update property request to modify its current form to another
+     * UpdateProperty updates an existing property.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.property.v1.UpdatePropertyResponse> updateProperty(
@@ -1173,7 +1201,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete property request to modify its current form to another
+     * DeleteProperty removes a property from the system.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.property.v1.DeletePropertyResponse> deleteProperty(
@@ -1184,7 +1212,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *State request to determine active state and status of a property
+     * StateOfProperty retrieves the current state of a property.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.property.v1.StateOfPropertyResponse> stateOfProperty(
@@ -1195,7 +1223,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *AddSubscription for a profile to a property
+     * AddSubscription grants a profile access to a property.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.property.v1.AddSubscriptionResponse> addSubscription(
@@ -1206,7 +1234,7 @@ public final class PropertyServiceGrpc {
 
     /**
      * <pre>
-     *Delete subscription of profile to a property
+     * DeleteSubscription revokes a profile's access to a property.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.property.v1.DeleteSubscriptionResponse> deleteSubscription(

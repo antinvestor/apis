@@ -17,6 +17,10 @@ package com.antinvestor.apis.settings.v1;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
+ * <pre>
+ * SettingsService provides hierarchical configuration management.
+ * All RPCs require authentication via Bearer token.
+ * </pre>
  */
 @io.grpc.stub.annotations.GrpcGenerated
 public final class SettingsServiceGrpc {
@@ -210,12 +214,17 @@ public final class SettingsServiceGrpc {
   }
 
   /**
+   * <pre>
+   * SettingsService provides hierarchical configuration management.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public interface AsyncService {
 
     /**
      * <pre>
-     * Gets a single setting and its stored value
+     * Get retrieves a single setting value by its hierarchical key.
+     * Returns the most specific matching setting based on the key hierarchy.
      * </pre>
      */
     default void get(com.antinvestor.apis.settings.v1.GetRequest request,
@@ -224,6 +233,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * List retrieves all settings matching a partial key.
+     * Empty fields in the key act as wildcards.
+     * </pre>
      */
     default void list(com.antinvestor.apis.settings.v1.ListRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.settings.v1.ListResponse> responseObserver) {
@@ -231,6 +244,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Search finds settings matching specified criteria.
+     * Supports full-text search and filtering.
+     * </pre>
      */
     default void search(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.settings.v1.SearchResponse> responseObserver) {
@@ -238,6 +255,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Set creates or updates a setting value.
+     * Creates a new setting if it doesn't exist, updates if it does.
+     * </pre>
      */
     default void set(com.antinvestor.apis.settings.v1.SetRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.settings.v1.SetResponse> responseObserver) {
@@ -247,6 +268,10 @@ public final class SettingsServiceGrpc {
 
   /**
    * Base class for the server implementation of the service SettingsService.
+   * <pre>
+   * SettingsService provides hierarchical configuration management.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static abstract class SettingsServiceImplBase
       implements io.grpc.BindableService, AsyncService {
@@ -258,6 +283,10 @@ public final class SettingsServiceGrpc {
 
   /**
    * A stub to allow clients to do asynchronous rpc calls to service SettingsService.
+   * <pre>
+   * SettingsService provides hierarchical configuration management.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class SettingsServiceStub
       extends io.grpc.stub.AbstractAsyncStub<SettingsServiceStub> {
@@ -274,7 +303,8 @@ public final class SettingsServiceGrpc {
 
     /**
      * <pre>
-     * Gets a single setting and its stored value
+     * Get retrieves a single setting value by its hierarchical key.
+     * Returns the most specific matching setting based on the key hierarchy.
      * </pre>
      */
     public void get(com.antinvestor.apis.settings.v1.GetRequest request,
@@ -284,6 +314,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * List retrieves all settings matching a partial key.
+     * Empty fields in the key act as wildcards.
+     * </pre>
      */
     public void list(com.antinvestor.apis.settings.v1.ListRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.settings.v1.ListResponse> responseObserver) {
@@ -292,6 +326,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Search finds settings matching specified criteria.
+     * Supports full-text search and filtering.
+     * </pre>
      */
     public void search(com.antinvestor.apis.common.v1.SearchRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.settings.v1.SearchResponse> responseObserver) {
@@ -300,6 +338,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Set creates or updates a setting value.
+     * Creates a new setting if it doesn't exist, updates if it does.
+     * </pre>
      */
     public void set(com.antinvestor.apis.settings.v1.SetRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.settings.v1.SetResponse> responseObserver) {
@@ -310,6 +352,10 @@ public final class SettingsServiceGrpc {
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service SettingsService.
+   * <pre>
+   * SettingsService provides hierarchical configuration management.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class SettingsServiceBlockingV2Stub
       extends io.grpc.stub.AbstractBlockingStub<SettingsServiceBlockingV2Stub> {
@@ -326,7 +372,8 @@ public final class SettingsServiceGrpc {
 
     /**
      * <pre>
-     * Gets a single setting and its stored value
+     * Get retrieves a single setting value by its hierarchical key.
+     * Returns the most specific matching setting based on the key hierarchy.
      * </pre>
      */
     public com.antinvestor.apis.settings.v1.GetResponse get(com.antinvestor.apis.settings.v1.GetRequest request) throws io.grpc.StatusException {
@@ -335,6 +382,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * List retrieves all settings matching a partial key.
+     * Empty fields in the key act as wildcards.
+     * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
     public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.settings.v1.ListResponse>
@@ -344,6 +395,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Search finds settings matching specified criteria.
+     * Supports full-text search and filtering.
+     * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
     public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.settings.v1.SearchResponse>
@@ -353,6 +408,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Set creates or updates a setting value.
+     * Creates a new setting if it doesn't exist, updates if it does.
+     * </pre>
      */
     public com.antinvestor.apis.settings.v1.SetResponse set(com.antinvestor.apis.settings.v1.SetRequest request) throws io.grpc.StatusException {
       return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
@@ -362,6 +421,10 @@ public final class SettingsServiceGrpc {
 
   /**
    * A stub to allow clients to do limited synchronous rpc calls to service SettingsService.
+   * <pre>
+   * SettingsService provides hierarchical configuration management.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class SettingsServiceBlockingStub
       extends io.grpc.stub.AbstractBlockingStub<SettingsServiceBlockingStub> {
@@ -378,7 +441,8 @@ public final class SettingsServiceGrpc {
 
     /**
      * <pre>
-     * Gets a single setting and its stored value
+     * Get retrieves a single setting value by its hierarchical key.
+     * Returns the most specific matching setting based on the key hierarchy.
      * </pre>
      */
     public com.antinvestor.apis.settings.v1.GetResponse get(com.antinvestor.apis.settings.v1.GetRequest request) {
@@ -387,6 +451,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * List retrieves all settings matching a partial key.
+     * Empty fields in the key act as wildcards.
+     * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.settings.v1.ListResponse> list(
         com.antinvestor.apis.settings.v1.ListRequest request) {
@@ -395,6 +463,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Search finds settings matching specified criteria.
+     * Supports full-text search and filtering.
+     * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.settings.v1.SearchResponse> search(
         com.antinvestor.apis.common.v1.SearchRequest request) {
@@ -403,6 +475,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Set creates or updates a setting value.
+     * Creates a new setting if it doesn't exist, updates if it does.
+     * </pre>
      */
     public com.antinvestor.apis.settings.v1.SetResponse set(com.antinvestor.apis.settings.v1.SetRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -412,6 +488,10 @@ public final class SettingsServiceGrpc {
 
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service SettingsService.
+   * <pre>
+   * SettingsService provides hierarchical configuration management.
+   * All RPCs require authentication via Bearer token.
+   * </pre>
    */
   public static final class SettingsServiceFutureStub
       extends io.grpc.stub.AbstractFutureStub<SettingsServiceFutureStub> {
@@ -428,7 +508,8 @@ public final class SettingsServiceGrpc {
 
     /**
      * <pre>
-     * Gets a single setting and its stored value
+     * Get retrieves a single setting value by its hierarchical key.
+     * Returns the most specific matching setting based on the key hierarchy.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.settings.v1.GetResponse> get(
@@ -438,6 +519,10 @@ public final class SettingsServiceGrpc {
     }
 
     /**
+     * <pre>
+     * Set creates or updates a setting value.
+     * Creates a new setting if it doesn't exist, updates if it does.
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.settings.v1.SetResponse> set(
         com.antinvestor.apis.settings.v1.SetRequest request) {

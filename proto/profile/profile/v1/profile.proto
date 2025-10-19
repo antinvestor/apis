@@ -16,167 +16,191 @@ syntax = "proto3";
 
 package profile.v1;
 
+// -----------------------------------------------------
+// Core notes (normative):
+// - Profile Service manages user and entity profiles
+// - Supports persons, institutions, and bots
+// - Contact verification via email and phone (MSISDN)
+// - Roster management for user contact lists
+// - Relationship tracking between profiles
+// - Address management with geocoding support
+// -----------------------------------------------------
+
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
-import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/profile/v1;profilev1";
 option java_multiple_files = true;
 option java_package = "profilev1";
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+
+option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Profile Service"
-    version: "1.0"
+    title: "Profile Service";
+    version: "v1.0.0";
+    description: "The Profile Service manages user and entity profiles including persons, institutions, and bots. It provides comprehensive profile management with contact verification (email, phone), roster management for user contact lists, relationship tracking between profiles, and address management with geocoding support. The service supports profile merging, communication preferences, and hierarchical relationships.";
     contact: {
-      name: "Ant Investor Ltd"
-      url: "https://github.com/antinvestor/service-profile"
-      email: "info@antinvestor.com"
+      name: "Ant Investor Ltd";
+      url: "https://github.com/antinvestor/service-profile";
+      email: "info@antinvestor.com";
+    }
+    license: {
+      name: "Apache License";
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
     }
   }
-
-  schemes: HTTP
-  schemes: HTTPS
-  consumes: "application/json"
-  produces: "application/json"
-
-  security_definitions: {
-    security: {
-      key: "bearer"
-      value: {
-        type: TYPE_API_KEY
-        in: IN_HEADER
-        name: "Authorization"
-        description: "Authentication token, prefixed by Bearer: Bearer <token>"
-      }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BearerAuth";
+          value: {
+            security_scheme: {
+              type: "http";
+              scheme: "bearer";
+              bearer_format: "JWT";
+            }
+          }
+        }
+      ]
     }
-  }
-  security: {
-    security_requirement: {key: "bearer"}
   }
 };
 
+// -----------------------------------------------------
+// Enumerations
+// -----------------------------------------------------
+
+// ContactType defines the type of contact information.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum ContactType {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  EMAIL = 0;
-  MSISDN = 1;
+  EMAIL = 0;   // Email address
+  MSISDN = 1;  // Mobile phone number (MSISDN format)
 }
 
+// CommunicationLevel defines user's communication preferences.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum CommunicationLevel {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  ALL = 0; // Any communication including 3rd party marketing is welcome.
-  INTERNAL_MARKETING = 1; // Can receive marketing messages from our services
-  IMPORTANT_ALERTS = 2; // These can be things like policy changes
-  SYSTEM_ALERTS = 3; // This include user actions expecting a response.
-  NO_CONTACT = 4; // This one needs prayers
+  ALL = 0;                 // All communications including 3rd party marketing
+  INTERNAL_MARKETING = 1;  // Marketing messages from our services only
+  IMPORTANT_ALERTS = 2;    // Important alerts like policy changes
+  SYSTEM_ALERTS = 3;       // System alerts for user actions requiring response
+  NO_CONTACT = 4;          // No communications (opt-out)
 }
 
+// ProfileType defines the type of profile entity.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum ProfileType {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  PERSON = 0;      // Individual person
+  INSTITUTION = 1; // Organization or institution
+  BOT = 2;         // Automated bot or service account
+}
+
+// RelationshipType defines how two profiles are linked.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum RelationshipType {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  MEMBER = 0;       // Member of an organization
+  AFFILIATED = 1;   // Affiliated or associated with
+  BLACK_LISTED = 2; // Blocked or blacklisted
+}
+
+// -----------------------------------------------------
+// Core Data Types
+// -----------------------------------------------------
+
+// ContactObject represents a contact method (email or phone).
 message ContactObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  ContactType type = 2;
-  string detail = 3;
-  bool verified = 4;
-  CommunicationLevel communication_level = 5;
-  common.v1.STATE state = 6;
-  google.protobuf.Struct extra = 7;
+  ];                                       // Unique contact ID
+  ContactType type = 2;                    // Contact type (email or MSISDN)
+  string detail = 3;                       // Contact detail (email address or phone number)
+  bool verified = 4;                       // Whether contact has been verified
+  CommunicationLevel communication_level = 5; // User's communication preferences
+  common.v1.STATE state = 6;               // Contact state
+  google.protobuf.Struct extra = 7;        // Additional metadata
 }
 
+// RosterObject represents a contact in a user's roster/contact list.
 message RosterObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];                    // Unique roster entry ID
   string profile_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  ContactObject contact = 3;
-  google.protobuf.Struct extra = 4;
+  ];                    // Profile ID of the contact
+  ContactObject contact = 3; // Contact information
+  google.protobuf.Struct extra = 4; // Additional metadata
 }
 
+// AddressObject represents a physical address with geocoding.
 message AddressObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];                    // Unique address ID
   string name = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 100
-  ];
-  string country = 3;
-  string city = 4;
-  string area = 5;
-  string street = 6;
-  string house = 7;
-  string postcode = 8;
-  double latitude = 9;
-  double longitude = 10;
+  ];                    // Address name/label (e.g., "Home", "Office")
+  string country = 3;   // Country name or code
+  string city = 4;      // City name
+  string area = 5;      // Area/district/neighborhood
+  string street = 6;    // Street name
+  string house = 7;     // House/building number
+  string postcode = 8;  // Postal/ZIP code
+  double latitude = 9;  // Latitude coordinate
+  double longitude = 10; // Longitude coordinate
   string extra = 11 [
     (buf.validate.field).string.min_len = 10,
     (buf.validate.field).string.max_len = 500
-  ];
+  ];                    // Additional address details
 }
 
-// buf:lint:ignore ENUM_VALUE_PREFIX
-enum ProfileType {
-  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  PERSON = 0;
-  INSTITUTION = 1;
-  BOT = 2;
-}
-
-// The response message containing the full profile object
+// ProfileObject represents a complete user or entity profile.
 message ProfileObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  ProfileType type = 2;
-  google.protobuf.Struct properties = 3;
-  repeated ContactObject contacts = 4;
-  repeated AddressObject addresses = 5;
-  common.v1.STATE state = 6;
+  ];                                    // Unique profile ID
+  ProfileType type = 2;                 // Profile type (person, institution, bot)
+  google.protobuf.Struct properties = 3; // Profile properties (name, bio, avatar, etc.)
+  repeated ContactObject contacts = 4;  // Associated contacts
+  repeated AddressObject addresses = 5; // Associated addresses
+  common.v1.STATE state = 6;            // Profile state
 }
 
-// RelationshipType enum represents the way two profiles are linked.
-// buf:lint:ignore ENUM_VALUE_PREFIX
-enum RelationshipType {
-  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  MEMBER = 0;
-  AFFILIATED = 1;
-  BLACK_LISTED = 2;
-}
-
+// EntryItem identifies an object in a relationship.
 message EntryItem {
-  string object_name = 1;
-  string object_id = 2;
+  string object_name = 1;  // Object type (Contact, Profile, Group)
+  string object_id = 2;    // Object ID
 }
 
-// A Relationship object
+// RelationshipObject represents a relationship between two profiles.
 message RelationshipObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  RelationshipType type = 2;
-  google.protobuf.Struct properties = 3;
-
-  EntryItem child_entry = 4;
-  EntryItem parent_entry = 5;
-
-  ProfileObject peer_profile = 6;
+  ];                                    // Unique relationship ID
+  RelationshipType type = 2;            // Relationship type
+  google.protobuf.Struct properties = 3; // Relationship properties
+  EntryItem child_entry = 4;            // Child entry in relationship
+  EntryItem parent_entry = 5;           // Parent entry in relationship
+  ProfileObject peer_profile = 6;       // Peer profile information
 }
 
 // The request message containing the profile's hash
@@ -491,124 +515,190 @@ message DeleteRelationshipResponse {
   RelationshipObject data = 1;
 }
 
-// The profile service definition.
+// -----------------------------------------------------
+// Profile Service
+// -----------------------------------------------------
+
+// ProfileService manages user and entity profiles.
+// All RPCs require authentication via Bearer token.
 service ProfileService {
-  // Obtains a profile by its hash
+  // GetById retrieves a profile by its unique ID.
   rpc GetById(GetByIdRequest) returns (GetByIdResponse) {
-    option (google.api.http) = {get: "/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getProfileById"
+      summary: "Get profile by ID"
+      description: "Retrieves a complete profile by its unique identifier including contacts, addresses, and properties."
+      tags: "Profiles"
+    };
   }
 
-  // Obtains a profile by its hash
+  // GetByContact retrieves a profile by contact information.
   rpc GetByContact(GetByContactRequest) returns (GetByContactResponse) {
-    option (google.api.http) = {get: "/contact"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getProfileByContact"
+      summary: "Get profile by contact"
+      description: "Retrieves a profile associated with a specific contact (email or phone number)."
+      tags: "Profiles"
+    };
   }
 
-  // Obtains a profile by its hash
+  // Search finds profiles matching specified criteria.
   rpc Search(SearchRequest) returns (stream SearchResponse) {
-    option (google.api.http) = {get: "/search"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchProfiles"
+      summary: "Search profiles"
+      description: "Searches for profiles matching specified criteria including name, contact, date range, and custom properties. Returns a stream of matching profiles."
+      tags: "Profiles"
+    };
   }
 
-  // Uses data found in the profile from mergeHash to update the current profile.
+  // Merge combines two profiles into one.
   rpc Merge(MergeRequest) returns (MergeResponse) {
-    option (google.api.http) = {
-      post: "/merge"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "mergeProfiles"
+      summary: "Merge profiles"
+      description: "Merges two profiles by combining their data. The merge source profile data is incorporated into the target profile."
+      tags: "Profiles"
     };
   }
 
-  // Creates a new profile based on the request.
+  // Create creates a new profile.
   rpc Create(CreateRequest) returns (CreateResponse) {
-    option (google.api.http) = {
-      post: "/"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createProfile"
+      summary: "Create profile"
+      description: "Creates a new profile with the specified type (person, institution, bot) and initial contact information."
+      tags: "Profiles"
     };
   }
 
-  // Creates a new profile based on the request.
+  // Update updates an existing profile's properties.
   rpc Update(UpdateRequest) returns (UpdateResponse) {
-    option (google.api.http) = {
-      patch: "/{id}"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "updateProfile"
+      summary: "Update profile"
+      description: "Updates an existing profile's properties and state. Contacts and addresses are managed via separate RPCs."
+      tags: "Profiles"
     };
   }
 
-  // Adds a new contact based on the request/this leads to automatic verification.
+  // AddContact adds a new contact to a profile with automatic verification.
   rpc AddContact(AddContactRequest) returns (AddContactResponse) {
-    option (google.api.http) = {
-      post: "/{id}/contact"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "addContact"
+      summary: "Add contact to profile"
+      description: "Adds a new contact (email or phone) to a profile and initiates automatic verification. Returns the updated profile and verification ID."
+      tags: "Contacts"
     };
   }
 
-  // Creates a new free contact based on the details provided.
+  // CreateContact creates a standalone contact not linked to a profile.
   rpc CreateContact(CreateContactRequest) returns (CreateContactResponse) {
-    option (google.api.http) = {
-      post: "/contact"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createContact"
+      summary: "Create standalone contact"
+      description: "Creates a standalone contact that can later be linked to a profile. Useful for pre-registration scenarios."
+      tags: "Contacts"
     };
   }
-  // Create a new contact verification request
+
+  // CreateContactVerification initiates contact verification.
   rpc CreateContactVerification(CreateContactVerificationRequest) returns (CreateContactVerificationResponse) {
-    option (google.api.http) = {
-      post: "/contact/{id}/verification/create"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createContactVerification"
+      summary: "Create contact verification"
+      description: "Initiates contact verification by sending a verification code via email or SMS. The code expires after the specified duration."
+      tags: "Contacts"
     };
   }
 
-  //Checks the status of a verification
+  // CheckVerification verifies a contact using the provided code.
   rpc CheckVerification(CheckVerificationRequest) returns (CheckVerificationResponse) {
-    option (google.api.http) = {
-      post: "/contact/{id}/verification/check"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "checkVerification"
+      summary: "Check verification code"
+      description: "Verifies a contact by checking the provided verification code. Tracks verification attempts and returns success status."
+      tags: "Contacts"
     };
   }
 
-  // Removes an old contact based on this request's id
+  // RemoveContact removes a contact from a profile.
   rpc RemoveContact(RemoveContactRequest) returns (RemoveContactResponse) {
-    option (google.api.http) = {delete: "/contact/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "removeContact"
+      summary: "Remove contact"
+      description: "Removes a contact from a profile. The contact is disassociated but may remain in the system."
+      tags: "Contacts"
+    };
   }
 
-  // Searches all contacts tied to a users profile and based on the active request.
+  // SearchRoster searches a user's contact roster.
   rpc SearchRoster(SearchRosterRequest) returns (stream SearchRosterResponse) {
-    option (google.api.http) = {get: "/roster"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchRoster"
+      summary: "Search roster"
+      description: "Searches a user's contact roster (contact list) with filtering by date range, properties, and custom criteria. Returns a stream of roster entries."
+      tags: "Roster"
+    };
   }
 
-  // Adds a new contact based on the request/this leads to automatic verification.
+  // AddRoster adds multiple contacts to a user's roster.
   rpc AddRoster(AddRosterRequest) returns (AddRosterResponse) {
-    option (google.api.http) = {
-      post: "/roster"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "addRoster"
+      summary: "Add roster entries"
+      description: "Adds multiple contacts to a user's roster (contact list). Each contact is verified automatically."
+      tags: "Roster"
     };
   }
 
-  // Removes a contact from a user's circle based on this request's id
+  // RemoveRoster removes a contact from a user's roster.
   rpc RemoveRoster(RemoveRosterRequest) returns (RemoveRosterResponse) {
-    option (google.api.http) = {delete: "/roster/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "removeRoster"
+      summary: "Remove roster entry"
+      description: "Removes a contact from a user's roster (contact list). The profile remains but is no longer in the user's contacts."
+      tags: "Roster"
+    };
   }
 
-  // Adds a new address based on the request.
+  // AddAddress adds a new address to a profile.
   rpc AddAddress(AddAddressRequest) returns (AddAddressResponse) {
-    option (google.api.http) = {
-      post: "/address"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "addAddress"
+      summary: "Add address"
+      description: "Adds a new physical address to a profile with optional geocoding (latitude/longitude)."
+      tags: "Addresses"
     };
   }
 
-  // Adds a new relationship between different proiles.
+  // AddRelationship creates a relationship between profiles.
   rpc AddRelationship(AddRelationshipRequest) returns (AddRelationshipResponse) {
-    option (google.api.http) = {
-      post: "/relationship"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "addRelationship"
+      summary: "Add relationship"
+      description: "Creates a relationship between two profiles (member, affiliated, blacklisted). Supports hierarchical relationships."
+      tags: "Relationships"
     };
   }
 
-  // Remove an existing relationship between profiles.
+  // DeleteRelationship removes a relationship between profiles.
   rpc DeleteRelationship(DeleteRelationshipRequest) returns (DeleteRelationshipResponse) {
-    option (google.api.http) = {delete: "/relationship/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "deleteRelationship"
+      summary: "Delete relationship"
+      description: "Removes an existing relationship between profiles. The profiles remain but are no longer linked."
+      tags: "Relationships"
+    };
   }
 
-  // Lists relationships a profile has.
+  // ListRelationship lists all relationships for a profile.
   rpc ListRelationship(ListRelationshipRequest) returns (stream ListRelationshipResponse) {
-    option (google.api.http) = {get: "/relationship"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listRelationships"
+      summary: "List relationships"
+      description: "Lists all relationships for a profile with optional filtering by type and related profiles. Supports pagination and relationship inversion."
+      tags: "Relationships"
+    };
   }
 }
