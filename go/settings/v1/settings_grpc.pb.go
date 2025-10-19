@@ -43,11 +43,21 @@ const (
 // SettingsServiceClient is the client API for SettingsService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// SettingsService provides hierarchical configuration management.
+// All RPCs require authentication via Bearer token.
 type SettingsServiceClient interface {
-	// Gets a single setting and its stored value
+	// Get retrieves a single setting value by its hierarchical key.
+	// Returns the most specific matching setting based on the key hierarchy.
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
+	// List retrieves all settings matching a partial key.
+	// Empty fields in the key act as wildcards.
 	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListResponse], error)
+	// Search finds settings matching specified criteria.
+	// Supports full-text search and filtering.
 	Search(ctx context.Context, in *v1.SearchRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchResponse], error)
+	// Set creates or updates a setting value.
+	// Creates a new setting if it doesn't exist, updates if it does.
 	Set(ctx context.Context, in *SetRequest, opts ...grpc.CallOption) (*SetResponse, error)
 }
 
@@ -120,11 +130,21 @@ func (c *settingsServiceClient) Set(ctx context.Context, in *SetRequest, opts ..
 // SettingsServiceServer is the server API for SettingsService service.
 // All implementations must embed UnimplementedSettingsServiceServer
 // for forward compatibility.
+//
+// SettingsService provides hierarchical configuration management.
+// All RPCs require authentication via Bearer token.
 type SettingsServiceServer interface {
-	// Gets a single setting and its stored value
+	// Get retrieves a single setting value by its hierarchical key.
+	// Returns the most specific matching setting based on the key hierarchy.
 	Get(context.Context, *GetRequest) (*GetResponse, error)
+	// List retrieves all settings matching a partial key.
+	// Empty fields in the key act as wildcards.
 	List(*ListRequest, grpc.ServerStreamingServer[ListResponse]) error
+	// Search finds settings matching specified criteria.
+	// Supports full-text search and filtering.
 	Search(*v1.SearchRequest, grpc.ServerStreamingServer[SearchResponse]) error
+	// Set creates or updates a setting value.
+	// Creates a new setting if it doesn't exist, updates if it does.
 	Set(context.Context, *SetRequest) (*SetResponse, error)
 	mustEmbedUnimplementedSettingsServiceServer()
 }

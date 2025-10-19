@@ -16,128 +16,187 @@ syntax = "proto3";
 
 package common.v1;
 
+// -----------------------------------------------------
+// Core notes (normative):
+// - Common types and utilities shared across all Ant Investor services
+// - All services should use these standard enums and messages for consistency
+// - Pagination follows cursor-based or offset-based patterns
+// - All timestamps should be RFC3339 / google.protobuf.Timestamp
+// -----------------------------------------------------
+
 import "buf/validate/validate.proto";
 import "google/protobuf/struct.proto";
+import "gnostic/openapi/v3/annotations.proto";
 
 option cc_enable_arenas = true;
 option go_package = "github.com/antinvestor/apis/go/common/v1;commonv1";
 option java_multiple_files = true;
 option java_package = "commonv1";
 
+option (gnostic.openapi.v3.document) = {
+  info: {
+    title: "Common Types";
+    version: "v1.0.0";
+    description: "The Common Types library provides shared data structures, enumerations, and utility messages used across all Ant Investor API services. This includes standard state and status enums, pagination helpers, search request patterns, and contact linking structures. These types ensure consistency and interoperability across the entire API ecosystem.";
+    contact: {
+      name: "Ant Investor Ltd";
+      url: "https://github.com/antinvestor/apis";
+      email: "info@antinvestor.com";
+    }
+    license: {
+      name: "Apache License";
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
+    }
+  }
+};
+
+// -----------------------------------------------------
+// Standard Enumerations
+// -----------------------------------------------------
+
+// STATE represents the lifecycle state of an entity across all services.
+// This enum provides a consistent way to track entity states from creation to deletion.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum STATE {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  CREATED = 0;
-  CHECKED = 1;
-  ACTIVE = 2;
-  INACTIVE = 3;
-  DELETED = 4;
+  CREATED = 0;   // Entity has been created but not yet verified or activated
+  CHECKED = 1;   // Entity has been verified and is pending activation
+  ACTIVE = 2;    // Entity is active and operational
+  INACTIVE = 3;  // Entity is temporarily inactive but can be reactivated
+  DELETED = 4;   // Entity has been soft-deleted and should not be used
 }
 
+// STATUS represents the processing status of an operation or task.
+// This enum is used for tracking asynchronous operations, jobs, and workflows.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum STATUS {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  UNKNOWN = 0;
-  QUEUED = 1;
-  IN_PROCESS = 2;
-  FAILED = 3;
-  SUCCESSFUL = 4;
+  UNKNOWN = 0;      // Status is unknown or not yet determined
+  QUEUED = 1;       // Operation is queued and waiting to be processed
+  IN_PROCESS = 2;   // Operation is currently being processed
+  FAILED = 3;       // Operation has failed and will not complete successfully
+  SUCCESSFUL = 4;   // Operation has completed successfully
 }
 
+// -----------------------------------------------------
+// Pagination & Search
+// -----------------------------------------------------
+
+// Pagination provides standard offset-based pagination parameters.
+// Used for list operations that return large result sets.
 message Pagination {
-  int32 count = 1;
-  int32 page = 2;
-  string start_date = 3;
-  string end_date = 4;
+  int32 count = 1;        // Number of items per page (limit)
+  int32 page = 2;         // Page number (0-indexed or 1-indexed depending on service)
+  string start_date = 3;  // Optional: Filter results from this date (RFC3339 format)
+  string end_date = 4;    // Optional: Filter results until this date (RFC3339 format)
 }
 
+// SearchRequest provides a standard structure for search operations across services.
+// Supports text search, ID-based queries, pagination, property filtering, and extensibility.
 message SearchRequest {
-  string query = 1;
-  string id_query = 2;
-  Pagination limits = 3;
-  repeated string properties = 7;
-  google.protobuf.Struct extras = 8;
+  string query = 1;                     // Full-text search query string
+  string id_query = 2;                  // Specific ID or ID pattern to search for
+  Pagination limits = 3;                // Pagination parameters
+  repeated string properties = 7;       // Specific properties/fields to include in results
+  google.protobuf.Struct extras = 8;    // Service-specific additional search parameters
 }
 
+// -----------------------------------------------------
+// Status Tracking
+// -----------------------------------------------------
+
+// StatusRequest retrieves the current status of an entity or operation.
 message StatusRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  google.protobuf.Struct extras = 2;
+  ];  // Unique identifier of the entity or operation
+  google.protobuf.Struct extras = 2;  // Additional context or parameters
 }
 
+// StatusResponse returns the current state and status of an entity or operation.
 message StatusResponse {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  STATE state = 2;
-  STATUS status = 3;
-  string external_id = 4;
-  string transient_id = 5;
-  google.protobuf.Struct extras = 6;
+  ];  // Unique identifier of the entity or operation
+  STATE state = 2;          // Current lifecycle state
+  STATUS status = 3;        // Current processing status
+  string external_id = 4;   // External system identifier (if applicable)
+  string transient_id = 5;  // Temporary identifier for tracking (e.g., session ID)
+  google.protobuf.Struct extras = 6;  // Additional status information
 }
 
+// StatusUpdateRequest updates the state and/or status of an entity or operation.
+// Used for state transitions and status updates by authorized services.
 message StatusUpdateRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  STATE state = 2;
-  STATUS status = 3;
-  string external_id = 4;
-  google.protobuf.Struct extras = 5;
+  ];  // Unique identifier of the entity or operation
+  STATE state = 2;          // New lifecycle state (if changing)
+  STATUS status = 3;        // New processing status (if changing)
+  string external_id = 4;   // External system identifier to associate
+  google.protobuf.Struct extras = 5;  // Additional update parameters
 }
 
+// StatusUpdateResponse returns the updated status after a status update operation.
 message StatusUpdateResponse {
-  StatusResponse data = 1;
+  StatusResponse data = 1;  // Updated status information
 }
 
+// -----------------------------------------------------
+// Contact & Profile Linking
+// -----------------------------------------------------
+
+// ContactLink represents a link between a contact and a profile in the system.
+// Used for associating external contacts with internal profiles across services.
+// This enables unified identity management and contact resolution.
 message ContactLink {
   string profile_name = 1 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 250,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"
-  ];
+  ];  // Display name of the profile
 
   string profile_type = 2 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 250,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"
-  ];
+  ];  // Type of profile (e.g., "user", "organization", "service")
 
   string profile_id = 3 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
+  ];  // Unique identifier of the profile
 
   string profile_image_id = 4 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
+  ];  // Identifier of the profile's image/avatar
 
   string contact_id = 8 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,40}"
-  ];
+  ];  // Unique identifier of the contact
+
   string detail = 9 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 250,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,250}"
-  ];
+  ];  // Additional contact details (e.g., email, phone, handle)
 
-  google.protobuf.Struct extras = 10;
+  google.protobuf.Struct extras = 10;  // Extended metadata for the contact link
 }

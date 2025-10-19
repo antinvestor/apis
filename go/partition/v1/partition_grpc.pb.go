@@ -59,48 +59,51 @@ const (
 // PartitionServiceClient is the client API for PartitionService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// PartitionService provides multi-tenancy and data isolation.
+// All RPCs require authentication via Bearer token.
 type PartitionServiceClient interface {
-	// Get a tenant in the system matching the id
+	// GetTenant retrieves a tenant by ID.
 	GetTenant(ctx context.Context, in *GetTenantRequest, opts ...grpc.CallOption) (*GetTenantResponse, error)
-	// List all tenants in the system matching the query in some way
+	// ListTenant retrieves all tenants matching criteria.
 	ListTenant(ctx context.Context, in *ListTenantRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListTenantResponse], error)
-	// Log a new tenant request
+	// CreateTenant creates a new tenant.
 	CreateTenant(ctx context.Context, in *CreateTenantRequest, opts ...grpc.CallOption) (*CreateTenantResponse, error)
-	// Update an existing tenant object
+	// UpdateTenant updates an existing tenant.
 	UpdateTenant(ctx context.Context, in *UpdateTenantRequest, opts ...grpc.CallOption) (*UpdateTenantResponse, error)
-	// List all partitions in the system matching the query in some way
+	// ListPartition retrieves all partitions matching criteria.
 	ListPartition(ctx context.Context, in *ListPartitionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListPartitionResponse], error)
-	// Log a new partition request
+	// CreatePartition creates a new partition.
 	CreatePartition(ctx context.Context, in *CreatePartitionRequest, opts ...grpc.CallOption) (*CreatePartitionResponse, error)
-	// Get an existing partition object
+	// GetPartition retrieves a partition by ID.
 	GetPartition(ctx context.Context, in *GetPartitionRequest, opts ...grpc.CallOption) (*GetPartitionResponse, error)
-	// Get a partition parents object
+	// GetPartitionParents retrieves the parent hierarchy.
 	GetPartitionParents(ctx context.Context, in *GetPartitionParentsRequest, opts ...grpc.CallOption) (*GetPartitionParentsResponse, error)
-	// Update an existing partition object
+	// UpdatePartition updates an existing partition.
 	UpdatePartition(ctx context.Context, in *UpdatePartitionRequest, opts ...grpc.CallOption) (*UpdatePartitionResponse, error)
-	// Create a partition Role for a particular partition
+	// CreatePartitionRole creates a role within a partition.
 	CreatePartitionRole(ctx context.Context, in *CreatePartitionRoleRequest, opts ...grpc.CallOption) (*CreatePartitionRoleResponse, error)
-	// List partition roles available for this particular partition
+	// ListPartitionRole retrieves all roles for a partition.
 	ListPartitionRole(ctx context.Context, in *ListPartitionRoleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListPartitionRoleResponse], error)
-	// Remove a partition role that is not required
+	// RemovePartitionRole deletes a partition role.
 	RemovePartitionRole(ctx context.Context, in *RemovePartitionRoleRequest, opts ...grpc.CallOption) (*RemovePartitionRoleResponse, error)
-	// Creates a new page for access or customization of how a partition looks like
+	// CreatePage creates a custom UI page for a partition.
 	CreatePage(ctx context.Context, in *CreatePageRequest, opts ...grpc.CallOption) (*CreatePageResponse, error)
-	// Obtains a new page specific to a partition
+	// GetPage retrieves a custom page.
 	GetPage(ctx context.Context, in *GetPageRequest, opts ...grpc.CallOption) (*GetPageResponse, error)
-	// Removes a page from being accessible for a partition
+	// RemovePage deletes a custom page.
 	RemovePage(ctx context.Context, in *RemovePageRequest, opts ...grpc.CallOption) (*RemovePageResponse, error)
-	// Creates a users ability to access a partition
+	// CreateAccess grants a profile access to a partition.
 	CreateAccess(ctx context.Context, in *CreateAccessRequest, opts ...grpc.CallOption) (*CreateAccessResponse, error)
-	// Obtains a users access to a partition by access id or partition and profile id
+	// GetAccess retrieves an access grant.
 	GetAccess(ctx context.Context, in *GetAccessRequest, opts ...grpc.CallOption) (*GetAccessResponse, error)
-	// Removes a user's ability to access a partition
+	// RemoveAccess revokes a profile's access to a partition.
 	RemoveAccess(ctx context.Context, in *RemoveAccessRequest, opts ...grpc.CallOption) (*RemoveAccessResponse, error)
-	// Create an access Role for a particular access
+	// CreateAccessRole assigns a role to an access grant.
 	CreateAccessRole(ctx context.Context, in *CreateAccessRoleRequest, opts ...grpc.CallOption) (*CreateAccessRoleResponse, error)
-	// List access roles available for this particular access
+	// ListAccessRole retrieves all roles for an access grant.
 	ListAccessRole(ctx context.Context, in *ListAccessRoleRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListAccessRoleResponse], error)
-	// Remove an access role that is not required
+	// RemoveAccessRole removes a role from an access grant.
 	RemoveAccessRole(ctx context.Context, in *RemoveAccessRoleRequest, opts ...grpc.CallOption) (*RemoveAccessRoleResponse, error)
 }
 
@@ -361,48 +364,51 @@ func (c *partitionServiceClient) RemoveAccessRole(ctx context.Context, in *Remov
 // PartitionServiceServer is the server API for PartitionService service.
 // All implementations must embed UnimplementedPartitionServiceServer
 // for forward compatibility.
+//
+// PartitionService provides multi-tenancy and data isolation.
+// All RPCs require authentication via Bearer token.
 type PartitionServiceServer interface {
-	// Get a tenant in the system matching the id
+	// GetTenant retrieves a tenant by ID.
 	GetTenant(context.Context, *GetTenantRequest) (*GetTenantResponse, error)
-	// List all tenants in the system matching the query in some way
+	// ListTenant retrieves all tenants matching criteria.
 	ListTenant(*ListTenantRequest, grpc.ServerStreamingServer[ListTenantResponse]) error
-	// Log a new tenant request
+	// CreateTenant creates a new tenant.
 	CreateTenant(context.Context, *CreateTenantRequest) (*CreateTenantResponse, error)
-	// Update an existing tenant object
+	// UpdateTenant updates an existing tenant.
 	UpdateTenant(context.Context, *UpdateTenantRequest) (*UpdateTenantResponse, error)
-	// List all partitions in the system matching the query in some way
+	// ListPartition retrieves all partitions matching criteria.
 	ListPartition(*ListPartitionRequest, grpc.ServerStreamingServer[ListPartitionResponse]) error
-	// Log a new partition request
+	// CreatePartition creates a new partition.
 	CreatePartition(context.Context, *CreatePartitionRequest) (*CreatePartitionResponse, error)
-	// Get an existing partition object
+	// GetPartition retrieves a partition by ID.
 	GetPartition(context.Context, *GetPartitionRequest) (*GetPartitionResponse, error)
-	// Get a partition parents object
+	// GetPartitionParents retrieves the parent hierarchy.
 	GetPartitionParents(context.Context, *GetPartitionParentsRequest) (*GetPartitionParentsResponse, error)
-	// Update an existing partition object
+	// UpdatePartition updates an existing partition.
 	UpdatePartition(context.Context, *UpdatePartitionRequest) (*UpdatePartitionResponse, error)
-	// Create a partition Role for a particular partition
+	// CreatePartitionRole creates a role within a partition.
 	CreatePartitionRole(context.Context, *CreatePartitionRoleRequest) (*CreatePartitionRoleResponse, error)
-	// List partition roles available for this particular partition
+	// ListPartitionRole retrieves all roles for a partition.
 	ListPartitionRole(*ListPartitionRoleRequest, grpc.ServerStreamingServer[ListPartitionRoleResponse]) error
-	// Remove a partition role that is not required
+	// RemovePartitionRole deletes a partition role.
 	RemovePartitionRole(context.Context, *RemovePartitionRoleRequest) (*RemovePartitionRoleResponse, error)
-	// Creates a new page for access or customization of how a partition looks like
+	// CreatePage creates a custom UI page for a partition.
 	CreatePage(context.Context, *CreatePageRequest) (*CreatePageResponse, error)
-	// Obtains a new page specific to a partition
+	// GetPage retrieves a custom page.
 	GetPage(context.Context, *GetPageRequest) (*GetPageResponse, error)
-	// Removes a page from being accessible for a partition
+	// RemovePage deletes a custom page.
 	RemovePage(context.Context, *RemovePageRequest) (*RemovePageResponse, error)
-	// Creates a users ability to access a partition
+	// CreateAccess grants a profile access to a partition.
 	CreateAccess(context.Context, *CreateAccessRequest) (*CreateAccessResponse, error)
-	// Obtains a users access to a partition by access id or partition and profile id
+	// GetAccess retrieves an access grant.
 	GetAccess(context.Context, *GetAccessRequest) (*GetAccessResponse, error)
-	// Removes a user's ability to access a partition
+	// RemoveAccess revokes a profile's access to a partition.
 	RemoveAccess(context.Context, *RemoveAccessRequest) (*RemoveAccessResponse, error)
-	// Create an access Role for a particular access
+	// CreateAccessRole assigns a role to an access grant.
 	CreateAccessRole(context.Context, *CreateAccessRoleRequest) (*CreateAccessRoleResponse, error)
-	// List access roles available for this particular access
+	// ListAccessRole retrieves all roles for an access grant.
 	ListAccessRole(*ListAccessRoleRequest, grpc.ServerStreamingServer[ListAccessRoleResponse]) error
-	// Remove an access role that is not required
+	// RemoveAccessRole removes a role from an access grant.
 	RemoveAccessRole(context.Context, *RemoveAccessRoleRequest) (*RemoveAccessRoleResponse, error)
 	mustEmbedUnimplementedPartitionServiceServer()
 }

@@ -18,7 +18,8 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  * <pre>
- * The device service definition.
+ * DeviceService provides comprehensive device management capabilities.
+ * All RPCs require authentication via Bearer token unless otherwise specified.
  * </pre>
  */
 @io.grpc.stub.annotations.GrpcGenerated
@@ -462,14 +463,16 @@ public final class DeviceServiceGrpc {
 
   /**
    * <pre>
-   * The device service definition.
+   * DeviceService provides comprehensive device management capabilities.
+   * All RPCs require authentication via Bearer token unless otherwise specified.
    * </pre>
    */
   public interface AsyncService {
 
     /**
      * <pre>
-     * Obtains a device by its hash
+     * GetById retrieves one or more devices by their unique identifiers.
+     * Supports batch retrieval for efficiency.
      * </pre>
      */
     default void getById(com.antinvestor.apis.device.v1.GetByIdRequest request,
@@ -479,7 +482,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its session id
+     * GetBySessionId retrieves a device by its active session identifier.
+     * Useful for resolving devices from session tokens.
      * </pre>
      */
     default void getBySessionId(com.antinvestor.apis.device.v1.GetBySessionIdRequest request,
@@ -489,7 +493,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its hash
+     * Search finds devices matching specified criteria.
+     * Supports filtering by date range, properties, and full-text search.
      * </pre>
      */
     default void search(com.antinvestor.apis.device.v1.SearchRequest request,
@@ -499,7 +504,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new device based on the request.
+     * Create registers a new device in the system.
+     * Returns a unique device ID that should be stored by the client.
      * </pre>
      */
     default void create(com.antinvestor.apis.device.v1.CreateRequest request,
@@ -509,7 +515,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Updates an existing device based on the request.
+     * Update modifies an existing device's information.
+     * Only the device owner or administrators can update device information.
      * </pre>
      */
     default void update(com.antinvestor.apis.device.v1.UpdateRequest request,
@@ -519,7 +526,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Links an existing device session based on the request to a profile.
+     * Link associates a device with a user profile.
+     * Required before the device can be used for authenticated operations.
      * </pre>
      */
     default void link(com.antinvestor.apis.device.v1.LinkRequest request,
@@ -529,7 +537,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Removes an existing device based on the request.
+     * Remove deletes a device from the system.
+     * This operation cannot be undone.
      * </pre>
      */
     default void remove(com.antinvestor.apis.device.v1.RemoveRequest request,
@@ -539,7 +548,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Log a new key based on the request.
+     * Log creates a new activity log entry for a device.
+     * Used for session tracking and security auditing.
      * </pre>
      */
     default void log(com.antinvestor.apis.device.v1.LogRequest request,
@@ -549,7 +559,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Lists logs the a device has/owns.
+     * ListLogs retrieves activity logs for a device.
+     * Returns a stream of log entries for the specified device.
      * </pre>
      */
     default void listLogs(com.antinvestor.apis.device.v1.ListLogsRequest request,
@@ -559,7 +570,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new key based on the request.
+     * AddKey adds an encryption key to a device.
+     * Keys are used for secure communications (Matrix E2EE, push notifications).
      * </pre>
      */
     default void addKey(com.antinvestor.apis.device.v1.AddKeyRequest request,
@@ -569,7 +581,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Removes an old device keys based on this request's id
+     * RemoveKey removes encryption keys from a device.
+     * Used for key rotation or when removing a device.
      * </pre>
      */
     default void removeKey(com.antinvestor.apis.device.v1.RemoveKeyRequest request,
@@ -579,7 +592,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Lists all the keys a device has/owns.
+     * SearchKey finds encryption keys associated with a device.
+     * Supports filtering by key type and pagination.
      * </pre>
      */
     default void searchKey(com.antinvestor.apis.device.v1.SearchKeyRequest request,
@@ -591,7 +605,8 @@ public final class DeviceServiceGrpc {
   /**
    * Base class for the server implementation of the service DeviceService.
    * <pre>
-   * The device service definition.
+   * DeviceService provides comprehensive device management capabilities.
+   * All RPCs require authentication via Bearer token unless otherwise specified.
    * </pre>
    */
   public static abstract class DeviceServiceImplBase
@@ -605,7 +620,8 @@ public final class DeviceServiceGrpc {
   /**
    * A stub to allow clients to do asynchronous rpc calls to service DeviceService.
    * <pre>
-   * The device service definition.
+   * DeviceService provides comprehensive device management capabilities.
+   * All RPCs require authentication via Bearer token unless otherwise specified.
    * </pre>
    */
   public static final class DeviceServiceStub
@@ -623,7 +639,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its hash
+     * GetById retrieves one or more devices by their unique identifiers.
+     * Supports batch retrieval for efficiency.
      * </pre>
      */
     public void getById(com.antinvestor.apis.device.v1.GetByIdRequest request,
@@ -634,7 +651,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its session id
+     * GetBySessionId retrieves a device by its active session identifier.
+     * Useful for resolving devices from session tokens.
      * </pre>
      */
     public void getBySessionId(com.antinvestor.apis.device.v1.GetBySessionIdRequest request,
@@ -645,7 +663,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its hash
+     * Search finds devices matching specified criteria.
+     * Supports filtering by date range, properties, and full-text search.
      * </pre>
      */
     public void search(com.antinvestor.apis.device.v1.SearchRequest request,
@@ -656,7 +675,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new device based on the request.
+     * Create registers a new device in the system.
+     * Returns a unique device ID that should be stored by the client.
      * </pre>
      */
     public void create(com.antinvestor.apis.device.v1.CreateRequest request,
@@ -667,7 +687,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Updates an existing device based on the request.
+     * Update modifies an existing device's information.
+     * Only the device owner or administrators can update device information.
      * </pre>
      */
     public void update(com.antinvestor.apis.device.v1.UpdateRequest request,
@@ -678,7 +699,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Links an existing device session based on the request to a profile.
+     * Link associates a device with a user profile.
+     * Required before the device can be used for authenticated operations.
      * </pre>
      */
     public void link(com.antinvestor.apis.device.v1.LinkRequest request,
@@ -689,7 +711,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Removes an existing device based on the request.
+     * Remove deletes a device from the system.
+     * This operation cannot be undone.
      * </pre>
      */
     public void remove(com.antinvestor.apis.device.v1.RemoveRequest request,
@@ -700,7 +723,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Log a new key based on the request.
+     * Log creates a new activity log entry for a device.
+     * Used for session tracking and security auditing.
      * </pre>
      */
     public void log(com.antinvestor.apis.device.v1.LogRequest request,
@@ -711,7 +735,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Lists logs the a device has/owns.
+     * ListLogs retrieves activity logs for a device.
+     * Returns a stream of log entries for the specified device.
      * </pre>
      */
     public void listLogs(com.antinvestor.apis.device.v1.ListLogsRequest request,
@@ -722,7 +747,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new key based on the request.
+     * AddKey adds an encryption key to a device.
+     * Keys are used for secure communications (Matrix E2EE, push notifications).
      * </pre>
      */
     public void addKey(com.antinvestor.apis.device.v1.AddKeyRequest request,
@@ -733,7 +759,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Removes an old device keys based on this request's id
+     * RemoveKey removes encryption keys from a device.
+     * Used for key rotation or when removing a device.
      * </pre>
      */
     public void removeKey(com.antinvestor.apis.device.v1.RemoveKeyRequest request,
@@ -744,7 +771,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Lists all the keys a device has/owns.
+     * SearchKey finds encryption keys associated with a device.
+     * Supports filtering by key type and pagination.
      * </pre>
      */
     public void searchKey(com.antinvestor.apis.device.v1.SearchKeyRequest request,
@@ -757,7 +785,8 @@ public final class DeviceServiceGrpc {
   /**
    * A stub to allow clients to do synchronous rpc calls to service DeviceService.
    * <pre>
-   * The device service definition.
+   * DeviceService provides comprehensive device management capabilities.
+   * All RPCs require authentication via Bearer token unless otherwise specified.
    * </pre>
    */
   public static final class DeviceServiceBlockingV2Stub
@@ -775,7 +804,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its hash
+     * GetById retrieves one or more devices by their unique identifiers.
+     * Supports batch retrieval for efficiency.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.GetByIdResponse getById(com.antinvestor.apis.device.v1.GetByIdRequest request) throws io.grpc.StatusException {
@@ -785,7 +815,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its session id
+     * GetBySessionId retrieves a device by its active session identifier.
+     * Useful for resolving devices from session tokens.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.GetBySessionIdResponse getBySessionId(com.antinvestor.apis.device.v1.GetBySessionIdRequest request) throws io.grpc.StatusException {
@@ -795,7 +826,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its hash
+     * Search finds devices matching specified criteria.
+     * Supports filtering by date range, properties, and full-text search.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -807,7 +839,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new device based on the request.
+     * Create registers a new device in the system.
+     * Returns a unique device ID that should be stored by the client.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.CreateResponse create(com.antinvestor.apis.device.v1.CreateRequest request) throws io.grpc.StatusException {
@@ -817,7 +850,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Updates an existing device based on the request.
+     * Update modifies an existing device's information.
+     * Only the device owner or administrators can update device information.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.UpdateResponse update(com.antinvestor.apis.device.v1.UpdateRequest request) throws io.grpc.StatusException {
@@ -827,7 +861,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Links an existing device session based on the request to a profile.
+     * Link associates a device with a user profile.
+     * Required before the device can be used for authenticated operations.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.LinkResponse link(com.antinvestor.apis.device.v1.LinkRequest request) throws io.grpc.StatusException {
@@ -837,7 +872,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Removes an existing device based on the request.
+     * Remove deletes a device from the system.
+     * This operation cannot be undone.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.RemoveResponse remove(com.antinvestor.apis.device.v1.RemoveRequest request) throws io.grpc.StatusException {
@@ -847,7 +883,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Log a new key based on the request.
+     * Log creates a new activity log entry for a device.
+     * Used for session tracking and security auditing.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.LogResponse log(com.antinvestor.apis.device.v1.LogRequest request) throws io.grpc.StatusException {
@@ -857,7 +894,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Lists logs the a device has/owns.
+     * ListLogs retrieves activity logs for a device.
+     * Returns a stream of log entries for the specified device.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -869,7 +907,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new key based on the request.
+     * AddKey adds an encryption key to a device.
+     * Keys are used for secure communications (Matrix E2EE, push notifications).
      * </pre>
      */
     public com.antinvestor.apis.device.v1.AddKeyResponse addKey(com.antinvestor.apis.device.v1.AddKeyRequest request) throws io.grpc.StatusException {
@@ -879,7 +918,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Removes an old device keys based on this request's id
+     * RemoveKey removes encryption keys from a device.
+     * Used for key rotation or when removing a device.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.RemoveKeyResponse removeKey(com.antinvestor.apis.device.v1.RemoveKeyRequest request) throws io.grpc.StatusException {
@@ -889,7 +929,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Lists all the keys a device has/owns.
+     * SearchKey finds encryption keys associated with a device.
+     * Supports filtering by key type and pagination.
      * </pre>
      */
     @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
@@ -903,7 +944,8 @@ public final class DeviceServiceGrpc {
   /**
    * A stub to allow clients to do limited synchronous rpc calls to service DeviceService.
    * <pre>
-   * The device service definition.
+   * DeviceService provides comprehensive device management capabilities.
+   * All RPCs require authentication via Bearer token unless otherwise specified.
    * </pre>
    */
   public static final class DeviceServiceBlockingStub
@@ -921,7 +963,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its hash
+     * GetById retrieves one or more devices by their unique identifiers.
+     * Supports batch retrieval for efficiency.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.GetByIdResponse getById(com.antinvestor.apis.device.v1.GetByIdRequest request) {
@@ -931,7 +974,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its session id
+     * GetBySessionId retrieves a device by its active session identifier.
+     * Useful for resolving devices from session tokens.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.GetBySessionIdResponse getBySessionId(com.antinvestor.apis.device.v1.GetBySessionIdRequest request) {
@@ -941,7 +985,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its hash
+     * Search finds devices matching specified criteria.
+     * Supports filtering by date range, properties, and full-text search.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.device.v1.SearchResponse> search(
@@ -952,7 +997,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new device based on the request.
+     * Create registers a new device in the system.
+     * Returns a unique device ID that should be stored by the client.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.CreateResponse create(com.antinvestor.apis.device.v1.CreateRequest request) {
@@ -962,7 +1008,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Updates an existing device based on the request.
+     * Update modifies an existing device's information.
+     * Only the device owner or administrators can update device information.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.UpdateResponse update(com.antinvestor.apis.device.v1.UpdateRequest request) {
@@ -972,7 +1019,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Links an existing device session based on the request to a profile.
+     * Link associates a device with a user profile.
+     * Required before the device can be used for authenticated operations.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.LinkResponse link(com.antinvestor.apis.device.v1.LinkRequest request) {
@@ -982,7 +1030,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Removes an existing device based on the request.
+     * Remove deletes a device from the system.
+     * This operation cannot be undone.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.RemoveResponse remove(com.antinvestor.apis.device.v1.RemoveRequest request) {
@@ -992,7 +1041,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Log a new key based on the request.
+     * Log creates a new activity log entry for a device.
+     * Used for session tracking and security auditing.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.LogResponse log(com.antinvestor.apis.device.v1.LogRequest request) {
@@ -1002,7 +1052,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Lists logs the a device has/owns.
+     * ListLogs retrieves activity logs for a device.
+     * Returns a stream of log entries for the specified device.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.device.v1.ListLogsResponse> listLogs(
@@ -1013,7 +1064,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new key based on the request.
+     * AddKey adds an encryption key to a device.
+     * Keys are used for secure communications (Matrix E2EE, push notifications).
      * </pre>
      */
     public com.antinvestor.apis.device.v1.AddKeyResponse addKey(com.antinvestor.apis.device.v1.AddKeyRequest request) {
@@ -1023,7 +1075,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Removes an old device keys based on this request's id
+     * RemoveKey removes encryption keys from a device.
+     * Used for key rotation or when removing a device.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.RemoveKeyResponse removeKey(com.antinvestor.apis.device.v1.RemoveKeyRequest request) {
@@ -1033,7 +1086,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Lists all the keys a device has/owns.
+     * SearchKey finds encryption keys associated with a device.
+     * Supports filtering by key type and pagination.
      * </pre>
      */
     public java.util.Iterator<com.antinvestor.apis.device.v1.SearchKeyResponse> searchKey(
@@ -1046,7 +1100,8 @@ public final class DeviceServiceGrpc {
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service DeviceService.
    * <pre>
-   * The device service definition.
+   * DeviceService provides comprehensive device management capabilities.
+   * All RPCs require authentication via Bearer token unless otherwise specified.
    * </pre>
    */
   public static final class DeviceServiceFutureStub
@@ -1064,7 +1119,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its hash
+     * GetById retrieves one or more devices by their unique identifiers.
+     * Supports batch retrieval for efficiency.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.GetByIdResponse> getById(
@@ -1075,7 +1131,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Obtains a device by its session id
+     * GetBySessionId retrieves a device by its active session identifier.
+     * Useful for resolving devices from session tokens.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.GetBySessionIdResponse> getBySessionId(
@@ -1086,7 +1143,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Creates a new device based on the request.
+     * Create registers a new device in the system.
+     * Returns a unique device ID that should be stored by the client.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.CreateResponse> create(
@@ -1097,7 +1155,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Updates an existing device based on the request.
+     * Update modifies an existing device's information.
+     * Only the device owner or administrators can update device information.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.UpdateResponse> update(
@@ -1108,7 +1167,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Links an existing device session based on the request to a profile.
+     * Link associates a device with a user profile.
+     * Required before the device can be used for authenticated operations.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.LinkResponse> link(
@@ -1119,7 +1179,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Removes an existing device based on the request.
+     * Remove deletes a device from the system.
+     * This operation cannot be undone.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.RemoveResponse> remove(
@@ -1130,7 +1191,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Log a new key based on the request.
+     * Log creates a new activity log entry for a device.
+     * Used for session tracking and security auditing.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.LogResponse> log(
@@ -1141,7 +1203,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Adds a new key based on the request.
+     * AddKey adds an encryption key to a device.
+     * Keys are used for secure communications (Matrix E2EE, push notifications).
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.AddKeyResponse> addKey(
@@ -1152,7 +1215,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * Removes an old device keys based on this request's id
+     * RemoveKey removes encryption keys from a device.
+     * Used for key rotation or when removing a device.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.RemoveKeyResponse> removeKey(

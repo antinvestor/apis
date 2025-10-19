@@ -16,121 +16,150 @@ syntax = "proto3";
 
 package device.v1;
 
+// -----------------------------------------------------
+// Core notes (normative):
+// - Device Service manages device registration, tracking, and key management
+// - All devices must be registered before use and linked to a profile
+// - Supports device logs for session tracking and security auditing
+// - Encryption keys (Matrix, Notification) are managed per device
+// - All timestamps are RFC3339 / google.protobuf.Timestamp
+// -----------------------------------------------------
+
 import "buf/validate/validate.proto";
-import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "gnostic/openapi/v3/annotations.proto";
 
 option go_package = "github.com/antinvestor/apis/go/device/v1;devicev1";
 option java_multiple_files = true;
 option java_package = "devicev1";
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+
+option (gnostic.openapi.v3.document) = {
   info: {
-    title: "Device Service"
-    version: "1.0"
+    title: "Device Service";
+    version: "v1.0.0";
+    description: "The Device Service provides comprehensive device management capabilities including device registration, session tracking, key management, and security auditing. It enables applications to register and track user devices across platforms (mobile, web, desktop), manage encryption keys for secure communications, and maintain detailed logs of device activity for security and compliance purposes. The service supports multi-device scenarios where users can have multiple active devices simultaneously.";
     contact: {
-      name: "Ant Investor Ltd"
-      url: "https://github.com/antinvestor/service-device"
-      email: "info@antinvestor.com"
+      name: "Ant Investor Ltd";
+      url: "https://github.com/antinvestor/service-device";
+      email: "info@antinvestor.com";
+    }
+    license: {
+      name: "Apache License";
+      url: "https://github.com/antinvestor/apis/blob/master/LICENSE";
     }
   }
-
-  schemes: HTTP
-  schemes: HTTPS
-  consumes: "application/json"
-  produces: "application/json"
-
-  security_definitions: {
-    security: {
-      key: "bearer"
-      value: {
-        type: TYPE_API_KEY
-        in: IN_HEADER
-        name: "Authorization"
-        description: "Authentication token, prefixed by Bearer: Bearer <token>"
-      }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BearerAuth";
+          value: {
+            security_scheme: {
+              type: "http";
+              scheme: "bearer";
+              bearer_format: "JWT";
+            }
+          }
+        }
+      ]
     }
-  }
-  security: {
-    security_requirement: {key: "bearer"}
   }
 };
 
+// -----------------------------------------------------
+// Enumerations
+// -----------------------------------------------------
+
+// KeyType defines the types of encryption keys that can be stored for a device.
+// Different key types serve different purposes in the security infrastructure.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 enum KeyType {
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  MATRIX_KEY = 0;
-  NOTIFICATION_KEY = 1;
+  MATRIX_KEY = 0;        // Encryption key for Matrix protocol end-to-end encryption
+  NOTIFICATION_KEY = 1;  // Key for secure push notification delivery
 }
 
+// -----------------------------------------------------
+// Core Data Types
+// -----------------------------------------------------
+
+// Locale represents the localization settings for a device.
+// Used to provide localized content and format data appropriately for the user.
 message Locale {
-  repeated string language = 1;
-  string timezone = 5;
-  string utc_offset = 6;
-  string currency = 8;
-  string currency_name = 9;
-  string code = 10;
+  repeated string language = 1;  // Preferred languages in priority order (e.g., ["en-US", "en"])
+  string timezone = 5;            // IANA timezone identifier (e.g., "America/New_York")
+  string utc_offset = 6;          // UTC offset in format "+HH:MM" or "-HH:MM"
+  string currency = 8;            // ISO 4217 currency code (e.g., "USD", "EUR")
+  string currency_name = 9;       // Human-readable currency name
+  string code = 10;               // ISO 3166-1 alpha-2 country code (e.g., "US", "GB")
 }
 
-// The response message containing the full device key object
+// KeyObject represents an encryption key associated with a device.
+// Keys are used for secure communications and must be properly managed.
 message KeyObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Unique identifier for the key
   string device_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Device this key belongs to
 
-  bytes key = 3;
-  google.protobuf.Struct extra = 4;
+  bytes key = 3;                      // The actual encryption key material (encrypted at rest)
+  google.protobuf.Struct extra = 4;   // Additional key metadata (algorithm, expiry, etc.)
 }
 
-// Contained message representing a device's log
+// DeviceLog represents an activity log entry for a device.
+// Logs track device sessions, locations, and activity for security auditing.
 message DeviceLog {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Unique identifier for this log entry
   string device_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string session_id = 3;
-  string ip = 4;
-  Locale locale = 5;
-  string user_agent = 6;
-  string os = 7;
-  string last_seen = 8;
-  google.protobuf.Struct location = 9;
-  google.protobuf.Struct extra = 10;
+  ];  // Device this log entry belongs to
+  string session_id = 3;                // Session identifier for this activity
+  string ip = 4;                        // IP address of the device during this session
+  Locale locale = 5;                    // Locale settings during this session
+  string user_agent = 6;                // User agent string (browser/app info)
+  string os = 7;                        // Operating system and version
+  string last_seen = 8;                 // Last activity timestamp (RFC3339)
+  google.protobuf.Struct location = 9;  // Geographic location data (lat/long, city, country)
+  google.protobuf.Struct extra = 10;    // Additional log metadata
 }
 
-// The response message containing the full device object
+// DeviceObject represents a registered device in the system.
+// Devices must be registered and linked to a profile before use.
 message DeviceObject {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string name = 2;
-  string session_id = 3;
-  string ip = 4;
-  string user_agent = 5;
-  string os = 6;
-  string last_seen = 7;
-  string profile_id = 8;
-  Locale locale = 9;
-  google.protobuf.Struct location = 11;
-  google.protobuf.Struct properties = 15;
+  ];  // Unique identifier for the device
+  string name = 2;                        // User-friendly device name (e.g., "John's iPhone")
+  string session_id = 3;                  // Current active session identifier
+  string ip = 4;                          // Last known IP address
+  string user_agent = 5;                  // User agent string
+  string os = 6;                          // Operating system and version
+  string last_seen = 7;                   // Last activity timestamp (RFC3339)
+  string profile_id = 8;                  // Profile this device is linked to
+  Locale locale = 9;                      // Device locale settings
+  google.protobuf.Struct location = 11;   // Last known geographic location
+  google.protobuf.Struct properties = 15; // Additional device properties (model, manufacturer, etc.)
 }
 
-// The request message containing the device's hash
+// -----------------------------------------------------
+// Device Management Messages
+// -----------------------------------------------------
+
+// GetByIdRequest retrieves one or more devices by their unique identifiers.
 message GetByIdRequest {
   repeated string id = 1 [(buf.validate.field).repeated.items = {
     string: {
@@ -138,161 +167,186 @@ message GetByIdRequest {
       max_len: 40
       pattern: "[0-9a-z_-]{3,20}"
     }
-  }];
-  bool extensive = 2;
+  }];  // List of device IDs to retrieve
+  bool extensive = 2;  // If true, include additional details (logs, keys count, etc.)
 }
 
+// GetByIdResponse returns the requested devices.
 message GetByIdResponse {
-  repeated DeviceObject data = 1;
+  repeated DeviceObject data = 1;  // List of devices matching the request
 }
 
-// The request message containing the device's hash
+// GetBySessionIdRequest retrieves a device by its active session identifier.
 message GetBySessionIdRequest {
   string id = 1 [(buf.validate.field).string = {
     min_len: 3
     max_len: 40
     pattern: "[0-9a-z_-]{3,20}"
-  }];
+  }];  // Session ID to look up
 }
 
+// GetBySessionIdResponse returns the device associated with the session.
 message GetBySessionIdResponse {
-  DeviceObject data = 1;
+  DeviceObject data = 1;  // Device object for the session
 }
 
+// SearchRequest searches for devices matching specified criteria.
 message SearchRequest {
-  string query = 1;
-  int32 page = 2;
-  int32 count = 3;
-  string start_date = 4;
-  string end_date = 5;
-  repeated string properties = 6;
-  google.protobuf.Struct extras = 7;
+  string query = 1;                     // Search query (device name, OS, etc.)
+  int32 page = 2;                       // Page number for pagination
+  int32 count = 3;                      // Number of results per page
+  string start_date = 4;                // Filter devices created after this date (RFC3339)
+  string end_date = 5;                  // Filter devices created before this date (RFC3339)
+  repeated string properties = 6;       // Specific properties to include in results
+  google.protobuf.Struct extras = 7;    // Additional search filters
 }
 
+// SearchResponse returns devices matching the search criteria.
 message SearchResponse {
-  repeated DeviceObject data = 1;
+  repeated DeviceObject data = 1;  // List of matching devices
 }
 
-// The request message containing the information necessary to create a device
+// CreateRequest registers a new device in the system.
 message CreateRequest {
-  string name = 2;
-  google.protobuf.Struct properties = 3;
+  string name = 2;                        // User-friendly name for the device
+  google.protobuf.Struct properties = 3;  // Device properties (model, manufacturer, OS version, etc.)
 }
 
+// CreateResponse returns the newly created device.
 message CreateResponse {
-  DeviceObject data = 1;
+  DeviceObject data = 1;  // The created device object
 }
 
-// The request message containing the information necessary to update a device
+// UpdateRequest updates an existing device's information.
 message UpdateRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string name = 2;
-  google.protobuf.Struct properties = 3;
+  ];  // Device ID to update
+  string name = 2;                        // New device name (if changing)
+  google.protobuf.Struct properties = 3;  // Updated device properties
 }
 
+// UpdateResponse returns the updated device.
 message UpdateResponse {
-  DeviceObject data = 1;
+  DeviceObject data = 1;  // The updated device object
 }
 
-// The request message has data to link a session to a user
+// LinkRequest links a device to a user profile.
+// Devices must be linked before they can be used for authenticated operations.
 message LinkRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Device ID to link
   string profile_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  google.protobuf.Struct properties = 3;
+  ];  // Profile ID to link the device to
+  google.protobuf.Struct properties = 3;  // Additional linking properties
 }
 
+// LinkResponse returns the linked device.
 message LinkResponse {
-  DeviceObject data = 1;
+  DeviceObject data = 1;  // The linked device object
 }
 
-// The request message containing the information necessary to remove a device
+// RemoveRequest removes a device from the system.
+// This is typically used when a user logs out or removes a device from their account.
 message RemoveRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Device ID to remove
 }
 
+// RemoveResponse returns the removed device.
 message RemoveResponse {
-  DeviceObject data = 1;
+  DeviceObject data = 1;  // The removed device object
 }
 
-// The request message containing the information necessary to create a key
+// -----------------------------------------------------
+// Device Logging Messages
+// -----------------------------------------------------
+
+// LogRequest creates a new activity log entry for a device.
+// Used for tracking device sessions and security auditing.
 message LogRequest {
   string device_id = 1 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Device ID (optional if session_id is provided)
 
   string session_id = 3 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Session identifier for this activity
 
-  string ip = 4;
-  string locale = 5;
-  string user_agent = 6;
-  string os = 7;
-  string last_seen = 8;
-  google.protobuf.Struct extras = 9;
+  string ip = 4;                        // IP address of the device
+  string locale = 5;                    // Locale settings (JSON string)
+  string user_agent = 6;                // User agent string
+  string os = 7;                        // Operating system and version
+  string last_seen = 8;                 // Timestamp of this activity (RFC3339)
+  google.protobuf.Struct extras = 9;    // Additional log data (location, app version, etc.)
 }
 
+// LogResponse returns the created log entry.
 message LogResponse {
-  DeviceLog data = 1;
+  DeviceLog data = 1;  // The created log entry
 }
 
-// Request message to list device logs related to the supplied device id
+// ListLogsRequest retrieves activity logs for a device.
+// Useful for security auditing and tracking device usage patterns.
 message ListLogsRequest {
   string device_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  int32 count = 2;
+  ];  // Device ID to retrieve logs for
+  int32 count = 2;  // Maximum number of log entries to return
 }
 
+// ListLogsResponse returns device activity logs.
 message ListLogsResponse {
-  repeated DeviceLog data = 1;
+  repeated DeviceLog data = 1;  // List of log entries
 }
 
-// The request message containing the information necessary to create a key
+// -----------------------------------------------------
+// Key Management Messages
+// -----------------------------------------------------
+
+// AddKeyRequest adds an encryption key to a device.
+// Keys are used for secure communications (Matrix E2EE, push notifications, etc.).
 message AddKeyRequest {
   string id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
+  ];  // Unique identifier for the key
   string device_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  KeyType key_type = 3;
-  bytes data = 4;
-  google.protobuf.Struct extras = 5;
+  ];  // Device this key belongs to
+  KeyType key_type = 3;                 // Type of key (Matrix, Notification, etc.)
+  bytes data = 4;                       // The key material (will be encrypted at rest)
+  google.protobuf.Struct extras = 5;    // Additional key metadata (algorithm, expiry, etc.)
 }
 
+// AddKeyResponse returns the created key.
 message AddKeyResponse {
-  KeyObject data = 1;
+  KeyObject data = 1;  // The created key object
 }
 
-// The request message containing the information necessary to remove a key
+// RemoveKeyRequest removes one or more encryption keys from a device.
+// Used when rotating keys or removing a device.
 message RemoveKeyRequest {
   repeated string id = 1 [(buf.validate.field).repeated.items = {
     string: {
@@ -300,100 +354,168 @@ message RemoveKeyRequest {
       max_len: 40
       pattern: "[0-9a-z_-]{3,20}"
     }
-  }];
+  }];  // List of key IDs to remove
 }
 
+// RemoveKeyResponse returns the IDs of removed keys.
 message RemoveKeyResponse {
-  repeated string id = 1;
+  repeated string id = 1;  // List of removed key IDs
 }
 
-// Request message to list all keys related to the supplied device id
+// SearchKeyRequest searches for encryption keys associated with a device.
 message SearchKeyRequest {
-  string query = 1;
+  string query = 1;       // Search query (key ID pattern, etc.)
   string device_id = 2 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  KeyType key_type = 3;
-  int32 page = 4;
-  int32 count = 5;
+  ];  // Device ID to search keys for
+  KeyType key_type = 3;   // Filter by key type
+  int32 page = 4;         // Page number for pagination
+  int32 count = 5;        // Number of results per page
 }
 
+// SearchKeyResponse returns matching encryption keys.
 message SearchKeyResponse {
-  repeated KeyObject data = 1;
+  repeated KeyObject data = 1;  // List of matching keys
 }
 
-// The device service definition.
+// -----------------------------------------------------
+// Device Service
+// -----------------------------------------------------
+
+// DeviceService provides comprehensive device management capabilities.
+// All RPCs require authentication via Bearer token unless otherwise specified.
 service DeviceService {
-  // Obtains a device by its hash
+  // GetById retrieves one or more devices by their unique identifiers.
+  // Supports batch retrieval for efficiency.
   rpc GetById(GetByIdRequest) returns (GetByIdResponse) {
-    option (google.api.http) = {get: "/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getDeviceById"
+      summary: "Get devices by ID"
+      description: "Retrieves one or more devices by their unique identifiers. Supports batch retrieval and optional extensive details including logs and key counts."
+      tags: "Devices"
+    };
   }
-  // Obtains a device by its session id
+
+  // GetBySessionId retrieves a device by its active session identifier.
+  // Useful for resolving devices from session tokens.
   rpc GetBySessionId(GetBySessionIdRequest) returns (GetBySessionIdResponse) {
-    option (google.api.http) = {get: "/session/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getDeviceBySessionId"
+      summary: "Get device by session ID"
+      description: "Retrieves a device by its active session identifier. Used to resolve device information from session tokens."
+      tags: "Devices"
+    };
   }
-  // Obtains a device by its hash
+
+  // Search finds devices matching specified criteria.
+  // Supports filtering by date range, properties, and full-text search.
   rpc Search(SearchRequest) returns (stream SearchResponse) {
-    option (google.api.http) = {get: "/search"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchDevices"
+      summary: "Search devices"
+      description: "Searches for devices matching specified criteria including device name, OS, date range, and custom properties. Returns a stream of matching devices."
+      tags: "Devices"
+    };
   }
-  // Creates a new device based on the request.
+
+  // Create registers a new device in the system.
+  // Returns a unique device ID that should be stored by the client.
   rpc Create(CreateRequest) returns (CreateResponse) {
-    option (google.api.http) = {
-      post: "/"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "createDevice"
+      summary: "Register a new device"
+      description: "Registers a new device in the system. The device must be linked to a profile before it can be used for authenticated operations."
+      tags: "Devices"
     };
   }
-  // Updates an existing device based on the request.
+
+  // Update modifies an existing device's information.
+  // Only the device owner or administrators can update device information.
   rpc Update(UpdateRequest) returns (UpdateResponse) {
-    option (google.api.http) = {
-      patch: "/{id}"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "updateDevice"
+      summary: "Update device information"
+      description: "Updates an existing device's name and properties. Only the device owner or administrators can perform this operation."
+      tags: "Devices"
     };
   }
 
-  // Links an existing device session based on the request to a profile.
+  // Link associates a device with a user profile.
+  // Required before the device can be used for authenticated operations.
   rpc Link(LinkRequest) returns (LinkResponse) {
-    option (google.api.http) = {
-      patch: "/link/{id}"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "linkDevice"
+      summary: "Link device to profile"
+      description: "Links a device to a user profile. This operation is required before the device can be used for authenticated operations."
+      tags: "Devices"
     };
   }
 
-  // Removes an existing device based on the request.
+  // Remove deletes a device from the system.
+  // This operation cannot be undone.
   rpc Remove(RemoveRequest) returns (RemoveResponse) {
-    option (google.api.http) = {delete: "/{id}"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "removeDevice"
+      summary: "Remove a device"
+      description: "Removes a device from the system. This operation is typically used when a user logs out or removes a device from their account. This action cannot be undone."
+      tags: "Devices"
+    };
   }
 
-  // Log a new key based on the request.
+  // Log creates a new activity log entry for a device.
+  // Used for session tracking and security auditing.
   rpc Log(LogRequest) returns (LogResponse) {
-    option (google.api.http) = {
-      post: "/logs"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "logDeviceActivity"
+      summary: "Log device activity"
+      description: "Creates a new activity log entry for a device. Used for tracking device sessions, locations, and activity for security auditing and compliance."
+      tags: "Device Logs"
     };
   }
 
-  // Lists logs the a device has/owns.
+  // ListLogs retrieves activity logs for a device.
+  // Returns a stream of log entries for the specified device.
   rpc ListLogs(ListLogsRequest) returns (stream ListLogsResponse) {
-    option (google.api.http) = {get: "/logs"};
-  }
-
-  // Adds a new key based on the request.
-  rpc AddKey(AddKeyRequest) returns (AddKeyResponse) {
-    option (google.api.http) = {
-      post: "/keys"
-      body: "*"
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "listDeviceLogs"
+      summary: "List device activity logs"
+      description: "Retrieves activity logs for a device. Useful for security auditing, tracking device usage patterns, and compliance reporting."
+      tags: "Device Logs"
     };
   }
 
-  // Removes an old device keys based on this request's id
-  rpc RemoveKey(RemoveKeyRequest) returns (RemoveKeyResponse) {
-    option (google.api.http) = {delete: "/keys/{id}"};
+  // AddKey adds an encryption key to a device.
+  // Keys are used for secure communications (Matrix E2EE, push notifications).
+  rpc AddKey(AddKeyRequest) returns (AddKeyResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "addDeviceKey"
+      summary: "Add encryption key"
+      description: "Adds an encryption key to a device. Keys are used for secure communications including Matrix end-to-end encryption and secure push notification delivery."
+      tags: "Device Keys"
+    };
   }
 
-  // Lists all the keys a device has/owns.
+  // RemoveKey removes encryption keys from a device.
+  // Used for key rotation or when removing a device.
+  rpc RemoveKey(RemoveKeyRequest) returns (RemoveKeyResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "removeDeviceKey"
+      summary: "Remove encryption keys"
+      description: "Removes one or more encryption keys from a device. Used for key rotation or when removing a device from the system."
+      tags: "Device Keys"
+    };
+  }
+
+  // SearchKey finds encryption keys associated with a device.
+  // Supports filtering by key type and pagination.
   rpc SearchKey(SearchKeyRequest) returns (stream SearchKeyResponse) {
-    option (google.api.http) = {get: "/keys"};
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "searchDeviceKeys"
+      summary: "Search device encryption keys"
+      description: "Searches for encryption keys associated with a device. Supports filtering by key type (Matrix, Notification) and pagination."
+      tags: "Device Keys"
+    };
   }
 }
