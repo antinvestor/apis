@@ -29,3 +29,9 @@ plugins:
   - remote: buf.build/protocolbuffers/java
     out: ../../java/common/src/main/java/
 
+  - remote: buf.build/protocolbuffers/dart
+    out: ../../dart/common/lib/src
+    include_wkt: true
+    include_imports: true
+  - remote: buf.build/connectrpc/dart
+    out: ../../dart/common/lib/src

@@ -22,8 +22,7 @@ package chatv1
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
+	_ "github.com/google/gnostic/openapiv3"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/known/emptypb"
@@ -2387,7 +2386,7 @@ var File_chat_v1_chat_proto protoreflect.FileDescriptor
 
 const file_chat_v1_chat_proto_rawDesc = "" +
 	"\n" +
-	"\x12chat/v1/chat.proto\x12\achat.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa8\x01\n" +
+	"\x12chat/v1/chat.proto\x12\achat.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a$gnostic/openapi/v3/annotations.proto\"\xa8\x01\n" +
 	"\vErrorDetail\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x122\n" +
@@ -2586,31 +2585,46 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\x10PRESENCE_OFFLINE\x10\x01\x12\x13\n" +
 	"\x0fPRESENCE_ONLINE\x10\x02\x12\x11\n" +
 	"\rPRESENCE_AWAY\x10\x03\x12\x11\n" +
-	"\rPRESENCE_BUSY\x10\x042\xe1\t\n" +
-	"\vChatService\x12Q\n" +
-	"\aConnect\x12\x17.chat.v1.ConnectRequest\x1a\x14.chat.v1.ServerEvent\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/connect(\x010\x01\x12V\n" +
-	"\vSendMessage\x12\x1b.chat.v1.SendMessageRequest\x1a\x1c.chat.v1.SendMessageResponse\"\f\x82\xd3\xe4\x93\x02\x06:\x01*\"\x01/\x12P\n" +
+	"\rPRESENCE_BUSY\x10\x042\xad\x19\n" +
+	"\vChatService\x12\xef\x02\n" +
+	"\aConnect\x12\x17.chat.v1.ConnectRequest\x1a\x14.chat.v1.ServerEvent\"\xb0\x02\xbaG\xac\x02\n" +
+	"\tReal-time\x12-Establish bi-directional streaming connection\x1a\xe6\x01Opens a persistent bi-directional stream for real-time chat events. Clients send ConnectRequest messages (auth, acks, commands) and receive ServerEvent messages in chronological order. Supports session resumption via resume_token.*\aconnect(\x010\x01\x12\x9c\x02\n" +
+	"\vSendMessage\x12\x1b.chat.v1.SendMessageRequest\x1a\x1c.chat.v1.SendMessageResponse\"\xd1\x01\xbaG\xcd\x01\n" +
+	"\bMessages\x12\x18Send a message to a room\x1a\x99\x01Sends one or more messages to chat rooms. Supports text, attachments, reactions, and system messages. Idempotent when idempotency_key header is provided.*\vsendMessage\x12\x88\x02\n" +
 	"\n" +
-	"GetHistory\x12\x1a.chat.v1.GetHistoryRequest\x1a\x1b.chat.v1.GetHistoryResponse\"\t\x82\xd3\xe4\x93\x02\x03\x12\x01/\x12W\n" +
+	"GetHistory\x12\x1a.chat.v1.GetHistoryRequest\x1a\x1b.chat.v1.GetHistoryResponse\"\xc0\x01\xbaG\xbc\x01\n" +
+	"\bMessages\x12#Retrieve message history for a room\x1a\x7fFetches paginated message history for a specified room using cursor-based navigation. Supports forward and backward pagination.*\n" +
+	"getHistory\x12\x9d\x02\n" +
 	"\n" +
-	"CreateRoom\x12\x1a.chat.v1.CreateRoomRequest\x1a\x1b.chat.v1.CreateRoomResponse\"\x10\x82\xd3\xe4\x93\x02\n" +
-	":\x01*\"\x05/room\x12Y\n" +
-	"\vSearchRooms\x12\x1b.chat.v1.SearchRoomsRequest\x1a\x1c.chat.v1.SearchRoomsResponse\"\r\x82\xd3\xe4\x93\x02\a\x12\x05/room0\x01\x12a\n" +
+	"CreateRoom\x12\x1a.chat.v1.CreateRoomRequest\x1a\x1b.chat.v1.CreateRoomResponse\"\xd5\x01\xbaG\xd1\x01\n" +
+	"\x05Rooms\x12\x16Create a new chat room\x1a\xa3\x01Creates a new chat room with specified configuration. The creator is automatically added as a member with owner privileges. Supports both public and private rooms.*\n" +
+	"createRoom\x12\x9b\x02\n" +
+	"\vSearchRooms\x12\x1b.chat.v1.SearchRoomsRequest\x1a\x1c.chat.v1.SearchRoomsResponse\"\xce\x01\xbaG\xca\x01\n" +
+	"\x05Rooms\x12\x15Search for chat rooms\x1a\x9c\x01Searches for chat rooms matching the specified criteria. Returns a stream of matching rooms. Supports filtering by query, date range, and custom properties.*\vsearchRooms0\x01\x12\x87\x02\n" +
 	"\n" +
-	"UpdateRoom\x12\x1a.chat.v1.UpdateRoomRequest\x1a\x1b.chat.v1.UpdateRoomResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*2\x0f/room/{room_id}\x12^\n" +
+	"UpdateRoom\x12\x1a.chat.v1.UpdateRoomRequest\x1a\x1b.chat.v1.UpdateRoomResponse\"\xbf\x01\xbaG\xbb\x01\n" +
+	"\x05Rooms\x12\x12Update a chat room\x1a\x91\x01Updates the configuration of an existing chat room including name, topic, and metadata. Only room owners and moderators can update room settings.*\n" +
+	"updateRoom\x12\xeb\x01\n" +
 	"\n" +
-	"DeleteRoom\x12\x1a.chat.v1.DeleteRoomRequest\x1a\x1b.chat.v1.DeleteRoomResponse\"\x17\x82\xd3\xe4\x93\x02\x11*\x0f/room/{room_id}\x12\x8c\x01\n" +
-	"\x14AddRoomSubscriptions\x12$.chat.v1.AddRoomSubscriptionsRequest\x1a%.chat.v1.AddRoomSubscriptionsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/room/{room_id}/subscription\x12\x92\x01\n" +
-	"\x17RemoveRoomSubscriptions\x12'.chat.v1.RemoveRoomSubscriptionsRequest\x1a(.chat.v1.RemoveRoomSubscriptionsResponse\"$\x82\xd3\xe4\x93\x02\x1e*\x1c/room/{room_id}/subscription\x12\xa4\x01\n" +
-	"\x16UpdateSubscriptionRole\x12&.chat.v1.UpdateSubscriptionRoleRequest\x1a'.chat.v1.UpdateSubscriptionRoleResponse\"9\x82\xd3\xe4\x93\x023:\x01*2./room/{room_id}/subscription/{profile_id}/role\x12\x92\x01\n" +
-	"\x17SearchRoomSubscriptions\x12'.chat.v1.SearchRoomSubscriptionsRequest\x1a(.chat.v1.SearchRoomSubscriptionsResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/room/{room_id}/subscriptionB\x96\x03\x92A\xfd\x01\x12j\n" +
-	"\fchat Service\"U\n" +
-	"\x10Ant Investor Ltd\x12+https://github.com/antinvestor/service-chat\x1a\x14info@antinvestor.com2\x031.0*\x02\x01\x022\x10application/json:\x10application/jsonZY\n" +
-	"W\n" +
-	"\x06bearer\x12M\b\x02\x128Authentication token, prefixed by Bearer: Bearer <token>\x1a\rAuthorization \x02b\f\n" +
+	"DeleteRoom\x12\x1a.chat.v1.DeleteRoomRequest\x1a\x1b.chat.v1.DeleteRoomResponse\"\xa3\x01\xbaG\x9f\x01\n" +
+	"\x05Rooms\x12\x12Delete a chat room\x1avPermanently deletes a chat room and all its messages. This action cannot be undone. Only room owners can delete rooms.*\n" +
+	"deleteRoom\x12\xad\x02\n" +
+	"\x14AddRoomSubscriptions\x12$.chat.v1.AddRoomSubscriptionsRequest\x1a%.chat.v1.AddRoomSubscriptionsResponse\"\xc7\x01\xbaG\xc3\x01\n" +
+	"\rSubscriptions\x12\x15Add members to a room\x1a\x84\x01Adds one or more users to a chat room with specified roles. The requesting user must have owner or moderator privileges in the room.*\x14addRoomSubscriptions\x12\xca\x02\n" +
+	"\x17RemoveRoomSubscriptions\x12'.chat.v1.RemoveRoomSubscriptionsRequest\x1a(.chat.v1.RemoveRoomSubscriptionsResponse\"\xdb\x01\xbaG\xd7\x01\n" +
+	"\rSubscriptions\x12\x1aRemove members from a room\x1a\x90\x01Removes one or more users from a chat room. The requesting user must have owner or moderator privileges in the room, unless removing themselves.*\x17removeRoomSubscriptions\x12\xb1\x02\n" +
+	"\x16UpdateSubscriptionRole\x12&.chat.v1.UpdateSubscriptionRoleRequest\x1a'.chat.v1.UpdateSubscriptionRoleResponse\"\xc5\x01\xbaG\xc1\x01\n" +
+	"\rSubscriptions\x12 Update a member's role in a room\x1avUpdates the role(s) of a user in a chat room. The requesting user must have owner or moderator privileges in the room.*\x16updateSubscriptionRole\x12\x9a\x02\n" +
+	"\x17SearchRoomSubscriptions\x12'.chat.v1.SearchRoomSubscriptionsRequest\x1a(.chat.v1.SearchRoomSubscriptionsResponse\"\xab\x01\xbaG\xa7\x01\n" +
+	"\rSubscriptions\x12\x11List room members\x1ajRetrieves a paginated list of users subscribed to a room, along with their roles and activity information.*\x17searchRoomSubscriptionsB\xe8\x06\xbaG\xcf\x05\x12\xa3\x05\n" +
+	"\fChat Service\x12\xe8\x03The Chat Service provides endpoints for real-time, secure messaging between users and devices. It supports sending, receiving, and synchronizing messages across rooms, direct chats, and group conversations, with optional end-to-end encryption. The service is designed for mobile, desktop, and web clients, supporting both streaming and standard request-response operations. APIs are consistent, well-structured, and optimized for low-latency delivery, even on limited network connections.\"U\n" +
+	"\x10Ant Investor Ltd\x12+https://github.com/antinvestor/service-chat\x1a\x14info@antinvestor.com*I\n" +
+	"\x0eApache License\x127https://github.com/antinvestor/apis/blob/master/LICENSE2\x06v1.0.0*':%\n" +
+	"#\n" +
 	"\n" +
-	"\n" +
-	"\x06bearer\x12\x00\n" +
+	"BearerAuth\x12\x15\n" +
+	"\x13\n" +
+	"\x04http*\x06bearer2\x03JWT\n" +
 	"\x1ccom.antinvestor.apis.chat.v1B\tChatProtoP\x01Z-github.com/antinvestor/apis/go/chat/v1;chatv1\xa2\x02\x03CXX\xaa\x02\aChat.V1\xca\x02\aChat\\V1\xe2\x02\x13Chat\\V1\\GPBMetadata\xea\x02\bChat::V1b\x06proto3"
 
 var (

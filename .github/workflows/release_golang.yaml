@@ -3,6 +3,9 @@ on:
   push:
     tags:
       - "v*.*.*"
+    paths:
+      - 'go/**'
+      - 'proto/**'
 
 jobs:
   create-tag:

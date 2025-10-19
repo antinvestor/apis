@@ -47,3 +47,9 @@ plugins:
     out: ../../java/lostid/src/main/java/
   - remote: buf.build/protocolbuffers/java
     out: ../../java/lostid/src/main/java/
+  - remote: buf.build/protocolbuffers/dart
+    out: ../../dart/lostid/lib/src
+    include_wkt: true
+    include_imports: true
+  - remote: buf.build/connectrpc/dart
+    out: ../../dart/lostid/lib/src

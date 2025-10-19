@@ -12,6 +12,9 @@ on:
   push:
     tags:
       - "v*.*.*"
+    paths:
+      - 'java/**'
+      - 'proto/**'
 
 jobs:
   publish:
