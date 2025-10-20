@@ -2,14 +2,102 @@ name: Changelog CI
 
 on:
   pull_request:
-    types: [ opened, reopened ]
+    types: [opened, reopened, synchronize]
 
 jobs:
-  build:
+  detect-changes:
     runs-on: ubuntu-latest
-
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
-      - name: Run Changelog CI
+      - name: Detect Changed Packages
+        id: set-matrix
+        run: |
+          # Get the list of changed files
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          else
+            CHANGED_FILES=$(git diff --name-only HEAD^..HEAD)
+          fi
+          
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+          
+          # Initialize arrays for each language
+          declare -A packages
+          
+          # Define all packages
+          ALL_PACKAGES=("chat" "common" "device" "files" "ledger" "lostid" "notification" "ocr" "partition" "payment" "profile" "property" "settings")
+          LANGUAGES=("dart" "go" "java")
+          
+          # Check each language/package combination
+          for lang in "${LANGUAGES[@]}"; do
+            for pkg in "${ALL_PACKAGES[@]}"; do
+              if echo "$CHANGED_FILES" | grep -q "^${lang}/${pkg}/"; then
+                packages["${lang}/${pkg}"]=1
+              fi
+            done
+          done
+          
+          # Build JSON array for matrix
+          matrix_json="["
+          first=true
+          for key in "${!packages[@]}"; do
+            lang="${key%%/*}"
+            pkg="${key##*/}"
+            if [ "$first" = true ]; then
+              first=false
+            else
+              matrix_json+=","
+            fi
+            matrix_json+="{\"language\":\"${lang}\",\"package\":\"${pkg}\"}"
+          done
+          matrix_json+="]"
+          
+          # If no changes detected, create empty matrix
+          if [ "$matrix_json" = "[]" ]; then
+            echo "No package changes detected"
+            echo "matrix={\"include\":[]}" >> $GITHUB_OUTPUT
+          else
+            echo "matrix={\"include\":${matrix_json}}" >> $GITHUB_OUTPUT
+          fi
+          
+          echo "Matrix: {\"include\":${matrix_json}}"
+
+  changelog:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.matrix != '{"include":[]}'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Changelog CI for ${{ matrix.language }}/${{ matrix.package }}
         uses: saadmk11/changelog-ci@v1.2.0
+        id: changelog
+        with:
+          changelog_filename: ${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md
+          config_file: .github/changelog-ci-config.yml
+          committer_username: 'github-actions[bot]'
+          committer_email: 'github-actions[bot]@users.noreply.github.com'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Display Changelog for ${{ matrix.language }}/${{ matrix.package }}
+        if: steps.changelog.outputs.changelog != ''
+        run: |
+          echo "## 📝 Changelog for ${{ matrix.language }}/${{ matrix.package }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.changelog.outputs.changelog }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
