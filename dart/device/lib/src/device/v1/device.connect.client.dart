@@ -7,7 +7,7 @@ import "package:connectrpc/connect.dart" as connect;
 import "device.pb.dart" as devicev1device;
 import "device.connect.spec.dart" as specs;
 
-/// DeviceService provides comprehensive device management capabilities.
+/// DeviceService provides core device management and key/token management.
 /// All RPCs require authentication via Bearer token unless otherwise specified.
 extension type DeviceServiceClient (connect.Transport _transport) {
   /// GetById retrieves one or more devices by their unique identifiers.
@@ -181,8 +181,7 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// AddKey adds an encryption key to a device.
-  /// Keys are used for secure communications (Matrix E2EE, push notifications).
+  /// AddKey adds a key or token to a device (FCM tokens, encryption keys, etc.).
   Future<devicev1device.AddKeyResponse> addKey(
     devicev1device.AddKeyRequest input, {
     connect.Headers? headers,
@@ -200,8 +199,7 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// RemoveKey removes encryption keys from a device.
-  /// Used for key rotation or when removing a device.
+  /// RemoveKey removes keys or tokens from a device.
   Future<devicev1device.RemoveKeyResponse> removeKey(
     devicev1device.RemoveKeyRequest input, {
     connect.Headers? headers,
@@ -219,17 +217,92 @@ extension type DeviceServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// SearchKey finds encryption keys associated with a device.
-  /// Supports filtering by key type and pagination.
-  Stream<devicev1device.SearchKeyResponse> searchKey(
+  /// SearchKey searches for keys or tokens associated with a device.
+  Future<devicev1device.SearchKeyResponse> searchKey(
     devicev1device.SearchKeyRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
-    return connect.Client(_transport).server(
+    return connect.Client(_transport).unary(
       specs.DeviceService.searchKey,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// RegisterKey registers a key with third-party services (e.g., FCM, APNs).
+  /// This handles integration with external services and stores the key.
+  Future<devicev1device.RegisterKeyResponse> registerKey(
+    devicev1device.RegisterKeyRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.DeviceService.registerKey,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// DeRegisterKey deregisters a key from third-party services.
+  /// This handles cleanup with external services and removes the key.
+  Future<devicev1device.DeRegisterKeyResponse> deRegisterKey(
+    devicev1device.DeRegisterKeyRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.DeviceService.deRegisterKey,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// RegisterNotificationKey registers a notification key for push notifications.
+  /// This integrates with notification services and stores the key.
+  Future<devicev1device.RegisterKeyResponse> registerNotificationKey(
+    devicev1device.RegisterKeyRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.DeviceService.registerNotificationKey,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// DeRegisterNotificationKey deregisters a notification key.
+  /// This removes the key from notification services and local storage.
+  Future<devicev1device.DeRegisterKeyResponse> deRegisterNotificationKey(
+    devicev1device.DeRegisterKeyRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.DeviceService.deRegisterNotificationKey,
       input,
       signal: signal,
       headers: headers,

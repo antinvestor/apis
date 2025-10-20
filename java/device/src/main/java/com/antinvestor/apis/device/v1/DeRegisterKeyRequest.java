@@ -21,17 +21,17 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * RemoveKeyRequest removes one or more keys or tokens from a device.
- * Used when rotating keys, removing tokens, or removing a device.
+ * DeRegisterKeyRequest removes device registration from third-party services.
+ * This cleans up the connection with external services like FCM.
  * </pre>
  *
- * Protobuf type {@code device.v1.RemoveKeyRequest}
+ * Protobuf type {@code device.v1.DeRegisterKeyRequest}
  */
 @com.google.protobuf.Generated
-public final class RemoveKeyRequest extends
+public final class DeRegisterKeyRequest extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:device.v1.RemoveKeyRequest)
-    RemoveKeyRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:device.v1.DeRegisterKeyRequest)
+    DeRegisterKeyRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -40,81 +40,74 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 33,
       /* patch= */ 0,
       /* suffix= */ "",
-      "RemoveKeyRequest");
+      "DeRegisterKeyRequest");
   }
-  // Use RemoveKeyRequest.newBuilder() to construct.
-  private RemoveKeyRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use DeRegisterKeyRequest.newBuilder() to construct.
+  private DeRegisterKeyRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private RemoveKeyRequest() {
-    id_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
+  private DeRegisterKeyRequest() {
+    id_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_RemoveKeyRequest_descriptor;
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeRegisterKeyRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_RemoveKeyRequest_fieldAccessorTable
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeRegisterKeyRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.antinvestor.apis.device.v1.RemoveKeyRequest.class, com.antinvestor.apis.device.v1.RemoveKeyRequest.Builder.class);
+            com.antinvestor.apis.device.v1.DeRegisterKeyRequest.class, com.antinvestor.apis.device.v1.DeRegisterKeyRequest.Builder.class);
   }
 
   public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private com.google.protobuf.LazyStringArrayList id_ =
-      com.google.protobuf.LazyStringArrayList.emptyList();
+  private volatile java.lang.Object id_ = "";
   /**
    * <pre>
-   * List of key IDs to remove
+   * Key ID to deregister from external service
    * </pre>
    *
-   * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return A list containing the id.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The id.
    */
-  public com.google.protobuf.ProtocolStringList
-      getIdList() {
-    return id_;
+  @java.lang.Override
+  public java.lang.String getId() {
+    java.lang.Object ref = id_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      id_ = s;
+      return s;
+    }
   }
   /**
    * <pre>
-   * List of key IDs to remove
+   * Key ID to deregister from external service
    * </pre>
    *
-   * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return The count of id.
+   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for id.
    */
-  public int getIdCount() {
-    return id_.size();
-  }
-  /**
-   * <pre>
-   * List of key IDs to remove
-   * </pre>
-   *
-   * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @param index The index of the element to return.
-   * @return The id at the given index.
-   */
-  public java.lang.String getId(int index) {
-    return id_.get(index);
-  }
-  /**
-   * <pre>
-   * List of key IDs to remove
-   * </pre>
-   *
-   * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @param index The index of the value to return.
-   * @return The bytes of the id at the given index.
-   */
+  @java.lang.Override
   public com.google.protobuf.ByteString
-      getIdBytes(int index) {
-    return id_.getByteString(index);
+      getIdBytes() {
+    java.lang.Object ref = id_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      id_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -131,8 +124,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    for (int i = 0; i < id_.size(); i++) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, id_.getRaw(i));
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -143,13 +136,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    {
-      int dataSize = 0;
-      for (int i = 0; i < id_.size(); i++) {
-        dataSize += computeStringSizeNoTag(id_.getRaw(i));
-      }
-      size += dataSize;
-      size += 1 * getIdList().size();
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -161,13 +149,13 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.antinvestor.apis.device.v1.RemoveKeyRequest)) {
+    if (!(obj instanceof com.antinvestor.apis.device.v1.DeRegisterKeyRequest)) {
       return super.equals(obj);
     }
-    com.antinvestor.apis.device.v1.RemoveKeyRequest other = (com.antinvestor.apis.device.v1.RemoveKeyRequest) obj;
+    com.antinvestor.apis.device.v1.DeRegisterKeyRequest other = (com.antinvestor.apis.device.v1.DeRegisterKeyRequest) obj;
 
-    if (!getIdList()
-        .equals(other.getIdList())) return false;
+    if (!getId()
+        .equals(other.getId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -179,53 +167,51 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (getIdCount() > 0) {
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getIdList().hashCode();
-    }
+    hash = (37 * hash) + ID_FIELD_NUMBER;
+    hash = (53 * hash) + getId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest parseFrom(byte[] data)
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest parseFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -233,26 +219,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest parseDelimitedFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest parseDelimitedFrom(
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -265,7 +251,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.antinvestor.apis.device.v1.RemoveKeyRequest prototype) {
+  public static Builder newBuilder(com.antinvestor.apis.device.v1.DeRegisterKeyRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -282,30 +268,30 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * RemoveKeyRequest removes one or more keys or tokens from a device.
-   * Used when rotating keys, removing tokens, or removing a device.
+   * DeRegisterKeyRequest removes device registration from third-party services.
+   * This cleans up the connection with external services like FCM.
    * </pre>
    *
-   * Protobuf type {@code device.v1.RemoveKeyRequest}
+   * Protobuf type {@code device.v1.DeRegisterKeyRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:device.v1.RemoveKeyRequest)
-      com.antinvestor.apis.device.v1.RemoveKeyRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:device.v1.DeRegisterKeyRequest)
+      com.antinvestor.apis.device.v1.DeRegisterKeyRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_RemoveKeyRequest_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeRegisterKeyRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_RemoveKeyRequest_fieldAccessorTable
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeRegisterKeyRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.antinvestor.apis.device.v1.RemoveKeyRequest.class, com.antinvestor.apis.device.v1.RemoveKeyRequest.Builder.class);
+              com.antinvestor.apis.device.v1.DeRegisterKeyRequest.class, com.antinvestor.apis.device.v1.DeRegisterKeyRequest.Builder.class);
     }
 
-    // Construct using com.antinvestor.apis.device.v1.RemoveKeyRequest.newBuilder()
+    // Construct using com.antinvestor.apis.device.v1.DeRegisterKeyRequest.newBuilder()
     private Builder() {
 
     }
@@ -319,25 +305,24 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      id_ =
-          com.google.protobuf.LazyStringArrayList.emptyList();
+      id_ = "";
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_RemoveKeyRequest_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_DeRegisterKeyRequest_descriptor;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.RemoveKeyRequest getDefaultInstanceForType() {
-      return com.antinvestor.apis.device.v1.RemoveKeyRequest.getDefaultInstance();
+    public com.antinvestor.apis.device.v1.DeRegisterKeyRequest getDefaultInstanceForType() {
+      return com.antinvestor.apis.device.v1.DeRegisterKeyRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.RemoveKeyRequest build() {
-      com.antinvestor.apis.device.v1.RemoveKeyRequest result = buildPartial();
+    public com.antinvestor.apis.device.v1.DeRegisterKeyRequest build() {
+      com.antinvestor.apis.device.v1.DeRegisterKeyRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -345,41 +330,35 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.RemoveKeyRequest buildPartial() {
-      com.antinvestor.apis.device.v1.RemoveKeyRequest result = new com.antinvestor.apis.device.v1.RemoveKeyRequest(this);
+    public com.antinvestor.apis.device.v1.DeRegisterKeyRequest buildPartial() {
+      com.antinvestor.apis.device.v1.DeRegisterKeyRequest result = new com.antinvestor.apis.device.v1.DeRegisterKeyRequest(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.antinvestor.apis.device.v1.RemoveKeyRequest result) {
+    private void buildPartial0(com.antinvestor.apis.device.v1.DeRegisterKeyRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        id_.makeImmutable();
         result.id_ = id_;
       }
     }
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.antinvestor.apis.device.v1.RemoveKeyRequest) {
-        return mergeFrom((com.antinvestor.apis.device.v1.RemoveKeyRequest)other);
+      if (other instanceof com.antinvestor.apis.device.v1.DeRegisterKeyRequest) {
+        return mergeFrom((com.antinvestor.apis.device.v1.DeRegisterKeyRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.antinvestor.apis.device.v1.RemoveKeyRequest other) {
-      if (other == com.antinvestor.apis.device.v1.RemoveKeyRequest.getDefaultInstance()) return this;
-      if (!other.id_.isEmpty()) {
-        if (id_.isEmpty()) {
-          id_ = other.id_;
-          bitField0_ |= 0x00000001;
-        } else {
-          ensureIdIsMutable();
-          id_.addAll(other.id_);
-        }
+    public Builder mergeFrom(com.antinvestor.apis.device.v1.DeRegisterKeyRequest other) {
+      if (other == com.antinvestor.apis.device.v1.DeRegisterKeyRequest.getDefaultInstance()) return this;
+      if (!other.getId().isEmpty()) {
+        id_ = other.id_;
+        bitField0_ |= 0x00000001;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -409,9 +388,8 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-              ensureIdIsMutable();
-              id_.add(s);
+              id_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000001;
               break;
             } // case 10
             default: {
@@ -431,170 +409,115 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private com.google.protobuf.LazyStringArrayList id_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
-    private void ensureIdIsMutable() {
-      if (!id_.isModifiable()) {
-        id_ = new com.google.protobuf.LazyStringArrayList(id_);
+    private java.lang.Object id_ = "";
+    /**
+     * <pre>
+     * Key ID to deregister from external service
+     * </pre>
+     *
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @return The id.
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        id_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
       }
-      bitField0_ |= 0x00000001;
     }
     /**
      * <pre>
-     * List of key IDs to remove
+     * Key ID to deregister from external service
      * </pre>
      *
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @return A list containing the id.
-     */
-    public com.google.protobuf.ProtocolStringList
-        getIdList() {
-      id_.makeImmutable();
-      return id_;
-    }
-    /**
-     * <pre>
-     * List of key IDs to remove
-     * </pre>
-     *
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @return The count of id.
-     */
-    public int getIdCount() {
-      return id_.size();
-    }
-    /**
-     * <pre>
-     * List of key IDs to remove
-     * </pre>
-     *
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param index The index of the element to return.
-     * @return The id at the given index.
-     */
-    public java.lang.String getId(int index) {
-      return id_.get(index);
-    }
-    /**
-     * <pre>
-     * List of key IDs to remove
-     * </pre>
-     *
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param index The index of the value to return.
-     * @return The bytes of the id at the given index.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for id.
      */
     public com.google.protobuf.ByteString
-        getIdBytes(int index) {
-      return id_.getByteString(index);
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     /**
      * <pre>
-     * List of key IDs to remove
+     * Key ID to deregister from external service
      * </pre>
      *
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param index The index to set the value at.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @param value The id to set.
      * @return This builder for chaining.
      */
     public Builder setId(
-        int index, java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      ensureIdIsMutable();
-      id_.set(index, value);
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * List of key IDs to remove
-     * </pre>
-     *
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param value The id to add.
-     * @return This builder for chaining.
-     */
-    public Builder addId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      ensureIdIsMutable();
-      id_.add(value);
+      id_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * List of key IDs to remove
+     * Key ID to deregister from external service
      * </pre>
      *
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param values The id to add.
-     * @return This builder for chaining.
-     */
-    public Builder addAllId(
-        java.lang.Iterable<java.lang.String> values) {
-      ensureIdIsMutable();
-      com.google.protobuf.AbstractMessageLite.Builder.addAll(
-          values, id_);
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * List of key IDs to remove
-     * </pre>
-     *
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearId() {
-      id_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000001);;
+      id_ = getDefaultInstance().getId();
+      bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * List of key IDs to remove
+     * Key ID to deregister from external service
      * </pre>
      *
-     * <code>repeated string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes of the id to add.
+     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for id to set.
      * @return This builder for chaining.
      */
-    public Builder addIdBytes(
+    public Builder setIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      ensureIdIsMutable();
-      id_.add(value);
+      id_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
 
-    // @@protoc_insertion_point(builder_scope:device.v1.RemoveKeyRequest)
+    // @@protoc_insertion_point(builder_scope:device.v1.DeRegisterKeyRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:device.v1.RemoveKeyRequest)
-  private static final com.antinvestor.apis.device.v1.RemoveKeyRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:device.v1.DeRegisterKeyRequest)
+  private static final com.antinvestor.apis.device.v1.DeRegisterKeyRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.RemoveKeyRequest();
+    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.DeRegisterKeyRequest();
   }
 
-  public static com.antinvestor.apis.device.v1.RemoveKeyRequest getDefaultInstance() {
+  public static com.antinvestor.apis.device.v1.DeRegisterKeyRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<RemoveKeyRequest>
-      PARSER = new com.google.protobuf.AbstractParser<RemoveKeyRequest>() {
+  private static final com.google.protobuf.Parser<DeRegisterKeyRequest>
+      PARSER = new com.google.protobuf.AbstractParser<DeRegisterKeyRequest>() {
     @java.lang.Override
-    public RemoveKeyRequest parsePartialFrom(
+    public DeRegisterKeyRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -613,17 +536,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<RemoveKeyRequest> parser() {
+  public static com.google.protobuf.Parser<DeRegisterKeyRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<RemoveKeyRequest> getParserForType() {
+  public com.google.protobuf.Parser<DeRegisterKeyRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.antinvestor.apis.device.v1.RemoveKeyRequest getDefaultInstanceForType() {
+  public com.antinvestor.apis.device.v1.DeRegisterKeyRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

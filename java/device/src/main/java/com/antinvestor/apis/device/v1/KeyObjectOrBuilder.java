@@ -66,38 +66,107 @@ public interface KeyObjectOrBuilder extends
 
   /**
    * <pre>
-   * The actual encryption key material (encrypted at rest)
+   * Type of key (FCM token, encryption key, etc.)
    * </pre>
    *
-   * <code>bytes key = 3 [json_name = "key"];</code>
+   * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
+   * @return The enum numeric value on the wire for keyType.
+   */
+  int getKeyTypeValue();
+  /**
+   * <pre>
+   * Type of key (FCM token, encryption key, etc.)
+   * </pre>
+   *
+   * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
+   * @return The keyType.
+   */
+  com.antinvestor.apis.device.v1.KeyType getKeyType();
+
+  /**
+   * <pre>
+   * The actual key material or token (encrypted at rest)
+   * </pre>
+   *
+   * <code>bytes key = 4 [json_name = "key"];</code>
    * @return The key.
    */
   com.google.protobuf.ByteString getKey();
 
   /**
    * <pre>
-   * Additional key metadata (algorithm, expiry, etc.)
+   * Timestamp when key was created (RFC3339)
    * </pre>
    *
-   * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
+   * <code>string created_at = 5 [json_name = "createdAt"];</code>
+   * @return The createdAt.
+   */
+  java.lang.String getCreatedAt();
+  /**
+   * <pre>
+   * Timestamp when key was created (RFC3339)
+   * </pre>
+   *
+   * <code>string created_at = 5 [json_name = "createdAt"];</code>
+   * @return The bytes for createdAt.
+   */
+  com.google.protobuf.ByteString
+      getCreatedAtBytes();
+
+  /**
+   * <pre>
+   * Optional expiration timestamp (RFC3339)
+   * </pre>
+   *
+   * <code>string expires_at = 6 [json_name = "expiresAt"];</code>
+   * @return The expiresAt.
+   */
+  java.lang.String getExpiresAt();
+  /**
+   * <pre>
+   * Optional expiration timestamp (RFC3339)
+   * </pre>
+   *
+   * <code>string expires_at = 6 [json_name = "expiresAt"];</code>
+   * @return The bytes for expiresAt.
+   */
+  com.google.protobuf.ByteString
+      getExpiresAtBytes();
+
+  /**
+   * <pre>
+   * Whether the key is currently active
+   * </pre>
+   *
+   * <code>bool is_active = 7 [json_name = "isActive"];</code>
+   * @return The isActive.
+   */
+  boolean getIsActive();
+
+  /**
+   * <pre>
+   * Additional key metadata (algorithm, app_id, etc.)
+   * </pre>
+   *
+   * <code>.google.protobuf.Struct extra = 8 [json_name = "extra"];</code>
    * @return Whether the extra field is set.
    */
   boolean hasExtra();
   /**
    * <pre>
-   * Additional key metadata (algorithm, expiry, etc.)
+   * Additional key metadata (algorithm, app_id, etc.)
    * </pre>
    *
-   * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
+   * <code>.google.protobuf.Struct extra = 8 [json_name = "extra"];</code>
    * @return The extra.
    */
   com.google.protobuf.Struct getExtra();
   /**
    * <pre>
-   * Additional key metadata (algorithm, expiry, etc.)
+   * Additional key metadata (algorithm, app_id, etc.)
    * </pre>
    *
-   * <code>.google.protobuf.Struct extra = 4 [json_name = "extra"];</code>
+   * <code>.google.protobuf.Struct extra = 8 [json_name = "extra"];</code>
    */
   com.google.protobuf.StructOrBuilder getExtraOrBuilder();
 }

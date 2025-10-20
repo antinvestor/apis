@@ -66,29 +66,69 @@ public interface SearchKeyRequestOrBuilder extends
 
   /**
    * <pre>
-   * Filter by key type
+   * Filter by key types (if empty, returns all)
    * </pre>
    *
-   * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-   * @return The enum numeric value on the wire for keyType.
+   * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+   * @return A list containing the keyTypes.
    */
-  int getKeyTypeValue();
+  java.util.List<com.antinvestor.apis.device.v1.KeyType> getKeyTypesList();
   /**
    * <pre>
-   * Filter by key type
+   * Filter by key types (if empty, returns all)
    * </pre>
    *
-   * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-   * @return The keyType.
+   * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+   * @return The count of keyTypes.
    */
-  com.antinvestor.apis.device.v1.KeyType getKeyType();
+  int getKeyTypesCount();
+  /**
+   * <pre>
+   * Filter by key types (if empty, returns all)
+   * </pre>
+   *
+   * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+   * @param index The index of the element to return.
+   * @return The keyTypes at the given index.
+   */
+  com.antinvestor.apis.device.v1.KeyType getKeyTypes(int index);
+  /**
+   * <pre>
+   * Filter by key types (if empty, returns all)
+   * </pre>
+   *
+   * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+   * @return A list containing the enum numeric values on the wire for keyTypes.
+   */
+  java.util.List<java.lang.Integer>
+  getKeyTypesValueList();
+  /**
+   * <pre>
+   * Filter by key types (if empty, returns all)
+   * </pre>
+   *
+   * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+   * @param index The index of the value to return.
+   * @return The enum numeric value on the wire of keyTypes at the given index.
+   */
+  int getKeyTypesValue(int index);
+
+  /**
+   * <pre>
+   * If true, includes expired keys
+   * </pre>
+   *
+   * <code>bool include_expired = 4 [json_name = "includeExpired"];</code>
+   * @return The includeExpired.
+   */
+  boolean getIncludeExpired();
 
   /**
    * <pre>
    * Page number for pagination
    * </pre>
    *
-   * <code>int32 page = 4 [json_name = "page"];</code>
+   * <code>int32 page = 5 [json_name = "page"];</code>
    * @return The page.
    */
   int getPage();
@@ -98,7 +138,7 @@ public interface SearchKeyRequestOrBuilder extends
    * Number of results per page
    * </pre>
    *
-   * <code>int32 count = 5 [json_name = "count"];</code>
+   * <code>int32 count = 6 [json_name = "count"];</code>
    * @return The count.
    */
   int getCount();

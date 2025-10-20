@@ -21,7 +21,7 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * KeyType defines the types of encryption keys that can be stored for a device.
+ * KeyType defines the types of keys that can be stored for a device.
  * Different key types serve different purposes in the security infrastructure.
  * buf:lint:ignore ENUM_VALUE_PREFIX
  * </pre>
@@ -47,6 +47,38 @@ public enum KeyType
    * <code>NOTIFICATION_KEY = 1;</code>
    */
   NOTIFICATION_KEY(1),
+  /**
+   * <pre>
+   * Firebase Cloud Messaging token for push notifications
+   * </pre>
+   *
+   * <code>FCM_TOKEN = 2;</code>
+   */
+  FCM_TOKEN(2),
+  /**
+   * <pre>
+   * Curve25519 key for ECDH
+   * </pre>
+   *
+   * <code>CURVE25519_KEY = 3;</code>
+   */
+  CURVE25519_KEY(3),
+  /**
+   * <pre>
+   * Ed25519 key for signing
+   * </pre>
+   *
+   * <code>ED25519_KEY = 4;</code>
+   */
+  ED25519_KEY(4),
+  /**
+   * <pre>
+   * Pickled key for session storage
+   * </pre>
+   *
+   * <code>PICKLE_KEY = 5;</code>
+   */
+  PICKLE_KEY(5),
   UNRECOGNIZED(-1),
   ;
 
@@ -75,6 +107,38 @@ public enum KeyType
    * <code>NOTIFICATION_KEY = 1;</code>
    */
   public static final int NOTIFICATION_KEY_VALUE = 1;
+  /**
+   * <pre>
+   * Firebase Cloud Messaging token for push notifications
+   * </pre>
+   *
+   * <code>FCM_TOKEN = 2;</code>
+   */
+  public static final int FCM_TOKEN_VALUE = 2;
+  /**
+   * <pre>
+   * Curve25519 key for ECDH
+   * </pre>
+   *
+   * <code>CURVE25519_KEY = 3;</code>
+   */
+  public static final int CURVE25519_KEY_VALUE = 3;
+  /**
+   * <pre>
+   * Ed25519 key for signing
+   * </pre>
+   *
+   * <code>ED25519_KEY = 4;</code>
+   */
+  public static final int ED25519_KEY_VALUE = 4;
+  /**
+   * <pre>
+   * Pickled key for session storage
+   * </pre>
+   *
+   * <code>PICKLE_KEY = 5;</code>
+   */
+  public static final int PICKLE_KEY_VALUE = 5;
 
 
   public final int getNumber() {
@@ -103,6 +167,10 @@ public enum KeyType
     switch (value) {
       case 0: return MATRIX_KEY;
       case 1: return NOTIFICATION_KEY;
+      case 2: return FCM_TOKEN;
+      case 3: return CURVE25519_KEY;
+      case 4: return ED25519_KEY;
+      case 5: return PICKLE_KEY;
       default: return null;
     }
   }

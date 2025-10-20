@@ -6,7 +6,7 @@
 import "package:connectrpc/connect.dart" as connect;
 import "device.pb.dart" as devicev1device;
 
-/// DeviceService provides comprehensive device management capabilities.
+/// DeviceService provides core device management and key/token management.
 /// All RPCs require authentication via Bearer token unless otherwise specified.
 abstract final class DeviceService {
   /// Fully-qualified name of the DeviceService service.
@@ -93,8 +93,7 @@ abstract final class DeviceService {
     devicev1device.ListLogsResponse.new,
   );
 
-  /// AddKey adds an encryption key to a device.
-  /// Keys are used for secure communications (Matrix E2EE, push notifications).
+  /// AddKey adds a key or token to a device (FCM tokens, encryption keys, etc.).
   static const addKey = connect.Spec(
     '/$name/AddKey',
     connect.StreamType.unary,
@@ -102,8 +101,7 @@ abstract final class DeviceService {
     devicev1device.AddKeyResponse.new,
   );
 
-  /// RemoveKey removes encryption keys from a device.
-  /// Used for key rotation or when removing a device.
+  /// RemoveKey removes keys or tokens from a device.
   static const removeKey = connect.Spec(
     '/$name/RemoveKey',
     connect.StreamType.unary,
@@ -111,12 +109,47 @@ abstract final class DeviceService {
     devicev1device.RemoveKeyResponse.new,
   );
 
-  /// SearchKey finds encryption keys associated with a device.
-  /// Supports filtering by key type and pagination.
+  /// SearchKey searches for keys or tokens associated with a device.
   static const searchKey = connect.Spec(
     '/$name/SearchKey',
-    connect.StreamType.server,
+    connect.StreamType.unary,
     devicev1device.SearchKeyRequest.new,
     devicev1device.SearchKeyResponse.new,
+  );
+
+  /// RegisterKey registers a key with third-party services (e.g., FCM, APNs).
+  /// This handles integration with external services and stores the key.
+  static const registerKey = connect.Spec(
+    '/$name/RegisterKey',
+    connect.StreamType.unary,
+    devicev1device.RegisterKeyRequest.new,
+    devicev1device.RegisterKeyResponse.new,
+  );
+
+  /// DeRegisterKey deregisters a key from third-party services.
+  /// This handles cleanup with external services and removes the key.
+  static const deRegisterKey = connect.Spec(
+    '/$name/DeRegisterKey',
+    connect.StreamType.unary,
+    devicev1device.DeRegisterKeyRequest.new,
+    devicev1device.DeRegisterKeyResponse.new,
+  );
+
+  /// RegisterNotificationKey registers a notification key for push notifications.
+  /// This integrates with notification services and stores the key.
+  static const registerNotificationKey = connect.Spec(
+    '/$name/RegisterNotificationKey',
+    connect.StreamType.unary,
+    devicev1device.RegisterKeyRequest.new,
+    devicev1device.RegisterKeyResponse.new,
+  );
+
+  /// DeRegisterNotificationKey deregisters a notification key.
+  /// This removes the key from notification services and local storage.
+  static const deRegisterNotificationKey = connect.Spec(
+    '/$name/DeRegisterNotificationKey',
+    connect.StreamType.unary,
+    devicev1device.DeRegisterKeyRequest.new,
+    devicev1device.DeRegisterKeyResponse.new,
   );
 }

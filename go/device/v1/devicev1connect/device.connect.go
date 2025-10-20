@@ -72,6 +72,18 @@ const (
 	DeviceServiceRemoveKeyProcedure = "/device.v1.DeviceService/RemoveKey"
 	// DeviceServiceSearchKeyProcedure is the fully-qualified name of the DeviceService's SearchKey RPC.
 	DeviceServiceSearchKeyProcedure = "/device.v1.DeviceService/SearchKey"
+	// DeviceServiceRegisterKeyProcedure is the fully-qualified name of the DeviceService's RegisterKey
+	// RPC.
+	DeviceServiceRegisterKeyProcedure = "/device.v1.DeviceService/RegisterKey"
+	// DeviceServiceDeRegisterKeyProcedure is the fully-qualified name of the DeviceService's
+	// DeRegisterKey RPC.
+	DeviceServiceDeRegisterKeyProcedure = "/device.v1.DeviceService/DeRegisterKey"
+	// DeviceServiceRegisterNotificationKeyProcedure is the fully-qualified name of the DeviceService's
+	// RegisterNotificationKey RPC.
+	DeviceServiceRegisterNotificationKeyProcedure = "/device.v1.DeviceService/RegisterNotificationKey"
+	// DeviceServiceDeRegisterNotificationKeyProcedure is the fully-qualified name of the
+	// DeviceService's DeRegisterNotificationKey RPC.
+	DeviceServiceDeRegisterNotificationKeyProcedure = "/device.v1.DeviceService/DeRegisterNotificationKey"
 )
 
 // DeviceServiceClient is a client for the device.v1.DeviceService service.
@@ -103,15 +115,24 @@ type DeviceServiceClient interface {
 	// ListLogs retrieves activity logs for a device.
 	// Returns a stream of log entries for the specified device.
 	ListLogs(context.Context, *connect.Request[v1.ListLogsRequest]) (*connect.ServerStreamForClient[v1.ListLogsResponse], error)
-	// AddKey adds an encryption key to a device.
-	// Keys are used for secure communications (Matrix E2EE, push notifications).
+	// AddKey adds a key or token to a device (FCM tokens, encryption keys, etc.).
 	AddKey(context.Context, *connect.Request[v1.AddKeyRequest]) (*connect.Response[v1.AddKeyResponse], error)
-	// RemoveKey removes encryption keys from a device.
-	// Used for key rotation or when removing a device.
+	// RemoveKey removes keys or tokens from a device.
 	RemoveKey(context.Context, *connect.Request[v1.RemoveKeyRequest]) (*connect.Response[v1.RemoveKeyResponse], error)
-	// SearchKey finds encryption keys associated with a device.
-	// Supports filtering by key type and pagination.
-	SearchKey(context.Context, *connect.Request[v1.SearchKeyRequest]) (*connect.ServerStreamForClient[v1.SearchKeyResponse], error)
+	// SearchKey searches for keys or tokens associated with a device.
+	SearchKey(context.Context, *connect.Request[v1.SearchKeyRequest]) (*connect.Response[v1.SearchKeyResponse], error)
+	// RegisterKey registers a key with third-party services (e.g., FCM, APNs).
+	// This handles integration with external services and stores the key.
+	RegisterKey(context.Context, *connect.Request[v1.RegisterKeyRequest]) (*connect.Response[v1.RegisterKeyResponse], error)
+	// DeRegisterKey deregisters a key from third-party services.
+	// This handles cleanup with external services and removes the key.
+	DeRegisterKey(context.Context, *connect.Request[v1.DeRegisterKeyRequest]) (*connect.Response[v1.DeRegisterKeyResponse], error)
+	// RegisterNotificationKey registers a notification key for push notifications.
+	// This integrates with notification services and stores the key.
+	RegisterNotificationKey(context.Context, *connect.Request[v1.RegisterKeyRequest]) (*connect.Response[v1.RegisterKeyResponse], error)
+	// DeRegisterNotificationKey deregisters a notification key.
+	// This removes the key from notification services and local storage.
+	DeRegisterNotificationKey(context.Context, *connect.Request[v1.DeRegisterKeyRequest]) (*connect.Response[v1.DeRegisterKeyResponse], error)
 }
 
 // NewDeviceServiceClient constructs a client for the device.v1.DeviceService service. By default,
@@ -197,23 +218,51 @@ func NewDeviceServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(deviceServiceMethods.ByName("SearchKey")),
 			connect.WithClientOptions(opts...),
 		),
+		registerKey: connect.NewClient[v1.RegisterKeyRequest, v1.RegisterKeyResponse](
+			httpClient,
+			baseURL+DeviceServiceRegisterKeyProcedure,
+			connect.WithSchema(deviceServiceMethods.ByName("RegisterKey")),
+			connect.WithClientOptions(opts...),
+		),
+		deRegisterKey: connect.NewClient[v1.DeRegisterKeyRequest, v1.DeRegisterKeyResponse](
+			httpClient,
+			baseURL+DeviceServiceDeRegisterKeyProcedure,
+			connect.WithSchema(deviceServiceMethods.ByName("DeRegisterKey")),
+			connect.WithClientOptions(opts...),
+		),
+		registerNotificationKey: connect.NewClient[v1.RegisterKeyRequest, v1.RegisterKeyResponse](
+			httpClient,
+			baseURL+DeviceServiceRegisterNotificationKeyProcedure,
+			connect.WithSchema(deviceServiceMethods.ByName("RegisterNotificationKey")),
+			connect.WithClientOptions(opts...),
+		),
+		deRegisterNotificationKey: connect.NewClient[v1.DeRegisterKeyRequest, v1.DeRegisterKeyResponse](
+			httpClient,
+			baseURL+DeviceServiceDeRegisterNotificationKeyProcedure,
+			connect.WithSchema(deviceServiceMethods.ByName("DeRegisterNotificationKey")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // deviceServiceClient implements DeviceServiceClient.
 type deviceServiceClient struct {
-	getById        *connect.Client[v1.GetByIdRequest, v1.GetByIdResponse]
-	getBySessionId *connect.Client[v1.GetBySessionIdRequest, v1.GetBySessionIdResponse]
-	search         *connect.Client[v1.SearchRequest, v1.SearchResponse]
-	create         *connect.Client[v1.CreateRequest, v1.CreateResponse]
-	update         *connect.Client[v1.UpdateRequest, v1.UpdateResponse]
-	link           *connect.Client[v1.LinkRequest, v1.LinkResponse]
-	remove         *connect.Client[v1.RemoveRequest, v1.RemoveResponse]
-	log            *connect.Client[v1.LogRequest, v1.LogResponse]
-	listLogs       *connect.Client[v1.ListLogsRequest, v1.ListLogsResponse]
-	addKey         *connect.Client[v1.AddKeyRequest, v1.AddKeyResponse]
-	removeKey      *connect.Client[v1.RemoveKeyRequest, v1.RemoveKeyResponse]
-	searchKey      *connect.Client[v1.SearchKeyRequest, v1.SearchKeyResponse]
+	getById                   *connect.Client[v1.GetByIdRequest, v1.GetByIdResponse]
+	getBySessionId            *connect.Client[v1.GetBySessionIdRequest, v1.GetBySessionIdResponse]
+	search                    *connect.Client[v1.SearchRequest, v1.SearchResponse]
+	create                    *connect.Client[v1.CreateRequest, v1.CreateResponse]
+	update                    *connect.Client[v1.UpdateRequest, v1.UpdateResponse]
+	link                      *connect.Client[v1.LinkRequest, v1.LinkResponse]
+	remove                    *connect.Client[v1.RemoveRequest, v1.RemoveResponse]
+	log                       *connect.Client[v1.LogRequest, v1.LogResponse]
+	listLogs                  *connect.Client[v1.ListLogsRequest, v1.ListLogsResponse]
+	addKey                    *connect.Client[v1.AddKeyRequest, v1.AddKeyResponse]
+	removeKey                 *connect.Client[v1.RemoveKeyRequest, v1.RemoveKeyResponse]
+	searchKey                 *connect.Client[v1.SearchKeyRequest, v1.SearchKeyResponse]
+	registerKey               *connect.Client[v1.RegisterKeyRequest, v1.RegisterKeyResponse]
+	deRegisterKey             *connect.Client[v1.DeRegisterKeyRequest, v1.DeRegisterKeyResponse]
+	registerNotificationKey   *connect.Client[v1.RegisterKeyRequest, v1.RegisterKeyResponse]
+	deRegisterNotificationKey *connect.Client[v1.DeRegisterKeyRequest, v1.DeRegisterKeyResponse]
 }
 
 // GetById calls device.v1.DeviceService.GetById.
@@ -272,8 +321,28 @@ func (c *deviceServiceClient) RemoveKey(ctx context.Context, req *connect.Reques
 }
 
 // SearchKey calls device.v1.DeviceService.SearchKey.
-func (c *deviceServiceClient) SearchKey(ctx context.Context, req *connect.Request[v1.SearchKeyRequest]) (*connect.ServerStreamForClient[v1.SearchKeyResponse], error) {
-	return c.searchKey.CallServerStream(ctx, req)
+func (c *deviceServiceClient) SearchKey(ctx context.Context, req *connect.Request[v1.SearchKeyRequest]) (*connect.Response[v1.SearchKeyResponse], error) {
+	return c.searchKey.CallUnary(ctx, req)
+}
+
+// RegisterKey calls device.v1.DeviceService.RegisterKey.
+func (c *deviceServiceClient) RegisterKey(ctx context.Context, req *connect.Request[v1.RegisterKeyRequest]) (*connect.Response[v1.RegisterKeyResponse], error) {
+	return c.registerKey.CallUnary(ctx, req)
+}
+
+// DeRegisterKey calls device.v1.DeviceService.DeRegisterKey.
+func (c *deviceServiceClient) DeRegisterKey(ctx context.Context, req *connect.Request[v1.DeRegisterKeyRequest]) (*connect.Response[v1.DeRegisterKeyResponse], error) {
+	return c.deRegisterKey.CallUnary(ctx, req)
+}
+
+// RegisterNotificationKey calls device.v1.DeviceService.RegisterNotificationKey.
+func (c *deviceServiceClient) RegisterNotificationKey(ctx context.Context, req *connect.Request[v1.RegisterKeyRequest]) (*connect.Response[v1.RegisterKeyResponse], error) {
+	return c.registerNotificationKey.CallUnary(ctx, req)
+}
+
+// DeRegisterNotificationKey calls device.v1.DeviceService.DeRegisterNotificationKey.
+func (c *deviceServiceClient) DeRegisterNotificationKey(ctx context.Context, req *connect.Request[v1.DeRegisterKeyRequest]) (*connect.Response[v1.DeRegisterKeyResponse], error) {
+	return c.deRegisterNotificationKey.CallUnary(ctx, req)
 }
 
 // DeviceServiceHandler is an implementation of the device.v1.DeviceService service.
@@ -305,15 +374,24 @@ type DeviceServiceHandler interface {
 	// ListLogs retrieves activity logs for a device.
 	// Returns a stream of log entries for the specified device.
 	ListLogs(context.Context, *connect.Request[v1.ListLogsRequest], *connect.ServerStream[v1.ListLogsResponse]) error
-	// AddKey adds an encryption key to a device.
-	// Keys are used for secure communications (Matrix E2EE, push notifications).
+	// AddKey adds a key or token to a device (FCM tokens, encryption keys, etc.).
 	AddKey(context.Context, *connect.Request[v1.AddKeyRequest]) (*connect.Response[v1.AddKeyResponse], error)
-	// RemoveKey removes encryption keys from a device.
-	// Used for key rotation or when removing a device.
+	// RemoveKey removes keys or tokens from a device.
 	RemoveKey(context.Context, *connect.Request[v1.RemoveKeyRequest]) (*connect.Response[v1.RemoveKeyResponse], error)
-	// SearchKey finds encryption keys associated with a device.
-	// Supports filtering by key type and pagination.
-	SearchKey(context.Context, *connect.Request[v1.SearchKeyRequest], *connect.ServerStream[v1.SearchKeyResponse]) error
+	// SearchKey searches for keys or tokens associated with a device.
+	SearchKey(context.Context, *connect.Request[v1.SearchKeyRequest]) (*connect.Response[v1.SearchKeyResponse], error)
+	// RegisterKey registers a key with third-party services (e.g., FCM, APNs).
+	// This handles integration with external services and stores the key.
+	RegisterKey(context.Context, *connect.Request[v1.RegisterKeyRequest]) (*connect.Response[v1.RegisterKeyResponse], error)
+	// DeRegisterKey deregisters a key from third-party services.
+	// This handles cleanup with external services and removes the key.
+	DeRegisterKey(context.Context, *connect.Request[v1.DeRegisterKeyRequest]) (*connect.Response[v1.DeRegisterKeyResponse], error)
+	// RegisterNotificationKey registers a notification key for push notifications.
+	// This integrates with notification services and stores the key.
+	RegisterNotificationKey(context.Context, *connect.Request[v1.RegisterKeyRequest]) (*connect.Response[v1.RegisterKeyResponse], error)
+	// DeRegisterNotificationKey deregisters a notification key.
+	// This removes the key from notification services and local storage.
+	DeRegisterNotificationKey(context.Context, *connect.Request[v1.DeRegisterKeyRequest]) (*connect.Response[v1.DeRegisterKeyResponse], error)
 }
 
 // NewDeviceServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -389,10 +467,34 @@ func NewDeviceServiceHandler(svc DeviceServiceHandler, opts ...connect.HandlerOp
 		connect.WithSchema(deviceServiceMethods.ByName("RemoveKey")),
 		connect.WithHandlerOptions(opts...),
 	)
-	deviceServiceSearchKeyHandler := connect.NewServerStreamHandler(
+	deviceServiceSearchKeyHandler := connect.NewUnaryHandler(
 		DeviceServiceSearchKeyProcedure,
 		svc.SearchKey,
 		connect.WithSchema(deviceServiceMethods.ByName("SearchKey")),
+		connect.WithHandlerOptions(opts...),
+	)
+	deviceServiceRegisterKeyHandler := connect.NewUnaryHandler(
+		DeviceServiceRegisterKeyProcedure,
+		svc.RegisterKey,
+		connect.WithSchema(deviceServiceMethods.ByName("RegisterKey")),
+		connect.WithHandlerOptions(opts...),
+	)
+	deviceServiceDeRegisterKeyHandler := connect.NewUnaryHandler(
+		DeviceServiceDeRegisterKeyProcedure,
+		svc.DeRegisterKey,
+		connect.WithSchema(deviceServiceMethods.ByName("DeRegisterKey")),
+		connect.WithHandlerOptions(opts...),
+	)
+	deviceServiceRegisterNotificationKeyHandler := connect.NewUnaryHandler(
+		DeviceServiceRegisterNotificationKeyProcedure,
+		svc.RegisterNotificationKey,
+		connect.WithSchema(deviceServiceMethods.ByName("RegisterNotificationKey")),
+		connect.WithHandlerOptions(opts...),
+	)
+	deviceServiceDeRegisterNotificationKeyHandler := connect.NewUnaryHandler(
+		DeviceServiceDeRegisterNotificationKeyProcedure,
+		svc.DeRegisterNotificationKey,
+		connect.WithSchema(deviceServiceMethods.ByName("DeRegisterNotificationKey")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/device.v1.DeviceService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -421,6 +523,14 @@ func NewDeviceServiceHandler(svc DeviceServiceHandler, opts ...connect.HandlerOp
 			deviceServiceRemoveKeyHandler.ServeHTTP(w, r)
 		case DeviceServiceSearchKeyProcedure:
 			deviceServiceSearchKeyHandler.ServeHTTP(w, r)
+		case DeviceServiceRegisterKeyProcedure:
+			deviceServiceRegisterKeyHandler.ServeHTTP(w, r)
+		case DeviceServiceDeRegisterKeyProcedure:
+			deviceServiceDeRegisterKeyHandler.ServeHTTP(w, r)
+		case DeviceServiceRegisterNotificationKeyProcedure:
+			deviceServiceRegisterNotificationKeyHandler.ServeHTTP(w, r)
+		case DeviceServiceDeRegisterNotificationKeyProcedure:
+			deviceServiceDeRegisterNotificationKeyHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -474,6 +584,22 @@ func (UnimplementedDeviceServiceHandler) RemoveKey(context.Context, *connect.Req
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("device.v1.DeviceService.RemoveKey is not implemented"))
 }
 
-func (UnimplementedDeviceServiceHandler) SearchKey(context.Context, *connect.Request[v1.SearchKeyRequest], *connect.ServerStream[v1.SearchKeyResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("device.v1.DeviceService.SearchKey is not implemented"))
+func (UnimplementedDeviceServiceHandler) SearchKey(context.Context, *connect.Request[v1.SearchKeyRequest]) (*connect.Response[v1.SearchKeyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("device.v1.DeviceService.SearchKey is not implemented"))
+}
+
+func (UnimplementedDeviceServiceHandler) RegisterKey(context.Context, *connect.Request[v1.RegisterKeyRequest]) (*connect.Response[v1.RegisterKeyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("device.v1.DeviceService.RegisterKey is not implemented"))
+}
+
+func (UnimplementedDeviceServiceHandler) DeRegisterKey(context.Context, *connect.Request[v1.DeRegisterKeyRequest]) (*connect.Response[v1.DeRegisterKeyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("device.v1.DeviceService.DeRegisterKey is not implemented"))
+}
+
+func (UnimplementedDeviceServiceHandler) RegisterNotificationKey(context.Context, *connect.Request[v1.RegisterKeyRequest]) (*connect.Response[v1.RegisterKeyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("device.v1.DeviceService.RegisterNotificationKey is not implemented"))
+}
+
+func (UnimplementedDeviceServiceHandler) DeRegisterNotificationKey(context.Context, *connect.Request[v1.DeRegisterKeyRequest]) (*connect.Response[v1.DeRegisterKeyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("device.v1.DeviceService.DeRegisterNotificationKey is not implemented"))
 }

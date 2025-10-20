@@ -33,25 +33,29 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DeviceService_GetById_FullMethodName        = "/device.v1.DeviceService/GetById"
-	DeviceService_GetBySessionId_FullMethodName = "/device.v1.DeviceService/GetBySessionId"
-	DeviceService_Search_FullMethodName         = "/device.v1.DeviceService/Search"
-	DeviceService_Create_FullMethodName         = "/device.v1.DeviceService/Create"
-	DeviceService_Update_FullMethodName         = "/device.v1.DeviceService/Update"
-	DeviceService_Link_FullMethodName           = "/device.v1.DeviceService/Link"
-	DeviceService_Remove_FullMethodName         = "/device.v1.DeviceService/Remove"
-	DeviceService_Log_FullMethodName            = "/device.v1.DeviceService/Log"
-	DeviceService_ListLogs_FullMethodName       = "/device.v1.DeviceService/ListLogs"
-	DeviceService_AddKey_FullMethodName         = "/device.v1.DeviceService/AddKey"
-	DeviceService_RemoveKey_FullMethodName      = "/device.v1.DeviceService/RemoveKey"
-	DeviceService_SearchKey_FullMethodName      = "/device.v1.DeviceService/SearchKey"
+	DeviceService_GetById_FullMethodName                   = "/device.v1.DeviceService/GetById"
+	DeviceService_GetBySessionId_FullMethodName            = "/device.v1.DeviceService/GetBySessionId"
+	DeviceService_Search_FullMethodName                    = "/device.v1.DeviceService/Search"
+	DeviceService_Create_FullMethodName                    = "/device.v1.DeviceService/Create"
+	DeviceService_Update_FullMethodName                    = "/device.v1.DeviceService/Update"
+	DeviceService_Link_FullMethodName                      = "/device.v1.DeviceService/Link"
+	DeviceService_Remove_FullMethodName                    = "/device.v1.DeviceService/Remove"
+	DeviceService_Log_FullMethodName                       = "/device.v1.DeviceService/Log"
+	DeviceService_ListLogs_FullMethodName                  = "/device.v1.DeviceService/ListLogs"
+	DeviceService_AddKey_FullMethodName                    = "/device.v1.DeviceService/AddKey"
+	DeviceService_RemoveKey_FullMethodName                 = "/device.v1.DeviceService/RemoveKey"
+	DeviceService_SearchKey_FullMethodName                 = "/device.v1.DeviceService/SearchKey"
+	DeviceService_RegisterKey_FullMethodName               = "/device.v1.DeviceService/RegisterKey"
+	DeviceService_DeRegisterKey_FullMethodName             = "/device.v1.DeviceService/DeRegisterKey"
+	DeviceService_RegisterNotificationKey_FullMethodName   = "/device.v1.DeviceService/RegisterNotificationKey"
+	DeviceService_DeRegisterNotificationKey_FullMethodName = "/device.v1.DeviceService/DeRegisterNotificationKey"
 )
 
 // DeviceServiceClient is the client API for DeviceService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// DeviceService provides comprehensive device management capabilities.
+// DeviceService provides core device management and key/token management.
 // All RPCs require authentication via Bearer token unless otherwise specified.
 type DeviceServiceClient interface {
 	// GetById retrieves one or more devices by their unique identifiers.
@@ -81,15 +85,24 @@ type DeviceServiceClient interface {
 	// ListLogs retrieves activity logs for a device.
 	// Returns a stream of log entries for the specified device.
 	ListLogs(ctx context.Context, in *ListLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ListLogsResponse], error)
-	// AddKey adds an encryption key to a device.
-	// Keys are used for secure communications (Matrix E2EE, push notifications).
+	// AddKey adds a key or token to a device (FCM tokens, encryption keys, etc.).
 	AddKey(ctx context.Context, in *AddKeyRequest, opts ...grpc.CallOption) (*AddKeyResponse, error)
-	// RemoveKey removes encryption keys from a device.
-	// Used for key rotation or when removing a device.
+	// RemoveKey removes keys or tokens from a device.
 	RemoveKey(ctx context.Context, in *RemoveKeyRequest, opts ...grpc.CallOption) (*RemoveKeyResponse, error)
-	// SearchKey finds encryption keys associated with a device.
-	// Supports filtering by key type and pagination.
-	SearchKey(ctx context.Context, in *SearchKeyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchKeyResponse], error)
+	// SearchKey searches for keys or tokens associated with a device.
+	SearchKey(ctx context.Context, in *SearchKeyRequest, opts ...grpc.CallOption) (*SearchKeyResponse, error)
+	// RegisterKey registers a key with third-party services (e.g., FCM, APNs).
+	// This handles integration with external services and stores the key.
+	RegisterKey(ctx context.Context, in *RegisterKeyRequest, opts ...grpc.CallOption) (*RegisterKeyResponse, error)
+	// DeRegisterKey deregisters a key from third-party services.
+	// This handles cleanup with external services and removes the key.
+	DeRegisterKey(ctx context.Context, in *DeRegisterKeyRequest, opts ...grpc.CallOption) (*DeRegisterKeyResponse, error)
+	// RegisterNotificationKey registers a notification key for push notifications.
+	// This integrates with notification services and stores the key.
+	RegisterNotificationKey(ctx context.Context, in *RegisterKeyRequest, opts ...grpc.CallOption) (*RegisterKeyResponse, error)
+	// DeRegisterNotificationKey deregisters a notification key.
+	// This removes the key from notification services and local storage.
+	DeRegisterNotificationKey(ctx context.Context, in *DeRegisterKeyRequest, opts ...grpc.CallOption) (*DeRegisterKeyResponse, error)
 }
 
 type deviceServiceClient struct {
@@ -228,30 +241,61 @@ func (c *deviceServiceClient) RemoveKey(ctx context.Context, in *RemoveKeyReques
 	return out, nil
 }
 
-func (c *deviceServiceClient) SearchKey(ctx context.Context, in *SearchKeyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchKeyResponse], error) {
+func (c *deviceServiceClient) SearchKey(ctx context.Context, in *SearchKeyRequest, opts ...grpc.CallOption) (*SearchKeyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &DeviceService_ServiceDesc.Streams[2], DeviceService_SearchKey_FullMethodName, cOpts...)
+	out := new(SearchKeyResponse)
+	err := c.cc.Invoke(ctx, DeviceService_SearchKey_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[SearchKeyRequest, SearchKeyResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
+	return out, nil
 }
 
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type DeviceService_SearchKeyClient = grpc.ServerStreamingClient[SearchKeyResponse]
+func (c *deviceServiceClient) RegisterKey(ctx context.Context, in *RegisterKeyRequest, opts ...grpc.CallOption) (*RegisterKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterKeyResponse)
+	err := c.cc.Invoke(ctx, DeviceService_RegisterKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deviceServiceClient) DeRegisterKey(ctx context.Context, in *DeRegisterKeyRequest, opts ...grpc.CallOption) (*DeRegisterKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeRegisterKeyResponse)
+	err := c.cc.Invoke(ctx, DeviceService_DeRegisterKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deviceServiceClient) RegisterNotificationKey(ctx context.Context, in *RegisterKeyRequest, opts ...grpc.CallOption) (*RegisterKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterKeyResponse)
+	err := c.cc.Invoke(ctx, DeviceService_RegisterNotificationKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deviceServiceClient) DeRegisterNotificationKey(ctx context.Context, in *DeRegisterKeyRequest, opts ...grpc.CallOption) (*DeRegisterKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeRegisterKeyResponse)
+	err := c.cc.Invoke(ctx, DeviceService_DeRegisterNotificationKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
 
 // DeviceServiceServer is the server API for DeviceService service.
 // All implementations must embed UnimplementedDeviceServiceServer
 // for forward compatibility.
 //
-// DeviceService provides comprehensive device management capabilities.
+// DeviceService provides core device management and key/token management.
 // All RPCs require authentication via Bearer token unless otherwise specified.
 type DeviceServiceServer interface {
 	// GetById retrieves one or more devices by their unique identifiers.
@@ -281,15 +325,24 @@ type DeviceServiceServer interface {
 	// ListLogs retrieves activity logs for a device.
 	// Returns a stream of log entries for the specified device.
 	ListLogs(*ListLogsRequest, grpc.ServerStreamingServer[ListLogsResponse]) error
-	// AddKey adds an encryption key to a device.
-	// Keys are used for secure communications (Matrix E2EE, push notifications).
+	// AddKey adds a key or token to a device (FCM tokens, encryption keys, etc.).
 	AddKey(context.Context, *AddKeyRequest) (*AddKeyResponse, error)
-	// RemoveKey removes encryption keys from a device.
-	// Used for key rotation or when removing a device.
+	// RemoveKey removes keys or tokens from a device.
 	RemoveKey(context.Context, *RemoveKeyRequest) (*RemoveKeyResponse, error)
-	// SearchKey finds encryption keys associated with a device.
-	// Supports filtering by key type and pagination.
-	SearchKey(*SearchKeyRequest, grpc.ServerStreamingServer[SearchKeyResponse]) error
+	// SearchKey searches for keys or tokens associated with a device.
+	SearchKey(context.Context, *SearchKeyRequest) (*SearchKeyResponse, error)
+	// RegisterKey registers a key with third-party services (e.g., FCM, APNs).
+	// This handles integration with external services and stores the key.
+	RegisterKey(context.Context, *RegisterKeyRequest) (*RegisterKeyResponse, error)
+	// DeRegisterKey deregisters a key from third-party services.
+	// This handles cleanup with external services and removes the key.
+	DeRegisterKey(context.Context, *DeRegisterKeyRequest) (*DeRegisterKeyResponse, error)
+	// RegisterNotificationKey registers a notification key for push notifications.
+	// This integrates with notification services and stores the key.
+	RegisterNotificationKey(context.Context, *RegisterKeyRequest) (*RegisterKeyResponse, error)
+	// DeRegisterNotificationKey deregisters a notification key.
+	// This removes the key from notification services and local storage.
+	DeRegisterNotificationKey(context.Context, *DeRegisterKeyRequest) (*DeRegisterKeyResponse, error)
 	mustEmbedUnimplementedDeviceServiceServer()
 }
 
@@ -333,8 +386,20 @@ func (UnimplementedDeviceServiceServer) AddKey(context.Context, *AddKeyRequest) 
 func (UnimplementedDeviceServiceServer) RemoveKey(context.Context, *RemoveKeyRequest) (*RemoveKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveKey not implemented")
 }
-func (UnimplementedDeviceServiceServer) SearchKey(*SearchKeyRequest, grpc.ServerStreamingServer[SearchKeyResponse]) error {
-	return status.Errorf(codes.Unimplemented, "method SearchKey not implemented")
+func (UnimplementedDeviceServiceServer) SearchKey(context.Context, *SearchKeyRequest) (*SearchKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchKey not implemented")
+}
+func (UnimplementedDeviceServiceServer) RegisterKey(context.Context, *RegisterKeyRequest) (*RegisterKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterKey not implemented")
+}
+func (UnimplementedDeviceServiceServer) DeRegisterKey(context.Context, *DeRegisterKeyRequest) (*DeRegisterKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeRegisterKey not implemented")
+}
+func (UnimplementedDeviceServiceServer) RegisterNotificationKey(context.Context, *RegisterKeyRequest) (*RegisterKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterNotificationKey not implemented")
+}
+func (UnimplementedDeviceServiceServer) DeRegisterNotificationKey(context.Context, *DeRegisterKeyRequest) (*DeRegisterKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeRegisterNotificationKey not implemented")
 }
 func (UnimplementedDeviceServiceServer) mustEmbedUnimplementedDeviceServiceServer() {}
 func (UnimplementedDeviceServiceServer) testEmbeddedByValue()                       {}
@@ -541,16 +606,95 @@ func _DeviceService_RemoveKey_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DeviceService_SearchKey_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchKeyRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _DeviceService_SearchKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(DeviceServiceServer).SearchKey(m, &grpc.GenericServerStream[SearchKeyRequest, SearchKeyResponse]{ServerStream: stream})
+	if interceptor == nil {
+		return srv.(DeviceServiceServer).SearchKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceService_SearchKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceServiceServer).SearchKey(ctx, req.(*SearchKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type DeviceService_SearchKeyServer = grpc.ServerStreamingServer[SearchKeyResponse]
+func _DeviceService_RegisterKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceServiceServer).RegisterKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceService_RegisterKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceServiceServer).RegisterKey(ctx, req.(*RegisterKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeviceService_DeRegisterKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeRegisterKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceServiceServer).DeRegisterKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceService_DeRegisterKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceServiceServer).DeRegisterKey(ctx, req.(*DeRegisterKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeviceService_RegisterNotificationKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceServiceServer).RegisterNotificationKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceService_RegisterNotificationKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceServiceServer).RegisterNotificationKey(ctx, req.(*RegisterKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeviceService_DeRegisterNotificationKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeRegisterKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceServiceServer).DeRegisterNotificationKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceService_DeRegisterNotificationKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceServiceServer).DeRegisterNotificationKey(ctx, req.(*DeRegisterKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
 
 // DeviceService_ServiceDesc is the grpc.ServiceDesc for DeviceService service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -595,6 +739,26 @@ var DeviceService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "RemoveKey",
 			Handler:    _DeviceService_RemoveKey_Handler,
 		},
+		{
+			MethodName: "SearchKey",
+			Handler:    _DeviceService_SearchKey_Handler,
+		},
+		{
+			MethodName: "RegisterKey",
+			Handler:    _DeviceService_RegisterKey_Handler,
+		},
+		{
+			MethodName: "DeRegisterKey",
+			Handler:    _DeviceService_DeRegisterKey_Handler,
+		},
+		{
+			MethodName: "RegisterNotificationKey",
+			Handler:    _DeviceService_RegisterNotificationKey_Handler,
+		},
+		{
+			MethodName: "DeRegisterNotificationKey",
+			Handler:    _DeviceService_DeRegisterNotificationKey_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -605,11 +769,6 @@ var DeviceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListLogs",
 			Handler:       _DeviceService_ListLogs_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "SearchKey",
-			Handler:       _DeviceService_SearchKey_Handler,
 			ServerStreams: true,
 		},
 	},

@@ -38,7 +38,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// KeyType defines the types of encryption keys that can be stored for a device.
+// KeyType defines the types of keys that can be stored for a device.
 // Different key types serve different purposes in the security infrastructure.
 // buf:lint:ignore ENUM_VALUE_PREFIX
 type KeyType int32
@@ -47,6 +47,10 @@ const (
 	// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
 	KeyType_MATRIX_KEY       KeyType = 0 // Encryption key for Matrix protocol end-to-end encryption
 	KeyType_NOTIFICATION_KEY KeyType = 1 // Key for secure push notification delivery
+	KeyType_FCM_TOKEN        KeyType = 2 // Firebase Cloud Messaging token for push notifications
+	KeyType_CURVE25519_KEY   KeyType = 3 // Curve25519 key for ECDH
+	KeyType_ED25519_KEY      KeyType = 4 // Ed25519 key for signing
+	KeyType_PICKLE_KEY       KeyType = 5 // Pickled key for session storage
 )
 
 // Enum value maps for KeyType.
@@ -54,10 +58,18 @@ var (
 	KeyType_name = map[int32]string{
 		0: "MATRIX_KEY",
 		1: "NOTIFICATION_KEY",
+		2: "FCM_TOKEN",
+		3: "CURVE25519_KEY",
+		4: "ED25519_KEY",
+		5: "PICKLE_KEY",
 	}
 	KeyType_value = map[string]int32{
 		"MATRIX_KEY":       0,
 		"NOTIFICATION_KEY": 1,
+		"FCM_TOKEN":        2,
+		"CURVE25519_KEY":   3,
+		"ED25519_KEY":      4,
+		"PICKLE_KEY":       5,
 	}
 )
 
@@ -174,14 +186,18 @@ func (x *Locale) GetCode() string {
 	return ""
 }
 
-// KeyObject represents an encryption key associated with a device.
-// Keys are used for secure communications and must be properly managed.
+// KeyObject represents a key or token associated with a device.
+// Keys are used for secure communications, authentication, and push notifications.
 type KeyObject struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                             // Unique identifier for the key
-	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"` // Device this key belongs to
-	Key           []byte                 `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`                           // The actual encryption key material (encrypted at rest)
-	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`                       // Additional key metadata (algorithm, expiry, etc.)
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                                  // Unique identifier for the key
+	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`                      // Device this key belongs to
+	KeyType       KeyType                `protobuf:"varint,3,opt,name=key_type,json=keyType,proto3,enum=device.v1.KeyType" json:"key_type,omitempty"` // Type of key (FCM token, encryption key, etc.)
+	Key           []byte                 `protobuf:"bytes,4,opt,name=key,proto3" json:"key,omitempty"`                                                // The actual key material or token (encrypted at rest)
+	CreatedAt     string                 `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                   // Timestamp when key was created (RFC3339)
+	ExpiresAt     string                 `protobuf:"bytes,6,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`                   // Optional expiration timestamp (RFC3339)
+	IsActive      bool                   `protobuf:"varint,7,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`                     // Whether the key is currently active
+	Extra         *structpb.Struct       `protobuf:"bytes,8,opt,name=extra,proto3" json:"extra,omitempty"`                                            // Additional key metadata (algorithm, app_id, etc.)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -230,11 +246,39 @@ func (x *KeyObject) GetDeviceId() string {
 	return ""
 }
 
+func (x *KeyObject) GetKeyType() KeyType {
+	if x != nil {
+		return x.KeyType
+	}
+	return KeyType_MATRIX_KEY
+}
+
 func (x *KeyObject) GetKey() []byte {
 	if x != nil {
 		return x.Key
 	}
 	return nil
+}
+
+func (x *KeyObject) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *KeyObject) GetExpiresAt() string {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return ""
+}
+
+func (x *KeyObject) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
 }
 
 func (x *KeyObject) GetExtra() *structpb.Struct {
@@ -1462,15 +1506,16 @@ func (x *ListLogsResponse) GetData() []*DeviceLog {
 	return nil
 }
 
-// AddKeyRequest adds an encryption key to a device.
-// Keys are used for secure communications (Matrix E2EE, push notifications, etc.).
+// AddKeyRequest adds a key or token to a device.
+// Keys are used for secure communications (Matrix E2EE, push notifications, FCM tokens, etc.).
 type AddKeyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                                  // Unique identifier for the key
 	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`                      // Device this key belongs to
-	KeyType       KeyType                `protobuf:"varint,3,opt,name=key_type,json=keyType,proto3,enum=device.v1.KeyType" json:"key_type,omitempty"` // Type of key (Matrix, Notification, etc.)
-	Data          []byte                 `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`                                              // The key material (will be encrypted at rest)
-	Extras        *structpb.Struct       `protobuf:"bytes,5,opt,name=extras,proto3" json:"extras,omitempty"`                                          // Additional key metadata (algorithm, expiry, etc.)
+	KeyType       KeyType                `protobuf:"varint,3,opt,name=key_type,json=keyType,proto3,enum=device.v1.KeyType" json:"key_type,omitempty"` // Type of key (Matrix, FCM, Encryption, etc.)
+	Data          []byte                 `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`                                              // The key material or token (will be encrypted at rest)
+	ExpiresAt     string                 `protobuf:"bytes,5,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`                   // Optional expiration timestamp (RFC3339)
+	Extras        *structpb.Struct       `protobuf:"bytes,6,opt,name=extras,proto3" json:"extras,omitempty"`                                          // Additional key metadata (algorithm, app_id, etc.)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1533,6 +1578,13 @@ func (x *AddKeyRequest) GetData() []byte {
 	return nil
 }
 
+func (x *AddKeyRequest) GetExpiresAt() string {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return ""
+}
+
 func (x *AddKeyRequest) GetExtras() *structpb.Struct {
 	if x != nil {
 		return x.Extras
@@ -1585,8 +1637,8 @@ func (x *AddKeyResponse) GetData() *KeyObject {
 	return nil
 }
 
-// RemoveKeyRequest removes one or more encryption keys from a device.
-// Used when rotating keys or removing a device.
+// RemoveKeyRequest removes one or more keys or tokens from a device.
+// Used when rotating keys, removing tokens, or removing a device.
 type RemoveKeyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            []string               `protobuf:"bytes,1,rep,name=id,proto3" json:"id,omitempty"` // List of key IDs to remove
@@ -1676,16 +1728,17 @@ func (x *RemoveKeyResponse) GetId() []string {
 	return nil
 }
 
-// SearchKeyRequest searches for encryption keys associated with a device.
+// SearchKeyRequest searches for keys or tokens associated with a device.
 type SearchKeyRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`                                            // Search query (key ID pattern, etc.)
-	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`                      // Device ID to search keys for
-	KeyType       KeyType                `protobuf:"varint,3,opt,name=key_type,json=keyType,proto3,enum=device.v1.KeyType" json:"key_type,omitempty"` // Filter by key type
-	Page          int32                  `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`                                             // Page number for pagination
-	Count         int32                  `protobuf:"varint,5,opt,name=count,proto3" json:"count,omitempty"`                                           // Number of results per page
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Query          string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`                                                      // Search query (key ID pattern, etc.)
+	DeviceId       string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`                                // Device ID to search keys for
+	KeyTypes       []KeyType              `protobuf:"varint,3,rep,packed,name=key_types,json=keyTypes,proto3,enum=device.v1.KeyType" json:"key_types,omitempty"` // Filter by key types (if empty, returns all)
+	IncludeExpired bool                   `protobuf:"varint,4,opt,name=include_expired,json=includeExpired,proto3" json:"include_expired,omitempty"`             // If true, includes expired keys
+	Page           int32                  `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`                                                       // Page number for pagination
+	Count          int32                  `protobuf:"varint,6,opt,name=count,proto3" json:"count,omitempty"`                                                     // Number of results per page
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *SearchKeyRequest) Reset() {
@@ -1732,11 +1785,18 @@ func (x *SearchKeyRequest) GetDeviceId() string {
 	return ""
 }
 
-func (x *SearchKeyRequest) GetKeyType() KeyType {
+func (x *SearchKeyRequest) GetKeyTypes() []KeyType {
 	if x != nil {
-		return x.KeyType
+		return x.KeyTypes
 	}
-	return KeyType_MATRIX_KEY
+	return nil
+}
+
+func (x *SearchKeyRequest) GetIncludeExpired() bool {
+	if x != nil {
+		return x.IncludeExpired
+	}
+	return false
 }
 
 func (x *SearchKeyRequest) GetPage() int32 {
@@ -1753,7 +1813,7 @@ func (x *SearchKeyRequest) GetCount() int32 {
 	return 0
 }
 
-// SearchKeyResponse returns matching encryption keys.
+// SearchKeyResponse returns matching keys or tokens.
 type SearchKeyResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          []*KeyObject           `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"` // List of matching keys
@@ -1798,6 +1858,215 @@ func (x *SearchKeyResponse) GetData() []*KeyObject {
 	return nil
 }
 
+// RegisterKeyRequest registers a device with third-party services.
+// Used when the key/token is generated by the third-party service (e.g., FCM token
+// generated on device by FCM SDK). This links the device to the external service.
+// For storing key material, use AddKeyRequest instead.
+type RegisterKeyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DeviceId      string                 `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`                      // Device to register with the service
+	KeyType       KeyType                `protobuf:"varint,2,opt,name=key_type,json=keyType,proto3,enum=device.v1.KeyType" json:"key_type,omitempty"` // Type of service to register with (FCM_TOKEN, etc.)
+	Extras        *structpb.Struct       `protobuf:"bytes,3,opt,name=extras,proto3" json:"extras,omitempty"`                                          // Service-specific metadata (app_id, platform, etc.)
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterKeyRequest) Reset() {
+	*x = RegisterKeyRequest{}
+	mi := &file_device_v1_device_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterKeyRequest) ProtoMessage() {}
+
+func (x *RegisterKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_device_v1_device_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterKeyRequest.ProtoReflect.Descriptor instead.
+func (*RegisterKeyRequest) Descriptor() ([]byte, []int) {
+	return file_device_v1_device_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *RegisterKeyRequest) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+func (x *RegisterKeyRequest) GetKeyType() KeyType {
+	if x != nil {
+		return x.KeyType
+	}
+	return KeyType_MATRIX_KEY
+}
+
+func (x *RegisterKeyRequest) GetExtras() *structpb.Struct {
+	if x != nil {
+		return x.Extras
+	}
+	return nil
+}
+
+// RegisterKeyResponse returns confirmation of registration.
+// The actual key/token data is managed by the third-party service.
+type RegisterKeyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          *KeyObject             `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"` // Registered key object with service metadata
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterKeyResponse) Reset() {
+	*x = RegisterKeyResponse{}
+	mi := &file_device_v1_device_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterKeyResponse) ProtoMessage() {}
+
+func (x *RegisterKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_device_v1_device_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterKeyResponse.ProtoReflect.Descriptor instead.
+func (*RegisterKeyResponse) Descriptor() ([]byte, []int) {
+	return file_device_v1_device_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *RegisterKeyResponse) GetData() *KeyObject {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+// DeRegisterKeyRequest removes device registration from third-party services.
+// This cleans up the connection with external services like FCM.
+type DeRegisterKeyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"` // Key ID to deregister from external service
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeRegisterKeyRequest) Reset() {
+	*x = DeRegisterKeyRequest{}
+	mi := &file_device_v1_device_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeRegisterKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeRegisterKeyRequest) ProtoMessage() {}
+
+func (x *DeRegisterKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_device_v1_device_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeRegisterKeyRequest.ProtoReflect.Descriptor instead.
+func (*DeRegisterKeyRequest) Descriptor() ([]byte, []int) {
+	return file_device_v1_device_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *DeRegisterKeyRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+// DeRegisterKeyResponse confirms service deregistration.
+type DeRegisterKeyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"` // True if successfully deregistered from service
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`  // Status message from the external service
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeRegisterKeyResponse) Reset() {
+	*x = DeRegisterKeyResponse{}
+	mi := &file_device_v1_device_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeRegisterKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeRegisterKeyResponse) ProtoMessage() {}
+
+func (x *DeRegisterKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_device_v1_device_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeRegisterKeyResponse.ProtoReflect.Descriptor instead.
+func (*DeRegisterKeyResponse) Descriptor() ([]byte, []int) {
+	return file_device_v1_device_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *DeRegisterKeyResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *DeRegisterKeyResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_device_v1_device_proto protoreflect.FileDescriptor
 
 const file_device_v1_device_proto_rawDesc = "" +
@@ -1811,12 +2080,18 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\bcurrency\x18\b \x01(\tR\bcurrency\x12#\n" +
 	"\rcurrency_name\x18\t \x01(\tR\fcurrencyName\x12\x12\n" +
 	"\x04code\x18\n" +
-	" \x01(\tR\x04code\"\xb3\x01\n" +
+	" \x01(\tR\x04code\"\xbd\x02\n" +
 	"\tKeyObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x128\n" +
-	"\tdevice_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12\x10\n" +
-	"\x03key\x18\x03 \x01(\fR\x03key\x12-\n" +
-	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xfc\x02\n" +
+	"\tdevice_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12-\n" +
+	"\bkey_type\x18\x03 \x01(\x0e2\x12.device.v1.KeyTypeR\akeyType\x12\x10\n" +
+	"\x03key\x18\x04 \x01(\fR\x03key\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"expires_at\x18\x06 \x01(\tR\texpiresAt\x12\x1b\n" +
+	"\tis_active\x18\a \x01(\bR\bisActive\x12-\n" +
+	"\x05extra\x18\b \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xfc\x02\n" +
 	"\tDeviceLog\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x128\n" +
 	"\tdevice_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12\x1d\n" +
@@ -1916,31 +2191,50 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\tdevice_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x05R\x05count\"<\n" +
 	"\x10ListLogsResponse\x12(\n" +
-	"\x04data\x18\x01 \x03(\v2\x14.device.v1.DeviceLogR\x04data\"\xea\x01\n" +
+	"\x04data\x18\x01 \x03(\v2\x14.device.v1.DeviceLogR\x04data\"\x89\x02\n" +
 	"\rAddKeyRequest\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x128\n" +
 	"\tdevice_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12-\n" +
 	"\bkey_type\x18\x03 \x01(\x0e2\x12.device.v1.KeyTypeR\akeyType\x12\x12\n" +
-	"\x04data\x18\x04 \x01(\fR\x04data\x12/\n" +
-	"\x06extras\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x06extras\":\n" +
+	"\x04data\x18\x04 \x01(\fR\x04data\x12\x1d\n" +
+	"\n" +
+	"expires_at\x18\x05 \x01(\tR\texpiresAt\x12/\n" +
+	"\x06extras\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x06extras\":\n" +
 	"\x0eAddKeyResponse\x12(\n" +
 	"\x04data\x18\x01 \x01(\v2\x14.device.v1.KeyObjectR\x04data\"D\n" +
 	"\x10RemoveKeyRequest\x120\n" +
 	"\x02id\x18\x01 \x03(\tB \xbaH\x1d\x92\x01\x1a\"\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"#\n" +
 	"\x11RemoveKeyResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x03(\tR\x02id\"\xbb\x01\n" +
+	"\x02id\x18\x01 \x03(\tR\x02id\"\xe6\x01\n" +
 	"\x10SearchKeyRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x128\n" +
-	"\tdevice_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12-\n" +
-	"\bkey_type\x18\x03 \x01(\x0e2\x12.device.v1.KeyTypeR\akeyType\x12\x12\n" +
-	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x14\n" +
-	"\x05count\x18\x05 \x01(\x05R\x05count\"=\n" +
+	"\tdevice_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12/\n" +
+	"\tkey_types\x18\x03 \x03(\x0e2\x12.device.v1.KeyTypeR\bkeyTypes\x12'\n" +
+	"\x0finclude_expired\x18\x04 \x01(\bR\x0eincludeExpired\x12\x12\n" +
+	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x14\n" +
+	"\x05count\x18\x06 \x01(\x05R\x05count\"=\n" +
 	"\x11SearchKeyResponse\x12(\n" +
-	"\x04data\x18\x01 \x03(\v2\x14.device.v1.KeyObjectR\x04data*/\n" +
+	"\x04data\x18\x01 \x03(\v2\x14.device.v1.KeyObjectR\x04data\"\xae\x01\n" +
+	"\x12RegisterKeyRequest\x128\n" +
+	"\tdevice_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12-\n" +
+	"\bkey_type\x18\x02 \x01(\x0e2\x12.device.v1.KeyTypeR\akeyType\x12/\n" +
+	"\x06extras\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x06extras\"?\n" +
+	"\x13RegisterKeyResponse\x12(\n" +
+	"\x04data\x18\x01 \x01(\v2\x14.device.v1.KeyObjectR\x04data\"C\n" +
+	"\x14DeRegisterKeyRequest\x12+\n" +
+	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"K\n" +
+	"\x15DeRegisterKeyResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage*s\n" +
 	"\aKeyType\x12\x0e\n" +
 	"\n" +
 	"MATRIX_KEY\x10\x00\x12\x14\n" +
-	"\x10NOTIFICATION_KEY\x10\x012\xab\x18\n" +
+	"\x10NOTIFICATION_KEY\x10\x01\x12\r\n" +
+	"\tFCM_TOKEN\x10\x02\x12\x12\n" +
+	"\x0eCURVE25519_KEY\x10\x03\x12\x0f\n" +
+	"\vED25519_KEY\x10\x04\x12\x0e\n" +
+	"\n" +
+	"PICKLE_KEY\x10\x052\xf0!\n" +
 	"\rDeviceService\x12\x86\x02\n" +
 	"\aGetById\x12\x19.device.v1.GetByIdRequest\x1a\x1a.device.v1.GetByIdResponse\"\xc3\x01\xbaG\xbf\x01\n" +
 	"\aDevices\x12\x11Get devices by ID\x1a\x91\x01Retrieves one or more devices by their unique identifiers. Supports batch retrieval and optional extensive details including logs and key counts.*\rgetDeviceById\x12\x83\x02\n" +
@@ -1960,14 +2254,22 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\x03Log\x12\x15.device.v1.LogRequest\x1a\x16.device.v1.LogResponse\"\xcb\x01\xbaG\xc7\x01\n" +
 	"\vDevice Logs\x12\x13Log device activity\x1a\x8f\x01Creates a new activity log entry for a device. Used for tracking device sessions, locations, and activity for security auditing and compliance.*\x11logDeviceActivity\x12\x83\x02\n" +
 	"\bListLogs\x12\x1a.device.v1.ListLogsRequest\x1a\x1b.device.v1.ListLogsResponse\"\xbb\x01\xbaG\xb7\x01\n" +
-	"\vDevice Logs\x12\x19List device activity logs\x1a}Retrieves activity logs for a device. Useful for security auditing, tracking device usage patterns, and compliance reporting.*\x0elistDeviceLogs0\x01\x12\x8f\x02\n" +
-	"\x06AddKey\x12\x18.device.v1.AddKeyRequest\x1a\x19.device.v1.AddKeyResponse\"\xcf\x01\xbaG\xcb\x01\n" +
-	"\vDevice Keys\x12\x12Add encryption key\x1a\x99\x01Adds an encryption key to a device. Keys are used for secure communications including Matrix end-to-end encryption and secure push notification delivery.*\faddDeviceKey\x12\xf8\x01\n" +
-	"\tRemoveKey\x12\x1b.device.v1.RemoveKeyRequest\x1a\x1c.device.v1.RemoveKeyResponse\"\xaf\x01\xbaG\xab\x01\n" +
-	"\vDevice Keys\x12\x16Remove encryption keys\x1asRemoves one or more encryption keys from a device. Used for key rotation or when removing a device from the system.*\x0fremoveDeviceKey\x12\x8b\x02\n" +
-	"\tSearchKey\x12\x1b.device.v1.SearchKeyRequest\x1a\x1c.device.v1.SearchKeyResponse\"\xc0\x01\xbaG\xbc\x01\n" +
-	"\vDevice Keys\x12\x1dSearch device encryption keys\x1a|Searches for encryption keys associated with a device. Supports filtering by key type (Matrix, Notification) and pagination.*\x10searchDeviceKeys0\x01B\x87\a\xbaG\xde\x05\x12\xb2\x05\n" +
-	"\x0eDevice Service\x12\xf3\x03The Device Service provides comprehensive device management capabilities including device registration, session tracking, key management, and security auditing. It enables applications to register and track user devices across platforms (mobile, web, desktop), manage encryption keys for secure communications, and maintain detailed logs of device activity for security and compliance purposes. The service supports multi-device scenarios where users can have multiple active devices simultaneously.\"W\n" +
+	"\vDevice Logs\x12\x19List device activity logs\x1a}Retrieves activity logs for a device. Useful for security auditing, tracking device usage patterns, and compliance reporting.*\x0elistDeviceLogs0\x01\x12\xe4\x01\n" +
+	"\x06AddKey\x12\x18.device.v1.AddKeyRequest\x1a\x19.device.v1.AddKeyResponse\"\xa4\x01\xbaG\xa0\x01\n" +
+	"\vDevice Keys\x12\x10Add key or token\x1aqAdds a key or token to a device. Supports FCM tokens, encryption keys (Curve25519, Ed25519), and other key types.*\faddDeviceKey\x12\xf9\x01\n" +
+	"\tRemoveKey\x12\x1b.device.v1.RemoveKeyRequest\x1a\x1c.device.v1.RemoveKeyResponse\"\xb0\x01\xbaG\xac\x01\n" +
+	"\vDevice Keys\x12\x15Remove keys or tokens\x1auRemoves one or more keys or tokens from a device. Used for key rotation, token management, or when removing a device.*\x0fremoveDeviceKey\x12\xe8\x01\n" +
+	"\tSearchKey\x12\x1b.device.v1.SearchKeyRequest\x1a\x1c.device.v1.SearchKeyResponse\"\x9f\x01\xbaG\x9b\x01\n" +
+	"\vDevice Keys\x12\x15Search keys or tokens\x1adSearches for keys or tokens associated with a device. Supports filtering by key type and expiration.*\x0fsearchDeviceKey\x12\xcc\x02\n" +
+	"\vRegisterKey\x12\x1d.device.v1.RegisterKeyRequest\x1a\x1e.device.v1.RegisterKeyResponse\"\xfd\x01\xbaG\xf9\x01\n" +
+	"\x10Key Registration\x12%Register key with third-party service\x1a\xb0\x01Registers a key or token with third-party services (like FCM for push notifications) and stores it. This method handles both the external service integration and local storage.*\vregisterKey\x12\xcc\x02\n" +
+	"\rDeRegisterKey\x12\x1f.device.v1.DeRegisterKeyRequest\x1a .device.v1.DeRegisterKeyResponse\"\xf7\x01\xbaG\xf3\x01\n" +
+	"\x10Key Registration\x12'DeRegister key from third-party service\x1a\xa6\x01DeRegisters a key or token from third-party services (like FCM) and removes it from storage. This method handles both the external service cleanup and local deletion.*\rdeRegisterKey\x12\xbe\x02\n" +
+	"\x17RegisterNotificationKey\x12\x1d.device.v1.RegisterKeyRequest\x1a\x1e.device.v1.RegisterKeyResponse\"\xe3\x01\xbaG\xdf\x01\n" +
+	"\x11Notification Keys\x12\x19Register notification key\x1a\x95\x01Registers a notification key for secure push notification delivery. This method integrates with notification services (APNs, FCM) and stores the key.*\x17registerNotificationKey\x12\xb0\x02\n" +
+	"\x19DeRegisterNotificationKey\x12\x1f.device.v1.DeRegisterKeyRequest\x1a .device.v1.DeRegisterKeyResponse\"\xcf\x01\xbaG\xcb\x01\n" +
+	"\x11Notification Keys\x12\x1bDeRegister notification key\x1a~DeRegisters a notification key from notification services and removes it from storage. Used when disabling push notifications.*\x19deRegisterNotificationKeyB\xec\a\xbaG\xc3\x06\x12\x97\x06\n" +
+	"\x15Device Management API\x12\xd1\x04The Device Management API provides comprehensive device management capabilities including device registration, session tracking, and unified key/token management. The API uses a unified KeyObject model for all key types including FCM tokens, encryption keys (Curve25519, Ed25519, Pickle), Matrix keys, and notification keys. This enables applications to register and track user devices across platforms (mobile, web, desktop), manage push notification tokens, handle encryption keys for secure communications, and maintain detailed logs of device activity for security and compliance purposes.\"W\n" +
 	"\x10Ant Investor Ltd\x12-https://github.com/antinvestor/service-device\x1a\x14info@antinvestor.com*I\n" +
 	"\x0eApache License\x127https://github.com/antinvestor/apis/blob/master/LICENSE2\x06v1.0.0*':%\n" +
 	"#\n" +
@@ -1991,7 +2293,7 @@ func file_device_v1_device_proto_rawDescGZIP() []byte {
 }
 
 var file_device_v1_device_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_device_v1_device_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_device_v1_device_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_device_v1_device_proto_goTypes = []any{
 	(KeyType)(0),                   // 0: device.v1.KeyType
 	(*Locale)(nil),                 // 1: device.v1.Locale
@@ -2022,64 +2324,80 @@ var file_device_v1_device_proto_goTypes = []any{
 	(*RemoveKeyResponse)(nil),      // 26: device.v1.RemoveKeyResponse
 	(*SearchKeyRequest)(nil),       // 27: device.v1.SearchKeyRequest
 	(*SearchKeyResponse)(nil),      // 28: device.v1.SearchKeyResponse
-	(*structpb.Struct)(nil),        // 29: google.protobuf.Struct
+	(*RegisterKeyRequest)(nil),     // 29: device.v1.RegisterKeyRequest
+	(*RegisterKeyResponse)(nil),    // 30: device.v1.RegisterKeyResponse
+	(*DeRegisterKeyRequest)(nil),   // 31: device.v1.DeRegisterKeyRequest
+	(*DeRegisterKeyResponse)(nil),  // 32: device.v1.DeRegisterKeyResponse
+	(*structpb.Struct)(nil),        // 33: google.protobuf.Struct
 }
 var file_device_v1_device_proto_depIdxs = []int32{
-	29, // 0: device.v1.KeyObject.extra:type_name -> google.protobuf.Struct
-	1,  // 1: device.v1.DeviceLog.locale:type_name -> device.v1.Locale
-	29, // 2: device.v1.DeviceLog.location:type_name -> google.protobuf.Struct
-	29, // 3: device.v1.DeviceLog.extra:type_name -> google.protobuf.Struct
-	1,  // 4: device.v1.DeviceObject.locale:type_name -> device.v1.Locale
-	29, // 5: device.v1.DeviceObject.location:type_name -> google.protobuf.Struct
-	29, // 6: device.v1.DeviceObject.properties:type_name -> google.protobuf.Struct
-	4,  // 7: device.v1.GetByIdResponse.data:type_name -> device.v1.DeviceObject
-	4,  // 8: device.v1.GetBySessionIdResponse.data:type_name -> device.v1.DeviceObject
-	29, // 9: device.v1.SearchRequest.extras:type_name -> google.protobuf.Struct
-	4,  // 10: device.v1.SearchResponse.data:type_name -> device.v1.DeviceObject
-	29, // 11: device.v1.CreateRequest.properties:type_name -> google.protobuf.Struct
-	4,  // 12: device.v1.CreateResponse.data:type_name -> device.v1.DeviceObject
-	29, // 13: device.v1.UpdateRequest.properties:type_name -> google.protobuf.Struct
-	4,  // 14: device.v1.UpdateResponse.data:type_name -> device.v1.DeviceObject
-	29, // 15: device.v1.LinkRequest.properties:type_name -> google.protobuf.Struct
-	4,  // 16: device.v1.LinkResponse.data:type_name -> device.v1.DeviceObject
-	4,  // 17: device.v1.RemoveResponse.data:type_name -> device.v1.DeviceObject
-	29, // 18: device.v1.LogRequest.extras:type_name -> google.protobuf.Struct
-	3,  // 19: device.v1.LogResponse.data:type_name -> device.v1.DeviceLog
-	3,  // 20: device.v1.ListLogsResponse.data:type_name -> device.v1.DeviceLog
-	0,  // 21: device.v1.AddKeyRequest.key_type:type_name -> device.v1.KeyType
-	29, // 22: device.v1.AddKeyRequest.extras:type_name -> google.protobuf.Struct
-	2,  // 23: device.v1.AddKeyResponse.data:type_name -> device.v1.KeyObject
-	0,  // 24: device.v1.SearchKeyRequest.key_type:type_name -> device.v1.KeyType
-	2,  // 25: device.v1.SearchKeyResponse.data:type_name -> device.v1.KeyObject
-	5,  // 26: device.v1.DeviceService.GetById:input_type -> device.v1.GetByIdRequest
-	7,  // 27: device.v1.DeviceService.GetBySessionId:input_type -> device.v1.GetBySessionIdRequest
-	9,  // 28: device.v1.DeviceService.Search:input_type -> device.v1.SearchRequest
-	11, // 29: device.v1.DeviceService.Create:input_type -> device.v1.CreateRequest
-	13, // 30: device.v1.DeviceService.Update:input_type -> device.v1.UpdateRequest
-	15, // 31: device.v1.DeviceService.Link:input_type -> device.v1.LinkRequest
-	17, // 32: device.v1.DeviceService.Remove:input_type -> device.v1.RemoveRequest
-	19, // 33: device.v1.DeviceService.Log:input_type -> device.v1.LogRequest
-	21, // 34: device.v1.DeviceService.ListLogs:input_type -> device.v1.ListLogsRequest
-	23, // 35: device.v1.DeviceService.AddKey:input_type -> device.v1.AddKeyRequest
-	25, // 36: device.v1.DeviceService.RemoveKey:input_type -> device.v1.RemoveKeyRequest
-	27, // 37: device.v1.DeviceService.SearchKey:input_type -> device.v1.SearchKeyRequest
-	6,  // 38: device.v1.DeviceService.GetById:output_type -> device.v1.GetByIdResponse
-	8,  // 39: device.v1.DeviceService.GetBySessionId:output_type -> device.v1.GetBySessionIdResponse
-	10, // 40: device.v1.DeviceService.Search:output_type -> device.v1.SearchResponse
-	12, // 41: device.v1.DeviceService.Create:output_type -> device.v1.CreateResponse
-	14, // 42: device.v1.DeviceService.Update:output_type -> device.v1.UpdateResponse
-	16, // 43: device.v1.DeviceService.Link:output_type -> device.v1.LinkResponse
-	18, // 44: device.v1.DeviceService.Remove:output_type -> device.v1.RemoveResponse
-	20, // 45: device.v1.DeviceService.Log:output_type -> device.v1.LogResponse
-	22, // 46: device.v1.DeviceService.ListLogs:output_type -> device.v1.ListLogsResponse
-	24, // 47: device.v1.DeviceService.AddKey:output_type -> device.v1.AddKeyResponse
-	26, // 48: device.v1.DeviceService.RemoveKey:output_type -> device.v1.RemoveKeyResponse
-	28, // 49: device.v1.DeviceService.SearchKey:output_type -> device.v1.SearchKeyResponse
-	38, // [38:50] is the sub-list for method output_type
-	26, // [26:38] is the sub-list for method input_type
-	26, // [26:26] is the sub-list for extension type_name
-	26, // [26:26] is the sub-list for extension extendee
-	0,  // [0:26] is the sub-list for field type_name
+	0,  // 0: device.v1.KeyObject.key_type:type_name -> device.v1.KeyType
+	33, // 1: device.v1.KeyObject.extra:type_name -> google.protobuf.Struct
+	1,  // 2: device.v1.DeviceLog.locale:type_name -> device.v1.Locale
+	33, // 3: device.v1.DeviceLog.location:type_name -> google.protobuf.Struct
+	33, // 4: device.v1.DeviceLog.extra:type_name -> google.protobuf.Struct
+	1,  // 5: device.v1.DeviceObject.locale:type_name -> device.v1.Locale
+	33, // 6: device.v1.DeviceObject.location:type_name -> google.protobuf.Struct
+	33, // 7: device.v1.DeviceObject.properties:type_name -> google.protobuf.Struct
+	4,  // 8: device.v1.GetByIdResponse.data:type_name -> device.v1.DeviceObject
+	4,  // 9: device.v1.GetBySessionIdResponse.data:type_name -> device.v1.DeviceObject
+	33, // 10: device.v1.SearchRequest.extras:type_name -> google.protobuf.Struct
+	4,  // 11: device.v1.SearchResponse.data:type_name -> device.v1.DeviceObject
+	33, // 12: device.v1.CreateRequest.properties:type_name -> google.protobuf.Struct
+	4,  // 13: device.v1.CreateResponse.data:type_name -> device.v1.DeviceObject
+	33, // 14: device.v1.UpdateRequest.properties:type_name -> google.protobuf.Struct
+	4,  // 15: device.v1.UpdateResponse.data:type_name -> device.v1.DeviceObject
+	33, // 16: device.v1.LinkRequest.properties:type_name -> google.protobuf.Struct
+	4,  // 17: device.v1.LinkResponse.data:type_name -> device.v1.DeviceObject
+	4,  // 18: device.v1.RemoveResponse.data:type_name -> device.v1.DeviceObject
+	33, // 19: device.v1.LogRequest.extras:type_name -> google.protobuf.Struct
+	3,  // 20: device.v1.LogResponse.data:type_name -> device.v1.DeviceLog
+	3,  // 21: device.v1.ListLogsResponse.data:type_name -> device.v1.DeviceLog
+	0,  // 22: device.v1.AddKeyRequest.key_type:type_name -> device.v1.KeyType
+	33, // 23: device.v1.AddKeyRequest.extras:type_name -> google.protobuf.Struct
+	2,  // 24: device.v1.AddKeyResponse.data:type_name -> device.v1.KeyObject
+	0,  // 25: device.v1.SearchKeyRequest.key_types:type_name -> device.v1.KeyType
+	2,  // 26: device.v1.SearchKeyResponse.data:type_name -> device.v1.KeyObject
+	0,  // 27: device.v1.RegisterKeyRequest.key_type:type_name -> device.v1.KeyType
+	33, // 28: device.v1.RegisterKeyRequest.extras:type_name -> google.protobuf.Struct
+	2,  // 29: device.v1.RegisterKeyResponse.data:type_name -> device.v1.KeyObject
+	5,  // 30: device.v1.DeviceService.GetById:input_type -> device.v1.GetByIdRequest
+	7,  // 31: device.v1.DeviceService.GetBySessionId:input_type -> device.v1.GetBySessionIdRequest
+	9,  // 32: device.v1.DeviceService.Search:input_type -> device.v1.SearchRequest
+	11, // 33: device.v1.DeviceService.Create:input_type -> device.v1.CreateRequest
+	13, // 34: device.v1.DeviceService.Update:input_type -> device.v1.UpdateRequest
+	15, // 35: device.v1.DeviceService.Link:input_type -> device.v1.LinkRequest
+	17, // 36: device.v1.DeviceService.Remove:input_type -> device.v1.RemoveRequest
+	19, // 37: device.v1.DeviceService.Log:input_type -> device.v1.LogRequest
+	21, // 38: device.v1.DeviceService.ListLogs:input_type -> device.v1.ListLogsRequest
+	23, // 39: device.v1.DeviceService.AddKey:input_type -> device.v1.AddKeyRequest
+	25, // 40: device.v1.DeviceService.RemoveKey:input_type -> device.v1.RemoveKeyRequest
+	27, // 41: device.v1.DeviceService.SearchKey:input_type -> device.v1.SearchKeyRequest
+	29, // 42: device.v1.DeviceService.RegisterKey:input_type -> device.v1.RegisterKeyRequest
+	31, // 43: device.v1.DeviceService.DeRegisterKey:input_type -> device.v1.DeRegisterKeyRequest
+	29, // 44: device.v1.DeviceService.RegisterNotificationKey:input_type -> device.v1.RegisterKeyRequest
+	31, // 45: device.v1.DeviceService.DeRegisterNotificationKey:input_type -> device.v1.DeRegisterKeyRequest
+	6,  // 46: device.v1.DeviceService.GetById:output_type -> device.v1.GetByIdResponse
+	8,  // 47: device.v1.DeviceService.GetBySessionId:output_type -> device.v1.GetBySessionIdResponse
+	10, // 48: device.v1.DeviceService.Search:output_type -> device.v1.SearchResponse
+	12, // 49: device.v1.DeviceService.Create:output_type -> device.v1.CreateResponse
+	14, // 50: device.v1.DeviceService.Update:output_type -> device.v1.UpdateResponse
+	16, // 51: device.v1.DeviceService.Link:output_type -> device.v1.LinkResponse
+	18, // 52: device.v1.DeviceService.Remove:output_type -> device.v1.RemoveResponse
+	20, // 53: device.v1.DeviceService.Log:output_type -> device.v1.LogResponse
+	22, // 54: device.v1.DeviceService.ListLogs:output_type -> device.v1.ListLogsResponse
+	24, // 55: device.v1.DeviceService.AddKey:output_type -> device.v1.AddKeyResponse
+	26, // 56: device.v1.DeviceService.RemoveKey:output_type -> device.v1.RemoveKeyResponse
+	28, // 57: device.v1.DeviceService.SearchKey:output_type -> device.v1.SearchKeyResponse
+	30, // 58: device.v1.DeviceService.RegisterKey:output_type -> device.v1.RegisterKeyResponse
+	32, // 59: device.v1.DeviceService.DeRegisterKey:output_type -> device.v1.DeRegisterKeyResponse
+	30, // 60: device.v1.DeviceService.RegisterNotificationKey:output_type -> device.v1.RegisterKeyResponse
+	32, // 61: device.v1.DeviceService.DeRegisterNotificationKey:output_type -> device.v1.DeRegisterKeyResponse
+	46, // [46:62] is the sub-list for method output_type
+	30, // [30:46] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_device_v1_device_proto_init() }
@@ -2093,7 +2411,7 @@ func file_device_v1_device_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_device_v1_device_proto_rawDesc), len(file_device_v1_device_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   28,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
