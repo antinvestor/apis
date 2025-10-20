@@ -100,41 +100,47 @@ jobs:
           PACKAGE_NAME=$(grep '^name:' pubspec.yaml | sed 's/name: //')
           echo "Package name: $PACKAGE_NAME"
           
-          # Determine version from git tag or pubspec.yaml
-          if [ "${{ github.event_name }}" = "push" ] && [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            # Extract version from global tag (format: vX.Y.Z)
-            TAG_NAME="${{ github.ref_name }}"
-            if [[ "$TAG_NAME" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
-              NEW_VERSION="${BASH_REMATCH[1]}"
-              echo "Using version from global tag: $NEW_VERSION"
-            else
-              echo "❌ Could not parse version from tag: $TAG_NAME"
-              echo "Expected format: vX.Y.Z (e.g., v1.47.0)"
-              exit 1
-            fi
+          # Extract version from global tag (format: vX.Y.Z)
+          TAG_NAME="${{ github.ref_name }}"
+          if [[ "$TAG_NAME" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            NEW_VERSION="${BASH_REMATCH[1]}"
+            echo "Release version from tag: $NEW_VERSION"
           else
-            # Manual dispatch - use current version from pubspec
-            CURRENT_VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //')
-            echo "Current version: $CURRENT_VERSION"
-            NEW_VERSION="$CURRENT_VERSION"
-            echo "Using current version from pubspec.yaml: $NEW_VERSION"
+            echo "❌ Could not parse version from tag: $TAG_NAME"
+            echo "Expected format: vX.Y.Z (e.g., v1.47.0)"
+            exit 1
           fi
           
-          echo "Release version: $NEW_VERSION"
+          # Get current version to check if update is needed
+          CURRENT_VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //')
+          echo "Current version in pubspec.yaml: $CURRENT_VERSION"
           
-          # Update version in pubspec.yaml
-          sed -i "s/^version: .*/version: $NEW_VERSION/" pubspec.yaml
+          # Update version in pubspec.yaml if different
+          if [ "$CURRENT_VERSION" != "$NEW_VERSION" ]; then
+            echo "Updating pubspec.yaml version to $NEW_VERSION"
+            sed -i "s/^version: .*/version: $NEW_VERSION/" pubspec.yaml
+          fi
           
-          # Verify CHANGELOG.md has entry for this version
+          # Verify/update CHANGELOG.md
           if [ -f "CHANGELOG.md" ]; then
             if ! grep -q "## $NEW_VERSION" CHANGELOG.md; then
-              echo "⚠️  WARNING: CHANGELOG.md does not contain entry for version $NEW_VERSION"
-              echo "Adding placeholder entry..."
+              echo "⚠️  CHANGELOG.md missing entry for version $NEW_VERSION - adding it"
               DATE=$(date +%Y-%m-%d)
               sed -i "1i## $NEW_VERSION - $DATE\n\n- Release version $NEW_VERSION\n" CHANGELOG.md
             else
               echo "✓ CHANGELOG.md contains entry for version $NEW_VERSION"
             fi
+          fi
+          
+          # Commit version changes if any
+          if ! git diff --quiet pubspec.yaml CHANGELOG.md 2>/dev/null; then
+            echo "Committing version updates..."
+            git add pubspec.yaml CHANGELOG.md
+            git commit -m "chore(dart/$PACKAGE): update version to $NEW_VERSION for release"
+            git push origin HEAD:main
+            echo "✅ Version changes committed"
+          else
+            echo "ℹ️  No version changes to commit"
           fi
           
           # Install dependencies

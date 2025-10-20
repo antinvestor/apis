@@ -428,39 +428,47 @@ Closes #123
 
 **Version tagging and releases** (maintainers only):
 
-The release workflow is **tag-driven** - pushing a tag automatically triggers the release process.
+The release workflow is **tag-driven** - pushing a global version tag triggers releases for all packages.
 
 ```bash
-# 1. Ensure CHANGELOG.md has entry for the new version
-# (Changelog CI should have already added it)
+# 1. Ensure CHANGELOG.md files have entries for the new version
+# (Changelog CI should have already added them)
 
-# 2. Tag for each language/package with the desired version
-git tag dart/chat/v1.47.0
-git tag go/chat/v1.47.0
-git tag java/chat/v1.47.0
+# 2. Create and push a global version tag
+git tag v1.47.0 -m "Release v1.47.0"
+git push origin v1.47.0
 
-# 3. Push tags to trigger release workflows
-git push origin --tags
+# That's it! The workflow will:
+# - Release all packages with version 1.47.0
+# - Commit any version updates to pubspec.yaml/CHANGELOG.md
+# - Create package-specific tags automatically (dart/chat/v1.47.0, go/chat/v1.47.0, etc.)
 ```
 
 **How it works:**
-1. **Tag pushed** → Triggers release workflow for that language/package
-2. **Version extracted** from tag (e.g., `dart/chat/v1.47.0` → version `1.47.0`)
-3. **Verify CHANGELOG.md** has entry for that version (warns if missing)
-4. **Update pubspec.yaml/go.mod** with the version from tag
-5. **Run tests and analysis**
-6. **Publish** to package repository
+1. **Global tag pushed** (e.g., `v1.47.0`) → Triggers release workflows
+2. **Version extracted** from tag → All packages get version `1.47.0`
+3. **For each package:**
+   - Update pubspec.yaml/go.mod if version differs
+   - Verify/update CHANGELOG.md entry for that version
+   - **Commit changes** to main if needed (version sync)
+   - Run tests and analysis
+   - Publish to package repository
+   - **Create package-specific tag** (e.g., `dart/chat/v1.47.0`) pointing to the commit
 
-**Tag format:**
-- Package-specific: `dart/chat/v1.47.0`, `go/ledger/v2.3.1`
-- Global (all packages): `v1.47.0` (releases all packages with same version)
+**Tag formats:**
+- **Trigger tag** (what you push): `v1.47.0` (global, releases all packages)
+- **Result tags** (auto-created): `dart/chat/v1.47.0`, `go/ledger/v1.47.0`, etc.
 
 **Release destinations:**
 - Dart packages → pub.dev
 - Go modules → GitHub Packages
 - Java packages → GitHub Packages/Maven Central
 
-**Important:** The tag version is the source of truth. Ensure your CHANGELOG.md already contains an entry for that version before tagging.
+**Important:** 
+- The global tag version is the source of truth
+- CHANGELOG.md entries are auto-created if missing (but should already exist from Changelog CI)
+- Version updates are committed before package tags are created
+- Package-specific tags point to the commit with the updated version
 
 ---
 
