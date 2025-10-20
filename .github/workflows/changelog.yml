@@ -128,21 +128,57 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run Changelog CI for ${{ matrix.language }}/${{ matrix.package }}
-        uses: saadmk11/changelog-ci@v1.2.0
+      - name: Generate Changelog for ${{ matrix.language }}/${{ matrix.package }}
+        uses: mikepenz/release-changelog-builder-action@v2.19.0
         id: changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          changelog_filename: ${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md
-          config_file: .github/changelog-ci-config.yml
-          committer_username: 'github-actions[bot]'
-          committer_email: 'github-actions[bot]@users.noreply.github.com'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          release_version: ${{ steps.draft-version.outputs.version }}
+          configuration: |
+            {
+              "reference": "",  # Empty means compare with previous tag
+              "nextVersion": "${{ steps.release-version.outputs.version }}",
+              "categories": [
+                {
+                  "title": "## 🚀 Features",
+                  "labels": ["feature", "enhancement"]
+                },
+                {
+                  "title": "## 🐛 Bug Fixes",
+                  "labels": ["bug", "bugfix"]
+                },
+                {
+                  "title": "## 📚 Documentation",
+                  "labels": ["documentation", "docs"]
+                },
+                {
+                  "title": "## 🔧 Maintenance",
+                  "labels": ["chore", "refactor", "ci", "test"]
+                }
+              ],
+              "includeLabels": ["*"],
+              "excludeLabels": ["skip-changelog"],
+              "sort": "DESC"
+            }
+          configurationPath: ""
+          output: "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
+          outputMode: "prepend"
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Display Changelog for ${{ matrix.language }}/${{ matrix.package }}
-        if: steps.changelog.outputs.changelog != ''
+        if: steps.changelog.outputs.changes == 'true'
         run: |
           echo "## 📝 Changelog for ${{ matrix.language }}/${{ matrix.package }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "${{ steps.changelog.outputs.changelog }}" >> $GITHUB_STEP_SUMMARY
+          cat "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md" | head -n 20 >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+          echo "*[View full changelog](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}/${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md)*" >> $GITHUB_STEP_SUMMARY
+
+      - name: Commit Changelog
+        if: steps.changelog.outputs.changes == 'true'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
+          git commit -m "chore(${{ matrix.package }}): update changelog for v${{ steps.release-version.outputs.version }}"
+          git push
