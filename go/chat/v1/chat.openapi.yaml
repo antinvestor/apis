@@ -928,11 +928,17 @@ components:
         metadata:
           title: metadata
           $ref: '#/components/schemas/google.protobuf.Struct'
+        error:
+          title: error
+          description: if set, indicates failure reason for this event
+          nullable: true
+          $ref: '#/components/schemas/chat.v1.ErrorDetail'
       title: StreamAck
       additionalProperties: false
       description: |-
         Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
          ack_event_id: last event_id client processed (inclusive).
+         If error is set, indicates the event failed to send/process correctly.
     chat.v1.TypingEvent:
       type: object
       properties:

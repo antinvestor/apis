@@ -867,16 +867,19 @@ class ConnectRequest extends $pb.GeneratedMessage {
 
 /// Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
 /// ack_event_id: last event_id client processed (inclusive).
+/// If error is set, indicates the event failed to send/process correctly.
 class StreamAck extends $pb.GeneratedMessage {
   factory StreamAck({
     $core.String? eventId,
     $0.Timestamp? ackAt,
     $1.Struct? metadata,
+    ErrorDetail? error,
   }) {
     final result = create();
     if (eventId != null) result.eventId = eventId;
     if (ackAt != null) result.ackAt = ackAt;
     if (metadata != null) result.metadata = metadata;
+    if (error != null) result.error = error;
     return result;
   }
 
@@ -898,6 +901,8 @@ class StreamAck extends $pb.GeneratedMessage {
         subBuilder: $0.Timestamp.create)
     ..aOM<$1.Struct>(6, _omitFieldNames ? '' : 'metadata',
         subBuilder: $1.Struct.create)
+    ..aOM<ErrorDetail>(7, _omitFieldNames ? '' : 'error',
+        subBuilder: ErrorDetail.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -949,6 +954,17 @@ class StreamAck extends $pb.GeneratedMessage {
   void clearMetadata() => $_clearField(6);
   @$pb.TagNumber(6)
   $1.Struct ensureMetadata() => $_ensure(2);
+
+  @$pb.TagNumber(7)
+  ErrorDetail get error => $_getN(3);
+  @$pb.TagNumber(7)
+  set error(ErrorDetail value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasError() => $_has(3);
+  @$pb.TagNumber(7)
+  void clearError() => $_clearField(7);
+  @$pb.TagNumber(7)
+  ErrorDetail ensureError() => $_ensure(3);
 }
 
 enum ClientCommand_Cmd { typing, readMarker, roomEvent, notSet }

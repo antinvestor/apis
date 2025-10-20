@@ -366,6 +366,19 @@ const StreamAck$json = {
       '6': '.google.protobuf.Struct',
       '10': 'metadata'
     },
+    {
+      '1': 'error',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.chat.v1.ErrorDetail',
+      '9': 0,
+      '10': 'error',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_error'},
   ],
 };
 
@@ -373,7 +386,8 @@ const StreamAck$json = {
 final $typed_data.Uint8List streamAckDescriptor = $convert.base64Decode(
     'CglTdHJlYW1BY2sSGQoIZXZlbnRfaWQYASABKAlSB2V2ZW50SWQSMQoGYWNrX2F0GAMgASgLMh'
     'ouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIFYWNrQXQSMwoIbWV0YWRhdGEYBiABKAsyFy5n'
-    'b29nbGUucHJvdG9idWYuU3RydWN0UghtZXRhZGF0YQ==');
+    'b29nbGUucHJvdG9idWYuU3RydWN0UghtZXRhZGF0YRIvCgVlcnJvchgHIAEoCzIULmNoYXQudj'
+    'EuRXJyb3JEZXRhaWxIAFIFZXJyb3KIAQFCCAoGX2Vycm9y');
 
 @$core.Deprecated('Use clientCommandDescriptor instead')
 const ClientCommand$json = {
@@ -958,6 +972,8 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.google.protobuf.Struct.FieldsEntry': $1.Struct_FieldsEntry$json,
   '.google.protobuf.Value': $1.Value$json,
   '.google.protobuf.ListValue': $1.ListValue$json,
+  '.chat.v1.ErrorDetail': ErrorDetail$json,
+  '.chat.v1.ErrorDetail.MetaEntry': ErrorDetail_MetaEntry$json,
   '.chat.v1.ClientCommand': ClientCommand$json,
   '.chat.v1.TypingUpdate': TypingUpdate$json,
   '.chat.v1.ReadMarker': ReadMarker$json,
@@ -1057,6 +1073,8 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.google.protobuf.Timestamp': $0.Timestamp$json,
   '.chat.v1.SendEventResponse': SendEventResponse$json,
   '.chat.v1.StreamAck': StreamAck$json,
+  '.chat.v1.ErrorDetail': ErrorDetail$json,
+  '.chat.v1.ErrorDetail.MetaEntry': ErrorDetail_MetaEntry$json,
   '.chat.v1.GetHistoryRequest': GetHistoryRequest$json,
   '.chat.v1.GetHistoryResponse': GetHistoryResponse$json,
   '.chat.v1.ServerEvent': ServerEvent$json,
@@ -1066,8 +1084,6 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.chat.v1.CreateRoomRequest': CreateRoomRequest$json,
   '.chat.v1.CreateRoomResponse': CreateRoomResponse$json,
   '.chat.v1.Room': Room$json,
-  '.chat.v1.ErrorDetail': ErrorDetail$json,
-  '.chat.v1.ErrorDetail.MetaEntry': ErrorDetail_MetaEntry$json,
   '.chat.v1.SearchRoomsRequest': SearchRoomsRequest$json,
   '.chat.v1.SearchRoomsResponse': SearchRoomsResponse$json,
   '.chat.v1.UpdateRoomRequest': UpdateRoomRequest$json,

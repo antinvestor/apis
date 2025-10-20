@@ -312,24 +312,24 @@ func (mr *MockChatServiceClientMockRecorder) SearchRooms(ctx, in any, opts ...an
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchRooms", reflect.TypeOf((*MockChatServiceClient)(nil).SearchRooms), varargs...)
 }
 
-// SendMessage mocks base method.
-func (m *MockChatServiceClient) SendMessage(ctx context.Context, in *chatv1.SendMessageRequest, opts ...grpc.CallOption) (*chatv1.SendMessageResponse, error) {
+// SendEvent mocks base method.
+func (m *MockChatServiceClient) SendEvent(ctx context.Context, in *chatv1.SendEventRequest, opts ...grpc.CallOption) (*chatv1.SendEventResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "SendMessage", varargs...)
-	ret0, _ := ret[0].(*chatv1.SendMessageResponse)
+	ret := m.ctrl.Call(m, "SendEvent", varargs...)
+	ret0, _ := ret[0].(*chatv1.SendEventResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// SendMessage indicates an expected call of SendMessage.
-func (mr *MockChatServiceClientMockRecorder) SendMessage(ctx, in any, opts ...any) *gomock.Call {
+// SendEvent indicates an expected call of SendEvent.
+func (mr *MockChatServiceClientMockRecorder) SendEvent(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMessage", reflect.TypeOf((*MockChatServiceClient)(nil).SendMessage), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendEvent", reflect.TypeOf((*MockChatServiceClient)(nil).SendEvent), varargs...)
 }
 
 // UpdateRoom mocks base method.
@@ -500,19 +500,19 @@ func (mr *MockChatServiceServerMockRecorder) SearchRooms(arg0, arg1 any) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchRooms", reflect.TypeOf((*MockChatServiceServer)(nil).SearchRooms), arg0, arg1)
 }
 
-// SendMessage mocks base method.
-func (m *MockChatServiceServer) SendMessage(arg0 context.Context, arg1 *chatv1.SendMessageRequest) (*chatv1.SendMessageResponse, error) {
+// SendEvent mocks base method.
+func (m *MockChatServiceServer) SendEvent(arg0 context.Context, arg1 *chatv1.SendEventRequest) (*chatv1.SendEventResponse, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendMessage", arg0, arg1)
-	ret0, _ := ret[0].(*chatv1.SendMessageResponse)
+	ret := m.ctrl.Call(m, "SendEvent", arg0, arg1)
+	ret0, _ := ret[0].(*chatv1.SendEventResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// SendMessage indicates an expected call of SendMessage.
-func (mr *MockChatServiceServerMockRecorder) SendMessage(arg0, arg1 any) *gomock.Call {
+// SendEvent indicates an expected call of SendEvent.
+func (mr *MockChatServiceServerMockRecorder) SendEvent(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMessage", reflect.TypeOf((*MockChatServiceServer)(nil).SendMessage), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendEvent", reflect.TypeOf((*MockChatServiceServer)(nil).SendEvent), arg0, arg1)
 }
 
 // UpdateRoom mocks base method.

@@ -320,10 +320,12 @@ message ConnectRequest {
 
 // Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
 // ack_event_id: last event_id client processed (inclusive).
+// If error is set, indicates the event failed to send/process correctly.
 message StreamAck {
   string event_id = 1;
   google.protobuf.Timestamp ack_at = 3;
   google.protobuf.Struct metadata = 6;
+  optional ErrorDetail error = 7; // if set, indicates failure reason for this event
 }
 
 // Generic client commands (typing, read markers that aren't receipts, and room events)
