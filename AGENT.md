@@ -492,9 +492,16 @@ git push origin --tags
 **How it works:**
 1. Detects changed files in PR
 2. Identifies affected `language/package` combinations
-3. Runs `saadmk11/changelog-ci` for each changed package
-4. Updates respective `CHANGELOG.md` files
-5. Commits changes automatically
+3. Fetches version from draft release (or falls back to PR title)
+4. Runs `saadmk11/changelog-ci` for each changed package with the version
+5. Updates respective `CHANGELOG.md` files
+6. Commits changes automatically
+
+**Version Detection:**
+- **Primary**: Fetches version from the latest draft release tag
+- **Fallback**: Extracts version from PR title (e.g., "feat(chat): description - v1.47.0")
+- **Default**: Uses "0.0.0" if no version found
+- This ensures changelogs use the same version as the upcoming release
 
 **Required PR Labels** (for beautiful changelogs):
 - `breaking`, `breaking-change` → ⚠️ Breaking Changes
