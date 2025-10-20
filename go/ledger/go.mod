@@ -4,7 +4,7 @@ go 1.25
 
 require (
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.46.1
+	github.com/antinvestor/apis/go/common v1.46.4
 	github.com/google/gnostic v0.7.1
 	go.uber.org/mock v0.6.0
 	google.golang.org/genproto v0.0.0-20251014184007-4626949a642f
@@ -13,7 +13,7 @@ require (
 )
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.9-20250912141014-52f32327d4b0.1 // indirect
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/google/gnostic-models v0.7.0 // indirect
