@@ -999,19 +999,18 @@ When something goes wrong:
 
 1. ✅ **Create an issue** - Describe what you're changing and why
 2. ✅ **Create a branch** - Never push directly to `main`
-3. ✅ **Follow conventions** - Edit proto files, run `make generate`, test with `make all`
-4. ✅ **Create PR** - Use proper title format with version, add labels
+3. ✅ **Follow conventions** - Edit proto files, run `make` and ensure it succeeds
+4. ✅ **Create PR** - Use proper title format with version and add labels
 5. ✅ **Wait for review** - CI checks must pass, maintainer approval required
 
 **Key commands:**
 ```bash
 # Full workflow
-git checkout -b feat/123-my-change
+git checkout -b feature/123-my-change
 vim proto/chat/chat/v1/chat.proto
-make generate
-make all
-git add . && git commit -m "feat(chat): my change - v1.47.0"
-git push origin feat/123-my-change
+make
+git add . && git commit -m "feature(chat): my change - v1.47.0"
+git push origin feature/123-my-change
 # Then create PR on GitHub
 ```
 
@@ -1023,6 +1022,46 @@ git push origin feat/123-my-change
 - 🏷️ Always add proper labels to PR
 
 See [Contribution Workflow](#contribution-workflow) for complete details.
+
+### Using GitHub CLI (`gh`)
+
+**Tip:** Use the `gh` CLI client to streamline issue creation, PR management, and branch cleanup:
+
+```bash
+# Install gh (if not already installed)
+# macOS: brew install gh
+# Linux: See https://cli.github.com/
+
+# Authenticate
+gh auth login
+
+# Create an issue
+gh issue create --title "feat: Add message encryption support" \
+  --body "Description of the feature..." \
+  --label "feature,chat,priority-high"
+
+# Create PR from current branch
+gh pr create --title "feat(chat): add message encryption - v1.47.0" \
+  --body "Closes #123" \
+  --label "feature,chat"
+
+# List your PRs
+gh pr list --author "@me"
+
+# Check PR status and CI checks
+gh pr status
+gh pr checks
+
+# View PR in browser
+gh pr view --web
+
+# Delete local branches that have been merged
+gh pr list --state merged --json headRefName --jq '.[].headRefName' | \
+  xargs -I {} git branch -D {}
+
+# Clean up remote merged branches (careful!)
+git fetch --prune
+```
 
 ---
 
