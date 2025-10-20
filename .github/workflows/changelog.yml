@@ -88,27 +88,42 @@ jobs:
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get Draft Release Version
-        id: draft-version
+      - name: Get Release Version
+        id: release-version
         run: |
-          # Fetch the latest draft release
-          DRAFT_RELEASE=$(gh release list --limit 1 --json tagName,isDraft --jq '.[] | select(.isDraft == true) | .tagName')
+          # Fetch the latest release (draft or published)
+          LATEST_RELEASE=$(gh release list --limit 1 --json tagName,isDraft --jq '.[0] | .tagName')
           
-          if [ -n "$DRAFT_RELEASE" ]; then
-            # Extract version from tag (remove 'v' prefix if present)
-            VERSION="${DRAFT_RELEASE#v}"
-            echo "version=$VERSION" >> $GITHUB_OUTPUT
-            echo "Using draft release version: $VERSION"
+          if [ -n "$LATEST_RELEASE" ]; then
+            # If we have a release, check if it's a draft
+            IS_DRAFT=$(gh release view "$LATEST_RELEASE" --json isDraft --jq '.isDraft')
+            
+            if [ "$IS_DRAFT" = "true" ]; then
+              # Use draft version as is
+              VERSION="${LATEST_RELEASE#v}"
+              echo "version=$VERSION" >> $GITHUB_OUTPUT
+              echo "Using draft release version: $VERSION"
+            else
+              # Increment patch version for non-draft releases
+              IFS='.' read -r major minor patch <<< "${LATEST_RELEASE#v}"
+              NEW_PATCH=$((patch + 1))
+              VERSION="${major}.${minor}.${NEW_PATCH}"
+              echo "version=$VERSION" >> $GITHUB_OUTPUT
+              echo "Incremented patch version: ${LATEST_RELEASE} -> $VERSION"
+            fi
           else
-            # Fallback to PR title extraction
+            # No releases found, check PR title for version
             PR_TITLE="${{ github.event.pull_request.title }}"
             VERSION=$(echo "$PR_TITLE" | grep -oP 'v?\K[0-9]+\.[0-9]+\.[0-9]+' || echo "")
-            if [ -z "$VERSION" ]; then
-              # Default to 0.0.0 if no version found
-              VERSION="0.0.0"
+            if [ -n "$VERSION" ]; then
+              echo "version=$VERSION" >> $GITHUB_OUTPUT
+              echo "Using version from PR title: $VERSION"
+            else
+              # Default to 0.1.0 if no version found
+              VERSION="0.1.0"
+              echo "version=$VERSION" >> $GITHUB_OUTPUT
+              echo "No releases found, using default version: $VERSION"
             fi
-            echo "version=$VERSION" >> $GITHUB_OUTPUT
-            echo "No draft release found, using version from PR title or default: $VERSION"
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
