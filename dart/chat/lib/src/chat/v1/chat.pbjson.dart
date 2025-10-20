@@ -366,6 +366,19 @@ const StreamAck$json = {
       '6': '.google.protobuf.Struct',
       '10': 'metadata'
     },
+    {
+      '1': 'error',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.chat.v1.ErrorDetail',
+      '9': 0,
+      '10': 'error',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_error'},
   ],
 };
 
@@ -373,7 +386,8 @@ const StreamAck$json = {
 final $typed_data.Uint8List streamAckDescriptor = $convert.base64Decode(
     'CglTdHJlYW1BY2sSGQoIZXZlbnRfaWQYASABKAlSB2V2ZW50SWQSMQoGYWNrX2F0GAMgASgLMh'
     'ouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIFYWNrQXQSMwoIbWV0YWRhdGEYBiABKAsyFy5n'
-    'b29nbGUucHJvdG9idWYuU3RydWN0UghtZXRhZGF0YQ==');
+    'b29nbGUucHJvdG9idWYuU3RydWN0UghtZXRhZGF0YRIvCgVlcnJvchgHIAEoCzIULmNoYXQudj'
+    'EuRXJyb3JEZXRhaWxIAFIFZXJyb3KIAQFCCAoGX2Vycm9y');
 
 @$core.Deprecated('Use clientCommandDescriptor instead')
 const ClientCommand$json = {
@@ -397,6 +411,15 @@ const ClientCommand$json = {
       '9': 0,
       '10': 'readMarker'
     },
+    {
+      '1': 'room_event',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.chat.v1.RoomEvent',
+      '9': 0,
+      '10': 'roomEvent'
+    },
   ],
   '8': [
     {'1': 'cmd'},
@@ -407,7 +430,8 @@ const ClientCommand$json = {
 final $typed_data.Uint8List clientCommandDescriptor = $convert.base64Decode(
     'Cg1DbGllbnRDb21tYW5kEi8KBnR5cGluZxgBIAEoCzIVLmNoYXQudjEuVHlwaW5nVXBkYXRlSA'
     'BSBnR5cGluZxI2CgtyZWFkX21hcmtlchgCIAEoCzITLmNoYXQudjEuUmVhZE1hcmtlckgAUgpy'
-    'ZWFkTWFya2VyQgUKA2NtZA==');
+    'ZWFkTWFya2VyEjMKCnJvb21fZXZlbnQYAyABKAsyEi5jaGF0LnYxLlJvb21FdmVudEgAUglyb2'
+    '9tRXZlbnRCBQoDY21k');
 
 @$core.Deprecated('Use typingUpdateDescriptor instead')
 const TypingUpdate$json = {
@@ -437,9 +461,9 @@ final $typed_data.Uint8List readMarkerDescriptor = $convert.base64Decode(
     'CgpSZWFkTWFya2VyEhcKB3Jvb21faWQYASABKAlSBnJvb21JZBIjCg51cF90b19ldmVudF9pZB'
     'gCIAEoCVILdXBUb0V2ZW50SWQ=');
 
-@$core.Deprecated('Use sendMessageRequestDescriptor instead')
-const SendMessageRequest$json = {
-  '1': 'SendMessageRequest',
+@$core.Deprecated('Use sendEventRequestDescriptor instead')
+const SendEventRequest$json = {
+  '1': 'SendEventRequest',
   '2': [
     {
       '1': 'message',
@@ -452,14 +476,14 @@ const SendMessageRequest$json = {
   ],
 };
 
-/// Descriptor for `SendMessageRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sendMessageRequestDescriptor = $convert.base64Decode(
-    'ChJTZW5kTWVzc2FnZVJlcXVlc3QSLAoHbWVzc2FnZRgEIAMoCzISLmNoYXQudjEuUm9vbUV2ZW'
-    '50UgdtZXNzYWdl');
+/// Descriptor for `SendEventRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sendEventRequestDescriptor = $convert.base64Decode(
+    'ChBTZW5kRXZlbnRSZXF1ZXN0EiwKB21lc3NhZ2UYBCADKAsyEi5jaGF0LnYxLlJvb21FdmVudF'
+    'IHbWVzc2FnZQ==');
 
-@$core.Deprecated('Use sendMessageResponseDescriptor instead')
-const SendMessageResponse$json = {
-  '1': 'SendMessageResponse',
+@$core.Deprecated('Use sendEventResponseDescriptor instead')
+const SendEventResponse$json = {
+  '1': 'SendEventResponse',
   '2': [
     {
       '1': 'ack',
@@ -472,10 +496,10 @@ const SendMessageResponse$json = {
   ],
 };
 
-/// Descriptor for `SendMessageResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sendMessageResponseDescriptor = $convert.base64Decode(
-    'ChNTZW5kTWVzc2FnZVJlc3BvbnNlEiQKA2FjaxgBIAMoCzISLmNoYXQudjEuU3RyZWFtQWNrUg'
-    'NhY2s=');
+/// Descriptor for `SendEventResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sendEventResponseDescriptor = $convert.base64Decode(
+    'ChFTZW5kRXZlbnRSZXNwb25zZRIkCgNhY2sYASADKAsyEi5jaGF0LnYxLlN0cmVhbUFja1IDYW'
+    'Nr');
 
 @$core.Deprecated('Use getHistoryRequestDescriptor instead')
 const GetHistoryRequest$json = {
@@ -924,8 +948,8 @@ final $typed_data.Uint8List searchRoomSubscriptionsResponseDescriptor =
         '1JZBIzCgdtZW1iZXJzGAIgAygLMhkuY2hhdC52MS5Sb29tU3Vic2NyaXB0aW9uUgdtZW1iZXJz'
         'Eh8KC25leHRfY3Vyc29yGAMgASgJUgpuZXh0Q3Vyc29y');
 
-const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
-  '1': 'ChatService',
+const $core.Map<$core.String, $core.dynamic> GatewayServiceBase$json = {
+  '1': 'GatewayService',
   '2': [
     {
       '1': 'Connect',
@@ -935,10 +959,48 @@ const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
       '5': true,
       '6': true
     },
+  ],
+};
+
+@$core.Deprecated('Use gatewayServiceDescriptor instead')
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
+    GatewayServiceBase$messageJson = {
+  '.chat.v1.ConnectRequest': ConnectRequest$json,
+  '.chat.v1.StreamAck': StreamAck$json,
+  '.google.protobuf.Timestamp': $0.Timestamp$json,
+  '.google.protobuf.Struct': $1.Struct$json,
+  '.google.protobuf.Struct.FieldsEntry': $1.Struct_FieldsEntry$json,
+  '.google.protobuf.Value': $1.Value$json,
+  '.google.protobuf.ListValue': $1.ListValue$json,
+  '.chat.v1.ErrorDetail': ErrorDetail$json,
+  '.chat.v1.ErrorDetail.MetaEntry': ErrorDetail_MetaEntry$json,
+  '.chat.v1.ClientCommand': ClientCommand$json,
+  '.chat.v1.TypingUpdate': TypingUpdate$json,
+  '.chat.v1.ReadMarker': ReadMarker$json,
+  '.chat.v1.RoomEvent': RoomEvent$json,
+  '.chat.v1.ServerEvent': ServerEvent$json,
+  '.chat.v1.PresenceEvent': PresenceEvent$json,
+  '.chat.v1.ReceiptEvent': ReceiptEvent$json,
+  '.chat.v1.TypingEvent': TypingEvent$json,
+};
+
+/// Descriptor for `GatewayService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
+final $typed_data.Uint8List gatewayServiceDescriptor = $convert.base64Decode(
+    'Cg5HYXRld2F5U2VydmljZRLvAgoHQ29ubmVjdBIXLmNoYXQudjEuQ29ubmVjdFJlcXVlc3QaFC'
+    '5jaGF0LnYxLlNlcnZlckV2ZW50IrACukesAgoJUmVhbC10aW1lEi1Fc3RhYmxpc2ggYmktZGly'
+    'ZWN0aW9uYWwgc3RyZWFtaW5nIGNvbm5lY3Rpb24a5gFPcGVucyBhIHBlcnNpc3RlbnQgYmktZG'
+    'lyZWN0aW9uYWwgc3RyZWFtIGZvciByZWFsLXRpbWUgY2hhdCBldmVudHMuIENsaWVudHMgc2Vu'
+    'ZCBDb25uZWN0UmVxdWVzdCBtZXNzYWdlcyAoYXV0aCwgYWNrcywgY29tbWFuZHMpIGFuZCByZW'
+    'NlaXZlIFNlcnZlckV2ZW50IG1lc3NhZ2VzIGluIGNocm9ub2xvZ2ljYWwgb3JkZXIuIFN1cHBv'
+    'cnRzIHNlc3Npb24gcmVzdW1wdGlvbiB2aWEgcmVzdW1lX3Rva2VuLioHY29ubmVjdCgBMAE=');
+
+const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
+  '1': 'ChatService',
+  '2': [
     {
-      '1': 'SendMessage',
-      '2': '.chat.v1.SendMessageRequest',
-      '3': '.chat.v1.SendMessageResponse',
+      '1': 'SendEvent',
+      '2': '.chat.v1.SendEventRequest',
+      '3': '.chat.v1.SendEventResponse',
       '4': {}
     },
     {
@@ -1002,30 +1064,26 @@ const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
 @$core.Deprecated('Use chatServiceDescriptor instead')
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
     ChatServiceBase$messageJson = {
-  '.chat.v1.ConnectRequest': ConnectRequest$json,
-  '.chat.v1.StreamAck': StreamAck$json,
-  '.google.protobuf.Timestamp': $0.Timestamp$json,
+  '.chat.v1.SendEventRequest': SendEventRequest$json,
+  '.chat.v1.RoomEvent': RoomEvent$json,
   '.google.protobuf.Struct': $1.Struct$json,
   '.google.protobuf.Struct.FieldsEntry': $1.Struct_FieldsEntry$json,
   '.google.protobuf.Value': $1.Value$json,
   '.google.protobuf.ListValue': $1.ListValue$json,
-  '.chat.v1.ClientCommand': ClientCommand$json,
-  '.chat.v1.TypingUpdate': TypingUpdate$json,
-  '.chat.v1.ReadMarker': ReadMarker$json,
+  '.google.protobuf.Timestamp': $0.Timestamp$json,
+  '.chat.v1.SendEventResponse': SendEventResponse$json,
+  '.chat.v1.StreamAck': StreamAck$json,
+  '.chat.v1.ErrorDetail': ErrorDetail$json,
+  '.chat.v1.ErrorDetail.MetaEntry': ErrorDetail_MetaEntry$json,
+  '.chat.v1.GetHistoryRequest': GetHistoryRequest$json,
+  '.chat.v1.GetHistoryResponse': GetHistoryResponse$json,
   '.chat.v1.ServerEvent': ServerEvent$json,
-  '.chat.v1.RoomEvent': RoomEvent$json,
   '.chat.v1.PresenceEvent': PresenceEvent$json,
   '.chat.v1.ReceiptEvent': ReceiptEvent$json,
   '.chat.v1.TypingEvent': TypingEvent$json,
-  '.chat.v1.SendMessageRequest': SendMessageRequest$json,
-  '.chat.v1.SendMessageResponse': SendMessageResponse$json,
-  '.chat.v1.GetHistoryRequest': GetHistoryRequest$json,
-  '.chat.v1.GetHistoryResponse': GetHistoryResponse$json,
   '.chat.v1.CreateRoomRequest': CreateRoomRequest$json,
   '.chat.v1.CreateRoomResponse': CreateRoomResponse$json,
   '.chat.v1.Room': Room$json,
-  '.chat.v1.ErrorDetail': ErrorDetail$json,
-  '.chat.v1.ErrorDetail.MetaEntry': ErrorDetail_MetaEntry$json,
   '.chat.v1.SearchRoomsRequest': SearchRoomsRequest$json,
   '.chat.v1.SearchRoomsResponse': SearchRoomsResponse$json,
   '.chat.v1.UpdateRoomRequest': UpdateRoomRequest$json,
@@ -1050,62 +1108,55 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
 
 /// Descriptor for `ChatService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
 final $typed_data.Uint8List chatServiceDescriptor = $convert.base64Decode(
-    'CgtDaGF0U2VydmljZRLvAgoHQ29ubmVjdBIXLmNoYXQudjEuQ29ubmVjdFJlcXVlc3QaFC5jaG'
-    'F0LnYxLlNlcnZlckV2ZW50IrACukesAgoJUmVhbC10aW1lEi1Fc3RhYmxpc2ggYmktZGlyZWN0'
-    'aW9uYWwgc3RyZWFtaW5nIGNvbm5lY3Rpb24a5gFPcGVucyBhIHBlcnNpc3RlbnQgYmktZGlyZW'
-    'N0aW9uYWwgc3RyZWFtIGZvciByZWFsLXRpbWUgY2hhdCBldmVudHMuIENsaWVudHMgc2VuZCBD'
-    'b25uZWN0UmVxdWVzdCBtZXNzYWdlcyAoYXV0aCwgYWNrcywgY29tbWFuZHMpIGFuZCByZWNlaX'
-    'ZlIFNlcnZlckV2ZW50IG1lc3NhZ2VzIGluIGNocm9ub2xvZ2ljYWwgb3JkZXIuIFN1cHBvcnRz'
-    'IHNlc3Npb24gcmVzdW1wdGlvbiB2aWEgcmVzdW1lX3Rva2VuLioHY29ubmVjdCgBMAESnAIKC1'
-    'NlbmRNZXNzYWdlEhsuY2hhdC52MS5TZW5kTWVzc2FnZVJlcXVlc3QaHC5jaGF0LnYxLlNlbmRN'
-    'ZXNzYWdlUmVzcG9uc2Ui0QG6R80BCghNZXNzYWdlcxIYU2VuZCBhIG1lc3NhZ2UgdG8gYSByb2'
-    '9tGpkBU2VuZHMgb25lIG9yIG1vcmUgbWVzc2FnZXMgdG8gY2hhdCByb29tcy4gU3VwcG9ydHMg'
-    'dGV4dCwgYXR0YWNobWVudHMsIHJlYWN0aW9ucywgYW5kIHN5c3RlbSBtZXNzYWdlcy4gSWRlbX'
-    'BvdGVudCB3aGVuIGlkZW1wb3RlbmN5X2tleSBoZWFkZXIgaXMgcHJvdmlkZWQuKgtzZW5kTWVz'
-    'c2FnZRKIAgoKR2V0SGlzdG9yeRIaLmNoYXQudjEuR2V0SGlzdG9yeVJlcXVlc3QaGy5jaGF0Ln'
-    'YxLkdldEhpc3RvcnlSZXNwb25zZSLAAbpHvAEKCE1lc3NhZ2VzEiNSZXRyaWV2ZSBtZXNzYWdl'
-    'IGhpc3RvcnkgZm9yIGEgcm9vbRp/RmV0Y2hlcyBwYWdpbmF0ZWQgbWVzc2FnZSBoaXN0b3J5IG'
-    'ZvciBhIHNwZWNpZmllZCByb29tIHVzaW5nIGN1cnNvci1iYXNlZCBuYXZpZ2F0aW9uLiBTdXBw'
-    'b3J0cyBmb3J3YXJkIGFuZCBiYWNrd2FyZCBwYWdpbmF0aW9uLioKZ2V0SGlzdG9yeRKdAgoKQ3'
-    'JlYXRlUm9vbRIaLmNoYXQudjEuQ3JlYXRlUm9vbVJlcXVlc3QaGy5jaGF0LnYxLkNyZWF0ZVJv'
-    'b21SZXNwb25zZSLVAbpH0QEKBVJvb21zEhZDcmVhdGUgYSBuZXcgY2hhdCByb29tGqMBQ3JlYX'
-    'RlcyBhIG5ldyBjaGF0IHJvb20gd2l0aCBzcGVjaWZpZWQgY29uZmlndXJhdGlvbi4gVGhlIGNy'
-    'ZWF0b3IgaXMgYXV0b21hdGljYWxseSBhZGRlZCBhcyBhIG1lbWJlciB3aXRoIG93bmVyIHByaX'
-    'ZpbGVnZXMuIFN1cHBvcnRzIGJvdGggcHVibGljIGFuZCBwcml2YXRlIHJvb21zLioKY3JlYXRl'
-    'Um9vbRKbAgoLU2VhcmNoUm9vbXMSGy5jaGF0LnYxLlNlYXJjaFJvb21zUmVxdWVzdBocLmNoYX'
-    'QudjEuU2VhcmNoUm9vbXNSZXNwb25zZSLOAbpHygEKBVJvb21zEhVTZWFyY2ggZm9yIGNoYXQg'
-    'cm9vbXManAFTZWFyY2hlcyBmb3IgY2hhdCByb29tcyBtYXRjaGluZyB0aGUgc3BlY2lmaWVkIG'
-    'NyaXRlcmlhLiBSZXR1cm5zIGEgc3RyZWFtIG9mIG1hdGNoaW5nIHJvb21zLiBTdXBwb3J0cyBm'
-    'aWx0ZXJpbmcgYnkgcXVlcnksIGRhdGUgcmFuZ2UsIGFuZCBjdXN0b20gcHJvcGVydGllcy4qC3'
-    'NlYXJjaFJvb21zMAEShwIKClVwZGF0ZVJvb20SGi5jaGF0LnYxLlVwZGF0ZVJvb21SZXF1ZXN0'
-    'GhsuY2hhdC52MS5VcGRhdGVSb29tUmVzcG9uc2UivwG6R7sBCgVSb29tcxISVXBkYXRlIGEgY2'
-    'hhdCByb29tGpEBVXBkYXRlcyB0aGUgY29uZmlndXJhdGlvbiBvZiBhbiBleGlzdGluZyBjaGF0'
-    'IHJvb20gaW5jbHVkaW5nIG5hbWUsIHRvcGljLCBhbmQgbWV0YWRhdGEuIE9ubHkgcm9vbSBvd2'
-    '5lcnMgYW5kIG1vZGVyYXRvcnMgY2FuIHVwZGF0ZSByb29tIHNldHRpbmdzLioKdXBkYXRlUm9v'
-    'bRLrAQoKRGVsZXRlUm9vbRIaLmNoYXQudjEuRGVsZXRlUm9vbVJlcXVlc3QaGy5jaGF0LnYxLk'
-    'RlbGV0ZVJvb21SZXNwb25zZSKjAbpHnwEKBVJvb21zEhJEZWxldGUgYSBjaGF0IHJvb20adlBl'
-    'cm1hbmVudGx5IGRlbGV0ZXMgYSBjaGF0IHJvb20gYW5kIGFsbCBpdHMgbWVzc2FnZXMuIFRoaX'
-    'MgYWN0aW9uIGNhbm5vdCBiZSB1bmRvbmUuIE9ubHkgcm9vbSBvd25lcnMgY2FuIGRlbGV0ZSBy'
-    'b29tcy4qCmRlbGV0ZVJvb20SrQIKFEFkZFJvb21TdWJzY3JpcHRpb25zEiQuY2hhdC52MS5BZG'
-    'RSb29tU3Vic2NyaXB0aW9uc1JlcXVlc3QaJS5jaGF0LnYxLkFkZFJvb21TdWJzY3JpcHRpb25z'
-    'UmVzcG9uc2UixwG6R8MBCg1TdWJzY3JpcHRpb25zEhVBZGQgbWVtYmVycyB0byBhIHJvb20ahA'
-    'FBZGRzIG9uZSBvciBtb3JlIHVzZXJzIHRvIGEgY2hhdCByb29tIHdpdGggc3BlY2lmaWVkIHJv'
-    'bGVzLiBUaGUgcmVxdWVzdGluZyB1c2VyIG11c3QgaGF2ZSBvd25lciBvciBtb2RlcmF0b3IgcH'
-    'JpdmlsZWdlcyBpbiB0aGUgcm9vbS4qFGFkZFJvb21TdWJzY3JpcHRpb25zEsoCChdSZW1vdmVS'
-    'b29tU3Vic2NyaXB0aW9ucxInLmNoYXQudjEuUmVtb3ZlUm9vbVN1YnNjcmlwdGlvbnNSZXF1ZX'
-    'N0GiguY2hhdC52MS5SZW1vdmVSb29tU3Vic2NyaXB0aW9uc1Jlc3BvbnNlItsBukfXAQoNU3Vi'
-    'c2NyaXB0aW9ucxIaUmVtb3ZlIG1lbWJlcnMgZnJvbSBhIHJvb20akAFSZW1vdmVzIG9uZSBvci'
-    'Btb3JlIHVzZXJzIGZyb20gYSBjaGF0IHJvb20uIFRoZSByZXF1ZXN0aW5nIHVzZXIgbXVzdCBo'
-    'YXZlIG93bmVyIG9yIG1vZGVyYXRvciBwcml2aWxlZ2VzIGluIHRoZSByb29tLCB1bmxlc3Mgcm'
-    'Vtb3ZpbmcgdGhlbXNlbHZlcy4qF3JlbW92ZVJvb21TdWJzY3JpcHRpb25zErECChZVcGRhdGVT'
-    'dWJzY3JpcHRpb25Sb2xlEiYuY2hhdC52MS5VcGRhdGVTdWJzY3JpcHRpb25Sb2xlUmVxdWVzdB'
-    'onLmNoYXQudjEuVXBkYXRlU3Vic2NyaXB0aW9uUm9sZVJlc3BvbnNlIsUBukfBAQoNU3Vic2Ny'
-    'aXB0aW9ucxIgVXBkYXRlIGEgbWVtYmVyJ3Mgcm9sZSBpbiBhIHJvb20adlVwZGF0ZXMgdGhlIH'
-    'JvbGUocykgb2YgYSB1c2VyIGluIGEgY2hhdCByb29tLiBUaGUgcmVxdWVzdGluZyB1c2VyIG11'
-    'c3QgaGF2ZSBvd25lciBvciBtb2RlcmF0b3IgcHJpdmlsZWdlcyBpbiB0aGUgcm9vbS4qFnVwZG'
-    'F0ZVN1YnNjcmlwdGlvblJvbGUSmgIKF1NlYXJjaFJvb21TdWJzY3JpcHRpb25zEicuY2hhdC52'
-    'MS5TZWFyY2hSb29tU3Vic2NyaXB0aW9uc1JlcXVlc3QaKC5jaGF0LnYxLlNlYXJjaFJvb21TdW'
-    'JzY3JpcHRpb25zUmVzcG9uc2UiqwG6R6cBCg1TdWJzY3JpcHRpb25zEhFMaXN0IHJvb20gbWVt'
-    'YmVycxpqUmV0cmlldmVzIGEgcGFnaW5hdGVkIGxpc3Qgb2YgdXNlcnMgc3Vic2NyaWJlZCB0by'
-    'BhIHJvb20sIGFsb25nIHdpdGggdGhlaXIgcm9sZXMgYW5kIGFjdGl2aXR5IGluZm9ybWF0aW9u'
-    'LioXc2VhcmNoUm9vbVN1YnNjcmlwdGlvbnM=');
+    'CgtDaGF0U2VydmljZRKRAgoJU2VuZEV2ZW50EhkuY2hhdC52MS5TZW5kRXZlbnRSZXF1ZXN0Gh'
+    'ouY2hhdC52MS5TZW5kRXZlbnRSZXNwb25zZSLMAbpHyAEKCE1lc3NhZ2VzEhdTZW5kIGFuIGV2'
+    'ZW50IHRvIGEgcm9vbRqXAVNlbmRzIG9uZSBvciBtb3JlIGV2ZW50cyB0byBjaGF0IHJvb21zLi'
+    'BTdXBwb3J0cyB0ZXh0LCBhdHRhY2htZW50cywgcmVhY3Rpb25zLCBhbmQgc3lzdGVtIG1lc3Nh'
+    'Z2VzLiBJZGVtcG90ZW50IHdoZW4gaWRlbXBvdGVuY3lfa2V5IGhlYWRlciBpcyBwcm92aWRlZC'
+    '4qCXNlbmRFdmVudBKIAgoKR2V0SGlzdG9yeRIaLmNoYXQudjEuR2V0SGlzdG9yeVJlcXVlc3Qa'
+    'Gy5jaGF0LnYxLkdldEhpc3RvcnlSZXNwb25zZSLAAbpHvAEKCE1lc3NhZ2VzEiNSZXRyaWV2ZS'
+    'BtZXNzYWdlIGhpc3RvcnkgZm9yIGEgcm9vbRp/RmV0Y2hlcyBwYWdpbmF0ZWQgbWVzc2FnZSBo'
+    'aXN0b3J5IGZvciBhIHNwZWNpZmllZCByb29tIHVzaW5nIGN1cnNvci1iYXNlZCBuYXZpZ2F0aW'
+    '9uLiBTdXBwb3J0cyBmb3J3YXJkIGFuZCBiYWNrd2FyZCBwYWdpbmF0aW9uLioKZ2V0SGlzdG9y'
+    'eRKdAgoKQ3JlYXRlUm9vbRIaLmNoYXQudjEuQ3JlYXRlUm9vbVJlcXVlc3QaGy5jaGF0LnYxLk'
+    'NyZWF0ZVJvb21SZXNwb25zZSLVAbpH0QEKBVJvb21zEhZDcmVhdGUgYSBuZXcgY2hhdCByb29t'
+    'GqMBQ3JlYXRlcyBhIG5ldyBjaGF0IHJvb20gd2l0aCBzcGVjaWZpZWQgY29uZmlndXJhdGlvbi'
+    '4gVGhlIGNyZWF0b3IgaXMgYXV0b21hdGljYWxseSBhZGRlZCBhcyBhIG1lbWJlciB3aXRoIG93'
+    'bmVyIHByaXZpbGVnZXMuIFN1cHBvcnRzIGJvdGggcHVibGljIGFuZCBwcml2YXRlIHJvb21zLi'
+    'oKY3JlYXRlUm9vbRKbAgoLU2VhcmNoUm9vbXMSGy5jaGF0LnYxLlNlYXJjaFJvb21zUmVxdWVz'
+    'dBocLmNoYXQudjEuU2VhcmNoUm9vbXNSZXNwb25zZSLOAbpHygEKBVJvb21zEhVTZWFyY2ggZm'
+    '9yIGNoYXQgcm9vbXManAFTZWFyY2hlcyBmb3IgY2hhdCByb29tcyBtYXRjaGluZyB0aGUgc3Bl'
+    'Y2lmaWVkIGNyaXRlcmlhLiBSZXR1cm5zIGEgc3RyZWFtIG9mIG1hdGNoaW5nIHJvb21zLiBTdX'
+    'Bwb3J0cyBmaWx0ZXJpbmcgYnkgcXVlcnksIGRhdGUgcmFuZ2UsIGFuZCBjdXN0b20gcHJvcGVy'
+    'dGllcy4qC3NlYXJjaFJvb21zMAEShwIKClVwZGF0ZVJvb20SGi5jaGF0LnYxLlVwZGF0ZVJvb2'
+    '1SZXF1ZXN0GhsuY2hhdC52MS5VcGRhdGVSb29tUmVzcG9uc2UivwG6R7sBCgVSb29tcxISVXBk'
+    'YXRlIGEgY2hhdCByb29tGpEBVXBkYXRlcyB0aGUgY29uZmlndXJhdGlvbiBvZiBhbiBleGlzdG'
+    'luZyBjaGF0IHJvb20gaW5jbHVkaW5nIG5hbWUsIHRvcGljLCBhbmQgbWV0YWRhdGEuIE9ubHkg'
+    'cm9vbSBvd25lcnMgYW5kIG1vZGVyYXRvcnMgY2FuIHVwZGF0ZSByb29tIHNldHRpbmdzLioKdX'
+    'BkYXRlUm9vbRLrAQoKRGVsZXRlUm9vbRIaLmNoYXQudjEuRGVsZXRlUm9vbVJlcXVlc3QaGy5j'
+    'aGF0LnYxLkRlbGV0ZVJvb21SZXNwb25zZSKjAbpHnwEKBVJvb21zEhJEZWxldGUgYSBjaGF0IH'
+    'Jvb20adlBlcm1hbmVudGx5IGRlbGV0ZXMgYSBjaGF0IHJvb20gYW5kIGFsbCBpdHMgbWVzc2Fn'
+    'ZXMuIFRoaXMgYWN0aW9uIGNhbm5vdCBiZSB1bmRvbmUuIE9ubHkgcm9vbSBvd25lcnMgY2FuIG'
+    'RlbGV0ZSByb29tcy4qCmRlbGV0ZVJvb20SrQIKFEFkZFJvb21TdWJzY3JpcHRpb25zEiQuY2hh'
+    'dC52MS5BZGRSb29tU3Vic2NyaXB0aW9uc1JlcXVlc3QaJS5jaGF0LnYxLkFkZFJvb21TdWJzY3'
+    'JpcHRpb25zUmVzcG9uc2UixwG6R8MBCg1TdWJzY3JpcHRpb25zEhVBZGQgbWVtYmVycyB0byBh'
+    'IHJvb20ahAFBZGRzIG9uZSBvciBtb3JlIHVzZXJzIHRvIGEgY2hhdCByb29tIHdpdGggc3BlY2'
+    'lmaWVkIHJvbGVzLiBUaGUgcmVxdWVzdGluZyB1c2VyIG11c3QgaGF2ZSBvd25lciBvciBtb2Rl'
+    'cmF0b3IgcHJpdmlsZWdlcyBpbiB0aGUgcm9vbS4qFGFkZFJvb21TdWJzY3JpcHRpb25zEsoCCh'
+    'dSZW1vdmVSb29tU3Vic2NyaXB0aW9ucxInLmNoYXQudjEuUmVtb3ZlUm9vbVN1YnNjcmlwdGlv'
+    'bnNSZXF1ZXN0GiguY2hhdC52MS5SZW1vdmVSb29tU3Vic2NyaXB0aW9uc1Jlc3BvbnNlItsBuk'
+    'fXAQoNU3Vic2NyaXB0aW9ucxIaUmVtb3ZlIG1lbWJlcnMgZnJvbSBhIHJvb20akAFSZW1vdmVz'
+    'IG9uZSBvciBtb3JlIHVzZXJzIGZyb20gYSBjaGF0IHJvb20uIFRoZSByZXF1ZXN0aW5nIHVzZX'
+    'IgbXVzdCBoYXZlIG93bmVyIG9yIG1vZGVyYXRvciBwcml2aWxlZ2VzIGluIHRoZSByb29tLCB1'
+    'bmxlc3MgcmVtb3ZpbmcgdGhlbXNlbHZlcy4qF3JlbW92ZVJvb21TdWJzY3JpcHRpb25zErECCh'
+    'ZVcGRhdGVTdWJzY3JpcHRpb25Sb2xlEiYuY2hhdC52MS5VcGRhdGVTdWJzY3JpcHRpb25Sb2xl'
+    'UmVxdWVzdBonLmNoYXQudjEuVXBkYXRlU3Vic2NyaXB0aW9uUm9sZVJlc3BvbnNlIsUBukfBAQ'
+    'oNU3Vic2NyaXB0aW9ucxIgVXBkYXRlIGEgbWVtYmVyJ3Mgcm9sZSBpbiBhIHJvb20adlVwZGF0'
+    'ZXMgdGhlIHJvbGUocykgb2YgYSB1c2VyIGluIGEgY2hhdCByb29tLiBUaGUgcmVxdWVzdGluZy'
+    'B1c2VyIG11c3QgaGF2ZSBvd25lciBvciBtb2RlcmF0b3IgcHJpdmlsZWdlcyBpbiB0aGUgcm9v'
+    'bS4qFnVwZGF0ZVN1YnNjcmlwdGlvblJvbGUSmgIKF1NlYXJjaFJvb21TdWJzY3JpcHRpb25zEi'
+    'cuY2hhdC52MS5TZWFyY2hSb29tU3Vic2NyaXB0aW9uc1JlcXVlc3QaKC5jaGF0LnYxLlNlYXJj'
+    'aFJvb21TdWJzY3JpcHRpb25zUmVzcG9uc2UiqwG6R6cBCg1TdWJzY3JpcHRpb25zEhFMaXN0IH'
+    'Jvb20gbWVtYmVycxpqUmV0cmlldmVzIGEgcGFnaW5hdGVkIGxpc3Qgb2YgdXNlcnMgc3Vic2Ny'
+    'aWJlZCB0byBhIHJvb20sIGFsb25nIHdpdGggdGhlaXIgcm9sZXMgYW5kIGFjdGl2aXR5IGluZm'
+    '9ybWF0aW9uLioXc2VhcmNoUm9vbVN1YnNjcmlwdGlvbnM=');

@@ -33,8 +33,109 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ChatService_Connect_FullMethodName                 = "/chat.v1.ChatService/Connect"
-	ChatService_SendMessage_FullMethodName             = "/chat.v1.ChatService/SendMessage"
+	GatewayService_Connect_FullMethodName = "/chat.v1.GatewayService/Connect"
+)
+
+// GatewayServiceClient is the client API for GatewayService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type GatewayServiceClient interface {
+	// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
+	// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
+	// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
+	Connect(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ConnectRequest, ServerEvent], error)
+}
+
+type gatewayServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewGatewayServiceClient(cc grpc.ClientConnInterface) GatewayServiceClient {
+	return &gatewayServiceClient{cc}
+}
+
+func (c *gatewayServiceClient) Connect(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ConnectRequest, ServerEvent], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &GatewayService_ServiceDesc.Streams[0], GatewayService_Connect_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[ConnectRequest, ServerEvent]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type GatewayService_ConnectClient = grpc.BidiStreamingClient[ConnectRequest, ServerEvent]
+
+// GatewayServiceServer is the server API for GatewayService service.
+// All implementations must embed UnimplementedGatewayServiceServer
+// for forward compatibility.
+type GatewayServiceServer interface {
+	// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
+	// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
+	// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
+	Connect(grpc.BidiStreamingServer[ConnectRequest, ServerEvent]) error
+	mustEmbedUnimplementedGatewayServiceServer()
+}
+
+// UnimplementedGatewayServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedGatewayServiceServer struct{}
+
+func (UnimplementedGatewayServiceServer) Connect(grpc.BidiStreamingServer[ConnectRequest, ServerEvent]) error {
+	return status.Errorf(codes.Unimplemented, "method Connect not implemented")
+}
+func (UnimplementedGatewayServiceServer) mustEmbedUnimplementedGatewayServiceServer() {}
+func (UnimplementedGatewayServiceServer) testEmbeddedByValue()                        {}
+
+// UnsafeGatewayServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to GatewayServiceServer will
+// result in compilation errors.
+type UnsafeGatewayServiceServer interface {
+	mustEmbedUnimplementedGatewayServiceServer()
+}
+
+func RegisterGatewayServiceServer(s grpc.ServiceRegistrar, srv GatewayServiceServer) {
+	// If the following call pancis, it indicates UnimplementedGatewayServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&GatewayService_ServiceDesc, srv)
+}
+
+func _GatewayService_Connect_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(GatewayServiceServer).Connect(&grpc.GenericServerStream[ConnectRequest, ServerEvent]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type GatewayService_ConnectServer = grpc.BidiStreamingServer[ConnectRequest, ServerEvent]
+
+// GatewayService_ServiceDesc is the grpc.ServiceDesc for GatewayService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var GatewayService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "chat.v1.GatewayService",
+	HandlerType: (*GatewayServiceServer)(nil),
+	Methods:     []grpc.MethodDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Connect",
+			Handler:       _GatewayService_Connect_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
+	Metadata: "chat/v1/chat.proto",
+}
+
+const (
+	ChatService_SendEvent_FullMethodName               = "/chat.v1.ChatService/SendEvent"
 	ChatService_GetHistory_FullMethodName              = "/chat.v1.ChatService/GetHistory"
 	ChatService_CreateRoom_FullMethodName              = "/chat.v1.ChatService/CreateRoom"
 	ChatService_SearchRooms_FullMethodName             = "/chat.v1.ChatService/SearchRooms"
@@ -50,12 +151,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ChatServiceClient interface {
-	// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
-	// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
-	// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
-	Connect(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ConnectRequest, ServerEvent], error)
-	// Send a message (unified message model). Idempotent if idempotency_key is provided.
-	SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error)
+	// Send an event (unified message model). Idempotent if idempotency_key is provided.
+	SendEvent(ctx context.Context, in *SendEventRequest, opts ...grpc.CallOption) (*SendEventResponse, error)
 	// Fetch history for a room. Cursor-based paging (cursor = opaque server token).
 	GetHistory(ctx context.Context, in *GetHistoryRequest, opts ...grpc.CallOption) (*GetHistoryResponse, error)
 	// Room lifecycle & management
@@ -78,23 +175,10 @@ func NewChatServiceClient(cc grpc.ClientConnInterface) ChatServiceClient {
 	return &chatServiceClient{cc}
 }
 
-func (c *chatServiceClient) Connect(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ConnectRequest, ServerEvent], error) {
+func (c *chatServiceClient) SendEvent(ctx context.Context, in *SendEventRequest, opts ...grpc.CallOption) (*SendEventResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &ChatService_ServiceDesc.Streams[0], ChatService_Connect_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[ConnectRequest, ServerEvent]{ClientStream: stream}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type ChatService_ConnectClient = grpc.BidiStreamingClient[ConnectRequest, ServerEvent]
-
-func (c *chatServiceClient) SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SendMessageResponse)
-	err := c.cc.Invoke(ctx, ChatService_SendMessage_FullMethodName, in, out, cOpts...)
+	out := new(SendEventResponse)
+	err := c.cc.Invoke(ctx, ChatService_SendEvent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -123,7 +207,7 @@ func (c *chatServiceClient) CreateRoom(ctx context.Context, in *CreateRoomReques
 
 func (c *chatServiceClient) SearchRooms(ctx context.Context, in *SearchRoomsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SearchRoomsResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &ChatService_ServiceDesc.Streams[1], ChatService_SearchRooms_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &ChatService_ServiceDesc.Streams[0], ChatService_SearchRooms_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -204,12 +288,8 @@ func (c *chatServiceClient) SearchRoomSubscriptions(ctx context.Context, in *Sea
 // All implementations must embed UnimplementedChatServiceServer
 // for forward compatibility.
 type ChatServiceServer interface {
-	// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
-	// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
-	// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
-	Connect(grpc.BidiStreamingServer[ConnectRequest, ServerEvent]) error
-	// Send a message (unified message model). Idempotent if idempotency_key is provided.
-	SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error)
+	// Send an event (unified message model). Idempotent if idempotency_key is provided.
+	SendEvent(context.Context, *SendEventRequest) (*SendEventResponse, error)
 	// Fetch history for a room. Cursor-based paging (cursor = opaque server token).
 	GetHistory(context.Context, *GetHistoryRequest) (*GetHistoryResponse, error)
 	// Room lifecycle & management
@@ -232,11 +312,8 @@ type ChatServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedChatServiceServer struct{}
 
-func (UnimplementedChatServiceServer) Connect(grpc.BidiStreamingServer[ConnectRequest, ServerEvent]) error {
-	return status.Errorf(codes.Unimplemented, "method Connect not implemented")
-}
-func (UnimplementedChatServiceServer) SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
+func (UnimplementedChatServiceServer) SendEvent(context.Context, *SendEventRequest) (*SendEventResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendEvent not implemented")
 }
 func (UnimplementedChatServiceServer) GetHistory(context.Context, *GetHistoryRequest) (*GetHistoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHistory not implemented")
@@ -286,27 +363,20 @@ func RegisterChatServiceServer(s grpc.ServiceRegistrar, srv ChatServiceServer) {
 	s.RegisterService(&ChatService_ServiceDesc, srv)
 }
 
-func _ChatService_Connect_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(ChatServiceServer).Connect(&grpc.GenericServerStream[ConnectRequest, ServerEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type ChatService_ConnectServer = grpc.BidiStreamingServer[ConnectRequest, ServerEvent]
-
-func _ChatService_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SendMessageRequest)
+func _ChatService_SendEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendEventRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ChatServiceServer).SendMessage(ctx, in)
+		return srv.(ChatServiceServer).SendEvent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ChatService_SendMessage_FullMethodName,
+		FullMethod: ChatService_SendEvent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ChatServiceServer).SendMessage(ctx, req.(*SendMessageRequest))
+		return srv.(ChatServiceServer).SendEvent(ctx, req.(*SendEventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -474,8 +544,8 @@ var ChatService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ChatServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SendMessage",
-			Handler:    _ChatService_SendMessage_Handler,
+			MethodName: "SendEvent",
+			Handler:    _ChatService_SendEvent_Handler,
 		},
 		{
 			MethodName: "GetHistory",
@@ -511,12 +581,6 @@ var ChatService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "Connect",
-			Handler:       _ChatService_Connect_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
-		},
 		{
 			StreamName:    "SearchRooms",
 			Handler:       _ChatService_SearchRooms_Handler,

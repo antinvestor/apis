@@ -18,6 +18,136 @@ import (
 	grpc "google.golang.org/grpc"
 )
 
+// MockGatewayServiceClient is a mock of GatewayServiceClient interface.
+type MockGatewayServiceClient struct {
+	ctrl     *gomock.Controller
+	recorder *MockGatewayServiceClientMockRecorder
+	isgomock struct{}
+}
+
+// MockGatewayServiceClientMockRecorder is the mock recorder for MockGatewayServiceClient.
+type MockGatewayServiceClientMockRecorder struct {
+	mock *MockGatewayServiceClient
+}
+
+// NewMockGatewayServiceClient creates a new mock instance.
+func NewMockGatewayServiceClient(ctrl *gomock.Controller) *MockGatewayServiceClient {
+	mock := &MockGatewayServiceClient{ctrl: ctrl}
+	mock.recorder = &MockGatewayServiceClientMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockGatewayServiceClient) EXPECT() *MockGatewayServiceClientMockRecorder {
+	return m.recorder
+}
+
+// Connect mocks base method.
+func (m *MockGatewayServiceClient) Connect(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[chatv1.ConnectRequest, chatv1.ServerEvent], error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "Connect", varargs...)
+	ret0, _ := ret[0].(grpc.BidiStreamingClient[chatv1.ConnectRequest, chatv1.ServerEvent])
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Connect indicates an expected call of Connect.
+func (mr *MockGatewayServiceClientMockRecorder) Connect(ctx any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Connect", reflect.TypeOf((*MockGatewayServiceClient)(nil).Connect), varargs...)
+}
+
+// MockGatewayServiceServer is a mock of GatewayServiceServer interface.
+type MockGatewayServiceServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockGatewayServiceServerMockRecorder
+	isgomock struct{}
+}
+
+// MockGatewayServiceServerMockRecorder is the mock recorder for MockGatewayServiceServer.
+type MockGatewayServiceServerMockRecorder struct {
+	mock *MockGatewayServiceServer
+}
+
+// NewMockGatewayServiceServer creates a new mock instance.
+func NewMockGatewayServiceServer(ctrl *gomock.Controller) *MockGatewayServiceServer {
+	mock := &MockGatewayServiceServer{ctrl: ctrl}
+	mock.recorder = &MockGatewayServiceServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockGatewayServiceServer) EXPECT() *MockGatewayServiceServerMockRecorder {
+	return m.recorder
+}
+
+// Connect mocks base method.
+func (m *MockGatewayServiceServer) Connect(arg0 grpc.BidiStreamingServer[chatv1.ConnectRequest, chatv1.ServerEvent]) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Connect", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Connect indicates an expected call of Connect.
+func (mr *MockGatewayServiceServerMockRecorder) Connect(arg0 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Connect", reflect.TypeOf((*MockGatewayServiceServer)(nil).Connect), arg0)
+}
+
+// mustEmbedUnimplementedGatewayServiceServer mocks base method.
+func (m *MockGatewayServiceServer) mustEmbedUnimplementedGatewayServiceServer() {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "mustEmbedUnimplementedGatewayServiceServer")
+}
+
+// mustEmbedUnimplementedGatewayServiceServer indicates an expected call of mustEmbedUnimplementedGatewayServiceServer.
+func (mr *MockGatewayServiceServerMockRecorder) mustEmbedUnimplementedGatewayServiceServer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedGatewayServiceServer", reflect.TypeOf((*MockGatewayServiceServer)(nil).mustEmbedUnimplementedGatewayServiceServer))
+}
+
+// MockUnsafeGatewayServiceServer is a mock of UnsafeGatewayServiceServer interface.
+type MockUnsafeGatewayServiceServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockUnsafeGatewayServiceServerMockRecorder
+	isgomock struct{}
+}
+
+// MockUnsafeGatewayServiceServerMockRecorder is the mock recorder for MockUnsafeGatewayServiceServer.
+type MockUnsafeGatewayServiceServerMockRecorder struct {
+	mock *MockUnsafeGatewayServiceServer
+}
+
+// NewMockUnsafeGatewayServiceServer creates a new mock instance.
+func NewMockUnsafeGatewayServiceServer(ctrl *gomock.Controller) *MockUnsafeGatewayServiceServer {
+	mock := &MockUnsafeGatewayServiceServer{ctrl: ctrl}
+	mock.recorder = &MockUnsafeGatewayServiceServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockUnsafeGatewayServiceServer) EXPECT() *MockUnsafeGatewayServiceServerMockRecorder {
+	return m.recorder
+}
+
+// mustEmbedUnimplementedGatewayServiceServer mocks base method.
+func (m *MockUnsafeGatewayServiceServer) mustEmbedUnimplementedGatewayServiceServer() {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "mustEmbedUnimplementedGatewayServiceServer")
+}
+
+// mustEmbedUnimplementedGatewayServiceServer indicates an expected call of mustEmbedUnimplementedGatewayServiceServer.
+func (mr *MockUnsafeGatewayServiceServerMockRecorder) mustEmbedUnimplementedGatewayServiceServer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedGatewayServiceServer", reflect.TypeOf((*MockUnsafeGatewayServiceServer)(nil).mustEmbedUnimplementedGatewayServiceServer))
+}
+
 // MockChatServiceClient is a mock of ChatServiceClient interface.
 type MockChatServiceClient struct {
 	ctrl     *gomock.Controller
@@ -60,26 +190,6 @@ func (mr *MockChatServiceClientMockRecorder) AddRoomSubscriptions(ctx, in any, o
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddRoomSubscriptions", reflect.TypeOf((*MockChatServiceClient)(nil).AddRoomSubscriptions), varargs...)
-}
-
-// Connect mocks base method.
-func (m *MockChatServiceClient) Connect(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[chatv1.ConnectRequest, chatv1.ServerEvent], error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "Connect", varargs...)
-	ret0, _ := ret[0].(grpc.BidiStreamingClient[chatv1.ConnectRequest, chatv1.ServerEvent])
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Connect indicates an expected call of Connect.
-func (mr *MockChatServiceClientMockRecorder) Connect(ctx any, opts ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Connect", reflect.TypeOf((*MockChatServiceClient)(nil).Connect), varargs...)
 }
 
 // CreateRoom mocks base method.
@@ -202,24 +312,24 @@ func (mr *MockChatServiceClientMockRecorder) SearchRooms(ctx, in any, opts ...an
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchRooms", reflect.TypeOf((*MockChatServiceClient)(nil).SearchRooms), varargs...)
 }
 
-// SendMessage mocks base method.
-func (m *MockChatServiceClient) SendMessage(ctx context.Context, in *chatv1.SendMessageRequest, opts ...grpc.CallOption) (*chatv1.SendMessageResponse, error) {
+// SendEvent mocks base method.
+func (m *MockChatServiceClient) SendEvent(ctx context.Context, in *chatv1.SendEventRequest, opts ...grpc.CallOption) (*chatv1.SendEventResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "SendMessage", varargs...)
-	ret0, _ := ret[0].(*chatv1.SendMessageResponse)
+	ret := m.ctrl.Call(m, "SendEvent", varargs...)
+	ret0, _ := ret[0].(*chatv1.SendEventResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// SendMessage indicates an expected call of SendMessage.
-func (mr *MockChatServiceClientMockRecorder) SendMessage(ctx, in any, opts ...any) *gomock.Call {
+// SendEvent indicates an expected call of SendEvent.
+func (mr *MockChatServiceClientMockRecorder) SendEvent(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMessage", reflect.TypeOf((*MockChatServiceClient)(nil).SendMessage), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendEvent", reflect.TypeOf((*MockChatServiceClient)(nil).SendEvent), varargs...)
 }
 
 // UpdateRoom mocks base method.
@@ -299,20 +409,6 @@ func (m *MockChatServiceServer) AddRoomSubscriptions(arg0 context.Context, arg1 
 func (mr *MockChatServiceServerMockRecorder) AddRoomSubscriptions(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddRoomSubscriptions", reflect.TypeOf((*MockChatServiceServer)(nil).AddRoomSubscriptions), arg0, arg1)
-}
-
-// Connect mocks base method.
-func (m *MockChatServiceServer) Connect(arg0 grpc.BidiStreamingServer[chatv1.ConnectRequest, chatv1.ServerEvent]) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Connect", arg0)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// Connect indicates an expected call of Connect.
-func (mr *MockChatServiceServerMockRecorder) Connect(arg0 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Connect", reflect.TypeOf((*MockChatServiceServer)(nil).Connect), arg0)
 }
 
 // CreateRoom mocks base method.
@@ -404,19 +500,19 @@ func (mr *MockChatServiceServerMockRecorder) SearchRooms(arg0, arg1 any) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchRooms", reflect.TypeOf((*MockChatServiceServer)(nil).SearchRooms), arg0, arg1)
 }
 
-// SendMessage mocks base method.
-func (m *MockChatServiceServer) SendMessage(arg0 context.Context, arg1 *chatv1.SendMessageRequest) (*chatv1.SendMessageResponse, error) {
+// SendEvent mocks base method.
+func (m *MockChatServiceServer) SendEvent(arg0 context.Context, arg1 *chatv1.SendEventRequest) (*chatv1.SendEventResponse, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendMessage", arg0, arg1)
-	ret0, _ := ret[0].(*chatv1.SendMessageResponse)
+	ret := m.ctrl.Call(m, "SendEvent", arg0, arg1)
+	ret0, _ := ret[0].(*chatv1.SendEventResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// SendMessage indicates an expected call of SendMessage.
-func (mr *MockChatServiceServerMockRecorder) SendMessage(arg0, arg1 any) *gomock.Call {
+// SendEvent indicates an expected call of SendEvent.
+func (mr *MockChatServiceServerMockRecorder) SendEvent(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMessage", reflect.TypeOf((*MockChatServiceServer)(nil).SendMessage), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendEvent", reflect.TypeOf((*MockChatServiceServer)(nil).SendEvent), arg0, arg1)
 }
 
 // UpdateRoom mocks base method.

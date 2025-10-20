@@ -35,6 +35,8 @@ import (
 const _ = connect.IsAtLeastVersion1_13_0
 
 const (
+	// GatewayServiceName is the fully-qualified name of the GatewayService service.
+	GatewayServiceName = "chat.v1.GatewayService"
 	// ChatServiceName is the fully-qualified name of the ChatService service.
 	ChatServiceName = "chat.v1.ChatService"
 )
@@ -47,10 +49,10 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// ChatServiceConnectProcedure is the fully-qualified name of the ChatService's Connect RPC.
-	ChatServiceConnectProcedure = "/chat.v1.ChatService/Connect"
-	// ChatServiceSendMessageProcedure is the fully-qualified name of the ChatService's SendMessage RPC.
-	ChatServiceSendMessageProcedure = "/chat.v1.ChatService/SendMessage"
+	// GatewayServiceConnectProcedure is the fully-qualified name of the GatewayService's Connect RPC.
+	GatewayServiceConnectProcedure = "/chat.v1.GatewayService/Connect"
+	// ChatServiceSendEventProcedure is the fully-qualified name of the ChatService's SendEvent RPC.
+	ChatServiceSendEventProcedure = "/chat.v1.ChatService/SendEvent"
 	// ChatServiceGetHistoryProcedure is the fully-qualified name of the ChatService's GetHistory RPC.
 	ChatServiceGetHistoryProcedure = "/chat.v1.ChatService/GetHistory"
 	// ChatServiceCreateRoomProcedure is the fully-qualified name of the ChatService's CreateRoom RPC.
@@ -75,14 +77,86 @@ const (
 	ChatServiceSearchRoomSubscriptionsProcedure = "/chat.v1.ChatService/SearchRoomSubscriptions"
 )
 
-// ChatServiceClient is a client for the chat.v1.ChatService service.
-type ChatServiceClient interface {
+// GatewayServiceClient is a client for the chat.v1.GatewayService service.
+type GatewayServiceClient interface {
 	// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
 	// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
 	// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
 	Connect(context.Context) *connect.BidiStreamForClient[v1.ConnectRequest, v1.ServerEvent]
-	// Send a message (unified message model). Idempotent if idempotency_key is provided.
-	SendMessage(context.Context, *connect.Request[v1.SendMessageRequest]) (*connect.Response[v1.SendMessageResponse], error)
+}
+
+// NewGatewayServiceClient constructs a client for the chat.v1.GatewayService service. By default,
+// it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and
+// sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC()
+// or connect.WithGRPCWeb() options.
+//
+// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
+// http://api.acme.com or https://acme.com/grpc).
+func NewGatewayServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) GatewayServiceClient {
+	baseURL = strings.TrimRight(baseURL, "/")
+	gatewayServiceMethods := v1.File_chat_v1_chat_proto.Services().ByName("GatewayService").Methods()
+	return &gatewayServiceClient{
+		connect: connect.NewClient[v1.ConnectRequest, v1.ServerEvent](
+			httpClient,
+			baseURL+GatewayServiceConnectProcedure,
+			connect.WithSchema(gatewayServiceMethods.ByName("Connect")),
+			connect.WithClientOptions(opts...),
+		),
+	}
+}
+
+// gatewayServiceClient implements GatewayServiceClient.
+type gatewayServiceClient struct {
+	connect *connect.Client[v1.ConnectRequest, v1.ServerEvent]
+}
+
+// Connect calls chat.v1.GatewayService.Connect.
+func (c *gatewayServiceClient) Connect(ctx context.Context) *connect.BidiStreamForClient[v1.ConnectRequest, v1.ServerEvent] {
+	return c.connect.CallBidiStream(ctx)
+}
+
+// GatewayServiceHandler is an implementation of the chat.v1.GatewayService service.
+type GatewayServiceHandler interface {
+	// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
+	// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
+	// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
+	Connect(context.Context, *connect.BidiStream[v1.ConnectRequest, v1.ServerEvent]) error
+}
+
+// NewGatewayServiceHandler builds an HTTP handler from the service implementation. It returns the
+// path on which to mount the handler and the handler itself.
+//
+// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
+// and JSON codecs. They also support gzip compression.
+func NewGatewayServiceHandler(svc GatewayServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	gatewayServiceMethods := v1.File_chat_v1_chat_proto.Services().ByName("GatewayService").Methods()
+	gatewayServiceConnectHandler := connect.NewBidiStreamHandler(
+		GatewayServiceConnectProcedure,
+		svc.Connect,
+		connect.WithSchema(gatewayServiceMethods.ByName("Connect")),
+		connect.WithHandlerOptions(opts...),
+	)
+	return "/chat.v1.GatewayService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case GatewayServiceConnectProcedure:
+			gatewayServiceConnectHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
+}
+
+// UnimplementedGatewayServiceHandler returns CodeUnimplemented from all methods.
+type UnimplementedGatewayServiceHandler struct{}
+
+func (UnimplementedGatewayServiceHandler) Connect(context.Context, *connect.BidiStream[v1.ConnectRequest, v1.ServerEvent]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("chat.v1.GatewayService.Connect is not implemented"))
+}
+
+// ChatServiceClient is a client for the chat.v1.ChatService service.
+type ChatServiceClient interface {
+	// Send an event (unified message model). Idempotent if idempotency_key is provided.
+	SendEvent(context.Context, *connect.Request[v1.SendEventRequest]) (*connect.Response[v1.SendEventResponse], error)
 	// Fetch history for a room. Cursor-based paging (cursor = opaque server token).
 	GetHistory(context.Context, *connect.Request[v1.GetHistoryRequest]) (*connect.Response[v1.GetHistoryResponse], error)
 	// Room lifecycle & management
@@ -108,16 +182,10 @@ func NewChatServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 	baseURL = strings.TrimRight(baseURL, "/")
 	chatServiceMethods := v1.File_chat_v1_chat_proto.Services().ByName("ChatService").Methods()
 	return &chatServiceClient{
-		connect: connect.NewClient[v1.ConnectRequest, v1.ServerEvent](
+		sendEvent: connect.NewClient[v1.SendEventRequest, v1.SendEventResponse](
 			httpClient,
-			baseURL+ChatServiceConnectProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("Connect")),
-			connect.WithClientOptions(opts...),
-		),
-		sendMessage: connect.NewClient[v1.SendMessageRequest, v1.SendMessageResponse](
-			httpClient,
-			baseURL+ChatServiceSendMessageProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("SendMessage")),
+			baseURL+ChatServiceSendEventProcedure,
+			connect.WithSchema(chatServiceMethods.ByName("SendEvent")),
 			connect.WithClientOptions(opts...),
 		),
 		getHistory: connect.NewClient[v1.GetHistoryRequest, v1.GetHistoryResponse](
@@ -179,8 +247,7 @@ func NewChatServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 
 // chatServiceClient implements ChatServiceClient.
 type chatServiceClient struct {
-	connect                 *connect.Client[v1.ConnectRequest, v1.ServerEvent]
-	sendMessage             *connect.Client[v1.SendMessageRequest, v1.SendMessageResponse]
+	sendEvent               *connect.Client[v1.SendEventRequest, v1.SendEventResponse]
 	getHistory              *connect.Client[v1.GetHistoryRequest, v1.GetHistoryResponse]
 	createRoom              *connect.Client[v1.CreateRoomRequest, v1.CreateRoomResponse]
 	searchRooms             *connect.Client[v1.SearchRoomsRequest, v1.SearchRoomsResponse]
@@ -192,14 +259,9 @@ type chatServiceClient struct {
 	searchRoomSubscriptions *connect.Client[v1.SearchRoomSubscriptionsRequest, v1.SearchRoomSubscriptionsResponse]
 }
 
-// Connect calls chat.v1.ChatService.Connect.
-func (c *chatServiceClient) Connect(ctx context.Context) *connect.BidiStreamForClient[v1.ConnectRequest, v1.ServerEvent] {
-	return c.connect.CallBidiStream(ctx)
-}
-
-// SendMessage calls chat.v1.ChatService.SendMessage.
-func (c *chatServiceClient) SendMessage(ctx context.Context, req *connect.Request[v1.SendMessageRequest]) (*connect.Response[v1.SendMessageResponse], error) {
-	return c.sendMessage.CallUnary(ctx, req)
+// SendEvent calls chat.v1.ChatService.SendEvent.
+func (c *chatServiceClient) SendEvent(ctx context.Context, req *connect.Request[v1.SendEventRequest]) (*connect.Response[v1.SendEventResponse], error) {
+	return c.sendEvent.CallUnary(ctx, req)
 }
 
 // GetHistory calls chat.v1.ChatService.GetHistory.
@@ -249,12 +311,8 @@ func (c *chatServiceClient) SearchRoomSubscriptions(ctx context.Context, req *co
 
 // ChatServiceHandler is an implementation of the chat.v1.ChatService service.
 type ChatServiceHandler interface {
-	// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
-	// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
-	// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
-	Connect(context.Context, *connect.BidiStream[v1.ConnectRequest, v1.ServerEvent]) error
-	// Send a message (unified message model). Idempotent if idempotency_key is provided.
-	SendMessage(context.Context, *connect.Request[v1.SendMessageRequest]) (*connect.Response[v1.SendMessageResponse], error)
+	// Send an event (unified message model). Idempotent if idempotency_key is provided.
+	SendEvent(context.Context, *connect.Request[v1.SendEventRequest]) (*connect.Response[v1.SendEventResponse], error)
 	// Fetch history for a room. Cursor-based paging (cursor = opaque server token).
 	GetHistory(context.Context, *connect.Request[v1.GetHistoryRequest]) (*connect.Response[v1.GetHistoryResponse], error)
 	// Room lifecycle & management
@@ -276,16 +334,10 @@ type ChatServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewChatServiceHandler(svc ChatServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	chatServiceMethods := v1.File_chat_v1_chat_proto.Services().ByName("ChatService").Methods()
-	chatServiceConnectHandler := connect.NewBidiStreamHandler(
-		ChatServiceConnectProcedure,
-		svc.Connect,
-		connect.WithSchema(chatServiceMethods.ByName("Connect")),
-		connect.WithHandlerOptions(opts...),
-	)
-	chatServiceSendMessageHandler := connect.NewUnaryHandler(
-		ChatServiceSendMessageProcedure,
-		svc.SendMessage,
-		connect.WithSchema(chatServiceMethods.ByName("SendMessage")),
+	chatServiceSendEventHandler := connect.NewUnaryHandler(
+		ChatServiceSendEventProcedure,
+		svc.SendEvent,
+		connect.WithSchema(chatServiceMethods.ByName("SendEvent")),
 		connect.WithHandlerOptions(opts...),
 	)
 	chatServiceGetHistoryHandler := connect.NewUnaryHandler(
@@ -344,10 +396,8 @@ func NewChatServiceHandler(svc ChatServiceHandler, opts ...connect.HandlerOption
 	)
 	return "/chat.v1.ChatService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case ChatServiceConnectProcedure:
-			chatServiceConnectHandler.ServeHTTP(w, r)
-		case ChatServiceSendMessageProcedure:
-			chatServiceSendMessageHandler.ServeHTTP(w, r)
+		case ChatServiceSendEventProcedure:
+			chatServiceSendEventHandler.ServeHTTP(w, r)
 		case ChatServiceGetHistoryProcedure:
 			chatServiceGetHistoryHandler.ServeHTTP(w, r)
 		case ChatServiceCreateRoomProcedure:
@@ -375,12 +425,8 @@ func NewChatServiceHandler(svc ChatServiceHandler, opts ...connect.HandlerOption
 // UnimplementedChatServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedChatServiceHandler struct{}
 
-func (UnimplementedChatServiceHandler) Connect(context.Context, *connect.BidiStream[v1.ConnectRequest, v1.ServerEvent]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("chat.v1.ChatService.Connect is not implemented"))
-}
-
-func (UnimplementedChatServiceHandler) SendMessage(context.Context, *connect.Request[v1.SendMessageRequest]) (*connect.Response[v1.SendMessageResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("chat.v1.ChatService.SendMessage is not implemented"))
+func (UnimplementedChatServiceHandler) SendEvent(context.Context, *connect.Request[v1.SendEventRequest]) (*connect.Response[v1.SendEventResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("chat.v1.ChatService.SendEvent is not implemented"))
 }
 
 func (UnimplementedChatServiceHandler) GetHistory(context.Context, *connect.Request[v1.GetHistoryRequest]) (*connect.Response[v1.GetHistoryResponse], error) {

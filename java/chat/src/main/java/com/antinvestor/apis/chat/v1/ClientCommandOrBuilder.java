@@ -66,5 +66,32 @@ public interface ClientCommandOrBuilder extends
    */
   com.antinvestor.apis.chat.v1.ReadMarkerOrBuilder getReadMarkerOrBuilder();
 
+  /**
+   * <pre>
+   * send a room event (message) via the stream
+   * </pre>
+   *
+   * <code>.chat.v1.RoomEvent room_event = 3 [json_name = "roomEvent"];</code>
+   * @return Whether the roomEvent field is set.
+   */
+  boolean hasRoomEvent();
+  /**
+   * <pre>
+   * send a room event (message) via the stream
+   * </pre>
+   *
+   * <code>.chat.v1.RoomEvent room_event = 3 [json_name = "roomEvent"];</code>
+   * @return The roomEvent.
+   */
+  com.antinvestor.apis.chat.v1.RoomEvent getRoomEvent();
+  /**
+   * <pre>
+   * send a room event (message) via the stream
+   * </pre>
+   *
+   * <code>.chat.v1.RoomEvent room_event = 3 [json_name = "roomEvent"];</code>
+   */
+  com.antinvestor.apis.chat.v1.RoomEventOrBuilder getRoomEventOrBuilder();
+
   com.antinvestor.apis.chat.v1.ClientCommand.CmdCase getCmdCase();
 }

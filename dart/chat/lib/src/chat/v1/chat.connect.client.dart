@@ -7,7 +7,7 @@ import "package:connectrpc/connect.dart" as connect;
 import "chat.pb.dart" as chatv1chat;
 import "chat.connect.spec.dart" as specs;
 
-extension type ChatServiceClient (connect.Transport _transport) {
+extension type GatewayServiceClient (connect.Transport _transport) {
   /// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
   /// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
   /// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
@@ -19,7 +19,7 @@ extension type ChatServiceClient (connect.Transport _transport) {
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).bidi(
-      specs.ChatService.connect,
+      specs.GatewayService.connect,
       input,
       signal: signal,
       headers: headers,
@@ -27,17 +27,18 @@ extension type ChatServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
-
-  /// Send a message (unified message model). Idempotent if idempotency_key is provided.
-  Future<chatv1chat.SendMessageResponse> sendMessage(
-    chatv1chat.SendMessageRequest input, {
+}
+extension type ChatServiceClient (connect.Transport _transport) {
+  /// Send an event (unified message model). Idempotent if idempotency_key is provided.
+  Future<chatv1chat.SendEventResponse> sendEvent(
+    chatv1chat.SendEventRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.ChatService.sendMessage,
+      specs.ChatService.sendEvent,
       input,
       signal: signal,
       headers: headers,

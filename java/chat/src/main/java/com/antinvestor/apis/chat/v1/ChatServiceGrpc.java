@@ -26,66 +26,35 @@ public final class ChatServiceGrpc {
   public static final java.lang.String SERVICE_NAME = "chat.v1.ChatService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.ConnectRequest,
-      com.antinvestor.apis.chat.v1.ServerEvent> getConnectMethod;
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.SendEventRequest,
+      com.antinvestor.apis.chat.v1.SendEventResponse> getSendEventMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "Connect",
-      requestType = com.antinvestor.apis.chat.v1.ConnectRequest.class,
-      responseType = com.antinvestor.apis.chat.v1.ServerEvent.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.ConnectRequest,
-      com.antinvestor.apis.chat.v1.ServerEvent> getConnectMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.ConnectRequest, com.antinvestor.apis.chat.v1.ServerEvent> getConnectMethod;
-    if ((getConnectMethod = ChatServiceGrpc.getConnectMethod) == null) {
-      synchronized (ChatServiceGrpc.class) {
-        if ((getConnectMethod = ChatServiceGrpc.getConnectMethod) == null) {
-          ChatServiceGrpc.getConnectMethod = getConnectMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.chat.v1.ConnectRequest, com.antinvestor.apis.chat.v1.ServerEvent>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Connect"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.chat.v1.ConnectRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.chat.v1.ServerEvent.getDefaultInstance()))
-              .setSchemaDescriptor(new ChatServiceMethodDescriptorSupplier("Connect"))
-              .build();
-        }
-      }
-    }
-    return getConnectMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.SendMessageRequest,
-      com.antinvestor.apis.chat.v1.SendMessageResponse> getSendMessageMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "SendMessage",
-      requestType = com.antinvestor.apis.chat.v1.SendMessageRequest.class,
-      responseType = com.antinvestor.apis.chat.v1.SendMessageResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "SendEvent",
+      requestType = com.antinvestor.apis.chat.v1.SendEventRequest.class,
+      responseType = com.antinvestor.apis.chat.v1.SendEventResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.SendMessageRequest,
-      com.antinvestor.apis.chat.v1.SendMessageResponse> getSendMessageMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.SendMessageRequest, com.antinvestor.apis.chat.v1.SendMessageResponse> getSendMessageMethod;
-    if ((getSendMessageMethod = ChatServiceGrpc.getSendMessageMethod) == null) {
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.SendEventRequest,
+      com.antinvestor.apis.chat.v1.SendEventResponse> getSendEventMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.SendEventRequest, com.antinvestor.apis.chat.v1.SendEventResponse> getSendEventMethod;
+    if ((getSendEventMethod = ChatServiceGrpc.getSendEventMethod) == null) {
       synchronized (ChatServiceGrpc.class) {
-        if ((getSendMessageMethod = ChatServiceGrpc.getSendMessageMethod) == null) {
-          ChatServiceGrpc.getSendMessageMethod = getSendMessageMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.chat.v1.SendMessageRequest, com.antinvestor.apis.chat.v1.SendMessageResponse>newBuilder()
+        if ((getSendEventMethod = ChatServiceGrpc.getSendEventMethod) == null) {
+          ChatServiceGrpc.getSendEventMethod = getSendEventMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.chat.v1.SendEventRequest, com.antinvestor.apis.chat.v1.SendEventResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SendMessage"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SendEvent"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.chat.v1.SendMessageRequest.getDefaultInstance()))
+                  com.antinvestor.apis.chat.v1.SendEventRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.chat.v1.SendMessageResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new ChatServiceMethodDescriptorSupplier("SendMessage"))
+                  com.antinvestor.apis.chat.v1.SendEventResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ChatServiceMethodDescriptorSupplier("SendEvent"))
               .build();
         }
       }
     }
-    return getSendMessageMethod;
+    return getSendEventMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.GetHistoryRequest,
@@ -432,24 +401,12 @@ public final class ChatServiceGrpc {
 
     /**
      * <pre>
-     * Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
-     * Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
-     * Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
+     * Send an event (unified message model). Idempotent if idempotency_key is provided.
      * </pre>
      */
-    default io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.ConnectRequest> connect(
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.ServerEvent> responseObserver) {
-      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getConnectMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Send a message (unified message model). Idempotent if idempotency_key is provided.
-     * </pre>
-     */
-    default void sendMessage(com.antinvestor.apis.chat.v1.SendMessageRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.SendMessageResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSendMessageMethod(), responseObserver);
+    default void sendEvent(com.antinvestor.apis.chat.v1.SendEventRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.SendEventResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSendEventMethod(), responseObserver);
     }
 
     /**
@@ -554,26 +511,13 @@ public final class ChatServiceGrpc {
 
     /**
      * <pre>
-     * Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
-     * Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
-     * Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
+     * Send an event (unified message model). Idempotent if idempotency_key is provided.
      * </pre>
      */
-    public io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.ConnectRequest> connect(
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.ServerEvent> responseObserver) {
-      return io.grpc.stub.ClientCalls.asyncBidiStreamingCall(
-          getChannel().newCall(getConnectMethod(), getCallOptions()), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Send a message (unified message model). Idempotent if idempotency_key is provided.
-     * </pre>
-     */
-    public void sendMessage(com.antinvestor.apis.chat.v1.SendMessageRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.SendMessageResponse> responseObserver) {
+    public void sendEvent(com.antinvestor.apis.chat.v1.SendEventRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.SendEventResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getSendMessageMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getSendEventMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -676,26 +620,12 @@ public final class ChatServiceGrpc {
 
     /**
      * <pre>
-     * Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
-     * Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
-     * Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
+     * Send an event (unified message model). Idempotent if idempotency_key is provided.
      * </pre>
      */
-    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
-    public io.grpc.stub.BlockingClientCall<com.antinvestor.apis.chat.v1.ConnectRequest, com.antinvestor.apis.chat.v1.ServerEvent>
-        connect() {
-      return io.grpc.stub.ClientCalls.blockingBidiStreamingCall(
-          getChannel(), getConnectMethod(), getCallOptions());
-    }
-
-    /**
-     * <pre>
-     * Send a message (unified message model). Idempotent if idempotency_key is provided.
-     * </pre>
-     */
-    public com.antinvestor.apis.chat.v1.SendMessageResponse sendMessage(com.antinvestor.apis.chat.v1.SendMessageRequest request) throws io.grpc.StatusException {
+    public com.antinvestor.apis.chat.v1.SendEventResponse sendEvent(com.antinvestor.apis.chat.v1.SendEventRequest request) throws io.grpc.StatusException {
       return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
-          getChannel(), getSendMessageMethod(), getCallOptions(), request);
+          getChannel(), getSendEventMethod(), getCallOptions(), request);
     }
 
     /**
@@ -791,12 +721,12 @@ public final class ChatServiceGrpc {
 
     /**
      * <pre>
-     * Send a message (unified message model). Idempotent if idempotency_key is provided.
+     * Send an event (unified message model). Idempotent if idempotency_key is provided.
      * </pre>
      */
-    public com.antinvestor.apis.chat.v1.SendMessageResponse sendMessage(com.antinvestor.apis.chat.v1.SendMessageRequest request) {
+    public com.antinvestor.apis.chat.v1.SendEventResponse sendEvent(com.antinvestor.apis.chat.v1.SendEventRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getSendMessageMethod(), getCallOptions(), request);
+          getChannel(), getSendEventMethod(), getCallOptions(), request);
     }
 
     /**
@@ -891,13 +821,13 @@ public final class ChatServiceGrpc {
 
     /**
      * <pre>
-     * Send a message (unified message model). Idempotent if idempotency_key is provided.
+     * Send an event (unified message model). Idempotent if idempotency_key is provided.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.chat.v1.SendMessageResponse> sendMessage(
-        com.antinvestor.apis.chat.v1.SendMessageRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.chat.v1.SendEventResponse> sendEvent(
+        com.antinvestor.apis.chat.v1.SendEventRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getSendMessageMethod(), getCallOptions()), request);
+          getChannel().newCall(getSendEventMethod(), getCallOptions()), request);
     }
 
     /**
@@ -974,7 +904,7 @@ public final class ChatServiceGrpc {
     }
   }
 
-  private static final int METHODID_SEND_MESSAGE = 0;
+  private static final int METHODID_SEND_EVENT = 0;
   private static final int METHODID_GET_HISTORY = 1;
   private static final int METHODID_CREATE_ROOM = 2;
   private static final int METHODID_SEARCH_ROOMS = 3;
@@ -984,7 +914,6 @@ public final class ChatServiceGrpc {
   private static final int METHODID_REMOVE_ROOM_SUBSCRIPTIONS = 7;
   private static final int METHODID_UPDATE_SUBSCRIPTION_ROLE = 8;
   private static final int METHODID_SEARCH_ROOM_SUBSCRIPTIONS = 9;
-  private static final int METHODID_CONNECT = 10;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1003,9 +932,9 @@ public final class ChatServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_SEND_MESSAGE:
-          serviceImpl.sendMessage((com.antinvestor.apis.chat.v1.SendMessageRequest) request,
-              (io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.SendMessageResponse>) responseObserver);
+        case METHODID_SEND_EVENT:
+          serviceImpl.sendEvent((com.antinvestor.apis.chat.v1.SendEventRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.SendEventResponse>) responseObserver);
           break;
         case METHODID_GET_HISTORY:
           serviceImpl.getHistory((com.antinvestor.apis.chat.v1.GetHistoryRequest) request,
@@ -1053,9 +982,6 @@ public final class ChatServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_CONNECT:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.connect(
-              (io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.ServerEvent>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -1065,19 +991,12 @@ public final class ChatServiceGrpc {
   public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
     return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
         .addMethod(
-          getConnectMethod(),
-          io.grpc.stub.ServerCalls.asyncBidiStreamingCall(
-            new MethodHandlers<
-              com.antinvestor.apis.chat.v1.ConnectRequest,
-              com.antinvestor.apis.chat.v1.ServerEvent>(
-                service, METHODID_CONNECT)))
-        .addMethod(
-          getSendMessageMethod(),
+          getSendEventMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              com.antinvestor.apis.chat.v1.SendMessageRequest,
-              com.antinvestor.apis.chat.v1.SendMessageResponse>(
-                service, METHODID_SEND_MESSAGE)))
+              com.antinvestor.apis.chat.v1.SendEventRequest,
+              com.antinvestor.apis.chat.v1.SendEventResponse>(
+                service, METHODID_SEND_EVENT)))
         .addMethod(
           getGetHistoryMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -1189,8 +1108,7 @@ public final class ChatServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new ChatServiceFileDescriptorSupplier())
-              .addMethod(getConnectMethod())
-              .addMethod(getSendMessageMethod())
+              .addMethod(getSendEventMethod())
               .addMethod(getGetHistoryMethod())
               .addMethod(getCreateRoomMethod())
               .addMethod(getSearchRoomsMethod())

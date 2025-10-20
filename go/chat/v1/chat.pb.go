@@ -813,11 +813,13 @@ func (*ConnectRequest_Command) isConnectRequest_Payload() {}
 
 // Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
 // ack_event_id: last event_id client processed (inclusive).
+// If error is set, indicates the event failed to send/process correctly.
 type StreamAck struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	EventId       string                 `protobuf:"bytes,1,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
 	AckAt         *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=ack_at,json=ackAt,proto3" json:"ack_at,omitempty"`
 	Metadata      *structpb.Struct       `protobuf:"bytes,6,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Error         *ErrorDetail           `protobuf:"bytes,7,opt,name=error,proto3,oneof" json:"error,omitempty"` // if set, indicates failure reason for this event
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -873,13 +875,21 @@ func (x *StreamAck) GetMetadata() *structpb.Struct {
 	return nil
 }
 
-// Generic client commands (typing, read markers that aren't receipts)
+func (x *StreamAck) GetError() *ErrorDetail {
+	if x != nil {
+		return x.Error
+	}
+	return nil
+}
+
+// Generic client commands (typing, read markers that aren't receipts, and room events)
 type ClientCommand struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Cmd:
 	//
 	//	*ClientCommand_Typing
 	//	*ClientCommand_ReadMarker
+	//	*ClientCommand_RoomEvent
 	Cmd           isClientCommand_Cmd `protobuf_oneof:"cmd"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -940,6 +950,15 @@ func (x *ClientCommand) GetReadMarker() *ReadMarker {
 	return nil
 }
 
+func (x *ClientCommand) GetRoomEvent() *RoomEvent {
+	if x != nil {
+		if x, ok := x.Cmd.(*ClientCommand_RoomEvent); ok {
+			return x.RoomEvent
+		}
+	}
+	return nil
+}
+
 type isClientCommand_Cmd interface {
 	isClientCommand_Cmd()
 }
@@ -952,9 +971,15 @@ type ClientCommand_ReadMarker struct {
 	ReadMarker *ReadMarker `protobuf:"bytes,2,opt,name=read_marker,json=readMarker,proto3,oneof"` // marker for "read up to X"
 }
 
+type ClientCommand_RoomEvent struct {
+	RoomEvent *RoomEvent `protobuf:"bytes,3,opt,name=room_event,json=roomEvent,proto3,oneof"` // send a room event (message) via the stream
+}
+
 func (*ClientCommand_Typing) isClientCommand_Cmd() {}
 
 func (*ClientCommand_ReadMarker) isClientCommand_Cmd() {}
+
+func (*ClientCommand_RoomEvent) isClientCommand_Cmd() {}
 
 type TypingUpdate struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1060,27 +1085,27 @@ func (x *ReadMarker) GetUpToEventId() string {
 	return ""
 }
 
-type SendMessageRequest struct {
+type SendEventRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       []*RoomEvent           `protobuf:"bytes,4,rep,name=message,proto3" json:"message,omitempty"` // message payload (server will assign final message_id if empty)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SendMessageRequest) Reset() {
-	*x = SendMessageRequest{}
+func (x *SendEventRequest) Reset() {
+	*x = SendEventRequest{}
 	mi := &file_chat_v1_chat_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SendMessageRequest) String() string {
+func (x *SendEventRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SendMessageRequest) ProtoMessage() {}
+func (*SendEventRequest) ProtoMessage() {}
 
-func (x *SendMessageRequest) ProtoReflect() protoreflect.Message {
+func (x *SendEventRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_chat_v1_chat_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1092,39 +1117,39 @@ func (x *SendMessageRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SendMessageRequest.ProtoReflect.Descriptor instead.
-func (*SendMessageRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SendEventRequest.ProtoReflect.Descriptor instead.
+func (*SendEventRequest) Descriptor() ([]byte, []int) {
 	return file_chat_v1_chat_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *SendMessageRequest) GetMessage() []*RoomEvent {
+func (x *SendEventRequest) GetMessage() []*RoomEvent {
 	if x != nil {
 		return x.Message
 	}
 	return nil
 }
 
-type SendMessageResponse struct {
+type SendEventResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ack           []*StreamAck           `protobuf:"bytes,1,rep,name=ack,proto3" json:"ack,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SendMessageResponse) Reset() {
-	*x = SendMessageResponse{}
+func (x *SendEventResponse) Reset() {
+	*x = SendEventResponse{}
 	mi := &file_chat_v1_chat_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SendMessageResponse) String() string {
+func (x *SendEventResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SendMessageResponse) ProtoMessage() {}
+func (*SendEventResponse) ProtoMessage() {}
 
-func (x *SendMessageResponse) ProtoReflect() protoreflect.Message {
+func (x *SendEventResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_chat_v1_chat_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1136,12 +1161,12 @@ func (x *SendMessageResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SendMessageResponse.ProtoReflect.Descriptor instead.
-func (*SendMessageResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SendEventResponse.ProtoReflect.Descriptor instead.
+func (*SendEventResponse) Descriptor() ([]byte, []int) {
 	return file_chat_v1_chat_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *SendMessageResponse) GetAck() []*StreamAck {
+func (x *SendEventResponse) GetAck() []*StreamAck {
 	if x != nil {
 		return x.Ack
 	}
@@ -2446,15 +2471,19 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\x03ack\x18\n" +
 	" \x01(\v2\x12.chat.v1.StreamAckH\x00R\x03ack\x122\n" +
 	"\acommand\x18\f \x01(\v2\x16.chat.v1.ClientCommandH\x00R\acommandB\t\n" +
-	"\apayload\"\x8e\x01\n" +
+	"\apayload\"\xc9\x01\n" +
 	"\tStreamAck\x12\x19\n" +
 	"\bevent_id\x18\x01 \x01(\tR\aeventId\x121\n" +
 	"\x06ack_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x05ackAt\x123\n" +
-	"\bmetadata\x18\x06 \x01(\v2\x17.google.protobuf.StructR\bmetadata\"\x7f\n" +
+	"\bmetadata\x18\x06 \x01(\v2\x17.google.protobuf.StructR\bmetadata\x12/\n" +
+	"\x05error\x18\a \x01(\v2\x14.chat.v1.ErrorDetailH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\x06_error\"\xb4\x01\n" +
 	"\rClientCommand\x12/\n" +
 	"\x06typing\x18\x01 \x01(\v2\x15.chat.v1.TypingUpdateH\x00R\x06typing\x126\n" +
 	"\vread_marker\x18\x02 \x01(\v2\x13.chat.v1.ReadMarkerH\x00R\n" +
-	"readMarkerB\x05\n" +
+	"readMarker\x123\n" +
+	"\n" +
+	"room_event\x18\x03 \x01(\v2\x12.chat.v1.RoomEventH\x00R\troomEventB\x05\n" +
 	"\x03cmd\"?\n" +
 	"\fTypingUpdate\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12\x16\n" +
@@ -2462,10 +2491,10 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\n" +
 	"ReadMarker\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x12#\n" +
-	"\x0eup_to_event_id\x18\x02 \x01(\tR\vupToEventId\"B\n" +
-	"\x12SendMessageRequest\x12,\n" +
-	"\amessage\x18\x04 \x03(\v2\x12.chat.v1.RoomEventR\amessage\";\n" +
-	"\x13SendMessageResponse\x12$\n" +
+	"\x0eup_to_event_id\x18\x02 \x01(\tR\vupToEventId\"@\n" +
+	"\x10SendEventRequest\x12,\n" +
+	"\amessage\x18\x04 \x03(\v2\x12.chat.v1.RoomEventR\amessage\"9\n" +
+	"\x11SendEventResponse\x12$\n" +
 	"\x03ack\x18\x01 \x03(\v2\x12.chat.v1.StreamAckR\x03ack\"t\n" +
 	"\x11GetHistoryRequest\x12\x17\n" +
 	"\aroom_id\x18\x02 \x01(\tR\x06roomId\x12\x16\n" +
@@ -2585,12 +2614,13 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\x10PRESENCE_OFFLINE\x10\x01\x12\x13\n" +
 	"\x0fPRESENCE_ONLINE\x10\x02\x12\x11\n" +
 	"\rPRESENCE_AWAY\x10\x03\x12\x11\n" +
-	"\rPRESENCE_BUSY\x10\x042\xad\x19\n" +
-	"\vChatService\x12\xef\x02\n" +
+	"\rPRESENCE_BUSY\x10\x042\x82\x03\n" +
+	"\x0eGatewayService\x12\xef\x02\n" +
 	"\aConnect\x12\x17.chat.v1.ConnectRequest\x1a\x14.chat.v1.ServerEvent\"\xb0\x02\xbaG\xac\x02\n" +
-	"\tReal-time\x12-Establish bi-directional streaming connection\x1a\xe6\x01Opens a persistent bi-directional stream for real-time chat events. Clients send ConnectRequest messages (auth, acks, commands) and receive ServerEvent messages in chronological order. Supports session resumption via resume_token.*\aconnect(\x010\x01\x12\x9c\x02\n" +
-	"\vSendMessage\x12\x1b.chat.v1.SendMessageRequest\x1a\x1c.chat.v1.SendMessageResponse\"\xd1\x01\xbaG\xcd\x01\n" +
-	"\bMessages\x12\x18Send a message to a room\x1a\x99\x01Sends one or more messages to chat rooms. Supports text, attachments, reactions, and system messages. Idempotent when idempotency_key header is provided.*\vsendMessage\x12\x88\x02\n" +
+	"\tReal-time\x12-Establish bi-directional streaming connection\x1a\xe6\x01Opens a persistent bi-directional stream for real-time chat events. Clients send ConnectRequest messages (auth, acks, commands) and receive ServerEvent messages in chronological order. Supports session resumption via resume_token.*\aconnect(\x010\x012\xb0\x16\n" +
+	"\vChatService\x12\x91\x02\n" +
+	"\tSendEvent\x12\x19.chat.v1.SendEventRequest\x1a\x1a.chat.v1.SendEventResponse\"\xcc\x01\xbaG\xc8\x01\n" +
+	"\bMessages\x12\x17Send an event to a room\x1a\x97\x01Sends one or more events to chat rooms. Supports text, attachments, reactions, and system messages. Idempotent when idempotency_key header is provided.*\tsendEvent\x12\x88\x02\n" +
 	"\n" +
 	"GetHistory\x12\x1a.chat.v1.GetHistoryRequest\x1a\x1b.chat.v1.GetHistoryResponse\"\xc0\x01\xbaG\xbc\x01\n" +
 	"\bMessages\x12#Retrieve message history for a room\x1a\x7fFetches paginated message history for a specified room using cursor-based navigation. Supports forward and backward pagination.*\n" +
@@ -2655,8 +2685,8 @@ var file_chat_v1_chat_proto_goTypes = []any{
 	(*ClientCommand)(nil),                   // 10: chat.v1.ClientCommand
 	(*TypingUpdate)(nil),                    // 11: chat.v1.TypingUpdate
 	(*ReadMarker)(nil),                      // 12: chat.v1.ReadMarker
-	(*SendMessageRequest)(nil),              // 13: chat.v1.SendMessageRequest
-	(*SendMessageResponse)(nil),             // 14: chat.v1.SendMessageResponse
+	(*SendEventRequest)(nil),                // 13: chat.v1.SendEventRequest
+	(*SendEventResponse)(nil),               // 14: chat.v1.SendEventResponse
 	(*GetHistoryRequest)(nil),               // 15: chat.v1.GetHistoryRequest
 	(*GetHistoryResponse)(nil),              // 16: chat.v1.GetHistoryResponse
 	(*Room)(nil),                            // 17: chat.v1.Room
@@ -2699,57 +2729,59 @@ var file_chat_v1_chat_proto_depIdxs = []int32{
 	10, // 14: chat.v1.ConnectRequest.command:type_name -> chat.v1.ClientCommand
 	36, // 15: chat.v1.StreamAck.ack_at:type_name -> google.protobuf.Timestamp
 	37, // 16: chat.v1.StreamAck.metadata:type_name -> google.protobuf.Struct
-	11, // 17: chat.v1.ClientCommand.typing:type_name -> chat.v1.TypingUpdate
-	12, // 18: chat.v1.ClientCommand.read_marker:type_name -> chat.v1.ReadMarker
-	4,  // 19: chat.v1.SendMessageRequest.message:type_name -> chat.v1.RoomEvent
-	9,  // 20: chat.v1.SendMessageResponse.ack:type_name -> chat.v1.StreamAck
-	3,  // 21: chat.v1.GetHistoryResponse.events:type_name -> chat.v1.ServerEvent
-	37, // 22: chat.v1.Room.metadata:type_name -> google.protobuf.Struct
-	36, // 23: chat.v1.Room.created_at:type_name -> google.protobuf.Timestamp
-	36, // 24: chat.v1.Room.updated_at:type_name -> google.protobuf.Timestamp
-	37, // 25: chat.v1.CreateRoomRequest.metadata:type_name -> google.protobuf.Struct
-	17, // 26: chat.v1.CreateRoomResponse.room:type_name -> chat.v1.Room
-	2,  // 27: chat.v1.CreateRoomResponse.error:type_name -> chat.v1.ErrorDetail
-	37, // 28: chat.v1.SearchRoomsRequest.extras:type_name -> google.protobuf.Struct
-	17, // 29: chat.v1.SearchRoomsResponse.data:type_name -> chat.v1.Room
-	37, // 30: chat.v1.UpdateRoomRequest.metadata:type_name -> google.protobuf.Struct
-	17, // 31: chat.v1.UpdateRoomResponse.room:type_name -> chat.v1.Room
-	2,  // 32: chat.v1.UpdateRoomResponse.error:type_name -> chat.v1.ErrorDetail
-	2,  // 33: chat.v1.DeleteRoomResponse.error:type_name -> chat.v1.ErrorDetail
-	36, // 34: chat.v1.RoomSubscription.joined_at:type_name -> google.protobuf.Timestamp
-	36, // 35: chat.v1.RoomSubscription.last_active:type_name -> google.protobuf.Timestamp
-	26, // 36: chat.v1.AddRoomSubscriptionsRequest.members:type_name -> chat.v1.RoomSubscription
-	2,  // 37: chat.v1.AddRoomSubscriptionsResponse.error:type_name -> chat.v1.ErrorDetail
-	2,  // 38: chat.v1.RemoveRoomSubscriptionsResponse.error:type_name -> chat.v1.ErrorDetail
-	2,  // 39: chat.v1.UpdateSubscriptionRoleResponse.error:type_name -> chat.v1.ErrorDetail
-	26, // 40: chat.v1.SearchRoomSubscriptionsResponse.members:type_name -> chat.v1.RoomSubscription
-	8,  // 41: chat.v1.ChatService.Connect:input_type -> chat.v1.ConnectRequest
-	13, // 42: chat.v1.ChatService.SendMessage:input_type -> chat.v1.SendMessageRequest
-	15, // 43: chat.v1.ChatService.GetHistory:input_type -> chat.v1.GetHistoryRequest
-	18, // 44: chat.v1.ChatService.CreateRoom:input_type -> chat.v1.CreateRoomRequest
-	20, // 45: chat.v1.ChatService.SearchRooms:input_type -> chat.v1.SearchRoomsRequest
-	22, // 46: chat.v1.ChatService.UpdateRoom:input_type -> chat.v1.UpdateRoomRequest
-	24, // 47: chat.v1.ChatService.DeleteRoom:input_type -> chat.v1.DeleteRoomRequest
-	27, // 48: chat.v1.ChatService.AddRoomSubscriptions:input_type -> chat.v1.AddRoomSubscriptionsRequest
-	29, // 49: chat.v1.ChatService.RemoveRoomSubscriptions:input_type -> chat.v1.RemoveRoomSubscriptionsRequest
-	31, // 50: chat.v1.ChatService.UpdateSubscriptionRole:input_type -> chat.v1.UpdateSubscriptionRoleRequest
-	33, // 51: chat.v1.ChatService.SearchRoomSubscriptions:input_type -> chat.v1.SearchRoomSubscriptionsRequest
-	3,  // 52: chat.v1.ChatService.Connect:output_type -> chat.v1.ServerEvent
-	14, // 53: chat.v1.ChatService.SendMessage:output_type -> chat.v1.SendMessageResponse
-	16, // 54: chat.v1.ChatService.GetHistory:output_type -> chat.v1.GetHistoryResponse
-	19, // 55: chat.v1.ChatService.CreateRoom:output_type -> chat.v1.CreateRoomResponse
-	21, // 56: chat.v1.ChatService.SearchRooms:output_type -> chat.v1.SearchRoomsResponse
-	23, // 57: chat.v1.ChatService.UpdateRoom:output_type -> chat.v1.UpdateRoomResponse
-	25, // 58: chat.v1.ChatService.DeleteRoom:output_type -> chat.v1.DeleteRoomResponse
-	28, // 59: chat.v1.ChatService.AddRoomSubscriptions:output_type -> chat.v1.AddRoomSubscriptionsResponse
-	30, // 60: chat.v1.ChatService.RemoveRoomSubscriptions:output_type -> chat.v1.RemoveRoomSubscriptionsResponse
-	32, // 61: chat.v1.ChatService.UpdateSubscriptionRole:output_type -> chat.v1.UpdateSubscriptionRoleResponse
-	34, // 62: chat.v1.ChatService.SearchRoomSubscriptions:output_type -> chat.v1.SearchRoomSubscriptionsResponse
-	52, // [52:63] is the sub-list for method output_type
-	41, // [41:52] is the sub-list for method input_type
-	41, // [41:41] is the sub-list for extension type_name
-	41, // [41:41] is the sub-list for extension extendee
-	0,  // [0:41] is the sub-list for field type_name
+	2,  // 17: chat.v1.StreamAck.error:type_name -> chat.v1.ErrorDetail
+	11, // 18: chat.v1.ClientCommand.typing:type_name -> chat.v1.TypingUpdate
+	12, // 19: chat.v1.ClientCommand.read_marker:type_name -> chat.v1.ReadMarker
+	4,  // 20: chat.v1.ClientCommand.room_event:type_name -> chat.v1.RoomEvent
+	4,  // 21: chat.v1.SendEventRequest.message:type_name -> chat.v1.RoomEvent
+	9,  // 22: chat.v1.SendEventResponse.ack:type_name -> chat.v1.StreamAck
+	3,  // 23: chat.v1.GetHistoryResponse.events:type_name -> chat.v1.ServerEvent
+	37, // 24: chat.v1.Room.metadata:type_name -> google.protobuf.Struct
+	36, // 25: chat.v1.Room.created_at:type_name -> google.protobuf.Timestamp
+	36, // 26: chat.v1.Room.updated_at:type_name -> google.protobuf.Timestamp
+	37, // 27: chat.v1.CreateRoomRequest.metadata:type_name -> google.protobuf.Struct
+	17, // 28: chat.v1.CreateRoomResponse.room:type_name -> chat.v1.Room
+	2,  // 29: chat.v1.CreateRoomResponse.error:type_name -> chat.v1.ErrorDetail
+	37, // 30: chat.v1.SearchRoomsRequest.extras:type_name -> google.protobuf.Struct
+	17, // 31: chat.v1.SearchRoomsResponse.data:type_name -> chat.v1.Room
+	37, // 32: chat.v1.UpdateRoomRequest.metadata:type_name -> google.protobuf.Struct
+	17, // 33: chat.v1.UpdateRoomResponse.room:type_name -> chat.v1.Room
+	2,  // 34: chat.v1.UpdateRoomResponse.error:type_name -> chat.v1.ErrorDetail
+	2,  // 35: chat.v1.DeleteRoomResponse.error:type_name -> chat.v1.ErrorDetail
+	36, // 36: chat.v1.RoomSubscription.joined_at:type_name -> google.protobuf.Timestamp
+	36, // 37: chat.v1.RoomSubscription.last_active:type_name -> google.protobuf.Timestamp
+	26, // 38: chat.v1.AddRoomSubscriptionsRequest.members:type_name -> chat.v1.RoomSubscription
+	2,  // 39: chat.v1.AddRoomSubscriptionsResponse.error:type_name -> chat.v1.ErrorDetail
+	2,  // 40: chat.v1.RemoveRoomSubscriptionsResponse.error:type_name -> chat.v1.ErrorDetail
+	2,  // 41: chat.v1.UpdateSubscriptionRoleResponse.error:type_name -> chat.v1.ErrorDetail
+	26, // 42: chat.v1.SearchRoomSubscriptionsResponse.members:type_name -> chat.v1.RoomSubscription
+	8,  // 43: chat.v1.GatewayService.Connect:input_type -> chat.v1.ConnectRequest
+	13, // 44: chat.v1.ChatService.SendEvent:input_type -> chat.v1.SendEventRequest
+	15, // 45: chat.v1.ChatService.GetHistory:input_type -> chat.v1.GetHistoryRequest
+	18, // 46: chat.v1.ChatService.CreateRoom:input_type -> chat.v1.CreateRoomRequest
+	20, // 47: chat.v1.ChatService.SearchRooms:input_type -> chat.v1.SearchRoomsRequest
+	22, // 48: chat.v1.ChatService.UpdateRoom:input_type -> chat.v1.UpdateRoomRequest
+	24, // 49: chat.v1.ChatService.DeleteRoom:input_type -> chat.v1.DeleteRoomRequest
+	27, // 50: chat.v1.ChatService.AddRoomSubscriptions:input_type -> chat.v1.AddRoomSubscriptionsRequest
+	29, // 51: chat.v1.ChatService.RemoveRoomSubscriptions:input_type -> chat.v1.RemoveRoomSubscriptionsRequest
+	31, // 52: chat.v1.ChatService.UpdateSubscriptionRole:input_type -> chat.v1.UpdateSubscriptionRoleRequest
+	33, // 53: chat.v1.ChatService.SearchRoomSubscriptions:input_type -> chat.v1.SearchRoomSubscriptionsRequest
+	3,  // 54: chat.v1.GatewayService.Connect:output_type -> chat.v1.ServerEvent
+	14, // 55: chat.v1.ChatService.SendEvent:output_type -> chat.v1.SendEventResponse
+	16, // 56: chat.v1.ChatService.GetHistory:output_type -> chat.v1.GetHistoryResponse
+	19, // 57: chat.v1.ChatService.CreateRoom:output_type -> chat.v1.CreateRoomResponse
+	21, // 58: chat.v1.ChatService.SearchRooms:output_type -> chat.v1.SearchRoomsResponse
+	23, // 59: chat.v1.ChatService.UpdateRoom:output_type -> chat.v1.UpdateRoomResponse
+	25, // 60: chat.v1.ChatService.DeleteRoom:output_type -> chat.v1.DeleteRoomResponse
+	28, // 61: chat.v1.ChatService.AddRoomSubscriptions:output_type -> chat.v1.AddRoomSubscriptionsResponse
+	30, // 62: chat.v1.ChatService.RemoveRoomSubscriptions:output_type -> chat.v1.RemoveRoomSubscriptionsResponse
+	32, // 63: chat.v1.ChatService.UpdateSubscriptionRole:output_type -> chat.v1.UpdateSubscriptionRoleResponse
+	34, // 64: chat.v1.ChatService.SearchRoomSubscriptions:output_type -> chat.v1.SearchRoomSubscriptionsResponse
+	54, // [54:65] is the sub-list for method output_type
+	43, // [43:54] is the sub-list for method input_type
+	43, // [43:43] is the sub-list for extension type_name
+	43, // [43:43] is the sub-list for extension extendee
+	0,  // [0:43] is the sub-list for field type_name
 }
 
 func init() { file_chat_v1_chat_proto_init() }
@@ -2767,9 +2799,11 @@ func file_chat_v1_chat_proto_init() {
 		(*ConnectRequest_Ack)(nil),
 		(*ConnectRequest_Command)(nil),
 	}
+	file_chat_v1_chat_proto_msgTypes[7].OneofWrappers = []any{}
 	file_chat_v1_chat_proto_msgTypes[8].OneofWrappers = []any{
 		(*ClientCommand_Typing)(nil),
 		(*ClientCommand_ReadMarker)(nil),
+		(*ClientCommand_RoomEvent)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2779,7 +2813,7 @@ func file_chat_v1_chat_proto_init() {
 			NumEnums:      2,
 			NumMessages:   34,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_chat_v1_chat_proto_goTypes,
 		DependencyIndexes: file_chat_v1_chat_proto_depIdxs,

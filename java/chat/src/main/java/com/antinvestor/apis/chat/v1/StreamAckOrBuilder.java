@@ -65,4 +65,31 @@ public interface StreamAckOrBuilder extends
    * <code>.google.protobuf.Struct metadata = 6 [json_name = "metadata"];</code>
    */
   com.google.protobuf.StructOrBuilder getMetadataOrBuilder();
+
+  /**
+   * <pre>
+   * if set, indicates failure reason for this event
+   * </pre>
+   *
+   * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+   * @return Whether the error field is set.
+   */
+  boolean hasError();
+  /**
+   * <pre>
+   * if set, indicates failure reason for this event
+   * </pre>
+   *
+   * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+   * @return The error.
+   */
+  com.antinvestor.apis.chat.v1.ErrorDetail getError();
+  /**
+   * <pre>
+   * if set, indicates failure reason for this event
+   * </pre>
+   *
+   * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+   */
+  com.antinvestor.apis.chat.v1.ErrorDetailOrBuilder getErrorOrBuilder();
 }

@@ -6,9 +6,9 @@
 import "package:connectrpc/connect.dart" as connect;
 import "chat.pb.dart" as chatv1chat;
 
-abstract final class ChatService {
-  /// Fully-qualified name of the ChatService service.
-  static const name = 'chat.v1.ChatService';
+abstract final class GatewayService {
+  /// Fully-qualified name of the GatewayService service.
+  static const name = 'chat.v1.GatewayService';
 
   /// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
   /// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
@@ -19,13 +19,17 @@ abstract final class ChatService {
     chatv1chat.ConnectRequest.new,
     chatv1chat.ServerEvent.new,
   );
+}
+abstract final class ChatService {
+  /// Fully-qualified name of the ChatService service.
+  static const name = 'chat.v1.ChatService';
 
-  /// Send a message (unified message model). Idempotent if idempotency_key is provided.
-  static const sendMessage = connect.Spec(
-    '/$name/SendMessage',
+  /// Send an event (unified message model). Idempotent if idempotency_key is provided.
+  static const sendEvent = connect.Spec(
+    '/$name/SendEvent',
     connect.StreamType.unary,
-    chatv1chat.SendMessageRequest.new,
-    chatv1chat.SendMessageResponse.new,
+    chatv1chat.SendEventRequest.new,
+    chatv1chat.SendEventResponse.new,
   );
 
   /// Fetch history for a room. Cursor-based paging (cursor = opaque server token).

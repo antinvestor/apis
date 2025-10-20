@@ -48,7 +48,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.AddRoomSubscriptionsResponse'
-  /chat.v1.ChatService/Connect: {}
   /chat.v1.ChatService/CreateRoom:
     post:
       tags:
@@ -235,14 +234,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/chat.v1.SearchRoomSubscriptionsResponse'
   /chat.v1.ChatService/SearchRooms: {}
-  /chat.v1.ChatService/SendMessage:
+  /chat.v1.ChatService/SendEvent:
     post:
       tags:
         - Messages
         - chat.v1.ChatService
-      summary: Send a message to a room
-      description: Sends one or more messages to chat rooms. Supports text, attachments, reactions, and system messages. Idempotent when idempotency_key header is provided.
-      operationId: sendMessage
+      summary: Send an event to a room
+      description: Sends one or more events to chat rooms. Supports text, attachments, reactions, and system messages. Idempotent when idempotency_key header is provided.
+      operationId: sendEvent
       parameters:
         - name: Connect-Protocol-Version
           in: header
@@ -257,7 +256,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/chat.v1.SendMessageRequest'
+              $ref: '#/components/schemas/chat.v1.SendEventRequest'
         required: true
       responses:
         default:
@@ -271,7 +270,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/chat.v1.SendMessageResponse'
+                $ref: '#/components/schemas/chat.v1.SendEventResponse'
   /chat.v1.ChatService/UpdateRoom:
     post:
       tags:
@@ -346,6 +345,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.UpdateSubscriptionRoleResponse'
+  /chat.v1.GatewayService/Connect: {}
 components:
   schemas:
     chat.v1.AddRoomSubscriptionsRequest:
@@ -385,6 +385,14 @@ components:
           required:
             - readMarker
         - properties:
+            roomEvent:
+              title: room_event
+              description: send a room event (message) via the stream
+              $ref: '#/components/schemas/chat.v1.RoomEvent'
+          title: room_event
+          required:
+            - roomEvent
+        - properties:
             typing:
               title: typing
               $ref: '#/components/schemas/chat.v1.TypingUpdate'
@@ -393,7 +401,7 @@ components:
             - typing
       title: ClientCommand
       additionalProperties: false
-      description: Generic client commands (typing, read markers that aren't receipts)
+      description: Generic client commands (typing, read markers that aren't receipts, and room events)
     chat.v1.ConnectRequest:
       type: object
       allOf:
@@ -838,7 +846,7 @@ components:
           title: data
       title: SearchRoomsResponse
       additionalProperties: false
-    chat.v1.SendMessageRequest:
+    chat.v1.SendEventRequest:
       type: object
       properties:
         message:
@@ -847,9 +855,9 @@ components:
             $ref: '#/components/schemas/chat.v1.RoomEvent'
           title: message
           description: message payload (server will assign final message_id if empty)
-      title: SendMessageRequest
+      title: SendEventRequest
       additionalProperties: false
-    chat.v1.SendMessageResponse:
+    chat.v1.SendEventResponse:
       type: object
       properties:
         ack:
@@ -857,7 +865,7 @@ components:
           items:
             $ref: '#/components/schemas/chat.v1.StreamAck'
           title: ack
-      title: SendMessageResponse
+      title: SendEventResponse
       additionalProperties: false
     chat.v1.ServerEvent:
       type: object
@@ -920,11 +928,17 @@ components:
         metadata:
           title: metadata
           $ref: '#/components/schemas/google.protobuf.Struct'
+        error:
+          title: error
+          description: if set, indicates failure reason for this event
+          nullable: true
+          $ref: '#/components/schemas/chat.v1.ErrorDetail'
       title: StreamAck
       additionalProperties: false
       description: |-
         Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
          ack_event_id: last event_id client processed (inclusive).
+         If error is set, indicates the event failed to send/process correctly.
     chat.v1.TypingEvent:
       type: object
       properties:
@@ -1246,4 +1260,5 @@ components:
       bearerFormat: JWT
 security: []
 tags:
+  - name: chat.v1.GatewayService
   - name: chat.v1.ChatService

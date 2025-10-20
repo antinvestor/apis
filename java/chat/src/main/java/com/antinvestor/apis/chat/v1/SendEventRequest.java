@@ -20,13 +20,13 @@
 package com.antinvestor.apis.chat.v1;
 
 /**
- * Protobuf type {@code chat.v1.SendMessageRequest}
+ * Protobuf type {@code chat.v1.SendEventRequest}
  */
 @com.google.protobuf.Generated
-public final class SendMessageRequest extends
+public final class SendEventRequest extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:chat.v1.SendMessageRequest)
-    SendMessageRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:chat.v1.SendEventRequest)
+    SendEventRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -35,27 +35,27 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 33,
       /* patch= */ 0,
       /* suffix= */ "",
-      "SendMessageRequest");
+      "SendEventRequest");
   }
-  // Use SendMessageRequest.newBuilder() to construct.
-  private SendMessageRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use SendEventRequest.newBuilder() to construct.
+  private SendEventRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private SendMessageRequest() {
+  private SendEventRequest() {
     message_ = java.util.Collections.emptyList();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_SendMessageRequest_descriptor;
+    return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_SendEventRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_SendMessageRequest_fieldAccessorTable
+    return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_SendEventRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.antinvestor.apis.chat.v1.SendMessageRequest.class, com.antinvestor.apis.chat.v1.SendMessageRequest.Builder.class);
+            com.antinvestor.apis.chat.v1.SendEventRequest.class, com.antinvestor.apis.chat.v1.SendEventRequest.Builder.class);
   }
 
   public static final int MESSAGE_FIELD_NUMBER = 4;
@@ -159,10 +159,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.antinvestor.apis.chat.v1.SendMessageRequest)) {
+    if (!(obj instanceof com.antinvestor.apis.chat.v1.SendEventRequest)) {
       return super.equals(obj);
     }
-    com.antinvestor.apis.chat.v1.SendMessageRequest other = (com.antinvestor.apis.chat.v1.SendMessageRequest) obj;
+    com.antinvestor.apis.chat.v1.SendEventRequest other = (com.antinvestor.apis.chat.v1.SendEventRequest) obj;
 
     if (!getMessageList()
         .equals(other.getMessageList())) return false;
@@ -186,44 +186,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.SendEventRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.SendEventRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.SendEventRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.SendEventRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest parseFrom(byte[] data)
+  public static com.antinvestor.apis.chat.v1.SendEventRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.SendEventRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest parseFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.chat.v1.SendEventRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.SendEventRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -231,26 +231,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest parseDelimitedFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.chat.v1.SendEventRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest parseDelimitedFrom(
+  public static com.antinvestor.apis.chat.v1.SendEventRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.SendEventRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.SendEventRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -263,7 +263,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.antinvestor.apis.chat.v1.SendMessageRequest prototype) {
+  public static Builder newBuilder(com.antinvestor.apis.chat.v1.SendEventRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -279,26 +279,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code chat.v1.SendMessageRequest}
+   * Protobuf type {@code chat.v1.SendEventRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:chat.v1.SendMessageRequest)
-      com.antinvestor.apis.chat.v1.SendMessageRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:chat.v1.SendEventRequest)
+      com.antinvestor.apis.chat.v1.SendEventRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_SendMessageRequest_descriptor;
+      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_SendEventRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_SendMessageRequest_fieldAccessorTable
+      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_SendEventRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.antinvestor.apis.chat.v1.SendMessageRequest.class, com.antinvestor.apis.chat.v1.SendMessageRequest.Builder.class);
+              com.antinvestor.apis.chat.v1.SendEventRequest.class, com.antinvestor.apis.chat.v1.SendEventRequest.Builder.class);
     }
 
-    // Construct using com.antinvestor.apis.chat.v1.SendMessageRequest.newBuilder()
+    // Construct using com.antinvestor.apis.chat.v1.SendEventRequest.newBuilder()
     private Builder() {
 
     }
@@ -325,17 +325,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_SendMessageRequest_descriptor;
+      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_SendEventRequest_descriptor;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.chat.v1.SendMessageRequest getDefaultInstanceForType() {
-      return com.antinvestor.apis.chat.v1.SendMessageRequest.getDefaultInstance();
+    public com.antinvestor.apis.chat.v1.SendEventRequest getDefaultInstanceForType() {
+      return com.antinvestor.apis.chat.v1.SendEventRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.chat.v1.SendMessageRequest build() {
-      com.antinvestor.apis.chat.v1.SendMessageRequest result = buildPartial();
+    public com.antinvestor.apis.chat.v1.SendEventRequest build() {
+      com.antinvestor.apis.chat.v1.SendEventRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -343,15 +343,15 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.chat.v1.SendMessageRequest buildPartial() {
-      com.antinvestor.apis.chat.v1.SendMessageRequest result = new com.antinvestor.apis.chat.v1.SendMessageRequest(this);
+    public com.antinvestor.apis.chat.v1.SendEventRequest buildPartial() {
+      com.antinvestor.apis.chat.v1.SendEventRequest result = new com.antinvestor.apis.chat.v1.SendEventRequest(this);
       buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartialRepeatedFields(com.antinvestor.apis.chat.v1.SendMessageRequest result) {
+    private void buildPartialRepeatedFields(com.antinvestor.apis.chat.v1.SendEventRequest result) {
       if (messageBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0)) {
           message_ = java.util.Collections.unmodifiableList(message_);
@@ -363,22 +363,22 @@ private static final long serialVersionUID = 0L;
       }
     }
 
-    private void buildPartial0(com.antinvestor.apis.chat.v1.SendMessageRequest result) {
+    private void buildPartial0(com.antinvestor.apis.chat.v1.SendEventRequest result) {
       int from_bitField0_ = bitField0_;
     }
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.antinvestor.apis.chat.v1.SendMessageRequest) {
-        return mergeFrom((com.antinvestor.apis.chat.v1.SendMessageRequest)other);
+      if (other instanceof com.antinvestor.apis.chat.v1.SendEventRequest) {
+        return mergeFrom((com.antinvestor.apis.chat.v1.SendEventRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.antinvestor.apis.chat.v1.SendMessageRequest other) {
-      if (other == com.antinvestor.apis.chat.v1.SendMessageRequest.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.antinvestor.apis.chat.v1.SendEventRequest other) {
+      if (other == com.antinvestor.apis.chat.v1.SendEventRequest.getDefaultInstance()) return this;
       if (messageBuilder_ == null) {
         if (!other.message_.isEmpty()) {
           if (message_.isEmpty()) {
@@ -773,23 +773,23 @@ private static final long serialVersionUID = 0L;
       return messageBuilder_;
     }
 
-    // @@protoc_insertion_point(builder_scope:chat.v1.SendMessageRequest)
+    // @@protoc_insertion_point(builder_scope:chat.v1.SendEventRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:chat.v1.SendMessageRequest)
-  private static final com.antinvestor.apis.chat.v1.SendMessageRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:chat.v1.SendEventRequest)
+  private static final com.antinvestor.apis.chat.v1.SendEventRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.antinvestor.apis.chat.v1.SendMessageRequest();
+    DEFAULT_INSTANCE = new com.antinvestor.apis.chat.v1.SendEventRequest();
   }
 
-  public static com.antinvestor.apis.chat.v1.SendMessageRequest getDefaultInstance() {
+  public static com.antinvestor.apis.chat.v1.SendEventRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<SendMessageRequest>
-      PARSER = new com.google.protobuf.AbstractParser<SendMessageRequest>() {
+  private static final com.google.protobuf.Parser<SendEventRequest>
+      PARSER = new com.google.protobuf.AbstractParser<SendEventRequest>() {
     @java.lang.Override
-    public SendMessageRequest parsePartialFrom(
+    public SendEventRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -808,17 +808,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<SendMessageRequest> parser() {
+  public static com.google.protobuf.Parser<SendEventRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<SendMessageRequest> getParserForType() {
+  public com.google.protobuf.Parser<SendEventRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.antinvestor.apis.chat.v1.SendMessageRequest getDefaultInstanceForType() {
+  public com.antinvestor.apis.chat.v1.SendEventRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

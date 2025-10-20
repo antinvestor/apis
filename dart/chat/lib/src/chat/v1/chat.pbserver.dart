@@ -20,11 +20,37 @@ import 'chat.pbjson.dart';
 
 export 'chat.pb.dart';
 
-abstract class ChatServiceBase extends $pb.GeneratedService {
+abstract class GatewayServiceBase extends $pb.GeneratedService {
   $async.Future<$2.ServerEvent> connect(
       $pb.ServerContext ctx, $2.ConnectRequest request);
-  $async.Future<$2.SendMessageResponse> sendMessage(
-      $pb.ServerContext ctx, $2.SendMessageRequest request);
+
+  $pb.GeneratedMessage createRequest($core.String methodName) {
+    switch (methodName) {
+      case 'Connect':
+        return $2.ConnectRequest();
+      default:
+        throw $core.ArgumentError('Unknown method: $methodName');
+    }
+  }
+
+  $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx,
+      $core.String methodName, $pb.GeneratedMessage request) {
+    switch (methodName) {
+      case 'Connect':
+        return connect(ctx, request as $2.ConnectRequest);
+      default:
+        throw $core.ArgumentError('Unknown method: $methodName');
+    }
+  }
+
+  $core.Map<$core.String, $core.dynamic> get $json => GatewayServiceBase$json;
+  $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
+      get $messageJson => GatewayServiceBase$messageJson;
+}
+
+abstract class ChatServiceBase extends $pb.GeneratedService {
+  $async.Future<$2.SendEventResponse> sendEvent(
+      $pb.ServerContext ctx, $2.SendEventRequest request);
   $async.Future<$2.GetHistoryResponse> getHistory(
       $pb.ServerContext ctx, $2.GetHistoryRequest request);
   $async.Future<$2.CreateRoomResponse> createRoom(
@@ -46,10 +72,8 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
-      case 'Connect':
-        return $2.ConnectRequest();
-      case 'SendMessage':
-        return $2.SendMessageRequest();
+      case 'SendEvent':
+        return $2.SendEventRequest();
       case 'GetHistory':
         return $2.GetHistoryRequest();
       case 'CreateRoom':
@@ -76,10 +100,8 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
   $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx,
       $core.String methodName, $pb.GeneratedMessage request) {
     switch (methodName) {
-      case 'Connect':
-        return connect(ctx, request as $2.ConnectRequest);
-      case 'SendMessage':
-        return sendMessage(ctx, request as $2.SendMessageRequest);
+      case 'SendEvent':
+        return sendEvent(ctx, request as $2.SendEventRequest);
       case 'GetHistory':
         return getHistory(ctx, request as $2.GetHistoryRequest);
       case 'CreateRoom':

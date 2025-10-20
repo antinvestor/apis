@@ -20,8 +20,8 @@
 package com.antinvestor.apis.chat.v1;
 
 @com.google.protobuf.Generated
-public interface SendMessageRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:chat.v1.SendMessageRequest)
+public interface SendEventRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:chat.v1.SendEventRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**
