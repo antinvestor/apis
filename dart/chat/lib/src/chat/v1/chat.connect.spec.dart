@@ -6,9 +6,9 @@
 import "package:connectrpc/connect.dart" as connect;
 import "chat.pb.dart" as chatv1chat;
 
-abstract final class StreamService {
-  /// Fully-qualified name of the StreamService service.
-  static const name = 'chat.v1.StreamService';
+abstract final class GatewayService {
+  /// Fully-qualified name of the GatewayService service.
+  static const name = 'chat.v1.GatewayService';
 
   /// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
   /// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.

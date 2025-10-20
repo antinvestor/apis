@@ -19,11 +19,11 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @io.grpc.stub.annotations.GrpcGenerated
-public final class StreamServiceGrpc {
+public final class GatewayServiceGrpc {
 
-  private StreamServiceGrpc() {}
+  private GatewayServiceGrpc() {}
 
-  public static final java.lang.String SERVICE_NAME = "chat.v1.StreamService";
+  public static final java.lang.String SERVICE_NAME = "chat.v1.GatewayService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.ConnectRequest,
@@ -37,10 +37,10 @@ public final class StreamServiceGrpc {
   public static io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.ConnectRequest,
       com.antinvestor.apis.chat.v1.ServerEvent> getConnectMethod() {
     io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.ConnectRequest, com.antinvestor.apis.chat.v1.ServerEvent> getConnectMethod;
-    if ((getConnectMethod = StreamServiceGrpc.getConnectMethod) == null) {
-      synchronized (StreamServiceGrpc.class) {
-        if ((getConnectMethod = StreamServiceGrpc.getConnectMethod) == null) {
-          StreamServiceGrpc.getConnectMethod = getConnectMethod =
+    if ((getConnectMethod = GatewayServiceGrpc.getConnectMethod) == null) {
+      synchronized (GatewayServiceGrpc.class) {
+        if ((getConnectMethod = GatewayServiceGrpc.getConnectMethod) == null) {
+          GatewayServiceGrpc.getConnectMethod = getConnectMethod =
               io.grpc.MethodDescriptor.<com.antinvestor.apis.chat.v1.ConnectRequest, com.antinvestor.apis.chat.v1.ServerEvent>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Connect"))
@@ -49,7 +49,7 @@ public final class StreamServiceGrpc {
                   com.antinvestor.apis.chat.v1.ConnectRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.antinvestor.apis.chat.v1.ServerEvent.getDefaultInstance()))
-              .setSchemaDescriptor(new StreamServiceMethodDescriptorSupplier("Connect"))
+              .setSchemaDescriptor(new GatewayServiceMethodDescriptorSupplier("Connect"))
               .build();
         }
       }
@@ -60,60 +60,60 @@ public final class StreamServiceGrpc {
   /**
    * Creates a new async stub that supports all call types for the service
    */
-  public static StreamServiceStub newStub(io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<StreamServiceStub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<StreamServiceStub>() {
+  public static GatewayServiceStub newStub(io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<GatewayServiceStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<GatewayServiceStub>() {
         @java.lang.Override
-        public StreamServiceStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new StreamServiceStub(channel, callOptions);
+        public GatewayServiceStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new GatewayServiceStub(channel, callOptions);
         }
       };
-    return StreamServiceStub.newStub(factory, channel);
+    return GatewayServiceStub.newStub(factory, channel);
   }
 
   /**
    * Creates a new blocking-style stub that supports all types of calls on the service
    */
-  public static StreamServiceBlockingV2Stub newBlockingV2Stub(
+  public static GatewayServiceBlockingV2Stub newBlockingV2Stub(
       io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<StreamServiceBlockingV2Stub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<StreamServiceBlockingV2Stub>() {
+    io.grpc.stub.AbstractStub.StubFactory<GatewayServiceBlockingV2Stub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<GatewayServiceBlockingV2Stub>() {
         @java.lang.Override
-        public StreamServiceBlockingV2Stub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new StreamServiceBlockingV2Stub(channel, callOptions);
+        public GatewayServiceBlockingV2Stub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new GatewayServiceBlockingV2Stub(channel, callOptions);
         }
       };
-    return StreamServiceBlockingV2Stub.newStub(factory, channel);
+    return GatewayServiceBlockingV2Stub.newStub(factory, channel);
   }
 
   /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
-  public static StreamServiceBlockingStub newBlockingStub(
+  public static GatewayServiceBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<StreamServiceBlockingStub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<StreamServiceBlockingStub>() {
+    io.grpc.stub.AbstractStub.StubFactory<GatewayServiceBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<GatewayServiceBlockingStub>() {
         @java.lang.Override
-        public StreamServiceBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new StreamServiceBlockingStub(channel, callOptions);
+        public GatewayServiceBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new GatewayServiceBlockingStub(channel, callOptions);
         }
       };
-    return StreamServiceBlockingStub.newStub(factory, channel);
+    return GatewayServiceBlockingStub.newStub(factory, channel);
   }
 
   /**
    * Creates a new ListenableFuture-style stub that supports unary calls on the service
    */
-  public static StreamServiceFutureStub newFutureStub(
+  public static GatewayServiceFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<StreamServiceFutureStub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<StreamServiceFutureStub>() {
+    io.grpc.stub.AbstractStub.StubFactory<GatewayServiceFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<GatewayServiceFutureStub>() {
         @java.lang.Override
-        public StreamServiceFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new StreamServiceFutureStub(channel, callOptions);
+        public GatewayServiceFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new GatewayServiceFutureStub(channel, callOptions);
         }
       };
-    return StreamServiceFutureStub.newStub(factory, channel);
+    return GatewayServiceFutureStub.newStub(factory, channel);
   }
 
   /**
@@ -134,30 +134,30 @@ public final class StreamServiceGrpc {
   }
 
   /**
-   * Base class for the server implementation of the service StreamService.
+   * Base class for the server implementation of the service GatewayService.
    */
-  public static abstract class StreamServiceImplBase
+  public static abstract class GatewayServiceImplBase
       implements io.grpc.BindableService, AsyncService {
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
-      return StreamServiceGrpc.bindService(this);
+      return GatewayServiceGrpc.bindService(this);
     }
   }
 
   /**
-   * A stub to allow clients to do asynchronous rpc calls to service StreamService.
+   * A stub to allow clients to do asynchronous rpc calls to service GatewayService.
    */
-  public static final class StreamServiceStub
-      extends io.grpc.stub.AbstractAsyncStub<StreamServiceStub> {
-    private StreamServiceStub(
+  public static final class GatewayServiceStub
+      extends io.grpc.stub.AbstractAsyncStub<GatewayServiceStub> {
+    private GatewayServiceStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected StreamServiceStub build(
+    protected GatewayServiceStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new StreamServiceStub(channel, callOptions);
+      return new GatewayServiceStub(channel, callOptions);
     }
 
     /**
@@ -175,19 +175,19 @@ public final class StreamServiceGrpc {
   }
 
   /**
-   * A stub to allow clients to do synchronous rpc calls to service StreamService.
+   * A stub to allow clients to do synchronous rpc calls to service GatewayService.
    */
-  public static final class StreamServiceBlockingV2Stub
-      extends io.grpc.stub.AbstractBlockingStub<StreamServiceBlockingV2Stub> {
-    private StreamServiceBlockingV2Stub(
+  public static final class GatewayServiceBlockingV2Stub
+      extends io.grpc.stub.AbstractBlockingStub<GatewayServiceBlockingV2Stub> {
+    private GatewayServiceBlockingV2Stub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected StreamServiceBlockingV2Stub build(
+    protected GatewayServiceBlockingV2Stub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new StreamServiceBlockingV2Stub(channel, callOptions);
+      return new GatewayServiceBlockingV2Stub(channel, callOptions);
     }
 
     /**
@@ -206,36 +206,36 @@ public final class StreamServiceGrpc {
   }
 
   /**
-   * A stub to allow clients to do limited synchronous rpc calls to service StreamService.
+   * A stub to allow clients to do limited synchronous rpc calls to service GatewayService.
    */
-  public static final class StreamServiceBlockingStub
-      extends io.grpc.stub.AbstractBlockingStub<StreamServiceBlockingStub> {
-    private StreamServiceBlockingStub(
+  public static final class GatewayServiceBlockingStub
+      extends io.grpc.stub.AbstractBlockingStub<GatewayServiceBlockingStub> {
+    private GatewayServiceBlockingStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected StreamServiceBlockingStub build(
+    protected GatewayServiceBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new StreamServiceBlockingStub(channel, callOptions);
+      return new GatewayServiceBlockingStub(channel, callOptions);
     }
   }
 
   /**
-   * A stub to allow clients to do ListenableFuture-style rpc calls to service StreamService.
+   * A stub to allow clients to do ListenableFuture-style rpc calls to service GatewayService.
    */
-  public static final class StreamServiceFutureStub
-      extends io.grpc.stub.AbstractFutureStub<StreamServiceFutureStub> {
-    private StreamServiceFutureStub(
+  public static final class GatewayServiceFutureStub
+      extends io.grpc.stub.AbstractFutureStub<GatewayServiceFutureStub> {
+    private GatewayServiceFutureStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected StreamServiceFutureStub build(
+    protected GatewayServiceFutureStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new StreamServiceFutureStub(channel, callOptions);
+      return new GatewayServiceFutureStub(channel, callOptions);
     }
   }
 
@@ -289,9 +289,9 @@ public final class StreamServiceGrpc {
         .build();
   }
 
-  private static abstract class StreamServiceBaseDescriptorSupplier
+  private static abstract class GatewayServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
-    StreamServiceBaseDescriptorSupplier() {}
+    GatewayServiceBaseDescriptorSupplier() {}
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
@@ -300,21 +300,21 @@ public final class StreamServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
-      return getFileDescriptor().findServiceByName("StreamService");
+      return getFileDescriptor().findServiceByName("GatewayService");
     }
   }
 
-  private static final class StreamServiceFileDescriptorSupplier
-      extends StreamServiceBaseDescriptorSupplier {
-    StreamServiceFileDescriptorSupplier() {}
+  private static final class GatewayServiceFileDescriptorSupplier
+      extends GatewayServiceBaseDescriptorSupplier {
+    GatewayServiceFileDescriptorSupplier() {}
   }
 
-  private static final class StreamServiceMethodDescriptorSupplier
-      extends StreamServiceBaseDescriptorSupplier
+  private static final class GatewayServiceMethodDescriptorSupplier
+      extends GatewayServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
     private final java.lang.String methodName;
 
-    StreamServiceMethodDescriptorSupplier(java.lang.String methodName) {
+    GatewayServiceMethodDescriptorSupplier(java.lang.String methodName) {
       this.methodName = methodName;
     }
 
@@ -329,11 +329,11 @@ public final class StreamServiceGrpc {
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     io.grpc.ServiceDescriptor result = serviceDescriptor;
     if (result == null) {
-      synchronized (StreamServiceGrpc.class) {
+      synchronized (GatewayServiceGrpc.class) {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new StreamServiceFileDescriptorSupplier())
+              .setSchemaDescriptor(new GatewayServiceFileDescriptorSupplier())
               .addMethod(getConnectMethod())
               .build();
         }

@@ -20,7 +20,7 @@ import 'chat.pbjson.dart';
 
 export 'chat.pb.dart';
 
-abstract class StreamServiceBase extends $pb.GeneratedService {
+abstract class GatewayServiceBase extends $pb.GeneratedService {
   $async.Future<$2.ServerEvent> connect(
       $pb.ServerContext ctx, $2.ConnectRequest request);
 
@@ -43,9 +43,9 @@ abstract class StreamServiceBase extends $pb.GeneratedService {
     }
   }
 
-  $core.Map<$core.String, $core.dynamic> get $json => StreamServiceBase$json;
+  $core.Map<$core.String, $core.dynamic> get $json => GatewayServiceBase$json;
   $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-      get $messageJson => StreamServiceBase$messageJson;
+      get $messageJson => GatewayServiceBase$messageJson;
 }
 
 abstract class ChatServiceBase extends $pb.GeneratedService {

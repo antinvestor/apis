@@ -361,110 +361,110 @@ public final class ChatProto extends com.google.protobuf.GeneratedFile {
       "PE_CUSTOM\020d*w\n\016PresenceStatus\022\024\n\020PRESENC" +
       "E_UNKNOWN\020\000\022\024\n\020PRESENCE_OFFLINE\020\001\022\023\n\017PRE" +
       "SENCE_ONLINE\020\002\022\021\n\rPRESENCE_AWAY\020\003\022\021\n\rPRE" +
-      "SENCE_BUSY\020\0042\201\003\n\rStreamService\022\357\002\n\007Conne" +
-      "ct\022\027.chat.v1.ConnectRequest\032\024.chat.v1.Se" +
-      "rverEvent\"\260\002\272G\254\002\n\tReal-time\022-Establish b" +
-      "i-directional streaming connection\032\346\001Ope" +
-      "ns a persistent bi-directional stream fo" +
-      "r real-time chat events. Clients send Co" +
-      "nnectRequest messages (auth, acks, comma" +
-      "nds) and receive ServerEvent messages in" +
-      " chronological order. Supports session r" +
-      "esumption via resume_token.*\007connect(\0010\001" +
-      "2\260\026\n\013ChatService\022\221\002\n\tSendEvent\022\031.chat.v1" +
-      ".SendEventRequest\032\032.chat.v1.SendEventRes" +
-      "ponse\"\314\001\272G\310\001\n\010Messages\022\027Send an event to" +
-      " a room\032\227\001Sends one or more events to ch" +
-      "at rooms. Supports text, attachments, re" +
-      "actions, and system messages. Idempotent" +
-      " when idempotency_key header is provided" +
-      ".*\tsendEvent\022\210\002\n\nGetHistory\022\032.chat.v1.Ge" +
-      "tHistoryRequest\032\033.chat.v1.GetHistoryResp" +
-      "onse\"\300\001\272G\274\001\n\010Messages\022#Retrieve message " +
-      "history for a room\032\177Fetches paginated me" +
-      "ssage history for a specified room using" +
-      " cursor-based navigation. Supports forwa" +
-      "rd and backward pagination.*\ngetHistory\022" +
-      "\235\002\n\nCreateRoom\022\032.chat.v1.CreateRoomReque" +
-      "st\032\033.chat.v1.CreateRoomResponse\"\325\001\272G\321\001\n\005" +
-      "Rooms\022\026Create a new chat room\032\243\001Creates " +
-      "a new chat room with specified configura" +
-      "tion. The creator is automatically added" +
-      " as a member with owner privileges. Supp" +
-      "orts both public and private rooms.*\ncre" +
-      "ateRoom\022\233\002\n\013SearchRooms\022\033.chat.v1.Search" +
-      "RoomsRequest\032\034.chat.v1.SearchRoomsRespon" +
-      "se\"\316\001\272G\312\001\n\005Rooms\022\025Search for chat rooms\032" +
-      "\234\001Searches for chat rooms matching the s" +
-      "pecified criteria. Returns a stream of m" +
-      "atching rooms. Supports filtering by que" +
-      "ry, date range, and custom properties.*\013" +
-      "searchRooms0\001\022\207\002\n\nUpdateRoom\022\032.chat.v1.U" +
-      "pdateRoomRequest\032\033.chat.v1.UpdateRoomRes" +
-      "ponse\"\277\001\272G\273\001\n\005Rooms\022\022Update a chat room\032" +
-      "\221\001Updates the configuration of an existi" +
-      "ng chat room including name, topic, and " +
-      "metadata. Only room owners and moderator" +
-      "s can update room settings.*\nupdateRoom\022" +
-      "\353\001\n\nDeleteRoom\022\032.chat.v1.DeleteRoomReque" +
-      "st\032\033.chat.v1.DeleteRoomResponse\"\243\001\272G\237\001\n\005" +
-      "Rooms\022\022Delete a chat room\032vPermanently d" +
-      "eletes a chat room and all its messages." +
-      " This action cannot be undone. Only room" +
-      " owners can delete rooms.*\ndeleteRoom\022\255\002" +
-      "\n\024AddRoomSubscriptions\022$.chat.v1.AddRoom" +
-      "SubscriptionsRequest\032%.chat.v1.AddRoomSu" +
-      "bscriptionsResponse\"\307\001\272G\303\001\n\rSubscription" +
-      "s\022\025Add members to a room\032\204\001Adds one or m" +
-      "ore users to a chat room with specified " +
-      "roles. The requesting user must have own" +
+      "SENCE_BUSY\020\0042\202\003\n\016GatewayService\022\357\002\n\007Conn" +
+      "ect\022\027.chat.v1.ConnectRequest\032\024.chat.v1.S" +
+      "erverEvent\"\260\002\272G\254\002\n\tReal-time\022-Establish " +
+      "bi-directional streaming connection\032\346\001Op" +
+      "ens a persistent bi-directional stream f" +
+      "or real-time chat events. Clients send C" +
+      "onnectRequest messages (auth, acks, comm" +
+      "ands) and receive ServerEvent messages i" +
+      "n chronological order. Supports session " +
+      "resumption via resume_token.*\007connect(\0010" +
+      "\0012\260\026\n\013ChatService\022\221\002\n\tSendEvent\022\031.chat.v" +
+      "1.SendEventRequest\032\032.chat.v1.SendEventRe" +
+      "sponse\"\314\001\272G\310\001\n\010Messages\022\027Send an event t" +
+      "o a room\032\227\001Sends one or more events to c" +
+      "hat rooms. Supports text, attachments, r" +
+      "eactions, and system messages. Idempoten" +
+      "t when idempotency_key header is provide" +
+      "d.*\tsendEvent\022\210\002\n\nGetHistory\022\032.chat.v1.G" +
+      "etHistoryRequest\032\033.chat.v1.GetHistoryRes" +
+      "ponse\"\300\001\272G\274\001\n\010Messages\022#Retrieve message" +
+      " history for a room\032\177Fetches paginated m" +
+      "essage history for a specified room usin" +
+      "g cursor-based navigation. Supports forw" +
+      "ard and backward pagination.*\ngetHistory" +
+      "\022\235\002\n\nCreateRoom\022\032.chat.v1.CreateRoomRequ" +
+      "est\032\033.chat.v1.CreateRoomResponse\"\325\001\272G\321\001\n" +
+      "\005Rooms\022\026Create a new chat room\032\243\001Creates" +
+      " a new chat room with specified configur" +
+      "ation. The creator is automatically adde" +
+      "d as a member with owner privileges. Sup" +
+      "ports both public and private rooms.*\ncr" +
+      "eateRoom\022\233\002\n\013SearchRooms\022\033.chat.v1.Searc" +
+      "hRoomsRequest\032\034.chat.v1.SearchRoomsRespo" +
+      "nse\"\316\001\272G\312\001\n\005Rooms\022\025Search for chat rooms" +
+      "\032\234\001Searches for chat rooms matching the " +
+      "specified criteria. Returns a stream of " +
+      "matching rooms. Supports filtering by qu" +
+      "ery, date range, and custom properties.*" +
+      "\013searchRooms0\001\022\207\002\n\nUpdateRoom\022\032.chat.v1." +
+      "UpdateRoomRequest\032\033.chat.v1.UpdateRoomRe" +
+      "sponse\"\277\001\272G\273\001\n\005Rooms\022\022Update a chat room" +
+      "\032\221\001Updates the configuration of an exist" +
+      "ing chat room including name, topic, and" +
+      " metadata. Only room owners and moderato" +
+      "rs can update room settings.*\nupdateRoom" +
+      "\022\353\001\n\nDeleteRoom\022\032.chat.v1.DeleteRoomRequ" +
+      "est\032\033.chat.v1.DeleteRoomResponse\"\243\001\272G\237\001\n" +
+      "\005Rooms\022\022Delete a chat room\032vPermanently " +
+      "deletes a chat room and all its messages" +
+      ". This action cannot be undone. Only roo" +
+      "m owners can delete rooms.*\ndeleteRoom\022\255" +
+      "\002\n\024AddRoomSubscriptions\022$.chat.v1.AddRoo" +
+      "mSubscriptionsRequest\032%.chat.v1.AddRoomS" +
+      "ubscriptionsResponse\"\307\001\272G\303\001\n\rSubscriptio" +
+      "ns\022\025Add members to a room\032\204\001Adds one or " +
+      "more users to a chat room with specified" +
+      " roles. The requesting user must have ow" +
+      "ner or moderator privileges in the room." +
+      "*\024addRoomSubscriptions\022\312\002\n\027RemoveRoomSub" +
+      "scriptions\022\'.chat.v1.RemoveRoomSubscript" +
+      "ionsRequest\032(.chat.v1.RemoveRoomSubscrip" +
+      "tionsResponse\"\333\001\272G\327\001\n\rSubscriptions\022\032Rem" +
+      "ove members from a room\032\220\001Removes one or" +
+      " more users from a chat room. The reques" +
+      "ting user must have owner or moderator p" +
+      "rivileges in the room, unless removing t" +
+      "hemselves.*\027removeRoomSubscriptions\022\261\002\n\026" +
+      "UpdateSubscriptionRole\022&.chat.v1.UpdateS" +
+      "ubscriptionRoleRequest\032\'.chat.v1.UpdateS" +
+      "ubscriptionRoleResponse\"\305\001\272G\301\001\n\rSubscrip" +
+      "tions\022 Update a member\'s role in a room\032" +
+      "vUpdates the role(s) of a user in a chat" +
+      " room. The requesting user must have own" +
       "er or moderator privileges in the room.*" +
-      "\024addRoomSubscriptions\022\312\002\n\027RemoveRoomSubs" +
-      "criptions\022\'.chat.v1.RemoveRoomSubscripti" +
-      "onsRequest\032(.chat.v1.RemoveRoomSubscript" +
-      "ionsResponse\"\333\001\272G\327\001\n\rSubscriptions\022\032Remo" +
-      "ve members from a room\032\220\001Removes one or " +
-      "more users from a chat room. The request" +
-      "ing user must have owner or moderator pr" +
-      "ivileges in the room, unless removing th" +
-      "emselves.*\027removeRoomSubscriptions\022\261\002\n\026U" +
-      "pdateSubscriptionRole\022&.chat.v1.UpdateSu" +
-      "bscriptionRoleRequest\032\'.chat.v1.UpdateSu" +
-      "bscriptionRoleResponse\"\305\001\272G\301\001\n\rSubscript" +
-      "ions\022 Update a member\'s role in a room\032v" +
-      "Updates the role(s) of a user in a chat " +
-      "room. The requesting user must have owne" +
-      "r or moderator privileges in the room.*\026" +
-      "updateSubscriptionRole\022\232\002\n\027SearchRoomSub" +
-      "scriptions\022\'.chat.v1.SearchRoomSubscript" +
-      "ionsRequest\032(.chat.v1.SearchRoomSubscrip" +
-      "tionsResponse\"\253\001\272G\247\001\n\rSubscriptions\022\021Lis" +
-      "t room members\032jRetrieves a paginated li" +
-      "st of users subscribed to a room, along " +
-      "with their roles and activity informatio" +
-      "n.*\027searchRoomSubscriptionsB\350\006\n\034com.anti" +
-      "nvestor.apis.chat.v1B\tChatProtoP\001Z-githu" +
-      "b.com/antinvestor/apis/go/chat/v1;chatv1" +
-      "\242\002\003CXX\252\002\007Chat.V1\312\002\007Chat\\V1\342\002\023Chat\\V1\\GPB" +
-      "Metadata\352\002\010Chat::V1\272G\317\005\022\243\005\n\014Chat Service" +
-      "\022\350\003The Chat Service provides endpoints f" +
-      "or real-time, secure messaging between u" +
-      "sers and devices. It supports sending, r" +
-      "eceiving, and synchronizing messages acr" +
-      "oss rooms, direct chats, and group conve" +
-      "rsations, with optional end-to-end encry" +
-      "ption. The service is designed for mobil" +
-      "e, desktop, and web clients, supporting " +
-      "both streaming and standard request-resp" +
-      "onse operations. APIs are consistent, we" +
-      "ll-structured, and optimized for low-lat" +
-      "ency delivery, even on limited network c" +
-      "onnections.\"U\n\020Ant Investor Ltd\022+https:/" +
-      "/github.com/antinvestor/service-chat\032\024in" +
-      "fo@antinvestor.com*I\n\016Apache License\0227ht" +
-      "tps://github.com/antinvestor/apis/blob/m" +
-      "aster/LICENSE2\006v1.0.0*\':%\n#\n\nBearerAuth\022" +
-      "\025\n\023\n\004http*\006bearer2\003JWTb\006proto3"
+      "\026updateSubscriptionRole\022\232\002\n\027SearchRoomSu" +
+      "bscriptions\022\'.chat.v1.SearchRoomSubscrip" +
+      "tionsRequest\032(.chat.v1.SearchRoomSubscri" +
+      "ptionsResponse\"\253\001\272G\247\001\n\rSubscriptions\022\021Li" +
+      "st room members\032jRetrieves a paginated l" +
+      "ist of users subscribed to a room, along" +
+      " with their roles and activity informati" +
+      "on.*\027searchRoomSubscriptionsB\350\006\n\034com.ant" +
+      "investor.apis.chat.v1B\tChatProtoP\001Z-gith" +
+      "ub.com/antinvestor/apis/go/chat/v1;chatv" +
+      "1\242\002\003CXX\252\002\007Chat.V1\312\002\007Chat\\V1\342\002\023Chat\\V1\\GP" +
+      "BMetadata\352\002\010Chat::V1\272G\317\005\022\243\005\n\014Chat Servic" +
+      "e\022\350\003The Chat Service provides endpoints " +
+      "for real-time, secure messaging between " +
+      "users and devices. It supports sending, " +
+      "receiving, and synchronizing messages ac" +
+      "ross rooms, direct chats, and group conv" +
+      "ersations, with optional end-to-end encr" +
+      "yption. The service is designed for mobi" +
+      "le, desktop, and web clients, supporting" +
+      " both streaming and standard request-res" +
+      "ponse operations. APIs are consistent, w" +
+      "ell-structured, and optimized for low-la" +
+      "tency delivery, even on limited network " +
+      "connections.\"U\n\020Ant Investor Ltd\022+https:" +
+      "//github.com/antinvestor/service-chat\032\024i" +
+      "nfo@antinvestor.com*I\n\016Apache License\0227h" +
+      "ttps://github.com/antinvestor/apis/blob/" +
+      "master/LICENSE2\006v1.0.0*\':%\n#\n\nBearerAuth" +
+      "\022\025\n\023\n\004http*\006bearer2\003JWTb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

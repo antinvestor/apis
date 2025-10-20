@@ -7,7 +7,7 @@ import "package:connectrpc/connect.dart" as connect;
 import "chat.pb.dart" as chatv1chat;
 import "chat.connect.spec.dart" as specs;
 
-extension type StreamServiceClient (connect.Transport _transport) {
+extension type GatewayServiceClient (connect.Transport _transport) {
   /// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
   /// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
   /// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
@@ -19,7 +19,7 @@ extension type StreamServiceClient (connect.Transport _transport) {
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).bidi(
-      specs.StreamService.connect,
+      specs.GatewayService.connect,
       input,
       signal: signal,
       headers: headers,

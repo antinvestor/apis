@@ -35,8 +35,8 @@ import (
 const _ = connect.IsAtLeastVersion1_13_0
 
 const (
-	// StreamServiceName is the fully-qualified name of the StreamService service.
-	StreamServiceName = "chat.v1.StreamService"
+	// GatewayServiceName is the fully-qualified name of the GatewayService service.
+	GatewayServiceName = "chat.v1.GatewayService"
 	// ChatServiceName is the fully-qualified name of the ChatService service.
 	ChatServiceName = "chat.v1.ChatService"
 )
@@ -49,8 +49,8 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// StreamServiceConnectProcedure is the fully-qualified name of the StreamService's Connect RPC.
-	StreamServiceConnectProcedure = "/chat.v1.StreamService/Connect"
+	// GatewayServiceConnectProcedure is the fully-qualified name of the GatewayService's Connect RPC.
+	GatewayServiceConnectProcedure = "/chat.v1.GatewayService/Connect"
 	// ChatServiceSendEventProcedure is the fully-qualified name of the ChatService's SendEvent RPC.
 	ChatServiceSendEventProcedure = "/chat.v1.ChatService/SendEvent"
 	// ChatServiceGetHistoryProcedure is the fully-qualified name of the ChatService's GetHistory RPC.
@@ -77,80 +77,80 @@ const (
 	ChatServiceSearchRoomSubscriptionsProcedure = "/chat.v1.ChatService/SearchRoomSubscriptions"
 )
 
-// StreamServiceClient is a client for the chat.v1.StreamService service.
-type StreamServiceClient interface {
+// GatewayServiceClient is a client for the chat.v1.GatewayService service.
+type GatewayServiceClient interface {
 	// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
 	// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
 	// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
 	Connect(context.Context) *connect.BidiStreamForClient[v1.ConnectRequest, v1.ServerEvent]
 }
 
-// NewStreamServiceClient constructs a client for the chat.v1.StreamService service. By default, it
-// uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and sends
-// uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or
-// connect.WithGRPCWeb() options.
+// NewGatewayServiceClient constructs a client for the chat.v1.GatewayService service. By default,
+// it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and
+// sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC()
+// or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
-func NewStreamServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) StreamServiceClient {
+func NewGatewayServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) GatewayServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	streamServiceMethods := v1.File_chat_v1_chat_proto.Services().ByName("StreamService").Methods()
-	return &streamServiceClient{
+	gatewayServiceMethods := v1.File_chat_v1_chat_proto.Services().ByName("GatewayService").Methods()
+	return &gatewayServiceClient{
 		connect: connect.NewClient[v1.ConnectRequest, v1.ServerEvent](
 			httpClient,
-			baseURL+StreamServiceConnectProcedure,
-			connect.WithSchema(streamServiceMethods.ByName("Connect")),
+			baseURL+GatewayServiceConnectProcedure,
+			connect.WithSchema(gatewayServiceMethods.ByName("Connect")),
 			connect.WithClientOptions(opts...),
 		),
 	}
 }
 
-// streamServiceClient implements StreamServiceClient.
-type streamServiceClient struct {
+// gatewayServiceClient implements GatewayServiceClient.
+type gatewayServiceClient struct {
 	connect *connect.Client[v1.ConnectRequest, v1.ServerEvent]
 }
 
-// Connect calls chat.v1.StreamService.Connect.
-func (c *streamServiceClient) Connect(ctx context.Context) *connect.BidiStreamForClient[v1.ConnectRequest, v1.ServerEvent] {
+// Connect calls chat.v1.GatewayService.Connect.
+func (c *gatewayServiceClient) Connect(ctx context.Context) *connect.BidiStreamForClient[v1.ConnectRequest, v1.ServerEvent] {
 	return c.connect.CallBidiStream(ctx)
 }
 
-// StreamServiceHandler is an implementation of the chat.v1.StreamService service.
-type StreamServiceHandler interface {
+// GatewayServiceHandler is an implementation of the chat.v1.GatewayService service.
+type GatewayServiceHandler interface {
 	// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
 	// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
 	// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
 	Connect(context.Context, *connect.BidiStream[v1.ConnectRequest, v1.ServerEvent]) error
 }
 
-// NewStreamServiceHandler builds an HTTP handler from the service implementation. It returns the
+// NewGatewayServiceHandler builds an HTTP handler from the service implementation. It returns the
 // path on which to mount the handler and the handler itself.
 //
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
-func NewStreamServiceHandler(svc StreamServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	streamServiceMethods := v1.File_chat_v1_chat_proto.Services().ByName("StreamService").Methods()
-	streamServiceConnectHandler := connect.NewBidiStreamHandler(
-		StreamServiceConnectProcedure,
+func NewGatewayServiceHandler(svc GatewayServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	gatewayServiceMethods := v1.File_chat_v1_chat_proto.Services().ByName("GatewayService").Methods()
+	gatewayServiceConnectHandler := connect.NewBidiStreamHandler(
+		GatewayServiceConnectProcedure,
 		svc.Connect,
-		connect.WithSchema(streamServiceMethods.ByName("Connect")),
+		connect.WithSchema(gatewayServiceMethods.ByName("Connect")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/chat.v1.StreamService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/chat.v1.GatewayService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case StreamServiceConnectProcedure:
-			streamServiceConnectHandler.ServeHTTP(w, r)
+		case GatewayServiceConnectProcedure:
+			gatewayServiceConnectHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
 	})
 }
 
-// UnimplementedStreamServiceHandler returns CodeUnimplemented from all methods.
-type UnimplementedStreamServiceHandler struct{}
+// UnimplementedGatewayServiceHandler returns CodeUnimplemented from all methods.
+type UnimplementedGatewayServiceHandler struct{}
 
-func (UnimplementedStreamServiceHandler) Connect(context.Context, *connect.BidiStream[v1.ConnectRequest, v1.ServerEvent]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("chat.v1.StreamService.Connect is not implemented"))
+func (UnimplementedGatewayServiceHandler) Connect(context.Context, *connect.BidiStream[v1.ConnectRequest, v1.ServerEvent]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("chat.v1.GatewayService.Connect is not implemented"))
 }
 
 // ChatServiceClient is a client for the chat.v1.ChatService service.

@@ -948,8 +948,8 @@ final $typed_data.Uint8List searchRoomSubscriptionsResponseDescriptor =
         '1JZBIzCgdtZW1iZXJzGAIgAygLMhkuY2hhdC52MS5Sb29tU3Vic2NyaXB0aW9uUgdtZW1iZXJz'
         'Eh8KC25leHRfY3Vyc29yGAMgASgJUgpuZXh0Q3Vyc29y');
 
-const $core.Map<$core.String, $core.dynamic> StreamServiceBase$json = {
-  '1': 'StreamService',
+const $core.Map<$core.String, $core.dynamic> GatewayServiceBase$json = {
+  '1': 'GatewayService',
   '2': [
     {
       '1': 'Connect',
@@ -962,9 +962,9 @@ const $core.Map<$core.String, $core.dynamic> StreamServiceBase$json = {
   ],
 };
 
-@$core.Deprecated('Use streamServiceDescriptor instead')
+@$core.Deprecated('Use gatewayServiceDescriptor instead')
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
-    StreamServiceBase$messageJson = {
+    GatewayServiceBase$messageJson = {
   '.chat.v1.ConnectRequest': ConnectRequest$json,
   '.chat.v1.StreamAck': StreamAck$json,
   '.google.protobuf.Timestamp': $0.Timestamp$json,
@@ -984,15 +984,15 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.chat.v1.TypingEvent': TypingEvent$json,
 };
 
-/// Descriptor for `StreamService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
-final $typed_data.Uint8List streamServiceDescriptor = $convert.base64Decode(
-    'Cg1TdHJlYW1TZXJ2aWNlEu8CCgdDb25uZWN0EhcuY2hhdC52MS5Db25uZWN0UmVxdWVzdBoULm'
-    'NoYXQudjEuU2VydmVyRXZlbnQisAK6R6wCCglSZWFsLXRpbWUSLUVzdGFibGlzaCBiaS1kaXJl'
-    'Y3Rpb25hbCBzdHJlYW1pbmcgY29ubmVjdGlvbhrmAU9wZW5zIGEgcGVyc2lzdGVudCBiaS1kaX'
-    'JlY3Rpb25hbCBzdHJlYW0gZm9yIHJlYWwtdGltZSBjaGF0IGV2ZW50cy4gQ2xpZW50cyBzZW5k'
-    'IENvbm5lY3RSZXF1ZXN0IG1lc3NhZ2VzIChhdXRoLCBhY2tzLCBjb21tYW5kcykgYW5kIHJlY2'
-    'VpdmUgU2VydmVyRXZlbnQgbWVzc2FnZXMgaW4gY2hyb25vbG9naWNhbCBvcmRlci4gU3VwcG9y'
-    'dHMgc2Vzc2lvbiByZXN1bXB0aW9uIHZpYSByZXN1bWVfdG9rZW4uKgdjb25uZWN0KAEwAQ==');
+/// Descriptor for `GatewayService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
+final $typed_data.Uint8List gatewayServiceDescriptor = $convert.base64Decode(
+    'Cg5HYXRld2F5U2VydmljZRLvAgoHQ29ubmVjdBIXLmNoYXQudjEuQ29ubmVjdFJlcXVlc3QaFC'
+    '5jaGF0LnYxLlNlcnZlckV2ZW50IrACukesAgoJUmVhbC10aW1lEi1Fc3RhYmxpc2ggYmktZGly'
+    'ZWN0aW9uYWwgc3RyZWFtaW5nIGNvbm5lY3Rpb24a5gFPcGVucyBhIHBlcnNpc3RlbnQgYmktZG'
+    'lyZWN0aW9uYWwgc3RyZWFtIGZvciByZWFsLXRpbWUgY2hhdCBldmVudHMuIENsaWVudHMgc2Vu'
+    'ZCBDb25uZWN0UmVxdWVzdCBtZXNzYWdlcyAoYXV0aCwgYWNrcywgY29tbWFuZHMpIGFuZCByZW'
+    'NlaXZlIFNlcnZlckV2ZW50IG1lc3NhZ2VzIGluIGNocm9ub2xvZ2ljYWwgb3JkZXIuIFN1cHBv'
+    'cnRzIHNlc3Npb24gcmVzdW1wdGlvbiB2aWEgcmVzdW1lX3Rva2VuLioHY29ubmVjdCgBMAE=');
 
 const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
   '1': 'ChatService',

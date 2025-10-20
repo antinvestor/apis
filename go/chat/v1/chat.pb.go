@@ -2614,8 +2614,8 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\x10PRESENCE_OFFLINE\x10\x01\x12\x13\n" +
 	"\x0fPRESENCE_ONLINE\x10\x02\x12\x11\n" +
 	"\rPRESENCE_AWAY\x10\x03\x12\x11\n" +
-	"\rPRESENCE_BUSY\x10\x042\x81\x03\n" +
-	"\rStreamService\x12\xef\x02\n" +
+	"\rPRESENCE_BUSY\x10\x042\x82\x03\n" +
+	"\x0eGatewayService\x12\xef\x02\n" +
 	"\aConnect\x12\x17.chat.v1.ConnectRequest\x1a\x14.chat.v1.ServerEvent\"\xb0\x02\xbaG\xac\x02\n" +
 	"\tReal-time\x12-Establish bi-directional streaming connection\x1a\xe6\x01Opens a persistent bi-directional stream for real-time chat events. Clients send ConnectRequest messages (auth, acks, commands) and receive ServerEvent messages in chronological order. Supports session resumption via resume_token.*\aconnect(\x010\x012\xb0\x16\n" +
 	"\vChatService\x12\x91\x02\n" +
@@ -2755,7 +2755,7 @@ var file_chat_v1_chat_proto_depIdxs = []int32{
 	2,  // 40: chat.v1.RemoveRoomSubscriptionsResponse.error:type_name -> chat.v1.ErrorDetail
 	2,  // 41: chat.v1.UpdateSubscriptionRoleResponse.error:type_name -> chat.v1.ErrorDetail
 	26, // 42: chat.v1.SearchRoomSubscriptionsResponse.members:type_name -> chat.v1.RoomSubscription
-	8,  // 43: chat.v1.StreamService.Connect:input_type -> chat.v1.ConnectRequest
+	8,  // 43: chat.v1.GatewayService.Connect:input_type -> chat.v1.ConnectRequest
 	13, // 44: chat.v1.ChatService.SendEvent:input_type -> chat.v1.SendEventRequest
 	15, // 45: chat.v1.ChatService.GetHistory:input_type -> chat.v1.GetHistoryRequest
 	18, // 46: chat.v1.ChatService.CreateRoom:input_type -> chat.v1.CreateRoomRequest
@@ -2766,7 +2766,7 @@ var file_chat_v1_chat_proto_depIdxs = []int32{
 	29, // 51: chat.v1.ChatService.RemoveRoomSubscriptions:input_type -> chat.v1.RemoveRoomSubscriptionsRequest
 	31, // 52: chat.v1.ChatService.UpdateSubscriptionRole:input_type -> chat.v1.UpdateSubscriptionRoleRequest
 	33, // 53: chat.v1.ChatService.SearchRoomSubscriptions:input_type -> chat.v1.SearchRoomSubscriptionsRequest
-	3,  // 54: chat.v1.StreamService.Connect:output_type -> chat.v1.ServerEvent
+	3,  // 54: chat.v1.GatewayService.Connect:output_type -> chat.v1.ServerEvent
 	14, // 55: chat.v1.ChatService.SendEvent:output_type -> chat.v1.SendEventResponse
 	16, // 56: chat.v1.ChatService.GetHistory:output_type -> chat.v1.GetHistoryResponse
 	19, // 57: chat.v1.ChatService.CreateRoom:output_type -> chat.v1.CreateRoomResponse

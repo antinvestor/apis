@@ -2981,10 +2981,10 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   void clearNextCursor() => $_clearField(3);
 }
 
-class StreamServiceApi {
+class GatewayServiceApi {
   final $pb.RpcClient _client;
 
-  StreamServiceApi(this._client);
+  GatewayServiceApi(this._client);
 
   /// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
   /// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
@@ -2992,7 +2992,7 @@ class StreamServiceApi {
   $async.Future<ServerEvent> connect(
           $pb.ClientContext? ctx, ConnectRequest request) =>
       _client.invoke<ServerEvent>(
-          ctx, 'StreamService', 'Connect', request, ServerEvent());
+          ctx, 'GatewayService', 'Connect', request, ServerEvent());
 }
 
 class ChatServiceApi {

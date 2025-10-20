@@ -18,32 +18,32 @@ import (
 	grpc "google.golang.org/grpc"
 )
 
-// MockStreamServiceClient is a mock of StreamServiceClient interface.
-type MockStreamServiceClient struct {
+// MockGatewayServiceClient is a mock of GatewayServiceClient interface.
+type MockGatewayServiceClient struct {
 	ctrl     *gomock.Controller
-	recorder *MockStreamServiceClientMockRecorder
+	recorder *MockGatewayServiceClientMockRecorder
 	isgomock struct{}
 }
 
-// MockStreamServiceClientMockRecorder is the mock recorder for MockStreamServiceClient.
-type MockStreamServiceClientMockRecorder struct {
-	mock *MockStreamServiceClient
+// MockGatewayServiceClientMockRecorder is the mock recorder for MockGatewayServiceClient.
+type MockGatewayServiceClientMockRecorder struct {
+	mock *MockGatewayServiceClient
 }
 
-// NewMockStreamServiceClient creates a new mock instance.
-func NewMockStreamServiceClient(ctrl *gomock.Controller) *MockStreamServiceClient {
-	mock := &MockStreamServiceClient{ctrl: ctrl}
-	mock.recorder = &MockStreamServiceClientMockRecorder{mock}
+// NewMockGatewayServiceClient creates a new mock instance.
+func NewMockGatewayServiceClient(ctrl *gomock.Controller) *MockGatewayServiceClient {
+	mock := &MockGatewayServiceClient{ctrl: ctrl}
+	mock.recorder = &MockGatewayServiceClientMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockStreamServiceClient) EXPECT() *MockStreamServiceClientMockRecorder {
+func (m *MockGatewayServiceClient) EXPECT() *MockGatewayServiceClientMockRecorder {
 	return m.recorder
 }
 
 // Connect mocks base method.
-func (m *MockStreamServiceClient) Connect(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[chatv1.ConnectRequest, chatv1.ServerEvent], error) {
+func (m *MockGatewayServiceClient) Connect(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[chatv1.ConnectRequest, chatv1.ServerEvent], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx}
 	for _, a := range opts {
@@ -56,38 +56,38 @@ func (m *MockStreamServiceClient) Connect(ctx context.Context, opts ...grpc.Call
 }
 
 // Connect indicates an expected call of Connect.
-func (mr *MockStreamServiceClientMockRecorder) Connect(ctx any, opts ...any) *gomock.Call {
+func (mr *MockGatewayServiceClientMockRecorder) Connect(ctx any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Connect", reflect.TypeOf((*MockStreamServiceClient)(nil).Connect), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Connect", reflect.TypeOf((*MockGatewayServiceClient)(nil).Connect), varargs...)
 }
 
-// MockStreamServiceServer is a mock of StreamServiceServer interface.
-type MockStreamServiceServer struct {
+// MockGatewayServiceServer is a mock of GatewayServiceServer interface.
+type MockGatewayServiceServer struct {
 	ctrl     *gomock.Controller
-	recorder *MockStreamServiceServerMockRecorder
+	recorder *MockGatewayServiceServerMockRecorder
 	isgomock struct{}
 }
 
-// MockStreamServiceServerMockRecorder is the mock recorder for MockStreamServiceServer.
-type MockStreamServiceServerMockRecorder struct {
-	mock *MockStreamServiceServer
+// MockGatewayServiceServerMockRecorder is the mock recorder for MockGatewayServiceServer.
+type MockGatewayServiceServerMockRecorder struct {
+	mock *MockGatewayServiceServer
 }
 
-// NewMockStreamServiceServer creates a new mock instance.
-func NewMockStreamServiceServer(ctrl *gomock.Controller) *MockStreamServiceServer {
-	mock := &MockStreamServiceServer{ctrl: ctrl}
-	mock.recorder = &MockStreamServiceServerMockRecorder{mock}
+// NewMockGatewayServiceServer creates a new mock instance.
+func NewMockGatewayServiceServer(ctrl *gomock.Controller) *MockGatewayServiceServer {
+	mock := &MockGatewayServiceServer{ctrl: ctrl}
+	mock.recorder = &MockGatewayServiceServerMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockStreamServiceServer) EXPECT() *MockStreamServiceServerMockRecorder {
+func (m *MockGatewayServiceServer) EXPECT() *MockGatewayServiceServerMockRecorder {
 	return m.recorder
 }
 
 // Connect mocks base method.
-func (m *MockStreamServiceServer) Connect(arg0 grpc.BidiStreamingServer[chatv1.ConnectRequest, chatv1.ServerEvent]) error {
+func (m *MockGatewayServiceServer) Connect(arg0 grpc.BidiStreamingServer[chatv1.ConnectRequest, chatv1.ServerEvent]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Connect", arg0)
 	ret0, _ := ret[0].(error)
@@ -95,57 +95,57 @@ func (m *MockStreamServiceServer) Connect(arg0 grpc.BidiStreamingServer[chatv1.C
 }
 
 // Connect indicates an expected call of Connect.
-func (mr *MockStreamServiceServerMockRecorder) Connect(arg0 any) *gomock.Call {
+func (mr *MockGatewayServiceServerMockRecorder) Connect(arg0 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Connect", reflect.TypeOf((*MockStreamServiceServer)(nil).Connect), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Connect", reflect.TypeOf((*MockGatewayServiceServer)(nil).Connect), arg0)
 }
 
-// mustEmbedUnimplementedStreamServiceServer mocks base method.
-func (m *MockStreamServiceServer) mustEmbedUnimplementedStreamServiceServer() {
+// mustEmbedUnimplementedGatewayServiceServer mocks base method.
+func (m *MockGatewayServiceServer) mustEmbedUnimplementedGatewayServiceServer() {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "mustEmbedUnimplementedStreamServiceServer")
+	m.ctrl.Call(m, "mustEmbedUnimplementedGatewayServiceServer")
 }
 
-// mustEmbedUnimplementedStreamServiceServer indicates an expected call of mustEmbedUnimplementedStreamServiceServer.
-func (mr *MockStreamServiceServerMockRecorder) mustEmbedUnimplementedStreamServiceServer() *gomock.Call {
+// mustEmbedUnimplementedGatewayServiceServer indicates an expected call of mustEmbedUnimplementedGatewayServiceServer.
+func (mr *MockGatewayServiceServerMockRecorder) mustEmbedUnimplementedGatewayServiceServer() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedStreamServiceServer", reflect.TypeOf((*MockStreamServiceServer)(nil).mustEmbedUnimplementedStreamServiceServer))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedGatewayServiceServer", reflect.TypeOf((*MockGatewayServiceServer)(nil).mustEmbedUnimplementedGatewayServiceServer))
 }
 
-// MockUnsafeStreamServiceServer is a mock of UnsafeStreamServiceServer interface.
-type MockUnsafeStreamServiceServer struct {
+// MockUnsafeGatewayServiceServer is a mock of UnsafeGatewayServiceServer interface.
+type MockUnsafeGatewayServiceServer struct {
 	ctrl     *gomock.Controller
-	recorder *MockUnsafeStreamServiceServerMockRecorder
+	recorder *MockUnsafeGatewayServiceServerMockRecorder
 	isgomock struct{}
 }
 
-// MockUnsafeStreamServiceServerMockRecorder is the mock recorder for MockUnsafeStreamServiceServer.
-type MockUnsafeStreamServiceServerMockRecorder struct {
-	mock *MockUnsafeStreamServiceServer
+// MockUnsafeGatewayServiceServerMockRecorder is the mock recorder for MockUnsafeGatewayServiceServer.
+type MockUnsafeGatewayServiceServerMockRecorder struct {
+	mock *MockUnsafeGatewayServiceServer
 }
 
-// NewMockUnsafeStreamServiceServer creates a new mock instance.
-func NewMockUnsafeStreamServiceServer(ctrl *gomock.Controller) *MockUnsafeStreamServiceServer {
-	mock := &MockUnsafeStreamServiceServer{ctrl: ctrl}
-	mock.recorder = &MockUnsafeStreamServiceServerMockRecorder{mock}
+// NewMockUnsafeGatewayServiceServer creates a new mock instance.
+func NewMockUnsafeGatewayServiceServer(ctrl *gomock.Controller) *MockUnsafeGatewayServiceServer {
+	mock := &MockUnsafeGatewayServiceServer{ctrl: ctrl}
+	mock.recorder = &MockUnsafeGatewayServiceServerMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockUnsafeStreamServiceServer) EXPECT() *MockUnsafeStreamServiceServerMockRecorder {
+func (m *MockUnsafeGatewayServiceServer) EXPECT() *MockUnsafeGatewayServiceServerMockRecorder {
 	return m.recorder
 }
 
-// mustEmbedUnimplementedStreamServiceServer mocks base method.
-func (m *MockUnsafeStreamServiceServer) mustEmbedUnimplementedStreamServiceServer() {
+// mustEmbedUnimplementedGatewayServiceServer mocks base method.
+func (m *MockUnsafeGatewayServiceServer) mustEmbedUnimplementedGatewayServiceServer() {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "mustEmbedUnimplementedStreamServiceServer")
+	m.ctrl.Call(m, "mustEmbedUnimplementedGatewayServiceServer")
 }
 
-// mustEmbedUnimplementedStreamServiceServer indicates an expected call of mustEmbedUnimplementedStreamServiceServer.
-func (mr *MockUnsafeStreamServiceServerMockRecorder) mustEmbedUnimplementedStreamServiceServer() *gomock.Call {
+// mustEmbedUnimplementedGatewayServiceServer indicates an expected call of mustEmbedUnimplementedGatewayServiceServer.
+func (mr *MockUnsafeGatewayServiceServerMockRecorder) mustEmbedUnimplementedGatewayServiceServer() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedStreamServiceServer", reflect.TypeOf((*MockUnsafeStreamServiceServer)(nil).mustEmbedUnimplementedStreamServiceServer))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedGatewayServiceServer", reflect.TypeOf((*MockUnsafeGatewayServiceServer)(nil).mustEmbedUnimplementedGatewayServiceServer))
 }
 
 // MockChatServiceClient is a mock of ChatServiceClient interface.

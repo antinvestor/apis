@@ -345,7 +345,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.UpdateSubscriptionRoleResponse'
-  /chat.v1.StreamService/Connect: {}
+  /chat.v1.GatewayService/Connect: {}
 components:
   schemas:
     chat.v1.AddRoomSubscriptionsRequest:
@@ -1260,5 +1260,5 @@ components:
       bearerFormat: JWT
 security: []
 tags:
-  - name: chat.v1.StreamService
+  - name: chat.v1.GatewayService
   - name: chat.v1.ChatService

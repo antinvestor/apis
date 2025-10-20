@@ -33,30 +33,30 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	StreamService_Connect_FullMethodName = "/chat.v1.StreamService/Connect"
+	GatewayService_Connect_FullMethodName = "/chat.v1.GatewayService/Connect"
 )
 
-// StreamServiceClient is the client API for StreamService service.
+// GatewayServiceClient is the client API for GatewayService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type StreamServiceClient interface {
+type GatewayServiceClient interface {
 	// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
 	// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
 	// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
 	Connect(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ConnectRequest, ServerEvent], error)
 }
 
-type streamServiceClient struct {
+type gatewayServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewStreamServiceClient(cc grpc.ClientConnInterface) StreamServiceClient {
-	return &streamServiceClient{cc}
+func NewGatewayServiceClient(cc grpc.ClientConnInterface) GatewayServiceClient {
+	return &gatewayServiceClient{cc}
 }
 
-func (c *streamServiceClient) Connect(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ConnectRequest, ServerEvent], error) {
+func (c *gatewayServiceClient) Connect(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ConnectRequest, ServerEvent], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &StreamService_ServiceDesc.Streams[0], StreamService_Connect_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &GatewayService_ServiceDesc.Streams[0], GatewayService_Connect_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -65,68 +65,68 @@ func (c *streamServiceClient) Connect(ctx context.Context, opts ...grpc.CallOpti
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type StreamService_ConnectClient = grpc.BidiStreamingClient[ConnectRequest, ServerEvent]
+type GatewayService_ConnectClient = grpc.BidiStreamingClient[ConnectRequest, ServerEvent]
 
-// StreamServiceServer is the server API for StreamService service.
-// All implementations must embed UnimplementedStreamServiceServer
+// GatewayServiceServer is the server API for GatewayService service.
+// All implementations must embed UnimplementedGatewayServiceServer
 // for forward compatibility.
-type StreamServiceServer interface {
+type GatewayServiceServer interface {
 	// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
 	// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
 	// Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
 	Connect(grpc.BidiStreamingServer[ConnectRequest, ServerEvent]) error
-	mustEmbedUnimplementedStreamServiceServer()
+	mustEmbedUnimplementedGatewayServiceServer()
 }
 
-// UnimplementedStreamServiceServer must be embedded to have
+// UnimplementedGatewayServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedStreamServiceServer struct{}
+type UnimplementedGatewayServiceServer struct{}
 
-func (UnimplementedStreamServiceServer) Connect(grpc.BidiStreamingServer[ConnectRequest, ServerEvent]) error {
+func (UnimplementedGatewayServiceServer) Connect(grpc.BidiStreamingServer[ConnectRequest, ServerEvent]) error {
 	return status.Errorf(codes.Unimplemented, "method Connect not implemented")
 }
-func (UnimplementedStreamServiceServer) mustEmbedUnimplementedStreamServiceServer() {}
-func (UnimplementedStreamServiceServer) testEmbeddedByValue()                       {}
+func (UnimplementedGatewayServiceServer) mustEmbedUnimplementedGatewayServiceServer() {}
+func (UnimplementedGatewayServiceServer) testEmbeddedByValue()                        {}
 
-// UnsafeStreamServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to StreamServiceServer will
+// UnsafeGatewayServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to GatewayServiceServer will
 // result in compilation errors.
-type UnsafeStreamServiceServer interface {
-	mustEmbedUnimplementedStreamServiceServer()
+type UnsafeGatewayServiceServer interface {
+	mustEmbedUnimplementedGatewayServiceServer()
 }
 
-func RegisterStreamServiceServer(s grpc.ServiceRegistrar, srv StreamServiceServer) {
-	// If the following call pancis, it indicates UnimplementedStreamServiceServer was
+func RegisterGatewayServiceServer(s grpc.ServiceRegistrar, srv GatewayServiceServer) {
+	// If the following call pancis, it indicates UnimplementedGatewayServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&StreamService_ServiceDesc, srv)
+	s.RegisterService(&GatewayService_ServiceDesc, srv)
 }
 
-func _StreamService_Connect_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(StreamServiceServer).Connect(&grpc.GenericServerStream[ConnectRequest, ServerEvent]{ServerStream: stream})
+func _GatewayService_Connect_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(GatewayServiceServer).Connect(&grpc.GenericServerStream[ConnectRequest, ServerEvent]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type StreamService_ConnectServer = grpc.BidiStreamingServer[ConnectRequest, ServerEvent]
+type GatewayService_ConnectServer = grpc.BidiStreamingServer[ConnectRequest, ServerEvent]
 
-// StreamService_ServiceDesc is the grpc.ServiceDesc for StreamService service.
+// GatewayService_ServiceDesc is the grpc.ServiceDesc for GatewayService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var StreamService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "chat.v1.StreamService",
-	HandlerType: (*StreamServiceServer)(nil),
+var GatewayService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "chat.v1.GatewayService",
+	HandlerType: (*GatewayServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "Connect",
-			Handler:       _StreamService_Connect_Handler,
+			Handler:       _GatewayService_Connect_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},
