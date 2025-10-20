@@ -19,6 +19,9 @@ jobs:
       - name: Detect Changed Packages
         id: set-matrix
         run: |
+          # Fetch base branch refs
+          git fetch origin ${{ github.base_ref }}
+          
           # Get the list of changed files
           if [ "${{ github.event_name }}" == "pull_request" ]; then
             CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
