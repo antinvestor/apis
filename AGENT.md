@@ -279,21 +279,22 @@ Labels: feature, chat, breaking-change, priority-high
 
 #### 2. Create a Feature Branch
 
-Branch from `main` using a descriptive name:
+**CRITICAL: Never commit directly to `main`!** Always create a feature branch.
 
 ```bash
-# Fetch latest changes
+# 1. Ensure you're on main and up to date
 git checkout main
 git pull origin main
 
-# Create feature branch
-git checkout -b <type>/<issue-number>-<short-description>
+# 2. Create feature branch with descriptive name
+git checkout -b <type>/<short-description>
 
 # Examples:
-git checkout -b feat/123-add-message-encryption
-git checkout -b fix/456-device-token-refresh
-git checkout -b docs/789-update-dart-readme
-git checkout -b chore/101-update-dependencies
+git checkout -b feat/add-message-encryption
+git checkout -b feat/chat-stream-service
+git checkout -b fix/device-token-refresh
+git checkout -b docs/update-dart-readme
+git checkout -b chore/update-dependencies
 ```
 
 **Branch naming conventions:**
@@ -306,54 +307,92 @@ git checkout -b chore/101-update-dependencies
 
 #### 3. Make Your Changes
 
-Follow the technical guidelines in the "Making Changes" section below.
-
-**Key requirements:**
-- Edit proto files (never generated code directly)
-- Run `make generate` to regenerate code
-- Run `make all` to build and test
-- Commit both proto and generated code together
-- Write clear, conventional commit messages
+**⚠️ CRITICAL WORKFLOW - Follow these steps in order:**
 
 ```bash
-# Make changes
+# Step 1: Make your proto changes
 vim proto/chat/chat/v1/chat.proto
 
-# Regenerate code
+# Step 2: Regenerate ALL code (NEVER skip this!)
 make generate
 
-# Test everything
+# Step 3: Test everything builds and passes
 make clean
 make all
 
-# Commit (including generated code)
+# Step 4: Stage ALL changes (proto + generated code)
 git add proto/chat/
 git add go/chat/ dart/chat/ java/chat/
+
+# Step 5: Commit with conventional format
 git commit -m "feat(chat): add message encryption support
 
 - Add encryption_key field to Message proto
-- Update all language bindings
+- Update all language bindings (dart, go, java)
 - Refs #123"
 ```
 
+**Key requirements:**
+- ✅ Edit proto files ONLY (never modify generated code directly)
+- ✅ Run `make generate` after proto changes
+- ✅ Run `make all` to verify build and tests
+- ✅ Commit proto AND generated code together in same commit
+- ✅ Use conventional commit messages
+- ❌ Never skip code generation
+- ❌ Never commit proto changes without generated code
+- ❌ Never commit directly to `main`
+
+**Commit Message Format:**
+```
+<type>(<scope>): <description>
+
+<body - bullet points of changes>
+```
+
+**Types:**
+- `feat` - New feature
+- `fix` - Bug fix
+- `docs` - Documentation only
+- `style` - Formatting, missing semicolons, etc
+- `refactor` - Code change that neither fixes a bug nor adds a feature
+- `test` - Adding missing tests
+- `chore` - Maintain, dependencies, build tools
+
 #### 4. Push and Create Pull Request
+
+**Step 1: Push your branch**
 
 ```bash
 # Push branch to remote
-git push origin feat/123-add-message-encryption
+git push origin feat/add-message-encryption
+
+# GitHub will output a URL like:
+# https://github.com/antinvestor/apis/pull/new/feat/add-message-encryption
 ```
 
-**Create PR with:**
+**Step 2: Create Pull Request on GitHub**
+
+Visit the URL from the push output, or go to:
+`https://github.com/antinvestor/apis/pulls` → Click "New Pull Request"
+
+**Step 3: Fill PR Details**
 
 **Title Format:**
 ```
 <type>(<scope>): <description> - v<version>
+```
 
-Examples:
+**Examples:**
+```
 feat(chat): add message encryption - v1.47.0
 fix(device): resolve token refresh issue - v1.46.5
 docs: update contribution guidelines - v1.0.1
+feat(chat): separate StreamService and rename SendMessage to SendEvent - v1.47.0
 ```
+
+**Step 4: Use PR Template**
+
+The repository has a PR template (`.github/PR_TEMPLATE.md`). Fill it out completely:
 
 **PR Description Template:**
 ```markdown
@@ -398,11 +437,80 @@ Closes #123
 - [ ] Proper labels added
 ```
 
-**Required Labels:**
-- Type: `feature`, `bug`, `docs`, `chore`, etc.
-- Service: `chat`, `device`, `payment`, etc.
-- For changelog: `breaking`, `enhancement`, `bugfix`, etc.
-- Use `skip-changelog` if changes don't need changelog entry
+**Step 5: Add Labels**
+
+Required labels for proper CI/changelog generation:
+- **Type**: `feature`, `bug`, `docs`, `chore`, `refactor`, etc.
+- **Service**: `chat`, `device`, `payment`, `ledger`, etc.
+- **Changelog**: `breaking`, `enhancement`, `bugfix`, etc.
+- **Special**: `skip-changelog` (if changes don't need changelog entry)
+
+**Step 6: Request Review**
+
+- Tag relevant reviewers
+- Wait for CI checks to pass
+- Address review feedback
+
+---
+
+### Complete Example Workflow
+
+Here's a complete end-to-end example:
+
+```bash
+# 1. Start on main, pull latest
+git checkout main
+git pull origin main
+
+# 2. Create feature branch
+git checkout -b feat/chat-stream-service
+
+# 3. Make proto changes
+vim proto/chat/chat/v1/chat.proto
+# (Make your edits)
+
+# 4. Regenerate code
+make generate
+
+# 5. Test everything
+make clean
+make all
+
+# 6. Stage all changes
+git add proto/chat/
+git add go/chat/ dart/chat/ java/chat/
+
+# 7. Commit with conventional format
+git commit -m "feat(chat): separate StreamService and rename SendMessage to SendEvent
+
+- Create new StreamService for real-time bidirectional streaming
+- Move Connect RPC from ChatService to StreamService
+- Rename SendMessage to SendEvent for better semantic clarity
+- Extend ClientCommand to support sending RoomEvent messages
+- Update all language bindings (dart, go, java)"
+
+# 8. Push branch
+git push origin feat/chat-stream-service
+
+# 9. Create PR on GitHub using the URL from push output
+# Visit: https://github.com/antinvestor/apis/pull/new/feat/chat-stream-service
+
+# 10. Fill in PR details:
+# Title: feat(chat): separate StreamService and rename SendMessage to SendEvent - v1.47.0
+# Use the PR template
+# Add labels: feature, chat, breaking-change
+
+# 11. Wait for CI and reviews
+```
+
+**Common Mistakes to Avoid:**
+- ❌ Committing to `main` directly
+- ❌ Skipping `make generate`
+- ❌ Not committing generated code with proto
+- ❌ Not running `make all` before pushing
+- ❌ Poor commit messages
+- ❌ Forgetting to add labels
+- ❌ Not using PR template
 
 #### 5. Review Process
 
