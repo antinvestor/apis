@@ -1,12 +1,10 @@
-# ## v1.0.0
+# Changelog
 
+## 1.0.0 - 2025-10-19
 
-#### ### 🚀 New Features
+### 🚀 New Features
 
 * [#797](https://github.com/antinvestor/apis/pull/797): feat: add changelog CI with smart detection for all languages
-
-
-# Changelog
 
 ## 1.46.4 - 2025-10-19
 
