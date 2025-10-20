@@ -485,6 +485,7 @@ git push origin --tags
 - Multi-language support (dart, go, java)
 - Label-based categorization
 - Automatic commits by `github-actions[bot]`
+- Version headers with date stamps (e.g., `## 1.47.0 - 2025-10-20`)
 
 **Triggers:**
 - Pull request: `opened`, `reopened`, `synchronize`
