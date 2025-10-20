@@ -11,6 +11,10 @@ exclude_labels:
   - dependabot
   - skip-changelog
 group_config:
+  - title: '### ⚠️ Breaking Changes'
+    labels:
+      - breaking
+      - breaking-change
   - title: '### 🚀 New Features'
     labels:
       - feature
@@ -46,7 +50,3 @@ group_config:
       - chore
       - maintenance
       - dependencies
-  - title: '### ⚠️ Breaking Changes'
-    labels:
-      - breaking
-      - breaking-change
