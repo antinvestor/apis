@@ -24,7 +24,7 @@ jobs:
           
           # Get the list of changed files
           if [ "${{ github.event_name }}" == "pull_request" ]; then
-            CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+            CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}..HEAD)
           else
             CHANGED_FILES=$(git diff --name-only HEAD^..HEAD)
           fi
