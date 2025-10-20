@@ -2,8 +2,8 @@ buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-202509121410
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1/go.mod h1:fUl8CEN/6ZAMk6bP8ahBJPUJw7rbp+j4x+wCcYi2IG4=
 connectrpc.com/connect v1.19.1 h1:R5M57z05+90EfEvCY1b7hBxDVOUl45PrtXtAV2fOC14=
 connectrpc.com/connect v1.19.1/go.mod h1:tN20fjdGlewnSFeZxLKb0xwIZ6ozc3OQs2hTXy4du9w=
-github.com/antinvestor/apis/go/common v1.46.1 h1:4l7G12BLd+yWigqdoWiRDRD9ioXJ377b7q291nUf0u8=
-github.com/antinvestor/apis/go/common v1.46.1/go.mod h1:Xzb3GUR/5LJ5atfQLxS5gdR9QHXBFd2i2l3bBV00goM=
+github.com/antinvestor/apis/go/common v1.46.4 h1:BNe2VjP8DTIoPGePp8ib8Barq/vG0UiH+Yjz0RjczBE=
+github.com/antinvestor/apis/go/common v1.46.4/go.mod h1:sMq1Wi4NUYJMdS5iW6vMViHtMMVxZyNeP68uoPWm5ow=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-logr/logr v1.2.2/go.mod h1:jdQByPbusPIv2/zmleS9BjJVeZ6kBagPoEUsqbVz/1A=

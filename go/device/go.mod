@@ -5,7 +5,7 @@ go 1.25
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.46.1
+	github.com/antinvestor/apis/go/common v1.46.4
 	github.com/google/gnostic v0.7.1
 	go.uber.org/mock v0.6.0
 	google.golang.org/grpc v1.76.0
