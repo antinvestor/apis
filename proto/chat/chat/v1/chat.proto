@@ -86,15 +86,12 @@ message ErrorDetail {
 // -----------------------------------------------------
 
 // -----------------------------------------------------
-// MAIN SERVICE: ChatService
+// STREAM SERVICE: StreamService
 // - Connect: BiDi streaming for a unified event timeline.
-// - Message ops: SendMessage (unified), GetHistory (cursor-based).
-// - Room ops: create/update/manage members/roles.
-// - Device & presence: register device, presence updates.
-// - BotService included below for integration (service accounts).
+// - Handles real-time bidirectional communication.
 // -----------------------------------------------------
 
-service ChatService {
+service StreamService {
   // Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
   // Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
   // Stream resume: client may provide last_received_event_id or resume_token to continue after reconnect.
@@ -106,13 +103,24 @@ service ChatService {
       tags: "Real-time"
     };
   }
+}
 
-  // Send a message (unified message model). Idempotent if idempotency_key is provided.
-  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse){
+// -----------------------------------------------------
+// MAIN SERVICE: ChatService
+// - Message ops: SendEvent (unified), GetHistory (cursor-based).
+// - Room ops: create/update/manage members/roles.
+// - Device & presence: register device, presence updates.
+// - BotService included below for integration (service accounts).
+// -----------------------------------------------------
+
+service ChatService {
+
+  // Send an event (unified message model). Idempotent if idempotency_key is provided.
+  rpc SendEvent(SendEventRequest) returns (SendEventResponse){
     option (gnostic.openapi.v3.operation) = {
-      operation_id: "sendMessage"
-      summary: "Send a message to a room"
-      description: "Sends one or more messages to chat rooms. Supports text, attachments, reactions, and system messages. Idempotent when idempotency_key header is provided."
+      operation_id: "sendEvent"
+      summary: "Send an event to a room"
+      description: "Sends one or more events to chat rooms. Supports text, attachments, reactions, and system messages. Idempotent when idempotency_key header is provided."
       tags: "Messages"
     };
   }
@@ -318,11 +326,12 @@ message StreamAck {
   google.protobuf.Struct metadata = 6;
 }
 
-// Generic client commands (typing, read markers that aren't receipts)
+// Generic client commands (typing, read markers that aren't receipts, and room events)
 message ClientCommand {
   oneof cmd {
     TypingUpdate typing = 1;
     ReadMarker read_marker = 2; // marker for "read up to X"
+    RoomEvent room_event = 3;    // send a room event (message) via the stream
   }
 }
 message TypingUpdate {
@@ -338,11 +347,11 @@ message ReadMarker {
 // Message RPCs (unified send + get history)
 // -----------------------------------------------------
 
-message SendMessageRequest {
+message SendEventRequest {
   repeated RoomEvent message = 4;          // message payload (server will assign final message_id if empty)
 }
 
-message SendMessageResponse {
+message SendEventResponse {
   repeated StreamAck ack = 1;
 }
 

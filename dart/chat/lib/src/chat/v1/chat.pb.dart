@@ -951,17 +951,19 @@ class StreamAck extends $pb.GeneratedMessage {
   $1.Struct ensureMetadata() => $_ensure(2);
 }
 
-enum ClientCommand_Cmd { typing, readMarker, notSet }
+enum ClientCommand_Cmd { typing, readMarker, roomEvent, notSet }
 
-/// Generic client commands (typing, read markers that aren't receipts)
+/// Generic client commands (typing, read markers that aren't receipts, and room events)
 class ClientCommand extends $pb.GeneratedMessage {
   factory ClientCommand({
     TypingUpdate? typing,
     ReadMarker? readMarker,
+    RoomEvent? roomEvent,
   }) {
     final result = create();
     if (typing != null) result.typing = typing;
     if (readMarker != null) result.readMarker = readMarker;
+    if (roomEvent != null) result.roomEvent = roomEvent;
     return result;
   }
 
@@ -978,17 +980,20 @@ class ClientCommand extends $pb.GeneratedMessage {
       {
     1: ClientCommand_Cmd.typing,
     2: ClientCommand_Cmd.readMarker,
+    3: ClientCommand_Cmd.roomEvent,
     0: ClientCommand_Cmd.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ClientCommand',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2])
+    ..oo(0, [1, 2, 3])
     ..aOM<TypingUpdate>(1, _omitFieldNames ? '' : 'typing',
         subBuilder: TypingUpdate.create)
     ..aOM<ReadMarker>(2, _omitFieldNames ? '' : 'readMarker',
         subBuilder: ReadMarker.create)
+    ..aOM<RoomEvent>(3, _omitFieldNames ? '' : 'roomEvent',
+        subBuilder: RoomEvent.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1014,9 +1019,11 @@ class ClientCommand extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   @$pb.TagNumber(2)
+  @$pb.TagNumber(3)
   ClientCommand_Cmd whichCmd() => _ClientCommand_CmdByTag[$_whichOneof(0)]!;
   @$pb.TagNumber(1)
   @$pb.TagNumber(2)
+  @$pb.TagNumber(3)
   void clearCmd() => $_clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
@@ -1040,6 +1047,17 @@ class ClientCommand extends $pb.GeneratedMessage {
   void clearReadMarker() => $_clearField(2);
   @$pb.TagNumber(2)
   ReadMarker ensureReadMarker() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  RoomEvent get roomEvent => $_getN(2);
+  @$pb.TagNumber(3)
+  set roomEvent(RoomEvent value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasRoomEvent() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRoomEvent() => $_clearField(3);
+  @$pb.TagNumber(3)
+  RoomEvent ensureRoomEvent() => $_ensure(2);
 }
 
 class TypingUpdate extends $pb.GeneratedMessage {
@@ -1176,8 +1194,8 @@ class ReadMarker extends $pb.GeneratedMessage {
   void clearUpToEventId() => $_clearField(2);
 }
 
-class SendMessageRequest extends $pb.GeneratedMessage {
-  factory SendMessageRequest({
+class SendEventRequest extends $pb.GeneratedMessage {
+  factory SendEventRequest({
     $core.Iterable<RoomEvent>? message,
   }) {
     final result = create();
@@ -1185,17 +1203,17 @@ class SendMessageRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  SendMessageRequest._();
+  SendEventRequest._();
 
-  factory SendMessageRequest.fromBuffer($core.List<$core.int> data,
+  factory SendEventRequest.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory SendMessageRequest.fromJson($core.String json,
+  factory SendEventRequest.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SendMessageRequest',
+      _omitMessageNames ? '' : 'SendEventRequest',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
     ..pPM<RoomEvent>(4, _omitFieldNames ? '' : 'message',
@@ -1203,32 +1221,32 @@ class SendMessageRequest extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SendMessageRequest clone() => deepCopy();
+  SendEventRequest clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SendMessageRequest copyWith(void Function(SendMessageRequest) updates) =>
-      super.copyWith((message) => updates(message as SendMessageRequest))
-          as SendMessageRequest;
+  SendEventRequest copyWith(void Function(SendEventRequest) updates) =>
+      super.copyWith((message) => updates(message as SendEventRequest))
+          as SendEventRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SendMessageRequest create() => SendMessageRequest._();
+  static SendEventRequest create() => SendEventRequest._();
   @$core.override
-  SendMessageRequest createEmptyInstance() => create();
-  static $pb.PbList<SendMessageRequest> createRepeated() =>
-      $pb.PbList<SendMessageRequest>();
+  SendEventRequest createEmptyInstance() => create();
+  static $pb.PbList<SendEventRequest> createRepeated() =>
+      $pb.PbList<SendEventRequest>();
   @$core.pragma('dart2js:noInline')
-  static SendMessageRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SendMessageRequest>(create);
-  static SendMessageRequest? _defaultInstance;
+  static SendEventRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SendEventRequest>(create);
+  static SendEventRequest? _defaultInstance;
 
   @$pb.TagNumber(4)
   $pb.PbList<RoomEvent> get message => $_getList(0);
 }
 
-class SendMessageResponse extends $pb.GeneratedMessage {
-  factory SendMessageResponse({
+class SendEventResponse extends $pb.GeneratedMessage {
+  factory SendEventResponse({
     $core.Iterable<StreamAck>? ack,
   }) {
     final result = create();
@@ -1236,17 +1254,17 @@ class SendMessageResponse extends $pb.GeneratedMessage {
     return result;
   }
 
-  SendMessageResponse._();
+  SendEventResponse._();
 
-  factory SendMessageResponse.fromBuffer($core.List<$core.int> data,
+  factory SendEventResponse.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory SendMessageResponse.fromJson($core.String json,
+  factory SendEventResponse.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SendMessageResponse',
+      _omitMessageNames ? '' : 'SendEventResponse',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
     ..pPM<StreamAck>(1, _omitFieldNames ? '' : 'ack',
@@ -1254,25 +1272,25 @@ class SendMessageResponse extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SendMessageResponse clone() => deepCopy();
+  SendEventResponse clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SendMessageResponse copyWith(void Function(SendMessageResponse) updates) =>
-      super.copyWith((message) => updates(message as SendMessageResponse))
-          as SendMessageResponse;
+  SendEventResponse copyWith(void Function(SendEventResponse) updates) =>
+      super.copyWith((message) => updates(message as SendEventResponse))
+          as SendEventResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SendMessageResponse create() => SendMessageResponse._();
+  static SendEventResponse create() => SendEventResponse._();
   @$core.override
-  SendMessageResponse createEmptyInstance() => create();
-  static $pb.PbList<SendMessageResponse> createRepeated() =>
-      $pb.PbList<SendMessageResponse>();
+  SendEventResponse createEmptyInstance() => create();
+  static $pb.PbList<SendEventResponse> createRepeated() =>
+      $pb.PbList<SendEventResponse>();
   @$core.pragma('dart2js:noInline')
-  static SendMessageResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SendMessageResponse>(create);
-  static SendMessageResponse? _defaultInstance;
+  static SendEventResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SendEventResponse>(create);
+  static SendEventResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
   $pb.PbList<StreamAck> get ack => $_getList(0);
@@ -2947,10 +2965,10 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   void clearNextCursor() => $_clearField(3);
 }
 
-class ChatServiceApi {
+class StreamServiceApi {
   final $pb.RpcClient _client;
 
-  ChatServiceApi(this._client);
+  StreamServiceApi(this._client);
 
   /// Bi-directional, long-lived connection. Client sends ConnectRequest (initial auth + acks/commands).
   /// Server streams ServerEvent objects in chronological order for rooms the client is subscribed to.
@@ -2958,13 +2976,19 @@ class ChatServiceApi {
   $async.Future<ServerEvent> connect(
           $pb.ClientContext? ctx, ConnectRequest request) =>
       _client.invoke<ServerEvent>(
-          ctx, 'ChatService', 'Connect', request, ServerEvent());
+          ctx, 'StreamService', 'Connect', request, ServerEvent());
+}
 
-  /// Send a message (unified message model). Idempotent if idempotency_key is provided.
-  $async.Future<SendMessageResponse> sendMessage(
-          $pb.ClientContext? ctx, SendMessageRequest request) =>
-      _client.invoke<SendMessageResponse>(
-          ctx, 'ChatService', 'SendMessage', request, SendMessageResponse());
+class ChatServiceApi {
+  final $pb.RpcClient _client;
+
+  ChatServiceApi(this._client);
+
+  /// Send an event (unified message model). Idempotent if idempotency_key is provided.
+  $async.Future<SendEventResponse> sendEvent(
+          $pb.ClientContext? ctx, SendEventRequest request) =>
+      _client.invoke<SendEventResponse>(
+          ctx, 'ChatService', 'SendEvent', request, SendEventResponse());
 
   /// Fetch history for a room. Cursor-based paging (cursor = opaque server token).
   $async.Future<GetHistoryResponse> getHistory(
