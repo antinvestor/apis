@@ -426,19 +426,41 @@ Closes #123
 
 #### 6. Post-Merge
 
-**Version tagging** (maintainers only):
+**Version tagging and releases** (maintainers only):
+
+The release workflow is **tag-driven** - pushing a tag automatically triggers the release process.
+
 ```bash
-# Tag for each language after merge
-git tag go/chat/v1.47.0
+# 1. Ensure CHANGELOG.md has entry for the new version
+# (Changelog CI should have already added it)
+
+# 2. Tag for each language/package with the desired version
 git tag dart/chat/v1.47.0
+git tag go/chat/v1.47.0
 git tag java/chat/v1.47.0
+
+# 3. Push tags to trigger release workflows
 git push origin --tags
 ```
 
-**Release workflows** will automatically publish packages to:
+**How it works:**
+1. **Tag pushed** → Triggers release workflow for that language/package
+2. **Version extracted** from tag (e.g., `dart/chat/v1.47.0` → version `1.47.0`)
+3. **Verify CHANGELOG.md** has entry for that version (warns if missing)
+4. **Update pubspec.yaml/go.mod** with the version from tag
+5. **Run tests and analysis**
+6. **Publish** to package repository
+
+**Tag format:**
+- Package-specific: `dart/chat/v1.47.0`, `go/ledger/v2.3.1`
+- Global (all packages): `v1.47.0` (releases all packages with same version)
+
+**Release destinations:**
 - Dart packages → pub.dev
 - Go modules → GitHub Packages
 - Java packages → GitHub Packages/Maven Central
+
+**Important:** The tag version is the source of truth. Ensure your CHANGELOG.md already contains an entry for that version before tagging.
 
 ---
 
