@@ -132,19 +132,27 @@ class Locale extends $pb.GeneratedMessage {
   void clearCode() => $_clearField(10);
 }
 
-/// KeyObject represents an encryption key associated with a device.
-/// Keys are used for secure communications and must be properly managed.
+/// KeyObject represents a key or token associated with a device.
+/// Keys are used for secure communications, authentication, and push notifications.
 class KeyObject extends $pb.GeneratedMessage {
   factory KeyObject({
     $core.String? id,
     $core.String? deviceId,
+    KeyType? keyType,
     $core.List<$core.int>? key,
+    $core.String? createdAt,
+    $core.String? expiresAt,
+    $core.bool? isActive,
     $0.Struct? extra,
   }) {
     final result = create();
     if (id != null) result.id = id;
     if (deviceId != null) result.deviceId = deviceId;
+    if (keyType != null) result.keyType = keyType;
     if (key != null) result.key = key;
+    if (createdAt != null) result.createdAt = createdAt;
+    if (expiresAt != null) result.expiresAt = expiresAt;
+    if (isActive != null) result.isActive = isActive;
     if (extra != null) result.extra = extra;
     return result;
   }
@@ -164,9 +172,14 @@ class KeyObject extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'deviceId')
+    ..aE<KeyType>(3, _omitFieldNames ? '' : 'keyType',
+        enumValues: KeyType.values)
     ..a<$core.List<$core.int>>(
-        3, _omitFieldNames ? '' : 'key', $pb.PbFieldType.OY)
-    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'extra',
+        4, _omitFieldNames ? '' : 'key', $pb.PbFieldType.OY)
+    ..aOS(5, _omitFieldNames ? '' : 'createdAt')
+    ..aOS(6, _omitFieldNames ? '' : 'expiresAt')
+    ..aOB(7, _omitFieldNames ? '' : 'isActive')
+    ..aOM<$0.Struct>(8, _omitFieldNames ? '' : 'extra',
         subBuilder: $0.Struct.create)
     ..hasRequiredFields = false;
 
@@ -208,24 +221,60 @@ class KeyObject extends $pb.GeneratedMessage {
   void clearDeviceId() => $_clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<$core.int> get key => $_getN(2);
+  KeyType get keyType => $_getN(2);
   @$pb.TagNumber(3)
-  set key($core.List<$core.int> value) => $_setBytes(2, value);
+  set keyType(KeyType value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasKey() => $_has(2);
+  $core.bool hasKeyType() => $_has(2);
   @$pb.TagNumber(3)
-  void clearKey() => $_clearField(3);
+  void clearKeyType() => $_clearField(3);
 
   @$pb.TagNumber(4)
-  $0.Struct get extra => $_getN(3);
+  $core.List<$core.int> get key => $_getN(3);
   @$pb.TagNumber(4)
-  set extra($0.Struct value) => $_setField(4, value);
+  set key($core.List<$core.int> value) => $_setBytes(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasExtra() => $_has(3);
+  $core.bool hasKey() => $_has(3);
   @$pb.TagNumber(4)
-  void clearExtra() => $_clearField(4);
-  @$pb.TagNumber(4)
-  $0.Struct ensureExtra() => $_ensure(3);
+  void clearKey() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get createdAt => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set createdAt($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCreatedAt() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCreatedAt() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get expiresAt => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set expiresAt($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasExpiresAt() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearExpiresAt() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.bool get isActive => $_getBF(6);
+  @$pb.TagNumber(7)
+  set isActive($core.bool value) => $_setBool(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasIsActive() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearIsActive() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $0.Struct get extra => $_getN(7);
+  @$pb.TagNumber(8)
+  set extra($0.Struct value) => $_setField(8, value);
+  @$pb.TagNumber(8)
+  $core.bool hasExtra() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearExtra() => $_clearField(8);
+  @$pb.TagNumber(8)
+  $0.Struct ensureExtra() => $_ensure(7);
 }
 
 /// DeviceLog represents an activity log entry for a device.
@@ -1860,14 +1909,15 @@ class ListLogsResponse extends $pb.GeneratedMessage {
   $pb.PbList<DeviceLog> get data => $_getList(0);
 }
 
-/// AddKeyRequest adds an encryption key to a device.
-/// Keys are used for secure communications (Matrix E2EE, push notifications, etc.).
+/// AddKeyRequest adds a key or token to a device.
+/// Keys are used for secure communications (Matrix E2EE, push notifications, FCM tokens, etc.).
 class AddKeyRequest extends $pb.GeneratedMessage {
   factory AddKeyRequest({
     $core.String? id,
     $core.String? deviceId,
     KeyType? keyType,
     $core.List<$core.int>? data,
+    $core.String? expiresAt,
     $0.Struct? extras,
   }) {
     final result = create();
@@ -1875,6 +1925,7 @@ class AddKeyRequest extends $pb.GeneratedMessage {
     if (deviceId != null) result.deviceId = deviceId;
     if (keyType != null) result.keyType = keyType;
     if (data != null) result.data = data;
+    if (expiresAt != null) result.expiresAt = expiresAt;
     if (extras != null) result.extras = extras;
     return result;
   }
@@ -1898,7 +1949,8 @@ class AddKeyRequest extends $pb.GeneratedMessage {
         enumValues: KeyType.values)
     ..a<$core.List<$core.int>>(
         4, _omitFieldNames ? '' : 'data', $pb.PbFieldType.OY)
-    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'extras',
+    ..aOS(5, _omitFieldNames ? '' : 'expiresAt')
+    ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'extras',
         subBuilder: $0.Struct.create)
     ..hasRequiredFields = false;
 
@@ -1960,15 +2012,24 @@ class AddKeyRequest extends $pb.GeneratedMessage {
   void clearData() => $_clearField(4);
 
   @$pb.TagNumber(5)
-  $0.Struct get extras => $_getN(4);
+  $core.String get expiresAt => $_getSZ(4);
   @$pb.TagNumber(5)
-  set extras($0.Struct value) => $_setField(5, value);
+  set expiresAt($core.String value) => $_setString(4, value);
   @$pb.TagNumber(5)
-  $core.bool hasExtras() => $_has(4);
+  $core.bool hasExpiresAt() => $_has(4);
   @$pb.TagNumber(5)
-  void clearExtras() => $_clearField(5);
-  @$pb.TagNumber(5)
-  $0.Struct ensureExtras() => $_ensure(4);
+  void clearExpiresAt() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $0.Struct get extras => $_getN(5);
+  @$pb.TagNumber(6)
+  set extras($0.Struct value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasExtras() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearExtras() => $_clearField(6);
+  @$pb.TagNumber(6)
+  $0.Struct ensureExtras() => $_ensure(5);
 }
 
 /// AddKeyResponse returns the created key.
@@ -2031,8 +2092,8 @@ class AddKeyResponse extends $pb.GeneratedMessage {
   KeyObject ensureData() => $_ensure(0);
 }
 
-/// RemoveKeyRequest removes one or more encryption keys from a device.
-/// Used when rotating keys or removing a device.
+/// RemoveKeyRequest removes one or more keys or tokens from a device.
+/// Used when rotating keys, removing tokens, or removing a device.
 class RemoveKeyRequest extends $pb.GeneratedMessage {
   factory RemoveKeyRequest({
     $core.Iterable<$core.String>? id,
@@ -2134,19 +2195,21 @@ class RemoveKeyResponse extends $pb.GeneratedMessage {
   $pb.PbList<$core.String> get id => $_getList(0);
 }
 
-/// SearchKeyRequest searches for encryption keys associated with a device.
+/// SearchKeyRequest searches for keys or tokens associated with a device.
 class SearchKeyRequest extends $pb.GeneratedMessage {
   factory SearchKeyRequest({
     $core.String? query,
     $core.String? deviceId,
-    KeyType? keyType,
+    $core.Iterable<KeyType>? keyTypes,
+    $core.bool? includeExpired,
     $core.int? page,
     $core.int? count,
   }) {
     final result = create();
     if (query != null) result.query = query;
     if (deviceId != null) result.deviceId = deviceId;
-    if (keyType != null) result.keyType = keyType;
+    if (keyTypes != null) result.keyTypes.addAll(keyTypes);
+    if (includeExpired != null) result.includeExpired = includeExpired;
     if (page != null) result.page = page;
     if (count != null) result.count = count;
     return result;
@@ -2167,10 +2230,13 @@ class SearchKeyRequest extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'query')
     ..aOS(2, _omitFieldNames ? '' : 'deviceId')
-    ..aE<KeyType>(3, _omitFieldNames ? '' : 'keyType',
-        enumValues: KeyType.values)
-    ..aI(4, _omitFieldNames ? '' : 'page')
-    ..aI(5, _omitFieldNames ? '' : 'count')
+    ..pc<KeyType>(3, _omitFieldNames ? '' : 'keyTypes', $pb.PbFieldType.KE,
+        valueOf: KeyType.valueOf,
+        enumValues: KeyType.values,
+        defaultEnumValue: KeyType.MATRIX_KEY)
+    ..aOB(4, _omitFieldNames ? '' : 'includeExpired')
+    ..aI(5, _omitFieldNames ? '' : 'page')
+    ..aI(6, _omitFieldNames ? '' : 'count')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2213,34 +2279,37 @@ class SearchKeyRequest extends $pb.GeneratedMessage {
   void clearDeviceId() => $_clearField(2);
 
   @$pb.TagNumber(3)
-  KeyType get keyType => $_getN(2);
-  @$pb.TagNumber(3)
-  set keyType(KeyType value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasKeyType() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearKeyType() => $_clearField(3);
+  $pb.PbList<KeyType> get keyTypes => $_getList(2);
 
   @$pb.TagNumber(4)
-  $core.int get page => $_getIZ(3);
+  $core.bool get includeExpired => $_getBF(3);
   @$pb.TagNumber(4)
-  set page($core.int value) => $_setSignedInt32(3, value);
+  set includeExpired($core.bool value) => $_setBool(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasPage() => $_has(3);
+  $core.bool hasIncludeExpired() => $_has(3);
   @$pb.TagNumber(4)
-  void clearPage() => $_clearField(4);
+  void clearIncludeExpired() => $_clearField(4);
 
   @$pb.TagNumber(5)
-  $core.int get count => $_getIZ(4);
+  $core.int get page => $_getIZ(4);
   @$pb.TagNumber(5)
-  set count($core.int value) => $_setSignedInt32(4, value);
+  set page($core.int value) => $_setSignedInt32(4, value);
   @$pb.TagNumber(5)
-  $core.bool hasCount() => $_has(4);
+  $core.bool hasPage() => $_has(4);
   @$pb.TagNumber(5)
-  void clearCount() => $_clearField(5);
+  void clearPage() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get count => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set count($core.int value) => $_setSignedInt32(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasCount() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCount() => $_clearField(6);
 }
 
-/// SearchKeyResponse returns matching encryption keys.
+/// SearchKeyResponse returns matching keys or tokens.
 class SearchKeyResponse extends $pb.GeneratedMessage {
   factory SearchKeyResponse({
     $core.Iterable<KeyObject>? data,
@@ -2292,7 +2361,284 @@ class SearchKeyResponse extends $pb.GeneratedMessage {
   $pb.PbList<KeyObject> get data => $_getList(0);
 }
 
-/// DeviceService provides comprehensive device management capabilities.
+/// RegisterKeyRequest registers a device with third-party services.
+/// Used when the key/token is generated by the third-party service (e.g., FCM token
+/// generated on device by FCM SDK). This links the device to the external service.
+/// For storing key material, use AddKeyRequest instead.
+class RegisterKeyRequest extends $pb.GeneratedMessage {
+  factory RegisterKeyRequest({
+    $core.String? deviceId,
+    KeyType? keyType,
+    $0.Struct? extras,
+  }) {
+    final result = create();
+    if (deviceId != null) result.deviceId = deviceId;
+    if (keyType != null) result.keyType = keyType;
+    if (extras != null) result.extras = extras;
+    return result;
+  }
+
+  RegisterKeyRequest._();
+
+  factory RegisterKeyRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory RegisterKeyRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'RegisterKeyRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'deviceId')
+    ..aE<KeyType>(2, _omitFieldNames ? '' : 'keyType',
+        enumValues: KeyType.values)
+    ..aOM<$0.Struct>(3, _omitFieldNames ? '' : 'extras',
+        subBuilder: $0.Struct.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RegisterKeyRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RegisterKeyRequest copyWith(void Function(RegisterKeyRequest) updates) =>
+      super.copyWith((message) => updates(message as RegisterKeyRequest))
+          as RegisterKeyRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RegisterKeyRequest create() => RegisterKeyRequest._();
+  @$core.override
+  RegisterKeyRequest createEmptyInstance() => create();
+  static $pb.PbList<RegisterKeyRequest> createRepeated() =>
+      $pb.PbList<RegisterKeyRequest>();
+  @$core.pragma('dart2js:noInline')
+  static RegisterKeyRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<RegisterKeyRequest>(create);
+  static RegisterKeyRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get deviceId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set deviceId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasDeviceId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDeviceId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  KeyType get keyType => $_getN(1);
+  @$pb.TagNumber(2)
+  set keyType(KeyType value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasKeyType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearKeyType() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $0.Struct get extras => $_getN(2);
+  @$pb.TagNumber(3)
+  set extras($0.Struct value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasExtras() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearExtras() => $_clearField(3);
+  @$pb.TagNumber(3)
+  $0.Struct ensureExtras() => $_ensure(2);
+}
+
+/// RegisterKeyResponse returns confirmation of registration.
+/// The actual key/token data is managed by the third-party service.
+class RegisterKeyResponse extends $pb.GeneratedMessage {
+  factory RegisterKeyResponse({
+    KeyObject? data,
+  }) {
+    final result = create();
+    if (data != null) result.data = data;
+    return result;
+  }
+
+  RegisterKeyResponse._();
+
+  factory RegisterKeyResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory RegisterKeyResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'RegisterKeyResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'),
+      createEmptyInstance: create)
+    ..aOM<KeyObject>(1, _omitFieldNames ? '' : 'data',
+        subBuilder: KeyObject.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RegisterKeyResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RegisterKeyResponse copyWith(void Function(RegisterKeyResponse) updates) =>
+      super.copyWith((message) => updates(message as RegisterKeyResponse))
+          as RegisterKeyResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RegisterKeyResponse create() => RegisterKeyResponse._();
+  @$core.override
+  RegisterKeyResponse createEmptyInstance() => create();
+  static $pb.PbList<RegisterKeyResponse> createRepeated() =>
+      $pb.PbList<RegisterKeyResponse>();
+  @$core.pragma('dart2js:noInline')
+  static RegisterKeyResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<RegisterKeyResponse>(create);
+  static RegisterKeyResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  KeyObject get data => $_getN(0);
+  @$pb.TagNumber(1)
+  set data(KeyObject value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasData() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearData() => $_clearField(1);
+  @$pb.TagNumber(1)
+  KeyObject ensureData() => $_ensure(0);
+}
+
+/// DeRegisterKeyRequest removes device registration from third-party services.
+/// This cleans up the connection with external services like FCM.
+class DeRegisterKeyRequest extends $pb.GeneratedMessage {
+  factory DeRegisterKeyRequest({
+    $core.String? id,
+  }) {
+    final result = create();
+    if (id != null) result.id = id;
+    return result;
+  }
+
+  DeRegisterKeyRequest._();
+
+  factory DeRegisterKeyRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory DeRegisterKeyRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'DeRegisterKeyRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeRegisterKeyRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeRegisterKeyRequest copyWith(void Function(DeRegisterKeyRequest) updates) =>
+      super.copyWith((message) => updates(message as DeRegisterKeyRequest))
+          as DeRegisterKeyRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeRegisterKeyRequest create() => DeRegisterKeyRequest._();
+  @$core.override
+  DeRegisterKeyRequest createEmptyInstance() => create();
+  static $pb.PbList<DeRegisterKeyRequest> createRepeated() =>
+      $pb.PbList<DeRegisterKeyRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeRegisterKeyRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeRegisterKeyRequest>(create);
+  static DeRegisterKeyRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+}
+
+/// DeRegisterKeyResponse confirms service deregistration.
+class DeRegisterKeyResponse extends $pb.GeneratedMessage {
+  factory DeRegisterKeyResponse({
+    $core.bool? success,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (success != null) result.success = success;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  DeRegisterKeyResponse._();
+
+  factory DeRegisterKeyResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory DeRegisterKeyResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'DeRegisterKeyResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'),
+      createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..aOS(2, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeRegisterKeyResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeRegisterKeyResponse copyWith(
+          void Function(DeRegisterKeyResponse) updates) =>
+      super.copyWith((message) => updates(message as DeRegisterKeyResponse))
+          as DeRegisterKeyResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeRegisterKeyResponse create() => DeRegisterKeyResponse._();
+  @$core.override
+  DeRegisterKeyResponse createEmptyInstance() => create();
+  static $pb.PbList<DeRegisterKeyResponse> createRepeated() =>
+      $pb.PbList<DeRegisterKeyResponse>();
+  @$core.pragma('dart2js:noInline')
+  static DeRegisterKeyResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeRegisterKeyResponse>(create);
+  static DeRegisterKeyResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get success => $_getBF(0);
+  @$pb.TagNumber(1)
+  set success($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSuccess() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSuccess() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get message => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set message($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMessage() => $_clearField(2);
+}
+
+/// DeviceService provides core device management and key/token management.
 /// All RPCs require authentication via Bearer token unless otherwise specified.
 class DeviceServiceApi {
   final $pb.RpcClient _client;
@@ -2361,26 +2707,51 @@ class DeviceServiceApi {
       _client.invoke<ListLogsResponse>(
           ctx, 'DeviceService', 'ListLogs', request, ListLogsResponse());
 
-  /// AddKey adds an encryption key to a device.
-  /// Keys are used for secure communications (Matrix E2EE, push notifications).
+  /// AddKey adds a key or token to a device (FCM tokens, encryption keys, etc.).
   $async.Future<AddKeyResponse> addKey(
           $pb.ClientContext? ctx, AddKeyRequest request) =>
       _client.invoke<AddKeyResponse>(
           ctx, 'DeviceService', 'AddKey', request, AddKeyResponse());
 
-  /// RemoveKey removes encryption keys from a device.
-  /// Used for key rotation or when removing a device.
+  /// RemoveKey removes keys or tokens from a device.
   $async.Future<RemoveKeyResponse> removeKey(
           $pb.ClientContext? ctx, RemoveKeyRequest request) =>
       _client.invoke<RemoveKeyResponse>(
           ctx, 'DeviceService', 'RemoveKey', request, RemoveKeyResponse());
 
-  /// SearchKey finds encryption keys associated with a device.
-  /// Supports filtering by key type and pagination.
+  /// SearchKey searches for keys or tokens associated with a device.
   $async.Future<SearchKeyResponse> searchKey(
           $pb.ClientContext? ctx, SearchKeyRequest request) =>
       _client.invoke<SearchKeyResponse>(
           ctx, 'DeviceService', 'SearchKey', request, SearchKeyResponse());
+
+  /// RegisterKey registers a key with third-party services (e.g., FCM, APNs).
+  /// This handles integration with external services and stores the key.
+  $async.Future<RegisterKeyResponse> registerKey(
+          $pb.ClientContext? ctx, RegisterKeyRequest request) =>
+      _client.invoke<RegisterKeyResponse>(
+          ctx, 'DeviceService', 'RegisterKey', request, RegisterKeyResponse());
+
+  /// DeRegisterKey deregisters a key from third-party services.
+  /// This handles cleanup with external services and removes the key.
+  $async.Future<DeRegisterKeyResponse> deRegisterKey(
+          $pb.ClientContext? ctx, DeRegisterKeyRequest request) =>
+      _client.invoke<DeRegisterKeyResponse>(ctx, 'DeviceService',
+          'DeRegisterKey', request, DeRegisterKeyResponse());
+
+  /// RegisterNotificationKey registers a notification key for push notifications.
+  /// This integrates with notification services and stores the key.
+  $async.Future<RegisterKeyResponse> registerNotificationKey(
+          $pb.ClientContext? ctx, RegisterKeyRequest request) =>
+      _client.invoke<RegisterKeyResponse>(ctx, 'DeviceService',
+          'RegisterNotificationKey', request, RegisterKeyResponse());
+
+  /// DeRegisterNotificationKey deregisters a notification key.
+  /// This removes the key from notification services and local storage.
+  $async.Future<DeRegisterKeyResponse> deRegisterNotificationKey(
+          $pb.ClientContext? ctx, DeRegisterKeyRequest request) =>
+      _client.invoke<DeRegisterKeyResponse>(ctx, 'DeviceService',
+          'DeRegisterNotificationKey', request, DeRegisterKeyResponse());
 }
 
 const $core.bool _omitFieldNames =

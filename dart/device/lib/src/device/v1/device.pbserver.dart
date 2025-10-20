@@ -45,6 +45,14 @@ abstract class DeviceServiceBase extends $pb.GeneratedService {
       $pb.ServerContext ctx, $1.RemoveKeyRequest request);
   $async.Future<$1.SearchKeyResponse> searchKey(
       $pb.ServerContext ctx, $1.SearchKeyRequest request);
+  $async.Future<$1.RegisterKeyResponse> registerKey(
+      $pb.ServerContext ctx, $1.RegisterKeyRequest request);
+  $async.Future<$1.DeRegisterKeyResponse> deRegisterKey(
+      $pb.ServerContext ctx, $1.DeRegisterKeyRequest request);
+  $async.Future<$1.RegisterKeyResponse> registerNotificationKey(
+      $pb.ServerContext ctx, $1.RegisterKeyRequest request);
+  $async.Future<$1.DeRegisterKeyResponse> deRegisterNotificationKey(
+      $pb.ServerContext ctx, $1.DeRegisterKeyRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
@@ -72,6 +80,14 @@ abstract class DeviceServiceBase extends $pb.GeneratedService {
         return $1.RemoveKeyRequest();
       case 'SearchKey':
         return $1.SearchKeyRequest();
+      case 'RegisterKey':
+        return $1.RegisterKeyRequest();
+      case 'DeRegisterKey':
+        return $1.DeRegisterKeyRequest();
+      case 'RegisterNotificationKey':
+        return $1.RegisterKeyRequest();
+      case 'DeRegisterNotificationKey':
+        return $1.DeRegisterKeyRequest();
       default:
         throw $core.ArgumentError('Unknown method: $methodName');
     }
@@ -104,6 +120,15 @@ abstract class DeviceServiceBase extends $pb.GeneratedService {
         return removeKey(ctx, request as $1.RemoveKeyRequest);
       case 'SearchKey':
         return searchKey(ctx, request as $1.SearchKeyRequest);
+      case 'RegisterKey':
+        return registerKey(ctx, request as $1.RegisterKeyRequest);
+      case 'DeRegisterKey':
+        return deRegisterKey(ctx, request as $1.DeRegisterKeyRequest);
+      case 'RegisterNotificationKey':
+        return registerNotificationKey(ctx, request as $1.RegisterKeyRequest);
+      case 'DeRegisterNotificationKey':
+        return deRegisterNotificationKey(
+            ctx, request as $1.DeRegisterKeyRequest);
       default:
         throw $core.ArgumentError('Unknown method: $methodName');
     }

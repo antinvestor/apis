@@ -21,8 +21,8 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * AddKeyRequest adds an encryption key to a device.
- * Keys are used for secure communications (Matrix E2EE, push notifications, etc.).
+ * AddKeyRequest adds a key or token to a device.
+ * Keys are used for secure communications (Matrix E2EE, push notifications, FCM tokens, etc.).
  * </pre>
  *
  * Protobuf type {@code device.v1.AddKeyRequest}
@@ -51,6 +51,7 @@ private static final long serialVersionUID = 0L;
     deviceId_ = "";
     keyType_ = 0;
     data_ = com.google.protobuf.ByteString.EMPTY;
+    expiresAt_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -165,7 +166,7 @@ private static final long serialVersionUID = 0L;
   private int keyType_ = 0;
   /**
    * <pre>
-   * Type of key (Matrix, Notification, etc.)
+   * Type of key (Matrix, FCM, Encryption, etc.)
    * </pre>
    *
    * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -176,7 +177,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Type of key (Matrix, Notification, etc.)
+   * Type of key (Matrix, FCM, Encryption, etc.)
    * </pre>
    *
    * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -191,7 +192,7 @@ private static final long serialVersionUID = 0L;
   private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
   /**
    * <pre>
-   * The key material (will be encrypted at rest)
+   * The key material or token (will be encrypted at rest)
    * </pre>
    *
    * <code>bytes data = 4 [json_name = "data"];</code>
@@ -202,14 +203,61 @@ private static final long serialVersionUID = 0L;
     return data_;
   }
 
-  public static final int EXTRAS_FIELD_NUMBER = 5;
+  public static final int EXPIRES_AT_FIELD_NUMBER = 5;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object expiresAt_ = "";
+  /**
+   * <pre>
+   * Optional expiration timestamp (RFC3339)
+   * </pre>
+   *
+   * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
+   * @return The expiresAt.
+   */
+  @java.lang.Override
+  public java.lang.String getExpiresAt() {
+    java.lang.Object ref = expiresAt_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      expiresAt_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * Optional expiration timestamp (RFC3339)
+   * </pre>
+   *
+   * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
+   * @return The bytes for expiresAt.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getExpiresAtBytes() {
+    java.lang.Object ref = expiresAt_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      expiresAt_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int EXTRAS_FIELD_NUMBER = 6;
   private com.google.protobuf.Struct extras_;
   /**
    * <pre>
-   * Additional key metadata (algorithm, expiry, etc.)
+   * Additional key metadata (algorithm, app_id, etc.)
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
    * @return Whether the extras field is set.
    */
   @java.lang.Override
@@ -218,10 +266,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Additional key metadata (algorithm, expiry, etc.)
+   * Additional key metadata (algorithm, app_id, etc.)
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
    * @return The extras.
    */
   @java.lang.Override
@@ -230,10 +278,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Additional key metadata (algorithm, expiry, etc.)
+   * Additional key metadata (algorithm, app_id, etc.)
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
    */
   @java.lang.Override
   public com.google.protobuf.StructOrBuilder getExtrasOrBuilder() {
@@ -266,8 +314,11 @@ private static final long serialVersionUID = 0L;
     if (!data_.isEmpty()) {
       output.writeBytes(4, data_);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(expiresAt_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 5, expiresAt_);
+    }
     if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(5, getExtras());
+      output.writeMessage(6, getExtras());
     }
     getUnknownFields().writeTo(output);
   }
@@ -292,9 +343,12 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeBytesSize(4, data_);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(expiresAt_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(5, expiresAt_);
+    }
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(5, getExtras());
+        .computeMessageSize(6, getExtras());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -318,6 +372,8 @@ private static final long serialVersionUID = 0L;
     if (keyType_ != other.keyType_) return false;
     if (!getData()
         .equals(other.getData())) return false;
+    if (!getExpiresAt()
+        .equals(other.getExpiresAt())) return false;
     if (hasExtras() != other.hasExtras()) return false;
     if (hasExtras()) {
       if (!getExtras()
@@ -342,6 +398,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + keyType_;
     hash = (37 * hash) + DATA_FIELD_NUMBER;
     hash = (53 * hash) + getData().hashCode();
+    hash = (37 * hash) + EXPIRES_AT_FIELD_NUMBER;
+    hash = (53 * hash) + getExpiresAt().hashCode();
     if (hasExtras()) {
       hash = (37 * hash) + EXTRAS_FIELD_NUMBER;
       hash = (53 * hash) + getExtras().hashCode();
@@ -445,8 +503,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * AddKeyRequest adds an encryption key to a device.
-   * Keys are used for secure communications (Matrix E2EE, push notifications, etc.).
+   * AddKeyRequest adds a key or token to a device.
+   * Keys are used for secure communications (Matrix E2EE, push notifications, FCM tokens, etc.).
    * </pre>
    *
    * Protobuf type {@code device.v1.AddKeyRequest}
@@ -492,6 +550,7 @@ private static final long serialVersionUID = 0L;
       deviceId_ = "";
       keyType_ = 0;
       data_ = com.google.protobuf.ByteString.EMPTY;
+      expiresAt_ = "";
       extras_ = null;
       if (extrasBuilder_ != null) {
         extrasBuilder_.dispose();
@@ -542,8 +601,11 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000008) != 0)) {
         result.data_ = data_;
       }
-      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.expiresAt_ = expiresAt_;
+      }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000020) != 0)) {
         result.extras_ = extrasBuilder_ == null
             ? extras_
             : extrasBuilder_.build();
@@ -579,6 +641,11 @@ private static final long serialVersionUID = 0L;
       }
       if (!other.getData().isEmpty()) {
         setData(other.getData());
+      }
+      if (!other.getExpiresAt().isEmpty()) {
+        expiresAt_ = other.expiresAt_;
+        bitField0_ |= 0x00000010;
+        onChanged();
       }
       if (other.hasExtras()) {
         mergeExtras(other.getExtras());
@@ -630,12 +697,17 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 34
             case 42: {
-              input.readMessage(
-                  internalGetExtrasFieldBuilder().getBuilder(),
-                  extensionRegistry);
+              expiresAt_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000010;
               break;
             } // case 42
+            case 50: {
+              input.readMessage(
+                  internalGetExtrasFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 50
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -840,7 +912,7 @@ private static final long serialVersionUID = 0L;
     private int keyType_ = 0;
     /**
      * <pre>
-     * Type of key (Matrix, Notification, etc.)
+     * Type of key (Matrix, FCM, Encryption, etc.)
      * </pre>
      *
      * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -851,7 +923,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Type of key (Matrix, Notification, etc.)
+     * Type of key (Matrix, FCM, Encryption, etc.)
      * </pre>
      *
      * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -866,7 +938,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Type of key (Matrix, Notification, etc.)
+     * Type of key (Matrix, FCM, Encryption, etc.)
      * </pre>
      *
      * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -879,7 +951,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Type of key (Matrix, Notification, etc.)
+     * Type of key (Matrix, FCM, Encryption, etc.)
      * </pre>
      *
      * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -895,7 +967,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Type of key (Matrix, Notification, etc.)
+     * Type of key (Matrix, FCM, Encryption, etc.)
      * </pre>
      *
      * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -911,7 +983,7 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
-     * The key material (will be encrypted at rest)
+     * The key material or token (will be encrypted at rest)
      * </pre>
      *
      * <code>bytes data = 4 [json_name = "data"];</code>
@@ -923,7 +995,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The key material (will be encrypted at rest)
+     * The key material or token (will be encrypted at rest)
      * </pre>
      *
      * <code>bytes data = 4 [json_name = "data"];</code>
@@ -939,7 +1011,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The key material (will be encrypted at rest)
+     * The key material or token (will be encrypted at rest)
      * </pre>
      *
      * <code>bytes data = 4 [json_name = "data"];</code>
@@ -952,26 +1024,118 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private java.lang.Object expiresAt_ = "";
+    /**
+     * <pre>
+     * Optional expiration timestamp (RFC3339)
+     * </pre>
+     *
+     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
+     * @return The expiresAt.
+     */
+    public java.lang.String getExpiresAt() {
+      java.lang.Object ref = expiresAt_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        expiresAt_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Optional expiration timestamp (RFC3339)
+     * </pre>
+     *
+     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
+     * @return The bytes for expiresAt.
+     */
+    public com.google.protobuf.ByteString
+        getExpiresAtBytes() {
+      java.lang.Object ref = expiresAt_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        expiresAt_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Optional expiration timestamp (RFC3339)
+     * </pre>
+     *
+     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
+     * @param value The expiresAt to set.
+     * @return This builder for chaining.
+     */
+    public Builder setExpiresAt(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      expiresAt_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional expiration timestamp (RFC3339)
+     * </pre>
+     *
+     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearExpiresAt() {
+      expiresAt_ = getDefaultInstance().getExpiresAt();
+      bitField0_ = (bitField0_ & ~0x00000010);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional expiration timestamp (RFC3339)
+     * </pre>
+     *
+     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
+     * @param value The bytes for expiresAt to set.
+     * @return This builder for chaining.
+     */
+    public Builder setExpiresAtBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      expiresAt_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+
     private com.google.protobuf.Struct extras_;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> extrasBuilder_;
     /**
      * <pre>
-     * Additional key metadata (algorithm, expiry, etc.)
+     * Additional key metadata (algorithm, app_id, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
      * @return Whether the extras field is set.
      */
     public boolean hasExtras() {
-      return ((bitField0_ & 0x00000010) != 0);
+      return ((bitField0_ & 0x00000020) != 0);
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, expiry, etc.)
+     * Additional key metadata (algorithm, app_id, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
      * @return The extras.
      */
     public com.google.protobuf.Struct getExtras() {
@@ -983,10 +1147,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, expiry, etc.)
+     * Additional key metadata (algorithm, app_id, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
      */
     public Builder setExtras(com.google.protobuf.Struct value) {
       if (extrasBuilder_ == null) {
@@ -997,16 +1161,16 @@ private static final long serialVersionUID = 0L;
       } else {
         extrasBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, expiry, etc.)
+     * Additional key metadata (algorithm, app_id, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
      */
     public Builder setExtras(
         com.google.protobuf.Struct.Builder builderForValue) {
@@ -1015,20 +1179,20 @@ private static final long serialVersionUID = 0L;
       } else {
         extrasBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, expiry, etc.)
+     * Additional key metadata (algorithm, app_id, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
      */
     public Builder mergeExtras(com.google.protobuf.Struct value) {
       if (extrasBuilder_ == null) {
-        if (((bitField0_ & 0x00000010) != 0) &&
+        if (((bitField0_ & 0x00000020) != 0) &&
           extras_ != null &&
           extras_ != com.google.protobuf.Struct.getDefaultInstance()) {
           getExtrasBuilder().mergeFrom(value);
@@ -1039,20 +1203,20 @@ private static final long serialVersionUID = 0L;
         extrasBuilder_.mergeFrom(value);
       }
       if (extras_ != null) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         onChanged();
       }
       return this;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, expiry, etc.)
+     * Additional key metadata (algorithm, app_id, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
      */
     public Builder clearExtras() {
-      bitField0_ = (bitField0_ & ~0x00000010);
+      bitField0_ = (bitField0_ & ~0x00000020);
       extras_ = null;
       if (extrasBuilder_ != null) {
         extrasBuilder_.dispose();
@@ -1063,22 +1227,22 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, expiry, etc.)
+     * Additional key metadata (algorithm, app_id, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
      */
     public com.google.protobuf.Struct.Builder getExtrasBuilder() {
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000020;
       onChanged();
       return internalGetExtrasFieldBuilder().getBuilder();
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, expiry, etc.)
+     * Additional key metadata (algorithm, app_id, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
      */
     public com.google.protobuf.StructOrBuilder getExtrasOrBuilder() {
       if (extrasBuilder_ != null) {
@@ -1090,10 +1254,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, expiry, etc.)
+     * Additional key metadata (algorithm, app_id, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
