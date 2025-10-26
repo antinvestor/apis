@@ -45,6 +45,14 @@ abstract class DeviceServiceBase extends $pb.GeneratedService {
       $pb.ServerContext ctx, $1.RemoveKeyRequest request);
   $async.Future<$1.SearchKeyResponse> searchKey(
       $pb.ServerContext ctx, $1.SearchKeyRequest request);
+  $async.Future<$1.RegisterKeyResponse> registerKey(
+      $pb.ServerContext ctx, $1.RegisterKeyRequest request);
+  $async.Future<$1.DeRegisterKeyResponse> deRegisterKey(
+      $pb.ServerContext ctx, $1.DeRegisterKeyRequest request);
+  $async.Future<$1.NotifyResponse> notify(
+      $pb.ServerContext ctx, $1.NotifyRequest request);
+  $async.Future<$1.UpdatePresenceResponse> updatePresence(
+      $pb.ServerContext ctx, $1.UpdatePresenceRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
@@ -72,6 +80,14 @@ abstract class DeviceServiceBase extends $pb.GeneratedService {
         return $1.RemoveKeyRequest();
       case 'SearchKey':
         return $1.SearchKeyRequest();
+      case 'RegisterKey':
+        return $1.RegisterKeyRequest();
+      case 'DeRegisterKey':
+        return $1.DeRegisterKeyRequest();
+      case 'Notify':
+        return $1.NotifyRequest();
+      case 'UpdatePresence':
+        return $1.UpdatePresenceRequest();
       default:
         throw $core.ArgumentError('Unknown method: $methodName');
     }
@@ -104,6 +120,14 @@ abstract class DeviceServiceBase extends $pb.GeneratedService {
         return removeKey(ctx, request as $1.RemoveKeyRequest);
       case 'SearchKey':
         return searchKey(ctx, request as $1.SearchKeyRequest);
+      case 'RegisterKey':
+        return registerKey(ctx, request as $1.RegisterKeyRequest);
+      case 'DeRegisterKey':
+        return deRegisterKey(ctx, request as $1.DeRegisterKeyRequest);
+      case 'Notify':
+        return notify(ctx, request as $1.NotifyRequest);
+      case 'UpdatePresence':
+        return updatePresence(ctx, request as $1.UpdatePresenceRequest);
       default:
         throw $core.ArgumentError('Unknown method: $methodName');
     }

@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
-  title: Device Service
-  description: The Device Service provides comprehensive device management capabilities including device registration, session tracking, key management, and security auditing. It enables applications to register and track user devices across platforms (mobile, web, desktop), manage encryption keys for secure communications, and maintain detailed logs of device activity for security and compliance purposes. The service supports multi-device scenarios where users can have multiple active devices simultaneously.
+  title: Device Management API
+  description: The Device Management API provides comprehensive device management capabilities including device registration, session tracking, and unified key/token management. The API uses a unified KeyObject model for all key types including FCM tokens, encryption keys (Curve25519, Ed25519, Pickle), Matrix keys, and notification keys. This enables applications to register and track user devices across platforms (mobile, web, desktop), manage push notification tokens, handle encryption keys for secure communications, and maintain detailed logs of device activity for security and compliance purposes.
   contact:
     name: Ant Investor Ltd
     url: https://github.com/antinvestor/service-device
@@ -16,8 +16,8 @@ paths:
       tags:
         - Device Keys
         - device.v1.DeviceService
-      summary: Add encryption key
-      description: Adds an encryption key to a device. Keys are used for secure communications including Matrix end-to-end encryption and secure push notification delivery.
+      summary: Add key or token
+      description: Adds a key or token to a device. Supports FCM tokens, encryption keys (Curve25519, Ed25519), and other key types.
       operationId: addDeviceKey
       parameters:
         - name: Connect-Protocol-Version
@@ -85,6 +85,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.CreateResponse'
+  /device.v1.DeviceService/DeRegisterKey:
+    post:
+      tags:
+        - Key Registration
+        - device.v1.DeviceService
+      summary: DeRegister key from third-party service
+      description: DeRegisters a key or token from third-party services (like FCM) and removes it from storage. This method handles both the external service cleanup and local deletion.
+      operationId: deRegisterKey
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/device.v1.DeRegisterKeyRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.v1.DeRegisterKeyResponse'
   /device.v1.DeviceService/GetById:
     post:
       tags:
@@ -234,6 +271,80 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.LogResponse'
+  /device.v1.DeviceService/Notify:
+    post:
+      tags:
+        - Device Notifications
+        - device.v1.DeviceService
+      summary: Notify device using registered key
+      description: Sends a notification to a device using one of its registered keys (FCM token, notification key, etc.). The service automatically selects an appropriate active key based on the key_type, or uses a specific key if key_id is provided.
+      operationId: notifyDevice
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/device.v1.NotifyRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.v1.NotifyResponse'
+  /device.v1.DeviceService/RegisterKey:
+    post:
+      tags:
+        - Key Registration
+        - device.v1.DeviceService
+      summary: Register key with third-party service
+      description: Registers a key or token with third-party services (like FCM for push notifications) and stores it. This method handles both the external service integration and local storage.
+      operationId: registerKey
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/device.v1.RegisterKeyRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.v1.RegisterKeyResponse'
   /device.v1.DeviceService/Remove:
     post:
       tags:
@@ -276,8 +387,8 @@ paths:
       tags:
         - Device Keys
         - device.v1.DeviceService
-      summary: Remove encryption keys
-      description: Removes one or more encryption keys from a device. Used for key rotation or when removing a device from the system.
+      summary: Remove keys or tokens
+      description: Removes one or more keys or tokens from a device. Used for key rotation, token management, or when removing a device.
       operationId: removeDeviceKey
       parameters:
         - name: Connect-Protocol-Version
@@ -309,7 +420,43 @@ paths:
               schema:
                 $ref: '#/components/schemas/device.v1.RemoveKeyResponse'
   /device.v1.DeviceService/Search: {}
-  /device.v1.DeviceService/SearchKey: {}
+  /device.v1.DeviceService/SearchKey:
+    post:
+      tags:
+        - Device Keys
+        - device.v1.DeviceService
+      summary: Search keys or tokens
+      description: Searches for keys or tokens associated with a device. Supports filtering by key type and expiration.
+      operationId: searchDeviceKey
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/device.v1.SearchKeyRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.v1.SearchKeyResponse'
   /device.v1.DeviceService/Update:
     post:
       tags:
@@ -347,6 +494,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/device.v1.UpdateResponse'
+  /device.v1.DeviceService/UpdatePresence:
+    post:
+      tags:
+        - Device Presence
+        - device.v1.DeviceService
+      summary: Update device presence
+      description: Updates the presence status of a device. Used to indicate online/offline/away/busy status and track last activity for real-time communication features.
+      operationId: updatePresence
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/device.v1.UpdatePresenceRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.v1.UpdatePresenceResponse'
 components:
   schemas:
     connect-protocol-version:
@@ -437,22 +621,26 @@ components:
           description: Device this key belongs to
         keyType:
           title: key_type
-          description: Type of key (Matrix, Notification, etc.)
+          description: Type of key (Matrix, FCM, Encryption, etc.)
           $ref: '#/components/schemas/device.v1.KeyType'
         data:
           type: string
           title: data
           format: byte
-          description: The key material (will be encrypted at rest)
+          description: The key material or token (will be encrypted at rest)
+        expiresAt:
+          type: string
+          title: expires_at
+          description: Optional expiration timestamp (RFC3339)
         extras:
           title: extras
-          description: Additional key metadata (algorithm, expiry, etc.)
+          description: Additional key metadata (algorithm, app_id, etc.)
           $ref: '#/components/schemas/google.protobuf.Struct'
       title: AddKeyRequest
       additionalProperties: false
       description: |-
-        AddKeyRequest adds an encryption key to a device.
-         Keys are used for secure communications (Matrix E2EE, push notifications, etc.).
+        AddKeyRequest adds a key or token to a device.
+         Keys are used for secure communications (Matrix E2EE, push notifications, FCM tokens, etc.).
     device.v1.AddKeyResponse:
       type: object
       properties:
@@ -487,6 +675,35 @@ components:
       title: CreateResponse
       additionalProperties: false
       description: CreateResponse returns the newly created device.
+    device.v1.DeRegisterKeyRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Key ID to deregister from external service
+      title: DeRegisterKeyRequest
+      additionalProperties: false
+      description: |-
+        DeRegisterKeyRequest removes device registration from third-party services.
+         This cleans up the connection with external services like FCM.
+    device.v1.DeRegisterKeyResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          title: success
+          description: True if successfully deregistered from service
+        message:
+          type: string
+          title: message
+          description: Status message from the external service
+      title: DeRegisterKeyResponse
+      additionalProperties: false
+      description: DeRegisterKeyResponse confirms service deregistration.
     device.v1.DeviceLog:
       type: object
       properties:
@@ -583,6 +800,10 @@ components:
           title: locale
           description: Device locale settings
           $ref: '#/components/schemas/device.v1.Locale'
+        presence:
+          title: presence
+          description: Device presense status
+          $ref: '#/components/schemas/device.v1.PresenceStatus'
         location:
           title: location
           description: Last known geographic location
@@ -667,28 +888,48 @@ components:
           minLength: 3
           pattern: '[0-9a-z_-]{3,20}'
           description: Device this key belongs to
+        keyType:
+          title: key_type
+          description: Type of key (FCM token, encryption key, etc.)
+          $ref: '#/components/schemas/device.v1.KeyType'
         key:
           type: string
           title: key
           format: byte
-          description: The actual encryption key material (encrypted at rest)
+          description: The actual key material or token (encrypted at rest)
+        createdAt:
+          type: string
+          title: created_at
+          description: Timestamp when key was created (RFC3339)
+        expiresAt:
+          type: string
+          title: expires_at
+          description: Optional expiration timestamp (RFC3339)
+        isActive:
+          type: boolean
+          title: is_active
+          description: Whether the key is currently active
         extra:
           title: extra
-          description: Additional key metadata (algorithm, expiry, etc.)
+          description: Additional key metadata (algorithm, app_id, etc.)
           $ref: '#/components/schemas/google.protobuf.Struct'
       title: KeyObject
       additionalProperties: false
       description: |-
-        KeyObject represents an encryption key associated with a device.
-         Keys are used for secure communications and must be properly managed.
+        KeyObject represents a key or token associated with a device.
+         Keys are used for secure communications, authentication, and push notifications.
     device.v1.KeyType:
       type: string
       title: KeyType
       enum:
         - MATRIX_KEY
         - NOTIFICATION_KEY
+        - FCM_TOKEN
+        - CURVE25519_KEY
+        - ED25519_KEY
+        - PICKLE_KEY
       description: |-
-        KeyType defines the types of encryption keys that can be stored for a device.
+        KeyType defines the types of keys that can be stored for a device.
          Different key types serve different purposes in the security infrastructure.
          buf:lint:ignore ENUM_VALUE_PREFIX
     device.v1.LinkRequest:
@@ -849,6 +1090,161 @@ components:
       title: LogResponse
       additionalProperties: false
       description: LogResponse returns the created log entry.
+    device.v1.NotifyRequest:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          title: device_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Device ID to notify
+        keyId:
+          type: string
+          title: key_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Specific key ID to use (optional - if not provided, uses key_type to select)
+        keyType:
+          title: key_type
+          description: Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
+          $ref: '#/components/schemas/device.v1.KeyType'
+        title:
+          type: string
+          title: title
+          description: Notification title
+        body:
+          type: string
+          title: body
+          description: Notification body/message
+        data:
+          title: data
+          description: Additional notification data/payload (custom data, actions, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+        extras:
+          title: extras
+          description: Extra notification options (priority, TTL, badge, sound, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: NotifyRequest
+      additionalProperties: false
+      description: |-
+        NotifyRequest sends a notification to a device using one of its registered keys.
+         The service will select an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
+    device.v1.NotifyResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          title: success
+          description: True if notification was successfully sent
+        message:
+          type: string
+          title: message
+          description: Status message or error details
+        notificationId:
+          type: string
+          title: notification_id
+          description: Unique identifier for the sent notification (if provided by service)
+        extras:
+          title: extras
+          description: Additional response metadata from notification service
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: NotifyResponse
+      additionalProperties: false
+      description: NotifyResponse confirms the notification was sent.
+    device.v1.PresenceObject:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          title: device_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Device this presence status belongs to
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Profile this device belongs to
+        status:
+          title: status
+          description: Current presence status
+          $ref: '#/components/schemas/device.v1.PresenceStatus'
+        statusMessage:
+          type: string
+          title: status_message
+          description: Optional custom status message
+        lastActive:
+          type: string
+          title: last_active
+          description: Timestamp of last activity (RFC3339)
+        updatedAt:
+          type: string
+          title: updated_at
+          description: Timestamp when presence was last updated (RFC3339)
+        extras:
+          title: extras
+          description: Additional presence metadata (activity type, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: PresenceObject
+      additionalProperties: false
+      description: |-
+        PresenceObject represents the presence/availability status of a device.
+         Tracks online/offline status and last activity for real-time communication features.
+    device.v1.PresenceStatus:
+      type: string
+      title: PresenceStatus
+      enum:
+        - OFFLINE
+        - ONLINE
+        - AWAY
+        - BUSY
+        - INVISIBLE
+      description: |-
+        PresenceStatus defines the online/offline status of a device.
+         buf:lint:ignore ENUM_VALUE_PREFIX
+    device.v1.RegisterKeyRequest:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          title: device_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Device to register with the service
+        keyType:
+          title: key_type
+          description: Type of service to register with (FCM_TOKEN, etc.)
+          $ref: '#/components/schemas/device.v1.KeyType'
+        extras:
+          title: extras
+          description: Service-specific metadata (app_id, platform, etc.)
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: RegisterKeyRequest
+      additionalProperties: false
+      description: |-
+        RegisterKeyRequest registers a device with third-party services.
+         Used when the key/token is generated by the third-party service (e.g., FCM token
+         generated on device by FCM SDK). This links the device to the external service.
+         For storing key material, use AddKeyRequest instead.
+    device.v1.RegisterKeyResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: Registered key object with service metadata
+          $ref: '#/components/schemas/device.v1.KeyObject'
+      title: RegisterKeyResponse
+      additionalProperties: false
+      description: |-
+        RegisterKeyResponse returns confirmation of registration.
+         The actual key/token data is managed by the third-party service.
     device.v1.RemoveKeyRequest:
       type: object
       properties:
@@ -864,8 +1260,8 @@ components:
       title: RemoveKeyRequest
       additionalProperties: false
       description: |-
-        RemoveKeyRequest removes one or more encryption keys from a device.
-         Used when rotating keys or removing a device.
+        RemoveKeyRequest removes one or more keys or tokens from a device.
+         Used when rotating keys, removing tokens, or removing a device.
     device.v1.RemoveKeyResponse:
       type: object
       properties:
@@ -917,10 +1313,16 @@ components:
           minLength: 3
           pattern: '[0-9a-z_-]{3,20}'
           description: Device ID to search keys for
-        keyType:
-          title: key_type
-          description: Filter by key type
-          $ref: '#/components/schemas/device.v1.KeyType'
+        keyTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/device.v1.KeyType'
+          title: key_types
+          description: Filter by key types (if empty, returns all)
+        includeExpired:
+          type: boolean
+          title: include_expired
+          description: If true, includes expired keys
         page:
           type: integer
           title: page
@@ -933,7 +1335,7 @@ components:
           description: Number of results per page
       title: SearchKeyRequest
       additionalProperties: false
-      description: SearchKeyRequest searches for encryption keys associated with a device.
+      description: SearchKeyRequest searches for keys or tokens associated with a device.
     device.v1.SearchKeyResponse:
       type: object
       properties:
@@ -945,7 +1347,7 @@ components:
           description: List of matching keys
       title: SearchKeyResponse
       additionalProperties: false
-      description: SearchKeyResponse returns matching encryption keys.
+      description: SearchKeyResponse returns matching keys or tokens.
     device.v1.SearchRequest:
       type: object
       properties:
@@ -996,6 +1398,41 @@ components:
       title: SearchResponse
       additionalProperties: false
       description: SearchResponse returns devices matching the search criteria.
+    device.v1.UpdatePresenceRequest:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          title: device_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Device ID to update presence for
+        status:
+          title: status
+          description: New presence status
+          $ref: '#/components/schemas/device.v1.PresenceStatus'
+        statusMessage:
+          type: string
+          title: status_message
+          description: Optional custom status message
+        extras:
+          title: extras
+          description: Additional presence metadata
+          $ref: '#/components/schemas/google.protobuf.Struct'
+      title: UpdatePresenceRequest
+      additionalProperties: false
+      description: UpdatePresenceRequest updates the presence status of a device.
+    device.v1.UpdatePresenceResponse:
+      type: object
+      properties:
+        data:
+          title: data
+          description: Updated presence object
+          $ref: '#/components/schemas/device.v1.PresenceObject'
+      title: UpdatePresenceResponse
+      additionalProperties: false
+      description: UpdatePresenceResponse returns the updated presence.
     device.v1.UpdateRequest:
       type: object
       properties:
@@ -1101,5 +1538,5 @@ security: []
 tags:
   - name: device.v1.DeviceService
     description: |-
-      DeviceService provides comprehensive device management capabilities.
+      DeviceService provides core device management and key/token management.
        All RPCs require authentication via Bearer token unless otherwise specified.

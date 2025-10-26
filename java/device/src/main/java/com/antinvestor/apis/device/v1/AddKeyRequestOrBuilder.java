@@ -66,7 +66,7 @@ public interface AddKeyRequestOrBuilder extends
 
   /**
    * <pre>
-   * Type of key (Matrix, Notification, etc.)
+   * Type of key (Matrix, FCM, Encryption, etc.)
    * </pre>
    *
    * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -75,7 +75,7 @@ public interface AddKeyRequestOrBuilder extends
   int getKeyTypeValue();
   /**
    * <pre>
-   * Type of key (Matrix, Notification, etc.)
+   * Type of key (Matrix, FCM, Encryption, etc.)
    * </pre>
    *
    * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -85,7 +85,7 @@ public interface AddKeyRequestOrBuilder extends
 
   /**
    * <pre>
-   * The key material (will be encrypted at rest)
+   * The key material or token (will be encrypted at rest)
    * </pre>
    *
    * <code>bytes data = 4 [json_name = "data"];</code>
@@ -95,28 +95,48 @@ public interface AddKeyRequestOrBuilder extends
 
   /**
    * <pre>
-   * Additional key metadata (algorithm, expiry, etc.)
+   * Optional expiration timestamp (RFC3339)
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+   * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
+   * @return The expiresAt.
+   */
+  java.lang.String getExpiresAt();
+  /**
+   * <pre>
+   * Optional expiration timestamp (RFC3339)
+   * </pre>
+   *
+   * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
+   * @return The bytes for expiresAt.
+   */
+  com.google.protobuf.ByteString
+      getExpiresAtBytes();
+
+  /**
+   * <pre>
+   * Additional key metadata (algorithm, app_id, etc.)
+   * </pre>
+   *
+   * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
    * @return Whether the extras field is set.
    */
   boolean hasExtras();
   /**
    * <pre>
-   * Additional key metadata (algorithm, expiry, etc.)
+   * Additional key metadata (algorithm, app_id, etc.)
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
    * @return The extras.
    */
   com.google.protobuf.Struct getExtras();
   /**
    * <pre>
-   * Additional key metadata (algorithm, expiry, etc.)
+   * Additional key metadata (algorithm, app_id, etc.)
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 5 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
    */
   com.google.protobuf.StructOrBuilder getExtrasOrBuilder();
 }

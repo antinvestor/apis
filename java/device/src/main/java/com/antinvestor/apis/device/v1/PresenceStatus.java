@@ -21,64 +21,55 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * KeyType defines the types of keys that can be stored for a device.
- * Different key types serve different purposes in the security infrastructure.
+ * PresenceStatus defines the online/offline status of a device.
  * buf:lint:ignore ENUM_VALUE_PREFIX
  * </pre>
  *
- * Protobuf enum {@code device.v1.KeyType}
+ * Protobuf enum {@code device.v1.PresenceStatus}
  */
 @com.google.protobuf.Generated
-public enum KeyType
+public enum PresenceStatus
     implements com.google.protobuf.ProtocolMessageEnum {
   /**
    * <pre>
    * buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
    * </pre>
    *
-   * <code>MATRIX_KEY = 0;</code>
+   * <code>OFFLINE = 0;</code>
    */
-  MATRIX_KEY(0),
+  OFFLINE(0),
   /**
    * <pre>
-   * Key for secure push notification delivery
+   * Device is online and active
    * </pre>
    *
-   * <code>NOTIFICATION_KEY = 1;</code>
+   * <code>ONLINE = 1;</code>
    */
-  NOTIFICATION_KEY(1),
+  ONLINE(1),
   /**
    * <pre>
-   * Firebase Cloud Messaging token for push notifications
+   * Device is online but idle/away
    * </pre>
    *
-   * <code>FCM_TOKEN = 2;</code>
+   * <code>AWAY = 2;</code>
    */
-  FCM_TOKEN(2),
+  AWAY(2),
   /**
    * <pre>
-   * Curve25519 key for ECDH
+   * Device is online but user is busy
    * </pre>
    *
-   * <code>CURVE25519_KEY = 3;</code>
+   * <code>BUSY = 3;</code>
    */
-  CURVE25519_KEY(3),
+  BUSY(3),
   /**
    * <pre>
-   * Ed25519 key for signing
+   * Device is online but appears offline to others
    * </pre>
    *
-   * <code>ED25519_KEY = 4;</code>
+   * <code>INVISIBLE = 4;</code>
    */
-  ED25519_KEY(4),
-  /**
-   * <pre>
-   * Pickled key for session storage
-   * </pre>
-   *
-   * <code>PICKLE_KEY = 5;</code>
-   */
-  PICKLE_KEY(5),
+  INVISIBLE(4),
   UNRECOGNIZED(-1),
   ;
 
@@ -89,56 +80,48 @@ public enum KeyType
       /* minor= */ 33,
       /* patch= */ 0,
       /* suffix= */ "",
-      "KeyType");
+      "PresenceStatus");
   }
   /**
    * <pre>
    * buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
    * </pre>
    *
-   * <code>MATRIX_KEY = 0;</code>
+   * <code>OFFLINE = 0;</code>
    */
-  public static final int MATRIX_KEY_VALUE = 0;
+  public static final int OFFLINE_VALUE = 0;
   /**
    * <pre>
-   * Key for secure push notification delivery
+   * Device is online and active
    * </pre>
    *
-   * <code>NOTIFICATION_KEY = 1;</code>
+   * <code>ONLINE = 1;</code>
    */
-  public static final int NOTIFICATION_KEY_VALUE = 1;
+  public static final int ONLINE_VALUE = 1;
   /**
    * <pre>
-   * Firebase Cloud Messaging token for push notifications
+   * Device is online but idle/away
    * </pre>
    *
-   * <code>FCM_TOKEN = 2;</code>
+   * <code>AWAY = 2;</code>
    */
-  public static final int FCM_TOKEN_VALUE = 2;
+  public static final int AWAY_VALUE = 2;
   /**
    * <pre>
-   * Curve25519 key for ECDH
+   * Device is online but user is busy
    * </pre>
    *
-   * <code>CURVE25519_KEY = 3;</code>
+   * <code>BUSY = 3;</code>
    */
-  public static final int CURVE25519_KEY_VALUE = 3;
+  public static final int BUSY_VALUE = 3;
   /**
    * <pre>
-   * Ed25519 key for signing
+   * Device is online but appears offline to others
    * </pre>
    *
-   * <code>ED25519_KEY = 4;</code>
+   * <code>INVISIBLE = 4;</code>
    */
-  public static final int ED25519_KEY_VALUE = 4;
-  /**
-   * <pre>
-   * Pickled key for session storage
-   * </pre>
-   *
-   * <code>PICKLE_KEY = 5;</code>
-   */
-  public static final int PICKLE_KEY_VALUE = 5;
+  public static final int INVISIBLE_VALUE = 4;
 
 
   public final int getNumber() {
@@ -155,7 +138,7 @@ public enum KeyType
    * @deprecated Use {@link #forNumber(int)} instead.
    */
   @java.lang.Deprecated
-  public static KeyType valueOf(int value) {
+  public static PresenceStatus valueOf(int value) {
     return forNumber(value);
   }
 
@@ -163,27 +146,26 @@ public enum KeyType
    * @param value The numeric wire value of the corresponding enum entry.
    * @return The enum associated with the given numeric wire value.
    */
-  public static KeyType forNumber(int value) {
+  public static PresenceStatus forNumber(int value) {
     switch (value) {
-      case 0: return MATRIX_KEY;
-      case 1: return NOTIFICATION_KEY;
-      case 2: return FCM_TOKEN;
-      case 3: return CURVE25519_KEY;
-      case 4: return ED25519_KEY;
-      case 5: return PICKLE_KEY;
+      case 0: return OFFLINE;
+      case 1: return ONLINE;
+      case 2: return AWAY;
+      case 3: return BUSY;
+      case 4: return INVISIBLE;
       default: return null;
     }
   }
 
-  public static com.google.protobuf.Internal.EnumLiteMap<KeyType>
+  public static com.google.protobuf.Internal.EnumLiteMap<PresenceStatus>
       internalGetValueMap() {
     return internalValueMap;
   }
   private static final com.google.protobuf.Internal.EnumLiteMap<
-      KeyType> internalValueMap =
-        new com.google.protobuf.Internal.EnumLiteMap<KeyType>() {
-          public KeyType findValueByNumber(int number) {
-            return KeyType.forNumber(number);
+      PresenceStatus> internalValueMap =
+        new com.google.protobuf.Internal.EnumLiteMap<PresenceStatus>() {
+          public PresenceStatus findValueByNumber(int number) {
+            return PresenceStatus.forNumber(number);
           }
         };
 
@@ -201,12 +183,12 @@ public enum KeyType
   }
   public static com.google.protobuf.Descriptors.EnumDescriptor
       getDescriptor() {
-    return com.antinvestor.apis.device.v1.DeviceProto.getDescriptor().getEnumTypes().get(0);
+    return com.antinvestor.apis.device.v1.DeviceProto.getDescriptor().getEnumTypes().get(1);
   }
 
-  private static final KeyType[] VALUES = values();
+  private static final PresenceStatus[] VALUES = values();
 
-  public static KeyType valueOf(
+  public static PresenceStatus valueOf(
       com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
     if (desc.getType() != getDescriptor()) {
       throw new java.lang.IllegalArgumentException(
@@ -220,10 +202,10 @@ public enum KeyType
 
   private final int value;
 
-  private KeyType(int value) {
+  private PresenceStatus(int value) {
     this.value = value;
   }
 
-  // @@protoc_insertion_point(enum_scope:device.v1.KeyType)
+  // @@protoc_insertion_point(enum_scope:device.v1.PresenceStatus)
 }
 

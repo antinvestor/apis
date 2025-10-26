@@ -21,7 +21,7 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * SearchKeyRequest searches for encryption keys associated with a device.
+ * SearchKeyRequest searches for keys or tokens associated with a device.
  * </pre>
  *
  * Protobuf type {@code device.v1.SearchKeyRequest}
@@ -48,7 +48,7 @@ private static final long serialVersionUID = 0L;
   private SearchKeyRequest() {
     query_ = "";
     deviceId_ = "";
-    keyType_ = 0;
+    keyTypes_ = emptyIntList();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -158,40 +158,108 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int KEY_TYPE_FIELD_NUMBER = 3;
-  private int keyType_ = 0;
+  public static final int KEY_TYPES_FIELD_NUMBER = 3;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.Internal.IntList keyTypes_ =
+      emptyIntList();
+  private static final     com.google.protobuf.Internal.IntListAdapter.IntConverter<
+      com.antinvestor.apis.device.v1.KeyType> keyTypes_converter_ =
+          new com.google.protobuf.Internal.IntListAdapter.IntConverter<
+              com.antinvestor.apis.device.v1.KeyType>() {
+            public com.antinvestor.apis.device.v1.KeyType convert(int from) {
+              com.antinvestor.apis.device.v1.KeyType result = com.antinvestor.apis.device.v1.KeyType.forNumber(from);
+              return result == null ? com.antinvestor.apis.device.v1.KeyType.UNRECOGNIZED : result;
+            }
+          };
   /**
    * <pre>
-   * Filter by key type
+   * Filter by key types (if empty, returns all)
    * </pre>
    *
-   * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-   * @return The enum numeric value on the wire for keyType.
+   * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+   * @return A list containing the keyTypes.
    */
-  @java.lang.Override public int getKeyTypeValue() {
-    return keyType_;
+  @java.lang.Override
+  public java.util.List<com.antinvestor.apis.device.v1.KeyType> getKeyTypesList() {
+    return new com.google.protobuf.Internal.IntListAdapter<
+        com.antinvestor.apis.device.v1.KeyType>(keyTypes_, keyTypes_converter_);
   }
   /**
    * <pre>
-   * Filter by key type
+   * Filter by key types (if empty, returns all)
    * </pre>
    *
-   * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-   * @return The keyType.
+   * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+   * @return The count of keyTypes.
    */
-  @java.lang.Override public com.antinvestor.apis.device.v1.KeyType getKeyType() {
-    com.antinvestor.apis.device.v1.KeyType result = com.antinvestor.apis.device.v1.KeyType.forNumber(keyType_);
-    return result == null ? com.antinvestor.apis.device.v1.KeyType.UNRECOGNIZED : result;
+  @java.lang.Override
+  public int getKeyTypesCount() {
+    return keyTypes_.size();
+  }
+  /**
+   * <pre>
+   * Filter by key types (if empty, returns all)
+   * </pre>
+   *
+   * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+   * @param index The index of the element to return.
+   * @return The keyTypes at the given index.
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.device.v1.KeyType getKeyTypes(int index) {
+    return keyTypes_converter_.convert(keyTypes_.getInt(index));
+  }
+  /**
+   * <pre>
+   * Filter by key types (if empty, returns all)
+   * </pre>
+   *
+   * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+   * @return A list containing the enum numeric values on the wire for keyTypes.
+   */
+  @java.lang.Override
+  public java.util.List<java.lang.Integer>
+  getKeyTypesValueList() {
+    return keyTypes_;
+  }
+  /**
+   * <pre>
+   * Filter by key types (if empty, returns all)
+   * </pre>
+   *
+   * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+   * @param index The index of the value to return.
+   * @return The enum numeric value on the wire of keyTypes at the given index.
+   */
+  @java.lang.Override
+  public int getKeyTypesValue(int index) {
+    return keyTypes_.getInt(index);
+  }
+  private int keyTypesMemoizedSerializedSize;
+
+  public static final int INCLUDE_EXPIRED_FIELD_NUMBER = 4;
+  private boolean includeExpired_ = false;
+  /**
+   * <pre>
+   * If true, includes expired keys
+   * </pre>
+   *
+   * <code>bool include_expired = 4 [json_name = "includeExpired"];</code>
+   * @return The includeExpired.
+   */
+  @java.lang.Override
+  public boolean getIncludeExpired() {
+    return includeExpired_;
   }
 
-  public static final int PAGE_FIELD_NUMBER = 4;
+  public static final int PAGE_FIELD_NUMBER = 5;
   private int page_ = 0;
   /**
    * <pre>
    * Page number for pagination
    * </pre>
    *
-   * <code>int32 page = 4 [json_name = "page"];</code>
+   * <code>int32 page = 5 [json_name = "page"];</code>
    * @return The page.
    */
   @java.lang.Override
@@ -199,14 +267,14 @@ private static final long serialVersionUID = 0L;
     return page_;
   }
 
-  public static final int COUNT_FIELD_NUMBER = 5;
+  public static final int COUNT_FIELD_NUMBER = 6;
   private int count_ = 0;
   /**
    * <pre>
    * Number of results per page
    * </pre>
    *
-   * <code>int32 count = 5 [json_name = "count"];</code>
+   * <code>int32 count = 6 [json_name = "count"];</code>
    * @return The count.
    */
   @java.lang.Override
@@ -228,20 +296,28 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    getSerializedSize();
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(query_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 1, query_);
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, deviceId_);
     }
-    if (keyType_ != com.antinvestor.apis.device.v1.KeyType.MATRIX_KEY.getNumber()) {
-      output.writeEnum(3, keyType_);
+    if (getKeyTypesList().size() > 0) {
+      output.writeUInt32NoTag(26);
+      output.writeUInt32NoTag(keyTypesMemoizedSerializedSize);
+    }
+    for (int i = 0; i < keyTypes_.size(); i++) {
+      output.writeEnumNoTag(keyTypes_.getInt(i));
+    }
+    if (includeExpired_ != false) {
+      output.writeBool(4, includeExpired_);
     }
     if (page_ != 0) {
-      output.writeInt32(4, page_);
+      output.writeInt32(5, page_);
     }
     if (count_ != 0) {
-      output.writeInt32(5, count_);
+      output.writeInt32(6, count_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -258,17 +334,29 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(2, deviceId_);
     }
-    if (keyType_ != com.antinvestor.apis.device.v1.KeyType.MATRIX_KEY.getNumber()) {
+    {
+      int dataSize = 0;
+      for (int i = 0; i < keyTypes_.size(); i++) {
+        dataSize += com.google.protobuf.CodedOutputStream
+          .computeEnumSizeNoTag(keyTypes_.getInt(i));
+      }
+      size += dataSize;
+      if (!getKeyTypesList().isEmpty()) {  size += 1;
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32SizeNoTag(dataSize);
+      }keyTypesMemoizedSerializedSize = dataSize;
+    }
+    if (includeExpired_ != false) {
       size += com.google.protobuf.CodedOutputStream
-        .computeEnumSize(3, keyType_);
+        .computeBoolSize(4, includeExpired_);
     }
     if (page_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(4, page_);
+        .computeInt32Size(5, page_);
     }
     if (count_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(5, count_);
+        .computeInt32Size(6, count_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -289,7 +377,9 @@ private static final long serialVersionUID = 0L;
         .equals(other.getQuery())) return false;
     if (!getDeviceId()
         .equals(other.getDeviceId())) return false;
-    if (keyType_ != other.keyType_) return false;
+    if (!keyTypes_.equals(other.keyTypes_)) return false;
+    if (getIncludeExpired()
+        != other.getIncludeExpired()) return false;
     if (getPage()
         != other.getPage()) return false;
     if (getCount()
@@ -309,8 +399,13 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getQuery().hashCode();
     hash = (37 * hash) + DEVICE_ID_FIELD_NUMBER;
     hash = (53 * hash) + getDeviceId().hashCode();
-    hash = (37 * hash) + KEY_TYPE_FIELD_NUMBER;
-    hash = (53 * hash) + keyType_;
+    if (getKeyTypesCount() > 0) {
+      hash = (37 * hash) + KEY_TYPES_FIELD_NUMBER;
+      hash = (53 * hash) + keyTypes_.hashCode();
+    }
+    hash = (37 * hash) + INCLUDE_EXPIRED_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getIncludeExpired());
     hash = (37 * hash) + PAGE_FIELD_NUMBER;
     hash = (53 * hash) + getPage();
     hash = (37 * hash) + COUNT_FIELD_NUMBER;
@@ -414,7 +509,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * SearchKeyRequest searches for encryption keys associated with a device.
+   * SearchKeyRequest searches for keys or tokens associated with a device.
    * </pre>
    *
    * Protobuf type {@code device.v1.SearchKeyRequest}
@@ -452,7 +547,8 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       query_ = "";
       deviceId_ = "";
-      keyType_ = 0;
+      keyTypes_ = emptyIntList();
+      includeExpired_ = false;
       page_ = 0;
       count_ = 0;
       return this;
@@ -495,12 +591,16 @@ private static final long serialVersionUID = 0L;
         result.deviceId_ = deviceId_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.keyType_ = keyType_;
+        keyTypes_.makeImmutable();
+        result.keyTypes_ = keyTypes_;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.page_ = page_;
+        result.includeExpired_ = includeExpired_;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.page_ = page_;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
         result.count_ = count_;
       }
     }
@@ -527,8 +627,19 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000002;
         onChanged();
       }
-      if (other.keyType_ != 0) {
-        setKeyTypeValue(other.getKeyTypeValue());
+      if (!other.keyTypes_.isEmpty()) {
+        if (keyTypes_.isEmpty()) {
+          keyTypes_ = other.keyTypes_;
+          keyTypes_.makeImmutable();
+          bitField0_ |= 0x00000004;
+        } else {
+          ensureKeyTypesIsMutable();
+          keyTypes_.addAll(other.keyTypes_);
+        }
+        onChanged();
+      }
+      if (other.getIncludeExpired() != false) {
+        setIncludeExpired(other.getIncludeExpired());
       }
       if (other.getPage() != 0) {
         setPage(other.getPage());
@@ -573,20 +684,36 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 18
             case 24: {
-              keyType_ = input.readEnum();
-              bitField0_ |= 0x00000004;
+              int tmpRaw = input.readEnum();
+              ensureKeyTypesIsMutable();
+              keyTypes_.addInt(tmpRaw);
               break;
             } // case 24
+            case 26: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              ensureKeyTypesIsMutable();
+              while (input.getBytesUntilLimit() > 0) {
+                keyTypes_.addInt(input.readEnum());
+              }
+              input.popLimit(limit);
+              break;
+            } // case 26
             case 32: {
-              page_ = input.readInt32();
+              includeExpired_ = input.readBool();
               bitField0_ |= 0x00000008;
               break;
             } // case 32
             case 40: {
-              count_ = input.readInt32();
+              page_ = input.readInt32();
               bitField0_ |= 0x00000010;
               break;
             } // case 40
+            case 48: {
+              count_ = input.readInt32();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 48
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -788,73 +915,230 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int keyType_ = 0;
-    /**
-     * <pre>
-     * Filter by key type
-     * </pre>
-     *
-     * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-     * @return The enum numeric value on the wire for keyType.
-     */
-    @java.lang.Override public int getKeyTypeValue() {
-      return keyType_;
+    private com.google.protobuf.Internal.IntList keyTypes_ = emptyIntList();
+    private void ensureKeyTypesIsMutable() {
+      if (!keyTypes_.isModifiable()) {
+        keyTypes_ = makeMutableCopy(keyTypes_);
+      }
+      bitField0_ |= 0x00000004;
     }
     /**
      * <pre>
-     * Filter by key type
+     * Filter by key types (if empty, returns all)
      * </pre>
      *
-     * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-     * @param value The enum numeric value on the wire for keyType to set.
+     * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+     * @return A list containing the keyTypes.
+     */
+    public java.util.List<com.antinvestor.apis.device.v1.KeyType> getKeyTypesList() {
+      return new com.google.protobuf.Internal.IntListAdapter<
+          com.antinvestor.apis.device.v1.KeyType>(keyTypes_, keyTypes_converter_);
+    }
+    /**
+     * <pre>
+     * Filter by key types (if empty, returns all)
+     * </pre>
+     *
+     * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+     * @return The count of keyTypes.
+     */
+    public int getKeyTypesCount() {
+      return keyTypes_.size();
+    }
+    /**
+     * <pre>
+     * Filter by key types (if empty, returns all)
+     * </pre>
+     *
+     * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+     * @param index The index of the element to return.
+     * @return The keyTypes at the given index.
+     */
+    public com.antinvestor.apis.device.v1.KeyType getKeyTypes(int index) {
+      return keyTypes_converter_.convert(keyTypes_.getInt(index));
+    }
+    /**
+     * <pre>
+     * Filter by key types (if empty, returns all)
+     * </pre>
+     *
+     * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+     * @param index The index to set the value at.
+     * @param value The keyTypes to set.
      * @return This builder for chaining.
      */
-    public Builder setKeyTypeValue(int value) {
-      keyType_ = value;
-      bitField0_ |= 0x00000004;
+    public Builder setKeyTypes(
+        int index, com.antinvestor.apis.device.v1.KeyType value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureKeyTypesIsMutable();
+      keyTypes_.setInt(index, value.getNumber());
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Filter by key type
+     * Filter by key types (if empty, returns all)
      * </pre>
      *
-     * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-     * @return The keyType.
+     * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+     * @param value The keyTypes to add.
+     * @return This builder for chaining.
+     */
+    public Builder addKeyTypes(com.antinvestor.apis.device.v1.KeyType value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureKeyTypesIsMutable();
+      keyTypes_.addInt(value.getNumber());
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Filter by key types (if empty, returns all)
+     * </pre>
+     *
+     * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+     * @param values The keyTypes to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllKeyTypes(
+        java.lang.Iterable<? extends com.antinvestor.apis.device.v1.KeyType> values) {
+      ensureKeyTypesIsMutable();
+      for (com.antinvestor.apis.device.v1.KeyType value : values) {
+        keyTypes_.addInt(value.getNumber());
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Filter by key types (if empty, returns all)
+     * </pre>
+     *
+     * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearKeyTypes() {
+      keyTypes_ = emptyIntList();
+      bitField0_ = (bitField0_ & ~0x00000004);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Filter by key types (if empty, returns all)
+     * </pre>
+     *
+     * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+     * @return A list containing the enum numeric values on the wire for keyTypes.
+     */
+    public java.util.List<java.lang.Integer>
+    getKeyTypesValueList() {
+      keyTypes_.makeImmutable();
+      return keyTypes_;
+    }
+    /**
+     * <pre>
+     * Filter by key types (if empty, returns all)
+     * </pre>
+     *
+     * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+     * @param index The index of the value to return.
+     * @return The enum numeric value on the wire of keyTypes at the given index.
+     */
+    public int getKeyTypesValue(int index) {
+      return keyTypes_.getInt(index);
+    }
+    /**
+     * <pre>
+     * Filter by key types (if empty, returns all)
+     * </pre>
+     *
+     * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+     * @param index The index to set the value at.
+     * @param value The enum numeric value on the wire for keyTypes to set.
+     * @return This builder for chaining.
+     */
+    public Builder setKeyTypesValue(
+        int index, int value) {
+      ensureKeyTypesIsMutable();
+      keyTypes_.setInt(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Filter by key types (if empty, returns all)
+     * </pre>
+     *
+     * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+     * @param value The enum numeric value on the wire for keyTypes to add.
+     * @return This builder for chaining.
+     */
+    public Builder addKeyTypesValue(int value) {
+      ensureKeyTypesIsMutable();
+      keyTypes_.addInt(value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Filter by key types (if empty, returns all)
+     * </pre>
+     *
+     * <code>repeated .device.v1.KeyType key_types = 3 [json_name = "keyTypes"];</code>
+     * @param values The enum numeric values on the wire for keyTypes to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllKeyTypesValue(
+        java.lang.Iterable<java.lang.Integer> values) {
+      ensureKeyTypesIsMutable();
+      for (int value : values) {
+        keyTypes_.addInt(value);
+      }
+      onChanged();
+      return this;
+    }
+
+    private boolean includeExpired_ ;
+    /**
+     * <pre>
+     * If true, includes expired keys
+     * </pre>
+     *
+     * <code>bool include_expired = 4 [json_name = "includeExpired"];</code>
+     * @return The includeExpired.
      */
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.KeyType getKeyType() {
-      com.antinvestor.apis.device.v1.KeyType result = com.antinvestor.apis.device.v1.KeyType.forNumber(keyType_);
-      return result == null ? com.antinvestor.apis.device.v1.KeyType.UNRECOGNIZED : result;
+    public boolean getIncludeExpired() {
+      return includeExpired_;
     }
     /**
      * <pre>
-     * Filter by key type
+     * If true, includes expired keys
      * </pre>
      *
-     * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-     * @param value The keyType to set.
+     * <code>bool include_expired = 4 [json_name = "includeExpired"];</code>
+     * @param value The includeExpired to set.
      * @return This builder for chaining.
      */
-    public Builder setKeyType(com.antinvestor.apis.device.v1.KeyType value) {
-      if (value == null) { throw new NullPointerException(); }
-      bitField0_ |= 0x00000004;
-      keyType_ = value.getNumber();
+    public Builder setIncludeExpired(boolean value) {
+
+      includeExpired_ = value;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Filter by key type
+     * If true, includes expired keys
      * </pre>
      *
-     * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
+     * <code>bool include_expired = 4 [json_name = "includeExpired"];</code>
      * @return This builder for chaining.
      */
-    public Builder clearKeyType() {
-      bitField0_ = (bitField0_ & ~0x00000004);
-      keyType_ = 0;
+    public Builder clearIncludeExpired() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      includeExpired_ = false;
       onChanged();
       return this;
     }
@@ -865,7 +1149,7 @@ private static final long serialVersionUID = 0L;
      * Page number for pagination
      * </pre>
      *
-     * <code>int32 page = 4 [json_name = "page"];</code>
+     * <code>int32 page = 5 [json_name = "page"];</code>
      * @return The page.
      */
     @java.lang.Override
@@ -877,14 +1161,14 @@ private static final long serialVersionUID = 0L;
      * Page number for pagination
      * </pre>
      *
-     * <code>int32 page = 4 [json_name = "page"];</code>
+     * <code>int32 page = 5 [json_name = "page"];</code>
      * @param value The page to set.
      * @return This builder for chaining.
      */
     public Builder setPage(int value) {
 
       page_ = value;
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
@@ -893,11 +1177,11 @@ private static final long serialVersionUID = 0L;
      * Page number for pagination
      * </pre>
      *
-     * <code>int32 page = 4 [json_name = "page"];</code>
+     * <code>int32 page = 5 [json_name = "page"];</code>
      * @return This builder for chaining.
      */
     public Builder clearPage() {
-      bitField0_ = (bitField0_ & ~0x00000008);
+      bitField0_ = (bitField0_ & ~0x00000010);
       page_ = 0;
       onChanged();
       return this;
@@ -909,7 +1193,7 @@ private static final long serialVersionUID = 0L;
      * Number of results per page
      * </pre>
      *
-     * <code>int32 count = 5 [json_name = "count"];</code>
+     * <code>int32 count = 6 [json_name = "count"];</code>
      * @return The count.
      */
     @java.lang.Override
@@ -921,14 +1205,14 @@ private static final long serialVersionUID = 0L;
      * Number of results per page
      * </pre>
      *
-     * <code>int32 count = 5 [json_name = "count"];</code>
+     * <code>int32 count = 6 [json_name = "count"];</code>
      * @param value The count to set.
      * @return This builder for chaining.
      */
     public Builder setCount(int value) {
 
       count_ = value;
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
@@ -937,11 +1221,11 @@ private static final long serialVersionUID = 0L;
      * Number of results per page
      * </pre>
      *
-     * <code>int32 count = 5 [json_name = "count"];</code>
+     * <code>int32 count = 6 [json_name = "count"];</code>
      * @return This builder for chaining.
      */
     public Builder clearCount() {
-      bitField0_ = (bitField0_ & ~0x00000010);
+      bitField0_ = (bitField0_ & ~0x00000020);
       count_ = 0;
       onChanged();
       return this;
