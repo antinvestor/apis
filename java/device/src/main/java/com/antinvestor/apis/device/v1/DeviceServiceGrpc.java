@@ -18,7 +18,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  * <pre>
- * DeviceService provides comprehensive device management capabilities.
+ * DeviceService provides core device management and key/token management.
  * All RPCs require authentication via Bearer token unless otherwise specified.
  * </pre>
  */
@@ -378,7 +378,7 @@ public final class DeviceServiceGrpc {
       fullMethodName = SERVICE_NAME + '/' + "SearchKey",
       requestType = com.antinvestor.apis.device.v1.SearchKeyRequest.class,
       responseType = com.antinvestor.apis.device.v1.SearchKeyResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.SearchKeyRequest,
       com.antinvestor.apis.device.v1.SearchKeyResponse> getSearchKeyMethod() {
     io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.SearchKeyRequest, com.antinvestor.apis.device.v1.SearchKeyResponse> getSearchKeyMethod;
@@ -387,7 +387,7 @@ public final class DeviceServiceGrpc {
         if ((getSearchKeyMethod = DeviceServiceGrpc.getSearchKeyMethod) == null) {
           DeviceServiceGrpc.getSearchKeyMethod = getSearchKeyMethod =
               io.grpc.MethodDescriptor.<com.antinvestor.apis.device.v1.SearchKeyRequest, com.antinvestor.apis.device.v1.SearchKeyResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SearchKey"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -400,6 +400,130 @@ public final class DeviceServiceGrpc {
       }
     }
     return getSearchKeyMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.RegisterKeyRequest,
+      com.antinvestor.apis.device.v1.RegisterKeyResponse> getRegisterKeyMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "RegisterKey",
+      requestType = com.antinvestor.apis.device.v1.RegisterKeyRequest.class,
+      responseType = com.antinvestor.apis.device.v1.RegisterKeyResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.RegisterKeyRequest,
+      com.antinvestor.apis.device.v1.RegisterKeyResponse> getRegisterKeyMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.RegisterKeyRequest, com.antinvestor.apis.device.v1.RegisterKeyResponse> getRegisterKeyMethod;
+    if ((getRegisterKeyMethod = DeviceServiceGrpc.getRegisterKeyMethod) == null) {
+      synchronized (DeviceServiceGrpc.class) {
+        if ((getRegisterKeyMethod = DeviceServiceGrpc.getRegisterKeyMethod) == null) {
+          DeviceServiceGrpc.getRegisterKeyMethod = getRegisterKeyMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.device.v1.RegisterKeyRequest, com.antinvestor.apis.device.v1.RegisterKeyResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "RegisterKey"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.RegisterKeyRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.RegisterKeyResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeviceServiceMethodDescriptorSupplier("RegisterKey"))
+              .build();
+        }
+      }
+    }
+    return getRegisterKeyMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.DeRegisterKeyRequest,
+      com.antinvestor.apis.device.v1.DeRegisterKeyResponse> getDeRegisterKeyMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DeRegisterKey",
+      requestType = com.antinvestor.apis.device.v1.DeRegisterKeyRequest.class,
+      responseType = com.antinvestor.apis.device.v1.DeRegisterKeyResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.DeRegisterKeyRequest,
+      com.antinvestor.apis.device.v1.DeRegisterKeyResponse> getDeRegisterKeyMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.DeRegisterKeyRequest, com.antinvestor.apis.device.v1.DeRegisterKeyResponse> getDeRegisterKeyMethod;
+    if ((getDeRegisterKeyMethod = DeviceServiceGrpc.getDeRegisterKeyMethod) == null) {
+      synchronized (DeviceServiceGrpc.class) {
+        if ((getDeRegisterKeyMethod = DeviceServiceGrpc.getDeRegisterKeyMethod) == null) {
+          DeviceServiceGrpc.getDeRegisterKeyMethod = getDeRegisterKeyMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.device.v1.DeRegisterKeyRequest, com.antinvestor.apis.device.v1.DeRegisterKeyResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeRegisterKey"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.DeRegisterKeyRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.DeRegisterKeyResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeviceServiceMethodDescriptorSupplier("DeRegisterKey"))
+              .build();
+        }
+      }
+    }
+    return getDeRegisterKeyMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.NotifyRequest,
+      com.antinvestor.apis.device.v1.NotifyResponse> getNotifyMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Notify",
+      requestType = com.antinvestor.apis.device.v1.NotifyRequest.class,
+      responseType = com.antinvestor.apis.device.v1.NotifyResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.NotifyRequest,
+      com.antinvestor.apis.device.v1.NotifyResponse> getNotifyMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.NotifyRequest, com.antinvestor.apis.device.v1.NotifyResponse> getNotifyMethod;
+    if ((getNotifyMethod = DeviceServiceGrpc.getNotifyMethod) == null) {
+      synchronized (DeviceServiceGrpc.class) {
+        if ((getNotifyMethod = DeviceServiceGrpc.getNotifyMethod) == null) {
+          DeviceServiceGrpc.getNotifyMethod = getNotifyMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.device.v1.NotifyRequest, com.antinvestor.apis.device.v1.NotifyResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Notify"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.NotifyRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.NotifyResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeviceServiceMethodDescriptorSupplier("Notify"))
+              .build();
+        }
+      }
+    }
+    return getNotifyMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.UpdatePresenceRequest,
+      com.antinvestor.apis.device.v1.UpdatePresenceResponse> getUpdatePresenceMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UpdatePresence",
+      requestType = com.antinvestor.apis.device.v1.UpdatePresenceRequest.class,
+      responseType = com.antinvestor.apis.device.v1.UpdatePresenceResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.UpdatePresenceRequest,
+      com.antinvestor.apis.device.v1.UpdatePresenceResponse> getUpdatePresenceMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.device.v1.UpdatePresenceRequest, com.antinvestor.apis.device.v1.UpdatePresenceResponse> getUpdatePresenceMethod;
+    if ((getUpdatePresenceMethod = DeviceServiceGrpc.getUpdatePresenceMethod) == null) {
+      synchronized (DeviceServiceGrpc.class) {
+        if ((getUpdatePresenceMethod = DeviceServiceGrpc.getUpdatePresenceMethod) == null) {
+          DeviceServiceGrpc.getUpdatePresenceMethod = getUpdatePresenceMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.device.v1.UpdatePresenceRequest, com.antinvestor.apis.device.v1.UpdatePresenceResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdatePresence"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.UpdatePresenceRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.antinvestor.apis.device.v1.UpdatePresenceResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DeviceServiceMethodDescriptorSupplier("UpdatePresence"))
+              .build();
+        }
+      }
+    }
+    return getUpdatePresenceMethod;
   }
 
   /**
@@ -463,7 +587,7 @@ public final class DeviceServiceGrpc {
 
   /**
    * <pre>
-   * DeviceService provides comprehensive device management capabilities.
+   * DeviceService provides core device management and key/token management.
    * All RPCs require authentication via Bearer token unless otherwise specified.
    * </pre>
    */
@@ -570,8 +694,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * AddKey adds an encryption key to a device.
-     * Keys are used for secure communications (Matrix E2EE, push notifications).
+     * AddKey stores a key or token and its material in the local storage for a device.
+     * This is used for keys generated by the service or when the service needs to manage the key material directly.
      * </pre>
      */
     default void addKey(com.antinvestor.apis.device.v1.AddKeyRequest request,
@@ -581,8 +705,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * RemoveKey removes encryption keys from a device.
-     * Used for key rotation or when removing a device.
+     * RemoveKey removes one or more keys or tokens from local storage.
+     * This does not handle deregistration from third-party services. For that, use DeRegisterKey.
      * </pre>
      */
     default void removeKey(com.antinvestor.apis.device.v1.RemoveKeyRequest request,
@@ -592,20 +716,65 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * SearchKey finds encryption keys associated with a device.
-     * Supports filtering by key type and pagination.
+     * SearchKey searches for keys or tokens associated with a device.
      * </pre>
      */
     default void searchKey(com.antinvestor.apis.device.v1.SearchKeyRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.SearchKeyResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSearchKeyMethod(), responseObserver);
     }
+
+    /**
+     * <pre>
+     * RegisterKey registers a key with a third-party service using an externally-generated key or token.
+     * This method handles the integration with the external service and stores metadata about the key,
+     * but not the key material itself. Use AddKey to store key material.
+     * </pre>
+     */
+    default void registerKey(com.antinvestor.apis.device.v1.RegisterKeyRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.RegisterKeyResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRegisterKeyMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * DeRegisterKey deregisters a key from a third-party service.
+     * This handles cleanup with the external service and removes the associated key metadata from local storage.
+     * </pre>
+     */
+    default void deRegisterKey(com.antinvestor.apis.device.v1.DeRegisterKeyRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.DeRegisterKeyResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeRegisterKeyMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Notify sends a notification to a device using one of its registered keys.
+     * The service selects an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
+     * If key_id is provided, that specific key will be used; otherwise the service selects the best available key.
+     * </pre>
+     */
+    default void notify(com.antinvestor.apis.device.v1.NotifyRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.NotifyResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getNotifyMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * UpdatePresence updates the presence status of a device.
+     * Used to track online/offline status and availability for real-time features.
+     * </pre>
+     */
+    default void updatePresence(com.antinvestor.apis.device.v1.UpdatePresenceRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.UpdatePresenceResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdatePresenceMethod(), responseObserver);
+    }
   }
 
   /**
    * Base class for the server implementation of the service DeviceService.
    * <pre>
-   * DeviceService provides comprehensive device management capabilities.
+   * DeviceService provides core device management and key/token management.
    * All RPCs require authentication via Bearer token unless otherwise specified.
    * </pre>
    */
@@ -620,7 +789,7 @@ public final class DeviceServiceGrpc {
   /**
    * A stub to allow clients to do asynchronous rpc calls to service DeviceService.
    * <pre>
-   * DeviceService provides comprehensive device management capabilities.
+   * DeviceService provides core device management and key/token management.
    * All RPCs require authentication via Bearer token unless otherwise specified.
    * </pre>
    */
@@ -747,8 +916,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * AddKey adds an encryption key to a device.
-     * Keys are used for secure communications (Matrix E2EE, push notifications).
+     * AddKey stores a key or token and its material in the local storage for a device.
+     * This is used for keys generated by the service or when the service needs to manage the key material directly.
      * </pre>
      */
     public void addKey(com.antinvestor.apis.device.v1.AddKeyRequest request,
@@ -759,8 +928,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * RemoveKey removes encryption keys from a device.
-     * Used for key rotation or when removing a device.
+     * RemoveKey removes one or more keys or tokens from local storage.
+     * This does not handle deregistration from third-party services. For that, use DeRegisterKey.
      * </pre>
      */
     public void removeKey(com.antinvestor.apis.device.v1.RemoveKeyRequest request,
@@ -771,21 +940,70 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * SearchKey finds encryption keys associated with a device.
-     * Supports filtering by key type and pagination.
+     * SearchKey searches for keys or tokens associated with a device.
      * </pre>
      */
     public void searchKey(com.antinvestor.apis.device.v1.SearchKeyRequest request,
         io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.SearchKeyResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSearchKeyMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * RegisterKey registers a key with a third-party service using an externally-generated key or token.
+     * This method handles the integration with the external service and stores metadata about the key,
+     * but not the key material itself. Use AddKey to store key material.
+     * </pre>
+     */
+    public void registerKey(com.antinvestor.apis.device.v1.RegisterKeyRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.RegisterKeyResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getRegisterKeyMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * DeRegisterKey deregisters a key from a third-party service.
+     * This handles cleanup with the external service and removes the associated key metadata from local storage.
+     * </pre>
+     */
+    public void deRegisterKey(com.antinvestor.apis.device.v1.DeRegisterKeyRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.DeRegisterKeyResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getDeRegisterKeyMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Notify sends a notification to a device using one of its registered keys.
+     * The service selects an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
+     * If key_id is provided, that specific key will be used; otherwise the service selects the best available key.
+     * </pre>
+     */
+    public void notify(com.antinvestor.apis.device.v1.NotifyRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.NotifyResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getNotifyMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * UpdatePresence updates the presence status of a device.
+     * Used to track online/offline status and availability for real-time features.
+     * </pre>
+     */
+    public void updatePresence(com.antinvestor.apis.device.v1.UpdatePresenceRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.UpdatePresenceResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getUpdatePresenceMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service DeviceService.
    * <pre>
-   * DeviceService provides comprehensive device management capabilities.
+   * DeviceService provides core device management and key/token management.
    * All RPCs require authentication via Bearer token unless otherwise specified.
    * </pre>
    */
@@ -907,8 +1125,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * AddKey adds an encryption key to a device.
-     * Keys are used for secure communications (Matrix E2EE, push notifications).
+     * AddKey stores a key or token and its material in the local storage for a device.
+     * This is used for keys generated by the service or when the service needs to manage the key material directly.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.AddKeyResponse addKey(com.antinvestor.apis.device.v1.AddKeyRequest request) throws io.grpc.StatusException {
@@ -918,8 +1136,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * RemoveKey removes encryption keys from a device.
-     * Used for key rotation or when removing a device.
+     * RemoveKey removes one or more keys or tokens from local storage.
+     * This does not handle deregistration from third-party services. For that, use DeRegisterKey.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.RemoveKeyResponse removeKey(com.antinvestor.apis.device.v1.RemoveKeyRequest request) throws io.grpc.StatusException {
@@ -929,22 +1147,65 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * SearchKey finds encryption keys associated with a device.
-     * Supports filtering by key type and pagination.
+     * SearchKey searches for keys or tokens associated with a device.
      * </pre>
      */
-    @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/10918")
-    public io.grpc.stub.BlockingClientCall<?, com.antinvestor.apis.device.v1.SearchKeyResponse>
-        searchKey(com.antinvestor.apis.device.v1.SearchKeyRequest request) {
-      return io.grpc.stub.ClientCalls.blockingV2ServerStreamingCall(
+    public com.antinvestor.apis.device.v1.SearchKeyResponse searchKey(com.antinvestor.apis.device.v1.SearchKeyRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getSearchKeyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * RegisterKey registers a key with a third-party service using an externally-generated key or token.
+     * This method handles the integration with the external service and stores metadata about the key,
+     * but not the key material itself. Use AddKey to store key material.
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.RegisterKeyResponse registerKey(com.antinvestor.apis.device.v1.RegisterKeyRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
+          getChannel(), getRegisterKeyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * DeRegisterKey deregisters a key from a third-party service.
+     * This handles cleanup with the external service and removes the associated key metadata from local storage.
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.DeRegisterKeyResponse deRegisterKey(com.antinvestor.apis.device.v1.DeRegisterKeyRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
+          getChannel(), getDeRegisterKeyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Notify sends a notification to a device using one of its registered keys.
+     * The service selects an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
+     * If key_id is provided, that specific key will be used; otherwise the service selects the best available key.
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.NotifyResponse notify(com.antinvestor.apis.device.v1.NotifyRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
+          getChannel(), getNotifyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * UpdatePresence updates the presence status of a device.
+     * Used to track online/offline status and availability for real-time features.
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.UpdatePresenceResponse updatePresence(com.antinvestor.apis.device.v1.UpdatePresenceRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
+          getChannel(), getUpdatePresenceMethod(), getCallOptions(), request);
     }
   }
 
   /**
    * A stub to allow clients to do limited synchronous rpc calls to service DeviceService.
    * <pre>
-   * DeviceService provides comprehensive device management capabilities.
+   * DeviceService provides core device management and key/token management.
    * All RPCs require authentication via Bearer token unless otherwise specified.
    * </pre>
    */
@@ -1064,8 +1325,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * AddKey adds an encryption key to a device.
-     * Keys are used for secure communications (Matrix E2EE, push notifications).
+     * AddKey stores a key or token and its material in the local storage for a device.
+     * This is used for keys generated by the service or when the service needs to manage the key material directly.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.AddKeyResponse addKey(com.antinvestor.apis.device.v1.AddKeyRequest request) {
@@ -1075,8 +1336,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * RemoveKey removes encryption keys from a device.
-     * Used for key rotation or when removing a device.
+     * RemoveKey removes one or more keys or tokens from local storage.
+     * This does not handle deregistration from third-party services. For that, use DeRegisterKey.
      * </pre>
      */
     public com.antinvestor.apis.device.v1.RemoveKeyResponse removeKey(com.antinvestor.apis.device.v1.RemoveKeyRequest request) {
@@ -1086,21 +1347,65 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * SearchKey finds encryption keys associated with a device.
-     * Supports filtering by key type and pagination.
+     * SearchKey searches for keys or tokens associated with a device.
      * </pre>
      */
-    public java.util.Iterator<com.antinvestor.apis.device.v1.SearchKeyResponse> searchKey(
-        com.antinvestor.apis.device.v1.SearchKeyRequest request) {
-      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+    public com.antinvestor.apis.device.v1.SearchKeyResponse searchKey(com.antinvestor.apis.device.v1.SearchKeyRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSearchKeyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * RegisterKey registers a key with a third-party service using an externally-generated key or token.
+     * This method handles the integration with the external service and stores metadata about the key,
+     * but not the key material itself. Use AddKey to store key material.
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.RegisterKeyResponse registerKey(com.antinvestor.apis.device.v1.RegisterKeyRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRegisterKeyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * DeRegisterKey deregisters a key from a third-party service.
+     * This handles cleanup with the external service and removes the associated key metadata from local storage.
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.DeRegisterKeyResponse deRegisterKey(com.antinvestor.apis.device.v1.DeRegisterKeyRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeRegisterKeyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Notify sends a notification to a device using one of its registered keys.
+     * The service selects an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
+     * If key_id is provided, that specific key will be used; otherwise the service selects the best available key.
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.NotifyResponse notify(com.antinvestor.apis.device.v1.NotifyRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getNotifyMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * UpdatePresence updates the presence status of a device.
+     * Used to track online/offline status and availability for real-time features.
+     * </pre>
+     */
+    public com.antinvestor.apis.device.v1.UpdatePresenceResponse updatePresence(com.antinvestor.apis.device.v1.UpdatePresenceRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdatePresenceMethod(), getCallOptions(), request);
     }
   }
 
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service DeviceService.
    * <pre>
-   * DeviceService provides comprehensive device management capabilities.
+   * DeviceService provides core device management and key/token management.
    * All RPCs require authentication via Bearer token unless otherwise specified.
    * </pre>
    */
@@ -1203,8 +1508,8 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * AddKey adds an encryption key to a device.
-     * Keys are used for secure communications (Matrix E2EE, push notifications).
+     * AddKey stores a key or token and its material in the local storage for a device.
+     * This is used for keys generated by the service or when the service needs to manage the key material directly.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.AddKeyResponse> addKey(
@@ -1215,14 +1520,75 @@ public final class DeviceServiceGrpc {
 
     /**
      * <pre>
-     * RemoveKey removes encryption keys from a device.
-     * Used for key rotation or when removing a device.
+     * RemoveKey removes one or more keys or tokens from local storage.
+     * This does not handle deregistration from third-party services. For that, use DeRegisterKey.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.RemoveKeyResponse> removeKey(
         com.antinvestor.apis.device.v1.RemoveKeyRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getRemoveKeyMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * SearchKey searches for keys or tokens associated with a device.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.SearchKeyResponse> searchKey(
+        com.antinvestor.apis.device.v1.SearchKeyRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getSearchKeyMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * RegisterKey registers a key with a third-party service using an externally-generated key or token.
+     * This method handles the integration with the external service and stores metadata about the key,
+     * but not the key material itself. Use AddKey to store key material.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.RegisterKeyResponse> registerKey(
+        com.antinvestor.apis.device.v1.RegisterKeyRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getRegisterKeyMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * DeRegisterKey deregisters a key from a third-party service.
+     * This handles cleanup with the external service and removes the associated key metadata from local storage.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.DeRegisterKeyResponse> deRegisterKey(
+        com.antinvestor.apis.device.v1.DeRegisterKeyRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getDeRegisterKeyMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * Notify sends a notification to a device using one of its registered keys.
+     * The service selects an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
+     * If key_id is provided, that specific key will be used; otherwise the service selects the best available key.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.NotifyResponse> notify(
+        com.antinvestor.apis.device.v1.NotifyRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getNotifyMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * UpdatePresence updates the presence status of a device.
+     * Used to track online/offline status and availability for real-time features.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.device.v1.UpdatePresenceResponse> updatePresence(
+        com.antinvestor.apis.device.v1.UpdatePresenceRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getUpdatePresenceMethod(), getCallOptions()), request);
     }
   }
 
@@ -1238,6 +1604,10 @@ public final class DeviceServiceGrpc {
   private static final int METHODID_ADD_KEY = 9;
   private static final int METHODID_REMOVE_KEY = 10;
   private static final int METHODID_SEARCH_KEY = 11;
+  private static final int METHODID_REGISTER_KEY = 12;
+  private static final int METHODID_DE_REGISTER_KEY = 13;
+  private static final int METHODID_NOTIFY = 14;
+  private static final int METHODID_UPDATE_PRESENCE = 15;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1303,6 +1673,22 @@ public final class DeviceServiceGrpc {
         case METHODID_SEARCH_KEY:
           serviceImpl.searchKey((com.antinvestor.apis.device.v1.SearchKeyRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.SearchKeyResponse>) responseObserver);
+          break;
+        case METHODID_REGISTER_KEY:
+          serviceImpl.registerKey((com.antinvestor.apis.device.v1.RegisterKeyRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.RegisterKeyResponse>) responseObserver);
+          break;
+        case METHODID_DE_REGISTER_KEY:
+          serviceImpl.deRegisterKey((com.antinvestor.apis.device.v1.DeRegisterKeyRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.DeRegisterKeyResponse>) responseObserver);
+          break;
+        case METHODID_NOTIFY:
+          serviceImpl.notify((com.antinvestor.apis.device.v1.NotifyRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.NotifyResponse>) responseObserver);
+          break;
+        case METHODID_UPDATE_PRESENCE:
+          serviceImpl.updatePresence((com.antinvestor.apis.device.v1.UpdatePresenceRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.device.v1.UpdatePresenceResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -1401,11 +1787,39 @@ public final class DeviceServiceGrpc {
                 service, METHODID_REMOVE_KEY)))
         .addMethod(
           getSearchKeyMethod(),
-          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
               com.antinvestor.apis.device.v1.SearchKeyRequest,
               com.antinvestor.apis.device.v1.SearchKeyResponse>(
                 service, METHODID_SEARCH_KEY)))
+        .addMethod(
+          getRegisterKeyMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.device.v1.RegisterKeyRequest,
+              com.antinvestor.apis.device.v1.RegisterKeyResponse>(
+                service, METHODID_REGISTER_KEY)))
+        .addMethod(
+          getDeRegisterKeyMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.device.v1.DeRegisterKeyRequest,
+              com.antinvestor.apis.device.v1.DeRegisterKeyResponse>(
+                service, METHODID_DE_REGISTER_KEY)))
+        .addMethod(
+          getNotifyMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.device.v1.NotifyRequest,
+              com.antinvestor.apis.device.v1.NotifyResponse>(
+                service, METHODID_NOTIFY)))
+        .addMethod(
+          getUpdatePresenceMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.antinvestor.apis.device.v1.UpdatePresenceRequest,
+              com.antinvestor.apis.device.v1.UpdatePresenceResponse>(
+                service, METHODID_UPDATE_PRESENCE)))
         .build();
   }
 
@@ -1466,6 +1880,10 @@ public final class DeviceServiceGrpc {
               .addMethod(getAddKeyMethod())
               .addMethod(getRemoveKeyMethod())
               .addMethod(getSearchKeyMethod())
+              .addMethod(getRegisterKeyMethod())
+              .addMethod(getDeRegisterKeyMethod())
+              .addMethod(getNotifyMethod())
+              .addMethod(getUpdatePresenceMethod())
               .build();
         }
       }

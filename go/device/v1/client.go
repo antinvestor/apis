@@ -16,9 +16,10 @@ package devicev1
 
 import (
 	"context"
+	"math"
+
 	"github.com/antinvestor/apis/go/common"
 	"google.golang.org/grpc"
-	"math"
 )
 
 const ctxKeyService = common.CtxServiceKey("deviceClientKey")

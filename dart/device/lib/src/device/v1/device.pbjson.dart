@@ -22,12 +22,35 @@ const KeyType$json = {
   '2': [
     {'1': 'MATRIX_KEY', '2': 0},
     {'1': 'NOTIFICATION_KEY', '2': 1},
+    {'1': 'FCM_TOKEN', '2': 2},
+    {'1': 'CURVE25519_KEY', '2': 3},
+    {'1': 'ED25519_KEY', '2': 4},
+    {'1': 'PICKLE_KEY', '2': 5},
   ],
 };
 
 /// Descriptor for `KeyType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List keyTypeDescriptor = $convert.base64Decode(
-    'CgdLZXlUeXBlEg4KCk1BVFJJWF9LRVkQABIUChBOT1RJRklDQVRJT05fS0VZEAE=');
+    'CgdLZXlUeXBlEg4KCk1BVFJJWF9LRVkQABIUChBOT1RJRklDQVRJT05fS0VZEAESDQoJRkNNX1'
+    'RPS0VOEAISEgoOQ1VSVkUyNTUxOV9LRVkQAxIPCgtFRDI1NTE5X0tFWRAEEg4KClBJQ0tMRV9L'
+    'RVkQBQ==');
+
+@$core.Deprecated('Use presenceStatusDescriptor instead')
+const PresenceStatus$json = {
+  '1': 'PresenceStatus',
+  '2': [
+    {'1': 'OFFLINE', '2': 0},
+    {'1': 'ONLINE', '2': 1},
+    {'1': 'AWAY', '2': 2},
+    {'1': 'BUSY', '2': 3},
+    {'1': 'INVISIBLE', '2': 4},
+  ],
+};
+
+/// Descriptor for `PresenceStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List presenceStatusDescriptor = $convert.base64Decode(
+    'Cg5QcmVzZW5jZVN0YXR1cxILCgdPRkZMSU5FEAASCgoGT05MSU5FEAESCAoEQVdBWRACEggKBE'
+    'JVU1kQAxINCglJTlZJU0lCTEUQBA==');
 
 @$core.Deprecated('Use localeDescriptor instead')
 const Locale$json = {
@@ -55,10 +78,21 @@ const KeyObject$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
     {'1': 'device_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'deviceId'},
-    {'1': 'key', '3': 3, '4': 1, '5': 12, '10': 'key'},
+    {
+      '1': 'key_type',
+      '3': 3,
+      '4': 1,
+      '5': 14,
+      '6': '.device.v1.KeyType',
+      '10': 'keyType'
+    },
+    {'1': 'key', '3': 4, '4': 1, '5': 12, '10': 'key'},
+    {'1': 'created_at', '3': 5, '4': 1, '5': 9, '10': 'createdAt'},
+    {'1': 'expires_at', '3': 6, '4': 1, '5': 9, '10': 'expiresAt'},
+    {'1': 'is_active', '3': 7, '4': 1, '5': 8, '10': 'isActive'},
     {
       '1': 'extra',
-      '3': 4,
+      '3': 8,
       '4': 1,
       '5': 11,
       '6': '.google.protobuf.Struct',
@@ -71,8 +105,10 @@ const KeyObject$json = {
 final $typed_data.Uint8List keyObjectDescriptor = $convert.base64Decode(
     'CglLZXlPYmplY3QSKwoCaWQYASABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLDIwfVICaW'
     'QSOAoJZGV2aWNlX2lkGAIgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17MywyMH1SCGRldmlj'
-    'ZUlkEhAKA2tleRgDIAEoDFIDa2V5Ei0KBWV4dHJhGAQgASgLMhcuZ29vZ2xlLnByb3RvYnVmLl'
-    'N0cnVjdFIFZXh0cmE=');
+    'ZUlkEi0KCGtleV90eXBlGAMgASgOMhIuZGV2aWNlLnYxLktleVR5cGVSB2tleVR5cGUSEAoDa2'
+    'V5GAQgASgMUgNrZXkSHQoKY3JlYXRlZF9hdBgFIAEoCVIJY3JlYXRlZEF0Eh0KCmV4cGlyZXNf'
+    'YXQYBiABKAlSCWV4cGlyZXNBdBIbCglpc19hY3RpdmUYByABKAhSCGlzQWN0aXZlEi0KBWV4dH'
+    'JhGAggASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdFIFZXh0cmE=');
 
 @$core.Deprecated('Use deviceLogDescriptor instead')
 const DeviceLog$json = {
@@ -143,6 +179,14 @@ const DeviceObject$json = {
       '10': 'locale'
     },
     {
+      '1': 'presence',
+      '3': 10,
+      '4': 1,
+      '5': 14,
+      '6': '.device.v1.PresenceStatus',
+      '10': 'presence'
+    },
+    {
       '1': 'location',
       '3': 11,
       '4': 1,
@@ -168,8 +212,47 @@ final $typed_data.Uint8List deviceObjectDescriptor = $convert.base64Decode(
     'DgoCaXAYBCABKAlSAmlwEh0KCnVzZXJfYWdlbnQYBSABKAlSCXVzZXJBZ2VudBIOCgJvcxgGIA'
     'EoCVICb3MSGwoJbGFzdF9zZWVuGAcgASgJUghsYXN0U2VlbhIdCgpwcm9maWxlX2lkGAggASgJ'
     'Uglwcm9maWxlSWQSKQoGbG9jYWxlGAkgASgLMhEuZGV2aWNlLnYxLkxvY2FsZVIGbG9jYWxlEj'
-    'MKCGxvY2F0aW9uGAsgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdFIIbG9jYXRpb24SNwoK'
-    'cHJvcGVydGllcxgPIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSCnByb3BlcnRpZXM=');
+    'UKCHByZXNlbmNlGAogASgOMhkuZGV2aWNlLnYxLlByZXNlbmNlU3RhdHVzUghwcmVzZW5jZRIz'
+    'Cghsb2NhdGlvbhgLIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSCGxvY2F0aW9uEjcKCn'
+    'Byb3BlcnRpZXMYDyABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0Ugpwcm9wZXJ0aWVz');
+
+@$core.Deprecated('Use presenceObjectDescriptor instead')
+const PresenceObject$json = {
+  '1': 'PresenceObject',
+  '2': [
+    {'1': 'device_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'deviceId'},
+    {'1': 'profile_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
+    {
+      '1': 'status',
+      '3': 3,
+      '4': 1,
+      '5': 14,
+      '6': '.device.v1.PresenceStatus',
+      '10': 'status'
+    },
+    {'1': 'status_message', '3': 4, '4': 1, '5': 9, '10': 'statusMessage'},
+    {'1': 'last_active', '3': 5, '4': 1, '5': 9, '10': 'lastActive'},
+    {'1': 'updated_at', '3': 6, '4': 1, '5': 9, '10': 'updatedAt'},
+    {
+      '1': 'extras',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Struct',
+      '10': 'extras'
+    },
+  ],
+};
+
+/// Descriptor for `PresenceObject`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List presenceObjectDescriptor = $convert.base64Decode(
+    'Cg5QcmVzZW5jZU9iamVjdBI4CglkZXZpY2VfaWQYASABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel'
+    '8tXXszLDIwfVIIZGV2aWNlSWQSOgoKcHJvZmlsZV9pZBgCIAEoCUIbukgYchYQAxgoMhBbMC05'
+    'YS16Xy1dezMsMjB9Uglwcm9maWxlSWQSMQoGc3RhdHVzGAMgASgOMhkuZGV2aWNlLnYxLlByZX'
+    'NlbmNlU3RhdHVzUgZzdGF0dXMSJQoOc3RhdHVzX21lc3NhZ2UYBCABKAlSDXN0YXR1c01lc3Nh'
+    'Z2USHwoLbGFzdF9hY3RpdmUYBSABKAlSCmxhc3RBY3RpdmUSHQoKdXBkYXRlZF9hdBgGIAEoCV'
+    'IJdXBkYXRlZEF0Ei8KBmV4dHJhcxgHIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSBmV4'
+    'dHJhcw==');
 
 @$core.Deprecated('Use getByIdRequestDescriptor instead')
 const GetByIdRequest$json = {
@@ -548,9 +631,10 @@ const AddKeyRequest$json = {
       '10': 'keyType'
     },
     {'1': 'data', '3': 4, '4': 1, '5': 12, '10': 'data'},
+    {'1': 'expires_at', '3': 5, '4': 1, '5': 9, '10': 'expiresAt'},
     {
       '1': 'extras',
-      '3': 5,
+      '3': 6,
       '4': 1,
       '5': 11,
       '6': '.google.protobuf.Struct',
@@ -564,8 +648,8 @@ final $typed_data.Uint8List addKeyRequestDescriptor = $convert.base64Decode(
     'Cg1BZGRLZXlSZXF1ZXN0EisKAmlkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17MywyMH'
     '1SAmlkEjgKCWRldmljZV9pZBgCIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy1dezMsMjB9Ughk'
     'ZXZpY2VJZBItCghrZXlfdHlwZRgDIAEoDjISLmRldmljZS52MS5LZXlUeXBlUgdrZXlUeXBlEh'
-    'IKBGRhdGEYBCABKAxSBGRhdGESLwoGZXh0cmFzGAUgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0'
-    'cnVjdFIGZXh0cmFz');
+    'IKBGRhdGEYBCABKAxSBGRhdGESHQoKZXhwaXJlc19hdBgFIAEoCVIJZXhwaXJlc0F0Ei8KBmV4'
+    'dHJhcxgGIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSBmV4dHJhcw==');
 
 @$core.Deprecated('Use addKeyResponseDescriptor instead')
 const AddKeyResponse$json = {
@@ -619,24 +703,26 @@ const SearchKeyRequest$json = {
     {'1': 'query', '3': 1, '4': 1, '5': 9, '10': 'query'},
     {'1': 'device_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'deviceId'},
     {
-      '1': 'key_type',
+      '1': 'key_types',
       '3': 3,
-      '4': 1,
+      '4': 3,
       '5': 14,
       '6': '.device.v1.KeyType',
-      '10': 'keyType'
+      '10': 'keyTypes'
     },
-    {'1': 'page', '3': 4, '4': 1, '5': 5, '10': 'page'},
-    {'1': 'count', '3': 5, '4': 1, '5': 5, '10': 'count'},
+    {'1': 'include_expired', '3': 4, '4': 1, '5': 8, '10': 'includeExpired'},
+    {'1': 'page', '3': 5, '4': 1, '5': 5, '10': 'page'},
+    {'1': 'count', '3': 6, '4': 1, '5': 5, '10': 'count'},
   ],
 };
 
 /// Descriptor for `SearchKeyRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List searchKeyRequestDescriptor = $convert.base64Decode(
     'ChBTZWFyY2hLZXlSZXF1ZXN0EhQKBXF1ZXJ5GAEgASgJUgVxdWVyeRI4CglkZXZpY2VfaWQYAi'
-    'ABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLDIwfVIIZGV2aWNlSWQSLQoIa2V5X3R5cGUY'
-    'AyABKA4yEi5kZXZpY2UudjEuS2V5VHlwZVIHa2V5VHlwZRISCgRwYWdlGAQgASgFUgRwYWdlEh'
-    'QKBWNvdW50GAUgASgFUgVjb3VudA==');
+    'ABKAlCG7pIGHIWEAMYKDIQWzAtOWEtel8tXXszLDIwfVIIZGV2aWNlSWQSLwoJa2V5X3R5cGVz'
+    'GAMgAygOMhIuZGV2aWNlLnYxLktleVR5cGVSCGtleVR5cGVzEicKD2luY2x1ZGVfZXhwaXJlZB'
+    'gEIAEoCFIOaW5jbHVkZUV4cGlyZWQSEgoEcGFnZRgFIAEoBVIEcGFnZRIUCgVjb3VudBgGIAEo'
+    'BVIFY291bnQ=');
 
 @$core.Deprecated('Use searchKeyResponseDescriptor instead')
 const SearchKeyResponse$json = {
@@ -657,6 +743,205 @@ const SearchKeyResponse$json = {
 final $typed_data.Uint8List searchKeyResponseDescriptor = $convert.base64Decode(
     'ChFTZWFyY2hLZXlSZXNwb25zZRIoCgRkYXRhGAEgAygLMhQuZGV2aWNlLnYxLktleU9iamVjdF'
     'IEZGF0YQ==');
+
+@$core.Deprecated('Use registerKeyRequestDescriptor instead')
+const RegisterKeyRequest$json = {
+  '1': 'RegisterKeyRequest',
+  '2': [
+    {'1': 'device_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'deviceId'},
+    {
+      '1': 'key_type',
+      '3': 2,
+      '4': 1,
+      '5': 14,
+      '6': '.device.v1.KeyType',
+      '10': 'keyType'
+    },
+    {
+      '1': 'extras',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Struct',
+      '10': 'extras'
+    },
+  ],
+};
+
+/// Descriptor for `RegisterKeyRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List registerKeyRequestDescriptor = $convert.base64Decode(
+    'ChJSZWdpc3RlcktleVJlcXVlc3QSOAoJZGV2aWNlX2lkGAEgASgJQhu6SBhyFhADGCgyEFswLT'
+    'lhLXpfLV17MywyMH1SCGRldmljZUlkEi0KCGtleV90eXBlGAIgASgOMhIuZGV2aWNlLnYxLktl'
+    'eVR5cGVSB2tleVR5cGUSLwoGZXh0cmFzGAMgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdF'
+    'IGZXh0cmFz');
+
+@$core.Deprecated('Use registerKeyResponseDescriptor instead')
+const RegisterKeyResponse$json = {
+  '1': 'RegisterKeyResponse',
+  '2': [
+    {
+      '1': 'data',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.device.v1.KeyObject',
+      '10': 'data'
+    },
+  ],
+};
+
+/// Descriptor for `RegisterKeyResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List registerKeyResponseDescriptor = $convert.base64Decode(
+    'ChNSZWdpc3RlcktleVJlc3BvbnNlEigKBGRhdGEYASABKAsyFC5kZXZpY2UudjEuS2V5T2JqZW'
+    'N0UgRkYXRh');
+
+@$core.Deprecated('Use deRegisterKeyRequestDescriptor instead')
+const DeRegisterKeyRequest$json = {
+  '1': 'DeRegisterKeyRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
+  ],
+};
+
+/// Descriptor for `DeRegisterKeyRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deRegisterKeyRequestDescriptor = $convert.base64Decode(
+    'ChREZVJlZ2lzdGVyS2V5UmVxdWVzdBIrCgJpZBgBIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy'
+    '1dezMsMjB9UgJpZA==');
+
+@$core.Deprecated('Use deRegisterKeyResponseDescriptor instead')
+const DeRegisterKeyResponse$json = {
+  '1': 'DeRegisterKeyResponse',
+  '2': [
+    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+    {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `DeRegisterKeyResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deRegisterKeyResponseDescriptor = $convert.base64Decode(
+    'ChVEZVJlZ2lzdGVyS2V5UmVzcG9uc2USGAoHc3VjY2VzcxgBIAEoCFIHc3VjY2VzcxIYCgdtZX'
+    'NzYWdlGAIgASgJUgdtZXNzYWdl');
+
+@$core.Deprecated('Use updatePresenceRequestDescriptor instead')
+const UpdatePresenceRequest$json = {
+  '1': 'UpdatePresenceRequest',
+  '2': [
+    {'1': 'device_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'deviceId'},
+    {
+      '1': 'status',
+      '3': 2,
+      '4': 1,
+      '5': 14,
+      '6': '.device.v1.PresenceStatus',
+      '10': 'status'
+    },
+    {'1': 'status_message', '3': 3, '4': 1, '5': 9, '10': 'statusMessage'},
+    {
+      '1': 'extras',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Struct',
+      '10': 'extras'
+    },
+  ],
+};
+
+/// Descriptor for `UpdatePresenceRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updatePresenceRequestDescriptor = $convert.base64Decode(
+    'ChVVcGRhdGVQcmVzZW5jZVJlcXVlc3QSOAoJZGV2aWNlX2lkGAEgASgJQhu6SBhyFhADGCgyEF'
+    'swLTlhLXpfLV17MywyMH1SCGRldmljZUlkEjEKBnN0YXR1cxgCIAEoDjIZLmRldmljZS52MS5Q'
+    'cmVzZW5jZVN0YXR1c1IGc3RhdHVzEiUKDnN0YXR1c19tZXNzYWdlGAMgASgJUg1zdGF0dXNNZX'
+    'NzYWdlEi8KBmV4dHJhcxgEIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSBmV4dHJhcw==');
+
+@$core.Deprecated('Use updatePresenceResponseDescriptor instead')
+const UpdatePresenceResponse$json = {
+  '1': 'UpdatePresenceResponse',
+  '2': [
+    {
+      '1': 'data',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.device.v1.PresenceObject',
+      '10': 'data'
+    },
+  ],
+};
+
+/// Descriptor for `UpdatePresenceResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updatePresenceResponseDescriptor =
+    $convert.base64Decode(
+        'ChZVcGRhdGVQcmVzZW5jZVJlc3BvbnNlEi0KBGRhdGEYASABKAsyGS5kZXZpY2UudjEuUHJlc2'
+        'VuY2VPYmplY3RSBGRhdGE=');
+
+@$core.Deprecated('Use notifyRequestDescriptor instead')
+const NotifyRequest$json = {
+  '1': 'NotifyRequest',
+  '2': [
+    {'1': 'device_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'deviceId'},
+    {'1': 'key_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'keyId'},
+    {
+      '1': 'key_type',
+      '3': 3,
+      '4': 1,
+      '5': 14,
+      '6': '.device.v1.KeyType',
+      '10': 'keyType'
+    },
+    {'1': 'title', '3': 4, '4': 1, '5': 9, '10': 'title'},
+    {'1': 'body', '3': 5, '4': 1, '5': 9, '10': 'body'},
+    {
+      '1': 'data',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Struct',
+      '10': 'data'
+    },
+    {
+      '1': 'extras',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Struct',
+      '10': 'extras'
+    },
+  ],
+};
+
+/// Descriptor for `NotifyRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List notifyRequestDescriptor = $convert.base64Decode(
+    'Cg1Ob3RpZnlSZXF1ZXN0EjgKCWRldmljZV9pZBgBIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy'
+    '1dezMsMjB9UghkZXZpY2VJZBI1CgZrZXlfaWQYAiABKAlCHrpIG9gBAXIWEAMYKDIQWzAtOWEt'
+    'el8tXXszLDIwfVIFa2V5SWQSLQoIa2V5X3R5cGUYAyABKA4yEi5kZXZpY2UudjEuS2V5VHlwZV'
+    'IHa2V5VHlwZRIUCgV0aXRsZRgEIAEoCVIFdGl0bGUSEgoEYm9keRgFIAEoCVIEYm9keRIrCgRk'
+    'YXRhGAYgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdFIEZGF0YRIvCgZleHRyYXMYByABKA'
+    'syFy5nb29nbGUucHJvdG9idWYuU3RydWN0UgZleHRyYXM=');
+
+@$core.Deprecated('Use notifyResponseDescriptor instead')
+const NotifyResponse$json = {
+  '1': 'NotifyResponse',
+  '2': [
+    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+    {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
+    {'1': 'notification_id', '3': 3, '4': 1, '5': 9, '10': 'notificationId'},
+    {
+      '1': 'extras',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Struct',
+      '10': 'extras'
+    },
+  ],
+};
+
+/// Descriptor for `NotifyResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List notifyResponseDescriptor = $convert.base64Decode(
+    'Cg5Ob3RpZnlSZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNzEhgKB21lc3NhZ2UYAi'
+    'ABKAlSB21lc3NhZ2USJwoPbm90aWZpY2F0aW9uX2lkGAMgASgJUg5ub3RpZmljYXRpb25JZBIv'
+    'CgZleHRyYXMYBCABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0UgZleHRyYXM=');
 
 const $core.Map<$core.String, $core.dynamic> DeviceServiceBase$json = {
   '1': 'DeviceService',
@@ -733,8 +1018,31 @@ const $core.Map<$core.String, $core.dynamic> DeviceServiceBase$json = {
       '1': 'SearchKey',
       '2': '.device.v1.SearchKeyRequest',
       '3': '.device.v1.SearchKeyResponse',
-      '4': {},
-      '6': true
+      '4': {}
+    },
+    {
+      '1': 'RegisterKey',
+      '2': '.device.v1.RegisterKeyRequest',
+      '3': '.device.v1.RegisterKeyResponse',
+      '4': {}
+    },
+    {
+      '1': 'DeRegisterKey',
+      '2': '.device.v1.DeRegisterKeyRequest',
+      '3': '.device.v1.DeRegisterKeyResponse',
+      '4': {}
+    },
+    {
+      '1': 'Notify',
+      '2': '.device.v1.NotifyRequest',
+      '3': '.device.v1.NotifyResponse',
+      '4': {}
+    },
+    {
+      '1': 'UpdatePresence',
+      '2': '.device.v1.UpdatePresenceRequest',
+      '3': '.device.v1.UpdatePresenceResponse',
+      '4': {}
     },
   ],
 };
@@ -774,6 +1082,15 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.device.v1.RemoveKeyResponse': RemoveKeyResponse$json,
   '.device.v1.SearchKeyRequest': SearchKeyRequest$json,
   '.device.v1.SearchKeyResponse': SearchKeyResponse$json,
+  '.device.v1.RegisterKeyRequest': RegisterKeyRequest$json,
+  '.device.v1.RegisterKeyResponse': RegisterKeyResponse$json,
+  '.device.v1.DeRegisterKeyRequest': DeRegisterKeyRequest$json,
+  '.device.v1.DeRegisterKeyResponse': DeRegisterKeyResponse$json,
+  '.device.v1.NotifyRequest': NotifyRequest$json,
+  '.device.v1.NotifyResponse': NotifyResponse$json,
+  '.device.v1.UpdatePresenceRequest': UpdatePresenceRequest$json,
+  '.device.v1.UpdatePresenceResponse': UpdatePresenceResponse$json,
+  '.device.v1.PresenceObject': PresenceObject$json,
 };
 
 /// Descriptor for `DeviceService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
@@ -819,19 +1136,42 @@ final $typed_data.Uint8List deviceServiceDescriptor = $convert.base64Decode(
     'djEuTGlzdExvZ3NSZXNwb25zZSK7AbpHtwEKC0RldmljZSBMb2dzEhlMaXN0IGRldmljZSBhY3'
     'Rpdml0eSBsb2dzGn1SZXRyaWV2ZXMgYWN0aXZpdHkgbG9ncyBmb3IgYSBkZXZpY2UuIFVzZWZ1'
     'bCBmb3Igc2VjdXJpdHkgYXVkaXRpbmcsIHRyYWNraW5nIGRldmljZSB1c2FnZSBwYXR0ZXJucy'
-    'wgYW5kIGNvbXBsaWFuY2UgcmVwb3J0aW5nLioObGlzdERldmljZUxvZ3MwARKPAgoGQWRkS2V5'
-    'EhguZGV2aWNlLnYxLkFkZEtleVJlcXVlc3QaGS5kZXZpY2UudjEuQWRkS2V5UmVzcG9uc2Uizw'
-    'G6R8sBCgtEZXZpY2UgS2V5cxISQWRkIGVuY3J5cHRpb24ga2V5GpkBQWRkcyBhbiBlbmNyeXB0'
-    'aW9uIGtleSB0byBhIGRldmljZS4gS2V5cyBhcmUgdXNlZCBmb3Igc2VjdXJlIGNvbW11bmljYX'
-    'Rpb25zIGluY2x1ZGluZyBNYXRyaXggZW5kLXRvLWVuZCBlbmNyeXB0aW9uIGFuZCBzZWN1cmUg'
-    'cHVzaCBub3RpZmljYXRpb24gZGVsaXZlcnkuKgxhZGREZXZpY2VLZXkS+AEKCVJlbW92ZUtleR'
-    'IbLmRldmljZS52MS5SZW1vdmVLZXlSZXF1ZXN0GhwuZGV2aWNlLnYxLlJlbW92ZUtleVJlc3Bv'
-    'bnNlIq8BukerAQoLRGV2aWNlIEtleXMSFlJlbW92ZSBlbmNyeXB0aW9uIGtleXMac1JlbW92ZX'
-    'Mgb25lIG9yIG1vcmUgZW5jcnlwdGlvbiBrZXlzIGZyb20gYSBkZXZpY2UuIFVzZWQgZm9yIGtl'
-    'eSByb3RhdGlvbiBvciB3aGVuIHJlbW92aW5nIGEgZGV2aWNlIGZyb20gdGhlIHN5c3RlbS4qD3'
-    'JlbW92ZURldmljZUtleRKLAgoJU2VhcmNoS2V5EhsuZGV2aWNlLnYxLlNlYXJjaEtleVJlcXVl'
-    'c3QaHC5kZXZpY2UudjEuU2VhcmNoS2V5UmVzcG9uc2UiwAG6R7wBCgtEZXZpY2UgS2V5cxIdU2'
-    'VhcmNoIGRldmljZSBlbmNyeXB0aW9uIGtleXMafFNlYXJjaGVzIGZvciBlbmNyeXB0aW9uIGtl'
-    'eXMgYXNzb2NpYXRlZCB3aXRoIGEgZGV2aWNlLiBTdXBwb3J0cyBmaWx0ZXJpbmcgYnkga2V5IH'
-    'R5cGUgKE1hdHJpeCwgTm90aWZpY2F0aW9uKSBhbmQgcGFnaW5hdGlvbi4qEHNlYXJjaERldmlj'
-    'ZUtleXMwAQ==');
+    'wgYW5kIGNvbXBsaWFuY2UgcmVwb3J0aW5nLioObGlzdERldmljZUxvZ3MwARLkAQoGQWRkS2V5'
+    'EhguZGV2aWNlLnYxLkFkZEtleVJlcXVlc3QaGS5kZXZpY2UudjEuQWRkS2V5UmVzcG9uc2UipA'
+    'G6R6ABCgtEZXZpY2UgS2V5cxIQQWRkIGtleSBvciB0b2tlbhpxQWRkcyBhIGtleSBvciB0b2tl'
+    'biB0byBhIGRldmljZS4gU3VwcG9ydHMgRkNNIHRva2VucywgZW5jcnlwdGlvbiBrZXlzIChDdX'
+    'J2ZTI1NTE5LCBFZDI1NTE5KSwgYW5kIG90aGVyIGtleSB0eXBlcy4qDGFkZERldmljZUtleRL5'
+    'AQoJUmVtb3ZlS2V5EhsuZGV2aWNlLnYxLlJlbW92ZUtleVJlcXVlc3QaHC5kZXZpY2UudjEuUm'
+    'Vtb3ZlS2V5UmVzcG9uc2UisAG6R6wBCgtEZXZpY2UgS2V5cxIVUmVtb3ZlIGtleXMgb3IgdG9r'
+    'ZW5zGnVSZW1vdmVzIG9uZSBvciBtb3JlIGtleXMgb3IgdG9rZW5zIGZyb20gYSBkZXZpY2UuIF'
+    'VzZWQgZm9yIGtleSByb3RhdGlvbiwgdG9rZW4gbWFuYWdlbWVudCwgb3Igd2hlbiByZW1vdmlu'
+    'ZyBhIGRldmljZS4qD3JlbW92ZURldmljZUtleRLoAQoJU2VhcmNoS2V5EhsuZGV2aWNlLnYxLl'
+    'NlYXJjaEtleVJlcXVlc3QaHC5kZXZpY2UudjEuU2VhcmNoS2V5UmVzcG9uc2UinwG6R5sBCgtE'
+    'ZXZpY2UgS2V5cxIVU2VhcmNoIGtleXMgb3IgdG9rZW5zGmRTZWFyY2hlcyBmb3Iga2V5cyBvci'
+    'B0b2tlbnMgYXNzb2NpYXRlZCB3aXRoIGEgZGV2aWNlLiBTdXBwb3J0cyBmaWx0ZXJpbmcgYnkg'
+    'a2V5IHR5cGUgYW5kIGV4cGlyYXRpb24uKg9zZWFyY2hEZXZpY2VLZXkSzAIKC1JlZ2lzdGVyS2'
+    'V5Eh0uZGV2aWNlLnYxLlJlZ2lzdGVyS2V5UmVxdWVzdBoeLmRldmljZS52MS5SZWdpc3Rlcktl'
+    'eVJlc3BvbnNlIv0Bukf5AQoQS2V5IFJlZ2lzdHJhdGlvbhIlUmVnaXN0ZXIga2V5IHdpdGggdG'
+    'hpcmQtcGFydHkgc2VydmljZRqwAVJlZ2lzdGVycyBhIGtleSBvciB0b2tlbiB3aXRoIHRoaXJk'
+    'LXBhcnR5IHNlcnZpY2VzIChsaWtlIEZDTSBmb3IgcHVzaCBub3RpZmljYXRpb25zKSBhbmQgc3'
+    'RvcmVzIGl0LiBUaGlzIG1ldGhvZCBoYW5kbGVzIGJvdGggdGhlIGV4dGVybmFsIHNlcnZpY2Ug'
+    'aW50ZWdyYXRpb24gYW5kIGxvY2FsIHN0b3JhZ2UuKgtyZWdpc3RlcktleRLMAgoNRGVSZWdpc3'
+    'RlcktleRIfLmRldmljZS52MS5EZVJlZ2lzdGVyS2V5UmVxdWVzdBogLmRldmljZS52MS5EZVJl'
+    'Z2lzdGVyS2V5UmVzcG9uc2Ui9wG6R/MBChBLZXkgUmVnaXN0cmF0aW9uEidEZVJlZ2lzdGVyIG'
+    'tleSBmcm9tIHRoaXJkLXBhcnR5IHNlcnZpY2UapgFEZVJlZ2lzdGVycyBhIGtleSBvciB0b2tl'
+    'biBmcm9tIHRoaXJkLXBhcnR5IHNlcnZpY2VzIChsaWtlIEZDTSkgYW5kIHJlbW92ZXMgaXQgZn'
+    'JvbSBzdG9yYWdlLiBUaGlzIG1ldGhvZCBoYW5kbGVzIGJvdGggdGhlIGV4dGVybmFsIHNlcnZp'
+    'Y2UgY2xlYW51cCBhbmQgbG9jYWwgZGVsZXRpb24uKg1kZVJlZ2lzdGVyS2V5EvYCCgZOb3RpZn'
+    'kSGC5kZXZpY2UudjEuTm90aWZ5UmVxdWVzdBoZLmRldmljZS52MS5Ob3RpZnlSZXNwb25zZSK2'
+    'ArpHsgIKFERldmljZSBOb3RpZmljYXRpb25zEiJOb3RpZnkgZGV2aWNlIHVzaW5nIHJlZ2lzdG'
+    'VyZWQga2V5GucBU2VuZHMgYSBub3RpZmljYXRpb24gdG8gYSBkZXZpY2UgdXNpbmcgb25lIG9m'
+    'IGl0cyByZWdpc3RlcmVkIGtleXMgKEZDTSB0b2tlbiwgbm90aWZpY2F0aW9uIGtleSwgZXRjLi'
+    'kuIFRoZSBzZXJ2aWNlIGF1dG9tYXRpY2FsbHkgc2VsZWN0cyBhbiBhcHByb3ByaWF0ZSBhY3Rp'
+    'dmUga2V5IGJhc2VkIG9uIHRoZSBrZXlfdHlwZSwgb3IgdXNlcyBhIHNwZWNpZmljIGtleSBpZi'
+    'BrZXlfaWQgaXMgcHJvdmlkZWQuKgxub3RpZnlEZXZpY2USrwIKDlVwZGF0ZVByZXNlbmNlEiAu'
+    'ZGV2aWNlLnYxLlVwZGF0ZVByZXNlbmNlUmVxdWVzdBohLmRldmljZS52MS5VcGRhdGVQcmVzZW'
+    '5jZVJlc3BvbnNlItcBukfTAQoPRGV2aWNlIFByZXNlbmNlEhZVcGRhdGUgZGV2aWNlIHByZXNl'
+    'bmNlGpcBVXBkYXRlcyB0aGUgcHJlc2VuY2Ugc3RhdHVzIG9mIGEgZGV2aWNlLiBVc2VkIHRvIG'
+    'luZGljYXRlIG9ubGluZS9vZmZsaW5lL2F3YXkvYnVzeSBzdGF0dXMgYW5kIHRyYWNrIGxhc3Qg'
+    'YWN0aXZpdHkgZm9yIHJlYWwtdGltZSBjb21tdW5pY2F0aW9uIGZlYXR1cmVzLioOdXBkYXRlUH'
+    'Jlc2VuY2U=');
