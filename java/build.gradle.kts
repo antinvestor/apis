@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.2.20"
+    kotlin("jvm") version "2.2.21"
     id("maven-publish")
 }
 
@@ -74,7 +74,7 @@ subprojects {
         api("org.gnostic:gnostic-grpc:0.7.1")
 
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0")
-        api("com.googlecode.libphonenumber:libphonenumber:9.0.16")
+        api("com.googlecode.libphonenumber:libphonenumber:9.0.17")
 
         api("org.slf4j:slf4j-api:2.0.17")
 
