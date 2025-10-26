@@ -21,7 +21,7 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * SearchKeyResponse returns matching encryption keys.
+ * SearchKeyResponse returns matching keys or tokens.
  * </pre>
  *
  * Protobuf type {@code device.v1.SearchKeyResponse}
@@ -284,7 +284,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * SearchKeyResponse returns matching encryption keys.
+   * SearchKeyResponse returns matching keys or tokens.
    * </pre>
    *
    * Protobuf type {@code device.v1.SearchKeyResponse}

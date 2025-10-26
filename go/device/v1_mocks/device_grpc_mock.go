@@ -82,6 +82,26 @@ func (mr *MockDeviceServiceClientMockRecorder) Create(ctx, in any, opts ...any) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockDeviceServiceClient)(nil).Create), varargs...)
 }
 
+// DeRegisterKey mocks base method.
+func (m *MockDeviceServiceClient) DeRegisterKey(ctx context.Context, in *devicev1.DeRegisterKeyRequest, opts ...grpc.CallOption) (*devicev1.DeRegisterKeyResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeRegisterKey", varargs...)
+	ret0, _ := ret[0].(*devicev1.DeRegisterKeyResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeRegisterKey indicates an expected call of DeRegisterKey.
+func (mr *MockDeviceServiceClientMockRecorder) DeRegisterKey(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeRegisterKey", reflect.TypeOf((*MockDeviceServiceClient)(nil).DeRegisterKey), varargs...)
+}
+
 // GetById mocks base method.
 func (m *MockDeviceServiceClient) GetById(ctx context.Context, in *devicev1.GetByIdRequest, opts ...grpc.CallOption) (*devicev1.GetByIdResponse, error) {
 	m.ctrl.T.Helper()
@@ -182,6 +202,46 @@ func (mr *MockDeviceServiceClientMockRecorder) Log(ctx, in any, opts ...any) *go
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Log", reflect.TypeOf((*MockDeviceServiceClient)(nil).Log), varargs...)
 }
 
+// Notify mocks base method.
+func (m *MockDeviceServiceClient) Notify(ctx context.Context, in *devicev1.NotifyRequest, opts ...grpc.CallOption) (*devicev1.NotifyResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "Notify", varargs...)
+	ret0, _ := ret[0].(*devicev1.NotifyResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Notify indicates an expected call of Notify.
+func (mr *MockDeviceServiceClientMockRecorder) Notify(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Notify", reflect.TypeOf((*MockDeviceServiceClient)(nil).Notify), varargs...)
+}
+
+// RegisterKey mocks base method.
+func (m *MockDeviceServiceClient) RegisterKey(ctx context.Context, in *devicev1.RegisterKeyRequest, opts ...grpc.CallOption) (*devicev1.RegisterKeyResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "RegisterKey", varargs...)
+	ret0, _ := ret[0].(*devicev1.RegisterKeyResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RegisterKey indicates an expected call of RegisterKey.
+func (mr *MockDeviceServiceClientMockRecorder) RegisterKey(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterKey", reflect.TypeOf((*MockDeviceServiceClient)(nil).RegisterKey), varargs...)
+}
+
 // Remove mocks base method.
 func (m *MockDeviceServiceClient) Remove(ctx context.Context, in *devicev1.RemoveRequest, opts ...grpc.CallOption) (*devicev1.RemoveResponse, error) {
 	m.ctrl.T.Helper()
@@ -243,14 +303,14 @@ func (mr *MockDeviceServiceClientMockRecorder) Search(ctx, in any, opts ...any) 
 }
 
 // SearchKey mocks base method.
-func (m *MockDeviceServiceClient) SearchKey(ctx context.Context, in *devicev1.SearchKeyRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[devicev1.SearchKeyResponse], error) {
+func (m *MockDeviceServiceClient) SearchKey(ctx context.Context, in *devicev1.SearchKeyRequest, opts ...grpc.CallOption) (*devicev1.SearchKeyResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "SearchKey", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[devicev1.SearchKeyResponse])
+	ret0, _ := ret[0].(*devicev1.SearchKeyResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -280,6 +340,26 @@ func (mr *MockDeviceServiceClientMockRecorder) Update(ctx, in any, opts ...any) 
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Update", reflect.TypeOf((*MockDeviceServiceClient)(nil).Update), varargs...)
+}
+
+// UpdatePresence mocks base method.
+func (m *MockDeviceServiceClient) UpdatePresence(ctx context.Context, in *devicev1.UpdatePresenceRequest, opts ...grpc.CallOption) (*devicev1.UpdatePresenceResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdatePresence", varargs...)
+	ret0, _ := ret[0].(*devicev1.UpdatePresenceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdatePresence indicates an expected call of UpdatePresence.
+func (mr *MockDeviceServiceClientMockRecorder) UpdatePresence(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdatePresence", reflect.TypeOf((*MockDeviceServiceClient)(nil).UpdatePresence), varargs...)
 }
 
 // MockDeviceServiceServer is a mock of DeviceServiceServer interface.
@@ -334,6 +414,21 @@ func (m *MockDeviceServiceServer) Create(arg0 context.Context, arg1 *devicev1.Cr
 func (mr *MockDeviceServiceServerMockRecorder) Create(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockDeviceServiceServer)(nil).Create), arg0, arg1)
+}
+
+// DeRegisterKey mocks base method.
+func (m *MockDeviceServiceServer) DeRegisterKey(arg0 context.Context, arg1 *devicev1.DeRegisterKeyRequest) (*devicev1.DeRegisterKeyResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeRegisterKey", arg0, arg1)
+	ret0, _ := ret[0].(*devicev1.DeRegisterKeyResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeRegisterKey indicates an expected call of DeRegisterKey.
+func (mr *MockDeviceServiceServerMockRecorder) DeRegisterKey(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeRegisterKey", reflect.TypeOf((*MockDeviceServiceServer)(nil).DeRegisterKey), arg0, arg1)
 }
 
 // GetById mocks base method.
@@ -410,6 +505,36 @@ func (mr *MockDeviceServiceServerMockRecorder) Log(arg0, arg1 any) *gomock.Call 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Log", reflect.TypeOf((*MockDeviceServiceServer)(nil).Log), arg0, arg1)
 }
 
+// Notify mocks base method.
+func (m *MockDeviceServiceServer) Notify(arg0 context.Context, arg1 *devicev1.NotifyRequest) (*devicev1.NotifyResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Notify", arg0, arg1)
+	ret0, _ := ret[0].(*devicev1.NotifyResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Notify indicates an expected call of Notify.
+func (mr *MockDeviceServiceServerMockRecorder) Notify(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Notify", reflect.TypeOf((*MockDeviceServiceServer)(nil).Notify), arg0, arg1)
+}
+
+// RegisterKey mocks base method.
+func (m *MockDeviceServiceServer) RegisterKey(arg0 context.Context, arg1 *devicev1.RegisterKeyRequest) (*devicev1.RegisterKeyResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RegisterKey", arg0, arg1)
+	ret0, _ := ret[0].(*devicev1.RegisterKeyResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RegisterKey indicates an expected call of RegisterKey.
+func (mr *MockDeviceServiceServerMockRecorder) RegisterKey(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterKey", reflect.TypeOf((*MockDeviceServiceServer)(nil).RegisterKey), arg0, arg1)
+}
+
 // Remove mocks base method.
 func (m *MockDeviceServiceServer) Remove(arg0 context.Context, arg1 *devicev1.RemoveRequest) (*devicev1.RemoveResponse, error) {
 	m.ctrl.T.Helper()
@@ -455,11 +580,12 @@ func (mr *MockDeviceServiceServerMockRecorder) Search(arg0, arg1 any) *gomock.Ca
 }
 
 // SearchKey mocks base method.
-func (m *MockDeviceServiceServer) SearchKey(arg0 *devicev1.SearchKeyRequest, arg1 grpc.ServerStreamingServer[devicev1.SearchKeyResponse]) error {
+func (m *MockDeviceServiceServer) SearchKey(arg0 context.Context, arg1 *devicev1.SearchKeyRequest) (*devicev1.SearchKeyResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchKey", arg0, arg1)
-	ret0, _ := ret[0].(error)
-	return ret0
+	ret0, _ := ret[0].(*devicev1.SearchKeyResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
 
 // SearchKey indicates an expected call of SearchKey.
@@ -481,6 +607,21 @@ func (m *MockDeviceServiceServer) Update(arg0 context.Context, arg1 *devicev1.Up
 func (mr *MockDeviceServiceServerMockRecorder) Update(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Update", reflect.TypeOf((*MockDeviceServiceServer)(nil).Update), arg0, arg1)
+}
+
+// UpdatePresence mocks base method.
+func (m *MockDeviceServiceServer) UpdatePresence(arg0 context.Context, arg1 *devicev1.UpdatePresenceRequest) (*devicev1.UpdatePresenceResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdatePresence", arg0, arg1)
+	ret0, _ := ret[0].(*devicev1.UpdatePresenceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdatePresence indicates an expected call of UpdatePresence.
+func (mr *MockDeviceServiceServerMockRecorder) UpdatePresence(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdatePresence", reflect.TypeOf((*MockDeviceServiceServer)(nil).UpdatePresence), arg0, arg1)
 }
 
 // mustEmbedUnimplementedDeviceServiceServer mocks base method.

@@ -21,17 +21,16 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * AddKeyRequest adds a key or token to a device.
- * Keys are used for secure communications (Matrix E2EE, push notifications, FCM tokens, etc.).
+ * UpdatePresenceRequest updates the presence status of a device.
  * </pre>
  *
- * Protobuf type {@code device.v1.AddKeyRequest}
+ * Protobuf type {@code device.v1.UpdatePresenceRequest}
  */
 @com.google.protobuf.Generated
-public final class AddKeyRequest extends
+public final class UpdatePresenceRequest extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:device.v1.AddKeyRequest)
-    AddKeyRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:device.v1.UpdatePresenceRequest)
+    UpdatePresenceRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -40,90 +39,41 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 33,
       /* patch= */ 0,
       /* suffix= */ "",
-      "AddKeyRequest");
+      "UpdatePresenceRequest");
   }
-  // Use AddKeyRequest.newBuilder() to construct.
-  private AddKeyRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use UpdatePresenceRequest.newBuilder() to construct.
+  private UpdatePresenceRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private AddKeyRequest() {
-    id_ = "";
+  private UpdatePresenceRequest() {
     deviceId_ = "";
-    keyType_ = 0;
-    data_ = com.google.protobuf.ByteString.EMPTY;
-    expiresAt_ = "";
+    status_ = 0;
+    statusMessage_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_descriptor;
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_UpdatePresenceRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_fieldAccessorTable
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_UpdatePresenceRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.antinvestor.apis.device.v1.AddKeyRequest.class, com.antinvestor.apis.device.v1.AddKeyRequest.Builder.class);
+            com.antinvestor.apis.device.v1.UpdatePresenceRequest.class, com.antinvestor.apis.device.v1.UpdatePresenceRequest.Builder.class);
   }
 
   private int bitField0_;
-  public static final int ID_FIELD_NUMBER = 1;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object id_ = "";
-  /**
-   * <pre>
-   * Unique identifier for the key
-   * </pre>
-   *
-   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return The id.
-   */
-  @java.lang.Override
-  public java.lang.String getId() {
-    java.lang.Object ref = id_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      id_ = s;
-      return s;
-    }
-  }
-  /**
-   * <pre>
-   * Unique identifier for the key
-   * </pre>
-   *
-   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for id.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getIdBytes() {
-    java.lang.Object ref = id_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      id_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int DEVICE_ID_FIELD_NUMBER = 2;
+  public static final int DEVICE_ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object deviceId_ = "";
   /**
    * <pre>
-   * Device this key belongs to
+   * Device ID to update presence for
    * </pre>
    *
-   * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
    * @return The deviceId.
    */
   @java.lang.Override
@@ -141,10 +91,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Device this key belongs to
+   * Device ID to update presence for
    * </pre>
    *
-   * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for deviceId.
    */
   @java.lang.Override
@@ -162,102 +112,87 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int KEY_TYPE_FIELD_NUMBER = 3;
-  private int keyType_ = 0;
+  public static final int STATUS_FIELD_NUMBER = 2;
+  private int status_ = 0;
   /**
    * <pre>
-   * Type of key (Matrix, FCM, Encryption, etc.)
+   * New presence status
    * </pre>
    *
-   * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-   * @return The enum numeric value on the wire for keyType.
+   * <code>.device.v1.PresenceStatus status = 2 [json_name = "status"];</code>
+   * @return The enum numeric value on the wire for status.
    */
-  @java.lang.Override public int getKeyTypeValue() {
-    return keyType_;
+  @java.lang.Override public int getStatusValue() {
+    return status_;
   }
   /**
    * <pre>
-   * Type of key (Matrix, FCM, Encryption, etc.)
+   * New presence status
    * </pre>
    *
-   * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-   * @return The keyType.
+   * <code>.device.v1.PresenceStatus status = 2 [json_name = "status"];</code>
+   * @return The status.
    */
-  @java.lang.Override public com.antinvestor.apis.device.v1.KeyType getKeyType() {
-    com.antinvestor.apis.device.v1.KeyType result = com.antinvestor.apis.device.v1.KeyType.forNumber(keyType_);
-    return result == null ? com.antinvestor.apis.device.v1.KeyType.UNRECOGNIZED : result;
-  }
-
-  public static final int DATA_FIELD_NUMBER = 4;
-  private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
-  /**
-   * <pre>
-   * The key material or token (will be encrypted at rest)
-   * </pre>
-   *
-   * <code>bytes data = 4 [json_name = "data"];</code>
-   * @return The data.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString getData() {
-    return data_;
+  @java.lang.Override public com.antinvestor.apis.device.v1.PresenceStatus getStatus() {
+    com.antinvestor.apis.device.v1.PresenceStatus result = com.antinvestor.apis.device.v1.PresenceStatus.forNumber(status_);
+    return result == null ? com.antinvestor.apis.device.v1.PresenceStatus.UNRECOGNIZED : result;
   }
 
-  public static final int EXPIRES_AT_FIELD_NUMBER = 5;
+  public static final int STATUS_MESSAGE_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object expiresAt_ = "";
+  private volatile java.lang.Object statusMessage_ = "";
   /**
    * <pre>
-   * Optional expiration timestamp (RFC3339)
+   * Optional custom status message
    * </pre>
    *
-   * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
-   * @return The expiresAt.
+   * <code>string status_message = 3 [json_name = "statusMessage"];</code>
+   * @return The statusMessage.
    */
   @java.lang.Override
-  public java.lang.String getExpiresAt() {
-    java.lang.Object ref = expiresAt_;
+  public java.lang.String getStatusMessage() {
+    java.lang.Object ref = statusMessage_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      expiresAt_ = s;
+      statusMessage_ = s;
       return s;
     }
   }
   /**
    * <pre>
-   * Optional expiration timestamp (RFC3339)
+   * Optional custom status message
    * </pre>
    *
-   * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
-   * @return The bytes for expiresAt.
+   * <code>string status_message = 3 [json_name = "statusMessage"];</code>
+   * @return The bytes for statusMessage.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getExpiresAtBytes() {
-    java.lang.Object ref = expiresAt_;
+      getStatusMessageBytes() {
+    java.lang.Object ref = statusMessage_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      expiresAt_ = b;
+      statusMessage_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int EXTRAS_FIELD_NUMBER = 6;
+  public static final int EXTRAS_FIELD_NUMBER = 4;
   private com.google.protobuf.Struct extras_;
   /**
    * <pre>
-   * Additional key metadata (algorithm, app_id, etc.)
+   * Additional presence metadata
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
    * @return Whether the extras field is set.
    */
   @java.lang.Override
@@ -266,10 +201,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Additional key metadata (algorithm, app_id, etc.)
+   * Additional presence metadata
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
    * @return The extras.
    */
   @java.lang.Override
@@ -278,10 +213,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Additional key metadata (algorithm, app_id, etc.)
+   * Additional presence metadata
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
    */
   @java.lang.Override
   public com.google.protobuf.StructOrBuilder getExtrasOrBuilder() {
@@ -302,23 +237,17 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
-    }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 2, deviceId_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, deviceId_);
     }
-    if (keyType_ != com.antinvestor.apis.device.v1.KeyType.MATRIX_KEY.getNumber()) {
-      output.writeEnum(3, keyType_);
+    if (status_ != com.antinvestor.apis.device.v1.PresenceStatus.OFFLINE.getNumber()) {
+      output.writeEnum(2, status_);
     }
-    if (!data_.isEmpty()) {
-      output.writeBytes(4, data_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(expiresAt_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 5, expiresAt_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(statusMessage_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 3, statusMessage_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(6, getExtras());
+      output.writeMessage(4, getExtras());
     }
     getUnknownFields().writeTo(output);
   }
@@ -329,26 +258,19 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
-    }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, deviceId_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, deviceId_);
     }
-    if (keyType_ != com.antinvestor.apis.device.v1.KeyType.MATRIX_KEY.getNumber()) {
+    if (status_ != com.antinvestor.apis.device.v1.PresenceStatus.OFFLINE.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
-        .computeEnumSize(3, keyType_);
+        .computeEnumSize(2, status_);
     }
-    if (!data_.isEmpty()) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeBytesSize(4, data_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(expiresAt_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(5, expiresAt_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(statusMessage_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, statusMessage_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(6, getExtras());
+        .computeMessageSize(4, getExtras());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -360,20 +282,16 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.antinvestor.apis.device.v1.AddKeyRequest)) {
+    if (!(obj instanceof com.antinvestor.apis.device.v1.UpdatePresenceRequest)) {
       return super.equals(obj);
     }
-    com.antinvestor.apis.device.v1.AddKeyRequest other = (com.antinvestor.apis.device.v1.AddKeyRequest) obj;
+    com.antinvestor.apis.device.v1.UpdatePresenceRequest other = (com.antinvestor.apis.device.v1.UpdatePresenceRequest) obj;
 
-    if (!getId()
-        .equals(other.getId())) return false;
     if (!getDeviceId()
         .equals(other.getDeviceId())) return false;
-    if (keyType_ != other.keyType_) return false;
-    if (!getData()
-        .equals(other.getData())) return false;
-    if (!getExpiresAt()
-        .equals(other.getExpiresAt())) return false;
+    if (status_ != other.status_) return false;
+    if (!getStatusMessage()
+        .equals(other.getStatusMessage())) return false;
     if (hasExtras() != other.hasExtras()) return false;
     if (hasExtras()) {
       if (!getExtras()
@@ -390,16 +308,12 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ID_FIELD_NUMBER;
-    hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + DEVICE_ID_FIELD_NUMBER;
     hash = (53 * hash) + getDeviceId().hashCode();
-    hash = (37 * hash) + KEY_TYPE_FIELD_NUMBER;
-    hash = (53 * hash) + keyType_;
-    hash = (37 * hash) + DATA_FIELD_NUMBER;
-    hash = (53 * hash) + getData().hashCode();
-    hash = (37 * hash) + EXPIRES_AT_FIELD_NUMBER;
-    hash = (53 * hash) + getExpiresAt().hashCode();
+    hash = (37 * hash) + STATUS_FIELD_NUMBER;
+    hash = (53 * hash) + status_;
+    hash = (37 * hash) + STATUS_MESSAGE_FIELD_NUMBER;
+    hash = (53 * hash) + getStatusMessage().hashCode();
     if (hasExtras()) {
       hash = (37 * hash) + EXTRAS_FIELD_NUMBER;
       hash = (53 * hash) + getExtras().hashCode();
@@ -409,44 +323,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(byte[] data)
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -454,26 +368,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseDelimitedFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseDelimitedFrom(
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -486,7 +400,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.antinvestor.apis.device.v1.AddKeyRequest prototype) {
+  public static Builder newBuilder(com.antinvestor.apis.device.v1.UpdatePresenceRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -503,30 +417,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * AddKeyRequest adds a key or token to a device.
-   * Keys are used for secure communications (Matrix E2EE, push notifications, FCM tokens, etc.).
+   * UpdatePresenceRequest updates the presence status of a device.
    * </pre>
    *
-   * Protobuf type {@code device.v1.AddKeyRequest}
+   * Protobuf type {@code device.v1.UpdatePresenceRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:device.v1.AddKeyRequest)
-      com.antinvestor.apis.device.v1.AddKeyRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:device.v1.UpdatePresenceRequest)
+      com.antinvestor.apis.device.v1.UpdatePresenceRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_UpdatePresenceRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_fieldAccessorTable
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_UpdatePresenceRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.antinvestor.apis.device.v1.AddKeyRequest.class, com.antinvestor.apis.device.v1.AddKeyRequest.Builder.class);
+              com.antinvestor.apis.device.v1.UpdatePresenceRequest.class, com.antinvestor.apis.device.v1.UpdatePresenceRequest.Builder.class);
     }
 
-    // Construct using com.antinvestor.apis.device.v1.AddKeyRequest.newBuilder()
+    // Construct using com.antinvestor.apis.device.v1.UpdatePresenceRequest.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -546,11 +459,9 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      id_ = "";
       deviceId_ = "";
-      keyType_ = 0;
-      data_ = com.google.protobuf.ByteString.EMPTY;
-      expiresAt_ = "";
+      status_ = 0;
+      statusMessage_ = "";
       extras_ = null;
       if (extrasBuilder_ != null) {
         extrasBuilder_.dispose();
@@ -562,17 +473,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_UpdatePresenceRequest_descriptor;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.AddKeyRequest getDefaultInstanceForType() {
-      return com.antinvestor.apis.device.v1.AddKeyRequest.getDefaultInstance();
+    public com.antinvestor.apis.device.v1.UpdatePresenceRequest getDefaultInstanceForType() {
+      return com.antinvestor.apis.device.v1.UpdatePresenceRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.AddKeyRequest build() {
-      com.antinvestor.apis.device.v1.AddKeyRequest result = buildPartial();
+    public com.antinvestor.apis.device.v1.UpdatePresenceRequest build() {
+      com.antinvestor.apis.device.v1.UpdatePresenceRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -580,32 +491,26 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.AddKeyRequest buildPartial() {
-      com.antinvestor.apis.device.v1.AddKeyRequest result = new com.antinvestor.apis.device.v1.AddKeyRequest(this);
+    public com.antinvestor.apis.device.v1.UpdatePresenceRequest buildPartial() {
+      com.antinvestor.apis.device.v1.UpdatePresenceRequest result = new com.antinvestor.apis.device.v1.UpdatePresenceRequest(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.antinvestor.apis.device.v1.AddKeyRequest result) {
+    private void buildPartial0(com.antinvestor.apis.device.v1.UpdatePresenceRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.id_ = id_;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
         result.deviceId_ = deviceId_;
       }
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.status_ = status_;
+      }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.keyType_ = keyType_;
-      }
-      if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.data_ = data_;
-      }
-      if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.expiresAt_ = expiresAt_;
+        result.statusMessage_ = statusMessage_;
       }
       int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000020) != 0)) {
+      if (((from_bitField0_ & 0x00000008) != 0)) {
         result.extras_ = extrasBuilder_ == null
             ? extras_
             : extrasBuilder_.build();
@@ -616,35 +521,27 @@ private static final long serialVersionUID = 0L;
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.antinvestor.apis.device.v1.AddKeyRequest) {
-        return mergeFrom((com.antinvestor.apis.device.v1.AddKeyRequest)other);
+      if (other instanceof com.antinvestor.apis.device.v1.UpdatePresenceRequest) {
+        return mergeFrom((com.antinvestor.apis.device.v1.UpdatePresenceRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.antinvestor.apis.device.v1.AddKeyRequest other) {
-      if (other == com.antinvestor.apis.device.v1.AddKeyRequest.getDefaultInstance()) return this;
-      if (!other.getId().isEmpty()) {
-        id_ = other.id_;
+    public Builder mergeFrom(com.antinvestor.apis.device.v1.UpdatePresenceRequest other) {
+      if (other == com.antinvestor.apis.device.v1.UpdatePresenceRequest.getDefaultInstance()) return this;
+      if (!other.getDeviceId().isEmpty()) {
+        deviceId_ = other.deviceId_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (!other.getDeviceId().isEmpty()) {
-        deviceId_ = other.deviceId_;
-        bitField0_ |= 0x00000002;
-        onChanged();
+      if (other.status_ != 0) {
+        setStatusValue(other.getStatusValue());
       }
-      if (other.keyType_ != 0) {
-        setKeyTypeValue(other.getKeyTypeValue());
-      }
-      if (!other.getData().isEmpty()) {
-        setData(other.getData());
-      }
-      if (!other.getExpiresAt().isEmpty()) {
-        expiresAt_ = other.expiresAt_;
-        bitField0_ |= 0x00000010;
+      if (!other.getStatusMessage().isEmpty()) {
+        statusMessage_ = other.statusMessage_;
+        bitField0_ |= 0x00000004;
         onChanged();
       }
       if (other.hasExtras()) {
@@ -677,37 +574,27 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              id_ = input.readStringRequireUtf8();
+              deviceId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
-            case 18: {
-              deviceId_ = input.readStringRequireUtf8();
+            case 16: {
+              status_ = input.readEnum();
               bitField0_ |= 0x00000002;
               break;
-            } // case 18
-            case 24: {
-              keyType_ = input.readEnum();
+            } // case 16
+            case 26: {
+              statusMessage_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
-            } // case 24
+            } // case 26
             case 34: {
-              data_ = input.readBytes();
-              bitField0_ |= 0x00000008;
-              break;
-            } // case 34
-            case 42: {
-              expiresAt_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000010;
-              break;
-            } // case 42
-            case 50: {
               input.readMessage(
                   internalGetExtrasFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000008;
               break;
-            } // case 50
+            } // case 34
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -725,105 +612,13 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object id_ = "";
-    /**
-     * <pre>
-     * Unique identifier for the key
-     * </pre>
-     *
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @return The id.
-     */
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        id_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <pre>
-     * Unique identifier for the key
-     * </pre>
-     *
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for id.
-     */
-    public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <pre>
-     * Unique identifier for the key
-     * </pre>
-     *
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param value The id to set.
-     * @return This builder for chaining.
-     */
-    public Builder setId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      id_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Unique identifier for the key
-     * </pre>
-     *
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearId() {
-      id_ = getDefaultInstance().getId();
-      bitField0_ = (bitField0_ & ~0x00000001);
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Unique identifier for the key
-     * </pre>
-     *
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for id to set.
-     * @return This builder for chaining.
-     */
-    public Builder setIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      id_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object deviceId_ = "";
     /**
      * <pre>
-     * Device this key belongs to
+     * Device ID to update presence for
      * </pre>
      *
-     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return The deviceId.
      */
     public java.lang.String getDeviceId() {
@@ -840,10 +635,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Device this key belongs to
+     * Device ID to update presence for
      * </pre>
      *
-     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for deviceId.
      */
     public com.google.protobuf.ByteString
@@ -861,10 +656,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Device this key belongs to
+     * Device ID to update presence for
      * </pre>
      *
-     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @param value The deviceId to set.
      * @return This builder for chaining.
      */
@@ -872,30 +667,30 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       deviceId_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Device this key belongs to
+     * Device ID to update presence for
      * </pre>
      *
-     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearDeviceId() {
       deviceId_ = getDefaultInstance().getDeviceId();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Device this key belongs to
+     * Device ID to update presence for
      * </pre>
      *
-     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for deviceId to set.
      * @return This builder for chaining.
      */
@@ -904,142 +699,98 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       deviceId_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+
+    private int status_ = 0;
+    /**
+     * <pre>
+     * New presence status
+     * </pre>
+     *
+     * <code>.device.v1.PresenceStatus status = 2 [json_name = "status"];</code>
+     * @return The enum numeric value on the wire for status.
+     */
+    @java.lang.Override public int getStatusValue() {
+      return status_;
+    }
+    /**
+     * <pre>
+     * New presence status
+     * </pre>
+     *
+     * <code>.device.v1.PresenceStatus status = 2 [json_name = "status"];</code>
+     * @param value The enum numeric value on the wire for status to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStatusValue(int value) {
+      status_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
-
-    private int keyType_ = 0;
     /**
      * <pre>
-     * Type of key (Matrix, FCM, Encryption, etc.)
+     * New presence status
      * </pre>
      *
-     * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-     * @return The enum numeric value on the wire for keyType.
-     */
-    @java.lang.Override public int getKeyTypeValue() {
-      return keyType_;
-    }
-    /**
-     * <pre>
-     * Type of key (Matrix, FCM, Encryption, etc.)
-     * </pre>
-     *
-     * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-     * @param value The enum numeric value on the wire for keyType to set.
-     * @return This builder for chaining.
-     */
-    public Builder setKeyTypeValue(int value) {
-      keyType_ = value;
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Type of key (Matrix, FCM, Encryption, etc.)
-     * </pre>
-     *
-     * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-     * @return The keyType.
+     * <code>.device.v1.PresenceStatus status = 2 [json_name = "status"];</code>
+     * @return The status.
      */
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.KeyType getKeyType() {
-      com.antinvestor.apis.device.v1.KeyType result = com.antinvestor.apis.device.v1.KeyType.forNumber(keyType_);
-      return result == null ? com.antinvestor.apis.device.v1.KeyType.UNRECOGNIZED : result;
+    public com.antinvestor.apis.device.v1.PresenceStatus getStatus() {
+      com.antinvestor.apis.device.v1.PresenceStatus result = com.antinvestor.apis.device.v1.PresenceStatus.forNumber(status_);
+      return result == null ? com.antinvestor.apis.device.v1.PresenceStatus.UNRECOGNIZED : result;
     }
     /**
      * <pre>
-     * Type of key (Matrix, FCM, Encryption, etc.)
+     * New presence status
      * </pre>
      *
-     * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
-     * @param value The keyType to set.
+     * <code>.device.v1.PresenceStatus status = 2 [json_name = "status"];</code>
+     * @param value The status to set.
      * @return This builder for chaining.
      */
-    public Builder setKeyType(com.antinvestor.apis.device.v1.KeyType value) {
+    public Builder setStatus(com.antinvestor.apis.device.v1.PresenceStatus value) {
       if (value == null) { throw new NullPointerException(); }
-      bitField0_ |= 0x00000004;
-      keyType_ = value.getNumber();
+      bitField0_ |= 0x00000002;
+      status_ = value.getNumber();
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Type of key (Matrix, FCM, Encryption, etc.)
+     * New presence status
      * </pre>
      *
-     * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
+     * <code>.device.v1.PresenceStatus status = 2 [json_name = "status"];</code>
      * @return This builder for chaining.
      */
-    public Builder clearKeyType() {
-      bitField0_ = (bitField0_ & ~0x00000004);
-      keyType_ = 0;
+    public Builder clearStatus() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      status_ = 0;
       onChanged();
       return this;
     }
 
-    private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+    private java.lang.Object statusMessage_ = "";
     /**
      * <pre>
-     * The key material or token (will be encrypted at rest)
+     * Optional custom status message
      * </pre>
      *
-     * <code>bytes data = 4 [json_name = "data"];</code>
-     * @return The data.
+     * <code>string status_message = 3 [json_name = "statusMessage"];</code>
+     * @return The statusMessage.
      */
-    @java.lang.Override
-    public com.google.protobuf.ByteString getData() {
-      return data_;
-    }
-    /**
-     * <pre>
-     * The key material or token (will be encrypted at rest)
-     * </pre>
-     *
-     * <code>bytes data = 4 [json_name = "data"];</code>
-     * @param value The data to set.
-     * @return This builder for chaining.
-     */
-    public Builder setData(com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      data_ = value;
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * The key material or token (will be encrypted at rest)
-     * </pre>
-     *
-     * <code>bytes data = 4 [json_name = "data"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearData() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      data_ = getDefaultInstance().getData();
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object expiresAt_ = "";
-    /**
-     * <pre>
-     * Optional expiration timestamp (RFC3339)
-     * </pre>
-     *
-     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
-     * @return The expiresAt.
-     */
-    public java.lang.String getExpiresAt() {
-      java.lang.Object ref = expiresAt_;
+    public java.lang.String getStatusMessage() {
+      java.lang.Object ref = statusMessage_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        expiresAt_ = s;
+        statusMessage_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -1047,20 +798,20 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional expiration timestamp (RFC3339)
+     * Optional custom status message
      * </pre>
      *
-     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
-     * @return The bytes for expiresAt.
+     * <code>string status_message = 3 [json_name = "statusMessage"];</code>
+     * @return The bytes for statusMessage.
      */
     public com.google.protobuf.ByteString
-        getExpiresAtBytes() {
-      java.lang.Object ref = expiresAt_;
+        getStatusMessageBytes() {
+      java.lang.Object ref = statusMessage_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        expiresAt_ = b;
+        statusMessage_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1068,50 +819,50 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional expiration timestamp (RFC3339)
+     * Optional custom status message
      * </pre>
      *
-     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
-     * @param value The expiresAt to set.
+     * <code>string status_message = 3 [json_name = "statusMessage"];</code>
+     * @param value The statusMessage to set.
      * @return This builder for chaining.
      */
-    public Builder setExpiresAt(
+    public Builder setStatusMessage(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      expiresAt_ = value;
-      bitField0_ |= 0x00000010;
+      statusMessage_ = value;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Optional expiration timestamp (RFC3339)
+     * Optional custom status message
      * </pre>
      *
-     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
+     * <code>string status_message = 3 [json_name = "statusMessage"];</code>
      * @return This builder for chaining.
      */
-    public Builder clearExpiresAt() {
-      expiresAt_ = getDefaultInstance().getExpiresAt();
-      bitField0_ = (bitField0_ & ~0x00000010);
+    public Builder clearStatusMessage() {
+      statusMessage_ = getDefaultInstance().getStatusMessage();
+      bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Optional expiration timestamp (RFC3339)
+     * Optional custom status message
      * </pre>
      *
-     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
-     * @param value The bytes for expiresAt to set.
+     * <code>string status_message = 3 [json_name = "statusMessage"];</code>
+     * @param value The bytes for statusMessage to set.
      * @return This builder for chaining.
      */
-    public Builder setExpiresAtBytes(
+    public Builder setStatusMessageBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      expiresAt_ = value;
-      bitField0_ |= 0x00000010;
+      statusMessage_ = value;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
@@ -1121,21 +872,21 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> extrasBuilder_;
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Additional presence metadata
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
      * @return Whether the extras field is set.
      */
     public boolean hasExtras() {
-      return ((bitField0_ & 0x00000020) != 0);
+      return ((bitField0_ & 0x00000008) != 0);
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Additional presence metadata
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
      * @return The extras.
      */
     public com.google.protobuf.Struct getExtras() {
@@ -1147,10 +898,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Additional presence metadata
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
      */
     public Builder setExtras(com.google.protobuf.Struct value) {
       if (extrasBuilder_ == null) {
@@ -1161,16 +912,16 @@ private static final long serialVersionUID = 0L;
       } else {
         extrasBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Additional presence metadata
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
      */
     public Builder setExtras(
         com.google.protobuf.Struct.Builder builderForValue) {
@@ -1179,20 +930,20 @@ private static final long serialVersionUID = 0L;
       } else {
         extrasBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Additional presence metadata
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
      */
     public Builder mergeExtras(com.google.protobuf.Struct value) {
       if (extrasBuilder_ == null) {
-        if (((bitField0_ & 0x00000020) != 0) &&
+        if (((bitField0_ & 0x00000008) != 0) &&
           extras_ != null &&
           extras_ != com.google.protobuf.Struct.getDefaultInstance()) {
           getExtrasBuilder().mergeFrom(value);
@@ -1203,20 +954,20 @@ private static final long serialVersionUID = 0L;
         extrasBuilder_.mergeFrom(value);
       }
       if (extras_ != null) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000008;
         onChanged();
       }
       return this;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Additional presence metadata
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
      */
     public Builder clearExtras() {
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000008);
       extras_ = null;
       if (extrasBuilder_ != null) {
         extrasBuilder_.dispose();
@@ -1227,22 +978,22 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Additional presence metadata
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
      */
     public com.google.protobuf.Struct.Builder getExtrasBuilder() {
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000008;
       onChanged();
       return internalGetExtrasFieldBuilder().getBuilder();
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Additional presence metadata
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
      */
     public com.google.protobuf.StructOrBuilder getExtrasOrBuilder() {
       if (extrasBuilder_ != null) {
@@ -1254,10 +1005,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Additional presence metadata
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
@@ -1273,23 +1024,23 @@ private static final long serialVersionUID = 0L;
       return extrasBuilder_;
     }
 
-    // @@protoc_insertion_point(builder_scope:device.v1.AddKeyRequest)
+    // @@protoc_insertion_point(builder_scope:device.v1.UpdatePresenceRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:device.v1.AddKeyRequest)
-  private static final com.antinvestor.apis.device.v1.AddKeyRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:device.v1.UpdatePresenceRequest)
+  private static final com.antinvestor.apis.device.v1.UpdatePresenceRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.AddKeyRequest();
+    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.UpdatePresenceRequest();
   }
 
-  public static com.antinvestor.apis.device.v1.AddKeyRequest getDefaultInstance() {
+  public static com.antinvestor.apis.device.v1.UpdatePresenceRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<AddKeyRequest>
-      PARSER = new com.google.protobuf.AbstractParser<AddKeyRequest>() {
+  private static final com.google.protobuf.Parser<UpdatePresenceRequest>
+      PARSER = new com.google.protobuf.AbstractParser<UpdatePresenceRequest>() {
     @java.lang.Override
-    public AddKeyRequest parsePartialFrom(
+    public UpdatePresenceRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1308,17 +1059,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<AddKeyRequest> parser() {
+  public static com.google.protobuf.Parser<UpdatePresenceRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<AddKeyRequest> getParserForType() {
+  public com.google.protobuf.Parser<UpdatePresenceRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.antinvestor.apis.device.v1.AddKeyRequest getDefaultInstanceForType() {
+  public com.antinvestor.apis.device.v1.UpdatePresenceRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 
