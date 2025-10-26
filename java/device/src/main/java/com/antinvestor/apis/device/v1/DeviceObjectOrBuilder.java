@@ -213,6 +213,25 @@ public interface DeviceObjectOrBuilder extends
 
   /**
    * <pre>
+   * Device presense status
+   * </pre>
+   *
+   * <code>.device.v1.PresenceStatus presence = 10 [json_name = "presence"];</code>
+   * @return The enum numeric value on the wire for presence.
+   */
+  int getPresenceValue();
+  /**
+   * <pre>
+   * Device presense status
+   * </pre>
+   *
+   * <code>.device.v1.PresenceStatus presence = 10 [json_name = "presence"];</code>
+   * @return The presence.
+   */
+  com.antinvestor.apis.device.v1.PresenceStatus getPresence();
+
+  /**
+   * <pre>
    * Last known geographic location
    * </pre>
    *
