@@ -83,6 +83,17 @@ enum KeyType {
   PICKLE_KEY = 5;        // Pickled key for session storage
 }
 
+// PresenceStatus defines the online/offline status of a device.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+enum PresenceStatus {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  OFFLINE = 0;     // Device is offline
+  ONLINE = 1;      // Device is online and active
+  AWAY = 2;        // Device is online but idle/away
+  BUSY = 3;        // Device is online but user is busy
+  INVISIBLE = 4;   // Device is online but appears offline to others
+}
+
 // -----------------------------------------------------
 // Core Data Types
 // -----------------------------------------------------
@@ -158,8 +169,30 @@ message DeviceObject {
   string last_seen = 7;                   // Last activity timestamp (RFC3339)
   string profile_id = 8;                  // Profile this device is linked to
   Locale locale = 9;                      // Device locale settings
+  PresenceStatus presence = 10;            // Device presense status
   google.protobuf.Struct location = 11;   // Last known geographic location
   google.protobuf.Struct properties = 15; // Additional device properties (model, manufacturer, etc.)
+
+}
+
+// PresenceObject represents the presence/availability status of a device.
+// Tracks online/offline status and last activity for real-time communication features.
+message PresenceObject {
+  string device_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];  // Device this presence status belongs to
+  string profile_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];  // Profile this device belongs to
+  PresenceStatus status = 3;              // Current presence status
+  string status_message = 4;              // Optional custom status message
+  string last_active = 5;                 // Timestamp of last activity (RFC3339)
+  string updated_at = 6;                  // Timestamp when presence was last updated (RFC3339)
+  google.protobuf.Struct extras = 7;      // Additional presence metadata (activity type, etc.)
 }
 
 // -----------------------------------------------------
@@ -429,6 +462,60 @@ message DeRegisterKeyResponse {
   string message = 2;  // Status message from the external service
 }
 
+// -----------------------------------------------------
+// Presence Management Messages
+// -----------------------------------------------------
+
+// UpdatePresenceRequest updates the presence status of a device.
+message UpdatePresenceRequest {
+  string device_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];  // Device ID to update presence for
+  PresenceStatus status = 2;              // New presence status
+  string status_message = 3;              // Optional custom status message
+  google.protobuf.Struct extras = 4;      // Additional presence metadata
+}
+
+// UpdatePresenceResponse returns the updated presence.
+message UpdatePresenceResponse {
+  PresenceObject data = 1;  // Updated presence object
+}
+
+// -----------------------------------------------------
+// Device Notification Messages
+// -----------------------------------------------------
+
+// NotifyRequest sends a notification to a device using one of its registered keys.
+// The service will select an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
+message NotifyRequest {
+  string device_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];  // Device ID to notify
+  string key_id = 2 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];  // Specific key ID to use (optional - if not provided, uses key_type to select)
+  KeyType key_type = 3;  // Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
+  string title = 4;  // Notification title
+  string body = 5;  // Notification body/message
+  google.protobuf.Struct data = 6;  // Additional notification data/payload (custom data, actions, etc.)
+  google.protobuf.Struct extras = 7;  // Extra notification options (priority, TTL, badge, sound, etc.)
+}
+
+// NotifyResponse confirms the notification was sent.
+message NotifyResponse {
+  bool success = 1;  // True if notification was successfully sent
+  string message = 2;  // Status message or error details
+  string notification_id = 3;  // Unique identifier for the sent notification (if provided by service)
+  google.protobuf.Struct extras = 4;  // Additional response metadata from notification service
+}
+
 
 // -----------------------------------------------------
 // Service Definitions
@@ -536,7 +623,8 @@ service DeviceService {
     };
   }
 
-  // AddKey adds a key or token to a device (FCM tokens, encryption keys, etc.).
+  // AddKey stores a key or token and its material in the local storage for a device.
+  // This is used for keys generated by the service or when the service needs to manage the key material directly.
   rpc AddKey(AddKeyRequest) returns (AddKeyResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "addDeviceKey"
@@ -546,7 +634,8 @@ service DeviceService {
     };
   }
 
-  // RemoveKey removes keys or tokens from a device.
+  // RemoveKey removes one or more keys or tokens from local storage.
+  // This does not handle deregistration from third-party services. For that, use DeRegisterKey.
   rpc RemoveKey(RemoveKeyRequest) returns (RemoveKeyResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "removeDeviceKey"
@@ -566,8 +655,9 @@ service DeviceService {
     };
   }
 
-  // RegisterKey registers a key with third-party services (e.g., FCM, APNs).
-  // This handles integration with external services and stores the key.
+  // RegisterKey registers a key with a third-party service using an externally-generated key or token.
+  // This method handles the integration with the external service and stores metadata about the key,
+  // but not the key material itself. Use AddKey to store key material.
   rpc RegisterKey(RegisterKeyRequest) returns (RegisterKeyResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "registerKey"
@@ -577,8 +667,8 @@ service DeviceService {
     };
   }
 
-  // DeRegisterKey deregisters a key from third-party services.
-  // This handles cleanup with external services and removes the key.
+  // DeRegisterKey deregisters a key from a third-party service.
+  // This handles cleanup with the external service and removes the associated key metadata from local storage.
   rpc DeRegisterKey(DeRegisterKeyRequest) returns (DeRegisterKeyResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "deRegisterKey"
@@ -588,25 +678,26 @@ service DeviceService {
     };
   }
 
-  // RegisterNotificationKey registers a notification key for push notifications.
-  // This integrates with notification services and stores the key.
-  rpc RegisterNotificationKey(RegisterKeyRequest) returns (RegisterKeyResponse) {
+  // Notify sends a notification to a device using one of its registered keys.
+  // The service selects an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
+  // If key_id is provided, that specific key will be used; otherwise the service selects the best available key.
+  rpc Notify(NotifyRequest) returns (NotifyResponse) {
     option (gnostic.openapi.v3.operation) = {
-      operation_id: "registerNotificationKey"
-      summary: "Register notification key"
-      description: "Registers a notification key for secure push notification delivery. This method integrates with notification services (APNs, FCM) and stores the key."
-      tags: "Notification Keys"
+      operation_id: "notifyDevice"
+      summary: "Notify device using registered key"
+      description: "Sends a notification to a device using one of its registered keys (FCM token, notification key, etc.). The service automatically selects an appropriate active key based on the key_type, or uses a specific key if key_id is provided."
+      tags: "Device Notifications"
     };
   }
 
-  // DeRegisterNotificationKey deregisters a notification key.
-  // This removes the key from notification services and local storage.
-  rpc DeRegisterNotificationKey(DeRegisterKeyRequest) returns (DeRegisterKeyResponse) {
+  // UpdatePresence updates the presence status of a device.
+  // Used to track online/offline status and availability for real-time features.
+  rpc UpdatePresence(UpdatePresenceRequest) returns (UpdatePresenceResponse) {
     option (gnostic.openapi.v3.operation) = {
-      operation_id: "deRegisterNotificationKey"
-      summary: "DeRegister notification key"
-      description: "DeRegisters a notification key from notification services and removes it from storage. Used when disabling push notifications."
-      tags: "Notification Keys"
+      operation_id: "updatePresence"
+      summary: "Update device presence"
+      description: "Updates the presence status of a device. Used to indicate online/offline/away/busy status and track last activity for real-time communication features."
+      tags: "Device Presence"
     };
   }
 }

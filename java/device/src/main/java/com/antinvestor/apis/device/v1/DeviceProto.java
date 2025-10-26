@@ -61,6 +61,11 @@ public final class DeviceProto extends com.google.protobuf.GeneratedFile {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_device_v1_DeviceObject_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_device_v1_PresenceObject_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_device_v1_PresenceObject_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_device_v1_GetByIdRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -200,6 +205,26 @@ public final class DeviceProto extends com.google.protobuf.GeneratedFile {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_device_v1_DeRegisterKeyResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_device_v1_UpdatePresenceRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_device_v1_UpdatePresenceRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_device_v1_UpdatePresenceResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_device_v1_UpdatePresenceResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_device_v1_NotifyRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_device_v1_NotifyRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_device_v1_NotifyResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_device_v1_NotifyResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -234,227 +259,260 @@ public final class DeviceProto extends com.google.protobuf.GeneratedFile {
       "\007 \001(\tR\002os\022\033\n\tlast_seen\030\010 \001(\tR\010lastSeen\0223" +
       "\n\010location\030\t \001(\0132\027.google.protobuf.Struc" +
       "tR\010location\022-\n\005extra\030\n \001(\0132\027.google.prot" +
-      "obuf.StructR\005extra\"\202\003\n\014DeviceObject\022+\n\002i" +
+      "obuf.StructR\005extra\"\271\003\n\014DeviceObject\022+\n\002i" +
       "d\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id" +
       "\022\022\n\004name\030\002 \001(\tR\004name\022\035\n\nsession_id\030\003 \001(\t" +
       "R\tsessionId\022\016\n\002ip\030\004 \001(\tR\002ip\022\035\n\nuser_agen" +
       "t\030\005 \001(\tR\tuserAgent\022\016\n\002os\030\006 \001(\tR\002os\022\033\n\tla" +
       "st_seen\030\007 \001(\tR\010lastSeen\022\035\n\nprofile_id\030\010 " +
       "\001(\tR\tprofileId\022)\n\006locale\030\t \001(\0132\021.device." +
-      "v1.LocaleR\006locale\0223\n\010location\030\013 \001(\0132\027.go" +
-      "ogle.protobuf.StructR\010location\0227\n\nproper" +
-      "ties\030\017 \001(\0132\027.google.protobuf.StructR\npro" +
-      "perties\"`\n\016GetByIdRequest\0220\n\002id\030\001 \003(\tB \272" +
-      "H\035\222\001\032\"\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\034\n\te" +
-      "xtensive\030\002 \001(\010R\textensive\">\n\017GetByIdResp" +
-      "onse\022+\n\004data\030\001 \003(\0132\027.device.v1.DeviceObj" +
-      "ectR\004data\"D\n\025GetBySessionIdRequest\022+\n\002id" +
-      "\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"" +
-      "E\n\026GetBySessionIdResponse\022+\n\004data\030\001 \001(\0132" +
-      "\027.device.v1.DeviceObjectR\004data\"\332\001\n\rSearc" +
-      "hRequest\022\024\n\005query\030\001 \001(\tR\005query\022\022\n\004page\030\002" +
-      " \001(\005R\004page\022\024\n\005count\030\003 \001(\005R\005count\022\035\n\nstar" +
-      "t_date\030\004 \001(\tR\tstartDate\022\031\n\010end_date\030\005 \001(" +
-      "\tR\007endDate\022\036\n\nproperties\030\006 \003(\tR\nproperti" +
-      "es\022/\n\006extras\030\007 \001(\0132\027.google.protobuf.Str" +
-      "uctR\006extras\"=\n\016SearchResponse\022+\n\004data\030\001 " +
-      "\003(\0132\027.device.v1.DeviceObjectR\004data\"\\\n\rCr" +
-      "eateRequest\022\022\n\004name\030\002 \001(\tR\004name\0227\n\nprope" +
-      "rties\030\003 \001(\0132\027.google.protobuf.StructR\npr" +
-      "operties\"=\n\016CreateResponse\022+\n\004data\030\001 \001(\013" +
-      "2\027.device.v1.DeviceObjectR\004data\"\211\001\n\rUpda" +
-      "teRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-" +
-      "z_-]{3,20}R\002id\022\022\n\004name\030\002 \001(\tR\004name\0227\n\npr" +
-      "operties\030\003 \001(\0132\027.google.protobuf.StructR" +
-      "\nproperties\"=\n\016UpdateResponse\022+\n\004data\030\001 " +
-      "\001(\0132\027.device.v1.DeviceObjectR\004data\"\257\001\n\013L" +
-      "inkRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a" +
-      "-z_-]{3,20}R\002id\022:\n\nprofile_id\030\002 \001(\tB\033\272H\030" +
-      "r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\tprofileId\0227\n\np" +
-      "roperties\030\003 \001(\0132\027.google.protobuf.Struct" +
-      "R\nproperties\";\n\014LinkResponse\022+\n\004data\030\001 \001" +
-      "(\0132\027.device.v1.DeviceObjectR\004data\"<\n\rRem" +
-      "oveRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a" +
-      "-z_-]{3,20}R\002id\"=\n\016RemoveResponse\022+\n\004dat" +
-      "a\030\001 \001(\0132\027.device.v1.DeviceObjectR\004data\"\252" +
-      "\002\n\nLogRequest\022;\n\tdevice_id\030\001 \001(\tB\036\272H\033r\026\020" +
-      "\003\030(2\020[0-9a-z_-]{3,20}\330\001\001R\010deviceId\022:\n\nse" +
-      "ssion_id\030\003 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3," +
-      "20}R\tsessionId\022\016\n\002ip\030\004 \001(\tR\002ip\022\026\n\006locale" +
-      "\030\005 \001(\tR\006locale\022\035\n\nuser_agent\030\006 \001(\tR\tuser" +
-      "Agent\022\016\n\002os\030\007 \001(\tR\002os\022\033\n\tlast_seen\030\010 \001(\t" +
-      "R\010lastSeen\022/\n\006extras\030\t \001(\0132\027.google.prot" +
-      "obuf.StructR\006extras\"7\n\013LogResponse\022(\n\004da" +
-      "ta\030\001 \001(\0132\024.device.v1.DeviceLogR\004data\"a\n\017" +
-      "ListLogsRequest\0228\n\tdevice_id\030\001 \001(\tB\033\272H\030r" +
-      "\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010deviceId\022\024\n\005cou" +
-      "nt\030\002 \001(\005R\005count\"<\n\020ListLogsResponse\022(\n\004d" +
-      "ata\030\001 \003(\0132\024.device.v1.DeviceLogR\004data\"\211\002" +
-      "\n\rAddKeyRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020" +
-      "[0-9a-z_-]{3,20}R\002id\0228\n\tdevice_id\030\002 \001(\tB" +
-      "\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010deviceId\022-" +
-      "\n\010key_type\030\003 \001(\0162\022.device.v1.KeyTypeR\007ke" +
-      "yType\022\022\n\004data\030\004 \001(\014R\004data\022\035\n\nexpires_at\030" +
-      "\005 \001(\tR\texpiresAt\022/\n\006extras\030\006 \001(\0132\027.googl" +
-      "e.protobuf.StructR\006extras\":\n\016AddKeyRespo" +
+      "v1.LocaleR\006locale\0225\n\010presence\030\n \001(\0162\031.de" +
+      "vice.v1.PresenceStatusR\010presence\0223\n\010loca" +
+      "tion\030\013 \001(\0132\027.google.protobuf.StructR\010loc" +
+      "ation\0227\n\nproperties\030\017 \001(\0132\027.google.proto" +
+      "buf.StructR\nproperties\"\321\002\n\016PresenceObjec" +
+      "t\0228\n\tdevice_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z" +
+      "_-]{3,20}R\010deviceId\022:\n\nprofile_id\030\002 \001(\tB" +
+      "\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\tprofileId\022" +
+      "1\n\006status\030\003 \001(\0162\031.device.v1.PresenceStat" +
+      "usR\006status\022%\n\016status_message\030\004 \001(\tR\rstat" +
+      "usMessage\022\037\n\013last_active\030\005 \001(\tR\nlastActi" +
+      "ve\022\035\n\nupdated_at\030\006 \001(\tR\tupdatedAt\022/\n\006ext" +
+      "ras\030\007 \001(\0132\027.google.protobuf.StructR\006extr" +
+      "as\"`\n\016GetByIdRequest\0220\n\002id\030\001 \003(\tB \272H\035\222\001\032" +
+      "\"\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\034\n\textens" +
+      "ive\030\002 \001(\010R\textensive\">\n\017GetByIdResponse\022" +
+      "+\n\004data\030\001 \003(\0132\027.device.v1.DeviceObjectR\004" +
+      "data\"D\n\025GetBySessionIdRequest\022+\n\002id\030\001 \001(" +
+      "\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"E\n\026Ge" +
+      "tBySessionIdResponse\022+\n\004data\030\001 \001(\0132\027.dev" +
+      "ice.v1.DeviceObjectR\004data\"\332\001\n\rSearchRequ" +
+      "est\022\024\n\005query\030\001 \001(\tR\005query\022\022\n\004page\030\002 \001(\005R" +
+      "\004page\022\024\n\005count\030\003 \001(\005R\005count\022\035\n\nstart_dat" +
+      "e\030\004 \001(\tR\tstartDate\022\031\n\010end_date\030\005 \001(\tR\007en" +
+      "dDate\022\036\n\nproperties\030\006 \003(\tR\nproperties\022/\n" +
+      "\006extras\030\007 \001(\0132\027.google.protobuf.StructR\006" +
+      "extras\"=\n\016SearchResponse\022+\n\004data\030\001 \003(\0132\027" +
+      ".device.v1.DeviceObjectR\004data\"\\\n\rCreateR" +
+      "equest\022\022\n\004name\030\002 \001(\tR\004name\0227\n\nproperties" +
+      "\030\003 \001(\0132\027.google.protobuf.StructR\npropert" +
+      "ies\"=\n\016CreateResponse\022+\n\004data\030\001 \001(\0132\027.de" +
+      "vice.v1.DeviceObjectR\004data\"\211\001\n\rUpdateReq" +
+      "uest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{" +
+      "3,20}R\002id\022\022\n\004name\030\002 \001(\tR\004name\0227\n\npropert" +
+      "ies\030\003 \001(\0132\027.google.protobuf.StructR\nprop" +
+      "erties\"=\n\016UpdateResponse\022+\n\004data\030\001 \001(\0132\027" +
+      ".device.v1.DeviceObjectR\004data\"\257\001\n\013LinkRe" +
+      "quest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]" +
+      "{3,20}R\002id\022:\n\nprofile_id\030\002 \001(\tB\033\272H\030r\026\020\003\030" +
+      "(2\020[0-9a-z_-]{3,20}R\tprofileId\0227\n\nproper" +
+      "ties\030\003 \001(\0132\027.google.protobuf.StructR\npro" +
+      "perties\";\n\014LinkResponse\022+\n\004data\030\001 \001(\0132\027." +
+      "device.v1.DeviceObjectR\004data\"<\n\rRemoveRe" +
+      "quest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]" +
+      "{3,20}R\002id\"=\n\016RemoveResponse\022+\n\004data\030\001 \001" +
+      "(\0132\027.device.v1.DeviceObjectR\004data\"\252\002\n\nLo" +
+      "gRequest\022;\n\tdevice_id\030\001 \001(\tB\036\272H\033r\026\020\003\030(2\020" +
+      "[0-9a-z_-]{3,20}\330\001\001R\010deviceId\022:\n\nsession" +
+      "_id\030\003 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\t" +
+      "sessionId\022\016\n\002ip\030\004 \001(\tR\002ip\022\026\n\006locale\030\005 \001(" +
+      "\tR\006locale\022\035\n\nuser_agent\030\006 \001(\tR\tuserAgent" +
+      "\022\016\n\002os\030\007 \001(\tR\002os\022\033\n\tlast_seen\030\010 \001(\tR\010las" +
+      "tSeen\022/\n\006extras\030\t \001(\0132\027.google.protobuf." +
+      "StructR\006extras\"7\n\013LogResponse\022(\n\004data\030\001 " +
+      "\001(\0132\024.device.v1.DeviceLogR\004data\"a\n\017ListL" +
+      "ogsRequest\0228\n\tdevice_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(" +
+      "2\020[0-9a-z_-]{3,20}R\010deviceId\022\024\n\005count\030\002 " +
+      "\001(\005R\005count\"<\n\020ListLogsResponse\022(\n\004data\030\001" +
+      " \003(\0132\024.device.v1.DeviceLogR\004data\"\211\002\n\rAdd" +
+      "KeyRequest\022+\n\002id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a" +
+      "-z_-]{3,20}R\002id\0228\n\tdevice_id\030\002 \001(\tB\033\272H\030r" +
+      "\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010deviceId\022-\n\010key" +
+      "_type\030\003 \001(\0162\022.device.v1.KeyTypeR\007keyType" +
+      "\022\022\n\004data\030\004 \001(\014R\004data\022\035\n\nexpires_at\030\005 \001(\t" +
+      "R\texpiresAt\022/\n\006extras\030\006 \001(\0132\027.google.pro" +
+      "tobuf.StructR\006extras\":\n\016AddKeyResponse\022(" +
+      "\n\004data\030\001 \001(\0132\024.device.v1.KeyObjectR\004data" +
+      "\"D\n\020RemoveKeyRequest\0220\n\002id\030\001 \003(\tB \272H\035\222\001\032" +
+      "\"\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"#\n\021Remove" +
+      "KeyResponse\022\016\n\002id\030\001 \003(\tR\002id\"\346\001\n\020SearchKe" +
+      "yRequest\022\024\n\005query\030\001 \001(\tR\005query\0228\n\tdevice" +
+      "_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010" +
+      "deviceId\022/\n\tkey_types\030\003 \003(\0162\022.device.v1." +
+      "KeyTypeR\010keyTypes\022\'\n\017include_expired\030\004 \001" +
+      "(\010R\016includeExpired\022\022\n\004page\030\005 \001(\005R\004page\022\024" +
+      "\n\005count\030\006 \001(\005R\005count\"=\n\021SearchKeyRespons" +
+      "e\022(\n\004data\030\001 \003(\0132\024.device.v1.KeyObjectR\004d" +
+      "ata\"\256\001\n\022RegisterKeyRequest\0228\n\tdevice_id\030" +
+      "\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010devi" +
+      "ceId\022-\n\010key_type\030\002 \001(\0162\022.device.v1.KeyTy" +
+      "peR\007keyType\022/\n\006extras\030\003 \001(\0132\027.google.pro" +
+      "tobuf.StructR\006extras\"?\n\023RegisterKeyRespo" +
       "nse\022(\n\004data\030\001 \001(\0132\024.device.v1.KeyObjectR" +
-      "\004data\"D\n\020RemoveKeyRequest\0220\n\002id\030\001 \003(\tB \272" +
-      "H\035\222\001\032\"\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"#\n\021R" +
-      "emoveKeyResponse\022\016\n\002id\030\001 \003(\tR\002id\"\346\001\n\020Sea" +
-      "rchKeyRequest\022\024\n\005query\030\001 \001(\tR\005query\0228\n\td" +
-      "evice_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3," +
-      "20}R\010deviceId\022/\n\tkey_types\030\003 \003(\0162\022.devic" +
-      "e.v1.KeyTypeR\010keyTypes\022\'\n\017include_expire" +
-      "d\030\004 \001(\010R\016includeExpired\022\022\n\004page\030\005 \001(\005R\004p" +
-      "age\022\024\n\005count\030\006 \001(\005R\005count\"=\n\021SearchKeyRe" +
-      "sponse\022(\n\004data\030\001 \003(\0132\024.device.v1.KeyObje" +
-      "ctR\004data\"\256\001\n\022RegisterKeyRequest\0228\n\tdevic" +
-      "e_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R" +
-      "\010deviceId\022-\n\010key_type\030\002 \001(\0162\022.device.v1." +
-      "KeyTypeR\007keyType\022/\n\006extras\030\003 \001(\0132\027.googl" +
-      "e.protobuf.StructR\006extras\"?\n\023RegisterKey" +
-      "Response\022(\n\004data\030\001 \001(\0132\024.device.v1.KeyOb" +
-      "jectR\004data\"C\n\024DeRegisterKeyRequest\022+\n\002id" +
-      "\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"" +
-      "K\n\025DeRegisterKeyResponse\022\030\n\007success\030\001 \001(" +
-      "\010R\007success\022\030\n\007message\030\002 \001(\tR\007message*s\n\007" +
-      "KeyType\022\016\n\nMATRIX_KEY\020\000\022\024\n\020NOTIFICATION_" +
-      "KEY\020\001\022\r\n\tFCM_TOKEN\020\002\022\022\n\016CURVE25519_KEY\020\003" +
-      "\022\017\n\013ED25519_KEY\020\004\022\016\n\nPICKLE_KEY\020\0052\360!\n\rDe" +
-      "viceService\022\206\002\n\007GetById\022\031.device.v1.GetB" +
-      "yIdRequest\032\032.device.v1.GetByIdResponse\"\303" +
-      "\001\272G\277\001\n\007Devices\022\021Get devices by ID\032\221\001Retr" +
-      "ieves one or more devices by their uniqu" +
-      "e identifiers. Supports batch retrieval " +
-      "and optional extensive details including" +
-      " logs and key counts.*\rgetDeviceById\022\203\002\n" +
-      "\016GetBySessionId\022 .device.v1.GetBySession" +
-      "IdRequest\032!.device.v1.GetBySessionIdResp" +
-      "onse\"\253\001\272G\247\001\n\007Devices\022\030Get device by sess" +
-      "ion ID\032lRetrieves a device by its active" +
-      " session identifier. Used to resolve dev" +
-      "ice information from session tokens.*\024ge" +
-      "tDeviceBySessionId\022\205\002\n\006Search\022\030.device.v" +
-      "1.SearchRequest\032\031.device.v1.SearchRespon" +
-      "se\"\303\001\272G\277\001\n\007Devices\022\016Search devices\032\224\001Sea" +
-      "rches for devices matching specified cri" +
-      "teria including device name, OS, date ra" +
-      "nge, and custom properties. Returns a st" +
-      "ream of matching devices.*\rsearchDevices" +
-      "0\001\022\365\001\n\006Create\022\030.device.v1.CreateRequest\032" +
-      "\031.device.v1.CreateResponse\"\265\001\272G\261\001\n\007Devic" +
-      "es\022\025Register a new device\032\200\001Registers a " +
-      "new device in the system. The device mus" +
-      "t be linked to a profile before it can b" +
-      "e used for authenticated operations.*\014cr" +
-      "eateDevice\022\355\001\n\006Update\022\030.device.v1.Update" +
-      "Request\032\031.device.v1.UpdateResponse\"\255\001\272G\251" +
-      "\001\n\007Devices\022\031Update device information\032uU" +
-      "pdates an existing device\'s name and pro" +
-      "perties. Only the device owner or admini" +
-      "strators can perform this operation.*\014up" +
-      "dateDevice\022\345\001\n\004Link\022\026.device.v1.LinkRequ" +
-      "est\032\027.device.v1.LinkResponse\"\253\001\272G\247\001\n\007Dev" +
-      "ices\022\026Link device to profile\032xLinks a de" +
-      "vice to a user profile. This operation i" +
-      "s required before the device can be used" +
-      " for authenticated operations.*\nlinkDevi" +
-      "ce\022\214\002\n\006Remove\022\030.device.v1.RemoveRequest\032" +
-      "\031.device.v1.RemoveResponse\"\314\001\272G\310\001\n\007Devic" +
-      "es\022\017Remove a device\032\235\001Removes a device f" +
-      "rom the system. This operation is typica" +
-      "lly used when a user logs out or removes" +
-      " a device from their account. This actio" +
-      "n cannot be undone.*\014removeDevice\022\202\002\n\003Lo" +
-      "g\022\025.device.v1.LogRequest\032\026.device.v1.Log" +
-      "Response\"\313\001\272G\307\001\n\013Device Logs\022\023Log device" +
-      " activity\032\217\001Creates a new activity log e" +
-      "ntry for a device. Used for tracking dev" +
-      "ice sessions, locations, and activity fo" +
-      "r security auditing and compliance.*\021log" +
-      "DeviceActivity\022\203\002\n\010ListLogs\022\032.device.v1." +
-      "ListLogsRequest\032\033.device.v1.ListLogsResp" +
-      "onse\"\273\001\272G\267\001\n\013Device Logs\022\031List device ac" +
-      "tivity logs\032}Retrieves activity logs for" +
-      " a device. Useful for security auditing," +
-      " tracking device usage patterns, and com" +
-      "pliance reporting.*\016listDeviceLogs0\001\022\344\001\n" +
-      "\006AddKey\022\030.device.v1.AddKeyRequest\032\031.devi" +
-      "ce.v1.AddKeyResponse\"\244\001\272G\240\001\n\013Device Keys" +
-      "\022\020Add key or token\032qAdds a key or token " +
-      "to a device. Supports FCM tokens, encryp" +
-      "tion keys (Curve25519, Ed25519), and oth" +
-      "er key types.*\014addDeviceKey\022\371\001\n\tRemoveKe" +
-      "y\022\033.device.v1.RemoveKeyRequest\032\034.device." +
-      "v1.RemoveKeyResponse\"\260\001\272G\254\001\n\013Device Keys" +
-      "\022\025Remove keys or tokens\032uRemoves one or " +
-      "more keys or tokens from a device. Used " +
-      "for key rotation, token management, or w" +
-      "hen removing a device.*\017removeDeviceKey\022" +
-      "\350\001\n\tSearchKey\022\033.device.v1.SearchKeyReque" +
-      "st\032\034.device.v1.SearchKeyResponse\"\237\001\272G\233\001\n" +
-      "\013Device Keys\022\025Search keys or tokens\032dSea" +
-      "rches for keys or tokens associated with" +
-      " a device. Supports filtering by key typ" +
-      "e and expiration.*\017searchDeviceKey\022\314\002\n\013R" +
-      "egisterKey\022\035.device.v1.RegisterKeyReques" +
-      "t\032\036.device.v1.RegisterKeyResponse\"\375\001\272G\371\001" +
-      "\n\020Key Registration\022%Register key with th" +
-      "ird-party service\032\260\001Registers a key or t" +
-      "oken with third-party services (like FCM" +
-      " for push notifications) and stores it. " +
-      "This method handles both the external se" +
-      "rvice integration and local storage.*\013re" +
-      "gisterKey\022\314\002\n\rDeRegisterKey\022\037.device.v1." +
-      "DeRegisterKeyRequest\032 .device.v1.DeRegis" +
-      "terKeyResponse\"\367\001\272G\363\001\n\020Key Registration\022" +
-      "\'DeRegister key from third-party service" +
-      "\032\246\001DeRegisters a key or token from third" +
-      "-party services (like FCM) and removes i" +
-      "t from storage. This method handles both" +
-      " the external service cleanup and local " +
-      "deletion.*\rdeRegisterKey\022\276\002\n\027RegisterNot" +
-      "ificationKey\022\035.device.v1.RegisterKeyRequ" +
-      "est\032\036.device.v1.RegisterKeyResponse\"\343\001\272G" +
-      "\337\001\n\021Notification Keys\022\031Register notifica" +
-      "tion key\032\225\001Registers a notification key " +
-      "for secure push notification delivery. T" +
-      "his method integrates with notification " +
-      "services (APNs, FCM) and stores the key." +
-      "*\027registerNotificationKey\022\260\002\n\031DeRegister" +
-      "NotificationKey\022\037.device.v1.DeRegisterKe" +
-      "yRequest\032 .device.v1.DeRegisterKeyRespon" +
-      "se\"\317\001\272G\313\001\n\021Notification Keys\022\033DeRegister" +
-      " notification key\032~DeRegisters a notific" +
-      "ation key from notification services and" +
-      " removes it from storage. Used when disa" +
-      "bling push notifications.*\031deRegisterNot" +
-      "ificationKeyB\354\007\n\036com.antinvestor.apis.de" +
-      "vice.v1B\013DeviceProtoP\001Z1github.com/antin" +
-      "vestor/apis/go/device/v1;devicev1\242\002\003DXX\252" +
-      "\002\tDevice.V1\312\002\tDevice\\V1\342\002\025Device\\V1\\GPBM" +
-      "etadata\352\002\nDevice::V1\272G\303\006\022\227\006\n\025Device Mana" +
-      "gement API\022\321\004The Device Management API p" +
-      "rovides comprehensive device management " +
-      "capabilities including device registrati" +
-      "on, session tracking, and unified key/to" +
-      "ken management. The API uses a unified K" +
-      "eyObject model for all key types includi" +
-      "ng FCM tokens, encryption keys (Curve255" +
-      "19, Ed25519, Pickle), Matrix keys, and n" +
-      "otification keys. This enables applicati" +
-      "ons to register and track user devices a" +
-      "cross platforms (mobile, web, desktop), " +
-      "manage push notification tokens, handle " +
-      "encryption keys for secure communication" +
-      "s, and maintain detailed logs of device " +
-      "activity for security and compliance pur" +
-      "poses.\"W\n\020Ant Investor Ltd\022-https://gith" +
-      "ub.com/antinvestor/service-device\032\024info@" +
-      "antinvestor.com*I\n\016Apache License\0227https" +
-      "://github.com/antinvestor/apis/blob/mast" +
-      "er/LICENSE2\006v1.0.0*\':%\n#\n\nBearerAuth\022\025\n\023" +
-      "\n\004http*\006bearer2\003JWTb\006proto3"
+      "\004data\"C\n\024DeRegisterKeyRequest\022+\n\002id\030\001 \001(" +
+      "\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\"K\n\025De" +
+      "RegisterKeyResponse\022\030\n\007success\030\001 \001(\010R\007su" +
+      "ccess\022\030\n\007message\030\002 \001(\tR\007message\"\334\001\n\025Upda" +
+      "tePresenceRequest\0228\n\tdevice_id\030\001 \001(\tB\033\272H" +
+      "\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010deviceId\0221\n\006s" +
+      "tatus\030\002 \001(\0162\031.device.v1.PresenceStatusR\006" +
+      "status\022%\n\016status_message\030\003 \001(\tR\rstatusMe" +
+      "ssage\022/\n\006extras\030\004 \001(\0132\027.google.protobuf." +
+      "StructR\006extras\"G\n\026UpdatePresenceResponse" +
+      "\022-\n\004data\030\001 \001(\0132\031.device.v1.PresenceObjec" +
+      "tR\004data\"\267\002\n\rNotifyRequest\0228\n\tdevice_id\030\001" +
+      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010devic" +
+      "eId\0225\n\006key_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_" +
+      "-]{3,20}\330\001\001R\005keyId\022-\n\010key_type\030\003 \001(\0162\022.d" +
+      "evice.v1.KeyTypeR\007keyType\022\024\n\005title\030\004 \001(\t" +
+      "R\005title\022\022\n\004body\030\005 \001(\tR\004body\022+\n\004data\030\006 \001(" +
+      "\0132\027.google.protobuf.StructR\004data\022/\n\006extr" +
+      "as\030\007 \001(\0132\027.google.protobuf.StructR\006extra" +
+      "s\"\236\001\n\016NotifyResponse\022\030\n\007success\030\001 \001(\010R\007s" +
+      "uccess\022\030\n\007message\030\002 \001(\tR\007message\022\'\n\017noti" +
+      "fication_id\030\003 \001(\tR\016notificationId\022/\n\006ext" +
+      "ras\030\004 \001(\0132\027.google.protobuf.StructR\006extr" +
+      "as*s\n\007KeyType\022\016\n\nMATRIX_KEY\020\000\022\024\n\020NOTIFIC" +
+      "ATION_KEY\020\001\022\r\n\tFCM_TOKEN\020\002\022\022\n\016CURVE25519" +
+      "_KEY\020\003\022\017\n\013ED25519_KEY\020\004\022\016\n\nPICKLE_KEY\020\005*" +
+      "L\n\016PresenceStatus\022\013\n\007OFFLINE\020\000\022\n\n\006ONLINE" +
+      "\020\001\022\010\n\004AWAY\020\002\022\010\n\004BUSY\020\003\022\r\n\tINVISIBLE\020\0042\247\"" +
+      "\n\rDeviceService\022\206\002\n\007GetById\022\031.device.v1." +
+      "GetByIdRequest\032\032.device.v1.GetByIdRespon" +
+      "se\"\303\001\272G\277\001\n\007Devices\022\021Get devices by ID\032\221\001" +
+      "Retrieves one or more devices by their u" +
+      "nique identifiers. Supports batch retrie" +
+      "val and optional extensive details inclu" +
+      "ding logs and key counts.*\rgetDeviceById" +
+      "\022\203\002\n\016GetBySessionId\022 .device.v1.GetBySes" +
+      "sionIdRequest\032!.device.v1.GetBySessionId" +
+      "Response\"\253\001\272G\247\001\n\007Devices\022\030Get device by " +
+      "session ID\032lRetrieves a device by its ac" +
+      "tive session identifier. Used to resolve" +
+      " device information from session tokens." +
+      "*\024getDeviceBySessionId\022\205\002\n\006Search\022\030.devi" +
+      "ce.v1.SearchRequest\032\031.device.v1.SearchRe" +
+      "sponse\"\303\001\272G\277\001\n\007Devices\022\016Search devices\032\224" +
+      "\001Searches for devices matching specified" +
+      " criteria including device name, OS, dat" +
+      "e range, and custom properties. Returns " +
+      "a stream of matching devices.*\rsearchDev" +
+      "ices0\001\022\365\001\n\006Create\022\030.device.v1.CreateRequ" +
+      "est\032\031.device.v1.CreateResponse\"\265\001\272G\261\001\n\007D" +
+      "evices\022\025Register a new device\032\200\001Register" +
+      "s a new device in the system. The device" +
+      " must be linked to a profile before it c" +
+      "an be used for authenticated operations." +
+      "*\014createDevice\022\355\001\n\006Update\022\030.device.v1.Up" +
+      "dateRequest\032\031.device.v1.UpdateResponse\"\255" +
+      "\001\272G\251\001\n\007Devices\022\031Update device informatio" +
+      "n\032uUpdates an existing device\'s name and" +
+      " properties. Only the device owner or ad" +
+      "ministrators can perform this operation." +
+      "*\014updateDevice\022\345\001\n\004Link\022\026.device.v1.Link" +
+      "Request\032\027.device.v1.LinkResponse\"\253\001\272G\247\001\n" +
+      "\007Devices\022\026Link device to profile\032xLinks " +
+      "a device to a user profile. This operati" +
+      "on is required before the device can be " +
+      "used for authenticated operations.*\nlink" +
+      "Device\022\214\002\n\006Remove\022\030.device.v1.RemoveRequ" +
+      "est\032\031.device.v1.RemoveResponse\"\314\001\272G\310\001\n\007D" +
+      "evices\022\017Remove a device\032\235\001Removes a devi" +
+      "ce from the system. This operation is ty" +
+      "pically used when a user logs out or rem" +
+      "oves a device from their account. This a" +
+      "ction cannot be undone.*\014removeDevice\022\202\002" +
+      "\n\003Log\022\025.device.v1.LogRequest\032\026.device.v1" +
+      ".LogResponse\"\313\001\272G\307\001\n\013Device Logs\022\023Log de" +
+      "vice activity\032\217\001Creates a new activity l" +
+      "og entry for a device. Used for tracking" +
+      " device sessions, locations, and activit" +
+      "y for security auditing and compliance.*" +
+      "\021logDeviceActivity\022\203\002\n\010ListLogs\022\032.device" +
+      ".v1.ListLogsRequest\032\033.device.v1.ListLogs" +
+      "Response\"\273\001\272G\267\001\n\013Device Logs\022\031List devic" +
+      "e activity logs\032}Retrieves activity logs" +
+      " for a device. Useful for security audit" +
+      "ing, tracking device usage patterns, and" +
+      " compliance reporting.*\016listDeviceLogs0\001" +
+      "\022\344\001\n\006AddKey\022\030.device.v1.AddKeyRequest\032\031." +
+      "device.v1.AddKeyResponse\"\244\001\272G\240\001\n\013Device " +
+      "Keys\022\020Add key or token\032qAdds a key or to" +
+      "ken to a device. Supports FCM tokens, en" +
+      "cryption keys (Curve25519, Ed25519), and" +
+      " other key types.*\014addDeviceKey\022\371\001\n\tRemo" +
+      "veKey\022\033.device.v1.RemoveKeyRequest\032\034.dev" +
+      "ice.v1.RemoveKeyResponse\"\260\001\272G\254\001\n\013Device " +
+      "Keys\022\025Remove keys or tokens\032uRemoves one" +
+      " or more keys or tokens from a device. U" +
+      "sed for key rotation, token management, " +
+      "or when removing a device.*\017removeDevice" +
+      "Key\022\350\001\n\tSearchKey\022\033.device.v1.SearchKeyR" +
+      "equest\032\034.device.v1.SearchKeyResponse\"\237\001\272" +
+      "G\233\001\n\013Device Keys\022\025Search keys or tokens\032" +
+      "dSearches for keys or tokens associated " +
+      "with a device. Supports filtering by key" +
+      " type and expiration.*\017searchDeviceKey\022\314" +
+      "\002\n\013RegisterKey\022\035.device.v1.RegisterKeyRe" +
+      "quest\032\036.device.v1.RegisterKeyResponse\"\375\001" +
+      "\272G\371\001\n\020Key Registration\022%Register key wit" +
+      "h third-party service\032\260\001Registers a key " +
+      "or token with third-party services (like" +
+      " FCM for push notifications) and stores " +
+      "it. This method handles both the externa" +
+      "l service integration and local storage." +
+      "*\013registerKey\022\314\002\n\rDeRegisterKey\022\037.device" +
+      ".v1.DeRegisterKeyRequest\032 .device.v1.DeR" +
+      "egisterKeyResponse\"\367\001\272G\363\001\n\020Key Registrat" +
+      "ion\022\'DeRegister key from third-party ser" +
+      "vice\032\246\001DeRegisters a key or token from t" +
+      "hird-party services (like FCM) and remov" +
+      "es it from storage. This method handles " +
+      "both the external service cleanup and lo" +
+      "cal deletion.*\rdeRegisterKey\022\366\002\n\006Notify\022" +
+      "\030.device.v1.NotifyRequest\032\031.device.v1.No" +
+      "tifyResponse\"\266\002\272G\262\002\n\024Device Notification" +
+      "s\022\"Notify device using registered key\032\347\001" +
+      "Sends a notification to a device using o" +
+      "ne of its registered keys (FCM token, no" +
+      "tification key, etc.). The service autom" +
+      "atically selects an appropriate active k" +
+      "ey based on the key_type, or uses a spec" +
+      "ific key if key_id is provided.*\014notifyD" +
+      "evice\022\257\002\n\016UpdatePresence\022 .device.v1.Upd" +
+      "atePresenceRequest\032!.device.v1.UpdatePre" +
+      "senceResponse\"\327\001\272G\323\001\n\017Device Presence\022\026U" +
+      "pdate device presence\032\227\001Updates the pres" +
+      "ence status of a device. Used to indicat" +
+      "e online/offline/away/busy status and tr" +
+      "ack last activity for real-time communic" +
+      "ation features.*\016updatePresenceB\354\007\n\036com." +
+      "antinvestor.apis.device.v1B\013DeviceProtoP" +
+      "\001Z1github.com/antinvestor/apis/go/device" +
+      "/v1;devicev1\242\002\003DXX\252\002\tDevice.V1\312\002\tDevice\\" +
+      "V1\342\002\025Device\\V1\\GPBMetadata\352\002\nDevice::V1\272" +
+      "G\303\006\022\227\006\n\025Device Management API\022\321\004The Devi" +
+      "ce Management API provides comprehensive" +
+      " device management capabilities includin" +
+      "g device registration, session tracking," +
+      " and unified key/token management. The A" +
+      "PI uses a unified KeyObject model for al" +
+      "l key types including FCM tokens, encryp" +
+      "tion keys (Curve25519, Ed25519, Pickle)," +
+      " Matrix keys, and notification keys. Thi" +
+      "s enables applications to register and t" +
+      "rack user devices across platforms (mobi" +
+      "le, web, desktop), manage push notificat" +
+      "ion tokens, handle encryption keys for s" +
+      "ecure communications, and maintain detai" +
+      "led logs of device activity for security" +
+      " and compliance purposes.\"W\n\020Ant Investo" +
+      "r Ltd\022-https://github.com/antinvestor/se" +
+      "rvice-device\032\024info@antinvestor.com*I\n\016Ap" +
+      "ache License\0227https://github.com/antinve" +
+      "stor/apis/blob/master/LICENSE2\006v1.0.0*\':" +
+      "%\n#\n\nBearerAuth\022\025\n\023\n\004http*\006bearer2\003JWTb\006" +
+      "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -486,175 +544,205 @@ public final class DeviceProto extends com.google.protobuf.GeneratedFile {
     internal_static_device_v1_DeviceObject_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_DeviceObject_descriptor,
-        new java.lang.String[] { "Id", "Name", "SessionId", "Ip", "UserAgent", "Os", "LastSeen", "ProfileId", "Locale", "Location", "Properties", });
-    internal_static_device_v1_GetByIdRequest_descriptor =
+        new java.lang.String[] { "Id", "Name", "SessionId", "Ip", "UserAgent", "Os", "LastSeen", "ProfileId", "Locale", "Presence", "Location", "Properties", });
+    internal_static_device_v1_PresenceObject_descriptor =
       getDescriptor().getMessageType(4);
+    internal_static_device_v1_PresenceObject_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_device_v1_PresenceObject_descriptor,
+        new java.lang.String[] { "DeviceId", "ProfileId", "Status", "StatusMessage", "LastActive", "UpdatedAt", "Extras", });
+    internal_static_device_v1_GetByIdRequest_descriptor =
+      getDescriptor().getMessageType(5);
     internal_static_device_v1_GetByIdRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_GetByIdRequest_descriptor,
         new java.lang.String[] { "Id", "Extensive", });
     internal_static_device_v1_GetByIdResponse_descriptor =
-      getDescriptor().getMessageType(5);
+      getDescriptor().getMessageType(6);
     internal_static_device_v1_GetByIdResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_GetByIdResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_device_v1_GetBySessionIdRequest_descriptor =
-      getDescriptor().getMessageType(6);
+      getDescriptor().getMessageType(7);
     internal_static_device_v1_GetBySessionIdRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_GetBySessionIdRequest_descriptor,
         new java.lang.String[] { "Id", });
     internal_static_device_v1_GetBySessionIdResponse_descriptor =
-      getDescriptor().getMessageType(7);
+      getDescriptor().getMessageType(8);
     internal_static_device_v1_GetBySessionIdResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_GetBySessionIdResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_device_v1_SearchRequest_descriptor =
-      getDescriptor().getMessageType(8);
+      getDescriptor().getMessageType(9);
     internal_static_device_v1_SearchRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_SearchRequest_descriptor,
         new java.lang.String[] { "Query", "Page", "Count", "StartDate", "EndDate", "Properties", "Extras", });
     internal_static_device_v1_SearchResponse_descriptor =
-      getDescriptor().getMessageType(9);
+      getDescriptor().getMessageType(10);
     internal_static_device_v1_SearchResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_SearchResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_device_v1_CreateRequest_descriptor =
-      getDescriptor().getMessageType(10);
+      getDescriptor().getMessageType(11);
     internal_static_device_v1_CreateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_CreateRequest_descriptor,
         new java.lang.String[] { "Name", "Properties", });
     internal_static_device_v1_CreateResponse_descriptor =
-      getDescriptor().getMessageType(11);
+      getDescriptor().getMessageType(12);
     internal_static_device_v1_CreateResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_CreateResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_device_v1_UpdateRequest_descriptor =
-      getDescriptor().getMessageType(12);
+      getDescriptor().getMessageType(13);
     internal_static_device_v1_UpdateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_UpdateRequest_descriptor,
         new java.lang.String[] { "Id", "Name", "Properties", });
     internal_static_device_v1_UpdateResponse_descriptor =
-      getDescriptor().getMessageType(13);
+      getDescriptor().getMessageType(14);
     internal_static_device_v1_UpdateResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_UpdateResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_device_v1_LinkRequest_descriptor =
-      getDescriptor().getMessageType(14);
+      getDescriptor().getMessageType(15);
     internal_static_device_v1_LinkRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_LinkRequest_descriptor,
         new java.lang.String[] { "Id", "ProfileId", "Properties", });
     internal_static_device_v1_LinkResponse_descriptor =
-      getDescriptor().getMessageType(15);
+      getDescriptor().getMessageType(16);
     internal_static_device_v1_LinkResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_LinkResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_device_v1_RemoveRequest_descriptor =
-      getDescriptor().getMessageType(16);
+      getDescriptor().getMessageType(17);
     internal_static_device_v1_RemoveRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_RemoveRequest_descriptor,
         new java.lang.String[] { "Id", });
     internal_static_device_v1_RemoveResponse_descriptor =
-      getDescriptor().getMessageType(17);
+      getDescriptor().getMessageType(18);
     internal_static_device_v1_RemoveResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_RemoveResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_device_v1_LogRequest_descriptor =
-      getDescriptor().getMessageType(18);
+      getDescriptor().getMessageType(19);
     internal_static_device_v1_LogRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_LogRequest_descriptor,
         new java.lang.String[] { "DeviceId", "SessionId", "Ip", "Locale", "UserAgent", "Os", "LastSeen", "Extras", });
     internal_static_device_v1_LogResponse_descriptor =
-      getDescriptor().getMessageType(19);
+      getDescriptor().getMessageType(20);
     internal_static_device_v1_LogResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_LogResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_device_v1_ListLogsRequest_descriptor =
-      getDescriptor().getMessageType(20);
+      getDescriptor().getMessageType(21);
     internal_static_device_v1_ListLogsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_ListLogsRequest_descriptor,
         new java.lang.String[] { "DeviceId", "Count", });
     internal_static_device_v1_ListLogsResponse_descriptor =
-      getDescriptor().getMessageType(21);
+      getDescriptor().getMessageType(22);
     internal_static_device_v1_ListLogsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_ListLogsResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_device_v1_AddKeyRequest_descriptor =
-      getDescriptor().getMessageType(22);
+      getDescriptor().getMessageType(23);
     internal_static_device_v1_AddKeyRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_AddKeyRequest_descriptor,
         new java.lang.String[] { "Id", "DeviceId", "KeyType", "Data", "ExpiresAt", "Extras", });
     internal_static_device_v1_AddKeyResponse_descriptor =
-      getDescriptor().getMessageType(23);
+      getDescriptor().getMessageType(24);
     internal_static_device_v1_AddKeyResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_AddKeyResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_device_v1_RemoveKeyRequest_descriptor =
-      getDescriptor().getMessageType(24);
+      getDescriptor().getMessageType(25);
     internal_static_device_v1_RemoveKeyRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_RemoveKeyRequest_descriptor,
         new java.lang.String[] { "Id", });
     internal_static_device_v1_RemoveKeyResponse_descriptor =
-      getDescriptor().getMessageType(25);
+      getDescriptor().getMessageType(26);
     internal_static_device_v1_RemoveKeyResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_RemoveKeyResponse_descriptor,
         new java.lang.String[] { "Id", });
     internal_static_device_v1_SearchKeyRequest_descriptor =
-      getDescriptor().getMessageType(26);
+      getDescriptor().getMessageType(27);
     internal_static_device_v1_SearchKeyRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_SearchKeyRequest_descriptor,
         new java.lang.String[] { "Query", "DeviceId", "KeyTypes", "IncludeExpired", "Page", "Count", });
     internal_static_device_v1_SearchKeyResponse_descriptor =
-      getDescriptor().getMessageType(27);
+      getDescriptor().getMessageType(28);
     internal_static_device_v1_SearchKeyResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_SearchKeyResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_device_v1_RegisterKeyRequest_descriptor =
-      getDescriptor().getMessageType(28);
+      getDescriptor().getMessageType(29);
     internal_static_device_v1_RegisterKeyRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_RegisterKeyRequest_descriptor,
         new java.lang.String[] { "DeviceId", "KeyType", "Extras", });
     internal_static_device_v1_RegisterKeyResponse_descriptor =
-      getDescriptor().getMessageType(29);
+      getDescriptor().getMessageType(30);
     internal_static_device_v1_RegisterKeyResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_RegisterKeyResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_device_v1_DeRegisterKeyRequest_descriptor =
-      getDescriptor().getMessageType(30);
+      getDescriptor().getMessageType(31);
     internal_static_device_v1_DeRegisterKeyRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_DeRegisterKeyRequest_descriptor,
         new java.lang.String[] { "Id", });
     internal_static_device_v1_DeRegisterKeyResponse_descriptor =
-      getDescriptor().getMessageType(31);
+      getDescriptor().getMessageType(32);
     internal_static_device_v1_DeRegisterKeyResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_DeRegisterKeyResponse_descriptor,
         new java.lang.String[] { "Success", "Message", });
+    internal_static_device_v1_UpdatePresenceRequest_descriptor =
+      getDescriptor().getMessageType(33);
+    internal_static_device_v1_UpdatePresenceRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_device_v1_UpdatePresenceRequest_descriptor,
+        new java.lang.String[] { "DeviceId", "Status", "StatusMessage", "Extras", });
+    internal_static_device_v1_UpdatePresenceResponse_descriptor =
+      getDescriptor().getMessageType(34);
+    internal_static_device_v1_UpdatePresenceResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_device_v1_UpdatePresenceResponse_descriptor,
+        new java.lang.String[] { "Data", });
+    internal_static_device_v1_NotifyRequest_descriptor =
+      getDescriptor().getMessageType(35);
+    internal_static_device_v1_NotifyRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_device_v1_NotifyRequest_descriptor,
+        new java.lang.String[] { "DeviceId", "KeyId", "KeyType", "Title", "Body", "Data", "Extras", });
+    internal_static_device_v1_NotifyResponse_descriptor =
+      getDescriptor().getMessageType(36);
+    internal_static_device_v1_NotifyResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_device_v1_NotifyResponse_descriptor,
+        new java.lang.String[] { "Success", "Message", "NotificationId", "Extras", });
     descriptor.resolveAllFeaturesImmutable();
     build.buf.validate.ValidateProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();

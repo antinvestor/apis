@@ -100,6 +100,64 @@ func (KeyType) EnumDescriptor() ([]byte, []int) {
 	return file_device_v1_device_proto_rawDescGZIP(), []int{0}
 }
 
+// PresenceStatus defines the online/offline status of a device.
+// buf:lint:ignore ENUM_VALUE_PREFIX
+type PresenceStatus int32
+
+const (
+	// buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+	PresenceStatus_OFFLINE   PresenceStatus = 0 // Device is offline
+	PresenceStatus_ONLINE    PresenceStatus = 1 // Device is online and active
+	PresenceStatus_AWAY      PresenceStatus = 2 // Device is online but idle/away
+	PresenceStatus_BUSY      PresenceStatus = 3 // Device is online but user is busy
+	PresenceStatus_INVISIBLE PresenceStatus = 4 // Device is online but appears offline to others
+)
+
+// Enum value maps for PresenceStatus.
+var (
+	PresenceStatus_name = map[int32]string{
+		0: "OFFLINE",
+		1: "ONLINE",
+		2: "AWAY",
+		3: "BUSY",
+		4: "INVISIBLE",
+	}
+	PresenceStatus_value = map[string]int32{
+		"OFFLINE":   0,
+		"ONLINE":    1,
+		"AWAY":      2,
+		"BUSY":      3,
+		"INVISIBLE": 4,
+	}
+)
+
+func (x PresenceStatus) Enum() *PresenceStatus {
+	p := new(PresenceStatus)
+	*p = x
+	return p
+}
+
+func (x PresenceStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (PresenceStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_device_v1_device_proto_enumTypes[1].Descriptor()
+}
+
+func (PresenceStatus) Type() protoreflect.EnumType {
+	return &file_device_v1_device_proto_enumTypes[1]
+}
+
+func (x PresenceStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use PresenceStatus.Descriptor instead.
+func (PresenceStatus) EnumDescriptor() ([]byte, []int) {
+	return file_device_v1_device_proto_rawDescGZIP(), []int{1}
+}
+
 // Locale represents the localization settings for a device.
 // Used to provide localized content and format data appropriately for the user.
 type Locale struct {
@@ -410,17 +468,18 @@ func (x *DeviceLog) GetExtra() *structpb.Struct {
 // Devices must be registered and linked to a profile before use.
 type DeviceObject struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                // Unique identifier for the device
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                            // User-friendly device name (e.g., "John's iPhone")
-	SessionId     string                 `protobuf:"bytes,3,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"` // Current active session identifier
-	Ip            string                 `protobuf:"bytes,4,opt,name=ip,proto3" json:"ip,omitempty"`                                // Last known IP address
-	UserAgent     string                 `protobuf:"bytes,5,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"` // User agent string
-	Os            string                 `protobuf:"bytes,6,opt,name=os,proto3" json:"os,omitempty"`                                // Operating system and version
-	LastSeen      string                 `protobuf:"bytes,7,opt,name=last_seen,json=lastSeen,proto3" json:"last_seen,omitempty"`    // Last activity timestamp (RFC3339)
-	ProfileId     string                 `protobuf:"bytes,8,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"` // Profile this device is linked to
-	Locale        *Locale                `protobuf:"bytes,9,opt,name=locale,proto3" json:"locale,omitempty"`                        // Device locale settings
-	Location      *structpb.Struct       `protobuf:"bytes,11,opt,name=location,proto3" json:"location,omitempty"`                   // Last known geographic location
-	Properties    *structpb.Struct       `protobuf:"bytes,15,opt,name=properties,proto3" json:"properties,omitempty"`               // Additional device properties (model, manufacturer, etc.)
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                             // Unique identifier for the device
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                         // User-friendly device name (e.g., "John's iPhone")
+	SessionId     string                 `protobuf:"bytes,3,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`              // Current active session identifier
+	Ip            string                 `protobuf:"bytes,4,opt,name=ip,proto3" json:"ip,omitempty"`                                             // Last known IP address
+	UserAgent     string                 `protobuf:"bytes,5,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`              // User agent string
+	Os            string                 `protobuf:"bytes,6,opt,name=os,proto3" json:"os,omitempty"`                                             // Operating system and version
+	LastSeen      string                 `protobuf:"bytes,7,opt,name=last_seen,json=lastSeen,proto3" json:"last_seen,omitempty"`                 // Last activity timestamp (RFC3339)
+	ProfileId     string                 `protobuf:"bytes,8,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`              // Profile this device is linked to
+	Locale        *Locale                `protobuf:"bytes,9,opt,name=locale,proto3" json:"locale,omitempty"`                                     // Device locale settings
+	Presence      PresenceStatus         `protobuf:"varint,10,opt,name=presence,proto3,enum=device.v1.PresenceStatus" json:"presence,omitempty"` // Device presense status
+	Location      *structpb.Struct       `protobuf:"bytes,11,opt,name=location,proto3" json:"location,omitempty"`                                // Last known geographic location
+	Properties    *structpb.Struct       `protobuf:"bytes,15,opt,name=properties,proto3" json:"properties,omitempty"`                            // Additional device properties (model, manufacturer, etc.)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -518,6 +577,13 @@ func (x *DeviceObject) GetLocale() *Locale {
 	return nil
 }
 
+func (x *DeviceObject) GetPresence() PresenceStatus {
+	if x != nil {
+		return x.Presence
+	}
+	return PresenceStatus_OFFLINE
+}
+
 func (x *DeviceObject) GetLocation() *structpb.Struct {
 	if x != nil {
 		return x.Location
@@ -528,6 +594,100 @@ func (x *DeviceObject) GetLocation() *structpb.Struct {
 func (x *DeviceObject) GetProperties() *structpb.Struct {
 	if x != nil {
 		return x.Properties
+	}
+	return nil
+}
+
+// PresenceObject represents the presence/availability status of a device.
+// Tracks online/offline status and last activity for real-time communication features.
+type PresenceObject struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DeviceId      string                 `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`                // Device this presence status belongs to
+	ProfileId     string                 `protobuf:"bytes,2,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`             // Profile this device belongs to
+	Status        PresenceStatus         `protobuf:"varint,3,opt,name=status,proto3,enum=device.v1.PresenceStatus" json:"status,omitempty"`     // Current presence status
+	StatusMessage string                 `protobuf:"bytes,4,opt,name=status_message,json=statusMessage,proto3" json:"status_message,omitempty"` // Optional custom status message
+	LastActive    string                 `protobuf:"bytes,5,opt,name=last_active,json=lastActive,proto3" json:"last_active,omitempty"`          // Timestamp of last activity (RFC3339)
+	UpdatedAt     string                 `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`             // Timestamp when presence was last updated (RFC3339)
+	Extras        *structpb.Struct       `protobuf:"bytes,7,opt,name=extras,proto3" json:"extras,omitempty"`                                    // Additional presence metadata (activity type, etc.)
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PresenceObject) Reset() {
+	*x = PresenceObject{}
+	mi := &file_device_v1_device_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PresenceObject) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PresenceObject) ProtoMessage() {}
+
+func (x *PresenceObject) ProtoReflect() protoreflect.Message {
+	mi := &file_device_v1_device_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PresenceObject.ProtoReflect.Descriptor instead.
+func (*PresenceObject) Descriptor() ([]byte, []int) {
+	return file_device_v1_device_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *PresenceObject) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+func (x *PresenceObject) GetProfileId() string {
+	if x != nil {
+		return x.ProfileId
+	}
+	return ""
+}
+
+func (x *PresenceObject) GetStatus() PresenceStatus {
+	if x != nil {
+		return x.Status
+	}
+	return PresenceStatus_OFFLINE
+}
+
+func (x *PresenceObject) GetStatusMessage() string {
+	if x != nil {
+		return x.StatusMessage
+	}
+	return ""
+}
+
+func (x *PresenceObject) GetLastActive() string {
+	if x != nil {
+		return x.LastActive
+	}
+	return ""
+}
+
+func (x *PresenceObject) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+func (x *PresenceObject) GetExtras() *structpb.Struct {
+	if x != nil {
+		return x.Extras
 	}
 	return nil
 }
@@ -543,7 +703,7 @@ type GetByIdRequest struct {
 
 func (x *GetByIdRequest) Reset() {
 	*x = GetByIdRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[4]
+	mi := &file_device_v1_device_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -555,7 +715,7 @@ func (x *GetByIdRequest) String() string {
 func (*GetByIdRequest) ProtoMessage() {}
 
 func (x *GetByIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[4]
+	mi := &file_device_v1_device_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -568,7 +728,7 @@ func (x *GetByIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetByIdRequest.ProtoReflect.Descriptor instead.
 func (*GetByIdRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{4}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetByIdRequest) GetId() []string {
@@ -595,7 +755,7 @@ type GetByIdResponse struct {
 
 func (x *GetByIdResponse) Reset() {
 	*x = GetByIdResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[5]
+	mi := &file_device_v1_device_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -607,7 +767,7 @@ func (x *GetByIdResponse) String() string {
 func (*GetByIdResponse) ProtoMessage() {}
 
 func (x *GetByIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[5]
+	mi := &file_device_v1_device_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -620,7 +780,7 @@ func (x *GetByIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetByIdResponse.ProtoReflect.Descriptor instead.
 func (*GetByIdResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{5}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetByIdResponse) GetData() []*DeviceObject {
@@ -640,7 +800,7 @@ type GetBySessionIdRequest struct {
 
 func (x *GetBySessionIdRequest) Reset() {
 	*x = GetBySessionIdRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[6]
+	mi := &file_device_v1_device_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -652,7 +812,7 @@ func (x *GetBySessionIdRequest) String() string {
 func (*GetBySessionIdRequest) ProtoMessage() {}
 
 func (x *GetBySessionIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[6]
+	mi := &file_device_v1_device_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -665,7 +825,7 @@ func (x *GetBySessionIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBySessionIdRequest.ProtoReflect.Descriptor instead.
 func (*GetBySessionIdRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{6}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetBySessionIdRequest) GetId() string {
@@ -685,7 +845,7 @@ type GetBySessionIdResponse struct {
 
 func (x *GetBySessionIdResponse) Reset() {
 	*x = GetBySessionIdResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[7]
+	mi := &file_device_v1_device_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -697,7 +857,7 @@ func (x *GetBySessionIdResponse) String() string {
 func (*GetBySessionIdResponse) ProtoMessage() {}
 
 func (x *GetBySessionIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[7]
+	mi := &file_device_v1_device_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -710,7 +870,7 @@ func (x *GetBySessionIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBySessionIdResponse.ProtoReflect.Descriptor instead.
 func (*GetBySessionIdResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{7}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetBySessionIdResponse) GetData() *DeviceObject {
@@ -736,7 +896,7 @@ type SearchRequest struct {
 
 func (x *SearchRequest) Reset() {
 	*x = SearchRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[8]
+	mi := &file_device_v1_device_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -748,7 +908,7 @@ func (x *SearchRequest) String() string {
 func (*SearchRequest) ProtoMessage() {}
 
 func (x *SearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[8]
+	mi := &file_device_v1_device_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -761,7 +921,7 @@ func (x *SearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchRequest.ProtoReflect.Descriptor instead.
 func (*SearchRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{8}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *SearchRequest) GetQuery() string {
@@ -823,7 +983,7 @@ type SearchResponse struct {
 
 func (x *SearchResponse) Reset() {
 	*x = SearchResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[9]
+	mi := &file_device_v1_device_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -835,7 +995,7 @@ func (x *SearchResponse) String() string {
 func (*SearchResponse) ProtoMessage() {}
 
 func (x *SearchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[9]
+	mi := &file_device_v1_device_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -848,7 +1008,7 @@ func (x *SearchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchResponse.ProtoReflect.Descriptor instead.
 func (*SearchResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{9}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SearchResponse) GetData() []*DeviceObject {
@@ -869,7 +1029,7 @@ type CreateRequest struct {
 
 func (x *CreateRequest) Reset() {
 	*x = CreateRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[10]
+	mi := &file_device_v1_device_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -881,7 +1041,7 @@ func (x *CreateRequest) String() string {
 func (*CreateRequest) ProtoMessage() {}
 
 func (x *CreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[10]
+	mi := &file_device_v1_device_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -894,7 +1054,7 @@ func (x *CreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRequest.ProtoReflect.Descriptor instead.
 func (*CreateRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{10}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *CreateRequest) GetName() string {
@@ -921,7 +1081,7 @@ type CreateResponse struct {
 
 func (x *CreateResponse) Reset() {
 	*x = CreateResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[11]
+	mi := &file_device_v1_device_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -933,7 +1093,7 @@ func (x *CreateResponse) String() string {
 func (*CreateResponse) ProtoMessage() {}
 
 func (x *CreateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[11]
+	mi := &file_device_v1_device_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -946,7 +1106,7 @@ func (x *CreateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateResponse.ProtoReflect.Descriptor instead.
 func (*CreateResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{11}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CreateResponse) GetData() *DeviceObject {
@@ -968,7 +1128,7 @@ type UpdateRequest struct {
 
 func (x *UpdateRequest) Reset() {
 	*x = UpdateRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[12]
+	mi := &file_device_v1_device_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -980,7 +1140,7 @@ func (x *UpdateRequest) String() string {
 func (*UpdateRequest) ProtoMessage() {}
 
 func (x *UpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[12]
+	mi := &file_device_v1_device_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -993,7 +1153,7 @@ func (x *UpdateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateRequest.ProtoReflect.Descriptor instead.
 func (*UpdateRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{12}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *UpdateRequest) GetId() string {
@@ -1027,7 +1187,7 @@ type UpdateResponse struct {
 
 func (x *UpdateResponse) Reset() {
 	*x = UpdateResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[13]
+	mi := &file_device_v1_device_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1039,7 +1199,7 @@ func (x *UpdateResponse) String() string {
 func (*UpdateResponse) ProtoMessage() {}
 
 func (x *UpdateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[13]
+	mi := &file_device_v1_device_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1052,7 +1212,7 @@ func (x *UpdateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateResponse.ProtoReflect.Descriptor instead.
 func (*UpdateResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{13}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UpdateResponse) GetData() *DeviceObject {
@@ -1075,7 +1235,7 @@ type LinkRequest struct {
 
 func (x *LinkRequest) Reset() {
 	*x = LinkRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[14]
+	mi := &file_device_v1_device_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1087,7 +1247,7 @@ func (x *LinkRequest) String() string {
 func (*LinkRequest) ProtoMessage() {}
 
 func (x *LinkRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[14]
+	mi := &file_device_v1_device_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1100,7 +1260,7 @@ func (x *LinkRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LinkRequest.ProtoReflect.Descriptor instead.
 func (*LinkRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{14}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *LinkRequest) GetId() string {
@@ -1134,7 +1294,7 @@ type LinkResponse struct {
 
 func (x *LinkResponse) Reset() {
 	*x = LinkResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[15]
+	mi := &file_device_v1_device_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1146,7 +1306,7 @@ func (x *LinkResponse) String() string {
 func (*LinkResponse) ProtoMessage() {}
 
 func (x *LinkResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[15]
+	mi := &file_device_v1_device_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1159,7 +1319,7 @@ func (x *LinkResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LinkResponse.ProtoReflect.Descriptor instead.
 func (*LinkResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{15}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *LinkResponse) GetData() *DeviceObject {
@@ -1180,7 +1340,7 @@ type RemoveRequest struct {
 
 func (x *RemoveRequest) Reset() {
 	*x = RemoveRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[16]
+	mi := &file_device_v1_device_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1192,7 +1352,7 @@ func (x *RemoveRequest) String() string {
 func (*RemoveRequest) ProtoMessage() {}
 
 func (x *RemoveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[16]
+	mi := &file_device_v1_device_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1205,7 +1365,7 @@ func (x *RemoveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveRequest.ProtoReflect.Descriptor instead.
 func (*RemoveRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{16}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *RemoveRequest) GetId() string {
@@ -1225,7 +1385,7 @@ type RemoveResponse struct {
 
 func (x *RemoveResponse) Reset() {
 	*x = RemoveResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[17]
+	mi := &file_device_v1_device_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1237,7 +1397,7 @@ func (x *RemoveResponse) String() string {
 func (*RemoveResponse) ProtoMessage() {}
 
 func (x *RemoveResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[17]
+	mi := &file_device_v1_device_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1250,7 +1410,7 @@ func (x *RemoveResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveResponse.ProtoReflect.Descriptor instead.
 func (*RemoveResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{17}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RemoveResponse) GetData() *DeviceObject {
@@ -1278,7 +1438,7 @@ type LogRequest struct {
 
 func (x *LogRequest) Reset() {
 	*x = LogRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[18]
+	mi := &file_device_v1_device_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1290,7 +1450,7 @@ func (x *LogRequest) String() string {
 func (*LogRequest) ProtoMessage() {}
 
 func (x *LogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[18]
+	mi := &file_device_v1_device_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1303,7 +1463,7 @@ func (x *LogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogRequest.ProtoReflect.Descriptor instead.
 func (*LogRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{18}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *LogRequest) GetDeviceId() string {
@@ -1372,7 +1532,7 @@ type LogResponse struct {
 
 func (x *LogResponse) Reset() {
 	*x = LogResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[19]
+	mi := &file_device_v1_device_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1384,7 +1544,7 @@ func (x *LogResponse) String() string {
 func (*LogResponse) ProtoMessage() {}
 
 func (x *LogResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[19]
+	mi := &file_device_v1_device_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1397,7 +1557,7 @@ func (x *LogResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogResponse.ProtoReflect.Descriptor instead.
 func (*LogResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{19}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *LogResponse) GetData() *DeviceLog {
@@ -1419,7 +1579,7 @@ type ListLogsRequest struct {
 
 func (x *ListLogsRequest) Reset() {
 	*x = ListLogsRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[20]
+	mi := &file_device_v1_device_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1431,7 +1591,7 @@ func (x *ListLogsRequest) String() string {
 func (*ListLogsRequest) ProtoMessage() {}
 
 func (x *ListLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[20]
+	mi := &file_device_v1_device_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1444,7 +1604,7 @@ func (x *ListLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListLogsRequest.ProtoReflect.Descriptor instead.
 func (*ListLogsRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{20}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ListLogsRequest) GetDeviceId() string {
@@ -1471,7 +1631,7 @@ type ListLogsResponse struct {
 
 func (x *ListLogsResponse) Reset() {
 	*x = ListLogsResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[21]
+	mi := &file_device_v1_device_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1483,7 +1643,7 @@ func (x *ListLogsResponse) String() string {
 func (*ListLogsResponse) ProtoMessage() {}
 
 func (x *ListLogsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[21]
+	mi := &file_device_v1_device_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1496,7 +1656,7 @@ func (x *ListLogsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListLogsResponse.ProtoReflect.Descriptor instead.
 func (*ListLogsResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{21}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListLogsResponse) GetData() []*DeviceLog {
@@ -1522,7 +1682,7 @@ type AddKeyRequest struct {
 
 func (x *AddKeyRequest) Reset() {
 	*x = AddKeyRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[22]
+	mi := &file_device_v1_device_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1534,7 +1694,7 @@ func (x *AddKeyRequest) String() string {
 func (*AddKeyRequest) ProtoMessage() {}
 
 func (x *AddKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[22]
+	mi := &file_device_v1_device_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1547,7 +1707,7 @@ func (x *AddKeyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddKeyRequest.ProtoReflect.Descriptor instead.
 func (*AddKeyRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{22}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *AddKeyRequest) GetId() string {
@@ -1602,7 +1762,7 @@ type AddKeyResponse struct {
 
 func (x *AddKeyResponse) Reset() {
 	*x = AddKeyResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[23]
+	mi := &file_device_v1_device_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1614,7 +1774,7 @@ func (x *AddKeyResponse) String() string {
 func (*AddKeyResponse) ProtoMessage() {}
 
 func (x *AddKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[23]
+	mi := &file_device_v1_device_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1627,7 +1787,7 @@ func (x *AddKeyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddKeyResponse.ProtoReflect.Descriptor instead.
 func (*AddKeyResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{23}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *AddKeyResponse) GetData() *KeyObject {
@@ -1648,7 +1808,7 @@ type RemoveKeyRequest struct {
 
 func (x *RemoveKeyRequest) Reset() {
 	*x = RemoveKeyRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[24]
+	mi := &file_device_v1_device_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1660,7 +1820,7 @@ func (x *RemoveKeyRequest) String() string {
 func (*RemoveKeyRequest) ProtoMessage() {}
 
 func (x *RemoveKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[24]
+	mi := &file_device_v1_device_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1673,7 +1833,7 @@ func (x *RemoveKeyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveKeyRequest.ProtoReflect.Descriptor instead.
 func (*RemoveKeyRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{24}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *RemoveKeyRequest) GetId() []string {
@@ -1693,7 +1853,7 @@ type RemoveKeyResponse struct {
 
 func (x *RemoveKeyResponse) Reset() {
 	*x = RemoveKeyResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[25]
+	mi := &file_device_v1_device_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1705,7 +1865,7 @@ func (x *RemoveKeyResponse) String() string {
 func (*RemoveKeyResponse) ProtoMessage() {}
 
 func (x *RemoveKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[25]
+	mi := &file_device_v1_device_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1718,7 +1878,7 @@ func (x *RemoveKeyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveKeyResponse.ProtoReflect.Descriptor instead.
 func (*RemoveKeyResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{25}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *RemoveKeyResponse) GetId() []string {
@@ -1743,7 +1903,7 @@ type SearchKeyRequest struct {
 
 func (x *SearchKeyRequest) Reset() {
 	*x = SearchKeyRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[26]
+	mi := &file_device_v1_device_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1755,7 +1915,7 @@ func (x *SearchKeyRequest) String() string {
 func (*SearchKeyRequest) ProtoMessage() {}
 
 func (x *SearchKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[26]
+	mi := &file_device_v1_device_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1768,7 +1928,7 @@ func (x *SearchKeyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchKeyRequest.ProtoReflect.Descriptor instead.
 func (*SearchKeyRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{26}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *SearchKeyRequest) GetQuery() string {
@@ -1823,7 +1983,7 @@ type SearchKeyResponse struct {
 
 func (x *SearchKeyResponse) Reset() {
 	*x = SearchKeyResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[27]
+	mi := &file_device_v1_device_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1835,7 +1995,7 @@ func (x *SearchKeyResponse) String() string {
 func (*SearchKeyResponse) ProtoMessage() {}
 
 func (x *SearchKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[27]
+	mi := &file_device_v1_device_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1848,7 +2008,7 @@ func (x *SearchKeyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchKeyResponse.ProtoReflect.Descriptor instead.
 func (*SearchKeyResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{27}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *SearchKeyResponse) GetData() []*KeyObject {
@@ -1873,7 +2033,7 @@ type RegisterKeyRequest struct {
 
 func (x *RegisterKeyRequest) Reset() {
 	*x = RegisterKeyRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[28]
+	mi := &file_device_v1_device_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1885,7 +2045,7 @@ func (x *RegisterKeyRequest) String() string {
 func (*RegisterKeyRequest) ProtoMessage() {}
 
 func (x *RegisterKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[28]
+	mi := &file_device_v1_device_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1898,7 +2058,7 @@ func (x *RegisterKeyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterKeyRequest.ProtoReflect.Descriptor instead.
 func (*RegisterKeyRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{28}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *RegisterKeyRequest) GetDeviceId() string {
@@ -1933,7 +2093,7 @@ type RegisterKeyResponse struct {
 
 func (x *RegisterKeyResponse) Reset() {
 	*x = RegisterKeyResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[29]
+	mi := &file_device_v1_device_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1945,7 +2105,7 @@ func (x *RegisterKeyResponse) String() string {
 func (*RegisterKeyResponse) ProtoMessage() {}
 
 func (x *RegisterKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[29]
+	mi := &file_device_v1_device_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1958,7 +2118,7 @@ func (x *RegisterKeyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterKeyResponse.ProtoReflect.Descriptor instead.
 func (*RegisterKeyResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{29}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *RegisterKeyResponse) GetData() *KeyObject {
@@ -1979,7 +2139,7 @@ type DeRegisterKeyRequest struct {
 
 func (x *DeRegisterKeyRequest) Reset() {
 	*x = DeRegisterKeyRequest{}
-	mi := &file_device_v1_device_proto_msgTypes[30]
+	mi := &file_device_v1_device_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1991,7 +2151,7 @@ func (x *DeRegisterKeyRequest) String() string {
 func (*DeRegisterKeyRequest) ProtoMessage() {}
 
 func (x *DeRegisterKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[30]
+	mi := &file_device_v1_device_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2004,7 +2164,7 @@ func (x *DeRegisterKeyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeRegisterKeyRequest.ProtoReflect.Descriptor instead.
 func (*DeRegisterKeyRequest) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{30}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *DeRegisterKeyRequest) GetId() string {
@@ -2025,7 +2185,7 @@ type DeRegisterKeyResponse struct {
 
 func (x *DeRegisterKeyResponse) Reset() {
 	*x = DeRegisterKeyResponse{}
-	mi := &file_device_v1_device_proto_msgTypes[31]
+	mi := &file_device_v1_device_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2037,7 +2197,7 @@ func (x *DeRegisterKeyResponse) String() string {
 func (*DeRegisterKeyResponse) ProtoMessage() {}
 
 func (x *DeRegisterKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_device_v1_device_proto_msgTypes[31]
+	mi := &file_device_v1_device_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2050,7 +2210,7 @@ func (x *DeRegisterKeyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeRegisterKeyResponse.ProtoReflect.Descriptor instead.
 func (*DeRegisterKeyResponse) Descriptor() ([]byte, []int) {
-	return file_device_v1_device_proto_rawDescGZIP(), []int{31}
+	return file_device_v1_device_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *DeRegisterKeyResponse) GetSuccess() bool {
@@ -2065,6 +2225,283 @@ func (x *DeRegisterKeyResponse) GetMessage() string {
 		return x.Message
 	}
 	return ""
+}
+
+// UpdatePresenceRequest updates the presence status of a device.
+type UpdatePresenceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DeviceId      string                 `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`                // Device ID to update presence for
+	Status        PresenceStatus         `protobuf:"varint,2,opt,name=status,proto3,enum=device.v1.PresenceStatus" json:"status,omitempty"`     // New presence status
+	StatusMessage string                 `protobuf:"bytes,3,opt,name=status_message,json=statusMessage,proto3" json:"status_message,omitempty"` // Optional custom status message
+	Extras        *structpb.Struct       `protobuf:"bytes,4,opt,name=extras,proto3" json:"extras,omitempty"`                                    // Additional presence metadata
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdatePresenceRequest) Reset() {
+	*x = UpdatePresenceRequest{}
+	mi := &file_device_v1_device_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePresenceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePresenceRequest) ProtoMessage() {}
+
+func (x *UpdatePresenceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_device_v1_device_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePresenceRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePresenceRequest) Descriptor() ([]byte, []int) {
+	return file_device_v1_device_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *UpdatePresenceRequest) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+func (x *UpdatePresenceRequest) GetStatus() PresenceStatus {
+	if x != nil {
+		return x.Status
+	}
+	return PresenceStatus_OFFLINE
+}
+
+func (x *UpdatePresenceRequest) GetStatusMessage() string {
+	if x != nil {
+		return x.StatusMessage
+	}
+	return ""
+}
+
+func (x *UpdatePresenceRequest) GetExtras() *structpb.Struct {
+	if x != nil {
+		return x.Extras
+	}
+	return nil
+}
+
+// UpdatePresenceResponse returns the updated presence.
+type UpdatePresenceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          *PresenceObject        `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"` // Updated presence object
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdatePresenceResponse) Reset() {
+	*x = UpdatePresenceResponse{}
+	mi := &file_device_v1_device_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePresenceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePresenceResponse) ProtoMessage() {}
+
+func (x *UpdatePresenceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_device_v1_device_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePresenceResponse.ProtoReflect.Descriptor instead.
+func (*UpdatePresenceResponse) Descriptor() ([]byte, []int) {
+	return file_device_v1_device_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *UpdatePresenceResponse) GetData() *PresenceObject {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+// NotifyRequest sends a notification to a device using one of its registered keys.
+// The service will select an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
+type NotifyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DeviceId      string                 `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`                      // Device ID to notify
+	KeyId         string                 `protobuf:"bytes,2,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`                               // Specific key ID to use (optional - if not provided, uses key_type to select)
+	KeyType       KeyType                `protobuf:"varint,3,opt,name=key_type,json=keyType,proto3,enum=device.v1.KeyType" json:"key_type,omitempty"` // Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
+	Title         string                 `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`                                            // Notification title
+	Body          string                 `protobuf:"bytes,5,opt,name=body,proto3" json:"body,omitempty"`                                              // Notification body/message
+	Data          *structpb.Struct       `protobuf:"bytes,6,opt,name=data,proto3" json:"data,omitempty"`                                              // Additional notification data/payload (custom data, actions, etc.)
+	Extras        *structpb.Struct       `protobuf:"bytes,7,opt,name=extras,proto3" json:"extras,omitempty"`                                          // Extra notification options (priority, TTL, badge, sound, etc.)
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NotifyRequest) Reset() {
+	*x = NotifyRequest{}
+	mi := &file_device_v1_device_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NotifyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NotifyRequest) ProtoMessage() {}
+
+func (x *NotifyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_device_v1_device_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NotifyRequest.ProtoReflect.Descriptor instead.
+func (*NotifyRequest) Descriptor() ([]byte, []int) {
+	return file_device_v1_device_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *NotifyRequest) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+func (x *NotifyRequest) GetKeyId() string {
+	if x != nil {
+		return x.KeyId
+	}
+	return ""
+}
+
+func (x *NotifyRequest) GetKeyType() KeyType {
+	if x != nil {
+		return x.KeyType
+	}
+	return KeyType_MATRIX_KEY
+}
+
+func (x *NotifyRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *NotifyRequest) GetBody() string {
+	if x != nil {
+		return x.Body
+	}
+	return ""
+}
+
+func (x *NotifyRequest) GetData() *structpb.Struct {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *NotifyRequest) GetExtras() *structpb.Struct {
+	if x != nil {
+		return x.Extras
+	}
+	return nil
+}
+
+// NotifyResponse confirms the notification was sent.
+type NotifyResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Success        bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`                                    // True if notification was successfully sent
+	Message        string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`                                     // Status message or error details
+	NotificationId string                 `protobuf:"bytes,3,opt,name=notification_id,json=notificationId,proto3" json:"notification_id,omitempty"` // Unique identifier for the sent notification (if provided by service)
+	Extras         *structpb.Struct       `protobuf:"bytes,4,opt,name=extras,proto3" json:"extras,omitempty"`                                       // Additional response metadata from notification service
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *NotifyResponse) Reset() {
+	*x = NotifyResponse{}
+	mi := &file_device_v1_device_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NotifyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NotifyResponse) ProtoMessage() {}
+
+func (x *NotifyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_device_v1_device_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NotifyResponse.ProtoReflect.Descriptor instead.
+func (*NotifyResponse) Descriptor() ([]byte, []int) {
+	return file_device_v1_device_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *NotifyResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *NotifyResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *NotifyResponse) GetNotificationId() string {
+	if x != nil {
+		return x.NotificationId
+	}
+	return ""
+}
+
+func (x *NotifyResponse) GetExtras() *structpb.Struct {
+	if x != nil {
+		return x.Extras
+	}
+	return nil
 }
 
 var File_device_v1_device_proto protoreflect.FileDescriptor
@@ -2105,7 +2542,7 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\tlast_seen\x18\b \x01(\tR\blastSeen\x123\n" +
 	"\blocation\x18\t \x01(\v2\x17.google.protobuf.StructR\blocation\x12-\n" +
 	"\x05extra\x18\n" +
-	" \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x82\x03\n" +
+	" \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xb9\x03\n" +
 	"\fDeviceObject\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
@@ -2118,11 +2555,24 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\tlast_seen\x18\a \x01(\tR\blastSeen\x12\x1d\n" +
 	"\n" +
 	"profile_id\x18\b \x01(\tR\tprofileId\x12)\n" +
-	"\x06locale\x18\t \x01(\v2\x11.device.v1.LocaleR\x06locale\x123\n" +
+	"\x06locale\x18\t \x01(\v2\x11.device.v1.LocaleR\x06locale\x125\n" +
+	"\bpresence\x18\n" +
+	" \x01(\x0e2\x19.device.v1.PresenceStatusR\bpresence\x123\n" +
 	"\blocation\x18\v \x01(\v2\x17.google.protobuf.StructR\blocation\x127\n" +
 	"\n" +
 	"properties\x18\x0f \x01(\v2\x17.google.protobuf.StructR\n" +
-	"properties\"`\n" +
+	"properties\"\xd1\x02\n" +
+	"\x0ePresenceObject\x128\n" +
+	"\tdevice_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x12:\n" +
+	"\n" +
+	"profile_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tprofileId\x121\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x19.device.v1.PresenceStatusR\x06status\x12%\n" +
+	"\x0estatus_message\x18\x04 \x01(\tR\rstatusMessage\x12\x1f\n" +
+	"\vlast_active\x18\x05 \x01(\tR\n" +
+	"lastActive\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\x06 \x01(\tR\tupdatedAt\x12/\n" +
+	"\x06extras\x18\a \x01(\v2\x17.google.protobuf.StructR\x06extras\"`\n" +
 	"\x0eGetByIdRequest\x120\n" +
 	"\x02id\x18\x01 \x03(\tB \xbaH\x1d\x92\x01\x1a\"\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1c\n" +
 	"\textensive\x18\x02 \x01(\bR\textensive\">\n" +
@@ -2225,7 +2675,27 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\"K\n" +
 	"\x15DeRegisterKeyResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage*s\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xdc\x01\n" +
+	"\x15UpdatePresenceRequest\x128\n" +
+	"\tdevice_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x121\n" +
+	"\x06status\x18\x02 \x01(\x0e2\x19.device.v1.PresenceStatusR\x06status\x12%\n" +
+	"\x0estatus_message\x18\x03 \x01(\tR\rstatusMessage\x12/\n" +
+	"\x06extras\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x06extras\"G\n" +
+	"\x16UpdatePresenceResponse\x12-\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.device.v1.PresenceObjectR\x04data\"\xb7\x02\n" +
+	"\rNotifyRequest\x128\n" +
+	"\tdevice_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\bdeviceId\x125\n" +
+	"\x06key_id\x18\x02 \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x05keyId\x12-\n" +
+	"\bkey_type\x18\x03 \x01(\x0e2\x12.device.v1.KeyTypeR\akeyType\x12\x14\n" +
+	"\x05title\x18\x04 \x01(\tR\x05title\x12\x12\n" +
+	"\x04body\x18\x05 \x01(\tR\x04body\x12+\n" +
+	"\x04data\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x04data\x12/\n" +
+	"\x06extras\x18\a \x01(\v2\x17.google.protobuf.StructR\x06extras\"\x9e\x01\n" +
+	"\x0eNotifyResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12'\n" +
+	"\x0fnotification_id\x18\x03 \x01(\tR\x0enotificationId\x12/\n" +
+	"\x06extras\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x06extras*s\n" +
 	"\aKeyType\x12\x0e\n" +
 	"\n" +
 	"MATRIX_KEY\x10\x00\x12\x14\n" +
@@ -2234,7 +2704,14 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\x0eCURVE25519_KEY\x10\x03\x12\x0f\n" +
 	"\vED25519_KEY\x10\x04\x12\x0e\n" +
 	"\n" +
-	"PICKLE_KEY\x10\x052\xf0!\n" +
+	"PICKLE_KEY\x10\x05*L\n" +
+	"\x0ePresenceStatus\x12\v\n" +
+	"\aOFFLINE\x10\x00\x12\n" +
+	"\n" +
+	"\x06ONLINE\x10\x01\x12\b\n" +
+	"\x04AWAY\x10\x02\x12\b\n" +
+	"\x04BUSY\x10\x03\x12\r\n" +
+	"\tINVISIBLE\x10\x042\xa7\"\n" +
 	"\rDeviceService\x12\x86\x02\n" +
 	"\aGetById\x12\x19.device.v1.GetByIdRequest\x1a\x1a.device.v1.GetByIdResponse\"\xc3\x01\xbaG\xbf\x01\n" +
 	"\aDevices\x12\x11Get devices by ID\x1a\x91\x01Retrieves one or more devices by their unique identifiers. Supports batch retrieval and optional extensive details including logs and key counts.*\rgetDeviceById\x12\x83\x02\n" +
@@ -2264,11 +2741,11 @@ const file_device_v1_device_proto_rawDesc = "" +
 	"\vRegisterKey\x12\x1d.device.v1.RegisterKeyRequest\x1a\x1e.device.v1.RegisterKeyResponse\"\xfd\x01\xbaG\xf9\x01\n" +
 	"\x10Key Registration\x12%Register key with third-party service\x1a\xb0\x01Registers a key or token with third-party services (like FCM for push notifications) and stores it. This method handles both the external service integration and local storage.*\vregisterKey\x12\xcc\x02\n" +
 	"\rDeRegisterKey\x12\x1f.device.v1.DeRegisterKeyRequest\x1a .device.v1.DeRegisterKeyResponse\"\xf7\x01\xbaG\xf3\x01\n" +
-	"\x10Key Registration\x12'DeRegister key from third-party service\x1a\xa6\x01DeRegisters a key or token from third-party services (like FCM) and removes it from storage. This method handles both the external service cleanup and local deletion.*\rdeRegisterKey\x12\xbe\x02\n" +
-	"\x17RegisterNotificationKey\x12\x1d.device.v1.RegisterKeyRequest\x1a\x1e.device.v1.RegisterKeyResponse\"\xe3\x01\xbaG\xdf\x01\n" +
-	"\x11Notification Keys\x12\x19Register notification key\x1a\x95\x01Registers a notification key for secure push notification delivery. This method integrates with notification services (APNs, FCM) and stores the key.*\x17registerNotificationKey\x12\xb0\x02\n" +
-	"\x19DeRegisterNotificationKey\x12\x1f.device.v1.DeRegisterKeyRequest\x1a .device.v1.DeRegisterKeyResponse\"\xcf\x01\xbaG\xcb\x01\n" +
-	"\x11Notification Keys\x12\x1bDeRegister notification key\x1a~DeRegisters a notification key from notification services and removes it from storage. Used when disabling push notifications.*\x19deRegisterNotificationKeyB\xec\a\xbaG\xc3\x06\x12\x97\x06\n" +
+	"\x10Key Registration\x12'DeRegister key from third-party service\x1a\xa6\x01DeRegisters a key or token from third-party services (like FCM) and removes it from storage. This method handles both the external service cleanup and local deletion.*\rdeRegisterKey\x12\xf6\x02\n" +
+	"\x06Notify\x12\x18.device.v1.NotifyRequest\x1a\x19.device.v1.NotifyResponse\"\xb6\x02\xbaG\xb2\x02\n" +
+	"\x14Device Notifications\x12\"Notify device using registered key\x1a\xe7\x01Sends a notification to a device using one of its registered keys (FCM token, notification key, etc.). The service automatically selects an appropriate active key based on the key_type, or uses a specific key if key_id is provided.*\fnotifyDevice\x12\xaf\x02\n" +
+	"\x0eUpdatePresence\x12 .device.v1.UpdatePresenceRequest\x1a!.device.v1.UpdatePresenceResponse\"\xd7\x01\xbaG\xd3\x01\n" +
+	"\x0fDevice Presence\x12\x16Update device presence\x1a\x97\x01Updates the presence status of a device. Used to indicate online/offline/away/busy status and track last activity for real-time communication features.*\x0eupdatePresenceB\xec\a\xbaG\xc3\x06\x12\x97\x06\n" +
 	"\x15Device Management API\x12\xd1\x04The Device Management API provides comprehensive device management capabilities including device registration, session tracking, and unified key/token management. The API uses a unified KeyObject model for all key types including FCM tokens, encryption keys (Curve25519, Ed25519, Pickle), Matrix keys, and notification keys. This enables applications to register and track user devices across platforms (mobile, web, desktop), manage push notification tokens, handle encryption keys for secure communications, and maintain detailed logs of device activity for security and compliance purposes.\"W\n" +
 	"\x10Ant Investor Ltd\x12-https://github.com/antinvestor/service-device\x1a\x14info@antinvestor.com*I\n" +
 	"\x0eApache License\x127https://github.com/antinvestor/apis/blob/master/LICENSE2\x06v1.0.0*':%\n" +
@@ -2292,112 +2769,128 @@ func file_device_v1_device_proto_rawDescGZIP() []byte {
 	return file_device_v1_device_proto_rawDescData
 }
 
-var file_device_v1_device_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_device_v1_device_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_device_v1_device_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_device_v1_device_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
 var file_device_v1_device_proto_goTypes = []any{
 	(KeyType)(0),                   // 0: device.v1.KeyType
-	(*Locale)(nil),                 // 1: device.v1.Locale
-	(*KeyObject)(nil),              // 2: device.v1.KeyObject
-	(*DeviceLog)(nil),              // 3: device.v1.DeviceLog
-	(*DeviceObject)(nil),           // 4: device.v1.DeviceObject
-	(*GetByIdRequest)(nil),         // 5: device.v1.GetByIdRequest
-	(*GetByIdResponse)(nil),        // 6: device.v1.GetByIdResponse
-	(*GetBySessionIdRequest)(nil),  // 7: device.v1.GetBySessionIdRequest
-	(*GetBySessionIdResponse)(nil), // 8: device.v1.GetBySessionIdResponse
-	(*SearchRequest)(nil),          // 9: device.v1.SearchRequest
-	(*SearchResponse)(nil),         // 10: device.v1.SearchResponse
-	(*CreateRequest)(nil),          // 11: device.v1.CreateRequest
-	(*CreateResponse)(nil),         // 12: device.v1.CreateResponse
-	(*UpdateRequest)(nil),          // 13: device.v1.UpdateRequest
-	(*UpdateResponse)(nil),         // 14: device.v1.UpdateResponse
-	(*LinkRequest)(nil),            // 15: device.v1.LinkRequest
-	(*LinkResponse)(nil),           // 16: device.v1.LinkResponse
-	(*RemoveRequest)(nil),          // 17: device.v1.RemoveRequest
-	(*RemoveResponse)(nil),         // 18: device.v1.RemoveResponse
-	(*LogRequest)(nil),             // 19: device.v1.LogRequest
-	(*LogResponse)(nil),            // 20: device.v1.LogResponse
-	(*ListLogsRequest)(nil),        // 21: device.v1.ListLogsRequest
-	(*ListLogsResponse)(nil),       // 22: device.v1.ListLogsResponse
-	(*AddKeyRequest)(nil),          // 23: device.v1.AddKeyRequest
-	(*AddKeyResponse)(nil),         // 24: device.v1.AddKeyResponse
-	(*RemoveKeyRequest)(nil),       // 25: device.v1.RemoveKeyRequest
-	(*RemoveKeyResponse)(nil),      // 26: device.v1.RemoveKeyResponse
-	(*SearchKeyRequest)(nil),       // 27: device.v1.SearchKeyRequest
-	(*SearchKeyResponse)(nil),      // 28: device.v1.SearchKeyResponse
-	(*RegisterKeyRequest)(nil),     // 29: device.v1.RegisterKeyRequest
-	(*RegisterKeyResponse)(nil),    // 30: device.v1.RegisterKeyResponse
-	(*DeRegisterKeyRequest)(nil),   // 31: device.v1.DeRegisterKeyRequest
-	(*DeRegisterKeyResponse)(nil),  // 32: device.v1.DeRegisterKeyResponse
-	(*structpb.Struct)(nil),        // 33: google.protobuf.Struct
+	(PresenceStatus)(0),            // 1: device.v1.PresenceStatus
+	(*Locale)(nil),                 // 2: device.v1.Locale
+	(*KeyObject)(nil),              // 3: device.v1.KeyObject
+	(*DeviceLog)(nil),              // 4: device.v1.DeviceLog
+	(*DeviceObject)(nil),           // 5: device.v1.DeviceObject
+	(*PresenceObject)(nil),         // 6: device.v1.PresenceObject
+	(*GetByIdRequest)(nil),         // 7: device.v1.GetByIdRequest
+	(*GetByIdResponse)(nil),        // 8: device.v1.GetByIdResponse
+	(*GetBySessionIdRequest)(nil),  // 9: device.v1.GetBySessionIdRequest
+	(*GetBySessionIdResponse)(nil), // 10: device.v1.GetBySessionIdResponse
+	(*SearchRequest)(nil),          // 11: device.v1.SearchRequest
+	(*SearchResponse)(nil),         // 12: device.v1.SearchResponse
+	(*CreateRequest)(nil),          // 13: device.v1.CreateRequest
+	(*CreateResponse)(nil),         // 14: device.v1.CreateResponse
+	(*UpdateRequest)(nil),          // 15: device.v1.UpdateRequest
+	(*UpdateResponse)(nil),         // 16: device.v1.UpdateResponse
+	(*LinkRequest)(nil),            // 17: device.v1.LinkRequest
+	(*LinkResponse)(nil),           // 18: device.v1.LinkResponse
+	(*RemoveRequest)(nil),          // 19: device.v1.RemoveRequest
+	(*RemoveResponse)(nil),         // 20: device.v1.RemoveResponse
+	(*LogRequest)(nil),             // 21: device.v1.LogRequest
+	(*LogResponse)(nil),            // 22: device.v1.LogResponse
+	(*ListLogsRequest)(nil),        // 23: device.v1.ListLogsRequest
+	(*ListLogsResponse)(nil),       // 24: device.v1.ListLogsResponse
+	(*AddKeyRequest)(nil),          // 25: device.v1.AddKeyRequest
+	(*AddKeyResponse)(nil),         // 26: device.v1.AddKeyResponse
+	(*RemoveKeyRequest)(nil),       // 27: device.v1.RemoveKeyRequest
+	(*RemoveKeyResponse)(nil),      // 28: device.v1.RemoveKeyResponse
+	(*SearchKeyRequest)(nil),       // 29: device.v1.SearchKeyRequest
+	(*SearchKeyResponse)(nil),      // 30: device.v1.SearchKeyResponse
+	(*RegisterKeyRequest)(nil),     // 31: device.v1.RegisterKeyRequest
+	(*RegisterKeyResponse)(nil),    // 32: device.v1.RegisterKeyResponse
+	(*DeRegisterKeyRequest)(nil),   // 33: device.v1.DeRegisterKeyRequest
+	(*DeRegisterKeyResponse)(nil),  // 34: device.v1.DeRegisterKeyResponse
+	(*UpdatePresenceRequest)(nil),  // 35: device.v1.UpdatePresenceRequest
+	(*UpdatePresenceResponse)(nil), // 36: device.v1.UpdatePresenceResponse
+	(*NotifyRequest)(nil),          // 37: device.v1.NotifyRequest
+	(*NotifyResponse)(nil),         // 38: device.v1.NotifyResponse
+	(*structpb.Struct)(nil),        // 39: google.protobuf.Struct
 }
 var file_device_v1_device_proto_depIdxs = []int32{
 	0,  // 0: device.v1.KeyObject.key_type:type_name -> device.v1.KeyType
-	33, // 1: device.v1.KeyObject.extra:type_name -> google.protobuf.Struct
-	1,  // 2: device.v1.DeviceLog.locale:type_name -> device.v1.Locale
-	33, // 3: device.v1.DeviceLog.location:type_name -> google.protobuf.Struct
-	33, // 4: device.v1.DeviceLog.extra:type_name -> google.protobuf.Struct
-	1,  // 5: device.v1.DeviceObject.locale:type_name -> device.v1.Locale
-	33, // 6: device.v1.DeviceObject.location:type_name -> google.protobuf.Struct
-	33, // 7: device.v1.DeviceObject.properties:type_name -> google.protobuf.Struct
-	4,  // 8: device.v1.GetByIdResponse.data:type_name -> device.v1.DeviceObject
-	4,  // 9: device.v1.GetBySessionIdResponse.data:type_name -> device.v1.DeviceObject
-	33, // 10: device.v1.SearchRequest.extras:type_name -> google.protobuf.Struct
-	4,  // 11: device.v1.SearchResponse.data:type_name -> device.v1.DeviceObject
-	33, // 12: device.v1.CreateRequest.properties:type_name -> google.protobuf.Struct
-	4,  // 13: device.v1.CreateResponse.data:type_name -> device.v1.DeviceObject
-	33, // 14: device.v1.UpdateRequest.properties:type_name -> google.protobuf.Struct
-	4,  // 15: device.v1.UpdateResponse.data:type_name -> device.v1.DeviceObject
-	33, // 16: device.v1.LinkRequest.properties:type_name -> google.protobuf.Struct
-	4,  // 17: device.v1.LinkResponse.data:type_name -> device.v1.DeviceObject
-	4,  // 18: device.v1.RemoveResponse.data:type_name -> device.v1.DeviceObject
-	33, // 19: device.v1.LogRequest.extras:type_name -> google.protobuf.Struct
-	3,  // 20: device.v1.LogResponse.data:type_name -> device.v1.DeviceLog
-	3,  // 21: device.v1.ListLogsResponse.data:type_name -> device.v1.DeviceLog
-	0,  // 22: device.v1.AddKeyRequest.key_type:type_name -> device.v1.KeyType
-	33, // 23: device.v1.AddKeyRequest.extras:type_name -> google.protobuf.Struct
-	2,  // 24: device.v1.AddKeyResponse.data:type_name -> device.v1.KeyObject
-	0,  // 25: device.v1.SearchKeyRequest.key_types:type_name -> device.v1.KeyType
-	2,  // 26: device.v1.SearchKeyResponse.data:type_name -> device.v1.KeyObject
-	0,  // 27: device.v1.RegisterKeyRequest.key_type:type_name -> device.v1.KeyType
-	33, // 28: device.v1.RegisterKeyRequest.extras:type_name -> google.protobuf.Struct
-	2,  // 29: device.v1.RegisterKeyResponse.data:type_name -> device.v1.KeyObject
-	5,  // 30: device.v1.DeviceService.GetById:input_type -> device.v1.GetByIdRequest
-	7,  // 31: device.v1.DeviceService.GetBySessionId:input_type -> device.v1.GetBySessionIdRequest
-	9,  // 32: device.v1.DeviceService.Search:input_type -> device.v1.SearchRequest
-	11, // 33: device.v1.DeviceService.Create:input_type -> device.v1.CreateRequest
-	13, // 34: device.v1.DeviceService.Update:input_type -> device.v1.UpdateRequest
-	15, // 35: device.v1.DeviceService.Link:input_type -> device.v1.LinkRequest
-	17, // 36: device.v1.DeviceService.Remove:input_type -> device.v1.RemoveRequest
-	19, // 37: device.v1.DeviceService.Log:input_type -> device.v1.LogRequest
-	21, // 38: device.v1.DeviceService.ListLogs:input_type -> device.v1.ListLogsRequest
-	23, // 39: device.v1.DeviceService.AddKey:input_type -> device.v1.AddKeyRequest
-	25, // 40: device.v1.DeviceService.RemoveKey:input_type -> device.v1.RemoveKeyRequest
-	27, // 41: device.v1.DeviceService.SearchKey:input_type -> device.v1.SearchKeyRequest
-	29, // 42: device.v1.DeviceService.RegisterKey:input_type -> device.v1.RegisterKeyRequest
-	31, // 43: device.v1.DeviceService.DeRegisterKey:input_type -> device.v1.DeRegisterKeyRequest
-	29, // 44: device.v1.DeviceService.RegisterNotificationKey:input_type -> device.v1.RegisterKeyRequest
-	31, // 45: device.v1.DeviceService.DeRegisterNotificationKey:input_type -> device.v1.DeRegisterKeyRequest
-	6,  // 46: device.v1.DeviceService.GetById:output_type -> device.v1.GetByIdResponse
-	8,  // 47: device.v1.DeviceService.GetBySessionId:output_type -> device.v1.GetBySessionIdResponse
-	10, // 48: device.v1.DeviceService.Search:output_type -> device.v1.SearchResponse
-	12, // 49: device.v1.DeviceService.Create:output_type -> device.v1.CreateResponse
-	14, // 50: device.v1.DeviceService.Update:output_type -> device.v1.UpdateResponse
-	16, // 51: device.v1.DeviceService.Link:output_type -> device.v1.LinkResponse
-	18, // 52: device.v1.DeviceService.Remove:output_type -> device.v1.RemoveResponse
-	20, // 53: device.v1.DeviceService.Log:output_type -> device.v1.LogResponse
-	22, // 54: device.v1.DeviceService.ListLogs:output_type -> device.v1.ListLogsResponse
-	24, // 55: device.v1.DeviceService.AddKey:output_type -> device.v1.AddKeyResponse
-	26, // 56: device.v1.DeviceService.RemoveKey:output_type -> device.v1.RemoveKeyResponse
-	28, // 57: device.v1.DeviceService.SearchKey:output_type -> device.v1.SearchKeyResponse
-	30, // 58: device.v1.DeviceService.RegisterKey:output_type -> device.v1.RegisterKeyResponse
-	32, // 59: device.v1.DeviceService.DeRegisterKey:output_type -> device.v1.DeRegisterKeyResponse
-	30, // 60: device.v1.DeviceService.RegisterNotificationKey:output_type -> device.v1.RegisterKeyResponse
-	32, // 61: device.v1.DeviceService.DeRegisterNotificationKey:output_type -> device.v1.DeRegisterKeyResponse
-	46, // [46:62] is the sub-list for method output_type
-	30, // [30:46] is the sub-list for method input_type
-	30, // [30:30] is the sub-list for extension type_name
-	30, // [30:30] is the sub-list for extension extendee
-	0,  // [0:30] is the sub-list for field type_name
+	39, // 1: device.v1.KeyObject.extra:type_name -> google.protobuf.Struct
+	2,  // 2: device.v1.DeviceLog.locale:type_name -> device.v1.Locale
+	39, // 3: device.v1.DeviceLog.location:type_name -> google.protobuf.Struct
+	39, // 4: device.v1.DeviceLog.extra:type_name -> google.protobuf.Struct
+	2,  // 5: device.v1.DeviceObject.locale:type_name -> device.v1.Locale
+	1,  // 6: device.v1.DeviceObject.presence:type_name -> device.v1.PresenceStatus
+	39, // 7: device.v1.DeviceObject.location:type_name -> google.protobuf.Struct
+	39, // 8: device.v1.DeviceObject.properties:type_name -> google.protobuf.Struct
+	1,  // 9: device.v1.PresenceObject.status:type_name -> device.v1.PresenceStatus
+	39, // 10: device.v1.PresenceObject.extras:type_name -> google.protobuf.Struct
+	5,  // 11: device.v1.GetByIdResponse.data:type_name -> device.v1.DeviceObject
+	5,  // 12: device.v1.GetBySessionIdResponse.data:type_name -> device.v1.DeviceObject
+	39, // 13: device.v1.SearchRequest.extras:type_name -> google.protobuf.Struct
+	5,  // 14: device.v1.SearchResponse.data:type_name -> device.v1.DeviceObject
+	39, // 15: device.v1.CreateRequest.properties:type_name -> google.protobuf.Struct
+	5,  // 16: device.v1.CreateResponse.data:type_name -> device.v1.DeviceObject
+	39, // 17: device.v1.UpdateRequest.properties:type_name -> google.protobuf.Struct
+	5,  // 18: device.v1.UpdateResponse.data:type_name -> device.v1.DeviceObject
+	39, // 19: device.v1.LinkRequest.properties:type_name -> google.protobuf.Struct
+	5,  // 20: device.v1.LinkResponse.data:type_name -> device.v1.DeviceObject
+	5,  // 21: device.v1.RemoveResponse.data:type_name -> device.v1.DeviceObject
+	39, // 22: device.v1.LogRequest.extras:type_name -> google.protobuf.Struct
+	4,  // 23: device.v1.LogResponse.data:type_name -> device.v1.DeviceLog
+	4,  // 24: device.v1.ListLogsResponse.data:type_name -> device.v1.DeviceLog
+	0,  // 25: device.v1.AddKeyRequest.key_type:type_name -> device.v1.KeyType
+	39, // 26: device.v1.AddKeyRequest.extras:type_name -> google.protobuf.Struct
+	3,  // 27: device.v1.AddKeyResponse.data:type_name -> device.v1.KeyObject
+	0,  // 28: device.v1.SearchKeyRequest.key_types:type_name -> device.v1.KeyType
+	3,  // 29: device.v1.SearchKeyResponse.data:type_name -> device.v1.KeyObject
+	0,  // 30: device.v1.RegisterKeyRequest.key_type:type_name -> device.v1.KeyType
+	39, // 31: device.v1.RegisterKeyRequest.extras:type_name -> google.protobuf.Struct
+	3,  // 32: device.v1.RegisterKeyResponse.data:type_name -> device.v1.KeyObject
+	1,  // 33: device.v1.UpdatePresenceRequest.status:type_name -> device.v1.PresenceStatus
+	39, // 34: device.v1.UpdatePresenceRequest.extras:type_name -> google.protobuf.Struct
+	6,  // 35: device.v1.UpdatePresenceResponse.data:type_name -> device.v1.PresenceObject
+	0,  // 36: device.v1.NotifyRequest.key_type:type_name -> device.v1.KeyType
+	39, // 37: device.v1.NotifyRequest.data:type_name -> google.protobuf.Struct
+	39, // 38: device.v1.NotifyRequest.extras:type_name -> google.protobuf.Struct
+	39, // 39: device.v1.NotifyResponse.extras:type_name -> google.protobuf.Struct
+	7,  // 40: device.v1.DeviceService.GetById:input_type -> device.v1.GetByIdRequest
+	9,  // 41: device.v1.DeviceService.GetBySessionId:input_type -> device.v1.GetBySessionIdRequest
+	11, // 42: device.v1.DeviceService.Search:input_type -> device.v1.SearchRequest
+	13, // 43: device.v1.DeviceService.Create:input_type -> device.v1.CreateRequest
+	15, // 44: device.v1.DeviceService.Update:input_type -> device.v1.UpdateRequest
+	17, // 45: device.v1.DeviceService.Link:input_type -> device.v1.LinkRequest
+	19, // 46: device.v1.DeviceService.Remove:input_type -> device.v1.RemoveRequest
+	21, // 47: device.v1.DeviceService.Log:input_type -> device.v1.LogRequest
+	23, // 48: device.v1.DeviceService.ListLogs:input_type -> device.v1.ListLogsRequest
+	25, // 49: device.v1.DeviceService.AddKey:input_type -> device.v1.AddKeyRequest
+	27, // 50: device.v1.DeviceService.RemoveKey:input_type -> device.v1.RemoveKeyRequest
+	29, // 51: device.v1.DeviceService.SearchKey:input_type -> device.v1.SearchKeyRequest
+	31, // 52: device.v1.DeviceService.RegisterKey:input_type -> device.v1.RegisterKeyRequest
+	33, // 53: device.v1.DeviceService.DeRegisterKey:input_type -> device.v1.DeRegisterKeyRequest
+	37, // 54: device.v1.DeviceService.Notify:input_type -> device.v1.NotifyRequest
+	35, // 55: device.v1.DeviceService.UpdatePresence:input_type -> device.v1.UpdatePresenceRequest
+	8,  // 56: device.v1.DeviceService.GetById:output_type -> device.v1.GetByIdResponse
+	10, // 57: device.v1.DeviceService.GetBySessionId:output_type -> device.v1.GetBySessionIdResponse
+	12, // 58: device.v1.DeviceService.Search:output_type -> device.v1.SearchResponse
+	14, // 59: device.v1.DeviceService.Create:output_type -> device.v1.CreateResponse
+	16, // 60: device.v1.DeviceService.Update:output_type -> device.v1.UpdateResponse
+	18, // 61: device.v1.DeviceService.Link:output_type -> device.v1.LinkResponse
+	20, // 62: device.v1.DeviceService.Remove:output_type -> device.v1.RemoveResponse
+	22, // 63: device.v1.DeviceService.Log:output_type -> device.v1.LogResponse
+	24, // 64: device.v1.DeviceService.ListLogs:output_type -> device.v1.ListLogsResponse
+	26, // 65: device.v1.DeviceService.AddKey:output_type -> device.v1.AddKeyResponse
+	28, // 66: device.v1.DeviceService.RemoveKey:output_type -> device.v1.RemoveKeyResponse
+	30, // 67: device.v1.DeviceService.SearchKey:output_type -> device.v1.SearchKeyResponse
+	32, // 68: device.v1.DeviceService.RegisterKey:output_type -> device.v1.RegisterKeyResponse
+	34, // 69: device.v1.DeviceService.DeRegisterKey:output_type -> device.v1.DeRegisterKeyResponse
+	38, // 70: device.v1.DeviceService.Notify:output_type -> device.v1.NotifyResponse
+	36, // 71: device.v1.DeviceService.UpdatePresence:output_type -> device.v1.UpdatePresenceResponse
+	56, // [56:72] is the sub-list for method output_type
+	40, // [40:56] is the sub-list for method input_type
+	40, // [40:40] is the sub-list for extension type_name
+	40, // [40:40] is the sub-list for extension extendee
+	0,  // [0:40] is the sub-list for field type_name
 }
 
 func init() { file_device_v1_device_proto_init() }
@@ -2410,8 +2903,8 @@ func file_device_v1_device_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_device_v1_device_proto_rawDesc), len(file_device_v1_device_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   32,
+			NumEnums:      2,
+			NumMessages:   37,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

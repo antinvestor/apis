@@ -462,6 +462,7 @@ class DeviceObject extends $pb.GeneratedMessage {
     $core.String? lastSeen,
     $core.String? profileId,
     Locale? locale,
+    PresenceStatus? presence,
     $0.Struct? location,
     $0.Struct? properties,
   }) {
@@ -475,6 +476,7 @@ class DeviceObject extends $pb.GeneratedMessage {
     if (lastSeen != null) result.lastSeen = lastSeen;
     if (profileId != null) result.profileId = profileId;
     if (locale != null) result.locale = locale;
+    if (presence != null) result.presence = presence;
     if (location != null) result.location = location;
     if (properties != null) result.properties = properties;
     return result;
@@ -502,6 +504,8 @@ class DeviceObject extends $pb.GeneratedMessage {
     ..aOS(7, _omitFieldNames ? '' : 'lastSeen')
     ..aOS(8, _omitFieldNames ? '' : 'profileId')
     ..aOM<Locale>(9, _omitFieldNames ? '' : 'locale', subBuilder: Locale.create)
+    ..aE<PresenceStatus>(10, _omitFieldNames ? '' : 'presence',
+        enumValues: PresenceStatus.values)
     ..aOM<$0.Struct>(11, _omitFieldNames ? '' : 'location',
         subBuilder: $0.Struct.create)
     ..aOM<$0.Struct>(15, _omitFieldNames ? '' : 'properties',
@@ -612,27 +616,170 @@ class DeviceObject extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   Locale ensureLocale() => $_ensure(8);
 
+  @$pb.TagNumber(10)
+  PresenceStatus get presence => $_getN(9);
+  @$pb.TagNumber(10)
+  set presence(PresenceStatus value) => $_setField(10, value);
+  @$pb.TagNumber(10)
+  $core.bool hasPresence() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearPresence() => $_clearField(10);
+
   @$pb.TagNumber(11)
-  $0.Struct get location => $_getN(9);
+  $0.Struct get location => $_getN(10);
   @$pb.TagNumber(11)
   set location($0.Struct value) => $_setField(11, value);
   @$pb.TagNumber(11)
-  $core.bool hasLocation() => $_has(9);
+  $core.bool hasLocation() => $_has(10);
   @$pb.TagNumber(11)
   void clearLocation() => $_clearField(11);
   @$pb.TagNumber(11)
-  $0.Struct ensureLocation() => $_ensure(9);
+  $0.Struct ensureLocation() => $_ensure(10);
 
   @$pb.TagNumber(15)
-  $0.Struct get properties => $_getN(10);
+  $0.Struct get properties => $_getN(11);
   @$pb.TagNumber(15)
   set properties($0.Struct value) => $_setField(15, value);
   @$pb.TagNumber(15)
-  $core.bool hasProperties() => $_has(10);
+  $core.bool hasProperties() => $_has(11);
   @$pb.TagNumber(15)
   void clearProperties() => $_clearField(15);
   @$pb.TagNumber(15)
-  $0.Struct ensureProperties() => $_ensure(10);
+  $0.Struct ensureProperties() => $_ensure(11);
+}
+
+/// PresenceObject represents the presence/availability status of a device.
+/// Tracks online/offline status and last activity for real-time communication features.
+class PresenceObject extends $pb.GeneratedMessage {
+  factory PresenceObject({
+    $core.String? deviceId,
+    $core.String? profileId,
+    PresenceStatus? status,
+    $core.String? statusMessage,
+    $core.String? lastActive,
+    $core.String? updatedAt,
+    $0.Struct? extras,
+  }) {
+    final result = create();
+    if (deviceId != null) result.deviceId = deviceId;
+    if (profileId != null) result.profileId = profileId;
+    if (status != null) result.status = status;
+    if (statusMessage != null) result.statusMessage = statusMessage;
+    if (lastActive != null) result.lastActive = lastActive;
+    if (updatedAt != null) result.updatedAt = updatedAt;
+    if (extras != null) result.extras = extras;
+    return result;
+  }
+
+  PresenceObject._();
+
+  factory PresenceObject.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory PresenceObject.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'PresenceObject',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'deviceId')
+    ..aOS(2, _omitFieldNames ? '' : 'profileId')
+    ..aE<PresenceStatus>(3, _omitFieldNames ? '' : 'status',
+        enumValues: PresenceStatus.values)
+    ..aOS(4, _omitFieldNames ? '' : 'statusMessage')
+    ..aOS(5, _omitFieldNames ? '' : 'lastActive')
+    ..aOS(6, _omitFieldNames ? '' : 'updatedAt')
+    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'extras',
+        subBuilder: $0.Struct.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PresenceObject clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PresenceObject copyWith(void Function(PresenceObject) updates) =>
+      super.copyWith((message) => updates(message as PresenceObject))
+          as PresenceObject;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PresenceObject create() => PresenceObject._();
+  @$core.override
+  PresenceObject createEmptyInstance() => create();
+  static $pb.PbList<PresenceObject> createRepeated() =>
+      $pb.PbList<PresenceObject>();
+  @$core.pragma('dart2js:noInline')
+  static PresenceObject getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PresenceObject>(create);
+  static PresenceObject? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get deviceId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set deviceId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasDeviceId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDeviceId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get profileId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set profileId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasProfileId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfileId() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  PresenceStatus get status => $_getN(2);
+  @$pb.TagNumber(3)
+  set status(PresenceStatus value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStatus() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStatus() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get statusMessage => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set statusMessage($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasStatusMessage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearStatusMessage() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get lastActive => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set lastActive($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasLastActive() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearLastActive() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get updatedAt => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set updatedAt($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasUpdatedAt() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearUpdatedAt() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $0.Struct get extras => $_getN(6);
+  @$pb.TagNumber(7)
+  set extras($0.Struct value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasExtras() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearExtras() => $_clearField(7);
+  @$pb.TagNumber(7)
+  $0.Struct ensureExtras() => $_ensure(6);
 }
 
 /// GetByIdRequest retrieves one or more devices by their unique identifiers.
@@ -2638,6 +2785,398 @@ class DeRegisterKeyResponse extends $pb.GeneratedMessage {
   void clearMessage() => $_clearField(2);
 }
 
+/// UpdatePresenceRequest updates the presence status of a device.
+class UpdatePresenceRequest extends $pb.GeneratedMessage {
+  factory UpdatePresenceRequest({
+    $core.String? deviceId,
+    PresenceStatus? status,
+    $core.String? statusMessage,
+    $0.Struct? extras,
+  }) {
+    final result = create();
+    if (deviceId != null) result.deviceId = deviceId;
+    if (status != null) result.status = status;
+    if (statusMessage != null) result.statusMessage = statusMessage;
+    if (extras != null) result.extras = extras;
+    return result;
+  }
+
+  UpdatePresenceRequest._();
+
+  factory UpdatePresenceRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory UpdatePresenceRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'UpdatePresenceRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'deviceId')
+    ..aE<PresenceStatus>(2, _omitFieldNames ? '' : 'status',
+        enumValues: PresenceStatus.values)
+    ..aOS(3, _omitFieldNames ? '' : 'statusMessage')
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'extras',
+        subBuilder: $0.Struct.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdatePresenceRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdatePresenceRequest copyWith(
+          void Function(UpdatePresenceRequest) updates) =>
+      super.copyWith((message) => updates(message as UpdatePresenceRequest))
+          as UpdatePresenceRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdatePresenceRequest create() => UpdatePresenceRequest._();
+  @$core.override
+  UpdatePresenceRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdatePresenceRequest> createRepeated() =>
+      $pb.PbList<UpdatePresenceRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdatePresenceRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdatePresenceRequest>(create);
+  static UpdatePresenceRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get deviceId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set deviceId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasDeviceId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDeviceId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  PresenceStatus get status => $_getN(1);
+  @$pb.TagNumber(2)
+  set status(PresenceStatus value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasStatus() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearStatus() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get statusMessage => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set statusMessage($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStatusMessage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStatusMessage() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $0.Struct get extras => $_getN(3);
+  @$pb.TagNumber(4)
+  set extras($0.Struct value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasExtras() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExtras() => $_clearField(4);
+  @$pb.TagNumber(4)
+  $0.Struct ensureExtras() => $_ensure(3);
+}
+
+/// UpdatePresenceResponse returns the updated presence.
+class UpdatePresenceResponse extends $pb.GeneratedMessage {
+  factory UpdatePresenceResponse({
+    PresenceObject? data,
+  }) {
+    final result = create();
+    if (data != null) result.data = data;
+    return result;
+  }
+
+  UpdatePresenceResponse._();
+
+  factory UpdatePresenceResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory UpdatePresenceResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'UpdatePresenceResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'),
+      createEmptyInstance: create)
+    ..aOM<PresenceObject>(1, _omitFieldNames ? '' : 'data',
+        subBuilder: PresenceObject.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdatePresenceResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdatePresenceResponse copyWith(
+          void Function(UpdatePresenceResponse) updates) =>
+      super.copyWith((message) => updates(message as UpdatePresenceResponse))
+          as UpdatePresenceResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdatePresenceResponse create() => UpdatePresenceResponse._();
+  @$core.override
+  UpdatePresenceResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdatePresenceResponse> createRepeated() =>
+      $pb.PbList<UpdatePresenceResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdatePresenceResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdatePresenceResponse>(create);
+  static UpdatePresenceResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  PresenceObject get data => $_getN(0);
+  @$pb.TagNumber(1)
+  set data(PresenceObject value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasData() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearData() => $_clearField(1);
+  @$pb.TagNumber(1)
+  PresenceObject ensureData() => $_ensure(0);
+}
+
+/// NotifyRequest sends a notification to a device using one of its registered keys.
+/// The service will select an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
+class NotifyRequest extends $pb.GeneratedMessage {
+  factory NotifyRequest({
+    $core.String? deviceId,
+    $core.String? keyId,
+    KeyType? keyType,
+    $core.String? title,
+    $core.String? body,
+    $0.Struct? data,
+    $0.Struct? extras,
+  }) {
+    final result = create();
+    if (deviceId != null) result.deviceId = deviceId;
+    if (keyId != null) result.keyId = keyId;
+    if (keyType != null) result.keyType = keyType;
+    if (title != null) result.title = title;
+    if (body != null) result.body = body;
+    if (data != null) result.data = data;
+    if (extras != null) result.extras = extras;
+    return result;
+  }
+
+  NotifyRequest._();
+
+  factory NotifyRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory NotifyRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'NotifyRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'deviceId')
+    ..aOS(2, _omitFieldNames ? '' : 'keyId')
+    ..aE<KeyType>(3, _omitFieldNames ? '' : 'keyType',
+        enumValues: KeyType.values)
+    ..aOS(4, _omitFieldNames ? '' : 'title')
+    ..aOS(5, _omitFieldNames ? '' : 'body')
+    ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'data',
+        subBuilder: $0.Struct.create)
+    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'extras',
+        subBuilder: $0.Struct.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NotifyRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NotifyRequest copyWith(void Function(NotifyRequest) updates) =>
+      super.copyWith((message) => updates(message as NotifyRequest))
+          as NotifyRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static NotifyRequest create() => NotifyRequest._();
+  @$core.override
+  NotifyRequest createEmptyInstance() => create();
+  static $pb.PbList<NotifyRequest> createRepeated() =>
+      $pb.PbList<NotifyRequest>();
+  @$core.pragma('dart2js:noInline')
+  static NotifyRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NotifyRequest>(create);
+  static NotifyRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get deviceId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set deviceId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasDeviceId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDeviceId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get keyId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set keyId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasKeyId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearKeyId() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  KeyType get keyType => $_getN(2);
+  @$pb.TagNumber(3)
+  set keyType(KeyType value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasKeyType() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearKeyType() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get title => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set title($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasTitle() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTitle() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get body => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set body($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasBody() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBody() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $0.Struct get data => $_getN(5);
+  @$pb.TagNumber(6)
+  set data($0.Struct value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasData() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearData() => $_clearField(6);
+  @$pb.TagNumber(6)
+  $0.Struct ensureData() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  $0.Struct get extras => $_getN(6);
+  @$pb.TagNumber(7)
+  set extras($0.Struct value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasExtras() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearExtras() => $_clearField(7);
+  @$pb.TagNumber(7)
+  $0.Struct ensureExtras() => $_ensure(6);
+}
+
+/// NotifyResponse confirms the notification was sent.
+class NotifyResponse extends $pb.GeneratedMessage {
+  factory NotifyResponse({
+    $core.bool? success,
+    $core.String? message,
+    $core.String? notificationId,
+    $0.Struct? extras,
+  }) {
+    final result = create();
+    if (success != null) result.success = success;
+    if (message != null) result.message = message;
+    if (notificationId != null) result.notificationId = notificationId;
+    if (extras != null) result.extras = extras;
+    return result;
+  }
+
+  NotifyResponse._();
+
+  factory NotifyResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory NotifyResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'NotifyResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'),
+      createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..aOS(2, _omitFieldNames ? '' : 'message')
+    ..aOS(3, _omitFieldNames ? '' : 'notificationId')
+    ..aOM<$0.Struct>(4, _omitFieldNames ? '' : 'extras',
+        subBuilder: $0.Struct.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NotifyResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NotifyResponse copyWith(void Function(NotifyResponse) updates) =>
+      super.copyWith((message) => updates(message as NotifyResponse))
+          as NotifyResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static NotifyResponse create() => NotifyResponse._();
+  @$core.override
+  NotifyResponse createEmptyInstance() => create();
+  static $pb.PbList<NotifyResponse> createRepeated() =>
+      $pb.PbList<NotifyResponse>();
+  @$core.pragma('dart2js:noInline')
+  static NotifyResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NotifyResponse>(create);
+  static NotifyResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get success => $_getBF(0);
+  @$pb.TagNumber(1)
+  set success($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSuccess() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSuccess() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get message => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set message($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMessage() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get notificationId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set notificationId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasNotificationId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearNotificationId() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $0.Struct get extras => $_getN(3);
+  @$pb.TagNumber(4)
+  set extras($0.Struct value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasExtras() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExtras() => $_clearField(4);
+  @$pb.TagNumber(4)
+  $0.Struct ensureExtras() => $_ensure(3);
+}
+
 /// DeviceService provides core device management and key/token management.
 /// All RPCs require authentication via Bearer token unless otherwise specified.
 class DeviceServiceApi {
@@ -2707,13 +3246,15 @@ class DeviceServiceApi {
       _client.invoke<ListLogsResponse>(
           ctx, 'DeviceService', 'ListLogs', request, ListLogsResponse());
 
-  /// AddKey adds a key or token to a device (FCM tokens, encryption keys, etc.).
+  /// AddKey stores a key or token and its material in the local storage for a device.
+  /// This is used for keys generated by the service or when the service needs to manage the key material directly.
   $async.Future<AddKeyResponse> addKey(
           $pb.ClientContext? ctx, AddKeyRequest request) =>
       _client.invoke<AddKeyResponse>(
           ctx, 'DeviceService', 'AddKey', request, AddKeyResponse());
 
-  /// RemoveKey removes keys or tokens from a device.
+  /// RemoveKey removes one or more keys or tokens from local storage.
+  /// This does not handle deregistration from third-party services. For that, use DeRegisterKey.
   $async.Future<RemoveKeyResponse> removeKey(
           $pb.ClientContext? ctx, RemoveKeyRequest request) =>
       _client.invoke<RemoveKeyResponse>(
@@ -2725,33 +3266,35 @@ class DeviceServiceApi {
       _client.invoke<SearchKeyResponse>(
           ctx, 'DeviceService', 'SearchKey', request, SearchKeyResponse());
 
-  /// RegisterKey registers a key with third-party services (e.g., FCM, APNs).
-  /// This handles integration with external services and stores the key.
+  /// RegisterKey registers a key with a third-party service using an externally-generated key or token.
+  /// This method handles the integration with the external service and stores metadata about the key,
+  /// but not the key material itself. Use AddKey to store key material.
   $async.Future<RegisterKeyResponse> registerKey(
           $pb.ClientContext? ctx, RegisterKeyRequest request) =>
       _client.invoke<RegisterKeyResponse>(
           ctx, 'DeviceService', 'RegisterKey', request, RegisterKeyResponse());
 
-  /// DeRegisterKey deregisters a key from third-party services.
-  /// This handles cleanup with external services and removes the key.
+  /// DeRegisterKey deregisters a key from a third-party service.
+  /// This handles cleanup with the external service and removes the associated key metadata from local storage.
   $async.Future<DeRegisterKeyResponse> deRegisterKey(
           $pb.ClientContext? ctx, DeRegisterKeyRequest request) =>
       _client.invoke<DeRegisterKeyResponse>(ctx, 'DeviceService',
           'DeRegisterKey', request, DeRegisterKeyResponse());
 
-  /// RegisterNotificationKey registers a notification key for push notifications.
-  /// This integrates with notification services and stores the key.
-  $async.Future<RegisterKeyResponse> registerNotificationKey(
-          $pb.ClientContext? ctx, RegisterKeyRequest request) =>
-      _client.invoke<RegisterKeyResponse>(ctx, 'DeviceService',
-          'RegisterNotificationKey', request, RegisterKeyResponse());
+  /// Notify sends a notification to a device using one of its registered keys.
+  /// The service selects an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
+  /// If key_id is provided, that specific key will be used; otherwise the service selects the best available key.
+  $async.Future<NotifyResponse> notify(
+          $pb.ClientContext? ctx, NotifyRequest request) =>
+      _client.invoke<NotifyResponse>(
+          ctx, 'DeviceService', 'Notify', request, NotifyResponse());
 
-  /// DeRegisterNotificationKey deregisters a notification key.
-  /// This removes the key from notification services and local storage.
-  $async.Future<DeRegisterKeyResponse> deRegisterNotificationKey(
-          $pb.ClientContext? ctx, DeRegisterKeyRequest request) =>
-      _client.invoke<DeRegisterKeyResponse>(ctx, 'DeviceService',
-          'DeRegisterNotificationKey', request, DeRegisterKeyResponse());
+  /// UpdatePresence updates the presence status of a device.
+  /// Used to track online/offline status and availability for real-time features.
+  $async.Future<UpdatePresenceResponse> updatePresence(
+          $pb.ClientContext? ctx, UpdatePresenceRequest request) =>
+      _client.invoke<UpdatePresenceResponse>(ctx, 'DeviceService',
+          'UpdatePresence', request, UpdatePresenceResponse());
 }
 
 const $core.bool _omitFieldNames =
