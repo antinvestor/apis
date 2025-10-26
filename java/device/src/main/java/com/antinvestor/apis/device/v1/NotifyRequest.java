@@ -21,17 +21,17 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * AddKeyRequest adds a key or token to a device.
- * Keys are used for secure communications (Matrix E2EE, push notifications, FCM tokens, etc.).
+ * NotifyRequest sends a notification to a device using one of its registered keys.
+ * The service will select an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
  * </pre>
  *
- * Protobuf type {@code device.v1.AddKeyRequest}
+ * Protobuf type {@code device.v1.NotifyRequest}
  */
 @com.google.protobuf.Generated
-public final class AddKeyRequest extends
+public final class NotifyRequest extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:device.v1.AddKeyRequest)
-    AddKeyRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:device.v1.NotifyRequest)
+    NotifyRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -40,90 +40,43 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 33,
       /* patch= */ 0,
       /* suffix= */ "",
-      "AddKeyRequest");
+      "NotifyRequest");
   }
-  // Use AddKeyRequest.newBuilder() to construct.
-  private AddKeyRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use NotifyRequest.newBuilder() to construct.
+  private NotifyRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private AddKeyRequest() {
-    id_ = "";
+  private NotifyRequest() {
     deviceId_ = "";
+    keyId_ = "";
     keyType_ = 0;
-    data_ = com.google.protobuf.ByteString.EMPTY;
-    expiresAt_ = "";
+    title_ = "";
+    body_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_descriptor;
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_NotifyRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_fieldAccessorTable
+    return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_NotifyRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.antinvestor.apis.device.v1.AddKeyRequest.class, com.antinvestor.apis.device.v1.AddKeyRequest.Builder.class);
+            com.antinvestor.apis.device.v1.NotifyRequest.class, com.antinvestor.apis.device.v1.NotifyRequest.Builder.class);
   }
 
   private int bitField0_;
-  public static final int ID_FIELD_NUMBER = 1;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object id_ = "";
-  /**
-   * <pre>
-   * Unique identifier for the key
-   * </pre>
-   *
-   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return The id.
-   */
-  @java.lang.Override
-  public java.lang.String getId() {
-    java.lang.Object ref = id_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      id_ = s;
-      return s;
-    }
-  }
-  /**
-   * <pre>
-   * Unique identifier for the key
-   * </pre>
-   *
-   * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for id.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getIdBytes() {
-    java.lang.Object ref = id_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      id_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int DEVICE_ID_FIELD_NUMBER = 2;
+  public static final int DEVICE_ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object deviceId_ = "";
   /**
    * <pre>
-   * Device this key belongs to
+   * Device ID to notify
    * </pre>
    *
-   * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
    * @return The deviceId.
    */
   @java.lang.Override
@@ -141,10 +94,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Device this key belongs to
+   * Device ID to notify
    * </pre>
    *
-   * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+   * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for deviceId.
    */
   @java.lang.Override
@@ -162,11 +115,58 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int KEY_ID_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object keyId_ = "";
+  /**
+   * <pre>
+   * Specific key ID to use (optional - if not provided, uses key_type to select)
+   * </pre>
+   *
+   * <code>string key_id = 2 [json_name = "keyId", (.buf.validate.field) = { ... }</code>
+   * @return The keyId.
+   */
+  @java.lang.Override
+  public java.lang.String getKeyId() {
+    java.lang.Object ref = keyId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      keyId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * Specific key ID to use (optional - if not provided, uses key_type to select)
+   * </pre>
+   *
+   * <code>string key_id = 2 [json_name = "keyId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for keyId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getKeyIdBytes() {
+    java.lang.Object ref = keyId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      keyId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   public static final int KEY_TYPE_FIELD_NUMBER = 3;
   private int keyType_ = 0;
   /**
    * <pre>
-   * Type of key (Matrix, FCM, Encryption, etc.)
+   * Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
    * </pre>
    *
    * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -177,7 +177,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Type of key (Matrix, FCM, Encryption, etc.)
+   * Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
    * </pre>
    *
    * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -188,88 +188,158 @@ private static final long serialVersionUID = 0L;
     return result == null ? com.antinvestor.apis.device.v1.KeyType.UNRECOGNIZED : result;
   }
 
-  public static final int DATA_FIELD_NUMBER = 4;
-  private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
-  /**
-   * <pre>
-   * The key material or token (will be encrypted at rest)
-   * </pre>
-   *
-   * <code>bytes data = 4 [json_name = "data"];</code>
-   * @return The data.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString getData() {
-    return data_;
-  }
-
-  public static final int EXPIRES_AT_FIELD_NUMBER = 5;
+  public static final int TITLE_FIELD_NUMBER = 4;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object expiresAt_ = "";
+  private volatile java.lang.Object title_ = "";
   /**
    * <pre>
-   * Optional expiration timestamp (RFC3339)
+   * Notification title
    * </pre>
    *
-   * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
-   * @return The expiresAt.
+   * <code>string title = 4 [json_name = "title"];</code>
+   * @return The title.
    */
   @java.lang.Override
-  public java.lang.String getExpiresAt() {
-    java.lang.Object ref = expiresAt_;
+  public java.lang.String getTitle() {
+    java.lang.Object ref = title_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      expiresAt_ = s;
+      title_ = s;
       return s;
     }
   }
   /**
    * <pre>
-   * Optional expiration timestamp (RFC3339)
+   * Notification title
    * </pre>
    *
-   * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
-   * @return The bytes for expiresAt.
+   * <code>string title = 4 [json_name = "title"];</code>
+   * @return The bytes for title.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getExpiresAtBytes() {
-    java.lang.Object ref = expiresAt_;
+      getTitleBytes() {
+    java.lang.Object ref = title_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      expiresAt_ = b;
+      title_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int EXTRAS_FIELD_NUMBER = 6;
-  private com.google.protobuf.Struct extras_;
+  public static final int BODY_FIELD_NUMBER = 5;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object body_ = "";
   /**
    * <pre>
-   * Additional key metadata (algorithm, app_id, etc.)
+   * Notification body/message
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
-   * @return Whether the extras field is set.
+   * <code>string body = 5 [json_name = "body"];</code>
+   * @return The body.
    */
   @java.lang.Override
-  public boolean hasExtras() {
+  public java.lang.String getBody() {
+    java.lang.Object ref = body_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      body_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * Notification body/message
+   * </pre>
+   *
+   * <code>string body = 5 [json_name = "body"];</code>
+   * @return The bytes for body.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getBodyBytes() {
+    java.lang.Object ref = body_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      body_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int DATA_FIELD_NUMBER = 6;
+  private com.google.protobuf.Struct data_;
+  /**
+   * <pre>
+   * Additional notification data/payload (custom data, actions, etc.)
+   * </pre>
+   *
+   * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+   * @return Whether the data field is set.
+   */
+  @java.lang.Override
+  public boolean hasData() {
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
    * <pre>
-   * Additional key metadata (algorithm, app_id, etc.)
+   * Additional notification data/payload (custom data, actions, etc.)
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+   * @return The data.
+   */
+  @java.lang.Override
+  public com.google.protobuf.Struct getData() {
+    return data_ == null ? com.google.protobuf.Struct.getDefaultInstance() : data_;
+  }
+  /**
+   * <pre>
+   * Additional notification data/payload (custom data, actions, etc.)
+   * </pre>
+   *
+   * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.StructOrBuilder getDataOrBuilder() {
+    return data_ == null ? com.google.protobuf.Struct.getDefaultInstance() : data_;
+  }
+
+  public static final int EXTRAS_FIELD_NUMBER = 7;
+  private com.google.protobuf.Struct extras_;
+  /**
+   * <pre>
+   * Extra notification options (priority, TTL, badge, sound, etc.)
+   * </pre>
+   *
+   * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
+   * @return Whether the extras field is set.
+   */
+  @java.lang.Override
+  public boolean hasExtras() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <pre>
+   * Extra notification options (priority, TTL, badge, sound, etc.)
+   * </pre>
+   *
+   * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
    * @return The extras.
    */
   @java.lang.Override
@@ -278,10 +348,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Additional key metadata (algorithm, app_id, etc.)
+   * Extra notification options (priority, TTL, badge, sound, etc.)
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+   * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
    */
   @java.lang.Override
   public com.google.protobuf.StructOrBuilder getExtrasOrBuilder() {
@@ -302,23 +372,26 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, id_);
-    }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 2, deviceId_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, deviceId_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(keyId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, keyId_);
     }
     if (keyType_ != com.antinvestor.apis.device.v1.KeyType.MATRIX_KEY.getNumber()) {
       output.writeEnum(3, keyType_);
     }
-    if (!data_.isEmpty()) {
-      output.writeBytes(4, data_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(title_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 4, title_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(expiresAt_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 5, expiresAt_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(body_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 5, body_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(6, getExtras());
+      output.writeMessage(6, getData());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(7, getExtras());
     }
     getUnknownFields().writeTo(output);
   }
@@ -329,26 +402,29 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(id_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, id_);
-    }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(deviceId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, deviceId_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, deviceId_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(keyId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, keyId_);
     }
     if (keyType_ != com.antinvestor.apis.device.v1.KeyType.MATRIX_KEY.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(3, keyType_);
     }
-    if (!data_.isEmpty()) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeBytesSize(4, data_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(title_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(4, title_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(expiresAt_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(5, expiresAt_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(body_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(5, body_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(6, getExtras());
+        .computeMessageSize(6, getData());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(7, getExtras());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -360,20 +436,25 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.antinvestor.apis.device.v1.AddKeyRequest)) {
+    if (!(obj instanceof com.antinvestor.apis.device.v1.NotifyRequest)) {
       return super.equals(obj);
     }
-    com.antinvestor.apis.device.v1.AddKeyRequest other = (com.antinvestor.apis.device.v1.AddKeyRequest) obj;
+    com.antinvestor.apis.device.v1.NotifyRequest other = (com.antinvestor.apis.device.v1.NotifyRequest) obj;
 
-    if (!getId()
-        .equals(other.getId())) return false;
     if (!getDeviceId()
         .equals(other.getDeviceId())) return false;
+    if (!getKeyId()
+        .equals(other.getKeyId())) return false;
     if (keyType_ != other.keyType_) return false;
-    if (!getData()
-        .equals(other.getData())) return false;
-    if (!getExpiresAt()
-        .equals(other.getExpiresAt())) return false;
+    if (!getTitle()
+        .equals(other.getTitle())) return false;
+    if (!getBody()
+        .equals(other.getBody())) return false;
+    if (hasData() != other.hasData()) return false;
+    if (hasData()) {
+      if (!getData()
+          .equals(other.getData())) return false;
+    }
     if (hasExtras() != other.hasExtras()) return false;
     if (hasExtras()) {
       if (!getExtras()
@@ -390,16 +471,20 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ID_FIELD_NUMBER;
-    hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + DEVICE_ID_FIELD_NUMBER;
     hash = (53 * hash) + getDeviceId().hashCode();
+    hash = (37 * hash) + KEY_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getKeyId().hashCode();
     hash = (37 * hash) + KEY_TYPE_FIELD_NUMBER;
     hash = (53 * hash) + keyType_;
-    hash = (37 * hash) + DATA_FIELD_NUMBER;
-    hash = (53 * hash) + getData().hashCode();
-    hash = (37 * hash) + EXPIRES_AT_FIELD_NUMBER;
-    hash = (53 * hash) + getExpiresAt().hashCode();
+    hash = (37 * hash) + TITLE_FIELD_NUMBER;
+    hash = (53 * hash) + getTitle().hashCode();
+    hash = (37 * hash) + BODY_FIELD_NUMBER;
+    hash = (53 * hash) + getBody().hashCode();
+    if (hasData()) {
+      hash = (37 * hash) + DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getData().hashCode();
+    }
     if (hasExtras()) {
       hash = (37 * hash) + EXTRAS_FIELD_NUMBER;
       hash = (53 * hash) + getExtras().hashCode();
@@ -409,44 +494,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.NotifyRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.NotifyRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.NotifyRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.NotifyRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(byte[] data)
+  public static com.antinvestor.apis.device.v1.NotifyRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.NotifyRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.NotifyRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.NotifyRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -454,26 +539,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseDelimitedFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.device.v1.NotifyRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseDelimitedFrom(
+  public static com.antinvestor.apis.device.v1.NotifyRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.NotifyRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.device.v1.AddKeyRequest parseFrom(
+  public static com.antinvestor.apis.device.v1.NotifyRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -486,7 +571,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.antinvestor.apis.device.v1.AddKeyRequest prototype) {
+  public static Builder newBuilder(com.antinvestor.apis.device.v1.NotifyRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -503,30 +588,30 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * AddKeyRequest adds a key or token to a device.
-   * Keys are used for secure communications (Matrix E2EE, push notifications, FCM tokens, etc.).
+   * NotifyRequest sends a notification to a device using one of its registered keys.
+   * The service will select an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
    * </pre>
    *
-   * Protobuf type {@code device.v1.AddKeyRequest}
+   * Protobuf type {@code device.v1.NotifyRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:device.v1.AddKeyRequest)
-      com.antinvestor.apis.device.v1.AddKeyRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:device.v1.NotifyRequest)
+      com.antinvestor.apis.device.v1.NotifyRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_NotifyRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_fieldAccessorTable
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_NotifyRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.antinvestor.apis.device.v1.AddKeyRequest.class, com.antinvestor.apis.device.v1.AddKeyRequest.Builder.class);
+              com.antinvestor.apis.device.v1.NotifyRequest.class, com.antinvestor.apis.device.v1.NotifyRequest.Builder.class);
     }
 
-    // Construct using com.antinvestor.apis.device.v1.AddKeyRequest.newBuilder()
+    // Construct using com.antinvestor.apis.device.v1.NotifyRequest.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -539,6 +624,7 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessage
               .alwaysUseFieldBuilders) {
+        internalGetDataFieldBuilder();
         internalGetExtrasFieldBuilder();
       }
     }
@@ -546,11 +632,16 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      id_ = "";
       deviceId_ = "";
+      keyId_ = "";
       keyType_ = 0;
-      data_ = com.google.protobuf.ByteString.EMPTY;
-      expiresAt_ = "";
+      title_ = "";
+      body_ = "";
+      data_ = null;
+      if (dataBuilder_ != null) {
+        dataBuilder_.dispose();
+        dataBuilder_ = null;
+      }
       extras_ = null;
       if (extrasBuilder_ != null) {
         extrasBuilder_.dispose();
@@ -562,17 +653,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_AddKeyRequest_descriptor;
+      return com.antinvestor.apis.device.v1.DeviceProto.internal_static_device_v1_NotifyRequest_descriptor;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.AddKeyRequest getDefaultInstanceForType() {
-      return com.antinvestor.apis.device.v1.AddKeyRequest.getDefaultInstance();
+    public com.antinvestor.apis.device.v1.NotifyRequest getDefaultInstanceForType() {
+      return com.antinvestor.apis.device.v1.NotifyRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.AddKeyRequest build() {
-      com.antinvestor.apis.device.v1.AddKeyRequest result = buildPartial();
+    public com.antinvestor.apis.device.v1.NotifyRequest build() {
+      com.antinvestor.apis.device.v1.NotifyRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -580,72 +671,83 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.device.v1.AddKeyRequest buildPartial() {
-      com.antinvestor.apis.device.v1.AddKeyRequest result = new com.antinvestor.apis.device.v1.AddKeyRequest(this);
+    public com.antinvestor.apis.device.v1.NotifyRequest buildPartial() {
+      com.antinvestor.apis.device.v1.NotifyRequest result = new com.antinvestor.apis.device.v1.NotifyRequest(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.antinvestor.apis.device.v1.AddKeyRequest result) {
+    private void buildPartial0(com.antinvestor.apis.device.v1.NotifyRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.id_ = id_;
+        result.deviceId_ = deviceId_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.deviceId_ = deviceId_;
+        result.keyId_ = keyId_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.keyType_ = keyType_;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.data_ = data_;
+        result.title_ = title_;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.expiresAt_ = expiresAt_;
+        result.body_ = body_;
       }
       int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.data_ = dataBuilder_ == null
+            ? data_
+            : dataBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
         result.extras_ = extrasBuilder_ == null
             ? extras_
             : extrasBuilder_.build();
-        to_bitField0_ |= 0x00000001;
+        to_bitField0_ |= 0x00000002;
       }
       result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.antinvestor.apis.device.v1.AddKeyRequest) {
-        return mergeFrom((com.antinvestor.apis.device.v1.AddKeyRequest)other);
+      if (other instanceof com.antinvestor.apis.device.v1.NotifyRequest) {
+        return mergeFrom((com.antinvestor.apis.device.v1.NotifyRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.antinvestor.apis.device.v1.AddKeyRequest other) {
-      if (other == com.antinvestor.apis.device.v1.AddKeyRequest.getDefaultInstance()) return this;
-      if (!other.getId().isEmpty()) {
-        id_ = other.id_;
+    public Builder mergeFrom(com.antinvestor.apis.device.v1.NotifyRequest other) {
+      if (other == com.antinvestor.apis.device.v1.NotifyRequest.getDefaultInstance()) return this;
+      if (!other.getDeviceId().isEmpty()) {
+        deviceId_ = other.deviceId_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (!other.getDeviceId().isEmpty()) {
-        deviceId_ = other.deviceId_;
+      if (!other.getKeyId().isEmpty()) {
+        keyId_ = other.keyId_;
         bitField0_ |= 0x00000002;
         onChanged();
       }
       if (other.keyType_ != 0) {
         setKeyTypeValue(other.getKeyTypeValue());
       }
-      if (!other.getData().isEmpty()) {
-        setData(other.getData());
+      if (!other.getTitle().isEmpty()) {
+        title_ = other.title_;
+        bitField0_ |= 0x00000008;
+        onChanged();
       }
-      if (!other.getExpiresAt().isEmpty()) {
-        expiresAt_ = other.expiresAt_;
+      if (!other.getBody().isEmpty()) {
+        body_ = other.body_;
         bitField0_ |= 0x00000010;
         onChanged();
+      }
+      if (other.hasData()) {
+        mergeData(other.getData());
       }
       if (other.hasExtras()) {
         mergeExtras(other.getExtras());
@@ -677,12 +779,12 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              id_ = input.readStringRequireUtf8();
+              deviceId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
             case 18: {
-              deviceId_ = input.readStringRequireUtf8();
+              keyId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
@@ -692,22 +794,29 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 24
             case 34: {
-              data_ = input.readBytes();
+              title_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000008;
               break;
             } // case 34
             case 42: {
-              expiresAt_ = input.readStringRequireUtf8();
+              body_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000010;
               break;
             } // case 42
             case 50: {
               input.readMessage(
-                  internalGetExtrasFieldBuilder().getBuilder(),
+                  internalGetDataFieldBuilder().getBuilder(),
                   extensionRegistry);
               bitField0_ |= 0x00000020;
               break;
             } // case 50
+            case 58: {
+              input.readMessage(
+                  internalGetExtrasFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000040;
+              break;
+            } // case 58
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -725,105 +834,13 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object id_ = "";
-    /**
-     * <pre>
-     * Unique identifier for the key
-     * </pre>
-     *
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @return The id.
-     */
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        id_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <pre>
-     * Unique identifier for the key
-     * </pre>
-     *
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for id.
-     */
-    public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <pre>
-     * Unique identifier for the key
-     * </pre>
-     *
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param value The id to set.
-     * @return This builder for chaining.
-     */
-    public Builder setId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      id_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Unique identifier for the key
-     * </pre>
-     *
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearId() {
-      id_ = getDefaultInstance().getId();
-      bitField0_ = (bitField0_ & ~0x00000001);
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Unique identifier for the key
-     * </pre>
-     *
-     * <code>string id = 1 [json_name = "id", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for id to set.
-     * @return This builder for chaining.
-     */
-    public Builder setIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      id_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object deviceId_ = "";
     /**
      * <pre>
-     * Device this key belongs to
+     * Device ID to notify
      * </pre>
      *
-     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return The deviceId.
      */
     public java.lang.String getDeviceId() {
@@ -840,10 +857,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Device this key belongs to
+     * Device ID to notify
      * </pre>
      *
-     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for deviceId.
      */
     public com.google.protobuf.ByteString
@@ -861,10 +878,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Device this key belongs to
+     * Device ID to notify
      * </pre>
      *
-     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @param value The deviceId to set.
      * @return This builder for chaining.
      */
@@ -872,30 +889,30 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       deviceId_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Device this key belongs to
+     * Device ID to notify
      * </pre>
      *
-     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearDeviceId() {
       deviceId_ = getDefaultInstance().getDeviceId();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Device this key belongs to
+     * Device ID to notify
      * </pre>
      *
-     * <code>string device_id = 2 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
+     * <code>string device_id = 1 [json_name = "deviceId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for deviceId to set.
      * @return This builder for chaining.
      */
@@ -904,6 +921,98 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       deviceId_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object keyId_ = "";
+    /**
+     * <pre>
+     * Specific key ID to use (optional - if not provided, uses key_type to select)
+     * </pre>
+     *
+     * <code>string key_id = 2 [json_name = "keyId", (.buf.validate.field) = { ... }</code>
+     * @return The keyId.
+     */
+    public java.lang.String getKeyId() {
+      java.lang.Object ref = keyId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        keyId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Specific key ID to use (optional - if not provided, uses key_type to select)
+     * </pre>
+     *
+     * <code>string key_id = 2 [json_name = "keyId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for keyId.
+     */
+    public com.google.protobuf.ByteString
+        getKeyIdBytes() {
+      java.lang.Object ref = keyId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        keyId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Specific key ID to use (optional - if not provided, uses key_type to select)
+     * </pre>
+     *
+     * <code>string key_id = 2 [json_name = "keyId", (.buf.validate.field) = { ... }</code>
+     * @param value The keyId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setKeyId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      keyId_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Specific key ID to use (optional - if not provided, uses key_type to select)
+     * </pre>
+     *
+     * <code>string key_id = 2 [json_name = "keyId", (.buf.validate.field) = { ... }</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearKeyId() {
+      keyId_ = getDefaultInstance().getKeyId();
+      bitField0_ = (bitField0_ & ~0x00000002);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Specific key ID to use (optional - if not provided, uses key_type to select)
+     * </pre>
+     *
+     * <code>string key_id = 2 [json_name = "keyId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for keyId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setKeyIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      keyId_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
@@ -912,7 +1021,7 @@ private static final long serialVersionUID = 0L;
     private int keyType_ = 0;
     /**
      * <pre>
-     * Type of key (Matrix, FCM, Encryption, etc.)
+     * Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
      * </pre>
      *
      * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -923,7 +1032,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Type of key (Matrix, FCM, Encryption, etc.)
+     * Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
      * </pre>
      *
      * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -938,7 +1047,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Type of key (Matrix, FCM, Encryption, etc.)
+     * Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
      * </pre>
      *
      * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -951,7 +1060,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Type of key (Matrix, FCM, Encryption, etc.)
+     * Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
      * </pre>
      *
      * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -967,7 +1076,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Type of key (Matrix, FCM, Encryption, etc.)
+     * Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
      * </pre>
      *
      * <code>.device.v1.KeyType key_type = 3 [json_name = "keyType"];</code>
@@ -980,66 +1089,22 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+    private java.lang.Object title_ = "";
     /**
      * <pre>
-     * The key material or token (will be encrypted at rest)
+     * Notification title
      * </pre>
      *
-     * <code>bytes data = 4 [json_name = "data"];</code>
-     * @return The data.
+     * <code>string title = 4 [json_name = "title"];</code>
+     * @return The title.
      */
-    @java.lang.Override
-    public com.google.protobuf.ByteString getData() {
-      return data_;
-    }
-    /**
-     * <pre>
-     * The key material or token (will be encrypted at rest)
-     * </pre>
-     *
-     * <code>bytes data = 4 [json_name = "data"];</code>
-     * @param value The data to set.
-     * @return This builder for chaining.
-     */
-    public Builder setData(com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      data_ = value;
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * The key material or token (will be encrypted at rest)
-     * </pre>
-     *
-     * <code>bytes data = 4 [json_name = "data"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearData() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      data_ = getDefaultInstance().getData();
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object expiresAt_ = "";
-    /**
-     * <pre>
-     * Optional expiration timestamp (RFC3339)
-     * </pre>
-     *
-     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
-     * @return The expiresAt.
-     */
-    public java.lang.String getExpiresAt() {
-      java.lang.Object ref = expiresAt_;
+    public java.lang.String getTitle() {
+      java.lang.Object ref = title_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        expiresAt_ = s;
+        title_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -1047,20 +1112,20 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional expiration timestamp (RFC3339)
+     * Notification title
      * </pre>
      *
-     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
-     * @return The bytes for expiresAt.
+     * <code>string title = 4 [json_name = "title"];</code>
+     * @return The bytes for title.
      */
     public com.google.protobuf.ByteString
-        getExpiresAtBytes() {
-      java.lang.Object ref = expiresAt_;
+        getTitleBytes() {
+      java.lang.Object ref = title_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        expiresAt_ = b;
+        title_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1068,52 +1133,301 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional expiration timestamp (RFC3339)
+     * Notification title
      * </pre>
      *
-     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
-     * @param value The expiresAt to set.
+     * <code>string title = 4 [json_name = "title"];</code>
+     * @param value The title to set.
      * @return This builder for chaining.
      */
-    public Builder setExpiresAt(
+    public Builder setTitle(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      expiresAt_ = value;
+      title_ = value;
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Notification title
+     * </pre>
+     *
+     * <code>string title = 4 [json_name = "title"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTitle() {
+      title_ = getDefaultInstance().getTitle();
+      bitField0_ = (bitField0_ & ~0x00000008);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Notification title
+     * </pre>
+     *
+     * <code>string title = 4 [json_name = "title"];</code>
+     * @param value The bytes for title to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTitleBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      title_ = value;
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object body_ = "";
+    /**
+     * <pre>
+     * Notification body/message
+     * </pre>
+     *
+     * <code>string body = 5 [json_name = "body"];</code>
+     * @return The body.
+     */
+    public java.lang.String getBody() {
+      java.lang.Object ref = body_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        body_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Notification body/message
+     * </pre>
+     *
+     * <code>string body = 5 [json_name = "body"];</code>
+     * @return The bytes for body.
+     */
+    public com.google.protobuf.ByteString
+        getBodyBytes() {
+      java.lang.Object ref = body_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        body_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Notification body/message
+     * </pre>
+     *
+     * <code>string body = 5 [json_name = "body"];</code>
+     * @param value The body to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBody(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      body_ = value;
       bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Optional expiration timestamp (RFC3339)
+     * Notification body/message
      * </pre>
      *
-     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
+     * <code>string body = 5 [json_name = "body"];</code>
      * @return This builder for chaining.
      */
-    public Builder clearExpiresAt() {
-      expiresAt_ = getDefaultInstance().getExpiresAt();
+    public Builder clearBody() {
+      body_ = getDefaultInstance().getBody();
       bitField0_ = (bitField0_ & ~0x00000010);
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Optional expiration timestamp (RFC3339)
+     * Notification body/message
      * </pre>
      *
-     * <code>string expires_at = 5 [json_name = "expiresAt"];</code>
-     * @param value The bytes for expiresAt to set.
+     * <code>string body = 5 [json_name = "body"];</code>
+     * @param value The bytes for body to set.
      * @return This builder for chaining.
      */
-    public Builder setExpiresAtBytes(
+    public Builder setBodyBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      expiresAt_ = value;
+      body_ = value;
       bitField0_ |= 0x00000010;
       onChanged();
       return this;
+    }
+
+    private com.google.protobuf.Struct data_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> dataBuilder_;
+    /**
+     * <pre>
+     * Additional notification data/payload (custom data, actions, etc.)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+     * @return Whether the data field is set.
+     */
+    public boolean hasData() {
+      return ((bitField0_ & 0x00000020) != 0);
+    }
+    /**
+     * <pre>
+     * Additional notification data/payload (custom data, actions, etc.)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+     * @return The data.
+     */
+    public com.google.protobuf.Struct getData() {
+      if (dataBuilder_ == null) {
+        return data_ == null ? com.google.protobuf.Struct.getDefaultInstance() : data_;
+      } else {
+        return dataBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     * Additional notification data/payload (custom data, actions, etc.)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+     */
+    public Builder setData(com.google.protobuf.Struct value) {
+      if (dataBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        data_ = value;
+      } else {
+        dataBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Additional notification data/payload (custom data, actions, etc.)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+     */
+    public Builder setData(
+        com.google.protobuf.Struct.Builder builderForValue) {
+      if (dataBuilder_ == null) {
+        data_ = builderForValue.build();
+      } else {
+        dataBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Additional notification data/payload (custom data, actions, etc.)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+     */
+    public Builder mergeData(com.google.protobuf.Struct value) {
+      if (dataBuilder_ == null) {
+        if (((bitField0_ & 0x00000020) != 0) &&
+          data_ != null &&
+          data_ != com.google.protobuf.Struct.getDefaultInstance()) {
+          getDataBuilder().mergeFrom(value);
+        } else {
+          data_ = value;
+        }
+      } else {
+        dataBuilder_.mergeFrom(value);
+      }
+      if (data_ != null) {
+        bitField0_ |= 0x00000020;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Additional notification data/payload (custom data, actions, etc.)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+     */
+    public Builder clearData() {
+      bitField0_ = (bitField0_ & ~0x00000020);
+      data_ = null;
+      if (dataBuilder_ != null) {
+        dataBuilder_.dispose();
+        dataBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Additional notification data/payload (custom data, actions, etc.)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+     */
+    public com.google.protobuf.Struct.Builder getDataBuilder() {
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return internalGetDataFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * Additional notification data/payload (custom data, actions, etc.)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+     */
+    public com.google.protobuf.StructOrBuilder getDataOrBuilder() {
+      if (dataBuilder_ != null) {
+        return dataBuilder_.getMessageOrBuilder();
+      } else {
+        return data_ == null ?
+            com.google.protobuf.Struct.getDefaultInstance() : data_;
+      }
+    }
+    /**
+     * <pre>
+     * Additional notification data/payload (custom data, actions, etc.)
+     * </pre>
+     *
+     * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
+        internalGetDataFieldBuilder() {
+      if (dataBuilder_ == null) {
+        dataBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder>(
+                getData(),
+                getParentForChildren(),
+                isClean());
+        data_ = null;
+      }
+      return dataBuilder_;
     }
 
     private com.google.protobuf.Struct extras_;
@@ -1121,21 +1435,21 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> extrasBuilder_;
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Extra notification options (priority, TTL, badge, sound, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
      * @return Whether the extras field is set.
      */
     public boolean hasExtras() {
-      return ((bitField0_ & 0x00000020) != 0);
+      return ((bitField0_ & 0x00000040) != 0);
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Extra notification options (priority, TTL, badge, sound, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
      * @return The extras.
      */
     public com.google.protobuf.Struct getExtras() {
@@ -1147,10 +1461,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Extra notification options (priority, TTL, badge, sound, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
      */
     public Builder setExtras(com.google.protobuf.Struct value) {
       if (extrasBuilder_ == null) {
@@ -1161,16 +1475,16 @@ private static final long serialVersionUID = 0L;
       } else {
         extrasBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Extra notification options (priority, TTL, badge, sound, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
      */
     public Builder setExtras(
         com.google.protobuf.Struct.Builder builderForValue) {
@@ -1179,20 +1493,20 @@ private static final long serialVersionUID = 0L;
       } else {
         extrasBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Extra notification options (priority, TTL, badge, sound, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
      */
     public Builder mergeExtras(com.google.protobuf.Struct value) {
       if (extrasBuilder_ == null) {
-        if (((bitField0_ & 0x00000020) != 0) &&
+        if (((bitField0_ & 0x00000040) != 0) &&
           extras_ != null &&
           extras_ != com.google.protobuf.Struct.getDefaultInstance()) {
           getExtrasBuilder().mergeFrom(value);
@@ -1203,20 +1517,20 @@ private static final long serialVersionUID = 0L;
         extrasBuilder_.mergeFrom(value);
       }
       if (extras_ != null) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         onChanged();
       }
       return this;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Extra notification options (priority, TTL, badge, sound, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
      */
     public Builder clearExtras() {
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000040);
       extras_ = null;
       if (extrasBuilder_ != null) {
         extrasBuilder_.dispose();
@@ -1227,22 +1541,22 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Extra notification options (priority, TTL, badge, sound, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
      */
     public com.google.protobuf.Struct.Builder getExtrasBuilder() {
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000040;
       onChanged();
       return internalGetExtrasFieldBuilder().getBuilder();
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Extra notification options (priority, TTL, badge, sound, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
      */
     public com.google.protobuf.StructOrBuilder getExtrasOrBuilder() {
       if (extrasBuilder_ != null) {
@@ -1254,10 +1568,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Additional key metadata (algorithm, app_id, etc.)
+     * Extra notification options (priority, TTL, badge, sound, etc.)
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 6 [json_name = "extras"];</code>
+     * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
@@ -1273,23 +1587,23 @@ private static final long serialVersionUID = 0L;
       return extrasBuilder_;
     }
 
-    // @@protoc_insertion_point(builder_scope:device.v1.AddKeyRequest)
+    // @@protoc_insertion_point(builder_scope:device.v1.NotifyRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:device.v1.AddKeyRequest)
-  private static final com.antinvestor.apis.device.v1.AddKeyRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:device.v1.NotifyRequest)
+  private static final com.antinvestor.apis.device.v1.NotifyRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.AddKeyRequest();
+    DEFAULT_INSTANCE = new com.antinvestor.apis.device.v1.NotifyRequest();
   }
 
-  public static com.antinvestor.apis.device.v1.AddKeyRequest getDefaultInstance() {
+  public static com.antinvestor.apis.device.v1.NotifyRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<AddKeyRequest>
-      PARSER = new com.google.protobuf.AbstractParser<AddKeyRequest>() {
+  private static final com.google.protobuf.Parser<NotifyRequest>
+      PARSER = new com.google.protobuf.AbstractParser<NotifyRequest>() {
     @java.lang.Override
-    public AddKeyRequest parsePartialFrom(
+    public NotifyRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1308,17 +1622,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<AddKeyRequest> parser() {
+  public static com.google.protobuf.Parser<NotifyRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<AddKeyRequest> getParserForType() {
+  public com.google.protobuf.Parser<NotifyRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.antinvestor.apis.device.v1.AddKeyRequest getDefaultInstanceForType() {
+  public com.antinvestor.apis.device.v1.NotifyRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

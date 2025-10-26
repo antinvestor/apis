@@ -55,6 +55,7 @@ private static final long serialVersionUID = 0L;
     os_ = "";
     lastSeen_ = "";
     profileId_ = "";
+    presence_ = 0;
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -485,6 +486,32 @@ private static final long serialVersionUID = 0L;
     return locale_ == null ? com.antinvestor.apis.device.v1.Locale.getDefaultInstance() : locale_;
   }
 
+  public static final int PRESENCE_FIELD_NUMBER = 10;
+  private int presence_ = 0;
+  /**
+   * <pre>
+   * Device presense status
+   * </pre>
+   *
+   * <code>.device.v1.PresenceStatus presence = 10 [json_name = "presence"];</code>
+   * @return The enum numeric value on the wire for presence.
+   */
+  @java.lang.Override public int getPresenceValue() {
+    return presence_;
+  }
+  /**
+   * <pre>
+   * Device presense status
+   * </pre>
+   *
+   * <code>.device.v1.PresenceStatus presence = 10 [json_name = "presence"];</code>
+   * @return The presence.
+   */
+  @java.lang.Override public com.antinvestor.apis.device.v1.PresenceStatus getPresence() {
+    com.antinvestor.apis.device.v1.PresenceStatus result = com.antinvestor.apis.device.v1.PresenceStatus.forNumber(presence_);
+    return result == null ? com.antinvestor.apis.device.v1.PresenceStatus.UNRECOGNIZED : result;
+  }
+
   public static final int LOCATION_FIELD_NUMBER = 11;
   private com.google.protobuf.Struct location_;
   /**
@@ -602,6 +629,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeMessage(9, getLocale());
     }
+    if (presence_ != com.antinvestor.apis.device.v1.PresenceStatus.OFFLINE.getNumber()) {
+      output.writeEnum(10, presence_);
+    }
     if (((bitField0_ & 0x00000002) != 0)) {
       output.writeMessage(11, getLocation());
     }
@@ -644,6 +674,10 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(9, getLocale());
+    }
+    if (presence_ != com.antinvestor.apis.device.v1.PresenceStatus.OFFLINE.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(10, presence_);
     }
     if (((bitField0_ & 0x00000002) != 0)) {
       size += com.google.protobuf.CodedOutputStream
@@ -689,6 +723,7 @@ private static final long serialVersionUID = 0L;
       if (!getLocale()
           .equals(other.getLocale())) return false;
     }
+    if (presence_ != other.presence_) return false;
     if (hasLocation() != other.hasLocation()) return false;
     if (hasLocation()) {
       if (!getLocation()
@@ -730,6 +765,8 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + LOCALE_FIELD_NUMBER;
       hash = (53 * hash) + getLocale().hashCode();
     }
+    hash = (37 * hash) + PRESENCE_FIELD_NUMBER;
+    hash = (53 * hash) + presence_;
     if (hasLocation()) {
       hash = (37 * hash) + LOCATION_FIELD_NUMBER;
       hash = (53 * hash) + getLocation().hashCode();
@@ -895,6 +932,7 @@ private static final long serialVersionUID = 0L;
         localeBuilder_.dispose();
         localeBuilder_ = null;
       }
+      presence_ = 0;
       location_ = null;
       if (locationBuilder_ != null) {
         locationBuilder_.dispose();
@@ -970,12 +1008,15 @@ private static final long serialVersionUID = 0L;
         to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00000200) != 0)) {
+        result.presence_ = presence_;
+      }
+      if (((from_bitField0_ & 0x00000400) != 0)) {
         result.location_ = locationBuilder_ == null
             ? location_
             : locationBuilder_.build();
         to_bitField0_ |= 0x00000002;
       }
-      if (((from_bitField0_ & 0x00000400) != 0)) {
+      if (((from_bitField0_ & 0x00000800) != 0)) {
         result.properties_ = propertiesBuilder_ == null
             ? properties_
             : propertiesBuilder_.build();
@@ -1038,6 +1079,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.hasLocale()) {
         mergeLocale(other.getLocale());
+      }
+      if (other.presence_ != 0) {
+        setPresenceValue(other.getPresenceValue());
       }
       if (other.hasLocation()) {
         mergeLocation(other.getLocation());
@@ -1118,18 +1162,23 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000100;
               break;
             } // case 74
+            case 80: {
+              presence_ = input.readEnum();
+              bitField0_ |= 0x00000200;
+              break;
+            } // case 80
             case 90: {
               input.readMessage(
                   internalGetLocationFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000400;
               break;
             } // case 90
             case 122: {
               input.readMessage(
                   internalGetPropertiesFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00000800;
               break;
             } // case 122
             default: {
@@ -2042,6 +2091,77 @@ private static final long serialVersionUID = 0L;
       return localeBuilder_;
     }
 
+    private int presence_ = 0;
+    /**
+     * <pre>
+     * Device presense status
+     * </pre>
+     *
+     * <code>.device.v1.PresenceStatus presence = 10 [json_name = "presence"];</code>
+     * @return The enum numeric value on the wire for presence.
+     */
+    @java.lang.Override public int getPresenceValue() {
+      return presence_;
+    }
+    /**
+     * <pre>
+     * Device presense status
+     * </pre>
+     *
+     * <code>.device.v1.PresenceStatus presence = 10 [json_name = "presence"];</code>
+     * @param value The enum numeric value on the wire for presence to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPresenceValue(int value) {
+      presence_ = value;
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Device presense status
+     * </pre>
+     *
+     * <code>.device.v1.PresenceStatus presence = 10 [json_name = "presence"];</code>
+     * @return The presence.
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.device.v1.PresenceStatus getPresence() {
+      com.antinvestor.apis.device.v1.PresenceStatus result = com.antinvestor.apis.device.v1.PresenceStatus.forNumber(presence_);
+      return result == null ? com.antinvestor.apis.device.v1.PresenceStatus.UNRECOGNIZED : result;
+    }
+    /**
+     * <pre>
+     * Device presense status
+     * </pre>
+     *
+     * <code>.device.v1.PresenceStatus presence = 10 [json_name = "presence"];</code>
+     * @param value The presence to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPresence(com.antinvestor.apis.device.v1.PresenceStatus value) {
+      if (value == null) { throw new NullPointerException(); }
+      bitField0_ |= 0x00000200;
+      presence_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Device presense status
+     * </pre>
+     *
+     * <code>.device.v1.PresenceStatus presence = 10 [json_name = "presence"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearPresence() {
+      bitField0_ = (bitField0_ & ~0x00000200);
+      presence_ = 0;
+      onChanged();
+      return this;
+    }
+
     private com.google.protobuf.Struct location_;
     private com.google.protobuf.SingleFieldBuilder<
         com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> locationBuilder_;
@@ -2054,7 +2174,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the location field is set.
      */
     public boolean hasLocation() {
-      return ((bitField0_ & 0x00000200) != 0);
+      return ((bitField0_ & 0x00000400) != 0);
     }
     /**
      * <pre>
@@ -2087,7 +2207,7 @@ private static final long serialVersionUID = 0L;
       } else {
         locationBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000400;
       onChanged();
       return this;
     }
@@ -2105,7 +2225,7 @@ private static final long serialVersionUID = 0L;
       } else {
         locationBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000400;
       onChanged();
       return this;
     }
@@ -2118,7 +2238,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder mergeLocation(com.google.protobuf.Struct value) {
       if (locationBuilder_ == null) {
-        if (((bitField0_ & 0x00000200) != 0) &&
+        if (((bitField0_ & 0x00000400) != 0) &&
           location_ != null &&
           location_ != com.google.protobuf.Struct.getDefaultInstance()) {
           getLocationBuilder().mergeFrom(value);
@@ -2129,7 +2249,7 @@ private static final long serialVersionUID = 0L;
         locationBuilder_.mergeFrom(value);
       }
       if (location_ != null) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         onChanged();
       }
       return this;
@@ -2142,7 +2262,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
      */
     public Builder clearLocation() {
-      bitField0_ = (bitField0_ & ~0x00000200);
+      bitField0_ = (bitField0_ & ~0x00000400);
       location_ = null;
       if (locationBuilder_ != null) {
         locationBuilder_.dispose();
@@ -2159,7 +2279,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Struct location = 11 [json_name = "location"];</code>
      */
     public com.google.protobuf.Struct.Builder getLocationBuilder() {
-      bitField0_ |= 0x00000200;
+      bitField0_ |= 0x00000400;
       onChanged();
       return internalGetLocationFieldBuilder().getBuilder();
     }
@@ -2211,7 +2331,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the properties field is set.
      */
     public boolean hasProperties() {
-      return ((bitField0_ & 0x00000400) != 0);
+      return ((bitField0_ & 0x00000800) != 0);
     }
     /**
      * <pre>
@@ -2244,7 +2364,7 @@ private static final long serialVersionUID = 0L;
       } else {
         propertiesBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00000800;
       onChanged();
       return this;
     }
@@ -2262,7 +2382,7 @@ private static final long serialVersionUID = 0L;
       } else {
         propertiesBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00000800;
       onChanged();
       return this;
     }
@@ -2275,7 +2395,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder mergeProperties(com.google.protobuf.Struct value) {
       if (propertiesBuilder_ == null) {
-        if (((bitField0_ & 0x00000400) != 0) &&
+        if (((bitField0_ & 0x00000800) != 0) &&
           properties_ != null &&
           properties_ != com.google.protobuf.Struct.getDefaultInstance()) {
           getPropertiesBuilder().mergeFrom(value);
@@ -2286,7 +2406,7 @@ private static final long serialVersionUID = 0L;
         propertiesBuilder_.mergeFrom(value);
       }
       if (properties_ != null) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000800;
         onChanged();
       }
       return this;
@@ -2299,7 +2419,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
      */
     public Builder clearProperties() {
-      bitField0_ = (bitField0_ & ~0x00000400);
+      bitField0_ = (bitField0_ & ~0x00000800);
       properties_ = null;
       if (propertiesBuilder_ != null) {
         propertiesBuilder_.dispose();
@@ -2316,7 +2436,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Struct properties = 15 [json_name = "properties"];</code>
      */
     public com.google.protobuf.Struct.Builder getPropertiesBuilder() {
-      bitField0_ |= 0x00000400;
+      bitField0_ |= 0x00000800;
       onChanged();
       return internalGetPropertiesFieldBuilder().getBuilder();
     }
