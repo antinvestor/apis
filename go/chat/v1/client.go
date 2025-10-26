@@ -24,46 +24,46 @@ import (
 
 const ctxKeyService = common.CtxServiceKey("chatClientKey")
 
-func defaultDeviceClientOptions() []common.ClientOption {
+func defaultChatClientOptions() []common.ClientOption {
 	return []common.ClientOption{
-		common.WithEndpoint("device.api.antinvestor.com:443"),
+		common.WithEndpoint("chat.api.antinvestor.com:443"),
 		common.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
 		common.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
 	}
 }
 
-func ToContext(ctx context.Context, deviceClient *DeviceClient) context.Context {
-	return context.WithValue(ctx, ctxKeyService, deviceClient)
+func ToContext(ctx context.Context, chatClient *ChatClient) context.Context {
+	return context.WithValue(ctx, ctxKeyService, chatClient)
 }
 
-func FromContext(ctx context.Context) *DeviceClient {
-	profileClient, ok := ctx.Value(ctxKeyService).(*DeviceClient)
+func FromContext(ctx context.Context) *ChatClient {
+	chatClient, ok := ctx.Value(ctxKeyService).(*ChatClient)
 	if !ok {
 		return nil
 	}
 
-	return profileClient
+	return chatClient
 }
 
 // ChatClient is a client for interacting with the chat service API.
-type DeviceClient struct {
+type ChatClient struct {
 	*common.GrpcClientBase
 
 	// The gRPC API client.
 	svc ChatServiceClient
 }
 
-func Init(cBase *common.GrpcClientBase, service ChatServiceClient) *DeviceClient {
-	return &DeviceClient{
+func Init(cBase *common.GrpcClientBase, service ChatServiceClient) *ChatClient {
+	return &ChatClient{
 		GrpcClientBase: cBase,
 		svc:            service,
 	}
 }
 
-// NewDeviceClient creates a new device svc.
+// NewChatClient creates a new chat svc client.
 // The service that an application uses to send and access received messages
-func NewDeviceClient(ctx context.Context, opts ...common.ClientOption) (*DeviceClient, error) {
-	clientOpts := defaultDeviceClientOptions()
+func NewChatClient(ctx context.Context, opts ...common.ClientOption) (*ChatClient, error) {
+	clientOpts := defaultChatClientOptions()
 
 	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
@@ -73,6 +73,6 @@ func NewDeviceClient(ctx context.Context, opts ...common.ClientOption) (*DeviceC
 	return Init(clientBase, NewChatServiceClient(clientBase.Connection())), nil
 }
 
-func (dc *DeviceClient) Svc() ChatServiceClient {
+func (dc *ChatClient) Svc() ChatServiceClient {
 	return dc.svc
 }
