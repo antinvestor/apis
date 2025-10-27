@@ -111,38 +111,6 @@ jobs:
             exit 1
           fi
           
-          # Get current version to check if update is needed
-          CURRENT_VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //')
-          echo "Current version in pubspec.yaml: $CURRENT_VERSION"
-          
-          # Update version in pubspec.yaml if different
-          if [ "$CURRENT_VERSION" != "$NEW_VERSION" ]; then
-            echo "Updating pubspec.yaml version to $NEW_VERSION"
-            sed -i "s/^version: .*/version: $NEW_VERSION/" pubspec.yaml
-          fi
-          
-          # Verify/update CHANGELOG.md
-          if [ -f "CHANGELOG.md" ]; then
-            if ! grep -q "## $NEW_VERSION" CHANGELOG.md; then
-              echo "⚠️  CHANGELOG.md missing entry for version $NEW_VERSION - adding it"
-              DATE=$(date +%Y-%m-%d)
-              sed -i "1i## $NEW_VERSION - $DATE\n\n- Release version $NEW_VERSION\n" CHANGELOG.md
-            else
-              echo "✓ CHANGELOG.md contains entry for version $NEW_VERSION"
-            fi
-          fi
-          
-          # Commit version changes if any
-          if ! git diff --quiet pubspec.yaml CHANGELOG.md 2>/dev/null; then
-            echo "Committing version updates..."
-            git add pubspec.yaml CHANGELOG.md
-            git commit -m "chore(dart/$PACKAGE): update version to $NEW_VERSION for release"
-            git push origin HEAD:main
-            echo "✅ Version changes committed"
-          else
-            echo "ℹ️  No version changes to commit"
-          fi
-          
           # Install dependencies
           echo "Installing dependencies..."
           dart pub get
@@ -174,31 +142,3 @@ jobs:
             echo "ℹ️  Tag $PACKAGE_TAG already exists"
           fi
       
-      
-      - name: Create GitHub Release
-        if: success() && steps.check_changes.outputs.should_release == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          PACKAGE="${{ matrix.package }}"
-          VERSION=$(grep '^version:' "dart/$PACKAGE/pubspec.yaml" | sed 's/version: //')
-          PACKAGE_NAME=$(grep '^name:' "dart/$PACKAGE/pubspec.yaml" | sed 's/name: //')
-          TAG="dart/${PACKAGE}/v${VERSION}"
-          
-          # Create release notes
-          RELEASE_NOTES="# ${PACKAGE_NAME} v${VERSION}\n\n"
-          RELEASE_NOTES="${RELEASE_NOTES}Released Dart package: **${PACKAGE}**\n\n"
-          RELEASE_NOTES="${RELEASE_NOTES}## Installation\n\n"
-          RELEASE_NOTES="${RELEASE_NOTES}\`\`\`yaml\n"
-          RELEASE_NOTES="${RELEASE_NOTES}dependencies:\n"
-          RELEASE_NOTES="${RELEASE_NOTES}  ${PACKAGE_NAME}: ^${VERSION}\n"
-          RELEASE_NOTES="${RELEASE_NOTES}\`\`\`\n\n"
-          RELEASE_NOTES="${RELEASE_NOTES}## Links\n\n"
-          RELEASE_NOTES="${RELEASE_NOTES}- [pub.dev](https://pub.dev/packages/${PACKAGE_NAME})\n"
-          RELEASE_NOTES="${RELEASE_NOTES}- [Documentation](https://pub.dev/documentation/${PACKAGE_NAME}/latest/)\n"
-          
-          # Create release
-          echo -e "$RELEASE_NOTES" | gh release create "$TAG" \
-            --title "${PACKAGE_NAME} v${VERSION}" \
-            --notes-file - \
-            --target main

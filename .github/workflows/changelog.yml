@@ -174,11 +174,38 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "*[View full changelog](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}/${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md)*" >> $GITHUB_STEP_SUMMARY
 
+      - name: Update pubspec.yaml version for Dart
+        if: steps.changelog.outputs.changes == 'true' && matrix.language == 'dart'
+        run: |
+          VERSION="${{ steps.release-version.outputs.version }}"
+          PUBSPEC_FILE="${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml"
+          
+          if [ -f "$PUBSPEC_FILE" ]; then
+            CURRENT_VERSION=$(grep '^version:' "$PUBSPEC_FILE" | sed 's/version: //')
+            echo "Current version in pubspec.yaml: $CURRENT_VERSION"
+            
+            if [ "$CURRENT_VERSION" != "$VERSION" ]; then
+              echo "Updating pubspec.yaml version to $VERSION"
+              sed -i "s/^version: .*/version: $VERSION/" "$PUBSPEC_FILE"
+              git add "$PUBSPEC_FILE"
+            else
+              echo "Version already up to date: $VERSION"
+            fi
+          else
+            echo "Warning: pubspec.yaml not found at $PUBSPEC_FILE"
+          fi
+
       - name: Commit Changelog
         if: steps.changelog.outputs.changes == 'true'
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
-          git commit -m "chore(${{ matrix.package }}): update changelog for v${{ steps.release-version.outputs.version }}"
+          
+          # Add pubspec.yaml if it exists and was modified (for Dart packages)
+          if [ -f "${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml" ]; then
+            git add "${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml" 2>/dev/null || true
+          fi
+          
+          git commit -m "chore(${{ matrix.package }}): update changelog and version to v${{ steps.release-version.outputs.version }}"
           git push
