@@ -1,5 +1,6 @@
 rootProject.name = "apis"
 include("common")
+include("chat")
 include("ledger")
 include("lostid")
 include("ocr")
