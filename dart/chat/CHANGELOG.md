@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.47.1
+
+### Changed
+- Updated to latest common code and dependencies
+
 ## 1.47.0 - 2025-10-27
 
 ### 🚀 New Features
