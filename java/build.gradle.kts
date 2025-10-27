@@ -28,6 +28,10 @@ subprojects {
 
     repositories {
         mavenCentral() // Add Maven Central Repository
+        maven {
+            name = "buf"
+            url = uri("https://buf.build/gen/maven")
+          }
     }
 
     tasks.withType<Jar> {
@@ -71,7 +75,7 @@ subprojects {
         api("io.grpc:grpc-services:1.76.0")
         api("io.grpc:grpc-stub:1.76.0")
         api("build.buf:protovalidate:1.0.0")
-        api("org.gnostic:gnostic-grpc:0.7.1")
+        api("build.buf.gen:gnostic_gnostic_protocolbuffers_java:33.0.0.1.20230414000709.087bc8072ce4")
 
         api("jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0")
         api("com.googlecode.libphonenumber:libphonenumber:9.0.17")
@@ -102,7 +106,6 @@ subprojects {
             target(".gitignore")
             // define the steps to apply to those files
             trimTrailingWhitespace()
-            indentWithSpaces() // Takes an integer argument if you don't like 4
             endWithNewline()
         }
         java {

@@ -473,7 +473,7 @@ public final class ChatProto extends com.google.protobuf.GeneratedFile {
           com.google.protobuf.EmptyProto.getDescriptor(),
           com.google.protobuf.StructProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
-          com.antinvestor.apis.gnostic.openapi.v3.AnnotationsProto.getDescriptor(),
+          build.buf.gen.gnostic.openapi.v3.AnnotationsProto.getDescriptor(),
         });
     internal_static_chat_v1_ErrorDetail_descriptor =
       getDescriptor().getMessageType(0);
@@ -684,12 +684,12 @@ public final class ChatProto extends com.google.protobuf.GeneratedFile {
     com.google.protobuf.EmptyProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
-    com.antinvestor.apis.gnostic.openapi.v3.AnnotationsProto.getDescriptor();
+    build.buf.gen.gnostic.openapi.v3.AnnotationsProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(build.buf.validate.ValidateProto.field);
-    registry.add(com.antinvestor.apis.gnostic.openapi.v3.AnnotationsProto.document);
-    registry.add(com.antinvestor.apis.gnostic.openapi.v3.AnnotationsProto.operation);
+    registry.add(build.buf.gen.gnostic.openapi.v3.AnnotationsProto.document);
+    registry.add(build.buf.gen.gnostic.openapi.v3.AnnotationsProto.operation);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
   }

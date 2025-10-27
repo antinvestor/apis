@@ -276,7 +276,7 @@ public final class NotificationProto extends com.google.protobuf.GeneratedFile {
           build.buf.validate.ValidateProto.getDescriptor(),
           com.antinvestor.apis.common.v1.CommonProto.getDescriptor(),
           com.google.protobuf.StructProto.getDescriptor(),
-          org.openapi_v3.AnnotationsProto.getDescriptor(),
+          build.buf.gen.gnostic.openapi.v3.AnnotationsProto.getDescriptor(),
         });
     internal_static_notification_v1_Language_descriptor =
       getDescriptor().getMessageType(0);
@@ -372,12 +372,12 @@ public final class NotificationProto extends com.google.protobuf.GeneratedFile {
     build.buf.validate.ValidateProto.getDescriptor();
     com.antinvestor.apis.common.v1.CommonProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();
-    org.openapi_v3.AnnotationsProto.getDescriptor();
+    build.buf.gen.gnostic.openapi.v3.AnnotationsProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(build.buf.validate.ValidateProto.field);
-    registry.add(org.openapi_v3.AnnotationsProto.document);
-    registry.add(org.openapi_v3.AnnotationsProto.operation);
+    registry.add(build.buf.gen.gnostic.openapi.v3.AnnotationsProto.document);
+    registry.add(build.buf.gen.gnostic.openapi.v3.AnnotationsProto.operation);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
   }

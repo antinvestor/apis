@@ -17,6 +17,9 @@ managed:
       value: true
     - file_option: java_package_prefix
       value: com.antinvestor.apis
+    - file_option: java_package
+      module: buf.build/gnostic/gnostic
+      value: build.buf.gen.gnostic.openapi.v3
     - file_option: go_package_prefix
       value: github.com/antinvestor/apis/go
 plugins:

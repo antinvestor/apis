@@ -152,7 +152,7 @@ public final class CommonProto extends com.google.protobuf.GeneratedFile {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           build.buf.validate.ValidateProto.getDescriptor(),
           com.google.protobuf.StructProto.getDescriptor(),
-          org.openapi_v3.AnnotationsProto.getDescriptor(),
+          build.buf.gen.gnostic.openapi.v3.AnnotationsProto.getDescriptor(),
         });
     internal_static_common_v1_Pagination_descriptor =
       getDescriptor().getMessageType(0);
@@ -199,11 +199,11 @@ public final class CommonProto extends com.google.protobuf.GeneratedFile {
     descriptor.resolveAllFeaturesImmutable();
     build.buf.validate.ValidateProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();
-    org.openapi_v3.AnnotationsProto.getDescriptor();
+    build.buf.gen.gnostic.openapi.v3.AnnotationsProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(build.buf.validate.ValidateProto.field);
-    registry.add(org.openapi_v3.AnnotationsProto.document);
+    registry.add(build.buf.gen.gnostic.openapi.v3.AnnotationsProto.document);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
   }

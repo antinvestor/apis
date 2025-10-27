@@ -4,8 +4,6 @@ managed:
   disable:
     - file_option: java_package
       module: buf.build/bufbuild/protovalidate
-    - file_option: java_package
-      module: buf.build/gnostic/gnostic
     - file_option: go_package
       module: buf.build/bufbuild/protovalidate
     - file_option: go_package
@@ -17,6 +15,9 @@ managed:
       value: true
     - file_option: java_package_prefix
       value: com.antinvestor.apis
+    - file_option: java_package
+      module: buf.build/gnostic/gnostic
+      value: build.buf.gen.gnostic.openapi.v3
     - file_option: go_package_prefix
       value: github.com/antinvestor/apis/go
 plugins:
@@ -41,7 +42,6 @@ plugins:
     out: ../../java/partition/src/main/java/
   - remote: buf.build/protocolbuffers/java
     out: ../../java/partition/src/main/java/
-
   - remote: buf.build/protocolbuffers/dart
     out: ../../dart/partition/lib/src
     include_wkt: true
