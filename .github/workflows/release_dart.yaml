@@ -68,87 +68,12 @@ jobs:
         uses: dart-lang/setup-dart@v1
         with:
           sdk: stable
-      
-      - name: Configure Git
-        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-      
-      - name: Setup pub credentials
-        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
-        run: |
-          mkdir -p ~/.config/dart
-          echo '${{ secrets.PUB_DEV_CREDENTIALS }}' > ~/.config/dart/pub-credentials.json
-      
-      - name: Release package
-        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
-        run: |
-          PACKAGE="${{ matrix.package }}"
-          PACKAGE_DIR="dart/$PACKAGE"
-          
-          echo "================================================"
-          echo "Processing package: $PACKAGE"
-          echo "================================================"
-          
-          if [ ! -d "$PACKAGE_DIR" ]; then
-            echo "  Package directory not found: $PACKAGE_DIR"
-            exit 1
-          fi
-          
-          cd "$PACKAGE_DIR"
-          
-          # Get package name
-          PACKAGE_NAME=$(grep '^name:' pubspec.yaml | sed 's/name: //')
-          echo "Package name: $PACKAGE_NAME"
-          
-          # Extract version from global tag (format: vX.Y.Z)
-          TAG_NAME="${{ github.ref_name }}"
-          if [[ "$TAG_NAME" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
-            NEW_VERSION="${BASH_REMATCH[1]}"
-            echo "Release version from tag: $NEW_VERSION"
-          else
-            echo "❌ Could not parse version from tag: $TAG_NAME"
-            echo "Expected format: vX.Y.Z (e.g., v1.47.0)"
-            exit 1
-          fi
-          
-          # Install dependencies
-          echo "Installing dependencies..."
-          dart pub get
-          
-          # Run analysis
-          echo "Running dart analyze..."
-          dart analyze
-          
-          # Dry run publish
-          echo "Running dry-run publish..."
-          dart pub publish --dry-run
-          
-          # Publish to pub.dev
-          echo "Publishing to pub.dev..."
-          dart pub publish --force
-          
-          echo "✅ Successfully published $PACKAGE v$NEW_VERSION"
-          
-          # Go back to repository root
-          cd "$GITHUB_WORKSPACE"
-          
-          # Create and push package-specific tag after successful publish
-          PACKAGE_TAG="dart/${PACKAGE}/v${NEW_VERSION}"
-          if ! git rev-parse "$PACKAGE_TAG" >/dev/null 2>&1; then
-            git tag -a "$PACKAGE_TAG" -m "Release $PACKAGE v$NEW_VERSION"
-            git push origin "$PACKAGE_TAG"
-            echo "✅ Created and pushed package-specific tag: $PACKAGE_TAG"
-          else
-            echo "ℹ️  Tag $PACKAGE_TAG already exists"
-          fi
 
       - uses: rickstaa/action-create-tag@v1
         if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
         id: "tag_create"
         with:
-          tag: go/${{ matrix.api_module }}/${{github.ref_name}}
+          tag: dart/${{ matrix.api_module }}/${{github.ref_name}}
           tag_exists_error: false
-          message: "release module go/${{ matrix.api_module }}/${{github.ref_name}}"
+          message: "release module dart/${{ matrix.api_module }}/${{github.ref_name}}"
 

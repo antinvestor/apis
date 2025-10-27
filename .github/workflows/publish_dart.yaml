@@ -1,0 +1,128 @@
+name: Publish Dart Packages
+
+on:
+  push:
+    tags:
+      - "dart/*/v*.*.*"
+    paths:
+      - 'dart/**'
+
+jobs:
+  release:
+    strategy:
+      matrix:
+        package: [common, chat, device, notification, ocr, partition, payment, profile, property, settings, ledger, lostid, files]
+      fail-fast: false
+    
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get dart module to publish
+        id: get_module
+        run: |
+          # extract module from tag name
+          MODULE=$(echo "${{ github.ref_name }}" | cut -d '/' -f 2)
+          VERSION_NO=$(echo "${{ github.ref_name }}" | cut -d '/' -f 3)
+          echo "module=$MODULE" >> $GITHUB_OUTPUT
+          echo "version_no=$VERSION_NO" >> $GITHUB_OUTPUT
+
+      - name: Get the latest tag
+        id: get_tags
+        run: |
+          # Get the most recent tag that matches the module
+          TAGS=$(git tag --sort=-creatordate | grep "^dart/${{ get_module.module }}/v" | head -n 1)
+          echo "Found tag: $TAGS"
+          if [[ -z "$TAGS" ]]; then
+            echo "not_enough_tags=true" >> $GITHUB_OUTPUT
+            echo "No tags found for dart/${{ get_module.module }}."
+          else
+            LATEST_TAG=$(echo "$TAGS" | head -n 1)
+            SECOND_LATEST_TAG=$(echo "$TAGS" | sed -n '2p')
+            echo "latest_tag=$LATEST_TAG" >> $GITHUB_ENV
+            echo "second_latest_tag=$SECOND_LATEST_TAG" >> $GITHUB_ENV
+            echo "not_enough_tags=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check for changes since the last tag
+        if: steps.get_tags.outputs.not_enough_tags == 'false'
+        id: dart_module_changed
+        run: |
+          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'dart/${{ get_module.module }}' || true)
+          if [[ -n "$CHANGES" ]]; then
+            echo "Changes found in dart/${{ get_module.module }}"
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes found in dart/${{ get_module.module }}"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Dart
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Setup pub credentials
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
+        run: |
+          mkdir -p ~/.config/dart
+          echo '${{ secrets.PUB_DEV_CREDENTIALS }}' > ~/.config/dart/pub-credentials.json
+      
+      - name: Release package
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
+        run: |
+          VERSION_NO="${{ get_module.version_no }}"
+          PACKAGE="${{ get_module.module }}"
+          PACKAGE_DIR="dart/$PACKAGE"
+          
+          echo "================================================"
+          echo "Processing package: $PACKAGE"
+          echo "================================================"
+          
+          if [ ! -d "$PACKAGE_DIR" ]; then
+            echo "  Package directory not found: $PACKAGE_DIR"
+            exit 1
+          fi
+          
+          cd "$PACKAGE_DIR"
+          
+          # Get package name
+          PACKAGE_NAME=$(grep '^name:' pubspec.yaml | sed 's/name: //')
+          echo "Package name: $PACKAGE_NAME"
+          
+          # Extract version from global tag (format: vX.Y.Z)
+          TAG_NAME="$VERSION_NO"
+          if [[ "$TAG_NAME" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            NEW_VERSION="${BASH_REMATCH[1]}"
+            echo "Release version from tag: $NEW_VERSION"
+          else
+            echo "❌ Could not parse version from tag: $TAG_NAME"
+            echo "Expected format: vX.Y.Z (e.g., v1.47.0)"
+            exit 1
+          fi
+          
+          # Install dependencies
+          echo "Installing dependencies..."
+          dart pub get
+          
+          # Run analysis
+          echo "Running dart analyze..."
+          dart analyze
+          
+          # Dry run publish
+          echo "Running dry-run publish..."
+          dart pub publish --dry-run
+          
+          # Publish to pub.dev
+          echo "Publishing to pub.dev..."
+          dart pub publish --force
+          
+          echo "✅ Successfully published $PACKAGE v$NEW_VERSION"

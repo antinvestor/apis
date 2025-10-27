@@ -1,6 +1,7 @@
 version: v2
 name: buf.build/antinvestor/chat
 deps:
+  - buf.build/antinvestor/common
   - buf.build/bufbuild/protovalidate
   - buf.build/gnostic/gnostic
 

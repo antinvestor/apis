@@ -200,3 +200,11 @@ message ContactLink {
 
   google.protobuf.Struct extras = 10;  // Extended metadata for the contact link
 }
+
+// Standard error codes used by API responses.
+// Use gRPC status codes; the application-level ErrorDetail below may carry more.
+message ErrorDetail {
+  int32 code = 1;         // application code (see doc)
+  string message = 2;     // human readable
+  map<string,string> meta = 3; // additional machine-readable data
+}

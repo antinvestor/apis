@@ -24,6 +24,7 @@ package chat.v1;
 // -----------------------------------------------------
 
 
+import "common/v1/common.proto";
 import "buf/validate/validate.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
@@ -68,13 +69,7 @@ option (gnostic.openapi.v3.document) = {
 };
 
 
-// Standard error codes used by API responses.
-// Use gRPC status codes; the application-level ErrorDetail below may carry more.
-message ErrorDetail {
-  int32 code = 1;         // application code (see doc)
-  string message = 2;     // human readable
-  map<string,string> meta = 3; // additional machine-readable data
-}
+
 
 // -----------------------------------------------------
 // Authentication & Authorization (claims):
@@ -202,6 +197,39 @@ service ChatService {
       tags: "Subscriptions"
     };
   }
+
+  // Real-time Activity APIs
+  // -----------------------------------------------------
+
+  // Update typing indicator for a user in a room
+  rpc UpdateTyping(UpdateTypingRequest) returns (UpdateTypingResponse){
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "updateTyping"
+      summary: "Update typing indicator"
+      description: "Updates the typing status of the authenticated user in a specific room. Broadcasts to all active participants."
+      tags: "Real-time"
+    };
+  }
+
+  // Update read marker (read receipt) for a user in a room
+  rpc UpdateReadMarker(UpdateReadMarkerRequest) returns (UpdateReadMarkerResponse){
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "updateReadMarker"
+      summary: "Update read marker"
+      description: "Updates the read marker indicating which messages a user has read. Enables read receipts and unread counts."
+      tags: "Real-time"
+    };
+  }
+
+  // Get read markers for a room
+  rpc GetReadMarkers(GetReadMarkersRequest) returns (GetReadMarkersResponse){
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "getReadMarkers"
+      summary: "Get read markers for a room"
+      description: "Retrieves read markers showing which messages users have read."
+      tags: "Real-time"
+    };
+  }
 }
 
 // -----------------------------------------------------
@@ -325,7 +353,7 @@ message StreamAck {
   string event_id = 1;
   google.protobuf.Timestamp ack_at = 3;
   google.protobuf.Struct metadata = 6;
-  optional ErrorDetail error = 7; // if set, indicates failure reason for this event
+  optional common.v1.ErrorDetail error = 7; // if set, indicates failure reason for this event
 }
 
 // Generic client commands (typing, read markers that aren't receipts, and room events)
@@ -406,7 +434,7 @@ message CreateRoomRequest {
 
 message CreateRoomResponse {
   Room room = 1;
-  ErrorDetail error = 2;
+  common.v1.ErrorDetail error = 2;
 }
 
 message SearchRoomsRequest {
@@ -433,7 +461,7 @@ message UpdateRoomRequest {
 
 message UpdateRoomResponse {
   Room room = 1;
-  ErrorDetail error = 2;
+  common.v1.ErrorDetail error = 2;
 }
 
 message DeleteRoomRequest {
@@ -442,7 +470,7 @@ message DeleteRoomRequest {
 
 message DeleteRoomResponse {
   string room_id = 1;
-  ErrorDetail error = 2;
+  common.v1.ErrorDetail error = 2;
 }
 
 // -----------------------------------------------------
@@ -464,7 +492,7 @@ message AddRoomSubscriptionsRequest {
 
 message AddRoomSubscriptionsResponse {
   string room_id = 1;
-  ErrorDetail error = 3;
+  common.v1.ErrorDetail error = 3;
 }
 
 message RemoveRoomSubscriptionsRequest {
@@ -474,7 +502,7 @@ message RemoveRoomSubscriptionsRequest {
 
 message RemoveRoomSubscriptionsResponse {
   string room_id = 1;
-  ErrorDetail error = 3;
+  common.v1.ErrorDetail error = 3;
 }
 
 message UpdateSubscriptionRoleRequest {
@@ -485,7 +513,7 @@ message UpdateSubscriptionRoleRequest {
 
 message UpdateSubscriptionRoleResponse {
   string room_id = 1;
-  ErrorDetail error = 3;
+  common.v1.ErrorDetail error = 3;
 }
 
 message SearchRoomSubscriptionsRequest {
@@ -498,3 +526,80 @@ message SearchRoomSubscriptionsResponse {
   repeated RoomSubscription members = 2;
   string next_cursor = 3;
 }
+
+// -----------------------------------------------------
+// Real-time Activity Request/Response Messages
+// -----------------------------------------------------
+
+// UpdateTyping
+message UpdateTypingRequest {
+  string room_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string profile_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  bool typing = 3;
+  google.protobuf.Timestamp timestamp = 4;
+}
+
+message UpdateTypingResponse {
+  bool success = 1;
+  int32 participant_count = 2;
+  google.protobuf.Timestamp broadcast_at = 3;
+}
+
+// UpdateReadMarker
+message UpdateReadMarkerRequest {
+  string room_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string profile_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string up_to_event_id = 3 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  google.protobuf.Timestamp read_at = 4;
+}
+
+message UpdateReadMarkerResponse {
+  bool success = 1;
+  string room_id = 2;
+  string up_to_event_id = 3;
+  google.protobuf.Timestamp read_at = 4;
+  int32 unread_count = 5;
+}
+
+// GetReadMarkers
+message GetReadMarkersRequest {
+  string room_id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  repeated string profile_ids = 2;
+}
+
+message GetReadMarkersResponse {
+  string room_id = 1;
+  repeated ReadMarkerInfo markers = 2;
+}
+
+message ReadMarkerInfo {
+  string profile_id = 1;
+  string up_to_event_id = 2;
+  google.protobuf.Timestamp read_at = 3;
+  int32 unread_count = 4;
+}
+

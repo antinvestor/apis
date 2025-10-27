@@ -660,6 +660,68 @@ func (x *ContactLink) GetExtras() *structpb.Struct {
 	return nil
 }
 
+// Standard error codes used by API responses.
+// Use gRPC status codes; the application-level ErrorDetail below may carry more.
+type ErrorDetail struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`                                                                          // application code (see doc)
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`                                                                     // human readable
+	Meta          map[string]string      `protobuf:"bytes,3,rep,name=meta,proto3" json:"meta,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // additional machine-readable data
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ErrorDetail) Reset() {
+	*x = ErrorDetail{}
+	mi := &file_common_v1_common_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ErrorDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ErrorDetail) ProtoMessage() {}
+
+func (x *ErrorDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_common_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ErrorDetail.ProtoReflect.Descriptor instead.
+func (*ErrorDetail) Descriptor() ([]byte, []int) {
+	return file_common_v1_common_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ErrorDetail) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *ErrorDetail) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *ErrorDetail) GetMeta() map[string]string {
+	if x != nil {
+		return x.Meta
+	}
+	return nil
+}
+
 var File_common_v1_common_proto protoreflect.FileDescriptor
 
 const file_common_v1_common_proto_rawDesc = "" +
@@ -710,7 +772,14 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"contact_id\x18\b \x01(\tB\x1e\xbaH\x1b\xd8\x01\x01r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,40}R\tcontactId\x128\n" +
 	"\x06detail\x18\t \x01(\tB \xbaH\x1d\xd8\x01\x01r\x18\x10\x03\x18\xfa\x012\x11[0-9a-z_-]{3,250}R\x06detail\x12/\n" +
 	"\x06extras\x18\n" +
-	" \x01(\v2\x17.google.protobuf.StructR\x06extras*H\n" +
+	" \x01(\v2\x17.google.protobuf.StructR\x06extras\"\xaa\x01\n" +
+	"\vErrorDetail\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x124\n" +
+	"\x04meta\x18\x03 \x03(\v2 .common.v1.ErrorDetail.MetaEntryR\x04meta\x1a7\n" +
+	"\tMetaEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*H\n" +
 	"\x05STATE\x12\v\n" +
 	"\aCREATED\x10\x00\x12\v\n" +
 	"\aCHECKED\x10\x01\x12\n" +
@@ -747,7 +816,7 @@ func file_common_v1_common_proto_rawDescGZIP() []byte {
 }
 
 var file_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_common_v1_common_proto_goTypes = []any{
 	(STATE)(0),                   // 0: common.v1.STATE
 	(STATUS)(0),                  // 1: common.v1.STATUS
@@ -758,25 +827,28 @@ var file_common_v1_common_proto_goTypes = []any{
 	(*StatusUpdateRequest)(nil),  // 6: common.v1.StatusUpdateRequest
 	(*StatusUpdateResponse)(nil), // 7: common.v1.StatusUpdateResponse
 	(*ContactLink)(nil),          // 8: common.v1.ContactLink
-	(*structpb.Struct)(nil),      // 9: google.protobuf.Struct
+	(*ErrorDetail)(nil),          // 9: common.v1.ErrorDetail
+	nil,                          // 10: common.v1.ErrorDetail.MetaEntry
+	(*structpb.Struct)(nil),      // 11: google.protobuf.Struct
 }
 var file_common_v1_common_proto_depIdxs = []int32{
 	2,  // 0: common.v1.SearchRequest.limits:type_name -> common.v1.Pagination
-	9,  // 1: common.v1.SearchRequest.extras:type_name -> google.protobuf.Struct
-	9,  // 2: common.v1.StatusRequest.extras:type_name -> google.protobuf.Struct
+	11, // 1: common.v1.SearchRequest.extras:type_name -> google.protobuf.Struct
+	11, // 2: common.v1.StatusRequest.extras:type_name -> google.protobuf.Struct
 	0,  // 3: common.v1.StatusResponse.state:type_name -> common.v1.STATE
 	1,  // 4: common.v1.StatusResponse.status:type_name -> common.v1.STATUS
-	9,  // 5: common.v1.StatusResponse.extras:type_name -> google.protobuf.Struct
+	11, // 5: common.v1.StatusResponse.extras:type_name -> google.protobuf.Struct
 	0,  // 6: common.v1.StatusUpdateRequest.state:type_name -> common.v1.STATE
 	1,  // 7: common.v1.StatusUpdateRequest.status:type_name -> common.v1.STATUS
-	9,  // 8: common.v1.StatusUpdateRequest.extras:type_name -> google.protobuf.Struct
+	11, // 8: common.v1.StatusUpdateRequest.extras:type_name -> google.protobuf.Struct
 	5,  // 9: common.v1.StatusUpdateResponse.data:type_name -> common.v1.StatusResponse
-	9,  // 10: common.v1.ContactLink.extras:type_name -> google.protobuf.Struct
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	11, // 10: common.v1.ContactLink.extras:type_name -> google.protobuf.Struct
+	10, // 11: common.v1.ErrorDetail.meta:type_name -> common.v1.ErrorDetail.MetaEntry
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_common_v1_common_proto_init() }
@@ -790,7 +862,7 @@ func file_common_v1_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_common_proto_rawDesc), len(file_common_v1_common_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   7,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
