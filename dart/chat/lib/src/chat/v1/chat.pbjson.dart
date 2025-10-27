@@ -14,6 +14,7 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+import '../../common/v1/common.pbjson.dart' as $2;
 import '../../google/protobuf/struct.pbjson.dart' as $1;
 import '../../google/protobuf/timestamp.pbjson.dart' as $0;
 
@@ -63,41 +64,6 @@ final $typed_data.Uint8List presenceStatusDescriptor = $convert.base64Decode(
     'Cg5QcmVzZW5jZVN0YXR1cxIUChBQUkVTRU5DRV9VTktOT1dOEAASFAoQUFJFU0VOQ0VfT0ZGTE'
     'lORRABEhMKD1BSRVNFTkNFX09OTElORRACEhEKDVBSRVNFTkNFX0FXQVkQAxIRCg1QUkVTRU5D'
     'RV9CVVNZEAQ=');
-
-@$core.Deprecated('Use errorDetailDescriptor instead')
-const ErrorDetail$json = {
-  '1': 'ErrorDetail',
-  '2': [
-    {'1': 'code', '3': 1, '4': 1, '5': 5, '10': 'code'},
-    {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
-    {
-      '1': 'meta',
-      '3': 3,
-      '4': 3,
-      '5': 11,
-      '6': '.chat.v1.ErrorDetail.MetaEntry',
-      '10': 'meta'
-    },
-  ],
-  '3': [ErrorDetail_MetaEntry$json],
-};
-
-@$core.Deprecated('Use errorDetailDescriptor instead')
-const ErrorDetail_MetaEntry$json = {
-  '1': 'MetaEntry',
-  '2': [
-    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
-  ],
-  '7': {'7': true},
-};
-
-/// Descriptor for `ErrorDetail`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List errorDetailDescriptor = $convert.base64Decode(
-    'CgtFcnJvckRldGFpbBISCgRjb2RlGAEgASgFUgRjb2RlEhgKB21lc3NhZ2UYAiABKAlSB21lc3'
-    'NhZ2USMgoEbWV0YRgDIAMoCzIeLmNoYXQudjEuRXJyb3JEZXRhaWwuTWV0YUVudHJ5UgRtZXRh'
-    'GjcKCU1ldGFFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6Aj'
-    'gB');
 
 @$core.Deprecated('Use serverEventDescriptor instead')
 const ServerEvent$json = {
@@ -371,7 +337,7 @@ const StreamAck$json = {
       '3': 7,
       '4': 1,
       '5': 11,
-      '6': '.chat.v1.ErrorDetail',
+      '6': '.common.v1.ErrorDetail',
       '9': 0,
       '10': 'error',
       '17': true
@@ -386,8 +352,8 @@ const StreamAck$json = {
 final $typed_data.Uint8List streamAckDescriptor = $convert.base64Decode(
     'CglTdHJlYW1BY2sSGQoIZXZlbnRfaWQYASABKAlSB2V2ZW50SWQSMQoGYWNrX2F0GAMgASgLMh'
     'ouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIFYWNrQXQSMwoIbWV0YWRhdGEYBiABKAsyFy5n'
-    'b29nbGUucHJvdG9idWYuU3RydWN0UghtZXRhZGF0YRIvCgVlcnJvchgHIAEoCzIULmNoYXQudj'
-    'EuRXJyb3JEZXRhaWxIAFIFZXJyb3KIAQFCCAoGX2Vycm9y');
+    'b29nbGUucHJvdG9idWYuU3RydWN0UghtZXRhZGF0YRIxCgVlcnJvchgHIAEoCzIWLmNvbW1vbi'
+    '52MS5FcnJvckRldGFpbEgAUgVlcnJvcogBAUIICgZfZXJyb3I=');
 
 @$core.Deprecated('Use clientCommandDescriptor instead')
 const ClientCommand$json = {
@@ -625,7 +591,7 @@ const CreateRoomResponse$json = {
       '3': 2,
       '4': 1,
       '5': 11,
-      '6': '.chat.v1.ErrorDetail',
+      '6': '.common.v1.ErrorDetail',
       '10': 'error'
     },
   ],
@@ -634,7 +600,7 @@ const CreateRoomResponse$json = {
 /// Descriptor for `CreateRoomResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createRoomResponseDescriptor = $convert.base64Decode(
     'ChJDcmVhdGVSb29tUmVzcG9uc2USIQoEcm9vbRgBIAEoCzINLmNoYXQudjEuUm9vbVIEcm9vbR'
-    'IqCgVlcnJvchgCIAEoCzIULmNoYXQudjEuRXJyb3JEZXRhaWxSBWVycm9y');
+    'IsCgVlcnJvchgCIAEoCzIWLmNvbW1vbi52MS5FcnJvckRldGFpbFIFZXJyb3I=');
 
 @$core.Deprecated('Use searchRoomsRequestDescriptor instead')
 const SearchRoomsRequest$json = {
@@ -712,7 +678,7 @@ const UpdateRoomResponse$json = {
       '3': 2,
       '4': 1,
       '5': 11,
-      '6': '.chat.v1.ErrorDetail',
+      '6': '.common.v1.ErrorDetail',
       '10': 'error'
     },
   ],
@@ -721,7 +687,7 @@ const UpdateRoomResponse$json = {
 /// Descriptor for `UpdateRoomResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateRoomResponseDescriptor = $convert.base64Decode(
     'ChJVcGRhdGVSb29tUmVzcG9uc2USIQoEcm9vbRgBIAEoCzINLmNoYXQudjEuUm9vbVIEcm9vbR'
-    'IqCgVlcnJvchgCIAEoCzIULmNoYXQudjEuRXJyb3JEZXRhaWxSBWVycm9y');
+    'IsCgVlcnJvchgCIAEoCzIWLmNvbW1vbi52MS5FcnJvckRldGFpbFIFZXJyb3I=');
 
 @$core.Deprecated('Use deleteRoomRequestDescriptor instead')
 const DeleteRoomRequest$json = {
@@ -745,7 +711,7 @@ const DeleteRoomResponse$json = {
       '3': 2,
       '4': 1,
       '5': 11,
-      '6': '.chat.v1.ErrorDetail',
+      '6': '.common.v1.ErrorDetail',
       '10': 'error'
     },
   ],
@@ -753,8 +719,8 @@ const DeleteRoomResponse$json = {
 
 /// Descriptor for `DeleteRoomResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteRoomResponseDescriptor = $convert.base64Decode(
-    'ChJEZWxldGVSb29tUmVzcG9uc2USFwoHcm9vbV9pZBgBIAEoCVIGcm9vbUlkEioKBWVycm9yGA'
-    'IgASgLMhQuY2hhdC52MS5FcnJvckRldGFpbFIFZXJyb3I=');
+    'ChJEZWxldGVSb29tUmVzcG9uc2USFwoHcm9vbV9pZBgBIAEoCVIGcm9vbUlkEiwKBWVycm9yGA'
+    'IgASgLMhYuY29tbW9uLnYxLkVycm9yRGV0YWlsUgVlcnJvcg==');
 
 @$core.Deprecated('Use roomSubscriptionDescriptor instead')
 const RoomSubscription$json = {
@@ -821,7 +787,7 @@ const AddRoomSubscriptionsResponse$json = {
       '3': 3,
       '4': 1,
       '5': 11,
-      '6': '.chat.v1.ErrorDetail',
+      '6': '.common.v1.ErrorDetail',
       '10': 'error'
     },
   ],
@@ -831,7 +797,7 @@ const AddRoomSubscriptionsResponse$json = {
 final $typed_data.Uint8List addRoomSubscriptionsResponseDescriptor =
     $convert.base64Decode(
         'ChxBZGRSb29tU3Vic2NyaXB0aW9uc1Jlc3BvbnNlEhcKB3Jvb21faWQYASABKAlSBnJvb21JZB'
-        'IqCgVlcnJvchgDIAEoCzIULmNoYXQudjEuRXJyb3JEZXRhaWxSBWVycm9y');
+        'IsCgVlcnJvchgDIAEoCzIWLmNvbW1vbi52MS5FcnJvckRldGFpbFIFZXJyb3I=');
 
 @$core.Deprecated('Use removeRoomSubscriptionsRequestDescriptor instead')
 const RemoveRoomSubscriptionsRequest$json = {
@@ -858,7 +824,7 @@ const RemoveRoomSubscriptionsResponse$json = {
       '3': 3,
       '4': 1,
       '5': 11,
-      '6': '.chat.v1.ErrorDetail',
+      '6': '.common.v1.ErrorDetail',
       '10': 'error'
     },
   ],
@@ -868,7 +834,7 @@ const RemoveRoomSubscriptionsResponse$json = {
 final $typed_data.Uint8List removeRoomSubscriptionsResponseDescriptor =
     $convert.base64Decode(
         'Ch9SZW1vdmVSb29tU3Vic2NyaXB0aW9uc1Jlc3BvbnNlEhcKB3Jvb21faWQYASABKAlSBnJvb2'
-        '1JZBIqCgVlcnJvchgDIAEoCzIULmNoYXQudjEuRXJyb3JEZXRhaWxSBWVycm9y');
+        '1JZBIsCgVlcnJvchgDIAEoCzIWLmNvbW1vbi52MS5FcnJvckRldGFpbFIFZXJyb3I=');
 
 @$core.Deprecated('Use updateSubscriptionRoleRequestDescriptor instead')
 const UpdateSubscriptionRoleRequest$json = {
@@ -896,7 +862,7 @@ const UpdateSubscriptionRoleResponse$json = {
       '3': 3,
       '4': 1,
       '5': 11,
-      '6': '.chat.v1.ErrorDetail',
+      '6': '.common.v1.ErrorDetail',
       '10': 'error'
     },
   ],
@@ -906,7 +872,7 @@ const UpdateSubscriptionRoleResponse$json = {
 final $typed_data.Uint8List updateSubscriptionRoleResponseDescriptor =
     $convert.base64Decode(
         'Ch5VcGRhdGVTdWJzY3JpcHRpb25Sb2xlUmVzcG9uc2USFwoHcm9vbV9pZBgBIAEoCVIGcm9vbU'
-        'lkEioKBWVycm9yGAMgASgLMhQuY2hhdC52MS5FcnJvckRldGFpbFIFZXJyb3I=');
+        'lkEiwKBWVycm9yGAMgASgLMhYuY29tbW9uLnYxLkVycm9yRGV0YWlsUgVlcnJvcg==');
 
 @$core.Deprecated('Use searchRoomSubscriptionsRequestDescriptor instead')
 const SearchRoomSubscriptionsRequest$json = {
@@ -948,6 +914,180 @@ final $typed_data.Uint8List searchRoomSubscriptionsResponseDescriptor =
         '1JZBIzCgdtZW1iZXJzGAIgAygLMhkuY2hhdC52MS5Sb29tU3Vic2NyaXB0aW9uUgdtZW1iZXJz'
         'Eh8KC25leHRfY3Vyc29yGAMgASgJUgpuZXh0Q3Vyc29y');
 
+@$core.Deprecated('Use updateTypingRequestDescriptor instead')
+const UpdateTypingRequest$json = {
+  '1': 'UpdateTypingRequest',
+  '2': [
+    {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
+    {'1': 'profile_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
+    {'1': 'typing', '3': 3, '4': 1, '5': 8, '10': 'typing'},
+    {
+      '1': 'timestamp',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'timestamp'
+    },
+  ],
+};
+
+/// Descriptor for `UpdateTypingRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateTypingRequestDescriptor = $convert.base64Decode(
+    'ChNVcGRhdGVUeXBpbmdSZXF1ZXN0EjQKB3Jvb21faWQYASABKAlCG7pIGHIWEAMYKDIQWzAtOW'
+    'Etel8tXXszLDIwfVIGcm9vbUlkEjoKCnByb2ZpbGVfaWQYAiABKAlCG7pIGHIWEAMYKDIQWzAt'
+    'OWEtel8tXXszLDIwfVIJcHJvZmlsZUlkEhYKBnR5cGluZxgDIAEoCFIGdHlwaW5nEjgKCXRpbW'
+    'VzdGFtcBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCXRpbWVzdGFtcA==');
+
+@$core.Deprecated('Use updateTypingResponseDescriptor instead')
+const UpdateTypingResponse$json = {
+  '1': 'UpdateTypingResponse',
+  '2': [
+    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+    {
+      '1': 'participant_count',
+      '3': 2,
+      '4': 1,
+      '5': 5,
+      '10': 'participantCount'
+    },
+    {
+      '1': 'broadcast_at',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'broadcastAt'
+    },
+  ],
+};
+
+/// Descriptor for `UpdateTypingResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateTypingResponseDescriptor = $convert.base64Decode(
+    'ChRVcGRhdGVUeXBpbmdSZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNzEisKEXBhcn'
+    'RpY2lwYW50X2NvdW50GAIgASgFUhBwYXJ0aWNpcGFudENvdW50Ej0KDGJyb2FkY2FzdF9hdBgD'
+    'IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSC2Jyb2FkY2FzdEF0');
+
+@$core.Deprecated('Use updateReadMarkerRequestDescriptor instead')
+const UpdateReadMarkerRequest$json = {
+  '1': 'UpdateReadMarkerRequest',
+  '2': [
+    {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
+    {'1': 'profile_id', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'profileId'},
+    {
+      '1': 'up_to_event_id',
+      '3': 3,
+      '4': 1,
+      '5': 9,
+      '8': {},
+      '10': 'upToEventId'
+    },
+    {
+      '1': 'read_at',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'readAt'
+    },
+  ],
+};
+
+/// Descriptor for `UpdateReadMarkerRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateReadMarkerRequestDescriptor = $convert.base64Decode(
+    'ChdVcGRhdGVSZWFkTWFya2VyUmVxdWVzdBI0Cgdyb29tX2lkGAEgASgJQhu6SBhyFhADGCgyEF'
+    'swLTlhLXpfLV17MywyMH1SBnJvb21JZBI6Cgpwcm9maWxlX2lkGAIgASgJQhu6SBhyFhADGCgy'
+    'EFswLTlhLXpfLV17MywyMH1SCXByb2ZpbGVJZBJACg51cF90b19ldmVudF9pZBgDIAEoCUIbuk'
+    'gYchYQAxgoMhBbMC05YS16Xy1dezMsMjB9Ugt1cFRvRXZlbnRJZBIzCgdyZWFkX2F0GAQgASgL'
+    'MhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIGcmVhZEF0');
+
+@$core.Deprecated('Use updateReadMarkerResponseDescriptor instead')
+const UpdateReadMarkerResponse$json = {
+  '1': 'UpdateReadMarkerResponse',
+  '2': [
+    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+    {'1': 'room_id', '3': 2, '4': 1, '5': 9, '10': 'roomId'},
+    {'1': 'up_to_event_id', '3': 3, '4': 1, '5': 9, '10': 'upToEventId'},
+    {
+      '1': 'read_at',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'readAt'
+    },
+    {'1': 'unread_count', '3': 5, '4': 1, '5': 5, '10': 'unreadCount'},
+  ],
+};
+
+/// Descriptor for `UpdateReadMarkerResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateReadMarkerResponseDescriptor = $convert.base64Decode(
+    'ChhVcGRhdGVSZWFkTWFya2VyUmVzcG9uc2USGAoHc3VjY2VzcxgBIAEoCFIHc3VjY2VzcxIXCg'
+    'dyb29tX2lkGAIgASgJUgZyb29tSWQSIwoOdXBfdG9fZXZlbnRfaWQYAyABKAlSC3VwVG9FdmVu'
+    'dElkEjMKB3JlYWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgZyZWFkQX'
+    'QSIQoMdW5yZWFkX2NvdW50GAUgASgFUgt1bnJlYWRDb3VudA==');
+
+@$core.Deprecated('Use getReadMarkersRequestDescriptor instead')
+const GetReadMarkersRequest$json = {
+  '1': 'GetReadMarkersRequest',
+  '2': [
+    {'1': 'room_id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'roomId'},
+    {'1': 'profile_ids', '3': 2, '4': 3, '5': 9, '10': 'profileIds'},
+  ],
+};
+
+/// Descriptor for `GetReadMarkersRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getReadMarkersRequestDescriptor = $convert.base64Decode(
+    'ChVHZXRSZWFkTWFya2Vyc1JlcXVlc3QSNAoHcm9vbV9pZBgBIAEoCUIbukgYchYQAxgoMhBbMC'
+    '05YS16Xy1dezMsMjB9UgZyb29tSWQSHwoLcHJvZmlsZV9pZHMYAiADKAlSCnByb2ZpbGVJZHM=');
+
+@$core.Deprecated('Use getReadMarkersResponseDescriptor instead')
+const GetReadMarkersResponse$json = {
+  '1': 'GetReadMarkersResponse',
+  '2': [
+    {'1': 'room_id', '3': 1, '4': 1, '5': 9, '10': 'roomId'},
+    {
+      '1': 'markers',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.chat.v1.ReadMarkerInfo',
+      '10': 'markers'
+    },
+  ],
+};
+
+/// Descriptor for `GetReadMarkersResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getReadMarkersResponseDescriptor =
+    $convert.base64Decode(
+        'ChZHZXRSZWFkTWFya2Vyc1Jlc3BvbnNlEhcKB3Jvb21faWQYASABKAlSBnJvb21JZBIxCgdtYX'
+        'JrZXJzGAIgAygLMhcuY2hhdC52MS5SZWFkTWFya2VySW5mb1IHbWFya2Vycw==');
+
+@$core.Deprecated('Use readMarkerInfoDescriptor instead')
+const ReadMarkerInfo$json = {
+  '1': 'ReadMarkerInfo',
+  '2': [
+    {'1': 'profile_id', '3': 1, '4': 1, '5': 9, '10': 'profileId'},
+    {'1': 'up_to_event_id', '3': 2, '4': 1, '5': 9, '10': 'upToEventId'},
+    {
+      '1': 'read_at',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'readAt'
+    },
+    {'1': 'unread_count', '3': 4, '4': 1, '5': 5, '10': 'unreadCount'},
+  ],
+};
+
+/// Descriptor for `ReadMarkerInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List readMarkerInfoDescriptor = $convert.base64Decode(
+    'Cg5SZWFkTWFya2VySW5mbxIdCgpwcm9maWxlX2lkGAEgASgJUglwcm9maWxlSWQSIwoOdXBfdG'
+    '9fZXZlbnRfaWQYAiABKAlSC3VwVG9FdmVudElkEjMKB3JlYWRfYXQYAyABKAsyGi5nb29nbGUu'
+    'cHJvdG9idWYuVGltZXN0YW1wUgZyZWFkQXQSIQoMdW5yZWFkX2NvdW50GAQgASgFUgt1bnJlYW'
+    'RDb3VudA==');
+
 const $core.Map<$core.String, $core.dynamic> GatewayServiceBase$json = {
   '1': 'GatewayService',
   '2': [
@@ -972,8 +1112,8 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.google.protobuf.Struct.FieldsEntry': $1.Struct_FieldsEntry$json,
   '.google.protobuf.Value': $1.Value$json,
   '.google.protobuf.ListValue': $1.ListValue$json,
-  '.chat.v1.ErrorDetail': ErrorDetail$json,
-  '.chat.v1.ErrorDetail.MetaEntry': ErrorDetail_MetaEntry$json,
+  '.common.v1.ErrorDetail': $2.ErrorDetail$json,
+  '.common.v1.ErrorDetail.MetaEntry': $2.ErrorDetail_MetaEntry$json,
   '.chat.v1.ClientCommand': ClientCommand$json,
   '.chat.v1.TypingUpdate': TypingUpdate$json,
   '.chat.v1.ReadMarker': ReadMarker$json,
@@ -1058,6 +1198,24 @@ const $core.Map<$core.String, $core.dynamic> ChatServiceBase$json = {
       '3': '.chat.v1.SearchRoomSubscriptionsResponse',
       '4': {}
     },
+    {
+      '1': 'UpdateTyping',
+      '2': '.chat.v1.UpdateTypingRequest',
+      '3': '.chat.v1.UpdateTypingResponse',
+      '4': {}
+    },
+    {
+      '1': 'UpdateReadMarker',
+      '2': '.chat.v1.UpdateReadMarkerRequest',
+      '3': '.chat.v1.UpdateReadMarkerResponse',
+      '4': {}
+    },
+    {
+      '1': 'GetReadMarkers',
+      '2': '.chat.v1.GetReadMarkersRequest',
+      '3': '.chat.v1.GetReadMarkersResponse',
+      '4': {}
+    },
   ],
 };
 
@@ -1073,8 +1231,8 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.google.protobuf.Timestamp': $0.Timestamp$json,
   '.chat.v1.SendEventResponse': SendEventResponse$json,
   '.chat.v1.StreamAck': StreamAck$json,
-  '.chat.v1.ErrorDetail': ErrorDetail$json,
-  '.chat.v1.ErrorDetail.MetaEntry': ErrorDetail_MetaEntry$json,
+  '.common.v1.ErrorDetail': $2.ErrorDetail$json,
+  '.common.v1.ErrorDetail.MetaEntry': $2.ErrorDetail_MetaEntry$json,
   '.chat.v1.GetHistoryRequest': GetHistoryRequest$json,
   '.chat.v1.GetHistoryResponse': GetHistoryResponse$json,
   '.chat.v1.ServerEvent': ServerEvent$json,
@@ -1104,6 +1262,13 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
       SearchRoomSubscriptionsRequest$json,
   '.chat.v1.SearchRoomSubscriptionsResponse':
       SearchRoomSubscriptionsResponse$json,
+  '.chat.v1.UpdateTypingRequest': UpdateTypingRequest$json,
+  '.chat.v1.UpdateTypingResponse': UpdateTypingResponse$json,
+  '.chat.v1.UpdateReadMarkerRequest': UpdateReadMarkerRequest$json,
+  '.chat.v1.UpdateReadMarkerResponse': UpdateReadMarkerResponse$json,
+  '.chat.v1.GetReadMarkersRequest': GetReadMarkersRequest$json,
+  '.chat.v1.GetReadMarkersResponse': GetReadMarkersResponse$json,
+  '.chat.v1.ReadMarkerInfo': ReadMarkerInfo$json,
 };
 
 /// Descriptor for `ChatService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
@@ -1159,4 +1324,17 @@ final $typed_data.Uint8List chatServiceDescriptor = $convert.base64Decode(
     'aFJvb21TdWJzY3JpcHRpb25zUmVzcG9uc2UiqwG6R6cBCg1TdWJzY3JpcHRpb25zEhFMaXN0IH'
     'Jvb20gbWVtYmVycxpqUmV0cmlldmVzIGEgcGFnaW5hdGVkIGxpc3Qgb2YgdXNlcnMgc3Vic2Ny'
     'aWJlZCB0byBhIHJvb20sIGFsb25nIHdpdGggdGhlaXIgcm9sZXMgYW5kIGFjdGl2aXR5IGluZm'
-    '9ybWF0aW9uLioXc2VhcmNoUm9vbVN1YnNjcmlwdGlvbnM=');
+    '9ybWF0aW9uLioXc2VhcmNoUm9vbVN1YnNjcmlwdGlvbnMS9AEKDFVwZGF0ZVR5cGluZxIcLmNo'
+    'YXQudjEuVXBkYXRlVHlwaW5nUmVxdWVzdBodLmNoYXQudjEuVXBkYXRlVHlwaW5nUmVzcG9uc2'
+    'UipgG6R6IBCglSZWFsLXRpbWUSF1VwZGF0ZSB0eXBpbmcgaW5kaWNhdG9yGm5VcGRhdGVzIHRo'
+    'ZSB0eXBpbmcgc3RhdHVzIG9mIHRoZSBhdXRoZW50aWNhdGVkIHVzZXIgaW4gYSBzcGVjaWZpYy'
+    'Byb29tLiBCcm9hZGNhc3RzIHRvIGFsbCBhY3RpdmUgcGFydGljaXBhbnRzLioMdXBkYXRlVHlw'
+    'aW5nEvwBChBVcGRhdGVSZWFkTWFya2VyEiAuY2hhdC52MS5VcGRhdGVSZWFkTWFya2VyUmVxdW'
+    'VzdBohLmNoYXQudjEuVXBkYXRlUmVhZE1hcmtlclJlc3BvbnNlIqIBukeeAQoJUmVhbC10aW1l'
+    'EhJVcGRhdGUgcmVhZCBtYXJrZXIaa1VwZGF0ZXMgdGhlIHJlYWQgbWFya2VyIGluZGljYXRpbm'
+    'cgd2hpY2ggbWVzc2FnZXMgYSB1c2VyIGhhcyByZWFkLiBFbmFibGVzIHJlYWQgcmVjZWlwdHMg'
+    'YW5kIHVucmVhZCBjb3VudHMuKhB1cGRhdGVSZWFkTWFya2VyEs4BCg5HZXRSZWFkTWFya2Vycx'
+    'IeLmNoYXQudjEuR2V0UmVhZE1hcmtlcnNSZXF1ZXN0Gh8uY2hhdC52MS5HZXRSZWFkTWFya2Vy'
+    'c1Jlc3BvbnNlInu6R3gKCVJlYWwtdGltZRIbR2V0IHJlYWQgbWFya2VycyBmb3IgYSByb29tGj'
+    '5SZXRyaWV2ZXMgcmVhZCBtYXJrZXJzIHNob3dpbmcgd2hpY2ggbWVzc2FnZXMgdXNlcnMgaGF2'
+    'ZSByZWFkLioOZ2V0UmVhZE1hcmtlcnM=');

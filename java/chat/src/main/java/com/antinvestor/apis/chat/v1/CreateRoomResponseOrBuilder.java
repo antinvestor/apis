@@ -40,17 +40,17 @@ public interface CreateRoomResponseOrBuilder extends
   com.antinvestor.apis.chat.v1.RoomOrBuilder getRoomOrBuilder();
 
   /**
-   * <code>.chat.v1.ErrorDetail error = 2 [json_name = "error"];</code>
+   * <code>.common.v1.ErrorDetail error = 2 [json_name = "error"];</code>
    * @return Whether the error field is set.
    */
   boolean hasError();
   /**
-   * <code>.chat.v1.ErrorDetail error = 2 [json_name = "error"];</code>
+   * <code>.common.v1.ErrorDetail error = 2 [json_name = "error"];</code>
    * @return The error.
    */
-  com.antinvestor.apis.chat.v1.ErrorDetail getError();
+  com.antinvestor.apis.common.v1.ErrorDetail getError();
   /**
-   * <code>.chat.v1.ErrorDetail error = 2 [json_name = "error"];</code>
+   * <code>.common.v1.ErrorDetail error = 2 [json_name = "error"];</code>
    */
-  com.antinvestor.apis.chat.v1.ErrorDetailOrBuilder getErrorOrBuilder();
+  com.antinvestor.apis.common.v1.ErrorDetailOrBuilder getErrorOrBuilder();
 }

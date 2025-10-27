@@ -97,4 +97,28 @@ abstract final class ChatService {
     chatv1chat.SearchRoomSubscriptionsRequest.new,
     chatv1chat.SearchRoomSubscriptionsResponse.new,
   );
+
+  /// Update typing indicator for a user in a room
+  static const updateTyping = connect.Spec(
+    '/$name/UpdateTyping',
+    connect.StreamType.unary,
+    chatv1chat.UpdateTypingRequest.new,
+    chatv1chat.UpdateTypingResponse.new,
+  );
+
+  /// Update read marker (read receipt) for a user in a room
+  static const updateReadMarker = connect.Spec(
+    '/$name/UpdateReadMarker',
+    connect.StreamType.unary,
+    chatv1chat.UpdateReadMarkerRequest.new,
+    chatv1chat.UpdateReadMarkerResponse.new,
+  );
+
+  /// Get read markers for a room
+  static const getReadMarkers = connect.Spec(
+    '/$name/GetReadMarkers',
+    connect.StreamType.unary,
+    chatv1chat.GetReadMarkersRequest.new,
+    chatv1chat.GetReadMarkersResponse.new,
+  );
 }

@@ -713,6 +713,85 @@ class ContactLink extends $pb.GeneratedMessage {
   $0.Struct ensureExtras() => $_ensure(6);
 }
 
+/// Standard error codes used by API responses.
+/// Use gRPC status codes; the application-level ErrorDetail below may carry more.
+class ErrorDetail extends $pb.GeneratedMessage {
+  factory ErrorDetail({
+    $core.int? code,
+    $core.String? message,
+    $core.Iterable<$core.MapEntry<$core.String, $core.String>>? meta,
+  }) {
+    final result = create();
+    if (code != null) result.code = code;
+    if (message != null) result.message = message;
+    if (meta != null) result.meta.addEntries(meta);
+    return result;
+  }
+
+  ErrorDetail._();
+
+  factory ErrorDetail.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ErrorDetail.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ErrorDetail',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'common.v1'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'code')
+    ..aOS(2, _omitFieldNames ? '' : 'message')
+    ..m<$core.String, $core.String>(3, _omitFieldNames ? '' : 'meta',
+        entryClassName: 'ErrorDetail.MetaEntry',
+        keyFieldType: $pb.PbFieldType.OS,
+        valueFieldType: $pb.PbFieldType.OS,
+        packageName: const $pb.PackageName('common.v1'))
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ErrorDetail clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ErrorDetail copyWith(void Function(ErrorDetail) updates) =>
+      super.copyWith((message) => updates(message as ErrorDetail))
+          as ErrorDetail;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ErrorDetail create() => ErrorDetail._();
+  @$core.override
+  ErrorDetail createEmptyInstance() => create();
+  static $pb.PbList<ErrorDetail> createRepeated() => $pb.PbList<ErrorDetail>();
+  @$core.pragma('dart2js:noInline')
+  static ErrorDetail getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ErrorDetail>(create);
+  static ErrorDetail? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get code => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set code($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCode() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get message => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set message($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMessage() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $pb.PbMap<$core.String, $core.String> get meta => $_getMap(2);
+}
+
 const $core.bool _omitFieldNames =
     $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames =

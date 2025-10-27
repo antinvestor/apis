@@ -159,6 +159,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetHistoryResponse'
+  /chat.v1.ChatService/GetReadMarkers:
+    post:
+      tags:
+        - Real-time
+        - chat.v1.ChatService
+      summary: Get read markers for a room
+      description: Retrieves read markers showing which messages users have read.
+      operationId: getReadMarkers
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.GetReadMarkersRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetReadMarkersResponse'
   /chat.v1.ChatService/RemoveRoomSubscriptions:
     post:
       tags:
@@ -271,6 +308,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.SendEventResponse'
+  /chat.v1.ChatService/UpdateReadMarker:
+    post:
+      tags:
+        - Real-time
+        - chat.v1.ChatService
+      summary: Update read marker
+      description: Updates the read marker indicating which messages a user has read. Enables read receipts and unread counts.
+      operationId: updateReadMarker
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.UpdateReadMarkerRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.UpdateReadMarkerResponse'
   /chat.v1.ChatService/UpdateRoom:
     post:
       tags:
@@ -345,6 +419,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.UpdateSubscriptionRoleResponse'
+  /chat.v1.ChatService/UpdateTyping:
+    post:
+      tags:
+        - Real-time
+        - chat.v1.ChatService
+      summary: Update typing indicator
+      description: Updates the typing status of the authenticated user in a specific room. Broadcasts to all active participants.
+      operationId: updateTyping
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.UpdateTypingRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.UpdateTypingResponse'
   /chat.v1.GatewayService/Connect: {}
 components:
   schemas:
@@ -370,7 +481,7 @@ components:
           title: room_id
         error:
           title: error
-          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: AddRoomSubscriptionsResponse
       additionalProperties: false
     chat.v1.ClientCommand:
@@ -479,7 +590,7 @@ components:
           $ref: '#/components/schemas/chat.v1.Room'
         error:
           title: error
-          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: CreateRoomResponse
       additionalProperties: false
     chat.v1.DeleteRoomRequest:
@@ -498,43 +609,8 @@ components:
           title: room_id
         error:
           title: error
-          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: DeleteRoomResponse
-      additionalProperties: false
-    chat.v1.ErrorDetail:
-      type: object
-      properties:
-        code:
-          type: integer
-          title: code
-          format: int32
-          description: application code (see doc)
-        message:
-          type: string
-          title: message
-          description: human readable
-        meta:
-          type: object
-          title: meta
-          additionalProperties:
-            type: string
-            title: value
-          description: additional machine-readable data
-      title: ErrorDetail
-      additionalProperties: false
-      description: |-
-        Standard error codes used by API responses.
-         Use gRPC status codes; the application-level ErrorDetail below may carry more.
-    chat.v1.ErrorDetail.MetaEntry:
-      type: object
-      properties:
-        key:
-          type: string
-          title: key
-        value:
-          type: string
-          title: value
-      title: MetaEntry
       additionalProperties: false
     chat.v1.GetHistoryRequest:
       type: object
@@ -574,6 +650,36 @@ components:
           title: prev_cursor
       title: GetHistoryResponse
       additionalProperties: false
+    chat.v1.GetReadMarkersRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        profileIds:
+          type: array
+          items:
+            type: string
+          title: profile_ids
+      title: GetReadMarkersRequest
+      additionalProperties: false
+      description: GetReadMarkers
+    chat.v1.GetReadMarkersResponse:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        markers:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.ReadMarkerInfo'
+          title: markers
+      title: GetReadMarkersResponse
+      additionalProperties: false
     chat.v1.PresenceEvent:
       type: object
       properties:
@@ -611,6 +717,24 @@ components:
           type: string
           title: up_to_event_id
       title: ReadMarker
+      additionalProperties: false
+    chat.v1.ReadMarkerInfo:
+      type: object
+      properties:
+        profileId:
+          type: string
+          title: profile_id
+        upToEventId:
+          type: string
+          title: up_to_event_id
+        readAt:
+          title: read_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        unreadCount:
+          type: integer
+          title: unread_count
+          format: int32
+      title: ReadMarkerInfo
       additionalProperties: false
     chat.v1.ReceiptEvent:
       type: object
@@ -651,7 +775,7 @@ components:
           title: room_id
         error:
           title: error
-          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: RemoveRoomSubscriptionsResponse
       additionalProperties: false
     chat.v1.Room:
@@ -932,7 +1056,7 @@ components:
           title: error
           description: if set, indicates failure reason for this event
           nullable: true
-          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: StreamAck
       additionalProperties: false
       description: |-
@@ -968,6 +1092,54 @@ components:
           title: typing
       title: TypingUpdate
       additionalProperties: false
+    chat.v1.UpdateReadMarkerRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        upToEventId:
+          type: string
+          title: up_to_event_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        readAt:
+          title: read_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: UpdateReadMarkerRequest
+      additionalProperties: false
+      description: UpdateReadMarker
+    chat.v1.UpdateReadMarkerResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          title: success
+        roomId:
+          type: string
+          title: room_id
+        upToEventId:
+          type: string
+          title: up_to_event_id
+        readAt:
+          title: read_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+        unreadCount:
+          type: integer
+          title: unread_count
+          format: int32
+      title: UpdateReadMarkerResponse
+      additionalProperties: false
     chat.v1.UpdateRoomRequest:
       type: object
       properties:
@@ -993,7 +1165,7 @@ components:
           $ref: '#/components/schemas/chat.v1.Room'
         error:
           title: error
-          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: UpdateRoomResponse
       additionalProperties: false
     chat.v1.UpdateSubscriptionRoleRequest:
@@ -1020,8 +1192,82 @@ components:
           title: room_id
         error:
           title: error
-          $ref: '#/components/schemas/chat.v1.ErrorDetail'
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: UpdateSubscriptionRoleResponse
+      additionalProperties: false
+    chat.v1.UpdateTypingRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        profileId:
+          type: string
+          title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        typing:
+          type: boolean
+          title: typing
+        timestamp:
+          title: timestamp
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: UpdateTypingRequest
+      additionalProperties: false
+      description: UpdateTyping
+    chat.v1.UpdateTypingResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          title: success
+        participantCount:
+          type: integer
+          title: participant_count
+          format: int32
+        broadcastAt:
+          title: broadcast_at
+          $ref: '#/components/schemas/google.protobuf.Timestamp'
+      title: UpdateTypingResponse
+      additionalProperties: false
+    common.v1.ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: integer
+          title: code
+          format: int32
+          description: application code (see doc)
+        message:
+          type: string
+          title: message
+          description: human readable
+        meta:
+          type: object
+          title: meta
+          additionalProperties:
+            type: string
+            title: value
+          description: additional machine-readable data
+      title: ErrorDetail
+      additionalProperties: false
+      description: |-
+        Standard error codes used by API responses.
+         Use gRPC status codes; the application-level ErrorDetail below may carry more.
+    common.v1.ErrorDetail.MetaEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: MetaEntry
       additionalProperties: false
     connect-protocol-version:
       type: number

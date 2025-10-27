@@ -15,19 +15,19 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'chat.pb.dart' as $2;
+import 'chat.pb.dart' as $3;
 import 'chat.pbjson.dart';
 
 export 'chat.pb.dart';
 
 abstract class GatewayServiceBase extends $pb.GeneratedService {
-  $async.Future<$2.ServerEvent> connect(
-      $pb.ServerContext ctx, $2.ConnectRequest request);
+  $async.Future<$3.ServerEvent> connect(
+      $pb.ServerContext ctx, $3.ConnectRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
       case 'Connect':
-        return $2.ConnectRequest();
+        return $3.ConnectRequest();
       default:
         throw $core.ArgumentError('Unknown method: $methodName');
     }
@@ -37,7 +37,7 @@ abstract class GatewayServiceBase extends $pb.GeneratedService {
       $core.String methodName, $pb.GeneratedMessage request) {
     switch (methodName) {
       case 'Connect':
-        return connect(ctx, request as $2.ConnectRequest);
+        return connect(ctx, request as $3.ConnectRequest);
       default:
         throw $core.ArgumentError('Unknown method: $methodName');
     }
@@ -49,49 +49,61 @@ abstract class GatewayServiceBase extends $pb.GeneratedService {
 }
 
 abstract class ChatServiceBase extends $pb.GeneratedService {
-  $async.Future<$2.SendEventResponse> sendEvent(
-      $pb.ServerContext ctx, $2.SendEventRequest request);
-  $async.Future<$2.GetHistoryResponse> getHistory(
-      $pb.ServerContext ctx, $2.GetHistoryRequest request);
-  $async.Future<$2.CreateRoomResponse> createRoom(
-      $pb.ServerContext ctx, $2.CreateRoomRequest request);
-  $async.Future<$2.SearchRoomsResponse> searchRooms(
-      $pb.ServerContext ctx, $2.SearchRoomsRequest request);
-  $async.Future<$2.UpdateRoomResponse> updateRoom(
-      $pb.ServerContext ctx, $2.UpdateRoomRequest request);
-  $async.Future<$2.DeleteRoomResponse> deleteRoom(
-      $pb.ServerContext ctx, $2.DeleteRoomRequest request);
-  $async.Future<$2.AddRoomSubscriptionsResponse> addRoomSubscriptions(
-      $pb.ServerContext ctx, $2.AddRoomSubscriptionsRequest request);
-  $async.Future<$2.RemoveRoomSubscriptionsResponse> removeRoomSubscriptions(
-      $pb.ServerContext ctx, $2.RemoveRoomSubscriptionsRequest request);
-  $async.Future<$2.UpdateSubscriptionRoleResponse> updateSubscriptionRole(
-      $pb.ServerContext ctx, $2.UpdateSubscriptionRoleRequest request);
-  $async.Future<$2.SearchRoomSubscriptionsResponse> searchRoomSubscriptions(
-      $pb.ServerContext ctx, $2.SearchRoomSubscriptionsRequest request);
+  $async.Future<$3.SendEventResponse> sendEvent(
+      $pb.ServerContext ctx, $3.SendEventRequest request);
+  $async.Future<$3.GetHistoryResponse> getHistory(
+      $pb.ServerContext ctx, $3.GetHistoryRequest request);
+  $async.Future<$3.CreateRoomResponse> createRoom(
+      $pb.ServerContext ctx, $3.CreateRoomRequest request);
+  $async.Future<$3.SearchRoomsResponse> searchRooms(
+      $pb.ServerContext ctx, $3.SearchRoomsRequest request);
+  $async.Future<$3.UpdateRoomResponse> updateRoom(
+      $pb.ServerContext ctx, $3.UpdateRoomRequest request);
+  $async.Future<$3.DeleteRoomResponse> deleteRoom(
+      $pb.ServerContext ctx, $3.DeleteRoomRequest request);
+  $async.Future<$3.AddRoomSubscriptionsResponse> addRoomSubscriptions(
+      $pb.ServerContext ctx, $3.AddRoomSubscriptionsRequest request);
+  $async.Future<$3.RemoveRoomSubscriptionsResponse> removeRoomSubscriptions(
+      $pb.ServerContext ctx, $3.RemoveRoomSubscriptionsRequest request);
+  $async.Future<$3.UpdateSubscriptionRoleResponse> updateSubscriptionRole(
+      $pb.ServerContext ctx, $3.UpdateSubscriptionRoleRequest request);
+  $async.Future<$3.SearchRoomSubscriptionsResponse> searchRoomSubscriptions(
+      $pb.ServerContext ctx, $3.SearchRoomSubscriptionsRequest request);
+  $async.Future<$3.UpdateTypingResponse> updateTyping(
+      $pb.ServerContext ctx, $3.UpdateTypingRequest request);
+  $async.Future<$3.UpdateReadMarkerResponse> updateReadMarker(
+      $pb.ServerContext ctx, $3.UpdateReadMarkerRequest request);
+  $async.Future<$3.GetReadMarkersResponse> getReadMarkers(
+      $pb.ServerContext ctx, $3.GetReadMarkersRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
       case 'SendEvent':
-        return $2.SendEventRequest();
+        return $3.SendEventRequest();
       case 'GetHistory':
-        return $2.GetHistoryRequest();
+        return $3.GetHistoryRequest();
       case 'CreateRoom':
-        return $2.CreateRoomRequest();
+        return $3.CreateRoomRequest();
       case 'SearchRooms':
-        return $2.SearchRoomsRequest();
+        return $3.SearchRoomsRequest();
       case 'UpdateRoom':
-        return $2.UpdateRoomRequest();
+        return $3.UpdateRoomRequest();
       case 'DeleteRoom':
-        return $2.DeleteRoomRequest();
+        return $3.DeleteRoomRequest();
       case 'AddRoomSubscriptions':
-        return $2.AddRoomSubscriptionsRequest();
+        return $3.AddRoomSubscriptionsRequest();
       case 'RemoveRoomSubscriptions':
-        return $2.RemoveRoomSubscriptionsRequest();
+        return $3.RemoveRoomSubscriptionsRequest();
       case 'UpdateSubscriptionRole':
-        return $2.UpdateSubscriptionRoleRequest();
+        return $3.UpdateSubscriptionRoleRequest();
       case 'SearchRoomSubscriptions':
-        return $2.SearchRoomSubscriptionsRequest();
+        return $3.SearchRoomSubscriptionsRequest();
+      case 'UpdateTyping':
+        return $3.UpdateTypingRequest();
+      case 'UpdateReadMarker':
+        return $3.UpdateReadMarkerRequest();
+      case 'GetReadMarkers':
+        return $3.GetReadMarkersRequest();
       default:
         throw $core.ArgumentError('Unknown method: $methodName');
     }
@@ -101,29 +113,35 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
       $core.String methodName, $pb.GeneratedMessage request) {
     switch (methodName) {
       case 'SendEvent':
-        return sendEvent(ctx, request as $2.SendEventRequest);
+        return sendEvent(ctx, request as $3.SendEventRequest);
       case 'GetHistory':
-        return getHistory(ctx, request as $2.GetHistoryRequest);
+        return getHistory(ctx, request as $3.GetHistoryRequest);
       case 'CreateRoom':
-        return createRoom(ctx, request as $2.CreateRoomRequest);
+        return createRoom(ctx, request as $3.CreateRoomRequest);
       case 'SearchRooms':
-        return searchRooms(ctx, request as $2.SearchRoomsRequest);
+        return searchRooms(ctx, request as $3.SearchRoomsRequest);
       case 'UpdateRoom':
-        return updateRoom(ctx, request as $2.UpdateRoomRequest);
+        return updateRoom(ctx, request as $3.UpdateRoomRequest);
       case 'DeleteRoom':
-        return deleteRoom(ctx, request as $2.DeleteRoomRequest);
+        return deleteRoom(ctx, request as $3.DeleteRoomRequest);
       case 'AddRoomSubscriptions':
         return addRoomSubscriptions(
-            ctx, request as $2.AddRoomSubscriptionsRequest);
+            ctx, request as $3.AddRoomSubscriptionsRequest);
       case 'RemoveRoomSubscriptions':
         return removeRoomSubscriptions(
-            ctx, request as $2.RemoveRoomSubscriptionsRequest);
+            ctx, request as $3.RemoveRoomSubscriptionsRequest);
       case 'UpdateSubscriptionRole':
         return updateSubscriptionRole(
-            ctx, request as $2.UpdateSubscriptionRoleRequest);
+            ctx, request as $3.UpdateSubscriptionRoleRequest);
       case 'SearchRoomSubscriptions':
         return searchRoomSubscriptions(
-            ctx, request as $2.SearchRoomSubscriptionsRequest);
+            ctx, request as $3.SearchRoomSubscriptionsRequest);
+      case 'UpdateTyping':
+        return updateTyping(ctx, request as $3.UpdateTypingRequest);
+      case 'UpdateReadMarker':
+        return updateReadMarker(ctx, request as $3.UpdateReadMarkerRequest);
+      case 'GetReadMarkers':
+        return getReadMarkers(ctx, request as $3.GetReadMarkersRequest);
       default:
         throw $core.ArgumentError('Unknown method: $methodName');
     }

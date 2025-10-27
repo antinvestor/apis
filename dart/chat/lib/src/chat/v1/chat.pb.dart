@@ -15,6 +15,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import '../../common/v1/common.pb.dart' as $2;
 import '../../google/protobuf/struct.pb.dart' as $1;
 import '../../google/protobuf/timestamp.pb.dart' as $0;
 import 'chat.pbenum.dart';
@@ -22,85 +23,6 @@ import 'chat.pbenum.dart';
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 export 'chat.pbenum.dart';
-
-/// Standard error codes used by API responses.
-/// Use gRPC status codes; the application-level ErrorDetail below may carry more.
-class ErrorDetail extends $pb.GeneratedMessage {
-  factory ErrorDetail({
-    $core.int? code,
-    $core.String? message,
-    $core.Iterable<$core.MapEntry<$core.String, $core.String>>? meta,
-  }) {
-    final result = create();
-    if (code != null) result.code = code;
-    if (message != null) result.message = message;
-    if (meta != null) result.meta.addEntries(meta);
-    return result;
-  }
-
-  ErrorDetail._();
-
-  factory ErrorDetail.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory ErrorDetail.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ErrorDetail',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
-      createEmptyInstance: create)
-    ..aI(1, _omitFieldNames ? '' : 'code')
-    ..aOS(2, _omitFieldNames ? '' : 'message')
-    ..m<$core.String, $core.String>(3, _omitFieldNames ? '' : 'meta',
-        entryClassName: 'ErrorDetail.MetaEntry',
-        keyFieldType: $pb.PbFieldType.OS,
-        valueFieldType: $pb.PbFieldType.OS,
-        packageName: const $pb.PackageName('chat.v1'))
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ErrorDetail clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ErrorDetail copyWith(void Function(ErrorDetail) updates) =>
-      super.copyWith((message) => updates(message as ErrorDetail))
-          as ErrorDetail;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ErrorDetail create() => ErrorDetail._();
-  @$core.override
-  ErrorDetail createEmptyInstance() => create();
-  static $pb.PbList<ErrorDetail> createRepeated() => $pb.PbList<ErrorDetail>();
-  @$core.pragma('dart2js:noInline')
-  static ErrorDetail getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ErrorDetail>(create);
-  static ErrorDetail? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get code => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set code($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearCode() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get message => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set message($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasMessage() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearMessage() => $_clearField(2);
-
-  @$pb.TagNumber(3)
-  $pb.PbMap<$core.String, $core.String> get meta => $_getMap(2);
-}
 
 enum ServerEvent_Payload {
   message,
@@ -873,7 +795,7 @@ class StreamAck extends $pb.GeneratedMessage {
     $core.String? eventId,
     $0.Timestamp? ackAt,
     $1.Struct? metadata,
-    ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final result = create();
     if (eventId != null) result.eventId = eventId;
@@ -901,8 +823,8 @@ class StreamAck extends $pb.GeneratedMessage {
         subBuilder: $0.Timestamp.create)
     ..aOM<$1.Struct>(6, _omitFieldNames ? '' : 'metadata',
         subBuilder: $1.Struct.create)
-    ..aOM<ErrorDetail>(7, _omitFieldNames ? '' : 'error',
-        subBuilder: ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(7, _omitFieldNames ? '' : 'error',
+        subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -956,15 +878,15 @@ class StreamAck extends $pb.GeneratedMessage {
   $1.Struct ensureMetadata() => $_ensure(2);
 
   @$pb.TagNumber(7)
-  ErrorDetail get error => $_getN(3);
+  $2.ErrorDetail get error => $_getN(3);
   @$pb.TagNumber(7)
-  set error(ErrorDetail value) => $_setField(7, value);
+  set error($2.ErrorDetail value) => $_setField(7, value);
   @$pb.TagNumber(7)
   $core.bool hasError() => $_has(3);
   @$pb.TagNumber(7)
   void clearError() => $_clearField(7);
   @$pb.TagNumber(7)
-  ErrorDetail ensureError() => $_ensure(3);
+  $2.ErrorDetail ensureError() => $_ensure(3);
 }
 
 enum ClientCommand_Cmd { typing, readMarker, roomEvent, notSet }
@@ -1744,7 +1666,7 @@ class CreateRoomRequest extends $pb.GeneratedMessage {
 class CreateRoomResponse extends $pb.GeneratedMessage {
   factory CreateRoomResponse({
     Room? room,
-    ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final result = create();
     if (room != null) result.room = room;
@@ -1766,8 +1688,8 @@ class CreateRoomResponse extends $pb.GeneratedMessage {
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
     ..aOM<Room>(1, _omitFieldNames ? '' : 'room', subBuilder: Room.create)
-    ..aOM<ErrorDetail>(2, _omitFieldNames ? '' : 'error',
-        subBuilder: ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(2, _omitFieldNames ? '' : 'error',
+        subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1803,15 +1725,15 @@ class CreateRoomResponse extends $pb.GeneratedMessage {
   Room ensureRoom() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  ErrorDetail get error => $_getN(1);
+  $2.ErrorDetail get error => $_getN(1);
   @$pb.TagNumber(2)
-  set error(ErrorDetail value) => $_setField(2, value);
+  set error($2.ErrorDetail value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasError() => $_has(1);
   @$pb.TagNumber(2)
   void clearError() => $_clearField(2);
   @$pb.TagNumber(2)
-  ErrorDetail ensureError() => $_ensure(1);
+  $2.ErrorDetail ensureError() => $_ensure(1);
 }
 
 class SearchRoomsRequest extends $pb.GeneratedMessage {
@@ -2087,7 +2009,7 @@ class UpdateRoomRequest extends $pb.GeneratedMessage {
 class UpdateRoomResponse extends $pb.GeneratedMessage {
   factory UpdateRoomResponse({
     Room? room,
-    ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final result = create();
     if (room != null) result.room = room;
@@ -2109,8 +2031,8 @@ class UpdateRoomResponse extends $pb.GeneratedMessage {
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
     ..aOM<Room>(1, _omitFieldNames ? '' : 'room', subBuilder: Room.create)
-    ..aOM<ErrorDetail>(2, _omitFieldNames ? '' : 'error',
-        subBuilder: ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(2, _omitFieldNames ? '' : 'error',
+        subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2146,15 +2068,15 @@ class UpdateRoomResponse extends $pb.GeneratedMessage {
   Room ensureRoom() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  ErrorDetail get error => $_getN(1);
+  $2.ErrorDetail get error => $_getN(1);
   @$pb.TagNumber(2)
-  set error(ErrorDetail value) => $_setField(2, value);
+  set error($2.ErrorDetail value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasError() => $_has(1);
   @$pb.TagNumber(2)
   void clearError() => $_clearField(2);
   @$pb.TagNumber(2)
-  ErrorDetail ensureError() => $_ensure(1);
+  $2.ErrorDetail ensureError() => $_ensure(1);
 }
 
 class DeleteRoomRequest extends $pb.GeneratedMessage {
@@ -2216,7 +2138,7 @@ class DeleteRoomRequest extends $pb.GeneratedMessage {
 class DeleteRoomResponse extends $pb.GeneratedMessage {
   factory DeleteRoomResponse({
     $core.String? roomId,
-    ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final result = create();
     if (roomId != null) result.roomId = roomId;
@@ -2238,8 +2160,8 @@ class DeleteRoomResponse extends $pb.GeneratedMessage {
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..aOM<ErrorDetail>(2, _omitFieldNames ? '' : 'error',
-        subBuilder: ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(2, _omitFieldNames ? '' : 'error',
+        subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2273,15 +2195,15 @@ class DeleteRoomResponse extends $pb.GeneratedMessage {
   void clearRoomId() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  ErrorDetail get error => $_getN(1);
+  $2.ErrorDetail get error => $_getN(1);
   @$pb.TagNumber(2)
-  set error(ErrorDetail value) => $_setField(2, value);
+  set error($2.ErrorDetail value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasError() => $_has(1);
   @$pb.TagNumber(2)
   void clearError() => $_clearField(2);
   @$pb.TagNumber(2)
-  ErrorDetail ensureError() => $_ensure(1);
+  $2.ErrorDetail ensureError() => $_ensure(1);
 }
 
 class RoomSubscription extends $pb.GeneratedMessage {
@@ -2457,7 +2379,7 @@ class AddRoomSubscriptionsRequest extends $pb.GeneratedMessage {
 class AddRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   factory AddRoomSubscriptionsResponse({
     $core.String? roomId,
-    ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final result = create();
     if (roomId != null) result.roomId = roomId;
@@ -2479,8 +2401,8 @@ class AddRoomSubscriptionsResponse extends $pb.GeneratedMessage {
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..aOM<ErrorDetail>(3, _omitFieldNames ? '' : 'error',
-        subBuilder: ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(3, _omitFieldNames ? '' : 'error',
+        subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2517,15 +2439,15 @@ class AddRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   void clearRoomId() => $_clearField(1);
 
   @$pb.TagNumber(3)
-  ErrorDetail get error => $_getN(1);
+  $2.ErrorDetail get error => $_getN(1);
   @$pb.TagNumber(3)
-  set error(ErrorDetail value) => $_setField(3, value);
+  set error($2.ErrorDetail value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasError() => $_has(1);
   @$pb.TagNumber(3)
   void clearError() => $_clearField(3);
   @$pb.TagNumber(3)
-  ErrorDetail ensureError() => $_ensure(1);
+  $2.ErrorDetail ensureError() => $_ensure(1);
 }
 
 class RemoveRoomSubscriptionsRequest extends $pb.GeneratedMessage {
@@ -2596,7 +2518,7 @@ class RemoveRoomSubscriptionsRequest extends $pb.GeneratedMessage {
 class RemoveRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   factory RemoveRoomSubscriptionsResponse({
     $core.String? roomId,
-    ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final result = create();
     if (roomId != null) result.roomId = roomId;
@@ -2618,8 +2540,8 @@ class RemoveRoomSubscriptionsResponse extends $pb.GeneratedMessage {
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..aOM<ErrorDetail>(3, _omitFieldNames ? '' : 'error',
-        subBuilder: ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(3, _omitFieldNames ? '' : 'error',
+        subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2657,15 +2579,15 @@ class RemoveRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   void clearRoomId() => $_clearField(1);
 
   @$pb.TagNumber(3)
-  ErrorDetail get error => $_getN(1);
+  $2.ErrorDetail get error => $_getN(1);
   @$pb.TagNumber(3)
-  set error(ErrorDetail value) => $_setField(3, value);
+  set error($2.ErrorDetail value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasError() => $_has(1);
   @$pb.TagNumber(3)
   void clearError() => $_clearField(3);
   @$pb.TagNumber(3)
-  ErrorDetail ensureError() => $_ensure(1);
+  $2.ErrorDetail ensureError() => $_ensure(1);
 }
 
 class UpdateSubscriptionRoleRequest extends $pb.GeneratedMessage {
@@ -2748,7 +2670,7 @@ class UpdateSubscriptionRoleRequest extends $pb.GeneratedMessage {
 class UpdateSubscriptionRoleResponse extends $pb.GeneratedMessage {
   factory UpdateSubscriptionRoleResponse({
     $core.String? roomId,
-    ErrorDetail? error,
+    $2.ErrorDetail? error,
   }) {
     final result = create();
     if (roomId != null) result.roomId = roomId;
@@ -2770,8 +2692,8 @@ class UpdateSubscriptionRoleResponse extends $pb.GeneratedMessage {
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..aOM<ErrorDetail>(3, _omitFieldNames ? '' : 'error',
-        subBuilder: ErrorDetail.create)
+    ..aOM<$2.ErrorDetail>(3, _omitFieldNames ? '' : 'error',
+        subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2808,15 +2730,15 @@ class UpdateSubscriptionRoleResponse extends $pb.GeneratedMessage {
   void clearRoomId() => $_clearField(1);
 
   @$pb.TagNumber(3)
-  ErrorDetail get error => $_getN(1);
+  $2.ErrorDetail get error => $_getN(1);
   @$pb.TagNumber(3)
-  set error(ErrorDetail value) => $_setField(3, value);
+  set error($2.ErrorDetail value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasError() => $_has(1);
   @$pb.TagNumber(3)
   void clearError() => $_clearField(3);
   @$pb.TagNumber(3)
-  ErrorDetail ensureError() => $_ensure(1);
+  $2.ErrorDetail ensureError() => $_ensure(1);
 }
 
 class SearchRoomSubscriptionsRequest extends $pb.GeneratedMessage {
@@ -2981,6 +2903,613 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   void clearNextCursor() => $_clearField(3);
 }
 
+/// UpdateTyping
+class UpdateTypingRequest extends $pb.GeneratedMessage {
+  factory UpdateTypingRequest({
+    $core.String? roomId,
+    $core.String? profileId,
+    $core.bool? typing,
+    $0.Timestamp? timestamp,
+  }) {
+    final result = create();
+    if (roomId != null) result.roomId = roomId;
+    if (profileId != null) result.profileId = profileId;
+    if (typing != null) result.typing = typing;
+    if (timestamp != null) result.timestamp = timestamp;
+    return result;
+  }
+
+  UpdateTypingRequest._();
+
+  factory UpdateTypingRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory UpdateTypingRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'UpdateTypingRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..aOS(2, _omitFieldNames ? '' : 'profileId')
+    ..aOB(3, _omitFieldNames ? '' : 'typing')
+    ..aOM<$0.Timestamp>(4, _omitFieldNames ? '' : 'timestamp',
+        subBuilder: $0.Timestamp.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateTypingRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateTypingRequest copyWith(void Function(UpdateTypingRequest) updates) =>
+      super.copyWith((message) => updates(message as UpdateTypingRequest))
+          as UpdateTypingRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateTypingRequest create() => UpdateTypingRequest._();
+  @$core.override
+  UpdateTypingRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateTypingRequest> createRepeated() =>
+      $pb.PbList<UpdateTypingRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateTypingRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdateTypingRequest>(create);
+  static UpdateTypingRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get profileId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set profileId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasProfileId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfileId() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.bool get typing => $_getBF(2);
+  @$pb.TagNumber(3)
+  set typing($core.bool value) => $_setBool(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTyping() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTyping() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $0.Timestamp get timestamp => $_getN(3);
+  @$pb.TagNumber(4)
+  set timestamp($0.Timestamp value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasTimestamp() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTimestamp() => $_clearField(4);
+  @$pb.TagNumber(4)
+  $0.Timestamp ensureTimestamp() => $_ensure(3);
+}
+
+class UpdateTypingResponse extends $pb.GeneratedMessage {
+  factory UpdateTypingResponse({
+    $core.bool? success,
+    $core.int? participantCount,
+    $0.Timestamp? broadcastAt,
+  }) {
+    final result = create();
+    if (success != null) result.success = success;
+    if (participantCount != null) result.participantCount = participantCount;
+    if (broadcastAt != null) result.broadcastAt = broadcastAt;
+    return result;
+  }
+
+  UpdateTypingResponse._();
+
+  factory UpdateTypingResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory UpdateTypingResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'UpdateTypingResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
+      createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..aI(2, _omitFieldNames ? '' : 'participantCount')
+    ..aOM<$0.Timestamp>(3, _omitFieldNames ? '' : 'broadcastAt',
+        subBuilder: $0.Timestamp.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateTypingResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateTypingResponse copyWith(void Function(UpdateTypingResponse) updates) =>
+      super.copyWith((message) => updates(message as UpdateTypingResponse))
+          as UpdateTypingResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateTypingResponse create() => UpdateTypingResponse._();
+  @$core.override
+  UpdateTypingResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateTypingResponse> createRepeated() =>
+      $pb.PbList<UpdateTypingResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateTypingResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdateTypingResponse>(create);
+  static UpdateTypingResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get success => $_getBF(0);
+  @$pb.TagNumber(1)
+  set success($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSuccess() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSuccess() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get participantCount => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set participantCount($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasParticipantCount() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearParticipantCount() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $0.Timestamp get broadcastAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set broadcastAt($0.Timestamp value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasBroadcastAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBroadcastAt() => $_clearField(3);
+  @$pb.TagNumber(3)
+  $0.Timestamp ensureBroadcastAt() => $_ensure(2);
+}
+
+/// UpdateReadMarker
+class UpdateReadMarkerRequest extends $pb.GeneratedMessage {
+  factory UpdateReadMarkerRequest({
+    $core.String? roomId,
+    $core.String? profileId,
+    $core.String? upToEventId,
+    $0.Timestamp? readAt,
+  }) {
+    final result = create();
+    if (roomId != null) result.roomId = roomId;
+    if (profileId != null) result.profileId = profileId;
+    if (upToEventId != null) result.upToEventId = upToEventId;
+    if (readAt != null) result.readAt = readAt;
+    return result;
+  }
+
+  UpdateReadMarkerRequest._();
+
+  factory UpdateReadMarkerRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory UpdateReadMarkerRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'UpdateReadMarkerRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..aOS(2, _omitFieldNames ? '' : 'profileId')
+    ..aOS(3, _omitFieldNames ? '' : 'upToEventId')
+    ..aOM<$0.Timestamp>(4, _omitFieldNames ? '' : 'readAt',
+        subBuilder: $0.Timestamp.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateReadMarkerRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateReadMarkerRequest copyWith(
+          void Function(UpdateReadMarkerRequest) updates) =>
+      super.copyWith((message) => updates(message as UpdateReadMarkerRequest))
+          as UpdateReadMarkerRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateReadMarkerRequest create() => UpdateReadMarkerRequest._();
+  @$core.override
+  UpdateReadMarkerRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateReadMarkerRequest> createRepeated() =>
+      $pb.PbList<UpdateReadMarkerRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateReadMarkerRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdateReadMarkerRequest>(create);
+  static UpdateReadMarkerRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get profileId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set profileId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasProfileId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfileId() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get upToEventId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set upToEventId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasUpToEventId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpToEventId() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $0.Timestamp get readAt => $_getN(3);
+  @$pb.TagNumber(4)
+  set readAt($0.Timestamp value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasReadAt() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearReadAt() => $_clearField(4);
+  @$pb.TagNumber(4)
+  $0.Timestamp ensureReadAt() => $_ensure(3);
+}
+
+class UpdateReadMarkerResponse extends $pb.GeneratedMessage {
+  factory UpdateReadMarkerResponse({
+    $core.bool? success,
+    $core.String? roomId,
+    $core.String? upToEventId,
+    $0.Timestamp? readAt,
+    $core.int? unreadCount,
+  }) {
+    final result = create();
+    if (success != null) result.success = success;
+    if (roomId != null) result.roomId = roomId;
+    if (upToEventId != null) result.upToEventId = upToEventId;
+    if (readAt != null) result.readAt = readAt;
+    if (unreadCount != null) result.unreadCount = unreadCount;
+    return result;
+  }
+
+  UpdateReadMarkerResponse._();
+
+  factory UpdateReadMarkerResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory UpdateReadMarkerResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'UpdateReadMarkerResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
+      createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..aOS(2, _omitFieldNames ? '' : 'roomId')
+    ..aOS(3, _omitFieldNames ? '' : 'upToEventId')
+    ..aOM<$0.Timestamp>(4, _omitFieldNames ? '' : 'readAt',
+        subBuilder: $0.Timestamp.create)
+    ..aI(5, _omitFieldNames ? '' : 'unreadCount')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateReadMarkerResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateReadMarkerResponse copyWith(
+          void Function(UpdateReadMarkerResponse) updates) =>
+      super.copyWith((message) => updates(message as UpdateReadMarkerResponse))
+          as UpdateReadMarkerResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateReadMarkerResponse create() => UpdateReadMarkerResponse._();
+  @$core.override
+  UpdateReadMarkerResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateReadMarkerResponse> createRepeated() =>
+      $pb.PbList<UpdateReadMarkerResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateReadMarkerResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdateReadMarkerResponse>(create);
+  static UpdateReadMarkerResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get success => $_getBF(0);
+  @$pb.TagNumber(1)
+  set success($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSuccess() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSuccess() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get roomId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set roomId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasRoomId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRoomId() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get upToEventId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set upToEventId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasUpToEventId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpToEventId() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $0.Timestamp get readAt => $_getN(3);
+  @$pb.TagNumber(4)
+  set readAt($0.Timestamp value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasReadAt() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearReadAt() => $_clearField(4);
+  @$pb.TagNumber(4)
+  $0.Timestamp ensureReadAt() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $core.int get unreadCount => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set unreadCount($core.int value) => $_setSignedInt32(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasUnreadCount() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearUnreadCount() => $_clearField(5);
+}
+
+/// GetReadMarkers
+class GetReadMarkersRequest extends $pb.GeneratedMessage {
+  factory GetReadMarkersRequest({
+    $core.String? roomId,
+    $core.Iterable<$core.String>? profileIds,
+  }) {
+    final result = create();
+    if (roomId != null) result.roomId = roomId;
+    if (profileIds != null) result.profileIds.addAll(profileIds);
+    return result;
+  }
+
+  GetReadMarkersRequest._();
+
+  factory GetReadMarkersRequest.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory GetReadMarkersRequest.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GetReadMarkersRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..pPS(2, _omitFieldNames ? '' : 'profileIds')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetReadMarkersRequest clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetReadMarkersRequest copyWith(
+          void Function(GetReadMarkersRequest) updates) =>
+      super.copyWith((message) => updates(message as GetReadMarkersRequest))
+          as GetReadMarkersRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetReadMarkersRequest create() => GetReadMarkersRequest._();
+  @$core.override
+  GetReadMarkersRequest createEmptyInstance() => create();
+  static $pb.PbList<GetReadMarkersRequest> createRepeated() =>
+      $pb.PbList<GetReadMarkersRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetReadMarkersRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetReadMarkersRequest>(create);
+  static GetReadMarkersRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $pb.PbList<$core.String> get profileIds => $_getList(1);
+}
+
+class GetReadMarkersResponse extends $pb.GeneratedMessage {
+  factory GetReadMarkersResponse({
+    $core.String? roomId,
+    $core.Iterable<ReadMarkerInfo>? markers,
+  }) {
+    final result = create();
+    if (roomId != null) result.roomId = roomId;
+    if (markers != null) result.markers.addAll(markers);
+    return result;
+  }
+
+  GetReadMarkersResponse._();
+
+  factory GetReadMarkersResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory GetReadMarkersResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GetReadMarkersResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..pPM<ReadMarkerInfo>(2, _omitFieldNames ? '' : 'markers',
+        subBuilder: ReadMarkerInfo.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetReadMarkersResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetReadMarkersResponse copyWith(
+          void Function(GetReadMarkersResponse) updates) =>
+      super.copyWith((message) => updates(message as GetReadMarkersResponse))
+          as GetReadMarkersResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetReadMarkersResponse create() => GetReadMarkersResponse._();
+  @$core.override
+  GetReadMarkersResponse createEmptyInstance() => create();
+  static $pb.PbList<GetReadMarkersResponse> createRepeated() =>
+      $pb.PbList<GetReadMarkersResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetReadMarkersResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetReadMarkersResponse>(create);
+  static GetReadMarkersResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $pb.PbList<ReadMarkerInfo> get markers => $_getList(1);
+}
+
+class ReadMarkerInfo extends $pb.GeneratedMessage {
+  factory ReadMarkerInfo({
+    $core.String? profileId,
+    $core.String? upToEventId,
+    $0.Timestamp? readAt,
+    $core.int? unreadCount,
+  }) {
+    final result = create();
+    if (profileId != null) result.profileId = profileId;
+    if (upToEventId != null) result.upToEventId = upToEventId;
+    if (readAt != null) result.readAt = readAt;
+    if (unreadCount != null) result.unreadCount = unreadCount;
+    return result;
+  }
+
+  ReadMarkerInfo._();
+
+  factory ReadMarkerInfo.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ReadMarkerInfo.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ReadMarkerInfo',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'profileId')
+    ..aOS(2, _omitFieldNames ? '' : 'upToEventId')
+    ..aOM<$0.Timestamp>(3, _omitFieldNames ? '' : 'readAt',
+        subBuilder: $0.Timestamp.create)
+    ..aI(4, _omitFieldNames ? '' : 'unreadCount')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ReadMarkerInfo clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ReadMarkerInfo copyWith(void Function(ReadMarkerInfo) updates) =>
+      super.copyWith((message) => updates(message as ReadMarkerInfo))
+          as ReadMarkerInfo;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ReadMarkerInfo create() => ReadMarkerInfo._();
+  @$core.override
+  ReadMarkerInfo createEmptyInstance() => create();
+  static $pb.PbList<ReadMarkerInfo> createRepeated() =>
+      $pb.PbList<ReadMarkerInfo>();
+  @$core.pragma('dart2js:noInline')
+  static ReadMarkerInfo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ReadMarkerInfo>(create);
+  static ReadMarkerInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get profileId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set profileId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasProfileId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearProfileId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get upToEventId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set upToEventId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasUpToEventId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUpToEventId() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $0.Timestamp get readAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set readAt($0.Timestamp value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasReadAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearReadAt() => $_clearField(3);
+  @$pb.TagNumber(3)
+  $0.Timestamp ensureReadAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.int get unreadCount => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set unreadCount($core.int value) => $_setSignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasUnreadCount() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearUnreadCount() => $_clearField(4);
+}
+
 class GatewayServiceApi {
   final $pb.RpcClient _client;
 
@@ -3055,6 +3584,24 @@ class ChatServiceApi {
           'SearchRoomSubscriptions',
           request,
           SearchRoomSubscriptionsResponse());
+
+  /// Update typing indicator for a user in a room
+  $async.Future<UpdateTypingResponse> updateTyping(
+          $pb.ClientContext? ctx, UpdateTypingRequest request) =>
+      _client.invoke<UpdateTypingResponse>(
+          ctx, 'ChatService', 'UpdateTyping', request, UpdateTypingResponse());
+
+  /// Update read marker (read receipt) for a user in a room
+  $async.Future<UpdateReadMarkerResponse> updateReadMarker(
+          $pb.ClientContext? ctx, UpdateReadMarkerRequest request) =>
+      _client.invoke<UpdateReadMarkerResponse>(ctx, 'ChatService',
+          'UpdateReadMarker', request, UpdateReadMarkerResponse());
+
+  /// Get read markers for a room
+  $async.Future<GetReadMarkersResponse> getReadMarkers(
+          $pb.ClientContext? ctx, GetReadMarkersRequest request) =>
+      _client.invoke<GetReadMarkersResponse>(ctx, 'ChatService',
+          'GetReadMarkers', request, GetReadMarkersResponse());
 }
 
 const $core.bool _omitFieldNames =

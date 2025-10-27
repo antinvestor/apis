@@ -145,6 +145,9 @@ const (
 	ChatService_RemoveRoomSubscriptions_FullMethodName = "/chat.v1.ChatService/RemoveRoomSubscriptions"
 	ChatService_UpdateSubscriptionRole_FullMethodName  = "/chat.v1.ChatService/UpdateSubscriptionRole"
 	ChatService_SearchRoomSubscriptions_FullMethodName = "/chat.v1.ChatService/SearchRoomSubscriptions"
+	ChatService_UpdateTyping_FullMethodName            = "/chat.v1.ChatService/UpdateTyping"
+	ChatService_UpdateReadMarker_FullMethodName        = "/chat.v1.ChatService/UpdateReadMarker"
+	ChatService_GetReadMarkers_FullMethodName          = "/chat.v1.ChatService/GetReadMarkers"
 )
 
 // ChatServiceClient is the client API for ChatService service.
@@ -165,6 +168,12 @@ type ChatServiceClient interface {
 	RemoveRoomSubscriptions(ctx context.Context, in *RemoveRoomSubscriptionsRequest, opts ...grpc.CallOption) (*RemoveRoomSubscriptionsResponse, error)
 	UpdateSubscriptionRole(ctx context.Context, in *UpdateSubscriptionRoleRequest, opts ...grpc.CallOption) (*UpdateSubscriptionRoleResponse, error)
 	SearchRoomSubscriptions(ctx context.Context, in *SearchRoomSubscriptionsRequest, opts ...grpc.CallOption) (*SearchRoomSubscriptionsResponse, error)
+	// Update typing indicator for a user in a room
+	UpdateTyping(ctx context.Context, in *UpdateTypingRequest, opts ...grpc.CallOption) (*UpdateTypingResponse, error)
+	// Update read marker (read receipt) for a user in a room
+	UpdateReadMarker(ctx context.Context, in *UpdateReadMarkerRequest, opts ...grpc.CallOption) (*UpdateReadMarkerResponse, error)
+	// Get read markers for a room
+	GetReadMarkers(ctx context.Context, in *GetReadMarkersRequest, opts ...grpc.CallOption) (*GetReadMarkersResponse, error)
 }
 
 type chatServiceClient struct {
@@ -284,6 +293,36 @@ func (c *chatServiceClient) SearchRoomSubscriptions(ctx context.Context, in *Sea
 	return out, nil
 }
 
+func (c *chatServiceClient) UpdateTyping(ctx context.Context, in *UpdateTypingRequest, opts ...grpc.CallOption) (*UpdateTypingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTypingResponse)
+	err := c.cc.Invoke(ctx, ChatService_UpdateTyping_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatServiceClient) UpdateReadMarker(ctx context.Context, in *UpdateReadMarkerRequest, opts ...grpc.CallOption) (*UpdateReadMarkerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateReadMarkerResponse)
+	err := c.cc.Invoke(ctx, ChatService_UpdateReadMarker_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatServiceClient) GetReadMarkers(ctx context.Context, in *GetReadMarkersRequest, opts ...grpc.CallOption) (*GetReadMarkersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetReadMarkersResponse)
+	err := c.cc.Invoke(ctx, ChatService_GetReadMarkers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChatServiceServer is the server API for ChatService service.
 // All implementations must embed UnimplementedChatServiceServer
 // for forward compatibility.
@@ -302,6 +341,12 @@ type ChatServiceServer interface {
 	RemoveRoomSubscriptions(context.Context, *RemoveRoomSubscriptionsRequest) (*RemoveRoomSubscriptionsResponse, error)
 	UpdateSubscriptionRole(context.Context, *UpdateSubscriptionRoleRequest) (*UpdateSubscriptionRoleResponse, error)
 	SearchRoomSubscriptions(context.Context, *SearchRoomSubscriptionsRequest) (*SearchRoomSubscriptionsResponse, error)
+	// Update typing indicator for a user in a room
+	UpdateTyping(context.Context, *UpdateTypingRequest) (*UpdateTypingResponse, error)
+	// Update read marker (read receipt) for a user in a room
+	UpdateReadMarker(context.Context, *UpdateReadMarkerRequest) (*UpdateReadMarkerResponse, error)
+	// Get read markers for a room
+	GetReadMarkers(context.Context, *GetReadMarkersRequest) (*GetReadMarkersResponse, error)
 	mustEmbedUnimplementedChatServiceServer()
 }
 
@@ -341,6 +386,15 @@ func (UnimplementedChatServiceServer) UpdateSubscriptionRole(context.Context, *U
 }
 func (UnimplementedChatServiceServer) SearchRoomSubscriptions(context.Context, *SearchRoomSubscriptionsRequest) (*SearchRoomSubscriptionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchRoomSubscriptions not implemented")
+}
+func (UnimplementedChatServiceServer) UpdateTyping(context.Context, *UpdateTypingRequest) (*UpdateTypingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTyping not implemented")
+}
+func (UnimplementedChatServiceServer) UpdateReadMarker(context.Context, *UpdateReadMarkerRequest) (*UpdateReadMarkerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateReadMarker not implemented")
+}
+func (UnimplementedChatServiceServer) GetReadMarkers(context.Context, *GetReadMarkersRequest) (*GetReadMarkersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetReadMarkers not implemented")
 }
 func (UnimplementedChatServiceServer) mustEmbedUnimplementedChatServiceServer() {}
 func (UnimplementedChatServiceServer) testEmbeddedByValue()                     {}
@@ -536,6 +590,60 @@ func _ChatService_SearchRoomSubscriptions_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ChatService_UpdateTyping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTypingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServiceServer).UpdateTyping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatService_UpdateTyping_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServiceServer).UpdateTyping(ctx, req.(*UpdateTypingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatService_UpdateReadMarker_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateReadMarkerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServiceServer).UpdateReadMarker(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatService_UpdateReadMarker_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServiceServer).UpdateReadMarker(ctx, req.(*UpdateReadMarkerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatService_GetReadMarkers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetReadMarkersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServiceServer).GetReadMarkers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatService_GetReadMarkers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServiceServer).GetReadMarkers(ctx, req.(*GetReadMarkersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ChatService_ServiceDesc is the grpc.ServiceDesc for ChatService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -578,6 +686,18 @@ var ChatService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SearchRoomSubscriptions",
 			Handler:    _ChatService_SearchRoomSubscriptions_Handler,
+		},
+		{
+			MethodName: "UpdateTyping",
+			Handler:    _ChatService_UpdateTyping_Handler,
+		},
+		{
+			MethodName: "UpdateReadMarker",
+			Handler:    _ChatService_UpdateReadMarker_Handler,
+		},
+		{
+			MethodName: "GetReadMarkers",
+			Handler:    _ChatService_GetReadMarkers_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

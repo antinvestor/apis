@@ -157,13 +157,13 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int ERROR_FIELD_NUMBER = 7;
-  private com.antinvestor.apis.chat.v1.ErrorDetail error_;
+  private com.antinvestor.apis.common.v1.ErrorDetail error_;
   /**
    * <pre>
    * if set, indicates failure reason for this event
    * </pre>
    *
-   * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+   * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
    * @return Whether the error field is set.
    */
   @java.lang.Override
@@ -175,23 +175,23 @@ private static final long serialVersionUID = 0L;
    * if set, indicates failure reason for this event
    * </pre>
    *
-   * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+   * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
    * @return The error.
    */
   @java.lang.Override
-  public com.antinvestor.apis.chat.v1.ErrorDetail getError() {
-    return error_ == null ? com.antinvestor.apis.chat.v1.ErrorDetail.getDefaultInstance() : error_;
+  public com.antinvestor.apis.common.v1.ErrorDetail getError() {
+    return error_ == null ? com.antinvestor.apis.common.v1.ErrorDetail.getDefaultInstance() : error_;
   }
   /**
    * <pre>
    * if set, indicates failure reason for this event
    * </pre>
    *
-   * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+   * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
    */
   @java.lang.Override
-  public com.antinvestor.apis.chat.v1.ErrorDetailOrBuilder getErrorOrBuilder() {
-    return error_ == null ? com.antinvestor.apis.chat.v1.ErrorDetail.getDefaultInstance() : error_;
+  public com.antinvestor.apis.common.v1.ErrorDetailOrBuilder getErrorOrBuilder() {
+    return error_ == null ? com.antinvestor.apis.common.v1.ErrorDetail.getDefaultInstance() : error_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -929,15 +929,15 @@ private static final long serialVersionUID = 0L;
       return metadataBuilder_;
     }
 
-    private com.antinvestor.apis.chat.v1.ErrorDetail error_;
+    private com.antinvestor.apis.common.v1.ErrorDetail error_;
     private com.google.protobuf.SingleFieldBuilder<
-        com.antinvestor.apis.chat.v1.ErrorDetail, com.antinvestor.apis.chat.v1.ErrorDetail.Builder, com.antinvestor.apis.chat.v1.ErrorDetailOrBuilder> errorBuilder_;
+        com.antinvestor.apis.common.v1.ErrorDetail, com.antinvestor.apis.common.v1.ErrorDetail.Builder, com.antinvestor.apis.common.v1.ErrorDetailOrBuilder> errorBuilder_;
     /**
      * <pre>
      * if set, indicates failure reason for this event
      * </pre>
      *
-     * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+     * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
      * @return Whether the error field is set.
      */
     public boolean hasError() {
@@ -948,12 +948,12 @@ private static final long serialVersionUID = 0L;
      * if set, indicates failure reason for this event
      * </pre>
      *
-     * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+     * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
      * @return The error.
      */
-    public com.antinvestor.apis.chat.v1.ErrorDetail getError() {
+    public com.antinvestor.apis.common.v1.ErrorDetail getError() {
       if (errorBuilder_ == null) {
-        return error_ == null ? com.antinvestor.apis.chat.v1.ErrorDetail.getDefaultInstance() : error_;
+        return error_ == null ? com.antinvestor.apis.common.v1.ErrorDetail.getDefaultInstance() : error_;
       } else {
         return errorBuilder_.getMessage();
       }
@@ -963,9 +963,9 @@ private static final long serialVersionUID = 0L;
      * if set, indicates failure reason for this event
      * </pre>
      *
-     * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+     * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
      */
-    public Builder setError(com.antinvestor.apis.chat.v1.ErrorDetail value) {
+    public Builder setError(com.antinvestor.apis.common.v1.ErrorDetail value) {
       if (errorBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -983,10 +983,10 @@ private static final long serialVersionUID = 0L;
      * if set, indicates failure reason for this event
      * </pre>
      *
-     * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+     * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
      */
     public Builder setError(
-        com.antinvestor.apis.chat.v1.ErrorDetail.Builder builderForValue) {
+        com.antinvestor.apis.common.v1.ErrorDetail.Builder builderForValue) {
       if (errorBuilder_ == null) {
         error_ = builderForValue.build();
       } else {
@@ -1001,13 +1001,13 @@ private static final long serialVersionUID = 0L;
      * if set, indicates failure reason for this event
      * </pre>
      *
-     * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+     * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
      */
-    public Builder mergeError(com.antinvestor.apis.chat.v1.ErrorDetail value) {
+    public Builder mergeError(com.antinvestor.apis.common.v1.ErrorDetail value) {
       if (errorBuilder_ == null) {
         if (((bitField0_ & 0x00000008) != 0) &&
           error_ != null &&
-          error_ != com.antinvestor.apis.chat.v1.ErrorDetail.getDefaultInstance()) {
+          error_ != com.antinvestor.apis.common.v1.ErrorDetail.getDefaultInstance()) {
           getErrorBuilder().mergeFrom(value);
         } else {
           error_ = value;
@@ -1026,7 +1026,7 @@ private static final long serialVersionUID = 0L;
      * if set, indicates failure reason for this event
      * </pre>
      *
-     * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+     * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
      */
     public Builder clearError() {
       bitField0_ = (bitField0_ & ~0x00000008);
@@ -1043,9 +1043,9 @@ private static final long serialVersionUID = 0L;
      * if set, indicates failure reason for this event
      * </pre>
      *
-     * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+     * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
      */
-    public com.antinvestor.apis.chat.v1.ErrorDetail.Builder getErrorBuilder() {
+    public com.antinvestor.apis.common.v1.ErrorDetail.Builder getErrorBuilder() {
       bitField0_ |= 0x00000008;
       onChanged();
       return internalGetErrorFieldBuilder().getBuilder();
@@ -1055,14 +1055,14 @@ private static final long serialVersionUID = 0L;
      * if set, indicates failure reason for this event
      * </pre>
      *
-     * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+     * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
      */
-    public com.antinvestor.apis.chat.v1.ErrorDetailOrBuilder getErrorOrBuilder() {
+    public com.antinvestor.apis.common.v1.ErrorDetailOrBuilder getErrorOrBuilder() {
       if (errorBuilder_ != null) {
         return errorBuilder_.getMessageOrBuilder();
       } else {
         return error_ == null ?
-            com.antinvestor.apis.chat.v1.ErrorDetail.getDefaultInstance() : error_;
+            com.antinvestor.apis.common.v1.ErrorDetail.getDefaultInstance() : error_;
       }
     }
     /**
@@ -1070,14 +1070,14 @@ private static final long serialVersionUID = 0L;
      * if set, indicates failure reason for this event
      * </pre>
      *
-     * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+     * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
-        com.antinvestor.apis.chat.v1.ErrorDetail, com.antinvestor.apis.chat.v1.ErrorDetail.Builder, com.antinvestor.apis.chat.v1.ErrorDetailOrBuilder> 
+        com.antinvestor.apis.common.v1.ErrorDetail, com.antinvestor.apis.common.v1.ErrorDetail.Builder, com.antinvestor.apis.common.v1.ErrorDetailOrBuilder> 
         internalGetErrorFieldBuilder() {
       if (errorBuilder_ == null) {
         errorBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-            com.antinvestor.apis.chat.v1.ErrorDetail, com.antinvestor.apis.chat.v1.ErrorDetail.Builder, com.antinvestor.apis.chat.v1.ErrorDetailOrBuilder>(
+            com.antinvestor.apis.common.v1.ErrorDetail, com.antinvestor.apis.common.v1.ErrorDetail.Builder, com.antinvestor.apis.common.v1.ErrorDetailOrBuilder>(
                 getError(),
                 getParentForChildren(),
                 isClean());

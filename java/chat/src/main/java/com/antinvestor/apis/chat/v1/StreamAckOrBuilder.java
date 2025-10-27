@@ -71,7 +71,7 @@ public interface StreamAckOrBuilder extends
    * if set, indicates failure reason for this event
    * </pre>
    *
-   * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+   * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
    * @return Whether the error field is set.
    */
   boolean hasError();
@@ -80,16 +80,16 @@ public interface StreamAckOrBuilder extends
    * if set, indicates failure reason for this event
    * </pre>
    *
-   * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+   * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
    * @return The error.
    */
-  com.antinvestor.apis.chat.v1.ErrorDetail getError();
+  com.antinvestor.apis.common.v1.ErrorDetail getError();
   /**
    * <pre>
    * if set, indicates failure reason for this event
    * </pre>
    *
-   * <code>optional .chat.v1.ErrorDetail error = 7 [json_name = "error"];</code>
+   * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
    */
-  com.antinvestor.apis.chat.v1.ErrorDetailOrBuilder getErrorOrBuilder();
+  com.antinvestor.apis.common.v1.ErrorDetailOrBuilder getErrorOrBuilder();
 }

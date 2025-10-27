@@ -261,3 +261,38 @@ final $typed_data.Uint8List contactLinkDescriptor = $convert.base64Decode(
     'XXszLDQwfVIJY29udGFjdElkEjgKBmRldGFpbBgJIAEoCUIgukgd2AEBchgQAxj6ATIRWzAtOW'
     'Etel8tXXszLDI1MH1SBmRldGFpbBIvCgZleHRyYXMYCiABKAsyFy5nb29nbGUucHJvdG9idWYu'
     'U3RydWN0UgZleHRyYXM=');
+
+@$core.Deprecated('Use errorDetailDescriptor instead')
+const ErrorDetail$json = {
+  '1': 'ErrorDetail',
+  '2': [
+    {'1': 'code', '3': 1, '4': 1, '5': 5, '10': 'code'},
+    {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
+    {
+      '1': 'meta',
+      '3': 3,
+      '4': 3,
+      '5': 11,
+      '6': '.common.v1.ErrorDetail.MetaEntry',
+      '10': 'meta'
+    },
+  ],
+  '3': [ErrorDetail_MetaEntry$json],
+};
+
+@$core.Deprecated('Use errorDetailDescriptor instead')
+const ErrorDetail_MetaEntry$json = {
+  '1': 'MetaEntry',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
+  ],
+  '7': {'7': true},
+};
+
+/// Descriptor for `ErrorDetail`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List errorDetailDescriptor = $convert.base64Decode(
+    'CgtFcnJvckRldGFpbBISCgRjb2RlGAEgASgFUgRjb2RlEhgKB21lc3NhZ2UYAiABKAlSB21lc3'
+    'NhZ2USNAoEbWV0YRgDIAMoCzIgLmNvbW1vbi52MS5FcnJvckRldGFpbC5NZXRhRW50cnlSBG1l'
+    'dGEaNwoJTWV0YUVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgJUgV2YWx1ZT'
+    'oCOAE=');
