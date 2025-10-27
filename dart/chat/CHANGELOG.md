@@ -1,31 +1,25 @@
-# ## v1.47.0
-
-
-#### ### 🚀 New Features
-
-* [#797](https://github.com/antinvestor/apis/pull/797): feat: add changelog CI with smart detection for all languages
-
-
 # Changelog
 
-## 1.46.4 - 2025-10-19
+## 1.47.0 - 2025-10-27
+
+### 🚀 New Features
+- Introduced new Chat API for peer-to-peer communication
+- Added StreamService for handling real-time chat events
+- Renamed SendMessage to SendEvent for better clarity
 
 ### Changed
-- Updated to Connect RPC from gRPC
-- Added client factory with automatic token refresh interceptors
-- Improved authentication handling with TokenManager integration
-- Updated analysis options to exclude all generated files
-- Fixed library exports and removed deprecated gRPC types
+- Migrated from gRPC Gateway to Connect RPC protocol
+- Updated to latest common code and dependencies
+- Moved error details to common package for better reusability
 
 ### Fixed
-- Resolved all Dart analyzer issues
-- Fixed generated file exclusions in analysis_options.yaml
+- Resolved dependency issues in Java bindings
+- Fixed API versioning and compatibility
+- Addressed build and packaging issues
 
+## 1.46.6 - 2025-10-19
 
-* Initial release
-* Support for real-time bi-directional streaming
-* Message operations (send, receive, history)
-* Room management (create, update, delete, search)
-* Subscription management (add/remove members, roles)
-* JWT authentication support
-* Generated from proto definitions using buf and Connect RPC
+### Changed
+- Initial release of the Chat service
+- Basic chat functionality implementation
+- Integration with common authentication and validation
