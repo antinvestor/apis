@@ -1,32 +1,25 @@
-# ## v1.0.0
-
-
-#### ### 🚀 New Features
-
-* [#797](https://github.com/antinvestor/apis/pull/797): feat: add changelog CI with smart detection for all languages
-
-
 # Changelog
 
-## 1.46.5 - 2025-10-19
+## 1.47.0 - 2025-10-27
 
 ### 🚀 New Features
-
-* [#797](https://github.com/antinvestor/apis/pull/797): feat: add changelog CI with smart detection for all languages
-
-## 1.46.4 - 2025-10-19
+- Enhanced OCR processing for various document types
+- Added support for additional image formats
+- Improved text recognition accuracy
 
 ### Changed
-- Updated to Connect RPC from gRPC
-- Added client factory with automatic token refresh interceptors
-- Improved authentication handling with TokenManager integration
-- Updated analysis options to exclude all generated files
-- Fixed library exports and removed deprecated gRPC types
+- Migrated from gRPC Gateway to Connect RPC protocol
+- Updated to latest common code and dependencies
+- Optimized image processing pipeline
 
 ### Fixed
-- Resolved all Dart analyzer issues
-- Fixed generated file exclusions in analysis_options.yaml
+- Resolved issues with character recognition
+- Fixed memory leaks in image processing
+- Addressed performance bottlenecks in batch processing
 
+## 1.46.6 - 2025-10-19
 
-* Initial release
-* Generated from proto definitions using buf and Connect RPC
+### Changed
+- Initial migration to Connect RPC
+- Improved document processing reliability
+- Enhanced error handling and validation
