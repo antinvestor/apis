@@ -477,12 +477,12 @@ class ReceiptEvent extends $pb.GeneratedMessage {
   factory ReceiptEvent({
     $core.String? profileId,
     $core.String? roomId,
-    $core.Iterable<$core.String>? messageId,
+    $core.Iterable<$core.String>? eventId,
   }) {
     final result = create();
     if (profileId != null) result.profileId = profileId;
     if (roomId != null) result.roomId = roomId;
-    if (messageId != null) result.messageId.addAll(messageId);
+    if (eventId != null) result.eventId.addAll(eventId);
     return result;
   }
 
@@ -501,7 +501,7 @@ class ReceiptEvent extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'profileId')
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
-    ..pPS(3, _omitFieldNames ? '' : 'messageId')
+    ..pPS(3, _omitFieldNames ? '' : 'eventId')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -544,7 +544,7 @@ class ReceiptEvent extends $pb.GeneratedMessage {
   void clearRoomId() => $_clearField(2);
 
   @$pb.TagNumber(3)
-  $pb.PbList<$core.String> get messageId => $_getList(2);
+  $pb.PbList<$core.String> get eventId => $_getList(2);
 }
 
 class ReadMarker extends $pb.GeneratedMessage {
@@ -868,12 +868,14 @@ class ConnectRequest extends $pb.GeneratedMessage {
 /// If error is set, indicates the event failed to send/process correctly.
 class StreamAck extends $pb.GeneratedMessage {
   factory StreamAck({
+    $core.String? roomId,
     $core.String? eventId,
     $0.Timestamp? ackAt,
     $1.Struct? metadata,
     $2.ErrorDetail? error,
   }) {
     final result = create();
+    if (roomId != null) result.roomId = roomId;
     if (eventId != null) result.eventId = eventId;
     if (ackAt != null) result.ackAt = ackAt;
     if (metadata != null) result.metadata = metadata;
@@ -894,7 +896,8 @@ class StreamAck extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'StreamAck',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'eventId')
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..aOS(2, _omitFieldNames ? '' : 'eventId')
     ..aOM<$0.Timestamp>(3, _omitFieldNames ? '' : 'ackAt',
         subBuilder: $0.Timestamp.create)
     ..aOM<$1.Struct>(6, _omitFieldNames ? '' : 'metadata',
@@ -923,46 +926,55 @@ class StreamAck extends $pb.GeneratedMessage {
   static StreamAck? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get eventId => $_getSZ(0);
+  $core.String get roomId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set eventId($core.String value) => $_setString(0, value);
+  set roomId($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasEventId() => $_has(0);
+  $core.bool hasRoomId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearEventId() => $_clearField(1);
+  void clearRoomId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get eventId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set eventId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasEventId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEventId() => $_clearField(2);
 
   @$pb.TagNumber(3)
-  $0.Timestamp get ackAt => $_getN(1);
+  $0.Timestamp get ackAt => $_getN(2);
   @$pb.TagNumber(3)
   set ackAt($0.Timestamp value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasAckAt() => $_has(1);
+  $core.bool hasAckAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearAckAt() => $_clearField(3);
   @$pb.TagNumber(3)
-  $0.Timestamp ensureAckAt() => $_ensure(1);
+  $0.Timestamp ensureAckAt() => $_ensure(2);
 
   @$pb.TagNumber(6)
-  $1.Struct get metadata => $_getN(2);
+  $1.Struct get metadata => $_getN(3);
   @$pb.TagNumber(6)
   set metadata($1.Struct value) => $_setField(6, value);
   @$pb.TagNumber(6)
-  $core.bool hasMetadata() => $_has(2);
+  $core.bool hasMetadata() => $_has(3);
   @$pb.TagNumber(6)
   void clearMetadata() => $_clearField(6);
   @$pb.TagNumber(6)
-  $1.Struct ensureMetadata() => $_ensure(2);
+  $1.Struct ensureMetadata() => $_ensure(3);
 
   @$pb.TagNumber(7)
-  $2.ErrorDetail get error => $_getN(3);
+  $2.ErrorDetail get error => $_getN(4);
   @$pb.TagNumber(7)
   set error($2.ErrorDetail value) => $_setField(7, value);
   @$pb.TagNumber(7)
-  $core.bool hasError() => $_has(3);
+  $core.bool hasError() => $_has(4);
   @$pb.TagNumber(7)
   void clearError() => $_clearField(7);
   @$pb.TagNumber(7)
-  $2.ErrorDetail ensureError() => $_ensure(3);
+  $2.ErrorDetail ensureError() => $_ensure(4);
 }
 
 enum ClientState_State {
@@ -1118,10 +1130,10 @@ class ClientState extends $pb.GeneratedMessage {
 
 class SendEventRequest extends $pb.GeneratedMessage {
   factory SendEventRequest({
-    $core.Iterable<RoomEvent>? message,
+    $core.Iterable<RoomEvent>? event,
   }) {
     final result = create();
-    if (message != null) result.message.addAll(message);
+    if (event != null) result.event.addAll(event);
     return result;
   }
 
@@ -1138,7 +1150,7 @@ class SendEventRequest extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'SendEventRequest',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
-    ..pPM<RoomEvent>(4, _omitFieldNames ? '' : 'message',
+    ..pPM<RoomEvent>(4, _omitFieldNames ? '' : 'event',
         subBuilder: RoomEvent.create)
     ..hasRequiredFields = false;
 
@@ -1164,7 +1176,7 @@ class SendEventRequest extends $pb.GeneratedMessage {
   static SendEventRequest? _defaultInstance;
 
   @$pb.TagNumber(4)
-  $pb.PbList<RoomEvent> get message => $_getList(0);
+  $pb.PbList<RoomEvent> get event => $_getList(0);
 }
 
 class SendEventResponse extends $pb.GeneratedMessage {

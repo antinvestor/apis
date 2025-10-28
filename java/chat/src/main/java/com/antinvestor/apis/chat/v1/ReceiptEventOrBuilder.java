@@ -49,27 +49,27 @@ public interface ReceiptEventOrBuilder extends
       getRoomIdBytes();
 
   /**
-   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
-   * @return A list containing the messageId.
+   * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+   * @return A list containing the eventId.
    */
   java.util.List<java.lang.String>
-      getMessageIdList();
+      getEventIdList();
   /**
-   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
-   * @return The count of messageId.
+   * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+   * @return The count of eventId.
    */
-  int getMessageIdCount();
+  int getEventIdCount();
   /**
-   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+   * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
    * @param index The index of the element to return.
-   * @return The messageId at the given index.
+   * @return The eventId at the given index.
    */
-  java.lang.String getMessageId(int index);
+  java.lang.String getEventId(int index);
   /**
-   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+   * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
    * @param index The index of the value to return.
-   * @return The bytes of the messageId at the given index.
+   * @return The bytes of the eventId at the given index.
    */
   com.google.protobuf.ByteString
-      getMessageIdBytes(int index);
+      getEventIdBytes(int index);
 }

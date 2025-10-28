@@ -702,11 +702,9 @@ components:
       type: string
       title: PresenceStatus
       enum:
-        - PRESENCE_UNKNOWN
-        - PRESENCE_OFFLINE
-        - PRESENCE_ONLINE
-        - PRESENCE_AWAY
-        - PRESENCE_BUSY
+        - UNKNOWN
+        - OFFLINE
+        - ONLINE
     chat.v1.ReadMarker:
       type: object
       properties:
@@ -745,14 +743,14 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,20}'
-        messageId:
+        eventId:
           type: array
           items:
             type: string
             maxLength: 40
             minLength: 3
             pattern: '[0-9a-z_-]{3,20}'
-          title: message_id
+          title: event_id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,20}'
@@ -877,18 +875,18 @@ components:
       type: string
       title: RoomEventType
       enum:
-        - MESSAGE_TYPE_UNSPECIFIED
-        - MESSAGE_TYPE_EVENT
-        - MESSAGE_TYPE_TEXT
-        - MESSAGE_TYPE_ATTACHMENT
-        - MESSAGE_TYPE_REACTION
-        - MESSAGE_TYPE_ENCRYPTED
-        - MESSAGE_TYPE_SYSTEM
-        - MESSAGE_TYPE_CALL_OFFER
-        - MESSAGE_TYPE_CALL_ANSWER
-        - MESSAGE_TYPE_CALL_ICE
-        - MESSAGE_TYPE_CALL_END
-        - MESSAGE_TYPE_CUSTOM
+        - UNSPECIFIED
+        - EVENT
+        - TEXT
+        - ATTACHMENT
+        - REACTION
+        - ENCRYPTED
+        - SYSTEM
+        - CALL_OFFER
+        - CALL_ANSWER
+        - CALL_ICE
+        - CALL_END
+        - CUSTOM
       description: Allowed message types. Extendable via new enum values; clients must ignore unknown values.
     chat.v1.RoomSubscription:
       type: object
@@ -999,12 +997,12 @@ components:
     chat.v1.SendEventRequest:
       type: object
       properties:
-        message:
+        event:
           type: array
           items:
             $ref: '#/components/schemas/chat.v1.RoomEvent'
-          title: message
-          description: message payload (server will assign final message_id if empty)
+          title: event
+          description: message payload (server will assign final event_id if empty)
       title: SendEventRequest
       additionalProperties: false
     chat.v1.SendEventResponse:
@@ -1076,6 +1074,12 @@ components:
     chat.v1.StreamAck:
       type: object
       properties:
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         eventId:
           type: string
           title: event_id

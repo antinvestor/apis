@@ -48,6 +48,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private StreamAck() {
+    roomId_ = "";
     eventId_ = "";
   }
 
@@ -65,11 +66,50 @@ private static final long serialVersionUID = 0L;
   }
 
   private int bitField0_;
-  public static final int EVENT_ID_FIELD_NUMBER = 1;
+  public static final int ROOM_ID_FIELD_NUMBER = 1;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object roomId_ = "";
+  /**
+   * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
+   * @return The roomId.
+   */
+  @java.lang.Override
+  public java.lang.String getRoomId() {
+    java.lang.Object ref = roomId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      roomId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for roomId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getRoomIdBytes() {
+    java.lang.Object ref = roomId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      roomId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int EVENT_ID_FIELD_NUMBER = 2;
   @SuppressWarnings("serial")
   private volatile java.lang.Object eventId_ = "";
   /**
-   * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+   * <code>string event_id = 2 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
    * @return The eventId.
    */
   @java.lang.Override
@@ -86,7 +126,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+   * <code>string event_id = 2 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for eventId.
    */
   @java.lang.Override
@@ -208,8 +248,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(roomId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, roomId_);
+    }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(eventId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, eventId_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, eventId_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeMessage(3, getAckAt());
@@ -229,8 +272,11 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(roomId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, roomId_);
+    }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(eventId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, eventId_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, eventId_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
@@ -259,6 +305,8 @@ private static final long serialVersionUID = 0L;
     }
     com.antinvestor.apis.chat.v1.StreamAck other = (com.antinvestor.apis.chat.v1.StreamAck) obj;
 
+    if (!getRoomId()
+        .equals(other.getRoomId())) return false;
     if (!getEventId()
         .equals(other.getEventId())) return false;
     if (hasAckAt() != other.hasAckAt()) return false;
@@ -287,6 +335,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + ROOM_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getRoomId().hashCode();
     hash = (37 * hash) + EVENT_ID_FIELD_NUMBER;
     hash = (53 * hash) + getEventId().hashCode();
     if (hasAckAt()) {
@@ -446,6 +496,7 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
+      roomId_ = "";
       eventId_ = "";
       ackAt_ = null;
       if (ackAtBuilder_ != null) {
@@ -496,22 +547,25 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(com.antinvestor.apis.chat.v1.StreamAck result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
+        result.roomId_ = roomId_;
+      }
+      if (((from_bitField0_ & 0x00000002) != 0)) {
         result.eventId_ = eventId_;
       }
       int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000002) != 0)) {
+      if (((from_bitField0_ & 0x00000004) != 0)) {
         result.ackAt_ = ackAtBuilder_ == null
             ? ackAt_
             : ackAtBuilder_.build();
         to_bitField0_ |= 0x00000001;
       }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
+      if (((from_bitField0_ & 0x00000008) != 0)) {
         result.metadata_ = metadataBuilder_ == null
             ? metadata_
             : metadataBuilder_.build();
         to_bitField0_ |= 0x00000002;
       }
-      if (((from_bitField0_ & 0x00000008) != 0)) {
+      if (((from_bitField0_ & 0x00000010) != 0)) {
         result.error_ = errorBuilder_ == null
             ? error_
             : errorBuilder_.build();
@@ -532,9 +586,14 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.antinvestor.apis.chat.v1.StreamAck other) {
       if (other == com.antinvestor.apis.chat.v1.StreamAck.getDefaultInstance()) return this;
+      if (!other.getRoomId().isEmpty()) {
+        roomId_ = other.roomId_;
+        bitField0_ |= 0x00000001;
+        onChanged();
+      }
       if (!other.getEventId().isEmpty()) {
         eventId_ = other.eventId_;
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         onChanged();
       }
       if (other.hasAckAt()) {
@@ -573,29 +632,34 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              eventId_ = input.readStringRequireUtf8();
+              roomId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
+            case 18: {
+              eventId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 18
             case 26: {
               input.readMessage(
                   internalGetAckAtFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000004;
               break;
             } // case 26
             case 50: {
               input.readMessage(
                   internalGetMetadataFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000008;
               break;
             } // case 50
             case 58: {
               input.readMessage(
                   internalGetErrorFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000010;
               break;
             } // case 58
             default: {
@@ -615,9 +679,81 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
+    private java.lang.Object roomId_ = "";
+    /**
+     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
+     * @return The roomId.
+     */
+    public java.lang.String getRoomId() {
+      java.lang.Object ref = roomId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        roomId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for roomId.
+     */
+    public com.google.protobuf.ByteString
+        getRoomIdBytes() {
+      java.lang.Object ref = roomId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        roomId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
+     * @param value The roomId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRoomId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      roomId_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearRoomId() {
+      roomId_ = getDefaultInstance().getRoomId();
+      bitField0_ = (bitField0_ & ~0x00000001);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for roomId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRoomIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      roomId_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+
     private java.lang.Object eventId_ = "";
     /**
-     * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+     * <code>string event_id = 2 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @return The eventId.
      */
     public java.lang.String getEventId() {
@@ -633,7 +769,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+     * <code>string event_id = 2 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for eventId.
      */
     public com.google.protobuf.ByteString
@@ -650,7 +786,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+     * <code>string event_id = 2 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @param value The eventId to set.
      * @return This builder for chaining.
      */
@@ -658,22 +794,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       eventId_ = value;
-      bitField0_ |= 0x00000001;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+     * <code>string event_id = 2 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearEventId() {
       eventId_ = getDefaultInstance().getEventId();
-      bitField0_ = (bitField0_ & ~0x00000001);
+      bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+     * <code>string event_id = 2 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for eventId to set.
      * @return This builder for chaining.
      */
@@ -682,7 +818,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       eventId_ = value;
-      bitField0_ |= 0x00000001;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
@@ -695,7 +831,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the ackAt field is set.
      */
     public boolean hasAckAt() {
-      return ((bitField0_ & 0x00000002) != 0);
+      return ((bitField0_ & 0x00000004) != 0);
     }
     /**
      * <code>.google.protobuf.Timestamp ack_at = 3 [json_name = "ackAt"];</code>
@@ -720,7 +856,7 @@ private static final long serialVersionUID = 0L;
       } else {
         ackAtBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
@@ -734,7 +870,7 @@ private static final long serialVersionUID = 0L;
       } else {
         ackAtBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
@@ -743,7 +879,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder mergeAckAt(com.google.protobuf.Timestamp value) {
       if (ackAtBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) != 0) &&
+        if (((bitField0_ & 0x00000004) != 0) &&
           ackAt_ != null &&
           ackAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
           getAckAtBuilder().mergeFrom(value);
@@ -754,7 +890,7 @@ private static final long serialVersionUID = 0L;
         ackAtBuilder_.mergeFrom(value);
       }
       if (ackAt_ != null) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         onChanged();
       }
       return this;
@@ -763,7 +899,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Timestamp ack_at = 3 [json_name = "ackAt"];</code>
      */
     public Builder clearAckAt() {
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000004);
       ackAt_ = null;
       if (ackAtBuilder_ != null) {
         ackAtBuilder_.dispose();
@@ -776,7 +912,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Timestamp ack_at = 3 [json_name = "ackAt"];</code>
      */
     public com.google.protobuf.Timestamp.Builder getAckAtBuilder() {
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return internalGetAckAtFieldBuilder().getBuilder();
     }
@@ -816,7 +952,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the metadata field is set.
      */
     public boolean hasMetadata() {
-      return ((bitField0_ & 0x00000004) != 0);
+      return ((bitField0_ & 0x00000008) != 0);
     }
     /**
      * <code>.google.protobuf.Struct metadata = 6 [json_name = "metadata"];</code>
@@ -841,7 +977,7 @@ private static final long serialVersionUID = 0L;
       } else {
         metadataBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
@@ -855,7 +991,7 @@ private static final long serialVersionUID = 0L;
       } else {
         metadataBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
@@ -864,7 +1000,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder mergeMetadata(com.google.protobuf.Struct value) {
       if (metadataBuilder_ == null) {
-        if (((bitField0_ & 0x00000004) != 0) &&
+        if (((bitField0_ & 0x00000008) != 0) &&
           metadata_ != null &&
           metadata_ != com.google.protobuf.Struct.getDefaultInstance()) {
           getMetadataBuilder().mergeFrom(value);
@@ -875,7 +1011,7 @@ private static final long serialVersionUID = 0L;
         metadataBuilder_.mergeFrom(value);
       }
       if (metadata_ != null) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         onChanged();
       }
       return this;
@@ -884,7 +1020,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Struct metadata = 6 [json_name = "metadata"];</code>
      */
     public Builder clearMetadata() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000008);
       metadata_ = null;
       if (metadataBuilder_ != null) {
         metadataBuilder_.dispose();
@@ -897,7 +1033,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.protobuf.Struct metadata = 6 [json_name = "metadata"];</code>
      */
     public com.google.protobuf.Struct.Builder getMetadataBuilder() {
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return internalGetMetadataFieldBuilder().getBuilder();
     }
@@ -941,7 +1077,7 @@ private static final long serialVersionUID = 0L;
      * @return Whether the error field is set.
      */
     public boolean hasError() {
-      return ((bitField0_ & 0x00000008) != 0);
+      return ((bitField0_ & 0x00000010) != 0);
     }
     /**
      * <pre>
@@ -974,7 +1110,7 @@ private static final long serialVersionUID = 0L;
       } else {
         errorBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
@@ -992,7 +1128,7 @@ private static final long serialVersionUID = 0L;
       } else {
         errorBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
@@ -1005,7 +1141,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder mergeError(com.antinvestor.apis.common.v1.ErrorDetail value) {
       if (errorBuilder_ == null) {
-        if (((bitField0_ & 0x00000008) != 0) &&
+        if (((bitField0_ & 0x00000010) != 0) &&
           error_ != null &&
           error_ != com.antinvestor.apis.common.v1.ErrorDetail.getDefaultInstance()) {
           getErrorBuilder().mergeFrom(value);
@@ -1016,7 +1152,7 @@ private static final long serialVersionUID = 0L;
         errorBuilder_.mergeFrom(value);
       }
       if (error_ != null) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         onChanged();
       }
       return this;
@@ -1029,7 +1165,7 @@ private static final long serialVersionUID = 0L;
      * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
      */
     public Builder clearError() {
-      bitField0_ = (bitField0_ & ~0x00000008);
+      bitField0_ = (bitField0_ & ~0x00000010);
       error_ = null;
       if (errorBuilder_ != null) {
         errorBuilder_.dispose();
@@ -1046,7 +1182,7 @@ private static final long serialVersionUID = 0L;
      * <code>optional .common.v1.ErrorDetail error = 7 [json_name = "error"];</code>
      */
     public com.antinvestor.apis.common.v1.ErrorDetail.Builder getErrorBuilder() {
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000010;
       onChanged();
       return internalGetErrorFieldBuilder().getBuilder();
     }

@@ -272,19 +272,19 @@ message RoomEvent {
 
 // Allowed message types. Extendable via new enum values; clients must ignore unknown values.
 enum RoomEventType {
-  MESSAGE_TYPE_UNSPECIFIED = 0;
-  MESSAGE_TYPE_EVENT = 1;
-  MESSAGE_TYPE_TEXT = 2;
-  MESSAGE_TYPE_ATTACHMENT = 3;
-  MESSAGE_TYPE_REACTION = 7;
-  MESSAGE_TYPE_ENCRYPTED = 6; // opaque ciphertext
-  MESSAGE_TYPE_SYSTEM = 10;
-  MESSAGE_TYPE_CALL_OFFER = 21;
-  MESSAGE_TYPE_CALL_ANSWER = 22;
-  MESSAGE_TYPE_CALL_ICE = 23;
-  MESSAGE_TYPE_CALL_END = 24;
+  UNSPECIFIED = 0;
+  EVENT = 1;
+  TEXT = 2;
+  ATTACHMENT = 3;
+  REACTION = 7;
+  ENCRYPTED = 6; // opaque ciphertext
+  SYSTEM = 10;
+  CALL_OFFER = 21;
+  CALL_ANSWER = 22;
+  CALL_ICE = 23;
+  CALL_END = 24;
 
-  MESSAGE_TYPE_CUSTOM = 100;  // vendor/app specific; metadata must indicate schema
+  CUSTOM = 100;  // vendor/app specific; metadata must indicate schema
 }
 
 // Presence event affecting a user (and visible to rooms the user is a member of)
@@ -300,11 +300,9 @@ message PresenceEvent {
 }
 
 enum PresenceStatus {
-  PRESENCE_UNKNOWN = 0;
-  PRESENCE_OFFLINE = 1;
-  PRESENCE_ONLINE = 2;
-  PRESENCE_AWAY = 3;
-  PRESENCE_BUSY = 4;
+  UNKNOWN = 0;
+  OFFLINE = 1;
+  ONLINE = 2;
 }
 
 // Read receipts
@@ -319,7 +317,7 @@ message ReceiptEvent {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  repeated string message_id = 3[
+  repeated string event_id = 3[
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
@@ -386,7 +384,12 @@ message ConnectRequest {
 // ack_event_id: last event_id client processed (inclusive).
 // If error is set, indicates the event failed to send/process correctly.
 message StreamAck {
-  string event_id = 1[
+  string room_id = 1[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string event_id = 2[
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
@@ -413,7 +416,7 @@ message ClientState {
 // -----------------------------------------------------
 
 message SendEventRequest {
-  repeated RoomEvent message = 4;          // message payload (server will assign final message_id if empty)
+  repeated RoomEvent event = 4;          // message payload (server will assign final event_id if empty)
 }
 
 message SendEventResponse {

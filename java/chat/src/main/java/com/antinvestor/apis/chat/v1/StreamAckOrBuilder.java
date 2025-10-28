@@ -25,12 +25,24 @@ public interface StreamAckOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+   * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
+   * @return The roomId.
+   */
+  java.lang.String getRoomId();
+  /**
+   * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for roomId.
+   */
+  com.google.protobuf.ByteString
+      getRoomIdBytes();
+
+  /**
+   * <code>string event_id = 2 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
    * @return The eventId.
    */
   java.lang.String getEventId();
   /**
-   * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+   * <code>string event_id = 2 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for eventId.
    */
   com.google.protobuf.ByteString
