@@ -149,6 +149,7 @@ jobs:
         with:
           mode: "COMMIT"
           fromTag: ${{ env.latest_tag }}
+          ignorePreReleases: "false"
           configurationJson: |
             {
               "template": "#{{CHANGELOG}}",
