@@ -134,9 +134,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          configuration: |
+          configurationJson: |
             {
-              "reference": "",  # Empty means compare with previous tag
+              "reference": "",
               "nextVersion": "${{ steps.release-version.outputs.version }}",
               "categories": [
                 {
@@ -160,9 +160,8 @@ jobs:
               "excludeLabels": ["skip-changelog"],
               "sort": "DESC"
             }
-          configurationPath: ""
-          output: "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
-          outputMode: "prepend"
+          outputFile: "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
+          mode: "prepend"
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Display Changelog for ${{ matrix.language }}/${{ matrix.package }}
