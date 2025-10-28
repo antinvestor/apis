@@ -77,6 +77,8 @@ jobs:
     needs: detect-changes
     if: needs.detect-changes.outputs.matrix != '{"include":[]}'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
@@ -85,8 +87,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v5
         with:
-          fetch-depth: 1
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch tags
+        run: git fetch --tags --force
 
       - name: Get Release Version
         id: release-version
@@ -147,8 +153,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          mode: "COMMIT"
           fromTag: ${{ env.latest_tag }}
+          toTag: ${{ github.sha }}
+          includeOnlyPaths: |
+            ${{ matrix.language }}/${{ matrix.package }}/
           ignorePreReleases: "false"
           configurationJson: |
             {
@@ -179,7 +187,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Display Changelog for ${{ matrix.language }}/${{ matrix.package }}
-        if: steps.changelog.outputs.changes == 'true'
+        if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != ''
         run: |
           echo "## 📝 Changelog for ${{ matrix.language }}/${{ matrix.package }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -188,7 +196,7 @@ jobs:
           echo "*[View full changelog](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}/${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md)*" >> $GITHUB_STEP_SUMMARY
 
       - name: Update pubspec.yaml version for Dart
-        if: steps.changelog.outputs.changes == 'true' && matrix.language == 'dart'
+        if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != '' && matrix.language == 'dart'
         run: |
           VERSION="${{ steps.release-version.outputs.version }}"
           PUBSPEC_FILE="${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml"
@@ -209,7 +217,7 @@ jobs:
           fi
 
       - name: Commit Changelog
-        if: steps.changelog.outputs.changes == 'true'
+        if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != '' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false)
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
