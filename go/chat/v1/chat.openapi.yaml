@@ -122,6 +122,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.DeleteRoomResponse'
+  /chat.v1.ChatService/GetClientState:
+    post:
+      tags:
+        - Real-time
+        - chat.v1.ChatService
+      summary: Get client states for profiles in a room
+      description: Retrieves client states for profiles in a room showing either which messages users have read, or presence state of the users in a room.
+      operationId: getClientStates
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat.v1.GetClientStateRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chat.v1.GetClientStateResponse'
   /chat.v1.ChatService/GetHistory:
     post:
       tags:
@@ -159,43 +196,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.GetHistoryResponse'
-  /chat.v1.ChatService/GetReadMarkers:
-    post:
-      tags:
-        - Real-time
-        - chat.v1.ChatService
-      summary: Get read markers for a room
-      description: Retrieves read markers showing which messages users have read.
-      operationId: getReadMarkers
-      parameters:
-        - name: Connect-Protocol-Version
-          in: header
-          required: true
-          schema:
-            $ref: '#/components/schemas/connect-protocol-version'
-        - name: Connect-Timeout-Ms
-          in: header
-          schema:
-            $ref: '#/components/schemas/connect-timeout-header'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/chat.v1.GetReadMarkersRequest'
-        required: true
-      responses:
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/connect.error'
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/chat.v1.GetReadMarkersResponse'
   /chat.v1.ChatService/RemoveRoomSubscriptions:
     post:
       tags:
@@ -308,14 +308,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.SendEventResponse'
-  /chat.v1.ChatService/UpdateReadMarker:
+  /chat.v1.ChatService/UpdateClientState:
     post:
       tags:
         - Real-time
         - chat.v1.ChatService
-      summary: Update read marker
-      description: Updates the read marker indicating which messages a user has read. Enables read receipts and unread counts.
-      operationId: updateReadMarker
+      summary: Update state from client
+      description: Updates the state of an event in a specific room and optionally Broadcasts to all active participants.
+      operationId: updateClientState
       parameters:
         - name: Connect-Protocol-Version
           in: header
@@ -330,7 +330,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/chat.v1.UpdateReadMarkerRequest'
+              $ref: '#/components/schemas/chat.v1.UpdateClientStateRequest'
         required: true
       responses:
         default:
@@ -344,7 +344,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/chat.v1.UpdateReadMarkerResponse'
+                $ref: '#/components/schemas/chat.v1.UpdateClientStateResponse'
   /chat.v1.ChatService/UpdateRoom:
     post:
       tags:
@@ -419,43 +419,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chat.v1.UpdateSubscriptionRoleResponse'
-  /chat.v1.ChatService/UpdateTyping:
-    post:
-      tags:
-        - Real-time
-        - chat.v1.ChatService
-      summary: Update typing indicator
-      description: Updates the typing status of the authenticated user in a specific room. Broadcasts to all active participants.
-      operationId: updateTyping
-      parameters:
-        - name: Connect-Protocol-Version
-          in: header
-          required: true
-          schema:
-            $ref: '#/components/schemas/connect-protocol-version'
-        - name: Connect-Timeout-Ms
-          in: header
-          schema:
-            $ref: '#/components/schemas/connect-timeout-header'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/chat.v1.UpdateTypingRequest'
-        required: true
-      responses:
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/connect.error'
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/chat.v1.UpdateTypingResponse'
   /chat.v1.GatewayService/Connect: {}
 components:
   schemas:
@@ -465,6 +428,9 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         members:
           type: array
           items:
@@ -479,14 +445,25 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         error:
           title: error
           $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: AddRoomSubscriptionsResponse
       additionalProperties: false
-    chat.v1.ClientCommand:
+    chat.v1.ClientState:
       type: object
       oneOf:
+        - properties:
+            presence:
+              title: presence
+              description: send a presence message to a room
+              $ref: '#/components/schemas/chat.v1.PresenceEvent'
+          title: presence
+          required:
+            - presence
         - properties:
             readMarker:
               title: read_marker
@@ -495,6 +472,14 @@ components:
           title: read_marker
           required:
             - readMarker
+        - properties:
+            receipt:
+              title: receipt
+              description: receipt acknowledgement for message delivery
+              $ref: '#/components/schemas/chat.v1.ReceiptEvent'
+          title: receipt
+          required:
+            - receipt
         - properties:
             roomEvent:
               title: room_event
@@ -506,13 +491,13 @@ components:
         - properties:
             typing:
               title: typing
-              $ref: '#/components/schemas/chat.v1.TypingUpdate'
+              $ref: '#/components/schemas/chat.v1.TypingEvent'
           title: typing
           required:
             - typing
-      title: ClientCommand
+      title: ClientState
       additionalProperties: false
-      description: Generic client commands (typing, read markers that aren't receipts, and room events)
+      description: Generic client state (typing, read markers that aren't receipts, and room events)
     chat.v1.ConnectRequest:
       type: object
       allOf:
@@ -543,12 +528,12 @@ components:
               required:
                 - ack
             - properties:
-                command:
-                  title: command
-                  $ref: '#/components/schemas/chat.v1.ClientCommand'
-              title: command
+                stateUpdate:
+                  title: stateUpdate
+                  $ref: '#/components/schemas/chat.v1.ClientState'
+              title: stateUpdate
               required:
-                - command
+                - stateUpdate
       title: ConnectRequest
       additionalProperties: false
       description: Client message over Connect stream. After initial connect frame, client sends acks/commands.
@@ -599,6 +584,9 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
       title: DeleteRoomRequest
       additionalProperties: false
     chat.v1.DeleteRoomResponse:
@@ -611,6 +599,45 @@ components:
           title: error
           $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: DeleteRoomResponse
+      additionalProperties: false
+    chat.v1.GetClientStateRequest:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+        profileIds:
+          type: array
+          items:
+            type: string
+          title: profile_ids
+        stateType:
+          title: stateType
+          $ref: '#/components/schemas/chat.v1.GetClientStateRequest.ClientStateType'
+      title: GetClientStateRequest
+      additionalProperties: false
+      description: GetClientState obtains the state of a set of profiles in a room
+    chat.v1.GetClientStateRequest.ClientStateType:
+      type: string
+      title: ClientStateType
+      enum:
+        - CLIENT_STATE_TYPE_PRESENCE
+        - CLIENT_STATE_TYPE_READ_MARKER
+    chat.v1.GetClientStateResponse:
+      type: object
+      properties:
+        roomId:
+          type: string
+          title: room_id
+        clientState:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.ClientState'
+          title: clientState
+      title: GetClientStateResponse
       additionalProperties: false
     chat.v1.GetHistoryRequest:
       type: object
@@ -650,42 +677,15 @@ components:
           title: prev_cursor
       title: GetHistoryResponse
       additionalProperties: false
-    chat.v1.GetReadMarkersRequest:
-      type: object
-      properties:
-        roomId:
-          type: string
-          title: room_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
-        profileIds:
-          type: array
-          items:
-            type: string
-          title: profile_ids
-      title: GetReadMarkersRequest
-      additionalProperties: false
-      description: GetReadMarkers
-    chat.v1.GetReadMarkersResponse:
-      type: object
-      properties:
-        roomId:
-          type: string
-          title: room_id
-        markers:
-          type: array
-          items:
-            $ref: '#/components/schemas/chat.v1.ReadMarkerInfo'
-          title: markers
-      title: GetReadMarkersResponse
-      additionalProperties: false
     chat.v1.PresenceEvent:
       type: object
       properties:
         profileId:
           type: string
           title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         status:
           title: status
           $ref: '#/components/schemas/chat.v1.PresenceStatus'
@@ -713,28 +713,22 @@ components:
         roomId:
           type: string
           title: room_id
-        upToEventId:
-          type: string
-          title: up_to_event_id
-      title: ReadMarker
-      additionalProperties: false
-    chat.v1.ReadMarkerInfo:
-      type: object
-      properties:
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         profileId:
           type: string
           title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         upToEventId:
           type: string
           title: up_to_event_id
-        readAt:
-          title: read_at
-          $ref: '#/components/schemas/google.protobuf.Timestamp'
-        unreadCount:
-          type: integer
-          title: unread_count
-          format: int32
-      title: ReadMarkerInfo
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+      title: ReadMarker
       additionalProperties: false
     chat.v1.ReceiptEvent:
       type: object
@@ -742,15 +736,26 @@ components:
         profileId:
           type: string
           title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         messageId:
-          type: string
+          type: array
+          items:
+            type: string
+            maxLength: 40
+            minLength: 3
+            pattern: '[0-9a-z_-]{3,20}'
           title: message_id
-        readAt:
-          title: read_at
-          $ref: '#/components/schemas/google.protobuf.Timestamp'
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
       title: ReceiptEvent
       additionalProperties: false
       description: Read receipts
@@ -760,6 +765,9 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         profileIds:
           type: array
           items:
@@ -773,6 +781,9 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         error:
           title: error
           $ref: '#/components/schemas/common.v1.ErrorDetail'
@@ -830,6 +841,9 @@ components:
         senderId:
           type: string
           title: sender_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
           description: profile_id or service/bot id
         type:
           title: type
@@ -882,9 +896,15 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         profileId:
           type: string
           title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         roles:
           type: array
           items:
@@ -905,6 +925,9 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         limit:
           type: integer
           title: limit
@@ -920,6 +943,9 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         members:
           type: array
           items:
@@ -1021,6 +1047,13 @@ components:
               required:
                 - presenceEvent
             - properties:
+                readEvent:
+                  title: read_event
+                  $ref: '#/components/schemas/chat.v1.ReadMarker'
+              title: read_event
+              required:
+                - readEvent
+            - properties:
                 receiptEvent:
                   title: receipt_event
                   $ref: '#/components/schemas/chat.v1.ReceiptEvent'
@@ -1046,6 +1079,9 @@ components:
         eventId:
           type: string
           title: event_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         ackAt:
           title: ack_at
           $ref: '#/components/schemas/google.protobuf.Timestamp'
@@ -1069,9 +1105,15 @@ components:
         profileId:
           type: string
           title: profile_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         typing:
           type: boolean
           title: typing
@@ -1081,18 +1123,7 @@ components:
       title: TypingEvent
       additionalProperties: false
       description: Typing indicator
-    chat.v1.TypingUpdate:
-      type: object
-      properties:
-        roomId:
-          type: string
-          title: room_id
-        typing:
-          type: boolean
-          title: typing
-      title: TypingUpdate
-      additionalProperties: false
-    chat.v1.UpdateReadMarkerRequest:
+    chat.v1.UpdateClientStateRequest:
       type: object
       properties:
         roomId:
@@ -1107,38 +1138,20 @@ components:
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,20}'
-        upToEventId:
-          type: string
-          title: up_to_event_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
-        readAt:
-          title: read_at
-          $ref: '#/components/schemas/google.protobuf.Timestamp'
-      title: UpdateReadMarkerRequest
+        clientStates:
+          type: array
+          items:
+            $ref: '#/components/schemas/chat.v1.ClientState'
+          title: clientStates
+      title: UpdateClientStateRequest
       additionalProperties: false
-      description: UpdateReadMarker
-    chat.v1.UpdateReadMarkerResponse:
+    chat.v1.UpdateClientStateResponse:
       type: object
       properties:
-        success:
-          type: boolean
-          title: success
-        roomId:
-          type: string
-          title: room_id
-        upToEventId:
-          type: string
-          title: up_to_event_id
-        readAt:
-          title: read_at
-          $ref: '#/components/schemas/google.protobuf.Timestamp'
-        unreadCount:
-          type: integer
-          title: unread_count
-          format: int32
-      title: UpdateReadMarkerResponse
+        error:
+          title: error
+          $ref: '#/components/schemas/common.v1.ErrorDetail'
+      title: UpdateClientStateResponse
       additionalProperties: false
     chat.v1.UpdateRoomRequest:
       type: object
@@ -1146,6 +1159,9 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         name:
           type: string
           title: name
@@ -1174,6 +1190,9 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         profileId:
           type: string
           title: profile_id
@@ -1190,49 +1209,13 @@ components:
         roomId:
           type: string
           title: room_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
         error:
           title: error
           $ref: '#/components/schemas/common.v1.ErrorDetail'
       title: UpdateSubscriptionRoleResponse
-      additionalProperties: false
-    chat.v1.UpdateTypingRequest:
-      type: object
-      properties:
-        roomId:
-          type: string
-          title: room_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
-        profileId:
-          type: string
-          title: profile_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
-        typing:
-          type: boolean
-          title: typing
-        timestamp:
-          title: timestamp
-          $ref: '#/components/schemas/google.protobuf.Timestamp'
-      title: UpdateTypingRequest
-      additionalProperties: false
-      description: UpdateTyping
-    chat.v1.UpdateTypingResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          title: success
-        participantCount:
-          type: integer
-          title: participant_count
-          format: int32
-        broadcastAt:
-          title: broadcast_at
-          $ref: '#/components/schemas/google.protobuf.Timestamp'
-      title: UpdateTypingResponse
       additionalProperties: false
     common.v1.ErrorDetail:
       type: object

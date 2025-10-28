@@ -69,7 +69,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object profileId_ = "";
   /**
-   * <code>string profile_id = 1 [json_name = "profileId"];</code>
+   * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The profileId.
    */
   @java.lang.Override
@@ -86,7 +86,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string profile_id = 1 [json_name = "profileId"];</code>
+   * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileId.
    */
   @java.lang.Override
@@ -578,7 +578,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object profileId_ = "";
     /**
-     * <code>string profile_id = 1 [json_name = "profileId"];</code>
+     * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return The profileId.
      */
     public java.lang.String getProfileId() {
@@ -594,7 +594,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string profile_id = 1 [json_name = "profileId"];</code>
+     * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for profileId.
      */
     public com.google.protobuf.ByteString
@@ -611,7 +611,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string profile_id = 1 [json_name = "profileId"];</code>
+     * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @param value The profileId to set.
      * @return This builder for chaining.
      */
@@ -624,7 +624,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string profile_id = 1 [json_name = "profileId"];</code>
+     * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearProfileId() {
@@ -634,7 +634,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string profile_id = 1 [json_name = "profileId"];</code>
+     * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for profileId to set.
      * @return This builder for chaining.
      */

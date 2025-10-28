@@ -232,6 +232,26 @@ func (mr *MockChatServiceClientMockRecorder) DeleteRoom(ctx, in any, opts ...any
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteRoom", reflect.TypeOf((*MockChatServiceClient)(nil).DeleteRoom), varargs...)
 }
 
+// GetClientState mocks base method.
+func (m *MockChatServiceClient) GetClientState(ctx context.Context, in *chatv1.GetClientStateRequest, opts ...grpc.CallOption) (*chatv1.GetClientStateResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetClientState", varargs...)
+	ret0, _ := ret[0].(*chatv1.GetClientStateResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetClientState indicates an expected call of GetClientState.
+func (mr *MockChatServiceClientMockRecorder) GetClientState(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetClientState", reflect.TypeOf((*MockChatServiceClient)(nil).GetClientState), varargs...)
+}
+
 // GetHistory mocks base method.
 func (m *MockChatServiceClient) GetHistory(ctx context.Context, in *chatv1.GetHistoryRequest, opts ...grpc.CallOption) (*chatv1.GetHistoryResponse, error) {
 	m.ctrl.T.Helper()
@@ -250,26 +270,6 @@ func (mr *MockChatServiceClientMockRecorder) GetHistory(ctx, in any, opts ...any
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHistory", reflect.TypeOf((*MockChatServiceClient)(nil).GetHistory), varargs...)
-}
-
-// GetReadMarkers mocks base method.
-func (m *MockChatServiceClient) GetReadMarkers(ctx context.Context, in *chatv1.GetReadMarkersRequest, opts ...grpc.CallOption) (*chatv1.GetReadMarkersResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "GetReadMarkers", varargs...)
-	ret0, _ := ret[0].(*chatv1.GetReadMarkersResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetReadMarkers indicates an expected call of GetReadMarkers.
-func (mr *MockChatServiceClientMockRecorder) GetReadMarkers(ctx, in any, opts ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReadMarkers", reflect.TypeOf((*MockChatServiceClient)(nil).GetReadMarkers), varargs...)
 }
 
 // RemoveRoomSubscriptions mocks base method.
@@ -352,24 +352,24 @@ func (mr *MockChatServiceClientMockRecorder) SendEvent(ctx, in any, opts ...any)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendEvent", reflect.TypeOf((*MockChatServiceClient)(nil).SendEvent), varargs...)
 }
 
-// UpdateReadMarker mocks base method.
-func (m *MockChatServiceClient) UpdateReadMarker(ctx context.Context, in *chatv1.UpdateReadMarkerRequest, opts ...grpc.CallOption) (*chatv1.UpdateReadMarkerResponse, error) {
+// UpdateClientState mocks base method.
+func (m *MockChatServiceClient) UpdateClientState(ctx context.Context, in *chatv1.UpdateClientStateRequest, opts ...grpc.CallOption) (*chatv1.UpdateClientStateResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "UpdateReadMarker", varargs...)
-	ret0, _ := ret[0].(*chatv1.UpdateReadMarkerResponse)
+	ret := m.ctrl.Call(m, "UpdateClientState", varargs...)
+	ret0, _ := ret[0].(*chatv1.UpdateClientStateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// UpdateReadMarker indicates an expected call of UpdateReadMarker.
-func (mr *MockChatServiceClientMockRecorder) UpdateReadMarker(ctx, in any, opts ...any) *gomock.Call {
+// UpdateClientState indicates an expected call of UpdateClientState.
+func (mr *MockChatServiceClientMockRecorder) UpdateClientState(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateReadMarker", reflect.TypeOf((*MockChatServiceClient)(nil).UpdateReadMarker), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateClientState", reflect.TypeOf((*MockChatServiceClient)(nil).UpdateClientState), varargs...)
 }
 
 // UpdateRoom mocks base method.
@@ -410,26 +410,6 @@ func (mr *MockChatServiceClientMockRecorder) UpdateSubscriptionRole(ctx, in any,
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateSubscriptionRole", reflect.TypeOf((*MockChatServiceClient)(nil).UpdateSubscriptionRole), varargs...)
-}
-
-// UpdateTyping mocks base method.
-func (m *MockChatServiceClient) UpdateTyping(ctx context.Context, in *chatv1.UpdateTypingRequest, opts ...grpc.CallOption) (*chatv1.UpdateTypingResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "UpdateTyping", varargs...)
-	ret0, _ := ret[0].(*chatv1.UpdateTypingResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// UpdateTyping indicates an expected call of UpdateTyping.
-func (mr *MockChatServiceClientMockRecorder) UpdateTyping(ctx, in any, opts ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTyping", reflect.TypeOf((*MockChatServiceClient)(nil).UpdateTyping), varargs...)
 }
 
 // MockChatServiceServer is a mock of ChatServiceServer interface.
@@ -501,6 +481,21 @@ func (mr *MockChatServiceServerMockRecorder) DeleteRoom(arg0, arg1 any) *gomock.
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteRoom", reflect.TypeOf((*MockChatServiceServer)(nil).DeleteRoom), arg0, arg1)
 }
 
+// GetClientState mocks base method.
+func (m *MockChatServiceServer) GetClientState(arg0 context.Context, arg1 *chatv1.GetClientStateRequest) (*chatv1.GetClientStateResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetClientState", arg0, arg1)
+	ret0, _ := ret[0].(*chatv1.GetClientStateResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetClientState indicates an expected call of GetClientState.
+func (mr *MockChatServiceServerMockRecorder) GetClientState(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetClientState", reflect.TypeOf((*MockChatServiceServer)(nil).GetClientState), arg0, arg1)
+}
+
 // GetHistory mocks base method.
 func (m *MockChatServiceServer) GetHistory(arg0 context.Context, arg1 *chatv1.GetHistoryRequest) (*chatv1.GetHistoryResponse, error) {
 	m.ctrl.T.Helper()
@@ -514,21 +509,6 @@ func (m *MockChatServiceServer) GetHistory(arg0 context.Context, arg1 *chatv1.Ge
 func (mr *MockChatServiceServerMockRecorder) GetHistory(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHistory", reflect.TypeOf((*MockChatServiceServer)(nil).GetHistory), arg0, arg1)
-}
-
-// GetReadMarkers mocks base method.
-func (m *MockChatServiceServer) GetReadMarkers(arg0 context.Context, arg1 *chatv1.GetReadMarkersRequest) (*chatv1.GetReadMarkersResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetReadMarkers", arg0, arg1)
-	ret0, _ := ret[0].(*chatv1.GetReadMarkersResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetReadMarkers indicates an expected call of GetReadMarkers.
-func (mr *MockChatServiceServerMockRecorder) GetReadMarkers(arg0, arg1 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReadMarkers", reflect.TypeOf((*MockChatServiceServer)(nil).GetReadMarkers), arg0, arg1)
 }
 
 // RemoveRoomSubscriptions mocks base method.
@@ -590,19 +570,19 @@ func (mr *MockChatServiceServerMockRecorder) SendEvent(arg0, arg1 any) *gomock.C
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendEvent", reflect.TypeOf((*MockChatServiceServer)(nil).SendEvent), arg0, arg1)
 }
 
-// UpdateReadMarker mocks base method.
-func (m *MockChatServiceServer) UpdateReadMarker(arg0 context.Context, arg1 *chatv1.UpdateReadMarkerRequest) (*chatv1.UpdateReadMarkerResponse, error) {
+// UpdateClientState mocks base method.
+func (m *MockChatServiceServer) UpdateClientState(arg0 context.Context, arg1 *chatv1.UpdateClientStateRequest) (*chatv1.UpdateClientStateResponse, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateReadMarker", arg0, arg1)
-	ret0, _ := ret[0].(*chatv1.UpdateReadMarkerResponse)
+	ret := m.ctrl.Call(m, "UpdateClientState", arg0, arg1)
+	ret0, _ := ret[0].(*chatv1.UpdateClientStateResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// UpdateReadMarker indicates an expected call of UpdateReadMarker.
-func (mr *MockChatServiceServerMockRecorder) UpdateReadMarker(arg0, arg1 any) *gomock.Call {
+// UpdateClientState indicates an expected call of UpdateClientState.
+func (mr *MockChatServiceServerMockRecorder) UpdateClientState(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateReadMarker", reflect.TypeOf((*MockChatServiceServer)(nil).UpdateReadMarker), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateClientState", reflect.TypeOf((*MockChatServiceServer)(nil).UpdateClientState), arg0, arg1)
 }
 
 // UpdateRoom mocks base method.
@@ -633,21 +613,6 @@ func (m *MockChatServiceServer) UpdateSubscriptionRole(arg0 context.Context, arg
 func (mr *MockChatServiceServerMockRecorder) UpdateSubscriptionRole(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateSubscriptionRole", reflect.TypeOf((*MockChatServiceServer)(nil).UpdateSubscriptionRole), arg0, arg1)
-}
-
-// UpdateTyping mocks base method.
-func (m *MockChatServiceServer) UpdateTyping(arg0 context.Context, arg1 *chatv1.UpdateTypingRequest) (*chatv1.UpdateTypingResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateTyping", arg0, arg1)
-	ret0, _ := ret[0].(*chatv1.UpdateTypingResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// UpdateTyping indicates an expected call of UpdateTyping.
-func (mr *MockChatServiceServerMockRecorder) UpdateTyping(arg0, arg1 any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTyping", reflect.TypeOf((*MockChatServiceServer)(nil).UpdateTyping), arg0, arg1)
 }
 
 // mustEmbedUnimplementedChatServiceServer mocks base method.

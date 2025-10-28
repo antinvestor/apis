@@ -20,25 +20,22 @@
 package com.antinvestor.apis.chat.v1;
 
 @com.google.protobuf.Generated
-public interface TypingUpdateOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:chat.v1.TypingUpdate)
+public interface UpdateClientStateResponseOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:chat.v1.UpdateClientStateResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string room_id = 1 [json_name = "roomId"];</code>
-   * @return The roomId.
+   * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
+   * @return Whether the error field is set.
    */
-  java.lang.String getRoomId();
+  boolean hasError();
   /**
-   * <code>string room_id = 1 [json_name = "roomId"];</code>
-   * @return The bytes for roomId.
+   * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
+   * @return The error.
    */
-  com.google.protobuf.ByteString
-      getRoomIdBytes();
-
+  com.antinvestor.apis.common.v1.ErrorDetail getError();
   /**
-   * <code>bool typing = 2 [json_name = "typing"];</code>
-   * @return The typing.
+   * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
    */
-  boolean getTyping();
+  com.antinvestor.apis.common.v1.ErrorDetailOrBuilder getErrorOrBuilder();
 }

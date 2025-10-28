@@ -20,13 +20,13 @@
 package com.antinvestor.apis.chat.v1;
 
 /**
- * Protobuf type {@code chat.v1.RemoveRoomSubscriptionsResponse}
+ * Protobuf type {@code chat.v1.UpdateClientStateResponse}
  */
 @com.google.protobuf.Generated
-public final class RemoveRoomSubscriptionsResponse extends
+public final class UpdateClientStateResponse extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:chat.v1.RemoveRoomSubscriptionsResponse)
-    RemoveRoomSubscriptionsResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:chat.v1.UpdateClientStateResponse)
+    UpdateClientStateResponseOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -35,73 +35,33 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 33,
       /* patch= */ 0,
       /* suffix= */ "",
-      "RemoveRoomSubscriptionsResponse");
+      "UpdateClientStateResponse");
   }
-  // Use RemoveRoomSubscriptionsResponse.newBuilder() to construct.
-  private RemoveRoomSubscriptionsResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use UpdateClientStateResponse.newBuilder() to construct.
+  private UpdateClientStateResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private RemoveRoomSubscriptionsResponse() {
-    roomId_ = "";
+  private UpdateClientStateResponse() {
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_RemoveRoomSubscriptionsResponse_descriptor;
+    return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_UpdateClientStateResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_RemoveRoomSubscriptionsResponse_fieldAccessorTable
+    return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_UpdateClientStateResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse.class, com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse.Builder.class);
+            com.antinvestor.apis.chat.v1.UpdateClientStateResponse.class, com.antinvestor.apis.chat.v1.UpdateClientStateResponse.Builder.class);
   }
 
   private int bitField0_;
-  public static final int ROOM_ID_FIELD_NUMBER = 1;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object roomId_ = "";
-  /**
-   * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
-   * @return The roomId.
-   */
-  @java.lang.Override
-  public java.lang.String getRoomId() {
-    java.lang.Object ref = roomId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      roomId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for roomId.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getRoomIdBytes() {
-    java.lang.Object ref = roomId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      roomId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int ERROR_FIELD_NUMBER = 3;
+  public static final int ERROR_FIELD_NUMBER = 1;
   private com.antinvestor.apis.common.v1.ErrorDetail error_;
   /**
-   * <code>.common.v1.ErrorDetail error = 3 [json_name = "error"];</code>
+   * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
    * @return Whether the error field is set.
    */
   @java.lang.Override
@@ -109,7 +69,7 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * <code>.common.v1.ErrorDetail error = 3 [json_name = "error"];</code>
+   * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
    * @return The error.
    */
   @java.lang.Override
@@ -117,7 +77,7 @@ private static final long serialVersionUID = 0L;
     return error_ == null ? com.antinvestor.apis.common.v1.ErrorDetail.getDefaultInstance() : error_;
   }
   /**
-   * <code>.common.v1.ErrorDetail error = 3 [json_name = "error"];</code>
+   * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
    */
   @java.lang.Override
   public com.antinvestor.apis.common.v1.ErrorDetailOrBuilder getErrorOrBuilder() {
@@ -138,11 +98,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(roomId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, roomId_);
-    }
     if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(3, getError());
+      output.writeMessage(1, getError());
     }
     getUnknownFields().writeTo(output);
   }
@@ -153,12 +110,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(roomId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, roomId_);
-    }
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(3, getError());
+        .computeMessageSize(1, getError());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -170,13 +124,11 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse)) {
+    if (!(obj instanceof com.antinvestor.apis.chat.v1.UpdateClientStateResponse)) {
       return super.equals(obj);
     }
-    com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse other = (com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse) obj;
+    com.antinvestor.apis.chat.v1.UpdateClientStateResponse other = (com.antinvestor.apis.chat.v1.UpdateClientStateResponse) obj;
 
-    if (!getRoomId()
-        .equals(other.getRoomId())) return false;
     if (hasError() != other.hasError()) return false;
     if (hasError()) {
       if (!getError()
@@ -193,8 +145,6 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ROOM_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getRoomId().hashCode();
     if (hasError()) {
       hash = (37 * hash) + ERROR_FIELD_NUMBER;
       hash = (53 * hash) + getError().hashCode();
@@ -204,44 +154,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse parseFrom(
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse parseFrom(
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse parseFrom(
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse parseFrom(
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse parseFrom(byte[] data)
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse parseFrom(
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse parseFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse parseFrom(
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -249,26 +199,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse parseDelimitedFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse parseDelimitedFrom(
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse parseFrom(
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse parseFrom(
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -281,7 +231,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse prototype) {
+  public static Builder newBuilder(com.antinvestor.apis.chat.v1.UpdateClientStateResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -297,26 +247,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code chat.v1.RemoveRoomSubscriptionsResponse}
+   * Protobuf type {@code chat.v1.UpdateClientStateResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:chat.v1.RemoveRoomSubscriptionsResponse)
-      com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:chat.v1.UpdateClientStateResponse)
+      com.antinvestor.apis.chat.v1.UpdateClientStateResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_RemoveRoomSubscriptionsResponse_descriptor;
+      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_UpdateClientStateResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_RemoveRoomSubscriptionsResponse_fieldAccessorTable
+      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_UpdateClientStateResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse.class, com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse.Builder.class);
+              com.antinvestor.apis.chat.v1.UpdateClientStateResponse.class, com.antinvestor.apis.chat.v1.UpdateClientStateResponse.Builder.class);
     }
 
-    // Construct using com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse.newBuilder()
+    // Construct using com.antinvestor.apis.chat.v1.UpdateClientStateResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -336,7 +286,6 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      roomId_ = "";
       error_ = null;
       if (errorBuilder_ != null) {
         errorBuilder_.dispose();
@@ -348,17 +297,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_RemoveRoomSubscriptionsResponse_descriptor;
+      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_UpdateClientStateResponse_descriptor;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse getDefaultInstanceForType() {
-      return com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse.getDefaultInstance();
+    public com.antinvestor.apis.chat.v1.UpdateClientStateResponse getDefaultInstanceForType() {
+      return com.antinvestor.apis.chat.v1.UpdateClientStateResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse build() {
-      com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse result = buildPartial();
+    public com.antinvestor.apis.chat.v1.UpdateClientStateResponse build() {
+      com.antinvestor.apis.chat.v1.UpdateClientStateResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -366,20 +315,17 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse buildPartial() {
-      com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse result = new com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse(this);
+    public com.antinvestor.apis.chat.v1.UpdateClientStateResponse buildPartial() {
+      com.antinvestor.apis.chat.v1.UpdateClientStateResponse result = new com.antinvestor.apis.chat.v1.UpdateClientStateResponse(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse result) {
+    private void buildPartial0(com.antinvestor.apis.chat.v1.UpdateClientStateResponse result) {
       int from_bitField0_ = bitField0_;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.roomId_ = roomId_;
-      }
       int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000002) != 0)) {
+      if (((from_bitField0_ & 0x00000001) != 0)) {
         result.error_ = errorBuilder_ == null
             ? error_
             : errorBuilder_.build();
@@ -390,21 +336,16 @@ private static final long serialVersionUID = 0L;
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse) {
-        return mergeFrom((com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse)other);
+      if (other instanceof com.antinvestor.apis.chat.v1.UpdateClientStateResponse) {
+        return mergeFrom((com.antinvestor.apis.chat.v1.UpdateClientStateResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse other) {
-      if (other == com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse.getDefaultInstance()) return this;
-      if (!other.getRoomId().isEmpty()) {
-        roomId_ = other.roomId_;
-        bitField0_ |= 0x00000001;
-        onChanged();
-      }
+    public Builder mergeFrom(com.antinvestor.apis.chat.v1.UpdateClientStateResponse other) {
+      if (other == com.antinvestor.apis.chat.v1.UpdateClientStateResponse.getDefaultInstance()) return this;
       if (other.hasError()) {
         mergeError(other.getError());
       }
@@ -435,17 +376,12 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              roomId_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000001;
-              break;
-            } // case 10
-            case 26: {
               input.readMessage(
                   internalGetErrorFieldBuilder().getBuilder(),
                   extensionRegistry);
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000001;
               break;
-            } // case 26
+            } // case 10
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -463,90 +399,18 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object roomId_ = "";
-    /**
-     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
-     * @return The roomId.
-     */
-    public java.lang.String getRoomId() {
-      java.lang.Object ref = roomId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        roomId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
-     * @return The bytes for roomId.
-     */
-    public com.google.protobuf.ByteString
-        getRoomIdBytes() {
-      java.lang.Object ref = roomId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        roomId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
-     * @param value The roomId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setRoomId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      roomId_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearRoomId() {
-      roomId_ = getDefaultInstance().getRoomId();
-      bitField0_ = (bitField0_ & ~0x00000001);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes for roomId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setRoomIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      roomId_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-
     private com.antinvestor.apis.common.v1.ErrorDetail error_;
     private com.google.protobuf.SingleFieldBuilder<
         com.antinvestor.apis.common.v1.ErrorDetail, com.antinvestor.apis.common.v1.ErrorDetail.Builder, com.antinvestor.apis.common.v1.ErrorDetailOrBuilder> errorBuilder_;
     /**
-     * <code>.common.v1.ErrorDetail error = 3 [json_name = "error"];</code>
+     * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
      * @return Whether the error field is set.
      */
     public boolean hasError() {
-      return ((bitField0_ & 0x00000002) != 0);
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.common.v1.ErrorDetail error = 3 [json_name = "error"];</code>
+     * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
      * @return The error.
      */
     public com.antinvestor.apis.common.v1.ErrorDetail getError() {
@@ -557,7 +421,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.common.v1.ErrorDetail error = 3 [json_name = "error"];</code>
+     * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
      */
     public Builder setError(com.antinvestor.apis.common.v1.ErrorDetail value) {
       if (errorBuilder_ == null) {
@@ -568,12 +432,12 @@ private static final long serialVersionUID = 0L;
       } else {
         errorBuilder_.setMessage(value);
       }
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>.common.v1.ErrorDetail error = 3 [json_name = "error"];</code>
+     * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
      */
     public Builder setError(
         com.antinvestor.apis.common.v1.ErrorDetail.Builder builderForValue) {
@@ -582,16 +446,16 @@ private static final long serialVersionUID = 0L;
       } else {
         errorBuilder_.setMessage(builderForValue.build());
       }
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>.common.v1.ErrorDetail error = 3 [json_name = "error"];</code>
+     * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
      */
     public Builder mergeError(com.antinvestor.apis.common.v1.ErrorDetail value) {
       if (errorBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) != 0) &&
+        if (((bitField0_ & 0x00000001) != 0) &&
           error_ != null &&
           error_ != com.antinvestor.apis.common.v1.ErrorDetail.getDefaultInstance()) {
           getErrorBuilder().mergeFrom(value);
@@ -602,16 +466,16 @@ private static final long serialVersionUID = 0L;
         errorBuilder_.mergeFrom(value);
       }
       if (error_ != null) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000001;
         onChanged();
       }
       return this;
     }
     /**
-     * <code>.common.v1.ErrorDetail error = 3 [json_name = "error"];</code>
+     * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
      */
     public Builder clearError() {
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000001);
       error_ = null;
       if (errorBuilder_ != null) {
         errorBuilder_.dispose();
@@ -621,15 +485,15 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.common.v1.ErrorDetail error = 3 [json_name = "error"];</code>
+     * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
      */
     public com.antinvestor.apis.common.v1.ErrorDetail.Builder getErrorBuilder() {
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000001;
       onChanged();
       return internalGetErrorFieldBuilder().getBuilder();
     }
     /**
-     * <code>.common.v1.ErrorDetail error = 3 [json_name = "error"];</code>
+     * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
      */
     public com.antinvestor.apis.common.v1.ErrorDetailOrBuilder getErrorOrBuilder() {
       if (errorBuilder_ != null) {
@@ -640,7 +504,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.common.v1.ErrorDetail error = 3 [json_name = "error"];</code>
+     * <code>.common.v1.ErrorDetail error = 1 [json_name = "error"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
         com.antinvestor.apis.common.v1.ErrorDetail, com.antinvestor.apis.common.v1.ErrorDetail.Builder, com.antinvestor.apis.common.v1.ErrorDetailOrBuilder> 
@@ -656,23 +520,23 @@ private static final long serialVersionUID = 0L;
       return errorBuilder_;
     }
 
-    // @@protoc_insertion_point(builder_scope:chat.v1.RemoveRoomSubscriptionsResponse)
+    // @@protoc_insertion_point(builder_scope:chat.v1.UpdateClientStateResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:chat.v1.RemoveRoomSubscriptionsResponse)
-  private static final com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:chat.v1.UpdateClientStateResponse)
+  private static final com.antinvestor.apis.chat.v1.UpdateClientStateResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse();
+    DEFAULT_INSTANCE = new com.antinvestor.apis.chat.v1.UpdateClientStateResponse();
   }
 
-  public static com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse getDefaultInstance() {
+  public static com.antinvestor.apis.chat.v1.UpdateClientStateResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<RemoveRoomSubscriptionsResponse>
-      PARSER = new com.google.protobuf.AbstractParser<RemoveRoomSubscriptionsResponse>() {
+  private static final com.google.protobuf.Parser<UpdateClientStateResponse>
+      PARSER = new com.google.protobuf.AbstractParser<UpdateClientStateResponse>() {
     @java.lang.Override
-    public RemoveRoomSubscriptionsResponse parsePartialFrom(
+    public UpdateClientStateResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -691,17 +555,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<RemoveRoomSubscriptionsResponse> parser() {
+  public static com.google.protobuf.Parser<UpdateClientStateResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<RemoveRoomSubscriptionsResponse> getParserForType() {
+  public com.google.protobuf.Parser<UpdateClientStateResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.antinvestor.apis.chat.v1.RemoveRoomSubscriptionsResponse getDefaultInstanceForType() {
+  public com.antinvestor.apis.chat.v1.UpdateClientStateResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

@@ -69,7 +69,7 @@ public interface RoomEventOrBuilder extends
    * profile_id or service/bot id
    * </pre>
    *
-   * <code>string sender_id = 3 [json_name = "senderId"];</code>
+   * <code>string sender_id = 3 [json_name = "senderId", (.buf.validate.field) = { ... }</code>
    * @return The senderId.
    */
   java.lang.String getSenderId();
@@ -78,7 +78,7 @@ public interface RoomEventOrBuilder extends
    * profile_id or service/bot id
    * </pre>
    *
-   * <code>string sender_id = 3 [json_name = "senderId"];</code>
+   * <code>string sender_id = 3 [json_name = "senderId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for senderId.
    */
   com.google.protobuf.ByteString

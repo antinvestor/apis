@@ -69,7 +69,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object eventId_ = "";
   /**
-   * <code>string event_id = 1 [json_name = "eventId"];</code>
+   * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
    * @return The eventId.
    */
   @java.lang.Override
@@ -86,7 +86,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string event_id = 1 [json_name = "eventId"];</code>
+   * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for eventId.
    */
   @java.lang.Override
@@ -617,7 +617,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object eventId_ = "";
     /**
-     * <code>string event_id = 1 [json_name = "eventId"];</code>
+     * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @return The eventId.
      */
     public java.lang.String getEventId() {
@@ -633,7 +633,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string event_id = 1 [json_name = "eventId"];</code>
+     * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for eventId.
      */
     public com.google.protobuf.ByteString
@@ -650,7 +650,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string event_id = 1 [json_name = "eventId"];</code>
+     * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @param value The eventId to set.
      * @return This builder for chaining.
      */
@@ -663,7 +663,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string event_id = 1 [json_name = "eventId"];</code>
+     * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearEventId() {
@@ -673,7 +673,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string event_id = 1 [json_name = "eventId"];</code>
+     * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for eventId to set.
      * @return This builder for chaining.
      */

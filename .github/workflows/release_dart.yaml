@@ -37,11 +37,11 @@ jobs:
         id: get_tags
         run: |
           # Get the most recent tag that matches the module
-          TAGS=$(git tag --sort=-creatordate | grep "^dart/${{ matrix.api_module }}/v" | head -n 1)
+          TAGS=$(git tag --sort=-creatordate | grep "^dart/${{ matrix.package }}/v" | head -n 1)
           echo "Found tag: $TAGS"
           if [[ -z "$TAGS" ]]; then
             echo "not_enough_tags=true" >> $GITHUB_OUTPUT
-            echo "No tags found for dart/${{ matrix.api_module }}."
+            echo "No tags found for dart/${{ matrix.package }}."
           else
             LATEST_TAG=$(echo "$TAGS" | head -n 1)
             SECOND_LATEST_TAG=$(echo "$TAGS" | sed -n '2p')
@@ -54,12 +54,12 @@ jobs:
         if: steps.get_tags.outputs.not_enough_tags == 'false'
         id: dart_module_changed
         run: |
-          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'dart/${{ matrix.api_module }}' || true)
+          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'dart/${{ matrix.package }}' || true)
           if [[ -n "$CHANGES" ]]; then
-            echo "Changes found in dart/${{ matrix.api_module }}"
+            echo "Changes found in dart/${{ matrix.package }}"
             echo "changed=true" >> $GITHUB_OUTPUT
           else
-            echo "No changes found in dart/${{ matrix.api_module }}"
+            echo "No changes found in dart/${{ matrix.package }}"
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
@@ -73,7 +73,7 @@ jobs:
         if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
         id: "tag_create"
         with:
-          tag: dart/${{ matrix.api_module }}/${{github.ref_name}}
+          tag: dart/${{ matrix.package }}/${{github.ref_name}}
           tag_exists_error: false
-          message: "release module dart/${{ matrix.api_module }}/${{github.ref_name}}"
+          message: "release module dart/${{ matrix.package }}/${{github.ref_name}}"
 

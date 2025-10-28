@@ -170,7 +170,7 @@ private static final long serialVersionUID = 0L;
    * profile_id or service/bot id
    * </pre>
    *
-   * <code>string sender_id = 3 [json_name = "senderId"];</code>
+   * <code>string sender_id = 3 [json_name = "senderId", (.buf.validate.field) = { ... }</code>
    * @return The senderId.
    */
   @java.lang.Override
@@ -191,7 +191,7 @@ private static final long serialVersionUID = 0L;
    * profile_id or service/bot id
    * </pre>
    *
-   * <code>string sender_id = 3 [json_name = "senderId"];</code>
+   * <code>string sender_id = 3 [json_name = "senderId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for senderId.
    */
   @java.lang.Override
@@ -1152,7 +1152,7 @@ private static final long serialVersionUID = 0L;
      * profile_id or service/bot id
      * </pre>
      *
-     * <code>string sender_id = 3 [json_name = "senderId"];</code>
+     * <code>string sender_id = 3 [json_name = "senderId", (.buf.validate.field) = { ... }</code>
      * @return The senderId.
      */
     public java.lang.String getSenderId() {
@@ -1172,7 +1172,7 @@ private static final long serialVersionUID = 0L;
      * profile_id or service/bot id
      * </pre>
      *
-     * <code>string sender_id = 3 [json_name = "senderId"];</code>
+     * <code>string sender_id = 3 [json_name = "senderId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for senderId.
      */
     public com.google.protobuf.ByteString
@@ -1193,7 +1193,7 @@ private static final long serialVersionUID = 0L;
      * profile_id or service/bot id
      * </pre>
      *
-     * <code>string sender_id = 3 [json_name = "senderId"];</code>
+     * <code>string sender_id = 3 [json_name = "senderId", (.buf.validate.field) = { ... }</code>
      * @param value The senderId to set.
      * @return This builder for chaining.
      */
@@ -1210,7 +1210,7 @@ private static final long serialVersionUID = 0L;
      * profile_id or service/bot id
      * </pre>
      *
-     * <code>string sender_id = 3 [json_name = "senderId"];</code>
+     * <code>string sender_id = 3 [json_name = "senderId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearSenderId() {
@@ -1224,7 +1224,7 @@ private static final long serialVersionUID = 0L;
      * profile_id or service/bot id
      * </pre>
      *
-     * <code>string sender_id = 3 [json_name = "senderId"];</code>
+     * <code>string sender_id = 3 [json_name = "senderId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for senderId to set.
      * @return This builder for chaining.
      */

@@ -28,6 +28,7 @@ enum ServerEvent_Payload {
   message,
   presenceEvent,
   receiptEvent,
+  readEvent,
   typingEvent,
   notSet
 }
@@ -42,6 +43,7 @@ class ServerEvent extends $pb.GeneratedMessage {
     RoomEvent? message,
     PresenceEvent? presenceEvent,
     ReceiptEvent? receiptEvent,
+    ReadMarker? readEvent,
     TypingEvent? typingEvent,
   }) {
     final result = create();
@@ -50,6 +52,7 @@ class ServerEvent extends $pb.GeneratedMessage {
     if (message != null) result.message = message;
     if (presenceEvent != null) result.presenceEvent = presenceEvent;
     if (receiptEvent != null) result.receiptEvent = receiptEvent;
+    if (readEvent != null) result.readEvent = readEvent;
     if (typingEvent != null) result.typingEvent = typingEvent;
     return result;
   }
@@ -68,14 +71,15 @@ class ServerEvent extends $pb.GeneratedMessage {
     10: ServerEvent_Payload.message,
     12: ServerEvent_Payload.presenceEvent,
     13: ServerEvent_Payload.receiptEvent,
-    14: ServerEvent_Payload.typingEvent,
+    15: ServerEvent_Payload.readEvent,
+    17: ServerEvent_Payload.typingEvent,
     0: ServerEvent_Payload.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ServerEvent',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
-    ..oo(0, [10, 12, 13, 14])
+    ..oo(0, [10, 12, 13, 15, 17])
     ..aOS(3, _omitFieldNames ? '' : 'id')
     ..aOM<$0.Timestamp>(5, _omitFieldNames ? '' : 'timestamp',
         subBuilder: $0.Timestamp.create)
@@ -85,7 +89,9 @@ class ServerEvent extends $pb.GeneratedMessage {
         subBuilder: PresenceEvent.create)
     ..aOM<ReceiptEvent>(13, _omitFieldNames ? '' : 'receiptEvent',
         subBuilder: ReceiptEvent.create)
-    ..aOM<TypingEvent>(14, _omitFieldNames ? '' : 'typingEvent',
+    ..aOM<ReadMarker>(15, _omitFieldNames ? '' : 'readEvent',
+        subBuilder: ReadMarker.create)
+    ..aOM<TypingEvent>(17, _omitFieldNames ? '' : 'typingEvent',
         subBuilder: TypingEvent.create)
     ..hasRequiredFields = false;
 
@@ -112,13 +118,15 @@ class ServerEvent extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   @$pb.TagNumber(12)
   @$pb.TagNumber(13)
-  @$pb.TagNumber(14)
+  @$pb.TagNumber(15)
+  @$pb.TagNumber(17)
   ServerEvent_Payload whichPayload() =>
       _ServerEvent_PayloadByTag[$_whichOneof(0)]!;
   @$pb.TagNumber(10)
   @$pb.TagNumber(12)
   @$pb.TagNumber(13)
-  @$pb.TagNumber(14)
+  @$pb.TagNumber(15)
+  @$pb.TagNumber(17)
   void clearPayload() => $_clearField($_whichOneof(0));
 
   @$pb.TagNumber(3)
@@ -174,16 +182,27 @@ class ServerEvent extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   ReceiptEvent ensureReceiptEvent() => $_ensure(4);
 
-  @$pb.TagNumber(14)
-  TypingEvent get typingEvent => $_getN(5);
-  @$pb.TagNumber(14)
-  set typingEvent(TypingEvent value) => $_setField(14, value);
-  @$pb.TagNumber(14)
-  $core.bool hasTypingEvent() => $_has(5);
-  @$pb.TagNumber(14)
-  void clearTypingEvent() => $_clearField(14);
-  @$pb.TagNumber(14)
-  TypingEvent ensureTypingEvent() => $_ensure(5);
+  @$pb.TagNumber(15)
+  ReadMarker get readEvent => $_getN(5);
+  @$pb.TagNumber(15)
+  set readEvent(ReadMarker value) => $_setField(15, value);
+  @$pb.TagNumber(15)
+  $core.bool hasReadEvent() => $_has(5);
+  @$pb.TagNumber(15)
+  void clearReadEvent() => $_clearField(15);
+  @$pb.TagNumber(15)
+  ReadMarker ensureReadEvent() => $_ensure(5);
+
+  @$pb.TagNumber(17)
+  TypingEvent get typingEvent => $_getN(6);
+  @$pb.TagNumber(17)
+  set typingEvent(TypingEvent value) => $_setField(17, value);
+  @$pb.TagNumber(17)
+  $core.bool hasTypingEvent() => $_has(6);
+  @$pb.TagNumber(17)
+  void clearTypingEvent() => $_clearField(17);
+  @$pb.TagNumber(17)
+  TypingEvent ensureTypingEvent() => $_ensure(6);
 }
 
 /// Unified message (user / bot / system / signalling)
@@ -458,14 +477,12 @@ class ReceiptEvent extends $pb.GeneratedMessage {
   factory ReceiptEvent({
     $core.String? profileId,
     $core.String? roomId,
-    $core.String? messageId,
-    $0.Timestamp? readAt,
+    $core.Iterable<$core.String>? messageId,
   }) {
     final result = create();
     if (profileId != null) result.profileId = profileId;
     if (roomId != null) result.roomId = roomId;
-    if (messageId != null) result.messageId = messageId;
-    if (readAt != null) result.readAt = readAt;
+    if (messageId != null) result.messageId.addAll(messageId);
     return result;
   }
 
@@ -484,9 +501,7 @@ class ReceiptEvent extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'profileId')
     ..aOS(2, _omitFieldNames ? '' : 'roomId')
-    ..aOS(3, _omitFieldNames ? '' : 'messageId')
-    ..aOM<$0.Timestamp>(5, _omitFieldNames ? '' : 'readAt',
-        subBuilder: $0.Timestamp.create)
+    ..pPS(3, _omitFieldNames ? '' : 'messageId')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -529,24 +544,85 @@ class ReceiptEvent extends $pb.GeneratedMessage {
   void clearRoomId() => $_clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get messageId => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set messageId($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasMessageId() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearMessageId() => $_clearField(3);
+  $pb.PbList<$core.String> get messageId => $_getList(2);
+}
 
-  @$pb.TagNumber(5)
-  $0.Timestamp get readAt => $_getN(3);
-  @$pb.TagNumber(5)
-  set readAt($0.Timestamp value) => $_setField(5, value);
-  @$pb.TagNumber(5)
-  $core.bool hasReadAt() => $_has(3);
-  @$pb.TagNumber(5)
-  void clearReadAt() => $_clearField(5);
-  @$pb.TagNumber(5)
-  $0.Timestamp ensureReadAt() => $_ensure(3);
+class ReadMarker extends $pb.GeneratedMessage {
+  factory ReadMarker({
+    $core.String? roomId,
+    $core.String? profileId,
+    $core.String? upToEventId,
+  }) {
+    final result = create();
+    if (roomId != null) result.roomId = roomId;
+    if (profileId != null) result.profileId = profileId;
+    if (upToEventId != null) result.upToEventId = upToEventId;
+    return result;
+  }
+
+  ReadMarker._();
+
+  factory ReadMarker.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ReadMarker.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ReadMarker',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'roomId')
+    ..aOS(2, _omitFieldNames ? '' : 'profileId')
+    ..aOS(3, _omitFieldNames ? '' : 'upToEventId')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ReadMarker clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ReadMarker copyWith(void Function(ReadMarker) updates) =>
+      super.copyWith((message) => updates(message as ReadMarker)) as ReadMarker;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ReadMarker create() => ReadMarker._();
+  @$core.override
+  ReadMarker createEmptyInstance() => create();
+  static $pb.PbList<ReadMarker> createRepeated() => $pb.PbList<ReadMarker>();
+  @$core.pragma('dart2js:noInline')
+  static ReadMarker getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ReadMarker>(create);
+  static ReadMarker? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get roomId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set roomId($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasRoomId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get profileId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set profileId($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasProfileId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfileId() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get upToEventId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set upToEventId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasUpToEventId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpToEventId() => $_clearField(3);
 }
 
 /// Typing indicator
@@ -644,7 +720,7 @@ class TypingEvent extends $pb.GeneratedMessage {
   $0.Timestamp ensureSince() => $_ensure(3);
 }
 
-enum ConnectRequest_Payload { ack, command, notSet }
+enum ConnectRequest_Payload { ack, stateUpdate, notSet }
 
 /// Client message over Connect stream. After initial connect frame, client sends acks/commands.
 class ConnectRequest extends $pb.GeneratedMessage {
@@ -654,7 +730,7 @@ class ConnectRequest extends $pb.GeneratedMessage {
     $core.String? authToken,
     $core.String? resumeToken,
     StreamAck? ack,
-    ClientCommand? command,
+    ClientState? stateUpdate,
   }) {
     final result = create();
     if (sessionId != null) result.sessionId = sessionId;
@@ -662,7 +738,7 @@ class ConnectRequest extends $pb.GeneratedMessage {
     if (authToken != null) result.authToken = authToken;
     if (resumeToken != null) result.resumeToken = resumeToken;
     if (ack != null) result.ack = ack;
-    if (command != null) result.command = command;
+    if (stateUpdate != null) result.stateUpdate = stateUpdate;
     return result;
   }
 
@@ -678,7 +754,7 @@ class ConnectRequest extends $pb.GeneratedMessage {
   static const $core.Map<$core.int, ConnectRequest_Payload>
       _ConnectRequest_PayloadByTag = {
     10: ConnectRequest_Payload.ack,
-    12: ConnectRequest_Payload.command,
+    12: ConnectRequest_Payload.stateUpdate,
     0: ConnectRequest_Payload.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
@@ -692,8 +768,8 @@ class ConnectRequest extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'resumeToken')
     ..aOM<StreamAck>(10, _omitFieldNames ? '' : 'ack',
         subBuilder: StreamAck.create)
-    ..aOM<ClientCommand>(12, _omitFieldNames ? '' : 'command',
-        subBuilder: ClientCommand.create)
+    ..aOM<ClientState>(12, _omitFieldNames ? '' : 'stateUpdate',
+        protoName: 'stateUpdate', subBuilder: ClientState.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -776,15 +852,15 @@ class ConnectRequest extends $pb.GeneratedMessage {
   StreamAck ensureAck() => $_ensure(4);
 
   @$pb.TagNumber(12)
-  ClientCommand get command => $_getN(5);
+  ClientState get stateUpdate => $_getN(5);
   @$pb.TagNumber(12)
-  set command(ClientCommand value) => $_setField(12, value);
+  set stateUpdate(ClientState value) => $_setField(12, value);
   @$pb.TagNumber(12)
-  $core.bool hasCommand() => $_has(5);
+  $core.bool hasStateUpdate() => $_has(5);
   @$pb.TagNumber(12)
-  void clearCommand() => $_clearField(12);
+  void clearStateUpdate() => $_clearField(12);
   @$pb.TagNumber(12)
-  ClientCommand ensureCommand() => $_ensure(5);
+  ClientState ensureStateUpdate() => $_ensure(5);
 }
 
 /// Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
@@ -889,247 +965,155 @@ class StreamAck extends $pb.GeneratedMessage {
   $2.ErrorDetail ensureError() => $_ensure(3);
 }
 
-enum ClientCommand_Cmd { typing, readMarker, roomEvent, notSet }
+enum ClientState_State {
+  roomEvent,
+  receipt,
+  readMarker,
+  typing,
+  presence,
+  notSet
+}
 
-/// Generic client commands (typing, read markers that aren't receipts, and room events)
-class ClientCommand extends $pb.GeneratedMessage {
-  factory ClientCommand({
-    TypingUpdate? typing,
-    ReadMarker? readMarker,
+/// Generic client state (typing, read markers that aren't receipts, and room events)
+class ClientState extends $pb.GeneratedMessage {
+  factory ClientState({
     RoomEvent? roomEvent,
+    ReceiptEvent? receipt,
+    ReadMarker? readMarker,
+    TypingEvent? typing,
+    PresenceEvent? presence,
   }) {
     final result = create();
-    if (typing != null) result.typing = typing;
-    if (readMarker != null) result.readMarker = readMarker;
     if (roomEvent != null) result.roomEvent = roomEvent;
+    if (receipt != null) result.receipt = receipt;
+    if (readMarker != null) result.readMarker = readMarker;
+    if (typing != null) result.typing = typing;
+    if (presence != null) result.presence = presence;
     return result;
   }
 
-  ClientCommand._();
+  ClientState._();
 
-  factory ClientCommand.fromBuffer($core.List<$core.int> data,
+  factory ClientState.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory ClientCommand.fromJson($core.String json,
+  factory ClientState.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static const $core.Map<$core.int, ClientCommand_Cmd> _ClientCommand_CmdByTag =
+  static const $core.Map<$core.int, ClientState_State> _ClientState_StateByTag =
       {
-    1: ClientCommand_Cmd.typing,
-    2: ClientCommand_Cmd.readMarker,
-    3: ClientCommand_Cmd.roomEvent,
-    0: ClientCommand_Cmd.notSet
+    1: ClientState_State.roomEvent,
+    2: ClientState_State.receipt,
+    3: ClientState_State.readMarker,
+    4: ClientState_State.typing,
+    5: ClientState_State.presence,
+    0: ClientState_State.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ClientCommand',
+      _omitMessageNames ? '' : 'ClientState',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3])
-    ..aOM<TypingUpdate>(1, _omitFieldNames ? '' : 'typing',
-        subBuilder: TypingUpdate.create)
-    ..aOM<ReadMarker>(2, _omitFieldNames ? '' : 'readMarker',
-        subBuilder: ReadMarker.create)
-    ..aOM<RoomEvent>(3, _omitFieldNames ? '' : 'roomEvent',
+    ..oo(0, [1, 2, 3, 4, 5])
+    ..aOM<RoomEvent>(1, _omitFieldNames ? '' : 'roomEvent',
         subBuilder: RoomEvent.create)
+    ..aOM<ReceiptEvent>(2, _omitFieldNames ? '' : 'receipt',
+        subBuilder: ReceiptEvent.create)
+    ..aOM<ReadMarker>(3, _omitFieldNames ? '' : 'readMarker',
+        subBuilder: ReadMarker.create)
+    ..aOM<TypingEvent>(4, _omitFieldNames ? '' : 'typing',
+        subBuilder: TypingEvent.create)
+    ..aOM<PresenceEvent>(5, _omitFieldNames ? '' : 'presence',
+        subBuilder: PresenceEvent.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ClientCommand clone() => deepCopy();
+  ClientState clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ClientCommand copyWith(void Function(ClientCommand) updates) =>
-      super.copyWith((message) => updates(message as ClientCommand))
-          as ClientCommand;
+  ClientState copyWith(void Function(ClientState) updates) =>
+      super.copyWith((message) => updates(message as ClientState))
+          as ClientState;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ClientCommand create() => ClientCommand._();
+  static ClientState create() => ClientState._();
   @$core.override
-  ClientCommand createEmptyInstance() => create();
-  static $pb.PbList<ClientCommand> createRepeated() =>
-      $pb.PbList<ClientCommand>();
+  ClientState createEmptyInstance() => create();
+  static $pb.PbList<ClientState> createRepeated() => $pb.PbList<ClientState>();
   @$core.pragma('dart2js:noInline')
-  static ClientCommand getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClientCommand>(create);
-  static ClientCommand? _defaultInstance;
+  static ClientState getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ClientState>(create);
+  static ClientState? _defaultInstance;
 
   @$pb.TagNumber(1)
   @$pb.TagNumber(2)
   @$pb.TagNumber(3)
-  ClientCommand_Cmd whichCmd() => _ClientCommand_CmdByTag[$_whichOneof(0)]!;
+  @$pb.TagNumber(4)
+  @$pb.TagNumber(5)
+  ClientState_State whichState() => _ClientState_StateByTag[$_whichOneof(0)]!;
   @$pb.TagNumber(1)
   @$pb.TagNumber(2)
   @$pb.TagNumber(3)
-  void clearCmd() => $_clearField($_whichOneof(0));
+  @$pb.TagNumber(4)
+  @$pb.TagNumber(5)
+  void clearState() => $_clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  TypingUpdate get typing => $_getN(0);
+  RoomEvent get roomEvent => $_getN(0);
   @$pb.TagNumber(1)
-  set typing(TypingUpdate value) => $_setField(1, value);
+  set roomEvent(RoomEvent value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasTyping() => $_has(0);
+  $core.bool hasRoomEvent() => $_has(0);
   @$pb.TagNumber(1)
-  void clearTyping() => $_clearField(1);
+  void clearRoomEvent() => $_clearField(1);
   @$pb.TagNumber(1)
-  TypingUpdate ensureTyping() => $_ensure(0);
+  RoomEvent ensureRoomEvent() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  ReadMarker get readMarker => $_getN(1);
+  ReceiptEvent get receipt => $_getN(1);
   @$pb.TagNumber(2)
-  set readMarker(ReadMarker value) => $_setField(2, value);
+  set receipt(ReceiptEvent value) => $_setField(2, value);
   @$pb.TagNumber(2)
-  $core.bool hasReadMarker() => $_has(1);
+  $core.bool hasReceipt() => $_has(1);
   @$pb.TagNumber(2)
-  void clearReadMarker() => $_clearField(2);
+  void clearReceipt() => $_clearField(2);
   @$pb.TagNumber(2)
-  ReadMarker ensureReadMarker() => $_ensure(1);
+  ReceiptEvent ensureReceipt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  RoomEvent get roomEvent => $_getN(2);
+  ReadMarker get readMarker => $_getN(2);
   @$pb.TagNumber(3)
-  set roomEvent(RoomEvent value) => $_setField(3, value);
+  set readMarker(ReadMarker value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasRoomEvent() => $_has(2);
+  $core.bool hasReadMarker() => $_has(2);
   @$pb.TagNumber(3)
-  void clearRoomEvent() => $_clearField(3);
+  void clearReadMarker() => $_clearField(3);
   @$pb.TagNumber(3)
-  RoomEvent ensureRoomEvent() => $_ensure(2);
-}
+  ReadMarker ensureReadMarker() => $_ensure(2);
 
-class TypingUpdate extends $pb.GeneratedMessage {
-  factory TypingUpdate({
-    $core.String? roomId,
-    $core.bool? typing,
-  }) {
-    final result = create();
-    if (roomId != null) result.roomId = roomId;
-    if (typing != null) result.typing = typing;
-    return result;
-  }
+  @$pb.TagNumber(4)
+  TypingEvent get typing => $_getN(3);
+  @$pb.TagNumber(4)
+  set typing(TypingEvent value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasTyping() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTyping() => $_clearField(4);
+  @$pb.TagNumber(4)
+  TypingEvent ensureTyping() => $_ensure(3);
 
-  TypingUpdate._();
-
-  factory TypingUpdate.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory TypingUpdate.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TypingUpdate',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
-      createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..aOB(2, _omitFieldNames ? '' : 'typing')
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TypingUpdate clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TypingUpdate copyWith(void Function(TypingUpdate) updates) =>
-      super.copyWith((message) => updates(message as TypingUpdate))
-          as TypingUpdate;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static TypingUpdate create() => TypingUpdate._();
-  @$core.override
-  TypingUpdate createEmptyInstance() => create();
-  static $pb.PbList<TypingUpdate> createRepeated() =>
-      $pb.PbList<TypingUpdate>();
-  @$core.pragma('dart2js:noInline')
-  static TypingUpdate getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TypingUpdate>(create);
-  static TypingUpdate? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get roomId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set roomId($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasRoomId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearRoomId() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.bool get typing => $_getBF(1);
-  @$pb.TagNumber(2)
-  set typing($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasTyping() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTyping() => $_clearField(2);
-}
-
-class ReadMarker extends $pb.GeneratedMessage {
-  factory ReadMarker({
-    $core.String? roomId,
-    $core.String? upToEventId,
-  }) {
-    final result = create();
-    if (roomId != null) result.roomId = roomId;
-    if (upToEventId != null) result.upToEventId = upToEventId;
-    return result;
-  }
-
-  ReadMarker._();
-
-  factory ReadMarker.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory ReadMarker.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ReadMarker',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
-      createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..aOS(2, _omitFieldNames ? '' : 'upToEventId')
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ReadMarker clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ReadMarker copyWith(void Function(ReadMarker) updates) =>
-      super.copyWith((message) => updates(message as ReadMarker)) as ReadMarker;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ReadMarker create() => ReadMarker._();
-  @$core.override
-  ReadMarker createEmptyInstance() => create();
-  static $pb.PbList<ReadMarker> createRepeated() => $pb.PbList<ReadMarker>();
-  @$core.pragma('dart2js:noInline')
-  static ReadMarker getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ReadMarker>(create);
-  static ReadMarker? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get roomId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set roomId($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasRoomId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearRoomId() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get upToEventId => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set upToEventId($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasUpToEventId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearUpToEventId() => $_clearField(2);
+  @$pb.TagNumber(5)
+  PresenceEvent get presence => $_getN(4);
+  @$pb.TagNumber(5)
+  set presence(PresenceEvent value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasPresence() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearPresence() => $_clearField(5);
+  @$pb.TagNumber(5)
+  PresenceEvent ensurePresence() => $_ensure(4);
 }
 
 class SendEventRequest extends $pb.GeneratedMessage {
@@ -2903,62 +2887,59 @@ class SearchRoomSubscriptionsResponse extends $pb.GeneratedMessage {
   void clearNextCursor() => $_clearField(3);
 }
 
-/// UpdateTyping
-class UpdateTypingRequest extends $pb.GeneratedMessage {
-  factory UpdateTypingRequest({
+class UpdateClientStateRequest extends $pb.GeneratedMessage {
+  factory UpdateClientStateRequest({
     $core.String? roomId,
     $core.String? profileId,
-    $core.bool? typing,
-    $0.Timestamp? timestamp,
+    $core.Iterable<ClientState>? clientStates,
   }) {
     final result = create();
     if (roomId != null) result.roomId = roomId;
     if (profileId != null) result.profileId = profileId;
-    if (typing != null) result.typing = typing;
-    if (timestamp != null) result.timestamp = timestamp;
+    if (clientStates != null) result.clientStates.addAll(clientStates);
     return result;
   }
 
-  UpdateTypingRequest._();
+  UpdateClientStateRequest._();
 
-  factory UpdateTypingRequest.fromBuffer($core.List<$core.int> data,
+  factory UpdateClientStateRequest.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory UpdateTypingRequest.fromJson($core.String json,
+  factory UpdateClientStateRequest.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'UpdateTypingRequest',
+      _omitMessageNames ? '' : 'UpdateClientStateRequest',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
     ..aOS(2, _omitFieldNames ? '' : 'profileId')
-    ..aOB(3, _omitFieldNames ? '' : 'typing')
-    ..aOM<$0.Timestamp>(4, _omitFieldNames ? '' : 'timestamp',
-        subBuilder: $0.Timestamp.create)
+    ..pPM<ClientState>(3, _omitFieldNames ? '' : 'clientStates',
+        protoName: 'clientStates', subBuilder: ClientState.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateTypingRequest clone() => deepCopy();
+  UpdateClientStateRequest clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateTypingRequest copyWith(void Function(UpdateTypingRequest) updates) =>
-      super.copyWith((message) => updates(message as UpdateTypingRequest))
-          as UpdateTypingRequest;
+  UpdateClientStateRequest copyWith(
+          void Function(UpdateClientStateRequest) updates) =>
+      super.copyWith((message) => updates(message as UpdateClientStateRequest))
+          as UpdateClientStateRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static UpdateTypingRequest create() => UpdateTypingRequest._();
+  static UpdateClientStateRequest create() => UpdateClientStateRequest._();
   @$core.override
-  UpdateTypingRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateTypingRequest> createRepeated() =>
-      $pb.PbList<UpdateTypingRequest>();
+  UpdateClientStateRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateClientStateRequest> createRepeated() =>
+      $pb.PbList<UpdateClientStateRequest>();
   @$core.pragma('dart2js:noInline')
-  static UpdateTypingRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<UpdateTypingRequest>(create);
-  static UpdateTypingRequest? _defaultInstance;
+  static UpdateClientStateRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdateClientStateRequest>(create);
+  static UpdateClientStateRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get roomId => $_getSZ(0);
@@ -2979,364 +2960,125 @@ class UpdateTypingRequest extends $pb.GeneratedMessage {
   void clearProfileId() => $_clearField(2);
 
   @$pb.TagNumber(3)
-  $core.bool get typing => $_getBF(2);
-  @$pb.TagNumber(3)
-  set typing($core.bool value) => $_setBool(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasTyping() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearTyping() => $_clearField(3);
-
-  @$pb.TagNumber(4)
-  $0.Timestamp get timestamp => $_getN(3);
-  @$pb.TagNumber(4)
-  set timestamp($0.Timestamp value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasTimestamp() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearTimestamp() => $_clearField(4);
-  @$pb.TagNumber(4)
-  $0.Timestamp ensureTimestamp() => $_ensure(3);
+  $pb.PbList<ClientState> get clientStates => $_getList(2);
 }
 
-class UpdateTypingResponse extends $pb.GeneratedMessage {
-  factory UpdateTypingResponse({
-    $core.bool? success,
-    $core.int? participantCount,
-    $0.Timestamp? broadcastAt,
+class UpdateClientStateResponse extends $pb.GeneratedMessage {
+  factory UpdateClientStateResponse({
+    $2.ErrorDetail? error,
   }) {
     final result = create();
-    if (success != null) result.success = success;
-    if (participantCount != null) result.participantCount = participantCount;
-    if (broadcastAt != null) result.broadcastAt = broadcastAt;
+    if (error != null) result.error = error;
     return result;
   }
 
-  UpdateTypingResponse._();
+  UpdateClientStateResponse._();
 
-  factory UpdateTypingResponse.fromBuffer($core.List<$core.int> data,
+  factory UpdateClientStateResponse.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory UpdateTypingResponse.fromJson($core.String json,
+  factory UpdateClientStateResponse.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'UpdateTypingResponse',
+      _omitMessageNames ? '' : 'UpdateClientStateResponse',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'success')
-    ..aI(2, _omitFieldNames ? '' : 'participantCount')
-    ..aOM<$0.Timestamp>(3, _omitFieldNames ? '' : 'broadcastAt',
-        subBuilder: $0.Timestamp.create)
+    ..aOM<$2.ErrorDetail>(1, _omitFieldNames ? '' : 'error',
+        subBuilder: $2.ErrorDetail.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateTypingResponse clone() => deepCopy();
+  UpdateClientStateResponse clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateTypingResponse copyWith(void Function(UpdateTypingResponse) updates) =>
-      super.copyWith((message) => updates(message as UpdateTypingResponse))
-          as UpdateTypingResponse;
+  UpdateClientStateResponse copyWith(
+          void Function(UpdateClientStateResponse) updates) =>
+      super.copyWith((message) => updates(message as UpdateClientStateResponse))
+          as UpdateClientStateResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static UpdateTypingResponse create() => UpdateTypingResponse._();
+  static UpdateClientStateResponse create() => UpdateClientStateResponse._();
   @$core.override
-  UpdateTypingResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateTypingResponse> createRepeated() =>
-      $pb.PbList<UpdateTypingResponse>();
+  UpdateClientStateResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateClientStateResponse> createRepeated() =>
+      $pb.PbList<UpdateClientStateResponse>();
   @$core.pragma('dart2js:noInline')
-  static UpdateTypingResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<UpdateTypingResponse>(create);
-  static UpdateTypingResponse? _defaultInstance;
+  static UpdateClientStateResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdateClientStateResponse>(create);
+  static UpdateClientStateResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.bool get success => $_getBF(0);
+  $2.ErrorDetail get error => $_getN(0);
   @$pb.TagNumber(1)
-  set success($core.bool value) => $_setBool(0, value);
+  set error($2.ErrorDetail value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasSuccess() => $_has(0);
+  $core.bool hasError() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSuccess() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.int get participantCount => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set participantCount($core.int value) => $_setSignedInt32(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasParticipantCount() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearParticipantCount() => $_clearField(2);
-
-  @$pb.TagNumber(3)
-  $0.Timestamp get broadcastAt => $_getN(2);
-  @$pb.TagNumber(3)
-  set broadcastAt($0.Timestamp value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasBroadcastAt() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearBroadcastAt() => $_clearField(3);
-  @$pb.TagNumber(3)
-  $0.Timestamp ensureBroadcastAt() => $_ensure(2);
+  void clearError() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.ErrorDetail ensureError() => $_ensure(0);
 }
 
-/// UpdateReadMarker
-class UpdateReadMarkerRequest extends $pb.GeneratedMessage {
-  factory UpdateReadMarkerRequest({
-    $core.String? roomId,
-    $core.String? profileId,
-    $core.String? upToEventId,
-    $0.Timestamp? readAt,
-  }) {
-    final result = create();
-    if (roomId != null) result.roomId = roomId;
-    if (profileId != null) result.profileId = profileId;
-    if (upToEventId != null) result.upToEventId = upToEventId;
-    if (readAt != null) result.readAt = readAt;
-    return result;
-  }
-
-  UpdateReadMarkerRequest._();
-
-  factory UpdateReadMarkerRequest.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory UpdateReadMarkerRequest.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'UpdateReadMarkerRequest',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
-      createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..aOS(2, _omitFieldNames ? '' : 'profileId')
-    ..aOS(3, _omitFieldNames ? '' : 'upToEventId')
-    ..aOM<$0.Timestamp>(4, _omitFieldNames ? '' : 'readAt',
-        subBuilder: $0.Timestamp.create)
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateReadMarkerRequest clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateReadMarkerRequest copyWith(
-          void Function(UpdateReadMarkerRequest) updates) =>
-      super.copyWith((message) => updates(message as UpdateReadMarkerRequest))
-          as UpdateReadMarkerRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static UpdateReadMarkerRequest create() => UpdateReadMarkerRequest._();
-  @$core.override
-  UpdateReadMarkerRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateReadMarkerRequest> createRepeated() =>
-      $pb.PbList<UpdateReadMarkerRequest>();
-  @$core.pragma('dart2js:noInline')
-  static UpdateReadMarkerRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<UpdateReadMarkerRequest>(create);
-  static UpdateReadMarkerRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get roomId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set roomId($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasRoomId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearRoomId() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get profileId => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set profileId($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasProfileId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearProfileId() => $_clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get upToEventId => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set upToEventId($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasUpToEventId() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearUpToEventId() => $_clearField(3);
-
-  @$pb.TagNumber(4)
-  $0.Timestamp get readAt => $_getN(3);
-  @$pb.TagNumber(4)
-  set readAt($0.Timestamp value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasReadAt() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearReadAt() => $_clearField(4);
-  @$pb.TagNumber(4)
-  $0.Timestamp ensureReadAt() => $_ensure(3);
-}
-
-class UpdateReadMarkerResponse extends $pb.GeneratedMessage {
-  factory UpdateReadMarkerResponse({
-    $core.bool? success,
-    $core.String? roomId,
-    $core.String? upToEventId,
-    $0.Timestamp? readAt,
-    $core.int? unreadCount,
-  }) {
-    final result = create();
-    if (success != null) result.success = success;
-    if (roomId != null) result.roomId = roomId;
-    if (upToEventId != null) result.upToEventId = upToEventId;
-    if (readAt != null) result.readAt = readAt;
-    if (unreadCount != null) result.unreadCount = unreadCount;
-    return result;
-  }
-
-  UpdateReadMarkerResponse._();
-
-  factory UpdateReadMarkerResponse.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory UpdateReadMarkerResponse.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'UpdateReadMarkerResponse',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
-      createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'success')
-    ..aOS(2, _omitFieldNames ? '' : 'roomId')
-    ..aOS(3, _omitFieldNames ? '' : 'upToEventId')
-    ..aOM<$0.Timestamp>(4, _omitFieldNames ? '' : 'readAt',
-        subBuilder: $0.Timestamp.create)
-    ..aI(5, _omitFieldNames ? '' : 'unreadCount')
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateReadMarkerResponse clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateReadMarkerResponse copyWith(
-          void Function(UpdateReadMarkerResponse) updates) =>
-      super.copyWith((message) => updates(message as UpdateReadMarkerResponse))
-          as UpdateReadMarkerResponse;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static UpdateReadMarkerResponse create() => UpdateReadMarkerResponse._();
-  @$core.override
-  UpdateReadMarkerResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateReadMarkerResponse> createRepeated() =>
-      $pb.PbList<UpdateReadMarkerResponse>();
-  @$core.pragma('dart2js:noInline')
-  static UpdateReadMarkerResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<UpdateReadMarkerResponse>(create);
-  static UpdateReadMarkerResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.bool get success => $_getBF(0);
-  @$pb.TagNumber(1)
-  set success($core.bool value) => $_setBool(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSuccess() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSuccess() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get roomId => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set roomId($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasRoomId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearRoomId() => $_clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get upToEventId => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set upToEventId($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasUpToEventId() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearUpToEventId() => $_clearField(3);
-
-  @$pb.TagNumber(4)
-  $0.Timestamp get readAt => $_getN(3);
-  @$pb.TagNumber(4)
-  set readAt($0.Timestamp value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasReadAt() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearReadAt() => $_clearField(4);
-  @$pb.TagNumber(4)
-  $0.Timestamp ensureReadAt() => $_ensure(3);
-
-  @$pb.TagNumber(5)
-  $core.int get unreadCount => $_getIZ(4);
-  @$pb.TagNumber(5)
-  set unreadCount($core.int value) => $_setSignedInt32(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasUnreadCount() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearUnreadCount() => $_clearField(5);
-}
-
-/// GetReadMarkers
-class GetReadMarkersRequest extends $pb.GeneratedMessage {
-  factory GetReadMarkersRequest({
+/// GetClientState obtains the state of a set of profiles in a room
+class GetClientStateRequest extends $pb.GeneratedMessage {
+  factory GetClientStateRequest({
     $core.String? roomId,
     $core.Iterable<$core.String>? profileIds,
+    GetClientStateRequest_ClientStateType? stateType,
   }) {
     final result = create();
     if (roomId != null) result.roomId = roomId;
     if (profileIds != null) result.profileIds.addAll(profileIds);
+    if (stateType != null) result.stateType = stateType;
     return result;
   }
 
-  GetReadMarkersRequest._();
+  GetClientStateRequest._();
 
-  factory GetReadMarkersRequest.fromBuffer($core.List<$core.int> data,
+  factory GetClientStateRequest.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory GetReadMarkersRequest.fromJson($core.String json,
+  factory GetClientStateRequest.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'GetReadMarkersRequest',
+      _omitMessageNames ? '' : 'GetClientStateRequest',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
     ..pPS(2, _omitFieldNames ? '' : 'profileIds')
+    ..aE<GetClientStateRequest_ClientStateType>(
+        3, _omitFieldNames ? '' : 'stateType',
+        protoName: 'stateType',
+        enumValues: GetClientStateRequest_ClientStateType.values)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetReadMarkersRequest clone() => deepCopy();
+  GetClientStateRequest clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetReadMarkersRequest copyWith(
-          void Function(GetReadMarkersRequest) updates) =>
-      super.copyWith((message) => updates(message as GetReadMarkersRequest))
-          as GetReadMarkersRequest;
+  GetClientStateRequest copyWith(
+          void Function(GetClientStateRequest) updates) =>
+      super.copyWith((message) => updates(message as GetClientStateRequest))
+          as GetClientStateRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static GetReadMarkersRequest create() => GetReadMarkersRequest._();
+  static GetClientStateRequest create() => GetClientStateRequest._();
   @$core.override
-  GetReadMarkersRequest createEmptyInstance() => create();
-  static $pb.PbList<GetReadMarkersRequest> createRepeated() =>
-      $pb.PbList<GetReadMarkersRequest>();
+  GetClientStateRequest createEmptyInstance() => create();
+  static $pb.PbList<GetClientStateRequest> createRepeated() =>
+      $pb.PbList<GetClientStateRequest>();
   @$core.pragma('dart2js:noInline')
-  static GetReadMarkersRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GetReadMarkersRequest>(create);
-  static GetReadMarkersRequest? _defaultInstance;
+  static GetClientStateRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetClientStateRequest>(create);
+  static GetClientStateRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get roomId => $_getSZ(0);
@@ -3349,58 +3091,68 @@ class GetReadMarkersRequest extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(2)
   $pb.PbList<$core.String> get profileIds => $_getList(1);
+
+  @$pb.TagNumber(3)
+  GetClientStateRequest_ClientStateType get stateType => $_getN(2);
+  @$pb.TagNumber(3)
+  set stateType(GetClientStateRequest_ClientStateType value) =>
+      $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStateType() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStateType() => $_clearField(3);
 }
 
-class GetReadMarkersResponse extends $pb.GeneratedMessage {
-  factory GetReadMarkersResponse({
+class GetClientStateResponse extends $pb.GeneratedMessage {
+  factory GetClientStateResponse({
     $core.String? roomId,
-    $core.Iterable<ReadMarkerInfo>? markers,
+    $core.Iterable<ClientState>? clientState,
   }) {
     final result = create();
     if (roomId != null) result.roomId = roomId;
-    if (markers != null) result.markers.addAll(markers);
+    if (clientState != null) result.clientState.addAll(clientState);
     return result;
   }
 
-  GetReadMarkersResponse._();
+  GetClientStateResponse._();
 
-  factory GetReadMarkersResponse.fromBuffer($core.List<$core.int> data,
+  factory GetClientStateResponse.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory GetReadMarkersResponse.fromJson($core.String json,
+  factory GetClientStateResponse.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'GetReadMarkersResponse',
+      _omitMessageNames ? '' : 'GetClientStateResponse',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'roomId')
-    ..pPM<ReadMarkerInfo>(2, _omitFieldNames ? '' : 'markers',
-        subBuilder: ReadMarkerInfo.create)
+    ..pPM<ClientState>(2, _omitFieldNames ? '' : 'clientState',
+        protoName: 'clientState', subBuilder: ClientState.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetReadMarkersResponse clone() => deepCopy();
+  GetClientStateResponse clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetReadMarkersResponse copyWith(
-          void Function(GetReadMarkersResponse) updates) =>
-      super.copyWith((message) => updates(message as GetReadMarkersResponse))
-          as GetReadMarkersResponse;
+  GetClientStateResponse copyWith(
+          void Function(GetClientStateResponse) updates) =>
+      super.copyWith((message) => updates(message as GetClientStateResponse))
+          as GetClientStateResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static GetReadMarkersResponse create() => GetReadMarkersResponse._();
+  static GetClientStateResponse create() => GetClientStateResponse._();
   @$core.override
-  GetReadMarkersResponse createEmptyInstance() => create();
-  static $pb.PbList<GetReadMarkersResponse> createRepeated() =>
-      $pb.PbList<GetReadMarkersResponse>();
+  GetClientStateResponse createEmptyInstance() => create();
+  static $pb.PbList<GetClientStateResponse> createRepeated() =>
+      $pb.PbList<GetClientStateResponse>();
   @$core.pragma('dart2js:noInline')
-  static GetReadMarkersResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GetReadMarkersResponse>(create);
-  static GetReadMarkersResponse? _defaultInstance;
+  static GetClientStateResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetClientStateResponse>(create);
+  static GetClientStateResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get roomId => $_getSZ(0);
@@ -3412,102 +3164,7 @@ class GetReadMarkersResponse extends $pb.GeneratedMessage {
   void clearRoomId() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  $pb.PbList<ReadMarkerInfo> get markers => $_getList(1);
-}
-
-class ReadMarkerInfo extends $pb.GeneratedMessage {
-  factory ReadMarkerInfo({
-    $core.String? profileId,
-    $core.String? upToEventId,
-    $0.Timestamp? readAt,
-    $core.int? unreadCount,
-  }) {
-    final result = create();
-    if (profileId != null) result.profileId = profileId;
-    if (upToEventId != null) result.upToEventId = upToEventId;
-    if (readAt != null) result.readAt = readAt;
-    if (unreadCount != null) result.unreadCount = unreadCount;
-    return result;
-  }
-
-  ReadMarkerInfo._();
-
-  factory ReadMarkerInfo.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(data, registry);
-  factory ReadMarkerInfo.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ReadMarkerInfo',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
-      createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'profileId')
-    ..aOS(2, _omitFieldNames ? '' : 'upToEventId')
-    ..aOM<$0.Timestamp>(3, _omitFieldNames ? '' : 'readAt',
-        subBuilder: $0.Timestamp.create)
-    ..aI(4, _omitFieldNames ? '' : 'unreadCount')
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ReadMarkerInfo clone() => deepCopy();
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ReadMarkerInfo copyWith(void Function(ReadMarkerInfo) updates) =>
-      super.copyWith((message) => updates(message as ReadMarkerInfo))
-          as ReadMarkerInfo;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ReadMarkerInfo create() => ReadMarkerInfo._();
-  @$core.override
-  ReadMarkerInfo createEmptyInstance() => create();
-  static $pb.PbList<ReadMarkerInfo> createRepeated() =>
-      $pb.PbList<ReadMarkerInfo>();
-  @$core.pragma('dart2js:noInline')
-  static ReadMarkerInfo getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ReadMarkerInfo>(create);
-  static ReadMarkerInfo? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get profileId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set profileId($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasProfileId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearProfileId() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get upToEventId => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set upToEventId($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasUpToEventId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearUpToEventId() => $_clearField(2);
-
-  @$pb.TagNumber(3)
-  $0.Timestamp get readAt => $_getN(2);
-  @$pb.TagNumber(3)
-  set readAt($0.Timestamp value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasReadAt() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearReadAt() => $_clearField(3);
-  @$pb.TagNumber(3)
-  $0.Timestamp ensureReadAt() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  $core.int get unreadCount => $_getIZ(3);
-  @$pb.TagNumber(4)
-  set unreadCount($core.int value) => $_setSignedInt32(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasUnreadCount() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearUnreadCount() => $_clearField(4);
+  $pb.PbList<ClientState> get clientState => $_getList(1);
 }
 
 class GatewayServiceApi {
@@ -3585,23 +3242,17 @@ class ChatServiceApi {
           request,
           SearchRoomSubscriptionsResponse());
 
-  /// Update typing indicator for a user in a room
-  $async.Future<UpdateTypingResponse> updateTyping(
-          $pb.ClientContext? ctx, UpdateTypingRequest request) =>
-      _client.invoke<UpdateTypingResponse>(
-          ctx, 'ChatService', 'UpdateTyping', request, UpdateTypingResponse());
+  /// Update different states that the client can be in for room subscriptions awareness
+  $async.Future<UpdateClientStateResponse> updateClientState(
+          $pb.ClientContext? ctx, UpdateClientStateRequest request) =>
+      _client.invoke<UpdateClientStateResponse>(ctx, 'ChatService',
+          'UpdateClientState', request, UpdateClientStateResponse());
 
-  /// Update read marker (read receipt) for a user in a room
-  $async.Future<UpdateReadMarkerResponse> updateReadMarker(
-          $pb.ClientContext? ctx, UpdateReadMarkerRequest request) =>
-      _client.invoke<UpdateReadMarkerResponse>(ctx, 'ChatService',
-          'UpdateReadMarker', request, UpdateReadMarkerResponse());
-
-  /// Get read markers for a room
-  $async.Future<GetReadMarkersResponse> getReadMarkers(
-          $pb.ClientContext? ctx, GetReadMarkersRequest request) =>
-      _client.invoke<GetReadMarkersResponse>(ctx, 'ChatService',
-          'GetReadMarkers', request, GetReadMarkersResponse());
+  /// Get client state for a set of profiles in a room
+  $async.Future<GetClientStateResponse> getClientState(
+          $pb.ClientContext? ctx, GetClientStateRequest request) =>
+      _client.invoke<GetClientStateResponse>(ctx, 'ChatService',
+          'GetClientState', request, GetClientStateResponse());
 }
 
 const $core.bool _omitFieldNames =

@@ -72,7 +72,7 @@ private static final long serialVersionUID = 0L;
       implements com.google.protobuf.Internal.EnumLite,
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
     ACK(10),
-    COMMAND(12),
+    STATEUPDATE(12),
     PAYLOAD_NOT_SET(0);
     private final int value;
     private PayloadCase(int value) {
@@ -91,7 +91,7 @@ private static final long serialVersionUID = 0L;
     public static PayloadCase forNumber(int value) {
       switch (value) {
         case 10: return ACK;
-        case 12: return COMMAND;
+        case 12: return STATEUPDATE;
         case 0: return PAYLOAD_NOT_SET;
         default: return null;
       }
@@ -320,35 +320,35 @@ private static final long serialVersionUID = 0L;
     return com.antinvestor.apis.chat.v1.StreamAck.getDefaultInstance();
   }
 
-  public static final int COMMAND_FIELD_NUMBER = 12;
+  public static final int STATEUPDATE_FIELD_NUMBER = 12;
   /**
-   * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
-   * @return Whether the command field is set.
+   * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
+   * @return Whether the stateUpdate field is set.
    */
   @java.lang.Override
-  public boolean hasCommand() {
+  public boolean hasStateUpdate() {
     return payloadCase_ == 12;
   }
   /**
-   * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
-   * @return The command.
+   * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
+   * @return The stateUpdate.
    */
   @java.lang.Override
-  public com.antinvestor.apis.chat.v1.ClientCommand getCommand() {
+  public com.antinvestor.apis.chat.v1.ClientState getStateUpdate() {
     if (payloadCase_ == 12) {
-       return (com.antinvestor.apis.chat.v1.ClientCommand) payload_;
+       return (com.antinvestor.apis.chat.v1.ClientState) payload_;
     }
-    return com.antinvestor.apis.chat.v1.ClientCommand.getDefaultInstance();
+    return com.antinvestor.apis.chat.v1.ClientState.getDefaultInstance();
   }
   /**
-   * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
+   * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
    */
   @java.lang.Override
-  public com.antinvestor.apis.chat.v1.ClientCommandOrBuilder getCommandOrBuilder() {
+  public com.antinvestor.apis.chat.v1.ClientStateOrBuilder getStateUpdateOrBuilder() {
     if (payloadCase_ == 12) {
-       return (com.antinvestor.apis.chat.v1.ClientCommand) payload_;
+       return (com.antinvestor.apis.chat.v1.ClientState) payload_;
     }
-    return com.antinvestor.apis.chat.v1.ClientCommand.getDefaultInstance();
+    return com.antinvestor.apis.chat.v1.ClientState.getDefaultInstance();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -381,7 +381,7 @@ private static final long serialVersionUID = 0L;
       output.writeMessage(10, (com.antinvestor.apis.chat.v1.StreamAck) payload_);
     }
     if (payloadCase_ == 12) {
-      output.writeMessage(12, (com.antinvestor.apis.chat.v1.ClientCommand) payload_);
+      output.writeMessage(12, (com.antinvestor.apis.chat.v1.ClientState) payload_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -410,7 +410,7 @@ private static final long serialVersionUID = 0L;
     }
     if (payloadCase_ == 12) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(12, (com.antinvestor.apis.chat.v1.ClientCommand) payload_);
+        .computeMessageSize(12, (com.antinvestor.apis.chat.v1.ClientState) payload_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -442,8 +442,8 @@ private static final long serialVersionUID = 0L;
             .equals(other.getAck())) return false;
         break;
       case 12:
-        if (!getCommand()
-            .equals(other.getCommand())) return false;
+        if (!getStateUpdate()
+            .equals(other.getStateUpdate())) return false;
         break;
       case 0:
       default:
@@ -473,8 +473,8 @@ private static final long serialVersionUID = 0L;
         hash = (53 * hash) + getAck().hashCode();
         break;
       case 12:
-        hash = (37 * hash) + COMMAND_FIELD_NUMBER;
-        hash = (53 * hash) + getCommand().hashCode();
+        hash = (37 * hash) + STATEUPDATE_FIELD_NUMBER;
+        hash = (53 * hash) + getStateUpdate().hashCode();
         break;
       case 0:
       default:
@@ -621,8 +621,8 @@ private static final long serialVersionUID = 0L;
       if (ackBuilder_ != null) {
         ackBuilder_.clear();
       }
-      if (commandBuilder_ != null) {
-        commandBuilder_.clear();
+      if (stateUpdateBuilder_ != null) {
+        stateUpdateBuilder_.clear();
       }
       payloadCase_ = 0;
       payload_ = null;
@@ -682,8 +682,8 @@ private static final long serialVersionUID = 0L;
         result.payload_ = ackBuilder_.build();
       }
       if (payloadCase_ == 12 &&
-          commandBuilder_ != null) {
-        result.payload_ = commandBuilder_.build();
+          stateUpdateBuilder_ != null) {
+        result.payload_ = stateUpdateBuilder_.build();
       }
     }
 
@@ -724,8 +724,8 @@ private static final long serialVersionUID = 0L;
           mergeAck(other.getAck());
           break;
         }
-        case COMMAND: {
-          mergeCommand(other.getCommand());
+        case STATEUPDATE: {
+          mergeStateUpdate(other.getStateUpdate());
           break;
         }
         case PAYLOAD_NOT_SET: {
@@ -787,7 +787,7 @@ private static final long serialVersionUID = 0L;
             } // case 82
             case 98: {
               input.readMessage(
-                  internalGetCommandFieldBuilder().getBuilder(),
+                  internalGetStateUpdateFieldBuilder().getBuilder(),
                   extensionRegistry);
               payloadCase_ = 12;
               break;
@@ -1320,71 +1320,71 @@ private static final long serialVersionUID = 0L;
     }
 
     private com.google.protobuf.SingleFieldBuilder<
-        com.antinvestor.apis.chat.v1.ClientCommand, com.antinvestor.apis.chat.v1.ClientCommand.Builder, com.antinvestor.apis.chat.v1.ClientCommandOrBuilder> commandBuilder_;
+        com.antinvestor.apis.chat.v1.ClientState, com.antinvestor.apis.chat.v1.ClientState.Builder, com.antinvestor.apis.chat.v1.ClientStateOrBuilder> stateUpdateBuilder_;
     /**
-     * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
-     * @return Whether the command field is set.
+     * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
+     * @return Whether the stateUpdate field is set.
      */
     @java.lang.Override
-    public boolean hasCommand() {
+    public boolean hasStateUpdate() {
       return payloadCase_ == 12;
     }
     /**
-     * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
-     * @return The command.
+     * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
+     * @return The stateUpdate.
      */
     @java.lang.Override
-    public com.antinvestor.apis.chat.v1.ClientCommand getCommand() {
-      if (commandBuilder_ == null) {
+    public com.antinvestor.apis.chat.v1.ClientState getStateUpdate() {
+      if (stateUpdateBuilder_ == null) {
         if (payloadCase_ == 12) {
-          return (com.antinvestor.apis.chat.v1.ClientCommand) payload_;
+          return (com.antinvestor.apis.chat.v1.ClientState) payload_;
         }
-        return com.antinvestor.apis.chat.v1.ClientCommand.getDefaultInstance();
+        return com.antinvestor.apis.chat.v1.ClientState.getDefaultInstance();
       } else {
         if (payloadCase_ == 12) {
-          return commandBuilder_.getMessage();
+          return stateUpdateBuilder_.getMessage();
         }
-        return com.antinvestor.apis.chat.v1.ClientCommand.getDefaultInstance();
+        return com.antinvestor.apis.chat.v1.ClientState.getDefaultInstance();
       }
     }
     /**
-     * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
+     * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
      */
-    public Builder setCommand(com.antinvestor.apis.chat.v1.ClientCommand value) {
-      if (commandBuilder_ == null) {
+    public Builder setStateUpdate(com.antinvestor.apis.chat.v1.ClientState value) {
+      if (stateUpdateBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
         payload_ = value;
         onChanged();
       } else {
-        commandBuilder_.setMessage(value);
+        stateUpdateBuilder_.setMessage(value);
       }
       payloadCase_ = 12;
       return this;
     }
     /**
-     * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
+     * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
      */
-    public Builder setCommand(
-        com.antinvestor.apis.chat.v1.ClientCommand.Builder builderForValue) {
-      if (commandBuilder_ == null) {
+    public Builder setStateUpdate(
+        com.antinvestor.apis.chat.v1.ClientState.Builder builderForValue) {
+      if (stateUpdateBuilder_ == null) {
         payload_ = builderForValue.build();
         onChanged();
       } else {
-        commandBuilder_.setMessage(builderForValue.build());
+        stateUpdateBuilder_.setMessage(builderForValue.build());
       }
       payloadCase_ = 12;
       return this;
     }
     /**
-     * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
+     * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
      */
-    public Builder mergeCommand(com.antinvestor.apis.chat.v1.ClientCommand value) {
-      if (commandBuilder_ == null) {
+    public Builder mergeStateUpdate(com.antinvestor.apis.chat.v1.ClientState value) {
+      if (stateUpdateBuilder_ == null) {
         if (payloadCase_ == 12 &&
-            payload_ != com.antinvestor.apis.chat.v1.ClientCommand.getDefaultInstance()) {
-          payload_ = com.antinvestor.apis.chat.v1.ClientCommand.newBuilder((com.antinvestor.apis.chat.v1.ClientCommand) payload_)
+            payload_ != com.antinvestor.apis.chat.v1.ClientState.getDefaultInstance()) {
+          payload_ = com.antinvestor.apis.chat.v1.ClientState.newBuilder((com.antinvestor.apis.chat.v1.ClientState) payload_)
               .mergeFrom(value).buildPartial();
         } else {
           payload_ = value;
@@ -1392,19 +1392,19 @@ private static final long serialVersionUID = 0L;
         onChanged();
       } else {
         if (payloadCase_ == 12) {
-          commandBuilder_.mergeFrom(value);
+          stateUpdateBuilder_.mergeFrom(value);
         } else {
-          commandBuilder_.setMessage(value);
+          stateUpdateBuilder_.setMessage(value);
         }
       }
       payloadCase_ = 12;
       return this;
     }
     /**
-     * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
+     * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
      */
-    public Builder clearCommand() {
-      if (commandBuilder_ == null) {
+    public Builder clearStateUpdate() {
+      if (stateUpdateBuilder_ == null) {
         if (payloadCase_ == 12) {
           payloadCase_ = 0;
           payload_ = null;
@@ -1415,50 +1415,50 @@ private static final long serialVersionUID = 0L;
           payloadCase_ = 0;
           payload_ = null;
         }
-        commandBuilder_.clear();
+        stateUpdateBuilder_.clear();
       }
       return this;
     }
     /**
-     * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
+     * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
      */
-    public com.antinvestor.apis.chat.v1.ClientCommand.Builder getCommandBuilder() {
-      return internalGetCommandFieldBuilder().getBuilder();
+    public com.antinvestor.apis.chat.v1.ClientState.Builder getStateUpdateBuilder() {
+      return internalGetStateUpdateFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
+     * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
      */
     @java.lang.Override
-    public com.antinvestor.apis.chat.v1.ClientCommandOrBuilder getCommandOrBuilder() {
-      if ((payloadCase_ == 12) && (commandBuilder_ != null)) {
-        return commandBuilder_.getMessageOrBuilder();
+    public com.antinvestor.apis.chat.v1.ClientStateOrBuilder getStateUpdateOrBuilder() {
+      if ((payloadCase_ == 12) && (stateUpdateBuilder_ != null)) {
+        return stateUpdateBuilder_.getMessageOrBuilder();
       } else {
         if (payloadCase_ == 12) {
-          return (com.antinvestor.apis.chat.v1.ClientCommand) payload_;
+          return (com.antinvestor.apis.chat.v1.ClientState) payload_;
         }
-        return com.antinvestor.apis.chat.v1.ClientCommand.getDefaultInstance();
+        return com.antinvestor.apis.chat.v1.ClientState.getDefaultInstance();
       }
     }
     /**
-     * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
+     * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
-        com.antinvestor.apis.chat.v1.ClientCommand, com.antinvestor.apis.chat.v1.ClientCommand.Builder, com.antinvestor.apis.chat.v1.ClientCommandOrBuilder> 
-        internalGetCommandFieldBuilder() {
-      if (commandBuilder_ == null) {
+        com.antinvestor.apis.chat.v1.ClientState, com.antinvestor.apis.chat.v1.ClientState.Builder, com.antinvestor.apis.chat.v1.ClientStateOrBuilder> 
+        internalGetStateUpdateFieldBuilder() {
+      if (stateUpdateBuilder_ == null) {
         if (!(payloadCase_ == 12)) {
-          payload_ = com.antinvestor.apis.chat.v1.ClientCommand.getDefaultInstance();
+          payload_ = com.antinvestor.apis.chat.v1.ClientState.getDefaultInstance();
         }
-        commandBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-            com.antinvestor.apis.chat.v1.ClientCommand, com.antinvestor.apis.chat.v1.ClientCommand.Builder, com.antinvestor.apis.chat.v1.ClientCommandOrBuilder>(
-                (com.antinvestor.apis.chat.v1.ClientCommand) payload_,
+        stateUpdateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.antinvestor.apis.chat.v1.ClientState, com.antinvestor.apis.chat.v1.ClientState.Builder, com.antinvestor.apis.chat.v1.ClientStateOrBuilder>(
+                (com.antinvestor.apis.chat.v1.ClientState) payload_,
                 getParentForChildren(),
                 isClean());
         payload_ = null;
       }
       payloadCase_ = 12;
       onChanged();
-      return commandBuilder_;
+      return stateUpdateBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:chat.v1.ConnectRequest)

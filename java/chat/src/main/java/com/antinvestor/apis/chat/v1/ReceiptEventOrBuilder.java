@@ -25,53 +25,51 @@ public interface ReceiptEventOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string profile_id = 1 [json_name = "profileId"];</code>
+   * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The profileId.
    */
   java.lang.String getProfileId();
   /**
-   * <code>string profile_id = 1 [json_name = "profileId"];</code>
+   * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileId.
    */
   com.google.protobuf.ByteString
       getProfileIdBytes();
 
   /**
-   * <code>string room_id = 2 [json_name = "roomId"];</code>
+   * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The roomId.
    */
   java.lang.String getRoomId();
   /**
-   * <code>string room_id = 2 [json_name = "roomId"];</code>
+   * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for roomId.
    */
   com.google.protobuf.ByteString
       getRoomIdBytes();
 
   /**
-   * <code>string message_id = 3 [json_name = "messageId"];</code>
-   * @return The messageId.
+   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+   * @return A list containing the messageId.
    */
-  java.lang.String getMessageId();
+  java.util.List<java.lang.String>
+      getMessageIdList();
   /**
-   * <code>string message_id = 3 [json_name = "messageId"];</code>
-   * @return The bytes for messageId.
+   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+   * @return The count of messageId.
+   */
+  int getMessageIdCount();
+  /**
+   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+   * @param index The index of the element to return.
+   * @return The messageId at the given index.
+   */
+  java.lang.String getMessageId(int index);
+  /**
+   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the messageId at the given index.
    */
   com.google.protobuf.ByteString
-      getMessageIdBytes();
-
-  /**
-   * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-   * @return Whether the readAt field is set.
-   */
-  boolean hasReadAt();
-  /**
-   * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-   * @return The readAt.
-   */
-  com.google.protobuf.Timestamp getReadAt();
-  /**
-   * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-   */
-  com.google.protobuf.TimestampOrBuilder getReadAtOrBuilder();
+      getMessageIdBytes(int index);
 }
