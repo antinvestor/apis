@@ -43,6 +43,7 @@ private static final long serialVersionUID = 0L;
   }
   private ReadMarker() {
     roomId_ = "";
+    profileId_ = "";
     upToEventId_ = "";
   }
 
@@ -63,7 +64,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object roomId_ = "";
   /**
-   * <code>string room_id = 1 [json_name = "roomId"];</code>
+   * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The roomId.
    */
   @java.lang.Override
@@ -80,7 +81,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string room_id = 1 [json_name = "roomId"];</code>
+   * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for roomId.
    */
   @java.lang.Override
@@ -98,11 +99,50 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int UP_TO_EVENT_ID_FIELD_NUMBER = 2;
+  public static final int PROFILE_ID_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object profileId_ = "";
+  /**
+   * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The profileId.
+   */
+  @java.lang.Override
+  public java.lang.String getProfileId() {
+    java.lang.Object ref = profileId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      profileId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getProfileIdBytes() {
+    java.lang.Object ref = profileId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      profileId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int UP_TO_EVENT_ID_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
   private volatile java.lang.Object upToEventId_ = "";
   /**
-   * <code>string up_to_event_id = 2 [json_name = "upToEventId"];</code>
+   * <code>string up_to_event_id = 3 [json_name = "upToEventId", (.buf.validate.field) = { ... }</code>
    * @return The upToEventId.
    */
   @java.lang.Override
@@ -119,7 +159,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string up_to_event_id = 2 [json_name = "upToEventId"];</code>
+   * <code>string up_to_event_id = 3 [json_name = "upToEventId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for upToEventId.
    */
   @java.lang.Override
@@ -154,8 +194,11 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(roomId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 1, roomId_);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, profileId_);
+    }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(upToEventId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 2, upToEventId_);
+      com.google.protobuf.GeneratedMessage.writeString(output, 3, upToEventId_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -169,8 +212,11 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(roomId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(1, roomId_);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(profileId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, profileId_);
+    }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(upToEventId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, upToEventId_);
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, upToEventId_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -189,6 +235,8 @@ private static final long serialVersionUID = 0L;
 
     if (!getRoomId()
         .equals(other.getRoomId())) return false;
+    if (!getProfileId()
+        .equals(other.getProfileId())) return false;
     if (!getUpToEventId()
         .equals(other.getUpToEventId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
@@ -204,6 +252,8 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ROOM_ID_FIELD_NUMBER;
     hash = (53 * hash) + getRoomId().hashCode();
+    hash = (37 * hash) + PROFILE_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getProfileId().hashCode();
     hash = (37 * hash) + UP_TO_EVENT_ID_FIELD_NUMBER;
     hash = (53 * hash) + getUpToEventId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
@@ -338,6 +388,7 @@ private static final long serialVersionUID = 0L;
       super.clear();
       bitField0_ = 0;
       roomId_ = "";
+      profileId_ = "";
       upToEventId_ = "";
       return this;
     }
@@ -376,6 +427,9 @@ private static final long serialVersionUID = 0L;
         result.roomId_ = roomId_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.profileId_ = profileId_;
+      }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
         result.upToEventId_ = upToEventId_;
       }
     }
@@ -397,9 +451,14 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000001;
         onChanged();
       }
+      if (!other.getProfileId().isEmpty()) {
+        profileId_ = other.profileId_;
+        bitField0_ |= 0x00000002;
+        onChanged();
+      }
       if (!other.getUpToEventId().isEmpty()) {
         upToEventId_ = other.upToEventId_;
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -434,10 +493,15 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 10
             case 18: {
-              upToEventId_ = input.readStringRequireUtf8();
+              profileId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
+            case 26: {
+              upToEventId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 26
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -457,7 +521,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object roomId_ = "";
     /**
-     * <code>string room_id = 1 [json_name = "roomId"];</code>
+     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @return The roomId.
      */
     public java.lang.String getRoomId() {
@@ -473,7 +537,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string room_id = 1 [json_name = "roomId"];</code>
+     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for roomId.
      */
     public com.google.protobuf.ByteString
@@ -490,7 +554,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string room_id = 1 [json_name = "roomId"];</code>
+     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @param value The roomId to set.
      * @return This builder for chaining.
      */
@@ -503,7 +567,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string room_id = 1 [json_name = "roomId"];</code>
+     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearRoomId() {
@@ -513,7 +577,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string room_id = 1 [json_name = "roomId"];</code>
+     * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for roomId to set.
      * @return This builder for chaining.
      */
@@ -527,9 +591,81 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private java.lang.Object profileId_ = "";
+    /**
+     * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @return The profileId.
+     */
+    public java.lang.String getProfileId() {
+      java.lang.Object ref = profileId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        profileId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for profileId.
+     */
+    public com.google.protobuf.ByteString
+        getProfileIdBytes() {
+      java.lang.Object ref = profileId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        profileId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @param value The profileId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setProfileId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      profileId_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearProfileId() {
+      profileId_ = getDefaultInstance().getProfileId();
+      bitField0_ = (bitField0_ & ~0x00000002);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for profileId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setProfileIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      profileId_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+
     private java.lang.Object upToEventId_ = "";
     /**
-     * <code>string up_to_event_id = 2 [json_name = "upToEventId"];</code>
+     * <code>string up_to_event_id = 3 [json_name = "upToEventId", (.buf.validate.field) = { ... }</code>
      * @return The upToEventId.
      */
     public java.lang.String getUpToEventId() {
@@ -545,7 +681,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string up_to_event_id = 2 [json_name = "upToEventId"];</code>
+     * <code>string up_to_event_id = 3 [json_name = "upToEventId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for upToEventId.
      */
     public com.google.protobuf.ByteString
@@ -562,7 +698,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string up_to_event_id = 2 [json_name = "upToEventId"];</code>
+     * <code>string up_to_event_id = 3 [json_name = "upToEventId", (.buf.validate.field) = { ... }</code>
      * @param value The upToEventId to set.
      * @return This builder for chaining.
      */
@@ -570,22 +706,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       upToEventId_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>string up_to_event_id = 2 [json_name = "upToEventId"];</code>
+     * <code>string up_to_event_id = 3 [json_name = "upToEventId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearUpToEventId() {
       upToEventId_ = getDefaultInstance().getUpToEventId();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
     /**
-     * <code>string up_to_event_id = 2 [json_name = "upToEventId"];</code>
+     * <code>string up_to_event_id = 3 [json_name = "upToEventId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for upToEventId to set.
      * @return This builder for chaining.
      */
@@ -594,7 +730,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       upToEventId_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }

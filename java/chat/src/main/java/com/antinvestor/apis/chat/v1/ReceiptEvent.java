@@ -48,7 +48,8 @@ private static final long serialVersionUID = 0L;
   private ReceiptEvent() {
     profileId_ = "";
     roomId_ = "";
-    messageId_ = "";
+    messageId_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -64,12 +65,11 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.chat.v1.ReceiptEvent.class, com.antinvestor.apis.chat.v1.ReceiptEvent.Builder.class);
   }
 
-  private int bitField0_;
   public static final int PROFILE_ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object profileId_ = "";
   /**
-   * <code>string profile_id = 1 [json_name = "profileId"];</code>
+   * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The profileId.
    */
   @java.lang.Override
@@ -86,7 +86,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string profile_id = 1 [json_name = "profileId"];</code>
+   * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileId.
    */
   @java.lang.Override
@@ -108,7 +108,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object roomId_ = "";
   /**
-   * <code>string room_id = 2 [json_name = "roomId"];</code>
+   * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The roomId.
    */
   @java.lang.Override
@@ -125,7 +125,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string room_id = 2 [json_name = "roomId"];</code>
+   * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for roomId.
    */
   @java.lang.Override
@@ -145,67 +145,39 @@ private static final long serialVersionUID = 0L;
 
   public static final int MESSAGE_ID_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object messageId_ = "";
+  private com.google.protobuf.LazyStringArrayList messageId_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
   /**
-   * <code>string message_id = 3 [json_name = "messageId"];</code>
-   * @return The messageId.
+   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+   * @return A list containing the messageId.
    */
-  @java.lang.Override
-  public java.lang.String getMessageId() {
-    java.lang.Object ref = messageId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      messageId_ = s;
-      return s;
-    }
+  public com.google.protobuf.ProtocolStringList
+      getMessageIdList() {
+    return messageId_;
   }
   /**
-   * <code>string message_id = 3 [json_name = "messageId"];</code>
-   * @return The bytes for messageId.
+   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+   * @return The count of messageId.
    */
-  @java.lang.Override
+  public int getMessageIdCount() {
+    return messageId_.size();
+  }
+  /**
+   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+   * @param index The index of the element to return.
+   * @return The messageId at the given index.
+   */
+  public java.lang.String getMessageId(int index) {
+    return messageId_.get(index);
+  }
+  /**
+   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the messageId at the given index.
+   */
   public com.google.protobuf.ByteString
-      getMessageIdBytes() {
-    java.lang.Object ref = messageId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      messageId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int READ_AT_FIELD_NUMBER = 5;
-  private com.google.protobuf.Timestamp readAt_;
-  /**
-   * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-   * @return Whether the readAt field is set.
-   */
-  @java.lang.Override
-  public boolean hasReadAt() {
-    return ((bitField0_ & 0x00000001) != 0);
-  }
-  /**
-   * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-   * @return The readAt.
-   */
-  @java.lang.Override
-  public com.google.protobuf.Timestamp getReadAt() {
-    return readAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : readAt_;
-  }
-  /**
-   * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-   */
-  @java.lang.Override
-  public com.google.protobuf.TimestampOrBuilder getReadAtOrBuilder() {
-    return readAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : readAt_;
+      getMessageIdBytes(int index) {
+    return messageId_.getByteString(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -228,11 +200,8 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(roomId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, roomId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(messageId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 3, messageId_);
-    }
-    if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(5, getReadAt());
+    for (int i = 0; i < messageId_.size(); i++) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 3, messageId_.getRaw(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -249,12 +218,13 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(roomId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(2, roomId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(messageId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, messageId_);
-    }
-    if (((bitField0_ & 0x00000001) != 0)) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(5, getReadAt());
+    {
+      int dataSize = 0;
+      for (int i = 0; i < messageId_.size(); i++) {
+        dataSize += computeStringSizeNoTag(messageId_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getMessageIdList().size();
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -275,13 +245,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getProfileId())) return false;
     if (!getRoomId()
         .equals(other.getRoomId())) return false;
-    if (!getMessageId()
-        .equals(other.getMessageId())) return false;
-    if (hasReadAt() != other.hasReadAt()) return false;
-    if (hasReadAt()) {
-      if (!getReadAt()
-          .equals(other.getReadAt())) return false;
-    }
+    if (!getMessageIdList()
+        .equals(other.getMessageIdList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -297,11 +262,9 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getProfileId().hashCode();
     hash = (37 * hash) + ROOM_ID_FIELD_NUMBER;
     hash = (53 * hash) + getRoomId().hashCode();
-    hash = (37 * hash) + MESSAGE_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getMessageId().hashCode();
-    if (hasReadAt()) {
-      hash = (37 * hash) + READ_AT_FIELD_NUMBER;
-      hash = (53 * hash) + getReadAt().hashCode();
+    if (getMessageIdCount() > 0) {
+      hash = (37 * hash) + MESSAGE_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getMessageIdList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -426,19 +389,13 @@ private static final long serialVersionUID = 0L;
 
     // Construct using com.antinvestor.apis.chat.v1.ReceiptEvent.newBuilder()
     private Builder() {
-      maybeForceBuilderInitialization();
+
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       super(parent);
-      maybeForceBuilderInitialization();
-    }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessage
-              .alwaysUseFieldBuilders) {
-        internalGetReadAtFieldBuilder();
-      }
+
     }
     @java.lang.Override
     public Builder clear() {
@@ -446,12 +403,8 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       profileId_ = "";
       roomId_ = "";
-      messageId_ = "";
-      readAt_ = null;
-      if (readAtBuilder_ != null) {
-        readAtBuilder_.dispose();
-        readAtBuilder_ = null;
-      }
+      messageId_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
       return this;
     }
 
@@ -492,16 +445,9 @@ private static final long serialVersionUID = 0L;
         result.roomId_ = roomId_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
+        messageId_.makeImmutable();
         result.messageId_ = messageId_;
       }
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.readAt_ = readAtBuilder_ == null
-            ? readAt_
-            : readAtBuilder_.build();
-        to_bitField0_ |= 0x00000001;
-      }
-      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -526,13 +472,15 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000002;
         onChanged();
       }
-      if (!other.getMessageId().isEmpty()) {
-        messageId_ = other.messageId_;
-        bitField0_ |= 0x00000004;
+      if (!other.messageId_.isEmpty()) {
+        if (messageId_.isEmpty()) {
+          messageId_ = other.messageId_;
+          bitField0_ |= 0x00000004;
+        } else {
+          ensureMessageIdIsMutable();
+          messageId_.addAll(other.messageId_);
+        }
         onChanged();
-      }
-      if (other.hasReadAt()) {
-        mergeReadAt(other.getReadAt());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -571,17 +519,11 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 18
             case 26: {
-              messageId_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000004;
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureMessageIdIsMutable();
+              messageId_.add(s);
               break;
             } // case 26
-            case 42: {
-              input.readMessage(
-                  internalGetReadAtFieldBuilder().getBuilder(),
-                  extensionRegistry);
-              bitField0_ |= 0x00000008;
-              break;
-            } // case 42
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -601,7 +543,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object profileId_ = "";
     /**
-     * <code>string profile_id = 1 [json_name = "profileId"];</code>
+     * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return The profileId.
      */
     public java.lang.String getProfileId() {
@@ -617,7 +559,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string profile_id = 1 [json_name = "profileId"];</code>
+     * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for profileId.
      */
     public com.google.protobuf.ByteString
@@ -634,7 +576,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string profile_id = 1 [json_name = "profileId"];</code>
+     * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @param value The profileId to set.
      * @return This builder for chaining.
      */
@@ -647,7 +589,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string profile_id = 1 [json_name = "profileId"];</code>
+     * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearProfileId() {
@@ -657,7 +599,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string profile_id = 1 [json_name = "profileId"];</code>
+     * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for profileId to set.
      * @return This builder for chaining.
      */
@@ -673,7 +615,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object roomId_ = "";
     /**
-     * <code>string room_id = 2 [json_name = "roomId"];</code>
+     * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @return The roomId.
      */
     public java.lang.String getRoomId() {
@@ -689,7 +631,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string room_id = 2 [json_name = "roomId"];</code>
+     * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for roomId.
      */
     public com.google.protobuf.ByteString
@@ -706,7 +648,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string room_id = 2 [json_name = "roomId"];</code>
+     * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @param value The roomId to set.
      * @return This builder for chaining.
      */
@@ -719,7 +661,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string room_id = 2 [json_name = "roomId"];</code>
+     * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearRoomId() {
@@ -729,7 +671,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string room_id = 2 [json_name = "roomId"];</code>
+     * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for roomId to set.
      * @return This builder for chaining.
      */
@@ -743,197 +685,115 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object messageId_ = "";
-    /**
-     * <code>string message_id = 3 [json_name = "messageId"];</code>
-     * @return The messageId.
-     */
-    public java.lang.String getMessageId() {
-      java.lang.Object ref = messageId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        messageId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
+    private com.google.protobuf.LazyStringArrayList messageId_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureMessageIdIsMutable() {
+      if (!messageId_.isModifiable()) {
+        messageId_ = new com.google.protobuf.LazyStringArrayList(messageId_);
       }
+      bitField0_ |= 0x00000004;
     }
     /**
-     * <code>string message_id = 3 [json_name = "messageId"];</code>
-     * @return The bytes for messageId.
+     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+     * @return A list containing the messageId.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getMessageIdList() {
+      messageId_.makeImmutable();
+      return messageId_;
+    }
+    /**
+     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+     * @return The count of messageId.
+     */
+    public int getMessageIdCount() {
+      return messageId_.size();
+    }
+    /**
+     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+     * @param index The index of the element to return.
+     * @return The messageId at the given index.
+     */
+    public java.lang.String getMessageId(int index) {
+      return messageId_.get(index);
+    }
+    /**
+     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the messageId at the given index.
      */
     public com.google.protobuf.ByteString
-        getMessageIdBytes() {
-      java.lang.Object ref = messageId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        messageId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+        getMessageIdBytes(int index) {
+      return messageId_.getByteString(index);
     }
     /**
-     * <code>string message_id = 3 [json_name = "messageId"];</code>
+     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+     * @param index The index to set the value at.
      * @param value The messageId to set.
      * @return This builder for chaining.
      */
     public Builder setMessageId(
-        java.lang.String value) {
+        int index, java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      messageId_ = value;
+      ensureMessageIdIsMutable();
+      messageId_.set(index, value);
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>string message_id = 3 [json_name = "messageId"];</code>
+     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+     * @param value The messageId to add.
+     * @return This builder for chaining.
+     */
+    public Builder addMessageId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureMessageIdIsMutable();
+      messageId_.add(value);
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+     * @param values The messageId to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllMessageId(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureMessageIdIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, messageId_);
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearMessageId() {
-      messageId_ = getDefaultInstance().getMessageId();
-      bitField0_ = (bitField0_ & ~0x00000004);
+      messageId_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00000004);;
       onChanged();
       return this;
     }
     /**
-     * <code>string message_id = 3 [json_name = "messageId"];</code>
-     * @param value The bytes for messageId to set.
+     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes of the messageId to add.
      * @return This builder for chaining.
      */
-    public Builder setMessageIdBytes(
+    public Builder addMessageIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      messageId_ = value;
+      ensureMessageIdIsMutable();
+      messageId_.add(value);
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
-    }
-
-    private com.google.protobuf.Timestamp readAt_;
-    private com.google.protobuf.SingleFieldBuilder<
-        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> readAtBuilder_;
-    /**
-     * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-     * @return Whether the readAt field is set.
-     */
-    public boolean hasReadAt() {
-      return ((bitField0_ & 0x00000008) != 0);
-    }
-    /**
-     * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-     * @return The readAt.
-     */
-    public com.google.protobuf.Timestamp getReadAt() {
-      if (readAtBuilder_ == null) {
-        return readAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : readAt_;
-      } else {
-        return readAtBuilder_.getMessage();
-      }
-    }
-    /**
-     * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-     */
-    public Builder setReadAt(com.google.protobuf.Timestamp value) {
-      if (readAtBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        readAt_ = value;
-      } else {
-        readAtBuilder_.setMessage(value);
-      }
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-     */
-    public Builder setReadAt(
-        com.google.protobuf.Timestamp.Builder builderForValue) {
-      if (readAtBuilder_ == null) {
-        readAt_ = builderForValue.build();
-      } else {
-        readAtBuilder_.setMessage(builderForValue.build());
-      }
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-     */
-    public Builder mergeReadAt(com.google.protobuf.Timestamp value) {
-      if (readAtBuilder_ == null) {
-        if (((bitField0_ & 0x00000008) != 0) &&
-          readAt_ != null &&
-          readAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
-          getReadAtBuilder().mergeFrom(value);
-        } else {
-          readAt_ = value;
-        }
-      } else {
-        readAtBuilder_.mergeFrom(value);
-      }
-      if (readAt_ != null) {
-        bitField0_ |= 0x00000008;
-        onChanged();
-      }
-      return this;
-    }
-    /**
-     * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-     */
-    public Builder clearReadAt() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      readAt_ = null;
-      if (readAtBuilder_ != null) {
-        readAtBuilder_.dispose();
-        readAtBuilder_ = null;
-      }
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-     */
-    public com.google.protobuf.Timestamp.Builder getReadAtBuilder() {
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return internalGetReadAtFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-     */
-    public com.google.protobuf.TimestampOrBuilder getReadAtOrBuilder() {
-      if (readAtBuilder_ != null) {
-        return readAtBuilder_.getMessageOrBuilder();
-      } else {
-        return readAt_ == null ?
-            com.google.protobuf.Timestamp.getDefaultInstance() : readAt_;
-      }
-    }
-    /**
-     * <code>.google.protobuf.Timestamp read_at = 5 [json_name = "readAt"];</code>
-     */
-    private com.google.protobuf.SingleFieldBuilder<
-        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
-        internalGetReadAtFieldBuilder() {
-      if (readAtBuilder_ == null) {
-        readAtBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
-                getReadAt(),
-                getParentForChildren(),
-                isClean());
-        readAt_ = null;
-      }
-      return readAtBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:chat.v1.ReceiptEvent)

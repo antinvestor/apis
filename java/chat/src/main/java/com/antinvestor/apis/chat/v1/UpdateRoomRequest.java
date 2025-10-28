@@ -65,7 +65,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object roomId_ = "";
   /**
-   * <code>string room_id = 2 [json_name = "roomId"];</code>
+   * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The roomId.
    */
   @java.lang.Override
@@ -82,7 +82,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string room_id = 2 [json_name = "roomId"];</code>
+   * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for roomId.
    */
   @java.lang.Override
@@ -593,7 +593,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object roomId_ = "";
     /**
-     * <code>string room_id = 2 [json_name = "roomId"];</code>
+     * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @return The roomId.
      */
     public java.lang.String getRoomId() {
@@ -609,7 +609,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string room_id = 2 [json_name = "roomId"];</code>
+     * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for roomId.
      */
     public com.google.protobuf.ByteString
@@ -626,7 +626,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string room_id = 2 [json_name = "roomId"];</code>
+     * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @param value The roomId to set.
      * @return This builder for chaining.
      */
@@ -639,7 +639,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string room_id = 2 [json_name = "roomId"];</code>
+     * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearRoomId() {
@@ -649,7 +649,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string room_id = 2 [json_name = "roomId"];</code>
+     * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for roomId to set.
      * @return This builder for chaining.
      */

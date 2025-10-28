@@ -98,27 +98,19 @@ abstract final class ChatService {
     chatv1chat.SearchRoomSubscriptionsResponse.new,
   );
 
-  /// Update typing indicator for a user in a room
-  static const updateTyping = connect.Spec(
-    '/$name/UpdateTyping',
+  /// Update different states that the client can be in for room subscriptions awareness
+  static const updateClientState = connect.Spec(
+    '/$name/UpdateClientState',
     connect.StreamType.unary,
-    chatv1chat.UpdateTypingRequest.new,
-    chatv1chat.UpdateTypingResponse.new,
+    chatv1chat.UpdateClientStateRequest.new,
+    chatv1chat.UpdateClientStateResponse.new,
   );
 
-  /// Update read marker (read receipt) for a user in a room
-  static const updateReadMarker = connect.Spec(
-    '/$name/UpdateReadMarker',
+  /// Get client state for a set of profiles in a room
+  static const getClientState = connect.Spec(
+    '/$name/GetClientState',
     connect.StreamType.unary,
-    chatv1chat.UpdateReadMarkerRequest.new,
-    chatv1chat.UpdateReadMarkerResponse.new,
-  );
-
-  /// Get read markers for a room
-  static const getReadMarkers = connect.Spec(
-    '/$name/GetReadMarkers',
-    connect.StreamType.unary,
-    chatv1chat.GetReadMarkersRequest.new,
-    chatv1chat.GetReadMarkersResponse.new,
+    chatv1chat.GetClientStateRequest.new,
+    chatv1chat.GetClientStateResponse.new,
   );
 }

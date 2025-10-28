@@ -109,17 +109,32 @@ public interface ServerEventOrBuilder extends
   com.antinvestor.apis.chat.v1.ReceiptEventOrBuilder getReceiptEventOrBuilder();
 
   /**
-   * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+   * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+   * @return Whether the readEvent field is set.
+   */
+  boolean hasReadEvent();
+  /**
+   * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+   * @return The readEvent.
+   */
+  com.antinvestor.apis.chat.v1.ReadMarker getReadEvent();
+  /**
+   * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+   */
+  com.antinvestor.apis.chat.v1.ReadMarkerOrBuilder getReadEventOrBuilder();
+
+  /**
+   * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
    * @return Whether the typingEvent field is set.
    */
   boolean hasTypingEvent();
   /**
-   * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+   * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
    * @return The typingEvent.
    */
   com.antinvestor.apis.chat.v1.TypingEvent getTypingEvent();
   /**
-   * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+   * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
    */
   com.antinvestor.apis.chat.v1.TypingEventOrBuilder getTypingEventOrBuilder();
 

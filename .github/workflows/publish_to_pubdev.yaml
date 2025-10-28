@@ -9,11 +9,6 @@ on:
 
 jobs:
   release:
-    strategy:
-      matrix:
-        package: [common, chat, device, notification, ocr, partition, payment, profile, property, settings, ledger, lostid, files]
-      fail-fast: false
-    
     runs-on: ubuntu-latest
     permissions:
       contents: write

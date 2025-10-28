@@ -203,16 +203,16 @@ extension type ChatServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Update typing indicator for a user in a room
-  Future<chatv1chat.UpdateTypingResponse> updateTyping(
-    chatv1chat.UpdateTypingRequest input, {
+  /// Update different states that the client can be in for room subscriptions awareness
+  Future<chatv1chat.UpdateClientStateResponse> updateClientState(
+    chatv1chat.UpdateClientStateRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.ChatService.updateTyping,
+      specs.ChatService.updateClientState,
       input,
       signal: signal,
       headers: headers,
@@ -221,34 +221,16 @@ extension type ChatServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Update read marker (read receipt) for a user in a room
-  Future<chatv1chat.UpdateReadMarkerResponse> updateReadMarker(
-    chatv1chat.UpdateReadMarkerRequest input, {
+  /// Get client state for a set of profiles in a room
+  Future<chatv1chat.GetClientStateResponse> getClientState(
+    chatv1chat.GetClientStateRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.ChatService.updateReadMarker,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
-  /// Get read markers for a room
-  Future<chatv1chat.GetReadMarkersResponse> getReadMarkers(
-    chatv1chat.GetReadMarkersRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).unary(
-      specs.ChatService.getReadMarkers,
+      specs.ChatService.getClientState,
       input,
       signal: signal,
       headers: headers,

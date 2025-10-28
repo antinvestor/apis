@@ -91,5 +91,27 @@ class PresenceStatus extends $pb.ProtobufEnum {
   const PresenceStatus._(super.value, super.name);
 }
 
+class GetClientStateRequest_ClientStateType extends $pb.ProtobufEnum {
+  static const GetClientStateRequest_ClientStateType
+      CLIENT_STATE_TYPE_PRESENCE = GetClientStateRequest_ClientStateType._(
+          0, _omitEnumNames ? '' : 'CLIENT_STATE_TYPE_PRESENCE');
+  static const GetClientStateRequest_ClientStateType
+      CLIENT_STATE_TYPE_READ_MARKER = GetClientStateRequest_ClientStateType._(
+          1, _omitEnumNames ? '' : 'CLIENT_STATE_TYPE_READ_MARKER');
+
+  static const $core.List<GetClientStateRequest_ClientStateType> values =
+      <GetClientStateRequest_ClientStateType>[
+    CLIENT_STATE_TYPE_PRESENCE,
+    CLIENT_STATE_TYPE_READ_MARKER,
+  ];
+
+  static final $core.List<GetClientStateRequest_ClientStateType?> _byValue =
+      $pb.ProtobufEnum.$_initByValueList(values, 1);
+  static GetClientStateRequest_ClientStateType? valueOf($core.int value) =>
+      value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const GetClientStateRequest_ClientStateType._(super.value, super.name);
+}
+
 const $core.bool _omitEnumNames =
     $core.bool.fromEnvironment('protobuf.omit_enum_names');

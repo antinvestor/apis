@@ -20,8 +20,8 @@
 package com.antinvestor.apis.chat.v1;
 
 @com.google.protobuf.Generated
-public interface UpdateTypingRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:chat.v1.UpdateTypingRequest)
+public interface UpdateClientStateRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:chat.v1.UpdateClientStateRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -49,23 +49,26 @@ public interface UpdateTypingRequestOrBuilder extends
       getProfileIdBytes();
 
   /**
-   * <code>bool typing = 3 [json_name = "typing"];</code>
-   * @return The typing.
+   * <code>repeated .chat.v1.ClientState clientStates = 3 [json_name = "clientStates"];</code>
    */
-  boolean getTyping();
-
+  java.util.List<com.antinvestor.apis.chat.v1.ClientState> 
+      getClientStatesList();
   /**
-   * <code>.google.protobuf.Timestamp timestamp = 4 [json_name = "timestamp"];</code>
-   * @return Whether the timestamp field is set.
+   * <code>repeated .chat.v1.ClientState clientStates = 3 [json_name = "clientStates"];</code>
    */
-  boolean hasTimestamp();
+  com.antinvestor.apis.chat.v1.ClientState getClientStates(int index);
   /**
-   * <code>.google.protobuf.Timestamp timestamp = 4 [json_name = "timestamp"];</code>
-   * @return The timestamp.
+   * <code>repeated .chat.v1.ClientState clientStates = 3 [json_name = "clientStates"];</code>
    */
-  com.google.protobuf.Timestamp getTimestamp();
+  int getClientStatesCount();
   /**
-   * <code>.google.protobuf.Timestamp timestamp = 4 [json_name = "timestamp"];</code>
+   * <code>repeated .chat.v1.ClientState clientStates = 3 [json_name = "clientStates"];</code>
    */
-  com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder();
+  java.util.List<? extends com.antinvestor.apis.chat.v1.ClientStateOrBuilder> 
+      getClientStatesOrBuilderList();
+  /**
+   * <code>repeated .chat.v1.ClientState clientStates = 3 [json_name = "clientStates"];</code>
+   */
+  com.antinvestor.apis.chat.v1.ClientStateOrBuilder getClientStatesOrBuilder(
+      int index);
 }

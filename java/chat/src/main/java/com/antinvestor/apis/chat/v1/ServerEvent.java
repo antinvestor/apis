@@ -74,7 +74,8 @@ private static final long serialVersionUID = 0L;
     MESSAGE(10),
     PRESENCE_EVENT(12),
     RECEIPT_EVENT(13),
-    TYPING_EVENT(14),
+    READ_EVENT(15),
+    TYPING_EVENT(17),
     PAYLOAD_NOT_SET(0);
     private final int value;
     private PayloadCase(int value) {
@@ -95,7 +96,8 @@ private static final long serialVersionUID = 0L;
         case 10: return MESSAGE;
         case 12: return PRESENCE_EVENT;
         case 13: return RECEIPT_EVENT;
-        case 14: return TYPING_EVENT;
+        case 15: return READ_EVENT;
+        case 17: return TYPING_EVENT;
         case 0: return PAYLOAD_NOT_SET;
         default: return null;
       }
@@ -281,32 +283,63 @@ private static final long serialVersionUID = 0L;
     return com.antinvestor.apis.chat.v1.ReceiptEvent.getDefaultInstance();
   }
 
-  public static final int TYPING_EVENT_FIELD_NUMBER = 14;
+  public static final int READ_EVENT_FIELD_NUMBER = 15;
   /**
-   * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+   * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+   * @return Whether the readEvent field is set.
+   */
+  @java.lang.Override
+  public boolean hasReadEvent() {
+    return payloadCase_ == 15;
+  }
+  /**
+   * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+   * @return The readEvent.
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.chat.v1.ReadMarker getReadEvent() {
+    if (payloadCase_ == 15) {
+       return (com.antinvestor.apis.chat.v1.ReadMarker) payload_;
+    }
+    return com.antinvestor.apis.chat.v1.ReadMarker.getDefaultInstance();
+  }
+  /**
+   * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.chat.v1.ReadMarkerOrBuilder getReadEventOrBuilder() {
+    if (payloadCase_ == 15) {
+       return (com.antinvestor.apis.chat.v1.ReadMarker) payload_;
+    }
+    return com.antinvestor.apis.chat.v1.ReadMarker.getDefaultInstance();
+  }
+
+  public static final int TYPING_EVENT_FIELD_NUMBER = 17;
+  /**
+   * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
    * @return Whether the typingEvent field is set.
    */
   @java.lang.Override
   public boolean hasTypingEvent() {
-    return payloadCase_ == 14;
+    return payloadCase_ == 17;
   }
   /**
-   * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+   * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
    * @return The typingEvent.
    */
   @java.lang.Override
   public com.antinvestor.apis.chat.v1.TypingEvent getTypingEvent() {
-    if (payloadCase_ == 14) {
+    if (payloadCase_ == 17) {
        return (com.antinvestor.apis.chat.v1.TypingEvent) payload_;
     }
     return com.antinvestor.apis.chat.v1.TypingEvent.getDefaultInstance();
   }
   /**
-   * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+   * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
    */
   @java.lang.Override
   public com.antinvestor.apis.chat.v1.TypingEventOrBuilder getTypingEventOrBuilder() {
-    if (payloadCase_ == 14) {
+    if (payloadCase_ == 17) {
        return (com.antinvestor.apis.chat.v1.TypingEvent) payload_;
     }
     return com.antinvestor.apis.chat.v1.TypingEvent.getDefaultInstance();
@@ -341,8 +374,11 @@ private static final long serialVersionUID = 0L;
     if (payloadCase_ == 13) {
       output.writeMessage(13, (com.antinvestor.apis.chat.v1.ReceiptEvent) payload_);
     }
-    if (payloadCase_ == 14) {
-      output.writeMessage(14, (com.antinvestor.apis.chat.v1.TypingEvent) payload_);
+    if (payloadCase_ == 15) {
+      output.writeMessage(15, (com.antinvestor.apis.chat.v1.ReadMarker) payload_);
+    }
+    if (payloadCase_ == 17) {
+      output.writeMessage(17, (com.antinvestor.apis.chat.v1.TypingEvent) payload_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -372,9 +408,13 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(13, (com.antinvestor.apis.chat.v1.ReceiptEvent) payload_);
     }
-    if (payloadCase_ == 14) {
+    if (payloadCase_ == 15) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(14, (com.antinvestor.apis.chat.v1.TypingEvent) payload_);
+        .computeMessageSize(15, (com.antinvestor.apis.chat.v1.ReadMarker) payload_);
+    }
+    if (payloadCase_ == 17) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(17, (com.antinvestor.apis.chat.v1.TypingEvent) payload_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -412,7 +452,11 @@ private static final long serialVersionUID = 0L;
         if (!getReceiptEvent()
             .equals(other.getReceiptEvent())) return false;
         break;
-      case 14:
+      case 15:
+        if (!getReadEvent()
+            .equals(other.getReadEvent())) return false;
+        break;
+      case 17:
         if (!getTypingEvent()
             .equals(other.getTypingEvent())) return false;
         break;
@@ -449,7 +493,11 @@ private static final long serialVersionUID = 0L;
         hash = (37 * hash) + RECEIPT_EVENT_FIELD_NUMBER;
         hash = (53 * hash) + getReceiptEvent().hashCode();
         break;
-      case 14:
+      case 15:
+        hash = (37 * hash) + READ_EVENT_FIELD_NUMBER;
+        hash = (53 * hash) + getReadEvent().hashCode();
+        break;
+      case 17:
         hash = (37 * hash) + TYPING_EVENT_FIELD_NUMBER;
         hash = (53 * hash) + getTypingEvent().hashCode();
         break;
@@ -614,6 +662,9 @@ private static final long serialVersionUID = 0L;
       if (receiptEventBuilder_ != null) {
         receiptEventBuilder_.clear();
       }
+      if (readEventBuilder_ != null) {
+        readEventBuilder_.clear();
+      }
       if (typingEventBuilder_ != null) {
         typingEventBuilder_.clear();
       }
@@ -681,7 +732,11 @@ private static final long serialVersionUID = 0L;
           receiptEventBuilder_ != null) {
         result.payload_ = receiptEventBuilder_.build();
       }
-      if (payloadCase_ == 14 &&
+      if (payloadCase_ == 15 &&
+          readEventBuilder_ != null) {
+        result.payload_ = readEventBuilder_.build();
+      }
+      if (payloadCase_ == 17 &&
           typingEventBuilder_ != null) {
         result.payload_ = typingEventBuilder_.build();
       }
@@ -718,6 +773,10 @@ private static final long serialVersionUID = 0L;
         }
         case RECEIPT_EVENT: {
           mergeReceiptEvent(other.getReceiptEvent());
+          break;
+        }
+        case READ_EVENT: {
+          mergeReadEvent(other.getReadEvent());
           break;
         }
         case TYPING_EVENT: {
@@ -787,13 +846,20 @@ private static final long serialVersionUID = 0L;
               payloadCase_ = 13;
               break;
             } // case 106
-            case 114: {
+            case 122: {
+              input.readMessage(
+                  internalGetReadEventFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              payloadCase_ = 15;
+              break;
+            } // case 122
+            case 138: {
               input.readMessage(
                   internalGetTypingEventFieldBuilder().getBuilder(),
                   extensionRegistry);
-              payloadCase_ = 14;
+              payloadCase_ = 17;
               break;
-            } // case 114
+            } // case 138
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1482,35 +1548,177 @@ private static final long serialVersionUID = 0L;
     }
 
     private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.chat.v1.ReadMarker, com.antinvestor.apis.chat.v1.ReadMarker.Builder, com.antinvestor.apis.chat.v1.ReadMarkerOrBuilder> readEventBuilder_;
+    /**
+     * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+     * @return Whether the readEvent field is set.
+     */
+    @java.lang.Override
+    public boolean hasReadEvent() {
+      return payloadCase_ == 15;
+    }
+    /**
+     * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+     * @return The readEvent.
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.chat.v1.ReadMarker getReadEvent() {
+      if (readEventBuilder_ == null) {
+        if (payloadCase_ == 15) {
+          return (com.antinvestor.apis.chat.v1.ReadMarker) payload_;
+        }
+        return com.antinvestor.apis.chat.v1.ReadMarker.getDefaultInstance();
+      } else {
+        if (payloadCase_ == 15) {
+          return readEventBuilder_.getMessage();
+        }
+        return com.antinvestor.apis.chat.v1.ReadMarker.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+     */
+    public Builder setReadEvent(com.antinvestor.apis.chat.v1.ReadMarker value) {
+      if (readEventBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        payload_ = value;
+        onChanged();
+      } else {
+        readEventBuilder_.setMessage(value);
+      }
+      payloadCase_ = 15;
+      return this;
+    }
+    /**
+     * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+     */
+    public Builder setReadEvent(
+        com.antinvestor.apis.chat.v1.ReadMarker.Builder builderForValue) {
+      if (readEventBuilder_ == null) {
+        payload_ = builderForValue.build();
+        onChanged();
+      } else {
+        readEventBuilder_.setMessage(builderForValue.build());
+      }
+      payloadCase_ = 15;
+      return this;
+    }
+    /**
+     * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+     */
+    public Builder mergeReadEvent(com.antinvestor.apis.chat.v1.ReadMarker value) {
+      if (readEventBuilder_ == null) {
+        if (payloadCase_ == 15 &&
+            payload_ != com.antinvestor.apis.chat.v1.ReadMarker.getDefaultInstance()) {
+          payload_ = com.antinvestor.apis.chat.v1.ReadMarker.newBuilder((com.antinvestor.apis.chat.v1.ReadMarker) payload_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          payload_ = value;
+        }
+        onChanged();
+      } else {
+        if (payloadCase_ == 15) {
+          readEventBuilder_.mergeFrom(value);
+        } else {
+          readEventBuilder_.setMessage(value);
+        }
+      }
+      payloadCase_ = 15;
+      return this;
+    }
+    /**
+     * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+     */
+    public Builder clearReadEvent() {
+      if (readEventBuilder_ == null) {
+        if (payloadCase_ == 15) {
+          payloadCase_ = 0;
+          payload_ = null;
+          onChanged();
+        }
+      } else {
+        if (payloadCase_ == 15) {
+          payloadCase_ = 0;
+          payload_ = null;
+        }
+        readEventBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+     */
+    public com.antinvestor.apis.chat.v1.ReadMarker.Builder getReadEventBuilder() {
+      return internalGetReadEventFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.chat.v1.ReadMarkerOrBuilder getReadEventOrBuilder() {
+      if ((payloadCase_ == 15) && (readEventBuilder_ != null)) {
+        return readEventBuilder_.getMessageOrBuilder();
+      } else {
+        if (payloadCase_ == 15) {
+          return (com.antinvestor.apis.chat.v1.ReadMarker) payload_;
+        }
+        return com.antinvestor.apis.chat.v1.ReadMarker.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chat.v1.ReadMarker read_event = 15 [json_name = "readEvent"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.chat.v1.ReadMarker, com.antinvestor.apis.chat.v1.ReadMarker.Builder, com.antinvestor.apis.chat.v1.ReadMarkerOrBuilder> 
+        internalGetReadEventFieldBuilder() {
+      if (readEventBuilder_ == null) {
+        if (!(payloadCase_ == 15)) {
+          payload_ = com.antinvestor.apis.chat.v1.ReadMarker.getDefaultInstance();
+        }
+        readEventBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.antinvestor.apis.chat.v1.ReadMarker, com.antinvestor.apis.chat.v1.ReadMarker.Builder, com.antinvestor.apis.chat.v1.ReadMarkerOrBuilder>(
+                (com.antinvestor.apis.chat.v1.ReadMarker) payload_,
+                getParentForChildren(),
+                isClean());
+        payload_ = null;
+      }
+      payloadCase_ = 15;
+      onChanged();
+      return readEventBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilder<
         com.antinvestor.apis.chat.v1.TypingEvent, com.antinvestor.apis.chat.v1.TypingEvent.Builder, com.antinvestor.apis.chat.v1.TypingEventOrBuilder> typingEventBuilder_;
     /**
-     * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+     * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
      * @return Whether the typingEvent field is set.
      */
     @java.lang.Override
     public boolean hasTypingEvent() {
-      return payloadCase_ == 14;
+      return payloadCase_ == 17;
     }
     /**
-     * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+     * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
      * @return The typingEvent.
      */
     @java.lang.Override
     public com.antinvestor.apis.chat.v1.TypingEvent getTypingEvent() {
       if (typingEventBuilder_ == null) {
-        if (payloadCase_ == 14) {
+        if (payloadCase_ == 17) {
           return (com.antinvestor.apis.chat.v1.TypingEvent) payload_;
         }
         return com.antinvestor.apis.chat.v1.TypingEvent.getDefaultInstance();
       } else {
-        if (payloadCase_ == 14) {
+        if (payloadCase_ == 17) {
           return typingEventBuilder_.getMessage();
         }
         return com.antinvestor.apis.chat.v1.TypingEvent.getDefaultInstance();
       }
     }
     /**
-     * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+     * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
      */
     public Builder setTypingEvent(com.antinvestor.apis.chat.v1.TypingEvent value) {
       if (typingEventBuilder_ == null) {
@@ -1522,11 +1730,11 @@ private static final long serialVersionUID = 0L;
       } else {
         typingEventBuilder_.setMessage(value);
       }
-      payloadCase_ = 14;
+      payloadCase_ = 17;
       return this;
     }
     /**
-     * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+     * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
      */
     public Builder setTypingEvent(
         com.antinvestor.apis.chat.v1.TypingEvent.Builder builderForValue) {
@@ -1536,15 +1744,15 @@ private static final long serialVersionUID = 0L;
       } else {
         typingEventBuilder_.setMessage(builderForValue.build());
       }
-      payloadCase_ = 14;
+      payloadCase_ = 17;
       return this;
     }
     /**
-     * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+     * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
      */
     public Builder mergeTypingEvent(com.antinvestor.apis.chat.v1.TypingEvent value) {
       if (typingEventBuilder_ == null) {
-        if (payloadCase_ == 14 &&
+        if (payloadCase_ == 17 &&
             payload_ != com.antinvestor.apis.chat.v1.TypingEvent.getDefaultInstance()) {
           payload_ = com.antinvestor.apis.chat.v1.TypingEvent.newBuilder((com.antinvestor.apis.chat.v1.TypingEvent) payload_)
               .mergeFrom(value).buildPartial();
@@ -1553,27 +1761,27 @@ private static final long serialVersionUID = 0L;
         }
         onChanged();
       } else {
-        if (payloadCase_ == 14) {
+        if (payloadCase_ == 17) {
           typingEventBuilder_.mergeFrom(value);
         } else {
           typingEventBuilder_.setMessage(value);
         }
       }
-      payloadCase_ = 14;
+      payloadCase_ = 17;
       return this;
     }
     /**
-     * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+     * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
      */
     public Builder clearTypingEvent() {
       if (typingEventBuilder_ == null) {
-        if (payloadCase_ == 14) {
+        if (payloadCase_ == 17) {
           payloadCase_ = 0;
           payload_ = null;
           onChanged();
         }
       } else {
-        if (payloadCase_ == 14) {
+        if (payloadCase_ == 17) {
           payloadCase_ = 0;
           payload_ = null;
         }
@@ -1582,33 +1790,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+     * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
      */
     public com.antinvestor.apis.chat.v1.TypingEvent.Builder getTypingEventBuilder() {
       return internalGetTypingEventFieldBuilder().getBuilder();
     }
     /**
-     * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+     * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
      */
     @java.lang.Override
     public com.antinvestor.apis.chat.v1.TypingEventOrBuilder getTypingEventOrBuilder() {
-      if ((payloadCase_ == 14) && (typingEventBuilder_ != null)) {
+      if ((payloadCase_ == 17) && (typingEventBuilder_ != null)) {
         return typingEventBuilder_.getMessageOrBuilder();
       } else {
-        if (payloadCase_ == 14) {
+        if (payloadCase_ == 17) {
           return (com.antinvestor.apis.chat.v1.TypingEvent) payload_;
         }
         return com.antinvestor.apis.chat.v1.TypingEvent.getDefaultInstance();
       }
     }
     /**
-     * <code>.chat.v1.TypingEvent typing_event = 14 [json_name = "typingEvent"];</code>
+     * <code>.chat.v1.TypingEvent typing_event = 17 [json_name = "typingEvent"];</code>
      */
     private com.google.protobuf.SingleFieldBuilder<
         com.antinvestor.apis.chat.v1.TypingEvent, com.antinvestor.apis.chat.v1.TypingEvent.Builder, com.antinvestor.apis.chat.v1.TypingEventOrBuilder> 
         internalGetTypingEventFieldBuilder() {
       if (typingEventBuilder_ == null) {
-        if (!(payloadCase_ == 14)) {
+        if (!(payloadCase_ == 17)) {
           payload_ = com.antinvestor.apis.chat.v1.TypingEvent.getDefaultInstance();
         }
         typingEventBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -1618,7 +1826,7 @@ private static final long serialVersionUID = 0L;
                 isClean());
         payload_ = null;
       }
-      payloadCase_ = 14;
+      payloadCase_ = 17;
       onChanged();
       return typingEventBuilder_;
     }

@@ -25,12 +25,12 @@ public interface StreamAckOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string event_id = 1 [json_name = "eventId"];</code>
+   * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
    * @return The eventId.
    */
   java.lang.String getEventId();
   /**
-   * <code>string event_id = 1 [json_name = "eventId"];</code>
+   * <code>string event_id = 1 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for eventId.
    */
   com.google.protobuf.ByteString

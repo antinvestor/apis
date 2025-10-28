@@ -25,12 +25,12 @@ public interface UpdateSubscriptionRoleResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string room_id = 1 [json_name = "roomId"];</code>
+   * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The roomId.
    */
   java.lang.String getRoomId();
   /**
-   * <code>string room_id = 1 [json_name = "roomId"];</code>
+   * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for roomId.
    */
   com.google.protobuf.ByteString

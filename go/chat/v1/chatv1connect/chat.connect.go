@@ -75,15 +75,12 @@ const (
 	// ChatServiceSearchRoomSubscriptionsProcedure is the fully-qualified name of the ChatService's
 	// SearchRoomSubscriptions RPC.
 	ChatServiceSearchRoomSubscriptionsProcedure = "/chat.v1.ChatService/SearchRoomSubscriptions"
-	// ChatServiceUpdateTypingProcedure is the fully-qualified name of the ChatService's UpdateTyping
-	// RPC.
-	ChatServiceUpdateTypingProcedure = "/chat.v1.ChatService/UpdateTyping"
-	// ChatServiceUpdateReadMarkerProcedure is the fully-qualified name of the ChatService's
-	// UpdateReadMarker RPC.
-	ChatServiceUpdateReadMarkerProcedure = "/chat.v1.ChatService/UpdateReadMarker"
-	// ChatServiceGetReadMarkersProcedure is the fully-qualified name of the ChatService's
-	// GetReadMarkers RPC.
-	ChatServiceGetReadMarkersProcedure = "/chat.v1.ChatService/GetReadMarkers"
+	// ChatServiceUpdateClientStateProcedure is the fully-qualified name of the ChatService's
+	// UpdateClientState RPC.
+	ChatServiceUpdateClientStateProcedure = "/chat.v1.ChatService/UpdateClientState"
+	// ChatServiceGetClientStateProcedure is the fully-qualified name of the ChatService's
+	// GetClientState RPC.
+	ChatServiceGetClientStateProcedure = "/chat.v1.ChatService/GetClientState"
 )
 
 // GatewayServiceClient is a client for the chat.v1.GatewayService service.
@@ -178,12 +175,10 @@ type ChatServiceClient interface {
 	RemoveRoomSubscriptions(context.Context, *connect.Request[v1.RemoveRoomSubscriptionsRequest]) (*connect.Response[v1.RemoveRoomSubscriptionsResponse], error)
 	UpdateSubscriptionRole(context.Context, *connect.Request[v1.UpdateSubscriptionRoleRequest]) (*connect.Response[v1.UpdateSubscriptionRoleResponse], error)
 	SearchRoomSubscriptions(context.Context, *connect.Request[v1.SearchRoomSubscriptionsRequest]) (*connect.Response[v1.SearchRoomSubscriptionsResponse], error)
-	// Update typing indicator for a user in a room
-	UpdateTyping(context.Context, *connect.Request[v1.UpdateTypingRequest]) (*connect.Response[v1.UpdateTypingResponse], error)
-	// Update read marker (read receipt) for a user in a room
-	UpdateReadMarker(context.Context, *connect.Request[v1.UpdateReadMarkerRequest]) (*connect.Response[v1.UpdateReadMarkerResponse], error)
-	// Get read markers for a room
-	GetReadMarkers(context.Context, *connect.Request[v1.GetReadMarkersRequest]) (*connect.Response[v1.GetReadMarkersResponse], error)
+	// Update different states that the client can be in for room subscriptions awareness
+	UpdateClientState(context.Context, *connect.Request[v1.UpdateClientStateRequest]) (*connect.Response[v1.UpdateClientStateResponse], error)
+	// Get client state for a set of profiles in a room
+	GetClientState(context.Context, *connect.Request[v1.GetClientStateRequest]) (*connect.Response[v1.GetClientStateResponse], error)
 }
 
 // NewChatServiceClient constructs a client for the chat.v1.ChatService service. By default, it uses
@@ -257,22 +252,16 @@ func NewChatServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			connect.WithSchema(chatServiceMethods.ByName("SearchRoomSubscriptions")),
 			connect.WithClientOptions(opts...),
 		),
-		updateTyping: connect.NewClient[v1.UpdateTypingRequest, v1.UpdateTypingResponse](
+		updateClientState: connect.NewClient[v1.UpdateClientStateRequest, v1.UpdateClientStateResponse](
 			httpClient,
-			baseURL+ChatServiceUpdateTypingProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("UpdateTyping")),
+			baseURL+ChatServiceUpdateClientStateProcedure,
+			connect.WithSchema(chatServiceMethods.ByName("UpdateClientState")),
 			connect.WithClientOptions(opts...),
 		),
-		updateReadMarker: connect.NewClient[v1.UpdateReadMarkerRequest, v1.UpdateReadMarkerResponse](
+		getClientState: connect.NewClient[v1.GetClientStateRequest, v1.GetClientStateResponse](
 			httpClient,
-			baseURL+ChatServiceUpdateReadMarkerProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("UpdateReadMarker")),
-			connect.WithClientOptions(opts...),
-		),
-		getReadMarkers: connect.NewClient[v1.GetReadMarkersRequest, v1.GetReadMarkersResponse](
-			httpClient,
-			baseURL+ChatServiceGetReadMarkersProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("GetReadMarkers")),
+			baseURL+ChatServiceGetClientStateProcedure,
+			connect.WithSchema(chatServiceMethods.ByName("GetClientState")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -290,9 +279,8 @@ type chatServiceClient struct {
 	removeRoomSubscriptions *connect.Client[v1.RemoveRoomSubscriptionsRequest, v1.RemoveRoomSubscriptionsResponse]
 	updateSubscriptionRole  *connect.Client[v1.UpdateSubscriptionRoleRequest, v1.UpdateSubscriptionRoleResponse]
 	searchRoomSubscriptions *connect.Client[v1.SearchRoomSubscriptionsRequest, v1.SearchRoomSubscriptionsResponse]
-	updateTyping            *connect.Client[v1.UpdateTypingRequest, v1.UpdateTypingResponse]
-	updateReadMarker        *connect.Client[v1.UpdateReadMarkerRequest, v1.UpdateReadMarkerResponse]
-	getReadMarkers          *connect.Client[v1.GetReadMarkersRequest, v1.GetReadMarkersResponse]
+	updateClientState       *connect.Client[v1.UpdateClientStateRequest, v1.UpdateClientStateResponse]
+	getClientState          *connect.Client[v1.GetClientStateRequest, v1.GetClientStateResponse]
 }
 
 // SendEvent calls chat.v1.ChatService.SendEvent.
@@ -345,19 +333,14 @@ func (c *chatServiceClient) SearchRoomSubscriptions(ctx context.Context, req *co
 	return c.searchRoomSubscriptions.CallUnary(ctx, req)
 }
 
-// UpdateTyping calls chat.v1.ChatService.UpdateTyping.
-func (c *chatServiceClient) UpdateTyping(ctx context.Context, req *connect.Request[v1.UpdateTypingRequest]) (*connect.Response[v1.UpdateTypingResponse], error) {
-	return c.updateTyping.CallUnary(ctx, req)
+// UpdateClientState calls chat.v1.ChatService.UpdateClientState.
+func (c *chatServiceClient) UpdateClientState(ctx context.Context, req *connect.Request[v1.UpdateClientStateRequest]) (*connect.Response[v1.UpdateClientStateResponse], error) {
+	return c.updateClientState.CallUnary(ctx, req)
 }
 
-// UpdateReadMarker calls chat.v1.ChatService.UpdateReadMarker.
-func (c *chatServiceClient) UpdateReadMarker(ctx context.Context, req *connect.Request[v1.UpdateReadMarkerRequest]) (*connect.Response[v1.UpdateReadMarkerResponse], error) {
-	return c.updateReadMarker.CallUnary(ctx, req)
-}
-
-// GetReadMarkers calls chat.v1.ChatService.GetReadMarkers.
-func (c *chatServiceClient) GetReadMarkers(ctx context.Context, req *connect.Request[v1.GetReadMarkersRequest]) (*connect.Response[v1.GetReadMarkersResponse], error) {
-	return c.getReadMarkers.CallUnary(ctx, req)
+// GetClientState calls chat.v1.ChatService.GetClientState.
+func (c *chatServiceClient) GetClientState(ctx context.Context, req *connect.Request[v1.GetClientStateRequest]) (*connect.Response[v1.GetClientStateResponse], error) {
+	return c.getClientState.CallUnary(ctx, req)
 }
 
 // ChatServiceHandler is an implementation of the chat.v1.ChatService service.
@@ -376,12 +359,10 @@ type ChatServiceHandler interface {
 	RemoveRoomSubscriptions(context.Context, *connect.Request[v1.RemoveRoomSubscriptionsRequest]) (*connect.Response[v1.RemoveRoomSubscriptionsResponse], error)
 	UpdateSubscriptionRole(context.Context, *connect.Request[v1.UpdateSubscriptionRoleRequest]) (*connect.Response[v1.UpdateSubscriptionRoleResponse], error)
 	SearchRoomSubscriptions(context.Context, *connect.Request[v1.SearchRoomSubscriptionsRequest]) (*connect.Response[v1.SearchRoomSubscriptionsResponse], error)
-	// Update typing indicator for a user in a room
-	UpdateTyping(context.Context, *connect.Request[v1.UpdateTypingRequest]) (*connect.Response[v1.UpdateTypingResponse], error)
-	// Update read marker (read receipt) for a user in a room
-	UpdateReadMarker(context.Context, *connect.Request[v1.UpdateReadMarkerRequest]) (*connect.Response[v1.UpdateReadMarkerResponse], error)
-	// Get read markers for a room
-	GetReadMarkers(context.Context, *connect.Request[v1.GetReadMarkersRequest]) (*connect.Response[v1.GetReadMarkersResponse], error)
+	// Update different states that the client can be in for room subscriptions awareness
+	UpdateClientState(context.Context, *connect.Request[v1.UpdateClientStateRequest]) (*connect.Response[v1.UpdateClientStateResponse], error)
+	// Get client state for a set of profiles in a room
+	GetClientState(context.Context, *connect.Request[v1.GetClientStateRequest]) (*connect.Response[v1.GetClientStateResponse], error)
 }
 
 // NewChatServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -451,22 +432,16 @@ func NewChatServiceHandler(svc ChatServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(chatServiceMethods.ByName("SearchRoomSubscriptions")),
 		connect.WithHandlerOptions(opts...),
 	)
-	chatServiceUpdateTypingHandler := connect.NewUnaryHandler(
-		ChatServiceUpdateTypingProcedure,
-		svc.UpdateTyping,
-		connect.WithSchema(chatServiceMethods.ByName("UpdateTyping")),
+	chatServiceUpdateClientStateHandler := connect.NewUnaryHandler(
+		ChatServiceUpdateClientStateProcedure,
+		svc.UpdateClientState,
+		connect.WithSchema(chatServiceMethods.ByName("UpdateClientState")),
 		connect.WithHandlerOptions(opts...),
 	)
-	chatServiceUpdateReadMarkerHandler := connect.NewUnaryHandler(
-		ChatServiceUpdateReadMarkerProcedure,
-		svc.UpdateReadMarker,
-		connect.WithSchema(chatServiceMethods.ByName("UpdateReadMarker")),
-		connect.WithHandlerOptions(opts...),
-	)
-	chatServiceGetReadMarkersHandler := connect.NewUnaryHandler(
-		ChatServiceGetReadMarkersProcedure,
-		svc.GetReadMarkers,
-		connect.WithSchema(chatServiceMethods.ByName("GetReadMarkers")),
+	chatServiceGetClientStateHandler := connect.NewUnaryHandler(
+		ChatServiceGetClientStateProcedure,
+		svc.GetClientState,
+		connect.WithSchema(chatServiceMethods.ByName("GetClientState")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/chat.v1.ChatService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -491,12 +466,10 @@ func NewChatServiceHandler(svc ChatServiceHandler, opts ...connect.HandlerOption
 			chatServiceUpdateSubscriptionRoleHandler.ServeHTTP(w, r)
 		case ChatServiceSearchRoomSubscriptionsProcedure:
 			chatServiceSearchRoomSubscriptionsHandler.ServeHTTP(w, r)
-		case ChatServiceUpdateTypingProcedure:
-			chatServiceUpdateTypingHandler.ServeHTTP(w, r)
-		case ChatServiceUpdateReadMarkerProcedure:
-			chatServiceUpdateReadMarkerHandler.ServeHTTP(w, r)
-		case ChatServiceGetReadMarkersProcedure:
-			chatServiceGetReadMarkersHandler.ServeHTTP(w, r)
+		case ChatServiceUpdateClientStateProcedure:
+			chatServiceUpdateClientStateHandler.ServeHTTP(w, r)
+		case ChatServiceGetClientStateProcedure:
+			chatServiceGetClientStateHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -546,14 +519,10 @@ func (UnimplementedChatServiceHandler) SearchRoomSubscriptions(context.Context, 
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("chat.v1.ChatService.SearchRoomSubscriptions is not implemented"))
 }
 
-func (UnimplementedChatServiceHandler) UpdateTyping(context.Context, *connect.Request[v1.UpdateTypingRequest]) (*connect.Response[v1.UpdateTypingResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("chat.v1.ChatService.UpdateTyping is not implemented"))
+func (UnimplementedChatServiceHandler) UpdateClientState(context.Context, *connect.Request[v1.UpdateClientStateRequest]) (*connect.Response[v1.UpdateClientStateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("chat.v1.ChatService.UpdateClientState is not implemented"))
 }
 
-func (UnimplementedChatServiceHandler) UpdateReadMarker(context.Context, *connect.Request[v1.UpdateReadMarkerRequest]) (*connect.Response[v1.UpdateReadMarkerResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("chat.v1.ChatService.UpdateReadMarker is not implemented"))
-}
-
-func (UnimplementedChatServiceHandler) GetReadMarkers(context.Context, *connect.Request[v1.GetReadMarkersRequest]) (*connect.Response[v1.GetReadMarkersResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("chat.v1.ChatService.GetReadMarkers is not implemented"))
+func (UnimplementedChatServiceHandler) GetClientState(context.Context, *connect.Request[v1.GetClientStateRequest]) (*connect.Response[v1.GetClientStateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("chat.v1.ChatService.GetClientState is not implemented"))
 }

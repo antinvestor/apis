@@ -69,12 +69,10 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
       $pb.ServerContext ctx, $3.UpdateSubscriptionRoleRequest request);
   $async.Future<$3.SearchRoomSubscriptionsResponse> searchRoomSubscriptions(
       $pb.ServerContext ctx, $3.SearchRoomSubscriptionsRequest request);
-  $async.Future<$3.UpdateTypingResponse> updateTyping(
-      $pb.ServerContext ctx, $3.UpdateTypingRequest request);
-  $async.Future<$3.UpdateReadMarkerResponse> updateReadMarker(
-      $pb.ServerContext ctx, $3.UpdateReadMarkerRequest request);
-  $async.Future<$3.GetReadMarkersResponse> getReadMarkers(
-      $pb.ServerContext ctx, $3.GetReadMarkersRequest request);
+  $async.Future<$3.UpdateClientStateResponse> updateClientState(
+      $pb.ServerContext ctx, $3.UpdateClientStateRequest request);
+  $async.Future<$3.GetClientStateResponse> getClientState(
+      $pb.ServerContext ctx, $3.GetClientStateRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
@@ -98,12 +96,10 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
         return $3.UpdateSubscriptionRoleRequest();
       case 'SearchRoomSubscriptions':
         return $3.SearchRoomSubscriptionsRequest();
-      case 'UpdateTyping':
-        return $3.UpdateTypingRequest();
-      case 'UpdateReadMarker':
-        return $3.UpdateReadMarkerRequest();
-      case 'GetReadMarkers':
-        return $3.GetReadMarkersRequest();
+      case 'UpdateClientState':
+        return $3.UpdateClientStateRequest();
+      case 'GetClientState':
+        return $3.GetClientStateRequest();
       default:
         throw $core.ArgumentError('Unknown method: $methodName');
     }
@@ -136,12 +132,10 @@ abstract class ChatServiceBase extends $pb.GeneratedService {
       case 'SearchRoomSubscriptions':
         return searchRoomSubscriptions(
             ctx, request as $3.SearchRoomSubscriptionsRequest);
-      case 'UpdateTyping':
-        return updateTyping(ctx, request as $3.UpdateTypingRequest);
-      case 'UpdateReadMarker':
-        return updateReadMarker(ctx, request as $3.UpdateReadMarkerRequest);
-      case 'GetReadMarkers':
-        return getReadMarkers(ctx, request as $3.GetReadMarkersRequest);
+      case 'UpdateClientState':
+        return updateClientState(ctx, request as $3.UpdateClientStateRequest);
+      case 'GetClientState':
+        return getClientState(ctx, request as $3.GetClientStateRequest);
       default:
         throw $core.ArgumentError('Unknown method: $methodName');
     }

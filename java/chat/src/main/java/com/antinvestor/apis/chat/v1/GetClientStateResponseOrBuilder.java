@@ -20,8 +20,8 @@
 package com.antinvestor.apis.chat.v1;
 
 @com.google.protobuf.Generated
-public interface GetReadMarkersResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:chat.v1.GetReadMarkersResponse)
+public interface GetClientStateResponseOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:chat.v1.GetClientStateResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -37,26 +37,26 @@ public interface GetReadMarkersResponseOrBuilder extends
       getRoomIdBytes();
 
   /**
-   * <code>repeated .chat.v1.ReadMarkerInfo markers = 2 [json_name = "markers"];</code>
+   * <code>repeated .chat.v1.ClientState clientState = 2 [json_name = "clientState"];</code>
    */
-  java.util.List<com.antinvestor.apis.chat.v1.ReadMarkerInfo> 
-      getMarkersList();
+  java.util.List<com.antinvestor.apis.chat.v1.ClientState> 
+      getClientStateList();
   /**
-   * <code>repeated .chat.v1.ReadMarkerInfo markers = 2 [json_name = "markers"];</code>
+   * <code>repeated .chat.v1.ClientState clientState = 2 [json_name = "clientState"];</code>
    */
-  com.antinvestor.apis.chat.v1.ReadMarkerInfo getMarkers(int index);
+  com.antinvestor.apis.chat.v1.ClientState getClientState(int index);
   /**
-   * <code>repeated .chat.v1.ReadMarkerInfo markers = 2 [json_name = "markers"];</code>
+   * <code>repeated .chat.v1.ClientState clientState = 2 [json_name = "clientState"];</code>
    */
-  int getMarkersCount();
+  int getClientStateCount();
   /**
-   * <code>repeated .chat.v1.ReadMarkerInfo markers = 2 [json_name = "markers"];</code>
+   * <code>repeated .chat.v1.ClientState clientState = 2 [json_name = "clientState"];</code>
    */
-  java.util.List<? extends com.antinvestor.apis.chat.v1.ReadMarkerInfoOrBuilder> 
-      getMarkersOrBuilderList();
+  java.util.List<? extends com.antinvestor.apis.chat.v1.ClientStateOrBuilder> 
+      getClientStateOrBuilderList();
   /**
-   * <code>repeated .chat.v1.ReadMarkerInfo markers = 2 [json_name = "markers"];</code>
+   * <code>repeated .chat.v1.ClientState clientState = 2 [json_name = "clientState"];</code>
    */
-  com.antinvestor.apis.chat.v1.ReadMarkerInfoOrBuilder getMarkersOrBuilder(
+  com.antinvestor.apis.chat.v1.ClientStateOrBuilder getClientStateOrBuilder(
       int index);
 }

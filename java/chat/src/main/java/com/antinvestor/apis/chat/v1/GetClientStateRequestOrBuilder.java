@@ -20,8 +20,8 @@
 package com.antinvestor.apis.chat.v1;
 
 @com.google.protobuf.Generated
-public interface UpdateReadMarkerRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:chat.v1.UpdateReadMarkerRequest)
+public interface GetClientStateRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:chat.v1.GetClientStateRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -37,41 +37,38 @@ public interface UpdateReadMarkerRequestOrBuilder extends
       getRoomIdBytes();
 
   /**
-   * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-   * @return The profileId.
+   * <code>repeated string profile_ids = 2 [json_name = "profileIds"];</code>
+   * @return A list containing the profileIds.
    */
-  java.lang.String getProfileId();
+  java.util.List<java.lang.String>
+      getProfileIdsList();
   /**
-   * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for profileId.
+   * <code>repeated string profile_ids = 2 [json_name = "profileIds"];</code>
+   * @return The count of profileIds.
+   */
+  int getProfileIdsCount();
+  /**
+   * <code>repeated string profile_ids = 2 [json_name = "profileIds"];</code>
+   * @param index The index of the element to return.
+   * @return The profileIds at the given index.
+   */
+  java.lang.String getProfileIds(int index);
+  /**
+   * <code>repeated string profile_ids = 2 [json_name = "profileIds"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the profileIds at the given index.
    */
   com.google.protobuf.ByteString
-      getProfileIdBytes();
+      getProfileIdsBytes(int index);
 
   /**
-   * <code>string up_to_event_id = 3 [json_name = "upToEventId", (.buf.validate.field) = { ... }</code>
-   * @return The upToEventId.
+   * <code>.chat.v1.GetClientStateRequest.ClientStateType stateType = 3 [json_name = "stateType"];</code>
+   * @return The enum numeric value on the wire for stateType.
    */
-  java.lang.String getUpToEventId();
+  int getStateTypeValue();
   /**
-   * <code>string up_to_event_id = 3 [json_name = "upToEventId", (.buf.validate.field) = { ... }</code>
-   * @return The bytes for upToEventId.
+   * <code>.chat.v1.GetClientStateRequest.ClientStateType stateType = 3 [json_name = "stateType"];</code>
+   * @return The stateType.
    */
-  com.google.protobuf.ByteString
-      getUpToEventIdBytes();
-
-  /**
-   * <code>.google.protobuf.Timestamp read_at = 4 [json_name = "readAt"];</code>
-   * @return Whether the readAt field is set.
-   */
-  boolean hasReadAt();
-  /**
-   * <code>.google.protobuf.Timestamp read_at = 4 [json_name = "readAt"];</code>
-   * @return The readAt.
-   */
-  com.google.protobuf.Timestamp getReadAt();
-  /**
-   * <code>.google.protobuf.Timestamp read_at = 4 [json_name = "readAt"];</code>
-   */
-  com.google.protobuf.TimestampOrBuilder getReadAtOrBuilder();
+  com.antinvestor.apis.chat.v1.GetClientStateRequest.ClientStateType getStateType();
 }

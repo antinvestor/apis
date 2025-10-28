@@ -21,16 +21,16 @@ package com.antinvestor.apis.chat.v1;
 
 /**
  * <pre>
- * GetReadMarkers
+ * GetClientState obtains the state of a set of profiles in a room
  * </pre>
  *
- * Protobuf type {@code chat.v1.GetReadMarkersRequest}
+ * Protobuf type {@code chat.v1.GetClientStateRequest}
  */
 @com.google.protobuf.Generated
-public final class GetReadMarkersRequest extends
+public final class GetClientStateRequest extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:chat.v1.GetReadMarkersRequest)
-    GetReadMarkersRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:chat.v1.GetClientStateRequest)
+    GetClientStateRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -39,29 +39,147 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 33,
       /* patch= */ 0,
       /* suffix= */ "",
-      "GetReadMarkersRequest");
+      "GetClientStateRequest");
   }
-  // Use GetReadMarkersRequest.newBuilder() to construct.
-  private GetReadMarkersRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use GetClientStateRequest.newBuilder() to construct.
+  private GetClientStateRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private GetReadMarkersRequest() {
+  private GetClientStateRequest() {
     roomId_ = "";
     profileIds_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
+    stateType_ = 0;
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_GetReadMarkersRequest_descriptor;
+    return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_GetClientStateRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_GetReadMarkersRequest_fieldAccessorTable
+    return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_GetClientStateRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.antinvestor.apis.chat.v1.GetReadMarkersRequest.class, com.antinvestor.apis.chat.v1.GetReadMarkersRequest.Builder.class);
+            com.antinvestor.apis.chat.v1.GetClientStateRequest.class, com.antinvestor.apis.chat.v1.GetClientStateRequest.Builder.class);
+  }
+
+  /**
+   * Protobuf enum {@code chat.v1.GetClientStateRequest.ClientStateType}
+   */
+  public enum ClientStateType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>CLIENT_STATE_TYPE_PRESENCE = 0;</code>
+     */
+    CLIENT_STATE_TYPE_PRESENCE(0),
+    /**
+     * <code>CLIENT_STATE_TYPE_READ_MARKER = 1;</code>
+     */
+    CLIENT_STATE_TYPE_READ_MARKER(1),
+    UNRECOGNIZED(-1),
+    ;
+
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 33,
+        /* patch= */ 0,
+        /* suffix= */ "",
+        "ClientStateType");
+    }
+    /**
+     * <code>CLIENT_STATE_TYPE_PRESENCE = 0;</code>
+     */
+    public static final int CLIENT_STATE_TYPE_PRESENCE_VALUE = 0;
+    /**
+     * <code>CLIENT_STATE_TYPE_READ_MARKER = 1;</code>
+     */
+    public static final int CLIENT_STATE_TYPE_READ_MARKER_VALUE = 1;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static ClientStateType valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static ClientStateType forNumber(int value) {
+      switch (value) {
+        case 0: return CLIENT_STATE_TYPE_PRESENCE;
+        case 1: return CLIENT_STATE_TYPE_READ_MARKER;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ClientStateType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        ClientStateType> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ClientStateType>() {
+            public ClientStateType findValueByNumber(int number) {
+              return ClientStateType.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.antinvestor.apis.chat.v1.GetClientStateRequest.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final ClientStateType[] VALUES = values();
+
+    public static ClientStateType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private ClientStateType(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:chat.v1.GetClientStateRequest.ClientStateType)
   }
 
   public static final int ROOM_ID_FIELD_NUMBER = 1;
@@ -140,6 +258,24 @@ private static final long serialVersionUID = 0L;
     return profileIds_.getByteString(index);
   }
 
+  public static final int STATETYPE_FIELD_NUMBER = 3;
+  private int stateType_ = 0;
+  /**
+   * <code>.chat.v1.GetClientStateRequest.ClientStateType stateType = 3 [json_name = "stateType"];</code>
+   * @return The enum numeric value on the wire for stateType.
+   */
+  @java.lang.Override public int getStateTypeValue() {
+    return stateType_;
+  }
+  /**
+   * <code>.chat.v1.GetClientStateRequest.ClientStateType stateType = 3 [json_name = "stateType"];</code>
+   * @return The stateType.
+   */
+  @java.lang.Override public com.antinvestor.apis.chat.v1.GetClientStateRequest.ClientStateType getStateType() {
+    com.antinvestor.apis.chat.v1.GetClientStateRequest.ClientStateType result = com.antinvestor.apis.chat.v1.GetClientStateRequest.ClientStateType.forNumber(stateType_);
+    return result == null ? com.antinvestor.apis.chat.v1.GetClientStateRequest.ClientStateType.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -159,6 +295,9 @@ private static final long serialVersionUID = 0L;
     }
     for (int i = 0; i < profileIds_.size(); i++) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, profileIds_.getRaw(i));
+    }
+    if (stateType_ != com.antinvestor.apis.chat.v1.GetClientStateRequest.ClientStateType.CLIENT_STATE_TYPE_PRESENCE.getNumber()) {
+      output.writeEnum(3, stateType_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -180,6 +319,10 @@ private static final long serialVersionUID = 0L;
       size += dataSize;
       size += 1 * getProfileIdsList().size();
     }
+    if (stateType_ != com.antinvestor.apis.chat.v1.GetClientStateRequest.ClientStateType.CLIENT_STATE_TYPE_PRESENCE.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(3, stateType_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -190,15 +333,16 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.antinvestor.apis.chat.v1.GetReadMarkersRequest)) {
+    if (!(obj instanceof com.antinvestor.apis.chat.v1.GetClientStateRequest)) {
       return super.equals(obj);
     }
-    com.antinvestor.apis.chat.v1.GetReadMarkersRequest other = (com.antinvestor.apis.chat.v1.GetReadMarkersRequest) obj;
+    com.antinvestor.apis.chat.v1.GetClientStateRequest other = (com.antinvestor.apis.chat.v1.GetClientStateRequest) obj;
 
     if (!getRoomId()
         .equals(other.getRoomId())) return false;
     if (!getProfileIdsList()
         .equals(other.getProfileIdsList())) return false;
+    if (stateType_ != other.stateType_) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -216,49 +360,51 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + PROFILE_IDS_FIELD_NUMBER;
       hash = (53 * hash) + getProfileIdsList().hashCode();
     }
+    hash = (37 * hash) + STATETYPE_FIELD_NUMBER;
+    hash = (53 * hash) + stateType_;
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest parseFrom(byte[] data)
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest parseFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -266,26 +412,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest parseDelimitedFrom(java.io.InputStream input)
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest parseDelimitedFrom(
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest parseFrom(
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -298,7 +444,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.antinvestor.apis.chat.v1.GetReadMarkersRequest prototype) {
+  public static Builder newBuilder(com.antinvestor.apis.chat.v1.GetClientStateRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -315,29 +461,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * GetReadMarkers
+   * GetClientState obtains the state of a set of profiles in a room
    * </pre>
    *
-   * Protobuf type {@code chat.v1.GetReadMarkersRequest}
+   * Protobuf type {@code chat.v1.GetClientStateRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:chat.v1.GetReadMarkersRequest)
-      com.antinvestor.apis.chat.v1.GetReadMarkersRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:chat.v1.GetClientStateRequest)
+      com.antinvestor.apis.chat.v1.GetClientStateRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_GetReadMarkersRequest_descriptor;
+      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_GetClientStateRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_GetReadMarkersRequest_fieldAccessorTable
+      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_GetClientStateRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.antinvestor.apis.chat.v1.GetReadMarkersRequest.class, com.antinvestor.apis.chat.v1.GetReadMarkersRequest.Builder.class);
+              com.antinvestor.apis.chat.v1.GetClientStateRequest.class, com.antinvestor.apis.chat.v1.GetClientStateRequest.Builder.class);
     }
 
-    // Construct using com.antinvestor.apis.chat.v1.GetReadMarkersRequest.newBuilder()
+    // Construct using com.antinvestor.apis.chat.v1.GetClientStateRequest.newBuilder()
     private Builder() {
 
     }
@@ -354,23 +500,24 @@ private static final long serialVersionUID = 0L;
       roomId_ = "";
       profileIds_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
+      stateType_ = 0;
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_GetReadMarkersRequest_descriptor;
+      return com.antinvestor.apis.chat.v1.ChatProto.internal_static_chat_v1_GetClientStateRequest_descriptor;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.chat.v1.GetReadMarkersRequest getDefaultInstanceForType() {
-      return com.antinvestor.apis.chat.v1.GetReadMarkersRequest.getDefaultInstance();
+    public com.antinvestor.apis.chat.v1.GetClientStateRequest getDefaultInstanceForType() {
+      return com.antinvestor.apis.chat.v1.GetClientStateRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.chat.v1.GetReadMarkersRequest build() {
-      com.antinvestor.apis.chat.v1.GetReadMarkersRequest result = buildPartial();
+    public com.antinvestor.apis.chat.v1.GetClientStateRequest build() {
+      com.antinvestor.apis.chat.v1.GetClientStateRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -378,14 +525,14 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.antinvestor.apis.chat.v1.GetReadMarkersRequest buildPartial() {
-      com.antinvestor.apis.chat.v1.GetReadMarkersRequest result = new com.antinvestor.apis.chat.v1.GetReadMarkersRequest(this);
+    public com.antinvestor.apis.chat.v1.GetClientStateRequest buildPartial() {
+      com.antinvestor.apis.chat.v1.GetClientStateRequest result = new com.antinvestor.apis.chat.v1.GetClientStateRequest(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.antinvestor.apis.chat.v1.GetReadMarkersRequest result) {
+    private void buildPartial0(com.antinvestor.apis.chat.v1.GetClientStateRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.roomId_ = roomId_;
@@ -394,20 +541,23 @@ private static final long serialVersionUID = 0L;
         profileIds_.makeImmutable();
         result.profileIds_ = profileIds_;
       }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.stateType_ = stateType_;
+      }
     }
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.antinvestor.apis.chat.v1.GetReadMarkersRequest) {
-        return mergeFrom((com.antinvestor.apis.chat.v1.GetReadMarkersRequest)other);
+      if (other instanceof com.antinvestor.apis.chat.v1.GetClientStateRequest) {
+        return mergeFrom((com.antinvestor.apis.chat.v1.GetClientStateRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.antinvestor.apis.chat.v1.GetReadMarkersRequest other) {
-      if (other == com.antinvestor.apis.chat.v1.GetReadMarkersRequest.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.antinvestor.apis.chat.v1.GetClientStateRequest other) {
+      if (other == com.antinvestor.apis.chat.v1.GetClientStateRequest.getDefaultInstance()) return this;
       if (!other.getRoomId().isEmpty()) {
         roomId_ = other.roomId_;
         bitField0_ |= 0x00000001;
@@ -422,6 +572,9 @@ private static final long serialVersionUID = 0L;
           profileIds_.addAll(other.profileIds_);
         }
         onChanged();
+      }
+      if (other.stateType_ != 0) {
+        setStateTypeValue(other.getStateTypeValue());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -460,6 +613,11 @@ private static final long serialVersionUID = 0L;
               profileIds_.add(s);
               break;
             } // case 18
+            case 24: {
+              stateType_ = input.readEnum();
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 24
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -660,23 +818,74 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    // @@protoc_insertion_point(builder_scope:chat.v1.GetReadMarkersRequest)
+    private int stateType_ = 0;
+    /**
+     * <code>.chat.v1.GetClientStateRequest.ClientStateType stateType = 3 [json_name = "stateType"];</code>
+     * @return The enum numeric value on the wire for stateType.
+     */
+    @java.lang.Override public int getStateTypeValue() {
+      return stateType_;
+    }
+    /**
+     * <code>.chat.v1.GetClientStateRequest.ClientStateType stateType = 3 [json_name = "stateType"];</code>
+     * @param value The enum numeric value on the wire for stateType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStateTypeValue(int value) {
+      stateType_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chat.v1.GetClientStateRequest.ClientStateType stateType = 3 [json_name = "stateType"];</code>
+     * @return The stateType.
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.chat.v1.GetClientStateRequest.ClientStateType getStateType() {
+      com.antinvestor.apis.chat.v1.GetClientStateRequest.ClientStateType result = com.antinvestor.apis.chat.v1.GetClientStateRequest.ClientStateType.forNumber(stateType_);
+      return result == null ? com.antinvestor.apis.chat.v1.GetClientStateRequest.ClientStateType.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.chat.v1.GetClientStateRequest.ClientStateType stateType = 3 [json_name = "stateType"];</code>
+     * @param value The stateType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStateType(com.antinvestor.apis.chat.v1.GetClientStateRequest.ClientStateType value) {
+      if (value == null) { throw new NullPointerException(); }
+      bitField0_ |= 0x00000004;
+      stateType_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.chat.v1.GetClientStateRequest.ClientStateType stateType = 3 [json_name = "stateType"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearStateType() {
+      bitField0_ = (bitField0_ & ~0x00000004);
+      stateType_ = 0;
+      onChanged();
+      return this;
+    }
+
+    // @@protoc_insertion_point(builder_scope:chat.v1.GetClientStateRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:chat.v1.GetReadMarkersRequest)
-  private static final com.antinvestor.apis.chat.v1.GetReadMarkersRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:chat.v1.GetClientStateRequest)
+  private static final com.antinvestor.apis.chat.v1.GetClientStateRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.antinvestor.apis.chat.v1.GetReadMarkersRequest();
+    DEFAULT_INSTANCE = new com.antinvestor.apis.chat.v1.GetClientStateRequest();
   }
 
-  public static com.antinvestor.apis.chat.v1.GetReadMarkersRequest getDefaultInstance() {
+  public static com.antinvestor.apis.chat.v1.GetClientStateRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<GetReadMarkersRequest>
-      PARSER = new com.google.protobuf.AbstractParser<GetReadMarkersRequest>() {
+  private static final com.google.protobuf.Parser<GetClientStateRequest>
+      PARSER = new com.google.protobuf.AbstractParser<GetClientStateRequest>() {
     @java.lang.Override
-    public GetReadMarkersRequest parsePartialFrom(
+    public GetClientStateRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -695,17 +904,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<GetReadMarkersRequest> parser() {
+  public static com.google.protobuf.Parser<GetClientStateRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<GetReadMarkersRequest> getParserForType() {
+  public com.google.protobuf.Parser<GetClientStateRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.antinvestor.apis.chat.v1.GetReadMarkersRequest getDefaultInstanceForType() {
+  public com.antinvestor.apis.chat.v1.GetClientStateRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

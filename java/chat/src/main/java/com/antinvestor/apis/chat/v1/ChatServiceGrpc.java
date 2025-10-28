@@ -336,97 +336,66 @@ public final class ChatServiceGrpc {
     return getSearchRoomSubscriptionsMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.UpdateTypingRequest,
-      com.antinvestor.apis.chat.v1.UpdateTypingResponse> getUpdateTypingMethod;
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.UpdateClientStateRequest,
+      com.antinvestor.apis.chat.v1.UpdateClientStateResponse> getUpdateClientStateMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "UpdateTyping",
-      requestType = com.antinvestor.apis.chat.v1.UpdateTypingRequest.class,
-      responseType = com.antinvestor.apis.chat.v1.UpdateTypingResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "UpdateClientState",
+      requestType = com.antinvestor.apis.chat.v1.UpdateClientStateRequest.class,
+      responseType = com.antinvestor.apis.chat.v1.UpdateClientStateResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.UpdateTypingRequest,
-      com.antinvestor.apis.chat.v1.UpdateTypingResponse> getUpdateTypingMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.UpdateTypingRequest, com.antinvestor.apis.chat.v1.UpdateTypingResponse> getUpdateTypingMethod;
-    if ((getUpdateTypingMethod = ChatServiceGrpc.getUpdateTypingMethod) == null) {
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.UpdateClientStateRequest,
+      com.antinvestor.apis.chat.v1.UpdateClientStateResponse> getUpdateClientStateMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.UpdateClientStateRequest, com.antinvestor.apis.chat.v1.UpdateClientStateResponse> getUpdateClientStateMethod;
+    if ((getUpdateClientStateMethod = ChatServiceGrpc.getUpdateClientStateMethod) == null) {
       synchronized (ChatServiceGrpc.class) {
-        if ((getUpdateTypingMethod = ChatServiceGrpc.getUpdateTypingMethod) == null) {
-          ChatServiceGrpc.getUpdateTypingMethod = getUpdateTypingMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.chat.v1.UpdateTypingRequest, com.antinvestor.apis.chat.v1.UpdateTypingResponse>newBuilder()
+        if ((getUpdateClientStateMethod = ChatServiceGrpc.getUpdateClientStateMethod) == null) {
+          ChatServiceGrpc.getUpdateClientStateMethod = getUpdateClientStateMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.chat.v1.UpdateClientStateRequest, com.antinvestor.apis.chat.v1.UpdateClientStateResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateTyping"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateClientState"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.chat.v1.UpdateTypingRequest.getDefaultInstance()))
+                  com.antinvestor.apis.chat.v1.UpdateClientStateRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.chat.v1.UpdateTypingResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new ChatServiceMethodDescriptorSupplier("UpdateTyping"))
+                  com.antinvestor.apis.chat.v1.UpdateClientStateResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ChatServiceMethodDescriptorSupplier("UpdateClientState"))
               .build();
         }
       }
     }
-    return getUpdateTypingMethod;
+    return getUpdateClientStateMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest,
-      com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse> getUpdateReadMarkerMethod;
+  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.GetClientStateRequest,
+      com.antinvestor.apis.chat.v1.GetClientStateResponse> getGetClientStateMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "UpdateReadMarker",
-      requestType = com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest.class,
-      responseType = com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "GetClientState",
+      requestType = com.antinvestor.apis.chat.v1.GetClientStateRequest.class,
+      responseType = com.antinvestor.apis.chat.v1.GetClientStateResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest,
-      com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse> getUpdateReadMarkerMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest, com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse> getUpdateReadMarkerMethod;
-    if ((getUpdateReadMarkerMethod = ChatServiceGrpc.getUpdateReadMarkerMethod) == null) {
+  public static io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.GetClientStateRequest,
+      com.antinvestor.apis.chat.v1.GetClientStateResponse> getGetClientStateMethod() {
+    io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.GetClientStateRequest, com.antinvestor.apis.chat.v1.GetClientStateResponse> getGetClientStateMethod;
+    if ((getGetClientStateMethod = ChatServiceGrpc.getGetClientStateMethod) == null) {
       synchronized (ChatServiceGrpc.class) {
-        if ((getUpdateReadMarkerMethod = ChatServiceGrpc.getUpdateReadMarkerMethod) == null) {
-          ChatServiceGrpc.getUpdateReadMarkerMethod = getUpdateReadMarkerMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest, com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse>newBuilder()
+        if ((getGetClientStateMethod = ChatServiceGrpc.getGetClientStateMethod) == null) {
+          ChatServiceGrpc.getGetClientStateMethod = getGetClientStateMethod =
+              io.grpc.MethodDescriptor.<com.antinvestor.apis.chat.v1.GetClientStateRequest, com.antinvestor.apis.chat.v1.GetClientStateResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateReadMarker"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetClientState"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest.getDefaultInstance()))
+                  com.antinvestor.apis.chat.v1.GetClientStateRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new ChatServiceMethodDescriptorSupplier("UpdateReadMarker"))
+                  com.antinvestor.apis.chat.v1.GetClientStateResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ChatServiceMethodDescriptorSupplier("GetClientState"))
               .build();
         }
       }
     }
-    return getUpdateReadMarkerMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.GetReadMarkersRequest,
-      com.antinvestor.apis.chat.v1.GetReadMarkersResponse> getGetReadMarkersMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "GetReadMarkers",
-      requestType = com.antinvestor.apis.chat.v1.GetReadMarkersRequest.class,
-      responseType = com.antinvestor.apis.chat.v1.GetReadMarkersResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.GetReadMarkersRequest,
-      com.antinvestor.apis.chat.v1.GetReadMarkersResponse> getGetReadMarkersMethod() {
-    io.grpc.MethodDescriptor<com.antinvestor.apis.chat.v1.GetReadMarkersRequest, com.antinvestor.apis.chat.v1.GetReadMarkersResponse> getGetReadMarkersMethod;
-    if ((getGetReadMarkersMethod = ChatServiceGrpc.getGetReadMarkersMethod) == null) {
-      synchronized (ChatServiceGrpc.class) {
-        if ((getGetReadMarkersMethod = ChatServiceGrpc.getGetReadMarkersMethod) == null) {
-          ChatServiceGrpc.getGetReadMarkersMethod = getGetReadMarkersMethod =
-              io.grpc.MethodDescriptor.<com.antinvestor.apis.chat.v1.GetReadMarkersRequest, com.antinvestor.apis.chat.v1.GetReadMarkersResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetReadMarkers"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.chat.v1.GetReadMarkersRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.antinvestor.apis.chat.v1.GetReadMarkersResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new ChatServiceMethodDescriptorSupplier("GetReadMarkers"))
-              .build();
-        }
-      }
-    }
-    return getGetReadMarkersMethod;
+    return getGetClientStateMethod;
   }
 
   /**
@@ -576,32 +545,22 @@ public final class ChatServiceGrpc {
 
     /**
      * <pre>
-     * Update typing indicator for a user in a room
+     * Update different states that the client can be in for room subscriptions awareness
      * </pre>
      */
-    default void updateTyping(com.antinvestor.apis.chat.v1.UpdateTypingRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.UpdateTypingResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateTypingMethod(), responseObserver);
+    default void updateClientState(com.antinvestor.apis.chat.v1.UpdateClientStateRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.UpdateClientStateResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateClientStateMethod(), responseObserver);
     }
 
     /**
      * <pre>
-     * Update read marker (read receipt) for a user in a room
+     * Get client state for a set of profiles in a room
      * </pre>
      */
-    default void updateReadMarker(com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateReadMarkerMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Get read markers for a room
-     * </pre>
-     */
-    default void getReadMarkers(com.antinvestor.apis.chat.v1.GetReadMarkersRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.GetReadMarkersResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetReadMarkersMethod(), responseObserver);
+    default void getClientState(com.antinvestor.apis.chat.v1.GetClientStateRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.GetClientStateResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetClientStateMethod(), responseObserver);
     }
   }
 
@@ -726,35 +685,24 @@ public final class ChatServiceGrpc {
 
     /**
      * <pre>
-     * Update typing indicator for a user in a room
+     * Update different states that the client can be in for room subscriptions awareness
      * </pre>
      */
-    public void updateTyping(com.antinvestor.apis.chat.v1.UpdateTypingRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.UpdateTypingResponse> responseObserver) {
+    public void updateClientState(com.antinvestor.apis.chat.v1.UpdateClientStateRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.UpdateClientStateResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getUpdateTypingMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getUpdateClientStateMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      * <pre>
-     * Update read marker (read receipt) for a user in a room
+     * Get client state for a set of profiles in a room
      * </pre>
      */
-    public void updateReadMarker(com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse> responseObserver) {
+    public void getClientState(com.antinvestor.apis.chat.v1.GetClientStateRequest request,
+        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.GetClientStateResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getUpdateReadMarkerMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Get read markers for a room
-     * </pre>
-     */
-    public void getReadMarkers(com.antinvestor.apis.chat.v1.GetReadMarkersRequest request,
-        io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.GetReadMarkersResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getGetReadMarkersMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getGetClientStateMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -860,32 +808,22 @@ public final class ChatServiceGrpc {
 
     /**
      * <pre>
-     * Update typing indicator for a user in a room
+     * Update different states that the client can be in for room subscriptions awareness
      * </pre>
      */
-    public com.antinvestor.apis.chat.v1.UpdateTypingResponse updateTyping(com.antinvestor.apis.chat.v1.UpdateTypingRequest request) throws io.grpc.StatusException {
+    public com.antinvestor.apis.chat.v1.UpdateClientStateResponse updateClientState(com.antinvestor.apis.chat.v1.UpdateClientStateRequest request) throws io.grpc.StatusException {
       return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
-          getChannel(), getUpdateTypingMethod(), getCallOptions(), request);
+          getChannel(), getUpdateClientStateMethod(), getCallOptions(), request);
     }
 
     /**
      * <pre>
-     * Update read marker (read receipt) for a user in a room
+     * Get client state for a set of profiles in a room
      * </pre>
      */
-    public com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse updateReadMarker(com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest request) throws io.grpc.StatusException {
+    public com.antinvestor.apis.chat.v1.GetClientStateResponse getClientState(com.antinvestor.apis.chat.v1.GetClientStateRequest request) throws io.grpc.StatusException {
       return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
-          getChannel(), getUpdateReadMarkerMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * Get read markers for a room
-     * </pre>
-     */
-    public com.antinvestor.apis.chat.v1.GetReadMarkersResponse getReadMarkers(com.antinvestor.apis.chat.v1.GetReadMarkersRequest request) throws io.grpc.StatusException {
-      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
-          getChannel(), getGetReadMarkersMethod(), getCallOptions(), request);
+          getChannel(), getGetClientStateMethod(), getCallOptions(), request);
     }
   }
 
@@ -990,32 +928,22 @@ public final class ChatServiceGrpc {
 
     /**
      * <pre>
-     * Update typing indicator for a user in a room
+     * Update different states that the client can be in for room subscriptions awareness
      * </pre>
      */
-    public com.antinvestor.apis.chat.v1.UpdateTypingResponse updateTyping(com.antinvestor.apis.chat.v1.UpdateTypingRequest request) {
+    public com.antinvestor.apis.chat.v1.UpdateClientStateResponse updateClientState(com.antinvestor.apis.chat.v1.UpdateClientStateRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getUpdateTypingMethod(), getCallOptions(), request);
+          getChannel(), getUpdateClientStateMethod(), getCallOptions(), request);
     }
 
     /**
      * <pre>
-     * Update read marker (read receipt) for a user in a room
+     * Get client state for a set of profiles in a room
      * </pre>
      */
-    public com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse updateReadMarker(com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest request) {
+    public com.antinvestor.apis.chat.v1.GetClientStateResponse getClientState(com.antinvestor.apis.chat.v1.GetClientStateRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getUpdateReadMarkerMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * Get read markers for a room
-     * </pre>
-     */
-    public com.antinvestor.apis.chat.v1.GetReadMarkersResponse getReadMarkers(com.antinvestor.apis.chat.v1.GetReadMarkersRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getGetReadMarkersMethod(), getCallOptions(), request);
+          getChannel(), getGetClientStateMethod(), getCallOptions(), request);
     }
   }
 
@@ -1121,35 +1049,24 @@ public final class ChatServiceGrpc {
 
     /**
      * <pre>
-     * Update typing indicator for a user in a room
+     * Update different states that the client can be in for room subscriptions awareness
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.chat.v1.UpdateTypingResponse> updateTyping(
-        com.antinvestor.apis.chat.v1.UpdateTypingRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.chat.v1.UpdateClientStateResponse> updateClientState(
+        com.antinvestor.apis.chat.v1.UpdateClientStateRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getUpdateTypingMethod(), getCallOptions()), request);
+          getChannel().newCall(getUpdateClientStateMethod(), getCallOptions()), request);
     }
 
     /**
      * <pre>
-     * Update read marker (read receipt) for a user in a room
+     * Get client state for a set of profiles in a room
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse> updateReadMarker(
-        com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.chat.v1.GetClientStateResponse> getClientState(
+        com.antinvestor.apis.chat.v1.GetClientStateRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getUpdateReadMarkerMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     * Get read markers for a room
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.antinvestor.apis.chat.v1.GetReadMarkersResponse> getReadMarkers(
-        com.antinvestor.apis.chat.v1.GetReadMarkersRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getGetReadMarkersMethod(), getCallOptions()), request);
+          getChannel().newCall(getGetClientStateMethod(), getCallOptions()), request);
     }
   }
 
@@ -1163,9 +1080,8 @@ public final class ChatServiceGrpc {
   private static final int METHODID_REMOVE_ROOM_SUBSCRIPTIONS = 7;
   private static final int METHODID_UPDATE_SUBSCRIPTION_ROLE = 8;
   private static final int METHODID_SEARCH_ROOM_SUBSCRIPTIONS = 9;
-  private static final int METHODID_UPDATE_TYPING = 10;
-  private static final int METHODID_UPDATE_READ_MARKER = 11;
-  private static final int METHODID_GET_READ_MARKERS = 12;
+  private static final int METHODID_UPDATE_CLIENT_STATE = 10;
+  private static final int METHODID_GET_CLIENT_STATE = 11;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1224,17 +1140,13 @@ public final class ChatServiceGrpc {
           serviceImpl.searchRoomSubscriptions((com.antinvestor.apis.chat.v1.SearchRoomSubscriptionsRequest) request,
               (io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.SearchRoomSubscriptionsResponse>) responseObserver);
           break;
-        case METHODID_UPDATE_TYPING:
-          serviceImpl.updateTyping((com.antinvestor.apis.chat.v1.UpdateTypingRequest) request,
-              (io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.UpdateTypingResponse>) responseObserver);
+        case METHODID_UPDATE_CLIENT_STATE:
+          serviceImpl.updateClientState((com.antinvestor.apis.chat.v1.UpdateClientStateRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.UpdateClientStateResponse>) responseObserver);
           break;
-        case METHODID_UPDATE_READ_MARKER:
-          serviceImpl.updateReadMarker((com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest) request,
-              (io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse>) responseObserver);
-          break;
-        case METHODID_GET_READ_MARKERS:
-          serviceImpl.getReadMarkers((com.antinvestor.apis.chat.v1.GetReadMarkersRequest) request,
-              (io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.GetReadMarkersResponse>) responseObserver);
+        case METHODID_GET_CLIENT_STATE:
+          serviceImpl.getClientState((com.antinvestor.apis.chat.v1.GetClientStateRequest) request,
+              (io.grpc.stub.StreamObserver<com.antinvestor.apis.chat.v1.GetClientStateResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -1325,26 +1237,19 @@ public final class ChatServiceGrpc {
               com.antinvestor.apis.chat.v1.SearchRoomSubscriptionsResponse>(
                 service, METHODID_SEARCH_ROOM_SUBSCRIPTIONS)))
         .addMethod(
-          getUpdateTypingMethod(),
+          getUpdateClientStateMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              com.antinvestor.apis.chat.v1.UpdateTypingRequest,
-              com.antinvestor.apis.chat.v1.UpdateTypingResponse>(
-                service, METHODID_UPDATE_TYPING)))
+              com.antinvestor.apis.chat.v1.UpdateClientStateRequest,
+              com.antinvestor.apis.chat.v1.UpdateClientStateResponse>(
+                service, METHODID_UPDATE_CLIENT_STATE)))
         .addMethod(
-          getUpdateReadMarkerMethod(),
+          getGetClientStateMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              com.antinvestor.apis.chat.v1.UpdateReadMarkerRequest,
-              com.antinvestor.apis.chat.v1.UpdateReadMarkerResponse>(
-                service, METHODID_UPDATE_READ_MARKER)))
-        .addMethod(
-          getGetReadMarkersMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              com.antinvestor.apis.chat.v1.GetReadMarkersRequest,
-              com.antinvestor.apis.chat.v1.GetReadMarkersResponse>(
-                service, METHODID_GET_READ_MARKERS)))
+              com.antinvestor.apis.chat.v1.GetClientStateRequest,
+              com.antinvestor.apis.chat.v1.GetClientStateResponse>(
+                service, METHODID_GET_CLIENT_STATE)))
         .build();
   }
 
@@ -1403,9 +1308,8 @@ public final class ChatServiceGrpc {
               .addMethod(getRemoveRoomSubscriptionsMethod())
               .addMethod(getUpdateSubscriptionRoleMethod())
               .addMethod(getSearchRoomSubscriptionsMethod())
-              .addMethod(getUpdateTypingMethod())
-              .addMethod(getUpdateReadMarkerMethod())
-              .addMethod(getGetReadMarkersMethod())
+              .addMethod(getUpdateClientStateMethod())
+              .addMethod(getGetClientStateMethod())
               .build();
         }
       }

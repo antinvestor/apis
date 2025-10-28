@@ -114,19 +114,19 @@ public interface ConnectRequestOrBuilder extends
   com.antinvestor.apis.chat.v1.StreamAckOrBuilder getAckOrBuilder();
 
   /**
-   * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
-   * @return Whether the command field is set.
+   * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
+   * @return Whether the stateUpdate field is set.
    */
-  boolean hasCommand();
+  boolean hasStateUpdate();
   /**
-   * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
-   * @return The command.
+   * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
+   * @return The stateUpdate.
    */
-  com.antinvestor.apis.chat.v1.ClientCommand getCommand();
+  com.antinvestor.apis.chat.v1.ClientState getStateUpdate();
   /**
-   * <code>.chat.v1.ClientCommand command = 12 [json_name = "command"];</code>
+   * <code>.chat.v1.ClientState stateUpdate = 12 [json_name = "stateUpdate"];</code>
    */
-  com.antinvestor.apis.chat.v1.ClientCommandOrBuilder getCommandOrBuilder();
+  com.antinvestor.apis.chat.v1.ClientStateOrBuilder getStateUpdateOrBuilder();
 
   com.antinvestor.apis.chat.v1.ConnectRequest.PayloadCase getPayloadCase();
 }

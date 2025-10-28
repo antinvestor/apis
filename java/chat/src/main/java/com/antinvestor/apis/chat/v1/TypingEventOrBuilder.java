@@ -25,24 +25,24 @@ public interface TypingEventOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string profile_id = 1 [json_name = "profileId"];</code>
+   * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The profileId.
    */
   java.lang.String getProfileId();
   /**
-   * <code>string profile_id = 1 [json_name = "profileId"];</code>
+   * <code>string profile_id = 1 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for profileId.
    */
   com.google.protobuf.ByteString
       getProfileIdBytes();
 
   /**
-   * <code>string room_id = 2 [json_name = "roomId"];</code>
+   * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The roomId.
    */
   java.lang.String getRoomId();
   /**
-   * <code>string room_id = 2 [json_name = "roomId"];</code>
+   * <code>string room_id = 2 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for roomId.
    */
   com.google.protobuf.ByteString

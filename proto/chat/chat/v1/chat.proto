@@ -201,32 +201,22 @@ service ChatService {
   // Real-time Activity APIs
   // -----------------------------------------------------
 
-  // Update typing indicator for a user in a room
-  rpc UpdateTyping(UpdateTypingRequest) returns (UpdateTypingResponse){
+  // Update different states that the client can be in for room subscriptions awareness
+  rpc UpdateClientState(UpdateClientStateRequest) returns (UpdateClientStateResponse){
     option (gnostic.openapi.v3.operation) = {
-      operation_id: "updateTyping"
-      summary: "Update typing indicator"
-      description: "Updates the typing status of the authenticated user in a specific room. Broadcasts to all active participants."
+      operation_id: "updateClientState"
+      summary: "Update state from client"
+      description: "Updates the state of an event in a specific room and optionally Broadcasts to all active participants."
       tags: "Real-time"
     };
   }
 
-  // Update read marker (read receipt) for a user in a room
-  rpc UpdateReadMarker(UpdateReadMarkerRequest) returns (UpdateReadMarkerResponse){
+  // Get client state for a set of profiles in a room
+  rpc GetClientState(GetClientStateRequest) returns (GetClientStateResponse){
     option (gnostic.openapi.v3.operation) = {
-      operation_id: "updateReadMarker"
-      summary: "Update read marker"
-      description: "Updates the read marker indicating which messages a user has read. Enables read receipts and unread counts."
-      tags: "Real-time"
-    };
-  }
-
-  // Get read markers for a room
-  rpc GetReadMarkers(GetReadMarkersRequest) returns (GetReadMarkersResponse){
-    option (gnostic.openapi.v3.operation) = {
-      operation_id: "getReadMarkers"
-      summary: "Get read markers for a room"
-      description: "Retrieves read markers showing which messages users have read."
+      operation_id: "getClientStates"
+      summary: "Get client states for profiles in a room"
+      description: "Retrieves client states for profiles in a room showing either which messages users have read, or presence state of the users in a room."
       tags: "Real-time"
     };
   }
@@ -250,7 +240,8 @@ message ServerEvent {
     RoomEvent message = 10;
     PresenceEvent presence_event = 12; // user presence change affecting the room
     ReceiptEvent receipt_event = 13;
-    TypingEvent typing_event = 14;
+    ReadMarker read_event = 15;
+    TypingEvent typing_event = 17;
   }
 }
 // Unified message (user / bot / system / signalling)
@@ -265,7 +256,11 @@ message RoomEvent {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];         // room_id
-  string sender_id = 3;         // profile_id or service/bot id
+  string sender_id = 3[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];         // profile_id or service/bot id
   RoomEventType type = 4;         // text, attachment, call_offer, etc.
   google.protobuf.Struct payload = 6; // e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
   google.protobuf.Timestamp sent_at = 7;
@@ -294,7 +289,11 @@ enum RoomEventType {
 
 // Presence event affecting a user (and visible to rooms the user is a member of)
 message PresenceEvent {
-  string profile_id = 1;
+  string profile_id = 1[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   PresenceStatus status = 2;
   string status_msg = 3;
   google.protobuf.Timestamp last_active = 4;
@@ -310,16 +309,53 @@ enum PresenceStatus {
 
 // Read receipts
 message ReceiptEvent {
-  string profile_id = 1;
-  string room_id = 2;
-  string message_id = 3;
-  google.protobuf.Timestamp read_at = 5;
+  string profile_id = 1[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string room_id = 2[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  repeated string message_id = 3[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+}
+
+message ReadMarker {
+  string room_id = 1[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string profile_id = 2 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string up_to_event_id = 3[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
 }
 
 // Typing indicator
 message TypingEvent {
-  string profile_id = 1;
-  string room_id = 2;
+  string profile_id = 1[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string room_id = 2[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   bool typing = 3;
   google.protobuf.Timestamp since = 5;
 }
@@ -342,7 +378,7 @@ message ConnectRequest {
   // The client can send various payloads inside the stream after initial auth:
   oneof payload {
     StreamAck ack = 10;
-    ClientCommand command = 12;
+    ClientState stateUpdate = 12;
   }
 }
 
@@ -350,28 +386,27 @@ message ConnectRequest {
 // ack_event_id: last event_id client processed (inclusive).
 // If error is set, indicates the event failed to send/process correctly.
 message StreamAck {
-  string event_id = 1;
+  string event_id = 1[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   google.protobuf.Timestamp ack_at = 3;
   google.protobuf.Struct metadata = 6;
   optional common.v1.ErrorDetail error = 7; // if set, indicates failure reason for this event
 }
 
-// Generic client commands (typing, read markers that aren't receipts, and room events)
-message ClientCommand {
-  oneof cmd {
-    TypingUpdate typing = 1;
-    ReadMarker read_marker = 2; // marker for "read up to X"
-    RoomEvent room_event = 3;    // send a room event (message) via the stream
+// Generic client state (typing, read markers that aren't receipts, and room events)
+message ClientState {
+  oneof state {
+    TypingEvent typing = 4;
+    ReceiptEvent receipt = 2; // receipt acknowledgement for message delivery
+    ReadMarker read_marker = 3; // marker for "read up to X"
+    RoomEvent room_event = 1;    // send a room event (message) via the stream
+    PresenceEvent presence = 5;    // send a presence message to a room
   }
 }
-message TypingUpdate {
-  string room_id = 1;
-  bool typing = 2;
-}
-message ReadMarker {
-  string room_id = 1;
-  string up_to_event_id = 2;
-}
+
 
 // -----------------------------------------------------
 // Message RPCs (unified send + get history)
@@ -453,7 +488,11 @@ message SearchRoomsResponse {
 
 
 message UpdateRoomRequest {
-  string room_id = 2;
+  string room_id = 2[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   string name = 3;
   string topic = 4;
   google.protobuf.Struct metadata = 5;
@@ -465,7 +504,11 @@ message UpdateRoomResponse {
 }
 
 message DeleteRoomRequest {
-  string room_id = 2;
+  string room_id = 2[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
 }
 
 message DeleteRoomResponse {
@@ -478,51 +521,91 @@ message DeleteRoomResponse {
 // -----------------------------------------------------
 
 message RoomSubscription {
-  string room_id = 2;
-  string profile_id = 3;
+  string room_id = 2[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string profile_id = 3[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   repeated string roles = 4; // e.g. ["owner","moderator","member","guest"]
   google.protobuf.Timestamp joined_at = 5;
   google.protobuf.Timestamp last_active = 6;
 }
 
 message AddRoomSubscriptionsRequest {
-  string room_id = 2;
+  string room_id = 2[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   repeated RoomSubscription members = 3; // include roles if desired
 }
 
 message AddRoomSubscriptionsResponse {
-  string room_id = 1;
+  string room_id = 1[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   common.v1.ErrorDetail error = 3;
 }
 
 message RemoveRoomSubscriptionsRequest {
-  string room_id = 2;
+  string room_id = 2[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   repeated string profile_ids = 3;
 }
 
 message RemoveRoomSubscriptionsResponse {
-  string room_id = 1;
+  string room_id = 1[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   common.v1.ErrorDetail error = 3;
 }
 
 message UpdateSubscriptionRoleRequest {
-  string room_id = 2;
+  string room_id = 2[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   string profile_id = 3;
   repeated string roles = 4;
 }
 
 message UpdateSubscriptionRoleResponse {
-  string room_id = 1;
+  string room_id = 1[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   common.v1.ErrorDetail error = 3;
 }
 
 message SearchRoomSubscriptionsRequest {
-  string room_id = 2;
+  string room_id = 2[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   int32 limit = 3;
   string cursor = 4;
 }
 message SearchRoomSubscriptionsResponse {
-  string room_id = 1;
+  string room_id = 1[
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
   repeated RoomSubscription members = 2;
   string next_cursor = 3;
 }
@@ -531,8 +614,7 @@ message SearchRoomSubscriptionsResponse {
 // Real-time Activity Request/Response Messages
 // -----------------------------------------------------
 
-// UpdateTyping
-message UpdateTypingRequest {
+message UpdateClientStateRequest {
   string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
@@ -543,63 +625,31 @@ message UpdateTypingRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  bool typing = 3;
-  google.protobuf.Timestamp timestamp = 4;
+  repeated ClientState clientStates = 3;
 }
 
-message UpdateTypingResponse {
-  bool success = 1;
-  int32 participant_count = 2;
-  google.protobuf.Timestamp broadcast_at = 3;
+message UpdateClientStateResponse {
+  common.v1.ErrorDetail error = 1;
 }
 
-// UpdateReadMarker
-message UpdateReadMarkerRequest {
-  string room_id = 1 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string profile_id = 2 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  string up_to_event_id = 3 [
-    (buf.validate.field).string.min_len = 3,
-    (buf.validate.field).string.max_len = 40,
-    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
-  ];
-  google.protobuf.Timestamp read_at = 4;
-}
 
-message UpdateReadMarkerResponse {
-  bool success = 1;
-  string room_id = 2;
-  string up_to_event_id = 3;
-  google.protobuf.Timestamp read_at = 4;
-  int32 unread_count = 5;
-}
-
-// GetReadMarkers
-message GetReadMarkersRequest {
+// GetClientState obtains the state of a set of profiles in a room
+message GetClientStateRequest {
   string room_id = 1 [
     (buf.validate.field).string.min_len = 3,
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
   repeated string profile_ids = 2;
+
+  enum ClientStateType {
+    CLIENT_STATE_TYPE_PRESENCE = 0;
+    CLIENT_STATE_TYPE_READ_MARKER = 1;
+  }
+  ClientStateType stateType = 3;
 }
 
-message GetReadMarkersResponse {
+message GetClientStateResponse {
   string room_id = 1;
-  repeated ReadMarkerInfo markers = 2;
+  repeated ClientState clientState = 2;
 }
-
-message ReadMarkerInfo {
-  string profile_id = 1;
-  string up_to_event_id = 2;
-  google.protobuf.Timestamp read_at = 3;
-  int32 unread_count = 4;
-}
-

@@ -25,24 +25,36 @@ public interface ReadMarkerOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string room_id = 1 [json_name = "roomId"];</code>
+   * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The roomId.
    */
   java.lang.String getRoomId();
   /**
-   * <code>string room_id = 1 [json_name = "roomId"];</code>
+   * <code>string room_id = 1 [json_name = "roomId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for roomId.
    */
   com.google.protobuf.ByteString
       getRoomIdBytes();
 
   /**
-   * <code>string up_to_event_id = 2 [json_name = "upToEventId"];</code>
+   * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The profileId.
+   */
+  java.lang.String getProfileId();
+  /**
+   * <code>string profile_id = 2 [json_name = "profileId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for profileId.
+   */
+  com.google.protobuf.ByteString
+      getProfileIdBytes();
+
+  /**
+   * <code>string up_to_event_id = 3 [json_name = "upToEventId", (.buf.validate.field) = { ... }</code>
    * @return The upToEventId.
    */
   java.lang.String getUpToEventId();
   /**
-   * <code>string up_to_event_id = 2 [json_name = "upToEventId"];</code>
+   * <code>string up_to_event_id = 3 [json_name = "upToEventId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for upToEventId.
    */
   com.google.protobuf.ByteString
