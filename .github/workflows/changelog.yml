@@ -81,6 +81,7 @@ jobs:
       contents: write
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
     
     steps:
@@ -154,7 +155,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           fromTag: ${{ env.latest_tag }}
-          toTag: ${{ github.sha }}
+          toTag: ${{ github.event.pull_request.head.sha }}
           includeOnlyPaths: |
             ${{ matrix.language }}/${{ matrix.package }}/
           ignorePreReleases: "false"
@@ -221,12 +222,33 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          BRANCH="${GITHUB_HEAD_REF:-$(git rev-parse --abbrev-ref HEAD)}"
+          # Ensure we are up to date with the remote to avoid non-fast-forward issues
+          git fetch origin "$BRANCH"
+          git config --global pull.rebase true
+          git pull --rebase origin "$BRANCH" || true
+
           git add "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
-          
+
           # Add pubspec.yaml if it exists and was modified (for Dart packages)
           if [ -f "${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml" ]; then
             git add "${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml" 2>/dev/null || true
           fi
-          
+
+          # Create commit if there are staged changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit. Skipping push."
+            exit 0
+          fi
+
           git commit -m "chore(${{ matrix.package }}): update changelog and version to v${{ steps.release-version.outputs.version }}"
-          git push
+
+          # Try pushing; if non-fast-forward, rebase again and retry with lease
+          if git push origin "$BRANCH"; then
+            echo "Push succeeded."
+          else
+            echo "Initial push failed. Attempting rebase and retry..."
+            git fetch origin "$BRANCH"
+            git rebase "origin/$BRANCH" || true
+            git push origin "$BRANCH" || git push --force-with-lease origin "$BRANCH"
+          fi
