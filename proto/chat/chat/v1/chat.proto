@@ -448,7 +448,10 @@ message Room {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];
-  string name = 3;
+  string name = 3 [
+    (buf.validate.field).string.min_len = 2,
+    (buf.validate.field).string.max_len = 200
+  ];
   string description = 4;
   bool is_private = 5;
   google.protobuf.Struct metadata = 6;
@@ -463,7 +466,10 @@ message CreateRoomRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ]; // optional client-provided idempotency key
-  string name = 4;
+  string name = 4 [
+    (buf.validate.field).string.min_len = 2,
+    (buf.validate.field).string.max_len = 200
+  ];
   string description = 5;
   bool is_private = 6;
   repeated string members = 7; // optional

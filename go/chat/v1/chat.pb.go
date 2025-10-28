@@ -2701,10 +2701,11 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\vnext_cursor\x18\x02 \x01(\tR\n" +
 	"nextCursor\x12\x1f\n" +
 	"\vprev_cursor\x18\x03 \x01(\tR\n" +
-	"prevCursor\"\xd2\x02\n" +
+	"prevCursor\"\xde\x02\n" +
 	"\x04Room\x12+\n" +
-	"\x02id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\x02id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1e\n" +
+	"\x04name\x18\x03 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x02\x18\xc8\x01R\x04name\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1d\n" +
 	"\n" +
 	"is_private\x18\x05 \x01(\bR\tisPrivate\x123\n" +
@@ -2714,10 +2715,11 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x1d\n" +
 	"\n" +
-	"creator_id\x18\t \x01(\tR\tcreatorId\"\xe4\x01\n" +
+	"creator_id\x18\t \x01(\tR\tcreatorId\"\xf0\x01\n" +
 	"\x11CreateRoomRequest\x12+\n" +
-	"\x02id\x18\x03 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
+	"\x02id\x18\x03 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1e\n" +
+	"\x04name\x18\x04 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x02\x18\xc8\x01R\x04name\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1d\n" +
 	"\n" +
 	"is_private\x18\x06 \x01(\bR\tisPrivate\x12\x18\n" +

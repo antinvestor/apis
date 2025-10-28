@@ -550,6 +550,8 @@ components:
         name:
           type: string
           title: name
+          maxLength: 200
+          minLength: 2
         description:
           type: string
           title: description
@@ -799,6 +801,8 @@ components:
         name:
           type: string
           title: name
+          maxLength: 200
+          minLength: 2
         description:
           type: string
           title: description

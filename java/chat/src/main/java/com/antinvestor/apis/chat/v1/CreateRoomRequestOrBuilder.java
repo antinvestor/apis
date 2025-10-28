@@ -45,12 +45,12 @@ public interface CreateRoomRequestOrBuilder extends
       getIdBytes();
 
   /**
-   * <code>string name = 4 [json_name = "name"];</code>
+   * <code>string name = 4 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The name.
    */
   java.lang.String getName();
   /**
-   * <code>string name = 4 [json_name = "name"];</code>
+   * <code>string name = 4 [json_name = "name", (.buf.validate.field) = { ... }</code>
    * @return The bytes for name.
    */
   com.google.protobuf.ByteString
