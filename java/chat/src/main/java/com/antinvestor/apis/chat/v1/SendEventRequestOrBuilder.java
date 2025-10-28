@@ -26,45 +26,45 @@ public interface SendEventRequestOrBuilder extends
 
   /**
    * <pre>
-   * message payload (server will assign final message_id if empty)
+   * message payload (server will assign final event_id if empty)
    * </pre>
    *
-   * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+   * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
    */
   java.util.List<com.antinvestor.apis.chat.v1.RoomEvent> 
-      getMessageList();
+      getEventList();
   /**
    * <pre>
-   * message payload (server will assign final message_id if empty)
+   * message payload (server will assign final event_id if empty)
    * </pre>
    *
-   * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+   * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
    */
-  com.antinvestor.apis.chat.v1.RoomEvent getMessage(int index);
+  com.antinvestor.apis.chat.v1.RoomEvent getEvent(int index);
   /**
    * <pre>
-   * message payload (server will assign final message_id if empty)
+   * message payload (server will assign final event_id if empty)
    * </pre>
    *
-   * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+   * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
    */
-  int getMessageCount();
+  int getEventCount();
   /**
    * <pre>
-   * message payload (server will assign final message_id if empty)
+   * message payload (server will assign final event_id if empty)
    * </pre>
    *
-   * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+   * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
    */
   java.util.List<? extends com.antinvestor.apis.chat.v1.RoomEventOrBuilder> 
-      getMessageOrBuilderList();
+      getEventOrBuilderList();
   /**
    * <pre>
-   * message payload (server will assign final message_id if empty)
+   * message payload (server will assign final event_id if empty)
    * </pre>
    *
-   * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+   * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
    */
-  com.antinvestor.apis.chat.v1.RoomEventOrBuilder getMessageOrBuilder(
+  com.antinvestor.apis.chat.v1.RoomEventOrBuilder getEventOrBuilder(
       int index);
 }

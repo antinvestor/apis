@@ -48,7 +48,7 @@ private static final long serialVersionUID = 0L;
   private ReceiptEvent() {
     profileId_ = "";
     roomId_ = "";
-    messageId_ =
+    eventId_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
   }
 
@@ -143,41 +143,41 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int MESSAGE_ID_FIELD_NUMBER = 3;
+  public static final int EVENT_ID_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
-  private com.google.protobuf.LazyStringArrayList messageId_ =
+  private com.google.protobuf.LazyStringArrayList eventId_ =
       com.google.protobuf.LazyStringArrayList.emptyList();
   /**
-   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
-   * @return A list containing the messageId.
+   * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+   * @return A list containing the eventId.
    */
   public com.google.protobuf.ProtocolStringList
-      getMessageIdList() {
-    return messageId_;
+      getEventIdList() {
+    return eventId_;
   }
   /**
-   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
-   * @return The count of messageId.
+   * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+   * @return The count of eventId.
    */
-  public int getMessageIdCount() {
-    return messageId_.size();
+  public int getEventIdCount() {
+    return eventId_.size();
   }
   /**
-   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+   * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
    * @param index The index of the element to return.
-   * @return The messageId at the given index.
+   * @return The eventId at the given index.
    */
-  public java.lang.String getMessageId(int index) {
-    return messageId_.get(index);
+  public java.lang.String getEventId(int index) {
+    return eventId_.get(index);
   }
   /**
-   * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+   * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
    * @param index The index of the value to return.
-   * @return The bytes of the messageId at the given index.
+   * @return The bytes of the eventId at the given index.
    */
   public com.google.protobuf.ByteString
-      getMessageIdBytes(int index) {
-    return messageId_.getByteString(index);
+      getEventIdBytes(int index) {
+    return eventId_.getByteString(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -200,8 +200,8 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(roomId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, roomId_);
     }
-    for (int i = 0; i < messageId_.size(); i++) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 3, messageId_.getRaw(i));
+    for (int i = 0; i < eventId_.size(); i++) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 3, eventId_.getRaw(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -220,11 +220,11 @@ private static final long serialVersionUID = 0L;
     }
     {
       int dataSize = 0;
-      for (int i = 0; i < messageId_.size(); i++) {
-        dataSize += computeStringSizeNoTag(messageId_.getRaw(i));
+      for (int i = 0; i < eventId_.size(); i++) {
+        dataSize += computeStringSizeNoTag(eventId_.getRaw(i));
       }
       size += dataSize;
-      size += 1 * getMessageIdList().size();
+      size += 1 * getEventIdList().size();
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -245,8 +245,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getProfileId())) return false;
     if (!getRoomId()
         .equals(other.getRoomId())) return false;
-    if (!getMessageIdList()
-        .equals(other.getMessageIdList())) return false;
+    if (!getEventIdList()
+        .equals(other.getEventIdList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -262,9 +262,9 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getProfileId().hashCode();
     hash = (37 * hash) + ROOM_ID_FIELD_NUMBER;
     hash = (53 * hash) + getRoomId().hashCode();
-    if (getMessageIdCount() > 0) {
-      hash = (37 * hash) + MESSAGE_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getMessageIdList().hashCode();
+    if (getEventIdCount() > 0) {
+      hash = (37 * hash) + EVENT_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getEventIdList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -403,7 +403,7 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       profileId_ = "";
       roomId_ = "";
-      messageId_ =
+      eventId_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
       return this;
     }
@@ -445,8 +445,8 @@ private static final long serialVersionUID = 0L;
         result.roomId_ = roomId_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        messageId_.makeImmutable();
-        result.messageId_ = messageId_;
+        eventId_.makeImmutable();
+        result.eventId_ = eventId_;
       }
     }
 
@@ -472,13 +472,13 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000002;
         onChanged();
       }
-      if (!other.messageId_.isEmpty()) {
-        if (messageId_.isEmpty()) {
-          messageId_ = other.messageId_;
+      if (!other.eventId_.isEmpty()) {
+        if (eventId_.isEmpty()) {
+          eventId_ = other.eventId_;
           bitField0_ |= 0x00000004;
         } else {
-          ensureMessageIdIsMutable();
-          messageId_.addAll(other.messageId_);
+          ensureEventIdIsMutable();
+          eventId_.addAll(other.eventId_);
         }
         onChanged();
       }
@@ -520,8 +520,8 @@ private static final long serialVersionUID = 0L;
             } // case 18
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
-              ensureMessageIdIsMutable();
-              messageId_.add(s);
+              ensureEventIdIsMutable();
+              eventId_.add(s);
               break;
             } // case 26
             default: {
@@ -685,112 +685,112 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private com.google.protobuf.LazyStringArrayList messageId_ =
+    private com.google.protobuf.LazyStringArrayList eventId_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-    private void ensureMessageIdIsMutable() {
-      if (!messageId_.isModifiable()) {
-        messageId_ = new com.google.protobuf.LazyStringArrayList(messageId_);
+    private void ensureEventIdIsMutable() {
+      if (!eventId_.isModifiable()) {
+        eventId_ = new com.google.protobuf.LazyStringArrayList(eventId_);
       }
       bitField0_ |= 0x00000004;
     }
     /**
-     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
-     * @return A list containing the messageId.
+     * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+     * @return A list containing the eventId.
      */
     public com.google.protobuf.ProtocolStringList
-        getMessageIdList() {
-      messageId_.makeImmutable();
-      return messageId_;
+        getEventIdList() {
+      eventId_.makeImmutable();
+      return eventId_;
     }
     /**
-     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
-     * @return The count of messageId.
+     * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+     * @return The count of eventId.
      */
-    public int getMessageIdCount() {
-      return messageId_.size();
+    public int getEventIdCount() {
+      return eventId_.size();
     }
     /**
-     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+     * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @param index The index of the element to return.
-     * @return The messageId at the given index.
+     * @return The eventId at the given index.
      */
-    public java.lang.String getMessageId(int index) {
-      return messageId_.get(index);
+    public java.lang.String getEventId(int index) {
+      return eventId_.get(index);
     }
     /**
-     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+     * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @param index The index of the value to return.
-     * @return The bytes of the messageId at the given index.
+     * @return The bytes of the eventId at the given index.
      */
     public com.google.protobuf.ByteString
-        getMessageIdBytes(int index) {
-      return messageId_.getByteString(index);
+        getEventIdBytes(int index) {
+      return eventId_.getByteString(index);
     }
     /**
-     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+     * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @param index The index to set the value at.
-     * @param value The messageId to set.
+     * @param value The eventId to set.
      * @return This builder for chaining.
      */
-    public Builder setMessageId(
+    public Builder setEventId(
         int index, java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      ensureMessageIdIsMutable();
-      messageId_.set(index, value);
+      ensureEventIdIsMutable();
+      eventId_.set(index, value);
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
-     * @param value The messageId to add.
+     * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+     * @param value The eventId to add.
      * @return This builder for chaining.
      */
-    public Builder addMessageId(
+    public Builder addEventId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      ensureMessageIdIsMutable();
-      messageId_.add(value);
+      ensureEventIdIsMutable();
+      eventId_.add(value);
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
-     * @param values The messageId to add.
+     * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+     * @param values The eventId to add.
      * @return This builder for chaining.
      */
-    public Builder addAllMessageId(
+    public Builder addAllEventId(
         java.lang.Iterable<java.lang.String> values) {
-      ensureMessageIdIsMutable();
+      ensureEventIdIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
-          values, messageId_);
+          values, eventId_);
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
+     * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearMessageId() {
-      messageId_ =
+    public Builder clearEventId() {
+      eventId_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
       bitField0_ = (bitField0_ & ~0x00000004);;
       onChanged();
       return this;
     }
     /**
-     * <code>repeated string message_id = 3 [json_name = "messageId", (.buf.validate.field) = { ... }</code>
-     * @param value The bytes of the messageId to add.
+     * <code>repeated string event_id = 3 [json_name = "eventId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes of the eventId to add.
      * @return This builder for chaining.
      */
-    public Builder addMessageIdBytes(
+    public Builder addEventIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      ensureMessageIdIsMutable();
-      messageId_.add(value);
+      ensureEventIdIsMutable();
+      eventId_.add(value);
       bitField0_ |= 0x00000004;
       onChanged();
       return this;

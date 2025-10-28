@@ -438,7 +438,7 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(senderId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 3, senderId_);
     }
-    if (type_ != com.antinvestor.apis.chat.v1.RoomEventType.MESSAGE_TYPE_UNSPECIFIED.getNumber()) {
+    if (type_ != com.antinvestor.apis.chat.v1.RoomEventType.UNSPECIFIED.getNumber()) {
       output.writeEnum(4, type_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
@@ -477,7 +477,7 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(senderId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(3, senderId_);
     }
-    if (type_ != com.antinvestor.apis.chat.v1.RoomEventType.MESSAGE_TYPE_UNSPECIFIED.getNumber()) {
+    if (type_ != com.antinvestor.apis.chat.v1.RoomEventType.UNSPECIFIED.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(4, type_);
     }

@@ -42,7 +42,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private SendEventRequest() {
-    message_ = java.util.Collections.emptyList();
+    event_ = java.util.Collections.emptyList();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -58,65 +58,65 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.chat.v1.SendEventRequest.class, com.antinvestor.apis.chat.v1.SendEventRequest.Builder.class);
   }
 
-  public static final int MESSAGE_FIELD_NUMBER = 4;
+  public static final int EVENT_FIELD_NUMBER = 4;
   @SuppressWarnings("serial")
-  private java.util.List<com.antinvestor.apis.chat.v1.RoomEvent> message_;
+  private java.util.List<com.antinvestor.apis.chat.v1.RoomEvent> event_;
   /**
    * <pre>
-   * message payload (server will assign final message_id if empty)
+   * message payload (server will assign final event_id if empty)
    * </pre>
    *
-   * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+   * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
    */
   @java.lang.Override
-  public java.util.List<com.antinvestor.apis.chat.v1.RoomEvent> getMessageList() {
-    return message_;
+  public java.util.List<com.antinvestor.apis.chat.v1.RoomEvent> getEventList() {
+    return event_;
   }
   /**
    * <pre>
-   * message payload (server will assign final message_id if empty)
+   * message payload (server will assign final event_id if empty)
    * </pre>
    *
-   * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+   * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
    */
   @java.lang.Override
   public java.util.List<? extends com.antinvestor.apis.chat.v1.RoomEventOrBuilder> 
-      getMessageOrBuilderList() {
-    return message_;
+      getEventOrBuilderList() {
+    return event_;
   }
   /**
    * <pre>
-   * message payload (server will assign final message_id if empty)
+   * message payload (server will assign final event_id if empty)
    * </pre>
    *
-   * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+   * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
    */
   @java.lang.Override
-  public int getMessageCount() {
-    return message_.size();
+  public int getEventCount() {
+    return event_.size();
   }
   /**
    * <pre>
-   * message payload (server will assign final message_id if empty)
+   * message payload (server will assign final event_id if empty)
    * </pre>
    *
-   * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+   * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
    */
   @java.lang.Override
-  public com.antinvestor.apis.chat.v1.RoomEvent getMessage(int index) {
-    return message_.get(index);
+  public com.antinvestor.apis.chat.v1.RoomEvent getEvent(int index) {
+    return event_.get(index);
   }
   /**
    * <pre>
-   * message payload (server will assign final message_id if empty)
+   * message payload (server will assign final event_id if empty)
    * </pre>
    *
-   * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+   * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
    */
   @java.lang.Override
-  public com.antinvestor.apis.chat.v1.RoomEventOrBuilder getMessageOrBuilder(
+  public com.antinvestor.apis.chat.v1.RoomEventOrBuilder getEventOrBuilder(
       int index) {
-    return message_.get(index);
+    return event_.get(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -133,8 +133,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    for (int i = 0; i < message_.size(); i++) {
-      output.writeMessage(4, message_.get(i));
+    for (int i = 0; i < event_.size(); i++) {
+      output.writeMessage(4, event_.get(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -145,9 +145,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    for (int i = 0; i < message_.size(); i++) {
+    for (int i = 0; i < event_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(4, message_.get(i));
+        .computeMessageSize(4, event_.get(i));
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -164,8 +164,8 @@ private static final long serialVersionUID = 0L;
     }
     com.antinvestor.apis.chat.v1.SendEventRequest other = (com.antinvestor.apis.chat.v1.SendEventRequest) obj;
 
-    if (!getMessageList()
-        .equals(other.getMessageList())) return false;
+    if (!getEventList()
+        .equals(other.getEventList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -177,9 +177,9 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (getMessageCount() > 0) {
-      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
-      hash = (53 * hash) + getMessageList().hashCode();
+    if (getEventCount() > 0) {
+      hash = (37 * hash) + EVENT_FIELD_NUMBER;
+      hash = (53 * hash) + getEventList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -312,11 +312,11 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      if (messageBuilder_ == null) {
-        message_ = java.util.Collections.emptyList();
+      if (eventBuilder_ == null) {
+        event_ = java.util.Collections.emptyList();
       } else {
-        message_ = null;
-        messageBuilder_.clear();
+        event_ = null;
+        eventBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000001);
       return this;
@@ -352,14 +352,14 @@ private static final long serialVersionUID = 0L;
     }
 
     private void buildPartialRepeatedFields(com.antinvestor.apis.chat.v1.SendEventRequest result) {
-      if (messageBuilder_ == null) {
+      if (eventBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0)) {
-          message_ = java.util.Collections.unmodifiableList(message_);
+          event_ = java.util.Collections.unmodifiableList(event_);
           bitField0_ = (bitField0_ & ~0x00000001);
         }
-        result.message_ = message_;
+        result.event_ = event_;
       } else {
-        result.message_ = messageBuilder_.build();
+        result.event_ = eventBuilder_.build();
       }
     }
 
@@ -379,29 +379,29 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.antinvestor.apis.chat.v1.SendEventRequest other) {
       if (other == com.antinvestor.apis.chat.v1.SendEventRequest.getDefaultInstance()) return this;
-      if (messageBuilder_ == null) {
-        if (!other.message_.isEmpty()) {
-          if (message_.isEmpty()) {
-            message_ = other.message_;
+      if (eventBuilder_ == null) {
+        if (!other.event_.isEmpty()) {
+          if (event_.isEmpty()) {
+            event_ = other.event_;
             bitField0_ = (bitField0_ & ~0x00000001);
           } else {
-            ensureMessageIsMutable();
-            message_.addAll(other.message_);
+            ensureEventIsMutable();
+            event_.addAll(other.event_);
           }
           onChanged();
         }
       } else {
-        if (!other.message_.isEmpty()) {
-          if (messageBuilder_.isEmpty()) {
-            messageBuilder_.dispose();
-            messageBuilder_ = null;
-            message_ = other.message_;
+        if (!other.event_.isEmpty()) {
+          if (eventBuilder_.isEmpty()) {
+            eventBuilder_.dispose();
+            eventBuilder_ = null;
+            event_ = other.event_;
             bitField0_ = (bitField0_ & ~0x00000001);
-            messageBuilder_ = 
+            eventBuilder_ = 
               com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetMessageFieldBuilder() : null;
+                 internalGetEventFieldBuilder() : null;
           } else {
-            messageBuilder_.addAllMessages(other.message_);
+            eventBuilder_.addAllMessages(other.event_);
           }
         }
       }
@@ -436,11 +436,11 @@ private static final long serialVersionUID = 0L;
                   input.readMessage(
                       com.antinvestor.apis.chat.v1.RoomEvent.parser(),
                       extensionRegistry);
-              if (messageBuilder_ == null) {
-                ensureMessageIsMutable();
-                message_.add(m);
+              if (eventBuilder_ == null) {
+                ensureEventIsMutable();
+                event_.add(m);
               } else {
-                messageBuilder_.addMessage(m);
+                eventBuilder_.addMessage(m);
               }
               break;
             } // case 34
@@ -461,316 +461,316 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.util.List<com.antinvestor.apis.chat.v1.RoomEvent> message_ =
+    private java.util.List<com.antinvestor.apis.chat.v1.RoomEvent> event_ =
       java.util.Collections.emptyList();
-    private void ensureMessageIsMutable() {
+    private void ensureEventIsMutable() {
       if (!((bitField0_ & 0x00000001) != 0)) {
-        message_ = new java.util.ArrayList<com.antinvestor.apis.chat.v1.RoomEvent>(message_);
+        event_ = new java.util.ArrayList<com.antinvestor.apis.chat.v1.RoomEvent>(event_);
         bitField0_ |= 0x00000001;
        }
     }
 
     private com.google.protobuf.RepeatedFieldBuilder<
-        com.antinvestor.apis.chat.v1.RoomEvent, com.antinvestor.apis.chat.v1.RoomEvent.Builder, com.antinvestor.apis.chat.v1.RoomEventOrBuilder> messageBuilder_;
+        com.antinvestor.apis.chat.v1.RoomEvent, com.antinvestor.apis.chat.v1.RoomEvent.Builder, com.antinvestor.apis.chat.v1.RoomEventOrBuilder> eventBuilder_;
 
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public java.util.List<com.antinvestor.apis.chat.v1.RoomEvent> getMessageList() {
-      if (messageBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(message_);
+    public java.util.List<com.antinvestor.apis.chat.v1.RoomEvent> getEventList() {
+      if (eventBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(event_);
       } else {
-        return messageBuilder_.getMessageList();
+        return eventBuilder_.getMessageList();
       }
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public int getMessageCount() {
-      if (messageBuilder_ == null) {
-        return message_.size();
+    public int getEventCount() {
+      if (eventBuilder_ == null) {
+        return event_.size();
       } else {
-        return messageBuilder_.getCount();
+        return eventBuilder_.getCount();
       }
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public com.antinvestor.apis.chat.v1.RoomEvent getMessage(int index) {
-      if (messageBuilder_ == null) {
-        return message_.get(index);
+    public com.antinvestor.apis.chat.v1.RoomEvent getEvent(int index) {
+      if (eventBuilder_ == null) {
+        return event_.get(index);
       } else {
-        return messageBuilder_.getMessage(index);
+        return eventBuilder_.getMessage(index);
       }
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public Builder setMessage(
+    public Builder setEvent(
         int index, com.antinvestor.apis.chat.v1.RoomEvent value) {
-      if (messageBuilder_ == null) {
+      if (eventBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureMessageIsMutable();
-        message_.set(index, value);
+        ensureEventIsMutable();
+        event_.set(index, value);
         onChanged();
       } else {
-        messageBuilder_.setMessage(index, value);
+        eventBuilder_.setMessage(index, value);
       }
       return this;
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public Builder setMessage(
+    public Builder setEvent(
         int index, com.antinvestor.apis.chat.v1.RoomEvent.Builder builderForValue) {
-      if (messageBuilder_ == null) {
-        ensureMessageIsMutable();
-        message_.set(index, builderForValue.build());
+      if (eventBuilder_ == null) {
+        ensureEventIsMutable();
+        event_.set(index, builderForValue.build());
         onChanged();
       } else {
-        messageBuilder_.setMessage(index, builderForValue.build());
+        eventBuilder_.setMessage(index, builderForValue.build());
       }
       return this;
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public Builder addMessage(com.antinvestor.apis.chat.v1.RoomEvent value) {
-      if (messageBuilder_ == null) {
+    public Builder addEvent(com.antinvestor.apis.chat.v1.RoomEvent value) {
+      if (eventBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureMessageIsMutable();
-        message_.add(value);
+        ensureEventIsMutable();
+        event_.add(value);
         onChanged();
       } else {
-        messageBuilder_.addMessage(value);
+        eventBuilder_.addMessage(value);
       }
       return this;
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public Builder addMessage(
+    public Builder addEvent(
         int index, com.antinvestor.apis.chat.v1.RoomEvent value) {
-      if (messageBuilder_ == null) {
+      if (eventBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureMessageIsMutable();
-        message_.add(index, value);
+        ensureEventIsMutable();
+        event_.add(index, value);
         onChanged();
       } else {
-        messageBuilder_.addMessage(index, value);
+        eventBuilder_.addMessage(index, value);
       }
       return this;
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public Builder addMessage(
+    public Builder addEvent(
         com.antinvestor.apis.chat.v1.RoomEvent.Builder builderForValue) {
-      if (messageBuilder_ == null) {
-        ensureMessageIsMutable();
-        message_.add(builderForValue.build());
+      if (eventBuilder_ == null) {
+        ensureEventIsMutable();
+        event_.add(builderForValue.build());
         onChanged();
       } else {
-        messageBuilder_.addMessage(builderForValue.build());
+        eventBuilder_.addMessage(builderForValue.build());
       }
       return this;
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public Builder addMessage(
+    public Builder addEvent(
         int index, com.antinvestor.apis.chat.v1.RoomEvent.Builder builderForValue) {
-      if (messageBuilder_ == null) {
-        ensureMessageIsMutable();
-        message_.add(index, builderForValue.build());
+      if (eventBuilder_ == null) {
+        ensureEventIsMutable();
+        event_.add(index, builderForValue.build());
         onChanged();
       } else {
-        messageBuilder_.addMessage(index, builderForValue.build());
+        eventBuilder_.addMessage(index, builderForValue.build());
       }
       return this;
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public Builder addAllMessage(
+    public Builder addAllEvent(
         java.lang.Iterable<? extends com.antinvestor.apis.chat.v1.RoomEvent> values) {
-      if (messageBuilder_ == null) {
-        ensureMessageIsMutable();
+      if (eventBuilder_ == null) {
+        ensureEventIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, message_);
+            values, event_);
         onChanged();
       } else {
-        messageBuilder_.addAllMessages(values);
+        eventBuilder_.addAllMessages(values);
       }
       return this;
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public Builder clearMessage() {
-      if (messageBuilder_ == null) {
-        message_ = java.util.Collections.emptyList();
+    public Builder clearEvent() {
+      if (eventBuilder_ == null) {
+        event_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
       } else {
-        messageBuilder_.clear();
+        eventBuilder_.clear();
       }
       return this;
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public Builder removeMessage(int index) {
-      if (messageBuilder_ == null) {
-        ensureMessageIsMutable();
-        message_.remove(index);
+    public Builder removeEvent(int index) {
+      if (eventBuilder_ == null) {
+        ensureEventIsMutable();
+        event_.remove(index);
         onChanged();
       } else {
-        messageBuilder_.remove(index);
+        eventBuilder_.remove(index);
       }
       return this;
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public com.antinvestor.apis.chat.v1.RoomEvent.Builder getMessageBuilder(
+    public com.antinvestor.apis.chat.v1.RoomEvent.Builder getEventBuilder(
         int index) {
-      return internalGetMessageFieldBuilder().getBuilder(index);
+      return internalGetEventFieldBuilder().getBuilder(index);
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public com.antinvestor.apis.chat.v1.RoomEventOrBuilder getMessageOrBuilder(
+    public com.antinvestor.apis.chat.v1.RoomEventOrBuilder getEventOrBuilder(
         int index) {
-      if (messageBuilder_ == null) {
-        return message_.get(index);  } else {
-        return messageBuilder_.getMessageOrBuilder(index);
+      if (eventBuilder_ == null) {
+        return event_.get(index);  } else {
+        return eventBuilder_.getMessageOrBuilder(index);
       }
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
     public java.util.List<? extends com.antinvestor.apis.chat.v1.RoomEventOrBuilder> 
-         getMessageOrBuilderList() {
-      if (messageBuilder_ != null) {
-        return messageBuilder_.getMessageOrBuilderList();
+         getEventOrBuilderList() {
+      if (eventBuilder_ != null) {
+        return eventBuilder_.getMessageOrBuilderList();
       } else {
-        return java.util.Collections.unmodifiableList(message_);
+        return java.util.Collections.unmodifiableList(event_);
       }
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public com.antinvestor.apis.chat.v1.RoomEvent.Builder addMessageBuilder() {
-      return internalGetMessageFieldBuilder().addBuilder(
+    public com.antinvestor.apis.chat.v1.RoomEvent.Builder addEventBuilder() {
+      return internalGetEventFieldBuilder().addBuilder(
           com.antinvestor.apis.chat.v1.RoomEvent.getDefaultInstance());
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
-    public com.antinvestor.apis.chat.v1.RoomEvent.Builder addMessageBuilder(
+    public com.antinvestor.apis.chat.v1.RoomEvent.Builder addEventBuilder(
         int index) {
-      return internalGetMessageFieldBuilder().addBuilder(
+      return internalGetEventFieldBuilder().addBuilder(
           index, com.antinvestor.apis.chat.v1.RoomEvent.getDefaultInstance());
     }
     /**
      * <pre>
-     * message payload (server will assign final message_id if empty)
+     * message payload (server will assign final event_id if empty)
      * </pre>
      *
-     * <code>repeated .chat.v1.RoomEvent message = 4 [json_name = "message"];</code>
+     * <code>repeated .chat.v1.RoomEvent event = 4 [json_name = "event"];</code>
      */
     public java.util.List<com.antinvestor.apis.chat.v1.RoomEvent.Builder> 
-         getMessageBuilderList() {
-      return internalGetMessageFieldBuilder().getBuilderList();
+         getEventBuilderList() {
+      return internalGetEventFieldBuilder().getBuilderList();
     }
     private com.google.protobuf.RepeatedFieldBuilder<
         com.antinvestor.apis.chat.v1.RoomEvent, com.antinvestor.apis.chat.v1.RoomEvent.Builder, com.antinvestor.apis.chat.v1.RoomEventOrBuilder> 
-        internalGetMessageFieldBuilder() {
-      if (messageBuilder_ == null) {
-        messageBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+        internalGetEventFieldBuilder() {
+      if (eventBuilder_ == null) {
+        eventBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
             com.antinvestor.apis.chat.v1.RoomEvent, com.antinvestor.apis.chat.v1.RoomEvent.Builder, com.antinvestor.apis.chat.v1.RoomEventOrBuilder>(
-                message_,
+                event_,
                 ((bitField0_ & 0x00000001) != 0),
                 getParentForChildren(),
                 isClean());
-        message_ = null;
+        event_ = null;
       }
-      return messageBuilder_;
+      return eventBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:chat.v1.SendEventRequest)

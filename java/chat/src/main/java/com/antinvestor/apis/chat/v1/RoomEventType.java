@@ -30,61 +30,61 @@ package com.antinvestor.apis.chat.v1;
 public enum RoomEventType
     implements com.google.protobuf.ProtocolMessageEnum {
   /**
-   * <code>MESSAGE_TYPE_UNSPECIFIED = 0;</code>
+   * <code>UNSPECIFIED = 0;</code>
    */
-  MESSAGE_TYPE_UNSPECIFIED(0),
+  UNSPECIFIED(0),
   /**
-   * <code>MESSAGE_TYPE_EVENT = 1;</code>
+   * <code>EVENT = 1;</code>
    */
-  MESSAGE_TYPE_EVENT(1),
+  EVENT(1),
   /**
-   * <code>MESSAGE_TYPE_TEXT = 2;</code>
+   * <code>TEXT = 2;</code>
    */
-  MESSAGE_TYPE_TEXT(2),
+  TEXT(2),
   /**
-   * <code>MESSAGE_TYPE_ATTACHMENT = 3;</code>
+   * <code>ATTACHMENT = 3;</code>
    */
-  MESSAGE_TYPE_ATTACHMENT(3),
+  ATTACHMENT(3),
   /**
-   * <code>MESSAGE_TYPE_REACTION = 7;</code>
+   * <code>REACTION = 7;</code>
    */
-  MESSAGE_TYPE_REACTION(7),
+  REACTION(7),
   /**
    * <pre>
    * opaque ciphertext
    * </pre>
    *
-   * <code>MESSAGE_TYPE_ENCRYPTED = 6;</code>
+   * <code>ENCRYPTED = 6;</code>
    */
-  MESSAGE_TYPE_ENCRYPTED(6),
+  ENCRYPTED(6),
   /**
-   * <code>MESSAGE_TYPE_SYSTEM = 10;</code>
+   * <code>SYSTEM = 10;</code>
    */
-  MESSAGE_TYPE_SYSTEM(10),
+  SYSTEM(10),
   /**
-   * <code>MESSAGE_TYPE_CALL_OFFER = 21;</code>
+   * <code>CALL_OFFER = 21;</code>
    */
-  MESSAGE_TYPE_CALL_OFFER(21),
+  CALL_OFFER(21),
   /**
-   * <code>MESSAGE_TYPE_CALL_ANSWER = 22;</code>
+   * <code>CALL_ANSWER = 22;</code>
    */
-  MESSAGE_TYPE_CALL_ANSWER(22),
+  CALL_ANSWER(22),
   /**
-   * <code>MESSAGE_TYPE_CALL_ICE = 23;</code>
+   * <code>CALL_ICE = 23;</code>
    */
-  MESSAGE_TYPE_CALL_ICE(23),
+  CALL_ICE(23),
   /**
-   * <code>MESSAGE_TYPE_CALL_END = 24;</code>
+   * <code>CALL_END = 24;</code>
    */
-  MESSAGE_TYPE_CALL_END(24),
+  CALL_END(24),
   /**
    * <pre>
    * vendor/app specific; metadata must indicate schema
    * </pre>
    *
-   * <code>MESSAGE_TYPE_CUSTOM = 100;</code>
+   * <code>CUSTOM = 100;</code>
    */
-  MESSAGE_TYPE_CUSTOM(100),
+  CUSTOM(100),
   UNRECOGNIZED(-1),
   ;
 
@@ -98,61 +98,61 @@ public enum RoomEventType
       "RoomEventType");
   }
   /**
-   * <code>MESSAGE_TYPE_UNSPECIFIED = 0;</code>
+   * <code>UNSPECIFIED = 0;</code>
    */
-  public static final int MESSAGE_TYPE_UNSPECIFIED_VALUE = 0;
+  public static final int UNSPECIFIED_VALUE = 0;
   /**
-   * <code>MESSAGE_TYPE_EVENT = 1;</code>
+   * <code>EVENT = 1;</code>
    */
-  public static final int MESSAGE_TYPE_EVENT_VALUE = 1;
+  public static final int EVENT_VALUE = 1;
   /**
-   * <code>MESSAGE_TYPE_TEXT = 2;</code>
+   * <code>TEXT = 2;</code>
    */
-  public static final int MESSAGE_TYPE_TEXT_VALUE = 2;
+  public static final int TEXT_VALUE = 2;
   /**
-   * <code>MESSAGE_TYPE_ATTACHMENT = 3;</code>
+   * <code>ATTACHMENT = 3;</code>
    */
-  public static final int MESSAGE_TYPE_ATTACHMENT_VALUE = 3;
+  public static final int ATTACHMENT_VALUE = 3;
   /**
-   * <code>MESSAGE_TYPE_REACTION = 7;</code>
+   * <code>REACTION = 7;</code>
    */
-  public static final int MESSAGE_TYPE_REACTION_VALUE = 7;
+  public static final int REACTION_VALUE = 7;
   /**
    * <pre>
    * opaque ciphertext
    * </pre>
    *
-   * <code>MESSAGE_TYPE_ENCRYPTED = 6;</code>
+   * <code>ENCRYPTED = 6;</code>
    */
-  public static final int MESSAGE_TYPE_ENCRYPTED_VALUE = 6;
+  public static final int ENCRYPTED_VALUE = 6;
   /**
-   * <code>MESSAGE_TYPE_SYSTEM = 10;</code>
+   * <code>SYSTEM = 10;</code>
    */
-  public static final int MESSAGE_TYPE_SYSTEM_VALUE = 10;
+  public static final int SYSTEM_VALUE = 10;
   /**
-   * <code>MESSAGE_TYPE_CALL_OFFER = 21;</code>
+   * <code>CALL_OFFER = 21;</code>
    */
-  public static final int MESSAGE_TYPE_CALL_OFFER_VALUE = 21;
+  public static final int CALL_OFFER_VALUE = 21;
   /**
-   * <code>MESSAGE_TYPE_CALL_ANSWER = 22;</code>
+   * <code>CALL_ANSWER = 22;</code>
    */
-  public static final int MESSAGE_TYPE_CALL_ANSWER_VALUE = 22;
+  public static final int CALL_ANSWER_VALUE = 22;
   /**
-   * <code>MESSAGE_TYPE_CALL_ICE = 23;</code>
+   * <code>CALL_ICE = 23;</code>
    */
-  public static final int MESSAGE_TYPE_CALL_ICE_VALUE = 23;
+  public static final int CALL_ICE_VALUE = 23;
   /**
-   * <code>MESSAGE_TYPE_CALL_END = 24;</code>
+   * <code>CALL_END = 24;</code>
    */
-  public static final int MESSAGE_TYPE_CALL_END_VALUE = 24;
+  public static final int CALL_END_VALUE = 24;
   /**
    * <pre>
    * vendor/app specific; metadata must indicate schema
    * </pre>
    *
-   * <code>MESSAGE_TYPE_CUSTOM = 100;</code>
+   * <code>CUSTOM = 100;</code>
    */
-  public static final int MESSAGE_TYPE_CUSTOM_VALUE = 100;
+  public static final int CUSTOM_VALUE = 100;
 
 
   public final int getNumber() {
@@ -179,18 +179,18 @@ public enum RoomEventType
    */
   public static RoomEventType forNumber(int value) {
     switch (value) {
-      case 0: return MESSAGE_TYPE_UNSPECIFIED;
-      case 1: return MESSAGE_TYPE_EVENT;
-      case 2: return MESSAGE_TYPE_TEXT;
-      case 3: return MESSAGE_TYPE_ATTACHMENT;
-      case 7: return MESSAGE_TYPE_REACTION;
-      case 6: return MESSAGE_TYPE_ENCRYPTED;
-      case 10: return MESSAGE_TYPE_SYSTEM;
-      case 21: return MESSAGE_TYPE_CALL_OFFER;
-      case 22: return MESSAGE_TYPE_CALL_ANSWER;
-      case 23: return MESSAGE_TYPE_CALL_ICE;
-      case 24: return MESSAGE_TYPE_CALL_END;
-      case 100: return MESSAGE_TYPE_CUSTOM;
+      case 0: return UNSPECIFIED;
+      case 1: return EVENT;
+      case 2: return TEXT;
+      case 3: return ATTACHMENT;
+      case 7: return REACTION;
+      case 6: return ENCRYPTED;
+      case 10: return SYSTEM;
+      case 21: return CALL_OFFER;
+      case 22: return CALL_ANSWER;
+      case 23: return CALL_ICE;
+      case 24: return CALL_END;
+      case 100: return CUSTOM;
       default: return null;
     }
   }

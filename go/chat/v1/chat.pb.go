@@ -45,49 +45,49 @@ const (
 type RoomEventType int32
 
 const (
-	RoomEventType_MESSAGE_TYPE_UNSPECIFIED RoomEventType = 0
-	RoomEventType_MESSAGE_TYPE_EVENT       RoomEventType = 1
-	RoomEventType_MESSAGE_TYPE_TEXT        RoomEventType = 2
-	RoomEventType_MESSAGE_TYPE_ATTACHMENT  RoomEventType = 3
-	RoomEventType_MESSAGE_TYPE_REACTION    RoomEventType = 7
-	RoomEventType_MESSAGE_TYPE_ENCRYPTED   RoomEventType = 6 // opaque ciphertext
-	RoomEventType_MESSAGE_TYPE_SYSTEM      RoomEventType = 10
-	RoomEventType_MESSAGE_TYPE_CALL_OFFER  RoomEventType = 21
-	RoomEventType_MESSAGE_TYPE_CALL_ANSWER RoomEventType = 22
-	RoomEventType_MESSAGE_TYPE_CALL_ICE    RoomEventType = 23
-	RoomEventType_MESSAGE_TYPE_CALL_END    RoomEventType = 24
-	RoomEventType_MESSAGE_TYPE_CUSTOM      RoomEventType = 100 // vendor/app specific; metadata must indicate schema
+	RoomEventType_UNSPECIFIED RoomEventType = 0
+	RoomEventType_EVENT       RoomEventType = 1
+	RoomEventType_TEXT        RoomEventType = 2
+	RoomEventType_ATTACHMENT  RoomEventType = 3
+	RoomEventType_REACTION    RoomEventType = 7
+	RoomEventType_ENCRYPTED   RoomEventType = 6 // opaque ciphertext
+	RoomEventType_SYSTEM      RoomEventType = 10
+	RoomEventType_CALL_OFFER  RoomEventType = 21
+	RoomEventType_CALL_ANSWER RoomEventType = 22
+	RoomEventType_CALL_ICE    RoomEventType = 23
+	RoomEventType_CALL_END    RoomEventType = 24
+	RoomEventType_CUSTOM      RoomEventType = 100 // vendor/app specific; metadata must indicate schema
 )
 
 // Enum value maps for RoomEventType.
 var (
 	RoomEventType_name = map[int32]string{
-		0:   "MESSAGE_TYPE_UNSPECIFIED",
-		1:   "MESSAGE_TYPE_EVENT",
-		2:   "MESSAGE_TYPE_TEXT",
-		3:   "MESSAGE_TYPE_ATTACHMENT",
-		7:   "MESSAGE_TYPE_REACTION",
-		6:   "MESSAGE_TYPE_ENCRYPTED",
-		10:  "MESSAGE_TYPE_SYSTEM",
-		21:  "MESSAGE_TYPE_CALL_OFFER",
-		22:  "MESSAGE_TYPE_CALL_ANSWER",
-		23:  "MESSAGE_TYPE_CALL_ICE",
-		24:  "MESSAGE_TYPE_CALL_END",
-		100: "MESSAGE_TYPE_CUSTOM",
+		0:   "UNSPECIFIED",
+		1:   "EVENT",
+		2:   "TEXT",
+		3:   "ATTACHMENT",
+		7:   "REACTION",
+		6:   "ENCRYPTED",
+		10:  "SYSTEM",
+		21:  "CALL_OFFER",
+		22:  "CALL_ANSWER",
+		23:  "CALL_ICE",
+		24:  "CALL_END",
+		100: "CUSTOM",
 	}
 	RoomEventType_value = map[string]int32{
-		"MESSAGE_TYPE_UNSPECIFIED": 0,
-		"MESSAGE_TYPE_EVENT":       1,
-		"MESSAGE_TYPE_TEXT":        2,
-		"MESSAGE_TYPE_ATTACHMENT":  3,
-		"MESSAGE_TYPE_REACTION":    7,
-		"MESSAGE_TYPE_ENCRYPTED":   6,
-		"MESSAGE_TYPE_SYSTEM":      10,
-		"MESSAGE_TYPE_CALL_OFFER":  21,
-		"MESSAGE_TYPE_CALL_ANSWER": 22,
-		"MESSAGE_TYPE_CALL_ICE":    23,
-		"MESSAGE_TYPE_CALL_END":    24,
-		"MESSAGE_TYPE_CUSTOM":      100,
+		"UNSPECIFIED": 0,
+		"EVENT":       1,
+		"TEXT":        2,
+		"ATTACHMENT":  3,
+		"REACTION":    7,
+		"ENCRYPTED":   6,
+		"SYSTEM":      10,
+		"CALL_OFFER":  21,
+		"CALL_ANSWER": 22,
+		"CALL_ICE":    23,
+		"CALL_END":    24,
+		"CUSTOM":      100,
 	}
 )
 
@@ -121,28 +121,22 @@ func (RoomEventType) EnumDescriptor() ([]byte, []int) {
 type PresenceStatus int32
 
 const (
-	PresenceStatus_PRESENCE_UNKNOWN PresenceStatus = 0
-	PresenceStatus_PRESENCE_OFFLINE PresenceStatus = 1
-	PresenceStatus_PRESENCE_ONLINE  PresenceStatus = 2
-	PresenceStatus_PRESENCE_AWAY    PresenceStatus = 3
-	PresenceStatus_PRESENCE_BUSY    PresenceStatus = 4
+	PresenceStatus_UNKNOWN PresenceStatus = 0
+	PresenceStatus_OFFLINE PresenceStatus = 1
+	PresenceStatus_ONLINE  PresenceStatus = 2
 )
 
 // Enum value maps for PresenceStatus.
 var (
 	PresenceStatus_name = map[int32]string{
-		0: "PRESENCE_UNKNOWN",
-		1: "PRESENCE_OFFLINE",
-		2: "PRESENCE_ONLINE",
-		3: "PRESENCE_AWAY",
-		4: "PRESENCE_BUSY",
+		0: "UNKNOWN",
+		1: "OFFLINE",
+		2: "ONLINE",
 	}
 	PresenceStatus_value = map[string]int32{
-		"PRESENCE_UNKNOWN": 0,
-		"PRESENCE_OFFLINE": 1,
-		"PRESENCE_ONLINE":  2,
-		"PRESENCE_AWAY":    3,
-		"PRESENCE_BUSY":    4,
+		"UNKNOWN": 0,
+		"OFFLINE": 1,
+		"ONLINE":  2,
 	}
 )
 
@@ -440,7 +434,7 @@ func (x *RoomEvent) GetType() RoomEventType {
 	if x != nil {
 		return x.Type
 	}
-	return RoomEventType_MESSAGE_TYPE_UNSPECIFIED
+	return RoomEventType_UNSPECIFIED
 }
 
 func (x *RoomEvent) GetPayload() *structpb.Struct {
@@ -537,7 +531,7 @@ func (x *PresenceEvent) GetStatus() PresenceStatus {
 	if x != nil {
 		return x.Status
 	}
-	return PresenceStatus_PRESENCE_UNKNOWN
+	return PresenceStatus_UNKNOWN
 }
 
 func (x *PresenceEvent) GetStatusMsg() string {
@@ -559,7 +553,7 @@ type ReceiptEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ProfileId     string                 `protobuf:"bytes,1,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`
 	RoomId        string                 `protobuf:"bytes,2,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
-	MessageId     []string               `protobuf:"bytes,3,rep,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	EventId       []string               `protobuf:"bytes,3,rep,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -608,9 +602,9 @@ func (x *ReceiptEvent) GetRoomId() string {
 	return ""
 }
 
-func (x *ReceiptEvent) GetMessageId() []string {
+func (x *ReceiptEvent) GetEventId() []string {
 	if x != nil {
-		return x.MessageId
+		return x.EventId
 	}
 	return nil
 }
@@ -869,7 +863,8 @@ func (*ConnectRequest_StateUpdate) isConnectRequest_Payload() {}
 // If error is set, indicates the event failed to send/process correctly.
 type StreamAck struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	EventId       string                 `protobuf:"bytes,1,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
+	RoomId        string                 `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+	EventId       string                 `protobuf:"bytes,2,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
 	AckAt         *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=ack_at,json=ackAt,proto3" json:"ack_at,omitempty"`
 	Metadata      *structpb.Struct       `protobuf:"bytes,6,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	Error         *v1.ErrorDetail        `protobuf:"bytes,7,opt,name=error,proto3,oneof" json:"error,omitempty"` // if set, indicates failure reason for this event
@@ -905,6 +900,13 @@ func (x *StreamAck) ProtoReflect() protoreflect.Message {
 // Deprecated: Use StreamAck.ProtoReflect.Descriptor instead.
 func (*StreamAck) Descriptor() ([]byte, []int) {
 	return file_chat_v1_chat_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *StreamAck) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
 }
 
 func (x *StreamAck) GetEventId() string {
@@ -1068,7 +1070,7 @@ func (*ClientState_Presence) isClientState_State() {}
 
 type SendEventRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Message       []*RoomEvent           `protobuf:"bytes,4,rep,name=message,proto3" json:"message,omitempty"` // message payload (server will assign final message_id if empty)
+	Event         []*RoomEvent           `protobuf:"bytes,4,rep,name=event,proto3" json:"event,omitempty"` // message payload (server will assign final event_id if empty)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1103,9 +1105,9 @@ func (*SendEventRequest) Descriptor() ([]byte, []int) {
 	return file_chat_v1_chat_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *SendEventRequest) GetMessage() []*RoomEvent {
+func (x *SendEventRequest) GetEvent() []*RoomEvent {
 	if x != nil {
-		return x.Message
+		return x.Event
 	}
 	return nil
 }
@@ -2640,13 +2642,12 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\n" +
 	"status_msg\x18\x03 \x01(\tR\tstatusMsg\x12;\n" +
 	"\vlast_active\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"lastActive\"\xbc\x01\n" +
+	"lastActive\"\xb8\x01\n" +
 	"\fReceiptEvent\x12:\n" +
 	"\n" +
 	"profile_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tprofileId\x124\n" +
-	"\aroom_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06roomId\x12:\n" +
-	"\n" +
-	"message_id\x18\x03 \x03(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tmessageId\"\xc0\x01\n" +
+	"\aroom_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06roomId\x126\n" +
+	"\bevent_id\x18\x03 \x03(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\aeventId\"\xc0\x01\n" +
 	"\n" +
 	"ReadMarker\x124\n" +
 	"\aroom_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06roomId\x12:\n" +
@@ -2669,9 +2670,10 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\x03ack\x18\n" +
 	" \x01(\v2\x12.chat.v1.StreamAckH\x00R\x03ack\x128\n" +
 	"\vstateUpdate\x18\f \x01(\v2\x14.chat.v1.ClientStateH\x00R\vstateUpdateB\t\n" +
-	"\apayload\"\xe8\x01\n" +
-	"\tStreamAck\x126\n" +
-	"\bevent_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\aeventId\x121\n" +
+	"\apayload\"\x9e\x02\n" +
+	"\tStreamAck\x124\n" +
+	"\aroom_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06roomId\x126\n" +
+	"\bevent_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\aeventId\x121\n" +
 	"\x06ack_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x05ackAt\x123\n" +
 	"\bmetadata\x18\x06 \x01(\v2\x17.google.protobuf.StructR\bmetadata\x121\n" +
 	"\x05error\x18\a \x01(\v2\x16.common.v1.ErrorDetailH\x00R\x05error\x88\x01\x01B\b\n" +
@@ -2684,9 +2686,9 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\n" +
 	"room_event\x18\x01 \x01(\v2\x12.chat.v1.RoomEventH\x00R\troomEvent\x124\n" +
 	"\bpresence\x18\x05 \x01(\v2\x16.chat.v1.PresenceEventH\x00R\bpresenceB\a\n" +
-	"\x05state\"@\n" +
-	"\x10SendEventRequest\x12,\n" +
-	"\amessage\x18\x04 \x03(\v2\x12.chat.v1.RoomEventR\amessage\"9\n" +
+	"\x05state\"<\n" +
+	"\x10SendEventRequest\x12(\n" +
+	"\x05event\x18\x04 \x03(\v2\x12.chat.v1.RoomEventR\x05event\"9\n" +
 	"\x11SendEventResponse\x12$\n" +
 	"\x03ack\x18\x01 \x03(\v2\x12.chat.v1.StreamAckR\x03ack\"t\n" +
 	"\x11GetHistoryRequest\x12\x17\n" +
@@ -2699,10 +2701,11 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\vnext_cursor\x18\x02 \x01(\tR\n" +
 	"nextCursor\x12\x1f\n" +
 	"\vprev_cursor\x18\x03 \x01(\tR\n" +
-	"prevCursor\"\xd2\x02\n" +
+	"prevCursor\"\xde\x02\n" +
 	"\x04Room\x12+\n" +
-	"\x02id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\x02id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1e\n" +
+	"\x04name\x18\x03 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x02\x18\xc8\x01R\x04name\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1d\n" +
 	"\n" +
 	"is_private\x18\x05 \x01(\bR\tisPrivate\x123\n" +
@@ -2712,10 +2715,11 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x1d\n" +
 	"\n" +
-	"creator_id\x18\t \x01(\tR\tcreatorId\"\xe4\x01\n" +
+	"creator_id\x18\t \x01(\tR\tcreatorId\"\xf0\x01\n" +
 	"\x11CreateRoomRequest\x12+\n" +
-	"\x02id\x18\x03 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
+	"\x02id\x18\x03 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x12\x1e\n" +
+	"\x04name\x18\x04 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x02\x18\xc8\x01R\x04name\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1d\n" +
 	"\n" +
 	"is_private\x18\x06 \x01(\bR\tisPrivate\x12\x18\n" +
@@ -2805,27 +2809,30 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\x1dCLIENT_STATE_TYPE_READ_MARKER\x10\x01\"i\n" +
 	"\x16GetClientStateResponse\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x126\n" +
-	"\vclientState\x18\x02 \x03(\v2\x14.chat.v1.ClientStateR\vclientState*\xd3\x02\n" +
-	"\rRoomEventType\x12\x1c\n" +
-	"\x18MESSAGE_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
-	"\x12MESSAGE_TYPE_EVENT\x10\x01\x12\x15\n" +
-	"\x11MESSAGE_TYPE_TEXT\x10\x02\x12\x1b\n" +
-	"\x17MESSAGE_TYPE_ATTACHMENT\x10\x03\x12\x19\n" +
-	"\x15MESSAGE_TYPE_REACTION\x10\a\x12\x1a\n" +
-	"\x16MESSAGE_TYPE_ENCRYPTED\x10\x06\x12\x17\n" +
-	"\x13MESSAGE_TYPE_SYSTEM\x10\n" +
-	"\x12\x1b\n" +
-	"\x17MESSAGE_TYPE_CALL_OFFER\x10\x15\x12\x1c\n" +
-	"\x18MESSAGE_TYPE_CALL_ANSWER\x10\x16\x12\x19\n" +
-	"\x15MESSAGE_TYPE_CALL_ICE\x10\x17\x12\x19\n" +
-	"\x15MESSAGE_TYPE_CALL_END\x10\x18\x12\x17\n" +
-	"\x13MESSAGE_TYPE_CUSTOM\x10d*w\n" +
-	"\x0ePresenceStatus\x12\x14\n" +
-	"\x10PRESENCE_UNKNOWN\x10\x00\x12\x14\n" +
-	"\x10PRESENCE_OFFLINE\x10\x01\x12\x13\n" +
-	"\x0fPRESENCE_ONLINE\x10\x02\x12\x11\n" +
-	"\rPRESENCE_AWAY\x10\x03\x12\x11\n" +
-	"\rPRESENCE_BUSY\x10\x042\x82\x03\n" +
+	"\vclientState\x18\x02 \x03(\v2\x14.chat.v1.ClientStateR\vclientState*\xb7\x01\n" +
+	"\rRoomEventType\x12\x0f\n" +
+	"\vUNSPECIFIED\x10\x00\x12\t\n" +
+	"\x05EVENT\x10\x01\x12\b\n" +
+	"\x04TEXT\x10\x02\x12\x0e\n" +
+	"\n" +
+	"ATTACHMENT\x10\x03\x12\f\n" +
+	"\bREACTION\x10\a\x12\r\n" +
+	"\tENCRYPTED\x10\x06\x12\n" +
+	"\n" +
+	"\x06SYSTEM\x10\n" +
+	"\x12\x0e\n" +
+	"\n" +
+	"CALL_OFFER\x10\x15\x12\x0f\n" +
+	"\vCALL_ANSWER\x10\x16\x12\f\n" +
+	"\bCALL_ICE\x10\x17\x12\f\n" +
+	"\bCALL_END\x10\x18\x12\n" +
+	"\n" +
+	"\x06CUSTOM\x10d*6\n" +
+	"\x0ePresenceStatus\x12\v\n" +
+	"\aUNKNOWN\x10\x00\x12\v\n" +
+	"\aOFFLINE\x10\x01\x12\n" +
+	"\n" +
+	"\x06ONLINE\x10\x022\x82\x03\n" +
 	"\x0eGatewayService\x12\xef\x02\n" +
 	"\aConnect\x12\x17.chat.v1.ConnectRequest\x1a\x14.chat.v1.ServerEvent\"\xb0\x02\xbaG\xac\x02\n" +
 	"\tReal-time\x12-Establish bi-directional streaming connection\x1a\xe6\x01Opens a persistent bi-directional stream for real-time chat events. Clients send ConnectRequest messages (auth, acks, commands) and receive ServerEvent messages in chronological order. Supports session resumption via resume_token.*\aconnect(\x010\x012\xdf\x1a\n" +
@@ -2952,7 +2959,7 @@ var file_chat_v1_chat_proto_depIdxs = []int32{
 	7,  // 19: chat.v1.ClientState.read_marker:type_name -> chat.v1.ReadMarker
 	4,  // 20: chat.v1.ClientState.room_event:type_name -> chat.v1.RoomEvent
 	5,  // 21: chat.v1.ClientState.presence:type_name -> chat.v1.PresenceEvent
-	4,  // 22: chat.v1.SendEventRequest.message:type_name -> chat.v1.RoomEvent
+	4,  // 22: chat.v1.SendEventRequest.event:type_name -> chat.v1.RoomEvent
 	10, // 23: chat.v1.SendEventResponse.ack:type_name -> chat.v1.StreamAck
 	3,  // 24: chat.v1.GetHistoryResponse.events:type_name -> chat.v1.ServerEvent
 	39, // 25: chat.v1.Room.metadata:type_name -> google.protobuf.Struct

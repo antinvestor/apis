@@ -26,25 +26,17 @@ package com.antinvestor.apis.chat.v1;
 public enum PresenceStatus
     implements com.google.protobuf.ProtocolMessageEnum {
   /**
-   * <code>PRESENCE_UNKNOWN = 0;</code>
+   * <code>UNKNOWN = 0;</code>
    */
-  PRESENCE_UNKNOWN(0),
+  UNKNOWN(0),
   /**
-   * <code>PRESENCE_OFFLINE = 1;</code>
+   * <code>OFFLINE = 1;</code>
    */
-  PRESENCE_OFFLINE(1),
+  OFFLINE(1),
   /**
-   * <code>PRESENCE_ONLINE = 2;</code>
+   * <code>ONLINE = 2;</code>
    */
-  PRESENCE_ONLINE(2),
-  /**
-   * <code>PRESENCE_AWAY = 3;</code>
-   */
-  PRESENCE_AWAY(3),
-  /**
-   * <code>PRESENCE_BUSY = 4;</code>
-   */
-  PRESENCE_BUSY(4),
+  ONLINE(2),
   UNRECOGNIZED(-1),
   ;
 
@@ -58,25 +50,17 @@ public enum PresenceStatus
       "PresenceStatus");
   }
   /**
-   * <code>PRESENCE_UNKNOWN = 0;</code>
+   * <code>UNKNOWN = 0;</code>
    */
-  public static final int PRESENCE_UNKNOWN_VALUE = 0;
+  public static final int UNKNOWN_VALUE = 0;
   /**
-   * <code>PRESENCE_OFFLINE = 1;</code>
+   * <code>OFFLINE = 1;</code>
    */
-  public static final int PRESENCE_OFFLINE_VALUE = 1;
+  public static final int OFFLINE_VALUE = 1;
   /**
-   * <code>PRESENCE_ONLINE = 2;</code>
+   * <code>ONLINE = 2;</code>
    */
-  public static final int PRESENCE_ONLINE_VALUE = 2;
-  /**
-   * <code>PRESENCE_AWAY = 3;</code>
-   */
-  public static final int PRESENCE_AWAY_VALUE = 3;
-  /**
-   * <code>PRESENCE_BUSY = 4;</code>
-   */
-  public static final int PRESENCE_BUSY_VALUE = 4;
+  public static final int ONLINE_VALUE = 2;
 
 
   public final int getNumber() {
@@ -103,11 +87,9 @@ public enum PresenceStatus
    */
   public static PresenceStatus forNumber(int value) {
     switch (value) {
-      case 0: return PRESENCE_UNKNOWN;
-      case 1: return PRESENCE_OFFLINE;
-      case 2: return PRESENCE_ONLINE;
-      case 3: return PRESENCE_AWAY;
-      case 4: return PRESENCE_BUSY;
+      case 0: return UNKNOWN;
+      case 1: return OFFLINE;
+      case 2: return ONLINE;
       default: return null;
     }
   }

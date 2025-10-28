@@ -77,20 +77,40 @@ jobs:
     needs: detect-changes
     if: needs.detect-changes.outputs.matrix != '{"include":[]}'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
     
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
         with:
-          fetch-depth: 1
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch tags
+        run: git fetch --tags --force
 
       - name: Get Release Version
         id: release-version
         run: |
+          
+          # Get the most recent tag that matches the module
+          TAGS=$(git tag --sort=-creatordate | grep "^v" | head -n 1)
+          echo "Found tag: $TAGS"
+          if [[ -z "$TAGS" ]]; then
+            echo "not_enough_tags=true" >> $GITHUB_OUTPUT
+            echo "No tags found"
+          else
+            LATEST_TAG=$(echo "$TAGS" | head -n 1)
+            echo "latest_tag=$LATEST_TAG" >> $GITHUB_ENV
+            echo "not_enough_tags=false" >> $GITHUB_OUTPUT
+          fi
+          
           # Fetch the latest release (draft or published)
           LATEST_RELEASE=$(gh release list --limit 1 --json tagName,isDraft --jq '.[0] | .tagName')
           
@@ -134,39 +154,41 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          configuration: |
+          fromTag: ${{ env.latest_tag }}
+          toTag: ${{ github.event.pull_request.head.sha }}
+          includeOnlyPaths: |
+            ${{ matrix.language }}/${{ matrix.package }}/
+          ignorePreReleases: "false"
+          configurationJson: |
             {
-              "reference": "",  # Empty means compare with previous tag
-              "nextVersion": "${{ steps.release-version.outputs.version }}",
+              "template": "#{{CHANGELOG}}",
               "categories": [
                 {
-                  "title": "## 🚀 Features",
-                  "labels": ["feature", "enhancement"]
+                    "title": "## Feature",
+                    "labels": ["feat", "feature"]
                 },
                 {
-                  "title": "## 🐛 Bug Fixes",
-                  "labels": ["bug", "bugfix"]
+                    "title": "## Fix",
+                    "labels": ["fix", "bug"]
                 },
                 {
-                  "title": "## 📚 Documentation",
-                  "labels": ["documentation", "docs"]
-                },
-                {
-                  "title": "## 🔧 Maintenance",
-                  "labels": ["chore", "refactor", "ci", "test"]
+                    "title": "## Other",
+                    "labels": []
                 }
               ],
-              "includeLabels": ["*"],
-              "excludeLabels": ["skip-changelog"],
-              "sort": "DESC"
+              "label_extractor": [
+                {
+                  "pattern": "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\\([\\w\\-\\.]+\\))?(!)?: ([\\w ])+([\\s\\S]*)",
+                  "on_property": "title",
+                  "target": "$1"
+                }
+              ]
             }
-          configurationPath: ""
-          output: "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
-          outputMode: "prepend"
+          outputFile: "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Display Changelog for ${{ matrix.language }}/${{ matrix.package }}
-        if: steps.changelog.outputs.changes == 'true'
+        if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != ''
         run: |
           echo "## 📝 Changelog for ${{ matrix.language }}/${{ matrix.package }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -175,7 +197,7 @@ jobs:
           echo "*[View full changelog](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}/${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md)*" >> $GITHUB_STEP_SUMMARY
 
       - name: Update pubspec.yaml version for Dart
-        if: steps.changelog.outputs.changes == 'true' && matrix.language == 'dart'
+        if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != '' && matrix.language == 'dart'
         run: |
           VERSION="${{ steps.release-version.outputs.version }}"
           PUBSPEC_FILE="${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml"
@@ -196,16 +218,37 @@ jobs:
           fi
 
       - name: Commit Changelog
-        if: steps.changelog.outputs.changes == 'true'
+        if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != '' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false)
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          BRANCH="${GITHUB_HEAD_REF:-$(git rev-parse --abbrev-ref HEAD)}"
+          # Ensure we are up to date with the remote to avoid non-fast-forward issues
+          git fetch origin "$BRANCH"
+          git config --global pull.rebase true
+          git pull --rebase origin "$BRANCH" || true
+
           git add "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
-          
+
           # Add pubspec.yaml if it exists and was modified (for Dart packages)
           if [ -f "${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml" ]; then
             git add "${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml" 2>/dev/null || true
           fi
-          
+
+          # Create commit if there are staged changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit. Skipping push."
+            exit 0
+          fi
+
           git commit -m "chore(${{ matrix.package }}): update changelog and version to v${{ steps.release-version.outputs.version }}"
-          git push
+
+          # Try pushing; if non-fast-forward, rebase again and retry with lease
+          if git push origin "$BRANCH"; then
+            echo "Push succeeded."
+          else
+            echo "Initial push failed. Attempting rebase and retry..."
+            git fetch origin "$BRANCH"
+            git rebase "origin/$BRANCH" || true
+            git push origin "$BRANCH" || git push --force-with-lease origin "$BRANCH"
+          fi
