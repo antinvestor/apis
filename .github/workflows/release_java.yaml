@@ -43,29 +43,18 @@ jobs:
       - name: Get the latest tag
         id: get_tags
         run: |
-          # Get all tags sorted by creation date (newest first)
-          ALL_TAGS=$(git tag --sort=-creatordate | grep "^v" || true)
-          echo "All tags found: $ALL_TAGS"
-          
-          if [[ -z "$ALL_TAGS" ]]; then
+          # Get the most recent tag that matches the module
+          TAGS=$(git tag --sort=-creatordate | grep "^java/${{ matrix.api_module }}/v" | head -n 1)
+          echo "Found tag: $TAGS"
+          if [[ -z "$TAGS" ]]; then
             echo "not_enough_tags=true" >> $GITHUB_OUTPUT
-            echo "No tags found for repository."
+            echo "No tags found for java/${{ matrix.api_module }}."
           else
-            LATEST_TAG=$(echo "$ALL_TAGS" | head -n 1)
-            SECOND_LATEST_TAG=$(echo "$ALL_TAGS" | sed -n '2p')
-            
+            LATEST_TAG=$(echo "$TAGS" | head -n 1)
+            SECOND_LATEST_TAG=$(echo "$TAGS" | sed -n '2p')
             echo "latest_tag=$LATEST_TAG" >> $GITHUB_ENV
-            echo "Latest tag: $LATEST_TAG"
-            
-            if [[ -z "$SECOND_LATEST_TAG" ]]; then
-              echo "second_latest_tag=" >> $GITHUB_ENV
-              echo "not_enough_tags=true" >> $GITHUB_OUTPUT
-              echo "Only one tag found, will publish all modules."
-            else
-              echo "second_latest_tag=$SECOND_LATEST_TAG" >> $GITHUB_ENV
-              echo "Second latest tag: $SECOND_LATEST_TAG"
-              echo "not_enough_tags=false" >> $GITHUB_OUTPUT
-            fi
+            echo "second_latest_tag=$SECOND_LATEST_TAG" >> $GITHUB_ENV
+            echo "not_enough_tags=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Check for changes since the last tag
@@ -81,8 +70,17 @@ jobs:
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
+
+      - uses: rickstaa/action-create-tag@v1
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.java_module_changed.outputs.changed == 'true'
+        id: "tag_create"
+        with:
+          tag: java/${{ matrix.api_module }}/${{github.ref_name}}
+          tag_exists_error: false
+          message: "release module java/${{ matrix.api_module }}/${{github.ref_name}}"
+
       - name: Run publish action
-        #if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.java_module_changed.outputs.changed == 'true'
+        if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.java_module_changed.outputs.changed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: java

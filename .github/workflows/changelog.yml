@@ -91,6 +91,19 @@ jobs:
       - name: Get Release Version
         id: release-version
         run: |
+          
+          # Get the most recent tag that matches the module
+          TAGS=$(git tag --sort=-creatordate | grep "^${{ matrix.language }}/${{ matrix.package }}/v" | head -n 1)
+          echo "Found tag: $TAGS"
+          if [[ -z "$TAGS" ]]; then
+            echo "not_enough_tags=true" >> $GITHUB_OUTPUT
+            echo "No tags found for ${{ matrix.language }}/${{ matrix.package }}."
+          else
+            LATEST_TAG=$(echo "$TAGS" | head -n 1)
+            echo "latest_tag=$LATEST_TAG" >> $GITHUB_ENV
+            echo "not_enough_tags=false" >> $GITHUB_OUTPUT
+          fi
+          
           # Fetch the latest release (draft or published)
           LATEST_RELEASE=$(gh release list --limit 1 --json tagName,isDraft --jq '.[0] | .tagName')
           
@@ -135,6 +148,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           mode: "COMMIT"
+          fromTag: ${{ env.latest_tag }}
           configurationJson: |
             {
               "template": "#{{CHANGELOG}}",
