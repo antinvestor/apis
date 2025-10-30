@@ -194,7 +194,7 @@ jobs:
           ignorePreReleases: "false"
           configurationJson: |
             {
-              "template": "#{{CHANGELOG}}\n\n## Other\n#{{UNCATEGORIZED}}",
+              "template": "#{{CHANGELOG}}",
               "categories": [
                 {
                     "title": "## Feature",
@@ -219,6 +219,25 @@ jobs:
             }
           outputFile: "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add version header to CHANGELOG
+        if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != ''
+        run: |
+          VERSION="${{ steps.release-version.outputs.version }}"
+          CHANGELOG_FILE="${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
+          DATE=$(date +%Y-%m-%d)
+          
+          # Create temp file with version header
+          echo "# Changelog" > "${CHANGELOG_FILE}.tmp"
+          echo "" >> "${CHANGELOG_FILE}.tmp"
+          echo "## [$VERSION] - $DATE" >> "${CHANGELOG_FILE}.tmp"
+          echo "" >> "${CHANGELOG_FILE}.tmp"
+          
+          # Append existing changelog content
+          cat "$CHANGELOG_FILE" >> "${CHANGELOG_FILE}.tmp"
+          
+          # Replace original with versioned changelog
+          mv "${CHANGELOG_FILE}.tmp" "$CHANGELOG_FILE"
 
       - name: Display Changelog for ${{ matrix.language }}/${{ matrix.package }}
         if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != ''
@@ -262,6 +281,29 @@ jobs:
             echo "Warning: pubspec.yaml not found at $PUBSPEC_FILE"
           fi
 
+      - name: Update VERSION file for Go and Java
+        if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != '' && (matrix.language == 'go' || matrix.language == 'java')
+        run: |
+          VERSION="${{ steps.release-version.outputs.version }}"
+          VERSION_FILE="${{ matrix.language }}/${{ matrix.package }}/VERSION"
+          
+          if [ -f "$VERSION_FILE" ]; then
+            CURRENT_VERSION=$(cat "$VERSION_FILE")
+            echo "Current version in VERSION file: $CURRENT_VERSION"
+            
+            if [ "$CURRENT_VERSION" != "$VERSION" ]; then
+              echo "Updating VERSION file to $VERSION"
+              echo "$VERSION" > "$VERSION_FILE"
+              git add "$VERSION_FILE"
+            else
+              echo "Version already up to date: $VERSION"
+            fi
+          else
+            echo "Creating VERSION file with version $VERSION"
+            echo "$VERSION" > "$VERSION_FILE"
+            git add "$VERSION_FILE"
+          fi
+
       - name: Commit Changelog
         if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != '' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false)
         run: |
@@ -278,6 +320,11 @@ jobs:
           # Add pubspec.yaml if it exists and was modified (for Dart packages)
           if [ -f "${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml" ]; then
             git add "${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml" 2>/dev/null || true
+          fi
+
+          # Add VERSION file if it exists and was modified (for Go and Java packages)
+          if [ -f "${{ matrix.language }}/${{ matrix.package }}/VERSION" ]; then
+            git add "${{ matrix.language }}/${{ matrix.package }}/VERSION" 2>/dev/null || true
           fi
 
           # Create commit if there are staged changes

@@ -30,9 +30,9 @@ package com.antinvestor.apis.chat.v1;
 public enum RoomEventType
     implements com.google.protobuf.ProtocolMessageEnum {
   /**
-   * <code>UNSPECIFIED = 0;</code>
+   * <code>SYSTEM = 0;</code>
    */
-  UNSPECIFIED(0),
+  SYSTEM(0),
   /**
    * <code>EVENT = 1;</code>
    */
@@ -58,9 +58,37 @@ public enum RoomEventType
    */
   ENCRYPTED(6),
   /**
-   * <code>SYSTEM = 10;</code>
+   * <pre>
+   * represents event overriding another
+   * </pre>
+   *
+   * <code>EDIT = 8;</code>
    */
-  SYSTEM(10),
+  EDIT(8),
+  /**
+   * <pre>
+   * represents event deleting another
+   * </pre>
+   *
+   * <code>REDACTION = 9;</code>
+   */
+  REDACTION(9),
+  /**
+   * <code>STATE_DELIVERED = 10;</code>
+   */
+  STATE_DELIVERED(10),
+  /**
+   * <code>STATE_READ = 11;</code>
+   */
+  STATE_READ(11),
+  /**
+   * <code>STATE_TYPING = 12;</code>
+   */
+  STATE_TYPING(12),
+  /**
+   * <code>PRESENCE = 17;</code>
+   */
+  PRESENCE(17),
   /**
    * <code>CALL_OFFER = 21;</code>
    */
@@ -77,14 +105,6 @@ public enum RoomEventType
    * <code>CALL_END = 24;</code>
    */
   CALL_END(24),
-  /**
-   * <pre>
-   * vendor/app specific; metadata must indicate schema
-   * </pre>
-   *
-   * <code>CUSTOM = 100;</code>
-   */
-  CUSTOM(100),
   UNRECOGNIZED(-1),
   ;
 
@@ -98,9 +118,9 @@ public enum RoomEventType
       "RoomEventType");
   }
   /**
-   * <code>UNSPECIFIED = 0;</code>
+   * <code>SYSTEM = 0;</code>
    */
-  public static final int UNSPECIFIED_VALUE = 0;
+  public static final int SYSTEM_VALUE = 0;
   /**
    * <code>EVENT = 1;</code>
    */
@@ -126,9 +146,37 @@ public enum RoomEventType
    */
   public static final int ENCRYPTED_VALUE = 6;
   /**
-   * <code>SYSTEM = 10;</code>
+   * <pre>
+   * represents event overriding another
+   * </pre>
+   *
+   * <code>EDIT = 8;</code>
    */
-  public static final int SYSTEM_VALUE = 10;
+  public static final int EDIT_VALUE = 8;
+  /**
+   * <pre>
+   * represents event deleting another
+   * </pre>
+   *
+   * <code>REDACTION = 9;</code>
+   */
+  public static final int REDACTION_VALUE = 9;
+  /**
+   * <code>STATE_DELIVERED = 10;</code>
+   */
+  public static final int STATE_DELIVERED_VALUE = 10;
+  /**
+   * <code>STATE_READ = 11;</code>
+   */
+  public static final int STATE_READ_VALUE = 11;
+  /**
+   * <code>STATE_TYPING = 12;</code>
+   */
+  public static final int STATE_TYPING_VALUE = 12;
+  /**
+   * <code>PRESENCE = 17;</code>
+   */
+  public static final int PRESENCE_VALUE = 17;
   /**
    * <code>CALL_OFFER = 21;</code>
    */
@@ -145,14 +193,6 @@ public enum RoomEventType
    * <code>CALL_END = 24;</code>
    */
   public static final int CALL_END_VALUE = 24;
-  /**
-   * <pre>
-   * vendor/app specific; metadata must indicate schema
-   * </pre>
-   *
-   * <code>CUSTOM = 100;</code>
-   */
-  public static final int CUSTOM_VALUE = 100;
 
 
   public final int getNumber() {
@@ -179,18 +219,22 @@ public enum RoomEventType
    */
   public static RoomEventType forNumber(int value) {
     switch (value) {
-      case 0: return UNSPECIFIED;
+      case 0: return SYSTEM;
       case 1: return EVENT;
       case 2: return TEXT;
       case 3: return ATTACHMENT;
       case 7: return REACTION;
       case 6: return ENCRYPTED;
-      case 10: return SYSTEM;
+      case 8: return EDIT;
+      case 9: return REDACTION;
+      case 10: return STATE_DELIVERED;
+      case 11: return STATE_READ;
+      case 12: return STATE_TYPING;
+      case 17: return PRESENCE;
       case 21: return CALL_OFFER;
       case 22: return CALL_ANSWER;
       case 23: return CALL_ICE;
       case 24: return CALL_END;
-      case 100: return CUSTOM;
       default: return null;
     }
   }

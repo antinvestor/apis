@@ -45,49 +45,61 @@ const (
 type RoomEventType int32
 
 const (
-	RoomEventType_UNSPECIFIED RoomEventType = 0
-	RoomEventType_EVENT       RoomEventType = 1
-	RoomEventType_TEXT        RoomEventType = 2
-	RoomEventType_ATTACHMENT  RoomEventType = 3
-	RoomEventType_REACTION    RoomEventType = 7
-	RoomEventType_ENCRYPTED   RoomEventType = 6 // opaque ciphertext
-	RoomEventType_SYSTEM      RoomEventType = 10
-	RoomEventType_CALL_OFFER  RoomEventType = 21
-	RoomEventType_CALL_ANSWER RoomEventType = 22
-	RoomEventType_CALL_ICE    RoomEventType = 23
-	RoomEventType_CALL_END    RoomEventType = 24
-	RoomEventType_CUSTOM      RoomEventType = 100 // vendor/app specific; metadata must indicate schema
+	RoomEventType_SYSTEM          RoomEventType = 0
+	RoomEventType_EVENT           RoomEventType = 1
+	RoomEventType_TEXT            RoomEventType = 2
+	RoomEventType_ATTACHMENT      RoomEventType = 3
+	RoomEventType_REACTION        RoomEventType = 7
+	RoomEventType_ENCRYPTED       RoomEventType = 6 // opaque ciphertext
+	RoomEventType_EDIT            RoomEventType = 8 // represents event overriding another
+	RoomEventType_REDACTION       RoomEventType = 9 // represents event deleting another
+	RoomEventType_STATE_DELIVERED RoomEventType = 10
+	RoomEventType_STATE_READ      RoomEventType = 11
+	RoomEventType_STATE_TYPING    RoomEventType = 12
+	RoomEventType_PRESENCE        RoomEventType = 17
+	RoomEventType_CALL_OFFER      RoomEventType = 21
+	RoomEventType_CALL_ANSWER     RoomEventType = 22
+	RoomEventType_CALL_ICE        RoomEventType = 23
+	RoomEventType_CALL_END        RoomEventType = 24
 )
 
 // Enum value maps for RoomEventType.
 var (
 	RoomEventType_name = map[int32]string{
-		0:   "UNSPECIFIED",
-		1:   "EVENT",
-		2:   "TEXT",
-		3:   "ATTACHMENT",
-		7:   "REACTION",
-		6:   "ENCRYPTED",
-		10:  "SYSTEM",
-		21:  "CALL_OFFER",
-		22:  "CALL_ANSWER",
-		23:  "CALL_ICE",
-		24:  "CALL_END",
-		100: "CUSTOM",
+		0:  "SYSTEM",
+		1:  "EVENT",
+		2:  "TEXT",
+		3:  "ATTACHMENT",
+		7:  "REACTION",
+		6:  "ENCRYPTED",
+		8:  "EDIT",
+		9:  "REDACTION",
+		10: "STATE_DELIVERED",
+		11: "STATE_READ",
+		12: "STATE_TYPING",
+		17: "PRESENCE",
+		21: "CALL_OFFER",
+		22: "CALL_ANSWER",
+		23: "CALL_ICE",
+		24: "CALL_END",
 	}
 	RoomEventType_value = map[string]int32{
-		"UNSPECIFIED": 0,
-		"EVENT":       1,
-		"TEXT":        2,
-		"ATTACHMENT":  3,
-		"REACTION":    7,
-		"ENCRYPTED":   6,
-		"SYSTEM":      10,
-		"CALL_OFFER":  21,
-		"CALL_ANSWER": 22,
-		"CALL_ICE":    23,
-		"CALL_END":    24,
-		"CUSTOM":      100,
+		"SYSTEM":          0,
+		"EVENT":           1,
+		"TEXT":            2,
+		"ATTACHMENT":      3,
+		"REACTION":        7,
+		"ENCRYPTED":       6,
+		"EDIT":            8,
+		"REDACTION":       9,
+		"STATE_DELIVERED": 10,
+		"STATE_READ":      11,
+		"STATE_TYPING":    12,
+		"PRESENCE":        17,
+		"CALL_OFFER":      21,
+		"CALL_ANSWER":     22,
+		"CALL_ICE":        23,
+		"CALL_END":        24,
 	}
 )
 
@@ -364,19 +376,18 @@ func (*ServerEvent_TypingEvent) isServerEvent_Payload() {}
 
 // Unified message (user / bot / system / signalling)
 type RoomEvent struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                 // client-supplied or server-generated UUID
-	RoomId           string                 `protobuf:"bytes,2,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`           // room_id
-	SenderId         string                 `protobuf:"bytes,3,opt,name=sender_id,json=senderId,proto3" json:"sender_id,omitempty"`     // profile_id or service/bot id
-	Type             RoomEventType          `protobuf:"varint,4,opt,name=type,proto3,enum=chat.v1.RoomEventType" json:"type,omitempty"` // text, attachment, call_offer, etc.
-	Payload          *structpb.Struct       `protobuf:"bytes,6,opt,name=payload,proto3" json:"payload,omitempty"`                       // e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
-	SentAt           *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=sent_at,json=sentAt,proto3" json:"sent_at,omitempty"`
-	Edited           bool                   `protobuf:"varint,8,opt,name=edited,proto3" json:"edited,omitempty"`
-	Redacted         bool                   `protobuf:"varint,9,opt,name=redacted,proto3" json:"redacted,omitempty"`
-	ReplacesEventId  string                 `protobuf:"bytes,10,opt,name=replaces_event_id,json=replacesEventId,proto3" json:"replaces_event_id,omitempty"`      // if this message replaces another (edit)
-	RelatesToEventId string                 `protobuf:"bytes,11,opt,name=relates_to_event_id,json=relatesToEventId,proto3" json:"relates_to_event_id,omitempty"` // for reactions / replies
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                 // client-supplied or server-generated UUID
+	RoomId        string                 `protobuf:"bytes,2,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`           // room_id
+	SenderId      string                 `protobuf:"bytes,3,opt,name=sender_id,json=senderId,proto3" json:"sender_id,omitempty"`     // profile_id or service/bot id
+	Type          RoomEventType          `protobuf:"varint,4,opt,name=type,proto3,enum=chat.v1.RoomEventType" json:"type,omitempty"` // text, attachment, call_offer, etc.
+	Payload       *structpb.Struct       `protobuf:"bytes,6,opt,name=payload,proto3" json:"payload,omitempty"`                       // e.g. {"format":"markdown","mime":"image/png","attachment_id":"..."}
+	SentAt        *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=sent_at,json=sentAt,proto3" json:"sent_at,omitempty"`
+	Edited        bool                   `protobuf:"varint,8,opt,name=edited,proto3" json:"edited,omitempty"`
+	Redacted      bool                   `protobuf:"varint,9,opt,name=redacted,proto3" json:"redacted,omitempty"`
+	ParentId      *string                `protobuf:"bytes,10,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"` // if this message is a followup event on an original message
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RoomEvent) Reset() {
@@ -434,7 +445,7 @@ func (x *RoomEvent) GetType() RoomEventType {
 	if x != nil {
 		return x.Type
 	}
-	return RoomEventType_UNSPECIFIED
+	return RoomEventType_SYSTEM
 }
 
 func (x *RoomEvent) GetPayload() *structpb.Struct {
@@ -465,16 +476,9 @@ func (x *RoomEvent) GetRedacted() bool {
 	return false
 }
 
-func (x *RoomEvent) GetReplacesEventId() string {
-	if x != nil {
-		return x.ReplacesEventId
-	}
-	return ""
-}
-
-func (x *RoomEvent) GetRelatesToEventId() string {
-	if x != nil {
-		return x.RelatesToEventId
+func (x *RoomEvent) GetParentId() string {
+	if x != nil && x.ParentId != nil {
+		return *x.ParentId
 	}
 	return ""
 }
@@ -2622,7 +2626,7 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\n" +
 	"read_event\x18\x0f \x01(\v2\x13.chat.v1.ReadMarkerH\x00R\treadEvent\x129\n" +
 	"\ftyping_event\x18\x11 \x01(\v2\x14.chat.v1.TypingEventH\x00R\vtypingEventB\t\n" +
-	"\apayload\"\xcb\x03\n" +
+	"\apayload\"\xbd\x03\n" +
 	"\tRoomEvent\x12+\n" +
 	"\x02id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x02id\x124\n" +
 	"\aroom_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06roomId\x128\n" +
@@ -2631,10 +2635,11 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\apayload\x18\x06 \x01(\v2\x17.google.protobuf.StructR\apayload\x123\n" +
 	"\asent_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\x06sentAt\x12\x16\n" +
 	"\x06edited\x18\b \x01(\bR\x06edited\x12\x1a\n" +
-	"\bredacted\x18\t \x01(\bR\bredacted\x12*\n" +
-	"\x11replaces_event_id\x18\n" +
-	" \x01(\tR\x0freplacesEventId\x12-\n" +
-	"\x13relates_to_event_id\x18\v \x01(\tR\x10relatesToEventId\"\xd8\x01\n" +
+	"\bredacted\x18\t \x01(\bR\bredacted\x12=\n" +
+	"\tparent_id\x18\n" +
+	" \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}H\x00R\bparentId\x88\x01\x01B\f\n" +
+	"\n" +
+	"_parent_id\"\xd8\x01\n" +
 	"\rPresenceEvent\x12:\n" +
 	"\n" +
 	"profile_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tprofileId\x12/\n" +
@@ -2809,25 +2814,29 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\x1dCLIENT_STATE_TYPE_READ_MARKER\x10\x01\"i\n" +
 	"\x16GetClientStateResponse\x12\x17\n" +
 	"\aroom_id\x18\x01 \x01(\tR\x06roomId\x126\n" +
-	"\vclientState\x18\x02 \x03(\v2\x14.chat.v1.ClientStateR\vclientState*\xb7\x01\n" +
-	"\rRoomEventType\x12\x0f\n" +
-	"\vUNSPECIFIED\x10\x00\x12\t\n" +
+	"\vclientState\x18\x02 \x03(\v2\x14.chat.v1.ClientStateR\vclientState*\xf8\x01\n" +
+	"\rRoomEventType\x12\n" +
+	"\n" +
+	"\x06SYSTEM\x10\x00\x12\t\n" +
 	"\x05EVENT\x10\x01\x12\b\n" +
 	"\x04TEXT\x10\x02\x12\x0e\n" +
 	"\n" +
 	"ATTACHMENT\x10\x03\x12\f\n" +
 	"\bREACTION\x10\a\x12\r\n" +
-	"\tENCRYPTED\x10\x06\x12\n" +
-	"\n" +
-	"\x06SYSTEM\x10\n" +
+	"\tENCRYPTED\x10\x06\x12\b\n" +
+	"\x04EDIT\x10\b\x12\r\n" +
+	"\tREDACTION\x10\t\x12\x13\n" +
+	"\x0fSTATE_DELIVERED\x10\n" +
 	"\x12\x0e\n" +
+	"\n" +
+	"STATE_READ\x10\v\x12\x10\n" +
+	"\fSTATE_TYPING\x10\f\x12\f\n" +
+	"\bPRESENCE\x10\x11\x12\x0e\n" +
 	"\n" +
 	"CALL_OFFER\x10\x15\x12\x0f\n" +
 	"\vCALL_ANSWER\x10\x16\x12\f\n" +
 	"\bCALL_ICE\x10\x17\x12\f\n" +
-	"\bCALL_END\x10\x18\x12\n" +
-	"\n" +
-	"\x06CUSTOM\x10d*6\n" +
+	"\bCALL_END\x10\x18*6\n" +
 	"\x0ePresenceStatus\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\v\n" +
 	"\aOFFLINE\x10\x01\x12\n" +
@@ -3030,6 +3039,7 @@ func file_chat_v1_chat_proto_init() {
 		(*ServerEvent_ReadEvent)(nil),
 		(*ServerEvent_TypingEvent)(nil),
 	}
+	file_chat_v1_chat_proto_msgTypes[1].OneofWrappers = []any{}
 	file_chat_v1_chat_proto_msgTypes[6].OneofWrappers = []any{
 		(*ConnectRequest_Ack)(nil),
 		(*ConnectRequest_StateUpdate)(nil),

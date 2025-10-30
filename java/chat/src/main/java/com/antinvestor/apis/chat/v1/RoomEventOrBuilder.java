@@ -159,41 +159,30 @@ public interface RoomEventOrBuilder extends
 
   /**
    * <pre>
-   * if this message replaces another (edit)
+   * if this message is a followup event on an original message
    * </pre>
    *
-   * <code>string replaces_event_id = 10 [json_name = "replacesEventId"];</code>
-   * @return The replacesEventId.
+   * <code>optional string parent_id = 10 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return Whether the parentId field is set.
    */
-  java.lang.String getReplacesEventId();
+  boolean hasParentId();
   /**
    * <pre>
-   * if this message replaces another (edit)
+   * if this message is a followup event on an original message
    * </pre>
    *
-   * <code>string replaces_event_id = 10 [json_name = "replacesEventId"];</code>
-   * @return The bytes for replacesEventId.
+   * <code>optional string parent_id = 10 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return The parentId.
+   */
+  java.lang.String getParentId();
+  /**
+   * <pre>
+   * if this message is a followup event on an original message
+   * </pre>
+   *
+   * <code>optional string parent_id = 10 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for parentId.
    */
   com.google.protobuf.ByteString
-      getReplacesEventIdBytes();
-
-  /**
-   * <pre>
-   * for reactions / replies
-   * </pre>
-   *
-   * <code>string relates_to_event_id = 11 [json_name = "relatesToEventId"];</code>
-   * @return The relatesToEventId.
-   */
-  java.lang.String getRelatesToEventId();
-  /**
-   * <pre>
-   * for reactions / replies
-   * </pre>
-   *
-   * <code>string relates_to_event_id = 11 [json_name = "relatesToEventId"];</code>
-   * @return The bytes for relatesToEventId.
-   */
-  com.google.protobuf.ByteString
-      getRelatesToEventIdBytes();
+      getParentIdBytes();
 }

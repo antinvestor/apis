@@ -22,27 +22,32 @@ import '../../google/protobuf/timestamp.pbjson.dart' as $0;
 const RoomEventType$json = {
   '1': 'RoomEventType',
   '2': [
-    {'1': 'UNSPECIFIED', '2': 0},
+    {'1': 'SYSTEM', '2': 0},
     {'1': 'EVENT', '2': 1},
     {'1': 'TEXT', '2': 2},
     {'1': 'ATTACHMENT', '2': 3},
     {'1': 'REACTION', '2': 7},
     {'1': 'ENCRYPTED', '2': 6},
-    {'1': 'SYSTEM', '2': 10},
+    {'1': 'EDIT', '2': 8},
+    {'1': 'REDACTION', '2': 9},
+    {'1': 'STATE_DELIVERED', '2': 10},
+    {'1': 'STATE_READ', '2': 11},
+    {'1': 'STATE_TYPING', '2': 12},
+    {'1': 'PRESENCE', '2': 17},
     {'1': 'CALL_OFFER', '2': 21},
     {'1': 'CALL_ANSWER', '2': 22},
     {'1': 'CALL_ICE', '2': 23},
     {'1': 'CALL_END', '2': 24},
-    {'1': 'CUSTOM', '2': 100},
   ],
 };
 
 /// Descriptor for `RoomEventType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List roomEventTypeDescriptor = $convert.base64Decode(
-    'Cg1Sb29tRXZlbnRUeXBlEg8KC1VOU1BFQ0lGSUVEEAASCQoFRVZFTlQQARIICgRURVhUEAISDg'
-    'oKQVRUQUNITUVOVBADEgwKCFJFQUNUSU9OEAcSDQoJRU5DUllQVEVEEAYSCgoGU1lTVEVNEAoS'
-    'DgoKQ0FMTF9PRkZFUhAVEg8KC0NBTExfQU5TV0VSEBYSDAoIQ0FMTF9JQ0UQFxIMCghDQUxMX0'
-    'VORBAYEgoKBkNVU1RPTRBk');
+    'Cg1Sb29tRXZlbnRUeXBlEgoKBlNZU1RFTRAAEgkKBUVWRU5UEAESCAoEVEVYVBACEg4KCkFUVE'
+    'FDSE1FTlQQAxIMCghSRUFDVElPThAHEg0KCUVOQ1JZUFRFRBAGEggKBEVESVQQCBINCglSRURB'
+    'Q1RJT04QCRITCg9TVEFURV9ERUxJVkVSRUQQChIOCgpTVEFURV9SRUFEEAsSEAoMU1RBVEVfVF'
+    'lQSU5HEAwSDAoIUFJFU0VOQ0UQERIOCgpDQUxMX09GRkVSEBUSDwoLQ0FMTF9BTlNXRVIQFhIM'
+    'CghDQUxMX0lDRRAXEgwKCENBTExfRU5EEBg=');
 
 @$core.Deprecated('Use presenceStatusDescriptor instead')
 const PresenceStatus$json = {
@@ -167,19 +172,18 @@ const RoomEvent$json = {
     {'1': 'edited', '3': 8, '4': 1, '5': 8, '10': 'edited'},
     {'1': 'redacted', '3': 9, '4': 1, '5': 8, '10': 'redacted'},
     {
-      '1': 'replaces_event_id',
+      '1': 'parent_id',
       '3': 10,
       '4': 1,
       '5': 9,
-      '10': 'replacesEventId'
+      '8': {},
+      '9': 0,
+      '10': 'parentId',
+      '17': true
     },
-    {
-      '1': 'relates_to_event_id',
-      '3': 11,
-      '4': 1,
-      '5': 9,
-      '10': 'relatesToEventId'
-    },
+  ],
+  '8': [
+    {'1': '_parent_id'},
   ],
 };
 
@@ -191,9 +195,9 @@ final $typed_data.Uint8List roomEventDescriptor = $convert.base64Decode(
     'lkEioKBHR5cGUYBCABKA4yFi5jaGF0LnYxLlJvb21FdmVudFR5cGVSBHR5cGUSMQoHcGF5bG9h'
     'ZBgGIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSB3BheWxvYWQSMwoHc2VudF9hdBgHIA'
     'EoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSBnNlbnRBdBIWCgZlZGl0ZWQYCCABKAhS'
-    'BmVkaXRlZBIaCghyZWRhY3RlZBgJIAEoCFIIcmVkYWN0ZWQSKgoRcmVwbGFjZXNfZXZlbnRfaW'
-    'QYCiABKAlSD3JlcGxhY2VzRXZlbnRJZBItChNyZWxhdGVzX3RvX2V2ZW50X2lkGAsgASgJUhBy'
-    'ZWxhdGVzVG9FdmVudElk');
+    'BmVkaXRlZBIaCghyZWRhY3RlZBgJIAEoCFIIcmVkYWN0ZWQSPQoJcGFyZW50X2lkGAogASgJQh'
+    'u6SBhyFhADGCgyEFswLTlhLXpfLV17MywyMH1IAFIIcGFyZW50SWSIAQFCDAoKX3BhcmVudF9p'
+    'ZA==');
 
 @$core.Deprecated('Use presenceEventDescriptor instead')
 const PresenceEvent$json = {

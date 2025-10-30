@@ -24,3 +24,6 @@
 
 # Ignore build.gradle to prevent overriding custom dependencies
 build.gradle
+
+# Ignore VERSION file to prevent overriding versioning
+VERSION
