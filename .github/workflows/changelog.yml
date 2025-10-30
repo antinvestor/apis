@@ -194,7 +194,7 @@ jobs:
           ignorePreReleases: "false"
           configurationJson: |
             {
-              "template": "#{{CHANGELOG}}\n\n## Other\n#{{UNCATEGORIZED}}",
+              "template": "#{{CHANGELOG}}",
               "categories": [
                 {
                     "title": "## Feature",
