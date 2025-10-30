@@ -1,11 +1,20 @@
 # Changelog
 
-## [0.1.0] - 2025-10-30
+## [1.47.4] - 2025-10-30
 
+## Feature
+
+- feat: add VERSION file support for Go and Java modules
+- feat: add version headers directly to CHANGELOG.md files
 
 ## Other
 
 - Improve chat event types and message relationships
    - PR: #817
+- Improve chat event types and message relationships
+- chore(settings): update changelog and version to v1.47.4
 - chore(settings): update changelog and version to v1.47.4
 - chore: remove duplicate changelog sections across all modules
+- chore(settings): update changelog and version to v1.47.4
+- chore(settings): update changelog and version to v1.47.4
+
