@@ -3,10 +3,5 @@
 - Improve chat event types and message relationships
    - PR: #817
 - Improve chat event types and message relationships
+- chore(settings): update changelog and version to v1.47.4
 
-
-
-## Other
-- Improve chat event types and message relationships
-   - PR: #817
-- Improve chat event types and message relationships
