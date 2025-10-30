@@ -10,4 +10,5 @@
 - chore(chat): update changelog and version to v1.47.4
 - chore(chat): update changelog and version to v1.47.4
 - chore: remove duplicate changelog sections across all modules
+- chore(chat): update changelog and version to v1.47.4
 
