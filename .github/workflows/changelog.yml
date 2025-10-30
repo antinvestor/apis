@@ -220,6 +220,25 @@ jobs:
           outputFile: "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Add version header to CHANGELOG
+        if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != ''
+        run: |
+          VERSION="${{ steps.release-version.outputs.version }}"
+          CHANGELOG_FILE="${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
+          DATE=$(date +%Y-%m-%d)
+          
+          # Create temp file with version header
+          echo "# Changelog" > "${CHANGELOG_FILE}.tmp"
+          echo "" >> "${CHANGELOG_FILE}.tmp"
+          echo "## [$VERSION] - $DATE" >> "${CHANGELOG_FILE}.tmp"
+          echo "" >> "${CHANGELOG_FILE}.tmp"
+          
+          # Append existing changelog content
+          cat "$CHANGELOG_FILE" >> "${CHANGELOG_FILE}.tmp"
+          
+          # Replace original with versioned changelog
+          mv "${CHANGELOG_FILE}.tmp" "$CHANGELOG_FILE"
+
       - name: Display Changelog for ${{ matrix.language }}/${{ matrix.package }}
         if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != ''
         run: |
