@@ -1,3 +1,7 @@
+## Feature
+
+- feat: add VERSION file support for Go and Java modules
+
 ## Other
 
 - ci(changelog): avoid empty output on PRs (HYBRID mode, include open, …
@@ -10,4 +14,5 @@
 - chore(chat): update changelog and version to v1.47.4
 - chore(chat): update changelog and version to v1.47.4
 - chore: remove duplicate changelog sections across all modules
+- chore(chat): update changelog and version to v1.47.4
 
