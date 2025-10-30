@@ -16,8 +16,8 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 /// Allowed message types. Extendable via new enum values; clients must ignore unknown values.
 class RoomEventType extends $pb.ProtobufEnum {
-  static const RoomEventType UNSPECIFIED =
-      RoomEventType._(0, _omitEnumNames ? '' : 'UNSPECIFIED');
+  static const RoomEventType SYSTEM =
+      RoomEventType._(0, _omitEnumNames ? '' : 'SYSTEM');
   static const RoomEventType EVENT =
       RoomEventType._(1, _omitEnumNames ? '' : 'EVENT');
   static const RoomEventType TEXT =
@@ -28,8 +28,18 @@ class RoomEventType extends $pb.ProtobufEnum {
       RoomEventType._(7, _omitEnumNames ? '' : 'REACTION');
   static const RoomEventType ENCRYPTED =
       RoomEventType._(6, _omitEnumNames ? '' : 'ENCRYPTED');
-  static const RoomEventType SYSTEM =
-      RoomEventType._(10, _omitEnumNames ? '' : 'SYSTEM');
+  static const RoomEventType EDIT =
+      RoomEventType._(8, _omitEnumNames ? '' : 'EDIT');
+  static const RoomEventType REDACTION =
+      RoomEventType._(9, _omitEnumNames ? '' : 'REDACTION');
+  static const RoomEventType STATE_DELIVERED =
+      RoomEventType._(10, _omitEnumNames ? '' : 'STATE_DELIVERED');
+  static const RoomEventType STATE_READ =
+      RoomEventType._(11, _omitEnumNames ? '' : 'STATE_READ');
+  static const RoomEventType STATE_TYPING =
+      RoomEventType._(12, _omitEnumNames ? '' : 'STATE_TYPING');
+  static const RoomEventType PRESENCE =
+      RoomEventType._(17, _omitEnumNames ? '' : 'PRESENCE');
   static const RoomEventType CALL_OFFER =
       RoomEventType._(21, _omitEnumNames ? '' : 'CALL_OFFER');
   static const RoomEventType CALL_ANSWER =
@@ -38,22 +48,24 @@ class RoomEventType extends $pb.ProtobufEnum {
       RoomEventType._(23, _omitEnumNames ? '' : 'CALL_ICE');
   static const RoomEventType CALL_END =
       RoomEventType._(24, _omitEnumNames ? '' : 'CALL_END');
-  static const RoomEventType CUSTOM =
-      RoomEventType._(100, _omitEnumNames ? '' : 'CUSTOM');
 
   static const $core.List<RoomEventType> values = <RoomEventType>[
-    UNSPECIFIED,
+    SYSTEM,
     EVENT,
     TEXT,
     ATTACHMENT,
     REACTION,
     ENCRYPTED,
-    SYSTEM,
+    EDIT,
+    REDACTION,
+    STATE_DELIVERED,
+    STATE_READ,
+    STATE_TYPING,
+    PRESENCE,
     CALL_OFFER,
     CALL_ANSWER,
     CALL_ICE,
     CALL_END,
-    CUSTOM,
   ];
 
   static final $core.Map<$core.int, RoomEventType> _byValue =

@@ -216,8 +216,7 @@ class RoomEvent extends $pb.GeneratedMessage {
     $0.Timestamp? sentAt,
     $core.bool? edited,
     $core.bool? redacted,
-    $core.String? replacesEventId,
-    $core.String? relatesToEventId,
+    $core.String? parentId,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -228,8 +227,7 @@ class RoomEvent extends $pb.GeneratedMessage {
     if (sentAt != null) result.sentAt = sentAt;
     if (edited != null) result.edited = edited;
     if (redacted != null) result.redacted = redacted;
-    if (replacesEventId != null) result.replacesEventId = replacesEventId;
-    if (relatesToEventId != null) result.relatesToEventId = relatesToEventId;
+    if (parentId != null) result.parentId = parentId;
     return result;
   }
 
@@ -257,8 +255,7 @@ class RoomEvent extends $pb.GeneratedMessage {
         subBuilder: $0.Timestamp.create)
     ..aOB(8, _omitFieldNames ? '' : 'edited')
     ..aOB(9, _omitFieldNames ? '' : 'redacted')
-    ..aOS(10, _omitFieldNames ? '' : 'replacesEventId')
-    ..aOS(11, _omitFieldNames ? '' : 'relatesToEventId')
+    ..aOS(10, _omitFieldNames ? '' : 'parentId')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -357,22 +354,13 @@ class RoomEvent extends $pb.GeneratedMessage {
   void clearRedacted() => $_clearField(9);
 
   @$pb.TagNumber(10)
-  $core.String get replacesEventId => $_getSZ(8);
+  $core.String get parentId => $_getSZ(8);
   @$pb.TagNumber(10)
-  set replacesEventId($core.String value) => $_setString(8, value);
+  set parentId($core.String value) => $_setString(8, value);
   @$pb.TagNumber(10)
-  $core.bool hasReplacesEventId() => $_has(8);
+  $core.bool hasParentId() => $_has(8);
   @$pb.TagNumber(10)
-  void clearReplacesEventId() => $_clearField(10);
-
-  @$pb.TagNumber(11)
-  $core.String get relatesToEventId => $_getSZ(9);
-  @$pb.TagNumber(11)
-  set relatesToEventId($core.String value) => $_setString(9, value);
-  @$pb.TagNumber(11)
-  $core.bool hasRelatesToEventId() => $_has(9);
-  @$pb.TagNumber(11)
-  void clearRelatesToEventId() => $_clearField(11);
+  void clearParentId() => $_clearField(10);
 }
 
 /// Presence event affecting a user (and visible to rooms the user is a member of)

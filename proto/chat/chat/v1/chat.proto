@@ -266,25 +266,31 @@ message RoomEvent {
   google.protobuf.Timestamp sent_at = 7;
   bool edited = 8;
   bool redacted = 9;
-  string replaces_event_id = 10; // if this message replaces another (edit)
-  string relates_to_event_id = 11; // for reactions / replies
+  optional string parent_id = 10 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ]; // if this message is a followup event on an original message
 }
 
 // Allowed message types. Extendable via new enum values; clients must ignore unknown values.
 enum RoomEventType {
-  UNSPECIFIED = 0;
+  SYSTEM = 0;
   EVENT = 1;
   TEXT = 2;
   ATTACHMENT = 3;
   REACTION = 7;
   ENCRYPTED = 6; // opaque ciphertext
-  SYSTEM = 10;
+  EDIT = 8; // represents event overriding another
+  REDACTION = 9; // represents event deleting another
+  STATE_DELIVERED = 10;
+  STATE_READ = 11;
+  STATE_TYPING = 12;
+  PRESENCE = 17;
   CALL_OFFER = 21;
   CALL_ANSWER = 22;
   CALL_ICE = 23;
   CALL_END = 24;
-
-  CUSTOM = 100;  // vendor/app specific; metadata must indicate schema
 }
 
 // Presence event affecting a user (and visible to rooms the user is a member of)
