@@ -17,25 +17,25 @@ package device
 import (
 	"context"
 
-	"github.com/antinvestor/apis/go/chat/v1/chatv1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
+	"github.com/antinvestor/apis/go/lostid/v1/lostidv1connect"
 )
 
-const ctxKeyService = common.CtxServiceKey("chatClientKey")
+const ctxKeyService = common.CtxServiceKey("lostidClientKey")
 
 func defaultOptions() []common.ClientOption {
 	return []common.ClientOption{
-		common.WithEndpoint("https://chat.api.antinvestor.com"),
+		common.WithEndpoint("https://lostid.api.antinvestor.com"),
 	}
 }
 
-func ToContext(ctx context.Context, chatClient chatv1connect.ChatServiceClient) context.Context {
-	return context.WithValue(ctx, ctxKeyService, chatClient)
+func ToContext(ctx context.Context, lostidClient lostidv1connect.LostIdServiceClient) context.Context {
+	return context.WithValue(ctx, ctxKeyService, lostidClient)
 }
 
-func FromContext(ctx context.Context) chatv1connect.ChatServiceClient {
-	client, ok := ctx.Value(ctxKeyService).(chatv1connect.ChatServiceClient)
+func FromContext(ctx context.Context) lostidv1connect.LostIdServiceClient {
+	client, ok := ctx.Value(ctxKeyService).(lostidv1connect.LostIdServiceClient)
 	if !ok {
 		return nil
 	}
@@ -43,17 +43,17 @@ func FromContext(ctx context.Context) chatv1connect.ChatServiceClient {
 	return client
 }
 
-// Client is a client for interacting with the chat service API.
+// Client is a client for interacting with the lostid service API.
 // Methods, except Close, may be called concurrently. However,
 // fields must not be modified concurrently with method calls.
 type Client struct {
 	*connection.ConnectClientBase
-	chatv1connect.ChatServiceClient
+	lostidv1connect.LostIdServiceClient
 }
 
 // NewClient creates a new chat svc client.
 // The service that an application uses to send and access received messages
-func NewClient(ctx context.Context, opts ...common.ClientOption) (chatv1connect.ChatServiceClient, error) {
+func NewClient(ctx context.Context, opts ...common.ClientOption) (lostidv1connect.LostIdServiceClient, error) {
 	clientOpts := defaultOptions()
 
 	clientBase, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
@@ -62,7 +62,7 @@ func NewClient(ctx context.Context, opts ...common.ClientOption) (chatv1connect.
 	}
 
 	return &Client{
-		ConnectClientBase: clientBase,
-		ChatServiceClient: chatv1connect.NewChatServiceClient(clientBase.Client(), clientBase.Endpoint()),
+		ConnectClientBase:   clientBase,
+		LostIdServiceClient: lostidv1connect.NewLostIdServiceClient(clientBase.Client(), clientBase.Endpoint()),
 	}, nil
 }

@@ -30,7 +30,10 @@ endef
 
 define mock_package
 cd go/${1} && $(GO) mod tidy
-cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/${2}_mocks/${1}_grpc_mock.go
+cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/${2}_mocks/grpc/${1}_grpc_mock.go
+
+cd go/${1} && $(GO) mod tidy
+cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}v1connect/${1}.connect.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/${2}_mocks/${1}_connect_mock.go
 
 endef
 
@@ -173,6 +176,7 @@ generate_grpc_mocks:
 	$(call mock_package,settings,v1)
 	$(call mock_package,ledger,v1)
 	$(call mock_package,lostid,v1)
+
 
 .PHONY: generate_buf_gen
 generate_buf_gen:
