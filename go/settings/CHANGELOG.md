@@ -1,20 +1,16 @@
 # Changelog
 
-## [1.47.4] - 2025-10-30
+## [1.47.5] - 2025-11-03
 
 ## Feature
 
-- feat: add VERSION file support for Go and Java modules
-- feat: add version headers directly to CHANGELOG.md files
+- feat: switch Go shared clients to Connect HTTP base
+   - PR: #818
+- feat: switch Go shared clients to Connect HTTP base
 
 ## Other
 
-- Improve chat event types and message relationships
-   - PR: #817
-- Improve chat event types and message relationships
-- chore(settings): update changelog and version to v1.47.4
-- chore(settings): update changelog and version to v1.47.4
-- chore: remove duplicate changelog sections across all modules
-- chore(settings): update changelog and version to v1.47.4
-- chore(settings): update changelog and version to v1.47.4
+- chore(settings): update changelog and version to v1.47.5
+- Merge branch 'main' of github.com:antinvestor/apis into feature/switch-clients-to-connectrpc
+- Merge branch 'feature/switch-clients-to-connectrpc' of github.com:antinvestor/apis into feature/switch-clients-to-connectrpc
 
