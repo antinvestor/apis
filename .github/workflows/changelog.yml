@@ -217,7 +217,7 @@ jobs:
                 }
               ]
             }
-          outputFile: "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
+          outputFile: "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.generated.md"
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add version header to CHANGELOG
@@ -227,9 +227,15 @@ jobs:
 
           VERSION="${{ steps.release-version.outputs.version }}"
           CHANGELOG_FILE="${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
+          GENERATED_FILE="${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.generated.md"
           DATE=$(date +%Y-%m-%d)
           TEMP_FILE="${CHANGELOG_FILE}.tmp"
           VERSION_HEADER="## [${VERSION}] - ${DATE}"
+
+          if [[ ! -s "${GENERATED_FILE}" ]]; then
+            echo "ℹ️  Generated changelog is empty, skipping update."
+            exit 0
+          fi
 
           mkdir -p "$(dirname "$CHANGELOG_FILE")"
 
@@ -239,42 +245,34 @@ jobs:
             exit 0
           fi
 
-          # Detect if changelog already has the main header
-          if [[ -f "$CHANGELOG_FILE" ]] && grep -q '^# Changelog' "$CHANGELOG_FILE"; then
-            echo "Found existing # Changelog header, preserving it."
+          OLD_CONTENT_FILE="${CHANGELOG_FILE}.previous"
+          rm -f "$OLD_CONTENT_FILE"
 
-            {
-              head -n 1 "$CHANGELOG_FILE"  # keep existing header
-              echo
-              echo "${VERSION_HEADER}"
-              echo
-              tail -n +2 "$CHANGELOG_FILE"  # append rest (skip first line)
-            } > "$TEMP_FILE"
-
+          if [[ -f "$CHANGELOG_FILE" ]]; then
+            if head -n 1 "$CHANGELOG_FILE" | grep -q '^# Changelog'; then
+              tail -n +2 "$CHANGELOG_FILE" > "$OLD_CONTENT_FILE"
+            else
+              cp "$CHANGELOG_FILE" "$OLD_CONTENT_FILE"
+            fi
           else
-            echo "No changelog found or missing header, creating new changelog file."
-
-            {
-              echo "# Changelog"
-              echo
-              echo "${VERSION_HEADER}"
-              echo
-              if [[ -f "$CHANGELOG_FILE" ]]; then
-                cat "$CHANGELOG_FILE"
-              else
-                echo "_Initial release._"
-              fi
-            } > "$TEMP_FILE"
+            echo "_Initial release._" > "$OLD_CONTENT_FILE"
           fi
 
-          # Only replace if the content has actually changed
-          if [[ ! -f "$CHANGELOG_FILE" ]] || ! cmp -s "$TEMP_FILE" "$CHANGELOG_FILE"; then
-            mv -f "$TEMP_FILE" "$CHANGELOG_FILE"
-            echo "✅ Updated changelog for version ${VERSION}"
-          else
-            rm -f "$TEMP_FILE"
-            echo "ℹ️  No changes detected in changelog, skipping write."
-          fi
+          {
+            echo "# Changelog"
+            echo
+            echo "${VERSION_HEADER}"
+            echo
+            cat "$GENERATED_FILE"
+            echo
+            if [[ -s "$OLD_CONTENT_FILE" ]]; then
+              cat "$OLD_CONTENT_FILE"
+            fi
+          } > "$TEMP_FILE"
+
+          mv -f "$TEMP_FILE" "$CHANGELOG_FILE"
+          rm -f "$OLD_CONTENT_FILE" "$GENERATED_FILE"
+          echo "✅ Updated changelog for version ${VERSION}"
 
       - name: Display Changelog for ${{ matrix.language }}/${{ matrix.package }}
         if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != ''
@@ -318,28 +316,6 @@ jobs:
             echo "Warning: pubspec.yaml not found at $PUBSPEC_FILE"
           fi
 
-      - name: Update VERSION file for Go and Java
-        if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != '' && (matrix.language == 'go' || matrix.language == 'java')
-        run: |
-          VERSION="${{ steps.release-version.outputs.version }}"
-          VERSION_FILE="${{ matrix.language }}/${{ matrix.package }}/VERSION"
-          
-          if [ -f "$VERSION_FILE" ]; then
-            CURRENT_VERSION=$(cat "$VERSION_FILE")
-            echo "Current version in VERSION file: $CURRENT_VERSION"
-            
-            if [ "$CURRENT_VERSION" != "$VERSION" ]; then
-              echo "Updating VERSION file to $VERSION"
-              echo "$VERSION" > "$VERSION_FILE"
-              git add "$VERSION_FILE"
-            else
-              echo "Version already up to date: $VERSION"
-            fi
-          else
-            echo "Creating VERSION file with version $VERSION"
-            echo "$VERSION" > "$VERSION_FILE"
-            git add "$VERSION_FILE"
-          fi
 
       - name: Commit Changelog
         if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != '' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false)
@@ -357,11 +333,6 @@ jobs:
           # Add pubspec.yaml if it exists and was modified (for Dart packages)
           if [ -f "${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml" ]; then
             git add "${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml" 2>/dev/null || true
-          fi
-
-          # Add VERSION file if it exists and was modified (for Go and Java packages)
-          if [ -f "${{ matrix.language }}/${{ matrix.package }}/VERSION" ]; then
-            git add "${{ matrix.language }}/${{ matrix.package }}/VERSION" 2>/dev/null || true
           fi
 
           # Create commit if there are staged changes
