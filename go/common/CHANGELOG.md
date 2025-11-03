@@ -1,9 +1,10 @@
 # Changelog
 
-## [0.1.0] - 2025-10-30
+## [1.47.5] - 2025-11-03
 
+## Feature
 
-## Other
+- feat: switch Go shared clients to Connect HTTP base
+   - PR: #818
+- feat: switch Go shared clients to Connect HTTP base
 
-- Improve chat event types and message relationships
-   - PR: #817
