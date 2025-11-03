@@ -7,7 +7,7 @@ jobs:
   build:
     strategy:
       matrix:
-        api_module: [ common ]
+        api_module: [ common,chat,device,ledger,lostid,notification,ocr,partition,payment,profile,property,settings ]
 
     runs-on: ubuntu-latest
     steps:
