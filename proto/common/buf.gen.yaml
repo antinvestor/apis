@@ -24,7 +24,7 @@ managed:
       value: github.com/antinvestor/apis/go
 plugins:
   - remote: buf.build/protocolbuffers/go
-    out: ../../go/gen/
+    out: ../../gen/go/
     opt: paths=source_relative
   - remote: buf.build/protocolbuffers/java
     out: ../../java/common/src/main/java/

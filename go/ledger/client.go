@@ -17,9 +17,9 @@ package ledger
 import (
 	"context"
 
+	"buf.build/gen/go/antinvestor/ledger/connectrpc/go/ledger/v1/ledgerv1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
-	"github.com/antinvestor/apis/go/ledger/v1/ledgerv1connect"
 )
 
 const ctxKeyService = common.CtxServiceKey("ledgerClientKey")

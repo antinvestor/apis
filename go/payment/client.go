@@ -17,9 +17,9 @@ package payment
 import (
 	"context"
 
+	"buf.build/gen/go/antinvestor/payment/connectrpc/go/payment/v1/paymentv1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
-	"github.com/antinvestor/apis/go/payment/v1/paymentv1connect"
 )
 
 const ctxKeyService = common.CtxServiceKey("paymentClientKey")

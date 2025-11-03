@@ -17,9 +17,9 @@ package lostid
 import (
 	"context"
 
+	"buf.build/gen/go/antinvestor/lostid/connectrpc/go/lostid/v1/lostidv1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
-	"github.com/antinvestor/apis/go/lostid/v1/lostidv1connect"
 )
 
 const ctxKeyService = common.CtxServiceKey("lostidClientKey")

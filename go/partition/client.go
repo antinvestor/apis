@@ -17,9 +17,9 @@ package partition
 import (
 	"context"
 
+	"buf.build/gen/go/antinvestor/partition/connectrpc/go/partition/v1/partitionv1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
-	"github.com/antinvestor/apis/go/partition/v1/partitionv1connect"
 )
 
 const ctxKeyService = common.CtxServiceKey("partitionClientKey")

@@ -17,9 +17,9 @@ package profile
 import (
 	"context"
 
+	"buf.build/gen/go/antinvestor/profile/connectrpc/go/profile/v1/profilev1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
-	"github.com/antinvestor/apis/go/profile/v1/profilev1connect"
 )
 
 const ctxKeyService = common.CtxServiceKey("profileClientKey")

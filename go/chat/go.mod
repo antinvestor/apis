@@ -4,7 +4,7 @@ go 1.25
 
 require (
 	buf.build/gen/go/antinvestor/chat/connectrpc/go v1.19.1-20251103151143-6ea4bf1e72fa.2
-	github.com/antinvestor/apis/go/common v1.47.6
+	github.com/antinvestor/apis/go/common v1.47.9
 )
 
 require (

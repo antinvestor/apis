@@ -17,9 +17,9 @@ package device
 import (
 	"context"
 
+	"buf.build/gen/go/antinvestor/device/connectrpc/go/device/v1/devicev1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
-	"github.com/antinvestor/apis/go/device/v1/devicev1connect"
 )
 
 const ctxKeyService = common.CtxServiceKey("deviceClientKey")

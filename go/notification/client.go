@@ -17,9 +17,9 @@ package notification
 import (
 	"context"
 
+	"buf.build/gen/go/antinvestor/notification/connectrpc/go/notification/v1/notificationv1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
-	"github.com/antinvestor/apis/go/notification/v1/notificationv1connect"
 )
 
 const ctxKeyService = common.CtxServiceKey("notificationClientKey")

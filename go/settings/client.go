@@ -17,9 +17,9 @@ package settings
 import (
 	"context"
 
+	"buf.build/gen/go/antinvestor/settingz/connectrpc/go/settings/v1/settingsv1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
-	"github.com/antinvestor/apis/go/settings/v1/settingsv1connect"
 )
 
 const ctxKeyService = common.CtxServiceKey("settingsClientKey")

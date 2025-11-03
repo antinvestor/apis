@@ -196,4 +196,4 @@ java/files/.github
 .qodo
 
 
-go/gen
+gen/go

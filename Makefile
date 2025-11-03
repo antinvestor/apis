@@ -29,11 +29,9 @@ cd go/${1} && $(GO) test -vet=off -race -cover ./...
 endef
 
 define mock_package
-cd go/${1} && $(GO) mod tidy
-cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/mocks/grpc/${1}_grpc_mock.go
+$(MOCK_GEN) -source=${CUR_DIR}gen/go/${1}/${2}/${1}_grpc.pb.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/mocks/grpc/${1}_grpc_mock.go
 
-cd go/${1} && $(GO) mod tidy
-cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}v1connect/${1}.connect.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/mocks/${1}_connect_mock.go
+$(MOCK_GEN) -source=${CUR_DIR}gen/go/${1}/${2}/${1}v1connect/${1}.connect.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/mocks/${1}_connect_mock.go
 
 endef
 
@@ -76,7 +74,6 @@ clean: ## Delete intermediate build artifacts
 golang_build_all: generate ## Build all packages
 	$(call golang_build,common)
 	$(call golang_build,chat)
-	$(call golang_build,device)
 	$(call golang_build,notification)
 	$(call golang_build,ocr)
 	$(call golang_build,partition)
@@ -86,6 +83,7 @@ golang_build_all: generate ## Build all packages
 	$(call golang_build,settings)
 	$(call golang_build,ledger)
 	$(call golang_build,lostid)
+	$(call golang_build,device)
 	$(call golang_build,files)
 
 

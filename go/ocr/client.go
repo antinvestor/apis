@@ -17,9 +17,9 @@ package ocr
 import (
 	"context"
 
+	"buf.build/gen/go/antinvestor/ocr/connectrpc/go/ocr/v1/ocrv1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
-	"github.com/antinvestor/apis/go/ocr/v1/ocrv1connect"
 )
 
 const ctxKeyService = common.CtxServiceKey("ocrClientKey")

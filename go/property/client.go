@@ -17,9 +17,9 @@ package property
 import (
 	"context"
 
+	"buf.build/gen/go/antinvestor/property/connectrpc/go/property/v1/propertyv1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
-	"github.com/antinvestor/apis/go/property/v1/propertyv1connect"
 )
 
 const ctxKeyService = common.CtxServiceKey("propertyClientKey")
