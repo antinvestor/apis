@@ -3,6 +3,7 @@ module github.com/antinvestor/apis/go/common
 go 1.25
 
 require (
+	buf.build/gen/go/antinvestor/common/protocolbuffers/go v1.36.10-20251027183628-c4e88473969f.1
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1
 	connectrpc.com/connect v1.19.1
 	github.com/google/gnostic v0.7.1
@@ -15,6 +16,7 @@ require (
 )
 
 require (
+	buf.build/gen/go/gnostic/gnostic/protocolbuffers/go v1.36.10-20230414000709-087bc8072ce4.1 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect

@@ -17,7 +17,7 @@ package chat
 import (
 	"context"
 
-	"github.com/antinvestor/apis/go/chat/v1/chatv1connect"
+	"buf.build/gen/go/antinvestor/chat/connectrpc/go/chat/v1/chatv1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
 )

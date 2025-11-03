@@ -14,6 +14,10 @@
 
 package common
 
+import (
+	_ "buf.build/gen/go/antinvestor/common/protocolbuffers/go/common/v1"
+)
+
 const (
 	CtxKeyPartitionInfo = CtxServiceKey("partitionInfoKey")
 )

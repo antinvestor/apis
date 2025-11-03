@@ -30,10 +30,10 @@ endef
 
 define mock_package
 cd go/${1} && $(GO) mod tidy
-cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/${2}_mocks/grpc/${1}_grpc_mock.go
+cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}_grpc.pb.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/mocks/grpc/${1}_grpc_mock.go
 
 cd go/${1} && $(GO) mod tidy
-cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}v1connect/${1}.connect.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/${2}_mocks/${1}_connect_mock.go
+cd go/${1} && $(MOCK_GEN) -source=${CUR_DIR}go/${1}/${2}/${1}v1connect/${1}.connect.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/mocks/${1}_connect_mock.go
 
 endef
 
@@ -200,7 +200,7 @@ generate_buf_gen:
 .PHONY: generate
 generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header  ## Regenerate code and licenses
 	$(MAKE) generate_buf_gen
-	$(MAKE) generate_grpc_mocks
+	## $(MAKE) generate_grpc_mocks
 	$(MAKE) openapi_files_gen_go
 	$(MAKE) openapi_files_gen_java
 	$(MAKE) openapi_files_gen_dart
