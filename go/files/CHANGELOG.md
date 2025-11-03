@@ -7,4 +7,5 @@
 - refactor: adopt connect clients across Go services
    - PR: #819
 - refactor: adopt connect clients across Go services
+- chore(files): update changelog and version to v1.47.8
 
