@@ -95,6 +95,14 @@ jobs:
       - name: Fetch tags
         run: git fetch --tags --force
 
+      - name: Fetch base branch ref
+        run: |
+          if [ -n "${{ github.base_ref }}" ]; then
+            git fetch --no-tags --depth=1 origin "${{ github.base_ref }}:${{ github.base_ref }}" || true
+            git branch --track "${{ github.base_ref }}" "origin/${{ github.base_ref }}" 2>/dev/null || true
+            git show-ref | grep "refs/remotes/origin/${{ github.base_ref }}" || git fetch origin "${{ github.base_ref }}"
+          fi
+
       - name: Get Release Version
         id: release-version
         run: |
@@ -148,16 +156,41 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Compute changelog range
+        run: |
+          if [ -n "${{ env.latest_tag }}" ]; then
+            echo "FROM_REF=${{ env.latest_tag }}" >> $GITHUB_ENV
+            echo "Using latest tag as fromRef: ${{ env.latest_tag }}"
+          else
+            BASE_REF="origin/${{ github.base_ref }}"
+            git fetch origin "${{ github.base_ref }}" --depth=1 || true
+            BASE_SHA=$(git rev-parse "$BASE_REF" 2>/dev/null || echo "")
+            if [ -n "$BASE_SHA" ]; then
+              MERGE_BASE=$(git merge-base "$BASE_SHA" "${{ github.event.pull_request.head.sha }}" 2>/dev/null || echo "")
+            else
+              MERGE_BASE=$(git merge-base "origin/${{ github.base_ref }}" "${{ github.event.pull_request.head.sha }}" 2>/dev/null || echo "")
+            fi
+            if [ -z "$MERGE_BASE" ]; then
+              MERGE_BASE=$(git rev-list --max-parents=0 HEAD | tail -n 1)
+            fi
+            echo "FROM_REF=$MERGE_BASE" >> $GITHUB_ENV
+            echo "Using merge-base as fromRef: $MERGE_BASE"
+          fi
+
       - name: Generate Changelog for ${{ matrix.language }}/${{ matrix.package }}
         uses: mikepenz/release-changelog-builder-action@v6.0.0
         id: changelog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          fromTag: ${{ env.latest_tag }}
+          mode: "HYBRID"
+          includeOpen: "true"
+          fetchViaCommits: "true"
+          fromTag: ${{ env.FROM_REF }}
           toTag: ${{ github.event.pull_request.head.sha }}
           includeOnlyPaths: |
             ${{ matrix.language }}/${{ matrix.package }}/
+            proto/${{ matrix.package }}/
           ignorePreReleases: "false"
           configurationJson: |
             {
@@ -187,6 +220,62 @@ jobs:
           outputFile: "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Add version header to CHANGELOG
+        if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != ''
+        run: |
+          set -euo pipefail
+
+          VERSION="${{ steps.release-version.outputs.version }}"
+          CHANGELOG_FILE="${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
+          DATE=$(date +%Y-%m-%d)
+          TEMP_FILE="${CHANGELOG_FILE}.tmp"
+          VERSION_HEADER="## [${VERSION}] - ${DATE}"
+
+          mkdir -p "$(dirname "$CHANGELOG_FILE")"
+
+          # Skip update if version already exists in the changelog
+          if [[ -f "$CHANGELOG_FILE" ]] && grep -q "^## \[${VERSION}\]" "$CHANGELOG_FILE"; then
+            echo "ℹ️  Changelog already contains version ${VERSION}, skipping update."
+            exit 0
+          fi
+
+          # Detect if changelog already has the main header
+          if [[ -f "$CHANGELOG_FILE" ]] && grep -q '^# Changelog' "$CHANGELOG_FILE"; then
+            echo "Found existing # Changelog header, preserving it."
+
+            {
+              head -n 1 "$CHANGELOG_FILE"  # keep existing header
+              echo
+              echo "${VERSION_HEADER}"
+              echo
+              tail -n +2 "$CHANGELOG_FILE"  # append rest (skip first line)
+            } > "$TEMP_FILE"
+
+          else
+            echo "No changelog found or missing header, creating new changelog file."
+
+            {
+              echo "# Changelog"
+              echo
+              echo "${VERSION_HEADER}"
+              echo
+              if [[ -f "$CHANGELOG_FILE" ]]; then
+                cat "$CHANGELOG_FILE"
+              else
+                echo "_Initial release._"
+              fi
+            } > "$TEMP_FILE"
+          fi
+
+          # Only replace if the content has actually changed
+          if [[ ! -f "$CHANGELOG_FILE" ]] || ! cmp -s "$TEMP_FILE" "$CHANGELOG_FILE"; then
+            mv -f "$TEMP_FILE" "$CHANGELOG_FILE"
+            echo "✅ Updated changelog for version ${VERSION}"
+          else
+            rm -f "$TEMP_FILE"
+            echo "ℹ️  No changes detected in changelog, skipping write."
+          fi
+
       - name: Display Changelog for ${{ matrix.language }}/${{ matrix.package }}
         if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != ''
         run: |
@@ -195,6 +284,18 @@ jobs:
           cat "${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md" | head -n 20 >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "*[View full changelog](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}/${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md)*" >> $GITHUB_STEP_SUMMARY
+
+      - name: Debug changelog outputs
+        run: |
+          echo "## 🔎 Changelog debug for ${{ matrix.language }}/${{ matrix.package }}" >> $GITHUB_STEP_SUMMARY
+          echo "fromTag: ${{ steps.changelog.outputs.fromTag }}" >> $GITHUB_STEP_SUMMARY
+          echo "toTag:   ${{ steps.changelog.outputs.toTag }}" >> $GITHUB_STEP_SUMMARY
+          echo "categorized_prs: ${{ steps.changelog.outputs.categorized_prs }}" >> $GITHUB_STEP_SUMMARY
+          echo "open_prs:        ${{ steps.changelog.outputs.open_prs }}" >> $GITHUB_STEP_SUMMARY
+          echo "commits:         ${{ steps.changelog.outputs.commits }}" >> $GITHUB_STEP_SUMMARY
+          echo "changes:         ${{ steps.changelog.outputs.changes }}" >> $GITHUB_STEP_SUMMARY
+          echo "failed:  ${{ steps.changelog.outputs.failed }}" >> $GITHUB_STEP_SUMMARY
+          echo "cache:   ${{ steps.changelog.outputs.cache }}" >> $GITHUB_STEP_SUMMARY
 
       - name: Update pubspec.yaml version for Dart
         if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != '' && matrix.language == 'dart'
@@ -217,6 +318,29 @@ jobs:
             echo "Warning: pubspec.yaml not found at $PUBSPEC_FILE"
           fi
 
+      - name: Update VERSION file for Go and Java
+        if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != '' && (matrix.language == 'go' || matrix.language == 'java')
+        run: |
+          VERSION="${{ steps.release-version.outputs.version }}"
+          VERSION_FILE="${{ matrix.language }}/${{ matrix.package }}/VERSION"
+          
+          if [ -f "$VERSION_FILE" ]; then
+            CURRENT_VERSION=$(cat "$VERSION_FILE")
+            echo "Current version in VERSION file: $CURRENT_VERSION"
+            
+            if [ "$CURRENT_VERSION" != "$VERSION" ]; then
+              echo "Updating VERSION file to $VERSION"
+              echo "$VERSION" > "$VERSION_FILE"
+              git add "$VERSION_FILE"
+            else
+              echo "Version already up to date: $VERSION"
+            fi
+          else
+            echo "Creating VERSION file with version $VERSION"
+            echo "$VERSION" > "$VERSION_FILE"
+            git add "$VERSION_FILE"
+          fi
+
       - name: Commit Changelog
         if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != '' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false)
         run: |
@@ -233,6 +357,11 @@ jobs:
           # Add pubspec.yaml if it exists and was modified (for Dart packages)
           if [ -f "${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml" ]; then
             git add "${{ matrix.language }}/${{ matrix.package }}/pubspec.yaml" 2>/dev/null || true
+          fi
+
+          # Add VERSION file if it exists and was modified (for Go and Java packages)
+          if [ -f "${{ matrix.language }}/${{ matrix.package }}/VERSION" ]; then
+            git add "${{ matrix.language }}/${{ matrix.package }}/VERSION" 2>/dev/null || true
           fi
 
           # Create commit if there are staged changes

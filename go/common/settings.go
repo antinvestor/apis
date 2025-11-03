@@ -19,6 +19,7 @@ import (
 	"errors"
 	"net/http"
 
+	"github.com/antinvestor/apis/go/common/connection/options"
 	"google.golang.org/grpc"
 
 	"golang.org/x/oauth2"
@@ -38,6 +39,7 @@ type DialSettings struct {
 	Audiences        []string
 	DefaultAudience  string
 	HTTPClient       *http.Client
+	HTTPDialOpts     []options.HTTPOption
 	GRPCDialOpts     []grpc.DialOption
 	GRPCConn         *grpc.ClientConn
 	ClientCertSource func(*tls.CertificateRequestInfo) (*tls.Certificate, error)

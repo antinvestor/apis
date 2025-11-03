@@ -22,8 +22,6 @@ import (
 	"google.golang.org/grpc"
 )
 
-type CtxServiceKey string
-
 // A ClientOption is an option for a Google API client.
 type ClientOption interface {
 	Apply(*DialSettings)

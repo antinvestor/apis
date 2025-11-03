@@ -12,21 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package common
+package connection
 
 import (
-	"bytes"
 	"context"
 	"crypto/x509"
-	"net/http"
 	"net/url"
-	"runtime"
 	"strings"
 	"sync"
-	"unicode"
 
+	"github.com/antinvestor/apis/go/common"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
+
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
 
@@ -34,15 +32,6 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )
-
-const ctxKeyPartitionInfo = CtxServiceKey("partitionInfoKey")
-
-type PartitionInfo struct {
-	TenantID    string
-	PartitionID string
-	AccessID    string
-	ProfileID   string
-}
 
 type GrpcClientBase struct {
 	// gRPC connection to the service.
@@ -77,18 +66,18 @@ func (gbc *GrpcClientBase) GetInfo() metadata.MD {
 	return gbc.xMetadata
 }
 
-func (gbc *GrpcClientBase) SetPartitionInfo(ctx context.Context, partitionInfo *PartitionInfo) context.Context {
-	return context.WithValue(ctx, ctxKeyPartitionInfo, partitionInfo)
+func (gbc *GrpcClientBase) SetPartitionInfo(ctx context.Context, partitionInfo *common.PartitionInfo) context.Context {
+	return context.WithValue(ctx, common.CtxKeyPartitionInfo, partitionInfo)
 }
 
-func NewClientBase(ctx context.Context, opts ...ClientOption) (*GrpcClientBase, error) {
-	connPool, err := DialConnection(ctx, opts...)
+func NewGrpcClientBase(ctx context.Context, opts ...common.ClientOption) (*GrpcClientBase, error) {
+	conn, err := DialConnection(ctx, opts...)
 	if err != nil {
 		return nil, err
 	}
 
 	clientBase := GrpcClientBase{
-		clientConn: connPool,
+		clientConn: conn,
 	}
 	clientBase.SetInfo()
 	return &clientBase, nil
@@ -101,8 +90,8 @@ type JWTInterceptor struct {
 	mu          sync.Mutex
 }
 
-func (jwt *JWTInterceptor) fromContext(ctx context.Context, key CtxServiceKey) *PartitionInfo {
-	val, ok := ctx.Value(key).(*PartitionInfo)
+func (jwt *JWTInterceptor) fromContext(ctx context.Context, key common.CtxServiceKey) *common.PartitionInfo {
+	val, ok := ctx.Value(key).(*common.PartitionInfo)
 	if !ok {
 		return nil
 	}
@@ -111,7 +100,7 @@ func (jwt *JWTInterceptor) fromContext(ctx context.Context, key CtxServiceKey) *
 }
 
 func (jwt *JWTInterceptor) setupPartitionData(ctx context.Context) context.Context {
-	partitionInfo := jwt.fromContext(ctx, ctxKeyPartitionInfo)
+	partitionInfo := jwt.fromContext(ctx, common.CtxKeyPartitionInfo)
 
 	if partitionInfo == nil {
 		return ctx
@@ -160,7 +149,7 @@ func (jwt *JWTInterceptor) UnaryClientInterceptor(
 	var finalCtx context.Context
 	if tokenStr != "" {
 		// Create a new context with the token and make the first request
-		finalCtx = metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+jwt.token.AccessToken)
+		finalCtx = metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+tokenStr)
 	} else {
 		finalCtx = ctx
 	}
@@ -185,7 +174,7 @@ func (jwt *JWTInterceptor) StreamClientInterceptor(
 	var finalCtx context.Context
 	if tokenStr != "" {
 		// Create a new context with the token and make the first request
-		finalCtx = metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+jwt.token.AccessToken)
+		finalCtx = metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+tokenStr)
 	} else {
 		finalCtx = ctx
 	}
@@ -194,49 +183,8 @@ func (jwt *JWTInterceptor) StreamClientInterceptor(
 	return streamer(finalCtx, desc, cc, method, opts...)
 }
 
-func processAndValidateOpts(opts []ClientOption) (*DialSettings, error) {
-	var o DialSettings
-	for _, opt := range opts {
-		opt.Apply(&o)
-	}
-	if err := o.Validate(); err != nil {
-		return nil, err
-	}
-
-	return &o, nil
-}
-
-// HTTPClient creates a new http client with the provided options.
-func HTTPClient(ctx context.Context, opts ...ClientOption) (*http.Client, error) {
-	var httpClient *http.Client
-	ds, err := processAndValidateOpts(opts)
-	if err != nil {
-		return nil, err
-	}
-	if !ds.NoAuth && ds.APIKey == "" {
-		var endpointValues url.Values
-		if len(ds.Audiences) > 0 {
-			endpointValues = url.Values{}
-			audienceList := strings.Join(ds.Audiences, " ")
-			endpointValues.Add("audience", audienceList)
-		}
-		cfg := &clientcredentials.Config{
-			ClientID:       ds.TokenUserName,
-			ClientSecret:   ds.TokenPassword,
-			TokenURL:       ds.TokenEndpoint,
-			Scopes:         ds.Scopes,
-			EndpointParams: endpointValues,
-		}
-		httpClient = cfg.Client(ctx)
-	} else {
-		httpClient = &http.Client{}
-	}
-
-	return httpClient, nil
-}
-
 // DialConnection creates a gRPC connection with the provided options.
-func DialConnection(_ context.Context, opts ...ClientOption) (*grpc.ClientConn, error) {
+func DialConnection(_ context.Context, opts ...common.ClientOption) (*grpc.ClientConn, error) {
 	ds, err := processAndValidateOpts(opts)
 	if err != nil {
 		return nil, err
@@ -289,61 +237,4 @@ func DialConnection(_ context.Context, opts ...ClientOption) (*grpc.ClientConn, 
 		ds.Endpoint, dialOptions...,
 	)
 	return serviceConnection, err
-}
-
-// XAntHeader Simple way to add a header to the ant service.
-func XAntHeader(keyval ...string) string {
-	if len(keyval) == 0 {
-		return ""
-	}
-	if len(keyval)%2 != 0 {
-		panic("xant.Header: odd argument count")
-	}
-	var buf bytes.Buffer
-	for i := 0; i < len(keyval); i += 2 {
-		buf.WriteByte(' ')
-		buf.WriteString(keyval[i])
-		buf.WriteByte('/')
-		buf.WriteString(keyval[i+1])
-	}
-	return buf.String()[1:]
-}
-
-const minDotsInDomain = 2
-
-// VersionGo returns the Go runtime version. The returned string
-// has no whitespace, suitable for reporting in header.
-func VersionGo() string {
-	const develPrefix = "devel +"
-
-	s := runtime.Version()
-	if strings.HasPrefix(s, develPrefix) {
-		s = s[len(develPrefix):]
-		if p := strings.IndexFunc(s, unicode.IsSpace); p >= 0 {
-			s = s[:p]
-		}
-		return s
-	}
-
-	notSemverRune := func(r rune) bool {
-		return !strings.ContainsRune("0123456789.", r)
-	}
-
-	if strings.HasPrefix(s, "go1") {
-		s = s[2:]
-		var prerelease string
-		if p := strings.IndexFunc(s, notSemverRune); p >= 0 {
-			s, prerelease = s[:p], s[p:]
-		}
-		if strings.HasSuffix(s, ".") {
-			s += "0"
-		} else if strings.Count(s, ".") < minDotsInDomain {
-			s += ".0"
-		}
-		if prerelease != "" {
-			s += "-" + prerelease
-		}
-		return s
-	}
-	return "UNKNOWN"
 }

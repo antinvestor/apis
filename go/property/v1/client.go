@@ -19,6 +19,7 @@ import (
 	"math"
 
 	"github.com/antinvestor/apis/go/common"
+	"github.com/antinvestor/apis/go/common/connection"
 	"google.golang.org/grpc"
 )
 
@@ -49,13 +50,13 @@ func FromContext(ctx context.Context) *PropertyClient {
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type PropertyClient struct {
-	*common.GrpcClientBase
+	*connection.GrpcClientBase
 
 	// The gRPC API svc.
 	svc PropertyServiceClient
 }
 
-func Init(cBase *common.GrpcClientBase, service PropertyServiceClient) *PropertyClient {
+func Init(cBase *connection.GrpcClientBase, service PropertyServiceClient) *PropertyClient {
 	return &PropertyClient{
 		GrpcClientBase: cBase,
 		svc:            service,
@@ -72,7 +73,7 @@ func (pc *PropertyClient) Svc() PropertyServiceClient {
 func NewPropertyClient(ctx context.Context, opts ...common.ClientOption) (*PropertyClient, error) {
 	clientOpts := defaultPropertyClientOptions()
 
-	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
+	clientBase, err := connection.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}

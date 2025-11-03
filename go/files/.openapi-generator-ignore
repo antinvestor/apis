@@ -24,3 +24,6 @@
 
 # Ignore go.mod to prevent overriding custom dependencies
 go.mod
+
+# Ignore VERSION file to prevent overriding versioning
+VERSION

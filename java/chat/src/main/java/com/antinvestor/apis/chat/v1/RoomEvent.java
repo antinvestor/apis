@@ -50,8 +50,7 @@ private static final long serialVersionUID = 0L;
     roomId_ = "";
     senderId_ = "";
     type_ = 0;
-    replacesEventId_ = "";
-    relatesToEventId_ = "";
+    parentId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -321,94 +320,59 @@ private static final long serialVersionUID = 0L;
     return redacted_;
   }
 
-  public static final int REPLACES_EVENT_ID_FIELD_NUMBER = 10;
+  public static final int PARENT_ID_FIELD_NUMBER = 10;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object replacesEventId_ = "";
+  private volatile java.lang.Object parentId_ = "";
   /**
    * <pre>
-   * if this message replaces another (edit)
+   * if this message is a followup event on an original message
    * </pre>
    *
-   * <code>string replaces_event_id = 10 [json_name = "replacesEventId"];</code>
-   * @return The replacesEventId.
+   * <code>optional string parent_id = 10 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return Whether the parentId field is set.
    */
   @java.lang.Override
-  public java.lang.String getReplacesEventId() {
-    java.lang.Object ref = replacesEventId_;
+  public boolean hasParentId() {
+    return ((bitField0_ & 0x00000004) != 0);
+  }
+  /**
+   * <pre>
+   * if this message is a followup event on an original message
+   * </pre>
+   *
+   * <code>optional string parent_id = 10 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return The parentId.
+   */
+  @java.lang.Override
+  public java.lang.String getParentId() {
+    java.lang.Object ref = parentId_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      replacesEventId_ = s;
+      parentId_ = s;
       return s;
     }
   }
   /**
    * <pre>
-   * if this message replaces another (edit)
+   * if this message is a followup event on an original message
    * </pre>
    *
-   * <code>string replaces_event_id = 10 [json_name = "replacesEventId"];</code>
-   * @return The bytes for replacesEventId.
+   * <code>optional string parent_id = 10 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for parentId.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getReplacesEventIdBytes() {
-    java.lang.Object ref = replacesEventId_;
+      getParentIdBytes() {
+    java.lang.Object ref = parentId_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      replacesEventId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int RELATES_TO_EVENT_ID_FIELD_NUMBER = 11;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object relatesToEventId_ = "";
-  /**
-   * <pre>
-   * for reactions / replies
-   * </pre>
-   *
-   * <code>string relates_to_event_id = 11 [json_name = "relatesToEventId"];</code>
-   * @return The relatesToEventId.
-   */
-  @java.lang.Override
-  public java.lang.String getRelatesToEventId() {
-    java.lang.Object ref = relatesToEventId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      relatesToEventId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <pre>
-   * for reactions / replies
-   * </pre>
-   *
-   * <code>string relates_to_event_id = 11 [json_name = "relatesToEventId"];</code>
-   * @return The bytes for relatesToEventId.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getRelatesToEventIdBytes() {
-    java.lang.Object ref = relatesToEventId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      relatesToEventId_ = b;
+      parentId_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -438,7 +402,7 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(senderId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 3, senderId_);
     }
-    if (type_ != com.antinvestor.apis.chat.v1.RoomEventType.UNSPECIFIED.getNumber()) {
+    if (type_ != com.antinvestor.apis.chat.v1.RoomEventType.SYSTEM.getNumber()) {
       output.writeEnum(4, type_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
@@ -453,11 +417,8 @@ private static final long serialVersionUID = 0L;
     if (redacted_ != false) {
       output.writeBool(9, redacted_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(replacesEventId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 10, replacesEventId_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(relatesToEventId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 11, relatesToEventId_);
+    if (((bitField0_ & 0x00000004) != 0)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 10, parentId_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -477,7 +438,7 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(senderId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(3, senderId_);
     }
-    if (type_ != com.antinvestor.apis.chat.v1.RoomEventType.UNSPECIFIED.getNumber()) {
+    if (type_ != com.antinvestor.apis.chat.v1.RoomEventType.SYSTEM.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(4, type_);
     }
@@ -497,11 +458,8 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(9, redacted_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(replacesEventId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(10, replacesEventId_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(relatesToEventId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(11, relatesToEventId_);
+    if (((bitField0_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(10, parentId_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -539,10 +497,11 @@ private static final long serialVersionUID = 0L;
         != other.getEdited()) return false;
     if (getRedacted()
         != other.getRedacted()) return false;
-    if (!getReplacesEventId()
-        .equals(other.getReplacesEventId())) return false;
-    if (!getRelatesToEventId()
-        .equals(other.getRelatesToEventId())) return false;
+    if (hasParentId() != other.hasParentId()) return false;
+    if (hasParentId()) {
+      if (!getParentId()
+          .equals(other.getParentId())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -576,10 +535,10 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + REDACTED_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getRedacted());
-    hash = (37 * hash) + REPLACES_EVENT_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getReplacesEventId().hashCode();
-    hash = (37 * hash) + RELATES_TO_EVENT_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getRelatesToEventId().hashCode();
+    if (hasParentId()) {
+      hash = (37 * hash) + PARENT_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getParentId().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -738,8 +697,7 @@ private static final long serialVersionUID = 0L;
       }
       edited_ = false;
       redacted_ = false;
-      replacesEventId_ = "";
-      relatesToEventId_ = "";
+      parentId_ = "";
       return this;
     }
 
@@ -805,10 +763,8 @@ private static final long serialVersionUID = 0L;
         result.redacted_ = redacted_;
       }
       if (((from_bitField0_ & 0x00000100) != 0)) {
-        result.replacesEventId_ = replacesEventId_;
-      }
-      if (((from_bitField0_ & 0x00000200) != 0)) {
-        result.relatesToEventId_ = relatesToEventId_;
+        result.parentId_ = parentId_;
+        to_bitField0_ |= 0x00000004;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -855,14 +811,9 @@ private static final long serialVersionUID = 0L;
       if (other.getRedacted() != false) {
         setRedacted(other.getRedacted());
       }
-      if (!other.getReplacesEventId().isEmpty()) {
-        replacesEventId_ = other.replacesEventId_;
+      if (other.hasParentId()) {
+        parentId_ = other.parentId_;
         bitField0_ |= 0x00000100;
-        onChanged();
-      }
-      if (!other.getRelatesToEventId().isEmpty()) {
-        relatesToEventId_ = other.relatesToEventId_;
-        bitField0_ |= 0x00000200;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -936,15 +887,10 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 72
             case 82: {
-              replacesEventId_ = input.readStringRequireUtf8();
+              parentId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000100;
               break;
             } // case 82
-            case 90: {
-              relatesToEventId_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000200;
-              break;
-            } // case 90
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1651,22 +1597,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object replacesEventId_ = "";
+    private java.lang.Object parentId_ = "";
     /**
      * <pre>
-     * if this message replaces another (edit)
+     * if this message is a followup event on an original message
      * </pre>
      *
-     * <code>string replaces_event_id = 10 [json_name = "replacesEventId"];</code>
-     * @return The replacesEventId.
+     * <code>optional string parent_id = 10 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @return Whether the parentId field is set.
      */
-    public java.lang.String getReplacesEventId() {
-      java.lang.Object ref = replacesEventId_;
+    public boolean hasParentId() {
+      return ((bitField0_ & 0x00000100) != 0);
+    }
+    /**
+     * <pre>
+     * if this message is a followup event on an original message
+     * </pre>
+     *
+     * <code>optional string parent_id = 10 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @return The parentId.
+     */
+    public java.lang.String getParentId() {
+      java.lang.Object ref = parentId_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        replacesEventId_ = s;
+        parentId_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -1674,20 +1631,20 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * if this message replaces another (edit)
+     * if this message is a followup event on an original message
      * </pre>
      *
-     * <code>string replaces_event_id = 10 [json_name = "replacesEventId"];</code>
-     * @return The bytes for replacesEventId.
+     * <code>optional string parent_id = 10 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for parentId.
      */
     public com.google.protobuf.ByteString
-        getReplacesEventIdBytes() {
-      java.lang.Object ref = replacesEventId_;
+        getParentIdBytes() {
+      java.lang.Object ref = parentId_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        replacesEventId_ = b;
+        parentId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1695,142 +1652,50 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * if this message replaces another (edit)
+     * if this message is a followup event on an original message
      * </pre>
      *
-     * <code>string replaces_event_id = 10 [json_name = "replacesEventId"];</code>
-     * @param value The replacesEventId to set.
+     * <code>optional string parent_id = 10 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @param value The parentId to set.
      * @return This builder for chaining.
      */
-    public Builder setReplacesEventId(
+    public Builder setParentId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      replacesEventId_ = value;
+      parentId_ = value;
       bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * if this message replaces another (edit)
+     * if this message is a followup event on an original message
      * </pre>
      *
-     * <code>string replaces_event_id = 10 [json_name = "replacesEventId"];</code>
+     * <code>optional string parent_id = 10 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
-    public Builder clearReplacesEventId() {
-      replacesEventId_ = getDefaultInstance().getReplacesEventId();
+    public Builder clearParentId() {
+      parentId_ = getDefaultInstance().getParentId();
       bitField0_ = (bitField0_ & ~0x00000100);
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * if this message replaces another (edit)
+     * if this message is a followup event on an original message
      * </pre>
      *
-     * <code>string replaces_event_id = 10 [json_name = "replacesEventId"];</code>
-     * @param value The bytes for replacesEventId to set.
+     * <code>optional string parent_id = 10 [json_name = "parentId", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for parentId to set.
      * @return This builder for chaining.
      */
-    public Builder setReplacesEventIdBytes(
+    public Builder setParentIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      replacesEventId_ = value;
+      parentId_ = value;
       bitField0_ |= 0x00000100;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object relatesToEventId_ = "";
-    /**
-     * <pre>
-     * for reactions / replies
-     * </pre>
-     *
-     * <code>string relates_to_event_id = 11 [json_name = "relatesToEventId"];</code>
-     * @return The relatesToEventId.
-     */
-    public java.lang.String getRelatesToEventId() {
-      java.lang.Object ref = relatesToEventId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        relatesToEventId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <pre>
-     * for reactions / replies
-     * </pre>
-     *
-     * <code>string relates_to_event_id = 11 [json_name = "relatesToEventId"];</code>
-     * @return The bytes for relatesToEventId.
-     */
-    public com.google.protobuf.ByteString
-        getRelatesToEventIdBytes() {
-      java.lang.Object ref = relatesToEventId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        relatesToEventId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <pre>
-     * for reactions / replies
-     * </pre>
-     *
-     * <code>string relates_to_event_id = 11 [json_name = "relatesToEventId"];</code>
-     * @param value The relatesToEventId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setRelatesToEventId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      relatesToEventId_ = value;
-      bitField0_ |= 0x00000200;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * for reactions / replies
-     * </pre>
-     *
-     * <code>string relates_to_event_id = 11 [json_name = "relatesToEventId"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearRelatesToEventId() {
-      relatesToEventId_ = getDefaultInstance().getRelatesToEventId();
-      bitField0_ = (bitField0_ & ~0x00000200);
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * for reactions / replies
-     * </pre>
-     *
-     * <code>string relates_to_event_id = 11 [json_name = "relatesToEventId"];</code>
-     * @param value The bytes for relatesToEventId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setRelatesToEventIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      relatesToEventId_ = value;
-      bitField0_ |= 0x00000200;
       onChanged();
       return this;
     }

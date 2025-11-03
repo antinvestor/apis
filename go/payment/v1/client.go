@@ -19,6 +19,7 @@ import (
 	"math"
 
 	"github.com/antinvestor/apis/go/common"
+	"github.com/antinvestor/apis/go/common/connection"
 	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	"google.golang.org/grpc"
 )
@@ -50,12 +51,12 @@ func FromContext(ctx context.Context) *PaymentClient {
 // Methods, except Close, may be called concurrently.
 // However, fields must not be modified concurrently with method calls.
 type PaymentClient struct {
-	*common.GrpcClientBase
+	*connection.GrpcClientBase
 	// The gRPC API svc.
 	svc PaymentServiceClient
 }
 
-func Init(cBase *common.GrpcClientBase, service PaymentServiceClient) *PaymentClient {
+func Init(cBase *connection.GrpcClientBase, service PaymentServiceClient) *PaymentClient {
 	return &PaymentClient{
 		GrpcClientBase: cBase,
 		svc:            service,
@@ -71,7 +72,7 @@ func (pc *PaymentClient) Svc() PaymentServiceClient {
 func NewPaymentsClient(ctx context.Context, opts ...common.ClientOption) (*PaymentClient, error) {
 	clientOpts := defaultPaymentClientOptions()
 
-	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
+	clientBase, err := connection.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}

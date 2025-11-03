@@ -16,9 +16,11 @@ package ledgerv1
 
 import (
 	"context"
-	"github.com/antinvestor/apis/go/common"
-	"google.golang.org/grpc"
 	"math"
+
+	"github.com/antinvestor/apis/go/common"
+	"github.com/antinvestor/apis/go/common/connection"
+	"google.golang.org/grpc"
 )
 
 const ctxKeyService = common.CtxServiceKey("ledgerClientKey")
@@ -48,13 +50,13 @@ func FromContext(ctx context.Context) *LedgerClient {
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type LedgerClient struct {
-	*common.GrpcClientBase
+	*connection.GrpcClientBase
 
 	// The gRPC API svc.
 	svc LedgerServiceClient
 }
 
-func Init(cBase *common.GrpcClientBase, service LedgerServiceClient) *LedgerClient {
+func Init(cBase *connection.GrpcClientBase, service LedgerServiceClient) *LedgerClient {
 	return &LedgerClient{
 		GrpcClientBase: cBase,
 		svc:            service,
@@ -67,7 +69,7 @@ func Init(cBase *common.GrpcClientBase, service LedgerServiceClient) *LedgerClie
 func NewLedgerClient(ctx context.Context, opts ...common.ClientOption) (*LedgerClient, error) {
 	clientOpts := defaultLedgerClientOptions()
 
-	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
+	clientBase, err := connection.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}

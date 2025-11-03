@@ -864,14 +864,14 @@ components:
         redacted:
           type: boolean
           title: redacted
-        replacesEventId:
+        parentId:
           type: string
-          title: replaces_event_id
-          description: if this message replaces another (edit)
-        relatesToEventId:
-          type: string
-          title: relates_to_event_id
-          description: for reactions / replies
+          title: parent_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: if this message is a followup event on an original message
+          nullable: true
       title: RoomEvent
       additionalProperties: false
       description: Unified message (user / bot / system / signalling)
@@ -879,18 +879,22 @@ components:
       type: string
       title: RoomEventType
       enum:
-        - UNSPECIFIED
+        - SYSTEM
         - EVENT
         - TEXT
         - ATTACHMENT
         - REACTION
         - ENCRYPTED
-        - SYSTEM
+        - EDIT
+        - REDACTION
+        - STATE_DELIVERED
+        - STATE_READ
+        - STATE_TYPING
+        - PRESENCE
         - CALL_OFFER
         - CALL_ANSWER
         - CALL_ICE
         - CALL_END
-        - CUSTOM
       description: Allowed message types. Extendable via new enum values; clients must ignore unknown values.
     chat.v1.RoomSubscription:
       type: object
