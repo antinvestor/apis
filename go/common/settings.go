@@ -15,9 +15,13 @@
 package common
 
 import (
+	"bytes"
 	"crypto/tls"
 	"errors"
 	"net/http"
+	"runtime"
+	"strings"
+	"unicode"
 
 	"google.golang.org/grpc"
 
@@ -76,4 +80,73 @@ func (ds *DialSettings) Validate() error {
 	}
 
 	return nil
+}
+
+func processAndValidateOpts(opts []ClientOption) (*DialSettings, error) {
+	var o DialSettings
+	for _, opt := range opts {
+		opt.Apply(&o)
+	}
+	if err := o.Validate(); err != nil {
+		return nil, err
+	}
+
+	return &o, nil
+}
+
+// XAntHeader Simple way to add a header to the ant service.
+func XAntHeader(keyval ...string) string {
+	if len(keyval) == 0 {
+		return ""
+	}
+	if len(keyval)%2 != 0 {
+		panic("xant.Header: odd argument count")
+	}
+	var buf bytes.Buffer
+	for i := 0; i < len(keyval); i += 2 {
+		buf.WriteByte(' ')
+		buf.WriteString(keyval[i])
+		buf.WriteByte('/')
+		buf.WriteString(keyval[i+1])
+	}
+	return buf.String()[1:]
+}
+
+const minDotsInDomain = 2
+
+// VersionGo returns the Go runtime version. The returned string
+// has no whitespace, suitable for reporting in header.
+func VersionGo() string {
+	const develPrefix = "devel +"
+
+	s := runtime.Version()
+	if strings.HasPrefix(s, develPrefix) {
+		s = s[len(develPrefix):]
+		if p := strings.IndexFunc(s, unicode.IsSpace); p >= 0 {
+			s = s[:p]
+		}
+		return s
+	}
+
+	notSemverRune := func(r rune) bool {
+		return !strings.ContainsRune("0123456789.", r)
+	}
+
+	if strings.HasPrefix(s, "go1") {
+		s = s[2:]
+		var prerelease string
+		if p := strings.IndexFunc(s, notSemverRune); p >= 0 {
+			s, prerelease = s[:p], s[p:]
+		}
+		if strings.HasSuffix(s, ".") {
+			s += "0"
+		} else if strings.Count(s, ".") < minDotsInDomain {
+			s += ".0"
+		}
+		if prerelease != "" {
+			s += "-" + prerelease
+		}
+		return s
+	}
+	return "UNKNOWN"
 }
