@@ -128,5 +128,20 @@ public interface ConnectRequestOrBuilder extends
    */
   com.antinvestor.apis.chat.v1.ClientStateOrBuilder getStateUpdateOrBuilder();
 
+  /**
+   * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+   * @return Whether the sendEventAck field is set.
+   */
+  boolean hasSendEventAck();
+  /**
+   * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+   * @return The sendEventAck.
+   */
+  com.antinvestor.apis.chat.v1.SendEventResponse getSendEventAck();
+  /**
+   * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+   */
+  com.antinvestor.apis.chat.v1.SendEventResponseOrBuilder getSendEventAckOrBuilder();
+
   com.antinvestor.apis.chat.v1.ConnectRequest.PayloadCase getPayloadCase();
 }

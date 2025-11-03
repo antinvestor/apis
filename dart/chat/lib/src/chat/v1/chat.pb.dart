@@ -708,7 +708,7 @@ class TypingEvent extends $pb.GeneratedMessage {
   $0.Timestamp ensureSince() => $_ensure(3);
 }
 
-enum ConnectRequest_Payload { ack, stateUpdate, notSet }
+enum ConnectRequest_Payload { ack, stateUpdate, sendEventAck, notSet }
 
 /// Client message over Connect stream. After initial connect frame, client sends acks/commands.
 class ConnectRequest extends $pb.GeneratedMessage {
@@ -719,6 +719,7 @@ class ConnectRequest extends $pb.GeneratedMessage {
     $core.String? resumeToken,
     StreamAck? ack,
     ClientState? stateUpdate,
+    SendEventResponse? sendEventAck,
   }) {
     final result = create();
     if (sessionId != null) result.sessionId = sessionId;
@@ -727,6 +728,7 @@ class ConnectRequest extends $pb.GeneratedMessage {
     if (resumeToken != null) result.resumeToken = resumeToken;
     if (ack != null) result.ack = ack;
     if (stateUpdate != null) result.stateUpdate = stateUpdate;
+    if (sendEventAck != null) result.sendEventAck = sendEventAck;
     return result;
   }
 
@@ -743,13 +745,14 @@ class ConnectRequest extends $pb.GeneratedMessage {
       _ConnectRequest_PayloadByTag = {
     10: ConnectRequest_Payload.ack,
     12: ConnectRequest_Payload.stateUpdate,
+    15: ConnectRequest_Payload.sendEventAck,
     0: ConnectRequest_Payload.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ConnectRequest',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
-    ..oo(0, [10, 12])
+    ..oo(0, [10, 12, 15])
     ..aOS(2, _omitFieldNames ? '' : 'sessionId')
     ..aOS(3, _omitFieldNames ? '' : 'deviceId')
     ..aOS(4, _omitFieldNames ? '' : 'authToken')
@@ -758,6 +761,8 @@ class ConnectRequest extends $pb.GeneratedMessage {
         subBuilder: StreamAck.create)
     ..aOM<ClientState>(12, _omitFieldNames ? '' : 'stateUpdate',
         protoName: 'stateUpdate', subBuilder: ClientState.create)
+    ..aOM<SendEventResponse>(15, _omitFieldNames ? '' : 'sendEventAck',
+        subBuilder: SendEventResponse.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -783,10 +788,12 @@ class ConnectRequest extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(10)
   @$pb.TagNumber(12)
+  @$pb.TagNumber(15)
   ConnectRequest_Payload whichPayload() =>
       _ConnectRequest_PayloadByTag[$_whichOneof(0)]!;
   @$pb.TagNumber(10)
   @$pb.TagNumber(12)
+  @$pb.TagNumber(15)
   void clearPayload() => $_clearField($_whichOneof(0));
 
   /// Servers should validate auth token before accepting further payload.
@@ -849,6 +856,17 @@ class ConnectRequest extends $pb.GeneratedMessage {
   void clearStateUpdate() => $_clearField(12);
   @$pb.TagNumber(12)
   ClientState ensureStateUpdate() => $_ensure(5);
+
+  @$pb.TagNumber(15)
+  SendEventResponse get sendEventAck => $_getN(6);
+  @$pb.TagNumber(15)
+  set sendEventAck(SendEventResponse value) => $_setField(15, value);
+  @$pb.TagNumber(15)
+  $core.bool hasSendEventAck() => $_has(6);
+  @$pb.TagNumber(15)
+  void clearSendEventAck() => $_clearField(15);
+  @$pb.TagNumber(15)
+  SendEventResponse ensureSendEventAck() => $_ensure(6);
 }
 
 /// Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
@@ -971,6 +989,7 @@ enum ClientState_State {
   readMarker,
   typing,
   presence,
+  sendEvent,
   notSet
 }
 
@@ -982,6 +1001,7 @@ class ClientState extends $pb.GeneratedMessage {
     ReadMarker? readMarker,
     TypingEvent? typing,
     PresenceEvent? presence,
+    SendEventRequest? sendEvent,
   }) {
     final result = create();
     if (roomEvent != null) result.roomEvent = roomEvent;
@@ -989,6 +1009,7 @@ class ClientState extends $pb.GeneratedMessage {
     if (readMarker != null) result.readMarker = readMarker;
     if (typing != null) result.typing = typing;
     if (presence != null) result.presence = presence;
+    if (sendEvent != null) result.sendEvent = sendEvent;
     return result;
   }
 
@@ -1008,13 +1029,14 @@ class ClientState extends $pb.GeneratedMessage {
     3: ClientState_State.readMarker,
     4: ClientState_State.typing,
     5: ClientState_State.presence,
+    10: ClientState_State.sendEvent,
     0: ClientState_State.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ClientState',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'chat.v1'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5])
+    ..oo(0, [1, 2, 3, 4, 5, 10])
     ..aOM<RoomEvent>(1, _omitFieldNames ? '' : 'roomEvent',
         subBuilder: RoomEvent.create)
     ..aOM<ReceiptEvent>(2, _omitFieldNames ? '' : 'receipt',
@@ -1025,6 +1047,8 @@ class ClientState extends $pb.GeneratedMessage {
         subBuilder: TypingEvent.create)
     ..aOM<PresenceEvent>(5, _omitFieldNames ? '' : 'presence',
         subBuilder: PresenceEvent.create)
+    ..aOM<SendEventRequest>(10, _omitFieldNames ? '' : 'sendEvent',
+        subBuilder: SendEventRequest.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1052,12 +1076,14 @@ class ClientState extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   @$pb.TagNumber(4)
   @$pb.TagNumber(5)
+  @$pb.TagNumber(10)
   ClientState_State whichState() => _ClientState_StateByTag[$_whichOneof(0)]!;
   @$pb.TagNumber(1)
   @$pb.TagNumber(2)
   @$pb.TagNumber(3)
   @$pb.TagNumber(4)
   @$pb.TagNumber(5)
+  @$pb.TagNumber(10)
   void clearState() => $_clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
@@ -1114,6 +1140,17 @@ class ClientState extends $pb.GeneratedMessage {
   void clearPresence() => $_clearField(5);
   @$pb.TagNumber(5)
   PresenceEvent ensurePresence() => $_ensure(4);
+
+  @$pb.TagNumber(10)
+  SendEventRequest get sendEvent => $_getN(5);
+  @$pb.TagNumber(10)
+  set sendEvent(SendEventRequest value) => $_setField(10, value);
+  @$pb.TagNumber(10)
+  $core.bool hasSendEvent() => $_has(5);
+  @$pb.TagNumber(10)
+  void clearSendEvent() => $_clearField(10);
+  @$pb.TagNumber(10)
+  SendEventRequest ensureSendEvent() => $_ensure(5);
 }
 
 class SendEventRequest extends $pb.GeneratedMessage {

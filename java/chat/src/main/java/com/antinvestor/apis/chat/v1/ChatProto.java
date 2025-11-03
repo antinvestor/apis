@@ -271,249 +271,252 @@ public final class ChatProto extends com.google.protobuf.GeneratedFile {
       "oom_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20" +
       "}R\006roomId\022\026\n\006typing\030\003 \001(\010R\006typing\0220\n\005sin" +
       "ce\030\005 \001(\0132\032.google.protobuf.TimestampR\005si" +
-      "nce\"\373\001\n\016ConnectRequest\022\035\n\nsession_id\030\002 \001" +
+      "nce\"\277\002\n\016ConnectRequest\022\035\n\nsession_id\030\002 \001" +
       "(\tR\tsessionId\022\033\n\tdevice_id\030\003 \001(\tR\010device" +
       "Id\022\035\n\nauth_token\030\004 \001(\tR\tauthToken\022!\n\014res" +
       "ume_token\030\005 \001(\tR\013resumeToken\022&\n\003ack\030\n \001(" +
       "\0132\022.chat.v1.StreamAckH\000R\003ack\0228\n\013stateUpd" +
       "ate\030\014 \001(\0132\024.chat.v1.ClientStateH\000R\013state" +
-      "UpdateB\t\n\007payload\"\236\002\n\tStreamAck\0224\n\007room_" +
-      "id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006r" +
-      "oomId\0226\n\010event_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9" +
-      "a-z_-]{3,20}R\007eventId\0221\n\006ack_at\030\003 \001(\0132\032." +
-      "google.protobuf.TimestampR\005ackAt\0223\n\010meta" +
-      "data\030\006 \001(\0132\027.google.protobuf.StructR\010met" +
-      "adata\0221\n\005error\030\007 \001(\0132\026.common.v1.ErrorDe" +
-      "tailH\000R\005error\210\001\001B\010\n\006_error\"\234\002\n\013ClientSta" +
-      "te\022.\n\006typing\030\004 \001(\0132\024.chat.v1.TypingEvent" +
-      "H\000R\006typing\0221\n\007receipt\030\002 \001(\0132\025.chat.v1.Re" +
-      "ceiptEventH\000R\007receipt\0226\n\013read_marker\030\003 \001" +
-      "(\0132\023.chat.v1.ReadMarkerH\000R\nreadMarker\0223\n" +
-      "\nroom_event\030\001 \001(\0132\022.chat.v1.RoomEventH\000R" +
-      "\troomEvent\0224\n\010presence\030\005 \001(\0132\026.chat.v1.P" +
-      "resenceEventH\000R\010presenceB\007\n\005state\"<\n\020Sen" +
-      "dEventRequest\022(\n\005event\030\004 \003(\0132\022.chat.v1.R" +
-      "oomEventR\005event\"9\n\021SendEventResponse\022$\n\003" +
-      "ack\030\001 \003(\0132\022.chat.v1.StreamAckR\003ack\"t\n\021Ge" +
-      "tHistoryRequest\022\027\n\007room_id\030\002 \001(\tR\006roomId" +
-      "\022\026\n\006cursor\030\003 \001(\tR\006cursor\022\024\n\005limit\030\004 \001(\005R" +
-      "\005limit\022\030\n\007forward\030\005 \001(\010R\007forward\"\204\001\n\022Get" +
-      "HistoryResponse\022,\n\006events\030\001 \003(\0132\024.chat.v" +
-      "1.ServerEventR\006events\022\037\n\013next_cursor\030\002 \001" +
-      "(\tR\nnextCursor\022\037\n\013prev_cursor\030\003 \001(\tR\npre" +
-      "vCursor\"\336\002\n\004Room\022+\n\002id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2" +
-      "\020[0-9a-z_-]{3,20}R\002id\022\036\n\004name\030\003 \001(\tB\n\272H\007" +
-      "r\005\020\002\030\310\001R\004name\022 \n\013description\030\004 \001(\tR\013desc" +
-      "ription\022\035\n\nis_private\030\005 \001(\010R\tisPrivate\0223" +
-      "\n\010metadata\030\006 \001(\0132\027.google.protobuf.Struc" +
-      "tR\010metadata\0229\n\ncreated_at\030\007 \001(\0132\032.google" +
-      ".protobuf.TimestampR\tcreatedAt\0229\n\nupdate" +
-      "d_at\030\010 \001(\0132\032.google.protobuf.TimestampR\t" +
-      "updatedAt\022\035\n\ncreator_id\030\t \001(\tR\tcreatorId" +
-      "\"\360\001\n\021CreateRoomRequest\022+\n\002id\030\003 \001(\tB\033\272H\030r" +
-      "\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\036\n\004name\030\004 \001(" +
-      "\tB\n\272H\007r\005\020\002\030\310\001R\004name\022 \n\013description\030\005 \001(\t" +
-      "R\013description\022\035\n\nis_private\030\006 \001(\010R\tisPri" +
-      "vate\022\030\n\007members\030\007 \003(\tR\007members\0223\n\010metada" +
-      "ta\030\010 \001(\0132\027.google.protobuf.StructR\010metad" +
-      "ata\"e\n\022CreateRoomResponse\022!\n\004room\030\001 \001(\0132" +
-      "\r.chat.v1.RoomR\004room\022,\n\005error\030\002 \001(\0132\026.co" +
-      "mmon.v1.ErrorDetailR\005error\"\337\001\n\022SearchRoo" +
-      "msRequest\022\024\n\005query\030\001 \001(\tR\005query\022\022\n\004page\030" +
-      "\002 \001(\005R\004page\022\024\n\005count\030\003 \001(\005R\005count\022\035\n\nsta" +
-      "rt_date\030\004 \001(\tR\tstartDate\022\031\n\010end_date\030\005 \001" +
-      "(\tR\007endDate\022\036\n\nproperties\030\006 \003(\tR\npropert" +
-      "ies\022/\n\006extras\030\007 \001(\0132\027.google.protobuf.St" +
-      "ructR\006extras\"8\n\023SearchRoomsResponse\022!\n\004d" +
-      "ata\030\001 \003(\0132\r.chat.v1.RoomR\004data\"\250\001\n\021Updat" +
-      "eRoomRequest\0224\n\007room_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(" +
-      "2\020[0-9a-z_-]{3,20}R\006roomId\022\022\n\004name\030\003 \001(\t" +
-      "R\004name\022\024\n\005topic\030\004 \001(\tR\005topic\0223\n\010metadata" +
-      "\030\005 \001(\0132\027.google.protobuf.StructR\010metadat" +
-      "a\"e\n\022UpdateRoomResponse\022!\n\004room\030\001 \001(\0132\r." +
-      "chat.v1.RoomR\004room\022,\n\005error\030\002 \001(\0132\026.comm" +
-      "on.v1.ErrorDetailR\005error\"I\n\021DeleteRoomRe" +
-      "quest\0224\n\007room_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a" +
-      "-z_-]{3,20}R\006roomId\"[\n\022DeleteRoomRespons" +
-      "e\022\027\n\007room_id\030\001 \001(\tR\006roomId\022,\n\005error\030\002 \001(" +
-      "\0132\026.common.v1.ErrorDetailR\005error\"\220\002\n\020Roo" +
-      "mSubscription\0224\n\007room_id\030\002 \001(\tB\033\272H\030r\026\020\003\030" +
-      "(2\020[0-9a-z_-]{3,20}R\006roomId\022:\n\nprofile_i" +
-      "d\030\003 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\tpr" +
-      "ofileId\022\024\n\005roles\030\004 \003(\tR\005roles\0227\n\tjoined_" +
-      "at\030\005 \001(\0132\032.google.protobuf.TimestampR\010jo" +
-      "inedAt\022;\n\013last_active\030\006 \001(\0132\032.google.pro" +
-      "tobuf.TimestampR\nlastActive\"\210\001\n\033AddRoomS" +
-      "ubscriptionsRequest\0224\n\007room_id\030\002 \001(\tB\033\272H" +
-      "\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006roomId\0223\n\007mem" +
-      "bers\030\003 \003(\0132\031.chat.v1.RoomSubscriptionR\007m" +
-      "embers\"\202\001\n\034AddRoomSubscriptionsResponse\022" +
-      "4\n\007room_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{" +
-      "3,20}R\006roomId\022,\n\005error\030\003 \001(\0132\026.common.v1" +
-      ".ErrorDetailR\005error\"w\n\036RemoveRoomSubscri" +
-      "ptionsRequest\0224\n\007room_id\030\002 \001(\tB\033\272H\030r\026\020\003\030" +
-      "(2\020[0-9a-z_-]{3,20}R\006roomId\022\037\n\013profile_i" +
-      "ds\030\003 \003(\tR\nprofileIds\"\205\001\n\037RemoveRoomSubsc" +
-      "riptionsResponse\0224\n\007room_id\030\001 \001(\tB\033\272H\030r\026" +
-      "\020\003\030(2\020[0-9a-z_-]{3,20}R\006roomId\022,\n\005error\030" +
-      "\003 \001(\0132\026.common.v1.ErrorDetailR\005error\"\212\001\n" +
-      "\035UpdateSubscriptionRoleRequest\0224\n\007room_i" +
-      "d\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006ro" +
-      "omId\022\035\n\nprofile_id\030\003 \001(\tR\tprofileId\022\024\n\005r" +
-      "oles\030\004 \003(\tR\005roles\"\204\001\n\036UpdateSubscription" +
-      "RoleResponse\0224\n\007room_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(" +
-      "2\020[0-9a-z_-]{3,20}R\006roomId\022,\n\005error\030\003 \001(" +
-      "\0132\026.common.v1.ErrorDetailR\005error\"\204\001\n\036Sea" +
-      "rchRoomSubscriptionsRequest\0224\n\007room_id\030\002" +
+      "Update\022B\n\016send_event_ack\030\017 \001(\0132\032.chat.v1" +
+      ".SendEventResponseH\000R\014sendEventAckB\t\n\007pa" +
+      "yload\"\236\002\n\tStreamAck\0224\n\007room_id\030\001 \001(\tB\033\272H" +
+      "\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006roomId\0226\n\010eve" +
+      "nt_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}" +
+      "R\007eventId\0221\n\006ack_at\030\003 \001(\0132\032.google.proto" +
+      "buf.TimestampR\005ackAt\0223\n\010metadata\030\006 \001(\0132\027" +
+      ".google.protobuf.StructR\010metadata\0221\n\005err" +
+      "or\030\007 \001(\0132\026.common.v1.ErrorDetailH\000R\005erro" +
+      "r\210\001\001B\010\n\006_error\"\330\002\n\013ClientState\022.\n\006typing" +
+      "\030\004 \001(\0132\024.chat.v1.TypingEventH\000R\006typing\0221" +
+      "\n\007receipt\030\002 \001(\0132\025.chat.v1.ReceiptEventH\000" +
+      "R\007receipt\0226\n\013read_marker\030\003 \001(\0132\023.chat.v1" +
+      ".ReadMarkerH\000R\nreadMarker\0223\n\nroom_event\030" +
+      "\001 \001(\0132\022.chat.v1.RoomEventH\000R\troomEvent\0224" +
+      "\n\010presence\030\005 \001(\0132\026.chat.v1.PresenceEvent" +
+      "H\000R\010presence\022:\n\nsend_event\030\n \001(\0132\031.chat." +
+      "v1.SendEventRequestH\000R\tsendEventB\007\n\005stat" +
+      "e\"<\n\020SendEventRequest\022(\n\005event\030\004 \003(\0132\022.c" +
+      "hat.v1.RoomEventR\005event\"9\n\021SendEventResp" +
+      "onse\022$\n\003ack\030\001 \003(\0132\022.chat.v1.StreamAckR\003a" +
+      "ck\"t\n\021GetHistoryRequest\022\027\n\007room_id\030\002 \001(\t" +
+      "R\006roomId\022\026\n\006cursor\030\003 \001(\tR\006cursor\022\024\n\005limi" +
+      "t\030\004 \001(\005R\005limit\022\030\n\007forward\030\005 \001(\010R\007forward" +
+      "\"\204\001\n\022GetHistoryResponse\022,\n\006events\030\001 \003(\0132" +
+      "\024.chat.v1.ServerEventR\006events\022\037\n\013next_cu" +
+      "rsor\030\002 \001(\tR\nnextCursor\022\037\n\013prev_cursor\030\003 " +
+      "\001(\tR\nprevCursor\"\336\002\n\004Room\022+\n\002id\030\002 \001(\tB\033\272H" +
+      "\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\036\n\004name\030\003 " +
+      "\001(\tB\n\272H\007r\005\020\002\030\310\001R\004name\022 \n\013description\030\004 \001" +
+      "(\tR\013description\022\035\n\nis_private\030\005 \001(\010R\tisP" +
+      "rivate\0223\n\010metadata\030\006 \001(\0132\027.google.protob" +
+      "uf.StructR\010metadata\0229\n\ncreated_at\030\007 \001(\0132" +
+      "\032.google.protobuf.TimestampR\tcreatedAt\0229" +
+      "\n\nupdated_at\030\010 \001(\0132\032.google.protobuf.Tim" +
+      "estampR\tupdatedAt\022\035\n\ncreator_id\030\t \001(\tR\tc" +
+      "reatorId\"\360\001\n\021CreateRoomRequest\022+\n\002id\030\003 \001" +
+      "(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\036\n\004n" +
+      "ame\030\004 \001(\tB\n\272H\007r\005\020\002\030\310\001R\004name\022 \n\013descripti" +
+      "on\030\005 \001(\tR\013description\022\035\n\nis_private\030\006 \001(" +
+      "\010R\tisPrivate\022\030\n\007members\030\007 \003(\tR\007members\0223" +
+      "\n\010metadata\030\010 \001(\0132\027.google.protobuf.Struc" +
+      "tR\010metadata\"e\n\022CreateRoomResponse\022!\n\004roo" +
+      "m\030\001 \001(\0132\r.chat.v1.RoomR\004room\022,\n\005error\030\002 " +
+      "\001(\0132\026.common.v1.ErrorDetailR\005error\"\337\001\n\022S" +
+      "earchRoomsRequest\022\024\n\005query\030\001 \001(\tR\005query\022" +
+      "\022\n\004page\030\002 \001(\005R\004page\022\024\n\005count\030\003 \001(\005R\005coun" +
+      "t\022\035\n\nstart_date\030\004 \001(\tR\tstartDate\022\031\n\010end_" +
+      "date\030\005 \001(\tR\007endDate\022\036\n\nproperties\030\006 \003(\tR" +
+      "\nproperties\022/\n\006extras\030\007 \001(\0132\027.google.pro" +
+      "tobuf.StructR\006extras\"8\n\023SearchRoomsRespo" +
+      "nse\022!\n\004data\030\001 \003(\0132\r.chat.v1.RoomR\004data\"\250" +
+      "\001\n\021UpdateRoomRequest\0224\n\007room_id\030\002 \001(\tB\033\272" +
+      "H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006roomId\022\022\n\004na" +
+      "me\030\003 \001(\tR\004name\022\024\n\005topic\030\004 \001(\tR\005topic\0223\n\010" +
+      "metadata\030\005 \001(\0132\027.google.protobuf.StructR" +
+      "\010metadata\"e\n\022UpdateRoomResponse\022!\n\004room\030" +
+      "\001 \001(\0132\r.chat.v1.RoomR\004room\022,\n\005error\030\002 \001(" +
+      "\0132\026.common.v1.ErrorDetailR\005error\"I\n\021Dele" +
+      "teRoomRequest\0224\n\007room_id\030\002 \001(\tB\033\272H\030r\026\020\003\030" +
+      "(2\020[0-9a-z_-]{3,20}R\006roomId\"[\n\022DeleteRoo" +
+      "mResponse\022\027\n\007room_id\030\001 \001(\tR\006roomId\022,\n\005er" +
+      "ror\030\002 \001(\0132\026.common.v1.ErrorDetailR\005error" +
+      "\"\220\002\n\020RoomSubscription\0224\n\007room_id\030\002 \001(\tB\033" +
+      "\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006roomId\022:\n\np" +
+      "rofile_id\030\003 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3" +
+      ",20}R\tprofileId\022\024\n\005roles\030\004 \003(\tR\005roles\0227\n" +
+      "\tjoined_at\030\005 \001(\0132\032.google.protobuf.Times" +
+      "tampR\010joinedAt\022;\n\013last_active\030\006 \001(\0132\032.go" +
+      "ogle.protobuf.TimestampR\nlastActive\"\210\001\n\033" +
+      "AddRoomSubscriptionsRequest\0224\n\007room_id\030\002" +
       " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006roomI" +
-      "d\022\024\n\005limit\030\003 \001(\005R\005limit\022\026\n\006cursor\030\004 \001(\tR" +
-      "\006cursor\"\255\001\n\037SearchRoomSubscriptionsRespo" +
-      "nse\0224\n\007room_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z" +
-      "_-]{3,20}R\006roomId\0223\n\007members\030\002 \003(\0132\031.cha" +
-      "t.v1.RoomSubscriptionR\007members\022\037\n\013next_c" +
-      "ursor\030\003 \001(\tR\nnextCursor\"\306\001\n\030UpdateClient" +
-      "StateRequest\0224\n\007room_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(" +
-      "2\020[0-9a-z_-]{3,20}R\006roomId\022:\n\nprofile_id" +
-      "\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\tpro" +
-      "fileId\0228\n\014clientStates\030\003 \003(\0132\024.chat.v1.C" +
-      "lientStateR\014clientStates\"I\n\031UpdateClient" +
-      "StateResponse\022,\n\005error\030\001 \001(\0132\026.common.v1" +
-      ".ErrorDetailR\005error\"\222\002\n\025GetClientStateRe" +
-      "quest\0224\n\007room_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a" +
-      "-z_-]{3,20}R\006roomId\022\037\n\013profile_ids\030\002 \003(\t" +
-      "R\nprofileIds\022L\n\tstateType\030\003 \001(\0162..chat.v" +
-      "1.GetClientStateRequest.ClientStateTypeR" +
-      "\tstateType\"T\n\017ClientStateType\022\036\n\032CLIENT_" +
-      "STATE_TYPE_PRESENCE\020\000\022!\n\035CLIENT_STATE_TY" +
-      "PE_READ_MARKER\020\001\"i\n\026GetClientStateRespon" +
-      "se\022\027\n\007room_id\030\001 \001(\tR\006roomId\0226\n\013clientSta" +
-      "te\030\002 \003(\0132\024.chat.v1.ClientStateR\013clientSt" +
-      "ate*\370\001\n\rRoomEventType\022\n\n\006SYSTEM\020\000\022\t\n\005EVE" +
-      "NT\020\001\022\010\n\004TEXT\020\002\022\016\n\nATTACHMENT\020\003\022\014\n\010REACTI" +
-      "ON\020\007\022\r\n\tENCRYPTED\020\006\022\010\n\004EDIT\020\010\022\r\n\tREDACTI" +
-      "ON\020\t\022\023\n\017STATE_DELIVERED\020\n\022\016\n\nSTATE_READ\020" +
-      "\013\022\020\n\014STATE_TYPING\020\014\022\014\n\010PRESENCE\020\021\022\016\n\nCAL" +
-      "L_OFFER\020\025\022\017\n\013CALL_ANSWER\020\026\022\014\n\010CALL_ICE\020\027" +
-      "\022\014\n\010CALL_END\020\030*6\n\016PresenceStatus\022\013\n\007UNKN" +
-      "OWN\020\000\022\013\n\007OFFLINE\020\001\022\n\n\006ONLINE\020\0022\202\003\n\016Gatew" +
-      "ayService\022\357\002\n\007Connect\022\027.chat.v1.ConnectR" +
-      "equest\032\024.chat.v1.ServerEvent\"\260\002\272G\254\002\n\tRea" +
-      "l-time\022-Establish bi-directional streami" +
-      "ng connection\032\346\001Opens a persistent bi-di" +
-      "rectional stream for real-time chat even" +
-      "ts. Clients send ConnectRequest messages" +
-      " (auth, acks, commands) and receive Serv" +
-      "erEvent messages in chronological order." +
-      " Supports session resumption via resume_" +
-      "token.*\007connect(\0010\0012\337\032\n\013ChatService\022\221\002\n\t" +
-      "SendEvent\022\031.chat.v1.SendEventRequest\032\032.c" +
-      "hat.v1.SendEventResponse\"\314\001\272G\310\001\n\010Message" +
-      "s\022\027Send an event to a room\032\227\001Sends one o" +
-      "r more events to chat rooms. Supports te" +
-      "xt, attachments, reactions, and system m" +
-      "essages. Idempotent when idempotency_key" +
-      " header is provided.*\tsendEvent\022\210\002\n\nGetH" +
-      "istory\022\032.chat.v1.GetHistoryRequest\032\033.cha" +
-      "t.v1.GetHistoryResponse\"\300\001\272G\274\001\n\010Messages" +
-      "\022#Retrieve message history for a room\032\177F" +
-      "etches paginated message history for a s" +
-      "pecified room using cursor-based navigat" +
-      "ion. Supports forward and backward pagin" +
-      "ation.*\ngetHistory\022\235\002\n\nCreateRoom\022\032.chat" +
-      ".v1.CreateRoomRequest\032\033.chat.v1.CreateRo" +
-      "omResponse\"\325\001\272G\321\001\n\005Rooms\022\026Create a new c" +
-      "hat room\032\243\001Creates a new chat room with " +
-      "specified configuration. The creator is " +
-      "automatically added as a member with own" +
-      "er privileges. Supports both public and " +
-      "private rooms.*\ncreateRoom\022\233\002\n\013SearchRoo" +
-      "ms\022\033.chat.v1.SearchRoomsRequest\032\034.chat.v" +
-      "1.SearchRoomsResponse\"\316\001\272G\312\001\n\005Rooms\022\025Sea" +
-      "rch for chat rooms\032\234\001Searches for chat r" +
-      "ooms matching the specified criteria. Re" +
-      "turns a stream of matching rooms. Suppor" +
-      "ts filtering by query, date range, and c" +
-      "ustom properties.*\013searchRooms0\001\022\207\002\n\nUpd" +
-      "ateRoom\022\032.chat.v1.UpdateRoomRequest\032\033.ch" +
-      "at.v1.UpdateRoomResponse\"\277\001\272G\273\001\n\005Rooms\022\022" +
-      "Update a chat room\032\221\001Updates the configu" +
-      "ration of an existing chat room includin" +
-      "g name, topic, and metadata. Only room o" +
-      "wners and moderators can update room set" +
-      "tings.*\nupdateRoom\022\353\001\n\nDeleteRoom\022\032.chat" +
-      ".v1.DeleteRoomRequest\032\033.chat.v1.DeleteRo" +
-      "omResponse\"\243\001\272G\237\001\n\005Rooms\022\022Delete a chat " +
-      "room\032vPermanently deletes a chat room an" +
-      "d all its messages. This action cannot b" +
-      "e undone. Only room owners can delete ro" +
-      "oms.*\ndeleteRoom\022\255\002\n\024AddRoomSubscription" +
-      "s\022$.chat.v1.AddRoomSubscriptionsRequest\032" +
-      "%.chat.v1.AddRoomSubscriptionsResponse\"\307" +
-      "\001\272G\303\001\n\rSubscriptions\022\025Add members to a r" +
-      "oom\032\204\001Adds one or more users to a chat r" +
-      "oom with specified roles. The requesting" +
-      " user must have owner or moderator privi" +
-      "leges in the room.*\024addRoomSubscriptions" +
-      "\022\312\002\n\027RemoveRoomSubscriptions\022\'.chat.v1.R" +
-      "emoveRoomSubscriptionsRequest\032(.chat.v1." +
-      "RemoveRoomSubscriptionsResponse\"\333\001\272G\327\001\n\r" +
-      "Subscriptions\022\032Remove members from a roo" +
-      "m\032\220\001Removes one or more users from a cha" +
-      "t room. The requesting user must have ow" +
-      "ner or moderator privileges in the room," +
-      " unless removing themselves.*\027removeRoom" +
-      "Subscriptions\022\261\002\n\026UpdateSubscriptionRole" +
-      "\022&.chat.v1.UpdateSubscriptionRoleRequest" +
-      "\032\'.chat.v1.UpdateSubscriptionRoleRespons" +
-      "e\"\305\001\272G\301\001\n\rSubscriptions\022 Update a member" +
-      "\'s role in a room\032vUpdates the role(s) o" +
-      "f a user in a chat room. The requesting " +
-      "user must have owner or moderator privil" +
-      "eges in the room.*\026updateSubscriptionRol" +
-      "e\022\232\002\n\027SearchRoomSubscriptions\022\'.chat.v1." +
-      "SearchRoomSubscriptionsRequest\032(.chat.v1" +
-      ".SearchRoomSubscriptionsResponse\"\253\001\272G\247\001\n" +
-      "\rSubscriptions\022\021List room members\032jRetri" +
-      "eves a paginated list of users subscribe" +
-      "d to a room, along with their roles and " +
-      "activity information.*\027searchRoomSubscri" +
-      "ptions\022\201\002\n\021UpdateClientState\022!.chat.v1.U" +
-      "pdateClientStateRequest\032\".chat.v1.Update" +
-      "ClientStateResponse\"\244\001\272G\240\001\n\tReal-time\022\030U" +
-      "pdate state from client\032fUpdates the sta" +
-      "te of an event in a specific room and op" +
-      "tionally Broadcasts to all active partic" +
-      "ipants.*\021updateClientState\022\250\002\n\016GetClient" +
-      "State\022\036.chat.v1.GetClientStateRequest\032\037." +
-      "chat.v1.GetClientStateResponse\"\324\001\272G\320\001\n\tR" +
-      "eal-time\022(Get client states for profiles" +
-      " in a room\032\207\001Retrieves client states for" +
-      " profiles in a room showing either which" +
-      " messages users have read, or presence s" +
-      "tate of the users in a room.*\017getClientS" +
-      "tatesB\350\006\n\034com.antinvestor.apis.chat.v1B\t" +
-      "ChatProtoP\001Z-github.com/antinvestor/apis" +
-      "/go/chat/v1;chatv1\242\002\003CXX\252\002\007Chat.V1\312\002\007Cha" +
-      "t\\V1\342\002\023Chat\\V1\\GPBMetadata\352\002\010Chat::V1\272G\317" +
-      "\005\022\243\005\n\014Chat Service\022\350\003The Chat Service pr" +
-      "ovides endpoints for real-time, secure m" +
-      "essaging between users and devices. It s" +
-      "upports sending, receiving, and synchron" +
-      "izing messages across rooms, direct chat" +
-      "s, and group conversations, with optiona" +
-      "l end-to-end encryption. The service is " +
-      "designed for mobile, desktop, and web cl" +
-      "ients, supporting both streaming and sta" +
-      "ndard request-response operations. APIs " +
-      "are consistent, well-structured, and opt" +
-      "imized for low-latency delivery, even on" +
-      " limited network connections.\"U\n\020Ant Inv" +
-      "estor Ltd\022+https://github.com/antinvesto" +
-      "r/service-chat\032\024info@antinvestor.com*I\n\016" +
-      "Apache License\0227https://github.com/antin" +
-      "vestor/apis/blob/master/LICENSE2\006v1.0.0*" +
-      "\':%\n#\n\nBearerAuth\022\025\n\023\n\004http*\006bearer2\003JWT" +
-      "b\006proto3"
+      "d\0223\n\007members\030\003 \003(\0132\031.chat.v1.RoomSubscri" +
+      "ptionR\007members\"\202\001\n\034AddRoomSubscriptionsR" +
+      "esponse\0224\n\007room_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-" +
+      "9a-z_-]{3,20}R\006roomId\022,\n\005error\030\003 \001(\0132\026.c" +
+      "ommon.v1.ErrorDetailR\005error\"w\n\036RemoveRoo" +
+      "mSubscriptionsRequest\0224\n\007room_id\030\002 \001(\tB\033" +
+      "\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006roomId\022\037\n\013p" +
+      "rofile_ids\030\003 \003(\tR\nprofileIds\"\205\001\n\037RemoveR" +
+      "oomSubscriptionsResponse\0224\n\007room_id\030\001 \001(" +
+      "\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006roomId\022," +
+      "\n\005error\030\003 \001(\0132\026.common.v1.ErrorDetailR\005e" +
+      "rror\"\212\001\n\035UpdateSubscriptionRoleRequest\0224" +
+      "\n\007room_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3" +
+      ",20}R\006roomId\022\035\n\nprofile_id\030\003 \001(\tR\tprofil" +
+      "eId\022\024\n\005roles\030\004 \003(\tR\005roles\"\204\001\n\036UpdateSubs" +
+      "criptionRoleResponse\0224\n\007room_id\030\001 \001(\tB\033\272" +
+      "H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006roomId\022,\n\005er" +
+      "ror\030\003 \001(\0132\026.common.v1.ErrorDetailR\005error" +
+      "\"\204\001\n\036SearchRoomSubscriptionsRequest\0224\n\007r" +
+      "oom_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20" +
+      "}R\006roomId\022\024\n\005limit\030\003 \001(\005R\005limit\022\026\n\006curso" +
+      "r\030\004 \001(\tR\006cursor\"\255\001\n\037SearchRoomSubscripti" +
+      "onsResponse\0224\n\007room_id\030\001 \001(\tB\033\272H\030r\026\020\003\030(2" +
+      "\020[0-9a-z_-]{3,20}R\006roomId\0223\n\007members\030\002 \003" +
+      "(\0132\031.chat.v1.RoomSubscriptionR\007members\022\037" +
+      "\n\013next_cursor\030\003 \001(\tR\nnextCursor\"\306\001\n\030Upda" +
+      "teClientStateRequest\0224\n\007room_id\030\001 \001(\tB\033\272" +
+      "H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\006roomId\022:\n\npr" +
+      "ofile_id\030\002 \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3," +
+      "20}R\tprofileId\0228\n\014clientStates\030\003 \003(\0132\024.c" +
+      "hat.v1.ClientStateR\014clientStates\"I\n\031Upda" +
+      "teClientStateResponse\022,\n\005error\030\001 \001(\0132\026.c" +
+      "ommon.v1.ErrorDetailR\005error\"\222\002\n\025GetClien" +
+      "tStateRequest\0224\n\007room_id\030\001 \001(\tB\033\272H\030r\026\020\003\030" +
+      "(2\020[0-9a-z_-]{3,20}R\006roomId\022\037\n\013profile_i" +
+      "ds\030\002 \003(\tR\nprofileIds\022L\n\tstateType\030\003 \001(\0162" +
+      "..chat.v1.GetClientStateRequest.ClientSt" +
+      "ateTypeR\tstateType\"T\n\017ClientStateType\022\036\n" +
+      "\032CLIENT_STATE_TYPE_PRESENCE\020\000\022!\n\035CLIENT_" +
+      "STATE_TYPE_READ_MARKER\020\001\"i\n\026GetClientSta" +
+      "teResponse\022\027\n\007room_id\030\001 \001(\tR\006roomId\0226\n\013c" +
+      "lientState\030\002 \003(\0132\024.chat.v1.ClientStateR\013" +
+      "clientState*\370\001\n\rRoomEventType\022\n\n\006SYSTEM\020" +
+      "\000\022\t\n\005EVENT\020\001\022\010\n\004TEXT\020\002\022\016\n\nATTACHMENT\020\003\022\014" +
+      "\n\010REACTION\020\007\022\r\n\tENCRYPTED\020\006\022\010\n\004EDIT\020\010\022\r\n" +
+      "\tREDACTION\020\t\022\023\n\017STATE_DELIVERED\020\n\022\016\n\nSTA" +
+      "TE_READ\020\013\022\020\n\014STATE_TYPING\020\014\022\014\n\010PRESENCE\020" +
+      "\021\022\016\n\nCALL_OFFER\020\025\022\017\n\013CALL_ANSWER\020\026\022\014\n\010CA" +
+      "LL_ICE\020\027\022\014\n\010CALL_END\020\030*6\n\016PresenceStatus" +
+      "\022\013\n\007UNKNOWN\020\000\022\013\n\007OFFLINE\020\001\022\n\n\006ONLINE\020\0022\202" +
+      "\003\n\016GatewayService\022\357\002\n\007Connect\022\027.chat.v1." +
+      "ConnectRequest\032\024.chat.v1.ServerEvent\"\260\002\272" +
+      "G\254\002\n\tReal-time\022-Establish bi-directional" +
+      " streaming connection\032\346\001Opens a persiste" +
+      "nt bi-directional stream for real-time c" +
+      "hat events. Clients send ConnectRequest " +
+      "messages (auth, acks, commands) and rece" +
+      "ive ServerEvent messages in chronologica" +
+      "l order. Supports session resumption via" +
+      " resume_token.*\007connect(\0010\0012\337\032\n\013ChatServ" +
+      "ice\022\221\002\n\tSendEvent\022\031.chat.v1.SendEventReq" +
+      "uest\032\032.chat.v1.SendEventResponse\"\314\001\272G\310\001\n" +
+      "\010Messages\022\027Send an event to a room\032\227\001Sen" +
+      "ds one or more events to chat rooms. Sup" +
+      "ports text, attachments, reactions, and " +
+      "system messages. Idempotent when idempot" +
+      "ency_key header is provided.*\tsendEvent\022" +
+      "\210\002\n\nGetHistory\022\032.chat.v1.GetHistoryReque" +
+      "st\032\033.chat.v1.GetHistoryResponse\"\300\001\272G\274\001\n\010" +
+      "Messages\022#Retrieve message history for a" +
+      " room\032\177Fetches paginated message history" +
+      " for a specified room using cursor-based" +
+      " navigation. Supports forward and backwa" +
+      "rd pagination.*\ngetHistory\022\235\002\n\nCreateRoo" +
+      "m\022\032.chat.v1.CreateRoomRequest\032\033.chat.v1." +
+      "CreateRoomResponse\"\325\001\272G\321\001\n\005Rooms\022\026Create" +
+      " a new chat room\032\243\001Creates a new chat ro" +
+      "om with specified configuration. The cre" +
+      "ator is automatically added as a member " +
+      "with owner privileges. Supports both pub" +
+      "lic and private rooms.*\ncreateRoom\022\233\002\n\013S" +
+      "earchRooms\022\033.chat.v1.SearchRoomsRequest\032" +
+      "\034.chat.v1.SearchRoomsResponse\"\316\001\272G\312\001\n\005Ro" +
+      "oms\022\025Search for chat rooms\032\234\001Searches fo" +
+      "r chat rooms matching the specified crit" +
+      "eria. Returns a stream of matching rooms" +
+      ". Supports filtering by query, date rang" +
+      "e, and custom properties.*\013searchRooms0\001" +
+      "\022\207\002\n\nUpdateRoom\022\032.chat.v1.UpdateRoomRequ" +
+      "est\032\033.chat.v1.UpdateRoomResponse\"\277\001\272G\273\001\n" +
+      "\005Rooms\022\022Update a chat room\032\221\001Updates the" +
+      " configuration of an existing chat room " +
+      "including name, topic, and metadata. Onl" +
+      "y room owners and moderators can update " +
+      "room settings.*\nupdateRoom\022\353\001\n\nDeleteRoo" +
+      "m\022\032.chat.v1.DeleteRoomRequest\032\033.chat.v1." +
+      "DeleteRoomResponse\"\243\001\272G\237\001\n\005Rooms\022\022Delete" +
+      " a chat room\032vPermanently deletes a chat" +
+      " room and all its messages. This action " +
+      "cannot be undone. Only room owners can d" +
+      "elete rooms.*\ndeleteRoom\022\255\002\n\024AddRoomSubs" +
+      "criptions\022$.chat.v1.AddRoomSubscriptions" +
+      "Request\032%.chat.v1.AddRoomSubscriptionsRe" +
+      "sponse\"\307\001\272G\303\001\n\rSubscriptions\022\025Add member" +
+      "s to a room\032\204\001Adds one or more users to " +
+      "a chat room with specified roles. The re" +
+      "questing user must have owner or moderat" +
+      "or privileges in the room.*\024addRoomSubsc" +
+      "riptions\022\312\002\n\027RemoveRoomSubscriptions\022\'.c" +
+      "hat.v1.RemoveRoomSubscriptionsRequest\032(." +
+      "chat.v1.RemoveRoomSubscriptionsResponse\"" +
+      "\333\001\272G\327\001\n\rSubscriptions\022\032Remove members fr" +
+      "om a room\032\220\001Removes one or more users fr" +
+      "om a chat room. The requesting user must" +
+      " have owner or moderator privileges in t" +
+      "he room, unless removing themselves.*\027re" +
+      "moveRoomSubscriptions\022\261\002\n\026UpdateSubscrip" +
+      "tionRole\022&.chat.v1.UpdateSubscriptionRol" +
+      "eRequest\032\'.chat.v1.UpdateSubscriptionRol" +
+      "eResponse\"\305\001\272G\301\001\n\rSubscriptions\022 Update " +
+      "a member\'s role in a room\032vUpdates the r" +
+      "ole(s) of a user in a chat room. The req" +
+      "uesting user must have owner or moderato" +
+      "r privileges in the room.*\026updateSubscri" +
+      "ptionRole\022\232\002\n\027SearchRoomSubscriptions\022\'." +
+      "chat.v1.SearchRoomSubscriptionsRequest\032(" +
+      ".chat.v1.SearchRoomSubscriptionsResponse" +
+      "\"\253\001\272G\247\001\n\rSubscriptions\022\021List room member" +
+      "s\032jRetrieves a paginated list of users s" +
+      "ubscribed to a room, along with their ro" +
+      "les and activity information.*\027searchRoo" +
+      "mSubscriptions\022\201\002\n\021UpdateClientState\022!.c" +
+      "hat.v1.UpdateClientStateRequest\032\".chat.v" +
+      "1.UpdateClientStateResponse\"\244\001\272G\240\001\n\tReal" +
+      "-time\022\030Update state from client\032fUpdates" +
+      " the state of an event in a specific roo" +
+      "m and optionally Broadcasts to all activ" +
+      "e participants.*\021updateClientState\022\250\002\n\016G" +
+      "etClientState\022\036.chat.v1.GetClientStateRe" +
+      "quest\032\037.chat.v1.GetClientStateResponse\"\324" +
+      "\001\272G\320\001\n\tReal-time\022(Get client states for " +
+      "profiles in a room\032\207\001Retrieves client st" +
+      "ates for profiles in a room showing eith" +
+      "er which messages users have read, or pr" +
+      "esence state of the users in a room.*\017ge" +
+      "tClientStatesB\350\006\n\034com.antinvestor.apis.c" +
+      "hat.v1B\tChatProtoP\001Z-github.com/antinves" +
+      "tor/apis/go/chat/v1;chatv1\242\002\003CXX\252\002\007Chat." +
+      "V1\312\002\007Chat\\V1\342\002\023Chat\\V1\\GPBMetadata\352\002\010Cha" +
+      "t::V1\272G\317\005\022\243\005\n\014Chat Service\022\350\003The Chat Se" +
+      "rvice provides endpoints for real-time, " +
+      "secure messaging between users and devic" +
+      "es. It supports sending, receiving, and " +
+      "synchronizing messages across rooms, dir" +
+      "ect chats, and group conversations, with" +
+      " optional end-to-end encryption. The ser" +
+      "vice is designed for mobile, desktop, an" +
+      "d web clients, supporting both streaming" +
+      " and standard request-response operation" +
+      "s. APIs are consistent, well-structured," +
+      " and optimized for low-latency delivery," +
+      " even on limited network connections.\"U\n" +
+      "\020Ant Investor Ltd\022+https://github.com/an" +
+      "tinvestor/service-chat\032\024info@antinvestor" +
+      ".com*I\n\016Apache License\0227https://github.c" +
+      "om/antinvestor/apis/blob/master/LICENSE2" +
+      "\006v1.0.0*\':%\n#\n\nBearerAuth\022\025\n\023\n\004http*\006bea" +
+      "rer2\003JWTb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -566,7 +569,7 @@ public final class ChatProto extends com.google.protobuf.GeneratedFile {
     internal_static_chat_v1_ConnectRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_chat_v1_ConnectRequest_descriptor,
-        new java.lang.String[] { "SessionId", "DeviceId", "AuthToken", "ResumeToken", "Ack", "StateUpdate", "Payload", });
+        new java.lang.String[] { "SessionId", "DeviceId", "AuthToken", "ResumeToken", "Ack", "StateUpdate", "SendEventAck", "Payload", });
     internal_static_chat_v1_StreamAck_descriptor =
       getDescriptor().getMessageType(7);
     internal_static_chat_v1_StreamAck_fieldAccessorTable = new
@@ -578,7 +581,7 @@ public final class ChatProto extends com.google.protobuf.GeneratedFile {
     internal_static_chat_v1_ClientState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_chat_v1_ClientState_descriptor,
-        new java.lang.String[] { "Typing", "Receipt", "ReadMarker", "RoomEvent", "Presence", "State", });
+        new java.lang.String[] { "Typing", "Receipt", "ReadMarker", "RoomEvent", "Presence", "SendEvent", "State", });
     internal_static_chat_v1_SendEventRequest_descriptor =
       getDescriptor().getMessageType(9);
     internal_static_chat_v1_SendEventRequest_fieldAccessorTable = new

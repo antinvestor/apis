@@ -147,5 +147,32 @@ public interface ClientStateOrBuilder extends
    */
   com.antinvestor.apis.chat.v1.PresenceEventOrBuilder getPresenceOrBuilder();
 
+  /**
+   * <pre>
+   * Similar to room_event but useful for sending messages in bulk
+   * </pre>
+   *
+   * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+   * @return Whether the sendEvent field is set.
+   */
+  boolean hasSendEvent();
+  /**
+   * <pre>
+   * Similar to room_event but useful for sending messages in bulk
+   * </pre>
+   *
+   * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+   * @return The sendEvent.
+   */
+  com.antinvestor.apis.chat.v1.SendEventRequest getSendEvent();
+  /**
+   * <pre>
+   * Similar to room_event but useful for sending messages in bulk
+   * </pre>
+   *
+   * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+   */
+  com.antinvestor.apis.chat.v1.SendEventRequestOrBuilder getSendEventOrBuilder();
+
   com.antinvestor.apis.chat.v1.ClientState.StateCase getStateCase();
 }

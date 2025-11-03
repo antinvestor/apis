@@ -758,6 +758,7 @@ type ConnectRequest struct {
 	//
 	//	*ConnectRequest_Ack
 	//	*ConnectRequest_StateUpdate
+	//	*ConnectRequest_SendEventAck
 	Payload       isConnectRequest_Payload `protobuf_oneof:"payload"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -846,6 +847,15 @@ func (x *ConnectRequest) GetStateUpdate() *ClientState {
 	return nil
 }
 
+func (x *ConnectRequest) GetSendEventAck() *SendEventResponse {
+	if x != nil {
+		if x, ok := x.Payload.(*ConnectRequest_SendEventAck); ok {
+			return x.SendEventAck
+		}
+	}
+	return nil
+}
+
 type isConnectRequest_Payload interface {
 	isConnectRequest_Payload()
 }
@@ -858,9 +868,15 @@ type ConnectRequest_StateUpdate struct {
 	StateUpdate *ClientState `protobuf:"bytes,12,opt,name=stateUpdate,proto3,oneof"`
 }
 
+type ConnectRequest_SendEventAck struct {
+	SendEventAck *SendEventResponse `protobuf:"bytes,15,opt,name=send_event_ack,json=sendEventAck,proto3,oneof"`
+}
+
 func (*ConnectRequest_Ack) isConnectRequest_Payload() {}
 
 func (*ConnectRequest_StateUpdate) isConnectRequest_Payload() {}
+
+func (*ConnectRequest_SendEventAck) isConnectRequest_Payload() {}
 
 // Acknowledgement for event(s) received; server uses it to free ephemeral delivery buffers.
 // ack_event_id: last event_id client processed (inclusive).
@@ -951,6 +967,7 @@ type ClientState struct {
 	//	*ClientState_ReadMarker
 	//	*ClientState_RoomEvent
 	//	*ClientState_Presence
+	//	*ClientState_SendEvent
 	State         isClientState_State `protobuf_oneof:"state"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1038,6 +1055,15 @@ func (x *ClientState) GetPresence() *PresenceEvent {
 	return nil
 }
 
+func (x *ClientState) GetSendEvent() *SendEventRequest {
+	if x != nil {
+		if x, ok := x.State.(*ClientState_SendEvent); ok {
+			return x.SendEvent
+		}
+	}
+	return nil
+}
+
 type isClientState_State interface {
 	isClientState_State()
 }
@@ -1062,6 +1088,10 @@ type ClientState_Presence struct {
 	Presence *PresenceEvent `protobuf:"bytes,5,opt,name=presence,proto3,oneof"` // send a presence message to a room
 }
 
+type ClientState_SendEvent struct {
+	SendEvent *SendEventRequest `protobuf:"bytes,10,opt,name=send_event,json=sendEvent,proto3,oneof"` // Similar to room_event but useful for sending messages in bulk
+}
+
 func (*ClientState_Typing) isClientState_State() {}
 
 func (*ClientState_Receipt) isClientState_State() {}
@@ -1071,6 +1101,8 @@ func (*ClientState_ReadMarker) isClientState_State() {}
 func (*ClientState_RoomEvent) isClientState_State() {}
 
 func (*ClientState_Presence) isClientState_State() {}
+
+func (*ClientState_SendEvent) isClientState_State() {}
 
 type SendEventRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -2664,7 +2696,7 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"profile_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\tprofileId\x124\n" +
 	"\aroom_id\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06roomId\x12\x16\n" +
 	"\x06typing\x18\x03 \x01(\bR\x06typing\x120\n" +
-	"\x05since\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x05since\"\xfb\x01\n" +
+	"\x05since\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x05since\"\xbf\x02\n" +
 	"\x0eConnectRequest\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x02 \x01(\tR\tsessionId\x12\x1b\n" +
@@ -2674,7 +2706,8 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\fresume_token\x18\x05 \x01(\tR\vresumeToken\x12&\n" +
 	"\x03ack\x18\n" +
 	" \x01(\v2\x12.chat.v1.StreamAckH\x00R\x03ack\x128\n" +
-	"\vstateUpdate\x18\f \x01(\v2\x14.chat.v1.ClientStateH\x00R\vstateUpdateB\t\n" +
+	"\vstateUpdate\x18\f \x01(\v2\x14.chat.v1.ClientStateH\x00R\vstateUpdate\x12B\n" +
+	"\x0esend_event_ack\x18\x0f \x01(\v2\x1a.chat.v1.SendEventResponseH\x00R\fsendEventAckB\t\n" +
 	"\apayload\"\x9e\x02\n" +
 	"\tStreamAck\x124\n" +
 	"\aroom_id\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18(2\x10[0-9a-z_-]{3,20}R\x06roomId\x126\n" +
@@ -2682,7 +2715,7 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"\x06ack_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x05ackAt\x123\n" +
 	"\bmetadata\x18\x06 \x01(\v2\x17.google.protobuf.StructR\bmetadata\x121\n" +
 	"\x05error\x18\a \x01(\v2\x16.common.v1.ErrorDetailH\x00R\x05error\x88\x01\x01B\b\n" +
-	"\x06_error\"\x9c\x02\n" +
+	"\x06_error\"\xd8\x02\n" +
 	"\vClientState\x12.\n" +
 	"\x06typing\x18\x04 \x01(\v2\x14.chat.v1.TypingEventH\x00R\x06typing\x121\n" +
 	"\areceipt\x18\x02 \x01(\v2\x15.chat.v1.ReceiptEventH\x00R\areceipt\x126\n" +
@@ -2690,7 +2723,10 @@ const file_chat_v1_chat_proto_rawDesc = "" +
 	"readMarker\x123\n" +
 	"\n" +
 	"room_event\x18\x01 \x01(\v2\x12.chat.v1.RoomEventH\x00R\troomEvent\x124\n" +
-	"\bpresence\x18\x05 \x01(\v2\x16.chat.v1.PresenceEventH\x00R\bpresenceB\a\n" +
+	"\bpresence\x18\x05 \x01(\v2\x16.chat.v1.PresenceEventH\x00R\bpresence\x12:\n" +
+	"\n" +
+	"send_event\x18\n" +
+	" \x01(\v2\x19.chat.v1.SendEventRequestH\x00R\tsendEventB\a\n" +
 	"\x05state\"<\n" +
 	"\x10SendEventRequest\x12(\n" +
 	"\x05event\x18\x04 \x03(\v2\x12.chat.v1.RoomEventR\x05event\"9\n" +
@@ -2960,71 +2996,73 @@ var file_chat_v1_chat_proto_depIdxs = []int32{
 	38, // 11: chat.v1.TypingEvent.since:type_name -> google.protobuf.Timestamp
 	10, // 12: chat.v1.ConnectRequest.ack:type_name -> chat.v1.StreamAck
 	11, // 13: chat.v1.ConnectRequest.stateUpdate:type_name -> chat.v1.ClientState
-	38, // 14: chat.v1.StreamAck.ack_at:type_name -> google.protobuf.Timestamp
-	39, // 15: chat.v1.StreamAck.metadata:type_name -> google.protobuf.Struct
-	40, // 16: chat.v1.StreamAck.error:type_name -> common.v1.ErrorDetail
-	8,  // 17: chat.v1.ClientState.typing:type_name -> chat.v1.TypingEvent
-	6,  // 18: chat.v1.ClientState.receipt:type_name -> chat.v1.ReceiptEvent
-	7,  // 19: chat.v1.ClientState.read_marker:type_name -> chat.v1.ReadMarker
-	4,  // 20: chat.v1.ClientState.room_event:type_name -> chat.v1.RoomEvent
-	5,  // 21: chat.v1.ClientState.presence:type_name -> chat.v1.PresenceEvent
-	4,  // 22: chat.v1.SendEventRequest.event:type_name -> chat.v1.RoomEvent
-	10, // 23: chat.v1.SendEventResponse.ack:type_name -> chat.v1.StreamAck
-	3,  // 24: chat.v1.GetHistoryResponse.events:type_name -> chat.v1.ServerEvent
-	39, // 25: chat.v1.Room.metadata:type_name -> google.protobuf.Struct
-	38, // 26: chat.v1.Room.created_at:type_name -> google.protobuf.Timestamp
-	38, // 27: chat.v1.Room.updated_at:type_name -> google.protobuf.Timestamp
-	39, // 28: chat.v1.CreateRoomRequest.metadata:type_name -> google.protobuf.Struct
-	16, // 29: chat.v1.CreateRoomResponse.room:type_name -> chat.v1.Room
-	40, // 30: chat.v1.CreateRoomResponse.error:type_name -> common.v1.ErrorDetail
-	39, // 31: chat.v1.SearchRoomsRequest.extras:type_name -> google.protobuf.Struct
-	16, // 32: chat.v1.SearchRoomsResponse.data:type_name -> chat.v1.Room
-	39, // 33: chat.v1.UpdateRoomRequest.metadata:type_name -> google.protobuf.Struct
-	16, // 34: chat.v1.UpdateRoomResponse.room:type_name -> chat.v1.Room
-	40, // 35: chat.v1.UpdateRoomResponse.error:type_name -> common.v1.ErrorDetail
-	40, // 36: chat.v1.DeleteRoomResponse.error:type_name -> common.v1.ErrorDetail
-	38, // 37: chat.v1.RoomSubscription.joined_at:type_name -> google.protobuf.Timestamp
-	38, // 38: chat.v1.RoomSubscription.last_active:type_name -> google.protobuf.Timestamp
-	25, // 39: chat.v1.AddRoomSubscriptionsRequest.members:type_name -> chat.v1.RoomSubscription
-	40, // 40: chat.v1.AddRoomSubscriptionsResponse.error:type_name -> common.v1.ErrorDetail
-	40, // 41: chat.v1.RemoveRoomSubscriptionsResponse.error:type_name -> common.v1.ErrorDetail
-	40, // 42: chat.v1.UpdateSubscriptionRoleResponse.error:type_name -> common.v1.ErrorDetail
-	25, // 43: chat.v1.SearchRoomSubscriptionsResponse.members:type_name -> chat.v1.RoomSubscription
-	11, // 44: chat.v1.UpdateClientStateRequest.clientStates:type_name -> chat.v1.ClientState
-	40, // 45: chat.v1.UpdateClientStateResponse.error:type_name -> common.v1.ErrorDetail
-	2,  // 46: chat.v1.GetClientStateRequest.stateType:type_name -> chat.v1.GetClientStateRequest.ClientStateType
-	11, // 47: chat.v1.GetClientStateResponse.clientState:type_name -> chat.v1.ClientState
-	9,  // 48: chat.v1.GatewayService.Connect:input_type -> chat.v1.ConnectRequest
-	12, // 49: chat.v1.ChatService.SendEvent:input_type -> chat.v1.SendEventRequest
-	14, // 50: chat.v1.ChatService.GetHistory:input_type -> chat.v1.GetHistoryRequest
-	17, // 51: chat.v1.ChatService.CreateRoom:input_type -> chat.v1.CreateRoomRequest
-	19, // 52: chat.v1.ChatService.SearchRooms:input_type -> chat.v1.SearchRoomsRequest
-	21, // 53: chat.v1.ChatService.UpdateRoom:input_type -> chat.v1.UpdateRoomRequest
-	23, // 54: chat.v1.ChatService.DeleteRoom:input_type -> chat.v1.DeleteRoomRequest
-	26, // 55: chat.v1.ChatService.AddRoomSubscriptions:input_type -> chat.v1.AddRoomSubscriptionsRequest
-	28, // 56: chat.v1.ChatService.RemoveRoomSubscriptions:input_type -> chat.v1.RemoveRoomSubscriptionsRequest
-	30, // 57: chat.v1.ChatService.UpdateSubscriptionRole:input_type -> chat.v1.UpdateSubscriptionRoleRequest
-	32, // 58: chat.v1.ChatService.SearchRoomSubscriptions:input_type -> chat.v1.SearchRoomSubscriptionsRequest
-	34, // 59: chat.v1.ChatService.UpdateClientState:input_type -> chat.v1.UpdateClientStateRequest
-	36, // 60: chat.v1.ChatService.GetClientState:input_type -> chat.v1.GetClientStateRequest
-	3,  // 61: chat.v1.GatewayService.Connect:output_type -> chat.v1.ServerEvent
-	13, // 62: chat.v1.ChatService.SendEvent:output_type -> chat.v1.SendEventResponse
-	15, // 63: chat.v1.ChatService.GetHistory:output_type -> chat.v1.GetHistoryResponse
-	18, // 64: chat.v1.ChatService.CreateRoom:output_type -> chat.v1.CreateRoomResponse
-	20, // 65: chat.v1.ChatService.SearchRooms:output_type -> chat.v1.SearchRoomsResponse
-	22, // 66: chat.v1.ChatService.UpdateRoom:output_type -> chat.v1.UpdateRoomResponse
-	24, // 67: chat.v1.ChatService.DeleteRoom:output_type -> chat.v1.DeleteRoomResponse
-	27, // 68: chat.v1.ChatService.AddRoomSubscriptions:output_type -> chat.v1.AddRoomSubscriptionsResponse
-	29, // 69: chat.v1.ChatService.RemoveRoomSubscriptions:output_type -> chat.v1.RemoveRoomSubscriptionsResponse
-	31, // 70: chat.v1.ChatService.UpdateSubscriptionRole:output_type -> chat.v1.UpdateSubscriptionRoleResponse
-	33, // 71: chat.v1.ChatService.SearchRoomSubscriptions:output_type -> chat.v1.SearchRoomSubscriptionsResponse
-	35, // 72: chat.v1.ChatService.UpdateClientState:output_type -> chat.v1.UpdateClientStateResponse
-	37, // 73: chat.v1.ChatService.GetClientState:output_type -> chat.v1.GetClientStateResponse
-	61, // [61:74] is the sub-list for method output_type
-	48, // [48:61] is the sub-list for method input_type
-	48, // [48:48] is the sub-list for extension type_name
-	48, // [48:48] is the sub-list for extension extendee
-	0,  // [0:48] is the sub-list for field type_name
+	13, // 14: chat.v1.ConnectRequest.send_event_ack:type_name -> chat.v1.SendEventResponse
+	38, // 15: chat.v1.StreamAck.ack_at:type_name -> google.protobuf.Timestamp
+	39, // 16: chat.v1.StreamAck.metadata:type_name -> google.protobuf.Struct
+	40, // 17: chat.v1.StreamAck.error:type_name -> common.v1.ErrorDetail
+	8,  // 18: chat.v1.ClientState.typing:type_name -> chat.v1.TypingEvent
+	6,  // 19: chat.v1.ClientState.receipt:type_name -> chat.v1.ReceiptEvent
+	7,  // 20: chat.v1.ClientState.read_marker:type_name -> chat.v1.ReadMarker
+	4,  // 21: chat.v1.ClientState.room_event:type_name -> chat.v1.RoomEvent
+	5,  // 22: chat.v1.ClientState.presence:type_name -> chat.v1.PresenceEvent
+	12, // 23: chat.v1.ClientState.send_event:type_name -> chat.v1.SendEventRequest
+	4,  // 24: chat.v1.SendEventRequest.event:type_name -> chat.v1.RoomEvent
+	10, // 25: chat.v1.SendEventResponse.ack:type_name -> chat.v1.StreamAck
+	3,  // 26: chat.v1.GetHistoryResponse.events:type_name -> chat.v1.ServerEvent
+	39, // 27: chat.v1.Room.metadata:type_name -> google.protobuf.Struct
+	38, // 28: chat.v1.Room.created_at:type_name -> google.protobuf.Timestamp
+	38, // 29: chat.v1.Room.updated_at:type_name -> google.protobuf.Timestamp
+	39, // 30: chat.v1.CreateRoomRequest.metadata:type_name -> google.protobuf.Struct
+	16, // 31: chat.v1.CreateRoomResponse.room:type_name -> chat.v1.Room
+	40, // 32: chat.v1.CreateRoomResponse.error:type_name -> common.v1.ErrorDetail
+	39, // 33: chat.v1.SearchRoomsRequest.extras:type_name -> google.protobuf.Struct
+	16, // 34: chat.v1.SearchRoomsResponse.data:type_name -> chat.v1.Room
+	39, // 35: chat.v1.UpdateRoomRequest.metadata:type_name -> google.protobuf.Struct
+	16, // 36: chat.v1.UpdateRoomResponse.room:type_name -> chat.v1.Room
+	40, // 37: chat.v1.UpdateRoomResponse.error:type_name -> common.v1.ErrorDetail
+	40, // 38: chat.v1.DeleteRoomResponse.error:type_name -> common.v1.ErrorDetail
+	38, // 39: chat.v1.RoomSubscription.joined_at:type_name -> google.protobuf.Timestamp
+	38, // 40: chat.v1.RoomSubscription.last_active:type_name -> google.protobuf.Timestamp
+	25, // 41: chat.v1.AddRoomSubscriptionsRequest.members:type_name -> chat.v1.RoomSubscription
+	40, // 42: chat.v1.AddRoomSubscriptionsResponse.error:type_name -> common.v1.ErrorDetail
+	40, // 43: chat.v1.RemoveRoomSubscriptionsResponse.error:type_name -> common.v1.ErrorDetail
+	40, // 44: chat.v1.UpdateSubscriptionRoleResponse.error:type_name -> common.v1.ErrorDetail
+	25, // 45: chat.v1.SearchRoomSubscriptionsResponse.members:type_name -> chat.v1.RoomSubscription
+	11, // 46: chat.v1.UpdateClientStateRequest.clientStates:type_name -> chat.v1.ClientState
+	40, // 47: chat.v1.UpdateClientStateResponse.error:type_name -> common.v1.ErrorDetail
+	2,  // 48: chat.v1.GetClientStateRequest.stateType:type_name -> chat.v1.GetClientStateRequest.ClientStateType
+	11, // 49: chat.v1.GetClientStateResponse.clientState:type_name -> chat.v1.ClientState
+	9,  // 50: chat.v1.GatewayService.Connect:input_type -> chat.v1.ConnectRequest
+	12, // 51: chat.v1.ChatService.SendEvent:input_type -> chat.v1.SendEventRequest
+	14, // 52: chat.v1.ChatService.GetHistory:input_type -> chat.v1.GetHistoryRequest
+	17, // 53: chat.v1.ChatService.CreateRoom:input_type -> chat.v1.CreateRoomRequest
+	19, // 54: chat.v1.ChatService.SearchRooms:input_type -> chat.v1.SearchRoomsRequest
+	21, // 55: chat.v1.ChatService.UpdateRoom:input_type -> chat.v1.UpdateRoomRequest
+	23, // 56: chat.v1.ChatService.DeleteRoom:input_type -> chat.v1.DeleteRoomRequest
+	26, // 57: chat.v1.ChatService.AddRoomSubscriptions:input_type -> chat.v1.AddRoomSubscriptionsRequest
+	28, // 58: chat.v1.ChatService.RemoveRoomSubscriptions:input_type -> chat.v1.RemoveRoomSubscriptionsRequest
+	30, // 59: chat.v1.ChatService.UpdateSubscriptionRole:input_type -> chat.v1.UpdateSubscriptionRoleRequest
+	32, // 60: chat.v1.ChatService.SearchRoomSubscriptions:input_type -> chat.v1.SearchRoomSubscriptionsRequest
+	34, // 61: chat.v1.ChatService.UpdateClientState:input_type -> chat.v1.UpdateClientStateRequest
+	36, // 62: chat.v1.ChatService.GetClientState:input_type -> chat.v1.GetClientStateRequest
+	3,  // 63: chat.v1.GatewayService.Connect:output_type -> chat.v1.ServerEvent
+	13, // 64: chat.v1.ChatService.SendEvent:output_type -> chat.v1.SendEventResponse
+	15, // 65: chat.v1.ChatService.GetHistory:output_type -> chat.v1.GetHistoryResponse
+	18, // 66: chat.v1.ChatService.CreateRoom:output_type -> chat.v1.CreateRoomResponse
+	20, // 67: chat.v1.ChatService.SearchRooms:output_type -> chat.v1.SearchRoomsResponse
+	22, // 68: chat.v1.ChatService.UpdateRoom:output_type -> chat.v1.UpdateRoomResponse
+	24, // 69: chat.v1.ChatService.DeleteRoom:output_type -> chat.v1.DeleteRoomResponse
+	27, // 70: chat.v1.ChatService.AddRoomSubscriptions:output_type -> chat.v1.AddRoomSubscriptionsResponse
+	29, // 71: chat.v1.ChatService.RemoveRoomSubscriptions:output_type -> chat.v1.RemoveRoomSubscriptionsResponse
+	31, // 72: chat.v1.ChatService.UpdateSubscriptionRole:output_type -> chat.v1.UpdateSubscriptionRoleResponse
+	33, // 73: chat.v1.ChatService.SearchRoomSubscriptions:output_type -> chat.v1.SearchRoomSubscriptionsResponse
+	35, // 74: chat.v1.ChatService.UpdateClientState:output_type -> chat.v1.UpdateClientStateResponse
+	37, // 75: chat.v1.ChatService.GetClientState:output_type -> chat.v1.GetClientStateResponse
+	63, // [63:76] is the sub-list for method output_type
+	50, // [50:63] is the sub-list for method input_type
+	50, // [50:50] is the sub-list for extension type_name
+	50, // [50:50] is the sub-list for extension extendee
+	0,  // [0:50] is the sub-list for field type_name
 }
 
 func init() { file_chat_v1_chat_proto_init() }
@@ -3043,6 +3081,7 @@ func file_chat_v1_chat_proto_init() {
 	file_chat_v1_chat_proto_msgTypes[6].OneofWrappers = []any{
 		(*ConnectRequest_Ack)(nil),
 		(*ConnectRequest_StateUpdate)(nil),
+		(*ConnectRequest_SendEventAck)(nil),
 	}
 	file_chat_v1_chat_proto_msgTypes[7].OneofWrappers = []any{}
 	file_chat_v1_chat_proto_msgTypes[8].OneofWrappers = []any{
@@ -3051,6 +3090,7 @@ func file_chat_v1_chat_proto_init() {
 		(*ClientState_ReadMarker)(nil),
 		(*ClientState_RoomEvent)(nil),
 		(*ClientState_Presence)(nil),
+		(*ClientState_SendEvent)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

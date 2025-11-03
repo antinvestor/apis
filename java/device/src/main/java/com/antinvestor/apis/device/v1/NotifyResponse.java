@@ -21,7 +21,7 @@ package com.antinvestor.apis.device.v1;
 
 /**
  * <pre>
- * NotifyResponse confirms the notification was sent.
+ * NotifyResponse confirms the notifications were sent.
  * </pre>
  *
  * Protobuf type {@code device.v1.NotifyResponse}
@@ -46,8 +46,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private NotifyResponse() {
-    message_ = "";
-    notificationId_ = "";
+    results_ = java.util.Collections.emptyList();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -63,152 +62,65 @@ private static final long serialVersionUID = 0L;
             com.antinvestor.apis.device.v1.NotifyResponse.class, com.antinvestor.apis.device.v1.NotifyResponse.Builder.class);
   }
 
-  private int bitField0_;
-  public static final int SUCCESS_FIELD_NUMBER = 1;
-  private boolean success_ = false;
-  /**
-   * <pre>
-   * True if notification was successfully sent
-   * </pre>
-   *
-   * <code>bool success = 1 [json_name = "success"];</code>
-   * @return The success.
-   */
-  @java.lang.Override
-  public boolean getSuccess() {
-    return success_;
-  }
-
-  public static final int MESSAGE_FIELD_NUMBER = 2;
+  public static final int RESULTS_FIELD_NUMBER = 5;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object message_ = "";
+  private java.util.List<com.antinvestor.apis.device.v1.NotifyResult> results_;
   /**
    * <pre>
-   * Status message or error details
+   * Per-notification send results when using bulk notifications
    * </pre>
    *
-   * <code>string message = 2 [json_name = "message"];</code>
-   * @return The message.
+   * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
    */
   @java.lang.Override
-  public java.lang.String getMessage() {
-    java.lang.Object ref = message_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      message_ = s;
-      return s;
-    }
+  public java.util.List<com.antinvestor.apis.device.v1.NotifyResult> getResultsList() {
+    return results_;
   }
   /**
    * <pre>
-   * Status message or error details
+   * Per-notification send results when using bulk notifications
    * </pre>
    *
-   * <code>string message = 2 [json_name = "message"];</code>
-   * @return The bytes for message.
+   * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getMessageBytes() {
-    java.lang.Object ref = message_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      message_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int NOTIFICATION_ID_FIELD_NUMBER = 3;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object notificationId_ = "";
-  /**
-   * <pre>
-   * Unique identifier for the sent notification (if provided by service)
-   * </pre>
-   *
-   * <code>string notification_id = 3 [json_name = "notificationId"];</code>
-   * @return The notificationId.
-   */
-  @java.lang.Override
-  public java.lang.String getNotificationId() {
-    java.lang.Object ref = notificationId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      notificationId_ = s;
-      return s;
-    }
+  public java.util.List<? extends com.antinvestor.apis.device.v1.NotifyResultOrBuilder> 
+      getResultsOrBuilderList() {
+    return results_;
   }
   /**
    * <pre>
-   * Unique identifier for the sent notification (if provided by service)
+   * Per-notification send results when using bulk notifications
    * </pre>
    *
-   * <code>string notification_id = 3 [json_name = "notificationId"];</code>
-   * @return The bytes for notificationId.
+   * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getNotificationIdBytes() {
-    java.lang.Object ref = notificationId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      notificationId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int EXTRAS_FIELD_NUMBER = 4;
-  private com.google.protobuf.Struct extras_;
-  /**
-   * <pre>
-   * Additional response metadata from notification service
-   * </pre>
-   *
-   * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
-   * @return Whether the extras field is set.
-   */
-  @java.lang.Override
-  public boolean hasExtras() {
-    return ((bitField0_ & 0x00000001) != 0);
+  public int getResultsCount() {
+    return results_.size();
   }
   /**
    * <pre>
-   * Additional response metadata from notification service
+   * Per-notification send results when using bulk notifications
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
-   * @return The extras.
+   * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
    */
   @java.lang.Override
-  public com.google.protobuf.Struct getExtras() {
-    return extras_ == null ? com.google.protobuf.Struct.getDefaultInstance() : extras_;
+  public com.antinvestor.apis.device.v1.NotifyResult getResults(int index) {
+    return results_.get(index);
   }
   /**
    * <pre>
-   * Additional response metadata from notification service
+   * Per-notification send results when using bulk notifications
    * </pre>
    *
-   * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
+   * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
    */
   @java.lang.Override
-  public com.google.protobuf.StructOrBuilder getExtrasOrBuilder() {
-    return extras_ == null ? com.google.protobuf.Struct.getDefaultInstance() : extras_;
+  public com.antinvestor.apis.device.v1.NotifyResultOrBuilder getResultsOrBuilder(
+      int index) {
+    return results_.get(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -225,17 +137,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (success_ != false) {
-      output.writeBool(1, success_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(message_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 2, message_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(notificationId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 3, notificationId_);
-    }
-    if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(4, getExtras());
+    for (int i = 0; i < results_.size(); i++) {
+      output.writeMessage(5, results_.get(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -246,19 +149,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (success_ != false) {
+    for (int i = 0; i < results_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeBoolSize(1, success_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(message_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, message_);
-    }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(notificationId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, notificationId_);
-    }
-    if (((bitField0_ & 0x00000001) != 0)) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(4, getExtras());
+        .computeMessageSize(5, results_.get(i));
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -275,17 +168,8 @@ private static final long serialVersionUID = 0L;
     }
     com.antinvestor.apis.device.v1.NotifyResponse other = (com.antinvestor.apis.device.v1.NotifyResponse) obj;
 
-    if (getSuccess()
-        != other.getSuccess()) return false;
-    if (!getMessage()
-        .equals(other.getMessage())) return false;
-    if (!getNotificationId()
-        .equals(other.getNotificationId())) return false;
-    if (hasExtras() != other.hasExtras()) return false;
-    if (hasExtras()) {
-      if (!getExtras()
-          .equals(other.getExtras())) return false;
-    }
+    if (!getResultsList()
+        .equals(other.getResultsList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -297,16 +181,9 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-        getSuccess());
-    hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
-    hash = (53 * hash) + getMessage().hashCode();
-    hash = (37 * hash) + NOTIFICATION_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getNotificationId().hashCode();
-    if (hasExtras()) {
-      hash = (37 * hash) + EXTRAS_FIELD_NUMBER;
-      hash = (53 * hash) + getExtras().hashCode();
+    if (getResultsCount() > 0) {
+      hash = (37 * hash) + RESULTS_FIELD_NUMBER;
+      hash = (53 * hash) + getResultsList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -407,7 +284,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * NotifyResponse confirms the notification was sent.
+   * NotifyResponse confirms the notifications were sent.
    * </pre>
    *
    * Protobuf type {@code device.v1.NotifyResponse}
@@ -431,32 +308,25 @@ private static final long serialVersionUID = 0L;
 
     // Construct using com.antinvestor.apis.device.v1.NotifyResponse.newBuilder()
     private Builder() {
-      maybeForceBuilderInitialization();
+
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       super(parent);
-      maybeForceBuilderInitialization();
-    }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessage
-              .alwaysUseFieldBuilders) {
-        internalGetExtrasFieldBuilder();
-      }
+
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      success_ = false;
-      message_ = "";
-      notificationId_ = "";
-      extras_ = null;
-      if (extrasBuilder_ != null) {
-        extrasBuilder_.dispose();
-        extrasBuilder_ = null;
+      if (resultsBuilder_ == null) {
+        results_ = java.util.Collections.emptyList();
+      } else {
+        results_ = null;
+        resultsBuilder_.clear();
       }
+      bitField0_ = (bitField0_ & ~0x00000001);
       return this;
     }
 
@@ -483,30 +353,26 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.antinvestor.apis.device.v1.NotifyResponse buildPartial() {
       com.antinvestor.apis.device.v1.NotifyResponse result = new com.antinvestor.apis.device.v1.NotifyResponse(this);
+      buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
+    private void buildPartialRepeatedFields(com.antinvestor.apis.device.v1.NotifyResponse result) {
+      if (resultsBuilder_ == null) {
+        if (((bitField0_ & 0x00000001) != 0)) {
+          results_ = java.util.Collections.unmodifiableList(results_);
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.results_ = results_;
+      } else {
+        result.results_ = resultsBuilder_.build();
+      }
+    }
+
     private void buildPartial0(com.antinvestor.apis.device.v1.NotifyResponse result) {
       int from_bitField0_ = bitField0_;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.success_ = success_;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.message_ = message_;
-      }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.notificationId_ = notificationId_;
-      }
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.extras_ = extrasBuilder_ == null
-            ? extras_
-            : extrasBuilder_.build();
-        to_bitField0_ |= 0x00000001;
-      }
-      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -521,21 +387,31 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.antinvestor.apis.device.v1.NotifyResponse other) {
       if (other == com.antinvestor.apis.device.v1.NotifyResponse.getDefaultInstance()) return this;
-      if (other.getSuccess() != false) {
-        setSuccess(other.getSuccess());
-      }
-      if (!other.getMessage().isEmpty()) {
-        message_ = other.message_;
-        bitField0_ |= 0x00000002;
-        onChanged();
-      }
-      if (!other.getNotificationId().isEmpty()) {
-        notificationId_ = other.notificationId_;
-        bitField0_ |= 0x00000004;
-        onChanged();
-      }
-      if (other.hasExtras()) {
-        mergeExtras(other.getExtras());
+      if (resultsBuilder_ == null) {
+        if (!other.results_.isEmpty()) {
+          if (results_.isEmpty()) {
+            results_ = other.results_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureResultsIsMutable();
+            results_.addAll(other.results_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.results_.isEmpty()) {
+          if (resultsBuilder_.isEmpty()) {
+            resultsBuilder_.dispose();
+            resultsBuilder_ = null;
+            results_ = other.results_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            resultsBuilder_ = 
+              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                 internalGetResultsFieldBuilder() : null;
+          } else {
+            resultsBuilder_.addAllMessages(other.results_);
+          }
+        }
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -563,28 +439,19 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            case 8: {
-              success_ = input.readBool();
-              bitField0_ |= 0x00000001;
+            case 42: {
+              com.antinvestor.apis.device.v1.NotifyResult m =
+                  input.readMessage(
+                      com.antinvestor.apis.device.v1.NotifyResult.parser(),
+                      extensionRegistry);
+              if (resultsBuilder_ == null) {
+                ensureResultsIsMutable();
+                results_.add(m);
+              } else {
+                resultsBuilder_.addMessage(m);
+              }
               break;
-            } // case 8
-            case 18: {
-              message_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000002;
-              break;
-            } // case 18
-            case 26: {
-              notificationId_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000004;
-              break;
-            } // case 26
-            case 34: {
-              input.readMessage(
-                  internalGetExtrasFieldBuilder().getBuilder(),
-                  extensionRegistry);
-              bitField0_ |= 0x00000008;
-              break;
-            } // case 34
+            } // case 42
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -602,389 +469,316 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private boolean success_ ;
-    /**
-     * <pre>
-     * True if notification was successfully sent
-     * </pre>
-     *
-     * <code>bool success = 1 [json_name = "success"];</code>
-     * @return The success.
-     */
-    @java.lang.Override
-    public boolean getSuccess() {
-      return success_;
-    }
-    /**
-     * <pre>
-     * True if notification was successfully sent
-     * </pre>
-     *
-     * <code>bool success = 1 [json_name = "success"];</code>
-     * @param value The success to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSuccess(boolean value) {
-
-      success_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * True if notification was successfully sent
-     * </pre>
-     *
-     * <code>bool success = 1 [json_name = "success"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearSuccess() {
-      bitField0_ = (bitField0_ & ~0x00000001);
-      success_ = false;
-      onChanged();
-      return this;
+    private java.util.List<com.antinvestor.apis.device.v1.NotifyResult> results_ =
+      java.util.Collections.emptyList();
+    private void ensureResultsIsMutable() {
+      if (!((bitField0_ & 0x00000001) != 0)) {
+        results_ = new java.util.ArrayList<com.antinvestor.apis.device.v1.NotifyResult>(results_);
+        bitField0_ |= 0x00000001;
+       }
     }
 
-    private java.lang.Object message_ = "";
-    /**
-     * <pre>
-     * Status message or error details
-     * </pre>
-     *
-     * <code>string message = 2 [json_name = "message"];</code>
-     * @return The message.
-     */
-    public java.lang.String getMessage() {
-      java.lang.Object ref = message_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        message_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <pre>
-     * Status message or error details
-     * </pre>
-     *
-     * <code>string message = 2 [json_name = "message"];</code>
-     * @return The bytes for message.
-     */
-    public com.google.protobuf.ByteString
-        getMessageBytes() {
-      java.lang.Object ref = message_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        message_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <pre>
-     * Status message or error details
-     * </pre>
-     *
-     * <code>string message = 2 [json_name = "message"];</code>
-     * @param value The message to set.
-     * @return This builder for chaining.
-     */
-    public Builder setMessage(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      message_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Status message or error details
-     * </pre>
-     *
-     * <code>string message = 2 [json_name = "message"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearMessage() {
-      message_ = getDefaultInstance().getMessage();
-      bitField0_ = (bitField0_ & ~0x00000002);
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Status message or error details
-     * </pre>
-     *
-     * <code>string message = 2 [json_name = "message"];</code>
-     * @param value The bytes for message to set.
-     * @return This builder for chaining.
-     */
-    public Builder setMessageBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      message_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
+    private com.google.protobuf.RepeatedFieldBuilder<
+        com.antinvestor.apis.device.v1.NotifyResult, com.antinvestor.apis.device.v1.NotifyResult.Builder, com.antinvestor.apis.device.v1.NotifyResultOrBuilder> resultsBuilder_;
 
-    private java.lang.Object notificationId_ = "";
     /**
      * <pre>
-     * Unique identifier for the sent notification (if provided by service)
+     * Per-notification send results when using bulk notifications
      * </pre>
      *
-     * <code>string notification_id = 3 [json_name = "notificationId"];</code>
-     * @return The notificationId.
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
      */
-    public java.lang.String getNotificationId() {
-      java.lang.Object ref = notificationId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        notificationId_ = s;
-        return s;
+    public java.util.List<com.antinvestor.apis.device.v1.NotifyResult> getResultsList() {
+      if (resultsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(results_);
       } else {
-        return (java.lang.String) ref;
+        return resultsBuilder_.getMessageList();
       }
     }
     /**
      * <pre>
-     * Unique identifier for the sent notification (if provided by service)
+     * Per-notification send results when using bulk notifications
      * </pre>
      *
-     * <code>string notification_id = 3 [json_name = "notificationId"];</code>
-     * @return The bytes for notificationId.
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
      */
-    public com.google.protobuf.ByteString
-        getNotificationIdBytes() {
-      java.lang.Object ref = notificationId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        notificationId_ = b;
-        return b;
+    public int getResultsCount() {
+      if (resultsBuilder_ == null) {
+        return results_.size();
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        return resultsBuilder_.getCount();
       }
     }
     /**
      * <pre>
-     * Unique identifier for the sent notification (if provided by service)
+     * Per-notification send results when using bulk notifications
      * </pre>
      *
-     * <code>string notification_id = 3 [json_name = "notificationId"];</code>
-     * @param value The notificationId to set.
-     * @return This builder for chaining.
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
      */
-    public Builder setNotificationId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      notificationId_ = value;
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Unique identifier for the sent notification (if provided by service)
-     * </pre>
-     *
-     * <code>string notification_id = 3 [json_name = "notificationId"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearNotificationId() {
-      notificationId_ = getDefaultInstance().getNotificationId();
-      bitField0_ = (bitField0_ & ~0x00000004);
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Unique identifier for the sent notification (if provided by service)
-     * </pre>
-     *
-     * <code>string notification_id = 3 [json_name = "notificationId"];</code>
-     * @param value The bytes for notificationId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setNotificationIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      notificationId_ = value;
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-
-    private com.google.protobuf.Struct extras_;
-    private com.google.protobuf.SingleFieldBuilder<
-        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> extrasBuilder_;
-    /**
-     * <pre>
-     * Additional response metadata from notification service
-     * </pre>
-     *
-     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
-     * @return Whether the extras field is set.
-     */
-    public boolean hasExtras() {
-      return ((bitField0_ & 0x00000008) != 0);
-    }
-    /**
-     * <pre>
-     * Additional response metadata from notification service
-     * </pre>
-     *
-     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
-     * @return The extras.
-     */
-    public com.google.protobuf.Struct getExtras() {
-      if (extrasBuilder_ == null) {
-        return extras_ == null ? com.google.protobuf.Struct.getDefaultInstance() : extras_;
+    public com.antinvestor.apis.device.v1.NotifyResult getResults(int index) {
+      if (resultsBuilder_ == null) {
+        return results_.get(index);
       } else {
-        return extrasBuilder_.getMessage();
+        return resultsBuilder_.getMessage(index);
       }
     }
     /**
      * <pre>
-     * Additional response metadata from notification service
+     * Per-notification send results when using bulk notifications
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
      */
-    public Builder setExtras(com.google.protobuf.Struct value) {
-      if (extrasBuilder_ == null) {
+    public Builder setResults(
+        int index, com.antinvestor.apis.device.v1.NotifyResult value) {
+      if (resultsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        extras_ = value;
-      } else {
-        extrasBuilder_.setMessage(value);
-      }
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Additional response metadata from notification service
-     * </pre>
-     *
-     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
-     */
-    public Builder setExtras(
-        com.google.protobuf.Struct.Builder builderForValue) {
-      if (extrasBuilder_ == null) {
-        extras_ = builderForValue.build();
-      } else {
-        extrasBuilder_.setMessage(builderForValue.build());
-      }
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Additional response metadata from notification service
-     * </pre>
-     *
-     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
-     */
-    public Builder mergeExtras(com.google.protobuf.Struct value) {
-      if (extrasBuilder_ == null) {
-        if (((bitField0_ & 0x00000008) != 0) &&
-          extras_ != null &&
-          extras_ != com.google.protobuf.Struct.getDefaultInstance()) {
-          getExtrasBuilder().mergeFrom(value);
-        } else {
-          extras_ = value;
-        }
-      } else {
-        extrasBuilder_.mergeFrom(value);
-      }
-      if (extras_ != null) {
-        bitField0_ |= 0x00000008;
+        ensureResultsIsMutable();
+        results_.set(index, value);
         onChanged();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Additional response metadata from notification service
-     * </pre>
-     *
-     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
-     */
-    public Builder clearExtras() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      extras_ = null;
-      if (extrasBuilder_ != null) {
-        extrasBuilder_.dispose();
-        extrasBuilder_ = null;
-      }
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Additional response metadata from notification service
-     * </pre>
-     *
-     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
-     */
-    public com.google.protobuf.Struct.Builder getExtrasBuilder() {
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return internalGetExtrasFieldBuilder().getBuilder();
-    }
-    /**
-     * <pre>
-     * Additional response metadata from notification service
-     * </pre>
-     *
-     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
-     */
-    public com.google.protobuf.StructOrBuilder getExtrasOrBuilder() {
-      if (extrasBuilder_ != null) {
-        return extrasBuilder_.getMessageOrBuilder();
       } else {
-        return extras_ == null ?
-            com.google.protobuf.Struct.getDefaultInstance() : extras_;
+        resultsBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public Builder setResults(
+        int index, com.antinvestor.apis.device.v1.NotifyResult.Builder builderForValue) {
+      if (resultsBuilder_ == null) {
+        ensureResultsIsMutable();
+        results_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        resultsBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public Builder addResults(com.antinvestor.apis.device.v1.NotifyResult value) {
+      if (resultsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureResultsIsMutable();
+        results_.add(value);
+        onChanged();
+      } else {
+        resultsBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public Builder addResults(
+        int index, com.antinvestor.apis.device.v1.NotifyResult value) {
+      if (resultsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureResultsIsMutable();
+        results_.add(index, value);
+        onChanged();
+      } else {
+        resultsBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public Builder addResults(
+        com.antinvestor.apis.device.v1.NotifyResult.Builder builderForValue) {
+      if (resultsBuilder_ == null) {
+        ensureResultsIsMutable();
+        results_.add(builderForValue.build());
+        onChanged();
+      } else {
+        resultsBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public Builder addResults(
+        int index, com.antinvestor.apis.device.v1.NotifyResult.Builder builderForValue) {
+      if (resultsBuilder_ == null) {
+        ensureResultsIsMutable();
+        results_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        resultsBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public Builder addAllResults(
+        java.lang.Iterable<? extends com.antinvestor.apis.device.v1.NotifyResult> values) {
+      if (resultsBuilder_ == null) {
+        ensureResultsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, results_);
+        onChanged();
+      } else {
+        resultsBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public Builder clearResults() {
+      if (resultsBuilder_ == null) {
+        results_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+      } else {
+        resultsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public Builder removeResults(int index) {
+      if (resultsBuilder_ == null) {
+        ensureResultsIsMutable();
+        results_.remove(index);
+        onChanged();
+      } else {
+        resultsBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public com.antinvestor.apis.device.v1.NotifyResult.Builder getResultsBuilder(
+        int index) {
+      return internalGetResultsFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public com.antinvestor.apis.device.v1.NotifyResultOrBuilder getResultsOrBuilder(
+        int index) {
+      if (resultsBuilder_ == null) {
+        return results_.get(index);  } else {
+        return resultsBuilder_.getMessageOrBuilder(index);
       }
     }
     /**
      * <pre>
-     * Additional response metadata from notification service
+     * Per-notification send results when using bulk notifications
      * </pre>
      *
-     * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
      */
-    private com.google.protobuf.SingleFieldBuilder<
-        com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
-        internalGetExtrasFieldBuilder() {
-      if (extrasBuilder_ == null) {
-        extrasBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-            com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder>(
-                getExtras(),
+    public java.util.List<? extends com.antinvestor.apis.device.v1.NotifyResultOrBuilder> 
+         getResultsOrBuilderList() {
+      if (resultsBuilder_ != null) {
+        return resultsBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(results_);
+      }
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public com.antinvestor.apis.device.v1.NotifyResult.Builder addResultsBuilder() {
+      return internalGetResultsFieldBuilder().addBuilder(
+          com.antinvestor.apis.device.v1.NotifyResult.getDefaultInstance());
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public com.antinvestor.apis.device.v1.NotifyResult.Builder addResultsBuilder(
+        int index) {
+      return internalGetResultsFieldBuilder().addBuilder(
+          index, com.antinvestor.apis.device.v1.NotifyResult.getDefaultInstance());
+    }
+    /**
+     * <pre>
+     * Per-notification send results when using bulk notifications
+     * </pre>
+     *
+     * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
+     */
+    public java.util.List<com.antinvestor.apis.device.v1.NotifyResult.Builder> 
+         getResultsBuilderList() {
+      return internalGetResultsFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilder<
+        com.antinvestor.apis.device.v1.NotifyResult, com.antinvestor.apis.device.v1.NotifyResult.Builder, com.antinvestor.apis.device.v1.NotifyResultOrBuilder> 
+        internalGetResultsFieldBuilder() {
+      if (resultsBuilder_ == null) {
+        resultsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+            com.antinvestor.apis.device.v1.NotifyResult, com.antinvestor.apis.device.v1.NotifyResult.Builder, com.antinvestor.apis.device.v1.NotifyResultOrBuilder>(
+                results_,
+                ((bitField0_ & 0x00000001) != 0),
                 getParentForChildren(),
                 isClean());
-        extras_ = null;
+        results_ = null;
       }
-      return extrasBuilder_;
+      return resultsBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:device.v1.NotifyResponse)

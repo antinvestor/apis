@@ -26,78 +26,45 @@ public interface NotifyResponseOrBuilder extends
 
   /**
    * <pre>
-   * True if notification was successfully sent
+   * Per-notification send results when using bulk notifications
    * </pre>
    *
-   * <code>bool success = 1 [json_name = "success"];</code>
-   * @return The success.
+   * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
    */
-  boolean getSuccess();
-
+  java.util.List<com.antinvestor.apis.device.v1.NotifyResult> 
+      getResultsList();
   /**
    * <pre>
-   * Status message or error details
+   * Per-notification send results when using bulk notifications
    * </pre>
    *
-   * <code>string message = 2 [json_name = "message"];</code>
-   * @return The message.
+   * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
    */
-  java.lang.String getMessage();
+  com.antinvestor.apis.device.v1.NotifyResult getResults(int index);
   /**
    * <pre>
-   * Status message or error details
+   * Per-notification send results when using bulk notifications
    * </pre>
    *
-   * <code>string message = 2 [json_name = "message"];</code>
-   * @return The bytes for message.
+   * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
    */
-  com.google.protobuf.ByteString
-      getMessageBytes();
-
+  int getResultsCount();
   /**
    * <pre>
-   * Unique identifier for the sent notification (if provided by service)
+   * Per-notification send results when using bulk notifications
    * </pre>
    *
-   * <code>string notification_id = 3 [json_name = "notificationId"];</code>
-   * @return The notificationId.
+   * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
    */
-  java.lang.String getNotificationId();
+  java.util.List<? extends com.antinvestor.apis.device.v1.NotifyResultOrBuilder> 
+      getResultsOrBuilderList();
   /**
    * <pre>
-   * Unique identifier for the sent notification (if provided by service)
+   * Per-notification send results when using bulk notifications
    * </pre>
    *
-   * <code>string notification_id = 3 [json_name = "notificationId"];</code>
-   * @return The bytes for notificationId.
+   * <code>repeated .device.v1.NotifyResult results = 5 [json_name = "results"];</code>
    */
-  com.google.protobuf.ByteString
-      getNotificationIdBytes();
-
-  /**
-   * <pre>
-   * Additional response metadata from notification service
-   * </pre>
-   *
-   * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
-   * @return Whether the extras field is set.
-   */
-  boolean hasExtras();
-  /**
-   * <pre>
-   * Additional response metadata from notification service
-   * </pre>
-   *
-   * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
-   * @return The extras.
-   */
-  com.google.protobuf.Struct getExtras();
-  /**
-   * <pre>
-   * Additional response metadata from notification service
-   * </pre>
-   *
-   * <code>.google.protobuf.Struct extras = 4 [json_name = "extras"];</code>
-   */
-  com.google.protobuf.StructOrBuilder getExtrasOrBuilder();
+  com.antinvestor.apis.device.v1.NotifyResultOrBuilder getResultsOrBuilder(
+      int index);
 }

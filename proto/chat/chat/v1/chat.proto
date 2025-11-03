@@ -383,6 +383,7 @@ message ConnectRequest {
   oneof payload {
     StreamAck ack = 10;
     ClientState stateUpdate = 12;
+    SendEventResponse send_event_ack = 15;
   }
 }
 
@@ -413,6 +414,7 @@ message ClientState {
     ReadMarker read_marker = 3; // marker for "read up to X"
     RoomEvent room_event = 1;    // send a room event (message) via the stream
     PresenceEvent presence = 5;    // send a presence message to a room
+    SendEventRequest send_event = 10; // Similar to room_event but useful for sending messages in bulk
   }
 }
 

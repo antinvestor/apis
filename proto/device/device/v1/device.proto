@@ -487,7 +487,20 @@ message UpdatePresenceResponse {
 // Device Notification Messages
 // -----------------------------------------------------
 
-// NotifyRequest sends a notification to a device using one of its registered keys.
+// NotifyPayload represents the content and metadata of a single notification.
+message NotifyMessage {
+  string id = 1 [
+    (buf.validate.field).string.min_len = 3,
+    (buf.validate.field).string.max_len = 40,
+    (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
+  ];
+  string title = 3;  // Notification title
+  string body = 4;  // Notification body/message
+  google.protobuf.Struct data = 5;  // Additional notification data/payload (custom data, actions, etc.)
+  google.protobuf.Struct extras = 6;  // Extra notification options (priority, TTL, badge, sound, etc.)
+}
+
+// NotifyRequest sends one or more notifications to a device using its registered keys.
 // The service will select an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
 message NotifyRequest {
   string device_id = 1 [
@@ -495,6 +508,9 @@ message NotifyRequest {
     (buf.validate.field).string.max_len = 40,
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];  // Device ID to notify
+
+  // The following fields remain for backward compatibility and represent a single notification payload.
+  // New integrations should prefer the notifications field for bulk sending.
   string key_id = 2 [
     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
     (buf.validate.field).string.min_len = 3,
@@ -502,18 +518,24 @@ message NotifyRequest {
     (buf.validate.field).string.pattern = "[0-9a-z_-]{3,20}"
   ];  // Specific key ID to use (optional - if not provided, uses key_type to select)
   KeyType key_type = 3;  // Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
-  string title = 4;  // Notification title
-  string body = 5;  // Notification body/message
-  google.protobuf.Struct data = 6;  // Additional notification data/payload (custom data, actions, etc.)
-  google.protobuf.Struct extras = 7;  // Extra notification options (priority, TTL, badge, sound, etc.)
+
+  repeated NotifyMessage notifications = 8 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 500
+  ];  // Collection of notifications to send in bulk.
 }
 
-// NotifyResponse confirms the notification was sent.
-message NotifyResponse {
+// NotifyResult details the outcome of sending an individual notification payload.
+message NotifyResult {
   bool success = 1;  // True if notification was successfully sent
   string message = 2;  // Status message or error details
   string notification_id = 3;  // Unique identifier for the sent notification (if provided by service)
   google.protobuf.Struct extras = 4;  // Additional response metadata from notification service
+}
+
+// NotifyResponse confirms the notifications were sent.
+message NotifyResponse {
+  repeated NotifyResult results = 5;  // Per-notification send results when using bulk notifications
 }
 
 

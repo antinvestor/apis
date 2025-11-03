@@ -216,10 +216,20 @@ public final class DeviceProto extends com.google.protobuf.GeneratedFile {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_device_v1_UpdatePresenceResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_device_v1_NotifyMessage_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_device_v1_NotifyMessage_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_device_v1_NotifyRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_device_v1_NotifyRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_device_v1_NotifyResult_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_device_v1_NotifyResult_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_device_v1_NotifyResponse_descriptor;
   static final 
@@ -360,159 +370,164 @@ public final class DeviceProto extends com.google.protobuf.GeneratedFile {
       "ssage\022/\n\006extras\030\004 \001(\0132\027.google.protobuf." +
       "StructR\006extras\"G\n\026UpdatePresenceResponse" +
       "\022-\n\004data\030\001 \001(\0132\031.device.v1.PresenceObjec" +
-      "tR\004data\"\267\002\n\rNotifyRequest\0228\n\tdevice_id\030\001" +
-      " \001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010devic" +
-      "eId\0225\n\006key_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_" +
-      "-]{3,20}\330\001\001R\005keyId\022-\n\010key_type\030\003 \001(\0162\022.d" +
-      "evice.v1.KeyTypeR\007keyType\022\024\n\005title\030\004 \001(\t" +
-      "R\005title\022\022\n\004body\030\005 \001(\tR\004body\022+\n\004data\030\006 \001(" +
-      "\0132\027.google.protobuf.StructR\004data\022/\n\006extr" +
-      "as\030\007 \001(\0132\027.google.protobuf.StructR\006extra" +
-      "s\"\236\001\n\016NotifyResponse\022\030\n\007success\030\001 \001(\010R\007s" +
-      "uccess\022\030\n\007message\030\002 \001(\tR\007message\022\'\n\017noti" +
-      "fication_id\030\003 \001(\tR\016notificationId\022/\n\006ext" +
-      "ras\030\004 \001(\0132\027.google.protobuf.StructR\006extr" +
-      "as*s\n\007KeyType\022\016\n\nMATRIX_KEY\020\000\022\024\n\020NOTIFIC" +
-      "ATION_KEY\020\001\022\r\n\tFCM_TOKEN\020\002\022\022\n\016CURVE25519" +
-      "_KEY\020\003\022\017\n\013ED25519_KEY\020\004\022\016\n\nPICKLE_KEY\020\005*" +
-      "L\n\016PresenceStatus\022\013\n\007OFFLINE\020\000\022\n\n\006ONLINE" +
-      "\020\001\022\010\n\004AWAY\020\002\022\010\n\004BUSY\020\003\022\r\n\tINVISIBLE\020\0042\247\"" +
-      "\n\rDeviceService\022\206\002\n\007GetById\022\031.device.v1." +
-      "GetByIdRequest\032\032.device.v1.GetByIdRespon" +
-      "se\"\303\001\272G\277\001\n\007Devices\022\021Get devices by ID\032\221\001" +
-      "Retrieves one or more devices by their u" +
-      "nique identifiers. Supports batch retrie" +
-      "val and optional extensive details inclu" +
-      "ding logs and key counts.*\rgetDeviceById" +
-      "\022\203\002\n\016GetBySessionId\022 .device.v1.GetBySes" +
-      "sionIdRequest\032!.device.v1.GetBySessionId" +
-      "Response\"\253\001\272G\247\001\n\007Devices\022\030Get device by " +
-      "session ID\032lRetrieves a device by its ac" +
-      "tive session identifier. Used to resolve" +
-      " device information from session tokens." +
-      "*\024getDeviceBySessionId\022\205\002\n\006Search\022\030.devi" +
-      "ce.v1.SearchRequest\032\031.device.v1.SearchRe" +
-      "sponse\"\303\001\272G\277\001\n\007Devices\022\016Search devices\032\224" +
-      "\001Searches for devices matching specified" +
-      " criteria including device name, OS, dat" +
-      "e range, and custom properties. Returns " +
-      "a stream of matching devices.*\rsearchDev" +
-      "ices0\001\022\365\001\n\006Create\022\030.device.v1.CreateRequ" +
-      "est\032\031.device.v1.CreateResponse\"\265\001\272G\261\001\n\007D" +
-      "evices\022\025Register a new device\032\200\001Register" +
-      "s a new device in the system. The device" +
-      " must be linked to a profile before it c" +
-      "an be used for authenticated operations." +
-      "*\014createDevice\022\355\001\n\006Update\022\030.device.v1.Up" +
-      "dateRequest\032\031.device.v1.UpdateResponse\"\255" +
-      "\001\272G\251\001\n\007Devices\022\031Update device informatio" +
-      "n\032uUpdates an existing device\'s name and" +
-      " properties. Only the device owner or ad" +
-      "ministrators can perform this operation." +
-      "*\014updateDevice\022\345\001\n\004Link\022\026.device.v1.Link" +
-      "Request\032\027.device.v1.LinkResponse\"\253\001\272G\247\001\n" +
-      "\007Devices\022\026Link device to profile\032xLinks " +
-      "a device to a user profile. This operati" +
-      "on is required before the device can be " +
-      "used for authenticated operations.*\nlink" +
-      "Device\022\214\002\n\006Remove\022\030.device.v1.RemoveRequ" +
-      "est\032\031.device.v1.RemoveResponse\"\314\001\272G\310\001\n\007D" +
-      "evices\022\017Remove a device\032\235\001Removes a devi" +
-      "ce from the system. This operation is ty" +
-      "pically used when a user logs out or rem" +
-      "oves a device from their account. This a" +
-      "ction cannot be undone.*\014removeDevice\022\202\002" +
-      "\n\003Log\022\025.device.v1.LogRequest\032\026.device.v1" +
-      ".LogResponse\"\313\001\272G\307\001\n\013Device Logs\022\023Log de" +
-      "vice activity\032\217\001Creates a new activity l" +
-      "og entry for a device. Used for tracking" +
-      " device sessions, locations, and activit" +
-      "y for security auditing and compliance.*" +
-      "\021logDeviceActivity\022\203\002\n\010ListLogs\022\032.device" +
-      ".v1.ListLogsRequest\032\033.device.v1.ListLogs" +
-      "Response\"\273\001\272G\267\001\n\013Device Logs\022\031List devic" +
-      "e activity logs\032}Retrieves activity logs" +
-      " for a device. Useful for security audit" +
-      "ing, tracking device usage patterns, and" +
-      " compliance reporting.*\016listDeviceLogs0\001" +
-      "\022\344\001\n\006AddKey\022\030.device.v1.AddKeyRequest\032\031." +
-      "device.v1.AddKeyResponse\"\244\001\272G\240\001\n\013Device " +
-      "Keys\022\020Add key or token\032qAdds a key or to" +
-      "ken to a device. Supports FCM tokens, en" +
-      "cryption keys (Curve25519, Ed25519), and" +
-      " other key types.*\014addDeviceKey\022\371\001\n\tRemo" +
-      "veKey\022\033.device.v1.RemoveKeyRequest\032\034.dev" +
-      "ice.v1.RemoveKeyResponse\"\260\001\272G\254\001\n\013Device " +
-      "Keys\022\025Remove keys or tokens\032uRemoves one" +
-      " or more keys or tokens from a device. U" +
-      "sed for key rotation, token management, " +
-      "or when removing a device.*\017removeDevice" +
-      "Key\022\350\001\n\tSearchKey\022\033.device.v1.SearchKeyR" +
-      "equest\032\034.device.v1.SearchKeyResponse\"\237\001\272" +
-      "G\233\001\n\013Device Keys\022\025Search keys or tokens\032" +
-      "dSearches for keys or tokens associated " +
-      "with a device. Supports filtering by key" +
-      " type and expiration.*\017searchDeviceKey\022\314" +
-      "\002\n\013RegisterKey\022\035.device.v1.RegisterKeyRe" +
-      "quest\032\036.device.v1.RegisterKeyResponse\"\375\001" +
-      "\272G\371\001\n\020Key Registration\022%Register key wit" +
-      "h third-party service\032\260\001Registers a key " +
-      "or token with third-party services (like" +
-      " FCM for push notifications) and stores " +
-      "it. This method handles both the externa" +
-      "l service integration and local storage." +
-      "*\013registerKey\022\314\002\n\rDeRegisterKey\022\037.device" +
-      ".v1.DeRegisterKeyRequest\032 .device.v1.DeR" +
-      "egisterKeyResponse\"\367\001\272G\363\001\n\020Key Registrat" +
-      "ion\022\'DeRegister key from third-party ser" +
-      "vice\032\246\001DeRegisters a key or token from t" +
-      "hird-party services (like FCM) and remov" +
-      "es it from storage. This method handles " +
-      "both the external service cleanup and lo" +
-      "cal deletion.*\rdeRegisterKey\022\366\002\n\006Notify\022" +
-      "\030.device.v1.NotifyRequest\032\031.device.v1.No" +
-      "tifyResponse\"\266\002\272G\262\002\n\024Device Notification" +
-      "s\022\"Notify device using registered key\032\347\001" +
-      "Sends a notification to a device using o" +
-      "ne of its registered keys (FCM token, no" +
-      "tification key, etc.). The service autom" +
-      "atically selects an appropriate active k" +
-      "ey based on the key_type, or uses a spec" +
-      "ific key if key_id is provided.*\014notifyD" +
-      "evice\022\257\002\n\016UpdatePresence\022 .device.v1.Upd" +
-      "atePresenceRequest\032!.device.v1.UpdatePre" +
-      "senceResponse\"\327\001\272G\323\001\n\017Device Presence\022\026U" +
-      "pdate device presence\032\227\001Updates the pres" +
-      "ence status of a device. Used to indicat" +
-      "e online/offline/away/busy status and tr" +
-      "ack last activity for real-time communic" +
-      "ation features.*\016updatePresenceB\354\007\n\036com." +
-      "antinvestor.apis.device.v1B\013DeviceProtoP" +
-      "\001Z1github.com/antinvestor/apis/go/device" +
-      "/v1;devicev1\242\002\003DXX\252\002\tDevice.V1\312\002\tDevice\\" +
-      "V1\342\002\025Device\\V1\\GPBMetadata\352\002\nDevice::V1\272" +
-      "G\303\006\022\227\006\n\025Device Management API\022\321\004The Devi" +
-      "ce Management API provides comprehensive" +
-      " device management capabilities includin" +
-      "g device registration, session tracking," +
-      " and unified key/token management. The A" +
-      "PI uses a unified KeyObject model for al" +
-      "l key types including FCM tokens, encryp" +
-      "tion keys (Curve25519, Ed25519, Pickle)," +
-      " Matrix keys, and notification keys. Thi" +
-      "s enables applications to register and t" +
-      "rack user devices across platforms (mobi" +
-      "le, web, desktop), manage push notificat" +
-      "ion tokens, handle encryption keys for s" +
-      "ecure communications, and maintain detai" +
-      "led logs of device activity for security" +
-      " and compliance purposes.\"W\n\020Ant Investo" +
-      "r Ltd\022-https://github.com/antinvestor/se" +
-      "rvice-device\032\024info@antinvestor.com*I\n\016Ap" +
-      "ache License\0227https://github.com/antinve" +
-      "stor/apis/blob/master/LICENSE2\006v1.0.0*\':" +
-      "%\n#\n\nBearerAuth\022\025\n\023\n\004http*\006bearer2\003JWTb\006" +
-      "proto3"
+      "tR\004data\"\304\001\n\rNotifyMessage\022+\n\002id\030\001 \001(\tB\033\272" +
+      "H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\002id\022\024\n\005title\030" +
+      "\003 \001(\tR\005title\022\022\n\004body\030\004 \001(\tR\004body\022+\n\004data" +
+      "\030\005 \001(\0132\027.google.protobuf.StructR\004data\022/\n" +
+      "\006extras\030\006 \001(\0132\027.google.protobuf.StructR\006" +
+      "extras\"\374\001\n\rNotifyRequest\0228\n\tdevice_id\030\001 " +
+      "\001(\tB\033\272H\030r\026\020\003\030(2\020[0-9a-z_-]{3,20}R\010device" +
+      "Id\0225\n\006key_id\030\002 \001(\tB\036\272H\033r\026\020\003\030(2\020[0-9a-z_-" +
+      "]{3,20}\330\001\001R\005keyId\022-\n\010key_type\030\003 \001(\0162\022.de" +
+      "vice.v1.KeyTypeR\007keyType\022K\n\rnotification" +
+      "s\030\010 \003(\0132\030.device.v1.NotifyMessageB\013\272H\010\222\001" +
+      "\005\010\001\020\364\003R\rnotifications\"\234\001\n\014NotifyResult\022\030" +
+      "\n\007success\030\001 \001(\010R\007success\022\030\n\007message\030\002 \001(" +
+      "\tR\007message\022\'\n\017notification_id\030\003 \001(\tR\016not" +
+      "ificationId\022/\n\006extras\030\004 \001(\0132\027.google.pro" +
+      "tobuf.StructR\006extras\"C\n\016NotifyResponse\0221" +
+      "\n\007results\030\005 \003(\0132\027.device.v1.NotifyResult" +
+      "R\007results*s\n\007KeyType\022\016\n\nMATRIX_KEY\020\000\022\024\n\020" +
+      "NOTIFICATION_KEY\020\001\022\r\n\tFCM_TOKEN\020\002\022\022\n\016CUR" +
+      "VE25519_KEY\020\003\022\017\n\013ED25519_KEY\020\004\022\016\n\nPICKLE" +
+      "_KEY\020\005*L\n\016PresenceStatus\022\013\n\007OFFLINE\020\000\022\n\n" +
+      "\006ONLINE\020\001\022\010\n\004AWAY\020\002\022\010\n\004BUSY\020\003\022\r\n\tINVISIB" +
+      "LE\020\0042\247\"\n\rDeviceService\022\206\002\n\007GetById\022\031.dev" +
+      "ice.v1.GetByIdRequest\032\032.device.v1.GetByI" +
+      "dResponse\"\303\001\272G\277\001\n\007Devices\022\021Get devices b" +
+      "y ID\032\221\001Retrieves one or more devices by " +
+      "their unique identifiers. Supports batch" +
+      " retrieval and optional extensive detail" +
+      "s including logs and key counts.*\rgetDev" +
+      "iceById\022\203\002\n\016GetBySessionId\022 .device.v1.G" +
+      "etBySessionIdRequest\032!.device.v1.GetBySe" +
+      "ssionIdResponse\"\253\001\272G\247\001\n\007Devices\022\030Get dev" +
+      "ice by session ID\032lRetrieves a device by" +
+      " its active session identifier. Used to " +
+      "resolve device information from session " +
+      "tokens.*\024getDeviceBySessionId\022\205\002\n\006Search" +
+      "\022\030.device.v1.SearchRequest\032\031.device.v1.S" +
+      "earchResponse\"\303\001\272G\277\001\n\007Devices\022\016Search de" +
+      "vices\032\224\001Searches for devices matching sp" +
+      "ecified criteria including device name, " +
+      "OS, date range, and custom properties. R" +
+      "eturns a stream of matching devices.*\rse" +
+      "archDevices0\001\022\365\001\n\006Create\022\030.device.v1.Cre" +
+      "ateRequest\032\031.device.v1.CreateResponse\"\265\001" +
+      "\272G\261\001\n\007Devices\022\025Register a new device\032\200\001R" +
+      "egisters a new device in the system. The" +
+      " device must be linked to a profile befo" +
+      "re it can be used for authenticated oper" +
+      "ations.*\014createDevice\022\355\001\n\006Update\022\030.devic" +
+      "e.v1.UpdateRequest\032\031.device.v1.UpdateRes" +
+      "ponse\"\255\001\272G\251\001\n\007Devices\022\031Update device inf" +
+      "ormation\032uUpdates an existing device\'s n" +
+      "ame and properties. Only the device owne" +
+      "r or administrators can perform this ope" +
+      "ration.*\014updateDevice\022\345\001\n\004Link\022\026.device." +
+      "v1.LinkRequest\032\027.device.v1.LinkResponse\"" +
+      "\253\001\272G\247\001\n\007Devices\022\026Link device to profile\032" +
+      "xLinks a device to a user profile. This " +
+      "operation is required before the device " +
+      "can be used for authenticated operations" +
+      ".*\nlinkDevice\022\214\002\n\006Remove\022\030.device.v1.Rem" +
+      "oveRequest\032\031.device.v1.RemoveResponse\"\314\001" +
+      "\272G\310\001\n\007Devices\022\017Remove a device\032\235\001Removes" +
+      " a device from the system. This operatio" +
+      "n is typically used when a user logs out" +
+      " or removes a device from their account." +
+      " This action cannot be undone.*\014removeDe" +
+      "vice\022\202\002\n\003Log\022\025.device.v1.LogRequest\032\026.de" +
+      "vice.v1.LogResponse\"\313\001\272G\307\001\n\013Device Logs\022" +
+      "\023Log device activity\032\217\001Creates a new act" +
+      "ivity log entry for a device. Used for t" +
+      "racking device sessions, locations, and " +
+      "activity for security auditing and compl" +
+      "iance.*\021logDeviceActivity\022\203\002\n\010ListLogs\022\032" +
+      ".device.v1.ListLogsRequest\032\033.device.v1.L" +
+      "istLogsResponse\"\273\001\272G\267\001\n\013Device Logs\022\031Lis" +
+      "t device activity logs\032}Retrieves activi" +
+      "ty logs for a device. Useful for securit" +
+      "y auditing, tracking device usage patter" +
+      "ns, and compliance reporting.*\016listDevic" +
+      "eLogs0\001\022\344\001\n\006AddKey\022\030.device.v1.AddKeyReq" +
+      "uest\032\031.device.v1.AddKeyResponse\"\244\001\272G\240\001\n\013" +
+      "Device Keys\022\020Add key or token\032qAdds a ke" +
+      "y or token to a device. Supports FCM tok" +
+      "ens, encryption keys (Curve25519, Ed2551" +
+      "9), and other key types.*\014addDeviceKey\022\371" +
+      "\001\n\tRemoveKey\022\033.device.v1.RemoveKeyReques" +
+      "t\032\034.device.v1.RemoveKeyResponse\"\260\001\272G\254\001\n\013" +
+      "Device Keys\022\025Remove keys or tokens\032uRemo" +
+      "ves one or more keys or tokens from a de" +
+      "vice. Used for key rotation, token manag" +
+      "ement, or when removing a device.*\017remov" +
+      "eDeviceKey\022\350\001\n\tSearchKey\022\033.device.v1.Sea" +
+      "rchKeyRequest\032\034.device.v1.SearchKeyRespo" +
+      "nse\"\237\001\272G\233\001\n\013Device Keys\022\025Search keys or " +
+      "tokens\032dSearches for keys or tokens asso" +
+      "ciated with a device. Supports filtering" +
+      " by key type and expiration.*\017searchDevi" +
+      "ceKey\022\314\002\n\013RegisterKey\022\035.device.v1.Regist" +
+      "erKeyRequest\032\036.device.v1.RegisterKeyResp" +
+      "onse\"\375\001\272G\371\001\n\020Key Registration\022%Register " +
+      "key with third-party service\032\260\001Registers" +
+      " a key or token with third-party service" +
+      "s (like FCM for push notifications) and " +
+      "stores it. This method handles both the " +
+      "external service integration and local s" +
+      "torage.*\013registerKey\022\314\002\n\rDeRegisterKey\022\037" +
+      ".device.v1.DeRegisterKeyRequest\032 .device" +
+      ".v1.DeRegisterKeyResponse\"\367\001\272G\363\001\n\020Key Re" +
+      "gistration\022\'DeRegister key from third-pa" +
+      "rty service\032\246\001DeRegisters a key or token" +
+      " from third-party services (like FCM) an" +
+      "d removes it from storage. This method h" +
+      "andles both the external service cleanup" +
+      " and local deletion.*\rdeRegisterKey\022\366\002\n\006" +
+      "Notify\022\030.device.v1.NotifyRequest\032\031.devic" +
+      "e.v1.NotifyResponse\"\266\002\272G\262\002\n\024Device Notif" +
+      "ications\022\"Notify device using registered" +
+      " key\032\347\001Sends a notification to a device " +
+      "using one of its registered keys (FCM to" +
+      "ken, notification key, etc.). The servic" +
+      "e automatically selects an appropriate a" +
+      "ctive key based on the key_type, or uses" +
+      " a specific key if key_id is provided.*\014" +
+      "notifyDevice\022\257\002\n\016UpdatePresence\022 .device" +
+      ".v1.UpdatePresenceRequest\032!.device.v1.Up" +
+      "datePresenceResponse\"\327\001\272G\323\001\n\017Device Pres" +
+      "ence\022\026Update device presence\032\227\001Updates t" +
+      "he presence status of a device. Used to " +
+      "indicate online/offline/away/busy status" +
+      " and track last activity for real-time c" +
+      "ommunication features.*\016updatePresenceB\354" +
+      "\007\n\036com.antinvestor.apis.device.v1B\013Devic" +
+      "eProtoP\001Z1github.com/antinvestor/apis/go" +
+      "/device/v1;devicev1\242\002\003DXX\252\002\tDevice.V1\312\002\t" +
+      "Device\\V1\342\002\025Device\\V1\\GPBMetadata\352\002\nDevi" +
+      "ce::V1\272G\303\006\022\227\006\n\025Device Management API\022\321\004T" +
+      "he Device Management API provides compre" +
+      "hensive device management capabilities i" +
+      "ncluding device registration, session tr" +
+      "acking, and unified key/token management" +
+      ". The API uses a unified KeyObject model" +
+      " for all key types including FCM tokens," +
+      " encryption keys (Curve25519, Ed25519, P" +
+      "ickle), Matrix keys, and notification ke" +
+      "ys. This enables applications to registe" +
+      "r and track user devices across platform" +
+      "s (mobile, web, desktop), manage push no" +
+      "tification tokens, handle encryption key" +
+      "s for secure communications, and maintai" +
+      "n detailed logs of device activity for s" +
+      "ecurity and compliance purposes.\"W\n\020Ant " +
+      "Investor Ltd\022-https://github.com/antinve" +
+      "stor/service-device\032\024info@antinvestor.co" +
+      "m*I\n\016Apache License\0227https://github.com/" +
+      "antinvestor/apis/blob/master/LICENSE2\006v1" +
+      ".0.0*\':%\n#\n\nBearerAuth\022\025\n\023\n\004http*\006bearer" +
+      "2\003JWTb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -731,18 +746,30 @@ public final class DeviceProto extends com.google.protobuf.GeneratedFile {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_UpdatePresenceResponse_descriptor,
         new java.lang.String[] { "Data", });
-    internal_static_device_v1_NotifyRequest_descriptor =
+    internal_static_device_v1_NotifyMessage_descriptor =
       getDescriptor().getMessageType(35);
+    internal_static_device_v1_NotifyMessage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_device_v1_NotifyMessage_descriptor,
+        new java.lang.String[] { "Id", "Title", "Body", "Data", "Extras", });
+    internal_static_device_v1_NotifyRequest_descriptor =
+      getDescriptor().getMessageType(36);
     internal_static_device_v1_NotifyRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_NotifyRequest_descriptor,
-        new java.lang.String[] { "DeviceId", "KeyId", "KeyType", "Title", "Body", "Data", "Extras", });
+        new java.lang.String[] { "DeviceId", "KeyId", "KeyType", "Notifications", });
+    internal_static_device_v1_NotifyResult_descriptor =
+      getDescriptor().getMessageType(37);
+    internal_static_device_v1_NotifyResult_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_device_v1_NotifyResult_descriptor,
+        new java.lang.String[] { "Success", "Message", "NotificationId", "Extras", });
     internal_static_device_v1_NotifyResponse_descriptor =
-      getDescriptor().getMessageType(36);
+      getDescriptor().getMessageType(38);
     internal_static_device_v1_NotifyResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_device_v1_NotifyResponse_descriptor,
-        new java.lang.String[] { "Success", "Message", "NotificationId", "Extras", });
+        new java.lang.String[] { "Results", });
     descriptor.resolveAllFeaturesImmutable();
     build.buf.validate.ValidateProto.getDescriptor();
     com.google.protobuf.StructProto.getDescriptor();

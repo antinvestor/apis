@@ -2944,26 +2944,131 @@ class UpdatePresenceResponse extends $pb.GeneratedMessage {
   PresenceObject ensureData() => $_ensure(0);
 }
 
-/// NotifyRequest sends a notification to a device using one of its registered keys.
-/// The service will select an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
-class NotifyRequest extends $pb.GeneratedMessage {
-  factory NotifyRequest({
-    $core.String? deviceId,
-    $core.String? keyId,
-    KeyType? keyType,
+/// NotifyPayload represents the content and metadata of a single notification.
+class NotifyMessage extends $pb.GeneratedMessage {
+  factory NotifyMessage({
+    $core.String? id,
     $core.String? title,
     $core.String? body,
     $0.Struct? data,
     $0.Struct? extras,
   }) {
     final result = create();
-    if (deviceId != null) result.deviceId = deviceId;
-    if (keyId != null) result.keyId = keyId;
-    if (keyType != null) result.keyType = keyType;
+    if (id != null) result.id = id;
     if (title != null) result.title = title;
     if (body != null) result.body = body;
     if (data != null) result.data = data;
     if (extras != null) result.extras = extras;
+    return result;
+  }
+
+  NotifyMessage._();
+
+  factory NotifyMessage.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory NotifyMessage.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'NotifyMessage',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(3, _omitFieldNames ? '' : 'title')
+    ..aOS(4, _omitFieldNames ? '' : 'body')
+    ..aOM<$0.Struct>(5, _omitFieldNames ? '' : 'data',
+        subBuilder: $0.Struct.create)
+    ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'extras',
+        subBuilder: $0.Struct.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NotifyMessage clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NotifyMessage copyWith(void Function(NotifyMessage) updates) =>
+      super.copyWith((message) => updates(message as NotifyMessage))
+          as NotifyMessage;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static NotifyMessage create() => NotifyMessage._();
+  @$core.override
+  NotifyMessage createEmptyInstance() => create();
+  static $pb.PbList<NotifyMessage> createRepeated() =>
+      $pb.PbList<NotifyMessage>();
+  @$core.pragma('dart2js:noInline')
+  static NotifyMessage getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NotifyMessage>(create);
+  static NotifyMessage? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+
+  @$pb.TagNumber(3)
+  $core.String get title => $_getSZ(1);
+  @$pb.TagNumber(3)
+  set title($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTitle() => $_has(1);
+  @$pb.TagNumber(3)
+  void clearTitle() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get body => $_getSZ(2);
+  @$pb.TagNumber(4)
+  set body($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBody() => $_has(2);
+  @$pb.TagNumber(4)
+  void clearBody() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $0.Struct get data => $_getN(3);
+  @$pb.TagNumber(5)
+  set data($0.Struct value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasData() => $_has(3);
+  @$pb.TagNumber(5)
+  void clearData() => $_clearField(5);
+  @$pb.TagNumber(5)
+  $0.Struct ensureData() => $_ensure(3);
+
+  @$pb.TagNumber(6)
+  $0.Struct get extras => $_getN(4);
+  @$pb.TagNumber(6)
+  set extras($0.Struct value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasExtras() => $_has(4);
+  @$pb.TagNumber(6)
+  void clearExtras() => $_clearField(6);
+  @$pb.TagNumber(6)
+  $0.Struct ensureExtras() => $_ensure(4);
+}
+
+/// NotifyRequest sends one or more notifications to a device using its registered keys.
+/// The service will select an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
+class NotifyRequest extends $pb.GeneratedMessage {
+  factory NotifyRequest({
+    $core.String? deviceId,
+    $core.String? keyId,
+    KeyType? keyType,
+    $core.Iterable<NotifyMessage>? notifications,
+  }) {
+    final result = create();
+    if (deviceId != null) result.deviceId = deviceId;
+    if (keyId != null) result.keyId = keyId;
+    if (keyType != null) result.keyType = keyType;
+    if (notifications != null) result.notifications.addAll(notifications);
     return result;
   }
 
@@ -2984,12 +3089,8 @@ class NotifyRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'keyId')
     ..aE<KeyType>(3, _omitFieldNames ? '' : 'keyType',
         enumValues: KeyType.values)
-    ..aOS(4, _omitFieldNames ? '' : 'title')
-    ..aOS(5, _omitFieldNames ? '' : 'body')
-    ..aOM<$0.Struct>(6, _omitFieldNames ? '' : 'data',
-        subBuilder: $0.Struct.create)
-    ..aOM<$0.Struct>(7, _omitFieldNames ? '' : 'extras',
-        subBuilder: $0.Struct.create)
+    ..pPM<NotifyMessage>(8, _omitFieldNames ? '' : 'notifications',
+        subBuilder: NotifyMessage.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3022,6 +3123,8 @@ class NotifyRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearDeviceId() => $_clearField(1);
 
+  /// The following fields remain for backward compatibility and represent a single notification payload.
+  /// New integrations should prefer the notifications field for bulk sending.
   @$pb.TagNumber(2)
   $core.String get keyId => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -3040,50 +3143,13 @@ class NotifyRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearKeyType() => $_clearField(3);
 
-  @$pb.TagNumber(4)
-  $core.String get title => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set title($core.String value) => $_setString(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasTitle() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearTitle() => $_clearField(4);
-
-  @$pb.TagNumber(5)
-  $core.String get body => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set body($core.String value) => $_setString(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasBody() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearBody() => $_clearField(5);
-
-  @$pb.TagNumber(6)
-  $0.Struct get data => $_getN(5);
-  @$pb.TagNumber(6)
-  set data($0.Struct value) => $_setField(6, value);
-  @$pb.TagNumber(6)
-  $core.bool hasData() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearData() => $_clearField(6);
-  @$pb.TagNumber(6)
-  $0.Struct ensureData() => $_ensure(5);
-
-  @$pb.TagNumber(7)
-  $0.Struct get extras => $_getN(6);
-  @$pb.TagNumber(7)
-  set extras($0.Struct value) => $_setField(7, value);
-  @$pb.TagNumber(7)
-  $core.bool hasExtras() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearExtras() => $_clearField(7);
-  @$pb.TagNumber(7)
-  $0.Struct ensureExtras() => $_ensure(6);
+  @$pb.TagNumber(8)
+  $pb.PbList<NotifyMessage> get notifications => $_getList(3);
 }
 
-/// NotifyResponse confirms the notification was sent.
-class NotifyResponse extends $pb.GeneratedMessage {
-  factory NotifyResponse({
+/// NotifyResult details the outcome of sending an individual notification payload.
+class NotifyResult extends $pb.GeneratedMessage {
+  factory NotifyResult({
     $core.bool? success,
     $core.String? message,
     $core.String? notificationId,
@@ -3097,17 +3163,17 @@ class NotifyResponse extends $pb.GeneratedMessage {
     return result;
   }
 
-  NotifyResponse._();
+  NotifyResult._();
 
-  factory NotifyResponse.fromBuffer($core.List<$core.int> data,
+  factory NotifyResult.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory NotifyResponse.fromJson($core.String json,
+  factory NotifyResult.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'NotifyResponse',
+      _omitMessageNames ? '' : 'NotifyResult',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'),
       createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'success')
@@ -3118,25 +3184,25 @@ class NotifyResponse extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  NotifyResponse clone() => deepCopy();
+  NotifyResult clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  NotifyResponse copyWith(void Function(NotifyResponse) updates) =>
-      super.copyWith((message) => updates(message as NotifyResponse))
-          as NotifyResponse;
+  NotifyResult copyWith(void Function(NotifyResult) updates) =>
+      super.copyWith((message) => updates(message as NotifyResult))
+          as NotifyResult;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static NotifyResponse create() => NotifyResponse._();
+  static NotifyResult create() => NotifyResult._();
   @$core.override
-  NotifyResponse createEmptyInstance() => create();
-  static $pb.PbList<NotifyResponse> createRepeated() =>
-      $pb.PbList<NotifyResponse>();
+  NotifyResult createEmptyInstance() => create();
+  static $pb.PbList<NotifyResult> createRepeated() =>
+      $pb.PbList<NotifyResult>();
   @$core.pragma('dart2js:noInline')
-  static NotifyResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<NotifyResponse>(create);
-  static NotifyResponse? _defaultInstance;
+  static NotifyResult getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NotifyResult>(create);
+  static NotifyResult? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.bool get success => $_getBF(0);
@@ -3175,6 +3241,58 @@ class NotifyResponse extends $pb.GeneratedMessage {
   void clearExtras() => $_clearField(4);
   @$pb.TagNumber(4)
   $0.Struct ensureExtras() => $_ensure(3);
+}
+
+/// NotifyResponse confirms the notifications were sent.
+class NotifyResponse extends $pb.GeneratedMessage {
+  factory NotifyResponse({
+    $core.Iterable<NotifyResult>? results,
+  }) {
+    final result = create();
+    if (results != null) result.results.addAll(results);
+    return result;
+  }
+
+  NotifyResponse._();
+
+  factory NotifyResponse.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory NotifyResponse.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'NotifyResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'device.v1'),
+      createEmptyInstance: create)
+    ..pPM<NotifyResult>(5, _omitFieldNames ? '' : 'results',
+        subBuilder: NotifyResult.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NotifyResponse clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NotifyResponse copyWith(void Function(NotifyResponse) updates) =>
+      super.copyWith((message) => updates(message as NotifyResponse))
+          as NotifyResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static NotifyResponse create() => NotifyResponse._();
+  @$core.override
+  NotifyResponse createEmptyInstance() => create();
+  static $pb.PbList<NotifyResponse> createRepeated() =>
+      $pb.PbList<NotifyResponse>();
+  @$core.pragma('dart2js:noInline')
+  static NotifyResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NotifyResponse>(create);
+  static NotifyResponse? _defaultInstance;
+
+  @$pb.TagNumber(5)
+  $pb.PbList<NotifyResult> get results => $_getList(0);
 }
 
 /// DeviceService provides core device management and key/token management.

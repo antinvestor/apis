@@ -489,6 +489,14 @@ components:
           required:
             - roomEvent
         - properties:
+            sendEvent:
+              title: send_event
+              description: Similar to room_event but useful for sending messages in bulk
+              $ref: '#/components/schemas/chat.v1.SendEventRequest'
+          title: send_event
+          required:
+            - sendEvent
+        - properties:
             typing:
               title: typing
               $ref: '#/components/schemas/chat.v1.TypingEvent'
@@ -527,6 +535,13 @@ components:
               title: ack
               required:
                 - ack
+            - properties:
+                sendEventAck:
+                  title: send_event_ack
+                  $ref: '#/components/schemas/chat.v1.SendEventResponse'
+              title: send_event_ack
+              required:
+                - sendEventAck
             - properties:
                 stateUpdate:
                   title: stateUpdate

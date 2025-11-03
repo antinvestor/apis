@@ -46,7 +46,8 @@ public interface NotifyRequestOrBuilder extends
 
   /**
    * <pre>
-   * Specific key ID to use (optional - if not provided, uses key_type to select)
+   * The following fields remain for backward compatibility and represent a single notification payload.
+   * New integrations should prefer the notifications field for bulk sending.
    * </pre>
    *
    * <code>string key_id = 2 [json_name = "keyId", (.buf.validate.field) = { ... }</code>
@@ -55,7 +56,8 @@ public interface NotifyRequestOrBuilder extends
   java.lang.String getKeyId();
   /**
    * <pre>
-   * Specific key ID to use (optional - if not provided, uses key_type to select)
+   * The following fields remain for backward compatibility and represent a single notification payload.
+   * New integrations should prefer the notifications field for bulk sending.
    * </pre>
    *
    * <code>string key_id = 2 [json_name = "keyId", (.buf.validate.field) = { ... }</code>
@@ -85,95 +87,45 @@ public interface NotifyRequestOrBuilder extends
 
   /**
    * <pre>
-   * Notification title
+   * Collection of notifications to send in bulk.
    * </pre>
    *
-   * <code>string title = 4 [json_name = "title"];</code>
-   * @return The title.
+   * <code>repeated .device.v1.NotifyMessage notifications = 8 [json_name = "notifications", (.buf.validate.field) = { ... }</code>
    */
-  java.lang.String getTitle();
+  java.util.List<com.antinvestor.apis.device.v1.NotifyMessage> 
+      getNotificationsList();
   /**
    * <pre>
-   * Notification title
+   * Collection of notifications to send in bulk.
    * </pre>
    *
-   * <code>string title = 4 [json_name = "title"];</code>
-   * @return The bytes for title.
+   * <code>repeated .device.v1.NotifyMessage notifications = 8 [json_name = "notifications", (.buf.validate.field) = { ... }</code>
    */
-  com.google.protobuf.ByteString
-      getTitleBytes();
-
+  com.antinvestor.apis.device.v1.NotifyMessage getNotifications(int index);
   /**
    * <pre>
-   * Notification body/message
+   * Collection of notifications to send in bulk.
    * </pre>
    *
-   * <code>string body = 5 [json_name = "body"];</code>
-   * @return The body.
+   * <code>repeated .device.v1.NotifyMessage notifications = 8 [json_name = "notifications", (.buf.validate.field) = { ... }</code>
    */
-  java.lang.String getBody();
+  int getNotificationsCount();
   /**
    * <pre>
-   * Notification body/message
+   * Collection of notifications to send in bulk.
    * </pre>
    *
-   * <code>string body = 5 [json_name = "body"];</code>
-   * @return The bytes for body.
+   * <code>repeated .device.v1.NotifyMessage notifications = 8 [json_name = "notifications", (.buf.validate.field) = { ... }</code>
    */
-  com.google.protobuf.ByteString
-      getBodyBytes();
-
+  java.util.List<? extends com.antinvestor.apis.device.v1.NotifyMessageOrBuilder> 
+      getNotificationsOrBuilderList();
   /**
    * <pre>
-   * Additional notification data/payload (custom data, actions, etc.)
+   * Collection of notifications to send in bulk.
    * </pre>
    *
-   * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
-   * @return Whether the data field is set.
+   * <code>repeated .device.v1.NotifyMessage notifications = 8 [json_name = "notifications", (.buf.validate.field) = { ... }</code>
    */
-  boolean hasData();
-  /**
-   * <pre>
-   * Additional notification data/payload (custom data, actions, etc.)
-   * </pre>
-   *
-   * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
-   * @return The data.
-   */
-  com.google.protobuf.Struct getData();
-  /**
-   * <pre>
-   * Additional notification data/payload (custom data, actions, etc.)
-   * </pre>
-   *
-   * <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
-   */
-  com.google.protobuf.StructOrBuilder getDataOrBuilder();
-
-  /**
-   * <pre>
-   * Extra notification options (priority, TTL, badge, sound, etc.)
-   * </pre>
-   *
-   * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
-   * @return Whether the extras field is set.
-   */
-  boolean hasExtras();
-  /**
-   * <pre>
-   * Extra notification options (priority, TTL, badge, sound, etc.)
-   * </pre>
-   *
-   * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
-   * @return The extras.
-   */
-  com.google.protobuf.Struct getExtras();
-  /**
-   * <pre>
-   * Extra notification options (priority, TTL, badge, sound, etc.)
-   * </pre>
-   *
-   * <code>.google.protobuf.Struct extras = 7 [json_name = "extras"];</code>
-   */
-  com.google.protobuf.StructOrBuilder getExtrasOrBuilder();
+  com.antinvestor.apis.device.v1.NotifyMessageOrBuilder getNotificationsOrBuilder(
+      int index);
 }
