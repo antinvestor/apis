@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package common
+package connection
 
 import (
 	"context"
@@ -21,6 +21,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/antinvestor/apis/go/common"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
 
@@ -65,11 +66,11 @@ func (gbc *GrpcClientBase) GetInfo() metadata.MD {
 	return gbc.xMetadata
 }
 
-func (gbc *GrpcClientBase) SetPartitionInfo(ctx context.Context, partitionInfo *PartitionInfo) context.Context {
-	return context.WithValue(ctx, ctxKeyPartitionInfo, partitionInfo)
+func (gbc *GrpcClientBase) SetPartitionInfo(ctx context.Context, partitionInfo *common.PartitionInfo) context.Context {
+	return context.WithValue(ctx, common.CtxKeyPartitionInfo, partitionInfo)
 }
 
-func NewClientBase(ctx context.Context, opts ...ClientOption) (*GrpcClientBase, error) {
+func NewClientBase(ctx context.Context, opts ...common.ClientOption) (*GrpcClientBase, error) {
 	connPool, err := DialConnection(ctx, opts...)
 	if err != nil {
 		return nil, err
@@ -89,8 +90,8 @@ type JWTInterceptor struct {
 	mu          sync.Mutex
 }
 
-func (jwt *JWTInterceptor) fromContext(ctx context.Context, key CtxServiceKey) *PartitionInfo {
-	val, ok := ctx.Value(key).(*PartitionInfo)
+func (jwt *JWTInterceptor) fromContext(ctx context.Context, key common.CtxServiceKey) *common.PartitionInfo {
+	val, ok := ctx.Value(key).(*common.PartitionInfo)
 	if !ok {
 		return nil
 	}
@@ -99,7 +100,7 @@ func (jwt *JWTInterceptor) fromContext(ctx context.Context, key CtxServiceKey) *
 }
 
 func (jwt *JWTInterceptor) setupPartitionData(ctx context.Context) context.Context {
-	partitionInfo := jwt.fromContext(ctx, ctxKeyPartitionInfo)
+	partitionInfo := jwt.fromContext(ctx, common.CtxKeyPartitionInfo)
 
 	if partitionInfo == nil {
 		return ctx
@@ -148,7 +149,7 @@ func (jwt *JWTInterceptor) UnaryClientInterceptor(
 	var finalCtx context.Context
 	if tokenStr != "" {
 		// Create a new context with the token and make the first request
-		finalCtx = metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+jwt.token.AccessToken)
+		finalCtx = metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+tokenStr)
 	} else {
 		finalCtx = ctx
 	}
@@ -173,7 +174,7 @@ func (jwt *JWTInterceptor) StreamClientInterceptor(
 	var finalCtx context.Context
 	if tokenStr != "" {
 		// Create a new context with the token and make the first request
-		finalCtx = metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+jwt.token.AccessToken)
+		finalCtx = metadata.AppendToOutgoingContext(ctx, "Authorization", "Bearer "+tokenStr)
 	} else {
 		finalCtx = ctx
 	}
@@ -183,7 +184,7 @@ func (jwt *JWTInterceptor) StreamClientInterceptor(
 }
 
 // DialConnection creates a gRPC connection with the provided options.
-func DialConnection(_ context.Context, opts ...ClientOption) (*grpc.ClientConn, error) {
+func DialConnection(_ context.Context, opts ...common.ClientOption) (*grpc.ClientConn, error) {
 	ds, err := processAndValidateOpts(opts)
 	if err != nil {
 		return nil, err

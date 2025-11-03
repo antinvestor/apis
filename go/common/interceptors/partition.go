@@ -34,14 +34,14 @@ func NewPartitionInfoInterceptor(clientInfo string) connect.Interceptor {
 
 func (ai *partitionInfoSetInterceptor) setPartitionInfo(ctx context.Context, header http.Header) {
 
-	partitionInfo, ok := ctx.Value(common.CtxServiceKey("partition_info")).(*common.PartitionInfo)
+	partitionInfo, ok := ctx.Value(common.CtxKeyPartitionInfo).(*common.PartitionInfo)
 	if !ok || partitionInfo == nil {
 		return
 	}
-	header.Set("Tenant_id", partitionInfo.TenantID)
-	header.Set("Partition_id", partitionInfo.PartitionID)
-	header.Set("Access_id", partitionInfo.AccessID)
-	header.Set("Profile_id", partitionInfo.ProfileID)
+	header.Set("Tenant_Id", partitionInfo.TenantID)
+	header.Set("Partition_Id", partitionInfo.PartitionID)
+	header.Set("Access_Id", partitionInfo.AccessID)
+	header.Set("Profile_Id", partitionInfo.ProfileID)
 }
 
 func (ai *partitionInfoSetInterceptor) WrapUnary(next connect.UnaryFunc) connect.UnaryFunc {

@@ -1,0 +1,156 @@
+// Copyright 2023-2024 Ant Investor Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package connection
+
+import (
+	"context"
+	"net/http"
+	"net/url"
+	"strings"
+	"time"
+
+	"connectrpc.com/connect"
+	"github.com/antinvestor/apis/go/common"
+	"github.com/antinvestor/apis/go/common/connection/options"
+	"github.com/antinvestor/apis/go/common/interceptors"
+	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+	"golang.org/x/oauth2/clientcredentials"
+)
+
+const (
+	defaultHTTPTimeoutSeconds     = 30
+	defaultHTTPIdleTimeoutSeconds = 90
+)
+
+type HttpClientBase struct {
+	// http client to the service.
+	client *http.Client
+
+	interceptors []connect.Interceptor
+
+	// The x-ant-* metadata to be sent with each request.
+	xMetadata string
+}
+
+// Client obtains the http client for the API service.
+// User should always use this client is required.
+func (gbc *HttpClientBase) Client() *http.Client {
+	return gbc.client
+}
+
+// Interceptors returns the interceptors for the API service.
+func (gbc *HttpClientBase) Interceptors() []connect.Interceptor {
+	return gbc.interceptors
+}
+
+// SetInfo sets the name and version of the application in
+// the `x-goog-api-client` header passed on each request. Intended for
+// use by Google-written clients.
+func (gbc *HttpClientBase) SetInfo(keyval ...string) {
+	kv := append([]string{"gl-go", VersionGo()}, keyval...)
+	kv = append(kv, "connect", connect.Version)
+	gbc.xMetadata = XAntHeader(kv...)
+}
+
+func (gbc *HttpClientBase) GetInfo() string {
+	return gbc.xMetadata
+}
+
+func (gbc *HttpClientBase) SetPartitionInfo(ctx context.Context, partitionInfo *common.PartitionInfo) context.Context {
+	return context.WithValue(ctx, common.CtxKeyPartitionInfo, partitionInfo)
+}
+
+func NewHTTPClientBase(ctx context.Context, opts ...common.ClientOption) (*HttpClientBase, error) {
+
+	ds, err := processAndValidateOpts(opts)
+	if err != nil {
+		return nil, err
+	}
+
+	httpDialOpts := ds.HTTPDialOpts
+
+	httpClient := NewHTTPClient(ctx, httpDialOpts...)
+
+	clientBase := HttpClientBase{
+		client: httpClient,
+	}
+	clientBase.SetInfo()
+
+	if ds.NoAuth {
+		return &clientBase, nil
+	}
+
+	var authOpts []interceptors.AuthInterceptorOption
+
+	if ds.APIKey != "" {
+		authOpts = append(authOpts, interceptors.WithAPIKey(ds.APIKey))
+	}
+
+	if ds.TokenEndpoint != "" {
+
+		var endpointValues url.Values
+		if len(ds.Audiences) > 0 {
+			endpointValues = url.Values{}
+			audienceList := strings.Join(ds.Audiences, " ")
+			endpointValues.Add("audience", audienceList)
+		}
+		cfg := &clientcredentials.Config{
+			ClientID:       ds.TokenUserName,
+			ClientSecret:   ds.TokenPassword,
+			TokenURL:       ds.TokenEndpoint,
+			Scopes:         ds.Scopes,
+			EndpointParams: endpointValues,
+		}
+
+		authOpts = append(authOpts, interceptors.WithTokenClient(cfg))
+	}
+
+	clientBase.interceptors = []connect.Interceptor{
+		interceptors.NewAuthInterceptor(authOpts...),
+		interceptors.NewPartitionInfoInterceptor(clientBase.GetInfo())}
+	return &clientBase, nil
+}
+
+// NewHTTPClient creates a new HTTP client with the provided options.
+// If no transport is specified, it defaults to otelhttp.NewTransport(http.DefaultTransport).
+func NewHTTPClient(ctx context.Context, opts ...options.HTTPOption) *http.Client {
+	cfg := &options.HttpConfig{
+		Timeout:     time.Duration(defaultHTTPTimeoutSeconds) * time.Second,
+		IdleTimeout: time.Duration(defaultHTTPIdleTimeoutSeconds) * time.Second,
+		Transport:   otelhttp.NewTransport(http.DefaultTransport),
+	}
+	for _, opt := range opts {
+		opt(cfg)
+	}
+
+	client := &http.Client{}
+
+	if cfg.CliCredCfg != nil {
+		client = cfg.CliCredCfg.Client(ctx)
+	}
+
+	client.Transport = cfg.Transport
+	client.Jar = cfg.Jar
+	client.Timeout = cfg.Timeout
+	client.CheckRedirect = cfg.CheckRedirect
+
+	if cfg.IdleTimeout > 0 {
+		if t, ok := client.Transport.(*http.Transport); ok {
+			t.IdleConnTimeout = cfg.IdleTimeout
+		}
+	}
+
+	return client
+}

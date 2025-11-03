@@ -223,21 +223,58 @@ jobs:
       - name: Add version header to CHANGELOG
         if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != ''
         run: |
+          set -euo pipefail
+
           VERSION="${{ steps.release-version.outputs.version }}"
           CHANGELOG_FILE="${{ matrix.language }}/${{ matrix.package }}/CHANGELOG.md"
           DATE=$(date +%Y-%m-%d)
-          
-          # Create temp file with version header
-          echo "# Changelog" > "${CHANGELOG_FILE}.tmp"
-          echo "" >> "${CHANGELOG_FILE}.tmp"
-          echo "## [$VERSION] - $DATE" >> "${CHANGELOG_FILE}.tmp"
-          echo "" >> "${CHANGELOG_FILE}.tmp"
-          
-          # Append existing changelog content
-          cat "$CHANGELOG_FILE" >> "${CHANGELOG_FILE}.tmp"
-          
-          # Replace original with versioned changelog
-          mv "${CHANGELOG_FILE}.tmp" "$CHANGELOG_FILE"
+          TEMP_FILE="${CHANGELOG_FILE}.tmp"
+          VERSION_HEADER="## [${VERSION}] - ${DATE}"
+
+          mkdir -p "$(dirname "$CHANGELOG_FILE")"
+
+          # Skip update if version already exists in the changelog
+          if [[ -f "$CHANGELOG_FILE" ]] && grep -q "^## \[${VERSION}\]" "$CHANGELOG_FILE"; then
+            echo "ℹ️  Changelog already contains version ${VERSION}, skipping update."
+            exit 0
+          fi
+
+          # Detect if changelog already has the main header
+          if [[ -f "$CHANGELOG_FILE" ]] && grep -q '^# Changelog' "$CHANGELOG_FILE"; then
+            echo "Found existing # Changelog header, preserving it."
+
+            {
+              head -n 1 "$CHANGELOG_FILE"  # keep existing header
+              echo
+              echo "${VERSION_HEADER}"
+              echo
+              tail -n +2 "$CHANGELOG_FILE"  # append rest (skip first line)
+            } > "$TEMP_FILE"
+
+          else
+            echo "No changelog found or missing header, creating new changelog file."
+
+            {
+              echo "# Changelog"
+              echo
+              echo "${VERSION_HEADER}"
+              echo
+              if [[ -f "$CHANGELOG_FILE" ]]; then
+                cat "$CHANGELOG_FILE"
+              else
+                echo "_Initial release._"
+              fi
+            } > "$TEMP_FILE"
+          fi
+
+          # Only replace if the content has actually changed
+          if [[ ! -f "$CHANGELOG_FILE" ]] || ! cmp -s "$TEMP_FILE" "$CHANGELOG_FILE"; then
+            mv -f "$TEMP_FILE" "$CHANGELOG_FILE"
+            echo "✅ Updated changelog for version ${VERSION}"
+          else
+            rm -f "$TEMP_FILE"
+            echo "ℹ️  No changes detected in changelog, skipping write."
+          fi
 
       - name: Display Changelog for ${{ matrix.language }}/${{ matrix.package }}
         if: steps.changelog.outputs.failed != 'true' && steps.changelog.outputs.changelog != ''

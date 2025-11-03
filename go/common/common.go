@@ -14,8 +14,11 @@
 
 package common
 
-const ctxKeyPartitionInfo = CtxServiceKey("partitionInfoKey")
-const ctxKeyClientInfo = CtxServiceKey("clientInfoKey")
+const (
+	CtxKeyPartitionInfo = CtxServiceKey("partitionInfoKey")
+)
+
+type CtxServiceKey string
 
 type MessageOrError[T any] struct {
 	Message T
