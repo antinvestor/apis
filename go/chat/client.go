@@ -16,60 +16,53 @@ package chat
 
 import (
 	"context"
-	"math"
 
 	"github.com/antinvestor/apis/go/chat/v1/chatv1connect"
 	"github.com/antinvestor/apis/go/common"
 	"github.com/antinvestor/apis/go/common/connection"
-	"google.golang.org/grpc"
 )
 
 const ctxKeyService = common.CtxServiceKey("chatClientKey")
 
-func defaultClientOptions() []common.ClientOption {
+func defaultOptions() []common.ClientOption {
 	return []common.ClientOption{
-		common.WithEndpoint("chat.api.antinvestor.com:443"),
-		common.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
-		common.WithGRPCDialOption(grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32))),
+		common.WithEndpoint("https://chat.api.antinvestor.com"),
 	}
 }
 
-func ToContext(ctx context.Context, chatClient *Client) context.Context {
+func ToContext(ctx context.Context, chatClient chatv1connect.ChatServiceClient) context.Context {
 	return context.WithValue(ctx, ctxKeyService, chatClient)
 }
 
-func FromContext(ctx context.Context) *Client {
-	chatClient, ok := ctx.Value(ctxKeyService).(*Client)
+func FromContext(ctx context.Context) chatv1connect.ChatServiceClient {
+	client, ok := ctx.Value(ctxKeyService).(chatv1connect.ChatServiceClient)
 	if !ok {
 		return nil
 	}
 
-	return chatClient
+	return client
 }
 
 // Client is a client for interacting with the chat service API.
+// Methods, except Close, may be called concurrently. However,
+// fields must not be modified concurrently with method calls.
 type Client struct {
 	*connection.ConnectClientBase
-
 	chatv1connect.ChatServiceClient
 }
 
-func Init(cBase *connection.ConnectClientBase, svc chatv1connect.ChatServiceClient) *Client {
-	return &Client{
-		ConnectClientBase: cBase,
-		ChatServiceClient: svc,
-	}
-}
-
-// NewChatClient creates a new chat svc client.
+// NewClient creates a new chat svc client.
 // The service that an application uses to send and access received messages
-func NewChatClient(ctx context.Context, opts ...common.ClientOption) (*Client, error) {
-	clientOpts := defaultClientOptions()
+func NewClient(ctx context.Context, opts ...common.ClientOption) (chatv1connect.ChatServiceClient, error) {
+	clientOpts := defaultOptions()
 
-	client, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
+	clientBase, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
 
-	return Init(client, chatv1connect.NewChatServiceClient(client.Client(), client.Endpoint())), nil
+	return &Client{
+		ConnectClientBase: clientBase,
+		ChatServiceClient: chatv1connect.NewChatServiceClient(clientBase.Client(), clientBase.Endpoint()),
+	}, nil
 }

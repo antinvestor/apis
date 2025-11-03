@@ -33,7 +33,7 @@ jobs:
         id: get_tags
         run: |
           # Get the most recent tag that matches the module
-          TAGS=$(git tag --sort=-creatordate | grep "^dart/${{ steps.get_module.module }}/v" | head -n 1)
+          TAGS=$(git tag --sort=-creatordate | grep "^dart/${{ steps.get_module.outputs.module }}/v" | head -n 1)
           echo "Found tag: $TAGS"
           if [[ -z "$TAGS" ]]; then
             echo "not_enough_tags=true" >> $GITHUB_OUTPUT
@@ -50,7 +50,7 @@ jobs:
         if: steps.get_tags.outputs.not_enough_tags == 'false'
         id: dart_module_changed
         run: |
-          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'dart/${{ steps.get_module.module }}' || true)
+          CHANGES=$(git diff --name-only ${{ env.latest_tag }} HEAD | grep 'dart/${{ steps.get_module.outputs.module }}' || true)
           if [[ -n "$CHANGES" ]]; then
             echo "Changes found in dart/${{ steps.get_module.module }}"
             echo "changed=true" >> $GITHUB_OUTPUT
@@ -74,8 +74,8 @@ jobs:
       - name: Release package
         if: steps.get_tags.outputs.not_enough_tags == 'true' || steps.dart_module_changed.outputs.changed == 'true'
         run: |
-          VERSION_NO="${{ steps.get_module.version_no }}"
-          PACKAGE="${{ steps.get_module.module }}"
+          VERSION_NO="${{ steps.get_module.outputs.version_no }}"
+          PACKAGE="${{ steps.get_module.outputs.module }}"
           PACKAGE_DIR="dart/$PACKAGE"
           
           echo "================================================"

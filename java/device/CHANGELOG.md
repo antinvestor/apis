@@ -1,9 +1,13 @@
 # Changelog
 
-## [0.1.0] - 2025-10-30
+## [1.47.8] - 2025-11-03
 
+## Feature
+
+- feat: add bulk notify payloads and update generated clients
 
 ## Other
 
-- Improve chat event types and message relationships
-   - PR: #817
+- refactor: adopt connect clients across Go services
+   - PR: #819
+

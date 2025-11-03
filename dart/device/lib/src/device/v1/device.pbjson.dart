@@ -875,6 +875,39 @@ final $typed_data.Uint8List updatePresenceResponseDescriptor =
         'ChZVcGRhdGVQcmVzZW5jZVJlc3BvbnNlEi0KBGRhdGEYASABKAsyGS5kZXZpY2UudjEuUHJlc2'
         'VuY2VPYmplY3RSBGRhdGE=');
 
+@$core.Deprecated('Use notifyMessageDescriptor instead')
+const NotifyMessage$json = {
+  '1': 'NotifyMessage',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'id'},
+    {'1': 'title', '3': 3, '4': 1, '5': 9, '10': 'title'},
+    {'1': 'body', '3': 4, '4': 1, '5': 9, '10': 'body'},
+    {
+      '1': 'data',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Struct',
+      '10': 'data'
+    },
+    {
+      '1': 'extras',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Struct',
+      '10': 'extras'
+    },
+  ],
+};
+
+/// Descriptor for `NotifyMessage`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List notifyMessageDescriptor = $convert.base64Decode(
+    'Cg1Ob3RpZnlNZXNzYWdlEisKAmlkGAEgASgJQhu6SBhyFhADGCgyEFswLTlhLXpfLV17MywyMH'
+    '1SAmlkEhQKBXRpdGxlGAMgASgJUgV0aXRsZRISCgRib2R5GAQgASgJUgRib2R5EisKBGRhdGEY'
+    'BSABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0UgRkYXRhEi8KBmV4dHJhcxgGIAEoCzIXLm'
+    'dvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RSBmV4dHJhcw==');
+
 @$core.Deprecated('Use notifyRequestDescriptor instead')
 const NotifyRequest$json = {
   '1': 'NotifyRequest',
@@ -889,23 +922,14 @@ const NotifyRequest$json = {
       '6': '.device.v1.KeyType',
       '10': 'keyType'
     },
-    {'1': 'title', '3': 4, '4': 1, '5': 9, '10': 'title'},
-    {'1': 'body', '3': 5, '4': 1, '5': 9, '10': 'body'},
     {
-      '1': 'data',
-      '3': 6,
-      '4': 1,
+      '1': 'notifications',
+      '3': 8,
+      '4': 3,
       '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'data'
-    },
-    {
-      '1': 'extras',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.Struct',
-      '10': 'extras'
+      '6': '.device.v1.NotifyMessage',
+      '8': {},
+      '10': 'notifications'
     },
   ],
 };
@@ -915,13 +939,12 @@ final $typed_data.Uint8List notifyRequestDescriptor = $convert.base64Decode(
     'Cg1Ob3RpZnlSZXF1ZXN0EjgKCWRldmljZV9pZBgBIAEoCUIbukgYchYQAxgoMhBbMC05YS16Xy'
     '1dezMsMjB9UghkZXZpY2VJZBI1CgZrZXlfaWQYAiABKAlCHrpIG9gBAXIWEAMYKDIQWzAtOWEt'
     'el8tXXszLDIwfVIFa2V5SWQSLQoIa2V5X3R5cGUYAyABKA4yEi5kZXZpY2UudjEuS2V5VHlwZV'
-    'IHa2V5VHlwZRIUCgV0aXRsZRgEIAEoCVIFdGl0bGUSEgoEYm9keRgFIAEoCVIEYm9keRIrCgRk'
-    'YXRhGAYgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdFIEZGF0YRIvCgZleHRyYXMYByABKA'
-    'syFy5nb29nbGUucHJvdG9idWYuU3RydWN0UgZleHRyYXM=');
+    'IHa2V5VHlwZRJLCg1ub3RpZmljYXRpb25zGAggAygLMhguZGV2aWNlLnYxLk5vdGlmeU1lc3Nh'
+    'Z2VCC7pICJIBBQgBEPQDUg1ub3RpZmljYXRpb25z');
 
-@$core.Deprecated('Use notifyResponseDescriptor instead')
-const NotifyResponse$json = {
-  '1': 'NotifyResponse',
+@$core.Deprecated('Use notifyResultDescriptor instead')
+const NotifyResult$json = {
+  '1': 'NotifyResult',
   '2': [
     {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
     {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
@@ -937,11 +960,31 @@ const NotifyResponse$json = {
   ],
 };
 
+/// Descriptor for `NotifyResult`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List notifyResultDescriptor = $convert.base64Decode(
+    'CgxOb3RpZnlSZXN1bHQSGAoHc3VjY2VzcxgBIAEoCFIHc3VjY2VzcxIYCgdtZXNzYWdlGAIgAS'
+    'gJUgdtZXNzYWdlEicKD25vdGlmaWNhdGlvbl9pZBgDIAEoCVIObm90aWZpY2F0aW9uSWQSLwoG'
+    'ZXh0cmFzGAQgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdFIGZXh0cmFz');
+
+@$core.Deprecated('Use notifyResponseDescriptor instead')
+const NotifyResponse$json = {
+  '1': 'NotifyResponse',
+  '2': [
+    {
+      '1': 'results',
+      '3': 5,
+      '4': 3,
+      '5': 11,
+      '6': '.device.v1.NotifyResult',
+      '10': 'results'
+    },
+  ],
+};
+
 /// Descriptor for `NotifyResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List notifyResponseDescriptor = $convert.base64Decode(
-    'Cg5Ob3RpZnlSZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNzEhgKB21lc3NhZ2UYAi'
-    'ABKAlSB21lc3NhZ2USJwoPbm90aWZpY2F0aW9uX2lkGAMgASgJUg5ub3RpZmljYXRpb25JZBIv'
-    'CgZleHRyYXMYBCABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0UgZleHRyYXM=');
+    'Cg5Ob3RpZnlSZXNwb25zZRIxCgdyZXN1bHRzGAUgAygLMhcuZGV2aWNlLnYxLk5vdGlmeVJlc3'
+    'VsdFIHcmVzdWx0cw==');
 
 const $core.Map<$core.String, $core.dynamic> DeviceServiceBase$json = {
   '1': 'DeviceService',
@@ -1087,7 +1130,9 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.device.v1.DeRegisterKeyRequest': DeRegisterKeyRequest$json,
   '.device.v1.DeRegisterKeyResponse': DeRegisterKeyResponse$json,
   '.device.v1.NotifyRequest': NotifyRequest$json,
+  '.device.v1.NotifyMessage': NotifyMessage$json,
   '.device.v1.NotifyResponse': NotifyResponse$json,
+  '.device.v1.NotifyResult': NotifyResult$json,
   '.device.v1.UpdatePresenceRequest': UpdatePresenceRequest$json,
   '.device.v1.UpdatePresenceResponse': UpdatePresenceResponse$json,
   '.device.v1.PresenceObject': PresenceObject$json,

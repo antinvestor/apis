@@ -72,6 +72,7 @@ private static final long serialVersionUID = 0L;
     READ_MARKER(3),
     ROOM_EVENT(1),
     PRESENCE(5),
+    SEND_EVENT(10),
     STATE_NOT_SET(0);
     private final int value;
     private StateCase(int value) {
@@ -94,6 +95,7 @@ private static final long serialVersionUID = 0L;
         case 3: return READ_MARKER;
         case 1: return ROOM_EVENT;
         case 5: return PRESENCE;
+        case 10: return SEND_EVENT;
         case 0: return STATE_NOT_SET;
         default: return null;
       }
@@ -312,6 +314,49 @@ private static final long serialVersionUID = 0L;
     return com.antinvestor.apis.chat.v1.PresenceEvent.getDefaultInstance();
   }
 
+  public static final int SEND_EVENT_FIELD_NUMBER = 10;
+  /**
+   * <pre>
+   * Similar to room_event but useful for sending messages in bulk
+   * </pre>
+   *
+   * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+   * @return Whether the sendEvent field is set.
+   */
+  @java.lang.Override
+  public boolean hasSendEvent() {
+    return stateCase_ == 10;
+  }
+  /**
+   * <pre>
+   * Similar to room_event but useful for sending messages in bulk
+   * </pre>
+   *
+   * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+   * @return The sendEvent.
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.chat.v1.SendEventRequest getSendEvent() {
+    if (stateCase_ == 10) {
+       return (com.antinvestor.apis.chat.v1.SendEventRequest) state_;
+    }
+    return com.antinvestor.apis.chat.v1.SendEventRequest.getDefaultInstance();
+  }
+  /**
+   * <pre>
+   * Similar to room_event but useful for sending messages in bulk
+   * </pre>
+   *
+   * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.chat.v1.SendEventRequestOrBuilder getSendEventOrBuilder() {
+    if (stateCase_ == 10) {
+       return (com.antinvestor.apis.chat.v1.SendEventRequest) state_;
+    }
+    return com.antinvestor.apis.chat.v1.SendEventRequest.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -341,6 +386,9 @@ private static final long serialVersionUID = 0L;
     if (stateCase_ == 5) {
       output.writeMessage(5, (com.antinvestor.apis.chat.v1.PresenceEvent) state_);
     }
+    if (stateCase_ == 10) {
+      output.writeMessage(10, (com.antinvestor.apis.chat.v1.SendEventRequest) state_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -369,6 +417,10 @@ private static final long serialVersionUID = 0L;
     if (stateCase_ == 5) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(5, (com.antinvestor.apis.chat.v1.PresenceEvent) state_);
+    }
+    if (stateCase_ == 10) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(10, (com.antinvestor.apis.chat.v1.SendEventRequest) state_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -407,6 +459,10 @@ private static final long serialVersionUID = 0L;
         if (!getPresence()
             .equals(other.getPresence())) return false;
         break;
+      case 10:
+        if (!getSendEvent()
+            .equals(other.getSendEvent())) return false;
+        break;
       case 0:
       default:
     }
@@ -441,6 +497,10 @@ private static final long serialVersionUID = 0L;
       case 5:
         hash = (37 * hash) + PRESENCE_FIELD_NUMBER;
         hash = (53 * hash) + getPresence().hashCode();
+        break;
+      case 10:
+        hash = (37 * hash) + SEND_EVENT_FIELD_NUMBER;
+        hash = (53 * hash) + getSendEvent().hashCode();
         break;
       case 0:
       default:
@@ -595,6 +655,9 @@ private static final long serialVersionUID = 0L;
       if (presenceBuilder_ != null) {
         presenceBuilder_.clear();
       }
+      if (sendEventBuilder_ != null) {
+        sendEventBuilder_.clear();
+      }
       stateCase_ = 0;
       state_ = null;
       return this;
@@ -656,6 +719,10 @@ private static final long serialVersionUID = 0L;
           presenceBuilder_ != null) {
         result.state_ = presenceBuilder_.build();
       }
+      if (stateCase_ == 10 &&
+          sendEventBuilder_ != null) {
+        result.state_ = sendEventBuilder_.build();
+      }
     }
 
     @java.lang.Override
@@ -689,6 +756,10 @@ private static final long serialVersionUID = 0L;
         }
         case PRESENCE: {
           mergePresence(other.getPresence());
+          break;
+        }
+        case SEND_EVENT: {
+          mergeSendEvent(other.getSendEvent());
           break;
         }
         case STATE_NOT_SET: {
@@ -756,6 +827,13 @@ private static final long serialVersionUID = 0L;
               stateCase_ = 5;
               break;
             } // case 42
+            case 82: {
+              input.readMessage(
+                  internalGetSendEventFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              stateCase_ = 10;
+              break;
+            } // case 82
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1640,6 +1718,184 @@ private static final long serialVersionUID = 0L;
       stateCase_ = 5;
       onChanged();
       return presenceBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.chat.v1.SendEventRequest, com.antinvestor.apis.chat.v1.SendEventRequest.Builder, com.antinvestor.apis.chat.v1.SendEventRequestOrBuilder> sendEventBuilder_;
+    /**
+     * <pre>
+     * Similar to room_event but useful for sending messages in bulk
+     * </pre>
+     *
+     * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+     * @return Whether the sendEvent field is set.
+     */
+    @java.lang.Override
+    public boolean hasSendEvent() {
+      return stateCase_ == 10;
+    }
+    /**
+     * <pre>
+     * Similar to room_event but useful for sending messages in bulk
+     * </pre>
+     *
+     * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+     * @return The sendEvent.
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.chat.v1.SendEventRequest getSendEvent() {
+      if (sendEventBuilder_ == null) {
+        if (stateCase_ == 10) {
+          return (com.antinvestor.apis.chat.v1.SendEventRequest) state_;
+        }
+        return com.antinvestor.apis.chat.v1.SendEventRequest.getDefaultInstance();
+      } else {
+        if (stateCase_ == 10) {
+          return sendEventBuilder_.getMessage();
+        }
+        return com.antinvestor.apis.chat.v1.SendEventRequest.getDefaultInstance();
+      }
+    }
+    /**
+     * <pre>
+     * Similar to room_event but useful for sending messages in bulk
+     * </pre>
+     *
+     * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+     */
+    public Builder setSendEvent(com.antinvestor.apis.chat.v1.SendEventRequest value) {
+      if (sendEventBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        state_ = value;
+        onChanged();
+      } else {
+        sendEventBuilder_.setMessage(value);
+      }
+      stateCase_ = 10;
+      return this;
+    }
+    /**
+     * <pre>
+     * Similar to room_event but useful for sending messages in bulk
+     * </pre>
+     *
+     * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+     */
+    public Builder setSendEvent(
+        com.antinvestor.apis.chat.v1.SendEventRequest.Builder builderForValue) {
+      if (sendEventBuilder_ == null) {
+        state_ = builderForValue.build();
+        onChanged();
+      } else {
+        sendEventBuilder_.setMessage(builderForValue.build());
+      }
+      stateCase_ = 10;
+      return this;
+    }
+    /**
+     * <pre>
+     * Similar to room_event but useful for sending messages in bulk
+     * </pre>
+     *
+     * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+     */
+    public Builder mergeSendEvent(com.antinvestor.apis.chat.v1.SendEventRequest value) {
+      if (sendEventBuilder_ == null) {
+        if (stateCase_ == 10 &&
+            state_ != com.antinvestor.apis.chat.v1.SendEventRequest.getDefaultInstance()) {
+          state_ = com.antinvestor.apis.chat.v1.SendEventRequest.newBuilder((com.antinvestor.apis.chat.v1.SendEventRequest) state_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          state_ = value;
+        }
+        onChanged();
+      } else {
+        if (stateCase_ == 10) {
+          sendEventBuilder_.mergeFrom(value);
+        } else {
+          sendEventBuilder_.setMessage(value);
+        }
+      }
+      stateCase_ = 10;
+      return this;
+    }
+    /**
+     * <pre>
+     * Similar to room_event but useful for sending messages in bulk
+     * </pre>
+     *
+     * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+     */
+    public Builder clearSendEvent() {
+      if (sendEventBuilder_ == null) {
+        if (stateCase_ == 10) {
+          stateCase_ = 0;
+          state_ = null;
+          onChanged();
+        }
+      } else {
+        if (stateCase_ == 10) {
+          stateCase_ = 0;
+          state_ = null;
+        }
+        sendEventBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Similar to room_event but useful for sending messages in bulk
+     * </pre>
+     *
+     * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+     */
+    public com.antinvestor.apis.chat.v1.SendEventRequest.Builder getSendEventBuilder() {
+      return internalGetSendEventFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * Similar to room_event but useful for sending messages in bulk
+     * </pre>
+     *
+     * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.chat.v1.SendEventRequestOrBuilder getSendEventOrBuilder() {
+      if ((stateCase_ == 10) && (sendEventBuilder_ != null)) {
+        return sendEventBuilder_.getMessageOrBuilder();
+      } else {
+        if (stateCase_ == 10) {
+          return (com.antinvestor.apis.chat.v1.SendEventRequest) state_;
+        }
+        return com.antinvestor.apis.chat.v1.SendEventRequest.getDefaultInstance();
+      }
+    }
+    /**
+     * <pre>
+     * Similar to room_event but useful for sending messages in bulk
+     * </pre>
+     *
+     * <code>.chat.v1.SendEventRequest send_event = 10 [json_name = "sendEvent"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.chat.v1.SendEventRequest, com.antinvestor.apis.chat.v1.SendEventRequest.Builder, com.antinvestor.apis.chat.v1.SendEventRequestOrBuilder> 
+        internalGetSendEventFieldBuilder() {
+      if (sendEventBuilder_ == null) {
+        if (!(stateCase_ == 10)) {
+          state_ = com.antinvestor.apis.chat.v1.SendEventRequest.getDefaultInstance();
+        }
+        sendEventBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.antinvestor.apis.chat.v1.SendEventRequest, com.antinvestor.apis.chat.v1.SendEventRequest.Builder, com.antinvestor.apis.chat.v1.SendEventRequestOrBuilder>(
+                (com.antinvestor.apis.chat.v1.SendEventRequest) state_,
+                getParentForChildren(),
+                isClean());
+        state_ = null;
+      }
+      stateCase_ = 10;
+      onChanged();
+      return sendEventBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:chat.v1.ClientState)

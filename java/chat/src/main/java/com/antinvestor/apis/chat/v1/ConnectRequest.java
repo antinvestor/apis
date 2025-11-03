@@ -73,6 +73,7 @@ private static final long serialVersionUID = 0L;
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
     ACK(10),
     STATEUPDATE(12),
+    SEND_EVENT_ACK(15),
     PAYLOAD_NOT_SET(0);
     private final int value;
     private PayloadCase(int value) {
@@ -92,6 +93,7 @@ private static final long serialVersionUID = 0L;
       switch (value) {
         case 10: return ACK;
         case 12: return STATEUPDATE;
+        case 15: return SEND_EVENT_ACK;
         case 0: return PAYLOAD_NOT_SET;
         default: return null;
       }
@@ -351,6 +353,37 @@ private static final long serialVersionUID = 0L;
     return com.antinvestor.apis.chat.v1.ClientState.getDefaultInstance();
   }
 
+  public static final int SEND_EVENT_ACK_FIELD_NUMBER = 15;
+  /**
+   * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+   * @return Whether the sendEventAck field is set.
+   */
+  @java.lang.Override
+  public boolean hasSendEventAck() {
+    return payloadCase_ == 15;
+  }
+  /**
+   * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+   * @return The sendEventAck.
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.chat.v1.SendEventResponse getSendEventAck() {
+    if (payloadCase_ == 15) {
+       return (com.antinvestor.apis.chat.v1.SendEventResponse) payload_;
+    }
+    return com.antinvestor.apis.chat.v1.SendEventResponse.getDefaultInstance();
+  }
+  /**
+   * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+   */
+  @java.lang.Override
+  public com.antinvestor.apis.chat.v1.SendEventResponseOrBuilder getSendEventAckOrBuilder() {
+    if (payloadCase_ == 15) {
+       return (com.antinvestor.apis.chat.v1.SendEventResponse) payload_;
+    }
+    return com.antinvestor.apis.chat.v1.SendEventResponse.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -383,6 +416,9 @@ private static final long serialVersionUID = 0L;
     if (payloadCase_ == 12) {
       output.writeMessage(12, (com.antinvestor.apis.chat.v1.ClientState) payload_);
     }
+    if (payloadCase_ == 15) {
+      output.writeMessage(15, (com.antinvestor.apis.chat.v1.SendEventResponse) payload_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -411,6 +447,10 @@ private static final long serialVersionUID = 0L;
     if (payloadCase_ == 12) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(12, (com.antinvestor.apis.chat.v1.ClientState) payload_);
+    }
+    if (payloadCase_ == 15) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(15, (com.antinvestor.apis.chat.v1.SendEventResponse) payload_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -445,6 +485,10 @@ private static final long serialVersionUID = 0L;
         if (!getStateUpdate()
             .equals(other.getStateUpdate())) return false;
         break;
+      case 15:
+        if (!getSendEventAck()
+            .equals(other.getSendEventAck())) return false;
+        break;
       case 0:
       default:
     }
@@ -475,6 +519,10 @@ private static final long serialVersionUID = 0L;
       case 12:
         hash = (37 * hash) + STATEUPDATE_FIELD_NUMBER;
         hash = (53 * hash) + getStateUpdate().hashCode();
+        break;
+      case 15:
+        hash = (37 * hash) + SEND_EVENT_ACK_FIELD_NUMBER;
+        hash = (53 * hash) + getSendEventAck().hashCode();
         break;
       case 0:
       default:
@@ -624,6 +672,9 @@ private static final long serialVersionUID = 0L;
       if (stateUpdateBuilder_ != null) {
         stateUpdateBuilder_.clear();
       }
+      if (sendEventAckBuilder_ != null) {
+        sendEventAckBuilder_.clear();
+      }
       payloadCase_ = 0;
       payload_ = null;
       return this;
@@ -685,6 +736,10 @@ private static final long serialVersionUID = 0L;
           stateUpdateBuilder_ != null) {
         result.payload_ = stateUpdateBuilder_.build();
       }
+      if (payloadCase_ == 15 &&
+          sendEventAckBuilder_ != null) {
+        result.payload_ = sendEventAckBuilder_.build();
+      }
     }
 
     @java.lang.Override
@@ -726,6 +781,10 @@ private static final long serialVersionUID = 0L;
         }
         case STATEUPDATE: {
           mergeStateUpdate(other.getStateUpdate());
+          break;
+        }
+        case SEND_EVENT_ACK: {
+          mergeSendEventAck(other.getSendEventAck());
           break;
         }
         case PAYLOAD_NOT_SET: {
@@ -792,6 +851,13 @@ private static final long serialVersionUID = 0L;
               payloadCase_ = 12;
               break;
             } // case 98
+            case 122: {
+              input.readMessage(
+                  internalGetSendEventAckFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              payloadCase_ = 15;
+              break;
+            } // case 122
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1459,6 +1525,148 @@ private static final long serialVersionUID = 0L;
       payloadCase_ = 12;
       onChanged();
       return stateUpdateBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.chat.v1.SendEventResponse, com.antinvestor.apis.chat.v1.SendEventResponse.Builder, com.antinvestor.apis.chat.v1.SendEventResponseOrBuilder> sendEventAckBuilder_;
+    /**
+     * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+     * @return Whether the sendEventAck field is set.
+     */
+    @java.lang.Override
+    public boolean hasSendEventAck() {
+      return payloadCase_ == 15;
+    }
+    /**
+     * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+     * @return The sendEventAck.
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.chat.v1.SendEventResponse getSendEventAck() {
+      if (sendEventAckBuilder_ == null) {
+        if (payloadCase_ == 15) {
+          return (com.antinvestor.apis.chat.v1.SendEventResponse) payload_;
+        }
+        return com.antinvestor.apis.chat.v1.SendEventResponse.getDefaultInstance();
+      } else {
+        if (payloadCase_ == 15) {
+          return sendEventAckBuilder_.getMessage();
+        }
+        return com.antinvestor.apis.chat.v1.SendEventResponse.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+     */
+    public Builder setSendEventAck(com.antinvestor.apis.chat.v1.SendEventResponse value) {
+      if (sendEventAckBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        payload_ = value;
+        onChanged();
+      } else {
+        sendEventAckBuilder_.setMessage(value);
+      }
+      payloadCase_ = 15;
+      return this;
+    }
+    /**
+     * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+     */
+    public Builder setSendEventAck(
+        com.antinvestor.apis.chat.v1.SendEventResponse.Builder builderForValue) {
+      if (sendEventAckBuilder_ == null) {
+        payload_ = builderForValue.build();
+        onChanged();
+      } else {
+        sendEventAckBuilder_.setMessage(builderForValue.build());
+      }
+      payloadCase_ = 15;
+      return this;
+    }
+    /**
+     * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+     */
+    public Builder mergeSendEventAck(com.antinvestor.apis.chat.v1.SendEventResponse value) {
+      if (sendEventAckBuilder_ == null) {
+        if (payloadCase_ == 15 &&
+            payload_ != com.antinvestor.apis.chat.v1.SendEventResponse.getDefaultInstance()) {
+          payload_ = com.antinvestor.apis.chat.v1.SendEventResponse.newBuilder((com.antinvestor.apis.chat.v1.SendEventResponse) payload_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          payload_ = value;
+        }
+        onChanged();
+      } else {
+        if (payloadCase_ == 15) {
+          sendEventAckBuilder_.mergeFrom(value);
+        } else {
+          sendEventAckBuilder_.setMessage(value);
+        }
+      }
+      payloadCase_ = 15;
+      return this;
+    }
+    /**
+     * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+     */
+    public Builder clearSendEventAck() {
+      if (sendEventAckBuilder_ == null) {
+        if (payloadCase_ == 15) {
+          payloadCase_ = 0;
+          payload_ = null;
+          onChanged();
+        }
+      } else {
+        if (payloadCase_ == 15) {
+          payloadCase_ = 0;
+          payload_ = null;
+        }
+        sendEventAckBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+     */
+    public com.antinvestor.apis.chat.v1.SendEventResponse.Builder getSendEventAckBuilder() {
+      return internalGetSendEventAckFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+     */
+    @java.lang.Override
+    public com.antinvestor.apis.chat.v1.SendEventResponseOrBuilder getSendEventAckOrBuilder() {
+      if ((payloadCase_ == 15) && (sendEventAckBuilder_ != null)) {
+        return sendEventAckBuilder_.getMessageOrBuilder();
+      } else {
+        if (payloadCase_ == 15) {
+          return (com.antinvestor.apis.chat.v1.SendEventResponse) payload_;
+        }
+        return com.antinvestor.apis.chat.v1.SendEventResponse.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.chat.v1.SendEventResponse send_event_ack = 15 [json_name = "sendEventAck"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.antinvestor.apis.chat.v1.SendEventResponse, com.antinvestor.apis.chat.v1.SendEventResponse.Builder, com.antinvestor.apis.chat.v1.SendEventResponseOrBuilder> 
+        internalGetSendEventAckFieldBuilder() {
+      if (sendEventAckBuilder_ == null) {
+        if (!(payloadCase_ == 15)) {
+          payload_ = com.antinvestor.apis.chat.v1.SendEventResponse.getDefaultInstance();
+        }
+        sendEventAckBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.antinvestor.apis.chat.v1.SendEventResponse, com.antinvestor.apis.chat.v1.SendEventResponse.Builder, com.antinvestor.apis.chat.v1.SendEventResponseOrBuilder>(
+                (com.antinvestor.apis.chat.v1.SendEventResponse) payload_,
+                getParentForChildren(),
+                isClean());
+        payload_ = null;
+      }
+      payloadCase_ = 15;
+      onChanged();
+      return sendEventAckBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:chat.v1.ConnectRequest)

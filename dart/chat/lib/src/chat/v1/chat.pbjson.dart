@@ -323,6 +323,15 @@ const ConnectRequest$json = {
       '9': 0,
       '10': 'stateUpdate'
     },
+    {
+      '1': 'send_event_ack',
+      '3': 15,
+      '4': 1,
+      '5': 11,
+      '6': '.chat.v1.SendEventResponse',
+      '9': 0,
+      '10': 'sendEventAck'
+    },
   ],
   '8': [
     {'1': 'payload'},
@@ -335,7 +344,8 @@ final $typed_data.Uint8List connectRequestDescriptor = $convert.base64Decode(
     'NlX2lkGAMgASgJUghkZXZpY2VJZBIdCgphdXRoX3Rva2VuGAQgASgJUglhdXRoVG9rZW4SIQoM'
     'cmVzdW1lX3Rva2VuGAUgASgJUgtyZXN1bWVUb2tlbhImCgNhY2sYCiABKAsyEi5jaGF0LnYxLl'
     'N0cmVhbUFja0gAUgNhY2sSOAoLc3RhdGVVcGRhdGUYDCABKAsyFC5jaGF0LnYxLkNsaWVudFN0'
-    'YXRlSABSC3N0YXRlVXBkYXRlQgkKB3BheWxvYWQ=');
+    'YXRlSABSC3N0YXRlVXBkYXRlEkIKDnNlbmRfZXZlbnRfYWNrGA8gASgLMhouY2hhdC52MS5TZW'
+    '5kRXZlbnRSZXNwb25zZUgAUgxzZW5kRXZlbnRBY2tCCQoHcGF5bG9hZA==');
 
 @$core.Deprecated('Use streamAckDescriptor instead')
 const StreamAck$json = {
@@ -433,6 +443,15 @@ const ClientState$json = {
       '9': 0,
       '10': 'presence'
     },
+    {
+      '1': 'send_event',
+      '3': 10,
+      '4': 1,
+      '5': 11,
+      '6': '.chat.v1.SendEventRequest',
+      '9': 0,
+      '10': 'sendEvent'
+    },
   ],
   '8': [
     {'1': 'state'},
@@ -445,8 +464,9 @@ final $typed_data.Uint8List clientStateDescriptor = $convert.base64Decode(
     'R5cGluZxIxCgdyZWNlaXB0GAIgASgLMhUuY2hhdC52MS5SZWNlaXB0RXZlbnRIAFIHcmVjZWlw'
     'dBI2CgtyZWFkX21hcmtlchgDIAEoCzITLmNoYXQudjEuUmVhZE1hcmtlckgAUgpyZWFkTWFya2'
     'VyEjMKCnJvb21fZXZlbnQYASABKAsyEi5jaGF0LnYxLlJvb21FdmVudEgAUglyb29tRXZlbnQS'
-    'NAoIcHJlc2VuY2UYBSABKAsyFi5jaGF0LnYxLlByZXNlbmNlRXZlbnRIAFIIcHJlc2VuY2VCBw'
-    'oFc3RhdGU=');
+    'NAoIcHJlc2VuY2UYBSABKAsyFi5jaGF0LnYxLlByZXNlbmNlRXZlbnRIAFIIcHJlc2VuY2USOg'
+    'oKc2VuZF9ldmVudBgKIAEoCzIZLmNoYXQudjEuU2VuZEV2ZW50UmVxdWVzdEgAUglzZW5kRXZl'
+    'bnRCBwoFc3RhdGU=');
 
 @$core.Deprecated('Use sendEventRequestDescriptor instead')
 const SendEventRequest$json = {
@@ -1080,6 +1100,8 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>>
   '.chat.v1.ReadMarker': ReadMarker$json,
   '.chat.v1.TypingEvent': TypingEvent$json,
   '.chat.v1.PresenceEvent': PresenceEvent$json,
+  '.chat.v1.SendEventRequest': SendEventRequest$json,
+  '.chat.v1.SendEventResponse': SendEventResponse$json,
   '.chat.v1.ServerEvent': ServerEvent$json,
 };
 

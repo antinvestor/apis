@@ -1090,27 +1090,15 @@ components:
       title: LogResponse
       additionalProperties: false
       description: LogResponse returns the created log entry.
-    device.v1.NotifyRequest:
+    device.v1.NotifyMessage:
       type: object
       properties:
-        deviceId:
+        id:
           type: string
-          title: device_id
+          title: id
           maxLength: 40
           minLength: 3
           pattern: '[0-9a-z_-]{3,20}'
-          description: Device ID to notify
-        keyId:
-          type: string
-          title: key_id
-          maxLength: 40
-          minLength: 3
-          pattern: '[0-9a-z_-]{3,20}'
-          description: Specific key ID to use (optional - if not provided, uses key_type to select)
-        keyType:
-          title: key_type
-          description: Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
-          $ref: '#/components/schemas/device.v1.KeyType'
         title:
           type: string
           title: title
@@ -1127,12 +1115,58 @@ components:
           title: extras
           description: Extra notification options (priority, TTL, badge, sound, etc.)
           $ref: '#/components/schemas/google.protobuf.Struct'
+      title: NotifyMessage
+      additionalProperties: false
+      description: NotifyPayload represents the content and metadata of a single notification.
+    device.v1.NotifyRequest:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          title: device_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: Device ID to notify
+        keyId:
+          type: string
+          title: key_id
+          maxLength: 40
+          minLength: 3
+          pattern: '[0-9a-z_-]{3,20}'
+          description: |-
+            The following fields remain for backward compatibility and represent a single notification payload.
+             New integrations should prefer the notifications field for bulk sending. Specific key ID to use (optional - if not provided, uses key_type to select)
+        keyType:
+          title: key_type
+          description: Type of key to use for notification (e.g., FCM_TOKEN, NOTIFICATION_KEY)
+          $ref: '#/components/schemas/device.v1.KeyType'
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/device.v1.NotifyMessage'
+          title: notifications
+          maxItems: 500
+          minItems: 1
+          description: Collection of notifications to send in bulk.
       title: NotifyRequest
       additionalProperties: false
       description: |-
-        NotifyRequest sends a notification to a device using one of its registered keys.
+        NotifyRequest sends one or more notifications to a device using its registered keys.
          The service will select an appropriate key based on key_type (e.g., FCM_TOKEN for push notifications).
     device.v1.NotifyResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/device.v1.NotifyResult'
+          title: results
+          description: Per-notification send results when using bulk notifications
+      title: NotifyResponse
+      additionalProperties: false
+      description: NotifyResponse confirms the notifications were sent.
+    device.v1.NotifyResult:
       type: object
       properties:
         success:
@@ -1151,9 +1185,9 @@ components:
           title: extras
           description: Additional response metadata from notification service
           $ref: '#/components/schemas/google.protobuf.Struct'
-      title: NotifyResponse
+      title: NotifyResult
       additionalProperties: false
-      description: NotifyResponse confirms the notification was sent.
+      description: NotifyResult details the outcome of sending an individual notification payload.
     device.v1.PresenceObject:
       type: object
       properties:
