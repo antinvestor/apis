@@ -19,6 +19,7 @@ import (
 	"math"
 
 	"github.com/antinvestor/apis/go/common"
+	"github.com/antinvestor/apis/go/common/connection"
 	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	"google.golang.org/grpc"
 )
@@ -50,13 +51,13 @@ func FromContext(ctx context.Context) *NotificationClient {
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type NotificationClient struct {
-	*common.GrpcClientBase
+	*connection.GrpcClientBase
 
 	// The gRPC API svc.
 	svc NotificationServiceClient
 }
 
-func Init(cBase *common.GrpcClientBase, service NotificationServiceClient) *NotificationClient {
+func Init(cBase *connection.GrpcClientBase, service NotificationServiceClient) *NotificationClient {
 	return &NotificationClient{
 		GrpcClientBase: cBase,
 		svc:            service,
@@ -73,7 +74,7 @@ func (nc *NotificationClient) Svc() NotificationServiceClient {
 func NewNotificationClient(ctx context.Context, opts ...common.ClientOption) (*NotificationClient, error) {
 	clientOpts := defaultNotificationClientOptions()
 
-	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
+	clientBase, err := connection.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}

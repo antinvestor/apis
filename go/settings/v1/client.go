@@ -16,9 +16,11 @@ package settingsv1
 
 import (
 	"context"
-	"github.com/antinvestor/apis/go/common"
-	"google.golang.org/grpc"
 	"math"
+
+	"github.com/antinvestor/apis/go/common"
+	"github.com/antinvestor/apis/go/common/connection"
+	"google.golang.org/grpc"
 )
 
 const ctxKeyService = common.CtxServiceKey("settingsClientKey")
@@ -44,7 +46,7 @@ func FromContext(ctx context.Context) *SettingsClient {
 	return client
 }
 
-func Init(cBase *common.GrpcClientBase, service SettingsServiceClient) *SettingsClient {
+func Init(cBase *connection.GrpcClientBase, service SettingsServiceClient) *SettingsClient {
 	return &SettingsClient{
 		GrpcClientBase: cBase,
 		svc:            service,
@@ -55,7 +57,7 @@ func Init(cBase *common.GrpcClientBase, service SettingsServiceClient) *Settings
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type SettingsClient struct {
-	*common.GrpcClientBase
+	*connection.GrpcClientBase
 	// The gRPC API svc.
 	svc SettingsServiceClient
 }
@@ -66,7 +68,7 @@ type SettingsClient struct {
 func NewsettingsClient(ctx context.Context, opts ...common.ClientOption) (*SettingsClient, error) {
 	clientOpts := defaultSettingsClientOptions()
 
-	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
+	clientBase, err := connection.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}

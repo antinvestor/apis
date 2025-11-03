@@ -2,8 +2,8 @@ buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-202509121410
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1/go.mod h1:fUl8CEN/6ZAMk6bP8ahBJPUJw7rbp+j4x+wCcYi2IG4=
 connectrpc.com/connect v1.19.1 h1:R5M57z05+90EfEvCY1b7hBxDVOUl45PrtXtAV2fOC14=
 connectrpc.com/connect v1.19.1/go.mod h1:tN20fjdGlewnSFeZxLKb0xwIZ6ozc3OQs2hTXy4du9w=
-github.com/antinvestor/apis/go/common v1.47.4 h1:WjPbY3OnexcSHj/9lC6oNKW4AU+P9lEfUjryO1SbeGM=
-github.com/antinvestor/apis/go/common v1.47.4/go.mod h1:sMq1Wi4NUYJMdS5iW6vMViHtMMVxZyNeP68uoPWm5ow=
+github.com/antinvestor/apis/go/common v1.47.5 h1:TgIe255cah3uU2E/fhTTPHvUms0YuEOYCYBJeQEyCvk=
+github.com/antinvestor/apis/go/common v1.47.5/go.mod h1:6XP1u5GKLLfL1ydBGUwR2gkiCuHC/5DCofx7lD6HDzA=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/go-logr/logr v1.4.3 h1:CjnDlHq8ikf6E492q6eKboGOC0T8CDaOvkHCIg8idEI=
 github.com/go-logr/logr v1.4.3/go.mod h1:9T104GzyrTigFIr8wt5mBrctHMim0Nb2HLGrmQ40KvY=

@@ -16,10 +16,12 @@ package ocrv1
 
 import (
 	"context"
+	"math"
+
 	"github.com/antinvestor/apis/go/common"
+	"github.com/antinvestor/apis/go/common/connection"
 	commonv1 "github.com/antinvestor/apis/go/common/v1"
 	"google.golang.org/grpc"
-	"math"
 )
 
 const ctxKeyService = common.CtxServiceKey("ocrClientKey")
@@ -49,13 +51,13 @@ func FromContext(ctx context.Context) *OCRClient {
 //
 // Methods, except Close, may be called concurrently. However, fields must not be modified concurrently with method calls.
 type OCRClient struct {
-	*common.GrpcClientBase
+	*connection.GrpcClientBase
 
 	// The gRPC API svc.
 	svc OCRServiceClient
 }
 
-func Init(cBase *common.GrpcClientBase, service OCRServiceClient) *OCRClient {
+func Init(cBase *connection.GrpcClientBase, service OCRServiceClient) *OCRClient {
 	return &OCRClient{
 		GrpcClientBase: cBase,
 		svc:            service,
@@ -71,7 +73,7 @@ func (oc *OCRClient) Svc() OCRServiceClient {
 func NewOCRClient(ctx context.Context, opts ...common.ClientOption) (*OCRClient, error) {
 	clientOpts := defaultOcrClientOptions()
 
-	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
+	clientBase, err := connection.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}

@@ -34,9 +34,11 @@ const (
 	defaultHTTPIdleTimeoutSeconds = 90
 )
 
-type HttpClientBase struct {
+type ConnectClientBase struct {
 	// http client to the service.
 	client *http.Client
+
+	endpoint string
 
 	interceptors []connect.Interceptor
 
@@ -46,33 +48,43 @@ type HttpClientBase struct {
 
 // Client obtains the http client for the API service.
 // User should always use this client is required.
-func (gbc *HttpClientBase) Client() *http.Client {
-	return gbc.client
+func (ccb *ConnectClientBase) Client() *http.Client {
+	return ccb.client
 }
 
-// Interceptors returns the interceptors for the API service.
-func (gbc *HttpClientBase) Interceptors() []connect.Interceptor {
-	return gbc.interceptors
+// Endpoint obtains the http uri for the API service.
+func (ccb *ConnectClientBase) Endpoint() string {
+	return ccb.endpoint
+}
+
+// Options returns the API client can use to configure itself.
+func (ccb *ConnectClientBase) Options(opts ...connect.Option) []connect.Option {
+
+	if len(ccb.interceptors) > 0 {
+		opts = append(opts, connect.WithInterceptors(ccb.interceptors...))
+	}
+
+	return opts
 }
 
 // SetInfo sets the name and version of the application in
 // the `x-goog-api-client` header passed on each request. Intended for
 // use by Google-written clients.
-func (gbc *HttpClientBase) SetInfo(keyval ...string) {
+func (ccb *ConnectClientBase) SetInfo(keyval ...string) {
 	kv := append([]string{"gl-go", VersionGo()}, keyval...)
 	kv = append(kv, "connect", connect.Version)
-	gbc.xMetadata = XAntHeader(kv...)
+	ccb.xMetadata = XAntHeader(kv...)
 }
 
-func (gbc *HttpClientBase) GetInfo() string {
-	return gbc.xMetadata
+func (ccb *ConnectClientBase) GetInfo() string {
+	return ccb.xMetadata
 }
 
-func (gbc *HttpClientBase) SetPartitionInfo(ctx context.Context, partitionInfo *common.PartitionInfo) context.Context {
+func (ccb *ConnectClientBase) SetPartitionInfo(ctx context.Context, partitionInfo *common.PartitionInfo) context.Context {
 	return context.WithValue(ctx, common.CtxKeyPartitionInfo, partitionInfo)
 }
 
-func NewHTTPClientBase(ctx context.Context, opts ...common.ClientOption) (*HttpClientBase, error) {
+func NewConnectClientBase(ctx context.Context, opts ...common.ClientOption) (*ConnectClientBase, error) {
 
 	ds, err := processAndValidateOpts(opts)
 	if err != nil {
@@ -83,7 +95,7 @@ func NewHTTPClientBase(ctx context.Context, opts ...common.ClientOption) (*HttpC
 
 	httpClient := NewHTTPClient(ctx, httpDialOpts...)
 
-	clientBase := HttpClientBase{
+	clientBase := ConnectClientBase{
 		client: httpClient,
 	}
 	clientBase.SetInfo()

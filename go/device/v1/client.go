@@ -19,6 +19,7 @@ import (
 	"math"
 
 	"github.com/antinvestor/apis/go/common"
+	"github.com/antinvestor/apis/go/common/connection"
 	"google.golang.org/grpc"
 )
 
@@ -49,13 +50,13 @@ func FromContext(ctx context.Context) *DeviceClient {
 // Methods, except Close, may be called concurrently. However,
 // fields must not be modified concurrently with method calls.
 type DeviceClient struct {
-	*common.GrpcClientBase
+	*connection.GrpcClientBase
 
 	// The gRPC API client.
 	svc DeviceServiceClient
 }
 
-func Init(cBase *common.GrpcClientBase, service DeviceServiceClient) *DeviceClient {
+func Init(cBase *connection.GrpcClientBase, service DeviceServiceClient) *DeviceClient {
 	return &DeviceClient{
 		GrpcClientBase: cBase,
 		svc:            service,
@@ -67,7 +68,7 @@ func Init(cBase *common.GrpcClientBase, service DeviceServiceClient) *DeviceClie
 func NewDeviceClient(ctx context.Context, opts ...common.ClientOption) (*DeviceClient, error) {
 	clientOpts := defaultDeviceClientOptions()
 
-	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
+	clientBase, err := connection.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}

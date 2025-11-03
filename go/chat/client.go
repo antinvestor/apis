@@ -12,19 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package chatv1
+package chat
 
 import (
 	"context"
 	"math"
 
+	"github.com/antinvestor/apis/go/chat/v1/chatv1connect"
 	"github.com/antinvestor/apis/go/common"
+	"github.com/antinvestor/apis/go/common/connection"
 	"google.golang.org/grpc"
 )
 
 const ctxKeyService = common.CtxServiceKey("chatClientKey")
 
-func defaultChatClientOptions() []common.ClientOption {
+func defaultClientOptions() []common.ClientOption {
 	return []common.ClientOption{
 		common.WithEndpoint("chat.api.antinvestor.com:443"),
 		common.WithGRPCDialOption(grpc.WithDisableServiceConfig()),
@@ -32,12 +34,12 @@ func defaultChatClientOptions() []common.ClientOption {
 	}
 }
 
-func ToContext(ctx context.Context, chatClient *ChatClient) context.Context {
+func ToContext(ctx context.Context, chatClient *Client) context.Context {
 	return context.WithValue(ctx, ctxKeyService, chatClient)
 }
 
-func FromContext(ctx context.Context) *ChatClient {
-	chatClient, ok := ctx.Value(ctxKeyService).(*ChatClient)
+func FromContext(ctx context.Context) *Client {
+	chatClient, ok := ctx.Value(ctxKeyService).(*Client)
 	if !ok {
 		return nil
 	}
@@ -45,34 +47,29 @@ func FromContext(ctx context.Context) *ChatClient {
 	return chatClient
 }
 
-// ChatClient is a client for interacting with the chat service API.
-type ChatClient struct {
-	*common.GrpcClientBase
+// Client is a client for interacting with the chat service API.
+type Client struct {
+	*connection.HttpClientBase
 
-	// The gRPC API client.
-	svc ChatServiceClient
+	chatv1connect.ChatServiceClient
 }
 
-func Init(cBase *common.GrpcClientBase, service ChatServiceClient) *ChatClient {
-	return &ChatClient{
-		GrpcClientBase: cBase,
-		svc:            service,
+func Init(cBase *connection.HttpClientBase, svc chatv1connect.ChatServiceClient) *Client {
+	return &Client{
+		HttpClientBase:    cBase,
+		ChatServiceClient: svc,
 	}
 }
 
 // NewChatClient creates a new chat svc client.
 // The service that an application uses to send and access received messages
-func NewChatClient(ctx context.Context, opts ...common.ClientOption) (*ChatClient, error) {
-	clientOpts := defaultChatClientOptions()
+func NewChatClient(ctx context.Context, opts ...common.ClientOption) (*Client, error) {
+	clientOpts := defaultClientOptions()
 
-	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
+	client, err := connection.NewHTTPClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
 
-	return Init(clientBase, NewChatServiceClient(clientBase.Connection())), nil
-}
-
-func (dc *ChatClient) Svc() ChatServiceClient {
-	return dc.svc
+	return Init(client, chatv1connect.NewChatServiceClient(client.Client(), client.GetInfo())), nil
 }

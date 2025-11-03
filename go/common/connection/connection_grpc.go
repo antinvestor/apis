@@ -70,14 +70,14 @@ func (gbc *GrpcClientBase) SetPartitionInfo(ctx context.Context, partitionInfo *
 	return context.WithValue(ctx, common.CtxKeyPartitionInfo, partitionInfo)
 }
 
-func NewClientBase(ctx context.Context, opts ...common.ClientOption) (*GrpcClientBase, error) {
-	connPool, err := DialConnection(ctx, opts...)
+func NewGrpcClientBase(ctx context.Context, opts ...common.ClientOption) (*GrpcClientBase, error) {
+	conn, err := DialConnection(ctx, opts...)
 	if err != nil {
 		return nil, err
 	}
 
 	clientBase := GrpcClientBase{
-		clientConn: connPool,
+		clientConn: conn,
 	}
 	clientBase.SetInfo()
 	return &clientBase, nil

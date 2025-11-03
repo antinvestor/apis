@@ -19,6 +19,7 @@ import (
 	"math"
 
 	"github.com/antinvestor/apis/go/common"
+	"github.com/antinvestor/apis/go/common/connection"
 	"google.golang.org/grpc"
 )
 
@@ -49,13 +50,13 @@ func FromContext(ctx context.Context) *PartitionClient {
 // Methods, except Close, may be called concurrently.
 // However, fields must not be modified concurrently with method calls.
 type PartitionClient struct {
-	*common.GrpcClientBase
+	*connection.GrpcClientBase
 
 	// The gRPC API svc.
 	svc PartitionServiceClient
 }
 
-func Init(cBase *common.GrpcClientBase, service PartitionServiceClient) *PartitionClient {
+func Init(cBase *connection.GrpcClientBase, service PartitionServiceClient) *PartitionClient {
 	return &PartitionClient{
 		GrpcClientBase: cBase,
 		svc:            service,
@@ -71,7 +72,7 @@ func (pc *PartitionClient) Svc() PartitionServiceClient {
 func NewPartitionsClient(ctx context.Context, opts ...common.ClientOption) (*PartitionClient, error) {
 	clientOpts := defaultPartitionClientOptions()
 
-	clientBase, err := common.NewClientBase(ctx, append(clientOpts, opts...)...)
+	clientBase, err := connection.NewClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
