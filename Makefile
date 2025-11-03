@@ -28,10 +28,10 @@ cd go/${1} && $(GO) test -vet=off -race -cover ./...
 
 endef
 
-define mock_package
-$(MOCK_GEN) -source=${CUR_DIR}gen/go/${1}/${2}/${1}_grpc.pb.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/mocks/grpc/${1}_grpc_mock.go
-
-$(MOCK_GEN) -source=${CUR_DIR}gen/go/${1}/${2}/${1}v1connect/${1}.connect.go -package=${1}${2}_mocks -destination=${CUR_DIR}go/${1}/mocks/${1}_connect_mock.go
+define connect_handler_mock
+cd go/$(1) && \
+	mkdir -p mocks && \
+	$(BIN)/counterfeiter -o mocks/$(6) buf.build/gen/go/antinvestor/$(if $(2),$(2),$(1))/connectrpc/go/$(if $(3),$(3),$(1))/$(4)/$(if $(3),$(3),$(1))$(4)connect.$(5)
 
 endef
 
@@ -161,19 +161,20 @@ openapi_files_gen_dart: ## Generate the dart open api spec for the files server
 		-i /local/proto/v1/openapi.yaml
 
 
-.PHONY: generate_grpc_mocks
-generate_grpc_mocks:
-	$(call mock_package,chat,v1)
-	$(call mock_package,device,v1)
-	$(call mock_package,notification,v1)
-	$(call mock_package,ocr,v1)
-	$(call mock_package,partition,v1)
-	$(call mock_package,payment,v1)
-	$(call mock_package,profile,v1)
-	$(call mock_package,property,v1)
-	$(call mock_package,settings,v1)
-	$(call mock_package,ledger,v1)
-	$(call mock_package,lostid,v1)
+.PHONY: generate_counterfeiter_mocks
+generate_counterfeiter_mocks: $(BIN)/counterfeiter
+	$(call connect_handler_mock,chat,,chat,v1,ChatServiceHandler,chat_connect_svc_fake.go)
+	$(call connect_handler_mock,chat,,chat,v1,GatewayServiceHandler,gateway_connect_svc_fake.go)
+	$(call connect_handler_mock,device,,device,v1,DeviceServiceHandler,device_connect_svc_fake.go)
+	$(call connect_handler_mock,notification,,notification,v1,NotificationServiceHandler,notification_connect_svc_fake.go)
+	$(call connect_handler_mock,ocr,,ocr,v1,OCRServiceHandler,ocr_connect_svc_fake.go)
+	$(call connect_handler_mock,partition,,partition,v1,PartitionServiceHandler,partition_connect_svc_fake.go)
+	$(call connect_handler_mock,payment,,payment,v1,PaymentServiceHandler,payment_connect_svc_fake.go)
+	$(call connect_handler_mock,profile,,profile,v1,ProfileServiceHandler,profile_connect_svc_fake.go)
+	$(call connect_handler_mock,property,,property,v1,PropertyServiceHandler,property_connect_svc_fake.go)
+	$(call connect_handler_mock,settings,settingz,settings,v1,SettingsServiceHandler,settings_connect_svc_fake.go)
+	$(call connect_handler_mock,ledger,,ledger,v1,LedgerServiceHandler,ledger_connect_svc_fake.go)
+	$(call connect_handler_mock,lostid,,lostid,v1,LostIdServiceHandler,lostid_connect_svc_fake.go)
 
 
 .PHONY: generate_buf_gen
@@ -196,9 +197,9 @@ generate_buf_gen:
 		--year-range "$(COPYRIGHT_YEARS)" $(LICENSE_IGNORE)
 
 .PHONY: generate
-generate: $(BIN)/buf $(BIN)/gomock $(BIN)/license-header  ## Regenerate code and licenses
-	$(MAKE) generate_buf_gen
-	## $(MAKE) generate_grpc_mocks
+generate: $(BIN)/buf $(BIN)/license-header  ## Regenerate code and licenses
+	#$(MAKE) generate_buf_gen
+	$(MAKE) generate_counterfeiter_mocks
 	$(MAKE) openapi_files_gen_go
 	$(MAKE) openapi_files_gen_java
 	$(MAKE) openapi_files_gen_dart
@@ -224,6 +225,6 @@ $(BIN)/golangci-lint: Makefile
 	@mkdir -p $(@D)
 	$(GO) install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.8
 
-$(BIN)/gomock: Makefile
+$(BIN)/counterfeiter: Makefile
 	@mkdir -p $(@D)
-	$(GO) install go.uber.org/mock/mockgen@latest
+	$(GO) install github.com/maxbrunsfeld/counterfeiter/v6@latest
