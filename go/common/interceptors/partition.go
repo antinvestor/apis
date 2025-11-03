@@ -38,10 +38,11 @@ func (ai *partitionInfoSetInterceptor) setPartitionInfo(ctx context.Context, hea
 	if !ok || partitionInfo == nil {
 		return
 	}
-	header.Set("Tenant_Id", partitionInfo.TenantID)
-	header.Set("Partition_Id", partitionInfo.PartitionID)
-	header.Set("Access_Id", partitionInfo.AccessID)
-	header.Set("Profile_Id", partitionInfo.ProfileID)
+
+	header.Set("Tenant-Id", partitionInfo.TenantID)
+	header.Set("Partition-Id", partitionInfo.PartitionID)
+	header.Set("Access-Id", partitionInfo.AccessID)
+	header.Set("Profile-Id", partitionInfo.ProfileID)
 }
 
 func (ai *partitionInfoSetInterceptor) WrapUnary(next connect.UnaryFunc) connect.UnaryFunc {
