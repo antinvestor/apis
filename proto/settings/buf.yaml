@@ -1,5 +1,5 @@
 version: v2
-name: buf.build/antinvestor/setting-s
+name: buf.build/antinvestor/settingz
 deps:
   - buf.build/antinvestor/common
   - buf.build/bufbuild/protovalidate
