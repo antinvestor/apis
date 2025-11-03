@@ -58,7 +58,7 @@ func (ccb *ConnectClientBase) Endpoint() string {
 }
 
 // Options returns the API client can use to configure itself.
-func (ccb *ConnectClientBase) Options(opts ...connect.Option) []connect.Option {
+func (ccb *ConnectClientBase) Options(opts ...connect.ClientOption) []connect.ClientOption {
 
 	if len(ccb.interceptors) > 0 {
 		opts = append(opts, connect.WithInterceptors(ccb.interceptors...))

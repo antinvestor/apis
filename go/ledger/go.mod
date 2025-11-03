@@ -4,7 +4,7 @@ go 1.25
 
 require (
 	connectrpc.com/connect v1.19.1
-	github.com/antinvestor/apis/go/common v1.47.5
+	github.com/antinvestor/apis/go/common v1.47.6
 	github.com/google/gnostic v0.7.1
 	go.uber.org/mock v0.6.0
 	google.golang.org/genproto v0.0.0-20251014184007-4626949a642f

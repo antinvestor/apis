@@ -49,14 +49,14 @@ func FromContext(ctx context.Context) *Client {
 
 // Client is a client for interacting with the chat service API.
 type Client struct {
-	*connection.HttpClientBase
+	*connection.ConnectClientBase
 
 	chatv1connect.ChatServiceClient
 }
 
-func Init(cBase *connection.HttpClientBase, svc chatv1connect.ChatServiceClient) *Client {
+func Init(cBase *connection.ConnectClientBase, svc chatv1connect.ChatServiceClient) *Client {
 	return &Client{
-		HttpClientBase:    cBase,
+		ConnectClientBase: cBase,
 		ChatServiceClient: svc,
 	}
 }
@@ -66,10 +66,10 @@ func Init(cBase *connection.HttpClientBase, svc chatv1connect.ChatServiceClient)
 func NewChatClient(ctx context.Context, opts ...common.ClientOption) (*Client, error) {
 	clientOpts := defaultClientOptions()
 
-	client, err := connection.NewHTTPClientBase(ctx, append(clientOpts, opts...)...)
+	client, err := connection.NewConnectClientBase(ctx, append(clientOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
 
-	return Init(client, chatv1connect.NewChatServiceClient(client.Client(), client.GetInfo())), nil
+	return Init(client, chatv1connect.NewChatServiceClient(client.Client(), client.Endpoint())), nil
 }
