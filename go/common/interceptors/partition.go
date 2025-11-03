@@ -34,7 +34,7 @@ func NewPartitionInfoInterceptor(clientInfo string) connect.Interceptor {
 
 func (ai *partitionInfoSetInterceptor) setPartitionInfo(ctx context.Context, header http.Header) {
 
-	partitionInfo, ok := ctx.Value(common.CtxServiceKey("partition_info")).(*common.PartitionInfo)
+partitionInfo, ok := ctx.Value(common.CtxKeyPartitionInfo).(*common.PartitionInfo)
 	if !ok || partitionInfo == nil {
 		return
 	}
