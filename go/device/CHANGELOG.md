@@ -14,6 +14,10 @@
    - PR: #826
 - Merge pull request #820 from antinvestor/feature/files-service-proto
 - chore(deps): bump buf.build/gen/go/antinvestor/device/protocolbuffers/go
+- chore(deps): bump buf.build/gen/go/antinvestor/device/connectrpc/go from 1.19.1-20251103165724-42546c15c96f.2 to 1.19.1-20251104075601-1b4b2a5749d5.2 in /go/device
+   - PR: #827
+- Merge pull request #820 from antinvestor/feature/files-service-proto
+- chore(deps): bump buf.build/gen/go/antinvestor/device/connectrpc/go
 
 
 
