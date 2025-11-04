@@ -1,36 +1,8 @@
 version: v2
 managed:
   enabled: true
-  disable:
-    - file_option: java_package
-      module: buf.build/bufbuild/protovalidate
-    - file_option: go_package
-      module: buf.build/bufbuild/protovalidate
-    - file_option: go_package
-      module: buf.build/gnostic/gnostic
-    - file_option: go_package
-      module: buf.build/antinvestor/common
-  override:
-    - file_option: java_multiple_files
-      value: true
-    - file_option: java_package_prefix
-      value: com.antinvestor.apis
-    - file_option: java_package
-      module: buf.build/gnostic/gnostic
-      value: build.buf.gen.gnostic.openapi.v3
-    - file_option: go_package_prefix
-      value: github.com/antinvestor/apis/go
+
 plugins:
-  - remote: buf.build/grpc/go
-    out: ../../gen/go/
-    opt: paths=source_relative
-  - remote: buf.build/protocolbuffers/go
-    out: ../../gen/go/
-    opt: paths=source_relative
-  - remote: buf.build/connectrpc/go
-    out: ../../gen/go/
-    opt:
-      - paths=source_relative
   - remote: buf.build/community/sudorandom-connect-openapi
     out: ../../go/
     opt:
@@ -38,13 +10,3 @@ plugins:
       - content-types=json
       - allow-get
       - debug
-  - remote: buf.build/grpc/java
-    out: ../../java/profile/src/main/java/
-  - remote: buf.build/protocolbuffers/java
-    out: ../../java/profile/src/main/java/
-  - remote: buf.build/protocolbuffers/dart
-    out: ../../dart/profile/lib/src
-    include_wkt: true
-    include_imports: true
-  - remote: buf.build/connectrpc/dart
-    out: ../../dart/profile/lib/src
